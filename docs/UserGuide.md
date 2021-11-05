@@ -5,8 +5,8 @@
 * [Getting Started](#getting-started)
 * [Features](#features)
 * [Commands](#commands)
-  * [Add](#add) 
-    *[Budget: `-b`](#add-budget)
+  * [Add](#add)
+    * [Budget: `-b`](#add-budget)
     * [Expenditure: `-e`](#add-expenditure)
     * [Loan: `-l`](#add-loan)
   * [Edit](#edit)
@@ -61,14 +61,15 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 
 ## Notes about the command format:
 * Words in UPPER_CASE are the parameters to be supplied by the user. <br />
-e.g. in `add -b a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can be used as `add -b a/500 m/12`
-* Words encased in `<>` are optional parameters.
+e.g. in `add -b a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can be used as `add -b a/500 m/12`.
+NOTE: **These parameters cannot be left empty.**
+* Words encased in `<>` brackets are optional parameters.
 
 <br />
 
 # <a id="commands"></a> Commands
 
-# &nbsp;&nbsp; `add`
+# <a id="add"></a> &nbsp;&nbsp; `add`
 
 The command word `add` adds a record of either Budget, Expenditure, or Loan to the record list. 
 The type of record is determined by the identifier tag after the `add` command word.
@@ -76,41 +77,42 @@ The type of record is determined by the identifier tag after the `add` command w
 ______________
 <br />
 
-### `-b` : Add a Budget
+### <a id="add-budget"></a> `-b` : Add a Budget
 
 Adds a new budget to a specific month.
 
-Format: `add -b a/AMOUNT m/MONTH`
+Format: `add -b a/AMOUNT m/<MONTH>`
 
-* The `AMOUNT` can be entered with 2 decimal places or without decimal places and cannot be empty.
-* The `MONTH` must strictly be within the range of 1 to 12 and cannot be empty.
+* The `AMOUNT` can be entered with 2 decimal places or without decimal places.
+* The `MONTH` must strictly be within the range of 1 to 12.
 
 Example of usage:
 
 `add -b a/500 m/12`
 
-Expected outcome: Budget of $500.00 is added to the december of that particular year.
+Expected outcome: Budget of $500.00 is added to the month of December of that particular year.
 
 ```
 ========================================================
-Your budget of 500.0 for this month is successfully added!
+Your budget of 500.0 for December is successfully added!
 ========================================================
 ```
 <br />
 
 ________________________
 
-### `-e` : Add an expenditure
+### <a id="add-expenditure"></a> `-e` : Add an expenditure
 
 Adds a new expenditure to a month.
 
-Format: `add -e n/<DESCRIPTION> a/AMOUNT d/<DATE_OF_EXPENDITURE> c/<CATEGORY>`
+Format: `add -e n/DESCRIPTION a/AMOUNT d/<DATE_OF_EXPENDITURE> c/<CATEGORY>`
 
-* The `DESCRIPTION` can be in a natural language format. It can be left empty if the user does not wish
-to add specific information about the expenditure.
+* The `DESCRIPTION` can be in a natural language format.
+  * NOTE: **Description has a 30characters limit**
 * The `AMOUNT` entered can be up to 2 decimal places and cannot be empty.
-* The `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_. If left empty, the current date according to the
-system will be entered by default.
+* The `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_. 
+  * If left empty, the current date according to the
+  system will be entered by default.
 * The `<CATEGORY>` must be one of the following values:
   * _GENERAL, CLOTHES, FOOD, ENTERTAINMENT, GIFTS, HEALTH_
   * If left empty, the default value will be _GENERAL_
@@ -127,6 +129,7 @@ Expenditure successfully added!
 Description: CS2113T Textbooks
 Amount: $60.00
 Date: 2021-08-20
+Category: GENERAL
 ========================================================
 ```
 
@@ -135,7 +138,7 @@ Date: 2021-08-20
 _________________________________________________________
 
 
-### `-l` : Add a Loan
+### <a id="add-loan"></a> `-l` : Add a Loan
 
 Adds a new loan to a month.
 
@@ -166,7 +169,7 @@ _________________________________________________________
 
 <br/>
 
-# &nbsp;&nbsp; `edit` 
+# <a id="edit"></a> &nbsp;&nbsp; `edit` 
 
 Edits a budget or expenditure entry.
 <br />
