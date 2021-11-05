@@ -16,7 +16,7 @@ public class WorldMapTest {
 
     @Test
     public void getCountry_sin_success() throws EmptyVertexException {
-        Country countrySin = WorldMap.getCountry("SIN");
+        Country countrySin = WorldMap.getValidCountry("SIN");
         assertEquals(new Country("SIN", 0).toString(), countrySin.toString());
     }
 
@@ -103,8 +103,8 @@ public class WorldMapTest {
     @Test
     public void updateMinDistance_jpnSin_success() throws EmptyVertexException {
         WorldMap.printWorld();
-        Country countrySin = WorldMap.getCountry("SIN");
-        Country countryJpn = WorldMap.getCountry("JPN");
+        Country countrySin = WorldMap.getValidCountry("SIN");
+        Country countryJpn = WorldMap.getValidCountry("JPN");
 
         List<Country> path = new ArrayList<>();
         List<Double> distances = new ArrayList<>();

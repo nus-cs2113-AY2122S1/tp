@@ -49,8 +49,8 @@ public class WorldMap {
     }
 
     public static MinCalcResult calcMinDistance(String sourceCountryName, String targetCountryName) {
-        Country sourceCountry = getCountry(sourceCountryName);
-        Country targetCountry = getCountry(targetCountryName);
+        Country sourceCountry = getValidCountry(sourceCountryName);
+        Country targetCountry = getValidCountry(targetCountryName);
         if (sourceCountry.getKey() == -1 || targetCountry.getKey() == -1) {
             MinCalcResult result = new MinCalcResult(sourceCountry, targetCountry, null, null);
             result.setError();
@@ -63,8 +63,8 @@ public class WorldMap {
     public static MinCalcResult calcMinCost(String sourceCountryName, String targetCountryName) {
         altWorldMap();
 
-        Country sourceCountry = getCountry(sourceCountryName);
-        Country targetCountry = getCountry(targetCountryName);
+        Country sourceCountry = getValidCountry(sourceCountryName);
+        Country targetCountry = getValidCountry(targetCountryName);
         if (sourceCountry.getKey() == -1 || targetCountry.getKey() == -1) {
             MinCalcResult result = new MinCalcResult(sourceCountry, targetCountry, null, null);
             result.setError();
@@ -78,7 +78,7 @@ public class WorldMap {
         return minResult;
     }
 
-    public static Country getCountry(String countryName) {
+    public static Country getValidCountry(String countryName) {
         Country country = new Country("",-1);;
         try {
             country = graphList.findVertex(countryName);
@@ -105,8 +105,8 @@ public class WorldMap {
 
     public static void editMap(Double dist, String sourceCountryName, String targetCountryName) {
         try {
-            Country sourceCountry = getCountry(sourceCountryName);
-            Country targetCountry = getCountry(targetCountryName);
+            Country sourceCountry = getValidCountry(sourceCountryName);
+            Country targetCountry = getValidCountry(targetCountryName);
 
             graphList.modifyEdge(dist, sourceCountry, targetCountry);
             distanceNonZero(dist);
