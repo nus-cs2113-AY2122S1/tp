@@ -47,13 +47,13 @@ public class ListCommandParser {
         switch (arguments.trim()) {
         case Constants.FLAG_MASTER_UNIVERSITYLIST:
             logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
-            return new ListUniCommand(universityMasterList, universityMasterList, ListType.MASTER);
+            return new ListUniCommand(universityMasterList, ListType.MASTER);
         case Constants.FLAG_MASTER_MODULELIST:
             logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
             return new ListModCommand(moduleMasterList, ListType.MASTER);
         case Constants.FLAG_SELECTED_UNIVERSITYLIST:
             logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
-            return new ListUniCommand(universitySelectedList, universityMasterList, ListType.SELECTED);
+            return new ListUniCommand(universitySelectedList, ListType.SELECTED);
         case Constants.FLAG_SELECTED_MODULELIST:
             logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
             return new ListModCommand(moduleSelectedList, ListType.SELECTED);
