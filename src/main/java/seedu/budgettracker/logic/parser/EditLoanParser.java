@@ -19,6 +19,10 @@ public class EditLoanParser implements ParserPrefix {
         double amount = ParserUtil.parseAmount(argumentMap.get(PREFIX_AMOUNT),IS_NOT_COMPULSORY);
         LocalDate date = ParserUtil.parseDate(argumentMap.get(PREFIX_DATE));
 
+        if (name.equals("") && amount == 0.00 && argumentMap.get(PREFIX_DATE).equals("")) {
+            throw new ParserException("Please include at least one value to edit!");
+        }
+
         return new EditLoanCommand(month, index,amount, date, name);
     }
 }
