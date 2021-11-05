@@ -29,19 +29,12 @@
 
 ## <a name="acknowledgements"></a>Acknowledgements
 
-- Inspiration for App Idea and OOP Structure: AddressBook (Level 2) <br />
-  https://github.com/se-edu/addressbook-level2
-- Inspiration for User Guide and Developer Guide: AddressBook (Level 3) <br />
-  https://se-education.org/addressbook-level3/DeveloperGuide.html <br/>
-  https://se-education.org/addressbook-level3/UserGuide.html
-- Converting text for ConTech: <br />
-  https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20
-- GitHub Markdown Emoji Syntax for User Guide: <br />
-  https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md
-- PlantUML Tutorial: <br />
-  https://se-education.org/guides/tutorials/plantUml.html
-
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+- Inspiration for App Idea and OOP Structure: [AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2) <br />
+- Inspiration for User Guide and Developer Guide: AddressBook (Level 3) [[DG]](https://se-education.org/addressbook-level3/DeveloperGuide.html) <br />
+  [[UG]](https://se-education.org/addressbook-level3/UserGuide.html)
+- [Converting text for ConTech](https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20) <br />
+- [GitHub Markdown Emoji Syntax](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md) for User Guide: <br />
+- [PlantUML Tutorial](https://se-education.org/guides/tutorials/plantUml.html) <br />
 
 ## <a name="design"></a>Design
 
