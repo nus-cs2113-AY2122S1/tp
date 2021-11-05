@@ -42,7 +42,7 @@ public class MainParser {
         case "discount-dish":
             dishParser.discountDish(command, menu);
             break;
-        case "list-menu":
+        case "list-dish":
             dishParser.listMenu(menu);
             break;
         case "add-ingredient":

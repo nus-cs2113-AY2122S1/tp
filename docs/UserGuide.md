@@ -55,7 +55,7 @@ colour blue - an example is the blue text in the contents section below
       2. [Removing a dish: `remove-dish`](#2iib-removing-a-dish-remove-dish)
       3. [Editing a dish's price: `edit-dish`](#2iic-editing-a-dishs-price-edit-dish)
       4. [Adding a discount to a dish: `discount-dish`](#2iid-adding-a-discount-to-a-dish-discount-dish)
-      5. [Listing all dishes: `list-menu`](#2iie-listing-all-dishes-list-menu)
+      5. [Listing all dishes: `list-dish`](#2iie-listing-all-dishes-list-dish)
    3. Ingredient
       1. [Adding an ingredient: `add-ingredient`](#2iiia-adding-an-ingredient-add-ingredient)
       2. [Removing an ingredient: `remove-ingredient`](#2iiib-removing-an-ingredient-remove-ingredient)
@@ -225,14 +225,14 @@ Example:
 ---------------------------------------------
 ```
 
-### 2.ii.e Listing all dishes: `list-menu`
+### 2.ii.e Listing all dishes: `list-dish`
 
 Lists all dishes in the menu.
 
-Format: `list-menu`
+Format: `list-dish`
 
 Example:
-`list-menu`
+`list-dish`
 ```
 ---------------------------------------------
  Here are the dishes in your menu:
@@ -440,7 +440,7 @@ Example:
 | remove-dish | `remove-dish/DISH_INDEX` |
 | edit-dish | `edit-dish/DISH_INDEX/NEW_PRICE` |
 | discount-dish | `discount-dish/DISH_INDEX/DISCOUNT(%)` |
-| list-menu | `list-menu` |
+| list-dish | `list-dish` |
 | add-ingredient | `add-ingredient/INGREDIENT_NAME/QUANTITY` |
 | remove-ingredient | `remove-ingredient/INGREDIENT_INDEX` |
 | list-ingredient | `list-ingredient` |
