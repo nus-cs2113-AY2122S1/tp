@@ -9,10 +9,7 @@ import happybit.command.UpdateHabitNameCommand;
 import happybit.exception.HaBitParserException;
 import happybit.goal.GoalType;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -189,36 +186,26 @@ public class UpdateParser extends Parser {
      */
 
     private static boolean isUpdateGoalName(ArrayList<String> parameters) {
-        return isContainFlag(parameters, FLAG_GOAL_INDEX) && isContainFlag(parameters, FLAG_NAME);
-    private static boolean isUpdateGoalName(String[] parameters) {
         return isContainFlag(parameters, FLAG_GOAL_INDEX) && isContainFlag(parameters, FLAG_NAME)
                 && isContainNoOtherFlag(parameters, FLAG_GOAL_INDEX, FLAG_NAME);
     }
 
     private static boolean isUpdateGoalType(ArrayList<String> parameters) {
-        return isContainFlag(parameters, FLAG_GOAL_INDEX) && isContainFlag(parameters, FLAG_GOAL_TYPE);
-    private static boolean isUpdateGoalType(String[] parameters) {
         return isContainFlag(parameters, FLAG_GOAL_INDEX) && isContainFlag(parameters, FLAG_GOAL_TYPE)
                 && isContainNoOtherFlag(parameters, FLAG_GOAL_INDEX, FLAG_GOAL_TYPE);
     }
 
     private static boolean isUpdateGoalEndDate(ArrayList<String> parameters) {
-        return isContainFlag(parameters, FLAG_GOAL_INDEX) && isContainFlag(parameters, FLAG_END_DATE);
-    private static boolean isUpdateGoalEndDate(String[] parameters) {
         return isContainFlag(parameters, FLAG_GOAL_INDEX) && isContainFlag(parameters, FLAG_END_DATE)
                 && isContainNoOtherFlag(parameters, FLAG_GOAL_INDEX, FLAG_END_DATE);
     }
 
     private static boolean isChangeHabitName(ArrayList<String> parameters) {
-        return isContainFlag(parameters, FLAG_HABIT_INDEX) && isContainFlag(parameters, FLAG_NAME);
-    private static boolean isChangeHabitName(String[] parameters) {
         return isContainFlag(parameters, FLAG_GOAL_INDEX) && isContainFlag(parameters, FLAG_HABIT_INDEX)
                 && isContainFlag(parameters, FLAG_NAME);
     }
 
     private static boolean isChangeHabitInterval(ArrayList<String> parameters) {
-        return isContainFlag(parameters, FLAG_HABIT_INDEX) && isContainFlag(parameters, FLAG_INTERVAL);
-    private static boolean isChangeHabitInterval(String[] parameters) {
         return isContainFlag(parameters, FLAG_GOAL_INDEX) && isContainFlag(parameters, FLAG_HABIT_INDEX)
                 && isContainFlag(parameters, FLAG_INTERVAL);
     }
@@ -244,8 +231,7 @@ public class UpdateParser extends Parser {
      * @param secondFlag Second expected flag from user.
      * @return True if there is no excess parameters in user input. False otherwise.
      */
-    private static boolean isContainNoOtherFlag(String[] parameters, String firstFlag, String secondFlag) {
-
+    private static boolean isContainNoOtherFlag(ArrayList<String> parameters, String firstFlag, String secondFlag) {
         for (String param : parameters) {
             if (param.contains(FLAG_GOAL_INDEX) && isExcessFlag(FLAG_GOAL_INDEX, firstFlag, secondFlag)) {
                 return false;
@@ -275,10 +261,7 @@ public class UpdateParser extends Parser {
      * @return True if referenceFlag is not equal to the 2 expected flags. False otherwise.
      */
     private static boolean isExcessFlag(String referenceFlag, String firstFlag, String secondFlag) {
-        if (referenceFlag.equals(firstFlag) || referenceFlag.equals(secondFlag)) {
-            return false;
-        }
-        return true;
+        return !referenceFlag.equals(firstFlag) && !referenceFlag.equals(secondFlag);
     }
 
     private static Date getDate(ArrayList<String> parameters) throws HaBitParserException {

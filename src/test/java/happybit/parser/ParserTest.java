@@ -14,7 +14,7 @@ class ParserTest {
     private static final String ERROR_GOAL_TYPE_FORMAT = "Use the 't/' flag to define the goal type. Exp: t/df";
     private static final String ERROR_INTEGER_FLAG_FORMAT = "The command is missing the '%1$s' flag";
     private static final String ERROR_CONVERT_NUM = "The flag '%1$s' has to be followed by a number";
-    private static final String ERROR_NEGATIVE_NUM = "The flag '%1$s' has to be followed by a number greater than 0";
+    private static final String ERROR_NEGATIVE_NUM = "The flag '%1$s' has to be followed by a positive integer";
     private static final String ERROR_UNDEFINED_GOAL_TYPE_LABEL = "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'";
     private static final String ERROR_NO_DESCRIPTION = "Use a description of at least 1 character";
     private static final String ERROR_LONG_DESCRIPTION = "Use a description no more than 50 characters "

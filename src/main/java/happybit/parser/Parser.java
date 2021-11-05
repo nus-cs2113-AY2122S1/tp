@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.function.Function;
-import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,7 +33,6 @@ public class Parser {
     private static final String ERROR_GOAL_TYPE_FORMAT = "Use the 't/' flag to define the goal type. Exp: t/df";
     private static final String ERROR_INTEGER_FLAG_FORMAT = "The command is missing the '%1$s' flag";
     private static final String ERROR_CONVERT_NUM = "The flag '%1$s' has to be followed by a number";
-    private static final String ERROR_NEGATIVE_NUM = "The flag '%1$s' has to be followed by a number greater than 0";
     private static final String ERROR_UNDEFINED_GOAL_TYPE_LABEL =
             "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'";
     private static final String ERROR_NEGATIVE_NUM = "The flag '%1$s' has to be followed by a positive integer";
@@ -170,7 +167,7 @@ public class Parser {
      * @return Integer of goal / habit user wanted.
      * @throws HaBitParserException If index entered by user is less than or equal to 0.
      */
-    protected static int getIndex(String[] parameters, String flag) throws HaBitParserException {
+    protected static int getIndex(ArrayList<String> parameters, String flag) throws HaBitParserException {
         int number = getNumber(parameters, flag);
         if (number == 0) {
             throw new HaBitParserException(String.format(ERROR_ZERO_NUM, flag));
@@ -188,7 +185,7 @@ public class Parser {
      * @return New interval to be changed to.
      * @throws HaBitParserException If interval is less than or equal to 0.
      */
-    protected static int getUpdateInterval(String[] parameters, String flag) throws HaBitParserException {
+    protected static int getUpdateInterval(ArrayList<String> parameters, String flag) throws HaBitParserException {
         int interval = getNumber(parameters, flag);
         if (interval == 0) {
             throw new HaBitParserException(String.format(ERROR_ZERO_NUM, flag));
