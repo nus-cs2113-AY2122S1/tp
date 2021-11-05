@@ -16,6 +16,7 @@ import terminus.content.ContentManager;
 import terminus.content.Link;
 import terminus.content.Question;
 import terminus.exception.InvalidArgumentException;
+import terminus.exception.InvalidFileException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 
@@ -39,20 +40,19 @@ public class FilterManagerTest {
     void setup() {
         filterManager = new FilterManager();
         this.gson = new GsonBuilder().setPrettyPrinting().create();
-        incorrectFilePath = Paths.get(RESOURCE_FOLDER.toString(),INCORRECT_FILE);
+        incorrectFilePath = Paths.get(RESOURCE_FOLDER.toString(), INCORRECT_FILE);
     }
 
     @Test
-    void filterModule_success() throws IOException, InvalidArgumentException {
-        BufferedReader reader = Files.newBufferedReader(incorrectFilePath);
-        ModuleManager moduleManager = gson.fromJson(reader, ModuleManager.class);
-        reader.close();
+    void filterModule_success() throws InvalidFileException {
+        JsonStorage jsonStorage = new JsonStorage(RESOURCE_FOLDER, INCORRECT_FILE);
+        ModuleManager moduleManager = jsonStorage.loadJson();
         filterManager.filter(moduleManager);
-        assertEquals(1,moduleManager.getAllModules().length);
+        assertEquals(1, moduleManager.getAllModules().length);
         NusModule module = moduleManager.getModule("TEST");
         ContentManager<Question> questionContentManager = module.getContentManager(Question.class);
         ContentManager<Link> linkContentManager = module.getContentManager(Link.class);
-        assertEquals(2,questionContentManager.getTotalContents());
-        assertEquals(1,linkContentManager.getTotalContents());
+        assertEquals(1, questionContentManager.getTotalContents());
+        assertEquals(1, linkContentManager.getTotalContents());
     }
 }

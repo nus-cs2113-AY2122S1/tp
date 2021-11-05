@@ -48,9 +48,6 @@ public class Storage {
             if (Files.notExists(filePath)) {
                 Files.createFile(filePath);
             }
-        } catch (FileAlreadyExistsException e) {
-            // Should not reach here
-            throw new InvalidFileException(String.format(Messages.ERROR_STORAGE_FILE_EXIST, filePath));
         } catch (IOException e) {
             throw new InvalidFileException(String.format(Messages.ERROR_STORAGE_CREATE_FILE, filePath));
         } catch (Exception e) {
@@ -169,9 +166,6 @@ public class Storage {
             throw new InvalidFileException(String.format(Messages.ERROR_MISSING_FOLDER, "null"));
         }
         File folder = new File(folderPath.toString());
-        if (folder == null) {
-            throw new InvalidFileException(String.format(Messages.ERROR_MISSING_FOLDER, folderPath));
-        }
         File[] result = folder.listFiles();
         if (result == null) {
             throw new InvalidFileException(String.format(Messages.ERROR_GET_FILES, folderPath));
@@ -211,9 +205,6 @@ public class Storage {
         } else if (Files.exists(oldPath) && Files.notExists(newPath)) {
             File oldFile = new File(oldPath.toString());
             File newFile = new File(newPath.toString());
-            if (oldFile == null || newFile == null) {
-                throw new InvalidFileException(Messages.ERROR_CHANGE_FILE_NAME);
-            }
             if (!oldFile.renameTo(newFile)) {
                 throw new InvalidFileException(Messages.ERROR_CHANGE_FILE_NAME);
             }
