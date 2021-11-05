@@ -13,7 +13,7 @@ Given below are the contributions I have made to this project.
 - **Enhancements implemented**:
   - General abstraction/skeleton of the TP program based on my IP program structure.
   - Implemented the `Ui.java` class to handle the reading of user inputs into the terminal and the displaying of 
-  application related messages to the user after each command entered into the application.
+  application related messages such as the result of a command execution based on the user's input.
   - Implemented the `CommandParser.java` class to parse user input into the correct `Command` object.
     - Added feature to allow flags to be extracted out of the user input to be universally used across all
     `Command` objects to allow flexibility/modularity for each command to allow additional arguments to be added subsequently.
@@ -61,7 +61,7 @@ Given below are the contributions I have made to this project.
   - Handled the releases of versions 1.0 and 2.0 of our application.
   - General format update to both the User Guide and Developer Guide to ensure consistency and allow others to easily
   add their assignment parts without affecting the general structure of the guide.
-  - Added FAQs, Target Users, and tidied up other miscellaneous sections in both the User Guide and Developer Guide.
+  - Added FAQs, Target Users, and tidied up sections in both the User Guide and Developer Guide.
 - **Review/mentoring contributions**:
   - Help team members to test their features to ensure they work prior to releases each version of our application on GitHub.
   - Help review PRs made by team members in general and offer advice and feedback prior to merging the PRs.
@@ -74,6 +74,7 @@ These are the diagrams (General, Class, Sequence...) I have added into the Devel
 <p align="center">
     <img src="images/AmosUMLDiagrams/Architecture.png">
 </p>
+
 <p align="center">
     <img src="images/AmosUMLDiagrams/SD_ValidInput.png">
 </p>
