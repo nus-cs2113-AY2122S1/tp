@@ -17,11 +17,11 @@ Package "IngredientList"<<RECTANGLE>>{
 
 class Storage #GoldenRod
 
-IngredientList -- "0..*" IngredientGroup
+IngredientList --> "0..*" IngredientGroup
 IngredientGroup : totalAmount: Double
 IngredientGroup : groupName: String
 
-IngredientGroup -- "1..*" Ingredient
+IngredientGroup --> "1..*" Ingredient
 Ingredient : name: String
 Ingredient : amount: Double
 Ingredient : expiry: LocalDate
