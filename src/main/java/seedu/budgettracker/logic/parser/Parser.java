@@ -11,6 +11,7 @@ import seedu.budgettracker.logic.commands.InvalidCommand;
 import seedu.budgettracker.logic.commands.ListRecordsCommand;
 import seedu.budgettracker.logic.commands.StatCommand;
 import seedu.budgettracker.logic.commands.YearCommand;
+import seedu.budgettracker.logic.commands.CsvCommand;
 import seedu.budgettracker.data.records.Category;
 import seedu.budgettracker.common.exception.EmptyDescriptionException;
 import seedu.budgettracker.logic.parser.exceptions.ParserException;
@@ -99,6 +100,9 @@ public class Parser {
                 break;
             case FindCommand.COMMAND_WORD:
                 command = prepareFindCommand(commandParams);
+                break;
+            case CsvCommand.COMMAND_WORD:
+                command = new CsvCommand();
                 break;
             case EditCommand.COMMAND_WORD:
                 command = prepareEditCommand(commandParams);
