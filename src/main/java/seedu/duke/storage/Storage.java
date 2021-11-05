@@ -102,10 +102,9 @@ public class Storage {
         return dish;
     }
 
-    private static String encodeDish(String toWrite) {
+    private static String encodeDish(Dish dish) {
         String encodedItem = null;
-        String[] description = toWrite.trim().split(" ");
-        encodedItem = "add-dish" + "|" + description[0] + "|" + description[2].substring(1) + "|" + description[3];
+        encodedItem = "add-dish" + "|" + dish.getName() + "|" + dish.getPrice() + "|" + dish.getDiscount();
         assert (!encodedItem.contains("$"));
         return encodedItem;
     }
@@ -125,7 +124,7 @@ public class Storage {
             }
             for (int i = 0; i < menu.menu.size(); i += 1) {
                 Dish dish = menu.menu.get(i);
-                fileWriter.write(String.format("%s\n", encodeDish(dish.toString() + " " + dish.getDiscount())));
+                fileWriter.write(String.format("%s\n", encodeDish(dish)));
             }
             for (int i = 0; i < financeList.financeList.size(); i += 1) {
                 Finance finance = financeList.financeList.get(i);

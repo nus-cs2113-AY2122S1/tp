@@ -31,7 +31,7 @@ public class DishUI {
         System.out.println(" Here are the dishes in your menu:");
         for (int i = 0; i < menu.menu.size(); i++) {
             int index = i + 1;
-            boolean notDiscounted = menu.menu.get(i).getDiscount() == 100;
+            boolean notDiscounted = menu.menu.get(i).getDiscount() == 0;
             if (notDiscounted) {
                 System.out.println("   " + index + ". " + menu.menu.get(i));
             } else {
@@ -50,11 +50,17 @@ public class DishUI {
     }
 
     public static void printDiscountDishMessage(Dish discountedDish, int dishIndex) {
+        boolean originalPrice = discountedDish.getDiscount() == 0;
         MainUI.printSingleLine();
-        System.out.println(" Got it! I have added the discount to the dish!");
-        System.out.println(" The discounted price is as follows:");
-        System.out.println("   " + dishIndex + ". " + discountedDish
-                + " ---> " + discountedDish.getDiscountedPriceString());
+        if (originalPrice) {
+            System.out.println(" Got it! I have set the dish back to its original price!");
+            System.out.println("   " + dishIndex + ". " + discountedDish);
+        } else {
+            System.out.println(" Got it! I have added the discount to the dish!");
+            System.out.println(" The discounted price is as follows:");
+            System.out.println("   " + dishIndex + ". " + discountedDish
+                    + " ---> " + discountedDish.getDiscountedPriceString());
+        }
         MainUI.printSingleLine();
     }
 
