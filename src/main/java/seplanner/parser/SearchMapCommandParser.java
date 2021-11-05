@@ -54,15 +54,16 @@ public class SearchMapCommandParser {
             university = universityMasterList.getUniversity(input);
         }
 
+        if (ParseCondition.isNullUniversity(university)) {
+            logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
+            throw new SearchMapParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1, false);
+        }
+
         if (ParseCondition.isNoPotentialMapping(university, moduleSelectedList)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new SearchMapParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1, false);
         }
 
-        if (ParseCondition.isNullUniversity(university)) {
-            logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new SearchMapParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1, false);
-        }
         assert university.getName() != null;
         logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
         return new SearchMapCommand(university, universitySelectedList, moduleSelectedList, false);
