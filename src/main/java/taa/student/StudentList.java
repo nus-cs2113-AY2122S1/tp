@@ -94,6 +94,16 @@ public class StudentList implements ClassChecker {
         return studentsFound;
     }
 
+    public Student getStudentWithId(String id) {
+        for (Student student : students) {
+            if (student.getId().equalsIgnoreCase(id)) {
+                return student;
+            }
+        }
+
+        return null;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
