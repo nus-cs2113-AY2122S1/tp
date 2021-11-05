@@ -20,9 +20,9 @@ public class UpdateParser extends Parser {
     private static final String ERROR_GOAL_END_DATE_NON_DATE = "Enter your date in the format DDMMYYYY";
 
     private static final String ERROR_INVALID_UPDATE_COMMAND = "There is no update command for goals in this format, "
-            + "do check your parameters one more time. Do not include more or less parameters than necessary.";
+            + "do check your parameters one more time.\nDo not include more or less parameters than necessary.";
     private static final String ERROR_INVALID_CHANGE_COMMAND = "There is no change command for habits in this format, "
-            + "do check your parameters one more time. Do not include more or less parameters than necessary.";
+            + "do check your parameters one more time.\nDo not include more or less parameters than necessary.";
     private static final String ERROR_CHANGE_HABIT_NAME_WITH_UPDATE_COMMAND = "Are you perhaps trying to change a "
             + "habit name? Please use the 'change' command instead.";
     private static final String ERROR_CHANGE_HABIT_INTERVAL_WITH_UPDATE_COMMAND = "Are you perhaps trying to change a "
@@ -47,6 +47,10 @@ public class UpdateParser extends Parser {
     public static Command parseUpdateGoalCommands(String input) throws HaBitParserException {
         checkNoDescription(input);
         String[] parameters = splitInput(input);
+
+        assert (input.contains(FLAG_GOAL_INDEX));
+        assert (!input.isBlank());
+
         if (isUpdateGoalName(parameters)) {
             return parseUpdateGoalNameCommand(input);
         }
@@ -69,6 +73,8 @@ public class UpdateParser extends Parser {
     public static Command parseUpdateHabitCommands(String input) throws HaBitParserException {
         checkNoDescription(input);
         String[] parameters = splitInput(input);
+        assert (input.contains(FLAG_GOAL_INDEX));
+        assert (!input.isBlank());
 
         if (isChangeHabitName(parameters)) {
             return parseUpdateHabitNameCommand(input);
@@ -221,9 +227,7 @@ public class UpdateParser extends Parser {
     private static boolean isContainNoOtherFlag(String[] parameters, String firstFlag, String secondFlag) {
 
         for (String param : parameters) {
-            if (param.contains(FLAG_GOAL_INDEX) && isExcessFlag(FLAG_GOAL_INDEX, firstFlag, secondFlag)) {
-                return false;
-            } else if (param.contains(FLAG_NAME) && isExcessFlag(FLAG_NAME, firstFlag, secondFlag)) {
+            if (param.contains(FLAG_NAME) && isExcessFlag(FLAG_NAME, firstFlag, secondFlag)) {
                 return false;
             } else if (param.contains(FLAG_GOAL_TYPE) && isExcessFlag(FLAG_GOAL_TYPE, firstFlag, secondFlag)) {
                 return false;

@@ -29,7 +29,10 @@ public class Parser {
     private static final String DEFAULT_LABEL = "df";
 
     private static final String ERROR_NAME_FORMAT = "Use the 'n/' flag to define the name. Exp: n/Foo";
+    private static final String ERROR_GOAL_END_DATE_FORMAT = "Use the e/ flag to set the new goal end dateEg: ";
     private static final String ERROR_GOAL_TYPE_FORMAT = "Use the 't/' flag to define the goal type. Exp: t/df";
+    private static final String ERROR_GOAL_UPDATE_FORMAT = "Missing additional goal name, goal end date, or "
+            + "goal type parameter needed for update.";
     private static final String ERROR_INTEGER_FLAG_FORMAT = "The command is missing the '%1$s' flag";
     private static final String ERROR_CONVERT_NUM = "The flag '%1$s' has to be followed by a number";
     private static final String ERROR_NEGATIVE_NUM = "The flag '%1$s' has to be followed by a integer greater than 0";
