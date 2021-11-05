@@ -1,0 +1,37 @@
+@startuml
+!include ClassStyle.puml
+
+class Storage {
+    {static} -MESSAGE_FORMAT_FAIL_CREATE_FILE: String
+    {static} -MESSAGE_FORMAT_UNABLE_TO_OPEN_READ: String
+    {static} -MESSAGE_FORMAT_UNABLE_TO_OPEN_WRITE: String
+    {static} -MESSAGE_FORMAT_UNABLE_TO_READ_JSON: String
+    {static} -MESSAGE_FORMAT_UNABLE_TO_WRITE_JSON: String
+    {static} -MESSAGE_FORMAT_JSON_SYNTAX_ERROR: String
+    -filename: String
+    +Storage(filename: String)
+    +load(): ClassList
+    +save(classList: ClassList): void
+}
+
+class StorageDeserializer as "{abstract}\nStorageDeserializer"
+class AssessmentDeserializer extends StorageDeserializer
+class AssessmentListDeserializer extends StorageDeserializer
+class AttendanceDeserializer extends StorageDeserializer
+class AttendanceListDeserializer extends StorageDeserializer
+class ClassListDeserializer extends StorageDeserializer
+class TeachingClassDeserializer extends StorageDeserializer
+class StudentDeserializer extends StorageDeserializer
+class StudentListDeserializer extends StorageDeserializer
+
+Storage .down.> ClassListDeserializer
+ClassListDeserializer .right.> TeachingClassDeserializer
+TeachingClassDeserializer .right.> StudentListDeserializer
+TeachingClassDeserializer .down.> AssessmentListDeserializer
+StudentListDeserializer .right.> StudentDeserializer
+StudentDeserializer .right.> AttendanceListDeserializer
+AttendanceListDeserializer .right.> AttendanceDeserializer
+AssessmentListDeserializer .right.> AssessmentDeserializer
+AssessmentDeserializer -up[hidden]- StudentListDeserializer
+
+@enduml

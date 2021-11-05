@@ -1,0 +1,23 @@
+@startuml
+!include ClassStyle.puml
+
+class Command as "{abstract}\nCommand" {
+    #argument: String
+    #isExit: boolean
+    #argumentKeys: String[]
+    #argumentMap: HashMap<String, String>
+    #includeEmptyValues: boolean
+    +Command(argument: String)
+    +Command(argument: String, argumentKeys: String[])
+    +Command(argument: String, argumentKeys: String[], includeEmptyValues: boolean)
+    #getUsage(): String &#123;abstract&#125;
+    +checkArgument(): void &#123;abstract&#125;
+    +execute(classList: ClassList, ui: Ui, storage: Storage): void &#123;abstract&#125;
+    +parseArgument(): void
+    +isExit(): boolean
+    #getUsageMessage(): String
+    #getMissingArgumentMessage(): String
+    #hasAllArguments(): boolean
+}
+
+@enduml
