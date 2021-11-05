@@ -26,9 +26,10 @@ commands that you can execute.
   * [Listing Tasks, Lessons or Modules - `list`](#listing-tasks-lessons-or-modules---list)
   * [Marking a Task as done - `done`](#marking-a-task-as-done---done)
   * [Deleting Tasks, Lessons or Modules - `delete`](#deleting-tasks-lessons-or-modules---delete)
-  * [Finding Tasks or lessons by keyword - `find task/lesson`](#finding-tasks-or-lessons-by-keyword---find)
+  * [Finding Tasks or lessons by keyword - `find task/lesson`](#finding-tasks-or-lessons-by-keyword---find-tasklesson)
   * [Retrieving Module information - `find module`](#retrieving-module-information---find-module)
   * [Setting module grade - `set grade`](#setting-module-grade---set-grade)
+  * [Launching Lesson URL - `launch lesson`](#launching-lesson-url---launch-lesson)
   * [Exiting the program - `exit`](#exiting-the-program---exit)
   * [Saving the data](#saving-the-data)
 * [FAQ](#faq)
@@ -577,7 +578,7 @@ $ set grade CG2028 B
       ______________________________________________________________________________________
 ```
 
-### Launching Lesson URL `launch lesson`
+### Launching Lesson URL - `launch lesson`
 
 Launches the meeting URL of the lesson of the given index.
 
