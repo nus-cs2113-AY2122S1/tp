@@ -92,6 +92,11 @@ public class Deadline extends Task {
     }
 
     //@@author SeanRobertDH
+    protected DeadlineFlag getTaskFlag() {
+        return new DeadlineFlag();
+    }
+
+    //@@author SeanRobertDH
     /**
      * Returns {@link #dueDate}.
      */

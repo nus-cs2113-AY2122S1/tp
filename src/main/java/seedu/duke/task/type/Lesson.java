@@ -94,6 +94,11 @@ public class Lesson extends Event {
     }
 
     @Override
+    protected LessonFlag getTaskFlag() {
+        return new LessonFlag();
+    }
+
+    @Override
     public ReminderInformation getReminderInformation() {
         return null;
     }

@@ -28,8 +28,8 @@ import seedu.duke.utility.Utility;
  * Parses user input.
  */
 public class CommandParser {
-
-    private static final String FLAG_REGEX = "^--\\w+";
+    public static final String FLAG_HEADER = "--";
+    private static final String FLAG_REGEX = "^" + FLAG_HEADER + "\\w+";
     private static final String WHITESPACE_REGEX = "\\s+";
     private static final String WHITESPACE = " ";
     private static final String SPLIT_INPUT_REGEX = "\\s+";

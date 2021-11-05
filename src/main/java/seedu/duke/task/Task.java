@@ -2,9 +2,13 @@ package seedu.duke.task;
 
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Map;
-import seedu.duke.command.flags.EditFlag;
+import seedu.duke.command.Command;
 import seedu.duke.command.flags.TaskFlag;
+import seedu.duke.exception.InvalidFlagsException;
 import seedu.duke.task.reminder.Reminder;
 import seedu.duke.task.reminder.ReminderInformation;
 import seedu.duke.exception.InvalidPriorityException;
@@ -118,19 +122,20 @@ public abstract class Task {
      * Edits the variables of {@link seedu.duke.task.Task} based off the flags in <code>arguments</code>.
      *
      * @param arguments <code>Map&lt;String, String&gt;</code> of
-     *     flags to values that should be edited in {@link seedu.duke.task.Task}.
-     * @throws seedu.duke.exception.InvalidPriorityException if attempting to edit
+     *                  flags to values that should be edited in {@link seedu.duke.task.Task}.
+     * @throws InvalidPriorityException if attempting to edit
      *     {@link #priority} and the <code>priority</code> specified is invalid.
-     * @throws seedu.duke.exception.InvalidRecurrenceException if attempting to edit
+     * @throws InvalidRecurrenceException if attempting to edit
      *     {@link #recurrence} and the <code>recurrence</code> specified is invalid.
-     * @throws seedu.duke.exception.ParseDateFailedException From {@link #taskEdit(java.util.Map)}.
-     * @throws seedu.duke.exception.StartDateAfterEndDateException From {@link #taskEdit(java.util.Map)}.
+     * @throws ParseDateFailedException From {@link #taskEdit(java.util.Map)}.
+     * @throws StartDateAfterEndDateException From {@link #taskEdit(java.util.Map)}.
      * @throws java.net.URISyntaxException From {@link #taskEdit(java.util.Map)}.
      */
     public void edit(Map<String, String> arguments) throws InvalidPriorityException,
-            InvalidRecurrenceException, ParseDateFailedException, StartDateAfterEndDateException, URISyntaxException {
-        if (arguments.containsKey(EditFlag.DESCRIPTION)) {
-            setDescription(arguments.get(EditFlag.DESCRIPTION));
+        InvalidRecurrenceException, ParseDateFailedException, StartDateAfterEndDateException, URISyntaxException {
+
+        if (arguments.containsKey(TaskFlag.EDIT_DESCRIPTION)) {
+            setDescription(arguments.get(TaskFlag.EDIT_DESCRIPTION));
         }
         if (arguments.containsKey(TaskFlag.PRIORITY)) {
             String priority = arguments.get(TaskFlag.PRIORITY);
@@ -158,11 +163,38 @@ public abstract class Task {
 
     //@@author SeanRobertDH
     /**
+     * Checks that all the keys in <code>Map&lt;String, String&gt; arguments</code> are valid edit flags.
+     *
+     * @param arguments <code>Map&lt;String, String&gt;</code> of flags to values to be checked for valid edit flags.
+     * @throws InvalidFlagsException If <code>arguments</code> has invalid flags.
+     */
+    public void checkAllEditFlagsValid(Map<String, String> arguments) throws InvalidFlagsException {
+        HashSet<String> validFlags = new HashSet<>(getTaskFlag().getAllEditFlags());
+        ArrayList<String> invalidFlags = new ArrayList<>();
+        for (String flag : arguments.keySet()) {
+            if (flag == Command.MAIN_ARGUMENT) {
+                continue;
+            }
+            if (!validFlags.contains(flag)) {
+                invalidFlags.add(flag);
+            }
+        }
+        if (!invalidFlags.isEmpty()) {
+            throw new InvalidFlagsException(invalidFlags);
+        }
+    }
+
+    //@@author SeanRobertDH
+    protected abstract TaskFlag getTaskFlag();
+
+    //@@author SeanRobertDH
+    /**
      * Returns the {@link java.time.LocalDateTime} that is the most relevant for the Task subclass.
      */
     public abstract LocalDateTime getListDate();
 
     //@@author SeanRobertDH
+
     /**
      * Updates the {@link java.time.LocalDateTime} in subclasses if they have a recurrence
      * to the latest date.

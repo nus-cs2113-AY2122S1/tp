@@ -8,30 +8,31 @@ import seedu.duke.task.RecurrenceEnum;
 public class TaskUsageParser {
 
     private static final String STRING_REGEX = "%s";
+    private static final char ARGUMENT_SPLIT = '|';
 
-    public static String getOptionalTaskArguments(String argumentFormat, String argumentSplit) {
+    public static String getOptionalTaskArguments(String argumentFormat) {
         String optionalTaskArguments = String.format(argumentFormat,
-            TaskFlag.PRIORITY + " " + getPrioritiesListString(argumentSplit)) + " ";
+            TaskFlag.PRIORITY + " " + getPrioritiesListString()) + " ";
         return optionalTaskArguments + String.format(argumentFormat,
-            TaskFlag.RECURRENCE + " " + getRecurrencesListString(argumentSplit));
+            TaskFlag.RECURRENCE + " " + getRecurrencesListString());
     }
 
-    private static String getPrioritiesListString(String argumentSplit) {
+    public static String getPrioritiesListString() {
         String listString = STRING_REGEX;
         for (PriorityEnum priority : PriorityEnum.values()) {
-            listString = String.format(listString, priority.toString() + argumentSplit + STRING_REGEX);
+            listString = String.format(listString, priority.toString() + ARGUMENT_SPLIT + STRING_REGEX);
         }
         listString = listString.replaceAll(STRING_REGEX, "");
         return listString.substring(0, listString.length() - 1);
     }
 
-    private static String getRecurrencesListString(String argumentSplit) {
+    public static String getRecurrencesListString() {
         String listString = STRING_REGEX;
         for (RecurrenceEnum recurrence : RecurrenceEnum.values()) {
             if (recurrence == RecurrenceEnum.NONE) {
                 continue;
             }
-            listString = String.format(listString, recurrence.toString() + argumentSplit + STRING_REGEX);
+            listString = String.format(listString, recurrence.toString() + ARGUMENT_SPLIT + STRING_REGEX);
         }
         listString = listString.replaceAll(STRING_REGEX, "");
         return listString.substring(0, listString.length() - 1);

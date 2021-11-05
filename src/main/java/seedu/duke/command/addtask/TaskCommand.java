@@ -20,7 +20,6 @@ public abstract class TaskCommand extends Command {
     private static String TASK_CREATED_MESSAGE = "Task created!\n%s";
 
     private static final String OPTIONAL_ARGUMENT_FORMAT = "[--%s]";
-    private static final String ARGUMENT_SPLIT = "|";
 
     /**
      * Constructs the TaskCommand with the program {@link #taskManager}
@@ -71,7 +70,7 @@ public abstract class TaskCommand extends Command {
     @Override
     protected String getUsage() {
         return getTaskUsage() + ' '
-            + TaskUsageParser.getOptionalTaskArguments(OPTIONAL_ARGUMENT_FORMAT, ARGUMENT_SPLIT);
+            + TaskUsageParser.getOptionalTaskArguments(OPTIONAL_ARGUMENT_FORMAT);
     }
 
     abstract String getTaskUsage();
