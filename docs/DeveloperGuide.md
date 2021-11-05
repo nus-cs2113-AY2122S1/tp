@@ -41,7 +41,8 @@ to ensure that Intellij is configured to use JDK 11.
 
 The diagram above shows the high-level design of TourPlanner.
 
-![image](component_diagram.png)
+<img width="307" alt="component_diagram" src="https://user-images.githubusercontent.com/79963329/140464392-5a1536d2-a5d8-4e57-83f4-f4938ede0cfe.PNG">
+
 
 Below is an overview of the main components, and how they interact with each other.
 
@@ -69,7 +70,7 @@ The rest of the app consists of the following components:
 The diagram below shows how the components interact with each other if the user 
 inputs the command ```list -c```:
 
-![image](architecture_example.png)
+<img width="538" alt="architecture_example" src="https://user-images.githubusercontent.com/79963329/140464330-b4f9121f-b60f-4203-a814-63b7a6bd97a5.PNG">
 
 <br>
 
@@ -308,8 +309,7 @@ be printed onto the console terminal.
 
 The following activity diagram summarizes the following steps.
 
-![image](findclient.png)
-(outdated feelsbad)
+<img width="542" alt="findclient" src="https://user-images.githubusercontent.com/79963329/140464449-0f72431b-8ae5-40e4-add1-aef8fed50031.PNG">
 
 <br>
 
@@ -344,7 +344,8 @@ terminal.
 
 The following activity diagram summarizes the following steps.
 
-![image](findtour.png)
+<img width="456" alt="findtour" src="https://user-images.githubusercontent.com/79963329/140464566-248296e9-0e27-4840-9906-5cfdbe57c309.PNG">
+
 
 <br>
 
@@ -379,7 +380,7 @@ terminal.
 
 The following activity diagram summarizes the following steps.
 
-![image](findflight.png)
+<img width="508" alt="findflight" src="https://user-images.githubusercontent.com/79963329/140464579-91ab5042-885b-4e55-877c-ac733bd12ce9.PNG">
 
 <br>
 
@@ -411,7 +412,7 @@ the console terminal.
 The diagram below shows the class diagram of the Ui component, in relation with
 other major components:
 
-(insert image)
+<img width="289" alt="ui" src="https://user-images.githubusercontent.com/79963329/140464630-a8a8000c-fb45-44af-9cc2-d146ae5ea5c8.PNG">
 
 <br>
 
