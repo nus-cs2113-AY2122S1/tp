@@ -90,7 +90,16 @@ will be referred to later on.
 ![Main Parser Sequence Diagram](images/MainParserSequenceDiagram.png)
 
 ### <a name="command"></a>Command
+
+The `Command` component represents a collection of classes with their names in the form of `XYZCommand`. The `XYZCommand` 
+classes are executed in `ConTech.java` by calling on their corresponding `execute()` function. 
+
 ### <a name="contact-list"></a>ContactList
+
+The `ContactList` component contains all the contacts stored in an arraylist. It deals with operations that interact with 
+the contacts in the `ContactList`, such as adding or editing contacts. The contacts stored in the `ContactList` are sorted
+according to their names in alphabetical order.
+
 ### <a name="storage"></a>Storage
 **API** :`Storage.java`
 
@@ -107,6 +116,8 @@ saved using the `ContactsEncoder` class.
 
 As the `Storage` component is also responsible for loading these data into their corresponding `ContactList` and 
 `Contact` objects, it is dependent on the classes, `ContactList` and `Contact`.
+
+
 
 
 ## <a name="implementation"></a>Implementation
@@ -141,24 +152,25 @@ The diagram below shows the process of parsing the user's input.
 ![Add Contact Parsing](images/AddContactParsingSequenceDiagram.png)
 
 Upon parsing the user's input, the details are passed to an `AddContactCommand`, and this command will be 
-executed in `Duke`. The sequence diagram below illustrates the process of executing `AddContactCommand`.
+executed in `ConTech`. The sequence diagram below illustrates the process of executing `AddContactCommand`.
 
 ![Add Sequence Diagram](images/AddContactCommandSequenceDiagram.png)
 
 ### <a name="View"></a>Viewing a contact: `view`
-This feature is processed using `ViewContactCommand`. Whenever a user wants to view a specific contact from the 
+This feature is processed using `ViewContactCommand`. Whenever a user wants to view a specific contact from the
 contact list, user can input `view INDEX` with the index of the desired contact displayed from the `list` feature. 
-`ViewContactCommand` is then created in the `MainParser` and executed in `Duke`.
+`ViewContactCommand` is then created in the `MainParser` and executed in `ConTech`.
+
 The sequence diagram below illustrates the `execute()` function in `ViewContactCommand`.
 
 ![View Sequence Diagram](images/ViewContactCommandSequenceDiagram.png)
 
 ### <a name="Edit"></a>Editing a contact: `edit`
-This feature is processed using `EditContactParser` under `MainParser`. In order to edit a contact in the contact list, 
+This feature is processed using `EditContactParser` under `MainParser`. In order to edit a contact in the contact list,
 a user must enter a command in the form `edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-l <LINKEDIN>} {-te <TELEGRAM>} 
 {-tw <TWITTER>} {-e <EMAIL>}`. The user input will be parsed by `EditContactParser` methods `getIndexToStore` and 
 `parseContactDetails` to obtain a String array with the details to be edited. An `EditContactCommand` 
-with the specified parameters will then be created and executed in `Duke`. The sequence diagram below 
+with the specified parameters will then be created and executed in `ConTech`. The sequence diagram below 
 shows how the whole process is carried out.
 
 ![Edit Sequence Diagram](images/EditContactCommandSequenceDiagram.png)
@@ -166,7 +178,7 @@ shows how the whole process is carried out.
 
 ### <a name="Delete"></a>Deleting contacts: `rm`
 This feature is processed using the `DeleteContactCommand`. `DeleteContactCommand` is created 
-in the `MainParser`and executed in`Duke`. Users can either delete a specified contact
+in the `MainParser`and executed in`ConTech`. Users can either delete a specified contact
 or delete all contacts at once.
 
 ![Delete Sequence Diagram](images/DeleteContactCommandSequenceDiagram.png)
@@ -201,7 +213,7 @@ This feature is processed using `SearchContactParser` under `MainParser`. In ord
 a user must enter a command in the form `search {-n | -g | -l | -te | -tw | -e} <SEARCH QUERY>`. If no flag is specified, the search will be done
 on contact names buy default. From the user input, the search query and the search flag are obtained from the 
 `parseSearchQuery` and the `getDetailFlag` methods respectively. A `SearchContactCommand` with the specified parameters
-will be created and executed in `Duke`. The sequence diagram below shows how the whole process is carried out.
+will be created and executed in `ConTech`. The sequence diagram below shows how the whole process is carried out.
 
 ![Search Sequence Diagram](images/SearchContactCommandSequenceDiagram.png)
 

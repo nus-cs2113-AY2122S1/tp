@@ -1,7 +1,7 @@
 @startuml
 hide footbox
 mainframe sd delete selected contact fields
-":DeleteContactCommand" -> ":DeleteContactCommand":deleteFields()
+-> ":DeleteContactCommand":deleteFields()
 activate ":DeleteContactCommand"
 
 'obtain contact to be deleted using index
@@ -16,6 +16,7 @@ opt#gold #lightgreen no fields to delete
     activate ":TextUi"
     ":TextUi" --> ":DeleteContactCommand"
     deactivate ":TextUi"
+    <-- ":DeleteContactCommand"
 end
 
 'confirm delete message
