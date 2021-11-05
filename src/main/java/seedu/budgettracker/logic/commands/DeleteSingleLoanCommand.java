@@ -5,7 +5,9 @@ import seedu.budgettracker.ui.TextUi;
 public class DeleteSingleLoanCommand extends DeleteCommand {
 
     public static final String MESSAGE_USAGE = "Delete an loan record.\n"
-            + "Parameters: l/INDEX_OF_LOAN m/MONTH";
+            + "Parameters: -l m/MONTH i/INDEX_OF_LOAN\n"
+            + "Note:\n"
+            + " * If INDEX is not specified, all the loan records of this month will be deleted.\n";
     public final int index;
     public final int month;
 
