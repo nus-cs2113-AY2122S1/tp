@@ -4,6 +4,11 @@ import happybit.exception.HaBitParserException;
 import happybit.goal.GoalType;
 
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.function.Function;
+import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,6 +38,10 @@ public class Parser {
     private static final String ERROR_NEGATIVE_NUM = "The flag '%1$s' has to be followed by a number greater than 0";
     private static final String ERROR_UNDEFINED_GOAL_TYPE_LABEL =
             "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'";
+    private static final String ERROR_NEGATIVE_NUM = "The flag '%1$s' has to be followed by a positive integer";
+    private static final String ERROR_ZERO_NUM = "The flag '%1$s' has to be followed by a number greater than 0";
+    private static final String ERROR_GOAL_TYPE_LABEL = "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'";
+    protected static final String ERROR_INTERVAL_TOO_LARGE = "Interval size is capped at 365 days.";
     protected static final String ERROR_NO_PARAMS = "Command cannot be called without parameters. "
             + "Enter the help command to view command formats";
     private static final String ERROR_NO_DESCRIPTION = "Use a description of at least 1 character";
@@ -41,6 +50,7 @@ public class Parser {
 
     private static final int FLAG_LENGTH = 2;
     private static final int MAX_NAME_LENGTH = 50;
+    protected static final int MAX_INTERVAL = 365;
 
     /**
      * Splits the input into the various parameters.
@@ -87,6 +97,26 @@ public class Parser {
     }
 
     /**
+     * 'Type-casting' a Date to a LocalDate.
+     *
+     * @param date Date to be 'type-casted'.
+     * @return LocalDate that has been 'type-casted' from Date.
+     */
+    protected static LocalDate convertDateToLocalDate(Date date) {
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    /**
+     * 'Type-casting' a LocalDate to a Date.
+     *
+     * @param localDate LocalDate to be 'type-casted'.
+     * @return Date that has been 'type-casted' from LocalDate.
+     */
+    protected static Date convertLocalDateToDate(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    /**
      * Gets the name of a goal/habit from the user input.
      *
      * @param parameters String array of command parameters.
@@ -129,6 +159,41 @@ public class Parser {
             throw new HaBitParserException(ERROR_GOAL_TYPE_FORMAT);
         }
         return getGoalType(flag.substring(FLAG_LENGTH));
+    }
+
+    /**
+     * Gets the index for goal / habit.
+     * Checks more than or equal to 0.
+     *
+     * @param parameters String array of command parameters.
+     * @param flag Flag of parameter being checked.
+     * @return Integer of goal / habit user wanted.
+     * @throws HaBitParserException If index entered by user is less than or equal to 0.
+     */
+    protected static int getIndex(String[] parameters, String flag) throws HaBitParserException {
+        int number = getNumber(parameters, flag);
+        if (number == 0) {
+            throw new HaBitParserException(String.format(ERROR_ZERO_NUM, flag));
+        }
+        return number - 1;
+    }
+
+    /**
+     * Gets interval when user wants to update the interval of a habit.
+     * Checks more than or equal to zero to update as interval cannot be 0 for update.
+     * When adding new habit, interval can be 0.
+     *
+     * @param parameters String array of command parameters.
+     * @param flag Flag of parameter being checked.
+     * @return New interval to be changed to.
+     * @throws HaBitParserException If interval is less than or equal to 0.
+     */
+    protected static int getUpdateInterval(String[] parameters, String flag) throws HaBitParserException {
+        int interval = getNumber(parameters, flag);
+        if (interval == 0) {
+            throw new HaBitParserException(String.format(ERROR_ZERO_NUM, flag));
+        }
+        return interval;
     }
 
     /*
@@ -187,7 +252,7 @@ public class Parser {
     }
 
     /**
-     * Checks if the input can be converted to an integer and is greater than 0.
+     * Checks if the input can be converted to an integer and is greater than or equal to 0.
      *
      * @param input Index as a string data type.
      * @return Index as an integer data type.
@@ -200,7 +265,7 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new HaBitParserException(String.format(ERROR_CONVERT_NUM, flag));
         }
-        if (number <= 0) {
+        if (number < 0) {
             throw new HaBitParserException(String.format(ERROR_NEGATIVE_NUM, flag));
         }
         return number;

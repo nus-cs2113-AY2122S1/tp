@@ -3,6 +3,9 @@ package happybit.goal;
 import happybit.habit.Habit;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -69,11 +72,20 @@ public class Goal {
     }
 
     /**
+     * Getter for start date of goal.
+     *
+     * @return Start Date of a goal.
+     */
+    public Date getStartDate() {
+        return this.startDate;
+    }
+
+    /**
      * Getter for startDate of the goal in string format. (For storage)
      *
      * @return Start date formatted as a string.
      */
-    public String getStartDate() {
+    public String getStringStartDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
         return dateFormat.format(this.startDate);
     }
@@ -339,6 +351,13 @@ public class Goal {
         return false;
     }
 
+    public long getNumOfDaysForGoal() {
+        LocalDate startDateLD = convertDateToLocalDate(this.startDate);
+        LocalDate endDateLD = convertDateToLocalDate(this.endDate);
+
+        return ChronoUnit.DAYS.between(endDateLD, startDateLD);
+    }
+
     /*
      * NOTE : ==================================================================
      * The following are private methods that are used to implement SLAP for the
@@ -346,5 +365,25 @@ public class Goal {
      * visualise the actual methods that can be called from outside this class.
      * =========================================================================
      */
+
+    /**
+     * 'Type-casting' a Date to a LocalDate.
+     *
+     * @param date Date to be 'type-casted'.
+     * @return LocalDate that has been 'type-casted' from Date.
+     */
+    private LocalDate convertDateToLocalDate(Date date) {
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    /**
+     * 'Type-casting' a LocalDate to a Date.
+     *
+     * @param localDate LocalDate to be 'type-casted'.
+     * @return Date that has been 'type-casted' from LocalDate.
+     */
+    private Date convertLocalDateToDate(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
+    }
 
 }
