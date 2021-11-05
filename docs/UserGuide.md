@@ -178,7 +178,10 @@ The accepted date formats in our program:
 
 >💡 **Note**: When minute (`mm`) is unspecified, it will be replaced with `0`.
 
-**Example**: `03/10/2004 03` translates to `3rd October 2004, 3am`.
+**Examples**:
+- `03/10/2004 03` translates to `3rd October 2004, 3:00am`.
+- `15:30` translates to `Your current year, month and day at 3.30pm`.
+- `15 12:30` translates to `Your current year and month on the 15th at 12.30pm`.
 
 ### 2.3 Adding your NUS timetable:
 
