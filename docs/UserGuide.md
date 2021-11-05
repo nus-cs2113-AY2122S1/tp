@@ -804,8 +804,9 @@ We recommend using this function after your daily logging of expenses for a one-
 
 2. It would be ideal not to have entries with big differences as the Stonks XD app is meant for daily logging.
 
+Format: `show_graph [Y/YEAR]`
 
-Format: `show_graph`
+- `YEAR` is an optional input which you may include. It will show the graph that corresponds to the given year. It must be in the YYYY format
 
 <details>
 <summary> ▼ Expected output in run window </summary>
