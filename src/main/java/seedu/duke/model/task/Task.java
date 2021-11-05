@@ -98,7 +98,7 @@ public class Task implements Comparable<Task> {
             return compareDay(this.getDayOfTheWeek(), t.getDayOfTheWeek());
         } catch (InvalidDayException e) {
             // Ignore and return 0
-            System.out.println("Error: Day comparison result is incorrect.");
+            System.out.println("Error: Task comparison result is incorrect.");
             return 0;
         }
     }

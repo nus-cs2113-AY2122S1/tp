@@ -19,8 +19,13 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
-    public TaskList(List<Task> taskList, boolean isSortByDay) {
-        if (isSortByDay) {
+    public TaskList(List<Task> taskList) {
+        Collections.sort(taskList);
+        this.taskList = taskList;
+    }
+
+    public TaskList(List<Task> taskList, boolean isSort) {
+        if (isSort) {
             Collections.sort(taskList);
         }
         this.taskList = taskList;
@@ -90,7 +95,7 @@ public class TaskList {
     public TaskList filterTasksByKeyword(String keyword) {
         return new TaskList(taskList.stream()
                 .filter(task -> task.getTitle().toLowerCase().contains(keyword))
-                .collect(Collectors.toList()), true);
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -102,7 +107,7 @@ public class TaskList {
     public TaskList filterTasksByPeriod(String period) {
         return new TaskList(taskList.stream()
                 .filter(task -> task.getDayOfTheWeek().toLowerCase().contains(period))
-                .collect(Collectors.toList()), true);
+                .collect(Collectors.toList()));
     }
 
     public TaskList sortTasksByPriority() {
