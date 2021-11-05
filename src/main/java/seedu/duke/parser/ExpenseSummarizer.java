@@ -41,7 +41,7 @@ public interface ExpenseSummarizer {
         System.out.println(person + " has spent "
                 + Ui.stringForeignMoney(totalAmountSpent)
                 + " (" + currTrip.getRepaymentCurrency() + " "
-                //+ currTrip.getRepaymentCurrencySymbol()
+                + currTrip.getRepaymentCurrencySymbol()
                 + String.format(currTrip.getRepaymentCurrencyFormat(), totalAmountSpentInLocalCurrency) + ") on "
                 + expensesInvolved
                 + " expenses on the following categories:");

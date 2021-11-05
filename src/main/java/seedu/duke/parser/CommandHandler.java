@@ -116,8 +116,6 @@ abstract class CommandHandler extends CommandExecutor {
             executeCreateExpense(inputParams);
         } catch (NullPointerException | IndexOutOfBoundsException | NumberFormatException e) {
             Ui.printExpenseFormatError();
-        } catch (InvalidAmountException e) {
-            Ui.printInvalidAmountError();
         }
     }
 

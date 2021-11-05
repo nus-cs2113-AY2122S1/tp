@@ -239,8 +239,14 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
         }
     }
 
-    protected static void executeCreateExpense(String inputDescription)
-            throws InvalidAmountException, ForceCancelException {
+    //@@author joshualeeky
+
+    /**
+     * Creates an Expense object in the current opened trip.
+     * @param inputDescription the input of the user.
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
+     */
+    protected static void executeCreateExpense(String inputDescription) throws ForceCancelException {
         Trip currTrip = Storage.getOpenTrip();
         assert Storage.checkOpenTrip();
         Expense newExpense = new Expense(inputDescription);
@@ -249,6 +255,12 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
         Ui.printExpenseAddedSuccess();
     }
 
+    /**
+     * Prints how much a Person object owe other Person object and/or how much other Person objects owe the Person
+     * object.
+     * @param inputParams the input of the user.
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
+     */
     protected static void executeAmount(String inputParams) throws ForceCancelException {
         Trip trip = Storage.getOpenTrip();
         Person toBeChecked = getValidPersonInTripFromString(inputParams, trip);
@@ -259,6 +271,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
         }
     }
 
+    //@@author
     protected static void executePeople() throws TripNotOpenException, ForceCancelException {
         Trip currTrip = Storage.getOpenTrip();
         if (Storage.checkOpenTrip()) {
@@ -277,6 +290,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
         }
     }
 
+    //@@author joshualeeky
     private static void executeDeleteExpense(int expenseIndex) throws ForceCancelException {
         Trip currentTrip = Storage.getOpenTrip();
         Expense expenseToDelete = currentTrip.getListOfExpenses().get(expenseIndex);
