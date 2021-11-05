@@ -58,8 +58,7 @@ public class RemoveCommandParser {
         case Constants.FLAG_MAP:
             handleMapFlagArgs(flagArguments, universitySelectedList, moduleSelectedList, universityMasterList);
             logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
-            return new RemoveMapCommand(uniIndex, mapIndex, universityMasterList, moduleMasterList,
-                    universitySelectedList, moduleSelectedList);
+            return new RemoveMapCommand(uniIndex, mapIndex, universityMasterList, universitySelectedList);
         default:
             throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1, true);
         }
