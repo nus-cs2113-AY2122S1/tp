@@ -29,7 +29,7 @@
 &nbsp;&nbsp;[4.3. Delete Ingredients](#43-deleting-ingredients) <br>
 =======
 &nbsp;&nbsp;[4.1. Alerts](#41-alerts) <br>
-&nbsp;&nbsp;[4.2. Alerts](#42-deleting-ingredients) <br>
+&nbsp;&nbsp;[4.2. Deleting Ingredients](#42-deleting-ingredients) <br>
 [5. Product scope](#5-product-scope) <br>
 [6. User stories](#6-user-stories) <br>
 [7. Non-functional requirements](#7-non-functional-requirements) <br>
