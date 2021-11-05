@@ -15,8 +15,7 @@ package "ui" <<Frame>> #DDDDDD {
     }
 
     class UiMapping extends Ui {
-    + printMappingForList(ModuleMapping mm, int index)
-    + printMapping(ModuleMapping mm, int index)
+    + printMapping(ModuleMapping mm, int index, boolean printMC)
     }
 
     class UiUniversity extends Ui {
