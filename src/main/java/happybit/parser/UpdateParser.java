@@ -42,7 +42,7 @@ public class UpdateParser extends Parser {
      * @param input User input.
      * @return Parse command specifically for updating the chosen goal attribute.
      * @throws HaBitParserException Thrown when parameters given are for changing habit rather than updating goal
-     *                              or when parameters are not in the same
+     *                              or when parameters are not in the expected format.
      */
     public static Command parseUpdateGoalCommands(String input) throws HaBitParserException {
         checkNoDescription(input);
@@ -54,7 +54,7 @@ public class UpdateParser extends Parser {
             return parseUpdateGoalTypeCommand(input);
         }
         if (isUpdateGoalEndDate(parameters)) {
-            return parseUpdateGoalEndDate(input);
+            return parseUpdateGoalEndDateCommand(input);
         }
 
         if (isChangeHabitName(parameters)) {
@@ -103,7 +103,7 @@ public class UpdateParser extends Parser {
         return new UpdateGoalNameCommand(goalIndex, newGoalName);
     }
 
-    public static Command parseUpdateGoalEndDate(String input) throws HaBitParserException {
+    public static Command parseUpdateGoalEndDateCommand(String input) throws HaBitParserException {
         checkNoDescription(input);
         String[] parameters = splitInput(input);
         int goalIndex = getNumber(parameters, FLAG_GOAL_INDEX) - 1;
@@ -260,6 +260,7 @@ public class UpdateParser extends Parser {
         if (strEndDate == null || strEndDate.equals(FLAG_END_DATE)) {
             throw new HaBitParserException(ERROR_GOAL_END_DATE_FORMAT);
         }
+        assert (strEndDate.length() > FLAG_LENGTH);
         return stringToDate(strEndDate.substring(FLAG_LENGTH));
     }
 

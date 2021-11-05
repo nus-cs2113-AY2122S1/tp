@@ -27,4 +27,8 @@ public class UpdateGoalEndDateCommand extends UpdateCommand {
             printManager.printError(e.getMessage());
         }
     }
+
+    public Date getNewDate() {
+        return newDate;
+    }
 }
