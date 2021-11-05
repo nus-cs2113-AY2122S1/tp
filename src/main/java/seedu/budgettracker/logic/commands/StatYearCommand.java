@@ -2,6 +2,8 @@ package seedu.budgettracker.logic.commands;
 
 import seedu.budgettracker.ui.TextUi;
 
+import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_STAT_COMMAND;
+
 public class StatYearCommand extends StatCommand {
     private int type = 0;
 
@@ -43,8 +45,7 @@ public class StatYearCommand extends StatCommand {
         System.out.printf("%.2f", expenditureTotal);
     }
 
-    @Override
-    public void execute() {
+    private void typeVerticalBarGraph() {
         double amount;
 
         double[] barPercentage;
@@ -66,5 +67,38 @@ public class StatYearCommand extends StatCommand {
         }
 
         TextUi.drawVerticalPercentage(barPercentage);
+    }
+
+    private void typeSingleOverallGraph() {
+        double amount = 0.0;
+        double totalSpending = 0.0;
+        double barPercentage = 0.0;
+
+        for (int i = 1; i <= 12; i++) {
+            for (int j = 0; j < allRecordList.getExpenditureListSize(i); j += 1) {
+                totalSpending += allRecordList.getExpenditure(j, i).getAmount();
+            }
+
+            amount += allRecordList.getBudget(i).getAmount();
+        }
+
+        barPercentage = (totalSpending / amount) * 100;
+
+        TextUi.drawSingleOverallGraph(barPercentage);
+    }
+
+    @Override
+    public void execute() {
+        switch (type) {
+        case (1):
+            typeVerticalBarGraph();
+            break;
+        case (2):
+            typeSingleOverallGraph();
+            break;
+        default:
+            typeVerticalBarGraph();
+            break;
+        }
     }
 }

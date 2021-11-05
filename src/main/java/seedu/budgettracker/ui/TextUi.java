@@ -369,6 +369,53 @@ public class TextUi {
         printDivider();
     }
 
+    public static void printExplosion() {
+        System.out.println("              _.-^^---....,,---_\n" +
+                "           _--                  --_\n" +
+                "          <          Overspent!       >)\n" +
+                "           \\._                   _./\n" +
+                "              ```--. . , ; .--'''\n" +
+                "                    | |   |\n" +
+                "                 .-=||  | |=-.\n" +
+                "                 `-=#$%&%$#=-'\n" +
+                "                    | ;  :|\n" +
+                "           _____.,-#%&$@%#&#~,._____");
+    }
+
+    public static void drawSingleOverallGraph(double barPercentage) {
+        System.out.println("Percentage of Money Spent throughout the year");
+        System.out.print(LS);
+
+        System.out.print("Percentage: ");
+        System.out.printf("%.2f", barPercentage);
+        System.out.print("%");
+        System.out.print(LS);
+
+        if (barPercentage > 100) {
+            printExplosion();
+        }
+
+        for (int i = 20; i > 0; i--) {
+            if (i == 20) {
+                System.out.print((i * 5) + "%     ");
+            } else if (i == 1) {
+                System.out.print((i * 5) + "%       ");
+            } else {
+                System.out.print((i * 5) + "%      ");
+            }
+
+            if (barPercentage < i * 5) {
+                System.out.print("             .....");
+            } else {
+                System.out.print("             #####");
+            }
+
+            System.out.print(LS);
+        }
+
+        printDivider();
+    }
+
     private static void printVerticalPercentageRow(double[] barPercentage, int i) {
         for (double v : barPercentage) {
             if ((i * 10) <= v) {
