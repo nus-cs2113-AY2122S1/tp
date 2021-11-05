@@ -51,6 +51,15 @@ public class ModuleList {
         return false;
     }
 
+    public Module isExistModule(String moduleCode) {
+        for (Module module : list) {
+            if (module.moduleCode.equals(moduleCode)) {
+                return module;
+            }
+        }
+        return null;
+    }
+
     /**
      * Checks whether the module exists in the list.
      * @param searchModule Module to check
