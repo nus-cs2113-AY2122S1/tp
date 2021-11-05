@@ -45,7 +45,7 @@ public class University implements Comparator<University> {
         for (int i = 0; i < list.size(); i++) {
             ModuleMapping currentMapping = list.get(i);
             System.out.print(Constants.INDENTATION);
-            UiMapping.printMappingForList(currentMapping, i + 1);
+            UiMapping.printMapping(currentMapping, i + 1, true);
         }
     }
 
@@ -56,7 +56,7 @@ public class University implements Comparator<University> {
     public void listSelectedMappings(ModuleList selectedModuleList) {
         ArrayList<ModuleMapping> selectedMappings = getSelectedMappings(selectedModuleList);
         for (int i = 0; i < selectedMappings.size(); i++) {
-            UiMapping.printMappingForList(selectedMappings.get(i), i + 1);
+            UiMapping.printMapping(selectedMappings.get(i), i + 1, true);
         }
     }
 
@@ -92,18 +92,6 @@ public class University implements Comparator<University> {
 
     public int getMappingListSize() {
         return list.size();
-    }
-
-    public Module getMappedModule(Module selectedLocalModule, ModuleList selectedModuleList) {
-        String mappedModuleCode = "";
-        for (int i = 0; i < list.size(); i++) {
-            ModuleMapping currentMapping = list.get(i);
-            if (currentMapping.localModule.getModuleCode()
-                    .equals(selectedLocalModule.getModuleCode())) {
-                mappedModuleCode = currentMapping.getMappedModule().getModuleCode();
-            }
-        }
-        return selectedModuleList.getModule(mappedModuleCode);
     }
 
     public String getName() {

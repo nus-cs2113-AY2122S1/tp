@@ -15,8 +15,7 @@ package "ui" <<Frame>> #DDDDDD {
     }
 
     class UiMapping extends Ui {
-    + printMappingForList(ModuleMapping mm, int index)
-    + printMapping(ModuleMapping mm, int index)
+    + printMapping(ModuleMapping mm, int index, boolean printMC)
     }
 
     class UiUniversity extends Ui {
@@ -45,6 +44,11 @@ UiStorage --|> Ui
     + printWarningMessage()
     }
 }
+
+PaddingType <-- Ui
+PaddingType <-- UiModule
+PaddingType <-- UiMapping
+PaddingType <-- UiUniversity
 enum PaddingType <<enumeration>> {
     INDEX,
     MODULECODE,
