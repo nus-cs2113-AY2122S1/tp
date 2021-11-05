@@ -128,7 +128,7 @@ public class AddCommandParser {
     }
 
     /**
-     * Handle the arguments for /mod flag
+     * Handle the arguments for /mod flag.
      *
      * @param arguments The arguments for /mod flag.
      * @param moduleMasterList The master list of all available modules.

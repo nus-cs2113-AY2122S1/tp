@@ -71,11 +71,20 @@ public class ModuleList {
      */
     public boolean isModuleExist(Module searchModule) {
         for (Module module : list) {
-            if (module.IsEqual(searchModule)) {
+            if (module.isEqual(searchModule)) {
                 return true;
             }
         }
         return false;
+    }
+
+    public Module isExistModule(String moduleCode) {
+        for (Module module : list) {
+            if (module.moduleCode.equals(moduleCode)) {
+                return module;
+            }
+        }
+        return null;
     }
 
     public Module getModule(String moduleCode) {

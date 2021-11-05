@@ -24,7 +24,7 @@ public class Parser {
     protected UniversityList universitySelectedList;
 
     /**
-     * Constructor for Parser
+     * Constructor for Parser.
      *
      * @param universityMasterList The master list of all available universities.
      * @param moduleMasterList The master list of all available modules.

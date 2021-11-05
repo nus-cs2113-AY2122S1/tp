@@ -11,10 +11,10 @@ import java.io.IOException;
 public class UserStorage {
 
     /**
-     * Loads the file based on the filepath
-     * @param filepath Path of the file
-     * @return The file based on the file path
-     * @throws IOException If there is a problem accessing the file
+     * Loads the file based on the filepath.
+     * @param filepath Path of the file.
+     * @return The file based on the file path.
+     * @throws IOException If there is a problem accessing the file.
      */
     protected File loadFile(String filepath) throws IOException {
         File file = new File(filepath);
