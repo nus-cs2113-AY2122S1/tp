@@ -23,7 +23,7 @@ public class UnreserveCommand extends Command {
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
         try {
-            id = args.split(" ")[1].strip();
+            id = args.split(" ", 2)[1].strip();
             Item toUnreserve = catalogue.getItem(id);
             if (toUnreserve.getStatus().equals(Status.RESERVED)) {
                 toUnreserve.setStatus(Status.AVAILABLE);

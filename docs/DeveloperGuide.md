@@ -193,6 +193,38 @@ The Edit Command class handles the functionality to change a specific detail of 
 
 ![SearchFunction](img/SearchFunctionSequence.png)
 
+#### Loan Command
+
+![LoanSequenceDiagram](img/LoanSequenceDiagram.png)
+
+The Loan Command class handles the functionality to loan a specific item and change its attributes accordingly.
+
+This sequence diagram shows the interactions occurring each time a user wants to loan an item.
+1. `Libmgr` calls `execute()` method in `LoanCommand` object.
+2. `LoanCommand` calls the `handleLoanCommand()` in itself.
+3. `LoanCommand` calls the `getItem()` in `Catalogue` using the specific id given.
+4. `LoanCommand` checks the status of the item.
+5. When the item status is `AVAILABLE` the loan is successful and the item's attributes change accordingly.
+6. When the item status is `RESERVED` the loan is successful only if the username matches the item's loanee.
+7. When the item status is `LOANED` the loan is unsuccessful.
+
+#### Deadline Command
+
+![DeadlineSequenceDiagram](img/DeadlineSequenceDiagram.png)
+
+The Deadline Command class handles the functionality to list the items according to their due dates.
+
+This sequence diagram shows the interactions occurring each time a user wants to loan an item.
+1. `Libmgr` calls `execute()` method in `DeadlineCommand` object.
+2. `DeadlineCommand` calls the `handleDeadlineCommand()` in itself.
+3. `DeadlineCommand` checks the description of the command given by the user.
+4. If the deadline description is `today`, it will print all items that are due today.
+5. If the deadline description is `overdue`, it will print all items that are overdue (due before today).
+6. If the deadline description is a specific date, it will print all items that are due by the date given.
+7. If the deadline description is outside of the listed three above, it will throw an exception and print 
+   the error message accrodingly.
+
+
 ---
 ## Product scope
 ### Target user profile
@@ -226,7 +258,8 @@ inventory more efficiently.
 |v2.0|librarian|loan an item for a person specified by their username||
 |v2.0|librarian|reserve an item for a person specified by their username||
 |v2.0|librarian|view what items are due to be returned today|| 
-|v2.0|librarian|view the list of overdue items|inform people to return them|| 
+|v2.0|librarian|view the list of overdue items|inform people to return them||
+|v2.0|librarian|view the list of items that are due to be returned on a specific date||
 
 ## Non-Functional Requirements
 
