@@ -94,18 +94,6 @@ public class University implements Comparator<University> {
         return list.size();
     }
 
-    public Module getMappedModule(Module selectedLocalModule, ModuleList selectedModuleList) {
-        String mappedModuleCode = "";
-        for (int i = 0; i < list.size(); i++) {
-            ModuleMapping currentMapping = list.get(i);
-            if (currentMapping.localModule.getModuleCode()
-                    .equals(selectedLocalModule.getModuleCode())) {
-                mappedModuleCode = currentMapping.getMappedModule().getModuleCode();
-            }
-        }
-        return selectedModuleList.getModule(mappedModuleCode);
-    }
-
     public String getName() {
         return name;
     }
