@@ -56,7 +56,7 @@ public class Person {
         if (foodIndex <= totalMenuItems && foodIndex > 0) {
             int updatedQuantity = individualFoodOrders[foodIndex - 1].getQuantity() + foodQuantity;
             if (updatedQuantity > MAX_FOOD_QUANTITY) {
-                throw new LotsException("Please keep the food quantity to less than 1000!");
+                throw new LotsException("Please make sure the quantity of each food is less than 1000.");
             }
             individualFoodOrders[foodIndex - 1].setQuantity(updatedQuantity);
         } else {
