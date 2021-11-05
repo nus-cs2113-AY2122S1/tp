@@ -35,7 +35,8 @@ public class RecordList {
                 hasBudget = true;
             }
         } else {
-            throw new DuplicateBudgetException("You have already added a budget to this month! Use edit to change its value instead.");
+            throw new DuplicateBudgetException("You have already added a budget to this month! "
+                    + "Use edit to change its value instead.");
         }
     }
 

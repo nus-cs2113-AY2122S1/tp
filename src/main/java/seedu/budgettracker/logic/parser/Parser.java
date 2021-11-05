@@ -52,9 +52,10 @@ public class Parser {
      *
      * @param commandParams the raw command arguments string
      * @param prefixes an array of prefix strings that the command should split by
-     * @return a HashMap of String keys and values, where keys are command prefixes and values are their respective values
+     * @return a HashMap of String keys and values, where keys are command prefixes,
+     *     and values are their respective values
      */
-    public static HashMap<String, String> splitArguments(String commandParams, String[] prefixes) throws ParserException {
+    public static HashMap<String, String> splitArgs(String commandParams, String[] prefixes) throws ParserException {
         int counter = 0;
         HashMap<String, String> argumentMap = new HashMap<>();
         for (String prefix : prefixes) {

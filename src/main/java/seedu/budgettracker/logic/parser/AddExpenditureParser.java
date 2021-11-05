@@ -15,7 +15,7 @@ public class AddExpenditureParser implements ParserPrefix {
         PREFIX_CATEGORY };
 
     public static AddExpenditureCommand parse(String args) throws ParserException {
-        HashMap<String, String> argumentMap = Parser.splitArguments(args, PREFIX_ARRAY);
+        HashMap<String, String> argumentMap = Parser.splitArgs(args, PREFIX_ARRAY);
 
         String description = ParserUtil.parseDescription(argumentMap.get(PREFIX_DESCRIPTION), IS_COMPULSORY);
         double amount = ParserUtil.parseAmount(argumentMap.get(PREFIX_AMOUNT), IS_COMPULSORY);
