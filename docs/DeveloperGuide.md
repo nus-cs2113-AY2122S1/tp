@@ -434,7 +434,7 @@ stock quantity.
 
 ### Order Commands
 
-### AddOrderCommand
+#### AddOrderCommand
 
 MediVault creates an `AddOrderCommand` object when CommandParser identifies `addorder` or the `add` keyword
 in `order` mode.
