@@ -211,7 +211,8 @@ inventory more efficiently.
 |v2.0|librarian|loan an item for a person specified by their username||
 |v2.0|librarian|reserve an item for a person specified by their username||
 |v2.0|librarian|view what items are due to be returned today|| 
-|v2.0|librarian|view the list of overdue items|inform people to return them|| 
+|v2.0|librarian|view the list of overdue items|inform people to return them||
+|v2.0|librarian|view the list of items that are due to be returned on a specific date||
 
 ## Non-Functional Requirements
 
