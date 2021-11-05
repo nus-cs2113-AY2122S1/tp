@@ -38,6 +38,7 @@ public class Parser {
     private static final String ERROR_NEGATIVE_NUM = "The flag '%1$s' has to be followed by a positive integer";
     private static final String ERROR_ZERO_NUM = "The flag '%1$s' has to be followed by a number greater than 0";
     private static final String ERROR_GOAL_TYPE_LABEL = "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'";
+    protected static final String ERROR_INTERVAL_TOO_LARGE = "Interval size is capped at 365 days.";
     protected static final String ERROR_NO_PARAMS = "Command cannot be called without parameters. "
             + "Enter the help command to view command formats";
     private static final String ERROR_LONG_STRING = "Use a description no more than 50 characters "
@@ -45,6 +46,7 @@ public class Parser {
 
     private static final int FLAG_LENGTH = 2;
     private static final int MAX_NAME_LENGTH = 50;
+    protected static final int MAX_INTERVAL = 365;
 
     /**
      * Splits the input into the various parameters.

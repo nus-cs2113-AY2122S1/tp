@@ -19,7 +19,8 @@ public class UiStartup extends UiManager {
             + LS + S_TAB + "[2] User Guide"
             + LS + S_TAB + "[3] Developer Guide"
             + LS + S_TAB + "[4] Demo Video"
-            + LS + S_TAB + "[5] Start Application\n";
+            + LS + S_TAB + "[5] Start Application"
+            + LS + S_TAB + "[6] Exit Application\n";
 
     private static final String WELCOME_MESSAGE = "Howdy! Welcome to Ha(ppy)Bit!\n";
     private static final String BROWSER_MESSAGE = "Opening in a web browser...\n";
@@ -44,6 +45,7 @@ public class UiStartup extends UiManager {
             + "=================================================================\n";
 
     private static final String VERSION_MESSAGE = "Current Version: v2.0 (updated 28-Oct-2021)\n";
+    private static boolean isExitFromStartup = false;
 
     /**
      * Main function to execute main menu interface.
@@ -54,13 +56,19 @@ public class UiStartup extends UiManager {
         defaultDisplay();
         Scanner in = new Scanner(System.in);
         String userInput = readUserInput(in);
-        while (!userInput.equals("5")) {
+        while (!userInput.equals("5") && !userInput.equals("6")) {
             scenario1To4(userInput);
             userInput = readUserInput(in);
         }
-        System.out.println(START_MESSAGE);
-        waitApp(1);
-        clearConsoleScreen();
+
+        if (userInput.equals("5")) {
+            System.out.println(START_MESSAGE);
+            waitApp(1);
+            clearConsoleScreen();
+        }
+        if (userInput.equals("6")) {
+            setIsExitFromStartup(true);
+        }
     }
 
     /*
@@ -149,4 +157,21 @@ public class UiStartup extends UiManager {
         }
     }
 
+    /**
+     * Setter for boolean variable isExitFromStartup.
+     *
+     * @param isExitFromStartup True meaning that user has chosen to exit app from startup page. Otherwise, false.
+     */
+    public static void setIsExitFromStartup(boolean isExitFromStartup) {
+        UiStartup.isExitFromStartup = isExitFromStartup;
+    }
+
+    /**
+     * Getter for boolean variable isExitFromStartup.
+     *
+     * @return Boolean value of isExitFromStartup.
+     */
+    public static boolean getIsExitFromStartup() {
+        return isExitFromStartup;
+    }
 }

@@ -15,6 +15,7 @@ public class PrintManager {
     private static final String MSG_ERROR = "Error Detected: %1$s" + LS;
     private static final String MSG_LIST_COMMAND = "Here are the list of commands:";
     private static final String MSG_LIST_GOAL = "%1$s goal(s) currently being tracked:" + LS;
+    private static final String MSG_LIST_GOAL_EXCESS_TEXT = "Gibberish found: %1$s. Anyway," + LS;
     private static final String MSG_LIST_HABIT = "%1$s habit(s) currently being tracked for %2$s:" + LS;
     private static final String MSG_ADD_GOAL = "The goal '%1$s' has been added." + LS;
     private static final String MSG_ADD_HABIT = "The habit '%1$s' has been added to goal '%2$s'" + LS;
@@ -31,7 +32,7 @@ public class PrintManager {
     private static final String MSG_UPDATE_HABIT_INTERVAL = "The habit '%1$s' of goal '%2$s' has its interval changed "
             + "to '%3$s'" + LS;
     private static final String MSG_EXIT = "Thanks for using Ha(ppy)Bit, see you in a \033[3mbit\033[0m! (hehe)" + LS
-            + "\"We are what we repeatedly do. Excellence, then, is not an act, but a habit.\"" + LS
+            + LS + "\"We are what we repeatedly do. Excellence, then, is not an act, but a habit.\"" + LS
             + " — Will Durant";
 
     private static final String COMMAND_HELP = "open command list";
@@ -96,6 +97,8 @@ public class PrintManager {
     private static final int COMMAND_INDEX = 0;
     private static final int INSTR_INDEX = 1;
 
+    private static final int MAX_GIBBERISH_LENGTH = 40;
+
     /**
      * Prints the list of commands.
      */
@@ -111,8 +114,9 @@ public class PrintManager {
      * @param goals      List of goals.
      * @param numOfGoals Number of goals in the goal list.
      */
-    public void printGoalList(ArrayList<Goal> goals, int numOfGoals) {
+    public void printGoalList(ArrayList<Goal> goals, int numOfGoals, String gibberish) {
         String[][] data = populateGoalData(goals, numOfGoals, GOAL_HEADERS.length);
+        printGibberish(gibberish);
         System.out.printf(MSG_LIST_GOAL, numOfGoals);
         PrintTable.printTable(GOAL_HEADERS, data);
     }
@@ -278,6 +282,33 @@ public class PrintManager {
      */
     private void printLine() {
         System.out.println(LINE);
+    }
+
+    //@@author kahhe
+    /**
+     * Prints the excess text from user after 'line' command if it exists.
+     *
+     * @param gibberish Excess text from user after the one-word command 'line'.
+     */
+    private void printGibberish(String gibberish) {
+        if (gibberish != null) {
+            gibberish = trimGibberish(gibberish);
+            System.out.printf(MSG_LIST_GOAL_EXCESS_TEXT, gibberish);
+        }
+    }
+
+    /**
+     * Shortens the gibberish text if it's too long.
+     * To prevent abuse from user by typing lengthy characters.
+     *
+     * @param gibberish Excess text from user after the one-word command 'line'.
+     * @return Trimmed gibberish to a respectable length.
+     */
+    private String trimGibberish(String gibberish) {
+        if (gibberish.length() > MAX_GIBBERISH_LENGTH) {
+            return gibberish.substring(0, MAX_GIBBERISH_LENGTH) + "..";
+        }
+        return gibberish;
     }
 
     /* The following are sub-methods of list printing.
