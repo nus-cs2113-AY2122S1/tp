@@ -24,6 +24,8 @@ public class GoalList {
     private static final String ERROR_DUPLICATE_GOAL_NAME = "This goal name is already present in your list";
     private static final String ERROR_NEW_END_DATE_AFTER_START_DATE = "You cannot have the end date of a goal before "
             + "or on the start date itself.";
+    private static final String ERROR_NEW_END_DATE_SAME_AS_TODAY =
+            "You cannot change the end date of a goal to today's date";
     private static final String ERROR_INTERVAL_LONGER_THAN_GOAL_DURATION =
             "Your interval for the habit cannot extend to after the end date for the goal";
 
@@ -272,6 +274,8 @@ public class GoalList {
         compareOldDateWithNewDate(oldDate, newDate);
         // check if new end date before start date
         checkNewDateAfterStartDate(startDate, newDate);
+        // check if new date is same as today
+        checkNewDateIsToday(newDate);
         goal.setEndDate(newDate);
         // Go through all habits for Goal
         // change endDate for all of them + call updateIntervals
@@ -478,6 +482,15 @@ public class GoalList {
 
         if (!newDateLD.isAfter(startDateLD)) {
             throw new HaBitCommandException(ERROR_NEW_END_DATE_AFTER_START_DATE);
+        }
+    }
+
+    private void checkNewDateIsToday(Date newDate) throws HaBitCommandException {
+        LocalDate newDateLD = convertDateToLocalDate(newDate);
+        LocalDate currDateLD = convertDateToLocalDate(new Date());
+
+        if (newDateLD.isEqual(currDateLD)) {
+            throw new HaBitCommandException(ERROR_NEW_END_DATE_SAME_AS_TODAY);
         }
     }
 

@@ -27,8 +27,10 @@ class AddParserTest {
     private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The flag 'g/' has to be followed by a number";
     private static final String ERROR_INTERVAL_NON_INTEGER = "The flag 'i/' has to be followed by a number";
     private static final String ERROR_INTERVAL_NEGATIVE = "The flag 'i/' has to be followed by a positive integer";
-    private static final String ERROR_GOAL_INDEX_NEGATIVE_NUM = "The flag 'g/' has to be followed by a positive integer";
-    private static final String ERROR_GOAL_INDEX_ZERO_NUM = "The flag 'g/' has to be followed by a number greater than 0";
+    private static final String ERROR_GOAL_INDEX_NEGATIVE_NUM =
+            "The flag 'g/' has to be followed by a positive integer";
+    private static final String ERROR_GOAL_INDEX_ZERO_NUM =
+            "The flag 'g/' has to be followed by a number greater than 0";
     private static final String ERROR_GOAL_TYPE_LABEL = "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'";
     private static final String ERROR_PAST_DATE = "All dates have to come after today's date";
     private static final String ERROR_CHRONOLOGICAL_DATE = "Start Date has to come before End Date.";
@@ -58,7 +60,8 @@ class AddParserTest {
         Goal testGoal = testCommand.getGoal();
         assertEquals("Test", testGoal.getGoalName());
         assertEquals("[DF]", testGoal.getGoalTypeCharacter());
-        assertEquals(LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyy")), testGoal.getStringStartDate());
+        assertEquals(LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyy")),
+                testGoal.getStringStartDate());
         assertEquals(new SimpleDateFormat("ddMMyyyy").parse("31122022"), testGoal.getEndDate());
     }
 

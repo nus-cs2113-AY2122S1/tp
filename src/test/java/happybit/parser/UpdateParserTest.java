@@ -17,12 +17,18 @@ class UpdateParserTest {
     private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The flag 'h/' has to be followed by a number";
     private static final String ERROR_INTERVAL_FORMAT = "The command is missing the 'i/' flag";
     private static final String ERROR_INTERVAL_NON_INTEGER = "The flag 'i/' has to be followed by a number";
-    private static final String ERROR_GOAL_INDEX_NEGATIVE_NUM = "The flag 'g/' has to be followed by a positive integer";
-    private static final String ERROR_GOAL_INDEX_ZERO_NUM = "The flag 'g/' has to be followed by a number greater than 0";
-    private static final String ERROR_HABIT_INDEX_NEGATIVE_NUM = "The flag 'h/' has to be followed by a positive integer";
-    private static final String ERROR_HABIT_INDEX_ZERO_NUM = "The flag 'h/' has to be followed by a number greater than 0";
-    private static final String ERROR_INTERVAL_NEGATIVE_NUM = "The flag 'i/' has to be followed by a positive integer";
-    private static final String ERROR_INTERVAL_ZERO_NUM = "The flag 'i/' has to be followed by a number greater than 0";
+    private static final String ERROR_GOAL_INDEX_NEGATIVE_NUM =
+            "The flag 'g/' has to be followed by a positive integer";
+    private static final String ERROR_GOAL_INDEX_ZERO_NUM =
+            "The flag 'g/' has to be followed by a number greater than 0";
+    private static final String ERROR_HABIT_INDEX_NEGATIVE_NUM =
+            "The flag 'h/' has to be followed by a positive integer";
+    private static final String ERROR_HABIT_INDEX_ZERO_NUM =
+            "The flag 'h/' has to be followed by a number greater than 0";
+    private static final String ERROR_INTERVAL_NEGATIVE_NUM =
+            "The flag 'i/' has to be followed by a positive integer";
+    private static final String ERROR_INTERVAL_ZERO_NUM =
+            "The flag 'i/' has to be followed by a number greater than 0";
 
 
     @Test

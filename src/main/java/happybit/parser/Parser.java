@@ -158,7 +158,6 @@ public class Parser {
 
     /**
      * Gets the index for goal / habit.
-     *
      * Checks more than or equal to 0.
      *
      * @param parameters String array of command parameters.
@@ -176,7 +175,6 @@ public class Parser {
 
     /**
      * Gets interval when user wants to update the interval of a habit.
-     *
      * Checks more than or equal to zero to update as interval cannot be 0 for update.
      * When adding new habit, interval can be 0.
      *
