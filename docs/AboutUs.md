@@ -1,8 +1,6 @@
-# About us
 
-Display | Name | Github Profile | Portfolio 
+Display | Name | Github Profile | Portfolio
 --------|:----:|:--------------:|:---------:
-
 ![](https://via.placeholder.com/100.png?text=Photo) | Leow Yuan Yang | [Github](https://github.com/leowyy99) | [Portfolio](docs/team/leowyy99.md)  
 ![](https://via.placeholder.com/100.png?text=Photo) | Madhan Selvapandian | [Github](https://github.com/madhanse) | [Portfolio](docs/team/madhanse.md)  
 ![](https://via.placeholder.com/100.png?text=Photo) | Ma Zijian | [Github](https://github.com/MAZJ124) | [Portfolio](docs/team/mazj124.md)  
