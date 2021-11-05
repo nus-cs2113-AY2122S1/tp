@@ -49,7 +49,10 @@ class UpdateParserTest {
     private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The flag 'h/' has to be followed by a number";
     private static final String ERROR_INTERVAL_FORMAT = "The command is missing the 'i/' flag";
     private static final String ERROR_INTERVAL_NON_INTEGER = "The flag 'i/' has to be followed by a number";
+    private static final String ERROR_INTERVAL_TOO_LARGE = "Interval size is capped at 365 days.";
+
     private static final String DATE_FORMAT = "ddMMyyyy";
+    private static final String INTERVAL_TOO_LARGE = "366";
 
     /*
     Tests for parseUpdateGoalCommands()
@@ -577,6 +580,15 @@ class UpdateParserTest {
             fail();
         } catch (HaBitParserException e) {
             assertEquals(Parser.ERROR_NO_PARAMS, e.getMessage());
+        }
+    }
+
+    @Test
+    void parseUpdateHabitIntervalCommand_intervalTooLarge_exceptionThrown() {
+        try {
+            UpdateParser.parseUpdateHabitIntervalCommand("g/1 h/1 i/" + INTERVAL_TOO_LARGE);
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_INTERVAL_TOO_LARGE, e.getMessage());
         }
     }
 
