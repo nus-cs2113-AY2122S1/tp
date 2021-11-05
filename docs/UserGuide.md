@@ -23,7 +23,7 @@ Below is a guide on how you can get started using our program to start **"Schedu
       - [2.4.3 Listing the recurrence of a task](#243-listing-the-recurrence-of-a-task)
     - [2.5 Sorting your tasklist: `sort`](#25-sorting-your-task-list-sort)
     - [2.6 Setting reminders to your tasks: `reminder`](#26-setting-reminders-to-your-tasks-reminder)
-    - [2.7 Editing your tasks: `edit`](#27-editing-your-tasks-edit)
+    - [2.7 Editing your tasks: `edit`](#27-editing-your-tasks-edit-index-flag-value-flag-value-flag-value)
     - [2.8 Deleting your tasks: `delete`](#28-deleting-your-tasks-delete)
     - [2.9 Exiting the program: `bye`](#29-exiting-the-program-bye)
     - [2.10 Storage](#210-storage)
@@ -322,7 +322,20 @@ Sorts your task list by a given criteria.
 
 ### 2.6 Setting reminders to your tasks: `reminder`
 
-### 2.7 Editing your tasks: `edit`
+### 2.7 Editing your tasks: `edit <index> <--flag <value>> [--flag <value>] [--flag <value>]...`
+Edits a single [Todo](#221-todo-todo), [Deadline](#222-deadline-deadline) or [Event](#223-event-event) based on the flags entered.
+- `<index>` is the index of the task in the most recent [list](#24-listing-your-tasks-list) command that you have run.
+   >💡 **Note**: if the task you want to edit was not in your most recent [list](#24-listing-your-tasks-list) command, simply type `list` to list all tasks and use its corresponding index to edit it.
+- at least one `<--flag <value>>` must be specified, though you can edit multiple values at once by providing multiple more `[--flag <value>]` arguments.
+- **Flags**
+  - `--description <description>` modifies Task description.
+  - `--priority <high|medium|low>` modifies Task priority.
+  - `--recur <daily|weekly|monthly|yearly>` modifies Task recurrence.
+  - <code>--doOn <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Todo](#221-todo-todo) is to be done.
+  - <code>--due <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Deadline](#222-deadline-deadline) is due.
+  - <code>--start <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Event](#223-event-event) starts.
+  - <code>--end <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Event](#223-event-event) ends.
+  - `--link <url>` modifies your Lesson link.
 
 ### 2.8 Deleting your tasks: `delete`
 Deletes tasks specified in comma-seperated argument.
