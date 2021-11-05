@@ -56,7 +56,7 @@ public class Module implements Comparator<Module> {
      * @param searchModule Module to check
      * @return True if equal. Otherwise, false
      */
-    public boolean IsEqual(Module searchModule) {
+    public boolean isEqual(Module searchModule) {
         return (getModuleCode().equals(searchModule.getModuleCode()))
                 && (getModuleName().equals(searchModule.getModuleName()))
                 && (getModuleCredits() == searchModule.getModuleCredits());

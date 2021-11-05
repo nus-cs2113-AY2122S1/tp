@@ -24,9 +24,9 @@ public class SelectedModuleStorage extends UserStorage {
     private static final String FILE_PATH = "data/selectedModules.txt";
 
     /**
-     * Writes the user's selected module list into the file
-     * @param moduleList User's selected module list
-     * @throws IOException If there is a problem in accessing the file
+     * Writes the user's selected module list into the file.
+     * @param moduleList User's selected module list.
+     * @throws IOException If there is a problem in accessing the file.
      */
     public void updateFile(ModuleList moduleList) throws IOException {
         FileWriter fw = new FileWriter(FILE_PATH);
@@ -39,11 +39,11 @@ public class SelectedModuleStorage extends UserStorage {
     }
 
     /**
-     * Reads the file storing the user's selected module list and adds them into
+     * Reads the file storing the user's selected module list and adds them into.
      * the array list.
-     * @param moduleMasterList Module Master List
-     * @return Array List storing the user's selected modules
-     * @throws IOException If there is a problem accessing the file
+     * @param moduleMasterList Module Master List.
+     * @return Array List storing the user's selected modules.
+     * @throws IOException If there is a problem accessing the file.
      */
     public ModuleList readFile(ModuleList moduleMasterList)
             throws IOException {
