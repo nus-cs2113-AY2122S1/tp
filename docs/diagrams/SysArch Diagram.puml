@@ -10,6 +10,7 @@ Package "SITUS"<<Rectangle>>{
     Class Command COMMAND_COLOUR
     Class IngredientList INGREDIENTLIST_COLOUR
     Class Main MAIN_COLOUR
+    Class IngredientGroup INGREDIENTGROUP_COLOUR
 }
 
 Class "<$user>" as User
@@ -24,6 +25,8 @@ Command -l[COMMAND_COLOUR]-> UI
 IngredientList -r[INGREDIENTLIST_COLOUR]-> Storage
 Storage -r[STORAGE_COLOUR]..> LocalStorage
 Storage -l[STORAGE_COLOUR]..> IngredientList
+IngredientList -d[INGREDIENTLIST_COLOUR]-> IngredientGroup
+IngredientGroup -u[INGREDIENTGROUP_COLOUR]-> IngredientList
 
 'UI -d--> Main
 'Main -r--> Parser

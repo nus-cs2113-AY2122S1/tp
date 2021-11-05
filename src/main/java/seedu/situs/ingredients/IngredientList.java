@@ -75,6 +75,7 @@ public class IngredientList {
         return ingredientList;
     }
 
+    //@@author ngoivanessa
     /**
      * Uses ingredient name as key to search if ingredient currently exists in ingredient list.
      *
@@ -90,6 +91,7 @@ public class IngredientList {
         return false;
     }
 
+    //@@author ngoivanessa
     /**
      * Uses ingredient name as key to find the index of the corresponding ingredient.
      * in the ingredient list.
@@ -107,6 +109,7 @@ public class IngredientList {
         return -1;
     }
 
+    //@@author ngoivanessa
     /**
      * Adds ingredient to ingredient list.
      *
@@ -212,6 +215,7 @@ public class IngredientList {
         return removedIngredient;
     }
 
+    //@@author ngoivanessa
     /**
      * Get ingredient group based on ingredient number (i.e. all duplicates of the same ingredient).
      *
