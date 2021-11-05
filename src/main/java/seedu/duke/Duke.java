@@ -17,7 +17,7 @@ import seedu.duke.model.module.FullModuleList;
 import seedu.duke.model.module.ModuleList;
 import seedu.duke.storage.Storage;
 import seedu.duke.model.task.TaskList;
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 import seedu.duke.ui.Ui;
 
 //@@author richwill28
@@ -92,7 +92,7 @@ public class Duke {
             fh.setLevel(Level.FINE);
             LOGGER.addHandler(fh);
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, Messages.ERROR_FILE_LOGGER, e);
+            LOGGER.log(Level.SEVERE, Message.ERROR_FILE_LOGGER, e);
         }
     }
 
@@ -109,8 +109,8 @@ public class Duke {
             List<String> taskData = storage.loadData(Storage.PATH_TO_TASK_FILE);
             taskList = new TaskList(TaskList.deserialize(ui, taskData), true);
             storage.saveData(taskList);
-            ui.printMessage(Messages.SUCCESS_RETRIEVING_TASK_DATA);
-            LOGGER.info(Messages.SUCCESS_RETRIEVING_TASK_DATA);
+            ui.printMessage(Message.SUCCESS_RETRIEVING_TASK_DATA);
+            LOGGER.info(Message.SUCCESS_RETRIEVING_TASK_DATA);
         } catch (IOException e) {
             LOGGER.warning(e.getMessage());
             ui.printMessage(e.getMessage());
@@ -124,8 +124,8 @@ public class Duke {
             List<String> lessonData = storage.loadData(Storage.PATH_TO_LESSON_FILE);
             lessonList = new LessonList(LessonList.deserialize(ui, lessonData));
             storage.saveData(lessonList);
-            ui.printMessage(Messages.SUCCESS_RETRIEVING_LESSON_DATA);
-            LOGGER.info(Messages.SUCCESS_RETRIEVING_LESSON_DATA);
+            ui.printMessage(Message.SUCCESS_RETRIEVING_LESSON_DATA);
+            LOGGER.info(Message.SUCCESS_RETRIEVING_LESSON_DATA);
         } catch (IOException e) {
             LOGGER.warning(e.getMessage());
             ui.printMessage(e.getMessage());
@@ -139,8 +139,8 @@ public class Duke {
             List<String> moduleData = storage.loadData(Storage.PATH_TO_MODULE_FILE);
             moduleList = new ModuleList(ModuleList.deserialize(ui, moduleData));
             storage.saveData(moduleList);
-            ui.printMessage(Messages.SUCCESS_RETRIEVING_MODULE_DATA);
-            LOGGER.info(Messages.SUCCESS_RETRIEVING_MODULE_DATA);
+            ui.printMessage(Message.SUCCESS_RETRIEVING_MODULE_DATA);
+            LOGGER.info(Message.SUCCESS_RETRIEVING_MODULE_DATA);
         } catch (IOException e) {
             LOGGER.warning(e.getMessage());
             ui.printMessage(e.getMessage());

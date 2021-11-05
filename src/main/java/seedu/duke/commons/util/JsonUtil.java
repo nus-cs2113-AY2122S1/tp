@@ -2,7 +2,7 @@ package seedu.duke.commons.util;
 
 import com.google.gson.Gson;
 
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 import seedu.duke.commons.util.exceptions.ModuleLoadException;
 import seedu.duke.model.module.Module;
 
@@ -33,7 +33,7 @@ public class JsonUtil {
         modules = gson.fromJson(reader, Module[].class);
 
         if (modules.length == 0) {
-            throw new ModuleLoadException(Messages.ERROR_MODULE_LOAD_FAILED);
+            throw new ModuleLoadException(Message.ERROR_MODULE_LOAD_FAILED);
         }
 
         LOGGER.log(Level.INFO, "successfully loaded NUSMods module information from json file");

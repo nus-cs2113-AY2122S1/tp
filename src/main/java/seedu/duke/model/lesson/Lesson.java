@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 
 import seedu.duke.commons.core.DayOfTheWeek;
 import seedu.duke.DukeException;
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 import seedu.duke.commons.util.TimeUtil;
 import seedu.duke.model.lesson.exceptions.EmptyLinkException;
 import seedu.duke.ui.Ui;
@@ -62,7 +62,7 @@ public class Lesson {
     public void launchUrl() throws EmptyLinkException, IOException {
         boolean isEmptyUrl = meetingUrl.isBlank() || meetingUrl.equals("-");
         if (isEmptyUrl) {
-            throw new EmptyLinkException(Messages.ERROR_EMPTY_MEETING_LINK);
+            throw new EmptyLinkException(Message.ERROR_EMPTY_MEETING_LINK);
         }
 
         Runtime rt = Runtime.getRuntime();
@@ -116,7 +116,7 @@ public class Lesson {
             return new Lesson(title, dayOfTheWeek, startTime, endTime, meetingUrl);
         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException | DukeException e) {
             // Ignoring the particular line
-            ui.printMessage(Messages.ERROR_DESERIALIZING_LESSON);
+            ui.printMessage(Message.ERROR_DESERIALIZING_LESSON);
             return null;
         }
     }

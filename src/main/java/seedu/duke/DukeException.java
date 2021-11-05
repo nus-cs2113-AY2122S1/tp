@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 
 //@@author richwill28
 public class DukeException extends Exception {
@@ -11,7 +11,7 @@ public class DukeException extends Exception {
     @Override
     public String toString() {
         String message = getLocalizedMessage();
-        return (message != null) ? message : Messages.ERROR_UNKNOWN;
+        return (message != null) ? message : Message.ERROR_UNKNOWN;
     }
 }
 

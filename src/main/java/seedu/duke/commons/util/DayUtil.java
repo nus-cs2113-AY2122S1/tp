@@ -1,6 +1,6 @@
 package seedu.duke.commons.util;
 
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 import seedu.duke.commons.util.exceptions.InvalidDayException;
 
 import java.time.LocalDate;
@@ -41,7 +41,7 @@ public class DayUtil {
 
         boolean isInvalidDay = !order.containsKey(d1) || !order.containsKey(d2);
         if (isInvalidDay) {
-            throw new InvalidDayException(Messages.ERROR_INVALID_DAY);
+            throw new InvalidDayException(Message.ERROR_INVALID_DAY);
         }
 
         int p1 = order.get(d1);

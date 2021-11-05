@@ -1,7 +1,7 @@
 package seedu.duke.logic.parser;
 
 import seedu.duke.commons.core.CommandType;
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.lesson.LaunchLessonCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
@@ -34,7 +34,7 @@ public class LaunchCommandParser {
             int lessonIndex = parseToZeroIndex(Integer.parseInt(userResponse));
             return new LaunchLessonCommand(lessonIndex);
         } catch (NumberFormatException e) {
-            throw new ParseException(Messages.ERROR_INVALID_NUMBER);
+            throw new ParseException(Message.ERROR_INVALID_NUMBER);
         }
     }
 }

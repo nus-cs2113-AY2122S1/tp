@@ -3,7 +3,7 @@ package seedu.duke.logic.parser;
 import java.util.HashMap;
 
 import seedu.duke.commons.core.CommandType;
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.lesson.AddLessonCommand;
 import seedu.duke.logic.commands.module.AddModuleCommand;
@@ -67,7 +67,7 @@ public class AddCommandParser {
                 ParserUtil.getFlagMap(userResponse, DAY_FLAG, START_FLAG, END_FLAG, LINK_FLAG);
         String[] params = userResponse.split(LESSON_FLAGS);
         if (!flagMap.containsKey(DAY_FLAG) || !flagMap.containsKey(START_FLAG) || !flagMap.containsKey(END_FLAG)) {
-            throw new ParseException(Messages.ERROR_MISSING_FLAGS);
+            throw new ParseException(Message.ERROR_MISSING_FLAGS);
         }
         String title = parseTitle(params[0]);
         String dayOfTheWeek = parseDayOfTheWeek(flagMap.get(DAY_FLAG));
@@ -86,7 +86,7 @@ public class AddCommandParser {
                 ParserUtil.getFlagMap(userResponse, DAY_FLAG, PRIORITY_FLAG, INFORMATION_FLAG);
         String[] params = userResponse.split(TASK_FLAGS);
         if (!flagMap.containsKey(DAY_FLAG)) {
-            throw new ParseException(Messages.ERROR_MISSING_FLAGS);
+            throw new ParseException(Message.ERROR_MISSING_FLAGS);
         }
         String title = parseTitle(params[0]);
         String dayOfTheWeek = parseDayOfTheWeek(flagMap.get(DAY_FLAG));

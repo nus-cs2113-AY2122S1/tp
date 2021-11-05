@@ -1,6 +1,6 @@
 package seedu.duke.commons.util;
 
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 import seedu.duke.commons.util.exceptions.TimeParseException;
 
 //@@author richwill28
@@ -14,7 +14,7 @@ public class TimeUtil {
      */
     public static String parseTwelveHourTime(String time) throws TimeParseException {
         if (time.length() != 8) {
-            throw new TimeParseException(Messages.ERROR_INVALID_TIME_FORMAT);
+            throw new TimeParseException(Message.ERROR_INVALID_TIME_FORMAT);
         }
 
         String hour = time.substring(0, 2);
@@ -22,17 +22,17 @@ public class TimeUtil {
         try {
             hourToInt = Integer.parseInt(hour);
         } catch (NumberFormatException e) {
-            throw new TimeParseException(Messages.ERROR_INVALID_TIME_FORMAT);
+            throw new TimeParseException(Message.ERROR_INVALID_TIME_FORMAT);
         }
         if (hourToInt < 1 || hourToInt > 12) {
-            throw new TimeParseException(Messages.ERROR_INVALID_TIME_FORMAT);
+            throw new TimeParseException(Message.ERROR_INVALID_TIME_FORMAT);
         }
         if (hourToInt == 12) {
             hourToInt -= 12;
         }
 
         if (time.charAt(2) != ':') {
-            throw new TimeParseException(Messages.ERROR_INVALID_TIME_FORMAT);
+            throw new TimeParseException(Message.ERROR_INVALID_TIME_FORMAT);
         }
 
         String minute = time.substring(3, 5);
@@ -40,10 +40,10 @@ public class TimeUtil {
         try {
             minuteToInt = Integer.parseInt(minute);
         } catch (NumberFormatException e) {
-            throw new TimeParseException(Messages.ERROR_INVALID_TIME_FORMAT);
+            throw new TimeParseException(Message.ERROR_INVALID_TIME_FORMAT);
         }
         if (minuteToInt < 0 || minuteToInt > 59) {
-            throw new TimeParseException(Messages.ERROR_INVALID_TIME_FORMAT);
+            throw new TimeParseException(Message.ERROR_INVALID_TIME_FORMAT);
         }
 
         String period = time.substring(6, 8);

@@ -1,6 +1,6 @@
 package seedu.duke.model.module;
 
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
@@ -126,7 +126,7 @@ public class Module {
             return new Module(moduleCode, title, moduleCredit, grade);
         } catch (ArrayIndexOutOfBoundsException e) {
             // Ignoring the particular line
-            ui.printMessage(Messages.ERROR_DESERIALIZING_MODULE);
+            ui.printMessage(Message.ERROR_DESERIALIZING_MODULE);
             return null;
         }
     }

@@ -1,6 +1,6 @@
 package seedu.duke.model.task;
 
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 import seedu.duke.model.task.exceptions.TaskIndexException;
 import seedu.duke.ui.Ui;
 
@@ -34,9 +34,9 @@ public class TaskList {
         try {
             return taskList.get(taskIndex);
         } catch (IndexOutOfBoundsException e) {
-            throw new TaskIndexException(Messages.ERROR_INVALID_INDEX);
+            throw new TaskIndexException(Message.ERROR_INVALID_INDEX);
         } catch (NumberFormatException e) {
-            throw new TaskIndexException(Messages.ERROR_INVALID_NUMBER);
+            throw new TaskIndexException(Message.ERROR_INVALID_NUMBER);
         }
     }
 
@@ -64,23 +64,19 @@ public class TaskList {
             taskList.remove(taskIndex);
             Collections.sort(taskList);
         } catch (IndexOutOfBoundsException e) {
-            throw new TaskIndexException(Messages.ERROR_INVALID_INDEX);
+            throw new TaskIndexException(Message.ERROR_INVALID_INDEX);
         } catch (NumberFormatException e) {
-            throw new TaskIndexException(Messages.ERROR_INVALID_NUMBER);
+            throw new TaskIndexException(Message.ERROR_INVALID_NUMBER);
         }
-    }
-
-    public void deleteAllTasks() {
-        taskList.clear();
     }
 
     public void markTaskAsDone(int taskIndex) throws TaskIndexException {
         try {
             taskList.get(taskIndex).setDone();
         } catch (IndexOutOfBoundsException e) {
-            throw new TaskIndexException(Messages.ERROR_INVALID_INDEX);
+            throw new TaskIndexException(Message.ERROR_INVALID_INDEX);
         } catch (NumberFormatException e) {
-            throw new TaskIndexException(Messages.ERROR_INVALID_NUMBER);
+            throw new TaskIndexException(Message.ERROR_INVALID_NUMBER);
         }
     }
 

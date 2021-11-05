@@ -10,7 +10,7 @@ import seedu.duke.model.module.ModuleList;
 import seedu.duke.storage.Storage;
 import seedu.duke.model.task.Task;
 import seedu.duke.model.task.TaskList;
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 import seedu.duke.ui.Ui;
 
 //@@author rebchua39
@@ -26,7 +26,7 @@ public class DoneTaskCommand extends Command {
             throws DukeException, IOException {
         Task task = taskList.getTask(taskIndex);
         if (task.isDone()) {
-            throw new CommandException(Messages.ERROR_TASK_IS_ALREADY_DONE);
+            throw new CommandException(Message.ERROR_TASK_IS_ALREADY_DONE);
         }
 
         taskList.markTaskAsDone(taskIndex);

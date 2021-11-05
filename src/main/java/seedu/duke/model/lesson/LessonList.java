@@ -1,7 +1,7 @@
 package seedu.duke.model.lesson;
 
 import seedu.duke.DukeException;
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 import seedu.duke.model.lesson.exceptions.LessonIndexException;
 import seedu.duke.ui.Ui;
 
@@ -29,9 +29,9 @@ public class LessonList {
         try {
             return lessonList.get(lessonIndex);
         } catch (IndexOutOfBoundsException e) {
-            throw new LessonIndexException(Messages.ERROR_INVALID_INDEX);
+            throw new LessonIndexException(Message.ERROR_INVALID_INDEX);
         } catch (NumberFormatException e) {
-            throw new LessonIndexException(Messages.ERROR_INVALID_NUMBER);
+            throw new LessonIndexException(Message.ERROR_INVALID_NUMBER);
         }
     }
 
@@ -53,9 +53,9 @@ public class LessonList {
         try {
             lessonList.remove(lessonIndex);
         } catch (IndexOutOfBoundsException e) {
-            throw new LessonIndexException(Messages.ERROR_INVALID_INDEX);
+            throw new LessonIndexException(Message.ERROR_INVALID_INDEX);
         } catch (NumberFormatException e) {
-            throw new LessonIndexException(Messages.ERROR_INVALID_NUMBER);
+            throw new LessonIndexException(Message.ERROR_INVALID_NUMBER);
         }
     }
 

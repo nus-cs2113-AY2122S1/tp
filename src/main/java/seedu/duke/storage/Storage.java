@@ -14,7 +14,7 @@ import java.util.List;
 import seedu.duke.model.lesson.LessonList;
 import seedu.duke.model.module.ModuleList;
 import seedu.duke.model.task.TaskList;
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 import seedu.duke.ui.Ui;
 
 //@@author richwill28
@@ -68,13 +68,13 @@ public class Storage {
             return data;
         } catch (IOException e) {
             if (PATH_TO_TASK_FILE.equals(pathToFile)) {
-                throw new IOException(Messages.ERROR_RETRIEVING_TASK_DATA);
+                throw new IOException(Message.ERROR_RETRIEVING_TASK_DATA);
             } else if (PATH_TO_LESSON_FILE.equals(pathToFile)) {
-                throw new IOException(Messages.ERROR_RETRIEVING_LESSON_DATA);
+                throw new IOException(Message.ERROR_RETRIEVING_LESSON_DATA);
             } else if (PATH_TO_MODULE_FILE.equals(pathToFile)) {
-                throw new IOException(Messages.ERROR_RETRIEVING_MODULE_DATA);
+                throw new IOException(Message.ERROR_RETRIEVING_MODULE_DATA);
             }
-            throw new IOException(Messages.ERROR_RETRIEVING_DATA);
+            throw new IOException(Message.ERROR_RETRIEVING_DATA);
         }
     }
 
@@ -91,7 +91,7 @@ public class Storage {
             bout.write(taskList.serialize());
             bout.close();
         } catch (IOException e) {
-            throw new IOException(Messages.ERROR_SAVING_DATA);
+            throw new IOException(Message.ERROR_SAVING_DATA);
         }
     }
 
@@ -108,7 +108,7 @@ public class Storage {
             bout.write(lessonList.serialize());
             bout.close();
         } catch (IOException e) {
-            throw new IOException(Messages.ERROR_SAVING_DATA);
+            throw new IOException(Message.ERROR_SAVING_DATA);
         }
     }
 
@@ -125,7 +125,7 @@ public class Storage {
             bout.write(moduleList.serialize());
             bout.close();
         } catch (IOException e) {
-            throw new IOException(Messages.ERROR_SAVING_DATA);
+            throw new IOException(Message.ERROR_SAVING_DATA);
         }
     }
 }

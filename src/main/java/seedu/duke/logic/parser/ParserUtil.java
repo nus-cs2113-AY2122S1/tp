@@ -2,7 +2,7 @@ package seedu.duke.logic.parser;
 
 import seedu.duke.commons.core.CommandType;
 import seedu.duke.commons.core.DayOfTheWeek;
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 import seedu.duke.commons.core.Priority;
 import seedu.duke.commons.core.exceptions.DayOfTheWeekException;
 import seedu.duke.commons.core.exceptions.PriorityException;
@@ -47,14 +47,14 @@ public class ParserUtil {
      */
     public static void checkParamsLength(String[] params, int min, int max) throws ParseException {
         if (params.length < min || params.length > max) {
-            throw new ParseException(Messages.ERROR_INVALID_NUMBER_OF_PARAMS);
+            throw new ParseException(Message.ERROR_INVALID_NUMBER_OF_PARAMS);
         }
     }
 
     public static String parseTitle(String param) throws ParseException {
         String title = param.strip();
         if (title.isBlank()) {
-            throw new ParseException(Messages.ERROR_INVALID_TITLE);
+            throw new ParseException(Message.ERROR_INVALID_TITLE);
         }
         return title;
     }
@@ -64,7 +64,7 @@ public class ParserUtil {
         try {
             time = LocalTime.parse(param.strip()).format(DateTimeFormatter.ofPattern("hh:mm a"));
         } catch (DateTimeParseException e) {
-            throw new ParseException(Messages.ERROR_INVALID_TIME_FORMAT);
+            throw new ParseException(Message.ERROR_INVALID_TIME_FORMAT);
         }
         return time;
     }
@@ -131,7 +131,7 @@ public class ParserUtil {
     public static void checkDuplicateFlags(String flag, String userResponse) throws ParseException {
         int firstIndex = userResponse.indexOf(flag);
         if (userResponse.substring(firstIndex + 1).contains(flag)) {
-            throw new ParseException(Messages.ERROR_DUPLICATE_FLAGS);
+            throw new ParseException(Message.ERROR_DUPLICATE_FLAGS);
         }
     }
 }
