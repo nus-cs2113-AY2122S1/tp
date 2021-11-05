@@ -36,6 +36,21 @@
 - [GitHub Markdown Emoji Syntax](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md) for User Guide: <br />
 - [PlantUML Tutorial](https://se-education.org/guides/tutorials/plantUml.html) <br />
 
+## <a name="notations"></a>Common Notations in DG
+The common notations listed below will be used throughout the Developer Guide.
+- Words in `UPPER_CASE` are meant to be parameters that can be supplied to the commands.
+  - e.g. When adding a contact, in the command `add -n NAME -g GITHUB`, `NAME` and `GITHUB` are parameters which
+    can be specified, such as `add -n Le Zong -g lezongmun`.
+  - e.g. When viewing a contact's details, in the command `view INDEX`, `INDEX` is a number (integer) representing
+    the contact's index in the **ConTech** book which can be specified, such as `view 2`.
+- Items in curly braces `{}` are optional.
+- Items in angle braces `<>` are mandatory.
+  - e.g. When specified in the format `<-n> <NAME> {-g <GITHUB>}`, it means that:
+    - The `-n` flag and `NAME` detail are mandatory fields, without which the command would not execute.
+    - The `-g` flag is optional, however, if used, a `GITHUB` detail would have to be specified.
+- Items specified with a pipe `|` denote an either-or field.
+  - e.g. For `{-n | -g | -l | -te | -tw | -e}`, only **up to** one `flag` is allowed, but there are **six** choices.
+
 ## <a name="design"></a>Design
 
 ### <a name="sys-arch"></a>System Architecture
