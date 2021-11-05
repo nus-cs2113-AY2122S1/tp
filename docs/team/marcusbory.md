@@ -34,8 +34,7 @@ The code written by me (`marcusbory`) can be found [here](https://nus-cs2113-ay2
 The link to the User Guide (UG) can be found [here](https://ay2122s1-cs2113t-t09-1.github.io/tp/UserGuide.html).
 
 ### Contributions to DG
-The link to the Developer Guide (DG) can be found [here](https://ay2122s1-cs2113t-t09-1.github.io/tp/DeveloperGuide.
-html).
+The link to the Developer Guide (DG) can be found [here](https://ay2122s1-cs2113t-t09-1.github.io/tp/DeveloperGuide.html).
 
 ### Team-based tasks
 - Hosted and conducted weekly brainstorming session during ideation phases (V1.0, V2.0, V2.1)

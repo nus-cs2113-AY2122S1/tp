@@ -2,6 +2,7 @@
 
 ### Table of Content
 - [Acknowledgements](#acknowledgements)
+- [Common Notations In DG](#notations)
 - [Design](#design)
   - [System Architecture](#sys-arch)
   - [TextUi](#text-ui)
@@ -17,6 +18,7 @@
   - [Deleting a contact](#Delete)
   - [Searching a contact](#Search)
   - [Listing all contacts](#List)
+  - [Importing contacts](#Import)
 - [Product Scope](#scope)
   - [Target user profile](#target)
   - [Value proposition](#value)
@@ -27,19 +29,27 @@
 
 ## <a name="acknowledgements"></a>Acknowledgements
 
-- Inspiration for App Idea and OOP Structure: AddressBook (Level 2) <br />
-  https://github.com/se-edu/addressbook-level2
-- Inspiration for User Guide and Developer Guide: AddressBook (Level 3) <br />
-  https://se-education.org/addressbook-level3/DeveloperGuide.html <br/>
-  https://se-education.org/addressbook-level3/UserGuide.html
-- Converting text for ConTech: <br />
-  https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20
-- GitHub Markdown Emoji Syntax for User Guide: <br />
-  https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md
-- PlantUML Tutorial: <br />
-  https://se-education.org/guides/tutorials/plantUml.html
+- Inspiration for App Idea and OOP Structure: [AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2) <br />
+- Inspiration for User Guide and Developer Guide: AddressBook (Level 3) [[DG]](https://se-education.org/addressbook-level3/DeveloperGuide.html) <br />
+  [[UG]](https://se-education.org/addressbook-level3/UserGuide.html)
+- [Converting text for ConTech](https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20) <br />
+- [GitHub Markdown Emoji Syntax](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md) for User Guide: <br />
+- [PlantUML Tutorial](https://se-education.org/guides/tutorials/plantUml.html) <br />
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+## <a name="notations"></a>Common Notations in DG
+The common notations listed below will be used throughout the Developer Guide.
+- Words in `UPPER_CASE` are meant to be parameters that can be supplied to the commands.
+  - e.g. When adding a contact, in the command `add -n NAME -g GITHUB`, `NAME` and `GITHUB` are parameters which
+    can be specified, such as `add -n Le Zong -g lezongmun`.
+  - e.g. When viewing a contact's details, in the command `view INDEX`, `INDEX` is a number (integer) representing
+    the contact's index in the **ConTech** book which can be specified, such as `view 2`.
+- Items in curly braces `{}` are optional.
+- Items in angle braces `<>` are mandatory.
+  - e.g. When specified in the format `<-n> <NAME> {-g <GITHUB>}`, it means that:
+    - The `-n` flag and `NAME` detail are mandatory fields, without which the command would not execute.
+    - The `-g` flag is optional, however, if used, a `GITHUB` detail would have to be specified.
+- Items specified with a pipe `|` denote an either-or field.
+  - e.g. For `{-n | -g | -l | -te | -tw | -e}`, only **up to** one `flag` is allowed, but there are **six** choices.
 
 ## <a name="design"></a>Design
 
@@ -95,10 +105,17 @@ according to their names in alphabetical order.
 
 ![Storage Class Diagram](images/StorageClassDiagram.png)
 
-The `Storage` component is responsible for saving both contacts data and personal contact data locally inside the file 
-paths, `data/contacts.txt` and `data/me.txt`. `Storage` is also responsible for loading these data back into their 
-corresponding `ContactList` and `Contact` objects. It is thus dependent on the classes, `ContactList` and 
-`Contact`.
+The `Storage` component consists of the `Storage`, `ContactsDecoder`, and `ContactsEncoder`. This component is 
+responsible for interacting with the user's local storage files. The user's contacts data and personal contact data 
+are stored locally inside the file paths, `data/contacts.txt` and `data/me.txt`.
+
+Firstly, the `Storage` class checks if the user has existing data, or if they are first time users. Next, it will 
+make use of the `ContactsDecoder` class to decode the storage file and load the contacts into the `ContactList` as 
+`Contacts`. After every command execution, to ensure data integrity, the `Contacts` in the `ContactList` will be 
+saved using the `ContactsEncoder` class.
+
+As the `Storage` component is also responsible for loading these data into their corresponding `ContactList` and 
+`Contact` objects, it is dependent on the classes, `ContactList` and `Contact`.
 
 
 
@@ -119,14 +136,17 @@ The currently supported contact details are provided in the table below:
 
 ### <a name="Add"></a>Adding a contact: `add`
 This feature is processed using `AddContactCommand`. This feature allows a user to add a contact to their contact list.
-The user is able to add a contact by entering a command in the form of `add [DETAILS WITH FLAGS]`, where
-the details with flags are specified in the form `-<flag> <detail>`.
+The user is able to add a contact by entering a command in the form of `add <-n> <NAME> {-g <GITHUB>} {-l <LINKEDIN>} 
+{-te <TELEGRAM>} {-tw <TWITTER>} {-e <EMAIL>}`.
 
 The user's input is parsed in `MainParser` and `AddContactParser`, the latter which inherits `ContactParser`. 
 `ContactParser` inherits `RegexParser` (for regex checks regarding each detail) and implements the `ContactDetails`
-interface (which uniquely allows the parsers to easily identify each detail based on their indexes).
+interface (which uniquely allows the parsers to easily identify each detail based on their indexes). The class 
+diagram for this is displayed below.
 
-As the contacts are identified by their names, the name field is made compulsory at the `MainParser` level.
+![Add Contact Parser Class Diagram](images/AddContactParserClassDiagram.png)
+
+As the contacts are identified by their names, the name field is made **compulsory** at the `MainParser` level.
 The diagram below shows the process of parsing the user's input.
 
 ![Add Contact Parsing](images/AddContactParsingSequenceDiagram.png)
@@ -137,20 +157,21 @@ executed in `ConTech`. The sequence diagram below illustrates the process of exe
 ![Add Sequence Diagram](images/AddContactCommandSequenceDiagram.png)
 
 ### <a name="View"></a>Viewing a contact: `view`
-This feature is processed using `ViewContactCommand`. Whenever a user wants to view a specific contact from the 
-contact list, user can input `view [INDEX]` with the index of the desired contact displayed from the `list` feature. 
+This feature is processed using `ViewContactCommand`. Whenever a user wants to view a specific contact from the
+contact list, user can input `view INDEX` with the index of the desired contact displayed from the `list` feature. 
 `ViewContactCommand` is then created in the `MainParser` and executed in `ConTech`.
+
 The sequence diagram below illustrates the `execute()` function in `ViewContactCommand`.
 
 ![View Sequence Diagram](images/ViewContactCommandSequenceDiagram.png)
 
 ### <a name="Edit"></a>Editing a contact: `edit`
-This feature is processed using `EditContactParser` under `MainParser`. In order to edit a contact in the contact list, 
-a user must enter a command in the form `edit [CONTACT INDEX] [DETAILS WITH FLAGS]`, where the details with flags are 
-specified in the form `-<flag> <detail>` with up to 6 details i.e. `-g github-username -tw twitter_handle`. The user 
-input will be parsed by `EditContactParser` methods `getIndexToStore` and `parseContactDetails` to obtain a String 
-array with the details to be edited. An `EditContactCommand` with the specified parameters will then be created and 
-executed in `ConTech`. The sequence diagram below shows how the whole process is carried out.
+This feature is processed using `EditContactParser` under `MainParser`. In order to edit a contact in the contact list,
+a user must enter a command in the form `edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-l <LINKEDIN>} {-te <TELEGRAM>} 
+{-tw <TWITTER>} {-e <EMAIL>}`. The user input will be parsed by `EditContactParser` methods `getIndexToStore` and 
+`parseContactDetails` to obtain a String array with the details to be edited. An `EditContactCommand` 
+with the specified parameters will then be created and executed in `ConTech`. The sequence diagram below 
+shows how the whole process is carried out.
 
 ![Edit Sequence Diagram](images/EditContactCommandSequenceDiagram.png)
 
@@ -170,7 +191,7 @@ If user cancels deletion, a message is printed to show that the deletion has bee
 
 ![Delete All Sequence Diagram](images/DeleteAllContacts.png) 
 
-To delete a selected contact, a user must enter a command in the form `rm [INDEX]`. The sequence diagram below
+To delete a selected contact, a user must enter a command in the form `rm <INDEX>`. The sequence diagram below
 shows how the removal of a contact works. Before any deletion, details of the contact with the specified`INDEX` 
 will be displayed to the user, along with a prompt to confirm deletion. If the user confirms deletion, 
 deletion of the selected contact will be executed, along with a message to show that deletion has been executed.
@@ -178,8 +199,8 @@ If user cancels deletion, a message is printed to show that the deletion has bee
 
 ![Delete Selected Sequence Diagram](images/DeleteSelectedContact.png)
 
-To delete specific details of a selected contact, a user must enter a command in the form `rm [CONTACT INDEX]
-[FLAGS]`. The sequence diagram below shows how the removal of a contact's fields works. Before any
+To delete specific details of a selected contact, a user must enter a command in the form `rm <INDEX> {-g} {-l} {-te}
+{-tw} {-e}`. The sequence diagram below shows how the removal of a contact's fields works. Before any
 deletion, details of the contact fields specified will be displayed to the user, along with a prompt to confirm 
 deletion. If the user confirms deletion, deletion of the selected contact will be executed, along with a message to show
 that deletion has been executed. If user cancels, deletion, a message is printed to show that the deletion has been
@@ -189,7 +210,7 @@ cancelled.
 
 ### <a name="Search"></a>Searching a contact: `search`
 This feature is processed using `SearchContactParser` under `MainParser`. In order to edit a contact in the contact list,
-a user must enter a command in the form `search [FLAG] [SEARCH QUERY]`. If no flag is specified, the search will be done
+a user must enter a command in the form `search {-n | -g | -l | -te | -tw | -e} <SEARCH QUERY>`. If no flag is specified, the search will be done
 on contact names buy default. From the user input, the search query and the search flag are obtained from the 
 `parseSearchQuery` and the `getDetailFlag` methods respectively. A `SearchContactCommand` with the specified parameters
 will be created and executed in `ConTech`. The sequence diagram below shows how the whole process is carried out.
@@ -234,8 +255,10 @@ additional devices or platforms.
 
 ## <a name="nf-req"></a>Non-Functional Requirements
 
-- Should work on any [*mainstream Operating Systems*](#os) as long as Java `11` or higher has been installed on it
-{Give non-functional requirements}
+- App should work on any [*mainstream Operating Systems*](#os) as long as Java `11` or higher has been installed on it
+- App should be easily usable by a novice who does not have much CLI experience
+- Format of details of contacts should follow requirements stated by Github, LinkedIn, Telegram, Twitter, and general Emails
+- Importing hundreds of contacts should be instantaneous
 
 ## <a name="glossary"></a>Glossary
 
