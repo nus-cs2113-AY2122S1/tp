@@ -346,6 +346,7 @@ These instructions only provide a starting point for testers to work on; testers
    3. Run the command `java -jar seplanner.jar`
       Expected: The welcome ascii art will display.
    4. Resize the terminal to fit the welcome ascii.
+
 2. Shutdown
    1. Enter the command `exit`.
       Expected: The exit ascii art will display.
@@ -357,22 +358,22 @@ These instructions only provide a starting point for testers to work on; testers
       Expected: The command list will be printed to console.
 
 ### Getting university list and module list
-1. Listing the master university list.
+1. Listing the Master University List.
    1. Test case: `list /muni`
 
       Expected: The entire list of universities are printed.
 
-2. Listing the master module list
+2. Listing the Master Module List
    1. Test case: `list /mmod`
 
       Expected: The entire list of modules are printed.
 
-3. Listing the user selected university list.
+3. Listing the Selected University List.
    1. Test case: `list /suni`
 
       Expected: The user selected university list are displayed.
 
-4. Listing the user selected module list.
+4. Listing the Selected Module List.
    1. Test case: `list /smod`
 
       Expected: The user selected module list are displayed.
@@ -380,66 +381,225 @@ These instructions only provide a starting point for testers to work on; testers
 5. Dealing with wrong flags.
    1. Test case: 'list /mod'
 
-      Expected: Error message indicating wrong flags is shown, together with the correct format for `list` command.
+      Expected: No list will be printed. Error message indicating wrong flags is shown, together with the correct format for `list` command.
 
 6. Dealing with incorrect format.
    1. Test case: `list`
 
-      Expected: Error message indicating missing flags is shown, together with the correct format for `list` command.
+      Expected: No list will be printed. Error message indicating missing flags is shown, together with the correct format for `list` command.
 
 ### Finding a university
 
 ### Finding a module
 
 ### Adding a university
+
 1. Adding a university by index.
-   1. Test case: `add /uni 1`
+   1. Prerequisites: Delete the data folder and restart the program.
+   2. Test case: `add /uni 1`
       
-      Expected: University with index 1 is added to the selected list of university. Success message is shown.
-   2. Test case: `add /uni 0`
+      Expected: University with index 1 is added to the Selected University List. Success message is shown.
+   3. Test case: `add /uni 0`
 
       Expected: No university is added. Error message is printed to indicate university is not available.
 
-   3. Test case: `add /uni 81`
+   4. Test case: `add /uni 81`
 
       Expected: No university is added. Error message is printed to indicate university is not available.
 
 2. Adding a university by university name.
-   1. Test case: `add /uni University of California`
+   1. Prerequisites: Delete the data folder and restart the program.
+   2. Test case: `add /uni University of California`
    
-      Expected: University of California is added into the list of selected university list. Success message is shown.
+      Expected: University of California is added into Selected University List. Success message is shown.
 
-   2. Test case: `add /uni random_string`
+   3. Test case: `add /uni random_string`
 
       Expected: No university is added. Error message is printed to indicate university is not available.
 
 3. Adding a duplicate university by index.
-   1. Prerequisites: Delete the data file and restart the program. Run the command `add /uni 34`.
+   1. Prerequisites: Delete the data folder and restart the program. Run the command `add /uni 34`.
    2. Test case: `add /uni 34`
       
-      Expected: Error message indicating duplicate university is shown.
+      Expected: No university is added. Error message indicating duplicate university is shown.
     
 4. Adding a duplicate university by university name.
-   1. Prerequisites: Delete the data file and restart the program. Run the command `add /uni University of Toronto`.
+   1. Prerequisites: Delete the data folder and restart the program. Run the command `add /uni University of Toronto`.
    2. Test case: `add /uni University of Toronto`
 
-      Expected: Error message indicating duplicate university is shown.
+      Expected: No university is added. Error message indicating duplicate university is shown.
+   
+5. Dealing with missing argument.
+    1. Test case: `add /uni`
+
+       Expected: No university will be added. Error message indicating missing arguments is shown, together with the correct format for `add` command.
+
+    2. Test case: `add`
+  
+       Expected: No university will be added. Error message indicating missing arguments is shown, together with the correct format for `add` command.
+
+6. Dealing with incorrect flag.
+   1. Test case: `add /muni 34`
+
+      Expected: No university will be added. Error message indicating wrong flags is shown, together with the correct format for `add` command.
 
 ### Adding a module
 
+1. Adding a module by index.
+   1. Prerequisites: Delete the data folder and restart the program.
+   2. Test case: `add /mod 1`
+
+       Expected: Module with index 1 is added to the Selected Module List. Success message is shown.
+   
+   3. Test case: `add /mod 0`
+
+       Expected: No module is added. Error message is printed to indicate module is not available.
+
+   4. Test case: `add /mod 806`
+
+      Expected: No module is added. Error message is printed to indicate module is not available.
+
+2. Adding a module by module code.
+   1. Prerequisites: Delete the data folder and restart the program.
+   2. Test case: `add /mod CS1010`
+
+      Expected: University of California is added into Selected Module List. Success message is shown.
+
+   3. Test case: `add /mod random_string`
+
+      Expected: No module is added. Error message is printed to indicate module is not available.
+
+3. Adding a duplicate module by index.
+   1. Prerequisites: Delete the data folder and restart the program. Run the command `add /mod 34`.
+   2. Test case: `add /mod 34`
+
+      Expected: No module is added. Error message indicating duplicate module is shown.
+
+4. Adding a duplicate module by module code.
+   1. Prerequisites: Delete the data folder and restart the program. Run the command `add /mod CS3230`.
+   2. Test case: `add /uni CS3230`
+
+      Expected: No module is added. Error message indicating duplicate module is shown.
+
+5. Dealing with missing argument.
+   1. Test case: `add /mod`
+
+      Expected: No module will be added. Error message indicating missing arguments is shown, together with the correct format for `add` command.
+
+   2. Test case: `add`
+
+      Expected: No module will be added. Error message indicating missing arguments is shown, together with the correct format for `add` command.
+
+6. Dealing with incorrect flag.
+   1. Test case: `add /mmod 34`
+
+      Expected: No module will be added. Error message indicating wrong flags is shown, together with the correct format for `add` command.
+   
 ### Adding a mapping
 
 ### Search for a mapping
 
-### Adding a university
-
-### Adding a module
-
-### Adding a mapping
-
 ### Removing a university
 
+1. Removing a university by index.
+    1. Prerequisites: Run the command `add /uni 1`
+    2. Test case: `remove /uni 1`
+
+       Expected: University with index 1 is removed from the Selected University List. Success message is shown.
+    3. Test case: `remove /uni 0`
+
+       Expected: No university is removed. Error message is printed to indicate university is not available.
+
+    4. Test case: `remove /uni 81`
+
+       Expected: No university is removed. Error message is printed to indicate university is not available.
+
+2. Removing a university by university name.
+    1. Prerequisites: Run the command `add /uni University of California`
+    2. Test case: `remove /uni University of California`
+
+       Expected: University of California is removed from Selected University List. Success message is shown.
+
+    3. Test case: `remove /uni random_string`
+
+       Expected: No university is removed. Error message is printed to indicate university is not available.
+
+3. Removing an unselected university by index.
+    1. Prerequisites: Delete the data folder and restart the program.
+    2. Test case: `remove /uni 34`
+
+       Expected: No university is removed. Error message is printed to indicate university is not available.
+
+4. Removing an unselected university by university name.
+    1. Prerequisites: Delete the data folder and restart the program.
+    2. Test case: `remove /uni University of Toronto`
+
+       Expected: No university is removed. Error message is printed to indicate university is not available.
+
+5. Dealing with missing argument.
+    1. Test case: `remove /uni`
+
+       Expected: No university will be removed. Error message indicating missing arguments is shown, together with the correct format for `remove` command.
+
+    2. Test case: `remove`
+
+       Expected: No university will be removed. Error message indicating missing arguments is shown, together with the correct format for `remove` command.
+
+6. Dealing with incorrect flag.
+    1. Test case: `remove /muni 34`
+
+       Expected: No university will be removed. Error message indicating wrong flags is shown, together with the correct format for `remove` command.
+
 ### Removing a module
+
+1. Removing a module by index.
+    1. Prerequisites: Run the command `add /mod 1`
+    2. Test case: `remove /mod 1`
+
+       Expected: University with index 1 is removed from the Selected Module List. Success message is shown.
+    3. Test case: `remove /mod 0`
+
+       Expected: No module is removed. Error message is printed to indicate module is not available.
+
+    4. Test case: `remove /mod 810`
+
+       Expected: No module is removed. Error message is printed to indicate module is not available.
+
+2. Removing a module by module code.
+    1. Prerequisites: Run the command `add /mod CS3230`
+    2. Test case: `remove /mod CS3230`
+
+       Expected: University of California is removed from Selected Module List. Success message is shown.
+
+    3. Test case: `remove /mod random_string`
+
+       Expected: No module is removed. Error message is printed to indicate module is not available.
+
+3. Removing an unselected module by index.
+    1. Prerequisites: Delete the data folder and restart the program.
+    2. Test case: `remove /mod 34`
+
+       Expected: No module is removed. Error message is printed to indicate module is not available.
+
+4. Removing an unselected module by module code.
+    1. Prerequisites: Delete the data folder and restart the program.
+    2. Test case: `remove /mod CS1010`
+
+       Expected: No module is removed. Error message is printed to indicate module is not available.
+
+5. Dealing with missing argument.
+    1. Test case: `remove /mod`
+
+       Expected: No module will be removed. Error message indicating missing arguments is shown, together with the correct format for `remove` command.
+
+    2. Test case: `remove`
+
+       Expected: No module will be removed. Error message indicating missing arguments is shown, together with the correct format for `remove` command.
+
+6. Dealing with incorrect flag.
+    1. Test case: `remove /mmod 34`
+
+       Expected: No module will be removed. Error message indicating wrong flags is shown, together with the correct format for `remove` command.
 
 ### Removing a mapping
 
