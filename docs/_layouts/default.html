@@ -47,11 +47,7 @@
     <script>
       const buttonScrollToTop = document.querySelector("#buttonToScrollToTop");
       buttonScrollToTop.addEventListener("click", function () {
-          window.scrollTo({
-            top: 75,
-            left: 0,
-            behaviour: "smooth"
-          });
+          document.getElementById('scrollToHere').scrollIntoView();
       });
     </script>
   </body>
