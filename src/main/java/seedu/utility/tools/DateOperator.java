@@ -1,4 +1,4 @@
-package seedu.utility.datetools;
+package seedu.utility.tools;
 
 import seedu.entry.Entry;
 

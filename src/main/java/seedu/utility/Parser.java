@@ -56,8 +56,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.utility.datetools.DateOperator.getYearFormat;
-import static seedu.utility.datetools.DateOperator.isValidDateRange;
+import static seedu.utility.tools.DateOperator.getYearFormat;
+import static seedu.utility.tools.DateOperator.isValidDateRange;
 
 public class Parser {
 
