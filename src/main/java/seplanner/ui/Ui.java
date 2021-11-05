@@ -27,8 +27,8 @@ public abstract class Ui {
     /**
      * StringPadder returns the appropriate space padding after a String depending on its length.
      * @param input The String that preceeds the padding.
-     * @param type The type of input that was displayed. 
-     * @return
+     * @param type The type of input that was displayed in the form of the enum PaddingType.
+     * @return A StringBuilder containing the appropriate padding.
      */
     protected static StringBuilder stringPadder(String input, PaddingType type) {
         StringBuilder padding = new StringBuilder();
