@@ -45,6 +45,11 @@ UiStorage --|> Ui
     + printWarningMessage()
     }
 }
+
+PaddingType <-- Ui
+PaddingType <-- UiModule
+PaddingType <-- UiMapping
+PaddingType <-- UiUniversity
 enum PaddingType <<enumeration>> {
     INDEX,
     MODULECODE,

@@ -5,7 +5,8 @@ header_pages:
   - UserGuide.md
   - DeveloperGuide.md
   - AboutUs.md
-
+  - README.md
+  
 markdown: kramdown
 
 plugins:
