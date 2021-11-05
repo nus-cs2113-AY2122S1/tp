@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import seedu.duke.commons.core.Message;
 import seedu.duke.commons.util.exceptions.InvalidDayException;
+import seedu.duke.commons.util.exceptions.InvalidTimeException;
 import seedu.duke.logic.parser.exceptions.ParseException;
 import seedu.duke.model.lesson.exceptions.EmptyLinkException;
 import seedu.duke.ui.Ui;
@@ -123,7 +124,7 @@ public class Lesson implements Comparable<Lesson> {
                 return dayComparison;
             }
             return compareTime(this.getStartTime(), l.getStartTime());
-        } catch (InvalidDayException e) {
+        } catch (InvalidDayException | InvalidTimeException e) {
             // Ignore and return 0
             System.out.println("Error: Lesson comparison result is incorrect.");
             return 0;
