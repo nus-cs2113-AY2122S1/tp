@@ -125,7 +125,7 @@ public class FilterManager {
             isValid = false;
         } else if (!CommonUtils.isValidDuration(link.getDuration())) {
             isValid = false;
-        } else if (!CommonUtils.isStringNullOrEmpty(link.getName())) {
+        } else if (CommonUtils.isStringNullOrEmpty(link.getName())) {
             isValid = false;
         }
         try {
