@@ -47,16 +47,6 @@ public class GoalList {
     }
 
     /**
-     * Getter for index of chosen goal.
-     * To be used for goal quick view (not implemented).
-     *
-     * @return Integer index of chosen goal.
-     */
-    public int getChosenGoalIndex() {
-        return chosenGoalIndex;
-    }
-
-    /**
      * Gets the goal type of the chosen goal.
      *
      * @return Goal type of the chosen goal.
@@ -454,7 +444,6 @@ public class GoalList {
      * Checks name of new goal being added by user to ensure it is not present in their goal list.
      *
      * @param newType Type of new goal being added in
-     * @return True if name already exists, False otherwise
      */
     private void compareNewTypeWithOldType(GoalType oldType, GoalType newType) throws HaBitCommandException {
         if (newType == oldType) {
@@ -495,16 +484,6 @@ public class GoalList {
      */
     private LocalDate convertDateToLocalDate(Date date) {
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-    }
-
-    /**
-     * 'Type-casting' a LocalDate to a Date.
-     *
-     * @param localDate LocalDate to be 'type-casted'.
-     * @return Date that has been 'type-casted' from LocalDate.
-     */
-    private Date convertLocalDateToDate(LocalDate localDate) {
-        return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
     }
 
     private boolean duplicateInGoalList(String newName) {

@@ -10,17 +10,19 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class UpdateParserTest {
 
-    private static final String ERROR_GOAL_INDEX_FORMAT = "Use the 'g/' flag to define the goal index. Eg: g/1";
-    private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The goal index has to be a number.";
-    private static final String ERROR_GOAL_NAME_FORMAT = "Use the 'n/' flag set the new goal name. "
-            + "Eg: n/Reach for the stars";
-    private static final String ERROR_HABIT_INDEX_FORMAT = "Use the 'h/' flag to define the goal index. Eg: h/1";
-    private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The habit index has to be a number.";
-    private static final String ERROR_HABIT_NAME_FORMAT = "Use the 'n/' flag set the new habit name. ";
-    private static final String ERROR_INTERVAL_FORMAT = "Use the i/ flag to define the interval for the habit. Eg i/1";
-    private static final String ERROR_INTERVAL_NON_INTEGER = "The interval has to be a number";
-    private static final String ERROR_INTERVAL_NEGATIVE = "The interval has to be a positive integer.";
-    private static final String ERROR_INTERVAL_ZERO = "You cannot update a habit to have no interval.";
+    private static final String ERROR_GOAL_INDEX_FORMAT = "The command is missing the 'g/' flag";
+    private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The flag 'g/' has to be followed by a number";
+    private static final String ERROR_GOAL_NAME_FORMAT = "Use the 'n/' flag to define the name. Exp: n/Foo";
+    private static final String ERROR_HABIT_INDEX_FORMAT = "The command is missing the 'h/' flag";
+    private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The flag 'h/' has to be followed by a number";
+    private static final String ERROR_INTERVAL_FORMAT = "The command is missing the 'i/' flag";
+    private static final String ERROR_INTERVAL_NON_INTEGER = "The flag 'i/' has to be followed by a number";
+    private static final String ERROR_GOAL_INDEX_NEGATIVE_NUM = "The flag 'g/' has to be followed by a positive integer";
+    private static final String ERROR_GOAL_INDEX_ZERO_NUM = "The flag 'g/' has to be followed by a number greater than 0";
+    private static final String ERROR_HABIT_INDEX_NEGATIVE_NUM = "The flag 'h/' has to be followed by a positive integer";
+    private static final String ERROR_HABIT_INDEX_ZERO_NUM = "The flag 'h/' has to be followed by a number greater than 0";
+    private static final String ERROR_INTERVAL_NEGATIVE_NUM = "The flag 'i/' has to be followed by a positive integer";
+    private static final String ERROR_INTERVAL_ZERO_NUM = "The flag 'i/' has to be followed by a number greater than 0";
 
 
     @Test
@@ -69,6 +71,23 @@ class UpdateParserTest {
     }
 
     @Test
+    void parseUpdateGoalNameCommand_negativeOrZeroGoalIndex_exceptionThrown() {
+        try {
+            UpdateParser.parseUpdateHabitIntervalCommand("g/-1 n/test");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_GOAL_INDEX_NEGATIVE_NUM, e.getMessage());
+        }
+
+        try {
+            UpdateParser.parseUpdateHabitIntervalCommand("g/0 n/test");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_GOAL_INDEX_ZERO_NUM, e.getMessage());
+        }
+    }
+
+    @Test
     void parseUpdateGoalNameCommand_missingGoalName_exceptionThrown() {
         try {
             UpdateParser.parseUpdateGoalNameCommand("g/1 n/ ");
@@ -95,10 +114,6 @@ class UpdateParserTest {
         }
     }
 
-    @Test
-    void parseUpdateEndDateCommand_validInput_success() throws HaBitParserException {
-
-    }
 
     @Test
     void parseUpdateHabitIntervalCommand_validInput_success() throws HaBitParserException {
@@ -133,6 +148,23 @@ class UpdateParserTest {
             fail();
         } catch (HaBitParserException e) {
             assertEquals(ERROR_GOAL_INDEX_NON_INTEGER, e.getMessage());
+        }
+    }
+
+    @Test
+    void parseUpdateHabitIntervalCommand_negativeOrZeroGoalIndex_exceptionThrown() {
+        try {
+            UpdateParser.parseUpdateHabitIntervalCommand("g/-1 h/1");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_GOAL_INDEX_NEGATIVE_NUM, e.getMessage());
+        }
+
+        try {
+            UpdateParser.parseUpdateHabitIntervalCommand("g/0 h/2");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_GOAL_INDEX_ZERO_NUM, e.getMessage());
         }
     }
 
@@ -174,6 +206,23 @@ class UpdateParserTest {
             fail();
         } catch (HaBitParserException e) {
             assertEquals(ERROR_HABIT_INDEX_NON_INTEGER, e.getMessage());
+        }
+    }
+
+    @Test
+    void parseUpdateHabitIntervalCommand_negativeOrZeroHabitIndex_exceptionThrown() {
+        try {
+            UpdateParser.parseUpdateHabitIntervalCommand("g/1 h/-1");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_HABIT_INDEX_NEGATIVE_NUM, e.getMessage());
+        }
+
+        try {
+            UpdateParser.parseUpdateHabitIntervalCommand("g/1 h/0");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_HABIT_INDEX_ZERO_NUM, e.getMessage());
         }
     }
 
@@ -224,14 +273,14 @@ class UpdateParserTest {
             UpdateParser.parseUpdateHabitIntervalCommand("g/1 h/1 i/-100");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_INTERVAL_NEGATIVE, e.getMessage());
+            assertEquals(ERROR_INTERVAL_NEGATIVE_NUM, e.getMessage());
         }
 
         try {
             UpdateParser.parseUpdateHabitIntervalCommand("g/1 h/1 i/0");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_INTERVAL_ZERO, e.getMessage());
+            assertEquals(ERROR_INTERVAL_ZERO_NUM, e.getMessage());
         }
     }
 

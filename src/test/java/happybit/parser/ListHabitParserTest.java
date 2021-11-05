@@ -9,8 +9,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class ListHabitParserTest {
 
-    private static final String ERROR_GOAL_INDEX_FORMAT = "Use the 'g/' flag to define the goal index. Eg: g/1";
-    private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The goal index has to be a number.";
+    private static final String ERROR_GOAL_INDEX_FORMAT = "The command is missing the 'g/' flag";
+    private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The flag 'g/' has to be followed by a number";
+    private static final String ERROR_GOAL_INDEX_NEGATIVE_NUM = "The flag 'g/' has to be followed by a positive integer";
+    private static final String ERROR_GOAL_INDEX_ZERO_NUM = "The flag 'g/' has to be followed by a number greater than 0";
 
     @Test
     void parseListHabitCommand_validInput_success() throws HaBitParserException {
@@ -52,6 +54,23 @@ class ListHabitParserTest {
             fail();
         } catch (HaBitParserException e) {
             assertEquals(ERROR_GOAL_INDEX_NON_INTEGER, e.getMessage());
+        }
+    }
+
+    @Test
+    void parseListHabitCommand_negativeOrZeroGoalIndex_exceptionThrown() {
+        try {
+            ListHabitParser.parseListHabitCommand("g/-1");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_GOAL_INDEX_NEGATIVE_NUM, e.getMessage());
+        }
+
+        try {
+            ListHabitParser.parseListHabitCommand("g/0");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_GOAL_INDEX_ZERO_NUM, e.getMessage());
         }
     }
 

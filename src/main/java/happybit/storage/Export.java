@@ -23,9 +23,9 @@ public class Export {
     private static final String INTERVAL_TYPE = "I";
     private static final String EMPTY = "";
     private static final String NULL = "null";
-    private static final String FILE_WRITE = "Allow writing to storage file.";
+    private static final String FILE_WRITE = "Allow writing of data to storage file.";
     private static final String FILE_WRITE_FAIL = "Failed to write to storage file.";
-    private static final String READ_ONLY = "Writing done. Storage file set to read only.";
+    private static final String READ_ONLY = "Writing done. Storage file is updated and set to read only.";
     private static final String SET_READ_ONLY_FAILED = "Failed to set storage file as read only.";
     private static final String DATE_FORMAT = "ddMMyyyy";
 
