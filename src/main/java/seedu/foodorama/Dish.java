@@ -166,7 +166,7 @@ public class Dish implements Comparable<Dish> {
     }
 
     public int getGraphHeight(double max, int resolution) {
-        int num = (int)(resolution * wastage / max);
+        int num = (int) Math.ceil(resolution * wastage / max);
         return num;
     }
 

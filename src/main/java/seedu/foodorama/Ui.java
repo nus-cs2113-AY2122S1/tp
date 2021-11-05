@@ -714,7 +714,7 @@ public class Ui {
     private void printGraph(int graphPortions, ArrayList<Integer> lengths, int i, int j) {
         if (i < graphPortions) {
             if (j % 2 == 0) {
-                System.out.print("  "); //Every other column is blank
+                System.out.print("   "); //Every other column is blank
             } else if (i > graphPortions - 1 - lengths.get(j / 2)) {
                 System.out.print("[|]");
             } else {
@@ -724,7 +724,7 @@ public class Ui {
             if (j % 2 == 0) {
                 System.out.print("   ");
             } else {
-                System.out.print((char)(j / 2 + 65) + " ");
+                System.out.print(" " + (char)(j / 2 + 65) + " ");
             }
         } else {
             System.out.print("   ");
@@ -745,12 +745,12 @@ public class Ui {
             //2d visualization
             //Nested for 2n columns, 10 rows (n rows but only 10 will be for graph rest for legend)
             int listSize = dishList.size();
-            int rows = (listSize > graphPortions) ? listSize : graphPortions + 1;
+            int rows = (listSize > graphPortions) ? listSize + 1 : graphPortions + 1;
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < listSize * 2; j++) {
                     printGraph(graphPortions, lengths, i, j);
                 }
-                if (i < listSize) {
+                if (i <= listSize) {
                     printDishLegend(dishList, i);
                 } else {
                     System.out.print(System.lineSeparator());
@@ -765,8 +765,14 @@ public class Ui {
     }
 
     private void printDishLegend(ArrayList<Dish> dishList, int i) {
-        System.out.println("     " + (char) (i + 65) + ". " + dishList.get(i).getDishName()
-            + ":" + dishList.get(i).getWastage() + "kg");
+        if (i == 0) {
+            System.out.print("     Legend:         ");
+            System.out.print("     Scale: 1 unit = " + DishList.getGreatestWaste() / 10 + "kg");
+        } else {
+            System.out.print("     " + (char) (i + 64) + ". " + dishList.get(i - 1).getDishName()
+                    + ": " + dishList.get(i - 1).getWastage() + "kg");
+        }
+        System.out.print(System.lineSeparator());
     }
 
     public void printIngrListGraph(ArrayList<Ingredient> ingredientList) {
@@ -783,12 +789,12 @@ public class Ui {
             //2d visualization
             //Nested for 2n columns, 10 rows (n rows but only 10 will be for graph rest for legend)
             int listSize = ingredientList.size();
-            int rows = (listSize > graphPortions) ? listSize : graphPortions + 1;
+            int rows = (listSize > graphPortions) ? listSize + 1 : graphPortions + 1;
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < listSize * 2; j++) {
                     printGraph(graphPortions, lengths, i, j);
                 }
-                if (i < listSize) {
+                if (i <= listSize) {
                     printIngrLegend(ingredientList, i);
                 } else {
                     System.out.print(System.lineSeparator());
@@ -803,8 +809,15 @@ public class Ui {
     }
 
     private void printIngrLegend(ArrayList<Ingredient> ingredientList, int i) {
-        System.out.println("     " + (char) (i + 65) + ". " + ingredientList.get(i).getIngredientName()
-                + ":" + ingredientList.get(i).getWastage() + "kg");
+        //Scale on first line
+        if (i == 0) {
+            System.out.print("     Legend:         ");
+            System.out.print("     Scale: 1 unit = " + IngredientList.getGreatestWaste() / 10 + "kg");
+        } else {
+            System.out.print("     " + (char) (i + 64) + ". " + ingredientList.get(i - 1).getIngredientName()
+                    + ": " + ingredientList.get(i - 1).getWastage() + "kg");
+        }
+        System.out.print(System.lineSeparator());
     }
 
     public void printMatchedDishes(ArrayList<Dish> matchedDishList) {

@@ -1116,6 +1116,9 @@ Display a graph to show Dish wastage.
 Format: `graph dish`
 
 * `graph dish` does not require additional parameters.
+  * 💡 *Note*:  Due to the limitations of a CLI based application, 
+  we are unable to print half a character and as a result the graphs are unable to display fractional values (e.g. 2.5 units is impossible)
+    * The scaling is instead done by getting the actual value and rounding it up to the nearest integer (e.g 3.2 units would show as 4 units)
 
 Example of usage:
 
@@ -1126,17 +1129,17 @@ Expected Outcome:
 ```
 ____________________________________________________________
 
-       [|]                              A. prata:3.0kg
-       [|]                              B. nasi lemak:16.0kg
-       [|]                              C. chicken rice:12.0kg
-       [|]  [|]       [|]               D. chicken chop:7.0kg
-       [|]  [|]       [|]               E. chicken cutlet:12.0kg
-       [|]  [|]       [|]               F. pork chop:4.0kg
-       [|]  [|]  [|]  [|]               G. briyani:3.0kg
-       [|]  [|]  [|]  [|]          
-       [|]  [|]  [|]  [|]  [|]     
-  [|]  [|]  [|]  [|]  [|]  [|]  [|]
-   A    B    C    D    E    F    G 
+         [|]                 Legend:              Scale: 1 unit = 3.45kg
+         [|]                 A. cake: 3.45kg
+         [|]                 B. chicken rice: 34.5kg
+         [|]                 C. hamburger: 7.22kg
+         [|]                 D. prata: 15.7kg
+         [|]         [|]
+         [|]         [|]
+         [|]   [|]   [|]
+         [|]   [|]   [|]
+   [|]   [|]   [|]   [|]
+    A     B     C     D 
 ____________________________________________________________
 
 ```
@@ -1152,6 +1155,9 @@ Displays a graph to show Ingredient wastage.
 Format: `graph ingr`
 
 * `graph ingr` does not require additional parameters.
+* 💡 *Note*:  Due to the limitations of a CLI based application,
+  we are unable to print half a character and as a result the graphs are unable to display fractional values (e.g. 2.5 units is impossible)
+  * The scaling is instead done by getting the actual value and rounding it up to the nearest integer (e.g 3.2 units would show as 4 units)
 
 Example of usage:
 
@@ -1162,17 +1168,17 @@ Expected Outcome:
 ```
 ____________________________________________________________
 
-            [|]               A. rice:2.0kg
-            [|]               B. flour:3.0kg
-            [|]               C. egg:10.0kg
-            [|]       [|]     D. pork:4.0kg
-            [|]       [|]     E. chicken:7.0kg
-            [|]       [|]
-            [|]  [|]  [|]
-       [|]  [|]  [|]  [|]
-  [|]  [|]  [|]  [|]  [|]
-  [|]  [|]  [|]  [|]  [|]
-   A    B    C    D    E 
+                           [|]     Legend:              Scale: 1 unit = 5.0kg
+                           [|]     A. chicken: 2.56kg
+                           [|]     B. rice: 21.56kg
+                           [|]     C. flour: 24.56kg
+                     [|]   [|]     D. potato: 26.56kg
+         [|]   [|]   [|]   [|]     E. corn: 50.0kg
+         [|]   [|]   [|]   [|]
+         [|]   [|]   [|]   [|]
+         [|]   [|]   [|]   [|]
+   [|]   [|]   [|]   [|]   [|]
+    A     B     C     D     E 
 ____________________________________________________________
 ```
 
