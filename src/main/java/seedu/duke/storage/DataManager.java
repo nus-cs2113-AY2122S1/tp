@@ -29,14 +29,14 @@ public class DataManager implements Observer {
 
     private static final String LOAD_ERROR_MESSAGE = "Error occurred while loading task list."
         + "Data will be overwritten when you add a task.";
-    private static final String READ_ACCESS_ERROR_MESSAGE = "No permission to read from save file,"
-        + " ensure the program has read access to %s\nand restart the program to allow your tasks to be imported!";
-    private static final String READ_IO_EXCEPTION = "IO Exception occurred when trying to read from save file,"
-        + " ensure the file %s exists\nand you have enough disk space";
-    private static final String WRITE_ACCESS_ERROR_MESSAGE = "No permission to write to save file,"
-        + " ensure the program has write access to %s\nand restart the program to allow created tasks to be saved!";
-    private static final String WRITE_IO_EXCEPTION = "IO Exception occurred when trying to read from save file,"
-        + " ensure the file %s exists\nand you have enough disk space";
+    private static final String READ_ACCESS_ERROR_MESSAGE = "No permission to read from save file."
+        + " Ensure the program has read access to %s\nand restart the program to allow your tasks to be imported!";
+    private static final String READ_IO_EXCEPTION = "IO Exception occurred when trying to read from save file."
+        + " Ensure the file %s exists\nand you have enough disk space";
+    private static final String WRITE_ACCESS_ERROR_MESSAGE = "No permission to write to save file."
+        + " Ensure the program has write access to %s\nand restart the program to allow created tasks to be saved!";
+    private static final String WRITE_IO_EXCEPTION = "IO Exception occurred when trying to read from save file."
+        + " Ensure the file %s exists\nand you have enough disk space";
 
     private static final boolean DO_APPEND_TO_FILE = false;
 
