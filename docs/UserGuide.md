@@ -26,9 +26,10 @@ commands that you can execute.
   * [Listing Tasks, Lessons or Modules - `list`](#listing-tasks-lessons-or-modules---list)
   * [Marking a Task as done - `done`](#marking-a-task-as-done---done)
   * [Deleting Tasks, Lessons or Modules - `delete`](#deleting-tasks-lessons-or-modules---delete)
-  * [Finding Tasks or lessons by keyword - `find`](#finding-tasks-or-lessons-by-keyword---find)
-  * [Retrieving Module information - `moduleinfo`](#retrieving-module-information---moduleinfo)
+  * [Finding Tasks or lessons by keyword - `find task/lesson`](#finding-tasks-or-lessons-by-keyword---find-tasklesson)
+  * [Retrieving Module information - `find module`](#retrieving-module-information---find-module)
   * [Setting module grade - `set grade`](#setting-module-grade---set-grade)
+  * [Launching Lesson URL - `launch lesson`](#launching-lesson-url---launch-lesson)
   * [Exiting the program - `exit`](#exiting-the-program---exit)
   * [Saving the data](#saving-the-data)
 * [FAQ](#faq)
@@ -91,28 +92,30 @@ Example usage:
 
 ```
 $ help
-      ______________________________________________________________________________________
-       Here are the list of commands that you can try.
-       ------------------------------------------------------------------------------------
-       add        task   [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}
-       add        lesson [TITLE] -d [DAY_OF] -s [START_TIME] -e [END_TIME] -l {MEETING_URL}
-       add        module [MODULE_CODE]
-       list       task {PERIOD/PRIORITY}
-       list       lesson {PERIOD}
-       list       module {verbose}
-       delete     task [INDEX]
-       delete     lesson [INDEX]
-       delete     module [MODULE_CODE]
-       done       task [INDEX]
-       find       [task/lesson] [KEYWORD]
-       moduleinfo [MODULE_CODE]
-       set        grade [MODULE_CODE] [GRADE]
-       exit           
+    ______________________________________________________________________________________
+     Here are the list of commands that you can try.
+     ------------------------------------------------------------------------------------
+     add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}
+     add lesson [TITLE] -d [DAY_OF_THE_WEEK] -s [START_TIME] -e [END_TIME] -l {MEETING_URL}
+     add module [MODULE_CODE]
+     list task {PERIOD/PRIORITY}
+     list lesson {PERIOD}
+     list module
+     delete task [INDEX]
+     delete lesson [INDEX]
+     delete module [MODULE_CODE]
+     done task [INDEX]
+     find task [KEYWORD]
+     find lesson [KEYWORD]
+     find module [MODULE_CODE] {verbose}
+     set grade [MODULE_CODE] [GRADE]
+     launch lesson [INDEX]
+     exit
 
-       Notes: Square brackets -> [COMPULSORY_PARAMETER]
-              Curly braces    -> {OPTIONAL_PARAMETER}
-              More details: https://ay2122s1-cs2113t-w11-3.github.io/tp/UserGuide.html
-      ______________________________________________________________________________________
+     Notes: Square brackets -> [COMPULSORY_PARAMETER]
+            Curly braces    -> {OPTIONAL_PARAMETER}
+            More details: https://ay2122s1-cs2113t-w11-3.github.io/tp/UserGuide.html
+    ______________________________________________________________________________________
 ```
 
 You can use this as a quick guide while using NUS Buddy. The format of the commands shown by `help` 
@@ -177,12 +180,12 @@ Format: `add lesson [TITLE] -d [DAY_OF_THE_WEEK] -s [START_TIME] -e [END_TIME] -
 Example:
 
 ```
-$ add lesson CS2113T Lecture -d fri -s 16:00 -e 18:00 
+$ add lesson CS2113T Lecture -d fri -s 16:00 -e 18:00 -l https://www.google.com/
       ______________________________________________________________________________________
        Noted. I've added this lesson:
          CS2113T Lecture
           Friday, 04:00 PM - 06:00 PM
-          Meeting URL: https://meetinglink.com/
+          Meeting URL: https://www.google.com/
        Now you have 1 lessons in the list.
       ______________________________________________________________________________________
 
@@ -193,7 +196,7 @@ $ add lesson CG2028 Tutorial -d thu -s 13:00 -e 14:00
           Thursday, 01:00 PM - 02:00 PM
           Meeting URL: -
        Now you have 2 lessons in the list.
-    ______________________________________________________________________________________
+      ______________________________________________________________________________________
 ```
 
 > 💡 The input times are automatically converted to 12-hour clock format.
@@ -212,14 +215,14 @@ Example:
 $ add module CS2113T
       ______________________________________________________________________________________
        Noted. I've added this module:
-         CS2113T Software Engineering & Object-Oriented Programming (4MCs) 
+         CS2113T Software Engineering & Object-Oriented Programming (4MCs) | Grade: NONE
        Now you have 1 modules in the list.
       ______________________________________________________________________________________
 
 $ add module CG2028
       ______________________________________________________________________________________
        Noted. I've added this module:
-         CG2028 Computer Organization (2MCs) 
+         CG2028 Computer Organization (2MCs) | Grade: NONE
        Now you have 2 modules in the list.
       ______________________________________________________________________________________
 ```
@@ -299,9 +302,7 @@ $ list lesson tomorrow
 
 #### Module
 
-Format: `list module {verbose}`
-
-* `verbose` provides more detailed information.
+Format: `list module`
 
 ```
 $ list module
@@ -309,29 +310,6 @@ $ list module
        Here are the modules in your list:
        1. CS2113T Software Engineering & Object-Oriented Programming (4MCs) | Grade: A
        2. CG2028 Computer Organization (2MCs) | Grade: B
-       ------------------------------------------------------------------------------------
-       You have a total of 6 MCs
-       Your current CAP is: 4.50
-      ______________________________________________________________________________________
-
-$ list module verbose
-      ______________________________________________________________________________________
-       Here are the detailed information of your modules:
-       ------------------------------------------------------------------------------------
-       CS2113T Software Engineering & Object-Oriented Programming (4MCs) | Grade: A
-       Department: Computer Science
-       Faculty: Computing
-       Preclusion: CS2103, CS2103T, (CS2113T for CS2113), (CS2113 for CS2113T)
-       Pre-requisite: CS2040C or ((CS2030 or its equivalent) and CS2040/S)
-       Core Requisites: CS2101 Effective Communication for Computing Professionals is co-requisite for CS2113T. Students exempted from CS2101 will take CS2113 which does not have CS2101 as co-req. Otherwise, CS2113 and CS2113T are identical.
-       ------------------------------------------------------------------------------------
-       ------------------------------------------------------------------------------------
-       CG2028 Computer Organization (2MCs) | Grade: B
-       Department: Computing and Engineering Programme
-       Faculty: Multi Disciplinary Programme
-       Preclusion: EE2024 Programming for Computer Interfaces
-       Pre-requisite: CS1010 Programming Methodology and (EE2026 Digital Design / EE2020 Digital Fundamentals)
-       Core Requisites: null
        ------------------------------------------------------------------------------------
        You have a total of 6 MCs
        Your current CAP is: 4.50
@@ -492,9 +470,9 @@ $ list module
       ______________________________________________________________________________________
 ```
 
-### Finding Tasks or Lessons by keyword - `find`
+### Finding Tasks or Lessons by keyword - `find task/lesson`
 
-Finds tasks/lessons that contains the specific keyword.
+Finds the tasks/lessons that contain the specific keyword.
 
 #### Task
 
@@ -532,26 +510,43 @@ $ find lesson CS2113T
       ______________________________________________________________________________________
 ```
 
-### Retrieving Module information - `moduleinfo`
+### Retrieving Module information - `find module`
 
-Shows you a complete list of information for any modules that are listed on NUSMods. You can find information 
+Format: `find module [MODULE_CODE] {verbose/-v}`
+
+Shows you a complete list of information for any modules that are listed on NUSMods. You can find information
 such as module title, modular credits, department, faculty, preclusion, pre-requisites, etc.
 
-Format: `moduleinfo [MODULE_CODE]`
-
-* `MODULE_CODE` refers to the module code (based on NUSMods), not case-sensitive
+* Adding `verbose` or `-v` at the end will provide more detailed information.
 
 Example:
 
 ```
-$ moduleinfo CS3219
+$ find module cs2113t
       ______________________________________________________________________________________
-       CS3219 Software Engineering Principles and Patterns (4MCs) 
+       CS2113T Software Engineering & Object-Oriented Programming (4MCs) 
        Department: Computer Science
        Faculty: Computing
-       Preclusion: CS3213 Software Systems Design
-       Pre-requisite: CS2103 or its equivalent
-       Core Requisites: null
+       Preclusion: CS2103, CS2103T, (CS2113T for CS2113), (CS2113 for CS2113T)
+       Prerequisite: CS2040C or ((CS2030 or its equivalent) and CS2040/S)
+       Corequisite: CS2101 Effective Communication for Computing Professionals is co-requisite for CS2113T. Students exempted from CS2101 will take CS2113 which does not have CS2101 as co-req. Otherwise, CS2113 and CS2113T are identical.
+      ______________________________________________________________________________________
+
+$ find module cs2113t verbose
+      ______________________________________________________________________________________
+       CS2113T Software Engineering & Object-Oriented Programming (4MCs) 
+       This module introduces the necessary skills for systematic and rigorous development
+       of software systems. It covers requirements, design, implementation, quality assuran
+       ce, and project management aspects of small-to-medium size multi-person software pro
+       jects. The module uses the Object Oriented Programming paradigm. Students of this mo
+       dule will receive hands-on practice of tools commonly used in the industry, such as
+       test automation tools, build automation tools, and code revisioning tools will be co
+       vered.
+       Department: Computer Science
+       Faculty: Computing
+       Preclusion: CS2103, CS2103T, (CS2113T for CS2113), (CS2113 for CS2113T)
+       Prerequisite: CS2040C or ((CS2030 or its equivalent) and CS2040/S)
+       Corequisite: CS2101 Effective Communication for Computing Professionals is co-requisite for CS2113T. Students exempted from CS2101 will take CS2113 which does not have CS2101 as co-req. Otherwise, CS2113 and CS2113T are identical.
       ______________________________________________________________________________________
 ```
 
@@ -576,6 +571,34 @@ $ set grade CG2028 B
           Grade: B
       ______________________________________________________________________________________
 ```
+
+### Launching Lesson URL - `launch lesson`
+
+Launches the meeting URL of the lesson of the given index.
+
+Format: `launch lesson [INDEX]`
+
+Example:
+
+```
+$ list lesson
+      ______________________________________________________________________________________
+       Here are the lessons in your list:
+       1. CG2028 Tutorial
+          Thursday, 01:00 PM - 02:00 PM
+          Meeting URL: -
+       2. CS2113T Lecture
+          Friday, 04:00 PM - 06:00 PM
+          Meeting URL: https://www.google.com/
+      ______________________________________________________________________________________
+
+$ launch lesson 2
+      ______________________________________________________________________________________
+       Launching URL...
+      ______________________________________________________________________________________
+```
+
+In this example, the meeting URL of lesson number 2 (which is https://www.google.com/) is launched.
 
 ### Exiting the program - `exit`
 
@@ -627,19 +650,20 @@ Modules:
 
 ## Command summary
 
-| Command                                                                                | Purpose                                          |
-| :------------------------------------------------------------------------------------- | :----------------------------------------------- |
-| `add        task   [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}`        | To add a task                                    |
-| `add        lesson [TITLE] -d [DAY_OF] -s [START_TIME] -e [END_TIME] -l {MEETING_URL}` | To add a lesson                                  |
-| `add        module [MODULE_CODE]`                                                      | To add a module                                  |
-| `list       task {PERIOD/PRIORITY}`                                                    | To list all tasks                                |
-| `list       lesson {PERIOD}`                                                           | To list all lessons                              |
-| `list       module {verbose}`                                                            | To list all modules                              |
-| `delete     task [INDEX]`                                                              | To delete a task                                 |
-| `delete     lesson [INDEX]`                                                            | To delete a lesson                               |
-| `delete     module [MODULE_CODE]`                                                      | To delete a module                               |
-| `done       task [INDEX]`                                                              | To mark a task as done                           |
-| `find       [task/lesson] [KEYWORD]`                                                   | To find tasks/lessons with the specified keyword |
-| `moduleinfo [MODULE_CODE]`                                                             | To display module details                        |
-| `set        grade [MODULE_CODE] [GRADE]`                                               | To set the grade for a particular module         |
-| `exit`                                                                                 | To exit the program                              |
+| Command                                                                                                                  | Purpose                                          |
+| :----------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------- |
+| [`add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}`](#adding-a-task-lesson-or-module---add)          | To add a task                                    |
+| [`add lesson [TITLE] -d [DAY_OF] -s [START_TIME] -e [END_TIME] -l {MEETING_URL}`](#adding-a-task-lesson-or-module---add) | To add a lesson                                  |
+| [`add module [MODULE_CODE]`](#adding-a-task-lesson-or-module---add)                                                      | To add a module                                  |
+| [`list task {PERIOD/PRIORITY}`](#listing-tasks-lessons-or-modules---list)                                                | To list all tasks                                |
+| [`list lesson {PERIOD}`](#listing-tasks-lessons-or-modules---list)                                                       | To list all lessons                              |
+| [`list module`](#listing-tasks-lessons-or-modules---list)                                                                | To list all modules                              |
+| [`delete task [INDEX]`](#deleting-tasks-lessons-or-modules---delete)                                                     | To delete a task                                 |
+| [`delete lesson [INDEX]`](#deleting-tasks-lessons-or-modules---delete)                                                   | To delete a lesson                               |
+| [`delete module [MODULE_CODE]`](#deleting-tasks-lessons-or-modules---delete)                                             | To delete a module                               |
+| [`done task [INDEX]`](#marking-a-task-as-done---done)                                                                    | To mark a task as done                           |
+| [`find [task/lesson] [KEYWORD]`](#finding-tasks-or-lessons-by-keyword---find-tasklesson)                                 | To find tasks/lessons with the specified keyword |
+| [`find module [MODULE_CODE] {verbose}`](#retrieving-module-information---find-module)                                    | To display module details                        |
+| [`set grade [MODULE_CODE] [GRADE]`](#setting-module-grade---set-grade)                                                   | To set the grade for a particular module         |
+| [`launch lesson [INDEX]`](#launching-lesson-url---launch-lesson)                                                         | To launch a meeting URL                          |
+| [`exit`](#exiting-the-program---exit)                                                                                    | To exit the program                              |
