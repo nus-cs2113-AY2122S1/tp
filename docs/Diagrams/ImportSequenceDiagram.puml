@@ -1,0 +1,33 @@
+@startuml
+!include Style.puml
+
+[-> Storage: load()
+Storage -> Import: importStorage(filePath)
+
+loop has next line in file
+
+    Import -> Import: updateGoalList(lineData,GoalList)
+
+    alt goal type
+    Import -> ImportParser: goalParser(lineData)
+    return Goal object
+
+    else habit type
+    Import -> ImportParser: habitParser(lineData)
+    return Habit object
+
+    else interval type
+    Import -> ImportParser: intervalParser(lineData)
+    return Interval object
+
+    else default
+    Import --> Storage: HabitStorageException
+
+    end
+
+end
+
+Import --> Storage: GoalList object
+[<-- Storage: GoalList object
+
+@enduml
