@@ -41,6 +41,11 @@ public class Module implements Comparator<Module> {
         return moduleCredits;
     }
 
+    /**
+     * Returns the index of the module with respect to the master list.
+     * @param moduleMasterList The module master list.
+     * @return The master list index of the module.
+     */
     public int getMasterListIndex(ModuleList moduleMasterList) {
         for (int i = 0; i < moduleMasterList.getSize(); i++) {
             if (moduleMasterList.get(i).getModuleCode().equals(moduleCode)) {
@@ -50,24 +55,23 @@ public class Module implements Comparator<Module> {
         return -1;
     }
 
+    //@@author madhanse
+    /**
+     * Checks whether two module objects are equal.
+     * @param searchModule Module to check
+     * @return True if equal. Otherwise, false
+     */
     public boolean isEqual(Module searchModule) {
         return (getModuleCode().equals(searchModule.getModuleCode()))
                 && (getModuleName().equals(searchModule.getModuleName()))
                 && (getModuleCredits() == searchModule.getModuleCredits());
     }
 
-    public void setModuleCode(String moduleCode) {
-        this.moduleCode = moduleCode;
-    }
-
-    public void setModuleName(String moduleName) {
-        this.moduleName = moduleName;
-    }
-
-    public void setModuleCredits(int moduleCredits) {
-        this.moduleCredits = moduleCredits;
-    }
-
+    //@@author madhanse
+    /**
+     * Converts a module object into a string used to write it into a file.
+     * @return Module in a string format
+     */
     public String toFileFormat() {
         return moduleCode + " # " + moduleName + " # " + moduleCredits
                 + System.lineSeparator();

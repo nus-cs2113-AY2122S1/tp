@@ -11,6 +11,7 @@ import java.text.ParseException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+//@@author madhanse
 class AddModCommandParserTest {
     private static Storage storage = new Storage();
     private static UniversityList universitySelectedList = new UniversityList();
@@ -30,10 +31,10 @@ class AddModCommandParserTest {
     @Test
     void parse_validModuleCode_expectModuleObject() {
         String moduleCode = "CS1231";
-        AddCommandParser acp = new AddCommandParser();
-        assertEquals("CS1231", acp.searchForModule(moduleCode, moduleMasterList).getModuleCode());
-        assertEquals("Discrete Structures", acp.searchForModule(moduleCode, moduleMasterList).getModuleName());
-        assertEquals(4.0, acp.searchForModule(moduleCode, moduleMasterList).getModuleCredits());
+        ParseCondition acp = new ParseCondition();
+        assertEquals("CS1231", acp.isValidModule(moduleMasterList, moduleCode).getModuleCode());
+        assertEquals("Discrete Structures", acp.isValidModule(moduleMasterList, moduleCode).getModuleName());
+        assertEquals(4.0, acp.isValidModule(moduleMasterList, moduleCode).getModuleCredits());
     }
 
     @Test

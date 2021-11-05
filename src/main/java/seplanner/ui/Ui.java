@@ -6,8 +6,14 @@ import seplanner.constants.Constants;
 
 import static java.lang.System.out;
 
+// @@author titustortoiseturtle1999
 public abstract class Ui {
 
+    /**
+     * printIndex Displays the specified index with the proper formatting.
+     * @param index The index to be displayed.
+     * @param println Whether to print a new line after displaying the index.
+     */
     public static void printIndex(int index, boolean println) {
         StringBuilder padding = stringPadder(String.valueOf(index), PaddingType.INDEX);
         String format = Constants.INDEX_WRAP_FRONT + index + Constants.INDEX_WRAP_BACK + padding;
@@ -18,6 +24,12 @@ public abstract class Ui {
         }
     }
 
+    /**
+     * StringPadder returns the appropriate space padding after a String depending on its length.
+     * @param input The String that preceeds the padding.
+     * @param type The type of input that was displayed in the form of the enum PaddingType.
+     * @return A StringBuilder containing the appropriate padding.
+     */
     protected static StringBuilder stringPadder(String input, PaddingType type) {
         StringBuilder padding = new StringBuilder();
         int benchmarkLength;

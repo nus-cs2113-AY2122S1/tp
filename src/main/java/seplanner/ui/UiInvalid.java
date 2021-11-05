@@ -11,8 +11,11 @@ public class UiInvalid extends Ui {
         out.println("No universities found");
     }
 
-    public static void printParseException(String errorMessage) {
-        out.println("There is an error in your inputs: " + errorMessage);
+    public static void printParseException(String errorMessage, String format, boolean isPrintFormat) {
+        out.println("There is an error in your inputs: " + errorMessage + "\n");
+        if (isPrintFormat) {
+            printFormat(format);
+        }
     }
 
     public static void printFormat(String format) {

@@ -4,7 +4,7 @@ title: Developer Guide
 ---
 
 ## Contents 
-
+* [About SEPlanner](#About-SEPanner)
 * [Acknowledgements](#acknowledgements)
 * [Getting Started](#getting-started)
 * [Design & Implementation](#design--implementation)
@@ -34,6 +34,10 @@ title: Developer Guide
 * [Glossary](#glossary)
 * [Instructions for manual testing](#instructions-for-manual-testing)
 
+## About SEPlanner
+SEPlanner is a lightweight desktop application for Computer Engineering undergraduates from the National University of Singapore
+to plan for their Student Exchange Programme, optimised for use via Command Line Interface (CLI).
+
 ## Acknowledgements
 
 * __EduRec:__ For the list of possible module mappings
@@ -41,11 +45,11 @@ title: Developer Guide
 
 ## Getting started 
 
-Refer to our user guide [here](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob/master/docs/UserGuide.md)
+Refer to our user guide [here](https://ay2122s1-cs2113t-t09-2.github.io/tp/UserGuide.html#quick-start)
 
 ## Design & implementation
 
-<img src="images/Placeholder_person.png" width = "280"/>  
+<img src="images/architecture.png" width = "280"/>  
 
 The ***Architecture Diagram*** above explains the high-level design of the App. 
 
@@ -67,34 +71,47 @@ The other core components of SEPlanner are:
 </p>
 
 The sequence diagram above illustrates the flow through our program structure when the user input `add /uni 1` 
-is entered. 
+is entered.  
 
+When the user runs the `add /uni 1` action on the parser class, the parser class calls the `addUniCommand` method 
+in the `addUniCommand` class by passing the university with master index `1` to it.  
+
+The `addUniCommand` class then  
+1. calls the `selectedUniversityList#addUniversity` method in the model class 
+by passing the university to implement the action.
+2. calls the `updateSelectedUniversity` method in the storage class 
+by passing the selected university list to update the stored selected list
+3. calls `printUniversity` in the UI class.
+by passing the university to display the message of adding the selected university to the user.
+ 
 ### Command Implementation
 
 <p align = "center">
-<img src="images/Package%20commands.png" width = "800" />
+<img src="images/commands.png" width = "800" />
 </p>
 
 
-Step 1. When the beginner user launches the application, to see the list of all universities available for the SEP program, the user executes `list /muni` command. To see the list of all NUS modules available for the SEP program, the user can executes `list /mmod` command.
+Step 1. When the beginner user launches the application, to see the list of all universities available for the SEP program, the user executes the `list /muni` command. To see the list of all NUS modules available for the SEP program, the user can execute the `list /mmod` command.
 
-Step 2. The user then module executes `add /uni Boston University` command to call `addUniCommand(university, list)` and add his preferred university to the selected university list. The other option for the user is to execute `add /uni 4` command to call `addUniCommand(index, list)` to add to the list.
+Step 2. The user then executes the `add /uni Boston University` command and add his preferred university to the selected university list. The other option for the user is to execute the `add /uni 4` command by entering its university master index.
 
-Step 3. The user executes `add /mod CS1231` command to call `addModCommand(module, list)` and add his preferred NUS module to the selected module list. The other option for the user is to execute `add /mod 81` command to call `addModCommand(index, list)` to add to the list.
+Step 3. The user executes the `add /mod CS1231` command to add his preferred NUS module to the selected module list. The other option for the user is to execute the `add /mod 81` command by entering its module master index.
 
 Step 4. The user executes `list /suni` to see his selected university list. The user executes `list /smod` command to see his selected module list.
 
-Step 5. The user executes `remove /mod 81` command to delete unwanted modules from see his selected module list. The user executes `remove /uni 4` command to delete unwanted university see his selected university list.
+Step 5. The user executes the `remove /mod CS1231` or `remove /mod 81` command to delete the unwanted module from see his selected module list. The user executes the `remove /uni Boston University` or `remove /uni 4` command to delete the unwanted university from his selected university list.
 
-Step 6. The user executes `find /code CS1231` to find the master index of the module. The user executes `find /uni Boston University` to find the master index of the university.
+Step 6. If the user forgets the master index for a university of a module, he can execute the `find /mod Discrete Structures` or `find /code CS1231` to find the module. The user executes `find /uni Boston University` to find the university.
 
-Step 7. The user executes `searchmap 4` command to see the module mapping of all modules in the selected module list in Boston University.
+Step 7. The user executes `searchmap 4` command to see the module mapping of all modules in the selected module list in Boston University. The user can execute `searchmap all` to see all modules in the selected module list for all universities in the selected university list.
 
 Step 8. The user executes `add /map 4 1` command to add the first module mapping available under Boston University.
 
 Step 9. The user executes `remove /map 4 1` command to remove the first mapping allocated to Boston University.
 
-Step 10. The user executes `exit` command to terminate the program.
+Step 10. The user executes `help` command to see the list of commands available for SEPlanner.
+
+Step 11. The user executes `exit` command to terminate the program.
 
 ### User Interface
 
@@ -120,6 +137,10 @@ The UiModule class contains methods for printing Modules.
 The UiUniversity class contains methods for printing Universities. 
 
 The UiWelcome class contains a method for printing the welcome greeting. 
+
+The UiInvalid class contains methods to display error messages to the user. 
+
+The UiStorage class contains methods to display error messages from the Storage component to the user. 
 
 <p align = "center">
 <img src="images/uiseq.png" width = "800" />
@@ -154,7 +175,8 @@ methods required.
 
 The classes `SelectedUniversityStorage` and `SelectedModuleStorage` are responsible for reading and updating the text files
 storing your selected university list and your selected module list. These classes inherit from the `UserStorage` class as the `loadFile` function
-is identical other than the file path.
+is identical other than the file path. The private methods in both the classes filters out the invalid data found while reading the 
+text files.
 
 The classes `UniversityStorage` and `ModuleStorage` are responsible for extracting the Master University List and Master Module List
 from the CSV type files (`University.csv` and `modules.csv`) stored in the resources root.
@@ -208,7 +230,6 @@ This component consist of the following classes:
 
 ### Parser Component
 
-<img src="images/Parser.png" width="5362"/>  
 The parser component is made up of the following classes:
 * Identify the command word and invoke the respective argument parser for the command.
 * Handle the arguments and return the respective Command object.
@@ -217,6 +238,10 @@ The parser component is made up of the following classes:
 #### Parser
 
 * This is the main parser class that will handle raw inputs and identify command words and invoke the respective command parsers instance and return the respective `Command` object.
+
+#### ParseCondition
+
+* This class contains methods used by various parser classes to verify that the inputs are valid.
 
 #### AddCommandParser
 
@@ -248,17 +273,23 @@ The `Module` object representing the particular module from Selected Module List
 
 #### HelpCommandParser
 
-This object will invoke an instance of `HelpCommand`.
+This object will return an instance of `HelpCommand`.
 
 #### ExitCommandParser
 
-This object will invoke an instance of `ExitCommand`.
+This object will return an instance of `ExitCommand`.
+
+#### ParserClassException
+
+* This is an abstract class inherited from Java 11's `ParseException` and its children objects are thrown when an input is detected as invalid. 
+* Each command word has its respective `ParserClassException` with its format inside.
+* On top of the parameters for `ParseException`, and additional boolean variable is required to identify when the user has made a format error in the command and the correct format will be output to the user.
 
 ## Product scope
 
 ### Target User Profile
 
-__SEPlanner__ is targeted at Computer Engineering students in NUS planning for their Student Exchange Program (SEP). 
+__SEPlanner__ is targeted at Computer Engineering students in the National University of Singapore planning for their Student Exchange Program (SEP). 
 
 ### Value Proposition
 
@@ -289,7 +320,10 @@ a list of potential exchange Universities based on the users study plan, module 
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+* SEPlanner must operate with full functionality on all mainstream operating systems: Windows, MacOS and Ubuntu with Java 11 installed. 
+* It should offer a streamlined experience using the command line interface primarily. 
+* It should be fast and responsive (No more than 1000ms between user input and program output).
+* It should be significantly faster than the default Student Exchange Program application portal on myEduRec. 
 
 ## Glossary
 
@@ -304,4 +338,114 @@ a list of potential exchange Universities based on the users study plan, module 
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+<div markdown="block" class="alert alert-info"> :information_source: **Note:**
+These instructions only provide a starting point for testers to work on; testers are expected to do more exploratory testing.
+</div>
+
+### Launch and shutdown
+
+1. Initial launch
+   1. Download the jar file and copy into an empty folder.
+   2. Open a terminal at the folder containing the jar file.
+   3. Run the command `java -jar seplanner.jar`
+      Expected: The welcome ascii art will display.
+   4. Resize the terminal to fit the welcome ascii.
+2. Shutdown
+   1. Enter the command `exit`.
+      Expected: The exit ascii art will display.
+
+### Getting help
+1. Get help for user the program.
+   1. Test case: `help`
+
+      Expected: The command list will be printed to console.
+
+### Getting university list and module list
+1. Listing the master university list.
+   1. Test case: `list /muni`
+
+      Expected: The entire list of universities are printed.
+
+2. Listing the master module list
+   1. Test case: `list /mmod`
+
+      Expected: The entire list of modules are printed.
+
+3. Listing the user selected university list.
+   1. Test case: `list /suni`
+
+      Expected: The user selected university list are displayed.
+
+4. Listing the user selected module list.
+   1. Test case: `list /smod`
+
+      Expected: The user selected module list are displayed.
+
+5. Dealing with wrong flags.
+   1. Test case: 'list /mod'
+
+      Expected: Error message indicating wrong flags is shown, together with the correct format for `list` command.
+
+6. Dealing with incorrect format.
+   1. Test case: `list`
+
+      Expected: Error message indicating missing flags is shown, together with the correct format for `list` command.
+
+### Finding a university
+
+### Finding a module
+
+### Adding a university
+1. Adding a university by index.
+   1. Test case: `add /uni 1`
+      
+      Expected: University with index 1 is added to the selected list of university. Success message is shown.
+   2. Test case: `add /uni 0`
+
+      Expected: No university is added. Error message is printed to indicate university is not available.
+
+   3. Test case: `add /uni 81`
+
+      Expected: No university is added. Error message is printed to indicate university is not available.
+
+2. Adding a university by university name.
+   1. Test case: `add /uni University of California`
+   
+      Expected: University of California is added into the list of selected university list. Success message is shown.
+
+   2. Test case: `add /uni random_string`
+
+      Expected: No university is added. Error message is printed to indicate university is not available.
+
+3. Adding a duplicate university by index.
+   1. Prerequisites: Delete the data file and restart the program. Run the command `add /uni 34`.
+   2. Test case: `add /uni 34`
+      
+      Expected: Error message indicating duplicate university is shown.
+    
+4. Adding a duplicate university by university name.
+   1. Prerequisites: Delete the data file and restart the program. Run the command `add /uni University of Toronto`.
+   2. Test case: `add /uni University of Toronto`
+
+      Expected: Error message indicating duplicate university is shown.
+
+### Adding a module
+
+### Adding a mapping
+
+### Search for a mapping
+
+### Adding a university
+
+### Adding a module
+
+### Adding a mapping
+
+### Removing a university
+
+### Removing a module
+
+### Removing a mapping
+
+### Saving data
+

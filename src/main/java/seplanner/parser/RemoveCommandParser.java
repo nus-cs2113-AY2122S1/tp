@@ -11,12 +11,14 @@ import seplanner.modules.ModuleList;
 import seplanner.universities.University;
 import seplanner.universities.UniversityList;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+// @@author leowyy99
+
+/**
+ * Handle remove command arguments.
+ */
 public class RemoveCommandParser {
 
     private static final Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
@@ -26,6 +28,18 @@ public class RemoveCommandParser {
     private University university;
     private Module module;
 
+    /**
+     * Handle add command arguments.
+     *
+     * @param arguments The string of user input without the command word.
+     * @param universityMasterList The master list of all available universities.
+     * @param moduleMasterList The master list of all available modules.
+     * @param universitySelectedList The list of user selected universities.
+     * @param moduleSelectedList The list of user selected modules.
+     * @return The Command object corresponding to the flag.
+     * @throws RemoveParseException If inputs are invalid.
+     * @throws IOException If IO exception exists.
+     */
     public Command parse(String arguments, UniversityList universityMasterList,
                          ModuleList moduleMasterList, UniversityList universitySelectedList,
                          ModuleList moduleSelectedList) throws RemoveParseException, IOException {
@@ -47,131 +61,144 @@ public class RemoveCommandParser {
             return new RemoveMapCommand(uniIndex, mapIndex, universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
         default:
-            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1);
+            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1, true);
         }
     }
 
 
+    /**
+     * Extract the flag from the rest of the arguments.
+     *
+     * @param arguments The user input without the command word.
+     * @return The String containing the arguments for AddCommand.
+     * @throws RemoveParseException If inputs are invalid.
+     */
     private String identifyFlagAndSplitArgs(String arguments) throws RemoveParseException {
         String[] argumentsSubstrings = arguments.trim().split(" ", 2);
-        if (argumentsSubstrings.length < 2) {
+        if (ParseCondition.isMissingArguments(argumentsSubstrings)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
-            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
+            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1, true);
         }
         flag = argumentsSubstrings[0].trim();
         return argumentsSubstrings[1].trim();
     }
 
+    /**
+     * Handle the arguments for /uni flag.
+     *
+     * @param arguments The argument for /uni flag.
+     * @param universityMasterList The master list of all available universities.
+     * @param universitySelectedList The list of user selected universities.
+     * @throws RemoveParseException If inputs are invalid.
+     */
     private void handleUniFlagArgs(String arguments, UniversityList universityMasterList,
                                    UniversityList universitySelectedList) throws RemoveParseException {
-        boolean textMatches = isTextMatches(arguments);
         String uniName;
-        if (textMatches) {
+        if (ParseCondition.isText(arguments)) {
             uniName = arguments;
             // Check if university has been added
-            if (!universitySelectedList.searchUniversity(uniName)) {
+            if (!ParseCondition.isDuplicateUniversity(universitySelectedList, uniName)) {
                 logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
-                throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
+                throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTSELECTED, 1, false);
             }
             university = universitySelectedList.getUniversity(uniName);
-        } else {
-            try {
-                uniIndex = Integer.parseInt(arguments);
-            } catch (NumberFormatException e) {
-                throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
-            }
+        } else if (ParseCondition.isNumeric(arguments)) {
+            uniIndex = Integer.parseInt(arguments);
             // Check if university exists
-            if (uniIndex > universityMasterList.getSize() || uniIndex <= 0) {
+            if (ParseCondition.isIndexOutOfBounds(uniIndex, universityMasterList)) {
                 logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
-                throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
+                throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNIINDEXNOTAVAILABLE, 1, false);
             }
             uniName = universityMasterList.get(uniIndex - 1).getName();
             university = universitySelectedList.getUniversity(uniName);
+        } else {
+            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
+            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNIINVALID, 1, false);
         }
 
         // Check if university has been added already
-        if (!universitySelectedList.searchUniversity(uniName)) {
+        if (!ParseCondition.isDuplicateUniversity(universitySelectedList, uniName)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
-            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
+            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1, false);
         }
     }
 
+    /**
+     * Handle the arguments for /mod flag.
+     *
+     * @param arguments The arguments for /mod flag.
+     * @param moduleMasterList The master list of all available modules.
+     * @param moduleSelectedList The list of user selected modules.
+     * @throws RemoveParseException If inputs are invalid.
+     */
     private void handleModFlagArgs(String arguments, ModuleList moduleMasterList,
                                    ModuleList moduleSelectedList) throws RemoveParseException {
-        boolean textMatches = isTextMatches(arguments);
-        if (textMatches) {
+        if (ParseCondition.isText(arguments)) {
             module = moduleSelectedList.getModule(arguments);
             // Check if module has been added already
-            if (module == null) {
+            if (ParseCondition.isNullModule(module)) {
                 logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
-                throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
+                throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTSELECTED, 1, false);
             }
-        } else {
-            int modIndex;
-            try {
-                modIndex = Integer.parseInt(arguments);
-            } catch (NumberFormatException e) {
-                throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
-            }
+        } else if (ParseCondition.isNumeric(arguments)) {
+            int modIndex = Integer.parseInt(arguments);
             // Check if module exists
-            if (modIndex > moduleMasterList.getSize() || modIndex <= 0) {
+            if (ParseCondition.isIndexOutOfBounds(modIndex, moduleMasterList)) {
                 logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
-                throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
+                throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODINDEXNOTAVAILABLE, 1, false);
             }
             module = moduleMasterList.get(modIndex - 1);
+        } else {
+            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
+            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODINVALID, 1, false);
         }
         // Check if module has been added already
-        if (!moduleSelectedList.isModuleExist(module.getModuleCode())) {
+        if (!ParseCondition.isDuplicateModule(moduleSelectedList, module)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
-            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
+            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1, false);
         }
     }
 
+    /**
+     * Handle arguments for /map flag.
+     * @param arguments The arguments for /map flag.
+     * @param universityMasterList The master list of all available universities.
+     * @param universitySelectedList The list of user selected universities.
+     * @param moduleSelectedList The list of user selected modules.    * @param universityMasterList
+     * @throws RemoveParseException If inputs are invalid.
+     */
     private void handleMapFlagArgs(String arguments, UniversityList universitySelectedList,
                                    ModuleList moduleSelectedList,
                                    UniversityList universityMasterList) throws RemoveParseException {
         // Separate arguments
         String[] argumentSubstrings = arguments.trim().split(" ", 2);
-        University currentUni = new University();
-        boolean validUni = false;
-        if (argumentSubstrings.length < 2) {
+        if (ParseCondition.isMissingArguments(argumentSubstrings)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
-            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
+            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1, true);
         }
-        try {
-            uniIndex = Integer.parseInt(argumentSubstrings[0].trim());
-            mapIndex = Integer.parseInt(argumentSubstrings[1].trim());
-        } catch (NumberFormatException e) {
-            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
-            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MAPPINGNOTFOUND, 1);
+        String firstParam = argumentSubstrings[0].trim();
+        String secondParam = argumentSubstrings[1].trim();
+        if (ParseCondition.isNumeric(firstParam) && ParseCondition.isNumeric(secondParam)) {
+            uniIndex = Integer.parseInt(firstParam);
+            mapIndex = Integer.parseInt(secondParam);
+        } else {
+            logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
+            String error = (ParseCondition.isNumeric(firstParam)) ? Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING
+                    : Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND;
+            throw new RemoveParseException(error, 1, false);
         }
-        for (University uni : universitySelectedList.getList()) {
-            if (uni.getIndex() == uniIndex) {
-                validUni = true;
-                currentUni = uni;
-                break;
-            }
-        }
-        if (!validUni) {
-
+        if (!ParseCondition.isInSelectedUniList(uniIndex, universitySelectedList, universityMasterList)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);  
-            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDUNI, 1);
+            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTSELECTED, 1, false);
         }
-        if (universityMasterList.get(uniIndex - 1).getSelectedMappingListSize(moduleSelectedList) == 0) {
+        if (ParseCondition.isMissingAvailableMapping(uniIndex, universityMasterList, moduleSelectedList)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
-            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1);
+            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1, false);
         }
-        if (currentUni.getMappingListSize() < mapIndex || mapIndex < 1) {
+        if (ParseCondition.isIndexOutOfBounds(uniIndex, mapIndex, universityMasterList, moduleSelectedList)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
-            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING, 1);
+            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING, 1, false);
         }
-
     }
 
-    private boolean isTextMatches(String arguments) {
-        String regex = ".*[a-zA-Z].*";  // regex to check if string contains any letters
-        Pattern pattern = Pattern.compile(regex);  // compiles the regex
-        Matcher matcherText = pattern.matcher(arguments);
-        return matcherText.matches();
-    }
 }

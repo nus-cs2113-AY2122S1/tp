@@ -12,7 +12,6 @@ import seplanner.ui.UiInvalid;
 import seplanner.universities.UniversityList;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.Scanner;
 
 public class Seplanner {
@@ -44,8 +43,7 @@ public class Seplanner {
             cmd = mainParser.parseCommand(userInput);
             System.out.println();
         } catch (ParserClassException e) {
-            UiInvalid.printParseException(e.getMessage());
-            UiInvalid.printFormat(e.getFormat());
+            UiInvalid.printParseException(e.getMessage(), e.getFormat(), e.isPrintFormat());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println();

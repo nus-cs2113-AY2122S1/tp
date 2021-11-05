@@ -1,5 +1,9 @@
 package seplanner.commands;
 
+//@@author titustortoiseturtle1999
+/**
+ * Help command to display all commands functions.
+*/
 public class HelpCommand extends Command {
     public HelpCommand() {
         String help
@@ -14,12 +18,13 @@ public class HelpCommand extends Command {
                 + "7:  find /code <search field> ------------ Find module codes that contain the search field\n"
                 + "8:  add /uni <uni index/name> ~~~~~~~~~~~~ Add a university to the selected list\n"
                 + "9:  add /mod <mod index/name> ------------ Add a module to the selected list\n"
-                + "10:  searchmap <uni index> ~~~~~~~~~~~~~~~ Display the available module mappings for "
+                + "10: searchmap <uni index> ~~~~~~~~~~~~~~~~ Display the available module mappings for "
                 + "selected modules for that university\n"
-                + "11: add /map <uni index> <mapping index> ~ Add that module mapping to the selected list\n"
-                + "12: remove </uni> <index> ---------------- Remove the specified university\n"
-                + "13: remove </mod> <index> ~~~~~~~~~~~~~~~~ Remove the specified module\n"
-                + "14: remove /map <uni index> <map index> -- Remove the specified module mapping";
+                + "11: searchmap all ------------------------ Display available module mappings for all universities\n"
+                + "12: add /map <uni index> <mapping index> ~ Add that module mapping to the selected list\n"
+                + "13: remove </uni> <index> ---------------- Remove the specified university\n"
+                + "14: remove </mod> <index> ~~~~~~~~~~~~~~~~ Remove the specified module\n"
+                + "15: remove /map <uni index> <map index> -- Remove the specified module mapping";
         System.out.println(help);
     }
 }

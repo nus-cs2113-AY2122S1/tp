@@ -9,56 +9,66 @@ import seplanner.universities.UniversityList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Handle searchmap command arguments.
+ */
 public class SearchMapCommandParser {
 
-    private static Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
+    private static final Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
 
+    /**
+     * Handle searchmap command arguments.
+     *
+     * @param arguments The string of user input without the command word.
+     * @param universityMasterList The master list of all available universities.
+     * @param universitySelectedList The list of user selected universities.
+     * @param moduleSelectedList The list of user selected modules.
+     * @return The SearchMapCommand object.
+     * @throws SearchMapParseException If inputs are invalid.
+     */
     public SearchMapCommand parse(String arguments, UniversityList universityMasterList,
                                   UniversityList universitySelectedList, ModuleList moduleSelectedList)
             throws SearchMapParseException {
         logger.log(Level.INFO, Constants.LOGMSG_PARSESTARTED);
+
         String input = arguments.trim();
-        if (input.length() == 0) {
+        if (ParseCondition.isEmptyInput(input)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new SearchMapParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
+            throw new SearchMapParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1, true);
         }
 
-        University university;
+        University university = new University();
 
-        if (isNumeric(input)) {
-            int index = Integer.parseInt(input);
-            if (index > universityMasterList.getSize() || index < 1) {
-                throw new SearchMapParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
+        if (input.equals("all")) {
+            logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
+            return new SearchMapCommand(university, universitySelectedList, universityMasterList,
+                    moduleSelectedList, true);
+        }
+
+        if (ParseCondition.isNumeric(input)) {
+            int uniIndex = Integer.parseInt(input);
+            if (ParseCondition.isIndexOutOfBounds(uniIndex, universityMasterList)) {
+                throw new SearchMapParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNIINDEXNOTAVAILABLE, 1, false);
             }
-            university = universityMasterList.get(index - 1);
+            university = universityMasterList.get(uniIndex - 1);
         } else {
-            university = searchForUniversity(input, universityMasterList);
+            university = universityMasterList.getUniversity(input);
         }
 
-        if (university == null) {
+        if (ParseCondition.isNullUniversity(university)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new SearchMapParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
+            throw new SearchMapParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1, false);
         }
+
+        if (ParseCondition.isNoPotentialMapping(university, moduleSelectedList)) {
+            logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
+            throw new SearchMapParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1, false);
+        }
+
         assert university.getName() != null;
         logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
-        return new SearchMapCommand(university, universitySelectedList, moduleSelectedList);
+        return new SearchMapCommand(university, universitySelectedList, universityMasterList,
+                moduleSelectedList, false);
     }
 
-    private static boolean isNumeric(String input) {
-        try {
-            Integer.parseInt(input);
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    private University searchForUniversity(String universityName, UniversityList universityMasterList) {
-        for (University university : universityMasterList.getList()) {
-            if (universityName.equals(university.getName())) {
-                return university;
-            }
-        }
-        return null;
-    }
 }

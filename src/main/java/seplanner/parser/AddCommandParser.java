@@ -14,9 +14,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+// @@author leowyy99
+
+/**
+ * Handle add command arguments.
+ */
 public class AddCommandParser {
 
     private String flag;
@@ -26,6 +29,18 @@ public class AddCommandParser {
     private Module module;
     private static final Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
 
+    /**
+     * Handle add command arguments.
+     *
+     * @param arguments The string of user input without the command word.
+     * @param universityMasterList The master list of all available universities.
+     * @param moduleMasterList The master list of all available modules.
+     * @param universitySelectedList The list of user selected universities.
+     * @param moduleSelectedList The list of user selected modules.
+     * @return The Command object corresponding to the flag.
+     * @throws AddParseException If arguments are invalid.
+     * @throws IOException If IO exception exists.
+     */
     public Command parse(String arguments, UniversityList universityMasterList,
                          ModuleList moduleMasterList, UniversityList universitySelectedList,
                          ModuleList moduleSelectedList) throws AddParseException, IOException {
@@ -39,7 +54,6 @@ public class AddCommandParser {
             handleUniFlagArgs(flagArguments, universityMasterList, universitySelectedList);
             logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
             return new AddUniCommand(university, universityMasterList, universitySelectedList);
-        case Constants.FLAG_MODULE_CODE:
         case Constants.FLAG_MODULE:
             handleModFlagArgs(flagArguments, moduleMasterList, moduleSelectedList);
             logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
@@ -51,146 +65,152 @@ public class AddCommandParser {
                     universitySelectedList, moduleSelectedList);
         default:
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1, true);
         }
     }
 
+    /**
+     * Extract the flag from the rest of the arguments.
+     *
+     * @param arguments The user input without the command word.
+     * @return The String containing the arguments for AddCommand.
+     * @throws AddParseException If inputs are invalid.
+     */
     private String identifyFlagAndSplitArgs(String arguments) throws AddParseException {
         String[] argumentsSubstrings = arguments.trim().split(" ", 2);
-        if (argumentsSubstrings.length < 2) {
+        if (ParseCondition.isMissingArguments(argumentsSubstrings)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1, true);
         }
         flag = argumentsSubstrings[0].trim();
         return argumentsSubstrings[1].trim();
     }
 
+    /**
+     * Handle the arguments for /uni flag.
+     *
+     * @param arguments The argument for /uni flag.
+     * @param universityMasterList The master list of all available universities.
+     * @param universitySelectedList The list of user selected universities.
+     * @throws AddParseException If inputs are invalid.
+     */
     private void handleUniFlagArgs(String arguments, UniversityList universityMasterList,
                                    UniversityList universitySelectedList) throws AddParseException {
-        boolean textMatches = isTextMatches(arguments);
         String uniName;
-        if (textMatches) {
+        if (ParseCondition.isText(arguments)) {
             uniName = arguments;
             // Check if university exists
-            if (!universityMasterList.searchUniversity(uniName)) {
+            if (!ParseCondition.isValidUniversity(universityMasterList, uniName)) {
                 logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-                throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
+                throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTAVAILABLE, 1, false);
             }
             university = new University(uniName, new ArrayList<>(), universityMasterList);
-        } else {
-            try {
-                uniIndex = Integer.parseInt(arguments);
-            } catch (NumberFormatException e) {
-                logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-                throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
-            }
+        } else if (ParseCondition.isNumeric(arguments)) {
+            uniIndex = Integer.parseInt(arguments);
             // Check if university exists
-            if (uniIndex > universityMasterList.getSize() || uniIndex <= 0) {
+            if (ParseCondition.isIndexOutOfBounds(uniIndex, universityMasterList)) {
                 logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-                throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
+                throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNIINDEXNOTAVAILABLE, 1, false);
             }
             uniName = universityMasterList.get(uniIndex - 1).getName();
             university = new University(uniName, new ArrayList<>(), uniIndex);
+        } else {
+            // in the case where input is both not text only and numbers only
+            logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNIINVALID, 1, false);
         }
 
         // Check if university has been added already
-        if (universitySelectedList.searchUniversity(uniName)) {
+        if (ParseCondition.isDuplicateUniversity(universitySelectedList, uniName)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_DUPLICATEUNI, 1);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNIDUPLICATE, 1, false);
         }
     }
 
+    /**
+     * Handle the arguments for /mod flag.
+     *
+     * @param arguments The arguments for /mod flag.
+     * @param moduleMasterList The master list of all available modules.
+     * @param moduleSelectedList The list of user selected modules.
+     * @throws AddParseException If inputs are invalid.
+     */
     private void handleModFlagArgs(String arguments, ModuleList moduleMasterList,
                                    ModuleList moduleSelectedList) throws AddParseException {
-        boolean textMatches = isTextMatches(arguments);
-        if (textMatches) {
+        if (ParseCondition.isText(arguments)) {
             module = moduleMasterList.getModule(arguments.toUpperCase());
             // Check if module exists
-            if (module == null) {
+            if (ParseCondition.isNullModule(module)) {
                 logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-                throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
+                throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTAVAILABLE, 1, false);
             }
-        } else {
-            int modIndex;
-            try {
-                modIndex = Integer.parseInt(arguments);
-            } catch (NumberFormatException e) {
-                logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-                throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
-            }
+        } else if (ParseCondition.isNumeric(arguments)) {
+            int modIndex = Integer.parseInt(arguments);
             // Check if module exists
-            if (modIndex > moduleMasterList.getSize() || modIndex <= 0) {
+            if (ParseCondition.isIndexOutOfBounds(modIndex, moduleMasterList)) {
                 logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-                throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
+                throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODINDEXNOTAVAILABLE, 1, false);
             }
             module = moduleMasterList.get(modIndex - 1);
+        } else {
+            logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODINVALID, 1, false);
         }
 
         // Check if module has been added already
-        if (moduleSelectedList.isModuleExist(module.getModuleCode())) {
+        if (ParseCondition.isDuplicateModule(moduleSelectedList, module)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_DUPLICATEMOD, 1);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODDUPLICATE, 1, false);
         }
     }
 
+    /**
+     * Handle arguments for /map flag.
+     * @param arguments The arguments for /map flag.
+     * @param universityMasterList The master list of all available universities.
+     * @param universitySelectedList The list of user selected universities.
+     * @param moduleSelectedList The list of user selected modules.    * @param universityMasterList
+     * @throws AddParseException If inputs are invalid.
+     */
     private void handleMapFlagArgs(String arguments, UniversityList universitySelectedList,
                                    ModuleList moduleSelectedList,
                                    UniversityList universityMasterList) throws AddParseException {
         // Separate arguments
         String[] argumentSubstrings = arguments.trim().split(" ", 2);
-        University currentUni = new University();
-        boolean validUni = false;
-        if (argumentSubstrings.length < 2) {
+        if (ParseCondition.isMissingArguments(argumentSubstrings)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1, true);
         }
-        try {
-            uniIndex = Integer.parseInt(argumentSubstrings[0].trim());
-            mapIndex = Integer.parseInt(argumentSubstrings[1].trim());
-        } catch (NumberFormatException e) {
+        String firstParam = argumentSubstrings[0].trim();
+        String secondParam = argumentSubstrings[1].trim();
+        if (ParseCondition.isNumeric(firstParam) && ParseCondition.isNumeric(secondParam)) {
+            uniIndex = Integer.parseInt(firstParam);
+            mapIndex = Integer.parseInt(secondParam);
+        } else {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_MAPPINGNOTFOUND, 1);
+            String error = (ParseCondition.isNumeric(firstParam)) ? Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING
+                    : Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND;
+            throw new AddParseException(error, 1, false);
         }
-        for (University uni : universitySelectedList.getList()) {
-            if (uni.getIndex() == uniIndex) {
-                validUni = true;
-                //university object from selected list
-                currentUni = uni;
-                break;
-            }
-        }
-        if (!validUni) {
+        if (!ParseCondition.isInSelectedUniList(uniIndex, universitySelectedList, universityMasterList)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDUNI, 1);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTSELECTED, 1, false);
         }
-        if (universityMasterList.get(uniIndex - 1).getSelectedMappingListSize(moduleSelectedList) == 0) {
+        if (ParseCondition.isMissingAvailableMapping(uniIndex, universityMasterList, moduleSelectedList)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1, false);
         }
-        if (universityMasterList.get(uniIndex - 1).getSelectedMappingListSize(moduleSelectedList)
-                < mapIndex || mapIndex < 1) {
+        if (ParseCondition.isIndexOutOfBounds(uniIndex, mapIndex, universityMasterList, moduleSelectedList)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING, 1);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING, 1, false);
         }
-        if (currentUni.isExistMapping(universityMasterList.get(uniIndex - 1).getSelectedMappings(moduleSelectedList)
-                .get(mapIndex - 1))) {
+        University currentUni = ParseCondition.getSelectedUniObject(uniIndex, universitySelectedList,
+                universityMasterList);
+        if (ParseCondition.isDuplicateMapping(currentUni, uniIndex, mapIndex, universityMasterList,
+                                              moduleSelectedList)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
-            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_DUPLICATEMAP, 1);
+            throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_DUPLICATEMAP, 1, false);
         }
     }
 
-    private boolean isTextMatches(String arguments) {
-        String regex = ".*[a-zA-Z].*";  // regex to check if string contains any letters
-        Pattern pattern = Pattern.compile(regex);  // compiles the regex
-        Matcher matcherText = pattern.matcher(arguments);
-        return matcherText.matches();
-    }
-
-    public boolean isUniversityExist(String uniName, UniversityList universityMasterList) {
-        return universityMasterList.searchUniversity(uniName);
-    }
-
-    public Module searchForModule(String moduleCode, ModuleList moduleMasterList) {
-        return moduleMasterList.getModule(moduleCode);
-    }
 }

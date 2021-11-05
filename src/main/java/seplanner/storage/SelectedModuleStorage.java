@@ -14,11 +14,22 @@ import java.util.logging.Logger;
 
 import static java.lang.Double.parseDouble;
 
+//@@author madhanse
+/**
+ * Hands the storage for user's selected module list.
+ */
 public class SelectedModuleStorage extends UserStorage {
     private static Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
 
     private static final String FILE_PATH = "data/selectedModules.txt";
 
+    private static Boolean isModuleValid = true;
+
+    /**
+     * Writes the user's selected module list into the file.
+     * @param moduleList User's selected module list.
+     * @throws IOException If there is a problem in accessing the file.
+     */
     public void updateFile(ModuleList moduleList) throws IOException {
         FileWriter fw = new FileWriter(FILE_PATH);
         for (int i = 0; i < moduleList.getSize(); i++) {
@@ -29,7 +40,15 @@ public class SelectedModuleStorage extends UserStorage {
         logger.log(Level.INFO, "File writing operation completed");
     }
 
-    public ModuleList readFile(ModuleList moduleMasterList) throws IOException {
+    /**
+     * Reads the file storing the user's selected module list and adds them into.
+     * the array list.
+     * @param moduleMasterList Module Master List.
+     * @return Array List storing the user's selected modules.
+     * @throws IOException If there is a problem accessing the file.
+     */
+    public ModuleList readFile(ModuleList moduleMasterList)
+            throws IOException {
         File file = loadFile(FILE_PATH);
         logger.log(Level.INFO, "File is either created or opened");
         Scanner scanner = new Scanner(file);
@@ -40,16 +59,24 @@ public class SelectedModuleStorage extends UserStorage {
         }
         updateFile(moduleList);
         logger.log(Level.INFO, "Modules stored in the file are successfully loaded");
+        if (!isModuleValid) {
+            System.out.println(UiStorage.getInvalidModuleMessage());
+        }
         return moduleList;
     }
 
+    /**
+     * Adds the module into the module list if it exists in the master list.
+     * @param moduleList User's selected module list
+     * @param line Line read by the Scanner
+     * @param moduleMasterList Module Master List
+     */
     private void updateList(ModuleList moduleList, String line,
                             ModuleList moduleMasterList) {
         String[] attributes = line.split(" # ");
         if (attributes.length != 3) {
             logger.log(Level.SEVERE, "Invalid module found in the file.");
-            UiStorage.printInvalidModuleMessage();
-            logger.log(Level.SEVERE, "Deleted the invalid module.");
+            isModuleValid = false;
             return;
         }
         Module newModule = new Module(attributes[0], attributes[1],
@@ -60,7 +87,7 @@ public class SelectedModuleStorage extends UserStorage {
             moduleList.addModule(newModule);
         } else {
             logger.log(Level.SEVERE, "Invalid module found in the file.");
-            UiStorage.printInvalidModuleMessage();
+            isModuleValid = false;
         }
     }
 }

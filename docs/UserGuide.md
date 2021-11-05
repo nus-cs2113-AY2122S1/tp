@@ -3,15 +3,17 @@ layout: page
 title: User Guide
 ---
 
-## Introduction
+## Purpose of this User Guide 
 
-SEPlanner is a lightweight desktop application for Computer Engineering undergraduates to plan for the Student
-Exchange Programme, optimised for use via Command Line Interface (CLI).  
+This User Guide is an introduction to the features, commands and tips of SEPlanner. If you are first time user, 
+or you simply wish to explore SEPlanner to its fullest potential, this is the page for you. Use the [Content Page](#Content-Page) 
+to easily access the different sections of this guide, and we hope you have a pleasant experience.
 
 ## Content Page
-
+* [Introduction](#Introduction)
+* [Program overview](#program-overview)
 * [Quick Start](#quick-start)  
-* [Program run through](#program-run-through)  
+* [How to use this guide](#How-to-use-this-guide)
 * [Features](#features)  
   * [Viewing all available universities](#viewing-all-available-universities)
   * [Viewing all available modules](#viewing-all-available-modules)
@@ -19,7 +21,8 @@ Exchange Programme, optimised for use via Command Line Interface (CLI).
   * [Adding a NUS module](#adding-a-nus-module)
   * [Viewing all selected universities](#viewing-all-selected-universities)
   * [Viewing all selected modules](#viewing-all-selected-modules)
-  * [Searching for available module mappings](#searching-for-available-module-mappings)
+  * [Searching for available module mappings for a specific university](#searching-for-available-module-mappings-for-a-specific-university)
+  * [Searching for available module mappings for all selected universities](#searching-for-available-module-mappings-for-all-selected-universities)
   * [Adding a module mapping](#adding-a-module-mapping)
   * [Finding a specific university](#finding-a-specific-university)
   * [Finding a specific module by module name](#finding-a-specific-module-by-module-name)
@@ -27,9 +30,25 @@ Exchange Programme, optimised for use via Command Line Interface (CLI).
   * [Removing a selected university](#removing-a-selected-university)
   * [Removing a selected NUS module](#removing-a-selected-nus-module)
   * [Removing a selected module mapping](#removing-a-selected-module-mapping)
+  * [Storage](#storage)
+  * [Logs](#Logs)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 * [Glossary](#glossary)
+
+## Introduction
+
+SEPlanner is a lightweight **desktop application** for Computer Engineering undergraduates from the National University of Singapore
+to plan for their **Student Exchange Program**, optimised for use via **Command Line Interface** (CLI). If you are familiar with command line,
+SEPlanner can streamline your planning process when compared to other Graphical User Interface (GUI) apps.
+
+## Program overview
+
+This SEPlanner allows the user to search for pre-approved module mappings through our platform. To do so, users can follow the following steps:
+1. Add partner universities the user is interested in.
+2. Add potential NUS modules that the user wants to add.
+3. Search for potential mapping for a particular selected university.
+4. Select a mapping and add the mapping.
 
 ## Quick Start
 
@@ -82,17 +101,9 @@ If the visual that appears does not look like this, you might want maximize your
 Don't worry, the features of SEPlanner still work regardless of window size, but doing so allows you to enjoy the beautiful ASCII art!
 </div>
 
-## Program run through
-
-This SEPlanner allows the user to search for pre-approved module mappings through our platform. To do so, users can follow the following steps:
-  1. Add partner universities the user is interested in.
-  2. Add potential NUS modules that the user wants to add.
-  3. Search for potential mapping for a particular selected university.
-  4. Select a mapping and add the mapping.
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Information about this guide:**<br>
+## How to use this guide
+This user guide provides useful tools to help the reader acclimatise to SEPlanner. 
+Here is a list of the different types of text formatting and what they mean. 
 
 <div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
 Tips give helpful information to make your experience better.
@@ -106,7 +117,10 @@ Warnings caution you about certain actions that might be dangerous.
 Notes are important pieces of information. 
 </div>
 
-</div>
+```
+Code blocks contain either user inputs or program outputs.  
+```
+
 
 ## Features
 
@@ -159,7 +173,7 @@ Here are the modules in the list:
 
 Add a partner university the user is interested into the user selected university list.
 
-#### Format: `add /uni <UNIVERSITY_INDEX>` `add /uni <UNIVERSITY_NAME`
+#### Format: `add /uni <UNIVERSITY_INDEX>` `add /uni <UNIVERSITY_NAME>`
 
 <div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
 This command accepts either the `<UNIVERSITY_INDEX>` or `<UNIVERSITY_NAME>` as arguments. 
@@ -242,7 +256,7 @@ Here are the modules in the list:
 [77]  CS1010   : Programming Methodology                 4.0   
 ```
 
-### Searching for available module mappings:
+### Searching for available module mappings for a specific university:
 
 Displays all available module mappings for a specific university that matches the list of selected modules.
 
@@ -266,6 +280,35 @@ Potential mappings for Boston University [4]  :
 The output of this command might differ from the example given, based on the modules added into the selected module 
 list. For instance, the above output is executed with the following modules in the selected module list: CS2030, CS2040,
  BT3102, BT4222. 
+</div>
+
+### Searching for available module mappings for all selected universities:  
+
+Displays all available module mappings for all the universities in the selected university list.
+
+#### Format: `searchmap all`
+
+* Example 1
+  Input: `searchmap all`
+  Expected Output: 
+```
+Potential mappings for Aarhus School of Business [1]  :
+Potential mappings for Boston University [4]  :
+1 | CS3244 - ENG EC 414 : Introduction to Machine Learning : 4.0
+2 | CS3243 - MET CS 664 : Artificial Intelligence : 4.0
+Potential mappings for ETH Zurich [17] :
+1 | CS3244 - 252-0220-00L : Learning and Intelligent Systems : 4.0
+2 | CS3244 - 227-0105-00L : Introduction to Estimation and Machine Learning : 4.0
+Potential mappings for Korea Advanced Inst of Sci & Tech [24] :
+Potential mappings for University of California [59] :
+```
+
+<div markdown="span" class="alert alert-primary"> :information_source: **Note:**
+Similar to the example for the previous command, the output of this command might also differ from the example given 
+based on the modules and universities in the selected list. For instance, the output shown in this example is based on
+the same selected modules as the example in the previous command, with the following universities in the selected list:
+arhus School of Business, Boston University, ETH Zurich, Korea Advanced Inst of Sci & Tech, University of California.
+</div>
 
 ### Adding a module mapping
 
@@ -437,6 +480,30 @@ This module mapping is removed:
 Removing a module does not automatically remove all module mappings associated with it.
 </div>
 
+### Storage
+
+Your selected module list and selected university list are stored in the text files, `selectedModules.txt` and 
+`selectedUniveristies.txt` respectively.
+
+<p align = "center">
+<img src="images/Storage_UG.png" />
+</p>
+
+Whenever your selected module list and selected university list gets updated, the data stored in the files will get
+updated immediately.
+
+<div markdown="span" class="alert alert-warning"> :exclamation: **Caution:**
+Do not edit the data stored in the text file, as the storage feature removes the invalid data stored in the files.
+</div>
+
+### Logs
+
+In your working directory, you might notice the `log` directory. The log directory contains files that track the status 
+and records events that occur while SEPlanner is in use. 
+
+The logging information is used for identification and tracking of bugs for developers, as we continue to improve SEPlanner
+for you.
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?  
@@ -450,6 +517,9 @@ Do not delete the `/data` directory or any of its files as this will cause you t
 **Q**: How do I save my selected universities and modules?  
 **A**: All your universities, modules and module mappings are automatically saved at 
 each command and will be auto-loaded on program start. 
+
+**Q**: How do I remove all my universities and modules?   
+**A**: You could remove them using the [remove](#removing-a-selected-university) command, or delete the `/data` directory.
 
 ## Command Summary
 
@@ -466,6 +536,6 @@ Command | Format | Purpose
 
 1. `UNI_INDEX` - The unique identifier corresponding to a particular university.
 2. `MOD_INDEX` - The unique identifier corresponding to a particular module.
-3. `MAPPING_INDEX` - The identifier corresponding to a particular module mapping withing a university. Note: this value changes accordingly with the module selected list.
-4. `university selected list` - The list of universities selected by you.
-5. `module selected list` - The list of modules selected by you.
+3. `MAPPING_INDEX` - The identifier corresponding to a particular module mapping withing a university. Note: this value changes accordingly with the selected module list.
+4. `selected university list` - The list of universities and its respective mappings selected by you.
+5. `selected module list` - The list of modules selected by you.

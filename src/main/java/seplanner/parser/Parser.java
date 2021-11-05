@@ -10,6 +10,11 @@ import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+// @@author leowyy99
+
+/**
+ * Main parser class that handles the command word.
+ */
 public class Parser {
 
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
@@ -18,6 +23,14 @@ public class Parser {
     protected ModuleList moduleSelectedList;
     protected UniversityList universitySelectedList;
 
+    /**
+     * Constructor for Parser.
+     *
+     * @param universityMasterList The master list of all available universities.
+     * @param moduleMasterList The master list of all available modules.
+     * @param universitySelectedList The list of user selected universities.
+     * @param moduleSelectedList The list of user selected modules.
+     */
     public Parser(UniversityList universityMasterList, ModuleList moduleMasterList,
                   UniversityList universitySelectedList, ModuleList moduleSelectedList) {
         this.universityMasterList = universityMasterList;
@@ -26,6 +39,14 @@ public class Parser {
         this.universitySelectedList = universitySelectedList;
     }
 
+    /**
+     * Handle the command word and extract arguments.
+     *
+     * @param userInput The raw input given by the user.
+     * @return The respective parser for the respective commands.
+     * @throws ParseException If inputs are invalid.
+     * @throws IOException If IO exceptions are present.
+     */
     public Command parseCommand(String userInput) throws ParseException, IOException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {

@@ -5,7 +5,18 @@ import seplanner.modules.Module;
 import seplanner.modules.ModuleList;
 import seplanner.ui.UiModule;
 
+//@@author Jiale-Sun
+/**
+ * Command to list modules in the master module list or the selected module list.
+*/
 public class ListModCommand extends Command {
+
+    /**
+     * print all modules in the master module list or the selected module list.
+     *
+     * @param moduleList list to be displayed, which is the master module list or the selected module list.
+     * @param type type of input, which is either "master" or "selected".
+    */
     public ListModCommand(ModuleList moduleList, ListType type) {
         if (moduleList.getSize() == 0) {
             assert moduleList.getSize() == 0;
