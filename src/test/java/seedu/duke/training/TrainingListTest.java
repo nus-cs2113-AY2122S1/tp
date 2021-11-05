@@ -16,7 +16,7 @@ import seedu.duke.command.DeleteTraining;
 /**
  * Test cases for functionalities related to TrainingList. Namely:
  * AddTraining, DeleteTraining, FindTraining, EditTraining
- *
+ * 
  * To Test:
  * Add 1 training - Should Pass
  * Add 1 training with missing fields - Should Fail
