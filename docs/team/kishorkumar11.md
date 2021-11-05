@@ -58,10 +58,7 @@ Given below are my contributions to the project.
 - **Documentation**:
     - User Guide:
         - Added expected outcomes for all the features.
-        - Added documentation for `recommend` feature.
-        - Added documentation for `edit` feature.
-        - Added documentation for `clear` feature.
-        - Contributed to the command summary.
+        - Added documentation for `recommend`, `edit` and `clear` feature.
         - Added introduction and purpose.
         - Enhanced display of warnings and notes.
     - Developer's Guide:
