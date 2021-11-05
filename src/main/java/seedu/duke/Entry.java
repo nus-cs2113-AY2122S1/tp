@@ -61,7 +61,7 @@ public class Entry {
                 Parser.askToListAll(attendanceList);
                 break;
             case ADD_MEMBER_KEYWORD:
-                Member member = Parser.getMemberDetails(entry, 'A');
+                Member member = Parser.getMemberDetails(entry, keyword);
                 new AddMember(members, member);
                 break;
             case ADD_TRAINING_KEYWORD:
@@ -116,7 +116,7 @@ public class Entry {
                     Ui.printValidNumberNeeded();
                     break;
                 }
-                Member newMemberDetail = Parser.getMemberDetails(entry, 'E');
+                Member newMemberDetail = Parser.getMemberDetails(entry, keyword);
                 new EditMember(members, memberIndex, newMemberDetail);
                 break;
             case NO_KEYWORD:

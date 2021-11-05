@@ -21,7 +21,7 @@ public class FindMember {
             MemberList membersThatMatchFind = members.findMember(name);
             Ui.printMatchingMemberList(membersThatMatchFind, name);
         } catch (InvalidFindMemberException e) {
-            System.out.println(e.getMessage());
+            Ui.printFindMemberErrorMessage(e.getMessage());
         }
     }
 
