@@ -1,3 +1,5 @@
+//@@author poppolette
+
 package seedu.duke.command;
 
 import static seedu.duke.storage.TrainingStorage.writeTrainingFile;
@@ -14,7 +16,7 @@ import seedu.duke.Ui;
 public class AddTraining {
 
     String invalidTrainingDetailsErrorMessage = "Invalid training details provided. Please check and ensure all "
-            + "fields are filled.";
+            + "fields are valid.\nSYNTAX: add /t /n <NAME> /a <TIME> /v <VENUE>";
     String duplicateTrainingNameErrorMessage = "Training name already exists in the list. Please input a different "
             + "training name.";
 

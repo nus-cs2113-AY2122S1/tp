@@ -1,3 +1,5 @@
+//@@author poppolette
+
 package seedu.duke.training;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

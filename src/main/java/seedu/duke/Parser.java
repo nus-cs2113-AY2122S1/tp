@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import seedu.duke.attendance.Attendance;
 import seedu.duke.attendance.AttendanceList;
+import seedu.duke.exception.InvalidCommandException;
 import seedu.duke.member.Member;
 import seedu.duke.member.exception.InvalidMemberException;
 import seedu.duke.training.TrainingSchedule;
@@ -159,7 +160,10 @@ public class Parser {
     }
 
     /**
-     * Returns the description of the task only, without the date or the keyword.
+     * Returns the description of the task only, without the date or the keyword. If any fields is empty "", an
+     * exception will be thrown at AddTraining or EditTraining. Users should only key in one of each field, /n /a /v, in
+     * the input. Additional inputs to the same field will set the field to "", causing an exception to be thrown at
+     * AddTraining or EditTraining.
      *
      * @param entry user raw data input.
      * @return description of task.
@@ -167,6 +171,9 @@ public class Parser {
     public static TrainingSchedule getTrainingDescription(String entry) {
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         Matcher matcher = pattern.matcher(entry);
+        boolean matchedName = false;
+        boolean matchedTime = false;
+        boolean matchedVenue = false;
 
         String[] words = entry.trim().split(regex);
         int parameterSize = words.length;
@@ -183,13 +190,28 @@ public class Parser {
             }
             switch (matcher.group()) {
             case "/n":
-                name = words[wordIndex].trim().toUpperCase();
+                if (!matchedName) {
+                    name = words[wordIndex].trim().toUpperCase();
+                    matchedName = true;
+                } else {
+                    name = "";
+                }
                 break;
             case "/a":
-                time = words[wordIndex].trim().toUpperCase();
+                if (!matchedTime) {
+                    time = words[wordIndex].trim().toUpperCase();
+                    matchedTime = true;
+                } else {
+                    time = "";
+                }
                 break;
             case "/v":
-                venue = words[wordIndex].trim().toUpperCase(Locale.ROOT);
+                if (!matchedVenue) {
+                    venue = words[wordIndex].trim().toUpperCase();
+                    matchedVenue = true;
+                } else {
+                    venue = "";
+                }
                 break;
             default:
                 break;
@@ -204,16 +226,15 @@ public class Parser {
     /**
      * Creates Member class by input given by user.
      *
-     * @param entry user raw data input.
-     * @param type  provide 'A' if adding member and provide 'E' if editing member
+     * @param entry   user raw data input.
+     * @param keyword provide keyword for command
      * @return Member according to user input.
      */
-    public static Member getMemberDetails(String entry, char type) {
+    public static Member getMemberDetails(String entry, Keyword keyword) {
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         Matcher matcher = pattern.matcher(entry);
 
         String[] words = entry.trim().split(regex);
-        String lastParameter = "";
         String name = "";
         String studentNumber = "";
         String gender = "";
@@ -223,48 +244,53 @@ public class Parser {
         int wordIndex = 1;
         try {
             while (matcher.find()) {
-                lastParameter = matcher.group();
                 switch (matcher.group()) {
                 case "/n":
                     name = words[wordIndex].trim().toUpperCase(Locale.ROOT);
                     if (name.equals("")) {
-                        throw new InvalidMemberException("Please do not give empty name");
+                        throw new InvalidCommandException("Please do not give empty name.");
                     }
                     break;
                 case "/s":
                     studentNumber = words[wordIndex].trim().toUpperCase(Locale.ROOT);
                     if (studentNumber.equals("")) {
-                        throw new InvalidMemberException("Please do not give empty student number");
+                        throw new InvalidCommandException("Please do not give empty student number.");
                     }
                     break;
                 case "/g":
                     gender = words[wordIndex].trim().toUpperCase(Locale.ROOT);
                     if (gender.equals("")) {
-                        throw new InvalidMemberException("Please do not give empty gender");
+                        throw new InvalidCommandException("Please do not give empty gender.");
                     }
                     break;
                 case "/p":
                     phoneNumber = words[wordIndex].trim();
                     if (phoneNumber.equals("")) {
-                        throw new InvalidMemberException("Please do not give empty phone number");
+                        throw new InvalidCommandException("Please do not give empty phone number.");
                     }
                     break;
                 case "/m":
                     break;
                 default:
-                    throw new InvalidMemberException("Either there is no parameter given or wrong parameter is given");
+                    throw new InvalidCommandException("Wrong parameter is given.");
                 }
                 wordIndex++;
             }
-            if (type == 'A') {
+            boolean noParameterProvided = wordIndex <= 2;
+            if (noParameterProvided) {
+                throw new InvalidCommandException("No parameter is given.");
+            }
+            if (keyword.equals(Keyword.ADD_MEMBER_KEYWORD)) {
                 memberdetails = new Member(name, studentNumber, gender, phoneNumber, true);
-            } else if (type == 'E') {
+            } else if (keyword.equals(Keyword.EDIT_MEMBER_KEYWORD)) {
                 memberdetails = new Member(name, studentNumber, gender, phoneNumber, false);
             }
+        } catch (InvalidCommandException e) {
+            Ui.printCommandErrorMessage(e.getMessage(), keyword);
         } catch (InvalidMemberException e) {
-            System.out.println(e.getMessage());
+            Ui.printCreateMemberErrorMessage(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Do not give empty value for the syntax: " + lastParameter);
+            Ui.printCommandErrorMessage("Nothing is given after last parameter.", keyword);
         }
         return memberdetails;
     }
@@ -353,13 +379,16 @@ public class Parser {
      * @return int Index that is in entry.
      */
     public static Integer getIndex(String entry) {
-        String[] words = entry.trim().split(regex);
-        int indexNumber = Integer.parseInt(words[1].trim());
-        assert indexNumber >= 1 : "indexNumber should be greater than 1.";
-        return indexNumber;
+        try {
+            String[] words = entry.trim().split(regex);
+            int indexNumber = Integer.parseInt(words[1].trim());
+            assert indexNumber >= 1 : "indexNumber should be greater than 1.";
+            return indexNumber;
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
     }
-
-    //@@author Teckwhye
+    //@@author
 
     /**
      * Returns parameter as given by user.
@@ -380,7 +409,6 @@ public class Parser {
             return null;
         }
     }
-    //@@author
 
     /**
      * Function finds tasks with descriptions matching the user's entry and adds them to a new ArrayList. If no matching

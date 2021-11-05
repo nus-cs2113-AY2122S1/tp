@@ -57,11 +57,11 @@ public class EditMember {
             writeMemberFile(dukeMemberFile, members);
 
         } catch (AssertionError e) {
-            System.out.println("Index to edit must be an integer >= 1");
+            Ui.printEditMemberErrorMessage("Index to edit must be an integer >= 1");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Unfortunately, the index you entered is invalid.");
+            Ui.printEditMemberErrorMessage("Unfortunately, the index you entered is invalid.");
         } catch (InvalidMemberException e) {
-            System.out.println(e.getMessage());
+            Ui.printEditMemberErrorMessage(e.getMessage());
         }
     }
 }
