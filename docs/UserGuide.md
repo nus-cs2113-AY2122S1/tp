@@ -129,15 +129,13 @@ Adds a student to a particular class.
 
 Format: `add_student c/<CLASS_ID> i/<STUDENT_ID> n/<STUDENT_NAME>`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F11).
+  * Case-insensitive
 * `STUDENT_ID` refers to the ID of the student (e.g. A0217978J).
 * `STUDENT_NAME` refers to the name of the student (e.g. Jon Lim).
 
 Examples:
 * `add_student c/CS2113T-F11 i/a0212345x n/Jon Lim`
 * `add_student c/CS2101-C04 n/Jonny Lims i/a1234567i`
-
-> 💡 **Note:**<br />
-> `STUDENT_ID` will be converted to uppercase.
 
 <br>
 
@@ -153,9 +151,6 @@ Format: `edit_student c/<CLASS_ID> s/<STUDENT_INDEX> i/<STUDENT_ID> n/<STUDENT_N
 Examples:
 * `edit_student c/CS2113T-F11 s/1 i/a03452345x n/Jon Lim`
 * `edit_student c/CS2101-D03 s/5 n/Jonny Lims i/a120067i`
-
-> 💡 **Note:**<br />
-> `STUDENT_ID` will be converted to uppercase.
 
 <br>
 
@@ -428,12 +423,12 @@ Format: `set_comment c/<CLASS_ID> s/<STUDENT_INDEX> t/<COMMENT>`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 * `COMMENT` refers to the comment to be set.
-> 💡 **Note:**<br />
-> The new comment will overwrite any previous comment set
 
 Examples:
 * `set_comment c/CS2113T-F12 s/1 t/Doing well in class`
 * `set_comment c/CS2113T-F12 s/1 t/Needs help understanding java`
+> 💡 **Note:**<br />
+> The new comment will overwrite any previous comment set
 
 <br>
 
