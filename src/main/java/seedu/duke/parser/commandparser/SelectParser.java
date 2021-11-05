@@ -6,8 +6,11 @@ import seedu.duke.commands.SelectCommand;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.parserexceptions.InvalidIndexException;
 import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
+import seedu.duke.items.characteristics.Member;
 import seedu.duke.parser.ItemType;
 import seedu.duke.parser.Parser;
+
+import java.util.ArrayList;
 
 import static seedu.duke.Duke.eventCatalog;
 import static seedu.duke.parser.ItemType.EVENT;
@@ -18,6 +21,7 @@ public abstract class SelectParser extends Parser {
     private static int eventIndexToSelect;
     private static int taskIndexToSelect;
     private static int lastEventIndex;
+    private static String memberNameToSelect;
 
     public static Command getSelectCommand(String[] command, String commandDetails) {
 
@@ -31,7 +35,7 @@ public abstract class SelectParser extends Parser {
                 parseTask(command);
                 return new SelectCommand(TASK, lastEventIndex, taskIndexToSelect);
             case MEMBER:
-                return null;
+                parseMember(command);
             default:
                 throw new InvalidItemTypeException();
             }
@@ -40,17 +44,13 @@ public abstract class SelectParser extends Parser {
         } catch (NumberFormatException e) {
             System.out.println("Please enter a number for the item index!");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("No such item index exists!");
+            System.out.println("Please select an index!");
         }
         return null;
     }
 
     private static void parseEvent(String[] command) throws InvalidIndexException {
         int index = getIndexFromCommand(command[2]);
-        if (!isValidEventIndex(index)) {
-            throw new InvalidIndexException("Invalid index range. Choose a number between 1 and "
-                    + eventCatalog.size() + ".");
-        }
         updateIndexOfLastSelectedEvent(index);
         eventIndexToSelect = index;
     }
@@ -68,12 +68,28 @@ public abstract class SelectParser extends Parser {
         taskIndexToSelect = index;
     }
 
-    private void parseMember(String[] command) {
-        // find member by string, return name and assigned tasks
+    private static void parseMember(String[] command) throws DukeException {
+        String memberName = getMemberNameFromCommand(command);
+        ArrayList<Member> foundMembers = getMembersFromQuery(memberName);
+        int size = foundMembers.size();
+        if (size == 0) {
+            System.out.println("No matches found!");
+        } else if (size == 1) {
+            printFoundMembersWithTasks(foundMembers);
+        } else {
+            printFoundMembersWithOnlyNames(foundMembers);
+            System.out.println("Select a member again with the exact name!");
+        }
+        memberNameToSelect = memberName;
     }
 
-    private static int getIndexFromCommand(String indexAsString) {
-        return Integer.parseInt(indexAsString.trim()) - 1;
+    private static int getIndexFromCommand(String indexAsString) throws InvalidIndexException {
+        int index = Integer.parseInt(indexAsString.trim()) - 1;
+        if (!isValidEventIndex(index)) {
+            throw new InvalidIndexException("Invalid index range. Choose a number between 1 and "
+                    + eventCatalog.size() + ".");
+        }
+        return index;
     }
 
     private static boolean isValidEventIndex(int eventIndex) {
@@ -82,5 +98,41 @@ public abstract class SelectParser extends Parser {
 
     private static boolean isValidTaskIndex(int eventIndex, int taskIndex) {
         return taskIndex >= 0 && taskIndex < Duke.eventCatalog.get(eventIndex).getTaskList().size();
+    }
+
+    private static String getMemberNameFromCommand(String[] command) throws DukeException {
+        if (command.length < 3) {
+            throw new DukeException("Please enter a name!");
+        }
+        StringBuilder memberNameQuery = new StringBuilder("");
+        for (int i = 2; i <= command.length; i++) {
+            memberNameQuery.append(command[i].trim());
+            memberNameQuery.append(" ");
+        }
+        return memberNameQuery.toString().trim();
+    }
+
+    private static ArrayList<Member> getMembersFromQuery(String memberName) {
+        ArrayList<Member> foundMembers = new ArrayList<>();
+        for (int i = 0; i < Duke.memberRoster.size(); i++) {
+            Member member = Duke.memberRoster.get(i);
+            if (member.getName().toLowerCase().contains(memberName.toLowerCase())) {
+                foundMembers.add(member);
+            }
+        }
+        return foundMembers;
+    }
+
+    private static void printFoundMembersWithTasks(ArrayList<Member> matchingMemberNames) {
+        for (Member member : matchingMemberNames) {
+            System.out.println(member.getName());
+            System.out.println(member.getTasks());
+        }
+    }
+
+    private static void printFoundMembersWithOnlyNames(ArrayList<Member> matchingMemberNames) {
+        for (Member member : matchingMemberNames) {
+            System.out.println(member.getName());
+        }
     }
 }
