@@ -5,7 +5,7 @@ import seedu.budgettracker.ui.TextUi;
 public class DeleteBudgetCommand extends DeleteCommand {
 
     public static final String MESSAGE_USAGE = "Delete a budget record.\n"
-            + "Parameters: -b m/MONTH";
+            + "Parameters: -b m/MONTH\n";
 
     private final int month;
 

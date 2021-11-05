@@ -2,21 +2,23 @@ package seedu.budgettracker.logic.commands;
 
 import org.junit.jupiter.api.Test;
 import seedu.budgettracker.data.RecordList;
+import seedu.budgettracker.data.records.Category;
 
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AddLoanTest {
+public class DeleteLoanTest {
+
     @Test
-    void addLoan_commandInput_loanList_sizeOf_1() {
-        String name = "Borrower";
-        double amount = 35.00;
-        LocalDate date = LocalDate.of(2021, 10, 8);
+    void deleteLoan_loanList_sizeOf1() {
+        LocalDate date = LocalDate.now();
         int month = date.getMonthValue();
 
         RecordList currentLoanList = new RecordList(month);
-        currentLoanList.addLoan(name, amount, date);
+        currentLoanList.addLoan("TestLoan1", 08.00, date);
+        currentLoanList.addLoan("TestLoan2", 10.00, date);
+        currentLoanList.deleteLoan(1);
         assertEquals(1, currentLoanList.getLoanListSize());
     }
 }

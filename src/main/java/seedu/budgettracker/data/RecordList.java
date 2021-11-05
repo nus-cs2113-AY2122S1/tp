@@ -55,9 +55,15 @@ public class RecordList {
         return expenditureToAdd;
     }
 
-    public void addLoan(String name, double amount, LocalDate date, boolean isLoadingStorage) {
+    /**
+     * Adds a loan record into the RecordList.
+     *
+     * @param name description of the expenditure
+     * @param amount amount spent
+     * @param date date on which the expenditure took place
+     */
+    public void addLoan(String name, double amount, LocalDate date) {
         loanRecords.add(new Loan(name, amount, date));
-        //assert getLoanListSize() == numberOfRecords;
     }
 
     public void deleteBudget() {
@@ -72,7 +78,6 @@ public class RecordList {
 
     public void deleteLoan(int index) {
         loanRecords.remove(index - 1);
-        //assert getLoanListSize() == numberOfRecords;
     }
 
     public ArrayList<Expenditure> getExpenditureRecords() {

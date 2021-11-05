@@ -1,6 +1,7 @@
 package seedu.budgettracker.logic.commands;
 
 import seedu.budgettracker.data.records.Loan;
+import seedu.budgettracker.ui.TextUi;
 
 import java.time.LocalDate;
 
@@ -22,7 +23,6 @@ public class EditLoanCommand extends EditCommand {
 
     public void execute() {
         Loan targetLoan = allRecordList.editLoan(month, index, amount, name, date);
-        System.out.println("Loan has been successfully edited!");
-        System.out.println("New values: " + targetLoan);
+        TextUi.showLoanEditedMessage(targetLoan);
     }
 }

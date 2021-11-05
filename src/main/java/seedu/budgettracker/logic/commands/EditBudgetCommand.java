@@ -1,6 +1,7 @@
 package seedu.budgettracker.logic.commands;
 
 import seedu.budgettracker.data.records.Budget;
+import seedu.budgettracker.ui.TextUi;
 
 public class EditBudgetCommand extends EditCommand {
     public int month;
@@ -13,7 +14,6 @@ public class EditBudgetCommand extends EditCommand {
 
     public void execute() {
         Budget targetBudget = allRecordList.editBudget(this.month, this.amount);
-        System.out.println("Budget successfully edited!");
-        System.out.println("New budget: " + targetBudget);
+        TextUi.showBudgetEditedMessage(targetBudget);
     }
 }
