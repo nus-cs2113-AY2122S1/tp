@@ -76,7 +76,7 @@ public class TrainingStorage {
             while (memberScanner.hasNextLine()) {
                 String fullMemberDetails = memberScanner.nextLine();
                 String[] memberDetails = fullMemberDetails.split("\\,", 4);
-                trainingName = memberDetails[1];
+                trainingName = memberDetails[0];
                 pendingTrainingName.add(trainingName);
             }
         } catch (FileNotFoundException e) {
