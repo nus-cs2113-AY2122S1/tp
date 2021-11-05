@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static seedu.utility.tools.FinancialCalculator.*;
+
 
 /**
  * A Financial tracker that contains 2 separate list of income and expense entries and a net balance.
@@ -168,16 +170,7 @@ public class FinancialTracker {
         assert totalExpense < TOTAL_EXPENSE_LIMIT;
         return totalExpense;
     }
-
-    private double getTotalExpense(List<Expense> accumulatedExpense) {
-        double totalExpense = 0;
-        for (Expense expense: accumulatedExpense) {
-            totalExpense += expense.getValue();
-        }
-        assert totalExpense < TOTAL_EXPENSE_LIMIT;
-        return totalExpense;
-    }
-
+    
     /**
      * Returns the total income of all incomes in the financial tracker.
      *
@@ -194,15 +187,6 @@ public class FinancialTracker {
         return totalIncome;
     }
 
-    private double getTotalIncome(List<Income> accumulatedIncome) {
-        double totalIncome = 0;
-        for (Income income: accumulatedIncome) {
-            totalIncome += income.getValue();
-        }
-        assert totalIncome < TOTAL_INCOME_LIMIT;
-        return totalIncome;
-    }
-
     /**
      * Returns total expense between two given dates.
      *
@@ -214,16 +198,9 @@ public class FinancialTracker {
         List<Expense> accumulatedExpense = expenses.stream()
                 .filter(DateOperator.entryDateInRange(startDate, endDate))
                 .collect(Collectors.toList());
-        return getTotalExpense(accumulatedExpense);
+        return getTotalExpenseOf(accumulatedExpense);
     }
     
-    private double getMonthlyExpense(int inputMonth, List<Expense> yearlyExpense) {
-        List<Expense> monthlyAccumulatedExpense = yearlyExpense.stream()
-                .filter(DateOperator.sameEntryMonth(inputMonth))
-                .collect(Collectors.toList());
-        return getTotalExpense(monthlyAccumulatedExpense);
-    }
-
     /**
      * Returns an ArrayList of size 12, where each element stores the total expense of that month in the given year.
      *
@@ -237,15 +214,6 @@ public class FinancialTracker {
         return sortExpenseByMonth(yearlyAccumulatedExpense);
     }
 
-    private ArrayList<Double> sortExpenseByMonth(List<Expense> yearlyAccumulatedExpense) {
-        ArrayList<Double> monthlyBreakdown = new ArrayList<>();
-        for (int i = 1; i <= 12; i++) {
-            double expenseForTheMonth = getMonthlyExpense(i, yearlyAccumulatedExpense);
-            monthlyBreakdown.add(expenseForTheMonth);
-        }
-        return monthlyBreakdown;
-    }
-
     /**
      * Returns total income between two given dates.
      *
@@ -257,14 +225,7 @@ public class FinancialTracker {
         List<Income> accumulatedIncome = incomes.stream()
                 .filter(DateOperator.entryDateInRange(startDate, endDate))
                 .collect(Collectors.toList());
-        return getTotalIncome(accumulatedIncome);
-    }
-    
-    private double getMonthlyIncome(int inputMonth, List<Income> yearlyIncome) {
-        List<Income> monthlyAccumulatedIncome = yearlyIncome.stream()
-                .filter(DateOperator.sameEntryMonth(inputMonth))
-                .collect(Collectors.toList());
-        return getTotalIncome(monthlyAccumulatedIncome);
+        return getTotalIncomeOf(accumulatedIncome);
     }
 
     /**
@@ -278,15 +239,6 @@ public class FinancialTracker {
                 .filter(DateOperator.sameEntryYear(inputYear))
                 .collect(Collectors.toList());
         return sortIncomeByMonth(yearlyAccumulatedIncome);
-    }
-
-    private ArrayList<Double> sortIncomeByMonth(List<Income> yearlyAccumulatedIncome) {
-        ArrayList<Double> monthlyBreakdown = new ArrayList<>();
-        for (int i = 1; i <= 12; i++) {
-            double incomeForTheMonth = getMonthlyIncome(i, yearlyAccumulatedIncome);
-            monthlyBreakdown.add(incomeForTheMonth);
-        }
-        return monthlyBreakdown;
     }
 
     /**
