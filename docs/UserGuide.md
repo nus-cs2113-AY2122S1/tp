@@ -246,7 +246,7 @@ Here are the modules in the list:
 [77]  CS1010   : Programming Methodology                 4.0   
 ```
 
-### Searching for available module mappings:
+### Searching for available module mappings for a specific university:
 
 Displays all available module mappings for a specific university that matches the list of selected modules.
 
@@ -270,6 +270,34 @@ Potential mappings for Boston University [4]  :
 The output of this command might differ from the example given, based on the modules added into the selected module 
 list. For instance, the above output is executed with the following modules in the selected module list: CS2030, CS2040,
  BT3102, BT4222. 
+</div>
+
+### Searching for available module mappings for all selected universities:  
+
+Displays all available module mappings for all the universities in the selected university list.
+
+#### Format: `searchmap all`
+
+* Example 1
+  Input: `searchmap all`
+  Expected Output: 
+```
+Potential mappings for Aarhus School of Business [1]  :
+Potential mappings for Boston University [4]  :
+1 | CS3244 - ENG EC 414 : Introduction to Machine Learning : 4.0
+2 | CS3243 - MET CS 664 : Artificial Intelligence : 4.0
+Potential mappings for ETH Zurich [17] :
+1 | CS3244 - 252-0220-00L : Learning and Intelligent Systems : 4.0
+2 | CS3244 - 227-0105-00L : Introduction to Estimation and Machine Learning : 4.0
+Potential mappings for Korea Advanced Inst of Sci & Tech [24] :
+Potential mappings for University of California [59] :
+```
+
+<div markdown="span" class="alert alert-primary"> :information_source: **Note:**
+Similar to the example for the previous command, the output of this command might also differ from the example given 
+based on the modules and universities in the selected list. For instance, the output shown in this example is based on
+the same selected modules as the example in the previous command, with the following universities in the selected list:
+arhus School of Business, Boston University, ETH Zurich, Korea Advanced Inst of Sci & Tech, University of California.
 </div>
 
 ### Adding a module mapping
