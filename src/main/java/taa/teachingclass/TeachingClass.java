@@ -2,7 +2,6 @@ package taa.teachingclass;
 
 //@@author leyondlee
 import taa.ClassChecker;
-import taa.Parser;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
 import taa.student.Student;
@@ -75,10 +74,6 @@ public class TeachingClass implements ClassChecker {
     @Override
     public boolean verify() {
         if (!isValidId(id)) {
-            return false;
-        }
-
-        if (!Parser.isValueValid(id) || !Parser.isValueValid(name)) {
             return false;
         }
 

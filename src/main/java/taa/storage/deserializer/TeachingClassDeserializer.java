@@ -8,6 +8,7 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import taa.Parser;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
 import taa.teachingclass.TeachingClass;
@@ -36,6 +37,10 @@ public class TeachingClassDeserializer extends StorageDeserializer implements Js
 
         JsonElement nameJson = jsonObject.get(MEMBER_NAME);
         String name = nameJson.getAsString();
+
+        if (!Parser.isValueValid(id) || !Parser.isValueValid(name)) {
+            return null;
+        }
 
         TeachingClass teachingClass = new TeachingClass(id, name);
 
