@@ -4,7 +4,6 @@ package seedu.duke.training;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,6 +11,7 @@ import seedu.duke.Parser;
 import seedu.duke.command.EditTraining;
 import seedu.duke.command.AddTraining;
 import seedu.duke.command.DeleteTraining;
+
 
 /**
  * Test cases for functionalities related to TrainingList. Namely:
@@ -65,7 +65,7 @@ public class TrainingListTest {
         trainingToAdd.setTrainingIndex(sizeBeforeAdd + 1);
         new AddTraining(trainingList, trainingToAdd);
         int sizeAfterAdd = trainingList.getTrainingListSize();
-        assertEquals(sizeAfterAdd, sizeBeforeAdd +1);
+        assertEquals(sizeAfterAdd, sizeBeforeAdd + 1);
     }
 
     @Test
@@ -222,4 +222,5 @@ public class TrainingListTest {
         assertEquals(trainingList.getTrainingName(1), "FRIDAY WEEKLY TRAINING 1");
     }
 }
+
 //@@author
