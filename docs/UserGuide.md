@@ -584,8 +584,7 @@ Example 2 (add order without date parameter): `addorder n/panadol q/100`
 Expected Output 2:
 
 ```
-<<<<<<< HEAD
-Order added: panadol
+Order added: PANADOL
 +====+=========+==========+============+=========+
 | ID |  NAME   | QUANTITY |    DATE    | STATUS  | 
 +====+=========+==========+============+=========+
@@ -600,11 +599,6 @@ Expected Output 3:
 Unable to add order as total order quantity exceeds maximum stock quantity of 1000.
 Existing quantity in stock: 30
 Pending order quantity: 250
-=======
-Unable to add order as total order quantity exceeds maximum stock quantity of 1000.
-Existing quantity in stock: 30
-Pending order quantity: 150
->>>>>>> 6ad7fb3cb803be4bcfa2bb908586baddaf77d499
 ```
 
 ### Listing orders: `listorder`
