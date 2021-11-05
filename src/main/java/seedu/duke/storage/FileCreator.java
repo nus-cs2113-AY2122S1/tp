@@ -9,11 +9,11 @@ import seedu.duke.log.Log;
  * <code>FileCreator</code> handles anything to do with file creation.
  */
 public class FileCreator {
-    private static final String LIST_STORAGE_FOLDER = "./data/";
-    private static final String LIST_STORAGE_FILE = "task.txt";
+    private static final String LIST_STORAGE_FOLDER = "data/";
+    private static final String LIST_STORAGE_FILE = "task.dat";
 
     private File taskFile;
-    private static final String IO_EXCEPTION_MESSAGE = "IO Exception oocured while trying to create "
+    private static final String IO_EXCEPTION_MESSAGE = "IO Exception occurred while trying to create "
         + "file for saving tasks: " + LIST_STORAGE_FOLDER + LIST_STORAGE_FILE;
 
     /**
@@ -51,9 +51,9 @@ public class FileCreator {
     }
 
     /**
-     * Returns the name of the {@link #taskFile} created by {@link seedu.duke.storage.FileCreator}.
+     * Returns the absolute file path of the {@link #taskFile} created by {@link seedu.duke.storage.FileCreator}.
      */
     public String getTaskFileName() {
-        return LIST_STORAGE_FOLDER + LIST_STORAGE_FILE;
+        return taskFile.getAbsolutePath();
     }
 }
