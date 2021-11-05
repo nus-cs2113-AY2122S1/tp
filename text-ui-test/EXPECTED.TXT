@@ -63,9 +63,13 @@ index | Food Name                           | Price     | index | Food Name     
 --------------------------------------------------------|----------------------------------------------------
 
 ============================================================================================
+Please make sure there is no inputs after the menu command!
+============================================================================================
 Unknown command. Please try again.
 ============================================================================================
 Your order list is empty!
+============================================================================================
+Please make sure there is no inputs after the list command!
 ============================================================================================
 Unknown command. Please try again.
 ============================================================================================
@@ -151,7 +155,7 @@ SUMMARY: [Total number of People: 2] [Total quantity of food: 12]
 [Total Cost = $14.00] [Total Quantity = 10]
 ============================================================================================
 Please enter a valid order index!
-You can enter "list" to check your order index.
+Enter "list" to check your order index.
 ============================================================================================
 We have updated the order list for: AIM
 	(1) Cheese Prata | Quantity = 2 | Cost = $5.00
@@ -163,16 +167,22 @@ We have updated the order list for: AIM
 [Total Cost = $6.40] [Total Quantity = 3]
 ============================================================================================
 Please enter a valid person's index followed by the order index and order quantity! i.e. edit 1/1 /q 8
+Enter "list" to view person's and order index.
 ============================================================================================
 Please enter a valid person's index followed by the order index and order quantity! i.e. edit 1/1 /q 8
+Enter "list" to view person's and order index.
 ============================================================================================
 Please enter a valid person's index followed by the order index and order quantity! i.e. edit 1/1 /q 8
+Enter "list" to view person's and order index.
 ============================================================================================
 Please enter a valid person's index followed by the order index and order quantity! i.e. edit 1/1 /q 8
+Enter "list" to view person's and order index.
 ============================================================================================
 Please enter a valid person's index followed by the order index and order quantity! i.e. edit 1/1 /q 8
+Enter "list" to view person's and order index.
 ============================================================================================
 Please enter a valid person's index followed by the order index and order quantity! i.e. edit 1/1 /q 8
+Enter "list" to view person's and order index.
 ============================================================================================
 Order 2 from TIM's order has been edited
 	(1) Plain Prata | Quantity = 5 | Cost = $5.50
@@ -238,12 +248,15 @@ Alright, order 1 has been deleted from TIM!
 [Total Cost = $10.40] [Total Quantity = 6]
 ============================================================================================
 Please enter a valid person's index followed by the order index! i.e. delete 1/2
+Enter "list" to view person's and order index.
 ============================================================================================
 Unknown command. Please try again.
 ============================================================================================
 Please enter a valid person's index followed by the order index! i.e. delete 1/2
+Enter "list" to view person's and order index.
 ============================================================================================
 Please enter a valid person's index followed by the order index! i.e. delete 1/2
+Enter "list" to view person's and order index.
 ============================================================================================
 Alright, order 1 has been deleted from TIM!
 	(1) Chili Prata | Quantity = 2 | Cost = $2.80

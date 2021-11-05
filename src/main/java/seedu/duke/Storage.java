@@ -17,6 +17,7 @@ public class Storage {
     private static final java.nio.file.Path FILE_PATH = java.nio.file.Paths.get(CURRENT_DIRECTORY);
     private static final PeopleManager FILE_PEOPLE_MANAGER = new PeopleManager();
     private static final int MAX_FOOD_QUANTITY = 999;
+    private static final int MIN_FOOD_QUANTITY = 0;
     private static final ArrayList<String> LIST_OF_ADD_COMMANDS = new ArrayList<>();
 
     /**
@@ -128,7 +129,7 @@ public class Storage {
         String personName = splitData[0];
         for (int i = 1; i < splitData.length; i++) {
             int quantityToAdd = Integer.parseInt(splitData[i]);
-            if (quantityToAdd > 0 && quantityToAdd <= MAX_FOOD_QUANTITY) {
+            if (quantityToAdd > MIN_FOOD_QUANTITY && quantityToAdd <= MAX_FOOD_QUANTITY) {
                 String loadCommand = "add /n " + personName + " /i " + i + " /q " + quantityToAdd;
                 if (!isValidCommand(loadCommand)) {
                     return false;
@@ -169,7 +170,7 @@ public class Storage {
      */
     private static boolean isInQuantityRange(String quantityInString) {
         int quantityToAdd = Integer.parseInt(quantityInString);
-        if (quantityToAdd < 0 || quantityToAdd > MAX_FOOD_QUANTITY) {
+        if (quantityToAdd < MIN_FOOD_QUANTITY || quantityToAdd > MAX_FOOD_QUANTITY) {
             return false;
         }
         return true;

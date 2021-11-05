@@ -10,6 +10,7 @@
   - [Finding person](#finding-person-find)
   - [List current orders](#list-current-orders-list)
   - [Exiting LOTS](#exiting-lots-bye)
+  - [Storing data](#storing-data)
 - [Command Summary](#command-summary)
 
 ## Introduction
@@ -24,6 +25,8 @@ Target users includes:
 1. Dinners
 2. Order collators (Middleman)
 
+---
+
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
@@ -32,8 +35,11 @@ Target users includes:
 4. Start the `LOTS` program by executing `java -jar CS2113TP.jar` in the terminal.
 5. You can start using the `LOTS` program by inputting commands into the command line. The list of commands and 
 instructions on how to use them can be found in the following section.
+
 > :exclamation: **Caution**: When entering commands, if the command does not include any additional parameters please 
 > ensure that no extra inputs is present after the command. Strictly keep to the command format.
+
+---
 
 ## Features
 
@@ -79,16 +85,8 @@ Adds a specific order for a particular person.
 **Example of usage:**
 1. Start with empty list. 
 2. Adds a new order under person named Jeremy, ordering 1 Plain Prata. 
-   1. `add /n Jeremy /i 1 /q 1`
-3. Adds a new order under person David, ordering 682 Onion Prata. 
-   1. `add /n David /i 24 /q 682`
-4. Adds a new order under Jeremy, who previously ordered, with a new order of 70 Double Egg Prata.
-   1. `add /n jeremy /i 20 /q 70`
-5. Adds an order under person David, ordering 60 Onion Prata.
-   1. `add /n David /i 24 /q 60`
-6. List the orders.
-   1. `list`
-
+   * `add /n Jeremy /i 1 /q 1`
+  
 ![Add1 Screenshot](https://raw.githubusercontent.com/AY2122S1-CS2113-T13-2/tp/master/docs/UG%20Images/UG_AddCommand_Example1.png)
 
 ### Deleting orders: `delete`   
@@ -119,7 +117,7 @@ Edits the quantity of a specific order from a particular person.
 * `QUANTITY` **must be a non-negative integer** 0, 1, 2, 3, …
 
 **Example of usage:** 
-* `list` followed by `edit 1/2 /q 5` edits the order of index '`2`' from the person of index '`1`' and changes the quantity to '`4`'.    
+* `list` followed by `edit 1/2 /q 5` edits the order of index '`2`' from the person of index '`1`' and changes the quantity to '`5`'.    
   
 ![Edit Screenshot](https://raw.githubusercontent.com/thaddyyz/tp/master/UMLdiagrams/EditCommandDiagrams/editUGDiagram.png)
 
@@ -137,8 +135,8 @@ Find persons with names that contain a given string and print out their orders.
     - E.g) `find /n drew` will return the name `andrew` as a match.
     
 **Example of usage**
-- Assume our current list contains 3 people named `tom`, `kim` & `kimmy` as seen below.
-- The command `find /n kim` will return both `kim` & `kimmy` as both names contain the string `"kim"`.
+- Assume our current list contains 3 people named `TOM`, `KIM` & `KIMMY` as seen below.
+- The command `find /n kim` will return both `KIM` & `KIMMY` as both names contain the string `"KIM"`.
 
 ![Find Image](https://raw.githubusercontent.com/AY2122S1-CS2113-T13-2/tp/master/docs/UG%20Images/FindList.jpg)
 
@@ -158,7 +156,7 @@ Shows a list of all the orders that have been made.
 - The `list` command will display everyone's orders, and a summary of the total number of people who have ordered and
 the total quantity of food ordered.
 
-![List Image](https://raw.githubusercontent.com/AY2122S1-CS2113-T13-2/tp/master/docs/UG%20Images/ListExample.JPG)
+![List Image](https://raw.githubusercontent.com/AY2122S1-CS2113-T13-2/tp/master/docs/UG%20Images/OrdersList.JPG)
 
 ### Exiting LOTS: `bye`
 
@@ -169,6 +167,17 @@ Exits the LOTS program.
 **Example of usage**
 
 ![Bye Image](https://raw.githubusercontent.com/AY2122S1-CS2113-T13-2/tp/master/docs/UG%20Images/ByeExample.JPG)
+
+### Storing data
+
+- Data such as user orders are saved automatically after every command.
+- The data are stored in a text file called `.orders.txt` located in the same directory as the main JAR file.
+- If the `.orders.txt` file is not found upon initial startup, LOTS will automatically create a new empty `.orders.txt` file.
+- As such, there is no need for users to manually save the data while using LOTS.  
+
+> :exclamation: **Caution**: Users should not edit the `.orders.txt` file as it may corrupt the data stored.
+
+---
 
 ## Command Summary
 

@@ -26,14 +26,16 @@ public class DeleteCommand extends Command {
     public DeleteCommand(String input) throws LotsException {
         String[] splitInput = input.split(" ");
         if (!checkUserInput(input)) {
-            throw new LotsException("Please enter a valid person's index followed by the order index! i.e. delete 1/2");
+            throw new LotsException("Please enter a valid person's index followed by the order index! i.e. delete 1/2"
+                + System.lineSeparator() + "Enter \"list\" to view person's and order index.");
         }
         assert checkUserInput(input) == true : "Invalid delete input command";
         try {
             personIndex = getPersonIndex(splitInput[1]);
             foodIndex = getFoodIndex(splitInput[1]);
         } catch (NullPointerException | IndexOutOfBoundsException | NumberFormatException e) {
-            throw new LotsException("Please enter a valid person's index followed by the order index! i.e. delete 1/2");
+            throw new LotsException("Please enter a valid person's index followed by the order index! i.e. delete 1/2"
+                + System.lineSeparator() + "Enter \"list\" to view person's and order index.");
         }
     }
 
@@ -99,7 +101,8 @@ public class DeleteCommand extends Command {
         try {
             deleteOrder(super.peopleManager);
         } catch (IndexOutOfBoundsException e) {
-            throw new LotsException("Please enter a valid person's index followed by the order index! i.e. delete 1/2");
+            throw new LotsException("Please enter a valid person's index followed by the order index! i.e. delete 1/2"
+                + System.lineSeparator() + "Enter \"list\" to view person's and order index.");
         }
     }
 
