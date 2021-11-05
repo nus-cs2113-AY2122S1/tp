@@ -41,13 +41,7 @@ v2.0 tasks:
 
 v2.1 tasks:
 
-- Fixed bug where ID does not reset after `purge`.
-  - Functionality: MediVault should reset the ID to 1 after `purge` command is executed.
-  - Justification: To prevent user confusion as they expect ID to start from 1.
-  - Pull request [[#280](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/280)]
-- Fixed bug where `receiveorder` does not mark an order as delivered.
-  - Functionality: MediVault should mark an order as delivered once `receiveorder` is executed successfully.
-  - Justification: To prevent users from receiving an order multiple times.
+- Fixed bug where ID does not reset after `purge`, `receiveorder` does not mark an order as delivered and whitespace renders command invalid.
   - Pull request [[#280](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/280)]
 - Demo video for stock features.
     
