@@ -42,6 +42,8 @@ public class ModuleList {
         return list.get(index);
     }
 
+    /** Returns true if the module exists given the module code, false if not.
+     */
     public boolean isModuleExist(String moduleCode) {
         for (Module module : list) {
             if (module.moduleCode.equals(moduleCode)) {
@@ -49,6 +51,17 @@ public class ModuleList {
             }
         }
         return false;
+    }
+
+    /** Returns the module if it exists given the module code, null if not.
+     */
+    public Module isExistModule(String moduleCode) {
+        for (Module module : list) {
+            if (module.moduleCode.equals(moduleCode)) {
+                return module;
+            }
+        }
+        return null;
     }
 
     /**

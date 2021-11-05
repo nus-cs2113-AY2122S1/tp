@@ -45,7 +45,7 @@ Refer to our user guide [here](https://ay2122s1-cs2113t-t09-2.github.io/tp/UserG
 
 ## Design & implementation
 
-<img src="images/Placeholder_person.png" width = "280"/>  
+<img src="images/architecture.png" width = "280"/>  
 
 The ***Architecture Diagram*** above explains the high-level design of the App. 
 
