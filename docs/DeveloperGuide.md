@@ -67,7 +67,18 @@ The other core components of SEPlanner are:
 </p>
 
 The sequence diagram above illustrates the flow through our program structure when the user input `add /uni 1` 
-is entered. 
+is entered.  
+
+When the user runs the `add /uni 1` action on the parser class, the parser class calls the `addUniCommand` method 
+in the `addUniCommand` class by passing the university with master index `1` to it.  
+
+The `addUniCommand` class then  
+1. calls the `selectedUniversityList#addUniversity` method in the model class 
+by passing the university to implement the action.
+2. calls the `updateSelectedUniversity` method in the storage class 
+by passing the selected university list to update the stored selected list
+3. calls `printUniversity` in the UI class.
+by passing the university to display the message of adding the selected university to the user.
  
 ### Command Implementation
 
