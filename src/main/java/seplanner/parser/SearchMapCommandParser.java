@@ -41,7 +41,8 @@ public class SearchMapCommandParser {
 
         if (input.equals("all")) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
-            return new SearchMapCommand(university, universitySelectedList, moduleSelectedList, true);
+            return new SearchMapCommand(university, universitySelectedList, universityMasterList,
+                    moduleSelectedList, true);
         }
 
         if (ParseCondition.isNumeric(input)) {
@@ -66,7 +67,8 @@ public class SearchMapCommandParser {
 
         assert university.getName() != null;
         logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
-        return new SearchMapCommand(university, universitySelectedList, moduleSelectedList, false);
+        return new SearchMapCommand(university, universitySelectedList, universityMasterList,
+                moduleSelectedList, false);
     }
 
 }

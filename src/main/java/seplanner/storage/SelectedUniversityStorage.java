@@ -24,8 +24,9 @@ import static java.lang.Double.parseDouble;
  */
 public class SelectedUniversityStorage extends UserStorage {
     private static Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
-
     private static final String FILE_PATH = "data/selectedUniversities.txt";
+    private static Boolean isMappingValid = true;
+    private static Boolean isUniversityValid = true;
 
     /**
      * Writes the user's selected university list into the text file.
@@ -53,7 +54,6 @@ public class SelectedUniversityStorage extends UserStorage {
     public UniversityList readFile(UniversityList universityMasterList,
                                    ModuleList moduleMasterList) throws IOException {
         File file = loadFile(FILE_PATH);
-        logger.log(Level.INFO, "File is either created or opened");
         Scanner scanner = new Scanner(file);
         UniversityList universitySelectedList = new UniversityList();
         ArrayList<ModuleMapping> moduleMappings = new ArrayList<>();
@@ -63,8 +63,7 @@ public class SelectedUniversityStorage extends UserStorage {
             if (curr.equals(" ")) {
                 curr = line;
             } else if (!line.contains("#")) {
-                updateUniversityList(curr, moduleMappings, universitySelectedList,
-                        universityMasterList);
+                updateUniversityList(curr, moduleMappings, universitySelectedList, universityMasterList);
                 moduleMappings = new ArrayList<>();
                 curr = line;
             } else {
@@ -77,6 +76,12 @@ public class SelectedUniversityStorage extends UserStorage {
                     universityMasterList);
         }
         updateFile(universitySelectedList);
+        if (!isMappingValid) {
+            System.out.println(UiStorage.getInvalidMappingMessage());
+        }
+        if (!isUniversityValid) {
+            System.out.println(UiStorage.getInvalidUniversityMessage());
+        }
         logger.log(Level.INFO, "Module mappings stored in the file are successfully loaded");
         return universitySelectedList;
     }
@@ -96,7 +101,7 @@ public class SelectedUniversityStorage extends UserStorage {
         String[] attributes = line.split(" # ");
         if (attributes.length != 6) {
             logger.log(Level.SEVERE, "Invalid mapping found in the file.");
-            System.out.println(UiStorage.getInvalidMappingMessage());
+            isMappingValid = false;
             return;
         }
         Module local = new Module(attributes[0], attributes[1],
@@ -110,7 +115,7 @@ public class SelectedUniversityStorage extends UserStorage {
             moduleMappings.add(newMapping);
         } else {
             logger.log(Level.SEVERE, "Invalid mapping found in the file.");
-            System.out.println(UiStorage.getInvalidModuleMessage());
+            isMappingValid = false;
         }
     }
 
@@ -132,7 +137,7 @@ public class SelectedUniversityStorage extends UserStorage {
                     universityMasterList));
         } else {
             logger.log(Level.SEVERE, "Invalid university found in the file.");
-            System.out.println(UiStorage.getInvalidUniversityMessage());
+            isUniversityValid = false;
         }
     }
 

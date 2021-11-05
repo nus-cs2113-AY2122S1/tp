@@ -23,6 +23,8 @@ public class SelectedModuleStorage extends UserStorage {
 
     private static final String FILE_PATH = "data/selectedModules.txt";
 
+    private static Boolean isModuleValid = true;
+
     /**
      * Writes the user's selected module list into the file.
      * @param moduleList User's selected module list.
@@ -57,6 +59,9 @@ public class SelectedModuleStorage extends UserStorage {
         }
         updateFile(moduleList);
         logger.log(Level.INFO, "Modules stored in the file are successfully loaded");
+        if (!isModuleValid) {
+            System.out.println(UiStorage.getInvalidModuleMessage());
+        }
         return moduleList;
     }
 
@@ -71,7 +76,8 @@ public class SelectedModuleStorage extends UserStorage {
         String[] attributes = line.split(" # ");
         if (attributes.length != 3) {
             logger.log(Level.SEVERE, "Invalid module found in the file.");
-            System.out.println(UiStorage.getInvalidModuleMessage());
+            isModuleValid = false;
+            return;
         }
         Module newModule = new Module(attributes[0], attributes[1],
                 parseDouble(attributes[2]), moduleMasterList);
@@ -81,7 +87,7 @@ public class SelectedModuleStorage extends UserStorage {
             moduleList.addModule(newModule);
         } else {
             logger.log(Level.SEVERE, "Invalid module found in the file.");
-            System.out.println(UiStorage.getInvalidModuleMessage());
+            isModuleValid = false;
         }
     }
 }
