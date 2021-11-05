@@ -16,37 +16,6 @@ public class ReadTextFile {
         this.fileDirectory = fileDirectory;
     }
 
-    public boolean checkTextFileEmpty() {
-        File database = new File(fileDirectory);
-        if (database.length() == 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * Reads a text file and then print its content into the terminal.
-     */
-    public void printText() {
-        try {
-            FileReader readTextFile = new FileReader(this.fileDirectory);
-
-            int singleCharacters;
-
-            while ((singleCharacters = readTextFile.read()) != -1) {
-                System.out.print((char) singleCharacters);
-            }
-            readTextFile.close();
-        } catch (IOException except) {
-            System.out.print(MESSAGE_INVALID_IO);
-            System.out.println(MESSAGE_WARNING_FILE_DIRECTORY);
-            except.printStackTrace();
-        }
-
-        System.out.println();
-    }
-
     /**
      * Reads the text file containing all the commands for adding Budget or Expenditure
      * and return an ArrayList of String containing those commands.

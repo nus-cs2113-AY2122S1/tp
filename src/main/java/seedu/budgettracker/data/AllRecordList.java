@@ -115,6 +115,7 @@ public class AllRecordList {
     public Expenditure editExpenditure(int month, int index, double amount,
                                        String description, LocalDate date) {
         Expenditure targetExpenditure = allRecordList.get(month).getExpenditure(index);
+
         if (amount != 0.00) {
             targetExpenditure.setAmount(amount);
         }

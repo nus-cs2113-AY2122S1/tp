@@ -7,6 +7,7 @@ import seedu.budgettracker.data.AllRecordList;
 import seedu.budgettracker.data.records.Category;
 import seedu.budgettracker.data.records.Expenditure;
 import seedu.budgettracker.data.records.Loan;
+import seedu.budgettracker.storage.Storage;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -451,6 +452,11 @@ public class TextUi {
         Delay.wait(500);
         System.out.println();
         Delay.loadingBar(40);
+    }
+
+    public static void printAvailableDataBase(Storage dataBase) {
+        System.out.println("These are the data base you currently have!");
+        dataBase.directoryListAllFiles();
     }
 
     public static void printExpenditureLoanFoundInMonth(ArrayList<Expenditure> matchedExpenditureList,

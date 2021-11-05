@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class Storage {
     public static String dataStorageDirectory = "./data/";
+    public static final String LS = System.lineSeparator();
 
     public String loadStorage(AllRecordList recordList, String recordListDirectory) {
         try {
@@ -65,4 +66,52 @@ public class Storage {
             }
         }
     }
+
+    public void directoryListAllFiles() {
+        System.out.print(LS);
+
+        File dataDirectory = new File(dataStorageDirectory);
+        File[] dataDirectoryList = dataDirectory.listFiles();
+
+        String dataBaseFileName = "";
+        String dataBaseYearName = "";
+        boolean isValidName = false;
+        boolean isFile = false;
+        boolean containsJunk = false;
+        boolean isValidFileType = true;
+
+        for (int i = 0; i < dataDirectoryList.length; i++) {
+            if (dataDirectoryList[i].isFile()) {
+                dataBaseFileName = dataDirectoryList[i].getName();
+                dataBaseYearName = dataBaseFileName.split("\\.")[0];
+
+                isFile = true;
+            }
+
+            if (isFile && dataBaseYearName.matches("^[0-9]{4}$")) {
+                isValidName = true;
+            }
+
+            if (dataBaseFileName.split("\\.")[1].equals("csv")) {
+                isValidFileType = false;
+            }
+
+            if (isFile && isValidName && isValidFileType) {
+                System.out.println(dataBaseFileName);
+            } else if (!isValidFileType) {
+                isValidFileType = true;
+                continue;
+            } else {
+                containsJunk = true;
+            }
+
+            isValidName = false;
+            isFile = true;
+        }
+
+        if (containsJunk) {
+            System.out.println("Your data directory contains junk files, please clean them up!");
+        }
+    }
+
 }

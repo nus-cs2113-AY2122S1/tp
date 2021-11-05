@@ -16,30 +16,6 @@ import static seedu.budgettracker.common.Messages.MESSAGE_FILE_NOT_EXIST;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_IO;
 
 public class WriteToTextFile {
-    /**
-     * Writes the adding Budget and Expenditure command to the end of text file.
-     *
-     * @param textToWrite      The raw command string from the user.
-     * @param storageDirectory Directory of the text file which the command is saved to.
-     */
-    public static void writeToStorage(String textToWrite, String storageDirectory) {
-        try {
-            File textFileToWrite = new File(storageDirectory);
-            boolean fileIsEmpty = textFileToWrite.length() == 0;
-
-            FileWriter writeLineToFile = new FileWriter(storageDirectory, true);
-
-            if (!fileIsEmpty) {
-                writeLineToFile.write("\n");
-            }
-
-            writeLineToFile.write(textToWrite);
-            writeLineToFile.close();
-        } catch (IOException ioe) {
-            System.out.println(MESSAGE_INVALID_IO + ioe.getMessage());
-        }
-    }
-
     public void reloadArrayToStorage(Hashtable<Integer, RecordList> monthlyRecordList, String storageDirectory) {
         try {
             File inFile = new File(storageDirectory);
@@ -81,9 +57,5 @@ public class WriteToTextFile {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void convertToCsvFile() {
-
     }
 }

@@ -18,7 +18,7 @@ public class BudgetTracker {
     private final Parser parser;
     private static int loanCounter = 1;
     private final AllRecordList recordList;
-    private final String recordListDirectory = "";
+    public final String recordListDirectory = "";
 
     public BudgetTracker() {
         recordList = new AllRecordList();
@@ -63,7 +63,7 @@ public class BudgetTracker {
         } else {
             loanReminder(dateNow, 12);
         }
-
+        TextUi.printAvailableDataBase(budgetStorage);
         TextUi.printDivider();
 
         boolean isExit = false;
