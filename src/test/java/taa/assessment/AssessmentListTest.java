@@ -132,7 +132,8 @@ class AssessmentListTest {
             command2.checkArgument();
             command2.execute(classList, ui, storage);
         } catch (Exception e) {
-            assertEquals("Invalid weightage. Weightage must be between 0.00 (inclusive) and 100.00 (inclusive)", e.getMessage());
+            assertEquals("Invalid weightage. "
+                    + "Weightage must be between 0.00 (inclusive) and 100.00 (inclusive)", e.getMessage());
         }
     }
 
@@ -267,7 +268,8 @@ class AssessmentListTest {
             command3.checkArgument();
             command3.execute(classList, ui, storage);
         } catch (Exception e) {
-            assertEquals("Invalid new weightage. Weightage must be between 0.00 (inclusive) and 100.00 (inclusive)", e.getMessage());
+            assertEquals("Invalid new weightage. "
+                    + "Weightage must be between 0.00 (inclusive) and 100.00 (inclusive)", e.getMessage());
         }
     }
 
