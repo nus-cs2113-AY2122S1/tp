@@ -3,7 +3,6 @@ package seplanner;
 import seplanner.commands.Command;
 import seplanner.commands.ExitCommand;
 import seplanner.exceptions.ParserClassException;
-import seplanner.exceptions.StorageException;
 import seplanner.log.Log;
 import seplanner.modules.ModuleList;
 import seplanner.parser.Parser;
@@ -13,7 +12,6 @@ import seplanner.ui.UiInvalid;
 import seplanner.universities.UniversityList;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.Scanner;
 
 public class Seplanner {
@@ -54,7 +52,7 @@ public class Seplanner {
         return cmd;
     }
 
-    private static Parser setupData(Storage storage) throws IOException, StorageException {
+    private static Parser setupData(Storage storage) throws IOException {
         ModuleList moduleMasterList = new ModuleList(storage.readModuleList());
         UniversityList universityMasterList = new UniversityList(storage.readUniversityList(moduleMasterList));
         UniversityList universitySelectedList = storage.readSelectedUniversityList(

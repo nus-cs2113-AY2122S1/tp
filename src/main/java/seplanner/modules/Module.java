@@ -50,7 +50,13 @@ public class Module implements Comparator<Module> {
         return -1;
     }
 
-    public boolean equals(Module searchModule) {
+    //@@author madhanse
+    /**
+     * Checks whether two module objects are equal.
+     * @param searchModule Module to check
+     * @return True if equal. Otherwise, false
+     */
+    public boolean IsEqual(Module searchModule) {
         return (getModuleCode().equals(searchModule.getModuleCode()))
                 && (getModuleName().equals(searchModule.getModuleName()))
                 && (getModuleCredits() == searchModule.getModuleCredits());
@@ -68,6 +74,11 @@ public class Module implements Comparator<Module> {
         this.moduleCredits = moduleCredits;
     }
 
+    //@@author madhanse
+    /**
+     * Converts a module object into a string used to write it into a file.
+     * @return Module in a string format
+     */
     public String toFileFormat() {
         return moduleCode + " # " + moduleName + " # " + moduleCredits
                 + System.lineSeparator();
