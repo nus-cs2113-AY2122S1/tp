@@ -386,7 +386,7 @@ Lists all prescription records in the application.
   parameters.
 * You are able to `listprescription` by any column and sort or reverse sort them.
 
-Format: `listprescription {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME sid/STOCK_ID sort/COLUMN_NAME rsort/COLUMN_NAME}`
+Format: `listprescription {i/ID n/NAME q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME sid/STOCK_ID sort/COLUMN_NAME rsort/COLUMN_NAME}`
 
 Example 1 (Listing all prescriptions): `listprescription`
 
@@ -853,8 +853,8 @@ optional only if the stock exists.
 | updateprescription  | updateprescription i/ID [n/NAME q/QUANTITY         | 
 |                     | c/CUSTOMER_ID d/DATE s/STAFF_NAME]                 | 
 +---------------------+----------------------------------------------------+
-|  listprescription   | listprescription {i/ID q/QUANTITY c/CUSTOMER_ID    | 
-|                     | d/DATE s/STAFF_NAME sid/STOCK_ID                   | 
+|  listprescription   | listprescription {i/ID n/NAME q/QUANTITY           | 
+|                     | c/CUSTOMER_ID d/DATE s/STAFF_NAME sid/STOCK_ID     | 
 |                     | sort/COLUMN_NAME rsort/COLUMN_NAME}                | 
 +---------------------+----------------------------------------------------+
 | archiveprescription | archiveprescription d/DATE                         | 
@@ -940,7 +940,7 @@ liststock | `liststock {i/ID p/PRICE q/QUANTITY low/LESS_THAN_OR_EQUAL_QUANTITY 
 addprescription | `addprescription n/NAME q/QUANTITY c/CUSTOMER_ID s/STAFF_NAME`
 deleteprescription | `deleteprescription i/ID`
 updateprescription | `updateprescription i/ID [n/NAME q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME]`
-listprescription | `listprescription {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME sid/STOCK_ID sort/COLUMN_NAME rsort/COLUMN_NAME}`
+listprescription | `listprescription {i/ID n/NAME q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME sid/STOCK_ID sort/COLUMN_NAME rsort/COLUMN_NAME}`
 archiveprescription | `archiveprescription d/DATE`
 addorder | `addorder n/NAME q/QUANTITY {d/DATE}`
 deleteorder | `deleteorder i/ID`

@@ -24,8 +24,8 @@ public class CommandSyntax {
     public static final String DELETE_PRESCRIPTION_COMMAND = "deleteprescription i/ID";
     public static final String EXIT_COMMAND = "exit";
     public static final String HELP_COMMAND = "help";
-    public static final String LIST_PRESCRIPTION_COMMAND = "listprescription {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE "
-            + "s/STAFF_NAME sid/STOCK_ID sort/COLUMN_NAME rsort/COLUMN_NAME}";
+    public static final String LIST_PRESCRIPTION_COMMAND = "listprescription {i/ID n/NAME q/QUANTITY c/CUSTOMER_ID "
+            + "d/DATE s/STAFF_NAME sid/STOCK_ID sort/COLUMN_NAME rsort/COLUMN_NAME}";
     public static final String LIST_ORDER_COMMAND = "listorder {i/ID n/NAME q/QUANTITY d/DATE s/STATUS "
             + "sort/COLUMN_NAME rsort/COLUMN_NAME}";
     public static final String LIST_STOCK_COMMAND = "liststock {i/ID p/PRICE q/QUANTITY low/LESS_THAN_OR_EQUAL_QUANTITY"
