@@ -29,9 +29,9 @@ public class SelectedUniversityStorage extends UserStorage {
     private static Boolean isUniversityValid = true;
 
     /**
-     * Writes the user's selected university list into the text file
-     * @param universityList User's selected university list
-     * @throws IOException If there is a problem in accessing the file
+     * Writes the user's selected university list into the text file.
+     * @param universityList User's selected university list.
+     * @throws IOException If there is a problem in accessing the file.
      */
     public void updateFile(UniversityList universityList) throws IOException {
         FileWriter fw = new FileWriter(FILE_PATH);
