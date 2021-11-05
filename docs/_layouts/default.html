@@ -44,5 +44,15 @@
     <button id="buttonToScrollToTop">
       <i class="material-icons">arrow_upward</i>
     </button>
+    <script>
+      const buttonScrollToTop = document.querySelector("#buttonToScrollToTop");
+      buttonScrollToTop.addEventListener("click", function () {
+          window.scrollTo({
+            top: 100,
+            left: 0,
+            behaviour: "smooth"
+          });
+      });
+    </script>
   </body>
 </html>
