@@ -47,11 +47,7 @@
     <script>
       const buttonScrollToTop = document.querySelector("#buttonToScrollToTop");
       buttonScrollToTop.addEventListener("click", function () {
-          window.scrollTo({
-            top: 100,
-            left: 0,
-            behaviour: "smooth"
-          });
+          $("html, body").animate({ scrollTop: 75 }, "slow");
       });
     </script>
   </body>
