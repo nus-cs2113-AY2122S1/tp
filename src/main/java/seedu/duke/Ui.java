@@ -35,6 +35,7 @@ public class Ui {
     public static final String BYE_MESSAGE = "Thanks for using TourPlanner. Goodbye!";
 
     public static final String SORT_TOUR_ID_MESSAGE = "Sorted by tour id alphabetically";
+    private static final String SORT_TOUR_NAME_MESSAGE = "Sorted by tour name alphabetically";
     public static final String SORT_TOUR_PRICE_MESSAGE = "Sorted by price in ascending order";
     public static final String SORT_CLIENT_ID_MESSAGE = "Sorted by client id alphabetically";
     public static final String SORT_CLIENT_NAME_MESSAGE = "Sorted by client name alphabetically";
@@ -43,7 +44,6 @@ public class Ui {
     public static final String SORT_FLIGHT_ID_MESSAGE = "Sorted by flight id alphabetically";
 
     private static final Scanner in = new Scanner(System.in);
-
 
     /**
      * Empty Ui class constructor.
@@ -269,6 +269,24 @@ public class Ui {
         int listIndex = 1;
         for (Float tourPrice : sortedTourPrices) {
             Tour currTour = tours.getTourByPrice(tourPrice);
+            show(listIndex + ". " + currTour + System.lineSeparator());
+            listIndex++;
+        }
+    }
+
+    /**
+     * Ui response to sort tour by name.
+     *
+     * @param tours            the current list of tours in the database
+     * @param sortedTourNames the list of sorted tour names (by alphabetical order)
+     * @throws TourPlannerException if there is no tours that can be found given the tour name
+     */
+    public void showSortedTourByName(TourList tours, ArrayList<String> sortedTourNames) throws TourPlannerException {
+        tours.initTempArray();
+        show(SORT_TOUR_NAME_MESSAGE);
+        int listIndex = 1;
+        for (String tourName : sortedTourNames) {
+            Tour currTour = tours.getTourByName(tourName);
             show(listIndex + ". " + currTour + System.lineSeparator());
             listIndex++;
         }

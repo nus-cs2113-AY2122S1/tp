@@ -10,6 +10,7 @@ public class TourList {
 
     private final ArrayList<Tour> tours;
     private final ArrayList<String> tourIds;
+    private final ArrayList<String> tourNames;
     private final ArrayList<Float> tourPrices;
     private ArrayList<String> iteratedTourIds;
     private int tourCount;
@@ -18,6 +19,7 @@ public class TourList {
         tours = new ArrayList<>();
         tourIds = new ArrayList<>();
         tourPrices = new ArrayList<>();
+        tourNames = new ArrayList<>();
         tourCount = 0;
     }
 
@@ -25,6 +27,7 @@ public class TourList {
         tours.add(tour);
         tourIds.add(tour.getId());
         tourPrices.add(tour.getPrice());
+        tourNames.add(tour.getName());
         tourCount++;
     }
 
@@ -38,8 +41,13 @@ public class TourList {
     }
 
     public ArrayList<String> getSortedTourIds() {
-        Collections.sort(tourIds);
+        Collections.sort(tourIds, String.CASE_INSENSITIVE_ORDER);
         return tourIds;
+    }
+
+    public ArrayList<String> getSortedTourNames() {
+        Collections.sort(tourNames, String.CASE_INSENSITIVE_ORDER);
+        return tourNames;
     }
 
     public int getTourCount() {
@@ -60,6 +68,16 @@ public class TourList {
             if (currTour.getPrice() == price && !iteratedTourIds.contains(currTourId)) {
                 iteratedTourIds.add(currTourId);
                 return currTour;
+            }
+        }
+        throw new TourPlannerException(TOUR_NOT_FOUND_MESSAGE);
+    }
+
+    public Tour getTourByName(String name) throws TourPlannerException {
+        for (int i = 0; i < tourCount; i++) {
+            Tour currentTour = tours.get(i);
+            if (currentTour.getName().equals(name)) {
+                return currentTour;
             }
         }
         throw new TourPlannerException(TOUR_NOT_FOUND_MESSAGE);

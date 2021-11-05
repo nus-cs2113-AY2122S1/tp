@@ -96,12 +96,12 @@ public class ClientList {
     }
 
     public ArrayList<String> getSortedClientIds() {
-        Collections.sort(clientIds);
+        Collections.sort(clientIds, String.CASE_INSENSITIVE_ORDER);
         return clientIds;
     }
 
     public ArrayList<String> getSortedClientNames() {
-        Collections.sort(clientNames);
+        Collections.sort(clientNames, String.CASE_INSENSITIVE_ORDER);
         return clientNames;
     }
 

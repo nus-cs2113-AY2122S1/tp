@@ -102,7 +102,7 @@ public class FlightList {
     }
 
     public ArrayList<String> getSortedFlightIds() {
-        Collections.sort(flightIds);
+        Collections.sort(flightIds, String.CASE_INSENSITIVE_ORDER);
         return flightIds;
     }
 
