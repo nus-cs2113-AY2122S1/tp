@@ -118,7 +118,7 @@ Enter your command: 1. 	c a b
 
 Enter your command: No matching expenses found.
 Enter your command: Please format your inputs as follows: 
-view filter [category, payer, description, person] [search keyword]
+view filter [category, description, payer, person, date] [search keyword]
 Enter your command: Sorry, we didn't recognize your entry. Please try again, or enter help to learn more.
 Enter your command: Sorry, we didn't recognize your entry. Please try again, or enter help to learn more.
 Enter your command: List of Expenses: 
