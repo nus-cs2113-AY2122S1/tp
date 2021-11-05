@@ -75,13 +75,13 @@ public class EditStudentCommand extends Command {
             throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
 
-        String newId = argumentMap.get(KEY_NEW_ID).toUpperCase();
+        String newId = argumentMap.get(KEY_NEW_ID);
         String newName = argumentMap.get(KEY_NEW_NAME);
-        for (Student students : studentList.getStudents()) {
-            if (students.getId().equals(newId)) {
-                throw new TaaException(MESSAGE_ID_ALREADY_EXISTS);
-            }
+        Student existingStudent = studentList.getStudentWithId(newId);
+        if (existingStudent != null && existingStudent != student) {
+            throw new TaaException(MESSAGE_ID_ALREADY_EXISTS);
         }
+
         student.setId(newId);
         student.setName(newName);
 
