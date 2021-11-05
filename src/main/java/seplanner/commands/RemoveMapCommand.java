@@ -10,6 +10,7 @@ import seplanner.universities.UniversityList;
 import java.io.IOException;
 import java.util.ArrayList;
 
+//@@author Jiale-Sun
 /**
  * Command to remove a module mapping under a selected university from the selected university list.
 */

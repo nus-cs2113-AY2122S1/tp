@@ -9,6 +9,7 @@ import seplanner.universities.UniversityList;
 import java.io.IOException;
 import java.util.ArrayList;
 
+//@@author Jiale-Sun
 /**
  * Command to add a module mapping under a selected university to the selected university list.
 */

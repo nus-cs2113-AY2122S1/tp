@@ -6,6 +6,7 @@ import seplanner.universities.UniversityList;
 
 import java.io.IOException;
 
+//@@author Jiale-Sun
 /**
  * Command to remove a university from the selected university list.
 */

@@ -6,6 +6,7 @@ import seplanner.ui.UiModule;
 
 import java.io.IOException;
 
+//@@author Jiale-Sun
 /**
  * Command to remove a module from the selected module list.
 */

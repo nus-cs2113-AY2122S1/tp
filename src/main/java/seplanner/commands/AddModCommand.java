@@ -6,6 +6,7 @@ import seplanner.ui.UiModule;
 
 import java.io.IOException;
 
+//@@author Jiale-Sun
 /**
  * Command to add a module to the selected module list.
 */
