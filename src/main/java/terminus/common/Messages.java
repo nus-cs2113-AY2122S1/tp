@@ -91,6 +91,7 @@ public class Messages {
     public static final String ERROR_FILE_BUFFERED_READER = "Unable to collect file contents : %s";
     public static final String ERROR_EXPORT_MISSING_NOTE = "There are no notes to export.";
     public static final String ERROR_INVALID_FILE_PATH = "Invalid file/folder path : %s";
+    public static final String ERROR_JSON_FILTER = "Invalid main json file : contained invalid data";
 
     /*
      * Banners
