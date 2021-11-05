@@ -87,6 +87,106 @@ class AssessmentListTest {
     }
 
     @Test
+    void addAssessment_userInputRepeatedAssessmentName_nameExistsErrorThrown() throws TaaException {
+        Ui ui = new Ui();
+        Storage storage = new Storage("./data/taa_data.json");
+        ClassList classList = new ClassList();
+        String classInput = "add_class i/cs2113t-f12 n/software engineering class F12";
+        Command command1 = Parser.parseUserInput(classInput);
+        command1.parseArgument();
+        command1.checkArgument();
+        command1.execute(classList, ui, storage);
+
+        String addAssessment1 = "add_assessment c/cs2113t-f12 n/Midterms m/50 w/20";
+        Command command2 = Parser.parseUserInput(addAssessment1);
+        command2.parseArgument();
+        command2.checkArgument();
+        command2.execute(classList, ui, storage);
+
+        try {
+            String addAssessment2 = "add_assessment c/cs2113t-f12 n/midterms m/50 w/20";
+            Command command7 = Parser.parseUserInput(addAssessment2);
+            command7.parseArgument();
+            command7.checkArgument();
+            command7.execute(classList, ui, storage);
+        } catch (Exception e) {
+            assertEquals("Invalid assessment name. Assessment already exists.", e.getMessage());
+        }
+    }
+
+    @Test
+    void addAssessment_userInputNegativeWeightage_WeightageErrorThrown() throws TaaException {
+        Ui ui = new Ui();
+        Storage storage = new Storage("./data/taa_data.json");
+        ClassList classList = new ClassList();
+        String classInput = "add_class i/cs2113t-f12 n/software engineering class F12";
+        Command command1 = Parser.parseUserInput(classInput);
+        command1.parseArgument();
+        command1.checkArgument();
+        command1.execute(classList, ui, storage);
+
+        try {
+            String addAssessment1 = "add_assessment c/cs2113t-f12 n/Midterms m/50 w/-0.001";
+            Command command2 = Parser.parseUserInput(addAssessment1);
+            command2.parseArgument();
+            command2.checkArgument();
+            command2.execute(classList, ui, storage);
+        } catch (Exception e) {
+            assertEquals("Invalid weightage. Weightage must be between 0.00 (inclusive) and 100.00 (inclusive)", e.getMessage());
+        }
+    }
+
+    @Test
+    void addAssessment_userInputNegativeMaximumMarks_MaximumMarksErrorThrown() throws TaaException {
+        Ui ui = new Ui();
+        Storage storage = new Storage("./data/taa_data.json");
+        ClassList classList = new ClassList();
+        String classInput = "add_class i/cs2113t-f12 n/software engineering class F12";
+        Command command1 = Parser.parseUserInput(classInput);
+        command1.parseArgument();
+        command1.checkArgument();
+        command1.execute(classList, ui, storage);
+
+        String addAssessment1 = "add_assessment c/cs2113t-f12 n/Midterms m/10 w/20";
+        Command command2 = Parser.parseUserInput(addAssessment1);
+        command2.parseArgument();
+        command2.checkArgument();
+        command2.execute(classList, ui, storage);
+
+        try {
+            String addAssessment2 = "add_assessment c/cs2113t-f12 n/Finals m/50 w/80.001";
+            Command command7 = Parser.parseUserInput(addAssessment2);
+            command7.parseArgument();
+            command7.checkArgument();
+            command7.execute(classList, ui, storage);
+        } catch (Exception e) {
+            assertEquals("Invalid weightage. Total new weightage exceeds 100%.", e.getMessage());
+        }
+    }
+
+    @Test
+    void addAssessment_userInputOverflowWeightage_weightageErrorThrown() throws TaaException {
+        Ui ui = new Ui();
+        Storage storage = new Storage("./data/taa_data.json");
+        ClassList classList = new ClassList();
+        String classInput = "add_class i/cs2113t-f12 n/software engineering class F12";
+        Command command1 = Parser.parseUserInput(classInput);
+        command1.parseArgument();
+        command1.checkArgument();
+        command1.execute(classList, ui, storage);
+
+        try {
+            String addAssessment1 = "add_assessment c/cs2113t-f12 n/Midterms m/-1 w/10";
+            Command command2 = Parser.parseUserInput(addAssessment1);
+            command2.parseArgument();
+            command2.checkArgument();
+            command2.execute(classList, ui, storage);
+        } catch (Exception e) {
+            assertEquals("Invalid maximum marks. Maximum marks must be larger than 0 (inclusive)", e.getMessage());
+        }
+    }
+
+    @Test
     void editAssessment_userInputFourEdits_assessmentEditedCorrectly() throws TaaException {
         Ui ui = new Ui();
         Storage storage = new Storage("./data/taa_data.json");
@@ -97,11 +197,17 @@ class AssessmentListTest {
         command1.checkArgument();
         command1.execute(classList, ui, storage);
 
-        String assessmentInput = "add_assessment c/cs2113t-f12 n/Midterms m/50 w/20";
-        Command command2 = Parser.parseUserInput(assessmentInput);
+        String addAssessment1 = "add_assessment c/cs2113t-f12 n/Midterms m/50 w/20";
+        Command command2 = Parser.parseUserInput(addAssessment1);
         command2.parseArgument();
         command2.checkArgument();
         command2.execute(classList, ui, storage);
+
+        String addAssessment3 = "add_assessment c/cs2113t-f12 n/PE m/50 w/20";
+        Command command8 = Parser.parseUserInput(addAssessment3);
+        command8.parseArgument();
+        command8.checkArgument();
+        command8.execute(classList, ui, storage);
 
         String editAssessment1 = "edit_assessment c/cs2113t-f12 a/midterms n/finals";
         Command command3 = Parser.parseUserInput(editAssessment1);
@@ -135,5 +241,153 @@ class AssessmentListTest {
         assertEquals("midterms", assessment.getName());
         assertEquals(50, assessment.getMaximumMarks());
         assertEquals(20, assessment.getWeightage());
+    }
+
+    @Test
+    void editAssessment_userInputNegativeWeightage_weightageErrorThrown() throws TaaException {
+        Ui ui = new Ui();
+        Storage storage = new Storage("./data/taa_data.json");
+        ClassList classList = new ClassList();
+        String classInput = "add_class i/cs2113t-f12 n/software engineering class F12";
+        Command command1 = Parser.parseUserInput(classInput);
+        command1.parseArgument();
+        command1.checkArgument();
+        command1.execute(classList, ui, storage);
+
+        String addAssessment1 = "add_assessment c/cs2113t-f12 n/Midterms m/50 w/20";
+        Command command2 = Parser.parseUserInput(addAssessment1);
+        command2.parseArgument();
+        command2.checkArgument();
+        command2.execute(classList, ui, storage);
+
+        try {
+            String editAssessment1 = "edit_assessment c/cs2113t-f12 a/midterms w/-0.001";
+            Command command3 = Parser.parseUserInput(editAssessment1);
+            command3.parseArgument();
+            command3.checkArgument();
+            command3.execute(classList, ui, storage);
+        } catch (Exception e) {
+            assertEquals("Invalid new weightage. Weightage must be between 0.00 (inclusive) and 100.00 (inclusive)", e.getMessage());
+        }
+    }
+
+    @Test
+    void editAssessment_userInputOverflowWeightage_weightageErrorThrown() throws TaaException {
+        Ui ui = new Ui();
+        Storage storage = new Storage("./data/taa_data.json");
+        ClassList classList = new ClassList();
+        String classInput = "add_class i/cs2113t-f12 n/software engineering class F12";
+        Command command1 = Parser.parseUserInput(classInput);
+        command1.parseArgument();
+        command1.checkArgument();
+        command1.execute(classList, ui, storage);
+
+        String addAssessment1 = "add_assessment c/cs2113t-f12 n/Midterms m/50 w/20";
+        Command command2 = Parser.parseUserInput(addAssessment1);
+        command2.parseArgument();
+        command2.checkArgument();
+        command2.execute(classList, ui, storage);
+
+        String addAssessment3 = "add_assessment c/cs2113t-f12 n/PE m/50 w/20";
+        Command command8 = Parser.parseUserInput(addAssessment3);
+        command8.parseArgument();
+        command8.checkArgument();
+        command8.execute(classList, ui, storage);
+
+        try {
+            String editAssessment1 = "edit_assessment c/cs2113t-f12 a/midterms w/80.001";
+            Command command3 = Parser.parseUserInput(editAssessment1);
+            command3.parseArgument();
+            command3.checkArgument();
+            command3.execute(classList, ui, storage);
+        } catch (Exception e) {
+            assertEquals("Invalid new weightage. Total new weightage exceeds 100%.", e.getMessage());
+        }
+    }
+
+    @Test
+    void editAssessment_userInputNegativeMaximumMarks_MaximumMarksErrorThrown() throws TaaException {
+        Ui ui = new Ui();
+        Storage storage = new Storage("./data/taa_data.json");
+        ClassList classList = new ClassList();
+        String classInput = "add_class i/cs2113t-f12 n/software engineering class F12";
+        Command command1 = Parser.parseUserInput(classInput);
+        command1.parseArgument();
+        command1.checkArgument();
+        command1.execute(classList, ui, storage);
+
+        String addAssessment1 = "add_assessment c/cs2113t-f12 n/Midterms m/50 w/20";
+        Command command2 = Parser.parseUserInput(addAssessment1);
+        command2.parseArgument();
+        command2.checkArgument();
+        command2.execute(classList, ui, storage);
+
+        try {
+            String editAssessment1 = "edit_assessment c/cs2113t-f12 a/midterms m/-1";
+            Command command3 = Parser.parseUserInput(editAssessment1);
+            command3.parseArgument();
+            command3.checkArgument();
+            command3.execute(classList, ui, storage);
+        } catch (Exception e) {
+            assertEquals("Invalid new maximum marks. Maximum marks must be larger than 0 (inclusive)", e.getMessage());
+        }
+    }
+
+    @Test
+    void editAssessment_userInputRepeatedAssessmentName_nameExistsErrorThrown() throws TaaException {
+        Ui ui = new Ui();
+        Storage storage = new Storage("./data/taa_data.json");
+        ClassList classList = new ClassList();
+        String classInput = "add_class i/cs2113t-f12 n/software engineering class F12";
+        Command command1 = Parser.parseUserInput(classInput);
+        command1.parseArgument();
+        command1.checkArgument();
+        command1.execute(classList, ui, storage);
+
+        String addAssessment1 = "add_assessment c/cs2113t-f12 n/Midterms m/50 w/20";
+        Command command2 = Parser.parseUserInput(addAssessment1);
+        command2.parseArgument();
+        command2.checkArgument();
+        command2.execute(classList, ui, storage);
+
+        String addAssessment3 = "add_assessment c/cs2113t-f12 n/PE m/50 w/20";
+        Command command8 = Parser.parseUserInput(addAssessment3);
+        command8.parseArgument();
+        command8.checkArgument();
+        command8.execute(classList, ui, storage);
+
+        try {
+            String editAssessment5 = "edit_assessment c/cs2113t-f12 a/PE n/FINALS";
+            Command command9 = Parser.parseUserInput(editAssessment5);
+            command9.parseArgument();
+            command9.checkArgument();
+            command9.execute(classList, ui, storage);
+        } catch (Exception e) {
+            assertEquals("Invalid new name. An assessment with the same name already exists.",
+                    e.getMessage());
+        }
+    }
+
+    @Test
+    void addAssessment_userInputMaximumMarksAndWeightageCornerCase_validWeightage() throws TaaException {
+        Ui ui = new Ui();
+        Storage storage = new Storage("./data/taa_data.json");
+        ClassList classList = new ClassList();
+        String classInput = "add_class i/cs2113t-f12 n/software engineering class F12";
+        Command command1 = Parser.parseUserInput(classInput);
+        command1.parseArgument();
+        command1.checkArgument();
+        command1.execute(classList, ui, storage);
+
+        String addAssessment1 = "add_assessment c/cs2113t-f12 n/Midterms m/0 w/0";
+        Command command2 = Parser.parseUserInput(addAssessment1);
+        command2.parseArgument();
+        command2.checkArgument();
+        command2.execute(classList, ui, storage);
+
+        Assessment assessment = classList.getClassWithId("cs2113t-f12").getAssessmentList()
+                .getAssessment("midterms");
+        assertEquals(0, assessment.getMaximumMarks());
+        assertEquals(0, assessment.getWeightage());
     }
 }

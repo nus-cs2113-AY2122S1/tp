@@ -32,8 +32,8 @@ public class AddAssessmentCommand extends Command {
     private static final String MESSAGE_FORMAT_INVALID_NAME = "Invalid assessment name. "
             + "Assessment already exists.";
     private static final String MESSAGE_FORMAT_INVALID_WEIGHTAGE = "Invalid weightage. "
-        + "Weightage must be between %,.2f and %,.2f (inclusive)";
-    private static final String MESSAGE_FORMAT_INVALID_TOTAL_WEIGHTAGE = "Invalid new weightage. "
+        + "Weightage must be between %,.2f (inclusive) and %,.2f (inclusive)";
+    private static final String MESSAGE_FORMAT_INVALID_TOTAL_WEIGHTAGE = "Invalid weightage. "
             + "Total new weightage exceeds 100%.";
     private static final String MESSAGE_FORMAT_INVALID_MAXIMUM_MARKS = "Invalid maximum marks. "
         + "Maximum marks must be larger than %d (inclusive)";
@@ -89,8 +89,8 @@ public class AddAssessmentCommand extends Command {
         }
 
         int maximumMarks = checkAndGetMaximumMarks();
-        String name = argumentMap.get(KEY_ASSESSMENT_NAME);
-        double weightage = checkAndGetWeightage(name, teachingClass);
+        String name = checkAndGetName(teachingClass.getAssessmentList().getAssessments());
+        double weightage = checkAndGetWeightage(teachingClass);
 
         Assessment assessment = new Assessment(name, maximumMarks, weightage);
 
@@ -122,7 +122,7 @@ public class AddAssessmentCommand extends Command {
         return maximumMarks;
     }
 
-    public double checkAndGetWeightage(String name, TeachingClass teachingClass) throws TaaException {
+    public double checkAndGetWeightage(TeachingClass teachingClass) throws TaaException {
         String weightageString = argumentMap.get(KEY_WEIGHTAGE);
         assert Util.isStringDouble(weightageString);
         double weightage = Double.parseDouble(weightageString);
@@ -136,10 +136,6 @@ public class AddAssessmentCommand extends Command {
         ArrayList<Assessment> assessments = teachingClass.getAssessmentList().getAssessments();
         double totalWeightage = 0;
         for (Assessment a : assessments) {
-            if (a.getName().equalsIgnoreCase(name)) {
-                throw new TaaException(MESSAGE_FORMAT_INVALID_NAME);
-            }
-
             totalWeightage += a.getWeightage();
         }
         double newTotalWeightage = totalWeightage + weightage;
@@ -147,6 +143,16 @@ public class AddAssessmentCommand extends Command {
             throw new TaaException(MESSAGE_FORMAT_INVALID_TOTAL_WEIGHTAGE);
         }
         return weightage;
+    }
+
+    public String checkAndGetName(ArrayList<Assessment> assessments) throws TaaException {
+        String name = argumentMap.get(KEY_ASSESSMENT_NAME);
+        for (Assessment a : assessments) {
+            if (a.getName().equalsIgnoreCase(name)) {
+                throw new TaaException(MESSAGE_FORMAT_INVALID_NAME);
+            }
+        }
+        return name;
     }
 
     @Override

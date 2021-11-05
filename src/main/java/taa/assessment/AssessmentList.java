@@ -76,16 +76,6 @@ public class AssessmentList implements ClassChecker {
         return null;
     }
 
-    public double totalWeightageForEditAssessmentCommand(String assessmentName) {
-        double totalWeightage = 0;
-        for (Assessment a : assessments) {
-            if (!a.getName().equalsIgnoreCase(assessmentName)) {
-                totalWeightage += a.getWeightage();
-            }
-        }
-        return totalWeightage;
-    }
-
     public boolean checkRepeatedName(Assessment assessment, String newAssessmentName) {
         for (Assessment a : assessments) {
             if (a.getName().equalsIgnoreCase(newAssessmentName) && (a != assessment)) {
