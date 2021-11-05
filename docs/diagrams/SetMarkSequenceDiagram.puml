@@ -4,8 +4,8 @@
 Actor User as user
 Participant ":Taa" as taa
 Participant ":SetMarkCommand" as setMarkCommand
-Participant ":ModuleList" as moduleList
-Participant ":Module" as module
+Participant ":ClassList" as classList
+Participant ":TeachingClass" as class
 Participant ":AssessmentList" as assessmentList
 Participant ":StudentList" as studentList
 Participant ":Student" as student
@@ -14,23 +14,23 @@ Participant ":Storage" as storage
 user -> taa : "set_marks c/CS2113T-F12 \ns/1 a/Midterms m/60"
 activate taa
 
-taa -> setMarkCommand : execute(moduleList:ModuleList, \nui:Ui, storage:Storage)
+taa -> setMarkCommand : execute(classList:ModuleList, \nui:Ui, storage:Storage)
 activate setMarkCommand
 
-setMarkCommand -> moduleList : getModuleWithCode(moduleCode:String)
-activate moduleList
-moduleList --> setMarkCommand : module:Module
-deactivate moduleList
+setMarkCommand -> classList : getClassWithId(id:String)
+activate classList
+classList --> setMarkCommand : class:Class
+deactivate classList
 
-setMarkCommand -> module : getStudentList()
-activate module
-module --> setMarkCommand : studentList:StudentList
-deactivate module
+setMarkCommand -> class : getStudentList()
+activate class
+class --> setMarkCommand : studentList:StudentList
+deactivate class
 
-setMarkCommand -> module : getAssessmentList()
-activate module
-module --> setMarkCommand : assessmentList:AssessmentList
-deactivate module
+setMarkCommand -> class : getAssessmentList()
+activate class
+class --> setMarkCommand : assessmentList:AssessmentList
+deactivate class
 
 setMarkCommand -> assessmentList : getAssessment(assessmentName:String)
 activate assessmentList

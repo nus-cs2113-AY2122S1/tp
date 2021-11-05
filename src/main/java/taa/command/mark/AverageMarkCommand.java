@@ -109,7 +109,7 @@ public class AverageMarkCommand extends Command {
     protected String getUsage() {
         return String.format(
             MESSAGE_FORMAT_AVERAGE_MARKS_USAGE,
-                COMMAND_AVERAGE_MARK,
+            COMMAND_AVERAGE_MARK,
             KEY_CLASS_ID,
             KEY_ASSESSMENT_NAME
         );
