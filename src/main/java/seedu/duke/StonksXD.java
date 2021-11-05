@@ -11,6 +11,8 @@ import seedu.utility.FinancialAdvisor;
 import seedu.utility.Parser;
 import seedu.utility.Ui;
 
+import static seedu.utility.FinancialAdvisor.getRandomAdvice;
+
 /**
  * A command line interfaced program that can store your financial entries and provide other insights and analytical 
  * services.
@@ -22,8 +24,6 @@ public class StonksXD {
     private DataManager dataManager;
     private BudgetManager budgetManager;
     private CurrencyManager currencyManager;
-    private FinancialAdvisor financialAdvisor;
-    private String advice;
 
     /**
      * Constructor for StonksXD. It instantiates all the components used and are crucial to the functioning of the 
@@ -38,9 +38,6 @@ public class StonksXD {
         
         this.dataManager = new DataManager(parser, finances, ui, budgetManager, currencyManager);
         dataManager.loadAll();
-        
-        this.financialAdvisor = FinancialAdvisor.getInstance();
-        this.advice = financialAdvisor.getRandomAdvice();
     }
 
     /**
@@ -59,7 +56,7 @@ public class StonksXD {
             }
             dataManager.saveAll();
         }
-        //ui.printBye(advice);
+//        ui.printBye(getRandomAdvice());
     }
 
     /**
