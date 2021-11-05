@@ -16,10 +16,6 @@ import java.util.Hashtable;
 import static seedu.budgettracker.common.Messages.MESSAGE_FILE_NOT_EXIST;
 
 public class ConverterToCsv {
-    private String fileName;
-
-    public ConverterToCsv() {}
-
     public void convertToCsvFile(AllRecordList monthlyRecordList, String csvDirectory) {
         try {
             File inFile = new File(csvDirectory);
