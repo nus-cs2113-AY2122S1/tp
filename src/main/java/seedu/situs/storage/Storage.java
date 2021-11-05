@@ -34,7 +34,7 @@ public class Storage {
             + "Setting to 1.0kg";
 
     private static final String INGREDIENT_DATA_CORRUPTED_MESSAGE = "Exit to fix the ingredients.txt file, or continue"
-            + " by modifying the ingredient list,\n which will overwrite every content in the memory file.";
+            + " by modifying the ingredient list,\n which will overwrite error content in the memory file.";
 
     private File dataFile;
     private File thresholdFile;
@@ -71,11 +71,15 @@ public class Storage {
 
         try {
             Scanner scanner = new Scanner(this.dataFile);
+            int lineCounter = 0;
 
             while (scanner.hasNextLine()) {
                 String memoryContent = scanner.nextLine();
+                lineCounter++;
 
                 if (!isValidIngredientLine(memoryContent)) {
+                    System.out.println("Wrong ingredient format found in line " + lineCounter
+                            + " of ingredients.txt\n"+ INGREDIENT_DATA_CORRUPTED_MESSAGE);
                     continue;
                 }
 
