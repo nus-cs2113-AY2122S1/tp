@@ -41,6 +41,11 @@ public class Module implements Comparator<Module> {
         return moduleCredits;
     }
 
+    /**
+     * Returns the index of the module with respect to the master list.
+     * @param moduleMasterList The master list.
+     * @return The index of the module.
+     */
     public int getMasterListIndex(ModuleList moduleMasterList) {
         for (int i = 0; i < moduleMasterList.getSize(); i++) {
             if (moduleMasterList.get(i).getModuleCode().equals(moduleCode)) {
