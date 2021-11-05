@@ -1,6 +1,8 @@
 package taa.util;
 
 //@@author leyondlee
+import taa.exception.FileCreationException;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -81,11 +83,11 @@ public class Util {
      * Creates a file and parent directories (if necessary).
      *
      * @param filename The file to create.
-     * @return true if file already exists or successfully created, else false.
+     * @throws FileCreationException if fail to create file.
      */
-    public static boolean createFile(String filename) {
+    public static void createFile(String filename) throws FileCreationException {
         if (fileExists(filename)) {
-            return true;
+            return;
         }
 
         File file = new File(filename);
@@ -112,7 +114,9 @@ public class Util {
             result = false;
         }
 
-        return result;
+        if (!result) {
+            throw new FileCreationException(filename);
+        }
     }
 
     public static String getAbsolutePath(String pathStr) {
