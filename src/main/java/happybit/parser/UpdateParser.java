@@ -9,12 +9,10 @@ import happybit.command.UpdateHabitNameCommand;
 import happybit.exception.HaBitParserException;
 import happybit.goal.GoalType;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class UpdateParser extends Parser {
@@ -51,8 +49,7 @@ public class UpdateParser extends Parser {
      *                              or when parameters are not in the same
      */
     public static Command parseUpdateGoalCommands(String input) throws HaBitParserException {
-        checkNoDescription(input);
-        String[] parameters = splitInput(input);
+        ArrayList<String> parameters = splitInput(input);
         if (isUpdateGoalName(parameters)) {
             return parseUpdateGoalNameCommand(input);
         }
@@ -82,8 +79,7 @@ public class UpdateParser extends Parser {
      *                              or when parameters are not the same
      */
     public static Command parseUpdateHabitCommands(String input) throws HaBitParserException {
-        checkNoDescription(input);
-        String[] parameters = splitInput(input);
+        ArrayList<String> parameters = splitInput(input);
 
         if (isChangeHabitName(parameters)) {
             return parseUpdateHabitNameCommand(input);
@@ -111,19 +107,15 @@ public class UpdateParser extends Parser {
      * @throws HaBitParserException If command parameters are not defined, or defined improperly.
      */
     public static Command parseUpdateGoalNameCommand(String input) throws HaBitParserException {
-        checkNoDescription(input);
-        String[] parameters = splitInput(input);
+        ArrayList<String> parameters = splitInput(input);
         int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
-        assert (goalIndex >= 0);
         String newGoalName = getName(parameters);
         return new UpdateGoalNameCommand(goalIndex, newGoalName);
     }
 
     public static Command parseUpdateGoalEndDate(String input) throws HaBitParserException {
-        checkNoDescription(input);
-        String[] parameters = splitInput(input);
+        ArrayList<String> parameters = splitInput(input);
         int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
-        assert (goalIndex >= 0);
         Date newDate = getDate(parameters);
         return new UpdateGoalEndDateCommand(goalIndex, newDate);
     }
@@ -136,10 +128,8 @@ public class UpdateParser extends Parser {
      * @throws HaBitParserException If command parameters are not defined, or defined improperly.
      */
     public static Command parseUpdateGoalTypeCommand(String input) throws HaBitParserException {
-        checkNoDescription(input);
-        String[] parameters = splitInput(input);
+        ArrayList<String> parameters = splitInput(input);
         int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
-        assert (goalIndex >= 0);
         GoalType newGoalType = getType(parameters);
         return new UpdateGoalTypeCommand(goalIndex, newGoalType);
     }
@@ -152,12 +142,9 @@ public class UpdateParser extends Parser {
      * @throws HaBitParserException If command parameters are not defined, or defined improperly.
      */
     public static Command parseUpdateHabitNameCommand(String input) throws HaBitParserException {
-        checkNoDescription(input);
-        String[] parameters = splitInput(input);
+        ArrayList<String> parameters = splitInput(input);
         int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
         int habitIndex = getIndex(parameters, FLAG_HABIT_INDEX);
-        assert (goalIndex >= 0);
-        assert (habitIndex >= 0);
         String newHabitName = getName(parameters);
         return new UpdateHabitNameCommand(goalIndex, habitIndex, newHabitName);
     }
@@ -170,8 +157,7 @@ public class UpdateParser extends Parser {
      * @throws HaBitParserException If command parameters are not defined, or defined improperly
      */
     public static Command parseUpdateHabitIntervalCommand(String commandInstruction) throws HaBitParserException {
-        checkNoDescription(commandInstruction);
-        String[] parameters = splitInput(commandInstruction);
+        ArrayList<String> parameters = splitInput(commandInstruction);
         int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
         int habitIndex = getIndex(parameters, FLAG_HABIT_INDEX);
         int interval = getUpdateInterval(parameters, FLAG_INTERVAL);
@@ -192,32 +178,32 @@ public class UpdateParser extends Parser {
      * =========================================================================
      */
 
-    private static boolean isUpdateGoalName(String[] parameters) {
+    private static boolean isUpdateGoalName(ArrayList<String> parameters) {
         return isContainFlag(parameters, FLAG_GOAL_INDEX) && isContainFlag(parameters, FLAG_NAME)
                 && isContainNoOtherFlag(parameters, FLAG_GOAL_INDEX, FLAG_NAME);
     }
 
-    private static boolean isUpdateGoalType(String[] parameters) {
+    private static boolean isUpdateGoalType(ArrayList<String> parameters) {
         return isContainFlag(parameters, FLAG_GOAL_INDEX) && isContainFlag(parameters, FLAG_GOAL_TYPE)
                 && isContainNoOtherFlag(parameters, FLAG_GOAL_INDEX, FLAG_GOAL_TYPE);
     }
 
-    private static boolean isUpdateGoalEndDate(String[] parameters) {
+    private static boolean isUpdateGoalEndDate(ArrayList<String> parameters) {
         return isContainFlag(parameters, FLAG_GOAL_INDEX) && isContainFlag(parameters, FLAG_END_DATE)
                 && isContainNoOtherFlag(parameters, FLAG_GOAL_INDEX, FLAG_END_DATE);
     }
 
-    private static boolean isChangeHabitName(String[] parameters) {
+    private static boolean isChangeHabitName(ArrayList<String> parameters) {
         return isContainFlag(parameters, FLAG_GOAL_INDEX) && isContainFlag(parameters, FLAG_HABIT_INDEX)
                 && isContainFlag(parameters, FLAG_NAME);
     }
 
-    private static boolean isChangeHabitInterval(String[] parameters) {
+    private static boolean isChangeHabitInterval(ArrayList<String> parameters) {
         return isContainFlag(parameters, FLAG_GOAL_INDEX) && isContainFlag(parameters, FLAG_HABIT_INDEX)
                 && isContainFlag(parameters, FLAG_INTERVAL);
     }
 
-    private static boolean isContainFlag(String[] parameters, String flag) {
+    private static boolean isContainFlag(ArrayList<String> parameters, String flag) {
         for (String param : parameters) {
             if (param.contains(flag)) {
                 return true;
@@ -238,8 +224,7 @@ public class UpdateParser extends Parser {
      * @param secondFlag Second expected flag from user.
      * @return True if there is no excess parameters in user input. False otherwise.
      */
-    private static boolean isContainNoOtherFlag(String[] parameters, String firstFlag, String secondFlag) {
-
+    private static boolean isContainNoOtherFlag(ArrayList<String> parameters, String firstFlag, String secondFlag) {
         for (String param : parameters) {
             if (param.contains(FLAG_GOAL_INDEX) && isExcessFlag(FLAG_GOAL_INDEX, firstFlag, secondFlag)) {
                 return false;
@@ -269,13 +254,10 @@ public class UpdateParser extends Parser {
      * @return True if referenceFlag is not equal to the 2 expected flags. False otherwise.
      */
     private static boolean isExcessFlag(String referenceFlag, String firstFlag, String secondFlag) {
-        if (referenceFlag.equals(firstFlag) || referenceFlag.equals(secondFlag)) {
-            return false;
-        }
-        return true;
+        return !referenceFlag.equals(firstFlag) && !referenceFlag.equals(secondFlag);
     }
 
-    private static Date getDate(String[] parameters) throws HaBitParserException {
+    private static Date getDate(ArrayList<String> parameters) throws HaBitParserException {
         String strEndDate = getParameter(parameters, FLAG_END_DATE);
         if (strEndDate == null || strEndDate.equals(FLAG_END_DATE)) {
             throw new HaBitParserException(ERROR_GOAL_END_DATE_FORMAT);

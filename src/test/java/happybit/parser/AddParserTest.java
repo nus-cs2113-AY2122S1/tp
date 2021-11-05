@@ -19,8 +19,9 @@ class AddParserTest {
 
     private static final String ERROR_GOAL_INDEX_FORMAT = "The command is missing the 'g/' flag";
     private static final String ERROR_NAME_FORMAT = "Use the 'n/' flag to define the name. Exp: n/Foo";
+    private static final String ERROR_NO_DESCRIPTION = "Use a description of at least 1 character";
     private static final String ERROR_GOAL_TYPE_FORMAT = "Use the 't/' flag to define the goal type. Exp: t/df";
-    private static final String ERROR_INTERVAL_FORMAT = "The command is missing the 'i/' flag";
+    private static final String ERROR_INTERVAL_FORMAT = "The flag 'i/' has to be followed by a number";
     private static final String ERROR_DATE_FORMAT = "Use the date format: 'ddMMyyyy'.";
     private static final String ERROR_END_DATE_FORMAT = "Use 'e/ddMMyyyy' to define the end date. Exp: e/25122021";
     private static final String ERROR_START_DATE_FORMAT = "Use 's/ddMMyyyy' to define the start date. Exp: s/25122021";
@@ -109,7 +110,7 @@ class AddParserTest {
             AddParser.parseAddGoalCommand(" n/  t/ e/31122022");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_NAME_FORMAT, e.getMessage());
+            assertEquals(ERROR_NO_DESCRIPTION, e.getMessage());
         }
 
         try {
@@ -185,16 +186,6 @@ class AddParserTest {
             fail();
         } catch (HaBitParserException e) {
             assertEquals(ERROR_CHRONOLOGICAL_DATE, e.getMessage());
-        }
-    }
-
-    @Test
-    void parseAddGoalCommand_nullInput_exceptionThrown() {
-        try {
-            AddParser.parseAddGoalCommand(null);
-            fail();
-        } catch (HaBitParserException e) {
-            assertEquals(Parser.ERROR_NO_PARAMS, e.getMessage());
         }
     }
 

@@ -13,9 +13,11 @@ class UpdateParserTest {
     private static final String ERROR_GOAL_INDEX_FORMAT = "The command is missing the 'g/' flag";
     private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The flag 'g/' has to be followed by a number";
     private static final String ERROR_GOAL_NAME_FORMAT = "Use the 'n/' flag to define the name. Exp: n/Foo";
+    private static final String ERROR_NO_DESCRIPTION = "Use a description of at least 1 character";
     private static final String ERROR_HABIT_INDEX_FORMAT = "The command is missing the 'h/' flag";
     private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The flag 'h/' has to be followed by a number";
-    private static final String ERROR_INTERVAL_FORMAT = "The command is missing the 'i/' flag";
+    private static final String ERROR_INTERVAL_FORMAT = "The flag 'i/' has to be followed by a number";
+    private static final String ERROR_MISSING_INTERVAL = "The command is missing the 'i/' flag";
     private static final String ERROR_INTERVAL_NON_INTEGER = "The flag 'i/' has to be followed by a number";
     private static final String ERROR_GOAL_INDEX_NEGATIVE_NUM =
             "The flag 'g/' has to be followed by a positive integer";
@@ -99,7 +101,7 @@ class UpdateParserTest {
             UpdateParser.parseUpdateGoalNameCommand("g/1 n/ ");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_GOAL_NAME_FORMAT, e.getMessage());
+            assertEquals(ERROR_NO_DESCRIPTION, e.getMessage());
         }
 
         try {
@@ -109,17 +111,6 @@ class UpdateParserTest {
             assertEquals(ERROR_GOAL_NAME_FORMAT, e.getMessage());
         }
     }
-
-    @Test
-    void parseUpdateGoalNameCommand_nullInput_exceptionThrown() {
-        try {
-            UpdateParser.parseUpdateGoalNameCommand(null);
-            fail();
-        } catch (HaBitParserException e) {
-            assertEquals(Parser.ERROR_NO_PARAMS, e.getMessage());
-        }
-    }
-
 
     @Test
     void parseUpdateHabitIntervalCommand_validInput_success() throws HaBitParserException {
@@ -245,14 +236,14 @@ class UpdateParserTest {
             UpdateParser.parseUpdateHabitIntervalCommand("g/1 h/1 n/ ");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_INTERVAL_FORMAT, e.getMessage());
+            assertEquals(ERROR_MISSING_INTERVAL, e.getMessage());
         }
 
         try {
             UpdateParser.parseUpdateHabitIntervalCommand("g/1 h/1 ");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_INTERVAL_FORMAT, e.getMessage());
+            assertEquals(ERROR_MISSING_INTERVAL, e.getMessage());
         }
     }
 
@@ -287,16 +278,6 @@ class UpdateParserTest {
             fail();
         } catch (HaBitParserException e) {
             assertEquals(ERROR_INTERVAL_ZERO_NUM, e.getMessage());
-        }
-    }
-
-    @Test
-    void parseUpdateGHabitIntervalCommand_nullInput_exceptionThrown() {
-        try {
-            UpdateParser.parseUpdateHabitIntervalCommand(null);
-            fail();
-        } catch (HaBitParserException e) {
-            assertEquals(Parser.ERROR_NO_PARAMS, e.getMessage());
         }
     }
 
