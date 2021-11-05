@@ -13,11 +13,10 @@ set up CCA Manager on your computer. The [Commands](#commands) section will show
 them. Finally, [Command Summary](#command-summary) provides you with an overview of all the commands you can execute.
 
 ## Table of contents
-
+* [Acknowledgements](#acknowledgements)
 * [Pre-requisites](#pre-requisites---_things-to-prepare-before-you-start-using-cca-manager_)
 * [Commands](#commands)
   * [Warning Labels](#warning-labels) ⚠️
-
   * [Members](#member-commands)
     * [add /m](#add-member)
     * [delete /m](#delete-member)
@@ -35,6 +34,14 @@ them. Finally, [Command Summary](#command-summary) provides you with an overview
     * [delete /att](#delete-attendance)
     * [list /att](#list-attendance)
 * [Command Summary](#command-summary)
+
+## Acknowledgements
+* SE-EDU
+    1. [AB3 Developer Guide Format](https://se-education.org/addressbook-level3/DeveloperGuide.html)
+    2. [AB3 User Guide Format](https://se-education.org/addressbook-level3/UserGuide.html)
+    3. [AB3 Appendix: Requirements](https://se-education.org/addressbook-level3/DeveloperGuide.html#appendix-requirements)
+    4. [AB2 Code Basics](https://github.com/se-edu/addressbook-level2)
+* [PlantUML](https://plantuml.com/)
 
 ## Pre-requisites - _Things to prepare before you start using CCA Manager_
 1. CCA Manager runs on Java 11. Please ensure you have `Java 11` installed on your workstation.
@@ -71,12 +78,12 @@ as any training-related information regarding your CCA's venue bookings and timi
 
 To start, you can populate the member list of **CCA Manager** with the help of the `add` member command. This command lets you key in necessary information such as your members' particulars
 
-1. `add /m` This adds entries to the Member List stored in CCA Manager.
+* `add /m` This adds entries to the Member List stored in CCA Manager.
     * The `add /m` keyword requires 4 different arguments:
         * use `/n` to input _name_ of your member. 
         * use `/s` to input _student number_ of your member.
-          * ⚠️ Student Number of each entry must be _unique_. Different member entries with the same student number is not allowed.
-        * use `/g` to input _gender_ of your member. Either _M_ for male and _F_ for female.
+          * ⚠️ Student Number of each entry must be _unique_. Different member entries with the same student number are not allowed.
+        * use `/g` to input _gender_ of your member. Either _M_ for male or _F_ for female.
         * use `/p` to input _phone number_ of your member.
    
     * **Format:**
@@ -94,8 +101,8 @@ To start, you can populate the member list of **CCA Manager** with the help of t
 ### Delete Member
 If one of your CCA members has quit, or your senior has graduated, you can remove their entry from **CCA Manager** to keep your member list up to date.
 
-2. `delete /m` This delete entries from the Member list in **CCA Manager**.
-   * The `delete /m` keyword can delete entries using either of two different prompts: index or name
+* `delete /m` This deletes entries from the Member list in **CCA Manager**.
+   * The `delete /m` keyword can delete entries using either of two different prompts: _index_ or _name_
      * You can delete member entries by inputting the `index` of the member.
      * You can also delete member entries by inputting the `name` of the member.
        * If there are *two or more* members with the same name, **CCA Manager** will display these members and their indexes and prompt you to delete the member you want using his/her index.
@@ -105,24 +112,24 @@ If one of your CCA members has quit, or your senior has graduated, you can remov
    * **Examples:**
      * `delete /m 1` Deletes the first member on the member list.
      * `delete /m John` Deletes a member with the name 'John'.
-       * If there is more than 1 John in the member list, a prompt will show up and you will need to delete the 'John' based on his index number.
+       * If there is more than 1 John in the member list, a prompt will show up, indicating that you may not add a duplicate member. 
+       _To avoid this error, you may want to key in the full name of your memebers!_
    * **Expected Output:**
    
    ```
     You have removed member: 
     [1] Name: JOHN HWEE | Student Number: A0248192K | Gender: M | Phone Number: 91128888
-   
-   !!!!!!!!!!!!!!!!!!!!!!!!!!ADD EXAMPLE OF DELETE JOHN WHEN THERE IS TWO JOHN HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   !!!!!!!!!!!!!!!!!!!!!!!!!!ADD EXAMPLE OF DELETE JOHN WHEN THERE IS TWO JOHN HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   !!!!!!!!!!!!!!!!!!!!!!!!!!ADD EXAMPLE OF DELETE JOHN WHEN THERE IS TWO JOHN HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   !!!!!!!!!!!!!!!!!!!!!!!!!!ADD EXAMPLE OF DELETE JOHN WHEN THERE IS TWO JOHN HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   !!!!!!!!!!!!!!!!!!!!!!!!!!ADD EXAMPLE OF DELETE JOHN WHEN THERE IS TWO JOHN HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!
    ```
+   * **Expected Output for duplicate member:**
+    ```
+    Error when adding member:
+        Duplicate name found. Please enter a different name
+    ```
 
 ### List Member
 **CCA Manager** allows you to list out all the recorded members in your member list.
 
-2. `list /m` This lists out entries in CCA Manager's Member List.
+* `list /m` This lists out entries in CCA Manager's Member List.
    * The `list /m` keyword is strict, meaning that it must follow the above format. E.g. `list /m RANDOM` will not be a valid command.
    * `list /m` will also show you the `index` of the members that will be helpful for other commands.
    * **Format:** 
@@ -140,7 +147,7 @@ If one of your CCA members has quit, or your senior has graduated, you can remov
 Oh, no! You were careless, and you accidentally keyed in John's name wrongly! Worry not; if you have to perform minor changes to your member entries, **CCA Manager** allows you to edit your member entries by using the edit function.
 This means that you will not have to delete the entry and then add a new one later on.
 
-4. `edit /m` This edits an existing entry from the member list
+* `edit /m` This edits an existing entry from the member list
     * Entries are referenced using their index
     * `/m <MEMBER_INDEX_NUMBER>` edits the member detail stored at the given index. The index is a **compulsory** field.
       * The below fields are on a fill-per-case basis. Only fill in the fields that need changing.
@@ -170,7 +177,7 @@ This means that you will not have to delete the entry and then add a new one lat
 ### Find Member
 **CCA Manager** allows you to search for a specific member by typing in a _keyword_ with the find function.
 
-5. `find` Searches for members based on the keyword given.
+* `find` Searches for members based on the keyword given.
    * The keyword should be related to the name of the member
    * `/m <MEMBER_NAME_KEYWORD>` finds ALL entries with the MEMBER_NAME_KEYWORD in it.
      * For example, if you type `find /m jon`, `JON TAN` and `JON BOVI` will be found, but `JOHN LIM` will not be matched
@@ -195,7 +202,7 @@ This means that you will not have to delete the entry and then add a new one lat
 ### Add Training
 **CCA Manager** can help add trainings to your training list with the help of the `add /t` command.
 
-1. `add /t` This adds entries to the Training List stored in CCA Manager.
+* `add /t` This adds entries to the Training List stored in CCA Manager.
     * The `add /t` keyword requires 3 different arguments:
         * use `/n` to input _name_ of your training schedule.
           * ⚠️ Training Schedules must have _unique_ names. Different training entries with the same training name is not allowed.
@@ -229,7 +236,7 @@ This means that you will not have to delete the entry and then add a new one lat
 ### Delete Training
 You can delete any existing training schedules with the help of the `delete` command.
 
-2. `delete /t` This delete entries from the training list in **CCA Manager**.
+* `delete /t` This delete entries from the training list in **CCA Manager**.
     * The `delete /t` keyword can delete entries using either of two different prompts: index or name
         * You can delete training entries by inputting the `index` of the training.
         * You can also delete training entries by inputting the `name` of the training.
@@ -258,7 +265,7 @@ You can delete any existing training schedules with the help of the `delete` com
 ### List Training
 **CCA Manager** allows you to list out all the recorded trainings.
 
-2. `list /t` This lists out entries in CCA Manager's Training List.
+* `list /t` This lists out entries in CCA Manager's Training List.
     * The `list /t` keyword is strict, meaning that it must follow the above format. E.g. `list /t TRAININGABC` will not be a valid command.
     * `list /t` will also show you the `index` of the trainings that will be helpful for other commands.
     * **Format:**
@@ -273,7 +280,7 @@ You can delete any existing training schedules with the help of the `delete` com
 ### Edit Training
 Had a sudden change in venue for your trainings? No worries! You can edit your training schedules with the help of the `edit /t` feature.
 
-4. `edit /t` This edits an existing entry from the training list
+* `edit /t` This edits an existing entry from the training list
     * Entries are referenced using their index
     * `/t <TRAINING_INDEX_NUMBER>` edits the training detail stored at the given index. The index is a **compulsory** field.
         * The below fields are on a fill-per-case basis. Only fill in the fields that need changing.
@@ -303,7 +310,7 @@ Had a sudden change in venue for your trainings? No worries! You can edit your t
    ```
 ### Find Training
 Have too many training schedules, and can't find the one you want? Just use the `find /t` feature to list out all candidates, helping you find it easier!
-5. `find` Searches for training schedules based on the keyword given.
+* `find` Searches for training schedules based on the keyword given.
     * The keyword should be related to the name of the training
     * `/t <TRAINING_NAME_KEYWORD>` finds ALL entries with the TRAINING_NAME_KEYWORD in it.
         * For example, if you type `find /t friday`, `FRIDAY TRAINING 1` and `FRIDAY TRAINING 2` will be found, but `FIDAY TRAINING` will not be matched
@@ -324,12 +331,12 @@ Have too many training schedules, and can't find the one you want? Just use the 
 ### Add Attendance
 **CCA Manager** can help keep track of which members went for which training with the help of the `add /att` feature.
 
-1. `add /att` This adds entries to the Attendance List stored in CCA Manager.
+* `add /att` This adds entries to the Attendance List stored in CCA Manager.
     * The `add /att` keyword requires 3 different arguments:
         * use `/m` to input _member name_ of the student who attended training.
         * use `/n` to input the _training name_ that the student attended.
         * use `/d` to input _status_ of the student who attended training.
-          * 1 represents 'Present', while 0 represents 'Absent'
+          * _1_ represents 'Present', while _0_ represents 'Absent'.
 
     * **Format:**
         * `add [/att [/m MEMBER_NAME] [/n TRAINING_NAME] [/d 1_OR_0]`
@@ -341,13 +348,12 @@ Have too many training schedules, and can't find the one you want? Just use the 
    ```
    Added an Attendance entry:
    Name: JOHN HWEE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
-   C:\repos\tP/DukeAttendance/WEEKLY FRIDAY TRAINING 1.csv 
    ```
 
 ### Delete Attendance
 You can delete existing attendance entries with the help of the `delete /att` command.
 
-2. `delete /att` This delete entries from the Attendance List in **CCA Manager**.
+* `delete /att` This delete entries from the Attendance List in **CCA Manager**.
     * The `delete /att` keyword can delete attendance entries based on index and training name. It takes in two arguments
         * `/t` represents the _training name_ of the attendance to delete from.
         * `/i` represents the _index_ of the attendee to delete.
@@ -373,7 +379,7 @@ You can delete existing attendance entries with the help of the `delete /att` co
 ### List Attendance
 **CCA Manager** allows you to list out all attendance entries recorded.
 
-2. `list /att` This lists out entries in CCA Manager's Attendance List.
+* `list /att` This lists out entries in CCA Manager's Attendance List.
     * `list /att` takes in several arguments
       * use `/t <TRAINING_NAME>` to look for all attendances for a particular training
       * use `/d <1 OR 0>` to further filter the list to show attendances of people who were present or absent
@@ -400,7 +406,6 @@ You can delete existing attendance entries with the help of the `delete /att` co
         [1] Name: JOHN HWEE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
         [2] Name: BILLIE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
         ```
-
 
 ## Command Summary
 

@@ -1,6 +1,7 @@
 # Developer Guide
 
 * [Introduction](#introduction)
+* [Acknowledgements](#acknowledgements)
 * [Setting Up](#setting-up)
 * [Design](#design)
   * [Architecture](#architecture)
@@ -30,6 +31,13 @@ improving other aspects of the CCA.
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
 
+## Acknowledgements
+* SE-EDU
+  1. [AB3 Developer Guide Format](https://se-education.org/addressbook-level3/DeveloperGuide.html)
+  2. [AB3 User Guide Format](https://se-education.org/addressbook-level3/UserGuide.html)
+  3. [AB3 Appendix: Requirements](https://se-education.org/addressbook-level3/DeveloperGuide.html#appendix-requirements)
+  4. [AB2 Code Basics](https://github.com/se-edu/addressbook-level2)
+* [PlantUML](https://plantuml.com/)
 
 ## Setting Up
 
@@ -155,7 +163,7 @@ The `Command` component directly interacts with the `Member`, `Training` or `Att
 
 
 The `Member` component,
-* instantiates an `MemberList` object comprising of 0 `Member` object.
+* instantiates an `MemberList` object comprising 0 `Member` objects.
 * stores inputted `Member` objects in a list as an `ArrayList<Member>` in `MemberList` class.
 * stores the `MemberList` object in a csv file with the help of `MemberStorage`.
 
