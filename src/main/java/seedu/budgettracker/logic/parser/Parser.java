@@ -21,8 +21,11 @@ import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_COMMAND;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_DELETE_COMMAND;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_LIST_COMMAND;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_STAT_COMMAND;
-import static seedu.budgettracker.common.Messages.MESSAGE_WARNING_INCORRECT_YEAR_FORMAT; 
+import static seedu.budgettracker.common.Messages.MESSAGE_WARNING_INCORRECT_YEAR_FORMAT;
 
+/**
+ * Main Parser class which parses user input into a {@Code Command}.
+ */
 public class Parser {
 
     /** Offset required to convert between 1-indexing and 0-indexing.  */
@@ -31,6 +34,12 @@ public class Parser {
     /** Offset after reading type identifier tag. */
     public static final int TYPE_IDENTIFIER_END_INDEX = 2;
 
+    /**
+     * Splits the user input into the command word and arguments.
+     *
+     * @param userInput the raw input of the user as a String
+     * @return a String array with the command word in index 0 and the arguments in index 1
+     */
     private static String[] splitCommandWordAndArgs(String userInput) {
         final String[] split = userInput.trim().split(" ", 2);
         if (split.length == 2) {
@@ -39,29 +48,51 @@ public class Parser {
         return new String[]{split[0].toLowerCase(), ""};
     }
 
-    //    public static String[] splitExpenditureParams(String expenditureParams) {
-    //        return expenditureParams.split(" ", 3);
-    //    }
-
-    public static HashMap<String, String> splitArguments(String commandParams, String[] prefixes) {
+    /**
+     * Splits the command arguments by their command prefixes.
+     *
+     * @param commandParams the raw command arguments string
+     * @param prefixes an array of prefix strings that the command should split by
+     * @return a HashMap of String keys and values, where keys are command prefixes,
+     *     and values are their respective values
+     */
+    public static HashMap<String, String> splitArgs(String commandParams, String[] prefixes) throws ParserException {
+        int counter = 0;
         HashMap<String, String> argumentMap = new HashMap<>();
         for (String prefix : prefixes) {
-            String parameterValue;
-            int startIndex = commandParams.indexOf(prefix) + 2;
-            if (startIndex == 1) {
+            if (!commandParams.contains(prefix)) {
                 argumentMap.put(prefix, "");
                 continue;
             }
-            String substring = commandParams.substring(startIndex);
-            if (substring.contains("/")) {
-                int endIndex = substring.indexOf("/") - 2;
-                parameterValue = substring.substring(0, endIndex);
-            } else {
-                parameterValue = substring;
-            }
-            argumentMap.put(prefix, parameterValue);
+            String argValue = findArgValue(commandParams, prefix);
+            argumentMap.put(prefix, argValue);
+            counter++;
         }
+        checkValidArguments(commandParams, counter);
         return argumentMap;
+    }
+
+    private static void checkValidArguments(String commandParams, int counter) throws ParserException {
+        String[] split = commandParams.split("[a-zA-Z]/");
+        if (split.length - 1 > counter) {
+            throw new ParserException("You have too many or incorrect arguments!");
+        }
+        if (!split[0].trim().equals("")) {
+            throw new ParserException("Your inputs are missing or incorrect!");
+        }
+    }
+
+    private static String findArgValue(String commandParams, String prefix) {
+        int startIndex = commandParams.indexOf(prefix) + 2;
+        String substring = commandParams.substring(startIndex);
+        String argValue;
+        if (substring.contains("/")) {
+            int endIndex = substring.indexOf("/") - 2;
+            argValue = substring.substring(0, endIndex);
+        } else {
+            argValue = substring;
+        }
+        return argValue;
     }
 
     /**
@@ -131,9 +162,9 @@ public class Parser {
     }
 
     private Command prepareEditCommand(String commandParams) throws ParserException {
-        String editOption = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
-        String paramsToEdit = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
         try {
+            String editOption = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
+            String paramsToEdit = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
             switch (editOption) {
             case ("-b"):
                 return EditBudgetParser.parse(paramsToEdit);
@@ -144,7 +175,7 @@ public class Parser {
             default:
                 return new InvalidCommand("Missing inputs! Please indicate '-e', '-b' or '-l");
             }
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
             throw new ParserException("Missing type parameters! Make sure to indicate '-b','-e' or '-l'");
         }
     }

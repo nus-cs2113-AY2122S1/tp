@@ -2,6 +2,7 @@ package seedu.budgettracker.logic.commands;
 
 import org.junit.jupiter.api.Test;
 import seedu.budgettracker.data.RecordList;
+import seedu.budgettracker.data.records.exceptions.DuplicateBudgetException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -12,7 +13,11 @@ public class AddBudgetTest {
         double spendingLimit = 20.00;
         int month = 12;
         RecordList currentBudgetList = new RecordList(month);
-        currentBudgetList.addBudget(spendingLimit);
+        try {
+            currentBudgetList.addBudget(spendingLimit, false);
+        } catch (DuplicateBudgetException e) {
+            e.printStackTrace();
+        }
         assertEquals(20.00, currentBudgetList.getBudget().getAmount());
     }
 

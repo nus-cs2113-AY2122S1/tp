@@ -2,6 +2,7 @@ package seedu.budgettracker.logic.commands;
 
 import org.junit.jupiter.api.Test;
 import seedu.budgettracker.data.RecordList;
+import seedu.budgettracker.data.records.exceptions.DuplicateBudgetException;
 
 import java.time.LocalDate;
 
@@ -14,7 +15,11 @@ public class DeleteBudgetTest {
         int thisMonth = LocalDate.now().getMonthValue();
 
         RecordList currentBudgetList = new RecordList(thisMonth);
-        currentBudgetList.addBudget(08.00);
+        try {
+            currentBudgetList.addBudget(08.00, false);
+        } catch (DuplicateBudgetException e) {
+            e.printStackTrace();
+        }
         currentBudgetList.deleteBudget();
         assertEquals(0.00, currentBudgetList.getBudget().getAmount());
     }
