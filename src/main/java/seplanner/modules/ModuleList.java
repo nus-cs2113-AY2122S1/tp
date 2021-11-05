@@ -78,15 +78,6 @@ public class ModuleList {
         return false;
     }
 
-    public Module isExistModule(String moduleCode) {
-        for (Module module : list) {
-            if (module.moduleCode.equals(moduleCode)) {
-                return module;
-            }
-        }
-        return null;
-    }
-
     public Module getModule(String moduleCode) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).moduleCode.equals(moduleCode)) {
