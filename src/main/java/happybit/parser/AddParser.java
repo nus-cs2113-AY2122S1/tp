@@ -35,7 +35,6 @@ public class AddParser extends Parser {
      * @throws HaBitParserException If command parameters are not defined, or defined improperly.
      */
     public static Command parseAddGoalCommand(String commandInstruction) throws HaBitParserException {
-        checkNoDescription(commandInstruction);
         Goal goal = getGoal(commandInstruction);
         return new AddGoalCommand(goal);
     }
@@ -48,9 +47,8 @@ public class AddParser extends Parser {
      * @throws HaBitParserException If command parameters are not defined, or defined improperly.
      */
     public static Command parseAddHabitCommand(String commandInstruction) throws HaBitParserException {
-        checkNoDescription(commandInstruction);
         ArrayList<String> parameters = splitInput(commandInstruction);
-        int goalIndex = getNumber(parameters, FLAG_GOAL_INDEX) - 1;
+        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
         Habit habit = getHabit(commandInstruction);
         return new AddHabitCommand(habit, goalIndex);
     }

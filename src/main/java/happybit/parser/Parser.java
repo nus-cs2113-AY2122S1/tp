@@ -37,10 +37,7 @@ public class Parser {
             "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'";
     private static final String ERROR_NEGATIVE_NUM = "The flag '%1$s' has to be followed by a positive integer";
     private static final String ERROR_ZERO_NUM = "The flag '%1$s' has to be followed by a number greater than 0";
-    private static final String ERROR_GOAL_TYPE_LABEL = "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'";
     protected static final String ERROR_INTERVAL_TOO_LARGE = "Interval size is capped at 365 days.";
-    protected static final String ERROR_NO_PARAMS = "Command cannot be called without parameters. "
-            + "Enter the help command to view command formats";
     private static final String ERROR_NO_DESCRIPTION = "Use a description of at least 1 character";
     private static final String ERROR_LONG_DESCRIPTION = "Use a description no more than 50 characters "
             + "(current: %1$s characters)";
@@ -82,18 +79,6 @@ public class Parser {
     }
 
     /**
-     * Checks if the input is null.
-     *
-     * @param input String of the user input.
-     * @throws HaBitParserException If the user input is null (blank).
-     */
-    protected static void checkNoDescription(String input) throws HaBitParserException {
-        if (input == null) {
-            throw new HaBitParserException(ERROR_NO_PARAMS);
-        }
-    }
-
-    /**
      * 'Type-casting' a Date to a LocalDate.
      *
      * @param date Date to be 'type-casted'.
@@ -128,12 +113,12 @@ public class Parser {
     }
 
     /**
-     * Gets the index of a goal/habit from the user input.
+     * Gets the number of a goal/habit from the user input.
      *
      * @param parameters String array of command parameters.
      * @param flag       Goal/habit flag.
      * @return Index of a goal/habit.
-     * @throws HaBitParserException If the index cannot be obtained from the user input.
+     * @throws HaBitParserException If the number cannot be obtained from the user input.
      */
     protected static int getNumber(ArrayList<String> parameters, String flag) throws HaBitParserException {
         String indexWithFlag = getAndCheckParameter(parameters, flag, String.format(ERROR_INTEGER_FLAG_FORMAT, flag));
@@ -230,8 +215,13 @@ public class Parser {
         String parameter = getParameter(parameters, flag);
         if (parameter == null) {
             throw new HaBitParserException(errorMessage);
+        } else if (parameter.equals(FLAG_NAME) || parameter.equals(FLAG_INTERVAL)) {
+            return parameter;
+        } else if (parameter.equals(flag)) {
+            throw new HaBitParserException(errorMessage);
+        } else {
+            return parameter;
         }
-        return parameter;
     }
 
     /**

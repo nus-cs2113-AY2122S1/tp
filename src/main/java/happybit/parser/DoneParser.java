@@ -16,10 +16,9 @@ public class DoneParser extends Parser {
      * @throws HaBitParserException If command parameters are not defined, or defined improperly.
      */
     public static Command parseDoneHabitCommand(String input) throws HaBitParserException {
-        checkNoDescription(input);
         ArrayList<String> parameters = splitInput(input);
-        int goalIndex = getNumber(parameters, FLAG_GOAL_INDEX) - 1;
-        int habitIndex = getNumber(parameters, FLAG_HABIT_INDEX) - 1;
+        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
+        int habitIndex = getIndex(parameters, FLAG_HABIT_INDEX);
         return new DoneHabitCommand(goalIndex, habitIndex);
     }
 

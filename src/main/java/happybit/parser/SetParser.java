@@ -16,9 +16,8 @@ public class SetParser extends Parser {
      * @throws HaBitParserException If command parameters are not defined, or defined improperly.
      */
     public static Command parseSetGoalCommand(String commandInstruction) throws HaBitParserException {
-        checkNoDescription(commandInstruction);
         ArrayList<String> parameters = splitInput(commandInstruction);
-        int goalIndex = getNumber(parameters, FLAG_GOAL_INDEX) - 1;
+        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
         return new SetCommand(goalIndex);
     }
 

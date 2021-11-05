@@ -49,7 +49,6 @@ public class UpdateParser extends Parser {
      *                              or when parameters are not in the same
      */
     public static Command parseUpdateGoalCommands(String input) throws HaBitParserException {
-        checkNoDescription(input);
         ArrayList<String> parameters = splitInput(input);
         if (isUpdateGoalName(parameters)) {
             return parseUpdateGoalNameCommand(input);
@@ -80,7 +79,6 @@ public class UpdateParser extends Parser {
      *                              or when parameters are not the same
      */
     public static Command parseUpdateHabitCommands(String input) throws HaBitParserException {
-        checkNoDescription(input);
         ArrayList<String> parameters = splitInput(input);
 
         if (isChangeHabitName(parameters)) {
@@ -109,17 +107,15 @@ public class UpdateParser extends Parser {
      * @throws HaBitParserException If command parameters are not defined, or defined improperly.
      */
     public static Command parseUpdateGoalNameCommand(String input) throws HaBitParserException {
-        checkNoDescription(input);
         ArrayList<String> parameters = splitInput(input);
-        int goalIndex = getNumber(parameters, FLAG_GOAL_INDEX) - 1;
+        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
         String newGoalName = getName(parameters);
         return new UpdateGoalNameCommand(goalIndex, newGoalName);
     }
 
     public static Command parseUpdateGoalEndDate(String input) throws HaBitParserException {
-        checkNoDescription(input);
         ArrayList<String> parameters = splitInput(input);
-        int goalIndex = getNumber(parameters, FLAG_GOAL_INDEX) - 1;
+        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
         Date newDate = getDate(parameters);
         return new UpdateGoalEndDateCommand(goalIndex, newDate);
     }
@@ -132,9 +128,8 @@ public class UpdateParser extends Parser {
      * @throws HaBitParserException If command parameters are not defined, or defined improperly.
      */
     public static Command parseUpdateGoalTypeCommand(String input) throws HaBitParserException {
-        checkNoDescription(input);
         ArrayList<String> parameters = splitInput(input);
-        int goalIndex = getNumber(parameters, FLAG_GOAL_INDEX) - 1;
+        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
         GoalType newGoalType = getType(parameters);
         return new UpdateGoalTypeCommand(goalIndex, newGoalType);
     }
@@ -147,10 +142,9 @@ public class UpdateParser extends Parser {
      * @throws HaBitParserException If command parameters are not defined, or defined improperly.
      */
     public static Command parseUpdateHabitNameCommand(String input) throws HaBitParserException {
-        checkNoDescription(input);
         ArrayList<String> parameters = splitInput(input);
-        int goalIndex = getNumber(parameters, FLAG_GOAL_INDEX) - 1;
-        int habitIndex = getNumber(parameters, FLAG_HABIT_INDEX) - 1;
+        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
+        int habitIndex = getIndex(parameters, FLAG_HABIT_INDEX);
         String newHabitName = getName(parameters);
         return new UpdateHabitNameCommand(goalIndex, habitIndex, newHabitName);
     }
@@ -163,7 +157,6 @@ public class UpdateParser extends Parser {
      * @throws HaBitParserException If command parameters are not defined, or defined improperly
      */
     public static Command parseUpdateHabitIntervalCommand(String commandInstruction) throws HaBitParserException {
-        checkNoDescription(commandInstruction);
         ArrayList<String> parameters = splitInput(commandInstruction);
         int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
         int habitIndex = getIndex(parameters, FLAG_HABIT_INDEX);
