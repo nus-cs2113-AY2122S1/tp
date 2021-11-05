@@ -121,17 +121,27 @@ public class University implements Comparator<University> {
         return 0;
     }
 
+    //@@author madhanse
+    /**
+     * Checks whether the module mapping exists in the list.
+     * @param mapping Module mapping to check
+     * @return True if exists. Otherwise, false
+     */
     public boolean isExistMapping(ModuleMapping mapping) {
         ArrayList<ModuleMapping> mappingList = getList();
         for (int i = 0; i < getMappingListSize(); i++) {
-            if (mappingList.get(i).equals(mapping)) {
+            if (mappingList.get(i).isEqual(mapping)) {
                 return true;
             }
         }
         return false;
     }
 
-
+    //@@author madhanse
+    /**
+     * Converts university object into a string to store it in the file.
+     * @return String containing details of university object
+     */
     public String toFileFormat() {
         String result = name + System.lineSeparator();
         for (int i = 0; i < list.size(); i++) {

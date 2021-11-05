@@ -10,9 +10,15 @@ public class ModuleMapping {
         this.mappedModule = mappedModule;
     }
 
-    public boolean equals(ModuleMapping searchMapping) {
-        return getLocalModule().equals(searchMapping.localModule)
-                && getMappedModule().equals(searchMapping.mappedModule);
+    //@@author madhanse
+    /**
+     * Checks if two module mapping objects are equal
+     * @param searchMapping Module mapping to check
+     * @return True if equal. Otherwise, false
+     */
+    public boolean isEqual(ModuleMapping searchMapping) {
+        return getLocalModule().IsEqual(searchMapping.localModule)
+                && getMappedModule().IsEqual(searchMapping.mappedModule);
     }
 
     public Module getLocalModule() {
