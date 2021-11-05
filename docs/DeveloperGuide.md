@@ -334,4 +334,114 @@ a list of potential exchange Universities based on the users study plan, module 
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+<div markdown="block" class="alert alert-info"> :information_source: **Note:**
+These instructions only provide a starting point for testers to work on; testers are expected to do more exploratory testing.
+</div>
+
+### Launch and shutdown
+
+1. Initial launch
+   1. Download the jar file and copy into an empty folder.
+   2. Open a terminal at the folder containing the jar file.
+   3. Run the command `java -jar seplanner.jar`
+      Expected: The welcome ascii art will display.
+   4. Resize the terminal to fit the welcome ascii.
+2. Shutdown
+   1. Enter the command `exit`.
+      Expected: The exit ascii art will display.
+
+### Getting help
+1. Get help for user the program.
+   1. Test case: `help`
+
+      Expected: The command list will be printed to console.
+
+### Getting university list and module list
+1. Listing the master university list.
+   1. Test case: `list /muni`
+
+      Expected: The entire list of universities are printed.
+
+2. Listing the master module list
+   1. Test case: `list /mmod`
+
+      Expected: The entire list of modules are printed.
+
+3. Listing the user selected university list.
+   1. Test case: `list /suni`
+
+      Expected: The user selected university list are displayed.
+
+4. Listing the user selected module list.
+   1. Test case: `list /smod`
+
+      Expected: The user selected module list are displayed.
+
+5. Dealing with wrong flags.
+   1. Test case: 'list /mod'
+
+      Expected: Error message indicating wrong flags is shown, together with the correct format for `list` command.
+
+6. Dealing with incorrect format.
+   1. Test case: `list`
+
+      Expected: Error message indicating missing flags is shown, together with the correct format for `list` command.
+
+### Finding a university
+
+### Finding a module
+
+### Adding a university
+1. Adding a university by index.
+   1. Test case: `add /uni 1`
+      
+      Expected: University with index 1 is added to the selected list of university. Success message is shown.
+   2. Test case: `add /uni 0`
+
+      Expected: No university is added. Error message is printed to indicate university is not available.
+
+   3. Test case: `add /uni 81`
+
+      Expected: No university is added. Error message is printed to indicate university is not available.
+
+2. Adding a university by university name.
+   1. Test case: `add /uni University of California`
+   
+      Expected: University of California is added into the list of selected university list. Success message is shown.
+
+   2. Test case: `add /uni random_string`
+
+      Expected: No university is added. Error message is printed to indicate university is not available.
+
+3. Adding a duplicate university by index.
+   1. Prerequisites: Delete the data file and restart the program. Run the command `add /uni 34`.
+   2. Test case: `add /uni 34`
+      
+      Expected: Error message indicating duplicate university is shown.
+    
+4. Adding a duplicate university by university name.
+   1. Prerequisites: Delete the data file and restart the program. Run the command `add /uni University of Toronto`.
+   2. Test case: `add /uni University of Toronto`
+
+      Expected: Error message indicating duplicate university is shown.
+
+### Adding a module
+
+### Adding a mapping
+
+### Search for a mapping
+
+### Adding a university
+
+### Adding a module
+
+### Adding a mapping
+
+### Removing a university
+
+### Removing a module
+
+### Removing a mapping
+
+### Saving data
+
