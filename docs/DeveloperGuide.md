@@ -24,10 +24,23 @@ and third-party libraries -- include links to the original source as well}
 
 ## Design
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document 
-can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. 
+> :bulb: **Tip:** The `.puml` files used to create diagrams in this document 
+> can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. 
+
 ### Architecture
 (Some architecture diagram)
+The Architecture diagram above explains the high-level design of the Typists app.  
+Given below is a quick overview of main components and how they interact with each other.
+
+**Main Components of the architecture**
+The `Main` class is the entry point of Typist. It is responsible for parsing and running various user's command.
+
+The other core components of Typist:
+* `ui`: The Ui of the app.
+* `command`: Consists of `CommandFactory` which parses user inputs, and various `command` objects.
+* `common`: A collection of classes used by multiple other components.
+* ``
+
 
 ## Implementation
 
