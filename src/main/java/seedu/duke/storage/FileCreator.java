@@ -10,7 +10,7 @@ import seedu.duke.log.Log;
  */
 public class FileCreator {
     private static final String LIST_STORAGE_FOLDER = "data/";
-    private static final String LIST_STORAGE_FILE = "task.dat";
+    private static final String LIST_STORAGE_FILE = "tasks.dat";
 
     private File taskFile;
     private static final String IO_EXCEPTION_MESSAGE = "IO Exception occurred while trying to create "
