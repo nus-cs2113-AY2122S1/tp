@@ -34,7 +34,7 @@ loop all ingredientGroups in ingredientList
         ing_group --> alert_exp: expiryDate
         opt expiryDate isbefore threshold date
             alert_exp -> ing_group
-            ing_group -> ing: getIngredientInfo()
+            ing_group -> ing: get()
             activate ing INGREDIENT_COLOUR
             ing --> ing_group: info
             deactivate ing
