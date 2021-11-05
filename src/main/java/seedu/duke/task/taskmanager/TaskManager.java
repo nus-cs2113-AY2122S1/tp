@@ -6,6 +6,7 @@ import seedu.duke.command.flags.ListFlag;
 import seedu.duke.command.flags.SortFlag;
 import seedu.duke.exception.EmptySortCriteriaException;
 import seedu.duke.exception.EmptyTasklistException;
+import seedu.duke.exception.InvalidFlagsException;
 import seedu.duke.exception.InvalidPriorityException;
 import seedu.duke.exception.InvalidRecurrenceException;
 import seedu.duke.exception.InvalidTaskIndexException;
@@ -488,9 +489,11 @@ public class TaskManager implements Subject {
      */
     //@@author SeanRobertDH
     public Task editFilteredTask(int index, Map<String, String> arguments) throws InvalidTaskIndexException,
-            InvalidPriorityException, InvalidRecurrenceException, ParseDateFailedException,
-            StartDateAfterEndDateException, URISyntaxException {
+        InvalidPriorityException, InvalidRecurrenceException, ParseDateFailedException,
+        StartDateAfterEndDateException, URISyntaxException, InvalidFlagsException {
         checkFilteredListIndexValid(index);
+        Task toEdit = latestFilteredList.get(index);
+        toEdit.checkAllEditFlagsValid(arguments);
         latestFilteredList.get(index).edit(arguments);
         updateObservers();
         return latestFilteredList.get(index);

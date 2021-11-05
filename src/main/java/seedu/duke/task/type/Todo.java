@@ -104,6 +104,11 @@ public class Todo extends Task {
     }
 
     //@@author SeanRobertDH
+    protected TodoFlag getTaskFlag() {
+        return new TodoFlag();
+    }
+
+    //@@author SeanRobertDH
     /**
      * Returns {@link #doOnDate}.
      */

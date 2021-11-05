@@ -132,6 +132,11 @@ public class Event extends Task {
     }
 
     //@@author SeanRobertDH
+    protected EventFlag getTaskFlag() {
+        return new EventFlag();
+    }
+
+    //@@author SeanRobertDH
     /**
      * Returns {@link #startDate}.
      */

@@ -16,7 +16,7 @@ import seedu.duke.task.taskmanager.TaskManager;
  */
 public class DeleteCommand extends Command {
 
-    private static final String TASK_DELETED = "Tasks deleted:\n";
+    private static final String TASK_DELETED = "Task(s) deleted:\n";
     private static final String USAGE = "-> Deleting a task: delete <index>";
 
     private static final String SPACE_REGEX = "[\\s|_]+";
