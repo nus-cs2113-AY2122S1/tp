@@ -1,4 +1,4 @@
-# Duke
+# TourPlanner
 
 If you are a tour agency who require customised data management solutions, **TourPlanner** is the program for you!
 TourPlanner has an intuitive and easy-to-use CLI interface, one can easily add to, and update the database with client, flight, and tour details!
