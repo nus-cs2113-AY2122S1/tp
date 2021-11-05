@@ -72,25 +72,25 @@ These are the diagrams (General, Class, Sequence...) I have added into the Devel
 
 #### For "3.1 Architecture"...
 <p align="center">
-    <img src="images/AmosUMLDiagrams/Architecture.png">
+    <img src="https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/docs/images/AmosUMLDiagrams/Architecture.png">
 </p>
 
 <p align="center">
-    <img src="images/AmosUMLDiagrams/SD_ValidInput.png">
+    <img src="https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/docs/images/AmosUMLDiagrams/SD_ValidInput.png">
 </p>
 
 #### For "3.2 UI Component"...
 <p align="center">
-    <img src="images/AmosUMLDiagrams/CD_UIComponent.png">
+    <img src="https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/docs/images/AmosUMLDiagrams/CD_UIComponent.png">
 </p>
 
 #### For "3.3 Parser Component"...
 <p align="center">
-    <img src="images/AmosUMLDiagrams/CD_ParserComponent.png">
+    <img src="https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/docs/images/AmosUMLDiagrams/CD_ParserComponent.png">
 </p>
 
 #### For"4.2 Filtering the tasklist"...
 <p align="center">
-    <img src="images/AmosUMLDiagrams/SD_FilteringTasklist.png">
+    <img src="https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/docs/images/AmosUMLDiagrams/SD_FilteringTasklist.png">
 </p>
 
