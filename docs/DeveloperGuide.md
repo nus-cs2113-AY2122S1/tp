@@ -55,6 +55,8 @@ The _Architecture Diagram_ shown above illustrates the high-level design of the 
 
 The _Architecture Sequence Diagram_ shown above shows how the components usually interact with each other.
 
+<br>
+
 ### Ui Component
 ![UiClassDiagram](diagrams/class/UiClassDiagram.png)
 
@@ -64,6 +66,8 @@ The `Ui` class handles all user interactions in the application.
 * Print messages with a standard output format.
 * Print exception messages with a standard output format.
 * Read user input through the `getUserInput` method.
+
+<br>
 
 ### Parser Component
 ![ParserClassDiagram](diagrams/class/ParserClassDiagram.png)
@@ -75,6 +79,8 @@ the user wishes to execute, and verify the validity of a value or provided by th
 * Parse a user input string and returning the respective `Command` object.
 * Check if a value is valid (e.g. Does not contain any illegal characters).
 
+<br>
+
 ### Command Component
 ![CommandClassDiagram](diagrams/class/CommandClassDiagram.png)
 
@@ -85,11 +91,17 @@ The `Command` class is an _abstract_ class inherited by other `Command` classes 
 * Check the validity of arguments provided by the user through the `checkArgument` method.
 * Perform the logic of the command run by the user through the `execute` method.
 
+<br>
+
 ### ClassList Component
 TODO
 
+<br>
+
 ### Util Component
 TODO
+
+<br>
 
 ### Storage Component
 ![StorageClassDiagram](diagrams/class/StorageClassDiagram.png)
@@ -101,6 +113,8 @@ deserialize the data read from the JSON file.
 * Save `ClassList` into a JSON file.
 * Read and parse JSON file into a `ClassList` object.
 * Filter out invalid data read from the JSON file.
+
+<br>
 
 ## Implementation
 ### Add Class
