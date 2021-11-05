@@ -71,30 +71,30 @@ public class Parser {
      * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
      */
     private static final Pattern ADD_EXPENSE_ARGUMENT_FORMAT =
-            Pattern.compile("d/(?<description>[^/]+)"
-                    + " a/(?<amount>[^/]+)"
-                    + " c/(?<category>[^/]+)");
+            Pattern.compile("^(?=.* d/(?<description>[^/]+?)( [ca]/|$))" 
+                    + "(?=.* a/(?<amount>[^/]+?)( [dc]/|$))" 
+                    + "(?=.* c/(?<category>[^/]+?)( [da]/|$)).*$");
 
     private static final Pattern ADD_EXPENSE_ARGUMENT_FORMAT_WITH_DATE =
-            Pattern.compile("d/(?<description>[^/]+)"
-                    + " a/(?<amount>[^/]+)"
-                    + " c/(?<category>[^/]+)"
-                    + " D/(?<date>.+)");
+            Pattern.compile("^(?=.* d/(?<description>[^/]+?)( [caD]/|$))"
+                    + "(?=.* a/(?<amount>[^/]+?)( [dcD]/|$))"
+                    + "(?=.* c/(?<category>[^/]+?)( [daD]/|$))" 
+                    + "(?=.* D/(?<date>[^a-zA-z]+?)( [dac]/|$)).*$");
 
     /**
      * This was adapted from addressbook-level2 source code here:
      * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
      */
     private static final Pattern ADD_INCOME_ARGUMENT_FORMAT =
-            Pattern.compile("d/(?<description>[^/]+)"
-                    + " a/(?<amount>[^/]+)"
-                    + " c/(?<category>[^/]+)");
+            Pattern.compile("^(?=.* d/(?<description>[^/]+?)( [ca]/|$))"
+                    + "(?=.* a/(?<amount>[^/]+?)( [dc]/|$))"
+                    + "(?=.* c/(?<category>[^/]+?)( [da]/|$)).*$");
 
     private static final Pattern ADD_INCOME_ARGUMENT_FORMAT_WITH_DATE =
-            Pattern.compile("d/(?<description>[^/]+)"
-                    + " a/(?<amount>[^/]+)"
-                    + " c/(?<category>[^/]+)"
-                    + " D/(?<date>.+)");
+            Pattern.compile("^(?=.* d/(?<description>[^/]+?)( [caD]/|$))"
+                    + "(?=.* a/(?<amount>[^/]+?)( [dcD]/|$))"
+                    + "(?=.* c/(?<category>[^/]+?)( [daD]/|$))"
+                    + "(?=.* D/(?<date>[^a-zA-z]+?)( [dac]/|$)).*$");
     /**
      * This was adapted from addressbook-level2 source code here:
      * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
@@ -112,10 +112,10 @@ public class Parser {
     private static final Pattern DATE_RANGE_ARGUMENT_FORMAT =
             Pattern.compile("s/(?<start>.+)"
                     + " e/(?<end>.+)");
-
+    
     private static final Pattern SET_BUDGET_ARGUMENT_FORMAT =
-            Pattern.compile("c/(?<category>[^/]+)"
-                    + " a/(?<amount>[^/]+)");
+            Pattern.compile("(?=.* c/(?<category>.+?)( [a]/|$))"
+                    + "(?=.* a/(?<amount>.+?)( [c]/|$)).*$");
 
     private static final Pattern CHECK_BUDGET_ARGUMENT_FORMAT =
             Pattern.compile("c/(?<category>[^/]+)");
@@ -179,7 +179,7 @@ public class Parser {
         }
 
         final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments").trim();
+        String arguments = matcher.group("arguments").trim();
         
         if (isExpenseRelatedCommand(commandWord)) {
             return prepareExpenseRelatedCommand(commandWord, arguments);
@@ -227,8 +227,8 @@ public class Parser {
     private Command prepareExpenseRelatedCommand(String commandWord, String arguments) {
         switch (commandWord) {
         case ADD_EXPENSE_KEYWORD:
-            final Matcher matcherWithoutDate = ADD_EXPENSE_ARGUMENT_FORMAT.matcher(arguments);
-            final Matcher matcherWithDate = ADD_EXPENSE_ARGUMENT_FORMAT_WITH_DATE.matcher(arguments);
+            final Matcher matcherWithoutDate = ADD_EXPENSE_ARGUMENT_FORMAT.matcher(" " + arguments);
+            final Matcher matcherWithDate = ADD_EXPENSE_ARGUMENT_FORMAT_WITH_DATE.matcher(" " + arguments);
             if (matcherWithoutDate.matches()) {
                 return prepareAddExpenseWithoutDate(matcherWithoutDate);
             } else if (matcherWithDate.matches()) {
@@ -252,8 +252,8 @@ public class Parser {
     private Command prepareIncomeRelatedCommand(String commandWord, String arguments) {
         switch (commandWord) {
         case ADD_INCOME_KEYWORD:
-            final Matcher matcherWithoutDate = ADD_INCOME_ARGUMENT_FORMAT.matcher(arguments);
-            final Matcher matcherWithDate = ADD_INCOME_ARGUMENT_FORMAT_WITH_DATE.matcher(arguments);
+            final Matcher matcherWithoutDate = ADD_INCOME_ARGUMENT_FORMAT.matcher(" " + arguments);
+            final Matcher matcherWithDate = ADD_INCOME_ARGUMENT_FORMAT_WITH_DATE.matcher(" " + arguments);
             if (matcherWithoutDate.matches()) {
                 return prepareAddIncomeWithoutDate(matcherWithoutDate);
             } else if (matcherWithDate.matches()) {
@@ -777,7 +777,7 @@ public class Parser {
     }
 
     private Command prepareSetBudget(String arguments) {
-        final Matcher matcher = SET_BUDGET_ARGUMENT_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = SET_BUDGET_ARGUMENT_FORMAT.matcher(" " + arguments);
         if (!matcher.matches()) {
             return new InvalidCommand(Messages.PARAMETERS_ERROR_MESSAGE);
         }
