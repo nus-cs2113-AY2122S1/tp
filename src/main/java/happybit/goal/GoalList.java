@@ -128,13 +128,13 @@ public class GoalList {
      */
     public void addHabitToGoal(Habit habit, int goalIndex, PrintManager printManager) throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
-        long maxDays = goal.getNumOfDaysForGoal();
+        LocalDate startDateLD = convertDateToLocalDate(goal.getStartDate());
+        LocalDate endDateLD = convertDateToLocalDate(goal.getEndDate());
+        LocalDate startDatePlusHabitInterval = startDateLD.plusDays(habit.getIntervalLength());
         // if interval of habit is more than maxDays, not possible
-        /*
-        if (habit.getIntervalLength() > maxDays) {
+        if (startDatePlusHabitInterval.isAfter(endDateLD)) {
             throw new HaBitCommandException(ERROR_INTERVAL_LONGER_THAN_GOAL_DURATION);
         }
-        */
         // check duplicate for currHabit
         if (goal.duplicateInHabitList(habit.getHabitName())) {
             throw new HaBitCommandException(ERROR_DUPLICATE_HABIT_NAME);
