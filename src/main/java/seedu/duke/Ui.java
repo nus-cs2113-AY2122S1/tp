@@ -271,12 +271,21 @@ public class Ui {
         System.out.print("The number you entered is not valid, ");
     }
 
-    public static void emptyArgForDeleteCommand() {
+    public static void emptyArgForDeleteTripCommand() {
         System.out.println();
         System.out.println("Which trip to delete?");
         System.out.println("Syntax: delete [trip number]");
         System.out.println("---------------------------");
         printAllTrips();
+        System.out.println("---------------------------");
+    }
+
+    public static void emptyArgForDeleteExpenseCommand() throws ForceCancelException {
+        System.out.println();
+        System.out.println("Which expense to delete?");
+        System.out.println("Syntax: delete [expense number]");
+        System.out.println("---------------------------");
+        printExpensesInList(Storage.getOpenTrip().getListOfExpenses());
         System.out.println("---------------------------");
     }
 
@@ -524,7 +533,7 @@ public class Ui {
     }
 
     public static void printForceCancelled() {
-        System.out.println("You have chosen to force cancel this operation.");
+        System.out.println("You have chosen to cancel this operation.");
     }
 
     public static void locationIsBlank() {
@@ -533,5 +542,11 @@ public class Ui {
 
     public static void noPersonsAdded() {
         System.out.println("No persons were added to this trip. Please enter the names of the people in this trip: ");
+    }
+
+    public static void duplicateTripWarning() {
+        System.out.println("A trip with similar information may already exist. Please confirm if you wish to proceed"
+                + "with creating this trip.");
+        System.out.print("Enter 'y' if you wish to create this trip, or 'n' to cancel: ");
     }
 }
