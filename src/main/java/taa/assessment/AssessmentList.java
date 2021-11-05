@@ -89,7 +89,7 @@ public class AssessmentList implements ClassChecker {
     public boolean checkRepeatedName(Assessment assessment, String newAssessmentName) {
         for (Assessment a : assessments) {
             if (a.getName().equalsIgnoreCase(newAssessmentName) && (a != assessment)) {
-                    return false;
+                return false;
             }
         }
         return true;

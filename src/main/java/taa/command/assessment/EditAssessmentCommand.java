@@ -147,7 +147,8 @@ public class EditAssessmentCommand extends Command {
             assessment));
     }
 
-    public boolean checkWeightage(String newWeightageString, AssessmentList assessmentList, String name) throws TaaException {
+    public boolean checkWeightage(String newWeightageString, AssessmentList assessmentList, String name)
+            throws TaaException {
         assert Util.isStringDouble(newWeightageString);
         double newWeightage = Double.parseDouble(newWeightageString);
         if (!Assessment.isWeightageWithinRange(newWeightage)) {
@@ -183,7 +184,8 @@ public class EditAssessmentCommand extends Command {
         return true;
     }
 
-    public boolean checkNewName(String newName, AssessmentList assessmentList, Assessment assessment) throws TaaException {
+    public boolean checkNewName(String newName, AssessmentList assessmentList, Assessment assessment)
+            throws TaaException {
         boolean isValidNewName = assessmentList.checkRepeatedName(assessment, newName);
         if (!isValidNewName) {
             throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_NEW_NAME));
