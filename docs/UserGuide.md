@@ -14,36 +14,36 @@ its developers (😀 us!) at our [Main Page](README.md).
 
 ------------
 
-* [Quick Start](#quick-start)
-  * [Start-Up Interface](#start-up-interface)
-  * [Main Interface](#main-interface)
-* [Using this Guide](#using-this-guide)
-  * [Terminology](#terminology)
-  * [Icons & Format](#icons--format)
-* [Using _Ha(ppy)Bit_](#using-_happybit_)
-  * [Instructions from _Ha(ppy)Bit_](#instructions-from-_happybit_)
-  * [Command Format](#command-format)
-* [Features](#features)
-    * [Ask for Help: `help`](#ask-for-help-help)
-    * [Set a Goal: `set`](#set-a-goal-set)
-    * [List all Goals: `list`](#list-all-goals-list)
-    * [Update a Goal: `update`](#update-a-goal-update)
-    * [Remove a Goal: `remove`](#remove-a-goal-remove)
-    * [Add a Habit: `add`](#add-a-habit-add)
-    * [Change a Habit Name: `change`](#change-a-habit-change)
-    * [Complete a Habit: `done`](#complete-a-habit-done)
-    * [Delete a Habit: `delete`](#delete-a-habit-delete)
-    * [View all Habit: `view`](#view-all-habits-view)
-    * [Return to Start-Up: `return`](#return-to-start-up-return)
-    * [Exit the Program: `exit`](#exit-the-program-exit)
-* [About Loading and Saving Data](#about-loading-and-saving-data)
-* [FAQ](#faq)
-* [Command Summary](#command-summary)
-* [Useful Links](#useful-links)
+* [1. Quick Start](#1-quick-start)
+  * [1.1 Start-Up Interface](#11-start-up-interface)
+  * [1. 2 Main Interface](#12-main-interface)
+* [2. Using this Guide](#2-using-this-guide)
+  * [2.1 Terminology](#21-terminology)
+  * [2.2 Icons](#22-icons)
+* [3. Using _Ha(ppy)Bit_](#3-using-_happybit_)
+  * [3.1 Instructions from _Ha(ppy)Bit_](#31-instructions-from-_happybit_)
+  * [3.2 Command Format](#32-command-format)
+* [4. Features](#features)
+    * [4.1 Ask for Help: `help`](#41-ask-for-help-help)
+    * [4.2 Set a Goal: `set`](#42-set-a-goal-set)
+    * [4.3 List all Goals: `list`](#43-list-all-goals-list)
+    * [4.4 Update a Goal: `update`](#44-update-a-goal-update)
+    * [4.5 Remove a Goal: `remove`](#45-remove-a-goal-remove)
+    * [4.6 Add a Habit: `add`](#46-add-a-habit-add)
+    * [4.7 Change a Habit Name: `change`](#47-change-a-habit-change)
+    * [4.8 Complete a Habit: `done`](#48-complete-a-habit-done)
+    * [4.9 Delete a Habit: `delete`](#49-delete-a-habit-delete)
+    * [4.10 View all Habit: `view`](#410-view-all-habits-view)
+    * [4.11 Return to Start-Up: `return`](#411-return-to-start-up-return)
+    * [4.12 Exit the Program: `exit`](#412-exit-the-program-exit)
+* [5. About Loading and Saving Data](#5-about-loading-and-saving-data)
+* [6. FAQ](#6-faq)
+* [7. Command Summary](#7-command-summary)
+* [8. Useful Links](#8-useful-links)
 
 ------------
 
-## Quick Start
+## 1. Quick Start
 
 1. Hype yourself up by dancing. Here begins your journey with _Ha(ppy)Bit_.
 2. Ensure you have Java `11` installed in your computer. If you do not have it installed,
@@ -75,7 +75,7 @@ indicating that you have successfully ran the app.
    ```
    Any keyboard input will appear after `Option: `. Here is where interaction between you and _Ha(ppy)Bit_ takes place.
 
-### Start-Up Interface
+### 1.1 Start-Up Interface
 In the current loading screen, you will be able to navigate to five other screens.
 Choose an option from one to five by typing 1, 2, 3, 4, or 5 and hitting "enter" to load the desired screen.
 Below are the outcomes.
@@ -146,7 +146,7 @@ This option starts up the main interface of the application.
     Starting application...
     Type 'return' to return to main menu
 
-### Main Interface
+### 1.2 Main Interface
 Upon formally starting the application, you should see the following screen. 
 (See [Start Application](#option-5-start-application) if you are unsure how to get here)
    
@@ -161,11 +161,11 @@ Upon formally starting the application, you should see the following screen.
     
 Any keyboard input will appear after `Command: `. Here is where interaction between you and _Ha(ppy)Bit_ takes place.
 
-## Using this Guide
+## 2. Using this Guide
 We understand there may be a lot to take in from this user guide. Here are some things to take note
 which may make the guide more friendly and helpful.
 
-### Terminology
+### 2.1 Terminology
 
 Name     | Description                                                      | Example
 -----    | ---------------------------------------------------------------- | -------------------
@@ -192,7 +192,7 @@ This is achieved by setting the `interval` as `0`, rather than any positive inte
 This if for those who are planning to do a habit more than once a day. 
 You may consider having multiple recurring habits instead.
 
-### Icons & Format
+### 2.2 Icons
 Unfamiliar symbols may confuse. Here is a comprehensive collection of all emojis and syntax we employ.  
 
 > 📃 **Notes**: important information you should take note off (especially if you encounter input errors)
@@ -205,11 +205,11 @@ Unfamiliar symbols may confuse. Here is a comprehensive collection of all emojis
 
 > 👍 &#8594; Used to show the developers' love and support for you.
 
-## Using _Ha(ppy)Bit_
+## 3. Using _Ha(ppy)Bit_
 _Ha(ppy)Bit_ comes with some quirks that might need some time getting used to. To get you up to speed and warmed
 up with _Ha(ppy)Bit_, here are instructions and command formats to follow. 👍
 
-### Instructions from _Ha(ppy)Bit_
+### 3.1 Instructions from _Ha(ppy)Bit_
 
 You may have noticed the instructions `Press enter to return to main menu...` and `Type 'return' to return to main menu`
 at the bottom of some responses from _Ha(ppy)Bit_. This is because _Ha(ppy)Bit_ clears and refreshes the page after 
@@ -219,7 +219,7 @@ through recently typed commands.
 Do follow the instructions before typing anything, lest _Ha(ppy)Bit_ does not
 register your input. On the topic of inputs...
 
-### Command Format
+### 3.2 Command Format
 _Ha(ppy)Bit_ is very particular about your commands. You begin off with a "command word" to tell _Ha(ppy)Bit_ the exact 
 action to carry out (See [Command Summary](#command-summary) for all actions). The actions are then followed up with
 "parameters", which are information you wish to pass to _Ha(ppy)Bit_ to carry out the actions with it. To indicate the 
@@ -246,12 +246,12 @@ Here are guidelines and tips for the command format:
 * **Flags** should have a whitespace before them <br>
   (e.g. `view g/1` instead of `viewg/1`)
 
-## Features
+## 4. Features
 
 Below are the commands supported by the application.
 Each section describes the function of each command and its format. <br>
 
-### Ask for Help: `help`
+### 4.1 Ask for Help: `help`
 What did you say? You're not sure what the commands are? Relax, that's why the `help` command exists.\
 This command displays a list of all possible commands.
 If an invalid command is typed, this command will be invoked by default.
@@ -295,7 +295,7 @@ Here are the list of commands:
 Press enter to return to command mode...
 ```
 
-### Set a Goal: `set`
+### 4.2 Set a Goal: `set`
 Sets a new goal for a long term achievement you wish to accomplish. Goals must have an end date while the goal type and
 start dates are optional (well, we wouldn't you to be procrastinating on your goals right?)
 
@@ -323,7 +323,7 @@ Output 3: `The goal '[FD] Become a vegetarian' has been added.`
 
 > 📃 If more than 8 numbers are used for the date, only the 1st 8 numbers will be treated as the date.
 
-### List all Goals: `list`
+### 4.3 List all Goals: `list`
 Can't remember what goals you have? Use this command to list all goals that you have set. 
 In addition, you get to view some useful statistics.
 
@@ -351,7 +351,7 @@ Command: list
 > 📃 Goal index may change if a goal is deleted. e.g. deleting the goal `Exercise more` will cause the index of `Become
 > a vegetarian` to change from 3 to 2.
 
-### Update a Goal: `Update`
+### 4.4 Update a Goal: `Update`
 Updates a parameter of a goal specified by its index.\
 (To err is human. That's why we have the `update` feature; designed to be more forgiving, 
 when we have the occasional oopsies. 👍 )
@@ -369,7 +369,7 @@ Output 3: `The goal type 'Default' has been updated to 'Study'.`
 
 > 📃 Only one parameter can be updated at a time (to be changed to multiple parameters in v2.1)
 
-### Remove a Goal: `remove`
+### 4.5 Remove a Goal: `remove`
 Removes a goal specified by its index.\
 (Life gets us sometimes. Things don't go as planned. But this isn't calling it quits. It's admitting
 defeat today, but to return stronger to fight another time. We got ya fam.)
@@ -390,7 +390,7 @@ ________________________________________________________________________________
 
 > 📃 Goal index may change if a goal is deleted. Use the `list` command to check what the new goal indexes are.
 
-### Add a Habit: `add`
+### 4.6 Add a Habit: `add`
 Adds a habit that is linked to a goal.\
 (Habits are meant to easy and doable. Completing them over time, with consistent dedication, 
 one of these habits will be the metaphorical straw that breaks the camel's back. Your goals reached,
@@ -412,7 +412,7 @@ Output 3: `The habit 'Learn a vegetarian dish' has been added to goal '[FD] Beco
 
 > 📃 You should notice a list of habits to be done on the main interface whenever a new habit is added.
 
-### Change a Habit: `change`
+### 4.7 Change a Habit: `change`
 Change and update the name and/or interval of a habit.
 
 **Format:** `change g/<goal_index> h/<habit_index> { n/<habit_name> i/<interval> }`
@@ -428,7 +428,7 @@ Output 2: `The habit 'Do 20 pushups' of goal 'Exercise more' has been changed to
 
 > 📃 Only one parameter can be updated at a time (to be changed to multiple parameters in v2.1)
 
-### Complete a Habit: `done`
+### 4.8 Complete a Habit: `done`
 Mark a habit under a goal as done.\
 (Congratulations on the completed habit... for that cycle :P)
 
@@ -447,7 +447,7 @@ The next interval will begin on 05112021
 ________________________________________________________________________________________________________________________
 ```
 
-### Delete a Habit: `delete`
+### 4.9 Delete a Habit: `delete`
 Deletes a habit under a goal.\
 (This should be used a last resort. Don't give up, hang in there and make your habits stick.)
 
@@ -465,7 +465,7 @@ The habit 'Do 30 pushups' of goal '[EX] Exercise more' has been deleted.
 ________________________________________________________________________________________________________________________
 ```
 
-### View all Habits: `view`
+### 4.10 View all Habits: `view`
 List all habits under a specific goal for a bird's eye view on your goal.
 
 **Format:** `view g/<goal_index>`
@@ -485,7 +485,7 @@ Command: view g/1
 -------------------------------------------------------------------------------------------------------
 ```
 
-### Return to Start-Up: `return`
+### 4.11 Return to Start-Up: `return`
 Return to the start-up interface.\
 (Where did that bring you? Back to the start.)
 
@@ -516,7 +516,7 @@ Select from one of the following menu items:
 Option:
 ```
 
-### Exit the Program: `exit`
+### 4.12 Exit the Program: `exit`
 Exits the program.\
 (Don't stay on _Ha(ppy)Bit_ too long. You have a life out there, go live it!)
 
@@ -538,7 +538,7 @@ Thanks for using Ha(ppy)Bit, see you in a bit! (hehe)
 ________________________________________________________________________________________________________________________
 ```
 
-## About Loading and Saving Data
+## 5. About Loading and Saving Data
 **Loading saved data:**
 
 Whenever you run the program, the program will **automatically** look for any
@@ -556,7 +556,7 @@ saved data in the relative storage path, `data/habits.txt`.
 * Before you exit the program, the goals you set and the habits you have added
   are **automatically** saved in a text file at the relative storage path, `data/habits.txt`.
 
-## FAQ
+## 6. FAQ
 
 **Q**: How do I transfer my data to another computer?
 <br>
@@ -570,7 +570,7 @@ your data will be there!
 <br>
 **A**: Data Structures and Algorithms in Java &#8594; [here](https://www.amazon.com/Data-Structures-Algorithms-Java-2nd/dp/0672324539)
 
-## Command Summary
+## 7. Command Summary
 
 Action             | Command Format                                                          | Example
 ------------------ | ----------------------------------------------------------------------- | ----------------------------------
@@ -587,8 +587,19 @@ View habits        | `view g/<goal_index>`                                      
 Return to Start-Up | `return`                                                                | `return`
 Exit Program       | `exit`                                                                  | `exit`
 
-## Useful Links
+## 8. Useful Links
 
 Visit our [Main Page](README.md) to find more useful links.
 
-Watch our wacky Demo Video v0 [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ)!
+Interested in what makes Ha(ppy)Bit tick? Visit our [GitHub website](https://github.com/AY2122S1-CS2113T-F14-1/tp)
+to explore and geek out on. What did you say? An explanation for the inner workings? Okay, okay.
+Here is our [Developer Guide](https://ay2122s1-cs2113t-f14-1.github.io/tp/DeveloperGuide.html).
+
+What now? You prefer a **guided walkthrough** because of the digital age and the attention economy today where
+corporations bombard your with enticing information to profit of your valuable attention 
+has shortened your attention span tremendously such that you don't have the patience nor focus to sit down and refer
+to our User Guide which we have painstakingly written to be comprehensive for users like you in order to provide a 
+better user experience to a new app they may be unfamiliar with? Fine! We get it! We have prepared a 
+[Demo Video](https://www.youtube.com/watch?v=dQw4w9WgXcQ) for you, the guided walkthrough you _oh_ so desired.
+
+Watch our wacky Demo Video bloopers [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ)!
