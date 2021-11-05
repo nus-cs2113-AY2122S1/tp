@@ -1,0 +1,78 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+Participant ":Libmgr" as Libmgr
+Participant ":DeadlineCommand" as deadlineCommand
+Participant "ui:TextUI" as ui
+Participant "catalogue:Catalogue" as catalogue
+Participant "item:Item" as item
+
+activate Libmgr
+Libmgr -> deadlineCommand : execute(ui, catalogue)
+
+activate deadlineCommand
+deadlineCommand -> deadlineCommand: handleDeadlineCommand(ui, catalogue)
+activate deadlineCommand
+
+alt deadline description is 'today'
+    deadlineCommand -> ui: print(LIST_DEADLINE_TODAY)
+    activate ui
+    return
+    deadlineCommand -> ui: print(DIVIDER)
+    activate ui
+    return
+    loop temp: Item in catalogue.getAllItems()
+        deadlineCommand -> item: temp.getDueDate()
+        activate item
+        return
+        opt item due date is today
+            deadlineCommand -> ui: print(temp)
+            activate ui
+            return
+        end
+    end
+else deadline description is 'overdue'
+    deadlineCommand -> ui: print(LIST_DEADLINE_OVERDUE)
+    activate ui
+    return
+    deadlineCommand -> ui: print(DIVIDER)
+    activate ui
+    return
+    loop temp: Item in catalogue.getAllItems()
+        deadlineCommand -> item: temp.getDueDate()
+        activate item
+        return
+        opt item due date is before today
+            deadlineCommand -> ui: print(temp)
+            activate ui
+            return
+        end
+    end
+else deadline description is a specific date
+    deadlineCommand -> ui: print(LIST_DEADLINE_DATE)
+    activate ui
+    return
+    deadlineCommand -> ui: print(DIVIDER)
+    activate ui
+    return
+    loop temp: Item in catalogue.getAllItems()
+        deadlineCommand -> item: temp.getDueDate()
+        activate item
+        return
+        opt item due date equals to the date given
+            deadlineCommand -> ui: print(temp)
+            activate ui
+            return
+        end
+    end
+else exception
+    deadlineCommand -> ui: print(e.getMessage())
+    activate ui
+    return
+end
+return
+return
+destroy deadlineCommand
+
+@enduml
