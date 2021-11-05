@@ -51,10 +51,10 @@ public class PrintManager {
     private static final String INSTR_HELP = "help";
     private static final String INSTR_ADD_GOAL = "set n/<goal_name> { t/<goal_type> s/<start_date> } e/<end_date>";
     private static final String INSTR_ADD_HABIT = "add g/<goal_index> n/<habit_name> i/<interval>";
-    private static final String INSTR_UPDATE_GOAL = "update g/<goal_index> { n/<goal_name> t/<goal_type> "
-            + "e/<end_date> }";
-    private static final String INSTR_UPDATE_HABIT = "change g/<goal_index> h/<habit_index> { n/<habit_name> "
-            + "i/<interval> }";
+    private static final String INSTR_UPDATE_GOAL = "update g/<goal_index> [ n/<goal_name> t/<goal_type> "
+            + "e/<end_date> ]";
+    private static final String INSTR_UPDATE_HABIT = "change g/<goal_index> h/<habit_index> [ n/<habit_name> "
+            + "i/<interval> ]";
     private static final String INSTR_LIST_GOAL = "list";
     private static final String INSTR_LIST_HABIT = "view g/<goal_index>";
     private static final String INSTR_DELETE_GOAL = "remove g/<goal_index>";
@@ -65,7 +65,9 @@ public class PrintManager {
 
     private static final String COMMAND_NOTE_1 = "* Replace <> with relevant terms (Exp: <goal_name> --> goal 1)";
     private static final String COMMAND_NOTE_2 = "* Items enclosed within { } are optional";
-    private static final String COMMAND_NOTE_3 = "* Use 'list' and 'view' to check the goal and habit indexes "
+    private static final String COMMAND_NOTE_3 = "* Items enclosed within [ ] need to have at least one of the "
+            + "parameters specified inside.";
+    private static final String COMMAND_NOTE_4 = "* Use 'list' and 'view' to check the goal and habit indexes "
             + "respectively";
 
     private static final String[] COMMAND_HEADERS = {"Action", "Format"};
@@ -103,7 +105,7 @@ public class PrintManager {
     public void printCommandList() {
         System.out.println(MSG_LIST_COMMAND);
         PrintTable.printTable(COMMAND_HEADERS, populateCommandData());
-        System.out.println(COMMAND_NOTE_1 + LS + COMMAND_NOTE_2 + LS + COMMAND_NOTE_3);
+        System.out.println(COMMAND_NOTE_1 + LS + COMMAND_NOTE_2 + LS + COMMAND_NOTE_3 + LS + COMMAND_NOTE_4);
     }
 
     /**

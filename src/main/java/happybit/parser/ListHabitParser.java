@@ -16,7 +16,7 @@ public class ListHabitParser extends Parser {
     public static Command parseListHabitCommand(String input) throws HaBitParserException {
         checkNoDescription(input);
         String[] parameters = splitInput(input);
-        int goalIndex = getNumber(parameters, FLAG_GOAL_INDEX) - 1;
+        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
         return new ListHabitsCommand(goalIndex);
     }
 

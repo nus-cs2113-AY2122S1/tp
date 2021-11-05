@@ -14,6 +14,14 @@ class DeleteParserTest {
     private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The flag 'g/' has to be followed by a number";
     private static final String ERROR_HABIT_INDEX_FORMAT = "The command is missing the 'h/' flag";
     private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The flag 'h/' has to be followed by a number";
+    private static final String ERROR_GOAL_INDEX_NEGATIVE_NUM =
+            "The flag 'g/' has to be followed by a positive integer";
+    private static final String ERROR_GOAL_INDEX_ZERO_NUM =
+            "The flag 'g/' has to be followed by a number greater than 0";
+    private static final String ERROR_HABIT_INDEX_NEGATIVE_NUM =
+            "The flag 'h/' has to be followed by a positive integer";
+    private static final String ERROR_HABIT_INDEX_ZERO_NUM =
+            "The flag 'h/' has to be followed by a number greater than 0";
 
     /*
      * NOTE : ==================================================================
@@ -61,6 +69,23 @@ class DeleteParserTest {
             fail();
         } catch (HaBitParserException e) {
             assertEquals(ERROR_GOAL_INDEX_NON_INTEGER, e.getMessage());
+        }
+    }
+
+    @Test
+    void parseDeleteGoalCommand_negativeOrZeroGoalIndex_exceptionThrown() {
+        try {
+            DeleteParser.parseDeleteGoalCommand("g/-1");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_GOAL_INDEX_NEGATIVE_NUM, e.getMessage());
+        }
+
+        try {
+            DeleteParser.parseDeleteGoalCommand("g/0");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_GOAL_INDEX_ZERO_NUM, e.getMessage());
         }
     }
 
@@ -155,6 +180,23 @@ class DeleteParserTest {
             fail();
         } catch (HaBitParserException e) {
             assertEquals(ERROR_HABIT_INDEX_NON_INTEGER, e.getMessage());
+        }
+    }
+
+    @Test
+    void parseDeleteHabitCommand_negativeOrZeroHabitIndex_exceptionThrown() {
+        try {
+            DeleteParser.parseDeleteHabitCommand("g/1 h/-1");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_HABIT_INDEX_NEGATIVE_NUM, e.getMessage());
+        }
+
+        try {
+            DeleteParser.parseDeleteHabitCommand("g/1 h/0");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_HABIT_INDEX_ZERO_NUM, e.getMessage());
         }
     }
 

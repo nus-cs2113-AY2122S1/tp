@@ -5,6 +5,7 @@ import happybit.habit.Habit;
 import happybit.interval.Interval;
 import happybit.ui.PrintManager;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -21,6 +22,12 @@ public class GoalList {
     private static final String ERROR_IDENTICAL_NEW_DATE = "There is no change in end date";
     private static final String ERROR_DUPLICATE_HABIT_NAME = "This habit name is already present for this goal";
     private static final String ERROR_DUPLICATE_GOAL_NAME = "This goal name is already present in your list";
+    private static final String ERROR_NEW_END_DATE_AFTER_START_DATE = "You cannot have the end date of a goal before "
+            + "or on the start date itself.";
+    private static final String ERROR_NEW_END_DATE_SAME_AS_TODAY =
+            "You cannot change the end date of a goal to today's date";
+    private static final String ERROR_INTERVAL_LONGER_THAN_GOAL_DURATION =
+            "Your interval for the habit cannot extend to after the end date for the goal";
 
     protected ArrayList<Goal> goalList;
     protected int chosenGoalIndex;
@@ -124,6 +131,13 @@ public class GoalList {
      */
     public void addHabitToGoal(Habit habit, int goalIndex, PrintManager printManager) throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
+        LocalDate startDateLD = convertDateToLocalDate(goal.getStartDate());
+        LocalDate endDateLD = convertDateToLocalDate(goal.getEndDate());
+        LocalDate startDatePlusHabitInterval = startDateLD.plusDays(habit.getIntervalLength());
+        // if interval of habit is more than maxDays, not possible
+        if (startDatePlusHabitInterval.isAfter(endDateLD)) {
+            throw new HaBitCommandException(ERROR_INTERVAL_LONGER_THAN_GOAL_DURATION);
+        }
         // check duplicate for currHabit
         if (goal.duplicateInHabitList(habit.getHabitName())) {
             throw new HaBitCommandException(ERROR_DUPLICATE_HABIT_NAME);
@@ -255,10 +269,14 @@ public class GoalList {
     public void updateGoalEndDate(int goalIndex, Date newDate, PrintManager printManager) throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
         Date oldDate = goal.getEndDate();
-        final String oldDateString = goal.getPrintableEndDate();
+        Date startDate = goal.getStartDate();
+        // check if new end date same as previous end date
         compareOldDateWithNewDate(oldDate, newDate);
+        // check if new end date before start date
+        checkNewDateAfterStartDate(startDate, newDate);
+        // check if new date is same as today
+        checkNewDateIsToday(newDate);
         goal.setEndDate(newDate);
-        String newDateString = goal.getPrintableEndDate();
         // Go through all habits for Goal
         // change endDate for all of them + call updateIntervals
         ArrayList<Habit> habits = goal.getHabitList();
@@ -267,7 +285,9 @@ public class GoalList {
             // update Interval Lengths using same interval for habit
             habit.updateLengthOfInterval(habit.getIntervalLength());
         }
+        String oldDateString = dateToString(oldDate);
         String goalName = goal.getGoalName();
+        String newDateString = goal.getPrintableEndDate();
         printManager.printUpdatedGoalEndDate(goalName, oldDateString, newDateString);
     }
 
@@ -319,8 +339,18 @@ public class GoalList {
     public void updateHabitIntervalFromGoal(int goalIndex, int habitIndex, int newInterval, PrintManager printManager)
         throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
+        // get End Date for current goal of habit
+        LocalDate goalEndDateLD = convertDateToLocalDate(goal.getEndDate());
         ArrayList<Habit> habits = goal.getHabitList();
         Habit habit = getHabit(habits, habitIndex);
+        // start date for current habit
+        LocalDate currHabitStartDateLD = habit.getStartDateLD();
+        // add new interval number of days
+        LocalDate newHabitEndDateAfterInterval = currHabitStartDateLD.plusDays(newInterval);
+        // if after adding new interval it exceeds end date of goal, throw exception
+        if (newHabitEndDateAfterInterval.isAfter(goalEndDateLD)) {
+            throw new HaBitCommandException(ERROR_INTERVAL_LONGER_THAN_GOAL_DURATION);
+        }
         habit.updateLengthOfInterval(newInterval);
         printManager.printUpdatedHabitInterval(goal.getGoalName(), habit.getHabitName(), newInterval);
     }
@@ -430,12 +460,37 @@ public class GoalList {
         }
     }
 
+    /**
+     * Checks if new end Date set by user is the same as the old end Date for that goal.
+     *
+     * @param oldDate Current end Date for goal
+     * @param newDate New end Date for goal
+     * @throws HaBitCommandException thrown if they are oldDate and newDate are the same
+     */
     private void compareOldDateWithNewDate(Date oldDate, Date newDate) throws HaBitCommandException {
         LocalDate oldDateLD = convertDateToLocalDate(oldDate);
         LocalDate newDateLD = convertDateToLocalDate(newDate);
 
         if (oldDateLD.isEqual(newDateLD)) {
-            throw new HaBitCommandException((ERROR_IDENTICAL_NEW_DATE));
+            throw new HaBitCommandException(ERROR_IDENTICAL_NEW_DATE);
+        }
+    }
+
+    private void checkNewDateAfterStartDate(Date startDate, Date newDate) throws HaBitCommandException {
+        LocalDate startDateLD = convertDateToLocalDate(startDate);
+        LocalDate newDateLD = convertDateToLocalDate(newDate);
+
+        if (!newDateLD.isAfter(startDateLD)) {
+            throw new HaBitCommandException(ERROR_NEW_END_DATE_AFTER_START_DATE);
+        }
+    }
+
+    private void checkNewDateIsToday(Date newDate) throws HaBitCommandException {
+        LocalDate newDateLD = convertDateToLocalDate(newDate);
+        LocalDate currDateLD = convertDateToLocalDate(new Date());
+
+        if (newDateLD.isEqual(currDateLD)) {
+            throw new HaBitCommandException(ERROR_NEW_END_DATE_SAME_AS_TODAY);
         }
     }
 
@@ -456,5 +511,10 @@ public class GoalList {
             }
         }
         return false;
+    }
+
+    private String dateToString(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        return dateFormat.format(date);
     }
 }
