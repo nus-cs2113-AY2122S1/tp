@@ -745,7 +745,7 @@ public class Ui {
             //2d visualization
             //Nested for 2n columns, 10 rows (n rows but only 10 will be for graph rest for legend)
             int listSize = dishList.size();
-            int rows = (listSize > graphPortions) ? listSize + 1: graphPortions + 1;
+            int rows = (listSize > graphPortions) ? listSize + 1 : graphPortions + 1;
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < listSize * 2; j++) {
                     printGraph(graphPortions, lengths, i, j);
@@ -766,11 +766,11 @@ public class Ui {
 
     private void printDishLegend(ArrayList<Dish> dishList, int i) {
         if (i == 0) {
-            System.out.print("     Legend:         " );
+            System.out.print("     Legend:         ");
             System.out.print("     Scale: 1 unit = " + DishList.getGreatestWaste() / 10 + "kg");
         } else {
-            System.out.print("     " + (char) (i + 64) + ". " + dishList.get(i-1).getDishName()
-                    + ": " + dishList.get(i-1).getWastage() + "kg");
+            System.out.print("     " + (char) (i + 64) + ". " + dishList.get(i - 1).getDishName()
+                    + ": " + dishList.get(i - 1).getWastage() + "kg");
         }
         System.out.print(System.lineSeparator());
     }
@@ -811,11 +811,11 @@ public class Ui {
     private void printIngrLegend(ArrayList<Ingredient> ingredientList, int i) {
         //Scale on first line
         if (i == 0) {
-            System.out.print("     Legend:         " );
+            System.out.print("     Legend:         ");
             System.out.print("     Scale: 1 unit = " + IngredientList.getGreatestWaste() / 10 + "kg");
         } else {
-            System.out.print("     " + (char) (i + 64) + ". " + ingredientList.get(i-1).getIngredientName()
-                    + ": " + ingredientList.get(i-1).getWastage() + "kg");
+            System.out.print("     " + (char) (i + 64) + ". " + ingredientList.get(i - 1).getIngredientName()
+                    + ": " + ingredientList.get(i - 1).getWastage() + "kg");
         }
         System.out.print(System.lineSeparator());
     }
