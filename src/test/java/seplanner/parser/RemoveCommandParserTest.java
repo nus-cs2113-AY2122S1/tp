@@ -30,7 +30,7 @@ class RemoveCommandParserTest {
             assertEquals(RemoveUniCommand.class, rcp.parse(arguments, universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList));
         } catch (Exception e) {
-            assertEquals("University not found.", e.getMessage());
+            assertEquals("This university is not in your selected list.", e.getMessage());
         }
     }
 
@@ -41,7 +41,7 @@ class RemoveCommandParserTest {
             assertEquals(RemoveModCommand.class, rcp.parse(arguments, universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList));
         } catch (Exception e) {
-            assertEquals("Module not found.", e.getMessage());
+            assertEquals("This module is not in your selected list.", e.getMessage());
         }
     }
 

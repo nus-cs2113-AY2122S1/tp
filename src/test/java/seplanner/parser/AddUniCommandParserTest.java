@@ -33,8 +33,8 @@ public class AddUniCommandParserTest {
     @Test
     public void test_validUniversityName_success() throws IOException {
         AddCommandParser commandParser = new AddCommandParser();
-        assertEquals(true, commandParser.isUniversityExist("Aarhus School of Business", universityMasterList));
-        assertEquals(true, commandParser.isUniversityExist("Aarhus University", universityMasterList));
+        assertEquals(true, ParseCondition.isValidUniversity(universityMasterList, "Aarhus School of Business"));
+        assertEquals(true, ParseCondition.isValidUniversity(universityMasterList, "Aarhus University"));
     }
 
     @Test
