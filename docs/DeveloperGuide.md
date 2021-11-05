@@ -5,12 +5,12 @@ title: Developer Guide
 
 ## Contents 
 
-* [Acknowledgements](#Acknowledgements)
+* [Acknowledgements](#acknowledgements)
 * [Getting Started](#getting-started)
 * [Design & Implementation](#design--implementation)
   * [Main Components](#main-components) 
   * [Command Implementation](#command-implementation)
-  * [Ui](#ui)
+  * [User Interface](#user-interface)
   * [Storage](#storage)
   * [University and module related classes](#university-and-module-related-classes)
     * [University](#university)
@@ -41,7 +41,7 @@ title: Developer Guide
 
 ## Getting started 
 
-Refer to our user guide [here](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob/master/docs/UserGuide.md)
+Refer to our user guide [here](https://ay2122s1-cs2113t-t09-2.github.io/tp/UserGuide.html#quick-start)
 
 ## Design & implementation
 
@@ -58,17 +58,17 @@ The other core components of SEPlanner are:
 `Parser`: Handles user inputs and pass them down to the `Command` class.  
 `Command` : Handles output passed down from `Parser` based on the user inputs and execute user instructions.  
 `Storage` : Loads data from, and stores data back to the user's local machine.  
-`UniversityList` and `ModuleList` : Stores information about Universities and modules as well as the methods to amend and filter them.  
+`UniversityList` and `ModuleList` : Stores information about Universities and modules as well as the methods to amend and filter them.
 
 ### Command Interaction 
 
 <p align = "center">
-<img src="images/CommandInteraction.png" width = "800" />
+<img src="images/mainseq.png" width = "800" />
 </p>
 
 The sequence diagram above illustrates the flow through our program structure when the user input `add /uni 1` 
 is entered. 
-
+ 
 ### Command Implementation
 
 <p align = "center">
@@ -86,7 +86,7 @@ Step 4. The user executes `list /suni` to see his selected university list. The 
 
 Step 5. The user executes `remove /mod 81` command to delete unwanted modules from see his selected module list. The user executes `remove /uni 4` command to delete unwanted university see his selected university list.
 
-Step 6. The user executes `find /mod CS1231` to find the master index of the module. The user executes `find /mod Boston University` to find the master index of the university.
+Step 6. The user executes `find /code CS1231` to find the master index of the module. The user executes `find /uni Boston University` to find the master index of the university.
 
 Step 7. The user executes `searchmap 4` command to see the module mapping of all modules in the selected module list in Boston University.
 
@@ -102,12 +102,12 @@ The Ui component consolidates and formats the output of the program before displ
 in the command line. 
 
 <p align = "center">
-<img src="images/Ui_UML.png" width = "800" />
+<img src="images/ui.png" width = "800" />
 </p>
 
 The above class diagram illustrates the relationship between the classes within the Ui components.
 
-The UI class
+The Ui class is the parent of every other class in the package.
 * Contains helper methods for the other Ui classes.
 * Provides means of printing constants.
 
@@ -120,6 +120,20 @@ The UiModule class contains methods for printing Modules.
 The UiUniversity class contains methods for printing Universities. 
 
 The UiWelcome class contains a method for printing the welcome greeting. 
+
+The UiInvalid class contains methods to display error messages to the user. 
+
+The UiStorage class contains methods to display error messages from the Storage component to the user. 
+
+<p align = "center">
+<img src="images/uiseq.png" width = "800" />
+</p>
+
+The sequence diagram above illustrates how the classes in the Ui package interact when a printUniversity() call is made from outside the package.
+In the printUniversity Method,
+1. printIndex is called from the Ui class.
+2. Within printIndex, we display the index, then do a self invocation on stringPadder within the Ui class to pad the string to line up the text after. 
+3. After printing the index, print the university name, then depending on the boolean printMC, we pad it again with stringPadder before displaying the Module Credits. 
 
 
 
@@ -144,7 +158,8 @@ methods required.
 
 The classes `SelectedUniversityStorage` and `SelectedModuleStorage` are responsible for reading and updating the text files
 storing your selected university list and your selected module list. These classes inherit from the `UserStorage` class as the `loadFile` function
-is identical other than the file path.
+is identical other than the file path. The private methods in both the classes filters out the invalid data found while reading the 
+text files.
 
 The classes `UniversityStorage` and `ModuleStorage` are responsible for extracting the Master University List and Master Module List
 from the CSV type files (`University.csv` and `modules.csv`) stored in the resources root.
@@ -230,7 +245,7 @@ The `Module` object representing the particular module from Selected Module List
 
 #### FindCommandParser
 
-* This object when invoked, will first identify the flag `/uni` or `/mod`. Once the flag is identified, a String representing `<KEYWORD>` is extracted and passed as an argument to the constructor for `FindUniCommand` or `FindModCommand`.
+* This object when invoked, will first identify the flag `/uni`, `/code` or `/mod`. Once the flag is identified, a String representing `<KEYWORD>` is extracted and passed as an argument to the constructor for `FindUniCommand` or `FindModCommand`.
 
 #### SearchMapCommandParser
 
@@ -248,7 +263,7 @@ This object will invoke an instance of `ExitCommand`.
 
 ### Target User Profile
 
-__SEPlanner__ is targeted at Computer Engineering students in NUS planning for their Student Exchange Program (SEP). 
+__SEPlanner__ is targeted at Computer Engineering students in the National University of Singapore planning for their Student Exchange Program (SEP). 
 
 ### Value Proposition
 
@@ -279,7 +294,10 @@ a list of potential exchange Universities based on the users study plan, module 
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+* SEPlanner must operate with full functionality on all mainstream operating systems: Windows, MacOS and Ubuntu with Java 11 installed. 
+* It should offer a streamlined experience using the command line interface primarily. 
+* It should be fast and responsive (No more than 1000ms between user input and program output).
+* It should be significantly faster than the default Student Exchange Program application portal on myEduRec. 
 
 ## Glossary
 

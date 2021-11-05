@@ -89,61 +89,61 @@ CS2104,Programming Language Concepts,4
 CS2105,Intro to Computer Networks,4
 CS2106,Intro to Operating Systems,4
 CS2107,Introduction to Information Security,4
-CS2108,Introduction to Media Computin,4
-CS2113,Software Engineering & Object-,4
+CS2108,Introduction to Media Computing,4
+CS2113,Software Engineering & Object Oriented Programming,4
 CS2220,Intro to Computational Biology,4
 CS3103,Computer Networks Practice,4
 CS3210,Parallel Computing,4
-CS3211,Parallel & Concurrent Programg,4
+CS3211,Parallel & Concurrent Programming,4
 CS3216,Software Product Engineering,4
-CS3217,SW Engg on Modern Appln Platfm,4
+CS3217,Software Engineering on Modern Application Platform,4
 CS3218,Multimodal Processing in Mobil,4
 CS3219,Software Engineering Principle,4
 CS3220,Computer Architecture,4
-CS3221,Operatg Sys Desgn & Pragmatics,4
-CS3223,Database Systems Implementatio,4
-CS3226,Web Programming and Applicatio,4
+CS3221,Operating System Design & Pragmatics,4
+CS3223,Database Systems Implementation,4
+CS3226,Web Programming and Application,4
 CS3230,Design & Analysis of Algorithm,4
 CS3231,Theory of Computation,4
 CS3233,Competitive Programming,4
 CS3234,Logic for Proofs and Programs,4
 CS3235,Computer Security,4
-CS3236,Introduction to Information Th,4
-CS3237,Introduction to Internet of Th,4
+CS3236,Introduction to Information Theory,4
+CS3237,Introduction to Internet of Things,4
 CS3240,Interaction Design,4
 CS3241,Computer Graphics,4
 CS3242,3D Modeling and Animation,4
-CS3243,Introduction to Artificial Int,4
+CS3243,Introduction to Artificial Intelligence,4
 CS3244,Machine Learning,4
 CS3245,Information Retrieval,4
 CS3247,Game Development,4
 CS3249,User Interface Development,4
-CS4211,Formal Methods for Software En,4
+CS4211,Formal Methods for Software Engineering,4
 CS4212,Compiler Design,4
-CS4215,Programming Language Implement,4
+CS4215,Programming Language Implementation,4
 CS4218,Software Testing,4
 CS4222,Wireless Networking,4
 CS4223,Multi-core Architectures,4
-CS4225,Big Data Systems for Data Scie,4
+CS4225,Big Data Systems for Data Science,4
 CS4226,Internet Architecture,4
-CS4231,Parallel & Distr Algorithms,4
+CS4231,Parallel & Distributed Algorithms,4
 CS4234,Optimisation Algorithms,4
 CS4236,Cryptography Theory & Practice,4
 CS4239,Software Security,4
-CS4240,Interaction Design for Virtual,4
+CS4240,Interaction Design for Virtual and Augmented Reality,4
 CS4242,Social Media Computing,4
-CS4243,Comp Vision & Pattern Recogntn,4
-CS4244,Knowledge Representation and R,4
-CS4246,AI Planning and Decision Makin,4
+CS4243,Computer Vision & Pattern Recognition,4
+CS4244,Knowledge Representation and Reasoning,4
+CS4246,AI Planning and Decision Making,4
 CS4247,Graphics Rendering Techniques,4
 CS4248,Natural Language Processing,4
-CS4249,Phenomena and Theories of Huma,4
+CS4249,Phenomena and Theories of Human-Computer Interaction,4
 CS4261,Algorithmic Mechanism Design,4
 CS4268,Quantum Computing,4
-CS4269,Fundamentals of Logic in Compu,4
+CS4269,Fundamentals of Logic in Computer Science,4
 CS4277,3D Computer Vision,4
 CS4278,Intelligent Robots: Algorithms,4
-CS4345,General-Purpose Computation on,4
+CS4345,General-Purpose Computation on GPU,4
 CS4880,Digital Entrepreneurship,4
 CS5223,Distributed Systems,4
 CS5224,Cloud Computing,4
@@ -151,14 +151,14 @@ CS5228,Knowledge Discovery and Data M,4
 CS5229,Advanced Computer Networks,4
 CS5232,Formal Specification & Design,4
 CS5234,Algorithms at Scale,4
-CS5239,Computer System Performance An,4
+CS5239,Computer System Performance Analysis,4
 CS5241,Speech Processing,4
-CS5242,Neural Networks &Deep Learning,4
+CS5242,Neural Networks & Deep Learning,4
 CS5250,Advanced Operating Systems,4
 CS5272,Embedded Software Design,4
 CS5321,Network Security,4
 CS5330,Randomized Algorithms,4
-CS5339,Theory and Algorithms for Mach,4
+CS5339,Theory and Algorithms for Machine Learning,4
 CS5340,Uncertainty Modelling in AI,4
 CS5343,Advanced Computer Animation,4
 CS5346,Information Visualisation,4
@@ -256,7 +256,7 @@ FIN3716,Financial Modelling,4
 FIN3717,Fixed Income Securities,4
 FIN3719,Household Finance,4
 FIN3720,Financial Statement Analysis,4
-FIN3761B,TIF: China’s Capital Markets,4
+FIN3761B,TIF: Chinaï¿½s Capital Markets,4
 FIN3761X,Topics in Finance,4
 FIN3761Y,Topics in Finance,4
 FIN3761Z,Topics in Finance,4

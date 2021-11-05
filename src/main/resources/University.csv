@@ -3,20 +3,20 @@ Aarhus School of Business,BSN3761X,Topics in Innovation & Entrepr,4,460201U004,I
 Aarhus School of Business,FIN3761Y,Topics in Finance,4,460181U005,INVESTMENTS AND CORPORATE FINANCE,5
 Aarhus School of Business,MNO3761X,Topics in L&HCM,4,461152U061,INTERNATIONAL MANAGEMENT,10
 Aarhus School of Business,FIN3713,Bank Management,4,460152U046,BANK MANAGEMENT,5
-Aarhus School of Business,MKT1705X,Principles of Marketing,4,4.60E+37,MARKETING MANAGEMENT,10
-Aarhus School of Business,MKT1705,Principles of Marketing,4,4.60E+37,MARKETING MANAGEMENT,10
+Aarhus School of Business,MKT1705X,Principles of Marketing,4,"460141E032",MARKETING MANAGEMENT,10
+Aarhus School of Business,MKT1705,Principles of Marketing,4,"460141E032",MARKETING MANAGEMENT,10
 Aarhus School of Business,FIN2704X,Finance,4,460151U032,FINANCE,5
 Aarhus School of Business,FIN2704,Finance,4,460151U032,FINANCE,5
 Aarhus School of Business,MNO3761Z,Topics in L&HCM,4,460161U021,INTERCULTURAL COMMUNICATION,5
 Aarhus School of Business,MNO3761Y,Topics in L&HCM,4,460161U075,INTERNATIONAL LABOUR MARKETS,5
-Aarhus School of Business,MNO3761Y,Topics in L&HCM,4,460161U081  ,ORGANISATIONAL DESIGN,5
+Aarhus School of Business,MNO3761Y,Topics in L&HCM,4,460161U081,ORGANISATIONAL DESIGN,5
 Aarhus School of Business,MKT3761Z,Topics in Marketing,4,460181U002,CONSUMER NEUROSCIENCE/ NEUROMARKETING,5
 Aarhus School of Business,DAO2703,Operations and Technology Management,4,460151U030,OPERATIONS MANAGEMENT,10
 Aarhus School of Business,FIN3702,Inv. Analysis & Portfolio Mgt,4,460181U008,INVESTMENTS,5
 Aarhus School of Business,DOS3761X,Topics in Operations & SCM,4,460142U016,MODELLING AND SOLVING DISCRETE OPTIMIZATION PROBLEMS WITHIN LOGISTICS,5
 Aarhus School of Business,MKT3812,Game Theory & Strat. Analysis,4,460122U070,GAME THEORY,5
 Aarhus School of Business,MKT3711,Services Marketing,4,460121U029,SERVICE MARKETING,5
-Aarhus School of Business,DOS3761Z,Topics in Operations & SCM,4,4620810028,"TOTAL QUALITY MANAGEMENT, LEAN AND SIX SIGMA",5
+Aarhus School of Business,DOS3761Z,Topics in Operations & SCM,4,"4620810028","TOTAL QUALITY MANAGEMENT, LEAN AND SIX SIGMA",5
 Aarhus School of Business,MKT3714,Digital Marketing,4,460171U001,DIGITAL MARKETING,5
 Aarhus School of Business,MKT3718,Advertising & Promotion Mgt,4,460181U011,ADVERTISING AND SOCIAL MEDIA STRATEGY,5
 Aarhus School of Business,BSP3701,Strategic Management,4,420161U012,STRATEGIC MANAGEMENT,5
@@ -27,10 +27,10 @@ Aarhus University,CS2102,Database Systems,4,CS220171U011,Introduction to Databas
 Aarhus University,CS3230,Design & Analysis of Algorithm,4,220171U002,Foundations of Algorithms and Data Structures,5
 Aarhus University,CS3240,Interaction Design,4,220172U017,Multimodal Interaction,10
 Aarhus University,CS4236,Cryptography Theory & Practice,4,220172U006,Cryptology,10
-Aarhus University,CS3226,Web Programming and Applicatio,4,CS220171U013,The Web of Things,5
+Aarhus University,CS3226,Web Programming and Application,4,CS220171U013,The Web of Things,5
 Aarhus University,CS3240,Interaction Design,4,520172U016,Designing Interactive Technologies,10
 Aarhus University,CS4234,Optimisation Algorithms,4,220171U008,Optimization,10
-Aarhus University,CS3223,Database Systems Implementatio,4,CS220171U012,Deployment and Uses of Databases,5
+Aarhus University,CS3223,Database Systems Implementation,4,CS220171U012,Deployment and Uses of Databases,5
 Aarhus University,CS3235,Computer Security,4,220164U003,IT Security and Cryptography in Practice,5
 Aarhus University,CS4222,Wireless Networking,4,240172U082,Advanced Wireless Communication,5
 Aarhus University,CS3244,Machine Learning,4,220171U007,Machine Learning,10
@@ -70,8 +70,8 @@ Aarhus University,LSM3991,Exchange Enrichment Module,4,215111U018,GIS Modelling,
 Aarhus University,LSM3214,Human Physio-Hormones & Hlth,4,215111U034,Ecophysiology,10
 Arizona State University,CS2102,Database Systems,4,ACO320,Database Systems,3
 Arizona State University,CS3230,Design & Analysis of Algorithm,4,CSE450,Design and Analysis of Algorithms,3
-Arizona State University,CS2108,Introduction to Media Computin,4,CSE408,Multimedia Information Systems,3
-Arizona State University,CS3223,Database Systems Implementatio,4,CSE 510,Database Management System Implementation,3
+Arizona State University,CS2108,Introduction to Media Computing,4,CSE408,Multimedia Information Systems,3
+Arizona State University,CS3223,Database Systems Implementation,4,CSE 510,Database Management System Implementation,3
 Arizona State University,CS2106,Intro to Operating Systems,4,CSE 330,Operating Systems,3
 Arizona State University,CS2040,Data Structures and Algorithms,4,CSE310,Data Structures and Algorithms,3
 Arizona State University,CS2102,Database Systems,4,CSE412,Database Management,3
@@ -84,7 +84,7 @@ Arizona State University,CS2102,Database Systems,4,IFT433,Intermediate DB Mgmt S
 Arizona State University,CS3103,Computer Networks Practice,4,IFT489,Network administration with TCP/IP,3
 Arizona State University,CS4222,Wireless Networking,4,ACO430,Wireless Networks,3
 Arizona State University,CS2104,Programming Language Concepts,4,CSE240,Introduction to Programming Languages,3
-Arizona State University,CS3243,Introduction to Artificial Int,4,CSE471,Introduction to Artificial Intelligence,3
+Arizona State University,CS3243,Introduction to Artificial Intelligence,4,CSE471,Introduction to Artificial Intelligence,3
 Arizona State University,CS3235,Computer Security,4,CSE466,Frontier approaches of control science,3
 Arizona State University,IE4211,Modelling & Analytics,4,IEE520,Statistical Learning for Data Mining,3
 Arizona State University,IE4243,Decision Modeling & Risk Analy,4,IEE454,Risk Management,3
@@ -121,7 +121,7 @@ Boston University,CS4248,Natural Language Processing,4,CAS CS 505,Introduction t
 Boston University,BT4240,Machine Learning for Predictiv,4,AD571,Business Analytics Foundations,4
 Boston University,BT3103,Application Systems Developmen,4,CS412,Full Stack Application Design and Development,4
 Boston University,IT1001,Introduction to Computing,4,CS103,Introduction to Internet Technologies and Web Programming,3
-Boston University,CS4225,Big Data Systems for Data Scie,4,CAS CS 504,Data Mechanics,4
+Boston University,CS4225,Big Data Systems for Data Science,4,CAS CS 504,Data Mechanics,4
 Boston University,CS4218,Software Testing,4,MET CS 633,"Software Quality, Testing and Security Management",4
 Boston University,BT4013,Analytics for Capital Market T,4,MET AD 685,Quantitative Methods for Finance,4
 Boston University,BT4013,Analytics for Capital Market T,4,MET AD 717,Investment Analysis and Portfolio Management,4
@@ -137,12 +137,12 @@ Boston University,CS2100,Computer Organisation,4,CS472,Computer Architecture,4
 Boston University,CS2102,Database Systems,4,CS469,Introduction to Database Design and Implementation for Business,4
 Boston University,CS3244,Machine Learning,4,ENG EC 414,Introduction to Machine Learning,3
 Boston University,CS2104,Programming Language Concepts,4,CAS CS 320,Concepts of Programming Languages,4
-Boston University,CS3223,Database Systems Implementatio,4,MET CS 779,Advanced Database Management,3
-Boston University,CS3243,Introduction to Artificial Int,4,MET CS 664,Artificial Intelligence,3
+Boston University,CS3223,Database Systems Implementation,4,MET CS 779,Advanced Database Management,3
+Boston University,CS3243,Introduction to Artificial Intelligence,4,MET CS 664,Artificial Intelligence,3
 Boston University,CS2040,Data Structures and Algorithms,4,Cs112,Introduction to Computer Science 2,3
 Boston University,BT3103,Application Systems Developmen,4,MET CS579,Database Management,3
 Boston University,BT3103,Application Systems Developmen,4,CS469,Introduction to Database Design and Implementation for Business,3
-Boston University,CS3236,Introduction to Information Th,4,ENG EC 517,Introduction to Information Theory,4
+Boston University,CS3236,Introduction to Information Theory,4,ENG EC 517,Introduction to Information Theory,4
 Boston University,IE4240,Project Management,4,METAD642,Project Management,4
 Boston University,MT4002,Technology Management Strategy,4,SMGSI480,The Business Technology Innovation,1
 Boston University,LSM3216,Neuronal Development and Disea,4,GMS MS 783,Molecular Basis of Neurologic Diseases,2
@@ -205,13 +205,13 @@ CentraleSupelec - Ecole Centrale Paris,IE4513,Exchange Elective,2,MA2827,Foundat
 CentraleSupelec - Ecole Centrale Paris,IE3911,IE3 Technical Elective,2,MA2814,Introduction to Random Modeling,3
 CentraleSupelec - Ecole Centrale Paris,EX4048,Exchange UEM,2,MA2500,Signal Processing and Sparsity,3
 CentraleSupelec - Ecole Centrale Paris,IE4512,Exchange Elective,2,SE2700,Modeling for Decision Making,3
-Chalmers University of Technology,CS4249,Phenomena and Theories of Huma,4,TDA486,Human-centred design,7.5
-Chalmers University of Technology,CS3243,Introduction to Artificial Int,4,MMS131,Introduction to artificial intelligence,7.5
+Chalmers University of Technology,CS4249,Phenomena and Theories of Human-Computer Interaction,4,TDA486,Human-centred design,7.5
+Chalmers University of Technology,CS3243,Introduction to Artificial Intelligence,4,MMS131,Introduction to artificial intelligence,7.5
 Chalmers University of Technology,CS2105,Intro to Computer Networks,4,EDA334,Computer communication,7.5
 Chalmers University of Technology,CS3240,Interaction Design,4,DAT420,Human - computer interaction,7.5
 Chalmers University of Technology,CS4236,Cryptography Theory & Practice,4,TDA352,Cryptography,7.5
 Chalmers University of Technology,CS3241,Computer Graphics,4,TDA362,Computer graphics,7.5
-Chalmers University of Technology,CS4215,Programming Language Implement,4,EDA387,Computer networks,7.5
+Chalmers University of Technology,CS4215,Programming Language Implementation,4,EDA387,Computer networks,7.5
 Chalmers University of Technology,CS3220,Computer Architecture,4,DAT105,Computer architecture,7.5
 Chalmers University of Technology,CS2104,Programming Language Concepts,4,DAT151,Programming language technology,7.5
 Chalmers University of Technology,CS3240,Interaction Design,4,TDA287,Human - computer interaction,5
@@ -222,7 +222,7 @@ Chalmers University of Technology,CS2102,Database Systems,4,TDA357,Databases,7.5
 Chalmers University of Technology,CS3240,Interaction Design,4,TDA289,Human - computer interaction,7.5
 Chalmers University of Technology,CS3244,Machine Learning,4,DAT340,Applied Machine Learning,7.5
 Chalmers University of Technology,BT3102,Computational Methods for Busi,4,MVE440,Statistical Learning for Big Data,7.5
-Chalmers University of Technology,CS3243,Introduction to Artificial Int,4,TIN175,Introduction to Artificial intelligence,7.5
+Chalmers University of Technology,CS3243,Introduction to Artificial Intelligence,4,TIN175,Introduction to Artificial intelligence,7.5
 Chalmers University of Technology,AR4101,Design 7,8,ARK127,Urban and architectural design,22.5
 Chalmers University of Technology,AR5011,Research Methodology,4,ARK461,Creactive Writing Theory and Methodology in Architecture,7.5
 Chalmers University of Technology,UD5221,Urban Design Theory and Disco,4,AMU019,Sustainable Development and the Design Professions,7.5
@@ -438,7 +438,7 @@ City University of Hong Kong,LSM1301,General Biology,4,BCH 1200,Discovery in Bio
 City University of Hong Kong,LSM3232,Microbiology,4,BCH 2013,Microbiology,3
 City University of Hong Kong,CM3991,Exchange Enrichment Module,4,BCH4043,Food Chemistry,3
 City University of Hong Kong,CM3991,Exchange Enrichment Module,4,BCH3083,Cosmetic Chemistry,3
-Columbia University,CS3243,Introduction to Artificial Int,4,COMSS4701D,Artifcial Intelligence,3
+Columbia University,CS3243,Introduction to Artificial Intelligence,4,COMSS4701D,Artifcial Intelligence,3
 Columbia University,CS3244,Machine Learning,4,COMSS4771Q,Machine Learning,3
 Columbia University,CS3230,Design & Analysis of Algorithm,4,CSORS4231D,Analysis of Algorithms,3
 Concordia University,LAF1201,French 1,4,FRAN211,French Language: Elementary,1
@@ -455,7 +455,7 @@ Concordia University,CS2106,Intro to Operating Systems,4,COMP310,Operating Syste
 Concordia University,IS4100,IT Project Management,4,BTM480,Project Management,3
 Concordia University,IS3251,Principles of Technology Entre,4,COMM320,Entrepreneurship,3
 Concordia University,CS1010,Programming Methodology,4,COMP218,Fundamentals of Programming,3
-Concordia University,CS4211,Formal Methods for Software En,4,SOEN331,Formal Methods for Software Engineering,3
+Concordia University,CS4211,Formal Methods for Software Engineering,4,SOEN331,Formal Methods for Software Engineering,3
 Concordia University,CS4218,Software Testing,4,SOEN345,"Software Testing, Verification and Quality Assurance",3
 Concordia University,IS4100,IT Project Management,4,SOEN384,"Management, Measurement and Quality Control",3
 Concordia University,CS2100,Computer Organisation,4,COEN311,Computer Organization and Software,3
@@ -465,12 +465,12 @@ Concordia University,IS3240,Digital Platform Strategy and,4,SOEN343,Software Arc
 Concordia University,IS3240,Digital Platform Strategy and,4,SOEN344,Advanced Software Architecture and Design,3
 Concordia University,IS3150,Digital Media Marketing,4,MARK452,e-Marketing,3
 Concordia University,IS3221,ERP Systems with Analytics Sol,4,BTM430,Enterprise Resource Planning and Information Technology Integration,3
-Concordia University,CS3243,Introduction to Artificial Int,4,COMP472,ARTIFICIAL INTELLIGENCE,3
+Concordia University,CS3243,Introduction to Artificial Intelligence,4,COMP472,ARTIFICIAL INTELLIGENCE,3
 Concordia University,CS3240,Interaction Design,4,SOEN357,User Interface Design,3
 Concordia University,IS3106,Enterprise Systems Interface D,4,SOEN387,Web-Based Enterprise Application Design,3
 Concordia University,CS2107,Introduction to Information Security,4,SOEN321,Information Systems Security,3
 Concordia University,IS1103,Ethics in Computing,4,ECNS393,Social and Ethical Dimensions of Information and Communication Technologies,3
-Concordia University,CS3226,Web Programming and Applicatio,4,SOEN287,Web Programming,3
+Concordia University,CS3226,Web Programming and Application,4,SOEN287,Web Programming,3
 Concordia University,CS3210,Parallel Computing,4,COMP428,Parallel Programming,4
 Concordia University,CS4212,Compiler Design,4,COMP442,Compiler Design,4
 Concordia University,CS3241,Computer Graphics,4,COMP371,Computer Graphics,4
@@ -512,14 +512,14 @@ Delft University of Technology,CS3219,Software Engineering Principle,4,IN4315,So
 Delft University of Technology,IS4231,Information Security Mgmt,4,SPM5441,Cyber Risk Management,5
 Delft University of Technology,IS4204,IT Governance,4,SPM9640,ICT MANAGEMENT,4
 Delft University of Technology,IS4260,E-Commerce Business Models,4,SEN9311,Digital Business,5
-Delft University of Technology,CS5242,Neural Networks &Deep Learning,4,CS4240,Deep Learning,5
+Delft University of Technology,CS5242,Neural Networks & Deep Learning,4,CS4240,Deep Learning,5
 Delft University of Technology,CS2040,Data Structures and Algorithms,4,TI1520AM,Algorithms and Data Structures,6
 Delft University of Technology,IS1103,Ethics in Computing,4,TBM009A,"Technology, Innovation and Ethics for Companies",3
 Delft University of Technology,BT4012,Fraud Analytics,4,CS4035,Cyber Data Analytics,5
 Delft University of Technology,IS4260,E-Commerce Business Models,4,SPM9310,E-business,6
 Delft University of Technology,IS3251,Principles of Technology Entre,4,WM0516TU,Turning Technology into Business,6
 Delft University of Technology,IS3223,IT and Supply Chain Management,4,SPM4621,Supply Chain Analysis and Engineering,6
-Delft University of Technology,CS3226,Web Programming and Applicatio,4,CS4275,Web Programming Languages,5
+Delft University of Technology,CS3226,Web Programming and Application,4,CS4275,Web Programming Languages,5
 Delft University of Technology,BT4212,Search Engine Optimization & A,4,CS4065,Multimedia Search and Recommendation,5
 Delft University of Technology,CS2102,Database Systems,4,CSE1505,Information and Data Management,5
 Delft University of Technology,AR3101,Design 5,8,Bk7810,Analysis and Model Study,8.5
@@ -587,10 +587,10 @@ Delft University of Technology,ST4238,Stochastic Processes II,4,WI4129,Stochasti
 "Ecole Centrale Des Arts Et Manufactures, Paris",EX2101,Exchange UEM,1,SH3200,"Seminar Series: individuals, labour, organisations",2
 "Ecole Centrale Des Arts Et Manufactures, Paris",IE4892,Exchange Elective,2,SE2500,Modeling and analysis of Supply Chain,3
 "Ecole Centrale Des Arts Et Manufactures, Paris",EX3618,Exchange UEM,2,SE3301,Entrepreneurship: A First Approach,3
-Ecole Polytechnique Federale de Lausanne,CS4231,Parallel & Distr Algorithms,4,CS451,Distributed algorithms,5
+Ecole Polytechnique Federale de Lausanne,CS4231,Parallel & Distributed Algorithms,4,CS451,Distributed algorithms,5
 Ecole Polytechnique Federale de Lausanne,CS3240,Interaction Design,4,CS486,Human computer interaction,4
-Ecole Polytechnique Federale de Lausanne,CS3223,Database Systems Implementatio,4,CS422,Database systems,6
-Ecole Polytechnique Federale de Lausanne,CS2108,Introduction to Media Computin,4,EE550,Image and video processing,6
+Ecole Polytechnique Federale de Lausanne,CS3223,Database Systems Implementation,4,CS422,Database systems,6
+Ecole Polytechnique Federale de Lausanne,CS2108,Introduction to Media Computing,4,EE550,Image and video processing,6
 Ecole Polytechnique Federale de Lausanne,CS2107,Introduction to Information Security,4,CS301,Computer security,6
 Ecole Polytechnique Federale de Lausanne,BT1101,Introduction to Business Analy,4,MATH493,Applied biostatistics,5
 Ecole Polytechnique Federale de Lausanne,CS3230,Design & Analysis of Algorithm,4,CS450,Advanced algorithms,6
@@ -636,14 +636,14 @@ Ecole Polytechnique Federale de Lausanne,LSM3994,Exchange Enrichment Level 3000,
 Eindhoven University of Technology,CS3244,Machine Learning,4,CS2IIG0,Data mining and Machine Learning,5
 Eindhoven University of Technology,CS2107,Introduction to Information Security,4,2AC10,Information security basics,5
 Eindhoven University of Technology,CS3244,Machine Learning,4,5XSL0,Fundamentals of machine learning,5
-Eindhoven University of Technology,CS5242,Neural Networks &Deep Learning,4,CS2IMM10/CSE2AMM10,Deep Learning,5
-Eindhoven University of Technology,CS5339,Theory and Algorithms for Mach,4,CSE2DI70,Statistical learning theory,5
+Eindhoven University of Technology,CS5242,Neural Networks & Deep Learning,4,CS2IMM10/CSE2AMM10,Deep Learning,5
+Eindhoven University of Technology,CS5339,Theory and Algorithms for Machine Learning,4,CSE2DI70,Statistical learning theory,5
 Eindhoven University of Technology,CS2106,Intro to Operating Systems,4,CS2INC0,Operating Systems,5
 Eindhoven University of Technology,CS3230,Design & Analysis of Algorithm,4,CS2ILC0,Algorithms,5
 Eindhoven University of Technology,CS2103,Software Engineering,4,2IS50,Software Development for Engineers,5
 Eindhoven University of Technology,CS2107,Introduction to Information Security,4,2IC80,Lab on offensive computer security,5
 Eindhoven University of Technology,CS2100,Computer Organisation,4,5SIBO,Electronic Design Automation,5
-Eindhoven University of Technology,CS3226,Web Programming and Applicatio,4,2II36,Web-based Interactive Systems,5
+Eindhoven University of Technology,CS3226,Web Programming and Application,4,2II36,Web-based Interactive Systems,5
 Eindhoven University of Technology,BT1101,Introduction to Business Analy,4,ZXXJBM030,Business analytics 1,5
 Eindhoven University of Technology,CS3240,Interaction Design,4,2ID40,Human Technology Interaction,5
 Eindhoven University of Technology,CS3219,Software Engineering Principle,4,CS2IPC0,Programming methods,5
@@ -651,13 +651,13 @@ Eindhoven University of Technology,CS3219,Software Engineering Principle,4,CS2IW
 Eindhoven University of Technology,CS3230,Design & Analysis of Algorithm,4,2ILCO,Algorithms,5
 Eindhoven University of Technology,CS2102,Database Systems,4,2ID50,Datamodelling and databases,5
 Eindhoven University of Technology,BT1101,Introduction to Business Analy,4,1BK40,1BK40,5
-Eindhoven University of Technology,CS3243,Introduction to Artificial Int,4,2ID90,Artificial intelligence,5
+Eindhoven University of Technology,CS3243,Introduction to Artificial Intelligence,4,2ID90,Artificial intelligence,5
 Eindhoven University of Technology,CS5343,Advanced Computer Animation,4,2IMV15,Simulation in computer graphics,5
 Eindhoven University of Technology,CS3241,Computer Graphics,4,2IV15,Simulation in Computer Graphics,5
 Eindhoven University of Technology,CS3230,Design & Analysis of Algorithm,4,CS2MMD30,Graphs and algorithms,5
 Eindhoven University of Technology,CS2102,Database Systems,4,CS2IMD10,Database Technology,5
 Eindhoven University of Technology,CS3245,Information Retrieval,4,CS2IMM10,Recommender Systems,5
-Eindhoven University of Technology,CS4225,Big Data Systems for Data Scie,4,CS2IMD15,Data Engineering,5
+Eindhoven University of Technology,CS4225,Big Data Systems for Data Science,4,CS2IMD15,Data Engineering,5
 Eindhoven University of Technology,CS2105,Intro to Computer Networks,4,2IC60,Computer Networks and Security,5
 Eindhoven University of Technology,AR4101,Design 7,8,7XS15,Masterproject 1 Architecture,14
 Eindhoven University of Technology,AR5011,Research Methodology,4,7X811,Methodology in Architectural History and Theory,3
@@ -723,12 +723,12 @@ ETH Zurich,CS5330,Randomized Algorithms,4,252-0417-00L,Randomized Algorithms and
 ETH Zurich,CS5234,Algorithms at Scale,4,401-3052-05V,Graph Theory,5
 ETH Zurich,CS4268,Quantum Computing,4,252-1403-00L,Invitation to Quantum Informatics,3
 ETH Zurich,CS4268,Quantum Computing,4,402044801L,Quantum Information Processing I: Concepts,55
-ETH Zurich,CS4231,Parallel & Distr Algorithms,4,227-0558-00L,Principles of Distributed Computing,6
+ETH Zurich,CS4231,Parallel & Distributed Algorithms,4,227-0558-00L,Principles of Distributed Computing,6
 ETH Zurich,CS4236,Cryptography Theory & Practice,4,252-0407-00L,Cryptography Foundations,7
 ETH Zurich,CS3244,Machine Learning,4,252-0220-00L,Learning and Intelligent Systems,8
 ETH Zurich,CS3210,Parallel Computing,4,151-0116-10L,High Performance Computing for Science and Engineering (HPCSE) for Engineers II,4
 ETH Zurich,CS2106,Intro to Operating Systems,4,252-0062-00L,Operating Systems and Networks,8
-ETH Zurich,CS4225,Big Data Systems for Data Scie,4,263-0008-00L,Computational Intelligence Lab,6
+ETH Zurich,CS4225,Big Data Systems for Data Science,4,263-0008-00L,Computational Intelligence Lab,6
 ETH Zurich,CS3244,Machine Learning,4,227-0105-00L,Introduction to Estimation and Machine Learning,6
 ETH Zurich,CG2271,Real-Time Operating Systems,4,2270124-00L,Embedded Systems,6
 ETH Zurich,CS4234,Optimisation Algorithms,4,2520209-00L,"Algorithms, Probability, and Computing",8
@@ -736,7 +736,7 @@ ETH Zurich,CS4248,Natural Language Processing,4,2523005-00L,Natural Language Und
 ETH Zurich,CS3241,Computer Graphics,4,2520543-01L,Computer Graphics,6
 ETH Zurich,CS3244,Machine Learning,4,2520535-00L,Machine Learning,6
 ETH Zurich,CS4222,Wireless Networking,4,2520293-00L,Wireless and Mobile Computing for Entertainment Applications,4
-ETH Zurich,CS5339,Theory and Algorithms for Mach,4,252505100L,Advanced Topics in Machine Learning,8
+ETH Zurich,CS5339,Theory and Algorithms for Machine Learning,4,252505100L,Advanced Topics in Machine Learning,8
 ETH Zurich,CS5234,Algorithms at Scale,4,263450000L,Advanced Algorithms,8
 ETH Zurich,CS3210,Parallel Computing,4,1510107-20L,High Performance Computing for Science and Engineering (HPCSE) I,4
 ETH Zurich,AR3721,Building Environmental System,4,051-1239-14S,Intergrated Discipline Sustainable Building Technologies (A.Schi?ter),3
@@ -851,7 +851,7 @@ Georgia Institute of Technology,CS4278,Intelligent Robots: Algorithms,4,CS7638,A
 Georgia Institute of Technology,CS4226,Internet Architecture,4,CS6675,Advanced Internet Computing Systmes and Application,3
 Georgia Institute of Technology,CS3240,Interaction Design,4,CS6750,Human-Computer Interact,3
 Georgia Institute of Technology,IS2102,Enterprise Systems Architectur,4,CS6365,Introduction to Enterprise Computing,3
-Georgia Institute of Technology,CS4231,Parallel & Distr Algorithms,4,CS7210,Distributed Computing,3
+Georgia Institute of Technology,CS4231,Parallel & Distributed Algorithms,4,CS7210,Distributed Computing,3
 Georgia Institute of Technology,CS4222,Wireless Networking,4,ECE6610,Wireless Networks,3
 Georgia Institute of Technology,CS2107,Introduction to Information Security,4,ECE4415,Introduction to Computer Security,3
 Georgia Institute of Technology,CS2102,Database Systems,4,MGT4058,Database Management,3
@@ -866,43 +866,43 @@ Georgia Institute of Technology,BT4211,Data-Driven Marketing,4,MGT4367,Revenue A
 Georgia Institute of Technology,BT4221,Big Data Techniques & Technolo,4,CSE6040,Computing for Data Analysis|,3
 Georgia Institute of Technology,CS5346,Information Visualisation,4,CS4460,Information Visualization,3
 Georgia Institute of Technology,BT4013,Analytics for Capital Market T,4,CS7646/CS4646,Machine Learning for Trading,3
-Georgia Institute of Technology,CS5242,Neural Networks &Deep Learning,4,CS7643,Deep Learning,3
+Georgia Institute of Technology,CS5242,Neural Networks & Deep Learning,4,CS7643,Deep Learning,3
 Georgia Institute of Technology,BT4221,Big Data Techniques & Technolo,4,CS6220,Big Data Sys & Analytics,3
 Georgia Institute of Technology,BT4222,Mining Web Data for Business I,4,MGT6203,Data Analytics Business,3
 Georgia Institute of Technology,BT2102,Data Management and Visualisat,4,CX 4242,Data and Visual Analytics,3
 Georgia Institute of Technology,CS5234,Algorithms at Scale,4,CS4540,Advanced Algorithms,3
 Georgia Institute of Technology,CS5330,Randomized Algorithms,4,CS4530,Randomized Algorithms,3
 Georgia Institute of Technology,CS4234,Optimisation Algorithms,4,CS4520,Approximation Algorithms,3
-Georgia Institute of Technology,CS5242,Neural Networks &Deep Learning,4,CS4803,Deep Learning,3
-Georgia Institute of Technology,CS4246,AI Planning and Decision Makin,4,CS7642,Reinforcement Learning and Decision Making,3
+Georgia Institute of Technology,CS5242,Neural Networks & Deep Learning,4,CS4803,Deep Learning,3
+Georgia Institute of Technology,CS4246,AI Planning and Decision Making,4,CS7642,Reinforcement Learning and Decision Making,3
 Georgia Institute of Technology,BT4221,Big Data Techniques & Technolo,4,MGT4050,Business Analytics,3
 Georgia Institute of Technology,BT4211,Data-Driven Marketing,4,MGT4332,Database and CRM Strategy,3
 Georgia Institute of Technology,CS3244,Machine Learning,4,CS7641,Machine Learning,3
 Georgia Institute of Technology,CS4236,Cryptography Theory & Practice,4,CS6260,Applied Cryptography,3
-Georgia Institute of Technology,CS4246,AI Planning and Decision Makin,4,CS4649,Robot Intelligence - Planning,3
+Georgia Institute of Technology,CS4246,AI Planning and Decision Making,4,CS4649,Robot Intelligence - Planning,3
 Georgia Institute of Technology,CS3219,Software Engineering Principle,4,CS6300,Software Development Process,3
-Georgia Institute of Technology,CS4244,Knowledge Representation and R,4,CS4635,Knowledge Based AI,3
+Georgia Institute of Technology,CS4244,Knowledge Representation and Reasoning,4,CS4635,Knowledge Based AI,3
 Georgia Institute of Technology,BT4240,Machine Learning for Predictiv,4,ISYE6740,Computational Data Analysis,3
 Georgia Institute of Technology,IS4241,Social Media Network Analysis,4,CS6474,SOCIAL COMPUTING,3
-Georgia Institute of Technology,CS4225,Big Data Systems for Data Scie,4,CS6220,Big Data Systems and Analytics,3
+Georgia Institute of Technology,CS4225,Big Data Systems for Data Science,4,CS6220,Big Data Systems and Analytics,3
 Georgia Institute of Technology,BT4222,Mining Web Data for Business I,4,MGT4803,Social and Digital Analytics,3
 Georgia Institute of Technology,CS2104,Programming Language Concepts,4,CS4392,Programming Languages,3
-Georgia Institute of Technology,CS4243,Comp Vision & Pattern Recogntn,4,CS4616,Pattern Recognition,3
+Georgia Institute of Technology,CS4243,Computer Vision & Pattern Recognition,4,CS4616,Pattern Recognition,3
 Georgia Institute of Technology,CS4248,Natural Language Processing,4,CS4650,Natural Language Processing,3
 Georgia Institute of Technology,CS3103,Computer Networks Practice,4,CS4251,Computer Networking II,3
 Georgia Institute of Technology,IS4241,Social Media Network Analysis,4,CS4460,Information Visualization,3
-Georgia Institute of Technology,CS3221,Operatg Sys Desgn & Pragmatics,4,CS3210,Operating Systems Design,3
+Georgia Institute of Technology,CS3221,Operating System Design & Pragmatics,4,CS3210,Operating Systems Design,3
 Georgia Institute of Technology,CS4212,Compiler Design,4,CS4240,Compilers and Interpreters,3
 Georgia Institute of Technology,IS1103,Ethics in Computing,4,CS4001,Computing and Society,3
 Georgia Institute of Technology,CS3241,Computer Graphics,4,CS3451,Computer Graphics,3
 Georgia Institute of Technology,CS2107,Introduction to Information Security,4,CS4235,Intro to Info Security,3
 Georgia Institute of Technology,CS2102,Database Systems,4,CS4400,Intro to Database Systems,3
-Georgia Institute of Technology,CS3243,Introduction to Artificial Int,4,CS3600,Introduction to Artificial Intelligence,3
+Georgia Institute of Technology,CS3243,Introduction to Artificial Intelligence,4,CS3600,Introduction to Artificial Intelligence,3
 Georgia Institute of Technology,CS3240,Interaction Design,4,CS3750,User Interface Design,3
 Georgia Institute of Technology,CS3230,Design & Analysis of Algorithm,4,CS3510,Design and Analysis of Algorithms,3
 Georgia Institute of Technology,CS2040,Data Structures and Algorithms,4,CS1332,Data Structures and Algorithms,3
 Georgia Institute of Technology,CS2030,Programming Methodology II,4,CS1331,Introduction to Object-Oriented Programming,3
-Georgia Institute of Technology,CS3223,Database Systems Implementatio,4,CS4220,Database Sys Implement,3
+Georgia Institute of Technology,CS3223,Database Systems Implementation,4,CS4220,Database Sys Implement,3
 Georgia Institute of Technology,IE4004,Department Exchange Module,4,ISYE4232,Advanced Stochastic Systems,3
 Georgia Institute of Technology,IE4124,Department Exchange Module,4,ISYE4311,Capital Investment Analysis,3
 Georgia Institute of Technology,IE4044,Exchange Elective,4,ISYE4803GUP,Online Learning and Decision Making,4
@@ -1013,7 +1013,7 @@ Hong Kong University of Science & Technology,CS3230,Design & Analysis of Algorit
 Hong Kong University of Science & Technology,CS3245,Information Retrieval,4,COMP4321,Search Engines for Web and Enterprise Data,3
 Hong Kong University of Science & Technology,CS3219,Software Engineering Principle,4,COMP4111,Software Engineering Practices,3
 Hong Kong University of Science & Technology,CS3210,Parallel Computing,4,COMP5112,Parallel Programming,3
-Hong Kong University of Science & Technology,CS3223,Database Systems Implementatio,4,COMP5311,Database Architecture and Implementation,3
+Hong Kong University of Science & Technology,CS3223,Database Systems Implementation,4,COMP5311,Database Architecture and Implementation,3
 Hong Kong University of Science & Technology,CS4234,Optimisation Algorithms,4,comp5712,Introduction to Combinatorial Optimization,3
 Hong Kong University of Science & Technology,CS2107,Introduction to Information Security,4,COMP3632,Principles of Cybersecurity,3
 Hong Kong University of Science & Technology,CS2103,Software Engineering,4,COMP3111,Software Engineering,4
@@ -1161,7 +1161,7 @@ King's College London,PS4882E,Topics in IR: Arms Control,5,SWF010,Military Strat
 King's College London,PS3749,Department exchange module,4,4AANB006,Political Philosophy I,7.5
 King's College London,PS3701,Political Science Exchange Mod,4,4SSWF001,CAUSES OF WAR,4
 King's College London,PS3702,Political Science Exchange Mod,4,4SSWF003,Experience Of War,4
-King's College London,LAF1201,French 1,4,4AALFR11,French 1 – One-Term,1
+King's College London,LAF1201,French 1,4,4AALFR11,French 1 ï¿½ One-Term,1
 King's College London,CS2107,Introduction to Information Security,4,6CCS3NSE,Network Security,15
 King's College London,CS3244,Machine Learning,4,6CC13ML1,Machine Learning,15
 King's College London,CS2104,Programming Language Concepts,4,5CCS2PLD,Programming Language Design Paradigms,15
@@ -1172,21 +1172,21 @@ King's College London,IFS4103,Penetration Testing Practice,4,7CCSMSCT,Security T
 King's College London,IFS4102,Digital Forensics,4,7CCS MCFC,Computer Forensics and Cybercrime,15
 King's College London,CS2100,Computer Organisation,4,CS4CCS1CS1,Computer Systems I,15
 King's College London,CS2030,Programming Methodology II,4,PEP5CCS2,Practical Experiences of Programming,15
-King's College London,CS4211,Formal Methods for Software En,4,6CCS3VER,Formal Verification,15
+King's College London,CS4211,Formal Methods for Software Engineering,4,6CCS3VER,Formal Verification,15
 King's College London,CS3230,Design & Analysis of Algorithm,4,5CCS2FC2,Foundations of Computing 2,15
 King's College London,CS3244,Machine Learning,4,6CCS3PRE,Pattern Recognition,15
-King's College London,CS3243,Introduction to Artificial Int,4,4CCS1IAI,Introduction to Artificial Intelligence,15
-King's College London,CS3226,Web Programming and Applicatio,4,6CCS3SIA,Software Engineering of Internet Applications,15
+King's College London,CS3243,Introduction to Artificial Intelligence,4,4CCS1IAI,Introduction to Artificial Intelligence,15
+King's College London,CS3226,Web Programming and Application,4,6CCS3SIA,Software Engineering of Internet Applications,15
 King's College London,CS2102,Database Systems,4,4CCS1DBS,Database Systems,15
 King's College London,CS1010S,Programming Methodology,4,5AAVC210,Introduction to Programming,15
 King's College London,CS3235,Computer Security,4,6CCS3NSE,Network Security,10
-King's College London,CS4246,AI Planning and Decision Makin,4,6CCS 3AIP,Artificial Intelligence Planning,15
+King's College London,CS4246,AI Planning and Decision Making,4,6CCS 3AIP,Artificial Intelligence Planning,15
 King's College London,CS2030,Programming Methodology II,4,5CCS 2PEP,Practical Experiences of Programming,15
 King's College London,CS2105,Intro to Computer Networks,4,5CCS 2INS,Internet Systems,15
-King's College London,CS3243,Introduction to Artificial Int,4,6CCS 3AIN,Artificial Intelligence,15
+King's College London,CS3243,Introduction to Artificial Intelligence,4,6CCS 3AIN,Artificial Intelligence,15
 King's College London,CS3210,Parallel Computing,4,6CCS 3PAL,Parallel Algorithms,15
 King's College London,CS3241,Computer Graphics,4,6CCS 3GRS,Computer Graphics Systems,15
-King's College London,CS4243,Comp Vision & Pattern Recogntn,4,6CCS 3COV,Computer Vision,15
+King's College London,CS4243,Computer Vision & Pattern Recognition,4,6CCS 3COV,Computer Vision,15
 King's College London,CS3234,Logic for Proofs and Programs,4,6CCS 3CSL,Computer Science Logic,15
 King's College London,CS3240,Interaction Design,4,6CCS 3HCI,Human-Computer Interaction,15
 King's College London,ST3131,Regression Analysis,4,5CCM242A,Statistic Modelling,15
@@ -1245,7 +1245,7 @@ Korea Advanced Inst of Sci & Tech,LAK1201,Korean 1,4,HSS180,Basic Korean and Kor
 Korea Advanced Inst of Sci & Tech,CS2104,Programming Language Concepts,4,CS320,Programming Language,3
 Korea Advanced Inst of Sci & Tech,CS2040,Data Structures and Algorithms,4,CS206,Data Structure,3
 Korea Advanced Inst of Sci & Tech,CS2107,Introduction to Information Security,4,CS448,Introduction to Information Security,3
-Korea Advanced Inst of Sci & Tech,CS3226,Web Programming and Applicatio,4,CS457,Web-based Software Development,3
+Korea Advanced Inst of Sci & Tech,CS3226,Web Programming and Application,4,CS457,Web-based Software Development,3
 Korea Advanced Inst of Sci & Tech,CS3230,Design & Analysis of Algorithm,4,CS500,Design and Analysis of Algorithm,3
 Korea Advanced Inst of Sci & Tech,IS3251,Principles of Technology Entre,4,COE207,Introduction to Entrepreneurship and Startup companies,3
 Korea Advanced Inst of Sci & Tech,CS3240,Interaction Design,4,IE566,Human-Computer Interaction : Theory and Design,3
@@ -1301,7 +1301,7 @@ KTH Royal Institute of Technology,IS3150,Digital Media Marketing,4,ME2094,Intern
 KTH Royal Institute of Technology,CS5340,Uncertainty Modelling in AI,4,DD2447,Statistical Methods in Applied Computer Science,7.5
 KTH Royal Institute of Technology,CS3240,Interaction Design,4,DH2642,Interaction Programming and the Dynamic Web,7.5
 KTH Royal Institute of Technology,CS3240,Interaction Design,4,DH2624,Human-Computer Interaction - a Didactive Perspective,7.5
-KTH Royal Institute of Technology,CS4231,Parallel & Distr Algorithms,4,DD2443,Parallel and Distributed Computing,7.5
+KTH Royal Institute of Technology,CS4231,Parallel & Distributed Algorithms,4,DD2443,Parallel and Distributed Computing,7.5
 KTH Royal Institute of Technology,CS3241,Computer Graphics,4,DH2413,Advanced Graphics and Interaction,7.5
 KTH Royal Institute of Technology,CS3247,Game Development,4,DH2650,Computer Game Design,7.5
 KTH Royal Institute of Technology,IS3251,Principles of Technology Entre,4,MJ2496,Innovation and Entrepreneurship in Sustainable Energy Technology,7.5
@@ -1325,7 +1325,7 @@ KTH Royal Institute of Technology,BT4240,Machine Learning for Predictiv,4,DD2421
 KTH Royal Institute of Technology,CS2105,Intro to Computer Networks,4,EP2120,Internetworking,7.5
 KTH Royal Institute of Technology,BT4211,Data-Driven Marketing,4,AH2314,Individual Choice Modeling and Market Analysis,7.5
 KTH Royal Institute of Technology,CS1231,Discrete Structures,4,SF1610,Discrete Mathematics,7.5
-KTH Royal Institute of Technology,CS4345,General-Purpose Computation on,4,DD2360,Applied GPU Programming,7.5
+KTH Royal Institute of Technology,CS4345,General-Purpose Computation on GPU,4,DD2360,Applied GPU Programming,7.5
 KTH Royal Institute of Technology,CS2102,Database Systems,4,DD1334,Database Technology,6
 KTH Royal Institute of Technology,CS2040,Data Structures and Algorithms,4,ID1021,Algorithms and Data Structures,7.5
 KTH Royal Institute of Technology,IS3261,Mobile Apps Development for En,4,ID2216,Developing Mobile Applications,7.5
@@ -1516,7 +1516,7 @@ Nanyang Technological University,IS3103,Information Systems Leadership,4,BU8642,
 Nanyang Technological University,IS3103,Information Systems Leadership,4,AB0602,Communication Management Strategies,3
 Nanyang Technological University,BT4222,Mining Web Data for Business I,4,CS4022,Social Media Mining,3
 Nanyang Technological University,IS3150,Digital Media Marketing,4,ET9122,E-STARTUPS & SOCIAL MEDIA STRATEGIES,3
-Nanyang Technological University,CS4240,Interaction Design for Virtual,4,CZ4001,Virtual and Augmented Reality,3
+Nanyang Technological University,CS4240,Interaction Design for Virtual and Augmented Reality,4,CZ4001,Virtual and Augmented Reality,3
 Nanyang Technological University,IT3011,Introduction to Machine Learn,4,MH4510,Statistical Learning and Data Mining,3
 Nanyang Technological University,CS3245,Information Retrieval,4,CZ4034,Information Retrieval,3
 Nanyang Technological University,IS4228,Information Technologies in Fi,4,BC3402,FINANCIAL SERVICE PROCESSES & ANALYTICS,3
@@ -1540,7 +1540,7 @@ Nanyang Technological University,CS4236,Cryptography Theory & Practice,4,CZ4010,
 Nanyang Technological University,CS4222,Wireless Networking,4,CZ4021,Pervasive Networks,3
 Nanyang Technological University,CS2107,Introduction to Information Security,4,IM3003,Information Security,3
 Nanyang Technological University,CS4278,Intelligent Robots: Algorithms,4,EE4268,Robotics and Automation,3
-Nanyang Technological University,CS4243,Comp Vision & Pattern Recogntn,4,CZ4003,Computer Vision,2
+Nanyang Technological University,CS4243,Computer Vision & Pattern Recognition,4,CZ4003,Computer Vision,2
 Nanyang Technological University,CS4248,Natural Language Processing,4,CZ4045,Natural Language Processing,2
 Nanyang Technological University,CS1231,Discrete Structures,4,MH1812,Discrete Mathematics,2
 Nanyang Technological University,IT3011,Introduction to Machine Learn,4,CZ/CE4041,Machine learning,3
@@ -1720,7 +1720,7 @@ Peking University,MKT3711,Services Marketing,4,2834660,SERVICE MARKETING,2
 Peking University,FIN3761X,Topics in Finance,4,2831661,INTERNATIONAL FINANCE AND INTERNATIONAL TRADE,3
 Peking University,MKT3761Y,Topics in Marketing,4,2837122,INTERNET AND NEW MARKETING MODELS,2
 Peking University,MNO3761X,Topics in L&HCM,4,2838130,CHINESE SOCIETY AND BUSINESS CULTURE,2
-Peking University,CS3236,Introduction to Information Th,4,4831210,Information Theory,3
+Peking University,CS3236,Introduction to Information Theory,4,4831210,Information Theory,3
 Peking University,IS1103,Ethics in Computing,4,F00022,The Social Implications of Computing,3
 Peking University,BT4221,Big Data Techniques & Technolo,4,SECS04833520,Big Data Management Technology,3
 Peking University,CS3244,Machine Learning,4,4802020,Fundamentals of Machine Learning,3
@@ -1730,7 +1730,7 @@ Peking University,CS3244,Machine Learning,4,MATH114250,Machine Learning,3
 Peking University,CS2106,Intro to Operating Systems,4,CS04834260,Operating Systems,4
 Peking University,CS4236,Cryptography Theory & Practice,4,CS4833900,Fundamentals of Cryptography,3
 Peking University,CS3240,Interaction Design,4,4830310,Human- Computer Interaction (HCI),2
-Peking University,CS3243,Introduction to Artificial Int,4,4830250,Introduction to artificial intelligence,2
+Peking University,CS3243,Introduction to Artificial Intelligence,4,4830250,Introduction to artificial intelligence,2
 Peking University,CS2104,Programming Language Concepts,4,CS04830270,Principle of Programming Languages,2
 Peking University,ST4234,Bayesian Statistics,4,100877,Bayesian Theory and Computation,3
 Peking University,ST3236,Stochastic Processes I,4,112650,Stochastic Processes,3
@@ -1746,13 +1746,13 @@ Peking University,LSM4265,Urban Ecology,4,12635230,Urban Ecology and Environment
 Peking University,LSM1996,Exchange Enrichment Level 1000,2,1130871,"Human Sex, Reproduction and Health",2
 Pohang University of Science & Technology,CS3235,Computer Security,4,CSED702,Computer Security,3
 Pohang University of Science & Technology,CS4222,Wireless Networking,4,CSED417,Wireless mobile networks,3
-Pohang University of Science & Technology,CS4243,Comp Vision & Pattern Recogntn,4,CSED441,Introduction to Computer Vision,3
+Pohang University of Science & Technology,CS4243,Computer Vision & Pattern Recognition,4,CSED441,Introduction to Computer Vision,3
 Pohang University of Science & Technology,CS4248,Natural Language Processing,4,CSED523,Statistical Natural Language Processing,3
 Pohang University of Science & Technology,CS3241,Computer Graphics,4,CSED451,Computer Graphics,3
 Pohang University of Science & Technology,CS3230,Design & Analysis of Algorithm,4,CSED331,Algorithms,3
-Pohang University of Science & Technology,CS3223,Database Systems Implementatio,4,CSED421,Databases systems,3
+Pohang University of Science & Technology,CS3223,Database Systems Implementation,4,CSED421,Databases systems,3
 Pohang University of Science & Technology,CS3244,Machine Learning,4,CSED515,Machine Learning,3
-Pohang University of Science & Technology,CS3243,Introduction to Artificial Int,4,CSED442,Artificial Intelligence,3
+Pohang University of Science & Technology,CS3243,Introduction to Artificial Intelligence,4,CSED442,Artificial Intelligence,3
 Pohang University of Science & Technology,CS3210,Parallel Computing,4,CSED490V,Parallel Com Architecture&Programming,3
 Pohang University of Science & Technology,CS3244,Machine Learning,4,CSED490B,ST:Introduction to Machine Learning,3
 Pohang University of Science & Technology,ME3102,Mechanical Systems Design II,4,MECH433,SYSTEMS DESIGN II,3
@@ -1792,15 +1792,15 @@ Pohang University of Science & Technology,CM3252,Polymer Chemistry 1,4,ADMS503,O
 Pohang University of Science & Technology,CM3252,Polymer Chemistry 1,4,CHEM552,Morpho.& Properties of Macro.,3
 Purdue University,CS2106,Intro to Operating Systems,4,CS354,Operating Systems,3
 Purdue University,CS3241,Computer Graphics,4,ECE30834,Fundamentals Of Computer Graphics,3
-Purdue University,CS3243,Introduction to Artificial Int,4,CS47100,Introduction to Artificial Intelligence,3
-Purdue University,CS5339,Theory and Algorithms for Mach,4,CS57800,Statistical Machine Learning,3
+Purdue University,CS3243,Introduction to Artificial Intelligence,4,CS47100,Introduction to Artificial Intelligence,3
+Purdue University,CS5339,Theory and Algorithms for Machine Learning,4,CS57800,Statistical Machine Learning,3
 Purdue University,CS2105,Intro to Computer Networks,4,CS42200,Computer Networks,3
 Purdue University,CS2100,Computer Organisation,4,CS25000,Computer Architecture,4
 Purdue University,CS2102,Database Systems,4,CS44800,Introduction To Relational Database Systems,3
 Purdue University,CS2107,Introduction to Information Security,4,CS42600,Computer Security,3
 Purdue University,CS2102,Database Systems,4,CS34800,Information Systems,3
-Purdue University,CS2108,Introduction to Media Computin,4,CS17700,Programming With Multimedia Objects,3
-Purdue University,CS3211,Parallel & Concurrent Programg,4,CS52500,Parallel Computing,3
+Purdue University,CS2108,Introduction to Media Computing,4,CS17700,Programming With Multimedia Objects,3
+Purdue University,CS3211,Parallel & Concurrent Programming,4,CS52500,Parallel Computing,3
 Purdue University,IS2102,Enterprise Systems Architectur,4,CNIT28000,Systems Analysis And Design Methods,3
 Purdue University,CS3230,Design & Analysis of Algorithm,4,CS38100,Introduction to the Analysis of Algorithms,3
 Purdue University,CS4212,Compiler Design,4,CS35200,Compilers: Principles And Practice,3
@@ -1897,7 +1897,7 @@ Singapore Management University,MNO3703,Leading in the 21st Century,4,MGMT233,LE
 Singapore Management University,MNO3701,Human Capital Management,4,OBHR224,HUMAN CAPITAL STRATEGY,1
 Singapore Management University,DOS3713,Project Management,4,OPIM313,PROJECT MANAGEMENT,1
 Singapore Management University,DOS3712,Physical Distribution Mgt,4,OPIM314,LOGISTICS AND TRANSPORTATION MANAGEMENT,1
-Singapore Management University,FIN3761B,TIF: China’s Capital Markets,4,COR1306,CAPITAL MARKETS IN CHINA,1
+Singapore Management University,FIN3761B,TIF: Chinaï¿½s Capital Markets,4,COR1306,CAPITAL MARKETS IN CHINA,1
 Singapore Management University,BSP1703,Managerial Economics,4,ECON001,INTRODUCTORY ECONOMICS,1
 Singapore Management University,DAO2703,Operations and Technology Management,4,OPIM201,BUSINESS PROCESSES,1
 Singapore Management University,MNO3761X,Topics in L&HCM,4,MGMT223,SOCIAL ENTREPRENEURSHIP,1
@@ -1998,7 +1998,7 @@ Singapore Management University,BT1101,Introduction to Business Analy,4,MGMT108,
 Singapore Management University,BT3103,Application Systems Developmen,4,IS211,Interaction Design and Prototyping,1
 Singapore Management University,CS3240,Interaction Design,4,IS211,Interaction Design and Prototyping,1
 Singapore Management University,CS2030,Programming Methodology II,4,IS442,Object Oriented Programming,1
-Singapore Management University,CS3237,Introduction to Internet of Th,4,CS462,Internet of Things: Technology and Applications,1
+Singapore Management University,CS3237,Introduction to Internet of Things,4,CS462,Internet of Things: Technology and Applications,1
 Singapore Management University,IS4250,IT-enabled Healthcare Solution,4,IS447,Smart Healthcare in Asia,1
 Singapore Management University,IS4100,IT Project Management,4,OPIM313,Project Management,4
 Singapore Management University,CS2107,Introduction to Information Security,4,IS302,Information Security and Trust,4
@@ -2016,7 +2016,7 @@ Singapore Management University,CS3235,Computer Security,4,IS437,Software and Sy
 Singapore Management University,IS4240,Business Intelligence Systems,4,IS424,Data Mining and Business Analytics,1
 Singapore Management University,IT3010,Data Management for Business,4,IS105,Business Data Management,1
 Singapore Management University,CS3230,Design & Analysis of Algorithm,4,CS602,Algorithm Design and Implementation,1
-Singapore Management University,CS3243,Introduction to Artificial Int,4,CS420,Introduction to AI,1
+Singapore Management University,CS3243,Introduction to Artificial Intelligence,4,CS420,Introduction to AI,1
 Singapore Management University,IS4303,IT-mediated financial solution,4,IS446,Digital Banking Enterprise Architecture,1
 Singapore Management University,BT4016,Risk Analytics for Financial S,4,QF305,GLOBAL FINANCIAL RISK MANAGEMENT,1
 Singapore Management University,BT4016,Risk Analytics for Financial S,4,IS453,Financial Analytics,1
@@ -2094,7 +2094,7 @@ Technical University of Darmstadt,IS4100,IT Project Management,4,0119-2G04,Manag
 Technical University of Darmstadt,IS4241,Social Media Network Analysis,4,0120-2G02,Social Network Analysis,5
 Technical University of Darmstadt,CS3244,Machine Learning,4,20-00-0358,Statistical machine learning,6
 Technical University of Darmstadt,CS3230,Design & Analysis of Algorithm,4,20-00-0580,Static and dynamic program analysis,6
-Technical University of Darmstadt,CS4243,Comp Vision & Pattern Recogntn,4,20-00-0401,Computer Vision II,6
+Technical University of Darmstadt,CS4243,Computer Vision & Pattern Recognition,4,20-00-0401,Computer Vision II,6
 Technical University of Darmstadt,CS5232,Formal Specification & Design,4,20-00-0794,Formal specification and verification of software,6
 Technical University of Darmstadt,CS2104,Programming Language Concepts,4,20-00-1117,Concepts of Programming Languages,6
 Technical University of Darmstadt,CS5321,Network Security,4,20-00-0512,Network Security,6
@@ -2126,7 +2126,7 @@ Technical University of Denmark,CS3244,Machine Learning,4,42186,Model-based mach
 Technical University of Denmark,BT4014,Analytics Driven Design of Ada,4,PHOENGIN3436,Intelligent systems,5
 Technical University of Denmark,CS2107,Introduction to Information Security,4,2244,Language Based Security,7.5
 Technical University of Denmark,IS4241,Social Media Network Analysis,4,2805,Social graphs and interactions,10
-Technical University of Denmark,CS4211,Formal Methods for Software En,4,01-02263,Formal Aspects of Software Engineering,5
+Technical University of Denmark,CS4211,Formal Methods for Software Engineering,4,01-02263,Formal Aspects of Software Engineering,5
 Technical University of Denmark,IS4241,Social Media Network Analysis,4,2806,Social data analysis and visualization,5
 Technical University of Denmark,BT4222,Mining Web Data for Business I,4,62589,Business Intelligence,5
 Technical University of Denmark,IS4240,Business Intelligence Systems,4,62589,Business Intelligence,5
@@ -2196,21 +2196,21 @@ Technical University of Munich,MKT1705,Principles of Marketing,4,WI000688,MARKET
 Technical University of Munich,DAO2703,Operations and Technology Management,4,WI000044,OPERATIONS MANAGEMENT,6
 Technical University of Munich,CS3244,Machine Learning,4,EI70130,Machine Learning in Robotics,5
 Technical University of Munich,CS4248,Natural Language Processing,4,IN2361,Natural Language Processing,6
-Technical University of Munich,CS5339,Theory and Algorithms for Mach,4,IN2378,Statistical Foundations of Learning,5
+Technical University of Munich,CS5339,Theory and Algorithms for Machine Learning,4,IN2378,Statistical Foundations of Learning,5
 Technical University of Munich,IS3261,Mobile Apps Development for En,4,IN0012,"Practical Course - iOS Praktikum (IN0012, IN2106, IN2175, IN2128)",10
 Technical University of Munich,CS2102,Database Systems,4,821020505,Practical Course - Database Systems,10
 Technical University of Munich,CS3249,User Interface Development,4,IN2111,3D User Interfaces,6
 Technical University of Munich,CS3242,3D Modeling and Animation,4,IN2297,Geometric Modelling and Character Animation,6
-Technical University of Munich,CS4243,Comp Vision & Pattern Recogntn,4,IN2228,Computer Vision II: Multiple View Geometry,8
+Technical University of Munich,CS4243,Computer Vision & Pattern Recognition,4,IN2228,Computer Vision II: Multiple View Geometry,8
 Technical University of Munich,CS3249,User Interface Development,4,IN2112,2D graphical User Interfaces for Desktop-based and Mobile Computer Applications,6
 Technical University of Munich,CS3241,Computer Graphics,4,IN2017,Computer Graphics,6
 Technical University of Munich,CS3244,Machine Learning,4,IN2064,Machine Learning,8
-Technical University of Munich,CS3217,SW Engg on Modern Appln Platfm,4,IN0012,"Practical Course - iPraktikum, iOS Praktikum",10
+Technical University of Munich,CS3217,Software Engineering on Modern Application Platform,4,IN0012,"Practical Course - iPraktikum, iOS Praktikum",10
 Technical University of Munich,CS3230,Design & Analysis of Algorithm,4,IN2003,Efficient Algorithm and Data Structures,8
 Technical University of Munich,CS4234,Optimisation Algorithms,4,IN2004,Efficient Algorithms and Data Structures II,8
-Technical University of Munich,CS4243,Comp Vision & Pattern Recogntn,4,IN2210,Tracking and Detection in Computer Vision,7
+Technical University of Munich,CS4243,Computer Vision & Pattern Recognition,4,IN2210,Tracking and Detection in Computer Vision,7
 Technical University of Munich,CS4223,Multi-core Architectures,4,IN2076,Advanced Computer Architecture,6
-Technical University of Munich,CS4345,General-Purpose Computation on,4,IN4102,Advanced Practical Course - GPU Programming in Computer Vision,6
+Technical University of Munich,CS4345,General-Purpose Computation on GPU,4,IN4102,Advanced Practical Course - GPU Programming in Computer Vision,6
 Technical University of Munich,CS3219,Software Engineering Principle,4,IN2309,Advanced Topics of Software Engineering,8
 Technical University of Munich,CS2105,Intro to Computer Networks,4,IN0010,Introduction to Computer Networking and Distributed Systems,6
 Technical University of Munich,CS3244,Machine Learning,4,IN2332,Statistical Modeling and Machine Learning,8
@@ -2219,12 +2219,12 @@ Technical University of Munich,CS2103,Software Engineering,4,IN0006,Introduction
 Technical University of Munich,IS4250,IT-enabled Healthcare Solution,4,IN9048,Innovation Generation in the Healthcare Domain,6
 Technical University of Munich,CS2107,Introduction to Information Security,4,IN2178,Security Engineering,5
 Technical University of Munich,CS3244,Machine Learning,4,IN2323,Machine Learning for Graphs and Sequential Data,5
-Technical University of Munich,CS4240,Interaction Design for Virtual,4,IN2018,Expanded reality,6
-Technical University of Munich,CS4243,Comp Vision & Pattern Recogntn,4,IN2057,3D Computer Vision,5
-Technical University of Munich,CS3243,Introduction to Artificial Int,4,IN2062,Techniques in Artificial Intelligence,5
+Technical University of Munich,CS4240,Interaction Design for Virtual and Augmented Reality,4,IN2018,Expanded reality,6
+Technical University of Munich,CS4243,Computer Vision & Pattern Recognition,4,IN2057,3D Computer Vision,5
+Technical University of Munich,CS3243,Introduction to Artificial Intelligence,4,IN2062,Techniques in Artificial Intelligence,5
 Technical University of Munich,CS3210,Parallel Computing,4,IN2147,Parallel Programming,5
-Technical University of Munich,CS3226,Web Programming and Applicatio,4,IN2087,Software Engineering for Business Applications - Web Application Engineering,5
-Technical University of Munich,CS3211,Parallel & Concurrent Programg,4,IN2013,Parallel and High-Performance Computing,5
+Technical University of Munich,CS3226,Web Programming and Application,4,IN2087,Software Engineering for Business Applications - Web Application Engineering,5
+Technical University of Munich,CS3211,Parallel & Concurrent Programming,4,IN2013,Parallel and High-Performance Computing,5
 Technical University of Munich,CS3234,Logic for Proofs and Programs,4,IN2049,Logic,6
 Technical University of Munich,CS4261,Algorithmic Mechanism Design,4,IN2239,Algorithmic Game Theory,6
 Technical University of Munich,IS1103,Ethics in Computing,4,IN0025,Information Technologies and Society,6
@@ -2338,7 +2338,7 @@ The Australian National University,BT4013,Analytics for Capital Market T,4,FINM1
 The Australian National University,BT4016,Risk Analytics for Financial S,4,BUSN1001,Business Reporting and Analysis,6
 The Australian National University,IS3106,Enterprise Systems Interface D,4,COMP1710,Web Development and Design,6
 The Australian National University,IS4100,IT Project Management,4,COMP3120,Managing Software Development,6
-The Australian National University,CS4243,Comp Vision & Pattern Recogntn,4,ENGN4528,Computer Vision,6
+The Australian National University,CS4243,Computer Vision & Pattern Recognition,4,ENGN4528,Computer Vision,6
 The Australian National University,BT4016,Risk Analytics for Financial S,4,BUSN2036,Financial Statement Analysis,6
 The Australian National University,CS2105,Intro to Computer Networks,4,COMP3310,Computer Networks,6
 The Australian National University,CS2100,Computer Organisation,4,COMP2300,Computer Organisation and Program Execution,6
@@ -2347,7 +2347,7 @@ The Australian National University,CS2030,Programming Methodology II,4,COMP2100,
 The Australian National University,CS2030,Programming Methodology II,4,COMP1140,Structured Programming (Advanced),6
 The Australian National University,CS2105,Intro to Computer Networks,4,COMP2410,Networked Information Systems,6
 The Australian National University,CS2102,Database Systems,4,COMP2400,Relational Databases,6
-The Australian National University,CS3243,Introduction to Artificial Int,4, COMP3620, Artificial Intelligence,6
+The Australian National University,CS3243,Introduction to Artificial Intelligence,4,COMP3620,Artificial Intelligence,6
 The Australian National University,CS2103,Software Engineering,4,COMP2500,Software Construction for Software Engineers,6
 The Australian National University,EX4890,UEM Exchange Module,5,COMP3650,System Architectural Understanding and the Human Brain,6
 The Australian National University,IE4240,Project Management,4,MGMT7020,Technology and Project Management,6
@@ -2416,8 +2416,8 @@ The Chinese University of Hong Kong,DAO2703,Operations and Technology Management
 The Chinese University of Hong Kong,FIN3715,Risk and Insurance,4,FINA3210,RISK MANAGEMENT AND INSURANCE,3
 The Chinese University of Hong Kong,IS3223,IT and Supply Chain Management,4,SEEM4610,Supply Chain Management,3
 The Chinese University of Hong Kong,CS1010J,Programming Methodology,4,CSCI 1130,Introduction to Computing Using Java,3
-The Chinese University of Hong Kong,CS5242,Neural Networks &Deep Learning,4,AIST4010,Foundation of Applied Deep Learning,3
-The Chinese University of Hong Kong,CS2108,Introduction to Media Computin,4,CSCI3280,Introduction to Multimedia Systems,3
+The Chinese University of Hong Kong,CS5242,Neural Networks & Deep Learning,4,AIST4010,Foundation of Applied Deep Learning,3
+The Chinese University of Hong Kong,CS2108,Introduction to Media Computing,4,CSCI3280,Introduction to Multimedia Systems,3
 The Chinese University of Hong Kong,CS2104,Programming Language Concepts,4,CSCI3180,Principles of Programming Languages,3
 The Chinese University of Hong Kong,CS3210,Parallel Computing,4,CSCI4160,Distributed and Parallel Computing,3
 The Chinese University of Hong Kong,IS4231,Information Security Mgmt,4,DSME4280,Networks and Security,3
@@ -2435,10 +2435,10 @@ The Chinese University of Hong Kong,IS4243,Information Systems Consulting,4,SEEM
 The Chinese University of Hong Kong,CS2106,Intro to Operating Systems,4,CSCI3150,Introduction to Operating Systems,3
 The Chinese University of Hong Kong,IS3101,Management of Information Syst,4,DSME2051,Business information system,3
 The Chinese University of Hong Kong,CS3219,Software Engineering Principle,4,CSCI3100,Software Engineering,3
-The Chinese University of Hong Kong,CS3226,Web Programming and Applicatio,4,CSCI2720,Building Web Applications,3
+The Chinese University of Hong Kong,CS3226,Web Programming and Application,4,CSCI2720,Building Web Applications,3
 The Chinese University of Hong Kong,CS3241,Computer Graphics,4,CSCI3260,PRINCIPLES OF COMP GRAPHICS,3
 The Chinese University of Hong Kong,CS3230,Design & Analysis of Algorithm,4,CSCI3160,Design and Analysis of Algorithms,3
-The Chinese University of Hong Kong,CS3223,Database Systems Implementatio,4,CSCI3170,Introduction to Database Systems,3
+The Chinese University of Hong Kong,CS3223,Database Systems Implementation,4,CSCI3170,Introduction to Database Systems,3
 The Chinese University of Hong Kong,IE4114,Department Exchange Module,4,SEEM4600,Logistics Management,3
 The Chinese University of Hong Kong,IE4504,Exchange Elective,4,SEEM4730,Statistics Modeling and Analysis in Financial Engineering,3
 The Chinese University of Hong Kong,IE4506,Exchange Elective,4,STAT4003,Statistical Inference,3
@@ -2513,7 +2513,7 @@ The George Washington University,IS4100,IT Project Management,4,ISTM 4120,Busine
 The George Washington University,CS2105,Intro to Computer Networks,4,CSCI 4431,Computer Network,3
 The George Washington University,CS2102,Database Systems,4,CSCI2441W,Database Systems and Team Projects,3
 The George Washington University,CS2100,Computer Organisation,4,CSCI 2461,Computer Architecture I,3
-The George Washington University,CS3237,Introduction to Internet of Th,4,CSCI4455,Computer Game Design and Programming,3
+The George Washington University,CS3237,Introduction to Internet of Things,4,CSCI4455,Computer Game Design and Programming,3
 The George Washington University,CS2104,Programming Language Concepts,4,CSCI4223,Principles of Programming Languages,3
 The George Washington University,IS4302,Blockchain and Distributed Led,4,CSCI3907,Blockchain Fundamentals,3
 The George Washington University,IE4044,Exchange Elective,4,STAT2118,Regression Analysis,3
@@ -2549,12 +2549,12 @@ The University of Auckland,BT1101,Introduction to Business Analy,4,INFOMGMT290,B
 The University of Auckland,CS4236,Cryptography Theory & Practice,4,COMPSCI 727,Cryptographic Management,15
 The University of Auckland,CS3241,Computer Graphics,4,COMPSCI 373,Computer Graphics and Image Processing,15
 The University of Auckland,CS2102,Database Systems,4,INFOSYS222,Database Systems,15
-The University of Auckland,CS3243,Introduction to Artificial Int,4,COMPSCI367,Artificial Intelligence,15
+The University of Auckland,CS3243,Introduction to Artificial Intelligence,4,COMPSCI367,Artificial Intelligence,15
 The University of Auckland,IS3251,Principles of Technology Entre,4,INNOVENT203/203G,THE ENTREPRENEURIAL MINDSET,6
 The University of Auckland,CS2102,Database Systems,4,COMPSCI351,Fundamentals of Database Systems,6
 The University of Auckland,CS2105,Intro to Computer Networks,4,COMPSCI 314,Modern Data Communications,15
 The University of Auckland,CS2100,Computer Organisation,4,COMPSCI210,Computer Systems 1,15
-The University of Auckland,CS4243,Comp Vision & Pattern Recogntn,4,COMPSCI 773,Intelligent Vision Systems,15
+The University of Auckland,CS4243,Computer Vision & Pattern Recognition,4,COMPSCI 773,Intelligent Vision Systems,15
 The University of Auckland,CS3244,Machine Learning,4,COMPSCI 361,Machine Learning,15
 The University of Auckland,CS2107,Introduction to Information Security,4,COMPSCI 316,Cyber Security,15
 The University of Auckland,LSM1991,Exchange Enrichment Module,4,MARINE 100G,The Oceans Around Us,15
@@ -2636,18 +2636,18 @@ The University of British Columbia,ACC1701X,Accounting for Decision Makers,4,COM
 The University of British Columbia,MKT3702,Consumer Behaviour,4,COMM362,BUYER BEHAVIOUR,3
 The University of British Columbia,BSP1703,Managerial Economics,4,COMM295,MANAGERIAL ECONOMICS,3
 The University of British Columbia,MNO1706,Organisational Behavior,4,COMM292,MANAGEMENT AND ORGANIZATIONAL BEHAVIOUR,3
-The University of British Columbia,CS5242,Neural Networks &Deep Learning,4,CPEN400D,Deep Learning,3
+The University of British Columbia,CS5242,Neural Networks & Deep Learning,4,CPEN400D,Deep Learning,3
 The University of British Columbia,IS3103,Information Systems Leadership,4,COMM205,Introduction to Management Information Systems,3
 The University of British Columbia,CS2103,Software Engineering,4,CPSC210,Software Construction,3
-The University of British Columbia,CS4231,Parallel & Distr Algorithms,4,CPSC416,Distributed Systems,3
-The University of British Columbia,CS4246,AI Planning and Decision Makin,4,CPSC522,Artificial Intelligence II,3
+The University of British Columbia,CS4231,Parallel & Distributed Algorithms,4,CPSC416,Distributed Systems,3
+The University of British Columbia,CS4246,AI Planning and Decision Making,4,CPSC522,Artificial Intelligence II,3
 The University of British Columbia,CS4212,Compiler Design,4,CPSC411,Introduction to Compiler Construction,3
-The University of British Columbia,CS4249,Phenomena and Theories of Huma,4,CPSC444,Advanced Methods for Human Computer Interaction,3
-The University of British Columbia,CS5339,Theory and Algorithms for Mach,4,CPSC540,Machine Learning,3
+The University of British Columbia,CS4249,Phenomena and Theories of Human-Computer Interaction,4,CPSC444,Advanced Methods for Human Computer Interaction,3
+The University of British Columbia,CS5339,Theory and Algorithms for Machine Learning,4,CPSC540,Machine Learning,3
 The University of British Columbia,CS3219,Software Engineering Principle,4,CPEN321,Software Engineering,3
 The University of British Columbia,CS3240,Interaction Design,4,CPEN441,Human Computer Interfaces in Engineering Design,3
 The University of British Columbia,BT3103,Application Systems Developmen,4,COMM335,Information Systems Technology and Development,3
-The University of British Columbia,CS5339,Theory and Algorithms for Mach,4,CPSC440,Advanced Machine Learning,3
+The University of British Columbia,CS5339,Theory and Algorithms for Machine Learning,4,CPSC440,Advanced Machine Learning,3
 The University of British Columbia,CS4248,Natural Language Processing,4,CPSC436N,NLP,3
 The University of British Columbia,CS3247,Game Development,4,CPSC427,Video Game Programming,3
 The University of British Columbia,IS1103,Ethics in Computing,4,CPSC430,Computers and Society,3
@@ -2817,7 +2817,7 @@ The University of Edinburgh,CS4218,Software Testing,4,INFR10057,Software Testing
 The University of Edinburgh,CS5330,Randomized Algorithms,4,INFR11089,Randomness and Computation,10
 The University of Edinburgh,CS3244,Machine Learning,4,INFR08028,Informatics 2B - Learning,10
 The University of Edinburgh,CS2106,Intro to Operating Systems,4,INFR10079,Operating Systems,10
-The University of Edinburgh,CS4243,Comp Vision & Pattern Recogntn,4,INFR11140,Image and Vision Computing,10
+The University of Edinburgh,CS4243,Computer Vision & Pattern Recognition,4,INFR11140,Image and Vision Computing,10
 The University of Edinburgh,IS4100,IT Project Management,4,MAEE09004,Manufacturing Information Systems (MIS) 3,10
 The University of Edinburgh,IS3240,Digital Platform Strategy and,4,INFR10064,Software Design and Modelling,20
 The University of Edinburgh,LSM2991,Exchange Enrichment Level 2000,4,ECSC 08008,Ecological and Environmental Analysis,20
@@ -2898,7 +2898,7 @@ The University of Hong Kong,IS3223,IT and Supply Chain Management,4,IIMT3681,Sup
 The University of Hong Kong,CS2105,Intro to Computer Networks,4,ELEC3443,Computer networks,3
 The University of Hong Kong,CS2107,Introduction to Information Security,4,COMP3355,Cyber Security,6
 The University of Hong Kong,CS1231,Discrete Structures,4,COMP2121,Discrete Mathematics,3
-The University of Hong Kong,CS4243,Comp Vision & Pattern Recogntn,4,COMP3317,Computer vision,6
+The University of Hong Kong,CS4243,Computer Vision & Pattern Recognition,4,COMP3317,Computer vision,6
 The University of Hong Kong,IS4234,Compliance and Regulation Tech,4,IIMT3686,Information Systems Audit and Control,6
 The University of Hong Kong,CS2106,Intro to Operating Systems,4,COMP3230,Principles of Operating Systems,6
 The University of Hong Kong,CS2103,Software Engineering,4,COMP3297,Introduction to Software Engineering,6
@@ -3157,10 +3157,10 @@ The University of Sheffield,PS3240,International Security,4,POL230,Contemporary 
 The University of Sheffield,PS3242,US Foreign Policy,4,POL232,Contemporary US Foreign Policy,20
 The University of Sheffield,CS3244,Machine Learning,4,COM3240,Adaptive Intelligence,15
 The University of Sheffield,CS3245,Information Retrieval,4,COM3504,The Intelligent Web,15
-The University of Sheffield,CS3226,Web Programming and Applicatio,4,COM3501,Computer Security and Forensics,15
-The University of Sheffield,CS2113,Software Engineering & Object-,4,COM162,Object Oriented Design and Programming with Java,15
+The University of Sheffield,CS3226,Web Programming and Application,4,COM3501,Computer Security and Forensics,15
+The University of Sheffield,CS2113,Software Engineering & Object Oriented Programming,4,COM162,Object Oriented Design and Programming with Java,15
 The University of Sheffield,CS2103,Software Engineering,4,COM35420,Software Hut,15
-The University of Sheffield,CS5239,Computer System Performance An,4,COM5239,Network Performance Analysis,15
+The University of Sheffield,CS5239,Computer System Performance Analysis,4,COM5239,Network Performance Analysis,15
 The University of Sheffield,CS5241,Speech Processing,4,COM4511,Speech Technology,15
 The University of Sheffield,AR2102,Design 4,8,ARC226,Architectural Design 4,30
 The University of Sheffield,AR2723,Strat for Sustainable Archi,4,ARC208,Environment and Technology 4,10
@@ -3221,7 +3221,7 @@ The University of Texas at Austin,MKT3716,Customer Relationship Mgt,4,MKT372,DAT
 The University of Texas at Austin,MKT3718,Advertising & Promotion Mgt,4,MKT372,MARKETING COMMUNICATIONS,3
 The University of Texas at Austin,MKT1705X,Principles of Marketing,4,MKT337,PRINCIPLES OF MARKETING,3
 The University of Texas at Austin,IS1103,Ethics in Computing,4,MIS302F,Foundations of Information Technology Management,3
-The University of Texas at Austin,CS3211,Parallel & Concurrent Programg,4,EE360P,Concurrent and Distributed Systems,3
+The University of Texas at Austin,CS3211,Parallel & Concurrent Programming,4,EE360P,Concurrent and Distributed Systems,3
 The University of Texas at Austin,CS3244,Machine Learning,4,CS391L,Machine Learning,3
 The University of Texas at Austin,CS1231,Discrete Structures,4,M325K,Discrete Mathematics,3
 The University of Texas at Austin,CS2100,Computer Organisation,4,CS429,Computer Organization and Architecture,3
@@ -3241,7 +3241,7 @@ The University of Texas at Austin,CS3247,Game Development,4,CS354R,Game Technolo
 The University of Texas at Austin,IS3261,Mobile Apps Development for En,4,CS371M,Mobile Computing,3
 The University of Texas at Austin,CS3247,Game Development,4,CS329E,ELEMENTS OF GAME DEVELOPMENT,3
 The University of Texas at Austin,CS2103,Software Engineering,4,CS330E,Elements of Software Engineering I,3
-The University of Texas at Austin,CS2113,Software Engineering & Object-,4,CS329E,Elements of Software Engineering,3
+The University of Texas at Austin,CS2113,Software Engineering & Object Oriented Programming,4,CS329E,Elements of Software Engineering,3
 The University of Texas at Austin,CS2030,Programming Methodology II,4,EE422C,Software Design and Implementation II,3
 The University of Texas at Austin,CS3240,Interaction Design,4,INF315C,Topics in Human-Computer Interaction: User Experience (UX) Design,3
 The University of Texas at Austin,CS2030,Programming Methodology II,4,CS371P,Object-Oriented Programming,3
@@ -3271,16 +3271,16 @@ The University of Texas at Austin,ST2132,Mathematical Statistics,4,SDS378,Introd
 The University of Texas at Austin,LSM3991,Exchange Enrichment Module,4,BIO 359R,Animal Sexuality,3
 Tokyo Institute of Technology,CS3240,Interaction Design,4,CSCT421,Human Computer Interaction,2
 Tokyo Institute of Technology,CS4226,Internet Architecture,4,CSCT441,Internet Infrastructure,2
-Tokyo Institute of Technology,CS4231,Parallel & Distr Algorithms,4,CSCT438,Distributed Algorithms,2
+Tokyo Institute of Technology,CS4231,Parallel & Distributed Algorithms,4,CSCT438,Distributed Algorithms,2
 Tokyo Institute of Technology,CS5224,Cloud Computing,4,CSCT351,Cloud computing and parallel processing,2
 Tokyo Institute of Technology,CS2102,Database Systems,4,CSCT343,Databases,2
 Tokyo Institute of Technology,CS2105,Intro to Computer Networks,4,CSCT345,Computer Networks,2
 Tokyo Institute of Technology,CS2106,Intro to Operating Systems,4,CSCT371,System Software,2
-Tokyo Institute of Technology,CS4269,Fundamentals of Logic in Compu,4,CSCT261,Logic in Computer Science,2
-Tokyo Institute of Technology,CS4240,Interaction Design for Virtual,4,CSCT439,Augmented Reality,2
+Tokyo Institute of Technology,CS4269,Fundamentals of Logic in Computer Science,4,CSCT261,Logic in Computer Science,2
+Tokyo Institute of Technology,CS4240,Interaction Design for Virtual and Augmented Reality,4,CSCT439,Augmented Reality,2
 Tokyo Institute of Technology,CS3210,Parallel Computing,4,MCST418,Practical Parallel Computing,2
 Tokyo Institute of Technology,CS4226,Internet Architecture,4,ARTT457,Workshop on Building Advanced Computer Network,2
-Tokyo Institute of Technology,CS3243,Introduction to Artificial Int,4,CSCT272,Artificial Intelligence,2
+Tokyo Institute of Technology,CS3243,Introduction to Artificial Intelligence,4,CSCT272,Artificial Intelligence,2
 Tokyo Institute of Technology,MT4002,Technology Management Strategy,4,36005,Strategic Management of Technology,1
 Tokyo Institute of Technology,IE4916,Exchange Elective,3,IEE.C430,Operatiions Management,2
 Tokyo Institute of Technology,IE4607,Exchange Elective,3,IEE C432,Applied Cognitive Ergonomics,2
@@ -3312,9 +3312,9 @@ Tsinghua University,MKT3722,Research for Marketing Insight,4,2833650,MARKETING R
 Tsinghua University,CS4248,Natural Language Processing,4,70240052,Computational Linguistics,3
 Tsinghua University,CS3240,Interaction Design,4,70240362,Techniques of Human-Machine Interactive and Interface,3
 Tsinghua University,CS3244,Machine Learning,4,80250993,Machine Learning,3
-Tsinghua University,CS3243,Introduction to Artificial Int,4,30250333,Foundation of Artificial Intelligence,3
+Tsinghua University,CS3243,Introduction to Artificial Intelligence,4,30250333,Foundation of Artificial Intelligence,3
 Tsinghua University,CS2105,Intro to Computer Networks,4,205100820,Computer Networks,3
-Tsinghua University,CS3243,Introduction to Artificial Int,4,602400520,Artificial Intelligence,3
+Tsinghua University,CS3243,Introduction to Artificial Intelligence,4,602400520,Artificial Intelligence,3
 Tsinghua University,CS3244,Machine Learning,4,80245013,Machine Learning,3
 Tsinghua University,CS3235,Computer Security,4,70250332,Network Security,3
 Tsinghua University,BT4221,Big Data Techniques & Technolo,4,80240673,Big Data Analytics with In-Memory Computing,3
@@ -3370,7 +3370,7 @@ Tulane University,LSM3991,Exchange Enrichment Module,4,EBIO 2250,Vertebrate Biol
 Tulane University,LSM2991,Exchange Enrichment Level 2000,4,EBIO 2240,Oceans and Human Health,3
 Tulane University,LSM3254,Ecology of Aquatic Environment,4,EBIO 2100-01,Marine Biology,3
 Tulane University,LSM3252,Evolutn & Comparative Genomics,4,EBIO 3080,Processes of Evolution,3
-University of Birmingham,CS4243,Comp Vision & Pattern Recogntn,4,CS19339,Computational Vision,10
+University of Birmingham,CS4243,Computer Vision & Pattern Recognition,4,CS19339,Computational Vision,10
 University of Birmingham,CS4278,Intelligent Robots: Algorithms,4,06-30227,Intelligent Robotics,20
 University of Birmingham,CS4248,Natural Language Processing,4,06-02495,Natural Language Processing 1,15
 University of Birmingham,CS3244,Machine Learning,4,06-26428,Machine Learning,10
@@ -3381,7 +3381,7 @@ University of Birmingham,BT4222,Mining Web Data for Business I,4,06-20122,Intell
 University of Birmingham,BT3103,Application Systems Developmen,4,06-34252,LC Full Stack Application Development,20
 University of Birmingham,CS3240,Interaction Design,4,CS06-27111,ICY Introduction to Human Computer Interaction,15
 University of Birmingham,CS1010S,Programming Methodology,4,CS 06-32248,Programming in Python,15
-University of Birmingham,CS4215,Programming Language Implement,4,CS30435,"Programming Language Principles, Design, and Implementation",20
+University of Birmingham,CS4215,Programming Language Implementation,4,CS30435,"Programming Language Principles, Design, and Implementation",20
 University of Birmingham,CS2102,Database Systems,4,06-21980,ICY Databases,15
 University of Birmingham,CS5272,Embedded Software Design,4,CE19504,Dig Systems & Embedded Computing,20
 University of Birmingham,CM3252,Polymer Chemistry 1,4,430573,"LI Polymer Case Studies, Part A",10
@@ -3427,7 +3427,7 @@ University of Bristol,PC1991,Exchange Enrichment Level 1000,4,PHYS11500,Galaxies
 University of Bristol,MA3236,Non-Linear Programming,4,MATH30017,Optimisation,20
 University of Bristol,LSM2991,Exchange Enrichment Level 2000,4,PANM 10003,Fundamentals of Molecular Microbiology,20
 University of Calgary,PS2741,Department Exchange Module,4,POLI321,Politics & Government in Canada,3
-University of Calgary,CS4211,Formal Methods for Software En,4,SENG523,Formal Methods,3
+University of Calgary,CS4211,Formal Methods for Software Engineering,4,SENG523,Formal Methods,3
 University of Calgary,CS3219,Software Engineering Principle,4,ENSF480,Principles of Software Design,3
 University of Calgary,CS3241,Computer Graphics,4,CPSC453,Introduction to Computer Graphics,3
 University of Calgary,CS3219,Software Engineering Principle,4,SENG471,Software Requirements Engineering,3
@@ -3437,7 +3437,7 @@ University of Calgary,CS2104,Programming Language Concepts,4,CPSC449,Programming
 University of Calgary,CS3235,Computer Security,4,CPSC525,Principles of Computer Security,3
 University of Calgary,CS3230,Design & Analysis of Algorithm,4,CPSC335,Intermediate Information Structures,3
 University of Calgary,CS4268,Quantum Computing,4,CPSC519,Introduction to Quantum Computation,3
-University of Calgary,CS3243,Introduction to Artificial Int,4,CPSC433,Artificial Intelligence,3
+University of Calgary,CS3243,Introduction to Artificial Intelligence,4,CPSC433,Artificial Intelligence,3
 University of Calgary,CS3230,Design & Analysis of Algorithm,4,CPSC413,Design and Analysis of Algorithms I,3
 University of Calgary,CS2105,Intro to Computer Networks,4,CPSC441,Computer Networks,3
 University of Calgary,CS5321,Network Security,4,CPSC526,Network Systems Security,3
@@ -3788,13 +3788,13 @@ University of California,CM4991,Exchange Enrichment Module,4,CHEM130B,Biophysica
 "University of California, Davis",CS3244,Machine Learning,4,CSE151,Introduction to Artificial Intelligence: Statistical Approaches,3
 "University of California, Davis",BT4222,Mining Web Data for Business I,4,STAT141B,Data & Web Technologies for Data Analysis,3
 "University of California, Davis",CS3230,Design & Analysis of Algorithm,4,ECS122B,Algorithm Design and Analysis,3
-"University of California, Davis",CS3243,Introduction to Artificial Int,4,ECS170,Artificial Intelligence,3
+"University of California, Davis",CS3243,Introduction to Artificial Intelligence,4,ECS170,Artificial Intelligence,3
 "University of California, Davis",CS2107,Introduction to Information Security,4,CSE153,Computer Security,3
-"University of California, Davis",CS4225,Big Data Systems for Data Scie,4,CSE158,Web Mining and Recommender Systems,3
+"University of California, Davis",CS4225,Big Data Systems for Data Science,4,CSE158,Web Mining and Recommender Systems,3
 "University of California, Davis",CS3241,Computer Graphics,4,ECS175,Computer Graphics,3
 "University of California, Davis",CS4236,Cryptography Theory & Practice,4,ECS127,Cryptography,3
 "University of California, Davis",CS3103,Computer Networks Practice,4,ECS152B,Computer Networks,3
-"University of California, Davis",CS4243,Comp Vision & Pattern Recogntn,4,ECS174,Introduction to Computer Vision,3
+"University of California, Davis",CS4243,Computer Vision & Pattern Recognition,4,ECS174,Introduction to Computer Vision,3
 "University of California, Davis",CS2107,Introduction to Information Security,4,ECS 235A,COMPUTER AND INFORMATION SECURITY,3
 "University of California, Davis",IS3103,Information Systems Leadership,4,MGT120,Managing and Using Information Technology,3
 "University of California, Davis",CS3244,Machine Learning,4,ECS171,Machine Learning,3
@@ -3820,16 +3820,16 @@ University of California,CM4991,Exchange Enrichment Module,4,CHEM130B,Biophysica
 "University of California, Los Angeles",CS3240,Interaction Design,4,COGS 120,Computer Interaction Design,3
 "University of California, Los Angeles",CS2106,Intro to Operating Systems,4,CS153,DESIGN OF OPERATING SYSTEMS,4
 "University of California, Los Angeles",CS3247,Game Development,4,ECS189L,Introduction to Gameplay Programming,3
-"University of California, Los Angeles",CS4240,Interaction Design for Virtual,4,CS135,Virtual Reality,3
+"University of California, Los Angeles",CS4240,Interaction Design for Virtual and Augmented Reality,4,CS135,Virtual Reality,3
 "University of California, Los Angeles",CS3230,Design & Analysis of Algorithm,4,CS141,Intermediate Data Structures and Algorithms,3
 "University of California, Los Angeles",CS1010,Programming Methodology,4,CSE 5A,Introduction to Programming I (C),3
 "University of California, Los Angeles",BT1101,Introduction to Business Analy,4,MGT3,Quantitative Methods in Business,3
 "University of California, Los Angeles",CS3249,User Interface Development,4,COMPSCI160,User Interface Design and Development,4
 "University of California, Los Angeles",CS3235,Computer Security,4,COMPSCI161,Computer Security,4
-"University of California, Los Angeles",CS3243,Introduction to Artificial Int,4,COMPSCI188,Introduction to Artificial Intelligence,4
+"University of California, Los Angeles",CS3243,Introduction to Artificial Intelligence,4,COMPSCI188,Introduction to Artificial Intelligence,4
 "University of California, Los Angeles",CS3244,Machine Learning,4,COMPSCI189,Introduction to Machine Learning,4
-"University of California, Los Angeles",CS3211,Parallel & Concurrent Programg,4,COMPSCI273,Foundations of Parallel Computation,3
-"University of California, Los Angeles",CS3243,Introduction to Artificial Int,4,CSE151,Introduction to Artificial Intelligence: Statistical,4
+"University of California, Los Angeles",CS3211,Parallel & Concurrent Programming,4,COMPSCI273,Foundations of Parallel Computation,3
+"University of California, Los Angeles",CS3243,Introduction to Artificial Intelligence,4,CSE151,Introduction to Artificial Intelligence: Statistical,4
 "University of California, Los Angeles",CS3242,3D Modeling and Animation,4,CSE169,Computer Animation,4
 "University of California, Los Angeles",CS3210,Parallel Computing,4,CSE160,Introduction to Parallel Computing,4
 "University of California, Los Angeles",IS4241,Social Media Network Analysis,4,BANA277,Customer and Social Analytics,3
@@ -3844,7 +3844,7 @@ University of California,CM4991,Exchange Enrichment Module,4,CHEM130B,Biophysica
 "University of California, Los Angeles",CS1010S,Programming Methodology,4,CMPSC 8,Introduction to Computer Science,3
 "University of California, Los Angeles",CS2107,Introduction to Information Security,4,CMPSC177,Computer Security,3
 "University of California, Los Angeles",IS3103,Information Systems Leadership,4,TMP127,Understanding and Managing Technology Organizations,3
-"University of California, Los Angeles",CS4243,Comp Vision & Pattern Recogntn,4,CSE185,INTRO TO COMPUTER VISION,4
+"University of California, Los Angeles",CS4243,Computer Vision & Pattern Recognition,4,CSE185,INTRO TO COMPUTER VISION,4
 "University of California, Los Angeles",IE3114,Department Exchange Module,4,MGMT140,Elements of Production and Operations Research,4
 "University of California, Los Angeles",MA2108,Mathematical Analysis I,4,MATH131A,Analysis,4
 "University of California, Los Angeles",MA2104,Multivariable Calculus,4,MATH32A,Calculus of Several Variables,4
@@ -3855,30 +3855,30 @@ University of California,CM4991,Exchange Enrichment Module,4,CHEM130B,Biophysica
 "University of California, Merced",CS3230,Design & Analysis of Algorithm,4,CSE100,Algorithm Design and Analysis,3
 "University of California, Merced",CS2103,Software Engineering,4,CSE120,Software Engineering,3
 "University of California, Merced",CS2105,Intro to Computer Networks,4,CSE160,Computer Networks,3
-"University of California, Merced",CS3243,Introduction to Artificial Int,4,CSE175,Introduction to Artificial Intelligence,4
+"University of California, Merced",CS3243,Introduction to Artificial Intelligence,4,CSE175,Introduction to Artificial Intelligence,4
 "University of California, Merced",CS3244,Machine Learning,4,CSE176,Introduction to Machine Learning,4
-"University of California, Merced",CS3223,Database Systems Implementatio,4,CSE177,Database Systems Implementation,4
+"University of California, Merced",CS3223,Database Systems Implementation,4,CSE177,Database Systems Implementation,4
 "University of California, Merced",CS4247,Graphics Rendering Techniques,4,CSE168,Computer Graphics II: Rendering,4
 "University of California, Merced",CS3247,Game Development,4,CSE171,Game Programming,4
-"University of California, Merced",CS4243,Comp Vision & Pattern Recogntn,4,CSE185,INTRO TO COMPUTER VISION,4
+"University of California, Merced",CS4243,Computer Vision & Pattern Recognition,4,CSE185,INTRO TO COMPUTER VISION,4
 "University of California, Merced",IE4243,Decision Modeling & Risk Analy,4,ENVE155,Decision Analysis in Management,4
 "University of California, Merced",EX1001,Exchange UEM,4,PSY001,Introduction to Psychology,4
 "University of California, Merced",IE2140,Engineering Economy,4,ENGR155,Engineering Economic Analysis,3
 "University of California, Merced",EX1000,Exchange UEM,4,JPN001,Elementary Japanese 1,4
 "University of California, Merced",EX1004,Exchange UEM,4,COGS001,Introduction to Cognitive Science,4
 "University of California, Riverside",CS2102,Database Systems,4,CS166,Database Management Systems,3
-"University of California, Riverside",CS3243,Introduction to Artificial Int,4,CS170,Introduction to Artificial Intelligence,3
+"University of California, Riverside",CS3243,Introduction to Artificial Intelligence,4,CS170,Introduction to Artificial Intelligence,3
 "University of California, Riverside",CS2100,Computer Organisation,4,CS061,Machine Organization and Assembly Language Programming,3
 "University of California, Riverside",CS3244,Machine Learning,4,CS171,Introduction to Machine Learning and Data Mining,3
 "University of California, Riverside",CS3241,Computer Graphics,4,CS130,Computer Graphics,3
-"University of California, Riverside",CS3211,Parallel & Concurrent Programg,4,CS160,Concurrent Programming and Parallel Systems,3
+"University of California, Riverside",CS3211,Parallel & Concurrent Programming,4,CS160,Concurrent Programming and Parallel Systems,3
 "University of California, Riverside",CS4218,Software Testing,4,CS182,Software Testing and Verification,3
-"University of California, Riverside",CS3243,Introduction to Artificial Int,4,CS205,Artificial Intelligence,3
+"University of California, Riverside",CS3243,Introduction to Artificial Intelligence,4,CS205,Artificial Intelligence,3
 "University of California, Riverside",CS3219,Software Engineering Principle,4,CS100,Software Construction,3
 "University of California, Riverside",PF4305,Green Development,4,CEE232-001,Green Engineering,4
 "University of California, Riverside",PF2203,Quality and Productivity Mgmt,4,BUS127-022,INTRO TO QUALITY IMPROVEMENTS,4
-"University of California, San Diego",CS3243,Introduction to Artificial Int,4,CSE250,Principles of Artificial Intelligence,3
-"University of California, San Diego",CS5242,Neural Networks &Deep Learning,4,CSE253,Neural Networks for Pattern Recognition,3
+"University of California, San Diego",CS3243,Introduction to Artificial Intelligence,4,CSE250,Principles of Artificial Intelligence,3
+"University of California, San Diego",CS5242,Neural Networks & Deep Learning,4,CSE253,Neural Networks for Pattern Recognition,3
 "University of California, San Diego",CS3230,Design & Analysis of Algorithm,4,CSE101,Design and Analysis of Algorithms,3
 "University of California, San Diego",CS2102,Database Systems,4,CSE132B,Database System Appplications,3
 "University of California, San Diego",CS1010J,Programming Methodology,4,CSE11,Introduction to Computer Science and Object-Oriented Programming: Java,3
@@ -3899,7 +3899,7 @@ University of California,CM4991,Exchange Enrichment Module,4,CHEM130B,Biophysica
 "University of California, Santa Cruz",CS4248,Natural Language Processing,4,CSE143,Introduction to Natural Language Processing,5
 "University of California, Santa Cruz",CS2102,Database Systems,4,CS180,Database Systems I,5
 "University of California, Santa Cruz",CS3241,Computer Graphics,4,CSE160,Introduction to Computer Graphics,5
-"University of California, Santa Cruz",CS3243,Introduction to Artificial Int,4,CMPSC 140,Artificial Intelligence,3
+"University of California, Santa Cruz",CS3243,Introduction to Artificial Intelligence,4,CMPSC 140,Artificial Intelligence,3
 "University of California, Santa Cruz",CS3230,Design & Analysis of Algorithm,4,CMPSC 102,Introduction to Analysis of Algorithms,3
 "University of California, Santa Cruz",CS2105,Intro to Computer Networks,4,CSE80N,Introduction to Networking and the Internet,5
 University of Leeds,MNO1706X,Organisational Behavior,4,LUBS1170,INTRODUCTION TO MANAGEMENT 1,10
@@ -3923,7 +3923,7 @@ University of Leeds,CS3241,Computer Graphics,4,COMP811,Computer Graphics,10
 University of Leeds,CS1231,Discrete Structures,4,COMP1511,Introduction to Discrete Mathematics,10
 University of Leeds,CS2040,Data Structures and Algorithms,4,COMP2721,Algorithms and Data Structures II,15
 University of Leeds,CS4236,Cryptography Theory & Practice,4,COMP3223,Cryptography,10
-University of Leeds,CS3243,Introduction to Artificial Int,4,COMP2611,Artificial Intelligence,10
+University of Leeds,CS3243,Introduction to Artificial Intelligence,4,COMP2611,Artificial Intelligence,10
 University of Leeds,PF3305,Facilities Planning and Desig,4,CIVE2802,Architectural Studies II,10
 University of Leeds,PF4202,"Safety, Health and Environment",4,SOEE3112,"Environmental Risk: Science, Policy & Management",10
 University of Leeds,PF4305,Green Development,4,SOEE3780,Sustainable Development in Practice,10
@@ -3980,11 +3980,11 @@ University of Leeds,FST3202,Nutrition & Disease Prevention,4,FOOD2160,Nutrition 
 "University of Michigan, Ann Arbor",DBA3761X,Topics in Business Analytics,4,TO433,ARTIFICIAL INTELLIGENCE FOR BUSINESS,3
 "University of Michigan, Ann Arbor",MKT3702,Consumer Behaviour,4,MKT313,Consumer Behavior,3
 "University of Michigan, Ann Arbor",CS2103,Software Engineering,4,EECS481,Software Engineering,4
-"University of Michigan, Ann Arbor",CS3243,Introduction to Artificial Int,4,EECS492,Introduction to Artificial Intelligence,4
+"University of Michigan, Ann Arbor",CS3243,Introduction to Artificial Intelligence,4,EECS492,Introduction to Artificial Intelligence,4
 "University of Michigan, Ann Arbor",CS3244,Machine Learning,4,EECS445,Introduction to Machine Learning,4
 "University of Michigan, Ann Arbor",CS1010,Programming Methodology,4,EECS183,Elementary Programming Concepts,4
 "University of Michigan, Ann Arbor",CS2107,Introduction to Information Security,4,EECS388,Introduction to Computer Security,4
-"University of Michigan, Ann Arbor",CS4243,Comp Vision & Pattern Recogntn,4,EECS442,Computer Vision,3
+"University of Michigan, Ann Arbor",CS4243,Computer Vision & Pattern Recognition,4,EECS442,Computer Vision,3
 "University of Michigan, Ann Arbor",CS2104,Programming Language Concepts,4,EECS490,Programming Languages,3
 "University of Michigan, Ann Arbor",MA4991,Exchange Enrichment Module,4,MATH665,Combinatorial Theory II: Combinatorial Representation Theory,3
 "University of Michigan, Ann Arbor",ST3232,Design & Analysis Of Experimts,4,STAT470,Introduction to the Design of Experiments,4
@@ -4000,25 +4000,25 @@ University of Leeds,FST3202,Nutrition & Disease Prevention,4,FOOD2160,Nutrition 
 "University of North Carolina, Chapel Hill",CS3240,Interaction Design,4,INLS318,Human Computer Interaction,3
 "University of North Carolina, Chapel Hill",CS2100,Computer Organisation,4,COMP411,Computer Organisation,3
 "University of North Carolina, Chapel Hill",IS1103,Ethics in Computing,4,COMP380,Computers and society,3
-"University of North Carolina, Chapel Hill",CS4225,Big Data Systems for Data Scie,4,COMP722,Data Mining,3
+"University of North Carolina, Chapel Hill",CS4225,Big Data Systems for Data Science,4,COMP722,Data Mining,3
 "University of North Carolina, Chapel Hill",CS4248,Natural Language Processing,4,COMP486,Applications of Natural Language Processing,3
 "University of North Carolina, Chapel Hill",CS4234,Optimisation Algorithms,4,STOR415,Introduction to Optimization,3
 "University of North Carolina, Chapel Hill",IFS4101,Legal Aspects of Information S,4,INLS566,Information Assurance,3
 "University of North Carolina, Chapel Hill",CS3235,Computer Security,4,COMP535,Introduction to Computer Security,3
 "University of North Carolina, Chapel Hill",CS5250,Advanced Operating Systems,4,COMP630,Operating System Implementation,3
 "University of North Carolina, Chapel Hill",CS2102,Database Systems,4,COMP421,Files and Databases,3
-"University of North Carolina, Chapel Hill",CS3223,Database Systems Implementatio,4,INLS623,Database Systems II: Intermediate Databases,3
-"University of North Carolina, Chapel Hill",CS4231,Parallel & Distr Algorithms,4,COMP735,Distributed and Concurrent Algorithms,3
+"University of North Carolina, Chapel Hill",CS3223,Database Systems Implementation,4,INLS623,Database Systems II: Intermediate Databases,3
+"University of North Carolina, Chapel Hill",CS4231,Parallel & Distributed Algorithms,4,COMP735,Distributed and Concurrent Algorithms,3
 "University of North Carolina, Chapel Hill",CS3244,Machine Learning,4,COMP562,Introduction to Machine Learning,3
-"University of North Carolina, Chapel Hill",CS3243,Introduction to Artificial Int,4,COMP560,Artificial Intelligence,3
+"University of North Carolina, Chapel Hill",CS3243,Introduction to Artificial Intelligence,4,COMP560,Artificial Intelligence,3
 "University of North Carolina, Chapel Hill",CS2106,Intro to Operating Systems,4,COMP530,Operating Systems,3
 "University of North Carolina, Chapel Hill",CS3216,Software Product Engineering,4,COMP523,Software engineering laboratory,4
-"University of North Carolina, Chapel Hill",CS4211,Formal Methods for Software En,4,INLS623,Database II,3
+"University of North Carolina, Chapel Hill",CS4211,Formal Methods for Software Engineering,4,INLS623,Database II,3
 "University of North Carolina, Chapel Hill",CS3230,Design & Analysis of Algorithm,4,COMP550,Algorithms and Analysis,3
 "University of North Carolina, Chapel Hill",CS2104,Programming Language Concepts,4,COMP524,Programming Language Concepts,3
 "University of North Carolina, Chapel Hill",CS2102,Database Systems,4,COMP521,Files and Databases,3
 "University of North Carolina, Chapel Hill",CS2102,Database Systems,4,INLS523,Introduction to Database Concepts and Applications,3
-"University of North Carolina, Chapel Hill",CS3211,Parallel & Concurrent Programg,4,COMP633,Parallel and Distributed Computing,3
+"University of North Carolina, Chapel Hill",CS3211,Parallel & Concurrent Programming,4,COMP633,Parallel and Distributed Computing,3
 "University of North Carolina, Chapel Hill",IS1103,Ethics in Computing,4,INLS384,Information and Computer Ethics,3
 "University of North Carolina, Chapel Hill",CS4222,Wireless Networking,4,COMP635,Wireless and Mobile Communications,3
 "University of North Carolina, Chapel Hill",CS4212,Compiler Design,4,COMP520,Compilers,3
@@ -4140,14 +4140,14 @@ University of Ottawa,PS3701,Political Science Exchange Mod,4,POL3162,Political V
 University of Ottawa,PS3251,International Organisations,4,POL3179,INTERNATIONAL ORGANISATIONS AND GLOBAL GOVERNANCE,3
 University of Ottawa,CS3241,Computer Graphics,4,CSI4130,Computer Graphics,3
 University of Ottawa,CS4236,Cryptography Theory & Practice,4,CSI4108,Cryptography,3
-University of Ottawa,CS3243,Introduction to Artificial Int,4,CSI4106,Introduction to Artificial Intelligence,3
+University of Ottawa,CS3243,Introduction to Artificial Intelligence,4,CSI4106,Introduction to Artificial Intelligence,3
 University of Ottawa,BT4015,Geospatial Analytics,4,CSI5124,Computational Aspects of Geographic Information Systems,3
 University of Ottawa,BT4013,Analytics for Capital Market T,4,MAT4372,Financial Mathematics,3
 University of Ottawa,BT4240,Machine Learning for Predictiv,4,MAT4373,Statistical Machine Learning,3
 University of Ottawa,CS2107,Introduction to Information Security,4,CSI4139,Design of Secure Computer Systems,3
 University of Ottawa,CS2106,Intro to Operating Systems,4,CSI3131,Operating Systems,3
 University of Ottawa,CS3240,Interaction Design,4,SEG3125,Analysis and Design of User Interfaces,3
-University of Ottawa,CS3223,Database Systems Implementatio,4,CSI3130,Database 2,3
+University of Ottawa,CS3223,Database Systems Implementation,4,CSI3130,Database 2,3
 University of Ottawa,CS2104,Programming Language Concepts,4,CSI2120,Programming Paradigms,3
 University of Ottawa,CS2040,Data Structures and Algorithms,4,CSI2110,Data Structures and Algorithms,3
 University of Ottawa,CS3244,Machine Learning,4,CSI5155,Machine Learning,3
@@ -4187,16 +4187,16 @@ University of Pittsburgh,CS3210,Parallel Computing,4,CS1645,Introduction to High
 University of Pittsburgh,CS3241,Computer Graphics,4,CS1566,Introductin to computer graphics,3
 University of Pittsburgh,CS4248,Natural Language Processing,4,CS1671,Human Language Technologies,3
 University of Pittsburgh,CS3230,Design & Analysis of Algorithm,4,CS1510,Algorithm Design,3
-University of Pittsburgh,CS4243,Comp Vision & Pattern Recogntn,4,CS1674,Computer Vision and Pattern Recognition,3
+University of Pittsburgh,CS4243,Computer Vision & Pattern Recognition,4,CS1674,Computer Vision and Pattern Recognition,3
 University of Pittsburgh,CS3103,Computer Networks Practice,4,INFSCI 1071,Application of Networks,3
 University of Pittsburgh,IS3103,Information Systems Leadership,4,INFSCI1029,BUSINESS ESSENTIALS FOR THE IT PROFESSIONAL,3
-University of Pittsburgh,CS5242,Neural Networks &Deep Learning,4,CS1678,Introduction to Deep Learning,3
+University of Pittsburgh,CS5242,Neural Networks & Deep Learning,4,CS1678,Introduction to Deep Learning,3
 University of Pittsburgh,CS3240,Interaction Design,4,INFSCI 1052,User-Centered Design,3
 University of Pittsburgh,IFS4101,Legal Aspects of Information S,4,INFSCI 0014,Cybersecurity and the Law,3
 University of Pittsburgh,CS5321,Network Security,4,INFSCI 1075,Network Security,3
 University of Pittsburgh,CS4236,Cryptography Theory & Practice,4,INFSCI 2170,Cryptography,3
 University of Pittsburgh,CS3240,Interaction Design,4,INFSCI1044,HUMAN FACTORS IN SYSTEM DESIGN,3
-University of Pittsburgh,CS3243,Introduction to Artificial Int,4,CS1571,INTRODUCTION TO ARTIFICIAL INTELLIGENCE,3
+University of Pittsburgh,CS3243,Introduction to Artificial Intelligence,4,CS1571,INTRODUCTION TO ARTIFICIAL INTELLIGENCE,3
 University of Pittsburgh,CS4236,Cryptography Theory & Practice,4,CS1653,APPLIED CRYPTOGRAPHY AND NETWORK SECURITY,3
 University of Pittsburgh,CS2102,Database Systems,4,INFSCI1500,DATABASE MANAGEMENT CONCEPTS AND APPLICATIONS,3
 University of Pittsburgh,IE4994,Exchange Elective,4,IE1076,Total Quality Management,3
@@ -4278,10 +4278,10 @@ University of Toronto,FIN3702,Inv. Analysis & Portfolio Mgt,4,RSM330,INVESTMENTS
 University of Toronto,FIN3702,Inv. Analysis & Portfolio Mgt,4,MGT330,INVESTMENTS,0.5
 University of Toronto,CS3247,Game Development,4,CSC404H1,Introduction to Video Game Design,0.5
 University of Toronto,CS3244,Machine Learning,4,ROB313H1,Introduction to Learning from Data,0.5
-University of Toronto,CS4249,Phenomena and Theories of Huma,4,CSC428H1-S,Human-Computer Interaction,0.5
-University of Toronto,CS4243,Comp Vision & Pattern Recogntn,4,CSC420H1,Introduction to Image Understanding,0.5
+University of Toronto,CS4249,Phenomena and Theories of Human-Computer Interaction,4,CSC428H1-S,Human-Computer Interaction,0.5
+University of Toronto,CS4243,Computer Vision & Pattern Recognition,4,CSC420H1,Introduction to Image Understanding,0.5
 University of Toronto,CS3210,Parallel Computing,4,CSC367H1,Parallel Programming,3
-University of Toronto,CS3221,Operatg Sys Desgn & Pragmatics,4,CSC469,Operating Systems Design and Implementation,3
+University of Toronto,CS3221,Operating System Design & Pragmatics,4,CSC469,Operating Systems Design and Implementation,3
 University of Toronto,CS4212,Compiler Design,4,CSC488,Compilers and Interpreters,3
 University of Toronto,CS4218,Software Testing,4,CSC410,Software Verification and Testing,3
 University of Toronto,CS3244,Machine Learning,4,CSC311H1,Introduction to Machine Learning,3
@@ -4293,19 +4293,19 @@ University of Toronto,CS2100,Computer Organisation,4,ECE352,Computer Organizatio
 University of Toronto,CS2104,Programming Language Concepts,4,CSC326H1,Programming Languages,0.5
 University of Toronto,CS2103,Software Engineering,4,CSC444H1,Software Engineering,0.5
 University of Toronto,CS2106,Intro to Operating Systems,4,ECE344H1,Operating Systems,0.5
-University of Toronto,CS3243,Introduction to Artificial Int,4,ROB311H1,Artificial Intellgence,0.5
-University of Toronto,CS3243,Introduction to Artificial Int,4,MIE369H1,Introduction to Artificial Intelligence,0.5
+University of Toronto,CS3243,Introduction to Artificial Intelligence,4,ROB311H1,Artificial Intellgence,0.5
+University of Toronto,CS3243,Introduction to Artificial Intelligence,4,MIE369H1,Introduction to Artificial Intelligence,0.5
 University of Toronto,CS3241,Computer Graphics,4,CSC317H1,Computer Graphics,0.5
 University of Toronto,CS2104,Programming Language Concepts,4,CSC324H1,Principles of Programming Languages,0.5
 University of Toronto,CS2102,Database Systems,4,CSC343H1,Introduction to Databases,0.5
 University of Toronto,CS2103,Software Engineering,4,CSC301H1,Introduction to Software Engineering,0.5
 University of Toronto,CS3244,Machine Learning,4,CSC411H1,Machine Learning and Data Mining,0.5
 University of Toronto,CS3244,Machine Learning,4,ECE421,Introduction to Machine Learning,0.5
-University of Toronto,CS3243,Introduction to Artificial Int,4,ROB311,Artificial Intelligence,0.5
+University of Toronto,CS3243,Introduction to Artificial Intelligence,4,ROB311,Artificial Intelligence,0.5
 University of Toronto,CS3244,Machine Learning,4,ECE521,Inference Algorithms and Machine Learning,0.5
 University of Toronto,CS2103,Software Engineering,4,CSC207H1,Software Design,0.5
 University of Toronto,CS3230,Design & Analysis of Algorithm,4,CSC373H1,"Algorithm Design, Analysis & Complexity",0.5
-University of Toronto,CS3243,Introduction to Artificial Int,4,CSC384H1,Introduction to Artificial Intelligence,0.5
+University of Toronto,CS3243,Introduction to Artificial Intelligence,4,CSC384H1,Introduction to Artificial Intelligence,0.5
 University of Toronto,IE4991,Exchange Elective 1,4,CIV355H1,Urban Operations Research,0.5
 University of Toronto,IE3993,IE3 Technical Elective,4,MIE262H1,Operations Research I: Deterministic OR,0.5
 University of Toronto,ME3122,Heat Transfer,4,MIE313H1,HEAT AND MASS TRANSFER,0.5
@@ -4441,12 +4441,12 @@ University of Waterloo,CS2040,Data Structures and Algorithms,4,CS240,Data Struct
 University of Waterloo,CS3219,Software Engineering Principle,4,ECE452,Software Design and Architectures,0.5
 University of Waterloo,CS3219,Software Engineering Principle,4,SE464,Software Design and Architectures,0.5
 University of Waterloo,CS3219,Software Engineering Principle,4,CS446,Software Design and Architectures,0.5
-University of Waterloo,CS4243,Comp Vision & Pattern Recogntn,4,CS484,Computational Vision,0.5
+University of Waterloo,CS4243,Computer Vision & Pattern Recognition,4,CS484,Computational Vision,0.5
 University of Waterloo,CS2220,Intro to Computational Biology,4,BIOL365,Methods in Bioinformatics,0.5
 University of Waterloo,IS1103,Ethics in Computing,4,SPCOM 227,SPCOM 227,0.5
 University of Waterloo,CS2104,Programming Language Concepts,4,CS241,Foundations of Sequential Programs,0.5
 University of Waterloo,CS3219,Software Engineering Principle,4,CS247,Software Engineering Principles,0.5
-University of Waterloo,CS3223,Database Systems Implementatio,4,CS448,Database Systems Implementation,0.5
+University of Waterloo,CS3223,Database Systems Implementation,4,CS448,Database Systems Implementation,0.5
 University of Waterloo,CS3244,Machine Learning,4,SYDE 522,Machine Intelligence,0.5
 University of Waterloo,CS2040,Data Structures and Algorithms,4,ECE250,Algorithms and Data Structures,0.5
 University of Waterloo,CS2030,Programming Methodology II,4,CS246,Object-Oriented Software Development,0.5
@@ -4462,7 +4462,7 @@ University of Waterloo,CS4236,Cryptography Theory & Practice,4,CO485,The Mathema
 University of Waterloo,CS2102,Database Systems,4,CS348,Introduction to Database Management,0.5
 University of Waterloo,CS4218,Software Testing,4,ECE453,"Software Testing, Quality Assurance, & Maintenance",0.5
 University of Waterloo,CS3249,User Interface Development,4,CS349,User Interfaces,0.5
-University of Waterloo,CS3243,Introduction to Artificial Int,4,CS486,Intro to AI,0.5
+University of Waterloo,CS3243,Introduction to Artificial Intelligence,4,CS486,Intro to AI,0.5
 University of Waterloo,BT3102,Computational Methods for Busi,4,CS335,Computational Methods in Business and Finance,0.5
 University of Waterloo,CS3240,Interaction Design,4,CS449,Human-Computer Interaction,0.5
 University of Waterloo,CS4268,Quantum Computing,4,CS467,Introduction to Quantum Information Processing,0.5
@@ -4577,15 +4577,15 @@ Uppsala University,BSP3701,Strategic Management,4,2FE806,BUSINESS STRATEGY,7.5
 Uppsala University,MKT3722,Research for Marketing Insight,4,2FE849,MARKETING RESEARCH,7.5
 Uppsala University,CS3219,Software Engineering Principle,4,1DL250,Software Engineering,5
 Uppsala University,CS3249,User Interface Development,4,1MD002,User Interface Programming I,5
-Uppsala University,CS3211,Parallel & Concurrent Programg,4,1DL550,Low-Level Parallel Programming,5
+Uppsala University,CS3211,Parallel & Concurrent Programming,4,1DL550,Low-Level Parallel Programming,5
 Uppsala University,CS4236,Cryptography Theory & Practice,4,1DT075,Cryptology,5
 Uppsala University,CS5228,Knowledge Discovery and Data M,4,1DL360,Data Mining I,5
-Uppsala University,CS4243,Comp Vision & Pattern Recogntn,4,1DT396,Computer-Assisted Image Analysis I,5
+Uppsala University,CS4243,Computer Vision & Pattern Recognition,4,1DT396,Computer-Assisted Image Analysis I,5
 Uppsala University,CS3219,Software Engineering Principle,4,1DT242,Advanced Software Design,5
 Uppsala University,CS2102,Database Systems,4,1DL301,Database Design I,5
 Uppsala University,CS3210,Parallel Computing,4,1DL530,Introduction to Parallel Programming,5
 Uppsala University,CS3103,Computer Networks Practice,4,CS5SD808,Network Programming for Games,5
-Uppsala University,CS3223,Database Systems Implementatio,4,1DTL400,Database Design II,5
+Uppsala University,CS3223,Database Systems Implementation,4,1DTL400,Database Design II,5
 Uppsala University,LSM3215,Neuronal Signaling and Memory,4,1BG207,Neurobiology,15
 Uppsala University,LSM3991,Exchange Enrichment Module,4,1BG203,Animal Structure and Function,15
 Uppsala University,LSM3225,Molecular Microbiology in HD,4,1BG219,Biology of Infections,10
@@ -4662,10 +4662,10 @@ Western University,CS3219,Software Engineering Principle,4,SE3352 A/B,Software R
 Western University,IS3150,Digital Media Marketing,4,DIGICOMM2309B,DIGITAL MARKETING FUNDAMENTALS,0.5
 Western University,CS3240,Interaction Design,4,SE3353A,HUMAN-COMPUTER INTERFACE DESIGN,3
 Western University,CS2102,Database Systems,4,CS3319,Databases I,4
-Western University,CS3243,Introduction to Artificial Int,4,CS3346A,Artificial Intelligence I,4
+Western University,CS3243,Introduction to Artificial Intelligence,4,CS3346A,Artificial Intelligence I,4
 Western University,CS3210,Parallel Computing,4,COMPSCI402A/B,DISTRIBUTED AND PARALLEL SYSTEMS,4
 Western University,CS3230,Design & Analysis of Algorithm,4,COMPSCI3340A/B,Analysis of Algorithms I,4
-Western University,CS4243,Comp Vision & Pattern Recogntn,4,CS4487,Algorithms for Image Analysis,4
+Western University,CS4243,Computer Vision & Pattern Recognition,4,CS4487,Algorithms for Image Analysis,4
 Western University,ME3242,Automation,4,MME4452B,ROBOTICS AND MANUFACTURING AUTOMATION,0.5
 Western University,ME3661,Technical Elective,4,MME4452B,ROBOTICS AND MANUFACTURING AUTOMATION,0.5
 Western University,CM3201,Principles of Chemical Process,4,CHEM3330F,Industrial Chemistry,0.5
