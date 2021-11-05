@@ -140,7 +140,7 @@ public class CommandParser {
         String command = userInputSplit[0].toLowerCase();
         String commandParameters = "";
         if (userInputSplit.length > 1) { // Ensure command parameter exists
-            commandParameters = userInputSplit[1];
+            commandParameters = userInputSplit[1].toUpperCase();
         }
         return new String[]{command, commandParameters};
     }
