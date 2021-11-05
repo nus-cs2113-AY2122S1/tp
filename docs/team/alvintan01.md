@@ -6,7 +6,7 @@ This is a student project for a university software development course and I am 
 
 Given below are my contributions to the project.
 
-Code contributed: more than 3000 lines of
+Code contributed: more than 4000 lines of
 code. [[RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=alvintan01&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&tabAuthor=alvintan01&tabRepo=AY2122S1-CS2113T-T10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)]
 
 ### Features
@@ -19,21 +19,16 @@ v1.0 tasks:
     - Pull request [[#10](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/10)]
 - Implemented `Ui` class for MediVault.
     - Functionality: Handles all the printing done by MediVault.
-    - Justification: Users will be able to view the stocks, prescriptions and orders in a table format and any other
-      error messages.
+    - Justification: Users will be able to view the stocks, prescriptions and orders in a table format and any messages.
     - Pull request [[#10](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/10)]
 - Implemented sort for `liststock` command.
     - Functionality: Users will be able to sort any columns of the stocks in ascending or descending order.
-    - Justification: Users will be able to view the stocks in sorted order such as by ascending price.
+    - Justification: Users will be able to view the stocks in sorted order such as ascending price.
     - Pull request [[#45](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/45)]
-- Implemented `exit`, `purge` and `help` command.
+- Implemented `exit`, `purge` and `help` command. [[#10](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/10), [#13](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/13), [#45](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/45)]
 
 v2.0 tasks:
 
-- Implemented mode feature.
-    - Functionality: MediVault will change modes when `stock`, `prescription` or `order` is received.
-    - Justification: Users will be able to type shorter commands for operations in MediVault.
-    - Pull request [[#123](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/123)]
 - Implemented `listprescription` command.
     - Functionality: Users will be able to view all the prescriptions in a table and filter them.
     - Justification: Users will be filter the prescriptions by any column such as by customer ID.
@@ -42,7 +37,7 @@ v2.0 tasks:
     - Functionality: Users will be able to receive an order and add the order to the stocks.
     - Justification: Users will be able to mark an order as received and add it to the stocks in one step.
     - Pull request [[#208](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/208)]
-- Implemented sort for `listorder` command. 
+- Implemented sort for `listorder` command and mode feature. [[#162](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/162), [#123](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/123)]
 
 v2.1 tasks:
 
@@ -54,7 +49,7 @@ v2.1 tasks:
   - Functionality: MediVault should mark an order as delivered once `receiveorder` is executed successfully.
   - Justification: To prevent users from receiving an order multiple times.
   - Pull request [[#280](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/280)]
-- Demo video for stock features
+- Demo video for stock features.
     
 
 ### Enhancements to Existing Features
@@ -78,11 +73,12 @@ v2.1 tasks:
     - Justification: From peer feedback, users were confused what `Dispense` was, as such our team decided
       that `Prescription` is a better word to use.
     - Pull request [[#208](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/208)]
+- Included JUnit tests for `CommandParser`, `ListPrescription`, `Help`, `Purge` and sort for `ListOrder` and `ListStock`. [[#92](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/92), [#305](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/305)]
 
 ### Documentation
 
 - [User Guide](../UserGuide.md)
-    - Added documentation for `mode`, `purge`, `exit`, `help`, `listprescription` and `receiveorder`. [[#97](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/97)], [[#208](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/208)]
+    - Added documentation for `mode`, `purge`, `exit`, `help`, `listprescription` and `receiveorder`. [[#97](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/97), [#208](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/208)]
     - Added command summary. [[#97](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/97)]
     - Reordered the sections into add, list, delete and update. [[#229](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/229)]
 
@@ -91,7 +87,7 @@ v2.1 tasks:
     - Main application logic and explanation. [[#163](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/163)]
     - Validator class diagram and explanation. [[#198](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/198)]
     - Inventory class diagram and explanation. [[#198](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/198)]
-  - Sections on `list` and `receiveorder` and their respective sequence diagrams. [[#163](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/163)], [[#223](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/223)]
+  - Sections on `list` and `receiveorder` and their respective sequence diagrams. [[#163](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/163), [#223](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/223)]
 
 ### Team-Based
 - Setting up the GitHub team org/repo.
@@ -103,4 +99,4 @@ v2.1 tasks:
 
 ### Community
 
-- Pull Requests reviewed with non-trivial review comments. [[#74](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/74)], [[#143](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/143)], [[#172](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/172)]
+- Pull Requests reviewed with non-trivial review comments. [[#74](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/74), [#143](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/143), [#172](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/172)]
