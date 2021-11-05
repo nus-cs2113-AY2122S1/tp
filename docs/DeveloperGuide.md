@@ -382,7 +382,7 @@ These instructions only provide a starting point for testers to work on; testers
       Expected: The user selected module list are displayed.
 
 5. Dealing with wrong flags.
-   1. Test case: 'list /mod'
+   1. Test case: `list /mod`
 
       Expected: Error message indicating wrong flags is shown, together with the correct format for `list` command.
 
@@ -392,8 +392,49 @@ These instructions only provide a starting point for testers to work on; testers
       Expected: Error message indicating missing flags is shown, together with the correct format for `list` command.
 
 ### Finding a university
+1. Finding a university by name.
+    1. Test case: `find /uni Boston University`
+
+       Expected: The related information for Boston University is printed.
+   2. Test case: `find /uni abc`
+
+      Expected: No university is found. Error message is printed to indicate university is not available.
+   
+2. Dealing with wrong flags.
+    1. Test case: `find /uniname`
+
+       Expected: Error message indicating wrong flags is shown, together with the correct format for `find` command.
+
+3. Dealing with incorrect format.
+    1. Test case: `find`
+
+       Expected: Error message indicating missing flags is shown, together with the correct format for `list` command.
 
 ### Finding a module
+1. Finding a module by name.
+    1. Test case: `find /mod Discrete Structures`
+
+       Expected: The related information for Discrete Structures is printed.
+    2. Test case: `find /mod abc`
+
+       Expected: No module is found. Error message is printed to indicate university is not available.
+2. Finding a module by code.
+    1. Test case: `find /code CS1231`
+
+       Expected: The related information for CS1231 is printed.
+    2. Test case: `find /mod abc`
+
+    Expected: No module is found. Error message is printed to indicate university is not available.
+
+2. Dealing with wrong flags.
+    1. Test case: `find /modname`
+
+       Expected: Error message indicating wrong flags is shown, together with the correct format for `find` command.
+
+3. Dealing with incorrect format.
+    1. Test case: `find`
+
+       Expected: Error message indicating missing flags is shown, together with the correct format for `list` command.
 
 ### Adding a university
 1. Adding a university by index.
@@ -430,6 +471,7 @@ These instructions only provide a starting point for testers to work on; testers
       Expected: Error message indicating duplicate university is shown.
 
 ### Adding a module
+
 
 ### Adding a mapping
 
