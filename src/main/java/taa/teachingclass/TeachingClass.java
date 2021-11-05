@@ -1,7 +1,6 @@
 package taa.teachingclass;
 
 //@@author leyondlee
-
 import taa.ClassChecker;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
