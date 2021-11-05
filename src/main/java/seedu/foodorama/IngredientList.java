@@ -163,7 +163,7 @@ public class IngredientList {
         return true;
     }
 
-    public static boolean isValidExpiryLength (long daysBetweenExpiryToday, String ingrName) {
+    public static boolean isValidExpiryLength(long daysBetweenExpiryToday, String ingrName) {
         Scanner input = new Scanner(System.in);
         if (daysBetweenExpiryToday > TEN_YEARS_IN_DAYS) {
             UI.printLongExpiryDateMsg();
@@ -199,8 +199,7 @@ public class IngredientList {
             UI.clearTerminalAndPrintNewPage();
             if (!isValidDateFormat(expiryDateString)) {
                 UI.printIncorrectExpiryDateFormatMsg();
-            }
-            else if (isValidDateFormat(expiryDateString)) {
+            } else if (isValidDateFormat(expiryDateString)) {
                 expiryDate = LocalDate.parse(expiryDateString, dtf);
                 daysBetweenExpiryToday = ChronoUnit.DAYS.between(LocalDate.now(), expiryDate);
             }

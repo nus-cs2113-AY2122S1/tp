@@ -306,7 +306,8 @@ public class Ui {
             + LINE_DIVIDER;
 
     public static final String FIND_INVALID_PARAM = LINE_DIVIDER + System.lineSeparator()
-            + "Incorrect command parameter! Please type `find dish [KEYWORD]` or `find ingr [KEYWORD]`" + System.lineSeparator()
+            + "Incorrect command parameter! Please type `find dish [KEYWORD]` or `find ingr [KEYWORD]`"
+            + System.lineSeparator()
             + LINE_DIVIDER;
 
     public static final String GRAPH_INVALID_PARAM = LINE_DIVIDER + System.lineSeparator()
