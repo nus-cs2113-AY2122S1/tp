@@ -48,6 +48,10 @@ Here are some of the enhancements implemented:
   * Loading data
   * Save file formatting
 
+* Documentation, logging, testing, configuration, dev-ops
+  * Documentation
+  * Testing
+
 ### Review/mentoring contributions
 
 Reviewing and approving of some [pull requests](https://github.com/AY2122S1-CS2113T-W11-3/tp/pulls?q=is%3Apr+is%3Aclosed) (around 20) of other members.

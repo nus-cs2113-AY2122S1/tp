@@ -12,6 +12,7 @@
     * [Storage component](#storage-component)
     * [Common classes](#common-classes)
 * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+    * [Documentation](#documentation)
     * [Testing](#testing) 
 * [Implementation](#implementation)
     * [Saving data](#saving-data)
@@ -195,6 +196,8 @@ The following sequence diagrams show how task data is [saved](#saving-data) and 
 
 ### Common classes
 
+The ["Commons" folder](https://github.com/AY2122S1-CS2113T-W11-3/tp/tree/master/src/main/java/seedu/duke/commons) stores classes that assist in the functioning of the various features of the application.
+
 #### Core
 
 * The `Messages` class stores string constants for simple success and error messages to be printed to users. (usually 1 liners)
@@ -206,11 +209,29 @@ It also provides a method that creates a ready-to-print string that suggests sel
 
 #### Utility
 
-{to be added}
+* The `DayUtil` class contains utility methods that makes use of the `DayOfTheWeek` variable of a class.
+* The `JsonUtil` class contains utility methods that make use of the `ModuleInfo.Json` file.
+* The `LinkUtil` class contains utility methods that help in launching URLs.
+* The `StringUtil` class contains utility methods that manipulates strings.
+* The `TimeUtil` class contains utility methods that are related to Time.
 
 ## Documentation, logging, testing, configuration, dev-ops
 
+### Documentation
+
+**Style Guidance:**
+
+* [Java Coding Standard](https://se-education.org/guides/conventions/java/basic.html)
+* [Markdown Coding Standard](https://se-education.org/guides/conventions/markdown.html)
+
+**Diagrams:**
+
+For our developer guide diagrams, we use PlantUML. Here is a [guide](https://se-education.org/guides/tutorials/plantUml.html) on how to set it up on Intellij.
+
 ### Testing
+
+This project has various tests that deal with different components and features of the application.
+The predominant types of test used for this project are Unit and Hybrid (Unit+Integration) tests.
 
 #### Running Tests
 
@@ -325,7 +346,7 @@ NUS undergraduate students who prefer typing over using a mouse and proficient w
 |v2.0|NUS student|list out all the modules that I have with only the basic information|see all my modules with key information at a glance|
 |v2.0|NUS student|list out all the modules that I have with detailed information|see all my modules in detail|
 |v2.0|NUS student|search and browse for modules|look up for detailed information regarding a known module quickly|
-|v2.0|student|save to zoom link for my lessons|quickly access my zoom lessons|
+|v2.0|student|save and launch URLs for my lessons|quickly open my lesson URLs|
 |v2.0|student|see all my tasks/lessons for today or tomorrow|quickly see work that are upcoming soon|
 |v2.0|user|see all the commands the app offers|not have to constantly refer to the user guide|
 |v2.0|user|sort my task in order of importance|see the important ones first|
