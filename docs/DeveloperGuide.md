@@ -243,8 +243,10 @@ additional devices or platforms.
 
 ## <a name="nf-req"></a>Non-Functional Requirements
 
-- Should work on any [*mainstream Operating Systems*](#os) as long as Java `11` or higher has been installed on it
-{Give non-functional requirements}
+- App should work on any [*mainstream Operating Systems*](#os) as long as Java `11` or higher has been installed on it
+- App should be easily usable by a novice who does not have much CLI experience
+- Format of details of contacts should follow requirements stated by Github, LinkedIn, Telegram, Twitter, and general Emails
+- Importing hundreds of contacts should be instantaneous
 
 ## <a name="glossary"></a>Glossary
 
