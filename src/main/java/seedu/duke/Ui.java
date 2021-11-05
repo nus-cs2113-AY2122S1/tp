@@ -354,23 +354,24 @@ public class Ui {
 
     //@@author lixiyuan416
     public static void displayHelp() {
-        if(Storage.getListOfTrips().isEmpty()){
+        if (Storage.getListOfTrips().isEmpty()) {
             System.out.println("You have no trips! Create one to get started!");
             System.out.println();
-            System.out.println("Syntax: create /[location] /[date dd-mm-yyyy] /[foreign-currency-ISO-code] /[exchange-rate] /[persons-in-trip]");
+            System.out.println("Syntax: create /[location] /[date dd-mm-yyyy] "
+                    + "/[foreign-currency-ISO-code] /[exchange-rate] /[persons-in-trip]");
             System.out.println("\t Separate each person-in-trip with commas");
             System.out.println();
             System.out.println("quit: exit the program");
             System.out.println();
-        }
-        else if (!Storage.checkOpenTrip()) {
+        } else if (!Storage.checkOpenTrip()) {
             System.out.println("You have trips, but have not opened any");
             System.out.println();
             System.out.println("list: list all your trips");
             System.out.println("open [trip number]: Open a trip");
             System.out.println("delete [trip number]: Delete a trip");
             System.out.println();
-            System.out.println("create /[location] /[date dd-mm-yyyy] /[foreign-currency-ISO-code] /[exchange-rate] /[persons-in-trip]: Creates a trip");
+            System.out.println("create /[location] /[date dd-mm-yyyy] "
+                    + "/[foreign-currency-ISO-code] /[exchange-rate] /[persons-in-trip]: Creates a trip");
             System.out.println("Separate persons-in-trip with commas");
             System.out.println();
             System.out.println("edit [trip num] [attribute] [new value]: edit trip attributes");
@@ -403,7 +404,8 @@ public class Ui {
             System.out.println("\tsummary -[name]: Shows all much a person has spent on this trip in total.");
             System.out.println("\t\tDisplays summary for everyone in the trip if index not provided");
             System.out.println();
-            System.out.println("\toptimize: Displays who-pays-who instructions to settle expense repayment at the end of the trip");
+            System.out.println("\toptimize: Displays who-pays-who instructions to "
+                    + "settle expense repayment at the end of the trip");
             System.out.println("\tamount [person]: Displays who-pays-who instructions for one person, unoptimized");
             System.out.println();
             System.out.println("\tclose: Closes the current trip");
@@ -446,7 +448,7 @@ public class Ui {
 
     public static void sameNameInTripError() {
         System.out.println("You have entered people with the same name, please recreate the trip ensuring there are no "
-            + "repeated names for the trip.");
+                + "repeated names for the trip.");
     }
 
     public static void sameNameInExpenseError() {
