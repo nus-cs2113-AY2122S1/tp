@@ -566,6 +566,14 @@ your data will be there!
 > 💡 **Pro Tip!** Have your home folder reside in a cloud storage service (OneDrive, iCloud, etc.) to sync your data
 > between devices.
 
+**Q**: Why do distinguish between `delete` and `remove`, and other similar commands but named differently? 
+<br>
+**A**:
+
+**Q**: Why do I have to hit "enter" every time I want to key in a new command?
+<br>
+**A**:
+
 **Q**: Are there any books you recommend?
 <br>
 **A**: Data Structures and Algorithms in Java &#8594; [here](https://www.amazon.com/Data-Structures-Algorithms-Java-2nd/dp/0672324539)

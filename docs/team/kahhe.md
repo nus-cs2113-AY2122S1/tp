@@ -7,7 +7,7 @@ hectic and stressful university life, through cultivating good habits.
 Users can only run the app on a Command Line Interface (CLI).
 
 ## Summary of Contributions
-Below are contributions I've made to the team and Ha(ppy)Bit.
+Below are contributions I've made to the team and Ha(ppy)Bit. Organised for you and because I like it that way.
 
 ### Code Contributed: [RepoSense Link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=f14&breakdown=true&sort=groupTitle&sortWithin=title&since=2021-09-25&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=kahhe&tabRepo=AY2122S1-CS2113T-F14-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
@@ -39,7 +39,7 @@ Below are contributions I've made to the team and Ha(ppy)Bit.
 #### [User Guide (UG)](/docs/UserGuide.md)
 
 - Contributed to UG introduction 
-- Wrote most of "Using this Guide" and "Using _Ha(ppy)Bit_" section
+- Wrote most of "Using this Guide", "Using _Ha(ppy)Bit_", and "Useful Links" section
 - Attempted to make the UG user-centric/reader-friendly overall with signposting and explanations
 - Fixed documentation flaws brought up by peers in PE Dry Run
 
