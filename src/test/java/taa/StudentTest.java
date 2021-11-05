@@ -23,7 +23,21 @@ public class StudentTest {
     }
 
     @Test
-    void averageMarks_userInput_marksAveragedCorrectly() {
-        
+    void averageMarks_averageMarksArguments_marksAveragedCorrectly() {
+        Student student1 = new Student("A0123456X", "Jim Ho");
+        Student student2 = new Student("A0123456Y", "Kim Ho");
+        Student student3 = new Student("A0123456Z", "Lim Ho");
+        Student student4 = new Student("A0123456A", "Mim Ho");
+        Student student5 = new Student("A0123456B", "Nim Ho");
+        AssessmentList assessments = new AssessmentList();
+        assessments.addAssessment(new Assessment("Midterms", 100, 20));
+        student1.setMarks("Midterms", 50);
+        student2.setMarks("Midterms", 60);
+        student3.setMarks("Midterms", 70);
+        student4.setMarks("Midterms", 80);
+        student5.setMarks("Midterms", 90);
+        assertEquals(70, );
+
+
     }
 }
