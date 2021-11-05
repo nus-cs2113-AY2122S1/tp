@@ -51,9 +51,9 @@ public class AddIngrStoredCommand extends Command {
         logger.log(Level.INFO, "End of process");
     }
 
-    public boolean isNumber(String number) {
+    public boolean isNumber(String numberString) {
         try {
-            int dishIndex = Integer.parseInt(number) - 1;
+            double number = Double.parseDouble(numberString);
             return true;
         } catch (NumberFormatException e) {
             return false;

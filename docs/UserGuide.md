@@ -155,41 +155,61 @@ Expected Outcome:
 ```
 ____________________________________________________________
 Here are the commands you can use:
-1. Adding a Dish : 'add dish [DISH_NAME]'
-    Example: 'add dish chicken rice'
-2. Adding Dish Wastage : 'add dish waste [DISH_NAME]' followed by '[weight in KG]'
-    Example: 'add dish waste chicken rice' ; '0.8'
-3. Adding Dish Limit : 'set dish limit [DISH_NAME]' followed by '[weight in KG]'
-    Example: 'set dish limit chicken rice' ; '16.9'
-4. Finding a Dish : 'find dish [keyword]'
-    Example: 'find dish chicken rice'
-5. Deleting a Dish : 'del [DISH_NAME]
-    Example: 'del dish chicken rice'
-6. Viewing all Dishes : 'list dish'
-7. Sorting Dishes according to Dish Wastage : 'sort dish'
-8. Viewing Graph of Dish Wastage : 'graph dish'
-9. Clearing all Dishes : 'clear dish'
-10. Adding a new Ingredient : 'add ingr [INGR_NAME]' followed by '[weight in KG]'
-    Example: 'add ingr chicken' ; '2'
-11. Adding storage to an already existing Ingredient : 'add ingr stored [INGR_NAME]' followed by '[weight in KG]'
-    Example: 'add ingr stored chicken' ; '1.5'
-12. Adding Ingredient Wastage : 'add ingr waste [INGR_NAME]' followed by '[weight in KG]'
-    Example: 'add ingr waste chicken' ; '0.7'
-13. Adding Ingredient Limit : 'set ingr limit [INGR_NAME]' followed by '[weight in KG]'
-    Example: 'set ingr limit chicken' ; '42.7'
-14. Linking an Ingredient to a Dish : 'link [DISH_NAME] / [INGR_NAME]'
-    Example: 'link chicken rice / chicken'
-15. Finding an Ingredient : 'find ingr [keyword]'
-    Example: 'find ingr chicken'
-16. Deleting an Ingredient : 'del [INGR_NAME]'
-    Example: 'del ingr chicken'
-17. Viewing all Ingredients : 'list ingr'
-18. Sorting Ingredients according to Ingredient Wastage : 'sort ingr'
-19. Viewing Graph of Ingredient Wastage : 'graph ingr'
-20. Clearing all Ingredients : 'clear ingr'
-21. Clearing both Dishes and Ingredients : 'clear all'
-22. Viewing this list of commands: help
-23. Exiting the program: bye
+Dish Commands:
+  1. Adding a Dish : 'add dish [DISH_NAME]'
+     Example: 'add dish chicken rice'
+  2. Adding Dish Wastage : 'add dish waste [DISH_NAME/INDEX]'. Type the [DISH_WASTE_WEIGHT in KG] when prompted
+     Example: 'add dish waste chicken rice' | '0.8'
+  3. Setting Dish Limit : 'set dish limit [DISH_NAME/INDEX]'. Type the [DISH_LIMIT_WEIGHT in KG] when prompted
+     Example: 'set dish limit chicken rice' | '16.9'
+  4. Finding a Dish : 'find dish [keyword]'
+     Example: 'find dish chicken rice'
+  5. Editing Dish Name : 'edit dish name [DISH_NAME/INDEX]'.
+     Type the [NEW_DISH_NAME] and 'y' to confirm and 'n' to disregard the change when prompted
+     Example: 'edit dish name chicken rice' | 'hainanese chicken rice' | 'y'
+  6. Editing Dish Waste : 'edit dish waste [DISH_NAME/INDEX]'.
+     Type the [NEW_DISH_WASTE_WEIGHT in KG] and 'y' to confirm and 'n' to disregard the change when prompted
+     Example: 'edit dish waste chicken rice' | '6.5' | 'y'
+  7. Deleting a Dish : 'del [DISH_NAME/INDEX]'.
+     Type 'y' to confirm and 'n' to disregard the deletion when prompted
+     Example: 'del dish chicken rice' | 'y'
+  8. Viewing all Dishes : 'list dish'
+  9. Sorting Dishes according to Dish Wastage : 'sort dish'
+  10. Viewing Graph of Dish Wastage : 'graph dish'
+  11. Clearing all Dishes : 'clear dish'
+  12. Creating Random Dish : 'rdish'
+
+Ingredient Commands:
+  13. Adding a new Ingredient : 'add ingr [INGR_NAME]' Type the [INGR_STORAGE_WEIGHT in KG] when prompted
+      Example: 'add ingr chicken' | '2'
+  14. Adding storage to an already existing Ingredient : 'add ingr stored [INGR_NAME/INDEX]'. Type the [INGR_STORAGE_WEIGHT in KG] when prompted
+      Example: 'add ingr stored chicken' | '1.5'
+  15. Adding Ingredient Wastage : 'add ingr waste [INGR_NAME/INDEX]'. Type the [INGR_WASTE_WEIGHT in KG] when prompted
+      Example: 'add ingr waste chicken' | '0.7'
+  16. Setting Ingredient Limit : 'set ingr limit [INGR_NAME/INDEX]'. Type the [INGR_LIMIT_WEIGHT in KG] when prompted
+      Example: 'set ingr limit chicken' | '42.7'
+  17. Setting Ingredient Expiry : 'set ingr expiry [INGR_NAME/INDEX]'. Type the [INGR_EXPIRY_DATE in dd/mm/yyyy Format] when prompted
+      Example: 'set ingr limit chicken' | '42.7'
+  18. Linking an Ingredient to a Dish : 'link [DISH_NAME] / [INGR_NAME]'
+      Example: 'link chicken rice / chicken'
+  19. Finding an Ingredient : 'find ingr [keyword]'
+      Example: 'find ingr chicken'
+  20. Editing Ingredient Name : 'edit ingr name [INGR_NAME/INDEX]'.
+      Type the [NEW_INGR_NAME] and 'y' to confirm and 'n' to disregard the change when prompted
+      Example: 'edit ingr name chicken' | 'chicken breast' | 'y'
+  21. Editing Ingredient Waste : 'edit ingr waste [INGR_NAME/INDEX]'.
+      Type the [NEW_INGR_WASTE_WEIGHT in KG] and 'y' to confirm and 'n' to disregard the change when prompted
+      Example: 'edit ingr waste chicken' | '7.0' | 'y'
+  22. Deleting an Ingredient : 'del [INGR_NAME/INDEX]'
+      Type 'y' to confirm and 'n' to disregard the deletion when prompted
+      Example: 'del ingr chicken' | 'y'
+  23. Viewing all Ingredients : 'list ingr'
+  24. Sorting Ingredients according to Ingredient Wastage : 'sort ingr'
+  25. Viewing Graph of Ingredient Wastage : 'graph ingr'
+  26. Clearing all Ingredients : 'clear ingr'
+  27. Clearing both Dishes and Ingredients : 'clear all'
+  28. Viewing this list of commands: help
+  29. Exiting the program: bye
 ____________________________________________________________
 ```
 
@@ -273,7 +293,7 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Enter the limit for prata in kg:
+Enter the limit for chicken rice in kg:
 ____________________________________________________________
 ```
 
@@ -285,7 +305,7 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-The limit for prata is now 3.5 kg
+The limit for chicken rice is now 3.5 kg
 ____________________________________________________________
 ```
 
@@ -299,21 +319,21 @@ Expected outcome:
 
 ```
 ____________________________________________________________
-Enter the weight of prata in kg:
+Enter the weight of chicken rice in kg:
 ____________________________________________________________
 4.5
 ____________________________________________________________
-Wastage of prata is now 4.5 kg
+Wastage of chicken rice is now 4.5 kg
 ____________________________________________________________
 ____________________________________________________________
-Wastage of prata has exceeded the limit
+Wastage of chicken rice has exceeded the limit
 ____________________________________________________________
 ```
 
 ```
 ____________________________________________________________
 Here are the dishes you have:
-1. prata
+1. chicken rice
    Wastage: 4.5 kg
    Ingredients Linked: None
    Limit: 3.5 (exceeded)
@@ -350,7 +370,7 @@ ____________________________________________________________
 
 Example of usage:
 
-`chicken rice`
+`roasted chicken rice`
 
 Expected Outcome:
 
@@ -414,7 +434,7 @@ ____________________________________________________________
 
 Example of usage:
 
-`2`
+`5`
 
 Expected Outcome:
 
@@ -466,7 +486,7 @@ Format: `del dish [DISH_NAME]`
 
 Example of usage:
 
-`del dish chicken rice`
+`del dish roasted chicken rice`
 
 Expected Outcome:
 
@@ -484,7 +504,7 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-chicken rice has been removed!
+roasted chicken rice has been removed!
 ____________________________________________________________
 
 ```
@@ -523,7 +543,7 @@ Expected Outcome:
 ```
 ____________________________________________________________
 Here are the dishes you have:
-1. chicken rice
+1. roasted chicken rice
    Wastage: 0.0 kg
    Ingredients Linked: None
    Limit: No limit has been set
@@ -813,13 +833,13 @@ ____________________________________________________________
 
 Example of usage:
 
-`roasted chicken`
+`chicken breast`
 
 Expected Outcome:
 
 ```
 ____________________________________________________________
-Are you sure you want to change ingredient name from 'chicken' to 'roasted chicken'? Type y for Yes and n for No.
+Are you sure you want to change ingredient name from 'chicken' to 'chicken breast'? Type y for Yes and n for No.
 ____________________________________________________________
 ```
 
@@ -831,7 +851,7 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-chicken has been updated to 'roasted chicken'!
+chicken has been updated to 'chicken breast'!
 ____________________________________________________________
 
 ```
@@ -866,13 +886,13 @@ Format: `edit ingr stored [INGR_NAME]`
 
 Example of usage:
 
-`edit ingr stored roasted chicken` or `edit ingr stored 1`
+`edit ingr stored chicken breast` or `edit ingr stored 1`
 
 Expected Outcome:
 
 ```
 ____________________________________________________________
-What would you like to change the storage weight (in kg) of 'roasted chicken' to?
+What would you like to change the storage weight (in kg) of 'chicken breast' to?
 ____________________________________________________________
 ```
 
@@ -896,7 +916,7 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Storage of roasted chicken has been updated to '50.0' kg!
+Storage of chicken breast has been updated to '50.0' kg!
 ____________________________________________________________
 
 ```
@@ -931,19 +951,19 @@ Format: `edit ingr waste [INGR_NAME]`
 
 Example of usage:
 
-`edit ingr waste roasted chicken` or `edit ingr waste 1`
+`edit ingr waste chicken breast` or `edit ingr waste 1`
 
 Expected Outcome:
 
 ```
 ____________________________________________________________
-What would you like to change the wastage weight (in kg) of 'roasted chicken' to?
+What would you like to change the wastage weight (in kg) of 'chicken breast' to?
 ____________________________________________________________
 ```
 
 Example of usage:
 
-`2`
+`5`
 
 Expected Outcome:
 
@@ -961,7 +981,7 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Wastage of roasted chicken has been updated to '5.0' kg!
+Wastage of chicken breast has been updated to '5.0' kg!
 ____________________________________________________________
 
 ```
@@ -992,13 +1012,13 @@ Format: `link [DISH_NAME] / [INGR_NAME]`
 
 Example of usage:
 
-`link chicken rice / chicken`
+`link chicken rice / chicken breast`
 
 Expected Outcome:
 
 ```
 ____________________________________________________________
-Successfully added chicken as ingredient of chicken rice
+Successfully added chicken breast as ingredient of chicken rice
 ____________________________________________________________
 ```
 
@@ -1019,7 +1039,7 @@ Format: `del ingr [INGR_NAME]`
 
 Example of usage:
 
-`del ingr rice`
+`del ingr chicken breast`
 
 Expected Outcome:
 
@@ -1037,7 +1057,7 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-rice has been removed!
+chicken breast has been removed!
 ____________________________________________________________
 
 ```
@@ -1076,7 +1096,7 @@ Expected Outcome:
 ```
 ____________________________________________________________
 Here are the ingredients you have: 
-1. chicken
+1. chicken breast
    Storage: 2.2 kg
    Wastage: 0.0 kg
    Limit: No limit has been set
