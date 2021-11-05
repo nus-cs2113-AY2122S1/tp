@@ -41,7 +41,7 @@ class UpdateParserTest {
     private static final String ERROR_GOAL_NAME_FORMAT = "Use the 'n/' flag to define the name. Exp: n/Foo";
     private static final String ERROR_GOAL_END_DATE_FORMAT = "Use the e/ flag to set the new goal end dateEg: "
             + "e/31122021";
-    private static final String ERROR_GOAL_END_DATE_NON_DATE = "Enter your date in the format DDMMYYYY";
+    private static final String ERROR_DATE_FORMAT = "Use the date format: 'ddMMyyyy'.";
     private static final String ERROR_GOAL_TYPE_FORMAT = "Use the 't/' flag to define the goal type. Exp: t/df";
     private static final String ERROR_GOAL_UPDATE_FORMAT = "Missing additional goal name, goal end date, or "
             + "goal type parameter needed for update.";
@@ -387,19 +387,19 @@ class UpdateParserTest {
 
     @Test
     void parseUpdateGoalEndDateCommand_invalidStrDateFormat_exceptionThrown() {
-        String inputWithAlphabet  = "CS2113T";
+        String inputWithAlphabet = "CS2113T";
         String inputWithSpecialCharacters = "25122021!";
 
         try {
             UpdateParser.parseUpdateGoalEndDateCommand("g/1 e/" + inputWithAlphabet);
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_GOAL_END_DATE_NON_DATE, e.getMessage());
+            assertEquals(ERROR_DATE_FORMAT, e.getMessage());
         }
 
         try {
             UpdateParser.parseUpdateGoalEndDateCommand("g/1 e/" + inputWithSpecialCharacters);
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_GOAL_END_DATE_NON_DATE, e.getMessage());
+            assertEquals(ERROR_DATE_FORMAT, e.getMessage());
         }
     }
 

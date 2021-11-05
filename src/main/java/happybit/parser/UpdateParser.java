@@ -22,11 +22,11 @@ public class UpdateParser extends Parser {
     private static final String ERROR_GOAL_END_DATE_FORMAT = "Use the e/ flag to set the new goal end date"
             + "Eg: e/31122021";
     private static final String ERROR_DATE_FORMAT = "Use the date format: 'ddMMyyyy'.";
-
     private static final String ERROR_INVALID_UPDATE_COMMAND = "There is no update command for goals in this format, "
             + "do check your parameters one more time.\nDo not include more or less parameters than necessary.";
     private static final String ERROR_INVALID_CHANGE_COMMAND = "There is no change command for habits in this format, "
             + "do check your parameters one more time.\nDo not include more or less parameters than necessary.";
+
     private static final String ERROR_CHANGE_HABIT_NAME_WITH_UPDATE_COMMAND = "Are you perhaps trying to change a "
             + "habit name? Please use the 'change' command instead.";
     private static final String ERROR_CHANGE_HABIT_INTERVAL_WITH_UPDATE_COMMAND = "Are you perhaps trying to change a "
@@ -39,7 +39,6 @@ public class UpdateParser extends Parser {
             + "goal end date? Please use the 'update' command instead.";
 
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("ddMMyyyy");
-
     private static final int FLAG_LENGTH = 2;
 
     /**
