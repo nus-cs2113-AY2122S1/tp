@@ -92,6 +92,7 @@ public class SetMarkTest {
         Assertions.assertEquals("Invalid Marks. Marks must be between 0 and 50.00 (inclusive)",
                 thrown.getMessage());
     }
+
     @Test
     void setMark_studentDoesNotExist_taaExceptionThrown() throws TaaException {
         Ui ui = new Ui();

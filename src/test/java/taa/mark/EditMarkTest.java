@@ -144,6 +144,7 @@ public class EditMarkTest {
         Assertions.assertEquals("Invalid Marks. Marks must be between 0 and 50.00 (inclusive)",
                 thrown.getMessage());
     }
+
     @Test
     void editMark_studentDoesNotExist_taaExceptionThrown() throws TaaException {
         Ui ui = new Ui();
