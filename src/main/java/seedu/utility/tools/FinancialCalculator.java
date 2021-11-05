@@ -11,14 +11,14 @@ import static seedu.utility.FinancialTracker.TOTAL_EXPENSE_LIMIT;
 import static seedu.utility.FinancialTracker.TOTAL_INCOME_LIMIT;
 
 /**
- * This class abstracts out more complication calculations used in FinancialTracker 
+ * This class abstracts out more complication calculations used in FinancialTracker.
  */
 public abstract class FinancialCalculator {
     /**
-     * Sorts an entire year's expense according to the month they are associated with
+     * Sorts an entire year's expense according to the month they are associated with.
      * 
-     * @param yearlyAccumulatedExpense A List of expenses that all share the same associated year
-     * @return A sorted ArrayList where index 1 - 12 contains the total expense corresponding to the month Jan to Dec
+     * @param yearlyAccumulatedExpense A List of expenses that all share the same associated year.
+     * @return A sorted ArrayList where index 1 - 12 contains the total expense corresponding to the month Jan to Dec.
      */
     public static ArrayList<Double> sortExpenseByMonth(List<Expense> yearlyAccumulatedExpense) {
         ArrayList<Double> monthlyBreakdown = new ArrayList<>();
@@ -37,10 +37,10 @@ public abstract class FinancialCalculator {
     }
 
     /**
-     * Calculate the total amount associated to all the expense in the list
+     * Calculate the total amount associated to all the expense in the list.
      * 
-     * @param accumulatedExpense A list containing all the expenses we want to sum the values of
-     * @return The sum of all the expenses stored as a double
+     * @param accumulatedExpense A list containing all the expenses we want to sum the values of.
+     * @return The sum of all the expenses stored as a double.
      */
     public static double getTotalExpenseOf(List<Expense> accumulatedExpense) {
         double totalExpense = 0;
@@ -52,10 +52,10 @@ public abstract class FinancialCalculator {
     }
 
     /**
-     * Sorts an entire year's income according to the month they are associated with
+     * Sorts an entire year's income according to the month they are associated with.
      *
-     * @param yearlyAccumulatedIncome A List of incomes that all share the same associated year
-     * @return A sorted ArrayList where index 1 - 12 contains the total income corresponding to the month Jan to Dec
+     * @param yearlyAccumulatedIncome A List of incomes that all share the same associated year.
+     * @return A sorted ArrayList where index 1 - 12 contains the total income corresponding to the month Jan to Dec.
      */
     public static ArrayList<Double> sortIncomeByMonth(List<Income> yearlyAccumulatedIncome) {
         ArrayList<Double> monthlyBreakdown = new ArrayList<>();
@@ -74,10 +74,10 @@ public abstract class FinancialCalculator {
     }
 
     /**
-     * Calculate the total amount associated to all the income in the list
+     * Calculate the total amount associated to all the income in the list.
      *
-     * @param accumulatedIncome A list containing all the incomes we want to sum the values of
-     * @return The sum of all the incomes stored as a double
+     * @param accumulatedIncome A list containing all the incomes we want to sum the values of.
+     * @return The sum of all the incomes stored as a double.
      */
     public static double getTotalIncomeOf(List<Income> accumulatedIncome) {
         double totalIncome = 0;

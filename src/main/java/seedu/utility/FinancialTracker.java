@@ -14,7 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static seedu.utility.tools.FinancialCalculator.*;
+import static seedu.utility.tools.FinancialCalculator.getTotalExpenseOf;
+import static seedu.utility.tools.FinancialCalculator.getTotalIncomeOf;
+import static seedu.utility.tools.FinancialCalculator.sortExpenseByMonth;
+import static seedu.utility.tools.FinancialCalculator.sortIncomeByMonth;
 
 
 /**
