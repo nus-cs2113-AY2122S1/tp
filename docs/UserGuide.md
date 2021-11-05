@@ -5,7 +5,7 @@ SchedUrMods can help you manage your daily tasks faster than traditional GUI app
 
 Below is a guide on how you can get started using our program to start **"Scheduling Ur Mods"**.  
 
-## Overview
+## <div id="scrollToHere">Overview</div>
 - [1. Quick Start](#1-quick-start)
 - [2. Features](#2-features)
     - [2.1 Viewing help: `help`](#21-viewing-help--help)
