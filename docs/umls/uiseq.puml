@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+box "ui" #LightBlue
+participant UiUniversity
+participant Ui
+end box
+
+[-> UiUniversity: printUniversity(University U, boolean printMC)
+activate UiUniversity
+
+autonumber 1
+UiUniversity -> Ui: printIndex(int index, boolean println)
+activate Ui
+
+Ui -> Ui : stringPadder(int index, PaddingType INDEX)
+activate Ui
+
+autonumber stop
+Ui --> Ui
+deactivate Ui
+
+Ui --> UiUniversity
+deactivate Ui
+
+
+autonumber 3
+opt printMC
+    UiUniversity -> Ui : stringPadder(String U.name, PaddingType UNIVERSITYNAME)
+    activate Ui
+    autonumber stop
+    Ui --> UiUniversity
+    deactivate Ui
+   end
+
+<-- UiUniversity
+deactivate UiUniversity
+
+@enduml
