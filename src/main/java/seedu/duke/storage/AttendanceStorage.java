@@ -147,16 +147,16 @@ public class AttendanceStorage {
     }
 
     /**
-     *Checks if attendance status is valid.
+     * Checks if attendance status is valid.
      *
      * @param attendanceStatus should be either 1 or 0.
      */
-    private static void verifyAttendanceStatus(String attendanceStatus) throws InvalidAddAttendanceException{
+    private static void verifyAttendanceStatus(String attendanceStatus) throws InvalidAddAttendanceException {
         int attendanceIntegerValue;
         try {
             attendanceIntegerValue = Integer.parseInt(attendanceStatus);
             boolean validAttendanceStatus = (attendanceIntegerValue == 1 || attendanceIntegerValue == 0);
-            if(!validAttendanceStatus) {
+            if (!validAttendanceStatus) {
                 throw new InvalidAddAttendanceException(invalidAttendanceStatusEntry);
             }
         } catch (NumberFormatException e) {
