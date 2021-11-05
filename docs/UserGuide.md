@@ -98,7 +98,7 @@ loaded, you will see the following message:
 Your saved data was successfully loaded!
 ```
 
-If there is an error loading your save file, please go to () for more information.
+If there is an error loading your save file, please go to the [FAQ](#faq)  for more information.
 
 <br />
 
@@ -289,6 +289,36 @@ Input syntax:
 delete [trip-number]
 ```
 - `[trip-number]` is the index of the Trip you wish to delete, which can be found by using `list` command while no Trip is open.
+- `delete last` to delete last trip
+
+
+For example,
+
+Input:
+
+````
+delete 1
+````
+If successful, the output will be as follows:
+```
+Your trip to America on 02 Feb 2021 has been successfully removed.
+```
+<br />
+
+#### - Edit Trip
+
+Edit attributes of a Trip
+
+Input syntax:
+```
+edit [trip num] [attribute] [new value]
+
+attributes: -location, -date, -exchange rate, -forcur, -homecur
+```
+- The hyphen preceding an attribute is part of the syntax.
+- `[trip-number]` is the index of the Trip you wish to edit, which can be found by using `list` command while no Trip is open.
+- `last` can be used for `[trip num]`
+
 
 For example,
 
@@ -418,6 +448,7 @@ Input syntax:
 view [expense-number]
 ````
 - Note that entering `view` without an index will print all expenses in the currently opened trip.
+- `view last` to view expense
 
 For example,
 
@@ -449,7 +480,7 @@ Input syntax:
 ````
 view filter [expense-attribute] [search-keyword]
 ````
-- `[expense-attribute]` can be either `[category]`, `[payer]`, `[person]` or `[description]`.
+- `[expense-attribute]` can be either `[category]`, `[description]`, `[payer]`, `[person]` or `[date]`.
 
 For example, if the user would like to search for all expenses in the category "food",
 
@@ -494,6 +525,7 @@ delete [expense-number]
 ```
 - `[expense-number]` is the index of the expense you wish to delete, 
 and can be found by using `list` command while a Trip is open.
+- `delete last` to delete last expense
 
 For example,
 
@@ -507,10 +539,51 @@ Your expense of SGD 50.00 has been successfully removed.
 ```
 <br />
 
-###Optimize Transactions
+### Settling Expenses
+There are 2 commands that you can run to get a list of who pays who (WPW) to 
+settle expenses. `amount` displays the WPW for 1 person, while `optimize` displays the WPW for everyone in 
+the trip. We recommend you use `optimize` most of the time.
 
-Shows the most optimized number of transactions to ensure that everyone is being paid back. User needs to have opened
-a trip and have expenses to use the command. 
+<br />
+
+#### Amount
+Shows the transactions that the input person have to make to ensure that everyone is being paid back. User needs to have opened a trip and have expenses to use the command. Note that the WPW list is not optimized, and you will encounter cases where the WPW list will list:
+
+```
+Adam needs to pay USD 10.00 (SGD 10.00) to Eve
+Eve needs to pay USD 3.00 (SGD 3.00) to Adam
+```
+instead of
+```
+Adam needs to pay USD 7.00 (SGD 7.00) to Eve
+```
+<br />
+
+Input syntax:
+```
+amount [person-in-trip]
+```
+
+For example,
+
+Input:
+
+```
+amount Ben
+```
+
+If successful, the output will be as follows:
+
+```
+Ben spent SGD $3050.50 (SGD $3050.50) on the trip so far
+Ben owes SGD $3000.00 (SGD $3000.00) to Jerry
+Ben does not owe anything to Dick
+Ben needs to pay USD 7.00 (SGD 7.00) to Eve
+```
+<br /><br />
+#### Optimize Transactions
+
+Shows the most optimized number of transactions to ensure that everyone is being paid back. User needs to have opened a trip and have expenses to use the command. 
 
 Input syntax:
 
@@ -617,23 +690,58 @@ You are inside a trip. Trip specific commands:
 	open [trip num]: open another trip
 	quit: exit the program
 ````
----
-
-
-
-
-
-
-
-=======
-
-
 
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+**Q**: How do I transfer my data to another computer?
 
 **A**: To transfer your data to another device, simply copy over the "trips.json" file in the same directory as this app to the device you wish to use.
 
+**Q**: There was an error loading my saved file.
+
+**A**: Ensure that your saved file is in the same directory as the jar file, and that you did not modify the contents of the json file directly. Delete all json files, and run the app again, and re-enter your data.
+
 ## Command Summary
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+Hyphen before square brackets (eg `summary -[name]`) denotes optional arguments
+
+### General commands
+Action | Command syntax
+---|---
+Display help|`help`
+Quit|`quit`
+
+<br />
+
+### Trip commands
+
+Action | Command syntax | Example
+---|---|---
+Create trip | `create /[location] /[date] /[foreign-currency-ISO-code] /[exchange-rate] /[persons-in-trip]`|`create /America /02-02-2021 /USD /0.74 /Ben, Jerry, Tom`
+Open trip | `open [trip-number]` | `open 1`
+Close trip | `close` | `close`
+List trips | `list` when no trip is opened| `list`
+List persons involved in a trip | `people` | `people`
+Delete trip | `delete [trip-number]`|`delete 1`
+Edit trip | `edit [trip num] [attribute] [new value]` <br /><br /> `[-attribute]: -location, -date, -exchange rate, -forcur, -homecur`  | `edit 1 -location Afghanistan`
+
+<br />
+
+### Expense commands
+Open a trip to use
+
+Action | Command syntax | Example
+---|---|---
+Create expense|`expense [amount] [category] [people] /[description]`|`expense 30 food Ben, Jerry /In-and-Out Burgers`
+List expenses |`list` when inside a trip| `list`
+View an expense in detail |`view [expense-number]`| `view 1`
+View filtered expenses in detail | `view filter [expense-attribute] [search-keyword]` <br /><br /> `expense-attribute: category, payer, person, description`|`view filter category food`
+Delete expense|`delete [expense-number]`|`delete 1`
+View list of expense| `summary -[name]` <br /> If name is not provided, displays all expenses like `list`| `summary` or `summary Ben`
+View expense settlement actions of a person| `amount [person-in-trip]` | `amount Ben`
+View optimized settlement actions for everyone in the trip|`optimize`|`optimize`
+
+
+
+
+
+
