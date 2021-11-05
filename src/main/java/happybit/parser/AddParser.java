@@ -49,7 +49,7 @@ public class AddParser extends Parser {
     public static Command parseAddHabitCommand(String commandInstruction) throws HaBitParserException {
         checkNoDescription(commandInstruction);
         String[] parameters = splitInput(commandInstruction);
-        int goalIndex = getNumber(parameters, FLAG_GOAL_INDEX) - 1;
+        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
         Habit habit = getHabit(commandInstruction);
         return new AddHabitCommand(habit, goalIndex);
     }
@@ -94,6 +94,9 @@ public class AddParser extends Parser {
         String[] parameters = splitInput(input);
         String habitName = getName(parameters).trim();
         int interval = getNumber(parameters, FLAG_INTERVAL);
+        if (interval > MAX_INTERVAL) {
+            throw new HaBitParserException(ERROR_INTERVAL_TOO_LARGE);
+        }
         return new Habit(habitName, interval);
     }
 
