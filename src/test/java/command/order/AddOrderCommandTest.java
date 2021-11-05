@@ -1,6 +1,7 @@
 package command.order;
 
 import command.Command;
+import command.stock.ListStockCommand;
 import inventory.Medicine;
 import inventory.Order;
 import inventory.Prescription;
@@ -18,6 +19,8 @@ import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
+//@@author jiangweichen835
 public class AddOrderCommandTest {
     public static final String NAME = "Panadol";
     public static final String QUANTITY = "50";
@@ -36,16 +39,21 @@ public class AddOrderCommandTest {
         System.setOut(new PrintStream(outContent));
     }
 
-    @Test
-    public void addOrderCommand_validAddOrder_expectValid() {
+    private void executeAddOrderCommand(String quantity, String date) {
         LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
 
         parameters.put("n", NAME);
-        parameters.put("q", QUANTITY);
-        parameters.put("d", DATE);
+        parameters.put("q", quantity);
+        parameters.put("d", date);
 
         Command command = new AddOrderCommand(parameters);
         command.execute();
+    }
+
+    @Test
+    public void addOrderCommand_validAddOrder_expectValid() {
+
+        executeAddOrderCommand(QUANTITY, DATE);
 
         String expectedOutput = "Order added: Panadol\n"
                + "+====+=========+==========+============+=========+\n"
@@ -59,14 +67,7 @@ public class AddOrderCommandTest {
 
     @Test
     public void addOrderCommand_invalidDate_expectInvalid() {
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-
-        parameters.put("n", NAME);
-        parameters.put("q", QUANTITY);
-        parameters.put("d", "10 Oct 2020");
-
-        Command command = new AddOrderCommand(parameters);
-        command.execute();
+        executeAddOrderCommand(QUANTITY, "10 Oct 2020");
 
         String expectedOutput = "Invalid date! Ensure date is in dd-MM-yyyy.";
         assertEquals(expectedOutput.trim(), outContent.toString().trim().replace("\r", ""));
@@ -84,14 +85,7 @@ public class AddOrderCommandTest {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-
-        parameters.put("n", NAME);
-        parameters.put("q", "1000");
-        parameters.put("d", DATE);
-
-        Command command = new AddOrderCommand(parameters);
-        command.execute();
+        executeAddOrderCommand("1000", DATE);
 
         String expectedOutput = "Unable to add order as total order quantity exceeds maximum stock quantity of 100.\n"
                 + "Existing quantity in stock: 50\n" + "Pending order quantity: 50";
@@ -109,14 +103,7 @@ public class AddOrderCommandTest {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-
-        parameters.put("n", NAME);
-        parameters.put("q", "1000");
-        parameters.put("d", DATE);
-
-        Command command = new AddOrderCommand(parameters);
-        command.execute();
+        executeAddOrderCommand("1000", DATE);
 
         String expectedOutput = "Order added: Panadol\n"
                 + "+====+=========+==========+============+=========+\n"
@@ -139,14 +126,7 @@ public class AddOrderCommandTest {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-
-        parameters.put("n", NAME);
-        parameters.put("q", "1000");
-        parameters.put("d", DATE);
-
-        Command command = new AddOrderCommand(parameters);
-        command.execute();
+        executeAddOrderCommand("1000", DATE);
 
         String expectedOutput = "Unable to add order as total order quantity exceeds "
                 + "maximum stock quantity of 1000.\nExisting quantity in stock: 20";
@@ -156,14 +136,7 @@ public class AddOrderCommandTest {
 
     @Test
     public void addOrderCommand_invalidQuantity_expectInvalid() {
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-
-        parameters.put("n", NAME);
-        parameters.put("q", "0");
-        parameters.put("d", DATE);
-
-        Command command = new AddOrderCommand(parameters);
-        command.execute();
+        executeAddOrderCommand("0", DATE);
 
         String expectedOutput = "Order Quantity cannot be 0.";
 

@@ -19,9 +19,9 @@ alt orderQuantity != 0
     alt nameExistsInorder
         alt !nameExistsInStock
                alt orderQuantity < maxQuantity
-                   addorder -> addorder : addDate()
-                   addorder --> addorder : orderDate
-                   addorder -> addorder : addOrder()
+                   addorder -> addorder : addDate(dateToAdd)
+                   addorder --> addorder
+                   addorder -> addorder : addOrder(ui: Ui, medicines: ArrayList<Medicine>, name: String, \nquantity: int, date: Date)
                    addorder --> addorder
                end
            else nameExistsInStock
@@ -32,16 +32,30 @@ alt orderQuantity != 0
                addorder -> stockmanager : getMaxStockQuantity()
                addorder <-- stockmanager : MaxStockQuantity
                alt orderQuantity + totalExistingQuantity <= maxQuantity
-                   addorder -> addorder : addDate()
-                   addorder --> addorder : orderDate
-                   addorder -> addorder : addOrder()
+                   addorder -> addorder : addDate(dateToAdd)
                    addorder --> addorder
+                   addorder -> addorder : addOrder(ui: Ui, medicines: ArrayList<Medicine>, name: String, \nquantity: int, date: Date)
+                   addorder --> addorder
+               end
            end
     else !nameExistsInorder
-        addorder -> addorder : addDate()
-        addorder --> addorder : orderDate
-        addorder -> addorder : addOrder()
-        addorder --> addorder
+        alt !nameExistsInStock
+            addorder -> addorder : addDate(dateToAdd)
+            addorder --> addorder
+            addorder -> addorder : addOrder(ui: Ui, medicines: ArrayList<Medicine>, name: String, \nquantity: int, date: Date)
+            addorder --> addorder
+        else nameExistsInStock
+            addorder -> stockmanager : getTotalStockQuantity()
+            addorder <-- stockmanager : TotalStockQuantity
+            addorder -> stockmanager : getMaxStockQuantity()
+            addorder <-- stockmanager : MaxStockQuantity
+            alt orderQuantity + existingStockQuantity <= maxQuantity
+                addorder -> addorder : addDate(dateToAdd)
+                addorder --> addorder
+                addorder -> addorder : addOrder(ui: Ui, medicines: ArrayList<Medicine>, name: String, \nquantity: int, date: Date)
+                addorder --> addorder
+            end
+        end
     end
 end
 deactivate addorder

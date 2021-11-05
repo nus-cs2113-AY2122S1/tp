@@ -44,6 +44,7 @@ public class ListStockCommandTest {
         new ListStockCommand(parameters).execute();
     }
 
+    // @@author jiangweichen835
     @Test
     public void listStockCommand_filterByIdOne_expectStocksWithIdOne() {
         String expectedOutput =
@@ -53,9 +54,8 @@ public class ListStockCommandTest {
                 + "| 1  | PANADOL | $20.00 |      20      | 13-09-2022  |  HEADACHES  |     1000     | \n"
                 + "|    |         |        | PENDING: 150 |             |             |              | \n"
                 + "+----+---------+--------+--------------+-------------+-------------+--------------+";
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("i", "1");
-        new ListStockCommand(parameters).execute();
+
+        executeListStockCommand("i", "1");
         // Output stream will include \r for each line break
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
@@ -73,9 +73,7 @@ public class ListStockCommandTest {
                 + "|    |         |        | PENDING: 150 |             |             |              | \n"
                 + "+----+---------+--------+--------------+-------------+-------------+--------------+";
 
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("n", "panadol");
-        new ListStockCommand(parameters).execute();
+        executeListStockCommand("n", "panadol");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -89,9 +87,7 @@ public class ListStockCommandTest {
                  + "|    |         |        | PENDING: 30 |             |             |              | \n"
                  + "+----+---------+--------+-------------+-------------+-------------+--------------+";
 
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("p", "10");
-        new ListStockCommand(parameters).execute();
+        executeListStockCommand("p", "10");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -108,6 +104,7 @@ public class ListStockCommandTest {
         LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
         parameters.put("q", "10");
         new ListStockCommand(parameters).execute();
+
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -133,9 +130,7 @@ public class ListStockCommandTest {
                 + "|    |             |        | PENDING: 200 |             |                  |              | \n"
                 + "+----+-------------+--------+--------------+-------------+------------------+--------------+";
 
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("low", "30");
-        new ListStockCommand(parameters).execute();
+        executeListStockCommand("low", "30");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -149,9 +144,7 @@ public class ListStockCommandTest {
                 + "|    |         |        | PENDING: 150 |             |             |              | \n"
                 + "+----+---------+--------+--------------+-------------+-------------+--------------+";
 
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("e", "13-09-2022");
-        new ListStockCommand(parameters).execute();
+        executeListStockCommand("e", "13-09-2022");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -187,9 +180,7 @@ public class ListStockCommandTest {
                 + "|    |              |        | PENDING: 100 |             |             |              | \n"
                 + "+----+--------------+--------+--------------+-------------+-------------+--------------+";
 
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("d", "INFECTIONS");
-        new ListStockCommand(parameters).execute();
+        executeListStockCommand("d", "INFECTIONS");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
@@ -206,9 +197,7 @@ public class ListStockCommandTest {
                 + "|    |         |        | PENDING: 150 |             |             |              | \n"
                 + "+----+---------+--------+--------------+-------------+-------------+--------------+";
 
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        parameters.put("m", "1000");
-        new ListStockCommand(parameters).execute();
+        executeListStockCommand("m", "1000");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 
