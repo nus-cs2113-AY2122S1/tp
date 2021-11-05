@@ -1,0 +1,13 @@
+@startuml
+!include ClassStyle.puml
+
+class Parser {
+    {static} +parseUserInput(userInput: String): Command
+    {static} +splitFirstSpace(string: String): String[]
+    {static} +getArgumentsFromString(string: String, argumentKeys: String[], includeEmptyValues: boolean): HashMap<String, String>
+    {static} +isValueValid(value: String): boolean
+    {static} -convertToRegexPattern(c: char): String
+    {static} -getSpecialCharactersAsString(): String
+}
+
+@enduml

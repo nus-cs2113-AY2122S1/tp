@@ -2,7 +2,7 @@
 !include <office/Concepts/globe_internet>
 !include <office/Concepts/documents>
 !include <office/Users/user>
-!include style.puml
+!include SequenceStyle.puml
 
 skinparam Class {
     FontColor #FFFFFF

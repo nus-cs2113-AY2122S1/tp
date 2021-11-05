@@ -1,0 +1,29 @@
+@startuml
+!include ClassStyle.puml
+
+class Taa {
+    -classList : ClassList
+    -storage: Storage
+    {static} +main(args: String[]): void
+    +Taa()
+    +Taa(isLoggingEnabled: boolean)
+    +run(): void
+    -loadClassListFromStorage(): void
+}
+
+class Ui {
+    -scanner: Scanner
+    +Ui()
+    +getUserInput(): String
+    +getUserInput(inputPrompt: String, allowEmpty: boolean): String
+    +printBorder(): void
+    +printMessage(message: String): void
+    +printMessage(message: String, withBorders: boolean): void
+    +printWelcomeMessage(): void
+    +printExitMessage(): void
+    +printException(message: String): void
+}
+
+Taa -> "1" Ui
+
+@enduml
