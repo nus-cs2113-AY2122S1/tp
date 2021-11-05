@@ -30,6 +30,7 @@ public class SearchMapCommandParser {
                                   UniversityList universitySelectedList, ModuleList moduleSelectedList)
             throws SearchMapParseException {
         logger.log(Level.INFO, Constants.LOGMSG_PARSESTARTED);
+
         String input = arguments.trim();
         if (ParseCondition.isEmptyInput(input)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
