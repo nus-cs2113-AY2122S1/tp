@@ -18,7 +18,6 @@ public class DeleteMultipleExpenditureCommand extends DeleteCommand {
         this.month = month;
     }
 
-
     @Override
     public void execute() {
         for (int i = startIndex; i <= endIndex; i++) {

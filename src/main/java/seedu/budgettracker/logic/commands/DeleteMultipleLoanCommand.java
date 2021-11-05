@@ -18,9 +18,6 @@ public class DeleteMultipleLoanCommand extends DeleteCommand {
         this.month = month;
     }
 
-    /**
-     * LocalDate.now().getMonthValue() is being used as a placeholder
-     */
     @Override
     public void execute() {
         for (int i = startIndex; i <= endIndex; i++) {
