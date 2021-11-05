@@ -177,7 +177,7 @@ Expected Output 1:
 
 ```
 Medicine exists. Using existing description and maximum quantity.
-Medication added: panadol
+Medication added: PANADOL
 +====+=========+=======+==========+=============+=============+==============+
 | ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | 
 +====+=========+=======+==========+=============+=============+==============+
@@ -190,7 +190,7 @@ Example 2 (If medication and expiry date exists): `addstock n/panadol q/50 e/19-
 Expected Output 2:
 
 ```
-Same Medication and Expiry Date exist. Update existing quantity.
+Same Medication and Expiry Date exist. Using existing price, description and maximum quantity. Updating existing quantity.
 +====+=========+=======+==========+=============+=============+==============+
 | ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | 
 +====+=========+=======+==========+=============+=============+==============+
@@ -203,7 +203,7 @@ Example 3 (If medication does not exist): `addstock n/paracetamol q/10 p/10 e/02
 Expected Output 3:
 
 ```
-Medication added: paracetamol
+Medication added: PARACETAMOL
 +====+=============+========+==========+=============+=============+==============+
 | ID |    NAME     | PRICE  | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | 
 +====+=============+========+==========+=============+=============+==============+
@@ -220,7 +220,7 @@ Lists all existing medications in the inventory.
 * When you update an order information, MediVault reflects the pending stocks shown here.
 * The total pending quantity will be shown if there are orders for a medication.
 * `low/LESS_THAN_OR_EQUAL_QUANTITY` and `expiring/LESS_THAN_OR_EQUAL_EXPIRY_DATE` parameters can be used to search for
-stocks with low quantity and expiring stocks. 
+stocks with low **total** remaining quantity and expiring stocks respectively.
 
 Format: `liststock {i/ID p/PRICE q/QUANTITY low/LESS_THAN_OR_EQUAL_QUANTITY e/EXPIRY_DATE expiring/LESS_THAN_OR_EQUAL_EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN_NAME}`
 
@@ -558,7 +558,7 @@ Example 1 (add order with date parameter): `addorder n/panadol q/150 d/21-10-202
 Expected Output 1:
 
 ```
-Order added: panadol
+Order added: PANADOL
 +====+=========+==========+============+=========+
 | ID |  NAME   | QUANTITY |    DATE    | STATUS  |
 +====+=========+==========+============+=========+
@@ -571,8 +571,9 @@ Example 2 (add order without date parameter): `addorder n/panadol q/1000`
 Expected Output 2:
 
 ```
-Order for panadol exists. 
-Unable to add order as total order quantity exceeds maximum stock quantity.
+Unable to add order as total order quantity exceeds maximum stock quantity of 1000.
+Existing quantity in stock: 30
+Pending order quantity: 150
 ```
 
 ### Listing orders: `listorder`
@@ -717,8 +718,7 @@ Example 2 (If medication exists) : `receiveorder i/2 p/20 e/25-10-2021`
 Expected Output 2:
 
 ```
-Medicine exists. Using existing description and maximum quantity.
-Medication added: PANADOL
+Same Medication and Expiry Date exist. Using existing price, description and maximum quantity. Updating existing quantity.
 +====+=========+========+==============+=============+=============+==============+
 | ID |  NAME   | PRICE  |   QUANTITY   | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | 
 +====+=========+========+==============+=============+=============+==============+

@@ -8,6 +8,7 @@ import inventory.Stock;
 import utilities.comparators.StockComparator;
 import utilities.parser.DateParser;
 import utilities.parser.MedicineValidator;
+import utilities.parser.StockManager;
 import utilities.parser.StockValidator;
 import utilities.ui.Ui;
 
@@ -60,7 +61,7 @@ public class ListStockCommand extends Command {
                 }
             }
         }
-        filteredStocks = filterStocks(filteredStocks);
+        filteredStocks = filterStocks(filteredStocks, medicines);
         ui.printStocks(filteredStocks, medicines);
         logger.log(Level.INFO, "Successful listing of stock");
     }
@@ -69,9 +70,10 @@ public class ListStockCommand extends Command {
      * Helps to filter stocks based on the user's input.
      *
      * @param filteredStocks Arraylist of Stock objects.
+     * @param medicines Arraylist of Medicines objects.
      * @return Arraylist of filtered Stock objects based on the user's parameters values.
      */
-    private ArrayList<Stock> filterStocks(ArrayList<Stock> filteredStocks) {
+    private ArrayList<Stock> filterStocks(ArrayList<Stock> filteredStocks, ArrayList<Medicine> medicines) {
         for (String parameter : parameters.keySet()) {
             String parameterValue = parameters.get(parameter);
             switch (parameter) {
@@ -90,7 +92,8 @@ public class ListStockCommand extends Command {
                 break;
             case CommandParameters.LOW:
                 filteredStocks = (ArrayList<Stock>) filteredStocks.stream().filter((m) ->
-                        m.getQuantity() <= Integer.parseInt(parameterValue)).collect(Collectors.toList());
+                        StockManager.getTotalStockQuantity(medicines, m.getMedicineName())
+                                <= Integer.parseInt(parameterValue)).collect(Collectors.toList());
                 break;
             case CommandParameters.QUANTITY:
                 filteredStocks = (ArrayList<Stock>) filteredStocks.stream().filter((m) ->
