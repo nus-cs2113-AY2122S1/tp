@@ -1,18 +1,14 @@
 package seedu.duke.model.lesson;
 
 import java.io.IOException;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
-import seedu.duke.commons.core.DayOfTheWeek;
-import seedu.duke.DukeException;
 import seedu.duke.commons.core.Message;
-import seedu.duke.commons.util.TimeUtil;
+import seedu.duke.commons.util.exceptions.InvalidDayException;
 import seedu.duke.logic.parser.exceptions.ParseException;
 import seedu.duke.model.lesson.exceptions.EmptyLinkException;
 import seedu.duke.ui.Ui;
 
+import static seedu.duke.commons.util.DayUtil.compareDay;
 import static seedu.duke.commons.util.LinkUtil.formatLink;
 import static seedu.duke.commons.util.LinkUtil.launchUrlOnLinux;
 import static seedu.duke.commons.util.LinkUtil.launchUrlOnMac;
@@ -20,9 +16,10 @@ import static seedu.duke.commons.util.LinkUtil.launchUrlOnWindows;
 import static seedu.duke.logic.parser.ParserUtil.parseTitle;
 import static seedu.duke.logic.parser.ParserUtil.parseDayOfTheWeek;
 import static seedu.duke.logic.parser.ParserUtil.parseTime;
+import static seedu.duke.commons.util.TimeUtil.compareTime;
 
 //@@author Roycius
-public class Lesson {
+public class Lesson implements Comparable<Lesson> {
     private final String title;
     private final String dayOfTheWeek;
     private final String startTime;
@@ -87,7 +84,6 @@ public class Lesson {
         }
     }
 
-    //@@author Roycius
     /**
      * Serializes the lesson data into the correct format for storage file.
      *
@@ -116,6 +112,21 @@ public class Lesson {
             // Ignoring the particular line
             ui.printMessage(Message.ERROR_DESERIALIZING_LESSON);
             return null;
+        }
+    }
+
+    @Override
+    public int compareTo(Lesson l) {
+        try {
+            int dayComparison = compareDay(this.getDayOfTheWeek(), l.getDayOfTheWeek());
+            if (dayComparison != 0) {
+                return dayComparison;
+            }
+            return compareTime(this.getStartTime(), l.getStartTime());
+        } catch (InvalidDayException e) {
+            // Ignore and return 0
+            System.out.println("Error: Lesson comparison result is incorrect.");
+            return 0;
         }
     }
 

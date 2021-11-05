@@ -5,6 +5,7 @@ import seedu.duke.commons.core.Message;
 import seedu.duke.model.lesson.exceptions.LessonIndexException;
 import seedu.duke.ui.Ui;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -18,6 +19,14 @@ public class LessonList {
     }
 
     public LessonList(List<Lesson> lessonList) {
+        Collections.sort(lessonList);
+        this.lessonList = lessonList;
+    }
+
+    public LessonList(List<Lesson> lessonList, boolean isSort) {
+        if (isSort) {
+            Collections.sort(lessonList);
+        }
         this.lessonList = lessonList;
     }
 
@@ -47,11 +56,13 @@ public class LessonList {
             }
         }
         lessonList.add(newLesson);
+        Collections.sort(lessonList);
     }
 
     public void deleteLesson(int lessonIndex) throws LessonIndexException {
         try {
             lessonList.remove(lessonIndex);
+            Collections.sort(lessonList);
         } catch (IndexOutOfBoundsException e) {
             throw new LessonIndexException(Message.ERROR_INVALID_INDEX);
         } catch (NumberFormatException e) {

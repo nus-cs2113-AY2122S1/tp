@@ -107,7 +107,7 @@ public class Duke {
     private void initializeTaskList() {
         try {
             List<String> taskData = storage.loadData(Storage.PATH_TO_TASK_FILE);
-            taskList = new TaskList(TaskList.deserialize(ui, taskData), true);
+            taskList = new TaskList(TaskList.deserialize(ui, taskData));
             storage.saveData(taskList);
             ui.printMessage(Message.SUCCESS_RETRIEVING_TASK_DATA);
             LOGGER.info(Message.SUCCESS_RETRIEVING_TASK_DATA);
