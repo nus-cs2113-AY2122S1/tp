@@ -370,16 +370,16 @@ public class TextUi {
     }
 
     public static void printExplosion() {
-        System.out.println("              _.-^^---....,,---_\n" +
-                "           _--                  --_\n" +
-                "          <          Overspent!       >)\n" +
-                "           \\._                   _./\n" +
-                "              ```--. . , ; .--'''\n" +
-                "                    | |   |\n" +
-                "                 .-=||  | |=-.\n" +
-                "                 `-=#$%&%$#=-'\n" +
-                "                    | ;  :|\n" +
-                "           _____.,-#%&$@%#&#~,._____");
+        System.out.println("              _.-^^---....,,---_\n"
+                + "           _--                  --_\n"
+                + "          <          Overspent!       >)\n"
+                + "           \\._                   _./\n"
+                + "              ```--. . , ; .--'''\n"
+                + "                    | |   |\n"
+                + "                 .-=||  | |=-.\n"
+                + "                 `-=#$%&%$#=-'\n"
+                + "                    | ;  :|\n"
+                + "           _____.,-#%&$@%#&#~,._____");
     }
 
     public static void drawSingleOverallGraph(double barPercentage) {
