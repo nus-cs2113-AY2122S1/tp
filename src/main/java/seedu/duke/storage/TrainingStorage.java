@@ -40,11 +40,9 @@ public class TrainingStorage {
                 e.printStackTrace();
             }
         } else {
-
             System.out.println("CCA Training file found & loaded");
             verifyTrainingDetails(ccaTrainingFile);
             loadTrainingsFile(ccaTrainingFile, trainings);
-
         }
     }
 
