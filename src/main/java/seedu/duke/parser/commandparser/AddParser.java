@@ -57,6 +57,7 @@ public abstract class AddParser extends Parser {
                 Ui.printLineBreak();
 
                 int eventIndex = getEventForTask();
+                Ui.printLineBreak();
                 int[] memberIndexes = getMembersForTask();
 
                 return new AddTaskCommand(title, description, dateTime, eventIndex, memberIndexes);
@@ -188,7 +189,6 @@ public abstract class AddParser extends Parser {
     }
 
     private static int[] getMembersForTask() {
-        Ui.printLineBreak();
         Ui.promptForMemberIndex();
         int[] memberIndexes = null;
         boolean isCorrectMember = false;
