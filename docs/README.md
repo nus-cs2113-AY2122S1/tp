@@ -1,7 +1,3 @@
----
-layout: page
-title: SEPlanner
----
 
 <p align = "center">
 <img src="images/SEPlanner_logo.png" width = "800" />
