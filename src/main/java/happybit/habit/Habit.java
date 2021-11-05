@@ -3,6 +3,7 @@ package happybit.habit;
 import happybit.interval.Interval;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
@@ -70,6 +71,10 @@ public class Habit {
         return HabitDateManager.dateToString(this.startDate);
     }
 
+    public LocalDate getStartDateLD() {
+        return convertDateToLocalDate(this.startDate);
+    }
+
     /**
      * Getter for end date in string format (for storage).
      *
@@ -77,6 +82,10 @@ public class Habit {
      */
     public String getEndDate() {
         return HabitDateManager.dateToString(this.endDate);
+    }
+
+    public LocalDate getEndDateLD() {
+        return convertDateToLocalDate(this.endDate);
     }
 
     /**
@@ -436,6 +445,26 @@ public class Habit {
             }
         }
         return count;
+    }
+
+    /**
+     * 'Type-casting' a Date to a LocalDate.
+     *
+     * @param date Date to be 'type-casted'.
+     * @return LocalDate that has been 'type-casted' from Date.
+     */
+    private LocalDate convertDateToLocalDate(Date date) {
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    /**
+     * 'Type-casting' a LocalDate to a Date.
+     *
+     * @param localDate LocalDate to be 'type-casted'.
+     * @return Date that has been 'type-casted' from LocalDate.
+     */
+    private Date convertLocalDateToDate(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
     }
 
 }

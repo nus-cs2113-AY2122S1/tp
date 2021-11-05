@@ -49,7 +49,7 @@ public class AddParser extends Parser {
     public static Command parseAddHabitCommand(String commandInstruction) throws HaBitParserException {
         checkNoDescription(commandInstruction);
         String[] parameters = splitInput(commandInstruction);
-        int goalIndex = getNumber(parameters, FLAG_GOAL_INDEX) - 1;
+        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
         Habit habit = getHabit(commandInstruction);
         return new AddHabitCommand(habit, goalIndex);
     }
