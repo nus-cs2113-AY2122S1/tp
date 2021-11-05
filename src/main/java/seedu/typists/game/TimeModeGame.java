@@ -1,7 +1,7 @@
 package seedu.typists.game;
 
-import seedu.typists.exception.ExceedRangeException;
-import seedu.typists.exception.InvalidCommandException;
+import seedu.typists.common.exception.ExceedRangeException;
+import seedu.typists.common.exception.InvalidCommandException;
 
 import java.util.ArrayList;
 import java.util.HashMap;

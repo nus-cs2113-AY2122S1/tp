@@ -1,8 +1,8 @@
 package seedu.typists.game;
 
-import seedu.typists.exception.ExceedRangeException;
-import seedu.typists.exception.InvalidCommandException;
-import seedu.typists.exception.InvalidStringInputException;
+import seedu.typists.common.exception.ExceedRangeException;
+import seedu.typists.common.exception.InvalidCommandException;
+import seedu.typists.common.exception.InvalidStringInputException;
 import seedu.typists.ui.TextUi;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 import static seedu.typists.common.Utils.getDisplayLinesWithoutNull;
 import static seedu.typists.common.Utils.getWordLineFromStringArray;
-import static seedu.typists.parser.StringParser.splitString;
+import static seedu.typists.common.StringParser.splitString;
 
 public class WordLimitGame extends Game {
     private ArrayList<String> eachWord;

@@ -40,7 +40,8 @@ The other core components of Typist:
 * `command`: Consists of `CommandFactory` which parses user inputs, and various `command` objects.
 * `common`: A collection of classes used by multiple other components.
 * `content`: holds the content and logic for `content` command
-* `exception`: holds the 
+* `game`: game, game summary and game record executor.
+* 
 
 
 ## Implementation
