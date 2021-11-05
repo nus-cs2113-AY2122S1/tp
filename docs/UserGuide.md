@@ -656,19 +656,20 @@ Modules:
 
 ## Command summary
 
-| Command                                                                                | Purpose                                          |
-| :------------------------------------------------------------------------------------- | :----------------------------------------------- |
-| `add        task   [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}`        | To add a task                                    |
-| `add        lesson [TITLE] -d [DAY_OF] -s [START_TIME] -e [END_TIME] -l {MEETING_URL}` | To add a lesson                                  |
-| `add        module [MODULE_CODE]`                                                      | To add a module                                  |
-| `list       task {PERIOD/PRIORITY}`                                                    | To list all tasks                                |
-| `list       lesson {PERIOD}`                                                           | To list all lessons                              |
-| `list       module {verbose}`                                                            | To list all modules                              |
-| `delete     task [INDEX]`                                                              | To delete a task                                 |
-| `delete     lesson [INDEX]`                                                            | To delete a lesson                               |
-| `delete     module [MODULE_CODE]`                                                      | To delete a module                               |
-| `done       task [INDEX]`                                                              | To mark a task as done                           |
-| `find       [task/lesson] [KEYWORD]`                                                   | To find tasks/lessons with the specified keyword |
-| `moduleinfo [MODULE_CODE]`                                                             | To display module details                        |
-| `set        grade [MODULE_CODE] [GRADE]`                                               | To set the grade for a particular module         |
-| `exit`                                                                                 | To exit the program                              |
+| Command                                                                                                                  | Purpose                                          |
+| :----------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------- |
+| [`add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}`](#adding-a-task-lesson-or-module---add)          | To add a task                                    |
+| [`add lesson [TITLE] -d [DAY_OF] -s [START_TIME] -e [END_TIME] -l {MEETING_URL}`](#adding-a-task-lesson-or-module---add) | To add a lesson                                  |
+| [`add module [MODULE_CODE]`](#adding-a-task-lesson-or-module---add)                                                      | To add a module                                  |
+| [`list task {PERIOD/PRIORITY}`](#listing-tasks-lessons-or-modules---list)                                                | To list all tasks                                |
+| [`list lesson {PERIOD}`](#listing-tasks-lessons-or-modules---list)                                                       | To list all lessons                              |
+| [`list module`](#listing-tasks-lessons-or-modules---list)                                                                | To list all modules                              |
+| [`delete task [INDEX]`](#deleting-tasks-lessons-or-modules---delete)                                                     | To delete a task                                 |
+| [`delete lesson [INDEX]`](#deleting-tasks-lessons-or-modules---delete)                                                   | To delete a lesson                               |
+| [`delete module [MODULE_CODE]`](#deleting-tasks-lessons-or-modules---delete)                                             | To delete a module                               |
+| [`done task [INDEX]`](#marking-a-task-as-done---done)                                                                    | To mark a task as done                           |
+| [`find [task/lesson] [KEYWORD]`](#finding-tasks-or-lessons-by-keyword---find-tasklesson)                                 | To find tasks/lessons with the specified keyword |
+| [`find module [MODULE_CODE] {verbose}`](#retrieving-module-information---find-module)                                    | To display module details                        |
+| [`set grade [MODULE_CODE] [GRADE]`](#setting-module-grade---set-grade)                                                   | To set the grade for a particular module         |
+| [`launch lesson [INDEX]`](#launching-lesson-url---launch-lesson)                                                         | To launch a meeting URL                          |
+| [`exit`](#exiting-the-program---exit)                                                                                    | To exit the program                              |
