@@ -1,6 +1,13 @@
 # Developer Guide
 * [Acknowledgements](#acknowledgements)
 * [Design](#design)
+  * [Architecture](#architecture)
+  * [Ui Component](#ui-component)
+  * [Parser Component](#parser-component)
+  * [Command Component](#command-component)
+  * [ClassList Component](#classlist-component)
+  * [Util Component](#util-component)
+  * [Storage Component](#storage-component)
 * [Implementation](#implementation)
   * [Add Class](#add-class)
   * [Add Student](#add-student)
@@ -44,14 +51,61 @@ The _Architecture Diagram_ shown above illustrates the high-level design of the 
 <br>
 
 **Interaction between components**
-![ArchitectureSequenceDiagram](diagrams/ArchitectureSequenceDiagram.png)
+![ArchitectureSequenceDiagram](diagrams/sequence/ArchitectureSequenceDiagram.png)
 
-The _Architecture Sequence Diagram_ shown above shows how the components usually interact with each other. 
+The _Architecture Sequence Diagram_ shown above shows how the components usually interact with each other.
+
+### Ui Component
+![UiClassDiagram](diagrams/class/UiClassDiagram.png)
+
+The `Ui` class handles all user interactions in the application.
+
+`Ui` implements the following functionalities:
+* Print messages with a standard output format.
+* Print exception messages with a standard output format.
+* Read user input through the `getUserInput` method.
+
+### Parser Component
+![ParserClassDiagram](diagrams/class/ParserClassDiagram.png)
+
+The `Parser` class provides methods to parse a user input and return a `Command` object which represents the command that
+the user wishes to execute, and verify the validity of a value or provided by the user or read from `Storage`.
+
+`Parser` implements the following functionalities:
+* Parse a user input string and returning the respective `Command` object.
+* Check if a value is valid (e.g. Does not contain any illegal characters).
+
+### Command Component
+![CommandClassDiagram](diagrams/class/CommandClassDiagram.png)
+
+The `Command` class is an _abstract_ class inherited by other `Command` classes such as `AddClassCommand`, `EditClassCommand`,
+`DeleteClassCommand`, `HelpCommand`, etc.
+
+`Command` implements the following functionalities:
+* Check the validity of arguments provided by the user through the `checkArgument` method.
+* Perform the logic of the command run by the user through the `execute` method.
+
+### ClassList Component
+TODO
+
+### Util Component
+TODO
+
+### Storage Component
+![StorageClassDiagram](diagrams/class/StorageClassDiagram.png)
+
+The `Storage` class handles all data file operations in the application. It depends on the `ClassListDeserializer` to
+deserialize the data read from the JSON file.
+
+`Storage` implements the following functionalities:
+* Save `ClassList` into a JSON file.
+* Read and parse JSON file into a `ClassList` object.
+* Filter out invalid data read from the JSON file.
 
 ## Implementation
 ### Add Class
 The sequence diagram shown below illustrates how the `add_class` command works:
-![AddClassSequenceDiagram](diagrams/AddClassSequenceDiagram.png)
+![AddClassSequenceDiagram](diagrams/sequence/AddClassSequenceDiagram.png)
 
 Below is an example scenario of how the add class feature behaves at each step:<br>
 * Step 1 - The user executes `add_class i/CS2113T-F12 n/Tutorial Group F12` to add a class. The `add_class` command calls the
@@ -67,7 +121,7 @@ within `ClassList`.
 
 ### Add Student
 The sequence diagram shown below illustrates how the `add_student` command works:
-![AddStudentSequenceDiagram](diagrams/AddStudentSequenceDiagram.png)
+![AddStudentSequenceDiagram](diagrams/sequence/AddStudentSequenceDiagram.png)
 
 Below is an example scenario of how the add student feature behaves at each step:<br>
 * Step 1 - The user executes `add_student c/CS2113T i/a0217978j n/jonny` to add a student. The `add_student` command 
@@ -81,7 +135,7 @@ object into the `students` ArrayList within `StudentList`.
 
 ### Add Assessment
 The sequence diagram shown below illustrates how the `add_assessment` command works:
-![AddAssessmentSequenceDiagram](diagrams/AddAssessmentSequenceDiagram.png)
+![AddAssessmentSequenceDiagram](diagrams/sequence/AddAssessmentSequenceDiagram.png)
 
 Below is an example scenario of how the add assessment feature behaves at each step:
 * Step 1 - The user executes `add_assessment c/cs2113t n/midterms m/20 w/10` to add an assessment. The `add_assessment`
@@ -104,7 +158,7 @@ Below is an example scenario of how the add assessment feature behaves at each s
 
 ### Set Marks
 The sequence diagram shown below illustrates how the `set_mark` command works:
-![SetMarkSequenceDiagram](diagrams/SetMarkSequenceDiagram.png)
+![SetMarkSequenceDiagram](diagrams/sequence/SetMarkSequenceDiagram.png)
 
 Steps:
 1. The `Taa` instance reads in a user input through the `Ui.getUserInput()` method.
@@ -125,7 +179,7 @@ student's `results` HashMap.
 
 ### Set Attendance
 The sequence diagram shown below illustrates how the `set_attendance` command works:
-![SetAttendanceSequenceDiagram](diagrams/SetAttendanceSequenceDiagram.png)
+![SetAttendanceSequenceDiagram](diagrams/sequence/SetAttendanceSequenceDiagram.png)
 
 Below is an example scenario of how the set attendance feature behaves at each step:
 * Step 1 - The user executes `set_attendance c/CS2113T s/1 l/1 p/1` to set an attendance to `Present` for student at 
