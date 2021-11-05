@@ -13,7 +13,12 @@ public class DishParser {
                 MainUI.printWrongCommandMessage();
                 return false;
             }
-            Double.parseDouble(command[2]);
+            double dishPrice = Double.parseDouble(command[2]);
+            boolean negativePrice = dishPrice < 1;
+            if (negativePrice) {
+                DishUI.printInvalidPriceMessage();
+                return false;
+            }
         } catch (ArrayIndexOutOfBoundsException e) {
             MainUI.printWrongCommandMessage();
             return false;
@@ -24,9 +29,20 @@ public class DishParser {
         return true;
     }
 
+    public boolean duplicateDishChecker(String dishName, Menu menu){
+        for (int i = 0; i < menu.menu.size(); i++) {
+            if (menu.menu.get(i).getName().equals(dishName)) {
+                DishUI.printDuplicateDishMessage();
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void addDish(String[] command, Menu menu) {
         boolean isValidAddDishCommand = addDishCommandChecker(command);
-        if (isValidAddDishCommand) {
+        boolean noDuplicateDishes = !duplicateDishChecker(command[1], menu);
+        if (isValidAddDishCommand && noDuplicateDishes) {
             double dishPrice = Double.parseDouble(command[2]);
             Dish newDish = new Dish(command[1], dishPrice);
             menu.menu.add(newDish);
@@ -85,6 +101,9 @@ public class DishParser {
         }
         try {
             Double.parseDouble(command[2]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            MainUI.printWrongCommandMessage();
+            return false;
         } catch (NumberFormatException e) {
             DishUI.printInvalidPriceMessage();
             return false;
@@ -121,6 +140,9 @@ public class DishParser {
         }
         try {
             Double.parseDouble(command[2]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            MainUI.printWrongCommandMessage();
+            return false;
         } catch (NumberFormatException e) {
             DishUI.printInvalidDiscountMessage();
             return false;

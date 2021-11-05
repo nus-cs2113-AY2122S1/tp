@@ -58,6 +58,13 @@ public class DishUI {
         MainUI.printSingleLine();
     }
 
+    public static void printDuplicateDishMessage() {
+        MainUI.printSingleLine();
+        System.out.println(" The dish that you entered is already in the menu!");
+        System.out.println(" Please try again :)");
+        MainUI.printSingleLine();
+    }
+
     public static void printInvalidIndexMessage() {
         MainUI.printSingleLine();
         System.out.println(" You have entered an invalid index number!");

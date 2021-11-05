@@ -14,6 +14,10 @@ public class Dish {
         this.discount = 100;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public double getPrice() {
         return this.price;
     }
@@ -33,7 +37,8 @@ public class Dish {
     public double getDiscountedPrice() {
         double discountMultiplier = 1 - getDiscount() / 100;
         double discountedPrice = getPrice() * discountMultiplier;
-        return discountedPrice;
+        double roundedDiscountedPrice = Math.round(discountedPrice * 100.0) / 100.0;
+        return roundedDiscountedPrice;
     }
 
     public String getDiscountedPriceString() {
