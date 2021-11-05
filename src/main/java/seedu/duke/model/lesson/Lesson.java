@@ -9,6 +9,7 @@ import seedu.duke.commons.core.DayOfTheWeek;
 import seedu.duke.DukeException;
 import seedu.duke.commons.core.Message;
 import seedu.duke.commons.util.TimeUtil;
+import seedu.duke.logic.parser.exceptions.ParseException;
 import seedu.duke.model.lesson.exceptions.EmptyLinkException;
 import seedu.duke.ui.Ui;
 
@@ -16,6 +17,9 @@ import static seedu.duke.commons.util.LinkUtil.formatLink;
 import static seedu.duke.commons.util.LinkUtil.launchUrlOnLinux;
 import static seedu.duke.commons.util.LinkUtil.launchUrlOnMac;
 import static seedu.duke.commons.util.LinkUtil.launchUrlOnWindows;
+import static seedu.duke.logic.parser.ParserUtil.parseTitle;
+import static seedu.duke.logic.parser.ParserUtil.parseDayOfTheWeek;
+import static seedu.duke.logic.parser.ParserUtil.parseTime;
 
 //@@author Roycius
 public class Lesson {
@@ -102,19 +106,13 @@ public class Lesson {
     public static Lesson deserialize(Ui ui, String line) {
         try {
             String[] params = line.split("\\s*[|]\\s*");
-
-            String title = params[0];
-            String dayOfTheWeek = DayOfTheWeek.toProper(params[1]);
-
-            String startTime = LocalTime.parse(TimeUtil.parseTwelveHourTime(params[2]))
-                    .format(DateTimeFormatter.ofPattern("hh:mm a"));
-
-            String endTime = LocalTime.parse(TimeUtil.parseTwelveHourTime(params[3]))
-                    .format(DateTimeFormatter.ofPattern("hh:mm a"));
-
+            String title = parseTitle(params[0]);
+            String dayOfTheWeek = parseDayOfTheWeek(params[1]);
+            String startTime = parseTime(params[2]);
+            String endTime = parseTime(params[3]);
             String meetingUrl = params[4];
             return new Lesson(title, dayOfTheWeek, startTime, endTime, meetingUrl);
-        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException | DukeException e) {
+        } catch (ParseException e) {
             // Ignoring the particular line
             ui.printMessage(Message.ERROR_DESERIALIZING_LESSON);
             return null;

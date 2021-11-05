@@ -60,33 +60,27 @@ public class ParserUtil {
     }
 
     public static String parseTime(String param) throws ParseException {
-        String time;
         try {
-            time = LocalTime.parse(param.strip()).format(DateTimeFormatter.ofPattern("hh:mm a"));
+            return LocalTime.parse(param.strip()).format(DateTimeFormatter.ofPattern("HH:mm"));
         } catch (DateTimeParseException e) {
             throw new ParseException(Message.ERROR_INVALID_TIME_FORMAT);
         }
-        return time;
     }
 
     public static String parseDayOfTheWeek(String param) throws ParseException {
-        String dayOfTheWeek;
         try {
-            dayOfTheWeek = DayOfTheWeek.toProper(param.strip());
+            return DayOfTheWeek.toProper(param.strip());
         } catch (DayOfTheWeekException e) {
             throw new ParseException(e.getMessage());
         }
-        return dayOfTheWeek;
     }
 
     public static String parsePriority(String param) throws ParseException {
-        String priority;
         try {
-            priority = Priority.toProper(param.strip());
+            return Priority.toProper(param.strip());
         } catch (PriorityException e) {
             throw new ParseException(e.getMessage());
         }
-        return priority;
     }
 
     /**

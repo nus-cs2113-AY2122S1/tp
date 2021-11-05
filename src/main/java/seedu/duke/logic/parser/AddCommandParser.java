@@ -69,6 +69,7 @@ public class AddCommandParser {
         if (!flagMap.containsKey(DAY_FLAG) || !flagMap.containsKey(START_FLAG) || !flagMap.containsKey(END_FLAG)) {
             throw new ParseException(Message.ERROR_MISSING_FLAGS);
         }
+
         String title = parseTitle(params[0]);
         String dayOfTheWeek = parseDayOfTheWeek(flagMap.get(DAY_FLAG));
         String startTime = parseTime(flagMap.get(START_FLAG));
