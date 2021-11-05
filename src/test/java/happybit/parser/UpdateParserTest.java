@@ -112,13 +112,13 @@ class UpdateParserTest {
         try {
             UpdateParser.parseUpdateGoalCommands(inputChangeHabitNameCommand);
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_CHANGE_HABIT_NAME_WITH_UPDATE_COMMAND ,e.getMessage());
+            assertEquals(ERROR_CHANGE_HABIT_NAME_WITH_UPDATE_COMMAND, e.getMessage());
         }
 
         try {
             UpdateParser.parseUpdateGoalCommands(inputChangeHabitIntervalCommand);
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_CHANGE_HABIT_INTERVAL_WITH_UPDATE_COMMAND ,e.getMessage());
+            assertEquals(ERROR_CHANGE_HABIT_INTERVAL_WITH_UPDATE_COMMAND, e.getMessage());
         }
 
         try {
@@ -171,13 +171,13 @@ class UpdateParserTest {
         try {
             UpdateParser.parseUpdateHabitCommands(inputUpdateGoalNameCommand);
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_UPDATE_GOAL_NAME_WITH_CHANGE_COMMAND ,e.getMessage());
+            assertEquals(ERROR_UPDATE_GOAL_NAME_WITH_CHANGE_COMMAND, e.getMessage());
         }
 
         try {
             UpdateParser.parseUpdateHabitCommands(inputUpdateGoalEndDateCommand);
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_UPDATE_GOAL_END_DATE_WITH_CHANGE_COMMAND ,e.getMessage());
+            assertEquals(ERROR_UPDATE_GOAL_END_DATE_WITH_CHANGE_COMMAND, e.getMessage());
         }
 
         try {
