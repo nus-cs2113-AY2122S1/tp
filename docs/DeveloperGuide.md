@@ -251,7 +251,7 @@ The following diagram shows the interaction of the `storage` class with the othe
 <br>How the `storage` component behaves is as follows:  
 
 **Upon startup:**
-* Duke calls `initialiseFile()` to try to get the `.order.txt` file, which is done in `getOrdersFile()` method. In the case when the file is not found, a new `.orders.txt` file would be created.
+* Duke calls `initialiseFile()` to try to get the `.order.txt` file, which is done in `getOrdersFile()` method. In the case where the file is not found, a new `.orders.txt` file would be created.
 * The content of the files are then checked line by line, to make sure it is of a valid format which includes: 
   * Valid name, valid quantity and valid array size of orders.
 * If all lines satisfy the expected format,`executeLoad()` is called to load the contents of the file by formatting each line into a valid `add` command and then executing it by calling `executeFromFile()` in the `AddCommand` class. 
