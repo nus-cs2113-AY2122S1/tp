@@ -3,14 +3,15 @@ layout: page
 title: User Guide
 ---
 
-## Introduction
+## Purpose of this User Guide 
 
-SEPlanner is a lightweight desktop application for Computer Engineering undergraduates from the National University of Singapore 
-to plan for their Student Exchange Program, optimised for use via Command Line Interface (CLI). If you are familiar with command line, 
-SEPlanner can streamline your planning process when compared to other Graphical User Interface (GUI) apps.
+This User Guide is an introduction to the features, commands and tips of SEPlanner. If you are first time user, 
+or you simply wish to explore SEPlanner to its fullest potential, this is the page for you. Use the [Content Page](#Content-Page) 
+to easily access the different sections of this guide, and we hope you have a pleasant experience.
 
 ## Content Page
-* [Program run through](#program-run-through)
+* [Introduction](#Introduction)
+* [Program overview](#program-overview)
 * [Quick Start](#quick-start)  
 * [How to use this guide](#How-to-use-this-guide)
 * [Features](#features)  
@@ -35,7 +36,13 @@ SEPlanner can streamline your planning process when compared to other Graphical 
 * [Command Summary](#command-summary)
 * [Glossary](#glossary)
 
-## Program run through
+## Introduction
+
+SEPlanner is a lightweight **desktop application** for Computer Engineering undergraduates from the National University of Singapore
+to plan for their **Student Exchange Program**, optimised for use via **Command Line Interface** (CLI). If you are familiar with command line,
+SEPlanner can streamline your planning process when compared to other Graphical User Interface (GUI) apps.
+
+## Program overview
 
 This SEPlanner allows the user to search for pre-approved module mappings through our platform. To do so, users can follow the following steps:
 1. Add partner universities the user is interested in.
