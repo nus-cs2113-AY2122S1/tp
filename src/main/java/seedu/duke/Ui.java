@@ -79,11 +79,6 @@ public class Ui {
         System.out.println("    " + errorMessage);
     }
 
-    public static void printFindMemberErrorMessage(String errorMessage) {
-        System.out.println("Error when finding member:");
-        System.out.println("    " + errorMessage);
-    }
-
     public static void printDeleteMemberErrorMessage(String errorMessage, MemberList members, String name) {
         System.out.println(errorMessage);
         if (members.getMemberListSize() > 0) {
@@ -92,6 +87,11 @@ public class Ui {
                 System.out.println(member.toString());
             }
         }
+    }
+
+    public static void printFindMemberErrorMessage(String errorMessage) {
+        System.out.println("Error when finding member:");
+        System.out.println("    " + errorMessage);
     }
 
     public static void printCreateMemberErrorMessage(String errorMessage) {
