@@ -4,12 +4,25 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import seedu.duke.Ui;
 import seedu.duke.attendance.Attendance;
 import seedu.duke.attendance.AttendanceList;
+import seedu.duke.command.exception.InvalidAddAttendanceException;
+import seedu.duke.command.exception.InvalidAddMemberException;
 
 public class AttendanceStorage {
+
+    static String duplicateAttendanceErrorExcelMessage = "Duplicates name found in one of the attendance CSV files."
+            + "Please fix this before running the program again.";
+    static String invalidAttendanceNameErrorExcelMessage = "Invalid name found in one of the attendance CSV files."
+            + "Please fix this before running the program again.";
+    static String invalidAttendanceStatusEntry = "Invalid name found in one of the attendance CSV files"
+            + "Please fix this before running the program again.";
 
     /**
      * Searches the current directory for a folder named DukeAttendance. If the folder exists, it will load
@@ -23,8 +36,10 @@ public class AttendanceStorage {
             String attendanceFolderPath = currentDir.getCanonicalPath() + "/Attendance";
             File attendanceFolder = new File(attendanceFolderPath);
             if (attendanceFolder.isDirectory()) {
+                System.out.println("CCA Attendance file found & loaded");
                 loadAttendanceFiles(attendanceFolder, attendanceList);
             } else {
+                System.out.println("CCA Attendance file not detected. Creating.");
                 new File(attendanceFolderPath).mkdirs();
             }
         } catch (IOException e) {
@@ -41,7 +56,127 @@ public class AttendanceStorage {
     public static void loadAttendanceFiles(File dukeAttendanceFolder, AttendanceList attendanceList) {
         File[] dukeAttendanceFiles = dukeAttendanceFolder.listFiles();
         for (File file : dukeAttendanceFiles) {
+            verifyIndividualAttendanceFile(file);
             loadIndividualAttendanceFile(file, attendanceList);
+        }
+    }
+
+    /**
+     * Verifies a single CSV file inputs to see if it is valid.
+     *
+     * @param attendanceCsvFile the current CSV file with attendances to be verified.
+     */
+    private static void verifyIndividualAttendanceFile(File attendanceCsvFile) {
+        verifyAttendanceDetailsValid(attendanceCsvFile);
+        verifyNoDuplicates(attendanceCsvFile);
+    }
+
+    /**
+     * Verifies that there are no duplicate names in the current attendance CSV file.
+     *
+     * @param attendanceCsvFile the current CSV file with attendances to be verified.
+     */
+    private static void verifyNoDuplicates(File attendanceCsvFile) {
+        String attendanceName;
+        List<String> pendingAttendanceName = new ArrayList<String>();
+        try {
+            Scanner attendanceScanner = new Scanner(attendanceCsvFile);
+            attendanceScanner.nextLine();
+            while (attendanceScanner.hasNextLine()) {
+                String fullAttendanceDetails = attendanceScanner.nextLine();
+                String[] attendanceDetails = fullAttendanceDetails.split("\\,", 2);
+                attendanceName = attendanceDetails[0];
+                pendingAttendanceName.add(attendanceName);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found!");
+        } catch (NoSuchElementException e) {
+            Ui.printEmptyTrainingFile();
+        }
+        try {
+            checkDuplicates(pendingAttendanceName);
+        } catch (InvalidAddAttendanceException e) {
+            System.out.println(e.getMessage());
+            System.exit(0);
+        }
+    }
+
+    /**
+     * Checks for any duplicates in the list.
+     *
+     * @param pendingList current list of Strings to check.
+     * @throws InvalidAddMemberException if there are any duplicates.
+     */
+    private static void checkDuplicates(List<String> pendingList) throws InvalidAddAttendanceException {
+        for (int i = 0; i < pendingList.size(); i++) {
+            for (int j = i + 1; j < pendingList.size(); j++) {
+                if (pendingList.get(i).equals(pendingList.get(j))) {
+                    throw new InvalidAddAttendanceException(duplicateAttendanceErrorExcelMessage);
+                }
+            }
+        }
+    }
+
+    /**
+     * Verifies that all entries in CSV file is valid.
+     *
+     * @param attendanceCsvFile the current CSV file with attendances to be verified.
+     */
+    private static void verifyAttendanceDetailsValid(File attendanceCsvFile) {
+        String name;
+        String attendanceStatus;
+        try {
+            Scanner attendanceScanner = new Scanner(attendanceCsvFile);
+            attendanceScanner.nextLine();
+            while (attendanceScanner.hasNextLine()) {
+                String fullAttendanceDetails = attendanceScanner.nextLine();
+                String[] attendanceDetails = fullAttendanceDetails.split("\\,", 2);
+                name = attendanceDetails[0];
+                verifyMemberName(name);
+                attendanceStatus = attendanceDetails[1];
+                verifyAttendanceStatus(attendanceStatus);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found!");
+        } catch (NoSuchElementException e) {
+            Ui.printEmptyMembersFile();
+        } catch (InvalidAddAttendanceException e) {
+            System.out.println(e.getMessage());
+            System.exit(0);
+        }
+    }
+
+    /**
+     * Checks if attendance status is valid.
+     *
+     * @param attendanceStatus should be either 1 or 0.
+     */
+    private static void verifyAttendanceStatus(String attendanceStatus) throws InvalidAddAttendanceException {
+        int attendanceIntegerValue;
+        try {
+            attendanceIntegerValue = Integer.parseInt(attendanceStatus);
+            boolean validAttendanceStatus = (attendanceIntegerValue == 1 || attendanceIntegerValue == 0);
+            if (!validAttendanceStatus) {
+                throw new InvalidAddAttendanceException(invalidAttendanceStatusEntry);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println(invalidAttendanceStatusEntry);
+            System.exit(0);
+        }
+    }
+
+    /**
+     * Checks if member name is valid.
+     *
+     * @param name the member name to be checked.
+     * @throws InvalidAddMemberException when member name is invalid.
+     */
+    private static void verifyMemberName(String name) throws InvalidAddAttendanceException {
+        boolean nameEmpty = (name == null || name.trim().isEmpty());
+        boolean nameContainDigits = name.matches(".*\\d.*");
+        boolean validName = !nameEmpty && !nameContainDigits;
+        if (!validName) {
+            throw new InvalidAddAttendanceException(invalidAttendanceNameErrorExcelMessage);
         }
     }
 
@@ -186,14 +321,13 @@ public class AttendanceStorage {
      * @param index          index of attendance.
      */
     public static void deleteAttendance(AttendanceList attendanceList, String trainingName, int index) {
-        System.out.println("trying to delete");
-        System.out.println(trainingName);
-        System.out.println(index);
+        assert index >= 1;
         int count = 1;
         for (int i = 1; i <= attendanceList.getAttendanceListSize(); i++) {
             if (attendanceList.getAttendanceTrainingName(i).equals(trainingName)) {
                 if (count == index) {
-                    attendanceList.deleteAttendance(i);
+                    Attendance toDelete = attendanceList.deleteAttendance(i);
+                    Ui.printDeletedAttendanceMessage(toDelete);
                     break;
                 } else {
                     count++;
@@ -206,7 +340,7 @@ public class AttendanceStorage {
      * Rewrites the entire CSV file after an attendance with the corresponding training name is deleted.
      *
      * @param attendanceList the current attendance list.
-     * @param trainingName name of training.
+     * @param trainingName   name of training.
      */
     public static void handleDeleteAttendanceCsv(AttendanceList attendanceList, String trainingName) {
         File currentDir = new File("");

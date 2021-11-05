@@ -1,9 +1,10 @@
+//@@author Teckwhye
+
 package seedu.duke.command;
 
 import static seedu.duke.storage.MemberStorage.writeMemberFile;
 
 import java.io.File;
-
 import seedu.duke.Ui;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
@@ -21,12 +22,13 @@ public class DeleteMember {
      * @param parameter Index of Member object to delete. Note that the actual index is index -1.
      */
     public DeleteMember(MemberList members, Object parameter) {
-        if (parameter instanceof Integer && !(parameter instanceof String)) {
+        if (parameter instanceof Integer) {
             deleteMemberByIndex(members, (Integer) parameter);
-        } else if (parameter instanceof String && !(parameter instanceof Integer)) {
+        } else if (parameter instanceof String) {
             deleteMemberByString(members, (String) parameter);
         } else {
-            System.out.println("Error in processing parameter, please input either name or index of member to delete.");
+            Ui.printDeleteMemberErrorMessage(
+                    "Error in processing parameter, please input either name or index of member to delete.");
         }
     }
 
@@ -37,10 +39,10 @@ public class DeleteMember {
             Ui.printDeletedMemberMessage(toDelete);
             File dukeMemberFile = new File("CCAMembers.csv");
             writeMemberFile(dukeMemberFile, members);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("please input a valid member index or member name");
-        } catch (AssertionError e) {
-            System.out.println("please input a valid member index or member name");
+        } catch (IndexOutOfBoundsException | AssertionError e) {
+            Ui.printDeleteMemberErrorMessage("Please input a valid member index or member name.");
+        } catch (InvalidMemberException e) {
+            Ui.printDeleteMemberErrorMessage(e.getMessage());
         }
     }
 
@@ -54,7 +56,8 @@ public class DeleteMember {
         } catch (InvalidMemberException e) {
             Ui.printDeleteMemberErrorMessage(e.getMessage(), e.getMembers(), name);
         } catch (AssertionError e) {
-            System.out.println("please input a valid member index or member name");
+            Ui.printDeleteMemberErrorMessage("Please input a valid member index or member name.");
         }
     }
 }
+//@@author

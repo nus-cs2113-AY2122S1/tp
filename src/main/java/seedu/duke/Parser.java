@@ -4,11 +4,11 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import seedu.duke.attendance.Attendance;
 import seedu.duke.attendance.AttendanceList;
+import seedu.duke.exception.InvalidCommandException;
 import seedu.duke.member.Member;
-import seedu.duke.training.TrainingList;
+import seedu.duke.member.exception.InvalidMemberException;
 import seedu.duke.training.TrainingSchedule;
 
 public class Parser {
@@ -48,7 +48,7 @@ public class Parser {
     }
 
     public static boolean hasDeleteAttendanceKeyword(String arg) {
-        return arg.trim().toLowerCase().contains("delete /att");
+        return arg.trim().toLowerCase().contains("delete /att /t");
     }
 
     public static boolean hasFindMemberKeyword(String arg) {
@@ -69,22 +69,6 @@ public class Parser {
 
     public static boolean hasExitKeyword(String arg) {
         return arg.trim().toLowerCase().contains("bye");
-    }
-
-    public static boolean isValidPhone(String phone) {
-        if (phone.contains("[a-zA-Z]+")) {
-            return false;
-        } else {
-            return phone.length() == 8;
-        }
-    }
-
-    public static boolean isValidGender(String gender) {
-        return (gender.toLowerCase().matches("m") ||  gender.toLowerCase().matches("f"));
-    }
-
-    public static boolean isValidName(String name) {
-        return !name.matches(".*\\d.*");
     }
 
     /**
@@ -146,8 +130,8 @@ public class Parser {
     }
 
     /**
-     * This function gets the filtered attendance list, requested by the user after the 'list /att /t' command
-     * is called.
+     * This function gets the filtered attendance list, requested by the user after the 'list /att /t' command is
+     * called.
      *
      * @param attendanceList full list of attendance sheet.
      * @param entry          user raw data input.
@@ -176,7 +160,10 @@ public class Parser {
     }
 
     /**
-     * Returns the description of the task only, without the date or the keyword.
+     * Returns the description of the task only, without the date or the keyword. If any fields is empty "", an
+     * exception will be thrown at AddTraining or EditTraining. Users should only key in one of each field, /n /a /v, in
+     * the input. Additional inputs to the same field will set the field to "", causing an exception to be thrown at
+     * AddTraining or EditTraining.
      *
      * @param entry user raw data input.
      * @return description of task.
@@ -184,6 +171,9 @@ public class Parser {
     public static TrainingSchedule getTrainingDescription(String entry) {
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         Matcher matcher = pattern.matcher(entry);
+        boolean matchedName = false;
+        boolean matchedTime = false;
+        boolean matchedVenue = false;
 
         String[] words = entry.trim().split(regex);
         int parameterSize = words.length;
@@ -200,13 +190,28 @@ public class Parser {
             }
             switch (matcher.group()) {
             case "/n":
-                name = words[wordIndex].trim().toUpperCase();
+                if (!matchedName) {
+                    name = words[wordIndex].trim().toUpperCase();
+                    matchedName = true;
+                } else {
+                    name = "";
+                }
                 break;
             case "/a":
-                time = words[wordIndex].trim().toUpperCase();
+                if (!matchedTime) {
+                    time = words[wordIndex].trim().toUpperCase();
+                    matchedTime = true;
+                } else {
+                    time = "";
+                }
                 break;
             case "/v":
-                venue = words[wordIndex].trim().toUpperCase(Locale.ROOT);
+                if (!matchedVenue) {
+                    venue = words[wordIndex].trim().toUpperCase();
+                    matchedVenue = true;
+                } else {
+                    venue = "";
+                }
                 break;
             default:
                 break;
@@ -221,46 +226,73 @@ public class Parser {
     /**
      * Creates Member class by input given by user.
      *
-     * @param entry user raw data input.
+     * @param entry   user raw data input.
+     * @param keyword provide keyword for command
      * @return Member according to user input.
      */
-    public static Member getMemberDetails(String entry) {
+    public static Member getMemberDetails(String entry, Keyword keyword) {
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
         Matcher matcher = pattern.matcher(entry);
 
         String[] words = entry.trim().split(regex);
-        int parameterSize = words.length;
         String name = "";
         String studentNumber = "";
         String gender = "";
         String phoneNumber = "";
 
+        Member memberdetails = null;
         int wordIndex = 1;
-        while (matcher.find()) {
-            boolean overParameterSize = wordIndex >= parameterSize;
-            if (overParameterSize) {
-                break;
+        try {
+            while (matcher.find()) {
+                switch (matcher.group()) {
+                case "/n":
+                    name = words[wordIndex].trim().toUpperCase(Locale.ROOT);
+                    if (name.equals("")) {
+                        throw new InvalidCommandException("Please do not give empty name.");
+                    }
+                    break;
+                case "/s":
+                    studentNumber = words[wordIndex].trim().toUpperCase(Locale.ROOT);
+                    if (studentNumber.equals("")) {
+                        throw new InvalidCommandException("Please do not give empty student number.");
+                    }
+                    break;
+                case "/g":
+                    gender = words[wordIndex].trim().toUpperCase(Locale.ROOT);
+                    if (gender.equals("")) {
+                        throw new InvalidCommandException("Please do not give empty gender.");
+                    }
+                    break;
+                case "/p":
+                    phoneNumber = words[wordIndex].trim();
+                    if (phoneNumber.equals("")) {
+                        throw new InvalidCommandException("Please do not give empty phone number.");
+                    }
+                    break;
+                case "/m":
+                    break;
+                default:
+                    throw new InvalidCommandException("Wrong parameter is given.");
+                }
+                wordIndex++;
             }
-            switch (matcher.group()) {
-            case "/n":
-                name = words[wordIndex].trim();
-                break;
-            case "/s":
-                studentNumber = words[wordIndex].trim();
-                break;
-            case "/g":
-                gender = words[wordIndex].trim();
-                break;
-            case "/p":
-                phoneNumber = words[wordIndex].trim();
-                break;
-            default:
-                break;
+            boolean noParameterProvided = wordIndex <= 2;
+            if (noParameterProvided) {
+                throw new InvalidCommandException("No parameter is given.");
             }
-            wordIndex++;
+            if (keyword.equals(Keyword.ADD_MEMBER_KEYWORD)) {
+                memberdetails = new Member(name, studentNumber, gender, phoneNumber, true);
+            } else if (keyword.equals(Keyword.EDIT_MEMBER_KEYWORD)) {
+                memberdetails = new Member(name, studentNumber, gender, phoneNumber, false);
+            }
+        } catch (InvalidCommandException e) {
+            Ui.printCommandErrorMessage(e.getMessage(), keyword);
+        } catch (InvalidMemberException e) {
+            Ui.printCreateMemberErrorMessage(e.getMessage());
+        } catch (IndexOutOfBoundsException e) {
+            Ui.printCommandErrorMessage("Nothing is given after last parameter.", keyword);
         }
-
-        return new Member(name, studentNumber, gender, phoneNumber);
+        return memberdetails;
     }
 
     /**
@@ -347,11 +379,16 @@ public class Parser {
      * @return int Index that is in entry.
      */
     public static Integer getIndex(String entry) {
-        String[] words = entry.trim().split(regex);
-        int indexNumber = Integer.parseInt(words[1].trim());
-        assert indexNumber >= 1 : "indexNumber should be greater than 1.";
-        return indexNumber;
+        try {
+            String[] words = entry.trim().split(regex);
+            int indexNumber = Integer.parseInt(words[1].trim());
+            assert indexNumber >= 1 : "indexNumber should be greater than 1.";
+            return indexNumber;
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
     }
+    //@@author
 
     /**
      * Returns parameter as given by user.

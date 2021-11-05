@@ -1,6 +1,7 @@
 # Developer Guide
 
 * [Introduction](#introduction)
+* [Acknowledgements](#acknowledgements)
 * [Setting Up](#setting-up)
 * [Design](#design)
   * [Architecture](#architecture)
@@ -20,13 +21,23 @@
   
 ## Introduction
 
-**CCA Manager** is a simple and easy to use command-line based application aimed to assist you, a CCA manager, to easily add, delete or alter information about your CCA members. 
-Moreover, **CCA Manager** also allows you to perform its functions on any training-related activities you may have in order to help you organise your CCA's timetable.
+CCA Manager is a **simple and easy to use** organisational planner for CCAs (Co-Curricular Activities) in NUS. It is 
+designed specifically for students who are key appointment holders of such CCAs. Features include **storing and tracking
+of information** on CCA members, training schedules and attendance records which can be accessed quickly via a Command
+Line Interface (CLI). CCA Manager aims to **centralise and optimize** all CCA-related information, so that you can focus on
+improving other aspects of the CCA.
 
 **CCA Manager** is written in `Java 11` and designed with OOP (Object Oriented Programming) as a guideline to help design a modular and organized structure for the application.
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
 
+## Acknowledgements
+* SE-EDU
+  1. [AB3 Developer Guide Format](https://se-education.org/addressbook-level3/DeveloperGuide.html)
+  2. [AB3 User Guide Format](https://se-education.org/addressbook-level3/UserGuide.html)
+  3. [AB3 Appendix: Requirements](https://se-education.org/addressbook-level3/DeveloperGuide.html#appendix-requirements)
+  4. [AB2 Code Basics](https://github.com/se-edu/addressbook-level2)
+* [PlantUML](https://plantuml.com/)
 
 ## Setting Up
 
@@ -101,6 +112,7 @@ The `Ui` component handles the **output display** of **CCA Manager**. Whenever t
 
 ### Parser Component
 ![Parser Object Diagram](images/ParserObjectDiagram.png)
+
 **API** : [Parser](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/src/main/java/seedu/duke/Parser.java)
 
 The `Parser` component handles the **input parsing** of **CCA Manager**. User input is parsed to produce a `keyword` and corresponding inputs, such as `index` , `name`, etc. are identified.
@@ -115,6 +127,7 @@ A `keyword` is an identifier used by **CCA Manager** to determine what operation
 
 ### Entry Component
 ![Entry Object Diagram](images/EntryObjectDiagram.png)
+
 **API** : [Entry](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/src/main/java/seedu/duke/Entry.java)
 
 The `Entry` component performs a `command` based on the `keyword` given. If the user enters an invalid command, for example, the `Entry` component will direct the `Ui` component
@@ -123,6 +136,7 @@ to print an error message. It uses a simple `switch-case` statement to handle th
 
 ### Command Component
 ![Command Object Diagram](images/CommandObjectDiagram.png)
+
 **API** : [Command](https://github.com/AY2122S1-CS2113T-F12-4/tp/tree/master/src/main/java/seedu/duke/command)
 
 The `Command` component directly interacts with the `Member`, `Training` or `Attendance` component based on the `keyword` given in order to perform a specific operation.
@@ -141,7 +155,7 @@ The `Command` component directly interacts with the `Member`, `Training` or `Att
 * Finding a specific `TrainingSchedule` in `TrainingList`
   * `Search by index` and `Search by training name` is supported.
 
-
+<!-- @@author Teckwhye -->
 ### Member Component
 ![Member Component Diagram](images/MemberComponent.png)
 
@@ -149,10 +163,11 @@ The `Command` component directly interacts with the `Member`, `Training` or `Att
 
 
 The `Member` component,
-* instantiates an `MemberList` object comprising of 0 `Member` object.
+* instantiates an `MemberList` object comprising 0 `Member` objects.
 * stores inputted `Member` objects in a list as an `ArrayList<Member>` in `MemberList` class.
 * stores the `MemberList` object in a csv file with the help of `MemberStorage`.
 
+ <!-- @@author -->
 
 ### Training Component
 ![Training Component](images/TrainingComponent.png)
@@ -206,7 +221,7 @@ The `training schedule` component
 
 ## Restrictions
 # IMPORTANT!
-One restriction of the current implementation (`v2.0`) of **CCAManager** is that the user input cannot contain any commas.
+One restriction of the current implementation (`v2.1`) of **CCAManager** is that the user input cannot contain any commas.
 
 This is because data is saved in a `.csv` file, which uses commas as field delimiters. Hence, if user input were to contain commas, this may cause data to be imported inaccurately during the loading of existing files at start-up.
 

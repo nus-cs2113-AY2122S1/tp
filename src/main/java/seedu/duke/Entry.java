@@ -14,9 +14,9 @@ import seedu.duke.command.FindMember;
 import seedu.duke.command.FindTraining;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
-import seedu.duke.storage.TrainingStorage;
-import seedu.duke.storage.MemberStorage;
 import seedu.duke.storage.AttendanceStorage;
+import seedu.duke.storage.MemberStorage;
+import seedu.duke.storage.TrainingStorage;
 import seedu.duke.training.TrainingList;
 import seedu.duke.training.TrainingSchedule;
 
@@ -31,8 +31,8 @@ public class Entry {
      */
     public static void initializeFiles() {
         MemberStorage.setupMemberFile(members);
-        AttendanceStorage.setUpAttendanceStorage(attendanceList);
         TrainingStorage.setupTrainingFile(trainings);
+        AttendanceStorage.setUpAttendanceStorage(attendanceList);
     }
 
     /**
@@ -61,7 +61,7 @@ public class Entry {
                 Parser.askToListAll(attendanceList);
                 break;
             case ADD_MEMBER_KEYWORD:
-                Member member = Parser.getMemberDetails(entry);
+                Member member = Parser.getMemberDetails(entry, keyword);
                 new AddMember(members, member);
                 break;
             case ADD_TRAINING_KEYWORD:
@@ -82,7 +82,12 @@ public class Entry {
                 new DeleteTraining(trainings, parameter);
                 break;
             case DELETE_ATTENDANCE_KEYWORD:
-                attendanceIndex = Parser.getAttendanceIndex(entry);
+                try {
+                    attendanceIndex = Parser.getAttendanceIndex(entry);
+                } catch (NumberFormatException e) {
+                    System.out.println("Please key in a valid number!");
+                    break;
+                }
                 String trainingName = Parser.getAttendanceTrainingName(entry);
                 new DeleteAttendance(attendanceList, trainingName, attendanceIndex);
                 break;
@@ -97,7 +102,7 @@ public class Entry {
             case EDIT_TRAINING_KEYWORD:
                 try {
                     trainingIndex = Parser.getIndex(entry);
-                } catch (NumberFormatException e) {
+                } catch (NumberFormatException | NullPointerException e) {
                     Ui.printValidNumberNeeded();
                     break;
                 }
@@ -107,11 +112,11 @@ public class Entry {
             case EDIT_MEMBER_KEYWORD:
                 try {
                     memberIndex = Parser.getIndex(entry);
-                } catch (NumberFormatException e) {
+                } catch (NumberFormatException | NullPointerException e) {
                     Ui.printValidNumberNeeded();
                     break;
                 }
-                Member newMemberDetail = Parser.getMemberDetails(entry);
+                Member newMemberDetail = Parser.getMemberDetails(entry, keyword);
                 new EditMember(members, memberIndex, newMemberDetail);
                 break;
             case NO_KEYWORD:

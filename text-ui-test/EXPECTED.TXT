@@ -1,7 +1,6 @@
-Member file not detected. Creating.
-attendance file does not exists
-attendance file created
-Training file not detected. Creating.
+CCA Members file not detected. Creating.
+CCA Training file not detected. Creating.
+CCA Attendance file not detected. Creating.
 Welcome to
  ,-----. ,-----.  ,---.      ,--.   ,--.  ,---.  ,--.  ,--.  ,---.   ,----.   ,------.,------.
 '  .--./'  .--./ /  O  \     |   `.'   | /  O  \ |  ,'.|  | /  O  \ '  .-./   |  .---'|  .--. '

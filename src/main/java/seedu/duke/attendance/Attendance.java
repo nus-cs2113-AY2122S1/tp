@@ -21,6 +21,28 @@ public class Attendance {
         this.attended = attended;
     }
 
+    public Attendance(Attendance attendance) {
+        setMemberName(attendance.memberName);
+        setTrainingName(attendance.trainingName);
+        setAttended(attendance.attended);
+    }
+
+    public void setMemberName(String name) {
+        this.memberName = name;
+    }
+
+    public void setTrainingName(String name) {
+        this.trainingName = name;
+    }
+
+    public void setAttended(String name) {
+        this.attended = name;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
     public String getTrainingName() {
         return trainingName;
     }
