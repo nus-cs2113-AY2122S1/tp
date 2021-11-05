@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+skinparam rectangle {
+        BackgroundColor<<PLACEHOLDER>> transparent
+        BorderThickness<<PLACEHOLDER>> .1
+        BorderColor<<PLACEHOLDER>> transparent
+              FontColor<<PLACEHOLDER>> transparent
+               FontSize<<PLACEHOLDER>> 0
+    StereotypeFontColor<<PLACEHOLDER>> transparent
+     StereotypeFontSize<<PLACEHOLDER>> 0
+Shadowing<<PLACEHOLDER>> false
+}
+
+rectangle a <<PLACEHOLDER>> {
+}
+
+
+frame Online {
+
+Component [NusMods] ONLINE_COLOR
+[Logic]-->[NusMods] 
+
+}
+
+frame Logic {
+}
+
+frame UI {
+}
+
+frame Storage {
+}
+
+[NusMods] --> UI
+
+[NusMods] --> Storage
+
+
+@enduml

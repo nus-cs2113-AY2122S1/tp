@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+skinparam rectangle {
+        BackgroundColor<<PLACEHOLDER>> transparent
+        BorderThickness<<PLACEHOLDER>> .1
+        BorderColor<<PLACEHOLDER>> transparent
+              FontColor<<PLACEHOLDER>> transparent
+               FontSize<<PLACEHOLDER>> 0
+    StereotypeFontColor<<PLACEHOLDER>> transparent
+     StereotypeFontSize<<PLACEHOLDER>> 0
+Shadowing<<PLACEHOLDER>> false
+}
+
+rectangle a <<PLACEHOLDER>> {
+}
+
+
+frame Storage {
+
+Component [ModStorage] STORAGE_COLOR
+Component [ProfileStorage] STORAGE_COLOR
+Component [TimetableStorage] STORAGE_COLOR
+
+[TimetableStorage] --> Timetable
+[TimetableStorage] --> UI
+[ModStorage] --> UI
+Online --> [ModStorage]
+
+[ModStorage] -[hidden]down- [TimetableStorage]
+}
+
+frame Timetable {
+}
+
+frame UI {
+}
+
+frame Online {
+}
+
+@enduml

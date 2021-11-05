@@ -86,6 +86,8 @@ The rest of the App consists of five components:
 ### UI component
 The **UI** component consists of the `AddUI`, `TextUi`, `TimetableUI` and `TranscriptUi` components.
 
+![UIComponent](./uml-diagrams/UIComponent.png)
+
 > The `TextUi` component is the most general purpose component and is called from `Logic`, `Storage` and `Online`.
 > 
 > The `AddUI` component is called only from `Logic`, specifically by the `AddCommand`.
@@ -116,6 +118,7 @@ Consists of the `CommandParser` and `FlagParser` classes.
 
 ### Online component
 The **Online** component consists of only `NusMods`.
+![OnlineComponent](./uml-diagrams/OnlineComponent.png)
 > Attempts to retrieve module information from NUSMods API using the `NusMods` component and prints it using the `UI`
 > component.
 > 
@@ -130,6 +133,7 @@ The **Online** component consists of only `NusMods`.
 ### Storage component
 The **Storage** component consists of the `ModStorage`, `ProfileStorage` and `TimetableStorage` components. Much like
 their names suggest, they handle the storage of Mods, Profiles and Timetables respectively.
+![StorageComponent](./uml-diagrams/StorageComponent.png)
 > `ModStorage` is primarily called by the `Online` component when there is a lack of internet connectivity. It is also
 > called through `Logic` manually by the user executing a `SearchCommand` with a quick flag.
 > 
@@ -151,7 +155,7 @@ Since the json format utilized by the API contains nested objects, the final imp
 emulates that of the json, with each `Module` containing an `Attributes` object and an array of `Semester` objects, 
 `Semester` containing an array of `Lesson` objects, and  `Lesson` containing an array of `Weeks` objects.
 
-![](resources/ModulesClassDiagram.png)
+![FetchModuleDiagram](resources/ModulesClassDiagram.png)
 
 #### Parsing and Saving of Weeks via Gson
 Gson was unable to parse the weeks key as provided by the NUSMods API as the value expected for the key can be of two different data types.
@@ -204,7 +208,7 @@ private Weeks weeks
 By utilizing a TypeAdapter for Weeks in Lessons, a  custom deserialization method for Gson to use for this specific key 
 was implemented.
 
-![](uml-diagrams/WeeksRead.png)
+![WeeksReadDiagram](uml-diagrams/WeeksRead.png)
 
 Using `peek()`, Gson checks if *weeks* is an array or an object. From there it utilizes the deserialization method for 
 the specific data type. The key difference is that while *weeks* can be an array in the json, when deserialized it is 
@@ -212,7 +216,7 @@ always an object that contains three variables, *weeks*, *start* and *end*. If i
 array be written into the *weeks* array in the object itself, and *start* and *end* will be null. If it was an object, 
 then *start* and *end* will be written, but *weeks* will be null.
 
-![](uml-diagrams/WeeksWrite.png)
+![WeeksWriteDiagram](uml-diagrams/WeeksWrite.png)
 
 Similarly for saving weeks for the `Timetable` json, a custom serialization method is used that checks which specific 
 data type to serialize it as. If *weeks* is not null, then Gson writes it as an array despite it being an object. 
@@ -236,11 +240,11 @@ The following implemented functions are utilized heavily:
 
 #### Search
 
-![](uml-diagrams/Search.png)
+![SearchDiagram](uml-diagrams/Search.png)
 
 *Fetch, Save and Load Mod*
 
-![](uml-diagrams/SearchRef.png)
+![SearchReferenceDiagram](uml-diagrams/SearchRef.png)
 
 Utilizes `getOnlineModList()` to get all mods from online. If the module code contains the search term or matches the 
 level flag if inputted, `getOnlineModInfo()` is used to fetch the full data for further comparison with the remaining 
@@ -250,7 +254,7 @@ If the module matches the search term and all flags, then it is printed. If eith
 
 #### Show
 
-![](uml-diagrams/Show.png)
+![ShowCommandDiagram](uml-diagrams/Show.png)
 
 Similar to search, except it directly uses `getOnlineModInfo()` instead. If the module exists, then it will be printed. 
 Again, `saveModInfo()` is always used after fetching a json to keep the local database as up to date as possible. 
@@ -258,7 +262,7 @@ If `getOnlineModInfo()` fails at the start, then `loadModInfo()` will execute in
 
 #### Update
 
-![](uml-diagrams/Update.png)
+![UpdateCommandDiagram](uml-diagrams/Update.png)
 
 Fetches the json from all mods in the NUSMods database. Utilizes `getOnlineModList()` to get all mods from online. 
 `getOnlineModInfo()` and `saveModInfo()` is run for every mod in the list to update all mods in the local database.
