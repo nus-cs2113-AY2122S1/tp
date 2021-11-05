@@ -10,6 +10,7 @@ participant "ClientPackageList" as ClientPackageList
 -> Parser: execute "find -f SQ-JPN"
 activate Parser
 Parser -> Parser : parseFind("-f SQ-JPN")
+activate Parser
 
 create FFC
 Parser -> FFC
@@ -26,8 +27,10 @@ ClientPackageList --> FFC : passengers
 deactivate ClientPackageList
 
 FFC --> Parser
+deactivate Parser
 deactivate FFC
 <-- Parser
+deactivate Parser
 destroy FFC
 
 @enduml
