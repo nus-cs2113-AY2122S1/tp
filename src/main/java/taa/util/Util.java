@@ -1,6 +1,7 @@
 package taa.util;
 
 //@@author leyondlee
+
 import taa.exception.FileCreationException;
 
 import java.io.File;
@@ -80,7 +81,7 @@ public class Util {
     }
 
     /**
-     * Creates a file and parent directories (if necessary).
+     * Creates a file and parent directories (if necessary). This method has no effect if the file already exists.
      *
      * @param filename The file to create.
      * @throws FileCreationException if fail to create file.

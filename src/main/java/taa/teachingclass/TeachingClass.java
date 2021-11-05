@@ -1,6 +1,7 @@
 package taa.teachingclass;
 
 //@@author leyondlee
+
 import taa.ClassChecker;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
@@ -108,6 +109,12 @@ public class TeachingClass implements ClassChecker {
         return true;
     }
 
+    /**
+     * Checks if the ID is valid. ID is valid if it is not empty and does not contain any spaces.
+     *
+     * @param id The ID to check.
+     * @return true if ID is valid, else false.
+     */
     public static boolean isValidId(String id) {
         return !id.isEmpty() && !id.contains(" ");
     }
