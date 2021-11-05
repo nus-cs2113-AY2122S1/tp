@@ -29,9 +29,9 @@ public class RemoveCommand extends Command {
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
         try {
-            String[] argList = args.split(" ");
+            String[] argList = args.split(" ", 2);
             if (argList.length == 2) {
-                Item removed = catalogue.removeItem(argList[1]);
+                Item removed = catalogue.removeItem(argList[1].strip());
                 assert removed != null : "Removed item returns null";
                 ui.print(RM_SUCCESS, removed);
             } else {
