@@ -12,13 +12,13 @@ public class ModuleMapping {
 
     //@@author madhanse
     /**
-     * Checks if two module mapping objects are equal
-     * @param searchMapping Module mapping to check
-     * @return True if equal. Otherwise, false
+     * Checks if two module mapping objects are equal.
+     * @param searchMapping Module mapping to check.
+     * @return True if equal. Otherwise, false.
      */
     public boolean isEqual(ModuleMapping searchMapping) {
-        return getLocalModule().IsEqual(searchMapping.localModule)
-                && getMappedModule().IsEqual(searchMapping.mappedModule);
+        return getLocalModule().isEqual(searchMapping.localModule)
+                && getMappedModule().isEqual(searchMapping.mappedModule);
     }
 
     public Module getLocalModule() {

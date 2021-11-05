@@ -72,12 +72,13 @@ public class ModuleList {
      */
     public boolean isModuleExist(Module searchModule) {
         for (Module module : list) {
-            if (module.IsEqual(searchModule)) {
+            if (module.isEqual(searchModule)) {
                 return true;
             }
         }
         return false;
     }
+
 
     /**
      * Finds the module object with the specified module code from the list.
