@@ -1,6 +1,7 @@
 
 # Developer Guide
 * [Acknowledgements](#acknowledgements)
+* [Setting Up, getting started](#setting-up-getting-started)
 * [Design](#design)
   * [Architecture](#architecture)
 * [Implementation](#implementation)
@@ -15,7 +16,7 @@
 * https://www.baeldung.com/java-testing-system-out-println
 * https://github.com/fastily/jwiki
 
-
+## Setting Up, getting started
 
 
 ## Design

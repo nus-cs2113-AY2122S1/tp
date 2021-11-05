@@ -115,6 +115,7 @@ and terminates the game at the same time.
 >**NOTE**: 
 > The time limit that user inputs needs to be a positive integer that represents time in seconds. 
 > It also needs to be multiple of 30. 
+
 * Format: `game -time [TIME_LIMIT] [-c] [-sn]`
 * Example: `game -time`  
 * ```
@@ -124,12 +125,19 @@ and terminates the game at the same time.
      | Timer will start once you entered "start":
   start
      | Lorem Ipsum is simply dummy text of the printing and
+  Lorem Ipsum is simply dummy text of the printing and
+     | Timer's Up!
   ```
+
+    **Exceeding Time:**  
+    When you are at the last sentence. Even though Timer is up, the game will wait
+    until you finish the last sentence to terminate. You will be informed of the exceeding time,
+    and it will count towards your game summary.
 
 #### Optional arguments
 * SET_CONTENT `-c`: allows user to set input content before game starts.
 * START_NOW `-sn`: allows timer to start immediately without the "start timer" prompt.
-* GAME_LIMIT: integer that sets the word/time limit of the game 
+* GAME_LIMIT: a positive integer that sets the word/time limit of the game 
  without the "enter limit" prompt.
   > **NOTE**:
   > if you want to specify GAME_LIMIT, it needs to be right after the GAME_MODE argument.
