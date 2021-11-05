@@ -9,7 +9,7 @@ Below is a guide on how you can get started using our program to start **"Schedu
 - [1. Quick Start](#1-quick-start)
 - [2. Features](#2-features)
     - [2.1 Viewing help: `help`](#21-viewing-help--help)
-    - [2.2 Adding your task:](#22-adding-your-task)
+    - [2.2 Adding your tasks:](#22-adding-your-tasks)
       - [2.2.1 Todo: `todo`](#221-todo-todo)
       - [2.2.2 Deadline: `deadline`](#222-deadline-deadline)
       - [2.2.3 Event: `event`](#223-event-event)
@@ -65,7 +65,9 @@ Displays all commands available for the SchedUrMods application.
 
 **Format**: `help`
 
-### 2.2 Adding your task:
+<p>&nbsp;</p>
+
+### 2.2 Adding your tasks:
 
 > #### 📝 **Some notes when adding tasks**:
 > - All commands are case-insensitive. For example, `todo` is the same as `Todo` or `TODO`
@@ -183,11 +185,15 @@ The accepted date formats in our program:
 - `15:30` translates to `Your current year, month and day at 3.30pm`.
 - `15 12:30` translates to `Your current year and month on the 15th at 12.30pm`.
 
+<p>&nbsp;</p>
+
 ### 2.3 Adding your NUS timetable:
 
 #### 2.3.1 Module: `module`
 
 #### 2.3.2 Browse: `browse`
+
+<p>&nbsp;</p>
 
 ### 2.4 Listing your tasks: `list`
 
@@ -288,6 +294,8 @@ Displays the next 4 recurrences of a task.
 
 >💡 **Note**: To obtain the correct task id of each task, please use the `list` command without any filters.
 
+<p>&nbsp;</p>
+
 ### 2.5 Sorting your task list: `sort`
 Sorts your task list by a given criteria.
 
@@ -320,9 +328,15 @@ Sorts your task list by a given criteria.
 || 7. [E] movie screening <low> {daily} (startDate: 05-11-2021 04:00 - endDate: 05-11-2021 05:00)
 ```
 
+<p>&nbsp;</p>
+
 ### 2.6 Setting reminders to your tasks: `reminder`
 
+<p>&nbsp;</p>
+
 ### 2.7 Editing your tasks: `edit`
+
+<p>&nbsp;</p>
 
 ### 2.8 Deleting your tasks: `delete`
 Deletes tasks specified in comma-seperated argument.
@@ -383,6 +397,8 @@ Index should be specified in either,
 -------------------------------------------------------------------------
 ```
 
+<p>&nbsp;</p>
+
 ### 2.9 Exiting the program: `bye`
 Displays goodbye message and exits the program.
 
@@ -398,6 +414,8 @@ An end-of-file condition in the input, such as <kbd>Ctrl-D</kbd> on Bash, has th
 || Exiting program!
 -------------------------------------------------------------------------
 ```
+
+<p>&nbsp;</p>
 
 ### 2.10 Storage
 The program will store and automatically update your Tasks in the the file `./data/task.dat` on any change in your Task list.  
