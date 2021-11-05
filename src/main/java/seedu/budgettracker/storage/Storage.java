@@ -92,7 +92,7 @@ public class Storage {
                 isValidName = true;
             }
 
-            if (dataBaseFileName.split("\\.")[1].equals("csv")) {
+            if (!(dataBaseFileName.split("\\.")[1].equals("txt"))) {
                 isValidFileType = false;
             }
 
