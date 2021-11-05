@@ -132,14 +132,14 @@ The diagram below shows the process of parsing the user's input.
 ![Add Contact Parsing](images/AddContactParsingSequenceDiagram.png)
 
 Upon parsing the user's input, the details are passed to an `AddContactCommand`, and this command will be 
-executed in `Duke`. The sequence diagram below illustrates the process of executing `AddContactCommand`.
+executed in `ConTech`. The sequence diagram below illustrates the process of executing `AddContactCommand`.
 
 ![Add Sequence Diagram](images/AddContactCommandSequenceDiagram.png)
 
 ### <a name="View"></a>Viewing a contact: `view`
 This feature is processed using `ViewContactCommand`. Whenever a user wants to view a specific contact from the 
 contact list, user can input `view [INDEX]` with the index of the desired contact displayed from the `list` feature. 
-`ViewContactCommand` is then created in the `MainParser` and executed in `Duke`.
+`ViewContactCommand` is then created in the `MainParser` and executed in `ConTech`.
 The sequence diagram below illustrates the `execute()` function in `ViewContactCommand`.
 
 ![View Sequence Diagram](images/ViewContactCommandSequenceDiagram.png)
@@ -150,14 +150,14 @@ a user must enter a command in the form `edit [CONTACT INDEX] [DETAILS WITH FLAG
 specified in the form `-<flag> <detail>` with up to 6 details i.e. `-g github-username -tw twitter_handle`. The user 
 input will be parsed by `EditContactParser` methods `getIndexToStore` and `parseContactDetails` to obtain a String 
 array with the details to be edited. An `EditContactCommand` with the specified parameters will then be created and 
-executed in `Duke`. The sequence diagram below shows how the whole process is carried out.
+executed in `ConTech`. The sequence diagram below shows how the whole process is carried out.
 
 ![Edit Sequence Diagram](images/EditContactCommandSequenceDiagram.png)
 
 
 ### <a name="Delete"></a>Deleting contacts: `rm`
 This feature is processed using the `DeleteContactCommand`. `DeleteContactCommand` is created 
-in the `MainParser`and executed in`Duke`. Users can either delete a specified contact
+in the `MainParser`and executed in`ConTech`. Users can either delete a specified contact
 or delete all contacts at once.
 
 ![Delete Sequence Diagram](images/DeleteContactCommandSequenceDiagram.png)
@@ -192,7 +192,7 @@ This feature is processed using `SearchContactParser` under `MainParser`. In ord
 a user must enter a command in the form `search [FLAG] [SEARCH QUERY]`. If no flag is specified, the search will be done
 on contact names buy default. From the user input, the search query and the search flag are obtained from the 
 `parseSearchQuery` and the `getDetailFlag` methods respectively. A `SearchContactCommand` with the specified parameters
-will be created and executed in `Duke`. The sequence diagram below shows how the whole process is carried out.
+will be created and executed in `ConTech`. The sequence diagram below shows how the whole process is carried out.
 
 ![Search Sequence Diagram](images/SearchContactCommandSequenceDiagram.png)
 
