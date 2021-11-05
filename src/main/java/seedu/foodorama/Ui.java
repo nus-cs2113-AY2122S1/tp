@@ -724,7 +724,7 @@ public class Ui {
             if (j % 2 == 0) {
                 System.out.print("   ");
             } else {
-                System.out.print(" " + (char)(j / 2 + 65) + " ");
+                System.out.print(" " + (char) (j / 2 + 65) + " ");
             }
         } else {
             System.out.print("   ");
