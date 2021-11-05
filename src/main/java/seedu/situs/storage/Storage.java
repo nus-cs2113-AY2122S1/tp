@@ -79,7 +79,7 @@ public class Storage {
 
                 if (!isValidIngredientLine(memoryContent)) {
                     System.out.println("Wrong ingredient format found in line " + lineCounter
-                            + " of ingredients.txt\n"+ INGREDIENT_DATA_CORRUPTED_MESSAGE);
+                            + " of ingredients.txt\n" + INGREDIENT_DATA_CORRUPTED_MESSAGE);
                     continue;
                 }
 
