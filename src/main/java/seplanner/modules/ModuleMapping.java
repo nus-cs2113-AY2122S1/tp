@@ -25,16 +25,8 @@ public class ModuleMapping {
         return localModule;
     }
 
-    public void setLocalModule(Module localModule) {
-        this.localModule = localModule;
-    }
-
     public Module getMappedModule() {
         return mappedModule;
-    }
-
-    public void setMappedModule(Module mappedModule) {
-        this.mappedModule = mappedModule;
     }
 
 }

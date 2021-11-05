@@ -38,10 +38,6 @@ public class University implements Comparator<University> {
         list.remove(moduleMapping);
     }
 
-    public void clearMappings() {
-        list = new ArrayList<>();
-    }
-
     public void listAllMappings() {
         for (int i = 0; i < list.size(); i++) {
             ModuleMapping currentMapping = list.get(i);
@@ -74,18 +70,6 @@ public class University implements Comparator<University> {
     //@@author Ma Zijian
     public int getSelectedMappingListSize(ModuleList selectedModuleList) {
         return getSelectedMappings(selectedModuleList).size();
-    }
-
-    public ModuleMapping getMapping(Module selectedLocalModule, ModuleList selectedModuleList) {
-        ModuleMapping selectedMapping = null;
-        for (int i = 0; i < list.size(); i++) {
-            ModuleMapping currentMapping = list.get(i);
-            if (currentMapping.localModule.getModuleCode()
-                    .equals(selectedLocalModule.getModuleCode())) {
-                selectedMapping = currentMapping;
-            }
-        }
-        return selectedMapping;
     }
 
     public int getMappingListSize() {

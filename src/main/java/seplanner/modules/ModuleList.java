@@ -29,10 +29,6 @@ public class ModuleList {
         }
     }
 
-    public void removeModule(int index) {
-        list.remove(index);
-    }
-
     public int getSize() {
         return list.size();
     }
@@ -79,9 +75,9 @@ public class ModuleList {
     }
 
     public Module getModule(String moduleCode) {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).moduleCode.equals(moduleCode)) {
-                return list.get(i);
+        for (Module module : list) {
+            if (module.moduleCode.equals(moduleCode)) {
+                return module;
             }
         }
         return null;
@@ -91,12 +87,4 @@ public class ModuleList {
         return list;
     }
 
-    public void listModules() {
-        assert list.size() != 0;
-        for (int i = 0; i < list.size(); i++) {
-            Module curr = list.get(i);
-            String output = (i + 1) + ". " + curr.moduleName;
-            System.out.println(output);
-        }
-    }
 }

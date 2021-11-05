@@ -43,8 +43,8 @@ public class Module implements Comparator<Module> {
 
     /**
      * Returns the index of the module with respect to the master list.
-     * @param moduleMasterList The master list.
-     * @return The index of the module.
+     * @param moduleMasterList The module master list.
+     * @return The master list index of the module.
      */
     public int getMasterListIndex(ModuleList moduleMasterList) {
         for (int i = 0; i < moduleMasterList.getSize(); i++) {
@@ -65,18 +65,6 @@ public class Module implements Comparator<Module> {
         return (getModuleCode().equals(searchModule.getModuleCode()))
                 && (getModuleName().equals(searchModule.getModuleName()))
                 && (getModuleCredits() == searchModule.getModuleCredits());
-    }
-
-    public void setModuleCode(String moduleCode) {
-        this.moduleCode = moduleCode;
-    }
-
-    public void setModuleName(String moduleName) {
-        this.moduleName = moduleName;
-    }
-
-    public void setModuleCredits(int moduleCredits) {
-        this.moduleCredits = moduleCredits;
     }
 
     //@@author madhanse
