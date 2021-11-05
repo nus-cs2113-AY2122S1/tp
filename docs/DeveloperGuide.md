@@ -91,27 +91,44 @@ by passing the university to display the message of adding the selected universi
 </p>
 
 
-Step 1. When the beginner user launches the application, to see the list of all universities available for the SEP program, the user executes the `list /muni` command. To see the list of all NUS modules available for the SEP program, the user can execute the `list /mmod` command.
+####AddModCommand
+When the `AddModCommand` method is called in the `AddModCommand` class. It will call the `addModule` method in the `moduleList` class under Model, adding the module in the selected module list. Then it will call the `updateSelectedModuleList` method in the storage class to update the selected list with the new module added. Finally, it will call the `printModule` method in the `UiModule` class to print the message of adding the module to the user.
 
-Step 2. The user then executes the `add /uni Boston University` command and add his preferred university to the selected university list. The other option for the user is to execute the `add /uni 4` command by entering its university master index.
+####AddUniCommand
+When the `AddUniCommand` method is called in the `AddUniCommand` class. It will call `addUniversity` method in the `universityList` class under Model, adding the university in the selected university list. Then it will call the `updateSelectedUniversityList` method in the storage class to update the selected list with the new university added. Finally, it will call the `printUniversity` method in the `UiUniversity` class to print the message of adding the university to the user.
 
-Step 3. The user executes the `add /mod CS1231` command to add his preferred NUS module to the selected module list. The other option for the user is to execute the `add /mod 81` command by entering its module master index.
+####AddMapCommand
+When the `addMapCommand` method is called in the `AddMapCommand` class. It will call the `addMapping` method in the `university` class under Model, adding the mapping under the selected university in the selected university list. Then it will call the `updateSelectedUniversity` method in the storage class to update the selected list with the new mapping added. Finally, it will call the `printUniversity` method in the `UiMapping` class to print the message of adding the mapping to the user.
 
-Step 4. The user executes `list /suni` to see his selected university list. The user executes `list /smod` command to see his selected module list.
+####RemoveModCommand
+When the `RemoveModCommand` method is called in the `RemoveModCommand` class. It will call the `removeModule` method in the `moduleList` class under Model, removing the module in the selected module list. Then it will call the `updateSelectedModuleList` method in the storage class to update the selected list with the module removed. Finally, it will call the `printModule` method in the `UiModule` class to print the message of removing the module to the user.
 
-Step 5. The user executes the `remove /mod CS1231` or `remove /mod 81` command to delete the unwanted module from see his selected module list. The user executes the `remove /uni Boston University` or `remove /uni 4` command to delete the unwanted university from his selected university list.
+####RemoveUniCommand
+When the `RemoveUniCommand` method is called in the `RemoveUniCommand` class. It will call `removeUniversity` method in the `universityList` class under Model, removing the university in the selected university list. Then it will call the `updateSelectedUniversityList` method in the storage class to update the selected list with the university removed. Finally, it will call the `printUniversity` method in the `UiUniversity` class to print the message of removing the university to the user.
 
-Step 6. If the user forgets the master index for a university of a module, he can execute the `find /mod Discrete Structures` or `find /code CS1231` to find the module. The user executes `find /uni Boston University` to find the university.
+####RemoveMapCommand
+When the `RemoveMapCommand` method is called in the `RemoveMapCommand` class. It will call the `removeMapping` method in the `university` class under Model, removing the mapping under the selected university in the selected university list. Then it will call the `updateSelectedUniversity` method in the storage class to update the selected list with the mapping removed. Finally, it will call the `printUniversity` method in the `UiMapping` class to print the message of removing the mapping to the user.
 
-Step 7. The user executes `searchmap 4` command to see the module mapping of all modules in the selected module list in Boston University. The user can execute `searchmap all` to see all modules in the selected module list for all universities in the selected university list.
+####ListModCommand
+When the `ListModCommand` method is called in the `ListModCommand` class. It will call the `getSize()` method in the `moduleList` class to check if the list is empty: if the list is empty, it prints the error message. If the list is not empty, it calls the `printModule` method in the `UiModule` class in a loop to print all modules found.
 
-Step 8. The user executes `add /map 4 1` command to add the first module mapping available under Boston University.
+####ListUniCommand
+When the `ListUniCommand` method is called in the `ListUniCommand` class. It will call the `getSize()` method in the `UniversityList` class to check if the list is empty: if the list is empty, it prints the error message. If the list is not empty, it checks the type of university list chosen. If the master list is chosen, the `printMasterList` method is called, which calls `printUniversity` method in the `UiUniversity` class to print out all universities in the master list. If the selected list is chosen, `printSelectedList` is called, which calls `printUniversity` method in the `UiUniversity` class to print out all universities in the selected list and calls `listAllMappings` method in the `universityList` class to print all module mappings under each university as well.
 
-Step 9. The user executes `remove /map 4 1` command to remove the first mapping allocated to Boston University.
+####FindModCommand
+When the `FindModCommand` method is called in the `FindModCommand` class. It will get the list of module results by searching in the `moduleMasterList`. Then it checks if the result list is empty: if the result list is empty, it calls the `printFindModNull` method in the `UiInvalid` class to print the error message. If the result list is not empty, it calls the `printModule` method in the `UiModule` class in a loop to print all modules found.
 
-Step 10. The user executes `help` command to see the list of commands available for SEPlanner.
+####FindUniCommand
+When the `FindUniCommand` method is called in the `FindUniCommand` class. It will get the list of university results by searching in the `universityMasterList`. Then it checks if the result list is empty: if the result list is empty, it calls the `printFindUniNull` method in the `UiInvalid` class to print the error message. If the result list is not empty, it calls the `printUniversity` method in the `UiUniversity` class in a loop to print all universities found.
 
-Step 11. The user executes `exit` command to terminate the program.
+####SearchMapCommand
+When the `SearchMapCommand` method is called in the `SearchMapCommand` class, it will check if `isAll` is true. If `isAll` is true, the `printMappings` method will be called, which prints all mappings from the selected module list for all universities in the selected university list by calling the `printIndex` method in the Ui class and `listSelectedMappings` method in the University class. If isAll is false, it will call the `printMappings` method to print out only the mappings for the selected university only.
+
+####HelpCommand
+When the `HelpCommand` method is called in the `HelpCommand` class. It will print out all commands available for SEPlanner.
+
+####ExitCommand
+When the `ExitCommand` method is called in the `ExitCommand` class. It will call the `printExit` method in the `UiGeneral` class to exit the program.
 
 ### User Interface
 
@@ -148,8 +165,8 @@ The UiStorage class contains methods to display error messages from the Storage 
 
 The sequence diagram above illustrates how the classes in the Ui package interact when a printUniversity() call is made from outside the package.
 In the printUniversity Method,
-1. printIndex is called from the Ui class.
-2. Within printIndex, we display the index, then do a self invocation on stringPadder within the Ui class to pad the string to line up the text after. 
+1. `printIndex` is called from the Ui class.
+2. Within `printIndex`, we display the index, then do a self invocation on stringPadder within the Ui class to pad the string to line up the text after. 
 3. After printing the index, print the university name, then depending on the boolean printMC, we pad it again with stringPadder before displaying the Module Credits. 
 
 
