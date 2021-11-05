@@ -56,4 +56,25 @@ public class LessonListTest {
     public void deleteLesson_negativeIndex_exceptionThrown() {
         assertThrows(DukeException.class, () -> new LessonList().deleteLesson(-1));
     }
+
+    @Test
+    public void testSortLessons() {
+        // Lessons should be sorted according to timeline by default
+        try {
+            LessonList lessonList = new LessonList();
+            lessonList.addLesson(new Lesson("Lesson 3", "Wednesday", "12:00", "14:00", "-"));
+            lessonList.addLesson(new Lesson("Lesson 5", "Friday", "14:30", "14:00", "-"));
+            lessonList.addLesson(new Lesson("Lesson 1", "Monday", "08:00", "10:00", "-"));
+            lessonList.addLesson(new Lesson("Lesson 2", "Monday", "09:00", "10:00", "-"));
+            lessonList.addLesson(new Lesson("Lesson 4", "Friday", "13:00", "16:00", "-"));
+
+            assertEquals("Lesson 1", lessonList.getLesson(0).getTitle());
+            assertEquals("Lesson 2", lessonList.getLesson(1).getTitle());
+            assertEquals("Lesson 3", lessonList.getLesson(2).getTitle());
+            assertEquals("Lesson 4", lessonList.getLesson(3).getTitle());
+            assertEquals("Lesson 5", lessonList.getLesson(4).getTitle());
+        } catch (DukeException e) {
+            fail(); // The program should never reach this line
+        }
+    }
 }
