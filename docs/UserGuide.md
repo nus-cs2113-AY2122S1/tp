@@ -595,7 +595,7 @@ Interested in what makes Ha(ppy)Bit tick? Visit our [GitHub website](https://git
 to explore and geek out on. What did you say? An explanation for the inner workings? Okay, okay.
 Here is our [Developer Guide](https://ay2122s1-cs2113t-f14-1.github.io/tp/DeveloperGuide.html).
 
-What now? You prefer a **guided walkthrough** because of the digital age and the attention economy today where
+What now? You prefer a ***guided walkthrough*** because of the digital age and the attention economy today where
 corporations bombard your with enticing information to profit of your valuable attention 
 has shortened your attention span tremendously such that you don't have the patience nor focus to sit down and refer
 to our User Guide which we have painstakingly written to be comprehensive for users like you in order to provide a 
