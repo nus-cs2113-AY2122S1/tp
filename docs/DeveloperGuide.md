@@ -147,7 +147,7 @@ The `Command` component directly interacts with the `Member`, `Training` or `Att
 * Finding a specific `TrainingSchedule` in `TrainingList`
   * `Search by index` and `Search by training name` is supported.
 
-
+<!-- @@author Teckwhye -->
 ### Member Component
 ![Member Component Diagram](images/MemberComponent.png)
 
@@ -159,6 +159,7 @@ The `Member` component,
 * stores inputted `Member` objects in a list as an `ArrayList<Member>` in `MemberList` class.
 * stores the `MemberList` object in a csv file with the help of `MemberStorage`.
 
+ <!-- @@author -->
 
 ### Training Component
 ![Training Component](images/TrainingComponent.png)
