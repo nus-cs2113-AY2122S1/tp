@@ -61,25 +61,8 @@ public class AddAssessmentCommand extends Command {
             );
         }
 
-        int maximumMarks = Integer.parseInt(maximumMarksString);
-        if (maximumMarks < Assessment.MINIMUM_MARKS) {
-            throw new TaaException(String.format(
-                MESSAGE_FORMAT_INVALID_MAXIMUM_MARKS,
-                Assessment.MINIMUM_MARKS)
-            );
-        }
-
         String weightageString = argumentMap.get(KEY_WEIGHTAGE);
         if (!Util.isStringDouble(weightageString)) {
-            throw new TaaException(String.format(
-                MESSAGE_FORMAT_INVALID_WEIGHTAGE,
-                Assessment.WEIGHTAGE_RANGE[0],
-                Assessment.WEIGHTAGE_RANGE[1])
-            );
-        }
-
-        double weightage = Double.parseDouble(weightageString);
-        if (!Assessment.isWeightageWithinRange(weightage)) {
             throw new TaaException(String.format(
                 MESSAGE_FORMAT_INVALID_WEIGHTAGE,
                 Assessment.WEIGHTAGE_RANGE[0],
@@ -104,30 +87,9 @@ public class AddAssessmentCommand extends Command {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
-        String maximumMarksString = argumentMap.get(KEY_MAXIMUM_MARKS);
-        assert Util.isStringInteger(maximumMarksString);
-        int maximumMarks = Integer.parseInt(maximumMarksString);
-        assert maximumMarks >= Assessment.MINIMUM_MARKS;
-
+        int maximumMarks = checkAndGetMaximumMarks();
         String name = argumentMap.get(KEY_ASSESSMENT_NAME);
-
-        String weightageString = argumentMap.get(KEY_WEIGHTAGE);
-        assert Util.isStringDouble(weightageString);
-        double weightage = Double.parseDouble(weightageString);
-        assert Assessment.isWeightageWithinRange(weightage);
-        ArrayList<Assessment> assessments = teachingClass.getAssessmentList().getAssessments();
-        double totalWeightage = 0;
-        for (Assessment a : assessments) {
-            if (a.getName().equalsIgnoreCase(name)) {
-                throw new TaaException(MESSAGE_FORMAT_INVALID_NAME);
-            }
-
-            totalWeightage += a.getWeightage();
-        }
-        double newTotalWeightage = totalWeightage + weightage;
-        if (!Assessment.isWeightageWithinRange(newTotalWeightage)) {
-            throw new TaaException(MESSAGE_FORMAT_INVALID_TOTAL_WEIGHTAGE);
-        }
+        double weightage = checkAndGetWeightage(name, teachingClass);
 
         Assessment assessment = new Assessment(name, maximumMarks, weightage);
 
@@ -144,6 +106,46 @@ public class AddAssessmentCommand extends Command {
         assert ui != null : "ui should exist.";
         ui.printMessage(String.format(MESSAGE_FORMAT_ASSESSMENT_ADDED, classId,
             assessment, assessmentList.getSize(), teachingClass));
+    }
+
+    public int checkAndGetMaximumMarks() throws TaaException {
+        String maximumMarksString = argumentMap.get(KEY_MAXIMUM_MARKS);
+        assert Util.isStringInteger(maximumMarksString);
+        int maximumMarks = Integer.parseInt(maximumMarksString);
+        if (maximumMarks < Assessment.MINIMUM_MARKS) {
+            throw new TaaException(String.format(
+                    MESSAGE_FORMAT_INVALID_MAXIMUM_MARKS,
+                    Assessment.MINIMUM_MARKS)
+            );
+        }
+        return maximumMarks;
+    }
+
+    public double checkAndGetWeightage(String name, TeachingClass teachingClass) throws TaaException {
+        String weightageString = argumentMap.get(KEY_WEIGHTAGE);
+        assert Util.isStringDouble(weightageString);
+        double weightage = Double.parseDouble(weightageString);
+        if (!Assessment.isWeightageWithinRange(weightage)) {
+            throw new TaaException(String.format(
+                    MESSAGE_FORMAT_INVALID_WEIGHTAGE,
+                    Assessment.WEIGHTAGE_RANGE[0],
+                    Assessment.WEIGHTAGE_RANGE[1])
+            );
+        }
+        ArrayList<Assessment> assessments = teachingClass.getAssessmentList().getAssessments();
+        double totalWeightage = 0;
+        for (Assessment a : assessments) {
+            if (a.getName().equalsIgnoreCase(name)) {
+                throw new TaaException(MESSAGE_FORMAT_INVALID_NAME);
+            }
+
+            totalWeightage += a.getWeightage();
+        }
+        double newTotalWeightage = totalWeightage + weightage;
+        if (!Assessment.isWeightageWithinRange(newTotalWeightage)) {
+            throw new TaaException(MESSAGE_FORMAT_INVALID_TOTAL_WEIGHTAGE);
+        }
+        return weightage;
     }
 
     @Override

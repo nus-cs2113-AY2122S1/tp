@@ -86,9 +86,9 @@ public class AssessmentList implements ClassChecker {
         return totalWeightage;
     }
 
-    public boolean checkRepeatedName(String newAssessmentName) {
+    public boolean checkRepeatedName(Assessment assessment, String newAssessmentName) {
         for (Assessment a : assessments) {
-            if (a.getName().equalsIgnoreCase(newAssessmentName)) {
+            if (a.getName().equalsIgnoreCase(newAssessmentName) && (a != assessment)) {
                 return false;
             }
         }
