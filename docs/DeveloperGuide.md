@@ -96,10 +96,17 @@ will be referred to later on.
 
 ![Storage Class Diagram](images/StorageClassDiagram.png)
 
-The `Storage` component is responsible for saving both contacts data and personal contact data locally inside the file 
-paths, `data/contacts.txt` and `data/me.txt`. `Storage` is also responsible for loading these data back into their 
-corresponding `ContactList` and `Contact` objects. It is thus dependent on the classes, `ContactList` and 
-`Contact`.
+The `Storage` component consists of the `Storage`, `ContactsDecoder`, and `ContactsEncoder`. This component is 
+responsible for interacting with the user's local storage files. The user's contacts data and personal contact data 
+are stored locally inside the file paths, `data/contacts.txt` and `data/me.txt`.
+
+Firstly, the `Storage` class checks if the user has existing data, or if they are first time users. Next, it will 
+make use of the `ContactsDecoder` class to decode the storage file and load the contacts into the `ContactList` as 
+`Contacts`. After every command execution, to ensure data integrity, the `Contacts` in the `ContactList` will be 
+saved using the `ContactsEncoder` class.
+
+As the `Storage` component is also responsible for loading these data into their corresponding `ContactList` and 
+`Contact` objects, it is dependent on the classes, `ContactList` and `Contact`.
 
 
 ## <a name="implementation"></a>Implementation
