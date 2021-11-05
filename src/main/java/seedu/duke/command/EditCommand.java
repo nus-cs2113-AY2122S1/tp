@@ -47,7 +47,7 @@ public class EditCommand extends Command {
             + "> modifies when Event starts." + NEWLINE
             + FLAG_HEADER + EventFlag.END_DATE + " <" + DateParser.getDefaultDateFormat()
             + "> modifies when Event ends." + NEWLINE
-            + FLAG_HEADER + LessonFlag.LINK + " <link> modifies your Lesson link.";
+            + FLAG_HEADER + LessonFlag.LINK + " <url> modifies your Lesson link.";
 
     /**
      * Constructs the EditCommand with the program {@link #taskManager}
