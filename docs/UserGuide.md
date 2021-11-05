@@ -63,105 +63,122 @@ Command-Line Interface for NUSMODS                               (v2.1.0)
 ### 2.1 Viewing help : `help`
 Displays all commands available for the SchedUrMods application.
 
-**Format:** `help`
+**Format**: `help`
 
 ### 2.2 Adding your task:
 
 > #### 📝 **Some notes when adding tasks**:
 > - All commands are case-insensitive. For example, `todo` is the same as `Todo` or `TODO`
-> - Command arguments within `< >` are mandatory fields and must be followed strictly.
-> - Command arguments within `[ ]` are optional fields and may be arranged in any order or left out.
+> - Command arguments within `< >` are **mandatory** fields and must be followed strictly.
+> - Command arguments within `[ ]` are **optional** fields and may be arranged in any order or left out.
+> - Command arguments such as `<a|b|c>` Means that the argument must **strictly** either be `a`, `b` or `c`. 
+> - If `[--priority <high|medium|low>]` flag is not used, the **default priority** will be set to `medium`. 
+> - If `[--recur <daily|weekly|monthly|yearly>]` flag is not used, the **default recurrence** will be set to `none`. 
 
 ### 2.2.1 Todo: `todo`
-Adds your **todo** task to your task list.
+Adds your **todo** to your task list.
 
-**Format:** `todo <description> [--flag <argument>]`
+**Format**: `todo <description> [--flag <argument>]`
 - `<description>` specifies the description of your todo.
-- `[--flag <argument>]` specifies additional details of your todo.
-  - When your task is to be done: `[--doOn `[`<dateFormat>`](#224-date-format-dateformat)`]`
+- `[--flag <argument>]` specifies optional details of your todo.
+  - When your task is to be done: <code>[--doOn <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a>]</code>
+     >💡 **Note**: if flag is unused, date will be set to the current time rounded up to the nearest hour.
   - The priority of your task: `[--priority high|medium|low]`
   - How often your task is to repeat: `[--recur daily|weekly|monthly|yearly]`
 
-**Example:** `todo read book --priority low --doOn 20-10-2021 02:00:00 --recur daily`
+**Example**: `todo read book --priority low --doOn 20-10-2021 02:00 --recur daily`
 - Adds a todo task with description `read book` to the task list.
 - Specifies the priority to be `low`.
-- Specifies the task is to be done on `20-10-2021 02:00:00`.
+- Specifies the task is to be done on `20-10-2021 02:00`.
 - Specifies the task is to repeat `daily`.
 
-**Expected Outcome:**
+**Expected Outcome**:
 
 ```
 -------------------------------------------------------------------------
-[user]: todo read book --priority low --doOn 20-10-2021 02:00:00 --recur daily
+[user]: todo read book --priority low --doOn 20-10-2021 02:00 --recur daily
 || Task created!
-|| read book [low] (doOn: 20-10-2021 02:00:00)
+|| [T] read book <low> {daily} (doOn: 20-10-2021 02:00)
 -------------------------------------------------------------------------
 ```
 
 ### 2.2.2 Deadline: `deadline`
-Adds your **deadline** task to your task list.
+Adds your **deadline** to your task list.
 
-**Format:** `deadline <description> <--due dd-MM-yyyy hh:mm> [--flag <argument>]`
+**Format**: `deadline <description> <--due dd-MM-yyyy hh:mm> [--flag <argument>]`
 - `<description>` specifies the description of your deadline.
-- `<--due `[`<dateFormat>`](#224-date-format-dateformat)`>` is a mandatory flag.
-- `[--flag <argument>]` specifies additional details of your deadline.
-  - The priority of your task: `[--priority high|medium|low]`
-  - How often your task is to repeat: `[--recur daily|weekly|monthly|yearly]`
+- <code>&lt;--due <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a>&gt;</code> specifies when your deadline is.
+- `[--flag <argument>]` specifies optional details of your deadline.
+  - The priority of your task: `[--priority <high|medium|low>]`
+  - How often your task is to repeat: `[--recur <daily|weekly|monthly|yearly>]`
 
-**Example:** `deadline CS2106 Lab 3 --priority high --due 20-10-2021 02:00:00`
+**Example**: `deadline CS2106 Lab 3 --priority high --due 20-10-2021 02:00`
 - Adds a deadline task with description `CS2106 Lab 3` to the task list.
 - Specifies the priority to be `high`.
-- Specifies the task is to be done on `20-10-2021 02:00:00`.
-- without recurrence.
+- Specifies the task is to be done on `20-10-2021 02:00`.
+- Specifies the task to have no recurrence.
 
-**Expected Outcome:**
+**Expected Outcome**:
 
 ```
 -------------------------------------------------------------------------
-[user]: deadline CS2106 Lab 3 --priority high --due 20-10-2021 02:00:00
+[user]: deadline CS2106 Lab 3 --priority high --due 20-10-2021 02:00
 || Task created!
-|| CS2106 Lab 3 [high] (dueDate: 20-10-2021 02:00:00)
+|| [D] CS2106 Lab 3 <high> {none} (dueDate: 20-10-2021 02:00)
 -------------------------------------------------------------------------
 ```
 
 ### 2.2.3 Event: `event`
-Adds your **event** task to your task list.
+Adds your **event** to your task list.
 
-**Format:** `event <description> <--start dd-MM-yyyy hh:mm> <--end dd-MM-yyyy hh:mm> [--flag <argument>]`
+**Format**: `event <description> <--start dd-MM-yyyy hh:mm> <--end dd-MM-yyyy hh:mm> [--flag <argument>]`
 - `<description>` specifies the description of your event.
-- `<--start `[`<dateFormat>`](#224-date-format-dateformat)`>` and `<--end `[`<dateFormat>`](#224-date-format-dateformat)`>` are mandatory flags.
-- `[--flag <argument>]` specifies additional details of your event.
-  - The priority of your event: `[--priority high|medium|low]`
-  - How often your event is to repeat: `[--recur daily|weekly|monthly|yearly]`
+- <code>&lt;--start <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a>&gt;</code> specifies when your event starts.
+- <code>&lt;--end <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a>&gt;</code> specifies when your event ends.
+- `[--flag <argument>]` specifies optional details of your event.
+  - The priority of your task: `[--priority <high|medium|low>]`
+  - How often your task is to repeat: `[--recur <daily|weekly|monthly|yearly>]`
 
-**Example:** `event Marquee Christmas Party --priority high --start 25-12-2020 22:00:00 --end 26-12-2020 04:00:00`
+**Example**: `event Marquee Christmas Party --priority high --start 25-12-2020 22:00 --end 26-12-2020 04:00`
 - Adds an event task with description `Marquee Christmas Party` to the task list.
 - Specifies the priority to be `high`.
-- Specifies the task to start on `25-12-2020 22:00:00` and end on `26-12-2020 04:00:00`.
+- Specifies the task to start on `25-12-2020 22:00` and end on `26-12-2020 04:00`.
 - with no recurrence.
+
+**Expected Outcome**:
+
+```
+-------------------------------------------------------------------------
+[user]: event Marquee Christmas Party --priority high --start 25-12-2020 22:00 --end 26-12-2020 04:00
+|| Task created!
+|| [E] Marquee Christmas Party <high> {none} (startDate: 25-12-2020 22:00 - endDate: 26-12-2020 04:00)
+-------------------------------------------------------------------------
+```
 
 ### 2.2.4 Date Format: `<dateFormat>`
 The accepted date formats in our program:  
-- `dd/MM/yyyy HH:mm`
-- `dd/MM/yyyy HH`
+- `dd/MM/yyyy HH:mm` or `dd/MM/yy HH:mm`
+- `dd/MM/yyyy HH` or `dd/MM/yy HH`
 - `dd/MM HH:mm`
 - `dd/MM HH`
 - `dd HH:mm`
 - `dd HH`
 - `HH`  
 
-**Legend:**
-- `dd` is day of month.
-- `MM` is month of year.
-- `yyyy` is the year.
-- `HH` is hour on 24-hour clock
-- `mm` is the minute
+**Legend**:
+- `dd` represents the **day** the of month.
+- `MM` represents the **month** the of year.
+- `yyyy` represents the **year**.
+- `yy` represents the **year** (in the 21st century)
+    -  e.g. `04` represents 2004.
+- `HH` represents the **hour** of the day on a 24-hour clock.
+- `mm` represents the **minute** of the hour.
 
->💡 **Note**: When `dd`, `MM` or `yyyy` is unspecified, they will be replaced with current day, month and year respectively.  
+>💡 **Note**: When day (`dd`), month (`MM`) or year (`yyyy` or `yy`) is unspecified, they will be replaced with the **current** day, month and year respectively.  
 
->💡 **Note**: When `mm` is unspecified, it will be replaced with `0`.
+>💡 **Note**: When minute (`mm`) is unspecified, it will be replaced with `0`.
 
-**Example:** `03/10/2004 03` translates to `3rd October 2004, 3am`.
+**Example**: `03/10/2004 03` translates to `3rd October 2004, 3am`.
 
 ### 2.3 Adding your NUS timetable:
 
@@ -176,7 +193,7 @@ There are **3 main features** you can use with the list command.
 #### 2.4.1 Listing your entire tasklist
 List all tasks currently stored locally in your tasklist.
 
-**Format:** `list`
+**Format**: `list`
 - The command displays the following information for each task:
   - **Task id**:
     - A positive integer i.e. `1.` to identify the task
@@ -200,10 +217,10 @@ List all tasks currently stored locally in your tasklist.
     - For an `Event`, it represents the date and duration of the event.
     - For a `Lesson`, it represents the date and duration of the lesson.
     
-**Example:** `list`
+**Example**: `list`
 - List all tasks currently stored locally in your tasklist.
 
-**Expected Outcome:**
+**Expected Outcome**:
 
 ```
 [user]: list
@@ -222,16 +239,16 @@ List all tasks currently stored locally in your tasklist.
 #### 2.4.2 Filtering your tasklist
 Filters the tasklist for specific tasks that matches the filters applied.
 
-**Format:** `list [--filter <argument>] [--filter <argument>] ...`
+**Format**: `list [--filter <argument>] [--filter <argument>] ...`
 - `[--flag <argument>]` specifies the filter to be applied to your task list.
-  - Type of task: `[--type todo|deadline|event|lesson]`
-  - Priority of the task: `[--priority low|medium|high]`
-  - Recurrence of the task: `[--recur none|daily|weekly|monthly|yearly]`
+  - Type of task: `[--type <todo|deadline|event|lesson>]`
+  - Priority of the task: `[--priority <low|medium|high>]`
+  - Recurrence of the task: `[--recur <none|daily|weekly|monthly|yearly>]`
 
-**Example:** `list --type todo --priority medium`
+**Example**: `list --type todo --priority medium`
 - List all tasks that are type `Todo` and priority is `medium`.
 
-**Expected Outcome:**
+**Expected Outcome**:
 
 ```
 [user]: list --type todo --priority medium
@@ -245,13 +262,13 @@ Filters the tasklist for specific tasks that matches the filters applied.
 #### 2.4.3 Listing the recurrence of a task
 Displays the next 4 recurrences of a task.
 
-**Format 2:** `list [task id]`
+**Format 2**: `list [task id]`
 - `[task id]` specifies the id of the task to display the recurrence.
 
-**Example (with task id):** `list 3`
+**Example (with task id)**: `list 3`
 - List the next 4 recurrences for task with task id `3`.
 
-**Expected Outcome:**
+**Expected Outcome**:
 
 ```
 [user]: list 3
@@ -271,17 +288,17 @@ Displays the next 4 recurrences of a task.
 ### 2.5 Sorting your task list: `sort`
 Sorts your task list by a given criteria.
 
-**Format:** `sort --by <criteria>`
+**Format**: `sort --by <criteria>`
 - `<criteria>` specifies what to sort your task list by.
   - Type of task: `type`.
   - Description of task: `description`
   - Priority of the task: `priority`
 
-**Example:** `sort --by priority` + `list`
+**Example**: `sort --by priority` + `list`
 - Sort your current task list by `priority` from `high` to `low`
 - Print out the sorted list with the `list` command
 
-**Expected Outcome:**
+**Expected Outcome**:
 
 ```
 [user]: sort --by priority
@@ -307,7 +324,7 @@ Sorts your task list by a given criteria.
 ### 2.8 Deleting your tasks: `delete`
 Deletes tasks specified in comma-seperated argument.
 
-**Format:** `delete <indexes of tasks to delete>`
+**Format**: `delete <indexes of tasks to delete>`
 
 Index should be specified in either,
 - Single index, such as `3`
@@ -318,10 +335,10 @@ Index should be specified in either,
   - `delete 1-3, 5` would delete tasks with indexes 1, 2, 3 and 5.  
  >💡 **Note**: Whether there are any spaces between the commas, it does not matter.
 
-**Example:** `delete 1-3, 5`
+**Example**: `delete 1-3, 5`
 - delete tasks with indexes 1, 2, 3 and 5.
 
-**List before deletion:**
+**List before deletion**:
 
 ```
 -------------------------------------------------------------------------
@@ -337,7 +354,7 @@ Index should be specified in either,
 || 6. movie screening [low] (startDate: 22-10-2021 04:00:00 - endDate: 22-10-2021 05:00:00)
 -----
 ```
-**Expected Outcome:**
+**Expected Outcome**:
 
 ```
 -------------------------------------------------------------------------
@@ -350,7 +367,7 @@ Index should be specified in either,
 -------------------------------------------------------------------------
 ```
 
-**List after deletion:**
+**List after deletion**:
 
 ```
 -------------------------------------------------------------------------
@@ -368,9 +385,9 @@ Displays goodbye message and exits the program.
 
 An end-of-file condition in the input, such as <kbd>Ctrl-D</kbd> on Bash, has the same effect as this command.
 
-**Format:** `bye`
+**Format**: `bye`
 
-**Expected Outcome:**
+**Expected Outcome**:
 
 ```
 -------------------------------------------------------------------------
@@ -385,14 +402,14 @@ The program will store and automatically update your Tasks in the the file `./da
 
 
 ## 3. FAQ
-**Q:** What operating systems can the application work on?
+**Q**: What operating systems can the application work on?
 
-**A:** The SchedUrMods application supports all Windows, Linux and Unix operating systems 
+**A**: The SchedUrMods application supports all Windows, Linux and Unix operating systems 
 that have `java 11` installed on their systems. 
 
-**Q:** How do I transfer my data to another computer?
+**Q**: How do I transfer my data to another computer?
 
-**A:** Install the program on the other computer and replace the new empty `tasks.dat`
+**A**: Install the program on the other computer and replace the new empty `tasks.dat`
 it creates with the `tasks.dat` that you wish to transfer from your previous `SchedUrMods.jar`
 home folder.
 
