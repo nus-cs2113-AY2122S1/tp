@@ -38,10 +38,9 @@ public class University implements Comparator<University> {
         list.remove(moduleMapping);
     }
 
-    public void clearMappings() {
-        list = new ArrayList<>();
-    }
-
+    /**
+     * Lists all module mappings for the university.
+     */
     public void listAllMappings() {
         for (int i = 0; i < list.size(); i++) {
             ModuleMapping currentMapping = list.get(i);
@@ -50,6 +49,10 @@ public class University implements Comparator<University> {
         }
     }
 
+    /**
+     * Lists out all mappings from the university with local module from the selected module list.
+     * @param selectedModuleList The selected module list
+     */
     public void listSelectedMappings(ModuleList selectedModuleList) {
         ArrayList<ModuleMapping> selectedMappings = getSelectedMappings(selectedModuleList);
         for (int i = 0; i < selectedMappings.size(); i++) {
@@ -57,6 +60,11 @@ public class University implements Comparator<University> {
         }
     }
 
+    /**
+     * Generates an array list storing all mappings from the university with local module from the selected module list.
+     * @param selectedModuleList RThe selected module list
+     * @return The list of mappings generated
+     */
     public ArrayList<ModuleMapping> getSelectedMappings(ModuleList selectedModuleList) {
         ArrayList<ModuleMapping> selectedMappings = new ArrayList<>();
         for (ModuleMapping currentMapping : list) {
@@ -72,36 +80,18 @@ public class University implements Comparator<University> {
     }
 
     //@@author Ma Zijian
+
+    /**
+     * Calculates the number of mappings for the university with local module from the selected module list.
+     * @param selectedModuleList The selected module list
+     * @return The number of mappings
+     */
     public int getSelectedMappingListSize(ModuleList selectedModuleList) {
         return getSelectedMappings(selectedModuleList).size();
     }
 
-    public ModuleMapping getMapping(Module selectedLocalModule, ModuleList selectedModuleList) {
-        ModuleMapping selectedMapping = null;
-        for (int i = 0; i < list.size(); i++) {
-            ModuleMapping currentMapping = list.get(i);
-            if (currentMapping.localModule.getModuleCode()
-                    .equals(selectedLocalModule.getModuleCode())) {
-                selectedMapping = currentMapping;
-            }
-        }
-        return selectedMapping;
-    }
-
     public int getMappingListSize() {
         return list.size();
-    }
-
-    public Module getMappedModule(Module selectedLocalModule, ModuleList selectedModuleList) {
-        String mappedModuleCode = "";
-        for (int i = 0; i < list.size(); i++) {
-            ModuleMapping currentMapping = list.get(i);
-            if (currentMapping.localModule.getModuleCode()
-                    .equals(selectedLocalModule.getModuleCode())) {
-                mappedModuleCode = currentMapping.getMappedModule().getModuleCode();
-            }
-        }
-        return selectedModuleList.getModule(mappedModuleCode);
     }
 
     public String getName() {
@@ -112,6 +102,11 @@ public class University implements Comparator<University> {
         return index;
     }
 
+    /**
+     * Returns the university's index in the university master list.
+     * @param universityMasterList The university master list
+     * @return Index of the current university in the master list
+     */
     public int getMasterListIndex(UniversityList universityMasterList) {
         for (int i = 0; i < universityMasterList.getSize(); i++) {
             if (name.equals(universityMasterList.get(i).getName())) {
