@@ -2,9 +2,13 @@ package seedu.budgettracker.logic.commands;
 
 import seedu.budgettracker.data.records.Category;
 import seedu.budgettracker.data.records.Expenditure;
+import seedu.budgettracker.logic.commands.exceptions.CommandException;
 import seedu.budgettracker.ui.TextUi;
 
 import java.time.LocalDate;
+
+import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_EXPENDITURE_AMOUNT;
+import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_YEAR;
 
 /**
  * Adds an Expenditure record to the RecordList.
@@ -12,18 +16,17 @@ import java.time.LocalDate;
 public class AddExpenditureCommand extends AddCommand {
 
     public static final boolean IS_NOT_LOADING_STORAGE = false;
+
     private final String description;
     private final double spending;
     private final LocalDate date;
     private final Category category;
 
-
-
     public static final String MESSAGE_USAGE = "Adds an expenditure record.\n"
             + "Parameters: -e n/EXPENDITURE_NAME a/COST d/[DATE_OF_EXPENDITURE] c/[CATEGORY]\n"
             + "Note:\n"
             + " * If DATE_OF_EXPENDITURE is not specified, current system date will be the default value.\n"
-            + " * If CATEGORY is not specified, GENERAL will be the default category.";
+            + " * If CATEGORY is not specified, GENERAL will be the default category.\n";
 
     /**
      * Constructor for when the user inputs only two parameters, leaving the optional
@@ -41,26 +44,34 @@ public class AddExpenditureCommand extends AddCommand {
         this.category = category;
     }
 
-    public void execute() {
+    /**
+     * Adds an expenditure during runtime.
+     */
+    public void execute() throws CommandException {
+        if (spending <= 0) {
+            throw new CommandException(MESSAGE_INVALID_EXPENDITURE_AMOUNT);
+        }
+        int currentYear = allRecordList.getYear();
+        if (date.getYear() != currentYear) {
+            throw new CommandException(MESSAGE_INVALID_YEAR);
+        }
         Expenditure addedExpenditure = allRecordList.addExpenditure(description,
                 spending,
                 date,
                 category,
                 IS_NOT_LOADING_STORAGE);
-        TextUi.showExpenditureAddedMessage(addedExpenditure, IS_NOT_LOADING_STORAGE, allRecordList);
+        TextUi.showExpenditureAddedMessage(addedExpenditure, allRecordList);
     }
 
 
     /**
-     * Adds an expenditure.
+     * Adds an expenditure during loading operations.
      *
      * @param isLoadingStorage boolean to indicate if command is being executed during loading
      *                         or during normal runtime operation
      */
     @Override
     public void execute(boolean isLoadingStorage) {
-        Expenditure newExpenditure = new Expenditure(description, spending, date, category);
         allRecordList.addExpenditure(description, spending, date, category, isLoadingStorage);
-        TextUi.showExpenditureAddedMessage(newExpenditure, isLoadingStorage, allRecordList);
     }
 }

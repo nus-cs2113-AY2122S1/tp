@@ -1,6 +1,7 @@
 package seedu.budgettracker.ui;
 
 import seedu.budgettracker.logic.commands.Command;
+import seedu.budgettracker.logic.commands.FindCommand;
 import seedu.budgettracker.logic.commands.StatYearCommand;
 import seedu.budgettracker.data.AllRecordList;
 import seedu.budgettracker.data.records.Category;
@@ -35,7 +36,7 @@ public class TextUi {
 
     private static final String buffer = "     ";
     public static final int percentageRepresentedByEachBar = 5;
-
+    private static final String WARNING_DIVIDER = "************************************************";
     private final Scanner in;
 
     public TextUi() {
@@ -59,7 +60,7 @@ public class TextUi {
         Delay.wait(1000);
 
         System.out.println(DIVIDER + LS
-                + "If you like to change the database, "
+                + "If you would like to change the database, "
                 + "please use the \"year DATABASE_YEAR\" command");
 
         System.out.println();
@@ -86,71 +87,84 @@ public class TextUi {
                 + " is due!!");
     }
 
-    public static void showExpenditureAddedMessage(Expenditure addedExpenditure, boolean isLoadingStorage,
-                                                   AllRecordList recordList) {
-        if (!isLoadingStorage) {
-            System.out.println("Expenditure successfully added!"
-                    + LS
-                    + "Description: " + addedExpenditure.getDescription()
-                    + "\nAmount: $" + addedExpenditure.getAmount()
-                    + "\nDate: " + addedExpenditure.getDate()
-                    + "\nCategory: " + addedExpenditure.getCategory());
+    public static void showExpenditureAddedMessage(Expenditure addedExpenditure, AllRecordList recordList) {
+        assert addedExpenditure.getAmount() > 0 : "Expenditure added should be a positive value";
 
-            int month = addedExpenditure.getMonth();
-            double amount = recordList.getBudget(month).getAmount();
-            double totalSpending = 0.0;
+        System.out.println("Expenditure successfully added!"
+                + LS
+                + "Description: " + addedExpenditure.getDescription()
+                + "\nAmount: $" + addedExpenditure.getAmount()
+                + "\nDate: " + addedExpenditure.getDate()
+                + "\nCategory: " + addedExpenditure.getCategory());
 
-            for (int i = 0; i < recordList.getExpenditureListSize(month); i += 1) {
-                totalSpending += recordList.getExpenditure(i, month).getAmount();
-            }
+        int month = addedExpenditure.getMonth();
+        String monthString = getMonthString(month);
+        double amount = recordList.getBudget(month).getAmount();
+        double totalMonthExpenditureSpending = recordList.getTotalAmountSpent(month);
 
-            System.out.println("Total Spent: $" + totalSpending);
+        System.out.println("Total Amount Spent in "
+                + monthString
+                + ": $" + totalMonthExpenditureSpending);
 
-            double amountLeft = amount - totalSpending;
+        double amountLeft = amount - totalMonthExpenditureSpending;
 
-            double percentageLeft;
-            if (amount == 0) {
-                System.out.println("Your Budget is: $0.00");
-                System.out.println("Have you forgotten to enter the budget first?");
-            } else if (amountLeft > 0) {
-                percentageLeft = (amountLeft / amount) * 100;
-                System.out.print("Percentage of Budget Left: ");
-                System.out.printf("%.2f", percentageLeft);
-                System.out.println("%");
-                System.out.println(DIVIDER);
-            } else {
-                percentageLeft = (totalSpending / amount) * 100;
-                System.out.print("You overspent your Budget by: ");
-                System.out.printf("%.2f", percentageLeft);
-                System.out.println("%");
-                System.out.println(DIVIDER);
-            }
+        double percentageLeft;
+        if (amount == 0) {
+            System.out.println("Your Budget is: $0.00");
+            System.out.println("Have you forgotten to enter the budget first?");
+        } else if (amountLeft > 0) {
+            percentageLeft = (amountLeft / amount) * 100;
+            System.out.print("Percentage of Budget Left: ");
+            System.out.printf("%.2f", percentageLeft);
+            System.out.println("%");
+        } else {
+            percentageLeft = (totalMonthExpenditureSpending / amount) * 100;
+            System.out.print("You overspent your Budget by: ");
+            System.out.printf("%.2f", percentageLeft);
+            System.out.println("%");
         }
+        printDivider();
     }
 
-    public static void showBudgetAddedMessage(double amount, boolean isLoadingStorage) {
-        if (!isLoadingStorage) {
-            System.out.println("Your budget of "
-                    + amount
-                    + " for this month is successfully added!"
-                    + LS
-                    + DIVIDER);
+    public static void showBudgetAddedMessage(double amount, int month) {
+        String monthString = getMonthString(month);
+        System.out.println("Your budget of $"
+                + amount
+                + " for "
+                + monthString
+                + " has been successfully set!"
+                + LS
+                + DIVIDER);
+
+        if (amount <= 0.00) {
+            System.out.println(WARNING_DIVIDER);
+            System.out.println("You may have entered a negative budget or entered $0.00!");
+            System.out.println("Please make the necessary edit before continuing!");
+            System.out.println(WARNING_DIVIDER);
         }
     }
 
     public static void showLoanAddedMessage(Loan newLoan, boolean isLoadingStorage) {
-        if (!isLoadingStorage) {
-            System.out.println("Loan successfully added!"
-                    + LS
-                    + newLoan.getName() + " owes you: $" + newLoan.getAmount()
-                    + LS
-                    + "Date of loan: " + newLoan.getDate()
-                    + LS
-                    + DIVIDER);
+        if (isLoadingStorage) {
+            return;
+        }
+        System.out.println("Loan successfully added!"
+                + LS
+                + newLoan.getName() + " owes you: $" + newLoan.getAmount()
+                + LS
+                + "Date of loan: " + newLoan.getDate()
+                + LS
+                + DIVIDER);
+
+        if (newLoan.getAmount() <= 0.00) {
+            System.out.println(WARNING_DIVIDER);
+            System.out.println("You may have entered a negative amount or entered $0.00!");
+            System.out.println("Please make the necessary edit before continuing!");
+            System.out.println(WARNING_DIVIDER);
         }
     }
 
-    public static String getMonth(int month) {
+    public static String getMonthString(int month) {
         String monthString = null;
         switch (month) {
         case 1:
@@ -206,9 +220,9 @@ public class TextUi {
     }
 
     private static void printRecordList(AllRecordList records, int i, Category category) {
-        String monthString = getMonth(i);
+        String monthString = getMonthString(i);
         double totalSpending = 0.0;
-        double currentMonthBudget = records.getBudget(i).getRawValue();
+        double currentMonthBudget = records.getBudget(i).getAmount();
         ArrayList<Expenditure> currentMonthRecordList = records.getExpenditureRecords(i);
 
         for (Expenditure expenditure : currentMonthRecordList) {
@@ -216,6 +230,7 @@ public class TextUi {
                 totalSpending += expenditure.getAmount();
             }
         }
+
         String budget = "";
         boolean printInfo = true;
 
@@ -226,6 +241,12 @@ public class TextUi {
             budget = records.getBudget(i).toString();
         }
 
+        recordListPrinter(records, i, category, monthString, totalSpending, currentMonthBudget, budget, printInfo);
+    }
+
+    private static void recordListPrinter(AllRecordList records, int i, Category category,
+                                          String monthString, double totalSpending, double currentMonthBudget,
+                                          String budget, boolean printInfo) {
         if (totalSpending > currentMonthBudget && currentMonthBudget > 0 && printInfo) {
             System.out.println("You are spending too much for " + monthString + "!");
             double percentage = (totalSpending / currentMonthBudget) * 100;
@@ -237,6 +258,7 @@ public class TextUi {
             System.out.printf("%.2f", percentage);
             System.out.println("% of your overall budget has been spent");
         }
+
         getMonthListView(records, i, monthString, budget, category);
     }
 
@@ -245,23 +267,37 @@ public class TextUi {
      */
     private static void getMonthListView(AllRecordList list, int month, String monthString,
                                          String budget, Category category) {
+        budgetExpenditurePrinter(list, month, monthString, budget, category);
+
+        loanPrinter(list, month);
+
+        printDivider();
+    }
+
+    private static void loanPrinter(AllRecordList list, int month) {
+        System.out.println("Your loans: ");
+
+        if (list.getLoanListSize(month) > 0) {
+            System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Debtor name", "   | Amount", "   | Date ");
+            System.out.print(LS);
+            printEnumeratedLoanList(list.getLoanRecords(month));
+        } else {
+            System.out.println("No Loan records yet.");
+        }
+    }
+
+    private static void budgetExpenditurePrinter(AllRecordList list, int month,
+                                                 String monthString, String budget, Category category) {
         System.out.println("Your budget for " + monthString + ":" + budget + LS
                 + "Your expenditures:");
-        if (list.getMonthListSize(month) > 0) {
+
+        if (list.getMonthNumberOfExpenditures(month) > 0) {
             System.out.printf("%-30.30s %-20.20s %-20.20s %-20.20s%n", "  Description", "| Amount",
                     "| Date ", "| Category");
             printEnumeratedExpenditureList(list.getExpenditureRecords(month), category);
         } else {
             System.out.println("No Expenditure records yet.");
         }
-        System.out.println("Your loans: ");
-        if (list.getLoanListSize(month) > 0) {
-            System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Debtor name", "   | Amount", "   | Date ");
-            printEnumeratedLoanList(list.getLoanRecords(month));
-        } else {
-            System.out.println("No Loan records yet.");
-        }
-        printDivider();
     }
 
     private static void printEnumeratedExpenditureList(ArrayList<Expenditure> monthExpenditureList, Category category) {
@@ -277,6 +313,7 @@ public class TextUi {
         for (int i = 0; i < monthLoanList.size(); i++) {
             Loan currentLoan = monthLoanList.get(i);
             System.out.println(i + 1 + "." + currentLoan);
+            System.out.print(LS);
         }
     }
 
@@ -414,6 +451,36 @@ public class TextUi {
         Delay.wait(500);
         System.out.println();
         Delay.loadingBar(40);
+    }
+
+    public static void printExpenditureLoanFoundInMonth(ArrayList<Expenditure> matchedExpenditureList,
+                                                        ArrayList<Loan> matchedLoanList,
+                                                        int sizeOfMatchedExpenditureList,
+                                                        int sizeOfMatchedLoanList) {
+        if (sizeOfMatchedExpenditureList == 0) {
+            System.out.println("No Expenditures found for this month");
+        } else {
+            System.out.println("Here are the Expenditures we found!");
+            System.out.println(FindCommand.TITLE_DIVIDER);
+            for (int j = 0; j < sizeOfMatchedExpenditureList; j += 1) {
+                System.out.println(matchedExpenditureList.get(j).toString(j));
+            }
+        }
+
+        System.out.println(FindCommand.EXPENDITURE_LOAN_DIVIDER);
+
+        if (sizeOfMatchedLoanList == 0) {
+            System.out.println("No Loan found for this month");
+        } else {
+            System.out.println("Here are the Loan we found!");
+            System.out.println(FindCommand.TITLE_DIVIDER);
+            for (int j = 0; j < sizeOfMatchedLoanList; j += 1) {
+                System.out.print((j + 1) + ". ");
+                System.out.println(matchedLoanList.get(j).toString());
+            }
+        }
+
+        System.out.println(FindCommand.DIVIDER);
     }
 
 

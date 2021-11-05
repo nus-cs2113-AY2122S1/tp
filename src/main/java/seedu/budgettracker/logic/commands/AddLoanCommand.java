@@ -12,8 +12,8 @@ public class AddLoanCommand extends AddCommand {
 
     public static final String MESSAGE_USAGE = "Adds a loan record.\n"
             + "Parameters: -l n/DEBTOR_NAME a/AMOUNT d/[DATE_OF_LOAN]\n"
-            + "Note: If DATE_OF_LOAN is not specified, the current system date will be the "
-            + "default value.";
+            + "Note: \n"
+            + " * If DATE_OF_LOAN is not specified, the current system date will be the default value.";
 
     /**
      * Constructor for when the user inputs only two parameters, leaving the optional

@@ -16,7 +16,7 @@ public class DeleteAllExpenditureCommand extends DeleteCommand {
      * LocalDate.now().getMonthValue() is being used as a placeholder
      */
     @Override
-    public void execute(boolean isLoadingStorage) {
+    public void execute() {
         int sizeBeforeDeletion = allRecordList.getExpenditureListSize(month);
         for (int i = 1; i <= sizeBeforeDeletion; i++) {
             allRecordList.deleteExpenditure(1, month);

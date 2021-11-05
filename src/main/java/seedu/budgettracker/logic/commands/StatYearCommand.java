@@ -35,7 +35,7 @@ public class StatYearCommand extends StatCommand {
         double expenditureTotal = getTotalExpenditure();
         double budgetTotal = getTotalBudgetAmount();
 
-        System.out.print("You have a total of: $");
+        System.out.print("You have a total budget of: $");
         System.out.printf("%.2f", budgetTotal);
         System.out.println();
 
@@ -44,7 +44,7 @@ public class StatYearCommand extends StatCommand {
     }
 
     @Override
-    public void execute(boolean isLoadingStorage) {
+    public void execute() {
         double amount;
 
         double[] barPercentage;

@@ -11,8 +11,7 @@ import seedu.budgettracker.logic.commands.InvalidCommand;
 import seedu.budgettracker.logic.commands.ListRecordsCommand;
 import seedu.budgettracker.logic.commands.StatCommand;
 import seedu.budgettracker.logic.commands.YearCommand;
-import seedu.budgettracker.data.records.Category;
-import seedu.budgettracker.common.exception.EmptyDescriptionException;
+import seedu.budgettracker.logic.parser.exceptions.ParserException;
 
 import java.util.HashMap;
 
@@ -21,7 +20,11 @@ import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_COMMAND;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_DELETE_COMMAND;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_LIST_COMMAND;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_STAT_COMMAND;
+import static seedu.budgettracker.common.Messages.MESSAGE_WARNING_INCORRECT_YEAR_FORMAT;
 
+/**
+ * Main Parser class which parses user input into a {@Code Command}.
+ */
 public class Parser {
 
     /** Offset required to convert between 1-indexing and 0-indexing.  */
@@ -30,6 +33,12 @@ public class Parser {
     /** Offset after reading type identifier tag. */
     public static final int TYPE_IDENTIFIER_END_INDEX = 2;
 
+    /**
+     * Splits the user input into the command word and arguments.
+     *
+     * @param userInput the raw input of the user as a String
+     * @return a String array with the command word in index 0 and the arguments in index 1
+     */
     private static String[] splitCommandWordAndArgs(String userInput) {
         final String[] split = userInput.trim().split(" ", 2);
         if (split.length == 2) {
@@ -38,10 +47,13 @@ public class Parser {
         return new String[]{split[0].toLowerCase(), ""};
     }
 
-    //    public static String[] splitExpenditureParams(String expenditureParams) {
-    //        return expenditureParams.split(" ", 3);
-    //    }
-
+    /**
+     * Splits the command arguments by their command prefixes.
+     *
+     * @param commandParams the raw command arguments string
+     * @param prefixes an array of prefix strings that the command should split by
+     * @return a HashMap of String keys and values, where keys are command prefixes and values are their respective values
+     */
     public static HashMap<String, String> splitArguments(String commandParams, String[] prefixes) {
         HashMap<String, String> argumentMap = new HashMap<>();
         for (String prefix : prefixes) {
@@ -108,15 +120,13 @@ public class Parser {
                 command = new InvalidCommand("Sorry. I don't understand your command!");
                 break;
             }
-        } catch (NumberFormatException e) {
-            command = new InvalidCommand("Incorrect inputs!");
-        } catch (EmptyDescriptionException e) {
-            command = new InvalidCommand("Expenditure description is empty!");
+        } catch (ParserException e) {
+            command = new InvalidCommand(e.getMessage());
         }
         return command;
     }
 
-    private Command prepareStatCommand(String commandParams) {
+    private Command prepareStatCommand(String commandParams) throws ParserException {
         String statOption = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
         switch (statOption) {
         case ("-c"):
@@ -128,7 +138,7 @@ public class Parser {
         }
     }
 
-    private Command prepareEditCommand(String commandParams) throws EmptyDescriptionException {
+    private Command prepareEditCommand(String commandParams) throws ParserException {
         String editOption = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
         String paramsToEdit = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
         try {
@@ -142,16 +152,16 @@ public class Parser {
             default:
                 return new InvalidCommand("Missing inputs! Please indicate '-e', '-b' or '-l");
             }
-        } catch (NumberFormatException | EmptyDescriptionException e) {
-            return new InvalidCommand("Missing inputs!");
+        } catch (NumberFormatException e) {
+            throw new ParserException("Missing type parameters! Make sure to indicate '-b','-e' or '-l'");
         }
     }
 
-    private Command prepareListMonthCommand(String commandParams) {
+    private Command prepareListMonthCommand(String commandParams) throws ParserException {
         try {
             return ListRecordParser.parse(commandParams);
-        } catch (StringIndexOutOfBoundsException | EmptyDescriptionException e) {
-            return new InvalidCommand(String.format(MESSAGE_INVALID_LIST_COMMAND, ListRecordsCommand.MESSAGE_USAGE));
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new ParserException(String.format(MESSAGE_INVALID_LIST_COMMAND, ListRecordsCommand.MESSAGE_USAGE));
         }
     }
 
@@ -161,7 +171,7 @@ public class Parser {
      * @param commandParams raw String commandParams
      * @return AddBudgetCommand or AddExpenditureCommand depending on the addType
      */
-    private Command prepareAddCommand(String commandParams) {
+    private Command prepareAddCommand(String commandParams) throws ParserException {
         try {
             String addType = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
             String addParams = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
@@ -175,24 +185,31 @@ public class Parser {
             default:
                 return new InvalidCommand(MESSAGE_INVALID_COMMAND);
             }
-        } catch (StringIndexOutOfBoundsException | EmptyDescriptionException e) {
-            return new InvalidCommand(String.format(MESSAGE_INVALID_ADD_COMMAND, AddCommand.MESSAGE_USAGE));
+        } catch (StringIndexOutOfBoundsException | IllegalArgumentException e) {
+            throw new ParserException(String.format(MESSAGE_INVALID_ADD_COMMAND, AddCommand.MESSAGE_USAGE));
         }
 
     }
 
-    private Command prepareFindCommand(String commandParams) {
+    private Command prepareFindCommand(String commandParams) throws ParserException {
         try {
             return new FindCommand(commandParams);
         } catch (StringIndexOutOfBoundsException e) {
-            return new InvalidCommand(String.format("Add message later please", AddCommand.MESSAGE_USAGE));
+            throw new ParserException(String.format("Add message later please", AddCommand.MESSAGE_USAGE));
         }
     }
 
     private Command prepareYearCommand(String commandParams) {
         try {
+            boolean isYear = commandParams.matches("^[0-9]{4}$");
+
+            if (!(isYear)) {
+                return new InvalidCommand(String.format(MESSAGE_WARNING_INCORRECT_YEAR_FORMAT,
+                        AddCommand.MESSAGE_USAGE));
+            }
+            int year = Integer.parseInt(commandParams);
             String directoryOfRecordList = "./data/" + commandParams + ".txt";
-            return new YearCommand(directoryOfRecordList);
+            return new YearCommand(directoryOfRecordList, year);
         } catch (StringIndexOutOfBoundsException e) {
             return new InvalidCommand(String.format(MESSAGE_INVALID_ADD_COMMAND, AddCommand.MESSAGE_USAGE));
         }
@@ -204,7 +221,7 @@ public class Parser {
      * @param commandParams raw String commandParams
      * @return AddBudgetCommand or AddExpenditureCommand depending on the addType
      */
-    private Command prepareDeleteCommand(String commandParams) {
+    private Command prepareDeleteCommand(String commandParams) throws ParserException {
         try {
             String deleteType = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
             String deleteParams = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
@@ -218,7 +235,7 @@ public class Parser {
             default:
                 return new InvalidCommand(MESSAGE_INVALID_COMMAND);
             }
-        } catch (StringIndexOutOfBoundsException | EmptyDescriptionException e) {
+        } catch (StringIndexOutOfBoundsException e) {
             return new InvalidCommand(String.format(MESSAGE_INVALID_DELETE_COMMAND, DeleteCommand.MESSAGE_USAGE));
         }
     }

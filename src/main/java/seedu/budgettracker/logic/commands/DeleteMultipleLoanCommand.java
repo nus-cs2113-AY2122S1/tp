@@ -20,7 +20,7 @@ public class DeleteMultipleLoanCommand extends DeleteCommand {
      * LocalDate.now().getMonthValue() is being used as a placeholder
      */
     @Override
-    public void execute(boolean isLoadingStorage) {
+    public void execute() {
         for (int i = startIndex; i <= endIndex; i++) {
             TextUi.showMultipleLoanDeletedMessage(i, endIndex, allRecordList.getLoan(startIndex - 1, month));
             allRecordList.deleteLoan(startIndex, month);

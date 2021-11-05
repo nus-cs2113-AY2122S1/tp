@@ -3,6 +3,7 @@ package seedu.budgettracker.logic.parser;
 import seedu.budgettracker.logic.commands.AddExpenditureCommand;
 import seedu.budgettracker.data.records.Category;
 import seedu.budgettracker.common.exception.EmptyDescriptionException;
+import seedu.budgettracker.logic.parser.exceptions.ParserException;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -13,7 +14,7 @@ public class AddExpenditureParser implements ParserPrefix {
         PREFIX_DATE,
         PREFIX_CATEGORY };
 
-    public static AddExpenditureCommand parse(String args) throws NumberFormatException, EmptyDescriptionException {
+    public static AddExpenditureCommand parse(String args) throws ParserException {
         HashMap<String, String> argumentMap = Parser.splitArguments(args, PREFIX_ARRAY);
 
         String description = ParserUtil.parseDescription(argumentMap.get(PREFIX_DESCRIPTION), IS_COMPULSORY);
@@ -21,6 +22,6 @@ public class AddExpenditureParser implements ParserPrefix {
         LocalDate date = ParserUtil.parseDate(argumentMap.get(PREFIX_DATE));
         Category category = ParserUtil.parseCategory(argumentMap.get(PREFIX_CATEGORY));
 
-        return new AddExpenditureCommand(description,amount,date,category);
+        return new AddExpenditureCommand(description, amount, date, category);
     }
 }

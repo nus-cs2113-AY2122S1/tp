@@ -15,16 +15,48 @@
 * [Instructions for manual testing](#Instructions-for-manual-testing)
 
 ## Acknowledgements
+* Inspiration for User Guide and Developer Guide: AddressBook (Level 3)
+  * https://se-education.org/addressbook-level3/UserGuide.html
+  * https://se-education.org/addressbook-level3/DeveloperGuide.html
 
+  
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well}
+  original source as well}
 
 ## Design 
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+![Figure_Architecture_Diagram](images/ArchitectureDiagram.png)
+
+The ***Architecture Diagram*** given above explains the high-level design of the App.
+
+Given below is a quick overview of main components and how they interact with each other.
+
+**Main components of the architecture**
+
+At app launch, **`BudgetTracker`** is in charge of initializing the components and linking them by passing some 
+initialized components into others as parameters. 
+
+For example, an initialized variable of `Data` is passed into an initialized variable of `Storage` for
+the `Storage` component to load hard disk information into the memory.
+
+[**`Commons`**](#common-classes) consists of the exception classes for exception handling and messages used by other classes.
+
+The rest of the App consists of four components.
+
+* [**`UI`**](#ui-component): The User Interface of the App -- Reads User Input and displays queried data.
+* [**`Logic`**](#logic-component): Parses User Input and executes the corresponding command.
+* [**`Data`**](#data-component): Holds the data of the App in memory.
+* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+
+
+**How the architecture components interact with each other**
+
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `add -e m/1 a/500`.
+
+![Figure_Architecture__Sequence_Diagram](images/ArchitectureSequenceDiagram.png)
 
 ## Implementation
-###Delete feature
+### Delete feature
 The delete feature collaborates with other classes like Parser, RecordList, etc. Basically it contains three usages which are deletion of Budget, Expenditure(s), and Loan(s).
 
 For example, when user keys ```delete -b m/MONTH```, The Parser class will analyse the whole command, and extract “b/” and “MONTH”. Then the class DeleteBudgetCommand will execute the deletion by using recordList.deleteBudget(MONTH).
@@ -54,13 +86,13 @@ Given below is an example usage scenario and how the delete feature behaves at e
 * By using substring method, description, indexes, and month of the expenditures are extracted in ```deleteParams```, ```prepareDeleteCommand(commandParams)``` calls ```DeleteExpenditureParser.parse(deleteParams)``` to parse the params more specifically.
 * Method ```parse(String args)``` in class ```DeleteExpenditureParser``` returns newly created object ```DeleteMultipleExpenditureCommand(startIndex, endIndex, month)```.
 <br/>
-  ![Figure Delete_Parse](diagrams/parseDeleteInputCommand-Sequence_Diagram.png)
+  ![Figure Delete_Parse](images/parseDeleteInputCommand-Sequence_Diagram.png)
 
 **Step 5**. The newly created object ```DeleteExpenditureCommand``` will execute the deletion:
 * ```execute(boolean isLoadinStorage)``` runs a for loop to delete the related expenditures in the expenditure ArrayList.
 * ```for(int i = startIndex; i <= endIndex; i++)``` iterates the 3 expenditures, everytime it just calls ```allRecordList.deleteExpenditure(startIndex, month)``` to delete each expenditure.
 <br/>
-  ![Figure Delete_Execute](diagrams/DeleteMultipleExpenditureCommand-Sequence_Diagram.png)
+  ![Figure Delete_Execute](images/DeleteMultipleExpenditureCommand-Sequence_Diagram.png)
 
 
 ###Edit feature
