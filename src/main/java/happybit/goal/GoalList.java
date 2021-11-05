@@ -281,9 +281,9 @@ public class GoalList {
         // change endDate for all of them + call updateIntervals
         ArrayList<Habit> habits = goal.getHabitList();
         for (Habit habit : habits) {
+            int habitInterval = habit.getIntervalLength();
             habit.setEndDate(newDate);
-            // update Interval Lengths using same interval for habit
-            habit.updateLengthOfInterval(habit.getIntervalLength());
+            habit.updateLengthOfInterval(habitInterval);
         }
         String oldDateString = dateToString(oldDate);
         String goalName = goal.getGoalName();
