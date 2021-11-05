@@ -73,6 +73,8 @@ employees accordingly.
 * `EmployeeUI` contains methods that display messages that interacts with the user.
 
 ### 1.3 Dish Component
+![dish](Diagrams/Dish.png)
+
 The dish component consists of the `Dish`, `Menu`, `DishParser`, and `DishUI` classes.
 
 * `Dish` stores the name, price and discount of a certain dish sold by the restaurant and the methods used to retrieve
@@ -100,10 +102,10 @@ The Finance component consists of the `Finance`, `FinanceList`, `FinanceParser`,
 * `FinanceUI` contains methods that display messages to interact with the user.
 
 ### 1.6 Storage Component
+![storage](Diagrams/Storage.png)
+
 The storage component has a `Storage` class which can load data from the file and save data into the file with the 
 methods to encode and decode data.  
-
-![storage](Diagrams/Storage.png)
 
 ## 2. Implementation  
 
@@ -133,6 +135,8 @@ dishes stored include the dish name, price and discount. The following depicts t
   5. Lastly, `printAddDishMessage` in the `DishUI` class is called to display a confirmation message to the user.
 
 This is also illustrated in the sequence diagram below.
+
+![add](Diagrams/addDish.png)
 
 ### 2.ii.b Remove Dish
 The `remove-dish` feature is designed to allow users to remove dishes from their menu that are no longer needed. The 
@@ -180,8 +184,6 @@ displayed. The following depicts the procedure for when a dish's price is edited
 3. Next, `listDish` calls for either the function `printMenu` or the function `printEmptyMenu` in the `DishUI` class 
    depending on whether the user's menu is empty.
 4. `printMenu` displays all the dishes in the menu while `printEmptyMenu` displays an empty menu.
-
-This is also illustrated in the sequence diagram below.
 
 ### 2.iii.a Add Ingredient
 The mechanism of adding an ingredient into the ingredient list is facilitated by `IngredientParser`. It creates a new
