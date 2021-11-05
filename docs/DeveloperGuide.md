@@ -449,6 +449,7 @@ The sequence diagram for `AddOrderCommand` is shown below.
 ![AddOrderCommandDiagram](diagrams/diagram_images/AddOrderSequenceDiagram.png)
 
 `addDate()` method will add order date based on whether the user provided the date parameter or not.
+
 `addOrder()` method will add order based on user input.
 
 MediVault will determine if there exist the medication with the same name in order and in stock.
@@ -458,7 +459,10 @@ existingStockQuantity + existingOrderQuantity <= maxQuantity` to ensure total or
 existing maximum stock quantity allowed.
 * If there exist medication with the same name in order but not in stock, MediVault will check if the `orderQuantity
 < maxQuantity`, where `maxQuantity = Integer.MAX_VALUE` to allow the user to add any quantity of medication.
-* If there does not exist medication with the same name in order, MediVault will not check for valid quantity and
+* If there does not exist medication with the same name in order but exist in stock, MediVault will check if the 
+`orderQuantity < existingStockQuantity` to ensure total order quantity does not exceed the existing maximum stock 
+quantity allowed.
+* If there does not exist medication with the same name in order and in stock, MediVault will not check for valid quantity and
 will simply add the order as a new order.
 
 #### DeleteOrderCommand

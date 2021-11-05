@@ -553,6 +553,17 @@ Adds an order for a stock.
 
 Format: `addorder n/NAME q/QUANTITY {d/DATE}`
 
+Initial stock records:
+```
++====+=========+========+==========+=============+=============+==============+
+| ID |  NAME   | PRICE  | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY |
++====+=========+========+==========+=============+=============+==============+
+| 1  | PANADOL | $20.00 |    20    | 13-09-2021  |  HEADACHES  |     1000     |
++----+---------+--------+----------+-------------+-------------+--------------+
+| 2  | PANADOL | $20.00 |    10    | 14-09-2021  |  HEADACHES  |     1000     |
++----+---------+--------+----------+-------------+-------------+--------------+
+```
+
 Example 1 (add order with date parameter): `addorder n/panadol q/150 d/21-10-2021`
 
 Expected Output 1:
@@ -566,14 +577,28 @@ Order added: PANADOL
 +----+---------+----------+------------+---------+
 ```
 
-Example 2 (add order without date parameter): `addorder n/panadol q/1000`
+Example 2 (add order without date parameter): `addorder n/panadol q/100`
+> :information_source: Note:
+> This example was done on 5 Nov 2021.
 
 Expected Output 2:
 
 ```
+Order added: PANADOL
++====+=========+==========+============+=========+
+| ID |  NAME   | QUANTITY |    DATE    | STATUS  | 
++====+=========+==========+============+=========+
+| 2  | PANADOL |   100    | 05-11-2021 | PENDING | 
++----+---------+----------+------------+---------+
+```
+
+Example 3 (add order quantity exceeds maximum stock quantity allowed): `addorder n/panadol q/1000`
+
+Expected Output 3:
+```
 Unable to add order as total order quantity exceeds maximum stock quantity of 1000.
 Existing quantity in stock: 30
-Pending order quantity: 150
+Pending order quantity: 250
 ```
 
 ### Listing orders: `listorder`
