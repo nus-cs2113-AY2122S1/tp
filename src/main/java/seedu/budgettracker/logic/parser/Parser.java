@@ -154,7 +154,7 @@ public class Parser {
         switch (statOption) {
         case ("-c"):
             return StatCategoryParser.parse(commandParams);
-        case ("-l"):
+        case ("-y"):
             return StatYearParser.parse(commandParams);
         default:
             return new InvalidCommand(MESSAGE_INVALID_STAT_COMMAND);
