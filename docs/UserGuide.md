@@ -105,7 +105,7 @@ Adds your **todo** to your task list.
 ### 2.2.2 Deadline: `deadline`
 Adds your **deadline** to your task list.
 
-**Format**: `deadline <description> <--due dd-MM-yyyy hh:mm> [--flag <argument>]`
+**Format**: `deadline <description> <--due dd/MM/yyyy HH:mm> [--flag <argument>]`
 - `<description>` specifies the description of your deadline.
 - <code>&lt;--due <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a>&gt;</code> specifies when your deadline is.
 - `[--flag <argument>]` specifies optional details of your deadline.
@@ -131,7 +131,7 @@ Adds your **deadline** to your task list.
 ### 2.2.3 Event: `event`
 Adds your **event** to your task list.
 
-**Format**: `event <description> <--start dd-MM-yyyy hh:mm> <--end dd-MM-yyyy hh:mm> [--flag <argument>]`
+**Format**: `event <description> <--start dd/MM/yyyy HH:mm> <--end dd/MM/yyyy HH:mm> [--flag <argument>]`
 - `<description>` specifies the description of your event.
 - <code>&lt;--start <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a>&gt;</code> specifies when your event starts.
 - <code>&lt;--end <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a>&gt;</code> specifies when your event ends.
