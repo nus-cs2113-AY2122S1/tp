@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 import static seedu.budgettracker.common.Messages.MESSAGE_FILE_NOT_EXIST;
-import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_IO;
 
 public class WriteToTextFile {
     public void reloadArrayToStorage(Hashtable<Integer, RecordList> monthlyRecordList, String storageDirectory) {
@@ -37,8 +36,8 @@ public class WriteToTextFile {
                     Expenditure currentExpenditure = expenditureRecords.get(j);
                     String description = currentExpenditure.getDescription();
                     double amount = currentExpenditure.getAmount();
-                    String date = currentExpenditure.getDate();
-                    String category = currentExpenditure.getCategory();
+                    String date = currentExpenditure.getDateString();
+                    String category = currentExpenditure.getCategoryString();
                     fileWrite.println("add -e n/" + description + " a/" + amount + " d/" + date + " c/" + category);
                     fileWrite.flush();
                 }
