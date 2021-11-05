@@ -2,6 +2,7 @@
 
 ### Table of Content
 - [Acknowledgements](#acknowledgements)
+- [Common Notations In DG](#notations)
 - [Design](#design)
   - [System Architecture](#sys-arch)
   - [TextUi](#text-ui)
@@ -17,6 +18,7 @@
   - [Deleting a contact](#Delete)
   - [Searching a contact](#Search)
   - [Listing all contacts](#List)
+  - [Importing contacts](#Import)
 - [Product Scope](#scope)
   - [Target user profile](#target)
   - [Value proposition](#value)
