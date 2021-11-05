@@ -20,21 +20,17 @@
 &nbsp;&nbsp;[3.2. UI component](#32-ui-component) <br>
 &nbsp;&nbsp;[3.3. Parser component](#33-parser-component) <br>
 &nbsp;&nbsp;[3.4. Command component](#34-command-component) <br>
-&nbsp;&nbsp;[3.5. IngredientList component](#35-ingredientlist-component) <br>
-&nbsp;&nbsp;[3.6. Storage component](#36-storage-component) <br>
+&nbsp;&nbsp;[3.5. IngredientGroup component](#35-ingredientgroup-component) <br>
+&nbsp;&nbsp;[3.6. IngredientList component](#36-ingredientlist-component) <br>
+&nbsp;&nbsp;[3.7. Storage component](#37-storage-component) <br>
 [4. Implementation](#4-implementation) <br>
-<<<<<<< HEAD
 &nbsp;&nbsp;[4.1. Adding Ingredients](#41-adding-ingredients) <br>
 &nbsp;&nbsp;[4.2. Alerts](#42-alerts) <br>
 &nbsp;&nbsp;[4.3. Delete Ingredients](#43-deleting-ingredients) <br>
-=======
-&nbsp;&nbsp;[4.1. Alerts](#41-alerts) <br>
-&nbsp;&nbsp;[4.2. Deleting Ingredients](#42-deleting-ingredients) <br>
 [5. Product scope](#5-product-scope) <br>
 [6. User stories](#6-user-stories) <br>
 [7. Non-functional requirements](#7-non-functional-requirements) <br>
 [8. Instructions for manual testing](#8-instructions-for-manual-testing)<br>
->>>>>>> master
 
 ## 1. Introduction
 
@@ -85,7 +81,8 @@ The App consists of 6 major components:
 * `UI`: Class that deals with the interaction with the user.
 * `Parser`: Class that processes inputs and executes commands.
 * `Command`: A set of classes covering the functionalities of the App.
-* `IngredientList`: Class that holds the information of ingredients.
+* `IngredientGroup`: Class that holds all entries of a single ingredient.
+* `IngredientList`: Class that holds the list of all ingredients in the inventory. It is made up of multiple instances of `IngredientGroup`.
 * `Storage`: Reads data from, and writes data
 
 **Interaction between architecture components**
@@ -123,7 +120,28 @@ A quick overview of how a command is parsed and executed is as such:
 * `parseXYZCommand()` creates an instance of the corresponding `XYZCommand` class and calls its `run()` method.
 * Thus, the command entered by the user is executed.
 
-### 3.5. IngredientList component
+###3.5 IngredientGroup component
+The **IngredientGroup** component can be found in the `ingredients` package
+
+An instance `IngredientGroup` is created for each new ingredient. 
+A new ingredient is defined as one with a different name as compared to all existing ingredients.
+
+Each instance of `IngredientGroup` is made up multiple `Ingredient`. One entry in an `IngredientGroup` corresponds to one `Ingredient`. 
+All entries with the same ingredient name is stored in the same `IngredientGroup`.
+
+In the example below, there are 2 `IngredientGroup`, Carrot and White Carrot. Carrot contains 2 `Ingredient` (entries) while White Carrot contains 3 `Ingredient` (entries). 
+```
+1. Carrot | Total Amount: 12.2 kg
+      Amount Left: 10.0 kg | Expiry Date: 23/12/2021
+      Amount Left: 2.2 kg | Expiry Date: 25/12/2021
+	
+ 2. White Carrot | Total Amount: 17.1 kg
+      Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+      Amount Left: 2.1 kg | Expiry Date: 12/11/2021
+      Amount Left: 10.0 kg | Expiry Date: 01/02/2022
+```
+
+### 3.6. IngredientList component
 
 The **IngredientList** component can be found in the `ingredients` package
 
@@ -138,7 +156,7 @@ The `IngredientList` class
 
 Each of the `Ingredient` objects contains information about an ingredient, namely its `name`, `amount` in stock and the `expiry` date.
 
-### 3.6. Storage component
+### 3.7. Storage component
 
 The **Storage** component can be found in the `Storage` package
 
@@ -158,6 +176,30 @@ of the storage class only when there is a change in the ingredient list of the p
 ## 4. Implementation
 
 ### 4.1. Adding Ingredients
+Ingredients can be added using the `add` command followed by 3 parameters prefixed with flags for identification by SITUS:
+* `n/`: Name of the ingredient
+* `a/` : Amount of the ingredient (kg)
+* `e/` : Expiry date of the ingredient (DD/MM/YYYY)
+
+E.g. `add n/carrots a/200 e/25-12-2021`
+
+1. The initial user input is stored as an entire string. It is first processed by the `Parser` class. `Parser` first checks for the validity of the input. 
+   If valid, it then breaks the user input into an array of 3 elements and converts the parameters into their appropriate variable types. 
+
+
+2. The array containing the parameters are then passed to the `AddCommand` class which calls the `add` method in `IngredientList`. 
+
+
+3. First, `isIngredientInList(ingredientName)` method in `IngredientList' checks if the new ingredient to be added is repeated. The ingredient name is used as the key to search.
+   * If the ingredient already exists in the ingredient list, the `get(ingredientIndex)` method searches for the index of the corresponding group that the ingredient belongs to, and appends the ingredient details to the end of the current ingredient group.
+   * If the ingredient does not exist in the ingredient list, a new `IngredientGroup` is created. 
+
+
+4. The updated `IngredientList` is stored in the external memory through the `Storage` class. 
+
+The overall sequence diagram can be seen below. 
+![image](images/AddSequenceDiagram.png)
+
 
 ### 4.2. Alerts
 

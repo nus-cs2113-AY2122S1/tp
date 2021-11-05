@@ -9,7 +9,6 @@ Participant ":IngredientList" as ingredient_list INGREDIENTLIST_COLOUR
 Participant ":IngredientGroup" as ingredient_group INGREDIENTGROUP_COLOUR
 Participant ":Ingredient" as ingredientClass INGREDIENT_COLOUR
 Participant ":Storage" as storage STORAGE_COLOUR
-Participant "<<class>> CurrentDate" as currentDate DATE_COLOUR
 
 
 -> parser: parse ("add a/carrot n/200 e/ 25/12/2021")
@@ -77,33 +76,6 @@ return
 
 return
 
-add -> ingredientClass : getName()
-activate ingredientClass INGREDIENT_COLOUR
-return
-
-add -> ingredientClass : toString()
-activate ingredientClass INGREDIENT_COLOUR
-return
-
-add -> ingredient_list : getInstance()
-activate ingredient_list INGREDIENTLIST_COLOUR
-return
-
-add -> ingredient_list : getSize()
-activate ingredient_list INGREDIENTLIST_COLOUR
-return
-
-add -> ingredientClass : getExpiry()
-activate ingredientClass INGREDIENT_COLOUR
-return expiryDate
-
-add -> ingredientClass : daysFromCurrentDate(expiryDate)
-activate ingredientClass INGREDIENTLIST_COLOUR
-
-ingredientClass -> currentDate : getCurrentDate()
-activate currentDate DATE_COLOUR
-return
-return
 return resultMsg
 return resultMsg
 return CLI message
