@@ -43,8 +43,10 @@ public class DishParser {
         boolean isValidAddDishCommand = addDishCommandChecker(command);
         boolean noDuplicateDishes = !duplicateDishChecker(command[1], menu);
         if (isValidAddDishCommand && noDuplicateDishes) {
-            double dishPrice = Double.parseDouble(command[2]);
-            Dish newDish = new Dish(command[1], dishPrice);
+            String dishName = command[1].stripLeading().stripTrailing();
+            String dishPriceString = command[2].stripLeading().stripTrailing();
+            double dishPrice = Double.parseDouble(dishPriceString);
+            Dish newDish = new Dish(dishName, dishPrice);
             menu.menu.add(newDish);
             DishUI.printAddDishMessage(newDish, menu.menu.size());
         }
@@ -139,7 +141,12 @@ public class DishParser {
             return false;
         }
         try {
-            Double.parseDouble(command[2]);
+            double discount = Double.parseDouble(command[2]);
+            boolean validDiscount = (0 <= discount) && (discount <= 100);
+            if (!validDiscount) {
+                DishUI.printInvalidDiscountMessage();
+                return false;
+            }
         } catch (ArrayIndexOutOfBoundsException e) {
             MainUI.printWrongCommandMessage();
             return false;

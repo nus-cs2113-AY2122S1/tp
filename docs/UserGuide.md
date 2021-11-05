@@ -158,6 +158,7 @@ Adds a dish to the menu.
 
 Format: `add-dish/DISH_NAME/PRICE`
   * `PRICE` must be a positive number.
+  * `PRICE` would only be displayed up to 2 decimal places.
 
 Example:
 `add-dish/Pizza/5.80` Adds `Pizza` which costs `$5.80` to the menu.
@@ -195,6 +196,7 @@ Format: `edit-dish/DISH_INDEX/NEW_PRICE`
   * `DISH_INDEX` refers to the index number shown in the displayed finance list.
   * `DISH_INDEX` must be a positive integer.
   * `NEW_PRICE` must be a number.
+  * `NEW_PRICE` would only be displayed up to 2 decimal places.
 
 Example:
 `edit-dish/1/10` Increases the price of the 1st dish in the menu to `$10`.
@@ -214,6 +216,8 @@ Format: `discount-dish/DISH_INDEX/DISCOUNT(%)`
   * `DISH_INDEX` refers to the index number shown in the displayed finance list.
   * `DISH_INDEX` must be a positive integer.
   * `DISCOUNT` must be a positive number.
+  * Maximum value `DISCOUNT` is 100 i.e. maximum possible discount is 100%.
+  * Discounted price would only be displayed up to 2 decimal places.
 
 Example:
 `discount-dish/1/30` Adds a `30%` discount to the 1st dish in the menu.
@@ -230,6 +234,7 @@ Example:
 Lists all dishes in the menu.
 
 Format: `list-dish`
+  * Prices would only be displayed up to 2 decimal places.
 
 Example:
 `list-dish`
@@ -237,7 +242,7 @@ Example:
 ---------------------------------------------
  Here are the dishes in your menu:
    1. Laksa - $5.8
-   2. Curry Chicken - $4.0
+   2. Curry Chicken - $4.0 ---> $2.5
    3. Prata - $2.0
    4. Steamed Fish - $6.3
 ---------------------------------------------

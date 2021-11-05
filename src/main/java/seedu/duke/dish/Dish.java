@@ -9,9 +9,10 @@ public class Dish {
     private double discount;
 
     public Dish(String name, double price) {
+        double roundedPrice = Math.round(price * 100.0) / 100.0;
         this.name = name;
-        this.price = price;
-        this.discount = 100;
+        this.price = roundedPrice;
+        this.discount = 0;
     }
 
     public String getName() {
@@ -23,7 +24,8 @@ public class Dish {
     }
 
     public void setPrice(double price) {
-        this.price = price;
+        double roundedPrice = Math.round(price * 100.0) / 100.0;
+        this.price = roundedPrice;
     }
 
     public double getDiscount() {
