@@ -24,6 +24,9 @@ public class MainParser {
     private static final String COMMAND_RETURN = "return";
     private static final String COMMAND_EXIT = "exit";
 
+    protected static final String ERROR_NO_PARAMS = "Command cannot be called without parameters. "
+            + "Enter the help command to view command formats";
+
     /**
      * Parses the user input.
      *
@@ -81,9 +84,9 @@ public class MainParser {
      * @param words String array of user input command delimited by whitespaces.
      * @return String containing the remainder of the user input without the command word.
      */
-    private static String getCommandInstruction(String[] words) {
+    private static String getCommandInstruction(String[] words) throws HaBitParserException {
         if (words.length == 1) {
-            return null;
+            throw new HaBitParserException(ERROR_NO_PARAMS);
         }
         return concatenateString(words);
     }

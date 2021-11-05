@@ -5,6 +5,8 @@ import happybit.command.DeleteGoalCommand;
 import happybit.command.DeleteHabitCommand;
 import happybit.exception.HaBitParserException;
 
+import java.util.ArrayList;
+
 public class DeleteParser extends Parser {
 
     /**
@@ -15,8 +17,7 @@ public class DeleteParser extends Parser {
      * @throws HaBitParserException If command parameters are not defined, or defined improperly.
      */
     public static Command parseDeleteGoalCommand(String input) throws HaBitParserException {
-        checkNoDescription(input);
-        String[] parameters = splitInput(input);
+        ArrayList<String> parameters = splitInput(input);
         int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
         return new DeleteGoalCommand(goalIndex);
     }
@@ -29,8 +30,7 @@ public class DeleteParser extends Parser {
      * @throws HaBitParserException If command parameters are not defined, or defined improperly.
      */
     public static Command parseDeleteHabitCommand(String input) throws HaBitParserException {
-        checkNoDescription(input);
-        String[] parameters = splitInput(input);
+        ArrayList<String> parameters = splitInput(input);
         int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
         int habitIndex = getIndex(parameters, FLAG_HABIT_INDEX);
         return new DeleteHabitCommand(goalIndex, habitIndex);
