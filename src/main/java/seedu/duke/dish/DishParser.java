@@ -38,7 +38,7 @@ public class DishParser {
         }
         return true;
     }
-
+    
     /**
      * Checks whether the dish to be added is already in the menu.
      *
