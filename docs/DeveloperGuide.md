@@ -39,7 +39,8 @@ The other core components of Typist:
 * `ui`: The Ui of the app.
 * `command`: Consists of `CommandFactory` which parses user inputs, and various `command` objects.
 * `common`: A collection of classes used by multiple other components.
-* ``
+* `content`: holds the content and logic for `content` command
+* `exception`: holds the 
 
 
 ## Implementation
