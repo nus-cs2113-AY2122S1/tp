@@ -253,11 +253,6 @@ Gamers should not edit the data it will manipulate the integrity of the records.
 In the event where the data is edited and the wrong format is inputted, the file contents will be cleared, 
 hence losing all the game data.
 
-### Showing summary of a game
-Statistics of game is shown automatically after a game is finished.
-
-
-
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
@@ -270,7 +265,7 @@ Statistics of game is shown automatically after a game is finished.
 | ------------- | ------------- | 
 |`content`| Set the content
 |`game -word [WORD_LIMIT] [-sn] [-c]` | Start a word-limited game
-|`game -time [TIME_LIMIT] [-sn] [-c]` | Start a time-limited game 
-|`history -h` | Get history
+|`game -time [TIME_LIMIT] [-sn] [-c]` | Start a time-limited game
 |`history -g GAME_MODE [-n NUMBER_OF_RECORDS] [-h]` | Clear history
+|`clear` | Clear history
 |`bye`| Exit the program
