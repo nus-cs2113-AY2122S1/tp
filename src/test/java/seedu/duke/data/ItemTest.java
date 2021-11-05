@@ -3,12 +3,13 @@ package seedu.duke.data.item;
 import org.junit.jupiter.api.Test;
 import seedu.duke.common.Status;
 import seedu.duke.data.Item;
+import seedu.duke.data.Miscellaneous;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //@@author silinche
 class ItemTest {
-    Item item = new Item("Junglebook", "1", Status.AVAILABLE, null, null);
+    Item item = new Miscellaneous("Junglebook", "1", Status.AVAILABLE, null, null);
 
     @Test
     void testGetTitle() {
