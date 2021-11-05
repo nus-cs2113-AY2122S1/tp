@@ -4,6 +4,22 @@
 @import 'jekyll-theme-cayman';
 
 code {
-  font-size: 0.9em;
   border: solid 1px $border-color;
+}
+
+.main-content code {
+  font-size: 0.9em;
+}
+#buttonToScrollToTop {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background:  $section-headings-color;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  color: #ffffff;
+  outline: none;
+  cursor: pointer;
 }
