@@ -1,6 +1,5 @@
 package terminus;
 
-import com.sun.tools.javac.Main;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.NoSuchElementException;

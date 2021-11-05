@@ -63,7 +63,7 @@ public class UpdateModuleCommand extends Command {
             throws InvalidCommandException, InvalidArgumentException {
         String[] listOfModule = moduleManager.getAllModules();
         if (!CommonUtils.isValidIndex(index, listOfModule)) {
-            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_EMPTY_CONTENTS);
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_INVALID_NUMBER);
         }
         if (moduleManager.getModule(newName) != null) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MODULE_EXIST);
