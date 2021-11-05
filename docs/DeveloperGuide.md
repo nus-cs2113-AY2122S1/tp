@@ -164,6 +164,20 @@ The Edit Command class handles the functionality to change a specific detail of 
 
 ![SearchFunction](img/SearchFunctionSequence.png)
 
+#### Loan Command
+
+![LoanSequenceDiagram](img/LoanSequenceDiagram.png)
+
+The Loan Command class handles the functionality to loan a specific item and change its attributes accordingly.
+
+This sequence diagram shows the interactions occurring each time a user wants to loan an item.
+1. `Libmgr` calls `execute()` method in `LoanCommand` object.
+2. `LoanCommand` calls the `getItem()` in `Catalogue` using the specific id given.
+3. `LoanCommand` checks the status of the item.
+4. When the item status is `AVAILABLE` the loan is successful and the item's attributes change accordingly.
+5. When the item status is `RESERVED` the loan is successful only if the username matches the item's loanee.
+6. When the item status is `LOANED` the loan is unsuccessful.
+
 ---
 ## Product scope
 ### Target user profile
