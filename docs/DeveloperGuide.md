@@ -4,7 +4,7 @@ title: Developer Guide
 ---
 
 ## Contents 
-
+* [About SEPlanner](#About-SEPanner)
 * [Acknowledgements](#acknowledgements)
 * [Getting Started](#getting-started)
 * [Design & Implementation](#design--implementation)
@@ -33,6 +33,10 @@ title: Developer Guide
 * [Non-Functional Requirements](#non-functional-requirements)
 * [Glossary](#glossary)
 * [Instructions for manual testing](#instructions-for-manual-testing)
+
+## About SEPlanner
+SEPlanner is a lightweight desktop application for Computer Engineering undergraduates from the National University of Singapore
+to plan for their Student Exchange Programme, optimised for use via Command Line Interface (CLI).
 
 ## Acknowledgements
 

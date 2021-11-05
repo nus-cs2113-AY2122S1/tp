@@ -6,7 +6,8 @@ title: User Guide
 ## Introduction
 
 SEPlanner is a lightweight desktop application for Computer Engineering undergraduates from the National University of Singapore 
-to plan for their Student Exchange Programme, optimised for use via Command Line Interface (CLI).  
+to plan for their Student Exchange Program, optimised for use via Command Line Interface (CLI). If you are familiar with command line, 
+SEPlanner can streamline your planning process when compared to other Graphical User Interface (GUI) apps.
 
 ## Content Page
 * [Program run through](#program-run-through)
@@ -29,6 +30,7 @@ to plan for their Student Exchange Programme, optimised for use via Command Line
   * [Removing a selected NUS module](#removing-a-selected-nus-module)
   * [Removing a selected module mapping](#removing-a-selected-module-mapping)
   * [Storage](#storage)
+  * [Logs](#Logs)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 * [Glossary](#glossary)
@@ -480,12 +482,20 @@ Your selected module list and selected university list are stored in the text fi
 <img src="images/Storage_UG.png" />
 </p>
 
-Whenever, your selected module list and selected university list gets updated, the data stored in the files will get
+Whenever your selected module list and selected university list gets updated, the data stored in the files will get
 updated immediately.
 
 <div markdown="span" class="alert alert-warning"> :exclamation: **Caution:**
-Do not try to edit the data stored in the text file, as the storage feature removes the invalid data stored in the files.
+Do not edit the data stored in the text file, as the storage feature removes the invalid data stored in the files.
 </div>
+
+### Logs
+
+In your working directory, you might notice the `log` directory. The log directory contains files that track the status 
+and records events that occur while SEPlanner is in use. 
+
+The logging information is used for identification and tracking of bugs for developers, as we continue to improve SEPlanner
+for you.
 
 ## FAQ
 
@@ -500,6 +510,9 @@ Do not delete the `/data` directory or any of its files as this will cause you t
 **Q**: How do I save my selected universities and modules?  
 **A**: All your universities, modules and module mappings are automatically saved at 
 each command and will be auto-loaded on program start. 
+
+**Q**: How do I remove all my universities and modules?   
+**A**: You could remove them using the [remove](#removing-a-selected-university) command, or delete the `/data` directory.
 
 ## Command Summary
 
