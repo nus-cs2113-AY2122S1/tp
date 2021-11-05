@@ -1,3 +1,7 @@
+---
+layout: page
+title: About Us 
+---
 
 Display | Name | Github Profile | Portfolio
 --------|:----:|:--------------:|:---------:
