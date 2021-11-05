@@ -41,7 +41,7 @@ total workload:
 # Quick Start
 
 1. Ensure you have **Java 11** or above installed in your Computer.
-2. Download the latest **unimods.jar** and local data from here.
+2. Download the latest **unimods.jar** and from here.
 3. Copy the files to the folder you want to use as the home folder for your Unimods.
 4. Open your CLI of choice and run `java -jar unimods.jar`.
 5. Type the command in the command box and press Enter to execute it.
@@ -191,6 +191,8 @@ You can also apply the following flags to refine the search:
 very quick e.g. `-q`. Note that local search cannot be cancelled.
 
 :information_source: Command, search term and flag regex are case-insensitive.
+
+:information_source: Search too slow? See [here](#slow_search).
 
 :warning: Flags are **NOT** case-insensitive. Inputting an invalid flag will print an error message.
 
@@ -449,7 +451,7 @@ unsupported, since NUS modules are far more often referred to by their module co
 **A**: This is unfortunately caused by most shells not using UTF-8 encoding. If possible, running 
 `chcp 65001` or `chcp.com 65001` from your CLI should resolve most issues.
 
-**Q**: Why is the search taking so long?
+**Q**<a name = "slow_search"></a>: Why is the search taking so long?
 <br>
 **A**: Your query is probably too broad. You can greatly cut down search time by specifying at least the letter codes 
 of the mods you are interested in. If you absolutely need to execute that query, it is recommended to perform a 

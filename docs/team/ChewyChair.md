@@ -16,14 +16,16 @@ Given below are my contributions to the project.
     * Highlights: This feature was initially implemented simply by creating Module objects from an extremely large json,
   in local storage. However, it was changed to instead search online by default and offline if there is no connection.
   Later on, the quicksearch (local search) flag was first implemented as online searches were extremely slow if the
-  search term is broad. Lastly, the other search flags were implemented to allow the user to construct more detailed
-  queries.
+  search term is broad. In `v2.0`, the other search flags were implemented to allow the user to construct more detailed
+  queries. Lastly, due to the case where a user would want to cancel a slow search command, the search command was
+  rewritten as a thread which can be canceled via another thread.
     * Credits: *GSon handles all parsing of jsons.*
 
 * **New Feature**: Added the show command.
     * What it does: allows the user to show details pertaining to a mod.
     * Justification: This feature is extremely important as it allows users to find out more about a mod.
-    * Highlights: This feature is a simple feature that simply prints information from the mod json.
+    * Highlights: This feature is a simple feature that simply prints information from the mod json. In `v2.0` an
+  additional printout for exam dates was added.
     * Credits: *GSon handles all parsing of jsons.*
 
 * **New Feature**: Added the update command.
@@ -32,7 +34,8 @@ Given below are my contributions to the project.
   up to date.
     * Highlights: This feature was one of the first things implemented in order to pull mod information from the NUSMods
   API. It was later added as a command for the user to use as well. It was also integrated into the search/show commands
-  so that pulling any mod jsons from the API will now update the local database.
+  so that pulling any mod jsons from the API will now update the local database. Towards the end of `v2.0`, like the
+  search command, the update command was rewritten as a thread which can be cancelled via another thread.
     * Credits: *GSon handles all parsing of jsons.*
 
 * **Code contributed**: [RepoSense link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=chewychair&sort=totalCommits%20dsc&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&tabAuthor=ChewyChair&tabRepo=AY2122S1-CS2113T-W12-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)

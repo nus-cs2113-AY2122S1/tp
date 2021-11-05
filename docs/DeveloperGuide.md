@@ -84,6 +84,15 @@ The rest of the App consists of five components:
 <br>
 
 ### UI component
+The **UI** component consists of the `AddUI`, `TextUi`, `TimetableUI` and `TranscriptUi` components.
+
+> The `TextUi` component is the most general purpose component and is called from `Logic`, `Storage` and `Online`.
+> 
+> The `AddUI` component is called only from `Logic`, specifically by the `AddCommand`.
+> 
+> The `TimetableUI` component is called from `Timetable`.
+> 
+> The `TranscriptUi` component is called only from `Logic`, specifically by the `TranscriptCommand`.
 
 <br>
 
@@ -106,6 +115,11 @@ Consists of the `CommandParser` and `FlagParser` classes.
 <br>
 
 ### Online component
+The **Online** component consists of only `NusMods`.
+> Attempts to retrieve module information from NUSMods API using the `NusMods` component and prints it using the `UI`
+> component.
+> 
+> If unable to do so, it attempts to do so through the `Storage` component.
 
 <br>
 
@@ -114,6 +128,15 @@ Consists of the `CommandParser` and `FlagParser` classes.
 <br>
 
 ### Storage component
+The **Storage** component consists of the `ModStorage`, `ProfileStorage` and `TimetableStorage` components. Much like
+their names suggest, they handle the storage of Mods, Profiles and Timetables respectively.
+> `ModStorage` is primarily called by the `Online` component when there is a lack of internet connectivity. It is also
+> called through `Logic` manually by the user executing a `SearchCommand` with a quick flag.
+> 
+> `ProfileStorage` is called through the main `UniMods` component on startup when no prior profile information can be
+> found.
+> 
+> `TimetableStorage` is called by the `Timetable` component to handle saving and loading of timetables.
 
 ### Common classes
 
@@ -130,7 +153,7 @@ emulates that of the json, with each `Module` containing an `Attributes` object 
 
 ![](resources/ModulesClassDiagram.png)
 
-####Parsing and Saving of Weeks via Gson
+#### Parsing and Saving of Weeks via Gson
 Gson was unable to parse the weeks key as provided by the NUSMods API as the value expected for the key can be of two different data types.
 
 ```
@@ -319,7 +342,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user      | stop a search command                                           | cancel it without waiting any longer                                   |
 
 ### Use Cases
-####**Use case: Search for and show a module**
+#### **Use case: Search for and show a module**
 
 **MSS**
 1. User searches for modules.
@@ -338,7 +361,7 @@ Use case ends.
 
 <br>
 
-####**Use case: Update local database**
+#### **Use case: Update local database**
 
 **MSS**
 1. User runs update command.
