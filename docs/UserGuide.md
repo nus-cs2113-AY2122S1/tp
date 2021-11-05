@@ -302,9 +302,7 @@ $ list lesson tomorrow
 
 #### Module
 
-Format: `list module {verbose/-v}`
-
-* Adding `verbose` or `-v` at the end will provide more detailed information.
+Format: `list module`
 
 ```
 $ list module
@@ -312,29 +310,6 @@ $ list module
        Here are the modules in your list:
        1. CS2113T Software Engineering & Object-Oriented Programming (4MCs) | Grade: A
        2. CG2028 Computer Organization (2MCs) | Grade: B
-       ------------------------------------------------------------------------------------
-       You have a total of 6 MCs
-       Your current CAP is: 4.50
-      ______________________________________________________________________________________
-
-$ list module verbose
-      ______________________________________________________________________________________
-       Here are the detailed information of your modules:
-       ------------------------------------------------------------------------------------
-       CS2113T Software Engineering & Object-Oriented Programming (4MCs) | Grade: A
-       Department: Computer Science
-       Faculty: Computing
-       Preclusion: CS2103, CS2103T, (CS2113T for CS2113), (CS2113 for CS2113T)
-       Pre-requisite: CS2040C or ((CS2030 or its equivalent) and CS2040/S)
-       Core Requisites: CS2101 Effective Communication for Computing Professionals is co-requisite for CS2113T. Students exempted from CS2101 will take CS2113 which does not have CS2101 as co-req. Otherwise, CS2113 and CS2113T are identical.
-       ------------------------------------------------------------------------------------
-       ------------------------------------------------------------------------------------
-       CG2028 Computer Organization (2MCs) | Grade: B
-       Department: Computing and Engineering Programme
-       Faculty: Multi Disciplinary Programme
-       Preclusion: EE2024 Programming for Computer Interfaces
-       Pre-requisite: CS1010 Programming Methodology and (EE2026 Digital Design / EE2020 Digital Fundamentals)
-       Core Requisites: null
        ------------------------------------------------------------------------------------
        You have a total of 6 MCs
        Your current CAP is: 4.50
@@ -537,10 +512,12 @@ $ find lesson CS2113T
 
 ### Retrieving Module information - `find module`
 
-Format: `find module [MODULE_CODE]`
+Format: `find module [MODULE_CODE] {verbose/-v}`
 
 Shows you a complete list of information for any modules that are listed on NUSMods. You can find information
 such as module title, modular credits, department, faculty, preclusion, pre-requisites, etc.
+
+* Adding `verbose` or `-v` at the end will provide more detailed information.
 
 Example:
 
@@ -548,6 +525,23 @@ Example:
 $ find module cs2113t
     ______________________________________________________________________________________
      CS2113T Software Engineering & Object-Oriented Programming (4MCs) 
+     Department: Computer Science
+     Faculty: Computing
+     Preclusion: CS2103, CS2103T, (CS2113T for CS2113), (CS2113 for CS2113T)
+     Prerequisite: CS2040C or ((CS2030 or its equivalent) and CS2040/S)
+     Corequisite: CS2101 Effective Communication for Computing Professionals is co-requisite for CS2113T. Students exempted from CS2101 will take CS2113 which does not have CS2101 as co-req. Otherwise, CS2113 and CS2113T are identical.
+    ______________________________________________________________________________________
+
+$ find module cs2113t verbose
+    ______________________________________________________________________________________
+     CS2113T Software Engineering & Object-Oriented Programming (4MCs) 
+     This module introduces the necessary skills for systematic and rigorous development
+     of software systems. It covers requirements, design, implementation, quality assuran
+     ce, and project management aspects of small-to-medium size multi-person software pro
+     jects. The module uses the Object Oriented Programming paradigm. Students of this mo
+     dule will receive hands-on practice of tools commonly used in the industry, such as
+     test automation tools, build automation tools, and code revisioning tools will be co
+     vered.
      Department: Computer Science
      Faculty: Computing
      Preclusion: CS2103, CS2103T, (CS2113T for CS2113), (CS2113 for CS2113T)
