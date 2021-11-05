@@ -72,7 +72,7 @@ is entered.
 ### Command Implementation
 
 <p align = "center">
-<img src="images/Package%20commands.png" width = "800" />
+<img src="images/commands.png" width = "800" />
 </p>
 
 
