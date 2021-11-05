@@ -25,22 +25,22 @@ Below are contributions I've made to the team and Ha(ppy)Bit.
 "Update" feature for goal name and habit name:
 - Added the `Command` class `UpdateCommand` and its inheritance classes `UpdateGoalNameCommand` 
   and `UpdateHabitNameCommand`
-- Contributed to `Parser` class `UpdateParser`
+- Contributed to `Parser` class `UpdateParser` for parsing input for updating goal name and updating habit name
 
 
 #### v2.1
 
 - 
-- Added Junit tests in `UpdateParserTest`
+- Added additional Junit tests in `UpdateParserTest` to improve test coverage
 - 
 
 ### Documentation
 
 #### [User Guide (UG)](/docs/UserGuide.md)
 
-- Contributed to "Overview" section.
+- Contributed to UG introduction 
 - Wrote most of "Using this Guide" and "Using _Ha(ppy)Bit_" section
-- Attempted to make the UG user-centric/reader-friendly overall
+- Attempted to make the UG user-centric/reader-friendly overall with signposting and explanations
 - Fixed documentation flaws brought up by peers in PE Dry Run
 
 #### [Developer Guide (DG)](/docs/DeveloperGuide.md)
