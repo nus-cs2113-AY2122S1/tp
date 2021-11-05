@@ -26,6 +26,7 @@ Below is a guide on how you can get started using our program to start **"Schedu
     - [2.7 Editing your tasks: `edit`](#27-editing-your-tasks-edit)
     - [2.8 Deleting your tasks: `delete`](#28-deleting-your-tasks-delete)
     - [2.9 Exiting the program: `bye`](#29-exiting-the-program-bye)
+    - [2.10 Storage](#210-storage)
 - [3. FAQ](#3-faq)
 - [4. Command Summary](#4-command-summary)
 
@@ -34,11 +35,12 @@ Below is a guide on how you can get started using our program to start **"Schedu
 and that `java` is in your `PATH` environment variable.
 2. Download the latest `SchedUrMods.jar` from [here](https://github.com/AY2122S1-CS2113T-W13-3/tp/releases/latest).
 
-   > **⚠️Note:** Do *not* decompress the jar file even if it shows as an archive on your file manager.
+   > **⚠️Warning**: Do *not* decompress the jar file even if it shows as an archive on your file manager.
 3. Copy the file to the folder you want to use as the _home folder_ for Duke.
-4. Open a terminal window in the _home folder_.
-5. Type `java -jar SchedUrMods.jar` into the terminal to start Duke.
-6. The following display should appear in a few seconds:
+   >💡 **Note**: Ensure you have permission to create files and folders in this _home folder_.
+5. Open a terminal window in the _home folder_.
+6. Type `java -jar SchedUrMods.jar` into the terminal to start Duke.
+7. The following display should appear in a few seconds:
 
 ```
  _____        _                _  _   _       ___  ___            _
@@ -155,7 +157,7 @@ The accepted date formats in our program:
 - `HH` is hour on 24-hour clock
 - `mm` is the minute
 
->💡 **Note**: When `dd`, `mm` or `yyyy` is unspecified, they will be replaced with current day, month and year respectively.  
+>💡 **Note**: When `dd`, `MM` or `yyyy` is unspecified, they will be replaced with current day, month and year respectively.  
 
 >💡 **Note**: When `mm` is unspecified, it will be replaced with `0`.
 
@@ -377,6 +379,11 @@ An end-of-file condition in the input, such as <kbd>Ctrl-D</kbd> on Bash, has th
 -------------------------------------------------------------------------
 ```
 
+### 2.10 Storage
+The program will store and automatically update your Tasks in the the file `./data/task.dat` on any change in your Task list.  
+   > **⚠️Warning**: The team **strongly discourages** users from directly modifying Task data in `task.dat` as it can lead to undefined behaviour. The team **will not be responsible** for any *loss of data* or *undefined behaviour* as a result of users directly modifying values in the save file.
+
+
 ## 3. FAQ
 **Q:** What operating systems can the application work on?
 
@@ -385,8 +392,8 @@ that have `java 11` installed on their systems.
 
 **Q:** How do I transfer my data to another computer?
 
-**A:** Install the program on the other computer and replace the new empty `task.txt`
-it creates with the `task.txt` that you wish to transfer from your previous `SchedUrMods.jar`
+**A:** Install the program on the other computer and replace the new empty `tasks.dat`
+it creates with the `tasks.dat` that you wish to transfer from your previous `SchedUrMods.jar`
 home folder.
 
 ## 4. Command Summary
