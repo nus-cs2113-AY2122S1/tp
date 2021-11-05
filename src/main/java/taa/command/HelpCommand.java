@@ -11,7 +11,7 @@ import taa.command.assessment.ListAssessmentsCommand;
 import taa.command.attendance.DeleteAttendanceCommand;
 import taa.command.attendance.ListAttendanceCommand;
 import taa.command.attendance.SetAttendanceCommand;
-import taa.command.mark.AverageMarksCommand;
+import taa.command.mark.AverageMarkCommand;
 import taa.command.mark.DeleteMarkCommand;
 import taa.command.mark.EditMarkCommand;
 import taa.command.mark.ListMarksCommand;
@@ -88,7 +88,7 @@ public class HelpCommand extends Command {
             new SetMarkCommand(""),
             new EditMarkCommand(""),
             new DeleteMarkCommand(""),
-            new AverageMarksCommand(""),
+            new AverageMarkCommand(""),
             new MedianMarkCommand(""),
             new SortByScoresCommand("")
         };

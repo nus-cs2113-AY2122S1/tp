@@ -25,7 +25,7 @@ If you can type fast, TAA can help keep track of your classes and students faste
     * [Setting mark for a student's assessment: `set_mark`](#setting-mark-for-a-students-assessment-set_mark)
     * [Editing mark for a student's assessment: `edit_mark`](#editing-mark-for-a-students-assessment-edit_mark)
     * [Deleting mark for a student's assessment: `delete_mark`](#deleting-mark-for-a-students-assessment-delete_mark)
-    * [Viewing average marks for an assessment: `average_marks`](#viewing-average-marks-for-an-assessment-average_marks)
+    * [Viewing average mark for an assessment: `average_mark`](#viewing-average-mark-for-an-assessment-average_mark)
     * [Viewing median mark for an assessment: `median_mark`](#viewing-median-mark-for-an-assessment-median_mark)
     * [Sorting and listing students in a class by their overall score: `sort_by_scores`](#sorting-and-listing-students-in-a-class-by-their-overall-score-sort_by_scores)
   * [Attendance](#attendance)
@@ -129,15 +129,13 @@ Adds a student to a particular class.
 
 Format: `add_student c/<CLASS_ID> i/<STUDENT_ID> n/<STUDENT_NAME>`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F11).
+  * Case-insensitive
 * `STUDENT_ID` refers to the ID of the student (e.g. A0217978J).
 * `STUDENT_NAME` refers to the name of the student (e.g. Jon Lim).
 
 Examples:
 * `add_student c/CS2113T-F11 i/a0212345x n/Jon Lim`
 * `add_student c/CS2101-C04 n/Jonny Lims i/a1234567i`
-
-> 💡 **Note:**<br />
-> `STUDENT_ID` will be converted to uppercase.
 
 <br>
 
@@ -153,9 +151,6 @@ Format: `edit_student c/<CLASS_ID> s/<STUDENT_INDEX> i/<STUDENT_ID> n/<STUDENT_N
 Examples:
 * `edit_student c/CS2113T-F11 s/1 i/a03452345x n/Jon Lim`
 * `edit_student c/CS2101-D03 s/5 n/Jonny Lims i/a120067i`
-
-> 💡 **Note:**<br />
-> `STUDENT_ID` will be converted to uppercase.
 
 <br>
 
@@ -319,17 +314,17 @@ Expected Output: <br>
 
 <br>
 
-#### Viewing average marks for an assessment: `average_marks`
-Computes and prints the average marks for an assessment. If there are unmarked students, the average will be computed
+#### Viewing average mark for an assessment: `average_mark`
+Computes and prints the average mark for an assessment. If there are unmarked students, the average will be computed
 within the marked students only.
 
-Format: `average_marks c/<CLASS_ID> a/<ASSESSMENT_NAME>`
+Format: `average_mark c/<CLASS_ID> a/<ASSESSMENT_NAME>`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `ASSESSMENT_NAME` refers to the name of the particular assessment.
 
 Examples:
-* `average_marks c/CS2113T a/Midterms`
-* `average_marks c/CS2101 a/Oral Presentation`
+* `average_mark c/CS2113T a/Midterms`
+* `average_mark c/CS2101 a/Oral Presentation`
 
 Expected Output: <br>
 (Some students unmarked) <br>
@@ -428,12 +423,12 @@ Format: `set_comment c/<CLASS_ID> s/<STUDENT_INDEX> t/<COMMENT>`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 * `COMMENT` refers to the comment to be set.
-> 💡 **Note:**<br />
-> The new comment will overwrite any previous comment set
 
 Examples:
 * `set_comment c/CS2113T-F12 s/1 t/Doing well in class`
 * `set_comment c/CS2113T-F12 s/1 t/Needs help understanding java`
+> 💡 **Note:**<br />
+> The new comment will overwrite any previous comment set
 
 <br>
 
@@ -510,7 +505,7 @@ Mark | Listing marks for an assessment: | `list_marks c/<CLASS_ID> a/<ASSESSMENT
 Mark | Setting mark for a student's assessment | `set_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<MARKS>`
 Mark | Editing mark for a student's assessment | `edit_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<NEW_MARKS>`
 Mark | Deleting mark for a student's assessment | `delete_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME>`
-Mark | Viewing average marks for an assessment | `average_marks c/<CLASS_ID> a/<ASSESSMENT_NAME>`
+Mark | Viewing average mark for an assessment | `average_mark c/<CLASS_ID> a/<ASSESSMENT_NAME>`
 Mark | Viewing the median mark for an assessment | `median_mark c/<CLASS_ID> a/<ASSESSMENT_NAME>`
 Mark | Sorting and listing students in a class by their overall score | `sort_by_scores c/<CLASS_ID> o/<ORDER>`
 Attendance | Listing attendance for a particular student | `list_attendance c/<CLASS_ID> s/<STUDENT_INDEX>`
