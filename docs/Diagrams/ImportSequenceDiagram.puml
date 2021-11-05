@@ -2,6 +2,7 @@
 !include Style.puml
 
 [-> Storage: load()
+activate Storage
 Storage -> Import: importStorage(filePath)
 
 loop has next line in file
@@ -27,7 +28,8 @@ loop has next line in file
 
 end
 
-Import --> Storage: GoalList object
+
+Import --> Storage : GoalList object
 [<-- Storage: GoalList object
 
 @enduml

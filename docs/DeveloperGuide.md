@@ -198,6 +198,8 @@ The program uses `Storage` class to import data from the storage file.
 
 The sequence diagram shows how the program exports data to storage file.
 
+![Export Sequence Diagram](Diagram%20Images/ExportSequenceDiagram.png)
+
 `Storage` class can also export data to storage file with `Export` class.
 It takes in a `GoalList` object and converts the data into string to be stored in storage file.
 
