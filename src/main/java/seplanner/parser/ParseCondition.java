@@ -44,7 +44,7 @@ public class ParseCondition {
     }
 
     public static Module isValidModule(ModuleList moduleMasterList,String moduleCode) {
-        return moduleMasterList.isExistModule(moduleCode);
+        return moduleMasterList.getModule(moduleCode);
     }
 
     public static boolean isIndexOutOfBounds(int uniIndex, UniversityList universityMasterList) {
