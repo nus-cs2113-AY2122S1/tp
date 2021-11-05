@@ -130,9 +130,12 @@ The user is able to add a contact by entering a command in the form of `add <-n>
 
 The user's input is parsed in `MainParser` and `AddContactParser`, the latter which inherits `ContactParser`. 
 `ContactParser` inherits `RegexParser` (for regex checks regarding each detail) and implements the `ContactDetails`
-interface (which uniquely allows the parsers to easily identify each detail based on their indexes).
+interface (which uniquely allows the parsers to easily identify each detail based on their indexes). The class 
+diagram for this is displayed below.
 
-As the contacts are identified by their names, the name field is made compulsory at the `MainParser` level.
+![Add Contact Parser Class Diagram](images/AddContactParserClassDiagram.png)
+
+As the contacts are identified by their names, the name field is made **compulsory** at the `MainParser` level.
 The diagram below shows the process of parsing the user's input.
 
 ![Add Contact Parsing](images/AddContactParsingSequenceDiagram.png)
