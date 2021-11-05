@@ -125,8 +125,8 @@ The currently supported contact details are provided in the table below:
 
 ### <a name="Add"></a>Adding a contact: `add`
 This feature is processed using `AddContactCommand`. This feature allows a user to add a contact to their contact list.
-The user is able to add a contact by entering a command in the form of `add [DETAILS WITH FLAGS]`, where
-the details with flags are specified in the form `-<flag> <detail>`.
+The user is able to add a contact by entering a command in the form of `add <-n> <NAME> {-g <GITHUB>} {-l <LINKEDIN>} 
+{-te <TELEGRAM>} {-tw <TWITTER>} {-e <EMAIL>}`.
 
 The user's input is parsed in `MainParser` and `AddContactParser`, the latter which inherits `ContactParser`. 
 `ContactParser` inherits `RegexParser` (for regex checks regarding each detail) and implements the `ContactDetails`
@@ -144,7 +144,7 @@ executed in `Duke`. The sequence diagram below illustrates the process of execut
 
 ### <a name="View"></a>Viewing a contact: `view`
 This feature is processed using `ViewContactCommand`. Whenever a user wants to view a specific contact from the 
-contact list, user can input `view [INDEX]` with the index of the desired contact displayed from the `list` feature. 
+contact list, user can input `view INDEX` with the index of the desired contact displayed from the `list` feature. 
 `ViewContactCommand` is then created in the `MainParser` and executed in `Duke`.
 The sequence diagram below illustrates the `execute()` function in `ViewContactCommand`.
 
@@ -152,11 +152,11 @@ The sequence diagram below illustrates the `execute()` function in `ViewContactC
 
 ### <a name="Edit"></a>Editing a contact: `edit`
 This feature is processed using `EditContactParser` under `MainParser`. In order to edit a contact in the contact list, 
-a user must enter a command in the form `edit [CONTACT INDEX] [DETAILS WITH FLAGS]`, where the details with flags are 
-specified in the form `-<flag> <detail>` with up to 6 details i.e. `-g github-username -tw twitter_handle`. The user 
-input will be parsed by `EditContactParser` methods `getIndexToStore` and `parseContactDetails` to obtain a String 
-array with the details to be edited. An `EditContactCommand` with the specified parameters will then be created and 
-executed in `Duke`. The sequence diagram below shows how the whole process is carried out.
+a user must enter a command in the form `edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-l <LINKEDIN>} {-te <TELEGRAM>} 
+{-tw <TWITTER>} {-e <EMAIL>}`. The user input will be parsed by `EditContactParser` methods `getIndexToStore` and 
+`parseContactDetails` to obtain a String array with the details to be edited. An `EditContactCommand` 
+with the specified parameters will then be created and executed in `Duke`. The sequence diagram below 
+shows how the whole process is carried out.
 
 ![Edit Sequence Diagram](images/EditContactCommandSequenceDiagram.png)
 
@@ -176,7 +176,7 @@ If user cancels deletion, a message is printed to show that the deletion has bee
 
 ![Delete All Sequence Diagram](images/DeleteAllContacts.png) 
 
-To delete a selected contact, a user must enter a command in the form `rm [INDEX]`. The sequence diagram below
+To delete a selected contact, a user must enter a command in the form `rm <INDEX>`. The sequence diagram below
 shows how the removal of a contact works. Before any deletion, details of the contact with the specified`INDEX` 
 will be displayed to the user, along with a prompt to confirm deletion. If the user confirms deletion, 
 deletion of the selected contact will be executed, along with a message to show that deletion has been executed.
@@ -184,8 +184,8 @@ If user cancels deletion, a message is printed to show that the deletion has bee
 
 ![Delete Selected Sequence Diagram](images/DeleteSelectedContact.png)
 
-To delete specific details of a selected contact, a user must enter a command in the form `rm [CONTACT INDEX]
-[FLAGS]`. The sequence diagram below shows how the removal of a contact's fields works. Before any
+To delete specific details of a selected contact, a user must enter a command in the form `rm <INDEX> {-g} {-l} {-te}
+{-tw} {-e}`. The sequence diagram below shows how the removal of a contact's fields works. Before any
 deletion, details of the contact fields specified will be displayed to the user, along with a prompt to confirm 
 deletion. If the user confirms deletion, deletion of the selected contact will be executed, along with a message to show
 that deletion has been executed. If user cancels, deletion, a message is printed to show that the deletion has been
@@ -195,7 +195,7 @@ cancelled.
 
 ### <a name="Search"></a>Searching a contact: `search`
 This feature is processed using `SearchContactParser` under `MainParser`. In order to edit a contact in the contact list,
-a user must enter a command in the form `search [FLAG] [SEARCH QUERY]`. If no flag is specified, the search will be done
+a user must enter a command in the form `search {-n | -g | -l | -te | -tw | -e} <SEARCH QUERY>`. If no flag is specified, the search will be done
 on contact names buy default. From the user input, the search query and the search flag are obtained from the 
 `parseSearchQuery` and the `getDetailFlag` methods respectively. A `SearchContactCommand` with the specified parameters
 will be created and executed in `Duke`. The sequence diagram below shows how the whole process is carried out.
