@@ -10,16 +10,16 @@ public class DuplicatedArgumentException extends TaaException {
     }
 
     private static String generateMessage(ArrayList<String> duplicatedKeys) {
-        String duplicatedKeysStr = "";
+        StringBuilder duplicatedKeysStr = new StringBuilder();
         for (int i = 0; i < duplicatedKeys.size(); i += 1) {
             String key = duplicatedKeys.get(i);
 
             if (i > 0) {
-                duplicatedKeysStr += ", ";
+                duplicatedKeysStr.append(", ");
             }
-            duplicatedKeysStr += key;
+            duplicatedKeysStr.append(key);
         }
 
-        return String.format(MESSAGE_FORMAT_DUPLICATED_KEYS_FOUND, duplicatedKeysStr);
+        return String.format(MESSAGE_FORMAT_DUPLICATED_KEYS_FOUND, duplicatedKeysStr.toString());
     }
 }
