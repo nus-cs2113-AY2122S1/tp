@@ -8,7 +8,7 @@ import taa.command.assessment.AddAssessmentCommand;
 import taa.command.attendance.ListLessonAttendanceCommand;
 import taa.command.teachingclass.AddClassCommand;
 import taa.command.student.AddStudentCommand;
-import taa.command.mark.AverageMarksCommand;
+import taa.command.mark.AverageMarkCommand;
 import taa.command.Command;
 import taa.command.assessment.DeleteAssessmentCommand;
 import taa.command.attendance.DeleteAttendanceCommand;
@@ -147,8 +147,8 @@ public class Parser {
             command = new DeleteMarkCommand(argument);
             break;
 
-        case Command.COMMAND_AVERAGE_MARKS:
-            command = new AverageMarksCommand(argument);
+        case Command.COMMAND_AVERAGE_MARK:
+            command = new AverageMarkCommand(argument);
             break;
 
         case Command.COMMAND_MEDIAN_MARK:

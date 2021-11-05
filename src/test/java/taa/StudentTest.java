@@ -21,4 +21,9 @@ public class StudentTest {
         student.setMarks("Midterms", 99.9);
         assertEquals(99.9, student.getMarks("Midterms"));
     }
+
+    @Test
+    void averageMarks_userInput_marksAveragedCorrectly() {
+        
+    }
 }

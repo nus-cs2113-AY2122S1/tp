@@ -1,5 +1,6 @@
 package taa.command.mark;
 
+//@@author jon-the-melon
 import taa.teachingclass.TeachingClass;
 import taa.teachingclass.ClassList;
 import taa.command.Command;
@@ -14,17 +15,17 @@ import taa.student.StudentList;
 /**
  * Class that deals with the outputting of the average marks.
  */
-public class AverageMarksCommand extends Command {
+public class AverageMarkCommand extends Command {
     private static final String KEY_CLASS_ID = "c";
     private static final String KEY_ASSESSMENT_NAME = "a";
     private static final String[] AVERAGE_MARKS_ARGUMENT_KEYS = {KEY_CLASS_ID, KEY_ASSESSMENT_NAME};
 
     private static final String MESSAGE_FORMAT_AVERAGE_MARKS_USAGE = "%s %s/<CLASS_ID> %s/<ASSESSMENT_NAME>";
-    private static final String MESSAGE_FORMAT_AVERAGE_MARKS = "Average marks for %s is %,.2f";
-    private static final String MESSAGE_FORMAT_AVERAGE_MARKS_WITH_UNMARKED = "Average marks for %s is %,.2f\n"
+    private static final String MESSAGE_FORMAT_AVERAGE_MARKS = "Average mark for %s is %,.2f";
+    private static final String MESSAGE_FORMAT_AVERAGE_MARKS_WITH_UNMARKED = "Average mark for %s is %,.2f\n"
         + "Note that %d student(s) have yet to be marked!";
 
-    public AverageMarksCommand(String argument) {
+    public AverageMarkCommand(String argument) {
         super(argument, AVERAGE_MARKS_ARGUMENT_KEYS);
     }
 
@@ -40,7 +41,7 @@ public class AverageMarksCommand extends Command {
     }
 
     /**
-     * Executes the average_marks command and displays the average mark of an assessment to the user.
+     * Executes the average_mark command and displays the average mark of an assessment to the user.
      *
      * @param classList The list of classes.
      * @param ui         The ui instance to handle interactions with the user.
@@ -66,16 +67,16 @@ public class AverageMarksCommand extends Command {
             throw new TaaException(MESSAGE_INVALID_ASSESSMENT_NAME);
         }
 
-        printAverageMarks(ui, teachingClass, assessment);
+        printAverageMark(ui, teachingClass, assessment);
     }
 
     /**
-     * Outputs the average marks of an assessment in a class.
+     * Outputs the average mark of an assessment in a class.
      *
      * @param ui     The ui instance to handle interactions with the user.
      * @param teachingClass The class the assessment belongs to.
      */
-    private void printAverageMarks(Ui ui, TeachingClass teachingClass, Assessment assessment) {
+    private void printAverageMark(Ui ui, TeachingClass teachingClass, Assessment assessment) {
         StudentList studentList = teachingClass.getStudentList();
         String assessmentName = assessment.getName();
 
@@ -90,12 +91,12 @@ public class AverageMarksCommand extends Command {
             }
         }
 
-        double averageMarks = totalMarks / (classSize - unmarkedStudents);
+        double averageMark = totalMarks / (classSize - unmarkedStudents);
         if (unmarkedStudents <= 0) {
-            ui.printMessage(String.format(MESSAGE_FORMAT_AVERAGE_MARKS, assessmentName, averageMarks));
+            ui.printMessage(String.format(MESSAGE_FORMAT_AVERAGE_MARKS, assessmentName, averageMark));
         } else {
             ui.printMessage(String.format(MESSAGE_FORMAT_AVERAGE_MARKS_WITH_UNMARKED,
-                assessmentName, averageMarks, unmarkedStudents));
+                assessmentName, averageMark, unmarkedStudents));
         }
     }
 
@@ -108,7 +109,7 @@ public class AverageMarksCommand extends Command {
     protected String getUsage() {
         return String.format(
             MESSAGE_FORMAT_AVERAGE_MARKS_USAGE,
-            COMMAND_AVERAGE_MARKS,
+            COMMAND_AVERAGE_MARK,
             KEY_CLASS_ID,
             KEY_ASSESSMENT_NAME
         );
