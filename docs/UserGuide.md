@@ -52,10 +52,10 @@ e.g. For `add b t/TITLE i/ID ...`, entering `add a t/The Great Gatsbyi/0125` is 
 e.g. For `add b t/TITLE i/ID ...`, entering `ADD a t/The Great Gatsby i/0125` is invalid
 
 ### Adding an item
-Add a new item to the catalogue. Items can fall under one of four categories: Audio, Books, Magazines, Videos
+Add a new item to the catalogue. Items can fall under one of five categories: Audio, Books, Magazines, Videos and Miscellaneous.
 
 #### Adding an audio item
-Add a new audio item to the catalogue
+Add a new audio item to the catalogue.
 
 Format: `add a t/TITLE i/ID a/ARTIST d/DURATION`
 
@@ -69,7 +69,7 @@ Expected Output:
 ```
 
 #### Adding a book item
-Add a new book item to the catalogue
+Add a new book item to the catalogue.
 
 Format: `add b t/TITLE i/ID a/AUTHOR`
 
@@ -83,7 +83,7 @@ Expected Output:
 ```
 
 #### Adding a magazine item
-Add a new magazine item to the catalogue
+Add a new magazine item to the catalogue.
 
 Format: `add m t/TITLE i/ID p/PUBLISHER e/EDITION`
 
@@ -97,7 +97,7 @@ Expected Output:
 ```
 
 #### Adding a video item
-Add a new video item to the catalogue
+Add a new video item to the catalogue.
 
 Format: `add v t/TITLE i/ID p/PUBLISHER e/DURATION`
 
@@ -111,7 +111,7 @@ Expected Output:
 ```
 
 #### Adding a miscellaneous item
-For any other item that cannot be categorised into the above-mentioned ones, they can be added using this command
+For any other item that cannot be categorised into the above-mentioned ones, they can be added using this command.
 
 Format: `add i t/TITLE i/ID`
 
@@ -125,7 +125,7 @@ Expected Output:
 ```
 
 ### List items
-List out all items in the catalogue
+List out all items in the catalogue.
 
 Format: `list`
 
@@ -141,7 +141,7 @@ Expected Output:
 ```
 
 ### Listing items that are due today
-List the loaned items that need to be returned today
+List the loaned items that need to be returned today.
 
 Format: `deadline today`
 
@@ -156,7 +156,7 @@ Expected Output:
 ```
 
 ### Listing items that are overdue
-List the loaned items that already overdue but haven't been returned yet
+List the loaned items that already overdue but haven't been returned yet.
 
 Format: `deadline overdue`
 
@@ -171,7 +171,7 @@ Expected Output:
 ```
 
 ### Listing items that are due on a specific date
-List the loaned items that are due on a specific date given in the input
+List the loaned items that are due on a specific date given in the input.
 
 > ℹ️ `DUE_DATE` must be in the format of `dd-mm-yyyy` in order to be valid
 

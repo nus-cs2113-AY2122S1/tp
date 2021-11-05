@@ -15,6 +15,7 @@ This document is meant to assist developers in better understanding the inner wo
   - [UI Component](#ui-component)
   - [Common Package](#common-component)
 - [Implementation](#implementation)
+  - [Add Command](#add-command)
 
 ## Acknowledgements
 
@@ -151,8 +152,36 @@ Classes used by multiple components are located in the `common` package.
 - `Status` enumeration contains the possible values for `Status` of items, which include `AVAILABLE`, `RESERVED` and `LOANED`
 - `Messages` contains information, warning and error messages
 
-
 ## Implementation
+
+### Add Command
+
+![AddCommandSequenceDiagram](img/AddCommandSequenceDiagram.png)
+
+![AddCommandObjectDiagram](img/AddCommandObjectDiagram.png)
+
+The following diagram shows the sequence diagram and the object diagram of the addition of a book.
+Firstly the user types in an add command.
+
+The example which is shown in the above diagrams is the addition of a book with the title `1984`, ID `91` and authored by `George Orwell`, 
+with the full command being `add b t/1984 i/91 a/George Orwell`
+
+1. The `main()` method within `Libmgr` calls `parser.parse()`, supplying the full line of input entered by the user.
+2. Within `parser.parse()`, `parser.extractArgs()` is called on the line of user input, generating a `HashMap<String, String>` <br>
+In this instance, the hashmap will contain the following entries
+
+|Key (String)|Value (String)|
+|---|---|
+|null|add b|
+|t/|1984|
+|i/|91|
+|a/|George Orwell|
+
+3. It then checks the value associated with the `null` key in order to determine which `Command` to generate, in this case the `AddBookCommand` is generated
+4. The newly created `AddBookCommand` object is returned by the `parser`
+5. `AddBookCommand.execute()` is executed by `Libmgr` which performs two checks, whether there are missing arguments and whether there are additional arguments supplied, outputting the relevant warning messages afterwards.
+6. If both checks pass, a new `Book` object is created with values stored in the `HashMap<String, String>` variable.
+7. Lastly this new `Book` object is passed to the `Catalogue` object which along with the `Catalogue.add()` method. 
 
 #### Edit Command
 
