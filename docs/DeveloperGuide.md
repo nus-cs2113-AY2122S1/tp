@@ -80,7 +80,16 @@ will be referred to later on.
 ![Main Parser Sequence Diagram](images/MainParserSequenceDiagram.png)
 
 ### <a name="command"></a>Command
+
+The `Command` component represents a collection of classes with their names in the form of `XYZCommand`. The `XYZCommand` 
+classes are executed in `ConTech.java` by calling on their corresponding `execute()` function. 
+
 ### <a name="contact-list"></a>ContactList
+
+The `ContactList` component contains all the contacts stored in an arraylist. It deals with operations that interact with 
+the contacts in the `ContactList`, such as adding or editing contacts. The contacts stored in the `ContactList` are sorted
+according to their names in alphabetical order.
+
 ### <a name="storage"></a>Storage
 **API** :`Storage.java`
 
@@ -90,6 +99,8 @@ The `Storage` component is responsible for saving both contacts data and persona
 paths, `data/contacts.txt` and `data/me.txt`. `Storage` is also responsible for loading these data back into their 
 corresponding `ContactList` and `Contact` objects. It is thus dependent on the classes, `ContactList` and 
 `Contact`.
+
+
 
 
 ## <a name="implementation"></a>Implementation
