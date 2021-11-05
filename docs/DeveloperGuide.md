@@ -284,6 +284,7 @@ This object will return an instance of `ExitCommand`.
 * This is an abstract class inherited from Java 11's `ParseException` and its children objects are thrown when an input is detected as invalid. 
 * Each command word has its respective `ParserClassException` with its format inside.
 * On top of the parameters for `ParseException`, and additional boolean variable is required to identify when the user has made a format error in the command and the correct format will be output to the user.
+* Any instance of this exception will be caught in the main method of `Seplanner` class.
 
 ## Product scope
 

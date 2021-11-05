@@ -1,6 +1,33 @@
 @startuml
 'https://plantuml.com/class-diagram
 
+hide circle
+skinparam classAttributeIconSize 0
+skinparam groupInheritance 2
+skinparam maxWidth 128
+
+Parser --> AddCommandParser
+Parser --> RemoveCommandParser
+Parser --> FindCommandParser
+Parser --> SearchMapCommandParser
+Parser --> ListCommandParser
+Parser --> HelpCommandParser
+Parser --> ExitCommandParser
+
+AddCommandParser --> AddParseException
+RemoveCommandParser --> RemoveParseException
+FindCommandParser --> FindParseException
+SearchMapCommandParser --> SearchMapParseException
+ListCommandParser --> ListParseException
+
+AddParseException --|> ParserClassException
+RemoveParseException --|> ParserClassException
+FindParseException --|> ParserClassException
+SearchMapParseException --|> ParserClassException
+ListParseException --|> ParserClassException
+
+ListCommandParser --> ListType
+
 class Parser {
     - BASIC_COMMAND_FORMAT: Pattern
     # universityMasterList: UniversityList
@@ -19,11 +46,15 @@ class AddCommandParser {
     - module: Module
     - logger: Logger
 
-    + parse(arguments: String, universityMasterList: UniversityList, moduleMasterList: ModuleList, universitySelectedList: UniversityList, moduleSelectedList: ModuleList): Command
+    + parse(arguments: String, universityMasterList: UniversityList, moduleMasterList: ModuleList,
+    universitySelectedList: UniversityList, moduleSelectedList: ModuleList): Command
     - identifyFlagAndSplitArgs(arguments: String): String
-    - handleUniFlagArgs(arguments: String, universityMasterList: UniversityList, universitySelectedList: UniversityList): void
-    - handleModFlagArgs(arguments: String, moduleMasterList: ModuleList, moduleSelectedList: ModuleList): void
-    - handleMapFlagArgs(arguments: String, universitySelectedList: UniversityList, moduleSelectedList: ModuleList, universityMasterList: UniversityList): void
+    - handleUniFlagArgs(arguments: String, universityMasterList: UniversityList,
+    universitySelectedList: UniversityList): void
+    - handleModFlagArgs(arguments: String,
+      moduleMasterList: ModuleList, moduleSelectedList: ModuleList): void
+    - handleMapFlagArgs(arguments: String, universitySelectedList: UniversityList,
+      moduleSelectedList: ModuleList, universityMasterList: UniversityList): void
 }
 
 class ExitCommandParser {
@@ -34,7 +65,8 @@ class FindCommandParser {
     - logger: Logger
     - flag:String
 
-    + parse(arguments: String, universityMasterList: UniversityList, moduleMasterList: ModuleList): Command
+    + parse(arguments: String, universityMasterList: UniversityList,
+      moduleMasterList: ModuleList): Command
     - identifyFlagAndSplitArgs(arguments: String): String
 }
 
@@ -45,7 +77,8 @@ class HelpCommandParser {
 class ListCommandParser {
     - logger: Logger
 
-    + parse(arguments: String, universityMasterList: UniversityList, moduleMasterList: ModuleList, universitySelectedList: UniversityList, moduleSelectedList: ModuleList): Command
+    + parse(arguments: String, universityMasterList: UniversityList, moduleMasterList: ModuleList,
+      universitySelectedList: UniversityList, moduleSelectedList: ModuleList): Command
 }
 
 class RemoveCommandParser {
@@ -56,20 +89,22 @@ class RemoveCommandParser {
     - module: Module
     - logger: Logger
 
-    + parse(arguments: String, universityMasterList: UniversityList, moduleMasterList: ModuleList, universitySelectedList: UniversityList, moduleSelectedList: ModuleList): Command
+    + parse(arguments: String, universityMasterList: UniversityList, moduleMasterList: ModuleList,
+    universitySelectedList: UniversityList, moduleSelectedList: ModuleList): Command
     - identifyFlagAndSplitArgs(arguments: String): String
-    - handleUniFlagArgs(arguments: String, universityMasterList: UniversityList, universitySelectedList: UniversityList): void
-    - handleModFlagArgs(arguments: String, moduleMasterList: ModuleList, moduleSelectedList: ModuleList): void
-    - handleMapFlagArgs(arguments: String, universitySelectedList: UniversityList, moduleSelectedList: ModuleList, universityMasterList: UniversityList): void
+    - handleUniFlagArgs(arguments: String, universityMasterList: UniversityList,
+      universitySelectedList: UniversityList): void
+    - handleModFlagArgs(arguments: String, moduleMasterList: ModuleList,
+      moduleSelectedList: ModuleList): void
+    - handleMapFlagArgs(arguments: String, universitySelectedList: UniversityList,
+      moduleSelectedList: ModuleList, universityMasterList: UniversityList): void
 }
 
 class SearchMapCommandParser {
     - logger: Logger
 
-    + parse(arguments: String, universityMasterList: UniversityList, universitySelectedList: UniversityList, moduleSelectedList: ModuleList): SearchMapCommand
-}
-
-class ParseCondition {
+    + parse(arguments: String, universityMasterList: UniversityList,
+    universitySelectedList: UniversityList, moduleSelectedList: ModuleList): SearchMapCommand
 }
 
 enum ListType {
