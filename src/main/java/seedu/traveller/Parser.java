@@ -190,6 +190,19 @@ public class Parser {
     }
 
     /**
+     * Parses user input to give a <code>DeleteCommand</code>.
+     * @param userInput Raw user input, with the first command option (delete) removed.
+     * @return Command A <code>DeleteCommand</code> object.
+     */
+    private static Command parseDeleteCommand(String userInput) throws TravellerException {
+        Command command;
+        logger.log(Level.INFO, "Delete command input");
+        String tripName = parseFieldValue(userInput, 0, userInput.length());
+        command = new DeleteCommand(tripName);
+        return command;
+    }
+
+    /**
      * Parses user input to give an <code>EditCommand</code>.
      * @param userInput Raw user input, with the first command option (edit) removed.
      * @return Command An <code>EditCommand</code> object.
@@ -213,19 +226,6 @@ public class Parser {
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidEditFormatException();
         }
-        return command;
-    }
-
-    /**
-     * Parses user input to give a <code>DeleteCommand</code>.
-     * @param userInput Raw user input, with the first command option (delete) removed.
-     * @return Command A <code>DeleteCommand</code> object.
-     */
-    private static Command parseDeleteCommand(String userInput) throws TravellerException {
-        Command command;
-        logger.log(Level.INFO, "Delete command input");
-        String tripName = parseFieldValue(userInput, 0, userInput.length());
-        command = new DeleteCommand(tripName);
         return command;
     }
 
@@ -322,6 +322,18 @@ public class Parser {
     }
 
     /**
+     * Parses user input to give a <code>ViewCommand</code>.
+     * @return Command A <code>ViewCommand</code> object.
+     */
+    private static Command parseViewCommand(String userInput) throws  TravellerException {
+        Command command;
+        logger.log(Level.INFO, "View command input");
+        String tripName = parseFieldValue(userInput, 0, userInput.length());
+        command = new ViewCommand(tripName);
+        return command;
+    }
+
+    /**
      * Parses user input to give an <code>EditItemCommand</code>.
      * @param userInput Raw user input, with the first command option (edit-item) removed.
      * @return Command An <code>EditItemCommand</code> object.
@@ -372,14 +384,32 @@ public class Parser {
     }
 
     /**
-     * Parses user input to give a <code>ViewCommand</code>.
-     * @return Command A <code>ViewCommand</code> object.
+     * Parses user input to give an <code>AddDayCommand</code>.
+     * @param userInput Raw user input, with the first command option (add-day) removed.
+     * @return Command An <code>AddDayCommand</code> object.
      */
-    private static Command parseViewCommand(String userInput) throws  TravellerException {
+    private static Command parseAddDayCommand(String userInput) throws TravellerException {
+        logger.log(Level.INFO, "Add-day command input");
+        String tripName;
+        String rawDaysIndex;
+
+        try {
+            int dayIdx = getDayFlagIndex(userInput);
+            tripName = parseFieldValue(userInput, 0, dayIdx);
+            rawDaysIndex = parseFieldValue(userInput, dayIdx + DAY_LENGTH, userInput.length());
+        } catch (StringIndexOutOfBoundsException e) {
+            logger.log(Level.WARNING, "Invalid add-day command format: " + userInput);
+            throw new InvalidAddDayFormatException();
+        }
+
+        int daysIndex = parseValidIndex(rawDaysIndex);
+        if (daysIndex == 0) {
+            throw new InvalidNumberOfDaysException(daysIndex);
+        }
+        assert daysIndex > 0 : "Number of days is negative or 0.";
+
         Command command;
-        logger.log(Level.INFO, "View command input");
-        String tripName = parseFieldValue(userInput, 0, userInput.length());
-        command = new ViewCommand(tripName);
+        command = new AddDayCommand(tripName, daysIndex);
         return command;
     }
 
@@ -444,37 +474,6 @@ public class Parser {
             throw new InvalidShortestCostException();
         }
 
-        return command;
-    }
-
-
-    /**
-     * Parses user input to give an <code>AddDayCommand</code>.
-     * @param userInput Raw user input, with the first command option (add-day) removed.
-     * @return Command An <code>AddDayCommand</code> object.
-     */
-    private static Command parseAddDayCommand(String userInput) throws TravellerException {
-        logger.log(Level.INFO, "Add-day command input");
-        String tripName;
-        String rawDaysIndex;
-
-        try {
-            int dayIdx = getDayFlagIndex(userInput);
-            tripName = parseFieldValue(userInput, 0, dayIdx);
-            rawDaysIndex = parseFieldValue(userInput, dayIdx + DAY_LENGTH, userInput.length());
-        } catch (StringIndexOutOfBoundsException e) {
-            logger.log(Level.WARNING, "Invalid add-day command format: " + userInput);
-            throw new InvalidAddDayFormatException();
-        }
-
-        int daysIndex = parseValidIndex(rawDaysIndex);
-        if (daysIndex == 0) {
-            throw new InvalidNumberOfDaysException(daysIndex);
-        }
-        assert daysIndex > 0 : "Number of days is negative or 0.";
-
-        Command command;
-        command = new AddDayCommand(tripName, daysIndex);
         return command;
     }
 
