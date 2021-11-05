@@ -6,7 +6,18 @@ import seplanner.universities.UniversityList;
 
 import java.io.IOException;
 
+/**
+ * Command to list universities in the master university list or the selected university list.
+*/
 public class ListUniCommand extends Command {
+    
+    /**
+     * print all universities in the master university list or the selected university list.
+     *
+     * @param universityList list to be displayed, which is the master university list or the selected university list.
+     * @param universityMasterList The master university list which contains all universities.
+     * @param type type of input, which is either "master" or "selected".
+    */
     public ListUniCommand(UniversityList universityList, UniversityList universityMasterList,
                           ListType type) throws IOException {
         if (universityList.getSize() == 0) {

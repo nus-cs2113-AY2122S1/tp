@@ -1,6 +1,6 @@
 package seplanner.exceptions;
 
-import java.text.ParseException;
+// @@author leowyy99
 
 public class FindParseException extends ParserClassException {
     private final String format = "find /uni <search field> ------------- "
@@ -9,17 +9,23 @@ public class FindParseException extends ParserClassException {
             + "find /code <search field> ------------ Find module codes that contain the search field\n";
 
     /**
-     * Constructs a ParseException with the specified detail message and
+     * Constructs an FindParseException with the specified detail message and
      * offset.
      * A detail message is a String that describes this particular exception.
      *
-     * @param s           the detail message
-     * @param errorOffset the position where the error is found while parsing.
+     * @param s The detail message
+     * @param errorOffset The position where the error is found while parsing.
+     * @param isPrintFormat Whether there is a need to output the format.
      */
-    public FindParseException(String s, int errorOffset) {
-        super(s, errorOffset);
+    public FindParseException(String s, int errorOffset, boolean isPrintFormat) {
+        super(s, errorOffset, isPrintFormat);
     }
 
+    /**
+     * Get the format String.
+     *
+     * @return The command format.
+     */
     public String getFormat() {
         return format;
     }

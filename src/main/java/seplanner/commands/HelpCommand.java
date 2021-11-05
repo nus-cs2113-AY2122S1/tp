@@ -1,6 +1,9 @@
 package seplanner.commands;
 
 //@@author titustortoiseturtle1999
+/**
+ * Help command to display all commands functions.
+*/
 public class HelpCommand extends Command {
     public HelpCommand() {
         String help

@@ -43,8 +43,7 @@ public class Seplanner {
             cmd = mainParser.parseCommand(userInput);
             System.out.println();
         } catch (ParserClassException e) {
-            UiInvalid.printParseException(e.getMessage());
-            UiInvalid.printFormat(e.getFormat());
+            UiInvalid.printParseException(e.getMessage(), e.getFormat(), e.isPrintFormat());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println();
