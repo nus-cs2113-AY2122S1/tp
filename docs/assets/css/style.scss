@@ -4,6 +4,9 @@
 @import 'jekyll-theme-cayman';
 
 code {
-  font-size: 95%;
   border: solid 1px $border-color;
+}
+
+.main-content code {
+  font-size: 0.9em;
 }
