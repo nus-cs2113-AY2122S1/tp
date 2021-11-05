@@ -5,6 +5,7 @@ import seplanner.modules.Module;
 import seplanner.modules.ModuleList;
 import seplanner.ui.UiModule;
 
+//@@author Jiale-Sun
 /**
  * Command to list modules in the master module list or the selected module list.
 */

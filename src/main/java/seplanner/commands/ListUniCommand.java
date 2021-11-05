@@ -6,6 +6,7 @@ import seplanner.universities.UniversityList;
 
 import java.io.IOException;
 
+//@@author Jiale-Sun
 /**
  * Command to list universities in the master university list or the selected university list.
 */

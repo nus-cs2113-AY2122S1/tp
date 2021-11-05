@@ -67,34 +67,47 @@ The other core components of SEPlanner are:
 </p>
 
 The sequence diagram above illustrates the flow through our program structure when the user input `add /uni 1` 
-is entered. 
+is entered.  
+
+When the user runs the `add /uni 1` action on the parser class, the parser class calls the `addUniCommand` method 
+in the `addUniCommand` class by passing the university with master index `1` to it.  
+
+The `addUniCommand` class then  
+1. calls the `selectedUniversityList#addUniversity` method in the model class 
+by passing the university to implement the action.
+2. calls the `updateSelectedUniversity` method in the storage class 
+by passing the selected university list to update the stored selected list
+3. calls `printUniversity` in the UI class.
+by passing the university to display the message of adding the selected university to the user.
  
 ### Command Implementation
 
 <p align = "center">
-<img src="images/Package%20commands.png" width = "800" />
+<img src="images/commands.png" width = "800" />
 </p>
 
 
-Step 1. When the beginner user launches the application, to see the list of all universities available for the SEP program, the user executes `list /muni` command. To see the list of all NUS modules available for the SEP program, the user can executes `list /mmod` command.
+Step 1. When the beginner user launches the application, to see the list of all universities available for the SEP program, the user executes the `list /muni` command. To see the list of all NUS modules available for the SEP program, the user can execute the `list /mmod` command.
 
-Step 2. The user then module executes `add /uni Boston University` command to call `addUniCommand(university, list)` and add his preferred university to the selected university list. The other option for the user is to execute `add /uni 4` command to call `addUniCommand(index, list)` to add to the list.
+Step 2. The user then executes the `add /uni Boston University` command and add his preferred university to the selected university list. The other option for the user is to execute the `add /uni 4` command by entering its university master index.
 
-Step 3. The user executes `add /mod CS1231` command to call `addModCommand(module, list)` and add his preferred NUS module to the selected module list. The other option for the user is to execute `add /mod 81` command to call `addModCommand(index, list)` to add to the list.
+Step 3. The user executes the `add /mod CS1231` command to add his preferred NUS module to the selected module list. The other option for the user is to execute the `add /mod 81` command by entering its module master index.
 
 Step 4. The user executes `list /suni` to see his selected university list. The user executes `list /smod` command to see his selected module list.
 
-Step 5. The user executes `remove /mod 81` command to delete unwanted modules from see his selected module list. The user executes `remove /uni 4` command to delete unwanted university see his selected university list.
+Step 5. The user executes the `remove /mod CS1231` or `remove /mod 81` command to delete the unwanted module from see his selected module list. The user executes the `remove /uni Boston University` or `remove /uni 4` command to delete the unwanted university from his selected university list.
 
-Step 6. The user executes `find /code CS1231` to find the master index of the module. The user executes `find /uni Boston University` to find the master index of the university.
+Step 6. If the user forgets the master index for a university of a module, he can execute the `find /mod Discrete Structures` or `find /code CS1231` to find the module. The user executes `find /uni Boston University` to find the university.
 
-Step 7. The user executes `searchmap 4` command to see the module mapping of all modules in the selected module list in Boston University.
+Step 7. The user executes `searchmap 4` command to see the module mapping of all modules in the selected module list in Boston University. The user can execute `searchmap all` to see all modules in the selected module list for all universities in the selected university list.
 
 Step 8. The user executes `add /map 4 1` command to add the first module mapping available under Boston University.
 
 Step 9. The user executes `remove /map 4 1` command to remove the first mapping allocated to Boston University.
 
-Step 10. The user executes `exit` command to terminate the program.
+Step 10. The user executes `help` command to see the list of commands available for SEPlanner.
+
+Step 11. The user executes `exit` command to terminate the program.
 
 ### User Interface
 

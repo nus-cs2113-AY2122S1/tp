@@ -6,6 +6,7 @@ import seplanner.universities.UniversityList;
 
 import java.io.IOException;
 
+//@@author Jiale-Sun
 /**
  * Command to add a university to the selected university list.
 */
