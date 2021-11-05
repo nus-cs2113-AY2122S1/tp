@@ -6,6 +6,7 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import taa.Parser;
 import taa.assessment.Assessment;
 import taa.util.Util;
 
@@ -27,6 +28,10 @@ public class AssessmentDeserializer extends StorageDeserializer implements JsonD
 
         JsonElement nameJson = jsonObject.get(MEMBER_NAME);
         String name = nameJson.getAsString();
+
+        if (!Parser.isValueValid(name)) {
+            return null;
+        }
 
         JsonElement weightageJson = jsonObject.get(MEMBER_WEIGHTAGE);
         if (!Util.isStringDouble(weightageJson.getAsString())) {

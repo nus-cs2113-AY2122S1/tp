@@ -2,11 +2,7 @@ package taa.student;
 
 //@@author hozhenhong99
 import taa.ClassChecker;
-import taa.Parser;
-import taa.assessment.Assessment;
-import taa.assessment.AssessmentList;
 import taa.attendance.AttendanceList;
-import taa.exception.TaaException;
 
 import java.util.HashMap;
 
@@ -21,9 +17,9 @@ public class Student implements ClassChecker {
     private final HashMap<String, Double> results;
 
     public Student(String id, String name) {
-        this.id = id;
-        this.name = name;
-        this.comment = "";
+        setId(id);
+        setName(name);
+        setComment("");
         this.attendanceList = new AttendanceList();
         this.results = new HashMap<>();
     }
@@ -69,7 +65,7 @@ public class Student implements ClassChecker {
      * @param id the student ID of the student
      */
     public void setId(String id) {
-        this.id = id;
+        this.id = id.toUpperCase();
     }
 
     /**
@@ -140,7 +136,7 @@ public class Student implements ClassChecker {
      */
     @Override
     public String toString() {
-        return String.format("%s (%s)", id, name);
+        return String.format("%s - %s", id, name);
     }
 
     /**
@@ -155,6 +151,6 @@ public class Student implements ClassChecker {
 
     @Override
     public boolean verify() {
-        return !id.isEmpty() && !name.isEmpty() && Parser.isValueValid(id) && Parser.isValueValid(name);
+        return !id.isEmpty() && !name.isEmpty();
     }
 }

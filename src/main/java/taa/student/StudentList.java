@@ -94,6 +94,16 @@ public class StudentList implements ClassChecker {
         return studentsFound;
     }
 
+    public Student getStudentWithId(String id) {
+        for (Student student : students) {
+            if (student.getId().equalsIgnoreCase(id)) {
+                return student;
+            }
+        }
+
+        return null;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -112,6 +122,20 @@ public class StudentList implements ClassChecker {
 
     @Override
     public boolean verify() {
+        ArrayList<String> studentIds = new ArrayList<>();
+        ArrayList<Student> duplicatedStudents = new ArrayList<>();
+        for (Student student : students) {
+            if (studentIds.contains(student.getId())) {
+                duplicatedStudents.add(student);
+            } else {
+                studentIds.add(student.getId());
+            }
+        }
+
+        for (Student student : duplicatedStudents) {
+            students.remove(student);
+        }
+
         return true;
     }
 }

@@ -52,16 +52,16 @@ public class AddStudentCommand extends Command {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
-        String studentID = argumentMap.get(KEY_STUDENT_ID).toUpperCase();
+        String studentId = argumentMap.get(KEY_STUDENT_ID);
         String studentName = argumentMap.get(KEY_STUDENT_NAME);
-        Student student = new Student(studentID, studentName);
 
         StudentList studentList = teachingClass.getStudentList();
-        for (Student students : studentList.getStudents()) {
-            if (students.getId().equals(studentID)) {
-                throw new TaaException(MESSAGE_ID_ALREADY_EXISTS);
-            }
+        Student student = studentList.getStudentWithId(studentId);
+        if (student != null) {
+            throw new TaaException(MESSAGE_ID_ALREADY_EXISTS);
         }
+
+        student = new Student(studentId, studentName);
         studentList.addStudent(student);
 
         storage.save(classList);

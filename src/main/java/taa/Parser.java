@@ -1,6 +1,7 @@
 package taa;
 
 //@@author leyondlee
+
 import taa.command.ArchiveCommand;
 import taa.command.ResetCommand;
 import taa.command.assessment.AddAssessmentCommand;
@@ -289,6 +290,13 @@ public class Parser {
         return matcher.find();
     }
 
+    /**
+     * Converts character into a regex pattern string. Character is escaped if needed.
+     * Note: This method is not complete and may not escape all characters which may need to be escaped.
+     *
+     * @param c The character to convert.
+     * @return A regex pattern string.
+     */
     private static String convertToRegexPattern(char c) {
         boolean needEscape;
         switch (c) {
