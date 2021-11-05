@@ -11,6 +11,10 @@ class ListHabitParserTest {
 
     private static final String ERROR_GOAL_INDEX_FORMAT = "The command is missing the 'g/' flag";
     private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The flag 'g/' has to be followed by a number";
+    private static final String ERROR_GOAL_INDEX_NEGATIVE_NUM =
+            "The flag 'g/' has to be followed by a positive integer";
+    private static final String ERROR_GOAL_INDEX_ZERO_NUM =
+            "The flag 'g/' has to be followed by a number greater than 0";
 
     @Test
     void parseListHabitCommand_validInput_success() throws HaBitParserException {
@@ -56,12 +60,19 @@ class ListHabitParserTest {
     }
 
     @Test
-    void parseListHabitCommand_nullInput_exceptionThrown() {
+    void parseListHabitCommand_negativeOrZeroGoalIndex_exceptionThrown() {
         try {
-            ListHabitParser.parseListHabitCommand(null);
+            ListHabitParser.parseListHabitCommand("g/-1");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(Parser.ERROR_NO_PARAMS, e.getMessage());
+            assertEquals(ERROR_GOAL_INDEX_NEGATIVE_NUM, e.getMessage());
+        }
+
+        try {
+            ListHabitParser.parseListHabitCommand("g/0");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_GOAL_INDEX_ZERO_NUM, e.getMessage());
         }
     }
 }

@@ -164,7 +164,7 @@ public class Export {
                 + GOAL_TYPE + DELIMITER
                 + goal.getGoalTypeStr() + DELIMITER
                 + goal.getGoalName() + DELIMITER
-                + goal.getStartDate() + DELIMITER
+                + goal.getStringStartDate() + DELIMITER
                 + goal.getStringEndDate() + NEWLINE;
     }
 
