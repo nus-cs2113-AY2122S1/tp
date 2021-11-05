@@ -13,9 +13,20 @@ import java.util.logging.Logger;
 
 import static java.lang.Double.parseDouble;
 
+//@@author madhanse
+/**
+ * Handles file reading operation for the module master list stored in the CSV file.
+ */
 public class ModuleStorage {
     private static Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
 
+    /**
+     * Reads the CSV file containing the module master list and adds them into the
+     * array list.
+     * @param inputStream For reading the CSV file stored in the resources root
+     * @return Array list containing the list of valid local modules
+     * @throws IOException If there is a problem accessing the file
+     */
     public ArrayList<Module> readFile(InputStream inputStream) throws IOException {
         ArrayList<Module> moduleList = new ArrayList<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
@@ -31,6 +42,11 @@ public class ModuleStorage {
         return moduleList;
     }
 
+    /**
+     * Converts the line read by BufferedReader into attributes.
+     * @param line Line read by BufferedReader
+     * @return String array containing the attributes
+     */
     private String[] extractAttributes(String line) {
         String[] attributes = line.split(",");
         if (attributes.length == 3) {

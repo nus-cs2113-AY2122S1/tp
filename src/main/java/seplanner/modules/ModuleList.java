@@ -51,9 +51,14 @@ public class ModuleList {
         return false;
     }
 
+    /**
+     * Checks whether the module exists in the list.
+     * @param searchModule Module to check
+     * @return True if exists. Otherwise, false
+     */
     public boolean isModuleExist(Module searchModule) {
         for (Module module : list) {
-            if (module.equals(searchModule)) {
+            if (module.IsEqual(searchModule)) {
                 return true;
             }
         }

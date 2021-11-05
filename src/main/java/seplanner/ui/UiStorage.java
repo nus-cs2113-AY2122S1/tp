@@ -2,6 +2,10 @@ package seplanner.ui;
 
 import seplanner.constants.Constants;
 
+//@@author madhanse
+/**
+ * Ui class for returning message when an invalid data is found in the file.
+ */
 public class UiStorage extends Ui {
     public static String getInvalidModuleMessage() {
         return Constants.LINE_SEPARATOR + System.lineSeparator()

@@ -11,6 +11,7 @@ import java.text.ParseException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+//@@author madhanse
 class AddModCommandParserTest {
     private static Storage storage = new Storage();
     private static UniversityList universitySelectedList = new UniversityList();

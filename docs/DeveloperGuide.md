@@ -213,7 +213,6 @@ This component consist of the following classes:
 
 ### Parser Component
 
-<img src="images/Parser.png" width="5362"/>  
 The parser component is made up of the following classes:
 * Identify the command word and invoke the respective argument parser for the command.
 * Handle the arguments and return the respective Command object.
@@ -222,6 +221,10 @@ The parser component is made up of the following classes:
 #### Parser
 
 * This is the main parser class that will handle raw inputs and identify command words and invoke the respective command parsers instance and return the respective `Command` object.
+
+#### ParseCondition
+
+* This class contains methods used by various parser classes to verify that the inputs are valid.
 
 #### AddCommandParser
 
@@ -253,11 +256,17 @@ The `Module` object representing the particular module from Selected Module List
 
 #### HelpCommandParser
 
-This object will invoke an instance of `HelpCommand`.
+This object will return an instance of `HelpCommand`.
 
 #### ExitCommandParser
 
-This object will invoke an instance of `ExitCommand`.
+This object will return an instance of `ExitCommand`.
+
+#### ParserClassException
+
+* This is an abstract class inherited from Java 11's `ParseException` and its children objects are thrown when an input is detected as invalid. 
+* Each command word has its respective `ParserClassException` with its format inside.
+* On top of the parameters for `ParseException`, and additional boolean variable is required to identify when the user has made a format error in the command and the correct format will be output to the user.
 
 ## Product scope
 
