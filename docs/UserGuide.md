@@ -23,7 +23,7 @@ Below is a guide on how you can get started using our program to start **"Schedu
       - [2.4.3 Listing the recurrence of a task](#243-listing-the-recurrence-of-a-task)
     - [2.5 Sorting your tasklist: `sort`](#25-sorting-your-task-list-sort)
     - [2.6 Setting reminders to your tasks: `reminder`](#26-setting-reminders-to-your-tasks-reminder)
-    - [2.7 Editing your tasks: `edit`](#27-editing-your-tasks-edit-index-flag-value-flag-value-flag-value)
+    - [2.7 Editing your tasks: `edit`](#27-editing-your-tasks-edit-index---flag-value---flag-value---flag-value)
     - [2.8 Deleting your tasks: `delete`](#28-deleting-your-tasks-delete)
     - [2.9 Exiting the program: `bye`](#29-exiting-the-program-bye)
     - [2.10 Storage](#210-storage)
