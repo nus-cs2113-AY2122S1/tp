@@ -181,22 +181,22 @@ Example:
 
 ```
 $ add lesson CS2113T Lecture -d fri -s 16:00 -e 18:00 -l https://www.google.com/
-    ______________________________________________________________________________________
-     Noted. I've added this lesson:
-       CS2113T Lecture
-        Friday, 04:00 PM - 06:00 PM
-        Meeting URL: https://www.google.com/
-     Now you have 1 lessons in the list.
-    ______________________________________________________________________________________
+      ______________________________________________________________________________________
+       Noted. I've added this lesson:
+         CS2113T Lecture
+          Friday, 04:00 PM - 06:00 PM
+          Meeting URL: https://www.google.com/
+       Now you have 1 lessons in the list.
+      ______________________________________________________________________________________
 
 $ add lesson CG2028 Tutorial -d thu -s 13:00 -e 14:00
-    ______________________________________________________________________________________
-     Noted. I've added this lesson:
-       CG2028 Tutorial
-        Thursday, 01:00 PM - 02:00 PM
-        Meeting URL: -
-     Now you have 2 lessons in the list.
-    ______________________________________________________________________________________
+      ______________________________________________________________________________________
+       Noted. I've added this lesson:
+         CG2028 Tutorial
+          Thursday, 01:00 PM - 02:00 PM
+          Meeting URL: -
+       Now you have 2 lessons in the list.
+      ______________________________________________________________________________________
 ```
 
 > 💡 The input times are automatically converted to 12-hour clock format.
@@ -215,14 +215,14 @@ Example:
 $ add module CS2113T
       ______________________________________________________________________________________
        Noted. I've added this module:
-         CS2113T Software Engineering & Object-Oriented Programming (4MCs) 
+         CS2113T Software Engineering & Object-Oriented Programming (4MCs) | Grade: NONE
        Now you have 1 modules in the list.
       ______________________________________________________________________________________
 
 $ add module CG2028
       ______________________________________________________________________________________
        Noted. I've added this module:
-         CG2028 Computer Organization (2MCs) 
+         CG2028 Computer Organization (2MCs) | Grade: NONE
        Now you have 2 modules in the list.
       ______________________________________________________________________________________
 ```
@@ -523,31 +523,31 @@ Example:
 
 ```
 $ find module cs2113t
-    ______________________________________________________________________________________
-     CS2113T Software Engineering & Object-Oriented Programming (4MCs) 
-     Department: Computer Science
-     Faculty: Computing
-     Preclusion: CS2103, CS2103T, (CS2113T for CS2113), (CS2113 for CS2113T)
-     Prerequisite: CS2040C or ((CS2030 or its equivalent) and CS2040/S)
-     Corequisite: CS2101 Effective Communication for Computing Professionals is co-requisite for CS2113T. Students exempted from CS2101 will take CS2113 which does not have CS2101 as co-req. Otherwise, CS2113 and CS2113T are identical.
-    ______________________________________________________________________________________
+      ______________________________________________________________________________________
+       CS2113T Software Engineering & Object-Oriented Programming (4MCs) 
+       Department: Computer Science
+       Faculty: Computing
+       Preclusion: CS2103, CS2103T, (CS2113T for CS2113), (CS2113 for CS2113T)
+       Prerequisite: CS2040C or ((CS2030 or its equivalent) and CS2040/S)
+       Corequisite: CS2101 Effective Communication for Computing Professionals is co-requisite for CS2113T. Students exempted from CS2101 will take CS2113 which does not have CS2101 as co-req. Otherwise, CS2113 and CS2113T are identical.
+      ______________________________________________________________________________________
 
 $ find module cs2113t verbose
-    ______________________________________________________________________________________
-     CS2113T Software Engineering & Object-Oriented Programming (4MCs) 
-     This module introduces the necessary skills for systematic and rigorous development
-     of software systems. It covers requirements, design, implementation, quality assuran
-     ce, and project management aspects of small-to-medium size multi-person software pro
-     jects. The module uses the Object Oriented Programming paradigm. Students of this mo
-     dule will receive hands-on practice of tools commonly used in the industry, such as
-     test automation tools, build automation tools, and code revisioning tools will be co
-     vered.
-     Department: Computer Science
-     Faculty: Computing
-     Preclusion: CS2103, CS2103T, (CS2113T for CS2113), (CS2113 for CS2113T)
-     Prerequisite: CS2040C or ((CS2030 or its equivalent) and CS2040/S)
-     Corequisite: CS2101 Effective Communication for Computing Professionals is co-requisite for CS2113T. Students exempted from CS2101 will take CS2113 which does not have CS2101 as co-req. Otherwise, CS2113 and CS2113T are identical.
-    ______________________________________________________________________________________
+      ______________________________________________________________________________________
+       CS2113T Software Engineering & Object-Oriented Programming (4MCs) 
+       This module introduces the necessary skills for systematic and rigorous development
+       of software systems. It covers requirements, design, implementation, quality assuran
+       ce, and project management aspects of small-to-medium size multi-person software pro
+       jects. The module uses the Object Oriented Programming paradigm. Students of this mo
+       dule will receive hands-on practice of tools commonly used in the industry, such as
+       test automation tools, build automation tools, and code revisioning tools will be co
+       vered.
+       Department: Computer Science
+       Faculty: Computing
+       Preclusion: CS2103, CS2103T, (CS2113T for CS2113), (CS2113 for CS2113T)
+       Prerequisite: CS2040C or ((CS2030 or its equivalent) and CS2040/S)
+       Corequisite: CS2101 Effective Communication for Computing Professionals is co-requisite for CS2113T. Students exempted from CS2101 will take CS2113 which does not have CS2101 as co-req. Otherwise, CS2113 and CS2113T are identical.
+      ______________________________________________________________________________________
 ```
 
 ### Setting module grade - `set grade`
@@ -582,20 +582,20 @@ Example:
 
 ```
 $ list lesson
-    ______________________________________________________________________________________
-     Here are the lessons in your list:
-     1. CG2028 Tutorial
-        Thursday, 01:00 PM - 02:00 PM
-        Meeting URL: -
-     2. CS2113T Lecture
-        Friday, 04:00 PM - 06:00 PM
-        Meeting URL: https://www.google.com/
-    ______________________________________________________________________________________
+      ______________________________________________________________________________________
+       Here are the lessons in your list:
+       1. CG2028 Tutorial
+          Thursday, 01:00 PM - 02:00 PM
+          Meeting URL: -
+       2. CS2113T Lecture
+          Friday, 04:00 PM - 06:00 PM
+          Meeting URL: https://www.google.com/
+      ______________________________________________________________________________________
 
 $ launch lesson 2
-    ______________________________________________________________________________________
-     Launching URL...
-    ______________________________________________________________________________________
+      ______________________________________________________________________________________
+       Launching URL...
+      ______________________________________________________________________________________
 ```
 
 In this example, the meeting URL of lesson number 2 (which is https://www.google.com/) is launched.
