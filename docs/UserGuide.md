@@ -84,20 +84,16 @@ colour blue - an example is the blue text in the contents section below
 7. Refer to the **[Features](#2-features)** below for details of all available commands.
 
 ## 2. Features
-
 **Notes about the command format:**
   * Words in UPPER_CASE are the parameters to be supplied by the user. 
     e.g. in `add-employee/EMPLOYEE_NAME/PHONE_NUMBER/EMPLOYMENT_STATUS/SALARY`, `EMPLOYEE_NAME` and `PHONE_NUMBER` are 
     parameters which can be used as `add-employee/John/81145812/PERM/6000`.
 
-
 ### 2.i Employee
-
 Employee refers to any person working at your restaurant. Restaurant Buddy needs some details from you about the employees.
 This includes: employee name, phone number, employment status and salary.
 
 ### 2.i.a Adding an employee: `add-employee`
-
 Adds an employee to the employee list.
 
 Format: `add-employee/EMPLOYEE_NAME/PHONE_NUMBER/EMPLOYMENT_STATUS/SALARY`
@@ -117,7 +113,6 @@ employee list. In addition, `PERM` staff and gets paid $`6000`.
 ```
 
 ### 2.i.b Removing an employee: `remove-employee`
-
 Removes an employee from the employee list.
 
 Format: `remove-employee/EMPLOYEE_INDEX`
@@ -135,7 +130,6 @@ Example:
 ```
 
 ### 2.i.c Listing all employees: `list-employee`
-
 Lists all employees in the employee list.
 
 Format: `list-employee`
@@ -153,7 +147,6 @@ Example:
 ```
 
 ### 2.ii.a Adding a dish: `add-dish`
-
 Adds a dish to the menu.
 
 Format: `add-dish/DISH_NAME/PRICE`
@@ -170,7 +163,6 @@ Example:
 ```
 
 ### 2.ii.b Removing a dish: `remove-dish`
-
 Removes a dish from the menu.
 
 Format: `remove-dish/DISH_INDEX`
@@ -188,7 +180,6 @@ Example:
 ```
 
 ### 2.ii.c Editing a dish's price: `edit-dish`
-
 Edits the price of a dish in the menu.
 
 Format: `edit-dish/DISH_INDEX/NEW_PRICE`
@@ -208,7 +199,6 @@ Example:
 ```
 
 ### 2.ii.d Adding a discount to a dish: `discount-dish`
-
 Adds a discount to a dish in the menu.
 
 Format: `discount-dish/DISH_INDEX/DISCOUNT(%)`
@@ -230,7 +220,6 @@ Example:
 ```
 
 ### 2.ii.e Listing all dishes: `list-dish`
-
 Lists all dishes in the menu.
 
 Format: `list-dish`
@@ -249,7 +238,6 @@ Example:
 ```
 
 ### 2.iii.a Adding an ingredient: `add-ingredient`
-
 Adds an ingredient to the ingredient list.
 
 Format: `add-ingredient/INGREDIENT_NAME/QUANTITY/PRICE/EXPIRY_DATE`
@@ -270,7 +258,6 @@ to the ingredient list.
 ```
 
 ### 2.iii.b Removing an ingredient: `remove-ingredient`
-
 Removes an ingredient from the ingredient list.
 
 Format: `remove-ingredient/INGREDIENT_INDEX`
@@ -288,7 +275,6 @@ Example:
 ```
 
 ### 2.iii.c Listing all ingredients: `list-ingredient`
-
 Lists all ingredients in the ingredient list.
 
 Format: `list-ingredient`
@@ -306,7 +292,6 @@ Example:
 ```
 
 ### 2.iii.d Finding expired ingredients: `find-expired-ingredient`
-
 Finds all ingredients from the ingredient list that are currently expired.
 
 Format: `find-expired-ingredient/CURRENT_DATE`
@@ -323,7 +308,6 @@ Example:
 ```
 
 ### 2.iv.a Adding a finance record: `add-finance`
-
 Adds a finance record to the finance list.
 
 Format: `add-finance/DATE/ACCOUNT`
@@ -340,7 +324,6 @@ Example:
 ```
 
 ### 2.iv.b Removing a finance record: `remove-finance`
-
 Removes the specified finance record from the finance list.
 
 Format: `remove-finance/FINANCE_INDEX`
@@ -358,7 +341,6 @@ Example:
 ```
 
 ### 2.iv.c Editing a finance record: `edit-finance`
-
 Edits a finance record in the finance list.
 
 Format: `edit-finance/FINANCE_INDEX/NEW_ACCOUNT`
@@ -378,7 +360,6 @@ Example:
 ```
 
 ### 2.iv.d Showing total account of finance records: `show-finance`
-
 Shows the total account of all finance records in the finance list.
 
 Format: `show-finance`
@@ -392,7 +373,6 @@ Example:
 ```
 
 ### 2.iv.e Listing all finance records: `list-finance`
-
 Lists all finance records in the finance list.
 
 Format: `list-finance`
@@ -411,7 +391,6 @@ Example:
 
 
 ### 2.v Exiting the program: `bye`
-
 Exits the program.
 
 Format: `bye`
@@ -429,13 +408,11 @@ Example:
 ```
 
 ## 3. FAQ
-
 **Q**: How do I transfer my data to another computer?
 
 **A**: Copy the _home folder_ of Restaurant Buddy over to the other computer and run it as usual.
 
 ## 4. Command Summary
-
 | Command | Format |
 | ------------ | ------------- |
 | add-employee | `add-employee/EMPLOYEE_NAME/PHONE_NUMBER` |
