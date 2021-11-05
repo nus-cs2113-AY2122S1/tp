@@ -154,7 +154,7 @@ Use this command to add an item to a day of your trip.
 
 ```
 ____________________________________________________________
-$ add-item trip1 /day 0 /time 7pm /name Check-in to HolidayInn
+$ add-item trip1 /day 0 /time 1900 /name Check-in to HolidayInn
 ____________________________________________________________
 	Added a new item to day 0 of trip trip1.
 ____________________________________________________________
@@ -263,9 +263,9 @@ Edits and updates existing item from a trip and updates it to a new correspondin
 #### Usage Example:
 ```
 _________________________________________________________________________________
-$ edit-item trip1 /day 1 /index 1 /time 9am /name later breakfast
+$ edit-item trip1 /day 1 /index 1 /time 0900 /name later breakfast
 _________________________________________________________________________________
-	You have just edited item 1 on day 1 of trip1 to later breakfast at 9am
+	You have just edited item 1 on day 1 of trip1 to later breakfast at 0900
 _________________________________________________________________________________
 ```
 
