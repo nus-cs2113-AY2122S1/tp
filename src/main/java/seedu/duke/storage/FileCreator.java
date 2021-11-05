@@ -14,7 +14,7 @@ public class FileCreator {
 
     private File taskFile;
     private static final String IO_EXCEPTION_MESSAGE = "IO Exception occurred while trying to create "
-        + "file for saving tasks: " + LIST_STORAGE_FOLDER + LIST_STORAGE_FILE;
+        + "file for saving tasks: %s";
 
     /**
      * Creates the files required for storing tasks if they are not already created.
@@ -24,7 +24,7 @@ public class FileCreator {
         try {
             taskFile = createFile(LIST_STORAGE_FOLDER + LIST_STORAGE_FILE);
         } catch (IOException e) {
-            Log.severe(IO_EXCEPTION_MESSAGE);
+            Log.severe(String.format(IO_EXCEPTION_MESSAGE, getTaskFileName()));
         }
     }
 
