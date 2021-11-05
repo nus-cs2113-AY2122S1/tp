@@ -18,16 +18,16 @@ Class "<$documents>" as File UI_COLOR_T1
 
 
 UI -[#green]> Logic
-UI -right[#green]-> Data
+
 Logic -[#blue]-> Storage
-Logic -down[#blue]-> Data
+Logic -right[#blue]-> Data
 BudgetTracker -[#grey]-> UI
 BudgetTracker -[#grey]-> Logic
 BudgetTracker -[#grey]-> Storage
 BudgetTracker -up[#grey]-> Data
 BudgetTracker -down[hidden]-> Commons
 
-Storage -up[STORAGE_COLOR].> Data
+Storage <-up[STORAGE_COLOR].> Data
 Storage .down[STORAGE_COLOR].>File
 User ..> UI
 @enduml

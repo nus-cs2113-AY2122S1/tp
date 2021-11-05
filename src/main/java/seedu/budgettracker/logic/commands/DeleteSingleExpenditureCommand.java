@@ -18,7 +18,7 @@ public class DeleteSingleExpenditureCommand extends DeleteCommand {
      * LocalDate.now().getMonthValue() is being used as a placeholder
      */
     @Override
-    public void execute(boolean isLoadingStorage) {
+    public void execute() {
         TextUi.showSingleExpenditureDeletedMessage(index + 1,
                 allRecordList.getExpenditure(index, month));
         allRecordList.deleteExpenditure(index + 1, month);

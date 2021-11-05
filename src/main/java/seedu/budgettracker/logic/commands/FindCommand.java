@@ -18,7 +18,7 @@ public class FindCommand extends Command {
         this.keyword = commandParams;
     }
 
-    public void execute(boolean isLoadingStorage) {
+    public void execute() {
         System.out.println("Here are the Expenditure and Loan matches we have found!");
         System.out.println(TITLE_DIVIDER);
 

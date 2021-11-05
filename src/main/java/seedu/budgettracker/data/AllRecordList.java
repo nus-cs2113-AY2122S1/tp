@@ -21,7 +21,7 @@ public class AllRecordList {
     protected int year;
 
     /**
-     * Constructor that creates 12 RecordLists upon construction.
+     * Constructor that creates 12 RecordLists upon initialization.
      */
     public AllRecordList() {
         year = LocalDate.now().getYear();
@@ -40,10 +40,20 @@ public class AllRecordList {
         textFileWriter.reloadArrayToStorage(allRecordList, storageDirectory);
     }
 
+    /**
+     * Returns the year the user is inserting records into.
+     *
+     * @return year in which records belong to
+     */
     public int getYear() {
         return year;
     }
 
+    /**
+     * Sets the year which User is adding records to.
+     *
+     * @param year year in which records will be added to
+     */
     public void setYear(int year) {
         this.year = year;
     }
@@ -56,6 +66,7 @@ public class AllRecordList {
      * @param isLoadingStorage indicate if this command is called during setup or runtime
      */
     public void addBudget(double spendingLimit, int month, boolean isLoadingStorage) {
+        assert spendingLimit >= 0 : "Amount should be greater than or equals to 0";
         allRecordList.get(month).addBudget(spendingLimit);
         if (!isLoadingStorage) {
             saveToStorage(storageDirectory);
@@ -72,6 +83,7 @@ public class AllRecordList {
      */
     public Expenditure addExpenditure(String description, double amount, LocalDate date, Category category,
                                       boolean isLoadingStorage) {
+        assert amount > 0 : "Amount should be greater than 0";
         int month = date.getMonthValue();
         Expenditure addedExpenditure = allRecordList.get(month)
                 .addExpenditure(description, amount, date, category);
@@ -89,21 +101,19 @@ public class AllRecordList {
         }
     }
 
-    public Budget editBudget(int month, double amount, boolean isLoadingStorage) {
+    public Budget editBudget(int month, double amount) {
         Budget targetBudget = allRecordList.get(month).getBudget();
         if (amount != 0.00) {
             targetBudget.setAmount(amount);
         }
 
-        if (!isLoadingStorage) {
-            saveToStorage(storageDirectory);
-        }
+        saveToStorage(storageDirectory);
 
         return targetBudget;
     }
 
     public Expenditure editExpenditure(int month, int index, double amount,
-                                       String description, LocalDate date, boolean isLoadingStorage) {
+                                       String description, LocalDate date) {
         Expenditure targetExpenditure = allRecordList.get(month).getExpenditure(index);
 
         if (amount != 0.00) {
@@ -116,14 +126,13 @@ public class AllRecordList {
             targetExpenditure.setDate(date);
         }
 
-        if (!isLoadingStorage) {
-            saveToStorage(storageDirectory);
-        }
+        saveToStorage(storageDirectory);
+
 
         return targetExpenditure;
     }
 
-    public Loan editLoan(int month, int index, double amount, String name, LocalDate date, boolean isLoadingStorage) {
+    public Loan editLoan(int month, int index, double amount, String name, LocalDate date) {
         Loan targetLoan = allRecordList.get(month).getLoan(index);
         if (amount != 0.00) {
             targetLoan.setAmount(amount);
@@ -135,9 +144,7 @@ public class AllRecordList {
             targetLoan.setDate(date);
         }
 
-        if (!isLoadingStorage) {
-            saveToStorage(storageDirectory);
-        }
+        saveToStorage(storageDirectory);
 
         return targetLoan;
     }
@@ -208,7 +215,7 @@ public class AllRecordList {
      * Gets the total amount spent from expenditures of a month.
      *
      * @param month month to get the total amount spent
-     * @return double amount spent during the specified month
+     * @return double total amount spent during the specified month
      */
     public double getTotalAmountSpent(int month) {
         return allRecordList.get(month).getTotalAmountSpentOnExpenditures();

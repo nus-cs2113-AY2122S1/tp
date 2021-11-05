@@ -18,7 +18,7 @@ public class DeleteSingleLoanCommand extends DeleteCommand {
      * LocalDate.now().getMonthValue() is being used as a placeholder
      */
     @Override
-    public void execute(boolean isLoadingStorage) {
+    public void execute() {
         TextUi.showSingleLoanDeletedMessage(index + 1,
                 allRecordList.getLoan(index, month));
         allRecordList.deleteLoan(index + 1, month);

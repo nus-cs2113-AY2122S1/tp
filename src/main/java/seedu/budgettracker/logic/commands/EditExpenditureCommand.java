@@ -20,9 +20,9 @@ public class EditExpenditureCommand extends EditCommand {
         this.description = description;
     }
 
-    public void execute(boolean isLoadingStorage) {
+    public void execute() {
         Expenditure targetExpenditure = allRecordList.editExpenditure(month, index,
-                amount, description, date, isLoadingStorage);
+                amount, description, date);
 
         System.out.println("Expenditure has been successfully edited!");
         System.out.println("New values: " + targetExpenditure);

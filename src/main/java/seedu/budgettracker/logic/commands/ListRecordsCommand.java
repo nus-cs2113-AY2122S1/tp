@@ -24,7 +24,7 @@ public class ListRecordsCommand extends Command {
     }
 
     @Override
-    public void execute(boolean isLoadingStorage) {
+    public void execute() {
         TextUi.showRecordsListView(allRecordList, month, isListAll, category);
     }
 }

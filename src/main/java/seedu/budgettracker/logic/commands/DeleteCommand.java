@@ -10,6 +10,4 @@ public abstract class DeleteCommand extends Command {
     public static final String MESSAGE_USAGE = (DeleteSingleExpenditureCommand.MESSAGE_USAGE
             + System.lineSeparator()
             + DeleteBudgetCommand.MESSAGE_USAGE);
-
-    public abstract void execute(boolean isLoadingStorage);
 }

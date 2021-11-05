@@ -1,7 +1,6 @@
 @startuml
 !include style.puml
 
-autonumber
 
 Actor User as user
 Participant ":UI" as ui UI_COLOR
@@ -15,9 +14,26 @@ activate ui UI_COLOR
 ui -[UI_COLOR]> logic : parseCommand("add -b m/1 a/500")
 activate logic LOGIC_COLOR
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+logic -[LOGIC_COLOR]> data : addBudget(1, 500)
+activate data DATA_COLOR
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+data -[DATA_COLOR]-> logic
+deactivate data
+
+logic -[LOGIC_COLOR]> storage : saveToStorage(storageDirectory)
+activate storage STORAGE_COLOR
+
+storage -[STORAGE_COLOR]> storage : Save to file
+activate storage STORAGE_COLOR_T1
+storage --[STORAGE_COLOR]> storage
+deactivate storage
+
+storage --[STORAGE_COLOR]> logic
+deactivate storage
+
+logic --[LOGIC_COLOR]> ui
+deactivate logic
+
+ui--[UI_COLOR]> user
+deactivate ui
 @enduml
