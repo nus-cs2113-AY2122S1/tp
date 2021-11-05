@@ -7,7 +7,72 @@ fast, this application can allow one to access relevant travel information faste
 
 <br>
 
-* Table of Contents{:toc}
+## Table of Contents
+
+### Taking Off - Introducing TourPlanner
+
+- [User Guide - How to Use](#user-guide---how-to-use)
+- [Quick Start](#quick-start)
+- [Introduction to Data Types](#introduction-to-data-types)
+- [Introduction to Data Fields](#introduction-to-data-fields)
+
+### On Top Of The World - Features of TourPlanner
+
+#### Add/Cut Data Entries
+
+- [Adding Data Types](#heavy_plus_sign-adding-data-types--add)
+    - [Adding Clients](#adding-clients-into-database-add--c)
+    - [Adding Tours](#adding-tours-into-database-add--t)
+    - [Adding Flights](#adding-flights-into-database-add--f)
+    - [Adding Client Packages](#adding-clientpackage-into-database-add--p)
+- [Cutting Data Types](#scissors-cutting-data-types--cut)
+    - [Cutting Client Packages](#cut-client-package)
+    - [Cutting Clients/Tours/Flights](#cut-client--tour--flight)
+
+#### Querying the Database
+
+- [Listing Data Types](#mag_right-listing-data-types-list)
+- [Finding Data Types](#finding-data-types-find)
+    - [Finding Clients](#find-client)
+    - [Finding Tour/Flights](#find-tour--flight)
+- [Sorting Data Types](#chart_with_upwards_trend-sorting-data-types-sort)
+    - [Sorting Clients](#sort-client)
+    - [Sorting Tours](#sort-tour)
+    - [Sorting Flights](#sort-flights)
+
+#### Miscellaneous
+
+- [Viewing help](#viewing-help-help)
+- [Exiting TourPlanner](#exit-application-bye)
+
+### Landing Gracefully - Summary
+
+- [General Command Information](#general-command-information)
+- [Supporting Command Information](#supporting-command-information)
+
+<br>
+
+## **User Guide - How to Use**
+
+<hr>
+
+Like our application, TourPlanner's User Guide is **intuitive** to use, but **comprehensive** as well. Any doubts you
+might have when using the application, we got you covered.
+
+**Navigate** across the User Guide with the [**Table of Contents**](#table-of-contents). Just click on the hyperlinks
+associated with your query, and you will be redirected to the specific section that addresses your query.
+
+The contents in this user guide follows you through the runtime of the program, and is sequenced chronologically.
+
+If you require help with your set-up, look under the [**Taking off**](#taking-off---introducing-tourplanner) section.
+
+Details on how to use the features are given under the
+[**On Top of The World**](#on-top-of-the-world---features-of-tourplanner) section.
+
+Lastly, for a summary of all the commands and prefixes, look under the
+[**Landing Gracefully**](#landing-gracefully---summary) section.
+
+Happy to have you onboard TourPlanner!
 
 <br>
 
@@ -29,6 +94,8 @@ fast, this application can allow one to access relevant travel information faste
 
 <br>
 
+[**Return to Table of Contents**](#table-of-contents)
+
 ## Introduction to Data Types ##
 
 <hr>
@@ -43,13 +110,14 @@ There are 4 data types that are stored in TourPlanner:
 * ```-f``` Flights
 * ```-p``` Client Package: package that contains the client along with the tour and flight they have opted for.
 
-
 Examples of data types in commands:
 
 * ```add -t JPN /n Japan Basic Tour /p 1500 ``` calls for a <u>tour</u> to be added.
 * ```list -p ``` calls for all available <u>client packages</u> to be listed out.
 
 <br>
+
+[**Return to Table of Contents**](#table-of-contents)
 
 ## Introduction to Data Fields
 
@@ -76,13 +144,18 @@ Examples of data fields in commands:
     * ```/n NAME```
     * ```/cn CONTACT_NUMBER```
     * ```/m EMAIL```
+
+
 * Sort tours:
     * ```/p``` - sorts tours by *price*
-    * ```/d``` - sorts tours by *departure date and time*
+    * ```/n``` - sorts tours by *name*
 
 <br>
 
+[**Return to Table of Contents**](#table-of-contents)
+
 ## Viewing help ``help``
+
 <hr>
 
 Shows a message with the link to this user guide.
@@ -97,11 +170,14 @@ The following output will be shown:
 
 <br>
 
+[**Return to Table of Contents**](#table-of-contents)
+
 ## Adding / Cutting Data Types
+
 <hr>
 
-:information_source:Please refer to <u>Introduction to Data Types</u> and <u>Introduction to Data Fields</u> on
-the purpose and syntax of ```DATA_TYPES``` and ```DATA_FIELDS```.
+:information_source:Please refer to <u>Introduction to Data Types</u> and <u>Introduction to Data Fields</u> on the
+purpose and syntax of ```DATA_TYPES``` and ```DATA_FIELDS```.
 
 <br>
 
@@ -127,8 +203,8 @@ Mandatory data fields:
 * Client contact number - ```/cn CONTACT_NUMBER```
 * Client email address - ```/m EMAIL```
 
-:exclamation: Note that the given contact number must contain only numbers from 0 to 9, or TourPlanner will reject the
-entry.
+:exclamation: Note that the given **contact number** should ideally contain only eight numbers from _0 to 9_. If there
+are extra inputs, TourPlanner will return a **warning** message.
 
 Example:
 
@@ -156,7 +232,8 @@ Mandatory data fields:
 * Flight departure date and time - ```/dd DEPARTURE_TIME```
 * Flight return date and time - ```/rd RETURN_TIME```
 
-:exclamation: Note that the given date and times should be of the format: ```d/M/yy HH:mm```
+:exclamation: Note that the given date and times should be of the format: ```d/M/yy HH:mm```. TourPlanner will **
+reject** any entry that violates this format rule.
 
 Example:
 
@@ -172,6 +249,10 @@ Add flights from _Singapore_ to _Korea_
 and back, departing from Korea at _11am, 2 May 2022_ and returning to Singapore at _15 May 2022, 11pm_. Stored in the
 database as ID: _SQ-KOR1_.
 
+:exclamation: Note that the given **date-times** should be logically coherent
+(i.e. arrival at destination should be before return). TourPlanner will reject erroneous inputs with an **error**
+message.
+
 <br>
 
 ### Adding tours into database: ```add -t```
@@ -184,7 +265,7 @@ Mandatory data fields:
 * Tour name - ```/n TOUR_NAME```
 * Tour price - ```/p TOUR_PRICE```
 
-:exclamation: Note that the given price should be a numerical value.
+:exclamation: Note that the given **price** should be a *positive numerical value* (up to 2 decimal places).
 
 Example:
 
@@ -226,25 +307,32 @@ Adds Client _c002_, Flight _SQ-KOR1_, and Tour _t002_ into an overall package _p
 
 <br>
 
+[**Return to Table of Contents**](#table-of-contents)
+
 <hr>
 
 ## :scissors: Cutting data types:  ```cut```
+
 Deletes entry of a certain data type.
 
 <br>
 
-###Cut Client Package
+### Cut Client Package
+
 Deletes the client package from the list of packages.
 
 Format: `cut -p DATA_ID`
+
 * Deletes the client package with specified DATA_ID.
 
 <br>
 Examples:
 
-* `cut -p p001` deletes client package with id 'p001', where 'p001' contains client 'c001', tour 'JPN1' and flight 'SQ-JPN'
+* `cut -p p001` deletes client package with id 'p001', where 'p001' contains client 'c001', tour 'JPN1' and flight '
+  SQ-JPN'
 
 An output of this format will be shown:
+
 ```
 Client has been deleted:
 Package ID: p001
@@ -268,9 +356,10 @@ Return Flight: SG, 21/10/21 03:00
 
 <br>
 
-###Cut Client / Tour / Flight
+### Cut Client / Tour / Flight
 
 Format: `cut [DATA_TYPE] DATA_ID`
+
 * Deletes the entry of DATA_TYPE with specified DATA_ID.
 * Deletes all client packages that contains the specific entry
 
@@ -282,6 +371,7 @@ Examples:
 An output of this format will be shown:
 
 Deleting client:
+
 ```
 Client has been deleted:
 Client ID: c001
@@ -289,7 +379,9 @@ Name: Adam
 Contact Number: 93338333
 Email: adam@mail.com
 ```
+
 Deleting all related client packages:
+
 ```
 Client Package has been deleted:
 Package ID: p001
@@ -318,13 +410,16 @@ Return Flight: SG, 21/10/21 03:00
 An output of this format will be shown:
 
 Deleting tour:
+
 ```
 Tour has been deleted:
 Name: Korea Cultural Tour
 Code: KOR
 Price per pax: $3000.00
 ```
+
 Deleting all related client packages:
+
 ```
 Client Package has been deleted:
 Package ID: p001
@@ -348,6 +443,8 @@ Return Flight: SG, 21/10/21 03:00
 
 <br>
 
+[**Return to Table of Contents**](#table-of-contents)
+
 ## **Querying Data Types**
 
 <hr>
@@ -355,7 +452,9 @@ Return Flight: SG, 21/10/21 03:00
 The user is also able to view all entries of a specific data type, as well as find specific entrie(s) based their codes.
 
 <br>
-:information_source: Please refer to <u>Introduction to Data Types</u> on the syntax of ```DATA_TYPE```
+
+:information_source: Please refer to <u>Introduction to Data Types</u> on the syntax of ```[DATA_TYPE]```
+
 <br>
 
 ## :mag_right: Listing data types: ```list```
@@ -407,13 +506,14 @@ Total Flights: 2
 
 <br>
 
+[**Return to Table of Contents**](#table-of-contents)
+
 ## Finding data types: ```find```
 
 ### Find client
 
-Finds specific client(s) based on a particular substring. It will return client(s) if their name contains 
-the substring. Note that the substring is case-insensitive. In addition, it will return the found 
-clients' subscribed packages.
+Finds specific client(s) based on a particular substring. It will return client(s) if their name contains the substring.
+Note that the substring is case-insensitive. In addition, it will return the found clients' subscribed packages.
 
 <br>
 
@@ -450,11 +550,11 @@ Flight ID: MSIA-KOR1
 Departure Flight: MSIA, 29/10/21 12:00
 Return Flight: KOR, 24/6/21 02:00
 ```
-In addition, ```find -c ad``` will yield the same results, since "ad" is
-contained in "Adam".
+
+In addition, ```find -c ad``` will yield the same results, since "ad" is contained in "Adam".
 <br>
 
-### Find tour / flight 
+### Find tour / flight
 
 Finds a specific entry based on a particular code. In addition, for tours and flights, it will show the names of the
 subscriber(s) / passenger(s) who are assigned to them respectively.
@@ -502,13 +602,14 @@ Betty
 Total Passengers: 1
 ```
 
-
 <br>
+
+[**Return to Table of Contents**](#table-of-contents)
 
 ## :chart_with_upwards_trend: Sorting data types: ```sort```
 
-Sort a specific data type based on a particular ```[FILTER]```. It will return all client(s) in ascending
-alphabetical order. the possible values of ```[FILTER]``` varies between data types.
+Sort a specific data type based on a particular ```[FILTER]```. It will return all client(s) in ascending alphabetical
+order. the possible values of ```[FILTER]``` varies between data types.
 
 Format: ```sort [DATA_TYPE] [FILTER]```
 
@@ -517,14 +618,15 @@ Format: ```sort [DATA_TYPE] [FILTER]```
 ### Sort client
 
 The possible values of ```[FILTER]``` are:
-* ```\n``` to sort by client name 
-* ```\id``` to sort by client id
+
+* ```/n``` to sort by client name
+* ```/id``` to sort by client id
 
 <br>
 
 Examples:
 
-* ```sort -c \n``` sorts the clients by client name alphabetically.
+* ```sort -c /n``` sorts the clients by client name alphabetically.
 
 An output of this format will be shown:
 
@@ -550,9 +652,10 @@ Name: Wayne
 Contact Number: 56667888
 Email: wendy@mail.com
 ```
+
 <br>
 
-* ```sort -c \id``` sorts the clients by id alphabetically.
+* ```sort -c /id``` sorts the clients by id alphabetically.
 
 An output of this format will be shown:
 
@@ -582,18 +685,18 @@ Contact Number: 10101010
 
 ### Sort tour
 
-Sort tour(s) based on a particular ```[FILTER]```. It will return all tour(s) in ascending
-alphabetical order.
+Sort tour(s) based on a particular ```[FILTER]```. It will return all tour(s) in ascending alphabetical order.
 
 The possible values of ```[FILTER]``` are:
-* ```\id``` to sort by tour id
-* ```\p``` to sort by price
+
+* ```/id``` to sort by tour id
+* ```/p``` to sort by price
 
 <br>
 
 Examples:
 
-* ```sort -t \id``` sorts the tours by tour id alphabetically.
+* ```sort -t /id``` sorts the tours by tour id alphabetically.
 
 An output of this format will be shown:
 
@@ -615,9 +718,33 @@ Price per pax: $3000.00
 Code: ZWM
 Price per pax: $1700.00
 ```
+
 <br>
 
-* ```sort -t \p``` sorts the tours by price in ascending order.
+* ```sort -t /n``` sorts the tours by tour name alphabetically.
+
+```
+Sorted by tour name alphabetically
+1. Name: Japan Basic Tour
+Code: JPN1
+Price per pax: $1500.00
+
+2. Name: Japan Food Tour
+Code: JPN2
+Price per pax: $4000.00
+
+3. Name: Korea Cultural Tour
+Code: KOR
+Price per pax: $3000.00
+
+4. Name: Zimbabwe Tour
+Code: ZWM
+Price per pax: $1700.00
+```
+
+<br>
+
+* ```sort -t /p``` sorts the tours by price in ascending order.
 
 An output of this format will be shown:
 
@@ -642,22 +769,21 @@ Price per pax: $4000.00
 
 <br>
 
-
 ### Sort flights
 
-Sort flight(s) based on a particular [FILTER]. 
-It will return all flight(s) in ascending alphabetical order.
+Sort flight(s) based on a particular [FILTER]. It will return all flight(s) in ascending alphabetical order.
 
 The possible values of ```[FILTER]``` are:
-*```\id``` to sort by flight id
-* ```\d``` to sort by departing flight times
-* ```\r``` to sort by returning flight times
+
+* ```/id``` to sort by flight id
+* ```/d``` to sort by departing flight times
+* ```/r``` to sort by returning flight times
 
 <br>
 
 Examples:
 
-* ```sort -f \id``` sorts the flights by flight id alphabetically.
+* ```sort -f /id``` sorts the flights by flight id alphabetically.
 
 An output of this format will be shown:
 
@@ -676,9 +802,10 @@ Return Flight: SG, 30/11/21 03:00
 Departure Flight: ZWM, 5/11/21 09:00
 Return Flight: SG, 7/11/21 15:00
 ```
+
 <br>
 
-* ```sort -f \d``` sorts the flights by departing returning flight times.
+* ```sort -f /d``` sorts the flights by departing returning flight times.
 
 An output of this format will be shown:
 
@@ -696,9 +823,10 @@ Return Flight: SG, 30/11/21 03:00
 Departure Flight: ZWM, 5/11/21 09:00
 Return Flight: SG, 7/11/21 15:00
 ```
+
 <br>
 
-* ```sort -f \r``` sorts the flights by ascending returning flight times.
+* ```sort -f /r``` sorts the flights by ascending returning flight times.
 
 An output of this format will be shown:
 
@@ -716,10 +844,13 @@ Return Flight: SG, 7/11/21 15:00
 Departure Flight: KOR, 23/10/21 08:00
 Return Flight: SG, 30/11/21 03:00
 ```
+
 <br>
 
+[**Return to Table of Contents**](#table-of-contents)
 
 ## Exit application: ```bye```
+
 <hr>
 
 Exits the application.
@@ -734,7 +865,10 @@ The following output will be shown:
 
 <br>
 
+[**Return to Table of Contents**](#table-of-contents)
+
 ## Saving Data
+
 <hr>
 
 In TourPlanner, all data (clients, tours, flights, client packages) are saved in the hard disk
@@ -743,6 +877,10 @@ In TourPlanner, all data (clients, tours, flights, client packages) are saved in
 <br>
 
 ## **Command Summary**
+
+<hr>
+
+### **General Command Information**
 
 Command | Format
 ------------ | -------------
@@ -753,3 +891,26 @@ Command | Format
 ```find``` | Clients: ```find [DATA_TYPE] [SUBSTRING]``` <br> Tour / Flights: ```find [DATA_TYPE] [ID]```
 ```sort``` | ```sort [DATA_TYPE] [FILTER]```
 ```bye``` | ```bye```
+
+<br>
+
+### **Supporting Command Information**
+
+Command | Data Type | Data Fields
+------------ | ------------- |-------------
+```help``` | - | -
+```add``` Clients | `-c` | `/id`, `/n`, `/cn`, `/m`
+```add``` Flights | `-f` |`/id`, `/d`, `/r`, `/dd`, `/rd`
+```add``` Tours   | `-t` |`/id`, `/n`, `/p`
+```add``` Packages   | `-p` |`/id`, `/c`, `/f`, `/t`
+```cut``` | `-c` <br> `-f` <br> `-t` <br> `-p`| -
+```list``` | `-c` <br> `-f` <br> `-t` <br> `-p` | -
+```find``` | `-c` <br> `-f` <br> `-t` | -
+```sort``` Clients | `-c` | `/id`, `/n`
+```sort``` Flights | `-f` |`/id`,`/d`, `/r`
+```sort``` Tours | `-t` |`/id`,`/n`, `/p`
+```bye``` | - | -
+
+<br>
+
+[**Return to Table of Contents**](#table-of-contents)
