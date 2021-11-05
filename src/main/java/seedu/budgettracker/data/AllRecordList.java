@@ -4,6 +4,7 @@ import seedu.budgettracker.data.records.Budget;
 import seedu.budgettracker.data.records.Category;
 import seedu.budgettracker.data.records.Expenditure;
 import seedu.budgettracker.data.records.Loan;
+import seedu.budgettracker.data.records.exceptions.DuplicateBudgetException;
 import seedu.budgettracker.storage.textfiletools.WriteToTextFile;
 import seedu.budgettracker.ui.TextUi;
 
@@ -65,9 +66,9 @@ public class AllRecordList {
      * @param month month which budget is being set for
      * @param isLoadingStorage indicate if this command is called during setup or runtime
      */
-    public void addBudget(double spendingLimit, int month, boolean isLoadingStorage) {
+    public void addBudget(double spendingLimit, int month, boolean isLoadingStorage) throws DuplicateBudgetException {
         assert spendingLimit >= 0 : "Amount should be greater than or equals to 0";
-        allRecordList.get(month).addBudget(spendingLimit);
+        allRecordList.get(month).addBudget(spendingLimit, isLoadingStorage);
         if (!isLoadingStorage) {
             saveToStorage(storageDirectory);
         }

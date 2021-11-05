@@ -3,6 +3,7 @@ package seedu.budgettracker;
 import java.time.LocalDate;
 import java.lang.String;
 
+import seedu.budgettracker.data.records.exceptions.DuplicateBudgetException;
 import seedu.budgettracker.logic.commands.Command;
 import seedu.budgettracker.data.AllRecordList;
 import seedu.budgettracker.logic.commands.exceptions.CommandException;

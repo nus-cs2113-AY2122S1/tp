@@ -1,6 +1,7 @@
 package seedu.budgettracker.logic.commands;
 
 import seedu.budgettracker.data.AllRecordList;
+import seedu.budgettracker.data.records.exceptions.DuplicateBudgetException;
 import seedu.budgettracker.logic.commands.exceptions.CommandException;
 
 /**
