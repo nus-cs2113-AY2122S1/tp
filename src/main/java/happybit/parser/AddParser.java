@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class AddParser extends Parser {
@@ -48,7 +49,7 @@ public class AddParser extends Parser {
      */
     public static Command parseAddHabitCommand(String commandInstruction) throws HaBitParserException {
         checkNoDescription(commandInstruction);
-        String[] parameters = splitInput(commandInstruction);
+        ArrayList<String> parameters = splitInput(commandInstruction);
         int goalIndex = getNumber(parameters, FLAG_GOAL_INDEX) - 1;
         Habit habit = getHabit(commandInstruction);
         return new AddHabitCommand(habit, goalIndex);
@@ -72,7 +73,7 @@ public class AddParser extends Parser {
      * @throws HaBitParserException If command parameters are not defined, or defined improperly.
      */
     private static Goal getGoal(String input) throws HaBitParserException {
-        String[] parameters = splitInput(input);
+        ArrayList<String> parameters = splitInput(input);
         String goalName = getName(parameters).trim();
         GoalType goalType = getType(parameters);
         Date[] dates = getDate(parameters);
@@ -91,7 +92,7 @@ public class AddParser extends Parser {
      * @throws HaBitParserException If command parameters are not defined, or defined improperly.
      */
     private static Habit getHabit(String input) throws HaBitParserException {
-        String[] parameters = splitInput(input);
+        ArrayList<String> parameters = splitInput(input);
         String habitName = getName(parameters).trim();
         int interval = getNumber(parameters, FLAG_INTERVAL);
         return new Habit(habitName, interval);
@@ -104,7 +105,7 @@ public class AddParser extends Parser {
      * @return Date array containing start and end dates.
      * @throws HaBitParserException If the date flag is used without fielding a date.
      */
-    private static Date[] getDate(String[] parameters) throws HaBitParserException {
+    private static Date[] getDate(ArrayList<String> parameters) throws HaBitParserException {
         Date[] dates = new Date[2];
         dates[START_DATE] = getStartDate(parameters);
         dates[END_DATE] = getEndDate(parameters);
@@ -144,7 +145,7 @@ public class AddParser extends Parser {
      * @return Start date.
      * @throws HaBitParserException If string fails to convert into a date.
      */
-    private static Date getStartDate(String[] parameters) throws HaBitParserException {
+    private static Date getStartDate(ArrayList<String> parameters) throws HaBitParserException {
         String strStartDate = getParameter(parameters, FLAG_START_DATE);
         if (strStartDate == null) {
             return new Date();
@@ -161,7 +162,7 @@ public class AddParser extends Parser {
      * @return End date.
      * @throws HaBitParserException If string fails to convert into a date.
      */
-    private static Date getEndDate(String[] parameters) throws HaBitParserException {
+    private static Date getEndDate(ArrayList<String> parameters) throws HaBitParserException {
         String strEndDate = getParameter(parameters, FLAG_END_DATE);
         if (strEndDate == null || strEndDate.equals(FLAG_END_DATE)) {
             throw new HaBitParserException(ERROR_END_DATE_FORMAT);

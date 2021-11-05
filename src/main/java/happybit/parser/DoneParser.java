@@ -4,6 +4,8 @@ import happybit.command.Command;
 import happybit.command.DoneHabitCommand;
 import happybit.exception.HaBitParserException;
 
+import java.util.ArrayList;
+
 public class DoneParser extends Parser {
 
     /**
@@ -15,7 +17,7 @@ public class DoneParser extends Parser {
      */
     public static Command parseDoneHabitCommand(String input) throws HaBitParserException {
         checkNoDescription(input);
-        String[] parameters = splitInput(input);
+        ArrayList<String> parameters = splitInput(input);
         int goalIndex = getNumber(parameters, FLAG_GOAL_INDEX) - 1;
         int habitIndex = getNumber(parameters, FLAG_HABIT_INDEX) - 1;
         return new DoneHabitCommand(goalIndex, habitIndex);

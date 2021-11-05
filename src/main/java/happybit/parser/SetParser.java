@@ -4,6 +4,8 @@ import happybit.command.Command;
 import happybit.command.SetCommand;
 import happybit.exception.HaBitParserException;
 
+import java.util.ArrayList;
+
 public class SetParser extends Parser {
 
     /**
@@ -15,7 +17,7 @@ public class SetParser extends Parser {
      */
     public static Command parseSetGoalCommand(String commandInstruction) throws HaBitParserException {
         checkNoDescription(commandInstruction);
-        String[] parameters = splitInput(commandInstruction);
+        ArrayList<String> parameters = splitInput(commandInstruction);
         int goalIndex = getNumber(parameters, FLAG_GOAL_INDEX) - 1;
         return new SetCommand(goalIndex);
     }

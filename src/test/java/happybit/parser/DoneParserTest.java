@@ -12,7 +12,7 @@ class DoneParserTest {
 
     private static final String ERROR_GOAL_INDEX_FORMAT = "The command is missing the 'g/' flag";
     private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The flag 'g/' has to be followed by a number";
-    private static final String ERROR_HABIT_INDEX_FORMAT = "The command is missing the 'h/' flag";
+    private static final String ERROR_HABIT_INDEX_FORMAT = "The flag 'h/' has to be followed by a number";
     private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The flag 'h/' has to be followed by a number";
 
 
