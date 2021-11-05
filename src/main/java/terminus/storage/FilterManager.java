@@ -6,7 +6,6 @@ import terminus.common.CommonUtils;
 import terminus.content.ContentManager;
 import terminus.content.Link;
 import terminus.content.Question;
-import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 
@@ -31,6 +30,10 @@ public class FilterManager {
                 moduleManager.removeModule(module);
             } else {
                 NusModule moduleObject = moduleManager.getModule(module);
+                if (moduleObject == null) {
+                    moduleManager.removeModule(module);
+                    continue;
+                }
                 ContentManager<Link> linkContentManager = moduleObject.getContentManager(Link.class);
                 filterLink(linkContentManager);
                 ContentManager<Question> questionContentManager = moduleObject.getContentManager(Question.class);
@@ -105,9 +108,15 @@ public class FilterManager {
      */
     public static boolean isQuestionValid(Question question) {
         boolean isValid = true;
+        if (question == null) {
+            isValid = false;
+            return isValid;
+        }
         if (CommonUtils.isStringNullOrEmpty(question.getAnswer())) {
             isValid = false;
         } else if (CommonUtils.isStringNullOrEmpty(question.getQuestion())) {
+            isValid = false;
+        } else if (Double.isNaN(question.getWeight())) {
             isValid = false;
         }
         return isValid;
@@ -121,11 +130,15 @@ public class FilterManager {
      */
     public static boolean isScheduleValid(Link link) {
         boolean isValid = true;
+        if (link == null) {
+            isValid = false;
+            return isValid;
+        }
         if (!CommonUtils.isValidDay(link.getDay())) {
             isValid = false;
         } else if (!CommonUtils.isValidDuration(link.getDuration())) {
             isValid = false;
-        } else if (!CommonUtils.isStringNullOrEmpty(link.getName())) {
+        } else if (CommonUtils.isStringNullOrEmpty(link.getName())) {
             isValid = false;
         }
         try {
@@ -136,7 +149,7 @@ public class FilterManager {
             if (CommonUtils.hasDurationOverflow(link.getStartTime(), link.getDuration())) {
                 isValid = false;
             }
-        } catch (InvalidArgumentException e) {
+        } catch (Exception e) {
             isValid = false;
         }
         return isValid;
