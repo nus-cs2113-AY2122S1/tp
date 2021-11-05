@@ -72,6 +72,15 @@ public class UpdateParser extends Parser {
         }
     }
 
+
+    /**
+     * Examines user input to decide which habit attribute user wants to change.
+     *
+     * @param input User input.
+     * @return Parse command specifically for updating the chosen habit attribute.
+     * @throws HaBitParserException Thrown when parameters given are for updating goal rather than changing habits
+     *                              or when parameters are not the same
+     */
     public static Command parseUpdateHabitCommands(String input) throws HaBitParserException {
         checkNoDescription(input);
         String[] parameters = splitInput(input);
