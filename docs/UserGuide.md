@@ -115,7 +115,7 @@ Outputs:
 add n/carrot a/20 e/01/03/2022
 ____________________________________________________
 Got it. This ingredient has been added to the inventory:
-	Carrot | Amount Left: 20.0 kg | Expiry Date: 01/03/2022
+	Carrot | Amount Left: 20.000 kg | Expiry Date: 01/03/2022
 Current inventory has 1 items.
 This ingredient will expire in 131 days.
 ____________________________________________________
@@ -124,7 +124,7 @@ ____________________________________________________
 add n/potato a/5 e/25/12/2021
 ____________________________________________________
 Got it. This ingredient has been added to the inventory:
-    Potato | Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+    Potato | Amount Left: 5.000 kg | Expiry Date: 25/12/2021
 Current inventory has 2 items.
 This ingredient will expire in 65 days.
 ____________________________________________________
@@ -141,11 +141,11 @@ Output:
 list
 ____________________________________________________
 Here is the list of the ingredients currently in inventory:
-	1. Carrot | Total Amount: 20.0 kg
-		1.1. Amount Left: 20.0 kg | Expiry Date: 01/03/2022
+	1. Carrot | Total Amount: 20.000 kg
+		1.1. Amount Left: 20.000 kg | Expiry Date: 01/03/2022
 
-	2. Potato | Total Amount: 5.0 kg
-		2.1. Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+	2. Potato | Total Amount: 5.000 kg
+		2.1. Amount Left: 5.000 kg | Expiry Date: 25/12/2021
 ____________________________________________________
 ```
 
@@ -154,7 +154,7 @@ ____________________________________________________
 
 ### 2.4. Update Ingredients
 
-You can update the amount, unit and expiry of an ingredient in your ingredient list if it needs
+You can update the amount of an ingredient in your ingredient list if it needs
 changes.
 
 Command:
@@ -172,7 +172,7 @@ Output (using list shown in the [list section](#23-list-ingredients)):
 update 1.1 a/100
 ____________________________________________________
 Got it. This ingredient has been updated:
-	Carrot | Amount Left: 100.0 kg | Expiry Date: 01/03/2022
+	Carrot | Amount Left: 100.000 kg | Expiry Date: 01/03/2022
 ____________________________________________________
 ```
 
@@ -180,7 +180,8 @@ ____________________________________________________
 
 You can subtract a given amount from an ingredient's total amount if you have used/ sold that amount. If the amount 
 given is equal to the existing stock of the ingredient, the ingredient is automatically removed from the list (instead 
-of displaying zero stock for the item.)
+of displaying zero stock for the item.) 
+If the ingredient has multiple entries, the earliest expiring one will be deducted first, as a good practice for inventory management.
 
 Command: `subtract GROUP_INDEX a/[AMOUNT]`
 
@@ -218,13 +219,14 @@ Output (using list shown in the [list section](#23-list-ingredients)):
 delete 1.1
 ____________________________________________________
 Got it. This ingredient has been removed:
-	Carrot | Amount Left: 50.0 kg | Expiry Date: 01/03/2022
+	Carrot | Amount Left: 50.000 kg | Expiry Date: 01/03/2022
 ____________________________________________________
 ```
 
 ### 2.7. Search Ingredients By Expiry
 
 You can search for ingredients that will expire by a specified date instead of looking through the full list for them. 
+The ingredients expiring sooner are shown at the top. Expired ingredients are also shown for your action.
 
 Command: `expire [DATE]`
 
@@ -238,28 +240,29 @@ This is the current list:
 list
 ____________________________________________________
 Here is the list of the ingredients currently in inventory:
-	1. Potato | Total Amount: 0.6 kg
-		1.1. Amount Left: 0.6 kg | Expiry Date: 30/12/2021
+	1. Carrot | Total Amount: 2.000 kg
+		1.1. Amount Left: 2.000 kg | Expiry Date: 11/11/2021
 
-	2. Carrot | Total Amount: 200.0 kg
-		2.1. Amount Left: 200.0 kg | Expiry Date: 01/03/2022
+	2. Plum | Total Amount: 7.000 kg
+		2.1. Amount Left: 2.000 kg | Expiry Date: 05/11/2021
+		2.2. Amount Left: 5.000 kg | Expiry Date: 12/11/2021
 
-	3. Radish | Total Amount: 43.8 kg
-		3.1. Amount Left: 43.8 kg | Expiry Date: 19/01/2022
-
-	4. Tomato | Total Amount: 23.7 kg
-		4.1. Amount Left: 23.7 kg | Expiry Date: 21/11/2021
+	3. Pumpkin | Total Amount: 6.000 kg
+		3.1. Amount Left: 6.000 kg | Expiry Date: 06/11/2021
+		3.2. Amount Left: 1.000 kg | Expiry Date: 21/11/2021
 ____________________________________________________
+
 ```
 
 Output:
 ```
-expire 30/01/2022
+expire 13/11/2021
 ____________________________________________________
-There are 3 ingredients expiring by: 2022-01-30
-    Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
-    Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
-    Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021	
+There are 4 ingredients expiring by: 13/11/2021
+	Plum | Amount Left: 2.000 kg | Expiry Date: 05/11/2021
+	Pumpkin | Amount Left: 6.000 kg | Expiry Date: 06/11/2021
+	Carrot | Amount Left: 2.000 kg | Expiry Date: 11/11/2021
+	Plum | Amount Left: 5.000 kg | Expiry Date: 12/11/2021
 ____________________________________________________
 ```
 
@@ -279,19 +282,19 @@ Outputs:
 find carrot
 ____________________________________________________
 I found these ingredients for "carrot":
-	2. Carrot | Total Amount: 200.0 kg
-		2.1. Amount Left: 200.0 kg | Expiry Date: 01/03/2022
+	2. Carrot | Total Amount: 200.000 kg
+		2.1. Amount Left: 200.000 kg | Expiry Date: 01/03/2022
 ____________________________________________________
 ```
 ```
 find potato tomato
 ____________________________________________________
 I found these ingredients for "potato":
-	1. Potato | Total Amount: 0.6 kg
-		1.1. Amount Left: 0.6 kg | Expiry Date: 30/12/2021
+	1. Potato | Total Amount: 0.600 kg
+		1.1. Amount Left: 0.600 kg | Expiry Date: 30/12/2021
 I found these ingredients for "tomato":
-	4. Tomato | Total Amount: 23.7 kg
-		4.1. Amount Left: 23.7 kg | Expiry Date: 21/11/2021
+	4. Tomato | Total Amount: 23.700 kg
+		4.1. Amount Left: 23.700 kg | Expiry Date: 21/11/2021
 ____________________________________________________
 ```
 
@@ -303,7 +306,7 @@ You can view the different types of alerts to see which ingredients are running 
 Command: `alerts [ALERT_TYPE]`
 
 There are 3 possible `[ALERT_TYPE]`:
-1. `expiry`: displays all ingredients expiring within the *number of days* as specified by the threshold
+1. `expiry`: displays all ingredients expiring within the *number of days* as specified by the threshold, with ingredients expiring sooner/that have expired shown first.
 2. `stock`: displays all ingredients with stock lower than the threshold value
 3. `all`: displays both of the above
 
@@ -316,8 +319,8 @@ ____________________________________________________
 alerts stock
 ____________________________________________________
 There are 1 ingredients with stock less than 5.0 kg
-	Potato | Total Amount: 0.6 kg
-		1.1. Amount Left: 0.6 kg | Expiry Date: 30/12/2021
+	Potato | Total Amount: 0.600 kg
+		1.1. Amount Left: 0.600 kg | Expiry Date: 30/12/2021
 ____________________________________________________
 ```
 
