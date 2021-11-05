@@ -246,8 +246,8 @@ public class ListPrescriptionCommandTest {
     @Test
     public void listPrescription_invalidParameter_expectError() {
         String expectedOutput = "Please enter a valid optional parameter!\n"
-                + "COMMAND SYNTAX: listprescription {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME sid/STOCK_ID "
-                + "sort/COLUMN_NAME rsort/COLUMN_NAME}";
+                + "COMMAND SYNTAX: listprescription {i/ID n/NAME q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME "
+                + "sid/STOCK_ID sort/COLUMN_NAME rsort/COLUMN_NAME}";
         executeListPrescriptionCommand("a", "1");
         assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
