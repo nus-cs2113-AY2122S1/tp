@@ -21,13 +21,15 @@ public class SearchMapCommand extends Command {
      * @param isAll refers to whether to list mappings for one university or all universities in the selected list.
     */
     public SearchMapCommand(University selectedUniversity, UniversityList universitySelectedList,
-                            ModuleList moduleSelectedList, boolean isAll) {
+                            UniversityList universityMasterList, ModuleList moduleSelectedList, boolean isAll) {
         assert selectedUniversity.getName() != null;
         assert selectedUniversity.getClass() != null;
         this.selectedUniversity = selectedUniversity;
         if (isAll) {
             for (University uni : universitySelectedList.getList()) {
-                printMappings(uni, moduleSelectedList);
+                String uniName = uni.getName();
+                University uniFromMasterList = universityMasterList.getUniversity(uniName);
+                printMappings(uniFromMasterList, moduleSelectedList);
             }
         } else {
             printMappings(selectedUniversity, moduleSelectedList);
