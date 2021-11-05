@@ -2,7 +2,7 @@
 hide footbox
 mainframe sd delete all contacts
 
-":DeleteContactCommand" -> ":DeleteContactCommand" : deleteAllContacts()
+-->":DeleteContactCommand":deleteAllContacts()
 activate ":DeleteContactCommand"
 
 'confirm delete message
