@@ -48,6 +48,57 @@ public class Ui {
         }
     }
 
+    public static void printCommandErrorMessage(String errorMessage, Keyword keyword) {
+        System.out.println(errorMessage + " Please refer to the format for command below:");
+        switch (keyword) {
+        case ADD_MEMBER_KEYWORD:
+            System.out.println("    add [/m </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>]");
+            break;
+        case EDIT_MEMBER_KEYWORD:
+            System.out.println("    edit [/m <MEMBER_INDEX_NUMBER> </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> "
+                    + "</p PHONE NUMBER>]");
+            break;
+        default:
+            printHelp();
+            break;
+        }
+    }
+
+    public static void printAddMemberErrorMessage(String errorMessage) {
+        System.out.println("Error when adding member:");
+        System.out.println("    " + errorMessage);
+    }
+
+    public static void printEditMemberErrorMessage(String errorMessage) {
+        System.out.println("Error when editing member:");
+        System.out.println("    " + errorMessage);
+    }
+
+    public static void printDeleteMemberErrorMessage(String errorMessage) {
+        System.out.println("Error when deleting member:");
+        System.out.println("    " + errorMessage);
+    }
+
+    public static void printFindMemberErrorMessage(String errorMessage) {
+        System.out.println("Error when finding member:");
+        System.out.println("    " + errorMessage);
+    }
+
+    public static void printDeleteMemberErrorMessage(String errorMessage, MemberList members, String name) {
+        System.out.println(errorMessage);
+        if (members.getMemberListSize() > 0) {
+            System.out.println("The following members that have similar name as your delete \"" + name + "\"");
+            for (Member member : members.getMemberList()) {
+                System.out.println(member.toString());
+            }
+        }
+    }
+
+    public static void printCreateMemberErrorMessage(String errorMessage) {
+        System.out.println("Error when creating member:");
+        System.out.println(errorMessage);
+    }
+
     public static void printMatchingMemberList(MemberList members, String name) {
         if (members.getMemberListSize() > 0) {
             System.out.println("The following members matches your search \"" + name + "\"");
@@ -61,16 +112,6 @@ public class Ui {
 
     public static void printDeletedMemberMessage(Member member) {
         System.out.println("You have removed member: " + "\n" + member);
-    }
-
-    public static void printDeleteMemberErrorMessage(String errorMessage, MemberList members, String name) {
-        System.out.println(errorMessage);
-        if (members.getMemberListSize() > 0) {
-            System.out.println("The following members that have similar name as your delete \"" + name + "\"");
-            for (Member member : members.getMemberList()) {
-                System.out.println(member.toString());
-            }
-        }
     }
 
     public static void printDeletedTrainingMessage(TrainingSchedule training) {
@@ -91,22 +132,6 @@ public class Ui {
 
     public static void printArrow() {
         System.out.print("=> ");
-    }
-
-    public static void printIndexError() {
-        System.out.println("Index must be a number");
-    }
-
-    public static void printEditPhoneFailed() {
-        System.out.println("You did not edit the phone number due to a wrong format being used...");
-    }
-
-    public static void printEditGenderFailed() {
-        System.out.println("You did not edit the gender due to a wrong format being used...");
-    }
-
-    public static void printEditNameFailed() {
-        System.out.println("You did not edit the Name due to a number being used...");
     }
 
     public static void printMissingTraining() {

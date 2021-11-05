@@ -35,7 +35,7 @@ public class AddMember {
                 }
             }
         } catch (InvalidMemberException e) {
-            System.out.println(e.getMessage());
+            Ui.printAddMemberErrorMessage(e.getMessage());
         }
     }
 

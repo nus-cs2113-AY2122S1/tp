@@ -27,7 +27,8 @@ public class DeleteMember {
         } else if (parameter instanceof String) {
             deleteMemberByString(members, (String) parameter);
         } else {
-            System.out.println("Error in processing parameter, please input either name or index of member to delete.");
+            Ui.printDeleteMemberErrorMessage(
+                    "Error in processing parameter, please input either name or index of member to delete.");
         }
     }
 
@@ -39,9 +40,9 @@ public class DeleteMember {
             File dukeMemberFile = new File("CCAMembers.csv");
             writeMemberFile(dukeMemberFile, members);
         } catch (IndexOutOfBoundsException | AssertionError e) {
-            System.out.println("please input a valid member index or member name");
+            Ui.printDeleteMemberErrorMessage("Please input a valid member index or member name.");
         } catch (InvalidMemberException e) {
-            System.out.println(e.getMessage());
+            Ui.printDeleteMemberErrorMessage(e.getMessage());
         }
     }
 
@@ -55,7 +56,7 @@ public class DeleteMember {
         } catch (InvalidMemberException e) {
             Ui.printDeleteMemberErrorMessage(e.getMessage(), e.getMembers(), name);
         } catch (AssertionError e) {
-            System.out.println("please input a valid member index or member name");
+            Ui.printDeleteMemberErrorMessage("Please input a valid member index or member name.");
         }
     }
 }

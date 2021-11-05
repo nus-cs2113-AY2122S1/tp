@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.Keyword;
 import seedu.duke.Parser;
 import seedu.duke.command.AddMember;
 import seedu.duke.command.DeleteMember;
@@ -80,7 +81,7 @@ class MemberListTest {
     @Test
     void makeMemberEntry() {
         final String string = "add /m /n Lorem Ipsum /s A1231234B /g M /p 91118888";
-        Member newMember = Parser.getMemberDetails(string, 'A');
+        Member newMember = Parser.getMemberDetails(string, Keyword.ADD_MEMBER_KEYWORD);
         new AddMember(fullMemberList, newMember);
         //Parser.makeMemberEntry(fullMemberList, string);
 
@@ -94,7 +95,7 @@ class MemberListTest {
     void editMember() {
         final String string = "edit /m 1 /n Ian Hwang";
         int index = Parser.getIndex(string);
-        Member memberDetail = Parser.getMemberDetails(string, 'E');
+        Member memberDetail = Parser.getMemberDetails(string, Keyword.EDIT_MEMBER_KEYWORD);
         new EditMember(fullMemberList, index, memberDetail);
 
         try {
