@@ -149,6 +149,16 @@ interface ExpenseSplitter {
         }
     }
 
+    /**
+     * Helper function for updateIndividualSpending(). Assigns the remaining amount of the expense to the last person
+     * in the expense list after receiving approval from the user.
+     * @param person the Person who is to be assigned the amount.
+     * @param payer the Person who paid for the expense.
+     * @param amountRemaining the amount to be assigned to the last person.
+     * @param expense the expense that is being added.
+     * @param amountBeingPaid the HashMap containing how much each Person spent on the expense.
+     * @throws ForceCancelException allows the user to cancel the command.
+     */
     private static void assignRemainder(Person person, Person payer, double amountRemaining, Expense expense,
                                         HashMap<Person, Double> amountBeingPaid) throws ForceCancelException {
         Ui.askAutoAssignRemainder(person, amountRemaining);

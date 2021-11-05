@@ -48,7 +48,7 @@ public class Expense implements ExpenseSplitter {
      * @param inputDescription String of user input to be parsed and assigned to expense attributes
      */
 
-    public Expense(String inputDescription) throws InvalidAmountException, ForceCancelException {
+    public Expense(String inputDescription) throws ForceCancelException {
         String[] expenseInfo = inputDescription.split(" ", 3);
         setAmountSpent(expenseInfo[0]);
         setCategory(expenseInfo[1].toLowerCase());
@@ -61,18 +61,22 @@ public class Expense implements ExpenseSplitter {
             ExpenseSplitter.updateIndividualSpending(this);
         }
     }
-    //@@author
 
+    //@@author joshualeeky
+    /**
+     * Extracts the description of the expense from the user input.
+     * @param userInput the string that the user enters.
+     * @return description of the expense.
+     */
     private static String getDescriptionParse(String userInput) {
         return userInput.split("/")[1].strip();
     }
 
-    //@@author joshualeeky
     /**
-     * Obtains a list of Person objects from array of names of people.
-     *
-     * @param userInput the input of the user
-     * @return listOfPersons ArrayList containing Person objects included in the expense
+     * Obtains a list of Person objects from a string of names separated by a comma. Also checks if there are repeated
+     * names that were entered in the expense.
+     * @param userInput the string that the user enters.
+     * @return ArrayList containing the Person objects included in the expense.
      */
     private static ArrayList<Person> checkValidPersons(String userInput) throws ForceCancelException {
         String[] listOfPeople = userInput.split("/")[0].split(",");
@@ -214,7 +218,7 @@ public class Expense implements ExpenseSplitter {
     }
 
     //@@author itsleeqian
-    public void setAmountSpent(String amount) throws InvalidAmountException, ForceCancelException {
+    public void setAmountSpent(String amount) throws ForceCancelException {
         try {
             this.amountSpent = Double.parseDouble(amount);
             if (this.amountSpent <= 0) {
