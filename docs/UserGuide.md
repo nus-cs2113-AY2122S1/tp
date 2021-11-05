@@ -23,7 +23,7 @@ Below is a guide on how you can get started using our program to start **"Schedu
       - [2.4.3 Listing the recurrence of a task](#243-listing-the-recurrence-of-a-task)
     - [2.5 Sorting your tasklist: `sort`](#25-sorting-your-task-list-sort)
     - [2.6 Setting reminders to your tasks: `reminder`](#26-setting-reminders-to-your-tasks-reminder)
-    - [2.7 Editing your tasks: `edit`](#27-editing-your-tasks-edit-index---flag-value---flag-value---flag-value)
+    - [2.7 Editing your tasks: `edit`](#27-editing-your-tasks-edit)
     - [2.8 Deleting your tasks: `delete`](#28-deleting-your-tasks-delete)
     - [2.9 Exiting the program: `bye`](#29-exiting-the-program-bye)
     - [2.10 Storage](#210-storage)
@@ -322,9 +322,10 @@ Sorts your task list by a given criteria.
 
 ### 2.6 Setting reminders to your tasks: `reminder`
 
-### 2.7 Editing your tasks: `edit <index> <--flag <value>> [--flag <value>] [--flag <value>]...`
+### 2.7 Editing your tasks: `edit`
 Edits a single [Todo](#221-todo-todo), [Deadline](#222-deadline-deadline) or [Event](#223-event-event) based on the flags entered.
-- `<index>` is the index of the task in the most recent [list](#24-listing-your-tasks-list) command that you have run.
+**Format**: `edit <index> <--flag <value>> [--flag <value>] [--flag <value>]...`
+- `<index>` is the index of the task you want to edit from the most recent [list](#24-listing-your-tasks-list) command that you have run.
    >💡 **Note**: if the task you want to edit was not in your most recent [list](#24-listing-your-tasks-list) command, simply type `list` to list all tasks and use its corresponding index to edit it.
 - at least one `<--flag <value>>` must be specified, though you can edit multiple values at once by providing multiple more `[--flag <value>]` arguments.
 - **Flags**
@@ -338,18 +339,17 @@ Edits a single [Todo](#221-todo-todo), [Deadline](#222-deadline-deadline) or [Ev
   - `--link <url>` modifies your Lesson link.
 
 ### 2.8 Deleting your tasks: `delete`
-Deletes tasks specified in comma-seperated argument.
+Deletes Tasks specified in comma-seperated argument.
+**Format**: `delete <indexes>`
+- `<indexes>` are the indexes of the task you want to edit from the most recent [list](#24-listing-your-tasks-list) command that you have run.
+   >💡 **Note**: if the task(s) you want to delete was not in your most recent [list](#24-listing-your-tasks-list) command, simply type `list` to list the tasks and use their indexes to delete them.
+  - Indexes should be comma seperated single integers such as `5` and/or ranges of two indexes such as `1-3`.
+  - **Example**:
+   - `delete 1,3,5` would delete tasks with indexes 1, 3 and 5.
+   - `delete 1-3` would delete tasks with indexes 1, 2 and 3.
+   - `delete 1-3, 5` would delete tasks with indexes 1, 2, 3 and 5.
+      >💡 **Note**: Whether there are any spaces between the commas, it does not matter.
 
-**Format**: `delete <indexes of tasks to delete>`
-
-Index should be specified in either,
-- Single index, such as `3`
-- A range of two indexes, such as `1-3`. This is a shorthand for `1,2,3`.
-- task indexes should be comma seperated.
-  - `delete 1,3,5` would delete tasks with indexes 1, 3 and 5.
-  - `delete 1-3` would delete tasks with indexes 1, 2 and 3.
-  - `delete 1-3, 5` would delete tasks with indexes 1, 2, 3 and 5.  
- >💡 **Note**: Whether there are any spaces between the commas, it does not matter.
 
 **Example**: `delete 1-3, 5`
 - delete tasks with indexes 1, 2, 3 and 5.
@@ -362,24 +362,24 @@ Index should be specified in either,
 || -------------
 ||  MY TASKLIST
 || -------------
-|| 1. read book [low] (doOn: 20-10-2021 02:00:00)
-|| 2. return book [medium] (dueDate: 21-10-2021 03:00:00)
-|| 3. project meeting [high] (startDate: 22-10-2021 04:00:00 - endDate: 22-10-2021 05:00:00)
-|| 4. wash clothes [medium] (doOn: 20-10-2021 02:00:00)
-|| 5. homework [low] (dueDate: 21-10-2021 03:00:00)
-|| 6. movie screening [low] (startDate: 22-10-2021 04:00:00 - endDate: 22-10-2021 05:00:00)
------
+|| 1. [T] read book <low> {none} (doOn: 20-10-2021 02:00)
+|| 2. [T] return book <low> {none} (doOn: 21-10-2021 03:00)
+|| 3. [E] project meeting <high> {none} (startDate: 22-10-2021 04:00 - endDate: 22-10-2021 05:00)
+|| 4. [T] wash clothes <medium> {none} (doOn: 20-10-2021 02:00)
+|| 5. [D] homework <low> {none} (dueDate: 21-10-2021 03:00)
+|| 6. [E] movie screening <low> {none} (startDate: 22-10-2021 04:00 - endDate: 22-10-2021 05:00)
+-------------------------------------------------------------------------
 ```
 **Expected Outcome**:
 
 ```
 -------------------------------------------------------------------------
 [user]: delete 1-3,5
-|| Tasks deleted:
-|| read book [low] (doOn: 20-10-2021 02:00:00)
-|| return book [medium] (dueDate: 21-10-2021 03:00:00)
-|| project meeting [high] (startDate: 22-10-2021 04:00:00 - endDate: 22-10-2021 05:00:00)
-|| homework [low] (dueDate: 21-10-2021 03:00:00)
+|| Task(s) deleted:
+|| [T] read book <low> {none} (doOn: 20-10-2021 02:00)
+|| [T] return book <low> {none} (doOn: 21-10-2021 03:00)
+|| [E] project meeting <high> {none} (startDate: 22-10-2021 04:00 - endDate: 22-10-2021 05:00)
+|| [D] homework <low> {none} (dueDate: 21-10-2021 03:00)
 -------------------------------------------------------------------------
 ```
 
@@ -391,8 +391,8 @@ Index should be specified in either,
 || -------------
 ||  MY TASKLIST
 || -------------
-|| 1. wash clothes [medium] (doOn: 20-10-2021 02:00:00)
-|| 2. movie screening [low] (startDate: 22-10-2021 04:00:00 - endDate: 22-10-2021 05:00:00)
+|| 1. [T] wash clothes <medium> {none} (doOn: 20-10-2021 02:00)
+|| 2. [E] movie screening <low> {none} (startDate: 22-10-2021 04:00 - endDate: 22-10-2021 05:00)
 -------------------------------------------------------------------------
 ```
 
