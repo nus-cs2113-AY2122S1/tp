@@ -1,8 +1,8 @@
 # Koh Qianqi's Project Portfolio Page
 
-## Project: Get Jack'd
+## Project: Get Jack'D
 
-Get Jack'd is a Command-Line application that helps busy people manage their workouts and fitness routines quickly by
+Get Jack'D is a Command-Line application that helps busy people manage their workouts and fitness routines quickly by
 typing in commands. It is written in Java and has about 6 kLoC.
 
 Given below are my contributions to the project.
@@ -46,8 +46,10 @@ Given below are my contributions to the project.
     - User Guide:
         - Added Command Summary.
         - Added documentation for Search command.
+        - Edited other commands.
     - Developer's Guide:
         - Added documentation for Ui component.
+        - Added Manual Testing for Search commmand.
         
 - **Community**:
     - PRs reviewed (with non-trivial review comments): [#59](https://github.com/AY2122S1-CS2113T-F12-2/tp/pull/59#discussion_r725626678),

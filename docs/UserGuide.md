@@ -32,6 +32,7 @@ to help you embark on your fitness journey, GetJack'D is the one for you!
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
+<div style="page-break-after: always;"></div>
 
 ## Purpose
 
@@ -71,7 +72,8 @@ ________________________________________________________
 
 --------------------------------------
 
-  
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 GetJack'D maintains a list of workouts (hereafter referred to as the "workout list"), where each workout is a list of exercises. 
@@ -780,6 +782,8 @@ This occurs when the `data` folder in which the GetJack'D data file is stored fa
 
 * Go to the folder where GetJack'D is saved and search for any **files** named `data`. If such a file exists then either delete or relocate it.
 * Reinstall GetJack'D and try mocing the application JAR file to another location.
+
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
