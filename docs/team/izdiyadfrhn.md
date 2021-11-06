@@ -23,4 +23,4 @@ UG Contributions
 * Updated `Command Summary` section of UserGuide.md whenever needed
 
 DG Contributions
-* 
+* Setup Attendance component for DeveloperGuide.md
