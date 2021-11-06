@@ -24,9 +24,11 @@ public class Storage {
     private static final String DEFAULT_PATH = "data/data.json";
     private static final String ERR_IOEXCEPTION = "(!) Critical Error: IO Exception";
     private static final String ERR_JSON_FORMAT = "(!) Critical Error: Malformed JSON data, no data will be loaded"
-            + System.lineSeparator() + "If you wish to retain the data file, exit the program immediately, do not execute any other commands";
+            + System.lineSeparator()
+            + "If you wish to retain the data file, exit the program immediately, do not execute any other commands";
     private static final String WARN_MISSING_CONTENT = "(*) Warning: Missing fields found, some data may be missing"
-            + System.lineSeparator() + "To resolve manually, exit the program immediately, do not execute any other commands";
+            + System.lineSeparator()
+            + "To resolve manually, exit the program immediately, do not execute any other commands";
     private static final String INFO_NO_EXISTING_FILE = "(*) No existing data found, creating new one: %s ...";
     private static final String SUCCESS_DATA_FOUND = "(+) Data file found %s, loading ...";
     private static final String SUCCESS_DATA_LOADED = "(+) Loaded %d records";
