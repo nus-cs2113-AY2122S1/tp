@@ -8,13 +8,13 @@ of information** on CCA members, training schedules and attendance records which
 Line Interface (CLI). CCA Manager aims to **centralise and optimize** all CCA-related information, so that you can focus on
 improving other aspects of the CCA.
 
-This user guide will help you get started on using CCA Manager. [Pre-requisites](#pre-requisites---things-to-prepare-before-you-start-using-cca-manager) will show you how to 
+This user guide will help you get started on using CCA Manager. [Pre-requisites](#pre---requisites---things-to-prepare-before-you-start-using-cca-manager) will show you how to 
 set up CCA Manager on your computer. The [Commands](#commands) section will show you the list of commands and how to use
 them. Finally, [Command Summary](#command-summary) provides you with an overview of all the commands you can execute.
 
 ## Table of contents
 * [Acknowledgements](#acknowledgements)
-* [Pre-requisites](#pre-requisites---_things-to-prepare-before-you-start-using-cca-manager_)
+* [Pre-requisites](#pre---requisites---things-to-prepare-before-you-start-using-cca-manager)
 * [Commands](#commands)
   * [Warning Labels](#warning-labels) ⚠️
   * [Members](#member-commands)
@@ -43,7 +43,7 @@ them. Finally, [Command Summary](#command-summary) provides you with an overview
     4. [AB2 Code Basics](https://github.com/se-edu/addressbook-level2)
 * [PlantUML](https://plantuml.com/)
 
-## Pre Requisites - _Things to prepare before you start using CCA Manager_
+## Pre-requisites - _Things to prepare before you start using CCA Manager_
 1. CCA Manager runs on Java 11. Please ensure you have `Java 11` installed on your workstation.
    1. You can download Java [here](https://java.com/en/download/) 
 2. Download the latest .jar of CCA Manager [here](https://github.com/AY2122S1-CS2113T-F12-4/tp/releases)
