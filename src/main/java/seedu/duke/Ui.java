@@ -154,6 +154,11 @@ public class Ui {
         System.out.println("Added an Attendance entry: " + "\n" + attendance);
     }
 
+    public static void printDeleteAttendanceErrorMessage(String errorMessage) {
+        System.out.println("Error when deleting attendance entry:");
+        System.out.println("    " + errorMessage);
+    }
+
     public static void printEditMessage(Member oldMember, Member newMember) {
         System.out.println("Edited member:\n" + oldMember);
         System.out.println("To become:\n" + newMember);

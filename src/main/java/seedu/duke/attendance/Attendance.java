@@ -1,12 +1,12 @@
+//@@author izdiyadfrhn
+
 package seedu.duke.attendance;
 
 public class Attendance {
 
     protected String memberName;
     protected String trainingName;
-    /* 1 if present, 0 if absent */
     protected String attended;
-    /* Index of attendance entry from the arraylist. */
     protected int index;
 
     /**

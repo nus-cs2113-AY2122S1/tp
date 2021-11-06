@@ -1,3 +1,5 @@
+//@@author xingyuan123
+
 package seedu.duke.command;
 
 import seedu.duke.storage.AttendanceStorage;
