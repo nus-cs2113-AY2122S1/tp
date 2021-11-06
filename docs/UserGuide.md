@@ -244,7 +244,7 @@ List the items with a due date of `03 November 2021`
 ### Search items
 Search items by ID, Title, Status, and Category.
 
-Status must be one of "AVAILABLE", "LOANED" or "RESERVED".
+Status must be one of "AVAILABLE", "LOANED" or "RESERVED" and it is case insensitive.
 
 Category must be one of "Audio", "Video", "Book", "Magazine".
 
@@ -564,6 +564,8 @@ Upon starting the program, it will search for the presence of a file in the dire
 > ℹ️ Data is updated at the completion of execution of each command entered by the user
 
 > ⚠️ While the `data.json` file can be edited manually, it is highly recommended that users **do not** attempt to do so unnecessarily
+
+> ⚠️ **Do not** make changes to the `data.json` while `libmgr` is running. Any changes made while running will not be reflected by `libmgr` and such changes may be overwritten.
 
 ## FAQ
 

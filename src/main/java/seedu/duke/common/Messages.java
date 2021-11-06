@@ -102,7 +102,7 @@ public class Messages {
     public static final String EDIT_BOOK_MESSAGE = "  (+) Edited book item details:";
     public static final String EDIT_VIDEO_MESSAGE = "  (+) Edited video item details:";
     public static final String EDIT_MAGAZINE_MESSAGE = "  (+) Edited magazine item details:";
-    public static final String EDIT_MISCELLANEOUS_MESSAGE = "  (+) Edited item details:";
+    public static final String EDIT_MISCELLANEOUS_MESSAGE = "  (+) Edited miscellaneous item details:";
     public static final String EDIT_UNCHANGED_TITLE = "  (!) New title is the same as the existing title";
     public static final String EDIT_UNCHANGED_ID = "  (!) New ID is the same as the existing ID";
     public static final String EDIT_UNCHANGED_AUTHOR = "  (!) New author is the same as the existing author";
@@ -150,4 +150,6 @@ public class Messages {
     public static final String WARN_INVALID_ARGS = "  (*) Invalid arguments detected, ignoring them";
     public static final String INVALID_ID = "  (!) Invalid Item ID!";
     public static final String INVALID_DATE = "  (!) Invalid date format! It should be in dd-mm-yyyy";
+    public static final String INVALID_STATUS = "  (!) Invalid status! Status can only be: AVAILABLE, LOANED, RESERVED"
+            + " (case insensitive)";
 }

@@ -268,6 +268,9 @@ The following sequence diagram shows the process of serialization and writing to
 
 > ⚠️As the `data.json` file is updated after completing execution of each command, if a corrupted `data.json` file is loaded and the user/developer wishes to retain the file, terminate the programme immediately, **do not** execute any commands other than `exit`
 
+> ⚠️ **Do not** make changes to the `data.json` while `libmgr` is running. Any changes made while running will not be reflected by `libmgr` and such changes may be overwritten.
+
+
 ---
 ## Product scope
 ### Target user profile

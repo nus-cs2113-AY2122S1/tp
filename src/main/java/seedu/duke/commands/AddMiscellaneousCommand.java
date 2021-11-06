@@ -14,9 +14,9 @@ import static seedu.duke.common.Messages.INVALID_VALUES;
 import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
 
 //@@author exetr
-public class AddItemCommand extends Command {
+public class AddMiscellaneousCommand extends Command {
     public static final String COMMAND_FORMAT = "  Format: add i t/TITLE i/ID";
-    public static final String ADD_MESSAGE = "  (+) Added new item to the catalogue";
+    public static final String ADD_MESSAGE = "  (+) Added new miscellaneous item to the catalogue";
     public static final String COMMAND_WORD = "add i";
     public static final String KEY_TITLE = "t";
     public static final String KEY_ID = "i";
@@ -26,7 +26,7 @@ public class AddItemCommand extends Command {
     private String id;
     private Status status;
 
-    public AddItemCommand(HashMap<String, String> args) {
+    public AddMiscellaneousCommand(HashMap<String, String> args) {
         this.args = args;
         this.title = args.get(KEY_TITLE);
         this.id = args.get(KEY_ID);
@@ -55,7 +55,7 @@ public class AddItemCommand extends Command {
     }
 
     /**
-     * Executes add audio command.
+     * Executes add miscellaneous command.
      * Checks for missing and/or additional arguments, then adds to catalogue.
      * Overrides method from parent Command class.
      * @param ui Object that handles user IO
