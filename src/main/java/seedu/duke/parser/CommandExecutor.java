@@ -13,7 +13,7 @@ import seedu.duke.expense.Expense;
 
 import java.util.ArrayList;
 
-abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
+abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummarizer {
     private static final int ATTRIBUTE_DATA = 1;
     private static final int EDIT_ATTRIBUTE = 0;
     private static final String EDIT_LOCATION = "-location";
