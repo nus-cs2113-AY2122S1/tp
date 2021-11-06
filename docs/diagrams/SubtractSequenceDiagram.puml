@@ -1,0 +1,76 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+Participant ":Parser" as parser PARSER_COLOUR
+Participant ":SubtractCommand" as subtract COMMAND_COLOUR
+Participant ":IngredientList" as ingredient_list INGREDIENTLIST_COLOUR
+Participant ":IngredientGroup" as ingredient_group INGREDIENTGROUP_COLOUR
+Participant ":Ingredient" as ingredient INGREDIENT_COLOUR
+Participant ":Storage" as storage STORAGE_COLOUR
+
+-> parser : parse("subtract 1 a/150.0")
+activate parser PARSER_COLOUR
+
+parser -> parser : parseUpdateCommand()
+activate parser PARSER_COLOUR_S1
+
+parser -> subtract **: SubtractCommand(1, 150.0)
+activate subtract COMMAND_COLOUR
+return
+
+parser -> subtract : run()
+activate subtract COMMAND_COLOUR
+
+subtract -> ingredient_list : getInstance()
+activate ingredient_list INGREDIENTLIST_COLOUR
+return instance
+
+subtract -> ingredient_list : subtractIngredientFromGroup(1, 150.0)
+activate ingredient_list INGREDIENTLIST_COLOUR
+
+ingredient_list -> ingredient_list : getIngredientGroup(1)
+activate ingredient_list INGREDIENTLIST_COLOUR
+return currentGroup
+
+ingredient_list -> ingredient_group : getIngredientGroupName()
+activate ingredient_group INGREDIENTGROUP_COLOUR
+return subtractedIngredientName
+
+opt totalAmount < subtractAmount
+    ingredient_list -> ingredient_group : getTotalAmount()
+    activate ingredient_group INGREDIENTGROUP_COLOUR
+return totalAmount
+
+ingredient_list -> Math : abs(totalAmount - 150.0)
+activate Math INGREDIENTGROUP_COLOUR
+return value
+
+ingredient_list -> ingredient_list : remove(0)
+activate ingredient_list INGREDIENTLIST_COLOUR
+return
+
+ingredient_list -> storage : writeIngredientsToMemory
+activate storage STORAGE_COLOUR
+return
+
+return subtractedIngredientName
+
+
+
+ingredient_list -> ingredient_group : subtractFromTotalAmount(150.0)
+activate ingredient_group INGREDIENTGROUP_COLOUR
+return
+
+
+
+
+return removedIngredient
+
+return resultMsg
+
+return resultMsg
+
+return CLI message
+
+@enduml

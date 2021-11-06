@@ -143,7 +143,6 @@ public class IngredientList {
     public String subtractIngredientFromGroup(int groupNumber, Double subtractAmount) throws
             SitusException, IOException, IndexOutOfBoundsException {
 
-        int i = 0;
         IngredientGroup currentGroup = getIngredientGroup(groupNumber);
         String subtractedIngredientName = currentGroup.getIngredientGroupName();
 
@@ -161,18 +160,34 @@ public class IngredientList {
 
         currentGroup.subtractFromTotalAmount(subtractAmount);
 
+        int i = 0;
+        Ingredient subtractIngredient;
         while (subtractAmount != 0.0) {
-            if (subtractAmount <= currentGroup.get(i + 1).getAmount()) {
-                currentGroup.get(i + 1).setAmount(currentGroup.get(i + 1).getAmount() - subtractAmount);
+            subtractIngredient = currentGroup.get(i + 1);
+            if (subtractAmount <= subtractIngredient.getAmount()) {
+                subtractIngredient.setAmount(subtractIngredient.getAmount() - subtractAmount);
                 subtractAmount = 0.0;
             } else {
-                subtractAmount -= currentGroup.get(i + 1).getAmount();
-                currentGroup.get(i + 1).setAmount(0.0);
+                subtractAmount -= subtractIngredient.getAmount();
+                subtractIngredient.setAmount(0.0);
             }
             i++;
         }
 
-        i = 0;
+        removeIngredientWithZeroValFromGroup(currentGroup);
+
+        storage.writeIngredientsToMemory(ingredientList);
+        return subtractedIngredientName;
+    }
+
+    //@@author AayushMathur7
+    /**
+     * Removes ingredients within groups that don't have any amount.
+     * @param currentGroup the current group to remove 0.0 valued ingredients
+     * @throws SitusException if the ingredient and/or expiry date are not matched
+     */
+    public void removeIngredientWithZeroValFromGroup(IngredientGroup currentGroup) throws SitusException {
+        int i = 0;
         // remove ingredients in group where amount is approx. 0
         while (i < currentGroup.getIngredientGroupSize()) {
             if (BigDecimal.valueOf(currentGroup.get(i + 1).getAmount()).compareTo(new BigDecimal("0.001")) < 0) {
@@ -181,9 +196,6 @@ public class IngredientList {
                 i++;
             }
         }
-
-        storage.writeIngredientsToMemory(ingredientList);
-        return subtractedIngredientName;
     }
 
     //@@author datn02
