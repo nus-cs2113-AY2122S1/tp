@@ -122,7 +122,11 @@ When the `FindModCommand` method is called in the `FindModCommand` class. It wil
 When the `FindUniCommand` method is called in the `FindUniCommand` class. It will get the list of university results by searching in the `universityMasterList`. Then it checks if the result list is empty: if the result list is empty, it calls the `printFindUniNull` method in the `UiInvalid` class to print the error message. If the result list is not empty, it calls the `printUniversity` method in the `UiUniversity` class in a loop to print all universities found.
 
 ####SearchMapCommand
-When the `SearchMapCommand` method is called in the `SearchMapCommand` class, it will check if `isAll` is true. If `isAll` is true, the `printMappings` method will be called, which prints all mappings from the selected module list for all universities in the selected university list by calling the `printIndex` method in the Ui class and `listSelectedMappings` method in the University class. If isAll is false, it will call the `printMappings` method to print out only the mappings for the selected university only.
+When the `SearchMapCommand` method is called in the `SearchMapCommand` class, it will check if `isAll` is true. If `isAll` is true, the `printMappings` method will be called, which prints all mappings from the selected module list for all universities in the selected university list by calling the `printIndex` method in the Ui class and `listSelectedMappings` method in the University class. If isAll is false, it will call the `printMappings` method to print out only the mappings for the selected university only.  
+The following sequence diagram illustrates how the whole process is carried out.
+<p align = "center">
+<img src="images/searchmapseq.png" width = "800" />
+</p>
 
 ####HelpCommand
 When the `HelpCommand` method is called in the `HelpCommand` class. It will print out all commands available for SEPlanner.

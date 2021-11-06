@@ -2,6 +2,7 @@ package seplanner.commands;
 
 import seplanner.modules.ModuleList;
 import seplanner.ui.Ui;
+import seplanner.ui.UiUniversity;
 import seplanner.universities.University;
 import seplanner.universities.UniversityList;
 
@@ -29,31 +30,15 @@ public class SearchMapCommand extends Command {
             for (University uni : universitySelectedList.getList()) {
                 String uniName = uni.getName();
                 University uniFromMasterList = universityMasterList.getUniversity(uniName);
-                printMappings(uniFromMasterList, moduleSelectedList);
+                UiUniversity.printMappings(uniFromMasterList, moduleSelectedList);
             }
         } else {
-            printMappings(selectedUniversity, moduleSelectedList);
+            UiUniversity.printMappings(selectedUniversity, moduleSelectedList);
         }
     }
 
     /**
-     * Print module mappings for modules in the selected module list.
-     *
-     * @param uni university selected to search module mappings for.
-     * @param moduleSelectedList The selected module list which contains only the module selected by the user.
-    */
-    public void printMappings(University uni, ModuleList moduleSelectedList) {
-        assert uni.getName() != null;
-        assert uni.getClass() != null;
-        System.out.print("Potential mappings for ");
-        System.out.print(uni.getName() + " ");
-        Ui.printIndex(uni.getIndex(), false);
-        System.out.println(":");
-        uni.listSelectedMappings(moduleSelectedList);
-    }
-
-    /**
-     * Get the seleted university.
+     * Get the selected university.
      *
      * @return the selected university.
     */    
