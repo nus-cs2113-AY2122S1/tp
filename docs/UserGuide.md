@@ -195,7 +195,7 @@ Patient with id PATIENT_ID deleted from system.
 Examples:
 `delete 123` deletes the patient with PATIENT_ID 123 in the list.
 
-####Notes:
+#### Notes:
 
 * The patient being deleted does not affect the data of the rest of the patients, i.e. the ID will 
 remain the same. 
@@ -246,7 +246,7 @@ For full details of each patient, please use the command "view PATIENT_ID"
  ----------------------------------------------------------------------------------------------------- 
 ```
 
-####Notes:
+#### Notes:
 
 * `Name`, `Email`, `Address` that are longer than 20 characters will be truncated to first 17 characters with a `...` appended.
 <br>Reason:
@@ -296,7 +296,7 @@ For full details of each patient, please use the command "view PATIENT_ID"
  ----------------------------------------------------------------------------------------------------- 
 ```
 
-####Notes:
+#### Notes:
 
 * The attributes given do not have to be in full.
 * At least one attribute must be present.
@@ -362,7 +362,7 @@ Expected output:
 deleted appointment with Id: APPOINTMENT_ID
 ```
 
-####Notes:
+#### Notes:
 
 * The appointment being deleted does not affect the rest of the appointments, i.e. the ID will
   remain the same.
@@ -415,7 +415,7 @@ Here is a list of all appointments:
  -------------------------------------------------------------------------------------------------- 
 ```
 
-####Notes:
+#### Notes:
 
 * `Patient Name` and `Staff Name` that are longer than 20 characters will be truncated to first 17 characters with a `...` appended.
   <br>Reason:
@@ -462,7 +462,7 @@ three text files to the other computer, and run the `medbot.jar` in the same new
 | :---         | :---                     |
 | **add**      | `add p/PERSON_ID s/STAFF_ID d/DATE_TIME` <br/> E.g., `add p/19 s/1 d/090222 0900`|
 | **delete**   | `delete APPOINTMENT_ID`  |
-| **edit**     | `edit APPOINTMENT_ID [p/PAITENT_ID] [s/STAFF_ID] [d/DATE_TIME]` <br/> E.g., `edit 2 s/3 d/100322 0800`|         |
+| **edit**     | `edit APPOINTMENT_ID [p/PAITENT_ID] [s/STAFF_ID] [d/DATE_TIME]` <br/> E.g., `edit 2 s/3 d/100322 0800`|         
 | **list**     | `list`                   |
 | **view**     | `view APPOINTMENT_ID` <br/> E.g., `view 3` |
 

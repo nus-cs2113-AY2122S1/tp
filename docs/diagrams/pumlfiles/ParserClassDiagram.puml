@@ -12,10 +12,10 @@ package medbot.parser #DDDDDD {
 class "{abstract}\n Parser"
 class "{abstract}\n XYZCommandParser"
 class "{abstract}\n ParserUtils" {
-    {static} preprocessInput(userInput: String): String
-    {static} getParameters(userInput: String): String
-    {static} updateMultipleAppointmentInformation(person: Person, attributeStrings: String[])
-    {static} updateMultiplePersonalInformation(person: Person, attributeStrings: String[])
+    {static} -preprocessInput(userInput: String): String
+    {static} ~getParameters(userInput: String): String
+    {static} ~updateMultipleAppointmentInformation(person: Person, attributeStrings: String[])
+    {static} ~updateMultiplePersonalInformation(person: Person, attributeStrings: String[])
 }
 
 "{abstract}\n Parser" ..> "{abstract}\n XYZCommandParser"
