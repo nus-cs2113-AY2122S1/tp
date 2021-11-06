@@ -28,6 +28,7 @@ to help you embark on your fitness journey, GetJack'D is the one for you!
   14. [Exiting the application: `bye`](#14-exiting-the-application-bye)
   15. [Saving data](#15-saving-data)
   16. [Editable data file](#16-editable-data-file)
+  17. [Troubleshooting](#17-troubleshooting)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -739,6 +740,46 @@ _**Things to look out for**_:
 1. Data fields in sets and reps are numbers.
 2. Data field in deadline is following the format: `YYYY-MM-DD`
 3. Missing `{ }`, `[ ]`, `" "` or `,`
+
+### 17. Troubleshooting
+
+**1. Unable to create workouts and add exercises.**
+```text
+create workout
+________________________________________________________
+? OOPS!!! Error writing to file while data!
+________________________________________________________
+```
+
+This occurs when GetJack'D is unable to create the file it stores its data in. You could:
+
+* Go to the folder where GetJack'D is saved and search inside the `data` folder for any folder named `workouts.json`. If such a folder exists then either delete or relocate that folder.
+* Reinstall GetJack'D and try moving the application JAR file to another location.
+
+**2. Unable to start application.**
+
+```text
+Welcome to
+   ______          _        _____              __      _  ______
+ .' ___  |        / |_     |_   _|            [  |  _ | ||_   _ `.
+/ .'   \_|  .---.`| |-'      | | ,--.   .---.  | | / ]\_|  | | `. \
+| |   ____ / /__\\| |    _   | |`'_\ : / /'`\] | '' <      | |  | |
+\ `.___]  || \__.,| |,  | |__' |// | |,| \__.  | |`\ \    _| |_.' /
+ `._____.'  '.__.'\__/  `.____.'\'-;__/'.___.'[__|  \_]  |______.'
+
+Let's begin the journey to achieve the physique you desire!
+If you don't know where to start, type "help" for a list of possible commands.
+Enter your command below.
+________________________________________________________
+________________________________________________________
+? OOPS!!! Data file can't be created.
+________________________________________________________
+```
+
+This occurs when the `data` folder in which the GetJack'D data file is stored fails to be created. You could:
+
+* Go to the folder where GetJack'D is saved and search for any **files** named `data`. If such a file exists then either delete or relocate it.
+* Reinstall GetJack'D and try mocing the application JAR file to another location.
 
 ## FAQ
 

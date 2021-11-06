@@ -24,8 +24,7 @@
 
 - Implementation: [AddressBook-Level3](https://github.com/se-edu/addressbook-level3)
 - Libraries used: [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5), [Ascii Table](https://mvnrepository.com/artifact/de.vandermeer/asciitable)
-- PlantUML Tutorial: [Guide]
-- Logging Tutorial: [Guide]
+- PlantUML Tutorial: [Guide](https://plantuml.com/)
 
 ## Setting up and Getting started
 
