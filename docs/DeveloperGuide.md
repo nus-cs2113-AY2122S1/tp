@@ -205,7 +205,23 @@ of the `Parser`. The 3 possible views and the corresponding user input commands 
 * `switch` - will switch to another view depending on the current view.
 
 Each command evokes the `Parser#setViewType(ViewType)` method, which will set the corresponding
-`ViewType` property in the `Parser` class.
+`ViewType` property in the `Parser` class. Additionally, the `Ui#clearConsoleFromIde` method will
+be evoked, which performs a pseudo clear of the console before printing a message that indicates
+the user has switched view.
+
+#### Design Considerations:
+
+**Aspect: How console is cleared:**
+* Alternative 1(Current Choice)
+  * Perform a pseudo-clear using multiple `System.lineSeparator()` to move the current console outputs
+    upwards.
+    * Pros: Easy to implement, system independent
+    * Cons: Only works for terminals up to a certain size (bigger terminals can still see previous console outputs)
+  * Perform an actual clear using the `ProcessBuilder` / `Runtime` class in java.
+    * Pros: Size of terminal doesn't matter since it actually clears the console.
+    * Cons: More complex implementation, need to consider different sets of implementation for different OSes,
+            does not work on IDE.
+    
 
 ### 4.2 Find feature
 
@@ -334,22 +350,33 @@ for their daily jobs
 2. Easily manage nurse/doctor schedules
 3. Assign nurses/doctors to visit patients at specific times
 
-## User Stories
+## Appendix B: User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|user|add a new patient's information|track new patients admitted to the hospital|
+|v1.0|user|remove a patient's information|discharged patients will no longer be tracked by the system|
+|v1.0|user|edit a patient's information|rectify data entry errors or reflect changes in personal details|
+|v2.0|user|add appointment timeslots for medical staff|easily administer their visiting hours|
+|v2.0|user|be informed if there are any conflicting visiting timings for medical staff|reschedule to more appropriate timings.
+|v2.0|user|edit appointment timeslots for medical staff|account for changes in schedule of the medical staff|
+|v2.0|user|see all available appointment timeslots for medical staff|I will not assign any conflicting timings|
+|v2.0|user|filter appointments by date/time|I can decide how to assign new appointments more quickly|
 
-## Non-Functional Requirements
+## Appendix C: Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on any *mainstream OS* as long as it has Java `11` or above installed.
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
+   should be able to accomplish most of the tasks faster using commands than using the mouse.
+3. Should be able to hold up to a thousand appointments and patient/staff records without any noticeable decrease in
+   performance.
 
-## Glossary
+## Appendix D: Glossary
 
-* *glossary item* - Definition
+* *Mainstream OS* - Windows, Linux, Unix, OS-X
 
-## Instructions for manual testing
+## Appendix E: Instructions for manual testing
 
 Here are the instructions to perform manual testing of the application:
 //TODO by crimsontitan79
