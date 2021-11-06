@@ -282,7 +282,9 @@ Sets the attributes of recipes, e.g. time needed, calories etc.
 
 **Format:** `set RECIPE_NAME /ATTRIBUTE_TYPE ATTRIBUTE_VALUE`
 
-* The program first looks for the recipe using `RECIPE_NAME`, similar to find.
+* The program first looks for the recipe using `RECIPE_NAME`.
+  * `RECIPE_NAME` is not case-sensitive.
+  * `RECIPE_NAME` must match the name of an existing recipe exactly.
 * `ATTRIBUTE_TYPE` can be any one of the following:
   * `/Calories` (`ATTRIBUTE_VALUE` must be an integer)
   * `/Difficulty` (`ATTRIBUTE_VALUE` must be one of these: `None`, `Easy`, `Medium` and `Hard`)
@@ -290,6 +292,9 @@ Sets the attributes of recipes, e.g. time needed, calories etc.
   * `/Time` (`ATTRIBUTE_VALUE` must be two integers, separated by a comma)
     * The first integer represents the preparation time required for the dish
     * The next integer then represents the cooking time
+  * `/Ingredients` (`ATTRIBUTE_VALUE` must be ingredients separated by '+', similar to addRecipe)
+  * `/Steps` (`ATTRIBUTE_VALUE` must be steps separated by '+', similar to addRecipe)
+  * `/Tag` (Refer to [this section](#94-find-a-recipe-by-their-tags-find) for more details)
 * For `/Calories`, `/Price` and `/Time`, setting the `ATTRIBUTE_VALUE` to `-1` in a recipe will prevent that attribute from showing up in that recipe.
 * Any values below -1 are not accepted.
 * `ATTRIBUTE_TYPE` is not case-sensitive.
@@ -299,7 +304,9 @@ Sets the attributes of recipes, e.g. time needed, calories etc.
 `set Chicken Rice /calories 350`  
 `set Chicken Rice /difficulty hard`  
 `set Chicken Rice /price 3.00`  
-`set Chicken Rice /time 20, 40`
+`set Chicken Rice /time 20, 40`  
+`set Chicken Rice /ingredients Chicken + Rice`  
+`set Chicken Rice /steps Boil chicken + Cook rice + Serve`  
 
 ```
 Setting calories...
@@ -310,6 +317,10 @@ Setting price...
 Price set successfully.
 Setting times...
 Times set successfully.
+Setting ingredients...
+Ingredients set successfully.
+Setting steps...
+Steps set successfully.
 ```
 
 **Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
