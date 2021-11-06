@@ -38,7 +38,7 @@ Given below are my contributions to the project:
 
 * **Documentation:**
   * User Guide:
-    * Added documentation for all the use cases and user stories of Gordon ([#113](https://github.com/AY2122S1-CS2113T-W13-2/tp/pull/113))
+    * Added documentation for functions of Gordon ([#113](https://github.com/AY2122S1-CS2113T-W13-2/tp/pull/113))
   * Developer Guide:
     * Added UML diagram and features for Command class and use cases for functions of Gordon. 
       * ([#110](https://github.com/AY2122S1-CS2113T-W13-2/tp/pull/110)) ([#140](https://github.com/AY2122S1-CS2113T-W13-2/tp/pull/140)) ([#271](https://github.com/AY2122S1-CS2113T-W13-2/tp/pull/271))
