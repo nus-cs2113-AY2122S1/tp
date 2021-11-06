@@ -2,7 +2,6 @@ package seedu.duke.storage;
 
 import seedu.duke.TourPlannerException;
 import seedu.duke.Ui;
-import seedu.duke.commands.Command;
 import seedu.duke.commands.clientpackages.AddClientPackageCommand;
 import seedu.duke.data.*;
 
@@ -25,10 +24,6 @@ public class ClientPackageStorage {
     private static boolean hasFlight = false;
     private static boolean hasClientPackage = false;
     private static boolean isPackageAdded = false;
-    private static String[] clientArray;
-    private static String[] tourArray;
-    private static String[] flightArray;
-    private static String clientPackageId;
     private ArrayList<String> rawClientPackage = new ArrayList<>();
 
     public ClientPackageList getClientPackages() {
@@ -56,18 +51,10 @@ public class ClientPackageStorage {
 
             while (scanner.hasNext()) {
                 String line = scanner.nextLine();
+                String clientPackageId;
                 String clientId;
-                String clientName;
-                String clientContactNum;
-                String clientEmail;
-                String tourName;
                 String tourId;
-                String tourPrice;
                 String flightId;
-                String from;
-                String to;
-                String fromDate;
-                String toDate;
 
                 if (line.equals("Client Package Details: ")) {
                     resetCheckerStates();
@@ -81,40 +68,18 @@ public class ClientPackageStorage {
                     clientId = line.substring(11);
                     rawClientPackage.add(clientId);
                     System.out.println("b");
-//                    line = scanner.nextLine();
-//                    clientName = line.substring(6);
-//                    line = scanner.nextLine();
-//                    clientContactNum = line.substring(16);
-//                    line = scanner.nextLine();
-//                    clientEmail = line.substring(7);
-//                    clientArray = new String[]{clientId, clientName, clientContactNum, clientEmail};
                     hasClient = true;
                 } else if (line.equals("Tour: ")) {
                     line = scanner.nextLine();
                     tourId = line.substring(9);
                     rawClientPackage.add(tourId);
                     System.out.println("c");
-//                    line = scanner.nextLine();
-//                    tourName = line.substring(6);
-//                    line = scanner.nextLine();
-//                    int index = line.indexOf("$");
-//                    tourPrice = line.substring(index + 1);
-//                    tourArray = new String[]{tourId, tourName, tourPrice};
                     hasTour = true;
                 } else if (line.equals("Flight: ")) {
                     line = scanner.nextLine();
                     flightId = line.substring(11);
                     rawClientPackage.add(flightId);
                     System.out.println("d");
-//                    line = scanner.nextLine();
-//                    int index = line.indexOf(", ");
-//                    from = line.substring(18, index);
-//                    fromDate = line.substring(index + 2);
-//                    line = scanner.nextLine();
-//                    index = line.indexOf(", ");
-//                    to = line.substring(15, index);
-//                    toDate = line.substring(index + 2);
-//                    flightArray = new String[]{flightId, to, from, toDate, fromDate};
                     hasFlight = true;
                 }
 
@@ -124,11 +89,6 @@ public class ClientPackageStorage {
                 System.out.println(hasClientPackage);
                 System.out.println(isPackageAdded);
                 if (hasClient && hasFlight && hasTour && hasClientPackage && !isPackageAdded) {
-//                    Client client = new Client(clientArray);
-//                    Tour tour = new Tour(tourArray);
-//                    Flight flight = new Flight(flightArray);
-//                    ClientPackage clientPackage = new ClientPackage(clientPackageId, client, tour, flight);
-//                    clientPackages.add(clientPackage);
                     System.out.println("HELLO");
                     AddClientPackageCommand command = new AddClientPackageCommand(rawClientPackage.toArray(new String[]{}));
                     command.setData(clients, flights, tours, clientPackages, ui);
@@ -148,9 +108,6 @@ public class ClientPackageStorage {
         hasTour = false;
         hasClientPackage = false;
         isPackageAdded = false;
-        clientArray = new String[4];
-        tourArray = new String[3];
-        flightArray = new String[5];
         rawClientPackage = new ArrayList<>();
     }
 
