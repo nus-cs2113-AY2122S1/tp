@@ -23,8 +23,8 @@ class ExpenseTest {
         Trip trip = new Trip(stringArray);
         Storage.getListOfTrips().add(trip);
         Storage.setOpenTrip(0);
-        double amountSpent = 600.0;
-        String description = "Dinner at fancy restaurant";
+        final double amountSpent = 600.0;
+        final String description = "Dinner at fancy restaurant";
         Person person1 = new Person("Albert");
         Person person2 = new Person("Betty");
         Person person3 = new Person("Chris");
@@ -32,10 +32,10 @@ class ExpenseTest {
         personsList.add(person1);
         personsList.add(person2);
         personsList.add(person3);
-        String category = "food";
-        LocalDate date = LocalDate.parse("02-12-2020", DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        Person payer = person3;
-        HashMap<String, Double>amountSplit = new HashMap<>();
+        final String category = "food";
+        final LocalDate date = LocalDate.parse("02-12-2020", DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        final Person payer = person3;
+        HashMap<String, Double> amountSplit = new HashMap<>();
         amountSplit.put("Albert", 100.0);
         amountSplit.put("Betty", 200.0);
         amountSplit.put("Chris", 300.0);
@@ -53,8 +53,7 @@ class ExpenseTest {
     void testGetPersonExpense() {
         assertEquals("\t\t1) Albert, USD $100.00" + System.lineSeparator()
                 + "\t\t2) Betty, USD $200.00" + System.lineSeparator()
-                + "\t\t3) Chris, USD $300.00" + System.lineSeparator()
-                , exp.getPersonExpense());
+                + "\t\t3) Chris, USD $300.00" + System.lineSeparator(), exp.getPersonExpense());
     }
 
     @Test
