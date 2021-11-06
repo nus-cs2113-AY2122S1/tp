@@ -439,3 +439,45 @@ exploratory testing.
        ____________________________________________________________
        ``` 
 
+### <a name="testing-view"></a>Viewing a contact
+1. Viewing a contact that is in the contact list
+    1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
+    2. Test case: `view 1`<br>
+       Expected: All details of the contact with index `1` will be displayed. 
+       ```
+       ____________________________________________________________
+       Name:     Alex Lee
+       Github:   github.com/alexlee
+       Email:    alex.lee@email.com
+       Telegram: t.me/alexlee
+       LinkedIn: linkedin.com/in/alexlee
+       Twitter:  twitter.com/alexl33
+       ____________________________________________________________
+       ```
+
+2. Viewing user's own personal contact
+    1. Test case: `view me`
+    2. Expected: All personal details of the user will be displayed.
+  
+
+3. Viewing a contact with a missing or invalid index
+    1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
+    2. Test case: `view -1`<br>
+       Expected: An error message will notify user on what the valid indexes are.
+       ```
+       ____________________________________________________________
+       The index you have input is out of range.
+       Please input a index between 0 and 2.
+       ____________________________________________________________
+       ```
+    3. Test case: `view`<br>
+       Expected: An error message will notify user that there is an index missing.
+       ```
+       ____________________________________________________________
+       There seems to be missing or invalid index in your request.
+       Please enter command in the following way:
+             view <INDEX>
+       Enter <INDEX> between 0 and 2 or "me" (personal contact)
+       ____________________________________________________________
+       ```
+  
