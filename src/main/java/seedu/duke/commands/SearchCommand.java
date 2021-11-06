@@ -15,7 +15,16 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import static seedu.duke.common.Messages.*;
+import static seedu.duke.common.Messages.DIVIDER;
+import static seedu.duke.common.Messages.INVALID_STATUS;
+import static seedu.duke.common.Messages.KEY_CATEGORY;
+import static seedu.duke.common.Messages.KEY_ID;
+import static seedu.duke.common.Messages.KEY_STATUS;
+import static seedu.duke.common.Messages.KEY_TITLE;
+import static seedu.duke.common.Messages.NO_SEARCH_RESULT;
+import static seedu.duke.common.Messages.SEARCH_FORMAT_INCORRECT;
+import static seedu.duke.common.Messages.SEARCH_MESSAGE;
+import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
 
 //@@author silinche
 /**
