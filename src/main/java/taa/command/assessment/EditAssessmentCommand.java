@@ -179,7 +179,7 @@ public class EditAssessmentCommand extends Command {
     public boolean checkMaximumMarks(String newMaximumMarksString) throws TaaException {
         assert Util.isStringDouble(newMaximumMarksString);
         double newMaximumMarks = Double.parseDouble(newMaximumMarksString);
-        if (newMaximumMarks < Assessment.MINIMUM_MARKS) {
+        if (!Assessment.isMaximumMarksValid(newMaximumMarks)) {
             throw new TaaException(String.format(
                     MESSAGE_FORMAT_INVALID_NEW_MAXIMUM_MARKS,
                     Assessment.MINIMUM_MARKS)

@@ -113,7 +113,7 @@ public class AddAssessmentCommand extends Command {
         String maximumMarksString = argumentMap.get(KEY_MAXIMUM_MARKS);
         assert Util.isStringDouble(maximumMarksString);
         double maximumMarks = Double.parseDouble(maximumMarksString);
-        if (maximumMarks < Assessment.MINIMUM_MARKS) {
+        if (!Assessment.isMaximumMarksValid(maximumMarks)) {
             throw new TaaException(String.format(
                     MESSAGE_FORMAT_INVALID_MAXIMUM_MARKS,
                     Assessment.MINIMUM_MARKS)
