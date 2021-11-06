@@ -18,7 +18,7 @@ create Command
 Parser -> Command : calls for FindClientCommand
 activate Command
 
-Command -> ClientList :
+Command -> ClientList : getClient() for every client
 activate ClientList
 ClientList --> Command : name, contact number, email
 deactivate ClientList
@@ -26,7 +26,7 @@ deactivate ClientList
 Command --> Parser
 deactivate Command
 
-Parser --> Ui
+Parser --> Ui :
 deactivate Parser
 <-- Ui : all clients
 deactivate Ui

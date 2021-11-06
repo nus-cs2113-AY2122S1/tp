@@ -41,7 +41,8 @@ to ensure that Intellij is configured to use JDK 11.
 
 The diagram above shows the high-level design of TourPlanner.
 
-![image](component_diagram.png)
+<img width="307" alt="component_diagram" src="https://user-images.githubusercontent.com/79963329/140464392-5a1536d2-a5d8-4e57-83f4-f4938ede0cfe.PNG">
+
 
 Below is an overview of the main components, and how they interact with each other.
 
@@ -69,7 +70,7 @@ The rest of the app consists of the following components:
 The diagram below shows how the components interact with each other if the user 
 inputs the command ```list -c```:
 
-![image](architecture_example.png)
+<img width="538" alt="architecture_example" src="https://user-images.githubusercontent.com/79963329/140464330-b4f9121f-b60f-4203-a814-63b7a6bd97a5.PNG">
 
 <br>
 
@@ -264,9 +265,9 @@ Depending on the type of list command being called, these command types will be 
 
 The ```find``` feature is to be used to query for a particular client or tour, providing extensive information about it. It is facilitated by the ```parse``` function in the ```Parser``` class, which determines which type of Object (```Client``` or ```Tour```) is to be parsed and which command to be executed. It is implemented by following operations:
 
-* ```FindClientCommand(String name)```
-
+* ```FindClientCommand(String substring)```
 * ```FindTourCommand(String code)```
+* ```FindFlightCommand(String code)```
 
 These commands extend from the Command class.
 
@@ -285,26 +286,30 @@ Firstly, assume that in previous sessions, commands were executed to add clients
 
 #### <u>Finding a particular client</u>
 
-**Step 1**: The user executes ```find -c Bo Tuan``` to query if a client named
+**Step 1**: The user executes ```find -c bo``` to query if a client named
 Bo Tuan exists in the ClientList. The ```parse``` function in the ```Parser```
 class takes the command, and the first word in it (```find```) means that the
 ```parseFind()``` is to be called to determine which type of Object is to be
 queried for. The second word (```-c```) means that a the ```FindClientCommand()``` is
-executed with the parameter ```Bo Tuan```
+executed with the parameter ```bo```
 
 
 
 **Step 2**: The ```FindClientCommand``` iterates through each ```Client``` object in the ```ClientList```.
 For every ```Client```, the ```getName()``` function is called to retrieve the name attribute of the Client.
-If the name attribute is equals to ```Bo Tuan```, the ```Client``` object
+The name attribute is then converted to lower case for comparison with the substring.
+If the name attribute is contains the substring```bo```, the ```Client``` object
 is printed onto the console terminal.
 
-<br>
+**Step 3**: In addition, the ```FindClientCommand``` iterates through each ```ClientPackage``` object in the ```ClientPackageList```.
+For every ```ClientPackage```, the ```getClient()``` function is called to retrieve the client attribute of the ClientPackage.
+If the client attribute is equals to the same ```Client``` object that was found in Step 2, the respective client package will
+be printed onto the console terminal.
 
 
 The following activity diagram summarizes the following steps.
 
-    ![image](findclient.png) 
+<img width="542" alt="findclient" src="https://user-images.githubusercontent.com/79963329/140464449-0f72431b-8ae5-40e4-add1-aef8fed50031.PNG">
 
 <br>
 
@@ -339,7 +344,8 @@ terminal.
 
 The following activity diagram summarizes the following steps.
 
-![image](findtour.png)
+<img width="456" alt="findtour" src="https://user-images.githubusercontent.com/79963329/140464566-248296e9-0e27-4840-9906-5cfdbe57c309.PNG">
+
 
 <br>
 
@@ -374,7 +380,7 @@ terminal.
 
 The following activity diagram summarizes the following steps.
 
-![image](findflight.png)
+<img width="508" alt="findflight" src="https://user-images.githubusercontent.com/79963329/140464579-91ab5042-885b-4e55-877c-ac733bd12ce9.PNG">
 
 <br>
 
@@ -383,7 +389,7 @@ The following activity diagram summarizes the following steps.
 * Alternative: only iterate through the ```Package``` List.
   * Pros: fast querying time.
   * Cons: If the client/tour/flight is not in any package, none of their information can be accessed, including their contact number.
-
+  
 ###<u>Sort feature</u>
 The `sort` feature is used to sort the `ObjectList` (for Client, Tour, Flight and ClientPackage) and list it,
 where `Parser` determines the `ObjectList` and criteria to sort for.
@@ -423,7 +429,34 @@ Depending on the type of sort command being called, these command types will be 
 * `sort -f`: `SortFlightCommand`
 * `sort -t`: `SortTourCommand`
 
+<br>
+
+##UI Component
+<hr>
+
+**API: `Ui.java`**
+
+The Ui component is the means by which Command(s) can receive inputs from the user, as
+well as display information to them, all through the console terminal.
+
+After the user typed in an input into the console terminal and presses 'Enter':
+* the ```Ui``` reads the input typed in by the user on the console terminal.
+* the ```Parser``` class parses the read input and calls the apprpriate ```Command```. (see the ```Parser``` and ```Command``` sections
+for more information)
+* the called ```Command``` calls a function in the ```Ui``` to print the appropriate information onto
+the console terminal.
+
+<br>
+
+The diagram below shows the class diagram of the Ui component, in relation with
+other major components:
+
+<img width="289" alt="ui" src="https://user-images.githubusercontent.com/79963329/140464630-a8a8000c-fb45-44af-9cc2-d146ae5ea5c8.PNG">
+
+<br>
+
 ## Product scope
+<hr>
 
 ### Target user profile
 
@@ -436,27 +469,36 @@ Depending on the type of sort command being called, these command types will be 
 
 * Manage tour information faster than typical mouse /GUI driven apps
 
+<br>
+
 ## User Stories
+<hr>
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 |Priority| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |`* * *`|new user|see usage instructions|refer to them when I forget how to use the application|
-|`* * *`|user|add a new client| |
-|`* * *`|user|delete a new client|remove clients that cancelled their travel plans|
-|`* * *`|user|add a new tour package|update the tour package database|
-|`* * *`|user|delete a tour package|update the tour package database|
-|`* * *`|user|add flight timings|keep track of flights|
+|`* * *`|user|add a new entry of specific data type| add data into the current database|
+|`* * *`|user|delete an existing entry of specific data type |remove outdated data from the current database|
+|`* *`|user with large amounts of data|find an existing entry of specific data type |locate a specific entry easily|
+|`* *`|user with large amounts of data|sort existing entries of specific data type |make smarter recommendations to clients based on their preferences|
+|`* *`|user|check number of clients subscribed to a tour / flight|check the popularity, vacancy of certain tours / flights|
 
+
+Note: 'specific data type' refers to either clients, tours, flights or tour packages.
+
+<br>
 
 ## Non-Functional Requirements
+<hr>
 
-{Give non-functional requirements}
+* Should work on any mainstream OS as long as it has Java 11 or above installed.
+* Should be able to hold up to 1000 entries without a noticeable sluggishness in performance for typical usage.
+* A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should
+be able to accomplish most of the tasks faster using commands than using the mouse.
 
-## Glossary
-
-* *glossary item* - Definition
+<br>
 
 ## Instructions for manual testing
 

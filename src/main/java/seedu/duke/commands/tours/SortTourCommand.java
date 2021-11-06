@@ -36,12 +36,16 @@ public class SortTourCommand extends Command {
         try {
             switch (filter) {
             case "/id":
-                ArrayList<String> sortedCodes = tours.getSortedTourCodes();
-                ui.showSortedTourById(tours, sortedCodes);
+                ArrayList<String> sortedIds = tours.getSortedTourIds();
+                ui.showSortedTourById(tours, sortedIds);
                 break;
             case "/p":
                 ArrayList<Float> sortedPrices = tours.getSortedTourPrices();
                 ui.showSortedTourByPrice(tours, sortedPrices);
+                break;
+            case "/n":
+                ArrayList<String> sortedNames = tours.getSortedTourNames();
+                ui.showSortedTourByName(tours, sortedNames);
                 break;
             default:
                 throw new TourPlannerException(ERROR_MISSING_FILTER);

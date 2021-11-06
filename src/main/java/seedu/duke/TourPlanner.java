@@ -5,8 +5,11 @@ import seedu.duke.data.ClientList;
 import seedu.duke.data.ClientPackageList;
 import seedu.duke.data.FlightList;
 import seedu.duke.data.TourList;
+import seedu.duke.storage.ClientPackageStorage;
+import seedu.duke.storage.ClientStorage;
+import seedu.duke.storage.FlightStorage;
+import seedu.duke.storage.TourStorage;
 
-import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,7 +20,6 @@ import java.util.logging.Logger;
 public class TourPlanner {
 
     public TourPlanner() {
-        ;
     }
 
     private static final Logger logr = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
@@ -29,21 +31,32 @@ public class TourPlanner {
      *
      * @param args not used
      */
-    public static void main(String[] args) throws TourPlannerException, FileNotFoundException {
+    public static void main(String[] args) {
         Ui ui = new Ui();
-        Storage storage;
+        ClientPackageStorage clientPackageStorage = null;
+        ClientStorage clientStorage = null;
+        TourStorage tourStorage = null;
+        FlightStorage flightStorage = null;
+
         try {
-            storage = new Storage();
-            storage.loadFile();
+            clientPackageStorage = new ClientPackageStorage();
+            clientStorage = new ClientStorage();
+            tourStorage = new TourStorage();
+            flightStorage = new FlightStorage();
+
+            clientPackageStorage.loadFile();
+            clientStorage.loadFile();
+            tourStorage.loadFile();
+            flightStorage.loadFile();
+
         } catch (TourPlannerException e) {
             ui.show(e.getMessage());
         }
 
-        storage = new Storage();
-        TourList tours = storage.getTours();
-        FlightList flights = storage.getFlights();
-        ClientList clients = storage.getClients();
-        ClientPackageList clientPackages = storage.getClientPackages();
+        TourList tours = tourStorage.getTours();
+        FlightList flights = flightStorage.getFlights();
+        ClientList clients = clientStorage.getClients();
+        ClientPackageList clientPackages = clientPackageStorage.getClientPackages();
         ui.showWelcome();
         boolean isExit = false;
         String command;
@@ -63,7 +76,10 @@ public class TourPlanner {
                 logr.log(Level.SEVERE, e.getMessage());
             } finally {
                 ui.showLine();
-                storage.saveFile(clientPackages.getClientPackages());
+                clientStorage.saveFile();
+                flightStorage.saveFile();
+                tourStorage.saveFile();
+                clientPackageStorage.saveFile();
             }
         }
     }

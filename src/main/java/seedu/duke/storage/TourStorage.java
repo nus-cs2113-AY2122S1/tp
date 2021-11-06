@@ -1,6 +1,8 @@
-package seedu.duke.data;
+package seedu.duke.storage;
 
 import seedu.duke.TourPlannerException;
+import seedu.duke.data.Tour;
+import seedu.duke.data.TourList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,12 +13,14 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ClientStorage {
+public class TourStorage {
+    private final TourList tours = new TourList();
     private static final String root = System.getProperty("user.dir");
-    private static final Path filePath = Paths.get(root, "data", "TourPlannerClients.txt");
+    private static final Path filePath = Paths.get(root, "data", "TourPlannerTours.txt");
     private static final Path dirPath = Paths.get(root, "data");
 
-    public ClientStorage() throws TourPlannerException {
+
+    public TourStorage() throws TourPlannerException {
         try {
             File fileDirectory = new File(dirPath.toString());
             if (!fileDirectory.exists()) {
@@ -30,48 +34,46 @@ public class ClientStorage {
         }
     }
 
+    public TourList getTours() {
+        return tours;
+    }
 
-    public ArrayList<Client> loadFile() throws FileNotFoundException {
+    public void loadFile() throws TourPlannerException {
         try {
-            ArrayList<Client> clients = new ArrayList<>();
-
             File dataFile = new File(filePath.toString());
             Scanner scanner = new Scanner(dataFile);
-            String clientId = null;
-            String clientName = null;
-            String clientContactNum = null;
-            String clientEmail = null;
+            String tourName;
+            String tourId;
+            String tourPrice;
 
             while (scanner.hasNext()) {
                 String line = scanner.nextLine();
 
-                if (line.contains("Client List")) {
+                if (line.contains("Tour Details:")) {
                     line = scanner.nextLine();
-                    clientId = line.substring(11);
+                    tourName = line.substring(6);
                     line = scanner.nextLine();
-                    clientName = line.substring(6);
+                    tourId = line.substring(4);
                     line = scanner.nextLine();
-                    clientContactNum = line.substring(16);
-                    line = scanner.nextLine();
-                    clientEmail = line.substring(7);
+                    int index = line.indexOf("$");
+                    tourPrice = line.substring(index + 1);
+                    String[] tourArray = {tourId, tourName, tourPrice};
+                    Tour tour = new Tour(tourArray);
+                    tours.add(tour);
                 }
-                String[] clientArray = {clientId, clientName, clientContactNum, clientEmail};
-                Client client = new Client(clientArray);
-                clients.add(client);
             }
-            return clients;
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new TourPlannerException("File not found!");
         }
-        return null;
     }
 
-    public void saveFile(ArrayList<Client> clients) {
+    public void saveFile() {
+        ArrayList<Tour> tourList = tours.getTours();
         try {
             FileWriter writer = new FileWriter(filePath.toString());
-            writer.write("Client List: " + System.lineSeparator());
-            for (Client client : clients) {
-                writer.write(client.toString() + System.lineSeparator());
+            for (Tour tour : tourList) {
+                writer.write("Tour Details: \n");
+                writer.write(tour.toString() + System.lineSeparator());
             }
             writer.close();
         } catch (IOException e) {

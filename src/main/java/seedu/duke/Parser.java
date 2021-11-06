@@ -6,41 +6,33 @@ import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.clientpackages.AddClientPackageCommand;
 import seedu.duke.commands.clientpackages.CutClientPackageCommand;
 import seedu.duke.commands.clientpackages.ListClientPackageCommand;
-
 import seedu.duke.commands.clients.AddClientCommand;
 import seedu.duke.commands.clients.CutClientCommand;
 import seedu.duke.commands.clients.FindClientCommand;
 import seedu.duke.commands.clients.ListClientCommand;
 import seedu.duke.commands.clients.SortClientCommand;
-
 import seedu.duke.commands.flights.AddFlightCommand;
 import seedu.duke.commands.flights.CutFlightCommand;
 import seedu.duke.commands.flights.FindFlightCommand;
-import seedu.duke.commands.flights.SortFlightCommand;
 import seedu.duke.commands.flights.ListFlightCommand;
-
-import seedu.duke.commands.tours.SortTourCommand;
-import seedu.duke.commands.tours.CutTourCommand;
+import seedu.duke.commands.flights.SortFlightCommand;
 import seedu.duke.commands.tours.AddTourCommand;
+import seedu.duke.commands.tours.CutTourCommand;
 import seedu.duke.commands.tours.FindTourCommand;
 import seedu.duke.commands.tours.ListTourCommand;
-
+import seedu.duke.commands.tours.SortTourCommand;
 import seedu.duke.data.Client;
 import seedu.duke.data.Flight;
 import seedu.duke.data.Tour;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.TreeMap;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Sense-makes the inputs given and distributes the information to other parts of the program.
@@ -80,7 +72,8 @@ public class Parser {
     public static final String ERROR_FLIGHT_TIME_FORMAT = "TourPlanner detected wrong date time entry formatting! \n"
             + "Please input your date-times with the following format: d/M/yy HH:mm";
     public static final String ERROR_FLIGHT_TIME_INVERT = "TourPlanner detected erroneous flight time entry!";
-    public static final String ERROR_PRICE_FORMAT = "Invalid Price";
+    public static final String ERROR_PRICE_FORMAT = "TourPlanner has detected erroneous price entry! "
+            + "Only include numbers (includes decimal)/one decimal point!";
     public static final String TOUR_NAME_PREFIX = "/n";
     public static final String TOUR_PRICE_PREFIX = "/p";
     public static final String CLIENT_NAME_PREFIX = "/n";
@@ -92,6 +85,8 @@ public class Parser {
     public static final int PARAMS_INDEX = 1;
     public static final int MAX_VALUE_ARRAY_SIZE = 5;
     public static final String EMPTY_STRING = "";
+    private static final String WARNING_PRICE_TOO_MANY_DECIMAL = "TourPlanner has detected erroneous price entry! "
+            + "Price has too many decimal places!";
 
     /**
      * Parses user's input into command to execute.
@@ -443,7 +438,7 @@ public class Parser {
     private static boolean containAllPrefixes(String argString, List<String> prefixList) {
 
         String[] splitBySpaces = argString.trim().split("\\s+");
-        String[] prefixes = prefixList.toArray(new String[prefixList.size()]);
+        String[] prefixes = prefixList.toArray(new String[0]);
         for (String prefix : prefixes) {
             boolean containPrefix = false;
             for (String substring : splitBySpaces) {
@@ -461,8 +456,25 @@ public class Parser {
 
     private static void handleTourException(String[] values) throws TourPlannerException {
         String price = values[2];
-        if (price.equals(null)) {
+        int decimalCount = (int) price.chars().filter(ch -> ch == '.').count();
+        String priceAfterParseString = price.replaceAll("[^0-9.]", "");
+        boolean containsAdditionalDecimalPoints = decimalCount > 1;
+        if (containsAdditionalDecimalPoints) {
             throw new TourPlannerException(ERROR_PRICE_FORMAT);
+        }
+
+        Float priceAfterParse = Float.parseFloat(priceAfterParseString);
+        boolean containsAdditionalCharacters = !price.equals(priceAfterParseString);
+
+        if (containsAdditionalCharacters) {
+            throw new TourPlannerException(ERROR_PRICE_FORMAT);
+        }
+
+        int decimalIndex = price.indexOf(".");
+        int numberOfDecimalPlaces = price.length() - decimalIndex - 1;
+
+        if (numberOfDecimalPlaces > 2) {
+            System.out.println(WARNING_PRICE_TOO_MANY_DECIMAL);
         }
     }
 
@@ -525,7 +537,7 @@ public class Parser {
 
         TreeMap<Integer, String> prefixIndexes = extractPrefixIndexes(args, identifier);
         ArrayList<String> valuesList = extractValuesIntoArray(prefixIndexes, args, identifier);
-        String[] values = valuesList.toArray(new String[valuesList.size()]);
+        String[] values = valuesList.toArray(new String[0]);
 
         switch (identifier) {
         case CLIENT_IDENTIFIER:

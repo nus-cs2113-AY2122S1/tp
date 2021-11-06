@@ -29,15 +29,6 @@ public class ClientPackage {
         return clientPackageId;
     }
 
-    public String storageString() {
-        return "Client: " + "\n"
-                + client + "\n\n"
-                + "Tour: " + "\n"
-                + tour + "\n\n"
-                + "Flight: " + "\n"
-                + flight + "\n\n"
-                + "Package ID: " + clientPackageId + "\n\n";
-    }
 
     @Override
     public String toString() {

@@ -12,8 +12,8 @@ public class ClientList {
     private static final String CLIENT_NOT_FOUND_MESSAGE = "Client cannot be found. Please try another client ID";
 
     private final ArrayList<Client> clients;
-    private final ArrayList<String> clientIds;
-    private final ArrayList<String> clientNames;
+    private ArrayList<String> clientIds;
+    private ArrayList<String> clientNames;
     private ArrayList<String> iteratedClientIds;
     private int clientCount = 0;
 
@@ -96,12 +96,12 @@ public class ClientList {
     }
 
     public ArrayList<String> getSortedClientIds() {
-        Collections.sort(clientIds);
+        Collections.sort(clientIds, String.CASE_INSENSITIVE_ORDER);
         return clientIds;
     }
 
     public ArrayList<String> getSortedClientNames() {
-        Collections.sort(clientNames);
+        Collections.sort(clientNames, String.CASE_INSENSITIVE_ORDER);
         return clientNames;
     }
 
