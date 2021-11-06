@@ -50,7 +50,7 @@ public class FinanceParser {
 
     public void listFinance(FinanceList finances) {
         if (finances.financeList.size() < 1) {
-            IngredientUI.printEmptyListMessage();
+            FinanceUI.printEmptyListMessage();
             return;
         }
         assert finances.financeList.size() > 0 : "Finance list should not be empty";

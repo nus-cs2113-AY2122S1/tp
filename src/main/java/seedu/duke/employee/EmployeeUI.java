@@ -1,7 +1,14 @@
+//@@author kairoskoh
+
 package seedu.duke.employee;
 
 import seedu.duke.main.MainUI;
 
+import java.sql.SQLOutput;
+
+/**
+ * Prints messages to interact with the users.
+ */
 public class EmployeeUI {
 
     public static void printNoEmployeeMessage() {
@@ -41,6 +48,35 @@ public class EmployeeUI {
                     + " - " + masterList.employeeList.get(i - 1).getStatus() + " STAFF"
                     + " - " + "$" + masterList.employeeList.get(i - 1).getSalary());
         }
+        MainUI.printSingleLine();
+    }
+
+    public static void printInvalidEmploymentStatusMessage() {
+        MainUI.printSingleLine();
+        System.out.println("Invalid employment status.");
+        System.out.println("Please use one of the three options: perm, temp or adhoc.");
+        MainUI.printSingleLine();
+    }
+
+    public static void printInvalidPhoneNumberMessage() {
+        MainUI.printSingleLine();
+        System.out.println("Invalid phone number.");
+        System.out.println("Please ensure that it is a positive integer.");
+        MainUI.printSingleLine();
+    }
+
+    public static void printInvalidSalaryMessage() {
+        MainUI.printSingleLine();
+        System.out.println("Invalid salary.");
+        System.out.println("Please ensure that it is a positive integer.");
+        MainUI.printSingleLine();
+    }
+
+    public static void printDuplicateEntryMessage(int i) {
+        MainUI.printSingleLine();
+        System.out.println("You have entered the exact same employee details before.");
+        System.out.println("Refer to your employee with index \'" + (i+1) + "\' when you type in list-employee.");
+        System.out.println("This is a duplicate!");
         MainUI.printSingleLine();
     }
 }
