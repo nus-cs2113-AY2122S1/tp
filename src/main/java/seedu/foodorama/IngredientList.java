@@ -55,7 +55,8 @@ public class IngredientList {
                     ingredientWeightValue = Double.parseDouble(ingredientWeight);
                 }
             }
-            if ((isNumber(ingredientWeight) && (ingredientWeightValue >= 0) && (ingredientWeightValue <= 10000)) | confirmAdd.startsWith(YES)) {
+            if ((isNumber(ingredientWeight) && (ingredientWeightValue >= 0)
+                    && (ingredientWeightValue <= 10000)) | confirmAdd.startsWith(YES)) {
                 exitloop = 1;
             }
         }

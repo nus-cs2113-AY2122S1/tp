@@ -76,7 +76,7 @@ public class Ingredient implements Comparable<Ingredient> {
     }
 
     public void updateIngredientWeight() throws FoodoramaException {
-        UI.printEnterWeightOf(ingredientName);
+        UI.printEnterStoredWeightOf(ingredientName);
         Scanner in = new Scanner(System.in);
         String inputIngredientWeight = in.nextLine();
         double ingredientWeightValue;
@@ -122,7 +122,7 @@ public class Ingredient implements Comparable<Ingredient> {
     }
 
     public void addWaste() throws FoodoramaException {
-        UI.printEnterWeightOf(ingredientName);
+        UI.printEnterWasteWeightOf(ingredientName);
         Scanner in = new Scanner(System.in);
         String ingredientWeight = in.nextLine();
         double ingredientWeightValue;

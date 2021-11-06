@@ -118,7 +118,7 @@ public class Dish implements Comparable<Dish> {
     }
 
     public void addWaste() throws FoodoramaException {
-        UI.printEnterWeightOf(dishName);
+        UI.printEnterWasteWeightOf(dishName);
         Scanner in = new Scanner(System.in);
         String dishWaste = in.nextLine();
 
