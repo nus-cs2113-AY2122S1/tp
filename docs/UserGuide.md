@@ -32,6 +32,8 @@ total workload:
     * [Delete from Timetable](#delete-from-timetable-delete-module_code)
     * [Clear Timetable](#clear-timetable-clear)
     * [View Timetable](#view-timetable-timetable)
+    * [Calculate CAP](#calculate-cap--calculate-cap)
+    * [View Unofficial Transcript](#view-unofficial-transcript--transcript)
     * [Exit](#exit-exit)
 - [FAQ](#faq)
 - [Command Summary]()
@@ -431,9 +433,9 @@ __________________________________________________________________________
 
 <br>
 
-## Remove modules from the list of completed modules: `remove <module_code>`
+## Remove modules from the Transcript: `remove <module_code>`
 
-You can remove any module that you added to your list of completed modules using this command.
+You can remove any module that you added to your list of completed modules or transcript using this command.
 
 For example: If you have CS2113T already to your list of completed modules. You can type
 `remove CS2113T` to remove this module and its corresponding grade from the list of modules completed.

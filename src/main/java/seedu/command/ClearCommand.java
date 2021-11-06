@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class ClearCommand extends Command {
 
     public static final String commandSyntax = "clear";
-    public static final String commandAction = "Clears the timetable of everything";
+    public static final String commandAction = "Clears the timetable or the transcript";
 
     private static final Logger logger = Logger.getLogger("");
     private final Timetable timetable;
