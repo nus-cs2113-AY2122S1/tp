@@ -1,11 +1,16 @@
-package seedu.utility;
+package seedu.utility.tools;
+
+import seedu.utility.Messages;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class FinancialAdvisor {
-    private Random random;
+/**
+ * FinancialAdvisor offers a finance related tip to the user at the end when the program terminates.
+ */
+public abstract class FinancialAdvisor {
+    private static final Random RANDOM = new Random();
     
     private static final String ADVICE_1 = "Try using the 50/30/20 rule to budget."
             + " 50% for needs, 30% for wants and 20% for savings";
@@ -18,21 +23,22 @@ public class FinancialAdvisor {
     private static final String ADVICE_5 = "If there is something you really want to buy"
             + ", make sure you have the price of it times 10 in your savings first";
     private static final List<String> ADVICES = Arrays.asList(ADVICE_1,ADVICE_2,ADVICE_3,ADVICE_4,ADVICE_5);
-    
-    public FinancialAdvisor() {
-        this.random = new Random();
-    }
-    
-    public String getRandomAdvice() {
+
+    /**
+     * Generates a random advice.
+     * 
+     * @return A string that reads a financial advice.
+     */
+    public static String getRandomAdvice() {
         int bound = ADVICES.size();
         if (isValidRandomRange(bound)) {
-            int adviceIndex = random.nextInt(bound);
+            int adviceIndex = RANDOM.nextInt(bound);
             return ADVICES.get(adviceIndex);
         }
         return Messages.DISPLAY_ADVICE_ERROR;
     }
 
-    private boolean isValidRandomRange(int bound) {
+    private static boolean isValidRandomRange(int bound) {
         return bound > 0;
     }
 }

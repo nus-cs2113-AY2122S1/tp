@@ -7,9 +7,10 @@ public class Messages {
     public static final String INVALID_COMMAND_MESSAGE =
             "Invalid command. Use \"help\" to show the list of possible commands.";
     public static final String NON_NUMERIC_AMOUNT_MESSAGE = "Only numeric inputs are allowed for amount.";
-    public static final String N0N_NUMERIC_INDEX_MESSAGE = "Only numeric inputs are allowed for index.";
+    public static final String NON_NUMERIC_THRESHOLD_MESSAGE = "Threshold value given is either out of range or " 
+            + "non-numeric. Please try again.";
     public static final String NON_POSITIVE_AMOUNT_MESSAGE = "Only positive values are allowed for amount.";
-    public static final String NON_POSITIVE_INDEX_MESSAGE = "Only positive values are allowed for index.";
+    public static final String NON_POSITIVE_INTEGER_INDEX_MESSAGE = "Only positive integers are allowed for index.";
     public static final String BLANK_AMOUNT_MESSAGE = "No amount inputted!";
     public static final String UNABLE_TO_DELETE_MESSAGE = "Entry not deleted because entry not found!";
     public static final String BLANK_DESCRIPTION_MESSAGE = "Your description is empty!";
@@ -39,9 +40,11 @@ public class Messages {
     public static final String INVALID_BUDGET_CATEGORY_MESSAGE = "Input only 1 of these 6 categories: Food, "
             + "Transport, Bills, Medical, Entertainment or Overall";
     public static final String INVALID_THRESHOLD_MESSAGE = "Threshold value should between 0 and 1.";
-    public static final String INVALID_CURRENCY_TYPE_MESSAGE = "Please enter a valid currency for conversion";
+    public static final String INVALID_CURRENCY_TYPE_MESSAGE = "Please enter a valid currency for conversion!";
     public static final String BLANK_CURRENCY_TYPE_MESSAGE = "You have not entered any currency type!";
     public static final String SAME_CURRENCY_TYPE_MESSAGE = "Your lists are already in the requested currency type!";
+    public static final String AVAILABLE_CURRENCIES_MESSAGE
+            = "Here is a list of available currencies you can convert to!";
 
     public static final String SEPARATOR_MESSAGE = "----------------------------------------------------------------"
             + "-------------------------------------";
@@ -62,9 +65,9 @@ public class Messages {
     public static final String DISPLAY_ADVICE_ERROR = "Sorry there is no advice for you at this moment >.<";
     public static final String CURRENT_CURRENCY_MESSAGE = "You currency setting currently: ";
     public static final String INVALID_DATE_RANGE_MESSAGE = "Make sure your start date is before your end date";
-    public static final String MISSING_PARAMETERS_MESSAGE = "Missing parameters! Use help to view commands again!";
-    
-    public static final String INVALID_EXPENSE_VALUE = "Wow! That's a lot of money."
+    public static final String PARAMETERS_ERROR_MESSAGE = "You have missing or invalid parameters. Use help to view " 
+            + "commands again!";
+    public static final String INVALID_EXPENSE_VALUE = "Wow! That's a lot of money. "
             + "Are you sure you have spent that much?";
     public static final String INVALID_INCOME_VALUE = "Wow! That's a lot of money."
             + "I don't think we can handle that much money";
@@ -78,4 +81,12 @@ public class Messages {
             + "Are you sure you have spent this much?";
     public static final String INCOME_OVERFLOW_ERROR = "Your total income will exceed $100000000000. "
             + "Are you sure you have gotten this much?";
+    public static final String ERROR_SAVING_ENTRIES_MESSAGE = "There is trouble saving entries into " 
+            + "StonksXD_Entries.csv, some or all entries maybe lost.";
+    public static final String ERROR_SAVING_SETTINGS_MESSAGE = "There is trouble saving entries into "
+            + "StonksXD_Settings.csv, some or all settings maybe lost.";
+    public static final String TOO_MANY_DP_MESSAGE = "Only 2 or less decimal places are allowed!";
+    public static final String INVALID_DATE_FORMAT = "Your date format is invalid. Please use DD/MM/YYYY";
+    public static final String INVALID_INDEX_MESSAGE = "Index given is either out of range or not an integer.";
+    public static final String INVALID_YEAR_MESSAGE = "The given year must be in the YYYY format.";
 }

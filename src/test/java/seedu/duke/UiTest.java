@@ -11,6 +11,7 @@ import seedu.entry.ExpenseCategory;
 import seedu.entry.Expense;
 import seedu.exceptions.ExpenseOverflowException;
 import seedu.exceptions.IncomeOverflowException;
+import seedu.utility.CurrencyManager;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Messages;
 import seedu.utility.StonksGraph;
@@ -53,7 +54,7 @@ public class UiTest {
     private final Ui testUI = new Ui();
     private final FinancialTracker financialTracker = new FinancialTracker();
     private BudgetManager budgetManager = new BudgetManager();
-
+    private CurrencyManager currencyManager = new CurrencyManager();
 
     public void initialiseFinancialTracker() throws IncomeOverflowException, ExpenseOverflowException {
         financialTracker.addIncome(new Income("Paycheck August", 25.0, IncomeCategory.SALARY));
@@ -285,14 +286,14 @@ public class UiTest {
     @Test
     public void printGraph_validStonksGraph_printCorrectGraph() {
         //empty financialtracker
-        StonksGraph stonksGraph = new StonksGraph(financialTracker);
+        StonksGraph stonksGraph = new StonksGraph(financialTracker,LocalDate.now().getYear());
         String expectedOutput = SEPARATOR_LINE
                 + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
                 + "x                                                                                                  x"
                 + "x   Account Balance: $0.00                                                 Legend:                 x"
                 + "x   Current month total expense: $0.00                                # is Expense      x"
                 + "x   Current month total income: $0.00                                 o is Income       x"
-                + "x   Your Yearly Report                                                                             x"
+                + "x   Your Yearly Report                                                     Unit: 0.01              x"
                 + "x ------------------------------------------------------------------------------------------------ x"
                 + "x                                                                                                  x"
                 + "x                                                                                                  x"
@@ -420,9 +421,10 @@ public class UiTest {
     @Test
     public void printThresholdConfirmation_validThreshold_printThresholdMsg() {
         String expectedOutput = SEPARATOR_LINE + newLine
-                + "Threshold for budget reminders set to 58.71" + newLine
+                + "Threshold for budget reminders set to 0.58" + newLine
+                + "We'll warn you when you spend 58.0% of your budget!" + newLine
                 + SEPARATOR_LINE;
-        testUI.printThresholdConfirmation(58.71);
+        testUI.printThresholdConfirmation(0.58);
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
 
@@ -431,7 +433,7 @@ public class UiTest {
             throws ExpenseOverflowException, IncomeOverflowException {
         FindCommand testFindCommand = new FindCommand("food");
         initialiseFinancialTracker();
-        testFindCommand.execute(financialTracker, testUI, budgetManager);
+        testFindCommand.execute(financialTracker, testUI, budgetManager, currencyManager);
         String expectedOutput = SEPARATOR_LINE + newLine
                 + "Below is a list of all your findings!" + newLine
                 + SEPARATOR_LINE + newLine
@@ -447,7 +449,7 @@ public class UiTest {
             throws ExpenseOverflowException, IncomeOverflowException {
         FindCommand testFindCommand = new FindCommand("FOod");
         initialiseFinancialTracker();
-        testFindCommand.execute(financialTracker, testUI, budgetManager);
+        testFindCommand.execute(financialTracker, testUI, budgetManager, currencyManager);
         String expectedOutput = SEPARATOR_LINE + newLine
                 + "Below is a list of all your findings!" + newLine
                 + SEPARATOR_LINE + newLine
@@ -467,7 +469,7 @@ public class UiTest {
         LocalDate date = LocalDate.parse("11/11/2121", DateTimeFormatter.ofPattern(DATE_FORMAT));
         Income incomeWithDiffDate = new Income("Paycheck August", 25.0, IncomeCategory.SALARY, date);
         financialTracker.addIncome(incomeWithDiffDate);
-        testFindCommand.execute(financialTracker, testUI, budgetManager);
+        testFindCommand.execute(financialTracker, testUI, budgetManager, currencyManager);
         String expectedOutput = SEPARATOR_LINE + newLine
                 + "Below is a list of all your findings!" + newLine
                 + SEPARATOR_LINE + newLine
@@ -486,7 +488,7 @@ public class UiTest {
             throws ExpenseOverflowException, IncomeOverflowException {
         FindCommand testFindCommand = new FindCommand("25/10/2099");
         initialiseFinancialTracker();
-        testFindCommand.execute(financialTracker, testUI, budgetManager);
+        testFindCommand.execute(financialTracker, testUI, budgetManager, currencyManager);
         String expectedOutput = SEPARATOR_LINE + newLine
                 + "Your search did not match any of the entries!" + newLine
                 + SEPARATOR_LINE;
@@ -498,7 +500,7 @@ public class UiTest {
             throws ExpenseOverflowException, IncomeOverflowException {
         FindCommand testFindCommand = new FindCommand("game");
         initialiseFinancialTracker();
-        testFindCommand.execute(financialTracker, testUI, budgetManager);
+        testFindCommand.execute(financialTracker, testUI, budgetManager, currencyManager);
         String expectedOutput = SEPARATOR_LINE + newLine
                 + "Below is a list of all your findings!" + newLine
                 + SEPARATOR_LINE + newLine
@@ -512,7 +514,7 @@ public class UiTest {
             throws ExpenseOverflowException, IncomeOverflowException {
         FindCommand testFindCommand = new FindCommand("19.73");
         initialiseFinancialTracker();
-        testFindCommand.execute(financialTracker, testUI, budgetManager);
+        testFindCommand.execute(financialTracker, testUI, budgetManager, currencyManager);
         String expectedOutput = SEPARATOR_LINE + newLine
                 + "Below is a list of all your findings!" + newLine
                 + SEPARATOR_LINE + newLine
