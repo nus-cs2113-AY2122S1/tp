@@ -36,13 +36,12 @@ public class Duke {
             assert userCommand != null : "Parsed command returns null";
             // Executes logic of command
             userCommand.execute(ui, catalogue);
-            // Write current state of catalogue to data.json
-            storage.write(catalogue);
-
             // Check whether to exit program
             if (userCommand.isExit()) {
                 break;
             }
+            // Write current state of catalogue to data.json
+            storage.write(catalogue);
         }
     }
 }
