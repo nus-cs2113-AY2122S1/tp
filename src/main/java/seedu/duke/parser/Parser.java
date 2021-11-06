@@ -61,7 +61,12 @@ public abstract class Parser {
             throw new GetJackDException("Error. Missing workout parameters");
         }
         int exerciseIndex = parseArgsAsIndex(args[0]);
+        //if this function is called for the edit command then length of args has to be greater than 3 for it
+        //to contain a workoutIndex, for all other commands the length of args greater than 1 means
+        //workoutIndex is present.
         int lengthForItToContainWorkoutIndex = (isEdit) ? 3 : 1;
+        //If workoutMode is 0 or a workoutIndex was passed in as a parameter, then we should use it instead of 
+        //the workoutMode.
         int workoutIndex = (Command.workoutMode == 0 || args.length > lengthForItToContainWorkoutIndex)
                 ? parseArgsAsIndex(args[1]) : Command.workoutMode;
         return new int[]{exerciseIndex, workoutIndex};
