@@ -18,11 +18,11 @@ public class Trip {
     private String startCountryCode;
     private String endCountryCode;
     private List<Country> path;
-    private List<Double> distances;
+    private List<Double> time;
     private final DaysList daysList;
 
     public Trip(String tripName, String startCountryCode, String endCountryCode,
-                List<Country> path, List<Double> distances) {
+                List<Country> path, List<Double> time) {
         logger.setLevel(Level.INFO);
         assert !tripName.equals("all") : "'all' is an invalid tripName.";
         assert !tripName.equals("") : "'' is an invalid tripName.";
@@ -30,7 +30,7 @@ public class Trip {
         this.startCountryCode = startCountryCode;
         this.endCountryCode = endCountryCode;
         this.path = path;
-        this.distances = distances;
+        this.time = time;
         this.daysList = new DaysList();
         logger.log(Level.INFO, "Trip created with details: \n" + this);
     }
@@ -41,7 +41,7 @@ public class Trip {
                 + "\n\t\t\t Origin: " + getStartCountryCode()
                 + "\n\t\t\t Destination: " + getEndCountryCode()
                 + "\n\t\t\t Path: " + getPath()
-                + "\n\t\t\t Distances: " + getDistances()
+                + "\n\t\t\t Time: " + getTime()
                 + "\n\t\t\t Days: " + daysList;
     }
 
@@ -73,12 +73,12 @@ public class Trip {
         this.path = path;
     }
 
-    public List<Double> getDistances() {
-        return distances;
+    public List<Double> getTime() {
+        return time;
     }
 
-    public void setDistances(List<Double> distances) {
-        this.distances = distances;
+    public void setTime(List<Double> time) {
+        this.time = time;
     }
 
     public Day getDay(int dayNumber) throws TravellerException {

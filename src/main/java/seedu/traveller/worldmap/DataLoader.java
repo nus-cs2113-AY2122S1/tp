@@ -20,7 +20,7 @@ public class DataLoader {
     private static final Logger logger = Logger.getLogger(DataLoader.class.getName());
     private final int numberOfCountries = 5;
     private final int countryCodeLength = 3;
-    private final String filePath = "./flightData/dist.txt";
+    private final String filePath = "./flightData/time.txt";
     private final String filePath2 = "./flightData/cost.txt";
     private final String separator = "\\|";
 
@@ -150,12 +150,12 @@ public class DataLoader {
     }
 
     /**
-     * This function reads the distance/cost data from the text file, depending on which text file is read from.
+     * This function reads the time/cost data from the text file, depending on which text file is read from.
      * @param scanner Scanner object to read from the text file.
-     * @param graphList GraphList to add distance/cost to.
+     * @param graphList GraphList to add time/cost to.
      * @param i Variable to ensure that data is read in lower triangular matrix. (Which the text file will contain.)
      * @throws IllegalFlightFileException If the text file contains invalid data
-     *     (More distance/cost numbers than expected.)
+     *     (More time/cost numbers than expected.)
      */
     private void readDistance(Scanner scanner, GraphList graphList, int i) throws IllegalFlightFileException {
         String[] rawInput = parseNextLine(scanner, i);
@@ -169,7 +169,7 @@ public class DataLoader {
      * This function parses the next line according to how readCountries and readDistance wants it to be.
      * @param scanner Scanner object to read from the text file.
      * @param limit Number to ensure only certain number of data is read.
-     * @return Parsed string array that contains Country codes or Distances/Costs to be added to the GraphList.
+     * @return Parsed string array that contains Country codes or Time/Costs to be added to the GraphList.
      */
     private String[] parseNextLine(Scanner scanner, int limit) {
         return scanner.nextLine().split(separator, limit);

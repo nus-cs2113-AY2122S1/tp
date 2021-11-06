@@ -67,8 +67,8 @@ public class GraphList {
                 + "\n\tdistance: " + distance
                 + "\n\tstartCountry: " + startCountry
                 + "\n\tendCountry: " + endCountry);
-        int startCountryKey = startCountry.key;
-        int endCountryKey = endCountry.key;
+        int startCountryKey = startCountry.getKey();
+        int endCountryKey = endCountry.getKey();
         edgeMatrix[startCountryKey][endCountryKey] = distance;
         edgeMatrix[endCountryKey][startCountryKey] = distance;
         Country.addNeighbour(distance, startCountry, endCountry);

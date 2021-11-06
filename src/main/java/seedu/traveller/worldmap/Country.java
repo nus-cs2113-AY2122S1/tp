@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 //@@author Jach23
 public class Country implements Comparable<Country> {
     private static final Logger logger = Logger.getLogger(Country.class.getName());
-    public int key;
+    private final int key;
     public final String name;
     private List<Distance> distances;
     private boolean visited;

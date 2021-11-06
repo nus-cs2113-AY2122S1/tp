@@ -65,13 +65,13 @@ public class NewCommand extends Command {
                 throw new DuplicateTripException(getTripName());
             }
         }
-        MinCalcResult result = WorldMap.calcMinDistance(getStartCountry(), getEndCountry());
+        MinCalcResult result = WorldMap.calcMinTime(getStartCountry(), getEndCountry());
         if (result.getError() == 1) {
             return;
         }
         List<Country> path = result.getPath();
-        List<Double> distances = result.getDistances();
-        Trip trip = new Trip(getTripName(), getStartCountry(), getEndCountry(), path, distances);
+        List<Double> time = result.getTime();
+        Trip trip = new Trip(getTripName(), getStartCountry(), getEndCountry(), path, time);
         tripsList.addTrip(trip);
         ui.printNewTripCreated(getTripName());
     }
