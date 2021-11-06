@@ -3,6 +3,8 @@ package seedu.budgettracker.data.records;
 import java.time.LocalDate;
 import java.lang.String;
 import java.time.format.DateTimeFormatter;
+import java.text.DecimalFormat;
+
 
 public class Loan extends Record {
     protected String debtorName;
@@ -12,6 +14,7 @@ public class Loan extends Record {
     private static final int HALF_MONTH = 15;
     private static final int TWO_DECIMAL = 10;
     private static final int DECEMBER = 12;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public Loan(String debtorName, double amount, LocalDate date) {
         super(amount, date.getMonthValue());
@@ -92,6 +95,6 @@ public class Loan extends Record {
 
     public String toString() {
         return String.format("%-20.20s  %-20.20s %-20.20s",
-                this.debtorName, " | $" + this.amount, " | " + this.date.toString());
+                this.debtorName, " | $" + df.format(this.amount), " | " + this.date.toString());
     }
 }

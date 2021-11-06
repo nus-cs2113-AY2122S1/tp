@@ -329,10 +329,8 @@ public class TextUi {
 
     private static void loanPrinter(AllRecordList list, int month) {
         System.out.println("Your loans: ");
-
         if (list.getLoanListSize(month) > 0) {
             System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Debtor name", "   | Amount", "   | Date ");
-            System.out.print(LS);
             printEnumeratedLoanList(list.getLoanRecords(month));
         } else {
             System.out.println("No Loan records yet.");
@@ -366,7 +364,6 @@ public class TextUi {
         for (int i = 0; i < monthLoanList.size(); i++) {
             Loan currentLoan = monthLoanList.get(i);
             System.out.println(i + 1 + "." + currentLoan);
-            System.out.print(LS);
         }
     }
 

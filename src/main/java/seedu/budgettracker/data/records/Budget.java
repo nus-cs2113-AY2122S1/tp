@@ -1,6 +1,10 @@
 package seedu.budgettracker.data.records;
 
+import java.text.DecimalFormat;
+
 public class Budget extends Record {
+
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public Budget(double amount, int month) {
         super(amount, month);
@@ -21,6 +25,6 @@ public class Budget extends Record {
     }
 
     public String toString() {
-        return (" $" + this.amount);
+        return (" $" + df.format(this.amount));
     }
 }
