@@ -23,7 +23,8 @@ public class Storage {
     private JsonFactory jsonFactory;
     private static final String DEFAULT_PATH = "data/data.json";
     private static final String ERR_IOEXCEPTION = "(!) Critical Error: IO Exception";
-    private static final String ERR_JSON_FORMAT = "(!) Critical Error: Malformed JSON data, no data will be loaded";
+    private static final String ERR_JSON_FORMAT = "(!) Critical Error: Malformed JSON data, no data will be loaded"
+            + System.lineSeparator() + "If you wish to retain the data file, exit the program immediately, do not execute any other commands";
     private static final String WARN_MISSING_CONTENT = "(*) Warning: Missing fields found, ignoring";
     private static final String INFO_NO_EXISTING_FILE = "(*) No existing data found, creating new one: %s ...";
     private static final String SUCCESS_DATA_FOUND = "(+) Data file found %s, loading ...";
