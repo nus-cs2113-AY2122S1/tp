@@ -4,6 +4,9 @@ package seedu.duke.employee;
 
 import seedu.duke.main.MainUI;
 
+/**
+ * Prints messages to interact with the users.
+ */
 public class EmployeeUI {
 
     public static void printNoEmployeeMessage() {
