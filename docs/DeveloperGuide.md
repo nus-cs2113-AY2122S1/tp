@@ -5,7 +5,9 @@
 * [Getting started](#getting-started)
 * [Design](#design)
   * [Architecture](#architecture)
+  * [UI Component](#ui-component)
 * [Implementation](#implementation)
+  * [Delete - Basic Command Logic](#delete---basic-command-logic)
 * [Product scope](#product-scope)
   * [Target user profile](#Target-user-profile)
   * [Value proposition](#value-proposition)
@@ -25,6 +27,7 @@
 
 ## Design 
 
+###Architecture
 ![Figure_Architecture_Diagram](images/ArchitectureDiagram.png)
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
@@ -55,8 +58,20 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 ![Figure_Architecture__Sequence_Diagram](images/ArchitectureSequenceDiagram.png)
 
+###UI Component
+**API**: [`ui.java`](https://github.com/AY2122S1-CS2113T-F11-2/tp/tree/master/src/main/java/seedu/budgettracker/ui)
+
+![Figure_UiComponent_Component_Diagram](images/UiComponent.png)
+
+The `Ui` component:
+- Reads in user input from the Command Line Interface (CLI).
+- Prints welcome screen, database information and messages prompting the user for input.
+- Other components call methods in Ui class to print corresponding output on the terminal.
+
+
 ## Implementation
-###Delete
+
+###Delete - Basic Command Logic
 
 The delete feature collaborates with other classes like Parser, RecordList, etc. Basically it contains three usages which are deletion of Budget, Expenditure(s), and Loan(s).
 
