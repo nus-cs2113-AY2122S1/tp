@@ -66,7 +66,7 @@ public class TrainingStorage {
     /**
      * Verifies the training schedule file details are non-empty.
      *
-     * @param ccaTrainingFile
+     * @param ccaTrainingFile CSV file to read data from.
      */
     private static void verifyTrainingEmpty(File ccaTrainingFile) throws InvalidAddTrainingException {
         String name;
@@ -98,7 +98,7 @@ public class TrainingStorage {
     /**
      * Verifies that there are o duplicate names in training schedule.
      *
-     * @param ccaTrainingFile the list of current trainings
+     * @param ccaTrainingFile CSV file to read data from.
      */
     private static void verifyTrainingDuplicates(File ccaTrainingFile) throws InvalidAddTrainingException {
         String trainingName;
