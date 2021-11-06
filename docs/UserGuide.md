@@ -183,7 +183,7 @@ given is equal to the existing stock of the ingredient, the ingredient is automa
 of displaying zero stock for the item.) 
 If the ingredient has multiple entries, the earliest expiring one will be deducted first, as a good practice for inventory management.
 
-Command: `subtract GROUP_INDEX a/[AMOUNT]`
+Command: `subtract [GROUP_INDEX] a/[AMOUNT]`
 
 The parameters used in the command are:
 
@@ -206,7 +206,7 @@ ____________________________________________________
 You can delete an ingredient from the ingredient list based on its name and expiry date in the list if you wish to stop 
 tracking it (e.g. if that batch has expired).
 
-Command: `delete GROUP_INDEX.INGREDIENT_INDEX`
+Command: `delete [GROUP_INDEX.INGREDIENT_INDEX]`
 
 The parameter used in the command are:
 * `GROUP_INDEX`: the index of the group the ingredient to delete is in
@@ -240,16 +240,16 @@ This is the current list:
 list
 ____________________________________________________
 Here is the list of the ingredients currently in inventory:
-	1. Carrot | Total Amount: 2.000 kg
-		1.1. Amount Left: 2.000 kg | Expiry Date: 11/11/2021
+    1. Carrot | Total Amount: 2.000 kg
+        1.1. Amount Left: 2.000 kg | Expiry Date: 11/11/2021
 
-	2. Plum | Total Amount: 7.000 kg
-		2.1. Amount Left: 2.000 kg | Expiry Date: 05/11/2021
-		2.2. Amount Left: 5.000 kg | Expiry Date: 12/11/2021
+    2. Plum | Total Amount: 7.000 kg
+        2.1. Amount Left: 2.000 kg | Expiry Date: 06/11/2021
+        2.2. Amount Left: 5.000 kg | Expiry Date: 12/11/2021
 
-	3. Pumpkin | Total Amount: 6.000 kg
-		3.1. Amount Left: 6.000 kg | Expiry Date: 06/11/2021
-		3.2. Amount Left: 1.000 kg | Expiry Date: 21/11/2021
+    3. Pumpkin | Total Amount: 6.000 kg
+        3.1. Amount Left: 6.000 kg | Expiry Date: 06/11/2021
+        3.2. Amount Left: 1.000 kg | Expiry Date: 21/11/2021
 ____________________________________________________
 
 ```
@@ -259,10 +259,10 @@ Output:
 expire 13/11/2021
 ____________________________________________________
 There are 4 ingredients expiring by: 13/11/2021
-	Plum | Amount Left: 2.000 kg | Expiry Date: 05/11/2021
-	Pumpkin | Amount Left: 6.000 kg | Expiry Date: 06/11/2021
-	Carrot | Amount Left: 2.000 kg | Expiry Date: 11/11/2021
-	Plum | Amount Left: 5.000 kg | Expiry Date: 12/11/2021
+    Plum | Amount Left: 2.000 kg | Expiry Date: 06/11/2021
+    Pumpkin | Amount Left: 6.000 kg | Expiry Date: 06/11/2021
+    Carrot | Amount Left: 2.000 kg | Expiry Date: 11/11/2021
+    Plum | Amount Left: 5.000 kg | Expiry Date: 12/11/2021
 ____________________________________________________
 ```
 
@@ -282,19 +282,19 @@ Outputs:
 find carrot
 ____________________________________________________
 I found these ingredients for "carrot":
-	2. Carrot | Total Amount: 200.000 kg
-		2.1. Amount Left: 200.000 kg | Expiry Date: 01/03/2022
+    2. Carrot | Total Amount: 200.000 kg
+        2.1. Amount Left: 200.000 kg | Expiry Date: 01/03/2022
 ____________________________________________________
 ```
 ```
 find potato tomato
 ____________________________________________________
 I found these ingredients for "potato":
-	1. Potato | Total Amount: 0.600 kg
-		1.1. Amount Left: 0.600 kg | Expiry Date: 30/12/2021
+    1. Potato | Total Amount: 0.600 kg
+        1.1. Amount Left: 0.600 kg | Expiry Date: 30/12/2021
 I found these ingredients for "tomato":
-	4. Tomato | Total Amount: 23.700 kg
-		4.1. Amount Left: 23.700 kg | Expiry Date: 21/11/2021
+    4. Tomato | Total Amount: 23.700 kg
+        4.1. Amount Left: 23.700 kg | Expiry Date: 21/11/2021
 ____________________________________________________
 ```
 
@@ -314,13 +314,17 @@ Output (using list shown in [Section 2.7](#27-search-ingredients-by-expiry)):
 ```
 alerts expiry
 ____________________________________________________
-No ingredients expiring by 27/10/2021
+There are 3 ingredients expiring by: 11/11/2021
+    Plum | Amount Left: 2.000 kg | Expiry Date: 06/11/2021
+    Pumpkin | Amount Left: 6.000 kg | Expiry Date: 06/11/2021
+    Carrot | Amount Left: 2.000 kg | Expiry Date: 11/11/2021
 ____________________________________________________
 alerts stock
 ____________________________________________________
-There are 1 ingredients with stock less than 5.0 kg
-	Potato | Total Amount: 0.600 kg
-		1.1. Amount Left: 0.600 kg | Expiry Date: 30/12/2021
+There are 1 ingredients with stock less than 10.0 kg
+    Carrot | Total Amount: 2.000 kg
+    Plum | Total Amount: 7.000 kg
+    Pumpkin | Total Amount: 7.000 kg
 ____________________________________________________
 ```
 
@@ -394,8 +398,9 @@ ____________________________________________________
 
 **Q**: How do I save my ingredient list?
 
-**A**: The ingredient list is automatically saved after any operations that edits its contents. They are saved under 
-`data\"ingredients.txt"`
+**A**: The ingredient list is automatically saved after any operations that edits its contents. 
+- The ingredient data is saved under `data/ingredients.txt`
+- The threshold data for expiry and stock are saved under `data/thresholds.txt`
 
 **Q**: How do I transfer my data to another computer?
 
