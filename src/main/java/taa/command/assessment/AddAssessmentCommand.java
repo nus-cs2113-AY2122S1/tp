@@ -34,9 +34,9 @@ public class AddAssessmentCommand extends Command {
     private static final String MESSAGE_FORMAT_INVALID_WEIGHTAGE = "Invalid weightage. "
         + "Weightage must be between %,.2f (inclusive) and %,.2f (inclusive)";
     private static final String MESSAGE_FORMAT_INVALID_TOTAL_WEIGHTAGE = "Invalid weightage. "
-            + "Total new weightage exceeds 100%.";
+            + "Total new weightage exceeds %,.2f%%.";
     private static final String MESSAGE_FORMAT_INVALID_MAXIMUM_MARKS = "Invalid maximum marks. "
-        + "Maximum marks must be larger than %d (inclusive)";
+        + "Maximum marks must be larger than %,.2f (inclusive)";
     private static final String MESSAGE_FORMAT_ASSESSMENT_ADDED = "Assessment added to %s:\n"
         + "  %s\nThere are %d assessments in the %s.";
 
@@ -55,7 +55,7 @@ public class AddAssessmentCommand extends Command {
         }
 
         String maximumMarksString = argumentMap.get(KEY_MAXIMUM_MARKS);
-        if (!Util.isStringInteger(maximumMarksString)) {
+        if (!Util.isStringDouble(maximumMarksString)) {
             throw new TaaException(String.format(
                 MESSAGE_FORMAT_INVALID_MAXIMUM_MARKS,
                 Assessment.MINIMUM_MARKS)
@@ -88,7 +88,7 @@ public class AddAssessmentCommand extends Command {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
-        int maximumMarks = checkAndGetMaximumMarks();
+        double maximumMarks = checkAndGetMaximumMarks();
         String name = checkAndGetName(teachingClass.getAssessmentList().getAssessments());
         double weightage = checkAndGetWeightage(teachingClass);
 
@@ -109,10 +109,10 @@ public class AddAssessmentCommand extends Command {
             assessment, assessmentList.getSize(), teachingClass));
     }
 
-    public int checkAndGetMaximumMarks() throws TaaException {
+    public double checkAndGetMaximumMarks() throws TaaException {
         String maximumMarksString = argumentMap.get(KEY_MAXIMUM_MARKS);
-        assert Util.isStringInteger(maximumMarksString);
-        int maximumMarks = Integer.parseInt(maximumMarksString);
+        assert Util.isStringDouble(maximumMarksString);
+        double maximumMarks = Double.parseDouble(maximumMarksString);
         if (maximumMarks < Assessment.MINIMUM_MARKS) {
             throw new TaaException(String.format(
                     MESSAGE_FORMAT_INVALID_MAXIMUM_MARKS,
@@ -140,7 +140,10 @@ public class AddAssessmentCommand extends Command {
         }
         double newTotalWeightage = totalWeightage + weightage;
         if (!Assessment.isWeightageWithinRange(newTotalWeightage)) {
-            throw new TaaException(MESSAGE_FORMAT_INVALID_TOTAL_WEIGHTAGE);
+            throw new TaaException(String.format(
+                    MESSAGE_FORMAT_INVALID_TOTAL_WEIGHTAGE,
+                    Assessment.WEIGHTAGE_RANGE[1])
+            );
         }
         return weightage;
     }
