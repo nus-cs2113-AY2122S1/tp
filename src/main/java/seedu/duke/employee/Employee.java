@@ -1,3 +1,5 @@
+//@@author kairoskoh
+
 package seedu.duke.employee;
 
 public class Employee {
