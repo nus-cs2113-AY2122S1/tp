@@ -15,7 +15,7 @@ public class EditMarkTest {
     @Test
     void editMark_userEditsThreeTimes_marksEditedCorrectly() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2102";
         Command command1 = Parser.parseUserInput(classInput);
@@ -75,7 +75,7 @@ public class EditMarkTest {
     @Test
     void editMark_editingWithoutSettingMarks_taaExceptionThrown() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2102";
         Command command1 = Parser.parseUserInput(classInput);
@@ -108,7 +108,7 @@ public class EditMarkTest {
     @Test
     void editMark_marksExceedMaximumMarks_taaExceptionThrown() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2102";
         Command command1 = Parser.parseUserInput(classInput);
@@ -148,7 +148,7 @@ public class EditMarkTest {
     @Test
     void editMark_studentDoesNotExist_taaExceptionThrown() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2102";
         Command command1 = Parser.parseUserInput(classInput);
@@ -187,7 +187,7 @@ public class EditMarkTest {
     @Test
     void editMark_classDoesNotExist_taaExceptionThrown() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2102";
         Command command1 = Parser.parseUserInput(classInput);
@@ -226,7 +226,7 @@ public class EditMarkTest {
     @Test
     void editMark_assessmentDoesNotExist_taaExceptionThrown() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2102";
         Command command1 = Parser.parseUserInput(classInput);

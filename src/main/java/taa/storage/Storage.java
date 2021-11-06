@@ -33,10 +33,14 @@ public class Storage {
     /**
      * Load the class list from the file.
      *
-     * @return A ClassList object after parsing from the file.
+     * @return A ClassList object after parsing from the file if successful, else null.
      * @throws TaaException if fail to open, read, or parse the file.
      */
     public ClassList load() throws TaaException {
+        if (filename == null || filename.isEmpty()) {
+            return null;
+        }
+
         if (!Util.fileExists(filename)) {
             return null;
         }
@@ -69,6 +73,10 @@ public class Storage {
      * @throws TaaException if fail to create, open, or write to the file.
      */
     public void save(ClassList classList) throws TaaException {
+        if (filename == null || filename.isEmpty()) {
+            return;
+        }
+
         Util.createFile(filename);
 
         assert Util.fileExists(filename);

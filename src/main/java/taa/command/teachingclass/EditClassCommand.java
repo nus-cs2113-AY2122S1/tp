@@ -25,7 +25,7 @@ public class EditClassCommand extends Command {
         + "Please use a different CLASS_ID.";
 
     public EditClassCommand(String argument) {
-        super(argument, EDIT_CLASS_ARGUMENT_KEYS);
+        super(argument, EDIT_CLASS_ARGUMENT_KEYS, true);
     }
 
     @Override
@@ -38,11 +38,23 @@ public class EditClassCommand extends Command {
             throw new TaaException(getMissingArgumentMessage());
         }
 
+        String classId = argumentMap.get(KEY_CLASS_ID);
+        if (classId.isEmpty()) {
+            throw new TaaException(getMissingArgumentMessage());
+        }
+
         boolean hasNewClassId = argumentMap.containsKey(KEY_NEW_CLASS_ID);
         boolean hasNewClassName = argumentMap.containsKey(KEY_NEW_CLASS_NAME);
         boolean hasOptionalArguments = (hasNewClassId || hasNewClassName);
         if (!hasOptionalArguments) {
             throw new TaaException(getMissingArgumentMessage());
+        }
+
+        if (hasNewClassId) {
+            String newClassId = argumentMap.get(KEY_NEW_CLASS_ID);
+            if (!TeachingClass.isValidId(newClassId)) {
+                throw new TaaException(MESSAGE_INVALID_CLASS_ID);
+            }
         }
     }
 

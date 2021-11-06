@@ -16,7 +16,7 @@ public class SetCommentTest {
     @Test
     void setComment_userSetsTwoComments_setCommentCorrectly() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2102";
         Command command1 = Parser.parseUserInput(classInput);
@@ -58,7 +58,7 @@ public class SetCommentTest {
     @Test
     void setComment_userOverwritesComments_setCommentCorrectly() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2102";
         Command command1 = Parser.parseUserInput(classInput);
@@ -91,7 +91,7 @@ public class SetCommentTest {
     @Test
     void setComment_classDoesNotExist_taaExceptionThrown() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2102";
         Command command1 = Parser.parseUserInput(classInput);
@@ -118,7 +118,7 @@ public class SetCommentTest {
     @Test
     void setComment_studentIndexDoesNotExist_taaExceptionThrown() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2102";
         Command command1 = Parser.parseUserInput(classInput);
