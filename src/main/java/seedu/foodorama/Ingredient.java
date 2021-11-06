@@ -9,6 +9,11 @@ import java.util.Scanner;
 
 public class Ingredient implements Comparable<Ingredient> {
 
+    public static final String YES_NO_REGEX = "^(y|yes|n|no)$";
+    private static final String YES = "y";
+    private static final String NO = "n";
+    private static final int LOOP = 0;
+    private static final int EXIT = 1;
     private static final Ui UI = new Ui();
     private String ingredientName;
     private double ingredientWeight;
@@ -79,21 +84,43 @@ public class Ingredient implements Comparable<Ingredient> {
         UI.printEnterStoredWeightOf(ingredientName);
         Scanner in = new Scanner(System.in);
         String inputIngredientWeight = in.nextLine();
+
+        int loop = LOOP;
         double ingredientWeightValue;
-        try {
+        while (loop == LOOP) {
+            String confirmAdd = "e";
+            if (!isNumber(inputIngredientWeight)) {
+                throw new FoodoramaException(UI.getInvalidNumberMsg());
+            }
+
             ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
             while (ingredientWeightValue < 0) {
                 UI.clearTerminalAndPrintNewPage();
-                UI.printInvalidUpdateIngrValue(ingredientName);
+                UI.printInvalidIngrWeight(inputIngredientWeight);
                 inputIngredientWeight = in.nextLine();
                 ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
             }
-        } catch (NumberFormatException e) {
-            throw new FoodoramaException(UI.getInvalidNumberMsg());
+            if (Double.isInfinite(ingredientWeightValue) | Double.isNaN(ingredientWeightValue)) {
+                throw new FoodoramaException(UI.printNumericalInputInvalid("dish waste"));
+            } else if (ingredientWeightValue > 10000) {
+                UI.clearTerminalAndPrintNewPage();
+                UI.printIngrValueHigh(ingredientName);
+                confirmAdd = in.nextLine();
+
+                confirmAdd = getConfirmation(confirmAdd);
+                if (confirmAdd.startsWith(NO)) {
+                    UI.clearTerminalAndPrintNewPage();
+                    UI.printEnterWeightOf(ingredientName);
+                    inputIngredientWeight = in.nextLine();
+                    ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
+                }
+            }
+            if ((isNumber(inputIngredientWeight) && (ingredientWeightValue >= 0)
+                    && (ingredientWeightValue <= 10000)) | confirmAdd.startsWith(YES)) {
+                loop = EXIT;
+            }
         }
-        if (Double.isInfinite(ingredientWeightValue) | Double.isNaN(ingredientWeightValue)) {
-            throw new FoodoramaException(UI.printNumericalInputInvalid("ingredient storage"));
-        }
+        ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
         ingredientWeight += ingredientWeightValue;
         UI.printStorage(ingredientName, ingredientWeight);
     }
@@ -125,8 +152,15 @@ public class Ingredient implements Comparable<Ingredient> {
         UI.printEnterWasteWeightOf(ingredientName);
         Scanner in = new Scanner(System.in);
         String ingredientWeight = in.nextLine();
+
+        int exitloop = 0;
         double ingredientWeightValue;
-        try {
+        while (exitloop == 0) {
+            String confirmAdd = "e";
+            if (!isNumber(ingredientWeight)) {
+                throw new FoodoramaException(UI.getInvalidNumberMsg());
+            }
+
             ingredientWeightValue = Double.parseDouble(ingredientWeight);
             while (ingredientWeightValue < 0) {
                 UI.clearTerminalAndPrintNewPage();
@@ -134,12 +168,29 @@ public class Ingredient implements Comparable<Ingredient> {
                 ingredientWeight = in.nextLine();
                 ingredientWeightValue = Double.parseDouble(ingredientWeight);
             }
-        } catch (NumberFormatException e) {
-            throw new FoodoramaException(UI.getInvalidNumberMsg());
+            if (Double.isInfinite(ingredientWeightValue) | Double.isNaN(ingredientWeightValue)) {
+                throw new FoodoramaException(UI.printNumericalInputInvalid("dish waste"));
+            } else if (ingredientWeightValue > 10000) {
+                UI.clearTerminalAndPrintNewPage();
+                UI.printIngrWasteValueHigh(ingredientName);
+                confirmAdd = in.nextLine();
+
+                confirmAdd = getConfirmation(confirmAdd);
+                if (confirmAdd.startsWith(NO)) {
+                    UI.clearTerminalAndPrintNewPage();
+                    UI.printEnterWeightOf(ingredientName);
+                    ingredientWeight = in.nextLine();
+                    ingredientWeightValue = Double.parseDouble(ingredientWeight);
+                }
+            }
+            if ((isNumber(ingredientWeight) && (ingredientWeightValue >= 0)
+                    && (ingredientWeightValue <= 10000)) | confirmAdd.startsWith(YES)) {
+                exitloop = 1;
+            }
         }
-        if (Double.isInfinite(ingredientWeightValue) | Double.isNaN(ingredientWeightValue)) {
-            throw new FoodoramaException(UI.printNumericalInputInvalid("ingredient waste"));
-        }
+
+        ingredientWeightValue = Double.parseDouble(ingredientWeight);
+
         ingredientWasteIngr += ingredientWeightValue;
         double totalWaste = ingredientWasteIngr + ingredientWasteDish;
         UI.printWastage(ingredientName, totalWaste);
@@ -211,5 +262,24 @@ public class Ingredient implements Comparable<Ingredient> {
         double wastage = ingredientWasteDish + ingredientWasteIngr;
         double diff = (o.getWastage() - wastage);
         return (diff >= 0) ? (diff == 0) ? 0 : 1 : -1;
+    }
+
+    public static boolean isNumber(String numberString) {
+        try {
+            int numberInteger = Integer.parseInt(numberString) - 1;
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public static String getConfirmation(String confirmAdd) {
+        Scanner input = new Scanner(System.in);
+        while (!confirmAdd.matches(YES_NO_REGEX)) {
+            UI.clearTerminalAndPrintNewPage();
+            UI.printInvalidConfirmationSoftLimit();
+            confirmAdd = input.nextLine().toLowerCase();
+        }
+        return confirmAdd;
     }
 }
