@@ -73,20 +73,18 @@ Code contributed: more than 2400 lines of code. [[RepoSense](https://nus-cs2113-
     * Pull request: [[#19](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/19)]
 
 
-* Included JUnit tests for:
+* Included JUnit tests:
     * `isValidStockId()` method
         * Pull request: [[#55](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/55)]
-    * `DateParser` class
+    * `DateParserTest`
         * Pull request: [[#90](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/90), [#125](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/125), [#304](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/304)]
-    * `DeleteStockCommand` class
+    * `DeleteStockCommandTest`
         * Pull request: [[#304](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/304)]
-    * `ListOrderCommand`, `ArchiveOrderCommand`, `ArchivePrescriptionCommand` classes
+    * `ListOrderCommandTest`, `ArchiveOrderCommandTest`, `ArchivePrescriptionCommandTest`
         * Pull request: [[#314](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/314)]
    
  
 * Refactor all usage of `stockID` to `stockId` to maintain consistency with `orderId` and `prescriptionId`.
-    * Functionality: Consistency
-    * Justification: Consistency
     * Pull requests: [[#200](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/200)]
 
 
@@ -111,9 +109,7 @@ Code contributed: more than 2400 lines of code. [[RepoSense](https://nus-cs2113-
       . [[#282](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/282)]
     * Sections on `DeleteStockCommand`, `ArchivePrescriptionCommand`, `ArchiveOrderCommand`
       . [[#219](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/219), [#274](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/274)]
-    * Value Proposition 
-      . [[#266](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/266)]
-    * Non Functional Requirements
+    * Value Proposition & Non Functional Requirements
       . [[#266](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/266)]
     * Instructions for Automated Testing
       . [[#317](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/317)]
