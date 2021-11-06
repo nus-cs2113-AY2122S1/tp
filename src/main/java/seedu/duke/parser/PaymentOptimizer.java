@@ -1,3 +1,4 @@
+//@@author leeyikai
 package seedu.duke.parser;
 
 import seedu.duke.Person;
@@ -6,10 +7,15 @@ import seedu.duke.trip.Trip;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-//@@author leeyikai
+
 interface PaymentOptimizer {
     double EPSILON = 0.001;
 
+    /**
+     * Calls different methods that helps to calculate the optimized payments.
+     *
+     * @param trip {@link Trip} that you want to optimize the payments for.
+     */
     static void optimizePayments(Trip trip) {
         ArrayList<Person> listOfPersons = trip.getListOfPersons();
         ArrayList<Double> totalExpenses = new ArrayList<>();
@@ -28,6 +34,12 @@ interface PaymentOptimizer {
         }
     }
 
+    /**
+     * Checks if every {@link Person} in the currently opened {@link Trip} has been paid.
+     *
+     * @param totalExpenses {@link ArrayList} containing the net total expenses of each person.
+     * @return true if every {@link Person} in the current {@link Trip} has been paid.
+     */
     private static boolean checkIfAllPaid(ArrayList<Double> totalExpenses) {
         for (Double i : totalExpenses) {
             if (!isZero(i)) {
@@ -37,6 +49,14 @@ interface PaymentOptimizer {
         return true;
     }
 
+    /**
+     * Finds the next {@link Person} to pay that is being owed money. Returns only when every single {@link Person}
+     * in the {@link Trip} has been paid.
+     *
+     * @param totalExpenses {@link ArrayList} containing the net total expenses of each person.
+     * @param indexOfPersonPaying index of the person who will be paying.
+     * @param listOfPersons list of persons in the currently opened trip
+     */
     private static void findNextPersonToPay(ArrayList<Double> totalExpenses, int indexOfPersonPaying,
             ArrayList<Person> listOfPersons) {
         Double expensesOfCurrentPerson;
@@ -72,6 +92,12 @@ interface PaymentOptimizer {
         }
     }
 
+    /**
+     * Gets the net total of expenses for every {@link Person} in {@link Trip}.
+     *
+     * @param totalExpenses {@link ArrayList} containing the net total of each {@link Person} in the open {@link Trip}.
+     * @param listOfPersons {@link ArrayList} of {@link Person} in the currently open {@link Trip}.
+     */
     private static void getTotalAmountForPerson(ArrayList<Double> totalExpenses, ArrayList<Person> listOfPersons) {
         Double totalAmountPerPerson;
         for (Person person : listOfPersons) {
@@ -90,6 +116,14 @@ interface PaymentOptimizer {
         }
     }
 
+
+    /**
+     * Checks if {@param firstValue} is larger or equal to {@param secondValue}.
+     *
+     * @param firstValue bigger or equal value that we want to compare
+     * @param secondValue smaller or equal value that we want to compare
+     * @return {@link Boolean} that is true if {@param firstValue} is greater or equal to {@param secondValue}
+     */
     private static boolean isMoreThanOrEqual(double firstValue, double secondValue) {
         if (isEqual(firstValue, secondValue)) {
             return true;
@@ -97,12 +131,24 @@ interface PaymentOptimizer {
         return firstValue > secondValue;
     }
 
+    /**
+     * Checks if {@param firstValue} is equal to {@param secondValue}.
+     * @param firstValue first value that we want to check.
+     * @param secondValue second value that we want to check against.
+     * @return true if {@param firstValue} is equals to {@param secondValue}.
+     */
     private static boolean isEqual(double firstValue, double secondValue) {
         double difference = firstValue - secondValue;
         return difference < EPSILON && difference > -EPSILON;
     }
 
+    /**
+     * Checks if {@param value} is zero.
+     * @param value value that we want to check.
+     * @return true if value is 0.
+     */
     private static boolean isZero(double value) {
         return value < EPSILON && value > -EPSILON;
     }
 }
+//@@author
