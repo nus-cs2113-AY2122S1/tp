@@ -12,38 +12,68 @@ import task.Task;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.StreamSupport;
 
 public class Ui {
-    private static final String logo = "NoCap Logo";
+    private static final String BORDER = "==================================================================\n";
+    private static final String LINE = "__________________________________________________________________\n";
+    private static final String CMD_LIST_SEMESTER = "[Commands for LIST/SWITCH SEMESTERS]\n";
+    private static final String CMD_LIST_MODULE = "[Commands for ADD/DELETE/LIST MODULES]\n";
+    private static final String CMD_LIST_ADD = "[ADD Commands]\n";
+    private static final String CMD_LIST_DELETE = "[DELETE Commands]\n";
+    private static final String CMD_LIST_LIST = "[LIST Commands]\n";
+    private static final String CMD_LIST_MARK = "[MARK Commands]\n";
+    private static final String CMD_LIST_EDIT = "[EDIT Commands]\n";
+    private static final String CMD_LIST_SHOW = "[SHOW Commands]\n";
+    private static final String CMD_LIST_EXIT = "[EXIT Commands]\n";
 
     public static void printHelpMessage() {
-        System.out.println("Show help: help \n"
+        System.out.println("[NoCap Command List]\n"
+                + BORDER
+                + "Show NoCap Command List: help \n"
+                + LINE
+                + CMD_LIST_SEMESTER
                 + "Show all semesters: list semesters\n"
                 + "Change semester: switch <semester index>\n"
+                + LINE
+                + CMD_LIST_MODULE
                 + "Add module: add <module name>\n"
                 + "Delete module: delete <module index>\n"
                 + "List all module: list module\n"
+                + LINE
+                + CMD_LIST_ADD
                 + "Add task: /m <module> addtask <description> /by <date> (time)\n"
                 + "Add gradable task:  /m <module> addgradable <description> /by <date> (time) /w <weightage>\n"
-                + "Edit description: /m <module> editdesc <task index> <new description>\n"
-                + "Edit deadline: /m <module> editdate <task index> <new deadline>\n"
+                + "Add class:  /m <module> addclass <day/period/location/comments>\n"
+                + "Add grade: /m <module> addgrade <grade letter>\n"
+                + "Add credit: /m <module> addcredit\n"
+                + LINE
+                + CMD_LIST_DELETE
                 + "Delete task: /m <module> deletetask <sub string>\n"
+                + "Delete class: /m <module> deleteclass <class index>\n"
+                + "Delete grade: /m <module> deletegrade\n"
+                + LINE
+                + CMD_LIST_LIST
+                + "List all tasks: list task (optional argument)\n"
+                + "List module tasks: /m <module> list (optional argument)\n"
+                + LINE
+                + CMD_LIST_MARK
                 + "Mark task as complete: /m <module> done <task index>\n"
                 + "Mark task as incomplete: /m <module> notdone <task index>\n"
                 + "Mark gradable task as complete: /m <module> gradabledone <task index>\n"
                 + "Mark gradable task as incomplete: /m <module> gradablenotdone <task index>\n"
-                + "List module tasks: /m <module> list (optional argument)\n"
-                + "Add class:  /m <module> addclass <day/period/location/comments>\n"
-                + "Delete class: /m <module> deleteclass <class index>\n"
-                + "Add grade: /m <module> addgrade <grade letter>\n"
-                + "Delete grade: /m <module> deletegrade\n"
-                + "Add credit: /m <module> addcredit\n"
+                + LINE
+                + CMD_LIST_EDIT
+                + "Edit description: /m <module> editdesc <task index> <new description>\n"
+                + "Edit deadline: /m <module> editdate <task index> <new deadline>\n"
+                + LINE
+                + CMD_LIST_SHOW
                 + "Show timetable: timetable\n"
-                + "List all tasks: list task (optional argument)\n"
                 + "Show module cap: cap\n"
                 + "Show overall cap: allcap\n"
-                + "Exit NoCap: bye");
+                + LINE
+                + CMD_LIST_EXIT
+                + "Exit NoCap: bye\n"
+                + BORDER);
 
     }
 
