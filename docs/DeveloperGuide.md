@@ -46,7 +46,8 @@
 
 The diagram above shows the high-level design of TourPlanner.
 
-![image](component_diagram.png)
+<img width="307" alt="component_diagram" src="https://user-images.githubusercontent.com/79963329/140464392-5a1536d2-a5d8-4e57-83f4-f4938ede0cfe.PNG">
+
 
 Below is an overview of the main components, and how they interact with each other.
 
@@ -75,7 +76,7 @@ The rest of the app consists of the following components:
 
 The diagram below shows how the components interact with each other if the user inputs the command ```list -c```:
 
-![image](architecture_example.png)
+<img width="538" alt="architecture_example" src="https://user-images.githubusercontent.com/79963329/140464330-b4f9121f-b60f-4203-a814-63b7a6bd97a5.PNG">
 
 <br>
 
@@ -344,8 +345,7 @@ in Step 2, the respective client package will be printed onto the console termin
 
 The following activity diagram summarizes the following steps.
 
-![image](findclient.png)
-(outdated feelsbad)
+<img width="542" alt="findclient" src="https://user-images.githubusercontent.com/79963329/140464449-0f72431b-8ae5-40e4-add1-aef8fed50031.PNG">
 
 <br>
 
@@ -374,7 +374,8 @@ through in the ```ClientPackageList```, the total number of subscribed clients w
 
 The following activity diagram summarizes the following steps.
 
-![image](findtour.png)
+<img width="456" alt="findtour" src="https://user-images.githubusercontent.com/79963329/140464566-248296e9-0e27-4840-9906-5cfdbe57c309.PNG">
+
 
 <br>
 
@@ -403,16 +404,58 @@ in the ```ClientPackageList```, the total number of passengers will be printed o
 
 The following activity diagram summarizes the following steps.
 
-![image](findflight.png)
+<img width="508" alt="findflight" src="https://user-images.githubusercontent.com/79963329/140464579-91ab5042-885b-4e55-877c-ac733bd12ce9.PNG">
 
 <br>
 
-### <u>Design Considerations</u>
+#### <u>Design Considerations</u>
 
 * Alternative: only iterate through the ```Package``` List.
     * Pros: fast querying time.
     * Cons: If the client/tour/flight is not in any package, none of their information can be accessed, including their
       contact number.
+
+### <u>Sort feature</u>
+
+The `sort` feature is used to sort the `ObjectList` (for Client, Tour, Flight and ClientPackage) and list it,
+where `Parser` determines the `ObjectList` and criteria to sort for.
+
+It implements these following types of `sort` commands:
+
+* Client
+    * `sort -c /n`: Sorts alphabetically by client name
+    * `sort -c /id`: Sorts alphabetically by client id
+* Flight
+    * `sort -f /d`: Sorts in ascending order of date and time for departure flight
+    * `sort -f /r`: Sorts in ascending order of date and time for return flight
+    * `sort -f /id`: Sorts alphabetically by flight id
+* Tour
+    * `sort -t /id`: Sorts alphabetically by tour id
+    * `sort -t /p`: Sorts in ascending order of tour price
+
+Given below is an example usage of `sort -c /id`:
+
+Here is a (partial) sequence diagram of the above user input:
+![SortClientCommand](https://user-images.githubusercontent.com/70316271/140540865-4e29204d-d501-4968-b69a-b7fbbdfe399c.png)
+
+**Step 1**: After adding a few clients to the database, user inputs `sort -c /id`. This command is passed to `parse()`
+method in the `Parser` class.
+
+**Step 2**: Based on the user input, `parse()` identifies that it is of type `sort` command and calls `ParseSort()`.
+`ParseSort()` will then return `SortClientCommand` based on the prefix `-c`.
+
+**Step 3**: Then, `execute()` method in `SortClientCommand` is called, where it gets the sorted `ArrayList<>` of
+`clientIds`.
+
+**Step 4** In `UI`, `showSortedClientById()` is called, with `clientIds` passed in. The method iterates through all the
+client IDs. For each iteration, finds the corresponding `Client` with `getClientById()` and prints out the `Client`
+and their details.
+
+Depending on the type of sort command being called, these command types will be returned:
+
+* `sort -c`: `SortClientCommand`
+* `sort -f`: `SortFlightCommand`
+* `sort -t`: `SortTourCommand`
 
 <br>
 
@@ -437,7 +480,7 @@ After the user typed in an input into the console terminal and presses 'Enter':
 
 The diagram below shows the class diagram of the Ui component, in relation with other major components:
 
-(insert image)
+<img width="289" alt="ui" src="https://user-images.githubusercontent.com/79963329/140464630-a8a8000c-fb45-44af-9cc2-d146ae5ea5c8.PNG">
 
 <br>
 
