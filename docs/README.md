@@ -1,4 +1,5 @@
 ![Ha(ppy)Bit Logo](Display_Images/HappyBit_logo.png)
+_Ha(ppy)Bit logo_ | Made with Canva
 
 # Howdy! This is Ha(ppy)Bit.
 _Ha(ppy)Bit_ is a desktop app aimed to **empower students** to achieve their
