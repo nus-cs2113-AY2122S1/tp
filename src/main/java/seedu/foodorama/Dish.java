@@ -137,8 +137,7 @@ public class Dish implements Comparable<Dish> {
             }
             if (Double.isInfinite(inputWastage) | Double.isNaN(inputWastage)) {
                 throw new FoodoramaException(UI.printNumericalInputInvalid("dish waste"));
-            }
-            else if (inputWastage > 10000) {
+            } else if (inputWastage > 10000) {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printDishWasteValueHigh(dishName);
                 confirmAdd = in.nextLine();
