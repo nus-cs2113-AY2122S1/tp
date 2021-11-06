@@ -8,23 +8,28 @@ done in an efficient manner.
 
 - [Quick Start](#quick-Start)
 - [Features](#features)
-    - [Adding an item: `add`](#adding-an-item)
-        - [Adding an audio item: `add a`](#adding-an-audio-item)
-        - [Adding a book item: `add b`](#adding-a-book-item)
-        - [Adding a magazine item: `add m`](#adding-a-magazine-item)
-        - [Adding a video item: `add v`](#adding-a-video-item)
-        - [Adding a miscellaneous item: `add i`](#adding-a-miscellaneous-item)
+    - [Add an item: `add`](#add-an-item)
+        - [Add an audio item: `add a`](#add-an-audio-item)
+        - [Add a book item: `add b`](#add-a-book-item)
+        - [Add a magazine item: `add m`](#add-a-magazine-item)
+        - [Add a video item: `add v`](#add-a-video-item)
+        - [Add a miscellaneous item: `add i`](#add-a-miscellaneous-item)
     - [List items: `list`](#list-items)
-    - [Listing items that are due today: `deadline today`](#listing-items-that-are-due-today)
-    - [Listing items that are overdue: `deadline overdue`](#listing-items-that-are-overdue)
+    - [List items that are due today: `deadline today`](#list-items-that-are-due-today)
+    - [List items that are overdue: `deadline overdue`](#list-items-that-are-overdue)
     - [Search items: `search`](#search-items)
     - [Reserve items: `res`](#reserve-items)
     - [Un-reserve items: `unres`](#unreserve-items)
     - [Loan items: `loan`](#loan-items)
     - [Return items: `return`](#return-items)
-    - [Removing an item: `rm`](#removing-an-item)
-    - [Editing an item: `edit`](#editing-an-item)
-    - [Exiting the program: `exit`](#exiting-the-program)
+    - [Edit an item: `edit`](#edit-an-item)
+    - [Remove an item: `rm`](#remove-an-item)
+    - [Display library information: `info`](#display-library-information)
+      - [Display all information: `info all`](#display-all-information)
+      - [Display information by item category: `info category`](#display-information-by-item-category)
+      - [Display information by item status: `info status`](#display-information-by-item-status)
+    - [Display valid user commands: `help`](#display-valid-user-commands)
+    - [Exit the program: `exit`](#exit-the-program)
 - [Data Storage](#data-storage)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
@@ -69,11 +74,11 @@ e.g. For `add b t/TITLE i/ID ...`, entering `add a t/The Great Gatsbyi/0125` is 
 > ⚠️ Command word must be in lower case
 e.g. For `add b t/TITLE i/ID ...`, entering `ADD a t/The Great Gatsby i/0125` is invalid
 
-### Adding an item
-Add a new item to the catalogue. Items can fall under one of five categories: Audio, Books, Magazines, Videos and Miscellaneous.
+### Add an item
+Add a new item to the catalogue. Items can fall under one of four categories: Audio, Books, Magazines, Videos
 
-#### Adding an audio item
-Add a new audio item to the catalogue.
+#### Add an audio item
+Add a new audio item to the catalogue
 
 Format: `add a t/TITLE i/ID a/ARTIST d/DURATION`
 
@@ -90,8 +95,9 @@ Adds an audio item to the catalogue titled `Thriller` with ID of `5920` by `Mich
   [A] 5920 | AVAILABLE | Thriller | Michael Jackson | 42:16
 ```
 
-#### Adding a book item
-Add a new book item to the catalogue.
+
+#### Add a book item
+Add a new book item to the catalogue
 
 Format: `add b t/TITLE i/ID a/AUTHOR`
 
@@ -108,8 +114,8 @@ Adds a book item to the catalogue titled `To Kill a Mockingbird` with an ID of `
   [B] 2551 | AVAILABLE | To Kill a Mockingbird | Harper Lee
 ```
 
-#### Adding a magazine item
-Add a new magazine item to the catalogue.
+#### Add a magazine item
+Add a new magazine item to the catalogue
 
 Format: `add m t/TITLE i/ID p/PUBLISHER e/EDITION`
 
@@ -126,10 +132,10 @@ Adds a magazine item to the catalogue titled `Time Magazine` with an ID of `5872
   [M] 58720a | AVAILABLE | Time Magazine | Time USA | oct252021
 ```
 
-#### Adding a video item
-Add a new video item to the catalogue.
+#### Add a video item
+Add a new video item to the catalogue
 
-Format: `add v t/TITLE i/ID p/PUBLISHER e/DURATION`
+Format: `add v t/TITLE i/ID p/PUBLISHER d/DURATION`
 
 ##### Usage Example: 
 
@@ -144,8 +150,8 @@ Adds a video item to the catalogue titled `Casino Royale` with an ID of `095680`
   [V] 095680 | AVAILABLE | Casino Royale | Sony Pictures | 144 minutes
 ```
 
-#### Adding a miscellaneous item
-For any other item that cannot be categorised into the above-mentioned ones, they can be added using this command.
+#### Add a miscellaneous item
+For any other item that cannot be categorised into the above-mentioned ones, they can be added using this command
 
 Format: `add i t/TITLE i/ID`
 
@@ -180,8 +186,8 @@ Format: `list`
   ========================================
 ```
 
-### Listing items that are due today
-List the loaned items that need to be returned today.
+### List items that are due today
+List the loaned items that need to be returned today
 
 Format: `deadline today`
 
@@ -197,8 +203,8 @@ Format: `deadline today`
   ========================================
 ```
 
-### Listing items that are overdue
-List the loaned items that already overdue but haven't been returned yet.
+### List items that are overdue
+List the loaned items that already overdue but have not been returned yet
 
 Format: `deadline overdue`
 
@@ -214,8 +220,8 @@ Format: `deadline overdue`
   ========================================
 ```
 
-### Listing items that are due on a specific date
-List the loaned items that are due on a specific date given in the input.
+### List items that are due on a specific date
+List the loaned items that are due on a specific date given in the input
 
 > ℹ️ `DUE_DATE` must be in the format of `dd-mm-yyyy` in order to be valid
 
@@ -234,7 +240,6 @@ List the items with a due date of `03 November 2021`
   [M] 58720a | LOANED (Sam TILL 03-11-2021) | Time Magazine | Time USA | oct252021
   ========================================
 ```
-
 
 ### Search items
 Search items by ID, Title, Status, and Category.
@@ -263,7 +268,7 @@ Searches the catalogue for `Books` or items that are `Loaned`
 ```
 
 ### Reserve items
-Reserves an item for a specific person.
+Reserve an item for a specific person.
 
 Format: `res i/ID u/USERNAME`
 
@@ -343,15 +348,27 @@ Mark item with ID of `2551` which was previously `LOANED` as `AVAILABLE`
   [B] 2551 | AVAILABLE | To Kill a Mockingbird | Harper Lee
 ```
 
-### Editing an item
-Edits an attribute of an existing item in the catalogue
+### Edit an item
+Edit the attributes of an existing item in the catalogue
 
-Format: `edit ID MARKER/new attribute`
+> ℹ️ Multiple attributes can be inputted, in any order.<br> 
+e.g. For an existing book with ID `123`, title `Harry Potter` and author `JK Rowling`, it is possible to edit both the 
+title and author simultaneously using `edit 123 t/NEW TITLE a/NEW AUTHOR`. 
 
-* For Book, valid markers are: t/TITLE, i/ID and a/AUTHOR
-* For Audio, valid markers are: t/TITLE, i/ID, a/ARTIST and d/DURATION
-* For Magazine, valid markers are: t/TITLE, i/ID, p/PUBLISHER and e/EDITION
-* For Video, valid markers are: t/TITLE, i/ID, p/PUBLISHER and d/DURATION
+> ℹ️ Attributes cannot be changed to the same existing attribute.<br>
+e.g. If the title of an existing book with ID 123 is already `Harry Potter`, calling `edit 123 t/Harry Potter` will 
+> throw a warning. 
+
+> ℹ️ Trying to change the id of the item into an id that is already associated with another existing item in the
+> library will throw a warning and not be allowed. 
+
+Format: `edit ID KEY/ATTRIBUTE`
+
+* For Book, valid key/attribute(s) are: t/TITLE, i/ID and a/AUTHOR
+* For Audio, valid key/attribute(s) are: t/TITLE, i/ID, a/ARTIST and d/DURATION
+* For Magazine, valid key/attribute(s) are: t/TITLE, i/ID, p/PUBLISHER and e/EDITION
+* For Video, valid key/attribute(s) are: t/TITLE, i/ID, p/PUBLISHER and d/DURATION
+* For Miscellaneous item, valid key/attribute(s) are: t/TITLE and i/ID 
 
 ##### Usage Example:
 
@@ -361,14 +378,17 @@ Edits the title of an item with ID 123 to Harry Potter
 
 ##### Expected Output:
 ```
+E.g. 
   [B] 123 | AVAILABLE | The Hunger Games | Suzanne Collins
-> edit 123 t/Harry Potter
+```
+```
+> edit 123 t/Harry Potter a/JK Rowling
   (+) Edited item details:
-  [B] 123 | AVAILABLE | Harry Potter | Suzanne Collins
+  [B] 123 | AVAILABLE | Harry Potter | JK Rowling
 ```
 
-### Removing an item
-Removes an existing item from the catalogue.
+### Remove an item
+Remove an existing item from the catalogue.
 
 Format: `rm ID`
 
@@ -386,10 +406,147 @@ Removes item with ID of `095680` from the catalogue
   [V] 095680 | AVAILABLE | Casino Royale | Sony Pictures | 144 minutes
 ```
 
-### Exiting the program
-Exits the program.
+### Display library information
+Display library information: total number of items in library, number of items by category and
+number of items by status.
+
+#### Display all information
+Display all library information
+
+Format: `info all`
+
+##### Usage Example:
+
+`info all`
+
+Expected output:
+```
+E.g.
+  [B] 123 | AVAILABLE | Harry Potter | JK Rowling
+  [A] 124 | LOANED (John TILL 07-11-2021) | CD | Michael Jackson | 2h
+```
+```
+> info all
+  (+) Total Number of Items in Library: 2
+
+  (+) Library Information by Item Category
+  ========================================
+  (+) Number of Audio Items: 1
+  (+) Number of Book Items: 1
+  (+) Number of Magazine Items: 0
+  (+) Number of Video Items: 0
+  (+) Number of Miscellaneous Items: 0
+
+  (+) Library Information by Item Status
+  ========================================
+  (+) Number of Available Items: 1
+  (+) Number of Loaned Items: 1
+  (+) Number of Reserved Items: 0
+```
+
+#### Display information by item category 
+Display total number of items in the library and the breakdown of items by category. 
+
+Format: `info category`
+
+##### Usage Example:
+
+`info category`
+
+Expected output:
+```
+E.g.
+  [B] 123 | AVAILABLE | Harry Potter | JK Rowling
+  [A] 124 | LOANED (John TILL 07-11-2021) | CD | Michael Jackson | 2h
+```
+```
+> info category
+  (+) Total Number of Items in Library: 2
+
+  (+) Library Information by Item Category
+  ========================================
+  (+) Number of Audio Items: 1
+  (+) Number of Book Items: 1
+  (+) Number of Magazine Items: 0
+  (+) Number of Video Items: 0
+  (+) Number of Miscellaneous Items: 0
+```
+
+#### Display information by item status 
+Display total number of items in the library and the breakdown of items by status.
+
+Format: `info status`
+
+##### Usage Example:
+
+`info status`
+
+Expected output:
+```
+E.g.
+  [B] 123 | AVAILABLE | Harry Potter | JK Rowling
+  [A] 124 | LOANED (John TILL 07-11-2021) | CD | Michael Jackson | 2h
+```
+```
+> info status
+  (+) Total Number of Items in Library: 2
+
+  (+) Library Information by Item Status
+  ========================================
+  (+) Number of Available Items: 1
+  (+) Number of Loaned Items: 1
+  (+) Number of Reserved Items: 0
+```
+
+### Display valid user commands
+Display a list of valid user commands for Libmgr. 
+
+Format: `help`
+
+##### Usage Example:
+
+`help`
+
+Expected output: 
+```
+> help
+  ** Words in `UPPER_CASE` are parameters to be supplied by you
+  ** Parameters can be in any order
+  ** Parameters must be separated with a space
+  (+) Add a new audio item: add a t/TITLE i/ID a/ARTIST d/DURATION
+  (+) Add a new book item: add b t/TITLE i/ID a/AUTHOR
+  (+) Add a new magazine item: add m t/TITLE i/ID p/PUBLISHER e/EDITION
+  (+) Add a new video item: add v t/TITLE i/ID p/PUBLISHER d/DURATION
+  (+) Add a new miscellaneous item: add i t/TITLE i/ID
+  (+) List out all items: list
+  (+) List out loaned items due today: deadline today
+  (+) List out loaned items that are overdue: deadline overdue
+  (+) Search items by ID, title, status or category: search [t|i|s|c]/ATTRIBUTE
+  (+) Reserve an item: res i/ID u/USERNAME
+  (+) Unreserve an item: unres ID
+  (+) Loan out an item: loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)
+  (+) Return a loaned item: return ID
+  (+) Edit details of an existing audio item: edit ID [t|i|a|d]/ATTRIBUTE
+  (+) Edit details of an existing book item: edit ID [t|i|a]/ATTRIBUTE
+  (+) Edit details of an existing magazine item: edit ID [t|i|p|e]/ATTRIBUTE
+  (+) Edit details of an existing video item: edit ID [t|i|p|d]/ATTRIBUTE
+  (+) Edit details of an existing miscellaneous item: edit ID [t|i]/ATTRIBUTE
+  (+) Remove an existing item: rm ID
+  (+) Display all library information: info all
+  (+) Display library information by item category: info category
+  (+) Display library information by item status: info status
+  (+) Get a list of valid user commands: help
+  (+) Exit the program: exit
+```
+
+### Exit the program
+Exit the program.
 
 Format: `exit`
+
+##### Usage Example:
+
+`exit`
 
 ##### Expected Output:
 ```
@@ -426,15 +583,17 @@ When `libmgr` detects errors or corruptions in `data.json` it will overwrite the
 |Add (Audio)|Add an audio item to the catalogue|`add a t/TITLE i/ID a/ARTIST d/DURATION`<br>E.g. `add a t/Thriller i/5920 a/Michael Jackson d/42:16`|
 |Add (Book)|Add a book item to the catalogue|`add b t/TITLE i/ID a/AUTHOR`<br>E.g. `add b t/To Kill a Mockingbird i/2551 a/Harper Lee`|
 |Add (Magazine)|Add a magazine item to the catalogue|`add m t/TITLE i/ID p/PUBLISHER e/EDITION`<br>E.g. `add m t/Time Magazine i/58720a p/Time USA e/oct252021`|
-|Add (Video)|Add a video item to the catalogue|`add v t/TITLE i/ID p/PUBLISHER e/DURATION` <br> E.g. `add v t/Casino Royale i/095680 p/Sony Pictures d/144 minutes`|
+|Add (Video)|Add a video item to the catalogue|`add v t/TITLE i/ID p/PUBLISHER d/DURATION` <br> E.g. `add v t/Casino Royale i/095680 p/Sony Pictures d/144 minutes`|
 |Add (Miscellaneous)|Add an item that cannot be categorised under any type|`add i t/TITLE i/ID` <br> E.g. `add i t/Scrabble i/0513895`|
-|Deadline|View items due to be returned|`deadline [overdue\|today]` <br> E.g. `deadline today`|
-|Edit|Edit existing items within the catalogue|`edit ID MARKER/new attribute` <br> E.g. `edit 123 t/Harry Potter`|
-|Exit|Quit the program|`exit`|
+|Deadline|View items due to be returned|`deadline [overdue/today]` <br> E.g. `deadline today`|
+|Edit|Edit existing items within the catalogue|`edit ID KEY/ATTRIBUTE` <br> E.g. `edit 123 t/Harry Potter a/JK Rowling`|
+|Exit|Exit the program|`exit`|
+|Help|Display a list of valid user commands|`help`|
+|Info|Display library information|`info [all/category/status]` <br> E.g. `info all`|
 |List (all items)|Lists all items within the catalogue|`list`|
 |Loan|Loan out an item to someone|`loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)` <br> E.g. `loan i/2551 d/12-11-2021 u/johnsmith`|
 |Remove|Remove an item from the catalogue|`rm ID` <br> E.g. `rm 095680`|
 |Reserve|Reserve an item for a specific person|`res i/ID u/USERNAME` <br> E.g. `res i/2551 u/johnsmith`|
 |Return|Mark an item as returned and available for loan again|`return ID` <br> E.g. `return 2551`|
-|Search|Search for items in the catalogue based on their attributes|`search MARKER/attribute` <br> E.g. `search c/Book t/Junglebook`|
+|Search|Search for items in the catalogue based on their attributes|`search KEY/ATTRIBUTE` <br> E.g. `search c/Book t/Junglebook`|
 |Un-reserve|"Un-reserve" an item and mark as available again|`unres ID`<br> E.g. `unres 2551`|

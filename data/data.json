@@ -1,10 +1,18 @@
 {
-  "audio" : [ ],
+  "audio" : [ {
+    "title" : "CD",
+    "id" : "124",
+    "status" : "LOANED",
+    "loanee" : "John",
+    "dueDate" : "07-11-2021",
+    "artist" : "Michael Jackson",
+    "duration" : "2h"
+  } ],
   "book" : [ {
-    "title" : "The Hunger Games",
+    "title" : "Harry Potter",
     "id" : "123",
     "status" : "AVAILABLE",
-    "author" : "Collins"
+    "author" : "JK Rowling"
   } ],
   "item" : [ ],
   "magazine" : [ ],

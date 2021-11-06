@@ -37,12 +37,12 @@ public class InfoCommand extends Command {
     }
 
     /**
-     * Calculates and displays library statistics by item category.
+     * Calculates and displays library information by item category.
      *
      * @param ui Object that handles user IO
      * @param catalogue Object that encapsulates the library catalogue
      */
-    public void calcCategoryStats(TextUI ui, Catalogue catalogue) {
+    public void calcCategoryInfo(TextUI ui, Catalogue catalogue) {
         ArrayList<Item> currentCatalogue = catalogue.getAllItems();
         long miscellaneousNum = 0;
         long audioNum = 0;
@@ -63,7 +63,7 @@ public class InfoCommand extends Command {
             }
         }
         // Print out numbers
-        ui.print("  (+) Statistics of Library by Item Category");
+        ui.print("  (+) Library Information by Item Category");
         ui.print(DIVIDER);
         ui.print("  (+) Number of Audio Items: " + audioNum);
         ui.print("  (+) Number of Book Items: " + bookNum);
@@ -74,12 +74,12 @@ public class InfoCommand extends Command {
     }
 
     /**
-     * Calculates and displays library statistics by item status.
+     * Calculates and displays library information by item status.
      *
      * @param ui Object that handles user IO
      * @param catalogue Object that encapsulates the library catalogue
      */
-    public void calcStatusStats(TextUI ui, Catalogue catalogue) {
+    public void calcStatusInfo(TextUI ui, Catalogue catalogue) {
         ArrayList<Item> currentCatalogue = catalogue.getAllItems();
         long availableNum = 0;
         long loanedNum = 0;
@@ -94,7 +94,7 @@ public class InfoCommand extends Command {
             }
         }
         // Print out numbers
-        ui.print("  (+) Statistics of Library by Item Status");
+        ui.print("  (+) Library Information by Item Status");
         ui.print(DIVIDER);
         ui.print("  (+) Number of Available Items: " + availableNum);
         ui.print("  (+) Number of Loaned Items: " + loanedNum);
@@ -129,17 +129,17 @@ public class InfoCommand extends Command {
             switch (argsList[1]) {
             case COMMAND_WORD_ALL:
                 calcTotalItems(ui, catalogue);
-                calcCategoryStats(ui, catalogue);
+                calcCategoryInfo(ui, catalogue);
                 ui.print("");
-                calcStatusStats(ui, catalogue);
+                calcStatusInfo(ui, catalogue);
                 break;
             case COMMAND_WORD_CATEGORY:
                 calcTotalItems(ui, catalogue);
-                calcCategoryStats(ui, catalogue);
+                calcCategoryInfo(ui, catalogue);
                 break;
             case COMMAND_WORD_STATUS:
                 calcTotalItems(ui, catalogue);
-                calcStatusStats(ui, catalogue);
+                calcStatusInfo(ui, catalogue);
                 break;
             default:
                 throw new LibmgrException(INFO_INVALID_FORMAT);
