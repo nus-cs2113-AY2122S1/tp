@@ -161,7 +161,7 @@ class AssessmentListTest {
             command7.checkArgument();
             command7.execute(classList, ui, storage);
         } catch (Exception e) {
-            assertEquals("Invalid weightage. Total new weightage exceeds 100%.", e.getMessage());
+            assertEquals("Invalid weightage. Total new weightage exceeds 100.00%.", e.getMessage());
         }
     }
 
@@ -183,7 +183,7 @@ class AssessmentListTest {
             command2.checkArgument();
             command2.execute(classList, ui, storage);
         } catch (Exception e) {
-            assertEquals("Invalid maximum marks. Maximum marks must be larger than 0 (inclusive)", e.getMessage());
+            assertEquals("Invalid maximum marks. Maximum marks must be larger than 0.00 (inclusive)", e.getMessage());
         }
     }
 
@@ -303,7 +303,7 @@ class AssessmentListTest {
             command3.checkArgument();
             command3.execute(classList, ui, storage);
         } catch (Exception e) {
-            assertEquals("Invalid new weightage. Total new weightage exceeds 100%.", e.getMessage());
+            assertEquals("Invalid new weightage. Total new weightage exceeds 100.00%.", e.getMessage());
         }
     }
 
@@ -331,7 +331,8 @@ class AssessmentListTest {
             command3.checkArgument();
             command3.execute(classList, ui, storage);
         } catch (Exception e) {
-            assertEquals("Invalid new maximum marks. Maximum marks must be larger than 0 (inclusive)", e.getMessage());
+            assertEquals("Invalid new maximum marks. "
+                    + "Maximum marks must be larger than 0.00 (inclusive)", e.getMessage());
         }
     }
 

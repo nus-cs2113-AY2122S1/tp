@@ -48,7 +48,9 @@ public class StudentDeserializer extends StorageDeserializer implements JsonDese
         JsonElement commentJson = jsonObject.get(MEMBER_COMMENT);
         if (commentJson != null) {
             String comment = commentJson.getAsString();
-            student.setComment(comment);
+            if (Parser.isValueValid(comment)) {
+                student.setComment(comment);
+            }
         }
 
         GsonBuilder gsonBuilder = new GsonBuilder();
