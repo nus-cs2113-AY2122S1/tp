@@ -558,9 +558,57 @@ These instructions only provide a starting point for testers to work on; testers
 
       Expected: No module will be added. Error message indicating wrong flags is shown, together with the correct format for `add` command.
    
-### Adding a mapping
+### Adding a mapping (rmb to verify the commands with actual test case)
 
-### Search for a mapping
+   1. Adding a mapping for a selected university and module
+      1. Prerequisites: Module and University has been added and potential mapping is available via `searchmap` command. Run the command `add /uni 75` and `add /mod 77`
+      2. Test case: `add /map 75 1`
+
+         Expected: Mapping will be added to the Selected University List under the respective university. Success message is shown. Run the command `list /suni` to verify.
+   
+   2. Adding a mapping to an unselected university and selected module. 
+      1. Prerequisites: Delete the data folder and restart the program. Run the command `add /mod 34`
+      2. Test case: 
+      
+         Expected:
+   
+   3. Adding a non-existent mapping to a university. 
+      1. Prerequisites: Module and University has been added and potential mapping is available via `searchmap` command. Run the command `add /uni 75`
+      2. Test Case: `add /map 75 1`
+      
+         Expected: No mapping wil be added. Error message indicating invalid mapping is shown.
+       
+   4. Dealing with missing argument.
+       1. Test case: `add /map`
+
+          Expected: No mapping will be added. Error message indicating missing arguments is shown, together with the correct format for `add` command.
+
+       2. Test case: `add`
+
+          Expected: No module will be added. Error message indicating missing arguments is shown, together with the correct format for `add` command.
+      
+   5. Dealing with incorrect flag.
+       1. Test case: `add /mmap 34 3`
+
+          Expected: No module will be added. Error message indicating wrong flags is shown, together with the correct format for `add` command.
+
+### Searching for a mapping (rmb to verify test case)
+
+1. Searching for a mapping for a university with mappings to user selected modules.
+   1. Prerequisite: Modules must be added to the Selected Module List with the `add` command. Run the command `add /mod 234`.
+   2. Test case: `searchmap 75`
+
+      Expected: List of potential mappings for the particular university is displayed.
+   3. Test case: `searchmap 0`
+   
+      Expected: No mappings will be listed. Error message indicating invalid university is shown. 
+   4. Test case: `searchmap 81`
+
+      Expected: No mappings will be listed. Error message indicating invalid university is shown.
+2. Dealing with missing arguments.
+   1. Test case: `searchmap`
+   
+      Expected: No mappings will be listed. Error message indicating missing arguments is shown, together with the correct format for `searchmap` command.
 
 ### Removing a university
 
@@ -664,7 +712,39 @@ These instructions only provide a starting point for testers to work on; testers
 
        Expected: No module will be removed. Error message indicating wrong flags is shown, together with the correct format for `remove` command.
 
-### Removing a mapping
+### Removing a mapping (rmb to verify test case with actual data)
+
+1. Removing a mapping for a selected university and module
+    1. Prerequisites: Module and University has been removed and potential mapping is available via `searchmap` command. Run the command `remove /uni 75` and `remove /mod 77`
+    2. Test case: `remove /map 75 1`
+
+       Expected: Mapping will be removed to the Selected University List under the respective university. Success message is shown. Run the command `list /suni` to verify.
+
+2. Removing a non-existent mapping from a selected university.
+    1. Prerequisites: Delete the data folder and restart the program. Run the command `add /uni 34`
+    2. Test case: `remove /map 34 2`
+
+       Expected: No mapping is removed. Error message indicating invalid mapping is shown.
+
+3. Removing a mapping from an unselected university.
+    1. Prerequisites: Delete the data folder and restart the program.
+    2. Test case: `remove /map 34 2`
+
+       Expected: No mapping is removed. Error message indicating university not selected is shown.
+
+4. Dealing with missing argument.
+    1. Test case: `remove /map`
+
+       Expected: No mapping will be removed. Error message indicating missing arguments is shown, together with the correct format for `remove` command.
+
+    2. Test case: `remove`
+
+       Expected: No module will be removed. Error message indicating missing arguments is shown, together with the correct format for `remove` command.
+
+5. Dealing with incorrect flag.
+    1. Test case: `remove /mmap 34 3`
+
+       Expected: No module will be removed. Error message indicating wrong flags is shown, together with the correct format for `remove` command.
 
 ### Saving data
 
