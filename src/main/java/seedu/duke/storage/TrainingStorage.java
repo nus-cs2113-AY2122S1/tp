@@ -20,6 +20,8 @@ public class TrainingStorage {
 
     static String duplicateTrainingErrorExcelMessage = "Duplicates training name found in CCA Trainings CSV."
             + "Please fix this before running the program again.";
+    static  String EmptyTrainingErrorExcelMessage = "Empty fields found in CCA Trainings CSV."
+            + "Please fix this before running the program again.";
 
     /**
      * This method sets up the cca trainings csv file. It firsts tries to find if the file exists in the current
@@ -53,12 +55,45 @@ public class TrainingStorage {
      */
     private static void verifyTrainingDetails(File ccaTrainingFile) {
         try {
+            verifyTrainingEmpty(ccaTrainingFile);
             verifyTrainingDuplicates(ccaTrainingFile);
         } catch (InvalidAddTrainingException e) {
             System.out.println(e.getMessage());
             System.exit(0);
         }
     }
+
+    /**
+     * Verifies the training schedule file details are non-empty.
+     *
+     * @param ccaTrainingFile
+     */
+    private static void verifyTrainingEmpty(File ccaTrainingFile) throws InvalidAddTrainingException {
+        String name;
+        String venue;
+        String time;
+        try {
+            Scanner trainingScanner = new Scanner(ccaTrainingFile);
+            trainingScanner.nextLine();
+            while (trainingScanner.hasNextLine()) {
+                String fullTrainingDetails = trainingScanner.nextLine();
+                assert fullTrainingDetails != null : "fullTrainingDetails should not be empty";
+                String[] trainingDetails = fullTrainingDetails.split("\\,", 3);
+                name = trainingDetails[0].toUpperCase();
+                venue = trainingDetails[1].toUpperCase();
+                time = trainingDetails[2].toUpperCase();
+                boolean isEmptyName = (name.trim().isEmpty()) || name.equals("");
+                boolean isEmptyVenue = (venue.trim().isEmpty()) || venue.equals("");
+                boolean isEmptyTime = (time.trim().isEmpty()) || time.equals("");
+                if (isEmptyVenue || isEmptyName || isEmptyTime) {
+                    throw new InvalidAddTrainingException(EmptyTrainingErrorExcelMessage);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("file not found!");
+        }
+    }
+
 
     /**
      * Verifies that there are o duplicate names in training schedule.
@@ -69,12 +104,12 @@ public class TrainingStorage {
         String trainingName;
         List<String> pendingTrainingName = new ArrayList<String>();
         try {
-            Scanner memberScanner = new Scanner(ccaTrainingFile);
-            memberScanner.nextLine();
-            while (memberScanner.hasNextLine()) {
-                String fullMemberDetails = memberScanner.nextLine();
+            Scanner trainingScanner = new Scanner(ccaTrainingFile);
+            trainingScanner.nextLine();
+            while (trainingScanner.hasNextLine()) {
+                String fullMemberDetails = trainingScanner.nextLine();
                 String[] memberDetails = fullMemberDetails.split("\\,", 4);
-                trainingName = memberDetails[0];
+                trainingName = memberDetails[0].toUpperCase();
                 pendingTrainingName.add(trainingName);
             }
         } catch (FileNotFoundException e) {
@@ -114,17 +149,15 @@ public class TrainingStorage {
         String time;
         try {
             Scanner trainingScanner = new Scanner(trainingFile);
-            trainingScanner.nextLine(); //skips the first header row
+            trainingScanner.nextLine();
             int index = 1;
             while (trainingScanner.hasNextLine()) {
                 String fullTrainingDetails = trainingScanner.nextLine();
                 assert fullTrainingDetails != null : "fullTrainingDetails should not be empty";
-                //System.out.println(fullTrainingDetails);
                 String[] trainingDetails = fullTrainingDetails.split("\\,", 3);
-
-                name = trainingDetails[0]; //used this to prevent magic numbers
-                venue = trainingDetails[1];
-                time = trainingDetails[2];
+                name = trainingDetails[0].toUpperCase();
+                venue = trainingDetails[1].toUpperCase();
+                time = trainingDetails[2].toUpperCase();
                 TrainingSchedule training = new TrainingSchedule(name, venue, time);
                 training.setTrainingIndex(index);
                 trainings.addTrainingSchedule(training);

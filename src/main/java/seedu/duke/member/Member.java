@@ -20,9 +20,9 @@ public class Member {
     protected int index;
 
     /* Regex for validity check of member details */
-    String validStudentNameRegex = "^[A-Z ]+$";
+    String validStudentNameRegex = "^[a-zA-ZA-Z ]+$";
     String validStudentNumberRegex = "^[A]\\d{7}[A-Z]$";
-    String validGenderRegex = "^[M|F]$";
+    String validGenderRegex = "^[M|F|m|f]$";
     String validPhoneNumberRegex = "^[8|9]\\d{7}$";
 
     /* Error message to throw */
