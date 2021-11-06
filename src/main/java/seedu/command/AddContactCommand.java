@@ -102,7 +102,7 @@ public class AddContactCommand extends Command {
     }
 
     /**
-     * This method returns true if the input string is equal to the similar field of a saved contact indicating a
+     * Returns true if the input string is equal to the similar field of a saved contact indicating a
      * duplicate.
      *
      * @param input String of field that user has input to add
