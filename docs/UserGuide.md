@@ -21,7 +21,7 @@ Each computer will have their own CLI, such as the Windows' Powershell and the m
 This guide's purpose is to help users like you understand how to use the Traveller application to its fullest potential.
 
 For users who can't wait to start using Traveller, see [here](#1-quick-start) for a quick guide on how to set it up.
-The [command summary](#4-command-summary) provides you with a summary of the various functionalities currently 
+The [command summary](#5-command-summary) provides you with a summary of the various functionalities currently 
 supported by Traveller too.
 
 For users who are seeking to understand the full functionality of Traveller, details, along with tips and tricks, of 
@@ -56,7 +56,8 @@ each functionality are explained in the [features](#2-features) section.
   * [2.13. shortest-cost](#213-least-cost-shortest-cost)
   * [2.14. exit](#214-exiting-the-program-exit)
 * [3. FAQ](#3-faq)
-* [4. Command Summary](#4-command-summary)
+* [4. Supported Countries Summary](#4-supported-countries-summary)
+* [5. Command Summary](#5-command-summary)
 
 <br/>
 
@@ -84,7 +85,7 @@ This section provides a guide on how to get Traveller up and running on your com
 ## 2. Features
 This section provides details for all commands that Traveller supports.
 
-For a quick summary of all commands, please click [here](#4-command-summary) instead.
+For a quick summary of all commands, please click [here](#5-command-summary) instead.
 
 > ![](documentationPics/info.png) As Traveller is a CLI based app, what and how you type your commands is *very important*.
 > Each command has its specific format so that Traveller can understand what you want to do!
@@ -105,7 +106,7 @@ Creates a new trip.
 #### Format: `new TRIP_NAME /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
    * The name of the trip must be one word. 
    * Keywords `/from` and `/to` must be included before the START and END destinations respectively.
-   * `START` and `END` destinations must be countries included in *flightData/time.txt* or *flightData/cost.txt*.
+   * `SOURCE_COUNTRY` and `DESTINATION_COUNTRY` destinations must be [supported countries codes](#4-supported-countries-summary).
 
 #### Usage Example:
 
@@ -262,15 +263,25 @@ ____________________________________________________________
 <br/>
 
 ### 2.9 Edit a trip: `edit`
-Edits an existing trip from the trip list.
+Edits any main aspect about an existing trip.
 
-#### Format: `edit TRIP_NAME /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
-   * Format is similar to `new`.
+#### Format: `edit TRIP_NAME /name NEW_TRIP_NAME /from NEW_SOURCE_COUNTRY /to NEW_DESTINATION_COUNTRY`
+
+   * If you want to edit multiple aspects, the format order must be as shown above.
+   * If you only want to edit a trip's name : `edit TRIP_NAME /name NEW_TRIP_NAME`.
+   * If you only want to edit a trip's source country : `edit TRIP_NAME /from NEW_SOURCE_COUNTRY`.
+   * If you only want to edit a trip's destination country : `edit TRIP_NAME /from NEW_DESTINATON_COUNTRY`.
+   * If you want to edit a trip's name and destination country : 
+`edit TRIP_NAME /name NEW_TRIP_NAME /to NEW_SOURCE_COUNTRY`.
+
 
 #### Usage Example:
-   * `edit FamilyTrip2021 /from SKR /to JPN` edits an existing trip called `FamilyTrip2021` to have new `START` and `END` destinations.
+   * `edit FamilyTrip2021 /from SKR /to JPN` edits an existing trip called `FamilyTrip2021` to be from South Korea to
+Japan.
+   * `edit FamilyTrip2021 /name SoloTrip2021` edits an existing trip called `FamilyTrip2021` to now be called 
+`SoloTrip2021`
 
-> ![](documentationPics/tip.png) Edit only allows you to change your Start and End destinations! 
+> ![](documentationPics/tip.png) Edit only allows you to change the name, to and from of a trip.
 > To change your trip itinerary use [edit-item](#210-edit-an-item-edit-item) instead!
 
 <br/>
@@ -352,8 +363,8 @@ Exits the program.
 
 #### Format: `exit`
 
-> ![](documentationPics/warning.png) Properly exiting Traveller with the `exit` command is **CRUCIAL** in 
-> ensuring that your trips are saved.
+> ![](documentationPics/warning.png) While your Trips are saved periodically when using Traveller, exiting with the 
+> `exit` command ensures that it is saved properly.
 
 <br/>
 
@@ -366,10 +377,11 @@ Exits the program.
    * *flightData* folder with *time.txt* and *cost.txt* inside
    * *save* folder with *save.txt* inside
 
-**Q**: Why does it keep saying "Either of these nodes doesn't exist!"?
+**Q**: Why does it keep saying "Country 'X' doesn't exist!"?
 
-**A**: Traveller can only read specific words as destinations. 
-Please check in *flightData/time.txt* or *flightData/cost.txt* for all supported destinations and their specific wordings.
+**A**: Traveller can only read specific words as countries.
+Please check in *flightData/time.txt* or *flightData/cost.txt* for all supported destinations and their specific 
+wordings.
 
 **Q**: What should I do when creating a new trip if my trip span multiple countries?
 
@@ -393,7 +405,21 @@ is 5 hours long.
 
 <br/>
 
-## 4. Command Summary
+## 4. Supported Countries Summary
+As Traveller can only read certain country codes. Below is a short table of the basic
+supported countries (included in our [release](https://github.com/AY2122S1-CS2113T-W13-1/tp/releases)) 
+and their codes. Read our Developer Guide [here](https://ay2122s1-cs2113t-w13-1.github.io/tp/DeveloperGuide.html)
+if you would like to change the supported countries to those that you want.
+
+Country | Code
+--- | ---
+Singapore | **SIN**
+Malaysia | **MLY**
+China | **CHN**
+Japan | **JPN**
+South Korea | **SKR**
+
+## 5. Command Summary
 
 A summary of all commands available in Traveller, and how you can use them, is detailed here.
 
@@ -413,4 +439,3 @@ Action | Format
 **shortest-time** | `shortest-time /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
 **shortest-cost** | `shortest-cost /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
 **exit** | `exit`
-
