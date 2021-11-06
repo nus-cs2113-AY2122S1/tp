@@ -189,8 +189,8 @@ public class TextUi {
     }
 
     public static void confirmDeleteContactMessage(Contact deletedContact, int deletedIndex) {
-        String message = "Delete this contact?  (y/n)\n"
-                + deletedIndex + ". " + deletedContact.getName() + formatContactFields(deletedContact);
+        String message = "Delete this contact?  (y/n)\n\n"
+                + deletedIndex + ".\n" + "Name:     " + deletedContact.getName() + formatContactFields(deletedContact);
         printDoubleLineMessage(message);
     }
 
