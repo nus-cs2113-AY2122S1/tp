@@ -36,7 +36,7 @@ public class ParserTest {
         NewCommand newCommand = new NewCommand("trip0", "CHN", "JPN");
         assertEquals(newCommand.toString(), Parser.parse("new trip0 /from    CHN /to JPN").toString());
 
-        EditCommand editCommand = new EditCommand("trip1", "SIN", "MLY");
+        EditCommand editCommand = new EditCommand("trip1", "", "SIN", "MLY");
         assertEquals(editCommand.toString(), Parser.parse("edit trip1 /from SIN /to MLY   ").toString());
 
         DeleteCommand deleteCommand = new DeleteCommand("trip2");

@@ -18,7 +18,7 @@ class EditCommandTest {
     private final TripsList tripsList;
     private final NewCommand beforeEditCommand = new NewCommand("Trip1", "MLY", "CHN");
     private final NewCommand afterEditCommand = new NewCommand("Trip2", "SIN", "JPN");
-    private final EditCommand edit = new EditCommand("Trip1", "SIN", "JPN");
+    private final EditCommand edit = new EditCommand("Trip1", "","SIN", "JPN");
 
     public EditCommandTest() {
         WorldMap.initWorldMap();
