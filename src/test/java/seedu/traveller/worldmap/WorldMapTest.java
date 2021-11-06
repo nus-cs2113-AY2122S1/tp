@@ -35,7 +35,7 @@ public class WorldMapTest {
         MinCalcResult minCalcResult = new MinCalcResult(countrySin, countryMly, path, distances);
 
         assertEquals(minCalcResult.toString(),
-                WorldMap.calcMinDistance("SIN", "MLY").toString());
+                WorldMap.calcMinTime("SIN", "MLY").toString());
     }
 
     @Test
@@ -74,7 +74,7 @@ public class WorldMapTest {
         MinCalcResult minCalcResult = new MinCalcResult(countrySin, countryJpn, path, distances);
 
         assertEquals(minCalcResult.toString(),
-                WorldMap.calcMinDistance("SIN", "JPN").toString());
+                WorldMap.calcMinTime("SIN", "JPN").toString());
     }
 
     @Test
@@ -96,7 +96,7 @@ public class WorldMapTest {
         MinCalcResult minCalcResult = new MinCalcResult(countryJpn, countrySin, path, distances);
 
         assertEquals(minCalcResult.toString(),
-                WorldMap.calcMinDistance("JPN", "SIN").toString());
+                WorldMap.calcMinTime("JPN", "SIN").toString());
 
     }
 
@@ -119,7 +119,7 @@ public class WorldMapTest {
         MinCalcResult minCalcResult = new MinCalcResult(countryJpn, countrySin, path, distances);
 
         assertEquals(minCalcResult.toString(),
-                WorldMap.calcMinDistance("JPN", "SIN").toString());
+                WorldMap.calcMinTime("JPN", "SIN").toString());
     }
 
     @Test

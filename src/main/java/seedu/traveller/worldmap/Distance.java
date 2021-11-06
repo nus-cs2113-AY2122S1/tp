@@ -1,5 +1,6 @@
 package seedu.traveller.worldmap;
 
+
 //@@author Jach23
 public class Distance {
     private double distance;

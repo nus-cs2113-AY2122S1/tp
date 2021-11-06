@@ -45,8 +45,8 @@ public class ParserTest {
         ViewCommand viewCommand = new ViewCommand("all");
         assertEquals(viewCommand.toString(), Parser.parse("view all").toString());
 
-        ShortestCommand shortestDistCommand = new ShortestCommand("dist", "SKR", "JPN");
-        assertEquals(shortestDistCommand.toString(), Parser.parse("shortest-dist /from SKR /to JPN").toString());
+        ShortestCommand shortestDistCommand = new ShortestCommand("time", "SKR", "JPN");
+        assertEquals(shortestDistCommand.toString(), Parser.parse("shortest-time /from SKR /to JPN").toString());
 
         ShortestCommand shortestCostCommand = new ShortestCommand("cost", "SKR", "JPN");
         assertEquals(shortestCostCommand.toString(), Parser.parse("shortest-cost /from SKR /to JPN").toString());
