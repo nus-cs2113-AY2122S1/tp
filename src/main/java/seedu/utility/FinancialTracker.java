@@ -7,12 +7,10 @@ import seedu.exceptions.ExpenseEntryNotFoundException;
 import seedu.exceptions.ExpenseOverflowException;
 import seedu.exceptions.IncomeEntryNotFoundException;
 import seedu.exceptions.IncomeOverflowException;
-import seedu.utility.tools.DateOperator;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 import static seedu.utility.tools.DateOperator.entryDateInRange;

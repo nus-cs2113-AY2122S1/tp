@@ -14,7 +14,7 @@ import static seedu.utility.FinancialTracker.TOTAL_ENTRIES_LIMIT;
  * This class abstracts out more complication calculations used in FinancialTracker.
  */
 public abstract class FinancialCalculator {
-    private final static int[] MONTHS = IntStream.range(1,12).toArray();
+    private final static int[] MONTHS = IntStream.range(1,13).toArray();
     
     /**
      * Sorts an entire year's entries according to the month they are associated with.
