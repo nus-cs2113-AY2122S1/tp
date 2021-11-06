@@ -67,6 +67,10 @@ public class ClearCommand extends Command {
         if (keyword.equals("workout")) {
             LOGGER.info("Removing all workouts");
             workouts.removeAllWorkout();
+            if (workoutMode != 0) {
+                workoutMode = 0;
+                return new CommandResult("All workouts have been cleared! Returning to main view.");
+            }
             return new CommandResult("All workouts have been cleared!");
         } else if (keyword.equals("exercise")) {
             LOGGER.info("Removing all exercises in workout " + workoutIndex);
