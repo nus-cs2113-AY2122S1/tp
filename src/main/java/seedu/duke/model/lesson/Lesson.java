@@ -1,24 +1,26 @@
 package seedu.duke.model.lesson;
 
 import java.io.IOException;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
-import seedu.duke.commons.core.DayOfTheWeek;
-import seedu.duke.DukeException;
-import seedu.duke.commons.core.Messages;
-import seedu.duke.commons.util.TimeUtil;
+import seedu.duke.commons.core.Message;
+import seedu.duke.commons.util.exceptions.InvalidDayException;
+import seedu.duke.commons.util.exceptions.InvalidTimeException;
+import seedu.duke.logic.parser.exceptions.ParseException;
 import seedu.duke.model.lesson.exceptions.EmptyLinkException;
 import seedu.duke.ui.Ui;
 
+import static seedu.duke.commons.util.DayUtil.compareDay;
 import static seedu.duke.commons.util.LinkUtil.formatLink;
 import static seedu.duke.commons.util.LinkUtil.launchUrlOnLinux;
 import static seedu.duke.commons.util.LinkUtil.launchUrlOnMac;
 import static seedu.duke.commons.util.LinkUtil.launchUrlOnWindows;
+import static seedu.duke.logic.parser.ParserUtil.parseTitle;
+import static seedu.duke.logic.parser.ParserUtil.parseDayOfTheWeek;
+import static seedu.duke.logic.parser.ParserUtil.parseTime;
+import static seedu.duke.commons.util.TimeUtil.compareTime;
 
 //@@author Roycius
-public class Lesson {
+public class Lesson implements Comparable<Lesson> {
     private final String title;
     private final String dayOfTheWeek;
     private final String startTime;
@@ -62,7 +64,7 @@ public class Lesson {
     public void launchUrl() throws EmptyLinkException, IOException {
         boolean isEmptyUrl = meetingUrl.isBlank() || meetingUrl.equals("-");
         if (isEmptyUrl) {
-            throw new EmptyLinkException(Messages.ERROR_EMPTY_MEETING_LINK);
+            throw new EmptyLinkException(Message.ERROR_EMPTY_MEETING_LINK);
         }
 
         Runtime rt = Runtime.getRuntime();
@@ -83,7 +85,6 @@ public class Lesson {
         }
     }
 
-    //@@author Roycius
     /**
      * Serializes the lesson data into the correct format for storage file.
      *
@@ -102,22 +103,31 @@ public class Lesson {
     public static Lesson deserialize(Ui ui, String line) {
         try {
             String[] params = line.split("\\s*[|]\\s*");
-
-            String title = params[0];
-            String dayOfTheWeek = DayOfTheWeek.toProper(params[1]);
-
-            String startTime = LocalTime.parse(TimeUtil.parseTwelveHourTime(params[2]))
-                    .format(DateTimeFormatter.ofPattern("hh:mm a"));
-
-            String endTime = LocalTime.parse(TimeUtil.parseTwelveHourTime(params[3]))
-                    .format(DateTimeFormatter.ofPattern("hh:mm a"));
-
+            String title = parseTitle(params[0]);
+            String dayOfTheWeek = parseDayOfTheWeek(params[1]);
+            String startTime = parseTime(params[2]);
+            String endTime = parseTime(params[3]);
             String meetingUrl = params[4];
             return new Lesson(title, dayOfTheWeek, startTime, endTime, meetingUrl);
-        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException | DukeException e) {
+        } catch (ParseException e) {
             // Ignoring the particular line
-            ui.printMessage(Messages.ERROR_DESERIALIZING_LESSON);
+            ui.printMessage(Message.ERROR_DESERIALIZING_LESSON);
             return null;
+        }
+    }
+
+    @Override
+    public int compareTo(Lesson l) {
+        try {
+            int dayComparison = compareDay(this.getDayOfTheWeek(), l.getDayOfTheWeek());
+            if (dayComparison != 0) {
+                return dayComparison;
+            }
+            return compareTime(this.getStartTime(), l.getStartTime());
+        } catch (InvalidDayException | InvalidTimeException e) {
+            // Ignore and return 0
+            System.out.println("Error: Lesson comparison result is incorrect.");
+            return 0;
         }
     }
 

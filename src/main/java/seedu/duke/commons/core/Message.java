@@ -1,7 +1,7 @@
 package seedu.duke.commons.core;
 
 //@@author richwill28
-public final class Messages {
+public final class Message {
     // Error messages, sorted in alphabetical order.
 
     public static final String ERROR_CREATING_NEW_FILE =

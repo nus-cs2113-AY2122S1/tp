@@ -1,7 +1,7 @@
 package seedu.duke.logic.parser;
 
 import seedu.duke.commons.core.CommandType;
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.lesson.FindLessonCommand;
 import seedu.duke.logic.commands.module.FindModuleCommand;
@@ -50,7 +50,7 @@ public class FindCommandParser {
 
     private static Command parseFindTaskCommand(String userResponse) throws ParseException {
         if (userResponse.isBlank()) {
-            throw new ParseException(Messages.ERROR_INVALID_COMMAND);
+            throw new ParseException(Message.ERROR_INVALID_COMMAND);
         }
 
         return new FindTaskCommand(promptFormat(FIND_TASK_FORMAT));

@@ -155,6 +155,31 @@ public class TaskListTest {
     }
 
     @Test
+    public void testSortTasksByDay() {
+        // Tasks should be sorted according to day by default
+        try {
+            TaskList taskList = new TaskList();
+            taskList.addTask(new Task("Task 2", "Tuesday", "MEDIUM", "-"));
+            taskList.addTask(new Task("Task 5", "Friday", "HIGH", "-"));
+            taskList.addTask(new Task("Task 1", "Monday", "HIGH", "-"));
+            taskList.addTask(new Task("Task 7", "Sunday", "LOW", "-"));
+            taskList.addTask(new Task("Task 4", "Thursday", "LOW", "-"));
+            taskList.addTask(new Task("Task 6", "Saturday", "MEDIUM", "-"));
+            taskList.addTask(new Task("Task 3", "Wednesday", "LOW", "-"));
+
+            assertEquals("Task 1", taskList.getTask(0).getTitle());
+            assertEquals("Task 2", taskList.getTask(1).getTitle());
+            assertEquals("Task 3", taskList.getTask(2).getTitle());
+            assertEquals("Task 4", taskList.getTask(3).getTitle());
+            assertEquals("Task 5", taskList.getTask(4).getTitle());
+            assertEquals("Task 6", taskList.getTask(5).getTitle());
+            assertEquals("Task 7", taskList.getTask(6).getTitle());
+        } catch (DukeException e) {
+            fail(); // the program should never reach this line
+        }
+    }
+
+    @Test
     public void testSortTasksByPriority() {
         try {
             TaskList taskList = new TaskList();

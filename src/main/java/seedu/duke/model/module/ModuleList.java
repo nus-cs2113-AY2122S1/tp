@@ -1,7 +1,7 @@
 package seedu.duke.model.module;
 
 import seedu.duke.DukeException;
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
@@ -31,9 +31,9 @@ public class ModuleList {
         try {
             return moduleList.get(moduleIndex);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(Messages.ERROR_INVALID_INDEX);
+            throw new DukeException(Message.ERROR_INVALID_INDEX);
         } catch (NumberFormatException e) {
-            throw new DukeException(Messages.ERROR_INVALID_NUMBER);
+            throw new DukeException(Message.ERROR_INVALID_NUMBER);
         }
     }
 

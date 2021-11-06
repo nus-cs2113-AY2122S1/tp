@@ -1,7 +1,7 @@
 package seedu.duke.logic.parser;
 
 import seedu.duke.commons.core.CommandType;
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.module.SetGradeCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
@@ -38,7 +38,7 @@ public class SetCommandParser {
             }
             return new SetGradeCommand(moduleCode, grade);
         } catch (IndexOutOfBoundsException e) {
-            throw new ParseException(Messages.ERROR_INVALID_COMMAND);
+            throw new ParseException(Message.ERROR_INVALID_COMMAND);
         }
     }
 

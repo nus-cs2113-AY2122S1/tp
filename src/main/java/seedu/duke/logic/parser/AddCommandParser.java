@@ -3,7 +3,7 @@ package seedu.duke.logic.parser;
 import java.util.HashMap;
 
 import seedu.duke.commons.core.CommandType;
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.lesson.AddLessonCommand;
 import seedu.duke.logic.commands.module.AddModuleCommand;
@@ -24,17 +24,17 @@ import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
 //@@author richwill28
 public class AddCommandParser {
-    public static final String LESSON_FLAGS = "-d |-s |-e |-l ";
-    public static final String TASK_FLAGS = "-d |-p |-i ";
+    public static final String LESSON_FLAG = "-d |-s |-e |-l ";
+    public static final String TASK_FLAG = "-d |-p |-i ";
     public static final String DAY_FLAG = "-d";
     public static final String START_FLAG = "-s";
     public static final String END_FLAG = "-e";
     public static final String LINK_FLAG = "-l";
     public static final String PRIORITY_FLAG = "-p";
     public static final String INFORMATION_FLAG = "-i";
+
     public static final String DEFAULT_PRIORITY = LOW.toString();
     public static final String EMPTY_INFORMATION = "-";
-
 
     public static Command parse(String userResponse) throws ParseException {
         if (userResponse.contains("|")) {
@@ -65,10 +65,11 @@ public class AddCommandParser {
     private static Command parseAddLessonCommand(String userResponse) throws ParseException {
         HashMap<String, String> flagMap =
                 ParserUtil.getFlagMap(userResponse, DAY_FLAG, START_FLAG, END_FLAG, LINK_FLAG);
-        String[] params = userResponse.split(LESSON_FLAGS);
+        String[] params = userResponse.split(LESSON_FLAG);
         if (!flagMap.containsKey(DAY_FLAG) || !flagMap.containsKey(START_FLAG) || !flagMap.containsKey(END_FLAG)) {
-            throw new ParseException(Messages.ERROR_MISSING_FLAGS);
+            throw new ParseException(Message.ERROR_MISSING_FLAGS);
         }
+
         String title = parseTitle(params[0]);
         String dayOfTheWeek = parseDayOfTheWeek(flagMap.get(DAY_FLAG));
         String startTime = parseTime(flagMap.get(START_FLAG));
@@ -84,9 +85,9 @@ public class AddCommandParser {
     private static Command parseAddTaskCommand(String userResponse) throws ParseException {
         HashMap<String, String> flagMap =
                 ParserUtil.getFlagMap(userResponse, DAY_FLAG, PRIORITY_FLAG, INFORMATION_FLAG);
-        String[] params = userResponse.split(TASK_FLAGS);
+        String[] params = userResponse.split(TASK_FLAG);
         if (!flagMap.containsKey(DAY_FLAG)) {
-            throw new ParseException(Messages.ERROR_MISSING_FLAGS);
+            throw new ParseException(Message.ERROR_MISSING_FLAGS);
         }
         String title = parseTitle(params[0]);
         String dayOfTheWeek = parseDayOfTheWeek(flagMap.get(DAY_FLAG));

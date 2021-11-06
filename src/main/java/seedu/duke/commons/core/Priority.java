@@ -29,7 +29,7 @@ public enum Priority {
      */
     public static String toProper(String param) throws PriorityException {
         if (!is(param)) {
-            throw new PriorityException(Messages.ERROR_INVALID_PRIORITY);
+            throw new PriorityException(Message.ERROR_INVALID_PRIORITY);
         }
 
         switch (param.toUpperCase()) {
@@ -46,7 +46,7 @@ public enum Priority {
         case "HIGH":
             return "HIGH";
         default:
-            throw new PriorityException(Messages.ERROR_INVALID_PRIORITY);
+            throw new PriorityException(Message.ERROR_INVALID_PRIORITY);
         }
     }
 }

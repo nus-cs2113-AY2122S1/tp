@@ -1,7 +1,6 @@
 package seedu.duke.model.module;
 
-import seedu.duke.DukeException;
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 import seedu.duke.commons.util.JsonUtil;
 import seedu.duke.commons.util.exceptions.ModuleLoadException;
 import seedu.duke.model.module.exceptions.ModuleNotFoundException;
@@ -53,7 +52,7 @@ public class FullModuleList {
      */
     public Module findModule(String moduleCode) throws ModuleNotFoundException {
         if (!moduleMap.containsKey(moduleCode)) {
-            throw new ModuleNotFoundException(Messages.ERROR_MODULE_NOT_FOUND);
+            throw new ModuleNotFoundException(Message.ERROR_MODULE_NOT_FOUND);
         }
         return moduleMap.get(moduleCode);
     }

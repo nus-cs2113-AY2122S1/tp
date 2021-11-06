@@ -1,7 +1,7 @@
 package seedu.duke.logic.parser;
 
 import seedu.duke.commons.core.CommandType;
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.lesson.DeleteLessonCommand;
 import seedu.duke.logic.commands.module.DeleteModuleCommand;
@@ -44,7 +44,7 @@ public class DeleteCommandParser {
             int lessonIndex = parseToZeroIndex(Integer.parseInt(userResponse));
             return new DeleteLessonCommand(lessonIndex);
         } catch (NumberFormatException e) {
-            throw new ParseException(Messages.ERROR_INVALID_NUMBER);
+            throw new ParseException(Message.ERROR_INVALID_NUMBER);
         }
     }
 
@@ -54,7 +54,7 @@ public class DeleteCommandParser {
             int taskIndex = parseToZeroIndex(Integer.parseInt(userResponse));
             return new DeleteTaskCommand(taskIndex);
         } catch (NumberFormatException e) {
-            throw new ParseException(Messages.ERROR_INVALID_NUMBER);
+            throw new ParseException(Message.ERROR_INVALID_NUMBER);
         }
     }
 
@@ -64,7 +64,7 @@ public class DeleteCommandParser {
             String moduleCode = userResponse.toUpperCase();
             return new DeleteModuleCommand(moduleCode);
         } catch (NumberFormatException e) {
-            throw new ParseException(Messages.ERROR_INVALID_NUMBER);
+            throw new ParseException(Message.ERROR_INVALID_NUMBER);
         }
     }
 }

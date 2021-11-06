@@ -3,7 +3,7 @@ package seedu.duke.model.task;
 import seedu.duke.commons.core.DayOfTheWeek;
 import seedu.duke.commons.core.Priority;
 import seedu.duke.DukeException;
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 import seedu.duke.commons.util.exceptions.InvalidDayException;
 import seedu.duke.ui.Ui;
 
@@ -86,7 +86,7 @@ public class Task implements Comparable<Task> {
             return task;
         } catch (ArrayIndexOutOfBoundsException | DukeException e) {
             // Ignoring the particular line
-            ui.printMessage(Messages.ERROR_DESERIALIZING_TASK);
+            ui.printMessage(Message.ERROR_DESERIALIZING_TASK);
             return null;
         }
     }
@@ -98,7 +98,7 @@ public class Task implements Comparable<Task> {
             return compareDay(this.getDayOfTheWeek(), t.getDayOfTheWeek());
         } catch (InvalidDayException e) {
             // Ignore and return 0
-            System.out.println("Error: Day comparison result is incorrect.");
+            System.out.println("Error: Task comparison result is incorrect.");
             return 0;
         }
     }

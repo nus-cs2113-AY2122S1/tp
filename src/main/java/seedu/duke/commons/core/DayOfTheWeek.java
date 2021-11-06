@@ -40,7 +40,7 @@ public enum DayOfTheWeek {
 
     public static String toProper(String param) throws DayOfTheWeekException {
         if (!is(param)) {
-            throw new DayOfTheWeekException(Messages.ERROR_INVALID_DAY);
+            throw new DayOfTheWeekException(Message.ERROR_INVALID_DAY);
         }
 
         switch (param.substring(0, 3).toLowerCase()) {
@@ -59,7 +59,7 @@ public enum DayOfTheWeek {
         case "sun":
             return "Sunday";
         default:
-            throw new DayOfTheWeekException(Messages.ERROR_INVALID_DAY);
+            throw new DayOfTheWeekException(Message.ERROR_INVALID_DAY);
         }
     }
 }

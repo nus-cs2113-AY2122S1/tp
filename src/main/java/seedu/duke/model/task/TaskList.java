@@ -1,6 +1,6 @@
 package seedu.duke.model.task;
 
-import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.core.Message;
 import seedu.duke.model.task.exceptions.TaskIndexException;
 import seedu.duke.ui.Ui;
 
@@ -19,8 +19,13 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
-    public TaskList(List<Task> taskList, boolean isSortByDay) {
-        if (isSortByDay) {
+    public TaskList(List<Task> taskList) {
+        Collections.sort(taskList);
+        this.taskList = taskList;
+    }
+
+    public TaskList(List<Task> taskList, boolean isSort) {
+        if (isSort) {
             Collections.sort(taskList);
         }
         this.taskList = taskList;
@@ -34,9 +39,9 @@ public class TaskList {
         try {
             return taskList.get(taskIndex);
         } catch (IndexOutOfBoundsException e) {
-            throw new TaskIndexException(Messages.ERROR_INVALID_INDEX);
+            throw new TaskIndexException(Message.ERROR_INVALID_INDEX);
         } catch (NumberFormatException e) {
-            throw new TaskIndexException(Messages.ERROR_INVALID_NUMBER);
+            throw new TaskIndexException(Message.ERROR_INVALID_NUMBER);
         }
     }
 
@@ -64,23 +69,19 @@ public class TaskList {
             taskList.remove(taskIndex);
             Collections.sort(taskList);
         } catch (IndexOutOfBoundsException e) {
-            throw new TaskIndexException(Messages.ERROR_INVALID_INDEX);
+            throw new TaskIndexException(Message.ERROR_INVALID_INDEX);
         } catch (NumberFormatException e) {
-            throw new TaskIndexException(Messages.ERROR_INVALID_NUMBER);
+            throw new TaskIndexException(Message.ERROR_INVALID_NUMBER);
         }
-    }
-
-    public void deleteAllTasks() {
-        taskList.clear();
     }
 
     public void markTaskAsDone(int taskIndex) throws TaskIndexException {
         try {
             taskList.get(taskIndex).setDone();
         } catch (IndexOutOfBoundsException e) {
-            throw new TaskIndexException(Messages.ERROR_INVALID_INDEX);
+            throw new TaskIndexException(Message.ERROR_INVALID_INDEX);
         } catch (NumberFormatException e) {
-            throw new TaskIndexException(Messages.ERROR_INVALID_NUMBER);
+            throw new TaskIndexException(Message.ERROR_INVALID_NUMBER);
         }
     }
 
@@ -94,7 +95,7 @@ public class TaskList {
     public TaskList filterTasksByKeyword(String keyword) {
         return new TaskList(taskList.stream()
                 .filter(task -> task.getTitle().toLowerCase().contains(keyword))
-                .collect(Collectors.toList()), true);
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -106,7 +107,7 @@ public class TaskList {
     public TaskList filterTasksByPeriod(String period) {
         return new TaskList(taskList.stream()
                 .filter(task -> task.getDayOfTheWeek().toLowerCase().contains(period))
-                .collect(Collectors.toList()), true);
+                .collect(Collectors.toList()));
     }
 
     public TaskList sortTasksByPriority() {
