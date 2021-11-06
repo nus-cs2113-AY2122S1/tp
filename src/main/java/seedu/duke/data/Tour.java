@@ -25,8 +25,8 @@ public class Tour {
 
     @Override
     public String toString() {
-        return "Name: " + name + "\n"
-                + "Id: " + id + "\n"
+        return "Tour ID: " + id + "\n"
+                + "Name: " + name + "\n"
                 + "Price per pax: $" + String.format("%.02f", price);
     }
 }

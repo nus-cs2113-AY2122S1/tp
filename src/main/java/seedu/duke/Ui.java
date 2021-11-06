@@ -94,14 +94,24 @@ public class Ui {
                 + "   Cut flight: cut -f FLIGHT_ID\n"
                 + "   Cut tour: cut -t TOUR_ID\n"
                 + "   Cut client package: cut -p PACKAGE_ID\n\n";
-        String find = "find: Finds specific client(s) based on a particular substring and returns their "
-                + "client packages.\n"
+        String find = "find: Finds specific entry of data type, returns the entry and other relevant information.\n"
                 + "   Find client: find -c CLIENT_NAME\n"
                 + "   Find flight: find -f FLIGHT_ID\n"
-                + "   Find tour: find -t TOUR_ID\n"
-                + "   Find client package: find -p PACKAGE_ID\n\n";
+                + "   Find tour: find -t TOUR_ID\n\n";
+        String sort = "sort: Sorts entries in the data type based on the criteria.\n "
+                + "   Sort client:\n"
+                + "      Sort by id: sort -c /id\n"
+                + "      Sort by name: sort -c /n\n"
+                + "   Sort flight:\n"
+                + "      Sort by id: sort -f /id\n"
+                + "      Sort by departure date: sort -f /d\n"
+                + "      Sort by return date: sort -f /r\n"
+                + "   Sort tour:\n"
+                + "      Sort by id: sort -t /id\n"
+                + "      Sort by name: sort -t /n\n"
+                + "      Sort by price: sort -t /p\n\n";
         String bye = "bye: Exits the program.";
-        show(add + list + cut + find + bye);
+        show(add + list + cut + find + sort + bye);
     }
 
     /**
