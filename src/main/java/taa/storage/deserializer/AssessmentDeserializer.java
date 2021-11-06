@@ -40,10 +40,10 @@ public class AssessmentDeserializer extends StorageDeserializer implements JsonD
         double weightage = weightageJson.getAsDouble();
 
         JsonElement maximumMarksJson = jsonObject.get(MEMBER_MAXIMUM_MARKS);
-        if (!Util.isStringInteger(maximumMarksJson.getAsString())) {
+        if (!Util.isStringDouble(maximumMarksJson.getAsString())) {
             return null;
         }
-        int maximumMarks = maximumMarksJson.getAsInt();
+        double maximumMarks = maximumMarksJson.getAsDouble();
 
         Assessment assessment = new Assessment(name, maximumMarks, weightage);
         if (!assessment.verify()) {
