@@ -1,13 +1,14 @@
 package taa;
 
 //@@author leyondlee
+
 import taa.command.ArchiveCommand;
 import taa.command.ResetCommand;
 import taa.command.assessment.AddAssessmentCommand;
 import taa.command.attendance.ListLessonAttendanceCommand;
 import taa.command.teachingclass.AddClassCommand;
 import taa.command.student.AddStudentCommand;
-import taa.command.mark.AverageMarksCommand;
+import taa.command.mark.AverageMarkCommand;
 import taa.command.Command;
 import taa.command.assessment.DeleteAssessmentCommand;
 import taa.command.attendance.DeleteAttendanceCommand;
@@ -44,7 +45,7 @@ import java.util.regex.Pattern;
 
 public class Parser {
     private static final String ARGUMENT_VALID_REGEX = "0-9a-zA-Z\\s";
-    private static final char[] VALID_SPECIAL_CHARACTERS = {'-', '_', '(', ')', '.'};
+    private static final char[] VALID_SPECIAL_CHARACTERS = {'-', '_', '(', ')', '.', ','};
 
     private static final String MESSAGE_UNKNOWN_COMMAND = "Unknown Command";
 
@@ -146,8 +147,8 @@ public class Parser {
             command = new DeleteMarkCommand(argument);
             break;
 
-        case Command.COMMAND_AVERAGE_MARKS:
-            command = new AverageMarksCommand(argument);
+        case Command.COMMAND_AVERAGE_MARK:
+            command = new AverageMarkCommand(argument);
             break;
 
         case Command.COMMAND_MEDIAN_MARK:
@@ -289,6 +290,13 @@ public class Parser {
         return matcher.find();
     }
 
+    /**
+     * Converts character into a regex pattern string. Character is escaped if needed.
+     * Note: This method is not complete and may not escape all characters which may need to be escaped.
+     *
+     * @param c The character to convert.
+     * @return A regex pattern string.
+     */
     private static String convertToRegexPattern(char c) {
         boolean needEscape;
         switch (c) {

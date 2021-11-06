@@ -1,0 +1,33 @@
+@startuml
+!include ClassStyle.puml
+
+class ClassList {
+    +ClassList()
+    +getSize(): int
+    +getClasses(): ArrayList<TeachingClass>
+    +isValidIndex(index: int): boolean
+    +addClass(teachingClass: TeachingClass): void
+    +getClassAt(index: int): TeachingClass
+    +getClassWithId(id: String): TeachingClass
+    +deleteClass(teachingClass: TeachingClass): boolean
+    +deleteAllClasses(): void
+}
+
+class TeachingClass
+class StudentList
+class Student
+class AttendanceList
+class Attendance
+class AssessmentList
+class Assessment
+
+ClassList -down-> "*" TeachingClass
+TeachingClass -down-> "1" StudentList
+StudentList -> "*" Student
+Student -down-> "1" AttendanceList
+AttendanceList -down-> "*" Attendance
+TeachingClass -down-> "1" AssessmentList
+
+AssessmentList -> "*" Assessment
+
+@enduml

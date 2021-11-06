@@ -1,0 +1,63 @@
+@startuml
+!include SequenceStyle.puml
+
+Actor User as user
+Participant ":Taa" as taa
+Participant ":SetMarkCommand" as setMarkCommand
+Participant ":ClassList" as classList
+Participant ":TeachingClass" as class
+Participant ":AssessmentList" as assessmentList
+Participant ":StudentList" as studentList
+Participant ":Student" as student
+Participant ":Storage" as storage
+
+user -> taa : "set_marks c/CS2113T-F12 \ns/1 a/Midterms m/60"
+activate taa
+
+taa -> setMarkCommand : execute(classList:ClassList, \nui:Ui, storage:Storage)
+activate setMarkCommand
+
+setMarkCommand -> classList : getClassWithId(id:String)
+activate classList
+classList --> setMarkCommand : class:Class
+deactivate classList
+
+setMarkCommand -> class : getStudentList()
+activate class
+class --> setMarkCommand : studentList:StudentList
+deactivate class
+
+setMarkCommand -> class : getAssessmentList()
+activate class
+class --> setMarkCommand : assessmentList:AssessmentList
+deactivate class
+
+setMarkCommand -> assessmentList : getAssessment(assessmentName:String)
+activate assessmentList
+assessmentList --> setMarkCommand : assessment:Assessment
+deactivate assessmentList
+
+setMarkCommand -> studentList : getStudentAt(studentIndex:Integer)
+activate studentList
+studentList --> setMarkCommand : student:Student
+deactivate studentList
+
+setMarkCommand -> student : setMarks(assessmentName:String, \nmarks:Double)
+activate student
+student --> setMarkCommand
+deactivate student
+
+setMarkCommand -> storage : save(classList:ClassList)
+activate storage
+storage --> setMarkCommand
+deactivate storage
+
+setMarkCommand --> taa
+deactivate setMarkCommand
+taa -[hidden]-> setMarkCommand
+destroy setMarkCommand
+
+taa --> user
+deactivate taa
+
+@enduml

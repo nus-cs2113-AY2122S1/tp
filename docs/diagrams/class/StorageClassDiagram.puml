@@ -1,0 +1,18 @@
+@startuml
+!include ClassStyle.puml
+
+class Storage {
+    -filename: String
+    +Storage(filename: String)
+    +load(): ClassList
+    +save(classList: ClassList): void
+}
+class Parser
+class Util
+class StorageDeserializer as "{abstract}\nStorageDeserializer"
+
+Storage .down.> StorageDeserializer
+StorageDeserializer .down.> Parser
+StorageDeserializer .down.> Util
+
+@enduml

@@ -9,6 +9,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
+import taa.Parser;
 import taa.attendance.Attendance;
 import taa.attendance.AttendanceList;
 import taa.student.Student;
@@ -22,10 +23,7 @@ public class StudentDeserializer extends StorageDeserializer implements JsonDese
     private static final String MEMBER_COMMENT = "comment";
     private static final String MEMBER_ATTENDANCELIST = "attendanceList";
     private static final String MEMBER_RESULTS = "results";
-    private static final String[] COMPULSORY_MEMBERS = {
-        MEMBER_ID,
-        MEMBER_NAME
-    };
+    private static final String[] COMPULSORY_MEMBERS = {MEMBER_ID, MEMBER_NAME};
 
     @Override
     public Student deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
@@ -41,12 +39,18 @@ public class StudentDeserializer extends StorageDeserializer implements JsonDese
         JsonElement nameJson = jsonObject.get(MEMBER_NAME);
         String name = nameJson.getAsString();
 
+        if (!Parser.isValueValid(id) || !Parser.isValueValid(name)) {
+            return null;
+        }
+
         Student student = new Student(id, name);
 
         JsonElement commentJson = jsonObject.get(MEMBER_COMMENT);
         if (commentJson != null) {
             String comment = commentJson.getAsString();
-            student.setComment(comment);
+            if (Parser.isValueValid(comment)) {
+                student.setComment(comment);
+            }
         }
 
         GsonBuilder gsonBuilder = new GsonBuilder();

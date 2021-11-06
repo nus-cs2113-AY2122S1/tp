@@ -2,7 +2,6 @@ package taa.teachingclass;
 
 //@@author leyondlee
 import taa.ClassChecker;
-import taa.Parser;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
 import taa.student.Student;
@@ -68,7 +67,7 @@ public class TeachingClass implements ClassChecker {
     }
 
     /**
-     * Checks if the variables in the class are valid.
+     * Checks if the variables in the class are valid. Filters out invalid marks for each Student.
      *
      * @return true if valid, else false.
      */
@@ -78,27 +77,18 @@ public class TeachingClass implements ClassChecker {
             return false;
         }
 
-        if (!Parser.isValueValid(id) || !Parser.isValueValid(name)) {
-            return false;
-        }
-
         assert (assessmentList != null && studentList != null);
-
-        HashMap<String, Assessment> assessmentMap = new HashMap<>();
-        for (Assessment assessment : assessmentList.getAssessments()) {
-            assessmentMap.put(assessment.getName(), assessment);
-        }
 
         for (Student student : studentList.getStudents()) {
             ArrayList<String> invalidMarks = new ArrayList<>();
             HashMap<String, Double> results = student.getResults();
             for (String assessmentName : results.keySet()) {
-                if (!assessmentMap.containsKey(assessmentName)) {
+                Assessment assessment = assessmentList.getAssessment(assessmentName);
+                if (assessment == null) {
                     invalidMarks.add(assessmentName);
                     continue;
                 }
 
-                Assessment assessment = assessmentMap.get(assessmentName);
                 double marks = results.get(assessmentName);
                 if (!assessment.isMarksValid(marks)) {
                     invalidMarks.add(assessmentName);
@@ -113,6 +103,12 @@ public class TeachingClass implements ClassChecker {
         return true;
     }
 
+    /**
+     * Checks if the ID is valid. ID is valid if it is not empty and does not contain any spaces.
+     *
+     * @param id The ID to check.
+     * @return true if ID is valid, else false.
+     */
     public static boolean isValidId(String id) {
         return !id.isEmpty() && !id.contains(" ");
     }

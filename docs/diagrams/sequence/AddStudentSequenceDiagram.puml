@@ -1,0 +1,53 @@
+@startuml
+!include SequenceStyle.puml
+
+Actor User as user
+Participant ":Taa" as taa
+Participant ":AddStudentCommand" as addStudentCommand
+Participant ":ClassList" as classList
+Participant ":TeachingClass" as teachingClass
+Participant ":StudentList" as studentList
+Participant ":Student" as student
+Participant ":Storage" as storage
+
+user -> taa : "add_student c/CS2113T-F12\ni/A0217978J n/Jonny Lims"
+activate taa
+
+taa -> addStudentCommand : execute(classList:ClassList, \nui:Ui, storage:Storage)
+activate addStudentCommand
+
+addStudentCommand -> classList : getClassWithId(classId:String)
+activate classList
+classList --> addStudentCommand : teachingClass:TeachingClass
+deactivate classList
+
+addStudentCommand -> teachingClass : getStudentList()
+activate teachingClass
+teachingClass --> addStudentCommand : studentList:StudentList
+deactivate teachingClass
+
+create student
+addStudentCommand -> student
+activate student
+student --> addStudentCommand : student:Student
+deactivate student
+
+addStudentCommand -> studentList : addStudent(Student student)
+activate studentList
+studentList --> addStudentCommand
+deactivate studentList
+
+addStudentCommand -> storage : save(classList:ClassList)
+activate storage
+storage --> addStudentCommand
+deactivate storage
+
+addStudentCommand --> taa
+deactivate addStudentCommand
+taa -[hidden]-> addStudentCommand
+destroy addStudentCommand
+
+taa --> user
+deactivate taa
+
+@enduml

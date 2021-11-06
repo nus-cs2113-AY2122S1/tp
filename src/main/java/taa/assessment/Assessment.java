@@ -1,7 +1,6 @@
 package taa.assessment;
 
 import taa.ClassChecker;
-import taa.Parser;
 
 public class Assessment implements ClassChecker {
     public static final double[] WEIGHTAGE_RANGE = {0, 100};
@@ -92,8 +91,7 @@ public class Assessment implements ClassChecker {
     public boolean verify() {
         int validMaximumMarks = Double.compare(maximumMarks, MINIMUM_MARKS);
         boolean isValidMaximumMarks = validMaximumMarks < 0;
-        if (name.isEmpty() || !Parser.isValueValid(name) || !isWeightageWithinRange(weightage)
-            || isValidMaximumMarks) {
+        if (name.isEmpty() || !isWeightageWithinRange(weightage) || isValidMaximumMarks) {
             return false;
         }
 

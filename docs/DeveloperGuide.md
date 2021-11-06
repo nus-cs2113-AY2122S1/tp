@@ -1,6 +1,14 @@
 # Developer Guide
 * [Acknowledgements](#acknowledgements)
 * [Design](#design)
+  * [Architecture](#architecture)
+  * [Taa Component](#taa-component)
+  * [Ui Component](#ui-component)
+  * [Parser Component](#parser-component)
+  * [Command Component](#command-component)
+  * [ClassList Component](#classlist-component)
+  * [Util Component](#util-component)
+  * [Storage Component](#storage-component)
 * [Implementation](#implementation)
   * [Add Class](#add-class)
   * [Add Student](#add-student)
@@ -14,7 +22,9 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+List of sources/references:
+* [GSON](https://github.com/google/gson/) - Read and write JSON files.
+* [Address Book (Level 4)](https://se-education.org/addressbook-level4/) - Provide samples of User Guide (UG) and Developer Guide (DG).
 
 ## Design
 ### Architecture
@@ -25,11 +35,11 @@ The _Architecture Diagram_ shown above illustrates the high-level design of the 
 **Overview of components**
 * `Main`
   * On app launch: Creates and runs an instance of `Taa`.
-* `UI`
-  * Handles UI operations.
 * `Taa`
   * On creation: Initializes the `UI` and `Storage` components.
   * On run: Loads persistent data from `Storage`, receives user input from `UI`, and uses `Parser` to parse the user input.
+* `UI`
+  * Handles UI operations.
 * `Parser`
   * Handles input parsing and determines which command to run.
 * `Command`
@@ -44,84 +54,144 @@ The _Architecture Diagram_ shown above illustrates the high-level design of the 
 <br>
 
 **Interaction between components**
-![ArchitectureSequenceDiagram](diagrams/ArchitectureSequenceDiagram.png)
+![ArchitectureSequenceDiagram](diagrams/sequence/ArchitectureSequenceDiagram.png)
 
-The _Architecture Sequence Diagram_ shown above shows how the components usually interact with each other. 
+The _Architecture Sequence Diagram_ shown above shows how the components usually interact with each other.
+
+<br>
+
+### Taa Component
+![TaaClassDiagram](diagrams/class/TaaClassDiagram.png)
+
+The `Taa` class is the starting point of the application. It stores a `ClassList` object which represents the current
+classes that the application is keeping track of. It also initialises the `Ui` and `Storage` objects to handle user
+interactions and persistent data storage respectively.
+
+<br>
+
+### Ui Component
+![UiClassDiagram](diagrams/class/UiClassDiagram.png)
+
+The `Ui` class handles all user interactions in the application.
+
+`Ui` implements the following functionalities:
+* Print messages with a standard output format.
+* Print exception messages with a standard output format.
+* Read user input through the `getUserInput` method.
+
+<br>
+
+### Parser Component
+![ParserClassDiagram](diagrams/class/ParserClassDiagram.png)
+
+The `Parser` class provides methods to parse a user input and returns a `Command` object which represents the command that
+the user wishes to execute, and verify the validity of a value or provided by the user or read from `Storage`.
+
+`Parser` implements the following functionalities:
+* Parse a user input string and returning the respective `Command` object.
+* Check if a value is valid (e.g. Does not contain any illegal characters).
+
+<br>
+
+### Command Component
+![CommandClassDiagram](diagrams/class/CommandClassDiagram.png)
+
+The `Command` class is an _abstract_ class inherited by other command classes such as `AddClassCommand`, `EditClassCommand`,
+`DeleteClassCommand`, `HelpCommand`, etc.
+
+`Command` implements the following functionalities:
+* Check the validity of arguments provided by the user through the `checkArgument` method.
+* Perform the logic of the command run by the user through the `execute` method.
+* Return a string representing the different command usage syntax.
+
+<br>
+
+### ClassList Component
+![ClassListClassDiagram](diagrams/class/ClassListClassDiagram.png)
+
+The `ClassList` class contains data of all classes saved within it. It provides methods to allow other classes to access
+the various data within it.
+
+`ClassList` implements the following functionalities:
+* Add/Delete `TeachingClass` objects within the list.
+* Return all `TeachingClass` objects within the list.
+
+<br>
+
+### Util Component
+![UtilClassDiagram](diagrams/class/UtilClassDiagram.png)
+
+The `Util` class provides common utility methods.
+
+`Util` implements the following functionalities:
+* Check if string can be converted to `int`, `double`, or `boolean`.
+* Create a file (including its parent directories, if necessary).
+* Check if file exists.
+* Check if path is a file or folder.
+* Return the absolute path of given a path.
+
+<br>
+
+### Storage Component
+![StorageClassDiagram](diagrams/class/StorageClassDiagram.png)
+
+The `Storage` class handles all data file operations in the application. It depends on the `StorageDeserializer` to
+deserialize the data read from the JSON file. `StorageDeserializer` is an _abstract_ class inherited by other deserializer
+classes such as `ClassListDeserializer`, `TeachingClassDeserializer`, `StudentListDeserializer`, etc.
+
+`Storage` implements the following functionalities:
+* Save `ClassList` into a JSON file.
+* Read and parse JSON file into a `ClassList` object.
+* Filter out invalid data read from the JSON file.
+
+<br>
 
 ## Implementation
 ### Add Class
 The sequence diagram shown below illustrates how the `add_class` command works:
-![AddClassSequenceDiagram](diagrams/AddClassSequenceDiagram.png)
+![AddClassSequenceDiagram](diagrams/sequence/AddClassSequenceDiagram.png)
 
-Steps:
-1. The `Taa` instance reads in a user input and calls `AddClassCommand.execute(classList:ClassList, ui:Ui, storage:Storage)`.
-2. A new `TeachingClass` object is created and the `ClassList.addClass(teachingClass:TeachingClass)` method is invoked
-to add the `TeachingClass` object into the list of classes.
-3. Lastly, a message indicating that the class has been added will be printed out.
+Below is an example scenario of how the add class feature behaves at each step:<br>
+* Step 1 - The user executes `add_class i/CS2113T-F12 n/Tutorial Group F12` to add a class. The `add_class` command calls the
+`AddClassCommand.execute` method.
+* Step 2 - Within `AddClassCommand.execute`, `ClassList.getModule("CS2113T-F12")` is called to ensure that
+there is no existing class with ID `CS2113T-F12`.
+* Step 3 - If no existing class with ID `CS2113T-F12` is found, a new `TeachingClass` object with ID and name set to `CS2113T-F12`
+and `Tutorial Group F12` respectively.
+* Step 4 - Then, `ClassList.addClass` is called to add the newly created `TeachingClass` object into the `classes` ArrayList
+within `ClassList`.
 
 <br>
 
 ### Add Student
-The add student mechanism is facilitated by `AddStudentCommand`. It extends `Command` and uses `StudentList` which
-stores student internally as an ArrayList `students`.
-<br>  
-
-`AddStudentCommand` implements the following methods:
-* `AddStudentCommand#execute(moduleList:ModuleList, ui:Ui, storage:Storage)` - Performs operations for the command.
-
-`StudentList` implements the following methods:
-* `StudentList#getSize()` - Returns the no. of students currently in the list.
-* `StudentList#getStudents()` - Returns an ArrayList containing all the students.
-* `StudentList#getStudentAt(index:int)` - Returns a student with the particular index.
-* `StudentList#isValidIndex(index:int)` - Checks if an index is valid w.r.t the `students` ArrayList.
-* `StudentList#addStudent(student:Student)` - Adds a student to the `students` ArrayList.
-* `StudentList#deleteStudent(index:int)` - Deletes the `student` object at the specified `index` within the `students` 
-ArrayList.
-* `StudentList#findStudent(keyword:String)` - Returns an ArrayList of students containing the keyword
-
 The sequence diagram shown below illustrates how the `add_student` command works:
-![AddStudentSequenceDiagram](diagrams/AddStudentSequenceDiagram.png)
+![AddStudentSequenceDiagram](diagrams/sequence/AddStudentSequenceDiagram.png)
 
 Below is an example scenario of how the add student feature behaves at each step:<br>
 * Step 1 - The user executes `add_student c/CS2113T i/a0217978j n/jonny` to add a student. The `add_student` command 
-calls the `AddStudentCommand#execute` method. Within `AddStudentCommand#execute`, `ModuleList#getModule("CS2113T")` is 
+calls the `AddStudentCommand.execute` method. Within `AddStudentCommand.execute`, `ModuleList.getModule("CS2113T")` is 
 called to ensure that there is an existing module with code `CS2113T`.
 * Step 2 - If an existing module with code `CS2113T` is found, a new `Student` object with id and name set to 
-`a0217978j` and `jonny` respectively. Then, `StudentList#addModule` is called to add the newly created `Student` 
+`a0217978j` and `jonny` respectively. Then, `StudentList.addModule` is called to add the newly created `Student` 
 object into the `students` ArrayList within `StudentList`.
 
 <br>
 
 ### Add Assessment
-The add assessment mechanism is facilitated by `AddAssessmentCommand`. It extends `Command` and uses `AssessmentList`
-which stores assessment internally as an ArrayList `assessments`.<br>
-
-`AddAssessmentCommand` implements the following methods:
-* `AddAssessmentCommand#execute(moduleList:ModuleList, ui:Ui, storage:Storage)` - Performs operations for the command.
-
-`AssessmentList` implements the following methods:
-* `AssessmentList#getSize()` - Returns the no. of assessments currently in the list.
-* `AssessmentList#getAssessments()` - Returns an ArrayList containing all the assessments.
-* `AssessmentList#getAssessment(assessmentName:String)` - Returns an assessment with a particular name specified by the
-  user.
-* `AssessmentList#addAssessment(assessment:Assessment)` - Adds an assessment to the `assessments` ArrayList.
-* `AssessmentList#deleteAssessment(assessmentName:String)` - Deletes an assessment with the name specified by the user
-  from the `assessments` ArrayList.
-
 The sequence diagram shown below illustrates how the `add_assessment` command works:
-![AddAssessmentSequenceDiagram](diagrams/AddAssessmentSequenceDiagram.png)
+![AddAssessmentSequenceDiagram](diagrams/sequence/AddAssessmentSequenceDiagram.png)
 
 Below is an example scenario of how the add assessment feature behaves at each step:
 * Step 1 - The user executes `add_assessment c/cs2113t n/midterms m/20 w/10` to add an assessment. The `add_assessment`
-  command calls the `AddAssessmentCommand#execute` method. Within `AddAssessmentCommand#execute`,
-  `ModuleList#getModuleWithCode("cs2113t")` is called to ensure that there is an existing module with code `cs2113t`.
+  command calls the `AddAssessmentCommand.execute` method. Within `AddAssessmentCommand.execute`,
+  `ModuleList.getModuleWithCode("cs2113t")` is called to ensure that there is an existing module with code `cs2113t`.
 * Step 2 - If an existing module with code `cs2113t` is found, the `MAXIMUM_MARKS` and `WEIGHTAGE` arguments are checked
   to ensure that they are valid.
 * Step 3 - If the `MAXIMUM_MARKS` and `WEIGHTAGE` arguments are valid, a new `Assessment` object with name,
   maximum marks and weightage set to `midterms`, `20` and `10` respectively is created under the existing `Module` with
-  code `cs2113t`. Then, `AssessmentList#addAssessment` is called to add the newly created `Assessment` object into the
+  code `cs2113t`. Then, `AssessmentList.addAssessment` is called to add the newly created `Assessment` object into the
   `assessments` ArrayList within `AssessmentList`.
-* Step 4 - Within `AssessmentList#addAssessment`, the name of the newly created `Assessment` object is checked to ensure
+* Step 4 - Within `AssessmentList.addAssessment`, the name of the newly created `Assessment` object is checked to ensure
   there is no existing assessment with name `midterms`. At the same time, the weightage of the newly created
   `Assessment` object is also checked to ensure that the total weightage of the assessments in the `cs2113t` module
   will not exceed 100 with the addition of the weightage of the newly created `Assessment` object.
@@ -132,7 +202,7 @@ Below is an example scenario of how the add assessment feature behaves at each s
 
 ### Set Marks
 The sequence diagram shown below illustrates how the `set_mark` command works:
-![SetMarkSequenceDiagram](diagrams/SetMarkSequenceDiagram.png)
+![SetMarkSequenceDiagram](diagrams/sequence/SetMarkSequenceDiagram.png)
 
 Steps:
 1. The `Taa` instance reads in a user input through the `Ui.getUserInput()` method.
@@ -149,41 +219,22 @@ Steps:
 student's `results` HashMap.
 9. A message will then be printed out to indicate to the user that the marks have been set successfully.
 
-
-### Set Attendance
-The set attendance mechanism is facilitated by SetAttendanceCommand. It extends `Command` and
-uses  `AttendanceList` which stores a student's lessons attendance as an
-ArrayList `attendances`.
 <br>
 
-`SetAttendanceCommand` implements the following methods:
-* `SetAttendanceCommand#execute(moduleList:ModuleList, ui:Ui, storage:Storage)` - Performs operations for the command.
-
-`AttendanceList` implements the following methods:
-* `AttendanceList#getSize()` - Returns the no. of attendance currently in the list.
-* `AttendanceList#getAttendances()` - Returns an ArrayList containing all the attendances.
-* `AttendanceList#getAttendance(lessonNumber:String)` - Returns an attendance with a particular lesson number.
-* `AttendanceList#isValidIndex(index:int)` - Checks if an index is valid w.r.t the `attendances` ArrayList.
-* `AttendanceList#addAttendance(attendance:Attendance)` - Adds an attendance to the `attendances` ArrayList.
-* `AttendnaceList#getAttendnaceIndex(lessonNumInput:String)` - Returns the attendance index in the `attendances` 
-ArrayList.
-* `AttendanceList#deleteAttendance(lessonNumInput:String)` - Deletes an attendance with a particular lesson number.
-* `AttendanceList#sortAttendances` - Sorts the attendance in the `attendances` ArrayList in ascending order based on 
-lesson number.
-
+### Set Attendance
 The sequence diagram shown below illustrates how the `set_attendance` command works:
-![SetAttendanceSequenceDiagram](diagrams/SetAttendanceSequenceDiagram.png)
+![SetAttendanceSequenceDiagram](diagrams/sequence/SetAttendanceSequenceDiagram.png)
 
 Below is an example scenario of how the set attendance feature behaves at each step:
 * Step 1 - The user executes `set_attendance c/CS2113T s/1 l/1 p/1` to set an attendance to `Present` for student at 
 index `1`, lesson number `1` to set a student's attendance for a lesson. The `set_attendance` command calls the 
-`SetAttendanceCommand#execute` method. Within `SetAttendanceCommand#execute`, `AttendanceList#getAttendance("1")` is 
+`SetAttendanceCommand.execute` method. Within `SetAttendanceCommand.execute`, `AttendanceList.getAttendance("1")` is 
 called to ensure that there is no existing attendance with the
 lesson number `1`for student at index `1`.
 * Step 2 - If no existing attendance object with lesson number `1` for student at index `1` is found, a new 
 `Attendance` object
 with lesson number `1` and attendance record `Present` is set as its lesson number and attendance record respectively.
-Then, `AttendanceList#addAttendance` is called to add the newly created `Attendance` object into the `attendances` 
+Then, `AttendanceList.addAttendance` is called to add the newly created `Attendance` object into the `attendances` 
 ArrayList within `AttendanceList`.
 
 <br>

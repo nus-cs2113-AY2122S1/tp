@@ -1,0 +1,17 @@
+@startuml
+!include ClassStyle.puml
+
+class Ui {
+    -scanner: Scanner
+    +Ui()
+    +getUserInput(): String
+    +getUserInput(inputPrompt: String, allowEmpty: boolean): String
+    +printBorder(): void
+    +printMessage(message: String): void
+    +printMessage(message: String, withBorders: boolean): void
+    +printWelcomeMessage(): void
+    +printExitMessage(): void
+    +printException(message: String): void
+}
+
+@enduml
