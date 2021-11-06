@@ -8,10 +8,22 @@ import java.security.InvalidParameterException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
+/**
+ * Processes the different commands which interacts with the list of employees.
+ * Enables users to add, remove and list employees.
+ */
 public class EmployeeParser {
 
     private static Logger logger = Logger.getLogger("EmployeeParser");
 
+    /**
+     * Adds a single employee into the list of employees.
+     * Requires critical information of the employee to be added such as name, phone number,
+     * employment status and salary.
+     *
+     * @param command contains the input from users.
+     * @param masterList references to the list of employees where changes will be made.
+     */
     public void addEmployee(String[] command, EmployeeList masterList) {
         logger.log(Level.FINE, "going to add employee");
 
@@ -36,6 +48,14 @@ public class EmployeeParser {
         assert masterList.totalEmployee >= 0 : "total employee should be equals to or greater than zero";
     }
 
+    /**
+     * Adds a single employee into the list of employees - from Duke.txt (storage location).
+     * Requires critical information of the employee to be added such as name, phone number,
+     * employment status and salary.
+     *
+     * @param command contains the input from storage.
+     * @param masterList references to the list of employees where changes will be made.
+     */
     public void addEmployeeFromStorage(String[] command, EmployeeList masterList) {
         logger.log(Level.FINE, "going to add employee");
 
@@ -49,6 +69,14 @@ public class EmployeeParser {
         assert masterList.totalEmployee >= 0 : "total employee should be equals to or greater than zero";
     }
 
+    /**
+     * Converts employee status from string format to enum.
+     * Employment status can only be perm, temp or adhoc, as specified in Employee.java.
+     *
+     * @param input contains the employment status specified by the users.
+     * @return enum of employment status.
+     * @throws InvalidParameterException If input from user is invalid.
+     */
     private Employee.employmentStatus convertToStatus(String input) throws InvalidParameterException {
         logger.log(Level.FINE, "going to convert employee status from string to enum");
         switch (input) {
@@ -66,6 +94,13 @@ public class EmployeeParser {
         }
     }
 
+    /**
+     * Deletes a single employee from the list of employees.
+     * Requires information on which employee to remove, which must be specified by user.
+     *
+     * @param command contains the input from storage.
+     * @param masterList references to the list of employees where changes will be made.
+     */
     public void deleteEmployee(String[] command, EmployeeList masterList) {
         logger.log(Level.FINE, "going to delete employee");
         try {
@@ -87,6 +122,12 @@ public class EmployeeParser {
         assert masterList.totalEmployee >= 0 : "total employee should be equals to or greater than zero";
     }
 
+    /**
+     * List all the employees in the list and their respective information.
+     * Information that are listed includes: name, phone number, employment status and salary.
+     *
+     * @param masterList references to the list of employees where changes will be made.
+     */
     public void listEmployee(EmployeeList masterList) {
         logger.log(Level.FINE, "going to list employee");
         if (masterList.totalEmployee < 1) {
