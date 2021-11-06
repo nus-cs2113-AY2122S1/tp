@@ -11,14 +11,14 @@ import taa.student.Student;
 
 import java.util.ArrayList;
 
-public class ListCommentCommand extends Command {
+public class ListCommentsCommand extends Command {
     private static final String KEY_CLASS_ID = "c";
     private static final String[] LIST_ATTENDANCE_ARGUMENT_KEYS = {KEY_CLASS_ID};
     private static final String MESSAGE_LIST_COMMENT_HEADER = "Here is the list of all students and the comments:";
 
     private static final String MESSAGE_FORMAT_LIST_ATTENDANCE_USAGE = "%s %s/<CLASS_ID>";
 
-    public ListCommentCommand(String argument) {
+    public ListCommentsCommand(String argument) {
         super(argument, LIST_ATTENDANCE_ARGUMENT_KEYS);
     }
 

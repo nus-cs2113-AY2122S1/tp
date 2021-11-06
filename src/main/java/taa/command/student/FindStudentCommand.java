@@ -11,6 +11,7 @@ import taa.student.Student;
 import taa.student.StudentList;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class FindStudentCommand extends Command {
     private static final String KEY_CLASS_ID = "c";
@@ -55,18 +56,20 @@ public class FindStudentCommand extends Command {
 
         String keyword = argumentMap.get(KEY_KEYWORD);
         StudentList studentList = teachingClass.getStudentList();
-        ArrayList<Student> studentsFound = studentList.findStudents(keyword);
+        HashMap<Integer, Student> studentsFound = studentList.findStudents(keyword);
         if (studentsFound.isEmpty()) {
             throw new TaaException(MESSAGE_NO_STUDENTS_FOUND);
         }
 
         String header = String.format(MESSAGE_FORMAT_STUDENT_FOUND_HEADER, classId, keyword);
         StringBuilder stringBuilder = new StringBuilder(header);
-        for (int i = 0; i < studentsFound.size(); i += 1) {
-            stringBuilder.append("\n");
-            stringBuilder.append(i + 1);
-            stringBuilder.append(". ");
-            stringBuilder.append(studentsFound.get(i));
+        for (int i = 0; i < studentList.getSize(); i += 1) {
+            if (studentsFound.containsKey(i)) {
+                stringBuilder.append("\n");
+                stringBuilder.append(i + 1);
+                stringBuilder.append(". ");
+                stringBuilder.append(studentsFound.get(i));
+            }
         }
 
         ui.printMessage(stringBuilder.toString());

@@ -33,7 +33,7 @@ import taa.command.mark.SetMarkCommand;
 import taa.command.student.SortByScoresCommand;
 import taa.command.comment.SetCommentCommand;
 import taa.command.comment.DeleteCommentCommand;
-import taa.command.comment.ListCommentCommand;
+import taa.command.comment.ListCommentsCommand;
 import taa.exception.DuplicatedArgumentException;
 import taa.exception.TaaException;
 
@@ -172,7 +172,7 @@ public class Parser {
             break;
 
         case Command.COMMAND_LIST_COMMENT:
-            command = new ListCommentCommand(argument);
+            command = new ListCommentsCommand(argument);
             break;
 
         case Command.COMMAND_ARCHIVE:
