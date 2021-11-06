@@ -54,7 +54,11 @@ public class TodoFactory extends TaskFactory {
 
     private static Todo getTodoWithDefaultPriority(String description, LocalDateTime doOn, RecurrenceEnum recurrence) {
         if (doOn == null) {
-            return new Todo(description);
+            if (recurrence == null) {
+                return new Todo(description);
+            } else {
+                return new Todo(description, recurrence);
+            }
         } else {
             if (recurrence == null) {
                 return new Todo(description, doOn);
@@ -67,7 +71,11 @@ public class TodoFactory extends TaskFactory {
     private static Todo getTodoWithPriority(String description,
                                             PriorityEnum priority, LocalDateTime doOn, RecurrenceEnum recurrence) {
         if (doOn == null) {
-            return new Todo(description, priority);
+            if (recurrence == null) {
+                return new Todo(description, priority);
+            } else {
+                return new Todo(description, priority, recurrence);
+            }
         } else {
             if (recurrence == null) {
                 return new Todo(description, priority, doOn);

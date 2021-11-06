@@ -3,14 +3,12 @@ package seedu.duke.task;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
 import seedu.duke.command.Command;
 import seedu.duke.command.flags.TaskFlag;
 import seedu.duke.exception.InvalidFlagsException;
 import seedu.duke.task.reminder.Reminder;
-import seedu.duke.task.reminder.ReminderInformation;
 import seedu.duke.exception.InvalidPriorityException;
 import seedu.duke.exception.InvalidRecurrenceException;
 import seedu.duke.exception.ParseDateFailedException;
@@ -19,7 +17,7 @@ import seedu.duke.exception.StartDateAfterEndDateException;
 public abstract class Task {
 
     private static final PriorityEnum DEFAULT_PRIORITY = PriorityEnum.MEDIUM;
-    protected static final RecurrenceEnum DEFAULT_RECURRENCE = RecurrenceEnum.NONE;
+    private static final RecurrenceEnum DEFAULT_RECURRENCE = RecurrenceEnum.NONE;
 
     private static final String TASK_ENTRY_DESCRIPTION_REGEX = "%s <%s> {%s}";
 
@@ -92,18 +90,6 @@ public abstract class Task {
 
     public boolean needReminder() {
         return (reminder != null);
-    }
-
-    public void updateReminderMessage(String message) {
-        reminder.setMessage(message);
-    }
-
-    public void updateReminderTime(long reminderTime) {
-        reminder.setUserTime(reminderTime);
-    }
-
-    public ReminderInformation getReminderInformation() {
-        return reminder.getInformation();
     }
 
     public RecurrenceEnum getRecurrence() {

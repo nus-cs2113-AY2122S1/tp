@@ -35,7 +35,8 @@ public class ReminderManager {
         if (index < 0 || index > taskManager.getTaskListSize() - 1) {
             throw new InvalidTaskIndexException(++index);
         } else if (taskManager.getTask(index).needReminder()) {
-            taskManager.getTask(index).updateReminderTime(userTime);
+            Reminder reminder = taskManager.getTask(index).getReminder();
+            reminder.setUserTime(userTime);
         } else {
             throw new ReminderNotRequiredException();
         }
@@ -47,7 +48,8 @@ public class ReminderManager {
         if (index < 0 || index > taskManager.getTaskListSize() - 1) {
             throw new InvalidTaskIndexException(++index);
         } else if (taskManager.getTask(index).needReminder()) {
-            taskManager.getTask(index).updateReminderMessage(message);
+            Reminder reminder = taskManager.getTask(index).getReminder();
+            reminder.setMessage(message);
         } else {
             throw new ReminderNotRequiredException();
         }

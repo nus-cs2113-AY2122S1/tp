@@ -84,22 +84,7 @@ public class Lesson extends Event {
     }
 
     @Override
-    public void updateReminderMessage(String message) {
-
-    }
-
-    @Override
-    public void updateReminderTime(long reminderTime) {
-
-    }
-
-    @Override
     protected LessonFlag getTaskFlag() {
         return new LessonFlag();
-    }
-
-    @Override
-    public ReminderInformation getReminderInformation() {
-        return null;
     }
 }

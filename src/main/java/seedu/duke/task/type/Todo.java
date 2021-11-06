@@ -30,6 +30,11 @@ public class Todo extends Task {
         setPriority(priority);
     }
 
+    public Todo(String description, RecurrenceEnum recurrence) {
+        this(description);
+        setRecurrence(recurrence);
+    }
+
     public Todo(String description, LocalDateTime doOnDate) {
         this(description);
         setDoOnDate(doOnDate);
@@ -44,6 +49,12 @@ public class Todo extends Task {
     public Todo(String description, LocalDateTime doOnDate, RecurrenceEnum recurrence) {
         this(description);
         setDoOnDate(doOnDate);
+        setRecurrence(recurrence);
+    }
+
+    public Todo(String description, PriorityEnum priority, RecurrenceEnum recurrence) {
+        this(description);
+        setPriority(priority);
         setRecurrence(recurrence);
     }
 
