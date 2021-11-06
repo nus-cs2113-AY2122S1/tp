@@ -55,6 +55,7 @@ Given below are the contributions I have made to this project.
     - All text descriptions in this section.
     - [Image] The **Sequence Diagram** - Showing how the process of filtering the user's tasklist that is managed 
     - by the TaskManager class.
+  - Added the information in "5.2 User stories".
 
 - **Contributions to team-based tasks**:
   - Maintained the issue tracker and milestones for our team.
