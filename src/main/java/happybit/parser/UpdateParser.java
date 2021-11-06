@@ -103,7 +103,7 @@ public class UpdateParser extends Parser {
             newHabitName = getName(parameters);
         }
         if (updateAttributes[1] == 1) {
-            newHabitInterval = getUpdateInterval(parameters, FLAG_INTERVAL);
+            newHabitInterval = getUpdateInterval(parameters);
         }
         ArrayList<String> excessAttributes = getExcessHabitAttributes(parameters);
         return new UpdateHabitCommand(goalIndex, habitIndex, newHabitName, newHabitInterval,

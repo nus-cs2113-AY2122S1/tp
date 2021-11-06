@@ -169,14 +169,13 @@ public class Parser {
      * When adding new habit, interval can be 0.
      *
      * @param parameters String array of command parameters.
-     * @param flag Flag of parameter being checked.
      * @return New interval to be changed to.
      * @throws HaBitParserException If interval is less than or equal to 0.
      */
-    protected static int getUpdateInterval(ArrayList<String> parameters, String flag) throws HaBitParserException {
-        int interval = getNumber(parameters, flag);
+    protected static int getUpdateInterval(ArrayList<String> parameters) throws HaBitParserException {
+        int interval = getNumber(parameters, Parser.FLAG_INTERVAL);
         if (interval == 0) {
-            throw new HaBitParserException(String.format(ERROR_ZERO_NUM, flag));
+            throw new HaBitParserException(String.format(ERROR_ZERO_NUM, Parser.FLAG_INTERVAL));
         }
         return interval;
     }
