@@ -33,9 +33,8 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for feature `delete` (Pull requests [#118](https://github.com/AY2122S1-CS2113T-F11-2/tp/pull/118), [#123](https://github.com/AY2122S1-CS2113T-F11-2/tp/pull/123)).
-        * Added documentation for features - `Loan Reminder` (Pull requests [#157](https://github.com/AY2122S1-CS2113T-F11-2/tp/pull/157)).
+        * Added documentation for feature `delete` (Pull request [#118](https://github.com/AY2122S1-CS2113T-F11-2/tp/pull/118), [#123](https://github.com/AY2122S1-CS2113T-F11-2/tp/pull/123)).
+        * Added documentation for features - `Loan Reminder` (Pull request [#157](https://github.com/AY2122S1-CS2113T-F11-2/tp/pull/157)).
     * Developer Guide:
-        * Added implementation details of the `delete` feature (Pull requests [#105](https://github.com/AY2122S1-CS2113T-F11-2/tp/pull/105)).
-        * Added design details of the `UI component` part.
-        
+        * Added implementation details of the `delete` feature (Pull request [#105](https://github.com/AY2122S1-CS2113T-F11-2/tp/pull/105)).
+        * Added design details of the `UI component` part. (Pull request [#214](https://github.com/AY2122S1-CS2113T-F11-2/tp/pull/214)).
