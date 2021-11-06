@@ -14,7 +14,7 @@ them. Finally, [Command Summary](#command-summary) provides you with an overview
 
 ## Table of contents
 * [Acknowledgements](#acknowledgements)
-* [Pre-requisites](#Pre-requisites - _Things to prepare before you start using CCA Manager_)
+* [Pre-requisites](#Pre-requisites)
 * [Commands](#commands)
   * [Warning Labels](#warning-labels) ⚠️
   * [Members](#member-commands)
