@@ -90,6 +90,7 @@ public class EmployeeParser {
         case "ADHOC":
             return Employee.employmentStatus.ADHOC;
         default:
+            EmployeeUI.printInvalidEmploymentStatusMessage();
             throw new InvalidParameterException();
         }
     }
