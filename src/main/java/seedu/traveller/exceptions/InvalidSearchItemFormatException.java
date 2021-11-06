@@ -1,7 +1,7 @@
 package seedu.traveller.exceptions;
 
 
-//@@author Jach23
+//@@author jach23
 public class InvalidSearchItemFormatException extends TravellerException {
     public InvalidSearchItemFormatException() {
         message = "\tWrong format for SearchItem!\n\tCorrect format: "
