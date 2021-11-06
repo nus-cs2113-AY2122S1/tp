@@ -44,6 +44,7 @@ public class Profile {
 
     public void showTranscript() {
         TranscriptUi.printIntroduction();
+        TranscriptUi.printPersonalParticulars();
         TranscriptUi.printHeadings();
         record.printGradedModuleInfo();
         record.printUngradedModuleInfo();

@@ -8,7 +8,7 @@ import seedu.user.Profile;
 import java.time.LocalDateTime;
 
 public class TranscriptUi {
-    private static final String CENTER_ALIGN_SPACE = String.format("%32s","");
+    private static final String CENTER_ALIGN_SPACE = String.format("%32s", "");
     private static final String UniName = CENTER_ALIGN_SPACE + "--\tNational University of Singapore\t--";
     private static final String transcriptName = CENTER_ALIGN_SPACE + "\t--\tUnofficial Transcript\t--";
     private static final String notice = "This is not an official transcript issued by the Office of the Registrar.";
@@ -26,17 +26,16 @@ public class TranscriptUi {
     private static final String MODULE_CREDITS_LENGTH = "%-7.7s";
     private static final String MODULE_SEPARATION_LENGTH = "%-2.2s";
     private static final String NEXT_LINE = "\n";
+    private static final String NAME = "Name";
+    private static final String MAJOR = "Enrolled in Major";
+    private static final String YEAR_OF_STUDY = "Year of study";
+    private static final String COLON = ": ";
+    private static final String PERSONAL_INFO_LENGTH = "%-19.19s";
 
 
     public static void printIntroduction() {
         System.out.println(UniName);
         System.out.println(transcriptName + divider);
-        now = LocalDateTime.now();
-        int month = now.getMonthValue();
-        int day = now.getDayOfMonth();
-        int year = now.getYear();
-        String dateOfIssuance = day + "-" + month + "-" + year;
-        System.out.println("\nDate Issued : " + dateOfIssuance + "\n");
     }
 
     public static void printHeadings() {
@@ -48,6 +47,26 @@ public class TranscriptUi {
         System.out.printf(MODULE_SEPARATION_LENGTH, DELIMITER_SPACE);
         System.out.printf((MODULE_CREDITS_LENGTH) + "%n", HEADING_CREDITS);
         System.out.print(NEXT_LINE);
+    }
+
+    public static void printPersonalParticulars() {
+        Profile currentProfile = UniMods.getProfileInUse();
+        String name = currentProfile.getName();
+        String major = currentProfile.getMajor();
+        String yearOfStudy = currentProfile.getYear();
+        System.out.println(NEXT_LINE);
+        System.out.printf(PERSONAL_INFO_LENGTH, NAME);
+        System.out.println(COLON + name);
+        System.out.printf(PERSONAL_INFO_LENGTH, MAJOR);
+        System.out.println(COLON + major);
+        System.out.printf(PERSONAL_INFO_LENGTH, YEAR_OF_STUDY);
+        System.out.println(COLON + yearOfStudy);
+        now = LocalDateTime.now();
+        int month = now.getMonthValue();
+        int day = now.getDayOfMonth();
+        int year = now.getYear();
+        String dateOfIssuance = day + "-" + month + "-" + year;
+        System.out.println("\nDate Issued : " + dateOfIssuance + "\n");
     }
 
     public static void printGradedModules(GradedModule module) {
@@ -84,7 +103,7 @@ public class TranscriptUi {
 
     public static void printConclusion() {
         System.out.println("\nTotal Credits Fulfilled : " + mcsCompleted);
-        mcsCompleted=0;
+        mcsCompleted = 0;
         System.out.println();
         Profile currentProfile = UniMods.getProfileInUse();
         TextUi.printCap(currentProfile.getCap());
