@@ -5,7 +5,6 @@ import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Event;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class EventDecoderTest {
 

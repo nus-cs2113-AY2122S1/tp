@@ -43,18 +43,18 @@ class TaskDecoderTest {
     }
 
     @Test
-    void decodeTaskFromString_outOfBoundsIndexOfEvent_exceptionThrown() throws DukeException {
+    void decodeTaskFromString_outOfBoundsIndexOfEvent_exceptionThrown() {
         String encodedTask = "t | Hype myself up | X | Drink lots of sugar | 19-02-2022 1950 | JOHN_DOE"
                 + " | 3 | Peppa Pig's Concert";
-        DukeException thrown = assertThrows(DukeException.class, () -> {
+        assertThrows(DukeException.class, () -> {
             TaskDecoder.decodeTaskFromString(encodedTask);
         });
     }
 
     @Test
-    void decodeTaskFromString_invalidMemberListSize_exceptionThrown() throws DukeException {
+    void decodeTaskFromString_invalidMemberListSize_exceptionThrown() {
         String encodedTask = "t | Enter venue |   |  | 19-02-2022 1955 | BIGGEST_FAN | 1 | Peppa Pig's Concert";
-        DukeException thrown = assertThrows(DukeException.class, () -> {
+        assertThrows(DukeException.class, () -> {
             TaskDecoder.decodeTaskFromString(encodedTask);
         });
     }

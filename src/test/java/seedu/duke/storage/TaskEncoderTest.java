@@ -1,7 +1,6 @@
 package seedu.duke.storage;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Event;
@@ -9,8 +8,7 @@ import seedu.duke.items.characteristics.Member;
 import seedu.duke.parser.Parser;
 import seedu.duke.items.Task;
 
-import javax.swing.plaf.metal.MetalMenuBarUI;
-import java.lang.reflect.Array;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
