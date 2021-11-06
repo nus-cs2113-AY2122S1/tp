@@ -60,4 +60,8 @@ public class ExpenseList {
     public static ArrayList<Expense> getExpenses() {
         return expenses;
     }
+
+    public static void clearExpenses() {
+        expenses.clear();
+    }
 }
