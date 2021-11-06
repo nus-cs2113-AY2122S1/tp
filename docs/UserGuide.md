@@ -123,7 +123,7 @@ Examples:
 * `list_students c/CS2113T-F11`
 * `list_students c/CS2101-C04`
 
-Expected output <br>
+Expected Output: <br>
 ![img.png](images/students/ListStudentsCommand.png)
 <br>
 
@@ -140,7 +140,7 @@ Examples:
 * `add_student c/CS2113T-F11 i/a0212345x n/Jon Lim`
 * `add_student c/CS2101-C04 n/Jonny Lims i/a1234567i`
 
-Expected output <br>
+Expected Output: <br>
 ![img.png](images/students/AddStudentCommand.png)
 > 💡 **Note:**<br />
 > The `STUDENT_ID` will be converted to UPPERCASE.
@@ -160,7 +160,7 @@ Examples:
 * `edit_student c/CS2113T-F11 s/1 i/a03452345x n/Jon Lim`
 * `edit_student c/CS2101-D03 s/5 n/Jonny Lims i/a120067i`
 
-Expected output <br>
+Expected Output: <br>
 ![img.png](images/students/EditStudentCommand.png)
 
 > 💡 **Note:**<br />
@@ -178,7 +178,7 @@ Format: `delete_student c/<CLASS_ID> s/<STUDENT_INDEX>`
 Examples:
 * `delete_student c/CS2113T-F11 s/1`
 
-Expected output <br>
+Expected Output: <br>
 ![img.png](images/students/DeleteStudentCommand.png)
 <br>
 
@@ -193,7 +193,7 @@ Examples:
 * `find_student c/CS2113T-F11 k/123`
 * `find_student c/CS2101-D03 k/Jon`
 
-Expected output <br>
+Expected Output: <br>
 ![img_1.png](images/students/FindStudentCommand.png)
 <br>
 <hr>
