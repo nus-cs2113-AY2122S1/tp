@@ -24,13 +24,16 @@ easy and fuss-free, by helping you calculate how much each person owes every oth
     * [List Trips](#--list-trips)
     * [View People in Trip](#--view-people-in-trip)
     * [Delete Trip](#--delete-trip)
+    * [Edit Trip](#--edit-trip)
   * [Expenses](#expenses)
     * [Create Expense](#--create-expense)
     * [List Expenses](#--list-expenses)
     * [View an Expense](#--view-an-expense)
     * [Filter Expenses by Attribute](#--filter-expenses-by-attribute)
     * [Delete Expense](#--delete-expense)
-  * [Optimize Transactions](#optimize-transactions)
+  * [Settling Expenses](#settling-expenses)
+    * [Amount](#amount)
+    * [Optimize Transactions](#optimize-transactions)
   * [Summary of Expenses](#summary-of-expenses)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
@@ -312,12 +315,12 @@ Edit attributes of a Trip
 Input syntax:
 ```
 edit [trip num] [attribute] [new value]
-
-attributes: -location, -date, -exchange rate, -forcur, -homecur
 ```
+All fields are compulsory. Note the following:
+- list of attributes: -location, -date, -exchange rate, -forcur, -homecur
 - The hyphen preceding an attribute is part of the syntax.
 - `[trip-number]` is the index of the Trip you wish to edit, which can be found by using `list` command while no Trip is open.
-- `last` can be used for `[trip num]`
+- `last` can be used for `[trip num]`.
 
 
 For example,
@@ -325,11 +328,11 @@ For example,
 Input:
 
 ````
-delete 1
+edit 2 -location japan
 ````
 If successful, the output will be as follows:
 ```
-Your trip to America on 02 Feb 2021 has been successfully removed.
+The location of your trip has been changed from tokyo to japan.
 ```
 <br />
 
@@ -722,7 +725,7 @@ Close trip | `close` | `close`
 List trips | `list` when no trip is opened| `list`
 List persons involved in a trip | `people` | `people`
 Delete trip | `delete [trip-number]`|`delete 1`
-Edit trip | `edit [trip num] [attribute] [new value]` <br /><br /> `[-attribute]: -location, -date, -exchange rate, -forcur, -homecur`  | `edit 1 -location Afghanistan`
+Edit trip | `edit [trip num] [attribute] [new value]` <br /><br /> attributes: -location, -date, -exchange rate, -forcur, -homecur  | `edit 1 -location Afghanistan`
 
 <br />
 

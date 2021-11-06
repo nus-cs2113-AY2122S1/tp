@@ -136,6 +136,12 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
     }
     //@@author
 
+    //@@author itsleeqian
+    /**
+     * Prints out the summary of expenses of an individual or everyone.
+     * @param inputParams the individual to view. Can also be null to print everyone.
+     * @throws ForceCancelException
+     */
     protected static void executeSummary(String inputParams) throws ForceCancelException {
         Trip currentTrip = Storage.getOpenTrip();
         if (inputParams == null) {
@@ -161,6 +167,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
             }
         }
     }
+    //@@author
 
     //@@author leeyikai
     protected static void executeView(String inputParams) throws ForceCancelException {
@@ -231,6 +238,11 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
     }
     //@@author
 
+    //@@author itsleeqian
+    /**
+     * Lists either trips or expenses depending on if a trip is open or not.
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required
+     */
     protected static void executeList() throws ForceCancelException {
         if (!Storage.checkOpenTrip()) {
             Ui.printAllTrips();
@@ -238,6 +250,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
             Ui.printExpensesInList(Storage.getOpenTrip().getListOfExpenses());
         }
     }
+    //@@author
 
     //@@author joshualeeky
 
@@ -272,6 +285,13 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
     }
 
     //@@author
+
+    //@@author itsleeqian
+    /**
+     * Lists the people involved in a trip.
+     * @throws TripNotOpenException cannot list people if no trip is open.
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
+     */
     protected static void executePeople() throws TripNotOpenException, ForceCancelException {
         Trip currTrip = Storage.getOpenTrip();
         if (Storage.checkOpenTrip()) {
@@ -281,6 +301,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
             throw new TripNotOpenException();
         }
     }
+    //@@author
 
     protected static void executeOptimize() throws NoExpensesException, ForceCancelException {
         if (Storage.getOpenTrip().getListOfExpenses().size() > 0) {
