@@ -4,7 +4,7 @@
 * [Acknowledgements](#acknowledgements)
 * [Setting Up](#setting-up)
 * [Design](#design)
-  * [Architecture](#architecture-overview)
+  * [Architecture](#architecture)
   * [UI](#ui-component)
   * [Parser](#parser-component)
   * [Entry](#entry-component)
@@ -52,7 +52,7 @@ We recommend the use of [IntelliJ](https://www.jetbrains.com/idea/download) when
 
 ## Design
 
-### Architecture Overview
+### Architecture
 
 ![Architecture Diagram](images/ArchitectureDiagram.png)
 
