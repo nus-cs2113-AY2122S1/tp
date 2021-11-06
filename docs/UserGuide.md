@@ -106,6 +106,8 @@ Usage example(s):
 * No deadline: `create abs`
 * With deadline: `create leg day, 2021-10-21`
 
+<div style="page-break-after: always;"></div>
+
 Expected outcome (*no deadline specified*):
 
 ```
@@ -144,13 +146,13 @@ Enter into the workout with index 2: `enter 2`
 Expected outcome:
 ```
 enter 2
-			________________________________________________________
-			Now inside workout 2 : leg day finish by: 2 Oct 2021
-			________________________________________________________
+		________________________________________________________
+		Now inside workout 2 : leg day finish by: 2 Oct 2021
+		________________________________________________________
 add Push-ups, 5 10
-			________________________________________________________
-			New exercise added to workout 1 : [ ] Push-ups | 5 sets of 10 reps
-			________________________________________________________
+		________________________________________________________
+		New exercise added to workout 1 : [ ] Push-ups | 5 sets of 10 reps
+		________________________________________________________
 ```
 
 
@@ -162,17 +164,17 @@ add Push-ups, 5 10
 For example,
 ```
 enter 1
-			________________________________________________________
-			Now inside workout 1 : leg day finish by: 2 Oct 2021
-			________________________________________________________
+		________________________________________________________
+		Now inside workout 1 : leg day finish by: 2 Oct 2021
+		________________________________________________________
 add sit ups, 4 30, 2
-			________________________________________________________
-			New exercise added to workout 2 : [ ] sit ups | 4 sets of 30 reps
-			________________________________________________________
+		________________________________________________________
+		New exercise added to workout 2 : [ ] sit ups | 4 sets of 30 reps
+		________________________________________________________
 enter 2
-			________________________________________________________
-			Now inside workout 2 : full body
-			________________________________________________________
+		________________________________________________________
+		Now inside workout 2 : full body
+		________________________________________________________
 ```
 
 ### 3. Exiting from a workout: `back`
@@ -303,13 +305,13 @@ ________________________________________________________
 Expected outcome (*Workout Mode*):
 ```
 enter 1
-			________________________________________________________
-			Now inside Workout: leg day finish by: 21 Oct 2021
-			________________________________________________________
+		________________________________________________________
+		Now inside Workout: leg day finish by: 21 Oct 2021
+		________________________________________________________
 add lunges, 4 8
-			________________________________________________________
-			New exercise added: [ ] lunges | 4 sets of 8 reps
-			________________________________________________________
+		________________________________________________________
+		New exercise added: [ ] lunges | 4 sets of 8 reps
+		________________________________________________________
 ```
 
 ### 7. Mark an exercise done: `done`
@@ -698,21 +700,24 @@ directly by editing that data file.
 Scenario 1 (Exercise reps and sets are not numbers)
 ```
 ________________________________________________________
-☹ OOPS!!! Error reading file! Please ensure the sets and reps in data/workouts.json are numbers.
+☹ OOPS!!! Error reading file! Please ensure the sets and reps in data/workouts.json 
+are numbers.
 ________________________________________________________
 ```
 
 Scenario 2 (Workout deadlines are not in the correct date format)
 ```
 ________________________________________________________
-☹ OOPS!!! Error reading file! Please ensure the deadline in data/workouts.json is in the format yyyy-mm-dd.
+☹ OOPS!!! Error reading file! Please ensure the deadline in data/workouts.json is in 
+the format yyyy-mm-dd.
 ________________________________________________________
 ```
 
 Scenario 3 (Invalid JSON file format)
 ```
 ________________________________________________________
-☹ OOPS!!! Error converting from JSON due to invalid JSON format. Check for proper closing brackets "{ }" and "[ ]" in data/workouts.json.
+☹ OOPS!!! Error converting from JSON due to invalid JSON format. Check for proper 
+closing brackets "{ }" and "[ ]" in data/workouts.json.
 ________________________________________________________
 ```
 
