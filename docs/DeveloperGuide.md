@@ -19,6 +19,7 @@
   - [Searching a contact](#Search)
   - [Listing all contacts](#List)
   - [Importing contacts](#Import)
+  - [Contact index parser](#IndexParser)
 - [Product Scope](#scope)
   - [Target user profile](#target)
   - [Value proposition](#value)
@@ -157,9 +158,11 @@ executed in `ConTech`. The sequence diagram below illustrates the process of exe
 
 ### <a name="View"></a>Viewing a contact: `view`
 This feature is processed using `ViewContactCommand`. Whenever a user wants to view a specific contact from the
-contact list, user can input `view INDEX` with the index of the desired contact displayed from the [`list`](#List) feature. 
-`ViewContactCommand` is then created in the `MainParser` and executed in `ConTech`.
+contact list, a user must input a command in the form `view <INDEX>`, with `INDEX` being the index of the desired 
+contact that is displayed using [`ls`](#List). The user input is parsed by the [`IndexParser`](#IndexParser) 
+to obtain the contact index, which identifies the contact in the contact list to be viewed.
 
+A `ViewContactCommand` with the specified parameters will then be created in the `MainParser` and executed in `ConTech`. 
 The sequence diagram below illustrates the `execute()` function in `ViewContactCommand`.
 
 ![View Sequence Diagram](images/ViewContactCommandSequenceDiagram.png)
@@ -178,30 +181,38 @@ shows how the whole process is carried out.
 
 
 ### <a name="Delete"></a>Deleting contacts: `rm`
-This feature is processed using the `DeleteContactCommand`. `DeleteContactCommand` is created 
-in the `MainParser`and executed in`ConTech`. Users can either delete a specified contact
-or delete all contacts at once.
+This feature is processed using the `DeleteContactCommand`. Users can delete a specified contact, delete all contacts at
+once or delete specific details of a selected contact. In order to determine which contact or which 
+contact's fields to delete, the user input is parsed using the [`IndexParser`](#IndexParser) to obtain the contact
+index for executing the command. The user input is also parsed using `DeleteContactParser` to obtain the specific fields
+to be deleted, if any.
+
+A `DeleteContactCommand` with the specified parameters will then be created in the `MainParser`and executed in`ConTech`.
 
 ![Delete Sequence Diagram](images/DeleteContactCommandSequenceDiagram.png)
 
-To _delete all contacts_, a user must enter the command `rm all`. The sequence diagram below
-shows how the removal of all contacts works. Before any deletion, the user will be
+To _delete all contacts_, a user must enter the command `rm all`. 
+
+The sequence diagram below shows how the removal of all contacts works. Before any deletion, the user will be
 prompted with a message to confirm deletion. If the user confirms deletion for all contacts,
 deletion will be executed, along with a message to show that deletion has been executed.
 If user cancels deletion, a message is printed to show that the deletion has been cancelled.
 
 ![Delete All Sequence Diagram](images/DeleteAllContacts.png) 
 
-To _delete a selected contact_, a user must enter a command in the form `rm <INDEX>`. The sequence diagram below
-shows how the removal of a contact works. Before any deletion, details of the contact with the specified`INDEX` 
-will be displayed to the user, along with a prompt to confirm deletion. If the user confirms deletion, 
-deletion of the selected contact will be executed, along with a message to show that deletion has been executed.
-If user cancels deletion, a message is printed to show that the deletion has been cancelled.
+To _delete a selected contact_, a user must enter a command in the form `rm <INDEX>`.
+
+The sequence diagram below shows how the removal of the selected contact works. Before any deletion, details of the 
+contact with the specified`INDEX` will be displayed to the user, along with a prompt to confirm deletion. If the user 
+confirms deletion, deletion of the selected contact will be executed, along with a message to show that deletion has 
+been executed. If user cancels deletion, a message is printed to show that the deletion has been cancelled.
 
 ![Delete Selected Sequence Diagram](images/DeleteSelectedContact.png)
 
 To _delete specific details_ of a selected contact, a user must enter a command in the form `rm <INDEX> {-g} {-l} {-te}
-{-tw} {-e}`. The sequence diagram below shows how the removal of a contact's fields works. Before any
+{-tw} {-e}`. 
+
+The sequence diagram below shows how the removal of a contact's fields works. Before any
 deletion, details of the contact fields specified will be displayed to the user, along with a prompt to confirm 
 deletion. If the user confirms deletion, deletion of the selected contact will be executed, along with a message to show
 that deletion has been executed. If user cancels, deletion, a message is printed to show that the deletion has been
