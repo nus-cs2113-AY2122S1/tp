@@ -10,7 +10,7 @@ import static seedu.duke.common.Messages.RM_SUCCESS;
 
 //@@author exetr
 public class RemoveCommand extends Command {
-    public static final String COMMAND_REMOVE = "rm";
+    public static final String COMMAND_WORD = "rm";
     protected String args;
 
     /**

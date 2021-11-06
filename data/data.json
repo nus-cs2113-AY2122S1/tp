@@ -2,9 +2,13 @@
   "audio" : [ {
     "title" : "CD",
     "id" : "124",
-    "status" : "LOANED",
-    "loanee" : "John",
-    "dueDate" : "07-11-2021",
+    "status" : "AVAILABLE",
+    "artist" : "Michael Jackson",
+    "duration" : "2h"
+  }, {
+    "title" : "Thriller",
+    "id" : "A A",
+    "status" : "AVAILABLE",
     "artist" : "Michael Jackson",
     "duration" : "2h"
   } ],
@@ -13,8 +17,35 @@
     "id" : "123",
     "status" : "AVAILABLE",
     "author" : "JK Rowling"
+  }, {
+    "title" : "TITLE",
+    "id" : "ID",
+    "status" : "AVAILABLE",
+    "author" : "AUTHOR"
   } ],
-  "item" : [ ],
-  "magazine" : [ ],
-  "video" : [ ]
+  "item" : [ {
+    "title" : "TITLE",
+    "id" : "126",
+    "status" : "LOANED",
+    "loanee" : "John",
+    "dueDate" : "20-10-2021"
+  }, {
+    "title" : "title",
+    "id" : "127",
+    "status" : "AVAILABLE"
+  } ],
+  "magazine" : [ {
+    "title" : "TITLE",
+    "id" : "id",
+    "status" : "AVAILABLE",
+    "publisher" : "PUBLISHER",
+    "edition" : "EDITION"
+  } ],
+  "video" : [ {
+    "title" : "title",
+    "id" : "125",
+    "status" : "AVAILABLE",
+    "publisher" : "pub",
+    "duration" : "dur"
+  } ]
 }

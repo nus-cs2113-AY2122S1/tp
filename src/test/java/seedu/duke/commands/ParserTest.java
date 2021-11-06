@@ -297,8 +297,6 @@ class ParserTest {
     public void parse_edit_InvalidItemExceptionThrown() {
         TextUI ui = new TextUI();
         Catalogue catalogue = new Catalogue();
-        // AddCommand add = (AddCommand) parser.parse("add b t/The Hunger Games i/123 a/Suzanne Collins");
-        // add.execute(ui, catalogue);
         Book b = new Book("The Hunger Games", "123", Status.AVAILABLE, null, null,"Suzanne Collins");
         try {
             catalogue.add(b);
