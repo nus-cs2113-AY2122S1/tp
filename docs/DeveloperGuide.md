@@ -23,6 +23,7 @@
 ## 1. Acknowledgements
 
 * [SE-EDU AB3 Developer Guide Format](https://se-education.org/addressbook-level3/DeveloperGuide.html)
+
 ## 2. Introduction
 
 MedBot is a Command Line Interface (CLI) application for head nurses to manage patients’ personal information, and
@@ -35,6 +36,7 @@ scheduler appointments between them and medical staff.
 Given below is a quick overview of the main components of MedBot and how they interact with one another.
 
 #### 3.1.1 Main Components
+
 ![MedBot Architecture Diagram](diagrams/ArchitectureDiagram.png)
 
 The main class of MedBot is the `MedBot` class. It is responsible for initialising the other core components of MedBot
@@ -69,11 +71,12 @@ The `Ui` class serves as an abstraction over these smaller classes:
 * `SchedulerUi`: Handles the Ui for schedulers.
 
 How `Ui` works:
-* After user input is parsed by `Parser`, depending on the current `viewType`, the `Ui` will 
-call methods from different `Ui` subclasses
-  * When `viewType` is `PATIENT_INFO`, `PatientUi` methods are called.
-  * When `viewType` is `MEDICAL_STAFF_INFO`, `StaffUi` methods are called.
-  * When `viewType` is `SCHEDULER`, `SchedulerUi` methods are called.
+
+* After user input is parsed by `Parser`, depending on the current `viewType`, the `Ui` will call methods from
+  different `Ui` subclasses
+    * When `viewType` is `PATIENT_INFO`, `PatientUi` methods are called.
+    * When `viewType` is `MEDICAL_STAFF_INFO`, `StaffUi` methods are called.
+    * When `viewType` is `SCHEDULER`, `SchedulerUi` methods are called.
 
 Given below is a sequence diagram of how the `Ui` component works after the `Parser`
 parses `help delete` input given by a user.
@@ -348,4 +351,4 @@ for their daily jobs
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Here are the instructions to perform manual testing of the application:
