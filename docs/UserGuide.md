@@ -117,6 +117,7 @@ Note:
 * If duplicate task exist and has a different deadline, the existing task's deadline will be updated with the new
   deadline.
 * If duplicate task has same deadline, new task will be rejected by the program.
+* The task description cannot contain any `/by` blocks. 
 
 Example of usage:
 
@@ -148,6 +149,7 @@ Note:
 * The weightage needs to be an Integer between 5 - 100.
 * The total value of all gradable tasks within the module needs to be less than or equals to 100, else a error message
   will be shown.
+* The GradableTask description cannot contain any `/by` or `/w` blocks.
 
 Examples:
 

@@ -70,7 +70,7 @@ public class ScheduleList {
     }
 
     private boolean checkInput(String[] input) {
-        return input.length == 4;
+        return input.length == 4 && !input[2].isBlank();
     }
 
     public int size() {

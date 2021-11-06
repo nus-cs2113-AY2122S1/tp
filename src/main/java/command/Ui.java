@@ -95,7 +95,7 @@ public class Ui {
     }
 
     public static void invalidWeightage() {
-        System.out.println("Missing /w");
+        System.out.println("Missing /w or wrong syntax! please refer to the UG for proper syntax.");
     }
 
 
