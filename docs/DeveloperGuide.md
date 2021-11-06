@@ -171,7 +171,7 @@ The constructed StonksGraph will then be printed out by the Ui class through the
 
 #### Class Diagram
 
-![](ClassDiagramForGraph.png)
+![](italiciseAbstractCD.png)
 
 In the following section all coordinates will be in the form of (Row from the top, Column from the left) and coordinates mark with X is a don't care.
 
@@ -198,7 +198,7 @@ Below is a sequential diagram for the constructor of StonksGraph that shows the 
 
 
 
-![](SequenceDiagramForGraphConstructor.png)
+![](UpdatedYearInputSD.drawio.png)
 
 ---
 
