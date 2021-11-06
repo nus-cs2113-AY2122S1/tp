@@ -28,7 +28,7 @@ public class SearchCommand extends Command {
             + "Format: search [KEYWORD or DATE]\n"
             + "Parameters:\n"
             + "\tKEYWORD - word to search for\n"
-            + "\tDATE - deadline of workout, which must be in the format DD MMM YYYY\n"
+            + "\tDATE - deadline of workout, which must be in the format D MMM YYYY\n"
             + "Example: " + COMMAND_WORD + " abs\n"
             + "Example: " + COMMAND_WORD + " 5 Nov 2021\n";
 
@@ -75,7 +75,7 @@ public class SearchCommand extends Command {
 
     /**
      * Filters through a workout list to find workouts that contain a keyword in the workout name.
-     * If the user wants to search by date, the date must match exactly, in the format dd mmm yyyy.
+     * If the user wants to search by date, the date must match exactly, in the format d mmm yyyy.
      * Index of workouts are preserved in the list.
      *
      * @param workoutList list of workouts that we want to filter through
