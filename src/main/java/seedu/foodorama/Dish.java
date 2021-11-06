@@ -12,6 +12,7 @@ public class Dish implements Comparable<Dish> {
     private static final Logger LOGGER = Logger.getLogger("Dish class");
     private ArrayList<Ingredient> parts = new ArrayList<>();
     private static final Ui UI = new Ui();
+    public static final String YES_NO_REGEX = "^(y|yes|n|no)$";
     private static final String YES = "y";
     private static final String NO = "n";
     private String dishName;
@@ -118,13 +119,15 @@ public class Dish implements Comparable<Dish> {
         UI.printEnterWeightOf(dishName);
         Scanner in = new Scanner(System.in);
         String dishWaste = in.nextLine();
-        while (!isNumber(dishWaste)) {
-            UI.clearTerminalAndPrintNewPage();
-            UI.printInvalidDishName();
-            dishWaste = in.nextLine();
-        }
+
+        int exitloop = 0;
         double inputWastage;
-        try {
+        while (exitloop == 0) {
+            String confirmAdd = "e";
+            if (!isNumber(dishWaste)) {
+                throw new FoodoramaException(UI.getInvalidNumberMsg());
+            }
+
             inputWastage = Double.parseDouble(dishWaste);
             while (inputWastage < 0) {
                 UI.clearTerminalAndPrintNewPage();
@@ -132,9 +135,30 @@ public class Dish implements Comparable<Dish> {
                 dishWaste = in.nextLine();
                 inputWastage = Double.parseDouble(dishWaste);
             }
-        } catch (NumberFormatException e) {
-            throw new FoodoramaException(UI.getInvalidNumberMsg());
+            if (Double.isInfinite(inputWastage) | Double.isNaN(inputWastage)) {
+                throw new FoodoramaException(UI.printNumericalInputInvalid("dish waste"));
+            }
+            else if (inputWastage > 10000) {
+                UI.clearTerminalAndPrintNewPage();
+                UI.printDishWasteValueHigh(dishName);
+                confirmAdd = in.nextLine();
+
+                confirmAdd = getConfirmation(confirmAdd);
+                if (confirmAdd.startsWith(NO)) {
+                    UI.clearTerminalAndPrintNewPage();
+                    UI.printEnterWeightOf(dishName);
+                    dishWaste = in.nextLine();
+                    inputWastage = Double.parseDouble(dishWaste);
+                }
+            }
+            if ((isNumber(dishWaste) && (inputWastage >= 0) && (inputWastage <= 10000)) | confirmAdd.startsWith(YES)) {
+                exitloop = 1;
+            }
         }
+
+        inputWastage = Double.parseDouble(dishWaste);
+
+
 
         assert inputWastage > 0 : "Adding negative waste is impossible";
         wastage += inputWastage;
@@ -208,5 +232,15 @@ public class Dish implements Comparable<Dish> {
     public int compareTo(Dish o) {
         double diff = (o.wastage - wastage);
         return (diff >= 0) ? (diff == 0) ? 0 : 1 : -1;
+    }
+
+    public String getConfirmation(String confirmAdd) {
+        Scanner input = new Scanner(System.in);
+        while (!confirmAdd.matches(YES_NO_REGEX)) {
+            UI.clearTerminalAndPrintNewPage();
+            UI.printInvalidConfirmation();
+            confirmAdd = input.nextLine().toLowerCase();
+        }
+        return confirmAdd;
     }
 }
