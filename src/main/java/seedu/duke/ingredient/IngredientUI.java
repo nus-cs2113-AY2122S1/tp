@@ -12,6 +12,7 @@ public class IngredientUI {
         System.out.println("   Ingredient Quantity: " + newIngredient.getQuantity());
         System.out.println("   Ingredient Unit Price: " + newIngredient.getPrice());
         System.out.println("   Expiry Date: " + newIngredient.getExpiry());
+        System.out.println("\n   " + newIngredient);
         MainUI.printSingleLine();
     }
 
@@ -24,7 +25,7 @@ public class IngredientUI {
     public static void printRemoveIngredientMessage(Ingredient deletedIngredient) {
         MainUI.printSingleLine();
         System.out.println(" Got it. This ingredient was deleted:");
-        System.out.println("   " + deletedIngredient.getName());
+        System.out.println("   " + deletedIngredient);
         MainUI.printSingleLine();
     }
 
