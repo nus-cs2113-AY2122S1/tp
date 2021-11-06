@@ -29,12 +29,14 @@ class SearchCommandTest {
         storage = new Storage();
     }
 
+    // creates empty workout with workout name "blah"
     private void createEmptyWorkout() {
         Workout workout = new Workout("blah");
         workoutList = new WorkoutList();
         workoutList.addWorkout(workout);
     }
 
+    // creates new workout "poia" with exercise "poi" and adds it to workoutList
     private void createWorkoutWithExercise() {
         Exercise e = new Exercise("poi", 2, 4);
         ArrayList<Exercise> exercises = new ArrayList<>();
@@ -43,6 +45,7 @@ class SearchCommandTest {
         workoutList.addWorkout(w);
     }
 
+    // creates new workout "poia" with deadline of today and exercise "poi" and adds it to workoutList
     private void createDeadlineWorkoutWithExercise() {
         Exercise e = new Exercise("poi", 2, 4);
         LocalDate date = LocalDate.now();

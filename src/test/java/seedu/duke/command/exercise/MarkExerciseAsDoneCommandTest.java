@@ -23,6 +23,7 @@ class MarkExerciseAsDoneCommandTest {
         storage = new Storage();
     }
 
+    // creates new workout "workout" with exercise "blah" and adds it to workoutList
     private void createOneWorkoutWithOneExercise() {
         Exercise exercise = new Exercise("blah", 10, 30);
         Workout workout = new Workout("workout");
