@@ -227,10 +227,16 @@ cancelled.
 
 ### <a name="Search"></a>Searching a contact: `search`
 This feature is processed using `SearchContactParser` under `MainParser`. In order to edit a contact in the contact list,
-a user must enter a command in the form `search {-n | -g | -l | -te | -tw | -e} <SEARCH QUERY>`. If no flag is specified, the search will be done
-on contact names buy default. From the user input, the search query and the search flag are obtained from the 
-`parseSearchQuery` and the `getDetailFlag` methods respectively. A `SearchContactCommand` with the specified parameters
-will be created and executed in `ConTech`. The sequence diagram below shows how the whole process is carried out.
+a user must enter a command in the form `search {-n | -g | -l | -te | -tw | -e} <SEARCH QUERY>`. If no flag is specified, 
+the search will be done on contact names buy default. 
+
+From the user input, the search query and the search flag are obtained from the `parseSearchQuery` and the `getDetailFlag`
+methods respectively. The sequence diagram below shows how the required parameters are obtained. 
+
+![Search Sequence Diagram](images/SearchContactParserSequenceDiagram.png)
+
+A `SearchContactCommand` with the specified parameters will then be created and executed in `ConTech`. The sequence 
+diagram below shows how the `SearchContactCommand` is executed.
 
 ![Search Sequence Diagram](images/SearchContactCommandSequenceDiagram.png)
 
