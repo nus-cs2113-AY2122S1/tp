@@ -21,6 +21,7 @@ public class StonksXD {
     private DataManager dataManager;
     private BudgetManager budgetManager;
     private CurrencyManager currencyManager;
+    private boolean isNonTerminatingCommand = true;
 
     /**
      * Constructor for StonksXD. It instantiates all the components used and are crucial to the functioning of the 
@@ -43,17 +44,21 @@ public class StonksXD {
      */
     public void run() {
         ui.printWelcome();
-        boolean isNonTerminatingCommand = true;
+        
         while (isNonTerminatingCommand) {
             String fullCommand = ui.readCommand();
             Command command = parser.parseCommand(fullCommand);
             command.execute(finances, ui, budgetManager, currencyManager);
             if (command.isExit()) {
-                isNonTerminatingCommand = false;
+                terminateStonksXD();
             }
             dataManager.saveAll();
         }
         //ui.printBye(getRandomAdvice());
+    }
+    
+    private void terminateStonksXD() {
+        isNonTerminatingCommand = false;
     }
 
     /**
