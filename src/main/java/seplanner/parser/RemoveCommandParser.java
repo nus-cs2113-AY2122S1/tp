@@ -180,6 +180,7 @@ public class RemoveCommandParser {
         if (ParseCondition.isNumeric(firstParam) && ParseCondition.isNumeric(secondParam)) {
             uniIndex = Integer.parseInt(firstParam);
             mapIndex = Integer.parseInt(secondParam);
+            university = universityMasterList.get(uniIndex - 1);
         } else {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             String error = (ParseCondition.isNumeric(firstParam)) ? Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING
@@ -190,7 +191,7 @@ public class RemoveCommandParser {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);  
             throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTSELECTED, 1, false);
         }
-        if (ParseCondition.isMissingAvailableMapping(uniIndex, universityMasterList, moduleSelectedList)) {
+        if (ParseCondition.isNoSelectedMapping(university, universitySelectedList)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1, false);
         }
