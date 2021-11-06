@@ -44,7 +44,7 @@ public class TextUi {
             "\t ** Note: For details, refer to the User Guide of NUSModsLite at: "
             + "\n\t\thttps://ay2122s1-cs2113t-w12-2.github.io/tp/UserGuide.html\n";
 
-    public static final String ERROR_MODULE_NOT_FOUND = "OOPS, this module does not exist in your timetable!";
+    public static final String ERROR_MODULE_NOT_FOUND = "OOPS, this item does not exist in your timetable!";
     public static final String ERROR_MODULE_FOUND = "OOPS, this module already exists in your transcript!";
     public static final String ERROR_MODULE_NOT_IN_TRANSCRIPT = "OOPS, this module does not exist in your Transcript";
     public static final String ERROR_INVALID_MODULE_CODE =
