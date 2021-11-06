@@ -17,7 +17,6 @@ public class ReadTextFileTest {
         ArrayList<String> arrayListOfRawCommands = textFileReader.readTextFileToString();
         // assertEquals(0, arrayListOfRawCommands.size());
 
-        assertThrows(NullPointerException.class,
-            () -> arrayListOfRawCommands.size());
+        assertThrows(NullPointerException.class, () -> arrayListOfRawCommands.size());
     }
 }

@@ -35,7 +35,6 @@ public class AddBudgetTest {
             e.printStackTrace();
         }
 
-        assertThrows(DuplicateBudgetException.class,
-            () -> currentBudgetList.addBudget(100, false));
+        assertThrows(DuplicateBudgetException.class, () -> currentBudgetList.addBudget(100, false));
     }
 }
