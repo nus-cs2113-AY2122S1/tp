@@ -13,22 +13,22 @@ Users interact with in through a CLI, and is written in Java.
      - **What it does**: the `Parser` class is responsible for parsing and receiving of commands.
      - **Justification**: creating a seperate class to handle parsing and checking commands of user input is one of the recommended approach to OOP code.
   2. `Command` abstract class
-     - **What it does**: the `Command` class provides a template for *all* commands type in the code to inherit. This class include abstract methods, which are modified and implemented a bit differently by each command inheritor.
+     - **What it does**: the `Command` class provides a template for *all* commands type in the code to inherit. 
      - **Justification**: Since command are to be run based on user's input, the idea of having the `run` method to be returned the same (`String` type) by all other command class is useful. Therefore, the `Command` class is implemented.
   3. `DateCommand` command class
      - **What it does**: the `DateCommand` class provides a way to modify/check if the current date/time in the system is correct.
-     - **Justification**: since ingredient expiry is one of the top priority of this application, wrong date stored in the system could be troublesome when checking the inventory. This command provides a way to fix the wrong date in the system to ensure correct expiry calculation is peformed. 
+     - **Justification**: this command provides a way to fix the wrong date in the system to ensure correct expiry calculation is peformed. 
   4. `CurrentDate` class
      - **What it does**: the `CurrentDate` class provides a way to retrieve/display the current date of the system in the `LocalDate` format.
-     - **Justification**: this class is used in any command/methods that require calculations of expiry date between food products and current date to get the expiry period. Providing a separate class to retrieve this information is useful, and contributes to the OOP-ness of the code. 
+     - **Justification**: This class is responsible for retrieving current date in the system for expiry calculation. 
   5. `Storage` class
      - **What it does**: the `Storage` class is responsible for writing/reading ingredients data from the memory.  
-     - **Justification**: the ability to read and write ingredient data to a memory file is helpful for long-term ingredient tracking. In addition, re-writing the ingredient data back into the memory file everytime the ingredient list is changed reduces the chance of data corruption in an event of program crashing.
-     - **Difficulties encountered**: previously, both threshold data and ingredient data are stored in one single data file. In addition, in the PE-d, testers have reported that any invalid lines in the memory file would skip the rest of the ingredient information to add into the database. Therefore, modifying and detecting errors in data file of both threshold and ingredient data is difficult. 
-     - **Solution**: We have split the ingredient and threshold data into separate memory files (credit: @mudkip8). In addition, a check method was added in the `loadIngredientsFromMemory()` method to skip invalid ingredients data lines, while retaining the integrity of the rest of the data file to add into the current ingredient database.
+     - **Justification**: the ability to read and write ingredient data to a memory file is helpful for long-term ingredient tracking. 
+     - **Difficulties encountered**: in the PE-d, testers have reported that any invalid lines in the memory file would skip the rest of the ingredient information. 
+     - **Solution**: split the ingredient and threshold data into separate memory files. In addition, a check method was added in the `loadIngredientsFromMemory()` method to skip invalid ingredients data lines, while retaining the integrity of the rest of the data file to add into the current ingredient database.
   6. `DeleteCommand` class
      - **What it does**: this class is responsible for removing ingredients from the database based on the ingredient group number and ingredient number.
-     - **Justification**: since ingredients of the same name are grouped together, and within groups they are sorted by expiry date, deleting by their numbers in lists and groups provides a faster way to operate this command.
+     - **Justification**: deleting by their numbers in lists and groups provides a faster way to operate this command.
      - **Further details**: previously, this command is operated by supplying the ingredient name and expiry date instead of ingredient numbers in the list. This involved checking of the ingredient name, and then checking the matching expiry date in each individual ingredient groups. This method was lengthy and error-prone, and since the ingredients are already sorted accordingly to their name and expiry, the current method of this command is carried out.
   7. Others
      - Participated in early stages of `AlertExpiringSoon` command, which later completed by @mudkip8.
