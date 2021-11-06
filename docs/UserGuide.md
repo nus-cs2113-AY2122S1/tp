@@ -36,10 +36,10 @@ and that `java` is in your `PATH` environment variable.
 2. Download the latest `SchedUrMods.jar` from [here](https://github.com/AY2122S1-CS2113T-W13-3/tp/releases/latest).
 
    > **⚠️Warning**: Do *not* decompress the jar file even if it shows as an archive on your file manager.
-3. Copy the file to the folder you want to use as the _home folder_ for Duke.
+3. Copy the file to the folder you want to use as the _home folder_ for SchedUrMods.
    >💡 **Note**: Ensure you have permission to create files and folders in this _home folder_.
 5. Open a terminal window in the _home folder_.
-6. Type `java -jar SchedUrMods.jar` into the terminal to start Duke.
+6. Type `java -jar SchedUrMods.jar` into the terminal to start SchedUrMods.
 7. The following display should appear in a few seconds:
 
 ```
