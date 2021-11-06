@@ -12,6 +12,8 @@ public class Dish implements Comparable<Dish> {
     private static final Logger LOGGER = Logger.getLogger("Dish class");
     private ArrayList<Ingredient> parts = new ArrayList<>();
     private static final Ui UI = new Ui();
+    private static final String YES = "y";
+    private static final String NO = "n";
     private String dishName;
     private double wastage;
     private double limit;
@@ -120,12 +122,16 @@ public class Dish implements Comparable<Dish> {
         double inputWastage;
         try {
             inputWastage = Double.parseDouble(dishWaste);
-            if (inputWastage < 0) {
-                throw new FoodoramaException("");
+            while (inputWastage < 0) {
+                UI.clearTerminalAndPrintNewPage();
+                UI.printInvalidDishWasteValue(dishName);
+                dishWaste = in.nextLine();
+                inputWastage = Double.parseDouble(dishWaste);
             }
-        } catch (NumberFormatException | FoodoramaException e) {
+        } catch (NumberFormatException e) {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
+
         assert inputWastage > 0 : "Adding negative waste is impossible";
         wastage += inputWastage;
         UI.printWastage(dishName, wastage);
@@ -140,6 +146,7 @@ public class Dish implements Comparable<Dish> {
                 ingredient.addDishWaste(inputWastage / parts.size());
             }
         }
+
     }
 
     private boolean isNumber(String numberString) {
@@ -160,7 +167,7 @@ public class Dish implements Comparable<Dish> {
         } else {
             limitString = String.valueOf(limit);
             if (limit < wastage) {
-                limitString  = limitString + " (exceeded)";
+                limitString = limitString + " (exceeded)";
             }
         }
         String partList = "";

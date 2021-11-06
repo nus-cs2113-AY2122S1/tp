@@ -7,7 +7,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class IngredientList {
@@ -25,17 +24,24 @@ public class IngredientList {
         Scanner in = new Scanner(System.in);
         String ingredientWeight = in.nextLine();
         double ingredientWeightValue;
+
         try {
             ingredientWeightValue = Double.parseDouble(ingredientWeight);
-            if (ingredientWeightValue < 0) {
-                throw new FoodoramaException("");
+            while (ingredientWeightValue < 0) {
+                UI.clearTerminalAndPrintNewPage();
+                UI.printInvalidIngredientWeight(ingredientName);
+                ingredientWeight = in.nextLine();
+                ingredientWeightValue = Double.parseDouble(ingredientWeight);
             }
-        } catch (NumberFormatException | FoodoramaException e) {
+        } catch (NumberFormatException e) {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
+
+
         Ingredient ingredientToAdd = new Ingredient(ingredientName, ingredientWeightValue);
         ingredientList.add(ingredientToAdd);
         UI.printAddedIngredient(ingredientToAdd, ingredientWeightValue);
+
     }
 
     //Returns -1 if not present, index if present
@@ -155,10 +161,32 @@ public class IngredientList {
         }
     }
 
-    private static boolean isValidDate(String expiryDateString) {
+    private static boolean isValidDateFormat(String expiryDateString) {
         try {
             LocalDate.parse(expiryDateString, dtf);
         } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isValidExpiryLength(long daysBetweenExpiryToday, String ingrName) {
+        Scanner input = new Scanner(System.in);
+        if (daysBetweenExpiryToday > TEN_YEARS_IN_DAYS) {
+            UI.printLongExpiryDateMsg();
+            String confirmDate = input.nextLine().toLowerCase();
+            while (!confirmDate.equals("y") && !confirmDate.equals("n")) {
+                UI.clearTerminalAndPrintNewPage();
+                UI.printInvalidConfirmation();
+                confirmDate = input.nextLine().toLowerCase();
+            }
+            UI.clearTerminalAndPrintNewPage();
+            if (confirmDate.equals("n")) {
+                UI.printAskIngrExpiryDate(ingrName);
+                return false;
+            }
+        } else if (daysBetweenExpiryToday < ZERO_DAYS) {
+            UI.printPassedExpiryDateMsg();
             return false;
         }
         return true;
@@ -172,27 +200,26 @@ public class IngredientList {
         String expiryDateString = input.nextLine();
         LocalDate expiryDate = null;
 
-        while (!isValidDate(expiryDateString)) {
+        int exitLoop = 0;
+        long daysBetweenExpiryToday = Long.MIN_VALUE;
+        while (exitLoop == 0) {
             UI.clearTerminalAndPrintNewPage();
-            System.out.println(UI.getIncorrectExpiryDateFormatMsg());
-            expiryDateString = input.nextLine();
+            if (!isValidDateFormat(expiryDateString)) {
+                UI.printIncorrectExpiryDateFormatMsg();
+            } else if (isValidDateFormat(expiryDateString)) {
+                expiryDate = LocalDate.parse(expiryDateString, dtf);
+                daysBetweenExpiryToday = ChronoUnit.DAYS.between(LocalDate.now(), expiryDate);
+            }
+            if (isValidDateFormat(expiryDateString) && daysBetweenExpiryToday != Long.MIN_VALUE
+                    && isValidExpiryLength(daysBetweenExpiryToday, ingrName)) {
+                exitLoop = 1;
+            } else {
+                expiryDateString = input.nextLine();
+            }
         }
-        if (isValidDate(expiryDateString)) {
-            expiryDate = LocalDate.parse(expiryDateString, dtf);
-        }
-
-        long daysBetweenExpiryToday = ChronoUnit.DAYS.between(LocalDate.now(), expiryDate);
-        if (daysBetweenExpiryToday > TEN_YEARS_IN_DAYS) {
-            UI.clearTerminalAndPrintNewPage();
-            throw new FoodoramaException(UI.getLongExpiryDateMsg());
-        } else if (daysBetweenExpiryToday < ZERO_DAYS) {
-            UI.clearTerminalAndPrintNewPage();
-            throw new FoodoramaException(UI.getPassedExpiryDateMsg());
-        } else {
-            ingredientList.get(ingredientIndex).setExpiryDate(expiryDate);
-            UI.clearTerminalAndPrintNewPage();
-            UI.printSetIngrExpiryDate(ingrName, expiryDate, daysBetweenExpiryToday);
-        }
+        ingredientList.get(ingredientIndex).setExpiryDate(expiryDate);
+        UI.clearTerminalAndPrintNewPage();
+        UI.printSetIngrExpiryDate(ingrName, expiryDate, daysBetweenExpiryToday);
     }
 
     public static void editWastage(int ingrIndex) throws FoodoramaException {

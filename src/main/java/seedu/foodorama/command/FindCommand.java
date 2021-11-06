@@ -20,33 +20,37 @@ public class FindCommand extends Command {
         String commandToExecute = parameters.get(0);
         parameters.remove(0);
         String itemToFind = String.join(" ", parameters);
-        if (itemToFind.isBlank()) {
-            throw new FoodoramaException(UI.getFindMissingParamMsg());
-        } else {
-            switch (commandToExecute) {
-            case DISH:
-                ArrayList<Dish> matchedDishList = new ArrayList<>();
-                for (Dish matchingDishes : DishList.dishList) {
-                    if (matchingDishes.getDishName().contains(itemToFind)) {
-                        matchedDishList.add(matchingDishes);
-                    }
-                }
-                UI.printMatchedDishes(matchedDishList);
-                break;
 
-            case INGR:
-                ArrayList<Ingredient> matchedIngrList = new ArrayList<>();
-                for (Ingredient matchingIngr : IngredientList.ingredientList) {
-                    if (matchingIngr.getIngredientName().contains(itemToFind)) {
-                        matchedIngrList.add(matchingIngr);
-                    }
-                }
-                UI.printMatchedIngredients(matchedIngrList);
-                break;
-
-            default:
-                throw new FoodoramaException(UI.getFindInvalidParamMsg());
+        switch (commandToExecute) {
+        case DISH:
+            if (itemToFind.isBlank()) {
+                throw new FoodoramaException(UI.getFindMissingParamMsg());
             }
+            ArrayList<Dish> matchedDishList = new ArrayList<>();
+            for (Dish matchingDishes : DishList.dishList) {
+                if (matchingDishes.getDishName().contains(itemToFind)) {
+                    matchedDishList.add(matchingDishes);
+                }
+            }
+            UI.printMatchedDishes(matchedDishList);
+            break;
+
+        case INGR:
+            if (itemToFind.isBlank()) {
+                throw new FoodoramaException(UI.getFindMissingParamMsg());
+            }
+            ArrayList<Ingredient> matchedIngrList = new ArrayList<>();
+            for (Ingredient matchingIngr : IngredientList.ingredientList) {
+                if (matchingIngr.getIngredientName().contains(itemToFind)) {
+                    matchedIngrList.add(matchingIngr);
+                }
+            }
+            UI.printMatchedIngredients(matchedIngrList);
+            break;
+
+        default:
+            throw new FoodoramaException(UI.getFindInvalidParamMsg());
         }
     }
 }
+

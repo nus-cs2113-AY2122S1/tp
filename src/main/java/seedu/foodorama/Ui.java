@@ -230,7 +230,7 @@ public class Ui {
 
 
     public static final String INVALID_NUMBER = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, please input a valid number" + System.lineSeparator()
+            + "Sorry, input is not valid. The command has been disregarded." + System.lineSeparator()
             + LINE_DIVIDER;
 
     private static final String LIST_MISSING_PARAM = LINE_DIVIDER + System.lineSeparator()
@@ -302,11 +302,12 @@ public class Ui {
             + LINE_DIVIDER;
 
     public static final String FIND_MISSING_PARAM = LINE_DIVIDER + System.lineSeparator()
-            + "Please enter a keyword!" + System.lineSeparator()
+            + "Missing keyword parameter! Please enter a keyword!" + System.lineSeparator()
             + LINE_DIVIDER;
 
     public static final String FIND_INVALID_PARAM = LINE_DIVIDER + System.lineSeparator()
-            + "Incorrect paramater! Please type find <dish/ingredient>" + System.lineSeparator()
+            + "Incorrect command parameter! Please type `find dish [KEYWORD]` or `find ingr [KEYWORD]`"
+            + System.lineSeparator()
             + LINE_DIVIDER;
 
     public static final String GRAPH_INVALID_PARAM = LINE_DIVIDER + System.lineSeparator()
@@ -315,8 +316,8 @@ public class Ui {
             + LINE_DIVIDER;
 
     public static final String INVALID_CONFIRMATION = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, that is an invalid command. "
-            + "Please type y/yes to confirm or n/no to disregard" + System.lineSeparator()
+            + "Sorry, that is an invalid input. "
+            + "Please type 'y/yes' to confirm or 'n/no' to disregard" + System.lineSeparator()
             + LINE_DIVIDER;
 
     public static final String INVALID_INGR_NAME = LINE_DIVIDER + System.lineSeparator()
@@ -368,16 +369,20 @@ public class Ui {
             + LINE_DIVIDER;
 
     public static final String EXPIRY_INCORRECT_FORMAT = LINE_DIVIDER + System.lineSeparator()
-            + "The expiry date of is in the incorrect format." + System.lineSeparator()
-            + "Please use the format 'dd/MM/yyyy'. " + System.lineSeparator() + LINE_DIVIDER;
+            + "The expiry date is in the incorrect format." + System.lineSeparator()
+            + "Enter an expiry date with the format 'dd/MM/yyyy': " + System.lineSeparator()
+            + LINE_DIVIDER;
 
     public static final String EXPIRY_LONG_DATE = LINE_DIVIDER + System.lineSeparator()
             + "The expiry date is unusually longer than 10 years." + System.lineSeparator()
-            + "Please enter a valid expiry date. " + System.lineSeparator() + LINE_DIVIDER;
+            + "Are you sure you want to continue saving this expiry date? " + System.lineSeparator()
+            + "Enter 'y' to continue, or 'n' to input a different expiry date: " + System.lineSeparator()
+            + LINE_DIVIDER;
 
     public static final String EXPIRY_PASSED_DATE = LINE_DIVIDER + System.lineSeparator()
             + "The expiry date cannot be set to a date before today." + System.lineSeparator()
-            + "Please enter a valid expiry date. " + System.lineSeparator() + LINE_DIVIDER;
+            + "Please enter a valid expiry date: " + System.lineSeparator()
+            + LINE_DIVIDER;
 
     private static final String INVALID_INDEX = LINE_DIVIDER + System.lineSeparator()
             + "The index given as input must be an integer" + System.lineSeparator()
@@ -663,7 +668,7 @@ public class Ui {
 
     public void printAskIngrExpiryDate(String ingrName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "What is the expiry date of '" + ingrName + "'?"
+                + "What is the expiry date of '" + ingrName + "' in 'dd/MM/yyyy' format?"
                 + System.lineSeparator() + LINE_DIVIDER);
     }
 
@@ -678,12 +683,16 @@ public class Ui {
         return EXPIRY_INCORRECT_FORMAT;
     }
 
-    public String getLongExpiryDateMsg() {
-        return EXPIRY_LONG_DATE;
+    public void printIncorrectExpiryDateFormatMsg() {
+        System.out.println(EXPIRY_INCORRECT_FORMAT);
     }
 
-    public String getPassedExpiryDateMsg() {
-        return EXPIRY_PASSED_DATE;
+    public void printLongExpiryDateMsg() {
+        System.out.println(EXPIRY_LONG_DATE);
+    }
+
+    public void printPassedExpiryDateMsg() {
+        System.out.println(EXPIRY_PASSED_DATE);
     }
 
     public void printDisregardMsg() {
@@ -729,7 +738,7 @@ public class Ui {
             if (j % 2 == 0) {
                 System.out.print("   ");
             } else {
-                System.out.print(" " + (char)(j / 2 + 65) + " ");
+                System.out.print(" " + (char) (j / 2 + 65) + " ");
             }
         } else {
             System.out.print("   ");
@@ -834,14 +843,15 @@ public class Ui {
         } else if (matchedDishList.size() == 0) {
             System.out.println("The keyword cannot be found!");
         } else {
-            int taskCounter = 0;
+            int dishListIndex;
             for (Dish element : matchedDishList) {
-                System.out.println(taskCounter + 1 + ". " + element.toString());
-                taskCounter++;
+                dishListIndex = DishList.dishList.indexOf(element);
+                System.out.println(dishListIndex + 1 + ". " + element.toString());
             }
         }
         System.out.println(LINE_DIVIDER);
     }
+
 
     public void printMatchedIngredients(ArrayList<Ingredient> matchedIngrList) {
         assert matchedIngrList != null : "matchedIngrList cannot be null";
@@ -852,10 +862,10 @@ public class Ui {
         } else if (matchedIngrList.size() == 0) {
             System.out.println("The keyword cannot be found!");
         } else {
-            int taskCounter = 0;
+            int ingrListIndex;
             for (Ingredient element : matchedIngrList) {
-                System.out.println(taskCounter + 1 + ". " + element.toString());
-                taskCounter++;
+                ingrListIndex = IngredientList.ingredientList.indexOf(element);
+                System.out.println(ingrListIndex + 1 + ". " + element.toString());
             }
         }
         System.out.println(LINE_DIVIDER);
@@ -960,6 +970,39 @@ public class Ui {
                 + "Here's an idea for a new Dish!" + System.lineSeparator()
                 + randomDishName + System.lineSeparator()
                 + LINE_DIVIDER
+        );
+    }
+
+    public void printInvalidIngredientWeight(String ingedientName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "The weight of " + ingedientName + "cannot be negative!"+ System.lineSeparator()
+                + "Please enter a weight that is not negative:" + System.lineSeparator()
+                + LINE_DIVIDER
+        );
+    }
+
+    public void printConfirmIngrNameAndWeight(String ingredientName, double ingredientWeight) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Are you sure you want to add " + ingredientName
+                + " that weighs " + ingredientWeight + "kg? Type y for Yes and n for No."
+                + System.lineSeparator() + LINE_DIVIDER
+        );
+
+    }
+
+    public void printInvalidDishWasteValue(String dishName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Please enter a weight that is not negative!" + System.lineSeparator()
+                + "add dish waste " + dishName + System.lineSeparator()
+                + LINE_DIVIDER
+        );
+    }
+
+    public void printConfirmDishWaste(String dishName, double dishWasteWeight) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Are you sure you want to add wasted " + dishName
+                + " that weighs " + dishWasteWeight + "kg? Type y for Yes and n for No."
+                + System.lineSeparator() + LINE_DIVIDER
         );
     }
 }
