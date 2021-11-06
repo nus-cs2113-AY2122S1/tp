@@ -8,12 +8,12 @@ import seedu.duke.storage.FileCreator;
 import seedu.duke.task.taskmanager.TaskManager;
 import seedu.duke.ui.Ui;
 
-public class Duke {
+public class SchedUrMods {
 
     private Ui ui;
     private TaskManager taskManager;
 
-    public Duke() {
+    public SchedUrMods() {
         ui = new Ui();
 
         FileCreator fileCreator = new FileCreator();
@@ -52,7 +52,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Duke duke = new Duke();
+        SchedUrMods duke = new SchedUrMods();
         duke.startProgram();
     }
 }
