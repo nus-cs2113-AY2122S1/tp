@@ -7,7 +7,7 @@ public class IngredientParser {
 
     public void addIngredient(String[] command, IngredientList ingredients) {
         try {
-            int quantity = Integer.parseInt(command[2]);
+            int quantity = Integer.parseInt(command[2].stripLeading().stripTrailing());
             if (quantity < 1) {
                 throw new NumberFormatException();
             }
@@ -18,7 +18,10 @@ public class IngredientParser {
                 throw new NumberFormatException();
             }
 
-            Ingredient newIngredient = new Ingredient(command[1], command[2], priceTwoDp, LocalDate.parse(command[4]));
+            Ingredient newIngredient = new Ingredient(command[1].stripLeading().stripTrailing(),
+                    command[2].stripLeading().stripTrailing(),
+                    priceTwoDp.stripLeading().stripTrailing(),
+                    LocalDate.parse(command[4]));
 
             ingredients.ingredientList.add(newIngredient);
             ingredients.totalIngredients++;
