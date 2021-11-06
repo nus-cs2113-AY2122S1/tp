@@ -115,18 +115,18 @@ public class ModuleRecord {
      * @return cap CAP according to the user's grades in the transcript's records.
      */
     private double calculateCapFromList() {
-        double sum_mod_grade_points = 0;
-        double sum_mod_credits = 0;
+        double sumModGradePoints = 0;
+        double sumModCredits = 0;
         double moduleCredits;
         double moduleGradePoint;
         for (int i = 0; i < gradedModules.size(); i++) {
             moduleCredits = (gradedModules.get(i)).getModuleCredit();
             moduleGradePoint = gradedModules.get(i).getEquivalentCap(gradedModules.get(i).getGrade());
-            sum_mod_grade_points = (moduleCredits * moduleGradePoint) + sum_mod_grade_points;
-            sum_mod_credits = sum_mod_credits + moduleCredits;
+            sumModGradePoints = (moduleCredits * moduleGradePoint) + sumModGradePoints;
+            sumModCredits = sumModCredits + moduleCredits;
         }
-        if (sum_mod_credits != 0) {
-            cap = sum_mod_grade_points / sum_mod_credits;
+        if (sumModCredits != 0) {
+            cap = sumModGradePoints / sumModCredits;
             cap = Math.round(cap * 100) / 100.0;
             return cap;
         }

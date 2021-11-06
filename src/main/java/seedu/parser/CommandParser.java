@@ -45,7 +45,7 @@ public class CommandParser {
     /**
      * Parses user input into different Command objects depending on the input.
      *
-     * @param text User input.
+     * @param text      User input.
      * @param timetable Timetable object for timetable commands.
      * @return command A Command object which class depends on the input.
      */
@@ -139,9 +139,9 @@ public class CommandParser {
             grade = split[0].trim().toUpperCase();
             gradeType = Module.checkGradeType(grade);
             moduleCode = split[1].trim().toUpperCase();
-            if(gradeType.equals("")){
+            if (gradeType.equals("")) {
                 return new InvalidCommand();
-            } else{
+            } else {
                 return new StoreResultsCommand(grade, moduleCode, gradeType, isErrorThrown);
             }
         } catch (UniModsException e) {

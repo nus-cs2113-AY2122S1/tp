@@ -45,17 +45,16 @@ public class StoreResultsCommand extends Command {
             if (gradeType.equals(TextUi.GRADED)) {
                 GradedModule grModule = new GradedModule(module, grade);
                 currentProfile.getRecord().addModuleToRecord(grModule);
-            } else if (gradeType.equals(TextUi.UNGRADED)){
+            } else if (gradeType.equals(TextUi.UNGRADED)) {
                 UngradedModule ugModule = new UngradedModule(module, grade);
                 currentProfile.getRecord().addModuleToRecord(ugModule);
-            }else{
+            } else {
                 System.out.print("INVALID GRADE");
             }
         } catch (FetchException e) {
             System.out.println(TextUi.ERROR_INVALID_MODULE_CODE);
             logger.log(Level.WARNING, "Attempt to store a module grade has failed");
-        }
-        catch (UniModsException e) {
+        } catch (UniModsException e) {
             System.out.println(e.getMessage());
             logger.log(Level.WARNING, e.getMessage());
         }

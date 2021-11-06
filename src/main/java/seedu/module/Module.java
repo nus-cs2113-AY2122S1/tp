@@ -285,6 +285,6 @@ public class Module extends BaseModule {
             }
         }
         System.out.println("3");
-            throw new UniModsException(TextUi.ERROR_INVALID_GRADE);
+        throw new UniModsException(TextUi.ERROR_INVALID_GRADE);
     }
 }
