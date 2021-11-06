@@ -4,21 +4,20 @@
 
 *Food-O-Rama* is a food wastage tracking application for *Restaurant Owners* like you to
 **keep track of your food resources**. It provides you with **insight on the amount of ingredients in your storage**
-and **how track much food is wasted**. This allows you to better plan your purchase of raw ingredients and enables more
+and **track how much food is wasted**. This allows you to better plan your purchase of raw ingredients and enables more
 efficient allocation to the cooking of dishes which ultimately saves cost.
 
 *Food-O-Rama* provides a variety of features that allow for food resource tracking. You can **add**, **delete**,
 **list** and **find** different dishes and ingredients. What's more, you can also show **graphs** for your statistical
-wastage, and even **link** your ingredients to your dishes for advanced management!
+wastage, add an **expiry date** to ingredients and even **link** your ingredients to your dishes for advanced management!
 
-This user guide serves to help you manoeuvre around **Food-O-Rama**, which the **Table of Contents** will be of big help
-to you, and includes a **List of Commands** for your quick reference. We hope you enjoy using *Food-O-Rama*!
+This user guide serves to help you manoeuvre around **Food-O-Rama**, which the **[Table of Contents](#-table-of-contents)** will be of big help
+to you, and includes a **[List of Commands](#-list-of-commands)** for your quick reference. We hope you enjoy using *Food-O-Rama*!
 
 | Legend |  Description |
 | --- | --- |
 | 💡 *Note*  | Lightbulb requires your attention. |
-| ❕ *Tip*  | Exclamation mark gives additional information to use Food-O-Rama more effectively. |
-| ↩ *Next Input* | Next Input indicates that to you that you should press the `enter` key after the first input. |
+| ❕ *Tip*  | Exclamation mark gives additional information to use Food-O-Rama more effectively.
 
 ## 🧾 Table of Contents
 
@@ -34,6 +33,7 @@ to you, and includes a **List of Commands** for your quick reference. We hope yo
         * `edit dish waste`: [Edit a dish's wastage](#edit-a-dishs-wastage--edit-dish-waste)
         * `del dish`: [Delete existing dish](#delete-existing-dish--del-dish)
         * `list dish`: [View existing dishes](#view-existing-dishes--list-dish)
+        * `rdish`: [Generate a random Dish name](#generate-a-random-dish-name--rdish)
     * [Ingredient Commands](#add-new-ingredient--add-ingr)
         * `add ingr`: [Add new ingredient](#add-new-ingredient--add-ingr)
         * `add ingr stored`: [Add storage to existing ingredient](#add-storage-to-existing-ingredient--add-ingr-stored)
@@ -97,7 +97,7 @@ java -jar Food-O-Rama.jar
 ################################################################################################################
 ```
 
-Congratulations! Now, the **List of Commands** below will teach you how to use all of the *Commands in Food-O-Rama*.
+Congratulations! Now, the **List of Commands** below will teach you how to use all the *Commands in Food-O-Rama*.
 
 ## 💽 List of Commands
 
@@ -555,7 +555,7 @@ ____________________________________________________________
 
 ### Generate a random Dish name : `rdish`
 
-Generates a random Dish name from a fixed list of Carbohydrates, Protiens, Sauces and Cooking Methods.
+Generates a random Dish name from a fixed list of Carbohydrates, Proteins, Sauces and Cooking Methods.
 
 ❕ *Tip*:  Useful to give new Dish idea for Restaurant's menu.
 
@@ -1111,7 +1111,7 @@ ____________________________________________________________
 
 Display a graph to show Dish wastage.
 
-*Gives you a visual representation of the Dishes wastage in your restaurant.*
+*Gives you a visual representation of the Dish wastage in your restaurant.*
 
 Format: `graph dish`
 
@@ -1598,6 +1598,3 @@ You have come to the end of the **Food-O-Rama User Guide**.
 For any further enquiries, please do contact us through our contact information found at
 our [About Us](https://ay2122s1-cs2113t-w11-4.github.io/tp/AboutUs.html)
 page.
-
-With Love 💕, <br>
-the *Food-O-Rama Team*.
