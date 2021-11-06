@@ -10,4 +10,8 @@ class Parser {
     {static} -getSpecialCharactersAsString(): String
 }
 
+class Command as "{abstract}\nCommand"
+
+Parser .down.> Command
+
 @enduml
