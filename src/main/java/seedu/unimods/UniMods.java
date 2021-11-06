@@ -8,8 +8,6 @@ import seedu.exceptions.FetchException;
 import seedu.exceptions.ModuleExistException;
 import seedu.parser.CommandParser;
 import seedu.storage.TimetableStorage;
-//import seedu.storage.TranscriptModStorage;
-//import seedu.storage.TranscriptModStorage;
 import seedu.timetable.Timetable;
 import seedu.ui.TextUi;
 import seedu.user.Profile;
@@ -19,11 +17,8 @@ import java.util.ArrayList;
 public class UniMods {
     private static String path = "data/Modules.json";
     private static String timetablePath = "data/timetable.json";
-    private static String GradedModsPath = "data/gradedMods.json";
-    private static String UngradedModsPath = "data/ungradedMods.json";
     public static Timetable timetable;
     public static TimetableStorage timetableStorage;
-    //    public static TranscriptModStorage transcriptModStorage;
     public static CommandParser commandParser = new CommandParser();
     public static ArrayList<Profile> profiles = new ArrayList<>();
     private static Profile profileInUse;
@@ -35,8 +30,7 @@ public class UniMods {
     private void setup() {
         timetableStorage = new TimetableStorage(timetablePath);
         timetable = timetableStorage.loadSchedule();
-//        transcriptModStorage = new TranscriptModStorage(GradedModsPath, UngradedModsPath);
-//        transcriptModStorage.loadModules();
+
         TextUi.printWelcomeMessage();
         profiles.add(new Profile("test user", "CEG", "2"));
         profileInUse = profiles.get(0);
@@ -48,8 +42,6 @@ public class UniMods {
         do {
             command = commandParser.parseCommand(TextUi.getCommand(), timetable);
             executeCommand(command);
-//            timetableStorage.save(timetable);
-//            transcriptModStorage.save();
         } while (!command.isExit());
     }
 

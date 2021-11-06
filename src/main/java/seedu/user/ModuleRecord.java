@@ -231,10 +231,4 @@ public class ModuleRecord {
             TranscriptUi.printUngradedModules(ungradedModules.get(i));
         }
     }
-    public ArrayList<GradedModule> getGradedModules(){
-        return gradedModules;
-    }
-    public ArrayList<UngradedModule> getUngradedModules(){
-        return ungradedModules;
-    }
 }
