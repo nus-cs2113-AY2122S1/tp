@@ -3,21 +3,11 @@
 activate AddCommand
 
 alt AddFlag equals to LESSON
-    AddCommand -> AddUi : getModuleCode()
-    activate AddUi
-    AddUi --> AddCommand : response
-    deactivate AddUi
     AddCommand -> NusMods : fetchModuleCode()
     activate NusMods
     NusMods --> AddCommand : module
     deactivate NusMods
     alt moduleExist
-        AddCommand -> TextUi : printAddMessage()
-        activate TextUi
-        TextUi --> AddCommand
-        deactivate TextUi
-        AddCommand -> AddCommand : addLesson()
-        activate AddCommand
         Loop for each lesson type
             AddCommand -> AddCommand : getLessonDetails()
             activate AddCommand
@@ -27,10 +17,6 @@ alt AddFlag equals to LESSON
         AddCommand -> AddUi : printLessonDetails
         activate AddUi
         loop for each lesson type
-            AddUi -> AddUi : getLessonDetails()
-            activate AddUi
-            AddUi --> AddUi : lesson details
-            deactivate AddUi
             AddUi -> AddUi : getCommand()
             activate AddUi
             AddUi -> timetable : addLesson()
@@ -42,20 +28,10 @@ alt AddFlag equals to LESSON
         end
         AddUi --> AddCommand
         deactivate AddUi
-        AddCommand --> AddCommand
-        deactivate AddCommand
     end
 else AddFlag equals to EVENT
-    AddCommand -> AddCommand : addEvent()
+    AddCommand -> AddCommand : getEvent()
     activate AddCommand
-    AddCommand -> AddCommand : getEventDetails()
-    activate AddCommand
-    AddCommand -> TimetableUserItem : new TimetableUserItem()
-    activate TimetableUserItem
-    TimetableUserItem -->AddCommand : event
-    deactivate TimetableUserItem
-    AddCommand --> AddCommand : event
-    deactivate AddCommand
     AddCommand -> timetable : addEvent()
     activate timetable
     timetable --> AddCommand

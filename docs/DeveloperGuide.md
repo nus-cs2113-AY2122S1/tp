@@ -283,6 +283,8 @@ In the event that the json save file is empty or does not exist, a new empty `Ti
 `Timetable` is converted to a `TimetableDto` object in order to separate different `TimetableItem` types. The `TimetableDto` object is then saved to a local json file via Gson.
 
 #### Add
+
+
 Utilizes `getLessonDetails` for each LessonType found in the Semester of the module. 
 Details of all lessons will be displayed and sorted based on classNo. 
 In the event where the lesson conflicts (another lesson is within the same time slot) 
