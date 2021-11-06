@@ -281,3 +281,46 @@ additional devices or platforms.
 ## <a name="manual-test"></a>Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Given below are instructions to test the app manually.
+
+**Note:** These instructions only provide a starting point for testers to work on; testers are expected to do more
+exploratory testing.
+
+### <a name="launch-and-shutdown"></a>Launch and Shutdown
+
+1. Initial launch
+    1. Ensure that you have Java `11` or above installed in your Computer.
+    2. Download the latest version of `contech.jar` from **[here](https://github.com/AY2122S1-CS2113T-T09-1/tp/releases)**.
+    3. Copy the `contech.jar` file to the folder you want to use as the _home folder_ for **ConTech**.
+    4. Open your desired _Command Line Interface_ from the folder with `contech.jar` and enter the following code:
+       `java -jar contech.jar`.
+       
+    
+2. First time user
+    1. For a first time user, you would be required to type in your personal details.
+    2. Entering your name will be **mandatory**. The other 5 fields (GitHub, Telegram, Twitter, Email and LinkedIn) are 
+       **optional**. You will be prompted to enter each detail accordingly. For the optional fields, you can press ENTER
+       to skip.
+       
+
+3. Regular user
+    1. For regular users, ConTech will simply greet you and you are ready to input your command.
+       Expected:
+       ```
+       ____________________________________________________________
+       Hello, John.
+       Welcome back to ConTech, your personal contact tracker.
+       ____________________________________________________________
+       ```
+
+4. Shutting down ConTech
+    1. Once you are done with your tasks and would like to shutdown ConTech, simply input `exit`.
+    2. Test case: `exit`<br>
+       Expected:
+       ```
+       ____________________________________________________________
+       ConTech will now shutdown.
+       We hope you have enjoyed using it.
+       ____________________________________________________________
+       ```
+
