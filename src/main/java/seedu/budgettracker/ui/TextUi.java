@@ -94,6 +94,12 @@ public class TextUi {
     public static void showExpenditureAddedMessage(Expenditure addedExpenditure, AllRecordList recordList) {
         assert addedExpenditure.getAmount() > 0 : "Expenditure added should be a positive value";
 
+        System.out.println("Expenditure successfully added!"
+                + LS
+                + "Description: " + addedExpenditure.getDescription()
+                + "\nAmount: $" + addedExpenditure.getAmount()
+                + "\nDate: " + addedExpenditure.getDate()
+                + "\nCategory: " + addedExpenditure.getCategory());
         System.out.println("Expenditure successfully added!");
         showExpenditureDetails(addedExpenditure, recordList);
 
@@ -122,10 +128,6 @@ public class TextUi {
         double amount = recordList.getBudget(month).getAmount();
         double totalMonthExpenditureSpending = recordList.getTotalAmountSpent(month);
 
-        spendingNotice(monthString, amount, totalMonthExpenditureSpending);
-    }
-
-    private static void spendingNotice(String monthString, double amount, double totalMonthExpenditureSpending) {
         System.out.println("Total Amount Spent in "
                 + monthString
                 + ": $" + df.format(totalMonthExpenditureSpending));
@@ -147,6 +149,7 @@ public class TextUi {
             System.out.printf("%.2f", percentageLeft);
             System.out.println("%");
         }
+        printDivider();
 
     }
 

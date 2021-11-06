@@ -1,6 +1,5 @@
 package seedu.budgettracker.logic.commands;
 
-import seedu.budgettracker.data.records.exceptions.DuplicateBudgetException;
 import seedu.budgettracker.logic.commands.exceptions.CommandException;
 import seedu.budgettracker.ui.TextUi;
 
@@ -28,19 +27,11 @@ public class AddBudgetCommand extends AddCommand {
         if (amount < 0) {
             throw new CommandException(MESSAGE_INVALID_BUDGET_AMOUNT);
         }
-        try {
-            allRecordList.addBudget(amount, month, IS_NOT_LOADING_STORAGE);
-        } catch (DuplicateBudgetException e) {
-            System.out.println(e.getMessage());
-        }
+        allRecordList.addBudget(amount, month, IS_NOT_LOADING_STORAGE);
         TextUi.showBudgetAddedMessage(amount, month);
     }
 
     public void execute(boolean isLoadingStorage) {
-        try {
-            allRecordList.addBudget(amount, month, isLoadingStorage);
-        } catch (DuplicateBudgetException e) {
-            System.out.println(e.getMessage());
-        }
+        allRecordList.addBudget(amount, month, isLoadingStorage);
     }
 }

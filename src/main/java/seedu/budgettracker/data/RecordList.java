@@ -5,7 +5,6 @@ import seedu.budgettracker.data.records.Category;
 import seedu.budgettracker.data.records.Expenditure;
 import seedu.budgettracker.data.records.Loan;
 import seedu.budgettracker.data.records.Record;
-import seedu.budgettracker.data.records.exceptions.DuplicateBudgetException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -26,17 +25,12 @@ public class RecordList {
         loanRecords = new ArrayList<>();
     }
 
-    public void addBudget(double spendingLimit, boolean isLoadingStorage) throws DuplicateBudgetException {
+    public void addBudget(double spendingLimit) {
+        budget.clearAmount();
+        budget.setAmount(spendingLimit);
+        assert budget.getAmount() == spendingLimit;
         if (!hasBudget) {
-            budget.clearAmount();
-            budget.setAmount(spendingLimit);
-            assert budget.getAmount() == spendingLimit;
-            if (!isLoadingStorage) {
-                hasBudget = true;
-            }
-        } else {
-            throw new DuplicateBudgetException("You have already added a budget to this month! "
-                    + "Use edit to change its value instead.");
+            hasBudget = true;
         }
     }
 

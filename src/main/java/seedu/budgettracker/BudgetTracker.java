@@ -3,7 +3,6 @@ package seedu.budgettracker;
 import java.time.LocalDate;
 import java.lang.String;
 
-import seedu.budgettracker.data.records.exceptions.DuplicateBudgetException;
 import seedu.budgettracker.logic.commands.Command;
 import seedu.budgettracker.data.AllRecordList;
 import seedu.budgettracker.logic.commands.exceptions.CommandException;
@@ -57,7 +56,7 @@ public class BudgetTracker {
         String[] dateNowString = dateNow.toString().split("-",3);
         int dateMonthNow = Integer.parseInt(dateNowString[1]);
 
-        // Calls loanReminder to remind user of loans that are due.
+        // Calls loanReminder to remind user of loans that are due...
         loanReminder(dateNow, dateMonthNow);
         if (dateMonthNow != 1) {
             loanReminder(dateNow, dateMonthNow - 1);
