@@ -230,7 +230,7 @@ public class Ui {
 
 
     public static final String INVALID_NUMBER = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, please input a valid number" + System.lineSeparator()
+            + "Sorry, input is not valid. The command has been disregarded." + System.lineSeparator()
             + LINE_DIVIDER;
 
     private static final String LIST_MISSING_PARAM = LINE_DIVIDER + System.lineSeparator()
@@ -316,8 +316,8 @@ public class Ui {
             + LINE_DIVIDER;
 
     public static final String INVALID_CONFIRMATION = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, that is an invalid input. " + System.lineSeparator()
-            + "Please enter 'y' to confirm or 'n' to disregard:" + System.lineSeparator()
+            + "Sorry, that is an invalid input. "
+            + "Please type 'y/yes' to confirm or 'n/no' to disregard" + System.lineSeparator()
             + LINE_DIVIDER;
 
     public static final String INVALID_INGR_NAME = LINE_DIVIDER + System.lineSeparator()
@@ -719,12 +719,18 @@ public class Ui {
         return INVALID_DISH_NAME;
     }
 
-    private void printGraph(int graphPortions, ArrayList<Integer> lengths, int i, int j) {
+    private void printGraph(int graphPortions, ArrayList<Double> lengths, int i, int j) {
+        int integralPart = (int) Math.floor(lengths.get(j / 2));
+        double fractionalPart = lengths.get(j / 2) - integralPart;
         if (i < graphPortions) {
             if (j % 2 == 0) {
                 System.out.print("   "); //Every other column is blank
-            } else if (i > graphPortions - 1 - lengths.get(j / 2)) {
-                System.out.print("[|]");
+            } else if (i >= graphPortions - 1 - integralPart) {
+                if (i == graphPortions - 1 - integralPart) {
+                    System.out.print("[" + (int) (fractionalPart * 10) + "]");
+                } else {
+                    System.out.print("[|]");
+                }
             } else {
                 System.out.print("   ");
             }
@@ -745,7 +751,7 @@ public class Ui {
         if (!dishList.isEmpty()) {
             System.out.println(LINE_DIVIDER + System.lineSeparator());
             //Get the n values for the dishes
-            ArrayList<Integer> lengths = new ArrayList<>();
+            ArrayList<Double> lengths = new ArrayList<>();
             double max = DishList.getGreatestWaste();
             for (int i = 0; i < dishList.size(); i++) {
                 lengths.add(dishList.get(i).getGraphHeight(max, graphPortions));
@@ -775,7 +781,7 @@ public class Ui {
     private void printDishLegend(ArrayList<Dish> dishList, int i) {
         if (i == 0) {
             System.out.print("     Legend:         ");
-            System.out.print("     Scale: 1 unit = " + DishList.getGreatestWaste() / 10 + "kg");
+            System.out.print("     Scale: 1 unit [|] = " + DishList.getGreatestWaste() / 10 + "kg");
         } else {
             System.out.print("     " + (char) (i + 64) + ". " + dishList.get(i - 1).getDishName()
                     + ": " + dishList.get(i - 1).getWastage() + "kg");
@@ -789,7 +795,7 @@ public class Ui {
         if (!ingredientList.isEmpty()) {
             System.out.println(LINE_DIVIDER + System.lineSeparator());
             //Get the n values for the ingredients
-            ArrayList<Integer> lengths = new ArrayList<>();
+            ArrayList<Double> lengths = new ArrayList<>();
             double max = IngredientList.getGreatestWaste();
             for (int i = 0; i < ingredientList.size(); i++) {
                 lengths.add(ingredientList.get(i).getGraphHeight(max, graphPortions));
@@ -964,6 +970,72 @@ public class Ui {
                 + "Here's an idea for a new Dish!" + System.lineSeparator()
                 + randomDishName + System.lineSeparator()
                 + LINE_DIVIDER
+        );
+    }
+
+    public void printInvalidIngrWeight(String ingredientName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "The weight of " + ingredientName + " cannot be negative!" + System.lineSeparator()
+                + "Please enter a weight that is not negative:" + System.lineSeparator()
+                + LINE_DIVIDER
+        );
+    }
+
+    public void printInvalidIngrWasteValue(String ingredientName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "The weight of " + ingredientName + " wasted cannot be negative!" + System.lineSeparator()
+                + "Please enter a weight that is not negative:" + System.lineSeparator()
+                + LINE_DIVIDER
+        );
+    }
+
+    public void printInvalidUpdateIngrValue(String ingredientName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "The weight of " + ingredientName + " to be stored cannot be negative!" + System.lineSeparator()
+                + "Please enter a weight that is not negative:" + System.lineSeparator()
+                + LINE_DIVIDER
+        );
+    }
+
+    public void printInvalidIngrLimitValue(String ingredientName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "The limit of " + ingredientName + "  cannot be negative!" + System.lineSeparator()
+                + "Please enter a weight that is not negative:" + System.lineSeparator()
+                + LINE_DIVIDER
+        );
+    }
+
+    public void printConfirmIngrNameAndWeight(String ingredientName, double ingredientWeight) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Are you sure you want to add " + ingredientName
+                + " that weighs " + ingredientWeight + "kg? Type y for Yes and n for No."
+                + System.lineSeparator() + LINE_DIVIDER
+        );
+
+    }
+
+    public void printInvalidDishWasteValue(String dishName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "The weight of " + dishName + " wasted cannot be negative!" + System.lineSeparator()
+                + "Please enter a weight that is not negative:" + System.lineSeparator()
+                + LINE_DIVIDER
+        );
+    }
+
+    public void printInvalidDishLimitValue(String dishName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "The limit of " + dishName + "  cannot be negative!" + System.lineSeparator()
+                + "Please enter a weight that is not negative:" + System.lineSeparator()
+                + LINE_DIVIDER
+        );
+    }
+
+
+    public void printConfirmDishWaste(String dishName, double dishWasteWeight) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Are you sure you want to add wasted " + dishName
+                + " that weighs " + dishWasteWeight + "kg? Type y for Yes and n for No."
+                + System.lineSeparator() + LINE_DIVIDER
         );
     }
 }

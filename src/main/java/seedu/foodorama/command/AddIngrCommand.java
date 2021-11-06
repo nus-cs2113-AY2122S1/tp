@@ -42,10 +42,9 @@ public class AddIngrCommand extends Command {
     }
 
     public boolean isNumber(String numberString) {
-        try {
-            double number = Double.parseDouble(numberString);
+        if (numberString.matches("^[\\d\\s.]+$")) {
             return true;
-        } catch (NumberFormatException e) {
+        } else {
             return false;
         }
     }

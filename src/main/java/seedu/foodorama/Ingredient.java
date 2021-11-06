@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
-public class Ingredient implements  Comparable<Ingredient> {
+public class Ingredient implements Comparable<Ingredient> {
 
     private static final Ui UI = new Ui();
     private String ingredientName;
@@ -82,12 +82,16 @@ public class Ingredient implements  Comparable<Ingredient> {
         double ingredientWeightValue;
         try {
             ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
-            if (ingredientWeightValue < 0) {
-                throw new FoodoramaException("");
+            while (ingredientWeightValue < 0) {
+                UI.clearTerminalAndPrintNewPage();
+                UI.printInvalidUpdateIngrValue(ingredientName);
+                inputIngredientWeight = in.nextLine();
+                ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
             }
-        } catch (NumberFormatException | FoodoramaException e) {
+        } catch (NumberFormatException e) {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
+
         ingredientWeight += ingredientWeightValue;
         UI.printStorage(ingredientName, ingredientWeight);
     }
@@ -99,10 +103,13 @@ public class Ingredient implements  Comparable<Ingredient> {
         double userLimit;
         try {
             userLimit = Double.parseDouble(inputLimit);
-            if (userLimit < 0) {
-                throw new FoodoramaException("");
+            while (userLimit < 0) {
+                UI.clearTerminalAndPrintNewPage();
+                UI.printInvalidIngrLimitValue(ingredientName);
+                inputLimit = in.nextLine();
+                userLimit = Double.parseDouble(inputLimit);
             }
-        } catch (NumberFormatException | FoodoramaException e) {
+        } catch (NumberFormatException e) {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
         limit = userLimit;
@@ -116,12 +123,16 @@ public class Ingredient implements  Comparable<Ingredient> {
         double ingredientWeightValue;
         try {
             ingredientWeightValue = Double.parseDouble(ingredientWeight);
-            if (ingredientWeightValue < 0) {
-                throw new FoodoramaException("");
+            while (ingredientWeightValue < 0) {
+                UI.clearTerminalAndPrintNewPage();
+                UI.printInvalidIngrWasteValue(ingredientName);
+                ingredientWeight = in.nextLine();
+                ingredientWeightValue = Double.parseDouble(ingredientWeight);
             }
-        } catch (NumberFormatException | FoodoramaException e) {
+        } catch (NumberFormatException e) {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
+
         ingredientWasteIngr += ingredientWeightValue;
         double totalWaste = ingredientWasteIngr + ingredientWasteDish;
         UI.printWastage(ingredientName, totalWaste);
@@ -144,7 +155,7 @@ public class Ingredient implements  Comparable<Ingredient> {
         } else {
             limitString = String.valueOf(limit);
             if (limit < totalWaste) {
-                limitString  = limitString + " (exceeded)";
+                limitString = limitString + " (exceeded)";
             }
         }
         if (this.expiryDate == null) {
@@ -160,7 +171,7 @@ public class Ingredient implements  Comparable<Ingredient> {
         }
 
         return ingredientName + '\n'
-                + "   Storage: " + ingredientWeight + " kg" +  System.lineSeparator()
+                + "   Storage: " + ingredientWeight + " kg" + System.lineSeparator()
                 + "   Wastage: " + totalWaste + " kg" + System.lineSeparator()
                 + "   Limit: " + limitString + System.lineSeparator()
                 + "   Expiry Date: " + expiryDateString;
@@ -173,7 +184,7 @@ public class Ingredient implements  Comparable<Ingredient> {
         } else {
             expiryDateString = expiryDate.format(dtf);
         }
-        return ingredientName + "|"  + ingredientWeight + "|" + ingredientWasteIngr + "|" + limit + "|"
+        return ingredientName + "|" + ingredientWeight + "|" + ingredientWasteIngr + "|" + limit + "|"
                 + expiryDateString;
     }
 
@@ -182,15 +193,16 @@ public class Ingredient implements  Comparable<Ingredient> {
         ingredientWasteDish += value;
     }
 
-    public int getGraphHeight(double max, int resolution) {
+    public double getGraphHeight(double max, int resolution) {
         double wastage = ingredientWasteDish + ingredientWasteIngr;
-        int num = (int) Math.ceil(resolution * wastage / max);
+        double num = resolution * wastage / max;
         return num;
     }
 
     @Override
     public int compareTo(Ingredient o) {
         double wastage = ingredientWasteDish + ingredientWasteIngr;
-        return (int) (o.getWastage() - wastage);
+        double diff = (o.getWastage() - wastage);
+        return (diff >= 0) ? (diff == 0) ? 0 : 1 : -1;
     }
 }

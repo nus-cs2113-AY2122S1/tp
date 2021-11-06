@@ -12,6 +12,8 @@ public class Dish implements Comparable<Dish> {
     private static final Logger LOGGER = Logger.getLogger("Dish class");
     private ArrayList<Ingredient> parts = new ArrayList<>();
     private static final Ui UI = new Ui();
+    private static final String YES = "y";
+    private static final String NO = "n";
     private String dishName;
     private double wastage;
     private double limit;
@@ -67,12 +69,16 @@ public class Dish implements Comparable<Dish> {
         double userLimit;
         try {
             userLimit = Double.parseDouble(inputLimit);
-            if (userLimit < 0) {
-                throw new FoodoramaException("");
+            while (userLimit < 0) {
+                UI.clearTerminalAndPrintNewPage();
+                UI.printInvalidDishLimitValue(dishName);
+                inputLimit = in.nextLine();
+                userLimit = Double.parseDouble(inputLimit);
             }
-        } catch (NumberFormatException | FoodoramaException e) {
+        } catch (NumberFormatException e) {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
+
         limit = userLimit;
         UI.printLimitSet(dishName, limit);
     }
@@ -112,15 +118,24 @@ public class Dish implements Comparable<Dish> {
         UI.printEnterWeightOf(dishName);
         Scanner in = new Scanner(System.in);
         String dishWaste = in.nextLine();
+        while (!isNumber(dishWaste)) {
+            UI.clearTerminalAndPrintNewPage();
+            UI.printInvalidDishName();
+            dishWaste = in.nextLine();
+        }
         double inputWastage;
         try {
             inputWastage = Double.parseDouble(dishWaste);
-            if (inputWastage < 0) {
-                throw new FoodoramaException("");
+            while (inputWastage < 0) {
+                UI.clearTerminalAndPrintNewPage();
+                UI.printInvalidDishWasteValue(dishName);
+                dishWaste = in.nextLine();
+                inputWastage = Double.parseDouble(dishWaste);
             }
-        } catch (NumberFormatException | FoodoramaException e) {
+        } catch (NumberFormatException e) {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
+
         assert inputWastage > 0 : "Adding negative waste is impossible";
         wastage += inputWastage;
         UI.printWastage(dishName, wastage);
@@ -135,6 +150,16 @@ public class Dish implements Comparable<Dish> {
                 ingredient.addDishWaste(inputWastage / parts.size());
             }
         }
+
+    }
+
+    private boolean isNumber(String numberString) {
+        try {
+            double number = Double.parseDouble(numberString);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
 
@@ -146,7 +171,7 @@ public class Dish implements Comparable<Dish> {
         } else {
             limitString = String.valueOf(limit);
             if (limit < wastage) {
-                limitString  = limitString + " (exceeded)";
+                limitString = limitString + " (exceeded)";
             }
         }
         String partList = "";
@@ -165,8 +190,8 @@ public class Dish implements Comparable<Dish> {
                 + "   Limit: " + limitString;
     }
 
-    public int getGraphHeight(double max, int resolution) {
-        int num = (int) Math.ceil(resolution * wastage / max);
+    public double getGraphHeight(double max, int resolution) {
+        double num = (resolution * wastage / max);
         return num;
     }
 
@@ -181,6 +206,7 @@ public class Dish implements Comparable<Dish> {
 
     @Override
     public int compareTo(Dish o) {
-        return (int) (o.wastage - wastage);
+        double diff = (o.wastage - wastage);
+        return (diff >= 0) ? (diff == 0) ? 0 : 1 : -1;
     }
 }

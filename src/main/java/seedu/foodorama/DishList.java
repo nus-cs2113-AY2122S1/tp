@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DishList {
+    public static final String YES_NO_REGEX = "^(y|yes|n|no)$";
     public static ArrayList<Dish> dishList = new ArrayList<>();
     public static Ui UI = new Ui();
     private static final String YES = "y";
@@ -60,13 +61,13 @@ public class DishList {
         String dishName = dishList.get(dishIndex).getDishName();
         UI.printConfirmDelDish();
         String confirmDel = input.nextLine().toLowerCase();
-        while (!(confirmDel.equals(YES) | confirmDel.equals(NO))) {
+        while (!confirmDel.matches(YES_NO_REGEX)) {
             UI.clearTerminalAndPrintNewPage();
             UI.printInvalidConfirmation();
             confirmDel = input.nextLine().toLowerCase();
         }
         UI.clearTerminalAndPrintNewPage();
-        if (confirmDel.equals(YES)) {
+        if (confirmDel.startsWith(YES)) {
             dishList.remove(dishIndex);
             UI.printDishNameRemoved(dishName);
             assert (dishList.size() == (listSize - 1)) : "dishList should be of size N-1";
@@ -80,13 +81,13 @@ public class DishList {
         UI.printConfirmClearDish();
         String confirmClear = input.nextLine().toLowerCase();
 
-        while (!(confirmClear.equals(YES) | confirmClear.equals(NO))) {
+        while (!confirmClear.matches(YES_NO_REGEX)) {
             UI.clearTerminalAndPrintNewPage();
             UI.printInvalidConfirmation();
             confirmClear = input.nextLine().toLowerCase();
         }
         UI.clearTerminalAndPrintNewPage();
-        if (confirmClear.equals(YES)) {
+        if (confirmClear.startsWith(YES)) {
             dishList.clear();
             assert dishList.size() == 0 : "dishList should be of size 0";
             UI.printDishListCleared();
@@ -110,13 +111,13 @@ public class DishList {
         UI.clearTerminalAndPrintNewPage();
         UI.printConfirmDishNameEditMsg(dishName, newName);
         String confirmChange = input.nextLine().toLowerCase();
-        while (!(confirmChange.equals(YES) | confirmChange.equals(NO))) {
+        while (!confirmChange.matches(YES_NO_REGEX)) {
             UI.clearTerminalAndPrintNewPage();
             UI.printInvalidConfirmation();
             confirmChange = input.nextLine().toLowerCase();
         }
         UI.clearTerminalAndPrintNewPage();
-        if (confirmChange.equals(YES)) {
+        if (confirmChange.startsWith(YES)) {
             dishList.get(dishIndex).setDishName(newName);
             UI.printDishNameChanged(dishName, newName);
         } else {
@@ -149,13 +150,13 @@ public class DishList {
             UI.clearTerminalAndPrintNewPage();
             UI.printConfirmDishWastageEditMsg(dishWeight, newWeight);
             String confirmChange = input.nextLine().toLowerCase();
-            while (!(confirmChange.equals(YES) | confirmChange.equals(NO))) {
+            while (!confirmChange.matches(YES_NO_REGEX)) {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printInvalidConfirmation();
                 confirmChange = input.nextLine().toLowerCase();
             }
             UI.clearTerminalAndPrintNewPage();
-            if (confirmChange.equals(YES)) {
+            if (confirmChange.startsWith(YES)) {
 
                 dishList.get(dishIndex).setDishWastage(newWeight);
                 UI.printDishWastageChanged(dishName, newWeight);
