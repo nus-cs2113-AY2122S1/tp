@@ -173,7 +173,8 @@ public class DishList {
                         inputWastage = Double.parseDouble(newWeight);
                     }
                 }
-                if ((isNumber(newWeight) && (inputWastage >= 0) && (inputWastage <= 10000)) | confirmAdd.startsWith(YES)) {
+                if ((isNumber(newWeight) && (inputWastage >= 0)
+                        && (inputWastage <= 10000)) | confirmAdd.startsWith(YES)) {
                     loop = EXIT;
                 }
             }
