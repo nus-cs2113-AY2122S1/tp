@@ -545,9 +545,9 @@ computer. The files are `data/contacts.txt` and `data/me.txt`.
 
 **A**: Yes, ConTech supports manual editing of `contacts.txt` and `me.txt` in the `data/` directory, although this is 
 not recommended. When doing so, remember to follow the correct syntax for contact details. Any contacts with incomplete/
-incorrect/corrupt data such as extra or missing fields will be discarded by ConTech upon launch. As such, users are 
-recommended to use the `add` and `edit` commands in the app instead of manually editing the save data files. For adding 
-a large number of contacts at once, the `import` function can be used.
+incorrect/corrupt data such as missing fields will be discarded by ConTech upon launch. In addition, extra fields 
+will be ignored. As such, users are recommended to use the `add` and `edit` commands in the app instead of manually 
+editing the save data files. For adding a large number of contacts at once, the `import` function can be used.
 
 **Q**: Does ConTech support duplicate prevention?
 
