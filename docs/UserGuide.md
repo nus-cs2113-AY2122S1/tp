@@ -16,7 +16,7 @@
 ## Introduction
 
 Large Order Tracking System (LOTS) is a Command Line (CLI) program that enables users to keep track of multiple food 
-orders from a pre-set list of food items from different stores. The program helps users to collate the orders and 
+orders from a pre-set list of food items. The program helps users to collate the orders and 
 displays a summary of all the orders along with other information such as an individual person’s order and the 
 corresponding cost, total cost of all the orders and more. As LOTS is a CLI program, this would 
 greatly benefit any user that excels in typing.
@@ -36,8 +36,8 @@ Target users includes:
 5. You can start using the `LOTS` program by inputting commands into the command line. The list of commands and 
 instructions on how to use them can be found in the following section.
 
-> :exclamation: **Caution**: When entering commands, if the command does not include any additional parameters please 
-> ensure that no extra inputs is present after the command. Strictly keep to the command format.
+> :exclamation: **Caution**: When entering commands, if the command does not include any additional parameters, please 
+> ensure that no extra inputs are present after the command. Strictly keep to the command format.
 
 ---
 
