@@ -19,7 +19,7 @@ public class SubtractCommand extends Command {
 
     /**
      * Constructor method for <code>SubtractCommand</code>.
-     * @param @param ingredientName the ingredient name to subtract amount from
+     * @param ingredientName the ingredient name to subtract amount from
      * @param subtractAmount the amount to be subtracted
      */
     public SubtractCommand(String ingredientName, Double subtractAmount) {
