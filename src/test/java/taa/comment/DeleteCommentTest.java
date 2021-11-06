@@ -16,7 +16,7 @@ public class DeleteCommentTest {
     @Test
     void deleteComment_userDeletesTwoComments_deleteCommentCorrectly() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2102";
         Command command1 = Parser.parseUserInput(classInput);
@@ -70,7 +70,7 @@ public class DeleteCommentTest {
     @Test
     void deleteComment_classDoesNotExist_taaExceptionThrown() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2102";
         Command command1 = Parser.parseUserInput(classInput);
@@ -103,7 +103,7 @@ public class DeleteCommentTest {
     @Test
     void deleteComment_studentIndexDoesNotExist_taaExceptionThrown() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2102";
         Command command1 = Parser.parseUserInput(classInput);
@@ -142,7 +142,7 @@ public class DeleteCommentTest {
     @Test
     void deleteComment_noCommentAdded_taaExceptionThrown() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2102";
         Command command1 = Parser.parseUserInput(classInput);

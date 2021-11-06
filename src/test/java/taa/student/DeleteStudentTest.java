@@ -17,7 +17,7 @@ public class DeleteStudentTest {
     @Test
     void deleteStudent_userDeletesTwoOutOfThreeStudents_deleteStudentCorrectly() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2102";
         Command command1 = Parser.parseUserInput(classInput);
@@ -64,7 +64,7 @@ public class DeleteStudentTest {
     @Test
     void deleteStudent_classDoesNotExist_taaExceptionThrown() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2102";
         Command command1 = Parser.parseUserInput(classInput);
@@ -91,7 +91,7 @@ public class DeleteStudentTest {
     @Test
     void deleteStudent_studentIndexDoesNotExist_taaExceptionThrown() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2102";
         Command command1 = Parser.parseUserInput(classInput);
