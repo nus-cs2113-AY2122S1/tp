@@ -329,4 +329,28 @@ public class TagTest {
         inputOutputTest(input,expected);
     }
 
+    @Test
+    public void testTag_CaseSensitivity() {
+        String input = "addRecipe Coffee /ingredients Beans /steps Brew"  + System.lineSeparator()
+                + "addRecipe Tea / ingredients Leaves /steps Brew" + System.lineSeparator()
+                + "tag / Coffee / favorites" + System.lineSeparator()
+                + "tag / Tea / FAVORITES" + System.lineSeparator()
+                + "untag / Coffee / FAVORITES" + System.lineSeparator()
+                + "deleteTag / FAVORITES" + System.lineSeparator()
+                + "check Coffee";
+
+        String expected = "Finding recipes called Coffee....." + System.lineSeparator()
+                + "====================" + System.lineSeparator()
+                + "Coffee" + System.lineSeparator()
+                + "Ingredients needed: " + System.lineSeparator()
+                + "1. Beans" + System.lineSeparator()
+                + "Method: " + System.lineSeparator()
+                + "1. Brew" + System.lineSeparator()
+                + "Tags: " + System.lineSeparator()
+                + "1. favorites" + System.lineSeparator()
+                + "====================" + System.lineSeparator();
+
+        inputOutputTest(input,expected);
+    }
+
 }
