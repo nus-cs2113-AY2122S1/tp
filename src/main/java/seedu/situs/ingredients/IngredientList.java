@@ -155,13 +155,15 @@ public class IngredientList {
             throw new SitusException(INVALID_SUBTRACT);
         }
 
-
+        // remove groups that total amount is approx 0
+        //@@author datn02
         if (Math.abs(currentGroup.getTotalAmount() - subtractAmount) < 0.001) {
             ingredientList.remove(groupNumber - 1);
             storage.writeIngredientsToMemory(ingredientList);
             return subtractedIngredientName;
         }
 
+        //@@author AayushMathur7
         currentGroup.subtractFromTotalAmount(subtractAmount);
 
         while (subtractAmount != 0.0) {
@@ -206,7 +208,7 @@ public class IngredientList {
         removedIngredient = getIngredientGroup(groupNumber)
                 .remove(ingredientNumber);
 
-        if (getIngredientGroup(groupNumber).getIngredientGroupSize() < 0.001) {
+        if (getIngredientGroup(groupNumber).getIngredientGroupSize() <= 0) {
             ingredientList.remove(groupNumber - 1);
         }
 
