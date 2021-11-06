@@ -20,11 +20,11 @@ public class UpdateParser extends Parser {
     private static final String ERROR_GOAL_END_DATE_FORMAT = "Use the e/ flag to set the new goal end date"
             + "Eg: e/31122021";
     private static final String ERROR_DATE_FORMAT = "Use the date format: 'ddMMyyyy'.";
-
     private static final String ERROR_INVALID_UPDATE_COMMAND = "There is no update command for goals in this format, "
-            + "do check your parameters one more time. Do not include more or less parameters than necessary.";
+            + "do check your parameters one more time.\nDo not include more or less parameters than necessary.";
     private static final String ERROR_INVALID_CHANGE_COMMAND = "There is no change command for habits in this format, "
-            + "do check your parameters one more time. Do not include more or less parameters than necessary.";
+            + "do check your parameters one more time.\nDo not include more or less parameters than necessary.";
+
     private static final String ERROR_CHANGE_HABIT_NAME_WITH_UPDATE_COMMAND = "Are you perhaps trying to change a "
             + "habit name? Please use the 'change' command instead.";
     private static final String ERROR_CHANGE_HABIT_INTERVAL_WITH_UPDATE_COMMAND = "Are you perhaps trying to change a "
@@ -37,7 +37,6 @@ public class UpdateParser extends Parser {
             + "goal end date? Please use the 'update' command instead.";
 
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("ddMMyyyy");
-
     private static final int FLAG_LENGTH = 2;
 
     /**
@@ -46,10 +45,12 @@ public class UpdateParser extends Parser {
      * @param input User input.
      * @return Parse command specifically for updating the chosen goal attribute.
      * @throws HaBitParserException Thrown when parameters given are for changing habit rather than updating goal
-     *                              or when parameters are not in the same
+     *                              or when parameters are not in the expected format.
      */
     public static Command parseUpdateGoalCommands(String input) throws HaBitParserException {
-        ArrayList<String> parameters = splitInput(input);
+        ArrayList<String> parameters = splitInput(input); 
+        assert (input.contains(FLAG_GOAL_INDEX));
+        assert (!input.isBlank());
         if (isUpdateGoalName(parameters)) {
             return parseUpdateGoalNameCommand(input);
         }
@@ -57,7 +58,7 @@ public class UpdateParser extends Parser {
             return parseUpdateGoalTypeCommand(input);
         }
         if (isUpdateGoalEndDate(parameters)) {
-            return parseUpdateGoalEndDate(input);
+            return parseUpdateGoalEndDateCommand(input);
         }
 
         if (isChangeHabitName(parameters)) {
@@ -80,7 +81,8 @@ public class UpdateParser extends Parser {
      */
     public static Command parseUpdateHabitCommands(String input) throws HaBitParserException {
         ArrayList<String> parameters = splitInput(input);
-
+        assert (input.contains(FLAG_GOAL_INDEX));
+        assert (!input.isBlank());
         if (isChangeHabitName(parameters)) {
             return parseUpdateHabitNameCommand(input);
         }
@@ -113,7 +115,7 @@ public class UpdateParser extends Parser {
         return new UpdateGoalNameCommand(goalIndex, newGoalName);
     }
 
-    public static Command parseUpdateGoalEndDate(String input) throws HaBitParserException {
+    public static Command parseUpdateGoalEndDateCommand(String input) throws HaBitParserException {
         ArrayList<String> parameters = splitInput(input);
         int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
         Date newDate = getDate(parameters);
@@ -226,9 +228,7 @@ public class UpdateParser extends Parser {
      */
     private static boolean isContainNoOtherFlag(ArrayList<String> parameters, String firstFlag, String secondFlag) {
         for (String param : parameters) {
-            if (param.contains(FLAG_GOAL_INDEX) && isExcessFlag(FLAG_GOAL_INDEX, firstFlag, secondFlag)) {
-                return false;
-            } else if (param.contains(FLAG_NAME) && isExcessFlag(FLAG_NAME, firstFlag, secondFlag)) {
+            if (param.contains(FLAG_NAME) && isExcessFlag(FLAG_NAME, firstFlag, secondFlag)) {
                 return false;
             } else if (param.contains(FLAG_GOAL_TYPE) && isExcessFlag(FLAG_GOAL_TYPE, firstFlag, secondFlag)) {
                 return false;
@@ -262,6 +262,7 @@ public class UpdateParser extends Parser {
         if (strEndDate == null || strEndDate.equals(FLAG_END_DATE)) {
             throw new HaBitParserException(ERROR_GOAL_END_DATE_FORMAT);
         }
+        assert (strEndDate.length() > FLAG_LENGTH);
         return stringToDate(strEndDate.substring(FLAG_LENGTH));
     }
 
