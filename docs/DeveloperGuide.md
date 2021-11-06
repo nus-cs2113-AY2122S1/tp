@@ -101,7 +101,6 @@ the contacts in the `ContactList`, such as adding or editing contacts. The conta
 according to their names in alphabetical order.
 
 ### <a name="storage"></a>Storage
-**API** :`Storage.java`
 
 ![Storage Class Diagram](images/StorageClassDiagram.png)
 
@@ -158,7 +157,7 @@ executed in `ConTech`. The sequence diagram below illustrates the process of exe
 
 ### <a name="View"></a>Viewing a contact: `view`
 This feature is processed using `ViewContactCommand`. Whenever a user wants to view a specific contact from the
-contact list, user can input `view INDEX` with the index of the desired contact displayed from the `list` feature. 
+contact list, user can input `view INDEX` with the index of the desired contact displayed from the [`list`](#List) feature. 
 `ViewContactCommand` is then created in the `MainParser` and executed in `ConTech`.
 
 The sequence diagram below illustrates the `execute()` function in `ViewContactCommand`.
@@ -169,8 +168,10 @@ The sequence diagram below illustrates the `execute()` function in `ViewContactC
 This feature is processed using `EditContactParser` under `MainParser`. In order to edit a contact in the contact list,
 a user must enter a command in the form `edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-l <LINKEDIN>} {-te <TELEGRAM>} 
 {-tw <TWITTER>} {-e <EMAIL>}`. The user input will be parsed by `EditContactParser` methods `getIndexToStore` and 
-`parseContactDetails` to obtain a String array with the details to be edited. An `EditContactCommand` 
-with the specified parameters will then be created and executed in `ConTech`. The sequence diagram below 
+`parseContactDetails` to obtain a String array with the details to be edited. The user input will also be parsed
+by the [`IndexParser`](#IndexParser) to obtain the contact index, which identifies the contact in the contact list to be edited.
+
+An `EditContactCommand` with the specified parameters will then be created and executed in `ConTech`. The sequence diagram below 
 shows how the whole process is carried out.
 
 ![Edit Sequence Diagram](images/EditContactCommandSequenceDiagram.png)
@@ -183,7 +184,7 @@ or delete all contacts at once.
 
 ![Delete Sequence Diagram](images/DeleteContactCommandSequenceDiagram.png)
 
-To delete all contacts, a user must enter the command `rm all`. The sequence diagram below
+To _delete all contacts_, a user must enter the command `rm all`. The sequence diagram below
 shows how the removal of all contacts works. Before any deletion, the user will be
 prompted with a message to confirm deletion. If the user confirms deletion for all contacts,
 deletion will be executed, along with a message to show that deletion has been executed.
@@ -191,7 +192,7 @@ If user cancels deletion, a message is printed to show that the deletion has bee
 
 ![Delete All Sequence Diagram](images/DeleteAllContacts.png) 
 
-To delete a selected contact, a user must enter a command in the form `rm <INDEX>`. The sequence diagram below
+To _delete a selected contact_, a user must enter a command in the form `rm <INDEX>`. The sequence diagram below
 shows how the removal of a contact works. Before any deletion, details of the contact with the specified`INDEX` 
 will be displayed to the user, along with a prompt to confirm deletion. If the user confirms deletion, 
 deletion of the selected contact will be executed, along with a message to show that deletion has been executed.
@@ -199,7 +200,7 @@ If user cancels deletion, a message is printed to show that the deletion has bee
 
 ![Delete Selected Sequence Diagram](images/DeleteSelectedContact.png)
 
-To delete specific details of a selected contact, a user must enter a command in the form `rm <INDEX> {-g} {-l} {-te}
+To _delete specific details_ of a selected contact, a user must enter a command in the form `rm <INDEX> {-g} {-l} {-te}
 {-tw} {-e}`. The sequence diagram below shows how the removal of a contact's fields works. Before any
 deletion, details of the contact fields specified will be displayed to the user, along with a prompt to confirm 
 deletion. If the user confirms deletion, deletion of the selected contact will be executed, along with a message to show
@@ -223,6 +224,15 @@ command which uses a loop to get the Contact object at every available index and
 function in `TextUi` class.
 
 ![List Sequence Diagram](images/ListContactsCommandSequenceDiagram.png)
+
+### <a name="IndexParser"></a>Index Parser
+
+The Index Parser is used when the user enters a command that specifies a contact index, such as the [`rm`](#Delete), 
+[`view`](#View) or [`edit`](#Edit) command. The Index Parser will parse the user's input string, and return the 
+specified contact index given as an integer, which will then be used in the execution of the corresponding command.
+
+For example, if `edit 2 -n Marcus Bobo` is given as the input, the Index Parser will identify the contact index to be `2`
+and pass the contact index to the execution of the `edit` command accordingly.
 
 
 ## <a name="scope"></a>Product scope
