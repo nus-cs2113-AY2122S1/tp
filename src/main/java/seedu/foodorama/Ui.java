@@ -1041,4 +1041,9 @@ public class Ui {
                 + System.lineSeparator() + LINE_DIVIDER;
     }
 
+    public String getBlankName(String type) {
+        return LINE_DIVIDER + System.lineSeparator()
+                + "The " + type + " name cannot be blank!"
+                + System.lineSeparator() + LINE_DIVIDER;
+    }
 }
