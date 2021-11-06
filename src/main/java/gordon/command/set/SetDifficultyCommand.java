@@ -14,6 +14,13 @@ public class SetDifficultyCommand extends Command {
         this.newDifficulty = newDifficulty;
     }
 
+    /**
+     * <h2> void execute(cookbook).</h2>
+     *
+     * <p> This method calls the setDifficulty function and prints the corresponding message</p>
+     *
+     * @param cookbook The recipe object to be referenced
+     */
     @Override
     public void execute(Cookbook cookbook) {
         System.out.println("Setting difficulty...");

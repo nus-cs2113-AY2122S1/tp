@@ -33,6 +33,10 @@ Developer Guide was adapted from [se-education.org/addressbook-level3](https://s
 
 ## Getting started
 
+### User guide
+
+* Refer to our user guide [here](https://ay2122s1-cs2113t-w13-2.github.io/tp/UserGuide.html) to get a better understanding of how to use Gordon
+
 ### Recommended software (for optimal compatibility)
 
 * Github
@@ -47,54 +51,56 @@ Developer Guide was adapted from [se-education.org/addressbook-level3](https://s
    1. Open a new tab
    1. Select the clone button at the top of the menu
    1. Key in the details of this repository
-1. **Configure the JDK:** Follow the guide [Project Configuration/ SDKs](https://www.jetbrains.com/help/idea/sdk.html) to ensure that Intellij is configured to use JDK 11.
+1. **Configure the JDK:** Follow the guide [Project Configuration/ SDKs](https://www.jetbrains.com/help/idea/sdk.html) to ensure that Intellij is configured to use JDK 11
 1. **Import the project as a Gradle project:** Follow the guide [Intellij IDEA: Importing a Gradle project
    ](https://se-education.org/guides/tutorials/intellijImportGradleProject.html)
 1. **Verify the setup:**
-   1. Run the seedu.address.Main and try a few commands.
-   1. Run the tests to ensure they all pass.
+   1. Run the seedu.address.Main and try a few commands
+   1. Run the tests to ensure they all pass
 
 ## Design & Implementation
 
 ### Architecture
 
+The diagram below describes the design of the app and how it functions:
+
 ![Architecture Diagram](./RenderedUML/ArchitectureDiagram.svg)
 
-The Diagram above explains how the App is designed and will function
+Given below is a quick overview of all the main components of Gordon as well as how these components interact with each other.
 
-Given below we have a quick overview of all the main components of Gordon as well as how these pieces interact with each other
+#### Main Components
 
-*Main Components*
-
-`Main` contains both `main` and `run`. It is responsible for:
+`Main` contains both `main` and `run`.
 
 1. Once the App is launched, `main` will call `run` to initialize the necessary components for the App to function properly
-2. On exit, the App will print the corresponding messages and execute the necessary cleanup methods.
+1. On exit, the App will print the corresponding messages and execute the necessary cleanup methods
 
 The App is organized by the `command`, `exception`, `kitchen`, and `util` packages that represent a collection of various different components that are deal with different parts of the functions of the App
 
 1. `command`: Contains all the `XYZ_Command` components that deal with the inputs that the user is able to make.
-2. `exception`: Contains all the the `GordonException` component that is used throughout the App
-3. `kitchen`: Contains the `Cookbook` and `Recipe` components that deal with the management of the cookbook
-4. `util`: Contains the `Difficulty`, `Parser`, `Tag` and `UI` components that deal with the functionality of the App
+1. `exception`: Contains all the `GordonException` components that are used throughout the App to handle errors
+1. `kitchen`: Contains the `Cookbook` and `Recipe` components that deal with the management of the cookbook database
+1. `util`: Contains the `Difficulty`, `Parser`, `Tag` and `UI` components that deal with the functionality of the App
 
-*How do these components interact with each other*
+#### How do these components interact with each other
 
-The Sequence Diagram below will show how the components interact with each other for the scenario where the user issues the command `add`.
+The Sequence Diagram below will show how the components interact with each other for the scenario where the user issues the command `add`:
 
 ![Add Sequence Diagram](./RenderedUML/AddSequence.svg)
 
 ### Kitchen component
 
-The Diagram below is the class diagram for the `Cookbook` and `Recipe` Classes in the ``Kitchen`` package
+The diagrams below are the class diagrams for the `Cookbook` and `Recipe` Classes in the ``Kitchen`` package:
 
-`COOKBOOK`
+> `COOKBOOK`
+>
+> ![Cookbook Class Diagram](./RenderedUML/Kitchen.svg)
+> 
 
-![Cookbook Class Diagram](./RenderedUML/Kitchen.svg)
-
-`RECIPE`
-
-![Recipe Class Diagram](./RenderedUML/Recipe.svg)
+> `RECIPE`
+>
+> ![Recipe Class Diagram](./RenderedUML/Recipe.svg)
+> 
 
 The `Cookbook` Class is instantiated by the `Gordon` Class, and manages the recipes and tags of the cookbook.
 The `Recipe` Class is instantiated by the `Parser` Class, and contains methods to update an existing recipe.
@@ -102,63 +108,81 @@ The `Recipe` Class is instantiated by the `Parser` Class, and contains methods t
 The `Cookbook` class consists of 2 main attributes
 
 1. The array `recipes` that stores all the main recipes currently in Gordon.
-2. The array `cookbookTags` that stores all the tags currently in Gordon.
+1. The array `cookbookTags` that stores all the tags currently in Gordon.
 
-The `Kichen` package can be classified into 3 main functionalities:
+The `Kitchen` package can be classified into **3** main functionalities:
 
-1. Recipe Management in `Cookbook` : 
-  - `addRecipe` : Adds recipe to Cookbook
-  - `removeRecipe` : Remove recipe from Cookbook
-  - `checkRecipe` : Checks whether recipe exists in Cookbook
-  - `setIngredients` : Updates the ***ingredients*** of a recipe in the Cookbook
-  - `setSteps` : Updates the ***steps*** of a recipe in the Cookbook
-  - `setCalories` : Adds ***calories*** to a recipe in the Cookbook
-  - `setPrice` : Adds ***price*** to a recipe in the Cookbook
-  - `setTime` : Adds ***cooking time*** and ***preparation time*** to a recipe in the Cookbook
-  - `setDifficulty` : Adds ***difficulty*** to a recipe in the Cookbook
-
-For example, the diagram below shows the sequence diagram when user wants to add ***calories*** to a recipe
-
-![AddCalories Sequence Diagram](./RenderedUML/SetCalories.svg)
-
-2. Tag Management in `Cookbook` :
-  - `addCookbookTag` : Add a new tag to the ***cookbookTags*** array
-  - `deleteCookbookTag` : Deletes a tag from the ***cookbookTags*** array
-  - `appendRecipeToCookbookTag` : Associates a recipe with a tag
-  - `deleteRecipeToCookBookTag` : Removes a recipe's association with a tag
-  - `addTagToRecipes` : Adds a tag to a recipe
-  - `deleteTagFromRecipes` : Deletes a tag from a recipe
-  - `listCookBookTags` : List all tags in the Cookbook
-  - `doesCookBookTagExist` : Check whether a tag exists 
-
-For example, the diagram below shows the sequence diagram for when user wants to add ***tag*** to a recipe
-
-![AddTags Sequence Diagram](./RenderedUML/AddTag.svg)
-
-3. Filter Recipes in `Cookbook` by different traits (such as *ingredients*, *tags*, *calories* etc.): 
-  - `filterByIngredients` : Filter by ***ingredients***
-  - `filterByTags` : Filter by ***tags***
-  - `filterByDifficulty` : Filter by ***difficulty***
-  - `filterByPrice` : Filter by ***price***
-  - `filterByCalories` : Filter by ***calories***
-  - `filterByTime` : Filter by ***cooking time*** and ***preparation time***
+1. Recipe Management in `Cookbook` :
+   * `addRecipe` : Adds recipe to Cookbook
+   * `removeRecipe` : Remove recipe from Cookbook
+   * `checkRecipe` : Checks whether recipe exists in Cookbook
+   * `setIngredients` : Updates the ***ingredients*** of a recipe in the Cookbook
+   * `setSteps` : Updates the ***steps*** of a recipe in the Cookbook
+   * `setCalories` : Adds ***calories*** to a recipe in the Cookbook
+   * `setPrice` : Adds ***price*** to a recipe in the Cookbook
+   * `setTime` : Adds ***cooking time*** and ***preparation time*** to a recipe in the Cookbook
+   * `setDifficulty` : Adds ***difficulty*** to a recipe in the Cookbook
+   * For example, the diagram below shows the sequence diagram when user wants to add ***calories*** to a recipe
+     ![AddCalories Sequence Diagram](./RenderedUML/SetCalories.svg)
+1. Tag Management in `Cookbook` :
+   * `addCookbookTag` : Add a new tag to the ***cookbookTags*** array
+   * `deleteCookbookTag` : Deletes a tag from the ***cookbookTags*** array
+   * `appendRecipeToCookbookTag` : Associates a recipe with a tag
+   * `deleteRecipeToCookBookTag` : Removes a recipe's association with a tag
+   * `addTagToRecipes` : Adds a tag to a recipe
+   * `deleteTagFromRecipes` : Deletes a tag from a recipe
+   * `listCookBookTags` : List all tags in the Cookbook
+   * `doesCookBookTagExist` : Check whether a tag exists
+   * For example, the diagram below shows the sequence diagram for when user wants to add ***tag*** to a recipe
+    ![AddTags Sequence Diagram](./RenderedUML/AddTag.svg)
+1. Filter Recipes in `Cookbook` by different traits (such as *ingredients*, *tags*, *calories* etc.): 
+   * `filterByIngredients` : Filter by ***ingredients***
+   * `filterByTags` : Filter by ***tags***
+   * `filterByDifficulty` : Filter by ***difficulty***
+   * `filterByPrice` : Filter by ***price***
+   * `filterByCalories` : Filter by ***calories***
+   * `filterByTime` : Filter by ***cooking time*** and ***preparation time***
 
 ### Parser component
 
-The diagram below is the class diagram for the `Parser` class
+The diagram below is the class diagram for the `Parser` class:
 
 ![Command Class Diagram](./RenderedUML/Parser.svg)
 
 Functions of the Parser class:
 
 * Reads in user input by implementing the `Scanner` class
-  * The parseMaster() method parses through the user's input to find the best match for the user's intended command
+  * The `parseMaster()` method parses through the user's input to find the best match for the user's intended command
   * The corresponding command is then returned to the `Gordon` class
+  * Below are the methods in the `Parser` class that `parseMaster()` calls:
+    * `addRecipeParse`:
+      * Adds a new recipe to the Cookbook by instantiating the `AddCommand` class
+    * `deleteRecipeParse`:
+      * Deletes an existing recipe from the Cookbook by instantiating the `DeleteRecipeCommand` class
+    * `deleteTagParse`:
+      * Deletes an existing tag from the Cookbook by instantiating the `DeleteTagCommand` class
+    * `setParse`:
+      * Compares the user's input against a list of valid inputs
+      * If valid, this method sets the corresponding attribute of the recipe as intended by the user by instantiating the `SetXYZCommand` class (where XYZ can be Ingredients, Steps, Calories, Difficulty, Price or Time)
+    * `findParse`:
+      * Compares the user's input against a list of valid inputs
+      * If valid, this method finds the corresponding attribute of the recipe as intended by the user by instantiating the `FindXYZCommand` class (where XYZ can be Ingredients, Steps, Calories, Difficulty, Price or Time)
+    * `addTagParse`:
+      * Adds a new tag to an existing recipe by instantiating the `TagAddCommand` class
+    * `unTagParse`
+      * Removes an existing tag from its original recipe by instantiating the `TagUntagCommand` class
+  * Below are the child classes of the `Command` class that `parseMaster()` instantiates directly:
+    * `CheckCommand`
+    * `ListRecipesCommand`
+    * `HelpCommand`
 * Prints responses to the console by implementing the `UI` class
+
+For example, the diagram below shows the sequence diagram for when the user wants to find recipes by their ingredients:
+![FindByIngredients Sequence Diagram](./RenderedUML/Find.svg)
 
 ### Command component
 
-The Diagram below is the class diagram for the Command Class
+The Diagram below is the class diagram for the Command Class:
 
 ![Command Class Diagram](./RenderedUML/CommandRects.svg)
 
@@ -166,39 +190,40 @@ The `Command` class contains all the basic functionality of the Gordon cookbook,
 
 The `Command` class can be classified into 4 main functionalities:
 
-1. Basic Commands: 
-   * The Commands that are required for the basic feature set of the Gordon cookbook are contained here
-   * `AddCommand` is where the `addRecipe` feature is executed
-   * `CheckCommand` is where the `checkRecipe` feature is executed
-   * `DeleteRecipeCommand` is where the `deleteRecipe` feature is executed
-   * `ListRecipesCommand` is where the `listRecipes` feature is executed
-   * `HelpCommand` is where the `help` feature is executed
+1. Basic Commands:
+   * The Commands that are required for the basic feature set of the Gordon cookbook are contained here.
+   * `AddCommand` is where the `addRecipe` feature is executed.
+   * `CheckCommand` is where the `checkRecipe` feature is executed.
+   * `DeleteRecipeCommand` is where the `deleteRecipe` feature is executed.
+   * `ListRecipesCommand` is where the `listRecipes` feature is executed.
+   * `HelpCommand` is where the `help` feature is executed.
 
-    #### Example : `AddCommand`
-    
-    `addRecipe Curry /ingredients Curry Sauce + Rice /steps Simmer + Cook`
+   #### Example : `AddCommand`
 
-    #### Expected outcome:
-    
+   `addRecipe Curry Rice /ingredients Curry Sauce + Rice /steps Simmer + Cook rice + Serve`
+
+   #### Expected outcome:
+
     ```
-    Added Curry recipe! Yum!
-    Curry
+    Added Curry Rice recipe! Yum!
+    Curry Rice
     Ingredients needed: 
     1. Curry Sauce
     2. Rice 
     Method: 
     1. Simmer
     2. Cook
+    3. Serve
     ```
 
 2. Set Commands:
-    * The Commands that are required for the `set` feature of Gordon are contained here
-    * `SetCaloriesCommand` is where the `set` /calories feature of gordon is executed
-    * `SetDifficultyCommand` is where the `set` /difficulty feature of gordon is executed
-    * `SetPriceCommand` is where the `set` /price feature of gordon is executed
-    * `SetIngredientsCommand` is where the `set` /ingredients feature of gordon is executed
-    * `SetStepsCommand` is where the `set` /steps feature of gordon is executed
-    * `SetTimeCommand` is where the `set` /time feature of gordon is executed
+   * The Commands that are required for the `set` feature of Gordon are contained here.
+   * `SetCaloriesCommand` is where the `set` /calories feature of gordon is executed.
+   * `SetDifficultyCommand` is where the `set` /difficulty feature of gordon is executed.
+   * `SetPriceCommand` is where the `set` /price feature of gordon is executed.
+   * `SetIngredientsCommand` is where the `set` /ingredients feature of gordon is executed.
+   * `SetStepsCommand` is where the `set` /steps feature of gordon is executed.
+   * `SetTimeCommand` is where the `set` /time feature of gordon is executed.
 
    #### Example : `SetDifficultyCommand`
 
@@ -212,40 +237,43 @@ The `Command` class can be classified into 4 main functionalities:
     ```
 
 3. Find Commands:
-   * The Commands that are required for the `find` feature of Gordon are contained here
-   * `FindTagsCommand` is where the `find` /tags feature of gordon is executed
-   * `FindCaloriesCommand` is where the `find` /calories feature of gordon is executed 
-   * `FindDifficultyCommand` is where the `find` /difficulty feature of gordon is executed
-   * `FindIngredientsCommand` is where the `find` /ingredients feature of gordon is executed
-   * `FindPriceCommand` is where the `find` /price feature of gordon is executed
-   * `FindTimeCommand` is where the `find` /time feature of gordon is executed
+   *The Commands that are required for the `find` feature of Gordon are contained here.
+   * `FindTagsCommand` is where the `find` /tags feature of gordon is executed.
+   * `FindCaloriesCommand` is where the `find` /calories feature of gordon is executed.
+   * `FindDifficultyCommand` is where the `find` /difficulty feature of gordon is executed.
+   * `FindIngredientsCommand` is where the `find` /ingredients feature of gordon is executed.
+   * `FindPriceCommand` is where the `find` /price feature of gordon is executed.
+   * `FindTimeCommand` is where the `find` /time feature of gordon is executed.
 
-    #### Example : `FindDifficultyCommand`
+   #### Example : `FindDifficultyCommand`
 
-    `find /difficulty Hard`
+   `find /difficulty Hard`
 
-    #### Expected outcome:
-    
+   #### Expected outcome:
+
     ```
     Searching by difficulty...
     1. Curry Rice (Difficulty: Hard)
+    2. Coffee (Difficulty: Easy)
     ```
 
 4. Tag Commands:
-   * The Commands that are required for the  `tag` feature of Gordon are contained here
-   * `TagAddCommand` is where the `tag` feature of gordon is executed
-   * `TagDeleteCommand` is where the `deleteTag` feature of gordon is executed
-   * `TagUntagCommand` is where the `untag` feature of gordon is executed
+   * The Commands that are required for the  `tag` feature of Gordon are contained here.
+   * `TagAddCommand` is where the `tag` feature of gordon is executed.
+   * `TagDeleteCommand` is where the `deleteTag` feature of gordon is executed.
+   * `TagUntagCommand` is where the `untag` feature of gordon is executed.
 
-    #### Example : `TagAddCommand`
+   #### Example : `TagAddCommand`
 
-    `tag / Curry Rice / Yummy`
+   `tag / Curry Rice / Yummy`
 
-    #### Expected outcome:
-    
+   #### Expected outcome:
+
     ```
     Successfully tagged Curry Rice under Yummy
     ```
+
+
 ### Storage component
 
 The Diagram below is the class diagram for the Storage Class
@@ -305,7 +333,7 @@ The `Tag` class contains the basic functionalities related to a _Tag_, and encap
 
 ### Value proposition
 
-A digital cookbook that works in Command-Line Interface that can provide all the necessary functions faster than from a typical mouse/GUI drive App
+A digital cookbook that works in Command-Line Interface that can provide all the necessary functions faster than from a typical mouse/GUI drive app
 
 ## User Stories
 
@@ -321,6 +349,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 |**|v2.0|health-conscious user|find recipes by calorie count|eat healthier by managing calories|
 |**|v2.0|budget-conscious user|find recipes by pricing|go for the most cost-efficient recipe|
 |**|v2.0|cooking newbie user|find recipes by difficulty|choose the difficulty of the recipe depending on my skill level|
+|**|v2.0|time-strapped user|find recipes by cooking/preparation time|choose a recipe with the appropriate cooking/preparation time, depending on my schedule|
 |**|v2.0|organised user|find recipes by my own tags|sort by my own metric|
 |**|v2.0|user|save and load my recipes from memory|refer to them whenever I want to|
 |*|v2.0|developer|add my own functionality to Gordon in a modular fashion|improve the app to my needs|
@@ -336,9 +365,12 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >
 >Use case ends.
 >
->**Extensions**
+>>**Extensions**
 >* The command given was invalid
-   >  * Gordon shows an error message
+>  * Gordon shows an error message
+>  * Use case resumes on step 1
+>* The recipe name was identical to an existing recipe
+>  * Gordon shows an error message that the recipe already exists
 >  * Use case resumes on step 1
 
 **Use case: `deleteRecipe`**
@@ -351,11 +383,11 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >
 >Use case ends.
 >
->**Extensions**
+>>**Extensions**
 >* The list is empty
-   >  * Use case ends
+>    * Use case ends
 >* The given index is invalid
-   >  * Gordon shows an error message
+>  * Gordon shows an error message
 >  * Use case resumes from step 2
 
 **Use case: `listRecipes`**
@@ -366,10 +398,10 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >
 >Use case ends.
 >
->**Extensions**
+>>**Extensions**
 >* The list is empty.
-   >    * Use case ends.
->
+>  * Use case ends.
+
 
 **Use case: `help`**
 >
@@ -388,7 +420,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >2. Program exits.
 >
 >Use case ends
- 
+
 **Use case: `check`**
 >
 >**MSS:**
@@ -397,10 +429,10 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >
 >Use case ends.
 >
->**Extensions**
+>>**Extensions**
 >* The recipe does not exist.
 >    * Use case ends.
->* Input was entered incorrectly
+>* Name of recipe was entered incorrectly
 >  * Use case resumes from step 1
 
 **Use case: `set`**
@@ -413,11 +445,13 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >
 >Use case ends.
 >
->**Extensions**
+>>**Extensions**
 >* The recipe does not exist.
-   >    * Use case ends.
+>     * Use case ends.
 >* Input was entered incorrectly
-   >  * Use case resumes from step 1
+>    * Use case resumes from step 1
+>* User enters an Index that is out of bounds
+>  * Use case resumes from step 1
 
 **Use case: `find`**
 >
@@ -429,7 +463,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >
 >Use case ends.
 >
->**Extensions** 
+>>**Extensions** 
 >* The list is empty
 >  * Use case ends
 >* No recipe contains the keyword
@@ -446,7 +480,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >
 >Use case ends.
 >
->**Extensions**
+>>**Extensions**
 >* The given recipe does not exist
 >  * Gordon shows an error message, notifies User that recipe does not exist
 >  * Use case resumes from step 2
@@ -470,7 +504,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >
 >Use case ends.
 >
->**Extensions**
+>>**Extensions**
 >* The tag does not exist
 >    * Gordon shows an error message.
 >    * Use case ends
@@ -480,7 +514,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >    * Use case ends
 >
 >* Input fields for tagName or recipeName is left blank
-   >    * Gordon shows an error message, prompts User to enter recipeName or tagName
+>      * Gordon shows an error message, prompts User to enter recipeName or tagName
 >    * Use case resumes from step 1
 
 **Use case: `deleteTag`**
@@ -492,21 +526,22 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 >
 >Use case ends.
 >
->**Extensions**
+>>**Extensions**
 >* The tag does not exist
 >    * Use case ends.
-
+>
 ## Non-Functional Requirements
 
-1. Should work on any mainstream OS as long as it has Java `11` or above installed.
-2. It should be able to hold thousands of recipes without any slowdown in performance
-3. A user with above average typing speed should be able to key in recipes faster than using a typical mouse/GUI application
+* Should work on any mainstream OS as long as it has Java `11` or above installed.
+* It should be able to hold thousands of recipes without any slowdown in performance
+* A user with above average typing speed should be able to key in recipes faster than using a typical mouse/GUI application
 
 ## Glossary
 
 * *Mainstream OS* - Windows, MacOS, Linux, Unix
 
 ## Instructions for manual testing
+
 - [I/O Tests](#io-tests)
 - [JUnit Tests](#junit-tests)
 
@@ -515,17 +550,13 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 #### Windows
 
 1. Using the `cd` command in Terminal, navigate to the `test-ui-text` folder
-
 2. Run the `runtests.bat` script
-
 3. If the script reports no difference between ACTUAL.TXT and EXPECTED.TXT, the I/O test has passed.
 
 #### Mac/Unix/Linux
 
 1. Using the `cd` command in Terminal, navigate to the `test-ui-text` folder
-
 2. Run the `runtests.sh` script
-
 3. If the script reports no difference between ACTUAL.TXT and EXPECTED.TXT, the I/O test has passed
 
 ### JUnit tests
