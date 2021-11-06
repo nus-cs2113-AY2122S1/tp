@@ -3,6 +3,8 @@ package seedu.budgettracker.common;
 public class Messages {
 
     public static final String MESSAGE_INVALID_EXPENDITURE_AMOUNT = "Amount entered must be greater than 0.";
+    public static final String MESSAGE_EXPENDITURE_AMOUNT_EXCEEDED = "Expenditure amount more than "
+            + "1 billion is currently not supported";
     public static final String MESSAGE_INVALID_BUDGET_AMOUNT = "Amount entered must be greater than or equals to 0.";
     public static final String MESSAGE_INVALID_DATE = "Date entered is invalid\n%1$s";
     public static final String MESSAGE_INVALID_YEAR = "The date entered belongs to a year outside of your "
@@ -18,7 +20,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_STAT_COMMAND = "Sorry, stat command must be "
             + "stat -b OR stat -e OR stat -l";
     public static final String MESSAGE_INVALID_COMMAND = "Sorry, I did not understand your command.";
-    public static final String MESSAGE_INVALID_CATEGORY = "Category entered is not recognized.";
     public static final String MESSAGE_EXIT = "Bye, see you again soon!";
     public static final String MESSAGE_FILE_NOT_EXIST = "The file does not exist!";
     public static final String MESSAGE_INVALID_INPUT = "Error! Your inputs are missing or incorrect!";

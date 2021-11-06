@@ -9,6 +9,7 @@ import java.time.LocalDate;
 
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_EXPENDITURE_AMOUNT;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_YEAR;
+import static seedu.budgettracker.common.Messages.MESSAGE_EXPENDITURE_AMOUNT_EXCEEDED;
 
 /**
  * Adds an Expenditure record to the RecordList.
@@ -50,6 +51,9 @@ public class AddExpenditureCommand extends AddCommand {
     public void execute() throws CommandException {
         if (spending <= 0) {
             throw new CommandException(MESSAGE_INVALID_EXPENDITURE_AMOUNT);
+        }
+        if (spending > 1000000000) {
+            throw new CommandException(MESSAGE_EXPENDITURE_AMOUNT_EXCEEDED);
         }
         int currentYear = allRecordList.getYear();
         if (date.getYear() != currentYear) {
