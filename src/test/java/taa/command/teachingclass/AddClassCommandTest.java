@@ -53,7 +53,7 @@ class AddClassCommandTest {
         command2.checkArgument();
 
         assertThrows(TaaException.class, () -> {
-           command2.execute(classList, ui, storage);
+            command2.execute(classList, ui, storage);
         });
     }
 
