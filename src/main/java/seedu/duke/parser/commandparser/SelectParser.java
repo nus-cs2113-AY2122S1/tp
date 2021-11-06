@@ -13,6 +13,7 @@ import seedu.duke.parser.Parser;
 import java.util.ArrayList;
 
 import static seedu.duke.Duke.eventCatalog;
+import static seedu.duke.parser.ItemType.MEMBER;
 import static seedu.duke.parser.ItemType.EVENT;
 import static seedu.duke.parser.ItemType.TASK;
 
@@ -21,7 +22,7 @@ public abstract class SelectParser extends Parser {
     private static int eventIndexToSelect;
     private static int taskIndexToSelect;
     private static int lastEventIndex;
-    private static String memberNameToSelect;
+    private static int memberIndexToSelect;
 
     public static Command getSelectCommand(String[] command, String commandDetails) {
 
@@ -36,10 +37,15 @@ public abstract class SelectParser extends Parser {
                 return new SelectCommand(TASK, lastEventIndex, taskIndexToSelect);
             case MEMBER:
                 parseMember(command);
+                return new SelectCommand(MEMBER, memberIndexToSelect);
             default:
                 throw new InvalidItemTypeException();
             }
-        } catch (InvalidItemTypeException | InvalidIndexException | DukeException e) {
+        } catch (InvalidItemTypeException e) {
+            System.out.println("Please indicate a flag:\n" + "-e for Event\n" + "-t for Task\n"
+                    + "-m for Member");
+        }
+        catch (InvalidIndexException | DukeException e) {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
             System.out.println("Please enter a number for the item index!");
@@ -70,17 +76,7 @@ public abstract class SelectParser extends Parser {
 
     private static void parseMember(String[] command) throws DukeException {
         String memberName = getMemberNameFromCommand(command);
-        ArrayList<Member> foundMembers = getMembersFromQuery(memberName);
-        int size = foundMembers.size();
-        if (size == 0) {
-            System.out.println("No matches found!");
-        } else if (size == 1) {
-            printFoundMembersWithTasks(foundMembers);
-        } else {
-            printFoundMembersWithOnlyNames(foundMembers);
-            System.out.println("Select a member again with the exact name!");
-        }
-        memberNameToSelect = memberName;
+        memberIndexToSelect = getMemberIndexFromQuery(memberName);
     }
 
     private static int getIndexFromCommand(String indexAsString) throws InvalidIndexException {
@@ -105,34 +101,21 @@ public abstract class SelectParser extends Parser {
             throw new DukeException("Please enter a name!");
         }
         StringBuilder memberNameQuery = new StringBuilder("");
-        for (int i = 2; i <= command.length; i++) {
+        for (int i = 2; i < command.length; i++) {
             memberNameQuery.append(command[i].trim());
             memberNameQuery.append(" ");
         }
         return memberNameQuery.toString().trim();
     }
 
-    private static ArrayList<Member> getMembersFromQuery(String memberName) {
-        ArrayList<Member> foundMembers = new ArrayList<>();
+    private static int getMemberIndexFromQuery(String memberName) throws DukeException {
         for (int i = 0; i < Duke.memberRoster.size(); i++) {
             Member member = Duke.memberRoster.get(i);
-            if (member.getName().toLowerCase().contains(memberName.toLowerCase())) {
-                foundMembers.add(member);
+            if (member.getName().equalsIgnoreCase(memberName)) {
+                return i;
             }
         }
-        return foundMembers;
-    }
-
-    private static void printFoundMembersWithTasks(ArrayList<Member> matchingMemberNames) {
-        for (Member member : matchingMemberNames) {
-            System.out.println(member.getName());
-            System.out.println(member.getTasks());
-        }
-    }
-
-    private static void printFoundMembersWithOnlyNames(ArrayList<Member> matchingMemberNames) {
-        for (Member member : matchingMemberNames) {
-            System.out.println(member.getName());
-        }
+        // a matching member is never found
+        throw new DukeException("No matching names found!");
     }
 }
