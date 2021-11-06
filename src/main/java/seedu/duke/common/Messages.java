@@ -102,7 +102,7 @@ public class Messages {
     public static final String EDIT_BOOK_MESSAGE = "  (+) Edited book item details:";
     public static final String EDIT_VIDEO_MESSAGE = "  (+) Edited video item details:";
     public static final String EDIT_MAGAZINE_MESSAGE = "  (+) Edited magazine item details:";
-    public static final String EDIT_MISCELLANEOUS_MESSAGE = "  (+) Edited item details:";
+    public static final String EDIT_MISCELLANEOUS_MESSAGE = "  (+) Edited miscellaneous item details:";
     public static final String EDIT_UNCHANGED_TITLE = "  (!) New title is the same as the existing title";
     public static final String EDIT_UNCHANGED_ID = "  (!) New ID is the same as the existing ID";
     public static final String EDIT_UNCHANGED_AUTHOR = "  (!) New author is the same as the existing author";

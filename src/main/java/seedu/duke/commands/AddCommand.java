@@ -40,8 +40,8 @@ public class AddCommand extends Command {
         case AddBookCommand.COMMAND_WORD:
             new AddBookCommand(args).execute(ui, catalogue);
             break;
-        case AddItemCommand.COMMAND_WORD:
-            new AddItemCommand(args).execute(ui, catalogue);
+        case AddMiscellaneousCommand.COMMAND_WORD:
+            new AddMiscellaneousCommand(args).execute(ui, catalogue);
             break;
         case AddMagazineCommand.COMMAND_WORD:
             new AddMagazineCommand(args).execute(ui, catalogue);
