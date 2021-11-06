@@ -44,11 +44,9 @@ public class TourPlanner {
             tourStorage = new TourStorage();
             flightStorage = new FlightStorage();
 
-            clientPackageStorage.loadFile();
             clientStorage.loadFile();
             tourStorage.loadFile();
             flightStorage.loadFile();
-
         } catch (TourPlannerException e) {
             ui.show(e.getMessage());
         }
@@ -56,6 +54,12 @@ public class TourPlanner {
         TourList tours = tourStorage.getTours();
         FlightList flights = flightStorage.getFlights();
         ClientList clients = clientStorage.getClients();
+
+        try {
+            clientPackageStorage.loadFile(clients, tours, flights, ui);
+        } catch (TourPlannerException e) {
+            ui.show(e.getMessage());
+        }
         ClientPackageList clientPackages = clientPackageStorage.getClientPackages();
         ui.showWelcome();
         boolean isExit = false;
