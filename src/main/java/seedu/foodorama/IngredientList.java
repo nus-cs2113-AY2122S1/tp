@@ -38,6 +38,9 @@ public class IngredientList {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
 
+        if (Double.isInfinite(ingredientWeightValue) | Double.isNaN(ingredientWeightValue)) {
+            throw new FoodoramaException(UI.printNumericalInputInvalid("ingredient storage"));
+        }
 
         Ingredient ingredientToAdd = new Ingredient(ingredientName, ingredientWeightValue);
         ingredientList.add(ingredientToAdd);
