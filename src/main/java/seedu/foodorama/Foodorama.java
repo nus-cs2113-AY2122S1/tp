@@ -50,7 +50,7 @@ public class Foodorama {
             } catch (FoodoramaException exception) {
                 System.out.println(exception.getMessage());
             }
-            userInput = input.nextLine().toLowerCase();
+            userInput = input.nextLine().toLowerCase().trim();
         }
         // Print exit message and close program
         ClearScreen.clearConsole();
