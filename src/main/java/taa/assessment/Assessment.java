@@ -5,13 +5,13 @@ import taa.Parser;
 
 public class Assessment implements ClassChecker {
     public static final double[] WEIGHTAGE_RANGE = {0, 100};
-    public static final int MINIMUM_MARKS = 0;
+    public static final double MINIMUM_MARKS = 0;
 
     private String name;
-    private int maximumMarks;
+    private double maximumMarks;
     private double weightage;
 
-    public Assessment(String name, int maximumMarks, double weightage) {
+    public Assessment(String name, double maximumMarks, double weightage) {
         this.name = name;
         this.maximumMarks = maximumMarks;
         this.weightage = weightage;
@@ -39,7 +39,7 @@ public class Assessment implements ClassChecker {
         return ((marks >= MINIMUM_MARKS) && (marks <= maximumMarks));
     }
 
-    public int getMaximumMarks() {
+    public double getMaximumMarks() {
         return maximumMarks;
     }
 
@@ -47,7 +47,7 @@ public class Assessment implements ClassChecker {
         this.name = name;
     }
 
-    public void setMaximumMarks(int maximumMarks) {
+    public void setMaximumMarks(double maximumMarks) {
         this.maximumMarks = maximumMarks;
     }
 
@@ -64,7 +64,7 @@ public class Assessment implements ClassChecker {
      */
     @Override
     public String toString() {
-        return String.format("%s (%d, %,.2f%%)", name, maximumMarks, weightage);
+        return String.format("%s (%,.2f, %,.2f%%)", name, maximumMarks, weightage);
     }
 
     /**
