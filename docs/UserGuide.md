@@ -34,6 +34,23 @@ done in an efficient manner.
 2. Down the latest version of `libmgr.jar` from [here](https://github.com/AY2122S1-CS2113-T16-1/tp/releases).
 3. Copy the file to the folder you want to use as the _home folder_ for Libmgr.
 4. Open a terminal/command prompt and run `java -jar libmgr.jar` to start the application.
+5. You will be greeted with the banner
+```
+        _.-"\
+    _.-"     \
+ ,-"          \
+( \            \
+ \ \            \
+  \ \            \
+   \ \         _.-;
+    \ \    _.-"   :
+     \ \,-"    _.-"
+      \(   _.-"  libmgr
+       `--"
+Welcome to libmgr
+Type 'help' to view available commands
+```
+6. View [Features](#features) to see what you can do in libmgr
 
 ## Features
 
