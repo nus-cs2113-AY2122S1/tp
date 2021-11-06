@@ -51,10 +51,9 @@ public class WordLimitGame extends Game {
     }
 
     public int getWordLimit() {
-        Scanner in = new Scanner(System.in);
         ui.printScreen("Enter how many words you want the game to run: ");
         try {
-            int n = Integer.parseInt(in.nextLine());
+            int n = Integer.parseInt(ui.readCommand());
             return isValidWord(n);
         } catch (NumberFormatException e) {
             new TextUi().printScreen("Length should be a number!");

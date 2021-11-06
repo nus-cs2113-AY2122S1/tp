@@ -39,10 +39,34 @@ The other core components of Typist:
 * `ui`: The Ui of the app.
 * `command`: Consists of `CommandFactory` which parses user inputs, and various `command` objects.
 * `common`: A collection of classes used by multiple other components.
-* `content`: holds the content and logic for `content` command
-* `game`: game, game summary and game record executor.
-* 
+* `content`: Holder for the content and logic for `content` command
+* `game`: Game, game summary and game record executor.
+* `storage`: Game storage executor.
 
+### Command Component
+
+The Command Component contains different types of command actions. 
+The `Command Factory` is responsible for parsing the user input and returning the corresponding command class to be executed.
+
+* When `Main` calls the `.run(args)` method of a `Command` object, ...
+
+### Game Component
+
+**How the Game Component works:**
+* When `.run(args)` of the `GameCommand` object is called, a corresponding `Game` object is created. 
+Immediately after, the `.run()` method of `Game` will be called, followed by `.gameSummary()`. 
+
+For instance:
+* When the `.run(args)` of `TimeGameCommand` is called, a `TimeLimitGame` object is created. 
+* Then, `.run()` method of `TimeLimitCommand` is executed, a Time Limit Game will start running 
+until game ends(i.e. timer's up).
+* `.gameSummary()` method will then generate the summary of the game. 
+
+### TimeLimitGame Class
+Sequence Diagram for Time Mode Game:
+<img src="https://user-images.githubusercontent.com/69776265/139190231-eb648329-517b-42dc-a088-fbce5c93c616.png" width="574" />
+
+The Sequence Diagram below illustrates the working process of the `TimeModeGame` class.
 
 ## Implementation
 
@@ -76,10 +100,6 @@ Once the CommandFactory reads a 'word' command, a word limit game will begin.
 Gonna to change this .puml diagram later - zhansen
 
 ![](diagrams/WordLimitMode.png)
-
-### Time Limit Game
-Sequence Diagram for Time Mode Game:
-![image](https://user-images.githubusercontent.com/69776265/139190231-eb648329-517b-42dc-a088-fbce5c93c616.png)
 
 ### \[Proposed\] View Statistics feature
 #### \[Proposed Implementation\]
