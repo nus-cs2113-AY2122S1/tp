@@ -548,6 +548,13 @@ can be used.
 **A**: Yes, ConTech has built-in duplicate protection for all commands except `import` currently. This will be added in
 a future revision with more granular controls to allow users to easily handle multiple duplicate contacts when importing.
 
+Current implementation ideas include:
+- import all with/without duplicates (use flag to specify)
+- manually check every single duplicate (inefficient, but can be an option with flag for users who want to check every duplicate)
+- allow Windows-style duplicate handling (Ignore, Ignore all, Cancel)
+- summarise every single duplicate and give user a one time confirmation to add/discard (no granularity)
+
+
 
 ## <a name="summary"></a>Command Summary
 
