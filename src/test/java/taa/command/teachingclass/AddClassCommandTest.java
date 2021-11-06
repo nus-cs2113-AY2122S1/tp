@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AddClassCommandTest {
     @Test
-    void addClass_oneClass_expectNoException() throws TaaException {
+    void addClass_oneClass_expectAddToClassList() throws TaaException {
         String argument = "i/cs2113T-f12 n/Class F-12 (AY21_22)";
         Command command = new AddClassCommand(argument);
         command.parseArgument();
@@ -25,6 +25,17 @@ class AddClassCommandTest {
         Ui ui = new Ui();
         Storage storage = new Storage(null);
         command.execute(classList, ui, storage);
+
+        TeachingClass teachingClass = classList.getClassWithId("cs2113t-f12");
+        boolean isAdded = teachingClass != null;
+        boolean hasId = false;
+        boolean hasName = false;
+        if (isAdded) {
+            hasId = teachingClass.getId().equals("CS2113T-F12");
+            hasName = teachingClass.getName().equals("Class F-12 (AY21_22)");
+        }
+
+        assertTrue(isAdded && hasId && hasName);
     }
 
     @Test
@@ -58,7 +69,7 @@ class AddClassCommandTest {
     }
 
     @Test
-    void addClass_emptyName_expectNoException() throws TaaException {
+    void addClass_emptyName_expectAddToClassList() throws TaaException {
         String argument = "i/cs2113T-f12 n/";
         Command command = new AddClassCommand(argument);
         command.parseArgument();
@@ -68,6 +79,17 @@ class AddClassCommandTest {
         Ui ui = new Ui();
         Storage storage = new Storage(null);
         command.execute(classList, ui, storage);
+
+        TeachingClass teachingClass = classList.getClassWithId("cs2113t-f12");
+        boolean isAdded = teachingClass != null;
+        boolean hasId = false;
+        boolean hasEmptyName = false;
+        if (isAdded) {
+            hasId = teachingClass.getId().equals("CS2113T-F12");
+            hasEmptyName = teachingClass.getName().isEmpty();
+        }
+
+        assertTrue(isAdded && hasId && hasEmptyName);
     }
 
     @Test
@@ -80,7 +102,7 @@ class AddClassCommandTest {
     }
 
     @Test
-    void addClass_validCharacters_expectNoException() throws TaaException {
+    void addClass_validCharacters_expectAddToClassList() throws TaaException {
         String argument = "i/cs2113.T-(f_12) n/This, is-nothing";
         Command command = new AddClassCommand(argument);
         command.parseArgument();
@@ -90,6 +112,17 @@ class AddClassCommandTest {
         Ui ui = new Ui();
         Storage storage = new Storage(null);
         command.execute(classList, ui, storage);
+
+        TeachingClass teachingClass = classList.getClassWithId("cs2113.T-(f_12)");
+        boolean isAdded = teachingClass != null;
+        boolean hasId = false;
+        boolean hasName = false;
+        if (isAdded) {
+            hasId = teachingClass.getId().equals("cs2113.T-(f_12)".toUpperCase());
+            hasName = teachingClass.getName().equals("This, is-nothing");
+        }
+
+        assertTrue(isAdded && hasId && hasName);
     }
 
     @Test
@@ -119,7 +152,7 @@ class AddClassCommandTest {
     }
 
     @Test
-    void addClass_withoutName_expectEmptyName() throws TaaException {
+    void addClass_withoutName_expectAddToClassList() throws TaaException {
         String argument = "i/Cs2113t(f11)";
         Command command = new AddClassCommand(argument);
         command.parseArgument();
@@ -132,11 +165,13 @@ class AddClassCommandTest {
 
         TeachingClass teachingClass = classList.getClassWithId("cs2113t(f11)");
         boolean isAdded = teachingClass != null;
+        boolean hasId = false;
         boolean hasEmptyName = false;
         if (isAdded) {
+            hasId = teachingClass.getId().equals("CS2113T(F11)");
             hasEmptyName = teachingClass.getName().isEmpty();
         }
 
-        assertTrue(isAdded && hasEmptyName);
+        assertTrue(isAdded && hasId && hasEmptyName);
     }
 }

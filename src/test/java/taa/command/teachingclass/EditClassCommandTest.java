@@ -80,7 +80,6 @@ class EditClassCommandTest {
         command.parseArgument();
         command.checkArgument();
 
-
         ClassList classList = new ClassList();
         TeachingClass teachingClass = new TeachingClass("cs2113t", "");
         classList.addClass(teachingClass);
@@ -102,7 +101,6 @@ class EditClassCommandTest {
         command.parseArgument();
         command.checkArgument();
 
-
         ClassList classList = new ClassList();
         TeachingClass teachingClass = new TeachingClass("cs2113t-f12", "");
         classList.addClass(teachingClass);
@@ -117,12 +115,11 @@ class EditClassCommandTest {
     }
 
     @Test
-    void editClass_existingIdAndOnlyNewId_expectNoException() throws TaaException {
+    void editClass_existingIdAndOnlyNewId_expectNewId() throws TaaException {
         String argument = "c/cs2113t-f12 i/cs2113t";
         Command command = new EditClassCommand(argument);
         command.parseArgument();
         command.checkArgument();
-
 
         ClassList classList = new ClassList();
         TeachingClass teachingClass = new TeachingClass("cs2113t-f12", "");
@@ -143,7 +140,6 @@ class EditClassCommandTest {
         command.parseArgument();
         command.checkArgument();
 
-
         ClassList classList = new ClassList();
         TeachingClass teachingClass = new TeachingClass("cs2113t-f12", "");
         classList.addClass(teachingClass);
@@ -156,12 +152,11 @@ class EditClassCommandTest {
     }
 
     @Test
-    void editClass_existingIdAndEmptyName_expectEmpty() throws TaaException {
+    void editClass_existingIdAndEmptyName_expectEmptyName() throws TaaException {
         String argument = "c/cs2113t-f12 n/";
         Command command = new EditClassCommand(argument);
         command.parseArgument();
         command.checkArgument();
-
 
         ClassList classList = new ClassList();
         TeachingClass teachingClass = new TeachingClass("cs2113t-f12", "This is old name");
@@ -171,7 +166,9 @@ class EditClassCommandTest {
         Storage storage = new Storage(null);
         command.execute(classList, ui, storage);
 
-        assertTrue(teachingClass.getName().isEmpty());
+        boolean sameId = teachingClass.getId().equals("CS2113T-F12");
+        boolean emptyName = teachingClass.getName().isEmpty();
+        assertTrue(sameId && emptyName);
     }
 
     @Test
