@@ -1,18 +1,22 @@
 package seedu.duke.parser.commandparser;
 
+import seedu.duke.Duke;
 import seedu.duke.Ui;
 import seedu.duke.commands.Command;
-import seedu.duke.commands.HelpCommand;
+import seedu.duke.commands.addcommands.AddEventCommand;
+import seedu.duke.commands.addcommands.AddMemberCommand;
+import seedu.duke.commands.addcommands.AddTaskCommand;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.parserexceptions.AttributeNotFoundException;
 import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
 import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
 import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
+import seedu.duke.items.Event;
+import seedu.duke.items.characteristics.Member;
 import seedu.duke.parser.ItemAttribute;
 import seedu.duke.parser.ItemType;
 import seedu.duke.parser.Parser;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public abstract class AddParser extends Parser {
@@ -29,27 +33,39 @@ public abstract class AddParser extends Parser {
      * @param commandDetails User input containing the flag of the item to be added and attributes for the command
      * @return The constructed Add Command. Null otherwise.
      */
-    public Command getAddCommand(String commandDetails) {
+    public static Command getAddCommand(String commandDetails) {
         try {
             ItemType itemTypeToAdd = getItemType(commandDetails);
             switch (itemTypeToAdd) {
             case EVENT:
                 String[] parsedAttributes = parseAddEvent(commandDetails);
-                assert parsedAttributes != null : "parseAddEvent failed";
                 String title = parsedAttributes[INDEX_OF_TITLE];
                 LocalDateTime dateTime = convertDateTime(parsedAttributes[INDEX_OF_DATETIME]);
                 String venue = parsedAttributes[INDEX_OF_VENUE];
-                Double budget = convertEventBudgetToDouble(parsedAttributes[INDEX_OF_BUDGET]);
+                double budget = convertEventBudgetToDouble(parsedAttributes[INDEX_OF_BUDGET]);
+                Ui.promptForDescription();
                 String description = Ui.readInput().trim();
-                // TODO: Create relevant constructor for AddEventCommand and return it.
-                // return new AddEventCommand(title, dateTime, venue, budget);
+                Ui.printLineBreak();
+                return new AddEventCommand(title, description, dateTime, venue, budget);
 
-                // TODO: Delete the HelpCommands after they have been replaced.
-                return new HelpCommand();
             case TASK:
-                return new HelpCommand();
+                parsedAttributes = parseAddTask(commandDetails);
+                title = parsedAttributes[INDEX_OF_TITLE];
+                dateTime = convertDateTime(parsedAttributes[INDEX_OF_DATETIME]);
+                Ui.promptForDescription();
+                description = Ui.readInput().trim();
+                Ui.printLineBreak();
+
+                int eventIndex = getEventForTask();
+                Ui.printLineBreak();
+                int[] memberIndexes = getMembersForTask();
+
+                return new AddTaskCommand(title, description, dateTime, eventIndex, memberIndexes);
+
             case MEMBER:
-                return new HelpCommand();
+                parsedAttributes = parseAddMembers(commandDetails);
+                return new AddMemberCommand(parsedAttributes);
+
             default:
                 return null;
             }
@@ -69,7 +85,7 @@ public abstract class AddParser extends Parser {
      * @param commandDetails String that contains command attributes and a redundant event flag.
      * @return The String[] of parsed attributes for an event. Null otherwise.
      */
-    private static String[] parseAddEvent(String commandDetails) {
+    private static String[] parseAddEvent(String commandDetails) throws DukeException {
         try {
             String commandAttributes = getCommandAttributes(commandDetails);
             String[] parsedAttributes = new String[4];
@@ -84,25 +100,122 @@ public abstract class AddParser extends Parser {
             parsedAttributes[INDEX_OF_BUDGET] = budget;
 
             return parsedAttributes;
+
         } catch (NoCommandAttributesException e) {
-            System.out.println("No details about the event you're trying to add is given!\n"
+            throw new DukeException("No details about the event you're trying to add is given!\n"
                     + "Format: add -e n/TITLE d/dd-MM-yyyy HHmm v/VENUE b/BUDGET");
         } catch (AttributeNotFoundException e) {
             String attributeType = ItemAttribute.getAttributeName(e.getItemAttribute());
             String attributeFlag = ItemAttribute.getItemFlag(e.getItemAttribute());
-            System.out.println("Please add a " + attributeType + "for your event using "
+            throw new DukeException("Please add a " + attributeType + "for your event using "
                     + attributeFlag + attributeType.toUpperCase());
         }
-
-        return null;
     }
 
-    private static String[] parseAddTask(String commandDetails) {
-        return null;
+    private static String[] parseAddTask(String commandDetails) throws DukeException {
+
+        if (Duke.eventCatalog.isEmpty()) {
+            throw new DukeException("There is no event to assign this task to! Please add "
+                    + "an event using the flag '-e'. ");
+        }
+        if (Duke.memberRoster.isEmpty()) {
+            throw new DukeException("There are no members in your roster to assign this task to!");
+        }
+
+        try {
+            String commandAttributes = getCommandAttributes(commandDetails);
+            String[] parsedAttributes = new String[2];
+
+            String title = retrieveItemAttribute(commandAttributes, ItemAttribute.TITLE);
+            parsedAttributes[INDEX_OF_TITLE] = title;
+            String dateTime = retrieveItemAttribute(commandAttributes, ItemAttribute.DATE);
+            parsedAttributes[INDEX_OF_DATETIME] = dateTime;
+
+            return parsedAttributes;
+
+        } catch (NoCommandAttributesException e) {
+            throw new DukeException("No details about the task you're trying to add is given!\n"
+                    + "Format: add -t n/TITLE d/dd-MM-yyyy HHmm");
+        } catch (AttributeNotFoundException e) {
+            String attributeType = ItemAttribute.getAttributeName(e.getItemAttribute());
+            String attributeFlag = ItemAttribute.getItemFlag(e.getItemAttribute());
+            throw new DukeException("Please add a " + attributeType + "for your task using "
+                    + attributeFlag + attributeType.toUpperCase());
+        }
     }
 
-    private static String[] parsedAddMember(String commandDetails) {
-        return null;
+    private static String[] parseAddMembers(String commandDetails) throws DukeException {
+
+        try {
+            String[] memberNames = commandDetails.split(" +", 2);
+            String[] parsedAttributes = memberNames[1].split(", +");
+            for (int i = 0; i < parsedAttributes.length; i++) {
+                parsedAttributes[i] = parsedAttributes[i].toUpperCase();
+                if (!isValidName(parsedAttributes[i])) {
+                    throw new DukeException("One or more of the member names are not valid. "
+                            + "Please separate the names with ', '. ");
+                }
+            }
+            return parsedAttributes;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Member name cannot be empty. ");
+        }
     }
 
+    private static int getEventForTask() {
+        Ui.promptForEventIndex();
+        int eventIndex = -1;
+        boolean isCorrectEvent = false;
+        while (!isCorrectEvent) {
+            try {
+                assert !Duke.eventCatalog.isEmpty() : "The event catalog should not be empty";
+                Ui.printEventCatalog();
+                Ui.printLineBreak();
+                eventIndex = Integer.parseInt(Ui.readInput()) - 1;
+                Event event = Duke.eventCatalog.get(eventIndex);
+                assert event != null : "Event does not exist";
+                isCorrectEvent = true;
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter the number corresponding to the event "
+                        + "you want to add to. ");
+                Ui.printLineBreak();
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("No such event. Please enter a valid event for your task. ");
+                Ui.printLineBreak();
+            }
+        }
+        assert eventIndex >= 0 : "Event index should be valid";
+        return eventIndex;
+    }
+
+    private static int[] getMembersForTask() {
+        Ui.promptForMemberIndex();
+        int[] memberIndexes = null;
+        boolean isCorrectMember = false;
+        while (!isCorrectMember) {
+            try {
+                assert !Duke.memberRoster.isEmpty() : "The member roster should not be empty";
+                Ui.printMemberRoster();
+                Ui.printLineBreak();
+                memberIndexes = extractInt(Ui.readInput());
+                for (int index : memberIndexes) {
+                    Member member = Duke.memberRoster.get(index);
+                    assert member != null : "Member does not exist";
+                }
+                isCorrectMember = true;
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("One or more of these members do not exist. Please enter the "
+                        + "index(es) corresponding to the correct member(s). ");
+                Ui.printLineBreak();
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+                Ui.printLineBreak();
+            }
+        }
+        return memberIndexes;
+    }
+
+    public static boolean isValidName(String input) {
+        return ((!input.equals("")) && (input.matches("^[A-Z. -]*$")));
+    }
 }
