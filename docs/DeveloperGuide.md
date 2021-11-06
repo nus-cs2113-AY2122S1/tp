@@ -137,13 +137,17 @@ The `Parser` class is in charge of:
 invalid command and the process stops here.
 3. If there is a match, `Parser` will check the validity of the arguments the user gave. This is also done
 using regex.
-4. If the arguments are valid, a respective command will be returned.
+4. If the arguments are valid, the corresponding command will be returned.
 5. If invalid, return an invalid command.
 
 ##### Converting user information to `csv` data
 
-1. 
+Every important field will be separated by `Parser` with a `,` before saving them into the respective `csv` files.
 
+##### Converting `csv` data to user information
+
+When a line of data is obtained from the `csv` file, `Parser` will check if the line fits the required format using
+regex.
 
 ### Budget Component
 
