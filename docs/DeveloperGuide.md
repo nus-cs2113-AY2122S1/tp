@@ -4,7 +4,7 @@
 * [Acknowledgements](#acknowledgements)
 * [Setting Up](#setting-up)
 * [Design](#design)
-  * [Architecture](#architecture)
+  * [Architecture](#architecture-overview)
   * [UI](#ui-component)
   * [Parser](#parser-component)
   * [Entry](#entry-component)
