@@ -592,3 +592,75 @@ exploratory testing.
        ____________________________________________________________
        ```  
 
+### <a name="testing-delete"></a>Deleting a contact
+1. Deleting a contact that is in the contact list
+    1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
+    2. Test case: `rm 1`<br>
+       Expected: User will be asked to confirm deleting the contact at the specified index. All details of the contact 
+       at index `1` will be displayed to allow user to check before confirming.
+       ```
+       ____________________________________________________________
+       Delete this contact?  (y/n)
+       
+       1.
+       Name:     Alex Lee
+       Github:   github.com/alexlee
+       Email:    alex.lee@email.com
+       Telegram: t.me/alexlee
+       LinkedIn: linkedin.com/in/alexlee
+       Twitter:  twitter.com/alexl33
+       ____________________________________________________________
+       ```
+    3. Follow up: You can either input `y` which stands for **yes** allowing you to delete the contact or `n` which 
+       stands for **no** to cancel deleting the contact.   
+
+
+2. Deleting a contact with a missing or invalid index
+    1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
+    2. Test case: `rm -1`<br>
+       Expected: An error message will notify user on what the valid indexes are.
+       ```
+       ____________________________________________________________
+       The index you have input is out of range.
+       Please input a index between 0 and 2.
+       ____________________________________________________________
+       ```
+    3. Test case: `rm`<br>
+       Expected: An error message will notify user that there is an index missing.
+       ```
+       ____________________________________________________________
+       There seems to be missing or invalid index in your request.
+       Please enter command in the following way:
+             rm <INDEX> {REMOVE_DETAIL_FLAGS}
+       Enter <INDEX> between 0 and 3
+       ____________________________________________________________
+       ```
+
+3. Deleting all contacts in the contact list
+    1. Test case: `rm all`<br>
+       Expected: User will be asked to confirm deleting all the contacts in the contact list.
+       ```
+       ____________________________________________________________
+       Delete all of your contacts?  (y/n)
+       ____________________________________________________________
+       ```
+    3. Follow up: You can either input `y` which stands for **yes** allowing you to delete all contacts or `n` which
+       stands for **no** to cancel deleting all contacts.
+
+
+4. Deleting one or few fields from a contact
+    1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
+    2. Test case: `rm 1 -g`<br>
+       Expected: User will be asked to confirm deleting a field from the contact at the specified index. The specified 
+       field of the contact at index `1` will be displayed to allow user to check before confirming. For this test case,
+       only the GitHub for the contact at index `1` will be displayed as only the `-g` flag is mentioned.
+       ```
+       ____________________________________________________________
+       Delete the following fields for Ben tan?  (y/n)
+       
+       Github:   github.com/bentan
+       ____________________________________________________________
+       ```
+    3. Follow up: You can either input `y` which stands for **yes** allowing you to delete the field from the contact
+       or `n` which stands for **no** to cancel deleting the field from the contact.
+
