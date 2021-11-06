@@ -1,7 +1,6 @@
 package taa.util;
 
 //@@author leyondlee
-
 import taa.exception.FileCreationException;
 
 import java.io.File;

@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ParserTest {
-
     @Test
     void getArgumentsFromString_noKeys_expectEmpty() throws TaaException {
         String inputString = "c/CS2113T_-() n/Software Engineering and Object-oriented Programming_-()";
