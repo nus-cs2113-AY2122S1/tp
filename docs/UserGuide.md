@@ -1207,13 +1207,15 @@ As requested, here are the matching dishes in your list:
    Wastage: 1.0 kg
    Ingredients Linked: None
    Limit: No limit has been set
-2. krabby patty
+3. krabby patty
    Wastage: 0.0 kg
    Ingredients Linked: None
    Limit: No limit has been set
 ____________________________________________________________
 
 ```
+
+💡 *Note*: `find dish [KEYWORD]` will print the index of matching dishes as how it appears in the dish list.
 
 <br/>
 
@@ -1236,18 +1238,20 @@ Expected Outcome:
 ```
 ____________________________________________________________
 As requested, here are the matching ingredients in your list:
-1. chicken
+2. chicken
    Storage: 7.0 kg
    Wastage: 0.0 kg
    Limit: No limit has been set
    Expiry Date: No expiry date has been set
-2. chickpea
+3. chickpea
    Storage: 3.5 kg
    Wastage: 0.0 kg
    Limit: No limit has been set
    Expiry Date: No expiry date has been set
 ____________________________________________________________
 ```
+
+💡 *Note*: `find ingr [KEYWORD]` will print the index of matching ingredients as how it appears in the ingredient list.
 
 <br/>
 
