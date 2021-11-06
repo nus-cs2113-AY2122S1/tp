@@ -25,7 +25,7 @@ public class SetDishLimitCommand extends Command {
         } else {
             dishIndex = DishList.find(dish);
         }
-        if (dishIndex == -1) {
+        if (dishIndex == -1 && !isNumber(dish)) {
             throw new FoodoramaException(UI.getDishNotExistMsg(parameters.get(0)));
         } else if (dishIndex < 0 || dishIndex >= DishList.dishList.size()) {
             throw new FoodoramaException(UI.getDishIndexExceedSizeMsg());

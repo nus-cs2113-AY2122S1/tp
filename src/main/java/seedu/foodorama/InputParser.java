@@ -9,8 +9,9 @@ public class InputParser {
     public Ui ui = new Ui();
 
     public CommandNames getCommandName(String input) throws FoodoramaException {
+        String trimmedInput = input.trim() + " ";
         for (CommandNames command : CommandNames.values()) {
-            if (input.startsWith(command.getName())) {
+            if (trimmedInput.startsWith(command.getName() + " ")) {
                 return command;
             }
         }
@@ -31,6 +32,7 @@ public class InputParser {
         case CLEAR_ALL:
         case SORT_DISH:
         case SORT_INGR:
+        case RAND_RISH_NAME:
         case HELP:
             if (!parameterString.isBlank()) {
                 ui.printExcessParamMsg(inputCommand.getName());
@@ -79,6 +81,7 @@ public class InputParser {
             break;
 
         default:
+            assert false;
             break;
         }
 

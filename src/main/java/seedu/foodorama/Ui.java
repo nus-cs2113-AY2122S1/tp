@@ -1,7 +1,5 @@
 package seedu.foodorama;
 
-import seedu.foodorama.command.RandomDishCommand;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -317,7 +315,8 @@ public class Ui {
             + LINE_DIVIDER;
 
     public static final String INVALID_CONFIRMATION = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, that is an invalid command. Please type y to confirm or n to disregard" + System.lineSeparator()
+            + "Sorry, that is an invalid command. "
+            + "Please type y/yes to confirm or n/no to disregard" + System.lineSeparator()
             + LINE_DIVIDER;
 
     public static final String INVALID_INGR_NAME = LINE_DIVIDER + System.lineSeparator()
@@ -711,12 +710,18 @@ public class Ui {
         return INVALID_DISH_NAME;
     }
 
-    private void printGraph(int graphPortions, ArrayList<Integer> lengths, int i, int j) {
+    private void printGraph(int graphPortions, ArrayList<Double> lengths, int i, int j) {
+        int integralPart = (int) Math.floor(lengths.get(j / 2));
+        double fractionalPart = lengths.get(j / 2) - integralPart;
         if (i < graphPortions) {
             if (j % 2 == 0) {
                 System.out.print("   "); //Every other column is blank
-            } else if (i > graphPortions - 1 - lengths.get(j / 2)) {
-                System.out.print("[|]");
+            } else if (i >= graphPortions - 1 - integralPart) {
+                if (i == graphPortions - 1 - integralPart) {
+                    System.out.print("[" + (int) (fractionalPart * 10) + "]");
+                } else {
+                    System.out.print("[|]");
+                }
             } else {
                 System.out.print("   ");
             }
@@ -737,7 +742,7 @@ public class Ui {
         if (!dishList.isEmpty()) {
             System.out.println(LINE_DIVIDER + System.lineSeparator());
             //Get the n values for the dishes
-            ArrayList<Integer> lengths = new ArrayList<>();
+            ArrayList<Double> lengths = new ArrayList<>();
             double max = DishList.getGreatestWaste();
             for (int i = 0; i < dishList.size(); i++) {
                 lengths.add(dishList.get(i).getGraphHeight(max, graphPortions));
@@ -767,7 +772,7 @@ public class Ui {
     private void printDishLegend(ArrayList<Dish> dishList, int i) {
         if (i == 0) {
             System.out.print("     Legend:         ");
-            System.out.print("     Scale: 1 unit = " + DishList.getGreatestWaste() / 10 + "kg");
+            System.out.print("     Scale: 1 unit [|] = " + DishList.getGreatestWaste() / 10 + "kg");
         } else {
             System.out.print("     " + (char) (i + 64) + ". " + dishList.get(i - 1).getDishName()
                     + ": " + dishList.get(i - 1).getWastage() + "kg");
@@ -781,7 +786,7 @@ public class Ui {
         if (!ingredientList.isEmpty()) {
             System.out.println(LINE_DIVIDER + System.lineSeparator());
             //Get the n values for the ingredients
-            ArrayList<Integer> lengths = new ArrayList<>();
+            ArrayList<Double> lengths = new ArrayList<>();
             double max = IngredientList.getGreatestWaste();
             for (int i = 0; i < ingredientList.size(); i++) {
                 lengths.add(ingredientList.get(i).getGraphHeight(max, graphPortions));

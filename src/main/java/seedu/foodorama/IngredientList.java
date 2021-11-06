@@ -78,13 +78,13 @@ public class IngredientList {
         } else {
             UI.printConfirmDelIngr();
             String confirmDel = input.nextLine().toLowerCase();
-            while (!(confirmDel.equals(YES) | confirmDel.equals(NO))) {
+            while (!confirmDel.matches("^(y|yes|n|no)$")) {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printInvalidConfirmation();
                 confirmDel = input.nextLine().toLowerCase();
             }
             UI.clearTerminalAndPrintNewPage();
-            if (confirmDel.equals(YES)) {
+            if (confirmDel.startsWith(YES)) {
                 //Get all dishes
                 for (Dish dish : DishList.dishList) {
                     //Find if they contain ingr in parts
@@ -111,13 +111,13 @@ public class IngredientList {
         UI.printConfirmClearIngr();
         String confirmClear = input.nextLine().toLowerCase();
 
-        while (!(confirmClear.equals(YES) | confirmClear.equals(NO))) {
+        while (!confirmClear.matches("^(y|yes|n|no)$")) {
             UI.clearTerminalAndPrintNewPage();
             UI.printInvalidConfirmation();
             confirmClear = input.nextLine().toLowerCase();
         }
         UI.clearTerminalAndPrintNewPage();
-        if (confirmClear.equals(YES)) {
+        if (confirmClear.startsWith(YES)) {
             ingredientList.clear();
             assert ingredientList.size() == 0 : "ingredientList should be of size 0";
             UI.printIngrListCleared();
@@ -141,13 +141,13 @@ public class IngredientList {
         UI.clearTerminalAndPrintNewPage();
         UI.printConfirmIngrEditMsg(ingrName, newName);
         String confirmChange = input.nextLine().toLowerCase();
-        while (!(confirmChange.equals(YES) | confirmChange.equals(NO))) {
+        while (!confirmChange.matches("^(y|yes|n|no)$")) {
             UI.clearTerminalAndPrintNewPage();
             UI.printInvalidConfirmation();
             confirmChange = input.nextLine().toLowerCase();
         }
         UI.clearTerminalAndPrintNewPage();
-        if (confirmChange.equals(YES)) {
+        if (confirmChange.startsWith(YES)) {
             ingredientList.get(ingredientIndex).setIngredientName(newName);
             UI.printIngrNameChanged(ingrName, newName);
         } else {
@@ -216,13 +216,13 @@ public class IngredientList {
         UI.clearTerminalAndPrintNewPage();
         UI.printConfirmDishWastageEditMsg(ingrWeight, newWeight);
         String confirmChange = input.nextLine().toLowerCase();
-        while (!(confirmChange.equals(YES) | confirmChange.equals(NO))) {
+        while (!confirmChange.matches("^(y|yes|n|no)$")) {
             UI.clearTerminalAndPrintNewPage();
             UI.printInvalidConfirmation();
             confirmChange = input.nextLine().toLowerCase();
         }
         UI.clearTerminalAndPrintNewPage();
-        if (confirmChange.equals(YES)) {
+        if (confirmChange.startsWith(YES)) {
             ingredientList.get(ingrIndex).setIngredientWaste(newWeight);
             UI.printDishWastageChanged(ingrName, newWeight);
         } else {
@@ -255,13 +255,13 @@ public class IngredientList {
             UI.clearTerminalAndPrintNewPage();
             UI.printConfirmIngrStorageEditMsg(ingrWeight, newWeight);
             String confirmChange = input.nextLine().toLowerCase();
-            while (!(confirmChange.equals(YES) | confirmChange.equals(NO))) {
+            while (!confirmChange.matches("^(y|yes|n|no)$")) {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printInvalidConfirmation();
                 confirmChange = input.nextLine().toLowerCase();
             }
             UI.clearTerminalAndPrintNewPage();
-            if (confirmChange.equals(YES)) {
+            if (confirmChange.startsWith(YES)) {
                 ingredientList.get(ingrIndex).setIngredientWeight(newWeight);
                 UI.printIngrStorageChanged(ingrName, newWeight);
             } else {

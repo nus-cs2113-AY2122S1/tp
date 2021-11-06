@@ -35,7 +35,9 @@ public class AddDishWasteCommand extends Command {
         }
         //Input validation for dishIndex
         //Possible edge case (user give 0 as input)
-        if (dishIndex == -1) {
+        if (dish.isBlank()) {
+            throw new FoodoramaException(UI.getDishNameMissingMsg());
+        } else if (dishIndex == -1 && !isNumber(dish)) {
             logger.log(Level.INFO, "Dish does not exist");
             throw new FoodoramaException(UI.getDishNotExistMsg(parameters.get(0)));
         } else if (dishIndex < 0 || dishIndex >= DishList.dishList.size()) {
@@ -56,10 +58,9 @@ public class AddDishWasteCommand extends Command {
     }
 
     public boolean isNumber(String numberString) {
-        try {
-            double number = Double.parseDouble(numberString);
+        if (numberString.matches("^[\\d\\s.]+$")) {
             return true;
-        } catch (NumberFormatException e) {
+        } else {
             return false;
         }
     }

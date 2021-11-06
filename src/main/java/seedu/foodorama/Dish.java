@@ -112,6 +112,11 @@ public class Dish implements Comparable<Dish> {
         UI.printEnterWeightOf(dishName);
         Scanner in = new Scanner(System.in);
         String dishWaste = in.nextLine();
+        while (!isNumber(dishWaste)) {
+            UI.clearTerminalAndPrintNewPage();
+            UI.printInvalidDishName();
+            dishWaste = in.nextLine();
+        }
         double inputWastage;
         try {
             inputWastage = Double.parseDouble(dishWaste);
@@ -134,6 +139,15 @@ public class Dish implements Comparable<Dish> {
                 //Change in contribution is change in wastage / num of partss
                 ingredient.addDishWaste(inputWastage / parts.size());
             }
+        }
+    }
+
+    private boolean isNumber(String numberString) {
+        try {
+            double number = Double.parseDouble(numberString);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 
@@ -165,8 +179,8 @@ public class Dish implements Comparable<Dish> {
                 + "   Limit: " + limitString;
     }
 
-    public int getGraphHeight(double max, int resolution) {
-        int num = (int) Math.ceil(resolution * wastage / max);
+    public double getGraphHeight(double max, int resolution) {
+        double num = (resolution * wastage / max);
         return num;
     }
 
@@ -181,6 +195,7 @@ public class Dish implements Comparable<Dish> {
 
     @Override
     public int compareTo(Dish o) {
-        return (int) (o.wastage - wastage);
+        double diff = (o.wastage - wastage);
+        return (diff >= 0) ? (diff == 0) ? 0 : 1 : -1;
     }
 }
