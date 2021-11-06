@@ -91,47 +91,47 @@ by passing the university to display the message of adding the selected universi
 </p>
 
 
-####AddModCommand
+#### AddModCommand
 When the `AddModCommand` method is called in the `AddModCommand` class. It will call the `addModule` method in the `moduleList` class under Model, adding the module in the selected module list. Then it will call the `updateSelectedModuleList` method in the storage class to update the selected list with the new module added. Finally, it will call the `printModule` method in the `UiModule` class to print the message of adding the module to the user.
 
-####AddUniCommand
+#### AddUniCommand
 When the `AddUniCommand` method is called in the `AddUniCommand` class. It will call `addUniversity` method in the `universityList` class under Model, adding the university in the selected university list. Then it will call the `updateSelectedUniversityList` method in the storage class to update the selected list with the new university added. Finally, it will call the `printUniversity` method in the `UiUniversity` class to print the message of adding the university to the user.
 
-####AddMapCommand
+#### AddMapCommand 
 When the `addMapCommand` method is called in the `AddMapCommand` class. It will call the `addMapping` method in the `university` class under Model, adding the mapping under the selected university in the selected university list. Then it will call the `updateSelectedUniversity` method in the storage class to update the selected list with the new mapping added. Finally, it will call the `printUniversity` method in the `UiMapping` class to print the message of adding the mapping to the user.
 
-####RemoveModCommand
+#### RemoveModCommand 
 When the `RemoveModCommand` method is called in the `RemoveModCommand` class. It will call the `removeModule` method in the `moduleList` class under Model, removing the module in the selected module list. Then it will call the `updateSelectedModuleList` method in the storage class to update the selected list with the module removed. Finally, it will call the `printModule` method in the `UiModule` class to print the message of removing the module to the user.
 
-####RemoveUniCommand
+#### RemoveUniCommand 
 When the `RemoveUniCommand` method is called in the `RemoveUniCommand` class. It will call `removeUniversity` method in the `universityList` class under Model, removing the university in the selected university list. Then it will call the `updateSelectedUniversityList` method in the storage class to update the selected list with the university removed. Finally, it will call the `printUniversity` method in the `UiUniversity` class to print the message of removing the university to the user.
 
-####RemoveMapCommand
+#### RemoveMapCommand 
 When the `RemoveMapCommand` method is called in the `RemoveMapCommand` class. It will call the `removeMapping` method in the `university` class under Model, removing the mapping under the selected university in the selected university list. Then it will call the `updateSelectedUniversity` method in the storage class to update the selected list with the mapping removed. Finally, it will call the `printUniversity` method in the `UiMapping` class to print the message of removing the mapping to the user.
 
-####ListModCommand
+#### ListModCommand 
 When the `ListModCommand` method is called in the `ListModCommand` class. It will call the `getSize()` method in the `moduleList` class to check if the list is empty: if the list is empty, it prints the error message. If the list is not empty, it calls the `printModule` method in the `UiModule` class in a loop to print all modules found.
 
-####ListUniCommand
+#### ListUniCommand 
 When the `ListUniCommand` method is called in the `ListUniCommand` class. It will call the `getSize()` method in the `UniversityList` class to check if the list is empty: if the list is empty, it prints the error message. If the list is not empty, it checks the type of university list chosen. If the master list is chosen, the `printMasterList` method is called, which calls `printUniversity` method in the `UiUniversity` class to print out all universities in the master list. If the selected list is chosen, `printSelectedList` is called, which calls `printUniversity` method in the `UiUniversity` class to print out all universities in the selected list and calls `listAllMappings` method in the `universityList` class to print all module mappings under each university as well.
 
-####FindModCommand
+#### FindModCommand 
 When the `FindModCommand` method is called in the `FindModCommand` class. It will get the list of module results by searching in the `moduleMasterList`. Then it checks if the result list is empty: if the result list is empty, it calls the `printFindModNull` method in the `UiInvalid` class to print the error message. If the result list is not empty, it calls the `printModule` method in the `UiModule` class in a loop to print all modules found.
 
-####FindUniCommand
+#### FindUniCommand 
 When the `FindUniCommand` method is called in the `FindUniCommand` class. It will get the list of university results by searching in the `universityMasterList`. Then it checks if the result list is empty: if the result list is empty, it calls the `printFindUniNull` method in the `UiInvalid` class to print the error message. If the result list is not empty, it calls the `printUniversity` method in the `UiUniversity` class in a loop to print all universities found.
 
-####SearchMapCommand
+#### SearchMapCommand 
 When the `SearchMapCommand` method is called in the `SearchMapCommand` class, it will check if `isAll` is true. If `isAll` is true, the `printMappings` method will be called, which prints all mappings from the selected module list for all universities in the selected university list by calling the `printIndex` method in the Ui class and `listSelectedMappings` method in the University class. If isAll is false, it will call the `printMappings` method to print out only the mappings for the selected university only.  
 The following sequence diagram illustrates how the whole process is carried out.
 <p align = "center">
 <img src="images/searchmapseq.png" width = "800" />
 </p>
 
-####HelpCommand
+#### HelpCommand 
 When the `HelpCommand` method is called in the `HelpCommand` class. It will print out all commands available for SEPlanner.
 
-####ExitCommand
+#### ExitCommand 
 When the `ExitCommand` method is called in the `ExitCommand` class. It will call the `printExit` method in the `UiGeneral` class to exit the program.
 
 ### User Interface
@@ -204,16 +204,13 @@ from the CSV type files (`University.csv` and `modules.csv`) stored in the resou
 
 ### University and module related classes
 
-The following diagrams are the class diagrams of the classes:  
+The following diagram is the class diagram of the university related classes:
 
 <p align = "center">
 <img src="images/universities.png" width = "800" />
 </p>
-<p align = "center">
-<img src="images/modules.png" width = "800" />
-</p>
 
-This component consist of the following classes: 
+This component consist of the following classes:  
 
 #### University 
 
@@ -231,6 +228,14 @@ This component consist of the following classes:
   * Stores the master list containing all universities available for CEG SEP application. This list is directly read from an external file `University.csv`.
   * Stores the selected list containing all universities added by the user. This list can be amended by the user, and all change to it will be stored under `data/selectedUniversities.txt`.
 * Contains methods to search, filter, or amend the list based on command from the user. 
+
+The following diagram is the class diagram for the module related classes:  
+
+<p align = "center">
+<img src="images/modules.png" width = "800" />
+</p>
+
+This component consist of the following classes:  
 
 #### Module 
 
@@ -361,6 +366,25 @@ a list of potential exchange Universities based on the users study plan, module 
 * *CSV* - Comma-separated Values
 * *SEP* - Student Exchange Programme
 * *NUS* - National University of Singapore
+
+## Possible further updates in the future 
+* Currently, data for universities and mappings are directly retrieved from EduRec website provided by NUS, and stored in csv files.
+There is no current way to automatically update the data retrieved. As such, one of the future updates the team can look into will be to 
+retrieve the data from EduRec automatically such that the universities, modules and mappings in the database will always be up-to-date.
+* Data entered by users (selected module and university list) are currently only stored in the user's local machine. This introduces a certain
+amount of uncertainty to the users since the data might be easily corrupted or lost if the local machine malfunctions, thus the team should also
+look into storing all the data on the cloud such that data from the users can be stored more safely.
+* SEPlanner's current database includes crucial information for SEP planning, such as universities, NUS modules, and corresponding module mappings. 
+These data are chosen for the first 2 versions of the app since the process of accessing these data on EduRec is extremely slow and unorganised. 
+However, there are other information which are not included in SEPlanner right now, including the time of exchange for each partner university, number of 
+vacancies etc. Information mentioned here are not provided by EduRec, and is easy for the user to access. However, it will be good for the team to include
+ all these details in future versions of SEPlanner, so that the application itself will be sufficient for the SEP application for a CEG undergraduate in NUS.
+* SEPlanner provides the users with a fast and easy experience to organise the mappings and universities for SEP, but SEPlanner alone is not enough for users to complete their SEP application. Unfortunately, after the planning 
+is done, users will still have to return to EduRec to submit their actual SEP application (which is extremely sow and inefficient as mentioned). The team 
+could look into further integration with EduRec in the future, and perform the application for users as well. This will make SEPlanner itself a sufficient 
+app for the entire SEP planning and applying process. 
+* The current version is only designed for CEG students from NUS, the team can further improve in the future by including more details for students from other 
+faculties, thus making SEPlanner the go-to choice for every single NUS student planning for their SEP.
 
 ## Instructions for manual testing
 
