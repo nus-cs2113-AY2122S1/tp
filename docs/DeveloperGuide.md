@@ -283,15 +283,14 @@ In the event that the json save file is empty or does not exist, a new empty `Ti
 `Timetable` is converted to a `TimetableDto` object in order to separate different `TimetableItem` types. The `TimetableDto` object is then saved to a local json file via Gson.
 
 #### Add
+![](uml-diagrams/AddCommand.png)
 
+If AddCommand is executed with a `LESSON` flag, `fetchModule()` will be executed. Module data will be fetched similar to the process of getting module detail in [Search](#fetch,-save-and-load-mod),
+and for each existing lesson type, details of the lesson will be printed through the `getLessonDetails()` method.
+For each lessonType, `getCommand()` is utilized to collect input of the Lesson to be added into the timetable.
 
-Utilizes `getLessonDetails` for each LessonType found in the Semester of the module. 
-Details of all lessons will be displayed and sorted based on classNo. 
-In the event where the lesson conflicts (another lesson is within the same time slot) 
-with any existing lessons, a `<CONFLICT>` line will be displayed beside the lesson. 
-For each lessonType, `getCommand` is utilized to collect input of the Lesson to be added into the timetable. 
-The `addModuleToList()` and `addLesson()` functions are called, and the modules are added to the module 
-list and each applicable timetable slot.
+If AddCommand is executed with a `EVENT` flag, `getEvent()` will be executed. Which subsequently calls `addEvent()` to add 
+event to the timetable.
 
 #### Delete
 
