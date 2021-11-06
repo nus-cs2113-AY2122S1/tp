@@ -1,1 +1,2 @@
-Time-limited|39.172|9|1|10|90.0|10.0|1.5317063208414174|[Ipsum, is, simply, dummy, text, of, the, printing, and]
+Time-limited|39.172|9|1|10|90.0|10.0|1.5317063208414174|[Ipsum,  is,  simply,  dummy,  text,  of,  the,  printing,  and]
+Time-limited|32.35|4|26|30|13.333333333333334|86.66666666666667|48.222565687789796|[the, and, industry's, dummy]
