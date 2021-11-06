@@ -1,4 +1,6 @@
-package seedu.utility;
+package seedu.utility.tools;
+
+import seedu.utility.Messages;
 
 import java.util.Arrays;
 import java.util.List;

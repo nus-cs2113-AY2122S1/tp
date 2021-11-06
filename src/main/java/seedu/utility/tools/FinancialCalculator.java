@@ -1,90 +1,55 @@
 package seedu.utility.tools;
 
-import seedu.entry.Expense;
-import seedu.entry.Income;
+import seedu.entry.Entry;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-import static seedu.utility.FinancialTracker.TOTAL_EXPENSE_LIMIT;
-import static seedu.utility.FinancialTracker.TOTAL_INCOME_LIMIT;
+import static seedu.utility.FinancialTracker.TOTAL_ENTRIES_LIMIT;
+
 
 /**
  * This class abstracts out more complication calculations used in FinancialTracker.
  */
 public abstract class FinancialCalculator {
+    private final static int[] MONTHS = IntStream.range(1,12).toArray();
+    
     /**
-     * Sorts an entire year's expense according to the month they are associated with.
+     * Sorts an entire year's entries according to the month they are associated with.
      * 
-     * @param yearlyAccumulatedExpense A List of expenses that all share the same associated year.
-     * @return A sorted ArrayList where index 1 - 12 contains the total expense corresponding to the month Jan to Dec.
+     * @param yearlyAccumulatedEntries A List of entries that all share the same associated year.
+     * @return A sorted ArrayList where index 1 - 12 contains the total entry corresponding to the month Jan to Dec.
      */
-    public static ArrayList<Double> sortExpenseByMonth(List<Expense> yearlyAccumulatedExpense) {
+    public static ArrayList<Double> sortEntriesByMonth(List<Entry> yearlyAccumulatedEntries) {
         ArrayList<Double> monthlyBreakdown = new ArrayList<>();
-        for (int i = 1; i <= 12; i++) {
-            double expenseForTheMonth = getMonthlyExpense(i, yearlyAccumulatedExpense);
-            monthlyBreakdown.add(expenseForTheMonth);
+        for (int month : MONTHS) {
+            double entryForTheMonth = getMonthlyEntries(month, yearlyAccumulatedEntries);
+            monthlyBreakdown.add(entryForTheMonth);
         }
         return monthlyBreakdown;
     }
     
-    private static double getMonthlyExpense(int inputMonth, List<Expense> yearlyExpense) {
-        List<Expense> monthlyAccumulatedExpense = yearlyExpense.stream()
+    private static double getMonthlyEntries(int inputMonth, List<Entry> yearlyEntries) {
+        List<Entry> monthlyAccumulatedEntries = yearlyEntries.stream()
                 .filter(DateOperator.sameEntryMonth(inputMonth))
                 .collect(Collectors.toList());
-        return getTotalExpenseOf(monthlyAccumulatedExpense);
+        return getSumOfEntries(monthlyAccumulatedEntries);
     }
 
     /**
-     * Calculate the total amount associated to all the expense in the list.
+     * Calculate the total amount associated to all the entries in the list.
      * 
-     * @param accumulatedExpense A list containing all the expenses we want to sum the values of.
-     * @return The sum of all the expenses stored as a double.
+     * @param accumulatedEntries A list containing all the entries we want to sum the values of.
+     * @return The sum of all the entries stored as a double.
      */
-    public static double getTotalExpenseOf(List<Expense> accumulatedExpense) {
-        double totalExpense = 0;
-        for (Expense expense: accumulatedExpense) {
-            totalExpense += expense.getValue();
+    public static double getSumOfEntries(List<Entry> accumulatedEntries) {
+        double totalEntry = 0;
+        for (Entry entry : accumulatedEntries) {
+            totalEntry += entry.getValue();
         }
-        assert totalExpense < TOTAL_EXPENSE_LIMIT;
-        return totalExpense;
-    }
-
-    /**
-     * Sorts an entire year's income according to the month they are associated with.
-     *
-     * @param yearlyAccumulatedIncome A List of incomes that all share the same associated year.
-     * @return A sorted ArrayList where index 1 - 12 contains the total income corresponding to the month Jan to Dec.
-     */
-    public static ArrayList<Double> sortIncomeByMonth(List<Income> yearlyAccumulatedIncome) {
-        ArrayList<Double> monthlyBreakdown = new ArrayList<>();
-        for (int i = 1; i <= 12; i++) {
-            double incomeForTheMonth = getMonthlyIncome(i, yearlyAccumulatedIncome);
-            monthlyBreakdown.add(incomeForTheMonth);
-        }
-        return monthlyBreakdown;
-    }
-
-    private static double getMonthlyIncome(int inputMonth, List<Income> yearlyIncome) {
-        List<Income> monthlyAccumulatedIncome = yearlyIncome.stream()
-                .filter(DateOperator.sameEntryMonth(inputMonth))
-                .collect(Collectors.toList());
-        return getTotalIncomeOf(monthlyAccumulatedIncome);
-    }
-
-    /**
-     * Calculate the total amount associated to all the income in the list.
-     *
-     * @param accumulatedIncome A list containing all the incomes we want to sum the values of.
-     * @return The sum of all the incomes stored as a double.
-     */
-    public static double getTotalIncomeOf(List<Income> accumulatedIncome) {
-        double totalIncome = 0;
-        for (Income income: accumulatedIncome) {
-            totalIncome += income.getValue();
-        }
-        assert totalIncome < TOTAL_INCOME_LIMIT;
-        return totalIncome;
+        assert totalEntry < TOTAL_ENTRIES_LIMIT;
+        return totalEntry;
     }
 }

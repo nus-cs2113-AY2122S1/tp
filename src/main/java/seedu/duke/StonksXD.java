@@ -6,12 +6,9 @@ import seedu.utility.BudgetManager;
 import seedu.utility.CurrencyManager;
 import seedu.utility.DataManager;
 import seedu.utility.FinancialTracker;
-import seedu.utility.FinancialAdvisor;
 
 import seedu.utility.Parser;
 import seedu.utility.Ui;
-
-import static seedu.utility.FinancialAdvisor.getRandomAdvice;
 
 /**
  * A command line interfaced program that can store your financial entries and provide other insights and analytical 
