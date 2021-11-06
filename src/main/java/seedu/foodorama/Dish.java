@@ -118,13 +118,6 @@ public class Dish implements Comparable<Dish> {
         UI.printEnterWeightOf(dishName);
         Scanner in = new Scanner(System.in);
         String dishWaste = in.nextLine();
-        while (!isNumber(dishWaste)) {
-            if (!isNumber(dishWaste)) {
-                throw new FoodoramaException(UI.getInvalidNumberMsg());
-            }
-            UI.printInvalidDishName();
-            dishWaste = in.nextLine();
-        }
         double inputWastage;
         try {
             inputWastage = Double.parseDouble(dishWaste);
