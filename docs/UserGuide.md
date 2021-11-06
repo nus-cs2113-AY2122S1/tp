@@ -266,6 +266,7 @@ ____________________________________________________________
 Edits any main aspect about an existing trip.
 
 #### Format: `edit TRIP_NAME /name NEW_TRIP_NAME /from NEW_SOURCE_COUNTRY /to NEW_DESTINATION_COUNTRY`
+
    * If you want to edit multiple aspects, the format order must be as shown above.
    * If you only want to edit a trip's name : `edit TRIP_NAME /name NEW_TRIP_NAME`.
    * If you only want to edit a trip's source country : `edit TRIP_NAME /from NEW_SOURCE_COUNTRY`.
