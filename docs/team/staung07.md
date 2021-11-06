@@ -1,10 +1,11 @@
 # Swann - Project Portfolio Page
 
 ## Overview
-I did my best :) Daren did 99.999999999999999999999999% of this project
-Give Daren A+ 
-Thank you Prof Akshay 
-We Love You
-~ Daren
 
 ### Summary of Contributions
+* List Goals
+* View Habits for each Goal
+* Done Habit for Goal [v1.0]
+* Update Goal End Date
+* Update Habit Interval
+* 
