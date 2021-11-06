@@ -321,12 +321,12 @@ public class Ui {
             + LINE_DIVIDER;
 
     public static final String INVALID_INGR_NAME = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, Ingredient Name cannot be a Number. Please type an appropriate Ingredient Name:"
+            + "Sorry, Ingredient Name cannot be a Number. The command has been disregarded."
             + System.lineSeparator()
             + LINE_DIVIDER;
 
     public static final String INVALID_DISH_NAME = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, Dish Name cannot be a Number. Please type an appropriate Dish Name:" + System.lineSeparator()
+            + "Sorry, Dish Name cannot be a Number. The command has been disregarded." + System.lineSeparator()
             + LINE_DIVIDER;
 
     public static final String DISREGARD_MSG = LINE_DIVIDER + System.lineSeparator()
