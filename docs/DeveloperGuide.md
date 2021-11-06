@@ -179,8 +179,8 @@ The `CommandParser.java` class implements the below functionalities using the fo
 The purpose of this is to enable direct and easier access to flags based on the name.
 - `createCommand`: Creates the correct `Command` based on the main command and any flags or arguments it may have.
 - `parseCommand`: Parent method that calls the above methods after splitting and sanitising the user's input into
-a `CommandEnum` variable for the **main command** and a `Map<String, String>` variable for the flags or arguments
-- associated with it.
+a `CommandEnum` variable for the **main command** and a `Map<String, String>` variable for the flags or arguments 
+associated with it.
 
 ### 3.4 Command Component
 
@@ -221,12 +221,36 @@ The sequence diagram above shows the creation of a Todo Task using TodoFactory.
 The same logical structure is used in the Deadline and Event factories.  
 
 ### 4.2 Filtering the tasklist
-The sequence diagram belows shows the process of filtering the user's tasklist that is managed
+
+The sequence diagram and description below shows the process of filtering the user's tasklist that is managed
 by the `TaskManager.java` class.
 
 <p align="center">
     <img src="images/AmosUMLDiagrams/SD_FilteringTasklist.png">
 </p>
+
+**Step 1**: When the `ListCommand` receives the call to be executed by the main class `SchedUrMods`, it will proceed to call the `listTasklistWithFilter()` method 
+and input the command arguments stored as a flag-argument `Map<String, String>`, in this case the **filters** entered by the user, 
+that was previously sanitised by the `CommandParser`.
+
+**Step 2**: The `listTasklistWithFilter()` method will then loop through all the **filters** and check the validity of the filters
+currently stored in the flag-argument `Map<String, String>`.
+
+**Step 3**: For each valid filter found, the respective filter functions will be called and will filter out all the tasks that
+do not match the filter specified by the user. For instance, if the filter flag equals to `type` and it's corresponding mapped
+value is `Todo`, then the method `filterListByTaskType()` will filter out all the tasks who do not have task type equals to `Todo`,
+and return a filtered tasklist with only `Todo` tasks.
+
+**Step 4**: The returned filtered tasklist will be reused for the remaining filters present in the flag-argument `Map<String, String>`
+of the filters to allow for multi-level filter to increase the filtering depth for the user to locate specific tasks
+that matches multiple filters.
+
+**Step 5**: Once the `listTasklistWithFilter()` method has looped through all the filters stored in the `Map<String, String>`,
+it will call the `getListTasklistWithFilterMessage()` method along with the final filtered tasklist to obtain a nicely 
+pre-formatted `String` containing a neat list of the final filtered tasks that matched all the filtering criteria.
+
+**Step 6**: A `CommandResult` object is then created and stores the `String` containing the filtered tasklist
+as the command execution message to be handled by the `Ui` and displayed to the user on the terminal interface.
 
 ## 5. Appendix: Requirements
 
