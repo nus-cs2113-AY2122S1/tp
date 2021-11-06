@@ -1,6 +1,7 @@
 package seedu.budgettracker.data.records;
 
 import java.time.LocalDate;
+import java.text.DecimalFormat;
 
 import static java.lang.Math.ceil;
 
@@ -10,6 +11,7 @@ public class Expenditure extends Record {
     protected String description;
     protected LocalDate date;
     protected Category category;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public Expenditure(String description, double amount, LocalDate date, Category category) {
         super(amount, date.getMonthValue());
@@ -54,7 +56,7 @@ public class Expenditure extends Record {
 
 
     public String toString() {
-        return this.description + this.amount + this.date + this.category;
+        return (this.description + df.format(this.amount) + this.date + this.category);
     }
 
     /**
@@ -74,7 +76,7 @@ public class Expenditure extends Record {
         }
         return String.format("%-30.30s %-20.20s %-20.20s %-20.20s",
                 displayIndex + "." + descriptionToPrint,
-                "| $" + this.amount,
+                "| $" + df.format(this.amount),
                 "| " + this.date.toString(),
                 "| " + this.category.toString());
     }
