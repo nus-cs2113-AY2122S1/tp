@@ -15,12 +15,12 @@ import seedu.utility.Ui;
  * services.
  */
 public class StonksXD {
-    private Ui ui;
-    private FinancialTracker finances;
-    private Parser parser;
-    private DataManager dataManager;
-    private BudgetManager budgetManager;
-    private CurrencyManager currencyManager;
+    private final Ui ui;
+    private final FinancialTracker finances;
+    private final Parser parser;
+    private final DataManager dataManager;
+    private final BudgetManager budgetManager;
+    private final CurrencyManager currencyManager;
     private boolean isNonTerminatingCommand = true;
 
     /**
