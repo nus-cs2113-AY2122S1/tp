@@ -190,7 +190,7 @@ public class Parser {
         return command;
     }
 
-    public static String[] splitFirstSpace(String string) {
+    private static String[] splitFirstSpace(String string) {
         String[] result = string.trim().split("\\s+", 2);
         if (result.length != 2) {
             return new String[]{result[0], ""};
