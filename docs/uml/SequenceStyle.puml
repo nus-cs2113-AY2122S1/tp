@@ -1,0 +1,25 @@
+@startuml
+!define MODULE_COLOR #lightsalmon
+!define CONTENT_COLOR #gold
+!define TERMINUS_COLOR #white
+!define PARSER_COLOR #palegreen
+!define STORAGE_COLOR #mistyrose
+!define ACTIVERECALL_COLOR #lightskyblue
+!define COMMAND_COLOR #violet
+
+!define MODULE_BOX_COLOR #coral
+!define CONTENT_BOX_COLOR #goldenrod
+!define TERMINUS_BOX_COLOR #whitesmoke
+!define PARSER_BOX_COLOR #aquamarine
+!define STORAGE_BOX_COLOR #lightpink
+!define ACTIVERECALL_BOX_COLOR #lightblue
+!define UI_BOX_COLOR #bisque
+!define COMMAND_BOX_COLOR #thistle
+
+hide footbox
+
+skinparam sequenceMessageAlign center
+skinparam DefaultTextAlignment center
+skinparam Shadowing false
+skinparam SequenceGroupBodyBackGroundColor ffffff90
+@enduml

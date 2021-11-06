@@ -1,14 +1,12 @@
 package terminus.command.content.note;
 
-import java.io.IOException;
 import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
-import terminus.exception.InvalidArgumentException;
-import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
-import terminus.storage.ModuleStorage;
+import terminus.storage.StorageActionEnum;
+import terminus.storage.StorageTypeEnum;
 
 public class ReloadNoteCommand extends Command {
 
@@ -38,17 +36,11 @@ public class ReloadNoteCommand extends Command {
      *
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return The CommandResult object indicating the success including additional options.
-     * @throws InvalidCommandException when the command could not be found.
-     * @throws InvalidArgumentException when arguments parsing fails.
-     * @throws IOException when the file to be read is null.
      */
     @Override
-    public CommandResult execute(ModuleManager moduleManager)
-            throws InvalidCommandException, InvalidArgumentException, IOException {
+    public CommandResult execute(ModuleManager moduleManager) {
         StringBuilder result = new StringBuilder();
-        ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.loadNotesFromModule(moduleManager, getModuleName());
         result.append(String.format(Messages.MESSAGE_RESPONSE_RELOAD_NOTE, getModuleName()));
-        return new CommandResult(result.toString());
+        return new CommandResult(getModuleName(), StorageActionEnum.RELOAD, StorageTypeEnum.TEXT, result.toString());
     }
 }

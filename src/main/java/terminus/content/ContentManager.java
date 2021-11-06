@@ -62,7 +62,7 @@ public class ContentManager<T extends Content> {
      */
     public String getContentData(int contentNumber) throws InvalidArgumentException {
         if (isNotValidNumber(contentNumber)) {
-            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_EMPTY_CONTENTS);
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_INVALID_NUMBER);
         }
         return contents.get(contentNumber - 1).getDisplayInfo();
     }
@@ -76,7 +76,7 @@ public class ContentManager<T extends Content> {
      */
     public String deleteContent(int contentNumber) throws InvalidArgumentException {
         if (isNotValidNumber(contentNumber)) {
-            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_EMPTY_CONTENTS);
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_INVALID_NUMBER);
         }
         String deletedContentName = contents.get(contentNumber - 1).getName();
         contents.remove(contentNumber - 1);
@@ -103,10 +103,16 @@ public class ContentManager<T extends Content> {
         this.contents = new ArrayList<>();
     }
 
+    /**
+     * Checks if name is unique in the Arraylist contents.
+     *
+     * @param name The new content name to be added.
+     * @return True if there is a similar name, false otherwise.
+     */
     public boolean isDuplicateName(String name) {
         if (contents.size() < 1) {
             return false;
         }
-        return contents.stream().anyMatch(x -> x.getName().equals(name));
+        return contents.stream().anyMatch(x -> x.getName().toLowerCase().equals(name.toLowerCase()));
     }
 }

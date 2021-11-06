@@ -1,45 +1,58 @@
 @startuml
-Activate AddLinkCommand #FFBBBB
+
+!include SequenceStyle.puml
+
+box Command COMMAND_BOX_COLOR
+participant ":AddLinkCommand" as AddLinkCommand COMMAND_COLOR
+endbox
+
+participant ":ConflictManager" as ConflictManager
+
+box Module MODULE_BOX_COLOR
+participant ":ModuleManager" as ModuleManager MODULE_COLOR
+participant ":NusModule" as NusModule MODULE_COLOR
+endbox
+
+box Content CONTENT_BOX_COLOR
+participant ":ContentManager" as ContentManager CONTENT_COLOR
+endbox
+
+participant ":StringBuilder" as StringBuilder
+
+Activate AddLinkCommand
 create ConflictManager
 AddLinkCommand -> ConflictManager: ConflictManager()
-Activate ConflictManager #FFBBBB
+Activate ConflictManager
 
 ConflictManager -> ConflictManager: getConflictingSchedule()
-Activate ConflictManager #DarkSalmon
+Activate ConflictManager
 
 ConflictManager -> ConflictManager: getAllLinks()
 Activate ConflictManager
 
-create ArrayList
-ConflictManager -> ArrayList: ArrayList()
-Activate ArrayList #FFBBBB
-ArrayList --> ConflictManager: currentLinks
-
 ConflictManager -> ModuleManager: getAllModules()
-Activate ModuleManager #FFBBBB
+Activate ModuleManager
 NusModule --> ModuleManager: modules
-Activate NusModule #FFBBBB
+Activate NusModule
 
 loop For each NusModule in modules
     ModuleManager -> NusModule: getModule(NusModule)
     Deactivate ModuleManager
     NusModule -> ContentManager : getContentManager()
-    Activate ContentManager #FFBBBB
+    Activate ContentManager
     Deactivate NusModule
     ContentManager -> ContentManager: getContents()
     Activate ContentManager
     ContentManager --> ContentManager: contents
     Deactivate ContentManager
-    ContentManager -> ArrayList: addAll(contents)
+    ContentManager --> ConflictManager: addAll(contents)
     Deactivate ContentManager
-    ArrayList --> ConflictManager
-    Deactivate ArrayList
     ConflictManager --> ConflictManager: AllLinks
     Deactivate ConflictManager
 
     create StringBuilder
     ConflictManager -> StringBuilder: StringBuilder()
-    Activate StringBuilder #FFBBBB
+    Activate StringBuilder
 
     loop For each Link in AllLinks
         alt same day && overlapping start-time or end-time

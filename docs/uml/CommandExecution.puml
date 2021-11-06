@@ -1,53 +1,30 @@
 @startuml
-participant ":Terminus" as Terminus
-participant ":MainCommandParser" as MainCommandParser
-participant ":GoCommand" as GoCommand
-participant  ":ModuleManager" as ModuleManger
-participant ":ModuleWorkspaceCommandParser" as ModuleWorkspaceCommandParser
-participant ":NoteCommand" as NoteCommand
-participant ":NoteCommandParser" as NoteCommandParser
-participant ":AddNoteCommand" as AddNoteCommand
+!include SequenceStyle.puml
+box "Main" TERMINUS_BOX_COLOR
+participant ":Terminus" as Terminus TERMINUS_COLOR
+endbox
+box "Parser" PARSER_BOX_COLOR
+participant ":MainCommandParser" as MainCommandParser PARSER_COLOR
+participant ":NoteCommandParser" as NoteCommandParser PARSER_COLOR
+participant ":ModuleWorkspaceCommandParser" as ModuleWorkspaceCommandParser PARSER_COLOR
+endbox
+box "Command" COMMAND_BOX_COLOR
+participant ":GoCommand" as GoCommand COMMAND_COLOR
+participant ":NoteCommand" as NoteCommand COMMAND_COLOR
+participant ":AddNoteCommand" as AddNoteCommand COMMAND_COLOR
+participant ":CommandResult" as CommandResult COMMAND_COLOR
+endbox
+box "Module" MODULE_BOX_COLOR
+participant  ":ModuleManager" as ModuleManger MODULE_COLOR
+endbox
 autoactivate on
+
 Terminus -> MainCommandParser: parseCommand(command)
   MainCommandParser -> GoCommand: parseArguments(arguments)
   return
 return GoCommand
-Terminus -> GoCommand: execute(ui, moduleManager)
-   GoCommand -> ModuleManger: getModule(moduleName)
-   return NusModule
-   GoCommand -> ModuleWorkspaceCommandParser: setWorkspace(workspace)
-   return
-      alt if arguments != null
-      GoCommand -> ModuleWorkspaceCommandParser:parseCommand(command)
-      return NoteCommand
-      GoCommand -> NoteCommand : execute(ui, moduleManager)
-        alt if arguments != null
-          NoteCommand -> NoteCommandParser: setModule(moduleName)
-          return
-          NoteCommand -> NoteCommandParser: parseCommand(arguments)
-          return AddNoteCommand
-          NoteCommand -> AddNoteCommand: setModule(moduleName)
-          return
-          NoteCommand -> AddNoteCommand: execute()
-            create CommandResult
-            AddNoteCommand -> CommandResult
-          return CommandResult
-        return CommandResult
-        else else
-          create CommandResult
-          NoteCommand -> CommandResult
-          return CommandResult
-        end
-      return CommandResult
-      else else
-        Create CommandResult
-        GoCommand -> CommandResult
-        return CommandResult
-      end
+Terminus -> GoCommand: execute(moduleManager)
+
+ref over NoteCommandParser, ModuleManger:Go Execution
 return CommandResult
-
-
-
-
-
 @enduml

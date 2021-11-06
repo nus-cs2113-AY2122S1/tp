@@ -5,35 +5,24 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import terminus.TestFilePath;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.parser.MainCommandParser;
 import terminus.parser.ModuleCommandParser;
-import terminus.storage.ModuleStorage;
+
 
 public class ModuleCommandTest {
 
     private MainCommandParser commandParser;
-    private ModuleStorage moduleStorage;
     private ModuleManager moduleManager;
 
     private String tempModule = "test";
 
-    @AfterAll
-    static void reset() throws IOException {
-        ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.cleanAfterDeleteModule("test");
-    }
-
     @BeforeEach
     void setUp() {
-        this.moduleStorage = ModuleStorage.getInstance();
-        this.moduleStorage.init(TestFilePath.SAVE_FILE);
         commandParser = MainCommandParser.getInstance();
         moduleManager = new ModuleManager();
     }

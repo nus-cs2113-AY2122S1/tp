@@ -1,25 +1,3 @@
 {
-  "moduleMap": {
-    "test": {
-      "linkManager": {
-        "contents": [
-          {
-            "day": "tuesday",
-            "startTime": {
-              "hour": 11,
-              "minute": 11,
-              "second": 0,
-              "nano": 0
-            },
-            "duration": 2,
-            "link": "https://zoom.us/",
-            "name": "test"
-          }
-        ]
-      },
-      "questionManager": {
-        "contents": []
-      }
-    }
-  }
+  "moduleMap": {}
 }
