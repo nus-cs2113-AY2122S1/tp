@@ -6,7 +6,6 @@ import seedu.utility.BudgetManager;
 import seedu.utility.CurrencyManager;
 import seedu.utility.DataManager;
 import seedu.utility.FinancialTracker;
-import seedu.utility.FinancialAdvisor;
 
 import seedu.utility.Parser;
 import seedu.utility.Ui;
@@ -16,14 +15,13 @@ import seedu.utility.Ui;
  * services.
  */
 public class StonksXD {
-    private Ui ui;
-    private FinancialTracker finances;
-    private Parser parser;
-    private DataManager dataManager;
-    private BudgetManager budgetManager;
-    private CurrencyManager currencyManager;
-    private FinancialAdvisor financialAdvisor;
-    private String advice;
+    private final Ui ui;
+    private final FinancialTracker finances;
+    private final Parser parser;
+    private final DataManager dataManager;
+    private final BudgetManager budgetManager;
+    private final CurrencyManager currencyManager;
+    private boolean isNonTerminatingCommand = true;
 
     /**
      * Constructor for StonksXD. It instantiates all the components used and are crucial to the functioning of the 
@@ -38,9 +36,6 @@ public class StonksXD {
         
         this.dataManager = new DataManager(parser, finances, ui, budgetManager, currencyManager);
         dataManager.loadAll();
-        
-        this.financialAdvisor = FinancialAdvisor.getInstance();
-        this.advice = financialAdvisor.getRandomAdvice();
     }
 
     /**
@@ -49,17 +44,21 @@ public class StonksXD {
      */
     public void run() {
         ui.printWelcome();
-        boolean isNonTerminatingCommand = true;
+        
         while (isNonTerminatingCommand) {
             String fullCommand = ui.readCommand();
             Command command = parser.parseCommand(fullCommand);
             command.execute(finances, ui, budgetManager, currencyManager);
             if (command.isExit()) {
-                isNonTerminatingCommand = false;
+                terminateStonksXD();
             }
             dataManager.saveAll();
         }
-        //ui.printBye(advice);
+        //ui.printBye();
+    }
+    
+    private void terminateStonksXD() {
+        isNonTerminatingCommand = false;
     }
 
     /**

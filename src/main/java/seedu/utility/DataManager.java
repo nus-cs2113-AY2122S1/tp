@@ -136,6 +136,7 @@ public class DataManager {
         while (sc.hasNextLine()) {
             String data = sc.nextLine();
             if (data.isBlank()) {
+                hasCorruptedLines = true;
                 continue;
             }
             try {
@@ -207,7 +208,6 @@ public class DataManager {
             buffer.write(SETTINGS_CSV_HEADER);
             buffer.write(NEWLINE);
             writeSettings(buffer);
-            buffer.write(NEWLINE);
             buffer.close();
         } catch (IOException e) {
             ui.printError(Messages.ERROR_SAVING_SETTINGS_MESSAGE);
@@ -218,6 +218,7 @@ public class DataManager {
         String data;
         data = parser.convertSettingsToData(budgetManager, currencyManager);
         buffer.write(data);
+        buffer.write(NEWLINE);
     }
 
     /**
@@ -241,7 +242,7 @@ public class DataManager {
             CurrencyType currency = parser.convertDataToCurrencySetting(data);
             loadCurrencySetting(currency);
             double thresholdValue = parser.convertDataToThresholdSetting(data);
-            loadThresholdSettings(thresholdValue);
+            loadThresholdSetting(thresholdValue);
             ArrayList<Double> budgetSettings = parser.convertDataToBudgetSettings(data);
             loadBudgetSettings(budgetSettings);
         } catch (NullPointerException | NumberFormatException | InvalidSettingsDataException
@@ -267,7 +268,7 @@ public class DataManager {
         }
     }
 
-    private void loadThresholdSettings(double thresholdValue) {
+    private void loadThresholdSetting(double thresholdValue) {
         budgetManager.setThreshold(thresholdValue);
     }
 }

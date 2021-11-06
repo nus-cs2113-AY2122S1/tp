@@ -12,12 +12,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static seedu.utility.tools.FinancialAdvisor.getRandomAdvice;
+
 /**
  * Represents a user interface where feedbacks are given in response to user input.
  */
 public class Ui {
-    private static final String DATE_FORMAT = "dd/MM/yyyy";
     private final Scanner in;
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
     private static final String NEW_LINE = System.lineSeparator();
 
 
@@ -65,8 +67,8 @@ public class Ui {
     }
 
     /**
-     * Prints the given list of incomes to the standard output, else if its empty print the empty income list message.
-     *
+     * Prints the given list of incomes else if its empty print the empty income list message.
+     * 
      * @param incomes An ArrayList of income elements.
      */
     public void listIncome(ArrayList<Income> incomes) {
@@ -81,7 +83,7 @@ public class Ui {
 
 
     /**
-     * Prints the given list of Entries to the standard output, else if its empty print the no match found message.
+     * Prints the given list of entries else if its empty print the no match found message.
      *
      * @param filteredEntries The entries that got filtered out from searching through the financial tracker.
      */
@@ -127,6 +129,8 @@ public class Ui {
         }
     }
 
+    
+    
     private void printExpenseList(ArrayList<Expense> expenses) {
         assert expenses.size() > 0;
         System.out.println(Messages.LISTING_EXPENSE_MESSAGE);
@@ -299,13 +303,12 @@ public class Ui {
     /**
      * Prints the termination message of the STONKS XD program.
      *
-     * @param advice The advice given by our Stonks program, given from a list of random advices.
      */
-    public void printBye(String advice) {
+    public void printBye() {
         printLine();
         System.out.println(Messages.BYE_MESSAGE);
         System.out.println(NEW_LINE);
-        System.out.println(Messages.TIP_HEADER + advice);
+        System.out.println(Messages.TIP_HEADER + getRandomAdvice());
         printLine();
     }
 
@@ -349,7 +352,7 @@ public class Ui {
         System.out.print(stonksGraph);
         printLine();
     }
-
+  
     public void printBudgetReminder(BudgetReminder reminder) {
         if (reminder.toString() != null) {
             System.out.println(reminder);
