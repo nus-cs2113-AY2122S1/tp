@@ -155,7 +155,6 @@ public class Ui {
                 + member.getTasks();
     }
 
-
     public static <T> void printList(ArrayList<T> list) {
         AtomicInteger i = new AtomicInteger();
         list.forEach(item -> System.out.println(i.getAndIncrement() + 1 + ". " + item));
