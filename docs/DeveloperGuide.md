@@ -230,10 +230,14 @@ Location: `seedu.duke.ui`
 
 __Note:__
 * `CommandResult` : Contains all the information we want to display to the user.
-* `Command` : Abstract class that tells us whether we are in the main level or in a workout.
+* `Command` : Abstract class that tells us whether we are in the main level or in a workout. If the user is in Workout Mode, i.e. `workoutMode != 0`, then the messages will be displayed with an indent.
 * `Ui` : Handles the display of information to the user.
 
-In the Ui class, `withIndent` is true if the user is in `workoutMode`, false otherwise.
+`itemList` in `CommandResult` is used to store a workout list or exercise list. `itemList` is used when a single list is needed to be shown to the user. Commands such as `display` and `list` use `itemList` to store information.
+
+`map` in `CommandResult` is used to store multiple lists that can be workout lists or exercise lists. The lists are the value in the map, and the accompanying message is stored as the key in the map. Commands such as `Search` and `Recommend` use `map` to store information to be displayed to the user.
+
+`isTable` decides whether a list should be displayed to the user as a list or as a table.
 
 ## Logging & Documentation
 
@@ -329,7 +333,7 @@ Given below are instructions to test the app manually.
 
      Expected: Exercise 1 from workout 1 has been edited to "Squats" with 5 sets and 10 reps. List is updated.
    - Prerequisites: Enter into a workout mode using `enter 2` command. Inside workout 2 now.
-   - Test Case: `edit 1, Lunges, 2 20` inside a workout mode 
+   - Test Case: `edit 1, Lunges, 2 20` inside Workout Mode 
 
      Expected: Exercise 1 from workout 2 has been edited to "Lunges" with 2 sets and 20 reps. List is updated.
    - Test Case: `edit 1, 2, Bench Press, 5 10 15`
@@ -341,7 +345,7 @@ Given below are instructions to test the app manually.
 
 ### Entering a Workout
 1. Entering into a workout
-   * Prerequisites: List all workouts using the `list` command. Atleast one workout in list.
+   * Prerequisites: List all workouts using the `list` command. At least one workout in list.
    * Test Case: `enter 1`
    * Expected: Message showing that you have entered into the first workout. Now you can repeat test cases from other commands without including the `workoutIndex`. </br> (e.g. `edit 1, Bench Press, 5 10`)
 
@@ -379,6 +383,63 @@ Given below are instructions to test the app manually.
    - Test Case: `clear exercisehello`, `clear exercise x`, `...` (where x is larger than the list size or x is less than or equal to 0)
    
      Expected: Similar to previous.
+
+### Searching for workouts and exercises
+
+Prerequisites: Add in the required workouts and exercises such that this is what the app should look like when we run the `display` command. This set up will be used for all three test cases for the `Search` command.
+```
+display 1
+________________________________________________________
+Exercises in (1) leg day finish by: 5 Dec 2021
+1. [ ] kickbacks | 5 sets of 10 reps
+2. [ ] squats | 4 sets of 10 reps
+________________________________________________________
+display 2
+________________________________________________________
+Exercises in (2) arms and legs
+1. [ ] kickbacks | 4 sets of 6 reps
+________________________________________________________
+```
+
+1. Search by keyword in Main Mode
+    - Prerequisite: Return to Main Mode with the `back` command.
+    - Test Case: `search leg`
+   
+      Expected: Matching workouts are `leg day finish by: 5 Dec 2021` and `arms and legs`. No matching exercises are found.
+    - Test Case: `search abs`
+    
+      Expected: No matches found.
+
+2. Search by keyword in Workout Mode
+  - Prerequisites: Enter the workout `arms and legs`.
+  - Test Case: `search kick` inside Workout Mode
+
+    Expected: The only matching exercise in `arms and legs` workout is `kickbacks | 4 sets of 6 reps`. You should not see any matching exercises in the other workout `leg day finish by: 5 Dec 2021`, or any list of matching workouts. 
+  - Test Case: `search squats`
+
+    Expected: No matches found.
+  - Test Case: `search arms and legs`
+
+    Expected: No matches found.
+
+3. Search by date in Main Mode.
+   - Prerequisites: Return to Main Mode with the `back` command.
+   - Test Case: `search 5 deC 2021`
+   
+     Expected: Matching workouts are `leg day finsih by: 5 Dec 2021`.
+   - Test Case: `search 05 DEC 2021`
+   
+     Expected: No matches found.
+   - Test Case: `search 2021`
+   
+     Expected: No matches found.
+
+4. Search by date in Workout Mode.
+   - Prerequisites: Enter the workout `leg day finish by 5 Dec 2021`.
+   - Test Case: `search 5 Dec 2021`
+
+     Expected: No matches found.
+    
 
 ### Saving data
 

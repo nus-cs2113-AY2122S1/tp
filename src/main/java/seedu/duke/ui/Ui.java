@@ -4,7 +4,6 @@ import de.vandermeer.asciitable.AsciiTable;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandResult;
 import seedu.duke.data.Exercise;
-import seedu.duke.exception.GetJackDException;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -106,7 +105,7 @@ public class Ui {
      * @param map contains multiple exercise lists
      * @return exercise table
      */
-    public AsciiTable getExerciseTable(Map.Entry<String, ArrayList<?>> map) {
+    private AsciiTable getExerciseTable(Map.Entry<String, ArrayList<?>> map) {
         AsciiTable at = new AsciiTable();
         at.addRule();
         String[] columnNames = {"Index", "Exercise name", "Sets", "Reps"};
@@ -133,7 +132,7 @@ public class Ui {
      *
      * @param map contains multiple exercise lists
      */
-    public void printExerciseTable(Map<String, ArrayList<?>> map) {
+    private void printExerciseTable(Map<String, ArrayList<?>> map) {
         assert map != null;
         assert !map.isEmpty();
 
