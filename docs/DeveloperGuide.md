@@ -278,6 +278,17 @@ sequence diagram below illustrates the process of executing `ImportContactComman
 
 Throughout the process of importing contacts, the alphabetical ordering of contacts is preserved.
 
+<a name="ComingSoon"></a>**Coming soon:** `import` currently does not support duplicate checks. This will be implemented 
+in future revisions to the application. Currently, 
+
+Current implementation ideas include:
+- import all with/without duplicates (use flag to specify)
+- manually check every single duplicate (inefficient, but can be an option with flag for users who want to check every duplicate)
+- allow Windows-style duplicate handling (Ignore, Ignore all, Cancel)
+- summarise every single duplicate and give user a one time confirmation to add/discard (no granularity)
+
+
+
 ### <a name="IndexParser"></a>Index Parser
 
 The Index Parser is used when the user enters a command that specifies a contact index, such as the [`rm`](#Delete),
