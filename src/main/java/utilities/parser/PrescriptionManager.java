@@ -182,8 +182,7 @@ public class PrescriptionManager {
             boolean isSameMedicineName = medicine.getMedicineName().equalsIgnoreCase(name);
             boolean isDeleted = ((Stock) medicine).isDeleted();
             Date existingExpiry = ((Stock) medicine).getExpiry();
-            String expiryString = DateParser.dateToString(existingExpiry);
-            String prescribeDateString = DateParser.dateToString(prescribeDate);
+
             boolean isExpired = existingExpiry.before(prescribeDate);
 
             if (isSameMedicineName && !isDeleted && !isExpired) {

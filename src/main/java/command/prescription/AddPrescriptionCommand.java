@@ -76,7 +76,7 @@ public class AddPrescriptionCommand extends Command {
         }
 
         int totalStock = PrescriptionManager.getNotExpiredStockQuantity(medicines, medicationName, prescribeDate);
-        
+
         if (prescriptionQuantity > totalStock) {
             ui.print("Unable to Prescribe! Prescription quantity is more than stock available!");
             ui.print("Prescription quantity: " + prescriptionQuantity + " Stock available: " + totalStock);
