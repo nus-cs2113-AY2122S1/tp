@@ -20,6 +20,7 @@ import seedu.duke.items.Item;
 import seedu.duke.parser.commandparser.AddParser;
 import seedu.duke.parser.commandparser.ListParser;
 import seedu.duke.parser.commandparser.NextParser;
+import seedu.duke.parser.commandparser.SelectParser;
 import seedu.duke.parser.commandparser.UpdateParser;
 
 import java.math.BigDecimal;
@@ -72,7 +73,7 @@ public abstract class Parser {
         case "find":
             return new FindCommand(command);
         case "select":
-            return new SelectCommand(command);
+            return SelectParser.getSelectCommand(command, commandDetails);
         case "update":
             //return new UpdateCommand(command);
             return UpdateParser.getUpdateCommand(commandDetails);

@@ -38,9 +38,9 @@ public abstract class ListParser extends Parser {
         } catch (NullPointerException | IndexOutOfBoundsException | NoCommandAttributesException e) {
             System.out.println("Please check through the format carefully");
             Ui.listUsageCommands();
-        } catch (InvalidItemTypeException  e) {
+        } catch (InvalidItemTypeException e) {
             System.out.println("Please key in the correct list type value (-e, -t, -m)");;
-        } catch (NumberFormatException  e) {
+        } catch (NumberFormatException e) {
             System.out.println("Please key in an integer that exists for the selection");;
         }
         return null;
