@@ -1,7 +1,6 @@
 #Jon Lim's Project Portfolio Page
 
-
-### Project: Teaching Assistant's Assistant (TAA)
+## Project: Teaching Assistant's Assistant (TAA)
 Teaching Assistant's Assistant (TAA) is a Command Line Interface (CLI) application for keeping track of classes and students.
 It is written in Java, and has about 9 kLoC.
 
