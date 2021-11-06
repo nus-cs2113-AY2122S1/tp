@@ -415,7 +415,9 @@ Command format: `import`
 - Data to be imported should be stored in the file `data/import.txt`.
 - Data to be imported should adhere to the following format:
   - CSV for **six** fields in the order of `NAME,GITHUB,LINKEDIN,TELEGRAM,TWITTER,EMAIL`
+  - Any extra fields will be treated as erroneous input and discarded.
   - For values that are empty, a `null` has to be specified.
+
 ```
 Le Zong,lezongmun,null,lezongg,null,lezongmun@gmail.com
 marcus,null,null,null,null,null
@@ -537,10 +539,10 @@ computer. The files are `data/contacts.txt` and `data/me.txt`.
 **Q**: Can I edit the files in `data/` manually?
 
 **A**: Yes, ConTech supports manual editing of `contacts.txt` and `me.txt` in the `data/` directory, although this is 
-not recommended. When doing so, remember to follow the correct syntax for contact details. Any incomplete/incorrect/
-corrupt data will be discarded by ConTech upon launch. Users are recommended to use the `add` and `edit` commands in the
-app instead of manually editing the save data files. For adding a large number of contacts at once, the `import` function
-can be used.
+not recommended. When doing so, remember to follow the correct syntax for contact details. Any contacts with incomplete/
+incorrect/corrupt data such as extra or missing fields will be discarded by ConTech upon launch. As such, users are 
+recommended to use the `add` and `edit` commands in the app instead of manually editing the save data files. For adding 
+a large number of contacts at once, the `import` function can be used.
 
 **Q**: Does ConTech support duplicate prevention?
 
