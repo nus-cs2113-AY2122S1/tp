@@ -166,15 +166,32 @@ The sequence diagram below illustrates the `execute()` function in `ViewContactC
 ![View Sequence Diagram](images/ViewContactCommandSequenceDiagram.png)
 
 ### <a name="Edit"></a>Editing a contact: `edit`
-This feature is processed using `EditContactParser` under `MainParser`. In order to edit a contact in the contact list,
-a user must enter a command in the form `edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-l <LINKEDIN>} {-te <TELEGRAM>} 
-{-tw <TWITTER>} {-e <EMAIL>}`. The user input will be parsed by `EditContactParser` methods `getIndexToStore` and 
-`parseContactDetails` to obtain a String array with the details to be edited. An `EditContactCommand` 
-with the specified parameters will then be created and executed in `ConTech`. The sequence diagram below 
-shows how the whole process is carried out.
+This feature is processed using `EditContactCommand`. This feature allows the user to edit a contact in their contact 
+list, by entering a command in the form `edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-l <LINKEDIN>} {-te <TELEGRAM>} 
+{-tw <TWITTER>} {-e <EMAIL>}`. At least one detail must be specified by the user for the command to be valid. The user 
+can also specify `me` as an index to edit the personal contact's details.
+
+The user's input is parsed in `MainParser` and `EditContactParser` and the implementation is similar to that of 
+`AddContactParser` .
+
+The user input will be parsed by `EditContactParser` methods `getIndexToStore` and 
+`parseContactDetails` to obtain a String array with the details to be edited. The sequence diagram below 
+shows how the String array is obtained.
+
+![Edit Sequence Diagram](images/EditContactParserSequenceDiagram.png)
+
+Once the user's input is parsed and the index specified is obtained, an `EditContactCommand` with the specified 
+parameters will then be created and executed in `ConTech`. The sequence diagram below depicts the execution of 
+`EditContactCommand` for the index `me` as well as an invalid index `all`.
 
 ![Edit Sequence Diagram](images/EditContactCommandSequenceDiagram.png)
 
+If a valid contact index in the contact book is specified, the details to be edited will first be checked against the 
+contact book for duplicates. If there are duplicates, ConTech will prompt the user for confirmation before editing the 
+contact. If the user accepts or there are no duplicates, the `EditContactCommand` will be executed. The sequence diagram
+below depicts the execution of `EditContactCommand` for a contact in the contact list.
+
+![Edit Sequence Diagram](images/EditContactCommandDetailedSequenceDiagram.png)
 
 ### <a name="Delete"></a>Deleting contacts: `rm`
 This feature is processed using the `DeleteContactCommand`. `DeleteContactCommand` is created 
