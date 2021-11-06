@@ -27,6 +27,8 @@
 &nbsp;&nbsp;[4.1. Adding Ingredients](#41-adding-ingredients) <br>
 &nbsp;&nbsp;[4.2. Alerts](#42-alerts) <br>
 &nbsp;&nbsp;[4.3. Delete Ingredients](#43-deleting-ingredients) <br>
+&nbsp;&nbsp;[4.4. Updating Ingredients](#44-updating-ingredients) <br>
+&nbsp;&nbsp;[4.5. Subtracting Ingredients](#45-subtracting-ingredients) <br>
 [5. Product scope](#5-product-scope) <br>
 [6. User stories](#6-user-stories) <br>
 [7. Non-functional requirements](#7-non-functional-requirements) <br>
@@ -244,7 +246,7 @@ information of the `IngredientGroup` is taken note of to be printed when the fun
 ### 4.3. Deleting ingredients
 
 Delete is performed on individual ingredients in groups. Users are to supply the information for the ingredient to delete by 
-their groups and numbers in the list. For example, the current ingredient inventory is
+their groups and numbers in the list. For example, the current ingredient inventory is:
 ```
 1. Carrot | Total Amount: 12.200 kg
 	1.1. Amount Left: 10.000 kg | Expiry Date: 23/12/2021
@@ -257,11 +259,68 @@ their groups and numbers in the list. For example, the current ingredient invent
 3. Beef | Total Amount: 5.100 kg
 	3.1. Amount Left: 5.100 kg | Expiry Date: 01/02/2022
 ```
-Then calling `delete 1.1` will remove the second entry in the `carrot` category.
+Then, calling `delete n/ carrot e/ 25/12/2021` will remove the second entry in the `carrot` category.
+
 The sequence diagram below illustrates the above command example
 
 ![image](images/DeleteSequenceDiagram.png)
 
+### 4.4. Updating ingredients
+Updating is performed on individual ingredients within the ingredient groups. For example, the current ingredient inventory is
+```
+1. Carrot | Total Amount: 18.7 kg
+	Amount Left: 10.0 kg | Expiry Date: 23/12/2021
+	Amount Left: 2.2 kg | Expiry Date: 25/12/2021
+	Amount Left: 6.5 kg | Expiry Date: 02/01/2022
+
+2. Potato | Total Amount: 7.1 kg
+	Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+	Amount Left: 2.1 kg | Expiry Date: 12/11/2021
+```
+Then, calling `update 1.2 a/150.0` will update the second entry in the carrot category. The sequence diagram 
+below illustrates the above command example.
+
+![image](images/UpdateSequenceDiagram.png)
+
+After individual ingredient has been updated, the ingredient inventory list is
+```
+1. Carrot | Total Amount: 166.5 kg
+	Amount Left: 10.0 kg | Expiry Date: 23/12/2021
+	Amount Left: 150.0 kg | Expiry Date: 25/12/2021
+	Amount Left: 6.5 kg | Expiry Date: 02/01/2022
+
+2. Potato | Total Amount: 7.1 kg
+	Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+	Amount Left: 2.1 kg | Expiry Date: 12/11/2021
+```
+
+### 4.5. Subtracting ingredients
+Subtracting is performed on ingredient groups. For example, the current ingredient inventory is
+```
+1. Carrot | Total Amount: 166.5 kg
+	Amount Left: 10.0 kg | Expiry Date: 23/12/2021
+	Amount Left: 150.0 kg | Expiry Date: 25/12/2021
+	Amount Left: 6.5 kg | Expiry Date: 02/01/2022
+
+2. Potato | Total Amount: 7.1 kg
+   Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+   Amount Left: 2.1 kg | Expiry Date: 12/11/2021
+```
+Then, calling `subtract n/carrot a/150.0` will subtract 17.5 kgs from the total amount of carrots (29 kgs). 
+The sequence diagram below illustrates the above command example.
+
+![image](images/SubtractSequenceDiagram.png)
+
+After ingredient group has been updated, the ingredient inventory list is
+```
+1. Carrot | Total Amount: 16.5 kg
+   Amount Left: 10.0 kg | Expiry Date: 25/12/2021
+   Amount Left: 6.5 kg | Expiry Date: 02/01/2022
+   
+2. Potato | Total Amount: 7.1 kg
+   Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+   Amount Left: 2.1 kg | Expiry Date: 12/11/2021
+```
 
 ## 5. Product scope
 

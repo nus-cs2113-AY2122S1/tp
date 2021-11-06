@@ -1,3 +1,5 @@
+@@author ngoivanessa
+
 @startuml
 'https://plantuml.com/sequence-diagram
 !include style.puml
@@ -79,15 +81,5 @@ return
 return resultMsg
 return resultMsg
 return CLI message
-
-
-
-
-
-
-
-
-
-
 
 @enduml

@@ -39,11 +39,12 @@ public class UpdateCommand extends Command {
     public String run() throws SitusException {
         try {
             String resultMsg;
-            if (IngredientList.getInstance().getSize() == 0) {
+            IngredientList instance = IngredientList.getInstance();
+            if (instance.getSize() == 0) {
                 resultMsg = LIST_EMPTY_MESSAGE;
                 return resultMsg;
             }
-            Ingredient updatedIngredient = IngredientList.getInstance()
+            Ingredient updatedIngredient = instance
                     .update(groupNumber, ingredientNumber, newAmount);
             resultMsg = UPDATE_MESSAGE + updatedIngredient.getName() + " | " + updatedIngredient;
             return resultMsg;
