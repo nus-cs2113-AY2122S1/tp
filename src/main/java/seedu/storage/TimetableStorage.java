@@ -4,7 +4,7 @@ import seedu.timetable.Timetable;
 import seedu.timetable.TimetableDto;
 import seedu.timetable.TimetableItem;
 import seedu.timetable.TimetableLesson;
-
+import seedu.ui.TimetableUI;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -46,6 +46,7 @@ public class TimetableStorage {
             if (timetable == null) {
                 return new Timetable(1);
             }
+            TimetableUI.printTimetableLoad();
             return timetable.toTimetable();
         } catch (IOException e) {
             System.out.println(e);

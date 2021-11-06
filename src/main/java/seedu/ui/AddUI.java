@@ -5,16 +5,19 @@ import seedu.module.Lesson;
 import seedu.module.Module;
 import seedu.timetable.Timetable;
 import seedu.timetable.TimetableUserItem;
+import seedu.logger.TimetableLogger;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AddUI {
 
     private static final String FIXED_LENGTH_FORMAT = "%-56.56s";
     private static final String FIXED_TIME_FORMAT = "%04d";
     private static final String SMALL_GAP = "%14s";
-    private static final String FIXED_FORMAT = "%88.88s";
+    private static final String FIXED_FORMAT = "%93.93s";
     private static final String LECTURE = "Lecture";
     private static final String TUTORIAL = "Tutorial";
     private static final String LAB = "Laboratory";
@@ -28,12 +31,13 @@ public class AddUI {
     private static final String RUN = "Run";
     private static final String EXIT = "Exit";
     private static final String LINE = "_________________________________________________   |   ";
-    private static final String NO_LESSON_FOUND = "No Lesson Time Slots Found";
+    private static final String NO_LESSON_FOUND = "      No Lesson Time Slots Found";
     private static final String NO_LECTURE_FOUND = "            *Module has no Lectures*";
     private static final String NO_TUTORIAL_FOUND = "            *Module has no Tutorials*";
     private static final String NO_LAB_FOUND = "               *Module has no Labs*";
     private static final String DISCLAIMER = " [CONFLICT]";
 
+    private static final Logger logger = Logger.getLogger("");
     public static Scanner in = new Scanner(System.in);
 
     /**
@@ -63,10 +67,11 @@ public class AddUI {
             getCommand(lec, LECTURE, timetable, module);
             getCommand(tt, TUTORIAL, timetable, module);
             getCommand(lab, LAB, timetable, module);
+            TextUi.printLessonAdded();
         } catch (IntegerException e) {
             e.printMessage();
+            logger.log(Level.WARNING, "Invalid Lesson Selection, Add Module aborted");
         }
-        TextUi.printLessonAdded();
     }
 
     /**
@@ -151,36 +156,12 @@ public class AddUI {
      */
     public void getCommand(ArrayList<Lesson> lessons, String lessonType,
                            Timetable timetable, Module module) throws IntegerException {
-        String classNumber = "";
         if (isArrayExist(lessons, ZERO)) {
-            String flag;
             try {
-                flag = RUN;
-                while (flag.equals(RUN)) {
-                    String select = TextUi.getLessonCommand(lessonType);
-                    int indexOfLesson = Integer.parseInt(select) - BALANCE_ARRAY;
-                    Lesson selectedLesson = lessonEqualizer(lessons, indexOfLesson);
-                    classNumber = selectedLesson.getClassNo();
-                    if (timetable.isConflict(selectedLesson)) {
-                        String choice = TextUi.printAskConfirmation(selectedLesson);
-                        if (choice.equals("y") || choice.equals("yes")) {
-                            flag = EXIT;
-                        } else if (choice.equals("n") || choice.equals("no")) {
-                            System.out.println("Alright bitch do it properly this time");
-                        } else {
-                            System.out.println("Invalid Command, Try Again Dumb Ass");
-                        }
-                    } else {
-                        flag = EXIT;
-                    }
-                }
-            } catch (NumberFormatException e) {
-                throw new IntegerException("Input is not an integer, try adding the module again");
-            } catch (IndexOutOfBoundsException e) {
-                throw new IntegerException("Input is out of range, try adding the module again");
+                addLessonInfo(lessons, lessonType, timetable, module);
+            } catch (IntegerException e) {
+                throw e;
             }
-
-            addLessonToTimetable(lessons, timetable, module, classNumber);
         }
     }
 
@@ -269,20 +250,30 @@ public class AddUI {
         System.out.println(header);
     }
 
+    /**
+     * Function takes in user input and return input in String format.
+     * @param question The printed question to the user
+     * @return the string format of the user input
+     */
     public String getReply(String question) {
         System.out.print(question);
         String input = in.nextLine();
-        while (input.isEmpty()) {
-            input = in.next();
+        if (input.equals("")) {
+            return "";
+        } else {
+            return input;
         }
-        return input;
     }
 
-    public void printEventMessage(TimetableUserItem event, String date) {
+    /**
+     * Function prints out the description of the event that has been added into the timetable.
+     * @param event The event that is to be printed
+     */
+    public void printEventMessage(TimetableUserItem event) {
         String startTime = String.format(FIXED_TIME_FORMAT, event.getStartHour() * TIME);
         String endTime = String.format(FIXED_TIME_FORMAT, event.getEndHour() * TIME);
 
-        String output = "Alright!! Event: " + event.getTitle() + " on " + date + ", from "
+        String output = "Alright!! Event: " + event.getTitle() + " on " + event.getDay() + ", from "
                 + startTime + " to " + endTime;
         if (event.isDescription()) {
             output = output.concat(" at " + event.getDescription());
@@ -300,6 +291,13 @@ public class AddUI {
         return input.toUpperCase();
     }
 
+    /**
+     * Function finds the true index value of the lesson that the user has selected by
+     * counting the number of lessons with the same class number before the index selected.
+     * @param lessons the list of lessons
+     * @param index the index that the user has selected to be added into timetable
+     * @return the lesson to be added to timetable
+     */
     public Lesson lessonEqualizer(ArrayList<Lesson> lessons, int index) {
         int tally = 0;
         for (int i = 1; lessons.size() > i; i++) {
@@ -313,5 +311,65 @@ public class AddUI {
             }
         }
         return lessons.get(tally);
+    }
+
+    public void addLessonInfo(ArrayList<Lesson> lessons, String lessonType,
+            Timetable timetable, Module module) throws IntegerException {
+        String flag = RUN;
+        String classNumber = "";
+        while (flag.equals(RUN)) {
+            String select = TextUi.getLessonCommand(lessonType);
+            try {
+                verifySelection(select, lessons);
+            } catch (IntegerException e) {
+                throw e;
+            }
+            int indexOfLesson = Integer.parseInt(select) - BALANCE_ARRAY;
+            Lesson selectedLesson = lessonEqualizer(lessons, indexOfLesson);
+            classNumber = selectedLesson.getClassNo();
+            flag = checkFlag(timetable, selectedLesson);
+        }
+        addLessonToTimetable(lessons, timetable, module, classNumber);
+    }
+
+    /**
+     * Function checks for user response when a conflict occurs when
+     * trying to add a lesson into timetable.
+     * @param timetable the user's timetable
+     * @param lesson the lesson to be added into the timetable
+     * @return the flag to determine whether user input is required again
+     */
+    public String checkFlag(Timetable timetable, Lesson lesson) {
+        if (timetable.isConflict(lesson)) {
+            String choice = TextUi.printAskConfirmation(lesson);
+            if (choice.equals("y") || choice.equals("yes")) {
+                return EXIT;
+            } else if (choice.equals("n") || choice.equals("no")) {
+                System.out.println("Alright, returning to lesson selection");
+                return RUN;
+            } else {
+                System.out.println("Invalid Command, Try Again");
+                return RUN;
+            }
+        } else {
+            return EXIT;
+        }
+    }
+
+    /**
+     * Function makes sure that the input String is a valid number and is not out of range of the array.
+     * @param select The user input of the number
+     * @param lessons The array of lesson
+     * @throws IntegerException when input is an invalid number
+     */
+    public void verifySelection(String select, ArrayList<Lesson> lessons) throws IntegerException {
+        try {
+            int indexOfLesson = Integer.parseInt(select) - BALANCE_ARRAY;
+            Lesson test = lessons.get(indexOfLesson);
+        } catch (NumberFormatException e) {
+            throw new IntegerException("Input is not an integer, try adding the module again");
+        } catch (IndexOutOfBoundsException e) {
+            throw new IntegerException("Input is out of range, try adding the module");
+        }
     }
 }

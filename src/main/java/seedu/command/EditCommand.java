@@ -12,6 +12,9 @@ public class EditCommand extends Command {
     public static final String commandSyntax = "edit";
     public static final String commandAction = "Edit a personal task in the timetable";
 
+    private static final String CHOICE_PROMPT = "Choose your Option: ";
+    private static final String TITLE_PROMPT = "New Title: ";
+
     private static final int ONE = 1;
 
     Timetable tt;
@@ -23,8 +26,12 @@ public class EditCommand extends Command {
     }
 
     public void execute() throws EditException {
-        TextUi.printEvents(tt);
-        String reply = TextUi.getReply("Choose your Option: ");
+        ArrayList<TimetableUserItem> timetableUserItems = tt.getEvents();
+        if (timetableUserItems.isEmpty()) {
+            throw new EditException("There aren't any personal tasks added to timetable yet");
+        }
+        TextUi.printEvents(timetableUserItems);
+        String reply = TextUi.getCommand(CHOICE_PROMPT);
         int index;
         try {
             index = Integer.parseInt(reply) - ONE;
@@ -36,8 +43,8 @@ public class EditCommand extends Command {
             throw new EditException("Selection out of bounds");
         }
 
-        String answer = TextUi.getReply("New Title: ");
-        if (answer.isEmpty()) {
+        String answer = TextUi.getCommand(TITLE_PROMPT);
+        if (answer.isEmpty() || answer.isBlank()) {
             throw new EditException("Empty input");
         }
 

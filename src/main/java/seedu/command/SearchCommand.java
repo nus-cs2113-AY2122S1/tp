@@ -14,7 +14,7 @@ public class SearchCommand extends Command {
     public static final String commandSyntax = "search <MODULE_CODE>";
     public static final String commandAction =
             "Searches for modules that match the search expression";
-    private static Logger logger = Logger.getLogger("");
+    private static final Logger logger = Logger.getLogger("");
     private final String searchTerm;
     private final SearchFlags searchFlags;
 
@@ -29,6 +29,9 @@ public class SearchCommand extends Command {
      * flags, and the total count of matching mods. Also displays a warning message for offline searches.
      */
     public void execute() {
+        if (searchFlagsHaveError()) {
+            return;
+        }
         boolean isQuickSearch = searchFlags.getHasQuickFlag();
         if (!isQuickSearch) {
             try {
@@ -44,5 +47,13 @@ public class SearchCommand extends Command {
             ModStorage.searchModsOffline(searchTerm, searchFlags);
             logger.log(Level.INFO, "Manual offline search done");
         }
+    }
+
+    private boolean searchFlagsHaveError() {
+        if (searchFlags.getErrorFlag() != SearchFlags.NO_ERROR) {
+            searchFlags.printErrorMessages();
+            return true;
+        }
+        return false;
     }
 }

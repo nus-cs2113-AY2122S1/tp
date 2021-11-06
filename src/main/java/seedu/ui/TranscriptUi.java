@@ -8,7 +8,7 @@ import seedu.user.Profile;
 import java.time.LocalDateTime;
 
 public class TranscriptUi {
-    private static final String CENTER_ALIGN_SPACE = "\t\t\t\t\t\t\t\t";
+    private static final String CENTER_ALIGN_SPACE = String.format("%32s","");
     private static final String UniName = CENTER_ALIGN_SPACE + "--\tNational University of Singapore\t--";
     private static final String transcriptName = CENTER_ALIGN_SPACE + "\t--\tUnofficial Transcript\t--";
     private static final String notice = "This is not an official transcript issued by the Office of the Registrar.";

@@ -3,14 +3,14 @@
 [-> UpdateCommand : execute()
 activate UpdateCommand
 
-alt Able to connect
+opt Able to connect
     UpdateCommand -> NusMods : update()
     activate NusMods
     NusMods -> NusMods : getOnlineModList()
     activate NusMods
     NusMods --> NusMods
     deactivate NusMods
-    loop for each mod
+    loop For each mod
         NusMods -> NusMods : getOnlineModInfo()
         activate NusMods
         NusMods --> NusMods
@@ -23,7 +23,7 @@ alt Able to connect
     NusMods --> UpdateCommand
     deactivate NusMods
 
-else No connection
+
 
 end
 

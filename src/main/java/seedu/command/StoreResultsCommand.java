@@ -10,16 +10,20 @@ import seedu.online.NusMods;
 import seedu.ui.TextUi;
 import seedu.user.Profile;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class StoreResultsCommand extends Command {
 
     public static final String commandSyntax = "store <GRADE> <MODULE_CODE>";
     public static final String commandAction =
             "Assigns a grade to a module and stores it on record ";
 
-    private String moduleCode;
-    private String grade;
-    private String gradeType;
-    private boolean isErrorThrown;
+    private final String moduleCode;
+    private final String grade;
+    private final String gradeType;
+    private final boolean isErrorThrown;
+    private static final Logger logger = Logger.getLogger("");
 
     public StoreResultsCommand(String grade, String moduleCode, String gradeType, boolean isErrorThrown) {
         this.grade = grade;
@@ -48,6 +52,7 @@ public class StoreResultsCommand extends Command {
             }
         } catch (FetchException e) {
             System.out.println(TextUi.ERROR_INVALID_MODULE_CODE);
+            logger.log(Level.WARNING, "Attempt to store a module grade has failed");
         }
     }
 }

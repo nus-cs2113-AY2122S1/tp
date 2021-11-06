@@ -7,12 +7,12 @@
 It’s August 5th, and the Academic Year is right around the corner!
 ModReg is about to start, and you have no idea what modules to take and what your timetable might even look like.
 
-Introducing **UNI Mods**, an easy to use application for NUS students that provides information on all available NUS
+Introducing **UNI Mods**, an easy-to-use application for NUS students that provides information on all available NUS
 modules and lets you pick and choose the modules and classes you want to take for that semester!
-Depending on the classes you decide to take, a timetable will be generated to keep track of your daily schedule and your
+Depending on the classes you decide to take, a timetable will be generated to keep track of your personal tasks, school lessons in your daily schedule and your
 total workload:
 
-![timetable](./resources/timetable.png)
+![Capture](https://user-images.githubusercontent.com/69495787/139837067-aed633dc-43f0-4748-9738-1dc6302d3c1f.JPG)
 
 <br>
 
@@ -26,7 +26,9 @@ total workload:
     * [Show Module Info](#display-module-info-show-module_code)
     * [Search Module](#search-module-search-keyword--l)
     * [Update Local Database](#update-local-database-update)
-    * [Add to Timetable](#add-to-timetable-add-module_code)
+    * [Add to Timetable](#add-to-timetable)
+      * [Add a Module](#add-a-module-to-timetable )
+      * [Add an Event](#add-an-event-to-timetable)
     * [Delete from Timetable](#delete-from-timetable-delete-module_code)
     * [Clear Timetable](#clear-timetable-clear)
     * [View Timetable](#view-timetable-timetable)
@@ -41,11 +43,9 @@ total workload:
 # Quick Start
 
 1. Ensure you have **Java 11** or above installed in your Computer.
-2. Download the latest **unimods.jar** from here. If it does not work, open your CLI of choice and run
-   `java -jar unimods.jar`.
-
-3. Copy the file to the folder you want to use as the home folder for your Unimods.
-4. Double-click the file to start the app.
+2. Download the latest **unimods.jar** and local data from here.
+3. Copy the files to the folder you want to use as the home folder for your Unimods.
+4. Open your CLI of choice and run `java -jar unimods.jar`.
 5. Type the command in the command box and press Enter to execute it.
 
    Some example commands you can try:
@@ -170,26 +170,38 @@ GEH1011 Film and History 4MC
 :
 ```
 
+If you wish to cancel your search, hit `ENTER`.
+
 You can also apply the following flags to refine the search:
 
-- **-l (small L) :** search for mods matching the level specified e.g `-l 3000`
+- **-l (small L) :** search for mods matching the level specified e.g `-l 3000` 
 - **-mc :** search for mods matching the number of MCs specified e.g `-mc 4`
 - **-s :** search for mods offered in the semester e.g. `-s 2`
   (:information_source: 3 & 4 refer to Special Terms 1 and 2 respectively.)
-- **-e :** search for mods that have/do not have exams. Specify with true/false e.g `-e false`
-- **-f :** search for mods from a faculty e.g `-f Computing`
-- **-d :** search for mods from a department `-d Computer Science`
+- **-e :** search for mods that have/do not have exams. Specify with true/false e.g `-e false`. Defaults to false if 
+input is invalid.
+- **-f :** search for mods from a faculty e.g `-f Computing`. Checks if faculty contains keyword.
+- **-d :** search for mods from a department `-d Computer Science`. Checks if faculty contains keyword.
 - **-q :** performs a local search using locally saved module data which might not be the most updated version, but is
-  very quick e.g. `-q`
+very quick e.g. `-q`. Note that local search cannot be cancelled.
 
-:information_source: Command, search term and flag regex are case insensitive.
+:information_source: Command, search term and flag regex are case-insensitive.
 
-:warning: Flags are not case insensitive. Inputting an invalid flag will cause the invalid flag and its regex to be
-ignored.
+:information_source: Search keyword is only for the module code. Searching for the title of a module is currently 
+unsupported.
+
+:information_source: If text is not displaying correctly (Mojibake), running `chcp 65001` or `chcp.com 65001` from your 
+CLI should resolve some issues.
+
+:warning: Flags are **NOT** case-insensitive. Inputting an invalid flag will print an error message.
 
 :warning: Broad queries may take up to ten minutes to execute, as UNI Mods will have to fetch information for every
 single mod from NUSMods. You may wish to avoid broad queries, and if absolutely required, it is recommended to perform
 them with the -q flag, which will execute in a matter of seconds.
+
+:warning: Local search is dependent on local data. If certain modules cannot be found offline, it is likely that you do
+not have the local data, or your local data is outdated. Please do run `update`, or `search` for that
+module online.
 
 <br>
 
@@ -197,9 +209,12 @@ them with the -q flag, which will execute in a matter of seconds.
 
 Maybe you are going to be doing some work at the University Sports Center tomorrow. You forsee that you will lack a good
 WiFi connection there, and want to access the latest information offline. Run update, and grab a cup of coffee while
-waiting!
+waiting! 
 
-:information_source: Command is case insensitive.
+Update will take up to 10 minutes to complete. If you wish to cancel your search at any time, simply hit 
+`ENTER` to cancel it!
+
+:information_source: Command is case-insensitive.
 
 :information_source:  You should rarely need to execute this command since every time UNI Mods retrieves data from
 NUSMods, it will update that mod in the local database. You should only realistically only need to do this before the
@@ -207,32 +222,96 @@ start of a new semester, when mods are being updated for the coming semester.
 
 <br>
 
-## Add to timetable: `add <MODULE_CODE>`
+## Add to timetable: `add`
+
+### Add a module to timetable 
 
 You have finally decided on the modules you want to take. Try adding your first module to your timetable!
 
 Let's add for example, `CG2271` to the timetable
 
-You can type `add CG2271` to see all the available lessons.
-
+You can type `add` to see what you can add to the timetable.
 ```shell
-~$ add CG2271
-Now adding CG2271 into timetable
-         Lecture Lesson Slots                         Tutorial Lesson Slots                         Laboratory Lesson Slots
-1: Wednesday, 0900-1100, 01, E-Learn_A    |   1: Thursday, 1100-1200, 01, E-Learn_A     |   1: Friday, 0800-1000, 01, E4A-04-08       |   
-_______________________________________   |   _______________________________________   |   _______________________________________   |   
-                                              2: Tuesday, 0800-0900, 02, E-Learn_A      |   2: Friday, 1000-1200, 02, E4A-04-08       |   
-                                              _______________________________________   |   _______________________________________   |   
-                                              3: Friday, 1400-1500, 03, E-Learn_A       |   
-                                              _______________________________________   | 
+What would you like to do?
+==>add
+1. Module
+2. Event
+Choose your option: 
 ```
+You can choose either Module or Event, since you are adding a module, you enter 1 into the terminal
+```shell
+Choose your option: 1
+Enter Module Code to add it into Timetable: cg2271
+Now adding CG2271 into timetable
+[DISCLAIMER] Lessons with the same class number are packed together
+[DISCLAIMER] Adding any type of lesson will add all lessons with similar class number into timetable
 
+              Lecture Lesson Slots                                    Tutorial Lesson Slots                                   Laboratory Lesson Slots
+1: Wednesday, 0900-1100, 01, E-Learn_A                  1: Thursday, 1100-1200, 01, E-Learn_A                   1: Friday, 0800-1000, 01, E4A-04-08                     
+_________________________________________________   |   _________________________________________________   |   _________________________________________________   |   
+                                                        2: Tuesday, 0800-0900, 02, E-Learn_A                    2: Friday, 1000-1200, 02, E4A-04-08                     
+                                                        _________________________________________________   |   _________________________________________________   |   
+                                                        3: Friday, 1400-1500, 03, E-Learn_A                     
+                                                        _________________________________________________   |   
+```
 If lessons are found, a prompt to indicate a choice for each lesson type will be shown as such.
-
 ```shell
 Which Lecture would you like to choose? 
+Which Tutorial would you like to choose? 
+Which Laboratory would you like to choose? 
+```
+For modules where lessons belong to the same class number, lessons will be packed together with a divider between each different class.
+
+For Example CS2113T lecture slot: 
+```shell
+Lecture Lesson Slots  
+1: Friday, 1600-1800, C01, E-Learn_C  
+1: Monday, 1200-1400, C01, E-Learn_C  
+1: Thursday, 1200-1400, C01, E-Learn_C                  
+1: Wednesday, 1200-1300, C01, E-Learn_C  
+_________________________________________________   | 
+```
+In addition, lessons that are currently in conflict with the timetable will be displayed with a disclaimer, and prompt you whether you want to proceed.
+
+For example:
+```shell
+1: Wednesday, 0900-1200, 01, E4A-04-08 [CONFLICT]
+```
+`NOTE:`Lessons that are added into timetable with existing lessons/events will override the slot
+
+If all lesson types have been successfully added, program will print out 
+```shell
+Lessons for all modules have been successfully added
 ```
 
+### Adding an Event to timetable
+
+Perhaps you have a team meeting that takes place every Monday, you can likewise add your personal events into the timetable
+
+Let's add for example, `Team Meeting on Monday, 8-9pm on Zoom` to your timetable
+
+This time after typing `add` select the event option.
+```shell
+1. Module
+2. Event
+Choose your option: 2
+Description of Event (E.g. Read Micah): 
+```
+
+Fill in all the relevant information and take note that time is strictly using 24-hr time format
+
+For example:
+```shell
+Description of Event (E.g. Read Micah): Team Meeting CS2113T
+Date of Event (E.g. Monday): Monday
+Starting time of Event (E.g. 1600): 2000
+Ending time of Event (E.g. 1800): 2100
+Location of Event (Optional): Discord
+Alright!! Event: Team Meeting CS2113T on Monday, from 2000 to 2100 at Team Meeting CS2113T has been added to your timetable
+```
+
+If the selected timeslot is already occupied, the program will let you know and the event will not be added until the timeslot
+has been freed up.
 <br>
 
 ## Delete from timetable: `delete <module_code>`
@@ -392,7 +471,7 @@ __________________________________________________________________________
 
 ## View Unofficial Transcript : `transcript`
 
-You can view your Unofficial Transcript to get an idea of your degree progress.This will disaply the modules you have
+You can view your Unofficial Transcript to get an idea of your degree progress.This will display the modules you have
 completed and their corresponding grades. The total number of credits completed and the CAP will also be displayed.
 
 You can type `transcript` to view your Unofficial Transcript.
@@ -433,10 +512,12 @@ __________________________________________________________________________
 
 # FAQ
 
-**Q**: How do I save my timetable so I don’t have to add all my modules again?</br>
+**Q**: How do I save my timetable so I don’t have to add all my modules again?
+<br>
 **A**: The timetable is saved automatically on every update (add/delete etc.)
 
-**Q**: How do I add additional comments/tags to my timetable so I can keep track of additional deadlines?</br>
+**Q**: How do I add additional comments/tags to my timetable so I can keep track of additional deadlines?
+<br>
 **A**: Stay tuned for v2.0!
 
 <br>
@@ -447,13 +528,13 @@ __________________________________________________________________________
 
 | Command                   | Meaning                                                                                           |
 | --------------            | ----------                                                                                        |
-| `help`                    | Shows available commands and flags. </br> Example: `help`                                         |
-| `search <KEYWORDd> [-l]`  | Lists modules that have partial matches by regex to the keyword. </br> Example: `search GEH -l`   |
-| `show <MODULE_CODE>`      | Display relevant module information. </br> Example: `show CS2113T`                                |
-| `add <MODULE_CODE>`       | Adds the module to the timetable. </br> Example: `add CS2113T`                                    |
-| `delete <MODULE_CODE>`    | Deletes the module from the timetable. </br> Example: `delete CS2113T`                            |
-| `clear`                   | Deletes all modules from the timetable. </br> Example: `clear`                                    |
-| `timetable`               | Displays timetable with total MCs taken. </br> Example: `timetable`                               |
-| `exit`                    | Exit the application. </br> Example:`exit`                                                        |
+| `help`                    | Shows available commands and flags. <br> Example: `help`                                         |
+| `search <KEYWORD> [-l]`  | Lists modules that have partial matches by regex to the keyword. <br> Example: `search GEH -l`   |
+| `show <MODULE_CODE>`      | Display relevant module information. <br> Example: `show CS2113T`                                |
+| `add <MODULE_CODE>`       | Adds the module to the timetable. <br> Example: `add CS2113T`                                    |
+| `delete <MODULE_CODE>`    | Deletes the module from the timetable. <br> Example: `delete CS2113T`                            |
+| `clear`                   | Deletes all modules from the timetable. <br> Example: `clear`                                    |
+| `timetable`               | Displays timetable with total MCs taken. <br> Example: `timetable`                               |
+| `exit`                    | Exit the application. <br> Example:`exit`                                                        |
 
 ---

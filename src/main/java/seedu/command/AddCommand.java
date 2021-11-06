@@ -4,6 +4,7 @@ import seedu.command.flags.AddFlag;
 import seedu.comparator.ClassNumComparator;
 import seedu.exceptions.AddException;
 import seedu.exceptions.FetchException;
+import seedu.exceptions.UniModsException;
 import seedu.module.Lesson;
 import seedu.module.Module;
 import seedu.module.Semester;
@@ -15,6 +16,8 @@ import seedu.ui.TextUi;
 import seedu.exceptions.ModuleExistException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AddCommand extends Command {
     private static final String LECTURE = "Lecture";
@@ -29,6 +32,7 @@ public class AddCommand extends Command {
     private final Timetable timetable;
     private final AddFlag flag;
     public AddUI addUI = new AddUI();
+    private static final Logger logger = Logger.getLogger("");
 
     public static final String commandSyntax = "add";
     public static final String commandAction = "Add modules or tasks to the Timetable";
@@ -43,73 +47,120 @@ public class AddCommand extends Command {
         if (getFlag() == AddFlag.LESSON) {
             Module module;
             String moduleCode = addUI.getModuleCode();
-            module = NusMods.fetchModOnline(moduleCode);
+            module = NusMods.fetchMod(moduleCode);
             checkModuleExist(module);
             TextUi.printAddMessage(moduleCode);
-
-            Semester semesterData = module.getSemester(semester);
-            try {
-                ArrayList<Lesson> lecture;
-                lecture = getLessonDetails(semesterData.getTimetable(), LECTURE);
-                lecture = addRemainingLessons(semesterData.getTimetable(), lecture);
-
-                ArrayList<Lesson> tutorial;
-                tutorial = getLessonDetails(semesterData.getTimetable(), TUTORIAL);
-
-                ArrayList<Lesson> laboratory;
-                laboratory = getLessonDetails(semesterData.getTimetable(), LAB);
-
-                addUI.printLessonDetails(lecture, tutorial, laboratory, timetable, module);
-            } catch (AddException e) {
-                e.printMessage();
-            }
+            addLesson(module, semester);
         } else if (getFlag() == AddFlag.EVENT) {
-            String description = addUI.getReply(FIRST_QN).trim();
-            if (isValidDescription(description)) {
-                throw new AddException("Description is Empty, please enter something valid");
-            }
+            addEvent();
+        }
+    }
 
-            String date = addUI.getReply(SECOND_QN).trim();
-            if (isValidDate(date)) {
-                throw new AddException("Invalid Date Format (Format: Monday)");
-            }
-
-            String startTime = addUI.getReply(THIRD_QN).trim();
-            try {
-                Integer.parseInt(startTime);
-            } catch (NumberFormatException e) {
-                throw new AddException("Invalid Start Time Entered (Format: 1600)");
-            }
-            if (isValidTime(startTime)) {
-                throw new AddException("Invalid Start Time Entered (Format: 1600)");
-            }
-
-            String endTime = addUI.getReply(FOURTH_QN).trim();
-            try {
-                Integer.parseInt(endTime);
-            } catch (NumberFormatException e) {
-                throw new AddException("Invalid End Time Entered (Format: 1600)");
-            }
-            if (isValidTime(endTime)) {
-                throw new AddException("Invalid End Time Entered (Format: 1600)");
-            }
-
-            if (isEndBeforeStart(startTime, endTime)) {
-                throw new AddException("Invalid Input, End Time is earlier than Start Time\n"
-                        + "All Events can only occur within a single day");
-            }
-
-            String location = addUI.getReply(FIFTH_QN).trim();
-
-            TimetableUserItem event = new TimetableUserItem(description, date, startTime, endTime, location);
-            if (timetable.isConflict(event)) {
-                throw new AddException("Selected timeslot is occupied, please delete before proceeding");
-            }
-
+    /**
+     * Function adds an event that the user will create by calling other methods
+     * to get the event details, which will be used to construct the event item.
+     */
+    public void addEvent() {
+        TimetableUserItem event;
+        try {
+            String description = getDescription();
+            String date = getDate();
+            String startTime = getStartTime();
+            String endTime = getEndTime();
+            verifyCorrectTime(startTime, endTime);
+            String location = getLocation();
+            event = new TimetableUserItem(description, date, startTime, endTime, location);
+            verifyNoConflict(event);
             timetable.addEvent(event.getDayOfWeek(), event);
             timetable.addToEvents(event);
+            addUI.printEventMessage(event);
+        } catch (AddException e) {
+            e.printMessage();
+            logger.log(Level.WARNING, "Invalid event created, event has not been added to timetable");
+        }
+    }
 
-            addUI.printEventMessage(event, date);
+    public void verifyNoConflict(TimetableUserItem event) throws AddException {
+        if (timetable.isConflict(event)) {
+            throw new AddException("Selected timeslot is occupied, please delete before proceeding");
+        }
+    }
+
+    public String getLocation() {
+        return addUI.getReply(FIFTH_QN).trim();
+    }
+
+    public void verifyCorrectTime(String startTime, String endTime) throws AddException {
+        if (isEndBeforeStart(startTime, endTime)) {
+            throw new AddException("Invalid Input, End Time is earlier than Start Time\n"
+                    + "All Events can only occur within a single day");
+        }
+    }
+
+    public String getEndTime() throws AddException {
+        String endTime = addUI.getReply(FOURTH_QN).trim();
+        try {
+            Integer.parseInt(endTime);
+        } catch (NumberFormatException e) {
+            throw new AddException("Invalid End Time Entered (Format: 1600)");
+        }
+        if (isValidTime(endTime)) {
+            throw new AddException("Invalid End Time Entered (Format: 1600)");
+        }
+        return endTime;
+    }
+
+    public String getStartTime() throws AddException {
+        String startTime = addUI.getReply(THIRD_QN).trim();
+        try {
+            Integer.parseInt(startTime);
+        } catch (NumberFormatException e) {
+            throw new AddException("Invalid Start Time Entered (Format: 1600)");
+        }
+        if (isValidTime(startTime)) {
+            throw new AddException("Invalid Start Time Entered (Format: 1600)");
+        }
+        return startTime;
+    }
+
+    public String getDate() throws AddException {
+        String date = addUI.getReply(SECOND_QN).trim();
+        if (isValidDate(date)) {
+            throw new AddException("Invalid Date Format (Format: Monday)");
+        }
+        return date;
+    }
+
+    public String getDescription() throws AddException {
+        String description = addUI.getReply(FIRST_QN).trim();
+        if (isValidDescription(description)) {
+            throw new AddException("Description is Empty, please enter something valid");
+        }
+        return description;
+    }
+
+    public void addLesson(Module module, int semester) {
+        try {
+            Semester semesterData = module.getSemester(semester);
+
+            ArrayList<Lesson> lecture;
+            lecture = getLessonDetails(semesterData.getTimetable(), LECTURE);
+            lecture = addRemainingLessons(semesterData.getTimetable(), lecture);
+
+            ArrayList<Lesson> tutorial;
+            tutorial = getLessonDetails(semesterData.getTimetable(), TUTORIAL);
+
+            ArrayList<Lesson> laboratory;
+            laboratory = getLessonDetails(semesterData.getTimetable(), LAB);
+
+            addUI.printLessonDetails(lecture, tutorial, laboratory, timetable, module);
+        } catch (AddException e) {
+            e.printMessage();
+            logger.log(Level.WARNING, "Module that does not contain any lessons, "
+                    + " module has been added into timetable");
+        } catch (UniModsException e) {
+            e.printMessage();
+            logger.log(Level.WARNING, "Attempt to add module not offered this semester failed");
         }
     }
 
@@ -118,7 +169,7 @@ public class AddCommand extends Command {
         try {
             for (Lesson lesson : lessons) {
                 if (!lesson.getLessonType().equals(LECTURE) && !lesson.getLessonType().equals(TUTORIAL)
-                        && !lesson.getLessonType().equals(LAB)) {
+                        && !lesson.getLessonType().equals(LAB) && !lecture.contains(lesson)) {
                     lecture.add(lesson);
                 }
             }
@@ -129,13 +180,20 @@ public class AddCommand extends Command {
         return lecture;
     }
 
+    /**
+     * Function creates an ArrayList of Lessons with the specified lesson type.
+     * @param lessons the list of lessons in the module
+     * @param lessonType the type of lesson specified
+     * @return list of lesson with the specified lesson type
+     * @throws AddException If the module contains no lessons
+     */
     public ArrayList<Lesson> getLessonDetails(ArrayList<Lesson> lessons, String lessonType) throws AddException {
         ArrayList<Lesson> completeList = new ArrayList<>();
         try {
             for (Lesson lesson : lessons) {
                 if (lesson.getLessonType().equals(lessonType)) {
                     completeList.add(lesson);
-                } else if (lessonType == LECTURE) {
+                } else if (lessonType.equals(LECTURE)) {
                     if (!lesson.getLessonType().equals(TUTORIAL) && !lesson.getLessonType().equals(LAB)) {
                         completeList.add(lesson);
                     }
@@ -148,6 +206,11 @@ public class AddCommand extends Command {
         return completeList;
     }
 
+    /**
+     * Check whether the current module to be added into the timetable already exist.
+     * @param mod the module to check
+     * @throws ModuleExistException if the module already exist in the timetable
+     */
     public void checkModuleExist(Module mod) throws ModuleExistException {
         for (Module module : timetable.getModules()) {
             String moduleCode = module.getModuleCode();

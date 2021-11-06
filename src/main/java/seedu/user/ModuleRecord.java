@@ -77,6 +77,7 @@ public class ModuleRecord {
      * @throws UniModsException IF the module is not found in the transcript records.
      */
     public void removeModuleFromTranscript(String moduleCode) throws UniModsException {
+        moduleCodes.remove(moduleCode);
         for (int i = 0; i < gradedModules.size(); i++) {
             if (gradedModules.get(i).getModuleCode().equals(moduleCode)) {
                 gradedModules.remove(gradedModules.get(i));
