@@ -425,8 +425,8 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
     //@author leeyikai
 
     /**
-     * Gets the necessary information and carry out the optimized payment function. When finished optimizing, this method
-     * will call the appropriate method in {@Ui} and print the optimized transactions out.
+     * Gets the necessary information and carry out the optimized payment function. When finished optimizing,
+     * this method will call the appropriate method in {@Ui} and print the optimized transactions out.
      *
      * @throws ForceCancelException allows the user to cancel an operation when an input is required.
      */
