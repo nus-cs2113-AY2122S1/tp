@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  */
 public class Trip {
     private static final Logger logger = Logger.getLogger(TripsList.class.getName());
-    private final String tripName;
+    private String tripName;
     private String startCountryCode;
     private String endCountryCode;
     private List<Country> path;
@@ -47,6 +47,10 @@ public class Trip {
 
     public String getTripName() {
         return tripName;
+    }
+
+    public void setTripName(String newTripName) {
+        this.tripName = newTripName;
     }
 
     public String getStartCountryCode() {
