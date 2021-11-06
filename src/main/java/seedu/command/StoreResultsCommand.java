@@ -22,7 +22,7 @@ public class StoreResultsCommand extends Command {
     private final String moduleCode;
     private final String grade;
     private final String gradeType;
-    private final boolean isErrorThrown;
+    private boolean isErrorThrown;
     private static final Logger logger = Logger.getLogger("");
 
     public StoreResultsCommand(String grade, String moduleCode, String gradeType, boolean isErrorThrown) {

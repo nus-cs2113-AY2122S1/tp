@@ -1,14 +1,13 @@
 package seedu.ui;
 
 import seedu.command.flags.AddFlag;
+import seedu.command.flags.ClearFlag;
 import seedu.exceptions.ProfileException;
 import seedu.exceptions.UniModsException;
 import seedu.module.Lesson;
 import seedu.module.Module;
-import seedu.timetable.Timetable;
 import seedu.timetable.TimetableUserItem;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -50,6 +49,7 @@ public class TextUi {
     public static final String ERROR_INVALID_MODULE_CODE =
             "OOPS, it looks like the module code you entered doesn't exist, Please re-check!";
     public static final String ERROR_EMPTY_TIMETABLE = "OOPS, it seems that your timetable is already empty.";
+    public static final String ERROR_EMPTY_TRANSCRIPT = "OOPS, it seems that your transcript is already empty.";
     public static final String ERROR_INVALID_GRADE = "OOPS, it seems that the grade you entered is invalid.";
     public static final String ERROR_INVALID_RESULT_COMMAND = "OOPS, it seems that your command is in wrong format. "
             + "The correct command format is =>"
@@ -62,6 +62,12 @@ public class TextUi {
             + "and grades to your transcript"
             + "\nType the command below to store the grades in our records =>"
             + "\n \"store\" <grade> \">\" <module_code> ";
+    public static final String OPTION_1 ="1";
+    public static final String OPTION_2 ="2";
+    public static final int ZERO =0;
+    public static final String CLEAR_TIMETABLE ="Timetable";
+    public static final String CLEAR_TRANSCRIPT ="Transcript";
+    public static final String DELIMITER_DOT =". ";
 
     /*------------- PUBLIC COMMANDS ----------- */
     public static String getCommand(String prompt) {
@@ -89,10 +95,26 @@ public class TextUi {
         while (input.isEmpty()) {
             input = in.next();
         }
-        if (input.equals("1")) {
+        if (input.equals(OPTION_1)) {
             return AddFlag.LESSON;
-        } else if (input.equals("2")) {
+        } else if (input.equals(OPTION_2)) {
             return AddFlag.EVENT;
+        } else {
+            throw new UniModsException("Invalid Selection, please choose either 1 or 2");
+        }
+    }
+    public static ClearFlag getClearFlag() throws UniModsException {
+        System.out.println(OPTION_1 +DELIMITER_DOT+CLEAR_TIMETABLE);
+        System.out.println(OPTION_2 +DELIMITER_DOT+CLEAR_TRANSCRIPT);
+        System.out.print("Choose your option: ");
+        String input = in.nextLine();
+        while (input.isEmpty()) {
+            input = in.next();
+        }
+        if (input.equals(OPTION_1)) {
+            return ClearFlag.TIMETABLE;
+        } else if (input.equals(OPTION_2)) {
+            return ClearFlag.TRANSCRIPT;
         } else {
             throw new UniModsException("Invalid Selection, please choose either 1 or 2");
         }
@@ -225,6 +247,9 @@ public class TextUi {
         System.out.println("All modules have been successfully removed from your Timetable.");
     }
 
+    public static void printTranscriptCleared() {
+        System.out.println("All modules have been successfully removed from your Transcript.");
+    }
     public static String returnLine() {
         return "________________________________________";
     }

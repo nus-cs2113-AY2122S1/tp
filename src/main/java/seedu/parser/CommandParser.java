@@ -19,6 +19,7 @@ import seedu.command.TimetableCommand;
 import seedu.command.TranscriptCommand;
 import seedu.command.UpdateCommand;
 import seedu.command.flags.AddFlag;
+import seedu.command.flags.ClearFlag;
 import seedu.command.flags.SearchFlags;
 import seedu.unimods.UniMods;
 import seedu.exceptions.UniModsException;
@@ -114,7 +115,14 @@ public class CommandParser {
      * @return ClearCommand with the timetable to be cleared.
      */
     public Command parseClearCommand(Timetable timetable) {
-        return new ClearCommand(timetable);
+        ClearFlag clearFlag = ClearFlag.INVALID;
+        try {
+            clearFlag = TextUi.getClearFlag();
+        } catch (UniModsException e) {
+            e.printMessage();
+        }
+        assert clearFlag != ClearFlag.INVALID;
+        return new ClearCommand(timetable, clearFlag);
     }
 
     /**
@@ -222,7 +230,6 @@ public class CommandParser {
             e.printMessage();
         }
         assert flag != AddFlag.INVALID;
-
         return new AddCommand(timetable, flag);
     }
 }

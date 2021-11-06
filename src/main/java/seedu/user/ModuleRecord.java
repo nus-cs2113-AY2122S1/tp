@@ -11,6 +11,7 @@ import seedu.ui.TranscriptUi;
 import java.util.ArrayList;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.logging.Level;
 
 
 public class ModuleRecord {
@@ -232,4 +233,13 @@ public class ModuleRecord {
             TranscriptUi.printUngradedModules(ungradedModules.get(i));
         }
     }
-}
+    public void clearTranscript()throws UniModsException{
+        if(gradedModules.size() == TextUi.ZERO && ungradedModules.size() == TextUi.ZERO ){
+            throw new UniModsException(TextUi.ERROR_EMPTY_TRANSCRIPT);
+        }
+        gradedModules.clear();
+        ungradedModules.clear();
+        TextUi.printTranscriptCleared();
+    }
+    }
+
