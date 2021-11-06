@@ -978,9 +978,33 @@ public class Ui {
         );
     }
 
-    public void printInvalidIngredientWeight(String ingedientName) {
+    public void printInvalidIngrWeight(String ingredientName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "The weight of " + ingedientName + "cannot be negative!" + System.lineSeparator()
+                + "The weight of " + ingredientName + " cannot be negative!" + System.lineSeparator()
+                + "Please enter a weight that is not negative:" + System.lineSeparator()
+                + LINE_DIVIDER
+        );
+    }
+
+    public void printInvalidIngrWasteValue(String ingredientName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "The weight of " + ingredientName + " wasted cannot be negative!" + System.lineSeparator()
+                + "Please enter a weight that is not negative:" + System.lineSeparator()
+                + LINE_DIVIDER
+        );
+    }
+
+    public void printInvalidUpdateIngrValue(String ingredientName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "The weight of " + ingredientName + " to be stored cannot be negative!" + System.lineSeparator()
+                + "Please enter a weight that is not negative:" + System.lineSeparator()
+                + LINE_DIVIDER
+        );
+    }
+
+    public void printInvalidIngrLimitValue(String ingredientName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "The limit of " + ingredientName + "  cannot be negative!" + System.lineSeparator()
                 + "Please enter a weight that is not negative:" + System.lineSeparator()
                 + LINE_DIVIDER
         );
@@ -997,11 +1021,20 @@ public class Ui {
 
     public void printInvalidDishWasteValue(String dishName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Please enter a weight that is not negative!" + System.lineSeparator()
-                + "add dish waste " + dishName + System.lineSeparator()
+                + "The weight of " + dishName + " wasted cannot be negative!" + System.lineSeparator()
+                + "Please enter a weight that is not negative:" + System.lineSeparator()
                 + LINE_DIVIDER
         );
     }
+
+    public void printInvalidDishLimitValue(String dishName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "The limit of " + dishName + "  cannot be negative!" + System.lineSeparator()
+                + "Please enter a weight that is not negative:" + System.lineSeparator()
+                + LINE_DIVIDER
+        );
+    }
+
 
     public void printConfirmDishWaste(String dishName, double dishWasteWeight) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
