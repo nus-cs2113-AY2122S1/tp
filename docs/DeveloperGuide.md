@@ -202,8 +202,12 @@ from the CSV type files (`University.csv` and `modules.csv`) stored in the resou
 
 The following diagrams are the class diagrams of the classes:  
 
-<img src="images/University.png" width = "280"/>  
-<img src="images/Module.png" width = "280"/>  
+<p align = "center">
+<img src="images/universities.png" width = "800" />
+</p>
+<p align = "center">
+<img src="images/modules.png" width = "800" />
+</p>
 
 This component consist of the following classes: 
 
