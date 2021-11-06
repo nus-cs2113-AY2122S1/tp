@@ -20,10 +20,8 @@ activate entry
 entry -> parser : getKeywordStatus()
 
 parser --> entry : keyword = ADD_MEMBER
-deactivate entry
 
 entry -> parser : getMemberDetails()
-activate entry
 parser --> entry : member = new Member()
 
 entry -> command : new AddMember()

@@ -114,6 +114,7 @@ The `Ui` component handles the **output display** of **CCA Manager**. Whenever t
 * Displaying success messages on valid command inputs.
 
 ### Parser Component
+
 ![Parser Object Diagram](images/ParserObjectDiagram.png)
 
 **API** : [Parser](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/src/main/java/seedu/duke/Parser.java)
@@ -129,6 +130,7 @@ A `keyword` is an identifier used by **CCA Manager** to determine what operation
 * Create a `Attendance` object from user input.
 
 ### Entry Component
+
 ![Entry Object Diagram](images/EntryObjectDiagram.png)
 
 **API** : [Entry](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/src/main/java/seedu/duke/Entry.java)
@@ -138,6 +140,7 @@ to print an error message. It uses simple `switch-case` statements to handle the
 
 
 ### Command Component
+
 ![Command Object Diagram](images/CommandObjectDiagram.png)
 
 **API** : [Command](https://github.com/AY2122S1-CS2113T-F12-4/tp/tree/master/src/main/java/seedu/duke/command)
@@ -160,6 +163,7 @@ The `Command` component directly interacts with the `Member`, `Training` or `Att
 
 <!-- @@author Teckwhye -->
 ### Member Component
+
 ![Member Component Diagram](images/MemberComponent.png)
 
 **API** : [Member](https://github.com/AY2122S1-CS2113T-F12-4/tp/tree/master/src/main/java/seedu/duke/member)
@@ -172,7 +176,9 @@ The `Member` component,
 
  <!-- @@author -->
 
+
 ### Training Component
+
 ![Training Component](images/TrainingComponent.png)
 
 **API** : [Training](https://github.com/AY2122S1-CS2113T-F12-4/tp/tree/master/src/main/java/seedu/duke/training)
@@ -192,6 +198,7 @@ The `Training` component,
 
 
 ### Attendance component
+
 ![Attendance Component Diagram](images/AttendanceComponent.png)
 
 **API** : [Attendance](https://github.com/AY2122S1-CS2113T-F12-4/tp/tree/master/src/main/java/seedu/duke/attendance)
@@ -203,6 +210,7 @@ The `Attendance` component,
 * stores the `AttendanceList` object in a csv file with the help of `AttendanceStorage`.
 
 ### Storage component
+
 **API** : [Storage]()
 
 The `Storage` component consists of 3 sub-components, corresponding to `member storage` , `attendance storage` 
@@ -215,12 +223,12 @@ The `member storage` component
 * automatically deletes to DukeMembers.csv whenever a member is deleted from the `MemberList` object.
 
 The `attendance storage` component
-*can save attendance data in CSV format and read them back into the `AttendanceList` object.
-*automatically deletes to AttendanceStorage.csv whenever a member is deleted from the `AttendanceList` object.
+* can save attendance data in CSV format and read them back into the `AttendanceList` object.
+* automatically deletes to AttendanceStorage.csv whenever a member is deleted from the `AttendanceList` object.
 
 The `training schedule` component
-*can save trainings schedules and read them back into the `TrainingList` object. 
-*automatically deletes in the file whenever a training schedule is deleted from the `TrainingList` object.
+* can save trainings schedules and read them back into the `TrainingList` object. 
+* automatically deletes in the file whenever a training schedule is deleted from the `TrainingList` object.
 
 ## Restrictions
 # IMPORTANT!
@@ -279,7 +287,7 @@ User can update CCA information faster than using a GUI, and offers a centralize
    1. Note that `cmd.exe` must be in the directory of `CCAManager.jar`
 
 ### Running Commands
-1. You can refer to the list of commands [here](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/docs/UserGuide.md)
+1. You can refer to the list of commands [here](https://ay2122s1-cs2113t-f12-4.github.io/tp/UserGuide.html)
 2. Upon a successful command run, data will be saved to `DukeMembers.csv`
 
 ### Exit

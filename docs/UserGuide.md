@@ -407,6 +407,20 @@ You can delete existing attendance entries with the help of the `delete /att` co
         [2] Name: BILLIE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
         ```
 
+### FAQ (Frequently Asked Questions)
+
+**Q**: Where can I find the file that my data is stored on?<br />
+**A**: Members data are stored in `CCAMembers.csv` and Trainings data are stored in `CCATrainings.csv`. These two files are found in the same folder location as your `CCAManager.jar`.<br />
+
+Attendance data are stored in a sub-folder called `Attendance`. There, the filename of your data is the Training Name of the attendance. The `Attendance` subfolder is found in the same folder location as your `CCAManager.jar`.
+
+
+**Q**: It appears that I can input String data into the `date/time` field of Training data. Is this intentional?<br />
+**A**: Yes, it is a feature. This is to support the use of relative date/time addressing, such as `After next meeting` or `Recess week`, for example. <br />This gives more flexibility to the user to store training data for trainings that may not have a set date currently. 
+<br />However, a side effect is that gibberish String such as `ABCABC` or `DUMMYTEXT` can be stored in the `date/time` field, which is discouraged.
+
+
+
 ## Command Summary
 
 A 'cheat sheet' of commands here
