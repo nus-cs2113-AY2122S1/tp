@@ -83,19 +83,6 @@ public class IngredientRepository {
     }
 
     /**
-     * Removes a batch of ingredients based on the given expiry date.
-     *
-     * @param ingredientName Name of ingredient.
-     * @param expiryDate Expiry date of batch of ingredients to be removed.
-     * @throws NotFoundException If ingredient does not exist in the repository.
-     * @throws IllegalValueException If the ingredient does not have any batch with the given expiry date.
-     */
-    public void remove(String ingredientName, LocalDate expiryDate) throws NotFoundException, IllegalValueException {
-        final IngredientStorage ingredientStorage = find(ingredientName);
-        ingredientStorage.remove(expiryDate);
-    }
-
-    /**
      * Removes ingredient from the ingredient repository.
      *
      * @param ingredientName Name of ingredient to be removed.

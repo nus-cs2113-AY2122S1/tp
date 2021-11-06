@@ -80,17 +80,6 @@ public class IngredientStorage {
     }
 
     /**
-     * Updates the quantity of a batch of ingredients based on the given expiry date.
-     *
-     * @param quantity New quantity.
-     * @param expiryDate Expiry date of batch of ingredients to update.
-     */
-    public void update(int quantity, LocalDate expiryDate) {
-        assert expiryDate != null : "Expiry date cannot be null";
-        ingredientBatches.put(expiryDate, quantity);
-    }
-
-    /**
      * Removes a quantity of ingredients from the storage.
      * Removes from the earliest batch of expiry date first.
      *
