@@ -375,6 +375,7 @@ public class Parser {
         command = new DeleteItemCommand(tripName, dayNumber, itemNumber);
         return command;
     }
+
     /**
      * Parses user input to give a <code>SearchItemCommand</code>.
      * @param userInput Raw user input, with the first command option (search-item) removed.
