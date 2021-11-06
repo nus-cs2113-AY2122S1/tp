@@ -169,7 +169,7 @@ public class Parser {
             + "(?<entertainment>.+)" + DATA_SEPARATOR + "(?<misc>.+)" + DATA_SEPARATOR + "(?<overall>.+)");
 
     private static final String DATE_FORMAT = "dd/MM/yyyy";
-    private static final double INPUT_AMOUNT_LIMIT = 1000000000;
+    private static final double ENTRY_AMOUNT_LIMIT = 1000000;
 
     /**
      * Parses user input into command for execution.
@@ -453,7 +453,7 @@ public class Parser {
             throws InvalidExpenseAmountException, InvalidInputAmountValueException {
         String userGivenAmount = matcher.group("amount").trim();
         double expenseAmount = parseExpenseAmount(userGivenAmount);
-        if (expenseAmount > INPUT_AMOUNT_LIMIT) { 
+        if (expenseAmount > ENTRY_AMOUNT_LIMIT) { 
             throw new InvalidInputAmountValueException(Messages.INVALID_EXPENSE_VALUE);
         }
         return expenseAmount;
@@ -531,7 +531,7 @@ public class Parser {
             throws InvalidIncomeAmountException, InvalidInputAmountValueException {
         String userGivenAmount = matcher.group("amount").trim();
         double incomeAmount = parseIncomeAmount(userGivenAmount);
-        if (incomeAmount > INPUT_AMOUNT_LIMIT) {
+        if (incomeAmount > ENTRY_AMOUNT_LIMIT) {
             throw new InvalidInputAmountValueException(Messages.INVALID_INCOME_VALUE);
         } 
         return incomeAmount;
