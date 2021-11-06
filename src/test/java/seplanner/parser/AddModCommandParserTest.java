@@ -1,6 +1,9 @@
 package seplanner.parser;
 
+import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
 import org.junit.jupiter.api.Test;
+import seplanner.exceptions.AddParseException;
+import seplanner.modules.Module;
 import seplanner.modules.ModuleList;
 import seplanner.storage.Storage;
 import seplanner.universities.UniversityList;
@@ -31,14 +34,14 @@ class AddModCommandParserTest {
     @Test
     void parse_validModuleCode_expectModuleObject() {
         String moduleCode = "CS1231";
-        ParseCondition acp = new ParseCondition();
-        assertEquals("CS1231", acp.isValidModule(moduleMasterList, moduleCode).getModuleCode());
-        assertEquals("Discrete Structures", acp.isValidModule(moduleMasterList, moduleCode).getModuleName());
-        assertEquals(4.0, acp.isValidModule(moduleMasterList, moduleCode).getModuleCredits());
+        assertEquals("CS1231", ParseCondition.isValidModule(moduleMasterList, moduleCode).getModuleCode());
+        assertEquals("Discrete Structures", ParseCondition
+                .isValidModule(moduleMasterList, moduleCode).getModuleName());
+        assertEquals(4.0, ParseCondition.isValidModule(moduleMasterList, moduleCode).getModuleCredits());
     }
 
     @Test
-    void parse_invalidModuleCode_expectException() throws IOException {
+    void parse_invalidModuleCode_expectException() {
         String moduleCode = "CS1011";
         AddCommandParser acp = new AddCommandParser();
         assertThrows(ParseException.class, () -> acp.parse(moduleCode, universityMasterList,
@@ -46,10 +49,42 @@ class AddModCommandParserTest {
     }
 
     @Test
-    void parse_nullInput_expectException() throws IOException {
+    void parse_nullInput_expectException() {
         String moduleCode = "";
         AddCommandParser acp = new AddCommandParser();
         assertThrows(ParseException.class, () -> acp.parse(moduleCode, universityMasterList,
                 moduleMasterList, universitySelectedList, moduleSelectedList));
     }
+
+    @Test
+    void parse_moduleIndexExceedLowerBound_exceptionThrown() {
+        String input = "0";
+        AddCommandParser acp = new AddCommandParser();
+        assertThrows(AddParseException.class, () -> acp.handleModFlagArgs(input, moduleMasterList, moduleSelectedList));
+    }
+
+    @Test
+    void parse_moduleIndexExceedUpperBound_exceptionThrown() {
+        String input = "999";
+        AddCommandParser acp = new AddCommandParser();
+        assertThrows(AddParseException.class, () -> acp.handleModFlagArgs(input, moduleMasterList, moduleSelectedList));
+    }
+
+    @Test
+    void parse_nonAlphabeticalOrNumericalInput_exceptionThrown() {
+        String input = ",.";
+        AddCommandParser acp = new AddCommandParser();
+        assertThrows(AddParseException.class, () -> acp.handleModFlagArgs(input, moduleMasterList, moduleSelectedList));
+    }
+
+    @Test
+    void parse_userAddDuplicateModule_exceptionThrown() {
+        String input = "CS1231";
+        AddCommandParser acp = new AddCommandParser();
+        Module dummyModule = new Module("CS1231", "test", 0, 0);
+        moduleSelectedList.addModule(dummyModule);
+        assertThrows(AddParseException.class, () -> acp.handleModFlagArgs(input,
+                moduleMasterList, moduleSelectedList));
+    }
+
 }
