@@ -46,23 +46,23 @@ class FindCommandTest {
         eventCatalog.clear();
     }
 
-//    @Test
-//    void findResult_noFlag_correctErrorMessage() throws DukeException, NoCommandAttributesException,
-//            InvalidItemTypeException {
-//        createEventsList();
-//        Command command = Parser.parseCommand("find abc");
-//        String expectedOutput = "Please add -e to find event(s)!";
-//        assertEquals(expectedOutput, outContent.toString());
-//    }
-//
-//    @Test
-//    void findResult_noEventsFound_correctErrorMessage() throws DukeException, NoCommandAttributesException,
-//            InvalidItemTypeException {
-//        createEventsList();
-//        Command command = Parser.parseCommand("find -e abc");
-//        String expectedOutput = "No matching events found!";
-//        assertEquals(expectedOutput, outContent.toString());
-//    }
+    //    @Test
+    //    void findResult_noFlag_correctErrorMessage() throws DukeException, NoCommandAttributesException,
+    //            InvalidItemTypeException {
+    //        createEventsList();
+    //        Command command = Parser.parseCommand("find abc");
+    //        String expectedOutput = "Please add -e to find event(s)!";
+    //        assertEquals(expectedOutput, outContent.toString());
+    //    }
+    //
+    //    @Test
+    //    void findResult_noEventsFound_correctErrorMessage() throws DukeException, NoCommandAttributesException,
+    //            InvalidItemTypeException {
+    //        createEventsList();
+    //        Command command = Parser.parseCommand("find -e abc");
+    //        String expectedOutput = "No matching events found!";
+    //        assertEquals(expectedOutput, outContent.toString());
+    //    }
 
     private void createEventsList() throws DukeException {
         eventCatalog.clear();
