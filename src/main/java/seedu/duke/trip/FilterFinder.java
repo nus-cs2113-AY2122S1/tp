@@ -40,6 +40,14 @@ interface FilterFinder {
     //@@author
 
     //@@author leeyikai
+
+    /**
+     * Finds the {@link Expense} that has the same {@link Person} name as {@param expenseAttribute} and prints
+     * the expense. If there are no matching {@link Expense}, an error message will be printed.
+     *
+     * @param listOfCurrentExpenses {@link ArrayList} containing the list of expenses currently in the trip.
+     * @param expenseAttribute @{@link String} containing the name of the {@link Person} that we want to find.
+     */
     static void findMatchingPayerExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
         boolean areThereExpenses = false;
         for (Expense e : listOfCurrentExpenses) {
@@ -54,6 +62,13 @@ interface FilterFinder {
         }
     }
 
+    /**
+     * Finds the {@link Expense} that contains the description as {@param expenseAttribute} and prints it out.
+     * If there are no matching {@link Expense}, an error message will be printed.
+     *
+     * @param listOfCurrentExpenses {@link ArrayList} containing the list of expenses currently in the trip.
+     * @param expenseAttribute @{@link String} containing the description that we want to find.
+     */
     static void findMatchingDescriptionExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                         String expenseAttribute) {
         boolean areThereExpenses = false;
@@ -72,6 +87,13 @@ interface FilterFinder {
         }
     }
 
+    /**
+     * Finds the {@link Expense} that contains the category as {@param expenseAttribute} and prints it out.
+     * If there are no matching {@link Expense}, an error message will be printed.
+     *
+     * @param listOfCurrentExpenses {@link ArrayList} containing the list of expenses currently in the trip.
+     * @param expenseAttribute @{@link String} containing the category that we want to find.
+     */
     static void findMatchingCategoryExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                      String expenseAttribute) {
         boolean areThereExpenses = false;

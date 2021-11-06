@@ -32,7 +32,7 @@ abstract class CommandHandler extends CommandExecutor {
             assert inputParams != null;
             executeEditTrip(inputParams);
         } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
-            Ui.printUnknownTripIndexError();
+            Ui.printEditFormatError();
         }
     }
 
@@ -116,8 +116,6 @@ abstract class CommandHandler extends CommandExecutor {
             executeCreateExpense(inputParams);
         } catch (NullPointerException | IndexOutOfBoundsException | NumberFormatException e) {
             Ui.printExpenseFormatError();
-        } catch (InvalidAmountException e) {
-            Ui.printInvalidAmountError();
         }
     }
 

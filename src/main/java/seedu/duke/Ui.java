@@ -149,7 +149,8 @@ public class Ui {
     public static void printCreateFormatError() {
         System.out.println("Please format your inputs as follows: "
                 + System.lineSeparator()
-                + "create /[place] /[date] /[currency ISO] /[exchange rate] /[people].");
+                + "create /[place] /[date DD-MM-YYYY] /[currency ISO] /[exchange rate] /[persons-in-trip].");
+        System.out.println("Separate person-in-trip with commas");
     }
 
     public static void printExpenseFormatError() {
@@ -158,10 +159,20 @@ public class Ui {
                 + "expense [amount] [category] [people] /[description].");
     }
 
+    public static void printEditFormatError() {
+        System.out.println("Please format your inputs as follows: "
+                + System.lineSeparator()
+                + "edit [trip num] [attribute] [new value]"
+                + System.lineSeparator()
+                + "attributes: -location, -date, -exchange rate, -forcur, -homecur"
+                + System.lineSeparator());
+    }
+
+
     public static void printFilterFormatError() {
         System.out.println("Please format your inputs as follows: "
                 + System.lineSeparator()
-                + "view filter [category, payer, description, person] [search keyword]");
+                + "view filter [category, description, payer, person, date] [search keyword]");
     }
 
 
@@ -242,6 +253,7 @@ public class Ui {
         printAllTrips();
     }
 
+    //@@author itsleeqian
     public static void printAllTrips() {
         System.out.println("List of Trips: ");
         ArrayList<Trip> listOfTrips = Storage.getListOfTrips();
@@ -252,6 +264,7 @@ public class Ui {
                     + listOfTrips.get(i).getDateOfTripString());
         }
     }
+    //@@author
 
     public static void emptyArgForOpenCommand() {
         System.out.println();
@@ -353,23 +366,63 @@ public class Ui {
 
     //@@author lixiyuan416
     public static void displayHelp() {
-        if (!Storage.checkOpenTrip()) {
-            System.out.println("Type \"open [trip number]\" to open your trip");
-            System.out.println("While a trip is open, type \"expense\" to create an expense for that trip");
-            System.out.println("Type \"quit\" to exit");
+        if (Storage.getListOfTrips().isEmpty()) {
+            System.out.println("You have no trips! Create one to get started!");
+            System.out.println();
+            System.out.println("Syntax: create /[location] /[date dd-mm-yyyy] "
+                    + "/[foreign-currency-ISO-code] /[exchange-rate] /[persons-in-trip]");
+            System.out.println("\t Separate each person-in-trip with commas");
+            System.out.println();
+            System.out.println("quit: exit the program");
+            System.out.println();
+        } else if (!Storage.checkOpenTrip()) {
+            System.out.println("You have trips, but have not opened any");
+            System.out.println();
+            System.out.println("list: list all your trips");
+            System.out.println("open [trip number]: Open a trip");
+            System.out.println("delete [trip number]: Delete a trip");
+            System.out.println();
+            System.out.println("create /[location] /[date dd-mm-yyyy] "
+                    + "/[foreign-currency-ISO-code] /[exchange-rate] /[persons-in-trip]: Creates a trip");
+            System.out.println("Separate persons-in-trip with commas");
+            System.out.println();
+            System.out.println("edit [trip num] [attribute] [new value]: edit trip attributes");
+            System.out.println("\tattributes: -location, -date, -exchange rate, -forcur, -homecur");
+            System.out.println("\tNote the hyphen in the attribute");
+            System.out.println("\tlast can be used for [trip num]");
+            System.out.println();
+            System.out.println("quit: exit the program");
             System.out.println();
         } else {
-            System.out.println("You are inside a trip. Trip specific commands:");
+            System.out.println("You are inside a trip. Here is a list of what you can do:");
+            System.out.println();
             System.out.println("\texpense: creates an expense");
-            System.out.println("\tview: list all expenses");
+            System.out.println("\t\texpense [amount] [category] [people] /[description]");
+            System.out.println("\t\t Separate each person with a comma");
+            System.out.println();
+            System.out.println("\tlist: List all expenses of the trip");
+            System.out.println();
+            System.out.println("\tpeople: List of persons in the trip");
+            System.out.println();
+            System.out.println("\tdelete [expense num]: delete an expense");
+            System.out.println("\t\t\"delete last\" to delete last expense");
+            System.out.println();
             System.out.println("\tview filter [options] [search keyword]: list filtered expenses.");
             System.out.println("\t\tfilter options: [category, description, payer, person, date]");
-            System.out.println("\tview [index]");
-            System.out.println("\tsummary: shows how much each person spent in total for this trip");
-            System.out.println("\tamount [person]: for settling repayment at the end of the trip,"
-                    + "shows how much this person owes to others, "
-                    + "or how much others owe this person");
-            System.out.println("\topen [trip num]: open another trip");
+            System.out.println();
+            System.out.println("\tview -[index]: View expense in detail");
+            System.out.println("\t\tViews all expenses if index not provided. \"view last\" to view last expense");
+            System.out.println();
+            System.out.println("\tsummary -[name]: Shows all much a person has spent on this trip in total.");
+            System.out.println("\t\tDisplays summary for everyone in the trip if index not provided");
+            System.out.println();
+            System.out.println("\toptimize: Displays who-pays-who instructions to "
+                    + "settle expense repayment at the end of the trip");
+            System.out.println("\tamount [person]: Displays who-pays-who instructions for one person, unoptimized");
+            System.out.println();
+            System.out.println("\tclose: Closes the current trip");
+            System.out.println("\topen [trip num]: Closes the current trip, opens another trip");
+            System.out.println();
             System.out.println("\tquit: exit the program");
             System.out.println();
         }
@@ -407,7 +460,7 @@ public class Ui {
 
     public static void sameNameInTripError() {
         System.out.println("You have entered people with the same name, please recreate the trip ensuring there are no "
-            + "repeated names for the trip.");
+                + "repeated names for the trip.");
     }
 
     public static void sameNameInExpenseError() {
@@ -498,27 +551,27 @@ public class Ui {
 
     public static void changeForeignCurrencySuccessful(Trip tripToEdit, String original) {
         System.out.println("Your foreign spending currency has been changed from "
-                + original + " to " + tripToEdit.getForeignCurrency());
+                + original + " to " + tripToEdit.getForeignCurrency() + ".");
     }
 
     public static void changeHomeCurrencySuccessful(Trip tripToEdit, String original) {
         System.out.println("Your home currency has been changed from "
-                + original + " to " + tripToEdit.getRepaymentCurrency());
+                + original + " to " + tripToEdit.getRepaymentCurrency() + ".");
     }
 
     public static void changeExchangeRateSuccessful(Trip tripToEdit, double original) {
         System.out.println("The exchange rate has been changed from "
-                + original + " to " + tripToEdit.getExchangeRate());
+                + original + " to " + tripToEdit.getExchangeRate() + ".");
     }
 
     public static void changeDateSuccessful(Trip tripToEdit, String original) {
         System.out.println("The date of your trip has been changed from "
-                + original + " to " + tripToEdit.getDateOfTripString());
+                + original + " to " + tripToEdit.getDateOfTripString() + ".");
     }
 
     public static void changeLocationSuccessful(Trip tripToEdit, String original) {
         System.out.println("The location of your trip has been changed from "
-                + original + " to " + tripToEdit.getLocation());
+                + original + " to " + tripToEdit.getLocation() + ".");
     }
 
     public static void printCouldNotSaveMessage() {
