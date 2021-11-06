@@ -29,7 +29,7 @@ class TripTest {
                 + "\n\t\t\t Origin: SIN"
                 + "\n\t\t\t Destination: MLY"
                 + "\n\t\t\t Path: [SIN, MLY]"
-                + "\n\t\t\t Distances: [1.0]"
+                + "\n\t\t\t Time: [1.0]"
                 + "\n\t\t\t Days: ";
         assertEquals(expectedOutput, trip.toString());
     }

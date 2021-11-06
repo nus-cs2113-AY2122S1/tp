@@ -30,7 +30,7 @@ import seedu.traveller.exceptions.InvalidNumberOfDaysException;
 import seedu.traveller.exceptions.InvalidSearchItemFormatException;
 import seedu.traveller.exceptions.InvalidEditItemIndexException;
 import seedu.traveller.exceptions.InvalidEditItemFormatException;
-import seedu.traveller.exceptions.InvalidShortestDistException;
+import seedu.traveller.exceptions.InvalidShortestTimeException;
 import seedu.traveller.exceptions.InvalidShortestCostException;
 import seedu.traveller.exceptions.TravellerException;
 import seedu.traveller.worldmap.WorldMap;
@@ -53,7 +53,6 @@ public class Parser {
     private static final int TIME_LENGTH = 7;
     private static final int INDEX_LENGTH = 8;
     private static final int KEY_LENGTH = 6;
-    private static final int DIST_LENGTH = 7;
 
 
     /**
@@ -83,8 +82,8 @@ public class Parser {
             case "view":
                 command = parseViewCommand(userInput[1]);
                 break;
-            case "shortest-dist":
-                command = parseShortestDistCommand(userInput[1]);
+            case "shortest-time":
+                command = parseShortestTimeCommand(userInput[1]);
                 break;
             case "shortest-cost":
                 command = parseShortestCostCommand(userInput[1]);
@@ -471,7 +470,7 @@ public class Parser {
      * @return Command A <code>ShortestCommand</code> object with in-built tag "dist"
      * @throws TravellerException Will be thrown if the user input cannot be understood.
      */
-    private static Command parseShortestDistCommand(String userInput) throws TravellerException {
+    private static Command parseShortestTimeCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Search command input");
         Command command;
         String startCountryCode;
@@ -492,9 +491,9 @@ public class Parser {
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
             assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
 
-            command = new ShortestCommand("dist", startCountryCode, endCountryCode);
+            command = new ShortestCommand("time", startCountryCode, endCountryCode);
         } catch (StringIndexOutOfBoundsException e) {
-            throw new InvalidShortestDistException();
+            throw new InvalidShortestTimeException();
         }
 
         return command;
@@ -699,16 +698,6 @@ public class Parser {
     private static int getIndexFlagIndex(String userInput) {
         String indexSeparator = " /index ";
         return userInput.indexOf(indexSeparator);
-    }
-
-    /**
-     * Used to parse flags in raw user input.
-     * @param userInput Input string which contains /dist flag.
-     * @return Starting index of /dist flag.
-     */
-    private static int getDistFlagIndex(String userInput) {
-        String distSeparator = " /dist ";
-        return userInput.indexOf(distSeparator);
     }
 }
 
