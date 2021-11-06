@@ -134,12 +134,15 @@ public class AddPrescriptionCommand extends Command {
             Date expiryDate = stock.getExpiry();
             Date todayDate = new Date();
 
-            boolean isExpired = expiryDate.before(todayDate);
+            String todayDateString = DateParser.dateToString(todayDate);
+            String latestExpiryString = DateParser.dateToString(expiryDate);
 
-            if (!isExpired && stock.getQuantity() != 0 && !(stock.isDeleted())) {
+            boolean isNotExpired = expiryDate.after(todayDate) || todayDateString.equals(latestExpiryString);
+
+            if (isNotExpired && stock.getQuantity() != 0 && !(stock.isDeleted())) {
                 existNonExpiredMed = true;
             }
-            if (!isExpired && stock.getQuantity() == 0 && !(stock.isDeleted())) {
+            if (isNotExpired && stock.getQuantity() == 0 && !(stock.isDeleted())) {
                 noStockLeft = true;
             }
         }
@@ -154,9 +157,7 @@ public class AddPrescriptionCommand extends Command {
             ui.print("Unable to Prescribe! Medication has expired!");
             return true;
         }
-
         return false;
-
     }
 
     /**
