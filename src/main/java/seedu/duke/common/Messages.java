@@ -31,7 +31,7 @@ public class Messages {
             + "  (+) Add a new audio item: add a t/TITLE i/ID a/ARTIST d/DURATION" + System.lineSeparator()
             + "  (+) Add a new book item: add b t/TITLE i/ID a/AUTHOR" + System.lineSeparator()
             + "  (+) Add a new magazine item: add m t/TITLE i/ID p/PUBLISHER e/EDITION" + System.lineSeparator()
-            + "  (+) Add a new video item: add v t/TITLE i/ID p/PUBLISHER e/DURATION" + System.lineSeparator()
+            + "  (+) Add a new video item: add v t/TITLE i/ID p/PUBLISHER d/DURATION" + System.lineSeparator()
             + "  (+) Add a new miscellaneous item: add i t/TITLE i/ID" + System.lineSeparator()
             + "  (+) List out all items: list" + System.lineSeparator()
             + "  (+) List out loaned items due today: deadline today" + System.lineSeparator()

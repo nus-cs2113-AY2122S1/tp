@@ -135,7 +135,7 @@ Adds a magazine item to the catalogue titled `Time Magazine` with an ID of `5872
 #### Add a video item
 Add a new video item to the catalogue
 
-Format: `add v t/TITLE i/ID p/PUBLISHER e/DURATION`
+Format: `add v t/TITLE i/ID p/PUBLISHER d/DURATION`
 
 ##### Usage Example: 
 
@@ -516,7 +516,7 @@ Expected output:
   (+) Add a new audio item: add a t/TITLE i/ID a/ARTIST d/DURATION
   (+) Add a new book item: add b t/TITLE i/ID a/AUTHOR
   (+) Add a new magazine item: add m t/TITLE i/ID p/PUBLISHER e/EDITION
-  (+) Add a new video item: add v t/TITLE i/ID p/PUBLISHER e/DURATION
+  (+) Add a new video item: add v t/TITLE i/ID p/PUBLISHER d/DURATION
   (+) Add a new miscellaneous item: add i t/TITLE i/ID
   (+) List out all items: list
   (+) List out loaned items due today: deadline today
@@ -583,7 +583,7 @@ When `libmgr` detects errors or corruptions in `data.json` it will overwrite the
 |Add (Audio)|Add an audio item to the catalogue|`add a t/TITLE i/ID a/ARTIST d/DURATION`<br>E.g. `add a t/Thriller i/5920 a/Michael Jackson d/42:16`|
 |Add (Book)|Add a book item to the catalogue|`add b t/TITLE i/ID a/AUTHOR`<br>E.g. `add b t/To Kill a Mockingbird i/2551 a/Harper Lee`|
 |Add (Magazine)|Add a magazine item to the catalogue|`add m t/TITLE i/ID p/PUBLISHER e/EDITION`<br>E.g. `add m t/Time Magazine i/58720a p/Time USA e/oct252021`|
-|Add (Video)|Add a video item to the catalogue|`add v t/TITLE i/ID p/PUBLISHER e/DURATION` <br> E.g. `add v t/Casino Royale i/095680 p/Sony Pictures d/144 minutes`|
+|Add (Video)|Add a video item to the catalogue|`add v t/TITLE i/ID p/PUBLISHER d/DURATION` <br> E.g. `add v t/Casino Royale i/095680 p/Sony Pictures d/144 minutes`|
 |Add (Miscellaneous)|Add an item that cannot be categorised under any type|`add i t/TITLE i/ID` <br> E.g. `add i t/Scrabble i/0513895`|
 |Deadline|View items due to be returned|`deadline [overdue/today]` <br> E.g. `deadline today`|
 |Edit|Edit existing items within the catalogue|`edit ID KEY/ATTRIBUTE` <br> E.g. `edit 123 t/Harry Potter a/JK Rowling`|
