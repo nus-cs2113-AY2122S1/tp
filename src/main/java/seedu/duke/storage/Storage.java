@@ -21,10 +21,21 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+/**
+ * The storage to manage,load and save data.
+ */
 public class Storage {
 
     public static final String FILE_NAME = "Duke.txt";
 
+    /**
+     * Load data from the default file
+     *
+     * @param employeeList the list of employees
+     * @param menu the list of dishes
+     * @param ingredientList the list of ingredients
+     * @param financeList the list of accounts
+     */
     public static void loadStorage(EmployeeList employeeList, Menu menu, IngredientList ingredientList,
                                    FinanceList financeList) {
         File file = new File(FILE_NAME);
@@ -62,12 +73,24 @@ public class Storage {
         }
     }
 
+    /**
+     * Decode the account from in the file
+     *
+     * @param toRead the string format of the account
+     * @return the decoded account
+     */
     private static Finance decodeFinance(String toRead) {
         String[] description = toRead.trim().split("\\|", 3);
         Finance finance = new Finance(LocalDate.parse(description[1]), description[2]);
         return finance;
     }
 
+    /**
+     * Encode the account to be stored in the file
+     *
+     * @param toWrite the account to be encoded
+     * @return the string format of the account
+     */
     private static String encodeFinance(String toWrite) {
         String encodedItem = null;
         String[] description = toWrite.trim().split(" ", 2);
@@ -75,12 +98,24 @@ public class Storage {
         return encodedItem;
     }
 
+    /**
+     * Decode the ingredient from the file
+     *
+     * @param toRead the string format of the ingredient
+     * @return the decoded ingredient
+     */
     private static Ingredient decodeIngredient(String toRead) {
         String[] description = toRead.trim().split("\\|", 5);
         Ingredient ingredient = new Ingredient(description[1], description[2], description[3], LocalDate.parse(description[4]));
         return ingredient;
     }
 
+    /**
+     * Encode the ingredient to be stored in the file
+     *
+     * @param toWrite the ingredient to be encoded
+     * @return the string format of the ingredient
+     */
     private static String encodeIngredient(String toWrite) {
         String encodedItem = null;
         String[] description = toWrite.trim().split(" ", 4);
@@ -93,6 +128,12 @@ public class Storage {
         return encodedItem;
     }
 
+    /**
+     * Decode the dish from the file
+     *
+     * @param toRead the string format of the dish
+     * @return the decoded dish
+     */
     private static Dish decodeDish(String toRead) {
         String[] description = toRead.trim().split("\\|", 4);
         double dishPrice = Double.parseDouble(description[2]);
@@ -102,6 +143,12 @@ public class Storage {
         return dish;
     }
 
+    /**
+     * Encode the dish to be stored in the file
+     *
+     * @param dish the dish to be encoded
+     * @return the string format of the dish
+     */
     private static String encodeDish(Dish dish) {
         String encodedItem = null;
         encodedItem = "add-dish" + "|" + dish.getName() + "|" + dish.getPrice() + "|" + dish.getDiscount();
@@ -109,6 +156,14 @@ public class Storage {
         return encodedItem;
     }
 
+    /**
+     * Save the date into the default file
+     *
+     * @param employeeList the list of employees
+     * @param menu the list of dishes
+     * @param ingredientList the list of ingredients
+     * @param financeList the list of accounts
+     */
     public static void saveStorage(EmployeeList employeeList, Menu menu,
                                    IngredientList ingredientList, FinanceList financeList) {
         try {

@@ -1,13 +1,20 @@
 package seedu.duke.finance;
 
-import seedu.duke.ingredient.IngredientList;
-import seedu.duke.ingredient.IngredientUI;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Contains all Finance related methods.
+ * Deals with the user's Finance related input commands.
+ */
 public class FinanceParser {
 
+    /**
+     * Adds a new account to the Finance list.
+     *
+     * @param command User's command in ArrayList format.
+     * @param finances User's finance list.
+     */
     public void addFinance(String[] command, FinanceList finances) {
         try {
             Finance newAccount = new Finance(LocalDate.parse(command[1]), command[2]);
@@ -24,11 +31,23 @@ public class FinanceParser {
         }
     }
 
+    /**
+     * Adds a new account to the finance list without printing any messages.
+     *
+     * @param finances User's finance list.
+     * @param account Account to be added.
+     */
     public void loadFinanceFromStorage(FinanceList finances, Finance account) {
         finances.financeList.add(account);
         finances.totalAccount += account.getAccount();
     }
 
+    /**
+     * Removes an existing account from the menu.
+     *
+     * @param command User's command in ArrayList format.
+     * @param finances User's finance list.
+     */
     public void deleteFinance(String[] command, FinanceList finances) {
         try {
             int deletedFinanceIndex = Integer.parseInt(command[1]) - 1;
@@ -48,6 +67,11 @@ public class FinanceParser {
         }
     }
 
+    /**
+     * Prints a list of all the accounts in the finance list.
+     *
+     * @param finances Finance list to be printed.
+     */
     public void listFinance(FinanceList finances) {
         if (finances.financeList.size() < 1) {
             FinanceUI.printEmptyListMessage();
@@ -58,10 +82,21 @@ public class FinanceParser {
         FinanceUI.printFinanceListMessage(finances);
     }
 
+    /**
+     * Prints the total account .
+     *
+     * @param finances Finance list to be computed to get the total account.
+     */
     public void showFinance(FinanceList finances) {
         FinanceUI.printTotalAccount(finances.totalAccount);
     }
 
+    /**
+     * Edits the number of an existing account in the finance list.
+     *
+     * @param command User's command in ArrayList format.
+     * @param finances User's finance list.
+     */
     public void editFinance(String[] command, FinanceList finances) {
         try {
             int editedFinanceIndex = Integer.parseInt(command[1]) - 1;
