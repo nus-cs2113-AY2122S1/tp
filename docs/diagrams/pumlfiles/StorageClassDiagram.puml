@@ -29,9 +29,9 @@ class PatientStorage
 class StaffStorage
 
 
-PatientStorage <-- StorageManager
-StaffStorage <-- StorageManager
-AppointmentStorage <-- StorageManager
+StorageManager --> "1" AppointmentStorage
+PatientStorage "1"<-- StorageManager
+StaffStorage "1"<-- StorageManager
 
 "{abstract} \n Storage" <|-- AppointmentStorage
 "{abstract} \n Storage" <|-- "{abstract} \n PersonStorage"
@@ -39,7 +39,7 @@ AppointmentStorage <-- StorageManager
 "{abstract} \n PersonStorage" <|-- StaffStorage
 
 
-enum ListItemType {
+enum "<<enumeration>> \n ListItemType"{
 PATIENT
 STAFF
 APPOINTMENT
