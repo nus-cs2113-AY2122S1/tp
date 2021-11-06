@@ -2,9 +2,7 @@
 
 ## Project - Large Order Tracking System(LOTS)
 Large Order Tracking System (LOTS) is a Command Line (CLI) program that is written in Java and meant to run on `Java 11`.
-This program enables users to keep track of multiple food orders from a pre-set list of food items from different stores.
-Users can easily view a summary of all the orders that they are currently tracking
-along with other information such as total cost, order quantity & names of the order.
+This program enables users to keep track of multiple food orders from a pre-set list of food items.
 
 ### Summary of Contributions
 
