@@ -24,7 +24,7 @@
   original source as well}
 
 ## Design 
-
+###Architecture
 ![Figure_Architecture_Diagram](images/ArchitectureDiagram.png)
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
@@ -54,6 +54,17 @@ The rest of the App consists of four components.
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `add -e m/1 a/500`.
 
 ![Figure_Architecture__Sequence_Diagram](images/ArchitectureSequenceDiagram.png)
+
+###Logic Component (Parser and Commands)
+![Figure_ParserDiagram](images/ParserDiagram.png)
+Figure x. Structure of the program's logic
+
+1. `BudgetTracker` uses `Parser` to parse user input into a `Command`.
+2. This results in the creation of an `XYZParser` (where 'XYZ' represents 'AddBudget', 'EditLoan', etc.) which in turn creates a `XYZCommand`.
+3. The `XYZCommand` being executed affects the `Data` component.
+4. Additionally, during execution of `XYZCommand`, `Ui` (not shown) will display helpful messages to the user.
+
+Given below is the Sequence Diagram for interactions with the Parser and Command components for the `parseCommand("add -b a/300")` call.
 
 ## Implementation
 ###Delete
