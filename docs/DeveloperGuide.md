@@ -243,20 +243,21 @@ information of the `IngredientGroup` is taken note of to be printed when the fun
 
 ### 4.3. Deleting ingredients
 
-Delete is performed on individual ingredients in groups. For example, the current ingredient inventory is
+Delete is performed on individual ingredients in groups. Users are to supply the information for the ingredient to delete by 
+their groups and numbers in the list. For example, the current ingredient inventory is
 ```
-1. Carrot | Total Amount: 12.2 kg
-	Amount Left: 10.0 kg | Expiry Date: 23/12/2021
-	Amount Left: 2.2 kg | Expiry Date: 25/12/2021
+1. Carrot | Total Amount: 12.200 kg
+	1.1. Amount Left: 10.000 kg | Expiry Date: 23/12/2021
+	1.2. Amount Left: 2.200 kg | Expiry Date: 25/12/2021
 
-2. Potato | Total Amount: 7.1 kg
-	Amount Left: 5.0 kg | Expiry Date: 25/12/2021
-	Amount Left: 2.1 kg | Expiry Date: 12/11/2021
+2. Potato | Total Amount: 7.100 kg
+	2.1. Amount Left: 2.100 kg | Expiry Date: 12/11/2021
+	2.2. Amount Left: 5.000 kg | Expiry Date: 25/12/2021
 
-3. Beef | Total Amount: 5.1 kg
-	Amount Left: 5.1 kg | Expiry Date: 01/02/2022
+3. Beef | Total Amount: 5.100 kg
+	3.1. Amount Left: 5.100 kg | Expiry Date: 01/02/2022
 ```
-Then calling `delete n/ carrot e/ 25/12/2021` will remove the second entry in the `carrot` category.
+Then calling `delete 1.1` will remove the second entry in the `carrot` category.
 The sequence diagram below illustrates the above command example
 
 ![image](images/DeleteSequenceDiagram.png)
