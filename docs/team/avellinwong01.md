@@ -17,7 +17,7 @@ Designed for fast typists, it can help to augment the day-to-day tasks of a libr
 2. Implemented `EditCommand` class and all associated classes to edit 
 3. Implemented `InfoCommand` class to display a variety of library information to the user
 4. Implemented `HelpCommand` class to display a list of valid input commands to the user 
-5. Implemented `UnknownCommand` class to capture all invalid user input commands
+5. Implemented `UnknownCommand` class to display a message informing the user when he has inputted an invalid command
 
 ### Contributions to the User Guide
 
