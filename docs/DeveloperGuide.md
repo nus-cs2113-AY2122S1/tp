@@ -1,6 +1,9 @@
 # Developer Guide
 
 - [Acknowledgements](#acknowledgements)
+- [Setting up and Getting started](#setting-up-and-getting-started)
+  - [Set up project](#set-up-project)
+  - [Before writing code](#before-writing-code)
 - [Design & Implementation](#design--implementation)
   - [Data Component](#data-component)
   - [Storage Component](#storage-component)
@@ -19,7 +22,44 @@
 
 ## Acknowledgements
 
+- Implementation: [AddressBook-Level3](https://github.com/se-edu/addressbook-level3)
 - Libraries used: [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5), [Ascii Table](https://mvnrepository.com/artifact/de.vandermeer/asciitable)
+- PlantUML Tutorial: [Guide]
+- Logging Tutorial: [Guide]
+
+## Setting up and Getting started
+
+### Set up project
+
+1. Fork this [repo](https://github.com/AY2122S1-CS2113T-F12-2/tp), and clone the fork into your computer.
+
+2. Ensure that you have [IntelliJ IDEA](https://www.jetbrains.com/idea/download/#section=windows) and [JDK 11](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html) installed.
+
+3. Configure the JDK
+   - Follow the guide at [[se-edu/guides] IDEA: Configuring the JDK](https://se-education.org/guides/tutorials/intellijJdk.html) to ensure Intellij is configured to use JDK 11.
+   
+4. Import the project as a Gradle project
+   - Follow the guide [[se-edu/guides] IDEA: Importing a Gradle project](https://se-education.org/guides/tutorials/intellijImportGradleProject.html) to import the project into IDEA.
+   - Note: Importing a Gradle project is slightly different from importing a normal Java project.
+   
+5. Verify the setup
+   - Locate the file src/main/java/GetJackd.java then run the GetJackd.main() and try a few commands.
+   - Run the test to ensure they all pass.
+
+
+### Before writing code
+
+1. **Configure the coding style**
+
+   - If using IDEA, follow the guide [[se-edu/guides] IDEA: Configuring the code style](https://se-education.org/guides/tutorials/intellijCodeStyle.html) to set up IDEA's coding style to match ours.
+   
+2. **Set up CI**
+
+   - This project comes with a GitHub Actions config files (in .github/workflows folder). When GitHub detects those files, it will run the CI for your project automatically at each push to the master branch or to any PR. No set up required.
+   
+3. **Learn the design**
+
+   - When you are read to start coding, we recommend that you get some sense of the overall design by reading the following.
 
 ## Design & implementation
 
@@ -113,6 +153,7 @@ The `Storage` component,
 Location : `seedu.duke.command`
 
 ![img.png](umldg/CommandDiagram.png)
+
 
 __Note:__
 
