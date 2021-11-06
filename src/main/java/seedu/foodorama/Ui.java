@@ -1019,6 +1019,21 @@ public class Ui {
         );
     }
 
+    public void printDishWasteValueHigh(String dishName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "The weight of " + dishName + " wasted is unusually greater than 10,000kg!" + System.lineSeparator()
+                + "Are you sure you want to add this weight? \n"
+                + "Enter 'y' to continue, or 'n' to disregard this command" + System.lineSeparator()
+                + LINE_DIVIDER
+        );
+    }
+
+    public String printNumericalInputInvalid(String type) {
+        return LINE_DIVIDER + System.lineSeparator()
+                + "The " + type + " is out of bounds. The Command has been disregarded."
+                + System.lineSeparator() + LINE_DIVIDER;
+    }
+
     public void printInvalidDishLimitValue(String dishName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "The limit of " + dishName + "  cannot be negative!" + System.lineSeparator()
@@ -1035,11 +1050,6 @@ public class Ui {
         );
     }
 
-    public String printNumericalInputInvalid(String type) {
-        return LINE_DIVIDER + System.lineSeparator()
-                + "The " + type + " is out of bounds"
-                + System.lineSeparator() + LINE_DIVIDER;
-    }
 
     public String getBlankName(String type) {
         return LINE_DIVIDER + System.lineSeparator()

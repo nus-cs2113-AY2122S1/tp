@@ -148,7 +148,7 @@ public class IngredientList {
             newName = input.nextLine().toLowerCase();
         }
 
-        if(newName.isBlank()) {
+        if (newName.isBlank()) {
             throw new FoodoramaException(UI.getBlankName("ingredient"));
         }
 

@@ -58,9 +58,10 @@ public class AddDishWasteCommand extends Command {
     }
 
     public boolean isNumber(String numberString) {
-        if (numberString.matches("^[\\d\\s.]+$")) {
+        try {
+            double number = Double.parseDouble(numberString);
             return true;
-        } else {
+        } catch (NumberFormatException e) {
             return false;
         }
     }
