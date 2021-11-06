@@ -969,8 +969,8 @@ public class Ui {
 
     public void printInvalidIngredientWeight(String ingedientName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Please enter a weight that is not negative!" + System.lineSeparator()
-                + "add ingr " + ingedientName + System.lineSeparator()
+                + "The weight of " + ingedientName + "cannot be negative!"+ System.lineSeparator()
+                + "Please enter a weight that is not negative:" + System.lineSeparator()
                 + LINE_DIVIDER
         );
     }
@@ -985,8 +985,8 @@ public class Ui {
     }
 
     public void printInvalidDishWasteValue(String dishName) {
-        System.out.println(LINE_DIVIDER + System.lineSeparator() +
-                "Please enter a weight that is not negative!" + System.lineSeparator()
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Please enter a weight that is not negative!" + System.lineSeparator()
                 + "add dish waste " + dishName + System.lineSeparator()
                 + LINE_DIVIDER
         );

@@ -37,26 +37,11 @@ public class IngredientList {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
 
-        // implement the confimatory loop here
-        // ask user if they want to add ingredient with this amount of weight
-        UI.clearTerminalAndPrintNewPage();
-        UI.printConfirmIngrNameAndWeight(ingredientName, ingredientWeightValue);
-        String confirmYesOrNo = in.nextLine().toLowerCase();
-        while (!(confirmYesOrNo.equals(YES) | confirmYesOrNo.equals(NO))) {
-            UI.clearTerminalAndPrintNewPage();
-            UI.printInvalidConfirmation();
-            confirmYesOrNo = in.nextLine().toLowerCase();
-        }
 
-        UI.clearTerminalAndPrintNewPage();
-        if (confirmYesOrNo.equals(YES)) {
-            //if yes, do this
-            Ingredient ingredientToAdd = new Ingredient(ingredientName, ingredientWeightValue);
-            ingredientList.add(ingredientToAdd);
-            UI.printAddedIngredient(ingredientToAdd, ingredientWeightValue);
-        } else {
-            UI.printDisregardMsg();
-        }
+        Ingredient ingredientToAdd = new Ingredient(ingredientName, ingredientWeightValue);
+        ingredientList.add(ingredientToAdd);
+        UI.printAddedIngredient(ingredientToAdd, ingredientWeightValue);
+
     }
 
     //Returns -1 if not present, index if present

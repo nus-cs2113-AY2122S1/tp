@@ -126,39 +126,22 @@ public class Dish implements Comparable<Dish> {
         } catch (NumberFormatException e) {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
-        // implement the confimatory loop here
-        // ask user if they want to add dish waste with this amount of weight
-        UI.clearTerminalAndPrintNewPage();
-        UI.printConfirmDishWaste(dishName, inputWastage);
 
-        String confirmYesOrNo = in.nextLine().toLowerCase();
-        while (!(confirmYesOrNo.equals(YES) | confirmYesOrNo.equals(NO))) {
-            UI.clearTerminalAndPrintNewPage();
-            UI.printInvalidConfirmation();
-            confirmYesOrNo = in.nextLine().toLowerCase();
+        assert inputWastage > 0 : "Adding negative waste is impossible";
+        wastage += inputWastage;
+        UI.printWastage(dishName, wastage);
+        if (wastage >= limit && limit != -1) {
+            UI.printLimitExceeded(dishName);
+        }
+        if (!parts.isEmpty()) {
+            //Todo proportion stuff and prevent feedback loop
+            ingredientContribution = wastage / parts.size();
+            for (Ingredient ingredient : parts) {
+                //Change in contribution is change in wastage / num of partss
+                ingredient.addDishWaste(inputWastage / parts.size());
+            }
         }
 
-        UI.clearTerminalAndPrintNewPage();
-
-        if (confirmYesOrNo.equals(YES)) {
-            //if yes, do this
-            assert inputWastage > 0 : "Adding negative waste is impossible";
-            wastage += inputWastage;
-            UI.printWastage(dishName, wastage);
-            if (wastage >= limit && limit != -1) {
-                UI.printLimitExceeded(dishName);
-            }
-            if (!parts.isEmpty()) {
-                //Todo proportion stuff and prevent feedback loop
-                ingredientContribution = wastage / parts.size();
-                for (Ingredient ingredient : parts) {
-                    //Change in contribution is change in wastage / num of partss
-                    ingredient.addDishWaste(inputWastage / parts.size());
-                }
-            }
-        } else {
-            UI.printDisregardMsg();
-        }
     }
 
 
