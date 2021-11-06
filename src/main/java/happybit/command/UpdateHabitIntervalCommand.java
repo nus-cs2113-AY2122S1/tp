@@ -14,9 +14,9 @@ public class UpdateHabitIntervalCommand extends UpdateCommand {
     /**
      * Constructor for UpdateHabitIntervalCommand.
      *
-     * @param goalIndex Index of goal in goalList where habit to be updated is located in
-     * @param habitIndex Index of habit in habitList of goal
-     * @param newInterval newInterval to be changed to
+     * @param goalIndex Index of goal in goalList where habit to be updated is located in.
+     * @param habitIndex Index of habit in habitList of goal.
+     * @param newInterval newInterval to be changed to.
      */
     public UpdateHabitIntervalCommand(int goalIndex, int habitIndex, int newInterval) {
         this.goalIndex = goalIndex;
@@ -43,6 +43,11 @@ public class UpdateHabitIntervalCommand extends UpdateCommand {
         return habitIndex;
     }
 
+    /**
+     * Getter for new interval.
+     *
+     * @return Updated interval.
+     */
     public int getNewInterval() {
         return newInterval;
     }
