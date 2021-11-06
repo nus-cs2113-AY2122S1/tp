@@ -296,17 +296,17 @@ public class ParserTest {
     }
     
     @Test
-    public void addExpenseWithDate_validInput_validCommand() {
+    public void parseCommand_expenseInputWithDate_validCommand() {
         Parser testParser = new Parser();
-        String userInput = "add_ex d/asf a/10 c/food D/11/11/2021";
+        String userInput = "add_ex_d D/11/11/2121 d/asf a/10 c/food";
         Command testCommand = testParser.parseCommand(userInput);
         assertEquals(testCommand.getClass(), AddExpenseCommand.class);
     }
 
     @Test
-    public void addIncomeWithDate_validInput_validCommand() {
+    public void parseCommand_incomeInputWithoutDate_validCommand() {
         Parser testParser = new Parser();
-        String userInput = "add_in d/asf a/10 c/salary D/11/11/2100";
+        String userInput = "add_in c/salary d/a/g/adg/ad/gd/fag/ a/10";
         Command testCommand = testParser.parseCommand(userInput);
         assertEquals(testCommand.getClass(), AddIncomeCommand.class);
     }
