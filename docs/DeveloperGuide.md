@@ -28,6 +28,8 @@
 - Libraries used: [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5), [Ascii Table](https://mvnrepository.com/artifact/de.vandermeer/asciitable)
 - PlantUML Tutorial: [Guide](https://plantuml.com/)
 
+<div style="page-break-after: always;"></div>
+
 ## Setting up and Getting started
 
 ### Set up project
@@ -251,6 +253,8 @@ __Note:__
 
 `isTable` decides whether a list should be displayed to the user as a list or as a table.
 
+<div style="page-break-after: always;"></div>
+
 ## Logging & Documentation
 
 * [Logger Guide](Logging.md)
@@ -287,7 +291,6 @@ Manage fitness routines quickly
 |v2.0|user|have my workouts sorted according to deadline|complete my workouts on time and meet my fitness goals|
 |v2.0|busy user|clear all my current workouts or all the exercises in a workout|make a new workout plan without having to delete one by one|
 
-<div style="page-break-after: always;"></div>
 
 ## Appendix C: Non-Functional Requirements
 
@@ -301,6 +304,8 @@ Manage fitness routines quickly
 * *Ui* - User Interface
 * *GUI* - Graphical User Interface
 * *Mainstream OS* - Windows, MacOS, Linux, Unix
+
+<div style="page-break-after: always;"></div>
 
 ## Appendix E: Instructions for manual testing
 
