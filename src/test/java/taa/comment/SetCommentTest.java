@@ -1,4 +1,4 @@
-package taa.student;
+package taa.comment;
 
 //@@author hozhenhong99
 import org.junit.jupiter.api.Assertions;
@@ -12,9 +12,9 @@ import taa.teachingclass.ClassList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class EditStudentTest {
+public class SetCommentTest {
     @Test
-    void editStudent_userEditsThreeTimes_editStudentCorrectly() throws TaaException {
+    void setComment_userSetsTwoComments_setCommentCorrectly() throws TaaException {
         Ui ui = new Ui();
         Storage storage = new Storage("./data/taa_data.json");
         ClassList classList = new ClassList();
@@ -24,38 +24,39 @@ public class EditStudentTest {
         command1.checkArgument();
         command1.execute(classList, ui, storage);
 
-        String studentInput = "add_student c/cs2102 i/ABC123 n/Jon Lin";
-        Command command2 = Parser.parseUserInput(studentInput);
+        String studentInput1 = "add_student c/cs2102 i/12345678 n/Jon Lin";
+        Command command2 = Parser.parseUserInput(studentInput1);
         command2.parseArgument();
         command2.checkArgument();
         command2.execute(classList, ui, storage);
 
-        String editStudentInput1 = "edit_student c/cs2102 s/1 i/555 n/Jon Lim";
-        Command command3 = Parser.parseUserInput(editStudentInput1);
+        String commentInput1 = "add_student c/cs2102 i/a123b n/Tim Ho";
+        Command command3 = Parser.parseUserInput(commentInput1);
         command3.parseArgument();
         command3.checkArgument();
         command3.execute(classList, ui, storage);
 
-        String editStudentInput2 = "edit_student c/cs2102 s/1 i/09123 n/Jonny Lim";
-        Command command4 = Parser.parseUserInput(editStudentInput2);
+        String commentInput2 = "set_comment c/cs2102 s/1 t/Doing Well";
+        Command command4 = Parser.parseUserInput(commentInput2);
         command4.parseArgument();
         command4.checkArgument();
         command4.execute(classList, ui, storage);
 
-        String editStudentInput3 = "edit_student c/cs2102 s/1 i/a609123x n/Jonny Limbs";
-        Command command5 = Parser.parseUserInput(editStudentInput3);
+        String commentInput3 = "set_comment c/cs2102 s/2 t/Doing poorly";
+        Command command5 = Parser.parseUserInput(commentInput3);
         command5.parseArgument();
         command5.checkArgument();
         command5.execute(classList, ui, storage);
 
-        assertEquals("A609123X", classList.getClassWithId("cs2102").getStudentList().getStudentAt(0)
-                .getId());
-        assertEquals("Jonny Limbs", classList.getClassWithId("cs2102").getStudentList().getStudentAt(0)
-                .getName());
+
+        assertEquals("Doing Well", classList.getClassWithId("cs2102").getStudentList().getStudentAt(0)
+                .getComment());
+        assertEquals("Doing poorly", classList.getClassWithId("cs2102").getStudentList().getStudentAt(1)
+                .getComment());
     }
 
     @Test
-    void editStudent_userAddSameStudentID_taaExceptionThrown() throws TaaException {
+    void setComment_userOverwritesComments_setCommentCorrectly() throws TaaException {
         Ui ui = new Ui();
         Storage storage = new Storage("./data/taa_data.json");
         ClassList classList = new ClassList();
@@ -65,31 +66,30 @@ public class EditStudentTest {
         command1.checkArgument();
         command1.execute(classList, ui, storage);
 
-        String studentInput = "add_student c/cs2102 i/12345678 n/Jon Lin";
-        Command command2 = Parser.parseUserInput(studentInput);
+        String studentInput1 = "add_student c/cs2102 i/12345678 n/Jon Lin";
+        Command command2 = Parser.parseUserInput(studentInput1);
         command2.parseArgument();
         command2.checkArgument();
         command2.execute(classList, ui, storage);
 
-        String studentInput2 = "add_student c/cs2102 i/a123b n/Tim Ho";
-        Command command3 = Parser.parseUserInput(studentInput2);
+        String commentInput1 = "set_comment c/cs2102 s/1 t/Doing Well";
+        Command command3 = Parser.parseUserInput(commentInput1);
         command3.parseArgument();
         command3.checkArgument();
         command3.execute(classList, ui, storage);
 
-        TaaException thrown = Assertions.assertThrows(TaaException.class, () -> {
-            String editStudentInput = "edit_student c/cs2102 s/1 i/A123b n/Jon Lim";
-            Command command4 = Parser.parseUserInput(editStudentInput);
-            command4.parseArgument();
-            command4.checkArgument();
-            command4.execute(classList, ui, storage);
-        }, "TaaException error was expected");
+        String commentInput2 = "set_comment c/cs2102 s/1 t/Doing poorly";
+        Command command4 = Parser.parseUserInput(commentInput2);
+        command4.parseArgument();
+        command4.checkArgument();
+        command4.execute(classList, ui, storage);
 
-        Assertions.assertEquals("A student with that ID already exists", thrown.getMessage());
+        assertEquals("Doing poorly", classList.getClassWithId("cs2102").getStudentList().getStudentAt(0)
+                .getComment());
     }
 
     @Test
-    void addStudent_classDoesNotExist_taaExceptionThrown() throws TaaException {
+    void setComment_classDoesNotExist_taaExceptionThrown() throws TaaException {
         Ui ui = new Ui();
         Storage storage = new Storage("./data/taa_data.json");
         ClassList classList = new ClassList();
@@ -106,8 +106,8 @@ public class EditStudentTest {
         command2.execute(classList, ui, storage);
 
         TaaException thrown = Assertions.assertThrows(TaaException.class, () -> {
-            String editStudentInput = "edit_student c/cs2112 s/1 i/A1234567B n/Jon Lim";
-            Command command3 = Parser.parseUserInput(editStudentInput);
+            String commentInput = "set_comment c/cs2112 s/1 t/good";
+            Command command3 = Parser.parseUserInput(commentInput);
             command3.parseArgument();
             command3.checkArgument();
             command3.execute(classList, ui, storage);
@@ -116,7 +116,7 @@ public class EditStudentTest {
     }
 
     @Test
-    void editStudent_studentIndexDoesNotExist_taaExceptionThrown() throws TaaException {
+    void setComment_studentIndexDoesNotExist_taaExceptionThrown() throws TaaException {
         Ui ui = new Ui();
         Storage storage = new Storage("./data/taa_data.json");
         ClassList classList = new ClassList();
@@ -139,13 +139,12 @@ public class EditStudentTest {
         command3.execute(classList, ui, storage);
 
         TaaException thrown = Assertions.assertThrows(TaaException.class, () -> {
-            String editStudentInput = "edit_student c/cs2102 s/5 i/A123b n/Jon Lim";
-            Command command4 = Parser.parseUserInput(editStudentInput);
+            String commentInput = "set_comment c/cs2102 s/5 t/good";
+            Command command4 = Parser.parseUserInput(commentInput);
             command4.parseArgument();
             command4.checkArgument();
             command4.execute(classList, ui, storage);
         }, "TaaException error was expected");
         Assertions.assertEquals("Invalid student index.", thrown.getMessage());
     }
-
 }

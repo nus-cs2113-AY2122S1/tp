@@ -80,7 +80,7 @@ public class SetCommentCommand extends Command {
         return String.format(
                 MESSAGE_FORMAT_SET_COMMAND_USAGE,
                 COMMAND_SET_COMMENT,
-            KEY_CLASS_ID,
+                KEY_CLASS_ID,
                 KEY_STUDENT_INDEX,
                 KEY_STUDENT_COMMENT
         );
