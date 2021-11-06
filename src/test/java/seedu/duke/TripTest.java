@@ -7,7 +7,9 @@ import seedu.duke.exceptions.SameNameException;
 import seedu.duke.parser.Parser;
 import seedu.duke.trip.Trip;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -61,18 +63,11 @@ class TripTest {
         assertEquals("Harry", personArrayList.get(3).getName());
         assertEquals("Dick", personArrayList.get(4).getName());
     }
-    //@@author
 
     @Test
     public void testEditLocation() throws ForceCancelException {
         testTrip1.setLocation("under the rainbow");
         assertEquals("under the rainbow", testTrip1.getLocation());
-    }
-
-
-    @Test
-    public void testEditLocationFromPerAttribute() {
-        //String parsedString = "-location over the rainbow";
     }
 
     @Test
@@ -96,6 +91,29 @@ class TripTest {
         Parser.parseUserInput(userInput);
         Trip tripToCheck = Storage.getLastTrip();
         assertEquals("09 Jan 1990", tripToCheck.getDateOfTripString());
+    }
+
+    @Test
+    public void testEditExrate() throws ForceCancelException {
+        testTrip1.setExchangeRate("12.0");
+        assertEquals(12.0, testTrip1.getExchangeRate());
+    }
+
+    @Test
+    public void testEditExRateNotParsable() throws ForceCancelException {
+        System.setIn(new ByteArrayInputStream("6.1".getBytes()));
+        Scanner scanner = new Scanner(System.in);
+        Storage.setScanner(scanner);
+        testTrip1.setExchangeRate("something");
+        assertEquals(6.1, testTrip1.getExchangeRate());
+    }
+
+    @Test
+    public void testEditExrateFull() {
+        String userInput = "edit last -exchangerate 0.01";
+        Parser.parseUserInput(userInput);
+        Trip tripToCheck = Storage.getLastTrip();
+        assertEquals(0.01, tripToCheck.getExchangeRate());
     }
 
     @Test
