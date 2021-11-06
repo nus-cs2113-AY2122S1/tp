@@ -35,7 +35,7 @@ public class AddIngrWasteCommand extends Command {
         }
         if (ingredient.isBlank()) {
             throw new FoodoramaException(UI.getIngrNameMissingMsg());
-        }else if (!isNumber(ingredient) & ingredientIndex == -1) {
+        } else if (!isNumber(ingredient) & ingredientIndex == -1) {
             LOGGER.log(Level.INFO, "Ingredient does not exist");
             throw new FoodoramaException(UI.getIngrNotExistMsg());
         } else if (ingredientIndex < 0 || ingredientIndex >= IngredientList.ingredientList.size()) {

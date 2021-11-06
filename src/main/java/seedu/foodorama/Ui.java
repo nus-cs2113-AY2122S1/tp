@@ -571,7 +571,8 @@ public class Ui {
 
     public void printConfirmDelDish(String dishName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Are you sure you want to remove " + dishName + "? Type 'y/yes' to confirm or 'n/no' to disregard" + System.lineSeparator()
+                + "Are you sure you want to remove " + dishName + "? Type 'y/yes' to confirm or 'n/no' to disregard"
+                + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
