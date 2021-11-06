@@ -448,7 +448,7 @@ Input syntax:
 view [expense-number]
 ````
 - Note that entering `view` without an index will print all expenses in the currently opened trip.
-- `view last` to view expense
+- `view last` to view last expense
 
 For example,
 
