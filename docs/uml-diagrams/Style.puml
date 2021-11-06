@@ -2,6 +2,9 @@
 'https://plantuml.com/sequence-diagram
 
 !define LOGIC_COLOR #F8CECC
-
+!define ONLINE_COLOR #4287F5
+!define STORAGE_COLOR #8AFF82
+!define UI_COLOR #F1CCFF
+!define TIMETABLE_COLOR #FCFFAD
 
 @enduml

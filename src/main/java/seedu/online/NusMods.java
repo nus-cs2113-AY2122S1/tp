@@ -100,7 +100,7 @@ public class NusMods {
     }
 
     /**
-     * Retrives detailed mod information from NUSMods and returns it as an Inputstream.
+     * Retrieves detailed mod information from NUSMods and returns it as an Inputstream.
      *
      * @param moduleCode mod to retrieve.
      * @return detailed mod information as an Inputstream.

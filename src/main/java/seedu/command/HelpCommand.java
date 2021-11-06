@@ -46,19 +46,20 @@ public class HelpCommand extends Command {
         printCommandHelps(1, HelpCommand.commandSyntax, HelpCommand.commandAction);
         printCommandHelps(2, SearchCommand.commandSyntax, SearchCommand.commandAction);
         printCommandHelps(3, ShowCommand.commandSyntax, ShowCommand.commandAction);
-        printCommandHelps(4, AddCommand.commandSyntax, AddCommand.commandAction);
-        printCommandHelps(5, DeleteCommand.commandSyntax, DeleteCommand.commandAction);
-        printCommandHelps(6, ClearCommand.commandSyntax, ClearCommand.commandAction);
-        printCommandHelps(7, EditCommand.commandSyntax, EditCommand.commandAction);
-        printCommandHelps(8, TimetableCommand.commandSyntax, TimetableCommand.commandAction);
-        printCommandHelps(9, ChangeSemesterCommand.commandSyntax,
+        printCommandHelps(4, UpdateCommand.commandSyntax, UpdateCommand.commandAction);
+        printCommandHelps(5, AddCommand.commandSyntax, AddCommand.commandAction);
+        printCommandHelps(6, DeleteCommand.commandSyntax, DeleteCommand.commandAction);
+        printCommandHelps(7, ClearCommand.commandSyntax, ClearCommand.commandAction);
+        printCommandHelps(8, EditCommand.commandSyntax, EditCommand.commandAction);
+        printCommandHelps(9, TimetableCommand.commandSyntax, TimetableCommand.commandAction);
+        printCommandHelps(10, ChangeSemesterCommand.commandSyntax,
                 ChangeSemesterCommand.commandAction);
-        printCommandHelps(10, CheckCommand.commandSyntax, CheckCommand.commandAction);
-        printCommandHelps(11, StoreResultsCommand.commandSyntax, StoreResultsCommand.commandAction);
-        printCommandHelps(12, RemoveCommand.commandSyntax, RemoveCommand.commandAction);
-        printCommandHelps(13, CalculateCapCommand.commandSyntax, CalculateCapCommand.commandAction);
-        printCommandHelps(14, TranscriptCommand.commandSyntax, TranscriptCommand.commandAction);
-        printCommandHelps(15, ExitCommand.commandSyntax, ExitCommand.commandAction);
+        printCommandHelps(11, CheckCommand.commandSyntax, CheckCommand.commandAction);
+        printCommandHelps(12, StoreResultsCommand.commandSyntax, StoreResultsCommand.commandAction);
+        printCommandHelps(13, RemoveCommand.commandSyntax, RemoveCommand.commandAction);
+        printCommandHelps(14, CalculateCapCommand.commandSyntax, CalculateCapCommand.commandAction);
+        printCommandHelps(15, TranscriptCommand.commandSyntax, TranscriptCommand.commandAction);
+        printCommandHelps(16, ExitCommand.commandSyntax, ExitCommand.commandAction);
     }
 }
 

@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+skinparam rectangle {
+        BackgroundColor<<PLACEHOLDER>> transparent
+        BorderThickness<<PLACEHOLDER>> .1
+        BorderColor<<PLACEHOLDER>> transparent
+              FontColor<<PLACEHOLDER>> transparent
+               FontSize<<PLACEHOLDER>> 0
+    StereotypeFontColor<<PLACEHOLDER>> transparent
+     StereotypeFontSize<<PLACEHOLDER>> 0
+Shadowing<<PLACEHOLDER>> false
+}
+
+rectangle a <<PLACEHOLDER>> {
+}
+
+frame Timetable {
+
+Component [timetable] TIMETABLE_COLOR
+Component [TimetableDto] TIMETABLE_COLOR
+Component [TimetableItem] TIMETABLE_COLOR
+Component [TimetableUserItem] TIMETABLE_COLOR
+
+}
+
+
+frame UI {
+    [Logic] --> Timetable
+}
+
+frame Logic {
+}
+
+frame Storage {
+}
+
+frame Online {
+}
+
+@enduml
