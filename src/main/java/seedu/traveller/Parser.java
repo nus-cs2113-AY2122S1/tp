@@ -189,7 +189,18 @@ public class Parser {
         return command;
     }
 
-    
+    /**
+     * Parses user input to give a <code>DeleteCommand</code>.
+     * @param userInput Raw user input, with the first command option (delete) removed.
+     * @return Command A <code>DeleteCommand</code> object.
+     */
+    private static Command parseDeleteCommand(String userInput) throws TravellerException {
+        Command command;
+        logger.log(Level.INFO, "Delete command input");
+        String tripName = parseFieldValue(userInput, 0, userInput.length());
+        command = new DeleteCommand(tripName);
+        return command;
+    }
 
     /**
      * Parses user input to give an <code>EditCommand</code>.
