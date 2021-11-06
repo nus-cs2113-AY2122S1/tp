@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 /**
  * Main class of the application.
  */
-public class Duke {
+public class Libmgr {
     private static TextUI ui;
     private static Catalogue catalogue;
     private static Parser parser;
