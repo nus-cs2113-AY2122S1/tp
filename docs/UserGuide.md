@@ -263,15 +263,24 @@ ____________________________________________________________
 <br/>
 
 ### 2.9 Edit a trip: `edit`
-Edits an existing trip from the trip list.
+Edits any main aspect about an existing trip.
 
-#### Format: `edit TRIP_NAME /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
-   * Format is similar to `new`.
+#### Format: `edit TRIP_NAME /name NEW_TRIP_NAME /from NEW_SOURCE_COUNTRY /to NEW_DESTINATION_COUNTRY`
+   * If you want to edit multiple aspects, the format order must be as shown above.
+   * If you only want to edit a trip's name : `edit TRIP_NAME /name NEW_TRIP_NAME`.
+   * If you only want to edit a trip's source country : `edit TRIP_NAME /from NEW_SOURCE_COUNTRY`.
+   * If you only want to edit a trip's destination country : `edit TRIP_NAME /from NEW_DESTINATON_COUNTRY`.
+   * If you want to edit a trip's name and destination country : 
+`edit TRIP_NAME /name NEW_TRIP_NAME /to NEW_SOURCE_COUNTRY`.
+
 
 #### Usage Example:
-   * `edit FamilyTrip2021 /from SKR /to JPN` edits an existing trip called `FamilyTrip2021` to have new `START` and `END` destinations.
+   * `edit FamilyTrip2021 /from SKR /to JPN` edits an existing trip called `FamilyTrip2021` to be from South Korea to
+Japan.
+   * `edit FamilyTrip2021 /name SoloTrip2021` edits an existing trip called `FamilyTrip2021` to now be called 
+`SoloTrip2021`
 
-> ![](documentationPics/tip.png) Edit only allows you to change your Start and End destinations! 
+> ![](documentationPics/tip.png) Edit only allows you to change the name, to and from of a trip.
 > To change your trip itinerary use [edit-item](#210-edit-an-item-edit-item) instead!
 
 <br/>
