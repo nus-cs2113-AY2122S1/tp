@@ -349,6 +349,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 |**|v2.0|health-conscious user|find recipes by calorie count|eat healthier by managing calories|
 |**|v2.0|budget-conscious user|find recipes by pricing|go for the most cost-efficient recipe|
 |**|v2.0|cooking newbie user|find recipes by difficulty|choose the difficulty of the recipe depending on my skill level|
+|**|v2.0|time-strapped user|find recipes by cooking/preparation time|choose a recipe with the appropriate cooking/preparation time, depending on my schedule|
 |**|v2.0|organised user|find recipes by my own tags|sort by my own metric|
 |**|v2.0|user|save and load my recipes from memory|refer to them whenever I want to|
 |*|v2.0|developer|add my own functionality to Gordon in a modular fashion|improve the app to my needs|
