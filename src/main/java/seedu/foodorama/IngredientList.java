@@ -24,9 +24,15 @@ public class IngredientList {
         UI.printEnterWeightOf(ingredientName);
         Scanner in = new Scanner(System.in);
         String ingredientWeight = in.nextLine();
-        double ingredientWeightValue;
 
-        try {
+        int exitloop = 0;
+        double ingredientWeightValue;
+        while (exitloop == 0) {
+            String confirmAdd = "e";
+            if (!isNumber(ingredientWeight)) {
+                throw new FoodoramaException(UI.getInvalidNumberMsg());
+            }
+
             ingredientWeightValue = Double.parseDouble(ingredientWeight);
             while (ingredientWeightValue < 0) {
                 UI.clearTerminalAndPrintNewPage();
@@ -34,14 +40,27 @@ public class IngredientList {
                 ingredientWeight = in.nextLine();
                 ingredientWeightValue = Double.parseDouble(ingredientWeight);
             }
-        } catch (NumberFormatException e) {
-            throw new FoodoramaException(UI.getInvalidNumberMsg());
+            if (Double.isInfinite(ingredientWeightValue) | Double.isNaN(ingredientWeightValue)) {
+                throw new FoodoramaException(UI.printNumericalInputInvalid("dish waste"));
+            } else if (ingredientWeightValue > 10000) {
+                UI.clearTerminalAndPrintNewPage();
+                UI.printIngrValueHigh(ingredientName);
+                confirmAdd = in.nextLine();
+
+                confirmAdd = getConfirmation(confirmAdd);
+                if (confirmAdd.startsWith(NO)) {
+                    UI.clearTerminalAndPrintNewPage();
+                    UI.printEnterWeightOf(ingredientName);
+                    ingredientWeight = in.nextLine();
+                    ingredientWeightValue = Double.parseDouble(ingredientWeight);
+                }
+            }
+            if ((isNumber(ingredientWeight) && (ingredientWeightValue >= 0) && (ingredientWeightValue <= 10000)) | confirmAdd.startsWith(YES)) {
+                exitloop = 1;
+            }
         }
 
-        if (Double.isInfinite(ingredientWeightValue) | Double.isNaN(ingredientWeightValue)) {
-            throw new FoodoramaException(UI.printNumericalInputInvalid("ingredient storage"));
-        }
-
+        ingredientWeightValue = Double.parseDouble(ingredientWeight);
         Ingredient ingredientToAdd = new Ingredient(ingredientName, ingredientWeightValue);
         ingredientList.add(ingredientToAdd);
         UI.printAddedIngredient(ingredientToAdd, ingredientWeightValue);
@@ -318,5 +337,15 @@ public class IngredientList {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public static String getConfirmation(String confirmAdd) {
+        Scanner input = new Scanner(System.in);
+        while (!confirmAdd.matches(YES_NO_REGEX)) {
+            UI.clearTerminalAndPrintNewPage();
+            UI.printInvalidConfirmationSoftLimit();
+            confirmAdd = input.nextLine().toLowerCase();
+        }
+        return confirmAdd;
     }
 }

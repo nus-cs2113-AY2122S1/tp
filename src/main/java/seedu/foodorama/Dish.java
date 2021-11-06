@@ -237,7 +237,7 @@ public class Dish implements Comparable<Dish> {
         Scanner input = new Scanner(System.in);
         while (!confirmAdd.matches(YES_NO_REGEX)) {
             UI.clearTerminalAndPrintNewPage();
-            UI.printInvalidConfirmation();
+            UI.printInvalidConfirmationSoftLimit();
             confirmAdd = input.nextLine().toLowerCase();
         }
         return confirmAdd;
