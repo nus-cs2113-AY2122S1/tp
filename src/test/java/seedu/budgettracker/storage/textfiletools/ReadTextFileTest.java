@@ -18,6 +18,6 @@ public class ReadTextFileTest {
         // assertEquals(0, arrayListOfRawCommands.size());
 
         assertThrows(NullPointerException.class,
-                ()-> arrayListOfRawCommands.size());
+            ()-> arrayListOfRawCommands.size());
     }
 }
