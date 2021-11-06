@@ -416,10 +416,6 @@ public class Parser {
         }
     }
 
-    private boolean isMatch(Matcher matcher) {
-        return matcher.matches();
-    }
-
     private ExpenseCategory extractExpenseCategory(Matcher matcher) throws
             BlankExpenseCategoryException, InvalidExpenseCategoryException {
         String expenseCategory = matcher.group("category").trim();
@@ -896,7 +892,7 @@ public class Parser {
 
     private Command prepareConvertCurrency(String arguments) {
         final Matcher matcher = CURRENCY_CONVERSION_FORMAT.matcher(arguments);
-        if (isMatch(matcher)) {
+        if (matcher.matches()) {
             try {
                 CurrencyType newCurrencyType = extractCurrencyType(matcher);
                 return new CurrencyConversionCommand(newCurrencyType);
