@@ -165,7 +165,7 @@ Use this command to add an item to a day of your trip. An item represents an act
 
 ```
 ____________________________________________________________
-$ add-item FamilyTrip2021 /day 0 /time 7pm /name Check-in to HolidayInn
+$ add-item trip1 /day 0 /time 1900 /name Check-in to HolidayInn
 ____________________________________________________________
 	Added a new item to day 0 of trip FamilyTrip2021.
 ____________________________________________________________
@@ -203,7 +203,7 @@ ____________________________________________________________
 			 Time: [1.0]
 			 Days: 
 				Day 0: 
-					0:	7pm		Check-in at HolidayInn
+					0:	1900		Check-in at HolidayInn
 ____________________________________________________________
 ```
 > ![](documentationPics/info.png) Viewing a trip shows you your trip's start country, destination country, 
@@ -278,14 +278,14 @@ Edits an existing trip from the trip list.
 ### 2.10. Edit an item: `edit-item`
 Edits and updates existing item from a trip and updates it to a new corresponding item.
 
-#### Format: `edit-item TRIP_NAME /day DAY_NUMBER /time NEW_TIME /name NEW_NAME /index ITEM_INDEX`
+#### Format: `edit-item TRIP_NAME /day DAY_NUMBER /index ITEM_INDEX /time NEW_TIME /name NEW_NAME`
 
 #### Usage Example:
 ```
 _________________________________________________________________________________
-$ edit-item FamilyTrip2021 /day 1 /time 9am /name later breakfast /index 1
+$ edit-item trip1 /day 1 /index 1 /time 0900 /name later breakfast
 _________________________________________________________________________________
-	You have just edited item 1 on day 1 of FamilyTrip2021 to later breakfast at 9am
+	You have just edited item 1 on day 1 of trip1 to later breakfast at 0900
 _________________________________________________________________________________
 ```
 
@@ -306,8 +306,8 @@ ________________________________________________________________________________
 	You have just search item keyword n on day 1 in trip called FamilyTrip2021
 	
 	Results: 
-	1. 2pm		mealtime (lunch)
-	2. 5pm		mealtime (dinner)
+	1. 1400		lunch
+	2. 1700		dinner
 _________________________________________________________________________________
 ```
 

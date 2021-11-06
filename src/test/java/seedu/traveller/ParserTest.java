@@ -65,9 +65,19 @@ public class ParserTest {
                 Parser.parse("search-item trip4 /day 0 /key dinner").toString());
 
         EditItemCommand editItemCommand =
-                new EditItemCommand("trip4", 0, "1900", "wake up from bed", 1);
+                new EditItemCommand("trip4", 0, 1, "1900", "wake up from bed");
         assertEquals(editItemCommand.toString(),
-                Parser.parse("edit-item trip4 /day 0 /time 1900 /name wake up from bed /index 1").toString());
+                Parser.parse("edit-item trip4 /day 0 /index 1 /time 1900 /name wake up from bed").toString());
+
+        EditItemCommand editItemCommand2 =
+                new EditItemCommand("trip4", 0, 1, "1900", "");
+        assertEquals(editItemCommand2.toString(),
+                Parser.parse("edit-item trip4 /day 0 /index 1 /time 1900").toString());
+
+        EditItemCommand editItemCommand3 =
+                new EditItemCommand("trip4", 0, 1, "", "wake up from bed");
+        assertEquals(editItemCommand3.toString(),
+                Parser.parse("edit-item trip4 /day 0 /index 1 /name wake up from bed").toString());
 
         ExitCommand exitCommand = new ExitCommand();
         assertEquals(exitCommand.toString(), Parser.parse("exit").toString());
@@ -230,76 +240,68 @@ public class ParserTest {
         //"edit-item trip4 /day 0 /time 1900 /name wake up from bed /index 1"
         // Invalid /day flag input, character
         assertThrows(InvalidNumberOfDaysException.class, () -> {
-            Parser.parse("edit-item trip4 /day a /time 1900 /name wake up from bed /index 1");
+            Parser.parse("edit-item trip4 /day a /index 1 /time 1900 /name wake up from bed");
         });
         // Invalid /day flag input, negative integer
         assertThrows(InvalidNumberOfDaysException.class, () -> {
-            Parser.parse("edit-item trip4 /day -27 /time 1900 /name wake up from bed /index 1");
+            Parser.parse("edit-item trip4 /day -27 /index 1 /time 1900 /name wake up from bed");
         });
         // Invalid /time flag input, negative integer 3 digits
         assertThrows(IllegalTimeValueException.class, () -> {
-            Parser.parse("edit-item trip4 /day 0 /time -100 /name wake up from bed /index 1");
+            Parser.parse("edit-item trip4 /day 0 /index 1 /time -321 /name wake up from bed");
         });
         // Invalid /time flag input, negative integer 4 digits
         assertThrows(IllegalTimeValueException.class, () -> {
-            Parser.parse("edit-item trip4 /day 0 /time -1700 /name wake up from bed /index 1");
+            Parser.parse("edit-item trip4 /day 0 /index 1 /time -1234 /name wake up from bed");
         });
         // Invalid /time flag input, integer 1 digits
         assertThrows(IllegalTimeValueException.class, () -> {
-            Parser.parse("edit-item trip4 /day 0 /time 9 /name wake up from bed /index 1");
+            Parser.parse("edit-item trip4 /day 0 /index 1 /time 7 /name wake up from bed");
         });
         // Invalid /time flag input, integer exceed 2359
         assertThrows(IllegalTimeValueException.class, () -> {
-            Parser.parse("edit-item trip4 /day 0 /time 4321 /name wake up from bed /index 1");
+            Parser.parse("edit-item trip4 /day 0 /index 1 /time 4321 /name wake up from bed");
         });
         // Invalid /time flag input, wrong format
         assertThrows(IllegalTimeFormatException.class, () -> {
-            Parser.parse("edit-item trip4 /day 0 /time 5pm /name wake up from bed /index 1");
+            Parser.parse("edit-item trip4 /day 0 /index 1 /time 7pm /name wake up from bed");
         });
         // Missing /day flag value
         assertThrows(EmptyFieldValueException.class, () -> {
-            Parser.parse("edit-item trip4 /day  /time 1900 /name wake up from bed /index 1");
+            Parser.parse("edit-item trip4 /day  /index 1 /time 0700 /name wake up from bed");
         });
         // Missing /day flag
         assertThrows(InvalidEditItemFormatException.class, () -> {
-            Parser.parse("edit-item trip4 /time 1900 /name wake up from bed /index 1");
+            Parser.parse("edit-item trip4 /index 1 /time 0700 /name wake up from bed");
         });
         // Missing /time flag value
         assertThrows(EmptyFieldValueException.class, () -> {
-            Parser.parse("edit-item trip4 /day 0 /time  /name wake up from bed /index 1");
-        });
-        // Missing /time flag
-        assertThrows(InvalidEditItemFormatException.class, () -> {
-            Parser.parse("edit-item trip4 /day 0 /name wake up from bed /index 1");
+            Parser.parse("edit-item trip4 /day 0 /index 1 /time  /name wake up from bed");
         });
         // Missing /name flag value
         assertThrows(EmptyFieldValueException.class, () -> {
-            Parser.parse("edit-item trip4 /day 0 /time 1900 /name  /index 1");
-        });
-        // Missing /name flag
-        assertThrows(InvalidEditItemFormatException.class, () -> {
-            Parser.parse("edit-item trip4 /day 0 /time 1900 /index 1");
+            Parser.parse("edit-item trip4 /day 0 /index 1 /time 0700 /name ");
         });
         // Missing /index flag value
         assertThrows(EmptyFieldValueException.class, () -> {
-            Parser.parse("edit-item trip4 /day 0 /time 1900 /name wake up from bed /index  ");
+            Parser.parse("edit-item trip4 /day 0 /index  /time 0700 /name wake up from bed");
         });
         // Missing index flag
         assertThrows(InvalidEditItemFormatException.class, () -> {
-            Parser.parse("edit-item trip4 /day 0 /time 1900");
+            Parser.parse("edit-item trip4 /day 0  /time 0700 /name wake up from bed");
         });
         // Wrong order of flags in add-item command
         assertThrows(InvalidEditItemFormatException.class, () -> {
-            Parser.parse("edit-item trip4 /time 1900 /day 0 /name wake up from bed /index 1");
+            Parser.parse("edit-item trip4 /index 1 /day 0 /time 0700 /name wake up from bed");
         });
         assertThrows(InvalidEditItemFormatException.class, () -> {
-            Parser.parse("edit-item trip4 /time 1900 /name wake up from bed /day 0 /index 1");
+            Parser.parse("edit-item trip4 /index 1 /time 0700 /day 0 /name wake up from bed");
         });
         assertThrows(InvalidEditItemFormatException.class, () -> {
-            Parser.parse("edit-item trip4 /time 1900 /day 0 /index 1 /name wake up from bed");
+            Parser.parse("edit-item trip4 /name wake up from bed /index 1 /time 0700 /day 0");
         });
         assertThrows(InvalidEditItemFormatException.class, () -> {
-            Parser.parse("edit-item trip4 /time 1900 /index 1 /day 0 /name wake up from bed");
+            Parser.parse("edit-item /name wake up from bed trip4 /index 1 /time 0700 /day 0");
         });
     }
 

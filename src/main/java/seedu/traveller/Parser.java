@@ -33,6 +33,7 @@ import seedu.traveller.exceptions.InvalidEditItemFormatException;
 import seedu.traveller.exceptions.InvalidShortestTimeException;
 import seedu.traveller.exceptions.InvalidShortestCostException;
 import seedu.traveller.exceptions.TravellerException;
+import seedu.traveller.worldmap.WorldMap;
 
 import java.util.Objects;
 import java.util.logging.Level;
@@ -340,47 +341,98 @@ public class Parser {
      */
     private static Command parseEditItemCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Edit-item command input");
-        String tripName;
-        String itemName;
-        String itemTime;
-        int itemIndex;
-        String rawIndex;
-        String rawDayNumber;
+        Command command;
 
         try {
+            String newTripEventTime = "";
+            String newTripEventName = "";
+            String tripName;
+            int itemIndex;
+            String rawDayNumber;
+
             int dayIndex = getDayFlagIndex(userInput);
             tripName = parseFieldValue(userInput, 0, dayIndex);
 
-            int timeIndex = getTimeFlagIndex(userInput);
-            rawDayNumber = parseFieldValue(userInput, dayIndex + DAY_LENGTH, timeIndex);
-
-            int nameIndex = getNameFlagIndex(userInput);
-            itemTime = parseFieldValue(userInput, timeIndex + TIME_LENGTH, nameIndex);
-
             int indexIndex = getIndexFlagIndex(userInput);
-            itemName = parseFieldValue(userInput, nameIndex + NAME_LENGTH, indexIndex);
+            rawDayNumber = parseFieldValue(userInput, dayIndex + DAY_LENGTH, indexIndex);
+            itemIndex = parseEditNewTripIndex(userInput);
 
-            rawIndex = parseFieldValue(userInput, indexIndex + INDEX_LENGTH, userInput.length());
+            int dayAsInteger = parseValidIndex(rawDayNumber);
+            assert dayAsInteger >= 0 : "Day index is negative.";
 
-            try {
-                itemIndex = Integer.parseInt(rawIndex);
-            } catch (NumberFormatException e) {
-                throw new InvalidEditItemIndexException();
+            if (userInput.contains("/time")) {
+                newTripEventTime = parseEditNewTripEventTime(userInput);
             }
+            if (userInput.contains("/name")) {
+                newTripEventName = parseEditNewTripEventName(userInput);
+            }
+
+            command = new EditItemCommand(tripName, dayAsInteger, itemIndex,
+                    newTripEventTime, newTripEventName);
 
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidEditItemFormatException();
         }
 
-        int dayIndex = parseValidIndex(rawDayNumber);
-        parseValidTime(itemTime);
-        assert dayIndex >= 0 : "Day index is negative.";
-
-        Command command = new EditItemCommand(tripName, dayIndex,
-                itemTime, itemName, itemIndex);
-
         return command;
     }
+
+    private static int parseEditNewTripIndex(String userInput) throws TravellerException {
+        int itemIndex;
+        String rawIndex = "";
+
+        int indexIndex = getIndexFlagIndex(userInput);
+
+        if (userInput.contains("/time")) {
+            int timeIndex = getTimeFlagIndex(userInput);
+            rawIndex = parseFieldValue(userInput, indexIndex + INDEX_LENGTH, timeIndex);
+        } else if (userInput.contains("/name")) {
+            assert !userInput.contains("/time");
+            int nameIndex = getNameFlagIndex(userInput);
+            rawIndex = parseFieldValue(userInput, indexIndex + INDEX_LENGTH, nameIndex);
+        } else {
+            assert !userInput.contains("/name") && !userInput.contains("/time");
+        }
+
+        try {
+            itemIndex = Integer.parseInt(rawIndex);
+        } catch (NumberFormatException e) {
+            throw new InvalidEditItemIndexException(rawIndex);
+        }
+
+        return itemIndex;
+    }
+
+    private static String parseEditNewTripEventTime(String userInput) throws TravellerException {
+        int fromIndex = getTimeFlagIndex(userInput);
+
+        String itemTime;
+
+        if (userInput.contains("/name")) {
+            int nameIndex = getNameFlagIndex(userInput);
+            itemTime = parseFieldValue(userInput,
+                    fromIndex + TIME_LENGTH, nameIndex);
+        } else {
+            assert (!userInput.contains("/name"));
+            itemTime = parseFieldValue(userInput,
+                    fromIndex + TIME_LENGTH, userInput.length());
+        }
+
+        parseValidTime(itemTime);
+
+        return itemTime;
+    }
+
+    private static String parseEditNewTripEventName(String userInput) throws TravellerException {
+        int nameIndex = getNameFlagIndex(userInput);
+        String itemName;
+
+        itemName = parseFieldValue(userInput,
+                nameIndex + NAME_LENGTH, userInput.length());
+
+        return itemName;
+    }
+
 
     /**
      * Parses user input to give an <code>AddDayCommand</code>.
@@ -433,6 +485,9 @@ public class Parser {
             endCountryCode = parseFieldValue(userInput,
                     toIndex + TO_LENGTH, userInput.length()).toUpperCase();
 
+            WorldMap.getValidCountry(startCountryCode);
+            WorldMap.getValidCountry(endCountryCode);
+
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
             assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
 
@@ -464,6 +519,9 @@ public class Parser {
                     fromIndex + FROM_LENGTH, toIndex).toUpperCase();
             endCountryCode = parseFieldValue(userInput,
                     toIndex + TO_LENGTH, userInput.length()).toUpperCase();
+
+            WorldMap.getValidCountry(startCountryCode);
+            WorldMap.getValidCountry(endCountryCode);
 
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
             assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
