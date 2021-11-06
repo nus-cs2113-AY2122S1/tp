@@ -3,7 +3,6 @@ package seedu.duke.parser;
 
 import seedu.duke.Duke;
 import seedu.duke.Ui;
-import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.ByeCommand;
 
 import seedu.duke.commands.DoneUndoCommand;
@@ -47,7 +46,8 @@ public abstract class Parser {
             String commandType = command[0];
             return singleWordCommandProtocol(command, commandType);
         } else {
-            String commandDetails = command[1];
+            String[] splitCommandIntoTwo = response.trim().split(" +", 2);
+            String commandDetails = splitCommandIntoTwo[1];
             String commandType = command[0];
             return multiWordCommandProtocol(response, command, commandDetails, commandType);
         }
@@ -65,9 +65,7 @@ public abstract class Parser {
         case "delete":
             return new DeleteCommand(command);
         case "add":
-            return new AddCommand(command, response);
-        // TODO: Replace with the following commented out code
-        // return AddParser.getAddCommand(commandDetails);
+            return AddParser.getAddCommand(commandDetails);
         case "bye":
             return new ByeCommand();
         case "help":
@@ -132,7 +130,7 @@ public abstract class Parser {
      * @throws NoCommandAttributesException If there is no command attributes detected
      */
     protected static String getCommandAttributes(String commandDetails) throws NoCommandAttributesException {
-        String[] commandAttributes = (commandDetails.trim().split(" +"));
+        String[] commandAttributes = (commandDetails.trim().split(" +", 2));
 
         if (commandAttributes.length < 2) {
             throw new NoCommandAttributesException();
@@ -211,6 +209,9 @@ public abstract class Parser {
     public static double convertEventBudgetToDouble(String budget) throws InvalidBudgetException {
         Double result = null;
         try {
+            if (!budget.matches("[0-9.]+")) {
+                throw new InvalidBudgetException("Event budget can only be a valid number. ");
+            }
             result = Double.parseDouble(budget);
             if (result < 0) {
                 throw new InvalidBudgetException("Event budget needs to be a positive number.");
@@ -229,6 +230,22 @@ public abstract class Parser {
         }
 
         return result;
+    }
+
+    public static int[] extractInt(String input) throws DukeException {
+        String parsedInput = input.replaceAll("[^\\d]", " ").trim();
+        if (parsedInput.isBlank()) {
+            throw new DukeException("Indexes entered need to be valid numbers. ");
+        }
+
+        String[] stringIndexes = parsedInput.split(" +");
+        int [] indexes = new int[stringIndexes.length];
+
+        for (int i = 0; i < stringIndexes.length; i++) {
+            // -1 to obtain the real indexes instead of what the user sees
+            indexes[i] = Integer.parseInt(stringIndexes[i]) - 1;
+        }
+        return indexes;
     }
 
     public static void updateIndexOfLastSelectedEvent(int index) {
