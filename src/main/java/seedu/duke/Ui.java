@@ -143,6 +143,11 @@ public class Ui {
                 + getEvent(event);
     }
 
+    public static String getSelectedMemberMessage(Member member) {
+        return "Here are the details of the member:\n" + member.getName()
+                + member.getTasks();
+    }
+
 
     public static <T> void printList(ArrayList<T> list) {
         AtomicInteger i = new AtomicInteger();
