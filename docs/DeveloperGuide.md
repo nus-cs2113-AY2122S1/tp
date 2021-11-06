@@ -59,7 +59,7 @@ be stored or edited.
 
 The logical component of the program consists multiple classes. Namely: `Parser`,`Command` &
 the various child class of `Command`.
-The class diagram below is a brief overview of how the `Parser`, `Manager` & the various `Command` class
+The class diagram below is a brief overview of how the `Parser`, `Manager`, `Storage` & the various `Command` class
 are related to one another.  
 <br>![Logical Component Partial Class Diagram](https://raw.githubusercontent.com/AY2122S1-CS2113-T13-2/tp/master/UMLdiagrams/LogicalComponentDiagrams/Logical%20Component%20Diagram.jpg)
 
@@ -202,14 +202,14 @@ This show the interaction between the Logical and Manager components during the 
 
 `Find`command goes through similar sequence as compared to the `delete` command sequence diagram.
 The main differences are:
-1. deleteOrder() is replaced with checkIfMatchAndPrint().
-2. deleteParticularOrder() is replaced with getPersonName().
+1. `deleteOrder()` is replaced with `checkIfMatchAndPrint()`.
+2. `deleteParticularOrder()` is replaced with `getPersonName()`.
 
 `Edit`command goes through similar sequence as compared to the `delete` command sequence diagram.
 The main differences are:
-1. additional getQuantity() method under EditCommand class.
-2. deleteOrder() is replaced with editOrder().
-3. editParticularOrder() is called directly from the EditCommand class instead of through a method in Person class.
+1. An additional `getQuantity()` method under `EditCommand` class.
+2. `deleteOrder()` is replaced with `editOrder()`.
+3. `editParticularOrder()` is called directly from the `EditCommand` class instead of through a method in `Person` class.
 
 
 #### Alternate implementation
