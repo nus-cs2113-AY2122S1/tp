@@ -365,7 +365,8 @@ public class Ui {
     public static final String EXPIRY_LONG_DATE = LINE_DIVIDER + System.lineSeparator()
             + "The expiry date is unusually longer than 10 years." + System.lineSeparator()
             + "Are you sure you want to continue saving this expiry date? " + System.lineSeparator()
-            + "Enter 'y' to continue, or 'n' to input a different expiry date: " + System.lineSeparator()
+            + "Please type 'y'/'yes' to confirm, or 'n'/'no' to input a different expiry date: "
+            + System.lineSeparator()
             + LINE_DIVIDER;
 
     public static final String EXPIRY_PASSED_DATE = LINE_DIVIDER + System.lineSeparator()
@@ -1029,8 +1030,8 @@ public class Ui {
     public void printDishWasteValueHigh(String dishName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "The weight of " + dishName + " wasted is unusually greater than 10,000kg!" + System.lineSeparator()
-                + "Are you sure you want to add this weight? \n"
-                + "Enter 'y' to continue, or 'n' to disregard this command" + System.lineSeparator()
+                + "Are you sure you want to add this weight?" + System.lineSeparator()
+                + "Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:" + System.lineSeparator()
                 + LINE_DIVIDER
         );
     }
@@ -1045,16 +1046,15 @@ public class Ui {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "The limit of " + dishName + "  cannot be negative!" + System.lineSeparator()
                 + "Please enter a weight that is not negative:" + System.lineSeparator()
-                + LINE_DIVIDER
-        );
+                + LINE_DIVIDER);
     }
 
     public void printConfirmDishWaste(String dishName, double dishWasteWeight) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Are you sure you want to add wasted " + dishName
-                + " that weighs " + dishWasteWeight + "kg? Type y for Yes and n for No."
-                + System.lineSeparator() + LINE_DIVIDER
-        );
+                + "Are you sure you want to add wasted " + dishName + " that weighs " + dishWasteWeight + "kg?"
+                + System.lineSeparator()
+                + "Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:" + System.lineSeparator()
+                + System.lineSeparator() + LINE_DIVIDER);
     }
 
 
