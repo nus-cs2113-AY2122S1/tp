@@ -434,7 +434,7 @@ Action | Format
 **delete-day** | `delete-day TRIP_NAME /day DAY_INDEX`
 **delete-item** | `delete-item TRIP_NAME /day DAY_INDEX /item ITEM_INDEX`
 **edit** | `edit TRIP_NAME /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
-**edit-item** | `edit-item TRIP_NAME /day DAY_NUMBER /time NEW_ITEM_TIME /name NEW_ITEM_NAME /index ITEM_INDEX`
+**edit-item** | `edit-item TRIP_NAME /day DAY_NUMBER /index ITEM_INDEX /time NEW_ITEM_TIME /name NEW_ITEM_NAME`
 **search-item** |  `search-item TRIP_NAME /day DAY_INDEX /key KEYWORD`
 **shortest-time** | `shortest-time /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
 **shortest-cost** | `shortest-cost /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`

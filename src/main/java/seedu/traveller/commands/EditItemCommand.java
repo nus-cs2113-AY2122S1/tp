@@ -63,17 +63,17 @@ public class EditItemCommand extends Command {
                 + "\n\titemName: " + getItemName();
     }
 
-    private void setNewItemTime(Trip current, String itemTime) {
+    private void setNewItemTime(Trip current, String itemTime) throws TravellerException {
         if (itemTime.equals("")) {
-            this.itemTime = current.getStartCountryCode();
+            this.itemTime = current.getDay(this.dayIndex).getItem(this.itemIndex).getItemTime();
         } else {
             this.itemTime = itemTime;
         }
     }
 
-    private void setNewItemName(Trip current, String itemName) {
+    private void setNewItemName(Trip current, String itemName) throws TravellerException {
         if (itemName.equals("")) {
-            this.itemName = current.getStartCountryCode();
+            this.itemName = current.getDay(this.dayIndex).getItem(this.itemIndex).getItemName();
         } else {
             this.itemName = itemName;
         }
@@ -105,7 +105,7 @@ public class EditItemCommand extends Command {
         ui.printEditItem(tripName, dayIndex, itemName, itemTime, itemIndex);
     }
 
-    private void setAll(Trip trip, String itemTime, String itemName) {
+    private void setAll(Trip trip, String itemTime, String itemName) throws TravellerException {
         setNewItemTime(trip, itemTime);
         setNewItemName(trip, itemName);
     }
