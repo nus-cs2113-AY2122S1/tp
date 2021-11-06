@@ -10,10 +10,10 @@ class MemberDecoderTest {
     @Test
     void decodeMemberFromString_stringValidFormat_expectOneMember() {
         // Setting up
-        String encodedMember = "m | John_Doe";
+        String encodedMember = "m | JOHN_DOE";
         Member decodedMember = MemberDecoder.decodeMemberFromString(encodedMember);
 
-        String expectedName = "John Doe";
+        String expectedName = "JOHN DOE";
         assertEquals(expectedName, decodedMember.getName());
     }
 }
