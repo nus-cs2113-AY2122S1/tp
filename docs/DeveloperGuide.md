@@ -481,3 +481,114 @@ exploratory testing.
        ____________________________________________________________
        ```
   
+### <a name="testing-edit"></a>Editing a contact
+1. Editing a contact with all fields
+    1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
+    2. Test case: `edit 1 -n Ben tan -g bentan -e ben.tan@email.com -te bentn -tw bent4n -l bentan`<br>
+       Expected: Contact at index 1 will have all fields edited. Each field will be displayed after it has been edited.
+       The index of contacts will be changed after editing as the list will be sorted after the edit.
+       ```
+       ____________________________________________________________
+       ConTech has edited the specified contact:
+       Name:     Ben tan
+       Github:   github.com/bentan
+       Email:    ben.tan@email.com
+       Telegram: t.me/bentn
+       LinkedIn: linkedin.com/in/bentan
+       Twitter:  twitter.com/bent4n
+       ____________________________________________________________
+       ```
+
+2. Editing a contact with fewer fields
+    1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
+    2. Test case: `edit 2 -n Charles -g chacharles -e charles@email.com`<br>
+       Expected: Contact at index 2 will have only the name, GitHub and email edited while the other fields, if filled
+       will remain the same. All details will then be displayed.
+
+
+3. Editing a contact with missing or invalid index
+    1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
+    2. Test case: `edit -n Brandon`<br>
+       Expected:  An error message will appear to notify that there are missing parameters.
+       ```
+       ____________________________________________________________
+       There seems to be missing parameters in your request.
+       Please enter command in this format:
+             edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
+             example : edit 0 -n George -g procoder -te george123
+       NOTE : At least one flag and description required
+              Order of parameters do not matter except for INDEX
+              "me" is used as the INDEX for personal contact.
+       ____________________________________________________________
+       ```
+    3. Test case: `edit 4 -n Brandon`<br>
+       Expected: An error message will appear to notify that the index is out of range.
+       ```
+       ____________________________________________________________
+       The index you have input is out of range.
+       Please input a number between 0 and 3 to edit saved contacts.
+       Otherwise, input index "me" if you wish to edit your Personal Contact details.
+       ____________________________________________________________
+       ```
+
+4. Editing a user's personal contact
+    1. Test case: `edit me -n Zack -g zackster -e zack@email.com`<br>
+    2. Expected: User's personal detail will be edited and the personal details will be displayed including fields that
+       were not edited.
+       
+
+5. Editing a contact with duplicates
+    1. Prerequisites: A contact with similar either similar name or details must already be in the contact list. For
+       simplicity, we will re-use the same command from `1`.
+    2. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.   
+    3. Test case: `edit 0 -n Ben tan -g bentan -e ben.tan@email.com -te bentn -tw bent4n -l bentan`<br>
+       Expected: ConTech will display a list of contacts that are already in your contact list with the same fields as
+       the ones you are editing. It will then ask for your confirmation whether you would still like to edit the contact
+       or ignore it.
+       ```
+       ____________________________________________________________
+       One of your saved contacts has a duplicate field:
+       
+       1.
+       Name:     Ben tan
+       Github:   github.com/bentan
+       Email:    ben.tan@email.com
+       Telegram: t.me/bentn
+       LinkedIn: linkedin.com/in/bentan
+       Twitter:  twitter.com/bent4n
+       
+       Do you still want to edit the contact?  (y/n)
+       ____________________________________________________________
+       ```
+    3. Follow up: You can either input `y` which stands for **yes** allowing you to still edit the contact despite having
+       a duplicate field or `n` which stands for **no** to disregard editing the contact.
+
+
+5. Editing a contact with a wrong flag
+    1. Test case: `edit 0 -p ali`<br>
+       Expected:  An error message will appear to notify the user that there appears to be a flag that is not recognised.
+       ```
+       ____________________________________________________________
+       There appears to be a flag that is not recognised.
+       Please try again with a valid flag.
+         -n NAME
+         -g GITHUB
+         -l LINKEDIN
+         -te TELEGRAM
+         -tw TWITTER
+         -e EMAIL
+       ____________________________________________________________
+       ```  
+
+6. Editing a contact with a wrong command
+    1. Test case: `Edit -n Ben`<br>
+       Expected:  An error message will appear to notify the user that ConTech is unable to understand the command and
+       that the user can try to input a valid command. The issue with the test case is that the `edit` command has a capital
+       E.
+       ```
+       ____________________________________________________________
+       ConTech is unable to understand your request.
+       Please try again with a valid command.
+       ____________________________________________________________
+       ```  
+
