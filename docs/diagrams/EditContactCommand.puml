@@ -6,7 +6,19 @@ hide footbox
 activate ":EditContactCommand"
 
 alt#gold #lightgreen PERSONAL_CONTACT_INDEX
-    ref over ":EditContactCommand", ":EditContactCommand" :edit personal contact
+    ":EditContactCommand" -> ":EditContactCommand":updatePersonalContact()
+    activate ":EditContactCommand"
+    ":EditContactCommand" -> ":personalContact":editContact(contactDetails:String[])
+    activate ":personalContact"
+    ":personalContact" --> ":EditContactCommand":
+    deactivate ":personalContact"
+    ":EditContactCommand" -> ":TextUi":editPersonalContactMessage(personalContact:Contact)
+    activate ":TextUi"
+    ":TextUi" --> ":EditContactCommand":
+    deactivate ":TextUi"
+    ":EditContactCommand" --> ":EditContactCommand":
+    deactivate ":EditContactCommand"
+
 
 else #lightblue ALL_CONTACTS_INDEX
     ":EditContactCommand" -> ":ExceptionTextUi":numOutOfRangeEditMessage(contactListSize:int)
