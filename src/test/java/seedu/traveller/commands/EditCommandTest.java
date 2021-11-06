@@ -91,6 +91,7 @@ class EditCommandTest {
     public void editCommand_create_success() {
         String expectedOutput = "Edit command:"
                 + "\n\ttripName: Trip1"
+                + "\n\tnewTripName: "
                 + "\n\tstartCountry: SIN"
                 + "\n\tendCountry: JPN";
 
