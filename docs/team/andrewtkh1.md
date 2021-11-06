@@ -41,7 +41,7 @@ This program enables users to keep track of multiple food orders from a pre-set 
     - Setup Organization & Team Repository.
     - Setup repo's `branch protection` to prevent unauthorized merging.
     - Setup Repo's overall `Markdown` language to be used.
-    - Manage `Issue tracker` to ensure no task is left out & all pending tasks are currently tracked.
+    - Manage `Issue tracker` to ensure no task is left out & all pending tasks are tracked.
     - Manage Milestones (`v1.0`, `v1.0 wrap-up` ,`v1.5`, `v2.0`, `v2.1`)
     - Managed [Releases](https://github.com/AY2122S1-CS2113-T13-2/tp/releases) (`v1.0`, `v2.0`,`v2.1`)
     - PR reviewed with non-trivial comments. ([#101](https://github.com/AY2122S1-CS2113-T13-2/tp/pull/101) ,[#37](https://github.com/AY2122S1-CS2113-T13-2/tp/pull/37) ,[#34](https://github.com/AY2122S1-CS2113-T13-2/tp/pull/34) ,[#42](https://github.com/AY2122S1-CS2113-T13-2/tp/pull/42))
