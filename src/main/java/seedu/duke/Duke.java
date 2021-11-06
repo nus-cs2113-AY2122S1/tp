@@ -2,6 +2,8 @@ package seedu.duke;
 
 import seedu.duke.parser.Parser;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -12,7 +14,7 @@ public class Duke {
     private static boolean isProgramRunning = true;
 
     /**
-     * Prints the welcome message and initializes {@link Scanner}, {@link Logger}, and {@link com.google.gson.Gson},
+     * Prints the welcome message and initializes {@link Scanner}, {@link Logger}, and {@link Gson},
      * and reads the user's save file.
      */
     private static void beginWelcome() {
