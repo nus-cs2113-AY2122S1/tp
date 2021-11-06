@@ -119,7 +119,9 @@ public class Dish implements Comparable<Dish> {
         Scanner in = new Scanner(System.in);
         String dishWaste = in.nextLine();
         while (!isNumber(dishWaste)) {
-            UI.clearTerminalAndPrintNewPage();
+            if (!isNumber(dishWaste)) {
+                throw new FoodoramaException(UI.getInvalidNumberMsg());
+            }
             UI.printInvalidDishName();
             dishWaste = in.nextLine();
         }
