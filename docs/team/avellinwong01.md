@@ -14,7 +14,7 @@ Designed for fast typists, it can help to augment the day-to-day tasks of a libr
 ### Enhancements Implemented
 
 1. Implemented `AddCommand` class with a single item type in v1.0
-2. Implemented `EditCommand` class and all associated classes to edit 
+2. Implemented `EditCommand` class and all associated classes to edit attributes of each item type (Audio, Book, Magazine, Video and Miscellaneous)
 3. Implemented `InfoCommand` class to display a variety of library information to the user
 4. Implemented `HelpCommand` class to display a list of valid input commands to the user 
 5. Implemented `UnknownCommand` class to display a message informing the user when he has inputted an invalid command
@@ -31,7 +31,7 @@ Designed for fast typists, it can help to augment the day-to-day tasks of a libr
 2. Wrote documentation for
    1. Setting up the project
    2. Design - Commands component
-   3. Design Common component 
+   3. Design - Common component 
    4. Implementation - Edit Command
 3. Contributed documentation for 
    1. Design - Architecture
