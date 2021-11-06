@@ -14,7 +14,7 @@ public class AddLoanParser implements ParserPrefix {
         PREFIX_DATE };
 
     public static AddLoanCommand parse(String args) throws ParserException {
-        HashMap<String, String> argumentMap = Parser.splitArguments(args, PREFIX_ARRAY);
+        HashMap<String, String> argumentMap = Parser.splitArgs(args, PREFIX_ARRAY);
 
         String name = ParserUtil.parseName(argumentMap.get(PREFIX_NAME), IS_NOT_COMPULSORY);
         double amount = ParserUtil.parseAmount(argumentMap.get(PREFIX_AMOUNT), IS_NOT_COMPULSORY);

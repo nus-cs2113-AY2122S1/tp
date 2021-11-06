@@ -10,7 +10,7 @@ public class StatYearParser implements ParserPrefix {
         PREFIX_TYPE };
 
     public static StatYearCommand parse(String args) throws ParserException {
-        HashMap<String, String> argumentMap = Parser.splitArguments(args, PREFIX_ARRAY);
+        HashMap<String, String> argumentMap = Parser.splitArgs(args, PREFIX_ARRAY);
         int type = ParserUtil.parseType(argumentMap.get(PREFIX_TYPE), IS_COMPULSORY);
         return new StatYearCommand(type);
     }

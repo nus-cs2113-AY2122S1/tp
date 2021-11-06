@@ -11,7 +11,7 @@ public class ListRecordParser implements ParserPrefix {
     public static final String[] PREFIX_ARRAY = {PREFIX_MONTH, PREFIX_CATEGORY};
 
     public static ListRecordsCommand parse(String args) throws ParserException {
-        HashMap<String, String> argumentMap = Parser.splitArguments(args, PREFIX_ARRAY);
+        HashMap<String, String> argumentMap = Parser.splitArgs(args, PREFIX_ARRAY);
 
         int month = ParserUtil.parseMonth(argumentMap.get(PREFIX_MONTH));
         Category category = ParserUtil.parseListCategory(argumentMap.get(PREFIX_CATEGORY));
