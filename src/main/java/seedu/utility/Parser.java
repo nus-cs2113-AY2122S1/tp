@@ -157,9 +157,9 @@ public class Parser {
             = Pattern.compile("I" + DATA_SEPARATOR + "(?<description>.+)" + DATA_SEPARATOR
             + "(?<amount>.+)" + DATA_SEPARATOR + "(?<category>.+)" + DATA_SEPARATOR + "(?<date>.+)");
     private static final Pattern SETTINGS_DATA_FORMAT = Pattern.compile("(?<currency>.+)" + DATA_SEPARATOR
-            + "(?<threshold>.+)" + DATA_SEPARATOR + "(?<food>.+)" + DATA_SEPARATOR + "(?<transport>.+)" 
+            + "(?<threshold>.+)" + DATA_SEPARATOR + "(?<overall>.+)" + DATA_SEPARATOR + "(?<food>.+)" + DATA_SEPARATOR + "(?<transport>.+)"
             + DATA_SEPARATOR + "(?<medical>.+)" + DATA_SEPARATOR + "(?<bills>.+)" + DATA_SEPARATOR 
-            + "(?<entertainment>.+)" + DATA_SEPARATOR + "(?<misc>.+)" + DATA_SEPARATOR + "(?<overall>.+)");
+            + "(?<entertainment>.+)" + DATA_SEPARATOR + "(?<misc>.+)");
 
     private static final String DATE_FORMAT = "dd/MM/yyyy";
     private static final double INPUT_AMOUNT_LIMIT = 1000000000;
@@ -907,8 +907,8 @@ public class Parser {
         StringBuilder data = new StringBuilder(currency.toString() + ",");
         data.append(budgetManager.getThreshold()).append(",");
         for (ExpenseCategory category : ExpenseCategory.values()) {
-            // NULL is the category after OVERALL. We do not expect NULL to have a value thus we break here.
-            if (category == ExpenseCategory.OVERALL) {
+            // NULL is the category after MISC. We do not expect NULL to have a value thus we break here.
+            if (category == ExpenseCategory.MISC) {
                 data.append(budgetManager.getBudget(category));
                 break;
             }

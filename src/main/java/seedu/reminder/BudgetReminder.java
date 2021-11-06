@@ -6,10 +6,15 @@ public abstract class BudgetReminder {
     protected double currBudgetAmount;
     protected double budgetLimit;
 
-    protected double roundTwoDecimalPlace(double value) {
+    protected String roundTwoDecimalPlace(double value) {
         double intermediateValue = Math.round(value * 100);
         double roundedValue = intermediateValue / 100;
-        return roundedValue;
+        String displayValue = Double.toString(roundedValue);
+        int decimalPointIndex = displayValue.indexOf(".");
+        if (displayValue.substring(decimalPointIndex).length() < 3) {
+            displayValue += "0";
+        }
+        return displayValue;
     }
 
     @Override

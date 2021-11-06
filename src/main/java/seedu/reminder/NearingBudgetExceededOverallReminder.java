@@ -19,9 +19,9 @@ public class NearingBudgetExceededOverallReminder extends DoubleReminder {
                 + roundTwoDecimalPlace(currBudgetAmount) + "/$" + roundTwoDecimalPlace(budgetLimit)
                 + ") but exceeded " + month + " OVERALL budget ($" + roundTwoDecimalPlace(currOverallAmount)
                 + "/$" + roundTwoDecimalPlace(overallLimit) + ")."
-                + "\n Consider adjusting your OVERALL budget to $" + roundTwoDecimalPlace(totalBudget)
+                + "\nConsider adjusting your OVERALL budget to $" + roundTwoDecimalPlace(totalBudget)
                 + " before adjusting your " + budgetName + " budget!"
-                + "\n Currently you cannot extend your " + budgetName
+                + "\nCurrently you cannot extend your " + budgetName
                 + " budget without first extending your OVERALL budget!";
     }
 }

@@ -14,7 +14,6 @@ public class UnableToSetOverallBudgetReminder extends BudgetReminder {
     @Override
     public String toString() {
         return "OVERALL budget must be greater than all sub-budgets and spending!"
-                + "\n Currently (sub-budgets + spending)/OVERALL budget: $" + roundTwoDecimalPlace(totalBudget)
-                + "/" + "$" + roundTwoDecimalPlace(budgetLimit);
+                + "\nCurrently sum of all sub-budgets/spending: $" + roundTwoDecimalPlace(totalBudget);
     }
 }

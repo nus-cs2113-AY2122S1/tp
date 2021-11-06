@@ -23,16 +23,16 @@ public class DoubleNearingBudgetReminder extends DoubleReminder {
                     + roundTwoDecimalPlace(currBudgetAmount) + "/$" + roundTwoDecimalPlace(budgetLimit)
                     + ") and " + month + " OVERALL budget ($" + roundTwoDecimalPlace(currOverallAmount)
                     + "/$" + roundTwoDecimalPlace(overallLimit) + ")."
-                    + "\n Consider adjusting your OVERALL budget before adjusting your " + budgetName + " budget!"
-                    + "\n Currently you cannot extend your " + budgetName
+                    + "\nConsider adjusting your OVERALL budget before adjusting your " + budgetName + " budget!"
+                    + "\nCurrently you cannot extend your " + budgetName
                     + " budget without first extending your OVERALL budget!";
         } else {
             return "Nearing both " + month + " " + budgetName + " budget ($"
                     + roundTwoDecimalPlace(currBudgetAmount) + "/$" + roundTwoDecimalPlace(budgetLimit)
                     + ") and " + month + " OVERALL budget ($" + roundTwoDecimalPlace(currOverallAmount)
                     + "/$" + roundTwoDecimalPlace(overallLimit) + ")."
-                    + "\n Consider adjusting your OVERALL budget before adjusting your " + budgetName + " budget!"
-                    + "\n Currently you can extend your " + budgetName
+                    + "\nConsider adjusting your OVERALL budget before adjusting your " + budgetName + " budget!"
+                    + "\nCurrently you can extend your " + budgetName
                     + " budget up until $" + roundTwoDecimalPlace(extendedBudget) + "!";
         }
 

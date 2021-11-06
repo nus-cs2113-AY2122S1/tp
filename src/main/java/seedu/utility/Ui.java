@@ -352,25 +352,18 @@ public class Ui {
 
     public void printBudgetReminder(BudgetReminder reminder) {
         if (reminder.toString() != null) {
-            printLine();
             System.out.println(reminder);
             printLine();
         }
     }
 
-    /**
-     * Prints the budget set confirmation feedback.
-     *
-     * @param category The category of expense.
-     * @param amount The budget limit for the given category.
-     */
-    public void printBudgetSetConfirmation(double amount, ExpenseCategory category) {
-        printLine();
-        System.out.printf("%s budget has been set to $%.2f", category.toString(), amount);
-        System.out.print(NEW_LINE);
-        printLine();
+    public void printSetBudgetReminder(BudgetReminder reminder) {
+        if (reminder.toString() != null) {
+            printLine();
+            System.out.println(reminder);
+            printLine();
+        }
     }
-
 
     /**
      * Prints the budget for the given category.

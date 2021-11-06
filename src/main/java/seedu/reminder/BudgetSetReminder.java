@@ -2,10 +2,10 @@ package seedu.reminder;
 
 public class BudgetSetReminder extends BudgetReminder {
 
-    public BudgetSetReminder(String budgetName, double currBudgetAmount, double budgetLimit) {
+    public BudgetSetReminder(String budgetName, double budgetLimit) {
         this.month = null;
         this.budgetName = budgetName;
-        this.currBudgetAmount = currBudgetAmount;
+        this.currBudgetAmount = 0;
         this.budgetLimit = budgetLimit;
     }
 
