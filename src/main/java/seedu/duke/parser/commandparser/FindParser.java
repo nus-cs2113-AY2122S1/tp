@@ -14,16 +14,15 @@ import static seedu.duke.parser.ItemType.EVENT;
 
 public abstract class FindParser extends Parser {
 
-    private static final int MAX_SIZE = Duke.eventCatalog.size();
-    //private static final Event[] findResults = new Event[MAX_SIZE];
-    private static int numberOfEventsFound = 0;
+    private static int numberOfEventsFound;
+    private static String result;
 
     public static Command getFindCommand(String[] command, String commandDetails) {
         try {
             ItemType itemType = getItemType(commandDetails);
             if (itemType == EVENT) {
                 parseFindKeyword(command);
-                return new FindCommand(findResults);
+                return new FindCommand(result);
             }
             throw new InvalidItemTypeException();
         } catch (InvalidItemTypeException e) {
@@ -36,7 +35,7 @@ public abstract class FindParser extends Parser {
 
     private static void parseFindKeyword(String[] command) throws DukeException {
         String keyword = extractKeywords(command);
-        filterEventsByKeyword(keyword);
+        result = filterEvents(keyword);
         if (noEventsFound()) {
             throw new DukeException("No matching events found!");
         }
@@ -54,14 +53,18 @@ public abstract class FindParser extends Parser {
         return keyword.toString().trim();
     }
 
-    private static void filterEventsByKeyword(String keyword) {
-        for (int i = 0; i < MAX_SIZE; i++) {
+    private static String filterEvents(String keyword) {
+        StringBuilder result = new StringBuilder();
+        numberOfEventsFound = 0;
+        for (int i = 0; i < Duke.eventCatalog.size(); i++) {
             Event event = Duke.eventCatalog.get(i);
             if (event.getTitle().toLowerCase().contains(keyword.toLowerCase())) {
-                findResults[i] = event;
+                result.append(i + 1).append(". ");
+                result.append(event.getTitle()).append("\n");
                 numberOfEventsFound++;
             }
         }
+        return result.toString();
     }
 
     private static boolean noEventsFound() {
