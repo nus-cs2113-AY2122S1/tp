@@ -122,7 +122,7 @@ public class Ui {
     }
 
     public static void printExpenseAddedSuccess() {
-        System.out.println("Your expense has been added successfully");
+        System.out.println("Your expense has been added successfully!");
     }
 
     public static void printExpensesInList(ArrayList<Expense> listOfExpenses) {
@@ -317,7 +317,7 @@ public class Ui {
         System.out.println("The person you entered is not in the expense, please try again.");
     }
 
-
+    //@@author joshualeeky
     public static void printAmount(Person person, Trip trip) {
         System.out.println(person.getName() + " spent "
                 + stringForeignMoney(person.getMoneyOwed().get(person.getName()))
@@ -341,6 +341,7 @@ public class Ui {
             }
         }
     }
+    //@@author
 
     public static void printIncorrectAmount(double amount) {
         System.out.println("The amount you have entered is incorrect, it is either too high or low. The total "
@@ -508,11 +509,6 @@ public class Ui {
     //@@author lixiyuan416
     public static void equalSplitPrompt() {
         System.out.println("Enter \"equal\" if expense is to be evenly split, enter individual spending otherwise");
-    }
-
-    public static void autoAssignIndividualSpending() {
-        System.out.println("Finished allocating expense amount. There are people involved that did not need to pay.");
-        System.out.println();
     }
 
     public static void askUserToConfirm() {
