@@ -238,6 +238,10 @@ public class Expense implements ExpenseSplitter {
         return description;
     }
 
+    public void setDate(String date) {
+        this.date = LocalDate.parse(date, inputPattern);
+    }
+
     public void setCategory(String category) {
         this.category = category;
     }
