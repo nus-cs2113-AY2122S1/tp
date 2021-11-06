@@ -29,7 +29,7 @@ public class IngredientList {
             ingredientWeightValue = Double.parseDouble(ingredientWeight);
             while (ingredientWeightValue < 0) {
                 UI.clearTerminalAndPrintNewPage();
-                UI.printInvalidIngredientWeight(ingredientName);
+                UI.printInvalidIngrWeight(ingredientName);
                 ingredientWeight = in.nextLine();
                 ingredientWeightValue = Double.parseDouble(ingredientWeight);
             }

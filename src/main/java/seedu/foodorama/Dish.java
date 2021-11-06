@@ -69,12 +69,16 @@ public class Dish implements Comparable<Dish> {
         double userLimit;
         try {
             userLimit = Double.parseDouble(inputLimit);
-            if (userLimit < 0) {
-                throw new FoodoramaException("");
+            while (userLimit < 0) {
+                UI.clearTerminalAndPrintNewPage();
+                UI.printInvalidDishLimitValue(dishName);
+                inputLimit = in.nextLine();
+                userLimit = Double.parseDouble(inputLimit);
             }
-        } catch (NumberFormatException | FoodoramaException e) {
+        } catch (NumberFormatException e) {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
+
         limit = userLimit;
         UI.printLimitSet(dishName, limit);
     }
