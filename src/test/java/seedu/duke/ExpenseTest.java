@@ -22,7 +22,7 @@ class ExpenseTest {
         String[] stringArray = {"", "USA", "01-12-2020", "USD", "0.74", "Albert, Betty, Chris, Don, Evan"};
         Trip trip = new Trip(stringArray);
         Storage.getListOfTrips().add(trip);
-        Storage.setOpenTrip(0);
+        Storage.setOpenTrip(Storage.getListOfTrips().indexOf(trip));
         final double amountSpent = 600.0;
         final String description = "Dinner at fancy restaurant";
         Person person1 = new Person("Albert");
