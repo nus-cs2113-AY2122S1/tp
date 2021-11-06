@@ -2,58 +2,21 @@
 hide footbox
 'https://plantuml.com/sequence-diagram
 
--> ":MainParser": execute()
-activate ":MainParser"
-
-
-":MainParser" -> ":MainParser":getCommandWord(userInput:String)
-activate ":MainParser"
-":MainParser" -> ":EditContactParser" :EditContactParser(userInput:String)
-activate ":EditContactParser"
-
-
-":EditContactParser" -> ":EditContactParser" :parseContactDetails(userInput:String)
-activate ":EditContactParser"
-":EditContactParser" --> ":EditContactParser" :details:String[]
-deactivate ":EditContactParser"
-
-
-":EditContactParser" -> ":IndexParser" :getIndexFromInput(userInput:String)
-activate ":IndexParser"
-":IndexParser" --> ":EditContactParser" :userIndex:int
-deactivate ":IndexParser"
-
-":EditContactParser" --> ":MainParser" : EditContactCommand(details, userIndex):Command
-deactivate ":EditContactParser"
-
-":MainParser" -> ":EditContactCommand" : EditContactCommand:Command
-
+-> ":EditContactCommand": execute()
 activate ":EditContactCommand"
 
-":EditContactCommand" -> ":ContactList" : editContact(contactDetails:String[], contactIndex:int)
-activate ":ContactList"
+alt#gold #lightgreen PERSONAL_CONTACT_INDEX
+    ref over ":EditContactCommand", ":EditContactCommand" :edit personal contact
 
-loop until all contactDetails have been updated
-alt#gold #lightgreen NAME_INDEX
-    ":ContactList" -> ":ContactList" : setName(contactDetails(i))
-    else GITHUB_INDEX
-    ":ContactList" -> ":ContactList" : setGithub(contactDetails(i))
-    else LINKEDIN_INDEX
-    ":ContactList" -> ":ContactList" : setLinkedin(contactDetails(i))
-    else TELEGRAM_INDEX
-    ":ContactList" -> ":ContactList" : setTelegram(contactDetails(i))
-    else TWITTER_INDEX
-    ":ContactList" -> ":ContactList" : setTwitter(contactDetails(i))
-    else EMAIL_INDEX
-    ":ContactList" -> ":ContactList" : setEmail(contactDetails(i))
-end
+else #lightblue ALL_CONTACTS_INDEX
+    ":EditContactCommand" -> ":ExceptionTextUi":numOutOfRangeEditMessage(contactListSize:int)
+    activate ":ExceptionTextUi"
+    ":ExceptionTextUi" --> ":EditContactCommand":
+    deactivate ":ExceptionTextUi"
+
+else #gold CONTACT_INDEX
+   ref over ":EditContactCommand", ":EditContactCommand" :edit contact
 end
 
-":ContactList"-->":EditContactCommand"
-deactivate ":ContactList"
-
-":EditContactCommand"-->":MainParser"
-deactivate ":EditContactCommand"
-deactivate ":MainParser"
 
 @enduml
