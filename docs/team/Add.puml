@@ -1,0 +1,69 @@
+@startuml
+[-> AddCommand : execute()
+activate AddCommand
+
+alt AddFlag equals to LESSON
+    AddCommand -> AddUi : getModuleCode()
+    activate AddUi
+    AddUi --> AddCommand : response
+    deactivate AddUi
+    AddCommand -> NusMods : fetchModuleCode()
+    activate NusMods
+    NusMods --> AddCommand : module
+    deactivate NusMods
+    alt moduleExist
+        AddCommand -> TextUi : printAddMessage()
+        activate TextUi
+        TextUi --> AddCommand
+        deactivate TextUi
+        AddCommand -> AddCommand : addLesson()
+        activate AddCommand
+        Loop for each lesson type
+            AddCommand -> AddCommand : getLessonDetails()
+            activate AddCommand
+            AddCommand --> AddCommand : lesson details
+            deactivate AddCommand
+        end
+        AddCommand -> AddUi : printLessonDetails
+        activate AddUi
+        loop for each lesson type
+            AddUi -> AddUi : getLessonDetails()
+            activate AddUi
+            AddUi --> AddUi : lesson details
+            deactivate AddUi
+            AddUi -> AddUi : getCommand()
+            activate AddUi
+            AddUi -> timetable : addLesson()
+            activate timetable
+            timetable --> AddUi
+            deactivate timetable
+            AddUi --> AddUi
+            deactivate AddUi
+        end
+        AddUi --> AddCommand
+        deactivate AddUi
+        AddCommand --> AddCommand
+        deactivate AddCommand
+    end
+else AddFlag equals to EVENT
+    AddCommand -> AddCommand : addEvent()
+    activate AddCommand
+    AddCommand -> AddCommand : getEventDetails()
+    activate AddCommand
+    AddCommand -> TimetableUserItem : new TimetableUserItem()
+    activate TimetableUserItem
+    TimetableUserItem -->AddCommand : event
+    deactivate TimetableUserItem
+    AddCommand --> AddCommand : event
+    deactivate AddCommand
+    AddCommand -> timetable : addEvent()
+    activate timetable
+    timetable --> AddCommand
+    deactivate timetable
+    AddCommand --> AddCommand
+    deactivate AddCommand
+end
+<-- AddCommand
+deactivate AddCommand
+
+@enduml
