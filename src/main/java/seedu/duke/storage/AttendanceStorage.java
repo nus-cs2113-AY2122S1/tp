@@ -4,10 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.util.*;
 
 import seedu.duke.Ui;
 import seedu.duke.attendance.Attendance;
@@ -194,13 +191,16 @@ public class AttendanceStorage {
         try {
             Scanner dukeAttendanceScanner = new Scanner(attendanceCsvFile);
             dukeAttendanceScanner.nextLine();
+            int index = 1;
             while (dukeAttendanceScanner.hasNextLine()) {
                 String fullAttendanceDetails = dukeAttendanceScanner.nextLine();
                 String[] attendanceDetails = fullAttendanceDetails.split("\\,", 2);
                 name = attendanceDetails[0];
                 attended = attendanceDetails[1];
                 Attendance attendance = new Attendance(name, trainingName, attended);
+                attendance.setIndex(index);
                 attendanceList.addAttendance(attendance);
+                index++;
             }
         } catch (FileNotFoundException e) {
             System.out.println("file not found!");
@@ -286,7 +286,7 @@ public class AttendanceStorage {
             dukeAttendanceWriter.write(',');
             dukeAttendanceWriter.write('\n');
             for (int i = 1; i <= attendanceListSize; i++) {
-                if (attendanceList.getAttendanceTrainingName(i).equals(trainingName)) {
+                if (attendanceList.getAttendanceTrainingName(i).equals(trainingName.toUpperCase(Locale.ROOT))) {
                     dukeAttendanceWriter.write(attendanceList.getAttendanceMemberName(i));
                     dukeAttendanceWriter.write(',');
                     dukeAttendanceWriter.write(attendanceList.getAttendancePresentOrLate(i));
@@ -323,8 +323,8 @@ public class AttendanceStorage {
     public static void deleteAttendance(AttendanceList attendanceList, String trainingName, int index) {
         assert index >= 1;
         int count = 1;
-        for (int i = 1; i <= attendanceList.getAttendanceListSize(); i++) {
-            if (attendanceList.getAttendanceTrainingName(i).equals(trainingName)) {
+        for (int i = 1; i <= attendanceList.getAttendanceListSize(); i++) { //iterate entire attendance list
+            if (attendanceList.getAttendanceTrainingName(i).equals(trainingName.toUpperCase(Locale.ROOT))) { //if entry has this training name
                 if (count == index) {
                     Attendance toDelete = attendanceList.deleteAttendance(i);
                     Ui.printDeletedAttendanceMessage(toDelete);

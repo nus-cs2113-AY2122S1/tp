@@ -347,7 +347,7 @@ Have too many training schedules, and can't find the one you want? Just use the 
     * **Expected Output:**
    ```
    Added an Attendance entry:
-   Name: JOHN HWEE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
+   [1] Name: JOHN HWEE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
    ```
 
 ### Delete Attendance
@@ -373,7 +373,7 @@ You can delete existing attendance entries with the help of the `delete /att` co
    n
    => delete /att /t WEEKLY FRIDAY TRAINING 1 /i 1
    You have removed attendance entry:
-   Name: ADAM | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
+   [1] Name: ADAM | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
    ```
 
 ### List Attendance
@@ -381,30 +381,21 @@ You can delete existing attendance entries with the help of the `delete /att` co
 
 * `list /att` This lists out entries in CCA Manager's Attendance List.
     * `list /att` takes in several arguments
-      * use `/t <TRAINING_NAME>` to look for all attendances for a particular training
-      * use `/d <1 OR 0>` to further filter the list to show attendances of people who were present or absent
-        * 1 displays the entries of members who were present for that training
-        * 0 displays the entries of members who were absent for that training
+      * use `/t <TRAINING_NAME>` to look for all attendances for a particular training.
     * In addition, there will be a prompt to view the full attendance list that consists of all trainings such as:
       ```
       ===== Would you like to list the full attendance sheet? (y / n) =====
       ```
     * **Format:**
-        * `list /att [/t TRAINING_NAME] [/d 1_OR_0]`
+        * `list /att [/t TRAINING_NAME]`
     * **Examples:**
         * `list /att /t Weekly Friday Training 1`
-        * `list /att /t Weekly Friday Training 1 /d 1`
     * **Expected Output:**
       * Attendance entries for particular training 'Weekly Friday Training 1':
         ```
         [1] Name: JOHN HWEE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
         [2] Name: MARK LEE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [0]
         [3] Name: BILLIE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
-        ```
-      * Filtered attendance list of 'Weekly Friday Training 1' for those who were present:
-        ```
-        [1] Name: JOHN HWEE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
-        [2] Name: BILLIE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
         ```
 
 ## Command Summary
@@ -425,4 +416,4 @@ Action| Syntax |Remarks|
 |find training| `find [/t TRAINING_NAME_KEYWORD]` | Searches for valid entries based on training name
 |list member| `list /m` |
 |list trainings| `list [/t]` |
-|list attendance entries | `list /att [/t TRAINING_NAME] [/d 1_OR_0]` |Training name is compulsory, 1_OR_0 is an optional field.
+|list attendance entries | `list /att [/t TRAINING_NAME]` |

@@ -197,10 +197,8 @@ public class Ui {
     }
 
     public static void printList(AttendanceList attendanceList) {
-        int display = 1;
         for (Attendance attendance : attendanceList.getAttendanceList()) {
-            System.out.println("[" + display + "] " + attendance.toString());
-            display++;
+            System.out.println(attendance.toString());
         }
     }
 
