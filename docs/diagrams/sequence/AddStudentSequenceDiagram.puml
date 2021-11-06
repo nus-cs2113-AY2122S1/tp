@@ -2,72 +2,52 @@
 !include SequenceStyle.puml
 
 Actor User as user
-Participant ":Ui" as ui
 Participant ":Taa" as taa
-Participant "<<class>>\nParser" as parser
 Participant ":AddStudentCommand" as addStudentCommand
-Participant ":ModuleList" as moduleList
-Participant ":Module" as module
+Participant ":ClassList" as classList
+Participant ":TeachingClass" as teachingClass
 Participant ":StudentList" as studentList
 Participant ":Student" as student
 Participant ":Storage" as storage
 
+user -> taa : "add_student c/CS2113T-F12\ni/A0217978J n/Jonny Lims"
 activate taa
 
-taa -> ui : getUserInput()
-activate ui
-
-user -> ui : "add_student c/CS2113T\n i/a12345x n/jon geh"
-ui --> taa : userInput:String
-deactivate ui
-
-taa -> parser : parseUserInput(userInput)
-activate parser
-
-create addStudentCommand
-parser -> addStudentCommand
-activate addStudentCommand
-addStudentCommand -> parser
-deactivate addStudentCommand
-
-parser --> taa : command:addStudentCommand
-deactivate parser
-
-taa -> addStudentCommand : checkArguments()
+taa -> addStudentCommand : execute(classList:ClassList, \nui:Ui, storage:Storage)
 activate addStudentCommand
 
-addStudentCommand --> taa
-deactivate addStudentCommand
+addStudentCommand -> classList : getClassWithId(classId:String)
+activate classList
+classList --> addStudentCommand : teachingClass:TeachingClass
+deactivate classList
 
-taa -> addStudentCommand : execute(moduleList:ModuleList, ui:Ui, storage:Storage)
-activate addStudentCommand
+addStudentCommand -> teachingClass : getStudentList()
+activate teachingClass
+teachingClass --> addStudentCommand : studentList:StudentList
+deactivate teachingClass
 
-addStudentCommand -> moduleList : getModuleWithCode(moduleCode:String)
-activate moduleList
-moduleList --> addStudentCommand : module:Module
-deactivate moduleList
-
-addStudentCommand -> module : getStudentList()
-activate module
-module --> addStudentCommand : studentList:StudentList
-deactivate module
+create student
+addStudentCommand -> student
+activate student
+student --> addStudentCommand : student:Student
+deactivate student
 
 addStudentCommand -> studentList : addStudent(Student student)
 activate studentList
 studentList --> addStudentCommand
 deactivate studentList
 
-addStudentCommand -> storage : save(moduleList:ModuleList)
+addStudentCommand -> storage : save(classList:ClassList)
 activate storage
 storage --> addStudentCommand
 deactivate storage
 
-addStudentCommand -> ui : printMessage("Student has been added ...")
-activate ui
-ui -> user : Display message:\n"Student has been added ..."
-ui --> addStudentCommand
-deactivate ui
-
+addStudentCommand --> taa
 deactivate addStudentCommand
+taa -[hidden]-> addStudentCommand
+destroy addStudentCommand
+
+taa --> user
+deactivate taa
 
 @enduml
