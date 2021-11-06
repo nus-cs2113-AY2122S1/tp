@@ -422,9 +422,11 @@ marcus,null,null,null,null,null
 ```
 - Invalid or corrupt data will not be imported into the contact list and will be discarded. Their line number in the
   `import.txt` will be specified for convenience in identifying problems.
+- Additional input after the `import` command will be treated as erroneous input and discarded.
 - However, there is a limitation that duplicates will not be checked for when performing contact imports. Do import 
   with caution.
-- Additional input after the `import` command will be treated as erroneous input and discarded.
+- Coming Soon: Duplicate checks for importing contacts will be added in future versions, with prompts for every contact
+and option to skip all/accept all duplicates.
 
 
 Expected outcome of usage:
@@ -540,6 +542,11 @@ not recommended. When doing so, remember to follow the correct syntax for contac
 corrupt data will be discarded by ConTech upon launch. Users are recommended to use the `add` and `edit` commands in the
 app instead of manually editing the save data files. For adding a large number of contacts at once, the `import` function
 can be used.
+
+**Q**: Does ConTech support duplicate prevention?
+
+**A**: Yes, ConTech has built-in duplicate protection for all commands except `import` currently. This will be added in
+a future revision with more granular controls to allow users to easily handle multiple duplicate contacts when importing.
 
 
 ## <a name="summary"></a>Command Summary
