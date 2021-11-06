@@ -116,6 +116,7 @@ public class Ingredient implements  Comparable<Ingredient> {
         double ingredientWeightValue;
         try {
             ingredientWeightValue = Double.parseDouble(ingredientWeight);
+
             if (ingredientWeightValue < 0) {
                 throw new FoodoramaException("");
             }

@@ -24,17 +24,39 @@ public class IngredientList {
         Scanner in = new Scanner(System.in);
         String ingredientWeight = in.nextLine();
         double ingredientWeightValue;
+
         try {
             ingredientWeightValue = Double.parseDouble(ingredientWeight);
-            if (ingredientWeightValue < 0) {
-                throw new FoodoramaException("");
+            while (ingredientWeightValue < 0) {
+                UI.clearTerminalAndPrintNewPage();
+                UI.printInvalidIngredientWeight(ingredientName);
+                ingredientWeight = in.nextLine();
+                ingredientWeightValue = Double.parseDouble(ingredientWeight);
             }
-        } catch (NumberFormatException | FoodoramaException e) {
+        } catch (NumberFormatException e) {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
-        Ingredient ingredientToAdd = new Ingredient(ingredientName, ingredientWeightValue);
-        ingredientList.add(ingredientToAdd);
-        UI.printAddedIngredient(ingredientToAdd, ingredientWeightValue);
+
+        // implement the confimatory loop here
+        // ask user if they want to add ingredient with this amount of weight
+        UI.clearTerminalAndPrintNewPage();
+        UI.printConfirmIngrNameAndWeight(ingredientName, ingredientWeightValue);
+        String confirmYesOrNo = in.nextLine().toLowerCase();
+        while (!(confirmYesOrNo.equals(YES) | confirmYesOrNo.equals(NO))) {
+            UI.clearTerminalAndPrintNewPage();
+            UI.printInvalidConfirmation();
+            confirmYesOrNo = in.nextLine().toLowerCase();
+        }
+
+        UI.clearTerminalAndPrintNewPage();
+        if (confirmYesOrNo.equals(YES)) {
+            //if yes, do this
+            Ingredient ingredientToAdd = new Ingredient(ingredientName, ingredientWeightValue);
+            ingredientList.add(ingredientToAdd);
+            UI.printAddedIngredient(ingredientToAdd, ingredientWeightValue);
+        } else {
+            UI.printDisregardMsg();
+        }
     }
 
     //Returns -1 if not present, index if present
