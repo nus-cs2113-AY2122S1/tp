@@ -147,10 +147,6 @@ public class TextUi {
         System.out.println("Error occurred.");
     }
 
-    public static void printMcErrorMessage() {
-        System.out.println("Invalid input for MC flag. MC flag is ignored.");
-    }
-
     public static void printUpdateStartMessage() {
         System.out.println("Updating, standby... This may take up to 10 minutes.");
         System.out.println("Press ENTER to cancel the update.");
@@ -334,7 +330,7 @@ public class TextUi {
     }
 
     public static void printStorageErrorMessage() {
-        System.out.println("Please do not tamper with the local storage. You should be ashamed of yourself. Delete "
-                + "all files in your Module directory.");
+        System.out.println("Please do not tamper with the local storage. You should be ashamed of yourself."
+                + "\nDelete all files in your Module directory and rerun update.");
     }
 }

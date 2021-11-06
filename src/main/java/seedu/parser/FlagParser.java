@@ -18,6 +18,7 @@ public class FlagParser {
 
     /**
      * Converts a String array of flags and regexes into a SearchFlags object.
+     *
      * @param flags String array containing each flag and its regex.
      * @return SearchFlags, an object that contains all flags and regexes.
      */
@@ -31,6 +32,7 @@ public class FlagParser {
 
     /**
      * Attempts to identify the given flag, and update the given SearchFlags object if identified.
+     *
      * @param flag Flag to identify.
      * @param searchFlags SearchFlags object to update.
      */
@@ -50,6 +52,7 @@ public class FlagParser {
 
     /**
      * Checks if given flag is a Quick flag (-q). Updates searchFlag if true.
+     *
      * @param flag Flag to check.
      * @param searchFlags SearchFlags object to update.
      * @return true if flag is a Quick flag, false otherwise.
@@ -64,6 +67,7 @@ public class FlagParser {
 
     /**
      * Checks if given flag is a MC flag (-mc). Updates searchFlag if true.
+     *
      * @param flag Flag to check.
      * @param searchFlags SearchFlags object to update.
      * @return true if flag is a MC flag, false otherwise.
@@ -84,6 +88,7 @@ public class FlagParser {
 
     /**
      * Tries to parse a String to an int. Will return -1 if String cannot be parsed into int.
+     *
      * @param str String to be parsed.
      * @return the String parsed into an int, -1 if invalid.
      */
@@ -98,6 +103,7 @@ public class FlagParser {
     /**
      * Checks the given flag to see if it matches all remaining flags (level, faculty, department, exam and semester),
      * and updates the SearchFlags object.
+     *
      * @param flag Flag to be checked.
      * @param searchFlags SearchFlags object to update.
      */

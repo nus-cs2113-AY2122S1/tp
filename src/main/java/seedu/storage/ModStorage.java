@@ -3,6 +3,7 @@ package seedu.storage;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import seedu.command.flags.SearchFlags;
+import seedu.exceptions.FileErrorException;
 import seedu.module.Module;
 import seedu.ui.TextUi;
 
@@ -20,6 +21,7 @@ public class ModStorage {
 
     /**
      * Saves the given mod into a json.
+     *
      * @param moduleCode Code of mod to save.
      * @param inputStream InputStream of the mod from NUSMods.
      * @throws IOException if there is an IO operation error.
@@ -40,6 +42,7 @@ public class ModStorage {
 
     /**
      * Adds a line to file.
+     *
      * @param input Line to input.
      * @param path Path of file.
      * @throws IOException if there is an IO operation error.
@@ -53,6 +56,7 @@ public class ModStorage {
 
     /**
      * Creates a mod json at the path.
+     *
      * @param savePath Path to create file at.
      * @return true if file is created, false otherwise.
      * @throws FileErrorException if file was unable to be created.
@@ -76,6 +80,7 @@ public class ModStorage {
 
     /**
      * Searches all files in the data/Modules directory, prints matching mods and the number of matching mods.
+     *
      * @param searchTerm Search term to search for.
      * @param searchFlags Flags to check mods against.
      */
@@ -94,6 +99,7 @@ public class ModStorage {
 
     /**
      * Searches all files in the given file list and prints matching mods.
+     *
      * @param fileList list of Files to search in.
      * @param searchTerm Search term to search for.
      * @param searchFlags Flags to check mods against.
@@ -108,11 +114,21 @@ public class ModStorage {
                 }
             } catch (Exception e) {
                 TextUi.printStorageErrorMessage();
+                return;
             }
         }
         TextUi.printModsFound(count);
     }
 
+    /**
+     * Checks if a file matches the given search term and SearchFlags.
+     *
+     * @param file File to be checked.
+     * @param searchTerm Search term to check for.
+     * @param searchFlags Flags to check file against.
+     * @return True if it matches the search term and all searchflags, false otherwise.
+     * @throws IOException if there is an IO operation error.
+     */
     private static boolean doesFileMatch(File file, String searchTerm, SearchFlags searchFlags) throws IOException {
         String extension = ".json";
         int extensionIndex = file.getName().indexOf(extension);
@@ -130,6 +146,7 @@ public class ModStorage {
 
     /**
      * Loads module info from local data.
+     *
      * @param moduleCode mod to load.
      * @return module that was loaded.
      * @throws IOException if there is an IO operation error.
@@ -143,9 +160,6 @@ public class ModStorage {
         } catch (InvalidPathException e) {
             throw new IOException();
         }
-    }
-
-    public static class FileErrorException extends Exception {
     }
 
 }

@@ -27,12 +27,12 @@ upon.
       * [Show](#show)
       * [Update](#update)
 - [Documentation, logging, testing, configuration, dev-ops]()
-- [Appendix: Requirements]()
-    * [Product scope]()
-    * [User stories]()
-    * [Use cases]()
-    * [Non-Functional Requirements]()
-    * [Glossary]()
+- [Appendix: Requirements](#appendix-requirements)
+    * [Product scope](#product-scope)
+    * [User stories](#user-stories)
+    * [Use cases](#use-cases)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
 - [Appendix: Instructions for manual testing]()
     * [Launch and shutdown]()
     * [Deleting a person]()
@@ -84,6 +84,17 @@ The rest of the App consists of five components:
 <br>
 
 ### UI component
+The **UI** component consists of the `AddUI`, `TextUi`, `TimetableUI` and `TranscriptUi` components.
+
+![UIComponent](./uml-diagrams/UIComponent.png)
+
+> The `TextUi` component is the most general purpose component and is called from `Logic`, `Storage` and `Online`.
+> 
+> The `AddUI` component is called only from `Logic`, specifically by the `AddCommand`.
+> 
+> The `TimetableUI` component is called from `Timetable`.
+> 
+> The `TranscriptUi` component is called only from `Logic`, specifically by the `TranscriptCommand`.
 
 <br>
 
@@ -106,6 +117,12 @@ Consists of the `CommandParser` and `FlagParser` classes.
 <br>
 
 ### Online component
+The **Online** component consists of only `NusMods`.
+![OnlineComponent](./uml-diagrams/OnlineComponent.png)
+> Attempts to retrieve module information from NUSMods API using the `NusMods` component and prints it using the `UI`
+> component.
+> 
+> If unable to do so, it attempts to do so through the `Storage` component.
 
 <br>
 
@@ -114,6 +131,16 @@ Consists of the `CommandParser` and `FlagParser` classes.
 <br>
 
 ### Storage component
+The **Storage** component consists of the `ModStorage`, `ProfileStorage` and `TimetableStorage` components. Much like
+their names suggest, they handle the storage of Mods, Profiles and Timetables respectively.
+![StorageComponent](./uml-diagrams/StorageComponent.png)
+> `ModStorage` is primarily called by the `Online` component when there is a lack of internet connectivity. It is also
+> called through `Logic` manually by the user executing a `SearchCommand` with a quick flag.
+> 
+> `ProfileStorage` is called through the main `UniMods` component on startup when no prior profile information can be
+> found.
+> 
+> `TimetableStorage` is called by the `Timetable` component to handle saving and loading of timetables.
 
 ### Common classes
 
@@ -128,9 +155,9 @@ Since the json format utilized by the API contains nested objects, the final imp
 emulates that of the json, with each `Module` containing an `Attributes` object and an array of `Semester` objects, 
 `Semester` containing an array of `Lesson` objects, and  `Lesson` containing an array of `Weeks` objects.
 
-![](resources/ModulesClassDiagram.png)
+![FetchModuleDiagram](resources/ModulesClassDiagram.png)
 
-####Parsing and Saving of Weeks via Gson
+#### Parsing and Saving of Weeks via Gson
 Gson was unable to parse the weeks key as provided by the NUSMods API as the value expected for the key can be of two different data types.
 
 ```
@@ -181,7 +208,7 @@ private Weeks weeks
 By utilizing a TypeAdapter for Weeks in Lessons, a  custom deserialization method for Gson to use for this specific key 
 was implemented.
 
-![](uml-diagrams/WeeksRead.png)
+![WeeksReadDiagram](uml-diagrams/WeeksRead.png)
 
 Using `peek()`, Gson checks if *weeks* is an array or an object. From there it utilizes the deserialization method for 
 the specific data type. The key difference is that while *weeks* can be an array in the json, when deserialized it is 
@@ -189,7 +216,7 @@ always an object that contains three variables, *weeks*, *start* and *end*. If i
 array be written into the *weeks* array in the object itself, and *start* and *end* will be null. If it was an object, 
 then *start* and *end* will be written, but *weeks* will be null.
 
-![](uml-diagrams/WeeksWrite.png)
+![WeeksWriteDiagram](uml-diagrams/WeeksWrite.png)
 
 Similarly for saving weeks for the `Timetable` json, a custom serialization method is used that checks which specific 
 data type to serialize it as. If *weeks* is not null, then Gson writes it as an array despite it being an object. 
@@ -213,11 +240,11 @@ The following implemented functions are utilized heavily:
 
 #### Search
 
-![](uml-diagrams/Search.png)
+![SearchDiagram](uml-diagrams/Search.png)
 
 *Fetch, Save and Load Mod*
 
-![](uml-diagrams/SearchRef.png)
+![SearchReferenceDiagram](uml-diagrams/SearchRef.png)
 
 Utilizes `getOnlineModList()` to get all mods from online. If the module code contains the search term or matches the 
 level flag if inputted, `getOnlineModInfo()` is used to fetch the full data for further comparison with the remaining 
@@ -227,7 +254,7 @@ If the module matches the search term and all flags, then it is printed. If eith
 
 #### Show
 
-![](uml-diagrams/Show.png)
+![ShowCommandDiagram](uml-diagrams/Show.png)
 
 Similar to search, except it directly uses `getOnlineModInfo()` instead. If the module exists, then it will be printed. 
 Again, `saveModInfo()` is always used after fetching a json to keep the local database as up to date as possible. 
@@ -235,7 +262,7 @@ If `getOnlineModInfo()` fails at the start, then `loadModInfo()` will execute in
 
 #### Update
 
-![](uml-diagrams/Update.png)
+![UpdateCommandDiagram](uml-diagrams/Update.png)
 
 Fetches the json from all mods in the NUSMods database. Utilizes `getOnlineModList()` to get all mods from online. 
 `getOnlineModInfo()` and `saveModInfo()` is run for every mod in the list to update all mods in the local database.
@@ -262,9 +289,106 @@ with any existing lessons, a `<CONFLICT>` line will be displayed beside the less
 For each lessonType, `getCommand` is utilized to collect input of the Lesson to be added into the timetable. 
 The `addModuleToList()` and `addLesson()` functions are called, and the modules are added to the module 
 list and each applicable timetable slot.
+
 #### Delete
 
 #### Clear Timetable
 
 #### Show Timetable
 
+## Appendix: Requirements
+
+### Product Scope
+
+Target user profile:
+* prefers desktop apps over other types
+* is a student at NUS
+
+Value proposition: Works both online and offline.
+
+### User Stories
+
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+
+| Priority | As a...   | I want to...                                                    | So that I can...                                                       |
+| -------- | ----------| ----------------------------------------------------------------| ---------------------------------------------------------------------- |
+| `* * *`  | user      | add mods to my timetable                                        | add mods that I intend to take                                         |
+| `* * *`  | user      | delete mods from my timetable                                   | remove mods that I am not taking                                       |
+| `* * *`  | user      | search for mods by module codes                                 | know which mods are offered under a pillar                             |
+| `* * *`  | user      | check which mods are S/U-able                                   | plan how to use my S/Us for the semester                               |
+| `* * *`  | user      | check module workloads                                          | plan how to use my modules                                             |
+| `* * *`  | user      | check which semester the module is offered in                   | plan in which semester to take it                                      |
+| `* * *`  | user      | check the total number of MC's taken for a particular semester  | know if I have to overload                                             |
+| `* * *`  | user      | check whether my upcoming class is a tutorial, lecture or lab   | know what type of class it is                                          |
+| `* * *`  | user      | save my timetable to a local file                               | any updates made are persisted                                         |
+| `* * *`  | new user  | use the 'help' command                                          | view the list of all possible commands and their description           |
+| `* * *`  | user      | use the 'clear' command to delete all modules from the timetable| start afresh and make a new timetable                                  |
+| `* *`    | user      | check the exam date of modules                                  | plan for my exams                                                      |
+| `* *`    | user      | filter mods by level                                            | find mods by difficulty level                                          |
+| `* *`    | user      | keep a record of past modules taken                             | refer back to it at any time                                           |
+| `* *`    | user      | monitor the number of MCs taken since enrolling                 | know if I meet my degree requirements                                  |
+| `* *`    | user      | add my own events to the timetable                              | better visualise my schedule for the day/week                          |
+| `* *`    | user      | search for and list all of my related personal tasks added      | find some of my tasks                                                  |
+| `* *`    | user      | check the venue of my classes                                   | know where to go for my classes                                        |
+| `* *`    | user      | check mod prerequisites                                         | know if I am eligible to take a mod that I intend to take              |
+| `* *`    | user      | delete my personal tasks                                        | clear tasks that I have finished                                       |
+| `* *`    | user      | rename my personal tasks                                        | rename it without deleting and re-adding it                            |
+| `* *`    | user      | update my personal tasks                                        | update it without deleting and re-adding it                            |
+| `* *`    | user      | filter the modules by the number of MCs                         | view only the modules that fit under my MC limit                       |
+| `* *`    | user      | access module information while offline                         | view relevant information on the module even while offline             |
+| `* *`    | user      | notified if the current lesson that I'm adding clashes with     | be aware of any potential clashes in my timetable                      |
+| `* *`    | user      | input the grades scored in various modules                      | know my overall semester result                                        |
+| `* *`    | user      | enter the command 'calculate cap'                               | see my CAP according to all grades that I have scored in the past mods |
+| `* *`    | user      | keep a record of all modules which I have S/Ued                 | refer back to them at any time                                         |
+| `* *`    | user      | remove modules and grades from the transcript                   | edit my transcript in case I make a mistake in adding my grades        |
+| `* *`    | user      | view my unofficial transcript                                   | track my degree progress and view the modules I have completed.        |
+| `* *`    | user      | stop an update command                                          | cancel it without waiting 10 minutes                                   |
+| `* *`    | user      | stop a search command                                           | cancel it without waiting any longer                                   |
+
+### Use Cases
+#### **Use case: Search for and show a module**
+
+**MSS**
+1. User searches for modules.
+2. UNIMods shows a list of modules matching the search terms.
+3. User requests to show a specific module in the list.
+4. UNIMods shows module information for that module. <br>
+Use case ends.
+
+**Extensions**
+* 1a. No matching mods are found. <br>
+Use case ends.
+* 1b. User cancels search with `ENTER`. <br>
+Use case ends.
+* 3a. User mistypes name of module and mistyped module code does not exist. <br>
+Use case ends.
+
+<br>
+
+#### **Use case: Update local database**
+
+**MSS**
+1. User runs update command.
+2. UNIMods updates local data.
+
+**Extensions**
+* 1a. User is offline. <br>
+  Use case ends.
+* 1a. User cancels update with `ENTER`. <br>
+  Use case ends.
+
+<br>
+
+### Non-Functional Requirements
+
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to perform local search operations, even on 12000+ module jsons quickly.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be 
+able to accomplish most of the tasks faster using commands than using the mouse.
+
+### Glossary
+
+* **Mainstream OS:** Windows, *nix, MacOS
+* **S/U:** Ability to ignore the letter grade of a mod and not factor it into a CAP as long as a `C` grade or above is 
+obtained
+* **Clash:** When two different modules have a lessons that are in the same slot. 

@@ -210,6 +210,13 @@ public class Module extends BaseModule {
         }
     }
 
+    /**
+     * Checks if the module has any exams for all 4 semesters, and returns a String containing all semesters and
+     * exam dates.
+     * If there are no exams in all 4 semesters, then returns "No Exam" instead.
+     *
+     * @return String containing all exam dates. Returns "No Exam" if all semesters do not have exams.
+     */
     public String getAllExams() {
         String examdates = "";
         boolean hasExam = false;
