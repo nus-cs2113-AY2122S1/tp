@@ -26,6 +26,11 @@
 - [Non-Function Requirements](#nf-req)
 - [Glossary](#glossary)
 - [Instructions for manual testing](#manual-test)
+  - [Launch and Shutdown](#launch-and-shutdown)
+  - [Adding a contact](#testing-add)
+  - [Viewing a contact](#testing-view)
+  - [Editing a contact](#testing-edit)
+  - [Deleting a contact](#testing-delete)  
 
 ## <a name="acknowledgements"></a>Acknowledgements
 
