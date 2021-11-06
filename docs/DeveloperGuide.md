@@ -111,6 +111,7 @@ The `Ui` component handles the **output display** of **CCA Manager**. Whenever t
 * Listing of `Training` in `TrainingList`.
 * Listing of `Attendance` in `AttendanceList`.
 * Displaying error messages on invalid command inputs.
+* Displaying success messages on valid command inputs.
 
 ### Parser Component
 ![Parser Object Diagram](images/ParserObjectDiagram.png)
@@ -133,7 +134,7 @@ A `keyword` is an identifier used by **CCA Manager** to determine what operation
 **API** : [Entry](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/src/main/java/seedu/duke/Entry.java)
 
 The `Entry` component performs a `command` based on the `keyword` given. If the user enters an invalid command, for example, the `Entry` component will direct the `Ui` component
-to print an error message. It uses a simple `switch-case` statement to handle the different `keyword` received.
+to print an error message. It uses simple `switch-case` statements to handle the different `keyword` received.
 
 
 ### Command Component
@@ -207,13 +208,13 @@ The `Attendance` component,
 The `Storage` component consists of 3 sub-components, corresponding to `member storage` , `attendance storage` 
 and `training schedule storage`
 
-The `member storage` component,
+The `member storage` component
 * can save members' data in CSV format and read them back into the `MemberList` object.
 * automatically adds to DukeMembers.csv whenever a new member is added to the `MemberList` object.
 * automatically edits to DukeMembers.csv whenever member details are edited in the `MemberList` object.
 * automatically deletes to DukeMembers.csv whenever a member is deleted from the `MemberList` object.
 
-The `attendance storage` component,
+The `attendance storage` component
 *can save attendance data in CSV format and read them back into the `AttendanceList` object.
 *automatically deletes to AttendanceStorage.csv whenever a member is deleted from the `AttendanceList` object.
 
