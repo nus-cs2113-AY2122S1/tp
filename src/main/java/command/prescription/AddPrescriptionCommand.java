@@ -129,6 +129,7 @@ public class AddPrescriptionCommand extends Command {
      */
     private boolean checkExpiredMedication(Ui ui, ArrayList<Stock> filteredStocks, int prescriptionQuantity) {
         boolean existNonExpiredMed = false;
+        boolean noStockLeft = false;
         for (Stock stock : filteredStocks) {
             Date expiryDate = stock.getExpiry();
             Date todayDate = new Date();
@@ -142,10 +143,14 @@ public class AddPrescriptionCommand extends Command {
                 existNonExpiredMed = true;
             }
             if (isNotExpired && stock.getQuantity() == 0 && !(stock.isDeleted())) {
-                ui.print("Unable to Prescribe! Prescription quantity is more than stock available!");
-                ui.print("Prescription quantity: " + prescriptionQuantity + " Stock available: 0");
-                return true;
+                noStockLeft = true;
             }
+        }
+
+        if (noStockLeft) {
+            ui.print("Unable to Prescribe! Prescription quantity is more than stock available!");
+            ui.print("Prescription quantity: " + prescriptionQuantity + " Stock available: 0");
+            return true;
         }
 
         if (!existNonExpiredMed) {
