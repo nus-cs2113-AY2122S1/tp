@@ -29,9 +29,12 @@ deactivate cmd
 activate ui
 ui --> main
 deactivate ui
-main-> store : updateStorage
+main-> store : updateStorage(ContactList)
 activate store
 store --> main
 deactivate store
+
+main --> user
+deactivate main
 
 @enduml

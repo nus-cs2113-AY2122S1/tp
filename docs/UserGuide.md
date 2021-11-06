@@ -69,16 +69,13 @@ This section aims to get you started with using **ConTech**.
    
 If you have reached this step without any issues, congratulations! You have successfully set up **ConTech**.
 
-<div markdown="block" class="alert alert-info">
-:information_source: You are advised to go through the following two sections.
-
-Before moving on to the features of **ConTech**, we have prepared some documentation regarding some common 
+>:information_source: You are advised to go through the following two sections.
+>Before moving on to the features of **ConTech**, we have prepared some documentation regarding some common 
 **[notations](#notations)** that will be used throughout this guide. You are strongly recommended to familiarise yourself 
 with the notations used.
 
 You may also refer to the **[features](#features)** below for details of each feature and 
 its respective command.
-</div>
 
 <a name="flag"></a>
 ### Contact flags: `-flag`
@@ -190,13 +187,9 @@ Command formats:
 * Additional input after the `me` in the command will be treated as erroneous input and discarded.
 
 
-<div markdown="block" class="alert alert-info">
+>:information_source: You can easily run the [`ls`](#list) command to view your contact indexes before running any 
+command requiring indexes.
 
-:information_source: You can easily run the [`ls`](#list) command to view your contact indexes before running any 
-command 
-requiring indexes.
-
-</div>
 
 Expected outcome of usage:
 
@@ -458,12 +451,10 @@ ____________________________________________________________
 ### Viewing help: `help`
 Displays a help message explaining what commands are available and each input format.
 
-<div markdown="block" class="alert alert-info">
 
-:information_source: After learning of all the crucial features and commands of **ConTech**, you are ready to begin 
+>:information_source: After learning of all the crucial features and commands of **ConTech**, you are ready to begin 
 using the app. A condensed version of this user guide can be accessed by typing `help`.
 
-</div>
 
 Command format: `help`
 

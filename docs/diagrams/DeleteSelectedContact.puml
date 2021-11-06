@@ -1,7 +1,7 @@
 @startuml
 hide footbox
 mainframe sd delete selected contact
-":DeleteContactCommand" -> ":DeleteContactCommand":deleteSelectedContact()
+-> ":DeleteContactCommand":deleteSelectedContact()
 activate ":DeleteContactCommand"
 
 'obtain contact to be deleted using index

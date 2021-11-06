@@ -12,7 +12,7 @@ activate "addedContact:Contact"
 deactivate "addedContact:Contact"
 
 alt#gold #lightgreen hasDuplicates(addedContact:Contact, contactList:ContactList)
-    ":AddContactCommand" -> ":TextUi":ignoreContact("add")
+    ":AddContactCommand" -> ":TextUi":ignoreContact(type:String)
     activate ":TextUi"
     ":TextUi" --> ":AddContactCommand"
     deactivate ":TextUi"
@@ -28,5 +28,6 @@ else #lightblue else
     ":TextUi" --> ":AddContactCommand"
     deactivate ":TextUi"
 end
+deactivate ":AddContactCommand"
 
 @enduml

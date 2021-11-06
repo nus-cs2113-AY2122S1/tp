@@ -8,7 +8,7 @@ Package "ConTech"<<Rectangle>>{
     Class Storage
     Class Command
     Class ContactList
-    Class Main #grey
+    Class Main
 }
 
 Class "<$user>" as User
@@ -19,8 +19,8 @@ MainParser -down-> Command
 Command -down-> ContactList : Pass\nCommand
 ContactList -right-> Storage
 Storage .left.> ContactList
-Main -up[#grey]-> MainParser
-Main -down[#grey]-> Storage
+Main -up-> MainParser
+Main -down-> Storage
 Storage .right.> LocalStorage
 
 User ..> TextUi
