@@ -25,6 +25,7 @@ done in an efficient manner.
     - [Removing an item: `rm`](#removing-an-item)
     - [Editing an item: `edit`](#editing-an-item)
     - [Exiting the program: `exit`](#exiting-the-program)
+- [Data Storage](#data-storage)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -396,12 +397,27 @@ Format: `exit`
 See you soon!
 ```
 
+## Data Storage
+
+Upon starting the program, it will search for the presence of a file in the directory `./data/data.json`. This is a file on the disk that tracks the last recorded state of the catalogue.
+- If the file exists, `libmgr` will attempt to read and parse all information within to load into the catalogue before completing the startup process
+- If the file does not exist, `libmgr` will create a new file with an empty catalogue
+- If the file exists, but the content is malformed or corrupted, users will be warned. Any commands input by the user after startup will result in the file being wiped with a new empty catalogue.
+
+> ℹ️ Data is updated at the completion of execution of each command entered by the user
+
+> ⚠️ While the `data.json` file can be edited manually, it is highly recommended that users **do not** attempt to do so unnecessarily
+
 ## FAQ
 
-**Q**: What happens if I mistype a command not recognised by the program?
+**Q**: Can I port the program over to other devices
 
-**A**: A message will be shown saying that the program does not recognise your command.
-You can then key in a command again.
+**A**: Yes, just copy over the `libmgr.jar` along with the `./data/data.json` files to the target computer, and make sure that they are stored within the same folder, all data will be preserved
+
+**Q**: Can I manually edit the `data.json` file to change contents of the catalogue
+
+**A**: While it is possible for users to manually edit the data using tools such as text editors, we highly recommend against doing so, as the risk of corrupting the file or entering malfomred input is very high.
+When `libmgr` detects errors or corruptions in `data.json` it will overwrite the existing catalogue with a new, empty one.
 
 ## Command Summary
 

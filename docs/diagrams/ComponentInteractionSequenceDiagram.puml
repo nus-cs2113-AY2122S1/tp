@@ -28,16 +28,16 @@ loop while true
     activate cmd
     return
 
-    libmgr -> storage:write(catalogue:Catalogue)
-    activate storage
-    return
-
-
     opt userCommand.isExit()
         libmgr -> cmd:isExit()
         activate cmd
         return isExit:Boolean
     end
+
+    libmgr -> storage:write(catalogue:Catalogue)
+    activate storage
+    return
+
     destroy cmd
 end
 

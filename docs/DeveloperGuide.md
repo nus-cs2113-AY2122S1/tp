@@ -22,14 +22,20 @@ This document is meant to assist developers in better understanding the inner wo
 The format of this developer guide was adapted from [SE-EDU AddressBook Level 3 Developer Guide](https://github.com/se-edu/addressbook-level3/blob/master/docs/DeveloperGuide.md)
 
 Libmgr also makes use of the following third-party libraries:
-- [Jackson Databind](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind/2.13.0) (Apache 2 License)
-- [Jackson Annotations](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations/2.13.0) (Apache 2 License)
-- [Jackson Datatype JSR310](https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310/2.13.0) (Apache 2 License)
+- [Jackson Databind](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind/2.13.0) Provides serialization and deserialization to and from JSON (Apache 2 License)
+- [Jackson Annotations](https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations/2.13.0) Provides serialization and deserialization to and from JSON (Apache 2 License)
+- [Jackson Datatype JSR310](https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310/2.13.0) Adds support to Jackson Databind for Java 8 Date/Time API (Apache 2 License)
 
 ## Setting up the project
 
+### Prerequisites
+
+Before setting up the project locally, ensure you have installed the following:
+- Java JDK 11
+- IntelliJ IDEA
+
 > ⚠ **Caution**: Follow the steps in the following guide precisely. Things will not work out if you deviate in some steps.
-> 
+
 First, **fork** this repo, and **clone** the fork into your computer.
 
 If you plan to use Intellij IDEA (highly recommended):
@@ -85,8 +91,8 @@ The above sequence diagram shows the interactions occurring each time a command 
 2. `Libmgr` then uses `Parser` to parse the user input.
 3. A `Command` object is returned based on the user input.
 4. `Libmgr` then calls the `execute()` method of the `Command` object which performs all the logic as defined by the command
-5. `Libmgr` lastly calls the `write()` method of the `Storage` object which writes the current state of teh items in the `Catalogue` container to `data/data.json`
-6. The exit condition is checked by computing whether the `isExit()` method of the current `Command` object returns true. If it is computed as true, the loop is broken out of and the program quits.
+5. The exit condition is checked by computing whether the `isExit()` method of the current `Command` object returns true. If it is computed as true, the loop is broken out of and the program quits.
+6. `Libmgr` lastly calls the `write()` method of the `Storage` object which writes the current state of teh items in the `Catalogue` container to `data/data.json`
 
 ### Commands component
 
@@ -183,17 +189,17 @@ In this instance, the hashmap will contain the following entries
 6. If both checks pass, a new `Book` object is created with values stored in the `HashMap<String, String>` variable.
 7. Lastly this new `Book` object is passed to the `Catalogue` object which along with the `Catalogue.add()` method. 
 
-#### Edit Command
+### Edit Command
 
 ![EditCommandSequence](img/EditCommandSequence.png)
 
 The Edit Command class handles the functionality to change a specific detail of an item in the catalogue.
 
-#### Search Command 
+### Search Command 
 
 ![SearchFunction](img/SearchFunctionSequence.png)
 
-#### Loan Command
+### Loan Command
 
 ![LoanSequenceDiagram](img/LoanSequenceDiagram.png)
 
@@ -208,7 +214,7 @@ This sequence diagram shows the interactions occurring each time a user wants to
 6. When the item status is `RESERVED` the loan is successful only if the username matches the item's loanee.
 7. When the item status is `LOANED` the loan is unsuccessful.
 
-#### Deadline Command
+### Deadline Command
 
 ![DeadlineSequenceDiagram](img/DeadlineSequenceDiagram.png)
 
@@ -221,9 +227,46 @@ This sequence diagram shows the interactions occurring each time a user wants to
 4. If the deadline description is `today`, it will print all items that are due today.
 5. If the deadline description is `overdue`, it will print all items that are overdue (due before today).
 6. If the deadline description is a specific date, it will print all items that are due by the date given.
-7. If the deadline description is outside of the listed three above, it will throw an exception and print 
-   the error message accrodingly.
+7. If the deadline description is outside the listed three above, it will throw an exception and print 
+   the error message accordingly.
 
+### Storage Processes
+
+#### Reading from file and deserializing
+
+When `Libmgr` is started at each runtime, it performs an operation to find existing `data.json` file within a specified directory, and attempt to load in the data stored within into the catalogue.
+
+The following sequence diagram shows the process of reading from the data file, along with an explanation of the steps.
+
+![StorageInitializationSequenceDiagram](img/StorageInitializationSequenceDiagram.png)
+
+1. Within `Libmgr.main()`, when the program is first started, it creates a new `Storage` object. 
+2. The `Storage` object then attempts to confirm the presence of the data file in the specified directory
+   1. If the file exists, it returns a java `File` object pointing to `data.json`
+   2. If the file does not exist, it creates a new `data.json` file in the default directory and stores an empty catalogue within
+3. Afterwards, the `Storage` object creates a new `JsonFactory` object.
+4. Lastly, `Libmgr.main()` calls `Storage.read()` which reads data from the `data.json` file and calls `jsonFactory.fromJson()` to deserialize the data within into an array list of items.
+If the `data.json` file contains errors, is malformed or corrupted, the user will be informed.
+5. This array list is then passed as an argument when the `catalogue.setItemsArrayList()` method is called, recreating the previous state of the catalogue
+
+#### Serializing and writing to file
+
+Upon the completion of every command input by the user, `libmgr` will serialize the contents within the catalogue and store it in `data.json`.
+This ensures that an up-to-date copy of the catalogue is always recorded into `data.json`.
+
+The following sequence diagram shows the process of serialization and writing to file, along with the explanation of the steps.
+
+![StorageWriteSequenceDiagram](img/StorageWriteSequenceDiagram.png)
+
+1. After completing execution of each command, `Libmgr.main()` will call the `storage.write()` method in order to store the current state of the catalogue.
+2. The `Storage` object in turn calls `jsonFactory.toJson()` for each of the five item types (audio, book, magazine, video, miscellaneous) in order to serialize all items within the catalogue
+3. The `Storage` object then outputs the data in `JSON` format to `data.json` through a java `FileWriter` object.
+
+> ℹ️ The default directory where `data.json` is located is `./data/data.json` <br> This can be modified within the `Storage` class.
+
+> ℹ️ Users and developes are allowed to manually edit the `data.json` file with tools such as text editors, but are strongly recommended to exercise caution regarding formatting and spelling, as a small error can result in corrupting the entire file's structure.
+
+> ⚠️As the `data.json` file is updated after completing execution of each command, if a corrupted `data.json` file is loaded and the user/developer wishes to retain the file, terminate the programme immediately, **do not** execute any commands other than `exit`
 
 ---
 ## Product scope
