@@ -1,6 +1,7 @@
 package seedu.command;
 
 
+import seedu.exceptions.UniModsException;
 import seedu.unimods.UniMods;
 import seedu.exceptions.FetchException;
 import seedu.module.GradedModule;
@@ -53,6 +54,10 @@ public class StoreResultsCommand extends Command {
         } catch (FetchException e) {
             System.out.println(TextUi.ERROR_INVALID_MODULE_CODE);
             logger.log(Level.WARNING, "Attempt to store a module grade has failed");
+        }
+        catch (UniModsException e) {
+            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, e.getMessage());
         }
     }
 }

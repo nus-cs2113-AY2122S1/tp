@@ -475,30 +475,34 @@ For Example:
 
 ```shell
 ~$==>transcript
-								--	National University of Singapore	--
-									--	Unofficial Transcript	--
-									------------------------------
+                                --	National University of Singapore	--
+                                	--	Unofficial Transcript	--
+                                	------------------------------
 
-Date Issued : 26-10-2021
+
+Name               : Jake Peralta
+Enrolled in Major  : Bachelor of Engineering- Computer Engineering
+Year of study      : 2
+
+Date Issued : 6-11-2021
 
 MODULE                                                                              GRADE  CREDITS
 
 CS2113T     Software Engineering & Object-Oriented Programming                        A+    4.0   
-CS1231      Discrete Structures                                                       A-    4.0   
-MA1512      Differential Equations for Engineering                                    B+    2.0   
-CS1010      Programming Methodology                                                   C+    4.0   
+CS1231      Discrete Structures                                                       A     4.0   
 EE2026      Digital Design                                                            B+    4.0   
-CG2271      Real-Time Operating Systems                                               A     4.0   
-CG1111      Engineering Principles and Practice I                                     S     6.0   
-CG1112      Engineering Principles and Practice II                                    U     6.0   
+CG1111      Engineering Principles and Practice I                                     A-    6.0   
+CS1010      Programming Methodology                                                   B     4.0   
 CFG1002     Career Catalyst                                                           CS    2.0   
+CG1112      Engineering Principles and Practice II                                    S     6.0   
 
-Total Credits Fulfilled : 36.0
+Total Credits Fulfilled : 30.0
 
-Cumulative Average Point : 4.18
+Cumulative Average Point : 4.41
 
 	This is not an official transcript issued by the Office of the Registrar.
-__________________________________________________________________________
+________________________________________________________________________________________________________________________
+
 ```
 
 <br>
