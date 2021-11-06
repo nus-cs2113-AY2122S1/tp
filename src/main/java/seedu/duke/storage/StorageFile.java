@@ -26,6 +26,8 @@ public class StorageFile {
 
     private static final String DEFAULT_FILE_PATH = "data/slamData.txt";
     private static final String DEFAULT_DIRECTORY = "data";
+    private static Logger logger = Logger.getLogger("Duke logger");
+
 
     public void save(MemberRoster memberRoster, EventCatalog eventCatalog) {
 
@@ -109,7 +111,6 @@ public class StorageFile {
             System.out.println("Data prior to the above line is loaded!\n"
                     + "Please terminate SLAM by entering <ctrl + c> and fix the save file before restarting.\n"
                     + "Otherwise, performing commands will cause data from that line onwards to be lost!\n");
-            Logger logger = Logger.getLogger("Duke logger");
             logger.log(Level.INFO, "File format error", e);
         }
         Ui.printLoadSuccesfulMessage();
