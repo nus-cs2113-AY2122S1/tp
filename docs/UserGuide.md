@@ -42,7 +42,7 @@ like this output
 
 It's me, **Gordon v2.0**, and today, I'm gonna teach you donkeys how to use the Gordon application.
 
-I am a Command Line Interface (CLI)-based recipe database application, and I can help you to;
+I am a Command Line Interface (CLI)-based recipe database application, and I can help you to:
 
 1. Store your recipes (including ingredients and steps required)
 1. Check them when you're ready to cook
