@@ -1,0 +1,57 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+Participant ":Libmgr" as Libmgr
+Participant ":LoanCommand" as loanCommand
+Participant "ui:TextUI" as ui
+Participant "catalogue:Catalogue" as catalogue
+Participant "item:Item" as item
+
+activate Libmgr
+Libmgr -> loanCommand : execute(ui, catalogue)
+
+activate loanCommand
+loanCommand -> loanCommand: handleLoanCommand(ui, catalogue)
+activate loanCommand
+loanCommand -> catalogue: getItem(id)
+activate catalogue
+return toBeLoaned:Item
+
+alt item status is AVAILABLE
+    loanCommand -> item: setDueDate(dueDate)
+    activate item
+    return
+    loanCommand -> item: setStatus(LOANED)
+    activate item
+    return
+    loanCommand -> item: setLoanee(username)
+    activate item
+    return
+    loanCommand -> ui: print(SUCCESS_LOAN)
+    activate ui
+    return
+else item status is RESERVED
+    alt item loanee equals to username
+        loanCommand -> item: setDueDate(dueDate)
+        activate item
+        return
+        loanCommand -> item: setStatus(LOANED)
+        activate item
+        return
+    else item loanee not equals to username
+        loanCommand -> ui: print(ERR_RESERVED)
+        activate ui
+        return
+    end
+else item status is LOANED
+    loanCommand -> ui: print(UNAVAILABLE_ITEM_MESSAGE)
+    activate ui
+    return
+end
+return
+return
+destroy loanCommand
+
+
+@enduml
