@@ -16,9 +16,12 @@ public class IngredientUI {
         MainUI.printSingleLine();
     }
 
-    public static void printInvalidCommandSyntaxMessage() {
+    public static void printInvalidCommandSyntaxMessage(String command) {
         MainUI.printSingleLine();
         System.out.println(" Invalid command syntax!");
+        printSampleCommandSyntaxMessage(command);
+        System.out.println(" Please refer to our user guide for more details: " +
+                "https://ay2122s1-cs2113t-t12-4.github.io/tp/UserGuide.html");
         MainUI.printSingleLine();
     }
 
@@ -65,5 +68,24 @@ public class IngredientUI {
             System.out.println("   " + "None :)");
         }
         MainUI.printSingleLine();
+    }
+
+    public static void printSampleCommandSyntaxMessage(String command) {
+        switch (command) {
+        case "add":
+            System.out.println(" Please follow this syntax:");
+            System.out.println("   add-ingredient/INGREDIENT_NAME/QUANTITY/PRICE/EXPIRY_DATE");
+            break;
+        case "remove":
+            System.out.println(" Please follow this syntax:");
+            System.out.println("   remove-ingredient/INGREDIENT_INDEX");
+            break;
+        case "find":
+            System.out.println(" Please follow this syntax:");
+            System.out.println("   find-expired-ingredient/INPUT_DATE");
+            break;
+        default:
+            break;
+        }
     }
 }
