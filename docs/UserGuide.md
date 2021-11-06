@@ -32,6 +32,12 @@ total workload:
     * [Delete from Timetable](#delete-from-timetable-delete-module_code)
     * [Clear Timetable](#clear-timetable-clear)
     * [View Timetable](#view-timetable-timetable)
+    * [Changing Semester](#changing-semester)
+    * [Storing grades secured in past modules](#store-grades-secured-in-various-modules-store-grade--module_code)
+    * [Removing modules from stored grades](#remove-modules-from-the-list-of-completed-modules-remove-module_code)
+    * [Calculating your CAP](#calculate-cap--calculate-cap)
+    * [Viewing your unoffical transcript](#view-unofficial-transcript--transcript)
+    * [Checking eligibility from a module's pre-requisite](#checking-for-module-pre-requisite-check-module_code)
     * [Exit](#exit-exit)
 - [FAQ](#faq)
 - [Command Summary]()
@@ -87,27 +93,33 @@ Output:
 
 ```shell
 ~$ help
-__________________________________________________________________________
+________________________________________________________________________________________________________________________
 	UNIMods accepts the following commands:-
-		| No.| Command Syntax                |            Command Action                      |
-		| 1. | search <module_code>          | Search module based on the given partial regex |
-		| 2. | show <module_code>            | Display module information                     |
-		| 3. | add <module_code>             | Add module to the Timetable                    |
-		| 4. | delete <module_code>          | Deletes module from the Timetable              |
-		| 5. | clear                         | Deletes all modules from the Timetable         |
-		| 6. | timetable                     | Display the Timetable                          |
-		| 7. | store <grade> > <module_code> | Stores the grades scored in the Transcript     |
-		| 8. | remove <module_code>          | Remove the module from the Transcript          |
-		| 9. | calculate cap                 | Displays the Cumulative Average Point          |
-		| 10.| exit                          | Exit From Program                              |
+		| No.| Command Syntax                  | Command Action                                         |
+		| 1. | help                            | Displays all the available commands                    |
+		| 2. | search <MODULE_CODE>            | Searches for modules that match the search expression  |
+		| 3. | show <MODULE_CODE>              | Displays the module's information and S/U-ability      |
+		| 4. | update                          | Fetches all modules from API to a local save           |
+		| 5. | add                             | Add modules or tasks to the Timetable                  |
+		| 6. | delete <MODULE_CODE/TASK>       | Removes the module or personal task from timetable     |
+		| 7. | clear                           | Clears the timetable of everything                     |
+		| 8. | edit                            | Edit a personal task in the timetable                  |
+		| 9. | timetable                       | Displays the timetable in a weekly grid format         |
+		| 10.| semester                        | Changes the academic semester that you wish to plan for|
+		| 11.| check <MODULE_CODE>             | Check whether the module's pre-requisite is met        |
+		| 12.| store <GRADE> <MODULE_CODE>     | Assigns a grade to a module and stores it on record    |
+		| 13.| remove <MODULE_CODE>            | Removes the module from the profile's record           |
+		| 14.| calculate                       | Calculates your CAP from your profile.                 |
+		| 15.| transcript                      | Creates and displays an unofficial transcript          |
+		| 16.| exit                            | Saves the current state and exits UniMods safely       |
 	 ** Note: For details, refer to the User Guide of NUSModsLite at: 
 		https://ay2122s1-cs2113t-w12-2.github.io/tp/UserGuide.html
-__________________________________________________________________________
 
+________________________________________________________________________________________________________________________
 
 ```
 
-To begin, perhaps try looking up CS2113T by running the following command:
+To begin, perhaps try looking up CS2113T by using the [show Command](#display-module-info-show-module_code)
 
 <br>
 
@@ -279,6 +291,8 @@ If all lesson types have been successfully added, program will print out
 Lessons for all modules have been successfully added
 ```
 
+<br></br>
+
 ### Adding an Event to timetable
 
 Perhaps you have a team meeting that takes place every Monday, you can likewise add your personal events into the timetable
@@ -307,7 +321,9 @@ Alright!! Event: Team Meeting CS2113T on Monday, from 2000 to 2100 at Team Meeti
 
 If the selected timeslot is already occupied, the program will let you know and the event will not be added until the timeslot
 has been freed up.
+
 <br>
+
 
 ## Delete from timetable: `delete <module_code>`
 
@@ -381,13 +397,17 @@ Simply type `timetable` into the input and voila!
 *******************
 Modules taken this semester: 
 
-CS2113T Software Engineering & Object-Oriented Programming 4MC
+CS2113T Software Engineering & Object-Oriented Programming 4MC (Exam: Tue Nov 30 09:00 AM - 11:00 AM)
 
 Total MCs taken this semester: 4.0
 
 *******************
 
 ```
+
+<br>
+
+## Changing semester
 
 <br>
 
@@ -474,7 +494,7 @@ You can type `transcript` to view your Unofficial Transcript.
 For Example:
 
 ```shell
-~$==>transcript
+~$ transcript
 								--	National University of Singapore	--
 									--	Unofficial Transcript	--
 									------------------------------
@@ -502,6 +522,27 @@ __________________________________________________________________________
 ```
 
 <br>
+
+## Checking for module pre-requisite: `check <MODULE_CODE>`
+
+After [assigning grades to past modules](#store-grades-secured-in-various-modules-store-grade--module_code), you can
+check whether you have met all the pre-requisites for a module!
+
+For example let's say you wish to take CS2040. <br>
+Example output (If you had not taken CS1010):
+```shell
+~$ check CS2040
+Oops, you have not met the module's prerequisite: 
+CS1010 or its equivalent
+________________________________________________________________________________________________________________________
+```
+
+Example output (If you had taken CS1010):
+```shell
+~$ check CS2040
+Yes! You are eligible to take up: CS2040 Data Structures and Algorithms 4MC
+________________________________________________________________________________________________________________________
+```
 
 ---
 

@@ -1,0 +1,66 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+[-> ModuleRecord : isModulePrereqMet()
+activate ModuleRecord
+ModuleRecord -> Module : getPrerequisiteTree()
+activate Module
+Module --> ModuleRecord : tree : PrerequisiteTree
+deactivate Module
+ModuleRecord -> ModuleRecord : isTreeSatisfied(tree)
+activate ModuleRecord
+alt not a tree but a single module pre-requisite
+    ModuleRecord -> ModuleRecord : isModuleInRecord(module)
+    activate ModuleRecord
+    deactivate ModuleRecord
+else it is an "AND" tree
+    ModuleRecord -> ModuleRecord : isAndTreeSatisfied()
+        note right
+            isAndTreeSatisfied and isOrTreeSatisfied are recursive calls
+            that call one another depending on every recursive sub-tree
+            to check that every pre-requisite is met on every level.
+        end note
+    activate ModuleRecord
+        loop for every module pre-requisite
+            opt module not in ModuleRecord
+                ModuleRecord --> ModuleRecord : return false back up
+            end
+        end
+        loop for every sub-tree
+            alt sub-tree is an AND tree
+                ModuleRecord -> ModuleRecord : isAndTreeSatisfied()
+                activate ModuleRecord
+                deactivate ModuleRecord
+            else sub-tree is an OR tree
+                ModuleRecord -> ModuleRecord : isORTreeSatisfied()
+                activate ModuleRecord
+                deactivate ModuleRecord
+            end
+        end
+    deactivate ModuleRecord
+else it is an "OR" tree
+    ModuleRecord -> ModuleRecord : isOrTreeSatisfied()
+    activate ModuleRecord
+        loop for every module pre-requisite
+            opt module in ModuleRecord
+                ModuleRecord --> ModuleRecord : return true back up
+            end
+        end
+        loop for every sub-tree
+            alt sub-tree is an AND tree
+                ModuleRecord -> ModuleRecord : isAndTreeSatisfied()
+                activate ModuleRecord
+                deactivate ModuleRecord
+            else sub-tree is an OR tree
+                ModuleRecord -> ModuleRecord : isORTreeSatisfied()
+                activate ModuleRecord
+                deactivate ModuleRecord
+            end
+        end
+    deactivate ModuleRecord
+end
+activate ModuleRecord
+ModuleRecord --> ModuleRecord
+deactivate ModuleRecord
+@enduml

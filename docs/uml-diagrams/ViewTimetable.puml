@@ -1,0 +1,68 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+
+[-> TimetableCommand : execute()
+activate TimetableCommand
+
+TimetableCommand ->Timetable : showTimetable()
+activate Timetable
+
+Timetable -> TimetableUI as "<<class>> \nTimetableUI" : <<static>> \nprintScheduleHours()
+activate TimetableUI
+
+TimetableUI --> Timetable
+deactivate TimetableUI
+
+loop For each day of week
+    Timetable -> TimetableUI : <<static>> \nprintDaySchedule(schedule, showUserItemsOnly)
+    activate TimetableUI
+    opt showUserItemsOnly is true
+        TimetableUI -> TimetableUI : getUserItems(schedule)
+        activate TimetableUI
+        TimetableUI --> TimetableUI : returns schedule with only \npersonal tasks
+        deactivate TimetableUI
+    end
+    TimetableUI -> TimetableUI : printLine(schedule,TITLE)
+    activate TimetableUI
+    deactivate TimetableUI
+            note left
+            Internally printLine self-invocates more
+            methods but has been left out of this
+            diagram in favor of conveying general
+            concept
+            end note
+    TimetableUI -> TimetableUI : printLine(schedule,TYPE)
+    activate TimetableUI
+    deactivate TimetableUI
+    TimetableUI -> TimetableUI : printLine(schedule,VENUE)
+    activate TimetableUI
+    deactivate TimetableUI
+    TimetableUI --> Timetable
+    deactivate TimetableUI
+
+end
+
+Timetable -> TimetableUI : <<static>> \nprintModules()
+activate TimetableUI
+loop For each module in timetable
+    TimetableUI -> Module : getExam(semester)
+    activate Module
+    Module --> TimetableUI : exam dates for this semester
+    deactivate Module
+    TimetableUI -> Module : getModuleCredit()
+    activate Module
+    Module --> TimetableUI : Number of MCs
+    deactivate Module
+end
+TimetableUI --> Timetable : prints all modules taken \nand exam dates
+deactivate TimetableUI
+
+TimetableCommand <-- Timetable
+deactivate Timetable
+
+<--TimetableCommand
+deactivate TimetableCommand
+
+@enduml

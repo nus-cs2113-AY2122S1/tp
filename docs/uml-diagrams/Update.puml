@@ -1,4 +1,4 @@
-@startuml
+k@startuml
 
 [-> UpdateCommand : execute()
 activate UpdateCommand
