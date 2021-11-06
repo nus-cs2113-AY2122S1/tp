@@ -62,6 +62,7 @@ public class Expenditure extends Record {
         return category;
     }
 
+
     public String toString() {
         return (this.description + df.format(this.amount) + this.date + this.category);
     }
