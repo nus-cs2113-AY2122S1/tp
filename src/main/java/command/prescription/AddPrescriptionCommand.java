@@ -76,7 +76,7 @@ public class AddPrescriptionCommand extends Command {
         }
 
         int totalStock = PrescriptionManager.getNotExpiredStockQuantity(medicines, medicationName, prescribeDate);
-
+        
         if (prescriptionQuantity > totalStock) {
             ui.print("Unable to Prescribe! Prescription quantity is more than stock available!");
             ui.print("Prescription quantity: " + prescriptionQuantity + " Stock available: " + totalStock);
@@ -129,30 +129,34 @@ public class AddPrescriptionCommand extends Command {
      */
     private boolean checkExpiredMedication(Ui ui, ArrayList<Stock> filteredStocks, int prescriptionQuantity) {
         boolean existNonExpiredMed = false;
+        boolean noStockLeft = false;
         for (Stock stock : filteredStocks) {
             Date expiryDate = stock.getExpiry();
             Date todayDate = new Date();
 
-            String todayDateString = DateParser.dateToString(todayDate);
-            String latestExpiryString = DateParser.dateToString(expiryDate);
+            boolean isExpired = expiryDate.before(todayDate);
 
-            boolean isNotExpired = expiryDate.after(todayDate) || todayDateString.equals(latestExpiryString);
-
-            if (isNotExpired && stock.getQuantity() != 0 && !(stock.isDeleted())) {
+            if (!isExpired && stock.getQuantity() != 0 && !(stock.isDeleted())) {
                 existNonExpiredMed = true;
             }
-            if (isNotExpired && stock.getQuantity() == 0 && !(stock.isDeleted())) {
-                ui.print("Unable to Prescribe! Prescription quantity is more than stock available!");
-                ui.print("Prescription quantity: " + prescriptionQuantity + " Stock available: 0");
-                return true;
+            if (!isExpired && stock.getQuantity() == 0 && !(stock.isDeleted())) {
+                noStockLeft = true;
             }
+        }
+
+        if (noStockLeft) {
+            ui.print("Unable to Prescribe! Prescription quantity is more than stock available!");
+            ui.print("Prescription quantity: " + prescriptionQuantity + " Stock available: 0");
+            return true;
         }
 
         if (!existNonExpiredMed) {
             ui.print("Unable to Prescribe! Medication has expired!");
             return true;
         }
+
         return false;
+
     }
 
     /**

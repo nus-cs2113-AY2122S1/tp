@@ -184,9 +184,9 @@ public class PrescriptionManager {
             Date existingExpiry = ((Stock) medicine).getExpiry();
             String expiryString = DateParser.dateToString(existingExpiry);
             String prescribeDateString = DateParser.dateToString(prescribeDate);
-            boolean isNotExpired = (existingExpiry.after(prescribeDate) || prescribeDateString.equals(expiryString));
+            boolean isExpired = existingExpiry.before(prescribeDate);
 
-            if (isSameMedicineName && !isDeleted && isNotExpired) {
+            if (isSameMedicineName && !isDeleted && !isExpired) {
                 existingQuantity += medicine.getQuantity();
             }
         }
