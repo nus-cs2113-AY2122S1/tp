@@ -336,9 +336,17 @@ Finds recipes by their attributes, e.g. time needed, calories etc.
 * For `/Calories`, `/Price`, and `/Time`;
   * I'll automatically sort the results from greatest to smallest `ATTRIBUTE_VALUE`.
   * I'll show you recipes whose `ATTRIBUTE_TYPE` is less than or equal to the `ATTRIBUTE_VALUE` you specified.
+    
+
 * For `/Ingredients` and `/Difficulty`;
   * I'll automatically sort the results in alphabetical order.
   * I'll show you recipes with the exact `ATTRIBUTE_VALUE` you are looking for.
+    
+
+* For `/tag`, see [9.4](#94-find-a-recipe-by-their-tags-find) for more details!
+
+  
+
 * If the `ATTRIBUTE_TYPE` of any recipe is not set, I'll send you an error.
 * **Warning:** When using the `deleteRecipe` command, `RECIPE_INDEX` refers to the index given by the `listRecipes` command and not the `find` command. Keep this in mind before deleting a recipe.
 
@@ -534,4 +542,4 @@ Instruction | Command format
 [Tag a recipe](#91-adding-tags-to-recipes-tag) | `tag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
 [Untag a recipe](#92-untagging-tags-from-recipes-untag) | `untag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
 [Delete a tag](#93-deleting-tags-from-cookbook-deletetag) | `deleteTag / TAG_NAME1 + TAG_NAME2 + ...`
-[List all tags](#94-find-a-recipe-by-their-tags-find) | `listTags`
+[List all tags](#95-list-all-your-tags-listtags) | `listTags`
