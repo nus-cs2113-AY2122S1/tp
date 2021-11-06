@@ -198,6 +198,7 @@ Expected outcome of usage:
 ```
 view 0
 ____________________________________________________________
+0.
 Name:     Alex Lee
 Github:   github.com/alexlee
 Email:    alex.lee@contech.sg
@@ -273,7 +274,9 @@ Expected outcome of usages:
 rm 0
 ____________________________________________________________
 Delete this contact?  (y/n)
-0. Alex Lee
+
+0. 
+Name:     Alex Lee
 Github:   github.com/alexlee
 Email:    alex.lee@contech.sg
 Telegram: t.me/alex133
@@ -392,6 +395,7 @@ Expected outcome of usage:
 ```
 search -g lee
 ____________________________________________________________
+1.
 Name:     Alex Lee
 Github:   github.com/alexlee
 Email:    alex.lee@contech.sg
@@ -399,6 +403,7 @@ Telegram: t.me/alexl33
 ____________________________________________________________
 
 ____________________________________________________________
+6.
 Name:     John Lee
 Github:   github.com/johnlee
 Email:    john.lee@contech.sg
