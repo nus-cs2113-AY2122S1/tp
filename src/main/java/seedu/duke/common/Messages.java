@@ -60,12 +60,12 @@ public class Messages {
     public static final String UNKNOWN_MESSAGE = "  (!) Invalid Command" + System.lineSeparator()
             + "  (!) Type 'help' to view available commands";
 
-    // Stats
-    public static final String STATS_INVALID_FORMAT = "  (!) Invalid Stats command" + System.lineSeparator()
+    // Info
+    public static final String INFO_INVALID_FORMAT = "  (!) Invalid Info command" + System.lineSeparator()
             + "  (!) Format:" + System.lineSeparator()
-            + "  1. stats all" + System.lineSeparator()
-            + "  2. stats category" + System.lineSeparator()
-            + "  3. stats status";
+            + "  1. info all" + System.lineSeparator()
+            + "  2. info category" + System.lineSeparator()
+            + "  3. info status";
 
     // List
     public static final String LIST_ALL_MESSAGE = "  (+) Listing out all items in library";
