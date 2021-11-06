@@ -15,7 +15,7 @@ America | 02 Feb 2021
 Enter your command: Enter date of expense:
 	Press enter to use today's date
 Who paid for the expense?: Enter "equal" if expense is to be evenly split, enter individual spending otherwise
-There is USD $8.00 left to be assigned. How much did yikai spend?: There is USD $8.00 left to be assigned. How much did yuzhao spend?: Assign the remaining USD $3.00 to qian? (y/n): Your expense has been added successfully
+There is USD $8.00 left to be assigned. How much did yikai spend?: There is USD $8.00 left to be assigned. How much did yuzhao spend?: Assign the remaining USD $3.00 to qian? (y/n): Your expense has been added successfully!
 Enter your command: 1. 	c a b
 	Date: 19 Oct 2021
 	Amount Spent: USD $8.00
@@ -33,14 +33,14 @@ Enter your command: The exchange rate has been changed from 0.74 to 1.0.
 Enter your command: Enter date of expense:
 	Press enter to use today's date
 Who paid for the expense?: Enter "equal" if expense is to be evenly split, enter individual spending otherwise
-There is USD $24.00 left to be assigned. How much did yikai spend?: There is USD $24.00 left to be assigned. How much did yuzhao spend?: Assign the remaining USD $8.00 to qian? (y/n): Your expense has been added successfully
+There is USD $24.00 left to be assigned. How much did yikai spend?: There is USD $24.00 left to be assigned. How much did yuzhao spend?: Assign the remaining USD $8.00 to qian? (y/n): Your expense has been added successfully!
 Enter your command: Here are the optimized payment transactions:
 yuzhao needs to pay USD $8.00 (SGD $8.00) to yikai
 yuzhao needs to pay USD $13.00 (SGD $13.00) to qian
 Enter your command: Enter date of expense:
 	Press enter to use today's date
 Who paid for the expense?: Enter "equal" if expense is to be evenly split, enter individual spending otherwise
-There is USD $48.00 left to be assigned. How much did yikai spend?: There is USD $16.00 left to be assigned. How much did yuzhao spend?: Assign the remaining USD $16.00 to qian? (y/n): Your expense has been added successfully
+There is USD $48.00 left to be assigned. How much did yikai spend?: There is USD $16.00 left to be assigned. How much did yuzhao spend?: Assign the remaining USD $16.00 to qian? (y/n): Your expense has been added successfully!
 Enter your command: yikai spent USD $32.00 (SGD $32.00) on the trip so far
 yikai owes USD $27.00 (SGD $27.00) to yuzhao
 qian owes USD $3.00 (SGD $3.00) to yikai
