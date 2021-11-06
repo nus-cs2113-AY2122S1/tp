@@ -5,7 +5,7 @@ Actor User as user #abcdef
 Participant ":UI" as ui #abcdef
 Participant ":Parser" as parser #f3f609
 Participant ":Entry" as entry #f3f609
-Participant ":Command" as command
+Participant ":AddMember" as command
 Participant ":Member" as member #d83815
 Participant ":Storage" as storage #ffffff
 
@@ -46,10 +46,15 @@ member --> command
 deactivate member
 
 command --> entry
-deactivate command
+destroy command
 
 entry --> parser
 deactivate entry
 
+parser -> ui
+
 deactivate parser
+
+ui -> user : printNewMemberAdded()
+
 @enduml
