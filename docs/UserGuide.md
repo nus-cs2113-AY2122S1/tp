@@ -525,7 +525,10 @@ Format: `clear [exercise/ workout] [WORKOUT_INDEX]`
 
 > 💡 Note
 >* Include `WORKOUT_INDEX` only when you want to clear exercises.
->* All workouts can also be cleared inside a workout mode.
+>* All workouts can also be cleared inside a workout mode. 
+>* Clearing workouts while inside a workout will return you to the main view.
+
+
 
 Example of usage: 
 
