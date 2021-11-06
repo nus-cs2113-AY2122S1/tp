@@ -50,7 +50,7 @@ public class BudgetManagerTest {
         assertEquals(expectedReminder.toString(), reminder.toString());
     }
 
-    public void setBudget_budgetLessThanExpense_warningGiven() throws ExpenseOverflowException{
+    public void setBudget_budgetLessThanExpense_warningGiven() throws ExpenseOverflowException {
         budgetManager.setBudget(20, ExpenseCategory.OVERALL, finances.getExpenses());
         finances.addExpense(new Expense("mcdonalds", 15, ExpenseCategory.FOOD));
         BudgetReminder reminder = budgetManager.setBudget(10, ExpenseCategory.FOOD, finances.getExpenses());
