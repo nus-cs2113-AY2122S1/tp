@@ -37,7 +37,7 @@ public class Storage {
     private final String filePath = file.getAbsolutePath();
     private final WorkoutListModel workoutListModel = new WorkoutListModel();
 
-    public Storage() throws GetJackDException {
+    public Storage() throws StorageException {
         setupLogger(LOGGER);
         try {
             assert file != null;
@@ -47,7 +47,7 @@ public class Storage {
             LOGGER.info("Generated Data Folder and storage JSON");
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Data file can't be created. Exception: ", e);
-            throw new GetJackDException("☹ OOPS!!! Data file can't be created.");
+            throw new StorageException("☹ OOPS!!! Data file can't be created.");
         }
     }
 
