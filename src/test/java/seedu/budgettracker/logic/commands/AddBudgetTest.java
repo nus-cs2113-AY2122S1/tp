@@ -13,11 +13,7 @@ public class AddBudgetTest {
         double spendingLimit = 20.00;
         int month = 12;
         RecordList currentBudgetList = new RecordList(month);
-        try {
-            currentBudgetList.addBudget(spendingLimit, false);
-        } catch (DuplicateBudgetException e) {
-            e.printStackTrace();
-        }
+        currentBudgetList.addBudget(spendingLimit);
         assertEquals(20.00, currentBudgetList.getBudget().getAmount());
     }
 
