@@ -1,6 +1,6 @@
 package seedu.traveller.exceptions;
 
-
+//@@author Cuiminjing
 public class InvalidDeleteDayFormatException extends TravellerException {
     public InvalidDeleteDayFormatException() {
         message = "\tWrong format for DeleteDay!"
