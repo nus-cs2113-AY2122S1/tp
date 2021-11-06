@@ -33,6 +33,8 @@ them. Finally, [Command Summary](#command-summary) provides you with an overview
     * [add /att](#add-attendance)
     * [delete /att](#delete-attendance)
     * [list /att](#list-attendance)
+* [FAQ](#faq-frequently-asked-questions)
+* [Storage](#Storage)
 * [Command Summary](#command-summary)
 
 ## Acknowledgements
@@ -416,7 +418,16 @@ Attendance data are stored in a sub-folder called `Attendance`. There, the filen
 **A**: Yes, it is a feature. This is to support the use of relative date/time addressing, such as `After next meeting` or `Recess week`, for example. <br />This gives more flexibility to the user to store training data for trainings that may not have a set date currently. 
 <br />However, a side effect is that gibberish String such as `ABCABC` or `DUMMYTEXT` can be stored in the `date/time` field, which is discouraged.
 
+## Storage
+CCA Manager data are saved in the hard disk automatically after any commands that changes the data.
+There is no need to save manually.
 
+⚠ Please refrain from editing the data directly from the CSV file.
+However, if you do so the program is able to run fine if the data changes are valid.
+Else, the program will terminate. You should make sure all data is valid before trying to run the
+program again.
+
+⚠ Do not use commas when manually editing the CSV file.It might cause unintended errors in the program.
 
 ## Command Summary
 
