@@ -66,6 +66,7 @@ Given below are my contributions to the project.
         - Drafted UML Diagram for `Parser`.
         - Added `Recommending workouts`, `Editing an exercise` and `Clearing all workouts or exercises` components in Instructions for Manual Testing.
         - Contributed to the user stories.
+        - Added `Setting up and Getting started` component.
 
 
 - **Project Management**:
