@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//@@author Jach23
+//@@author jach23
 public class EditItemCommand extends Command {
     private static final Logger logger = Logger.getLogger(DeleteDayCommand.class.getName());
     private final String tripName;
