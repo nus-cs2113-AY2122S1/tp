@@ -52,7 +52,7 @@ We recommend the use of [IntelliJ](https://www.jetbrains.com/idea/download) when
 
 ## Design
 
-### Architecture
+### Architecture Overview
 
 ![Architecture Diagram](images/ArchitectureDiagram.png)
 
