@@ -4,11 +4,15 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import seplanner.exceptions.AddParseException;
 import seplanner.modules.ModuleList;
 import seplanner.storage.Storage;
+import seplanner.universities.University;
 import seplanner.universities.UniversityList;
 
 
@@ -39,15 +43,10 @@ public class AddUniCommandParserTest {
 
     @Test
     public void test_invalidUniversityName_exceptionThrown() {
-        try {
-            AddCommandParser commandParser = new AddCommandParser();
-            commandParser.parse("non-existent university name", universityMasterList, moduleMasterList,
-                    universitySelectedList, moduleSelectedList);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        } catch (ParseException e) {
-            assertEquals("Incorrect flags passed.", e.getMessage());
-        }
+        String input = "non-existent university name";
+        AddCommandParser acp = new AddCommandParser();
+        assertThrows(AddParseException.class, () -> acp.handleUniFlagArgs(input,
+                universityMasterList, universitySelectedList));
     }
 
     @Test
@@ -62,4 +61,40 @@ public class AddUniCommandParserTest {
             assertEquals("Missing arguments.", e.getMessage());
         }
     }
+
+    @Test
+    public void parse_universityIndexExceedLowerBound_exceptionThrown() {
+        String input = "-1";
+        AddCommandParser acp = new AddCommandParser();
+        assertThrows(AddParseException.class, () -> acp.handleUniFlagArgs(input,
+                universityMasterList, universitySelectedList));
+    }
+
+    @Test
+    public void parse_universityIndexExceedUpperBound_exceptionThrown() {
+        String input = "81";
+        AddCommandParser acp = new AddCommandParser();
+        assertThrows(AddParseException.class, () -> acp.handleUniFlagArgs(input,
+                universityMasterList, universitySelectedList));
+    }
+
+    @Test
+    public void parse_nonAlphabeticalOrNumericalInput_exceptionThrown() {
+        String input = "@.@";
+        AddCommandParser acp = new AddCommandParser();
+        assertThrows(AddParseException.class, () -> acp.handleUniFlagArgs(input,
+                universityMasterList, universitySelectedList));
+    }
+
+    @Test
+    public void parse_addDuplicateUniversity_exceptionThrown() {
+        String input = "1";
+        AddCommandParser acp = new AddCommandParser();
+        University dummyUniversity = new University("Aarhus School of Business", new ArrayList<>(), 0);
+        universitySelectedList.addUniversity(dummyUniversity);
+        assertThrows(AddParseException.class, () -> acp.handleUniFlagArgs(input,
+                universityMasterList, universitySelectedList));
+    }
+
+
 }
