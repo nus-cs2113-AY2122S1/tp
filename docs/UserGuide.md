@@ -2,10 +2,10 @@
 
 ## Introduction
 
-Get Jack'd is a **desktop app for managing and planning exercise routines, optimized for use via a Command Line Interface** (CLI).
-This application is targeted at computing students who wish to keep track of the workout and exercise routine despite their busy schedule.
-GetJack'd guarantees faster management of workouts than traditional GUI apps. If you are a fast typer and looking for an application to help you 
-embark on a fitness journey, Get Jack'd is the one for you!
+GetJack'D is a **desktop app for managing and planning exercise routines, optimized for use via a Command Line Interface** (CLI).
+This application is targeted at computing students who wish to keep track of their workout and exercise routines in spite of their busy schedules.
+GetJack'D guarantees faster management of workouts than traditional GUI applications. If you type fast and are looking for an application 
+to help you embark on your fitness journey, GetJack'D is the one for you!
 
 ## Contents
 
@@ -28,25 +28,25 @@ embark on a fitness journey, Get Jack'd is the one for you!
   14. [Exiting the application: `bye`](#14-exiting-the-application-bye)
   15. [Saving data](#15-saving-data)
   16. [Editable data file](#16-editable-data-file)
-  17. [Automatic sorting of Workouts](#17-automatic-sorting-of-workouts)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
 
 ## Purpose
 
-This user guide explains how you can set up the application and utilise the various features delivered by GetJackD. 
-In addition, this guide provides the correct format to use, examples to refer and expected outcomes to reconfirm actions.
+This user guide explains how you can set up the application and utilise the various features delivered by GetJack'D. 
+In addition, this guide provides the correct command format to use as well as example commands and expected outcomes for your reference.
 
-As an active fitness enthusiast, you would probably dive straight into using the modifying features.
+If you are an active fitness enthusiast, you can probably dive straight into using the general workout and exercise features.
 
-As a beginner, you may be more interested in the recommended workouts and work your way through from there.
+If you are a beginner, you may be more interested in the recommended workouts and work your way up from there as you get more used to 
+working out and using GetJack'D.
 
 ## Quick Start
 
 1. Ensure you have Java `11` or above installed in your computer.
 2. Download the latest `GetJackd.jar` from [here](https://github.com/AY2122S1-CS2113T-F12-2/tp/releases/)
-3. Go to the folder you saved `GetJackd.jar` and note the **absolute file path**.
+3. Go to the folder you saved `GetJackd.jar` and note the **absolute file path** (the location of the file).
 4. If you are using **Windows**, open up a Command prompt terminal `cmd.exe` or `powershell.exe` and
    navigate to the folder where `GetJackd.jar` is stored (using the file path).
 5. For **Mac** and **Linux** users, do the same as step 4 with the terminal of your respective systems.
@@ -73,28 +73,35 @@ ________________________________________________________
   
 ## Features
 
+GetJack'D maintains a list of workouts (hereafter referred to as the "workout list"), where each workout is a list of exercises. 
+Using the commands specified in this guide will allow you to manipulate these workouts and the workout list in various ways.
+
 > 💡 Note
 >* Words wrapped in square braces `[words]` are parameters, they are the parts of the command that you can change.
-   Words not wrapped in square braces are part of the command format. Not following said command format may cause your
-   input to not be recognised by the application.
+>* Words not wrapped in square braces are part of the command format. 
+>* Not following said command formats may cause your input to not be recognised by the application.
 
 ### 1. Creating a new workout: `create`
 
-Adds a new workout to the list of workouts. You are free to add a deadline to your workouts too.
+Adds a new workout to the list of workouts. You can also add a deadline to your workouts if you want to specify a date to do them by.
 
-Format
+Format:
 - No deadline: `create [WORKOUT_DESCRIPTION]`
 
 - With deadline: `create [WORKOUT_DESCRIPTION], [DEADLINE]`
 
->⚠️ Warning  
->* `DEADLINE` needs to be in format `yyyy-MM-dd`.
->* There must be a space between the comma `,` and the next parameter as shown in the format.
- 
-Usage examples: 
+Parameters:
+* `[WORKOUT_DESCRIPTION]`: The description of the workout you are creating.
+* `[DEADLINE]`: Date of to do workout by.
 
-- No deadline: `create abs`
-- With deadline: `create leg day, 2021-10-21`
+>⚠️ Warning  
+>* `DEADLINE` must be entered in the format `yyyy-MM-dd`.
+>* There must be a space between the comma `,` and the next parameter as shown in the format.
+
+Usage example(s): 
+
+* No deadline: `create abs`
+* With deadline: `create leg day, 2021-10-21`
 
 Expected outcome (*no deadline specified*):
 
@@ -116,17 +123,20 @@ ________________________________________________________
 
 ### 2. Entering into a Workout: `enter`
 
-Allows you to enter into a workout so that you can `add` ,`remove` , mark as `done`, `edit` and `display` exercises
-in the context of the workout routine you have entered, saving you the trouble of entering the workout index everytime.
+Enter into a workout so that you can `add` ,`remove` , mark as `done`, `edit` and `display` exercises
+in the context of the workout routine you have entered, saving you the trouble of entering the workout index for the commands.
 
 > 💡 Note
 >* Entering a workout also confines your search results to within the particular workout you are in.
 
 Format: `enter [WORKOUT_INDEX]`
 
-Example of usage:
+Parameters: 
+- `[WORKOUT_INDEX]`: The workout's number in the workout list.
 
-`enter 2` = enter into the workout with index 2
+Usage example(s):
+
+Enter into the workout with index 2: `enter 2` 
 
 Expected outcome:
 ```
@@ -134,12 +144,17 @@ enter 2
 			________________________________________________________
 			Now inside workout 2 : leg day finish by: 2 Oct 2021
 			________________________________________________________
+add Push-ups, 5 10
+			________________________________________________________
+			New exercise added to workout 1 : [ ] Push-ups | 5 sets of 10 reps
+			________________________________________________________
 ```
 
 
 > 💡 Tip
->* You may enter another workout, say workout 2, while you are currently in one workout, say workout 1.
-You may also add, remove, edit, display and mark exercises as done in workout 2 while you are in workout 1.
+>* You are able to enter into a different workout from within a workout. 
+>* You are able to `add`, `remove`, mark as `done`, `edit` and `display` exercises from other workouts while inside a workout, 
+> provided you specify their workout index.
 
 For example,
 ```
@@ -159,9 +174,9 @@ enter 2
 
 ### 3. Exiting from a workout: `back`
 
-Allows you to exit back into the main view once you have entered into a workout.
+Returns you to the main view after entering into a workout.
 
-Format `back`
+Format: `back`
 
 Expected outcome:
 
@@ -175,13 +190,14 @@ ________________________________________________________
 
 ### 4. Show all workouts: `list`
 
-Shows you all the workouts in the current list of workouts, in **sorted** order: 
-workouts with deadlines (in ascending order), then workouts without deadlines.
+Shows you all the workouts in the current list of workouts, in **sorted** order 
+(i.e. workouts with deadlines, the earliest dates first, then workouts with no deadlines)
+
 
 >⚠️ Warning   
->* Since the workouts are sorted , whenever you create or delete a workout, the indices of other workout might change!️
+>* Since the workouts are sorted, whenever you create or delete a workout, the indices of other workout might change!️
 
-Usage example:
+Usage example(s):
 
 `list`
 
@@ -198,17 +214,41 @@ Workout list:
 ________________________________________________________
 ```
 
+
+GetJack'D automatically sorts your workouts by their deadlines every time you add a new workout to your workout list.
+The workouts will be sorted in order where workouts with the earliest deadlines appear on top. Workouts without
+deadlines will be at the bottom of the list and ranked according to the order they were added to the workout list.
+
+Example (key in the following commands in this order):
+1. `create test`
+2. `create xmas workout, 2021-12-25`
+3. `create halloween workout, 2021-10-31`
+4. `create test 2`
+
+Expected final Workout List:
+```
+________________________________________________________
+Workout list:
+1. halloween workout finish by: 31 Oct 2021
+2. xmas workout finish by: 25 Dec 2021
+3. test
+4. test 2
+________________________________________________________
+```
 ### 5. Deleting a workout: `delete`
 
-Deletes a workout from the list of workouts
-Tip: If you are in Workout Mode and you delete the workout that you are currently in, you will automatically be returned 
-to Main Mode.
+Deletes a workout from the list of workouts.
+
+> 💡 Note
+>* If you are entered into a workout and delete the workout that you are currently in, you will automatically be returned 
+to the main view.
 
 Format: `delete [WORKOUT_INDEX]`
 
-* Workout index is the index of the workout in the list
+Parameters:
+* `[WORKOUT_INDEX]`: The workout's number in the workout list.
 
-Usage example:
+Usage example(s):
 
 `delete 1`
 
@@ -225,21 +265,28 @@ ________________________________________________________
 
 Adds an exercise to a specified workout
 
-Format 
-- Main Mode: `add [EXERCISE_DESCRIPTION], [SETS] [REPS], [WORKOUT_INDEX]`
-- Workout Mode: `add [EXERCISE_DESCRIPTION], [SETS] [REPS]`
+Format: 
+* Main Mode: `add [EXERCISE_DESCRIPTION], [SETS] [REPS], [WORKOUT_INDEX]`
+* Workout Mode: `add [EXERCISE_DESCRIPTION], [SETS] [REPS]`
 
-* Note the comma and space `, `  separating the command arguments
-* Sets and reps are entered in the form of two numbers separated by a space 
+Parameters:
+* `[EXERCISE_DESCRIPTION]`: Description of the exercise to be added.
+* `[SETS]`: Number of sets of exercise.
+* `[REPS]`: Number of repetitions per set.
+* `[WORKOUT_INDEX]`: The workout's number in the workout list.
 
 >⚠️ Warning  
 >* There must be a space between the comma `, ` and the next parameter as shown in the format.
 
-Usage examples:
+Usage example(s):
 
-- Main mode: `add squats, 5 10, 2`  = squats, 5 sets of 10 reps, add to workout 2
+* Main mode: 
 
-- Workout Mode: `enter 1` then `add lunges, 4 8` = lunges, 4 sets of 8 reps, add to workout 1
+Add squats, 5 sets of 10 reps, add to workout 2: `add squats, 5 10, 2` 
+
+* Entered into workout 1: 
+
+Add lunges, 4 sets of 8 reps: `add lunges, 4 8` 
 
 Expected outcome (*Main mode*):
 
@@ -264,20 +311,29 @@ add lunges, 4 8
 
 ### 7. Mark an exercise done: `done`
 
-Marks an exercise from a specified workout as done
+Marks an exercise from a specified workout as done.
 
-Format 
-- Main mode: `done [EXERCISE_INDEX], [WORKOUT_INDEX]`
+Format: 
+* Main mode: `done [EXERCISE_INDEX], [WORKOUT_INDEX]`
+* Workout Mode: `done [EXERCISE_INDEX]`
 
-- Workout Mode: `done [EXERCISE_INDEX]`
+Parameters:
+* `[EXERCISE_INDEX]`: The exercise's number in the workout.
+* `[WORKOUT_INDEX]`: The workout's number in the workout list.
+
 
 >⚠️ Warning  
 >* There must be a space between the comma `,` and the next parameter as shown in the format.
 
-Usage example:
+Usage example(s):
 
-- Main mode: `done 1, 2` = mark exercise 1 from workout 2 as done
-- Workout Mode: `enter 1` then `done 1` = mark exercise 1 from workout 1 as done
+* Main mode: 
+
+Mark exercise 1 from workout 2 as done: `done 1, 2`
+
+* Entered into workout 1: 
+
+Mark exercise 1 as done: `done 1` 
 
 Expected outcome (*Main mode*):
 
@@ -287,7 +343,7 @@ ________________________________________________________
 Completed: [X] lunges | 4 sets of 8 reps
 ________________________________________________________
 ```
-Expected outcome (*Workout Mode*): 
+Expected outcome (*Workout mode*): 
 ```
 enter 1
 			________________________________________________________
@@ -302,29 +358,42 @@ done 1
 
 ### 8. Editing an exercise in a workout: `edit`
 
-Edits an exercise in a specified workout
+Edits an exercise in a specified workout.
 
-Format
-- Main Mode: `edit [EXERCISE_INDEX], [WORKOUT_INDEX], [NEW_DESCRIPTION], [SETS] [REPS]`
+Format:
+- Main Mode: `edit [EXERCISE_INDEX], [WORKOUT_INDEX], [NEW_DESCRIPTION], [NEW_SETS] [NEW_REPS]`
 - Workout Mode: `edit [EXERCISE_INDEX], [NEW_DESCRIPTION], [SETS] [REPS]`
+
+Parameters:
+* `[EXERCISE_INDEX]`: The exercise's number in the workout.
+* `[WORKOUT_INDEX]`: The workout's number in the workout list.
+* `[NEW_DESCRIPTION]`: Edited exercise description.
+* `[NEW_SETS]`: Edited number of sets.
+* `[NEW_REPS]`: Edited number of reps.
 
 >⚠️ Warning
 >* There must be a space between the comma `,` and the next parameter as shown in the format.
 
-Usage example:
-- Main Mode: `edit 2, 1, kickbacks, 4 12 ` = edit exercise `2` from workout `1` to new exercise description of`kickbacks`, new
-sets of `4` and new reps of `12`
-- Workout Mode: `enter 1` then `edit 2, kickbacks, 4 12 ` = edit exercise `2` from workout `1` to new exercise description of`kickbacks`, new
-  sets of `4` and new reps of `12`
+Usage example(s):
 
-Expected outcome:
+* Main Mode: 
+
+Edit exercise 2 from workout 1 to new exercise description of kickbacks, new
+sets of 4 and new reps of 12: `edit 2, 1, kickbacks, 4 12`
+
+* Entered into workout 1:
+
+Edit exercise 2 to new exercise description of kickbacks, new
+sets of 4 and new reps of 12: `edit 2, kickbacks, 4 12 `
+
+Expected outcome (*Main mode*):
 ```
 edit 2, 1, kickbacks, 4 12
 ________________________________________________________
 The edited exercise: [X] kickbacks | 4 sets of 12 reps
 ________________________________________________________
 ```
-Expected outcome (Workout Mode):
+Expected outcome (*Workout mode*):
 ```text
 enter 1
                         ________________________________________________________
@@ -338,18 +407,26 @@ edit 2, kickbacks, 4 12
 
 ### 9. Show all exercises from a workout: `display`
 
-Shows you all the exercises in a specified workout
+Shows you all the exercises in a specified workout.
 
-Format
-- Main Mode: `display [WORKOUT_INDEX]`
-- Workout Mode: `display`
+Format:
+* Main Mode: `display [WORKOUT_INDEX]`
+* Workout Mode: `display`
 
-Examples of usage:
+Parameters:
+* `[WORKOUT_INDEX]`: The workout's number in the workout list.
 
-- Main Mode: `display 1` = Show all exercises from workout 1
-- Workout Mode: `enter 1` then `display` = show all exercises from workout 1
+Usage example(s):
 
-Expected outcome:
+* Main mode: 
+
+Show all exercises from workout 1: `display 1` 
+
+* Entered into workout 1: 
+
+show all exercises: `display` 
+
+Expected outcome (*Main mode*):
 
 ```
 display 1
@@ -360,7 +437,7 @@ Exercises in leg day
 ________________________________________________________
 ```
 
-Expected outcome (Workout Mode):
+Expected outcome (*Workout mode*):
 ```text
 enter 1
                         ________________________________________________________
@@ -378,19 +455,28 @@ display
 
 Removes an exercise from a specified workout
 
-Format
-- Main Mode: `remove [EXERCISE_INDEX], [WORKOUT_INDEX]`
-- Workout Mode: `remove [EXERCISE_INDEX]`
+Format:
+* Main Mode: `remove [EXERCISE_INDEX], [WORKOUT_INDEX]`
+* Workout Mode: `remove [EXERCISE_INDEX]`
+
+Parameters:
+* `[EXERCISE_INDEX]`: The exercise's number in the workout.
+* `[WORKOUT_INDEX]`: The workout's number in the workout list.
 
 >⚠️ Warning  
 >* There must be a space between the comma `,` and the next parameter as shown in the format.
 >* Only one exercise can be removed at a time. 
 
 
-Examples of usage:
+Usage example(s):
 
-- Main Mode: `remove 1, 1` = remove exercise 1 from workout 1
-- Workout Mode: `enter 1` then `remove 1` = remove exercise 1 from workout 1
+* Main mode: 
+
+Remove exercise 1 from workout 1: `remove 1, 1` 
+
+* Entered into workout 1:
+
+Remove exercise 1 from workout 1: `remove 1`
 
 Expected outcome (*Main Mode*):
 
@@ -415,7 +501,7 @@ remove 1
 
 ### 11. Searching for workouts and exercises: `search`
 
-Searches for workouts and exercises containing the keyword specified
+Searches for workouts and exercises containing the keyword specified.
 
 > 💡 Note
 > 
@@ -423,24 +509,26 @@ Searches for workouts and exercises containing the keyword specified
 >- Search by name: Displays workouts or exercises that contain the specified keyword in the workout or exercise name.
 >- Search by date: Displays workouts that has the specified date (in the format `DD MMM YYY`) as the workout deadline.
 >
->Workout Mode: 
->- Search by name: Displays exercises that contain the specified keyword in the exercise name, within the particular workout.
+> Entered into workout: 
+>- Search by name: Displays exercises that contain the specified keyword in the exercise name, only within the particular workout.
 
-Format
-- search by name: `search [KEYWORD]`
-- search by date: `search [DD MMM YYYY]`
+Format:
+* search by name: `search [KEYWORD]`
+* search by date: `search [DD MMM YYYY]`
 
-Examples of usage:
+Usage example(s):
 
-- Main Mode: 
-  - `search kick` = search for workouts and exercises that contain "kick" in the description
-  - `search 2 oct 2021` = search for workouts that have the deadline 2 Oct 2021
-- Workout Mode:
-  - `enter 1` then `search kick` = search for exercises within workout 1 
+* Main Mode: 
 
-Expected outcome:
+search for workouts and exercises that contain "kick" in the description: `search kick`
 
-- Main Mode
+search for workouts that have the deadline 2 Oct 2021: `search 2 oct 2021`
+
+* Workout Mode:
+
+search for exercises within workout 1 : `search kick` 
+
+Expected outcome (*Main mode*):
 ```
 search kick
 ________________________________________________________
@@ -458,7 +546,7 @@ Matching workouts:
 ________________________________________________________
 ```
 
-- Workout Mode
+Expected outcome (*Workout mode*)
 ```
 enter 1
 			________________________________________________________
@@ -473,18 +561,19 @@ search kick
 
 ### 12. Recommend a workout: `recommend`
 
-Provides a given set of workouts with exercises.
+Recommends a set of sample workouts with exercises already added.
 
-> 💡 Note  
->* When command is executed, the recommended workouts will be automatically added to your workout list.
+Format: `recommend [DIFFICULTY]`
 
->⚠️ Warning  
->* Duplicate of same recommended workout will be added to the list if command is executed multiple times.   
+Parameters:
+* `[DIFFICULTY]`: Level of difficulty of the workouts to recommend.
 
+> 💡 Note
+>* `[DIFFICULTY]` can only take the values `beginner`, `intermediate` or `pro`
+>* When the command is executed, the recommended workouts will be automatically added to your workout list.
 
-Format: `recommend [beginner/ intermediate/ pro]`
-
-Example of usage: `recommend beginner`
+>⚠️ Warning
+>* Duplicates of same recommended workouts will be added to the list if command is executed multiple times.
 
 Expected outcome:
 ```
@@ -518,26 +607,33 @@ ________________________________________________________
 
 ### 13. Clearing all workouts or exercises: `clear`
 
-Helps you to remove all the exercises in a specified workout or all workouts in the application in one
-go.
+Removes all workouts or all exercises within a workout.
 
-Format: `clear [exercise/ workout] [WORKOUT_INDEX]`
+Format: 
+* Remove all workouts: `clear workout`
+* Remove all exercises in a workout: `clear exercise [WORKOUT_INDEX]`
+
+Parameters:
+
+* `[WORKOUT_INDEX]`: The workout's number in the workout list.
 
 > 💡 Note
 >* Include `WORKOUT_INDEX` only when you want to clear exercises.
 >* All workouts can also be cleared inside a workout mode. 
 >* Clearing workouts while inside a workout will return you to the main view.
 
+Usage example(s): 
 
+* Main Mode:
 
-Example of usage: 
+Clears all the exercises present inside workout 1: `clear exercise 1`
 
-- Main Mode: 
-  - `clear exercise 1` - Clears all the exercises present inside workout 1
-  - `clear workout` - Clears all the workouts present in the application
-- Workout Mode: 
-  - `enter 1` then `clear exercise` = Clears all exercises within workout 1
-  
+Clears all the workouts present in the application: `clear workout`
+
+* Entered into workout 1: 
+
+Clears all exercises within workout 1: `clear exercise` 
+
 
 Expected outcome (*Main Mode*):
 ```
@@ -568,7 +664,7 @@ clear exercise
 
 ### 14. Exiting the application: `bye`
 
-Allows you to exit from the application.
+Exits from the application.
 
 Format: `bye`
 
@@ -582,18 +678,17 @@ ________________________________________________________
 
 ### 15. Saving data
 
-GetJackd's workout list data is saved in the hard disk automatically after any command that changes the data (Adding 
-or editing workouts and exercises). There is no need to
-save manually.
+The data that GetJack'D saves is saved in the hard disk automatically after any command that changes the data (Adding 
+or editing workouts and exercises). There is no need to save manually.
 
 ### 16. Editable data file
 
-GetJackd's data is saved as a json file `[JAR file location]/data/workouts.json`. Advanced users are welcome to update data
+GetJack'D data is saved as a json file `[JAR file location]/data/workouts.json`. Advanced users are welcome to update data
 directly by editing that data file.
 
-❗  **Caution**: If your changes to the data file is detected to be corrupted or does not conform to GetJackd's
-saved file format (json), GetJack'd will automatically stop running and display an error message. GetJackd will be able
-to run again when the data file conforms to the saved file format (json) again. 
+> ❗  **Caution**: If the data file is detected to be corrupted or does not conform to GetJack'D
+> saved file format (json), GetJack'D will automatically stop running and display an error message. GetJack'D will be able
+> to run again when the data file conforms to the saved file format (json) again. 
 
 **Error Messages when data file does not conform to saved file format**:
 
@@ -620,7 +715,7 @@ ________________________________________________________
 
 **How to resolve errors?**
 
-If you obtained the error messages in any of the 3 scenarios, do ensure that GetJackd's data file is in the valid format as shown below. 
+If you obtained the error messages in any of the 3 scenarios, do ensure that GetJack'D data file is in the valid format as shown below. 
 ```json
 {
   "workouts" : [ {
@@ -644,29 +739,6 @@ _**Things to look out for**_:
 1. Data fields in sets and reps are numbers.
 2. Data field in deadline is following the format: `YYYY-MM-DD`
 3. Missing `{ }`, `[ ]`, `" "` or `,`
-
-### 17. Automatic sorting of Workouts
-
-GetJack'd automatically sorts your workouts by their deadlines every time you add a new workout to your workout list. The
-workouts will be sorted in descending order where workouts with the earliest deadlines being on top. Workouts without 
-deadlines will be at the bottom of the list and ranked according to the time they were added to your workout list. 
-
-Example (key in the following commands in this order): 
-1. `create test`
-2. `create xmas workout, 2021-12-25`
-3. `create halloween workout, 2021-10-31`
-4. `create test 2`
-
-Expected final Workout List:
-```
-________________________________________________________
-Workout list:
-1. halloween workout finish by: 31 Oct 2021
-2. xmas workout finish by: 25 Dec 2021
-3. test
-4. test 2
-________________________________________________________
-```
 
 ## FAQ
 
