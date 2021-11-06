@@ -13,6 +13,7 @@ import java.util.Date;
 import static constants.WarningMessage.expenseNearingBudgetWarning;
 import static constants.WarningMessage.budgetNowZeroWarning;
 import static constants.WarningMessage.expenseExceedBudgetWarning;
+import static constants.WarningMessage.budgetExpenseWarningNotAvailable;
 import static constants.ErrorMessage.cannotFindSuchItemErrorMsg;
 
 public class ExpenseManager implements LoadableManager {
@@ -42,16 +43,20 @@ public class ExpenseManager implements LoadableManager {
 
     public void checkIfBudgetExceeded() {
         Ui ui = Ui.getUi();
-        double totalBudgetValue = BudgetList.getBudgets().get(0).getValue();
-        double totalExpenseValue = ExpenseList.getRunningExpenseValue();
-        double currDiffToBurstBudget = totalBudgetValue - totalExpenseValue;
-        if (currDiffToBurstBudget < warningAmt
-                && currDiffToBurstBudget > 0) {
-            ui.printMessage(expenseNearingBudgetWarning);
-        } else if (currDiffToBurstBudget == 0) {
-            ui.printMessage(budgetNowZeroWarning);
-        } else if (currDiffToBurstBudget < 0) {
-            ui.printMessage(expenseExceedBudgetWarning);
+        try {
+            double totalBudgetValue = BudgetList.getBudgets().get(0).getValue();
+            double totalExpenseValue = ExpenseList.getRunningExpenseValue();
+            double currDiffToBurstBudget = totalBudgetValue - totalExpenseValue;
+            if (currDiffToBurstBudget < warningAmt
+                    && currDiffToBurstBudget > 0) {
+                ui.printMessage(expenseNearingBudgetWarning);
+            } else if (currDiffToBurstBudget == 0) {
+                ui.printMessage(budgetNowZeroWarning);
+            } else if (currDiffToBurstBudget < 0) {
+                ui.printMessage(expenseExceedBudgetWarning);
+            }
+        } catch (Exception error) {
+            ui.printMessage(budgetExpenseWarningNotAvailable);
         }
     }
 

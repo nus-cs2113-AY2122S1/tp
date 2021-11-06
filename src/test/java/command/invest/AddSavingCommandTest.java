@@ -12,13 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AddSavingCommandTest {
 
     @Test
-    public void testAddSaving() {
-        try {
-            DataManager dataMgr = DataManager.getDataMgr();
-            dataMgr.loadAllManagers();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+    public void addSavingCommand_addSaving_success() {
+
         CommandLine cmd = CommandLineFactory.getCmd();
         int exitCode = cmd.execute("invest", "add", "savings", "main", "-v 1000");
 

@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DeleteSavingCommandTest {
 
     @Test
-    public void testDeleteSavingById() {
+    public void deleteSavingCommand_deleteSavingById_success() {
         Saving saving = new Saving("main", 1000.00);
         SavingList.addSavings(saving);
 
