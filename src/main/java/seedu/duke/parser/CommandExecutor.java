@@ -136,6 +136,12 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
     }
     //@@author
 
+    //@@author itsleeqian
+    /**
+     * Prints out the summary of expenses of an individual or everyone.
+     * @param inputParams the individual to view. Can also be null to print everyone.
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
+     */
     protected static void executeSummary(String inputParams) throws ForceCancelException {
         Trip currentTrip = Storage.getOpenTrip();
         if (inputParams == null) {
@@ -161,8 +167,15 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
             }
         }
     }
+    //@@author
 
     //@@author leeyikai
+
+    /**
+     * Checks to see which expenses user wants to see and calls the appropriate method.
+     * @param inputParams contains the information that determines what expenses user wants to see
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
+     */
     protected static void executeView(String inputParams) throws ForceCancelException {
         Trip openTrip = Storage.getOpenTrip();
         if (inputParams == null) {
@@ -199,6 +212,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
             }
         }
     }
+    //@@author
 
     //@@author yeezao
     /**
@@ -231,6 +245,11 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
     }
     //@@author
 
+    //@@author itsleeqian
+    /**
+     * Lists either trips or expenses depending on if a trip is open or not.
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required
+     */
     protected static void executeList() throws ForceCancelException {
         if (!Storage.checkOpenTrip()) {
             Ui.printAllTrips();
@@ -238,6 +257,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
             Ui.printExpensesInList(Storage.getOpenTrip().getListOfExpenses());
         }
     }
+    //@@author
 
     //@@author joshualeeky
 
@@ -258,6 +278,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
     /**
      * Prints how much a Person object owe other Person object and/or how much other Person objects owe the Person
      * object.
+     *
      * @param inputParams the input of the user.
      * @throws ForceCancelException allows the user to cancel an operation when an input is required.
      */
@@ -272,6 +293,13 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
     }
 
     //@@author
+
+    //@@author itsleeqian
+    /**
+     * Lists the people involved in a trip.
+     * @throws TripNotOpenException cannot list people if no trip is open.
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
+     */
     protected static void executePeople() throws TripNotOpenException, ForceCancelException {
         Trip currTrip = Storage.getOpenTrip();
         if (Storage.checkOpenTrip()) {
@@ -281,7 +309,16 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
             throw new TripNotOpenException();
         }
     }
+    //@@author
 
+    //@@author leeyikai
+
+    /**
+     * Check that there are expenses in the current open trip. If there is, execute the optimization method.
+     *
+     * @throws NoExpensesException stops the optimize command when there is no expenses available to optimize.
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
+     */
     protected static void executeOptimize() throws NoExpensesException, ForceCancelException {
         if (Storage.getOpenTrip().getListOfExpenses().size() > 0) {
             checkForOptimization();
@@ -289,6 +326,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
             throw new NoExpensesException();
         }
     }
+    //@@author
 
     //@@author joshualeeky
     private static void executeDeleteExpense(int expenseIndex) throws ForceCancelException {
@@ -405,10 +443,18 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
     }
     //@@author
 
+    //@author leeyikai
 
+    /**
+     * Gets the necessary information and carry out the optimized payment function. When finished optimizing,
+     * this method will call the appropriate method in {@Ui} and print the optimized transactions out.
+     *
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
+     */
     private static void checkForOptimization() throws ForceCancelException {
         Trip trip = Storage.getOpenTrip();
         PaymentOptimizer.optimizePayments(trip);
         Ui.printOptimizedAmounts();
     }
+    //@@author
 }
