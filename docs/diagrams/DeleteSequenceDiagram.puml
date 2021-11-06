@@ -9,13 +9,13 @@ Participant ":IngredientGroup" as ingredient_group INGREDIENTGROUP_COLOUR
 
 Participant ":Storage" as storage STORAGE_COLOUR
 
--> parser : parse("delete n/ carrot e/ 25/12/2021")
+-> parser : parse("delete 1.1")
 activate parser PARSER_COLOUR
 
 parser -> parser : parseDeleteCommand()
 activate parser PARSER_COLOUR_S1
 
-parser -> delete **: DeleteCommand("carrot", "25/12/2021")
+parser -> delete **: DeleteCommand(1, 1)
 activate delete COMMAND_COLOUR
 return
 
@@ -26,16 +26,12 @@ delete -> ingredient_list : getInstance()
 activate ingredient_list INGREDIENTLIST_COLOUR
 return instance
 
-delete -> ingredient_list : removeIngredientFromGroup()
+delete -> ingredient_list : removeIngredientFromGroup(1, 1)
 activate ingredient_list INGREDIENTLIST_COLOUR
 
-ingredient_list -> ingredient_list : findIngredientIndexInList("carrot")
+ingredient_list -> ingredient_list : getIngredientGroup(1)
 activate ingredient_list INGREDIENTLIST_COLOUR
-return groupIndexToRemove
-
-ingredient_list -> ingredient_group : findIngredientIndexByExpiry(25/12/2021)
-activate ingredient_group INGREDIENTGROUP_COLOUR
-return ingredientIndexToRemove
+return
 
 ingredient_list -> ingredient_group : remove()
 activate ingredient_group INGREDIENTGROUP_COLOUR
