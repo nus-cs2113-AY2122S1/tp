@@ -240,7 +240,6 @@ public class Parser {
         logger.log(Level.INFO, "Edit command input");
         Command command;
         try {
-            String tripName = parseEditTripName(userInput);
             String newTripName = "";
             String startCountryCode = "";
             String endCountryCode = "";
@@ -253,6 +252,7 @@ public class Parser {
             if (userInput.contains("/to")) {
                 endCountryCode = parseEditEndCountryCode(userInput);
             }
+            String tripName = parseEditTripName(userInput);
             parseValidTripName(tripName);
             command = new EditCommand(tripName, newTripName, startCountryCode, endCountryCode);
         } catch (StringIndexOutOfBoundsException e) {

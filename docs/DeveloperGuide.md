@@ -243,8 +243,8 @@ Following the loading of the save file, writing of the save file is handled as s
 ![](documentationPics/saveSequenceDiagram.jpg)
 <div style="text-align: center;">Figure 6: Save Sequence Diagram</div>
 
-The return strings of each trip, day and item corresponds to the command that will be executed in order to add it 
-to the tripList/ DaysList or ItemsList.
+The functions `getSaveTrip()`, `getSaveDay()` and `getSaveItem()` return `strings` that corresponds to the 
+command that will be executed in order to add a trip, day or item to the TripList, DaysList or ItemsList respectively.
 
 >![](documentationPics/info.png) Trivial points are omitted from the sequence diagram to keep it more concise.
 > To read up more on what the `SaveLoader` class writes, take a look at the `getSaveX` functions from the `Trip` class
