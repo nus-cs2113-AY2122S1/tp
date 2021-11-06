@@ -10,16 +10,8 @@ import seedu.duke.model.task.TaskList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
-import static seedu.duke.logic.parser.ParserUtil.isVerbose;
-
 //@@author Roycius
 public class ListModuleCommand extends Command {
-    private final String parameter;
-
-    public ListModuleCommand(String parameter) {
-        this.parameter = parameter;
-    }
-
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList, ModuleList moduleList)
             throws DukeException, IOException {

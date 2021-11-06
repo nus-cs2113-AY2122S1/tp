@@ -69,7 +69,10 @@ public class ListCommandParser {
         return new ListTaskCommand(userResponse.toLowerCase());
     }
 
-    private static Command parseListModuleCommand(String userResponse) {
-        return new ListModuleCommand(userResponse.toLowerCase());
+    private static Command parseListModuleCommand(String userResponse) throws ParseException {
+        if (!userResponse.isBlank()) {
+            throw new ParseException(promptFormat(LIST_MODULE_FORMAT));
+        }
+        return new ListModuleCommand();
     }
 }
