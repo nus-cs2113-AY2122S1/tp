@@ -23,7 +23,7 @@ public class MemberParser {
 
         String[] memberNames = userInput.split(INTER_MEMBER_DELIMITER);
         for (int i = 0; i < memberNames.length; i++) {
-            memberNames[i] = memberNames[i].replaceAll(NAME_SPACER, " ");
+            memberNames[i] = memberNames[i].replaceAll(NAME_SPACER, " ").toUpperCase();
         }
         return memberNames;
     }

@@ -97,17 +97,21 @@ public class StorageFile {
                     throw new DukeException("Invalid flag at start of line.");
                 }
             }
-        } catch (NumberFormatException | IndexOutOfBoundsException | DukeException | DateTimeParseException e) {
+        } catch (NumberFormatException | IndexOutOfBoundsException | DateTimeParseException | DukeException e) {
             System.out.println("Oh no seems like the save data is corrupted! Previous data will be overwritten :(\n"
                     + "Corrupted data occurs in the following line in slamData.txt:\n\n"
-                    + line + "\n\n"
-                    + "Data prior to the above line is loaded!\n"
+                    + line);
+            if (e instanceof DukeException) {
+                System.out.println("Additional info: " + e.getMessage() + System.lineSeparator());
+            } else {
+                System.out.println();
+            }
+            System.out.println("Data prior to the above line is loaded!\n"
                     + "Please terminate SLAM by entering <ctrl + c> and fix the save file before restarting.\n"
                     + "Otherwise, performing commands will cause data from that line onwards to be lost!\n");
             Logger logger = Logger.getLogger("Duke logger");
             logger.log(Level.INFO, "File format error", e);
         }
-
         Ui.printLoadSuccesfulMessage();
     }
 
