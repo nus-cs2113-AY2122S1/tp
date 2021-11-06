@@ -1,6 +1,6 @@
 package seedu.typists.content;
 
-import seedu.typists.exception.InvalidArticleException;
+import seedu.typists.common.exception.InvalidArticleException;
 import seedu.typists.ui.TextUi;
 
 import java.util.Random;

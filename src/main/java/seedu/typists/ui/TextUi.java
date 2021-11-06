@@ -29,9 +29,10 @@ public class TextUi {
     private static final String LINE_PREFIX = "     | ";
     private static final String LS = lineSeparator();
 
-
-    //get current timestamp
-    //unused because it interferes with the EXPECTED.TXT in runtest
+    /** Get current timestamp.
+     * Unused because it interferes with the EXPECTED.TXT in runtest
+     * @return current time in yyyy-mm-dd hh:mm:ss format
+     */
     public String getTimeStamp() {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         return timeFormatter.format(timestamp);
