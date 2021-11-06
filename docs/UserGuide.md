@@ -17,9 +17,25 @@ search for ingredients by name or expiry date, and even set and receive alerts w
 This user guide will give you a quick rundown of all the things SITUS can do for you and how you can use these tools effortlessly.  
 
 ### How to use this guide
+There are 4 main sections in this guide, [Quick Start](#1-quick-start), [Features](#2-features), [FAQ](#3-faq), 
+and [Command Summary](#4-command-summary). All of these are included in [Contents](#contents) for your convenience. 
+
+[Quick Start](#1-quick-start) provides you with a short tutorial on how to get SITUS set up correctly on your own device.
+[Features](#2-features) are split into different subsections for each of SITUS' commands. They all have the same structure:
+1. A brief description of what you can do with the command
+2. The format of the command and an explanation of its user-defined parameters if it requires any (more on user-defined 
+parameters [here](#format-notes))
+   * If there are user-defined parameters, examples of possible commands are also given  
+3. Expected outputs from SITUS after running the command
+
+[FAQ](#3-faq) answers some possible questions you may have getting started with SITUS. [Command Summary](#4-command-summary)
+provides a table summarising all SITUS commands and their formats for your quick reference.
+
 #### Format notes
+* All SITUS commands are case-insensitive. Hence, if you enter `carrot`, `Carrot`, or even `caRRoT` as part of commands, they are 
+read as the same word by SITUS
 * Words/phrases in this format: `example`, are command snippets
-* Words/phrases within square brackets `[square bracket]` are user's inputs. <br>
+* Words/phrases within square brackets `[square bracket]` are user's (your) inputs. <br>
   For example, in `delete [INGREDIENT_NUMBER]`, `INGREDIENT_NUMBER` is the user's input,
   such as `delete 1`.
   > Note: Ensure *ALL* parameters are specified when entering the command. There are no optional parameters for commands
@@ -68,7 +84,7 @@ ____________________________________________________
    
 ## 2. Features
 
-This section covers the commands SITUS can execute - how you can use them and the expected outputs. 
+This section covers the commands SITUS can execute - how you can use them and their expected outputs. 
 
 ### 2.1. Viewing Help
 
@@ -101,7 +117,7 @@ ____________________________________________________
 
 You can add an ingredient to the ingredient list to start tracking it.
 
-`add n/[INGREDIENT_NAME] a/[AMOUNT] e/[EXPIRY]`
+Command: `add n/[INGREDIENT_NAME] a/[AMOUNT] e/[EXPIRY]`
 
 The parameters used in the command are:
 * `INGREDIENT_NAME`: the ingredient name to add
@@ -130,9 +146,16 @@ This ingredient will expire in 65 days.
 ____________________________________________________
 ```
 
+> Note: It is important you name your ingredients either **ALL** singular or **ALL** plural to avoid adding both `Carrot` and 
+> `Carrots` as separate ingredients, as SITUS only looks for an exact match when grouping ingredients by name (more on this
+> grouping will be explained in the next section).
+
 ### 2.3. List Ingredients
 
-You can view the full list of your ingredients that SITUS is currently tracking.
+You can view the full list of your ingredients that SITUS is currently tracking. The list shows your ingredients in groups. 
+These groups are ingredients of the same name (e.g. `Carrot` or `Potato`), and within each group are the different expiry
+dates of certain amounts of that ingredient. For example in the output shown below, it shows that there are 20 kg of the 
+ingredient `Carrot`, and all 20 kg are expiring on 01/03/2022.  
 
 Command: `list`
 
@@ -157,8 +180,7 @@ ____________________________________________________
 You can update the amount of an ingredient in your ingredient list if it needs
 changes.
 
-Command:
-`update [GROUP_INDEX.INGREDIENT_INDEX] a/[AMOUNT]`
+Command: `update [GROUP_INDEX.INGREDIENT_INDEX] a/[AMOUNT]`
 
 The parameters used in the command are:
 * `GROUP_INDEX`: the index of the group the ingredient to update is in
@@ -180,8 +202,8 @@ ____________________________________________________
 
 You can subtract a given amount from an ingredient's total amount if you have used/ sold that amount. If the amount 
 given is equal to the existing stock of the ingredient, the ingredient is automatically removed from the list (instead 
-of displaying zero stock for the item.) 
-If the ingredient has multiple entries, the earliest expiring one will be deducted first, as a good practice for inventory management.
+of displaying zero stock for the item.)
+> Note: If the ingredient has multiple entries, the earliest expiring one will be deducted first, as a good practice for inventory management.
 
 Command: `subtract [GROUP_INDEX] a/[AMOUNT]`
 
@@ -240,16 +262,16 @@ This is the current list:
 list
 ____________________________________________________
 Here is the list of the ingredients currently in inventory:
-    1. Carrot | Total Amount: 2.000 kg
-        1.1. Amount Left: 2.000 kg | Expiry Date: 11/11/2021
+	1. Carrot | Total Amount: 2.000 kg
+		1.1. Amount Left: 2.000 kg | Expiry Date: 11/11/2021
 
-    2. Plum | Total Amount: 7.000 kg
-        2.1. Amount Left: 2.000 kg | Expiry Date: 06/11/2021
-        2.2. Amount Left: 5.000 kg | Expiry Date: 12/11/2021
+	2. Plum | Total Amount: 7.000 kg
+		2.1. Amount Left: 2.000 kg | Expiry Date: 06/11/2021
+		2.2. Amount Left: 5.000 kg | Expiry Date: 12/11/2021
 
-    3. Pumpkin | Total Amount: 6.000 kg
-        3.1. Amount Left: 6.000 kg | Expiry Date: 06/11/2021
-        3.2. Amount Left: 1.000 kg | Expiry Date: 21/11/2021
+	3. Pumpkin | Total Amount: 7.000 kg
+		3.1. Amount Left: 6.000 kg | Expiry Date: 06/11/2021
+		3.2. Amount Left: 1.000 kg | Expiry Date: 21/11/2021
 ____________________________________________________
 
 ```
@@ -272,29 +294,32 @@ You can search for ingredients using keywords in their names to find specific in
 full list.
 
 Command: `find [INGREDIENT_NAMES]`
-* `INGREDIENT_NAMES`: the words to search for in the ingredient list
-> Note: One or more ingredient names can be entered. Separate them using *spaces*.
+* `INGREDIENT_NAMES`: the words to search for in the ingredient list. 
+One or more ingredient names can be entered. Separate them using *spaces*.
+> Note: these names are case-insensitive, so the query `carrot` will give results that may not be exact matches, such as `Carrot`.
 
 Examples: `find radish`, `find potato tomato`
 
-Outputs:
+Outputs (using list shown in [Section 2.7](#27-search-ingredients-by-expiry):
 ```
 find carrot
 ____________________________________________________
 I found these ingredients for "carrot":
-    2. Carrot | Total Amount: 200.000 kg
-        2.1. Amount Left: 200.000 kg | Expiry Date: 01/03/2022
+	1. Carrot | Total Amount: 2.000 kg
+		1.1. Amount Left: 2.000 kg | Expiry Date: 11/11/2021
 ____________________________________________________
 ```
 ```
-find potato tomato
+find plum pumpkin
 ____________________________________________________
-I found these ingredients for "potato":
-    1. Potato | Total Amount: 0.600 kg
-        1.1. Amount Left: 0.600 kg | Expiry Date: 30/12/2021
-I found these ingredients for "tomato":
-    4. Tomato | Total Amount: 23.700 kg
-        4.1. Amount Left: 23.700 kg | Expiry Date: 21/11/2021
+I found these ingredients for "plum":
+	2. Plum | Total Amount: 7.000 kg
+		2.1. Amount Left: 2.000 kg | Expiry Date: 06/11/2021
+		2.2. Amount Left: 5.000 kg | Expiry Date: 12/11/2021
+I found these ingredients for "pumpkin":
+	3. Pumpkin | Total Amount: 7.000 kg
+		3.1. Amount Left: 6.000 kg | Expiry Date: 06/11/2021
+		3.2. Amount Left: 1.000 kg | Expiry Date: 21/11/2021
 ____________________________________________________
 ```
 
@@ -321,7 +346,7 @@ There are 3 ingredients expiring by: 11/11/2021
 ____________________________________________________
 alerts stock
 ____________________________________________________
-There are 1 ingredients with stock less than 10.0 kg
+There are 3 ingredients with stock less than 10.0 kg
     Carrot | Total Amount: 2.000 kg
     Plum | Total Amount: 7.000 kg
     Pumpkin | Total Amount: 7.000 kg
