@@ -151,11 +151,12 @@ public class Parser {
 
     private Command prepareStatCommand(String commandParams) throws ParserException {
         String statOption = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
+        String statParams = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
         switch (statOption) {
         case ("-c"):
-            return StatCategoryParser.parse(commandParams);
+            return StatCategoryParser.parse(statParams);
         case ("-y"):
-            return StatYearParser.parse(commandParams);
+            return StatYearParser.parse(statParams);
         default:
             return new InvalidCommand(MESSAGE_INVALID_STAT_COMMAND);
         }
