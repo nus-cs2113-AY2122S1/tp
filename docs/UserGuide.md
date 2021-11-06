@@ -565,6 +565,8 @@ Upon starting the program, it will search for the presence of a file in the dire
 
 > ⚠️ While the `data.json` file can be edited manually, it is highly recommended that users **do not** attempt to do so unnecessarily
 
+> ⚠️ **Do not** make changes to the `data.json` while `libmgr` is running. Any changes made while running will not be reflected by `libmgr` and such changes may be overwritten.
+
 ## FAQ
 
 **Q**: Can I port the program over to other devices
