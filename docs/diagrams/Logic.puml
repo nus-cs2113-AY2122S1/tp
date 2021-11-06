@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/component-diagram
+!include style.puml
+
+component Logic {
+
+component ExpiryEliminator
+component Parser
+
+component "{abstract}\nCommand" as Command
+component XYZCommand
+
+ExpiryEliminator --> Parser
+
+ExpiryEliminator ..> Command : execute >
+Parser ..> XYZCommand : creates >
+
+
+XYZCommand --|> Command
+}
+
+component Storage
+ExpiryEliminator --> Storage
+
+note right of XYZCommand
+XYZCommand = AddCommand,
+DeleteCommand, etc
+end note
+
+@enduml

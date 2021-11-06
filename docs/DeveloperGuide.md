@@ -253,7 +253,7 @@ To help young adults who are living in their own home keep track of ingredients 
 |v2.0|user|list recipes i can cook based on the ingredients I have|save time on checking the ingredients I have|
 |v2.0|user|generate a shopping list for a particular recipe/recipes|know what ingredients to buy|
 |v2.0|user|delete all ingredients that have expired at one go|all ingredients I keep track of are not expired|
-
+|v2.0|user|update the units of an ingredient|accurately quantify each ingredient
 ## Non-Functional Requirements
 
 1. Should work on Windows, Mac, and any mainstream Linux OS as long as it has Java 11 or above installed.
