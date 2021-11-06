@@ -190,15 +190,6 @@ The modules are stored in an ArrayList and ModuleList uses the Module.get(int in
   constructing a Time Table.
 - ModuleList contains getter method find(String input) which returns a module by the same name as the input.
 
-How printing a timetable works:
-
-1. ModuleList first extracts day of week and timeslot information from different schedules.
-2. It then prints out the Timetable one line at a time. At the same time it checks if the day of week and the timeslot
-   corresponds to the schedule.
-
-- If day of week and timeslot corresponds, venue and comments information is printed out
-- If day of week and timeslot does not correspond, and blank character &quot; &quot; is printed instead.
-
 # ![modulePrintTimetableSeq](media/ModuleListseq.png)
 
 How printing a timetable works:
