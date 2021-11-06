@@ -3,11 +3,8 @@ package seedu.duke.commands;
 import org.junit.jupiter.api.Test;
 import seedu.duke.common.LibmgrException;
 import seedu.duke.common.Status;
-import seedu.duke.data.Audio;
 import seedu.duke.data.Book;
 import seedu.duke.data.Catalogue;
-import seedu.duke.data.Magazine;
-import seedu.duke.data.Video;
 import seedu.duke.ui.TextUI;
 
 import java.util.HashMap;
@@ -318,26 +315,26 @@ class ParserTest {
     }
 
     @Test
-    public void parse_stats_StatsCommandObject() {
-        boolean type = parser.parse("stats all") instanceof StatsCommand;
+    public void parse_info_InfoCommandObject() {
+        boolean type = parser.parse("info all") instanceof InfoCommand;
         assertTrue(type);
     }
 
     @Test
-    public void parse_stats_StatsInvalidFormatExceptionThrown() {
+    public void parse_info_InfoInvalidFormatExceptionThrown() {
         TextUI ui = new TextUI();
         Catalogue catalogue = new Catalogue();
-        String args = "stats hello";
+        String args = "info hello";
         try {
-            StatsCommand a = (StatsCommand) parser.parse(args);
-            a.handlesStatsCommand(ui, catalogue);
+            InfoCommand a = (InfoCommand) parser.parse(args);
+            a.handlesInfoCommand(ui, catalogue);
             fail();
         } catch (Exception e) {
-            assertEquals("  (!) Invalid Stats command" + System.lineSeparator()
+            assertEquals("  (!) Invalid Info command" + System.lineSeparator()
                     + "  (!) Format:" + System.lineSeparator()
-                    + "  1. stats all" + System.lineSeparator()
-                    + "  2. stats category" + System.lineSeparator()
-                    + "  3. stats status", e.getMessage());
+                    + "  1. info all" + System.lineSeparator()
+                    + "  2. info category" + System.lineSeparator()
+                    + "  3. info status", e.getMessage());
         }
     }
 
