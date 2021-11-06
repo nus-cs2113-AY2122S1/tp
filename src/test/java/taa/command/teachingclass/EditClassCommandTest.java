@@ -111,7 +111,7 @@ class EditClassCommandTest {
         Storage storage = new Storage(null);
         command.execute(classList, ui, storage);
 
-        boolean hasNewId = teachingClass.getId().equals("cs2113t");
+        boolean hasNewId = teachingClass.getId().equals("CS2113T");
         boolean hasNewName = teachingClass.getName().equals("This is a class.");
         assertTrue(hasNewId && hasNewName);
     }
@@ -132,7 +132,7 @@ class EditClassCommandTest {
         Storage storage = new Storage(null);
         command.execute(classList, ui, storage);
 
-        assertEquals(teachingClass.getId(), "cs2113t");
+        assertEquals(teachingClass.getId(), "CS2113T");
     }
 
 
