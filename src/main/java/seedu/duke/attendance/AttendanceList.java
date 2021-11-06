@@ -53,15 +53,15 @@ public class AttendanceList {
         return attendanceList.size();
     }
 
-    public String getAttendanceMemberName(int index) { //added by xy
+    public String getAttendanceMemberName(int index) {
         return attendanceList.get(index - 1).memberName;
     }
 
-    public String getAttendanceTrainingName(int index) { //added by xy
+    public String getAttendanceTrainingName(int index) {
         return attendanceList.get(index - 1).trainingName;
     }
 
-    public String getAttendancePresentOrLate(int index) { //added by xy
+    public String getAttendancePresentOrLate(int index) {
         return attendanceList.get(index - 1).attended;
     }
 

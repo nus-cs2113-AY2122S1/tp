@@ -25,6 +25,7 @@ public class Attendance {
         setMemberName(attendance.memberName);
         setTrainingName(attendance.trainingName);
         setAttended(attendance.attended);
+        setIndex(attendance.index);
     }
 
     public void setMemberName(String name) {
@@ -55,6 +56,10 @@ public class Attendance {
         return attended;
     }
 
+    public int getIndex() {
+        return index;
+    }
+
     /**
      * Formats description of attendance to be displayed to user.
      *
@@ -62,7 +67,7 @@ public class Attendance {
      */
     @Override
     public String toString() {
-        return String.format("Name: %s | Training Name: %s | Present: [%s] ",
-                memberName, trainingName, attended);
+        return String.format("[%d] Name: %s | Training Name: %s | Present: [%s] ", this.index,
+                this.memberName, this.trainingName, this.attended);
     }
 }
