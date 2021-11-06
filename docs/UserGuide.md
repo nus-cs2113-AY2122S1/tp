@@ -101,10 +101,13 @@ to show all available commands and their format.)
 ### Notes
 
 - Words in `UPPER_CASE` are the parameters to be supplied by you, the user.
-  e.g. in add `a/AMOUNT`, `AMOUNT` is a parameter which can be typed as `a/12.30`.
-- Parameters surrounded with `[` and `]` are optional parameters which you might consider including to your input.
-  e.g. in the add expense/income feature, an optional date parameter `[D/DATE]` may be added which can be typed as `D/19/10/2021` 
-- Most features below have a collapsible section that allows you to see the run time output. Do check them out if you want to visualize what the product looks like!
+e.g. in add `a/AMOUNT`, `AMOUNT` is a parameter which can be typed as `a/12.30`.
+- Parameters can be in any order.
+e.g. if the command specifies `c/CATEGORY a/AMOUNT`, `a/AMOUNT c/CATEGORY` is also acceptable.
+- If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence 
+of the parameter will be taken. e.g. if you gave `a/100 a/1000`, only `a/1000` will be read in.
+- Most features below have a collapsible section that allows you to see the run time output. Do check them out if you 
+want to visualize what the product looks like!
 
 ---
 ### 2.1 Help
