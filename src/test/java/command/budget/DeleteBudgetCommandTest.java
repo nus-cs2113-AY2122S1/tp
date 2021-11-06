@@ -5,23 +5,13 @@ import entity.budget.Budget;
 import entity.budget.BudgetList;
 import org.junit.jupiter.api.Test;
 import picocli.CommandLine;
-import storage.DataManager;
-
-import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DeleteBudgetCommandTest {
 
     @Test
-    public void testDeleteBudget() {
-        try {
-            DataManager dataMgr = DataManager.getDataMgr();
-            dataMgr.loadAllManagers();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-
+    public void deleteBudgetCommand_deleteBudget_success() {
         Budget budget = new Budget(1000);
         BudgetList.addBudget(budget);
 
