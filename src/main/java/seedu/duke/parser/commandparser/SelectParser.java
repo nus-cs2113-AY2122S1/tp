@@ -44,8 +44,7 @@ public abstract class SelectParser extends Parser {
         } catch (InvalidItemTypeException e) {
             System.out.println("Please indicate a flag:\n" + "-e for Event\n" + "-t for Task\n"
                     + "-m for Member");
-        }
-        catch (InvalidIndexException | DukeException e) {
+        } catch (InvalidIndexException | DukeException e) {
             System.out.println(e.getMessage());
         } catch (NumberFormatException e) {
             System.out.println("Please enter a number for the item index!");
