@@ -1,19 +1,11 @@
 package seedu.duke;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import seedu.duke.exceptions.ForceCancelException;
-import seedu.duke.exceptions.SameNameException;
 import seedu.duke.parser.Parser;
-import seedu.duke.trip.Trip;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ValidityCheckerTest {
 
