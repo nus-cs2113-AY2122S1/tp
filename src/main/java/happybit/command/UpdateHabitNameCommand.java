@@ -15,14 +15,14 @@ public class UpdateHabitNameCommand extends UpdateCommand {
     /**
      * Constructor for UpdateHabitNameCommand.
      *
-     * @param goalIndex  Index of goal in goalList, where the habitName of a habit of that goal is to be updated.
-     * @param habitIndex Index of habit in goal, where the habitName is to be updated.
-     * @param habitName  New name of the habit.
+     * @param goalIndex  Index of goal in goalList, where the newHabitName of a habit of that goal is to be updated.
+     * @param habitIndex Index of habit in goal, where the newHabitName is to be updated.
+     * @param newHabitName  New name of the habit.
      */
-    public UpdateHabitNameCommand(int goalIndex, int habitIndex, String habitName) {
+    public UpdateHabitNameCommand(int goalIndex, int habitIndex, String newHabitName) {
         this.goalIndex = goalIndex;
         this.habitIndex = habitIndex;
-        this.habitName = habitName;
+        this.habitName = newHabitName;
     }
 
     /**
@@ -44,4 +44,12 @@ public class UpdateHabitNameCommand extends UpdateCommand {
         }
     }
 
+    /**
+     * Getter for new habit name.
+     *
+     * @return Updated habit name.
+     */
+    public String getNewHabitName() {
+        return habitName;
+    }
 }
