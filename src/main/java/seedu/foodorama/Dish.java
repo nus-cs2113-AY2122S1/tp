@@ -120,11 +120,6 @@ public class Dish implements Comparable<Dish> {
         UI.printEnterWeightOf(dishName);
         Scanner in = new Scanner(System.in);
         String dishWaste = in.nextLine();
-        while (!isNumber(dishWaste)) {
-            UI.clearTerminalAndPrintNewPage();
-            UI.printInvalidDishName();
-            dishWaste = in.nextLine();
-        }
         double inputWastage;
         try {
             inputWastage = Double.parseDouble(dishWaste);
