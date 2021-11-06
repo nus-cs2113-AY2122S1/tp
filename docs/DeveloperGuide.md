@@ -118,7 +118,7 @@ How the `StorageEncoder` class works:
    object from the  `jackson-databind` library
 5. Upon completion, the data file is saved in a default data directory.
 
-**How the `StorageDecoder` class works:**
+How the `StorageDecoder` class works:
 
 ![alt_text](media/StorageDecoderSequenceDiagram.png "image_tooltip")
 
@@ -199,7 +199,7 @@ How printing a timetable works:
 - If day of week and timeslot corresponds, venue and comments information is printed out
 - If day of week and timeslot does not correspond, and blank character &quot; &quot; is printed instead.
 
-# ![modulePrintTimetableSeq](media/modulePrintTimetableSeq.png)
+# ![modulePrintTimetableSeq](media/ModuleListseq.png)
 
 How printing a timetable works:
 
