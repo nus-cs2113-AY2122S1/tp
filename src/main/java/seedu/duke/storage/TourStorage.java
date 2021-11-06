@@ -51,9 +51,9 @@ public class TourStorage {
 
                 if (line.contains("Tour Details:")) {
                     line = scanner.nextLine();
-                    tourName = line.substring(6);
+                    tourId = line.substring(9);
                     line = scanner.nextLine();
-                    tourId = line.substring(4);
+                    tourName = line.substring(6);
                     line = scanner.nextLine();
                     int index = line.indexOf("$");
                     tourPrice = line.substring(index + 1);
