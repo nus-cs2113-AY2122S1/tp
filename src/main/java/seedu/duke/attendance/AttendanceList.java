@@ -1,6 +1,10 @@
+//@@author izdiyadfrhn
+
 package seedu.duke.attendance;
 
 import java.util.ArrayList;
+
+import seedu.duke.attendance.exception.InvalidAttendanceException;
 
 public class AttendanceList {
 
@@ -16,37 +20,6 @@ public class AttendanceList {
 
     public ArrayList<Attendance> getAttendanceList() {
         return attendanceList;
-    }
-
-    /**
-     * Add attendance entry as request by user.
-     *
-     * @param attendance attendance entry to be added
-     */
-    public void addAttendance(Attendance attendance) {
-        attendanceList.add(attendance);
-    }
-
-    /**
-     * Delete attendance entry as request by user.
-     *
-     * @param attendanceNumber member number given by user
-     * @throws IndexOutOfBoundsException When an invalid member is selected to be deleted
-     */
-    public Attendance deleteAttendance(int attendanceNumber) throws IndexOutOfBoundsException {
-        try {
-            int index = attendanceNumber - 1;
-            Attendance entry = attendanceList.get(index);
-            Attendance removedEntry = new Attendance(entry);
-            for (int i = attendanceNumber; i < this.getAttendanceListSize(); i++) {
-                Attendance attendanceToChangeIndex = attendanceList.get(i);
-                attendanceToChangeIndex.setIndex(i);
-            }
-            attendanceList.remove(index);
-            return removedEntry;
-        } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException(e.getMessage());
-        }
     }
 
     public int getAttendanceListSize() {
@@ -65,4 +38,37 @@ public class AttendanceList {
         return attendanceList.get(index - 1).attended;
     }
 
+    /**
+     * Adds attendance entry as request by user.
+     *
+     * @param attendance attendance entry to be added
+     */
+    public void addAttendance(Attendance attendance) {
+        attendanceList.add(attendance);
+    }
+
+    /**
+     * Deletes attendance entry based on index input by user. Index must be valid.
+     *
+     * @param attendanceNumber index of the Attendance entry user wishes to delete.
+     * @return Attendance entry to be deleted
+     * @throws IndexOutOfBoundsException When an invalid member is selected to be deleted
+     * @throws InvalidAttendanceException When unable to find entry with the same details
+     */
+    public Attendance deleteAttendance(int attendanceNumber) throws IndexOutOfBoundsException,
+            InvalidAttendanceException {
+        try {
+            int index = attendanceNumber - 1;
+            Attendance entry = attendanceList.get(index);
+            Attendance removedEntry = new Attendance(entry);
+            for (int i = attendanceNumber; i < this.getAttendanceListSize(); i++) {
+                Attendance attendanceToChangeIndex = attendanceList.get(i);
+                attendanceToChangeIndex.setIndex(i);
+            }
+            attendanceList.remove(index);
+            return removedEntry;
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException(e.getMessage());
+        }
+    }
 }

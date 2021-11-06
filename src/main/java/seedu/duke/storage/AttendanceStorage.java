@@ -1,3 +1,5 @@
+//@@author xingyuan123
+
 package seedu.duke.storage;
 
 import java.io.File;
@@ -14,6 +16,7 @@ import java.util.Locale;
 import seedu.duke.Ui;
 import seedu.duke.attendance.Attendance;
 import seedu.duke.attendance.AttendanceList;
+import seedu.duke.attendance.exception.InvalidAttendanceException;
 import seedu.duke.command.exception.InvalidAddAttendanceException;
 import seedu.duke.command.exception.InvalidAddMemberException;
 
@@ -326,18 +329,24 @@ public class AttendanceStorage {
      * @param index          index of attendance.
      */
     public static void deleteAttendance(AttendanceList attendanceList, String trainingName, int index) {
-        assert index >= 1;
-        int count = 1;
-        for (int i = 1; i <= attendanceList.getAttendanceListSize(); i++) {
-            if (attendanceList.getAttendanceTrainingName(i).equals(trainingName.toUpperCase(Locale.ROOT))) {
-                if (count == index) {
-                    Attendance toDelete = attendanceList.deleteAttendance(i);
-                    Ui.printDeletedAttendanceMessage(toDelete);
-                    break;
-                } else {
-                    count++;
+        try {
+            assert index >= 1;
+            int count = 1;
+            for (int i = 1; i <= attendanceList.getAttendanceListSize(); i++) {
+                if (attendanceList.getAttendanceTrainingName(i).equals(trainingName.toUpperCase(Locale.ROOT))) {
+                    if (count == index) {
+                        Attendance toDelete = attendanceList.deleteAttendance(i);
+                        Ui.printDeletedAttendanceMessage(toDelete);
+                        break;
+                    } else {
+                        count++;
+                    }
                 }
             }
+        } catch (IndexOutOfBoundsException | AssertionError e) {
+            Ui.printDeleteAttendanceErrorMessage("Please input a valid attendance index.");
+        } catch (InvalidAttendanceException e) {
+            Ui.printDeleteAttendanceErrorMessage(e.getMessage());
         }
     }
 

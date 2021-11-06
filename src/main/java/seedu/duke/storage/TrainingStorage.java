@@ -1,4 +1,4 @@
-/*@@author xingyuan123*/
+//@@author xingyuan123
 
 package seedu.duke.storage;
 
