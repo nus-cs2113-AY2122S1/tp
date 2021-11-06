@@ -7,7 +7,9 @@ import seedu.budgettracker.logic.commands.exceptions.CommandException;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class AddExpenditureTest {
     public static final boolean IS_LOADING = true;
@@ -22,7 +24,10 @@ public class AddExpenditureTest {
 
         AllRecordList allRecordList = new AllRecordList();
 
-        AddExpenditureCommand addExpenditureCommand = new AddExpenditureCommand(description, amount, date, category);
+        AddExpenditureCommand addExpenditureCommand = new AddExpenditureCommand(description,
+                amount,
+                date,
+                category);
         addExpenditureCommand.setAllRecordList(allRecordList);
         addExpenditureCommand.execute(IS_LOADING);
 
@@ -37,10 +42,16 @@ public class AddExpenditureTest {
         LocalDate date = LocalDate.now();
         Category category = Category.GENERAL;
 
-        AddExpenditureCommand addNegativeExpenditureCommand = new AddExpenditureCommand(description, negativeAmount, date, category);
+        AddExpenditureCommand addNegativeExpenditureCommand = new AddExpenditureCommand(description,
+                negativeAmount,
+                date,
+                category);
         assertThrows(CommandException.class, addNegativeExpenditureCommand::execute);
 
-        AddExpenditureCommand addZeroExpenditureCommand = new AddExpenditureCommand(description, zeroAmount, date, category);
+        AddExpenditureCommand addZeroExpenditureCommand = new AddExpenditureCommand(description,
+                zeroAmount,
+                date,
+                category);
         assertThrows(CommandException.class, addZeroExpenditureCommand::execute);
     }
 
@@ -54,11 +65,17 @@ public class AddExpenditureTest {
 
         AllRecordList allRecordList = new AllRecordList();
 
-        AddExpenditureCommand addFutureExpenditureCommand = new AddExpenditureCommand(description, amount, futureDate, category);
+        AddExpenditureCommand addFutureExpenditureCommand = new AddExpenditureCommand(description,
+                amount,
+                futureDate,
+                category);
         addFutureExpenditureCommand.setAllRecordList(allRecordList);
         assertThrows(CommandException.class, addFutureExpenditureCommand::execute);
 
-        AddExpenditureCommand addPastExpenditureCommand = new AddExpenditureCommand(description, amount, pastDate, category);
+        AddExpenditureCommand addPastExpenditureCommand = new AddExpenditureCommand(description,
+                amount,
+                pastDate,
+                category);
         addPastExpenditureCommand.setAllRecordList(allRecordList);
         assertThrows(CommandException.class, addPastExpenditureCommand::execute);
 
