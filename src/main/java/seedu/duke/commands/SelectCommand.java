@@ -34,7 +34,6 @@ public class SelectCommand extends Command {
         this.taskIndex = taskIndex;
     }
 
-
     public CommandResult execute() {
         Item selectedItem;
         Member selectedMember;
@@ -50,7 +49,7 @@ public class SelectCommand extends Command {
             selectedMember = getMemberFromIndex(memberIndex);
             return new CommandResult(Ui.getSelectedMemberMessage(selectedMember));
         default:
-            return new CommandResult("");
+            return new CommandResult("Something went wrong.");
         }
     }
 
