@@ -1,13 +1,13 @@
 # Developer Guide
 
-This developer guide documents the design and implementation of the application,
-_Ha(ppy)Bit_. It will provide an insight into the design considerations, and implementation
-of features.
+This document describes the architecture and software implementation of the application, _Ha(ppy)Bit_. The document is 
+meant for developers who wish to gain insight into the design considerations and implementation of features, and 
+possibly expand on the application.
 
 * [Acknowledgements](#acknowledgements)
-* [Design and Implementation](#design-and-implementation)
-  * [Architecture](#architecture)
-  * [UI component](#ui-component)
+* [Design and Implementation](#3-design-and-implementation)
+  * [Architecture](#31-overall-architecture)
+  * [UI component](#32-ui-component)
   * [Command component](#command-component)
   * [Parser logic component](#parser-logic-component)
   * [GoalList component](#goallist-component)
@@ -41,17 +41,85 @@ This application adapted the Developer Guide and User Guide from:
 
 ---------------------------------------------------------------------------------------------------------
 
-## Design and Implementation
+## 1. Introduction
 
-### Architecture
+### 1.1. Overview of Ha(ppy)Bit
 
-The diagram below shows the higher-level implementation of the interactions of all the components within `HappyBit` 
+Ha(ppy)Bit is a desktop application aimed to empower students to achieve their goals—whether personal, academical, or 
+health—amidst the hectic and stressful university life, through cultivating good habits. The application operates on a 
+Command Line Interface (CLI) while still comprising features typically found in a Graphical User Interface (GUI). 
+Students who type fast will find that Ha(ppy)Bit performs habit tracking more efficiently than your conventional GUI 
+applications.
 
-![Ui Diagram](Diagram Images/SystemArchitecture.png)
+### 1.2. Terminology
 
-In the sections below, we will be explaining in detail how each component works.
+Name     | Description                                                 | Example
+-----    | ----------------------------------------------------------- | ---------------------
+Goal     | A long term achievement you wish to accomplish.             |`Lose 5kg by Dec`
+Habit    | Small, actionable tasks to be done to achieve goal.         |`Run 5km`
+Interval | The frequency (in days) which you want the habit to recur.  |`Run 5km every 7 days`
 
-### UI component
+One goal can have one or more habits.\
+One habit can have one or more intervals.
+
+### 1.3. Icons and Format
+
+> 📃 **Notes**: important information you should take note off (especially if you encounter input errors)
+
+> ⚠ **Warning**: avoid doing the things mentioned here at all costs (unless you're feeling lucky)
+
+> 💡 **Pro-Tip!** additional information that may make your tracking journey easier
+
+> 😀 &#8594; Used to show the developers' exuberance!!!
+
+> 👍 &#8594; Used to show the developers' love and support for you.
+
+## 2. Setting Up
+
+### 2.1. Application Requirements
+
+1. Ensure that you have installed Java SE Development Kit (JDK) 11 on your computer. If you do not have it installed, 
+   you may download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
+2. Recommended to use [IntelliJ IDEA](https://www.jetbrains.com/idea/download/).
+3. Fork this [repository](https://github.com/AY2122S1-CS2113T-F14-1/tp), and clone the fork to your computer.
+
+### 2.2. Project Set-Up
+
+> ⚠ Follow the steps in the following guide exactly. Any deviations may result in the code failing to run as intended.
+
+1. Start IntelliJ IDEA.
+2. If you are currently on a project, close the project.
+3. Navigate to `Plugins` and ensure that the Gradle plugin is enabled (Gradle is installed by default).
+4. Open the project that was forked to your computer.
+5. Set-up JDK 
+   * Navigate to `File` > `Project Structure...` > `Project` 
+   * Under `Project SDK`, add the JDK installed in Section 2.1.1
+   * Under `Project Language Level`, choose `11 - Local variable syntax for lambda parameters`
+6. Navigate to `Project` > `tp` > `src` > `main` > `happybit` > `HappyBit`
+7. Locate the `main` method and click the green triangle on the left of it
+8. If the code builds and runs with no issues, you are good.
+
+## 3. Design and Implementation
+
+### 3.1. Overall Architecture
+
+The architecture diagram below describes the high-level design of the application.
+
+![Ui Diagram](Diagram Images/OverallArchitecture.png)
+
+The 5 main components of the architecture diagram are:
+1. `Ui` : User interface of the application
+2. `Parser` : Parses user inputs (checks if input is valid and logic is correct)
+3. `Command` : Executes the user commands
+4. `Goal` : Contains the data of all goals, habits and intervals, as well as the logic to update them
+5. `Storage` : Facilitates transfer of data between the application and external storage files
+
+The sequence diagram below shows how the components interact with each other for the scenario where the user issues the
+command `remove g/1` to remove the goal at index 1.
+
+![Ui Diagram](Diagram Images/ArchitectureSequenceDiagram.png)
+
+### 3.2. UI component
 
 **API:** `Ui.java`
 
