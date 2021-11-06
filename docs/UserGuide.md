@@ -62,6 +62,9 @@ Displays the list of all classes in the class list.
 
 Format: `list_classes`
 
+Expected Output:
+![ListClassesCommand](images/class/ListClassesCommand.png)
+
 <br>
 
 #### Adding a class: `add_class`
@@ -74,9 +77,12 @@ Format: `add_class i/<CLASS_ID> [n/<CLASS_NAME>]`
 * `CLASS_NAME` [Optional] refers to the name of the class to be added.
 
 Examples:
-* `add_class i/CS2113T-F12 n/Tutorial Group F12`
+* `add_class i/cs2113t-f12 n/Tutorial Group F12`
 * `add_class n/Sectional Group C03 i/CS2101-C03`
 * `add_class i/CS2102`
+
+Expected Output:
+![AddClassesCommand](images/class/AddClassCommand.png)
 
 <br>
 
@@ -93,9 +99,12 @@ Format: `edit_class c/<CLASS_ID> [i/<NEW_CLASS_ID> | n/<NEW_CLASS_NAME>]`
 > * `NEW_CLASS_NAME`
 
 Examples:
-* `edit_class c/CS2113T-F12 i/cs2113t-f12`
-* `edit_class c/CS2113T-F12 n/Class F12`
+* `edit_class c/CS2113T-F12 i/cs2113t-f11`
+* `edit_class c/cs2113t-f12 n/Class F12`
 * `edit_class c/CS2113T-F12 i/CS2113T-F13 n/Class-F13 of Software Engineering`
+
+Expected Output:
+![EditClassesCommand](images/class/EditClassCommand.png)
 
 <br>
 
@@ -106,8 +115,11 @@ Format: `delete_class c/<CLASS_ID>`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 
 Examples:
-* `delete_class c/CS2113T-F12`
+* `delete_class c/cs2113t-f12`
 * `delete_class c/CS2101-C03`
+
+Expected Output:
+![DeleteClassesCommand](images/class/DeleteClassCommand.png)
 
 <br>
 <hr>
@@ -125,6 +137,7 @@ Examples:
 
 Expected Output: <br>
 ![img.png](images/students/ListStudentsCommand.png)
+
 <br>
 
 #### Adding a student to a class: `add_student`
@@ -180,6 +193,7 @@ Examples:
 
 Expected Output: <br>
 ![img.png](images/students/DeleteStudentCommand.png)
+
 <br>
 
 #### Finding students in a class given a keyword: `find_student`
@@ -195,6 +209,7 @@ Examples:
 
 Expected Output: <br>
 ![img_1.png](images/students/FindStudentCommand.png)
+
 <br>
 <hr>
 
@@ -393,6 +408,7 @@ Expected Output: <br>
 (Descending) <br>
 ![img.png](images/students/SortByScoresCommand_desc.png)
 
+<br>
 <hr>
 
 ### Attendance
