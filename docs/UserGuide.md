@@ -276,10 +276,13 @@ Edits any main aspect about an existing trip.
 
 
 #### Usage Example:
-   * `edit FamilyTrip2021 /from SKR /to JPN` edits an existing trip called `FamilyTrip2021` to be from South Korea to
-Japan.
-   * `edit FamilyTrip2021 /name SoloTrip2021` edits an existing trip called `FamilyTrip2021` to now be called 
-`SoloTrip2021`
+```
+_________________________________________________________________________________
+$ edit FamilyTrip2021 /name SoloTrip2021 /from SKR /to JPN
+_________________________________________________________________________________
+	You have just edited a trip called FamilyTrip2021.
+_________________________________________________________________________________
+```
 
 > ![](documentationPics/tip.png) Edit only allows you to change the name, to and from of a trip.
 > To change your trip itinerary use [edit-item](#210-edit-an-item-edit-item) instead!

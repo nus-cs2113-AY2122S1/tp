@@ -36,6 +36,7 @@ Listed below are my contributions to Traveller.
   * Kept it updated and debugged.
   * Wrote first draft of UG which includes Quick Start, Features (new, view, delete, edit, exit), 
   FAQ and Command Summary.
+  * Wrote edit, Supported Countries Summary, 
 * Developer Guide (DG)
   * Wrote first draft of DG which includes Target User Profile, Value Proposition, User Stories, 
   Non-Functional Requirements, Glossary.
