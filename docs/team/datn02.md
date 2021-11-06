@@ -29,9 +29,8 @@ Users interact with in through a CLI, and is written in Java.
   6. `DeleteCommand` class
      - **What it does**: this class is responsible for removing ingredients from the database based on the ingredient group number and ingredient number.
      - **Justification**: deleting by their numbers in lists and groups provides a faster way to operate this command.
-     - **Further details**: previously, this command is operated by supplying the ingredient name and expiry date instead of ingredient numbers in the list. This involved checking of the ingredient name, and then checking the matching expiry date in each individual ingredient groups. This method was lengthy and error-prone, and since the ingredients are already sorted accordingly to their name and expiry, the current method of this command is carried out.
   7. Others
-     - Participated in early stages of `AlertExpiringSoon` command, which later completed by @mudkip8.
+     - Participated in early stages of `AlertExpiringSoon` command, which later completed by [@mudkip8](https://github.com/mudkip8).
      - Added sorting methods in the `IngredientGroup` class.
      - Added `add()` and `deleteIngredientFromGroup()` methods in `IngredientList` class for adding and removing ingredients.
      - Debugged and fixed `SubtractCommand` and `UpdateCommand` with their respecting methods `subtractIngredientFromGroup()` and `update()` in `IngredientList` class.
