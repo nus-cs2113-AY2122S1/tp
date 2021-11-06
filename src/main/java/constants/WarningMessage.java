@@ -12,4 +12,7 @@ public final class WarningMessage {
 
     public static final String expenseExceedBudgetWarning = "Your latest expense has made you burst your budget! "
             + "\nPlease spend more consciously now.";
+
+    public static final String budgetExpenseWarningNotAvailable = "You don't have a budget set. "
+            + "So you will not receive any warnings when your expense is about to exceed your budget.";
 }

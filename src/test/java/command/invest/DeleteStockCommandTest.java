@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DeleteStockCommandTest {
 
     @Test
-    public void testDeleteStockById() {
+    public void deleteStockCommand_deleteStockById_success() {
         Stock stock = new Stock("dbs", 1000, 25.00);
         StockList.addStock(stock);
 

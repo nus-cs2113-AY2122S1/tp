@@ -1,5 +1,6 @@
 package entity.expense;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,6 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class ExpenseListTest {
+
+    @BeforeAll
+    public static void setUp() {
+        ExpenseList.clearExpenses();
+        ExpenseList.setRunningExpenseValue(0);
+    }
 
     @Test
     public void addExpense_expenseListAdd_success() {
