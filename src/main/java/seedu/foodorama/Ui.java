@@ -318,6 +318,11 @@ public class Ui {
             + "Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:" + System.lineSeparator()
             + LINE_DIVIDER;
 
+    public static final String INVALID_CONFIRMATION_SOFT_LIMIT = LINE_DIVIDER + System.lineSeparator()
+            + "Sorry, that is an invalid input. "
+            + "Please type 'y/yes' to confirm or 'n/no' to type new weight" + System.lineSeparator()
+            + LINE_DIVIDER;
+
     public static final String INVALID_INGR_NAME = LINE_DIVIDER + System.lineSeparator()
             + "Sorry, Ingredient Name cannot be a Number. The command has been disregarded."
             + System.lineSeparator()
@@ -708,6 +713,10 @@ public class Ui {
         System.out.println(INVALID_CONFIRMATION);
     }
 
+    public void printInvalidConfirmationSoftLimit() {
+        System.out.println(INVALID_CONFIRMATION_SOFT_LIMIT);
+    }
+
     public void printInvalidIngredientName() {
         System.out.println(INVALID_INGR_NAME);
     }
@@ -1023,17 +1032,23 @@ public class Ui {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "The weight of " + dishName + " wasted cannot be negative!" + System.lineSeparator()
                 + "Please enter a weight that is not negative:" + System.lineSeparator()
-                + LINE_DIVIDER
-        );
+                + LINE_DIVIDER);
     }
 
     public void printDishWasteValueHigh(String dishName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "The weight of " + dishName + " wasted is unusually greater than 10,000kg!" + System.lineSeparator()
                 + "Are you sure you want to add this weight?" + System.lineSeparator()
-                + "Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:" + System.lineSeparator()
-                + LINE_DIVIDER
-        );
+                + "Please type 'y'/'yes' to confirm, or 'n'/'no' to type a new weight:" + System.lineSeparator()
+                + LINE_DIVIDER);
+    }
+
+    public void printIngrValueHigh(String ingrName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "The weight of " + ingrName + " is unusually greater than 10,000kg!" + System.lineSeparator()
+                + "Are you sure you want to add this weight?" + System.lineSeparator()
+                + "Enter 'y' to continue, or 'n' to type a new weight" + System.lineSeparator()
+                + LINE_DIVIDER);
     }
 
     public String printNumericalInputInvalid(String type) {
