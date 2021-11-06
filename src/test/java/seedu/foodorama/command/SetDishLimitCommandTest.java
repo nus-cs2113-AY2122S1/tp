@@ -43,7 +43,7 @@ class SetDishLimitCommandTest {
             commandToTest.execute(inputs);
             assertEquals(7.2,DishList.dishList.get(0).getLimit());
             //Test case for negative inputs
-            fakeInput = new ByteArrayInputStream("-22".getBytes());
+            fakeInput = new ByteArrayInputStream("-22\n2".getBytes());
             System.setIn(fakeInput);
             commandToTest.execute(inputs);
         } catch (FoodoramaException e) {

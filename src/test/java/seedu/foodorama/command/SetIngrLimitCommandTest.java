@@ -44,7 +44,7 @@ class SetIngrLimitCommandTest {
             commandToTest.execute(inputs);
             assertEquals(7.2,IngredientList.ingredientList.get(0).getLimit());
             //Test case for negative inputs
-            fakeInput = new ByteArrayInputStream("-22".getBytes());
+            fakeInput = new ByteArrayInputStream("-22\n33".getBytes());
             System.setIn(fakeInput);
             commandToTest.execute(inputs);
             //System.setIn(fakeInput);

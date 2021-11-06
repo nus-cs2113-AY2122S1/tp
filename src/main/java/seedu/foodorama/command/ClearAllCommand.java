@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 public class ClearAllCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger("ClearAllCommand.execute()");
     private static final Ui UI = new Ui();
+    public static final String YES_NO_REGEX = "^(y|yes|n|no)$";
 
     ClearAllCommand() {
         LoggerManager.setupLogger(LOGGER);
@@ -25,7 +26,7 @@ public class ClearAllCommand extends Command {
         Scanner input = new Scanner(System.in);
         UI.printConfirmClearAll();
         String confirmClear = input.nextLine().toLowerCase();
-        while (!confirmClear.matches("^(y|yes|n|no)$")) {
+        while (!confirmClear.matches(YES_NO_REGEX)) {
             UI.clearTerminalAndPrintNewPage();
             UI.printInvalidConfirmation();
             confirmClear = input.nextLine().toLowerCase();
