@@ -109,11 +109,11 @@ public class ContactsDecoder extends RegexParser {
             ExceptionTextUi.invalidFlagMessage();
         } catch (InvalidGithubUsernameException | InvalidNameException | InvalidTelegramUsernameException
                 | InvalidLinkedinUsernameException | InvalidTwitterUsernameException | InvalidEmailException e) {
-            handleInvalidNames(e, lineIndex, contactFilePath);
+            handleInvalidDetails(e, lineIndex, contactFilePath);
         }
     }
 
-    private void handleInvalidNames(Exception e, int lineIndex, String contactFilePath) {
+    private void handleInvalidDetails(Exception e, int lineIndex, String contactFilePath) {
         ExceptionTextUi.invalidLoadedLineMessage(lineIndex, contactFilePath);
         if (e instanceof InvalidNameException) {
             ExceptionTextUi.invalidNameInput();
