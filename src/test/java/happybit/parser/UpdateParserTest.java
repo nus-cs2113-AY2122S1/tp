@@ -1,16 +1,17 @@
 package happybit.parser;
 
-import happybit.command.UpdateGoalNameCommand;
-import happybit.command.UpdateGoalEndDateCommand;
-import happybit.command.UpdateGoalTypeCommand;
-import happybit.command.UpdateHabitIntervalCommand;
-import happybit.command.UpdateHabitNameCommand;
+import happybit.command.UpdateGoalCommand;
+//import happybit.command.UpdateGoalNameCommand;
+//import happybit.command.UpdateGoalEndDateCommand;
+//import happybit.command.UpdateGoalTypeCommand;
+import happybit.command.UpdateHabitCommand;
+//import happybit.command.UpdateHabitIntervalCommand;
+//import happybit.command.UpdateHabitNameCommand;
 
 import happybit.exception.HaBitParserException;
 import happybit.goal.GoalType;
 import org.junit.jupiter.api.Test;
 
-import java.nio.file.attribute.UserDefinedFileAttributeView;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class UpdateParserTest {
 
+    /*
     private static final String ERROR_INVALID_UPDATE_COMMAND = "There is no update command for goals in this format, "
             + "do check your parameters one more time.\nDo not include more or less parameters than necessary.";
     private static final String ERROR_INVALID_CHANGE_COMMAND = "There is no change command for habits in this format, "
@@ -67,11 +69,163 @@ class UpdateParserTest {
 
     private static final String DATE_FORMAT = "ddMMyyyy";
     private static final String INTERVAL_TOO_LARGE = "366";
+    */
+    private static final String ERROR_UPDATE_COMMAND_NO_GOAL_INDEX = "A goal index has to be provided with the "
+            + "g/ flag for Update commands.";
 
+    private static final String ERROR_INVALID_UPDATE_COMMAND = "There is no update command for goals in this format, "
+            + "do check your parameters one more time.";
+
+    private static final String ERROR_UPDATE_START_DATE = "The start date cannot be updated once set. Start on time!";
+
+    private static final String ERROR_CHANGE_COMMAND_MISSING_INDEXES = "A goal index and a habit index has to be "
+            + "provided using the g/ and h/ flags respectively for Change commands";
+
+    private static final String ERROR_INVALID_CHANGE_COMMAND = "There is no change command for habits in this format, "
+            + "do check your parameters one more time.";
     /*
     Tests for parseUpdateGoalCommands()
      */
 
+    @Test
+    void parseUpdateGoalCommands_validInputs_success() throws HaBitParserException {
+
+        UpdateParser updateParser = new UpdateParser();
+        String changeNameNoExcess = "g/1 n/change name";
+        UpdateGoalCommand test = (UpdateGoalCommand) updateParser.parseUpdateGoalCommands(changeNameNoExcess);
+        assertEquals(0, test.getGoalIndex());
+        assertEquals("change name", test.getNewGoalName());
+
+        String changeNameWithExcess = "g/1 n/change name i/3";
+        UpdateGoalCommand test1 = (UpdateGoalCommand) updateParser.parseUpdateGoalCommands(changeNameWithExcess);
+        assertEquals(0, test1.getGoalIndex());
+        assertEquals("change name", test1.getNewGoalName());
+        assertEquals("i/", test1.getExcessAttributes().get(0));
+
+        String changeNameAndEndDateNoExcess = "g/1 n/change name e/31122021";
+        UpdateGoalCommand test2 = (UpdateGoalCommand) updateParser.parseUpdateGoalCommands(
+                changeNameAndEndDateNoExcess);
+        assertEquals(0, test2.getGoalIndex());
+        assertEquals("change name", test2.getNewGoalName());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+        Date expectedDate;
+        try {
+            expectedDate = dateFormat.parse("31122021");
+        } catch (ParseException e) {
+            throw new HaBitParserException(e.getMessage());
+        }
+        assertEquals(expectedDate, test2.getNewGoalEndDate());
+
+        String changeNameAndEndDateWithExcess = "g/1 n/change name e/31122021 h/1 i/5";
+        UpdateGoalCommand test3 = (UpdateGoalCommand) updateParser.parseUpdateGoalCommands(
+                changeNameAndEndDateWithExcess);
+        assertEquals(0, test3.getGoalIndex());
+        assertEquals("change name", test3.getNewGoalName());
+        Date expectedDate1;
+        try {
+            expectedDate1 = dateFormat.parse("31122021");
+        } catch (ParseException e) {
+            throw new HaBitParserException(e.getMessage());
+        }
+        assertEquals(expectedDate1, test3.getNewGoalEndDate());
+        assertEquals("h/", test3.getExcessAttributes().get(0));
+        assertEquals("i/", test3.getExcessAttributes().get(1));
+
+        String changeNameAndEndDateAndGoalTypeWithExcess = "g/1 n/change name e/31122021 t/ex i/3 h/2";
+        UpdateGoalCommand test4 = (UpdateGoalCommand) updateParser.parseUpdateGoalCommands(
+                changeNameAndEndDateAndGoalTypeWithExcess);
+        assertEquals(0, test4.getGoalIndex());
+        assertEquals("change name", test4.getNewGoalName());
+        Date expectedDate2;
+        try {
+            expectedDate2 = dateFormat.parse("31122021");
+        } catch (ParseException e) {
+            throw new HaBitParserException(e.getMessage());
+        }
+        assertEquals(expectedDate2, test4.getNewGoalEndDate());
+        GoalType expectedGoalType = GoalType.EXERCISE;
+        assertEquals(expectedGoalType, test4.getNewGoalType());
+        assertEquals("h/", test4.getExcessAttributes().get(0));
+        assertEquals("i/", test4.getExcessAttributes().get(1));
+
+    }
+
+    @Test
+    void parseUpdateGoalCommands_invalidInputs_exceptionThrown() throws HaBitParserException {
+
+        try {
+            UpdateParser.parseUpdateGoalCommands(" i/3 h/3");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_UPDATE_COMMAND_NO_GOAL_INDEX, e.getMessage());
+        }
+
+        try {
+            UpdateParser.parseUpdateGoalCommands("g/1 i/3 h/3");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_INVALID_UPDATE_COMMAND, e.getMessage());
+        }
+
+        try {
+            UpdateParser.parseUpdateGoalCommands("g/1 n/test i/3 h/3 s/31122021");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_UPDATE_START_DATE, e.getMessage());
+        }
+    }
+
+    @Test
+    void parseUpdateHabitCommands_validInputs_success() throws HaBitParserException {
+        UpdateParser updateParser = new UpdateParser();
+        String changeNameAndIntervalNoExcess = "g/1 h/1 n/change name i/3";
+        UpdateHabitCommand test = (UpdateHabitCommand) updateParser.parseUpdateHabitCommands(
+                changeNameAndIntervalNoExcess);
+        assertEquals(0, test.getGoalIndex());
+        assertEquals(0, test.getHabitIndex());
+        assertEquals("change name", test.getNewHabitName());
+        assertEquals(3, test.getNewHabitInterval());
+
+        String changeNameAndIntervalWithExcess = "g/1 h/1 n/change name i/3 t/ex e/31122021";
+        UpdateHabitCommand test1 = (UpdateHabitCommand) updateParser.parseUpdateHabitCommands(
+                changeNameAndIntervalWithExcess);
+        assertEquals(0, test1.getGoalIndex());
+        assertEquals(0, test1.getHabitIndex());
+        assertEquals("change name", test1.getNewHabitName());
+        assertEquals(3, test1.getNewHabitInterval());
+        assertEquals("e/", test1.getExcessAttributes().get(0));
+        assertEquals("t/", test1.getExcessAttributes().get(1));
+    }
+
+    @Test
+    void parseUpdateHabitCommands_invalidInputs_exceptionThrown() throws HaBitParserException {
+        try {
+            UpdateParser.parseUpdateHabitCommands("t/ex e/31122021");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_CHANGE_COMMAND_MISSING_INDEXES, e.getMessage());
+        }
+
+        try {
+            UpdateParser.parseUpdateHabitCommands("g/1 h/1 t/ex e/31122021");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_INVALID_CHANGE_COMMAND, e.getMessage());
+        }
+
+        try {
+            UpdateParser.parseUpdateGoalCommands("g/1 h/1 t/ex e/31122021 s/31112021");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_UPDATE_START_DATE, e.getMessage());
+        }
+    }
+
+    /*
+    Able to assert handling of incorrect variables within flag due to tests below
+     */
+
+    /*
     @Test
     void parseUpdateGoalCommands_userUpdateGoalAttribute_success() throws HaBitParserException {
         UpdateParser updateParser = new UpdateParser();
@@ -107,7 +261,7 @@ class UpdateParserTest {
      * @param strDate Date written in String format
      * @return Date object of strDate
      * @throws ParseException If the String Date fails to be parsed
-     */
+     * /
     private static Date stringToDateForTest(String strDate) throws HaBitParserException {
         SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
         formatter.setLenient(false);
@@ -155,7 +309,7 @@ class UpdateParserTest {
 
     /*
     Tests for parseUpdateHabitCommands()
-     */
+     * /
 
     @Test
     void parseUpdateHabitCommands_userUpdateHabitAttribute_success() throws HaBitParserException {
@@ -212,8 +366,8 @@ class UpdateParserTest {
 
     /*
     Tests for parseUpdateGoalNameCommand()
-     */
-  
+     * /
+
     @Test
     void parseUpdateGoalNameCommand_validInput_success() throws HaBitParserException {
         UpdateGoalNameCommand testCommand =
@@ -295,7 +449,7 @@ class UpdateParserTest {
 
     /*
     Tests for parseUpdateGoalEndDateCommand()
-     */
+     * /
 
     @Test
     void parseUpdateGoalEndDateCommand_validInput_success() throws HaBitParserException {
@@ -386,7 +540,7 @@ class UpdateParserTest {
 
     /*
     Tests for parseUpdateGoalTypeCommand()
-     */
+     * /
 
     @Test
     void parseUpdateGoalTypeCommand_validInput_success() throws HaBitParserException {
@@ -445,7 +599,7 @@ class UpdateParserTest {
 
     /*
     Tests for parseUpdateHabitNameCommand()
-     */
+     * /
 
     @Test
     void parseUpdateHabitNameCommand_validInput_success() throws HaBitParserException {
@@ -454,7 +608,7 @@ class UpdateParserTest {
 
     /*
     Tests for parseUpdateHabitIntervalCommand()
-     */
+     * /
 
     @Test
     void parseUpdateHabitIntervalCommand_validInput_success() throws HaBitParserException {
@@ -633,6 +787,7 @@ class UpdateParserTest {
             assertEquals(ERROR_INTERVAL_TOO_LARGE, e.getMessage());
         }
     }
+    */
 
     /*
     Tests for remaining methods
