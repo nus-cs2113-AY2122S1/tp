@@ -7,6 +7,7 @@ import seedu.situs.ingredients.IngredientList;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 //@@author mudkip8
 
 public class ExpireCommand extends Command {
@@ -21,6 +22,7 @@ public class ExpireCommand extends Command {
     @Override
     public String run() throws SitusException {
         int expiringCount = 0;
+        ArrayList<Ingredient> expiringIngredients = new ArrayList<>();
         String resultMsg = "";
         ArrayList<IngredientGroup> ingredientList = IngredientList.getInstance().getIngredientList();
 
@@ -31,9 +33,7 @@ public class ExpireCommand extends Command {
                         expireBeforeDate) < 0) {
                     continue;
                 }
-                String groupName = ingredientGroup.get(i + 1).getName();
-                String ingredientInfo = ingredientGroup.getIngredientInfo(i + 1);
-                resultMsg +=  groupName + " | " + ingredientInfo + LIST_NEWLINE_INDENT;
+                expiringIngredients.add(ingredientGroup.get(i + 1));
                 expiringCount += 1;
 
             }
@@ -43,7 +43,10 @@ public class ExpireCommand extends Command {
             resultMsg = "No ingredients expiring by " + Ingredient.dateToString(expireBeforeDate);
             return resultMsg;
         }
-
+        expiringIngredients.sort(Comparator.comparing(Ingredient::getExpiry));
+        for (Ingredient ingredient : expiringIngredients) {
+            resultMsg += ingredient.getName() + " | " + ingredient + LIST_NEWLINE_INDENT;
+        }
         return "There are " + expiringCount
                 + " ingredients expiring by: " + Ingredient.dateToString(expireBeforeDate)
                 + LIST_NEWLINE_INDENT + resultMsg.trim();

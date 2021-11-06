@@ -6,7 +6,7 @@ abstract class Command #pink {
 + {abstract} run() : String
 }
 
-class Parser #deepSkyBlue {
+class Parser #F3722C {
 - {static} parseXYZCommand(command : String) : String
 }
 
@@ -15,6 +15,6 @@ class XYZCommand #orchid {
 }
 
 XYZCommand --|> Command
-Parser "executes" --> XYZCommand
+Parser "executes" ..> XYZCommand
 
 @enduml
