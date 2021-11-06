@@ -225,17 +225,37 @@ function in `TextUi` class.
 
 ![List Sequence Diagram](images/ListContactsCommandSequenceDiagram.png)
 
+### <a name="Import"></a>Importing contacts: `import`
+This feature is processed using the `ImportContactCommand`. This feature allows a user to import contacts over from 
+a text file containing comma-separated values (CSV).
+
+As inputs may be corrupted (having less fields than required), or may not adhere to the detail formats of each field 
+(such as having illegal characters in the Github username), a `ContactsDecoder` is used to read and ensure the data 
+integrity of imported contacts. To achieve this, the `ContactsDecoder` class inherits the `RegexParser` abstract 
+class, as depicted below.
+
+![ContactsDecoder Class Diagram](images/ContactsDecoderClassDiagram.png)
+
+With this implementation in place, the `ImportContactCommand` will firstly check if there exists a file `import.txt` 
+stored in the `data/` directory (ie. stored in `data/import.txt`). Should the `import.txt` file exist, it will then 
+attempt to import the contacts to a temporary `ContactList`, before adding them to the user's `ContactList`. The 
+sequence diagram below illustrates the process of executing `ImportContactCommand`.
+
+![Import Sequence Diagram](images/ImportContactCommandSequenceDiagram.png)
+
+Throughout the process of importing contacts, the alphabetical ordering of contacts is preserved.
+
 ### <a name="IndexParser"></a>Index Parser
 
-The Index Parser is used when the user enters a command that specifies a contact index, such as the [`rm`](#Delete), 
-[`view`](#View) or [`edit`](#Edit) command. The Index Parser will parse the user's input string, and return the 
+The Index Parser is used when the user enters a command that specifies a contact index, such as the [`rm`](#Delete),
+[`view`](#View) or [`edit`](#Edit) command. The Index Parser will parse the user's input string, and return the
 specified contact index given as an integer, which will then be used in the execution of the corresponding command.
 
 For example, if `edit 2 -n Marcus Bobo` is given as the input, the Index Parser will identify the contact index to be `2`
 and pass the contact index to the execution of the `edit` command accordingly.
 
-
 ## <a name="scope"></a>Product scope
+
 ### <a name="target"></a>Target user profile
 - Has a need to store a significant amount of computing-related contacts
 - Prefers and is familiar with Command Line Interface (CLI) applications

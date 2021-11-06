@@ -32,9 +32,15 @@ The code written by me (`marcusbory`) can be found [here](https://nus-cs2113-ay2
 
 ### Contributions to UG
 The link to the User Guide (UG) can be found [here](https://ay2122s1-cs2113t-t09-1.github.io/tp/UserGuide.html).
+- Added documentation for `add` function
+- Added documentation for `import` function
+- Updated documentation formatting and overall readability
 
 ### Contributions to DG
 The link to the Developer Guide (DG) can be found [here](https://ay2122s1-cs2113t-t09-1.github.io/tp/DeveloperGuide.html).
+- Added documentation for `add` function
+- Added documentation for `import` function
+- Added UML diagrams for all the above-mentioned features
 
 ### Team-based tasks
 - Hosted and conducted weekly brainstorming session during ideation phases (V1.0, V2.0, V2.1)
@@ -45,6 +51,9 @@ The link to the Developer Guide (DG) can be found [here](https://ay2122s1-cs2113
   - DG: Set up DG with System Architecture diagram, Product Scope, Non-functional Requirements
 - Refactored entire codebase (on 27/10/21) to improve code quality (apply SLAP) and fix any coding standard violations
 - Updated `runtest.bat` and `runtest.sh` to automatically delete data files, and work with `import` feature
+
+### Review/mentoring contributions
+- Reviewed PRs and ensured overall code quality/formatting was up to standard
 
 ### Community
 Reported Bugs during PE Dry Run.

@@ -1,0 +1,17 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+class ContactsDecoder {
+    - decodeContact():void
+    - handleInvalidDetails():void
+    + readContacts():ContactList
+}
+
+class "<<abstract>>\nRegexParser" {
+    + checkRegex():void
+}
+
+ContactsDecoder -up-|> "<<abstract>>\nRegexParser"
+
+@enduml
