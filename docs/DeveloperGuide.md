@@ -23,9 +23,8 @@
 - [5. Appendix: Requirements](#5-appendix-requirements)
   - [5.1 Product scope](#51-product-scope)
   - [5.2 User stories](#52-user-stories)
-  - [5.3 Use cases](#53-use-cases)
-  - [5.4 Non-Functional Requirements](#54-non-functional-requirements)
-  - [5.5 Glossary](#55-glossary)
+  - [5.3 Non-Functional Requirements](#53-non-functional-requirements)
+  - [5.4 Glossary](#54-glossary)
 - [6. Appendix: Instructions for manual testing](#6-appendix-instructions-for-manual-testing)
   
 ## 1. Introduction
@@ -287,19 +286,51 @@ The target user profile of **SchedUrMods** are NUS students from all faculties.
 |`* *`|user|set reminders for my tasks|will not forget if I have a task upcoming|
 |`*`|user|have tab completion|reduce the time spent typing commands|
 
-### 5.3 Use cases
-{Describe the use cases}
-
-### 5.4 Non-Functional Requirements
+### 5.3 Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
-2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
+2. Should be able to hold up to 100 tasks without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
 should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-### 5.5 Glossary
+### 5.4 Glossary
 
 * *Mainstream OS* - Windows, Linux, Unix, OS-X
 
 ## 6. Appendix: Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launch and Exit
+Initial Launch:
+1. Download the **SchedUrMods** latest JAR file [here](https://github.com/AY2122S1-CS2113T-W13-3/tp) and copy it into an empty folder.
+2. Launch a terminal from the folder containing the **SchedUrMods** JAR file.
+3. Type `java -jar SchedUrMods.jar` into the terminal to start **SchedUrMods**.
+
+    **Expected Output**: The welcome screen of the **SchedUrMods** application (Logo + User Interface)
+    with the corresponding correct version number.
+
+    ```
+     _____        _                _  _   _       ___  ___            _
+    /  ___|      | |              | || | | |      |  \/  |           | |
+    \ `--.   ___ | |__    ___   __| || | | | _ __ | .  . |  ___    __| | ___
+    `--.  \ / __|| '_ \  / _ \ / _` || | | || '_| | |\/| | / _ \  / _` |/ __|
+    /\__/ /| (__ | | | ||  __/| (_| || |_| || |   | |  | || (_) || (_| |\__ \
+    \____/  \___||_| |_| \___| \__,_| \___/ |_|   \_|  |_/ \___/  \__,_||___/
+    -------------------------------------------------------------------------
+    Command-Line Interface for NUSMODS                               (v2.1.0)
+    -------------------------------------------------------------------------
+    [user]:
+    ```
+
+Exiting the application:
+1. Type `bye` into the terminal to exit **SchedUrMods**.
+
+   **Expected Output**: Message indicating that the program is exiting.
+
+    ```
+    -------------------------------------------------------------------------
+    [user]: bye
+    || Exiting program!
+    -------------------------------------------------------------------------
+    ```
+
+
