@@ -1,1 +1,2 @@
-saving;main;55000.0
+stock;d05;208000;25.0
+saving;main;52000.0
