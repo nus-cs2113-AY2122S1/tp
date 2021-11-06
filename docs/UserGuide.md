@@ -33,8 +33,6 @@ them. Finally, [Command Summary](#command-summary) provides you with an overview
     * [add /att](#add-attendance)
     * [delete /att](#delete-attendance)
     * [list /att](#list-attendance)
-* [FAQ](#faq-frequently-asked-questions)
-* [Storage](#Storage)
 * [Command Summary](#command-summary)
 
 ## Acknowledgements
@@ -74,19 +72,23 @@ With **CCA Manager**, you can organize your data with the help of useful command
 
 
 ## Member Commands
-### Add Member
-**CCA Manager** has an add feature which lets you key in necessary information such as your members' information and attendance, as well 
-as any training-related information regarding your CCA's venue bookings and timings.
+Members of CCA will be added using the `add` member command. The key information needed for a member will be the member's name, student number, gender and phone number. It is important to take note that name, student number and phone number cannot have duplicates. Members of CCA can be deleted with the `delete` member command and can be edited with the `edit` member command. To look for member, you can use the `find` member function. The instructions on how you can use the commands are listed below. To show all members, you can use the `list` member function.
 
+### Add Member
 To start, you can populate the member list of **CCA Manager** with the help of the `add` member command. This command lets you key in necessary information such as your members' particulars
 
 * `add /m` This adds entries to the Member List stored in CCA Manager.
     * The `add /m` keyword requires 4 different arguments:
         * use `/n` to input _name_ of your member. 
+          * ⚠️ Member name of each entry must be _unique_. Different member entries with the same member name are not allowed.
+          * ⚠️ Member name can only have letters and spaces. Anything else will be rejected.
         * use `/s` to input _student number_ of your member.
           * ⚠️ Student Number of each entry must be _unique_. Different member entries with the same student number are not allowed.
+          * ⚠️ Student Number must start with A, then 7 numbers and ends with any letters.
         * use `/g` to input _gender_ of your member. Either _M_ for male or _F_ for female.
         * use `/p` to input _phone number_ of your member.
+          * ⚠️ Phone number of each entry must be _unique_. Different member entries with the same phone number are not allowed.
+          * ⚠️ Phone number must be a Singapore phone number that starts with 9 or 8 and have only 8 digits.
    
     * **Format:**
       * `add /m [/n MEMBER_NAME] [/s STUDENT_NUMBER] [/g GENDER] [/p PHONE NUMBER]`
@@ -100,6 +102,12 @@ To start, you can populate the member list of **CCA Manager** with the help of t
    [1] Name: JOHN HWEE | Student Number: A0248192K | Gender: M | Phone Number: 91128888
    ```
    
+   * **Expected Output for duplicate member:**
+    ```
+    Error when adding member:
+        Duplicate name found. Please enter a different name
+    ```
+    
 ### Delete Member
 If one of your CCA members has quit, or your senior has graduated, you can remove their entry from **CCA Manager** to keep your member list up to date.
 
@@ -114,19 +122,15 @@ If one of your CCA members has quit, or your senior has graduated, you can remov
    * **Examples:**
      * `delete /m 1` Deletes the first member on the member list.
      * `delete /m John` Deletes a member with the name 'John'.
-       * If there is more than 1 John in the member list, a prompt will show up, indicating that you may not add a duplicate member. 
+       * If unable to find a direct match to the name, similar names with John in them will be shown so that you can specify the full name of the person you want to delete. 
        _To avoid this error, you may want to key in the full name of your memebers!_
+   
    * **Expected Output:**
    
    ```
     You have removed member: 
     [1] Name: JOHN HWEE | Student Number: A0248192K | Gender: M | Phone Number: 91128888
    ```
-   * **Expected Output for duplicate member:**
-    ```
-    Error when adding member:
-        Duplicate name found. Please enter a different name
-    ```
 
 ### List Member
 **CCA Manager** allows you to list out all the recorded members in your member list.
@@ -412,16 +416,7 @@ Attendance data are stored in a sub-folder called `Attendance`. There, the filen
 **A**: Yes, it is a feature. This is to support the use of relative date/time addressing, such as `After next meeting` or `Recess week`, for example. <br />This gives more flexibility to the user to store training data for trainings that may not have a set date currently. 
 <br />However, a side effect is that gibberish String such as `ABCABC` or `DUMMYTEXT` can be stored in the `date/time` field, which is discouraged.
 
-## Storage
-CCA Manager data are saved in the hard disk automatically after any commands that changes the data.
-There is no need to save manually.
 
-⚠ Please refrain from editing the data directly from the CSV file.
-However, if you do so the program is able to run fine if the data changes are valid.
-Else, the program will terminate. You should make sure all data is valid before trying to run the
-program again.
-
-⚠ Do not use commas when manually editing the CSV file.It might cause unintended errors in the program.
 
 ## Command Summary
 
