@@ -15,11 +15,7 @@ public class DeleteBudgetTest {
         int thisMonth = LocalDate.now().getMonthValue();
 
         RecordList currentBudgetList = new RecordList(thisMonth);
-        try {
-            currentBudgetList.addBudget(08.00, false);
-        } catch (DuplicateBudgetException e) {
-            e.printStackTrace();
-        }
+        currentBudgetList.addBudget(08.00);
         currentBudgetList.deleteBudget();
         assertEquals(0.00, currentBudgetList.getBudget().getAmount());
     }
