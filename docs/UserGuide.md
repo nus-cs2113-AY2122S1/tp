@@ -544,17 +544,17 @@ _________________________________________________________
 
 
 
-### `-l` : View Statistics for the Year
+### `-y` : View Statistics for the Year
 
 Display the statistics for a particular the current database year which the user is working on. 
 
-Format: `stat -l t/TYPE_OF_GRAPHICAL_VIEW`
+Format: `stat -y t/TYPE_OF_GRAPHICAL_VIEW`
 
 * The `TYPE_OF_GRAPHICAL_VIEW` is ... 
 
 Example of usage:
 
-`stat -l t/1`
+`stat -y t/1`
 
 Expected outcome: A histogram of the percentage of money spend for each month of the year will be shown
 with vertical axis showing percentage ranging from 0 to 100%.
@@ -576,7 +576,7 @@ Percentage of Money Spent in 2021
 ========================================================
 ```
 
-`stat -l t/2`
+`stat -y t/2`
 
 <br />
 
