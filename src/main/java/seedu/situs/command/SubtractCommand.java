@@ -14,16 +14,16 @@ public class SubtractCommand extends Command {
     private static final String STORAGE_ERROR_MESSAGE = "Cannot remove ingredient from memory file!";
     private static final String INVALID_NUMBER = "Ingredient number does not exist!";
 
-    private int groupNumber;
+    private String ingredientName;
     private Double subtractAmount;
 
     /**
      * Constructor method for <code>SubtractCommand</code>.
-     * @param groupNumber the ingredient name to subtract amount from
+     * @param ingredientName the ingredient name to subtract amount from
      * @param subtractAmount the amount to be subtracted
      */
-    public SubtractCommand(int groupNumber, Double subtractAmount) {
-        this.groupNumber = groupNumber;
+    public SubtractCommand(String ingredientName, Double subtractAmount) {
+        this.ingredientName = ingredientName.substring(0, 1).toUpperCase() + ingredientName.substring(1);
         this.subtractAmount = subtractAmount;
     }
 
@@ -31,11 +31,10 @@ public class SubtractCommand extends Command {
     public String run() throws SitusException {
         try {
             String resultMsg;
-            String subtractedIngredient = IngredientList.getInstance()
-                    .subtractIngredientFromGroup(groupNumber, subtractAmount);
+            IngredientList.getInstance()
+                    .subtractIngredientFromGroup(ingredientName, subtractAmount);
             resultMsg = "Got it. " + subtractAmount
-                    + " kg has been subtracted from "
-                    + subtractedIngredient;
+                    + " kg has been subtracted from " + ingredientName;
             return resultMsg;
         } catch (IndexOutOfBoundsException e) {
             throw new SitusException(INVALID_NUMBER);

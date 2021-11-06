@@ -205,19 +205,19 @@ given is equal to the existing stock of the ingredient, the ingredient is automa
 of displaying zero stock for the item.)
 > Note: If the ingredient has multiple entries, the earliest expiring one will be deducted first, as a good practice for inventory management.
 
-Command: `subtract [GROUP_INDEX] a/[AMOUNT]`
+Command: `subtract n/[NAME] a/[AMOUNT]`
 
 The parameters used in the command are:
 
-* `GROUP_INDEX`: the index of the ingredient group to subtract from
+* `NAME`: the name of the ingredient group to subtract from
 * `AMOUNT`: the ingredient amount to be subtracted, in kilograms
 
-Example: `subtract 1 a/50`
+Example: `subtract n/carrot a/50`
 
 Output (using list shown in the [list section](#23-list-ingredients)):
 
 ```
-subtract 1 a/50
+subtract n/carrot a/50
 ____________________________________________________
 Got it. 50.0 kg has been subtracted from Carrot
 ____________________________________________________
@@ -442,7 +442,7 @@ The following table shows a summary of all of SITUS's commands and links to thei
 | [Add ingredient](#22-add-ingredients) | `add n/[INGREDIENT_NAME] a/[AMOUNT] e/[EXPIRY]` |
 | [List ingredients](#23-list-ingredients) | `list` |
 | [Update ingredient](#24-update-ingredients) | `update [GROUP_INDEX.INGREDIENT_INDEX] a/[AMOUNT]` |
-| [Subtract Ingredients Stock](#25-subtract-ingredient-stock) | `subtract [GROUP_INDEX] a/[AMOUNT]` | 
+| [Subtract Ingredients Stock](#25-subtract-ingredient-stock) | `subtract n/[NAME] a/[AMOUNT]` | 
 | [Delete ingredient](#26-delete-ingredients) | `delete [GROUP_INDEX.INGREDIENT_INDEX]` |
 | [Search Ingredients By Expiry](#27-search-ingredients-by-expiry) | `expire [DATE]` |
 | [Search Ingredients By Name](#28-search-ingredients-by-name) | `find [INGREDIENT_NAMES]` |
