@@ -2,6 +2,7 @@
 'https://plantuml.com/sequence-diagram
 
 participant ":Libmgr" as Libmgr
+participant ":Parser" as Parser
 participant ":EditCommand" as EditCommand
 participant ":Catalogue" as Catalogue
 participant ":Book" as Book
@@ -9,11 +10,24 @@ participant ":Audio" as Audio
 participant ":Magazine" as Magazine
 participant ":Video" as Video
 
+hide footbox
+
 
 activate Libmgr
+create Parser
+Libmgr -> Parser: parse("edit 123 t/Harry Potter")
+activate Parser
+Parser -> Parser: extractArgs("edit 123 t/Harry Potter")
+activate Parser
+Parser --> Parser: args: HashMap<String, String>
+deactivate Parser
 create EditCommand
-Libmgr -> EditCommand: execute(ui: TextUI, catalogue: Catalogue)
+Parser -> EditCommand: EditCommand(args: HashMap<String, String>)
 activate EditCommand
+
+
+
+
 EditCommand -> EditCommand: handlesEditCommand(ui: TextUI, catalogue: Catalogue)
 activate EditCommand
 EditCommand -> Catalogue: getItem(argList2[0]: String)
