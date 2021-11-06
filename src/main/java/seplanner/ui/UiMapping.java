@@ -14,11 +14,11 @@ public class UiMapping extends Ui {
      */
     public static void printMapping(ModuleMapping mm, int index, boolean printMC) {
         printIndex(index, false);
-        String mappingDetails = " " + mm.localModule.getModuleCode()
-                + Constants.MODULE_MAPPING_SEPARATOR + mm.mappedModule.getModuleCode()
-                + Constants.MODULE_NAME_SEPARATOR + mm.mappedModule.getModuleName();
+        String mappingDetails = " " + mm.getLocalModule().getModuleCode()
+                + Constants.MODULE_MAPPING_SEPARATOR + mm.getMappedModule().getModuleCode()
+                + Constants.MODULE_NAME_SEPARATOR + mm.getMappedModule().getModuleName();
         if (printMC) {
-            mappingDetails += Constants.MODULE_NAME_SEPARATOR + mm.localModule.getModuleCredits();
+            mappingDetails += Constants.MODULE_NAME_SEPARATOR + mm.getLocalModule().getModuleCredits();
         }
         out.println(mappingDetails);
     }
