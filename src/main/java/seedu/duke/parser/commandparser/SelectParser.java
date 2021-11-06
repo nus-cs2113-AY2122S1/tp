@@ -57,6 +57,10 @@ public abstract class SelectParser extends Parser {
 
     private static void parseEvent(String[] command) throws InvalidIndexException {
         int index = getIndexFromCommand(command[2]);
+        if (!isValidEventIndex(index)) {
+            throw new InvalidIndexException("Invalid index range. Choose a number between 1 and "
+                    + eventCatalog.size() + ".");
+        }
         updateIndexOfLastSelectedEvent(index);
         eventIndexToSelect = index;
     }
@@ -80,12 +84,7 @@ public abstract class SelectParser extends Parser {
     }
 
     private static int getIndexFromCommand(String indexAsString) throws InvalidIndexException {
-        int index = Integer.parseInt(indexAsString.trim()) - 1;
-        if (!isValidEventIndex(index)) {
-            throw new InvalidIndexException("Invalid index range. Choose a number between 1 and "
-                    + eventCatalog.size() + ".");
-        }
-        return index;
+        return Integer.parseInt(indexAsString.trim()) - 1;
     }
 
     private static boolean isValidEventIndex(int eventIndex) {
