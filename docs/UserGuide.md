@@ -8,7 +8,7 @@ of information** on CCA members, training schedules and attendance records which
 Line Interface (CLI). CCA Manager aims to **centralise and optimize** all CCA-related information, so that you can focus on
 improving other aspects of the CCA.
 
-This user guide will help you get started on using CCA Manager. [Pre-requisites](#pre-requisites---_things-to-prepare-before-you-start-using-cca-manager_) will show you how to 
+This user guide will help you get started on using CCA Manager. [Pre-requisites](#pre-requisites---things-to-prepare-before-you-start-using-cca-manager) will show you how to 
 set up CCA Manager on your computer. The [Commands](#commands) section will show you the list of commands and how to use
 them. Finally, [Command Summary](#command-summary) provides you with an overview of all the commands you can execute.
 
