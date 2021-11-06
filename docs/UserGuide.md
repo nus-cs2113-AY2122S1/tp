@@ -36,10 +36,10 @@ and that `java` is in your `PATH` environment variable.
 2. Download the latest `SchedUrMods.jar` from [here](https://github.com/AY2122S1-CS2113T-W13-3/tp/releases/latest).
 
    > **⚠️Warning**: Do *not* decompress the jar file even if it shows as an archive on your file manager.
-3. Copy the file to the folder you want to use as the _home folder_ for Duke.
+3. Copy the file to the folder you want to use as the _home folder_ for SchedUrMods.
    >💡 **Note**: Ensure you have permission to create files and folders in this _home folder_.
 5. Open a terminal window in the _home folder_.
-6. Type `java -jar SchedUrMods.jar` into the terminal to start Duke.
+6. Type `java -jar SchedUrMods.jar` into the terminal to start SchedUrMods.
 7. The following display should appear in a few seconds:
 
 ```
@@ -226,6 +226,7 @@ List all tasks currently stored locally in your tasklist.
 **Expected Outcome**:
 
 ```
+-------------------------------------------------------------------------
 [user]: list
 || -------------
 ||  MY TASKLIST
@@ -237,6 +238,7 @@ List all tasks currently stored locally in your tasklist.
 || 5. [T] wash clothes <medium> {weekly} (doOn: 10-11-2021 02:00)
 || 6. [D] project submission <high> {monthly} (dueDate: 21-11-2021 03:00)
 || 7. [E] movie screening <low> {daily} (startDate: 05-11-2021 04:00 - endDate: 05-11-2021 05:00)
+-------------------------------------------------------------------------
 ```
 
 #### 2.4.2 Filtering your tasklist
@@ -254,12 +256,14 @@ Filters the tasklist for specific tasks that matches the filters applied.
 **Expected Outcome**:
 
 ```
+-------------------------------------------------------------------------
 [user]: list --type todo --priority medium
 || -------------
 ||  MY TASKLIST
 || -------------
 || 1. [T] exercise <medium> {none} (doOn: 04-11-2021 18:00)
 || 2. [T] wash clothes <medium> {weekly} (doOn: 10-11-2021 02:00)
+-------------------------------------------------------------------------
 ```
 
 #### 2.4.3 Listing the recurrence of a task
@@ -274,6 +278,7 @@ Displays the next 4 recurrences of a task.
 **Expected Outcome**:
 
 ```
+-------------------------------------------------------------------------
 [user]: list 3
 || -------------
 ||  MY TASKLIST
@@ -284,6 +289,7 @@ Displays the next 4 recurrences of a task.
 || -> 22-01-2022 04:00
 || -> 22-02-2022 04:00
 || -> 22-03-2022 04:00
+-------------------------------------------------------------------------
 ```
 
 >💡 **Note**: To obtain the correct task id of each task, please use the `list` command without any filters.
@@ -304,6 +310,7 @@ Sorts your task list by a given criteria.
 **Expected Outcome**:
 
 ```
+-------------------------------------------------------------------------
 [user]: sort --by priority
 || [!] Tasklist has been sorted by: priority
 -------------------------------------------------------------------------
@@ -318,6 +325,7 @@ Sorts your task list by a given criteria.
 || 5. [T] wash clothes <medium> {weekly} (doOn: 10-11-2021 02:00)
 || 6. [T] read book <low> {daily} (doOn: 05-11-2021 02:00)
 || 7. [E] movie screening <low> {daily} (startDate: 05-11-2021 04:00 - endDate: 05-11-2021 05:00)
+-------------------------------------------------------------------------
 ```
 
 ### 2.6 Setting reminders to your tasks: `reminder`

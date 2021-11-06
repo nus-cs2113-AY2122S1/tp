@@ -23,9 +23,8 @@
 - [5. Appendix: Requirements](#5-appendix-requirements)
   - [5.1 Product scope](#51-product-scope)
   - [5.2 User stories](#52-user-stories)
-  - [5.3 Use cases](#53-use-cases)
-  - [5.4 Non-Functional Requirements](#54-non-functional-requirements)
-  - [5.5 Glossary](#55-glossary)
+  - [5.3 Non-Functional Requirements](#53-non-functional-requirements)
+  - [5.4 Glossary](#54-glossary)
 - [6. Appendix: Instructions for manual testing](#6-appendix-instructions-for-manual-testing)
   
 ## 1. Introduction
@@ -179,8 +178,8 @@ The `CommandParser.java` class implements the below functionalities using the fo
 The purpose of this is to enable direct and easier access to flags based on the name.
 - `createCommand`: Creates the correct `Command` based on the main command and any flags or arguments it may have.
 - `parseCommand`: Parent method that calls the above methods after splitting and sanitising the user's input into
-a `CommandEnum` variable for the **main command** and a `Map<String, String>` variable for the flags or arguments
-- associated with it.
+a `CommandEnum` variable for the **main command** and a `Map<String, String>` variable for the flags or arguments 
+associated with it.
 
 ### 3.4 Command Component
 
@@ -221,12 +220,36 @@ The sequence diagram above shows the creation of a Todo Task using TodoFactory.
 The same logical structure is used in the Deadline and Event factories.  
 
 ### 4.2 Filtering the tasklist
-The sequence diagram belows shows the process of filtering the user's tasklist that is managed
+
+The sequence diagram and description below shows the process of filtering the user's tasklist that is managed
 by the `TaskManager.java` class.
 
 <p align="center">
     <img src="images/AmosUMLDiagrams/SD_FilteringTasklist.png">
 </p>
+
+**Step 1**: When the `ListCommand` receives the call to be executed by the main class `SchedUrMods`, it will proceed to call the `listTasklistWithFilter()` method 
+and input the command arguments stored as a flag-argument `Map<String, String>`, in this case the **filters** entered by the user, 
+that was previously sanitised by the `CommandParser`.
+
+**Step 2**: The `listTasklistWithFilter()` method will then loop through all the **filters** and check the validity of the filters
+currently stored in the flag-argument `Map<String, String>`.
+
+**Step 3**: For each valid filter found, the respective filter functions will be called and will filter out all the tasks that
+do not match the filter specified by the user. For instance, if the filter flag equals to `type` and it's corresponding mapped
+value is `Todo`, then the method `filterListByTaskType()` will filter out all the tasks who do not have task type equals to `Todo`,
+and return a filtered tasklist with only `Todo` tasks.
+
+**Step 4**: The returned filtered tasklist will be reused for the remaining filters present in the flag-argument `Map<String, String>`
+of the filters to allow for multi-level filter to increase the filtering depth for the user to locate specific tasks
+that matches multiple filters.
+
+**Step 5**: Once the `listTasklistWithFilter()` method has looped through all the filters stored in the `Map<String, String>`,
+it will call the `getListTasklistWithFilterMessage()` method along with the final filtered tasklist to obtain a nicely 
+pre-formatted `String` containing a neat list of the final filtered tasks that matched all the filtering criteria.
+
+**Step 6**: A `CommandResult` object is then created and stores the `String` containing the filtered tasklist
+as the command execution message to be handled by the `Ui` and displayed to the user on the terminal interface.
 
 ## 5. Appendix: Requirements
 
@@ -247,22 +270,164 @@ The target user profile of **SchedUrMods** are NUS students from all faculties.
 
 | Priority | As a ... | I want to ... | So that I can ...|
 |----------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|`* * *`|new user|see usage instructions|refer to them when I forget how to use the application|
+|`* * *`|new user|update my timetable via NUSMODS automatically|stop keeping track of changes made on NUSMODS|
+|`* * *`|user|add tasks to my tasklist|track all of my tasks I have easily|
+|`* * *`|user|view all my tasks in my tasklist|know which tasks are soon to be due|
+|`* *`|user|have different kinds of task types|know the nature of my task|
+|`* *`|user|set priorities to tasks in my tasklist|know which tasks are more important than others|
+|`* *`|user|set a task to recur automatically|reduce the number of times I need to update the tasklist|
+|`* *`|user|add zoom links to a lesson task|save time spent finding the zoom link|
+|`* *`|user|launch zoom links from the application|save time opening browser|
+|`* *`|user|filter my tasklist|find tasks that match a certain criteria quickly|
+|`* *`|user|view the upcoming recurrences of a task|plan my schedule accordingly|
+|`* *`|user|sort my tasklist by priority|view the most important tasks I have at the top of the tasklist|
+|`* *`|user|edit my tasks|reduce the number of times I have to add new tasks|
+|`* *`|user|set reminders for my tasks|will not forget if I have a task upcoming|
+|`*`|user|have tab completion|reduce the time spent typing commands|
 
-### 5.3 Use cases
-{Describe the use cases}
-
-### 5.4 Non-Functional Requirements
+### 5.3 Non-Functional Requirements
 
 1. Should work on any mainstream OS as long as it has Java 11 or above installed.
-2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
+2. Should be able to hold up to 100 tasks without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
 should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-### 5.5 Glossary
+### 5.4 Glossary
 
 * *Mainstream OS* - Windows, Linux, Unix, OS-X
 
 ## 6. Appendix: Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launch and Exit
+Initial Launch:
+1. Download the **SchedUrMods** latest JAR file [here](https://github.com/AY2122S1-CS2113T-W13-3/tp) and copy it into an empty folder.
+2. Launch a terminal from the folder containing the **SchedUrMods** JAR file.
+3. Type `java -jar SchedUrMods.jar` into the terminal to start **SchedUrMods**.
+
+    **Expected Output**: The welcome screen of the **SchedUrMods** application (Logo + User Interface)
+    with the corresponding correct version number.
+
+    ```
+     _____        _                _  _   _       ___  ___            _
+    /  ___|      | |              | || | | |      |  \/  |           | |
+    \ `--.   ___ | |__    ___   __| || | | | _ __ | .  . |  ___    __| | ___
+    `--.  \ / __|| '_ \  / _ \ / _` || | | || '_| | |\/| | / _ \  / _` |/ __|
+    /\__/ /| (__ | | | ||  __/| (_| || |_| || |   | |  | || (_) || (_| |\__ \
+    \____/  \___||_| |_| \___| \__,_| \___/ |_|   \_|  |_/ \___/  \__,_||___/
+    -------------------------------------------------------------------------
+    Command-Line Interface for NUSMODS                               (v2.1.0)
+    -------------------------------------------------------------------------
+    [user]:
+    ```
+
+Exiting the application:
+1. Type `bye` into the terminal to exit **SchedUrMods**.
+
+   **Expected Output**: Message indicating that the program is exiting.
+
+    ```
+    -------------------------------------------------------------------------
+    [user]: bye
+    || Exiting program!
+    -------------------------------------------------------------------------
+    ```
+
+### Listing the Tasklist
+**Case A**: Tasklist is empty
+1. Type `list`
+
+   **Expected Output**: Warning message informing user that the tasklist is empty.
+
+**Case B**: Tasklist is not empty
+1. Type `list`
+
+   **Expected Output**: List of the user's tasks that was added before.
+
+### Filtering the Tasklist
+
+>💡 **Note**: If none of the filters match, only the header of the tasklist will be returned.
+
+**Case A**: By task type
+1. Type `list --type todo`
+
+   **Expected Output**: List of all the `Todo` type tasks.
+2. Type `list --type deadline`
+
+   **Expected Output**: List of all the `Deadline` type tasks.
+3. Type `list --type event`
+
+   **Expected Output**: List of all the `Event` type tasks.
+
+**Case B**: By priority
+1. Type `list --priority low`
+
+   **Expected Output**: List of all the tasks with priority `low`.
+2. Type `list --priority medium`
+
+   **Expected Output**: List of all the tasks with priority `medium`
+3. Type `list --priority high`
+
+   **Expected Output**: List of all the tasks with priority `high`
+
+**Case C**: By recurrence
+1. Type `list --recur none`
+
+   **Expected Output**: List of all the tasks do not recur.
+2. Type `list --recur daily`
+
+   **Expected Output**: List of all the tasks that recurs `daily`
+3. Type `list --recur weekly`
+
+   **Expected Output**: List of all the tasks that recurs `weekly`
+4. Type `list --recur monthly`
+
+   **Expected Output**: List of all the tasks that recurs `monthly`
+5. Type `list --recur yearly`
+
+   **Expected Output**: List of all the tasks that recurs `yearly`
+
+### Sorting the Tasklist
+
+>💡 **Pre-requisite**: Add at least 1 tasks of each task type and priority, and name all task descriptions
+> after the letters of the alphabets.
+
+**Case A**: Sort by task type
+1. Type `sort --by type`
+
+   **Expected Output**: Message informing user that the tasklist has been sorted by task type.
+2. Type `list`
+
+   **Expected Output**: All tasks with same task types are now grouped together in the tasklist.
+
+**Case B**: Sort by description
+1. Type `sort --by description`
+
+   **Expected Output**: Message informing user that the tasklist has been sorted in alphabetical order.
+2. Type `list`
+
+   **Expected Output**: All tasks are now sorted alphabetically.
+
+**Case B**: Sort by priority
+1. Type `sort --by priority`
+
+   **Expected Output**: Message informing user that the tasklist has been sorted by priority.
+2. Type `list`
+
+   **Expected Output**: All tasks are now sorted from highest to lowest priority.
+
+### Viewing the recurrence of a task
+
+>💡 **Pre-requisite**: Add 1 task into the tasklist with a recurrence value of `daily`. The recurrence
+> value can be modified and changed to  test the correctness of the recurrence feature.
+
+**Case A**: Task is a non-recurring task
+1. Type `list <task id of a non-recurring task>`
+
+   **Expected Output**: Warning message telling the user that the selected task is non-recurring and to choose another task.
+
+**Case B**: Task is a recurring task
+1. Type `list <task id of a recurring task>`
+
+    **Expected Output**: The next 4 recurrences of the task that are in increments of the type of recurrence.
+
