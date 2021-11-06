@@ -363,23 +363,25 @@ public class UpdatePrescriptionCommand extends Command {
         if (prescription == null) {
             return false;
         }
+        Prescription updatedPrescription = null;
         for (Medicine medicine : medicines) {
             if (!(medicine instanceof Prescription)) {
                 continue;
             }
             Prescription targetPrescription = (Prescription) medicine;
-            boolean isSameStockId = targetPrescription.getStockId() == prescription.getStockId();
-            if (isSameStockId) {
+            boolean isSamePrescriptionId = targetPrescription.getPrescriptionId() == prescription.getPrescriptionId();
+            if (isSamePrescriptionId) {
                 ((Prescription) medicine).setCustomerId(customerId);
                 ((Prescription) medicine).setDate(date);
                 ((Prescription) medicine).setStaff(staffName);
+                updatedPrescription = (Prescription) medicine;
                 break;
             }
         }
-        ArrayList<Prescription> newPrescriptions = new ArrayList<>();
-        newPrescriptions.add(prescription);
+        ArrayList<Prescription> updatedPrescriptions = new ArrayList<>();
+        updatedPrescriptions.add(updatedPrescription);
         ui.print("Updated prescription information!");
-        ui.printPrescriptions(newPrescriptions);
+        ui.printPrescriptions(updatedPrescriptions);
         return true;
     }
 
