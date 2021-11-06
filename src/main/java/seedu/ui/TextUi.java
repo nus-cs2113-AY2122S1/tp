@@ -151,7 +151,7 @@ public class TextUi {
 
     public static void viewContactMessage(Contact viewingContact, int index) {
         String viewName = ViewMessageFormatterUi.viewNameFormatter(viewingContact);
-        String message = "Name:     " + viewName + formatContactFields(viewingContact);
+        String message = index + ".\n" + "Name:     " + viewName + formatContactFields(viewingContact);
         printDoubleLineMessage(message);
     }
 
