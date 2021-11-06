@@ -69,7 +69,7 @@ public class ListCommentsCommand extends Command {
         return String.format(
                 MESSAGE_FORMAT_LIST_ATTENDANCE_USAGE,
                 COMMAND_LIST_COMMENT,
-            KEY_CLASS_ID
+                KEY_CLASS_ID
         );
     }
 }
