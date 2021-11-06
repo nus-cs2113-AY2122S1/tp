@@ -123,7 +123,7 @@ All fields are compulsory. Note the following:
   - The program is still runnable with unknown currencies, however the symbol and decimal place will not be accurate.
 - `[exchange-rate]` should be how much 1 of your home currency costs in foreign currency.
   - Example: SGD $1 is equivalent to USD $0.74, hence the `exchange-rate` will be 0.74.
-  - Note that the default home currency is SGD.
+  - Note that the default home currency is SGD. To change the home currency, please refer to [Edit Trip](#--edit-trip).
 - `persons-in-trip` should be separated with commas.
 
 #### Compatible Currencies
@@ -171,13 +171,13 @@ For example,
 Input:
 
 ```
-create /America /02-02-2021 /USD /0.74 /Ben, Jerry, Tom
+create /United States of America /02-02-2021 /USD /0.74 /Ben, Jerry, Tom
 ```
 
 If successful, the output will be as follows:
 
 ```
-Your trip to America on 02 Feb 2021 has been successfully added!
+Your trip to United States of America on 02 Feb 2021 has been successfully added!
 ```
 
 <br />
@@ -201,7 +201,7 @@ open 1
 If successful, the output will be as follows:
 ```
 You have opened the following trip:
-America | 02 Feb 2021
+United States of America | 02 Feb 2021
 ```
 
 You can also run the `open` command while a Trip is already open. This will close the currently-opened
@@ -213,9 +213,10 @@ Trip, and open the specified Trip in the most recent command.
 
 #### - Close Trip
 
-Closes the current Trip you are in. This allows the user to list all trips or to delete a Trip.
+Closes the current Trip you are in. This allows you to interact with trips (e.g. adding a new trip,
+list all trips or to delete a trip).
 
-This command can only be used if a Trip is open.
+This command can only be used if a Trip is already open.
 
 Input syntax:
 ```
@@ -236,10 +237,13 @@ America | 02 Feb 2021
 <br />
 
 #### - List Trips
+
 Lists all the Trips that you have created. 
+
 This command can only be used if no Trip is open.
 
-Note that if a Trip is open, this command will list down your expenses instead. 
+Note that if a Trip is open, this command will list down your expenses instead. See [List Expenses](#--list-expenses)
+for more information on listing expenses.
 
 Input syntax:
 ```
@@ -260,7 +264,9 @@ List of Trips:
 <br />
 
 #### - View People in Trip
+
 Lists the persons involved in a particular Trip. 
+
 This command can only be used if you have opened a Trip.
 
 Input syntax:
@@ -292,7 +298,7 @@ Input syntax:
 delete [trip-number]
 ```
 - `[trip-number]` is the index of the Trip you wish to delete, which can be found by using `list` command while no Trip is open.
-- `delete last` to delete last trip
+- `delete last` to delete the trip you last interacted with.
 
 
 For example,
@@ -314,13 +320,18 @@ Edit attributes of a Trip
 
 Input syntax:
 ```
-edit [trip num] [attribute] [new value]
+edit [trip-num] -[attribute] [new-value]
 ```
 All fields are compulsory. Note the following:
-- list of attributes: -location, -date, -exchange rate, -forcur, -homecur
-- The hyphen preceding an attribute is part of the syntax.
+- The following attributes can be edited: 
+  - Location: `-location`
+  - Date: `-date`
+  - Exchange Rate: `-exchangerate`
+  - Foreign Currency ISO Code: `-forcur`
+  - Home Currency ISO Code: `-homecur`
+- The hyphen preceding `[attribute]` is part of the syntax.
 - `[trip-number]` is the index of the Trip you wish to edit, which can be found by using `list` command while no Trip is open.
-- `last` can be used for `[trip num]`.
+- `last` can be used for `[trip num]`. This will modify the last trip you interacted with.
 
 
 For example,
@@ -627,7 +638,7 @@ The input syntax is as follows:
 ````
 summary [name]
 ````
-- [name] is an optional argument.
+- `[name]` is an optional argument.
 - Note that entering `summary` without a name will print the summary of everybody in the opened trip.
 
 For example,
@@ -657,6 +668,7 @@ shopping: USD $30.00 (SGD $40.54)
 ```
 
 ### Help
+
 Shows a quick help message, depending on which stage the user is at.
 
 Input syntax:
@@ -698,11 +710,24 @@ You are inside a trip. Trip specific commands:
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: To transfer your data to another device, simply copy over the "trips.json" file in the same directory as this app to the device you wish to use.
+**A**: To transfer your data to another device, simply copy over the "trips.json" file in the same directory as this
+app to the device you wish to use. Ensure that the save file is stored in the same directory as the PayMeBack
+app on your destination device before starting the program.
 
-**Q**: There was an error loading my saved file.
+**Q**: There was an error loading my save file. What should I do?
 
-**A**: Ensure that your saved file is in the same directory as the jar file, and that you did not modify the contents of the json file directly. Delete all json files, and run the app again, and re-enter your data.
+**A**: It is likely that your save file is corrupted. If you have modified the save file directly using another
+application, you should try to undo those changes. Also ensure that your save file is in the same directory as 
+the jar file.
+
+If the file cannot be recovered, we recommend that you run the app again. When prompted to overwrite the
+corrupted save file, enter `y`. You may then proceed to re-enter your data.
+
+**Q**: I made a mistake while entering a command. How can I exit the process and start again?
+
+**A**: If the app is asking you to correct an erroneous input, but you wish to cancel the process, 
+type `-cancel`. This will return you to the preceding state of the program, allowing you to enter 
+any command.
 
 ## Command Summary
 Hyphen before square brackets (eg `summary -[name]`) denotes optional arguments

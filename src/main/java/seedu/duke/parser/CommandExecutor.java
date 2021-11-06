@@ -14,6 +14,7 @@ import seedu.duke.expense.Expense;
 import java.util.ArrayList;
 
 abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
+
     private static final int ATTRIBUTE_DATA = 1;
     private static final int EDIT_ATTRIBUTE = 0;
     private static final String EDIT_LOCATION = "-location";
@@ -362,7 +363,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
      * @param attributeToEdit String of all attributes to be added and their new values
      */
     private static void editTripPerAttribute(Trip tripToEdit, String attributeToEdit) throws ForceCancelException {
-        String[] splitCommandAndData = attributeToEdit.split(" ");
+        String[] splitCommandAndData = attributeToEdit.split(" ", 2);
         String data = splitCommandAndData[ATTRIBUTE_DATA];
         switch (splitCommandAndData[EDIT_ATTRIBUTE]) {
         case EDIT_LOCATION:
@@ -447,7 +448,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
 
     /**
      * Gets the necessary information and carry out the optimized payment function. When finished optimizing,
-     * this method will call the appropriate method in {@Ui} and print the optimized transactions out.
+     * this method will call the appropriate method in {@link Ui} and print the optimized transactions out.
      *
      * @throws ForceCancelException allows the user to cancel an operation when an input is required.
      */
