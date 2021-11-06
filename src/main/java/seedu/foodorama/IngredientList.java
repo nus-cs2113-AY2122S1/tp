@@ -333,7 +333,7 @@ public class IngredientList {
 
     public static boolean isNumber(String numberString) {
         try {
-            int numberInteger = Integer.parseInt(numberString) - 1;
+            double numberInteger = Double.parseDouble(numberString);
             return true;
         } catch (NumberFormatException e) {
             return false;
