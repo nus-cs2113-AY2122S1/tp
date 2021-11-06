@@ -150,4 +150,6 @@ public class Messages {
     public static final String WARN_INVALID_ARGS = "  (*) Invalid arguments detected, ignoring them";
     public static final String INVALID_ID = "  (!) Invalid Item ID!";
     public static final String INVALID_DATE = "  (!) Invalid date format! It should be in dd-mm-yyyy";
+    public static final String INVALID_STATUS = "  (!) Invalid status! Status can only be: AVAILABLE, LOANED, RESERVED"
+            + " (case insensitive)";
 }
