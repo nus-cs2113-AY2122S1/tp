@@ -7,7 +7,26 @@ public class IngredientParser {
 
     public void addIngredient(String[] command, IngredientList ingredients) {
         try {
-            Ingredient newIngredient = new Ingredient(command[1], command[2], command[3], LocalDate.parse(command[4]));
+            String name = command[1].stripLeading().stripTrailing();
+            if (name.length() == 0) {
+                throw new ArrayIndexOutOfBoundsException();
+            }
+
+            int quantity = Integer.parseInt(command[2].stripLeading().stripTrailing());
+            if (quantity < 1) {
+                throw new NumberFormatException();
+            }
+
+            double price = Double.parseDouble(command[3]);
+            String priceTwoDp = String.format("%.2f", price);
+            if (Double.parseDouble(priceTwoDp) <= 0) {
+                throw new NumberFormatException();
+            }
+
+            Ingredient newIngredient = new Ingredient(command[1].stripLeading().stripTrailing(),
+                    command[2].stripLeading().stripTrailing(),
+                    priceTwoDp.stripLeading().stripTrailing(),
+                    LocalDate.parse(command[4]));
 
             ingredients.ingredientList.add(newIngredient);
             ingredients.totalIngredients++;
@@ -15,9 +34,11 @@ public class IngredientParser {
             IngredientUI.printAddIngredientMessage(newIngredient);
 
         } catch (ArrayIndexOutOfBoundsException e) {
-            IngredientUI.printInvalidCommandSyntaxMessage();
+            IngredientUI.printInvalidCommandSyntaxMessage("add");
         } catch (DateTimeParseException e) {
-            IngredientUI.printInvalidCommandSyntaxMessage();
+            IngredientUI.printInvalidCommandSyntaxMessage("add");
+        } catch (NumberFormatException e) {
+            IngredientUI.printInvalidCommandSyntaxMessage("add");
         }
     }
 
@@ -37,11 +58,11 @@ public class IngredientParser {
             IngredientUI.printRemoveIngredientMessage(deletedIngredient);
 
         } catch (ArrayIndexOutOfBoundsException e) {
-            IngredientUI.printInvalidCommandSyntaxMessage();
+            IngredientUI.printInvalidCommandSyntaxMessage("remove");
         } catch (IndexOutOfBoundsException e) {
             IngredientUI.printInvalidIndexMessage();
         } catch (NumberFormatException e) {
-            IngredientUI.printInvalidCommandSyntaxMessage();
+            IngredientUI.printInvalidCommandSyntaxMessage("remove");
         }
     }
 
@@ -61,9 +82,9 @@ public class IngredientParser {
 
             IngredientUI.printExpiredIngredientMessage(inputDate, ingredients);
         } catch (ArrayIndexOutOfBoundsException e) {
-            IngredientUI.printInvalidCommandSyntaxMessage();
+            IngredientUI.printInvalidCommandSyntaxMessage("find");
         } catch (DateTimeParseException e) {
-            IngredientUI.printInvalidCommandSyntaxMessage();
+            IngredientUI.printInvalidCommandSyntaxMessage("find");
         }
     }
 }
