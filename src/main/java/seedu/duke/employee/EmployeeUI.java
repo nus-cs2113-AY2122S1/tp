@@ -4,6 +4,8 @@ package seedu.duke.employee;
 
 import seedu.duke.main.MainUI;
 
+import java.sql.SQLOutput;
+
 /**
  * Prints messages to interact with the users.
  */
@@ -46,6 +48,13 @@ public class EmployeeUI {
                     + " - " + masterList.employeeList.get(i - 1).getStatus() + " STAFF"
                     + " - " + "$" + masterList.employeeList.get(i - 1).getSalary());
         }
+        MainUI.printSingleLine();
+    }
+
+    public static void printInvalidEmploymentStatusMessage() {
+        MainUI.printSingleLine();
+        System.out.println("Invalid employment status.");
+        System.out.println("Please use one of the three options: perm, temp or adhoc.");
         MainUI.printSingleLine();
     }
 }
