@@ -29,9 +29,9 @@ public class EmployeeParser {
 
         try {
             Employee employee = new Employee(command[1].stripLeading().stripTrailing(),
-                    Integer.parseInt(command[2]),
+                    checkNumber(command[2].stripLeading().stripTrailing()),
                     convertToStatus(command[3].stripLeading().stripTrailing()),
-                    Integer.parseInt(command[4]));
+                    checkSalary(command[4].stripLeading().stripTrailing()) );
 
             masterList.employeeList.add(employee);
             masterList.totalEmployee += 1;
@@ -46,6 +46,24 @@ public class EmployeeParser {
         }
         logger.log(Level.FINE, "end of adding employee");
         assert masterList.totalEmployee >= 0 : "total employee should be equals to or greater than zero";
+    }
+
+    private int checkSalary(String number) {
+        int num = Integer.parseInt(number);
+        if (num <= 0) {
+            EmployeeUI.printInvalidSalaryMessage();
+            throw new NumberFormatException();
+        }
+        return num;
+    }
+
+    private int checkNumber(String number) {
+        int num = Integer.parseInt(number);
+        if (num <= 0) {
+            EmployeeUI.printInvalidPhoneNumberMessage();
+            throw new NumberFormatException();
+        }
+        return num;
     }
 
     /**

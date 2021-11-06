@@ -57,4 +57,18 @@ public class EmployeeUI {
         System.out.println("Please use one of the three options: perm, temp or adhoc.");
         MainUI.printSingleLine();
     }
+
+    public static void printInvalidPhoneNumberMessage() {
+        MainUI.printSingleLine();
+        System.out.println("Invalid phone number.");
+        System.out.println("Please ensure that it is a positive integer.");
+        MainUI.printSingleLine();
+    }
+
+    public static void printInvalidSalaryMessage() {
+        MainUI.printSingleLine();
+        System.out.println("Invalid salary.");
+        System.out.println("Please ensure that it is a positive integer.");
+        MainUI.printSingleLine();
+    }
 }
