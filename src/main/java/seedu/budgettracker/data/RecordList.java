@@ -130,7 +130,7 @@ public class RecordList {
     public double getCategorySpending(String categoryString) {
         double categorySpending = 0.0;
         for (Expenditure expenditure: expenditureRecords) {
-            String expenditureCategory = expenditure.getCategory();
+            String expenditureCategory = expenditure.getCategoryString();
             if (expenditureCategory.equals(categoryString)) {
                 categorySpending += expenditure.getAmount();
             }

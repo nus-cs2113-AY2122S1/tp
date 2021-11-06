@@ -24,21 +24,29 @@ public class Expenditure extends Record {
         return description;
     }
 
-    /**
-     * Gets the date on which the expenditure was made.
-     *
-     * @return String date on which expenditure was made
-     */
-    public String getDate() {
-        return date.toString();
+    public LocalDate getDate() {
+        return date;
     }
 
     /**
-     * Gets category which expenditure falls under.
+     * Gets the date on which the expenditure was made after casting to string.
+     *
+     * @return String date on which expenditure was made
+     */
+    public String getDateString() {
+        return date.toString();
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    /**
+     * Gets category which expenditure falls under as a String.
      *
      * @return String category which expenditure belongs to
      */
-    public String getCategory() {
+    public String getCategoryString() {
         return category.toString();
     }
 

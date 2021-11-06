@@ -114,8 +114,8 @@ public class TextUi {
     private static void showExpenditureDetails(Expenditure newExpenditure, AllRecordList recordList) {
         System.out.println("Description: " + newExpenditure.getDescription()
                 + "\nAmount: $" + df.format(newExpenditure.getAmount())
-                + "\nDate: " + newExpenditure.getDate()
-                + "\nCategory: " + newExpenditure.getCategory());
+                + "\nDate: " + newExpenditure.getDateString()
+                + "\nCategory: " + newExpenditure.getCategoryString());
 
         int month = newExpenditure.getMonth();
         String monthString = getMonthString(month);
