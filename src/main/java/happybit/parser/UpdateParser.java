@@ -2,16 +2,15 @@ package happybit.parser;
 
 import happybit.command.Command;
 import happybit.command.UpdateGoalCommand;
-import happybit.command.UpdateGoalEndDateCommand;
-import happybit.command.UpdateGoalNameCommand;
-import happybit.command.UpdateGoalTypeCommand;
+//import happybit.command.UpdateGoalEndDateCommand;
+//import happybit.command.UpdateGoalNameCommand;
+//import happybit.command.UpdateGoalTypeCommand;
 import happybit.command.UpdateHabitCommand;
-import happybit.command.UpdateHabitIntervalCommand;
-import happybit.command.UpdateHabitNameCommand;
+//import happybit.command.UpdateHabitIntervalCommand;
+//import happybit.command.UpdateHabitNameCommand;
 import happybit.exception.HaBitParserException;
 import happybit.goal.GoalType;
 
-import javax.lang.model.type.ArrayType;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -63,12 +62,13 @@ public class UpdateParser extends Parser {
             throw new HaBitParserException(ERROR_UPDATE_COMMAND_NO_GOAL_INDEX);
         }
         assert (input.contains(FLAG_GOAL_INDEX));
-        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
+
         // check if it contains n/, t/ and e/ flag
         // if yes, mark as 1 in int array
         String newGoalName = null;
         GoalType newGoalType = null;
         Date newGoalEndDate = null;
+
         int[] updateAttributes = getUpdateGoalAttributes(parameters);
         if (updateAttributes[0] == 1) {
             newGoalName = getName(parameters);
@@ -79,42 +79,13 @@ public class UpdateParser extends Parser {
         if (updateAttributes[2] == 1) {
             newGoalEndDate = getDate(parameters);
         }
+        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
         ArrayList<String> excessAttributes = getExcessGoalAttributes(parameters);
         return new UpdateGoalCommand(goalIndex, newGoalName, newGoalType, newGoalEndDate,
                 updateAttributes, excessAttributes);
     }
 
-    /**
-     * Examines user input to decide which goal attribute user wants to update.
-     *
-     * @param input User input.
-     * @return Parse command specifically for updating the chosen goal attribute.
-     * @throws HaBitParserException Thrown when parameters given are for changing habit rather than updating goal
-     *                              or when parameters are not in the expected format.
-     *
-    public static Command parseUpdateGoalCommands(String input) throws HaBitParserException {
-        ArrayList<String> parameters = splitInput(input); 
-        assert (input.contains(FLAG_GOAL_INDEX));
-        assert (!input.isBlank());
-        if (isUpdateGoalName(parameters)) {
-            return parseUpdateGoalNameCommand(input);
-        }
-        if (isUpdateGoalType(parameters)) {
-            return parseUpdateGoalTypeCommand(input);
-        }
-        if (isUpdateGoalEndDate(parameters)) {
-            return parseUpdateGoalEndDateCommand(input);
-        }
 
-        if (isChangeHabitName(parameters)) {
-            throw new HaBitParserException(ERROR_CHANGE_HABIT_NAME_WITH_UPDATE_COMMAND);
-        } else if (isChangeHabitInterval(parameters)) {
-            throw new HaBitParserException(ERROR_CHANGE_HABIT_INTERVAL_WITH_UPDATE_COMMAND);
-        } else {
-            throw new HaBitParserException(ERROR_INVALID_UPDATE_COMMAND);
-        }
-    }
-    */
 
     public static Command parseUpdateHabitCommands(String input) throws HaBitParserException {
         ArrayList<String> parameters = splitInput(input);
@@ -137,109 +108,6 @@ public class UpdateParser extends Parser {
         ArrayList<String> excessAttributes = getExcessHabitAttributes(parameters);
         return new UpdateHabitCommand(goalIndex, habitIndex, newHabitName, newHabitInterval,
                 updateAttributes, excessAttributes);
-    }
-
-
-    /**
-     * Examines user input to decide which habit attribute user wants to change.
-     *
-     * @param input User input.
-     * @return Parse command specifically for updating the chosen habit attribute.
-     * @throws HaBitParserException Thrown when parameters given are for updating goal rather than changing habits
-     *                              or when parameters are not the same
-     *
-    public static Command parseUpdateHabitCommands(String input) throws HaBitParserException {
-        ArrayList<String> parameters = splitInput(input);
-        assert (input.contains(FLAG_GOAL_INDEX));
-        assert (!input.isBlank());
-        if (isChangeHabitName(parameters)) {
-            return parseUpdateHabitNameCommand(input);
-        }
-        if (isChangeHabitInterval(parameters)) {
-            return parseUpdateHabitIntervalCommand(input);
-        }
-
-        if (isUpdateGoalName(parameters)) {
-            throw new HaBitParserException(ERROR_UPDATE_GOAL_NAME_WITH_CHANGE_COMMAND);
-        } else if (isUpdateGoalType(parameters)) {
-            throw new HaBitParserException(ERROR_UPDATE_GOAL_TYPE_WITH_CHANGE_COMMAND);
-        } else if (isUpdateGoalEndDate(parameters)) {
-            throw new HaBitParserException(ERROR_UPDATE_GOAL_END_DATE_WITH_CHANGE_COMMAND);
-        } else {
-            throw new HaBitParserException(ERROR_INVALID_CHANGE_COMMAND);
-        }
-    }
-    */
-
-    /**
-     * Parses detail from user into goalIndex and newGoalName (information) to create a new Command.
-     *
-     * @param input Input typed by the user.
-     * @return A Command class with the goalIndex and newGoalName.
-     * @throws HaBitParserException If command parameters are not defined, or defined improperly.
-     */
-    public static Command parseUpdateGoalNameCommand(String input) throws HaBitParserException {
-        ArrayList<String> parameters = splitInput(input);
-        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
-        String newGoalName = getName(parameters);
-        return new UpdateGoalNameCommand(goalIndex, newGoalName);
-    }
-
-    public static Command parseUpdateGoalEndDateCommand(String input) throws HaBitParserException {
-        ArrayList<String> parameters = splitInput(input);
-        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
-        Date newDate = getDate(parameters);
-        return new UpdateGoalEndDateCommand(goalIndex, newDate);
-    }
-
-    /**
-     * Parses detail from user into goalIndex and newGoalName (information) to create a new Command.
-     *
-     * @param input Input typed by the user.
-     * @return A Command class with the goalIndex and newGoalName.
-     * @throws HaBitParserException If command parameters are not defined, or defined improperly.
-     */
-    public static Command parseUpdateGoalTypeCommand(String input) throws HaBitParserException {
-        ArrayList<String> parameters = splitInput(input);
-        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
-        GoalType newGoalType = getType(parameters);
-        return new UpdateGoalTypeCommand(goalIndex, newGoalType);
-    }
-
-    /**
-     * Parses detail from user into goalIndex, habitIndex, and newHabitName (information) to create a new Command.
-     *
-     * @param input Input typed by the user.
-     * @return A Command class with the goalIndex, habitIndex, and newHabitName.
-     * @throws HaBitParserException If command parameters are not defined, or defined improperly.
-     */
-    public static Command parseUpdateHabitNameCommand(String input) throws HaBitParserException {
-        ArrayList<String> parameters = splitInput(input);
-        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
-        int habitIndex = getIndex(parameters, FLAG_HABIT_INDEX);
-        String newHabitName = getName(parameters);
-        return new UpdateHabitNameCommand(goalIndex, habitIndex, newHabitName);
-    }
-
-    /**
-     * Parser to parse user's command of updating interval.
-     *
-     * @param commandInstruction Input from user.
-     * @return A Command instance for UpdateHabitIntervalCommand with the goalIndex, habitIndex and interval
-     * @throws HaBitParserException If command parameters are not defined, or defined improperly
-     */
-    public static Command parseUpdateHabitIntervalCommand(String commandInstruction) throws HaBitParserException {
-        ArrayList<String> parameters = splitInput(commandInstruction);
-        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
-        int habitIndex = getIndex(parameters, FLAG_HABIT_INDEX);
-        int interval = getUpdateInterval(parameters, FLAG_INTERVAL);
-        if (interval > MAX_INTERVAL) {
-            throw new HaBitParserException(ERROR_INTERVAL_TOO_LARGE);
-        }
-        assert (goalIndex >= 0);
-        assert (habitIndex >= 0);
-        assert (interval > 0);
-        return new UpdateHabitIntervalCommand(goalIndex, habitIndex, interval);
     }
 
     /*
@@ -425,6 +293,139 @@ public class UpdateParser extends Parser {
         }
     }
 
+    /*
+    /**
+     * Examines user input to decide which goal attribute user wants to update.
+     *
+     * @param input User input.
+     * @return Parse command specifically for updating the chosen goal attribute.
+     * @throws HaBitParserException Thrown when parameters given are for changing habit rather than updating goal
+     *                              or when parameters are not in the expected format.
+     * /
+    public static Command parseUpdateGoalCommands(String input) throws HaBitParserException {
+        ArrayList<String> parameters = splitInput(input);
+        assert (input.contains(FLAG_GOAL_INDEX));
+        assert (!input.isBlank());
+        if (isUpdateGoalName(parameters)) {
+            return parseUpdateGoalNameCommand(input);
+        }
+        if (isUpdateGoalType(parameters)) {
+            return parseUpdateGoalTypeCommand(input);
+        }
+        if (isUpdateGoalEndDate(parameters)) {
+            return parseUpdateGoalEndDateCommand(input);
+        }
+
+        if (isChangeHabitName(parameters)) {
+            throw new HaBitParserException(ERROR_CHANGE_HABIT_NAME_WITH_UPDATE_COMMAND);
+        } else if (isChangeHabitInterval(parameters)) {
+            throw new HaBitParserException(ERROR_CHANGE_HABIT_INTERVAL_WITH_UPDATE_COMMAND);
+        } else {
+            throw new HaBitParserException(ERROR_INVALID_UPDATE_COMMAND);
+        }
+    }
+    /**
+     * Examines user input to decide which habit attribute user wants to change.
+     *
+     * @param input User input.
+     * @return Parse command specifically for updating the chosen habit attribute.
+     * @throws HaBitParserException Thrown when parameters given are for updating goal rather than changing habits
+     *                              or when parameters are not the same
+     * /
+    public static Command parseUpdateHabitCommands(String input) throws HaBitParserException {
+        ArrayList<String> parameters = splitInput(input);
+        assert (input.contains(FLAG_GOAL_INDEX));
+        assert (!input.isBlank());
+        if (isChangeHabitName(parameters)) {
+            return parseUpdateHabitNameCommand(input);
+        }
+        if (isChangeHabitInterval(parameters)) {
+            return parseUpdateHabitIntervalCommand(input);
+        }
+
+        if (isUpdateGoalName(parameters)) {
+            throw new HaBitParserException(ERROR_UPDATE_GOAL_NAME_WITH_CHANGE_COMMAND);
+        } else if (isUpdateGoalType(parameters)) {
+            throw new HaBitParserException(ERROR_UPDATE_GOAL_TYPE_WITH_CHANGE_COMMAND);
+        } else if (isUpdateGoalEndDate(parameters)) {
+            throw new HaBitParserException(ERROR_UPDATE_GOAL_END_DATE_WITH_CHANGE_COMMAND);
+        } else {
+            throw new HaBitParserException(ERROR_INVALID_CHANGE_COMMAND);
+        }
+    }
+    /**
+     * Parses detail from user into goalIndex and newGoalName (information) to create a new Command.
+     *
+     * @param input Input typed by the user.
+     * @return A Command class with the goalIndex and newGoalName.
+     * @throws HaBitParserException If command parameters are not defined, or defined improperly.
+     * /
+    public static Command parseUpdateGoalNameCommand(String input) throws HaBitParserException {
+        ArrayList<String> parameters = splitInput(input);
+        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
+        String newGoalName = getName(parameters);
+        return new UpdateGoalNameCommand(goalIndex, newGoalName);
+    }
+
+    public static Command parseUpdateGoalEndDateCommand(String input) throws HaBitParserException {
+        ArrayList<String> parameters = splitInput(input);
+        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
+        Date newDate = getDate(parameters);
+        return new UpdateGoalEndDateCommand(goalIndex, newDate);
+    }
+
+    /**
+     * Parses detail from user into goalIndex and newGoalName (information) to create a new Command.
+     *
+     * @param input Input typed by the user.
+     * @return A Command class with the goalIndex and newGoalName.
+     * @throws HaBitParserException If command parameters are not defined, or defined improperly.
+     * /
+    public static Command parseUpdateGoalTypeCommand(String input) throws HaBitParserException {
+        ArrayList<String> parameters = splitInput(input);
+        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
+        GoalType newGoalType = getType(parameters);
+        return new UpdateGoalTypeCommand(goalIndex, newGoalType);
+    }
+
+
+    /**
+     * Parses detail from user into goalIndex, habitIndex, and newHabitName (information) to create a new Command.
+     *
+     * @param input Input typed by the user.
+     * @return A Command class with the goalIndex, habitIndex, and newHabitName.
+     * @throws HaBitParserException If command parameters are not defined, or defined improperly.
+     * /
+    public static Command parseUpdateHabitNameCommand(String input) throws HaBitParserException {
+        ArrayList<String> parameters = splitInput(input);
+        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
+        int habitIndex = getIndex(parameters, FLAG_HABIT_INDEX);
+        String newHabitName = getName(parameters);
+        return new UpdateHabitNameCommand(goalIndex, habitIndex, newHabitName);
+    }
+
+    /**
+     * Parser to parse user's command of updating interval.
+     *
+     * @param commandInstruction Input from user.
+     * @return A Command instance for UpdateHabitIntervalCommand with the goalIndex, habitIndex and interval
+     * @throws HaBitParserException If command parameters are not defined, or defined improperly
+     * /
+    public static Command parseUpdateHabitIntervalCommand(String commandInstruction) throws HaBitParserException {
+        ArrayList<String> parameters = splitInput(commandInstruction);
+        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
+        int habitIndex = getIndex(parameters, FLAG_HABIT_INDEX);
+        int interval = getUpdateInterval(parameters, FLAG_INTERVAL);
+        if (interval > MAX_INTERVAL) {
+            throw new HaBitParserException(ERROR_INTERVAL_TOO_LARGE);
+        }
+        assert (goalIndex >= 0);
+        assert (habitIndex >= 0);
+        assert (interval > 0);
+        return new UpdateHabitIntervalCommand(goalIndex, habitIndex, interval);
+    }
+
+*/
 
 
 }

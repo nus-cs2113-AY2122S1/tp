@@ -85,7 +85,7 @@ public class MainParser {
      * @return String containing the remainder of the user input without the command word.
      */
     private static String getCommandInstruction(String[] words) throws HaBitParserException {
-        if (words.length == 1) {
+        if (words.length < 1) {
             throw new HaBitParserException(ERROR_NO_PARAMS);
         }
         return concatenateString(words);

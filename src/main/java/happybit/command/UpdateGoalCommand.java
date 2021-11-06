@@ -1,6 +1,7 @@
 package happybit.command;
 
 import happybit.exception.HaBitCommandException;
+import happybit.exception.HaBitStorageException;
 import happybit.goal.GoalList;
 import happybit.goal.GoalType;
 import happybit.storage.Storage;
@@ -9,7 +10,7 @@ import happybit.ui.PrintManager;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class UpdateGoalCommand extends UpdateCommand{
+public class UpdateGoalCommand extends UpdateCommand {
     protected int goalIndex;
     protected String newGoalName; // index 0
     protected GoalType newGoalType; // index 1
@@ -29,7 +30,13 @@ public class UpdateGoalCommand extends UpdateCommand{
 
     @Override
     public void runCommand(GoalList goalList, PrintManager printManager, Storage storage) throws HaBitCommandException {
-
+        goalList.updateGoalAttributes(goalIndex, newGoalName, newGoalType, newGoalEndDate,
+                updateAttributes, excessAttributes, printManager);
+        try {
+            storage.export(goalList.getGoalList());
+        } catch (HaBitStorageException e) {
+            printManager.printError(e.getMessage());
+        }
     }
 
     public int getGoalIndex() {
