@@ -1,24 +1,33 @@
 package seedu.duke.commands;
 
 import seedu.duke.Duke;
-import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Event;
-import java.util.Arrays;
 
 
 public class FindCommand extends Command {
 
-    private static final int MAX_SIZE = Duke.eventCatalog.size();
+    private final Event[] findResults;
 
-    private static String keyword;
-    private static Event[] filteredList = new Event[MAX_SIZE];
-    private static int numberOfEvents;
 
-    public FindCommand(String[] command) {
-
+    public FindCommand(Event[] findResults) {
+        this.findResults = findResults;
     }
 
     public CommandResult execute() {
+        String foundEvents;
+        foundEvents = filteredEventsAsString(findResults);
+        return new CommandResult(foundEvents);
+    }
 
+    private static String filteredEventsAsString(Event[] findResults) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < findResults.length; i++) {
+            if (findResults[i] == null) {
+                continue;
+            }
+            result.append((i + 1)).append(". ").append(findResults[i].getTitle());
+            result.append("\n");
+        }
+        return result.toString();
     }
 }
