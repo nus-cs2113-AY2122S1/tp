@@ -378,21 +378,21 @@ public class ParserTest {
     }
     
     @Test
-    public void parseCommand_validExpenseInputDCA_validCommand() {
+    public void parseCommand_validExpenseInputD_C_A_validCommand() {
         Parser testParser = new Parser();
         Command underTest = testParser.parseCommand("add_ex d//fa/gd/ff/s/f/sf/s/f/ c/food a/100");
         assertEquals(AddExpenseCommand.class, underTest.getClass());
     }
 
     @Test
-    public void parseCommand_validExpenseInputCDA_validCommand() {
+    public void parseCommand_validExpenseInputC_D_A_validCommand() {
         Parser testParser = new Parser();
         Command underTest = testParser.parseCommand("add_ex c/food d//fa/gd/ff/s/f/sf/s/f/ a/100");
         assertEquals(AddExpenseCommand.class, underTest.getClass());
     }
 
     @Test
-    public void parseCommand_validExpenseInputACD_validCommand() {
+    public void parseCommand_validExpenseInputA_C_D_validCommand() {
         Parser testParser = new Parser();
         Command underTest = testParser.parseCommand("add_ex a/100 c/food d//fa/gd/ff/s/f/sf/s/f/");
         assertEquals(AddExpenseCommand.class, underTest.getClass());
