@@ -3,7 +3,11 @@ package seedu.duke.storage;
 import seedu.duke.TourPlannerException;
 import seedu.duke.Ui;
 import seedu.duke.commands.clientpackages.AddClientPackageCommand;
-import seedu.duke.data.*;
+import seedu.duke.data.ClientList;
+import seedu.duke.data.ClientPackage;
+import seedu.duke.data.ClientPackageList;
+import seedu.duke.data.FlightList;
+import seedu.duke.data.TourList;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -80,7 +84,8 @@ public class ClientPackageStorage {
                 }
 
                 if (hasClient && hasFlight && hasTour && hasClientPackage && !isPackageAdded) {
-                    AddClientPackageCommand command = new AddClientPackageCommand(rawClientPackage.toArray(new String[]{}));
+                    AddClientPackageCommand command =
+                            new AddClientPackageCommand(rawClientPackage.toArray(new String[]{}));
                     command.setData(clients, flights, tours, clientPackages, ui);
                     command.executeStorage();
                     isPackageAdded = true;

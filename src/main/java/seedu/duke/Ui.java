@@ -373,7 +373,7 @@ public class Ui {
         flights.initTempArray();
         int listIndex = 1;
         for (String flightArriveDate : sortedFlightByArriveDates) {
-            Flight currFlight = flights.getFlightByArriveDate(flightArriveDate);
+            Flight currFlight = flights.getFlightByReturnDate(flightArriveDate);
             show(listIndex + ". " + currFlight + System.lineSeparator());
             listIndex++;
         }

@@ -13,12 +13,20 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class for flights. Creates and loads up the FlightList.
+ */
 public class FlightStorage {
     private final FlightList flights = new FlightList();
     private static final String root = System.getProperty("user.dir");
     private static final Path filePath = Paths.get(root, "data", "TourPlannerFlights.txt");
     private static final Path dirPath = Paths.get(root, "data");
 
+    /**
+     * Class constructor for FlightStorage.
+     *
+     * @throws TourPlannerException if there are IOException thrown when creating a new directory/file
+     */
     public FlightStorage() throws TourPlannerException {
         try {
             File fileDirectory = new File(dirPath.toString());
@@ -33,10 +41,20 @@ public class FlightStorage {
         }
     }
 
+    /**
+     * Getter for flight list.
+     *
+     * @return the list of flights stored in database
+     */
     public FlightList getFlights() {
         return flights;
     }
 
+    /**
+     * Reads and loads the flights from the stored text file, '/data/TourPlannerFlights.txt' into FlightList.
+     *
+     * @throws TourPlannerException if file in the given filePath does not exist
+     */
     public void loadFile() throws TourPlannerException {
         try {
             File dataFile = new File(filePath.toString());
@@ -71,6 +89,9 @@ public class FlightStorage {
         }
     }
 
+    /**
+     * Writes to and saves the flights from the database into the text file, '/data/TourPlannerFlights.txt' for storage.
+     */
     public void saveFile() {
         ArrayList<Flight> flightList = flights.getFlights();
         try {
