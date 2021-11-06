@@ -11,7 +11,9 @@ public class StorageTest {
     @Test
     void budgetTracker_onLaunch_createNewDataFile() {
         File dataDirectory = new File("./data/");
-        BudgetTracker budgetTracker = new BudgetTracker();
+        Storage storage = new Storage();
+
+        storage.makeStorageTextFile("");
 
         File[] dataDirectoryList = dataDirectory.listFiles();
         assertTrue(dataDirectoryList.length > 0);
@@ -20,15 +22,25 @@ public class StorageTest {
     @Test
     void storageDirectoryListing_execute_noChangesToDataDirectory() {
         Storage newStorage = new Storage();
-
-        File dataDirectory1 = new File("./data/");
-        File[] dataDirectoryList1 = dataDirectory1.listFiles();
-
+        int directoryFiles1 = 0;
+        int directoryFiles2 = 0;
+        try {
+            File dataDirectory1 = new File("./data/");
+            File[] dataDirectoryList1 = dataDirectory1.listFiles();
+            directoryFiles1 = dataDirectoryList1.length;
+        } catch (NullPointerException e) {
+            directoryFiles1 = 0;
+        }
         newStorage.directoryListAllFiles();
 
-        File dataDirectory2 = new File("./data/");
-        File[] dataDirectoryList2 = dataDirectory2.listFiles();
+        try {
+            File dataDirectory2 = new File("./data/");
+            File[] dataDirectoryList2 = dataDirectory2.listFiles();
+            directoryFiles2 = dataDirectoryList2.length;
+        } catch (NullPointerException e) {
+            directoryFiles2 = 0;
+        }
 
-        assertTrue(dataDirectoryList1.length == dataDirectoryList2.length);
+        assertTrue(directoryFiles1 == directoryFiles2);
     }
 }

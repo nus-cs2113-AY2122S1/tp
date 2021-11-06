@@ -15,8 +15,8 @@ public class ReadTextFileTest {
     @Test
     void readTextFileToString_invalidFile_expectNoRawCommand() throws IOException {
         ArrayList<String> arrayListOfRawCommands = textFileReader.readTextFileToString();
-        // assertEquals(0, arrayListOfRawCommands.size());
+        assertEquals(0, arrayListOfRawCommands.size());
 
-        assertThrows(NullPointerException.class, () -> arrayListOfRawCommands.size());
+        // assertThrows(NullPointerException.class, () -> arrayListOfRawCommands.size());
     }
 }
