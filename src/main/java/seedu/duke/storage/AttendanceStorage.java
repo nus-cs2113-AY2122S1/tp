@@ -323,8 +323,8 @@ public class AttendanceStorage {
     public static void deleteAttendance(AttendanceList attendanceList, String trainingName, int index) {
         assert index >= 1;
         int count = 1;
-        for (int i = 1; i <= attendanceList.getAttendanceListSize(); i++) { //iterate entire attendance list
-            if (attendanceList.getAttendanceTrainingName(i).equals(trainingName.toUpperCase(Locale.ROOT))) { //if entry has this training name
+        for (int i = 1; i <= attendanceList.getAttendanceListSize(); i++) {
+            if (attendanceList.getAttendanceTrainingName(i).equals(trainingName.toUpperCase(Locale.ROOT))) {
                 if (count == index) {
                     Attendance toDelete = attendanceList.deleteAttendance(i);
                     Ui.printDeletedAttendanceMessage(toDelete);
