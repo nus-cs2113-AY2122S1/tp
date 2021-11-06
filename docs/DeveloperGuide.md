@@ -177,8 +177,9 @@ The user's input is parsed in `MainParser` and `EditContactParser` and the imple
 `AddContactParser` .
 
 The user input will be parsed by `EditContactParser` methods `getIndexToStore` and 
-`parseContactDetails` to obtain a String array with the details to be edited. The sequence diagram below 
-shows how the String array is obtained.
+`parseContactDetails` to obtain a String array with the details to be edited.
+The user input will also be parsed by the [`IndexParser`](#IndexParser) to obtain the contact index, which identifies the contact in the 
+contact list to be edited.The sequence diagram below shows how the String array is obtained.
 
 ![Edit Sequence Diagram](images/EditContactParserSequenceDiagram.png)
 
