@@ -186,6 +186,7 @@ public class AddCommandParser {
         if (ParseCondition.isNumeric(firstParam) && ParseCondition.isNumeric(secondParam)) {
             uniIndex = Integer.parseInt(firstParam);
             mapIndex = Integer.parseInt(secondParam);
+            university = universityMasterList.get(uniIndex - 1);
         } else {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             String error = (ParseCondition.isNumeric(firstParam)) ? Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING
@@ -196,7 +197,7 @@ public class AddCommandParser {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTSELECTED, 1, false);
         }
-        if (ParseCondition.isMissingAvailableMapping(uniIndex, universityMasterList, moduleSelectedList)) {
+        if (ParseCondition.isNoPotentialMapping(university, moduleSelectedList)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1, false);
         }

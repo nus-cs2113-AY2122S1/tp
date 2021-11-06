@@ -91,27 +91,48 @@ by passing the university to display the message of adding the selected universi
 </p>
 
 
-Step 1. When the beginner user launches the application, to see the list of all universities available for the SEP program, the user executes the `list /muni` command. To see the list of all NUS modules available for the SEP program, the user can execute the `list /mmod` command.
+####AddModCommand
+When the `AddModCommand` method is called in the `AddModCommand` class. It will call the `addModule` method in the `moduleList` class under Model, adding the module in the selected module list. Then it will call the `updateSelectedModuleList` method in the storage class to update the selected list with the new module added. Finally, it will call the `printModule` method in the `UiModule` class to print the message of adding the module to the user.
 
-Step 2. The user then executes the `add /uni Boston University` command and add his preferred university to the selected university list. The other option for the user is to execute the `add /uni 4` command by entering its university master index.
+####AddUniCommand
+When the `AddUniCommand` method is called in the `AddUniCommand` class. It will call `addUniversity` method in the `universityList` class under Model, adding the university in the selected university list. Then it will call the `updateSelectedUniversityList` method in the storage class to update the selected list with the new university added. Finally, it will call the `printUniversity` method in the `UiUniversity` class to print the message of adding the university to the user.
 
-Step 3. The user executes the `add /mod CS1231` command to add his preferred NUS module to the selected module list. The other option for the user is to execute the `add /mod 81` command by entering its module master index.
+####AddMapCommand
+When the `addMapCommand` method is called in the `AddMapCommand` class. It will call the `addMapping` method in the `university` class under Model, adding the mapping under the selected university in the selected university list. Then it will call the `updateSelectedUniversity` method in the storage class to update the selected list with the new mapping added. Finally, it will call the `printUniversity` method in the `UiMapping` class to print the message of adding the mapping to the user.
 
-Step 4. The user executes `list /suni` to see his selected university list. The user executes `list /smod` command to see his selected module list.
+####RemoveModCommand
+When the `RemoveModCommand` method is called in the `RemoveModCommand` class. It will call the `removeModule` method in the `moduleList` class under Model, removing the module in the selected module list. Then it will call the `updateSelectedModuleList` method in the storage class to update the selected list with the module removed. Finally, it will call the `printModule` method in the `UiModule` class to print the message of removing the module to the user.
 
-Step 5. The user executes the `remove /mod CS1231` or `remove /mod 81` command to delete the unwanted module from see his selected module list. The user executes the `remove /uni Boston University` or `remove /uni 4` command to delete the unwanted university from his selected university list.
+####RemoveUniCommand
+When the `RemoveUniCommand` method is called in the `RemoveUniCommand` class. It will call `removeUniversity` method in the `universityList` class under Model, removing the university in the selected university list. Then it will call the `updateSelectedUniversityList` method in the storage class to update the selected list with the university removed. Finally, it will call the `printUniversity` method in the `UiUniversity` class to print the message of removing the university to the user.
 
-Step 6. If the user forgets the master index for a university of a module, he can execute the `find /mod Discrete Structures` or `find /code CS1231` to find the module. The user executes `find /uni Boston University` to find the university.
+####RemoveMapCommand
+When the `RemoveMapCommand` method is called in the `RemoveMapCommand` class. It will call the `removeMapping` method in the `university` class under Model, removing the mapping under the selected university in the selected university list. Then it will call the `updateSelectedUniversity` method in the storage class to update the selected list with the mapping removed. Finally, it will call the `printUniversity` method in the `UiMapping` class to print the message of removing the mapping to the user.
 
-Step 7. The user executes `searchmap 4` command to see the module mapping of all modules in the selected module list in Boston University. The user can execute `searchmap all` to see all modules in the selected module list for all universities in the selected university list.
+####ListModCommand
+When the `ListModCommand` method is called in the `ListModCommand` class. It will call the `getSize()` method in the `moduleList` class to check if the list is empty: if the list is empty, it prints the error message. If the list is not empty, it calls the `printModule` method in the `UiModule` class in a loop to print all modules found.
 
-Step 8. The user executes `add /map 4 1` command to add the first module mapping available under Boston University.
+####ListUniCommand
+When the `ListUniCommand` method is called in the `ListUniCommand` class. It will call the `getSize()` method in the `UniversityList` class to check if the list is empty: if the list is empty, it prints the error message. If the list is not empty, it checks the type of university list chosen. If the master list is chosen, the `printMasterList` method is called, which calls `printUniversity` method in the `UiUniversity` class to print out all universities in the master list. If the selected list is chosen, `printSelectedList` is called, which calls `printUniversity` method in the `UiUniversity` class to print out all universities in the selected list and calls `listAllMappings` method in the `universityList` class to print all module mappings under each university as well.
 
-Step 9. The user executes `remove /map 4 1` command to remove the first mapping allocated to Boston University.
+####FindModCommand
+When the `FindModCommand` method is called in the `FindModCommand` class. It will get the list of module results by searching in the `moduleMasterList`. Then it checks if the result list is empty: if the result list is empty, it calls the `printFindModNull` method in the `UiInvalid` class to print the error message. If the result list is not empty, it calls the `printModule` method in the `UiModule` class in a loop to print all modules found.
 
-Step 10. The user executes `help` command to see the list of commands available for SEPlanner.
+####FindUniCommand
+When the `FindUniCommand` method is called in the `FindUniCommand` class. It will get the list of university results by searching in the `universityMasterList`. Then it checks if the result list is empty: if the result list is empty, it calls the `printFindUniNull` method in the `UiInvalid` class to print the error message. If the result list is not empty, it calls the `printUniversity` method in the `UiUniversity` class in a loop to print all universities found.
 
-Step 11. The user executes `exit` command to terminate the program.
+####SearchMapCommand
+When the `SearchMapCommand` method is called in the `SearchMapCommand` class, it will check if `isAll` is true. If `isAll` is true, the `printMappings` method will be called, which prints all mappings from the selected module list for all universities in the selected university list by calling the `printIndex` method in the Ui class and `listSelectedMappings` method in the University class. If isAll is false, it will call the `printMappings` method to print out only the mappings for the selected university only.  
+The following sequence diagram illustrates how the whole process is carried out.
+<p align = "center">
+<img src="images/searchmapseq.png" width = "800" />
+</p>
+
+####HelpCommand
+When the `HelpCommand` method is called in the `HelpCommand` class. It will print out all commands available for SEPlanner.
+
+####ExitCommand
+When the `ExitCommand` method is called in the `ExitCommand` class. It will call the `printExit` method in the `UiGeneral` class to exit the program.
 
 ### User Interface
 
@@ -148,8 +169,8 @@ The UiStorage class contains methods to display error messages from the Storage 
 
 The sequence diagram above illustrates how the classes in the Ui package interact when a printUniversity() call is made from outside the package.
 In the printUniversity Method,
-1. printIndex is called from the Ui class.
-2. Within printIndex, we display the index, then do a self invocation on stringPadder within the Ui class to pad the string to line up the text after. 
+1. `printIndex` is called from the Ui class.
+2. Within `printIndex`, we display the index, then do a self invocation on stringPadder within the Ui class to pad the string to line up the text after. 
 3. After printing the index, print the university name, then depending on the boolean printMC, we pad it again with stringPadder before displaying the Module Credits. 
 
 
@@ -185,8 +206,12 @@ from the CSV type files (`University.csv` and `modules.csv`) stored in the resou
 
 The following diagrams are the class diagrams of the classes:  
 
-<img src="images/University.png" width = "280"/>  
-<img src="images/Module.png" width = "280"/>  
+<p align = "center">
+<img src="images/universities.png" width = "800" />
+</p>
+<p align = "center">
+<img src="images/modules.png" width = "800" />
+</p>
 
 This component consist of the following classes: 
 
@@ -284,6 +309,7 @@ This object will return an instance of `ExitCommand`.
 * This is an abstract class inherited from Java 11's `ParseException` and its children objects are thrown when an input is detected as invalid. 
 * Each command word has its respective `ParserClassException` with its format inside.
 * On top of the parameters for `ParseException`, and additional boolean variable is required to identify when the user has made a format error in the command and the correct format will be output to the user.
+* Any instance of this exception will be caught in the main method of `Seplanner` class.
 
 ## Product scope
 
@@ -383,7 +409,7 @@ These instructions only provide a starting point for testers to work on; testers
       Expected: The user selected module list are displayed.
 
 5. Dealing with wrong flags.
-   1. Test case: 'list /mod'
+   1. Test case: `list /mod`
 
       Expected: No list will be printed. Error message indicating wrong flags is shown, together with the correct format for `list` command.
 
@@ -393,8 +419,49 @@ These instructions only provide a starting point for testers to work on; testers
       Expected: No list will be printed. Error message indicating missing flags is shown, together with the correct format for `list` command.
 
 ### Finding a university
+1. Finding a university by name.
+    1. Test case: `find /uni Boston University`
+
+       Expected: The related information for Boston University is printed.
+   2. Test case: `find /uni abc`
+
+      Expected: No university is found. Error message is printed to indicate university is not available.
+   
+2. Dealing with wrong flags.
+    1. Test case: `find /uniname`
+
+       Expected: Error message indicating wrong flags is shown, together with the correct format for `find` command.
+
+3. Dealing with incorrect format.
+    1. Test case: `find`
+
+       Expected: Error message indicating missing flags is shown, together with the correct format for `list` command.
 
 ### Finding a module
+1. Finding a module by name.
+    1. Test case: `find /mod Discrete Structures`
+
+       Expected: The related information for Discrete Structures is printed.
+    2. Test case: `find /mod abc`
+
+       Expected: No module is found. Error message is printed to indicate university is not available.
+2. Finding a module by code.
+    1. Test case: `find /code CS1231`
+
+       Expected: The related information for CS1231 is printed.
+    2. Test case: `find /mod abc`
+
+    Expected: No module is found. Error message is printed to indicate university is not available.
+
+2. Dealing with wrong flags.
+    1. Test case: `find /modname`
+
+       Expected: Error message indicating wrong flags is shown, together with the correct format for `find` command.
+
+3. Dealing with incorrect format.
+    1. Test case: `find`
+
+       Expected: Error message indicating missing flags is shown, together with the correct format for `list` command.
 
 ### Adding a university
 
@@ -499,9 +566,57 @@ These instructions only provide a starting point for testers to work on; testers
 
       Expected: No module will be added. Error message indicating wrong flags is shown, together with the correct format for `add` command.
    
-### Adding a mapping
+### Adding a mapping (rmb to verify the commands with actual test case)
 
-### Search for a mapping
+   1. Adding a mapping for a selected university and module
+      1. Prerequisites: Module and University has been added and potential mapping is available via `searchmap` command. Run the command `add /uni 75` and `add /mod 77`
+      2. Test case: `add /map 75 1`
+
+         Expected: Mapping will be added to the Selected University List under the respective university. Success message is shown. Run the command `list /suni` to verify.
+   
+   2. Adding a mapping to an unselected university and selected module. 
+      1. Prerequisites: Delete the data folder and restart the program. Run the command `add /mod 34`
+      2. Test case: 
+      
+         Expected:
+   
+   3. Adding a non-existent mapping to a university. 
+      1. Prerequisites: Module and University has been added and potential mapping is available via `searchmap` command. Run the command `add /uni 75`
+      2. Test Case: `add /map 75 1`
+      
+         Expected: No mapping wil be added. Error message indicating invalid mapping is shown.
+       
+   4. Dealing with missing argument.
+       1. Test case: `add /map`
+
+          Expected: No mapping will be added. Error message indicating missing arguments is shown, together with the correct format for `add` command.
+
+       2. Test case: `add`
+
+          Expected: No module will be added. Error message indicating missing arguments is shown, together with the correct format for `add` command.
+      
+   5. Dealing with incorrect flag.
+       1. Test case: `add /mmap 34 3`
+
+          Expected: No module will be added. Error message indicating wrong flags is shown, together with the correct format for `add` command.
+
+### Searching for a mapping (rmb to verify test case)
+
+1. Searching for a mapping for a university with mappings to user selected modules.
+   1. Prerequisite: Modules must be added to the Selected Module List with the `add` command. Run the command `add /mod 234`.
+   2. Test case: `searchmap 75`
+
+      Expected: List of potential mappings for the particular university is displayed.
+   3. Test case: `searchmap 0`
+   
+      Expected: No mappings will be listed. Error message indicating invalid university is shown. 
+   4. Test case: `searchmap 81`
+
+      Expected: No mappings will be listed. Error message indicating invalid university is shown.
+2. Dealing with missing arguments.
+   1. Test case: `searchmap`
+   
+      Expected: No mappings will be listed. Error message indicating missing arguments is shown, together with the correct format for `searchmap` command.
 
 ### Removing a university
 
@@ -605,7 +720,39 @@ These instructions only provide a starting point for testers to work on; testers
 
        Expected: No module will be removed. Error message indicating wrong flags is shown, together with the correct format for `remove` command.
 
-### Removing a mapping
+### Removing a mapping (rmb to verify test case with actual data)
+
+1. Removing a mapping for a selected university and module
+    1. Prerequisites: Module and University has been removed and potential mapping is available via `searchmap` command. Run the command `remove /uni 75` and `remove /mod 77`
+    2. Test case: `remove /map 75 1`
+
+       Expected: Mapping will be removed to the Selected University List under the respective university. Success message is shown. Run the command `list /suni` to verify.
+
+2. Removing a non-existent mapping from a selected university.
+    1. Prerequisites: Delete the data folder and restart the program. Run the command `add /uni 34`
+    2. Test case: `remove /map 34 2`
+
+       Expected: No mapping is removed. Error message indicating invalid mapping is shown.
+
+3. Removing a mapping from an unselected university.
+    1. Prerequisites: Delete the data folder and restart the program.
+    2. Test case: `remove /map 34 2`
+
+       Expected: No mapping is removed. Error message indicating university not selected is shown.
+
+4. Dealing with missing argument.
+    1. Test case: `remove /map`
+
+       Expected: No mapping will be removed. Error message indicating missing arguments is shown, together with the correct format for `remove` command.
+
+    2. Test case: `remove`
+
+       Expected: No module will be removed. Error message indicating missing arguments is shown, together with the correct format for `remove` command.
+
+5. Dealing with incorrect flag.
+    1. Test case: `remove /mmap 34 3`
+
+       Expected: No module will be removed. Error message indicating wrong flags is shown, together with the correct format for `remove` command.
 
 ### Saving data
 

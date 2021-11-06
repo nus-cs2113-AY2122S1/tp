@@ -1,6 +1,7 @@
 package seplanner.ui;
 
 import seplanner.enumerations.PaddingType;
+import seplanner.modules.ModuleList;
 import seplanner.universities.University;
 
 import static java.lang.System.out;
@@ -24,6 +25,22 @@ public class UiUniversity extends Ui {
             output = uni.getName();
         }
         out.println(output);
+    }
+
+    /**
+     * Print module mappings for modules in the selected module list.
+     *
+     * @param uni university selected to search module mappings for.
+     * @param moduleSelectedList The selected module list which contains only the module selected by the user.
+     */
+    public static void printMappings(University uni, ModuleList moduleSelectedList) {
+        assert uni.getName() != null;
+        assert uni.getClass() != null;
+        String header = "Potential mappings for " + uni.getName() + " ";
+        out.print(header);
+        Ui.printIndex(uni.getIndex(), false);
+        out.println(":");
+        uni.listSelectedMappings(moduleSelectedList);
     }
 
 }

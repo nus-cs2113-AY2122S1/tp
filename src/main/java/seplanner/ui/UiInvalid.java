@@ -4,11 +4,11 @@ import static java.lang.System.out;
 
 public class UiInvalid extends Ui {
     public static void printFindModNull() {
-        out.println("No modules found");
+        out.println("There is an error in your inputs: This module does not exist.");
     }
 
     public static void printFindUniNull() {
-        out.println("No universities found");
+        out.println("There is an error in your inputs: This university does not exist.");
     }
 
     public static void printParseException(String errorMessage, String format, boolean isPrintFormat) {

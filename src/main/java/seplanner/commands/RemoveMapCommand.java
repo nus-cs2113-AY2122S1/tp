@@ -33,7 +33,7 @@ public class RemoveMapCommand extends Command {
         System.out.println("This module mapping is removed: ");
         ModuleMapping selectedMapping = selectedMappings.get(selectedMappingIndex - 1);
         universityToMap.removeMapping(selectedMapping);
-        UiMapping.printMapping(selectedMapping, selectedMappingIndex);
+        UiMapping.printMapping(selectedMapping, selectedMappingIndex, false);
         storage.updateSelectedUniversityList(universitySelectedList);
     }
 }
