@@ -19,6 +19,7 @@
   - [Searching a contact](#Search)
   - [Listing all contacts](#List)
   - [Importing contacts](#Import)
+  - [Contact index parser](#IndexParser)
 - [Product Scope](#scope)
   - [Target user profile](#target)
   - [Value proposition](#value)
@@ -114,7 +115,6 @@ the contacts in the `ContactList`, such as adding or editing contacts. The conta
 according to their names in alphabetical order.
 
 ### <a name="storage"></a>Storage
-**API** :`Storage.java`
 
 ![Storage Class Diagram](images/StorageClassDiagram.png)
 
@@ -187,41 +187,67 @@ process of viewing a contact.
 ![View Sequence Diagram](images/ViewContactCommandSequenceDiagram.png)
 
 ### <a name="Edit"></a>Editing a contact: `edit`
-This feature is processed using `EditContactParser` under `MainParser`. In order to edit a contact in the contact list,
-a user must enter a command in the form `edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-l <LINKEDIN>} {-te <TELEGRAM>} 
-{-tw <TWITTER>} {-e <EMAIL>}`. The user input will be parsed by `EditContactParser` methods `getIndexToStore` and 
-`parseContactDetails` to obtain a String array with the details to be edited. An `EditContactCommand` 
-with the specified parameters will then be created and executed in `ConTech`. The sequence diagram below 
-shows how the whole process is carried out.
+This feature is processed using `EditContactCommand`. This feature allows the user to edit a contact in their contact 
+list, by entering a command in the form `edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-l <LINKEDIN>} {-te <TELEGRAM>} 
+{-tw <TWITTER>} {-e <EMAIL>}`. At least one detail must be specified by the user for the command to be valid. The user 
+can also specify `me` as an index to edit the personal contact's details.
+
+The user's input is parsed in `MainParser` and `EditContactParser` and the implementation is similar to that of 
+`AddContactParser` .
+
+The user input will be parsed by `EditContactParser` methods `getIndexToStore` and 
+`parseContactDetails` to obtain a String array with the details to be edited.
+The user input will also be parsed by the [`IndexParser`](#IndexParser) to obtain the contact index, which identifies the contact in the 
+contact list to be edited.The sequence diagram below shows how the String array is obtained.
+
+![Edit Sequence Diagram](images/EditContactParserSequenceDiagram.png)
+
+Once the user's input is parsed and the index specified is obtained, an `EditContactCommand` with the specified 
+parameters will then be created and executed in `ConTech`. The sequence diagram below depicts the execution of 
+`EditContactCommand` for the index `me` as well as an invalid index `all`.
 
 ![Edit Sequence Diagram](images/EditContactCommandSequenceDiagram.png)
 
+If a valid contact index in the contact book is specified, the details to be edited will first be checked against the 
+contact book for duplicates. If there are duplicates, ConTech will prompt the user for confirmation before editing the 
+contact. If the user accepts or there are no duplicates, the `EditContactCommand` will be executed. The sequence diagram
+below depicts the execution of `EditContactCommand` for a contact in the contact list.
+
+![Edit Sequence Diagram](images/EditContactCommandDetailedSequenceDiagram.png)
 
 ### <a name="Delete"></a>Deleting contacts: `rm`
-This feature is processed using the `DeleteContactCommand`. `DeleteContactCommand` is created 
-in the `MainParser`and executed in`ConTech`. Users can either delete a specified contact
-or delete all contacts at once.
+This feature is processed using the `DeleteContactCommand`. Users can delete a specified contact, delete all contacts at
+once or delete specific details of a selected contact. In order to determine which contact or which 
+contact's fields to delete, the user input is parsed using the [`IndexParser`](#IndexParser) to obtain the contact
+index for executing the command. The user input is also parsed using `DeleteContactParser` to obtain the specific fields
+to be deleted, if any.
+
+A `DeleteContactCommand` with the specified parameters will then be created in the `MainParser`and executed in`ConTech`.
 
 ![Delete Sequence Diagram](images/DeleteContactCommandSequenceDiagram.png)
 
-To delete all contacts, a user must enter the command `rm all`. The sequence diagram below
-shows how the removal of all contacts works. Before any deletion, the user will be
+To _delete all contacts_, a user must enter the command `rm all`. 
+
+The sequence diagram below shows how the removal of all contacts works. Before any deletion, the user will be
 prompted with a message to confirm deletion. If the user confirms deletion for all contacts,
 deletion will be executed, along with a message to show that deletion has been executed.
 If user cancels deletion, a message is printed to show that the deletion has been cancelled.
 
 ![Delete All Sequence Diagram](images/DeleteAllContacts.png) 
 
-To delete a selected contact, a user must enter a command in the form `rm <INDEX>`. The sequence diagram below
-shows how the removal of a contact works. Before any deletion, details of the contact with the specified`INDEX` 
-will be displayed to the user, along with a prompt to confirm deletion. If the user confirms deletion, 
-deletion of the selected contact will be executed, along with a message to show that deletion has been executed.
-If user cancels deletion, a message is printed to show that the deletion has been cancelled.
+To _delete a selected contact_, a user must enter a command in the form `rm <INDEX>`.
+
+The sequence diagram below shows how the removal of the selected contact works. Before any deletion, details of the 
+contact with the specified`INDEX` will be displayed to the user, along with a prompt to confirm deletion. If the user 
+confirms deletion, deletion of the selected contact will be executed, along with a message to show that deletion has 
+been executed. If user cancels deletion, a message is printed to show that the deletion has been cancelled.
 
 ![Delete Selected Sequence Diagram](images/DeleteSelectedContact.png)
 
-To delete specific details of a selected contact, a user must enter a command in the form `rm <INDEX> {-g} {-l} {-te}
-{-tw} {-e}`. The sequence diagram below shows how the removal of a contact's fields works. Before any
+To _delete specific details_ of a selected contact, a user must enter a command in the form `rm <INDEX> {-g} {-l} {-te}
+{-tw} {-e}`. 
+
+The sequence diagram below shows how the removal of a contact's fields works. Before any
 deletion, details of the contact fields specified will be displayed to the user, along with a prompt to confirm 
 deletion. If the user confirms deletion, deletion of the selected contact will be executed, along with a message to show
 that deletion has been executed. If user cancels, deletion, a message is printed to show that the deletion has been
@@ -231,10 +257,16 @@ cancelled.
 
 ### <a name="Search"></a>Searching a contact: `search`
 This feature is processed using `SearchContactParser` under `MainParser`. In order to edit a contact in the contact list,
-a user must enter a command in the form `search {-n | -g | -l | -te | -tw | -e} <SEARCH QUERY>`. If no flag is specified, the search will be done
-on contact names buy default. From the user input, the search query and the search flag are obtained from the 
-`parseSearchQuery` and the `getDetailFlag` methods respectively. A `SearchContactCommand` with the specified parameters
-will be created and executed in `ConTech`. The sequence diagram below shows how the whole process is carried out.
+a user must enter a command in the form `search {-n | -g | -l | -te | -tw | -e} <SEARCH QUERY>`. If no flag is specified, 
+the search will be done on contact names buy default. 
+
+From the user input, the search query and the search flag are obtained from the `parseSearchQuery` and the `getDetailFlag`
+methods respectively. The sequence diagram below shows how the required parameters are obtained. 
+
+![Search Sequence Diagram](images/SearchContactParserSequenceDiagram.png)
+
+A `SearchContactCommand` with the specified parameters will then be created and executed in `ConTech`. The sequence 
+diagram below shows how the `SearchContactCommand` is executed.
 
 ![Search Sequence Diagram](images/SearchContactCommandSequenceDiagram.png)
 
@@ -245,8 +277,48 @@ function in `TextUi` class.
 
 ![List Sequence Diagram](images/ListContactsCommandSequenceDiagram.png)
 
+### <a name="Import"></a>Importing contacts: `import`
+This feature is processed using the `ImportContactCommand`. This feature allows a user to import contacts over from 
+a text file containing comma-separated values (CSV).
+
+As inputs may be corrupted (having less fields than required), or may not adhere to the detail formats of each field 
+(such as having illegal characters in the Github username), a `ContactsDecoder` is used to read and ensure the data 
+integrity of imported contacts. To achieve this, the `ContactsDecoder` class inherits the `RegexParser` abstract 
+class, as depicted below.
+
+![ContactsDecoder Class Diagram](images/ContactsDecoderClassDiagram.png)
+
+With this implementation in place, the `ImportContactCommand` will firstly check if there exists a file `import.txt` 
+stored in the `data/` directory (ie. stored in `data/import.txt`). Should the `import.txt` file exist, it will then 
+attempt to import the contacts to a temporary `ContactList`, before adding them to the user's `ContactList`. The 
+sequence diagram below illustrates the process of executing `ImportContactCommand`.
+
+![Import Sequence Diagram](images/ImportContactCommandSequenceDiagram.png)
+
+Throughout the process of importing contacts, the alphabetical ordering of contacts is preserved.
+
+<a name="ComingSoon"></a>**Coming soon:** `import` currently does not support duplicate checks. This will be implemented 
+in future revisions to the application. Currently, 
+
+Current implementation ideas include:
+- import all with/without duplicates (use flag to specify)
+- manually check every single duplicate (inefficient, but can be an option with flag for users who want to check every duplicate)
+- allow Windows-style duplicate handling (Ignore, Ignore all, Cancel)
+- summarise every single duplicate and give user a one time confirmation to add/discard (no granularity)
+
+
+
+### <a name="IndexParser"></a>Index Parser
+
+The Index Parser is used when the user enters a command that specifies a contact index, such as the [`rm`](#Delete),
+[`view`](#View) or [`edit`](#Edit) command. The Index Parser will parse the user's input string, and return the
+specified contact index given as an integer, which will then be used in the execution of the corresponding command.
+
+For example, if `edit 2 -n Marcus Bobo` is given as the input, the Index Parser will identify the contact index to be `2`
+and pass the contact index to the execution of the `edit` command accordingly.
 
 ## <a name="scope"></a>Product scope
+
 ### <a name="target"></a>Target user profile
 - Has a need to store a significant amount of computing-related contacts
 - Prefers and is familiar with Command Line Interface (CLI) applications

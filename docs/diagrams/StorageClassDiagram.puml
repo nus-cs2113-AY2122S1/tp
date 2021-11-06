@@ -16,9 +16,6 @@ Storage .right.> ContactsEncoder
 'Storage  -up->"personalContactFile 0..1"File
 ContactsEncoder ..> Storage
 
-'class File {
-'}
-
 class Storage {
 -File contactFile
 -File personalContactFile

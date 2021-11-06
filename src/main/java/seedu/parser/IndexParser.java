@@ -9,10 +9,10 @@ public class IndexParser {
     private static final int INDEX_POSITION = 1;
     private static final int SIGNIFICANT_INDEX_POSITION = 0;
     private static final int COMD_INDEX_LENGTH = 2;
-    private static final String PERSONAL_CONTACT_INDEX = "me";
-    private static final int PERSONAL_CONTACT_ID = -1;
-    private static final String REMOVE_ALL_INDEX = "all";
-    private static final int REMOVE_ALL_ID = -2;
+    private static final String PERSONAL_CONTACT_ID = "me";
+    private static final int PERSONAL_CONTACT_INDEX = -1;
+    private static final String REMOVE_ALL_ID = "all";
+    private static final int REMOVE_ALL_INDEX = -2;
     private static final String numbers = "^-?\\d+$";
 
     public static int getIndexFromInput(String userInput)
@@ -29,11 +29,11 @@ public class IndexParser {
         // 1 is the significant index that is important and chosen as the index for command
         // index can be "me" or "all" or an integer
         String significantIndex = indexSplit[SIGNIFICANT_INDEX_POSITION].trim();
-        if (significantIndex.equalsIgnoreCase(PERSONAL_CONTACT_INDEX)) {
-            return PERSONAL_CONTACT_ID;
+        if (significantIndex.equalsIgnoreCase(PERSONAL_CONTACT_ID)) {
+            return PERSONAL_CONTACT_INDEX;
         }
-        if (significantIndex.equalsIgnoreCase(REMOVE_ALL_INDEX)) {
-            return REMOVE_ALL_ID;
+        if (significantIndex.equalsIgnoreCase(REMOVE_ALL_ID)) {
+            return REMOVE_ALL_INDEX;
         }
         if (!significantIndex.matches(numbers)) {
             throw new NumberFormatException();

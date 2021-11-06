@@ -420,16 +420,19 @@ Command format: `import`
 - Data to be imported should be stored in the file `data/import.txt`.
 - Data to be imported should adhere to the following format:
   - CSV for **six** fields in the order of `NAME,GITHUB,LINKEDIN,TELEGRAM,TWITTER,EMAIL`
+  - Any extra fields will be treated as erroneous input and discarded.
   - For values that are empty, a `null` has to be specified.
+
 ```
 Le Zong,lezongmun,null,lezongg,null,lezongmun@gmail.com
 marcus,null,null,null,null,null
 ```
 - Invalid or corrupt data will not be imported into the contact list and will be discarded. Their line number in the
   `import.txt` will be specified for convenience in identifying problems.
+- Additional input after the `import` command will be treated as erroneous input and discarded.
 - However, there is a limitation that duplicates will not be checked for when performing contact imports. Do import 
   with caution.
-- Additional input after the `import` command will be treated as erroneous input and discarded.
+- Coming Soon: Duplicate checks for importing contacts will be added in future versions, with more granular controls.
 
 
 Expected outcome of usage:
@@ -541,10 +544,16 @@ computer. The files are `data/contacts.txt` and `data/me.txt`.
 **Q**: Can I edit the files in `data/` manually?
 
 **A**: Yes, ConTech supports manual editing of `contacts.txt` and `me.txt` in the `data/` directory, although this is 
-not recommended. When doing so, remember to follow the correct syntax for contact details. Any incomplete/incorrect/
-corrupt data will be discarded by ConTech upon launch. Users are recommended to use the `add` and `edit` commands in the
-app instead of manually editing the save data files. For adding a large number of contacts at once, the `import` function
-can be used.
+not recommended. When doing so, remember to follow the correct syntax for contact details. Any contacts with incomplete/
+incorrect/corrupt data such as extra or missing fields will be discarded by ConTech upon launch. As such, users are 
+recommended to use the `add` and `edit` commands in the app instead of manually editing the save data files. For adding 
+a large number of contacts at once, the `import` function can be used.
+
+**Q**: Does ConTech support duplicate prevention?
+
+**A**: Yes, ConTech has built-in duplicate protection for all commands except `import` currently. This will be added in
+a future revision with more granular controls to allow users to easily handle multiple duplicate contacts when importing.
+For more information on the implementation, please refer to the [Developer Guide](https://ay2122s1-cs2113t-t09-1.github.io/tp/DeveloperGuide.html#ComingSoon).
 
 
 ## <a name="summary"></a>Command Summary
