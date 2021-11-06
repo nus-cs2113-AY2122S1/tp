@@ -43,50 +43,71 @@ public class Parser {
     private static final String TOUR_IDENTIFIER = "-t";
     private static final String FLIGHT_IDENTIFIER = "-f";
     private static final String PACKAGE_IDENTIFIER = "-p";
-    private static final String CLIENT_PREFIX = "/c";
-    private static final String TOUR_PREFIX = "/t";
-    private static final String FLIGHT_PREFIX = "/f";
+
+    private static final String PACKAGE_CLIENT_PREFIX = "/c";
+    private static final String PACKAGE_TOUR_PREFIX = "/t";
+    private static final String PACKAGE_FLIGHT_PREFIX = "/f";
+
     private static final String FLIGHT_DEPARTURE_PREFIX = "/d";
     private static final String FLIGHT_RETURN_PREFIX = "/r";
     private static final String FLIGHT_DEPARTURE_DATE_PREFIX = "/dd";
     private static final String FLIGHT_RETURN_DATE_PREFIX = "/rd";
-    public static final String ERROR_INVALID_INPUT = "Invalid input! Please enter a valid command.";
-    public static final String ERROR_MISSING_IDENTIFIER =
-            "Missing command filter! Please enter a command with this format: COMMAND -FILTER DATA \n"
-                    + "Example: find -t TOUR_ID";
-    public static final String ERROR_EXTRA_INPUT = "Extra input! Refrain from doing so.";
-    public static final String ERROR_DUPLICATE_PREFIXES = "Duplicate prefixes! Please try again.";
-    public static final String ERROR_MISSING_PREFIXES
-            = "Missing prefixes! Did you miss out some fields? Please try again.";
-    public static final String ERROR_MISSING_NAME_ID = "Missing name/id! Please try again.";
-    private static final String ERROR_MISSING_FIELDS = "Please do not leave your fields empty!";
-    public static final String ERROR_EMAIL_FORMAT_WRONG = "TourPlanner has detected possible erroneous email! "
-            + "Are you sure about this entry? \n";
-    public static final String ERROR_CONTACT_NUMBER_WRONG =
-            "TourPlanner has detected possible erroneous contact number! (characters other than numbers)"
-                    + "Are you sure about this entry? \n";
-    public static final String ERROR_SHORT_CONTACT_NUMBER =
-            "TourPlanner detected that the given contact number is too short (< 8)! Are you sure about this entry? \n";
-    private static final String ERROR_LONG_CONTACT_NUMBER =
-            "TourPlanner detected that the given contact number is too long (> 8)! Are you sure about this entry? \n";
-    public static final String ERROR_FLIGHT_TIME_FORMAT = "TourPlanner detected wrong date time entry formatting! \n"
-            + "Please input your date-times with the following format: d/M/yy HH:mm";
-    public static final String ERROR_FLIGHT_TIME_INVERT = "TourPlanner detected erroneous flight time entry!";
-    public static final String ERROR_PRICE_FORMAT = "TourPlanner has detected erroneous price entry! "
-            + "Only include numbers (includes decimal)/one decimal point!";
+
     public static final String TOUR_NAME_PREFIX = "/n";
     public static final String TOUR_PRICE_PREFIX = "/p";
+
     public static final String CLIENT_NAME_PREFIX = "/n";
     public static final String CLIENT_CONTACT_NUMBER_PREFIX = "/cn";
     public static final String CLIENT_EMAIL_PREFIX = "/m";
+
+    public static final String ERROR_INVALID_INPUT = "ERROR: TourPlanner cannot understand the command! "
+            + "Please enter a valid command.";
+    public static final String ERROR_MISSING_IDENTIFIER =
+            "ERROR: Missing/wrong command filter used! Please enter a command with this format: COMMAND -FILTER DATA \n"
+                    + "Example: find -t TOUR_ID";
+    public static final String ERROR_DUPLICATE_PREFIXES = "ERROR: TourPlanner has detected duplicate prefixes!";
+    public static final String ERROR_MISSING_PREFIXES
+            = "ERROR: TourPlanner has detected missing prefixes! Did you miss out some fields?";
+    public static final String ERROR_MISSING_NAME_ID = "ERROR: TourPlanner has detected missing name/id!";
+    private static final String ERROR_MISSING_FIELDS = "ERROR: TourPlanner has detected empty fields! "
+            + "Please enter all fields!";
+    public static final String ERROR_FLIGHT_TIME_FORMAT = "ERROR: TourPlanner detected wrong date-time entry "
+            + "formatting! \n Please input your date-times with the following format: d/M/yy HH:mm";
+    public static final String ERROR_FLIGHT_TIME_INVERT = "ERROR: TourPlanner detected erroneous flight time entry! \n";
+    public static final String ERROR_PRICE_FORMAT = "ERROR: TourPlanner has detected erroneous price entry! "
+            + "Only include numbers (includes decimal)/one decimal point!";
+
+    public static final String WARNING_EXTRA_INPUT = "WARNING: Extra input! Refrain from doing so.";
+    public static final String WARNING_EMAIL_FORMAT_WRONG = "WARNING: TourPlanner has detected possible "
+            + "erroneous email! \n";
+    public static final String WARNING_CONTACT_NUMBER_WRONG =
+            "WARNING: TourPlanner has detected possible erroneous contact number! (characters other than numbers) \n";
+    public static final String WARNING_SHORT_CONTACT_NUMBER =
+            "WARNING: TourPlanner detected that the given contact number is too short (< 8)! \n";
+    private static final String WARNING_LONG_CONTACT_NUMBER =
+            "WARNING: TourPlanner detected that the given contact number is too long (> 8)! \n";
+    private static final String WARNING_PRICE_TOO_MANY_DECIMAL = "WARNING: TourPlanner has detected "
+            + "erroneous price entry! Price has too many decimal places!";
+
     public static final int IDENTIFIER_INDEX = 0;
     public static final int ARGS_INDEX = 1;
     public static final int COMMAND_INDEX = 0;
     public static final int PARAMS_INDEX = 1;
     public static final int MAX_VALUE_ARRAY_SIZE = 5;
+
+    //Client has four prefixes: /id, /n, /cn, /m
+    private static final int CLIENT_PREFIX_NUM = 4;
+
+    //Flight has five prefixes: /id, /d, /r, /dd, /rd
+    private static final int FLIGHT_PREFIX_NUM = 5;
+
+    //Tour has three prefixes: /id, /n, /p
+    private static final int TOUR_PREFIX_NUM = 3;
+
+    // Package has four prefixes: /id, /c, /f, /t
+    private static final int PACKAGE_PREFIX_NUM = 4;
+
     public static final String EMPTY_STRING = "";
-    private static final String WARNING_PRICE_TOO_MANY_DECIMAL = "TourPlanner has detected erroneous price entry! "
-            + "Price has too many decimal places!";
 
     /**
      * Parses user's input into command to execute.
@@ -94,19 +115,16 @@ public class Parser {
      * @param input full user's input string
      * @return the command parsed from user's input
      * @throws TourPlannerException if there are missing fields, duplicated prefixes, missing prefixes and other general
-     *                              parsing errors.
+     *                              parsing errors
      */
     public static Command parse(String input) throws TourPlannerException {
-        String[] commandAndParams = splitCommandString(input, " ");
+        String[] commandAndParams = splitCommandString(input);
         String command = commandAndParams[COMMAND_INDEX];
         String params = commandAndParams[PARAMS_INDEX];
 
         switch (command) {
         case "bye":
-            if (!params.equals(EMPTY_STRING)) {
-                throw new TourPlannerException(ERROR_EXTRA_INPUT);
-            }
-            return new ByeCommand();
+            return parseBye(params);
         case "add":
             return parseAdd(params);
         case "cut":
@@ -118,10 +136,7 @@ public class Parser {
         case "sort":
             return parseSort(params);
         case "help":
-            if (!params.equals(EMPTY_STRING)) {
-                throw new TourPlannerException(ERROR_EXTRA_INPUT);
-            }
-            return new HelpCommand();
+            return parseHelp(params);
         default:
             throw new TourPlannerException(ERROR_INVALID_INPUT);
         }
@@ -130,12 +145,11 @@ public class Parser {
     /**
      * Separates command word and arguments.
      *
-     * @param input     full user's input string
-     * @param separator separator between command and argument/params strings
+     * @param input full user's input string
      * @return the array containing command and argument/params strings
      */
-    private static String[] splitCommandString(String input, String separator) {
-        String[] split = input.trim().split(separator, 2);
+    private static String[] splitCommandString(String input) {
+        String[] split = input.trim().split(" ", 2);
         return split.length == 2 ? split : new String[]{split[0], ""};
     }
 
@@ -170,20 +184,26 @@ public class Parser {
         return prefixIndexes;
     }
 
+    /**
+     * Returns the number of prefixes for the specific data type, determined by the identifier.
+     *
+     * @param identifier specific identifier to determine specific data type (client, flight, tour, package)
+     * @return the number of prefixes determined by the identifier
+     */
     private static int generateExpectedNumberOfPrefixIndexes(String identifier) {
         int numberOfPrefixIndexes = 0;
         switch (identifier) {
         case CLIENT_IDENTIFIER:
-            numberOfPrefixIndexes = 4;
+            numberOfPrefixIndexes = CLIENT_PREFIX_NUM;
             break;
         case PACKAGE_IDENTIFIER:
-            numberOfPrefixIndexes = 4;
+            numberOfPrefixIndexes = PACKAGE_PREFIX_NUM;
             break;
         case TOUR_IDENTIFIER:
-            numberOfPrefixIndexes = 3;
+            numberOfPrefixIndexes = TOUR_PREFIX_NUM;
             break;
         case FLIGHT_IDENTIFIER:
-            numberOfPrefixIndexes = 5;
+            numberOfPrefixIndexes = FLIGHT_PREFIX_NUM;
             break;
         default:
             break;
@@ -270,6 +290,13 @@ public class Parser {
         return value;
     }
 
+    /**
+     * Return the list of prefixes for each data type.
+     *
+     * @param identifier specific identifier to determine specific data type (client, flight, tour, package)
+     * @return the list of prefixes, as specified by the identifier
+     * @throws TourPlannerException if the identifier is invalid
+     */
     private static List<String> generatePrefixesFromIdentifier(String identifier) throws TourPlannerException {
         List<String> prefixes;
         switch (identifier) {
@@ -284,7 +311,7 @@ public class Parser {
                     FLIGHT_DEPARTURE_DATE_PREFIX, FLIGHT_RETURN_DATE_PREFIX);
             break;
         case PACKAGE_IDENTIFIER:
-            prefixes = Arrays.asList(CLIENT_PREFIX, TOUR_PREFIX, FLIGHT_PREFIX);
+            prefixes = Arrays.asList(PACKAGE_CLIENT_PREFIX, PACKAGE_TOUR_PREFIX, PACKAGE_FLIGHT_PREFIX);
             break;
         default:
             throw new TourPlannerException(ERROR_MISSING_IDENTIFIER);
@@ -332,13 +359,13 @@ public class Parser {
         int index;
 
         switch (prefix) {
-        case CLIENT_PREFIX:
+        case PACKAGE_CLIENT_PREFIX:
             index = 1;
             break;
-        case TOUR_PREFIX:
+        case PACKAGE_TOUR_PREFIX:
             index = 2;
             break;
-        case FLIGHT_PREFIX:
+        case PACKAGE_FLIGHT_PREFIX:
             index = 3;
             break;
         default:
@@ -454,6 +481,15 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Handles all exceptions regarding inputs for add tour command.
+     * Throws TourPlannerException when there are duplicate decimal points (.), or additional characters in price
+     * that prevent parsing.
+     * Prints a warning if price has too many divisions, i.e. decimal places
+     *
+     * @param values the array of values extracted from user's input after parsing
+     * @throws TourPlannerException if there are duplicate decimal points, additional characters in price
+     */
     private static void handleTourException(String[] values) throws TourPlannerException {
         String price = values[2];
         int decimalCount = (int) price.chars().filter(ch -> ch == '.').count();
@@ -463,21 +499,30 @@ public class Parser {
             throw new TourPlannerException(ERROR_PRICE_FORMAT);
         }
 
-        Float priceAfterParse = Float.parseFloat(priceAfterParseString);
         boolean containsAdditionalCharacters = !price.equals(priceAfterParseString);
 
         if (containsAdditionalCharacters) {
             throw new TourPlannerException(ERROR_PRICE_FORMAT);
         }
 
-        int decimalIndex = price.indexOf(".");
-        int numberOfDecimalPlaces = price.length() - decimalIndex - 1;
+        if (decimalCount == 1) {
+            int decimalIndex = price.indexOf(".");
+            int numberOfDecimalPlaces = price.length() - decimalIndex - 1;
 
-        if (numberOfDecimalPlaces > 2) {
-            System.out.println(WARNING_PRICE_TOO_MANY_DECIMAL);
+            if (numberOfDecimalPlaces > 2) {
+                System.out.println(WARNING_PRICE_TOO_MANY_DECIMAL);
+            }
         }
     }
 
+    /**
+     * Handles all exceptions regarding inputs for add flight command.
+     *
+     * @param values the array of values extracted from user's input after parsing
+     * @throws TourPlannerException if there are logical errors with date-time input (i.e. date-time of flight to
+     *                              destination location is after date-time of return flight)
+     *                              or date-time parsing/format errors
+     */
     private static void handleFlightException(String[] values) throws TourPlannerException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yy HH:mm");
         LocalDateTime start;
@@ -496,6 +541,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles all exceptions regarding inputs for add client command.
+     * Prints warnings for erroneous contact number (inclusive of characters other than numbers, length != 8)
+     * Also prints warnings for erroneous email (lacking/more than one '@' symbol or period '.', that are commonly
+     * found in emails).
+     *
+     * @param values the array of values extracted from user's input after parsing
+     */
     private static void handleClientException(String[] values) {
         String contactNum = values[2];
         String email = values[3];
@@ -503,7 +556,7 @@ public class Parser {
         int periodCount = (int) email.chars().filter(ch -> ch == '.').count();
 
         if (adSymbolCount != 1 || periodCount != 1) {
-            System.out.println(ERROR_EMAIL_FORMAT_WRONG);
+            System.out.println(WARNING_EMAIL_FORMAT_WRONG);
         }
 
         boolean isWrongContactNumber = false;
@@ -516,22 +569,26 @@ public class Parser {
             }
         }
         if (isWrongContactNumber) {
-            System.out.println(ERROR_CONTACT_NUMBER_WRONG);
+            System.out.println(WARNING_CONTACT_NUMBER_WRONG);
         } else if (contactNumberLength < 8) {
-            System.out.println(ERROR_SHORT_CONTACT_NUMBER);
+            System.out.println(WARNING_SHORT_CONTACT_NUMBER);
         } else if (contactNumberLength > 8) {
-            System.out.println(ERROR_LONG_CONTACT_NUMBER);
+            System.out.println(WARNING_LONG_CONTACT_NUMBER);
         }
     }
 
     /**
-     * Parses arguments with respect to the add client command.
+     * Parses arguments with respect to the add command.
+     * Extract values from user's input and passes it as an argument to construct Client/Flight/Tour object
+     * depending on the identifier.
+     * Passes the created object to the specific AddCommand, determined by the identifier.
      *
      * @param params full user's argument string
+     * @return the specific AddCommand object determined by the command's identifier
      * @throws TourPlannerException if there are missing fields,duplicated or missing prefixes
      */
     private static Command parseAdd(String params) throws TourPlannerException {
-        String[] identifierAndArgs = splitCommandString(params, " ");
+        String[] identifierAndArgs = splitCommandString(params);
         String identifier = identifierAndArgs[IDENTIFIER_INDEX];
         String args = identifierAndArgs[ARGS_INDEX];
 
@@ -575,7 +632,7 @@ public class Parser {
     }
 
     private static Command parseCut(String params) throws TourPlannerException {
-        String[] identifierAndArgs = splitCommandString(params, " ");
+        String[] identifierAndArgs = splitCommandString(params);
         String identifier = identifierAndArgs[IDENTIFIER_INDEX];
         String args = identifierAndArgs[ARGS_INDEX];
 
@@ -616,10 +673,11 @@ public class Parser {
      * Parses arguments with respect to the sort command.
      *
      * @param params full user's argument string
+     * @return the specific SortCommand object determined by the command's identifier
      * @throws TourPlannerException if there are missing fields,duplicated or missing prefixes
      */
     private static Command parseSort(String params) throws TourPlannerException {
-        String[] identifierAndFilter = splitCommandString(params, " ");
+        String[] identifierAndFilter = splitCommandString(params);
         String identifier = identifierAndFilter[IDENTIFIER_INDEX];
         String filter = identifierAndFilter[ARGS_INDEX];
         switch (identifier) {
@@ -632,6 +690,32 @@ public class Parser {
         default:
             throw new TourPlannerException(ERROR_MISSING_IDENTIFIER);
         }
+    }
+
+    /**
+     * Parses arguments with respect to the help command.
+     *
+     * @param params full user's argument string
+     * @return HelpCommand object
+     */
+    private static Command parseHelp(String params) {
+        if (!params.equals(EMPTY_STRING)) {
+            System.out.println(WARNING_EXTRA_INPUT);
+        }
+        return new HelpCommand();
+    }
+
+    /**
+     * Parses arguments with respect to the bye command.
+     *
+     * @param params full user's argument string
+     * @return ByeCommand object
+     */
+    private static Command parseBye(String params) {
+        if (!params.equals(EMPTY_STRING)) {
+            System.out.println(WARNING_EXTRA_INPUT);
+        }
+        return new ByeCommand();
     }
 }
 

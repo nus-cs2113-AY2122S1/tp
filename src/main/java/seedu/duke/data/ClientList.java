@@ -4,12 +4,15 @@ import seedu.duke.TourPlannerException;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * List of clients.
  */
 public class ClientList {
-    private static final String CLIENT_NOT_FOUND_MESSAGE = "Client cannot be found. Please try another client ID";
+    private static final String CLIENT_NOT_FOUND_MESSAGE = "ERROR: Client cannot be found. "
+            + "Please try another client ID";
 
     private final ArrayList<Client> clients;
     private ArrayList<String> clientIds;
@@ -29,18 +32,6 @@ public class ClientList {
 
     public ArrayList<Client> getClients() {
         return clients;
-    }
-
-    /**
-     * Main method for adding a client.
-     *
-     * @param client the client to-be-added
-     */
-    public void add(Client client) {
-        clientCount++;
-        clients.add(client);
-        clientIds.add(client.getId());
-        clientNames.add(client.getName());
     }
 
     /**
@@ -84,37 +75,57 @@ public class ClientList {
     }
 
     /**
-     * Main method for clearing the client list.
+     * Getter for the sorted list of client IDs.
+     * Sorts the client IDs by the natural ordering of String, ignoring case sensitivities.
+     *
+     * @return the list of sorted client IDs, by natural(alphabetical, numerical) order
+     * @see Collections#sort(List, Comparator)
      */
-    public void clearAllClients() throws TourPlannerException {
-        if (clientCount == 0) {
-            throw new TourPlannerException("Your client list is currently empty.\n"
-                    + "Please first add clients to clear.");
-        }
-        clients.clear();
-        clientCount = 0;
-    }
-
     public ArrayList<String> getSortedClientIds() {
         Collections.sort(clientIds, String.CASE_INSENSITIVE_ORDER);
         return clientIds;
     }
 
+    /**
+     * Getter for the sorted list of client names.
+     * Sorts the client names by the natural ordering of String, ignoring case sensitivities.
+     *
+     * @return the list of sorted client names, by natural(alphabetical, numerical) order
+     * @see Collections#sort(List, Comparator)
+     */
     public ArrayList<String> getSortedClientNames() {
         Collections.sort(clientNames, String.CASE_INSENSITIVE_ORDER);
         return clientNames;
     }
 
+    /**
+     * Creates a new temporary array each time the function is called.
+     * The flight IDs that have been iterated by Ui in the sort command will be added into FlightList's
+     * temporary array to prevent duplicates.
+     */
     public void initTempArray() {
         iteratedClientIds = new ArrayList<String>();
+    }
+
+    /**
+     * Main method for adding a client.
+     *
+     * @param client the client to-be-added
+     */
+    public void add(Client client) {
+        clientCount++;
+        clients.add(client);
+        clientIds.add(client.getId());
+        clientNames.add(client.getName());
     }
 
     /**
      * Main method for deleting a client.
      */
     public void cut(Client client) {
+        clientIds.remove(client.getId());
+        clientNames.remove(client.getName());
         clients.remove(client);
         clientCount--;
     }
-
 }

@@ -35,7 +35,7 @@ public class AddTourCommandTest {
         Tour retrieveTour = addTour.getTour();
         assertEquals(TEST_TOUR_ID, retrieveTour.getId());
         assertEquals(TEST_TOUR_NAME, retrieveTour.getName());
-        assertEquals(TEST_TOUR_PRICE_STRING, retrieveTour.getPrice());
+        assertEquals(Float.parseFloat(TEST_TOUR_PRICE_STRING), retrieveTour.getPrice());
     }
 
     @Test
@@ -52,6 +52,6 @@ public class AddTourCommandTest {
         Tour retrieveTour = addTour.getTour();
         assertEquals(TEST_TOUR_ID, retrieveTour.getId());
         assertEquals(TEST_TOUR_NAME, retrieveTour.getName());
-        assertEquals(TEST_TOUR_PRICE_STRING, retrieveTour.getPrice());
+        assertEquals(Float.parseFloat(TEST_TOUR_PRICE_STRING), retrieveTour.getPrice());
     }
 }
