@@ -101,6 +101,8 @@ The Finance component consists of the `Finance`, `FinanceList`, `FinanceParser`,
 * `FinanceParser` contains methods that decode user inputs to meaningful parameters and modify the finance accordingly.
 * `FinanceUI` contains methods that display messages to interact with the user.
 
+![finance](Diagrams/Finance.png)
+
 ### 1.6 Storage Component
 ![storage](Diagrams/Storage.png)
 

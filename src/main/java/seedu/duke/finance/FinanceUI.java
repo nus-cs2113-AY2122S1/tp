@@ -38,8 +38,13 @@ public class FinanceUI {
         }
         MainUI.printSingleLine();
     }
+    public static void printEmptyListMessage() {
+        MainUI.printSingleLine();
+        System.out.println(" No accounts found.");
+        MainUI.printSingleLine();
+    }
 
-    public static void printTotalAccount(int totalAccount) {
+    public static void printTotalAccount(double totalAccount) {
         MainUI.printSingleLine();
         System.out.println(" Here is the total account you have: $" + totalAccount);
         MainUI.printSingleLine();
