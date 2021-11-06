@@ -44,14 +44,19 @@ The other core components of Typist:
 * `storage`: Game storage executor.
 
 ### Command Component
+**API:** `CommandFactory.java`  
 
-API: `C`
-How the `command` component work:
-1. When `command` is called upon 
-The Command Component contains different types of command actions. 
-The `Command Factory` is responsible for parsing the user input and returning the corresponding command class to be executed.
+The `Command` component implements the Factory Design Pattern to parse user commands.
 
-* When `Main` calls the `.run(args)` method of a `Command` object, ...
+Here’s a (partial) class diagram of the `Command` component:  
+<img src="diagrams/command.puml" width="560">
+
+How the `Command` component works:
+1. Typists `Main` calls upon the `CommandFactory` class to parse the user input.
+2. The `CommandFactory` returns a `Command` object (more precisely, an object that implements it e.g., `GameCommand`).
+3. `Main` will then execute the `Command` by calling `.run(args)` method of the `Command`.
+
+The Sequence Diagram below illustrates the interactions between `main` and `Command` component for the `getCommand("game -time")` input.
 
 ### Game Component
 
