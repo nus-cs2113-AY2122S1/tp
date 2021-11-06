@@ -95,11 +95,17 @@ public class Parser {
     public static final int PARAMS_INDEX = 1;
     public static final int MAX_VALUE_ARRAY_SIZE = 5;
 
+    //Client has four prefixes: /id, /n, /cn, /m
     private static final int CLIENT_PREFIX_NUM = 4;
-    private static final int FLIGHT_PREFIX_NUM = 5;
-    private static final int TOUR_PREFIX_NUM = 3;
-    private static final int PACKAGE_PREFIX_NUM = 4;
 
+    //Flight has five prefixes: /id, /d, /r, /dd, /rd
+    private static final int FLIGHT_PREFIX_NUM = 5;
+
+    //Tour has three prefixes: /id, /n, /p
+    private static final int TOUR_PREFIX_NUM = 3;
+
+    // Package has four prefixes: /id, /c, /f, /t
+    private static final int PACKAGE_PREFIX_NUM = 4;
 
     public static final String EMPTY_STRING = "";
 
@@ -109,7 +115,7 @@ public class Parser {
      * @param input full user's input string
      * @return the command parsed from user's input
      * @throws TourPlannerException if there are missing fields, duplicated prefixes, missing prefixes and other general
-     *                              parsing errors.
+     *                              parsing errors
      */
     public static Command parse(String input) throws TourPlannerException {
         String[] commandAndParams = splitCommandString(input);
@@ -284,6 +290,13 @@ public class Parser {
         return value;
     }
 
+    /**
+     * Return the list of prefixes for each data type.
+     *
+     * @param identifier specific identifier to determine specific data type (client, flight, tour, package)
+     * @return the list of prefixes, as specified by the identifier
+     * @throws TourPlannerException if the identifier is invalid
+     */
     private static List<String> generatePrefixesFromIdentifier(String identifier) throws TourPlannerException {
         List<String> prefixes;
         switch (identifier) {
@@ -468,6 +481,15 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Handles all exceptions regarding inputs for add tour command.
+     * Throws TourPlannerException when there are duplicate decimal points (.), or additional characters in price
+     * that prevent parsing.
+     * Prints a warning if price has too many divisions, i.e. decimal places
+     *
+     * @param values the array of values extracted from user's input after parsing
+     * @throws TourPlannerException if there are duplicate decimal points, additional characters in price
+     */
     private static void handleTourException(String[] values) throws TourPlannerException {
         String price = values[2];
         int decimalCount = (int) price.chars().filter(ch -> ch == '.').count();
@@ -493,6 +515,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles all exceptions regarding inputs for add flight command.
+     *
+     * @param values the array of values extracted from user's input after parsing
+     * @throws TourPlannerException if there are logical errors with date-time input (i.e. date-time of flight to
+     *                              destination location is after date-time of return flight)
+     *                              or date-time parsing/format errors
+     */
     private static void handleFlightException(String[] values) throws TourPlannerException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yy HH:mm");
         LocalDateTime start;
@@ -511,6 +541,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Handles all exceptions regarding inputs for add client command.
+     * Prints warnings for erroneous contact number (inclusive of characters other than numbers, length != 8)
+     * Also prints warnings for erroneous email (lacking/more than one '@' symbol or period '.', that are commonly
+     * found in emails).
+     *
+     * @param values the array of values extracted from user's input after parsing
+     */
     private static void handleClientException(String[] values) {
         String contactNum = values[2];
         String email = values[3];
@@ -540,7 +578,7 @@ public class Parser {
     }
 
     /**
-     * Parses arguments with respect to the add client command.
+     * Parses arguments with respect to the add command.
      * Extract values from user's input and passes it as an argument to construct Client/Flight/Tour object
      * depending on the identifier.
      * Passes the created object to the specific AddCommand, determined by the identifier.
