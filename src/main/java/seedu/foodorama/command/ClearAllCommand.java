@@ -25,13 +25,13 @@ public class ClearAllCommand extends Command {
         Scanner input = new Scanner(System.in);
         UI.printConfirmClearAll();
         String confirmClear = input.nextLine().toLowerCase();
-        while (!(confirmClear.equals("y") | confirmClear.equals("n"))) {
+        while (!confirmClear.matches("^(y|yes|n|no)$")) {
             UI.clearTerminalAndPrintNewPage();
             UI.printInvalidConfirmation();
             confirmClear = input.nextLine().toLowerCase();
         }
         UI.clearTerminalAndPrintNewPage();
-        if (confirmClear.equals("y")) {
+        if (confirmClear.startsWith("y")) {
             DishList.dishList.clear();
             IngredientList.ingredientList.clear();
             UI.printAllCleared();

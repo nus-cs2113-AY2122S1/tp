@@ -183,15 +183,16 @@ public class Ingredient implements  Comparable<Ingredient> {
         ingredientWasteDish += value;
     }
 
-    public int getGraphHeight(double max, int resolution) {
+    public double getGraphHeight(double max, int resolution) {
         double wastage = ingredientWasteDish + ingredientWasteIngr;
-        int num = (int) Math.ceil(resolution * wastage / max);
+        double num = resolution * wastage / max;
         return num;
     }
 
     @Override
     public int compareTo(Ingredient o) {
         double wastage = ingredientWasteDish + ingredientWasteIngr;
-        return (int) (o.getWastage() - wastage);
+        double diff = (o.getWastage() - wastage);
+        return (diff >= 0) ? (diff == 0) ? 0 : 1 : -1;
     }
 }

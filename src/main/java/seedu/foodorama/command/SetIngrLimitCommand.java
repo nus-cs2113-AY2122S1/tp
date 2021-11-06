@@ -26,7 +26,7 @@ public class SetIngrLimitCommand extends Command {
         } else {
             ingrIndex = IngredientList.find(ingr);
         }
-        if (ingrIndex == -1) {
+        if (ingrIndex == -1 && !isNumber(ingr)) {
             throw new FoodoramaException(UI.getIngrNotExistMsg());
         } else if (ingrIndex < 0 || ingrIndex >= IngredientList.ingredientList.size()) {
             throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());

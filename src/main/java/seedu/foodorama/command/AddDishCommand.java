@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class AddDishCommand extends Command {
+    public static final String numberRegex = "^[\\d\\s.]+$";
     private static Logger LOGGER = Logger.getLogger("AddDishCommand.execute()");
     private static final Ui UI = new Ui();
 
@@ -36,10 +37,9 @@ public class AddDishCommand extends Command {
     }
 
     public boolean isNumber(String numberString) {
-        try {
-            double number = Double.parseDouble(numberString);
+        if (numberString.matches("^[\\d\\s.]+$")) {
             return true;
-        } catch (NumberFormatException e) {
+        } else {
             return false;
         }
     }
