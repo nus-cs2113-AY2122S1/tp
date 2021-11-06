@@ -4,6 +4,7 @@ import seedu.duke.TourPlannerException;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 
 public class TourList {
     private static final String TOUR_NOT_FOUND_MESSAGE = "Tour cannot be found. Please try another tour ID";
@@ -65,7 +66,7 @@ public class TourList {
     public Tour getTourByPrice(Float price) throws TourPlannerException {
         for (Tour currTour : tours) {
             String currTourId = currTour.getId();
-            if (currTour.getPrice() == price && !iteratedTourIds.contains(currTourId)) {
+            if (Objects.equals(currTour.getPrice(), price) && !iteratedTourIds.contains(currTourId)) {
                 iteratedTourIds.add(currTourId);
                 return currTour;
             }
