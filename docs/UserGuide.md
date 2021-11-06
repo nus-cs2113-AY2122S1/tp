@@ -534,14 +534,14 @@ Searches for workouts and exercises containing the keyword specified.
 > 
 > Main Mode: 
 >- Search by name: Displays workouts or exercises that contain the specified keyword in the workout or exercise name.
->- Search by date: Displays workouts that has the specified date (in the format `DD MMM YYY`) as the workout deadline.
+>- Search by date: Displays workouts that has the specified date (in the format `D MMM YYY`) as the workout deadline.
 >
 > Entered into workout: 
 >- Search by name: Displays exercises that contain the specified keyword in the exercise name, only within the particular workout.
 
 Format:
 * search by name: `search [KEYWORD]`
-* search by date: `search [DD MMM YYYY]`
+* search by date: `search [D MMM YYYY]`
 
 Usage example(s):
 
