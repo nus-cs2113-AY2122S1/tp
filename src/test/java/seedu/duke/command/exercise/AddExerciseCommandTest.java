@@ -21,6 +21,7 @@ class AddExerciseCommandTest {
         storage = new Storage();
     }
 
+    // creates empty workout "blah" and adds it to workoutList
     private void createEmptyWorkout() {
         Workout workout = new Workout("blah");
         workoutList = new WorkoutList();
