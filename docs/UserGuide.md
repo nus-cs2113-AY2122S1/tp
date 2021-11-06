@@ -60,6 +60,7 @@ colour blue - an example is the blue text in the contents section below
       1. [Adding an ingredient: `add-ingredient`](#2iiia-adding-an-ingredient-add-ingredient)
       2. [Removing an ingredient: `remove-ingredient`](#2iiib-removing-an-ingredient-remove-ingredient)
       3. [Listing all ingredients: `list-ingredient`](#2iiic-listing-all-ingredients-list-ingredient)
+      4. [Finding expired ingredients: `find-expired-ingredient`](#2iiid-finding-expired-ingredients-find-expired-ingredient)
    4. Finance
       1. [Adding a finance record: `add-finance`](#2iva-adding-a-finance-record-add-finance)
       2. [Removing a finance record: `remove-finance`](#2ivb-removing-a-finance-record-remove-finance)
@@ -292,10 +293,15 @@ Example:
 ```
 
 ### 2.iii.d Finding expired ingredients: `find-expired-ingredient`
-Finds all ingredients from the ingredient list that are currently expired.
+Finds all ingredients from the ingredient list that are expired on a particular
+date. There is some flexibility here for you to choose the input date according
+to your needs. For instance, you can enter a future date to check which ingredients
+would be expired by that date, and hence plan your inventory accordingly. If you
+wish to find currently expired ingredients, simply enter the current date as
+the input date.
 
-Format: `find-expired-ingredient/CURRENT_DATE`
-  * `CURRENT_DATE` must be a valid date in YYYY-MM-DD format.
+Format: `find-expired-ingredient/INPUT_DATE`
+  * `INPUT_DATE` must be a valid date in YYYY-MM-DD format.
 
 Example:
 `find-expired-ingredient/2021-11-05`
