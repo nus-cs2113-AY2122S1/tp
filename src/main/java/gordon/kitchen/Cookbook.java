@@ -396,7 +396,7 @@ public class Cookbook {
      */
     public Tag extractCookbookTag(String tagName) throws GordonException {
         for (Tag tag : cookbookTags) {
-            if (tag.getTagName().toLowerCase().contains(tagName.toLowerCase())) {
+            if (tag.getTagName().equals(tagName)) {
                 return tag;
             }
         }
@@ -405,7 +405,7 @@ public class Cookbook {
 
     public boolean doesCookbookTagExists(String tagName) {
         for (Tag cookbookTag : cookbookTags) {
-            if (cookbookTag.getTagName().toLowerCase().contains(tagName.toLowerCase())) {
+            if (cookbookTag.getTagName().equals(tagName)) {
                 return true;
             }
         }

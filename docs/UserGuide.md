@@ -375,7 +375,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > * I'll name your tag as defined in `TAG_NAME`
 > * Within a recipe, you are not allowed to have duplicate tag names
 > * You can associate multiple tags to a single recipe in one command
-> * Tags are case-sensitive! (favorites is not the same as FAVORITES)
+> * Tags are case-sensitive! (favorites is **NOT** the same as FAVORITES)
 > 
 > #### Example of usage:
 > 
@@ -401,7 +401,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > * I'll untag all tags as defined in `TAG_NAME`, from your Recipe.
 > * You can untag multiple tags from a single recipe in one command.
 > * If untagging causes the Tag to have no associated recipes, a prompt will be shown.
-> * Tags are case-sensitive! (favorites is not the same as FAVORITES)
+> * Tags are case-sensitive! (favorites is **NOT** the same as FAVORITES)
 >
 > #### Example of usage:
 >
@@ -428,7 +428,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > * I'll delete all tags as defined in `TAG_NAME` from your Cookbook.
 > * Note that deleting a tag will remove **ALL** instances of that tag from **ALL** recipes!
 > * You can delete multiple tags from your Cookbook in one command.
-> * Tags are case-sensitive! (favorites is not the same as FAVORITES)
+> * Tags are case-sensitive! (favorites is **NOT** the same as FAVORITES)
 >
 > #### Example of usage:
 > 
@@ -448,7 +448,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > #### Format: `find /tag TAG_NAME1 + TAG_NAME2 + ...`
 > 
 > * I'll search for recipes that have **ALL** tags as defined in `TAG_NAME`.
-> * Tags are case-sensitive! (favorites is not the same as FAVORITES)
+> * Tags are case-sensitive! (favorites is **NOT** the same as FAVORITES)
 >
 > #### Example of usage:
 > 
