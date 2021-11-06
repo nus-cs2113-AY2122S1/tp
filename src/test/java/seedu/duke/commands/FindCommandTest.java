@@ -14,7 +14,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.duke.Duke.eventCatalog;
 
 class FindCommandTest {
@@ -33,7 +35,8 @@ class FindCommandTest {
     }
 
     @Test
-    void findResult_ThreeEventsWithTwoMatches_correctOutput() throws DukeException, NoCommandAttributesException, InvalidItemTypeException {
+    void findResult_ThreeEventsWithTwoMatches_correctOutput() throws DukeException, NoCommandAttributesException,
+            InvalidItemTypeException {
         createEventsList();
         Command command = Parser.parseCommand("find -e Concert");
         CommandResult feedback = command.execute();
@@ -44,7 +47,8 @@ class FindCommandTest {
     }
 
     @Test
-    void findResult_noFlag_correctErrorMessage() throws DukeException, NoCommandAttributesException, InvalidItemTypeException {
+    void findResult_noFlag_correctErrorMessage() throws DukeException, NoCommandAttributesException,
+            InvalidItemTypeException {
         createEventsList();
         Command command = Parser.parseCommand("find abc");
         String expectedOutput = "Please add -e to find event(s)!\r\n";
@@ -52,7 +56,8 @@ class FindCommandTest {
     }
 
     @Test
-    void findResult_noEventsFound_correctErrorMessage() throws DukeException, NoCommandAttributesException, InvalidItemTypeException {
+    void findResult_noEventsFound_correctErrorMessage() throws DukeException, NoCommandAttributesException,
+            InvalidItemTypeException {
         createEventsList();
         Command command = Parser.parseCommand("find -e abc");
         String expectedOutput = "No matching events found!\r\n";
