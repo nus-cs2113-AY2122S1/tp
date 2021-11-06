@@ -75,14 +75,4 @@ class ListHabitParserTest {
             assertEquals(ERROR_GOAL_INDEX_ZERO_NUM, e.getMessage());
         }
     }
-
-    @Test
-    void parseListHabitCommand_nullInput_exceptionThrown() {
-        try {
-            ListHabitParser.parseListHabitCommand(null);
-            fail();
-        } catch (HaBitParserException e) {
-            assertEquals(Parser.ERROR_NO_PARAMS, e.getMessage());
-        }
-    }
 }

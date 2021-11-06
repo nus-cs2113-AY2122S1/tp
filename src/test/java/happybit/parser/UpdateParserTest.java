@@ -45,9 +45,11 @@ class UpdateParserTest {
     private static final String ERROR_GOAL_TYPE_FORMAT = "Use the 't/' flag to define the goal type. Exp: t/df";
     private static final String ERROR_GOAL_UPDATE_FORMAT = "Missing additional goal name, goal end date, or "
             + "goal type parameter needed for update.";
+    private static final String ERROR_NO_DESCRIPTION = "Use a description of at least 1 character";
     private static final String ERROR_HABIT_INDEX_FORMAT = "The command is missing the 'h/' flag";
     private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The flag 'h/' has to be followed by a number";
-    private static final String ERROR_INTERVAL_FORMAT = "The command is missing the 'i/' flag";
+    private static final String ERROR_INTERVAL_FORMAT = "The flag 'i/' has to be followed by a number";
+    private static final String ERROR_MISSING_INTERVAL = "The command is missing the 'i/' flag";
     private static final String ERROR_INTERVAL_NON_INTEGER = "The flag 'i/' has to be followed by a number";
     private static final String ERROR_GOAL_INDEX_NEGATIVE_NUM =
             "The flag 'g/' has to be followed by a positive integer";
@@ -61,7 +63,6 @@ class UpdateParserTest {
             "The flag 'i/' has to be followed by a positive integer";
     private static final String ERROR_INTERVAL_ZERO_NUM =
             "The flag 'i/' has to be followed by a number greater than 0";
-  
     private static final String ERROR_INTERVAL_TOO_LARGE = "Interval size is capped at 365 days.";
 
     private static final String DATE_FORMAT = "ddMMyyyy";
@@ -281,7 +282,7 @@ class UpdateParserTest {
             UpdateParser.parseUpdateGoalNameCommand("g/1 n/ ");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_GOAL_NAME_FORMAT, e.getMessage());
+            assertEquals(ERROR_NO_DESCRIPTION, e.getMessage());
         }
 
         try {
@@ -289,16 +290,6 @@ class UpdateParserTest {
             fail();
         } catch (HaBitParserException e) {
             assertEquals(ERROR_GOAL_NAME_FORMAT, e.getMessage());
-        }
-    }
-
-    @Test
-    void parseUpdateGoalNameCommand_nullInput_exceptionThrown() {
-        try {
-            UpdateParser.parseUpdateGoalNameCommand(null);
-            fail();
-        } catch (HaBitParserException e) {
-            assertEquals(Parser.ERROR_NO_PARAMS, e.getMessage());
         }
     }
 
@@ -376,16 +367,6 @@ class UpdateParserTest {
     }
 
     @Test
-    void parseUpdateGoalEndDateCommand_nullInput_exceptionThrown() {
-        try {
-            UpdateParser.parseUpdateGoalEndDateCommand(null);
-            fail();
-        } catch (HaBitParserException e) {
-            assertEquals(Parser.ERROR_NO_PARAMS, e.getMessage());
-        }
-    }
-
-    @Test
     void parseUpdateGoalEndDateCommand_invalidStrDateFormat_exceptionThrown() {
         String inputWithAlphabet = "CS2113T";
         String inputWithSpecialCharacters = "25122021!";
@@ -459,16 +440,6 @@ class UpdateParserTest {
             fail();
         } catch (HaBitParserException e) {
             assertEquals(ERROR_GOAL_TYPE_FORMAT, e.getMessage());
-        }
-    }
-
-    @Test
-    void parseUpdateGoalTypeCommand_nullInput_exceptionThrown() {
-        try {
-            UpdateParser.parseUpdateGoalTypeCommand(null);
-            fail();
-        } catch (HaBitParserException e) {
-            assertEquals(Parser.ERROR_NO_PARAMS, e.getMessage());
         }
     }
 
@@ -609,14 +580,14 @@ class UpdateParserTest {
             UpdateParser.parseUpdateHabitIntervalCommand("g/1 h/1 n/ ");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_INTERVAL_FORMAT, e.getMessage());
+            assertEquals(ERROR_MISSING_INTERVAL, e.getMessage());
         }
 
         try {
             UpdateParser.parseUpdateHabitIntervalCommand("g/1 h/1 ");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_INTERVAL_FORMAT, e.getMessage());
+            assertEquals(ERROR_MISSING_INTERVAL, e.getMessage());
         }
     }
 
@@ -655,16 +626,6 @@ class UpdateParserTest {
     }
 
     @Test
-    void parseUpdateGHabitIntervalCommand_nullInput_exceptionThrown() {
-        try {
-            UpdateParser.parseUpdateHabitIntervalCommand(null);
-            fail();
-        } catch (HaBitParserException e) {
-            assertEquals(Parser.ERROR_NO_PARAMS, e.getMessage());
-        }
-    }
-
-    @Test
     void parseUpdateHabitIntervalCommand_intervalTooLarge_exceptionThrown() {
         try {
             UpdateParser.parseUpdateHabitIntervalCommand("g/1 h/1 i/" + INTERVAL_TOO_LARGE);
@@ -676,6 +637,5 @@ class UpdateParserTest {
     /*
     Tests for remaining methods
      */
-
 
 }
