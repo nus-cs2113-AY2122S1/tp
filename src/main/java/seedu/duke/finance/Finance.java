@@ -24,8 +24,8 @@ public class Finance {
         this.date = date;
     }
 
-    public int getAccount() {
-        return Integer.parseInt(account);
+    public Double getAccount() {
+        return Double.parseDouble(account);
     }
 
     public void setAccount(String account) {

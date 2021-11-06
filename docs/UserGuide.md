@@ -419,6 +419,7 @@ Example:
 **A**: Copy the _home folder_ of Restaurant Buddy over to the other computer and run it as usual.
 
 ## 4. Command Summary
+
 | Command | Format |
 | ------------ | ------------- |
 | add-employee | `add-employee/EMPLOYEE_NAME/PHONE_NUMBER/EMPLOYMENT_STATUS/SALARY` |

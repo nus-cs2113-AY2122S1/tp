@@ -6,5 +6,5 @@ import java.util.ArrayList;
 
 public class FinanceList {
     public ArrayList<Finance> financeList = new ArrayList<>();
-    public int totalAccount = 0;
+    public double totalAccount = 0;
 }
