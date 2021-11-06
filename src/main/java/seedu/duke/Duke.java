@@ -26,7 +26,7 @@ public class Duke {
     public static void main(String[] args) {
 
         Ui.printGreetingMessage();
-        storage.load(memberRoster, eventCatalog);
+        storage.loadSaveFile(memberRoster, eventCatalog);
         runSlam();
         storage.save(memberRoster, eventCatalog);
     }

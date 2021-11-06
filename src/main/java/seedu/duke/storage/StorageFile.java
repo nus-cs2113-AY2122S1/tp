@@ -69,7 +69,7 @@ public class StorageFile {
         eventsWriter.close();
     }
 
-    public void load(MemberRoster memberRoster, EventCatalog eventCatalog) {
+    public void loadSaveFile(MemberRoster memberRoster, EventCatalog eventCatalog) {
         File saveFile = new File(DEFAULT_FILE_PATH);
         List<String> encodedLines = getStringsFromFile(saveFile);
 
