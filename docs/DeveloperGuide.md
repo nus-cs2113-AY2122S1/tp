@@ -280,7 +280,6 @@ additional devices or platforms.
 
 ## <a name="manual-test"></a>Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 Given below are instructions to test the app manually.
 
 **Note:** These instructions only provide a starting point for testers to work on; testers are expected to do more
@@ -323,4 +322,120 @@ exploratory testing.
        We hope you have enjoyed using it.
        ____________________________________________________________
        ```
+
+### <a name="testing-add"></a>Adding a contact
+1. Adding a contact with all fields
+    1. Test case: `add -n Alex Lee -g alexlee -te alexlee -tw alexl33 -e alex.lee@email.com -l alexlee`<br>
+       Expected: New contact will have all fields added. Each field will be displayed after it has been added to the 
+       contact list.
+       ```
+       ____________________________________________________________
+       ConTech has added the specified contact:
+       Name:     Alex Lee
+       Github:   github.com/alexlee
+       Email:    alex.lee@email.com
+       Telegram: t.me/alexlee
+       LinkedIn: linkedin.com/in/alexlee
+       Twitter:  twitter.com/alexl33
+       
+       You now have 1 contact(s).
+       ____________________________________________________________
+       ```
+       
+2. Adding a contact with fewer fields
+    1. Test case: `add -n Jake Tan -g tanjakey -e jakeytan@email.com`<br>
+       Expected: New contact will only have the fields mentioned added to the contact. Each field that is field will be
+       displayed after it has been added to the contact list.
+       ```
+       ____________________________________________________________
+       ConTech has added the specified contact:
+       Name:     Jake Tan
+       Github:   github.com/tanjakey
+       Email:    jakeytan@email.com
+       
+       You now have 1 contact(s).
+       ____________________________________________________________
+       ```
+       
+3. Adding a contact with no field entered
+    1. Test case: `add`<br>
+       Expected:  An error message will notify user that there are missing parameters.
+       ```
+       ____________________________________________________________
+       There seems to be missing parameters in your request.
+       Please enter command in this format:
+             add -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
+             example : add -n John Doe -g johndoecoder -e john@email.com -te johndoe
+       NOTE : At least NAME required
+              Order of parameters do not matter
+       ____________________________________________________________
+       ```
+       
+4. Adding a contact with duplicates
+    1. Prerequisites: A contact with similar either similar name or details must already be in the contact list. For
+       simplicity, we will re-use the same command from `1`.
+    2. Test case: `add -n Alex Lee -g alexlee -te alexlee -tw alexl33 -e alex.lee@email.com -l alexlee`<br>
+       Expected: ConTech will display a list of contacts that are already in your contact list with the same fields as
+       the one you are adding. It will then ask for your confirmation whether you would still like to add the contact
+       or ignore it.
+       ```
+       ____________________________________________________________
+       One of your saved contacts has a duplicate field:
+       
+       0.
+       Name:     Alex Lee
+       Github:   github.com/alexlee
+       Email:    alex.lee@email.com
+       Telegram: t.me/alexlee
+       LinkedIn: linkedin.com/in/alexlee
+       Twitter:  twitter.com/alexl33
+       
+       Do you still want to add the contact?  (y/n)
+       ____________________________________________________________
+       ```
+    3. Follow up: You can either input `y` which stands for **yes** allowing you to still add the contact despite having
+       a duplicate field or `n` which stands for **no** to disregard adding the contact.
+       
+
+5. Adding a contact with a wrong flag
+    1. Test case: `add -n Ali -p alixpress`<br>
+       Expected:  An error message will notify user that there appears to be a flag that is not recognised.
+       ```
+       ____________________________________________________________
+       There appears to be a flag that is not recognised.
+       Please try again with a valid flag.
+         -n NAME
+         -g GITHUB
+         -l LINKEDIN
+         -te TELEGRAM
+         -tw TWITTER
+         -e EMAIL
+       ____________________________________________________________
+       ```  
+  
+6. Adding a contact with a wrong command
+    1. Test case: `Add -n Ben`<br>
+       Expected:  An error message will notify user that ConTech is unable to understand the command and
+       that the user can try to input a valid command. The issue with the test case is that the `add` command has a capital
+       A.
+       ```
+       ____________________________________________________________
+       ConTech is unable to understand your request.
+       Please try again with a valid command.
+       ____________________________________________________________
+       ```  
+
+7. Adding a contact with an invalid field format
+    1. Test case: `add -n George -e george`<br>
+    2. Expected: An error message will notify user on the field with the invalid format. For this test case, the email
+       has the wrong format.
+       ```
+       ____________________________________________________________
+       The email id is not correctly formatted,
+       Rules for email id :
+           * Lowercase letters only
+           * Numbers, underscore, hyphen and dot allowed
+           * @ cannot be at the start or end
+       ____________________________________________________________
+       ``` 
 
