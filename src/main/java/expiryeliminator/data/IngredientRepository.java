@@ -57,9 +57,10 @@ public class IngredientRepository {
      * @param expiryDate Expiry date of ingredient.
      * @return Ingredient storage object corresponding to the added ingredient.
      * @throws DuplicateDataException If ingredient already exists in the repository.
+     * @throws IllegalValueException If quantity to be added is less than or equal to 0.
      */
     public IngredientStorage add(String ingredientName, String unit, int quantity, LocalDate expiryDate)
-            throws DuplicateDataException {
+            throws DuplicateDataException, IllegalValueException {
         assert ingredientName != null : "Ingredient name cannot be null";
         assert expiryDate != null : "Expiry date cannot be null";
         checkDuplicateIngredient(ingredientName);
@@ -163,7 +164,12 @@ public class IngredientRepository {
 
             for (LocalDate expiryDate : ingredientStorage.getIngredientBatches().keySet()) {
                 if (expiryDate.isAfter(currentDate) && expiryDate.isBefore(currentDatePlusAWeek)) {
-                    expiredIngredientStorage.add(ingredientStorage.getIngredientBatches().get(expiryDate), expiryDate);
+                    try {
+                        expiredIngredientStorage.add(ingredientStorage.getIngredientBatches().get(expiryDate),
+                                expiryDate);
+                    } catch (IllegalValueException e) {
+                        assert false : "Quantity added to ingredient storage should have been greater than zero.";
+                    }
                     hasExpiringIngredients = true;
                 }
             }
@@ -193,7 +199,12 @@ public class IngredientRepository {
 
             for (LocalDate expiryDate : ingredientStorage.getIngredientBatches().keySet()) {
                 if (expiryDate.isBefore(currentDate)) {
-                    expiredIngredientStorage.add(ingredientStorage.getIngredientBatches().get(expiryDate), expiryDate);
+                    try {
+                        expiredIngredientStorage.add(ingredientStorage.getIngredientBatches().get(expiryDate),
+                                expiryDate);
+                    } catch (IllegalValueException e) {
+                        assert false : "Quantity added to ingredient storage should have been greater than zero.";
+                    }
                     hasExpiredIngredients = true;
                 }
             }

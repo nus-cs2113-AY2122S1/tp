@@ -68,8 +68,12 @@ public class IngredientStorage {
      *
      * @param quantity Quantity of batch of ingredients to be added.
      * @param expiryDate Expiry date of batch of ingredients to be added.
+     * @throws IllegalValueException If quantity to be added is less than or equal to 0.
      */
-    public void add(int quantity, LocalDate expiryDate) {
+    public void add(int quantity, LocalDate expiryDate) throws IllegalValueException {
+        if (quantity <= 0) {
+            throw new IllegalValueException();
+        }
         assert expiryDate != null : "Expiry date cannot be null";
         if (ingredientBatches.containsKey(expiryDate)) {
             ingredientBatches.replace(expiryDate, ingredientBatches.get(expiryDate) + quantity);

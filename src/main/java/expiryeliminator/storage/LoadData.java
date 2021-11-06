@@ -1,5 +1,10 @@
 package expiryeliminator.storage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.time.LocalDate;
+import java.util.Scanner;
+
 import expiryeliminator.data.Ingredient;
 import expiryeliminator.data.IngredientQuantity;
 import expiryeliminator.data.IngredientRepository;
@@ -8,11 +13,6 @@ import expiryeliminator.data.Recipe;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.IllegalValueException;
-
-import java.time.LocalDate;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 public class LoadData {
 
@@ -39,8 +39,8 @@ public class LoadData {
     /**
      * Store the current recipe from the txt file to the recipe list.
      *
-     * @param recipes       The whole recipe list.
-     * @param sc            The scanner.
+     * @param recipes The whole recipe list.
+     * @param sc The scanner.
      * @param currentRecipe The current recipe that is going to be stored.
      */
     private static void storeCurrentRecipeFromList(RecipeList recipes, Scanner sc, Recipe currentRecipe)
@@ -69,7 +69,7 @@ public class LoadData {
      * Stores the current ingredient of a recipe from the txt file.
      *
      * @param currentRecipe The current recipe that is stored.
-     * @param line          The current line of the txt file.
+     * @param line The current line of the txt file.
      */
     private static void storeCurrentIngredientOfRecipe(Recipe currentRecipe, String line)
             throws IllegalValueException {
@@ -90,9 +90,9 @@ public class LoadData {
     /**
      * Gets the current unit of an ingredient from the txt file.
      *
-     * @param line           The current line of a txt file.
+     * @param line The current line of a txt file.
      * @param unitStartIndex The starting index of the unit substring.
-     * @param unitEndIndex   The ending index of the unit substring.
+     * @param unitEndIndex The ending index of the unit substring.
      */
     private static String getUnitForIngredientRepo(String line, int unitStartIndex, int unitEndIndex) {
         String unit = line.substring(unitStartIndex, unitEndIndex);
@@ -118,7 +118,7 @@ public class LoadData {
             loadCurrentIngredientFromRepo(ingredients, sc);
         } catch (FileNotFoundException e) {
             SaveData.createFileOrFolder(pathName, fileName);
-        } catch (DuplicateDataException e) {
+        } catch (DuplicateDataException | IllegalValueException e) {
             e.printStackTrace();
         }
     }
@@ -126,7 +126,7 @@ public class LoadData {
     /**
      * Gets the current quantity of the ingredient with batch number from the txt file.
      *
-     * @param line            The current line of a txt file.
+     * @param line The current line of a txt file.
      * @param expiryDateStart The start index of the expiry date substring.
      */
     private static int getQuantityWithBatch(String line, int expiryDateStart) {
@@ -162,10 +162,10 @@ public class LoadData {
      * Loads the current ingredient from the txt file.
      *
      * @param ingredients The whole ingredient repository.
-     * @param sc          The scanner.
+     * @param sc The scanner.
      */
     private static void loadCurrentIngredientFromRepo(IngredientRepository ingredients, Scanner sc)
-            throws DuplicateDataException {
+            throws DuplicateDataException, IllegalValueException {
         LocalDate expiryDate = null;
         String unit = null;
         String ingredientName = null;

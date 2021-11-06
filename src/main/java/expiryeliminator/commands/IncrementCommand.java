@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.IngredientStorage;
 import expiryeliminator.data.RecipeList;
+import expiryeliminator.data.exception.IllegalValueException;
 import expiryeliminator.data.exception.NotFoundException;
 
 /**
@@ -18,6 +19,7 @@ public class IncrementCommand extends Command {
                     + "Parameters: i/INGREDIENT q/QUANTITY e/EXPIRY_DATE\n"
                     + "Example: " + COMMAND_WORD + " i/Red Apple q/3 e/2021-12-25";
 
+    private static final String MESSAGE_QUANTITY_ZERO = "Cannot increment by a quantity of zero.";
     private static final String MESSAGE_INGREDIENT_NOT_FOUND = "Sorry. No matching ingredients found!";
     private static final String MESSAGE_INGREDIENT_INCREMENTED = "I've incremented this ingredient by %1$s:\n"
             + "\n%2$s";
@@ -51,7 +53,11 @@ public class IncrementCommand extends Command {
         } catch (NotFoundException e) {
             return MESSAGE_INGREDIENT_NOT_FOUND;
         }
-        ingredientStorage.add(quantity, expiryDate);
+        try {
+            ingredientStorage.add(quantity, expiryDate);
+        } catch (IllegalValueException e) {
+            return MESSAGE_QUANTITY_ZERO;
+        }
         return String.format(MESSAGE_INGREDIENT_INCREMENTED, quantity, ingredientStorage);
     }
 }
