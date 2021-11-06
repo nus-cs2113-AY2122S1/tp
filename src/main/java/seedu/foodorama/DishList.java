@@ -145,8 +145,10 @@ public class DishList {
             } catch (NumberFormatException | FoodoramaException e) {
                 throw new FoodoramaException(UI.getInvalidNumberMsg());
             }
+            if (Double.isInfinite(newWeight) | Double.isNaN(newWeight)) {
+                throw new FoodoramaException(UI.printNumericalInputInvalid("dish waste"));
+            }
             Double dishWeight = dishList.get(dishIndex).getWastage();
-
             UI.clearTerminalAndPrintNewPage();
             UI.printConfirmDishWastageEditMsg(dishWeight, newWeight);
             String confirmChange = input.nextLine().toLowerCase();
@@ -157,7 +159,6 @@ public class DishList {
             }
             UI.clearTerminalAndPrintNewPage();
             if (confirmChange.startsWith(YES)) {
-
                 dishList.get(dishIndex).setDishWastage(newWeight);
                 UI.printDishWastageChanged(dishName, newWeight);
             } else {

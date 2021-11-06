@@ -38,6 +38,9 @@ public class IngredientList {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
 
+        if (Double.isInfinite(ingredientWeightValue) | Double.isNaN(ingredientWeightValue)) {
+            throw new FoodoramaException(UI.printNumericalInputInvalid("ingredient storage"));
+        }
 
         Ingredient ingredientToAdd = new Ingredient(ingredientName, ingredientWeightValue);
         ingredientList.add(ingredientToAdd);
@@ -239,6 +242,9 @@ public class IngredientList {
         } catch (NumberFormatException | FoodoramaException e) {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
+        if (Double.isInfinite(newWeight) | Double.isNaN(newWeight)) {
+            throw new FoodoramaException(UI.printNumericalInputInvalid("ingredient waste"));
+        }
         Double ingrWeight = ingredientList.get(ingrIndex).getWastage();
 
         UI.clearTerminalAndPrintNewPage();
@@ -277,6 +283,9 @@ public class IngredientList {
                 }
             } catch (NumberFormatException | FoodoramaException e) {
                 throw new FoodoramaException(UI.getInvalidNumberMsg());
+            }
+            if (Double.isInfinite(newWeight) | Double.isNaN(newWeight)) {
+                throw new FoodoramaException(UI.printNumericalInputInvalid("ingredient storage"));
             }
             Double ingrWeight = ingredientList.get(ingrIndex).getIngredientWeight();
 

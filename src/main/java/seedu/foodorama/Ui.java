@@ -1026,4 +1026,19 @@ public class Ui {
                 + LINE_DIVIDER
         );
     }
+
+    public void printConfirmDishWaste(String dishName, double dishWasteWeight) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Are you sure you want to add wasted " + dishName
+                + " that weighs " + dishWasteWeight + "kg? Type y for Yes and n for No."
+                + System.lineSeparator() + LINE_DIVIDER
+        );
+    }
+
+    public String printNumericalInputInvalid(String type) {
+        return LINE_DIVIDER + System.lineSeparator()
+                + "The " + type + " is out of bounds"
+                + System.lineSeparator() + LINE_DIVIDER;
+    }
+
 }
