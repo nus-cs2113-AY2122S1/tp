@@ -73,12 +73,7 @@ public class Parser {
             case "new":
                 command = parseNewCommand(userInput[1]);
                 break;
-            case "edit":
-                command = parseEditCommand(userInput[1]);
-                break;
-            case "delete":
-                command = parseDeleteCommand(userInput[1]);
-                break;
+
             case "view":
                 command = parseViewCommand(userInput[1]);
                 break;
@@ -97,12 +92,7 @@ public class Parser {
             case "add-item":
                 command = parseAddItemCommand(userInput[1]);
                 break;
-            case "delete-day":
-                command = parseDeleteDayCommand(userInput[1]);
-                break;
-            case "delete-item":
-                command = parseDeleteItemCommand(userInput[1]);
-                break;
+
             case "edit-item":
                 command = parseEditItemCommand(userInput[1]);
                 break;
@@ -189,104 +179,6 @@ public class Parser {
         return command;
     }
 
-    /**
-     * Parses user input to give a <code>DeleteCommand</code>.
-     * @param userInput Raw user input, with the first command option (delete) removed.
-     * @return Command A <code>DeleteCommand</code> object.
-     */
-    private static Command parseDeleteCommand(String userInput) throws TravellerException {
-        Command command;
-        logger.log(Level.INFO, "Delete command input");
-        String tripName = parseFieldValue(userInput, 0, userInput.length());
-        command = new DeleteCommand(tripName);
-        return command;
-    }
-
-    /**
-     * Parses user input to give an <code>EditCommand</code>.
-     * @param userInput Raw user input, with the first command option (edit) removed.
-     * @return Command An <code>EditCommand</code> object.
-     * @throws TravellerException Will be thrown if the user input cannot be understood.
-     */
-    private static Command parseEditCommand(String userInput) throws TravellerException {
-        logger.log(Level.INFO, "Edit command input");
-        Command command;
-        try {
-            int fromIdx = getFromFlagIndex(userInput);
-            int toIdx = getToFlagIndex(userInput);
-
-            String tripName = parseFieldValue(userInput, 0, fromIdx);
-            String startCountryCode = parseFieldValue(userInput,
-                    fromIdx + FROM_LENGTH, toIdx).toUpperCase();
-            String endCountryCode = parseFieldValue(userInput,
-                    toIdx + TO_LENGTH, userInput.length()).toUpperCase();
-            parseValidTripName(tripName);
-
-            command = new EditCommand(tripName, startCountryCode, endCountryCode);
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new InvalidEditFormatException();
-        }
-        return command;
-    }
-
-    /**
-     * Parses user input to give a <code>DeleteDayCommand</code>.
-     * @param userInput Raw user input, with the first command option (delete-day) removed.
-     * @return Command A <code>DeleteDayCommand</code> object.
-     */
-    private static Command parseDeleteDayCommand(String userInput) throws TravellerException {
-        String tripName;
-        String rawDayIndex;
-
-        try {
-            int dayIdx = getDayFlagIndex(userInput);
-
-            tripName = parseFieldValue(userInput, 0, dayIdx);
-            rawDayIndex = parseFieldValue(userInput, dayIdx + DAY_LENGTH, userInput.length());
-        } catch (StringIndexOutOfBoundsException e) {
-            logger.log(Level.WARNING, "Invalid delete-day command format: " + userInput);
-            throw new InvalidDeleteDayFormatException();
-        }
-        int dayIndex = parseValidIndex(rawDayIndex);
-        assert dayIndex >= 0 : "Day index is negative.";
-
-        Command command;
-        logger.log(Level.INFO, "Delete-day command input");
-        command = new DeleteDayCommand(tripName, dayIndex);
-        return command;
-    }
-
-    /**
-     * Parses user input to give a <code>DeleteItemCommand</code>.
-     * @param userInput Raw user input, with the first command option (delete-item) removed.
-     * @return A <code>DeleteItemCommand</code> object.
-     */
-    private static Command parseDeleteItemCommand(String userInput) throws TravellerException {
-        logger.log(Level.INFO, "Delete-item command input");
-        String tripName;
-        String rawDayNumber;
-        String rawItemNumber;
-        try {
-            int dayIdx = getDayFlagIndex(userInput);
-            int itemIdx = getItemFlagIndex(userInput);
-
-            tripName = parseFieldValue(userInput, 0, dayIdx);
-            rawDayNumber = parseFieldValue(userInput, dayIdx + DAY_LENGTH, itemIdx);
-            rawItemNumber = parseFieldValue(userInput, itemIdx + ITEM_LENGTH, userInput.length());
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new InvalidDeleteItemFormatCommand();
-        }
-
-        int dayNumber = parseValidIndex(rawDayNumber);
-        assert dayNumber >= 0 : "Day number is negative.";
-
-        int itemNumber = parseValidIndex(rawItemNumber);
-        assert itemNumber >= 0 : "Item number is negative.";
-
-        Command command;
-        command = new DeleteItemCommand(tripName, dayNumber, itemNumber);
-        return command;
-    }
 
     /**
      * Parses user input to give a <code>SearchItemCommand</code>.
