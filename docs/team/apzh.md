@@ -10,6 +10,7 @@ Given below are the contributions I have made to this project.
 ### Summary of Contributions
 - **Code contributed**: [RepoSense Link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=apzh&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&tabAuthor=APZH&tabRepo=AY2122S1-CS2113T-W13-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
+
 - **Enhancements implemented**:
   - General abstraction/skeleton of the TP program based on my IP program structure.
   - Implemented the `Ui.java` class to handle the reading of user inputs into the terminal and the displaying of 
@@ -25,6 +26,7 @@ Given below are the contributions I have made to this project.
   such as by **task type**, **priority**, or **description**. Methods are implemented in `TaskManager.java` class.
     - Added the relevant command class `SortCommand.java` and the relevant exceptions associated with the `sort` command.
     
+
 - **Contributions to the UG**:
   - Created and maintained the skeleton/overview for the User Guide to help the team be consistent when adding information.
   - Added the information in "1. Quick Start".
@@ -34,6 +36,7 @@ Given below are the contributions I have made to this project.
   - Added the information in "2.5 Sorting your tasklist: `sort`".
   - Updated "4. Command Summary" table with changes made to the `list` and `sort` command.
   
+
 - **Contributions to the DG**:
   - Created and maintained the skeleton/overview for the Developer Guide to help the team be consistent when adding information.
   - Added the information in "1. Introduction".
@@ -54,7 +57,8 @@ Given below are the contributions I have made to this project.
   - Added the information in "4.2 Filtering the tasklist".
     - All text descriptions in this section.
     - [Image] The **Sequence Diagram** - Showing how the process of filtering the user's tasklist that is managed 
-    - by the TaskManager class.
+    by the TaskManager class.
+
 
 - **Contributions to team-based tasks**:
   - Maintained the issue tracker and milestones for our team.
@@ -65,6 +69,7 @@ Given below are the contributions I have made to this project.
   - Added user stories and formatted the table.
   - Added instructions for manual testing for "Launch and Exit", "Listing the Tasklist", "Filtering the Tasklist", "Sorting the Tasklist", 
   and "Viewing the recurrence of a task".
+  
 
 - **Review/mentoring contributions**:
   - Help team members to test their features to ensure they work prior to releases each version of our application on GitHub.
@@ -76,25 +81,25 @@ These are the diagrams (General, Class, Sequence...) I have added into the Devel
 
 #### For "3.1 Architecture"...
 <p align="center">
-    <img src="https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/docs/images/AmosUMLDiagrams/Architecture.png">
+    <img src="../images/AmosUMLDiagrams/Architecture.png">
 </p>
 
 <p align="center">
-    <img src="https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/docs/images/AmosUMLDiagrams/SD_ValidInput.png">
+    <img src="../images/AmosUMLDiagrams/SD_ValidInput.png">
 </p>
 
 #### For "3.2 UI Component"...
 <p align="center">
-    <img src="https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/docs/images/AmosUMLDiagrams/CD_UIComponent.png">
+    <img src="../images/AmosUMLDiagrams/CD_UIComponent.png">
 </p>
 
 #### For "3.3 Parser Component"...
 <p align="center">
-    <img src="https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/docs/images/AmosUMLDiagrams/CD_ParserComponent.png">
+    <img src="../images/AmosUMLDiagrams/CD_ParserComponent.png">
 </p>
 
 #### For"4.2 Filtering the tasklist"...
 <p align="center">
-    <img src="https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/docs/images/AmosUMLDiagrams/SD_FilteringTasklist.png">
+    <img src="../images/AmosUMLDiagrams/SD_FilteringTasklist.png">
 </p>
 
