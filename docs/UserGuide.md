@@ -24,10 +24,10 @@ done in an efficient manner.
     - [Return items: `return`](#return-items)
     - [Edit an item: `edit`](#edit-an-item)
     - [Remove an item: `rm`](#remove-an-item)
-    - [Display library statistics: `stats`](#display-library-statistics)
-      - [Display all statistics: `stats all`](#display-all-statistics)
-      - [Display statistics by item category: `stats category`](#display-statistics-by-item-category)
-      - [Display statistics by item status: `stats status`](#display-statistics-by-item-status)
+    - [Display library information: `info`](#display-library-information)
+      - [Display all information: `info all`](#display-all-information)
+      - [Display information by item category: `info category`](#display-information-by-item-category)
+      - [Display information by item status: `info status`](#display-information-by-item-status)
     - [Display valid user commands: `help`](#display-valid-user-commands)
     - [Exit the program: `exit`](#exit-the-program)
 - [Data Storage](#data-storage)
@@ -406,18 +406,18 @@ Removes item with ID of `095680` from the catalogue
   [V] 095680 | AVAILABLE | Casino Royale | Sony Pictures | 144 minutes
 ```
 
-### Display library statistics
-Display library statistics: total number of items in library, number of items by category and
+### Display library information
+Display library information: total number of items in library, number of items by category and
 number of items by status.
 
-#### Display all statistics
-Display all library statistics
+#### Display all information
+Display all library information
 
-Format: `stats all`
+Format: `info all`
 
 ##### Usage Example:
 
-`stats all`
+`info all`
 
 Expected output:
 ```
@@ -426,10 +426,10 @@ E.g.
   [A] 124 | LOANED (John TILL 07-11-2021) | CD | Michael Jackson | 2h
 ```
 ```
-> stats all
+> info all
   (+) Total Number of Items in Library: 2
 
-  (+) Statistics of Library by Item Category
+  (+) Library Information by Item Category
   ========================================
   (+) Number of Audio Items: 1
   (+) Number of Book Items: 1
@@ -437,21 +437,21 @@ E.g.
   (+) Number of Video Items: 0
   (+) Number of Miscellaneous Items: 0
 
-  (+) Statistics of Library by Item Status
+  (+) Library Information by Item Status
   ========================================
   (+) Number of Available Items: 1
   (+) Number of Loaned Items: 1
   (+) Number of Reserved Items: 0
 ```
 
-#### Display statistics by item category 
+#### Display information by item category 
 Display total number of items in the library and the breakdown of items by category. 
 
-Format: `stats category`
+Format: `info category`
 
 ##### Usage Example:
 
-`stats category`
+`info category`
 
 Expected output:
 ```
@@ -460,10 +460,10 @@ E.g.
   [A] 124 | LOANED (John TILL 07-11-2021) | CD | Michael Jackson | 2h
 ```
 ```
-> stats category
+> info category
   (+) Total Number of Items in Library: 2
 
-  (+) Statistics of Library by Item Category
+  (+) Library Information by Item Category
   ========================================
   (+) Number of Audio Items: 1
   (+) Number of Book Items: 1
@@ -472,14 +472,14 @@ E.g.
   (+) Number of Miscellaneous Items: 0
 ```
 
-#### Display statistics by item status 
+#### Display information by item status 
 Display total number of items in the library and the breakdown of items by status.
 
-Format: `stats status`
+Format: `info status`
 
 ##### Usage Example:
 
-`stats status`
+`info status`
 
 Expected output:
 ```
@@ -488,10 +488,10 @@ E.g.
   [A] 124 | LOANED (John TILL 07-11-2021) | CD | Michael Jackson | 2h
 ```
 ```
-> stats status
+> info status
   (+) Total Number of Items in Library: 2
 
-  (+) Statistics of Library by Item Status
+  (+) Library Information by Item Status
   ========================================
   (+) Number of Available Items: 1
   (+) Number of Loaned Items: 1
@@ -532,9 +532,9 @@ Expected output:
   (+) Edit details of an existing video item: edit ID [t|i|p|d]/ATTRIBUTE
   (+) Edit details of an existing miscellaneous item: edit ID [t|i]/ATTRIBUTE
   (+) Remove an existing item: rm ID
-  (+) Display all library statistics: stats all
-  (+) Display library statistics by item category: stats category
-  (+) Display library statistics by item status: stats status
+  (+) Display all library information: info all
+  (+) Display library information by item category: info category
+  (+) Display library information by item status: info status
   (+) Get a list of valid user commands: help
   (+) Exit the program: exit
 ```
