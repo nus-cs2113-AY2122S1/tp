@@ -194,9 +194,10 @@ __Note:__
 
 In the Ui class, `withIndent` is true if the user is in `workoutMode`, false otherwise.
 
-## Logging
+## Logging and Documentation
 
 * [Logger Guide](Logging.md)
+* [Documentation Guide](Documentation.md)
 
 ## Appendix A: Product scope
 ### Target user profile
@@ -296,6 +297,12 @@ Given below are instructions to test the app manually.
    - Test Case: `edit x,y, testexercise, 2 10`, `edit 123`, `...` (where x or y is larger than the list size or less than or equal to 0)
 
      Expected: Similar to previous.
+
+### Entering a Workout
+1. Entering into a workout
+   * Prerequisites: List all workouts using the `list` command. Atleast one workout in list.
+   * Test Case: `enter 1`
+   * Expected: Message showing that you have entered into the first workout. Now you can repeat test cases from other commands without including the `workoutIndex`. </br> (e.g. `edit 1, Bench Press, 5 10`)
 
 ### Clearing all workouts or exercises
 
