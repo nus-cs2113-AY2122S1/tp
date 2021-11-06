@@ -310,7 +310,103 @@ public class Parser {
         return startCountryCode;
     }
 
-    
+    private static String parseEditEndCountryCode(String userInput) throws TravellerException {
+        int toIdx = getToFlagIndex(userInput);
+        String endCountryCode = parseFieldValue(userInput,
+                toIdx + TO_LENGTH, userInput.length()).toUpperCase();
+        return endCountryCode;
+    }
+
+    /**
+     * Parses user input to give a <code>DeleteDayCommand</code>.
+     * @param userInput Raw user input, with the first command option (delete-day) removed.
+     * @return Command A <code>DeleteDayCommand</code> object.
+     */
+    private static Command parseDeleteDayCommand(String userInput) throws TravellerException {
+        String tripName;
+        String rawDayIndex;
+
+        try {
+            int dayIdx = getDayFlagIndex(userInput);
+
+            tripName = parseFieldValue(userInput, 0, dayIdx);
+            rawDayIndex = parseFieldValue(userInput, dayIdx + DAY_LENGTH, userInput.length());
+        } catch (StringIndexOutOfBoundsException e) {
+            logger.log(Level.WARNING, "Invalid delete-day command format: " + userInput);
+            throw new InvalidDeleteDayFormatException();
+        }
+        int dayIndex = parseValidIndex(rawDayIndex);
+        assert dayIndex >= 0 : "Day index is negative.";
+
+        Command command;
+        logger.log(Level.INFO, "Delete-day command input");
+        command = new DeleteDayCommand(tripName, dayIndex);
+        return command;
+    }
+
+    /**
+     * Parses user input to give a <code>DeleteItemCommand</code>.
+     * @param userInput Raw user input, with the first command option (delete-item) removed.
+     * @return A <code>DeleteItemCommand</code> object.
+     */
+    private static Command parseDeleteItemCommand(String userInput) throws TravellerException {
+        logger.log(Level.INFO, "Delete-item command input");
+        String tripName;
+        String rawDayNumber;
+        String rawItemNumber;
+        try {
+            int dayIdx = getDayFlagIndex(userInput);
+            int itemIdx = getItemFlagIndex(userInput);
+
+            tripName = parseFieldValue(userInput, 0, dayIdx);
+            rawDayNumber = parseFieldValue(userInput, dayIdx + DAY_LENGTH, itemIdx);
+            rawItemNumber = parseFieldValue(userInput, itemIdx + ITEM_LENGTH, userInput.length());
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new InvalidDeleteItemFormatCommand();
+        }
+
+        int dayNumber = parseValidIndex(rawDayNumber);
+        assert dayNumber >= 0 : "Day number is negative.";
+
+        int itemNumber = parseValidIndex(rawItemNumber);
+        assert itemNumber >= 0 : "Item number is negative.";
+
+        Command command;
+        command = new DeleteItemCommand(tripName, dayNumber, itemNumber);
+        return command;
+    }
+    /**
+     * Parses user input to give a <code>SearchItemCommand</code>.
+     * @param userInput Raw user input, with the first command option (search-item) removed.
+     * @return Command An <code>SearchItemCommand</code> object.
+     * @throws TravellerException Will be thrown if the user input cannot be understood.
+     */
+    private static Command parseSearchItemCommand(String userInput) throws TravellerException {
+        logger.log(Level.INFO, "Search command input");
+        String tripName;
+        String rawDayNumber;
+        String keyword;
+
+        try {
+            int dayIdx = getDayFlagIndex(userInput);
+            int keywordIdx = getKeyFlagIndex(userInput);
+
+            tripName = parseFieldValue(userInput, 0, dayIdx);
+            rawDayNumber = parseFieldValue(userInput, dayIdx + DAY_LENGTH, keywordIdx);
+            keyword = parseFieldValue(userInput, keywordIdx + KEY_LENGTH, userInput.length());
+            assert !keyword.equals(" ") : "keyword should not be blank.";
+            assert !keyword.contains(" ") : "keyword should not be contain whitespace.";
+
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new InvalidSearchItemFormatException();
+        }
+        int dayIndex = parseValidIndex(rawDayNumber);
+        assert dayIndex >= 0 : "Day index is negative.";
+
+        Command command = new SearchItemCommand(tripName, dayIndex, keyword);
+
+        return command;
+    }
 
     /**
      * Parses user input to give a <code>ViewCommand</code>.
