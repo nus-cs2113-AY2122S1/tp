@@ -12,9 +12,13 @@ class Taa {
 class ClassList
 class Ui
 class Storage
+class Parser
+class Command as "{abstract}\nCommand"
 
 Taa -down-> "1" ClassList
 Taa -down-> "1" Ui
 Taa -down-> "1" Storage
+Taa .right.> Parser
+Parser .right.> Command
 
 @enduml
