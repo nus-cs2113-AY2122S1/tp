@@ -36,6 +36,6 @@ public class AddBudgetTest {
         }
 
         assertThrows(DuplicateBudgetException.class,
-            ()-> currentBudgetList.addBudget(100, false));
+            () -> currentBudgetList.addBudget(100, false));
     }
 }
