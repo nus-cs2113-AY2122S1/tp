@@ -103,7 +103,7 @@ Format: `add-employee/EMPLOYEE_NAME/PHONE_NUMBER/EMPLOYMENT_STATUS/SALARY`
 
 Example:
 `add-employee/John/81145812/PERM/6000` Adds the employee named `John` with `81145812` as his phone number to the 
-employee list. In addition, `PERM` staff and gets paid $`6000`.
+employee list. In addition, he/she is a `PERM` staff and gets paid $`6000`.
 ```
 ---------------------------------------------
  I have added: 
@@ -413,9 +413,10 @@ Example:
 **A**: Copy the _home folder_ of Restaurant Buddy over to the other computer and run it as usual.
 
 ## 4. Command Summary
+
 | Command | Format |
 | ------------ | ------------- |
-| add-employee | `add-employee/EMPLOYEE_NAME/PHONE_NUMBER` |
+| add-employee | `add-employee/EMPLOYEE_NAME/PHONE_NUMBER/EMPLOYMENT_STATUS/SALARY` |
 | remove-employee | `remove-employee/EMPLOYEE_INDEX` |
 | list-employee | `list-employee` |
 | add-dish | `add-dish/DISH_NAME/PRICE` |
