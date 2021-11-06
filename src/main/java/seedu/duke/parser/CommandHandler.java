@@ -8,7 +8,7 @@ import seedu.duke.exceptions.TripNotOpenException;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 
-abstract class CommandHandler extends CommandExecutor {
+public class CommandHandler extends CommandExecutor {
 
     //@@author yeezao
     /**
