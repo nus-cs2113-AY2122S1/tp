@@ -7,6 +7,8 @@ import seedu.duke.data.ClientPackage;
 import seedu.duke.data.Flight;
 import seedu.duke.data.Tour;
 
+import java.util.Arrays;
+
 public class AddClientPackageCommand extends Command {
     private ClientPackage clientPackage;
     private String[] rawClientPackage;
@@ -26,6 +28,20 @@ public class AddClientPackageCommand extends Command {
                     && !clientPackage.getFlight().equals(null)) {
                 clientPackages.add(clientPackage);
                 ui.showAdd(clientPackage);
+            }
+        }
+    }
+
+    public void executeStorage() {
+        try {
+            System.out.println(Arrays.toString(rawClientPackage));
+            createClientPackage();
+            ClientPackage existingClientPackage = clientPackages.getClientPackageById(clientPackage.getId());
+            System.out.println("Client package ID already exists. Please try another client package ID.");
+        } catch (TourPlannerException e) {
+            if (!clientPackage.getClient().equals(null) && !clientPackage.getTour().equals(null)
+                    && !clientPackage.getFlight().equals(null)) {
+                clientPackages.add(clientPackage);
             }
         }
     }
@@ -59,11 +75,6 @@ public class AddClientPackageCommand extends Command {
 
     private Flight extractFlight(String flightId) throws TourPlannerException {
         return flights.getFlightById(flightId);
-    }
-
-    private static int stringToInt(String params) {
-        int clientIndex = Integer.parseInt(params);
-        return clientIndex;
     }
 
 }

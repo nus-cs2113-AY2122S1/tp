@@ -1,0 +1,49 @@
+@startuml
+
+participant ":Parser" as Parser
+participant ":SortClientCommand" as SCC
+participant ":ClientList" as ClientList
+participant ":Ui" as Ui
+
+-> Parser: parse("sort -c /id")
+activate Parser
+Parser -> Parser : parseSort("-c /id")
+activate Parser
+Parser --> Parser
+deactivate Parser
+
+create SCC
+Parser -> SCC
+activate SCC
+SCC --> Parser
+deactivate SCC
+<-- Parser: SortClientCommand
+deactivate Parser
+
+-> SCC: execute()
+activate SCC
+
+SCC -> ClientList : getSortedClientIds()
+activate ClientList
+ClientList --> SCC : sorted client IDs
+deactivate ClientList
+
+
+SCC -> Ui : showSortedClientById()
+activate Ui
+loop until all clientIds iterated
+    Ui -> ClientList : getClientById(clientId)
+    ClientList --> Ui: Client
+    Ui -> Ui: show Client
+    activate Ui
+    Ui --> Ui
+    deactivate Ui
+end
+Ui --> SCC
+deactivate Ui
+
+<-- SCC
+deactivate SCC
+
+destroy SCC
+@enduml

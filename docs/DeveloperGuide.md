@@ -384,11 +384,50 @@ The following activity diagram summarizes the following steps.
 
 <br>
 
-### <u>Design Considerations</u>
+#### <u>Design Considerations</u>
 
 * Alternative: only iterate through the ```Package``` List.
   * Pros: fast querying time.
   * Cons: If the client/tour/flight is not in any package, none of their information can be accessed, including their contact number.
+  
+###<u>Sort feature</u>
+The `sort` feature is used to sort the `ObjectList` (for Client, Tour, Flight and ClientPackage) and list it,
+where `Parser` determines the `ObjectList` and criteria to sort for.
+
+It implements these following types of `sort` commands:
+* Client
+  * `sort -c /n`: Sorts alphabetically by client name
+  * `sort -c /id`: Sorts alphabetically by client id
+* Flight
+  * `sort -f /d`: Sorts in ascending order of date and time for departure flight
+  * `sort -f /r`: Sorts in ascending order of date and time for return flight
+  * `sort -f /id`: Sorts alphabetically by flight id
+* Tour
+  * `sort -t /id`: Sorts alphabetically by tour id
+  * `sort -t /p`: Sorts in ascending order of tour price
+
+Given below is an example usage of `sort -c /id`:
+
+Here is a (partial) sequence diagram of the above user input:
+![SortClientCommand](https://user-images.githubusercontent.com/70316271/140540865-4e29204d-d501-4968-b69a-b7fbbdfe399c.png)
+
+**Step 1**: After adding a few clients to the database, user inputs `sort -c /id`. This command is passed to `parse()`
+method in the `Parser` class.
+
+**Step 2**: Based on the user input, `parse()` identifies that it is of type `sort` command and calls `ParseSort()`.
+`ParseSort()` will then return `SortClientCommand` based on the prefix `-c`.
+
+**Step 3**: Then, `execute()` method in `SortClientCommand` is called, where it gets the sorted `ArrayList<>` of 
+`clientIds`.
+
+**Step 4** In `UI`, `showSortedClientById()` is called, with `clientIds` passed in. The method iterates through all the
+client IDs. For each iteration, finds the corresponding `Client` with `getClientById()` and prints out the `Client`
+and their details.
+
+Depending on the type of sort command being called, these command types will be returned:
+* `sort -c`: `SortClientCommand`
+* `sort -f`: `SortFlightCommand`
+* `sort -t`: `SortTourCommand`
 
 <br>
 
