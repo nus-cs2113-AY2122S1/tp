@@ -78,7 +78,7 @@ Given below are my contributions to the project.
   * Helped teammates test for bugs in their implementation.
 
 * **Community**:
-  * Reported bugs for other teams for [PED](https://github.com/leyondlee/ped/issues).
+  * Reported bugs for other teams in [PED](https://github.com/leyondlee/ped/issues).
 
 * **Tools**:
   * Integrated [GSON](https://github.com/google/gson) for data storage. ([#77](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/77))
