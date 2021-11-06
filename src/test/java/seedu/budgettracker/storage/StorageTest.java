@@ -31,7 +31,11 @@ public class StorageTest {
         } catch (NullPointerException e) {
             directoryFiles1 = 0;
         }
-        newStorage.directoryListAllFiles();
+        try {
+            newStorage.directoryListAllFiles();
+        } catch (NullPointerException e) {
+            directoryFiles1 = 0;
+        }
 
         try {
             File dataDirectory2 = new File("./data/");
