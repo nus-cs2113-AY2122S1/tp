@@ -24,6 +24,7 @@ public class StorageTest {
         Storage newStorage = new Storage();
         int directoryFiles1 = 0;
         int directoryFiles2 = 0;
+
         try {
             File dataDirectory1 = new File("./data/");
             File[] dataDirectoryList1 = dataDirectory1.listFiles();
@@ -31,6 +32,7 @@ public class StorageTest {
         } catch (NullPointerException e) {
             directoryFiles1 = 0;
         }
+
         try {
             newStorage.directoryListAllFiles();
         } catch (NullPointerException e) {
