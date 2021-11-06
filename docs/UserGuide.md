@@ -415,7 +415,7 @@ Example:
 ## 4. Command Summary
 | Command | Format |
 | ------------ | ------------- |
-| add-employee | `add-employee/EMPLOYEE_NAME/PHONE_NUMBER` |
+| add-employee | `add-employee/EMPLOYEE_NAME/PHONE_NUMBER/EMPLOYMENT_STATUS/SALARY` |
 | remove-employee | `remove-employee/EMPLOYEE_INDEX` |
 | list-employee | `list-employee` |
 | add-dish | `add-dish/DISH_NAME/PRICE` |
