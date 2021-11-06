@@ -321,12 +321,12 @@ public class Ui {
             + LINE_DIVIDER;
 
     public static final String INVALID_INGR_NAME = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, Ingredient Name cannot be a Number. Please type an appropriate Ingredient Name!"
+            + "Sorry, Ingredient Name cannot be a Number. The command has been disregarded."
             + System.lineSeparator()
             + LINE_DIVIDER;
 
     public static final String INVALID_DISH_NAME = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, Dish Name cannot be a Number. Please type an appropriate Dish Name!" + System.lineSeparator()
+            + "Sorry, Dish Name cannot be a Number. The command has been disregarded." + System.lineSeparator()
             + LINE_DIVIDER;
 
     public static final String DISREGARD_MSG = LINE_DIVIDER + System.lineSeparator()
@@ -357,13 +357,13 @@ public class Ui {
             + LINE_DIVIDER;
 
     public static final String INGR_INDEX_EXCEED_SIZE = LINE_DIVIDER + System.lineSeparator()
-            + "Ingredient Index exceeds size of Ingredient List. \nType 'list ingr' to view the correct"
+            + "Ingredient Index is not found in the Ingredient List. \nType 'list ingr' to view the correct"
             + " Ingredient Index of the Ingredient you want to edit."
             + System.lineSeparator()
             + LINE_DIVIDER;
 
     public static final String DISH_INDEX_EXCEED_SIZE = LINE_DIVIDER + System.lineSeparator()
-            + "Dish Index exceeds size of Dish List. \nType 'list dish' to view the correct"
+            + "Dish Index is not found in the Dish List. \nType 'list dish' to view the correct"
             + " Dish Index of the Dish you want to edit."
             + System.lineSeparator()
             + LINE_DIVIDER;
@@ -569,16 +569,22 @@ public class Ui {
         System.out.println(DISH_SORT);
     }
 
-    public void printConfirmDelDish() {
-        System.out.println(CONFIRM_DEL_DISH);
+    public void printConfirmDelDish(String dishName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Are you sure you want to remove " + dishName + "? Type 'y/yes' to confirm or 'n/no' to disregard"
+                + System.lineSeparator()
+                + LINE_DIVIDER);
     }
 
     public void printConfirmClearDish() {
         System.out.println(CONFIRM_CLEAR_DISH);
     }
 
-    public void printConfirmDelIngr() {
-        System.out.println(CONFIRM_DEL_INGR);
+    public void printConfirmDelIngr(String ingrName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Are you sure you want to remove " + ingrName + "? Type 'y/yes' to confirm or 'n/no' to disregard"
+                + System.lineSeparator()
+                + LINE_DIVIDER);
     }
 
     public void printConfirmClearIngr() {
@@ -1005,15 +1011,6 @@ public class Ui {
         );
     }
 
-    public void printConfirmIngrNameAndWeight(String ingredientName, double ingredientWeight) {
-        System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Are you sure you want to add " + ingredientName
-                + " that weighs " + ingredientWeight + "kg? Type y for Yes and n for No."
-                + System.lineSeparator() + LINE_DIVIDER
-        );
-
-    }
-
     public void printInvalidDishWasteValue(String dishName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "The weight of " + dishName + " wasted cannot be negative!" + System.lineSeparator()
@@ -1045,12 +1042,18 @@ public class Ui {
         );
     }
 
-
     public void printConfirmDishWaste(String dishName, double dishWasteWeight) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "Are you sure you want to add wasted " + dishName
                 + " that weighs " + dishWasteWeight + "kg? Type y for Yes and n for No."
                 + System.lineSeparator() + LINE_DIVIDER
         );
+    }
+
+
+    public String getBlankName(String type) {
+        return LINE_DIVIDER + System.lineSeparator()
+                + "The " + type + " name cannot be blank!"
+                + System.lineSeparator() + LINE_DIVIDER;
     }
 }

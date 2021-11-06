@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class IngredientList {
+    public static final String YES_NO_REGEX = "^(y|yes|n|no)$";
     public static ArrayList<Ingredient> ingredientList = new ArrayList<>();
     private static final Ui UI = new Ui();
     private static final String YES = "y";
@@ -37,6 +38,9 @@ public class IngredientList {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
 
+        if (Double.isInfinite(ingredientWeightValue) | Double.isNaN(ingredientWeightValue)) {
+            throw new FoodoramaException(UI.printNumericalInputInvalid("ingredient storage"));
+        }
 
         Ingredient ingredientToAdd = new Ingredient(ingredientName, ingredientWeightValue);
         ingredientList.add(ingredientToAdd);
@@ -82,9 +86,9 @@ public class IngredientList {
             UI.printIngrNotExistMsg();
             assert ingredientList.size() == listSize : "ingredientList should be of size N";
         } else {
-            UI.printConfirmDelIngr();
+            UI.printConfirmDelIngr(ingredientName);
             String confirmDel = input.nextLine().toLowerCase();
-            while (!confirmDel.matches("^(y|yes|n|no)$")) {
+            while (!confirmDel.matches(YES_NO_REGEX)) {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printInvalidConfirmation();
                 confirmDel = input.nextLine().toLowerCase();
@@ -117,7 +121,7 @@ public class IngredientList {
         UI.printConfirmClearIngr();
         String confirmClear = input.nextLine().toLowerCase();
 
-        while (!confirmClear.matches("^(y|yes|n|no)$")) {
+        while (!confirmClear.matches(YES_NO_REGEX)) {
             UI.clearTerminalAndPrintNewPage();
             UI.printInvalidConfirmation();
             confirmClear = input.nextLine().toLowerCase();
@@ -144,10 +148,14 @@ public class IngredientList {
             newName = input.nextLine().toLowerCase();
         }
 
+        if (newName.isBlank()) {
+            throw new FoodoramaException(UI.getBlankName("ingredient"));
+        }
+
         UI.clearTerminalAndPrintNewPage();
         UI.printConfirmIngrEditMsg(ingrName, newName);
         String confirmChange = input.nextLine().toLowerCase();
-        while (!confirmChange.matches("^(y|yes|n|no)$")) {
+        while (!confirmChange.matches(YES_NO_REGEX)) {
             UI.clearTerminalAndPrintNewPage();
             UI.printInvalidConfirmation();
             confirmChange = input.nextLine().toLowerCase();
@@ -171,17 +179,17 @@ public class IngredientList {
     }
 
     public static boolean isValidExpiryLength(long daysBetweenExpiryToday, String ingrName) {
-        Scanner input = new Scanner(System.in);
         if (daysBetweenExpiryToday > TEN_YEARS_IN_DAYS) {
             UI.printLongExpiryDateMsg();
+            Scanner input = new Scanner(System.in);
             String confirmDate = input.nextLine().toLowerCase();
-            while (!confirmDate.equals("y") && !confirmDate.equals("n")) {
+            while (!confirmDate.matches(YES_NO_REGEX)) {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printInvalidConfirmation();
                 confirmDate = input.nextLine().toLowerCase();
             }
             UI.clearTerminalAndPrintNewPage();
-            if (confirmDate.equals("n")) {
+            if (confirmDate.startsWith("n")) {
                 UI.printAskIngrExpiryDate(ingrName);
                 return false;
             }
@@ -238,12 +246,15 @@ public class IngredientList {
         } catch (NumberFormatException | FoodoramaException e) {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
+        if (Double.isInfinite(newWeight) | Double.isNaN(newWeight)) {
+            throw new FoodoramaException(UI.printNumericalInputInvalid("ingredient waste"));
+        }
         Double ingrWeight = ingredientList.get(ingrIndex).getWastage();
 
         UI.clearTerminalAndPrintNewPage();
         UI.printConfirmDishWastageEditMsg(ingrWeight, newWeight);
         String confirmChange = input.nextLine().toLowerCase();
-        while (!confirmChange.matches("^(y|yes|n|no)$")) {
+        while (!confirmChange.matches(YES_NO_REGEX)) {
             UI.clearTerminalAndPrintNewPage();
             UI.printInvalidConfirmation();
             confirmChange = input.nextLine().toLowerCase();
@@ -277,12 +288,15 @@ public class IngredientList {
             } catch (NumberFormatException | FoodoramaException e) {
                 throw new FoodoramaException(UI.getInvalidNumberMsg());
             }
+            if (Double.isInfinite(newWeight) | Double.isNaN(newWeight)) {
+                throw new FoodoramaException(UI.printNumericalInputInvalid("ingredient storage"));
+            }
             Double ingrWeight = ingredientList.get(ingrIndex).getIngredientWeight();
 
             UI.clearTerminalAndPrintNewPage();
             UI.printConfirmIngrStorageEditMsg(ingrWeight, newWeight);
             String confirmChange = input.nextLine().toLowerCase();
-            while (!confirmChange.matches("^(y|yes|n|no)$")) {
+            while (!confirmChange.matches(YES_NO_REGEX)) {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printInvalidConfirmation();
                 confirmChange = input.nextLine().toLowerCase();

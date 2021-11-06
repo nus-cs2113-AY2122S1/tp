@@ -59,7 +59,7 @@ public class DishList {
 
         int listSize = dishList.size(); //listSize = N
         String dishName = dishList.get(dishIndex).getDishName();
-        UI.printConfirmDelDish();
+        UI.printConfirmDelDish(dishName);
         String confirmDel = input.nextLine().toLowerCase();
         while (!confirmDel.matches(YES_NO_REGEX)) {
             UI.clearTerminalAndPrintNewPage();
@@ -108,6 +108,10 @@ public class DishList {
             newName = input.nextLine().toLowerCase();
         }
 
+        if (newName.isBlank()) {
+            throw new FoodoramaException(UI.getBlankName("dish"));
+        }
+
         UI.clearTerminalAndPrintNewPage();
         UI.printConfirmDishNameEditMsg(dishName, newName);
         String confirmChange = input.nextLine().toLowerCase();
@@ -145,8 +149,10 @@ public class DishList {
             } catch (NumberFormatException | FoodoramaException e) {
                 throw new FoodoramaException(UI.getInvalidNumberMsg());
             }
+            if (Double.isInfinite(newWeight) | Double.isNaN(newWeight)) {
+                throw new FoodoramaException(UI.printNumericalInputInvalid("dish waste"));
+            }
             Double dishWeight = dishList.get(dishIndex).getWastage();
-
             UI.clearTerminalAndPrintNewPage();
             UI.printConfirmDishWastageEditMsg(dishWeight, newWeight);
             String confirmChange = input.nextLine().toLowerCase();
@@ -157,7 +163,6 @@ public class DishList {
             }
             UI.clearTerminalAndPrintNewPage();
             if (confirmChange.startsWith(YES)) {
-
                 dishList.get(dishIndex).setDishWastage(newWeight);
                 UI.printDishWastageChanged(dishName, newWeight);
             } else {
