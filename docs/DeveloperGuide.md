@@ -168,17 +168,33 @@ The sequence diagram below illustrates the `execute()` function in `ViewContactC
 ![View Sequence Diagram](images/ViewContactCommandSequenceDiagram.png)
 
 ### <a name="Edit"></a>Editing a contact: `edit`
-This feature is processed using `EditContactParser` under `MainParser`. In order to edit a contact in the contact list,
-a user must enter a command in the form `edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-l <LINKEDIN>} {-te <TELEGRAM>} 
-{-tw <TWITTER>} {-e <EMAIL>}`. The user input will be parsed by `EditContactParser` methods `getIndexToStore` and 
-`parseContactDetails` to obtain a String array with the details to be edited. The user input will also be parsed
-by the [`IndexParser`](#IndexParser) to obtain the contact index, which identifies the contact in the contact list to be edited.
+This feature is processed using `EditContactCommand`. This feature allows the user to edit a contact in their contact 
+list, by entering a command in the form `edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-l <LINKEDIN>} {-te <TELEGRAM>} 
+{-tw <TWITTER>} {-e <EMAIL>}`. At least one detail must be specified by the user for the command to be valid. The user 
+can also specify `me` as an index to edit the personal contact's details.
 
-An `EditContactCommand` with the specified parameters will then be created and executed in `ConTech`. The sequence diagram below 
-shows how the whole process is carried out.
+The user's input is parsed in `MainParser` and `EditContactParser` and the implementation is similar to that of 
+`AddContactParser` .
+
+The user input will be parsed by `EditContactParser` methods `getIndexToStore` and 
+`parseContactDetails` to obtain a String array with the details to be edited.
+The user input will also be parsed by the [`IndexParser`](#IndexParser) to obtain the contact index, which identifies the contact in the 
+contact list to be edited.The sequence diagram below shows how the String array is obtained.
+
+![Edit Sequence Diagram](images/EditContactParserSequenceDiagram.png)
+
+Once the user's input is parsed and the index specified is obtained, an `EditContactCommand` with the specified 
+parameters will then be created and executed in `ConTech`. The sequence diagram below depicts the execution of 
+`EditContactCommand` for the index `me` as well as an invalid index `all`.
 
 ![Edit Sequence Diagram](images/EditContactCommandSequenceDiagram.png)
 
+If a valid contact index in the contact book is specified, the details to be edited will first be checked against the 
+contact book for duplicates. If there are duplicates, ConTech will prompt the user for confirmation before editing the 
+contact. If the user accepts or there are no duplicates, the `EditContactCommand` will be executed. The sequence diagram
+below depicts the execution of `EditContactCommand` for a contact in the contact list.
+
+![Edit Sequence Diagram](images/EditContactCommandDetailedSequenceDiagram.png)
 
 ### <a name="Delete"></a>Deleting contacts: `rm`
 This feature is processed using the `DeleteContactCommand`. Users can delete a specified contact, delete all contacts at
@@ -222,10 +238,16 @@ cancelled.
 
 ### <a name="Search"></a>Searching a contact: `search`
 This feature is processed using `SearchContactParser` under `MainParser`. In order to edit a contact in the contact list,
-a user must enter a command in the form `search {-n | -g | -l | -te | -tw | -e} <SEARCH QUERY>`. If no flag is specified, the search will be done
-on contact names buy default. From the user input, the search query and the search flag are obtained from the 
-`parseSearchQuery` and the `getDetailFlag` methods respectively. A `SearchContactCommand` with the specified parameters
-will be created and executed in `ConTech`. The sequence diagram below shows how the whole process is carried out.
+a user must enter a command in the form `search {-n | -g | -l | -te | -tw | -e} <SEARCH QUERY>`. If no flag is specified, 
+the search will be done on contact names buy default. 
+
+From the user input, the search query and the search flag are obtained from the `parseSearchQuery` and the `getDetailFlag`
+methods respectively. The sequence diagram below shows how the required parameters are obtained. 
+
+![Search Sequence Diagram](images/SearchContactParserSequenceDiagram.png)
+
+A `SearchContactCommand` with the specified parameters will then be created and executed in `ConTech`. The sequence 
+diagram below shows how the `SearchContactCommand` is executed.
 
 ![Search Sequence Diagram](images/SearchContactCommandSequenceDiagram.png)
 
@@ -255,6 +277,17 @@ sequence diagram below illustrates the process of executing `ImportContactComman
 ![Import Sequence Diagram](images/ImportContactCommandSequenceDiagram.png)
 
 Throughout the process of importing contacts, the alphabetical ordering of contacts is preserved.
+
+<a name="ComingSoon"></a>**Coming soon:** `import` currently does not support duplicate checks. This will be implemented 
+in future revisions to the application. Currently, 
+
+Current implementation ideas include:
+- import all with/without duplicates (use flag to specify)
+- manually check every single duplicate (inefficient, but can be an option with flag for users who want to check every duplicate)
+- allow Windows-style duplicate handling (Ignore, Ignore all, Cancel)
+- summarise every single duplicate and give user a one time confirmation to add/discard (no granularity)
+
+
 
 ### <a name="IndexParser"></a>Index Parser
 

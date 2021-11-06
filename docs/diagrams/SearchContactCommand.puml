@@ -2,88 +2,37 @@
 hide footbox
 'https://plantuml.com/sequence-diagram
 
--> ":MainParser": execute()
-activate ":MainParser"
-
-":MainParser" -> ":MainParser" :getCommandWord(userInput:String)
-activate ":MainParser"
-":MainParser" -> ":SearchContactParser" :parseSearchQuery(userInput:String)
-activate ":SearchContactParser"
-
-":SearchContactParser" -> ":SearchContactParser" :parseSearchQuery(userInput:String)
-activate ":SearchContactParser"
-":SearchContactParser" --> ":SearchContactParser" :searchInput:String
-deactivate ":SearchContactParser"
-
-":SearchContactParser" -> ":SearchContactParser" :getDetailFlag(searchInput:String))
-activate ":SearchContactParser"
-":SearchContactParser" --> ":SearchContactParser" :detailFlag:int
-deactivate ":SearchContactParser"
-
-":SearchContactParser" -> ":SearchContactParser" :parseSearchQuery(searchInput:String)
-activate ":SearchContactParser"
-":SearchContactParser" --> ":SearchContactParser" :query:String
-deactivate ":SearchContactParser"
-
-
-":SearchContactParser" --> ":MainParser" : SearchContactCommand(query:String, detailFlag:int)
-deactivate ":SearchContactParser"
-
-":MainParser" -> ":SearchContactCommand" : SearchContactCommand:Command
+-> ":SearchContactCommand": execute()
 activate ":SearchContactCommand"
+
 
 ":SearchContactCommand" -> ":ContactList" : searchContact(query:String, detailFlag:int)
 activate ":ContactList"
 
 loop for all contacts
-":ContactList" -> ":ContactList" :getDetailFlag(userInput:String)
-loop#gold #lightgreen for all contacts
-    alt contact.getName().contains(query)
-    ":ContactList" -> ":TextUI" : viewContactMessage(contact, i)
-    activate ":TextUI"
-    deactivate ":TextUI"
-    end
+    loop #lightgrey for all contacts
+    ":ContactList" -> ":ContactList" :getContactAtIndex(i:int)
+    activate ":ContactList"
+    ":ContactList" --> ":ContactList" :contact:Contact
+    deactivate ":ContactList"
 
-    else GITHUB_INDEX
-    alt contact.getGithub().contains(query)
-    ":ContactList" -> ":TextUI" : viewContactMessage(contact, i)
-    activate ":TextUI"
-    deactivate ":TextUI"
+        opt#gold #lightgreen hasDetailMatches(query, detailType, i, contact)
+        ":ContactList" -> ":TextUI" :viewContactMessage(contact:Contact, Index:int)
+        activate ":TextUI"
+        ":TextUI" --> ":ContactList"
+        deactivate ":TextUI"
+        ":ContactList" -> ":ContactList" : matches++
     end
+end
 
-    else LINKEDIN_INDEX
-    alt contact.getLinkedIn().contains(query)
-    ":ContactList" -> ":TextUI" : viewContactMessage(contact, i)
-    activate ":TextUI"
-    deactivate ":TextUI"
-    end
-
-    else TELEGRAM_INDEX
-    alt contact.getTelegram().contains(query)
-    ":ContactList" -> ":TextUI" : viewContactMessage(contact, i)
-    activate ":TextUI"
-    deactivate ":TextUI"
-    end
-    else TWITTER_INDEX
-    alt contact.getTwitter().contains(query)
-    ":ContactList" -> ":TextUI" : viewContactMessage(contact, i)
-    activate ":TextUI"
-    deactivate ":TextUI"
-    end
-    else EMAIL_INDEX
-    alt contact.getEmail().contains(query)
-    ":ContactList" -> ":TextUI" : viewContactMessage(contact, i)
-    activate ":TextUI"
-    deactivate ":TextUI"
-    end end
+opt#gold #lightgreen matches == 0
+":ContactList"->":TextUI":searchNoResultsFoundMessage()
+activate ":TextUI"
+":TextUI" --> ":ContactList"
+deactivate ":TextUI"
 end
 
 ":ContactList"-->":SearchContactCommand"
-deactivate ":ContactList"
-
-":SearchContactCommand"-->":MainParser"
 deactivate ":SearchContactCommand"
-deactivate ":MainParser"
-
 
 @enduml
