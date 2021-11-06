@@ -62,6 +62,7 @@ upon.
 
 The Architecture Diagram given below explains the high-level design of the App. 
 Given below is a quick overview of main components and how they interact with each other.
+
 ![Unimods](./resources/architecture.png)
 
 #### Main components of the architecture
