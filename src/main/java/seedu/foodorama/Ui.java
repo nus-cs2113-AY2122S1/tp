@@ -1022,19 +1022,45 @@ public class Ui {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "The weight of " + dishName + " wasted cannot be negative!" + System.lineSeparator()
                 + "Please enter a weight that is not negative:" + System.lineSeparator()
-                + LINE_DIVIDER);
+                + LINE_DIVIDER
+        );
+    }
+
+    public void printDishWasteValueHigh(String dishName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "The weight of " + dishName + " wasted is unusually greater than 10,000kg!" + System.lineSeparator()
+                + "Are you sure you want to add this weight? \n"
+                + "Enter 'y' to continue, or 'n' to disregard this command" + System.lineSeparator()
+                + LINE_DIVIDER
+        );
+    }
+
+    public String printNumericalInputInvalid(String type) {
+        return LINE_DIVIDER + System.lineSeparator()
+                + "The " + type + " is out of bounds. The Command has been disregarded."
+                + System.lineSeparator() + LINE_DIVIDER;
     }
 
     public void printInvalidDishLimitValue(String dishName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "The limit of " + dishName + "  cannot be negative!" + System.lineSeparator()
                 + "Please enter a weight that is not negative:" + System.lineSeparator()
-                + LINE_DIVIDER);
+                + LINE_DIVIDER
+        );
     }
 
-    public String printNumericalInputInvalid(String type) {
+    public void printConfirmDishWaste(String dishName, double dishWasteWeight) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Are you sure you want to add wasted " + dishName
+                + " that weighs " + dishWasteWeight + "kg? Type y for Yes and n for No."
+                + System.lineSeparator() + LINE_DIVIDER
+        );
+    }
+
+
+    public String getBlankName(String type) {
         return LINE_DIVIDER + System.lineSeparator()
-                + "The " + type + " is out of bounds!"
+                + "The " + type + " name cannot be blank!"
                 + System.lineSeparator() + LINE_DIVIDER;
     }
 

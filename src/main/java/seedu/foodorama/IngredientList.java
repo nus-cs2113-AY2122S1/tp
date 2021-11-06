@@ -148,6 +148,10 @@ public class IngredientList {
             newName = input.nextLine().toLowerCase();
         }
 
+        if (newName.isBlank()) {
+            throw new FoodoramaException(UI.getBlankName("ingredient"));
+        }
+
         UI.clearTerminalAndPrintNewPage();
         UI.printConfirmIngrEditMsg(ingrName, newName);
         String confirmChange = input.nextLine().toLowerCase();

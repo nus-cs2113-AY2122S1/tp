@@ -108,6 +108,10 @@ public class DishList {
             newName = input.nextLine().toLowerCase();
         }
 
+        if (newName.isBlank()) {
+            throw new FoodoramaException(UI.getBlankName("dish"));
+        }
+
         UI.clearTerminalAndPrintNewPage();
         UI.printConfirmDishNameEditMsg(dishName, newName);
         String confirmChange = input.nextLine().toLowerCase();
