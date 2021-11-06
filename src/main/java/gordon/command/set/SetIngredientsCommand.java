@@ -15,6 +15,13 @@ public class SetIngredientsCommand extends Command {
         this.ingredients = ingredients;
     }
 
+    /**
+     * <h2> void execute(cookbook).</h2>
+     *
+     * <p> This method calls the setIngredients function and prints the corresponding message</p>
+     *
+     * @param cookbook The recipe object to be referenced
+     */
     @Override
     public void execute(Cookbook cookbook) {
         System.out.println("Setting ingredients...");

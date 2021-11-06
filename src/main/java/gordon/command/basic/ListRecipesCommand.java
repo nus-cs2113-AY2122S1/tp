@@ -11,6 +11,13 @@ public class ListRecipesCommand extends Command {
         this.listType = listType;
     }
 
+    /**
+     * <h2> void execute(cookbook).</h2>
+     *
+     * <p> This method prints the name of every recipe in the cookbook, or all the tags in the cookbook</p>
+     *
+     * @param cookbook The recipe object to be referenced
+     */
     @Override
     public void execute(Cookbook cookbook) {
         if (listType.equals("listRecipes")) {

@@ -9,7 +9,7 @@
   1. [Add a recipe](#1-add-a-recipe-addrecipe)
   1. [Delete a recipe](#2-delete-a-recipe-deleterecipe)
   1. [Look up a recipe](#3-look-up-a-recipe-check)
-  1. [Display all recipes](#4-display-all-recipes-listrecipe)
+  1. [Display all recipes](#4-display-all-recipes-listrecipes)
   1. [Exit Gordon](#5-exit-gordon-exit)
   1. [Lend a hand](#6-lend-a-hand-help)
   1. [Set attributes of a recipe](#7-set-attributes-of-a-recipe-set)
@@ -42,7 +42,7 @@ like this output
 
 It's me, **Gordon v2.0**, and today, I'm gonna teach you donkeys how to use the Gordon application.
 
-I am a Command Line Interface (CLI)-based recipe database application, and I can help you to;
+I am a Command Line Interface (CLI)-based recipe database application, and I can help you to:
 
 1. Store your recipes (including ingredients and steps required)
 1. Check them when you're ready to cook
@@ -117,7 +117,7 @@ Method:
 - I'll list down the ingredients and steps required for said recipe
 - Finally, some good ******** food...
 
-**Quick reference:** | [**Contents**](#contents) | [**Cheat sheet**](#cheat-sheet) |
+**Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
 
 ---
 
@@ -147,7 +147,7 @@ OK! The recipe has been deleted from your cookbook.
 - I'll let you know that the recipe has been removed.
 - You can type `listRecipes` to confirm if the correct recipe has been removed.
 
-**Quick reference:** | [**Contents**](#contents) | [**Cheat sheet**](#cheat-sheet) |
+**Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
 
 ---
 
@@ -185,7 +185,7 @@ Method:
 
 * I'll show you the ingredients you need for that recipe, and the steps required to prepare it, as well as any other attributes you might have assigned it.
 
-**Quick reference:** | [**Contents**](#contents) | [**Cheat sheet**](#cheat-sheet) |
+**Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
 
 ---
 
@@ -210,7 +210,7 @@ Shows all recipes saved in my database.
 
 - I'll show you all the existing recipes saved in my database.
 
-**Quick reference:** | [**Contents**](#contents) | [**Cheat sheet**](#cheat-sheet) |
+**Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
 
 ---
 
@@ -234,7 +234,7 @@ Pack your bags, you're off the show
 
 * Pass me your apron...
 
-**Quick reference:** | [**Contents**](#contents) | [**Cheat sheet**](#cheat-sheet) |
+**Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
 
 ---
 
@@ -272,7 +272,7 @@ Shows you the proper format of commands.
 * I'll show you the proper format for using every command
 * Just type `help` anywhere in the terminal for a quick guide if you forget any command
 
-**Quick reference:** | [**Contents**](#contents) | [**Cheat sheet**](#cheat-sheet) |
+**Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
 
 ---
 
@@ -303,7 +303,7 @@ Sets the attributes of recipes, e.g. time needed, calories etc.
  
 `set Chicken Rice /calories 350`  
 `set Chicken Rice /difficulty hard`  
-`set Chicken Rice /price $3.00`  
+`set Chicken Rice /price 3.00`  
 `set Chicken Rice /time 20, 40`  
 `set Chicken Rice /ingredients Chicken + Rice`  
 `set Chicken Rice /steps Boil chicken + Cook rice + Serve`  
@@ -323,7 +323,7 @@ Setting steps...
 Steps set successfully.
 ```
 
-**Quick reference:** | [**Contents**](#contents) | [**Cheat sheet**](#cheat-sheet) |
+**Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
 
 ---
 
@@ -369,7 +369,7 @@ Searching by ingredient...
 2. Duck Rice
 ```
 
-**Quick reference:** | [**Contents**](#contents) | [**Cheat sheet**](#cheat-sheet) |
+**Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
 
 ---
 
@@ -378,17 +378,21 @@ Searching by ingredient...
 I've got a variety of tagging-related functions, for better organization of your recipes.
 
 #### 9.1 Adding Tags to Recipes: `tag`
+
 > Tag recipes in your cookbook.
 > 
 > #### Format: `tag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
+> 
 > * I'll name your tag as defined in `TAG_NAME`
 > * Within a recipe, you are not allowed to have duplicate tag names
 > * You can associate multiple tags to a single recipe in one command
 > 
 > #### Example of usage:
-> `tag / Mee Pok / Hawker Food + Noodles`
-> </br>
- `tag / Duck Rice / Hawker Food + Favorites`
+> 
+> ```
+> tag / Mee Pok / Hawker Food + Noodles
+> tag / Duck Rice / Hawker Food + Favorites
+> ```
 > 
 > #### Expected outcome
 > 
@@ -400,6 +404,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > ```
  
 #### 9.2 Untagging Tags from Recipes: `untag`
+
 > Untag recipes in your cookbook.
 >
 > #### Format: `untag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
@@ -425,6 +430,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > ```
 
 #### 9.3 Deleting Tags from Cookbook: `deleteTag`
+
 > Delete tags from your cookbook.
 >
 > #### Format: `deleteTag / TAG_NAME1 + TAG_NAME2 + ...`
@@ -433,6 +439,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > * You can delete multiple tags from your Cookbook in one command.
 >
 > #### Example of usage:
+> 
 > `deleteTag / Hawker Food + Noodles`
 > <br>
 > 
@@ -443,12 +450,15 @@ I've got a variety of tagging-related functions, for better organization of your
 > ```
 
 #### 9.4 Find a Recipe by their tag(s): `find`
+
 > Finds recipes by their tag(s)
 >
 > #### Format: `find /tag TAG_NAME1 + TAG_NAME2 + ...`
+> 
 > * I'll search for recipes that have **ALL** tags as defined in `TAG_NAME`.
 >
 > #### Example of usage:
+> 
 > Assume that _Mee Pok_ is under _Hawker Food_ and _Noodles_ tag
 > <br>
 > Assume that _Duck Rice_ is under _Hawker Food_ and _Favorites_ tag
@@ -458,6 +468,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > ```
 >
 > #### Expected outcome
+> 
 > ```
 > Searching by tags...
 > 1. Mee Pok
@@ -468,16 +479,19 @@ I've got a variety of tagging-related functions, for better organization of your
 > ```
 
 #### 9.5 List all your Tags: `listTags`
+
 > List all the tags in your Cookbook.
 >
 > #### Format: `listTags`
 >
 > #### Example of usage:
+> 
 > ```
 > listTags
 > ```
 >
 > #### Expected outcome
+> 
 > ```
 > 1. Hawker Food
 > 2. Noodles
@@ -491,7 +505,7 @@ in the same directory where you ran the app. It loads the recipes when you start
 
 <div markdown="span" class="alert alert-danger">
 
-:exclamation: **Warning:** It is not advised to edit the save file directly unless you are very 
+**Warning:** It is not advised to edit the save file directly unless you are very 
 familiar with the syntax of how the file structured. Misuse may cause the save file to be deleted
 altogether, or cause errors in the main software. If the program fails to start, close the application
 and delete the save file before trying again.
@@ -508,7 +522,7 @@ Instruction | Command format
 [Add a recipe](#1-add-a-recipe-addrecipe) | `addRecipe RECIPE_NAME /ingredients INGREDIENTS /steps STEPS`
 [Delete a recipe](#2-delete-a-recipe-deleterecipe) | `deleteRecipe RECIPE_INDEX`
 [Look up a recipe](#3-look-up-a-recipe-check) | `check RECIPE_NAME`
-[Display all recipes](#4-display-all-recipes-listrecipe) | `listRecipes`
+[Display all recipes](#4-display-all-recipes-listrecipes) | `listRecipes`
 [Exit Gordon](#5-exit-gordon-exit) | `exit`
 [Get some help](#6-lend-a-hand-help) | `help`
 [Set attributes of a recipe](#7-set-attributes-of-a-recipe-set) | `set RECIPE_NAME /ATTRIBUTE_NAME ATTRIBUTE_VALUE`

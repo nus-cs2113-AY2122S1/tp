@@ -15,6 +15,13 @@ public class SetStepsCommand extends Command {
         this.steps = steps;
     }
 
+    /**
+     * <h2> void execute(cookbook).</h2>
+     *
+     * <p> This method calls the setSteps function and prints the corresponding message</p>
+     *
+     * @param cookbook The recipe object to be referenced
+     */
     @Override
     public void execute(Cookbook cookbook) {
         System.out.println("Setting steps...");

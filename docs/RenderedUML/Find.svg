@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="256px" preserveAspectRatio="none" style="width:888px;height:256px;background:#FFFFFF;" version="1.1" viewBox="0 0 888 256" width="888.8px" zoomAndPan="magnify"><defs/><g><rect fill="#FFDAB9" height="182.9949" style="stroke:#000000;stroke-width:0.8000000000000002;" width="8" x="63.2" y="53.6379"/><rect fill="#FFDAB9" height="20" style="stroke:#000000;stroke-width:0.8000000000000002;" width="8" x="67.2" y="83.1969"/><rect fill="#FFDAB9" height="104.677" style="stroke:#000000;stroke-width:0.8000000000000002;" width="8" x="345.6" y="131.9559"/><rect fill="#FFDAB9" height="70.318" style="stroke:#000000;stroke-width:0.8000000000000002;" width="8" x="592.8" y="155.1148"/><rect fill="#FFDAB9" height="11.2" style="stroke:#000000;stroke-width:0.8000000000000002;" width="8" x="847.2" y="197.4328"/><rect fill="#FFFFFF" height="47.918" style="stroke:#000000;stroke-width:1.6000000000000003;" width="328" x="556" y="167.1148"/><line style="stroke:#000000;stroke-width:0.8000000000000002;stroke-dasharray:5.0,5.0;" x1="67.2" x2="67.2" y1="28.8789" y2="251.0328"/><line style="stroke:#000000;stroke-width:0.8000000000000002;stroke-dasharray:5.0,5.0;" x1="349.6" x2="349.6" y1="28.8789" y2="251.0328"/><line style="stroke:#000000;stroke-width:0.8000000000000002;stroke-dasharray:5.0,5.0;" x1="596.8" x2="596.8" y1="28.8789" y2="251.0328"/><line style="stroke:#000000;stroke-width:0.8000000000000002;stroke-dasharray:5.0,5.0;" x1="851.2" x2="851.2" y1="28.8789" y2="251.0328"/><rect fill="#FEFECE" height="24.0789" style="stroke:#000000;stroke-width:1.2000000000000002;" width="48" x="43.2" y="4"/><text fill="#000000" font-family="Arial" font-size="11.2" lengthAdjust="spacing" textLength="36.8" x="48.8" y="20.1055">:Parser</text><rect fill="#FEFECE" height="24.0789" style="stroke:#000000;stroke-width:1.2000000000000002;" width="144" x="277.6" y="4"/><text fill="#000000" font-family="Arial" font-size="11.2" lengthAdjust="spacing" textLength="132.8" x="283.2" y="20.1055">:FindIngredientsCommand</text><rect fill="#FEFECE" height="24.0789" style="stroke:#000000;stroke-width:1.2000000000000002;" width="65.6" x="564" y="4"/><text fill="#000000" font-family="Arial" font-size="11.2" lengthAdjust="spacing" textLength="54.4" x="569.6" y="20.1055">:Cookbook</text><rect fill="#FEFECE" height="24.0789" style="stroke:#000000;stroke-width:1.2000000000000002;" width="49.6" x="826.4" y="4"/><text fill="#000000" font-family="Arial" font-size="11.2" lengthAdjust="spacing" textLength="38.4" x="832" y="20.1055">:Recipe</text><rect fill="#FFDAB9" height="182.9949" style="stroke:#000000;stroke-width:0.8000000000000002;" width="8" x="63.2" y="53.6379"/><rect fill="#FFDAB9" height="20" style="stroke:#000000;stroke-width:0.8000000000000002;" width="8" x="67.2" y="83.1969"/><rect fill="#FFDAB9" height="104.677" style="stroke:#000000;stroke-width:0.8000000000000002;" width="8" x="345.6" y="131.9559"/><rect fill="#FFDAB9" height="70.318" style="stroke:#000000;stroke-width:0.8000000000000002;" width="8" x="592.8" y="155.1148"/><rect fill="#FFDAB9" height="11.2" style="stroke:#000000;stroke-width:0.8000000000000002;" width="8" x="847.2" y="197.4328"/><polygon fill="#000000" points="53.6,50.4379,61.6,53.6379,53.6,56.8379,56.8,53.6379" style="stroke:#000000;stroke-width:0.8000000000000002;"/><line style="stroke:#000000;stroke-width:1.6000000000000003;stroke-dasharray:2.0,2.0;" x1="0" x2="58.4" y1="53.6379" y2="53.6379"/><text fill="#000000" font-family="Arial" font-size="10.4" lengthAdjust="spacing" textLength="48" x="5.6" y="49.834">setParse()</text><line style="stroke:#000000;stroke-width:1.6000000000000003;" x1="71.2" x2="108.8" y1="72.7969" y2="72.7969"/><line style="stroke:#000000;stroke-width:1.6000000000000003;" x1="108.8" x2="108.8" y1="72.7969" y2="83.1969"/><line style="stroke:#000000;stroke-width:1.6000000000000003;" x1="76" x2="108.8" y1="83.1969" y2="83.1969"/><polygon fill="#000000" points="84,79.9969,76,83.1969,84,86.3969,80.8,83.1969" style="stroke:#000000;stroke-width:0.8000000000000002;"/><text fill="#000000" font-family="Arial" font-size="10.4" lengthAdjust="spacing" textLength="105.6" x="80.8" y="68.993">parseName(String line)</text><line style="stroke:#000000;stroke-width:1.6000000000000003;stroke-dasharray:2.0,2.0;" x1="75.2" x2="108.8" y1="102.3969" y2="102.3969"/><line style="stroke:#000000;stroke-width:1.6000000000000003;stroke-dasharray:2.0,2.0;" x1="108.8" x2="108.8" y1="102.3969" y2="112.7969"/><line style="stroke:#000000;stroke-width:1.6000000000000003;stroke-dasharray:2.0,2.0;" x1="71.2" x2="108.8" y1="112.7969" y2="112.7969"/><polygon fill="#000000" points="79.2,109.5969,71.2,112.7969,79.2,115.9969,76,112.7969" style="stroke:#000000;stroke-width:0.8000000000000002;"/><polygon fill="#000000" points="336,128.7559,344,131.9559,336,135.1559,339.2,131.9559" style="stroke:#000000;stroke-width:0.8000000000000002;"/><line style="stroke:#000000;stroke-width:1.6000000000000003;" x1="71.2" x2="340.8" y1="131.9559" y2="131.9559"/><text fill="#000000" font-family="Arial" font-size="10.4" lengthAdjust="spacing" textLength="259.2" x="76.8" y="128.152">FindIngredientsCommand(ArrayList&lt;String&gt; ingredients)</text><polygon fill="#000000" points="583.2,151.9148,591.2,155.1148,583.2,158.3148,586.4,155.1148" style="stroke:#000000;stroke-width:0.8000000000000002;"/><line style="stroke:#000000;stroke-width:1.6000000000000003;" x1="353.6" x2="588" y1="155.1148" y2="155.1148"/><text fill="#000000" font-family="Arial" font-size="10.4" lengthAdjust="spacing" textLength="224" x="359.2" y="151.3109">filterByIngredients(ArrayList&lt;String&gt; ingredients)</text><path d="M556,167.1148 L614.4,167.1148 L614.4,171.9148 L606.4,179.9148 L556,179.9148 L556,167.1148 " fill="#EEEEEE" style="stroke:#000000;stroke-width:0.8000000000000002;"/><rect fill="none" height="47.918" style="stroke:#000000;stroke-width:1.6000000000000003;" width="328" x="556" y="167.1148"/><text fill="#000000" font-family="Arial" font-size="10.4" font-weight="bold" lengthAdjust="spacing" textLength="22.4" x="568" y="177.6699">loop</text><text fill="#000000" font-family="Arial" font-size="8.8" font-weight="bold" lengthAdjust="spacing" textLength="67.2" x="626.4" y="176.9691">[no. of recipes]</text><polygon fill="#000000" points="837.6,194.2328,845.6,197.4328,837.6,200.6328,840.8,197.4328" style="stroke:#000000;stroke-width:0.8000000000000002;"/><line style="stroke:#000000;stroke-width:1.6000000000000003;" x1="600.8" x2="842.4" y1="197.4328" y2="197.4328"/><text fill="#000000" font-family="Arial" font-size="10.4" lengthAdjust="spacing" textLength="231.2" x="606.4" y="193.6289">containsIngredients(ArrayList&lt;String&gt; ingredients)</text><polygon fill="#000000" points="609.6,205.4328,601.6,208.6328,609.6,211.8328,606.4,208.6328" style="stroke:#000000;stroke-width:0.8000000000000002;"/><line style="stroke:#000000;stroke-width:1.6000000000000003;stroke-dasharray:2.0,2.0;" x1="604.8" x2="850.4" y1="208.6328" y2="208.6328"/><line style="stroke:#000000;stroke-width:1.6000000000000003;" x1="844" x2="858.4" y1="201.4328" y2="215.8328"/><line style="stroke:#000000;stroke-width:1.6000000000000003;" x1="844" x2="858.4" y1="215.8328" y2="201.4328"/><polygon fill="#000000" points="362.4,222.2328,354.4,225.4328,362.4,228.6328,359.2,225.4328" style="stroke:#000000;stroke-width:0.8000000000000002;"/><line style="stroke:#000000;stroke-width:1.6000000000000003;stroke-dasharray:2.0,2.0;" x1="357.6" x2="596" y1="225.4328" y2="225.4328"/><line style="stroke:#000000;stroke-width:1.6000000000000003;" x1="589.6" x2="604" y1="218.2328" y2="232.6328"/><line style="stroke:#000000;stroke-width:1.6000000000000003;" x1="589.6" x2="604" y1="232.6328" y2="218.2328"/><polygon fill="#000000" points="76,233.4328,68,236.6328,76,239.8328,72.8,236.6328" style="stroke:#000000;stroke-width:0.8000000000000002;"/><line style="stroke:#000000;stroke-width:1.6000000000000003;stroke-dasharray:2.0,2.0;" x1="71.2" x2="348.8" y1="236.6328" y2="236.6328"/><line style="stroke:#000000;stroke-width:1.6000000000000003;" x1="342.4" x2="356.8" y1="229.4328" y2="243.8328"/><line style="stroke:#000000;stroke-width:1.6000000000000003;" x1="342.4" x2="356.8" y1="243.8328" y2="229.4328"/><line style="stroke:#000000;stroke-width:1.6000000000000003;" x1="60" x2="74.4" y1="229.4328" y2="243.8328"/><line style="stroke:#000000;stroke-width:1.6000000000000003;" x1="60" x2="74.4" y1="243.8328" y2="229.4328"/><!--MD5=[b560e90b8848117b935f6677e16d882f]
+@startuml
+
+hide footbox
+
+!include Style.puml
+skinparam sequence {
+ParticipantBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor peachpuff
+}
+
+skinparam sequenceArrowColor black
+
+- -> ":Parser": setParse()
+activate ":Parser"
+
+' Name
+":Parser" -> ":Parser": parseName(String line)
+activate ":Parser"
+
+":Parser" - -> ":Parser"
+deactivate ":Parser"
+
+":Parser" -> ":FindIngredientsCommand": FindIngredientsCommand(ArrayList<String> ingredients)
+activate ":FindIngredientsCommand"
+
+":FindIngredientsCommand" -> ":Cookbook" : filterByIngredients(ArrayList<String> ingredients)
+activate ":Cookbook"
+
+loop no. of recipes
+":Cookbook" -> ":Recipe": containsIngredients(ArrayList<String> ingredients)
+activate ":Recipe"
+
+":Recipe" - -> ":Cookbook"
+destroy ":Recipe"
+end
+
+":Cookbook" - -> ":FindIngredientsCommand"
+destroy ":Cookbook"
+
+":FindIngredientsCommand" - -> ":Parser"
+destroy ":FindIngredientsCommand"
+
+destroy ":Parser"
+
+@enduml
+
+@startuml
+
+hide footbox
+
+
+
+
+
+
+
+hide circle
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam shadowing false
+skinparam arrowThickness 2
+skinparam classAttributeIconSize 0
+skinparam sequence {
+ParticipantBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor peachpuff
+}
+
+skinparam sequenceArrowColor black
+
+- -> ":Parser": setParse()
+activate ":Parser"
+
+":Parser" -> ":Parser": parseName(String line)
+activate ":Parser"
+
+":Parser" - -> ":Parser"
+deactivate ":Parser"
+
+":Parser" -> ":FindIngredientsCommand": FindIngredientsCommand(ArrayList<String> ingredients)
+activate ":FindIngredientsCommand"
+
+":FindIngredientsCommand" -> ":Cookbook" : filterByIngredients(ArrayList<String> ingredients)
+activate ":Cookbook"
+
+loop no. of recipes
+":Cookbook" -> ":Recipe": containsIngredients(ArrayList<String> ingredients)
+activate ":Recipe"
+
+":Recipe" - -> ":Cookbook"
+destroy ":Recipe"
+end
+
+":Cookbook" - -> ":FindIngredientsCommand"
+destroy ":Cookbook"
+
+":FindIngredientsCommand" - -> ":Parser"
+destroy ":FindIngredientsCommand"
+
+destroy ":Parser"
+
+@enduml
+
+PlantUML version 1.2021.11(Sat Oct 02 21:26:11 SGT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: en
+Country: SG
+--></g></svg>

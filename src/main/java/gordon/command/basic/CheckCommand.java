@@ -11,6 +11,13 @@ public class CheckCommand extends Command {
         this.recipeName = recipeName;
     }
 
+    /**
+     * <h2> void execute(cookbook).</h2>
+     *
+     * <p> This method calls the checkRecipe function and prints the recipe</p>
+     *
+     * @param cookbook The recipe object to be referenced
+     */
     @Override
     public void execute(Cookbook cookbook) {
         try {
