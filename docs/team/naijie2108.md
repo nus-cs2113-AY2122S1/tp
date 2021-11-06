@@ -71,8 +71,8 @@ How the `OverallTaskList` class works:
 2. Both `Task` and `GradableTask` objects are converted to `OverallTask` objects first before being inserted into
    `OverallTaskList`.
 3. When the `OverallTaskList` object is instantiated, a `ModuleList` object from a semester is passed to its
-   constructor.
-![alt_text](../media/OverallTaskListConstructorSequenceDiagram.png "image_tooltip") <br>
+   constructor. <br>
+![alt_text](../media/OverallTaskListConstructorSequenceDiagram.png "image_tooltip") 
 4. The constructor calls the method `addAllModuleListTasks(module list)` which converts and adds all the tasks in the
    module list into `OverallTaskList`.
 5. Once the object is instantiated, the following methods can be called to sort and print the tasks in the
