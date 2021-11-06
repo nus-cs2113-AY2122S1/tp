@@ -50,5 +50,6 @@ Designed for fast typists, it can help to augment the day-to-day tasks of a libr
 4. Assisted in product testing and maintaining general code consistency
 
 ### Review/mentoring contributions
-#### PRs Reviewed 
-1. 
+#### Teammates' PRs Reviewed 
+1. https://github.com/AY2122S1-CS2113-T16-1/tp/pull/187
+2. https://github.com/AY2122S1-CS2113-T16-1/tp/pull/23
