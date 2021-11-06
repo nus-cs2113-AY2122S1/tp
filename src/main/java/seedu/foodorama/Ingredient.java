@@ -103,7 +103,7 @@ public class Ingredient implements Comparable<Ingredient> {
         double userLimit;
         try {
             userLimit = Double.parseDouble(inputLimit);
-            while(userLimit < 0) {
+            while (userLimit < 0) {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printInvalidIngrLimitValue(ingredientName);
                 inputLimit = in.nextLine();
