@@ -37,9 +37,11 @@ public class Parser {
             simplifiedUserResponse = removeFirstParam(userResponse, "set");
             return SetCommandParser.parse(simplifiedUserResponse);
         case HELP:
-            return HelpCommandParser.parse();
+            simplifiedUserResponse = removeFirstParam(userResponse, "help");
+            return HelpCommandParser.parse(simplifiedUserResponse);
         case EXIT:
-            return ExitCommandParser.parse();
+            simplifiedUserResponse = removeFirstParam(userResponse, "exit");
+            return ExitCommandParser.parse(simplifiedUserResponse);
         case INVALID:
             // Fallthrough
         default:

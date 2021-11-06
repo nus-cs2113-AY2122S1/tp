@@ -43,6 +43,9 @@ public class CommandFormat {
     public static final String FIND_MODULE_FORMAT =
             "find module [MODULE_CODE] {verbose}";
 
+    public static final String HELP_FORMAT =
+            "help";
+
     public static final String SET_GRADE_FORMAT =
             "set grade [MODULE_CODE] [GRADE]";
 

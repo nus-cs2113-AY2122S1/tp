@@ -161,4 +161,11 @@ public class ParserTest {
         String userResponse = "set grade cs1010";
         assertThrows(DukeException.class, () -> Parser.parse(userResponse));
     }
+
+    @Test
+    public void parseCommand_extraParameter_exceptionThrown() {
+        assertThrows(DukeException.class, () -> Parser.parse("help invalid"));
+        assertThrows(DukeException.class, () -> Parser.parse("exit invalid"));
+        assertThrows(DukeException.class, () -> Parser.parse("list module invalid"));
+    }
 }
