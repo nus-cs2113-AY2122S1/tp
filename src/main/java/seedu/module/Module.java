@@ -273,18 +273,15 @@ public class Module extends BaseModule {
         for (int i = 0; i < GRADES.length; i++) {
             if (gradeToCheck.equals(GRADES[i])) {
                 gradeType = TextUi.GRADED;
-                System.out.println("1");
                 return gradeType;
             }
         }
         for (int i = 0; i < SU_GRADES.length; i++) {
             if (gradeToCheck.equals(SU_GRADES[i])) {
                 gradeType = TextUi.UNGRADED;
-                System.out.println("2");
                 return gradeType;
             }
         }
-        System.out.println("3");
         throw new UniModsException(TextUi.ERROR_INVALID_GRADE);
     }
 }
