@@ -181,8 +181,9 @@ Examples:
 <hr>
 
 ### Assessment
-> 💡 **Note:**<br />
+> 💡 **Notes:**<br />
 > If multiple input fields are incorrect, only one of the errors will be explicitly shown.
+> For decimal values, only up to 2 decimal places will be displayed.
 #### Listing all assessments in a class: `list_assessments`
 List all assessments in a class.
 
