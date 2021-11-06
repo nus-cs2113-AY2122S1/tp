@@ -25,15 +25,33 @@ done in an efficient manner.
     - [Removing an item: `rm`](#removing-an-item)
     - [Editing an item: `edit`](#editing-an-item)
     - [Exiting the program: `exit`](#exiting-the-program)
+- [Data Storage](#data-storage)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
 ## Quick Start
 
-1. Ensure that you have Java `11` or above installed.
+1. Ensure that you have Java `11` or above installed (can be verified by opening a command prompt or terminal and running `java -version`).
 2. Down the latest version of `libmgr.jar` from [here](https://github.com/AY2122S1-CS2113-T16-1/tp/releases).
 3. Copy the file to the folder you want to use as the _home folder_ for Libmgr.
 4. Open a terminal/command prompt and run `java -jar libmgr.jar` to start the application.
+5. You will be greeted with the banner
+```
+        _.-"\
+    _.-"     \
+ ,-"          \
+( \            \
+ \ \            \
+  \ \            \
+   \ \         _.-;
+    \ \    _.-"   :
+     \ \,-"    _.-"
+      \(   _.-"  libmgr
+       `--"
+Welcome to libmgr
+Type 'help' to view available commands
+```
+6. View [Features](#features) to see what you can do in libmgr
 
 ## Features
 
@@ -52,16 +70,20 @@ e.g. For `add b t/TITLE i/ID ...`, entering `add a t/The Great Gatsbyi/0125` is 
 e.g. For `add b t/TITLE i/ID ...`, entering `ADD a t/The Great Gatsby i/0125` is invalid
 
 ### Adding an item
-Add a new item to the catalogue. Items can fall under one of four categories: Audio, Books, Magazines, Videos
+Add a new item to the catalogue. Items can fall under one of five categories: Audio, Books, Magazines, Videos and Miscellaneous.
 
 #### Adding an audio item
-Add a new audio item to the catalogue
+Add a new audio item to the catalogue.
 
 Format: `add a t/TITLE i/ID a/ARTIST d/DURATION`
 
-Example: `add a t/Thriller i/5920 a/Michael Jackson d/42:16`
+##### Usage Example: 
 
-Expected Output:
+`add a t/Thriller i/5920 a/Michael Jackson d/42:16`
+
+Adds an audio item to the catalogue titled `Thriller` with ID of `5920` by `Michael Jackson` and a duration of `42:16` 
+
+##### Expected Output:
 ```
 > add a t/Thriller i/5920 a/Michael Jackson d/42:16
   (+) Added new audio item to the catalogue
@@ -69,13 +91,17 @@ Expected Output:
 ```
 
 #### Adding a book item
-Add a new book item to the catalogue
+Add a new book item to the catalogue.
 
 Format: `add b t/TITLE i/ID a/AUTHOR`
 
-Example: `add b t/To Kill a Mockingbird i/2551 a/Harper Lee`
+##### Usage Example: 
 
-Expected Output:
+`add b t/To Kill a Mockingbird i/2551 a/Harper Lee`
+
+Adds a book item to the catalogue titled `To Kill a Mockingbird` with an ID of `2551`, authored by `Harper Lee`
+
+##### Expected Output:
 ```
 > add b t/To Kill a Mockingbird i/2551 a/Harper Lee
   (+) Added new book item to the catalogue
@@ -83,13 +109,17 @@ Expected Output:
 ```
 
 #### Adding a magazine item
-Add a new magazine item to the catalogue
+Add a new magazine item to the catalogue.
 
 Format: `add m t/TITLE i/ID p/PUBLISHER e/EDITION`
 
-Example: `add m t/Time Magazine i/58720a p/Time USA e/oct252021`
+##### Usage Example: 
 
-Expected Output:
+`add m t/Time Magazine i/58720a p/Time USA e/oct252021`
+
+Adds a magazine item to the catalogue titled `Time Magazine` with an ID of `58720a`, published by `TimeUSA`, edition of `oct252021`
+
+##### Expected Output:
 ```
 > add m t/Time Magazine i/58720a p/Time USA e/oct252021
   (+) Added new magazine item to the catalogue
@@ -97,13 +127,17 @@ Expected Output:
 ```
 
 #### Adding a video item
-Add a new video item to the catalogue
+Add a new video item to the catalogue.
 
 Format: `add v t/TITLE i/ID p/PUBLISHER e/DURATION`
 
-Example: `add v t/Casino Royale i/095680 p/Sony Pictures d/144 minutes`
+##### Usage Example: 
 
-Expected Output:
+`add v t/Casino Royale i/095680 p/Sony Pictures d/144 minutes`
+
+Adds a video item to the catalogue titled `Casino Royale` with an ID of `095680`, published by `Sony Pictures` and with a duration of `144 minutes`
+
+##### Expected Output:
 ```
 > add v t/Casino Royale i/095680 p/Sony Pictures d/144 minutes
   (+) Added new video item to the catalogue
@@ -111,13 +145,17 @@ Expected Output:
 ```
 
 #### Adding a miscellaneous item
-For any other item that cannot be categorised into the above-mentioned ones, they can be added using this command
+For any other item that cannot be categorised into the above-mentioned ones, they can be added using this command.
 
 Format: `add i t/TITLE i/ID`
 
-Example: `add i t/Scrabble i/0513895`
+##### Usage Example: 
 
-Expected Output:
+`add i t/Scrabble i/0513895`
+
+Adds a miscellaneous item to the catalogue titled `Scrabble` with an ID of `0513895`
+
+##### Expected Output:
 ```
 > add i t/Scrabble i/0513895
   (+) Added new item to the catalogue
@@ -125,13 +163,15 @@ Expected Output:
 ```
 
 ### List items
-List out all items in the catalogue
+List out all items in the catalogue.
 
 Format: `list`
 
-Example: `list`
+##### Usage Example: 
 
-Expected Output:
+`list`
+
+##### Expected Output:
 ```
   (+) Listing out all items in library
   ========================================
@@ -141,13 +181,15 @@ Expected Output:
 ```
 
 ### Listing items that are due today
-List the loaned items that need to be returned today
+List the loaned items that need to be returned today.
 
 Format: `deadline today`
 
-Example: `deadline today`
+##### Usage Example: 
 
-Expected Output:
+`deadline today`
+
+##### Expected Output:
 ```
   (+) Listing out loaned items that have to be returned today
   ========================================
@@ -156,13 +198,15 @@ Expected Output:
 ```
 
 ### Listing items that are overdue
-List the loaned items that already overdue but haven't been returned yet
+List the loaned items that already overdue but haven't been returned yet.
 
 Format: `deadline overdue`
 
-Example: `deadline overdue`
+##### Usage Example: 
 
-Expected Output:
+`deadline overdue`
+
+##### Expected Output:
 ```
   (+) Listing out loaned items that are overdue
   ========================================
@@ -171,15 +215,19 @@ Expected Output:
 ```
 
 ### Listing items that are due on a specific date
-List the loaned items that are due on a specific date given in the input
+List the loaned items that are due on a specific date given in the input.
 
 > ℹ️ `DUE_DATE` must be in the format of `dd-mm-yyyy` in order to be valid
 
 Format: `deadline d/dd-mm-yyyy`
 
-Example: `deadline d/03-11-2021`
+##### Usage Example: 
 
-Expected Output:
+`deadline d/03-11-2021`
+
+List the items with a due date of `03 November 2021`
+
+##### Expected Output:
 ```
   (+) Listing out loaned items that are due this date: 03-11-2021
   ========================================
@@ -199,9 +247,13 @@ Any items matching more than one keyword will be listed, those items matching th
 
 Format: Subset of `search i/ID t/TITLE s/STATUS c/CATEGORY`
 
-Example: `search s/LOANED c/Book`
+##### Usage Example: 
 
-Expected Output:
+`search s/LOANED c/Book`
+
+Searches the catalogue for `Books` or items that are `Loaned`
+
+##### Expected Output:
 ```
   (+) Here are the searching results in library
   ========================================
@@ -215,9 +267,13 @@ Reserves an item for a specific person.
 
 Format: `res i/ID u/USERNAME`
 
-Example: `res i/2551 u/johnsmith`
+##### Usage Example: 
 
-Expected Output:
+`res i/2551 u/johnsmith`
+
+Sets aside an item with ID of `2551` for user `johnsmith`
+
+##### Expected Output:
 ```
 > res i/2551 u/johnsmith
   (+) You have successfully reserved an item:
@@ -229,9 +285,13 @@ Make a previously reserved item available again.
 
 Format: `unres ID`
 
-Example: `unres 2551`
+##### Usage Example: 
 
-Expected Output:
+`unres 2551`
+
+Makes a previously `RESERVED` item with ID of `2551` as `AVAILABLE`
+
+##### Expected Output:
 ```
 > unres 2551
   (+) Item unreserved:
@@ -249,9 +309,13 @@ Loan out an item to an individual until a specific due date.
 
 Format: `loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)`
 
-Example: `loan i/2551 d/12-11-2021 u/johnsmith`
+##### Usage Example: 
 
-Expected Output:
+`loan i/2551 d/12-11-2021 u/johnsmith` 
+
+Mark item with ID of `2551` as `LOANED` to a user `johnsmith`, due to be returned on `12 November 2021`
+
+##### Expected Output:
 ```
 > loan i/2551 d/12-11-2021 u/johnsmith
   (+) Item has been loaned out:
@@ -266,9 +330,13 @@ Mark a previously loaned item as returned, making it available again.
 
 Format: `return ID`
 
-Example: `return 2551`
+##### Usage Example: 
 
-Expected Output:
+`return 2551` 
+
+Mark item with ID of `2551` which was previously `LOANED` as `AVAILABLE`
+
+##### Expected Output:
 ```
 > return 2551
   (+) Item has been returned:
@@ -285,18 +353,19 @@ Format: `edit ID MARKER/new attribute`
 * For Magazine, valid markers are: t/TITLE, i/ID, p/PUBLISHER and e/EDITION
 * For Video, valid markers are: t/TITLE, i/ID, p/PUBLISHER and d/DURATION
 
-Examples of usage:
+##### Usage Example:
 
-`edit 123 t/Harry Potter` Edits the title of an item with ID 123 to Harry Potter
+`edit 123 t/Harry Potter`
 
-Expected Output:
+Edits the title of an item with ID 123 to Harry Potter
+
+##### Expected Output:
 ```
   [B] 123 | AVAILABLE | The Hunger Games | Suzanne Collins
 > edit 123 t/Harry Potter
   (+) Edited item details:
   [B] 123 | AVAILABLE | Harry Potter | Suzanne Collins
 ```
-
 
 ### Removing an item
 Removes an existing item from the catalogue.
@@ -305,9 +374,12 @@ Format: `rm ID`
 
 * The item specified by `ID` will be deleted.
 
-Example: `rm 095680`
+##### Usage Example
+`rm 095680` 
 
-Expected Output:
+Removes item with ID of `095680` from the catalogue
+
+##### Expected Output:
 ```
 > rm 095680
   (+) Removed the following item:
@@ -319,18 +391,33 @@ Exits the program.
 
 Format: `exit`
 
-Expected Output:
+##### Expected Output:
 ```
 > exit
 See you soon!
 ```
 
+## Data Storage
+
+Upon starting the program, it will search for the presence of a file in the directory `./data/data.json`. This is a file on the disk that tracks the last recorded state of the catalogue.
+- If the file exists, `libmgr` will attempt to read and parse all information within to load into the catalogue before completing the startup process
+- If the file does not exist, `libmgr` will create a new file with an empty catalogue
+- If the file exists, but the content is malformed or corrupted, users will be warned. Any commands input by the user after startup will result in the file being wiped with a new empty catalogue.
+
+> ℹ️ Data is updated at the completion of execution of each command entered by the user
+
+> ⚠️ While the `data.json` file can be edited manually, it is highly recommended that users **do not** attempt to do so unnecessarily
+
 ## FAQ
 
-**Q**: What happens if I mistype a command not recognised by the program?
+**Q**: Can I port the program over to other devices
 
-**A**: A message will be shown saying that the program does not recognise your command.
-You can then key in a command again.
+**A**: Yes, just copy over the `libmgr.jar` along with the `./data/data.json` files to the target computer, and make sure that they are stored within the same folder, all data will be preserved
+
+**Q**: Can I manually edit the `data.json` file to change contents of the catalogue
+
+**A**: While it is possible for users to manually edit the data using tools such as text editors, we highly recommend against doing so, as the risk of corrupting the file or entering malfomred input is very high.
+When `libmgr` detects errors or corruptions in `data.json` it will overwrite the existing catalogue with a new, empty one.
 
 ## Command Summary
 

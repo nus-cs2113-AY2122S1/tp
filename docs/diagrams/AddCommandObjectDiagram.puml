@@ -1,0 +1,16 @@
+@startuml
+object "__newBook:Book__" as book
+book : title: "1984"
+book : id: "91"
+book : author: "George Orwell"
+book : status: null
+book : loanee: null
+
+object "__catalogue:Catalogue__" as catalogue
+
+object "__userCommand:AddBookCommand__" as cmd
+cmd : args = {null: "add b", "t/":"1984", "i/":"91", "a/":"George Orwell"}
+
+cmd -up-> book
+catalogue -> book
+@enduml
