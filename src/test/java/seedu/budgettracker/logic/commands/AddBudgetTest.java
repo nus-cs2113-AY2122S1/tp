@@ -5,6 +5,7 @@ import seedu.budgettracker.data.RecordList;
 import seedu.budgettracker.data.records.exceptions.DuplicateBudgetException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AddBudgetTest {
 
@@ -21,5 +22,20 @@ public class AddBudgetTest {
         assertEquals(20.00, currentBudgetList.getBudget().getAmount());
     }
 
-    
+    @Test
+    void addBudget_addingToExistingBudget_expectFail() {
+        double amount = 20.00;
+        int month = 10;
+
+        RecordList currentBudgetList = new RecordList(month);
+
+        try {
+            currentBudgetList.addBudget(amount, false);
+        } catch (DuplicateBudgetException e) {
+            e.printStackTrace();
+        }
+
+        assertThrows(DuplicateBudgetException.class,
+                ()-> currentBudgetList.addBudget(100, false));
+    }
 }
