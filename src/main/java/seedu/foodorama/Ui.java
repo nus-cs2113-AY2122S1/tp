@@ -1044,4 +1044,10 @@ public class Ui {
                 + System.lineSeparator() + LINE_DIVIDER
         );
     }
+
+    public String printNumericalInputInvalid(String type) {
+        return LINE_DIVIDER + System.lineSeparator()
+                + "The " + type + " is out of bounds"
+                + System.lineSeparator() + LINE_DIVIDER;
+    }
 }

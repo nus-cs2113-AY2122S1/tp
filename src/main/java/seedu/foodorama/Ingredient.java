@@ -91,7 +91,9 @@ public class Ingredient implements Comparable<Ingredient> {
         } catch (NumberFormatException e) {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
-
+        if (Double.isInfinite(ingredientWeightValue) | Double.isNaN(ingredientWeightValue)) {
+            throw new FoodoramaException(UI.printNumericalInputInvalid("ingredient storage"));
+        }
         ingredientWeight += ingredientWeightValue;
         UI.printStorage(ingredientName, ingredientWeight);
     }
@@ -111,6 +113,9 @@ public class Ingredient implements Comparable<Ingredient> {
             }
         } catch (NumberFormatException e) {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
+        }
+        if (Double.isInfinite(userLimit) | Double.isNaN(userLimit)) {
+            throw new FoodoramaException(UI.printNumericalInputInvalid("ingredient limit"));
         }
         limit = userLimit;
         UI.printLimitSet(ingredientName, limit);
@@ -132,7 +137,9 @@ public class Ingredient implements Comparable<Ingredient> {
         } catch (NumberFormatException e) {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
-
+        if (Double.isInfinite(ingredientWeightValue) | Double.isNaN(ingredientWeightValue)) {
+            throw new FoodoramaException(UI.printNumericalInputInvalid("ingredient waste"));
+        }
         ingredientWasteIngr += ingredientWeightValue;
         double totalWaste = ingredientWasteIngr + ingredientWasteDish;
         UI.printWastage(ingredientName, totalWaste);
