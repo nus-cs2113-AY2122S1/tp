@@ -1,5 +1,6 @@
 package seedu.typists.command;
 
+import seedu.typists.command.commands.*;
 import seedu.typists.ui.TextUi;
 
 import java.util.ArrayList;

@@ -45,6 +45,9 @@ The other core components of Typist:
 
 ### Command Component
 
+API: `C`
+How the `command` component work:
+1. When `command` is called upon 
 The Command Component contains different types of command actions. 
 The `Command Factory` is responsible for parsing the user input and returning the corresponding command class to be executed.
 
