@@ -22,9 +22,9 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-* User Guide and Developer Guide of [AddressBook Level-3](https://se-education.org/addressbook-level3/)
-
+List of sources/references:
+* [GSON](https://github.com/google/gson/) - Read and write JSON files.
+* [Address Book (Level 4)](https://se-education.org/addressbook-level4/) - Provide samples of User Guide (UG) and Developer Guide (DG).
 
 ## Design
 ### Architecture
