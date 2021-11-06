@@ -82,7 +82,7 @@ public class IngredientList {
             UI.printIngrNotExistMsg();
             assert ingredientList.size() == listSize : "ingredientList should be of size N";
         } else {
-            UI.printConfirmDelIngr();
+            UI.printConfirmDelIngr(ingredientName);
             String confirmDel = input.nextLine().toLowerCase();
             while (!confirmDel.matches("^(y|yes|n|no)$")) {
                 UI.clearTerminalAndPrintNewPage();

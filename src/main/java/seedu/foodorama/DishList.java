@@ -59,7 +59,7 @@ public class DishList {
 
         int listSize = dishList.size(); //listSize = N
         String dishName = dishList.get(dishIndex).getDishName();
-        UI.printConfirmDelDish();
+        UI.printConfirmDelDish(dishName);
         String confirmDel = input.nextLine().toLowerCase();
         while (!confirmDel.matches(YES_NO_REGEX)) {
             UI.clearTerminalAndPrintNewPage();
