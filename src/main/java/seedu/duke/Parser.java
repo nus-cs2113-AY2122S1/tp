@@ -59,6 +59,7 @@ public class Parser {
     public static final String ERROR_MISSING_PREFIXES
             = "Missing prefixes! Did you miss out some fields? Please try again.";
     public static final String ERROR_MISSING_NAME_ID = "Missing name/id! Please try again.";
+    public static final String ERROR_MISSING_ID = "Missing id that you wish to cut from! Please try again.";
     private static final String ERROR_MISSING_FIELDS = "Please do not leave your fields empty!";
     public static final String ERROR_EMAIL_FORMAT_WRONG = "TourPlanner has detected possible erroneous email! "
             + "Are you sure about this entry? \n";
@@ -128,7 +129,9 @@ public class Parser {
     }
 
     /**
-     * Separates command word and arguments.
+     * Separates user input into 2 based on the separator.
+     * If the value of the String after the separator is null,
+     * the second value of the String array will be returned as "".
      *
      * @param input     full user's input string
      * @param separator separator between command and argument/params strings
@@ -574,6 +577,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses user input, identifies data type to be cutting from based on the command filter,
+     * and returns the corresponding subclass of Command.
+     *
+     * @param params user input excluding "cut"
+     * @return command corresponding to the data type of the command filter
+     * @throws TourPlannerException if command filter is wrong/missing or id to cut is wrong/missing
+     */
     private static Command parseCut(String params) throws TourPlannerException {
         String[] identifierAndArgs = splitCommandString(params, " ");
         String identifier = identifierAndArgs[IDENTIFIER_INDEX];
@@ -581,15 +592,25 @@ public class Parser {
 
         switch (identifier) {
         case CLIENT_IDENTIFIER:
+            handleCutException(args);
             return new CutClientCommand(args);
         case TOUR_IDENTIFIER:
+            handleCutException(args);
             return new CutTourCommand(args);
         case FLIGHT_IDENTIFIER:
+            handleCutException(args);
             return new CutFlightCommand(args);
         case PACKAGE_IDENTIFIER:
+            handleCutException(args);
             return new CutClientPackageCommand(args);
         default:
             throw new TourPlannerException(ERROR_MISSING_IDENTIFIER);
+        }
+    }
+
+    private static void handleCutException(String args) throws TourPlannerException {
+        if (args.equals(EMPTY_STRING)) {
+            throw new TourPlannerException(ERROR_MISSING_ID);
         }
     }
 

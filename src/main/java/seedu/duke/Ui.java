@@ -52,14 +52,14 @@ public class Ui {
     }
 
     /**
-     * Prints a divider to the text Ui.
+     * Shows a divider to the user.
      */
     public void showLine() {
         show("____________________________________________________________");
     }
 
     /**
-     * Prints a welcome message to the user on the text Ui.
+     * Shows a welcome message to the user.
      */
     public void showWelcome() {
         showLine();
@@ -75,6 +75,9 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Shows a help message to the user, which includes all available commands in TourPlanner.
+     */
     public void showHelp() {
         String add = "add: Add information of all data types into the database.\n"
                 + "Prefixes can be input in any order.\n"
@@ -457,7 +460,7 @@ public class Ui {
     }
 
     /**
-     * Prints an exit message to the text Ui to acknowledge exiting the application.
+     * Shows an exit message to the user to acknowledge exiting the application.
      */
     public void showBye() {
         show(BYE_MESSAGE);

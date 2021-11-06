@@ -21,7 +21,7 @@ public class CutFlightCommand extends Command {
     }
 
     /**
-     * Executes the deletion of a specific flight from flight list, corresponding to the flightId.
+     * Executes deletion of the specific flight and related client packages, according to the flightId.
      */
     @Override
     public void execute() {
@@ -35,6 +35,11 @@ public class CutFlightCommand extends Command {
         }
     }
 
+    /**
+     * Executes deletion of the specific flight from the flight list.
+     *
+     * @throws TourPlannerException if flight cannot be found based on the flight id
+     */
     private void cutFlight() throws TourPlannerException {
         this.flight = flights.getFlightById(flightId);
         int newFlightCount = flights.getFlightCount() - 1;
@@ -44,6 +49,9 @@ public class CutFlightCommand extends Command {
         assert newFlightCount >= 0;
     }
 
+    /**
+     * Executes deletion of the client packages containing the specific flight from the client package list.
+     */
     private void cutFlightPackage() {
         ArrayList<ClientPackage> clientPackagesWithFlight = clientPackages.getClientPackageByFlight(flight);
         for (ClientPackage clientPackage: clientPackagesWithFlight) {

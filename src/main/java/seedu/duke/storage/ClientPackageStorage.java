@@ -62,38 +62,27 @@ public class ClientPackageStorage {
                     clientPackageId = line.substring(12);
                     rawClientPackage.add(clientPackageId);
                     hasClientPackage = true;
-                    System.out.println("a");
                 } else if (line.equals("Client: ")) {
                     line = scanner.nextLine();
                     clientId = line.substring(11);
                     rawClientPackage.add(clientId);
-                    System.out.println("b");
                     hasClient = true;
                 } else if (line.equals("Tour: ")) {
                     line = scanner.nextLine();
                     tourId = line.substring(9);
                     rawClientPackage.add(tourId);
-                    System.out.println("c");
                     hasTour = true;
                 } else if (line.equals("Flight: ")) {
                     line = scanner.nextLine();
                     flightId = line.substring(11);
                     rawClientPackage.add(flightId);
-                    System.out.println("d");
                     hasFlight = true;
                 }
 
-                System.out.println(hasClient);
-                System.out.println(hasFlight);
-                System.out.println(hasTour);
-                System.out.println(hasClientPackage);
-                System.out.println(isPackageAdded);
                 if (hasClient && hasFlight && hasTour && hasClientPackage && !isPackageAdded) {
-                    System.out.println("HELLO");
                     AddClientPackageCommand command = new AddClientPackageCommand(rawClientPackage.toArray(new String[]{}));
                     command.setData(clients, flights, tours, clientPackages, ui);
                     command.executeStorage();
-                    System.out.println("e");
                     isPackageAdded = true;
                 }
             }

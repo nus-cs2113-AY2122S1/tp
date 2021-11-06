@@ -12,7 +12,7 @@ public class CutClientCommand extends Command {
     private Client client;
 
     /**
-     * Class constructor for CutCommand.
+     * Class constructor for CutClientCommand.
      *
      * @param clientId ID of to-be-deleted client in the client list
      */
@@ -21,7 +21,7 @@ public class CutClientCommand extends Command {
     }
 
     /**
-     * Executes the deletion of a specific client from client list, corresponding to his/her index in the list.
+     * Executes deletion of the specific client and related client packages, according to the clientId.
      */
     @Override
     public void execute() {
@@ -35,6 +35,11 @@ public class CutClientCommand extends Command {
         }
     }
 
+    /**
+     * Executes deletion of the specific client from the client list.
+     *
+     * @throws TourPlannerException if client cannot be found based on the client id
+     */
     private void cutClient() throws TourPlannerException {
         this.client = clients.getClientById(clientId);
         final int newClientCount = clients.getClientCount() - 1;
@@ -45,6 +50,9 @@ public class CutClientCommand extends Command {
         assert newClientCount >= 0;
     }
 
+    /**
+     * Executes deletion of the client packages containing the specific client from the client package list.
+     */
     private void cutClientPackage() {
         ArrayList<ClientPackage> clientPackagesWithClient = clientPackages.getClientPackageByClient(client);
         for (ClientPackage clientPackage: clientPackagesWithClient) {
