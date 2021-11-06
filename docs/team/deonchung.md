@@ -6,7 +6,7 @@ This is a student project for a university software development course and I am 
 
 Given below are my contributions to the project.
 
-Code contributed: more than 1500 lines of
+Code contributed: more than 2000 lines of
 code. [RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=deonchung&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25)
 ### Features
 
@@ -36,6 +36,16 @@ code. [RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=deo
     * Justification: Users will be able to delete order from the order list.
     * Pull request: [[#119](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/119)]
 
+#### v2.1:
+
+* Fix bug in `addstock` where maximum quantity can be exceeded if the same medication with the same expiry date is added.
+  * Pull request: [[#255](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/255)]
+* Fix bug in `addprescription` where expired medication can be prescribed. 
+  * Pull request: [[#295](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/295)]
+* Fix bug in `addprescription` where the wrong error message is shown.
+  * Pull request: [[#306](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/306)]
+* Demo video for prescription features.
+    
 ### Enhancements to Existing Features
 
 * Implemented `Prescription Validator` method.
@@ -58,7 +68,8 @@ code. [RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=deo
         * Pull request: [[#89](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/89)]
     * `Order Validator` class
         * Pull request: [[#140](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/140)]
-        
+    * `AddStock`, `AddPrescription`, `DeletePrescription` and `DeleteStock`
+      * Pull request: [[#306](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/306)]
 * Added functionality for `addstock` command to limit number of medication for stock.
     * Functionality: User will not be able to input quantity above the maximum quantity. 
     * Justification: Prevents user from adding too much medication to the stock.
@@ -92,10 +103,10 @@ code. [RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=deo
 
 * Attended weekly team meetings.
 * Release management.
-* Pull Requests reviewed with non-trivial review comments. [[#298](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/298)
+* Pull Requests reviewed with non-trivial review comments. [[#298](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/298)]
 
 ### Community
 
-* Reported bugs and suggestions for other teams in the class. [[#1](https://github.com/deonchung/ped/issues/1)], [[#2](https://github.com/deonchung/ped/issues/2)],
-  [[#3](https://github.com/deonchung/ped/issues/3)], [[#4](https://github.com/deonchung/ped/issues/4)], [[#5](https://github.com/deonchung/ped/issues/5)],   
-  [[#6](https://github.com/deonchung/ped/issues/6)], [[#7](https://github.com/deonchung/ped/issues/7)]
+* Reported bugs and suggestions for other teams in the class. [[#1](https://github.com/deonchung/ped/issues/1), [#2](https://github.com/deonchung/ped/issues/2),
+  [#3](https://github.com/deonchung/ped/issues/3), [#4](https://github.com/deonchung/ped/issues/4), [#5](https://github.com/deonchung/ped/issues/5),   
+  [#6](https://github.com/deonchung/ped/issues/6), [#7](https://github.com/deonchung/ped/issues/7)]
