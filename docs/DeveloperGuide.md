@@ -73,7 +73,7 @@ employees accordingly.
 * `EmployeeUI` contains methods that display messages that interacts with the user.
 
 ### 1.3 Dish Component
-![dish](Diagrams/Dish.png)
+![dish](Diagrams/dish/Dish.png)
 
 The dish component consists of the `Dish`, `Menu`, `DishParser`, and `DishUI` classes.
 
@@ -102,7 +102,7 @@ The Finance component consists of the `Finance`, `FinanceList`, `FinanceParser`,
 * `FinanceUI` contains methods that display messages to interact with the user.
 
 ### 1.6 Storage Component
-![storage](Diagrams/Storage.png)
+![storage](Diagrams/storage/Storage.png)
 
 The storage component has a `Storage` class which can load data from the file and save data into the file with the 
 methods to encode and decode data.  
@@ -136,7 +136,7 @@ dishes stored include the dish name, price and discount. The following depicts t
 
 This is also illustrated in the sequence diagram below.
 
-![add](Diagrams/addDish.png)
+![add](Diagrams/dish/addDish.png)
 
 ### 2.ii.b Remove Dish
 The `remove-dish` feature is designed to allow users to remove dishes from their menu that are no longer needed. The 
@@ -149,6 +149,8 @@ following depicts the procedure for when a dish is removed:
    5. Lastly, `printRemoveDishMessage` in the `DishUI` class is called to display a confirmation message to the user.
 
 This is also illustrated in the sequence diagram below.
+
+![add](Diagrams/dish/removeDish.png)
 
 ### 2.ii.c Edit Dish
 The `edit-dish` feature is designed to allow users to edit the prices of the dishes in their menu. The following 
@@ -163,6 +165,8 @@ depicts the procedure for when a dish's price is edited:
 
 This is also illustrated in the sequence diagram below.
 
+![add](Diagrams/dish/editDish.png)
+
 ### 2.ii.d Discount Dish
 The `discount-dish` feature is designed to allow users to add discounts to the dishes in their menu. The following
 depicts the procedure for when a discount is added to a dish:
@@ -173,8 +177,6 @@ depicts the procedure for when a discount is added to a dish:
 4. If it is valid, `discountDish` calls for the `setDiscount` function in the `Dish` class to set the discount of the
    instance of `Dish` at `DISH_INDEX` to `DISCOUNT`.
 5. Lastly, `printDiscountDishMessage` in the `DishUI` class is called to display a confirmation message to the user.
-
-This is also illustrated in the sequence diagram below.
 
 ### 2.ii.e List Dishes
 The `list-dish` feature is designed to allow users view all the dishes in their menu. The prices of each dish are also
@@ -214,7 +216,7 @@ by mainParser to handle add finance command. Then, it creates new `Finance` obje
 the Finance object to the FinanceList and add the account number to the totalAccount. Lastly, it will call 
 printAddFinanceMessage() of FinanceUI to show the result.
 
-![add](Diagrams/addFinance.png)
+![add](Diagrams/finance/addFinance.png)
 
 ### 2.iv.b Remove Finance
 The mechanism of removing an account from the financeList is facilitated by `FinanceParser`. It is firstly identified 
@@ -223,7 +225,7 @@ will get the deletedAccount using get method from the financeList. Besides, it w
 financeList and the totalAccount will minus the account number of deletedAccount. Lastly, it will call
 printRemoveFinanceMessage() of FinanceUI to show the result.
 
-![remove](Diagrams/removeFinance.png)
+![remove](Diagrams/finance/removeFinance.png)
 
 ### 2.iv.c Edit Finance
 The mechanism of editing an account form the financeList is facilitated by `FinanceParser`. It is firstly identified 
@@ -232,7 +234,7 @@ will get the editedAccount using get method from the financeList. Besides,it wil
 method and change the totalAccount number. Lastly, it will call printEditFinanceMessage() of FinanceUI to 
 show the result.
 
-![edit](Diagrams/editFinance.png)
+![edit](Diagrams/finance/editFinance.png)
 
 ### 2.iv.d Show Finance Feature
 The mechanism of showing total account from the financeList is facilitated by `FinanceParser`. It is firstly
@@ -253,7 +255,7 @@ in the list. In `Storage`, it will encode the target object based its toString f
 Lastly, it will have four loops for the four different lists. Given below is the sequence diagram when storing
 employeeList and ingredientList.
 
-![save](Diagrams/save.png)
+![save](Diagrams/storage/save.png)
 
 ### 2.v.b Load Storage
 The mechanism of loading all the data from the storage file is facilitated by `Storage`. It will firstly create a file 
@@ -263,7 +265,7 @@ It goes in a loop until there are no more lines to read. Then, it will create ne
 Lastly, it will use `loadEmployeeFromStorage` method to different object to add them into target lists. Given below
 is the sequence diagram of loading `Employee` from the Storage.
 
-![load](Diagrams/load.png)
+![load](Diagrams/storage/load.png)
 
 ## 3. Appendix
 
