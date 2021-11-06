@@ -8,9 +8,10 @@ import seedu.duke.parser.Parser;
 import seedu.duke.trip.Trip;
 
 import java.util.ArrayList;
-import java.util.SortedMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TripTest {
 
