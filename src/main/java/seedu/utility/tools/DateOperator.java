@@ -1,8 +1,12 @@
-package seedu.utility.datetools;
+package seedu.utility.tools;
 
 import seedu.entry.Entry;
 
 import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.function.Predicate;
 
 /**
@@ -58,6 +62,18 @@ public abstract class DateOperator {
     }
 
     /**
+     * Create a DateTime format that only accounts for year. It is used to compare with user input
+     * 
+     * @return DateTimeFormatter object that compares year.
+     */
+    public static DateTimeFormatter getYearFormat() {
+        return new DateTimeFormatterBuilder().appendPattern("yyyy")
+                .parseDefaulting(ChronoField.MONTH_OF_YEAR, 1)
+                .parseDefaulting(ChronoField.DAY_OF_MONTH, 1)
+                .toFormatter();
+    }
+
+    /**
      * Creates a lambda that compares if the date associated to an item falls between 2 given dates.
      * 
      * @param startDate The lower bound of the valid date range.
@@ -87,4 +103,15 @@ public abstract class DateOperator {
     public static Predicate<Entry> sameEntryYear(int inputYear) {
         return item -> isSameYear(inputYear, item);
     }
+
+    public static int currentMonthInIndex() {
+        LocalDate currentDate = LocalDate.now();
+        return currentDate.getMonthValue() - 1;
+    }
+
+    public static Month currentMonth() {
+        LocalDate currentDate = LocalDate.now();
+        return currentDate.getMonth();
+    }
+    
 }

@@ -7,10 +7,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import seedu.commands.Command;
+import seedu.commands.budget.BalanceCommand;
 import seedu.commands.budget.SetThresholdCommand;
 import seedu.commands.expense.AddExpenseCommand;
 import seedu.commands.general.ClearAllEntriesCommand;
 import seedu.commands.currency.CurrencyType;
+import seedu.commands.general.ShowGraphByYearCommand;
 import seedu.commands.general.ShowGraphCommand;
 import seedu.commands.income.AddIncomeCommand;
 import seedu.commands.income.DeleteIncomeCommand;
@@ -33,7 +35,7 @@ import seedu.exceptions.InvalidIncomeDataFormatException;
 import seedu.exceptions.InvalidSettingsDataException;
 import seedu.utility.BudgetManager;
 import seedu.utility.CurrencyManager;
-import seedu.utility.FinancialTracker;
+import seedu.utility.Messages;
 import seedu.utility.Parser;
 
 import java.time.DateTimeException;
@@ -304,17 +306,17 @@ public class ParserTest {
     }
     
     @Test
-    public void addExpenseWithDate_validInput_validCommand() {
+    public void parseCommand_expenseInputWithDate_validCommand() {
         Parser testParser = new Parser();
-        String userInput = "add_ex d/asf a/10 c/food D/11/11/2021";
+        String userInput = "add_ex_d D/11/11/2121 d/asf a/10 c/food";
         Command testCommand = testParser.parseCommand(userInput);
         assertEquals(testCommand.getClass(), AddExpenseCommand.class);
     }
 
     @Test
-    public void addIncomeWithDate_validInput_validCommand() {
+    public void parseCommand_incomeInputWithoutDate_validCommand() {
         Parser testParser = new Parser();
-        String userInput = "add_in d/asf a/10 c/salary D/11/11/2100";
+        String userInput = "add_in c/salary d/a/g/adg/ad/gd/fag/ a/10";
         Command testCommand = testParser.parseCommand(userInput);
         assertEquals(testCommand.getClass(), AddIncomeCommand.class);
     }
@@ -369,5 +371,46 @@ public class ParserTest {
         Command underTest = testParser.parseCommand("show_graph");
         assertSame(ShowGraphCommand.class, underTest.getClass());
     }
+
+    @Test
+    public void parseCommand_validYearInputShowGraphCommand_correctCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("show_graph Y/   2021    ");
+        assertSame(ShowGraphByYearCommand.class, underTest.getClass());
+    }
+
+    @Test
+    public void parseCommand_invalidYearInputShowGraphCommand_correctCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("show_graph Y/2023 12as d v ");
+        assertEquals(Messages.INVALID_YEAR_MESSAGE,((InvalidCommand)underTest).getMessage());
+    }
     
+    @Test
+    public void parseCommand_validExpenseInputD_C_A_validCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("add_ex d//fa/gd/ff/s/f/sf/s/f/ c/food a/100");
+        assertEquals(AddExpenseCommand.class, underTest.getClass());
+    }
+
+    @Test
+    public void parseCommand_validExpenseInputC_D_A_validCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("add_ex c/food d//fa/gd/ff/s/f/sf/s/f/ a/100");
+        assertEquals(AddExpenseCommand.class, underTest.getClass());
+    }
+
+    @Test
+    public void parseCommand_validExpenseInputA_C_D_validCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("add_ex a/100 c/food d//fa/gd/ff/s/f/sf/s/f/");
+        assertEquals(AddExpenseCommand.class, underTest.getClass());
+    }
+    
+    @Test
+    public void parseCommand_validBalanceCommand_validBalanceCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("balance");
+        assertEquals(BalanceCommand.class, underTest.getClass());
+    }
 }
