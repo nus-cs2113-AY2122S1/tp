@@ -1,6 +1,36 @@
 # Developer Guide
 
-##Getting started
+## Table of Contents
+
+- [Getting Started](#getting-started)
+  - [Recommend software (for optimal compatability)](#recommended-software-for-optimal-compatability)
+  - [Setting up this project in your computer](#setting-up-this-project-in-your-computer)
+  
+
+- [Design & Implementation](#design--implementation)
+   - [Architecture](#architecture)
+   - [Command component](#command-component)
+       - [Add feature](#uadd-featureu)
+       - [Cut feature](#ucut-featureu)
+       - [List feature](#ulist-featureu)
+       - [Find feature](#ufind-featureu)
+   - [Ui component](#ui-component)
+   - [Storage component (chengxu to do)]()
+
+
+- [Product Scope](#product-scope)
+    - [Target user profile](#target-user-profile)
+    - [Value proposition](#value-proposition)
+
+
+- [User Stories](#user-stories)
+
+
+- [Non-Functional Requirements](#non-functional-requirements)
+
+<br>
+
+##Getting Started
 <hr>
 
 ###Recommended software (for optimal compatability)
@@ -33,7 +63,7 @@ to ensure that Intellij is configured to use JDK 11.
 
 <br>
 
-## Design & implementation
+## Design & Implementation
 <hr>
 
 ##Architecture
@@ -416,6 +446,7 @@ other major components:
 
 <br>
 
+
 ## Product scope
 <hr>
 
@@ -460,8 +491,4 @@ Note: 'specific data type' refers to either clients, tours, flights or tour pack
 be able to accomplish most of the tasks faster using commands than using the mouse.
 
 <br>
-
-## Instructions for manual testing
-
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 

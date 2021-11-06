@@ -3,7 +3,7 @@
 participant ":Parser" as Parser
 participant ":FindFlightCommand" as FFC
 participant ":FlightList" as FlightList
-participant "ClientPackageList" as ClientPackageList
+participant ":ClientPackageList" as ClientPackageList
 
 
 
