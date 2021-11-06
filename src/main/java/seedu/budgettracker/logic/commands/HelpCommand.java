@@ -20,11 +20,10 @@ public class HelpCommand extends Command {
         System.out.println(DIVIDER);
         System.out.println("5. find [m/MONTH] b/DESCRIPTION");
         System.out.println(DIVIDER);
-        System.out.println("6. list m/all [c/CATEGORY]");
+        System.out.println("6. " + ListRecordsCommand.COMMAND_WORD);
+        System.out.println(ListRecordsCommand.MESSAGE_USAGE);
         System.out.println(DIVIDER);
-        System.out.println("7. list m/MONTH [c/CATEGORY]");
-        System.out.println(DIVIDER);
-        System.out.println("8. " + DeleteCommand.COMMAND_WORD);
+        System.out.println("7. " + DeleteCommand.COMMAND_WORD);
         System.out.println(DeleteBudgetCommand.MESSAGE_USAGE);
         System.out.println(DeleteAllExpenditureCommand.MESSAGE_USAGE);
         System.out.println(DeleteSingleExpenditureCommand.MESSAGE_USAGE);
@@ -33,11 +32,11 @@ public class HelpCommand extends Command {
         System.out.println(DeleteSingleLoanCommand.MESSAGE_USAGE);
         System.out.println(DeleteMultipleLoanCommand.MESSAGE_USAGE);
         System.out.println(DIVIDER);
-        System.out.println("9. help");
+        System.out.println("8. help");
         System.out.println("Get all commands' information.");
         System.out.println("Parameters: help");
         System.out.println(DIVIDER);
-        System.out.println("10. bye");
+        System.out.println("9. bye");
         System.out.println("Exit the app.");
         System.out.println("Parameters: bye");
         System.out.println(DIVIDER);

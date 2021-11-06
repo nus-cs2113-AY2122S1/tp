@@ -149,7 +149,10 @@ from the ArrayList to ensure that data is saved at every step.
 The yearly Records is stored in the form of <year>.txt. Each year contains all the monthly budget as
 well as all the expenditure tied to that month.
 
-## Product scope
+## List of Commands
+
+
+## Appendix A: Product scope
 
 ### Target user profile
 
@@ -161,10 +164,10 @@ well as all the expenditure tied to that month.
 
 ### Value proposition
 
-Value proposition: allow users to record and track expenses more conveniently,
-and thereby encourage them to have greater control over their finances.
+This application allows users to record and track expenses more conveniently,
+and thereby encourages them to have greater control over their finances.
 
-## User Stories
+## Appendix B: User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
@@ -183,14 +186,16 @@ and thereby encourage them to have greater control over their finances.
 |v2.0|user|categorize my spendings|see what I spend most money on|
 |v2.0|user|analyze my spendings with a chart|get my spendings components in a more direct and easier way|
 
-## Non-Functional Requirements
+## Appendix C: Non-Functional Requirements
 
+**1**. Should work on any mainstream OS as long as it has Java 11 or above installed.
+<br/> **2**. 
 {Give non-functional requirements}
 
-## Glossary
+## Appendix D: Glossary
 
-* *glossary item* - Definition
+* *Mainstream OS*: Windows, Linux, Unix, OS-X
 
-## Instructions for manual testing
+## Appendix E: Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
