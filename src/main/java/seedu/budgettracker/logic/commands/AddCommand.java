@@ -1,7 +1,5 @@
 package seedu.budgettracker.logic.commands;
 
-import seedu.budgettracker.data.records.exceptions.DuplicateBudgetException;
-
 /**
  * Command that deals with adding Records to the RecordList.
  * Expected to be extended by AddBudget and AddExpenditure.

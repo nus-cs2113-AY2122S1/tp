@@ -10,7 +10,7 @@ public class StatCategoryParser implements ParserPrefix {
         PREFIX_MONTH };
 
     public static StatCategoryCommand parse(String args) throws ParserException {
-        HashMap<String, String> argumentMap = Parser.splitArgs(args, PREFIX_ARRAY);
+        HashMap<String, String> argumentMap = Parser.splitArguments(args, PREFIX_ARRAY);
         int month = ParserUtil.parseMonth(argumentMap.get(PREFIX_MONTH), IS_COMPULSORY);
         return new StatCategoryCommand(month);
     }

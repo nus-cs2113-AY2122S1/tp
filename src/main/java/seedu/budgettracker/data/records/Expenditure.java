@@ -52,9 +52,8 @@ public class Expenditure extends Record {
         return category;
     }
 
-
     public String toString() {
-        return this.description + this.amount + this.date + this.category;
+        return String.format(this.description + this.amount + this.date + this.category);
     }
 
     /**

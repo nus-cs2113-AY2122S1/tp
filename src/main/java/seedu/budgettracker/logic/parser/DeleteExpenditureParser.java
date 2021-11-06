@@ -15,7 +15,7 @@ public class DeleteExpenditureParser implements ParserPrefix {
         PREFIX_INDEX };
 
     public static DeleteCommand parse(String args) throws ParserException {
-        HashMap<String, String> argumentMap = Parser.splitArgs(args, PREFIX_ARRAY);
+        HashMap<String, String> argumentMap = Parser.splitArguments(args, PREFIX_ARRAY);
 
         int month = ParserUtil.parseMonth(argumentMap.get(PREFIX_MONTH),IS_COMPULSORY);
 
