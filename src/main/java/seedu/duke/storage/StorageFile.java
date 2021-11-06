@@ -1,5 +1,7 @@
 package seedu.duke.storage;
 
+import seedu.duke.Duke;
+import seedu.duke.Ui;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Event;
 import seedu.duke.items.Task;
@@ -13,6 +15,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -66,13 +69,15 @@ public class StorageFile {
 
     public void load(MemberRoster memberRoster, EventCatalog eventCatalog) {
         File saveFile = new File(DEFAULT_FILE_PATH);
+        List<String> encodedLines = getStringsFromFile(saveFile);
+
+        assert encodedLines.isEmpty() || encodedLines.get(0).startsWith("m")
+                : "First String in list should be a Member";
+
+        String line = "";
         try {
-            List<String> encodedLines = getStringsFromFile(saveFile);
-
-            assert encodedLines.isEmpty() || encodedLines.get(0).startsWith("m")
-                    : "First String in list should be a Member";
-
-            for (String line : encodedLines) {
+            for (int i = 0; i < encodedLines.size(); i++) {
+                line = encodedLines.get(i).trim();
                 char classType = line.charAt(0);
                 switch (classType) {
                 case 'm':
@@ -82,23 +87,28 @@ public class StorageFile {
                     eventCatalog.add(EventDecoder.decodeEventFromString(line));
                     break;
                 case 't':
-                    Event currEvent = eventCatalog.get(eventCatalog.size() - 1);
                     Task task = TaskDecoder.decodeTaskFromString(line);
-                    task.setEvent(currEvent);
-                    currEvent.addToTaskList(task);
+                    // Within the parent event, update its list of tasks
+                    task.getEvent().addToTaskList(task);
+                    // Within each member in the member roster that contains this task, add this task to their task list
                     updateMemberTasks(task, memberRoster);
                     break;
                 default:
-                    throw new DukeException("Seems like you have no data for me to load!");
+                    throw new DukeException("Invalid flag at start of line.");
                 }
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("Oooh a new user!");
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
+        } catch (NumberFormatException | IndexOutOfBoundsException | DukeException | DateTimeParseException e) {
+            System.out.println("Oh no seems like the save data is corrupted! Previous data will be overwritten :(\n"
+                    + "Corrupted data occurs in the following line in slamData.txt:\n\n"
+                    + line + "\n\n"
+                    + "Data prior to the above line is loaded!\n"
+                    + "Please terminate SLAM by entering <ctrl + c> and fix the save file before restarting.\n"
+                    + "Otherwise, performing commands will cause data from that line onwards to be lost!\n");
             Logger logger = Logger.getLogger("Duke logger");
-            logger.log(Level.INFO, "potential file format error", e);
+            logger.log(Level.INFO, "File format error", e);
         }
+
+        Ui.printLoadSuccesfulMessage();
     }
 
     private void updateMemberTasks(Task task, MemberRoster memberRoster) {
@@ -109,14 +119,18 @@ public class StorageFile {
         }
     }
 
-    private List<String> getStringsFromFile(File saveFile) throws FileNotFoundException {
+    private List<String> getStringsFromFile(File saveFile) {
         List<String> encodedItems = new ArrayList<>();
-        Scanner myScanner = new Scanner(saveFile);
-        while (myScanner.hasNextLine()) {
-            String data = myScanner.nextLine();
-            encodedItems.add(data);
+        try {
+            Scanner myScanner = new Scanner(saveFile);
+            while (myScanner.hasNextLine()) {
+                String data = myScanner.nextLine();
+                encodedItems.add(data);
+            }
+            Ui.printLoadingMessage();
+        } catch (FileNotFoundException e) {
+            System.out.println("Oooh a new user!");
         }
-
         return encodedItems;
     }
 }
