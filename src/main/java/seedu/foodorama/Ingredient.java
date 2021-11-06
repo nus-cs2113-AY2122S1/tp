@@ -153,9 +153,9 @@ public class Ingredient implements Comparable<Ingredient> {
         Scanner in = new Scanner(System.in);
         String ingredientWeight = in.nextLine();
 
-        int exitloop = 0;
+        int loop = LOOP;
         double ingredientWeightValue;
-        while (exitloop == 0) {
+        while (loop == LOOP) {
             String confirmAdd = "e";
             if (!isNumber(ingredientWeight)) {
                 throw new FoodoramaException(UI.getInvalidNumberMsg());
@@ -185,7 +185,7 @@ public class Ingredient implements Comparable<Ingredient> {
             }
             if ((isNumber(ingredientWeight) && (ingredientWeightValue >= 0)
                     && (ingredientWeightValue <= 10000)) | confirmAdd.startsWith(YES)) {
-                exitloop = 1;
+                loop = EXIT;
             }
         }
 

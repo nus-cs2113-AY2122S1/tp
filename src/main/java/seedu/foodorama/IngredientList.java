@@ -230,9 +230,9 @@ public class IngredientList {
         String expiryDateString = input.nextLine();
         LocalDate expiryDate = null;
 
-        int exitLoop = 0;
+        int loop = LOOP;
         long daysBetweenExpiryToday = Long.MIN_VALUE;
-        while (exitLoop == 0) {
+        while (loop == LOOP) {
             UI.clearTerminalAndPrintNewPage();
             if (!isValidDateFormat(expiryDateString)) {
                 UI.printIncorrectExpiryDateFormatMsg();
@@ -242,7 +242,7 @@ public class IngredientList {
             }
             if (isValidDateFormat(expiryDateString) && daysBetweenExpiryToday != Long.MIN_VALUE
                     && isValidExpiryLength(daysBetweenExpiryToday, ingrName)) {
-                exitLoop = 1;
+                loop = EXIT;
             } else {
                 expiryDateString = input.nextLine();
             }
