@@ -126,6 +126,8 @@ New workout created: leg day finish by: 21 Oct 2021
 ________________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### 2. Entering into a Workout: `enter`
 
 Enter into a workout so that you can `add` ,`remove` , mark as `done`, `edit` and `display` exercises
@@ -177,6 +179,8 @@ enter 2
 		________________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### 3. Exiting from a workout: `back`
 
 Returns you to the main view after entering into a workout.
@@ -192,6 +196,8 @@ Back to Main View
 ________________________________________________________
 			
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### 4. Show all workouts: `list`
 
@@ -240,6 +246,9 @@ Workout list:
 4. test 2
 ________________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
+
 ### 5. Deleting a workout: `delete`
 
 Deletes a workout from the list of workouts.
@@ -265,6 +274,8 @@ ________________________________________________________
 Deleted workout: abs finish by: 25 Dec 2021
 ________________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### 6. Adding an exercise to a workout: `add`
 
@@ -314,6 +325,8 @@ add lunges, 4 8
 		________________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### 7. Mark an exercise done: `done`
 
 Marks an exercise from a specified workout as done.
@@ -361,6 +374,8 @@ done 1
 
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### 8. Editing an exercise in a workout: `edit`
 
 Edits an exercise in a specified workout.
@@ -399,16 +414,18 @@ The edited exercise: [X] kickbacks | 4 sets of 12 reps
 ________________________________________________________
 ```
 Expected outcome (*Workout mode*):
-```text
-enter 1
-                        ________________________________________________________
-                        Now inside workout 1 : workout
-                        ________________________________________________________
-edit 2, kickbacks, 4 12
-                        ________________________________________________________
-                        The edited exercise in workout 1 : [X] kickbacks | 4 sets of 12 reps
-                        ________________________________________________________
 ```
+enter 1
+        ________________________________________________________
+        Now inside workout 1 : workout
+        ________________________________________________________
+edit 2, kickbacks, 4 12
+        ________________________________________________________
+        The edited exercise in workout 1 : [X] kickbacks | 4 sets of 12 reps
+        ________________________________________________________
+```
+
+<div style="page-break-after: always;"></div>
 
 ### 9. Show all exercises from a workout: `display`
 
@@ -443,18 +460,20 @@ ________________________________________________________
 ```
 
 Expected outcome (*Workout mode*):
-```text
-enter 1
-                        ________________________________________________________
-                        Now inside workout 1 : workout
-                        ________________________________________________________
-display
-                        ________________________________________________________
-                        Exercises in (1) workout
-                        1. [ ] squats | 5 sets of 10 reps
-                        2. [X] kickbacks | 4 sets of 12 reps
-                        ________________________________________________________
 ```
+enter 1
+            ________________________________________________________
+            Now inside workout 1 : workout
+            ________________________________________________________
+display
+            ________________________________________________________
+            Exercises in (1) workout
+            1. [ ] squats | 5 sets of 10 reps
+            2. [X] kickbacks | 4 sets of 12 reps
+            ________________________________________________________
+```
+
+<div style="page-break-after: always;"></div>
 
 ### 10. Removing an exercise from a workout: `remove`
 
@@ -503,6 +522,8 @@ remove 1
 			Removed exercise: [ ] squats | 5 sets of 10 reps
 			________________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### 11. Searching for workouts and exercises: `search`
 
@@ -564,6 +585,8 @@ search kick
 			________________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### 12. Recommend a workout: `recommend`
 
 Recommends a set of sample workouts with exercises already added.
@@ -610,6 +633,8 @@ Arm
 ________________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### 13. Clearing all workouts or exercises: `clear`
 
 Removes all workouts or all exercises within a workout.
@@ -655,15 +680,15 @@ ________________________________________________________
 
 
 Expected outcome (*Workout Mode*):
-```text
+```
 enter 1
-                        ________________________________________________________
-                        Now inside workout 1 : workout
-                        ________________________________________________________
+          ________________________________________________________
+          Now inside workout 1 : workout
+          ________________________________________________________
 clear exercise
-                        ________________________________________________________
-                        All exercises in workout 1 have been cleared!
-                        ________________________________________________________
+          ________________________________________________________
+          All exercises in workout 1 have been cleared!
+          ________________________________________________________
 ```
 
 
@@ -681,10 +706,14 @@ Bye. Hope you get your desired body soon, have a great day!
 ________________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### 15. Saving data
 
 The data that GetJack'D saves is saved in the hard disk automatically after any command that changes the data (Adding 
 or editing workouts and exercises). There is no need to save manually.
+
+<div style="page-break-after: always;"></div>
 
 ### 16. Editable data file
 
@@ -747,6 +776,8 @@ _**Things to look out for**_:
 1. Data fields in sets and reps are numbers.
 2. Data field in deadline is following the format: `YYYY-MM-DD`
 3. Missing `{ }`, `[ ]`, `" "` or `,`
+
+<div style="page-break-after: always;"></div>
 
 ### 17. Troubleshooting
 
