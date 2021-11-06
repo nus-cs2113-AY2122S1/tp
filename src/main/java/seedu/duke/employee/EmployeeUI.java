@@ -71,4 +71,12 @@ public class EmployeeUI {
         System.out.println("Please ensure that it is a positive integer.");
         MainUI.printSingleLine();
     }
+
+    public static void printDuplicateEntryMessage(int i) {
+        MainUI.printSingleLine();
+        System.out.println("You have entered the exact same employee details before.");
+        System.out.println("Refer to your employee with index \'" + (i+1) + "\' when you type in list-employee.");
+        System.out.println("This is a duplicate!");
+        MainUI.printSingleLine();
+    }
 }

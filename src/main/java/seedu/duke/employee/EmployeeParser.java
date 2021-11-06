@@ -5,6 +5,7 @@ package seedu.duke.employee;
 import seedu.duke.main.MainUI;
 
 import java.security.InvalidParameterException;
+import java.util.Objects;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -33,6 +34,8 @@ public class EmployeeParser {
                     convertToStatus(command[3].stripLeading().stripTrailing()),
                     checkSalary(command[4].stripLeading().stripTrailing()) );
 
+            checkDuplicate(employee, masterList);
+
             masterList.employeeList.add(employee);
             masterList.totalEmployee += 1;
 
@@ -48,6 +51,47 @@ public class EmployeeParser {
         assert masterList.totalEmployee >= 0 : "total employee should be equals to or greater than zero";
     }
 
+    /**
+     * Checks for duplicate entries by comparing user input with every single existing employee.
+     *
+     * @param employee contains the user input for the new employee.
+     * @param masterList references to the list of employees where changes will be made
+     */
+    private void checkDuplicate(Employee employee, EmployeeList masterList) {
+        for(int i = 0; i < masterList.totalEmployee; i += 1) {
+            compareEmployee(employee, masterList, i);
+        }
+    }
+
+    /**
+     * Checks for duplicate entries by comparing user input with a single employee.
+     *
+     * @param employee contains the user input for the new employee.
+     * @param masterList references to the list of employees where changes will be made
+     * @param i refers to the index of the current employee in the existing list that the
+     *          new employee is being compared to.
+     */
+    private void compareEmployee(Employee employee, EmployeeList masterList, int i) {
+        if (Objects.equals(employee.getName(), masterList.employeeList.get(i).getName())) {
+            if (Objects.equals(employee.getPhoneNum(), masterList.employeeList.get(i).getPhoneNum())) {
+                if (Objects.equals(employee.getStatus(), masterList.employeeList.get(i).getStatus())) {
+                    if(Objects.equals(employee.getSalary(), masterList.employeeList.get(i).getSalary())) {
+                        EmployeeUI.printDuplicateEntryMessage(i);
+                        throw new InvalidParameterException();
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Checks if the format for salary is valid - must be a positive integer.
+     * If format is valid, string format is converted into integer format.
+     *
+     * @param number contains the user input for salary.
+     * @return the user input in integer format.
+     * @throws NumberFormatException If input from user is invalid.
+     */
     private int checkSalary(String number) {
         int num = Integer.parseInt(number);
         if (num <= 0) {
@@ -57,6 +101,14 @@ public class EmployeeParser {
         return num;
     }
 
+    /**
+     * Checks if the format for phone number is valid - must be a positive integer.
+     * If format is valid, string format is converted into integer format.
+     *
+     * @param number contains the user input for phone number.
+     * @return the user input in integer format.
+     * @throws NumberFormatException If input from user is invalid.
+     */
     private int checkNumber(String number) {
         int num = Integer.parseInt(number);
         if (num <= 0) {
