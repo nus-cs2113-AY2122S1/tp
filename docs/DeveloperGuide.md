@@ -19,6 +19,8 @@
 - [Appendix E: Instructions for manual testing](#appendix-e-instructions-for-manual-testing)
     - [Launch and Shutdown](#launch-and-shutdown)
     - [Saving data](#saving-data)
+    
+<div style="page-break-after: always;"></div>
 
 ## Acknowledgements
 
@@ -60,6 +62,8 @@
 
    - When you are read to start coding, we recommend that you get some sense of the overall design by reading the following.
 
+<div style="page-break-after: always;"></div>
+
 ## Design & implementation
 
 ### Basic Architecture
@@ -94,6 +98,7 @@ Below is a high-level sequence diagram showing the `create` Command
 
 **`showResultToUser(CommandResult)`
 
+<div style="page-break-after: always;"></div>
 
 ### Data Component
 
@@ -133,6 +138,8 @@ Below is a sequence diagram showing how this all happens:
 2. Once all `Workout` objects are converted to `WorkoutModel` objects, the `WorkoutListModel` has all the data which was in 
    the `WorkoutList` and now can be converted into a json String to be stored in the json File.
 
+<div style="page-break-after: always;"></div>
+
 ### Storage Component
 
 Location: `seedu.duke.storage`
@@ -146,6 +153,8 @@ __Note:__
 The `Storage` component,
 - can save workout list data in json format, and read them back into corresponding Java objects.
 - depends on some classes in the `Models` component within Storage (because the Storage component can only save/retrieve objects that belong to the Model).
+
+<div style="page-break-after: always;"></div>
 
 ### Command Component
 
@@ -193,6 +202,8 @@ Most commands require the use of `workoutIndex` and `exerciseIndex` to execute c
 workout/exercise. However, there are other commands which do not need them such as `HelpCommand`, `ListWorkoutsCommand` 
 and a few more.
 
+<div style="page-break-after: always;"></div>
+
 ### Parser / CommandManager Component
 Location: `seedu.duke.parser`
 
@@ -221,6 +232,8 @@ Not all the Commands will have a defined Parser, as some commands do not take ar
 Other commands that require parsing the command arguments in different ways, such are extracting exercise and workout index, will require
 further processing. This additional processing is defined by each Command's corresponding Parser.
 
+<div style="page-break-after: always;"></div>
+
 ### Ui Component
 
 Location: `seedu.duke.ui`
@@ -243,6 +256,8 @@ __Note:__
 * [Logger Guide](Logging.md)
 * [Documentation Guide](Documentation.md)
 
+<div style="page-break-after: always;"></div>
+
 ## Appendix A: Product scope
 ### Target user profile
 
@@ -253,6 +268,8 @@ __Note:__
 
 ### Value proposition: 
 Manage fitness routines quickly
+
+<div style="page-break-after: always;"></div>
 
 ## Appendix B: User Stories
 
@@ -269,6 +286,8 @@ Manage fitness routines quickly
 |v2.0|user who finds it hard to find motivation to complete workouts|be able to set deadlines for my workouts|set a goal for myself|
 |v2.0|user|have my workouts sorted according to deadline|complete my workouts on time and meet my fitness goals|
 |v2.0|busy user|clear all my current workouts or all the exercises in a workout|make a new workout plan without having to delete one by one|
+
+<div style="page-break-after: always;"></div>
 
 ## Appendix C: Non-Functional Requirements
 
