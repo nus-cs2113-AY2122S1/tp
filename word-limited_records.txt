@@ -1,0 +1,5 @@
+Word-limited|10.055|2|3|5|40.0|60.0|17.90154152163103|[simply,  dummy]
+Word-limited|16.25|4|6|10|40.0|60.0|22.153846153846153|[may, refer, to:
+
+Jaan, name)
+Jaan]
