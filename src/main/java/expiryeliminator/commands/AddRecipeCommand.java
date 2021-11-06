@@ -59,7 +59,7 @@ public class AddRecipeCommand extends Command {
 
         for (int i = 0; i < ingredientNames.size(); i++) {
             try {
-                message += recipe.add(ingredientNames.get(i), quantities.get(i), ingredients);
+                message += recipe.addIngredient(ingredientNames.get(i), quantities.get(i), ingredients);
             } catch (DuplicateDataException e) {
                 return String.format(MESSAGE_DUPLICATE_INGREDIENT, name, ingredientNames.get(i));
             } catch (IllegalValueException e) {

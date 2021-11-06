@@ -29,8 +29,8 @@ public class TestUtil {
         final IngredientRepository ingredientRepository = generateIngredientRepositoryForRecipe();
         assert ingredientRepository != null;
         try {
-            recipe.add("Chicken", 1, ingredientRepository);
-            recipe.add("Salt", 20, ingredientRepository);
+            recipe.addIngredient("Chicken", 1, ingredientRepository);
+            recipe.addIngredient("Salt", 20, ingredientRepository);
         } catch (DuplicateDataException | IllegalValueException e) {
             fail("Recipe should be valid by definition");
         }
@@ -40,8 +40,8 @@ public class TestUtil {
         final IngredientRepository ingredientRepository = generateIngredientRepositoryForRecipe();
         assert ingredientRepository != null;
         try {
-            recipe.add("Pork", 1, ingredientRepository);
-            recipe.add("Salt", 20, ingredientRepository);
+            recipe.addIngredient("Pork", 1, ingredientRepository);
+            recipe.addIngredient("Salt", 20, ingredientRepository);
         } catch (DuplicateDataException | IllegalValueException e) {
             fail("Recipe should be valid by definition");
         }
@@ -51,8 +51,8 @@ public class TestUtil {
         final IngredientRepository ingredientRepository = generateIngredientRepositoryForExampleRecipe(1, 20);
         assert ingredientRepository != null;
         try {
-            recipe.add("Chicken", 1, ingredientRepository);
-            recipe.add("Salt", 20, ingredientRepository);
+            recipe.addIngredient("Chicken", 1, ingredientRepository);
+            recipe.addIngredient("Salt", 20, ingredientRepository);
         } catch (DuplicateDataException | IllegalValueException e) {
             fail("Recipe should be valid by definition");
         }

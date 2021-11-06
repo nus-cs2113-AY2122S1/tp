@@ -77,7 +77,7 @@ public class UpdateRecipeCommand extends Command {
                     return String.format(RECIPE_UPDATE_FAIL, name) + "\n\n" + MESSAGE_ILLEGAL_VALUE_ERROR;
                 } catch (NotFoundException e) {
                     try {
-                        recipe.add(ingredientName, quantity, ingredients);
+                        recipe.addIngredient(ingredientName, quantity, ingredients);
                     } catch (DuplicateDataException | IllegalValueException ex) {
                         return String.format(RECIPE_UPDATE_FAIL, name);
                     }
