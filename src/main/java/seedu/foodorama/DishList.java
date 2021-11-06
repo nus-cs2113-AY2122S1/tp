@@ -11,6 +11,8 @@ public class DishList {
     public static Ui UI = new Ui();
     private static final String YES = "y";
     private static final String NO = "n";
+    private static final int LOOP = 0;
+    private static final int EXIT = 1;
 
     public static void add(String dishName) {
         if (DishList.find(dishName) == -1) {
@@ -138,33 +140,59 @@ public class DishList {
             String dishName = dishList.get(dishIndex).getDishName();
             UI.printAskNewWastageDish(dishName);
 
-            Scanner input = new Scanner(System.in);
-            double newWeight;
+            Scanner in = new Scanner(System.in);
+            String newWeight = in.nextLine();
 
-            try {
-                newWeight = Double.parseDouble(input.nextLine());
-                if (newWeight < 0) {
-                    throw new FoodoramaException("");
+            int loop = LOOP;
+            double inputWastage;
+            while (loop == LOOP) {
+                String confirmAdd = "e";
+                if (!isNumber(newWeight)) {
+                    throw new FoodoramaException(UI.getInvalidNumberMsg());
                 }
-            } catch (NumberFormatException | FoodoramaException e) {
-                throw new FoodoramaException(UI.getInvalidNumberMsg());
+
+                inputWastage = Double.parseDouble(newWeight);
+                while (inputWastage < 0) {
+                    UI.clearTerminalAndPrintNewPage();
+                    UI.printInvalidDishWasteValue(dishName);
+                    newWeight = in.nextLine();
+                    inputWastage = Double.parseDouble(newWeight);
+                }
+                if (Double.isInfinite(inputWastage) | Double.isNaN(inputWastage)) {
+                    throw new FoodoramaException(UI.printNumericalInputInvalid("dish waste"));
+                } else if (inputWastage > 10000) {
+                    UI.clearTerminalAndPrintNewPage();
+                    UI.printDishWasteValueHigh(dishName);
+                    confirmAdd = in.nextLine();
+
+                    confirmAdd = getConfirmation(confirmAdd);
+                    if (confirmAdd.startsWith(NO)) {
+                        UI.clearTerminalAndPrintNewPage();
+                        UI.printEnterWeightOf(dishName);
+                        newWeight = in.nextLine();
+                        inputWastage = Double.parseDouble(newWeight);
+                    }
+                }
+                if ((isNumber(newWeight) && (inputWastage >= 0)
+                        && (inputWastage <= 10000)) | confirmAdd.startsWith(YES)) {
+                    loop = EXIT;
+                }
             }
-            if (Double.isInfinite(newWeight) | Double.isNaN(newWeight)) {
-                throw new FoodoramaException(UI.printNumericalInputInvalid("dish waste"));
-            }
+
+            inputWastage = Double.parseDouble(newWeight);
             Double dishWeight = dishList.get(dishIndex).getWastage();
             UI.clearTerminalAndPrintNewPage();
-            UI.printConfirmDishWastageEditMsg(dishWeight, newWeight);
-            String confirmChange = input.nextLine().toLowerCase();
+            UI.printConfirmDishWastageEditMsg(dishWeight, inputWastage);
+            String confirmChange = in.nextLine().toLowerCase();
             while (!confirmChange.matches(YES_NO_REGEX)) {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printInvalidConfirmation();
-                confirmChange = input.nextLine().toLowerCase();
+                confirmChange = in.nextLine().toLowerCase();
             }
             UI.clearTerminalAndPrintNewPage();
             if (confirmChange.startsWith(YES)) {
-                dishList.get(dishIndex).setDishWastage(newWeight);
-                UI.printDishWastageChanged(dishName, newWeight);
+                dishList.get(dishIndex).setDishWastage(inputWastage);
+                UI.printDishWastageChanged(dishName, inputWastage);
             } else {
                 UI.printDisregardMsg();
             }
@@ -187,5 +215,15 @@ public class DishList {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public static String getConfirmation(String confirmAdd) {
+        Scanner input = new Scanner(System.in);
+        while (!confirmAdd.matches(YES_NO_REGEX)) {
+            UI.clearTerminalAndPrintNewPage();
+            UI.printInvalidConfirmationSoftLimit();
+            confirmAdd = input.nextLine().toLowerCase();
+        }
+        return confirmAdd;
     }
 }

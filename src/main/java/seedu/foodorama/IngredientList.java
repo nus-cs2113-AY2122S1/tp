@@ -15,6 +15,8 @@ public class IngredientList {
     private static final Ui UI = new Ui();
     private static final String YES = "y";
     private static final String NO = "n";
+    private static final int LOOP = 0;
+    private static final int EXIT = 1;
     private static final String DATE_FORMAT = "dd/MM/yyyy";
     private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_FORMAT);
     private static final int TEN_YEARS_IN_DAYS = 3650;
@@ -25,9 +27,9 @@ public class IngredientList {
         Scanner in = new Scanner(System.in);
         String ingredientWeight = in.nextLine();
 
-        int exitloop = 0;
+        int loop = LOOP;
         double ingredientWeightValue;
-        while (exitloop == 0) {
+        while (loop == LOOP) {
             String confirmAdd = "e";
             if (!isNumber(ingredientWeight)) {
                 throw new FoodoramaException(UI.getInvalidNumberMsg());
@@ -57,7 +59,7 @@ public class IngredientList {
             }
             if ((isNumber(ingredientWeight) && (ingredientWeightValue >= 0)
                     && (ingredientWeightValue <= 10000)) | confirmAdd.startsWith(YES)) {
-                exitloop = 1;
+                loop = EXIT;
             }
         }
 
@@ -255,29 +257,55 @@ public class IngredientList {
         String ingrName = ingredientList.get(ingrIndex).getIngredientName();
         UI.printAskNewWastageDish(ingrName);
 
-        Scanner input = new Scanner(System.in);
-        double newWeight;
+        Scanner in = new Scanner(System.in);
+        String inputIngredientWeight = in.nextLine();
 
-        try {
-            newWeight = Double.parseDouble(input.nextLine());
-            if (newWeight < 0) {
-                throw new FoodoramaException("");
+        int loop = LOOP;
+        double ingredientWeightValue;
+        while (loop == LOOP) {
+            String confirmAdd = "e";
+            if (!isNumber(inputIngredientWeight)) {
+                throw new FoodoramaException(UI.getInvalidNumberMsg());
             }
-        } catch (NumberFormatException | FoodoramaException e) {
-            throw new FoodoramaException(UI.getInvalidNumberMsg());
+
+            ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
+            while (ingredientWeightValue < 0) {
+                UI.clearTerminalAndPrintNewPage();
+                UI.printInvalidIngrWeight(inputIngredientWeight);
+                inputIngredientWeight = in.nextLine();
+                ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
+            }
+            if (Double.isInfinite(ingredientWeightValue) | Double.isNaN(ingredientWeightValue)) {
+                throw new FoodoramaException(UI.printNumericalInputInvalid("dish waste"));
+            } else if (ingredientWeightValue > 10000) {
+                UI.clearTerminalAndPrintNewPage();
+                UI.printIngrValueHigh(ingrName);
+                confirmAdd = in.nextLine();
+
+                confirmAdd = getConfirmation(confirmAdd);
+                if (confirmAdd.startsWith(NO)) {
+                    UI.clearTerminalAndPrintNewPage();
+                    UI.printEnterWeightOf(ingrName);
+                    inputIngredientWeight = in.nextLine();
+                    ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
+                }
+            }
+            if ((isNumber(inputIngredientWeight) && (ingredientWeightValue >= 0)
+                    && (ingredientWeightValue <= 10000)) | confirmAdd.startsWith(YES)) {
+                loop = EXIT;
+            }
         }
-        if (Double.isInfinite(newWeight) | Double.isNaN(newWeight)) {
-            throw new FoodoramaException(UI.printNumericalInputInvalid("ingredient waste"));
-        }
+
+        Double newWeight = Double.parseDouble(inputIngredientWeight);
         Double ingrWeight = ingredientList.get(ingrIndex).getWastage();
 
         UI.clearTerminalAndPrintNewPage();
         UI.printConfirmDishWastageEditMsg(ingrWeight, newWeight);
-        String confirmChange = input.nextLine().toLowerCase();
+        String confirmChange = in.nextLine().toLowerCase();
         while (!confirmChange.matches(YES_NO_REGEX)) {
             UI.clearTerminalAndPrintNewPage();
             UI.printInvalidConfirmation();
-            confirmChange = input.nextLine().toLowerCase();
+            confirmChange = in.nextLine().toLowerCase();
         }
         UI.clearTerminalAndPrintNewPage();
         if (confirmChange.startsWith(YES)) {

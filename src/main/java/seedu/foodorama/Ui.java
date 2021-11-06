@@ -1051,6 +1051,14 @@ public class Ui {
                 + LINE_DIVIDER);
     }
 
+    public void printIngrWasteValueHigh(String ingrName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "The weight of " + ingrName + " wasted is unusually greater than 10,000kg!" + System.lineSeparator()
+                + "Are you sure you want to add this weight?" + System.lineSeparator()
+                + "Please type 'y'/'yes' to confirm, or 'n'/'no' to type a new weight:" + System.lineSeparator()
+                + LINE_DIVIDER);
+    }
+
     public String printNumericalInputInvalid(String type) {
         return LINE_DIVIDER + System.lineSeparator()
                 + "The " + type + " is out of bounds. The Command has been disregarded."

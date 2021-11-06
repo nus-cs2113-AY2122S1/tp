@@ -15,6 +15,8 @@ public class Dish implements Comparable<Dish> {
     public static final String YES_NO_REGEX = "^(y|yes|n|no)$";
     private static final String YES = "y";
     private static final String NO = "n";
+    private static final int LOOP = 0;
+    private static final int EXIT = 1;
     private String dishName;
     private double wastage;
     private double limit;
@@ -122,9 +124,9 @@ public class Dish implements Comparable<Dish> {
         Scanner in = new Scanner(System.in);
         String dishWaste = in.nextLine();
 
-        int exitloop = 0;
+        int loop = LOOP;
         double inputWastage;
-        while (exitloop == 0) {
+        while (loop == LOOP) {
             String confirmAdd = "e";
             if (!isNumber(dishWaste)) {
                 throw new FoodoramaException(UI.getInvalidNumberMsg());
@@ -153,7 +155,7 @@ public class Dish implements Comparable<Dish> {
                 }
             }
             if ((isNumber(dishWaste) && (inputWastage >= 0) && (inputWastage <= 10000)) | confirmAdd.startsWith(YES)) {
-                exitloop = 1;
+                loop = EXIT;
             }
         }
 
