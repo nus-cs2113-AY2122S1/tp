@@ -38,7 +38,7 @@ public class AddAssessmentCommand extends Command {
     private static final String MESSAGE_FORMAT_INVALID_MAXIMUM_MARKS = "Invalid maximum marks. "
         + "Maximum marks must be larger than %,.2f (inclusive)";
     private static final String MESSAGE_FORMAT_ASSESSMENT_ADDED = "Assessment added to %s:\n"
-        + "  %s\nThere are %d assessments in the %s.";
+        + "  %s\nThere are %d assessments in %s.";
 
     public AddAssessmentCommand(String argument) {
         super(argument, ADD_ASSESSMENT_ARGUMENT_KEYS);

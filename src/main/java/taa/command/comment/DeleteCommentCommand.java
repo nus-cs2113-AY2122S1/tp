@@ -79,7 +79,7 @@ public class DeleteCommentCommand extends Command {
         return String.format(
                 MESSAGE_FORMAT_DELETE_COMMAND_USAGE,
                 COMMAND_SET_COMMENT,
-            KEY_CLASS_ID,
+                KEY_CLASS_ID,
                 KEY_STUDENT_INDEX
         );
     }
