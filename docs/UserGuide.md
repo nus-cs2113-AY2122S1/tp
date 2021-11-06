@@ -714,7 +714,7 @@ You are inside a trip. Trip specific commands:
 app to the device you wish to use. Ensure that the save file is stored in the same directory as the PayMeBack
 app on your destination device before starting the program.
 
-**Q**: There was an error loading my saved file. What should I do?
+**Q**: There was an error loading my save file. What should I do?
 
 **A**: It is likely that your save file is corrupted. If you have modified the save file directly using another
 application, you should try to undo those changes. Also ensure that your save file is in the same directory as 
