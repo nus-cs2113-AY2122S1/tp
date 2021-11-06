@@ -1,5 +1,6 @@
 package seedu.budgettracker.ui;
 
+import seedu.budgettracker.data.records.Budget;
 import seedu.budgettracker.logic.commands.Command;
 import seedu.budgettracker.logic.commands.FindCommand;
 import seedu.budgettracker.logic.commands.StatYearCommand;
@@ -24,6 +25,8 @@ public class TextUi {
      * A platform independent line separator.
      */
     public static final String LS = System.lineSeparator();
+
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     private static final String DIVIDER = "========================================================";
     private static final String LOGO = "  ____            _            _ _______             _\n"
@@ -83,7 +86,7 @@ public class TextUi {
         System.out.println(index + "."
                 + "Your loan to "
                 + dueLoan.getName() + ", "
-                + "$" + dueLoan.getAmount() + ", "
+                + "$" + df.format(dueLoan.getAmount()) + ", "
                 + "on " + dueLoan.getDate()
                 + " is due!!");
     }
@@ -97,15 +100,37 @@ public class TextUi {
                 + "\nAmount: $" + addedExpenditure.getAmount()
                 + "\nDate: " + addedExpenditure.getDate()
                 + "\nCategory: " + addedExpenditure.getCategory());
+        System.out.println("Expenditure successfully added!");
+        showExpenditureDetails(addedExpenditure, recordList);
 
-        int month = addedExpenditure.getMonth();
+        printDivider();
+    }
+
+    public static void showExpenditureEditedMessage(Expenditure newExpenditure, AllRecordList recordList) {
+        assert newExpenditure.getAmount() > 0 : "Edited Expenditure should have a positive amount";
+
+        System.out.println("Expenditure has been successfully edited!");
+        System.out.println("New values: ");
+        showExpenditureDetails(newExpenditure, recordList);
+
+        printDivider();
+    }
+
+
+    private static void showExpenditureDetails(Expenditure newExpenditure, AllRecordList recordList) {
+        System.out.println("Description: " + newExpenditure.getDescription()
+                + "\nAmount: $" + df.format(newExpenditure.getAmount())
+                + "\nDate: " + newExpenditure.getDateString()
+                + "\nCategory: " + newExpenditure.getCategoryString());
+
+        int month = newExpenditure.getMonth();
         String monthString = getMonthString(month);
         double amount = recordList.getBudget(month).getAmount();
         double totalMonthExpenditureSpending = recordList.getTotalAmountSpent(month);
 
         System.out.println("Total Amount Spent in "
                 + monthString
-                + ": $" + totalMonthExpenditureSpending);
+                + ": $" + df.format(totalMonthExpenditureSpending));
 
         double amountLeft = amount - totalMonthExpenditureSpending;
 
@@ -125,12 +150,13 @@ public class TextUi {
             System.out.println("%");
         }
         printDivider();
+
     }
 
     public static void showBudgetAddedMessage(double amount, int month) {
         String monthString = getMonthString(month);
         System.out.println("Your budget of $"
-                + amount
+                + df.format(amount)
                 + " for "
                 + monthString
                 + " has been successfully set!"
@@ -145,13 +171,28 @@ public class TextUi {
         }
     }
 
+    public static void showBudgetEditedMessage(Budget newBudget) {
+        assert newBudget.getAmount() > 0 : "Edited Expenditure should have a positive amount";
+
+        System.out.println("Loan has been successfully edited!");
+        System.out.println("New values: ");
+        showBudgetDetails(newBudget);
+
+        printDivider();
+    }
+
+    private static void showBudgetDetails(Budget newBudget) {
+        System.out.println("Amount: $" + df.format(newBudget.getAmount())
+                + "\nMonth: " + newBudget.getMonth());
+    }
+
     public static void showLoanAddedMessage(Loan newLoan, boolean isLoadingStorage) {
         if (isLoadingStorage) {
             return;
         }
         System.out.println("Loan successfully added!"
                 + LS
-                + newLoan.getName() + " owes you: $" + newLoan.getAmount()
+                + newLoan.getName() + " owes you: $" + df.format(newLoan.getAmount())
                 + LS
                 + "Date of loan: " + newLoan.getDate()
                 + LS
@@ -163,6 +204,22 @@ public class TextUi {
             System.out.println("Please make the necessary edit before continuing!");
             System.out.println(WARNING_DIVIDER);
         }
+    }
+
+    public static void showLoanEditedMessage(Loan newLoan) {
+        assert newLoan.getAmount() > 0 : "Edited Expenditure should have a positive amount";
+
+        System.out.println("Loan has been successfully edited!");
+        System.out.println("New values: ");
+        showLoanDetails(newLoan);
+
+        printDivider();
+    }
+
+    private static void showLoanDetails(Loan newLoan) {
+        System.out.println("Debtor: " + newLoan.getName()
+                + "\nAmount: $" + df.format(newLoan.getAmount())
+                + "\nDate: " + newLoan.getDate());
     }
 
     public static String getMonthString(int month) {
@@ -269,18 +326,14 @@ public class TextUi {
     private static void getMonthListView(AllRecordList list, int month, String monthString,
                                          String budget, Category category) {
         budgetExpenditurePrinter(list, month, monthString, budget, category);
-
         loanPrinter(list, month);
-
         printDivider();
     }
 
     private static void loanPrinter(AllRecordList list, int month) {
         System.out.println("Your loans: ");
-
         if (list.getLoanListSize(month) > 0) {
             System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Debtor name", "   | Amount", "   | Date ");
-            System.out.print(LS);
             printEnumeratedLoanList(list.getLoanRecords(month));
         } else {
             System.out.println("No Loan records yet.");
@@ -314,17 +367,18 @@ public class TextUi {
         for (int i = 0; i < monthLoanList.size(); i++) {
             Loan currentLoan = monthLoanList.get(i);
             System.out.println(i + 1 + "." + currentLoan);
-            System.out.print(LS);
         }
     }
 
-    public static void showSingleExpenditureDeletedMessage(int indexOfExpenditure, Expenditure deletedExpenditure) {
-        System.out.println("Successfully deleted Expenditure " + indexOfExpenditure + "." + deletedExpenditure);
+    public static void showSingleExpenditureDeletedMessage(int index, Expenditure deleteExe, AllRecordList recordList) {
+        System.out.println("Successfully deleted Expenditure " + index + ":");
+        showExpenditureDetails(deleteExe, recordList);
         System.out.println(DIVIDER);
     }
 
     public static void showSingleLoanDeletedMessage(int indexOfLoan, Loan deletedLoan) {
-        System.out.println("Successfully deleted Loan " + indexOfLoan + "." + deletedLoan);
+        System.out.println("Successfully deleted Loan " + indexOfLoan + ":");
+        showLoanDetails(deletedLoan);
         System.out.println(DIVIDER);
     }
 
@@ -338,18 +392,14 @@ public class TextUi {
         System.out.println(DIVIDER);
     }
 
-    public static void showMultipleExpenditureDeletedMessage(int index, int endIndex, Expenditure deletedExpenditure) {
-        System.out.println("Successfully deleted Expenditure " + index + "." + deletedExpenditure);
-        if (index == endIndex) {
-            System.out.println(DIVIDER);
-        }
+    public static void showMultipleExpenditureDeletedMessage(int index, Expenditure delExe, AllRecordList recordList) {
+        System.out.println("Successfully deleted Expenditure " + index + ":");
+        showExpenditureDetails(delExe, recordList);
     }
 
-    public static void showMultipleLoanDeletedMessage(int index, int endIndex, Loan deletedLoan) {
-        System.out.println("Successfully deleted Loan " + index + "." + deletedLoan);
-        if (index == endIndex) {
-            System.out.println(DIVIDER);
-        }
+    public static void showMultipleLoanDeletedMessage(int index, Loan deletedLoan) {
+        System.out.println("Successfully deleted Loan " + index + ":");
+        showLoanDetails(deletedLoan);
     }
 
     public static void showBudgetDeletedMessage() {

@@ -63,7 +63,11 @@ public class BudgetTracker {
         } else {
             loanReminder(dateNow, 12);
         }
+
+        TextUi.printDivider();
+
         TextUi.printAvailableDataBase(budgetStorage);
+
         TextUi.printDivider();
 
         boolean isExit = false;

@@ -95,7 +95,7 @@ public class AllRecordList {
 
     public void addLoan(String name, double amount, LocalDate date, boolean isLoadingStorage) {
         int month = date.getMonthValue();
-        allRecordList.get(month).addLoan(name, amount, date, isLoadingStorage);
+        allRecordList.get(month).addLoan(name, amount, date);
         if (!isLoadingStorage) {
             saveToStorage(storageDirectory);
         }

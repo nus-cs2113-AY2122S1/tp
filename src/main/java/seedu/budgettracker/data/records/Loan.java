@@ -3,11 +3,18 @@ package seedu.budgettracker.data.records;
 import java.time.LocalDate;
 import java.lang.String;
 import java.time.format.DateTimeFormatter;
+import java.text.DecimalFormat;
+
 
 public class Loan extends Record {
     protected String debtorName;
     protected LocalDate date;
     protected LocalDate dueDate;
+    private static final int TWO_WEEKS = 14;
+    private static final int HALF_MONTH = 15;
+    private static final int TWO_DECIMAL = 10;
+    private static final int DECEMBER = 12;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     public Loan(String debtorName, double amount, LocalDate date) {
         super(amount, date.getMonthValue());
@@ -22,24 +29,24 @@ public class Loan extends Record {
         int dueDateYear = Integer.parseInt(dayString[0]);
         int dueDateMonth = Integer.parseInt(dayString[1]);
         int dueDateDay = Integer.parseInt(dayString[2]);
-        if (dueDateMonth != 12) {
-            if (dueDateDay > 15) {
+        if (dueDateMonth != DECEMBER) {
+            if (dueDateDay > HALF_MONTH) {
                 dueDateMonth += 1;
-                dueDateDay -= 15;
+                dueDateDay -= HALF_MONTH;
             } else {
-                dueDateDay += 14;
+                dueDateDay += TWO_WEEKS;
             }
         } else {
-            if (dueDateDay > 15) {
+            if (dueDateDay > HALF_MONTH) {
                 dueDateMonth = 1;
                 dueDateYear += 1;
-                dueDateDay -= 15;
+                dueDateDay -= HALF_MONTH;
             } else {
-                dueDateDay += 14;
+                dueDateDay += TWO_WEEKS;
             }
         }
 
-        if (dueDateMonth < 10) {
+        if (dueDateMonth < TWO_DECIMAL) {
             dueDateMonthString = "0" + dueDateMonth;
             dueDateString = dueDateYear + "-" + dueDateMonthString + "-" + dueDateDay;
         } else {
@@ -88,6 +95,6 @@ public class Loan extends Record {
 
     public String toString() {
         return String.format("%-20.20s  %-20.20s %-20.20s",
-                this.debtorName, " | $" + this.amount, " | " + this.date.toString());
+                this.debtorName, " | $" + df.format(this.amount), " | " + this.date.toString());
     }
 }

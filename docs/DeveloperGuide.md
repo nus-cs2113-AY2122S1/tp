@@ -56,7 +56,8 @@ The *Sequence Diagram* below shows how the components interact with each other f
 ![Figure_Architecture__Sequence_Diagram](images/ArchitectureSequenceDiagram.png)
 
 ## Implementation
-### Delete feature
+###Delete
+
 The delete feature collaborates with other classes like Parser, RecordList, etc. Basically it contains three usages which are deletion of Budget, Expenditure(s), and Loan(s).
 
 For example, when user keys ```delete -b m/MONTH```, The Parser class will analyse the whole command, and extract “b/” and “MONTH”. Then the class DeleteBudgetCommand will execute the deletion by using recordList.deleteBudget(MONTH).
