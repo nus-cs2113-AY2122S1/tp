@@ -61,7 +61,7 @@ while the Main Traveller code handles the interaction with users, and the genera
 The World Map is 1 of the 2 major components of the Traveller project.
 It implements a key feature of the application, which is to find the shortest travel path from 1 country to another.
 As shown in figure 2, the World Map consists of 4 sub-components, the [`WorldMap`](#111-worldmap-class) class, 
-[`GraphList`](#112-graphlist-class) class, [`Logic`](#113-logic-class) class, and [`Loader`](#114-dataloader-class) class.
+[`GraphList`](#112-graphlist-class) class, [`Logic`](#113-logic-class) class, and [`DataLoader`](#114-dataloader-class) class.
 Additionally, the World Map uses 2 other classes to pass data around, the `Country` class, and the `Distance` class.
 
 ![](documentationPics/worldMapClassDiagram.jpeg)
@@ -117,24 +117,41 @@ in reverse order. Note that `getToGoal` returns an object of `MinCalcResult` typ
 #### 1.1.4. DataLoader class
 The `DataLoader` class reads in data from *flightData/time.txt* or *flightData/cost.txt* to create the vertexes 
 and edges in `GraphList`.
-Its main function is the `readData` function which passes the relevant lines in *time.txt* or *cost.txt* to either 
-`loadCountries` or `loadDistances` to create vertexes or edges respectively.
+Its main function is the `readData` or `readAltData` function which passes the relevant lines in 
+*time.txt* or *cost.txt* to either `loadCountries` or `loadDistances` to create vertexes or edges respectively.
 
 While `DataLoader` is hardcoded to accept only 5 countries at its implementation, it is possible to increase this 
-number by changing the variable `numberOfCountries` in the class.
+number by changing the variable `numberOfCountries` in the class. Reading on, `numberOfCountries` might be used as a
+variable number.
 
-![](documentationPics/dataSequenceDiagram.png)
+![](documentationPics/dataSequenceDiagram.jpg)
 <div style="text-align: center;">Figure 3: DataLoader Sequence Diagram</div>
 
 The first line of *time.txt* or *cost.txt* contains the 5 country codes, which are read added as vertexes.
 The remaining lines contain the country to country distances, which are in a lower triangular matrix, and are added as 
-edges between the vertexes.
+edges between the vertexes. The total number of lines in each text file is the same number as `numberOfCountries(5)`.
+
+Each loop shown in the sequence diagram helps to facilitate the reading of the data 
+according to how it is written in *time.txt* and *cost.txt*. 
+
+1. The main loop ensures that only `numberOfCountries(5)` lines of text is read. 
+2. The loop in `loadCountries()` ensures that only `numberOfCountries(5)` vertexes is added to the 
+`graphList`. 
+3. The loop in `loadDistances()` ensures that data is read as a lower triangular matrix of length 
+`numberOfCountries - 1 (4)`, to ensure that duplicate edges are not added.
+
+>![](documentationPics/info.png) Trivial points are omitted from the sequence diagram to keep it more concise.
+> For example, getting the reference of `sourceCountry:Country` and `destinationCountry:Country` 
+> from the `countryArray`. As well as the parsing of each newline read from `scanner` to ensure that the data is read
+> properly. To read more about how data in *time.txt* and *cost.txt* is saved and thus parsed/read, 
+> [click here](#61-data-file).
 
 >![](documentationPics/tip.png) As *time.txt* and *cost.txt* are both read in a specific way, 
 > there are certain things to take note when modifying it.
 >1. Country codes must only be 3 letters.
 >2. Distances must be numbers as it will be parsed into a double.
 >3. **numberOfCountries** should be changed to the number of countries on the first line.
+>4. Total number of lines in both text files must be **numberOfCountries**.
 > 
 > ![](documentationPics/warning.png) Invalid information that cannot be read by DataLoader will result in the 
 > disregard of the entire text file.
@@ -208,20 +225,25 @@ The steps illustated by Figure 6 is summarised now.
 #### 1.2.5. SaveLoader class
 The `SaveLoader` class handles the reading and writing of the save file which stores the existing trips when Traveller 
 is exited.
-Its functions are called at the very start (to read and load the save) and at the very end (to write the save).
+It contains two main functions `readSave()` and `writeSave()`. While `readSave()` is called at the start of Traveller,
+`writeSave()` is called whenever a command from user is received and executed, and when Traveller is exited.
+
+>![](documentationPics/info.png) The function `writeSave()` is called whenever is command from user is received and
+> executed to ensure that even if Traveller crashes due to unforeseen circumstances, the save data will always be up to
+>  date. (Suggestion from [Issue #139](https://github.com/AY2122S1-CS2113T-W13-1/tp/issues/139).)
 
 The save file in *save/save.txt* stores the minimum number of commands to recreate the same trip list that was 
 saved previously.
+
 Loading the save file is similar to the main `run` function of Traveller, as the function reads each line of 
-*save.txt* and executes
-each corresponding command.
+*save.txt* and executes the corresponding command.
 
-Following the loading of the save file, writing of the save is handled as shown below.
+Following the loading of the save file, writing of the save file is handled as shown below.
 
-![](documentationPics/saveSequenceDiagram.png)
+![](documentationPics/saveSequenceDiagram.jpg)
 <div style="text-align: center;">Figure 6: Save Sequence Diagram</div>
 
-The return strings of each trip, day and item will correspond to the command that will be executed in order to add it 
+The return strings of each trip, day and item corresponds to the command that will be executed in order to add it 
 to the tripList/ DaysList or ItemsList.
 
 >![](documentationPics/info.png) Trivial points are omitted from the sequence diagram to keep it more concise.

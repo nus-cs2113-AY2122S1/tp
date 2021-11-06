@@ -40,10 +40,20 @@ public class SaveLoader {
      * It is called at the start when Traveller opens.
      */
     public void readSave() {
+        if (!hasDirectory()) {
+            createDir();
+        }
         if (hasSave()) {
             try {
                 readFromSave();
             } catch (SaveDataNotFoundException e) {
+                ui.printError(e.getMessage());
+            }
+        } else {
+            assert !hasSave();
+            try {
+                createSave();
+            } catch (IOException e) {
                 ui.printError(e.getMessage());
             }
         }
@@ -58,9 +68,6 @@ public class SaveLoader {
      */
     public void writeSave(String status) {
         try {
-            if (!hasDirectory()) {
-                createDir();
-            }
             writeToSave();
         } catch (IOException | TravellerException e) {
             ui.printError(e.getMessage());
@@ -149,6 +156,15 @@ public class SaveLoader {
             fw.write(current.getSaveItem());
         }
         fw.close();
+    }
+
+    /**
+     * Creates save.txt. Is called if the save text file doesn't exist.
+     * @throws IOException If an I/O error occurs due to file class.
+     */
+    private void createSave() throws IOException {
+        File save = new File(filePath);
+        save.createNewFile();
     }
 
     /**
