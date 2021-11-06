@@ -2,6 +2,7 @@
 * [Acknowledgements](#acknowledgements)
 * [Design](#design)
   * [Architecture](#architecture)
+  * [Taa Component](#taa-component)
   * [Ui Component](#ui-component)
   * [Parser Component](#parser-component)
   * [Command Component](#command-component)
@@ -32,11 +33,11 @@ The _Architecture Diagram_ shown above illustrates the high-level design of the 
 **Overview of components**
 * `Main`
   * On app launch: Creates and runs an instance of `Taa`.
-* `UI`
-  * Handles UI operations.
 * `Taa`
   * On creation: Initializes the `UI` and `Storage` components.
   * On run: Loads persistent data from `Storage`, receives user input from `UI`, and uses `Parser` to parse the user input.
+* `UI`
+  * Handles UI operations.
 * `Parser`
   * Handles input parsing and determines which command to run.
 * `Command`
@@ -57,6 +58,15 @@ The _Architecture Sequence Diagram_ shown above shows how the components usually
 
 <br>
 
+### Taa Component
+![TaaClassDiagram](diagrams/class/TaaClassDiagram.png)
+
+The `Taa` class is the starting point of the application. It stores a `ClassList` object which represents the current
+classes that the application is keeping track of. It also initialises the `Ui` and `Storage` objects to handle user
+interactions and persistent data storage respectively.
+
+<br>
+
 ### Ui Component
 ![UiClassDiagram](diagrams/class/UiClassDiagram.png)
 
@@ -72,7 +82,7 @@ The `Ui` class handles all user interactions in the application.
 ### Parser Component
 ![ParserClassDiagram](diagrams/class/ParserClassDiagram.png)
 
-The `Parser` class provides methods to parse a user input and return a `Command` object which represents the command that
+The `Parser` class provides methods to parse a user input and returns a `Command` object which represents the command that
 the user wishes to execute, and verify the validity of a value or provided by the user or read from `Storage`.
 
 `Parser` implements the following functionalities:
@@ -84,30 +94,48 @@ the user wishes to execute, and verify the validity of a value or provided by th
 ### Command Component
 ![CommandClassDiagram](diagrams/class/CommandClassDiagram.png)
 
-The `Command` class is an _abstract_ class inherited by other `Command` classes such as `AddClassCommand`, `EditClassCommand`,
+The `Command` class is an _abstract_ class inherited by other command classes such as `AddClassCommand`, `EditClassCommand`,
 `DeleteClassCommand`, `HelpCommand`, etc.
 
 `Command` implements the following functionalities:
 * Check the validity of arguments provided by the user through the `checkArgument` method.
 * Perform the logic of the command run by the user through the `execute` method.
+* Return a string representing the different command usage syntax.
 
 <br>
 
 ### ClassList Component
-TODO
+![ClassListClassDiagram](diagrams/class/ClassListClassDiagram.png)
+
+The `ClassList` class contains data of all classes saved within it. It provides methods to allow other classes to access
+the various data within it.
+
+`ClassList` implements the following functionalities:
+* Add/Delete `TeachingClass` objects within the list.
+* Return all `TeachingClass` objects within the list.
 
 <br>
 
 ### Util Component
-TODO
+![UtilClassDiagram](diagrams/class/UtilClassDiagram.png)
+
+The `Util` class provides common utility methods.
+
+`Util` implements the following functionalities:
+* Check if string can be converted to `int`, `double`, or `boolean`.
+* Create a file (including its parent directories, if necessary).
+* Check if file exists.
+* Check if path is a file or folder.
+* Return the absolute path of given a path.
 
 <br>
 
 ### Storage Component
 ![StorageClassDiagram](diagrams/class/StorageClassDiagram.png)
 
-The `Storage` class handles all data file operations in the application. It depends on the `ClassListDeserializer` to
-deserialize the data read from the JSON file.
+The `Storage` class handles all data file operations in the application. It depends on the `StorageDeserializer` to
+deserialize the data read from the JSON file. `StorageDeserializer` is an _abstract_ class inherited by other deserializer
+classes such as `ClassListDeserializer`, `TeachingClassDeserializer`, `StudentListDeserializer`, etc.
 
 `Storage` implements the following functionalities:
 * Save `ClassList` into a JSON file.
