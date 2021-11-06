@@ -115,7 +115,7 @@ public class UpdateParser extends Parser {
         return new UpdateGoalNameCommand(goalIndex, newGoalName);
     }
 
-    public static Command parseUpdateGoalEndDate(String input) throws HaBitParserException {
+    public static Command parseUpdateGoalEndDateCommand(String input) throws HaBitParserException {
         ArrayList<String> parameters = splitInput(input);
         int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
         Date newDate = getDate(parameters);
