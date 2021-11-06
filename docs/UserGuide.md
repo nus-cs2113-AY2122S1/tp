@@ -179,7 +179,6 @@ enter 2
 		________________________________________________________
 ```
 
-<div style="page-break-after: always;"></div>
 
 ### 3. Exiting from a workout: `back`
 
@@ -406,6 +405,8 @@ sets of 4 and new reps of 12: `edit 2, 1, kickbacks, 4 12`
 Edit exercise 2 to new exercise description of kickbacks, new
 sets of 4 and new reps of 12: `edit 2, kickbacks, 4 12 `
 
+<div style="page-break-after: always;"></div>
+
 Expected outcome (*Main mode*):
 ```
 edit 2, 1, kickbacks, 4 12
@@ -564,6 +565,9 @@ Matching exercises in (2) full body
 1. [ ] kickbacks | 2 sets of 10 reps
 ________________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
+
 ```
 search 2 oct 2021
 ________________________________________________________
@@ -630,7 +634,6 @@ Arm
 ├───────────────────┼───────────────────┼───────────────────┼──────────────────┤
 │4                  │Bear Crawl         │4                  │10                │
 └───────────────────┴───────────────────┴───────────────────┴──────────────────┘
-________________________________________________________
 ```
 
 <div style="page-break-after: always;"></div>
@@ -678,6 +681,7 @@ All workouts have been cleared!
 ________________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
 
 Expected outcome (*Workout Mode*):
 ```
@@ -706,7 +710,6 @@ Bye. Hope you get your desired body soon, have a great day!
 ________________________________________________________
 ```
 
-<div style="page-break-after: always;"></div>
 
 ### 15. Saving data
 
