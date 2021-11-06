@@ -9,13 +9,13 @@ Participant ":IngredientGroup" as ingredient_group INGREDIENTGROUP_COLOUR
 Participant ":Ingredient" as ingredient INGREDIENT_COLOUR
 Participant ":Storage" as storage STORAGE_COLOUR
 
--> parser : parse("subtract 1 a/150.0")
+-> parser : parse("subtract n/carrot a/150.0")
 activate parser PARSER_COLOUR
 
-parser -> parser : parseUpdateCommand()
+parser -> parser : parseSubtractCommand()
 activate parser PARSER_COLOUR_S1
 
-parser -> subtract **: SubtractCommand(1, 150.0)
+parser -> subtract **: SubtractCommand("carrot", 150.0)
 activate subtract COMMAND_COLOUR
 return
 
@@ -26,10 +26,14 @@ subtract -> ingredient_list : getInstance()
 activate ingredient_list INGREDIENTLIST_COLOUR
 return instance
 
-subtract -> ingredient_list : subtractIngredientFromGroup(1, 150.0)
+subtract -> ingredient_list : subtractIngredientFromGroup("carrot", 150.0)
 activate ingredient_list INGREDIENTLIST_COLOUR
 
-ingredient_list -> ingredient_list : getIngredientGroup(1)
+ingredient_list -> ingredient_list : findIngredientIndexInList("Carrot")
+activate ingredient_list INGREDIENTLIST_COLOUR
+return ingredientIndex
+
+ingredient_list -> ingredient_list : getIngredientGroup(ingredientIndex + 1)
 activate ingredient_list INGREDIENTLIST_COLOUR
 return currentGroup
 
@@ -37,16 +41,72 @@ ingredient_list -> ingredient_group : getIngredientGroupName()
 activate ingredient_group INGREDIENTGROUP_COLOUR
 return subtractedIngredientName
 
-opt totalAmount < subtractAmount
-    ingredient_list -> ingredient_group : getTotalAmount()
-    activate ingredient_group INGREDIENTGROUP_COLOUR
+ingredient_list -> ingredient_group : getTotalAmount()
+activate ingredient_group INGREDIENTGROUP_COLOUR
 return totalAmount
 
-ingredient_list -> Math : abs(totalAmount - 150.0)
-activate Math INGREDIENTGROUP_COLOUR
-return value
+alt totalAmount - 150.0 < 0.001
 
-ingredient_list -> ingredient_list : remove(0)
+   ingredient_list -> ingredient_list : remove(currentGroup)
+   activate ingredient_list INGREDIENTLIST_COLOUR
+   return
+
+   ingredient_list -> storage : writeIngredientsToMemory
+   activate storage STORAGE_COLOUR
+   return
+
+   else totalAmount - 150.0 >= 0.001
+   ingredient_list -> ingredient_group : subtractFromTotalAmount(150.0)
+   activate ingredient_group INGREDIENTGROUP_COLOUR
+   return
+
+   loop subtractAmount != 0.0
+       ingredient_list -> ingredient_group : get(i + 1)
+       activate ingredient_group INGREDIENTGROUP_COLOUR
+       return subtractINgredient
+
+       ingredient_list -> ingredient : getAmount()
+       activate ingredient INGREDIENT_COLOUR
+       return ingredientSubtractAmount
+
+        alt subtractAmount <= ingredientSubtractAmount
+            ingredient_list -> ingredient : setAmount(ingredientSubtractAmount - subtractAmount)
+            activate ingredient INGREDIENT_COLOUR
+            return
+
+            else subtractAmount > ingredientSubtractAmount
+            ingredient_list -> ingredient : setAmount(0.0)
+            activate ingredient INGREDIENT_COLOUR
+            return
+
+        end
+    end
+
+end
+
+ingredient_list -> ingredient_group : subtractFromTotalAmount(150.0)
+activate ingredient_group INGREDIENTGROUP_COLOUR
+return
+
+ingredient_list -> ingredient_group : get()
+activate ingredient_group INGREDIENTGROUP_COLOUR
+return ingredientSubtractAmount
+
+loop subtractAmount != 0.0
+    alt subtractAmount <= ingredientSubtractAmount
+        ingredient_list -> ingredient : setAmount(ingredientSubtractAmount - subtractAmount)
+        activate ingredient INGREDIENT_COLOUR
+        return
+
+        else subtractAmount > ingredientSubtractAmount
+        ingredient_list -> ingredient : setAmount(0.0)
+        activate ingredient INGREDIENT_COLOUR
+        return
+
+    end
+end
+
+ingredient_list -> ingredient_list : removeLowAmountIngredientFromGroup(currentGroup)
 activate ingredient_list INGREDIENTLIST_COLOUR
 return
 
@@ -55,17 +115,6 @@ activate storage STORAGE_COLOUR
 return
 
 return subtractedIngredientName
-
-
-
-ingredient_list -> ingredient_group : subtractFromTotalAmount(150.0)
-activate ingredient_group INGREDIENTGROUP_COLOUR
-return
-
-
-
-
-return removedIngredient
 
 return resultMsg
 

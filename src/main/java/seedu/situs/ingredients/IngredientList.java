@@ -171,14 +171,21 @@ public class IngredientList {
         currentGroup.subtractFromTotalAmount(subtractAmount);
 
         int i = 0;
-        Ingredient subtractIngredient = currentGroup.get(i + 1);
+        Ingredient subtractIngredient;
+        Double ingredientSubtractAmount;
 
+        //subtracts ingredient amount from closest to furthest expiry date
         while (subtractAmount != 0.0) {
-            if (subtractAmount <= subtractIngredient.getAmount()) {
-                subtractIngredient.setAmount(subtractIngredient.getAmount() - subtractAmount);
+            subtractIngredient = currentGroup.get(i + 1);
+            ingredientSubtractAmount = subtractIngredient.getAmount();
+
+            if (subtractAmount <= ingredientSubtractAmount) {
+                //remaining subtract amount is less than ingredient with the nearest expiry date
+                subtractIngredient.setAmount(ingredientSubtractAmount - subtractAmount);
                 subtractAmount = 0.0;
             } else {
-                subtractAmount -= subtractIngredient.getAmount();
+                //remaining subtract amount is greater than ingredient with the nearest expiry date
+                subtractAmount -= ingredientSubtractAmount;
                 subtractIngredient.setAmount(0.0);
             }
             i++;

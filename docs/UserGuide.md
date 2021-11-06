@@ -219,7 +219,7 @@ Output (using list shown in the [list section](#23-list-ingredients)):
 ```
 subtract n/carrot a/50
 ____________________________________________________
-Got it. 100.0 kg has been subtracted from Carrot
+Got it. 50.0 kg has been subtracted from Carrot
 ____________________________________________________
 ```
 

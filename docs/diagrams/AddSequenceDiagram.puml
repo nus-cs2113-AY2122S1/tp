@@ -3,91 +3,101 @@
 !include style.puml
 
 
-Participant "<<class>> Parser" as parser PARSER_COLOUR
-Participant ":AddCommand" as add COMMAND_COLOUR
+Participant ":Parser" as parser PARSER_COLOUR
+Participant ":SubtractCommand" as subtract COMMAND_COLOUR
 Participant ":IngredientList" as ingredient_list INGREDIENTLIST_COLOUR
 Participant ":IngredientGroup" as ingredient_group INGREDIENTGROUP_COLOUR
-Participant ":Ingredient" as ingredientClass INGREDIENT_COLOUR
+Participant ":Ingredient" as ingredient INGREDIENT_COLOUR
 Participant ":Storage" as storage STORAGE_COLOUR
 
-
--> parser: parse ("add a/carrot n/200 e/ 25/12/2021")
+-> parser : parse("subtract n/carrot a/150.0")
 activate parser PARSER_COLOUR
 
-parser -> parser : parseAddCommand("a/carrot n/200 e/ 25/12/2021")
-activate parser PARSER_COLOUR
+parser -> parser : parseSubtractCommand()
+activate parser PARSER_COLOUR_S1
 
-parser -> add **: AddCommand(ingredient)
-activate add COMMAND_COLOUR
+parser -> subtract **: SubtractCommand("carrot", 150.0)
+activate subtract COMMAND_COLOUR
 return
 
-parser -> add : run()
-activate add COMMAND_COLOUR
+parser -> subtract : run()
+activate subtract COMMAND_COLOUR
 
-add -> ingredient_list : getInstance()
+subtract -> ingredient_list : getInstance()
 activate ingredient_list INGREDIENTLIST_COLOUR
 return instance
 
-add -> ingredient_list : add(ingredient)
+subtract -> ingredient_list : subtractIngredientFromGroup("carrot", 150.0)
 activate ingredient_list INGREDIENTLIST_COLOUR
 
-ingredient_list -> ingredientClass : getName()
-activate ingredientClass INGREDIENT_COLOUR
-return ingredientName
-
-ingredient_list -> ingredient_list : isIngredientInList(ingredientName)
+ingredient_list -> ingredient_list : findIngredientIndexInList("Carrot")
 activate ingredient_list INGREDIENTLIST_COLOUR
-return isRepeatedName
+return ingredientIndex
 
-alt !isRepeatedName
-    ingredient_list -> ingredient_group **: IngredientGroup()
+ingredient_list -> ingredient_list : getIngredientGroup(ingredientIndex + 1)
+activate ingredient_list INGREDIENTLIST_COLOUR
+return currentGroup
+
+ingredient_list -> ingredient_group : getIngredientGroupName()
+activate ingredient_group INGREDIENTGROUP_COLOUR
+return subtractedIngredientName
+
+ingredient_list -> ingredient_group : getTotalAmount()
+activate ingredient_group INGREDIENTGROUP_COLOUR
+return totalAmount
+
+alt totalAmount - 150.0 < 0.001
+
+   ingredient_list -> ingredient_list : remove(currentGroup)
+   activate ingredient_list INGREDIENTLIST_COLOUR
+   return
+
+   ingredient_list -> storage : writeIngredientsToMemory
+   activate storage STORAGE_COLOUR
+   return
+
+
+    else totalAmount - 150.0 >= 0.001
+    ingredient_list -> ingredient_group : subtractFromTotalAmount(150.0)
     activate ingredient_group INGREDIENTGROUP_COLOUR
-    return newIngredientGroup
-
-    ingredient_list -> ingredient_list : add(newIngredientGroup)
-    activate ingredient_list INGREDIENTLIST_COLOUR
     return
 
-    ingredient_list -> ingredient_group : setIngredientGroupName(ingredientName)
+    ingredient_list -> ingredient_group : get()
     activate ingredient_group INGREDIENTGROUP_COLOUR
-    return
+    return ingredientSubtractAmount
 
-    ingredient_list -> ingredient_group : add (ingredient)
-    activate ingredient_group INGREDIENTGROUP_COLOUR
-    return
+    loop subtractAmount != 0.0
+        alt subtractAmount <= ingredientSubtractAmount
+            ingredient_list -> ingredient : setAmount(ingredientSubtractAmount - subtractAmount)
+            activate ingredient INGREDIENT_COLOUR
+            return
+
+            else subtractAmount > ingredientSubtractAmount
+            ingredient_list -> ingredient : setAmount(0.0)
+            activate ingredient INGREDIENT_COLOUR
+            return
+
+        end
+    end
 
 
-    else isRepeatedName
-    ingredient_list -> ingredient_list : findIngredientIndexInList(ingredientName)
-        activate ingredient_list INGREDIENTLIST_COLOUR
-        return ingredientIndex
-
-        ingredient_list -> ingredient_list : get(ingredientIndex)
-        activate ingredient_list INGREDIENTLIST_COLOUR
-        return
-        ingredient_list -> ingredient_group : add(ingredient)
-        activate ingredient_group INGREDIENTGROUP_COLOUR
-        return
 end
 
-ingredient_list -> storage : writeIngredientsToMemory(ingredientList)
+
+ingredient_list -> ingredient_list : removeLowAmountIngredientFromGroup(currentGroup)
+activate ingredient_list INGREDIENTLIST_COLOUR
+return
+
+ingredient_list -> storage : writeIngredientsToMemory
 activate storage STORAGE_COLOUR
 return
 
-return
+return subtractedIngredientName
 
 return resultMsg
+
 return resultMsg
+
 return CLI message
-
-
-
-
-
-
-
-
-
-
 
 @enduml
