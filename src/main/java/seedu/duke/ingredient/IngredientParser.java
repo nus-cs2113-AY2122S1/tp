@@ -7,6 +7,11 @@ public class IngredientParser {
 
     public void addIngredient(String[] command, IngredientList ingredients) {
         try {
+            String name = command[1].stripLeading().stripTrailing();
+            if (name.length() == 0) {
+                throw new ArrayIndexOutOfBoundsException();
+            }
+
             int quantity = Integer.parseInt(command[2].stripLeading().stripTrailing());
             if (quantity < 1) {
                 throw new NumberFormatException();
