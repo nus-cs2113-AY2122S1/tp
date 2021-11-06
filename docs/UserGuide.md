@@ -242,6 +242,7 @@ Example:
 Adds an ingredient to the ingredient list.
 
 Format: `add-ingredient/INGREDIENT_NAME/QUANTITY/PRICE/EXPIRY_DATE`
+  * `INGREDIENT_NAME` must be a string.
   * `QUANTITY` must be a positive, non-zero integer.
   * `PRICE` must be a positive number of at least `0.01`. All values will be rounded to 2 decimal places.
   * `EXPIRY_DATE` must be a valid date in YYYY-MM-DD format.
@@ -256,6 +257,8 @@ to the ingredient list.
    Ingredient Quantity: 50
    Ingredient Unit Price: 1.50
    Expiry Date: 2021-10-21
+   
+   Carrot [50] [$1.50] [2021-10-21]
 ---------------------------------------------
 ```
 
@@ -272,7 +275,7 @@ Example:
 ```
 ---------------------------------------------
  Got it. This ingredient was deleted:
-   Strawberry
+   Strawberry [30] [$1.00] [2021-10-30]
 ---------------------------------------------
 ```
 
