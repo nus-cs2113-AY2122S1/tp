@@ -56,6 +56,11 @@ public class ConTech {
         } while (!command.isExit());
     }
 
+    /**
+     * Runs the Command Procedure by setting the contact list and personal contact contexts before executing any
+     * given command. Upon execution of given command, the contact list and personal contact are saved to local storage.
+     * @param command Supplied Command after parsing
+     */
     private void runCommandProcedure(Command command) {
         try {
             command.setContactList(contactList);

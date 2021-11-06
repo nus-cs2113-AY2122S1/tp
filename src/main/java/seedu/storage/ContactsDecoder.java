@@ -24,7 +24,18 @@ import java.util.Scanner;
 import static seedu.parser.ContactParser.NUMBER_OF_FIELDS;
 import static seedu.storage.Storage.SEPARATOR;
 
+/**
+ * This class inherits the abstract RegexParser class to decode and read local storage files.
+ */
 public class ContactsDecoder extends RegexParser {
+
+    /**
+     * Returns a ContactList containing contacts from parsing inputs in a specified file in local storage.
+     * @param contactFile Specified file to be read
+     * @param contactFilePath File path of specified file
+     * @return ContactList Returns a ContactList containing parsed contacts
+     * @throws FileErrorException If the program faces issues relating to local storage
+     */
     public ContactList readContacts(File contactFile, String contactFilePath) throws FileErrorException {
         ContactList updatedContactList = new ContactList();
         try {
@@ -89,6 +100,13 @@ public class ContactsDecoder extends RegexParser {
     }
 
     //@@author marcusbory
+    /**
+     * Decodes a string read from the file and attempts to parse it as a contact.
+     * @param contactList Given contact list for contact to be added to
+     * @param contactText String read from the file
+     * @param lineIndex Line which contactText was from
+     * @param contactFilePath File path of specified file
+     */
     private void decodeContact(ContactList contactList, String contactText, int lineIndex, String contactFilePath) {
         // Add the decoded details into the contact list
         try {
@@ -113,6 +131,12 @@ public class ContactsDecoder extends RegexParser {
         }
     }
 
+    /**
+     * Prints the relevant message for invalid details pertaining to the parsed contacts
+     * @param e Exception that was caught
+     * @param lineIndex Line in the file which the exception was thrown
+     * @param contactFilePath File path of specified file
+     */
     private void handleInvalidDetails(Exception e, int lineIndex, String contactFilePath) {
         ExceptionTextUi.invalidLoadedLineMessage(lineIndex, contactFilePath);
         if (e instanceof InvalidNameException) {
@@ -130,6 +154,19 @@ public class ContactsDecoder extends RegexParser {
         }
     }
 
+    /**
+     * Returns a String array containing parsed details relating to a contact
+     * @param contactText String read from the file
+     * @return String[] String array containing parsed contact details
+     * @throws IndexOutOfBoundsException If contactText contains fewer fields than required
+     * @throws InvalidGithubUsernameException If there exists an invalid Github username
+     * @throws InvalidNameException If there exists an invalid name
+     * @throws InvalidFlagException If there exists an invalid flag
+     * @throws InvalidTelegramUsernameException If there exists an invalid Telegram username
+     * @throws InvalidTwitterUsernameException If there exists an invalid Twitter username
+     * @throws InvalidLinkedinUsernameException If there exists an invalid Linkedin username
+     * @throws InvalidEmailException If there exists an invalid email
+     */
     private String[] decodeDetails(String contactText) throws IndexOutOfBoundsException,
             InvalidGithubUsernameException, InvalidNameException, InvalidFlagException,
             InvalidTelegramUsernameException, InvalidTwitterUsernameException,

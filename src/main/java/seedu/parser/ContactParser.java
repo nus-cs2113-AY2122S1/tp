@@ -34,9 +34,8 @@ public abstract class ContactParser extends RegexParser implements ContactDetail
             MissingArgEditException, MissingArgAddException, DuplicateDetailException;
 
     /**
-     * This method takes in the contactDetails array and populates it with contact
-     * details. It will sift out the flags to decide what details to populate, using
-     * the enumeration from DetailType.
+     * Takes in the contactDetails array and populates it with contact details. Sifts out the flags to decide
+     * what details to populate, using the enumeration from DetailType.
      *
      * @param contactDetails String array containing contact details
      * @param detail         Unparsed detail
@@ -47,10 +46,8 @@ public abstract class ContactParser extends RegexParser implements ContactDetail
             InvalidGithubUsernameException, InvalidTelegramUsernameException, InvalidLinkedinUsernameException,
             InvalidTwitterUsernameException, InvalidEmailException, DuplicateDetailException {
         String[] destructuredDetails = detail.split(" ", NUMBER_OF_DETAILS);
-        // for commands that specify a flag, but do not specify any argument for that
-        // flag
-        // IndexOutOfBoundsException should not be thrown as the first if case will be
-        // true
+        // for commands that specify a flag, but do not specify any argument for that flag
+        // IndexOutOfBoundsException should not be thrown as the first if case will be true
         if (destructuredDetails.length == 1 || destructuredDetails[1].isBlank()) {
             throw new MissingDetailException();
         }

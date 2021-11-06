@@ -14,6 +14,12 @@ public interface ContactDetails {
     String EMAIL_FLAG = "e";
     String LINKEDIN_FLAG = "l";
 
+    /**
+     * Returns the index that identifies the detail type denoted by the flag.
+     * @param flag Flag specified by the user representing the field
+     * @return int Unique index of the detail
+     * @throws InvalidFlagException If the flag given is not recognised
+     */
     default int getIndexToStore(String flag) throws InvalidFlagException {
         int indexToStore;
         switch (flag) {
