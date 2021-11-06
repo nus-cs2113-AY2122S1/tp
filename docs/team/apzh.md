@@ -55,7 +55,6 @@ Given below are the contributions I have made to this project.
     - All text descriptions in this section.
     - [Image] The **Sequence Diagram** - Showing how the process of filtering the user's tasklist that is managed 
     - by the TaskManager class.
-  - Added the information in "5.2 User stories".
 
 - **Contributions to team-based tasks**:
   - Maintained the issue tracker and milestones for our team.
@@ -63,6 +62,10 @@ Given below are the contributions I have made to this project.
   - General format update to both the User Guide and Developer Guide to ensure consistency and allow others to easily
   add their assignment parts without affecting the general structure of the guide.
   - Added FAQs, Target Users, and tidied up sections in both the User Guide and Developer Guide.
+  - Added user stories and formatted the table.
+  - Added instructions for manual testing for "Launch and Exit", "Listing the Tasklist", "Filtering the Tasklist", "Sorting the Tasklist", 
+  and "Viewing the recurrence of a task".
+
 - **Review/mentoring contributions**:
   - Help team members to test their features to ensure they work prior to releases each version of our application on GitHub.
   - Help review PRs made by team members in general and offer advice and feedback prior to merging the PRs.
