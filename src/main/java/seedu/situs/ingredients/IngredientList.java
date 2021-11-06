@@ -137,19 +137,24 @@ public class IngredientList {
     //@@author AayushMathur7
     /**
      * Subtracts amount from total ingredient amount.
-     * @param groupNumber group number of ingredient
+     * @param ingredientName the name of the ingredient to subtract from
      * @param subtractAmount amount to be subtracted from total amount
      * @return name of the subtracted ingredient
      * @throws SitusException if the ingredient and/or expiry date are not matched
      * @throws IOException if the removed ingredient cannot be removed from memory
      */
-    public String subtractIngredientFromGroup(int groupNumber, Double subtractAmount) throws
+    public String subtractIngredientFromGroup(String ingredientName, Double subtractAmount) throws
             SitusException, IOException, IndexOutOfBoundsException {
 
         int i = 0;
-        IngredientGroup currentGroup = getIngredientGroup(groupNumber);
-        String subtractedIngredientName = currentGroup.getIngredientGroupName();
+        int ingredientIndex = findIngredientIndexInList(ingredientName);
 
+        if (ingredientIndex < 0) {
+            throw new SitusException("Ingredient not found!");
+        }
+
+        IngredientGroup currentGroup = getIngredientGroup(ingredientIndex + 1);
+        String subtractedIngredientName = currentGroup.getIngredientGroupName();
 
         if (BigDecimal.valueOf(currentGroup.getTotalAmount()).compareTo(BigDecimal.valueOf(subtractAmount)) < 0) {
             throw new SitusException(INVALID_SUBTRACT);
@@ -158,7 +163,7 @@ public class IngredientList {
         // remove groups that total amount is approx 0
         //@@author datn02
         if (Math.abs(currentGroup.getTotalAmount() - subtractAmount) < 0.001) {
-            ingredientList.remove(groupNumber - 1);
+            ingredientList.remove(currentGroup);
             storage.writeIngredientsToMemory(ingredientList);
             return subtractedIngredientName;
         }
