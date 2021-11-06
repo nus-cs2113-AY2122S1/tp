@@ -3,7 +3,6 @@ package seedu.duke.parser;
 import seedu.duke.exceptions.ForceCancelException;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
-import seedu.duke.trip.Trip;
 
 import java.time.LocalDate;
 import java.util.logging.Level;
