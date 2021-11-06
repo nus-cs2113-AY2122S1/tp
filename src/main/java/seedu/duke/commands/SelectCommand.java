@@ -5,17 +5,27 @@ import seedu.duke.Ui;
 import seedu.duke.items.Event;
 import seedu.duke.items.Item;
 import seedu.duke.items.Task;
+import seedu.duke.items.characteristics.Member;
 import seedu.duke.parser.ItemType;
+
+import static seedu.duke.parser.ItemType.EVENT;
+import static seedu.duke.parser.ItemType.MEMBER;
 
 public class SelectCommand extends Command {
 
     protected ItemType itemType;
-    private final int eventIndex;
+    private int eventIndex;
     private int taskIndex;
+    private int memberIndex;
 
-    public SelectCommand(ItemType itemType, int eventIndex) {
+    public SelectCommand(ItemType itemType, int index) {
         this.itemType = itemType;
-        this.eventIndex = eventIndex;
+        assert itemType.equals(EVENT) | itemType.equals(MEMBER);
+        if (itemType.equals(EVENT)) {
+            eventIndex = index;
+        } else if (itemType.equals(MEMBER)) {
+            memberIndex = index;
+        }
     }
 
     public SelectCommand(ItemType itemType, int eventIndex, int taskIndex) {
@@ -24,8 +34,10 @@ public class SelectCommand extends Command {
         this.taskIndex = taskIndex;
     }
 
+
     public CommandResult execute() {
         Item selectedItem;
+        Member selectedMember;
 
         switch (itemType) {
         case EVENT:
@@ -35,6 +47,8 @@ public class SelectCommand extends Command {
             selectedItem = getTaskFromEventIndex(eventIndex, taskIndex);
             return new CommandResult(Ui.getSelectedTaskMessage((Task) selectedItem));
         case MEMBER:
+            selectedMember = getMemberFromIndex(memberIndex);
+            return new CommandResult(Ui.getSelectedMemberMessage(selectedMember));
         default:
             return new CommandResult("");
         }
@@ -48,4 +62,7 @@ public class SelectCommand extends Command {
         return Duke.eventCatalog.get(eventIndex).getFromTaskList(taskIndex);
     }
 
+    private Member getMemberFromIndex(int memberIndex) {
+        return Duke.memberRoster.get(memberIndex);
+    }
 }
