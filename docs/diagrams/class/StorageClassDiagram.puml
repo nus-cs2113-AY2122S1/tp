@@ -7,25 +7,12 @@ class Storage {
     +load(): ClassList
     +save(classList: ClassList): void
 }
-
+class Parser
+class Util
 class StorageDeserializer as "{abstract}\nStorageDeserializer"
-class AssessmentDeserializer extends StorageDeserializer
-class AssessmentListDeserializer extends StorageDeserializer
-class AttendanceDeserializer extends StorageDeserializer
-class AttendanceListDeserializer extends StorageDeserializer
-class ClassListDeserializer extends StorageDeserializer
-class TeachingClassDeserializer extends StorageDeserializer
-class StudentDeserializer extends StorageDeserializer
-class StudentListDeserializer extends StorageDeserializer
 
-Storage .down.> ClassListDeserializer
-ClassListDeserializer .right.> TeachingClassDeserializer
-TeachingClassDeserializer .right.> StudentListDeserializer
-TeachingClassDeserializer .down.> AssessmentListDeserializer
-StudentListDeserializer .right.> StudentDeserializer
-StudentDeserializer .right.> AttendanceListDeserializer
-AttendanceListDeserializer .right.> AttendanceDeserializer
-AssessmentListDeserializer .right.> AssessmentDeserializer
-AssessmentDeserializer -up[hidden]- StudentListDeserializer
+Storage .down.> StorageDeserializer
+StorageDeserializer .down.> Parser
+StorageDeserializer .down.> Util
 
 @enduml

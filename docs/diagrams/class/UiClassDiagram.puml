@@ -1,16 +1,6 @@
 @startuml
 !include ClassStyle.puml
 
-class Taa {
-    -classList : ClassList
-    -storage: Storage
-    {static} +main(args: String[]): void
-    +Taa()
-    +Taa(isLoggingEnabled: boolean)
-    +run(): void
-    -loadClassListFromStorage(): void
-}
-
 class Ui {
     -scanner: Scanner
     +Ui()
@@ -23,7 +13,5 @@ class Ui {
     +printExitMessage(): void
     +printException(message: String): void
 }
-
-Taa -> "1" Ui
 
 @enduml

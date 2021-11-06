@@ -1,0 +1,20 @@
+@startuml
+!include ClassStyle.puml
+
+class Taa {
+    {static} +main(args: String[]): void
+    +Taa()
+    +Taa(isLoggingEnabled: boolean)
+    +run(): void
+    -loadClassListFromStorage(): void
+}
+
+class ClassList
+class Ui
+class Storage
+
+Taa -down-> "1" ClassList
+Taa -down-> "1" Ui
+Taa -down-> "1" Storage
+
+@enduml

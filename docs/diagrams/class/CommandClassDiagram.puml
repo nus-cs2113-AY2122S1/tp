@@ -20,4 +20,14 @@ class Command as "{abstract}\nCommand" {
     #hasAllArguments(): boolean
 }
 
+class ClassList
+class Ui
+class Storage
+class Util
+
+Command .down.> ClassList
+Command .down.> Ui
+Command .down.> Storage
+Command .down.> Util
+
 @enduml
