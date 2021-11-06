@@ -143,17 +143,15 @@ public class Ui {
     }
 
     public static String getSelectedTaskMessage(Task task) {
-        return "Here are the details of the task:" + System.lineSeparator()
-                + getTask(task);
+        return "Here are the details of the task:\n" + getTask(task);
     }
 
     public static String getSelectedEventMessage(Event event) {
-        return "Here are the details of the event:" + System.lineSeparator()
-                + getEvent(event);
+        return "Here are the details of the event:\n" + getEvent(event);
     }
 
     public static String getSelectedMemberMessage(Member member) {
-        return "Here are the details of the member:\n" + member.getName()
+        return "Here are the details of the member:\n" + member.getName() + "\n"
                 + member.getTasks();
     }
 
