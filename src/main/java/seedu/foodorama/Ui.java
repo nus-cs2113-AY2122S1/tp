@@ -975,7 +975,7 @@ public class Ui {
 
     public void printInvalidIngredientWeight(String ingedientName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "The weight of " + ingedientName + "cannot be negative!"+ System.lineSeparator()
+                + "The weight of " + ingedientName + "cannot be negative!" + System.lineSeparator()
                 + "Please enter a weight that is not negative:" + System.lineSeparator()
                 + LINE_DIVIDER
         );
