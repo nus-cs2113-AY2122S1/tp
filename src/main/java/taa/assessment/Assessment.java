@@ -23,7 +23,19 @@ public class Assessment implements ClassChecker {
      * @return true if valid, else false.
      */
     public static boolean isWeightageWithinRange(double weightage) {
-        return (weightage >= WEIGHTAGE_RANGE[0] && weightage <= WEIGHTAGE_RANGE[1]);
+        int lowerBoundary = Double.compare(weightage, WEIGHTAGE_RANGE[0]);
+        int upperBoundary = Double.compare(weightage, WEIGHTAGE_RANGE[1]);
+        //valid lower boundary values are >=0
+        //valid upper boundary values are <=0
+        boolean isValidLowerBoundary = lowerBoundary >= 0;
+        boolean isValidUpperBoundary = upperBoundary <= 0;
+        return (isValidLowerBoundary && isValidUpperBoundary);
+    }
+
+    public static boolean isMaximumMarksValid(double maximumMarks) {
+        int lowerBoundary = Double.compare(maximumMarks, MINIMUM_MARKS);
+        boolean isValidLowerBoundary = lowerBoundary >= 0;
+        return (isValidLowerBoundary);
     }
 
     public String getName() {
@@ -35,7 +47,11 @@ public class Assessment implements ClassChecker {
     }
 
     public boolean isMarksValid(double marks) {
-        return ((marks >= MINIMUM_MARKS) && (marks <= maximumMarks));
+        int lowerBoundary = Double.compare(marks, MINIMUM_MARKS);
+        int upperBoundary = Double.compare(marks, maximumMarks);
+        boolean isValidLowerBoundary = lowerBoundary >= 0;
+        boolean isValidUpperBoundary = upperBoundary <= 0;
+        return (isValidLowerBoundary && isValidUpperBoundary);
     }
 
     public double getMaximumMarks() {
@@ -73,7 +89,9 @@ public class Assessment implements ClassChecker {
      */
     @Override
     public boolean verify() {
-        if (name.isEmpty() || !isWeightageWithinRange(weightage) || maximumMarks < MINIMUM_MARKS) {
+        int validMaximumMarks = Double.compare(maximumMarks, MINIMUM_MARKS);
+        boolean isValidMaximumMarks = validMaximumMarks < 0;
+        if (name.isEmpty() || !isWeightageWithinRange(weightage) || isValidMaximumMarks) {
             return false;
         }
 
