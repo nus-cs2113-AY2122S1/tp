@@ -94,7 +94,7 @@ public class AddCommandParser {
      * @param universitySelectedList The list of user selected universities.
      * @throws AddParseException If inputs are invalid.
      */
-    private void handleUniFlagArgs(String arguments, UniversityList universityMasterList,
+    public void handleUniFlagArgs(String arguments, UniversityList universityMasterList,
                                    UniversityList universitySelectedList) throws AddParseException {
         String uniName;
         if (ParseCondition.isText(arguments)) {
@@ -135,7 +135,7 @@ public class AddCommandParser {
      * @param moduleSelectedList The list of user selected modules.
      * @throws AddParseException If inputs are invalid.
      */
-    private void handleModFlagArgs(String arguments, ModuleList moduleMasterList,
+    public void handleModFlagArgs(String arguments, ModuleList moduleMasterList,
                                    ModuleList moduleSelectedList) throws AddParseException {
         if (ParseCondition.isText(arguments)) {
             module = moduleMasterList.getModule(arguments.toUpperCase());
@@ -172,7 +172,7 @@ public class AddCommandParser {
      * @param moduleSelectedList The list of user selected modules.    * @param universityMasterList
      * @throws AddParseException If inputs are invalid.
      */
-    private void handleMapFlagArgs(String arguments, UniversityList universitySelectedList,
+    public void handleMapFlagArgs(String arguments, UniversityList universitySelectedList,
                                    ModuleList moduleSelectedList,
                                    UniversityList universityMasterList) throws AddParseException {
         // Separate arguments
