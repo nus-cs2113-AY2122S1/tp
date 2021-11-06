@@ -27,6 +27,11 @@
 - [Non-Function Requirements](#nf-req)
 - [Glossary](#glossary)
 - [Instructions for manual testing](#manual-test)
+  - [Launch and Shutdown](#launch-and-shutdown)
+  - [Adding a contact](#testing-add)
+  - [Viewing a contact](#testing-view)
+  - [Editing a contact](#testing-edit)
+  - [Deleting a contact](#testing-delete)  
 
 ## <a name="acknowledgements"></a>Acknowledgements
 
@@ -75,10 +80,18 @@ ConTech comprises five main components, namely:
 The five main components interact with each other, as shown in the sequence diagram below
 for the example: `view 2`
 
-![Sysem Architecture Sequence Diagram](images/SystemArchitectureSequence.png)
+![System Architecture Sequence Diagram](images/SystemArchitectureSequence.png)
 
 
 ### <a name="text-ui"></a>TextUi
+The `TextUi` component is responsible for displaying all outputs to the Command Line User Interface. After a user's input
+has been processed and ConTech has performed its commands depending on the input, in order to output the results of the
+commands, a relevant method in the `TextUi` class will be called. 
+
+Methods for printing **error messages** have been separated
+from the main feature outputs. These methods have been placed in the `ExceptionTextUi` class within the same `ui` package
+as `TextUi`. 
+
 ### <a name="main-parser"></a>MainParser
 The `MainParser` component is responsible for making sense of the user's inputs. It functions as the
 not only the identifier for commands, but also calls its relevant sub-parsers to further destructure
@@ -158,12 +171,18 @@ executed in `ConTech`. The sequence diagram below illustrates the process of exe
 
 ### <a name="View"></a>Viewing a contact: `view`
 This feature is processed using `ViewContactCommand`. Whenever a user wants to view a specific contact from the
-contact list, a user must input a command in the form `view <INDEX>`, with `INDEX` being the index of the desired 
-contact that is displayed using [`ls`](#List). The user input is parsed by the [`IndexParser`](#IndexParser) 
-to obtain the contact index, which identifies the contact in the contact list to be viewed.
+contact list, user can input `view INDEX` with the index of the desired contact displayed from the `ls` feature. 
+`ViewContactCommand` is then created in the `MainParser` and executed in `ConTech` after parsing for the index
+of the desired contact.
 
-A `ViewContactCommand` with the specified parameters will then be created in the `MainParser` and executed in `ConTech`. 
-The sequence diagram below illustrates the `execute()` function in `ViewContactCommand`.
+If the `INDEX` is input as `me`, it will be equivalent to the `contactIndex` being `-1` in which case the personal 
+details of the user will be printed by calling the `viewPersonalContactMessage` method in `TextUi`. If the `INDEX` is 
+missing, it will be equivalent to the `contactIndex` being `-2` in which case the error message to notify the user that 
+the index is missing will be printed by calling the `missingIndexMessage` method in `ExceptionTextUi`. Lastly, if the 
+`INDEX` is within range and valid, the contact will be retrieved by calling the `getContactAtIndex` method in 
+`ContactList` which will return the `Contact` and store it as `viewingContact` in `ViewContactCommand`. To print out 
+the contact, the `viewContactMessage` method in `TextUi` will be called. The sequence diagram below illustrates the
+process of viewing a contact.
 
 ![View Sequence Diagram](images/ViewContactCommandSequenceDiagram.png)
 
@@ -341,4 +360,387 @@ additional devices or platforms.
 
 ## <a name="manual-test"></a>Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Given below are instructions to test the app manually.
+
+**Note:** These instructions only provide a starting point for testers to work on; testers are expected to do more
+exploratory testing.
+
+### <a name="launch-and-shutdown"></a>Launch and Shutdown
+
+1. Initial launch
+    1. Ensure that you have Java `11` or above installed in your Computer.
+    2. Download the latest version of `contech.jar` from **[here](https://github.com/AY2122S1-CS2113T-T09-1/tp/releases)**.
+    3. Copy the `contech.jar` file to the folder you want to use as the _home folder_ for **ConTech**.
+    4. Open your desired _Command Line Interface_ from the folder with `contech.jar` and enter the following code:
+       `java -jar contech.jar`.
+       
+    
+2. First time user
+    1. For a first time user, you would be required to type in your personal details.
+    2. Entering your name will be **mandatory**. The other 5 fields (GitHub, Telegram, Twitter, Email and LinkedIn) are 
+       **optional**. You will be prompted to enter each detail accordingly. For the optional fields, you can press ENTER
+       to skip.
+       
+
+3. Regular user
+    1. For regular users, ConTech will simply greet you and you are ready to input your command.
+       Expected:
+       ```
+       ____________________________________________________________
+       Hello, John.
+       Welcome back to ConTech, your personal contact tracker.
+       ____________________________________________________________
+       ```
+
+4. Shutting down ConTech
+    1. Once you are done with your tasks and would like to shutdown ConTech, simply input `exit`.
+    2. Test case: `exit`<br>
+       Expected:
+       ```
+       ____________________________________________________________
+       ConTech will now shutdown.
+       We hope you have enjoyed using it.
+       ____________________________________________________________
+       ```
+
+### <a name="testing-add"></a>Adding a contact
+1. Adding a contact with all fields
+    1. Test case: `add -n Alex Lee -g alexlee -te alexlee -tw alexl33 -e alex.lee@email.com -l alexlee`<br>
+       Expected: New contact will have all fields added. Each field will be displayed after it has been added to the 
+       contact list.
+       ```
+       ____________________________________________________________
+       ConTech has added the specified contact:
+       Name:     Alex Lee
+       Github:   github.com/alexlee
+       Email:    alex.lee@email.com
+       Telegram: t.me/alexlee
+       LinkedIn: linkedin.com/in/alexlee
+       Twitter:  twitter.com/alexl33
+       
+       You now have 1 contact(s).
+       ____________________________________________________________
+       ```
+       
+2. Adding a contact with fewer fields
+    1. Test case: `add -n Jake Tan -g tanjakey -e jakeytan@email.com`<br>
+       Expected: New contact will only have the fields mentioned added to the contact. Each field that is field will be
+       displayed after it has been added to the contact list.
+       ```
+       ____________________________________________________________
+       ConTech has added the specified contact:
+       Name:     Jake Tan
+       Github:   github.com/tanjakey
+       Email:    jakeytan@email.com
+       
+       You now have 1 contact(s).
+       ____________________________________________________________
+       ```
+       
+3. Adding a contact with no field entered
+    1. Test case: `add`<br>
+       Expected:  An error message will notify user that there are missing parameters.
+       ```
+       ____________________________________________________________
+       There seems to be missing parameters in your request.
+       Please enter command in this format:
+             add -n <NAME> {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
+             example : add -n John Doe -g johndoecoder -e john@email.com -te johndoe
+       NOTE : At least NAME required
+              Order of parameters do not matter
+       ____________________________________________________________
+       ```
+       
+4. Adding a contact with duplicates
+    1. Prerequisites: A contact with similar either similar name or details must already be in the contact list. For
+       simplicity, we will re-use the same command from `1`.
+    2. Test case: `add -n Alex Lee -g alexlee -te alexlee -tw alexl33 -e alex.lee@email.com -l alexlee`<br>
+       Expected: ConTech will display a list of contacts that are already in your contact list with the same fields as
+       the one you are adding. It will then ask for your confirmation whether you would still like to add the contact
+       or ignore it.
+       ```
+       ____________________________________________________________
+       One of your saved contacts has a duplicate field:
+       
+       0.
+       Name:     Alex Lee
+       Github:   github.com/alexlee
+       Email:    alex.lee@email.com
+       Telegram: t.me/alexlee
+       LinkedIn: linkedin.com/in/alexlee
+       Twitter:  twitter.com/alexl33
+       
+       Do you still want to add the contact?  (y/n)
+       ____________________________________________________________
+       ```
+    3. Follow up: You can either input `y` which stands for **yes** allowing you to still add the contact despite having
+       a duplicate field or `n` which stands for **no** to disregard adding the contact.
+       
+
+5. Adding a contact with a wrong flag
+    1. Test case: `add -n Ali -p alixpress`<br>
+       Expected:  An error message will notify user that there appears to be a flag that is not recognised.
+       ```
+       ____________________________________________________________
+       There appears to be a flag that is not recognised.
+       Please try again with a valid flag.
+         -n NAME
+         -g GITHUB
+         -l LINKEDIN
+         -te TELEGRAM
+         -tw TWITTER
+         -e EMAIL
+       ____________________________________________________________
+       ```  
+  
+6. Adding a contact with a wrong command
+    1. Test case: `Add -n Ben`<br>
+       Expected:  An error message will notify user that ConTech is unable to understand the command and
+       that the user can try to input a valid command. The issue with the test case is that the `add` command has a capital
+       A.
+       ```
+       ____________________________________________________________
+       ConTech is unable to understand your request.
+       Please try again with a valid command.
+       ____________________________________________________________
+       ```  
+
+7. Adding a contact with an invalid field format
+    1. Test case: `add -n George -e george`<br>
+    2. Expected: An error message will notify user on the field with the invalid format. For this test case, the email
+       has the wrong format.
+       ```
+       ____________________________________________________________
+       The email id is not correctly formatted,
+       Rules for email id :
+           * Lowercase letters only
+           * Numbers, underscore, hyphen and dot allowed
+           * @ cannot be at the start or end
+       ____________________________________________________________
+       ``` 
+
+### <a name="testing-view"></a>Viewing a contact
+1. Viewing a contact that is in the contact list
+    1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
+    2. Test case: `view 1`<br>
+       Expected: All details of the contact with index `1` will be displayed. 
+       ```
+       ____________________________________________________________
+       Name:     Alex Lee
+       Github:   github.com/alexlee
+       Email:    alex.lee@email.com
+       Telegram: t.me/alexlee
+       LinkedIn: linkedin.com/in/alexlee
+       Twitter:  twitter.com/alexl33
+       ____________________________________________________________
+       ```
+
+2. Viewing user's own personal contact
+    1. Test case: `view me`
+    2. Expected: All personal details of the user will be displayed.
+  
+
+3. Viewing a contact with a missing or invalid index
+    1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
+    2. Test case: `view -1`<br>
+       Expected: An error message will notify user on what the valid indexes are.
+       ```
+       ____________________________________________________________
+       The index you have input is out of range.
+       Please input a index between 0 and 2.
+       ____________________________________________________________
+       ```
+    3. Test case: `view`<br>
+       Expected: An error message will notify user that there is an index missing.
+       ```
+       ____________________________________________________________
+       There seems to be missing or invalid index in your request.
+       Please enter command in the following way:
+             view <INDEX>
+       Enter <INDEX> between 0 and 2 or "me" (personal contact)
+       ____________________________________________________________
+       ```
+  
+### <a name="testing-edit"></a>Editing a contact
+1. Editing a contact with all fields
+    1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
+    2. Test case: `edit 1 -n Ben tan -g bentan -e ben.tan@email.com -te bentn -tw bent4n -l bentan`<br>
+       Expected: Contact at index 1 will have all fields edited. Each field will be displayed after it has been edited.
+       The index of contacts will be changed after editing as the list will be sorted after the edit.
+       ```
+       ____________________________________________________________
+       ConTech has edited the specified contact:
+       Name:     Ben tan
+       Github:   github.com/bentan
+       Email:    ben.tan@email.com
+       Telegram: t.me/bentn
+       LinkedIn: linkedin.com/in/bentan
+       Twitter:  twitter.com/bent4n
+       ____________________________________________________________
+       ```
+
+2. Editing a contact with fewer fields
+    1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
+    2. Test case: `edit 2 -n Charles -g chacharles -e charles@email.com`<br>
+       Expected: Contact at index 2 will have only the name, GitHub and email edited while the other fields, if filled
+       will remain the same. All details will then be displayed.
+
+
+3. Editing a contact with missing or invalid index
+    1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
+    2. Test case: `edit -n Brandon`<br>
+       Expected:  An error message will appear to notify that there are missing parameters.
+       ```
+       ____________________________________________________________
+       There seems to be missing parameters in your request.
+       Please enter command in this format:
+             edit <INDEX> {-n <NAME>} {-g <GITHUB>} {-e <EMAIL>} {-te <TELEGRAM>} {-l <LINKEDIN>} {-tw <TWITTER>}
+             example : edit 0 -n George -g procoder -te george123
+       NOTE : At least one flag and description required
+              Order of parameters do not matter except for INDEX
+              "me" is used as the INDEX for personal contact.
+       ____________________________________________________________
+       ```
+    3. Test case: `edit 4 -n Brandon`<br>
+       Expected: An error message will appear to notify that the index is out of range.
+       ```
+       ____________________________________________________________
+       The index you have input is out of range.
+       Please input a number between 0 and 3 to edit saved contacts.
+       Otherwise, input index "me" if you wish to edit your Personal Contact details.
+       ____________________________________________________________
+       ```
+
+4. Editing a user's personal contact
+    1. Test case: `edit me -n Zack -g zackster -e zack@email.com`<br>
+    2. Expected: User's personal detail will be edited and the personal details will be displayed including fields that
+       were not edited.
+       
+
+5. Editing a contact with duplicates
+    1. Prerequisites: A contact with similar either similar name or details must already be in the contact list. For
+       simplicity, we will re-use the same command from `1`.
+    2. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.   
+    3. Test case: `edit 0 -n Ben tan -g bentan -e ben.tan@email.com -te bentn -tw bent4n -l bentan`<br>
+       Expected: ConTech will display a list of contacts that are already in your contact list with the same fields as
+       the ones you are editing. It will then ask for your confirmation whether you would still like to edit the contact
+       or ignore it.
+       ```
+       ____________________________________________________________
+       One of your saved contacts has a duplicate field:
+       
+       1.
+       Name:     Ben tan
+       Github:   github.com/bentan
+       Email:    ben.tan@email.com
+       Telegram: t.me/bentn
+       LinkedIn: linkedin.com/in/bentan
+       Twitter:  twitter.com/bent4n
+       
+       Do you still want to edit the contact?  (y/n)
+       ____________________________________________________________
+       ```
+    3. Follow up: You can either input `y` which stands for **yes** allowing you to still edit the contact despite having
+       a duplicate field or `n` which stands for **no** to disregard editing the contact.
+
+
+5. Editing a contact with a wrong flag
+    1. Test case: `edit 0 -p ali`<br>
+       Expected:  An error message will appear to notify the user that there appears to be a flag that is not recognised.
+       ```
+       ____________________________________________________________
+       There appears to be a flag that is not recognised.
+       Please try again with a valid flag.
+         -n NAME
+         -g GITHUB
+         -l LINKEDIN
+         -te TELEGRAM
+         -tw TWITTER
+         -e EMAIL
+       ____________________________________________________________
+       ```  
+
+6. Editing a contact with a wrong command
+    1. Test case: `Edit -n Ben`<br>
+       Expected:  An error message will appear to notify the user that ConTech is unable to understand the command and
+       that the user can try to input a valid command. The issue with the test case is that the `edit` command has a capital
+       E.
+       ```
+       ____________________________________________________________
+       ConTech is unable to understand your request.
+       Please try again with a valid command.
+       ____________________________________________________________
+       ```  
+
+### <a name="testing-delete"></a>Deleting a contact
+1. Deleting a contact that is in the contact list
+    1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
+    2. Test case: `rm 1`<br>
+       Expected: User will be asked to confirm deleting the contact at the specified index. All details of the contact 
+       at index `1` will be displayed to allow user to check before confirming.
+       ```
+       ____________________________________________________________
+       Delete this contact?  (y/n)
+       
+       1.
+       Name:     Alex Lee
+       Github:   github.com/alexlee
+       Email:    alex.lee@email.com
+       Telegram: t.me/alexlee
+       LinkedIn: linkedin.com/in/alexlee
+       Twitter:  twitter.com/alexl33
+       ____________________________________________________________
+       ```
+    3. Follow up: You can either input `y` which stands for **yes** allowing you to delete the contact or `n` which 
+       stands for **no** to cancel deleting the contact.   
+
+
+2. Deleting a contact with a missing or invalid index
+    1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
+    2. Test case: `rm -1`<br>
+       Expected: An error message will notify user on what the valid indexes are.
+       ```
+       ____________________________________________________________
+       The index you have input is out of range.
+       Please input a index between 0 and 2.
+       ____________________________________________________________
+       ```
+    3. Test case: `rm`<br>
+       Expected: An error message will notify user that there is an index missing.
+       ```
+       ____________________________________________________________
+       There seems to be missing or invalid index in your request.
+       Please enter command in the following way:
+             rm <INDEX> {REMOVE_DETAIL_FLAGS}
+       Enter <INDEX> between 0 and 3
+       ____________________________________________________________
+       ```
+
+3. Deleting all contacts in the contact list
+    1. Test case: `rm all`<br>
+       Expected: User will be asked to confirm deleting all the contacts in the contact list.
+       ```
+       ____________________________________________________________
+       Delete all of your contacts?  (y/n)
+       ____________________________________________________________
+       ```
+    3. Follow up: You can either input `y` which stands for **yes** allowing you to delete all contacts or `n` which
+       stands for **no** to cancel deleting all contacts.
+
+
+4. Deleting one or few fields from a contact
+    1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
+    2. Test case: `rm 1 -g`<br>
+       Expected: User will be asked to confirm deleting a field from the contact at the specified index. The specified 
+       field of the contact at index `1` will be displayed to allow user to check before confirming. For this test case,
+       only the GitHub for the contact at index `1` will be displayed as only the `-g` flag is mentioned.
+       ```
+       ____________________________________________________________
+       Delete the following fields for Ben tan?  (y/n)
+       
+       Github:   github.com/bentan
+       ____________________________________________________________
+       ```
+    3. Follow up: You can either input `y` which stands for **yes** allowing you to delete the field from the contact
+       or `n` which stands for **no** to cancel deleting the field from the contact.
+

@@ -20,6 +20,9 @@ public class ViewContactCommand extends Command {
         return contactIndex;
     }
 
+    /**
+     * This method executes the process of printing out the contact the user wants to view.
+     */
     public void execute() {
         try {
             if (contactIndex == PERSONAL_CONTACT_INDEX) {

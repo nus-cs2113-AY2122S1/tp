@@ -40,6 +40,9 @@ The code written by me (`ashrafjfr`) can be found [here](https://nus-cs2113-ay21
    - Updated overall UG and fixed inconsistencies between UG and output from application
    - Added the `Table of Contents` with links to each feature in the UG
    - Added table of user stories for `User Stories` section in the DG
+   - Added `Instructions for Manual Testing` section in the DG
+- Attended weekly meeting sessions with team to plan for product    
+- Updated UI of various features to ensure consistency across features
 
 ### Review/mentoring contributions
 - Reviewed PRs and ensured overall code quality/formatting was up to standard

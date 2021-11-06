@@ -1,18 +1,31 @@
 @startuml
 hide footbox
 'https://plantuml.com/sequence-diagram
--> ":ViewContactCommand": execute()
+-> ":ViewContactCommand":execute()
 activate ":ViewContactCommand"
-
-":ViewContactCommand" -> ":IndexParser" :getContactFromIndex(contactIndex:int, contactList:ContactList)
-activate ":IndexParser"
-":IndexParser" --> ":ViewContactCommand" :viewingContact:Contact
-deactivate ":IndexParser"
-
-":ViewContactCommand" -> ":TextUi":viewContactMessage(viewingContact:Contact, contactIndex:int)
+alt#gold #lightgreen contactIndex:int == -1
+":ViewContactCommand" -> ":TextUi" :viewPersonalContactMessage(personalContact: Contact)
 activate ":TextUi"
+
 ":TextUi" --> ":ViewContactCommand"
 deactivate ":TextUi"
 
+else #lightblue contactIndex:int == -2
+":ViewContactCommand" -> ":ExceptionTextUi" :missingIndexMessage()
+activate ":ExceptionTextUi"
+
+":ExceptionTextUi" --> ":ViewContactCommand"
+deactivate ":ExceptionTextUi"
+
+else #yellow else
+":ViewContactCommand" -> ":ContactList" :getContactAtIndex(contactIndex: int)
+activate ":ContactList"
+":ContactList" --> ":ViewContactCommand" :viewingContact: Contact
+deactivate ":ContactList"
+":ViewContactCommand" -> ":TextUi" :viewContactMessage(viewingContact: Contact, contactIndex: int)
+activate ":TextUi"
+":TextUi" --> ":ViewContactCommand"
+deactivate ":TextUi"
+end
 deactivate ":ViewContactCommand"
 @enduml

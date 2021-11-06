@@ -237,6 +237,13 @@ public class MainParser {
     }
 
     //@@author ashrafjfr
+    /**
+     * This method parses the userInput according to the view command. After parsing for the viewedIndex, it will
+     * initialise a new ViewContactCommand.
+     *
+     * @param userInput String that user has input
+     * @return new ViewContactCommand(viewedIndex)
+     */
     private Command parseViewContact(String userInput) {
         try {
             int viewedIndex = IndexParser.getIndexFromInput(userInput);
