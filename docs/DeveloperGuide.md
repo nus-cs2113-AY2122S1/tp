@@ -280,7 +280,9 @@ _{More to be added}_
 ## 6. Instructions for manual testing
 
 ### 6.1 Data file
+
 The data file *flightData/time.txt* or *cost.txt* can be modified following the formatting stated [here](#114-dataloader-class).
+
 To test out the effectiveness of the implemented algorithm, you can add 0 to the distance matrix to tell Traveller that
 there is no flight between the two countries (no edge between the vertexes).
 
@@ -296,6 +298,6 @@ Element11 (Row 1, Column 1) is the distance from SIN to MLY (and vice versa).
 
 Element32 (Row 3, Column 2) is the distance from MLY to JPN (and vice versa).
 
-###6.2 Save file
+### 6.2 Save file
 The save file *save/save.txt* can be modified following the formatting stated [here](#125-saveloader-class) and the corresponding command formats
 which can be found in our [UserGuide](https://ay2122s1-cs2113t-w13-1.github.io/tp/UserGuide.html).

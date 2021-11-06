@@ -38,6 +38,7 @@ public class Traveller {
             } finally {
                 ui.printLine();
             }
+            save.writeSave("run");
         }
     }
 
@@ -47,6 +48,6 @@ public class Traveller {
         WorldMap.initWorldMap();
         save.readSave();
         traveller.run();
-        save.writeSave();
+        save.writeSave("exit");
     }
 }

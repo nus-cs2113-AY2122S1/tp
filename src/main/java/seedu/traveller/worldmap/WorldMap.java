@@ -5,7 +5,7 @@ import seedu.traveller.worldmap.exceptions.NonZeroDistanceException;
 import seedu.traveller.worldmap.exceptions.WorldMapException;
 import seedu.traveller.worldmap.exceptions.NonStringDistanceException;
 
-
+//@@author Jach23
 public class WorldMap {
     protected static GraphList graphList = new GraphList();
     protected static DataLoader loader = new DataLoader();
