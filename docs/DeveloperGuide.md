@@ -171,8 +171,20 @@ executed in `ConTech`. The sequence diagram below illustrates the process of exe
 
 ### <a name="View"></a>Viewing a contact: `view`
 This feature is processed using `ViewContactCommand`. Whenever a user wants to view a specific contact from the
-contact list, user can input `view INDEX` with the index of the desired contact displayed from the `list` feature. 
-`ViewContactCommand` is then created in the `MainParser` and executed in `ConTech`.
+contact list, user can input `view INDEX` with the index of the desired contact displayed from the `ls` feature. 
+`ViewContactCommand` is then created in the `MainParser` and executed in `ConTech` after parsing for the index
+of the desired contact.
+
+If the `INDEX` is input as `me`, it will be equivalent to the `contactIndex` being `-1` in which case the personal details
+of the user will be printed by calling the `viewPersonalContactMessage` method in `TextUi`. 
+
+If the `INDEX` is missing, it will be equivalent to the `contactIndex` being `-2` in which case the error message to 
+notify the user that the index is missing will be printed by calling the `missingIndexMessage` method in 
+`ExceptionTextUi`. 
+
+Lastly, if the `INDEX` is within range and valid, the contact will be retrieved by calling the `getContactAtIndex` 
+method in `ContactList` which will return the `Contact` and store it as `viewingContact` in `ViewContactCommand`. 
+To print out the contact, the `viewContactMessage` method in `TextUi` will be called.
 
 The sequence diagram below illustrates the `execute()` function in `ViewContactCommand`.
 
