@@ -4,11 +4,11 @@ import java.util.List;
 
 
 public class MinCalcResult {
-    Country startCountry;
-    Country endCountry;
-    List<Country> path;
-    List<Double> time;
-    int error;
+    private final Country startCountry;
+    private final Country endCountry;
+    private final List<Country> path;
+    private final List<Double> time;
+    private int error;
 
     public MinCalcResult(Country startCountry, Country endCountry, List<Country> path, List<Double> time) {
         this.startCountry = startCountry;

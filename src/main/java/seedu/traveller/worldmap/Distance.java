@@ -1,7 +1,7 @@
 package seedu.traveller.worldmap;
 
 
-public class Distance {
+    public class Distance {
     private double distance;
     private Country startCountry;
     private Country endCountry;

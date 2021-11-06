@@ -32,8 +32,8 @@ public class Logic {
                     v.setPrevCountry(vertex);
                     v.setMinDistance(minDist);
                     priorityQueue.add(v);
-                    adjMatrix[vertex.key][v.key] = minDist;
-                    adjMatrix[v.key][vertex.key] = minDist;
+                    adjMatrix[vertex.getKey()][v.getKey()] = minDist;
+                    adjMatrix[v.getKey()][vertex.getKey()] = minDist;
                 }
             }
         }
@@ -50,7 +50,7 @@ public class Logic {
             if (!path.contains(country)) {
                 path.add(country);
                 if (country.getPrevCountry() != null) {
-                    accumDist.add(adjMatrix[country.getPrevCountry().key][country.key]);
+                    accumDist.add(adjMatrix[country.getPrevCountry().getKey()][country.getKey()]);
                 }
                 if (country == sourceCountry) {
                     break;
