@@ -29,7 +29,7 @@ Enter your command: 1. 	c a b
 Enter your command: No matching expenses found.
 Enter your command: List of Expenses: 
 	1. c a b | 19 Oct 2021
-Enter your command: The exchange rate has been changed from 0.74 to 1.0
+Enter your command: The exchange rate has been changed from 0.74 to 1.0.
 Enter your command: Enter date of expense:
 	Press enter to use today's date
 Who paid for the expense?: Enter "equal" if expense is to be evenly split, enter individual spending otherwise
