@@ -1,3 +1,5 @@
+//@@author kairoskoh
+
 package seedu.duke.employee;
 
 import seedu.duke.main.MainUI;
@@ -15,9 +17,9 @@ public class EmployeeParser {
 
         try {
             Employee employee = new Employee(command[1].stripLeading().stripTrailing(),
-                                            Integer.parseInt(command[2]),
-                                            convertToStatus(command[3].stripLeading().stripTrailing()),
-                                            Integer.parseInt(command[4]));
+                    Integer.parseInt(command[2]),
+                    convertToStatus(command[3].stripLeading().stripTrailing()),
+                    Integer.parseInt(command[4]));
 
             masterList.employeeList.add(employee);
             masterList.totalEmployee += 1;
@@ -47,7 +49,7 @@ public class EmployeeParser {
         assert masterList.totalEmployee >= 0 : "total employee should be equals to or greater than zero";
     }
 
-    private Employee.employmentStatus convertToStatus(String input) throws InvalidParameterException{
+    private Employee.employmentStatus convertToStatus(String input) throws InvalidParameterException {
         logger.log(Level.FINE, "going to convert employee status from string to enum");
         switch (input) {
         case "perm":

@@ -1,3 +1,5 @@
+//@@author kairoskoh
+
 package seedu.duke.employee;
 
 import seedu.duke.main.MainUI;
