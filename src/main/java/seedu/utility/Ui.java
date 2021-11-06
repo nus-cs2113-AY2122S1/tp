@@ -11,6 +11,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static seedu.utility.tools.FinancialAdvisor.getRandomAdvice;
+
 /**
  * Represents a user interface where feedbacks are given in response to user input.
  */
@@ -298,13 +300,12 @@ public class Ui {
     /**
      * Prints the termination message of the STONKS XD program.
      *
-     * @param advice The advice given by our Stonks program, given from a list of random advices.
      */
-    public void printBye(String advice) {
+    public void printBye() {
         printLine();
         System.out.println(Messages.BYE_MESSAGE);
         System.out.println(NEW_LINE);
-        System.out.println(Messages.TIP_HEADER + advice);
+        System.out.println(Messages.TIP_HEADER + getRandomAdvice());
         printLine();
     }
 

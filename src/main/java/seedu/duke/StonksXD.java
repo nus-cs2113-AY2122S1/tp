@@ -54,7 +54,7 @@ public class StonksXD {
             }
             dataManager.saveAll();
         }
-        //ui.printBye(getRandomAdvice());
+        //ui.printBye();
     }
     
     private void terminateStonksXD() {

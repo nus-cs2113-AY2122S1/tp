@@ -88,7 +88,10 @@ It interacts with `FinancialTracker` and `BudgetManager` and receives commands f
 
 `DataManager` &larr; `StonksXD_data.csv`
 
+The Sequence Diagram below shows how the components interact with each other in a typical feedback loop.
+It is illustrated using the hypothetical scenario where the user issues the command `del_ex i/1`.
 
+![](StonksXDSequenceDiagram.drawio.png)
 The sections below provide more information on the respective components.
 
 ---
@@ -134,7 +137,25 @@ information such as users' entries to easy-to-store data, and vice versa.
 4. To split up data from the `csv` files into their respective parameters with the help of commas since our data are
 stored in `csv` files.
 
+---
 
+### Financial Tracker Component
+
+The `FinancialTracker` class is in charge of storing, deleting, and retrieving income and 
+expense related calculations while the program is running. It performs these operations based
+on the different commands it receives from the user.
+
+The class diagram below shows the structure of `FinancialTracker`.
+
+![](FinancialTrackerCD.drawio.png) 
+
+<to be updated>
+
+#### 
+
+
+
+---
 
 ### Budget Component
 
@@ -306,7 +327,11 @@ The sequence diagram below illustrates the loading process (note that the diagra
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+StonksXD a global financial tracking journal, capable of both budgeting and 
+analysis to serve financial needs while traveling. It is highly operable and 
+intuitive command line program that is simple to use and is optimized for 
+anyone on the go. Using a minimalistic command format, we aim to empower 
+youth to manage their finances by making personal finance entries simple.
 
 ## User Stories
 
@@ -447,7 +472,7 @@ Below is a list of the currently available tests:
 Intellij comes with an in-built Gradle Daemon that can be used to run the following test:
 
 - `.\gradlew test` to check if all test files have passed.
-- `.\graldew checkStyleTest` to check if test files comply with certain coding standards and conventions.
+- `.\gradlew checkStyleTest` to check if test files comply with certain coding standards and conventions.
 - `.\gradlew checkStyleMain` to check if main program complies with all JAVA coding standards.
 <br>
 
