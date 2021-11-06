@@ -185,14 +185,23 @@ The class diagram shows the interactions between the different classes.
 
 ![Storage Class Diagram](Diagram%20Images/StorageClassDiagram.png)
 
+The sequence diagram shows how the program imports data from storage file.
+
+![Import Sequence Diagram](Diagram%20Images/ImportSequenceDiagram.png)
+
 The program uses `Storage` class to import data from the storage file.
 * `Storage` interacts with `Import` to access the data stored in storage file.
 * `Import` will depend on `ImportParser` to decipher the data stored, and return 
-a `Goal` or `Habit` object back to `Import` correspondingly.
-* `Import` will then populate `GoalList` with `Goal` and `Habit` objects accordingly
-before returning `GoalList` back to `Storage` and back to user.
+  a `Goal`, `Habit` or `Interval` object back to `Import` correspondingly.
+* `Import` will then populate `GoalList` accordingly
+  before returning `GoalList` back to `Storage` and back to user.
+
+The sequence diagram shows how the program exports data to storage file.
+
+![Export Sequence Diagram](Diagram%20Images/ExportSequenceDiagram.png)
 
 `Storage` class can also export data to storage file with `Export` class.
+It takes in a `GoalList` object and converts the data into string to be stored in storage file.
 
 
 ---------------------------------------------------------------------------------------------------------

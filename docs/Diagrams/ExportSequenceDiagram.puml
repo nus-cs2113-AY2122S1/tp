@@ -1,0 +1,31 @@
+@startuml
+!include Style.puml
+
+[-> Storage: export()
+Storage -> Export: exportToStorage(goalList)
+Export -> Export: clearFile()
+Export -> Export: writeToFile(goalList)
+
+loop goal in goalList
+
+    Export -> Export: goalString(goal, index)
+    Export -> Export: writeHabit(fileWriter, habitList, index)
+
+    loop habit in habitList
+        Export -> Export: habitString(habit, index)
+        Export -> Export: writeInterval(fileWriter, intervalList, goalIndex, habitIndex)
+
+        loop interval in intervalList
+
+        Export -> Export: intervalString(interval, goalIndex, habitIndex)
+
+        end
+
+    end
+
+end
+
+Export --> Storage
+[<-- Storage
+
+@enduml
