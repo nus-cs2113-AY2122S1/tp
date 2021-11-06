@@ -75,14 +75,20 @@ public class IngredientUI {
         case "add":
             System.out.println(" Please follow this syntax:");
             System.out.println("   add-ingredient/INGREDIENT_NAME/QUANTITY/PRICE/EXPIRY_DATE");
+            System.out.println("   <INGREDIENT_NAME> must be a string.");
+            System.out.println("   <QUANTITY> must be a positive, non-zero integer.");
+            System.out.println("   <PRICE> must be a positive number greater than 0.01.");
+            System.out.println("   <EXPIRY_DATE> must be a valid date in YYYY-MM-DD format.");
             break;
         case "remove":
             System.out.println(" Please follow this syntax:");
             System.out.println("   remove-ingredient/INGREDIENT_INDEX");
+            System.out.println("   <INGREDIENT_INDEX> must be a positive integer corresponding to the list index.");
             break;
         case "find":
             System.out.println(" Please follow this syntax:");
             System.out.println("   find-expired-ingredient/INPUT_DATE");
+            System.out.println("   <INPUT_DATE> must be a valid date in YYYY-MM-DD format.");
             break;
         default:
             break;

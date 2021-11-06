@@ -242,7 +242,8 @@ Example:
 Adds an ingredient to the ingredient list.
 
 Format: `add-ingredient/INGREDIENT_NAME/QUANTITY/PRICE/EXPIRY_DATE`
-  * `QUANTITY` must be a positive integer.
+  * `QUANTITY` must be a positive, non-zero integer.
+  * `PRICE` must be a positive number of at least `0.01`. All values will be rounded to 2 decimal places.
   * `EXPIRY_DATE` must be a valid date in YYYY-MM-DD format.
 
 Example:

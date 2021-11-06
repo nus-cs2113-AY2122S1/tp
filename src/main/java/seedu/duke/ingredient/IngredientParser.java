@@ -7,7 +7,18 @@ public class IngredientParser {
 
     public void addIngredient(String[] command, IngredientList ingredients) {
         try {
-            Ingredient newIngredient = new Ingredient(command[1], command[2], command[3], LocalDate.parse(command[4]));
+            int quantity = Integer.parseInt(command[2]);
+            if (quantity < 1) {
+                throw new NumberFormatException();
+            }
+
+            double price = Double.parseDouble(command[3]);
+            String priceTwoDp = String.format("%.2f", price);
+            if (Double.parseDouble(priceTwoDp) <= 0) {
+                throw new NumberFormatException();
+            }
+
+            Ingredient newIngredient = new Ingredient(command[1], command[2], priceTwoDp, LocalDate.parse(command[4]));
 
             ingredients.ingredientList.add(newIngredient);
             ingredients.totalIngredients++;
@@ -17,6 +28,8 @@ public class IngredientParser {
         } catch (ArrayIndexOutOfBoundsException e) {
             IngredientUI.printInvalidCommandSyntaxMessage("add");
         } catch (DateTimeParseException e) {
+            IngredientUI.printInvalidCommandSyntaxMessage("add");
+        } catch (NumberFormatException e) {
             IngredientUI.printInvalidCommandSyntaxMessage("add");
         }
     }
