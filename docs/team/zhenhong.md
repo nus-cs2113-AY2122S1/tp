@@ -41,7 +41,8 @@ Given below are my contributions to the project.
         * Added documentation for the `Student` and `Comment` features
           ([\#97](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/97/files),
           [\#108](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/108/files),
-          [\#207](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/212/files))
+          [\#207](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/207/files),
+          [\#251](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/251/files))
           , add after added diagrams
     * Developer Guide:
         * Added implementation details and sequence diagram of the `AddStudentCommand` feature.

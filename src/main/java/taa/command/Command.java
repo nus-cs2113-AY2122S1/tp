@@ -37,7 +37,7 @@ public abstract class Command {
     public static final String COMMAND_SORT_BY_SCORES = "sort_by_scores";
     public static final String COMMAND_SET_COMMENT = "set_comment";
     public static final String COMMAND_DELETE_COMMENT = "delete_comment";
-    public static final String COMMAND_LIST_COMMENT = "list_comment";
+    public static final String COMMAND_LIST_COMMENT = "list_comments";
     public static final String COMMAND_HELP = "help";
     public static final String COMMAND_ARCHIVE = "archive";
     public static final String COMMAND_RESET = "reset";

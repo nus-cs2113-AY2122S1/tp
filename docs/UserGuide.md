@@ -123,6 +123,8 @@ Examples:
 * `list_students c/CS2113T-F11`
 * `list_students c/CS2101-C04`
 
+Expected output <br>
+![img.png](images/students/ListStudentsCommand.png)
 <br>
 
 #### Adding a student to a class: `add_student`
@@ -137,6 +139,11 @@ Format: `add_student c/<CLASS_ID> i/<STUDENT_ID> n/<STUDENT_NAME>`
 Examples:
 * `add_student c/CS2113T-F11 i/a0212345x n/Jon Lim`
 * `add_student c/CS2101-C04 n/Jonny Lims i/a1234567i`
+
+Expected output <br>
+![img.png](images/students/AddStudentCommand.png)
+> 💡 **Note:**<br />
+> The `STUDENT_ID` will be converted to UPPERCASE.
 
 <br>
 
@@ -153,6 +160,12 @@ Examples:
 * `edit_student c/CS2113T-F11 s/1 i/a03452345x n/Jon Lim`
 * `edit_student c/CS2101-D03 s/5 n/Jonny Lims i/a120067i`
 
+Expected output <br>
+![img.png](images/students/EditStudentCommand.png)
+
+> 💡 **Note:**<br />
+> The `STUDENT_ID` will be converted to UPPERCASE.
+
 <br>
 
 #### Deleting a student from a class: `delete_student`
@@ -165,6 +178,8 @@ Format: `delete_student c/<CLASS_ID> s/<STUDENT_INDEX>`
 Examples:
 * `delete_student c/CS2113T-F11 s/1`
 
+Expected output <br>
+![img.png](images/students/DeleteStudentCommand.png)
 <br>
 
 #### Finding students in a class given a keyword: `find_student`
@@ -178,6 +193,8 @@ Examples:
 * `find_student c/CS2113T-F11 k/123`
 * `find_student c/CS2101-D03 k/Jon`
 
+Expected output <br>
+![img_1.png](images/students/FindStudentCommand.png)
 <br>
 <hr>
 
@@ -369,7 +386,13 @@ Examples:
 * `sort_by_scores c/CS2113T-F12 o/asc`
 * `sort_by_scores c/CS2113T-F12 o/desc`
 
-<br>
+Expected Output: <br>
+(Ascending) <br>
+![img.png](images/students/SortByScoresCommand_asc.png)
+
+(Descending) <br>
+![img.png](images/students/SortByScoresCommand_desc.png)
+
 <hr>
 
 ### Attendance
@@ -412,9 +435,11 @@ Format: `list_comment c/<CLASS_ID>`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 
 Examples:
-* `list_comment c/CS2113T-F12`
-* `list_comment c/CS2101-D03`
+* `list_comments c/CS2113T-F12`
+* `list_comments c/CS2101-D03`
 
+Expected Output: <br>
+![img.png](images/students/ListCommentsCommand.png)
 <br>
 
 #### Setting comment for a particular student: `set_comment`
@@ -428,6 +453,9 @@ Format: `set_comment c/<CLASS_ID> s/<STUDENT_INDEX> t/<COMMENT>`
 Examples:
 * `set_comment c/CS2113T-F12 s/1 t/Doing well in class`
 * `set_comment c/CS2113T-F12 s/1 t/Needs help understanding java`
+
+Expected Output: <br>
+![img.png](images/students/SetCommentCommand.png)
 > 💡 **Note:**<br />
 > The new comment will overwrite any previous comment set
 
@@ -444,6 +472,8 @@ Examples:
 * `delete_comment c/CS2113T-F12 s/1`
 * `delete_comment c/CS2113T-F12 s/5`
 
+Expected Output: <br>
+![img.png](images/students/DeleteCommentCommand.png)
 <br>
 <hr>
 

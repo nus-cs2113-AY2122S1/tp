@@ -25,7 +25,7 @@ import taa.command.student.AddStudentCommand;
 import taa.command.student.DeleteStudentCommand;
 import taa.command.student.EditStudentCommand;
 import taa.command.student.FindStudentCommand;
-import taa.command.comment.ListCommentCommand;
+import taa.command.comment.ListCommentsCommand;
 import taa.command.student.ListStudentsCommand;
 import taa.command.comment.SetCommentCommand;
 import taa.command.student.SortByScoresCommand;
@@ -102,7 +102,7 @@ public class HelpCommand extends Command {
         commandUsages.put(STRING_ATTENDANCE, getUsagesFromCommands(attendanceCommands));
 
         Command[] commentCommands = {
-            new ListCommentCommand(""),
+            new ListCommentsCommand(""),
             new SetCommentCommand(""),
             new DeleteCommentCommand("")
         };
