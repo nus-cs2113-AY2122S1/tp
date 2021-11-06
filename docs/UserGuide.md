@@ -244,7 +244,7 @@ List the items with a due date of `03 November 2021`
 ### Search items
 Search items by ID, Title, Status, and Category.
 
-Status must be one of "AVAILABLE", "LOANED" or "RESERVED".
+Status must be one of "AVAILABLE", "LOANED" or "RESERVED" and it is case insensitive.
 
 Category must be one of "Audio", "Video", "Book", "Magazine".
 
