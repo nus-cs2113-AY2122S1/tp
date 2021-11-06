@@ -333,4 +333,101 @@ Exiting the application:
     -------------------------------------------------------------------------
     ```
 
+### Listing the Tasklist
+**Case A**: Tasklist is empty
+1. Type `list`
+
+   **Expected Output**: Warning message informing user that the tasklist is empty.
+
+**Case B**: Tasklist is not empty
+1. Type `list`
+
+   **Expected Output**: List of the user's tasks that was added before.
+
+### Filtering the Tasklist
+
+>💡 **Note**: If none of the filters match, only the header of the tasklist will be returned.
+
+**Case A**: By task type
+1. Type `list --type todo`
+
+   **Expected Output**: List of all the `Todo` type tasks.
+2. Type `list --type deadline`
+
+   **Expected Output**: List of all the `Deadline` type tasks.
+3. Type `list --type event`
+
+   **Expected Output**: List of all the `Event` type tasks.
+
+**Case B**: By priority
+1. Type `list --priority low`
+
+   **Expected Output**: List of all the tasks with priority `low`.
+2. Type `list --priority medium`
+
+   **Expected Output**: List of all the tasks with priority `medium`
+3. Type `list --priority high`
+
+   **Expected Output**: List of all the tasks with priority `high`
+
+**Case C**: By recurrence
+1. Type `list --recur none`
+
+   **Expected Output**: List of all the tasks do not recur.
+2. Type `list --recur daily`
+
+   **Expected Output**: List of all the tasks that recurs `daily`
+3. Type `list --recur weekly`
+
+   **Expected Output**: List of all the tasks that recurs `weekly`
+4. Type `list --recur monthly`
+
+   **Expected Output**: List of all the tasks that recurs `monthly`
+5. Type `list --recur yearly`
+
+   **Expected Output**: List of all the tasks that recurs `yearly`
+
+### Sorting the Tasklist
+
+>💡 **Pre-requisite**: Add at least 1 tasks of each task type and priority, and name all task descriptions
+> after the letters of the alphabets.
+
+**Case A**: Sort by task type
+1. Type `sort --by type`
+
+   **Expected Output**: Message informing user that the tasklist has been sorted by task type.
+2. Type `list`
+
+   **Expected Output**: All tasks with same task types are now grouped together in the tasklist.
+
+**Case B**: Sort by description
+1. Type `sort --by description`
+
+   **Expected Output**: Message informing user that the tasklist has been sorted in alphabetical order.
+2. Type `list`
+
+   **Expected Output**: All tasks are now sorted alphabetically.
+
+**Case B**: Sort by priority
+1. Type `sort --by priority`
+
+   **Expected Output**: Message informing user that the tasklist has been sorted by priority.
+2. Type `list`
+
+   **Expected Output**: All tasks are now sorted from highest to lowest priority.
+
+### Viewing the recurrence of a task
+
+>💡 **Pre-requisite**: Add 1 task into the tasklist with a recurrence value of `daily`. The recurrence
+> value can be modified and changed to  test the correctness of the recurrence feature.
+
+**Case A**: Task is a non-recurring task
+1. Type `list <task id of a non-recurring task>`
+
+   **Expected Output**: Warning message telling the user that the selected task is non-recurring and to choose another task.
+
+**Case B**: Task is a recurring task
+1. Type `list <task id of a recurring task>`
+
+    **Expected Output**: The next 4 recurrences of the task that are in increments of the type of recurrence.
 
