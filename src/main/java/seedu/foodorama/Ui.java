@@ -321,12 +321,12 @@ public class Ui {
             + LINE_DIVIDER;
 
     public static final String INVALID_INGR_NAME = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, Ingredient Name cannot be a Number. Please type an appropriate Ingredient Name!"
+            + "Sorry, Ingredient Name cannot be a Number. Please type an appropriate Ingredient Name:"
             + System.lineSeparator()
             + LINE_DIVIDER;
 
     public static final String INVALID_DISH_NAME = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, Dish Name cannot be a Number. Please type an appropriate Dish Name!" + System.lineSeparator()
+            + "Sorry, Dish Name cannot be a Number. Please type an appropriate Dish Name:" + System.lineSeparator()
             + LINE_DIVIDER;
 
     public static final String DISREGARD_MSG = LINE_DIVIDER + System.lineSeparator()
@@ -1011,15 +1011,6 @@ public class Ui {
         );
     }
 
-    public void printConfirmIngrNameAndWeight(String ingredientName, double ingredientWeight) {
-        System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Are you sure you want to add " + ingredientName
-                + " that weighs " + ingredientWeight + "kg? Type y for Yes and n for No."
-                + System.lineSeparator() + LINE_DIVIDER
-        );
-
-    }
-
     public void printInvalidDishWasteValue(String dishName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "The weight of " + dishName + " wasted cannot be negative!" + System.lineSeparator()
@@ -1033,15 +1024,6 @@ public class Ui {
                 + "The limit of " + dishName + "  cannot be negative!" + System.lineSeparator()
                 + "Please enter a weight that is not negative:" + System.lineSeparator()
                 + LINE_DIVIDER
-        );
-    }
-
-
-    public void printConfirmDishWaste(String dishName, double dishWasteWeight) {
-        System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Are you sure you want to add wasted " + dishName
-                + " that weighs " + dishWasteWeight + "kg? Type y for Yes and n for No."
-                + System.lineSeparator() + LINE_DIVIDER
         );
     }
 }
