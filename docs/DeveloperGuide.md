@@ -79,10 +79,18 @@ ConTech comprises five main components, namely:
 The five main components interact with each other, as shown in the sequence diagram below
 for the example: `view 2`
 
-![Sysem Architecture Sequence Diagram](images/SystemArchitectureSequence.png)
+![System Architecture Sequence Diagram](images/SystemArchitectureSequence.png)
 
 
 ### <a name="text-ui"></a>TextUi
+The `TextUi` component is responsible for displaying all outputs to the Command Line User Interface. After a user's input
+has been processed and ConTech has performed its commands depending on the input, in order to output the results of the
+commands, a relevant method in the `TextUi` class will be called. 
+
+Methods for printing **error messages** have been separated
+from the main feature outputs. These methods have been placed in the `ExceptionTextUi` class within the same `ui` package
+as `TextUi`. 
+
 ### <a name="main-parser"></a>MainParser
 The `MainParser` component is responsible for making sense of the user's inputs. It functions as the
 not only the identifier for commands, but also calls its relevant sub-parsers to further destructure
