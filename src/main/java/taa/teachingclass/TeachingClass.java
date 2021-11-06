@@ -32,7 +32,7 @@ public class TeachingClass implements ClassChecker {
     }
 
     public void setId(String id) {
-        this.id = id.toLowerCase();
+        this.id = id.toUpperCase();
     }
 
     public void setName(String name) {
