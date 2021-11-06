@@ -271,8 +271,21 @@ The target user profile of **SchedUrMods** are NUS students from all faculties.
 
 | Priority | As a ... | I want to ... | So that I can ...|
 |----------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|`* * *`|new user|see usage instructions|refer to them when I forget how to use the application|
+|`* * *`|new user|update my timetable via NUSMODS automatically|stop keeping track of changes made on NUSMODS|
+|`* * *`|user|add tasks to my tasklist|track all of my tasks I have easily|
+|`* * *`|user|view all my tasks in my tasklist|know which tasks are soon to be due|
+|`* *`|user|have different kinds of task types|know the nature of my task|
+|`* *`|user|set priorities to tasks in my tasklist|know which tasks are more important than others|
+|`* *`|user|set a task to recur automatically|reduce the number of times I need to update the tasklist|
+|`* *`|user|add zoom links to a lesson task|save time spent finding the zoom link|
+|`* *`|user|launch zoom links from the application|save time opening browser|
+|`* *`|user|filter my tasklist|find tasks that match a certain criteria quickly|
+|`* *`|user|view the upcoming recurrences of a task|plan my schedule accordingly|
+|`* *`|user|sort my tasklist by priority|view the most important tasks I have at the top of the tasklist|
+|`* *`|user|edit my tasks|reduce the number of times I have to add new tasks|
+|`* *`|user|set reminders for my tasks|will not forget if I have a task upcoming|
+|`*`|user|have tab completion|reduce the time spent typing commands|
 
 ### 5.3 Use cases
 {Describe the use cases}
