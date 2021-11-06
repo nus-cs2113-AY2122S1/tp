@@ -7,6 +7,7 @@ import seedu.duke.command.Command;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.data.Workout;
 import seedu.duke.data.WorkoutList;
+import seedu.duke.exception.StorageException;
 import seedu.duke.storage.Storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,7 +18,7 @@ class EnterWorkoutCommandTest {
     private Storage storage;
 
     @BeforeEach
-    public void setUp() throws GetJackDException {
+    public void setUp() throws GetJackDException, StorageException {
         createOneWorkout();
         storage = new Storage();
     }

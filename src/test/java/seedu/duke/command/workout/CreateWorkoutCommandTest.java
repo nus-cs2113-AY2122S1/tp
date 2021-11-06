@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.data.WorkoutList;
+import seedu.duke.exception.StorageException;
 import seedu.duke.storage.Storage;
 
 import java.time.LocalDate;
@@ -17,7 +18,7 @@ class CreateWorkoutCommandTest {
     private Storage storage;
 
     @BeforeEach
-    public void setUp() throws GetJackDException {
+    public void setUp() throws GetJackDException, StorageException {
         createEmptyWorkoutList();
         storage = new Storage();
     }
