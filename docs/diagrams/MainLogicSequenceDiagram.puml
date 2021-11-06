@@ -31,18 +31,18 @@ autoactivate on
     loop until exit is received
         medivault -> ui : getInput()
         medivault <-- ui : userInput
+        medivault -> commandparser : parseCommand(userInput : String)
+        medivault <-- commandparser : userCommand, parameters
 
         alt command equals modes
-            medivault -> commandparser : changeMode()
+            medivault -> commandparser : changeMode(ui: Ui,commandString: String, mode: Mode)
             medivault <-- commandparser
         else else
-            medivault -> commandparser : parseCommand(userInput : String)
-            medivault <-- commandparser : userCommand, parameters
-            medivault -> commandparser : processCommand()
-            commandparser -> commandparser : parseParameters(parametersString)
+            medivault -> commandparser : processCommand(commandString: String,\ncommandParameters: LinkedHashMap<String, String>,\nmode Mode)
+            commandparser -> commandparser : parseParameters(parametersString: String)
             commandparser --> commandparser : parameterValues
             create command
-            commandparser -> command : Command()
+            commandparser -> command : Command(parameters: LinkedHashMap<String, String>)
             commandparser <-- command
             medivault <-- commandparser
             medivault -> command : execute()

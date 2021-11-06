@@ -3,30 +3,29 @@ package command.order;
 import command.Command;
 import command.CommandParameters;
 import command.CommandSyntax;
-import inventory.Order;
 import inventory.Medicine;
+import inventory.Order;
 import inventory.Stock;
 import utilities.parser.DateParser;
 import utilities.parser.OrderManager;
 import utilities.parser.OrderValidator;
 import utilities.parser.StockManager;
 import utilities.storage.Storage;
-
 import utilities.ui.Ui;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 //@@author jiangweichen835
+
 /**
  * Add order for medication based on user input.
  * User input include medication name, quantity and the order date.
  */
-
 public class AddOrderCommand extends Command {
     private static Logger logger = Logger.getLogger("AddOrder");
 
@@ -44,7 +43,7 @@ public class AddOrderCommand extends Command {
         String[] optionalParameter = {CommandParameters.DATE};
 
         OrderValidator orderValidator = new OrderValidator();
-        if (checkValidParameterValues(ui,parameters, medicines, requiredParameters, optionalParameter,
+        if (checkValidParameterValues(ui, parameters, medicines, requiredParameters, optionalParameter,
                 orderValidator)) {
             return;
         }
@@ -72,20 +71,20 @@ public class AddOrderCommand extends Command {
             }
         }
 
-        if (nameExistsInOrder) {
-            if (parameters.containsKey(CommandParameters.NAME)) {
-                nameToAdd = parameters.get(CommandParameters.NAME);
-                for (Medicine medicine : medicines) {
-                    if (medicine instanceof Stock && medicine.getMedicineName().equalsIgnoreCase(nameToAdd)) {
-                        nameExistsInStock = true;
-                        break;
-                    }
+        if (parameters.containsKey(CommandParameters.NAME)) {
+            nameToAdd = parameters.get(CommandParameters.NAME);
+            for (Medicine medicine : medicines) {
+                if (medicine instanceof Stock && medicine.getMedicineName().equalsIgnoreCase(nameToAdd)) {
+                    nameExistsInStock = true;
+                    break;
                 }
             }
+        }
 
+        if (nameExistsInOrder) {
             if (!nameExistsInStock) {
                 if (orderQuantity < maxQuantity) {
-                    addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(ui, dateToAdd));
+                    addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(dateToAdd));
                 }
             } else {
                 int existingOrdersQuantity = OrderManager.getTotalOrderQuantity(medicines, nameToAdd);
@@ -94,15 +93,26 @@ public class AddOrderCommand extends Command {
                 maxQuantity = StockManager.getMaxStockQuantity(medicines, nameToAdd);
 
                 if (orderQuantity + totalQuantity <= maxQuantity) {
-                    addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(ui, dateToAdd));
+                    addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(dateToAdd));
                 } else {
-                    ui.print("Order for " + nameToAdd + " exists. Unable to add order as total order quantity "
-                            + "exceeds maximum stock quantity of " + maxQuantity + ". Existing quantity "
-                            + totalQuantity + ".");
+                    ui.print("Unable to add order as total order quantity exceeds maximum stock quantity of "
+                            + maxQuantity + ".\nExisting quantity in stock: " + existingStockQuantity
+                            + "\nPending order quantity: " + existingOrdersQuantity);
                 }
             }
         } else {
-            addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(ui, dateToAdd));
+            if (!nameExistsInStock) {
+                addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(dateToAdd));
+            } else {
+                int existingStockQuantity = StockManager.getTotalStockQuantity(medicines, nameToAdd);
+                maxQuantity = StockManager.getMaxStockQuantity(medicines, nameToAdd);
+                if (orderQuantity + existingStockQuantity <= maxQuantity) {
+                    addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(dateToAdd));
+                } else {
+                    ui.print("Unable to add order as total order quantity exceeds maximum stock quantity of "
+                            + maxQuantity + ".\nExisting quantity in stock: " + existingStockQuantity);
+                }
+            }
         }
     }
 
@@ -129,11 +139,10 @@ public class AddOrderCommand extends Command {
     /**
      * Add date based on user input.
      *
-     * @param ui        Reference to the UI object to print messages.
      * @param dateToAdd Order date input by user (check if it is in correct date format).
      * @return Default date or order date.
      */
-    private Date addDate(Ui ui, String dateToAdd) {
+    private Date addDate(String dateToAdd) {
         if (dateToAdd == null) {
             Date defaultDate = null;
             defaultDate = new Date();
@@ -153,28 +162,23 @@ public class AddOrderCommand extends Command {
     /**
      * Checks if user inputs are valid.
      *
-     * @param ui                    Reference to the UI object to print messages.
-     * @param parameters            The parameter that is not found.
-     * @param medicines             List of all medicines.
-     * @param requiredParameters    The required parameters to check.
-     * @param optionalParameters    The optional parameters to check.
-     * @param orderValidator        Reference to OrderValidator object.
+     * @param ui                 Reference to the UI object to print messages.
+     * @param parameters         The parameter that is not found.
+     * @param medicines          List of all medicines.
+     * @param requiredParameters The required parameters to check.
+     * @param optionalParameters The optional parameters to check.
+     * @param orderValidator     Reference to OrderValidator object.
      * @return Boolean value indicating if parameter and parameter values are valid.
      */
     private boolean checkValidParameterValues(Ui ui, LinkedHashMap<String, String> parameters,
-                                            ArrayList<Medicine> medicines, String[] requiredParameters,
-                                            String[] optionalParameters, OrderValidator orderValidator) {
-        boolean isInvalidParameters = orderValidator.containsInvalidParameters(ui, parameters,
-                requiredParameters, optionalParameters, CommandSyntax.ADD_ORDER_COMMAND, false);
-        if (isInvalidParameters) {
-            logger.log(Level.WARNING, "Invalid parameters given by user");
-            return true;
-        }
+                                              ArrayList<Medicine> medicines, String[] requiredParameters,
+                                              String[] optionalParameters, OrderValidator orderValidator) {
+        boolean isInvalidInput = orderValidator.containsInvalidParametersAndValues(ui, medicines, parameters,
+                requiredParameters, optionalParameters, CommandSyntax.ADD_ORDER_COMMAND,
+                false, orderValidator);
 
-        boolean isInvalidParameterValues = orderValidator.containsInvalidParameterValues(ui, parameters,
-                medicines, CommandSyntax.ADD_ORDER_COMMAND);
-        if (isInvalidParameterValues) {
-            logger.log(Level.WARNING, "Invalid parameters values given by user");
+        if (isInvalidInput) {
+            logger.log(Level.WARNING, "Invalid parameter or value specified by user");
             return true;
         }
         return false;

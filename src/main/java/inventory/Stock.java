@@ -8,7 +8,6 @@ import java.util.Date;
  * Represents a Medicine object. A Medicine object is represented by stock_id, name, price, quantity, expiry,
  * description and max quantity.
  */
-
 public class Stock extends Medicine {
     public static final String ID = "ID";
     public static final String NAME = "NAME";
@@ -104,9 +103,9 @@ public class Stock extends Medicine {
     }
 
     public String toFileFormat() {
-        String fileFormat = getStockId() + "|" + getMedicineName() + "|" + getPrice() + "|" + getQuantity() + "|"
-                + DateParser.dateToString(getExpiry()) + "|" + getDescription() + "|" + getMaxQuantity() + "|"
-                + isDeleted();
+        String fileFormat = getStockId() + "|" + getMedicineName().toUpperCase() + "|" + getPrice() + "|"
+                + getQuantity() + "|" + DateParser.dateToString(getExpiry()) + "|" + getDescription().toUpperCase()
+                + "|" + getMaxQuantity() + "|" + isDeleted();
         return fileFormat;
     }
 

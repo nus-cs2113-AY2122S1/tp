@@ -6,9 +6,11 @@ import command.CommandSyntax;
 import inventory.Prescription;
 import inventory.Medicine;
 import inventory.Stock;
+import utilities.parser.MedicineValidator;
 import utilities.parser.PrescriptionValidator;
 import utilities.parser.DateParser;
 import utilities.parser.PrescriptionManager;
+import utilities.parser.StockManager;
 import utilities.storage.Storage;
 import utilities.ui.Ui;
 
@@ -42,20 +44,10 @@ public class AddPrescriptionCommand extends Command {
                 CommandParameters.CUSTOMER_ID, CommandParameters.STAFF};
         String[] optionalParameters = {};
 
-        PrescriptionValidator prescriptionValidator = new PrescriptionValidator();
-
-        boolean isInvalidParameters = prescriptionValidator.containsInvalidParameters(ui, parameters,
-                requiredParameters,
-                optionalParameters, CommandSyntax.ADD_PRESCRIPTION_COMMAND, false);
-
-        if (isInvalidParameters) {
-            return;
-        }
-
-        boolean isInvalidParameterValues = prescriptionValidator.containsInvalidParameterValues(ui, parameters,
-                medicines,
-                CommandSyntax.ADD_PRESCRIPTION_COMMAND);
-        if (isInvalidParameterValues) {
+        MedicineValidator validator = new PrescriptionValidator();
+        boolean isInvalidInput = validator.containsInvalidParametersAndValues(ui, medicines, parameters,
+                requiredParameters, optionalParameters, CommandSyntax.ADD_PRESCRIPTION_COMMAND, false, validator);
+        if (isInvalidInput) {
             return;
         }
 
@@ -67,24 +59,22 @@ public class AddPrescriptionCommand extends Command {
             return;
         }
 
-
-        ArrayList<Stock> filteredStocks = new ArrayList<>();
-
-        for (Medicine medicine : medicines) {
-            if ((medicine instanceof Stock) && (medicine.getMedicineName().equalsIgnoreCase(medicationName))
-                    && !((Stock) medicine).isDeleted()) {
-                filteredStocks.add((Stock) medicine);
-            }
-        }
+        ArrayList<Stock> filteredStocks = StockManager.getFilteredStocksByName(medicines, medicationName);
 
         if (filteredStocks.isEmpty()) {
             ui.print("Medicine not available!");
             return;
         }
+
         Date prescribeDate = new Date(); //prescribe date will be today's date
         String prescribeDateString = DateParser.dateToString(prescribeDate);
 
         filteredStocks.sort(new utilities.comparators.StockComparator(CommandParameters.EXPIRY_DATE, false));
+
+        if (checkExpiredMedication(ui, filteredStocks, prescriptionQuantity)) {
+            return;
+        }
+
         int totalStock = PrescriptionManager.getNotExpiredStockQuantity(medicines, medicationName, prescribeDate);
 
         if (prescriptionQuantity > totalStock) {
@@ -124,8 +114,50 @@ public class AddPrescriptionCommand extends Command {
             }
 
         }
+
         ui.print("Unable to Prescribe! Medicine has expired!");
 
+    }
+
+    /**
+     * Check if non-expired medication exist.
+     *
+     * @param ui                   Reference to the UI object to print messages.
+     * @param filteredStocks       List of stock sorted by expiry date.
+     * @param prescriptionQuantity Quantity to prescribe.
+     * @return Boolean Value indicating if expired medication exist.
+     */
+    private boolean checkExpiredMedication(Ui ui, ArrayList<Stock> filteredStocks, int prescriptionQuantity) {
+        boolean existNonExpiredMed = false;
+        boolean noStockLeft = false;
+        for (Stock stock : filteredStocks) {
+            Date expiryDate = stock.getExpiry();
+            Date todayDate = new Date();
+
+            String todayDateString = DateParser.dateToString(todayDate);
+            String latestExpiryString = DateParser.dateToString(expiryDate);
+
+            boolean isNotExpired = expiryDate.after(todayDate) || todayDateString.equals(latestExpiryString);
+
+            if (isNotExpired && stock.getQuantity() != 0 && !(stock.isDeleted())) {
+                existNonExpiredMed = true;
+            }
+            if (isNotExpired && stock.getQuantity() == 0 && !(stock.isDeleted())) {
+                noStockLeft = true;
+            }
+        }
+
+        if (noStockLeft) {
+            ui.print("Unable to Prescribe! Prescription quantity is more than stock available!");
+            ui.print("Prescription quantity: " + prescriptionQuantity + " Stock available: 0");
+            return true;
+        }
+
+        if (!existNonExpiredMed) {
+            ui.print("Unable to Prescribe! Medication has expired!");
+            return true;
+        }
+        return false;
     }
 
     /**

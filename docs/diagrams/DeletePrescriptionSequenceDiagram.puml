@@ -19,18 +19,15 @@ autoactivate on
 mainframe sd DeletePrescriptionCommand
 activate deleteprescription
 
-deleteprescription -> deleteprescription : isValidPrescriptionParameters()
-    opt isValidPrescriptionId
-    deleteprescription -> prescriptionManager : isValidPrescriptionId()
-    deleteprescription <-- prescriptionManager : isValidPrescriptionId
+deleteprescription -> deleteprescription : isValidPrescriptionParameters(ui: Ui, medicines: ArrayList<Medicine>)
+
     deleteprescription -> deleteprescription : setStockQuantity()
         loop medicine : medicines
 
             opt medicine intanceof Stock
-                deleteprescription -> stock : isDeleted()
-                deleteprescription <-- stock :
+
                 opt prescription.getPrescriptionId() == prescriptionId
-                deleteprescription -> deleteprescription : setStockQuantity()
+                deleteprescription -> deleteprescription : setStockQuantity(ui Ui, medicines: ArrayList<Medicine>, \nstockIdPrescribe: int, prescribeQuantity: int)
                 opt stock.isDeleted
                     deleteprescription -> stock : setDeleted()
                     deleteprescription <-- stock : setAsDeleted
@@ -47,7 +44,7 @@ deleteprescription -> deleteprescription : isValidPrescriptionParameters()
             end
         end
     end
-    end
+
 deactivate deleteprescription
 deleteprescription --> deleteprescription :
 

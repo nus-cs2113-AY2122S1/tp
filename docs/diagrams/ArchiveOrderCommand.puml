@@ -15,14 +15,14 @@ end box
 autoactivate on
 mainFrame sd Logic for ArchiveOrderCommand
 activate archiveOrder
-archiveOrder -> dateParser : stringToDate()
+archiveOrder -> dateParser : stringToDate(date: String)
 archiveOrder <-- dateParser : date
-archiveOrder -> archiveOrder : ordersToArchive()
+archiveOrder -> archiveOrder : ordersToArchive(medicines: ArrayList<Medicine>,\n orderArchiveDate: Date)
 archiveOrder --> archiveOrder : filteredOrders
-archiveOrder -> archiveOrder : removeFromOrders()
+archiveOrder -> archiveOrder : removeFromOrders(medicines: ArrayList<Medicine>,\n filteredOrders: ArrayList<Medicine>)
 archiveOrder --> archiveOrder
 archiveOrder -> storage : getInstance()
 archiveOrder <-- storage
-archiveOrder -> storage : archiveData()
+archiveOrder -> storage : archiveData(filteredOrders: ArrayList<Medicine>)
 archiveOrder <-- storage
 @enduml

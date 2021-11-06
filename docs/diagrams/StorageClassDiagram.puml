@@ -4,6 +4,8 @@
 hide circle
 ' hide the icons for access modifiers
 skinparam classAttributeIconSize 0
+!include style.puml
+skinparam classBackgroundColor COLOR_UTILITIES_BOX
 
 Storage -> FileParser
 
@@ -14,15 +16,15 @@ class Storage {
     -prescriptionArchiveFile : File
     -orderArchiveFile : File
 
-    +saveData() : void
-    +archiveData() : void
+    +saveData(medicines: ArrayList<Medicine>) : void
+    +archiveData(medicines: ArrayList<Medicine>) : void
     +loadData() : ArrayList<Medicine>
-    -writeToFile() : void
-    -appendToFile() : void
-    -readFromFile() : ArrayList<Medicine>
-    -parseStockData() : Medicine
-    -parseOrderData() : Medicine
-    -parsePrescriptionData() : Medicine
+    -writeToFile(data: String, filePath: String) : void
+    -appendToFile(data: String, filePath: String) : void
+    -readFromFile(fileType: String, file: File) : ArrayList<Medicine>
+    -parseStockData(stockDetails: String, stockRow: int) : Medicine
+    -parseOrderData(orderDetails: String, orderRow: int) : Medicine
+    -parsePrescriptionData(prescriptionDetails: String, prescriptionRow: int) : Medicine
 }
 
 class "FileParser"{
@@ -52,5 +54,10 @@ class "FileParser"{
     +parsePrescriptionStockId() : int
 }
 
-note "The input parameters for all functions\nhas been left out to make this\ndiagram more compact." as n1
+note bottom
+The input parameters are as follows:
+parseStock*(splitStockDetails: String[], stockRow: int)
+parseOrder*(splitOrderDetails: String[], orderRow: int)
+parsePrescription*(splitPrescriptionDetails: String[], prescriptionRow: int)
+end note
 @enduml

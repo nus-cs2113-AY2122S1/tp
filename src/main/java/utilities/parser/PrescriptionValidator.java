@@ -7,6 +7,7 @@ import utilities.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.LinkedHashMap;
 
 //@@author deonchung
@@ -27,6 +28,7 @@ public class PrescriptionValidator extends MedicineValidator {
      * @param commandSyntax The command's valid syntax.
      * @return A boolean value indicating whether parameter values are valid.
      */
+    @Override
     public boolean containsInvalidParameterValues(Ui ui, LinkedHashMap<String, String> parameters,
                                                   ArrayList<Medicine> medicines, String commandSyntax) {
         for (String parameter : parameters.keySet()) {
@@ -167,7 +169,14 @@ public class PrescriptionValidator extends MedicineValidator {
      */
     public boolean isValidDate(Ui ui, String dateString) {
         try {
-            DateParser.stringToDate(dateString);
+            Date date = DateParser.stringToDate(dateString);
+            Date todayDate = new Date();
+            String todayDateString = DateParser.dateToString(todayDate);
+            todayDate = DateParser.stringToDate(todayDateString);
+            if (date.after(todayDate)) {
+                ui.print("Invalid date! Input date cannot be after today's date.");
+                return false;
+            }
             return true;
         } catch (Exception e) {
             ui.print("Invalid date! Ensure date is in " + DateParser.OUTPUT_DATE_FORMAT + ".");

@@ -13,7 +13,6 @@ box Utilities COLOR_UTILITIES_BOX
 end box
 
 box Inventory COLOR_INVENTORY_BOX
-    participant "<<class>>\nMedicine" as medicine COLOR_INVENTORY
     participant ":*" as object COLOR_INVENTORY
 end box
 
@@ -24,16 +23,16 @@ mainFrame sd Logic for List*
 activate list
 list -> list : filter*()
 
-loop parameter : parameters.keySet()
+loop until end of parameters
 
     alt parameters.equals(SORT)
         create comparator
-        list -> comparator : new *Comparator()
+        list -> comparator : new *Comparator(column: String, isReversed: boolean)
         list <-- comparator : sorted*
         deactivate comparator
     else parameters.equals(REVERSED_SORT)
         create comparator
-        list -> comparator : new *Comparator()
+        list -> comparator : new *Comparator(column: String, isReversed: boolean)
         list <-- comparator : reverseSorted*
         deactivate comparator
     else default
@@ -48,10 +47,14 @@ end
 
 list --> list : filtered*
 
-list -> ui : print*()
+list -> ui : print*(medicines: Arraylist<*>)
 deactivate ui
 
-
+note left of object
+Replace * in the diagram with
+Stock, Prescription or Order
+depending on the command entered.
+end note
 
 
 

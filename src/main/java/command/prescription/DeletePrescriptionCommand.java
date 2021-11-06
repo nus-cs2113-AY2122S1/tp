@@ -6,6 +6,7 @@ import command.CommandSyntax;
 import inventory.Prescription;
 import inventory.Medicine;
 import inventory.Stock;
+import utilities.parser.MedicineValidator;
 import utilities.parser.PrescriptionValidator;
 import utilities.storage.Storage;
 import utilities.ui.Ui;
@@ -36,7 +37,7 @@ public class DeletePrescriptionCommand extends Command {
 
         String prescriptionIdToDelete = parameters.get(CommandParameters.ID);
 
-        if (isValidPrescriptionParameters(ui, medicines, prescriptionIdToDelete)) {
+        if (!isValidPrescriptionParameters(ui, medicines)) {
             return;
         }
 
@@ -79,33 +80,23 @@ public class DeletePrescriptionCommand extends Command {
      *
      * @param ui                     Reference to the UI object to print messages.
      * @param medicines              Arraylist of medicines.
-     * @param prescriptionIdToDelete Prescription ID to delete.
      * @return Boolean Value indicating if parameters values for Prescription are valid and Prescription ID exist.
      */
-    private boolean isValidPrescriptionParameters(Ui ui, ArrayList<Medicine> medicines, String prescriptionIdToDelete) {
+    private boolean isValidPrescriptionParameters(Ui ui, ArrayList<Medicine> medicines) {
 
-        PrescriptionValidator prescriptionValidator = new PrescriptionValidator();
+        MedicineValidator validator = new PrescriptionValidator();
         String[] requiredParameters = {CommandParameters.ID};
         String[] optionalParameters = {};
 
-        boolean isInvalidParameter = prescriptionValidator.containsInvalidParameters(ui, parameters, requiredParameters,
-                optionalParameters, CommandSyntax.DELETE_PRESCRIPTION_COMMAND, true);
+        boolean isInvalidInput = validator.containsInvalidParametersAndValues(ui, medicines, parameters,
+                requiredParameters, optionalParameters, CommandSyntax.DELETE_PRESCRIPTION_COMMAND, true, validator);
 
-        if (isInvalidParameter) {
-            logger.log(Level.WARNING, "Invalid parameter is specified by user");
+        if (isInvalidInput) {
+            logger.log(Level.WARNING, "Invalid parameter or value specified by user");
             logger.log(Level.INFO, "Unsuccessful deletion of prescription");
-            return true;
+            return false;
         }
-
-        boolean isValidPrescriptionId = prescriptionValidator.isValidPrescriptionId(ui, prescriptionIdToDelete,
-                medicines);
-
-        if (!isValidPrescriptionId) {
-            logger.log(Level.WARNING, "Invalid prescription id is specified by user");
-            logger.log(Level.INFO, "Unsuccessful deletion of prescription");
-            return true;
-        }
-        return false;
+        return true;
     }
 
     /**

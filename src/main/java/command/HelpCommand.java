@@ -5,10 +5,10 @@ import utilities.ui.Ui;
 import java.util.ArrayList;
 
 //@@author alvintan01
+
 /**
  * Display help message containing command usage information.
  */
-
 public class HelpCommand extends Command {
 
     @Override

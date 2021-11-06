@@ -4,7 +4,7 @@
 
 MediVault is a Command Line Interface (CLI) application that will help to manage medication supplies within a pharmacy.
 It is an integrated solution that provides real-time tracking of stocks, prescriptions and orders. The
-purpose of this guide is to help developers set up and continue with the development of MediVault past version 2.0.
+purpose of this guide is to help developers set up and continue with the development of MediVault past version 2.1.
 
 ## Acknowledgements
 
@@ -12,6 +12,7 @@ purpose of this guide is to help developers set up and continue with the develop
 * Inspiration for User Guide: https://se-education.org/addressbook-level3/UserGuide.html
 * Inspiration for Developer Guide: https://se-education.org/addressbook-level3/DeveloperGuide.html
 * PlantUML Tutorial: https://se-education.org/guides/tutorials/plantUml.html
+* Gradle: https://github.com/gradle/gradle
 
 ## Contents
 
@@ -47,11 +48,12 @@ purpose of this guide is to help developers set up and continue with the develop
         * [ArchivePrescriptionCommand](#archiveprescriptioncommand)
         * [ArchiveOrderCommand](#archiveordercommand)
 * [Product Scope](#product-scope)
-    * [Target user profile](#target-user-profile)
-    * [Value proposition](#value-proposition)
+    * [Target User Profile](#target-user-profile)
+    * [Value Proposition](#value-proposition)
 * [User Stories](#user-stories)
 * [Non-Functional Requirements](#non-functional-requirements)
-* [Instructions for manual testing](#instructions-for-manual-testing)
+* [Instructions for Manual Testing](#instructions-for-manual-testing)
+* [Instructions for Automated Testing](#instructions-for-automated-testing)
 
 ## Glossary
 
@@ -61,6 +63,11 @@ Stock | Refers to a medication.
 Prescription | Refers to a prescription.
 Order | Refers to ordering new medications to replenish the stocks.
 Parameters | Prefixes for MediVault to understand the type of information you provide.
+
+Meaning of Icons:
+- :information_source: Note
+- :warning: Warning
+- :bulb: Tip
 
 ## Setting up environment
 
@@ -73,7 +80,6 @@ Parameters | Prefixes for MediVault to understand the type of information you pr
     * Follow the guide
       at [se-edu/guides IDEA: Configuring the JDK](https://se-education.org/guides/tutorials/intellijJdk.html) to ensure
       Intellij is configured to use JDK 11.
-
 4. Import the project as a Gradle project
     * Follow the
       guide [se-edu/guides IDEA: Importing a Gradle project](https://se-education.org/guides/tutorials/intellijImportGradleProject.html)
@@ -112,7 +118,7 @@ The rest of the program consist of four components.
 * `Command`: Executes command based on the user input that is processed by `Utilities`
   component. The list of commands can be found in our User Guide [here](UserGuide.md).
 * `Utilities`: Contains important driver classes for MediVault
-  * includes `parser`, `ui`, `storage` and `comparators`.
+  * Includes `parser`, `ui`, `storage` and `comparators`.
 * `Inventory`: Contains a collection of classes used by MediVault to represent
 different medication information.
 * `Errors`: Contains collection of classes that handles exceptions during execution of MediVault.
@@ -198,7 +204,7 @@ logic:
   to MediVault.
 * MediVault will then invoke the `execute()` function of the `Command` object to execute the command.
 
-> :warning: Warning
+> :warning: Warning:
 > * Should there be an invalid command, `CommandParser` will throw `InvalidCommandException` and MediVault will display the error message using the `Ui` class.
 
 Given below is the sequence diagram after `run()` is called for the interactions within the main application logic.
@@ -213,19 +219,19 @@ After the `.execute()` command is called, MediVault does the following validator
 
 ![ContainValidParametersAndValuesSequenceDiagram](diagrams/diagram_images/ContainValidParametersAndValuesSequenceDiagram.png)
 
-> :information_source: Replace `*` in the diagram with `Stock`, `Prescription` or `Order` depending on the command entered.
+> :information_source: Note: Replace `*` with `Stock`, `Prescription` or `Order` depending on the command entered.
 
-1. MediVault attempts to get the instance of the `Ui` class which is a singleton if it exists. Otherwise, it creates
-a new instance of the `Ui` class.
-2. MediVault creates a new `*Validator` instance which contains the methods to validate the user's input for the
+1. `*Command` attempts to get the instances of the `Ui` and `Medicine` classes which are a singletons if they exists. 
+Otherwise, it creates a new instance of the `Ui` and/or `Medicine` class.
+2. `*Command` creates a new `*Validator` instance which contains the methods to validate the user's input for the
 respective `*`.
-3. MediVault runs `containsInvalidParameters()` to check if **parameters** input by the user are valid.
-4. Medivault attempts to get the instance of the `Medicine` class which is also a single if it exists. Otherwise, it 
-creates a new instance of the `Medicine` class. 
-5. MediVault runs `containsInvalidParameterValues()` to check if **parameter values** input by the user is valid.
-6. If **Step 3** and **Step 5** are able to run without throwing any exception or error, user inputs are considered 
-valid.
-7. After running the logic for `*Command`, commands that modifies the `*` information attempts to get the instance of 
+3. `*Command` runs `containsInvalidParametersAndValues()` and does validation checks explained in detail in **Step 4** 
+and **Step 5**.
+4. The `MedicineValidator` class runs `containsInvalidParameters()` to check if **parameters** input by the user are valid.
+5. Then, `MedicineValidator` class runs `containsInvalidParameterValues()` in `*Validator` to check if 
+**parameter values** input by the user is valid.
+6. `MedicineValidator` will return the result of the validity checks back to `*Command`.
+7. After running the Logic for `*Command`, commands that **modifies** the `*` information attempts to get the instance of 
 `Storage` class which is a singleton if it exists. MediVault runs `saveData()` to save the latest information into the text file.
 
 The motivation to implement an **initial validity checker** was because most of the commands requires MediVault to check 
@@ -245,8 +251,6 @@ There are three variations of the list command.
 The sequence diagram below shows how the `list` operation works in general.
 
 ![ListSequenceDiagram](diagrams/diagram_images/ListSequenceDiagram.png)
-
-> :information_source: Replace `*` in the diagram with `Stock`, `Prescription` or `Order` depending on the command entered.
 
 * All three variations of `list` are similar as they are implemented by iterating through the `Medicine` ArrayList and
   filtering out the respective object types.
@@ -294,6 +298,8 @@ in `stock` mode.
 > * MediVault performs a check to determine if it is executing deletion by stock id or deletion by expiry then executes
   accordingly.
 > * MediVault will not execute if both id and expiry date are specified. 
+> * MediVault will not actually delete the stock. Rather, it will set it as deleted and hide from user view. This is 
+for the purpose of retaining stock information in case it is needed again in the future.
 
 The sequence diagram for `DeleteStockCommand` is shown below.
 
@@ -379,7 +385,7 @@ The sequence diagram for `DeletePrescriptionCommand` is shown below.
 
 ![DeletePrescriptionCommandDiagram](diagrams/diagram_images/DeletePrescriptionSequenceDiagram.png)
 
-> :bulb: If the stock is deleted, MediVault will recover the stock and add the prescription quantity to the stock.
+> :bulb: Tip: If the stock is deleted, MediVault will recover the stock and add the prescription quantity to the stock.
 
 - `setStockQuantity()` method will check stock if stock exist. If stock exist, add the quantity to the stock quantity.
 
@@ -423,17 +429,17 @@ This approach solves the issue when a medication is prescribed to a user with an
 **more than** the current batch of stock with the same Stock ID but **less than** the total 
 stock quantity. 
 
-> :bulb: MediVault automatically adds new prescription records when a medication is prescribed
+> :bulb: Tip: MediVault automatically adds new prescription records when a medication is prescribed
 > from stocks with different Stock IDs.
 
 ### Order Commands
 
-### AddOrderCommand
+#### AddOrderCommand
 
 MediVault creates an `AddOrderCommand` object when CommandParser identifies `addorder` or the `add` keyword
 in `order` mode.
 
-> :information_source: Note
+> :information_source: Note:
 > * MediVault adds order information when `parameter` and `parameterValues` provided by the user are valid.
 > * As the order date is an optional parameter, MediVault will use the date the order was placed as the default date.
 > * Users will not be unable to add orders if the order quantity exceeds maximum stock quantity.
@@ -442,12 +448,29 @@ The sequence diagram for `AddOrderCommand` is shown below.
 
 ![AddOrderCommandDiagram](diagrams/diagram_images/AddOrderSequenceDiagram.png)
 
+`addDate()` method will add order date based on whether the user provided the date parameter or not.
+
+`addOrder()` method will add order based on user input.
+
+MediVault will determine if there exist the medication with the same name in order and in stock.
+
+* If there exist medication with the same name in order and in stock, MediVault will check if the `orderQuantity +
+existingStockQuantity + existingOrderQuantity <= maxQuantity` to ensure total order quantity does not exceed the 
+existing maximum stock quantity allowed.
+* If there exist medication with the same name in order but not in stock, MediVault will check if the `orderQuantity
+< maxQuantity`, where `maxQuantity = Integer.MAX_VALUE` to allow the user to add any quantity of medication.
+* If there does not exist medication with the same name in order but exist in stock, MediVault will check if the 
+`orderQuantity < existingStockQuantity` to ensure total order quantity does not exceed the existing maximum stock 
+quantity allowed.
+* If there does not exist medication with the same name in order and in stock, MediVault will not check for valid quantity and
+will simply add the order as a new order.
+
 #### DeleteOrderCommand
 
 MediVault creates a `DeleteOrderCommand` object when CommandParser identifies `deleteorder` or  `delete` in `order`
 mode.
 
-> :information_source: Note
+> :information_source: Note:
 > * MediVault deletes the order when the `parameter` and `parameterValues` provided by the user are valid.
 
 The sequence diagram for `DeleteOrderCommand` is shown below.
@@ -466,7 +489,7 @@ The sequence diagram for `UpdateOrderCommand` is shown below.
 MediVault retrieves the order object using the `i/ID` parameter specified by the user using the
 `extractOrderObject()` method.
 
-> :warning: Warning
+> :warning: Warning:
 > * MediVault disables updating an order that has been delivered. Users can only update information for pending orders.
 
 MediVault conducts a check if an order quantity is valid with the provided `q/QUANTITY`.
@@ -485,6 +508,7 @@ MediVault creates an `ReceiveOrderCommand` object when `CommandParser` identifie
 > * `ReceiveOrderCommand` will call `AddStockCommand` once the `parameters` and `parameterValues` are validated.
 > * If the order contains a medication already in stock, the `d/DESCRIPTION` and `m/MAX_QUANTITY` will be ignored
 > and existing values will be used.
+> * If the `e/EXPIRY_DATE` provided is the same as the one in stock, `p/PRICE` will be ignored as well.
 
 The sequence diagram for `ReceiveOrderCommand` is shown below.
 
@@ -546,14 +570,14 @@ The sequence diagram for ArchiveOrderCommand is shown below.
 
 ## Product Scope
 
-### Target user profile
+### Target User Profile
 
 * Pharmacist handling storing, ordering and prescribing of medication
 * Has a need to manage large number of stocks in the pharmacy
 * May forget how much medicine stock is left in the pharmacy
 * Is a fast typist
 
-### Value proposition
+### Value Proposition
 
 The main value proposition of MediVault is such that it provides the user with an interface for efficient stock taking
 purposes. It eradicates the need for manual tracking of medications which will greatly lessen the administrative 
@@ -627,7 +651,7 @@ redirection tests.
 * **User Requirements:** MediVault should be user-friendly such that it is usable by a pharmacist with no CLI experience.
 
 
-## Instructions for manual testing
+## Instructions for Manual Testing
 
 ### Starting up and Shutting Down
 
@@ -653,11 +677,32 @@ All data files are located in the data folder.
         5. Delete entry to stock, prescription and order into MediVault.
         6. Exit MediVault.
     * Expected: stock.txt, prescription.txt and order.txt will be empty.
-2. Archive data is saved in archiveorder.txt and archiveprescription.txt.
+2. Archive data is saved in order_archive.txt and prescription_archive.txt.
     * Test Case:
         1. Run the application.
         2. Add entries to prescription and order into MediVault.
         3. Run the `archiveorder` and `archiveprescription` command with date specified.
         4. Exit MediVault.
-    * Expected: archiveorder.txt and archiveprescription.txt will have entries.
-   
+    * Expected: order_archive.txt and prescription_archive.txt will have entries.
+
+## Instructions for Automated Testing
+
+### Gradle Build Tests
+
+MediVault uses Gradle for Continuous Integration during development. Gradle performs automated checking of 
+coding style which helps in ensuring adherence to Java Coding Standards. Gradle also helps to automate testing by running
+our JUnit test cases to ensure that MediVault bug-free to the extent of our testing and working as intended. It is helpful
+in catching unintended bugs while we continuously develop MediVault.
+
+### JUnit Tests
+
+> :bulb: Tip
+> * **Equivalence Partitions:** Create Effective and Efficient Test Cases by considering Equivalence Partitions
+> * **Boundary Value Analysis:** Focus on testing Boundary Values
+
+To contribute and develop JUnit Test Cases:
+1. Locate `tp/src/test/java/` folder.
+2. Decide which aspect of MediVault you will be creating JUnit Tests for.
+   * Command, Parsers, Validators, etc.
+3. Start coding JUnit Test Cases in the appropriate files.
+   * Aim to create both Positive and Negative test cases.

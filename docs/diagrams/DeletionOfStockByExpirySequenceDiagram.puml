@@ -19,8 +19,8 @@ end box
 autoactivate on
 mainFrame sd Deletion of stock by expiry
 activate deleteStock
-deleteStock -> deleteStock: deleteStockByExpiry()
-deleteStock -> dateParser : stringToDate()
+deleteStock -> deleteStock: deleteStockByExpiry(ui: Ui,\n medicines: ArrayList<Medicine>)
+deleteStock -> dateParser : stringToDate(date: String)
 deleteStock <-- dateParser : date
 loop medicine : medicines
     deleteStock -> deleteStock : medicine
@@ -28,8 +28,10 @@ loop medicine : medicines
         deleteStock -> stock : getExpiry()
         deleteStock <-- stock : stockExpiryDate
         opt stockExpiryDate.before(date) || stockExpiryDate.equals(date)
-            deleteStock -> stock : setDeleted()
-            deleteStock <-- stock : setAsDeleted
+            deleteStock -> stock : setQuantity(quantity: int)
+            deleteStock <-- stock
+            deleteStock -> stock : setDeleted(deleted: boolean)
+            deleteStock <-- stock
         end
     end
     deleteStock --> deleteStock

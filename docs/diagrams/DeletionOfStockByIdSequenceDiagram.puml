@@ -18,15 +18,17 @@ end box
 autoactivate on
 mainFrame sd Deletion of stock by id
 activate deleteStock
-deleteStock -> deleteStock: deleteStockById()
+deleteStock -> deleteStock: deleteStockById(ui: Ui,\n medicines: ArrayList<Medicine>)
 loop medicine : medicines
     deleteStock -> deleteStock : medicine
     opt medicine instanceof Stock
         deleteStock -> stock : getStockId()
         deleteStock <-- stock : stockId
         opt stock.getStockId() == stockId
-            deleteStock -> stock : setDeleted()
-            deleteStock <-- stock : setAsDeleted
+            deleteStock -> stock : setQuantity(quantity: int)
+            deleteStock <-- stock
+            deleteStock -> stock : setDeleted(deleted: boolean)
+            deleteStock <-- stock
         end
     end
     deleteStock --> deleteStock

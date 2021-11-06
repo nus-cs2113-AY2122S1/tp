@@ -57,7 +57,6 @@ import static utilities.parser.Mode.STOCK;
 /**
  * Helps to parse the commands given by the user as well as extract the parameters provided.
  */
-
 public class CommandParser {
     public CommandParser() {
     }
@@ -141,7 +140,7 @@ public class CommandParser {
         String command = userInputSplit[0].toLowerCase();
         String commandParameters = "";
         if (userInputSplit.length > 1) { // Ensure command parameter exists
-            commandParameters = userInputSplit[1];
+            commandParameters = userInputSplit[1].toUpperCase();
         }
         return new String[]{command, commandParameters};
     }

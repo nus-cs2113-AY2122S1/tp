@@ -1,20 +1,63 @@
 package utilities.parser;
 
+import command.CommandParameters;
 import inventory.Medicine;
 import utilities.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Contains all the methods to validate if a Medicine's input parameters are valid.
  */
 public abstract class MedicineValidator {
-    public MedicineValidator() {
+    private static Logger logger = Logger.getLogger("MedicineValidator");
+
+    public MedicineValidator(){
     }
 
     public abstract boolean containsInvalidParameterValues(Ui ui, LinkedHashMap<String, String> parameters,
                                                            ArrayList<Medicine> medicines, String commandSyntax);
+
+    public abstract boolean isValidColumn(Ui ui, String columnName);
+
+    /**
+     * Helps to check if the parameters and values required are provided by the user.
+     *
+     * @param ui                         Reference to the UI object to print messages.
+     * @param medicines                  Arraylist of all medicines.
+     * @param parameters                 Parameters entered in by the user.
+     * @param requiredParameters         Parameters required by the command.
+     * @param optionalParameters         Parameters that are optional.
+     * @param commandSyntax              The command's valid syntax.
+     * @param requiresOptionalParameters Boolean value of whether command required optional parameters.
+     * @param validator                  Validator object used for validation checks.
+     * @return A boolean value indicating if the parameters and values required are entered by the user.
+     */
+    public boolean containsInvalidParametersAndValues(Ui ui, ArrayList<Medicine> medicines,
+                                                      LinkedHashMap<String, String> parameters,
+                                                      String[] requiredParameters, String[] optionalParameters,
+                                                      String commandSyntax, boolean requiresOptionalParameters,
+                                                      MedicineValidator validator) {
+        boolean isInvalidParameter = validator.containsInvalidParameters(ui, parameters, requiredParameters,
+                optionalParameters, commandSyntax, requiresOptionalParameters);
+        if (isInvalidParameter) {
+            logger.log(Level.WARNING, "Invalid parameters given by user");
+            return true;
+        }
+
+        boolean isInvalidParameterValues = validator.containsInvalidParameterValues(ui, parameters,
+                medicines, commandSyntax);
+        if (isInvalidParameterValues) {
+            logger.log(Level.WARNING, "Invalid parameters values given by user");
+            return true;
+        }
+
+        return false;
+    }
+
 
     /**
      * Helps to check if the parameters required are provided by the user.
@@ -123,5 +166,41 @@ public abstract class MedicineValidator {
         return false;
     }
 
-    abstract boolean isValidColumn(Ui ui, String columnName);
+    /**
+     * Checks if name parameter exists.
+     *
+     * @param parameters   Parameters entered in by the user.
+     * @param medicineName Medicine name of the given object.
+     * @return A boolean value to return whether a parameter exist.
+     */
+    public boolean hasNameParamChecker(LinkedHashMap<String, String> parameters, String medicineName) {
+        boolean hasNameParam = parameters.containsKey(CommandParameters.NAME);
+        if (hasNameParam) {
+            String currentName = medicineName;
+            String updatedName = parameters.get(CommandParameters.NAME);
+            if (updatedName.equalsIgnoreCase(currentName)) {
+                hasNameParam = false;
+            }
+        }
+        return hasNameParam;
+    }
+
+    /**
+     * Checks if given quantity and stored quantity are the same.
+     *
+     * @param parameters Parameters entered in by the user.
+     * @param quantity   Current quantity in stocks.
+     * @return A boolean value to return whether a parameter exist.
+     */
+    public boolean hasQuantityParamChecker(LinkedHashMap<String, String> parameters, int quantity) {
+        boolean hasQuantityParam = parameters.containsKey(CommandParameters.QUANTITY);
+        if (hasQuantityParam) {
+            int currentQuantity = quantity;
+            int updatedQuantity = Integer.parseInt(parameters.get(CommandParameters.QUANTITY));
+            if (currentQuantity == updatedQuantity) {
+                hasQuantityParam = false;
+            }
+        }
+        return hasQuantityParam;
+    }
 }

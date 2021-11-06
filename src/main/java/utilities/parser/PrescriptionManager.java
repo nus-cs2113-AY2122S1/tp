@@ -6,11 +6,13 @@ import inventory.Medicine;
 import inventory.Stock;
 import utilities.comparators.StockComparator;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
 //@@author a-tph
+
 /**
  * Manages medicines that are prescription objects.
  */
@@ -101,6 +103,67 @@ public class PrescriptionManager {
         }
         return newPrescriptions;
     }
+
+    /**
+     * Extracts the date value if it is provided.
+     *
+     * @param parameters Parameters entered in by the user.
+     * @param storedDate Date field currently in the prescription.
+     * @return The date to be updated.
+     */
+    public static Date getUpdatedDate(LinkedHashMap<String, String> parameters, Date storedDate) {
+        boolean hasDateParam = parameters.containsKey(CommandParameters.DATE);
+        Date date = null;
+        if (hasDateParam) {
+            try {
+                date = DateParser.stringToDate(parameters.get(CommandParameters.DATE));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        } else {
+            date = storedDate;
+        }
+        assert date != null : "Date should not be null";
+        return date;
+    }
+
+    /**
+     * Extracts the Customer Id if it is provided.
+     *
+     * @param parameters       Parameters entered in by the user.
+     * @param storedCustomerId Customer Id field currently in the prescription.
+     * @return The Customer Id to be updated.
+     */
+    public static String getUpdatedCustomerId(LinkedHashMap<String, String> parameters, String storedCustomerId) {
+        boolean hasCustomerParam = parameters.containsKey(CommandParameters.CUSTOMER_ID);
+        String customerId;
+        if (hasCustomerParam) {
+            customerId = parameters.get(CommandParameters.CUSTOMER_ID);
+        } else {
+            customerId = storedCustomerId;
+        }
+        return customerId;
+    }
+
+    /**
+     * Extracts the Staff information if it is provided.
+     *
+     * @param parameters  Parameters entered in by the user.
+     * @param storedStaff Staff field currently in the prescription.
+     * @return The Staff to be updated.
+     */
+    public static String getUpdatedStaff(LinkedHashMap<String, String> parameters, String storedStaff) {
+        boolean hasStaffParam = parameters.containsKey(CommandParameters.STAFF);
+        String staffName;
+        if (hasStaffParam) {
+            staffName = parameters.get(CommandParameters.STAFF);
+        } else {
+            staffName = storedStaff;
+        }
+        return staffName;
+    }
+
+    //@@author deonchung
 
     /**
      * Retrieves the total stock quantity for medicine with same name that has not expired.

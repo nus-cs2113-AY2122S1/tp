@@ -19,18 +19,18 @@ end box
 autoactivate on
 mainFrame sd Logic for AddStockCommand
 activate addstock
-addstock -> addstock : checkExpiryDate()
-addstock --> addstock : formatExpiryDate
+addstock -> addstock : checkExpiryDate(ui: Ui, expiryDate: String)
+addstock --> addstock :
 alt nameExist
     addstock -> stockmanager: getTotalStockQuantity()
     addstock <-- stockmanager: totalStock
-    addstock -> addstock : isExpiryExist()
+    addstock -> addstock : isExpiryExist(ui: Ui, stockValidator: StockValidator, \nfilteredStock: ArrayList<Stock>, quantityToAdd: String, \nformatExpiry: Date, totalStock: int)
     loop stock : filteredStocks
         opt isValidQuantity
-            addstock -> addstock : isValidQuantity()
-            addstock -> stockvalidator : quantityValidityChecker()
+            addstock -> addstock : isValidQuantity(ui:Ui, stockValidator: StockValidator, \nmaxQuantity: int, quantity: int)
+            addstock -> stockvalidator : quantityValidityChecker(ui: Ui, quantity: int, maxQuantity: int)
             addstock <-- stockvalidator : isValidQuantity
-            addstock --> addstock : isValidQuantity
+            addstock --> addstock :
             opt formatExpiry.equals(stock.getExpiry())
                 addstock -> stock : getQuantity()
                 addstock <-- stock : getQuantity
@@ -39,29 +39,33 @@ alt nameExist
             end
         end
     end
-    addstock --> addstock : isExpiryExist
-    addstock -> addstock : addSameMedicine()
+    addstock --> addstock :
+    addstock -> addstock : checkValidParametersAndValues(ui: Ui, parameters: LinkedHashMap<String, String>, \nmedicines: ArrayList<Medicine>, requiredParameters: String[], optionalParameters: String[])
+    addstock -> addstock : addSameMedicine(ui: Ui, medicines: ArrayList<Medicine>, nameToAdd: String, \nstockValidator: StockValidator, filteredStocks: ArrayList<Stock>, quantityToAdd: String, \nformatExpiry: Date, totalStock: int)
     loop stock : filteredStocks
         opt isValidQuantity
-        addstock -> addstock : isValidQuantity()
-        addstock -> stockvalidator : quantityValidityChecker()
+        addstock -> addstock : isValidQuantity(ui:Ui, stockValidator: StockValidator, \nmaxQuantity: int, quantity: int)
+        addstock -> stockvalidator : quantityValidityChecker(ui: Ui, quantity: int, maxQuantity: int)
         addstock <-- stockvalidator : isValidQuantity
-        addstock --> addstock : isValidQuantity
-        addstock -> addstock : addMedicine()
-        addstock --> addstock : addMedicine
+        addstock --> addstock :
+        addstock -> addstock : addMedicine(ui: Ui, medicines: ArrayList<Medicine>, name: String, \ndescription: String, price: Double, quantity: int, expiryDate: Date, maxQuantity: int)
+        addstock --> addstock :
         end
-        addstock --> addstock : addSameMedicine
+        addstock --> addstock :
     end
+    addstock --> addstock :
 
 else !nameExist
-    addstock -> addstock : isValidQuantity()
-    addstock -> stockvalidator : quantityValidityChecker()
+    addstock -> addstock : checkValidParametersAndValues(ui: Ui, parameters: LinkedHashMap<String, String>, \nmedicines: ArrayList<Medicine>, requiredParameters: String[], optionalParameters: String[])
+    addstock -> addstock : isValidQuantity(ui:Ui, stockValidator: StockValidator, \nmaxQuantity: int, quantity: int)
+    addstock -> stockvalidator : quantityValidityChecker(ui: Ui, quantity: int, maxQuantity: int)
     addstock <-- stockvalidator : isValidQuantity
-    addstock --> addstock : isValidQuantity
+    addstock --> addstock :
     opt isValidQuantity
-        addstock -> addstock : addMedicine()
-        addstock --> addstock : addMedicine
+        addstock -> addstock : addMedicine(ui: Ui, medicines: ArrayList<Medicine>, name: String, \ndescription: String, price: Double, quantity: int, expiryDate: Date, maxQuantity: int)
+        addstock --> addstock :
     end
+    addstock --> addstock :
 end
 
 

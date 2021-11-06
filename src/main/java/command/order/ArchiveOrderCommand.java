@@ -6,6 +6,7 @@ import command.CommandSyntax;
 import inventory.Medicine;
 import inventory.Order;
 import utilities.parser.DateParser;
+import utilities.parser.MedicineValidator;
 import utilities.parser.OrderValidator;
 import utilities.ui.Ui;
 import utilities.storage.Storage;
@@ -39,19 +40,10 @@ public class ArchiveOrderCommand extends Command {
         String[] requiredParameters = {CommandParameters.DATE};
         String[] optionalParameters = {};
 
-        OrderValidator orderValidator = new OrderValidator();
-        boolean isInvalidParameter = orderValidator.containsInvalidParameters(ui, parameters, requiredParameters,
-                optionalParameters, CommandSyntax.ARCHIVE_ORDER_COMMAND, true);
-        if (isInvalidParameter) {
-            logger.log(Level.WARNING, "Invalid parameter is specified by user");
-            logger.log(Level.INFO, "Unsuccessful archive of order");
-            return;
-        }
-
-        boolean isInvalidParameterValues = orderValidator.containsInvalidParameterValues(ui, parameters,
-                medicines, CommandSyntax.ARCHIVE_ORDER_COMMAND);
-        if (isInvalidParameterValues) {
-            logger.log(Level.WARNING, "Invalid parameters values given by user");
+        MedicineValidator validator = new OrderValidator();
+        boolean isInvalidInput = validator.containsInvalidParametersAndValues(ui, medicines, parameters,
+                requiredParameters, optionalParameters, CommandSyntax.ARCHIVE_ORDER_COMMAND, true, validator);
+        if (isInvalidInput) {
             logger.log(Level.INFO, "Unsuccessful archive of order");
             return;
         }
@@ -70,7 +62,8 @@ public class ArchiveOrderCommand extends Command {
         Storage storage = Storage.getInstance();
         storage.archiveData(filteredOrders);
         storage.saveData(medicines);
-        ui.print("Archived delivered orders from " + DateParser.dateToString(orderArchiveDate));
+        ui.print("Archived " + filteredOrders.size() + " delivered orders from "
+                + DateParser.dateToString(orderArchiveDate));
         logger.log(Level.INFO, "Successful archive of order");
     }
 

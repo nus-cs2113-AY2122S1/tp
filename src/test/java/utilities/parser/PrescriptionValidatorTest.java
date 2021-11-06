@@ -6,6 +6,8 @@ import utilities.ui.Ui;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+//@@author deonchung
+
 public class PrescriptionValidatorTest {
     private Ui ui = new Ui();
     PrescriptionValidator prescriptionValidator = new PrescriptionValidator();

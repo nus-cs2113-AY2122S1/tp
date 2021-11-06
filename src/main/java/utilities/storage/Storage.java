@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 //@@author RemusTeo
+
 /**
  * Storage class handles all saving and loading of data.
  */
@@ -302,7 +303,7 @@ public class Storage {
      * Parse prescription data and create a prescription object based on it.
      *
      * @param prescriptionDetails String of data of specific stock from file data/prescription.txt.
-     * @param prescriptionRow Row ID of the prescription.
+     * @param prescriptionRow     Row ID of the prescription.
      * @return Prescription object for adding into medicines.
      */
     private Medicine parsePrescriptionData(String prescriptionDetails, int prescriptionRow)

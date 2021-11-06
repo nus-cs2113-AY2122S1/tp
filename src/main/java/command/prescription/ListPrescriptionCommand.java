@@ -7,6 +7,7 @@ import inventory.Prescription;
 import utilities.comparators.PrescriptionComparator;
 import inventory.Medicine;
 import utilities.parser.DateParser;
+import utilities.parser.MedicineValidator;
 import utilities.parser.PrescriptionValidator;
 import utilities.ui.Ui;
 
@@ -19,10 +20,10 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 //@@author alvintan01
+
 /**
  * Helps to process the listprescription command together with filters and sort.
  */
-
 public class ListPrescriptionCommand extends Command {
     private static Logger logger = Logger.getLogger("ListPrescription");
 
@@ -34,30 +35,18 @@ public class ListPrescriptionCommand extends Command {
     public void execute() {
         logger.log(Level.INFO, "Start listing of prescription records");
         Ui ui = Ui.getInstance();
+        ArrayList<Medicine> medicines = Medicine.getInstance();
 
-        String[] requiredParameter = {};
+        String[] requiredParameters = {};
         String[] optionalParameters = {CommandParameters.ID, CommandParameters.NAME, CommandParameters.QUANTITY,
                 CommandParameters.CUSTOMER_ID, CommandParameters.DATE, CommandParameters.STAFF,
                 CommandParameters.STOCK_ID,
                 CommandParameters.SORT, CommandParameters.REVERSED_SORT};
 
-        PrescriptionValidator prescriptionValidator = new PrescriptionValidator();
-        boolean isInvalidParameter = prescriptionValidator.containsInvalidParameters(ui, parameters, requiredParameter,
-                optionalParameters, CommandSyntax.LIST_PRESCRIPTION_COMMAND, false);
-
-        if (isInvalidParameter) {
-            logger.log(Level.WARNING, "Invalid parameters given by user");
-            return;
-        }
-
-        ArrayList<Medicine> medicines = Medicine.getInstance();
-
-        boolean isInvalidParameterValues = prescriptionValidator.containsInvalidParameterValues(ui, parameters,
-                medicines,
-                CommandSyntax.LIST_PRESCRIPTION_COMMAND);
-
-        if (isInvalidParameterValues) {
-            logger.log(Level.WARNING, "Invalid parameters values given by user");
+        MedicineValidator validator = new PrescriptionValidator();
+        boolean isInvalidInput = validator.containsInvalidParametersAndValues(ui, medicines, parameters,
+                requiredParameters, optionalParameters, CommandSyntax.LIST_PRESCRIPTION_COMMAND, false, validator);
+        if (isInvalidInput) {
             return;
         }
 
@@ -70,7 +59,7 @@ public class ListPrescriptionCommand extends Command {
                 filteredPrescriptions.add((Prescription) medicine);
             }
         }
-        filteredPrescriptions = filterPrescription(parameters, filteredPrescriptions);
+        filteredPrescriptions = filterPrescription(filteredPrescriptions);
 
         ui.printPrescriptions(filteredPrescriptions);
         logger.log(Level.INFO, "Successful listing of prescription");
@@ -80,12 +69,10 @@ public class ListPrescriptionCommand extends Command {
     /**
      * Helps to filter prescription records based on the user's input.
      *
-     * @param parameters            HashMap Key-Value set for parameter and user specified parameter value.
      * @param filteredPrescriptions Arraylist of Prescription objects.
      * @return Arraylist of filtered Prescription objects based on the user's parameters values.
      */
-    private ArrayList<Prescription> filterPrescription(LinkedHashMap<String, String> parameters,
-                                                       ArrayList<Prescription> filteredPrescriptions) {
+    private ArrayList<Prescription> filterPrescription(ArrayList<Prescription> filteredPrescriptions) {
         for (String parameter : parameters.keySet()) {
             String parameterValue = parameters.get(parameter);
             switch (parameter) {

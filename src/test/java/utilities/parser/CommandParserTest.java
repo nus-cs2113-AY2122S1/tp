@@ -4,15 +4,34 @@ import command.Command;
 import command.ExitCommand;
 import command.stock.AddStockCommand;
 import errors.InvalidCommandException;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import utilities.ui.Ui;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.LinkedHashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//@@author alvintan01
+
 public class CommandParserTest {
-    Ui ui = new Ui();
+    private final PrintStream standardOut = System.out;
+    private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+    @BeforeEach
+    public void setUp() {
+        System.setOut(new PrintStream(outputStream));
+    }
+
+    @AfterEach
+    public void tearDown() {
+        System.setOut(standardOut);
+    }
+
+    Ui ui = Ui.getInstance();
     CommandParser commandParser = new CommandParser();
 
     @Test
@@ -59,8 +78,44 @@ public class CommandParserTest {
     }
 
     @Test
-    public void changeMode_modeStock_expectModePrescription() {
+    public void changeMode_currentModeStockNewModePrescription_expectModePrescription() {
         Mode mode = commandParser.changeMode(ui, "prescription", Mode.STOCK);
         assertEquals(mode, Mode.PRESCRIPTION);
+    }
+
+    @Test
+    public void changeMode_currentModeStockNewModeOrder_expectModeOrder() {
+        Mode mode = commandParser.changeMode(ui, "order", Mode.STOCK);
+        assertEquals(mode, Mode.ORDER);
+    }
+
+    @Test
+    public void changeMode_currentModeOrderNewModeStock_expectModeStock() {
+        Mode mode = commandParser.changeMode(ui, "stock", Mode.ORDER);
+        assertEquals(mode, Mode.STOCK);
+    }
+
+    @Test
+    public void changeMode_currentStockNewModeStock_expectModeAlreadyInStockError() {
+        String expectedOutput = "Already in STOCK mode!";
+        Mode mode = commandParser.changeMode(ui, "stock", Mode.STOCK);
+        // Output stream will include \r for each line break
+        assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
+    }
+
+    @Test
+    public void changeMode_currentModeOrderNewModeOrder_expectModeAlreadyInOrderError() {
+        String expectedOutput = "Already in ORDER mode!";
+        Mode mode = commandParser.changeMode(ui, "order", Mode.ORDER);
+        // Output stream will include \r for each line break
+        assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
+    }
+
+    @Test
+    public void changeMode_currentModePrescriptionNewModePrescription_expectModeAlreadyInPrescriptionError() {
+        String expectedOutput = "Already in PRESCRIPTION mode!";
+        Mode mode = commandParser.changeMode(ui, "prescription", Mode.PRESCRIPTION);
+        // Output stream will include \r for each line break
+        assertEquals(expectedOutput, outputStream.toString().trim().replace("\r", ""));
     }
 }

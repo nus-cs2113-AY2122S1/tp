@@ -12,7 +12,6 @@ import java.util.Date;
 /**
  * Contains the parser for date objects.
  */
-
 public class DateParser {
     public static final String INPUT_DATE_FORMAT = "d-M-yyyy";
     public static final String OUTPUT_DATE_FORMAT = "dd-MM-yyyy";

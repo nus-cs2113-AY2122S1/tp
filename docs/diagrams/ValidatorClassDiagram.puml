@@ -7,19 +7,25 @@ skinparam classAttributeIconSize 0
 ' to join all the arrows
 skinparam groupInheritance 3
 
+!include style.puml
+
+skinparam classBackgroundColor COLOR_UTILITIES_BOX
 
 class "{abstract}\n MedicineValidator"{
     +containsInvalidParameterValues(): boolean &#123;abstract&#125;
+    +isValidColumn(): boolean &#123;abstract&#125;
+    +containsInvalidParametersAndValues(): boolean
     +containsInvalidParameters(): boolean
     +isValidName(): boolean
     +isValidQuantity(): boolean
-    +isValidColumn(): boolean &#123;abstract&#125;
+    +hasNameParamChecker(): boolean
+    +hasQuantityParamChecker: boolean
 }
 
 class "StockValidator"{
     +StockValidator()
     +containsInvalidParameterValues(): boolean;
-    +isValidOrderId(): boolean
+    +isValidStockId(): boolean
     +isValidPrice(): boolean
     +isValidExpiry(): boolean
     +isValidDescription(): boolean
@@ -29,11 +35,11 @@ class "StockValidator"{
     +dateValidityChecker(): boolean
 }
 
-class "DispenseValidator"{
-    +DispenseValidator()
+class "PrescriptionValidator"{
+    +PrescriptionValidator()
     +containsInvalidParameterValues(): boolean;
     +isValidDispenseId(): boolean
-    +isValidColumn(): boolean
+    +isValidCustomerId(): boolean
     +isValidStaffName(): boolean
     +isValidColumn(): boolean
     +isValidDate(): boolean
@@ -49,9 +55,8 @@ class "OrderValidator"{
 }
 
 "{abstract}\n MedicineValidator" <|---- "StockValidator"
-"{abstract}\n MedicineValidator" <|-- "DispenseValidator"
+"{abstract}\n MedicineValidator" <|-- "PrescriptionValidator"
 "{abstract}\n MedicineValidator" <|---- "OrderValidator"
 
 note "The input parameters for all functions\nhas been left out to make this\ndiagram more compact." as n1
- '
 @enduml
