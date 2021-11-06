@@ -84,11 +84,15 @@ public class IngredientStorage {
      * Removes from the earliest batch of expiry date first.
      *
      * @param quantity Quantity to be removed.
-     * @throws IllegalValueException If quantity to be removed exceeds the current available quantity.
+     * @throws IllegalValueException If quantity to be removed exceeds the current available quantity or if
+     *         quantity to be removed is less than or equal to 0.
      */
     public void remove(int quantity) throws IllegalValueException {
         if (this.quantity < quantity) {
-            throw new IllegalValueException();
+            throw new IllegalValueException("Quantity to be removed exceeds current available quantity");
+        }
+        if (quantity <= 0) {
+            throw new IllegalValueException("Quantity to be removed is less than or equal to 0");
         }
 
         int toRemove = quantity;
