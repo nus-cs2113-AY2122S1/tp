@@ -140,7 +140,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
     /**
      * Prints out the summary of expenses of an individual or everyone.
      * @param inputParams the individual to view. Can also be null to print everyone.
-     * @throws ForceCancelException
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
      */
     protected static void executeSummary(String inputParams) throws ForceCancelException {
         Trip currentTrip = Storage.getOpenTrip();
