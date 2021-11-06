@@ -99,7 +99,7 @@ The sections below give more details of each component.
 
 ![Ui Object Diagram](images/UiObjectDiagram.png)
 
-*Hint: You can click on the API links to be redirected to its source code!*
+*Hint: You can click on the Application Programming Interface (API) links to be redirected to its source code!*
 
 **API** : [Ui](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/src/main/java/seedu/duke/Ui.java)
 
