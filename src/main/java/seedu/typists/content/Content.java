@@ -71,7 +71,11 @@ public class Content {
         } else {
             this.content = Books.getBook(selection - 1);
             assert this.content.length() > 0;
-            ui.printLine("Content set");
+            try {
+                ui.viewAnimateLeft("Content set");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -92,7 +96,11 @@ public class Content {
                     articleNotFound = false;
                     this.content = temp;
                     assert this.content.length() > 0;
-                    ui.printLine("Content set");
+                    try {
+                        ui.viewAnimateLeft("Content set");
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 } catch (InvalidArticleException e) {
                     ui.printLine(e.getMessage());
                 }
@@ -123,7 +131,11 @@ public class Content {
             }
             this.content = s;
             assert this.content.length() > 0;
-            ui.printLine("Content set");
+            try {
+                ui.viewAnimateLeft("Content set");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

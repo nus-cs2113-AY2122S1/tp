@@ -1,2 +1,0 @@
-Time-limited|39.172|9|1|10|90.0|10.0|1.5317063208414174|[Ipsum,   is,   simply,   dummy,   text,   of,   the,   printing,   and]
-Time-limited|38.126|5|25|30|16.666666666666664|83.33333333333334|39.34323034149924|[Some, little, purse,, nothing, shore,]

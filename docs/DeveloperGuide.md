@@ -156,14 +156,13 @@ Single Responsibility Principle.
 ## Product scope
 Our product is a typing game, intent to provide enjoyment for people who are familiar with the CML.
 
-
 ### Target user profile
 
-{Describe the target user profile}
+The target user profile includes bored people who are looking for a fun way to entertain themselves while working on the command line.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+It solves the lack of entertainment alternatives on the CLI.
 
 ## User Stories
 
@@ -178,12 +177,6 @@ Our product is a typing game, intent to provide enjoyment for people who are fam
 |v2.0|gamer|view my past records|see how I have improved over time|
 |v2.0|gamer|clear my past records|have a fresh start|
 |v2.0|typist|see the words I typed wrongly after I've finished a game|know which words I have to practice more|
-
-## Non-Functional Requirements
-
-{Give non-functional requirements}
-### Animation
-
 
 ## Glossary
 
