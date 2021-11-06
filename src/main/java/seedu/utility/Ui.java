@@ -351,18 +351,14 @@ public class Ui {
     }
 
     public void printBudgetReminder(BudgetReminder reminder) {
-        if (reminder.toString() != null) {
-            System.out.println(reminder);
-            printLine();
-        }
+        System.out.println(reminder);
+        printLine();
     }
 
     public void printSetBudgetReminder(BudgetReminder reminder) {
-        if (reminder.toString() != null) {
-            printLine();
-            System.out.println(reminder);
-            printLine();
-        }
+        printLine();
+        System.out.println(reminder);
+        printLine();
     }
 
     /**

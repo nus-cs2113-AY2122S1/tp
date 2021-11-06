@@ -16,7 +16,6 @@ import seedu.reminder.DoubleExceededBudgetReminder;
 import seedu.reminder.DoubleNearingBudgetReminder;
 import seedu.reminder.ExceededBudgetNearingOverallReminder;
 import seedu.reminder.NearingBudgetExceededOverallReminder;
-import seedu.reminder.NoReminder;
 import seedu.reminder.SingleExceededReminder;
 import seedu.reminder.SingleNearingReminder;
 import seedu.reminder.SingleReminder;
@@ -54,28 +53,30 @@ public class BudgetManager {
         String month = LocalDate.now().getMonth().toString();
         double currBudgetAmount = budget.calAmount(expenses);
         double diff = budget.getLimit() - currBudgetAmount;
+        double budgetThresholdLimit = getThresholdLimit(budget.getLimit());
         double currOverallAmount = overallBudget.calAmount(expenses);
         double overallDiff = overallBudget.getLimit() - currOverallAmount;
-        if (isNearingLimit(diff, getThresholdLimit(budget.getLimit()))
-                & isNearingLimit(overallDiff, getThresholdLimit(overallBudget.getLimit()))) {
+        double overallThresholdLimit = getThresholdLimit(overallBudget.getLimit());
+        if (isNearingLimit(diff, budgetThresholdLimit)
+                & isNearingLimit(overallDiff, overallThresholdLimit)) {
             return new DoubleNearingBudgetReminder(month, budget.getName(), currBudgetAmount, budget.getLimit(),
                     currOverallAmount, overallBudget.getLimit(), getTotalBudget(expenses));
-        } else if (isExceededLimit(diff, getThresholdLimit(budget.getLimit()))
-                & isExceededLimit(overallDiff, getThresholdLimit(overallBudget.getLimit()))) {
+        } else if (isExceededLimit(diff, budgetThresholdLimit)
+                & isExceededLimit(overallDiff, overallThresholdLimit)) {
             return new DoubleExceededBudgetReminder(month, budget.getName(), currBudgetAmount, budget.getLimit(),
                     currOverallAmount, overallBudget.getLimit(), getTotalBudget(expenses));
-        } else if (isNearingLimit(diff, getThresholdLimit(budget.getLimit()))
-                & isExceededLimit(overallDiff, getThresholdLimit(overallBudget.getLimit()))) {
+        } else if (isNearingLimit(diff, budgetThresholdLimit)
+                & isExceededLimit(overallDiff, overallThresholdLimit)) {
             return new NearingBudgetExceededOverallReminder(month, budget.getName(), currBudgetAmount,
                     budget.getLimit(), currOverallAmount, overallBudget.getLimit(), getTotalBudget(expenses));
-        } else if (isExceededLimit(diff, getThresholdLimit(budget.getLimit()))
-                & isNearingLimit(overallDiff, getThresholdLimit(overallBudget.getLimit()))) {
+        } else if (isExceededLimit(diff, budgetThresholdLimit)
+                & isNearingLimit(overallDiff, overallThresholdLimit)) {
             return new ExceededBudgetNearingOverallReminder(month, budget.getName(), currBudgetAmount,
                     budget.getLimit(), currOverallAmount, overallBudget.getLimit(), getTotalBudget(expenses));
         } else {
-            if (isNearingLimit(diff, getThresholdLimit(budget.getLimit()))) {
+            if (isNearingLimit(diff, budgetThresholdLimit)) {
                 return new SingleNearingReminder(month, budget.getName(), currBudgetAmount, budget.getLimit());
-            } else if (isExceededLimit(diff, getThresholdLimit(budget.getLimit()))) {
+            } else if (isExceededLimit(diff, budgetThresholdLimit)) {
                 return new SingleExceededReminder(month, budget.getName(), currBudgetAmount, budget.getLimit());
             } else {
                 return new SingleReminder(month, budget.getName(), currBudgetAmount, budget.getLimit());
@@ -101,12 +102,6 @@ public class BudgetManager {
         } else {
             return false;
         }
-    }
-
-    private boolean isSingleActiveBudget(Budget budget) {
-        return (budget == overallBudget & isActive(budget))
-                | (budget != overallBudget & isActive(budget) & !isActive(overallBudget))
-                | (budget != overallBudget & !isActive(budget) & isActive(overallBudget));
     }
 
     public void setThreshold(double threshold) {

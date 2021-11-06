@@ -157,9 +157,10 @@ public class Parser {
             = Pattern.compile("I" + DATA_SEPARATOR + "(?<description>.+)" + DATA_SEPARATOR
             + "(?<amount>.+)" + DATA_SEPARATOR + "(?<category>.+)" + DATA_SEPARATOR + "(?<date>.+)");
     private static final Pattern SETTINGS_DATA_FORMAT = Pattern.compile("(?<currency>.+)" + DATA_SEPARATOR
-            + "(?<threshold>.+)" + DATA_SEPARATOR + "(?<overall>.+)" + DATA_SEPARATOR + "(?<food>.+)" + DATA_SEPARATOR + "(?<transport>.+)"
-            + DATA_SEPARATOR + "(?<medical>.+)" + DATA_SEPARATOR + "(?<bills>.+)" + DATA_SEPARATOR 
-            + "(?<entertainment>.+)" + DATA_SEPARATOR + "(?<misc>.+)");
+            + "(?<threshold>.+)" + DATA_SEPARATOR + "(?<overall>.+)" + DATA_SEPARATOR + "(?<food>.+)"
+            + DATA_SEPARATOR + "(?<transport>.+)" + DATA_SEPARATOR + "(?<medical>.+)"
+            + DATA_SEPARATOR + "(?<bills>.+)" + DATA_SEPARATOR + "(?<entertainment>.+)"
+            + DATA_SEPARATOR + "(?<misc>.+)");
 
     private static final String DATE_FORMAT = "dd/MM/yyyy";
     private static final double INPUT_AMOUNT_LIMIT = 1000000000;

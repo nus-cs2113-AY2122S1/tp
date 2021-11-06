@@ -35,8 +35,8 @@ public class DataManager {
     private static final String ENTRIES_FILE_NAME = "./StonksXD_Entries.csv";
     private static final String ENTRIES_CSV_HEADER = "entry_type,entry_description,amount,category,date";
     private static final String SETTINGS_FILE_NAME = "./StonksXD_Settings.csv";
-    private static final String SETTINGS_CSV_HEADER = "currency,threshold,overall,food,transport,medical,bills,entertainment,"
-            + "misc";
+    private static final String SETTINGS_CSV_HEADER = "currency,threshold,overall,food,transport,medical,"
+            + "bills,entertainment,misc";
     private final Parser parser;
     private final Ui ui;
     private final FinancialTracker financialTracker;
