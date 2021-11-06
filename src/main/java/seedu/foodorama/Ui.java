@@ -230,7 +230,7 @@ public class Ui {
 
 
     public static final String INVALID_NUMBER = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, please input a valid number" + System.lineSeparator()
+            + "Sorry, input is not valid. The command has been disregarded." + System.lineSeparator()
             + LINE_DIVIDER;
 
     private static final String LIST_MISSING_PARAM = LINE_DIVIDER + System.lineSeparator()
@@ -732,7 +732,7 @@ public class Ui {
             if (j % 2 == 0) {
                 System.out.print("   ");
             } else {
-                System.out.print(" " + (char)(j / 2 + 65) + " ");
+                System.out.print(" " + (char) (j / 2 + 65) + " ");
             }
         } else {
             System.out.print("   ");
@@ -964,6 +964,39 @@ public class Ui {
                 + "Here's an idea for a new Dish!" + System.lineSeparator()
                 + randomDishName + System.lineSeparator()
                 + LINE_DIVIDER
+        );
+    }
+
+    public void printInvalidIngredientWeight(String ingedientName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "The weight of " + ingedientName + "cannot be negative!"+ System.lineSeparator()
+                + "Please enter a weight that is not negative:" + System.lineSeparator()
+                + LINE_DIVIDER
+        );
+    }
+
+    public void printConfirmIngrNameAndWeight(String ingredientName, double ingredientWeight) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Are you sure you want to add " + ingredientName
+                + " that weighs " + ingredientWeight + "kg? Type y for Yes and n for No."
+                + System.lineSeparator() + LINE_DIVIDER
+        );
+
+    }
+
+    public void printInvalidDishWasteValue(String dishName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Please enter a weight that is not negative!" + System.lineSeparator()
+                + "add dish waste " + dishName + System.lineSeparator()
+                + LINE_DIVIDER
+        );
+    }
+
+    public void printConfirmDishWaste(String dishName, double dishWasteWeight) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Are you sure you want to add wasted " + dishName
+                + " that weighs " + dishWasteWeight + "kg? Type y for Yes and n for No."
+                + System.lineSeparator() + LINE_DIVIDER
         );
     }
 }

@@ -24,17 +24,24 @@ public class IngredientList {
         Scanner in = new Scanner(System.in);
         String ingredientWeight = in.nextLine();
         double ingredientWeightValue;
+
         try {
             ingredientWeightValue = Double.parseDouble(ingredientWeight);
-            if (ingredientWeightValue < 0) {
-                throw new FoodoramaException("");
+            while (ingredientWeightValue < 0) {
+                UI.clearTerminalAndPrintNewPage();
+                UI.printInvalidIngredientWeight(ingredientName);
+                ingredientWeight = in.nextLine();
+                ingredientWeightValue = Double.parseDouble(ingredientWeight);
             }
-        } catch (NumberFormatException | FoodoramaException e) {
+        } catch (NumberFormatException e) {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
+
+
         Ingredient ingredientToAdd = new Ingredient(ingredientName, ingredientWeightValue);
         ingredientList.add(ingredientToAdd);
         UI.printAddedIngredient(ingredientToAdd, ingredientWeightValue);
+
     }
 
     //Returns -1 if not present, index if present
