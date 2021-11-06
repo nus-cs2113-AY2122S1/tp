@@ -24,8 +24,8 @@ import java.util.logging.Logger;
  * @author Jonathan Mui
  * @author Kishor Kumar
  * @author Qianqi Koh
- * @version 2.0
- * @since 2021-10-11
+ * @version 2.1
+ * @since 2021-11-7
  */
 public class GetJackd {
     private static final Logger LOGGER = Logger.getLogger(GetJackd.class.getName());
