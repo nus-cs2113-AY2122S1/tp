@@ -68,7 +68,7 @@ public class University implements Comparator<University> {
     public ArrayList<ModuleMapping> getSelectedMappings(ModuleList selectedModuleList) {
         ArrayList<ModuleMapping> selectedMappings = new ArrayList<>();
         for (ModuleMapping currentMapping : list) {
-            if (selectedModuleList.isModuleExist(currentMapping.localModule.getModuleCode())) {
+            if (selectedModuleList.isModuleExist(currentMapping.getLocalModule().getModuleCode())) {
                 selectedMappings.add(currentMapping);
             }
         }
