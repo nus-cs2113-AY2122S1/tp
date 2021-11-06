@@ -237,14 +237,13 @@ ________________________________________________________
 ```
 ### 5. Deleting a workout: `delete`
 
-Deletes a workout from the list of workouts
+Deletes a workout from the list of workouts.
+
 > 💡 Note
 >* If you are entered into a workout and delete the workout that you are currently in, you will automatically be returned 
 to the main view.
 
 Format: `delete [WORKOUT_INDEX]`
-
-* Workout index is the index of the workout in the list
 
 Parameters:
 * `[WORKOUT_INDEX]`: The workout's number in the workout list.
