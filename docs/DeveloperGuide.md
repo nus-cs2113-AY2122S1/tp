@@ -415,11 +415,13 @@ The instructions below are for the manual testing of the program.
   
 ![Start Up Page](Display_Images/StartUpPage.png)
 
-
 2. Navigation
   * Select from the start-up menu by typing in the corresponding option number.
   * You can find out more about the various options at our [User Guide](UserGuide.md#12-main-interface).
+  * There will be an error message shown if you select an invalid option.
+  * Test: `-1` to see the error message.
 
+![Menu Error Message](Display_Images/MenuError.png)
 
 3. Exit
   * To exit the program, select option `6`.
@@ -445,3 +447,41 @@ The instructions below are for the manual testing of the program.
 ![Added Goal](Display_Images/AddGoal.png)
 
 6. Press enter again to return to command screen.
+
+### Deleting Goals or Habits
+
+After adding in a substantial number of goals and habits, you can test out the deletion commands as shown below.
+
+1. To see all the goals you have added, use command `list`. You should take note of the index of the goal that you
+  want to delete. We will be using the list shown below as an example.
+
+![List of Goals](Display_Images/ListOfGoals.png)
+
+2. To delete a goal, use the command `remove`.
+  * Test: `remove g/6` to remove goal at index `6`.
+
+![Delete Goal 1](Display_Images/DeleteGoal1.png)
+
+  * Use the command `list` to see the new index of the goals.
+
+![New List of Goals](Display_Images/NewListOfGoals.png)
+
+3. Next, use `view` to see the index of the habit under a goal that you want to delete.
+
+![View Habits](Display_Images/ViewHabits.png)
+
+5. To delete a habit, use the command `delete`.
+  * Test: `delete g/6 h/1` to delete habit `1` under goal `6`.
+
+![Delete Habit 1](Display_Images/DeleteHabit1.png)
+
+6. After any deletion, the index of the goals or habits will change. Therefore, make sure to use commands
+  `list` and/or `view` to check for the new index of the goals and habits.
+  * Test: `remove g/7` to remove a goal at index `7` that does not exist. Error will be thrown.
+
+![Delete Error](Display_Images/DeleteError.png)
+
+### Storage of Data
+
+
+
