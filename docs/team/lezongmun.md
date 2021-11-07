@@ -33,6 +33,8 @@ The link to the User Guide (UG) can be found [here](https://ay2122s1-cs2113t-t09
 - Added documentation for features `me` and `rm`
 - Updated documentation (command formats, usages, examples) for features with `all` and `me` as inputs
 
+<div style="page-break-after: always;"></div>
+
 ### Contributions to DG
 The link to the Developer Guide (DG) can be found [here](https://ay2122s1-cs2113t-t09-1.github.io/tp/DeveloperGuide.html).
 - Added implementation details and class diagram for `Storage` system
