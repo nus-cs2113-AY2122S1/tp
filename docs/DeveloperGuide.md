@@ -144,6 +144,11 @@ Storage will reload the data in the app into the database text file.
 
 2) Architecture of the Storage component
 
+![Storage Sequence Diagram](images/StorageBasicaArchitecture.png)
+
+The Storage component continuously save every changes to the data in the app and the app loads the 
+data from storage everytime during start up.
+
 ![Storage Sequence Diagram](images/Storage.png)
 
 - Initially, when BudgetTracker App is started, it will create new Parser and Storage object. Storage's 
