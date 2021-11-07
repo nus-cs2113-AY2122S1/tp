@@ -884,7 +884,8 @@ exploratory testing.
 2. Importing a contact with invalid fields
     1. Test case: `import`<br>
        Expected: Error message will notify the user that there is an invalid field.
-       ```
+
+        ```
        data/import.txt:1 - There is an invalid field.
        ____________________________________________________________
        The github username is not correctly formatted,
