@@ -10,14 +10,15 @@ import expiryeliminator.commands.AddRecipeCommand;
 import expiryeliminator.commands.DeleteRecipeCommand;
 import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.RecipeList;
+import expiryeliminator.parser.argparser.IngredientParser;
+import expiryeliminator.parser.argparser.QuantityParser;
+import expiryeliminator.parser.argparser.RecipeParser;
 import expiryeliminator.util.TestUtil;
 
 class ParserTest {
     @Test
     public void prepareAddRecipe_incorrectFormats_ErrorMessage() {
-        String[] tests = {"add recipe r/chicken soup i/chicken q/",
-                          "add recipe r/chicken soup i/ q/1",
-                          "add recipe r/chicken soup",
+        String[] tests = {"add recipe r/chicken soup",
                           "add recipe r/Apple Pie",
                           "add recipe i/Red Apple q/4 i/Green Apple q/4"};
 
@@ -25,6 +26,20 @@ class ParserTest {
             assertEquals(parseCommand(test).execute(null, null),
                     String.format(Parser.MESSAGE_INVALID_COMMAND_FORMAT, AddRecipeCommand.MESSAGE_USAGE));
         }
+    }
+
+    @Test
+    public void prepareAddRecipe_quantityBlank_ErrorMessage() {
+        String test = "add recipe r/chicken soup i/chicken q/";
+        assertEquals(String.format(Parser.MESSAGE_INVALID_ARGUMENT_FORMAT, QuantityParser.MESSAGE_BLANK_QUANTITY),
+                parseCommand(test).execute(null, null));
+    }
+
+    @Test
+    public void prepareAddRecipe_ingredientBlank_ErrorMessage() {
+        String test = "add recipe r/chicken soup i/ q/1";
+        assertEquals(String.format(Parser.MESSAGE_INVALID_ARGUMENT_FORMAT, IngredientParser.MESSAGE_BLANK_INGREDIENT),
+                parseCommand(test).execute(null, null));
     }
 
     @Test
@@ -72,6 +87,6 @@ class ParserTest {
     public void prepareDeleteRecipe_incorrectFormat_ErrorMessage() {
         String test = "delete recipe r/";
         assertEquals(parseCommand(test).execute(null, null),
-                String.format(Parser.MESSAGE_INVALID_COMMAND_FORMAT, DeleteRecipeCommand.MESSAGE_USAGE));
+                String.format(Parser.MESSAGE_INVALID_ARGUMENT_FORMAT, RecipeParser.MESSAGE_BLANK_RECIPE));
     }
 }

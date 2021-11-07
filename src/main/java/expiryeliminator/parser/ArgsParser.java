@@ -27,7 +27,7 @@ class ArgsParser {
      * Used for separation of each prefix and argument.
      * E.g. this matches "/a aaaaa aaaa"
      */
-    private static final Pattern ARGS_FORMAT = Pattern.compile("\\w+/([^/\\s]+( +|$))+");
+    private static final Pattern ARGS_FORMAT = Pattern.compile("\\w+/([^/\\s]*( +|$))+");
 
     private final ArrayList<Prefix> prefixList;
 
@@ -68,10 +68,18 @@ class ArgsParser {
 
     private void findAndPopulateArgs(Matcher matcher) throws InvalidPrefixException {
         while (matcher.find()) {
-            final String match = matcher.group();
+            final String match = matcher.group().trim();
             final String[] prefixAndArg = match.split("/");
             final String prefix = prefixAndArg[0];
-            final String arg = prefixAndArg[1].trim();
+            String arg = null;
+            if (prefixAndArg.length == 2) {
+                arg = prefixAndArg[1];
+                // Throw error if first character is a space as that is not allowed.
+                if (Character.isSpaceChar(arg.charAt(0))) {
+                    throw new InvalidPrefixException(prefix);
+                }
+                arg = arg.trim();
+            }
             try {
                 prefixesToArgs.get(prefix).add(arg);
             } catch (NullPointerException error) {
