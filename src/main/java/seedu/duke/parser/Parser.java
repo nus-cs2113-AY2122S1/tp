@@ -5,9 +5,7 @@ import seedu.duke.Duke;
 import seedu.duke.Ui;
 import seedu.duke.commands.ByeCommand;
 
-import seedu.duke.commands.DoneUndoCommand;
 import seedu.duke.commands.HelpCommand;
-import seedu.duke.commands.SelectCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.FindCommand;
@@ -17,11 +15,7 @@ import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
 import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
 import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
 import seedu.duke.items.Item;
-import seedu.duke.parser.commandparser.AddParser;
-import seedu.duke.parser.commandparser.ListParser;
-import seedu.duke.parser.commandparser.NextParser;
-import seedu.duke.parser.commandparser.SelectParser;
-import seedu.duke.parser.commandparser.UpdateParser;
+import seedu.duke.parser.commandparser.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -61,7 +55,7 @@ public abstract class Parser {
             return ListParser.getListCommand(commandDetails,response);
         case "done":
         case "undo":
-            return new DoneUndoCommand(command, response);
+            return DoneUndoParser.getDoneUndoCommand(command, commandDetails);
         case "delete":
             return new DeleteCommand(command);
         case "add":

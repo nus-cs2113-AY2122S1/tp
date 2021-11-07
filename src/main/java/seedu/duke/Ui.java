@@ -128,6 +128,30 @@ public class Ui {
         return message.toString();
     }
 
+    public static String getItemsMarkedDoneMessage(String listOfItemsMarkedDone, String listOfAlreadyDoneItems) {
+        StringBuilder message = new StringBuilder();
+        if (!listOfItemsMarkedDone.isBlank()) {
+            message.append("Nice! I have marked these items as done: \n").append(listOfItemsMarkedDone);
+            message.append("--------LIST UPDATED-----------");
+        }
+        if (!listOfAlreadyDoneItems.isBlank()) {
+            message.append("These items are already done: \n").append(listOfAlreadyDoneItems);
+        }
+        return message.toString();
+    }
+
+    public static String getItemsUnmarkedMessage(String listOfItemsUnmarked, String listOfUndoneItems) {
+        StringBuilder message = new StringBuilder();
+        if (!listOfItemsUnmarked.isBlank()) {
+            message.append("Okay, I have unmarked these items: \n").append(listOfItemsUnmarked);
+            message.append("--------LIST UPDATED-----------");
+        }
+        if (!listOfUndoneItems.isBlank()) {
+            message.append("These items are not done yet: \n").append(listOfUndoneItems);
+        }
+        return message.toString();
+    }
+
     public static void printGreetingMessage() {
         System.out.println("Greetings mortal. How may you be served today?\n"
                 + "TIP: enter \"help\" if you are weak and clueless!\n"

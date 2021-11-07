@@ -1,135 +1,102 @@
 package seedu.duke.commands;
 
 import seedu.duke.Duke;
+import seedu.duke.Ui;
 import seedu.duke.items.Event;
+import seedu.duke.items.Task;
+import seedu.duke.parser.ItemType;
 import seedu.duke.parser.Parser;
-import seedu.duke.exceptions.DukeException;
-import seedu.duke.items.mainlists.EventCatalog;
-import seedu.duke.items.Item;
-
-import java.util.ArrayList;
 
 public class DoneUndoCommand extends Command {
 
-    protected static final String TASK_FLAG = "-t";
-    protected static final String EVENT_FLAG = "-e";
-    protected static final String DONE = "done";
-    protected static final String UNDO = "undo";
+    private final String action;
+    private final ItemType itemType;
+    private final int[] indexes;
 
-    protected static String action;
-    protected static String itemType;
-    protected static int[] indexes;
+    private static final String DONE = "done";
+    private static final String UNDO = "undo";
 
-    // Indicates if an error occurs due to the wrong format typed by the user
-    protected static boolean isCorrectFormat;
-
-    public DoneUndoCommand(String[] command, String response) {
-        isCorrectFormat = true;
-        try {
-            if (command.length == 1) {
-                throw new DukeException("Please specify the indexes of the items you want to mark done or undo "
-                        + "using the event '-e' or task '-t' flags. ");
-            }
-            action = command[0];
-            itemType = command[1];
-            if (!(itemType.equalsIgnoreCase(TASK_FLAG) || itemType.equalsIgnoreCase(EVENT_FLAG))) {
-                throw new DukeException("Please specify the type of items you want to mark done or undo "
-                        + "using the event '-e' or task '-t' flags. ");
-            }
-            if (command.length == 2) {
-                throw new DukeException("Please specify the indexes of the tasks or events you want "
-                        + "to mark done or undo. ");
-            }
-            extractInt(response);
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-            isCorrectFormat = false;
-        }
+    public DoneUndoCommand(String action, ItemType itemType, int[] indexes) {
+        this.action = action;
+        this.itemType = itemType;
+        this.indexes = indexes;
     }
 
-    private static void extractInt(String input) throws DukeException {
-        String parsedInput = input.replaceAll("[^\\d]", " ").trim();
-        if (parsedInput.isBlank()) {
-            throw new DukeException("Indexes entered need to be valid numbers. ");
+    private String[] obtainAndMarkDoneItems() {
+        String[] listOfItems = new String[2];
+        StringBuilder listOfItemsMarkedDone = new StringBuilder();
+        StringBuilder listOfAlreadyDoneItems = new StringBuilder();
+        switch (itemType) {
+        case EVENT:
+            for (int index : indexes) {
+                Event event = Duke.eventCatalog.get(index);
+                if (!event.getIsDone()) {
+                    event.markAsDone();
+                    listOfItemsMarkedDone.append(event).append("\n");
+                } else {
+                    listOfAlreadyDoneItems.append(event).append("\n");
+                }
+            }
+        case TASK:
+            Event selectedEvent = Duke.eventCatalog.get(Parser.getIndexOfLastSelectedEvent());
+            for (int index : indexes) {
+                Task task = selectedEvent.getFromTaskList(index);
+                if (!task.getIsDone()) {
+                    task.markAsDone();
+                    listOfItemsMarkedDone.append(task).append("\n");
+                } else {
+                    listOfAlreadyDoneItems.append(task).append("\n");
+                }
+            }
+        default:
         }
-
-        String[] stringIndexes = parsedInput.split(" +");
-        indexes = new int[stringIndexes.length];
-
-        for (int i = 0; i < stringIndexes.length; i++) {
-            indexes[i] = Integer.parseInt(stringIndexes[i]);
-        }
+        listOfItems[0] = listOfItemsMarkedDone.toString();
+        listOfItems[1] = listOfAlreadyDoneItems.toString();
+        return listOfItems;
     }
 
-    private String done() throws DukeException {
-        try {
-            StringBuilder listOfItems = new StringBuilder();
-            if (itemType.equalsIgnoreCase(TASK_FLAG)) {
-                if (Parser.noEventSelected()) {
-                    throw new DukeException("Please select which event the task is under using the "
-                            + "'select' command. ");
-                }
-                for (int index : indexes) {
-                    Duke.eventCatalog.get(Parser.getIndexOfLastSelectedEvent())
-                            .getFromTaskList(index - 1).markAsDone();
-                    listOfItems.append(Duke.eventCatalog.get(Parser.getIndexOfLastSelectedEvent())
-                            .getFromTaskList(index - 1)).append("\n");
-                }
-            }
-            if (itemType.equalsIgnoreCase(EVENT_FLAG)) {
-                for (int index : indexes) {
-                    Duke.eventCatalog.get(index - 1).markAsDone();
-                    listOfItems.append(Duke.eventCatalog.get(index - 1)).append("\n");
+    private String[] obtainAndUndoItems() {
+        String[] listOfItems = new String[2];
+        StringBuilder listOfItemsUnmarked = new StringBuilder();
+        StringBuilder listOfUndoneItems = new StringBuilder();
+        switch (itemType) {
+        case EVENT:
+            for (int index : indexes) {
+                Event event = Duke.eventCatalog.get(index);
+                if (event.getIsDone()) {
+                    event.undo();
+                    listOfItemsUnmarked.append(event).append("\n");
+                } else {
+                    listOfUndoneItems.append(event).append("\n");
                 }
             }
-            return listOfItems.toString();
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("One or more of the items do not exist. ");
+        case TASK:
+            Event selectedEvent = Duke.eventCatalog.get(Parser.getIndexOfLastSelectedEvent());
+            for (int index : indexes) {
+                Task task = selectedEvent.getFromTaskList(index);
+                if (task.getIsDone()) {
+                    task.undo();
+                    listOfItemsUnmarked.append(task).append("\n");
+                } else {
+                    listOfUndoneItems.append(task).append("\n");
+                }
+            }
+        default:
         }
-    }
-
-    private String undo() throws DukeException {
-        try {
-            StringBuilder listOfItems = new StringBuilder();
-            if (itemType.equalsIgnoreCase(TASK_FLAG)) {
-                if (Parser.noEventSelected()) {
-                    throw new DukeException("Please select which event the task is under using the "
-                            + "'select' command. ");
-                }
-                for (int index : indexes) {
-                    Event eventOfTask = Duke.eventCatalog.get(Parser.getIndexOfLastSelectedEvent());
-                    eventOfTask.getFromTaskList(index - 1).undo();
-                    String taskToAdd = eventOfTask.getFromTaskList(index - 1).toString();
-                    listOfItems.append(taskToAdd).append("\n");
-                }
-            }
-            if (itemType.equalsIgnoreCase(EVENT_FLAG)) {
-                for (int index : indexes) {
-                    Duke.eventCatalog.get(index - 1).undo();
-                    listOfItems.append(Duke.eventCatalog.get(index - 1)).append("\n");
-                }
-            }
-            return listOfItems.toString();
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("One or more of the items do not exist. ");
-        }
+        listOfItems[0] = listOfItemsUnmarked.toString();
+        listOfItems[1] = listOfUndoneItems.toString();
+        return listOfItems;
     }
 
     public CommandResult execute() {
-        if (!isCorrectFormat) {
-            return new CommandResult("Unable to mark as done or undo items. ");
+        if (action.equals(DONE)) {
+            String[] listOfItems = obtainAndMarkDoneItems();
+            return new CommandResult(Ui.getItemsMarkedDoneMessage(listOfItems[0], listOfItems[1]));
         }
-        try {
-            if (action.equalsIgnoreCase(DONE)) {
-                String listOfItems = done();
-                System.out.print("Nice! I have marked these items as done: \n" + listOfItems);
-            } else if (action.equalsIgnoreCase(UNDO)) {
-                String listOfItems = undo();
-                System.out.print("Okay, I have unmarked these items: \n" + listOfItems);
-            }
-            return new CommandResult("--------LIST UPDATED-----------");
-        } catch (DukeException e) {
-            return new CommandResult(e.getMessage() + "Unable to mark as done or undo items. ");
+        if (action.equals(UNDO)) {
+            String[] listOfItems = obtainAndUndoItems();
+            return new CommandResult(Ui.getItemsUnmarkedMessage(listOfItems[0], listOfItems[1]));
         }
+        return null;
     }
 }
