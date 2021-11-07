@@ -6,7 +6,7 @@ This is a student project for a university software development course and I am 
 
 Given below are my contributions to the project.
 
-Code contributed: more than 900 lines of
+Code contributed: more than 1000 lines of
 code. [[RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&tabAuthor=jiangweichen835&tabRepo=AY2122S1-CS2113T-T10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)]
 ### Features
 
@@ -61,3 +61,8 @@ code. [[RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&s
 
 * Attended weekly team meetings.
 * Release management.
+
+### Community
+
+* Reported bugs and suggestions for other teams in the class. [[#1](https://github.com/jiangweichen835/ped/issues/1), [#2](https://github.com/jiangweichen835/ped/issues/2),
+[#3](https://github.com/jiangweichen835/ped/issues/3), [#4](https://github.com/jiangweichen835/ped/issues/4), [#5](https://github.com/jiangweichen835/ped/issues/5)]
