@@ -6,6 +6,7 @@ import seedu.tp.command.flags.EventFlag;
 import seedu.tp.command.flags.LessonFlag;
 import seedu.tp.command.flags.TaskFlag;
 import seedu.tp.command.flags.TodoFlag;
+import seedu.tp.exception.EmptyDescriptionException;
 import seedu.tp.exception.EmptyTasklistException;
 import seedu.tp.exception.InvalidFlagsException;
 import seedu.tp.exception.InvalidPriorityException;
@@ -94,6 +95,8 @@ public class EditCommand extends Command {
             message = etle.getMessage();
         } catch (NumberFormatException nfe) {
             message = nfe.getMessage();
+        } catch (EmptyDescriptionException ede) {
+            message = ede.getMessage();
         } catch (InvalidTaskIndexException itie) {
             message = itie.getMessage();
         } catch (InvalidPriorityException ipe) {

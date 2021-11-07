@@ -10,6 +10,7 @@ import java.util.Map;
 import org.jetbrains.annotations.Nullable;
 import seedu.tp.command.Command;
 import seedu.tp.command.flags.TaskFlag;
+import seedu.tp.exception.EmptyDescriptionException;
 import seedu.tp.exception.InvalidFlagsException;
 import seedu.tp.task.reminder.Reminder;
 import seedu.tp.exception.InvalidPriorityException;
@@ -121,9 +122,14 @@ public abstract class Task {
      * @throws java.net.URISyntaxException From {@link #taskEdit(java.util.Map)}.
      */
     public void edit(Map<String, String> arguments) throws InvalidPriorityException,
-        InvalidRecurrenceException, ParseDateFailedException, StartDateAfterEndDateException, URISyntaxException {
+        InvalidRecurrenceException, ParseDateFailedException, StartDateAfterEndDateException,
+        URISyntaxException, EmptyDescriptionException {
 
         if (arguments.containsKey(TaskFlag.EDIT_DESCRIPTION)) {
+            String description = arguments.get(TaskFlag.EDIT_DESCRIPTION);
+            if (description.equals("")) {
+                throw  new EmptyDescriptionException();
+            }
             setDescription(arguments.get(TaskFlag.EDIT_DESCRIPTION));
         }
         if (arguments.containsKey(TaskFlag.PRIORITY)) {
