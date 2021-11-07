@@ -54,7 +54,7 @@ public class ContactsDecoder extends RegexParser {
 
     //@author lezongmun
     /**
-     * This method returns the personal contact after parsing inputs from the specified
+     * Returns the personal contact after parsing inputs from the specified
      * personal contact file in local storage.
      *
      * @param personalContactFile Specified file to be read
@@ -79,7 +79,7 @@ public class ContactsDecoder extends RegexParser {
 
     //@author lezongmun
     /**
-     * This method decodes a string read from the personal contact file and
+     * Decodes a string read from the personal contact file and
      * attempts to parse it as a contact. If there are errors in the file,
      * and the data cannot be loaded, user's personal contact details will
      * be prompted to create a new personal contact

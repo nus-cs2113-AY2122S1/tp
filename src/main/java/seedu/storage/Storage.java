@@ -31,6 +31,12 @@ public class Storage {
     }
 
     //@@author lezongmun
+    /**
+     * Checks if there already exists a local storage file, and creates one if
+     * it does not exist.
+     * @return True if local storage file exists
+     * @throws FileErrorException If there are errors writing or checking for local storage files
+     */
     private boolean hasExistingPersonalContactFile() throws FileErrorException {
         try {
             if (!personalContactFile.exists()) {
@@ -47,6 +53,12 @@ public class Storage {
     }
 
     //@@author lezongmun
+
+    /**
+     * Checks if there exists an empty local storage file.
+     *
+     * @return True if empty local storage file exists
+     */
     private boolean hasEmptyExistingPersonalContactFile() {
         return personalContactFile.exists() && personalContactFile.length() == 0;
     }
@@ -87,6 +99,15 @@ public class Storage {
     }
 
     //@@author lezongmun
+
+    /**
+     * Returns a personal contact by attempting to retrieve any existing personal contact data
+     * from user's local storage file. If there does not exist any existing personal contact data,
+     * a new personal contact will be created and saved into the local storage.
+     *
+     * @return Contact decoded personal contact from the local storage file
+     * @throws FileErrorException If there are errors reading from local storage file
+     */
     public Contact loadExistingPersonalContact() throws FileErrorException {
         if (!hasExistingPersonalContactFile() || hasEmptyExistingPersonalContactFile()) {
             // get new contact's name
