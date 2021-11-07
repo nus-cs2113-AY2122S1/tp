@@ -101,10 +101,17 @@ The Ui’s main role is to provide feedback whenever the user enters a command t
 handles the indexing of each element in the listing methods before printing out to the standard output for users to see.
 
 The image below illustrates the sequence diagram in the context of listing methods
-which includes listExpense, listIncome and listFind.
+which includes listExpense, listIncome and listFind
 
 
 ![Untitled Diagram drawio (2)](https://user-images.githubusercontent.com/69465661/138629733-63b2a115-5405-4af5-8a74-4d18f51c8f96.png)
+
+How the Ui component works:
+1. The Ui component consists mainly of printing methods that are tailored to be informative.
+2. The listing sequence diagram shown above uses the listExpense() method that calls printLine(), which is a line separator in the terminal.
+3. Based on the state of the list given it would decide whether to print a feedback message or to print the entire list with its indexes.
+4. Before ending with another line separator to mark the end of the message.
+5. There are many more methods that provides feedback messages like printing of exceptions, values and graphs. Some of this would be covered in the later sections.
 
 ---
 
@@ -212,10 +219,24 @@ Below is a list of some of the more important methods
 3. determineBarValue() is used to determine the skill of the graph based on the biggest value of that report's year, scaled to the nearest representing 10,100,1000.....<br>For example a value of 7672 will have a scale of 10,000/10 = 1000 and a value of 0.01 will have a scale of 0.1/10 = 0.01
 
 ---
+### Notes
 
-In the following section all coordinates will be in the form of (Row from the top, Column from the left) and coordinates mark with X is a don't care.
+- In the following section all coordinates will be in the form of `(Row from the top, Column from the left)` and coordinates mark with X is a don't care.
 
-Description of graphing component
+
+
+
+#### Sequential Diagram
+
+
+
+![](UpdatedWithDateOpSD.drawio.png)
+
+Above is a sequential diagram for the constructor of StonksGraph that shows the different method calls when a new StonksGraph object is instantiated.
+
+
+
+How the graphing component works:
 1. The graphing component consists mainly of the StonksGraph class which contains a 20 by 100 2D array.
 2. When first initialised, the StonksGraph constructor will call setBorder() which will loop through the 2D array and set
    all border characters as the given border character 'x' while keeping the others as the char blank.
@@ -227,18 +248,7 @@ Description of graphing component
 6. Using this 24 data set in total (12months for both expenses and incomes) it will calculate the scale for each bar unit
 7. Then it plots the bar graph based on whichever column it looped through using the drawBar() method.
 
----
 
-
-Below is a sequential diagram for the constructor of StonksGraph that shows the different method calls when a new StonksGraph object is instantiated.
-
-
-
-#### Sequential Diagram
-
-
-
-![](UpdatedWithDateOpSD.drawio.png)
 
 ---
 
