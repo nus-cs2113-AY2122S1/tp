@@ -109,6 +109,42 @@ The `Expense` class deals with most functionalities related to adding an expense
 
 When `Parser` calls the `executeExpense` method, it creates an expense object, and also calls the `promptDate` method to set that expense object’s date. `promptDate` calls `isDateValid` to validate user input.
 
+### `Storage` Component
+
+The `Storage` component consists of two classes - the `Storage` class, which stores data for the current instance of the program,
+and `FileStorage` class, which interacts with the save file.
+
+The interaction between the two classes is illustrated in the diagram below:
+
+(insert diagram)
+
+- The `Storage` class stores the user data after it has been read from the save file. It also stores the list of supported 
+currencies, the current open trip (set to `null` if there is no open trip), and the trip which the user last interacted with and
+(set to `null` if the trip was deleted).
+- The `FileStorage` class contains methods to read from and write to a save file, and to create a new save file.
+
+The sequence diagram illustrating the process of reading from a save file is below:
+
+![](images/ReadFromFileSeqDiag.png)
+
+The sequence diagram illustrating the process of writing to a save file is below:
+
+![](images/WriteToFileSeqDiag.png)
+
+
+#### `FileStorage` implementation
+
+The  Gson library we use to serialise and deserialise data to and from the JSON format tdoes not properly parse LocalDate
+objects, given that LocalDate cannot be directly instantiated. As a result, using the default implementation of Gson 
+to serialise LocalDate causes an `InaccessibleObjectException` when attempting to deserialise a LocalDate object. To overcome
+this, we implemented a custom serialiser and deserialiser specifically for LocalDate, adapted from the Gson User Guide 
+[here](https://github.com/google/gson/blob/master/UserGuide.md#TOC-Custom-Serialization-and-Deserialization).
+
+The custom serialiser and deserialiser is implemented as inner classes within the `FileStorage` class.
+
+The code for the custom serialiser is:
+
+The code for the custom deserialiser is:
 
 ## Appendix: Requirements
 
