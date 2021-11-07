@@ -1,9 +1,276 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Creating new file...
+Welcome to L.O.T.S! What would you like to track today?
+============================================================================================
+Unknown command. Please try again.
+============================================================================================
+Unknown command. Please try again.
+============================================================================================
+Unknown command. Please try again.
+============================================================================================
+Unknown command. Please try again.
+============================================================================================
+Unknown command. Please try again.
+============================================================================================
+index | Food Name                           | Price     | index | Food Name                           | Price
+--------------------------------------------------------|----------------------------------------------------
+1       Plain Prata                           1.10      | 25      Onion Cheese Prata                    2.50
+--------------------------------------------------------|----------------------------------------------------
+2       Egg Prata                             1.90      | 26      Onion Chili Prata                     2.10
+--------------------------------------------------------|----------------------------------------------------
+3       Cheese Prata                          2.50      | 27      Onion Garlic Prata                    2.10
+--------------------------------------------------------|----------------------------------------------------
+4       Chili Prata                           1.40      | 28      Plaster Prata                         1.90
+--------------------------------------------------------|----------------------------------------------------
+5       Garlic Prata                          1.70      | 29      Plaster Chili Prata                   2.20
+--------------------------------------------------------|----------------------------------------------------
+6       Paper Prata                           1.20      | 30      Plaster Onion Prata                   2.20
+--------------------------------------------------------|----------------------------------------------------
+7       Special Paper Prata                   1.40      | 31      Plaster Cheese Prata                  3.20
+--------------------------------------------------------|----------------------------------------------------
+8       Special Paper Prata (Milk)            1.60      | 32      Banana Prata                          3.00
+--------------------------------------------------------|----------------------------------------------------
+9       Special Paper Prata (Sugar)           1.60      | 33      Chocolate Prata                       2.50
+--------------------------------------------------------|----------------------------------------------------
+10      Special Paper Prata (Milk & Sugar)    1.90      | 34      Pineapple Prata                       2.50
+--------------------------------------------------------|----------------------------------------------------
+11      Garlic Cheese Prata                   3.00      | 35      Red Bean Prata                        3.00
+--------------------------------------------------------|----------------------------------------------------
+12      Mozzarella Cheese Prata               3.00      | 36      Roti Bom Prata                        2.00
+--------------------------------------------------------|----------------------------------------------------
+13      Egg and Onion Prata                   2.20      | 37      Strawberry Prata                      2.50
+--------------------------------------------------------|----------------------------------------------------
+14      Egg and Garlic Prata                  2.40      | 38      Milky Prata                           3.00
+--------------------------------------------------------|----------------------------------------------------
+15      Egg and Cheese Prata                  3.20      | 39      Banana Chocolate Prata                3.50
+--------------------------------------------------------|----------------------------------------------------
+16      Egg and Chili Prata                   2.20      | 40      Egg Floss Prata                       3.50
+--------------------------------------------------------|----------------------------------------------------
+17      Egg and Onion Cheese Prata            3.70      | 41      Egg Cheese Floss Prata                4.50
+--------------------------------------------------------|----------------------------------------------------
+18      Egg and Onion Chili Prata             2.50      | 42      Tomato Prata                          1.70
+--------------------------------------------------------|----------------------------------------------------
+19      Egg and Onion Mushroom Prata          3.50      | 43      Mushroom Egg Tomato Prata             3.50
+--------------------------------------------------------|----------------------------------------------------
+20      Double Egg Prata                      2.80      | 44      Hotdog Prata                          3.00
+--------------------------------------------------------|----------------------------------------------------
+21      Double Egg Onion Prata                3.00      | 45      Mushroom Egg Prata                    3.00
+--------------------------------------------------------|----------------------------------------------------
+22      Double Egg Cheese Prata               4.00      | 46      Hotdog Cheese Prata                   4.00
+--------------------------------------------------------|----------------------------------------------------
+23      Double Egg Chili Prata                3.00      | 47      Mushroom Cheese Egg Prata             4.00
+--------------------------------------------------------|----------------------------------------------------
+24      Onion Prata                           1.50      | 48      Portobello Mozzarella Prata           5.00
+--------------------------------------------------------|----------------------------------------------------
 
-What is your name?
-Hello James Gosling
+============================================================================================
+Please make sure there is no inputs after the menu command!
+============================================================================================
+Unknown command. Please try again.
+============================================================================================
+Your order list is empty!
+============================================================================================
+Please make sure there is no inputs after the list command!
+============================================================================================
+Unknown command. Please try again.
+============================================================================================
+Invalid Command!
+Please check your range of values and the format.
+Name: Shorter than 50 characters. Index: Range of menu. Quantity: 1 to 999.
+Refer to the UG for more details.
+============================================================================================
+Invalid Command!
+Please check your range of values and the format.
+Name: Shorter than 50 characters. Index: Range of menu. Quantity: 1 to 999.
+Refer to the UG for more details.
+============================================================================================
+Invalid Command!
+Please check your range of values and the format.
+Name: Shorter than 50 characters. Index: Range of menu. Quantity: 1 to 999.
+Refer to the UG for more details.
+============================================================================================
+Invalid Command!
+Please check your range of values and the format.
+Name: Shorter than 50 characters. Index: Range of menu. Quantity: 1 to 999.
+Refer to the UG for more details.
+============================================================================================
+Invalid Command!
+Please check your range of values and the format.
+Name: Shorter than 50 characters. Index: Range of menu. Quantity: 1 to 999.
+Refer to the UG for more details.
+============================================================================================
+Invalid Command!
+Please check your range of values and the format.
+Name: Shorter than 50 characters. Index: Range of menu. Quantity: 1 to 999.
+Refer to the UG for more details.
+============================================================================================
+We have updated the order list for: ABC
+	(1) Special Paper Prata (Sugar) | Quantity = 2 | Cost = $3.20
+[Total Cost = $3.20] [Total Quantity = 2]
+============================================================================================
+Invalid Command!
+Please check your range of values and the format.
+Name: Shorter than 50 characters. Index: Range of menu. Quantity: 1 to 999.
+Refer to the UG for more details.
+============================================================================================
+We have updated the order list for: TIM
+	(1) Egg Prata | Quantity = 3 | Cost = $5.70
+[Total Cost = $5.70] [Total Quantity = 3]
+============================================================================================
+We have updated the order list for: TIM
+	(1) Egg Prata | Quantity = 3 | Cost = $5.70
+	(2) Chili Prata | Quantity = 2 | Cost = $2.80
+[Total Cost = $8.50] [Total Quantity = 5]
+============================================================================================
+SUMMARY: [Total number of People: 2] [Total quantity of food: 7]
+----------------------------------------------------
+1) ABC:
+	(1) Special Paper Prata (Sugar) | Quantity = 2 | Cost = $3.20
+[Total Cost = $3.20] [Total Quantity = 2]
+2) TIM:
+	(1) Egg Prata | Quantity = 3 | Cost = $5.70
+	(2) Chili Prata | Quantity = 2 | Cost = $2.80
+[Total Cost = $8.50] [Total Quantity = 5]
+============================================================================================
+We have updated the order list for: TIM
+	(1) Plain Prata | Quantity = 3 | Cost = $3.30
+	(2) Egg Prata | Quantity = 3 | Cost = $5.70
+	(3) Chili Prata | Quantity = 2 | Cost = $2.80
+[Total Cost = $11.80] [Total Quantity = 8]
+============================================================================================
+We have updated the order list for: TIM
+	(1) Plain Prata | Quantity = 5 | Cost = $5.50
+	(2) Egg Prata | Quantity = 3 | Cost = $5.70
+	(3) Chili Prata | Quantity = 2 | Cost = $2.80
+[Total Cost = $14.00] [Total Quantity = 10]
+============================================================================================
+SUMMARY: [Total number of People: 2] [Total quantity of food: 12]
+----------------------------------------------------
+1) ABC:
+	(1) Special Paper Prata (Sugar) | Quantity = 2 | Cost = $3.20
+[Total Cost = $3.20] [Total Quantity = 2]
+2) TIM:
+	(1) Plain Prata | Quantity = 5 | Cost = $5.50
+	(2) Egg Prata | Quantity = 3 | Cost = $5.70
+	(3) Chili Prata | Quantity = 2 | Cost = $2.80
+[Total Cost = $14.00] [Total Quantity = 10]
+============================================================================================
+Please enter a valid order index!
+Enter "list" to check your order index.
+============================================================================================
+We have updated the order list for: AIM
+	(1) Cheese Prata | Quantity = 2 | Cost = $5.00
+[Total Cost = $5.00] [Total Quantity = 2]
+============================================================================================
+We have updated the order list for: AIM
+	(1) Cheese Prata | Quantity = 2 | Cost = $5.00
+	(2) Chili Prata | Quantity = 1 | Cost = $1.40
+[Total Cost = $6.40] [Total Quantity = 3]
+============================================================================================
+Please enter a valid person's index followed by the order index and order quantity! i.e. edit 1/1 /q 8
+Enter "list" to view person's and order index.
+============================================================================================
+Please enter a valid person's index followed by the order index and order quantity! i.e. edit 1/1 /q 8
+Enter "list" to view person's and order index.
+============================================================================================
+Please enter a valid person's index followed by the order index and order quantity! i.e. edit 1/1 /q 8
+Enter "list" to view person's and order index.
+============================================================================================
+Please enter a valid person's index followed by the order index and order quantity! i.e. edit 1/1 /q 8
+Enter "list" to view person's and order index.
+============================================================================================
+Please enter a valid person's index followed by the order index and order quantity! i.e. edit 1/1 /q 8
+Enter "list" to view person's and order index.
+============================================================================================
+Please enter a valid person's index followed by the order index and order quantity! i.e. edit 1/1 /q 8
+Enter "list" to view person's and order index.
+============================================================================================
+Order 2 from TIM's order has been edited
+	(1) Plain Prata | Quantity = 5 | Cost = $5.50
+	(2) Egg Prata | Quantity = 4 | Cost = $7.60
+	(3) Chili Prata | Quantity = 2 | Cost = $2.80
+[Total Cost = $15.90] [Total Quantity = 11]
+============================================================================================
+SUMMARY: [Total number of People: 3] [Total quantity of food: 16]
+----------------------------------------------------
+1) ABC:
+	(1) Special Paper Prata (Sugar) | Quantity = 2 | Cost = $3.20
+[Total Cost = $3.20] [Total Quantity = 2]
+2) TIM:
+	(1) Plain Prata | Quantity = 5 | Cost = $5.50
+	(2) Egg Prata | Quantity = 4 | Cost = $7.60
+	(3) Chili Prata | Quantity = 2 | Cost = $2.80
+[Total Cost = $15.90] [Total Quantity = 11]
+3) AIM:
+	(1) Cheese Prata | Quantity = 2 | Cost = $5.00
+	(2) Chili Prata | Quantity = 1 | Cost = $1.40
+[Total Cost = $6.40] [Total Quantity = 3]
+============================================================================================
+Alright, order 1 has been deleted from ABC!
+============================================================================================
+SUMMARY: [Total number of People: 2] [Total quantity of food: 14]
+----------------------------------------------------
+1) TIM:
+	(1) Plain Prata | Quantity = 5 | Cost = $5.50
+	(2) Egg Prata | Quantity = 4 | Cost = $7.60
+	(3) Chili Prata | Quantity = 2 | Cost = $2.80
+[Total Cost = $15.90] [Total Quantity = 11]
+2) AIM:
+	(1) Cheese Prata | Quantity = 2 | Cost = $5.00
+	(2) Chili Prata | Quantity = 1 | Cost = $1.40
+[Total Cost = $6.40] [Total Quantity = 3]
+============================================================================================
+Wrong format for command Find. E.g) find /n <String to find>
+============================================================================================
+Wrong format for command Find. E.g) find /n <String to find>
+============================================================================================
+Wrong format for command Find. E.g) find /n <String to find>
+============================================================================================
+2) AIM:
+	(1) Cheese Prata | Quantity = 2 | Cost = $5.00
+	(2) Chili Prata | Quantity = 1 | Cost = $1.40
+[Total Cost = $6.40] [Total Quantity = 3]
+
+============================================================================================
+1) TIM:
+	(1) Plain Prata | Quantity = 5 | Cost = $5.50
+	(2) Egg Prata | Quantity = 4 | Cost = $7.60
+	(3) Chili Prata | Quantity = 2 | Cost = $2.80
+[Total Cost = $15.90] [Total Quantity = 11]
+2) AIM:
+	(1) Cheese Prata | Quantity = 2 | Cost = $5.00
+	(2) Chili Prata | Quantity = 1 | Cost = $1.40
+[Total Cost = $6.40] [Total Quantity = 3]
+
+============================================================================================
+Alright, order 1 has been deleted from TIM!
+	(1) Egg Prata | Quantity = 4 | Cost = $7.60
+	(2) Chili Prata | Quantity = 2 | Cost = $2.80
+[Total Cost = $10.40] [Total Quantity = 6]
+============================================================================================
+Please enter a valid person's index followed by the order index! i.e. delete 1/2
+Enter "list" to view person's and order index.
+============================================================================================
+Unknown command. Please try again.
+============================================================================================
+Please enter a valid person's index followed by the order index! i.e. delete 1/2
+Enter "list" to view person's and order index.
+============================================================================================
+Please enter a valid person's index followed by the order index! i.e. delete 1/2
+Enter "list" to view person's and order index.
+============================================================================================
+Alright, order 1 has been deleted from TIM!
+	(1) Chili Prata | Quantity = 2 | Cost = $2.80
+[Total Cost = $2.80] [Total Quantity = 2]
+============================================================================================
+Alright, order 1 has been deleted from TIM!
+============================================================================================
+Alright, order 1 has been deleted from AIM!
+	(1) Chili Prata | Quantity = 1 | Cost = $1.40
+[Total Cost = $1.40] [Total Quantity = 1]
+============================================================================================
+Alright, order 1 has been deleted from AIM!
+============================================================================================
+Your order list is empty!
+============================================================================================
+Thank you for using L.O.T.S! Good bye!
+============================================================================================
