@@ -37,6 +37,7 @@ public class SelectedModuleStorage extends UserStorage {
             fw.write(curr.toFileFormat());
         }
         fw.close();
+        isModuleValid = true;
         logger.log(Level.INFO, "File writing operation completed");
     }
 

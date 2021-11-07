@@ -40,6 +40,8 @@ public class SelectedUniversityStorage extends UserStorage {
             fw.write(curr.toFileFormat());
         }
         fw.close();
+        isMappingValid = true;
+        isUniversityValid = true;
         logger.log(Level.INFO, "File writing operation completed");
     }
 
