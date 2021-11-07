@@ -37,7 +37,7 @@ public class WorldMapTest {
         assertEquals(minCalcResult.toString(),
                 WorldMap.calcMinTime("SIN", "MLY").toString());
     }
-
+    
     @Test
     public void calcMinCost_sinMly_success() throws EmptyVertexException {
         Country countrySin = new Country("SIN", 0);

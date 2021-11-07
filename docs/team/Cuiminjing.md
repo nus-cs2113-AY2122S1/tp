@@ -9,13 +9,16 @@ Please see below for my contributions to Traveller.
 
 #### Features
 * `delete`: Allow user to delete a whole trip
-    * Bases on the tripname, worked to implement the delete function to be able to delete the whole trips with all itineraries
+    * Bases on the tripname, worked to implement the delete function to be able to 
+      delete the whole trips with all itineraries
     * Help users delete wrong or past journeys to simplify the page
 * `delete-day`: Allow user to delete an existing day of a trip
-    * Based on the name of the trip and index of the day, the user can delete a single day of a trip.
+    * Based on the name of the trip and index of the day, the user can delete a 
+      single day of a trip.
     * Delete itineraries of a whole day
 * `delete-item`: Allow user to delete an existing item of a day
-    * Enable user to delete an item of a day based on the name of trip and index of day and item.
+    * Enable user to delete an item of a day based on the name of trip and index of 
+      day and item.
     * Delete a single wrong item of a day
 
 #### Project Management

@@ -1,5 +1,6 @@
 package seedu.traveller.exceptions;
 
+//@@author jach23
 public class InvalidShortestTimeException extends TravellerException {
     public InvalidShortestTimeException() {
         message = "\tWrong format for Shortest!\n"

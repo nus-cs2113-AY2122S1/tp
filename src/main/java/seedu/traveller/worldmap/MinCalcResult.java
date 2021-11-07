@@ -2,7 +2,7 @@ package seedu.traveller.worldmap;
 
 import java.util.List;
 
-//@@author Jach23
+//@@author jach23
 public class MinCalcResult {
     private final Country startCountry;
     private final Country endCountry;

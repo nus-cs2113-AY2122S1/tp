@@ -73,12 +73,6 @@ public class Parser {
             case "new":
                 command = parseNewCommand(userInput[1]);
                 break;
-            case "edit":
-                command = parseEditCommand(userInput[1]);
-                break;
-            case "delete":
-                command = parseDeleteCommand(userInput[1]);
-                break;
             case "view":
                 command = parseViewCommand(userInput[1]);
                 break;
@@ -97,17 +91,23 @@ public class Parser {
             case "add-item":
                 command = parseAddItemCommand(userInput[1]);
                 break;
-            case "delete-day":
-                command = parseDeleteDayCommand(userInput[1]);
-                break;
-            case "delete-item":
-                command = parseDeleteItemCommand(userInput[1]);
-                break;
             case "edit-item":
                 command = parseEditItemCommand(userInput[1]);
                 break;
             case "exit":
                 command = parseExitCommand();
+                break;
+            case "edit":
+                command = parseEditCommand(userInput[1]);
+                break;
+            case "delete":
+                command = parseDeleteCommand(userInput[1]);
+                break;
+            case "delete-day":
+                command = parseDeleteDayCommand(userInput[1]);
+                break;
+            case "delete-item":
+                command = parseDeleteItemCommand(userInput[1]);
                 break;
             case "help":
                 command = parseHelpCommand();

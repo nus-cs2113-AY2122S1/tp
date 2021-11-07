@@ -205,10 +205,19 @@ viewing trips, or deleting trips.
 thrown.
 
 #### 1.2.3. TripsList class
-The `TripsList` class is the main class to store the data for `Trip`, `Item`, and `Day`. 
+The `TripsList` class is the main class to store the data.
+This include:
 
-Its main functionalities are `add` and `delete`, which will control and edit the storage data. Also, the `get` and 
-`getSize` functions help get access to the data.
+1.`Trip`.
+
+2.`Day`.
+
+3.`Item`.
+
+It contains functions that can help control the date inside the list. 
+`addTrip` function will create a new space and store the data in it, while the `deleteTrip` function will delete and 
+clear the data from the list. `getTrip` and `getTripIndex` can return the specific `Trip` data by giving the name 
+or the index of the Also, the `getSize` functions will return the size of the `TripsList`. 
 
 {TODO: Add details}
 

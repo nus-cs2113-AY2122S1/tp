@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
 
-//@@author Jach23
+//@@author jach23
 public class Logic {
     private final double[][] adjMatrix = new double[10][10];
 
