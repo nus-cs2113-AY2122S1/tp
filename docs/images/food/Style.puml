@@ -3,3 +3,6 @@ title Food Commands
 
 skinparam classAttributeIconSize 0
 hide footbox
+
+hide circle
+skinparam classAttributeIconSize 0

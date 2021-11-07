@@ -139,7 +139,7 @@ When the user types `module add c/CS2113T n/Software Engineering e/A`, the follo
    ii. `AddModuleCommand` calls `getModule()` to create a new `module` based on user's input.\
    iii. `AddModuleCommand` calls `storage.StorageModule.readDataFromFile()` to read Module-related data `moduleList` from the storage file.\
    iv. `AddModuleCommand` calls `moduleList.addModule(module)` to add a new `module` to the list.\
-   v. `AddModuleCommand` prompts the successful message to the user.
+   v. `AddModuleCommand` prompts the successful message to the user.\
    vi. `AddModuleCommand` calls `storage.storageModule.saveDataToFile(moduleList)` to save the new data to the storage file.
 
 #### 4.1.2 Removing a Module

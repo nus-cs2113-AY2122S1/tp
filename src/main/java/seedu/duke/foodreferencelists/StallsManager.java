@@ -27,7 +27,7 @@ public class StallsManager {
     public static HashMap<Integer, String[]> idData = new HashMap<>();
     public static ArrayList<String[]> compoundedItemsList = new ArrayList<>();
 
-    public static int MAX_STORE_INDEX = 11;
+    public static final int MAX_STORE_INDEX = 11;
 
     //for easier indexing and searching
     public StallsManager() {
