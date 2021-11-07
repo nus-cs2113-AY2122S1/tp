@@ -40,8 +40,6 @@ v2.1 tasks:
     - Justification: This helps preserve the order of parameters input by the user as MediVault will take the last
       occurrence if the same parameter is provided multiple times.
 - Refactor `command` objects. [[#133](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/133)]
-    - Functionality: Removed the input parameters of the `execute()` function.
-    - Justification: Most of the parameters like `Ui` can be made into a singleton.
 - Refactor `Dispense` to `Prescription` [[#208](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/208)]
     - Functionality: Refactor `Dispense` object to `Prescription`.
     - Justification: From peer feedback, users were confused what `Dispense` was, as such our team decided
