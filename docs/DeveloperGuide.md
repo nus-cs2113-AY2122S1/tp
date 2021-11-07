@@ -137,8 +137,19 @@ it will then load the data from the database text file into the app.
 Storage will reload the data in the app into the database text file. 
 
 2) Architecture of the Storage component
+
 ![Storage Sequence Diagram](images/Storage.png)
 
+- Initially, when BudgetTracker App is started, it will create new Parser and Storage object. Storage's 
+makeStorageTextFile() method will be called to either create a new database text file of the current year
+for example "2021.txt" if it does not exist or it will load the existing "2021.txt" into the App by calling 
+loadStorage() method of the Storage Class.
+- Then a while loop will be initialized to check for User Input in the command line to check for user's 
+command. Whenever any command that changes the data in the App is called such as `add`, `edit` and `delete` 
+is called, reloadArrayToStorage() method of the WriteToTextFile class must be called to refresh the data text
+file to the new state of the data in the App. 
+- Then the loop will continue. For commands that will not change the data in the app such as `list`, `find`...
+The reloadArrayToStorage() method will not be called. 
 
 ## <a id="implementation"></a> Implementation
 
@@ -234,6 +245,7 @@ wiped and re-written from the ArrayList to ensure that data is saved at every st
 ![dataSample](images/dataSample.png)
 
 2) Why are the data stored in such a manner?
+
 The reason it is implemented in this manner is so that we could reuse
 code that have been written for adding of budget and expenditures directly when loading from storage.
 
@@ -247,7 +259,8 @@ the correct format.
 The way the database is organized is that each yearly Records is stored in the form of <year>.txt. Each year 
 contains all the monthly budget as well as all the expenditure and loan tied to that month. 
 
-3) 
+3) How does some of the key method work?
+
 ![readTextFileToString Sequence Diagram](images/readTextFileToString.png)
 
 ![reloadArrayToStorage Sequence Diagram](images/reloadArrayToStorage.png)
@@ -255,6 +268,7 @@ contains all the monthly budget as well as all the expenditure and loan tied to 
 ![convertToCsvFile Sequence Diagram](images/convertToCsvFile.png)
 
 4) How switching database work?
+
 When the `year <SELECTED DATABASE YEAR>` command is called eg. `year 2020`, the Parser will call the YearCommand
 and it will run the method "execute()". "execute()" first clears the allRecordList by calling clearAll() from 
 the AllRecordList class. And setYear(2020) method is called from AllRecordList Class to set the year to 2020. 
