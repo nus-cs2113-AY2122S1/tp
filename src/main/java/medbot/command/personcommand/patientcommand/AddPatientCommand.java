@@ -15,7 +15,7 @@ public class AddPatientCommand extends AddPersonCommand {
     @Override
     public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
         scheduler.addPatient(person);
-        String addPatientMessage = Ui.getAddMessage(ViewType.PATIENT_INFO, person.toString());
+        String addPatientMessage = Ui.getAddMessage(person.toString(), ViewType.PATIENT_INFO);
         ui.printOutput(addPatientMessage);
     }
 }

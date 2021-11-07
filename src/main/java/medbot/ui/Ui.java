@@ -61,7 +61,7 @@ public class Ui {
      * @param viewType the viewType context of the command
      * @return the Successful Message
      */
-    public static String getAddMessage(ViewType viewType, String info) throws MedBotException {
+    public static String getAddMessage(String info, ViewType viewType) throws MedBotException {
         switch (viewType) {
         case PATIENT_INFO:
             return PatientUi.getAddPatientMessage(info);

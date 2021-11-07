@@ -36,7 +36,7 @@ class UiTest {
                 + "Address: " + "Blk 123 Bishan St 12 #05-39";
 
         try {
-            String actualPatientOutput = Ui.getAddMessage(ViewType.PATIENT_INFO, patientInfo);
+            String actualPatientOutput = Ui.getAddMessage(patientInfo, ViewType.PATIENT_INFO);
             assertEquals(expectedPatientOutput, actualPatientOutput);
 
         } catch (MedBotException e) {
@@ -60,7 +60,7 @@ class UiTest {
                 + "Address: " + "Blk 123 Bishan St 12 #05-39";
 
         try {
-            String actualStaffOutput = Ui.getAddMessage(ViewType.MEDICAL_STAFF_INFO, staffInfo);
+            String actualStaffOutput = Ui.getAddMessage(staffInfo, ViewType.MEDICAL_STAFF_INFO);
             assertEquals(expectedStaffOutput, actualStaffOutput);
         } catch (MedBotException e) {
             assertEquals("Cannot identify the current view type" + END_LINE, e.getMessage());
@@ -79,7 +79,7 @@ class UiTest {
                 + "Date/Time: 11 Dec 21 1400HRS" + END_LINE;
 
         try {
-            String actualScheduleOutput = Ui.getAddMessage(ViewType.SCHEDULER, appointmentInfo);
+            String actualScheduleOutput = Ui.getAddMessage(appointmentInfo, ViewType.SCHEDULER);
             assertEquals(expectedScheduleOutput, actualScheduleOutput);
         } catch (MedBotException e) {
             assertEquals("Cannot identify the current view type" + END_LINE, e.getMessage());
