@@ -49,6 +49,7 @@ TextUi *-- Main
 CommandFactory *-- Main
 Command *- Main
 Animation *-- TextUi
+Content *-- Animation
 GameUi *-- Game
 SummaryUi *-- Game
 SummaryManager *-- Game
@@ -64,13 +65,13 @@ TimeLimitGame *-- TimeGameCommand
 WordLimitGame *-- WordGameCommand
 TextUi *- CommandFactory
 TextUi *-- Utils
-TextUi *-- Content
+TextUi *--- Content
 WikiImport *-- Content
 RandomGenerator *-- Content
 Books *-- Content
 Storage *-- GameRecordsManager
 GameRecord *-- GameRecordsManager
-TextUi *-- TimeLimitGame
+TextUi *--- TimeLimitGame
 TextUi *-- WordLimitGame
 GameRecord *-- FileParser
 GameRecord *-- Storage
