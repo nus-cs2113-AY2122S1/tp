@@ -367,3 +367,95 @@ GUI: Graphical User Interface
 ## Appendix: Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Testing commands for tasks
+
+#### Adding a task
+
+Test case: `add task CS2113T assignment -d tue -i add feature -p low`
+
+Expected output: The task is successfully added and a message with the added task is displayed.
+
+#### Adding a task without required flags
+
+Test case: `add task CS2113T assignment`
+
+Expected output: A message is displayed about missing flags in the input.
+
+#### Adding a task with empty title
+
+Test case: `add task -d tue -i add feature`
+
+Expected output: A message is displayed that the title cannot be blank.
+
+#### Listing all tasks
+
+Test case: `list task`
+
+Expected output: The full list of tasks is displayed.
+
+#### Listing tasks sorted by priority
+
+Test case: `list task priority`
+
+Expected output: The full list of tasks is displayed, sorted according to the priority assigned for each task (HIGH, MEDIUM or LOW).
+
+#### Listing tasks on a day of the week
+
+Test case: `list task tue`
+
+Expected output: A list of tasks on Tuesday is displayed.
+
+#### Listing tasks with invalid day of the week
+
+Test case: `list task t`
+
+Expected output: A message is displayed stating that the wrong format is used for the command.
+
+#### Finding tasks with keyword
+
+Test case: `find task assignment`
+
+Expected output: A message is displayed with the tasks that contain the keyword.
+
+#### Finding tasks with empty keyword
+
+Test case: `find task`
+
+Expected output: A message is displayed stating that the wrong format is used for the command.
+
+#### Marking a task as done
+
+Test case: `done task 1`
+
+Expected output: The task is successfully marked as done and a message with the task marked as done is displayed.
+
+#### Marking a task with invalid index
+
+Test case: `done task 0`
+
+Expected output: A message is displayed stating that the index of the task entered is invalid.
+
+#### Marking a task with an index that is not a number
+
+Test case: `done task m`
+
+Expected output: A message is displayed stating that the index of the task entered is not a number.
+
+#### Deleting a task
+
+Test case: `delete task 1`
+
+Expected output: The task is successfully deleted and a message with the deleted task is displayed.
+
+#### Deleting a non-existent task
+
+Test case: `delete task 0`
+
+Expected output: A message is displayed stating that the index of the task entered is invalid.
+
+#### Deleting a task with an index that is not a number
+
+Test case: `delete task m`
+
+Expected output: A message is displayed stating that the index of the task entered is not a number.
+
