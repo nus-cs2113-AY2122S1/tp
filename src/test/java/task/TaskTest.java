@@ -60,8 +60,8 @@ public class TaskTest {
     @Test
     void setDate_success() {
         Task task = new Task("Submit Assignment 1", "20/09/2021 1600");
-        task.setDate("20th October 2021");
-        assertEquals("20th October 2021", task.getDate());
+        task.setDate("20/10/2021");
+        assertEquals("20/10/2021", task.getDate());
     }
 
     @Test
