@@ -39,6 +39,8 @@
 - Inspiration for App Idea and OOP Structure: [AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2) <br />
 - Inspiration for User Guide and Developer Guide: AddressBook (Level 3) [[DG]](https://se-education.org/addressbook-level3/DeveloperGuide.html) <br />
   [[UG]](https://se-education.org/addressbook-level3/UserGuide.html)
+- Inspiration for Regular expression for [GitHub username](https://github.com/shinnn/github-username-regex) validation
+- Regular expression for [email](https://emailregex.com/) validation
 - [Converting text for ConTech](https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20) <br />
 - [GitHub Markdown Emoji Syntax](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md) for User Guide: <br />
 - [PlantUML Tutorial](https://se-education.org/guides/tutorials/plantUml.html) <br />
