@@ -33,7 +33,7 @@ to you, and includes a **[List of Commands](#-list-of-commands)** for your quick
         * `edit dish waste`: [Edit a dish's wastage](#edit-a-dishs-wastage--edit-dish-waste)
         * `del dish`: [Delete existing dish](#delete-existing-dish--del-dish)
         * `list dish`: [View existing dishes](#view-existing-dishes--list-dish)
-        * `rdish`: [Generate a random Dish name](#generate-a-random-dish-name--rdish)
+        * `rdish`: [Generate a random dish name](#generate-a-random-dish-name--rdish)
     * [Ingredient Commands](#add-new-ingredient--add-ingr)
         * `add ingr`: [Add new ingredient](#add-new-ingredient--add-ingr)
         * `add ingr stored`: [Add storage to existing ingredient](#add-storage-to-existing-ingredient--add-ingr-stored)
@@ -111,7 +111,7 @@ Congratulations! Now, the **List of Commands** below will teach you how to use a
 | Edit a *dish's wastage* | `edit dish waste [DISH_NAME]` |
 | Delete existing *dish* | `del dish [DISH_NAME]` |
 | View existing *dishes* | `list dish` |
-| Generate a random *dish* name | `rdish` |
+| Generate a random *dish name* | `rdish` |
 | Add a new *ingredient* | `add ingr [INGR_NAME]` |
 | Add storage to an existing *ingredient* | `add ingr stored [INGR_NAME]` |
 | Add *ingredient wastage* | `add ingr waste [INGR_NAME]` |
@@ -246,7 +246,7 @@ Incur wastage on an existing dish.
 Format: `add dish waste [DISH_NAME]`
 
 * Can only be performed on existing `DISH_NAME`
-
+* ❕ *Tip*: You can replace `[DISH_NAME]` with `[DISH_INDEX]` to quickly choose which dish to add weight to.
 * 💡 *Note*:  You will be prompted to enter the weight of `DISH_NAME` wasted in the next step.
 
 Example of usage:
@@ -269,7 +269,7 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Wastage of chicken rice is now 2.5 kg
+Wastage of 'chicken rice' is now 2.5 kg
 ____________________________________________________________
 ```
 
@@ -293,7 +293,7 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Enter the limit for chicken rice in kg:
+The limit for 'chicken rice' is now 3.5 kg
 ____________________________________________________________
 ```
 

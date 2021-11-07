@@ -212,7 +212,7 @@ public class DishList {
             double inputWastage;
             while (loop == LOOP) {
                 String confirmAdd = "e";
-                if (!isNumber(newWeight)) {
+                if (!isDouble(newWeight)) {
                     throw new FoodoramaException(UI.getInvalidNumberMsg());
                 }
 
@@ -238,7 +238,7 @@ public class DishList {
                         inputWastage = Double.parseDouble(newWeight);
                     }
                 }
-                if ((isNumber(newWeight) && (inputWastage >= 0)
+                if ((isDouble(newWeight) && (inputWastage >= 0)
                         && (inputWastage <= WEIGHT_SOFT_LIMIT)) | confirmAdd.startsWith(YES)) {
                     loop = EXIT;
                 }
@@ -272,10 +272,9 @@ public class DishList {
      * @author Dniv-ra
      */
     public static boolean isNumber(String numberString) {
-        try {
-            int numberInteger = Integer.parseInt(numberString);
+        if (numberString.matches("^[\\d\\s.]+$")) {
             return true;
-        } catch (NumberFormatException e) {
+        } else {
             return false;
         }
     }

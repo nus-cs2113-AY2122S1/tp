@@ -53,7 +53,7 @@ class EditDishWasteCommandTest {
 
         //Negative value test
         try {
-            fakeInput = new ByteArrayInputStream("-7.0\ny".getBytes());
+            fakeInput = new ByteArrayInputStream("-7.0\n7.0\ny".getBytes());
             System.setIn(fakeInput);
             commandToTest.execute(inputParams);
         } catch (FoodoramaException e) {

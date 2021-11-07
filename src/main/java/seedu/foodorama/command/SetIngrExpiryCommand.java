@@ -47,11 +47,7 @@ public class SetIngrExpiryCommand extends Command {
             throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());
         } else {
             assert (ingrIndex != -1) : "The ingrIndex cannot be -1";
-            try {
-                IngredientList.addExpiry(ingrIndex);
-            } catch (FoodoramaException e) {
-                throw new FoodoramaException(e.getMessage());
-            }
+            IngredientList.addExpiry(ingrIndex);
         }
 
     }

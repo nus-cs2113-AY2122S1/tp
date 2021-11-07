@@ -9,9 +9,12 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class that handles the collection of ingredient objects at runtime.
+ * @author renzocanare, jhsee5, Rakesh12000, Dniv-ra
+ */
 public class IngredientList {
     public static final String YES_NO_REGEX = "^(y|yes|n|no)$";
-    public static ArrayList<Ingredient> ingredientList = new ArrayList<>();
     private static final Ui UI = new Ui();
     private static final String YES = "y";
     private static final String NO = "n";
@@ -21,7 +24,15 @@ public class IngredientList {
     private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_FORMAT);
     private static final int TEN_YEARS_IN_DAYS = 3650;
     private static final int ZERO_DAYS = 0;
+    public static ArrayList<Ingredient> ingredientList = new ArrayList<>();
 
+    /**
+     * Adds a new ingredient to the ingredient list.
+     * @param ingredientName name of the ingredient to be added
+     * @throws FoodoramaException if the weight of the ingredient is invalid
+     *
+     * @author jhsee5
+     */
     public static void add(String ingredientName) throws FoodoramaException {
         UI.printEnterWeightOf(ingredientName);
         Scanner in = new Scanner(System.in);
@@ -70,7 +81,13 @@ public class IngredientList {
 
     }
 
-    //Returns -1 if not present, index if present
+    /**
+     * Checks if an ingredient exists in the ingredient list and returns it index.
+     * @param ingredientName name of ingredient being searched for
+     * @return -1 if not present, index if present
+     *
+     * @author renzocanare
+     */
     public static int find(String ingredientName) {
         for (Ingredient ingredient : ingredientList) {
             if (ingredient.getIngredientName().equals(ingredientName)) {
@@ -80,6 +97,12 @@ public class IngredientList {
         return -1;
     }
 
+    /**
+     * Gets the value of the ingredient with the largest waste.
+     * @return largest wastage present in the list
+     *
+     * @author Dniv-ra
+     */
     public static double getGreatestWaste() {
         double greatest = 0;
         for (Ingredient ingr : ingredientList) {
@@ -92,14 +115,30 @@ public class IngredientList {
         return greatest;
     }
 
+    /**
+     * Calls the graph function for ingredients.
+     *
+     * @author Dniv-ra
+     */
     public static void graph() {
         UI.printIngrListGraph(ingredientList);
     }
 
+    /**
+     * Calls the list function for ingredients.
+     *
+     * @author renzocanare
+     */
     public static void list() {
         UI.printIngrList(ingredientList);
     }
 
+    /**
+     * Deletes an ingredient from the ingredient list.
+     * @param ingredientIndex index of the item to be deleted
+     *
+     * @author Rakesh12000
+     */
     public static void delete(int ingredientIndex) {
         Scanner input = new Scanner(System.in);
         int listSize = ingredientList.size(); //listSize = N
@@ -133,11 +172,14 @@ public class IngredientList {
             } else {
                 UI.printDisregardMsg();
             }
-
-
         }
     }
 
+    /**
+     * Clears the ingredient list.
+     *
+     * @author Rakesh12000
+     */
     public static void clearList() {
         Scanner input = new Scanner(System.in);
         UI.printConfirmClearIngr();
@@ -158,13 +200,20 @@ public class IngredientList {
         }
     }
 
+    /**
+     * Edits the name of one of the ingredients present in the list.
+     * @param ingredientIndex index of item to be edited
+     * @throws FoodoramaException if new name is blank
+     *
+     * @author Rakesh12000
+     */
     public static void editName(int ingredientIndex) throws FoodoramaException {
         String ingrName = ingredientList.get(ingredientIndex).getIngredientName();
         UI.printAskNewNameIngr(ingrName);
 
         Scanner input = new Scanner(System.in);
         String newName = input.nextLine().toLowerCase();
-        while (isNumber(newName)) {
+        while (isNumber(newName) | isDouble(newName)) {
             UI.clearTerminalAndPrintNewPage();
             UI.printInvalidIngredientName();
             newName = input.nextLine().toLowerCase();
@@ -191,6 +240,13 @@ public class IngredientList {
         }
     }
 
+    /**
+     * Check if the given date matches the proper date formatting.
+     * @param expiryDateString date string to be checked
+     * @return true if follows the correct format, false otherwise
+     *
+     * @author renzocanare
+     */
     private static boolean isValidDateFormat(String expiryDateString) {
         try {
             LocalDate.parse(expiryDateString, dtf);
@@ -200,6 +256,15 @@ public class IngredientList {
         return true;
     }
 
+    /**
+     * Checks if the expiry date is too far away in the future
+     * or in the past and prompts the user if that's the case.
+     * @param daysBetweenExpiryToday time till the expiry date
+     * @param ingrName name of the ingredient its getting expiry updated
+     * @return false if expiry is in the past or too far away in the future, true otherwise
+     *
+     * @author renzocanare
+     */
     public static boolean isValidExpiryLength(long daysBetweenExpiryToday, String ingrName) {
         if (daysBetweenExpiryToday > TEN_YEARS_IN_DAYS) {
             UI.printLongExpiryDateMsg();
@@ -222,7 +287,13 @@ public class IngredientList {
         return true;
     }
 
-    public static void addExpiry(int ingredientIndex) throws FoodoramaException {
+    /**
+     * Add expiry date for an ingredient.
+     * @param ingredientIndex index of the ingredient expiry is being added to
+     *
+     * @author renzocanare
+     */
+    public static void addExpiry(int ingredientIndex) {
         String ingrName = ingredientList.get(ingredientIndex).getIngredientName();
         UI.printAskIngrExpiryDate(ingrName);
 
@@ -252,6 +323,13 @@ public class IngredientList {
         UI.printSetIngrExpiryDate(ingrName, expiryDate, daysBetweenExpiryToday);
     }
 
+    /**
+     * Edits the wastage of one of the ingredients present in the list.
+     * @param ingrIndex index of item to be edited
+     * @throws FoodoramaException if new wastage is negative or infinity
+     *
+     * @author renzocanare
+     */
     public static void editWastage(int ingrIndex) throws FoodoramaException {
 
         String ingrName = ingredientList.get(ingrIndex).getIngredientName();
@@ -264,7 +342,7 @@ public class IngredientList {
         double ingredientWeightValue;
         while (loop == LOOP) {
             String confirmAdd = "e";
-            if (!isNumber(inputIngredientWeight)) {
+            if (!isDouble(inputIngredientWeight)) {
                 throw new FoodoramaException(UI.getInvalidNumberMsg());
             }
 
@@ -290,7 +368,7 @@ public class IngredientList {
                     ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
                 }
             }
-            if ((isNumber(inputIngredientWeight) && (ingredientWeightValue >= 0)
+            if ((isDouble(inputIngredientWeight) && (ingredientWeightValue >= 0)
                     && (ingredientWeightValue <= 10000)) | confirmAdd.startsWith(YES)) {
                 loop = EXIT;
             }
@@ -316,6 +394,13 @@ public class IngredientList {
         }
     }
 
+    /**
+     * Edits the storage of one of the ingredients present in the list.
+     * @param ingrIndex index of item to be edited
+     * @throws FoodoramaException if new storage is negative or infinity
+     *
+     * @author renzocanare
+     */
     public static void editStorage(int ingrIndex) throws FoodoramaException {
         if (ingrIndex == -1) {
             throw new FoodoramaException(UI.getIngrNotExistEdit());
@@ -359,7 +444,29 @@ public class IngredientList {
         }
     }
 
+    /**
+     * Checks if the parameter numberString is a number.
+     *
+     * @param numberString the String to check if it is a number
+     * @return true is the String is a number, false if it is not a number
+     * @author Dniv-ra
+     */
     public static boolean isNumber(String numberString) {
+        if (numberString.matches("^[\\d\\s.]+$")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if given string can be converted into a number.
+     * @param numberString string to be checked
+     * @return true if string can be converted into a double, false otherwise
+     *
+     * @author Rakesh12000
+     */
+    public static boolean isDouble(String numberString) {
         try {
             double numberInteger = Double.parseDouble(numberString);
             return true;
@@ -368,6 +475,13 @@ public class IngredientList {
         }
     }
 
+    /**
+     * Get user confirmation through a prompt.
+     * @param confirmAdd user input as a string
+     * @return final user input if it is not invalid
+     *
+     * @author Rakesh12000
+     */
     public static String getConfirmation(String confirmAdd) {
         Scanner input = new Scanner(System.in);
         while (!confirmAdd.matches(YES_NO_REGEX)) {
