@@ -59,17 +59,17 @@ public class BudgetManager {
             return new NoReminder();
         }
 
-        if (isNearingLimit(budget, currBudgetAmount) & isNearingLimit(overallBudget, currOverallAmount)) {
+        if (isNearingLimit(budget, currBudgetAmount) && isNearingLimit(overallBudget, currOverallAmount)) {
 
             return new DoubleNearingBudgetReminder(month, budget.getName(), currBudgetAmount, budget.getLimit(),
                     currOverallAmount, overallBudget.getLimit(), getTotalBudget(expenses, date));
 
-        } else if (isExceededLimit(budget, currBudgetAmount) & isExceededLimit(overallBudget, currOverallAmount)) {
+        } else if (isExceededLimit(budget, currBudgetAmount) && isExceededLimit(overallBudget, currOverallAmount)) {
 
             return new DoubleExceededBudgetReminder(month, budget.getName(), currBudgetAmount, budget.getLimit(),
                     currOverallAmount, overallBudget.getLimit(), getTotalBudget(expenses, date));
 
-        } else if (isExceededLimit(budget, currBudgetAmount) & isNearingLimit(overallBudget, currOverallAmount)) {
+        } else if (isExceededLimit(budget, currBudgetAmount) && isNearingLimit(overallBudget, currOverallAmount)) {
 
             return new ExceededBudgetNearingOverallReminder(month, budget.getName(), currBudgetAmount,
                     budget.getLimit(), currOverallAmount, overallBudget.getLimit(), getTotalBudget(expenses, date));
@@ -98,7 +98,7 @@ public class BudgetManager {
     private boolean isNearingLimit(Budget budget, double currBudgetAmount) {
         double diff = budget.getLimit() - currBudgetAmount;
         double thresholdLimit = getThresholdLimit(budget.getLimit());
-        return (diff > 0) & (diff <= thresholdLimit);
+        return (diff > 0) && (diff <= thresholdLimit);
     }
 
     private boolean isExceededLimit(Budget budget, double currBudgetAmount) {
@@ -115,7 +115,7 @@ public class BudgetManager {
     }
 
     public void setThreshold(double threshold) {
-        assert (threshold >= 0) & (threshold <= 1);
+        assert (threshold >= 0) && (threshold <= 1);
         this.threshold = threshold;
     }
 
@@ -140,7 +140,7 @@ public class BudgetManager {
             double oldBudget = budget.getLimit();
             budget.setLimit(amount);
             double newTotalBudget = getTotalBudget(expenses, date);
-            if (amount >= budget.calAmount(expenses, date) & newTotalBudget <= overallBudget.getLimit()) {
+            if (amount >= budget.calAmount(expenses, date) && newTotalBudget <= overallBudget.getLimit()) {
                 return new BudgetSetReminder(budget.getName(), budget.getLimit());
             } else {
                 budget.setLimit(oldBudget);
@@ -165,8 +165,7 @@ public class BudgetManager {
         for (Budget budget : budgets) {
             if (budget == overallBudget) {
                 continue;
-            }
-            if (budget.getLimit() >= budget.calAmount(expenses, date)) {
+            } else if (budget.getLimit() >= budget.calAmount(expenses, date)) {
                 total += budget.getLimit();
             } else {
                 total += budget.calAmount(expenses, date);

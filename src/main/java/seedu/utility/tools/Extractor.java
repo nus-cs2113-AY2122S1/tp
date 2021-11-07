@@ -97,13 +97,15 @@ public abstract class Extractor {
         double budgetAmount;
         try {
             budgetAmount = Double.parseDouble(dataAmount);
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new InvalidBudgetAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
-        } if(budgetAmount< 0) {
+        }
+
+        if (budgetAmount < 0) {
             throw new InvalidBudgetAmountException(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
-        } else if(Double.isInfinite(budgetAmount)||Double.isNaN(budgetAmount)) {
+        } else if (Double.isInfinite(budgetAmount) || Double.isNaN(budgetAmount)) {
             throw new InvalidBudgetAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
-        } else if(budgetAmount > BUDGET_AMOUNT_LIMIT) {
+        } else if (budgetAmount > BUDGET_AMOUNT_LIMIT) {
             throw new InvalidBudgetAmountException(Messages.INVALID_BUDGET_VALUE);
         }
         return budgetAmount;
