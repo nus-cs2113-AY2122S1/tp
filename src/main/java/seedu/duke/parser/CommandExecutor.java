@@ -29,6 +29,10 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
      * Creates a new instance of {@link Trip}.
      *
      * @param attributesInString attributes of the trip to be added (in a single {@link String}), before being parsed.
+     *
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
+     * @throws IndexOutOfBoundsException if the user has not entered sufficient attributes to create a new trip.
+     * @throws SameNameException if the user enters multiple persons with the same name.
      */
     protected static void executeCreateTrip(String attributesInString)
             throws ForceCancelException, IndexOutOfBoundsException, SameNameException {
@@ -101,8 +105,11 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
      *
      * @param inputDescription - user input of trip index and trip attributes to edit.
      *
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
+     *
      * @see Parser#editTripWithIndex(String)
      * @see Parser#editTripPerAttribute(Trip, String)
+     *
      */
     protected static void executeEditTrip(String inputDescription) throws ForceCancelException {
         String[] tripToEditInfo = inputDescription.split(" ", 2);
@@ -125,6 +132,8 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
      * Sets the user-specified trip as opened. Requires that the {@code listOfTrips} has at least one open trip.
      *
      * @param indexAsString index of trip to open, as a {@link String} to be parsed.
+     *
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
      */
     protected static void executeOpen(String indexAsString) throws ForceCancelException {
         //assumes that listOfTrips have at least 1 trip
@@ -221,6 +230,8 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
      * and calls the appropriate method.
      *
      * @param inputParams attributes of trip to be deleted (if valid, this should be the trip/expense index)
+     *
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
      *
      * @see Parser#executeDeleteTrip(int)
      * @see Parser#executeDeleteExpense(int)
@@ -361,6 +372,8 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
      *
      * @param tripToEdit user-specified trip to be edited
      * @param attributeToEdit String of all attributes to be added and their new values
+     *
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
      */
     private static void editTripPerAttribute(Trip tripToEdit, String attributeToEdit) throws ForceCancelException {
         String[] splitCommandAndData = attributeToEdit.split(" ", 2);

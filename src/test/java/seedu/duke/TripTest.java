@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.ForceCancelException;
@@ -8,19 +9,25 @@ import seedu.duke.parser.Parser;
 import seedu.duke.trip.Trip;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TripTest {
 
     private static Trip testTrip1;
+    private static InputStream origIn;
 
     @BeforeAll
     static void setUp() throws SameNameException, ForceCancelException {
+        origIn = System.in;
         String[] stringArray = {"", "Canada", "02-03-2021", "cad", "0.123", "ben,jerry,tom"};
         testTrip1 = new Trip(stringArray);
     }
@@ -71,7 +78,16 @@ class TripTest {
     }
 
     @Test
+    public void testEditLocation_BlankInput() throws ForceCancelException {
+        System.setIn(new ByteArrayInputStream("in our favourite rocket ship".getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        testTrip1.setLocation("");
+        assertEquals("in our favourite rocket ship", testTrip1.getLocation());
+    }
+
+    @Test
     public void testEditLocationFull() {
+        Storage.setListOfTrips(new ArrayList<>());
         createNewTripForTest();
         String userInput = "edit last -location going on a trip";
         Parser.parseUserInput(userInput);
@@ -86,7 +102,37 @@ class TripTest {
     }
 
     @Test
+    public void testEditDateNotParsable() throws ForceCancelException {
+        System.setIn(new ByteArrayInputStream("08-12-2010".getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        testTrip1.setDateOfTrip("something");
+        assertEquals("08 Dec 2010", testTrip1.getDateOfTripString());
+    }
+
+    @Test
+    public void testEditDateBeforeEpoch() throws ForceCancelException {
+        System.setIn(new ByteArrayInputStream("08-12-2010".getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        testTrip1.setDateOfTrip("01-01-1969");
+        assertEquals("08 Dec 2010", testTrip1.getDateOfTripString());
+    }
+
+    @Test
+    public void testEditDateWhichDoesNotExist() throws ForceCancelException {
+        String scannerInputs = "35-02-2021" + System.lineSeparator()
+                + "00-11-2021" + System.lineSeparator()
+                + "25-00-2021" + System.lineSeparator()
+                + "16-23-2021" + System.lineSeparator()
+                + "08-12-2020";
+        System.setIn(new ByteArrayInputStream(scannerInputs.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        testTrip1.setDateOfTrip("29-02-2021");
+        assertEquals("08 Dec 2020", testTrip1.getDateOfTripString());
+    }
+
+    @Test
     public void testEditDateFull() {
+        createNewTripForTest();
         String userInput = "edit last -date 09-01-1990";
         Parser.parseUserInput(userInput);
         Trip tripToCheck = Storage.getLastTrip();
@@ -102,10 +148,18 @@ class TripTest {
     @Test
     public void testEditExRateNotParsable() throws ForceCancelException {
         System.setIn(new ByteArrayInputStream("6.1".getBytes()));
-        Scanner scanner = new Scanner(System.in);
-        Storage.setScanner(scanner);
+        Storage.setScanner(new Scanner(System.in));
         testTrip1.setExchangeRate("something");
         assertEquals(6.1, testTrip1.getExchangeRate());
+    }
+
+    @Test
+    public void testEditExRateNotParsableWithForceCancel() {
+        assertThrows(ForceCancelException.class, () -> {
+            System.setIn(new ByteArrayInputStream("-cancel".getBytes()));
+            Storage.setScanner(new Scanner(System.in));
+            testTrip1.setExchangeRate("something");
+        });
     }
 
     @Test
@@ -114,6 +168,78 @@ class TripTest {
         Parser.parseUserInput(userInput);
         Trip tripToCheck = Storage.getLastTrip();
         assertEquals(0.01, tripToCheck.getExchangeRate());
+    }
+
+    @Test
+    public void testOpenTripByIndex() throws ForceCancelException {
+        createNewTripForTest();
+        Storage.setOpenTrip(0);
+        assertTrue(Storage.checkOpenTrip());
+        assertEquals(Storage.getOpenTrip(), Storage.getListOfTrips().get(0));
+        assertEquals(Storage.getLastTrip(), Storage.getListOfTrips().get(0));
+    }
+
+    @Test
+    public void testCloseTrip() throws ForceCancelException {
+        Storage.setOpenTrip(0);
+        Trip trip = Storage.getOpenTrip();
+        Storage.closeTrip();
+        assertFalse(Storage.checkOpenTrip());
+        assertEquals(Storage.getLastTrip(), trip);
+    }
+
+    @Test
+    public void testOpenTripFull() throws ForceCancelException {
+        createNewTripForTest();
+        String userInput = "open 1";
+        Parser.parseUserInput(userInput);
+        assertTrue(Storage.checkOpenTrip());
+        assertEquals(Storage.getOpenTrip(), Storage.getListOfTrips().get(0));
+        assertEquals(Storage.getLastTrip(), Storage.getListOfTrips().get(0));
+    }
+
+    @Test
+    public void testCloseTripFull() throws ForceCancelException {
+        Storage.setOpenTrip(0);
+        Trip trip = Storage.getOpenTrip();
+        String userInput = "close";
+        Parser.parseUserInput(userInput);
+        assertFalse(Storage.checkOpenTrip());
+        assertEquals(Storage.getLastTrip(), trip);
+    }
+
+    @Test
+    public void testOpenTripNull() throws ForceCancelException {
+        System.setIn(new ByteArrayInputStream("1".getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        createNewTripForTest();
+        Storage.setOpenTrip(0);
+        Storage.closeTrip();
+        assertFalse(Storage.checkOpenTrip());
+        Storage.getOpenTrip();
+        assertEquals(Storage.getOpenTrip(), Storage.getListOfTrips().get(0));
+        assertEquals(Storage.getLastTrip(), Storage.getListOfTrips().get(0));
+    }
+
+    @Test
+    public void testDeleteTripFull() {
+        createNewTripForTest();
+        Storage.closeTrip();
+        String userInput = "delete 1";
+        Parser.parseUserInput(userInput);
+        assertEquals(0, Storage.getListOfTrips().size());
+        assertNull(Storage.getLastTrip());
+    }
+
+    @Test
+    public void setListOfPersons_EmptyList() throws SameNameException, ForceCancelException {
+        System.setIn(new ByteArrayInputStream("me, someone".getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Trip trip = new Trip();
+        trip.setListOfPersons(new ArrayList<>());
+        ArrayList<Person> listOfPersons = trip.getListOfPersons();
+        assertEquals("me", listOfPersons.get(0).getName());
+        assertEquals("someone", listOfPersons.get(1).getName());
     }
 
     @Test
@@ -154,7 +280,13 @@ class TripTest {
         assertTrue(true);
     }
 
+    @AfterAll
+    static void restore() {
+        System.setIn(origIn);
+    }
+
     private void createNewTripForTest() {
+        Storage.setListOfTrips(new ArrayList<>());
         String userInput = "create /United States of America /02-02-2021 /USD /0.74 /Ben, Jerry, Tom, Harry, Dick";
         Parser.parseUserInput(userInput);
     }

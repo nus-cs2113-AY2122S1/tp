@@ -595,7 +595,7 @@ public class Ui {
 
     public static void duplicateTripWarning() {
         System.out.println("A trip with similar information may already exist. Please confirm if you wish to proceed"
-                + "with creating this trip.");
+                + " with creating this trip.");
         System.out.print("Enter 'y' if you wish to create this trip, or 'n' to cancel: ");
     }
 }

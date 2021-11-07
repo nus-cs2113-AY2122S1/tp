@@ -277,8 +277,9 @@ public class Trip implements FilterFinder {
         if (location.isBlank()) {
             Ui.locationIsBlank();
             setLocation(Ui.receiveUserInput());
+        } else {
+            this.location = location;
         }
-        this.location = location;
     }
 
     public Expense getLastExpense() {
