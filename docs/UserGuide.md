@@ -413,6 +413,7 @@ Deletes Tasks specified in comma-seperated argument.
    - `delete 1,3,5` would delete tasks with indexes 1, 3 and 5.
    - `delete 1-3` would delete tasks with indexes 1, 2 and 3.
    - `delete 1-3, 5` would delete tasks with indexes 1, 2, 3 and 5.
+   - `delete 5` would delete the task with index 5.
       >💡 **Note**: Whether there are any spaces between the commas, it does not matter.
 
 
@@ -500,12 +501,13 @@ Action   | Format                                           | Example           
 -------- | -------------------------------------------------| -----------------------------------------------------------------------------------------------------|
 help     | `help`                                           | `help`                                                                                               |
 todo     | `todo <description> [--flag <argument>]`         | `todo read book`                                                                                     |
-deadline | `deadline <description> [--flag <argument>]`     |`deadline CS2106 Lab 3 --priority high --due 20-10-2021 02:00:00`                                     |
-event    | `event <description> [--flag <argument>]`        | `event Marquee Christmas Party --priority high --start 25-12-2020 22:00:00 --end 26-12-2020 04:00:00`|
+deadline | `deadline <description> [--flag <argument>]`     |`deadline CS2106 Lab 3 --priority high --due 20-10-2021 02:00`                                        |
+event    | `event <description> [--flag <argument>]`        | `event Marquee Christmas Party --priority high --start 25-12-2020 22:00:00 --end 26-12-2020 04:00`   |
 module   | `module {<module code>:{<class number>,}...;}...`| `module CS2113T:C02;LAJ2203:1,A2,B4`                                                                 | 
 browse   | `browse <index>`                                 | `browse 2`                                                                                           |
 list     | `list [--filter <argument>]` or `list [task id]` | `list` or `list --type todo --priority medium` or `list 3`                                           |
 reminder |                                                  |                                                                                                      |
 sort     | `sort --by <criteria>`                           | `sort --by priority`                                                                                 |
-delete   | `delete <indexes of tasks to delete>`            | `delete 1, 2, 4-7`                                                                                   |
+delete   | `delete <index(es) of task(s) to delete>`        | `delete 1, 2, 4-7`                                                                                   |
+edit     | `edit <index of task to delete>`                 | `edit 3`                                                                                             |
 bye      | `bye`                                            | `bye`                                                                                                |
