@@ -25,6 +25,23 @@ public abstract class RegexParser {
         TELEGRAM_FLAG, TWITTER_FLAG, EMAIL_FLAG};
     private static final Logger LOGGER = Logger.getLogger(RegexParser.class.getName());
 
+    /**
+     * Throws an exception if the field does not comply with the regex.
+     * If the field passes the regex check nothing is returned and program
+     * flow continues.
+     * The flag provided is checked in a switch case to invoke the respective
+     * function to check the regex of the field.
+     *
+     * @param flag          field type
+     * @param detailToParse field contents
+     * @throws InvalidGithubUsernameException   If GitHub username does not match regex
+     * @throws InvalidNameException             If Name does not match regex
+     * @throws InvalidFlagException             If flag is invalid
+     * @throws InvalidTelegramUsernameException If Telegram username does not match regex
+     * @throws InvalidTwitterUsernameException  If Twitter username does not match regex
+     * @throws InvalidLinkedinUsernameException If LinkedIn username does not match regex
+     * @throws InvalidEmailException            If Email does not match regex
+     */
     public void checkRegex(String flag, String detailToParse)
             throws InvalidGithubUsernameException, InvalidNameException, InvalidFlagException,
             InvalidTelegramUsernameException, InvalidTwitterUsernameException,
