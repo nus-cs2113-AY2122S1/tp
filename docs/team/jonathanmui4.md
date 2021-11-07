@@ -47,7 +47,7 @@ Given below are my contributions to the project.
       - Added `Launch and Shutdown` and `Saving data` components in Instructions for Manual Testing.
 
 - **Project Management**:
-    - Managed releases `v1.0`-`v2.0` (2 releases) on GitHub.
+    - Managed releases `v1.0`-`v2.1` (3 releases) on GitHub.
 
 - **Community**:
     - PRs reviewed (with non-trivial review comments): [#59](https://github.com/AY2122S1-CS2113T-F12-2/tp/pull/59#discussion_r725626678), 
