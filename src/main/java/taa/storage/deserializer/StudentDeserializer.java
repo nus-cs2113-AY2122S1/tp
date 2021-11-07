@@ -35,10 +35,10 @@ public class StudentDeserializer extends StorageDeserializer implements JsonDese
         }
 
         JsonElement idJson = jsonObject.get(MEMBER_ID);
-        String id = idJson.getAsString();
+        String id = getJsonElementAsString(idJson);
 
         JsonElement nameJson = jsonObject.get(MEMBER_NAME);
-        String name = nameJson.getAsString();
+        String name = getJsonElementAsString(nameJson);
 
         if (!Parser.isValueValid(id) || !Parser.isValueValid(name)) {
             return null;
@@ -48,7 +48,7 @@ public class StudentDeserializer extends StorageDeserializer implements JsonDese
 
         JsonElement commentJson = jsonObject.get(MEMBER_COMMENT);
         if (commentJson != null) {
-            String comment = commentJson.getAsString();
+            String comment = getJsonElementAsString(commentJson);
             if (Parser.isValueValid(comment)) {
                 student.setComment(comment);
             }

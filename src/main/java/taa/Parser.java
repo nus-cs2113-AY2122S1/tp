@@ -308,6 +308,10 @@ public class Parser {
      * @return true if it is valid, else false.
      */
     public static boolean isValueValid(String value) {
+        if (value == null) {
+            return false;
+        }
+
         if (value.isEmpty()) {
             return true;
         }

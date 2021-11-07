@@ -17,7 +17,7 @@ public class Util {
      * @return true if string can convert to integer, else false.
      */
     public static boolean isStringInteger(String string) {
-        if (string.isEmpty()) {
+        if (string == null || string.isEmpty()) {
             return false;
         }
 
@@ -39,7 +39,7 @@ public class Util {
      * @return true if string can convert to double, else false.
      */
     public static boolean isStringDouble(String string) {
-        if (string.isEmpty()) {
+        if (string == null || string.isEmpty()) {
             return false;
         }
 
@@ -61,7 +61,7 @@ public class Util {
      * @return true if string can convert to boolean, else false.
      */
     public static boolean isStringBoolean(String string) {
-        if (string.isEmpty()) {
+        if (string == null || string.isEmpty()) {
             return false;
         }
 

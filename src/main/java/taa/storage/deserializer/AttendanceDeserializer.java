@@ -26,17 +26,22 @@ public class AttendanceDeserializer extends StorageDeserializer implements JsonD
         }
 
         JsonElement lessonNumberJson = jsonObject.get(MEMBER_LESSONNUMBER);
-        if (!Util.isStringInteger(lessonNumberJson.getAsString())) {
+        if (!Util.isStringInteger(getJsonElementAsString(lessonNumberJson))) {
             return null;
         }
         int lessonNumber = lessonNumberJson.getAsInt();
 
         JsonElement isPresentJson = jsonObject.get(MEMBER_ISPRESENT);
-        String isPresentString = isPresentJson.getAsString().toLowerCase();
-        if (!Util.isStringBoolean(isPresentString)) {
+        String isPresentString = getJsonElementAsString(isPresentJson);
+        if (isPresentString == null) {
             return null;
         }
-        boolean isPresent = Boolean.parseBoolean(isPresentString);
+
+        String isPresentStringLower = isPresentString.toLowerCase();
+        if (!Util.isStringBoolean(isPresentStringLower)) {
+            return null;
+        }
+        boolean isPresent = Boolean.parseBoolean(isPresentStringLower);
 
         Attendance attendance = new Attendance(lessonNumber, isPresent);
         if (!attendance.verify()) {

@@ -34,10 +34,13 @@ public class TeachingClassDeserializer extends StorageDeserializer implements Js
         }
 
         JsonElement idJson = jsonObject.get(MEMBER_ID);
-        String id = idJson.getAsString();
+        String id = getJsonElementAsString(idJson);
 
         JsonElement nameJson = jsonObject.get(MEMBER_NAME);
-        String name = nameJson.getAsString();
+        String name = getJsonElementAsString(nameJson);
+        if (name == null) {
+            name = "";
+        }
 
         if (!Parser.isValueValid(id) || !Parser.isValueValid(name)) {
             return null;
