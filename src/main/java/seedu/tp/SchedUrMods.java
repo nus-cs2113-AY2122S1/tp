@@ -52,7 +52,7 @@ public class SchedUrMods {
     }
 
     public static void main(String[] args) {
-        SchedUrMods duke = new SchedUrMods();
-        duke.startProgram();
+        SchedUrMods schedUrMods = new SchedUrMods();
+        schedUrMods.startProgram();
     }
 }

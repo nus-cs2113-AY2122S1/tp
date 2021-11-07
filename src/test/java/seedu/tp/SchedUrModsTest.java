@@ -7,7 +7,7 @@ import seedu.tp.ui.Ui;
 
 import java.io.InputStream;
 
-class DukeTest {
+class SchedUrModsTest {
     @Test
     public void sampleTest() {
         assertTrue(true);
