@@ -51,7 +51,8 @@ public abstract class Command {
     protected static final String MESSAGE_INVALID_STUDENT_INDEX = "Invalid student index.";
     protected static final String MESSAGE_INVALID_LESSON_NUMBER = "Invalid lesson number.";
     protected static final String MESSAGE_INVALID_ASSESSMENT_NAME = "Invalid assessment name.";
-    protected static final String MESSAGE_INVALID_MARKS = "Invalid marks. Marks must be a double with at most 2 decimal points.";
+    protected static final String MESSAGE_INVALID_MARKS = "Invalid marks. Marks must be a double with at most 2 "
+            + "decimal points.";
     protected static final String MESSAGE_NO_STUDENTS = "There are no students in this class";
     protected static final String MESSAGE_NO_MARKS = "This student has not been marked yet.";
     protected static final String MESSAGE_ALREADY_MARKED = "This student has already been marked.";

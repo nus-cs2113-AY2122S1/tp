@@ -130,7 +130,7 @@ public class Student implements ClassChecker {
     }
 
     /**
-     * Changes the assessment name in the results Hashmap from oldName to newName
+     * Changes the assessment name in the results Hashmap from oldName to newName.
      * @param oldName Previous assessment name
      * @param newName New assessment name
      */
