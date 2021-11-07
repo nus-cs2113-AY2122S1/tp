@@ -37,12 +37,18 @@ class StorageTest {
     private static final String APPOINTMENT_DATA_INVALID = "src/test/data/StorageTest/appointmentData-invalid.txt";
     private static final String APPOINTMENT_DATA_VALID = "src/test/data/StorageTest/appointmentData-valid.txt";
     private static final String APPOINTMENT_DATA_SAVED = "src/test/data/StorageTest/appointmentData-saved.txt";
-    private static final String ERROR_INVALID_STORAGE_LINE_INSTRUCTION = "\n\n"
-            + "Please decide if you wish to:" + "\n"
-            + "1. Enter 'exit' to exit MedBot to correct the storage file" + "\n"
-            + "2. Enter other valid commands to OVERWRITE all invalid data!" + "\n";
 
-
+    /**
+     * Loads Patient Storage with a mix of valid storage lines and invalid storage lines.
+     * Tests for both correct error message and correct loading of storage.
+     * <p>
+     * Expected: patients added through the program
+     * Actual: Patients added through loading storage
+     *
+     * @throws MedBotException       if unable to initialize PatientStorageStub or
+     *                               getTestPatientListStorageString() fails.
+     * @throws FileNotFoundException if unable to load patient storage.
+     */
     @Test
     public void testLoadPatientStorage_partialInvalidFormat()
             throws MedBotException, FileNotFoundException {
@@ -59,13 +65,21 @@ class StorageTest {
         String expectedStorageString = getTestPatientListStorageString();
         String actualStorageString = actualScheduler.getPatientStorageString();
 
-        //Test for both correct error message and correct loading of storage
         assertEquals(expectedLoadStorageErrorMessage, actualLoadStorageErrorMessage);
         assertEquals(expectedStorageString, actualStorageString);
     }
 
-    // expected: patients added through the program
-    // actual: patients added through loading storage
+    /**
+     * Loads Patient Storage with only valid storage lines.
+     * Tests for both correct error message (none here) and correct loading of storage.
+     * <p>
+     * Expected: patients added through the program
+     * Actual: Patients added through loading storage
+     *
+     * @throws FileNotFoundException if unable to load patient storage.
+     * @throws MedBotException       if unable to initialize PatientStorageStub or
+     *                               getTestPatientListStorageString() fails.
+     */
     @Test
     public void testLoadPatientStorage_validFormat() throws FileNotFoundException, MedBotException {
         PatientStorage patientStorage = new PatientStorageStub(PATIENT_DATA_VALID);
@@ -77,13 +91,22 @@ class StorageTest {
         String expectedStorageString = getTestPatientListStorageString();
         String actualStorageString = actualScheduler.getPatientStorageString();
 
-        //Test for both correct error message and correct loading of storage
         assertEquals(expectedLoadStorageErrorMessage, actualLoadStorageErrorMessage);
         assertEquals(expectedStorageString, actualStorageString);
-
     }
 
 
+    /**
+     * Loads Staff Storage with a mix of valid storage lines and invalid storage lines.
+     * Tests for both correct error message and correct loading of storage.
+     * <p>
+     * Expected: staff added through the program
+     * Actual: staff added through loading storage
+     *
+     * @throws MedBotException       if unable to initialize StaffStorageStub or
+     *                               getTestStaffListStorageString() fails.
+     * @throws FileNotFoundException if unable to load staff storage.
+     */
     @Test
     public void testLoadStaffStorage_partialInvalidFormat() throws MedBotException, FileNotFoundException {
         StaffStorage staffStorage = new StaffStorageStub(STAFF_DATA_INVALID);
@@ -99,11 +122,21 @@ class StorageTest {
         String expectedStorageString = getTestStaffListStorageString();
         String actualStorageString = actualScheduler.getStaffStorageString();
 
-        //Test for both correct error message and correct loading of storage
         assertEquals(expectedLoadStorageErrorMessage, actualLoadStorageErrorMessage);
         assertEquals(expectedStorageString, actualStorageString);
     }
 
+    /**
+     * Loads Staff Storage with only valid storage lines.
+     * Tests for both correct error message (none) and correct loading of storage.
+     * <p>
+     * Expected: staff added through the program
+     * Actual: staff added through loading storage
+     *
+     * @throws MedBotException       if unable to initialize StaffStorageStub or
+     *                               getTestStaffListStorageString() fails.
+     * @throws FileNotFoundException if unable to load staff storage.
+     */
     @Test
     public void testLoadStaffStorage_validFormat() throws MedBotException, FileNotFoundException {
         StaffStorage staffStorage = new StaffStorageStub(STAFF_DATA_VALID);
@@ -115,11 +148,21 @@ class StorageTest {
         String expectedStorageString = getTestStaffListStorageString();
         String actualStorageString = actualScheduler.getStaffStorageString();
 
-        //Test for both correct error message and correct loading of storage
         assertEquals(expectedLoadStorageErrorMessage, actualLoadStorageErrorMessage);
         assertEquals(expectedStorageString, actualStorageString);
     }
 
+    /**
+     * Loads Appointment Storage with a mix of valid storage lines and invalid storage lines.
+     * Tests for both correct error message and correct loading of storage.
+     * <p>
+     * Expected: appointment added through the program
+     * Actual: appointment added through loading storage
+     *
+     * @throws MedBotException       if unable to initialize StaffStorageStub or
+     *                               getTestAppointmentListStorageString() fails.
+     * @throws FileNotFoundException if unable to load appointment storage.
+     */
     @Test
     public void testLoadAppointmentStorage_partialInvalidFormat() throws MedBotException, FileNotFoundException {
         PatientStorage patientStorage = new PatientStorageStub(PATIENT_DATA_VALID);
@@ -147,6 +190,17 @@ class StorageTest {
         assertEquals(expectedStorageString, actualStorageString);
     }
 
+    /**
+     * Loads Appointment Storage with only valid storage lines.
+     * Tests for both correct error message (none) and correct loading of storage.
+     * <p>
+     * Expected: appointment added through the program
+     * Actual: appointment added through loading storage
+     *
+     * @throws MedBotException       if unable to initialize StaffStorageStub or
+     *                               getTestAppointmentListStorageString() fails.
+     * @throws FileNotFoundException if unable to load appointment storage.
+     */
     @Test
     public void testLoadAppointmentStorage_validFormat() throws MedBotException, FileNotFoundException {
         PatientStorage patientStorage = new PatientStorageStub(PATIENT_DATA_VALID);
@@ -170,9 +224,17 @@ class StorageTest {
     }
 
 
+    /**
+     * Test the saving of data of to all three storage files.
+     * <p>
+     * Expected: Scanned contents from storage files with the expected contents.
+     * Actual: Scanned contents from the storage files that were created from this test.
+     *
+     * @throws MedBotException if unable to initialize any of the StorageStubs or any
+     *                         getTest(*)ListStorageString() fails.
+     */
     @Test
     public void testSaveData() throws MedBotException {
-        //create test storage files
         PatientStorage patientStorage = new PatientStorageStub(PATIENT_DATA_SAVED);
         StaffStorage staffStorage = new StaffStorageStub(STAFF_DATA_SAVED);
         AppointmentStorage appointmentStorage = new AppointmentStorageStub(APPOINTMENT_DATA_SAVED);
@@ -182,7 +244,6 @@ class StorageTest {
         String expectedTestAppointmentString = getTestAppointmentListStorageString();
 
         try {
-            //SAVE all storage data
             patientStorage.saveData(expectedPatientStorageString);
             staffStorage.saveData(expectedStaffStorageString);
             appointmentStorage.saveData(expectedTestAppointmentString);
@@ -322,7 +383,7 @@ class StorageTest {
                                 String residentialAddress)
             throws MedBotException {
 
-        Person person = null;
+        Person person;
         switch (personType) {
         case PATIENT:
             person = new Patient();

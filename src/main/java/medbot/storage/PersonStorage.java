@@ -87,11 +87,9 @@ public abstract class PersonStorage extends Storage {
         Integer listItemId = Integer.parseInt(listItemParameters[0]);
 
         for (int i = 0; i < parameterPrefixes.length; i++) {
-            // i + 1, since listItemParameters[0] is the listItemId
             if (isStorageParameterNull(listItemParameters[i + 1])) {
                 continue;
             }
-            // i + 1, since listItemParameters[0] is the listItemId
             String prefixPlusListItemParameter = parameterPrefixes[i] + listItemParameters[i + 1];
             prefixPlusListItemParameters.add(prefixPlusListItemParameter);
         }

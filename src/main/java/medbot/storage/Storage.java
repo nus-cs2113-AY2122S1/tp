@@ -21,7 +21,7 @@ public abstract class Storage {
     protected static final String ERROR_CREATE_STORAGE = "\nERROR: MedBot is unable to create/detect"
             + " its storage files.\n";
     public static final String ERROR_SAVE_STORAGE = "\nERROR: MedBot is unable to save data into its storage files.\n";
-    public static final String ERROR_MOVE_STORAGE_FILES = "\nPlease manually move medbot.jar to "
+    public static final String ERROR_MOVE_STORAGE_FILES = "\nPlease manually move tp.jar to "
             + "a location where it has read and write privileges before running it again.\n\n"
             + "Exiting MedBot...\n";
     protected static final String ERROR_NOT_LIST_ITEM = "Not a list item";
