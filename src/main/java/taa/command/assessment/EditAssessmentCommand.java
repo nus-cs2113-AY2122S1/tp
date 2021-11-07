@@ -13,6 +13,7 @@ import taa.storage.Storage;
 import taa.util.Util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EditAssessmentCommand extends Command {
     private static final String KEY_CLASS_ID = "c";
@@ -37,6 +38,8 @@ public class EditAssessmentCommand extends Command {
     private static final String MESSAGE_FORMAT_INVALID_NEW_MAXIMUM_MARKS = "Invalid new maximum marks. "
         + "Maximum marks must be a number with at most 2 decimal places "
         + "between %,.2f (inclusive) and %,.2f (inclusive).";
+    private static final String MESSAGE_FORMAT_NEW_MAXIMUM_MARKS_EXCEED_STUDENTS_CURRENT_MARKS =
+        "Invalid new maximum marks. New maximum marks exceed the current marks of %d student(s).";
     private static final String MESSAGE_FORMAT_INVALID_NEW_NAME = "Invalid new name. "
         + "An assessment with the same name already exists.";
     private static final String MESSAGE_FORMAT_ASSESSMENT_EDITED = "Assessment in %s updated:\n  %s";
@@ -122,7 +125,12 @@ public class EditAssessmentCommand extends Command {
         String newMaximumMarksString = argumentMap.getOrDefault(KEY_NEW_MAXIMUM_MARKS, null);
         boolean hasValidNewMaximumMarks = false;
         if (newMaximumMarksString != null) {
-            hasValidNewMaximumMarks = checkMaximumMarks(newMaximumMarksString);
+            hasValidNewMaximumMarks = checkMaximumMarks(name, newMaximumMarksString, teachingClass);
+            if (!hasValidNewMaximumMarks) {
+                int numberOfStudentsExceedingNewMaximumMarks = countNumberOfStudentsExceedingNewMaximumMarks(name, newMaximumMarksString, teachingClass);
+                throw new TaaException(String.format(MESSAGE_FORMAT_NEW_MAXIMUM_MARKS_EXCEED_STUDENTS_CURRENT_MARKS,
+                        numberOfStudentsExceedingNewMaximumMarks));
+            }
         }
 
         String newName = argumentMap.getOrDefault(KEY_NEW_ASSESSMENT_NAME, null);
@@ -180,8 +188,9 @@ public class EditAssessmentCommand extends Command {
         return true;
     }
 
-    public boolean checkMaximumMarks(String newMaximumMarksString) throws TaaException {
+    public boolean checkMaximumMarks(String name, String newMaximumMarksString, TeachingClass teachingClass) throws TaaException {
         assert Util.isStringDouble(newMaximumMarksString, 2);
+        ArrayList<Student> students = teachingClass.getStudentList().getStudents();
         double newMaximumMarks = Double.parseDouble(newMaximumMarksString);
         if (!Assessment.isMaximumMarksValid(newMaximumMarks)) {
             throw new TaaException(String.format(
@@ -190,7 +199,40 @@ public class EditAssessmentCommand extends Command {
                     Assessment.MAXIMUM_MARKS_RANGE[1])
             );
         }
+        String nameWithCorrectCase = teachingClass.getAssessmentList().getAssessment(name).getName();
+        for (Student s : students) {
+            HashMap<String, Double> results = s.getResults();
+            Double mark = results.get(nameWithCorrectCase);
+            if (mark != null) {
+                int validNewMaximumMarks = Double.compare(newMaximumMarks, mark);
+                boolean isNewMaximumMarksValid = validNewMaximumMarks >= 0;
+                if (!isNewMaximumMarksValid) {
+                    return false;
+                }
+            }
+        }
         return true;
+    }
+
+    public int countNumberOfStudentsExceedingNewMaximumMarks(String name, String newMaximumMarksString, TeachingClass teachingClass) {
+        assert Util.isStringDouble(newMaximumMarksString, 2);
+        ArrayList<Student> students = teachingClass.getStudentList().getStudents();
+        double newMaximumMarks = Double.parseDouble(newMaximumMarksString);
+        assert Assessment.isMaximumMarksValid(newMaximumMarks);
+        String nameWithCorrectCase = teachingClass.getAssessmentList().getAssessment(name).getName();
+        int numberOfStudentsExceedingNewMaximumMarks = 0;
+        for (Student s : students) {
+            HashMap<String, Double> results = s.getResults();
+            Double mark = results.get(nameWithCorrectCase);
+            if (mark != null) {
+                int validNewMaximumMarks = Double.compare(newMaximumMarks, mark);
+                boolean isNewMaximumMarksValid = validNewMaximumMarks >= 0;
+                if (!isNewMaximumMarksValid) {
+                    numberOfStudentsExceedingNewMaximumMarks += 1;
+                }
+            }
+        }
+        return numberOfStudentsExceedingNewMaximumMarks;
     }
 
     public boolean checkNewName(String newName, AssessmentList assessmentList, Assessment assessment)
