@@ -175,8 +175,8 @@ the high level representation of the component.
 
 **API:** `Parser.java`
 
-1. A user input is given to `MainParser` that determines which subclass of `Parser` is required
-2. Inputs starting with `help`, `return`, and `exit` are handled by `MainParser`
+1. A user input is given to `ParserManager` that determines which subclass of `Parser` is required
+2. Inputs starting with `help`, `return`, and `exit` are handled by `ParserManager`
 3. Other inputs are handled by `Parser`, which has a total of 7 subclasses
 4. `AddParser` handles the parsing of inputs starting with `set` and `add`
 5. `DeleteParser` handles the parsing of inputs starting with `remove` and `delete`
@@ -316,6 +316,7 @@ sequence diagram below is then carried out:
 ### 4.4. Listing all Habits
 
 A `ListHabitCommand` object is returned from the `ListHabitParser` if the users input is successfully parsed as shown below.
+If no goal index or invalid goal index is detected, an exception is thrown.
 
 ![](Diagram Images/Implementation Diagram Images/ListHabitsCommandParserSequenceDiagram.png)
 
@@ -339,7 +340,15 @@ Goal or the Habit is detected, an exception will be thrown.
 
 ### 4.6. Updating a Goal
 
+A `UpdateGoalCommand` object is returned from the `UpdateParser` if the users input is successfully parsed as shown below.
+
+The `runCommand` method is then executed for the `UpdateGoalCommand` object as seen.
+
 ### 4.7. Updating a Habit
+
+A `UpdateHabitCommand` object is returned from the `UpdateParser` if the users input is successfully parsed as shown below.
+
+The `runCommand` method is then executed for the `UpdateHabitCommand` object as seen.
 
 ### 4.8. Deleting a Goal
 
