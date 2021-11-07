@@ -8,7 +8,7 @@ import seedu.duke.Ui;
 
 import java.util.HashMap;
 
-interface ExpenseSplitter {
+public interface ExpenseSplitter {
     double EPSILON = 0.001;
 
     //@@author joshualeeky
