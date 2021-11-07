@@ -70,7 +70,11 @@ public class Terminus {
                 "Check 'terminus.log' for more information."
             );
         } catch (InvalidFileException e) {
-            ui.printSection(e.getMessage());
+            TerminusLogger.warning("Data file loading has failed.", e.fillInStackTrace());
+            ui.printSection(e.getMessage(),
+                "TermiNUS may still run, but your data may not have loaded properly.",
+                "Check 'terminus.log' for more information."
+            );
         }
 
         if (this.moduleManager == null) {
@@ -127,6 +131,7 @@ public class Terminus {
             TerminusLogger.info("Saving data into file...");
             this.storageManager.updateMainJsonFile(moduleManager);
         } catch (InvalidFileException ex) {
+            this.storageManager.setDisabled(true);
             ui.printSection(ex.getMessage());
             ui.printSection(Messages.ERROR_STORAGE_DISABLE_RESPONSE);
         }

@@ -129,8 +129,13 @@ public class StorageManager {
         }
 
         // Filter
-        FilterManager filterManager = new FilterManager();
-        filterManager.filter(moduleManager);
+        try {
+            FilterManager filterManager = new FilterManager();
+            filterManager.filter(moduleManager);
+        } catch (Exception e) {
+            throw new InvalidFileException(Messages.ERROR_JSON_FILTER);
+        }
+
 
         // Load Notes
         for (String module : moduleManager.getAllModules()) {

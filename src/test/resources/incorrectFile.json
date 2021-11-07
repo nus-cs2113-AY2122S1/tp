@@ -1,5 +1,6 @@
 {
   "moduleMap": {
+    "VALID": null,
     "with spaces": {
       "linkManager": {
         "contents": []
@@ -50,7 +51,7 @@
           {
             "day": "tuesday",
             "startTime": {
-              "hour": 1121,
+              "hour": 99,
               "minute": 11,
               "second": 0,
               "nano": 0
@@ -107,6 +108,7 @@
             "link": "https://zoom.us/",
             "name": "test"
           },
+          null,
           {
             "day": "tuesday",
             "startTime": {
@@ -124,9 +126,7 @@
       "questionManager": {
         "contents": [
           {
-            "weight": null,
-            "name": "s",
-            "data": "s"
+
           },
           {
             "weight": 0.36048851650742564,
@@ -139,7 +139,13 @@
             "data": "System under test"
           },
           {
-            "weight": 10000000000000000000,
+            "weight": NaN,
+            "name": "aasas",
+            "data": "System under test"
+          },
+          null,
+          {
+            "weight": 0.3,
             "name": "What is Java?",
             "data": "It is a programming language."
           }

@@ -1,14 +1,15 @@
 package terminus.storage;
 
-import com.itextpdf.io.font.constants.StandardFonts;
-import com.itextpdf.kernel.font.PdfFont;
-import com.itextpdf.kernel.font.PdfFontFactory;
-import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Paragraph;
+import com.lowagie.text.Document;
+import com.lowagie.text.Font;
+import com.lowagie.text.FontFactory;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
+import java.awt.Color;
+import java.io.FileOutputStream;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.common.TerminusLogger;
 import terminus.content.ContentManager;
@@ -76,20 +77,20 @@ public class PdfStorage extends Storage {
             if (noteArrayList.isEmpty()) {
                 throw new Exception();
             }
-            Document tempDocument = new Document(new PdfDocument(new PdfWriter(pdfFile.toFile())));
-            PdfFont font = PdfFontFactory.createFont(StandardFonts.HELVETICA);
+            Document tempDocument = new Document();
+            final PdfWriter writer = PdfWriter.getInstance(tempDocument, new FileOutputStream(pdfFile.toString()));
+            Font header = FontFactory
+                .getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_HEADER_SIZE, Font.BOLD, Color.BLACK);
+            Font text = FontFactory.getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_SIZE, Color.BLACK);
+            tempDocument.open();
             for (Note note : noteArrayList) {
-                Paragraph title = new Paragraph(note.getName())
-                    .setFont(font)
-                    .setFontSize(14)
-                    .setBold();
-                Paragraph content = new Paragraph(note.getData())
-                    .setFont(font)
-                    .setFontSize(11);
+                Paragraph title = new Paragraph(note.getName(), header);
+                Paragraph content = new Paragraph(note.getData(), text);
                 tempDocument.add(title);
                 tempDocument.add(content);
             }
             tempDocument.close();
+            writer.close();
         } catch (Exception e) {
             throw new InvalidFileException(Messages.FAIL_TO_EXPORT);
         }
