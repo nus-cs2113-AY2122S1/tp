@@ -184,7 +184,8 @@ class AssessmentListTest {
             command2.execute(classList, ui, storage);
         } catch (Exception e) {
             assertEquals("Invalid maximum marks. "
-                    + "Maximum marks must a number be between 0.00 (inclusive) and 1,000.00 (inclusive).", e.getMessage());
+                    + "Maximum marks must a number be between 0.00 (inclusive) and 1,000.00 (inclusive).",
+                    e.getMessage());
         }
     }
 
@@ -333,7 +334,8 @@ class AssessmentListTest {
             command3.execute(classList, ui, storage);
         } catch (Exception e) {
             assertEquals("Invalid new maximum marks. "
-                    + "Maximum marks must a number be between 0.00 (inclusive) and 1,000.00 (inclusive).", e.getMessage());
+                    + "Maximum marks must a number be between 0.00 (inclusive) and 1,000.00 (inclusive).",
+                    e.getMessage());
         }
     }
 
