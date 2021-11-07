@@ -12,7 +12,7 @@ public class FinanceParser {
     /**
      * Adds a new account to the Finance list.
      *
-     * @param command User's command in ArrayList format.
+     * @param command  User's command in ArrayList format.
      * @param finances User's finance list.
      */
     public void addFinance(String[] command, FinanceList finances) {
@@ -35,7 +35,7 @@ public class FinanceParser {
      * Adds a new account to the finance list without printing any messages.
      *
      * @param finances User's finance list.
-     * @param account Account to be added.
+     * @param account  Account to be added.
      */
     public void loadFinanceFromStorage(FinanceList finances, Finance account) {
         finances.financeList.add(account);
@@ -45,7 +45,7 @@ public class FinanceParser {
     /**
      * Removes an existing account from the menu.
      *
-     * @param command User's command in ArrayList format.
+     * @param command  User's command in ArrayList format.
      * @param finances User's finance list.
      */
     public void deleteFinance(String[] command, FinanceList finances) {
@@ -94,7 +94,7 @@ public class FinanceParser {
     /**
      * Edits the number of an existing account in the finance list.
      *
-     * @param command User's command in ArrayList format.
+     * @param command  User's command in ArrayList format.
      * @param finances User's finance list.
      */
     public void editFinance(String[] command, FinanceList finances) {

@@ -38,15 +38,15 @@ public class DishParser {
         }
         return true;
     }
-    
+
     /**
      * Checks whether the dish to be added is already in the menu.
      *
      * @param dishName Name of the dish to be added.
-     * @param menu Menu of the user.
+     * @param menu     Menu of the user.
      * @return Boolean representing whether the dish to be added is already in the menu.
      */
-    public boolean duplicateDishChecker(String dishName, Menu menu){
+    public boolean duplicateDishChecker(String dishName, Menu menu) {
         for (int i = 0; i < menu.menu.size(); i++) {
             if (menu.menu.get(i).getName().equals(dishName)) {
                 DishUI.printDuplicateDishMessage();
@@ -60,7 +60,7 @@ public class DishParser {
      * Adds a new dish to the menu.
      *
      * @param command User's command in ArrayList format.
-     * @param menu User's menu.
+     * @param menu    User's menu.
      */
     public void addDish(String[] command, Menu menu) {
         boolean isValidAddDishCommand = addDishCommandChecker(command);
@@ -88,7 +88,7 @@ public class DishParser {
     /**
      * Checks whether a remove-dish command is in the correct format.
      *
-     * @param command User's command in ArrayList format.
+     * @param command  User's command in ArrayList format.
      * @param menuSize Size of user's menu.
      * @return Boolean representing whether the remove-dish command is in the correct format.
      */
@@ -114,7 +114,7 @@ public class DishParser {
      * Removes an existing dish from the menu.
      *
      * @param command User's command in ArrayList format.
-     * @param menu User's menu.
+     * @param menu    User's menu.
      */
     public void removeDish(String[] command, Menu menu) {
         boolean isValidRemoveDishCommand = removeDishCommandChecker(command, menu.menu.size());
@@ -131,7 +131,7 @@ public class DishParser {
     /**
      * Checks whether an edit-dish command is in the correct format.
      *
-     * @param command User's command in ArrayList format.
+     * @param command  User's command in ArrayList format.
      * @param menuSize Size of user's menu.
      * @return Boolean representing whether the edit-dish command is in the correct format.
      */
@@ -166,7 +166,7 @@ public class DishParser {
      * Edits the price of an existing dish in the menu.
      *
      * @param command User's command in ArrayList format.
-     * @param menu User's menu.
+     * @param menu    User's menu.
      */
     public void editDish(String[] command, Menu menu) {
         boolean isValidEditDishCommand = editDishCommandChecker(command, menu.menu.size());
@@ -183,7 +183,7 @@ public class DishParser {
     /**
      * Checks whether a discount-dish command is in the correct format.
      *
-     * @param command User's command in ArrayList format.
+     * @param command  User's command in ArrayList format.
      * @param menuSize Size of user's menu.
      * @return Boolean representing whether the discount-dish command is in the correct format.
      */
@@ -223,7 +223,7 @@ public class DishParser {
      * Adds a discount to an existing dish in the menu.
      *
      * @param command User's command in ArrayList format.
-     * @param menu User's menu.
+     * @param menu    User's menu.
      */
     public void discountDish(String[] command, Menu menu) {
         boolean isValidDiscountDishCommand = discountDishCommandChecker(command, menu.menu.size());
