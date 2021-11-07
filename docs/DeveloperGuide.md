@@ -214,7 +214,7 @@ The sequence diagram for when the user inputs `alerts all` is shown below.
 
 ![image](images/AlertsAllSequenceDiagram.png)
 
-All constructors for the command classes are called right before the relevant `run()` methods, as in `new XXXCommand().run()`. These are not shown in the diagram for simplicity. 
+All constructors for the command classes are called right before the relevant `run()` methods, as in `new XYZCommand().run()`. These are not shown in the diagram for simplicity. 
 
 The `alerts all` command is passed into the `parser` class's `parse` command, which invokes the `parseAlertsCommand` method.
 
@@ -347,7 +347,7 @@ Here is an overview of what happens when an `expire` command is run:
 1. The command is stored as a string and split by spaces into its 2 parameters, `expire` and the date to search for. The date given is then converted into a `LocalDate`
 object using the `stringToDate` method of the `Ingredient` class.
 
-2. This date is passed into the constructor of the `ExpireCommand` class and its run method is called. This method iterates through the current ingredient list
+2. This date is passed into the constructor of the `ExpireCommand` class and its `run()` method is called. This method iterates through the current ingredient list
 and adds any ingredient whose expiry date and the given date differ by less than 0 days (using the `getNumDaysBetween()` method of the `Command` class) to an `ArrayList`
 object of type `Ingredient`. The ingredients are then sorted by earliest expiring to latest and displayed to the user.
 
