@@ -28,37 +28,6 @@ import java.util.Scanner;
  */
 
 public class Storage {
-    /**
-     * Storage player data for next time use.
-     */
-    public static void savePlayer() {
-
-        if (!Files.exists(Player.DATAPATH)) {
-            System.out.println("Data folder not found!");
-            File dir = new File(Player.DATAPATH.toString());
-            if (dir.mkdir()) {
-                System.out.println("Directory " + Player.DATAPATH + " created...");
-            }
-        }
-
-        Object[] playerMember = {Player.getName(), Player.getEasyRecords(), Player.getDifficultRecords(),
-                Player.getCardsCollected(), Player.getCardsToBeCollected()};
-
-        Path saveFileName = Paths.get(Player.DATAPATH.toString(), Player.PLAYER_FILE_NAME);
-        FileOutputStream fos;
-        ObjectOutputStream oos;
-
-        try {
-            fos = new FileOutputStream(saveFileName.toString());
-            oos = new ObjectOutputStream(fos);
-            oos.writeObject(playerMember);
-            oos.flush();
-            oos.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
 
     /**
      * Load player previous save state.
@@ -94,10 +63,33 @@ public class Storage {
     }
 
     /**
-     * Overload of  loadPlayer().
+     * Storage player data for next time use.
      */
-    public static void loadPlayer() {
-        initPlayer();
+    public static void savePlayer() {
+        if (!Files.exists(Player.DATAPATH)) {
+            System.out.println("Data folder not found!");
+            File dir = new File(Player.DATAPATH.toString());
+            if (dir.mkdir()) {
+                System.out.println("Directory " + Player.DATAPATH + " created...");
+            }
+        }
+
+        Object[] playerMember = {Player.getName(), Player.getEasyRecords(), Player.getDifficultRecords(),
+            Player.getCardsCollected(), Player.getCardsToBeCollected()};
+
+        Path saveFileName = Paths.get(Player.DATAPATH.toString(), Player.PLAYER_FILE_NAME);
+        FileOutputStream fos;
+        ObjectOutputStream oos;
+
+        try {
+            fos = new FileOutputStream(saveFileName.toString());
+            oos = new ObjectOutputStream(fos);
+            oos.writeObject(playerMember);
+            oos.flush();
+            oos.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
@@ -122,6 +114,13 @@ public class Storage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Overload of  loadPlayer().
+     */
+    public static void loadPlayer() {
+        initPlayer();
     }
 
     /**

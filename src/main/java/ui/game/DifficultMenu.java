@@ -122,33 +122,6 @@ public class DifficultMenu extends Menu {
         }
     }
 
-    private int startQuizGame() {
-        int cardId;
-
-        while (true) {
-            System.out.println(Strings.QUIZ_START);
-            QuizGame quizGame = new QuizGame("2");
-            cardId = quizGame.execute(false);
-            Player.winCard(cardId);
-
-            if (cardId != 0) { // Win the Game
-                Player.addDifficultGameRecord(quizGame);
-
-                System.out.print(quizGame.getName());
-                int playStatus = setPlayStatus();
-                if (playStatus != 2) {
-                    return playStatus;
-                }
-            } else {
-                System.out.print(quizGame.getName());
-                int playStatus = setPlayStatusLoss();
-                if (playStatus == 3) {
-                    return playStatus;
-                }
-            }
-        }
-    }
-
     private int startGuessNum() {
         int cardId;
 
@@ -168,6 +141,33 @@ public class DifficultMenu extends Menu {
                 }
             } else {
                 System.out.print(guessingNumGame.getName());
+                int playStatus = setPlayStatusLoss();
+                if (playStatus == 3) {
+                    return playStatus;
+                }
+            }
+        }
+    }
+
+    private int startQuizGame() {
+        int cardId;
+
+        while (true) {
+            System.out.println(Strings.QUIZ_START);
+            QuizGame quizGame = new QuizGame("2");
+            cardId = quizGame.execute(false);
+            Player.winCard(cardId);
+
+            if (cardId != 0) { // Win the Game
+                Player.addDifficultGameRecord(quizGame);
+
+                System.out.print(quizGame.getName());
+                int playStatus = setPlayStatus();
+                if (playStatus != 2) {
+                    return playStatus;
+                }
+            } else {
+                System.out.print(quizGame.getName());
                 int playStatus = setPlayStatusLoss();
                 if (playStatus == 3) {
                     return playStatus;
