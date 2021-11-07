@@ -45,6 +45,7 @@ when learning how to use **ConTech**.
 * **[Command Summary](#summary)**
 
 <br />
+<div style="page-break-after: always;"></div>
 
 <a name="start"></a>
 ## Quick Start
@@ -213,7 +214,6 @@ ____________________________________________________________
 Name:     Marcus Bo
 Github:   github.com/marcusbohre
 Email:    marcus.bo@contech.sg
-Telegram: t.me/m4rcusb0
 ____________________________________________________________
 ```
 
@@ -235,7 +235,6 @@ ____________________________________________________________
 Name:     Marcus Bo
 Github:   github.com/marcusbohre
 Email:    marcus.bo@contech.sg
-Telegram: t.me/m4rcusb0
 ____________________________________________________________
 ```
 
@@ -288,6 +287,8 @@ ConTech has removed the specified contact: Alex Lee
 You now have 2 contact(s).
 ____________________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 * Remove specific details of a contact:
 
