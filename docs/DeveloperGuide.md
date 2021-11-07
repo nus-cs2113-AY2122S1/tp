@@ -47,11 +47,14 @@ The sections below provide more details of the components and classes in them.
 The `Trip` class contains attributes storing the details of trips added by the user, 
 and is a container class for the expenses (each expense being represented by an 
 instance of the `Expense` class) and persons (each person being represented by an 
-instance of the `Person` class) tagged to the trip.
+instance of the `Person` class) tagged to the trip. The class diagram below illustrates
+the interactions of the `Trip` class with other classes.
+
+![](images/TripClassDiag.png)
 
 A trip is created when the `Parser` class calls its `executeCreate()` method to instantiate 
 a new instance of `Trip`. The newly-created trip is then added to the `ArrayList<Trip>` 
-in the Storage class
+in the Storage class.
 
 Although the program is able to store zero trips, in order for it to work at any appreciable level,
 there must be at least one trip added by the user (either through input or through loading from the
@@ -116,7 +119,7 @@ and `FileStorage` class, which interacts with the save file.
 
 The interaction between the two classes is illustrated in the diagram below:
 
-(insert diagram)
+![](images/StorageCompClassDiag.png)
 
 - The `Storage` class stores the user data after it has been read from the save file. It also stores the list of supported 
 currencies, the current open trip (set to `null` if there is no open trip), and the trip which the user last interacted with and
