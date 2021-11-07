@@ -307,7 +307,7 @@ Searches for an item keyword from a trip and returns the resulting matching item
 
 #### Format: `search-item TRIP_NAME /day DAY_INDEX /key KEYWORD`
 
-> ![](documentationPics/info.png) KEYWORD must be one word and not have any white spaces before or after.
+> ![](documentationPics/info.png) KEYWORD must be one word.
 
 #### Usage Example:
 ```
