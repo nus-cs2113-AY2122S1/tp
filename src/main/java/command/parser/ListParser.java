@@ -148,6 +148,10 @@ public class ListParser {
      * @param input string indicating sorting methods. Default sorting is used if sorting method stated is invalid.
      */
     public void moduleListParser(Module module, String input) {
+        if (input.isBlank()) {
+            listAll(module);
+            return;
+        }
         switch (input) {
         case SORT_BY_DATE:
             sortByDate(module);
@@ -168,7 +172,7 @@ public class ListParser {
             Ui.visualiseGradableTask(module.getGradableTaskList());
             break;
         default:
-            listAll(module);
+            Ui.wrongListFormat();
             break;
         }
     }

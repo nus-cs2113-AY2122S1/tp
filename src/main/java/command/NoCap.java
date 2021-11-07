@@ -6,6 +6,7 @@ import module.ModuleList;
 import semester.SemesterList;
 import semester.Semester;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import command.Logger;
 
@@ -30,6 +31,10 @@ public class NoCap {
     }
 
     public static void main(String[] args) {
-        new NoCap().run();
+        try {
+            new NoCap().run();
+        } catch (NoSuchElementException e) {
+            Ui.cheekyErrorMessage();
+        }
     }
 }
