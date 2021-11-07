@@ -11,11 +11,10 @@ LifeLineBackgroundColor peachpuff
 
 skinparam sequenceArrowColor black
 
---> ":Parser": addRecipeParse()
+--> ":Parser": parseMaster()
 activate ":Parser"
 
-' Name
-":Parser" -> ":Parser": parseName(String line)
+":Parser" -> ":Parser": addRecipeParse(String line)
 activate ":Parser"
 
 ":Parser" --> ":Parser"
@@ -52,8 +51,17 @@ deactivate ":Parser"
 ":Recipe" --> ":Parser":
 destroy ":Recipe"
 
+":Parser" -> ":AddCommand": AddCommand(Recipe r)
+activate ":AddCommand"
 
+":AddCommand" -> ":Cookbook": addRecipe(Recipe recipe)
+activate ":Cookbook"
+
+":Cookbook" --> ":AddCommand"
+destroy ":Cookbook"
+
+":AddCommand" --> ":Parser"
+destroy ":AddCommand"
 
 destroy ":Parser"
-
 @enduml
