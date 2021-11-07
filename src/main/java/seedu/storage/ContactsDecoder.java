@@ -149,10 +149,6 @@ public class ContactsDecoder extends RegexParser {
         }
     }
 
-//    private void checkNameNotNull(String name) throws InvalidNameException {
-//        if (name.equalsIgnoreCase("null"))
-//    }
-
     /**
      * Prints the relevant message for invalid details pertaining to the parsed contacts.
      * @param e Exception that was caught
