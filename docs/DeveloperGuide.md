@@ -77,6 +77,7 @@ The dish component consists of the `Dish`, `Menu`, `DishParser`, and `DishUI` cl
 * `DishUI` contains methods that display messages to interact with the user.
 
 ### 1.4 Ingredient Component
+![ingredient](Diagrams/ingredient/Ingredient.png)
 The ingredient component consists of the `Ingredient`, `IngredientList`, `IngredientParser`, and `IngredientUI` classes.  
 
 * `Ingredient` stores the name and quantity of a particular ingredient used by the restaurant, as well as methods to 
@@ -186,6 +187,8 @@ displayed. The following depicts the procedure for when a dish's price is edited
 The mechanism of adding an ingredient into the ingredient list is facilitated by `IngredientParser`. It creates a new
 instance of `Ingredient`, and adds it to the existing instance of `IngredientList`. It then calls a method from
 `IngredientUI` to display a confirmation message to the user.
+
+![addIngredient](Diagrams/ingredient/addIngredient.png)
 
 ### 2.iii.b Remove Ingredient
 The mechanism of removing an ingredient from the ingredient list is facilitated by `IngredientParser`. It identifies
