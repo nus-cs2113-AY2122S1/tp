@@ -37,6 +37,7 @@ public class DoneUndoCommand extends Command {
                     listOfAlreadyDoneItems.append(event).append("\n");
                 }
             }
+            break;
         case TASK:
             Event selectedEvent = Duke.eventCatalog.get(Parser.getIndexOfLastSelectedEvent());
             for (int index : indexes) {
@@ -48,6 +49,7 @@ public class DoneUndoCommand extends Command {
                     listOfAlreadyDoneItems.append(task).append("\n");
                 }
             }
+            break;
         default:
         }
         listOfItems[0] = listOfItemsMarkedDone.toString();
@@ -70,6 +72,7 @@ public class DoneUndoCommand extends Command {
                     listOfUndoneItems.append(event).append("\n");
                 }
             }
+            break;
         case TASK:
             Event selectedEvent = Duke.eventCatalog.get(Parser.getIndexOfLastSelectedEvent());
             for (int index : indexes) {
@@ -81,6 +84,7 @@ public class DoneUndoCommand extends Command {
                     listOfUndoneItems.append(task).append("\n");
                 }
             }
+            break;
         default:
         }
         listOfItems[0] = listOfItemsUnmarked.toString();
