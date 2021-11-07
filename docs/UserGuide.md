@@ -81,7 +81,8 @@ No ingredients expiring by [5 days from current date]
 No ingredients with stock less than 1.0 kg
 ____________________________________________________
 ```
-   
+> **IMPORTANT**: **DO NOT** edit any files in the `data/` folder! This can cause major bugs in loading data and you 
+> may have to delete the folder completely to use SITUS again!
 ## 2. Features
 
 This section covers the commands SITUS can execute - how you can use them and their expected outputs. 
@@ -131,7 +132,7 @@ Outputs:
 add n/carrot a/20 e/01/03/2022
 ____________________________________________________
 Got it. This ingredient has been added to the inventory:
-	Carrot | Amount Left: 20.000 kg | Expiry Date: 01/03/2022
+    Carrot | Amount Left: 20.000 kg | Expiry Date: 01/03/2022
 Current inventory has 1 items.
 This ingredient will expire in 131 days.
 ____________________________________________________
@@ -164,11 +165,11 @@ Output:
 list
 ____________________________________________________
 Here is the list of the ingredients currently in inventory:
-	1. Carrot | Total Amount: 20.000 kg
-		1.1. Amount Left: 20.000 kg | Expiry Date: 01/03/2022
+    1. Carrot | Total Amount: 20.000 kg
+        1.1. Amount Left: 20.000 kg | Expiry Date: 01/03/2022
 
-	2. Potato | Total Amount: 5.000 kg
-		2.1. Amount Left: 5.000 kg | Expiry Date: 25/12/2021
+    2. Potato | Total Amount: 5.000 kg
+        2.1. Amount Left: 5.000 kg | Expiry Date: 25/12/2021
 ____________________________________________________
 ```
 
@@ -183,8 +184,8 @@ changes.
 Command: `update [GROUP_INDEX.INGREDIENT_INDEX] a/[AMOUNT]`
 
 The parameters used in the command are:
-* `GROUP_INDEX`: the index of the group the ingredient to update is in
-* `INGREDIENT_INDEX` : the index of the ingredient to update within its group
+* `GROUP_INDEX`: the index of the group the ingredient to be updated is in
+* `INGREDIENT_INDEX` : the index within the group of the ingredient to be updated
 * `AMOUNT`: the ingredient amount to be updated, in kilograms
 
 Example: `update 1.1 a/100`
@@ -194,7 +195,7 @@ Output (using list shown in the [list section](#23-list-ingredients)):
 update 1.1 a/100
 ____________________________________________________
 Got it. This ingredient has been updated:
-	Carrot | Amount Left: 100.000 kg | Expiry Date: 01/03/2022
+    Carrot | Amount Left: 100.000 kg | Expiry Date: 01/03/2022
 ____________________________________________________
 ```
 
@@ -241,7 +242,7 @@ Output (using list shown in the [list section](#23-list-ingredients)):
 delete 1.1
 ____________________________________________________
 Got it. This ingredient has been removed:
-	Carrot | Amount Left: 50.000 kg | Expiry Date: 01/03/2022
+    Carrot | Amount Left: 50.000 kg | Expiry Date: 01/03/2022
 ____________________________________________________
 ```
 
@@ -262,16 +263,16 @@ This is the current list:
 list
 ____________________________________________________
 Here is the list of the ingredients currently in inventory:
-	1. Carrot | Total Amount: 2.000 kg
-		1.1. Amount Left: 2.000 kg | Expiry Date: 11/11/2021
+    1. Carrot | Total Amount: 2.000 kg
+        1.1. Amount Left: 2.000 kg | Expiry Date: 11/11/2021
 
-	2. Plum | Total Amount: 7.000 kg
-		2.1. Amount Left: 2.000 kg | Expiry Date: 06/11/2021
-		2.2. Amount Left: 5.000 kg | Expiry Date: 12/11/2021
+    2. Plum | Total Amount: 7.000 kg
+        2.1. Amount Left: 2.000 kg | Expiry Date: 06/11/2021
+        2.2. Amount Left: 5.000 kg | Expiry Date: 12/11/2021
 
-	3. Pumpkin | Total Amount: 7.000 kg
-		3.1. Amount Left: 6.000 kg | Expiry Date: 06/11/2021
-		3.2. Amount Left: 1.000 kg | Expiry Date: 21/11/2021
+    3. Pumpkin | Total Amount: 7.000 kg
+        3.1. Amount Left: 6.000 kg | Expiry Date: 06/11/2021
+        3.2. Amount Left: 1.000 kg | Expiry Date: 21/11/2021
 ____________________________________________________
 
 ```
@@ -305,21 +306,21 @@ Outputs (using list shown in [Section 2.7](#27-search-ingredients-by-expiry):
 find carrot
 ____________________________________________________
 I found these ingredients for "carrot":
-	1. Carrot | Total Amount: 2.000 kg
-		1.1. Amount Left: 2.000 kg | Expiry Date: 11/11/2021
+    1. Carrot | Total Amount: 2.000 kg
+        1.1. Amount Left: 2.000 kg | Expiry Date: 11/11/2021
 ____________________________________________________
 ```
 ```
 find plum pumpkin
 ____________________________________________________
 I found these ingredients for "plum":
-	2. Plum | Total Amount: 7.000 kg
-		2.1. Amount Left: 2.000 kg | Expiry Date: 06/11/2021
-		2.2. Amount Left: 5.000 kg | Expiry Date: 12/11/2021
+    2. Plum | Total Amount: 7.000 kg
+        2.1. Amount Left: 2.000 kg | Expiry Date: 06/11/2021
+        2.2. Amount Left: 5.000 kg | Expiry Date: 12/11/2021
 I found these ingredients for "pumpkin":
-	3. Pumpkin | Total Amount: 7.000 kg
-		3.1. Amount Left: 6.000 kg | Expiry Date: 06/11/2021
-		3.2. Amount Left: 1.000 kg | Expiry Date: 21/11/2021
+    3. Pumpkin | Total Amount: 7.000 kg
+        3.1. Amount Left: 6.000 kg | Expiry Date: 06/11/2021
+        3.2. Amount Left: 1.000 kg | Expiry Date: 21/11/2021
 ____________________________________________________
 ```
 > Note: The output also gives the actual index of the ingredients in the full ingredient list. This is hence useful if you 

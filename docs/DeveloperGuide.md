@@ -1,12 +1,5 @@
 # Developer Guide for SITUS
 
-## Acknowledgements
-
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-* [AB3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html) - Reference
-* [HighWater Design Specification Document](http://www.cci.drexel.edu/seniordesign/2016_2017/HighWater/HighWaterDesignDocument.pdf) - Reference
-* [FDsys System Design Document](https://www.govinfo.gov/media/FDsys_Architecture.pdf) - Reference
-
 ## Table of contents
 [1. Introduction](#1-introduction) <br>
 &nbsp;&nbsp;[1.1. Purpose](#11-purpose) <br>
@@ -33,6 +26,7 @@
 [6. User stories](#6-user-stories) <br>
 [7. Non-functional requirements](#7-non-functional-requirements) <br>
 [8. Instructions for manual testing](#8-instructions-for-manual-testing)<br>
+[9. Acknowledgements](#9-acknowledgements)<br>
 
 ## 1. Introduction
 
@@ -134,13 +128,13 @@ All entries with the same ingredient name is stored in the same `IngredientGroup
 In the example below, there are 2 `IngredientGroup`, Carrot and White Carrot. Carrot contains 2 `Ingredient` (entries) while White Carrot contains 3 `Ingredient` (entries). 
 ```
 1. Carrot | Total Amount: 12.2 kg
-      Amount Left: 10.0 kg | Expiry Date: 23/12/2021
-      Amount Left: 2.2 kg | Expiry Date: 25/12/2021
+    1.1. Amount Left: 10.0 kg | Expiry Date: 23/12/2021 
+    1.2. Amount Left: 2.2 kg | Expiry Date: 25/12/2021
 	
- 2. White Carrot | Total Amount: 17.1 kg
-      Amount Left: 5.0 kg | Expiry Date: 25/12/2021
-      Amount Left: 2.1 kg | Expiry Date: 12/11/2021
-      Amount Left: 10.0 kg | Expiry Date: 01/02/2022
+2. White Carrot | Total Amount: 17.1 kg
+    2.1. Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+    2.2. Amount Left: 2.1 kg | Expiry Date: 12/11/2021
+    2.3. Amount Left: 10.0 kg | Expiry Date: 01/02/2022
 ```
 
 ### 3.6. IngredientList component
@@ -249,17 +243,17 @@ Delete is performed on individual ingredients in groups. Users are to supply the
 their groups and numbers in the list. For example, the current ingredient inventory is:
 ```
 1. Carrot | Total Amount: 12.200 kg
-	1.1. Amount Left: 10.000 kg | Expiry Date: 23/12/2021
-	1.2. Amount Left: 2.200 kg | Expiry Date: 25/12/2021
+    1.1. Amount Left: 10.000 kg | Expiry Date: 23/12/2021
+    1.2. Amount Left: 2.200 kg | Expiry Date: 25/12/2021
 
 2. Potato | Total Amount: 7.100 kg
-	2.1. Amount Left: 2.100 kg | Expiry Date: 12/11/2021
-	2.2. Amount Left: 5.000 kg | Expiry Date: 25/12/2021
+    2.1. Amount Left: 2.100 kg | Expiry Date: 12/11/2021
+    2.2. Amount Left: 5.000 kg | Expiry Date: 25/12/2021
 
 3. Beef | Total Amount: 5.100 kg
-	3.1. Amount Left: 5.100 kg | Expiry Date: 01/02/2022
+    3.1. Amount Left: 5.100 kg | Expiry Date: 01/02/2022
 ```
-Then, calling `delete n/ carrot e/ 25/12/2021` will remove the second entry in the `carrot` category.
+Then, calling `delete 1.1` will remove the second entry in the `carrot` category.
 
 The sequence diagram below illustrates the above command example
 
@@ -269,13 +263,13 @@ The sequence diagram below illustrates the above command example
 Updating is performed on individual ingredients within the ingredient groups. For example, the current ingredient inventory is
 ```
 1. Carrot | Total Amount: 18.7 kg
-	Amount Left: 10.0 kg | Expiry Date: 23/12/2021
-	Amount Left: 2.2 kg | Expiry Date: 25/12/2021
-	Amount Left: 6.5 kg | Expiry Date: 02/01/2022
+    Amount Left: 10.0 kg | Expiry Date: 23/12/2021
+    Amount Left: 2.2 kg | Expiry Date: 25/12/2021
+    Amount Left: 6.5 kg | Expiry Date: 02/01/2022
 
 2. Potato | Total Amount: 7.1 kg
-	Amount Left: 5.0 kg | Expiry Date: 25/12/2021
-	Amount Left: 2.1 kg | Expiry Date: 12/11/2021
+    Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+    Amount Left: 2.1 kg | Expiry Date: 12/11/2021
 ```
 Then, calling `update 1.2 a/150.0` will update the second entry in the carrot category. The sequence diagram 
 below illustrates the above command example.
@@ -285,26 +279,26 @@ below illustrates the above command example.
 After individual ingredient has been updated, the ingredient inventory list is
 ```
 1. Carrot | Total Amount: 166.5 kg
-	Amount Left: 10.0 kg | Expiry Date: 23/12/2021
-	Amount Left: 150.0 kg | Expiry Date: 25/12/2021
-	Amount Left: 6.5 kg | Expiry Date: 02/01/2022
+    Amount Left: 10.0 kg | Expiry Date: 23/12/2021
+    Amount Left: 150.0 kg | Expiry Date: 25/12/2021
+    Amount Left: 6.5 kg | Expiry Date: 02/01/2022
 
 2. Potato | Total Amount: 7.1 kg
-	Amount Left: 5.0 kg | Expiry Date: 25/12/2021
-	Amount Left: 2.1 kg | Expiry Date: 12/11/2021
+    Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+    Amount Left: 2.1 kg | Expiry Date: 12/11/2021
 ```
 
 ### 4.5. Subtracting ingredients
 Subtracting is performed on ingredient groups. For example, the current ingredient inventory is
 ```
 1. Carrot | Total Amount: 166.5 kg
-	Amount Left: 10.0 kg | Expiry Date: 23/12/2021
-	Amount Left: 150.0 kg | Expiry Date: 25/12/2021
-	Amount Left: 6.5 kg | Expiry Date: 02/01/2022
+    Amount Left: 10.0 kg | Expiry Date: 23/12/2021
+    Amount Left: 150.0 kg | Expiry Date: 25/12/2021
+    Amount Left: 6.5 kg | Expiry Date: 02/01/2022
 
 2. Potato | Total Amount: 7.1 kg
-   Amount Left: 5.0 kg | Expiry Date: 25/12/2021
-   Amount Left: 2.1 kg | Expiry Date: 12/11/2021
+    Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+    Amount Left: 2.1 kg | Expiry Date: 12/11/2021
 ```
 Then, calling `subtract n/carrot a/150.0` will subtract 17.5 kgs from the total amount of carrots (29 kgs). 
 The sequence diagram below illustrates the above command example.
@@ -314,12 +308,12 @@ The sequence diagram below illustrates the above command example.
 After ingredient group has been updated, the ingredient inventory list is
 ```
 1. Carrot | Total Amount: 16.5 kg
-   Amount Left: 10.0 kg | Expiry Date: 25/12/2021
-   Amount Left: 6.5 kg | Expiry Date: 02/01/2022
+    Amount Left: 10.0 kg | Expiry Date: 25/12/2021
+    Amount Left: 6.5 kg | Expiry Date: 02/01/2022
    
 2. Potato | Total Amount: 7.1 kg
-   Amount Left: 5.0 kg | Expiry Date: 25/12/2021
-   Amount Left: 2.1 kg | Expiry Date: 12/11/2021
+    Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+    Amount Left: 2.1 kg | Expiry Date: 12/11/2021
 ```
 
 ## 5. Product scope
@@ -377,3 +371,8 @@ Expected: The first ingredient is deleted.
 1. Similar to adding ingredients, first use `update` correctly for an existing ingredient.
 2. Next, test `update` with missing parameters <br>
 Expected: No ingredient is updated and an error message is shown.
+
+## 9. Acknowledgements
+* [AB3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html) - Reference
+* [HighWater Design Specification Document](http://www.cci.drexel.edu/seniordesign/2016_2017/HighWater/HighWaterDesignDocument.pdf) - Reference
+* [FDsys System Design Document](https://www.govinfo.gov/media/FDsys_Architecture.pdf) - Reference
