@@ -128,6 +128,7 @@ The Storage component consists of:
 
 The `Storage` component:
 
+1) What it does?
 - During the first launch of the app, it creates a new current year database text file if there isn't any. 
 it will then load the data from the database text file into the app. 
 - Allows user to change the data base to the year he wants. 
@@ -135,6 +136,7 @@ it will then load the data from the database text file into the app.
 - Upon performing any commands that will perform changes to the database such as `add`, `edit`, `delete`
 Storage will reload the data in the app into the database text file. 
 
+2) Architecture of the Storage component
 ![Storage Sequence Diagram](images/Storage.png)
 
 
@@ -223,23 +225,40 @@ Given below is an example usage scenario and how the list feature behaves at eac
 
 ### <a id=""></a> Storage 
 
+1) How are the data stored?
+
 The storage stores the exact `add` command of budget, expenditures and loan into the text file containing 
-in the current AllRecordList. The reason it is implemented in this manner is so that we could reuse
+in the current AllRecordList. Everytime a deleted, edit or add command is called, the txt file is automatically 
+wiped and re-written from the ArrayList to ensure that data is saved at every step. 
+
+![dataSample](images/dataSample.png)
+
+2) Why are the data stored in such a manner?
+The reason it is implemented in this manner is so that we could reuse
 code that have been written for adding of budget and expenditures directly when loading from storage.
 
-Everytime a deleted, edit or add command is called, the txt file is automatically wiped and re-written 
-from the ArrayList to ensure that data is saved at every step. 
+This implementation makes Storage very versitile even when there are substantiate changes in the architecture 
+of our app. Some examples are the changes to Parser, Logic and Commands. Even with these stated changes, 
+the Storage needs very little tweaks to the Storage for it to work with the new implementation. The reason
+is that Storage uses the code used in Parser to load the data into the app. For the saving of data, only the 
+reloading method needs to be editted to adhere to the new changes such that the adding command stored is of
+the correct format.
 
-The yearly Records is stored in the form of <year>.txt. Each year contains all the monthly budget as
-well as all the expenditure tied to that month.
+The way the database is organized is that each yearly Records is stored in the form of <year>.txt. Each year 
+contains all the monthly budget as well as all the expenditure and loan tied to that month. 
 
+3) 
+![readTextFileToString Sequence Diagram](images/readTextFileToString.png)
 
-![Storage Sequence Diagram](images/readTextFileToString.png)
+![reloadArrayToStorage Sequence Diagram](images/reloadArrayToStorage.png)
 
-![Storage Sequence Diagram](images/reloadArrayToStorage.png)
+![convertToCsvFile Sequence Diagram](images/convertToCsvFile.png)
 
-![Storage Sequence Diagram](images/convertToCsvFile.png)
-
+4) How switching database work?
+When the `year <SELECTED DATABASE YEAR>` command is called eg. `year 2020`, the Parser will call the YearCommand
+and it will run the method "execute()". "execute()" first clears the allRecordList by calling clearAll() from 
+the AllRecordList class. And setYear(2020) method is called from AllRecordList Class to set the year to 2020. 
+Then the loadStorage method of Storage Class will be called to load the datafile "2020.txt" into the app.  
 
 ## <a id=""></a> List of Commands
 
