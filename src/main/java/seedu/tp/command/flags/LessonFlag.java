@@ -3,6 +3,7 @@ package seedu.tp.command.flags;
 import java.util.ArrayList;
 import java.util.List;
 
+//@@author SuibianP
 public class LessonFlag extends EventFlag {
     public static final String LINK = "link";
 
