@@ -1,4 +1,4 @@
-# Developer Guide Draft
+# Developer Guide
 
 ## Introduction
 Restaurant Buddy is a command-line-interface (CLI) application for **restaurant managers** to 
