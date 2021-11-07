@@ -50,8 +50,7 @@ public class ParserUtil {
             throw new ParserException("Please ensure your indexes are valid integers!");
         }
 
-        int[] indexArray = {startIndex, endIndex};
-        return indexArray;
+        return new int[]{startIndex, endIndex};
     }
 
     public static String parseDescription(String descString, boolean isCompulsory) throws ParserException {
@@ -97,7 +96,7 @@ public class ParserUtil {
             return Category.GENERAL;
         }
         try {
-            return Category.valueOf(categoryString);
+            return Category.valueOf(categoryString.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new ParserException("Specified category name does not exist!");
         }
