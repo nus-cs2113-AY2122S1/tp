@@ -30,8 +30,8 @@ public class DeleteContactCommand extends Command {
      * the contact to be deleted and prompts the user for confirmation to delete, before
      * executing any deletion of a contact.
      *
-     * @throws IndexOutOfBoundsException If index given in the DeleteContactCommand is
-     *      outside the size of the Contact List.
+     * @throws IndexOutOfBoundsException If index given in the DeleteContactCommand by user
+     *      is outside the size of the Contact List.
      */
     private void deleteSelectedContact() throws IndexOutOfBoundsException {
         // throws IndexOutOfBoundsException if index is outside of the range
