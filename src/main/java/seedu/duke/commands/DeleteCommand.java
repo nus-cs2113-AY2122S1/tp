@@ -3,6 +3,7 @@ package seedu.duke.commands;
 
 import seedu.duke.Duke;
 import seedu.duke.Ui;
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Event;
 import seedu.duke.items.Task;
 import seedu.duke.items.characteristics.Member;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 
 import static seedu.duke.parser.ItemType.EVENT;
 import static seedu.duke.parser.ItemType.TASK;
+import static seedu.duke.parser.ItemType.MEMBER;
 
 public class DeleteCommand extends Command {
 
@@ -20,13 +22,17 @@ public class DeleteCommand extends Command {
     private int eventIndex;
     private int taskIndex;
     private int memberIndex;
+    private boolean canDeleteMember;
 
     public DeleteCommand(ItemType itemType, int index) {
         this.itemType = itemType;
+        assert itemType == EVENT | itemType == TASK | itemType == MEMBER;
         if (itemType.equals(EVENT)) {
             eventIndex = index;
         } else if (itemType.equals(TASK)) {
             taskIndex = index;
+        } else {
+            memberIndex = index;
         }
     }
 
@@ -40,6 +46,9 @@ public class DeleteCommand extends Command {
         case TASK:
             deletedItem = deleteTask(taskIndex);
             return new CommandResult(Ui.getTaskDeletionMessage(deletedItem));
+        case MEMBER:
+            deletedItem = deleteMember(memberIndex);
+            return new CommandResult(Ui.getMemberDeletionMessage(deletedItem));
         default:
             return new CommandResult("Something went wrong.");
         }
@@ -68,6 +77,49 @@ public class DeleteCommand extends Command {
         deleteTaskFromMemberTaskList(memberList, taskTitle, parentEventTitle);
         Duke.eventCatalog.get(lastEventIndex).getTaskList().remove(index);
         return taskTitle;
+    }
+
+    private static String deleteMember(int index){
+        Member memberToDelete =  Duke.memberRoster.get(index);
+        String memberName = memberToDelete.getName();
+
+        ArrayList<String> tasksContainingOnlyMemberToDelete = new ArrayList<>();
+        StringBuilder details = new StringBuilder();
+        for (int i = 0; i < Duke.eventCatalog.size(); i++) {
+            for (Task task: Duke.eventCatalog.get(i).getTaskList()) {
+                for (Member member: task.getMemberList()) {
+                    if (member.getName().equalsIgnoreCase(memberName)) {
+                        details.append("Event #").append(i).append(": ").append(task.getTitle());
+                        details.append(System.lineSeparator());
+                    }
+                }
+                tasksContainingOnlyMemberToDelete.add(details.toString());
+            }
+        }
+
+        if (tasksContainingOnlyMemberToDelete.isEmpty()) {
+            for (int i = 0; i < Duke.eventCatalog.size(); i++) {
+                for (Task task: Duke.eventCatalog.get(i).getTaskList()) {
+                    int counter = 0;
+                    for (Member member: task.getMemberList()) {
+                        if (member.getName().equalsIgnoreCase(memberName)) {
+                            task.memberList.remove(counter);
+                        }
+                        counter++;
+                    }
+                }
+            }
+            for (int i = 0; i < Duke.memberRoster.size(); i++) {
+                if (Duke.memberRoster.get(i).getName().equalsIgnoreCase(memberName)) {
+                    Duke.memberRoster.remove(i);
+                    break;
+                }
+            }
+        } else {
+            return "Please assign more members to these tasks:" + System.lineSeparator()
+                    + tasksContainingOnlyMemberToDelete;
+        }
+        return memberName;
     }
 
     private static void deleteTaskFromMemberTaskList(ArrayList<Member> memberList, String taskTitle, String parentEventTitle) {

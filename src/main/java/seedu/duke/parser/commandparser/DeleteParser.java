@@ -3,19 +3,21 @@ package seedu.duke.parser.commandparser;
 import seedu.duke.Duke;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteCommand;
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.parserexceptions.InvalidIndexException;
 import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
+import seedu.duke.items.characteristics.Member;
 import seedu.duke.parser.ItemType;
 import seedu.duke.parser.Parser;
 
 import static seedu.duke.Duke.eventCatalog;
-import static seedu.duke.parser.ItemType.EVENT;
-import static seedu.duke.parser.ItemType.TASK;
+import static seedu.duke.parser.ItemType.*;
 
 public abstract class DeleteParser extends Parser {
 
     private static int eventIndexToDelete;
     private static int taskIndexToDelete;
+    private static int memberIndexToDelete;
 
     public static Command getDeleteCommand(String[] command, String commandDetails) {
         try {
@@ -28,7 +30,8 @@ public abstract class DeleteParser extends Parser {
                 parseTask(command);
                 return new DeleteCommand(TASK, taskIndexToDelete);
             case MEMBER:
-                break;
+                parseMember(command);
+                return new DeleteCommand(MEMBER, memberIndexToDelete);
             default:
                 throw new InvalidItemTypeException();
             }
@@ -39,7 +42,7 @@ public abstract class DeleteParser extends Parser {
             System.out.println("Please enter a number for the item index!");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Please select an index!");
-        } catch (InvalidIndexException e) {
+        } catch (DukeException | InvalidIndexException e) {
             System.out.println(e.getMessage());
         }
         return null;
@@ -70,6 +73,11 @@ public abstract class DeleteParser extends Parser {
         taskIndexToDelete = taskIndex;
     }
 
+    private static void parseMember(String[] command) throws DukeException {
+        String memberName = getMemberNameFromCommand(command);
+        memberIndexToDelete = getMemberIndexFromQuery(memberName);
+    }
+
     private static int getIndexFromCommand(String indexAsString) {
         return Integer.parseInt(indexAsString.trim()) - 1;
     }
@@ -80,6 +88,28 @@ public abstract class DeleteParser extends Parser {
 
     private static boolean isValidTaskIndex(int eventIndex, int taskIndex) {
         return taskIndex >= 0 && taskIndex < Duke.eventCatalog.get(eventIndex).getTaskList().size();
+    }
+
+    private static String getMemberNameFromCommand(String[] command) throws DukeException {
+        if (command.length < 3) {
+            throw new DukeException("Please enter a name!");
+        }
+        StringBuilder memberNameQuery = new StringBuilder();
+        for (int i = 2; i < command.length; i++) {
+            memberNameQuery.append(command[i].trim());
+            memberNameQuery.append(" ");
+        }
+        return memberNameQuery.toString().trim();
+    }
+
+    private static int getMemberIndexFromQuery(String memberName) throws DukeException {
+        for (int i = 0; i < Duke.memberRoster.size(); i++) {
+            Member member = Duke.memberRoster.get(i);
+            if (member.getName().equalsIgnoreCase(memberName)) {
+                return i;
+            }
+        }
+        throw new DukeException("No matching names found!");
     }
 
     private boolean isDeleteAll(String[] command) {
