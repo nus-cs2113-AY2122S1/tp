@@ -45,7 +45,7 @@ If you plan to use Intellij IDEA (highly recommended):
 to import the project into IDEA.
    _⚠ Note: Importing a Gradle project is slightly different from importing a normal Java project._
 3. **Verify the setup**:
-   1. Run the `seedu.libmgr.Libmgr` and try a few commands. 
+   1. Run the `seedu.duke.Libmgr` and try a few commands. 
    2. Run the tests to ensure they all pass.
 
 ## Design
@@ -59,7 +59,7 @@ Further elaboration  is given below.
 
 ![ArchitectureDiagram](img/ArchitectureDiagram.png)
 
-The base `Duke` class consists of the main method which is responsible for:
+The base `Libmgr` class consists of the main method which is responsible for:
 - Application launch: initializing the components in the correct order and setting up the data containers effectively.
 - Applicaiton teardown: shutting down the components, perform cleaning up and closing of processes where necessary.
 
