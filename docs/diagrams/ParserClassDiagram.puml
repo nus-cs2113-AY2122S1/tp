@@ -1,0 +1,48 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Parser
+class Expense
+interface ExpenseSummary
+interface PaymentOptimizer
+class Trip
+interface FilterFinder
+
+
+abstract CommandHandler {
+handleCreateTrip(String)
+handleEditTrip(String)
+handleOpenTrip(String)
+handleTripSummary(String)
+handleViewTrip(String)
+handleDelete(String)
+handleList()
+handleCreateExpense(String)
+handleAmount(String)
+handlePeople()
+handleOptimize()
+}
+
+abstract CommandExecutor {
+executeCreateTrip(String)
+executeEditTrip(String)
+executeOpen(String)
+executeSummary(String)
+executeView(String)
+executeDelete(String)
+executeList()
+executeCreateExpense(String)
+executeAmount(String)
+executePeople()
+executeOptimize()
+}
+
+CommandHandler <|-up- Parser
+CommandExecutor <|-up- CommandHandler
+
+CommandExecutor -[dashed]-> Expense
+CommandExecutor -[dashed]-> ExpenseSummary
+CommandExecutor -[dashed]-> PaymentOptimizer
+CommandExecutor -[dashed]-> Trip
+CommandExecutor -[dashed]-> FilterFinder
+@enduml

@@ -120,7 +120,8 @@ All fields are compulsory. Note the following:
 - `[location]` is the location of the trip. Any string can be entered.
 - `[date]` must follow the format of dd-mm-yyyy.
 - `[foriegn-currency-ISO-code]`: Currently there are 30 currencies supported, the currencies' names and ISO codes are listed below.
-  - The program is still runnable with unknown currencies, however the symbol and decimal place will not be accurate.
+  - Some currencies will not have symbols as some terminals may not be able to support displaying of certain symbols.
+  - The program is still runnable with unknown currencies, however the symbol and decimal place may not be accurate.
 - `[exchange-rate]` should be how much 1 of your home currency costs in foreign currency.
   - Example: SGD $1 is equivalent to USD $0.74, hence the `exchange-rate` will be 0.74.
   - Note that the default home currency is SGD. To change the home currency, please refer to [Edit Trip](#--edit-trip).
@@ -128,43 +129,43 @@ All fields are compulsory. Note the following:
 
 #### Compatible Currencies
 
-Currency Name | ISO Code
------------- | -----------
-United States Dollar | USD
-Singapore Dollar | SGD
-Australian Dollar | AUD
-Canadian Dollar | CAD
-New Zealand Dollar | NZD
-Euro | EUR
-Pound Sterling| GBP
-Malaysian Ringgit | MYR
-Hong Kong Dollar | HKD
-Thai Baht | THB
-Russian Ruble | RUB
-South African Rand | ZAR
-Turkish Lira | TRY
-Brazilian Real | BRL
-Danish Krone | DKK
-Polish Zloty | PLN
-Israeli New Shekel | ILS
-Saudi Riyal | SAR
-Chinese Yuan | CNY
-Japanese Yen | JPY
-South Korean Won | KRW
-Indonesian Rupiah | IDR
-Indian Rupee | INR
-Swiss Franc | CHF
-Swedish Krona | SEK
-Norwegian Krone | NOK
-Mexican Peso | MXN
-New Taiwan Dollar | TWD
-Hungarian Forint | HUF
-Czech Koruna | CZK
-Chilean Peso | CLP
-Philippine Peso | PHP
-United Arab Emirates Dirham | AED
-Colombian Peso | COP
-Romanian Leu | RON
+Currency Name | ISO Code | Symbol?
+------------ | ----------- | -------
+United States Dollar | USD | Yes
+Singapore Dollar | SGD | Yes
+Australian Dollar | AUD | Yes
+Canadian Dollar | CAD | Yes
+New Zealand Dollar | NZD | Yes
+Euro | EUR | No
+Pound Sterling| GBP | No
+Malaysian Ringgit | MYR | Yes
+Hong Kong Dollar | HKD | Yes
+Thai Baht | THB | No
+Russian Ruble | RUB | No
+South African Rand | ZAR | Yes
+Turkish Lira | TRY |  No
+Brazilian Real | BRL | Yes
+Danish Krone | DKK | Yes
+Polish Zloty | PLN | No
+Israeli New Shekel | ILS | No
+Saudi Riyal | SAR | Yes
+Chinese Yuan | CNY | No
+Japanese Yen | JPY | No
+South Korean Won | KRW | No
+Indonesian Rupiah | IDR | Yes
+Indian Rupee | INR | Yes
+Swiss Franc | CHF | Yes
+Swedish Krona | SEK | Yes
+Norwegian Krone | NOK | Yes
+Mexican Peso | MXN | Yes
+New Taiwan Dollar | TWD | Yes
+Hungarian Forint | HUF | Yes
+Czech Koruna | CZK | Yes
+Chilean Peso | CLP | Yes
+Philippine Peso | PHP | No
+United Arab Emirates Dirham | AED | No
+Colombian Peso | COP | Yes
+Romanian Leu | RON | Yes
 
 For example,
 
