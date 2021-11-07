@@ -721,6 +721,8 @@ of file I/O operations using `NIO2` to be in its own class which is in the `Stor
 of the storage type class to inherit the functionality of the `Storage` class while adding their own
 checks and third party imports on top of it.
 
+<div style="page-break-after: always;"></div>
+
 #### 4.5.2 Loading Storage Implementation
 
 This section details the technical information of `StorageManager` when `Terminus` loads data in the `data` directory.
@@ -786,6 +788,8 @@ the additional filo I/O operation to create a folder may result in an IO Excepti
 create the specified folder. Due to this, it may abort loading of any notes for any other `NusModule` in
 ModuleManager. Secondly, this method is meant to load existing data and not to create any data that is not
 the main `data` directory or the `main.json` file.
+
+<div style="page-break-after: always;"></div>
 
 #### 4.5.3 Execute CommandResult with Storage Implementation
 
