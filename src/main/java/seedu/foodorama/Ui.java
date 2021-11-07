@@ -749,31 +749,59 @@ public class Ui {
      * Prints the bars for the graph given the coordinates of a particular point in the grid.
      * @param graphPortions maximum number of bars in the graph
      * @param lengths collection of the lengths of all the bars in the graph
-     * @param i x coordinate of the point
-     * @param j y coordinate of the point
+     * @param i y coordinate of the point
+     * @param j x coordinate of the point
      *
      * @author Dniv-ra
      */
     private void printGraph(int graphPortions, ArrayList<Double> lengths, int i, int j) {
-        int integralPart = (int) Math.floor(lengths.get(j / 2));
-        double fractionalPart = lengths.get(j / 2) - integralPart;
         if (i < graphPortions) {
-            if (j % 2 == 0) {
-                System.out.print("   "); //Every other column is blank
-            } else if (i >= graphPortions - 1 - integralPart) {
-                if (i == graphPortions - 1 - integralPart) {
-                    System.out.print("[" + (int) (fractionalPart * 10) + "]");
+            printBars(graphPortions, i, j, lengths.get(j / 2));
+        } else if (i == graphPortions) {
+            printAxis(j);
+        } else {
+            System.out.print("   ");
+        }
+    }
+
+
+    /**
+     * Prints the X axis for the graph.
+     * @param j x coordinate of the point
+     *
+     * @author Dniv-ra
+     */
+    private void printAxis(int j) {
+        if (j % 2 == 0) {
+            System.out.print("   ");
+        } else {
+            System.out.print(" " + (char) (j / 2 + 65) + " ");
+        }
+    }
+
+    /**
+     * Prints the bars for the graph given the coordinates of a particular point in the grid.
+     * @param graphPortions maximum number of bars in the graph
+     * @param i y coordinate of the point
+     * @param j x coordinate of the point
+     * @param length length of the j/2th object
+     *
+     * @author Dniv-ra
+     */
+    private void printBars(int graphPortions, int i, int j, double length) {
+        int integralPart = (int) Math.floor(length);
+        double fractionalPart = length - integralPart;
+        if (j % 2 == 0) {
+            System.out.print("   "); //Every other column is blank
+        } else if (i >= graphPortions - 1 - integralPart) {
+            if (i == graphPortions - 1 - integralPart) {
+                if(fractionalPart == 0) {
+                    System.out.print("   ");
                 } else {
-                    System.out.print("[|]");
+                    System.out.print("[" + (int) (fractionalPart * 10) + "]");
                 }
             } else {
-                System.out.print("   ");
-            }
-        } else if (i == graphPortions) {
-            if (j % 2 == 0) {
-                System.out.print("   ");
-            } else {
-                System.out.print(" " + (char) (j / 2 + 65) + " ");
+                System.out.print("[|]");
             }
         } else {
             System.out.print("   ");
