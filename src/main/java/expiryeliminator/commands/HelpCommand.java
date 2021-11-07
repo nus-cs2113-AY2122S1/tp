@@ -3,6 +3,7 @@ package expiryeliminator.commands;
 import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.RecipeList;
 
+//@@author kairuihu
 public class HelpCommand extends Command {
     /**
      * Unique word associated with the command.

@@ -260,6 +260,8 @@ public class Parser {
         return new ViewIngredientCommand(ingredient);
     }
 
+    //@@author kairuihu
+
     /**
      * Creates a UpdateRecipeCommand from the inputs.
      *
@@ -308,7 +310,8 @@ public class Parser {
         final String recipe = new RecipeParser().parse(argsParser.getSingleArg(PREFIX_RECIPE));
         return new CookedRecipeCommand(recipe);
     }
-    //@@author
+
+    //@@author kairuihu
 
     /**
      * Creates a ViewRecipeCommand from the inputs.
