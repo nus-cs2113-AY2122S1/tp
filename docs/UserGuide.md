@@ -322,7 +322,8 @@ I found these ingredients for "pumpkin":
 		3.2. Amount Left: 1.000 kg | Expiry Date: 21/11/2021
 ____________________________________________________
 ```
-
+> Note: The output also gives the actual index of the ingredients in the full ingredient list. This is hence useful if you 
+> need the index of an ingredient (e.g. to `delete` or `update` it) but have too many ingredients to manually find it using `list`.
 
 ### 2.9. Display Alerts
 
