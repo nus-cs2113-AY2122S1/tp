@@ -14,6 +14,7 @@ import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
 import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
 import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
 import seedu.duke.parser.commandparser.AddParser;
+import seedu.duke.parser.commandparser.FindParser;
 import seedu.duke.parser.commandparser.ListParser;
 import seedu.duke.parser.commandparser.NextParser;
 import seedu.duke.parser.commandparser.SelectParser;
@@ -67,7 +68,7 @@ public abstract class Parser {
         case "help":
             return new HelpCommand();
         case "find":
-            return new FindCommand(command);
+            return FindParser.getFindCommand(command, commandDetails);
         case "select":
             return SelectParser.getSelectCommand(command, commandDetails);
         case "update":
