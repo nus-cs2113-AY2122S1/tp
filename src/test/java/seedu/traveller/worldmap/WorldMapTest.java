@@ -14,14 +14,15 @@ public class WorldMapTest {
         WorldMap.initWorldMap();
     }
 
+    //@@author Uxinnn
     @Test
-    public void getCountry_sin_success() throws EmptyVertexException {
+    public void getCountry_sin_success() {
         Country countrySin = WorldMap.getValidCountry("SIN");
         assertEquals(new Country("SIN", 0).toString(), countrySin.toString());
     }
 
     @Test
-    public void calcMinDistance_sinMly_success() throws EmptyVertexException {
+    public void calcMinDistance_sinMly_success() {
         Country countrySin = new Country("SIN", 0);
         Country countryMly = new Country("MLY", 1);
 

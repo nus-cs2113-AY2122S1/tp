@@ -2,6 +2,7 @@ package seedu.traveller.objects;
 
 import seedu.traveller.exceptions.DayNotFoundException;
 import seedu.traveller.exceptions.TravellerException;
+import seedu.traveller.exceptions.MaxNumberOfDaysAllowedExceededException;
 
 import java.util.ArrayList;
 import java.util.logging.Level;

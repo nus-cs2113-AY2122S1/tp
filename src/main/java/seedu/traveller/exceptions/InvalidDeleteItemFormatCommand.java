@@ -1,6 +1,6 @@
 package seedu.traveller.exceptions;
 
-//@@author Cuiminjing
+//@@author Uxinnn
 public class InvalidDeleteItemFormatCommand extends TravellerException {
     public InvalidDeleteItemFormatCommand() {
         message = "\tWrong format for DeleteItem!"
