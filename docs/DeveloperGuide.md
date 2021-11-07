@@ -739,9 +739,7 @@ exploratory testing.
        ConTech is unable to understand your request.
        Please try again with a valid command.
        ____________________________________________________________
-       ```  
-
-<div style="page-break-after: always;"></div>
+       ```
 
 ### <a name="testing-delete"></a>Deleting a contact
 1. Deleting a contact that is in the contact list
