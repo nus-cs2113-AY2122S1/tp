@@ -56,4 +56,4 @@ The link to the Developer Guide (DG) can be found [here](https://ay2122s1-cs2113
 - Reviewed PRs and ensured overall code quality/formatting was up to standard
 
 ### Community
-Reported Bugs during PE Dry Run.
+- Reported Bugs during PE Dry Run.
