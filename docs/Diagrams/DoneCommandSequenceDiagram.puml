@@ -4,7 +4,7 @@
 -> ":DoneHabitCommand": runCommand(goalList: GoalList,\nprintManager:PrintManager, storage: Storage)
 activate ":DoneHabitCommand"
 
-":DoneHabitCommand" -> "goalList:GoalList": doneHabitFromGoal(goalIndex: int,\nhabitIndex: int, printManager: PrintManager)
+":DoneHabitCommand" -> "goalList:GoalList": doneHabitFromGoal(goalIndex, habitIndex, printManager)
 activate "goalList:GoalList"
 "goalList:GoalList" -> "goalList:GoalList": getGoal(goalIndex: int)
 activate "goalList:GoalList"
@@ -31,6 +31,7 @@ activate "printManager:PrintManager"
 deactivate "printManager:PrintManager"
 "goalList:GoalList" --> ":DoneHabitCommand"
 deactivate "goalList:GoalList"
+<-- ":DoneHabitCommand"
 deactivate ":DoneHabitCommand"
 
 @enduml

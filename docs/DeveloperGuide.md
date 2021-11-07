@@ -164,6 +164,7 @@ The Parser component is responsible for parsing and checking the logic of the us
 the high level representation of the component.
 
 ![Parser Component](Diagram%20Images/Design%20Diagram%20Images/ParserComponent.png)
+![](Diagram Images/Design Diagram Images/MainParserSequenceDiagram.png)
 
 **API:** `Parser.java`
 
@@ -246,6 +247,10 @@ sequence diagram below is carried out:
 
 ### 4.2. Adding a Habit
 
+** insert detailed description **
+
+![](Diagram Images/Implementation Diagram Images/AddHabitCommandSequenceDiagram.png)
+
 ### 4.3. Listing all Goals
 
 When the `runCommand` function is executed for the `ListGoalsCommand` object, the following steps as indicated by the
@@ -261,12 +266,6 @@ sequence diagram below is carried out:
 ![](Diagram Images/Implementation Diagram Images/ListHabitsCommandSequenceDiagram.png)
 
 ### 4.5. Completing a Habit
-
-When the `runCommand` function is executed for the `HelpCommand` object, it instantiates a `PrintManager` object and 
-calls the `printCommandList` method which prints out a pre-set message informing the user of all the inputs they
-can type to execute a certain command.
-
-### GoalList component
 
 When the `runCommand` function is executed for the `DoneHabitCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
