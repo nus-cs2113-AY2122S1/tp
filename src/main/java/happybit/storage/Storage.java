@@ -51,14 +51,16 @@ public class Storage {
      */
     public GoalList load() {
         this.createStorageFile(this.filePath, this.fileDir);
+        GoalList goalList = new GoalList();
 
         try {
-            return Import.importStorage(this.filePath);
+            goalList = Import.importStorage(this.filePath);
         } catch (HaBitStorageException e) {
             this.clearFile();
             this.setReadOnly(new File(this.filePath));
             printManager.printError(e.getMessage());
         }
+        return goalList;
     }
 
     /**
