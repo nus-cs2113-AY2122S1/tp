@@ -1,6 +1,9 @@
 package seedu.traveller.worldmap;
 
-import seedu.traveller.worldmap.exceptions.*;
+import seedu.traveller.worldmap.exceptions.EmptyVertexException;
+import seedu.traveller.worldmap.exceptions.NonZeroDistanceException;
+import seedu.traveller.worldmap.exceptions.WorldMapException;
+import seedu.traveller.worldmap.exceptions.NonStringDistanceException;
 
 //@@author jach23
 /**
@@ -69,8 +72,7 @@ public class WorldMap {
      * corresponding path.
      * @param sourceCountryName The starting country.
      * @param targetCountryName The destination country.
-     * @return MinCalcResult which contains the source and destination countries
-     * along with the path of least time.
+     * @return MinCalcResult which contains the source and destination countries along with the path of least time.
      */
     public static MinCalcResult calcMinTime(String sourceCountryName, String targetCountryName) {
         Country sourceCountry = getValidCountry(sourceCountryName);
@@ -91,8 +93,7 @@ public class WorldMap {
      * corresponding path.
      * @param sourceCountryName The starting country.
      * @param targetCountryName The destination country.
-     * @return MinCalcResult which contains the source and destination countries
-     * along with the path of the least cost.
+     * @return MinCalcResult which contains the source and destination countries along with the path of the least cost.
      */
     public static MinCalcResult calcMinCost(String sourceCountryName, String targetCountryName) {
         altWorldMap();
