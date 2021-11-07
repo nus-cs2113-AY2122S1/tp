@@ -22,6 +22,9 @@
 &nbsp;&nbsp;[4.3. Delete Ingredients](#43-deleting-ingredients) <br>
 &nbsp;&nbsp;[4.4. Updating Ingredients](#44-updating-ingredients) <br>
 &nbsp;&nbsp;[4.5. Subtracting Ingredients](#45-subtracting-ingredients) <br>
+&nbsp;&nbsp;[4.6. Searching for Ingredients](#46-searching-for-ingredients) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.6.1 Searching by Name](#461-searching-by-name) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.6.2. Searching by Expiry Date](#462-searching-by-expiry-date) <br>
 [5. Product scope](#5-product-scope) <br>
 [6. User stories](#6-user-stories) <br>
 [7. Non-functional requirements](#7-non-functional-requirements) <br>
@@ -83,8 +86,8 @@ The App consists of 6 major components:
 
 **Interaction between architecture components**
 
-The _sequence diagram_ below shows how the components interact with each other given a scenario where the user 
-enters the input `add n/carrot a/1 e/2021-11-12`
+The _sequence diagram_ below shows how the components interact with each other for a generic command input. 
+> Note: `XYZCommand` is henceforth used as a placeholder for the different command names, e.g. `AddCommand`
 
 ![image](images/InteractionSeqDiagram.png)
 
@@ -98,7 +101,7 @@ The **UI** component can be found in the `UI` package. The UI reads commands fro
 
 The **Parser** component can be found in the `parser` package. 
 
-The package consists of the `Parser` class, which parses the command input by the user and executes the required `XYZCommand` class (`XYZ` is henceforth used as a placeholder for the specific command name, e.g. `AddCommand`).
+The package consists of the `Parser` class, which parses the command input by the user and executes the required `XYZCommand` class.
 
 ### 3.4. Command component
 
@@ -116,7 +119,7 @@ A quick overview of how a command is parsed and executed is as such:
 * `parseXYZCommand()` creates an instance of the corresponding `XYZCommand` class and calls its `run()` method.
 * Thus, the command entered by the user is executed.
 
-###3.5 IngredientGroup component
+### 3.5. IngredientGroup component
 The **IngredientGroup** component can be found in the `ingredients` package
 
 An instance `IngredientGroup` is created for each new ingredient. 
@@ -165,11 +168,12 @@ The `Storage` class
 * has a public method to return the `ArrayList` of `Ingredient` type in the storage file.
 * has a public method can take an `ArrayList` of `Ingredient` to write to the memory file.
 
-The two public methods mentioned above are the most essential for the storage capablility of the program.
+The two public methods mentioned above are the most essential for the storage capability of the program.
 `IngredientList` object will only use `loadIngredientsFromMemory()` and `writeIngredientsToMemory()` methods
 of the storage class only when there is a change in the ingredient list of the program.
 
 ## 4. Implementation
+This sections provides details regarding the implementation of the more significant features of SITUS.
 
 ### 4.1. Adding Ingredients
 Ingredients can be added using the `add` command followed by 3 parameters prefixed with flags for identification by SITUS:
@@ -255,7 +259,7 @@ their groups and numbers in the list. For example, the current ingredient invent
 ```
 Then, calling `delete 1.1` will remove the second entry in the `carrot` category.
 
-The sequence diagram below illustrates the above command example
+The sequence diagram below illustrates the above command example.
 
 ![image](images/DeleteSequenceDiagram.png)
 
@@ -315,6 +319,40 @@ After ingredient group has been updated, the ingredient inventory list is
     Amount Left: 5.0 kg | Expiry Date: 25/12/2021
     Amount Left: 2.1 kg | Expiry Date: 12/11/2021
 ```
+
+### 4.6. Searching for Ingredients
+Ingredients can be searched for either by name using `find` or by expiry date using `expire`. 
+
+#### 4.6.1. Searching by Name
+The command to find ingredients by name uses the keyword `find` followed by the keywords/names to search the ingredient list for.
+Some examples are `find carrot`, `find potato tomato`. Here is an overview of what happens when a `find` command is run:
+
+1. The initial user input is stored as a string. The word `find` is removed and the remaining string (consisting only of space-separated keywords) 
+is split by spaces and stored as an array of type `String`. 
+
+2. The array of keywords is then iterated through and checked for either empty values (no keyword given) or invalid characters (non-alphanumeric) and an error is thrown if either 
+exist. If these checks pass, the current keyword is added to a `HashSet` object and the next keyword is checked. This avoids duplicate keywords being searched for once the entire array of keywords has been iterated through.
+
+3. The `HashSet` of keywords is then iterated through and for each keyword, an instance of the `FindCommand` class is created and its `run()` method is called. This 
+searches the names in the ingredient list for the given keyword, and displays an output message showing the results found, if any. 
+
+The partial sequence diagram of the above process is shown below:
+![image](images/FindSequenceDiagram.png)
+
+#### 4.6.2. Searching by Expiry Date
+The command to find ingredients by expiry date uses the keyword `expire` followed by the expiry date to search in the format dd/mm/yyyy. 
+The command will display all ingredients in the list that are expiring **by** and **on** the given date. An example of its usage is `expire 23/12/2021`.
+Here is an overview of what happens when an `expire` command is run:
+
+1. The command is stored as a string and split by spaces into its 2 parameters, `expire` and the date to search for. The date given is then converted into a `LocalDate`
+object using the `stringToDate` method of the `Ingredient` class.
+
+2. This date is passed into the constructor of the `ExpireCommand` class and its run method is called. This method iterates through the current ingredient list
+and adds any ingredient whose expiry date and the given date differ by less than 0 days (using the `getNumDaysBetween()` method of the `Command` class) to an `ArrayList`
+object of type `Ingredient`. The ingredients are then sorted by earliest expiring to latest and displayed to the user.
+
+The partial sequence diagram of the above process is shown below:
+![image](images/ExpireSequenceDiagram.png)
 
 ## 5. Product scope
 
