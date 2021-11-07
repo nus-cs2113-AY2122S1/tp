@@ -144,6 +144,11 @@ Storage will reload the data in the app into the database text file.
 
 2) Architecture of the Storage component
 
+![Storage Sequence Diagram](images/StorageBasicaArchitecture.png)
+
+The Storage component continuously save every changes to the data in the app and the app loads the 
+data from storage everytime during start up.
+
 ![Storage Sequence Diagram](images/Storage.png)
 
 - Initially, when BudgetTracker App is started, it will create new Parser and Storage object. Storage's 
@@ -156,6 +161,16 @@ is called, reloadArrayToStorage() method of the WriteToTextFile class must be ca
 file to the new state of the data in the App. 
 - Then the loop will continue. For commands that will not change the data in the app such as `list`, `find`...
 The reloadArrayToStorage() method will not be called. 
+
+3) Class Diagram of the Storage component
+
+![Storage Sequence Diagram](images/Storage-Class_Diagram.png)
+
+- All the multiplicity of the BudgetTracker to Storage, Command and Parser are 1 to 1. 
+- The multiplicity of Storage to ReadTextFile is 1 to 1. 
+- The multiplicity of Command to WriteToTextFile is 1 to 1. 
+- There is BudgetTracker consist of Storage, Command and Parser. Storage consist of ReadTextFile and Command
+consist of WriteToTextFile. 
 
 ## <a id="implementation"></a> Implementation
 
