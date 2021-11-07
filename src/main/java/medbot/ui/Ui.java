@@ -19,7 +19,7 @@ public class Ui {
     private static final String TABLE_ROW_SEPARATOR = " ------------------------------------------------"
             + "----------------------------------------------------- " + END_LINE;
 
-    private Scanner inputScanner = new Scanner(System.in);
+    private final Scanner inputScanner = new Scanner(System.in);
 
     /**
      * Gets user input from terminal and returns it as a String.
@@ -61,7 +61,7 @@ public class Ui {
      * @param viewType the viewType context of the command
      * @return the Successful Message
      */
-    public static String getAddMessage(ViewType viewType, String info) throws MedBotException {
+    public static String getAddMessage(String info, ViewType viewType) throws MedBotException {
         switch (viewType) {
         case PATIENT_INFO:
             return PatientUi.getAddPatientMessage(info);
@@ -114,6 +114,20 @@ public class Ui {
             return SchedulerUi.getEditAppointmentMessage(id, info);
         case MEDICAL_STAFF_INFO:
             return StaffUi.getEditStaffMessage(id, info);
+        default:
+            assert false;
+            throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
+        }
+    }
+
+    public static String getViewMessage(String info, ViewType viewType) throws MedBotException {
+        switch (viewType) {
+        case PATIENT_INFO:
+            return PatientUi.getViewPatientMessage(info);
+        case SCHEDULER:
+            return SchedulerUi.getViewAppointmentMessage(info);
+        case MEDICAL_STAFF_INFO:
+            return StaffUi.getViewStaffMessage(info);
         default:
             assert false;
             throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
@@ -269,7 +283,7 @@ public class Ui {
         case MEDICAL_STAFF_INFO:
             return StaffUi.getListStaffHelpMessage();
         case SCHEDULER:
-            return SchedulerUi.getListSchedulerHelpMessage();
+            return SchedulerUi.getListAppointmentHelpMessage();
         default:
             assert false;
             throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
@@ -290,7 +304,7 @@ public class Ui {
         case MEDICAL_STAFF_INFO:
             return StaffUi.getViewStaffHelpMessage();
         case SCHEDULER:
-            return SchedulerUi.getViewSchedulerHelpMessage();
+            return SchedulerUi.getViewAppointmentHelpMessage();
         default:
             assert false;
             throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
@@ -311,7 +325,7 @@ public class Ui {
         case MEDICAL_STAFF_INFO:
             return StaffUi.getAddStaffHelpMessage();
         case SCHEDULER:
-            return SchedulerUi.getAddSchedulerHelpMessage();
+            return SchedulerUi.getAddAppointmentHelpMessage();
         default:
             assert false;
             throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
@@ -332,7 +346,7 @@ public class Ui {
         case MEDICAL_STAFF_INFO:
             return StaffUi.getEditStaffHelpMessage();
         case SCHEDULER:
-            return SchedulerUi.getEditSchedulerHelpMessage();
+            return SchedulerUi.getEditAppointmentHelpMessage();
         default:
             assert false;
             throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
@@ -352,7 +366,7 @@ public class Ui {
         case MEDICAL_STAFF_INFO:
             return StaffUi.getDeleteStaffHelpMessage();
         case SCHEDULER:
-            return SchedulerUi.getDeleteSchedulerHelpMessage();
+            return SchedulerUi.getDeleteAppointmentHelpMessage();
         default:
             assert false;
             throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
@@ -373,7 +387,7 @@ public class Ui {
         case MEDICAL_STAFF_INFO:
             return StaffUi.getFindStaffHelpMessage();
         case SCHEDULER:
-            return SchedulerUi.getFindSchedulerHelpMessage();
+            return SchedulerUi.getFindAppointmentHelpMessage();
         default:
             assert false;
             throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
@@ -450,6 +464,7 @@ public class Ui {
     }
 
     //@@author Kureans
+
     /**
      * Utility function that performs a pseudo-clear of the console.
      */

@@ -3,7 +3,6 @@ package medbot;
 import medbot.exceptions.MedBotException;
 import medbot.list.MedicalStaffList;
 import medbot.list.PatientList;
-import medbot.list.PersonList;
 import medbot.person.Patient;
 import medbot.person.Staff;
 import medbot.ui.PatientUi;
@@ -37,7 +36,7 @@ class UiTest {
                 + "Address: " + "Blk 123 Bishan St 12 #05-39";
 
         try {
-            String actualPatientOutput = Ui.getAddMessage(ViewType.PATIENT_INFO, patientInfo);
+            String actualPatientOutput = Ui.getAddMessage(patientInfo, ViewType.PATIENT_INFO);
             assertEquals(expectedPatientOutput, actualPatientOutput);
 
         } catch (MedBotException e) {
@@ -61,7 +60,7 @@ class UiTest {
                 + "Address: " + "Blk 123 Bishan St 12 #05-39";
 
         try {
-            String actualStaffOutput = Ui.getAddMessage(ViewType.MEDICAL_STAFF_INFO, staffInfo);
+            String actualStaffOutput = Ui.getAddMessage(staffInfo, ViewType.MEDICAL_STAFF_INFO);
             assertEquals(expectedStaffOutput, actualStaffOutput);
         } catch (MedBotException e) {
             assertEquals("Cannot identify the current view type" + END_LINE, e.getMessage());
@@ -80,7 +79,7 @@ class UiTest {
                 + "Date/Time: 11 Dec 21 1400HRS" + END_LINE;
 
         try {
-            String actualScheduleOutput = Ui.getAddMessage(ViewType.SCHEDULER, appointmentInfo);
+            String actualScheduleOutput = Ui.getAddMessage(appointmentInfo, ViewType.SCHEDULER);
             assertEquals(expectedScheduleOutput, actualScheduleOutput);
         } catch (MedBotException e) {
             assertEquals("Cannot identify the current view type" + END_LINE, e.getMessage());
@@ -299,7 +298,7 @@ class UiTest {
         try {
             patientList.addPerson(patient);
             String patientInfo = patient.toString();
-            assertEquals(expectedOutput, PatientUi.getPatientInfo(patientInfo));
+            assertEquals(expectedOutput, PatientUi.getViewPatientMessage(patientInfo));
 
         } catch (MedBotException e) {
             fail();
@@ -323,7 +322,7 @@ class UiTest {
         try {
             staffList.addPerson(staff);
             String staffInfo = staff.toString();
-            assertEquals(expectedOutput, StaffUi.getStaffInfo(staffInfo));
+            assertEquals(expectedOutput, StaffUi.getViewStaffMessage(staffInfo));
         } catch (MedBotException e) {
             fail();
         }
@@ -409,13 +408,22 @@ class UiTest {
     public void testGetPatientCommandListMessage() {
 
         String expectedOutput = "Here are the list of commands:" + END_LINE + END_LINE
-                + "help" + END_LINE + "add" + END_LINE + "list" + END_LINE + "view" + END_LINE + "edit" + END_LINE
-                + "find" + END_LINE + "delete" + END_LINE + "switch" + END_LINE + "exit" + END_LINE
-                + "hide" + END_LINE + "show" + END_LINE + "get view" + END_LINE + END_LINE
+                + "help" + END_LINE
+                + "add" + END_LINE
+                + "delete" + END_LINE
+                + "edit" + END_LINE
+                + "view" + END_LINE
+                + "list" + END_LINE
+                + "find" + END_LINE
+                + "hide" + END_LINE
+                + "show" + END_LINE
+                + "switch" + END_LINE
+                + "get view" + END_LINE
+                + "exit" + END_LINE + END_LINE
                 + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
-                + "*Note that all commands will remove any '|' inputs for format parsing purposes. For" + END_LINE
-                + "examples of the expected output, please refer to the actual user guide." + END_LINE;
+                + "*Note that all commands will remove any '|' inputs for format parsing purposes." + END_LINE
+                + "For expected output examples, please refer to the User Guide." + END_LINE;
 
         try {
             assertEquals(expectedOutput, Ui.getCommandList(ViewType.PATIENT_INFO));
@@ -428,13 +436,22 @@ class UiTest {
     public void testGetStaffCommandListMessage() {
 
         String expectedOutput = "Here are the list of commands:" + END_LINE + END_LINE
-                + "help" + END_LINE + "add" + END_LINE + "list" + END_LINE + "view" + END_LINE + "edit" + END_LINE
-                + "find" + END_LINE + "delete" + END_LINE + "switch" + END_LINE + "exit" + END_LINE
-                + "hide" + END_LINE + "show" + END_LINE + "get view" + END_LINE + END_LINE
+                + "help" + END_LINE
+                + "add" + END_LINE
+                + "delete" + END_LINE
+                + "edit" + END_LINE
+                + "view" + END_LINE
+                + "list" + END_LINE
+                + "find" + END_LINE
+                + "hide" + END_LINE
+                + "show" + END_LINE
+                + "switch" + END_LINE
+                + "get view" + END_LINE
+                + "exit" + END_LINE + END_LINE
                 + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
-                + "*Note that all commands will remove any '|' inputs for format parsing purposes. For" + END_LINE
-                + "examples of the expected output, please refer to the actual user guide." + END_LINE;
+                + "*Note that all commands will remove any '|' inputs for format parsing purposes." + END_LINE
+                + "For expected output examples, please refer to the User Guide." + END_LINE;
 
         try {
             assertEquals(expectedOutput, Ui.getCommandList(ViewType.MEDICAL_STAFF_INFO));
@@ -447,12 +464,20 @@ class UiTest {
     public void testGetSchedulerCommandListMessage() {
 
         String expectedOutput = "Here are the list of commands:" + END_LINE + END_LINE
-                + "help" + END_LINE + "add" + END_LINE + "list" + END_LINE + "view" + END_LINE + "edit" + END_LINE
-                + "find" + END_LINE + "delete" + END_LINE + "get view" + END_LINE + "switch" + END_LINE + "exit"
-                + END_LINE + END_LINE + "To obtain more information on each command and their respective required "
-                + "inputs, type:" + END_LINE + "help [COMMAND]" + END_LINE + END_LINE
-                + "*Note that all commands will remove any '|' inputs for format parsing purposes. For " + END_LINE
-                + "examples of the expected output, please refer to the actual user guide." + END_LINE;
+                + "help" + END_LINE
+                + "add" + END_LINE
+                + "delete" + END_LINE
+                + "edit" + END_LINE
+                + "view" + END_LINE
+                + "list" + END_LINE
+                + "find" + END_LINE
+                + "switch" + END_LINE
+                + "get view" + END_LINE
+                + "exit" + END_LINE + END_LINE
+                + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
+                + "help [COMMAND]" + END_LINE + END_LINE
+                + "*Note that all commands will remove any '|' inputs for format parsing purposes." + END_LINE
+                + "For expected output examples, please refer to the actual user guide." + END_LINE;
 
         try {
             assertEquals(expectedOutput, Ui.getCommandList(ViewType.SCHEDULER));

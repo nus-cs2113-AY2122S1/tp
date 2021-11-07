@@ -36,3 +36,9 @@ MedBotData/patient.bak
 MedBotData/staff.bak
 text-ui-test/duplicate-sche.txt
 
+
+src/test/data/StorageTest/appointmentData-saved.txt
+
+src/test/data/StorageTest/patientData-saved.txt
+
+src/test/data/StorageTest/staffData-saved.txt
