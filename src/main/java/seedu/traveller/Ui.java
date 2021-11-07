@@ -160,10 +160,10 @@ public class Ui {
                 + "\n\t\tAdds item Check-in to HolidayInn to day 0 of trip1.\n"
 
                 + "\tview FamilyTrip2021: "
-                + "\tViews your trip named FamilyTrip2021 and their detail.\n"
+                + "\n\t\tViews your trip named FamilyTrip2021 and their detail.\n"
 
-                + "\tdelete FamilyTrip2021 :"
-                + "\tDeletes the trip called FamilyTrip2021.\n"
+                + "\tdelete FamilyTrip2021 : "
+                + "\n\t\tDeletes the trip called FamilyTrip2021.\n"
 
                 + "\tdelete-day myTrip /day 0 : "
                 + "\n\t\tDeletes day 0 of myTrip.\n"
@@ -184,8 +184,8 @@ public class Ui {
                 + "\tshortest-time /from SKR /to JPN : "
                 + "\n\t\tReturns the shortest time from SKR to JPN.\n"
 
-                + "\texit :"
-                +"\n\t\tExits the program.");
+                + "\texit : "
+                + "\n\t\tExits the program.");
     }
 
     public void printReadSaveError(int lineNumber) {
