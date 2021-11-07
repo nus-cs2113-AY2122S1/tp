@@ -747,11 +747,11 @@ public class Ui {
 
     /**
      * Prints the bars for the graph given the coordinates of a particular point in the grid.
-     * @param graphPortions maximum number of bars in the graph
-     * @param lengths collection of the lengths of all the bars in the graph
-     * @param i y coordinate of the point
-     * @param j x coordinate of the point
      *
+     * @param graphPortions maximum number of bars in the graph
+     * @param lengths       collection of the lengths of all the bars in the graph
+     * @param i             y coordinate of the point
+     * @param j             x coordinate of the point
      * @author Dniv-ra
      */
     private void printGraph(int graphPortions, ArrayList<Double> lengths, int i, int j) {
@@ -767,8 +767,8 @@ public class Ui {
 
     /**
      * Prints the X axis for the graph.
-     * @param j x coordinate of the point
      *
+     * @param j x coordinate of the point
      * @author Dniv-ra
      */
     private void printAxis(int j) {
@@ -781,11 +781,11 @@ public class Ui {
 
     /**
      * Prints the bars for the graph given the coordinates of a particular point in the grid.
-     * @param graphPortions maximum number of bars in the graph
-     * @param i y coordinate of the point
-     * @param j x coordinate of the point
-     * @param length length of the j/2th object
      *
+     * @param graphPortions maximum number of bars in the graph
+     * @param i             y coordinate of the point
+     * @param j             x coordinate of the point
+     * @param length        length of the j/2th object
      * @author Dniv-ra
      */
     private void printBars(int graphPortions, int i, int j, double length) {
@@ -795,7 +795,7 @@ public class Ui {
             System.out.print("   "); //Every other column is blank
         } else if (i >= graphPortions - 1 - integralPart) {
             if (i == graphPortions - 1 - integralPart) {
-                if(fractionalPart == 0) {
+                if (fractionalPart == 0) {
                     System.out.print("   ");
                 } else {
                     System.out.print("[" + (int) (fractionalPart * 10) + "]");
@@ -810,8 +810,8 @@ public class Ui {
 
     /**
      * Prints the wastage of an array of dishes in a graphical format.
-     * @param dishList list of dishes to be converted into a bar graph
      *
+     * @param dishList list of dishes to be converted into a bar graph
      * @author Dniv-ra
      */
     public void printDishListGraph(ArrayList<Dish> dishList) {
@@ -849,9 +849,9 @@ public class Ui {
 
     /**
      * Prints the legend and the scale at the side of the graph.
-     * @param dishList list of dishes to be used for the legend
-     * @param i current row in the grid
      *
+     * @param dishList list of dishes to be used for the legend
+     * @param i        current row in the grid
      * @author Dniv-ra
      */
     private void printDishLegend(ArrayList<Dish> dishList, int i) {
@@ -867,8 +867,8 @@ public class Ui {
 
     /**
      * Prints the wastage of an array of ingredients in a graphical format.
-     * @param ingredientList list of ingredients to be converted into a bar graph
      *
+     * @param ingredientList list of ingredients to be converted into a bar graph
      * @author Dniv-ra
      */
     public void printIngrListGraph(ArrayList<Ingredient> ingredientList) {
@@ -906,9 +906,9 @@ public class Ui {
 
     /**
      * Prints the legend and the scale at the side of the graph.
-     * @param ingredientList list of ingredients to be used for the legend
-     * @param i current row in the grid
      *
+     * @param ingredientList list of ingredients to be used for the legend
+     * @param i              current row in the grid
      * @author Dniv-ra
      */
     private void printIngrLegend(ArrayList<Ingredient> ingredientList, int i) {
