@@ -319,7 +319,6 @@ Delete the following fields for Le Zong?  (y/n)
 
 Github:   github.com/lezongmun
 Telegram: t.me/lezongg
-Email:    lezongmun@gmail.com
 ____________________________________________________________
 
 y
