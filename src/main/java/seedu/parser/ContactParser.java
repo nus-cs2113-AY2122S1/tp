@@ -54,7 +54,7 @@ public abstract class ContactParser extends RegexParser implements ContactDetail
         assert destructuredDetails.length == NUMBER_OF_DETAILS;
         String flag = destructuredDetails[FLAG_INDEX_IN_DETAILS];
         String detailToStore = destructuredDetails[DETAIL_INDEX_IN_DETAILS].trim();
-        if (detailToStore.equals("null")) {
+        if (detailToStore.equalsIgnoreCase("null")) {
             throw new ForbiddenDetailException();
         }
         checkRegex(flag, detailToStore);

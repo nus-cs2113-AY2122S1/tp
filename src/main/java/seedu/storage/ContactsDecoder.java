@@ -191,11 +191,11 @@ public class ContactsDecoder extends RegexParser {
             InvalidLinkedinUsernameException, InvalidEmailException {
         String[] destructuredInputs = contactText.split(SEPARATOR);
         String[] compiledDetails = new String[NUMBER_OF_FIELDS];
-        if (destructuredInputs[0].equals("null")) {
+        if (destructuredInputs[0].equalsIgnoreCase("null")) {
             throw new InvalidNameException();
         }
         for (int i = 0; i < NUMBER_OF_FIELDS; i++) {
-            if (destructuredInputs[i].equals("null")) {
+            if (destructuredInputs[i].equalsIgnoreCase("null")) {
                 compiledDetails[i] = null;
             } else {
                 checkRegex(FLAG_SEQUENCE[i], destructuredInputs[i]);
