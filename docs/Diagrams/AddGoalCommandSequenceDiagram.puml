@@ -1,5 +1,7 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+!include Style.puml
+
 -> ": AddGoalCommand": runCommand(goalList: GoalList, \nprintManager: PrintManager, storage: Storage)
 activate ": AddGoalCommand"
 
