@@ -33,6 +33,9 @@
   - [Viewing a contact](#testing-view)
   - [Editing a contact](#testing-edit)
   - [Deleting a contact](#testing-delete)  
+  - [Searching for a contact](#testing-search)
+  - [Importing contacts](#testing-import)
+
 
 ## <a name="acknowledgements"></a>Acknowledgements
 
@@ -780,3 +783,96 @@ exploratory testing.
     3. Follow up: You can either input `y` which stands for **yes** allowing you to delete the field from the contact
        or `n` which stands for **no** to cancel deleting the field from the contact.
 
+### <a name="testing-search"></a>Searching for a contact
+1. Search for a contact that is in the contact list
+    1. Test case: `search alex`<br>
+       Expected: All contacts with `alex` in their name will be listed
+       ```
+       ____________________________________________________________      
+       1.
+       Name:     Alex Lee
+       Github:   github.com/alexlee
+       Email:    alex.lee@email.com
+       Telegram: t.me/alexlee
+       LinkedIn: linkedin.com/in/alexlee
+       Twitter:  twitter.com/alexl33
+       ____________________________________________________________
+       ```
+
+2. Search for a contact with a specified field
+    1. Test case: `search -g alexlee`<br>
+       Expected: All contacts with the GitHub username containing `alexlee` will be listed.
+       ```
+       ____________________________________________________________      
+        1.
+       Name:     Alex Lee
+       Github:   github.com/alexlee
+       Email:    alex.lee@email.com
+       Telegram: t.me/alexlee
+       LinkedIn: linkedin.com/in/alexlee
+       Twitter:  twitter.com/alexl33
+       ____________________________________________________________
+       ```
+
+3. Search for a contact that is not in the contact list
+    1. Test case: `search mebe`<br>
+       Expected: Error message will notify users that no contacts are found. 
+       ```
+       ____________________________________________________________
+       No search results found.
+       ____________________________________________________________
+       ```
+
+4. Search with no parameters specified
+    1. Test case: `search`<br>
+       Expected: Error message will notify user that the command is invalid.
+       ```
+       ____________________________________________________________
+       There seems to be missing parameters in your request.
+       Please enter command in this format:
+       search {FLAG} <QUERY>
+       example : search Ashraf
+       search -g revflash
+       NOTE : Flag is optional and only one can be specified
+       ____________________________________________________________
+       ```
+       
+### <a name="testing-import"></a>Importing contacts
+1. Importing contacts with all valid details
+    1. Test case: `import`<br>
+       Expected: All contacts will be imported successfully.
+       ```
+       ____________________________________________________________      
+       ConTech has successfully imported 3 lines
+       ____________________________________________________________
+       ```
+
+2. Importing a contact with invalid fields
+    1. Test case: `import`<br>
+       Expected: Error message will notify the user that there is an invalid field.
+       ```
+       data/import.txt:1 - There is an invalid field.
+       ____________________________________________________________
+       The github username is not correctly formatted,
+       Rules for Github username :
+       * Only contain alphanumeric characters or hyphens
+       * Only lowercase allowed
+       * Maximum 39 characters allowed
+       * Cannot have multiple consecutive hyphens
+       * Cannot begin or end with a hyphen
+       ____________________________________________________________
+       
+       ____________________________________________________________
+       ConTech has successfully imported 0 lines
+       ____________________________________________________________
+       ```
+
+3. Importing a contact with missing fields
+    1. Test case: `import`<br>
+       Expected: Error message will notify the user that there are missing fields.
+       ```
+       data/import.txt:1 - "ashraf,ashrafjfr,null,null" is corrupted and not loaded.
+       ____________________________________________________________
+       ConTech has successfully imported 0 lines
+       ____________________________________________________________
+       ```

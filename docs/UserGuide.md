@@ -45,6 +45,7 @@ when learning how to use **ConTech**.
 * **[Command Summary](#summary)**
 
 <br />
+<div style="page-break-after: always;"></div>
 
 <a name="start"></a>
 ## Quick Start
@@ -213,7 +214,6 @@ ____________________________________________________________
 Name:     Marcus Bo
 Github:   github.com/marcusbohre
 Email:    marcus.bo@contech.sg
-Telegram: t.me/m4rcusb0
 ____________________________________________________________
 ```
 
@@ -235,7 +235,6 @@ ____________________________________________________________
 Name:     Marcus Bo
 Github:   github.com/marcusbohre
 Email:    marcus.bo@contech.sg
-Telegram: t.me/m4rcusb0
 ____________________________________________________________
 ```
 
@@ -288,6 +287,8 @@ ConTech has removed the specified contact: Alex Lee
 You now have 2 contact(s).
 ____________________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 * Remove specific details of a contact:
 
@@ -350,6 +351,7 @@ Command formats:
 - Additional input between the `edit` command and the first detail flag will be treated as erroneous input and
   discarded.
 
+<div style="page-break-after: always;"></div>
 
 Expected outcome of usage: 
 
@@ -411,6 +413,8 @@ Telegram: t.me/johnlee123
 ____________________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
+
 <a name="import"></a>
 ### Importing contacts: `import`
 Import contacts from a comma-separated value (CSV) text file into your contact list. 
@@ -455,6 +459,8 @@ ____________________________________________________________
 ConTech has successfully imported 4 lines
 ____________________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 <a name="help"></a>
 ### Viewing help: `help`
@@ -518,6 +524,7 @@ import: Imports contacts from a CSV Text File.
 ____________________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
 
 <a name="exit"></a>
 ### Exiting the program: `exit`
@@ -556,6 +563,8 @@ editing the save data files. For adding a large number of contacts at once, the 
 a future revision with more granular controls to allow users to easily handle multiple duplicate contacts when importing.
 For more information on the implementation, please refer to the [Developer Guide](https://ay2122s1-cs2113t-t09-1.github.io/tp/DeveloperGuide.html#ComingSoon).
 
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="summary"></a>Command Summary
 
