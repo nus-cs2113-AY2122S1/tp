@@ -10,8 +10,11 @@ Given below are the contributions I have made to this project.
 ### Summary of Contributions
 
 ---
+
 - **Code contributed:** [RepoSense Link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=apzh&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&tabAuthor=APZH&tabRepo=AY2122S1-CS2113T-W13-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
+
 ---
+
 - **Features implemented:**
   - **Feature 1:** Added the `Ui.java` class. 
     - **What it does:** Handles the reading of user inputs into the terminal and the displaying of 
@@ -41,11 +44,15 @@ Given below are the contributions I have made to this project.
     - **Justification:** Improves the user experience by allowing users to sort their tasklist in a certain order to maintain the
     neatness of the tasklist. Without this command, the ordering of the tasklist will be based on the order in which the tasks are added,
     which reduces the logical grouping of tasks in the user's tasklist.
+
 ---
+
 - **Enhancements implemented**:
   - **Enhancement 1:** Added the general abstraction/skeleton of the TP program based on my IP program structure.
   - **Enhancement 2:** Renamed exception messages to follow a standardised format to be shown to the user. 
+
 ---
+
 - **Contributions to the UG**: 
 [#159](https://github.com/AY2122S1-CS2113T-W13-3/tp/pull/159) (C1-C5)
   - **Contribution 1:** Created and maintained the skeleton/overview for the User Guide to help the team be consistent when adding information.
@@ -55,7 +62,9 @@ Given below are the contributions I have made to this project.
       "2.4.3 Listing the recurrence of a task".
   - **Contribution 4:** Added the documentation in "2.5 Sorting your tasklist: `sort`".
   - **Contribution 5:** Updated "4. Command Summary" table with changes made to the `list` and `sort` command.
+
 ---
+
 - **Contributions to the DG**: 
 [#149](https://github.com/AY2122S1-CS2113T-W13-3/tp/pull/149) (C1-C4), 
 [#155](https://github.com/AY2122S1-CS2113T-W13-3/tp/pull/155) (C5-C6),
@@ -83,7 +92,9 @@ Given below are the contributions I have made to this project.
     by the TaskManager class.
   - **Contribution 8:** Added instructions for manual testing for "Launch and Exit", "Listing the Tasklist", "Filtering the Tasklist", "Sorting the Tasklist",
         and "Viewing the recurrence of a task".
+
 ---
+
 - **Contributions to team-based tasks**:
   - **Contribution 1:** Maintained the issue tracker and milestones for our team.
   - **Contribution 2:** Handled the releases of versions `1.0` and `2.0` of our application.
@@ -91,10 +102,13 @@ Given below are the contributions I have made to this project.
   add their assignment parts without affecting the general structure of the guide.
   - **Contribution 4:** Added FAQs, Target Users, and tidied up sections in both the User Guide and Developer Guide.
   - **Contribution 5:** Added user stories and formatted the table.
+
 ---
+
 - **Review/mentoring contributions**:
   - **Contribution 1:** Help team members to test their features to ensure they work prior to releases each version of our application on GitHub.
   - **Contribution 2:** Help review PRs made by team members in general and offer advice and feedback prior to merging the PRs.
+
 ---
 
 ### Contributions to the Developer Guide (Extracts):
