@@ -12,10 +12,17 @@ public class InvalidDetailCommand extends Command {
         this.type = type;
     }
 
+    /**
+     * Returns the type of failed command.
+     */
     public FailedCommandType getType() {
         return type;
     }
 
+    /**
+     * Invokes the respective Text Ui function to print
+     * the error message based on the "type" provided.
+     */
     public void execute() {
         switch (type) {
         case INVALID_NAME:

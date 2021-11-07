@@ -25,6 +25,23 @@ public abstract class RegexParser {
         TELEGRAM_FLAG, TWITTER_FLAG, EMAIL_FLAG};
     private static final Logger LOGGER = Logger.getLogger(RegexParser.class.getName());
 
+    /**
+     * Throws an exception if the field does not comply with the regex.
+     * If the field passes the regex check nothing is returned and program
+     * flow continues.
+     * The flag provided is checked in a switch case to invoke the respective
+     * function to check the regex of the field.
+     *
+     * @param flag          field type
+     * @param detailToParse field contents
+     * @throws InvalidGithubUsernameException   If GitHub username does not match regex
+     * @throws InvalidNameException             If Name does not match regex
+     * @throws InvalidFlagException             If flag is invalid
+     * @throws InvalidTelegramUsernameException If Telegram username does not match regex
+     * @throws InvalidTwitterUsernameException  If Twitter username does not match regex
+     * @throws InvalidLinkedinUsernameException If LinkedIn username does not match regex
+     * @throws InvalidEmailException            If Email does not match regex
+     */
     public void checkRegex(String flag, String detailToParse)
             throws InvalidGithubUsernameException, InvalidNameException, InvalidFlagException,
             InvalidTelegramUsernameException, InvalidTwitterUsernameException,
@@ -55,8 +72,22 @@ public abstract class RegexParser {
         }
     }
 
+    /**
+     * Throws an exception if the email id does not comply with the regex.
+     * If the email passes the regex check nothing is returned and program
+     * flow continues.
+     * The function only allows emails in lowercase and uppercase letters,
+     * numbers, with symbols including hyphens, underscores, "@" and dot.
+     * The symbols cannot be placed at the start or end of the
+     * email or be consecutive. Also, only one "@" symbol allowed.
+     *
+     * @param detailToParse email id to be checked
+     * @throws InvalidEmailException If email does not match regex
+     */
     protected void checkEmailRegex(String detailToParse) throws InvalidEmailException {
-        //allow lowercase email ids
+        // Allows lowercase, uppercase, numbers, hyphen, underscore, "@" and dot.
+        // Blocks consecutive symbols or if placed at start or end
+        // Only one "@" symbol allowed
         String emailRegex = "^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|"
                 + "(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|"
                 + "(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
@@ -66,8 +97,19 @@ public abstract class RegexParser {
         }
     }
 
+    /**
+     * Throws an exception if the LinkedIn username does not comply with the regex.
+     * If the LinkedIn username passes the regex check nothing is returned and program
+     * flow continues.
+     * The regex only allows usernames in lowercase letters, numbers, underscore and
+     * hyphen with a length between 3 and 100 characters.
+     *
+     * @param detailToParse LinkedIn username to be checked
+     * @throws InvalidLinkedinUsernameException If LinkedIn does not match regex
+     */
     protected void checkLinkedinUsernameRegex(String detailToParse) throws InvalidLinkedinUsernameException {
-        //allows lowercase, numbers, underscore and hyphen. Length must be 3-100 characters
+        // Allows lowercase, numbers, underscore and hyphen
+        // Length must be 3-100 characters
         String linkedinRegex = "^[a-z0-9-_]{3,100}$";
         if (!detailToParse.matches(linkedinRegex)) {
             LOGGER.log(Level.FINE, "Regex check for Linkedin failed");
@@ -75,8 +117,19 @@ public abstract class RegexParser {
         }
     }
 
+    /**
+     * Throws an exception if the Twitter username does not comply with the regex.
+     * If the Twitter username passes the regex check nothing is returned and program
+     * flow continues.
+     * The regex only allows usernames in lowercase letters, numbers, and underscore
+     * with a max length of 15 characters.
+     *
+     * @param detailToParse Twitter username id to be checked
+     * @throws InvalidTwitterUsernameException If Twitter username does not match regex
+     */
     protected void checkTwitterUsernameRegex(String detailToParse) throws InvalidTwitterUsernameException {
-        //allows lowercase, numbers and underscore. Length must be max 15 characters
+        // Allows lowercase, numbers and underscore
+        // Length must be max 15 characters
         String twitterRegex = "^[a-z0-9_]{1,15}$";
         if (!detailToParse.matches(twitterRegex)) {
             LOGGER.log(Level.FINE, "Regex check for Name failed");
@@ -84,8 +137,19 @@ public abstract class RegexParser {
         }
     }
 
+    /**
+     * Throws an exception if the Telegram username does not comply with the regex.
+     * If the Telegram username passes the regex check nothing is returned and program
+     * flow continues.
+     * The regex only allows usernames in lowercase and uppercase letters, numbers, and underscore
+     * with a length of at least 5 characters.
+     *
+     * @param detailToParse Telegram username to be checked
+     * @throws InvalidTelegramUsernameException If Telegram username does not match regex
+     */
     protected void checkTelegramUsernameRegex(String detailToParse) throws InvalidTelegramUsernameException {
-        //allows uppercase, lowercase, numbers and underscore. Length must be at least 5 characters
+        // Allows uppercase, lowercase, numbers and underscore
+        // Length must be at least 5 characters
         String telegramRegex = "^[a-zA-Z0-9_]{5,}$";
         if (!detailToParse.matches(telegramRegex)) {
             LOGGER.log(Level.FINE, "Regex check for Telegram username failed");
@@ -93,11 +157,22 @@ public abstract class RegexParser {
         }
     }
 
+    /**
+     * Throws an exception if the GitHub username does not comply with the regex.
+     * If the GitHub username passes the regex check nothing is returned and program
+     * flow continues.
+     * The regex only allows usernames in lowercase and uppercase letters, numbers and hyphen
+     * with a max length of 39 characters. It also blocks multiple consecutive hyphens or
+     * hyphens at the start or end of the username.
+     *
+     * @param detailToParse GitHub username to be checked
+     * @throws InvalidGithubUsernameException If GitHub username does not match regex
+     */
     protected void checkGithubUsernameRegex(String detailToParse) throws InvalidGithubUsernameException {
-        //GitHub username may only contain alphanumeric characters or hyphens.
-        //GitHub username cannot have multiple consecutive hyphens.
-        //GitHub username cannot begin or end with a hyphen.
-        //Maximum is 39 characters.
+        // Allows alphanumeric characters or hyphens.
+        // Blocks multiple consecutive hyphens.
+        // Cannot begin or end with a hyphen.
+        // Length must be max 39 characters
         String githubUsernameRegex = "^[a-zA-Z\\d](?:[a-zA-Z\\d]|-(?=[a-zA-Z\\d])){0,39}$";
         if (!detailToParse.matches(githubUsernameRegex)) {
             LOGGER.log(Level.FINE, "Regex check for Github username failed");
@@ -105,8 +180,20 @@ public abstract class RegexParser {
         }
     }
 
+    /**
+     * Throws an exception if the Name does not comply with the regex.
+     * If the Name passes the regex check nothing is returned and program
+     * flow continues.
+     * The regex only allows Names in lowercase and uppercase letters with
+     * symbols fullstop, apostrophe and slash. Space is also allowed between
+     * words.
+     *
+     * @param detailToParse Name to be checked
+     * @throws InvalidNameException If Name does not match regex
+     */
     protected void checkNameRegex(String detailToParse) throws InvalidNameException {
-        //only letters and spaces allowed
+        // Allows uppercase, lowercase, fullstop, apostrophe and slash
+        // Allows one space between consecutive words
         String nameRegex = "^([a-zA-Z.'/]+\\s)*[a-zA-Z.'/]+$";
         if (!detailToParse.matches(nameRegex)) {
             LOGGER.log(Level.FINE, "Regex check for name failed");

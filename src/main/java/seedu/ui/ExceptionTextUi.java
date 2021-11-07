@@ -210,15 +210,12 @@ public class ExceptionTextUi {
     public static void missingIndexDeleteMessage(int listSize) {
         String message;
         if (listSize == 0) {
-            message = "There seems to be missing or invalid index in your request.\n"
-                    + "Please enter command in the following way:\n"
-                    + "      rm <INDEX> {REMOVE_DETAIL_FLAGS}\n"
-                    + "Enter <INDEX> as 0";
+            message = "There are no contacts stored in ConTech.";
         } else if (listSize == 1) {
             message = "There seems to be missing or invalid index in your request.\n"
                     + "Please enter command in the following way:\n"
                     + "      rm <INDEX> {REMOVE_DETAIL_FLAGS}\n"
-                    + "Enter <INDEX> as 0 or 1";
+                    + "Enter <INDEX> as 0 as only one contact is stored";
         } else {
             message = "There seems to be missing or invalid index in your request.\n"
                     + "Please enter command in the following way:\n"
@@ -333,9 +330,9 @@ public class ExceptionTextUi {
     public static void invalidNameInput() {
         String message = "The name is not correctly formatted,\n"
                 + "Rules for name :\n"
-                + "    * Uppercase and lowercase letters\n"
-                + "    * Spaces\n"
-                + "    * No numbers or special characters\n"
+                + "    * Uppercase and lowercase letters allowed\n"
+                + "    * Spaces, fullstops, apostrophes and slashes allowed\n"
+                + "    * No numbers or other special characters\n"
                 + "    * Cannot be \"null\"";
         printDoubleLineMessage(message);
     }
@@ -377,9 +374,10 @@ public class ExceptionTextUi {
     public static void invalidEmailInput() {
         String message = "The email id is not correctly formatted,\n"
                 + "Rules for email id :\n"
-                + "    * Lowercase letters only\n"
+                + "    * Lowercase and uppercase letters allowed\n"
                 + "    * Numbers, underscore, hyphen and dot allowed\n"
-                + "    * @ cannot be at the start or end";
+                + "    * Only one @ character allowed\n"
+                + "    * Email cannot start or end with a symbol";
         printDoubleLineMessage(message);
     }
 
