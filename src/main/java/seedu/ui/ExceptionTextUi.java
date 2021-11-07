@@ -210,10 +210,7 @@ public class ExceptionTextUi {
     public static void missingIndexDeleteMessage(int listSize) {
         String message;
         if (listSize == 0) {
-            message = "There seems to be missing or invalid index in your request.\n"
-                    + "Please enter command in the following way:\n"
-                    + "      rm <INDEX> {REMOVE_DETAIL_FLAGS}\n"
-                    + "Enter <INDEX> as 0";
+            message = "There are no contacts stored in ConTech.";
         } else if (listSize == 1) {
             message = "There seems to be missing or invalid index in your request.\n"
                     + "Please enter command in the following way:\n"
