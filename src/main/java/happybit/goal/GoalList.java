@@ -502,7 +502,7 @@ public class GoalList {
      * @param newName New goal or habit name given by user.
      * @throws HaBitCommandException If old and new names are identical.
      */
-    private void compareNewNameWithOldName(String oldName,String newName) throws HaBitCommandException {
+    private void compareNewNameWithOldName(String oldName, String newName) throws HaBitCommandException {
         if (oldName.equals(newName)) {
             throw new HaBitCommandException(ERROR_IDENTICAL_NEW_NAME);
         }
