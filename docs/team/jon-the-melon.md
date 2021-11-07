@@ -2,7 +2,7 @@
 
 ## Project: Teaching Assistant's Assistant (TAA)
 Teaching Assistant's Assistant (TAA) is a Command Line Interface (CLI) application for keeping track of classes and students.
-It is written in Java, and has about 9 kLoC.
+It is written in Java, and has about 9 kLoC. 
 
 Given below are my contributions to the project.
 * **New Feature**: Added `results` HashMap attribute for each student in `v1.0`
@@ -21,6 +21,8 @@ Given below are my contributions to the project.
 
 * **Project management**:
     * Managed releases `v1.0` - `v2.1` (3 releases) on GitHub
+    * Created issues on issue tracker based on user stories
+    * Reviewed and merged teammates pull requests 
 
 * **Enhancements to existing features**:
     * Wrote additional tests for existing features to increase coverage 
@@ -33,16 +35,17 @@ Given below are my contributions to the project.
           [\#114](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/114/files), 
           [\#127](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/127/files),
           [\#212](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/212/files))
+        * Added command summary as a table ([\#100](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/100/files))
         * Did cosmetic tweaks to features list and command summary 
           ([\#219](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/219/files))
     * Developer Guide:
         * Added implementation details and sequence diagram of the `set_mark` feature.
       
 * **Team-Based Tasks**:
-    * Organising Zoom meetings to discuss features and issues.
-    * Maintaining the issue tracker
+    * Organised Zoom meetings to discuss features and issues
+    * Maintained the issue tracker
+    * Helped teammates test bugs in their implementation
 
 * **Community**:
-    * Reported bugs and suggestions for other teams in the class.
-      (example: [1](https://github.com/jon-the-melon/ped/tree/main/files))
+    * Reported bugs and suggestions for other teams in the class on [PED](https://github.com/jon-the-melon/ped/issues).
     
