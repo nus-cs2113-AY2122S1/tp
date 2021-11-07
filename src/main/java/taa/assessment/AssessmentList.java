@@ -33,7 +33,8 @@ public class AssessmentList implements ClassChecker {
      * @return true if success, else false.
      */
     public boolean addAssessment(Assessment assessment) {
-        assert assessment.getMaximumMarks() >= Assessment.MINIMUM_MARKS;
+        assert assessment.getMaximumMarks() >= Assessment.MAXIMUM_MARKS_RANGE[0];
+        assert assessment.getMaximumMarks() <= Assessment.MAXIMUM_MARKS_RANGE[1];
         assert Assessment.isWeightageWithinRange(assessment.getWeightage());
 
         assessments.add(assessment);
