@@ -2,33 +2,31 @@
 'https://plantuml.com/sequence-diagram
 
 box
-
--> SortDishCommand: parameters
+actor User
+User -> SortDishCommand: UserCommand
 
 activate SortDishCommand
 
-SortDishCommand -> DishList: execute();
+SortDishCommand -> DishList: dishList.sort(dishComparator)
 
 activate DishList
 
-SortDishCommand -> UI : execute();
+SortDishCommand -> UI : printSortDishMsg()
 
 activate UI
 
-DishList -> DishList: ingredientList.sort(dishComparator)
+SortDishCommand -> DishList: list()
+deactivate SortDishCommand
 
-UI -> UI: ui.printSortDishMsg();
-
-DishList -> DishList : list();
-
-<-- UI: output to be displayed
+DishList -> UI: printDishList(dishList)
+deactivate DishList
+User <-- UI: output to be displayed
 
  deactivate UI
 
-<-- DishList: output to be displayed
 
- deactivate DishList
 
- deactivate SortDishCommand
+
+
 
 @enduml

@@ -233,8 +233,7 @@ Commands/Parameters.
 The implementation of the Edit function allows the User to edit several 
 instance variables of the Dishes and Ingredients present in the DishList and
 IngredientList.
-
-![](images/edit_dish_name_sequence_diagram.png)
+![](images/edit_dish_name_sequence.png)
 This Sequence Diagram shows how the `EditDishNameCommand` class functions.
 
 Currently the User is able to edit the following:
@@ -250,6 +249,26 @@ the one shown above in their implementation.
 
 ### Set
 
+
+### Link
+The Link function allows Users to link existing Ingredients in the IngredientList 
+to the existing Dishes in the DishList that use them. The diagram below showcases
+the sequence of the `LinkCommand` class.
+
+![](images/link_sequence.png)
+
+* The LinkCommand calls upon DishList to get the Dish based on the Index given via 
+UserInput
+* DishList then calls on Dish to carry out the addPart(ingredientName) function which
+is responsible for the linking of the Dish and Ingredient
+* Dish calls on IngredientList through the find function, to which IngredientList
+returns the Index of the Ingredient
+* Given the index is non-negative, the addPart function then removes any old
+contributions of Ingredient Wastes in the current Dish's Waste through a loop
+* Subsequently, it adds the Ingredient to the Dish's parts following which it updates 
+the Dish's own Ingredient Contribution
+* Finally, the function re-updates the contribution of all linked Ingredient's
+Wastes to the Dish's Waste.
 ### Graph
 
 ![](images/graph_class_dig.png)
@@ -284,6 +303,18 @@ ____________________________________________________________
 ### Random dish
 
 ### Sort
+The `SortDishCommand` and `SortIngrCommand` classes are used to sort the Dishes and Ingredients
+respectively, according to their Wastages in descending order. This allows the user to view 
+the most wasted Dishes and Ingredients at the top.
+
+![](images/sort_dish_sequence.png)
+![](images/sort_ingr_sequence.png)
+
+* The Sort functions work by calling on the pre-existing Comparator function in ArrayList.
+Using this, they sort the Dishes and Ingredients in descending order of their Wastages. 
+* Once done, the Sort Commands call on the list() function present in both DishList and IngredientList. 
+* The list() function calls upon the `Ui` class to print the list of Dishes or Ingredients
+via the printDishList(dishList) or printIngrList(ingredientList) functions.
 
 ### Terminal refreshing
 The interface of the program utilizes the ClearScreen class to clear the terminal after every user input through the built-in `ProcessBuilder` Java class. Such a feature allows greater readability and focus for the user as the terminal will not be cluttered with past commands.
