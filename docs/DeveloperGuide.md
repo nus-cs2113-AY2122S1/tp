@@ -251,6 +251,10 @@ Brings developers through the requirements of Users the *Food-O-Rama* team consi
 | v2.0 | Restaurant owner | Clear all the Dishes and/or Ingredients present in my data | Restart my data collection |
 | v2.0 | Restaurant owner | View a graph of wastage for my Dishes and Ingredients | Understand the wastage trends of Dishes and Ingredients at a glance |
 | v2.0 | Restaurant owner | Refresh my Command Line Interface after every User Command | Not have a cluttered terminal and instead focus on my tasks |
+| v2.0 | Restaurant owner | Set limits for wastage | Get prompted when I waste too much as opposed to checking constantly |
+| v2.1 | Restaurant owner | Edit my dishes | Fix my mistakes and not have to worry about perfectly inputting details all the time |
+| v2.1 | Restaurant owner | Get a random dish name | Expand my collection of dishes |
+| v2.1 | Restaurant owner | Set an expiry date for ingredients | Track if my ingredients are fresh |
 
 ## 🚦 Non-Functional Requirements
 
