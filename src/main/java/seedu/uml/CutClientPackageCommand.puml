@@ -5,12 +5,23 @@ participant ":CutClientPackageCommand" as CCC
 participant ":ClientPackageList" as ClientPackageList
 
 
--> Parser: execute "cut -p p001"
+-> Parser: parse("cut -p p001")
 activate Parser
 Parser -> Parser : parseCut("-p p001")
+activate Parser
 
 create CCC
 Parser -> CCC
+activate CCC
+CCC --> Parser
+deactivate CCC
+Parser --> Parser
+deactivate Parser
+
+<-- Parser: CutClientPackageCommand
+deactivate Parser
+
+-> CCC: execute()
 activate CCC
 
 CCC -> ClientPackageList : getClientPackageById("p001")
@@ -24,9 +35,8 @@ ClientPackageList --> CCC
 deactivate ClientPackageList
 
 
-CCC --> Parser
+<-- CCC
 deactivate CCC
-<-- Parser
 deactivate Parser
 destroy CCC
 @enduml

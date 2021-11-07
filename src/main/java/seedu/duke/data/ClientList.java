@@ -11,7 +11,7 @@ import java.util.List;
  * List of clients.
  */
 public class ClientList {
-    private static final String CLIENT_NOT_FOUND_MESSAGE = "ERROR: Client cannot be found. "
+    public static final String CLIENT_NOT_FOUND_MESSAGE = "ERROR: Client cannot be found. "
             + "Please try another client ID";
 
     private final ArrayList<Client> clients;
