@@ -1,27 +1,34 @@
 @startuml
-'https://plantuml.com/class-diagram
+!include style.puml
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
+Participant ":Parser" as parser PARSER_COLOUR
+Participant ":FindCommand" as find COMMAND_COLOUR
 
-List <|-- AbstractList
-Collection <|-- AbstractCollection
 
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
+-> parser : "find [keywords]"
+activate parser PARSER_COLOUR
 
-class ArrayList {
-Object[] elementData
-size()
-}
+parser -> parser : parseAndRunFindCommand("find [keywords]")
+activate parser PARSER_COLOUR_S1
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
-}
+loop all keywords entered
+  parser -> find **: FindCommand(keyword)
+  activate find COMMAND_COLOUR
+
+  find --> parser
+  deactivate find
+
+  parser -> find : run()
+  activate find COMMAND_COLOUR
+
+  find --> parser : results for keyword
+  deactivate find
+end
+
+parser --> parser : results for all keywords
+deactivate parser
+
+<-- parser : results for all keywords
+deactivate parser
 
 @enduml
