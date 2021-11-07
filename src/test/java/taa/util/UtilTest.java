@@ -139,4 +139,28 @@ class UtilTest {
         String string = "10.0.0";
         assertFalse(Util.isStringDouble(string, 2));
     }
+
+    @Test
+    void isStringDouble_onlyOneDotAndTwoDp_expectFalse() {
+        String string = ".";
+        assertFalse(Util.isStringDouble(string, 2));
+    }
+
+    @Test
+    void isStringDouble_dotFirstAndOneZeroAndTwoDp_expectTrue() {
+        String string = ".0";
+        assertTrue(Util.isStringDouble(string, 2));
+    }
+
+    @Test
+    void isStringDouble_dotFirstAndTwoZeroesAndTwoDp_expectTrue() {
+        String string = ".00";
+        assertTrue(Util.isStringDouble(string, 2));
+    }
+
+    @Test
+    void isStringDouble_dotFirstAndThreeZeroesAndTwoDp_expectFalse() {
+        String string = ".000";
+        assertFalse(Util.isStringDouble(string, 2));
+    }
 }
