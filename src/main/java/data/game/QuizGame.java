@@ -107,13 +107,13 @@ public class QuizGame extends Game implements Serializable {
     }
 
     public void getQuestion(String[] questions, String[] answers) {
+        int index = chooseQuestion(questions);
         Scanner in = new Scanner(System.in);
         String answer = in.nextLine();
         answer = answer.replace("(","");
         answer = answer.replace(")","");
         answer = answer.replace("[","");
         answer = answer.replace("]","");
-        int index = chooseQuestion(questions);
         if (answer.toLowerCase().equals(answers[index].toLowerCase())) {
             System.out.println("Congratulations! The answer is correct!\n");
             NumOfCorrect++;
