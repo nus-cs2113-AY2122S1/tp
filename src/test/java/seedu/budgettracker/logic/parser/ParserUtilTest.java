@@ -1,6 +1,7 @@
 package seedu.budgettracker.logic.parser;
 
 import org.junit.jupiter.api.Test;
+import seedu.budgettracker.data.records.Category;
 import seedu.budgettracker.logic.parser.exceptions.ParserException;
 
 import java.time.LocalDate;
@@ -66,26 +67,78 @@ class ParserUtilTest {
     }
 
     @Test
-    void parseAmount() {
+    void parseAmount_numberString_sameNumberAsDbl() {
+        double testInt = 0;
+        try {
+            testInt = ParserUtil.parseAmount("10",true);
+        } catch (ParserException e) {
+            fail();
+        }
+        assertEquals(testInt,10.00);
     }
 
     @Test
-    void parseDate() {
+    void parseAmount_emptyStringNotCompulsory_0() {
+        double testInt = 0;
+        try {
+            testInt = ParserUtil.parseAmount("",false);
+        } catch (ParserException e) {
+            fail();
+        }
+        assertEquals(testInt,0.00);
     }
 
     @Test
-    void parseName() {
+    void parseDate_emptyString_LocalDateNow() {
+        try {
+            assertEquals(ParserUtil.parseDate(""),LocalDate.now());
+        } catch (ParserException e) {
+            fail();
+        }
     }
 
     @Test
-    void parseCategory() {
+    void parseName_string_trimmedString() {
+        try {
+            assertEquals(ParserUtil.parseName(" Test ",true),"Test");
+        } catch (ParserException e) {
+            fail();
+        }
     }
 
     @Test
-    void parseListCategory() {
+    void parseCategory_lowerCaseString_upperCaseString() {
+        try {
+            assertEquals(ParserUtil.parseCategory("food"), Category.FOOD);
+        } catch (ParserException e) {
+            fail();
+        }
     }
 
     @Test
-    void parseType() {
+    void parseCategory_emptyString_categoryGeneral() {
+        try {
+            assertEquals(ParserUtil.parseCategory(""),Category.GENERAL);
+        } catch (ParserException e) {
+            fail();
+        }
+    }
+
+    @Test
+    void parseListCategory_emptyString_categoryAll() {
+        try {
+            assertEquals(ParserUtil.parseListCategory(""),Category.ALL);
+        } catch (ParserException e) {
+            fail();
+        }
+    }
+
+    @Test
+    void parseType_numString_numInt() {
+        try {
+            assertEquals(ParserUtil.parseType("1",true),1);
+        } catch (ParserException e) {
+            fail();
+        }
     }
 }

@@ -96,7 +96,7 @@ public class ParserUtil {
             return Category.GENERAL;
         }
         try {
-            return Category.valueOf(categoryString);
+            return Category.valueOf(categoryString.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new ParserException("Specified category name does not exist!");
         }
