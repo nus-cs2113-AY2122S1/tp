@@ -101,7 +101,8 @@ The following section covers basic setup instructions to get you up and running 
 
 ### 2.2. Project Set-Up
 
-> ⚠️ **Warning**: Follow the steps in the following guide exactly. Any deviations may result in the code failing to run as intended.
+> ⚠️ **Warning**: Follow the steps in the following guide exactly. Any deviations may result in the code failing to 
+                     run as intended.
 
 1. Start IntelliJ IDEA.
 2. If you are currently on a project, close the project.
@@ -162,7 +163,6 @@ each sub-component.
 2. `PrintManager` may call `PrintTable` to print a list of items in a tabular format, for example when a user inputs
 the `help` command to view a summary of formats of relevant commands in a tabular form.
 3. `PrintManager` depends on `Goal` and `Habit` to print goal-related and habit-related information respectively.
-// TODO: Update the Print Manager diagram above to include the Habit class
 
 ### 3.3. Parser Component
 
