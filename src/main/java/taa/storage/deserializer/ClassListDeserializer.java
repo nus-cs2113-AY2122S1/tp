@@ -1,6 +1,7 @@
 package taa.storage.deserializer;
 
 //@@author leyondlee
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -26,28 +27,31 @@ public class ClassListDeserializer extends StorageDeserializer implements JsonDe
             return null;
         }
 
-        JsonElement modulesJson = jsonObject.get(MEMBER_CLASSES);
-        if (!modulesJson.isJsonArray()) {
+        JsonElement classesJson = jsonObject.get(MEMBER_CLASSES);
+        if (!classesJson.isJsonArray()) {
             return null;
         }
 
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(TeachingClass.class, new TeachingClassDeserializer());
-        Gson gson = gsonBuilder.create();
-
         ClassList classList = new ClassList();
-        JsonArray modulesJsonArray = modulesJson.getAsJsonArray();
-        for (JsonElement moduleJson : modulesJsonArray) {
-            TeachingClass teachingClass = gson.fromJson(moduleJson, TeachingClass.class);
-            if (teachingClass != null) {
-                classList.addClass(teachingClass);
-            }
-        }
-
+        deserializeClasses(classesJson, classList);
         if (!classList.verify()) {
             return null;
         }
 
         return classList;
+    }
+
+    private void deserializeClasses(JsonElement classesJson, ClassList classList) throws JsonParseException {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(TeachingClass.class, new TeachingClassDeserializer());
+        Gson gson = gsonBuilder.create();
+
+        JsonArray classesJsonArray = classesJson.getAsJsonArray();
+        for (JsonElement teachingClassJson : classesJsonArray) {
+            TeachingClass teachingClass = gson.fromJson(teachingClassJson, TeachingClass.class);
+            if (teachingClass != null) {
+                classList.addClass(teachingClass);
+            }
+        }
     }
 }
