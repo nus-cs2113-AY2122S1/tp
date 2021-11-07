@@ -108,9 +108,9 @@ class ExpenseTest {
         String input = "02-12-2020" + System.lineSeparator() + "Evan" + System.lineSeparator() + "equal";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Storage.setScanner(new Scanner(System.in));
-        Expense testExpense = new Expense("900 category Chris, Evan, Betty /description");
+        Expense testExpense = new Expense("900 category Don, Evan, Betty /description");
         trip.addExpense(testExpense);
-        assertEquals(300.0, testExpense.getAmountSplit().get("Chris"));
+        assertEquals(300.0, testExpense.getAmountSplit().get("Don"));
         assertEquals(300.0, testExpense.getAmountSplit().get("Evan"));
         assertEquals(300.0, testExpense.getAmountSplit().get("Betty"));
     }
