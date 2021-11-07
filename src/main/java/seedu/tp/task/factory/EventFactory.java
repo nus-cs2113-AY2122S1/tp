@@ -16,7 +16,7 @@ import seedu.tp.task.type.Event;
  */
 public class EventFactory extends TaskFactory {
 
-    private static final TypeEnum taskType = TypeEnum.EVENT;
+    private static final TypeEnum TASK_TYPE = TypeEnum.EVENT;
 
     LocalDateTime startDate;
     LocalDateTime endDate;
@@ -27,7 +27,7 @@ public class EventFactory extends TaskFactory {
      * @param flags the <code>Map&lt;String, String&gt;</code> of flags to their values.
      */
     public EventFactory(Map<String, String> flags) {
-        super(taskType, EventFlag.REQUIRED_FLAGS, flags);
+        super(TASK_TYPE, EventFlag.REQUIRED_FLAGS, flags);
     }
 
     @Override
