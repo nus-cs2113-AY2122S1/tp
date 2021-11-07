@@ -17,7 +17,8 @@ create "habitList: ArrayList<habit>"
 "goalList: GoalList" -> "habitList: ArrayList<habit>"
 activate "habitList: ArrayList<habit>"
 "goal: Goal" <- "habitList: ArrayList<habit>": getHabitList()
-"goalList: GoalList" <-- "goal: Goal"
+"goal: Goal" --> "habitList: ArrayList<habit>"
+"goalList: GoalList" <-- "habitList: ArrayList<habit>"
 
 create "habit: Habit"
 "goalList: GoalList" -> "habit: Habit"
