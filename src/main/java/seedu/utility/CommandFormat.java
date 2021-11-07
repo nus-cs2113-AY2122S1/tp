@@ -7,15 +7,15 @@ public class CommandFormat {
     private static final String HELP_FORMAT = "List Out All Commands: help";
     private static final String ADD_EXPENSE_FORMAT = "Adding Expense: add_ex d/DESCRIPTION " 
             + "a/AMOUNT c/CATEGORY";
-    private static final String ADD_EXPENSE_WITH_DATE_FORMAT = "Adding Expense With Date (Date Format: DD/MM/YYYY):" +
-            " add_ex_d d/DESCRIPTION a/AMOUNT c/CATEGORY D/DATE";
+    private static final String ADD_EXPENSE_WITH_DATE_FORMAT = "Adding Expense With Date (Date Format: DD/MM/YYYY):"
+            + " add_ex_d d/DESCRIPTION a/AMOUNT c/CATEGORY D/DATE";
     private static final String DEL_EXPENSE_FORMAT = "Deleting Expense: del_ex i/INDEX";
     private static final String LIST_EXPENSE_FORMAT = "Listing Expense: list_ex";
     private static final String TOTAL_EXPENSE_FORMAT = "Show Total Expense: total_ex";
     private static final String ADD_INCOME_FORMAT = "Adding Income: add_in d/DESCRIPTION " 
             + "a/AMOUNT c/CATEGORY";
-    private static final String ADD_INCOME_WITH_DATE_FORMAT = "Adding Income With Date (Date Format: DD/MM/YYYY):" +
-            " add_in_d d/DESCRIPTION a/AMOUNT c/CATEGORY D/DATE";
+    private static final String ADD_INCOME_WITH_DATE_FORMAT = "Adding Income With Date (Date Format: DD/MM/YYYY):"
+            + " add_in_d d/DESCRIPTION a/AMOUNT c/CATEGORY D/DATE";
     private static final String DEL_INCOME_FORMAT = "Deleting Income: del_in i/INDEX";
     private static final String LIST_INCOME_FORMAT = "Listing Income: list_in";
     private static final String TOTAL_INCOME_FORMAT = "Show Total Income: total_in";
