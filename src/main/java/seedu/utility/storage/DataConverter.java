@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static seedu.utility.tools.DateOperator.DATE_FORMAT;
 import static seedu.utility.tools.DateOperator.extractDate;
 import static seedu.utility.tools.Extractor.extractAmount;
 import static seedu.utility.tools.Extractor.extractCurrencyType;
@@ -50,7 +51,6 @@ public abstract class DataConverter {
             + DATA_SEPARATOR + "(?<transport>.+)" + DATA_SEPARATOR + "(?<medical>.+)"
             + DATA_SEPARATOR + "(?<bills>.+)" + DATA_SEPARATOR + "(?<entertainment>.+)"
             + DATA_SEPARATOR + "(?<misc>.+)");
-    private static final String DATE_FORMAT = "dd/MM/yyyy";
 
     /**
      * Converts Expense entries to a csv String. This is so that the String can be stored in a csv file.

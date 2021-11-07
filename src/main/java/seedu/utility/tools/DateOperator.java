@@ -16,7 +16,7 @@ import java.util.regex.Matcher;
  * DateOperator is stores useful date manipulation methods which are used for processing data of FinancialTracker.java.
  */
 public abstract class DateOperator {
-    private static final String DATE_FORMAT = "dd/MM/yyyy";
+    public static final String DATE_FORMAT = "dd/MM/yyyy";
     /**
      * Checks if the date of a given entry is within a valid date range, 
      * where startDate is earlier than or the same as endDate.
