@@ -31,10 +31,10 @@ public class Taa {
     }
 
     public void run() {
+        ui.printWelcomeMessage();
+
         loadClassListFromStorage();
         assert classList != null;
-
-        ui.printWelcomeMessage();
 
         boolean isExit = false;
         do {
