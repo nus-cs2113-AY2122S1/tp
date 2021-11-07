@@ -18,10 +18,10 @@ create Note
 AddNoteCommand -> Note : Note()
 activate Note
 return
-AddNoteCommand -> ContentManager : add(:Note)
+AddNoteCommand -> ContentManager : add(note)
 activate ContentManager
 note right : Add the new Note into \nthe arraylist of Note \nin ContentManager.
 return
-return :CommandResult
+return commandResult
 
 @enduml

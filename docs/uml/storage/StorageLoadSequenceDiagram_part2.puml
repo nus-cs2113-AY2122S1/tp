@@ -25,12 +25,12 @@ create FilterManager
 StorageManager -> FilterManager : FilterManager()
 activate FilterManager
 return filterManager
-StorageManager -> FilterManager : filter(:ModuleStorage)
+StorageManager -> FilterManager : filter(moduleStorage)
 note left : Remove any \ninvalid data \nin ModuleManager \nloaded from json
 activate FilterManager
 return
 loop each module in ModuleManager
-  StorageManager -> NoteStorage : execute(:ModuleManager, module : String, null : String, RELOAD : StorageActionEnum)
+  StorageManager -> NoteStorage : execute(moduleManager, moduleCode, null, StorageActionEnum.RELOAD)
   activate NoteStorage
   note left : ignore the file \nif exception \nis caught
   |||

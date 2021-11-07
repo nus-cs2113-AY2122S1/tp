@@ -15,9 +15,9 @@ endbox
 
 -> DeleteCommand : execute()
 activate DeleteCommand
-DeleteCommand -> ContentManager : deleteContent(contentNumber:int)
+DeleteCommand -> ContentManager : deleteContent(contentNumber)
 activate ContentManager
-ContentManager -> ContentManager : isNotValidNumber(:int)
+ContentManager -> ContentManager : isNotValidNumber(contentNumber)
 activate ContentManager
 note left : Invalid contentNumber: \ncontentNumber < 1 and \ncontentNumber > the size of arraylist
 return
@@ -30,7 +30,7 @@ return
 note left : Remove the Content from \nthe arraylist of Content \nin ContentManager.
 destroy Content
 end
-return deletedContentName:String
-return :CommandResult
+return deletedContentName
+return commandResult
 
 @enduml

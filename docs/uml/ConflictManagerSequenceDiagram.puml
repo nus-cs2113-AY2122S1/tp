@@ -6,16 +6,16 @@ box Command COMMAND_BOX_COLOR
 participant ":AddLinkCommand" as AddLinkCommand COMMAND_COLOR
 endbox
 
-participant ":ConflictManager" as ConflictManager
+box Content CONTENT_BOX_COLOR
+participant ":ConflictManager" as ConflictManager CONTENT_COLOR
+participant ":ContentManager" as ContentManager CONTENT_COLOR
+endbox
 
 box Module MODULE_BOX_COLOR
 participant ":ModuleManager" as ModuleManager MODULE_COLOR
 participant ":NusModule" as NusModule MODULE_COLOR
 endbox
 
-box Content CONTENT_BOX_COLOR
-participant ":ContentManager" as ContentManager CONTENT_COLOR
-endbox
 
 Activate AddLinkCommand
 create ConflictManager
@@ -49,7 +49,7 @@ loop For each NusModule in modules
     Deactivate ConflictManager
 
     loop For each Link in AllLinks
-        alt same day && overlapping start-time or end-time
+        opt same day && overlapping start-time to end-time
         ConflictManager -> ConflictManager: append(LinkDescription)
         ConflictManager --> ConflictManager: conflictingSchedule
         Deactivate ConflictManager
@@ -60,4 +60,5 @@ end
 end
 
 ConflictManager --> AddLinkCommand: conflictingSchedule
+destroy ConflictManager
 @enduml
