@@ -25,6 +25,8 @@ However, for first time users, you are highly encouraged to go through the user 
 bottom. This is because the guide is also written in a specific order to allow you to maximise your understanding 
 when learning how to use **ConTech**.
 
+<div style="page-break-after: always;"></div>
+
 ### Table Of Contents
 
 * **[Quick Start](#start)**
@@ -45,7 +47,6 @@ when learning how to use **ConTech**.
 * **[Command Summary](#summary)**
 
 <br />
-<div style="page-break-after: always;"></div>
 
 <a name="start"></a>
 ## Quick Start
@@ -67,7 +68,9 @@ This section aims to get you started with using **ConTech**.
    * `view 1`: Displays all the details of the contact at index `1`.   
    * `rm 1`: Deletes the contact at index `1` in the list.
    * `exit`: Exits the program.
-   
+
+<div style="page-break-after: always;"></div>
+
 If you have reached this step without any issues, congratulations! You have successfully set up **ConTech**.
 
 >:information_source: You are advised to go through the following two sections.
@@ -110,6 +113,8 @@ Throughout the user guide, you will find the following notations:
 
 Do familiarise yourself with these notations to better utilise the user guide.
 <br />
+
+<div style="page-break-after: always;"></div>
 
 <a name="features"></a>
 ## Features 
