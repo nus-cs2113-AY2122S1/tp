@@ -135,16 +135,16 @@ Mode has changed to ORDER.
 > * Parameters enclosed in `()` are **conditional** optional parameters. For `addstock` and `receiveorder`, parameters 
 > `d/DESCRIPTION` and `m/MAX_QUANTITY` will be optional only if the stock exists.
 > * Parameters you specify can be in any order. 
->  * E.g. `update i/1 q/100 m/200` and `update i/1 m/200 q/100` are both acceptable.
+>   * E.g. `update i/1 q/100 m/200` and `update i/1 m/200 q/100` are both acceptable.
 > * MediVault ignores additional parameters provided when commands do not require one.
 > * If you specify the same parameter multiple times, MediVault will accept the last occurrence.
->  * E.g. `delete i/2 i/1`, MediVault interprets the command as `delete i/1`.
+>   * E.g. `delete i/2 i/1`, MediVault interprets the command as `delete i/1`.
 > * MediVault also ignores all extra values that are not provided in parameters.
->  * E.g. `list abc123 i/1`, MediVault interprets the command as `list i/1`.
+>   * E.g. `list abc123 i/1`, MediVault interprets the command as `list i/1`.
 > * MediVault's commands are case-insensitive.
 > * Dates in the `d/DATE` and `e/EXPIRY_DATE` field are in `DD-MM-YYYY` format.
 > * Column names in the `sort` parameter can be provided as the full column name or the column alias.
->  * E.g. `NAME` is equivalent to `n` and `QUANTITY` is equivalent to `q`.
+>   * E.g. `NAME` is equivalent to `n` and `QUANTITY` is equivalent to `q`.
 > * For the `list` commands, use the `sort` parameter to sort by a column in ascending order and `rsort` parameter to
 > sort in descending order.
 > * For the `delete` commands, ID will not reset after deletion as stock ID, order ID and prescription ID are unique so that MediVault 
@@ -607,12 +607,10 @@ Lists all order records in the application.
 
 * All parameters for `listorder` command are optional, you can choose to list the records by any of the parameters.
 * You are able to listorder by id, name, quantity, date, status and also sort and reverse sort by columns.
-* Example 1 demonstrates the list of all order records without parameters.
-* Example 2 demonstrates the list of all orders that are PENDING.
 
 Format: `listorder {i/ID n/NAME q/QUANTITY d/DATE s/STATUS sort/COLUMN_NAME rsort/COLUMN_NAME}`
 
-Example 1: `listorder`
+Example 1 (List all orders): `listorder`
 
 Expected Output 1:
 
@@ -636,9 +634,9 @@ Expected Output 1:
 +----+--------------+----------+------------+-----------+
 ```
 
-Example 2: `listorder s/pending`
+Example 2 (List pending orders): `listorder s/pending`
 
-Expended output:
+Expected output:
 
 ```
 +====+==============+==========+============+=========+
@@ -951,8 +949,7 @@ Data formats:
 **Q**: How do I transfer my data to another computer?
 
 **A**: You can transfer data to another computer by moving the 3 data files into the folder where MediVault.jar is.
-Ensure that the data files are in a folder named `data`. You should expect to
-see `stock.txt, order.txt, prescription.txt` in that folder.
+Ensure that the data files are in a folder named `data`. You should expect to see `stock.txt, order.txt, prescription.txt` in that folder.
 
 ## Command Summary
 
