@@ -23,18 +23,23 @@ in Java and has about x kLoC.
 
 * **Project management:**
   * Managed releases `v1.0` - `v2.1` (3 releases)
+  * Summarized tasks to be done
 
-  
-* **Documentation:**
-  * User Guide:
+
+* **Community:**
+  * Reported bugs and suggestions for other teams in the class
+
+
+<div style="page-break-after: always;"></div>
+
+
+## Documentation
+  * **User Guide:**
     * Added the sections Quick Start, FAQ and Command Summary.
     * Added documentation for the features `add-dish`, `remove-dish`, `edit-dish`, `discount-dish` and `list-dish`
-  * Developer Guide:
+  * **Developer Guide:**
     * Added the sections Product Scope, User Stories, Non-Functional Requirements and Glossary.
     * Added implementation details for the features `add-dish`, `remove-dish`, `edit-dish`, `discount-dish` and 
       `list-dish`
     * Added UML diagram for dish component
     * Added sequence diagrams for the features `add-dish`, `remove-dish`, `edit-dish`
-    
-* **Community:**
-  * Reported bugs and suggestions for other teams in the class

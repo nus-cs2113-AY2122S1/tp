@@ -4,12 +4,6 @@
 Restaurant Buddy is a command-line-interface (CLI) application for **restaurant managers** to 
 help **keep track of restaurant data** such as its employees, dishes and ingredients in storage.
 
-## Purpose
-?
-
-## How to use
-?
-
 ## Contents
 1. [Design](#1-design)
    1. [Architecture](#11-architecture)
@@ -47,7 +41,6 @@ help **keep track of restaurant data** such as its employees, dishes and ingredi
    2. [User Stories](#3ii-user-stories)
    3. [Non Functional Requirements](#3iii-non-functional-requirements)
    4. [Glossary](#3iv-glossary)
-   5. [Instructions for Manual Testing](#3v-instructions-for-manual-testing)
 
 ## 1. Design
 
@@ -319,7 +312,3 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### 3.iv Glossary
 * **Mainstream OS:** Windows, Linux, Unix, macOS
 * **GUI:** A type of user interface that allows users to interact with applications through graphical icons.
-
-### 3.v Instructions for Manual Testing
-?
-
