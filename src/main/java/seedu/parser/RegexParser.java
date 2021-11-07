@@ -157,11 +157,22 @@ public abstract class RegexParser {
         }
     }
 
+    /**
+     * Throws an exception if the GitHub username does not comply with the regex.
+     * If the GitHub username passes the regex check nothing is returned and program
+     * flow continues.
+     * The regex only allows usernames in lowercase and uppercase letters, numbers and hyphen
+     * with a max length of 39 characters. It also blocks multiple consecutive hyphens or
+     * hyphens at the start or end of the username.
+     *
+     * @param detailToParse GitHub username to be checked
+     * @throws InvalidGithubUsernameException If GitHub username does not match regex
+     */
     protected void checkGithubUsernameRegex(String detailToParse) throws InvalidGithubUsernameException {
-        //GitHub username may only contain alphanumeric characters or hyphens.
-        //GitHub username cannot have multiple consecutive hyphens.
-        //GitHub username cannot begin or end with a hyphen.
-        //Maximum is 39 characters.
+        // Allows alphanumeric characters or hyphens.
+        // Blocks multiple consecutive hyphens.
+        // Cannot begin or end with a hyphen.
+        // Length must be max 39 characters
         String githubUsernameRegex = "^[a-zA-Z\\d](?:[a-zA-Z\\d]|-(?=[a-zA-Z\\d])){0,39}$";
         if (!detailToParse.matches(githubUsernameRegex)) {
             LOGGER.log(Level.FINE, "Regex check for Github username failed");
