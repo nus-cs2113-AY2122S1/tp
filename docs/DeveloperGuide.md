@@ -19,6 +19,10 @@
     - [4.3 Edit Feature](#43-edit-feature)
     - [4.4 Appointment Management](#44-appointment-management)
 - [Appendix A: Product Scope](#appendix-a-product-scope)
+- [Appendix B: User Stories](#appendix-b-user-stories)
+- [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
+- [Appendix D: Glossary](#appendix-d-glossary)
+- [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
 
 ## 1. Acknowledgements
 
