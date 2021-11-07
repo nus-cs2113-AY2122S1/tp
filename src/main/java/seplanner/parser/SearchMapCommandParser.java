@@ -9,6 +9,7 @@ import seplanner.universities.UniversityList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+//@@author MAZJ124
 /**
  * Handle searchmap command arguments.
  */

@@ -2,6 +2,7 @@ package seplanner.modules;
 
 import java.util.Comparator;
 
+//@@author MAZJ124
 public class Module implements Comparator<Module> {
     protected int index;
     protected String moduleCode;
@@ -77,6 +78,7 @@ public class Module implements Comparator<Module> {
                 + System.lineSeparator();
     }
 
+    //@@ author titustortoiseturltle1999
     @Override
     public int compare(Module m, Module m1) {
         return m.index - m1.index;

@@ -12,6 +12,7 @@ import seplanner.modules.ModuleList;
 import seplanner.universities.University;
 import seplanner.universities.UniversityList;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -134,7 +135,7 @@ public class RemoveCommandParser {
     private void handleModFlagArgs(String arguments, ModuleList moduleMasterList,
                                    ModuleList moduleSelectedList) throws RemoveParseException {
         if (ParseCondition.isText(arguments)) {
-            module = moduleSelectedList.getModule(arguments);
+            module = moduleSelectedList.getModule(arguments.toUpperCase());
             // Check if module has been added already
             if (ParseCondition.isNullModule(module)) {
                 logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
