@@ -9,6 +9,12 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Allows the user to add dishes to the dish list.
+ * Format: add dish [DISH_NAME]
+ *
+ * @author Dniv-ra
+ */
 public class AddDishCommand extends Command {
     public static final String numberRegex = "^[\\d\\s.]+$";
     private static Logger LOGGER = Logger.getLogger("AddDishCommand.execute()");
@@ -18,6 +24,17 @@ public class AddDishCommand extends Command {
         LoggerManager.setupLogger(LOGGER);
     }
 
+    /**
+     * User command to add a dish to the dish list.
+     * The DISH_NAME to be added is stored in ArrayList<String> parameters. The method checks if the input
+     * is empty, if the dish already exists in the list or if the input is an number only, and throws an exception.
+     *
+     * If no exceptions are thrown, DISH_NAME in ArrayList<String> parameters is added to the dish list.
+     *
+     * @param parameters contains the user input for DISH_NAME
+     * @throws FoodoramaException when the DISH_NAME is missing/blank, already exists in the list or is a number
+     * @author Dniv-ra
+     */
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         String dish = parameters.get(0);
@@ -36,6 +53,13 @@ public class AddDishCommand extends Command {
         }
     }
 
+    /**
+     * Checks if the parameter numberString is a number.
+     *
+     * @param numberString the String to check if it is a number
+     * @return true is the String is a number, false if it is not a number
+     * @author Dniv-ra
+     */
     public boolean isNumber(String numberString) {
         if (numberString.matches("^[\\d\\s.]+$")) {
             return true;

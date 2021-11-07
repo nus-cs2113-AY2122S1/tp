@@ -3,7 +3,6 @@ package seedu.foodorama.command;
 import seedu.foodorama.DishList;
 import seedu.foodorama.IngredientList;
 import seedu.foodorama.Ui;
-import seedu.foodorama.exceptions.FoodoramaException;
 import seedu.foodorama.logger.LoggerManager;
 
 import java.util.ArrayList;
@@ -11,6 +10,12 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Allows the user to clear the list of dishes and ingredients.
+ * Format: clear all
+ *
+ * @author Rakesh12000
+ */
 public class ClearAllCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger("ClearAllCommand.execute()");
     private static final Ui UI = new Ui();
@@ -20,8 +25,15 @@ public class ClearAllCommand extends Command {
         LoggerManager.setupLogger(LOGGER);
     }
 
+    /**
+     * User command to clear the list of dishes and ingredients.
+     * This method calls .clear() methods in both DishList and IngredientList, clearing the list of dishes
+     * and ingredients respectively.
+     *
+     * @author Rakesh12000
+     */
     @Override
-    public void execute(ArrayList<String> parameters) throws FoodoramaException {
+    public void execute(ArrayList<String> parameters)  {
         LOGGER.log(Level.INFO, "Start of process");
         Scanner input = new Scanner(System.in);
         UI.printConfirmClearAll();

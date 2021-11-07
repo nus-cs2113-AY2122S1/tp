@@ -1,10 +1,19 @@
 package seedu.foodorama;
 
+/**
+ * Allows the application to clear the user's terminal.
+ *
+ * @author renzocanare
+ */
 public class ClearScreen {
-    public  static void main(String [] args) {
-        clearConsole();
-    }
 
+    /**
+     * Clears the user's terminal.
+     * The method checks if the user's terminal is running on Windows or MacOS/Linux, and sends the corresponding
+     * clear terminal command to their terminal to clear their terminal.
+     *
+     * @author renzocanare
+     */
     public static void clearConsole() {
         try {
             // Get current operating system

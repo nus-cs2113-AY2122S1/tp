@@ -4,6 +4,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Class that handles all User-interface outputs that prints to the terminal.
+ *
+ * @author renzocanare, Dniv-ra, Rakesh12000, jhsee5
+ */
 public class Ui {
     private static final String LINE_DIVIDER = "____________________________________________________________";
     private static final String START_LOGO =
@@ -733,6 +738,15 @@ public class Ui {
         return INVALID_DISH_NAME;
     }
 
+    /**
+     * Prints the graph of
+     *
+     * @param graphPortions
+     * @param lengths
+     * @param i
+     * @param j
+     * @author Dniv-ra
+     */
     private void printGraph(int graphPortions, ArrayList<Double> lengths, int i, int j) {
         int integralPart = (int) Math.floor(lengths.get(j / 2));
         double fractionalPart = lengths.get(j / 2) - integralPart;
@@ -759,6 +773,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the graph of
+     *
+     * @param dishList
+     * @author Dniv-ra
+     */
     public void printDishListGraph(ArrayList<Dish> dishList) {
         assert dishList != null : "dishList cannot be null";
         int graphPortions = 10;
@@ -792,6 +812,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the legend
+     *
+     * @param dishList
+     * @param i
+     * @author Dniv-ra
+     */
     private void printDishLegend(ArrayList<Dish> dishList, int i) {
         if (i == 0) {
             System.out.print("     Legend:         ");
@@ -803,6 +830,12 @@ public class Ui {
         System.out.print(System.lineSeparator());
     }
 
+    /**
+     * Prints the graph of
+     *
+     * @param ingredientList
+     * @author Dniv-ra
+     */
     public void printIngrListGraph(ArrayList<Ingredient> ingredientList) {
         assert ingredientList != null : "ingredientList cannot be null";
         int graphPortions = 10;
@@ -836,6 +869,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the legend
+     *
+     * @param ingredientList
+     * @param i
+     * @author Dniv-ra
+     */
     private void printIngrLegend(ArrayList<Ingredient> ingredientList, int i) {
         //Scale on first line
         if (i == 0) {
@@ -867,6 +907,12 @@ public class Ui {
     }
 
 
+    /**
+     * Prints the list of ingredients that match the KEYWORD input by the user in the find command.
+     *
+     * @param matchedIngrList the list of ingredients that match the KEYWORD
+     * @author renzocanare
+     */
     public void printMatchedIngredients(ArrayList<Ingredient> matchedIngrList) {
         assert matchedIngrList != null : "matchedIngrList cannot be null";
         System.out.println(LINE_DIVIDER + System.lineSeparator()
