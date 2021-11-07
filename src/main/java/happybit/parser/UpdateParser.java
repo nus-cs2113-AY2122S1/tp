@@ -47,12 +47,12 @@ public class UpdateParser extends Parser {
     private static final int FLAG_LENGTH = 2;
 
     /**
-     * Examines user input to decide which goal attribute user wants to update.
+     * Examines user input to extract which goal attribute(s) user wants to update.
+     * Goal attributes that can be updated: Goal name, Goal Type, Goal End Date.
      *
      * @param input User input.
-     * @return Parse command specifically for updating the chosen goal attribute.
-     * @throws HaBitParserException Thrown when parameters given are for changing habit rather than updating goal
-     *                              or when parameters are not in the expected format.
+     * @return UpdateGoalCommand to specifically update the chosen goal attribute(s).
+     * @throws HaBitParserException Thrown when user types an Update command  without a g/ flag.
      *
      */
     public static Command parseUpdateGoalCommands(String input) throws HaBitParserException {
@@ -70,23 +70,33 @@ public class UpdateParser extends Parser {
         Date newGoalEndDate = null;
 
         int[] updateAttributes = getUpdateGoalAttributes(parameters);
-        if (updateAttributes[0] == 1) {
+        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
+        boolean isUpdateGoalName = (updateAttributes[0] == 1);
+        boolean isUpdateGoalType = (updateAttributes[1] == 1);
+        boolean isUpdateGoalEndDate = (updateAttributes[2] == 1);
+
+        if (isUpdateGoalName) {
             newGoalName = getName(parameters);
         }
-        if (updateAttributes[1] == 1) {
+        if (isUpdateGoalType) {
             newGoalType = getType(parameters);
         }
-        if (updateAttributes[2] == 1) {
+        if (isUpdateGoalEndDate) {
             newGoalEndDate = getDate(parameters);
         }
-        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
         ArrayList<String> excessAttributes = getExcessGoalAttributes(parameters);
         return new UpdateGoalCommand(goalIndex, newGoalName, newGoalType, newGoalEndDate,
                 updateAttributes, excessAttributes);
     }
 
-
-
+    /**
+     * Examines user input to extract which habit attribute(s) user wants to update.
+     * Habit attributes that can be updated: Habit Name, Habit Interval.
+     *
+     * @param input User input.
+     * @return UpdateHabitCommand to specifically update the chosen habit attribute(s).
+     * @throws HaBitParserException Thrown when user types a Change command without g/ and h/ flags.
+     */
     public static Command parseUpdateHabitCommands(String input) throws HaBitParserException {
         ArrayList<String> parameters = splitInput(input);
         if (!isContainFlag(parameters, FLAG_GOAL_INDEX) || !isContainFlag(parameters, FLAG_HABIT_INDEX)) {
@@ -96,13 +106,18 @@ public class UpdateParser extends Parser {
         assert (input.contains(FLAG_HABIT_INDEX));
         int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
         int habitIndex = getIndex(parameters, FLAG_HABIT_INDEX);
+
         String newHabitName = null;
         int newHabitInterval = 0;
+
         int[] updateAttributes = getUpdateHabitAttributes(parameters);
-        if (updateAttributes[0] == 1) {
+        boolean isUpdateHabitName = (updateAttributes[0] == 1);
+        boolean isUpdateHabitInterval = (updateAttributes[1] == 1);
+
+        if (isUpdateHabitName) {
             newHabitName = getName(parameters);
         }
-        if (updateAttributes[1] == 1) {
+        if (isUpdateHabitInterval) {
             newHabitInterval = getUpdateInterval(parameters, FLAG_INTERVAL);
         }
         ArrayList<String> excessAttributes = getExcessHabitAttributes(parameters);
