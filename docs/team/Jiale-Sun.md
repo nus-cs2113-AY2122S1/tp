@@ -1,5 +1,7 @@
-# Jiale-Sun - Project Portfolio Page
-
+---
+layout: page
+title: Sun Jiale's Project Portfoilo Page
+---
 ### Project: SEPlanner
 
 SEPlanner is a lightweight desktop application for Computer Engineering undergraduates from NUS to plan for the Student
@@ -17,14 +19,10 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for the command component.
+        * Added documentation and for the `command` component.
     * Developer Guide:
-        * Added implementation and class diagram for command related classes.
+        * Added implementation and class diagram for `command` related classes.
+        * Added some manual testing for `find` command.
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments):
     * Reported bugs and suggestions for other teams in the class.
-
-* **Tools**:
-
-* _{you can add/remove categories in the list above}_

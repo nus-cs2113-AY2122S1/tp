@@ -7,28 +7,28 @@ skinparam maxLength 128
 
 package "ui" <<Frame>> #DDDDDD {
     abstract class Ui {
-    + printIndex(int index, boolean println)
-    # stringPadder(String input, PaddingType type) : StringBuilder
+    + printIndex(index: int, println: boolean)
+    # stringPadder(input: String, type: PaddingType) : StringBuilder
     }
 
     class UiModule extends Ui{
-    UiModule : + printModule(Module mod, int index, boolean printMC)
+    UiModule : + printModule(mod: Module, index: int, boolean printMC)
     }
 
     class UiMapping extends Ui {
-    + printMapping(ModuleMapping mm, int index, boolean printMC)
+    + printMapping(mm: ModuleMapping, index: int, printMC: boolean)
     }
 
     class UiUniversity extends Ui {
-    + printUniversity(University uni, boolean printMC)
+    + printUniversity(uni: University, printMC: boolean)
     }
 
 UiInvalid --|> Ui
     class UiInvalid {
     + printFindModNull()
     + printFindUniNull()
-    + printParseException(String errorMessage)
-    + printFormat(String format)
+    + printParseException(errorMessage: String)
+    + printFormat(format: String)
     }
 
 UiGeneral --|> Ui

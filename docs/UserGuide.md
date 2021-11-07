@@ -45,7 +45,7 @@ SEPlanner can streamline your planning process when compared to other Graphical 
 ## Program Overview
 
 This SEPlanner allows you to search for pre-approved module mappings through our platform. To do so, you can follow the following steps:
-1. Add partner universities you are interested in.
+1. Add partner universities that you are interested in.
 2. Add potential NUS modules that you want to add.
 3. Search for potential mapping for a particular selected university.
 4. Select a mapping and add the mapping.
@@ -101,8 +101,9 @@ If the visual that appears does not look like this, you might want maximize your
 Don't worry, the features of SEPlanner still work regardless of window size, but doing so allows you to enjoy the beautiful ASCII art!
 </div>
 
-## How To Use This Guide
-This user guide provides useful tools to help the reader acclimatise to SEPlanner. 
+## How to use this guide
+This user guide provides useful tools to help you acclimatise to SEPlanner. 
+
 Here is a list of the different types of text formatting and what they mean. 
 
 <div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
@@ -138,14 +139,14 @@ list /muni
 ```  
 Expected output:
 ```
-Here are the universities and module mappings in the list:  
-[1]  - Aarhus School of Business  
-[2]  - Aarhus University  
-[3]  - Arizona State University  
+Here are the universities for exchange:  
+[1]  Aarhus School of Business
+[2]  Aarhus University
+[3]  Arizona State University  
 ...  
-[78] - Uppsala University  
-[79] - Waseda University  
-[80] - Western University  
+[78] Uppsala University
+[79] Waseda University
+[80] Western University 
 ```
 
 ### Viewing all available modules: 
@@ -174,7 +175,7 @@ Here are the modules in the list:
 
 ### Adding a partner university
 
-Add a partner university you are interested into the *Selected University List*.
+Add a partner university that you are interested into your selected university list.
 
 #### Format: `add /uni <UNIVERSITY_INDEX>` `add /uni <UNIVERSITY_NAME>`
 
@@ -200,7 +201,7 @@ New university added:
 
 ### Adding a NUS module
 
-Add a NUS module that you want to complete during SEP into the *Selected Module List*.  
+Add a NUS module that you want to complete during SEP into your *Selected Module List*.
 
 #### Format: `add /mod <MODULE_INDEX>` `add /mod <MODULE_CODE>` 
 
@@ -226,7 +227,7 @@ New module added:
 
 ### Viewing all selected universities:
 
-Displays all universities added into the *Selected University List*, as well as all module mappings added to the university by you.
+Displays all universities added into your *Selected University List*, as well as all module mappings added to the university by you.
 
 #### Format: `list /suni`
 
@@ -274,10 +275,10 @@ Mappings here are labeled with a mapping index, which will be used for `add /map
   Expected Output:
 ```
 Potential mappings for Boston University [4]  :
-1 | CS2030 - MET CS 232 : Programming with Java
-2 | BT4222 - MET CS688 : Web Analytics and Mining
-3 | BT3102 - CAS MA 589 : Computational Statistics
-4 | CS2040 - Cs112 : Introduction to Computer Science 2
+      [1]   CS2030 - MET CS 232 : Programming with Java : 4.0
+      [2]   BT4222 - MET CS688 : Web Analytics and Mining : 4.0
+      [3]   BT3102 - CAS MA 589 : Computational Statistics : 4.0
+      [4]   CS2040 - Cs112 : Introduction to Computer Science 2 : 4.0
 ```
 <div markdown="span" class="alert alert-primary"> :information_source: **Note:**
 The output of this command might differ from the example given, based on the modules added into the selected module 
@@ -291,17 +292,17 @@ Displays all available module mappings for all the universities in the *Selected
 
 #### Format: `searchmap all`
 
-* Example 1
-  Input: `searchmap all`
+* Example 1  
+  Input: `searchmap all`  
   Expected Output: 
 ```
 Potential mappings for Aarhus School of Business [1]  :
 Potential mappings for Boston University [4]  :
-1 | CS3244 - ENG EC 414 : Introduction to Machine Learning : 4.0
-2 | CS3243 - MET CS 664 : Artificial Intelligence : 4.0
+      [1]   CS3244 - ENG EC 414 : Introduction to Machine Learning : 4.0
+      [2]   CS3243 - MET CS 664 : Artificial Intelligence : 4.0
 Potential mappings for ETH Zurich [17] :
-1 | CS3244 - 252-0220-00L : Learning and Intelligent Systems : 4.0
-2 | CS3244 - 227-0105-00L : Introduction to Estimation and Machine Learning : 4.0
+      [1]   CS3244 - 252-0220-00L : Learning and Intelligent Systems : 4.0
+      [2]   CS3244 - 227-0105-00L : Introduction to Estimation and Machine Learning : 4.0
 Potential mappings for Korea Advanced Inst of Sci & Tech [24] :
 Potential mappings for University of California [59] :
 ```
@@ -329,7 +330,7 @@ Input: `add /map 4 2`
 Expected output:
 ```
 New module mapping added: 
-[2]   BT4222 - MET CS688 : Web Analytics and Mining
+      [2]   BT4222 - MET CS688 : Web Analytics and Mining
 ```
 
 ### Finding a specific university
@@ -425,7 +426,7 @@ Look for modules with module codes that matches your entered keyword.
 
 Remove a partner university from the *Selected University List*.
 
-#### Format: `remove /uni <UNIVERSITY_INDEX>` `remove /uni <UNIVERSITY_NAME` 
+#### Format: `remove /uni <UNIVERSITY_INDEX>` `remove /uni <UNIVERSITY_NAME>` 
 
 * Example 1: using index   
 Input: `remove /uni 4`   
@@ -452,14 +453,14 @@ Removes a module from the *Selected Module List*.
 Input: `remove /mod 81`  
 Expected output:
 ```
-The following module has been removed: 
+This module is removed: 
 [81]  CS1231   : Discrete Structures
 ```
 * Example 2: using module code  
 Input: `remove /mod CS1231`  
 Expected output:
 ```
-The following module has been removed: 
+This module is removed: 
 [81]  CS1231   : Discrete Structures
 ```
 
@@ -474,9 +475,8 @@ Removes a module mapping under a selected university.
 Input: `remove /map 4 2`  
 Expected output:  
 ```
-The following module mapping has been removed:
 This module mapping is removed: 
-[2]   CS1231 - CAS CS131 : Combinatoric Structures
+      [2]   CS1231 - CAS CS131 : Combinatoric Structures
 ```
  
 <div markdown="block" class="alert alert-info"> :information_source: **Note:**
