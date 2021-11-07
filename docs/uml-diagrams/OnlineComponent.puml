@@ -16,26 +16,22 @@ Shadowing<<PLACEHOLDER>> false
 rectangle a <<PLACEHOLDER>> {
 }
 
-
 frame Online {
 
 Component [NusMods] ONLINE_COLOR
-[Logic]-->[NusMods] 
-
-}
-
-frame Logic {
-}
-
-frame UI {
-}
-
-frame Storage {
-}
-
+[Logic]-->[NusMods]
 [NusMods] --> UI
-
 [NusMods] --> Storage
 
+}
+
+frame [Logic] LOGIC_COLOR {
+}
+
+frame [Storage] STORAGE_COLOR {
+}
+
+frame [UI] UI_COLOR {
+}
 
 @enduml

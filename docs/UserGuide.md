@@ -73,7 +73,7 @@ total workload:
 
 > :information_source: **Notes about the command formats**
 > - Words in `<UPPER_CASE>` are the parameters to be given by the user. <br />
-    > e.g. in `show <MODULE_CODE>`, <MODULE_CODE> is a parameter and be called like so : `show CS2113T`
+    > e.g. in `show <MODULE_CODE>`, <MODULE_CODE> is a parameter and be called like so : `show CS2113T`.
     <br /><br />
 > - Items in square brackets are optional <br />
     > e.g. find `search <KEYWORD> [-l]`
@@ -119,13 +119,13 @@ ________________________________________________________________________________
 
 ```
 
-To begin, perhaps try looking up CS2113T by using the [show Command](#display-module-info-show-module_code)
+To begin, perhaps try looking up CS2113T by using the [show command](#display-module-info-show-module_code).
 
 <br>
 
 ## Display Module Info: `show <MODULE_CODE>`
 
-If you want to find out more about a module, type `show <module_code>` to display the following:
+If you want to find out more about a module, type `show <MODULE_CODE>` to display the following:
 
 * Name
 * MCs
@@ -134,6 +134,7 @@ If you want to find out more about a module, type `show <module_code>` to displa
 * Prerequisites
 * S/U option Availability
 * Semester Availability
+* Exam Date(s)
 
 For example, try typing `show CS2113T` and see the magic happen!
 
@@ -168,7 +169,7 @@ Exam Date(s): Sem 1: Tue Nov 30 09:00 AM - 11:00 AM
 
 <br>
 
-## Search Module: `search <KEYWORD> [-l]`
+## Search Module: `search <KEYWORD> [-f]`
 
 Maybe you don't know what modules are out there, and want to know what GEH modules are available.
 
@@ -193,16 +194,16 @@ If you wish to cancel your search, hit `ENTER`.
 
 You can also apply the following flags to refine the search:
 
-- **-l (small L) :** search for mods matching the level specified e.g `-l 3000` 
-- **-mc :** search for mods matching the number of MCs specified e.g `-mc 4`
-- **-s :** search for mods offered in the semester e.g. `-s 2`
+- **-q :** performs a local search using locally saved module data which might not be the most updated version, but is
+  very quick e.g. `-q`. Note that local search cannot be cancelled.
+- **-l (small L) :** search for mods matching the level specified e.g. `-l 3000`. 
+- **-mc :** search for mods matching the number of MCs specified e.g. `-mc 4`.
+- **-s :** search for mods offered in the semester e.g. `-s 2`.
   <br>:information_source: 3 & 4 refer to Special Terms 1 and 2 respectively.
 - **-e :** search for mods that have/do not have exams. Specify with true/false e.g `-e false`.
   <br>:information_source: Defaults to false if input is invalid.
-- **-f :** search for mods from a faculty e.g `-f Computing`. Checks if faculty contains keyword.
-- **-d :** search for mods from a department `-d Computer Science`. Checks if faculty contains keyword.
-- **-q :** performs a local search using locally saved module data which might not be the most updated version, but is
-very quick e.g. `-q`. Note that local search cannot be cancelled.
+- **-f :** search for mods from a faculty e.g. `-f Computing`. Checks if faculty contains keyword.
+- **-d :** search for mods from a department e.g. `-d Computer Science`. Checks if faculty contains keyword.
 
 :information_source: Command, search term and flag regex are case-insensitive.
 
@@ -594,7 +595,7 @@ and is very similar to just running `update`.
 | Command                         | Meaning                                                                                            |
 | --------------                  | ----------                                                                                         |
 | `help`                          | Shows available commands and flags. <br> Example: `help`                                           |
-| `search <KEYWORD> [-l]`         | Lists modules that have partial matches by regex to the keyword. <br> Example: `search GEH -l 1000`|
+| `search <KEYWORD> [-q]`         | Lists modules that have partial matches by regex to the keyword. <br> Example: `search GEH -l 1000`|
 | `show <MODULE_CODE>`            | Display relevant module information. <br> Example: `show CS2113T`                                  |
 | `update`                        | Fetches all mods from the API to a local save. <br> Example: `update`                              |
 | `add`                           | Adds modules or events to the timetable. <br> Example: `add`                                       |

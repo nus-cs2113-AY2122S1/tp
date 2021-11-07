@@ -18,7 +18,7 @@ rectangle a <<PLACEHOLDER>> {
 
 frame Timetable {
 
-Component [timetable] TIMETABLE_COLOR
+Component [Timetable] TIMETABLE_COLOR
 Component [TimetableDto] TIMETABLE_COLOR
 Component [TimetableItem] TIMETABLE_COLOR
 Component [TimetableUserItem] TIMETABLE_COLOR
@@ -26,17 +26,19 @@ Component [TimetableUserItem] TIMETABLE_COLOR
 }
 
 
-frame UI {
-    [Logic] --> Timetable
+frame [UniMods] UNIMODS_COLOR {
 }
 
-frame Logic {
+frame [Logic] LOGIC_COLOR {
 }
 
-frame Storage {
+frame [Storage] STORAGE_COLOR {
 }
 
-frame Online {
+frame [Online] ONLINE_COLOR {
+}
+
+frame [UI] UI_COLOR {
 }
 
 @enduml

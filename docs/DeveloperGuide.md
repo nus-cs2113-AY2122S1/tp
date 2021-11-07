@@ -40,6 +40,9 @@ upon.
 
 ## Acknowledgements
 
+* [Thread](https://stackoverflow.com/questions/31758872/how-to-handle-different-data-types-with-same-attribute-name-with-gson)
+from StackOverflow with a simple method to parse a json field with a variable data type. 
+
 ## Setting up, getting started
 
 1. Ensure you have Java 11 or above installed in your Computer.
@@ -63,12 +66,12 @@ upon.
 The Architecture Diagram given below explains the high-level design of the App. 
 Given below is a quick overview of main components and how they interact with each other.
 
-![Unimods](./resources/architecture.png)
+![Unimods](./uml-diagrams/Architecture.png)
 
 #### Main components of the architecture
 **Unimods**
 
->  **Unimods** one class called `Duke`. It is responsible for
+>  **Unimods** has one class called `UniMods`. It is responsible for
 >  - At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 
 <br>
@@ -89,7 +92,8 @@ The **UI** component consists of the `AddUI`, `TextUi`, `TimetableUI` and `Trans
 
 ![UIComponent](./uml-diagrams/UIComponent.png)
 
-> The `TextUi` component is the most general purpose component and is called from `Logic`, `Storage` and `Online`.
+> The `TextUi` component is the most general purpose component and is called from `UniMods`, `Logic`, `Storage` 
+and `Online`.
 > 
 > The `AddUI` component is called only from `Logic`, specifically by the `AddCommand`.
 > 
@@ -106,8 +110,6 @@ The **Logic** component consists of the `CommandParser` , as well as all the val
 
 ![LogicComponent](./uml-diagrams/LogicComponent.png)
 
-The **Logic** component. </br>
-Consists of the `CommandParser` and `FlagParser` classes.
 > Converts user input into a `Command` object using the `CommandParser` component.
 >
 > If the user inputs a search command with **flags**, convert **flags** into a `SearchFlags` object using the `FlagParser` component.
@@ -119,7 +121,9 @@ Consists of the `CommandParser` and `FlagParser` classes.
 
 ### Online component
 The **Online** component consists of only `NusMods`.
+
 ![OnlineComponent](./uml-diagrams/OnlineComponent.png)
+
 > Attempts to retrieve module information from NUSMods API using the `NusMods` component and prints it using the `UI`
 > component.
 > 
@@ -134,14 +138,16 @@ The **Online** component consists of only `NusMods`.
 ### Storage component
 The **Storage** component consists of the `ModStorage`, `ProfileStorage` and `TimetableStorage` components. Much like
 their names suggest, they handle the storage of Mods, Profiles and Timetables respectively.
+
 ![StorageComponent](./uml-diagrams/StorageComponent.png)
+
 > `ModStorage` is primarily called by the `Online` component when there is a lack of internet connectivity. It is also
 > called through `Logic` manually by the user executing a `SearchCommand` with a quick flag.
 > 
 > `ProfileStorage` is called through the main `UniMods` component on startup when no prior profile information can be
 > found.
 > 
-> `TimetableStorage` is called by the `Timetable` component to handle saving and loading of timetables.
+> `TimetableStorage` is called by the `UniMods` component to handle saving and loading of timetables.
 
 ### Common classes
 
