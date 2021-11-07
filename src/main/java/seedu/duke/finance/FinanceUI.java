@@ -75,7 +75,7 @@ public class FinanceUI {
      */
     public static void printTotalAccount(double totalAccount) {
         MainUI.printSingleLine();
-        System.out.println(" Here is the total account you have: $" + totalAccount);
+        System.out.format(" Here is the total account you have: $ %.2f %n", totalAccount);
         MainUI.printSingleLine();
     }
 
