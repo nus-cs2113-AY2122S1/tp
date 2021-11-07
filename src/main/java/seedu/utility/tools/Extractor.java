@@ -1,10 +1,7 @@
 package seedu.utility.tools;
 
-<<<<<<< HEAD
-=======
 import seedu.commands.currency.CurrencyType;
 import seedu.commands.InvalidCommand;
->>>>>>> 774198baf9abb04eb64e363849dd33919decc8ed
 import seedu.entry.ExpenseCategory;
 import seedu.entry.IncomeCategory;
 import seedu.exceptions.BlankCurrencyTypeException;
