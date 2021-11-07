@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 public abstract class MedicineValidator {
     private static Logger logger = Logger.getLogger("MedicineValidator");
 
-    public MedicineValidator(){
+    public MedicineValidator() {
     }
 
     public abstract boolean containsInvalidParameterValues(Ui ui, LinkedHashMap<String, String> parameters,
@@ -48,6 +48,19 @@ public abstract class MedicineValidator {
             return true;
         }
 
+        int requiredParametersLength = requiredParameters.length;
+        int optionalParametersLength = optionalParameters.length;
+        // Combine both parameter array to check if optional parameter is valid
+        String[] mergedParameters = new String[requiredParametersLength + optionalParametersLength];
+        System.arraycopy(requiredParameters, 0, mergedParameters, 0, requiredParametersLength);
+        System.arraycopy(optionalParameters, 0, mergedParameters, requiredParametersLength, optionalParametersLength);
+
+        ArrayList<String> invalidParameters = getInvalidParameters(parameters, mergedParameters);
+
+        for (String invalidParameter : invalidParameters) {
+            parameters.remove(invalidParameter);
+        }
+
         boolean isInvalidParameterValues = validator.containsInvalidParameterValues(ui, parameters,
                 medicines, commandSyntax);
         if (isInvalidParameterValues) {
@@ -56,6 +69,32 @@ public abstract class MedicineValidator {
         }
 
         return false;
+    }
+
+    /**
+     * Filter out the invalid parameters provided by user.
+     *
+     * @param parameters       Parameters entered in by the user.
+     * @param mergedParameters Parameters that are both required and optional.
+     * @return ArrayList of invalid parameters.
+     */
+    private ArrayList<String> getInvalidParameters(LinkedHashMap<String, String> parameters,
+                                                   String[] mergedParameters) {
+        ArrayList<String> invalidParameters = new ArrayList<>();
+        for (String parameter : parameters.keySet()) {
+            boolean found = false;
+            for (String mergedParameter : mergedParameters) {
+                if (parameter.equals(mergedParameter)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                continue;
+            }
+            invalidParameters.add(parameter);
+        }
+        return invalidParameters;
     }
 
 
