@@ -9,6 +9,9 @@ activate ":UpdateGoalCommand"
 activate "goalList: GoalList"
 
 "goalList: GoalList" -> "printManager: PrintManager": printUpdateGoalMessageStart()
+activate "printManager: PrintManager"
+"printManager: PrintManager" --> "goalList: GoalList"
+deactivate "printManager: PrintManager"
 
 alt#gold #lightblue updateAttributes[0] == 1
 "goalList: GoalList" -> "goalList: GoalList": updateGoalName(goalIndex,\nnewGoalName, printManager)
@@ -32,6 +35,9 @@ deactivate "goalList: GoalList"
 end
 
 "goalList: GoalList" -> "printManager: PrintManager": printUpdateGoalMessageEnd\n(excessAttributes)
+activate "printManager: PrintManager"
+"printManager: PrintManager" --> "goalList: GoalList"
+deactivate "printManager: PrintManager"
 
 "goalList: GoalList" --> ":UpdateGoalCommand"
 deactivate "goalList: GoalList"
