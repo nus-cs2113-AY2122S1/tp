@@ -31,7 +31,8 @@ User Interface (GUI) apps.
     * [Sorting and listing students in a class by their overall score: `sort_by_scores`](#sorting-and-listing-students-in-a-class-by-their-overall-score-sort_by_scores)
   * [Attendance](#attendance)
     * [Listing attendance for a particular student: `list_attendance`](#listing-attendance-for-a-particular-student-list_attendance)
-    * [Setting attendance for a particular lesson for a student: `set_attendance`](#setting-attendance-for-a-particular-lesson-for-a-student-set_attendance)
+    * [Listing attendance for a particular lesson: `list_lesson_attendance`](#listing-attendance-for-a-particular-lesson-list_lesson_attendance)
+    * [Setting attendance for a particular lesson for student/(s): `set_attendance`](#setting-attendance-for-a-particular-lesson-for-students-set_attendance)
     * [Deleting attendance for a particular lesson for a student: `delete_attendance`](#deleting-attendance-for-a-particular-lesson-for-a-student-delete_attendance)
   * [Comment](#comment)
     * [Listing comments for all students in a class: `list_comment`](#listing-comments-for-all-students-in-a-class-list_comment)
@@ -62,7 +63,7 @@ Displays the list of all classes in the class list.
 
 Format: `list_classes`
 
-Expected Output:
+Expected Output:<br>
 ![ListClassesCommand](images/class/ListClassesCommand.png)
 
 <br>
@@ -81,7 +82,7 @@ Examples:
 * `add_class n/Sectional Group C03 i/CS2101-C03`
 * `add_class i/CS2102`
 
-Expected Output:
+Expected Output:<br>
 ![AddClassesCommand](images/class/AddClassCommand.png)
 
 <br>
@@ -103,7 +104,7 @@ Examples:
 * `edit_class c/cs2113t-f12 n/Class F12`
 * `edit_class c/CS2113T-F12 i/CS2113T-F13 n/Class-F13 of Software Engineering`
 
-Expected Output:
+Expected Output:<br>
 ![EditClassesCommand](images/class/EditClassCommand.png)
 
 <br>
@@ -118,7 +119,7 @@ Examples:
 * `delete_class c/cs2113t-f12`
 * `delete_class c/CS2101-C03`
 
-Expected Output:
+Expected Output:<br>
 ![DeleteClassesCommand](images/class/DeleteClassCommand.png)
 
 <br>
@@ -415,20 +416,74 @@ Expected Output: <br>
 #### Listing attendance for a particular student: `list_attendance`
 Lists a student's attendance.
 
-Format: `list_attendance c/<CLASS_ID> s/<STUDENT_INDEX`
+Format: `list_attendance c/<CLASS_ID> s/<STUDENT_INDEX>`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 
+Examples:
+* `list_attendance c/CS2113T-F12 s/1`
+* `list_attendance c/CS2101-D03 s/3`
+
 <br>
 
-#### Setting attendance for a particular lesson for a student: `set_attendance`
-Sets a student's attendance for a lesson.
+#### Listing attendance for a particular lesson: `list_lesson_attendance`
+Lists the class attendance for the lesson.
+
+Format: `list_lesson_attendance c/<CLASS_ID> l/<LESSON_NUMBER>`
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
+* `LESSON_NUMBER` refers to the lesson number.
+
+Examples:
+* `list_lesson_attendance c/CS2113T-F12 l/1`
+* `list_lesson_attendance c/CS2101-D03 l/3`
+
+<br>
+
+#### Setting attendance for a particular lesson for student/(s): `set_attendance`
+Sets student's attendance for a lesson.
 
 Format: `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 * `LESSON_NUMBER` refers to the lesson number.
 * `PRESENT` refers to the whether a student is present. (`1` for present, `0` for not present)
+
+Examples:
+* `set_attendance c/CS2113T-F12 s/1 l/1 p/1`
+* `set_attendance c/CS2113T-F12 s/3 l/2 p/0`
+
+<br>
+
+>This command also allows for the setting of multiple attendances.
+
+<br>
+
+Method 1: Sets the attendance for a range of student indexes for a lesson.
+
+Format: `set_attendance c/<CLASS_ID> s/<START_STUDENT_INDEX>-<END_STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
+* `START_STUDENT_INDEX` refers to the start index of the student in the student list of the class.
+* `END_STUDENT_INDEX` refers to the end index of the student in the student list of the class.
+* `LESSON_NUMBER` refers to the lesson number.
+* `PRESENT` refers to the whether a student is present. (`1` for present, `0` for not present)
+
+Examples:
+* `set_attendance c/CS2113T-F12 s/1-5 l/1 p/1`
+* `set_attendance c/CS2101-D03 s/3-8 l/2 p/0`
+
+<br>
+
+Method 2: Sets the attendance for selected student indexes for a lesson.
+
+Format: `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX>,<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
+* `STUDENT_INDEX` refers to the index of the student in the student list of the class.
+* `LESSON_NUMBER` refers to the lesson number.
+* `PRESENT` refers to the whether a student is present. (`1` for present, `0` for not present)
+
+Examples:
+* `set_attendance c/CS2113T-F12 s/1,3,5 l/1 p/1`
+* `set_attendance c/CS2101-D03 s/1,3,4,5,6 l/2 p/0`
 
 <br>
 
@@ -439,6 +494,10 @@ Format: `delete_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER>`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 * `LESSON_NUMBER` refers to the lesson number.
+
+Examples:
+* `delete_attendance c/CS2113T-F12 s/1 l/1`
+* `delete_attendance c/CS2101-D03 s/4 l/2`
 
 <br>
 <hr>
@@ -511,10 +570,9 @@ Format: `exit`
 ### Archiving data: `archive`
 Saves the current program data to an archive.
 
-By default, archive file is stored in the `<TAA Root>/data/archive` folder.
+Archive files are stored in the `<TAA Root>/data/archive` folder.
 
-Format: `archive [f/<FILENAME>]`
-* `FILENAME` [Optional] refers to the name of the file to save the archive as.
+Format: `archive`
 
 <br>
 
