@@ -72,10 +72,10 @@ applications.
 
 ### 1.2. Terminology
 
-Name     | Description                                                 | Example
------    | ----------------------------------------------------------- | ---------------------
-Goal     | A long term achievement you wish to accomplish.             |`Lose 5kg by Dec`
-Habit    | Small, actionable tasks to be done to achieve goal.         |`Run 5km`
+Name     | Description                                                   | Example
+-----    | ------------------------------------------------------------- | ---------------------
+Goal     | A long term achievement you wish to accomplish.               |`Lose 5kg by Dec`
+Habit    | Small, actionable tasks to be done to achieve goal.           |`Run 5km`
 Interval | The time period (in days) which you want the habit to recur.  |`Run 5km every 7 days`
 
 A goal can have one or more habits.\
@@ -394,7 +394,7 @@ workload or commitments.
 |App should be operable on Windows, macOS, and Ubuntu running Java `11` or above.|Technical|
 |App can be learned anyone who is familiar with computer within minutes of use.|Quality|
 |App should be a helpful, encouraging, and a joy to use.|Quality|
-| |Performance|
+| {feel free to add something here}|Performance|
 
 ## Appendix D: Glossary
 
