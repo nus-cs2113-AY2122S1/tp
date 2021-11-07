@@ -82,7 +82,7 @@ public class AddCommandParser {
         }
 
         if (LocalTime.parse(startTime).isAfter(LocalTime.parse(endTime))) {
-            throw new ParseException("Sorry, the starting time of a lesson needs to be before its ending time.");
+            throw new ParseException(Message.ERROR_INVALID_TIME_SEQUENCE);
         }
 
         return new AddLessonCommand(title, dayOfTheWeek, startTime, endTime, meetingUrl);
