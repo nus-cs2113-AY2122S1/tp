@@ -25,7 +25,7 @@ Type any of the following to get started:
 > back
 
 [TEST] >>> Error: Missing arguments or Invalid arguments.
-Format: note add "<note name>" "<note content>"
+Format: note add "<note_name>" "<note_content>"
 [TEST] >>> Your note on 'CS2113T' has been added!
 [TEST] >>> List of Content
 ---------------
@@ -33,16 +33,16 @@ Format: note add "<note name>" "<note content>"
 
 Rerun the same command with an index behind to view the content.
 [TEST] >>> Error: Invalid numerical value provided or content could not be found.
-Format: note view {item number}
+Format: note view {index}
 [TEST] >>> Error: Invalid numerical value provided or content could not be found.
 [TEST] >>> Name: CS2113T
 Content:
 Week 8 test
 
 [TEST] >>> Error: Missing arguments or Invalid arguments.
-Format: note delete <item number>
+Format: note delete <index>
 [TEST] >>> Error: Invalid numerical value provided or content could not be found.
-Format: note delete <item number>
+Format: note delete <index>
 [TEST] >>> Error: Invalid numerical value provided or content could not be found.
 [TEST] >>> Your note on 'CS2113T' has been deleted!
 [TEST] >>> 
@@ -67,11 +67,11 @@ back : Returns to the parent workspace.
 Format: back
 
 [TEST] >>> Error: Missing arguments or Invalid arguments.
-Format: schedule add "<link description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"
+Format: schedule add "<link_description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"
 [TEST] >>> Error: Missing arguments or Invalid arguments.
-Format: schedule add "<link description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"
+Format: schedule add "<link_description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"
 [TEST] >>> Error: Missing arguments or Invalid arguments.
-Format: schedule add "<link description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"
+Format: schedule add "<link_description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"
 [TEST] >>> Your schedule on 'CS2113T Tutorial' has been added!
 [TEST] >>> Your schedule on 'CS2113T Lecture' has been added!
 [TEST] >>> Command not found! Type 'help' for a list of commands.
@@ -84,7 +84,7 @@ Rerun the same command with an index behind to view the content.
 [TEST] >>> Error: Invalid numerical value provided or content could not be found.
 [TEST] >>> CS2113T Lecture (Friday, 16:00 - 18:00): https://zoom.us/test
 [TEST] >>> Error: Missing arguments or Invalid arguments.
-Format: schedule delete <item number>
+Format: schedule delete <index>
 [TEST] >>> Error: Invalid numerical value provided or content could not be found.
 [TEST] >>> Your link on 'CS2113T Tutorial' has been deleted!
 [TEST] >>> List of Content
