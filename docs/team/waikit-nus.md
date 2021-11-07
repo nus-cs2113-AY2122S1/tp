@@ -25,6 +25,7 @@ As LOTS is a CLI program, this would greatly benefit any user that excels in typ
     * **Function:** To test and capture as many edge cases as possible.
 * **Final Product Testing:**
     * **Function:** To try and break the program by throwing as many edge cases as possible at it.
+  
 ### Enhancements implemented:
 * Made all the person's name uppercase to prevent duplicates.
 * Added Total Cost and Total Quantity of everyone in the list for better UI.
@@ -33,11 +34,14 @@ As LOTS is a CLI program, this would greatly benefit any user that excels in typ
   [#190](https://github.com/AY2122S1-CS2113-T13-2/tp/issues/190), 
   [#205](https://github.com/AY2122S1-CS2113-T13-2/tp/issues/205),
   [#208](https://github.com/AY2122S1-CS2113-T13-2/tp/issues/208)).
+  
 ### Contributions to UG
 * Added the guideline for `Add Function` in the user guide. (Pull Request [#243](https://github.com/AY2122S1-CS2113-T13-2/tp/pull/243)).
+
 ### Contributions to DG
 * Manager Component with diagram under Design and added `MenuAndOrdersSequenceDiagram`.
 * Add, Delete, Edit, Orders and Find Command Classes under Implementation.
+
 ### Contributions to team-based tasks
 * Creating User Stories.
 * Maintaining Issue Trackers.
