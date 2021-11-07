@@ -100,6 +100,8 @@ Given below are the contributions I have made to this project.
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ### Contributions to the Developer Guide (Extracts):
 
 These are the diagrams (General, Class, Sequence...) I have added into the Developer Guide:
