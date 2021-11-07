@@ -26,14 +26,12 @@ The code written by me (`lezongmun`) can be found [here](https://nus-cs2113-ay21
     - `AddPersonalContactParser.java`: Parser that is responsible for prompting users to input their personal contact
       details and parsing them into `Contact` details for their personal contact
     - `IndexParser`: Parser that is responsible for obtaining the `Contact` index from a user input command string. Used 
-      for commands involving `Contact` indexes like `rm`, `view` and `edit` commands.
+      for commands involving `Contact`
 
 ### Contributions to UG
 The link to the User Guide (UG) can be found [here](https://ay2122s1-cs2113t-t09-1.github.io/tp/UserGuide.html).
 - Added documentation for features `me` and `rm`
 - Updated documentation (command formats, usages, examples) for features with `all` and `me` as inputs
-
-<div style="page-break-after: always;"></div>
 
 ### Contributions to DG
 The link to the Developer Guide (DG) can be found [here](https://ay2122s1-cs2113t-t09-1.github.io/tp/DeveloperGuide.html).
