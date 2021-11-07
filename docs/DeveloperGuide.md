@@ -63,6 +63,8 @@ The common notations listed below will be used throughout the Developer Guide.
 - Items specified with a pipe `|` denote an either-or field.
   - e.g. For `{-n | -g | -l | -te | -tw | -e}`, only **up to** one `flag` is allowed, but there are **six** choices.
 
+<div style="page-break-after: always;"></div>
+
 ## <a name="design"></a>Design
 
 ### <a name="sys-arch"></a>System Architecture
@@ -137,7 +139,7 @@ As the `Storage` component is also responsible for loading these data into their
 `Contact` objects, it is dependent on the classes, `ContactList` and `Contact`.
 
 
-
+<div style="page-break-after: always;"></div>
 
 ## <a name="implementation"></a>Implementation
 
@@ -174,6 +176,8 @@ Upon parsing the user's input, the details are passed to an `AddContactCommand`,
 executed in `ConTech`. The sequence diagram below illustrates the process of executing `AddContactCommand`.
 
 ![Add Sequence Diagram](images/AddContactCommandSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 ### <a name="View"></a>Viewing a contact: `view`
 This feature is processed using `ViewContactCommand`. Whenever a user wants to view a specific contact from the
@@ -221,6 +225,8 @@ below depicts the execution of `EditContactCommand` for a contact in the contact
 
 ![Edit Sequence Diagram](images/EditContactCommandDetailedSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 ### <a name="Delete"></a>Deleting contacts: `rm`
 This feature is processed using the `DeleteContactCommand`. Users can delete a specified contact, delete all contacts at
 once or delete specific details of a selected contact. In order to determine which contact or which 
@@ -261,6 +267,8 @@ cancelled.
 
 ![Delete Fields Sequence Diagram](images/DeleteContactFieldsSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 ### <a name="Search"></a>Searching a contact: `search`
 This feature is processed using `SearchContactParser` under `MainParser`. In order to edit a contact in the contact list,
 a user must enter a command in the form `search {-n | -g | -l | -te | -tw | -e} <SEARCH QUERY>`. If no flag is specified, 
@@ -275,6 +283,8 @@ A `SearchContactCommand` with the specified parameters will then be created and 
 diagram below shows how the `SearchContactCommand` is executed.
 
 ![Search Sequence Diagram](images/SearchContactCommandSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 ### <a name="List"></a>Listing all contacts: `ls`
 This feature is processed under `ListContactsCommand`. The feature allows the user to list all their stored contacts
@@ -353,7 +363,8 @@ and pass the contact index to the execution of the `edit` command accordingly.
     * Pros: Easy to implement as rm is a much simpler feature which only takes an index.
       Much easier exception handling also and thus less error-prone.
     * Cons: Less user intuitive and takes two steps when the user wants to edit a contact and also delete fields
-    
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="scope"></a>Product scope
 
@@ -395,6 +406,8 @@ additional devices or platforms.
 
 * <a name="os"></a>**Mainstream Operating Systems** - Windows, macOS, *NIX
 * <a name="local-storage"></a>**LocalStorage** - Refers to user's hard disk storage
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="manual-test"></a>Instructions for manual testing
 
@@ -488,7 +501,9 @@ exploratory testing.
               Order of parameters do not matter
        ____________________________________________________________
        ```
-       
+
+<div style="page-break-after: always;"></div>
+
 4. Adding a contact with duplicates
     1. Prerequisites: A contact with similar either similar name or details must already be in the contact list. For
        simplicity, we will re-use the same command from `1`.
@@ -513,6 +528,7 @@ exploratory testing.
        ```
     3. Follow up: You can either input `y` which stands for **yes** allowing you to still add the contact despite having
        a duplicate field or `n` which stands for **no** to disregard adding the contact.
+       
        
 
 5. Adding a contact with a wrong flag
@@ -577,7 +593,8 @@ exploratory testing.
 2. Viewing user's own personal contact
     1. Test case: `view me`
     2. Expected: All personal details of the user will be displayed.
-  
+
+<div style="page-break-after: always;"></div>
 
 3. Viewing a contact with a missing or invalid index
     1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
@@ -650,6 +667,8 @@ exploratory testing.
        ____________________________________________________________
        ```
 
+<div style="page-break-after: always;"></div>
+
 4. Editing a user's personal contact
     1. Test case: `edit me -n Zack -g zackster -e zack@email.com`<br>
     2. Expected: User's personal detail will be edited and the personal details will be displayed including fields that
@@ -710,6 +729,8 @@ exploratory testing.
        Please try again with a valid command.
        ____________________________________________________________
        ```  
+
+<div style="page-break-after: always;"></div>
 
 ### <a name="testing-delete"></a>Deleting a contact
 1. Deleting a contact that is in the contact list
@@ -783,6 +804,8 @@ exploratory testing.
     3. Follow up: You can either input `y` which stands for **yes** allowing you to delete the field from the contact
        or `n` which stands for **no** to cancel deleting the field from the contact.
 
+<div style="page-break-after: always;"></div>
+
 ### <a name="testing-search"></a>Searching for a contact
 1. Search for a contact that is in the contact list
     1. Test case: `search alex`<br>
@@ -836,7 +859,9 @@ exploratory testing.
        NOTE : Flag is optional and only one can be specified
        ____________________________________________________________
        ```
-       
+
+<div style="page-break-after: always;"></div>
+
 ### <a name="testing-import"></a>Importing contacts
 1. Importing contacts with all valid details
     1. Test case: `import`<br>
