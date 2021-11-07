@@ -385,11 +385,13 @@ public class TextUi {
     public static void showMultipleExpenditureDeletedMessage(int index, Expenditure delExe, AllRecordList recordList) {
         System.out.println("Successfully deleted Expenditure " + index + ":");
         showExpenditureDetails(delExe, recordList);
+        System.out.println(DIVIDER);
     }
 
     public static void showMultipleLoanDeletedMessage(int index, Loan deletedLoan) {
         System.out.println("Successfully deleted Loan " + index + ":");
         showLoanDetails(deletedLoan);
+        System.out.println(DIVIDER);
     }
 
     public static void showBudgetDeletedMessage() {
