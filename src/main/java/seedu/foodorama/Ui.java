@@ -451,7 +451,7 @@ public class Ui {
     public void printDishNameRemoved(String dishName) {
         assert dishName != null : "dishName cannot be null";
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                +"'" + dishName + "' has been removed from your dish list!" + System.lineSeparator()
+                + "'" + dishName + "' has been removed from your dish list!" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
