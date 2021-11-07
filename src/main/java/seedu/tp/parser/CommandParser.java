@@ -10,6 +10,7 @@ import seedu.tp.command.HelpCommand;
 import seedu.tp.command.InvalidCommand;
 import seedu.tp.command.ListCommand;
 import seedu.tp.command.SortCommand;
+import seedu.tp.command.UpcomingCommand;
 import seedu.tp.command.addtask.DeadlineCommand;
 import seedu.tp.command.addtask.EventCommand;
 import seedu.tp.command.addtask.ModuleCommand;
@@ -106,6 +107,8 @@ public class CommandParser {
             return new EditCommand(taskManager, commandOptions);
         case BROWSE:
             return new BrowseCommand(taskManager, commandOptions);
+        case UPCOMING:
+            return new UpcomingCommand(taskManager, commandOptions);
         default:
             return new InvalidCommand();
         }

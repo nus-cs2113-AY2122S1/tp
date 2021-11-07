@@ -45,7 +45,11 @@ import seedu.tp.task.type.Todo;
  */
 public class TaskManager implements Subject {
 
-    private List<Task> taskList;
+    public List<Task> getAllTasksView() {
+        return Collections.unmodifiableList(taskList);
+    }
+
+    private final List<Task> taskList;
     private List<Task> latestFilteredList;
     static final int STARTING_SIZE = 128;
 

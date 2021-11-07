@@ -3,6 +3,8 @@ package seedu.tp.task.type;
 
 import java.time.LocalDateTime;
 import java.util.Map;
+
+import org.jetbrains.annotations.Nullable;
 import seedu.tp.command.flags.DeadlineFlag;
 import seedu.tp.exception.ParseDateFailedException;
 import seedu.tp.parser.DateParser;
@@ -46,6 +48,11 @@ public class Deadline extends Task {
 
     public TypeEnum getTaskType() {
         return this.TASK_TYPE;
+    }
+
+    @Override
+    public LocalDateTime getHappenTime() {
+        return getDueDate();
     }
 
     public LocalDateTime getDueDate() {
