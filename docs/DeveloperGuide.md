@@ -171,12 +171,6 @@ Additionally, the `Command` class is used to execute various actions in the vari
 ![](documentationPics/mainTravellerDesign.png)
 <div style="text-align: center;">Figure 4: Design of the Main Traveller</div>
 
-
-
-
-
-
-
 Details of each of the sub-components can be found in the subsequent sub-sections.
 
 #### 1.2.1. Traveller class

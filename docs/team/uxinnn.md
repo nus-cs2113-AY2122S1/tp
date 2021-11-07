@@ -1,20 +1,24 @@
 # Foong Xin Yu - Project Portfolio Page
+
 ## Overview
 Hi! I'm a Year 2 Computer Engineering student at NUS.
+
 Please see below for my contributions to Traveller.
+
 ### Summary of Contributions
+
 #### Features
 * `new`: Allow users to create new trips.
-    * Core part of Traveller, which is to enable users to plan trips.
+   * Core part of Traveller, which is to enable users to plan trips.
 * `view`: Allow users to view trips created.
-    * Core part of Traveller, enable users to view their created trips.
+   * Core part of Traveller, enable users to view their created trips.
 * `add-day`: Allow users to add days to each trip.
-    * Usually, people plan trips by day. This enables users to do just that using Traveller, without having
-      1 large lump of activities to do without any indication of which day each activity will be done on.
+   * Usually, people plan trips by day. This enables users to do just that using Traveller, without having
+    1 large lump of activities to do without any indication of which day each activity will be done on.
 * `add-item`: Allow users to add items to each day.
-    * Represents an activity that someone on the trip will do. Enable users to have multiple items in a day so that
-      they can plan multiple activities per day.
-    * Has an added time field to help users easily organise the duration of each item.
+   * Represents an activity that someone on the trip will do. Enable users to have multiple items in a day so that
+   they can plan multiple activities per day.
+   * Has an added time field to help users easily organise the duration of each item.
 * `exit`: Exits the application.
 #### Other code contributions
 * Implemented the main structure of Traveller.
