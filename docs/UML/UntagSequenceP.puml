@@ -13,6 +13,7 @@ skinparam sequenceArrowColor black
 -> ":Parser": parseMaster()
 activate ":Parser"
 
+create ":TagUntagCommand"
 ":Parser" -> ":TagUntagCommand": untagParse()
 activate ":TagUntagCommand"
 
@@ -30,6 +31,7 @@ alt recipe exists
         ":Cookbook" --> ":TagUntagCommand"
     end
 else recipe does not exist
+    create ":GordonException"
     ":Cookbook" -> ":GordonException": throws(NO_RECIPE_FOUND)
     activate ":GordonException"
     ":GordonException" --> ":Parser"

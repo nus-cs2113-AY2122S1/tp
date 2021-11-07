@@ -20,6 +20,7 @@ activate ":Parser"
 ":Parser" --> ":Parser"
 deactivate ":Parser"
 
+create ":Recipe"
 ":Parser" -> ":Recipe": Recipe(String name)
 activate ":Recipe"
 
@@ -51,6 +52,7 @@ deactivate ":Parser"
 ":Recipe" --> ":Parser":
 destroy ":Recipe"
 
+create ":AddCommand"
 ":Parser" -> ":AddCommand": AddCommand(Recipe r)
 activate ":AddCommand"
 
