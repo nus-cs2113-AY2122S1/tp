@@ -228,15 +228,16 @@ public class Ui {
 
     private static final String INVALID_COMMAND = LINE_DIVIDER + System.lineSeparator()
             + "Sorry, that is an invalid command." + System.lineSeparator()
+            + "Type 'help' to see a full list of commands with their examples!" + System.lineSeparator()
             + LINE_DIVIDER;
 
 
     public static final String INVALID_NUMBER = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, input is not valid. The command has been disregarded." + System.lineSeparator()
+            + "Sorry, your input is not valid. The command has been disregarded." + System.lineSeparator()
             + LINE_DIVIDER;
 
     private static final String LIST_MISSING_PARAM = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, missing type parameter!." + System.lineSeparator()
+            + "Sorry, your input is missing a type parameter!" + System.lineSeparator()
             + "Please enter 'list [TYPE]', where [TYPE] is either 'dish' or 'ingr'." + System.lineSeparator()
             + LINE_DIVIDER;
 
@@ -253,7 +254,7 @@ public class Ui {
             + LINE_DIVIDER;
 
     private static final String DISH_SORT = LINE_DIVIDER + System.lineSeparator()
-            + "List of Dishes has been sorted." + System.lineSeparator();
+            + "List of Dishes has been sorted.";
 
     private static final String DISH_LIST_CLEARED = LINE_DIVIDER + System.lineSeparator()
             + "Dish list has been cleared." + System.lineSeparator()
@@ -264,26 +265,26 @@ public class Ui {
             + LINE_DIVIDER;
 
     private static final String INGR_INDEX_MISSING = LINE_DIVIDER + System.lineSeparator()
-            + "Missing Parameter!" + System.lineSeparator()
+            + "Sorry, your input is missing a parameter!" + System.lineSeparator()
             + "Please type the NAME or INDEX of the Ingredient you would like to edit." + System.lineSeparator()
             + "You can view the Ingredient Index by typing 'list ingr'." + System.lineSeparator()
             + LINE_DIVIDER;
 
     private static final String DISH_INDEX_MISSING = LINE_DIVIDER + System.lineSeparator()
-            + "Missing Parameter!" + System.lineSeparator()
+            + "Sorry, your input is missing a parameter!" + System.lineSeparator()
             + "Please type the NAME or INDEX of the Dish you would like to edit." + System.lineSeparator()
             + "You can view the Dish Index by typing 'list dish'." + System.lineSeparator()
             + LINE_DIVIDER;
 
     private static final String INGR_NOT_EXIST_EDIT = LINE_DIVIDER + System.lineSeparator()
             + "Ingredient does not exist!" + System.lineSeparator()
-            + "Please type the correct Index OR Name of the Ingredient you would like to edit." + System.lineSeparator()
+            + "Please type the correct NAME or INDEX of the Ingredient you would like to edit." + System.lineSeparator()
             + "You can view the Ingredient Index by typing 'list ingr'." + System.lineSeparator()
             + LINE_DIVIDER;
 
     private static final String DISH_NOT_EXIST_EDIT = LINE_DIVIDER + System.lineSeparator()
             + "Dish does not exist!" + System.lineSeparator()
-            + "Please type the NAME or INDEX of the Dish you would like to edit." + System.lineSeparator()
+            + "Please type the correct NAME or INDEX of the Dish you would like to edit." + System.lineSeparator()
             + "You can view the Dish Index by typing 'list dish'." + System.lineSeparator()
             + LINE_DIVIDER;
 
@@ -293,7 +294,7 @@ public class Ui {
 
 
     private static final String INGR_SORT = LINE_DIVIDER + System.lineSeparator()
-            + "List of Ingredients has been sorted." + System.lineSeparator();
+            + "List of Ingredients has been sorted.";
 
     private static final String INGR_LIST_CLEARED = LINE_DIVIDER + System.lineSeparator()
             + "Ingredient list has been cleared." + System.lineSeparator()
@@ -314,27 +315,27 @@ public class Ui {
             + LINE_DIVIDER;
 
     public static final String GRAPH_INVALID_PARAM = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, missing type parameter!." + System.lineSeparator()
+            + "Sorry, your input is missing a type parameter!" + System.lineSeparator()
             + "Please enter 'graph [TYPE]', where [TYPE] is either 'dish' or 'ingr'." + System.lineSeparator()
             + LINE_DIVIDER;
 
     public static final String INVALID_CONFIRMATION = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, that is an invalid input. " + System.lineSeparator()
+            + "Sorry, that is an invalid input." + System.lineSeparator()
             + "Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:" + System.lineSeparator()
             + LINE_DIVIDER;
 
     public static final String INVALID_CONFIRMATION_SOFT_LIMIT = LINE_DIVIDER + System.lineSeparator()
             + "Sorry, that is an invalid input. "
-            + "Please type 'y/yes' to confirm or 'n/no' to type new weight" + System.lineSeparator()
+            + "Please type 'y/yes' to confirm or 'n/no' to type a new weight:" + System.lineSeparator()
             + LINE_DIVIDER;
 
     public static final String INVALID_INGR_NAME = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, Ingredient Name cannot be a Number. The command has been disregarded."
+            + "Sorry, Ingredient Name cannot be a number. The command has been disregarded."
             + System.lineSeparator()
             + LINE_DIVIDER;
 
     public static final String INVALID_DISH_NAME = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, Dish Name cannot be a Number. The command has been disregarded." + System.lineSeparator()
+            + "Sorry, Dish Name cannot be a number. The command has been disregarded." + System.lineSeparator()
             + LINE_DIVIDER;
 
     public static final String DISREGARD_MSG = LINE_DIVIDER + System.lineSeparator()
@@ -385,7 +386,7 @@ public class Ui {
             + LINE_DIVIDER;
 
     private static final String INVALID_INDEX = LINE_DIVIDER + System.lineSeparator()
-            + "The index given as input must be an integer" + System.lineSeparator()
+            + "Sorry, the index given as input must be an integer!" + System.lineSeparator()
             + LINE_DIVIDER;
 
     public static final String LINK_MISSING_PARAM = LINE_DIVIDER + System.lineSeparator()
@@ -428,7 +429,7 @@ public class Ui {
     public String getDishNotExistMsg(String dishName) {
         assert dishName != null : "dishName cannot be null";
         return LINE_DIVIDER + System.lineSeparator()
-                + "Sorry, the dish " + dishName + " does not exist in your list." + System.lineSeparator()
+                + "Sorry, the dish '" + dishName + "' does not exist in your list." + System.lineSeparator()
                 + LINE_DIVIDER;
     }
 
@@ -450,7 +451,7 @@ public class Ui {
     public void printDishNameRemoved(String dishName) {
         assert dishName != null : "dishName cannot be null";
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + dishName + " has been removed!" + System.lineSeparator()
+                +"'" + dishName + "' has been removed from your dish list!" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
@@ -488,7 +489,7 @@ public class Ui {
     public void printIngrNameRemoved(String ingredientName) {
         assert ingredientName != null : "ingredientName cannot be null";
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + ingredientName + " has been removed!" + System.lineSeparator()
+                + "'" + ingredientName + "' has been removed from your ingredient list!" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
@@ -535,14 +536,14 @@ public class Ui {
     public String getDishExistsMsg(String dishName) {
         assert dishName != null : "dishName cannot be null";
         return LINE_DIVIDER + System.lineSeparator()
-                + "Sorry, the Dish " + dishName + " already exists in your list." + System.lineSeparator()
+                + "Sorry, the Dish '" + dishName + "' already exists in your list." + System.lineSeparator()
                 + LINE_DIVIDER;
     }
 
     public String getIngrExistsMsg(String ingrName) {
         assert ingrName != null : "ingrName cannot be null";
         return LINE_DIVIDER + System.lineSeparator()
-                + "Sorry, the Ingredient " + ingrName + " already exists in your list." + System.lineSeparator()
+                + "Sorry, the Ingredient '" + ingrName + "' already exists in your list." + System.lineSeparator()
                 + LINE_DIVIDER;
     }
 
@@ -576,7 +577,7 @@ public class Ui {
 
     public void printConfirmDelDish(String dishName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Are you sure you want to remove " + dishName + "?" + System.lineSeparator()
+                + "Are you sure you want to remove '" + dishName + "'?" + System.lineSeparator()
                 + "Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
@@ -587,7 +588,7 @@ public class Ui {
 
     public void printConfirmDelIngr(String ingrName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Are you sure you want to remove " + ingrName + "?" + System.lineSeparator()
+                + "Are you sure you want to remove '" + ingrName + "'?" + System.lineSeparator()
                 + "Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
@@ -644,19 +645,19 @@ public class Ui {
 
     public void printDishNameChanged(String dishName, String newName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + dishName + " has been updated to '" + newName + "'!"
+                + "'" + dishName + "' has been updated to '" + newName + "'!"
                 + System.lineSeparator() + LINE_DIVIDER);
     }
 
     public void printDishWastageChanged(String dishName, Double newWastage) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Wastage of " + dishName + " has been updated to '" + newWastage + "' kg!"
+                + "Wastage of '" + dishName + "' has been updated to " + newWastage + " kg!"
                 + System.lineSeparator() + LINE_DIVIDER);
     }
 
     public void printIngrStorageChanged(String dishName, Double newStorage) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Storage of " + dishName + " has been updated to '" + newStorage + "' kg!"
+                + "Storage of '" + dishName + "' has been updated to " + newStorage + " kg!"
                 + System.lineSeparator() + LINE_DIVIDER);
     }
 
@@ -677,7 +678,7 @@ public class Ui {
 
     public void printIngrNameChanged(String ingrName, String newName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + ingrName + " has been updated to '" + newName + "'!"
+                + "'" + ingrName + "' has been updated to '" + newName + "'!"
                 + System.lineSeparator() + LINE_DIVIDER);
     }
 
@@ -807,7 +808,7 @@ public class Ui {
             System.out.println(LINE_DIVIDER);
         } else {
             System.out.println(LINE_DIVIDER);
-            System.out.println("There are no dishes to graph");
+            System.out.println("Sorry, there are no dishes to graph!");
             System.out.println(LINE_DIVIDER);
         }
     }
@@ -864,7 +865,7 @@ public class Ui {
             System.out.println(LINE_DIVIDER);
         } else {
             System.out.println(LINE_DIVIDER);
-            System.out.println("There are no ingredients to graph");
+            System.out.println("Sorry, there are no ingredients to graph!");
             System.out.println(LINE_DIVIDER);
         }
     }
@@ -893,9 +894,9 @@ public class Ui {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "As requested, here are the matching dishes in your list:");
         if (DishList.dishList.size() == 0) {
-            System.out.println("There are no dishes recorded!");
+            System.out.println("Sorry, there are no dishes recorded!");
         } else if (matchedDishList.size() == 0) {
-            System.out.println("The keyword cannot be found!");
+            System.out.println("Sorry, the keyword cannot be found!");
         } else {
             int dishListIndex;
             for (Dish element : matchedDishList) {
@@ -918,9 +919,9 @@ public class Ui {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "As requested, here are the matching ingredients in your list:");
         if (IngredientList.ingredientList.size() == 0) {
-            System.out.println("There are no ingredients recorded!");
+            System.out.println("Sorry, there are no ingredients recorded!");
         } else if (matchedIngrList.size() == 0) {
-            System.out.println("The keyword cannot be found!");
+            System.out.println("Sorry, the keyword cannot be found!");
         } else {
             int ingrListIndex;
             for (Ingredient element : matchedIngrList) {
@@ -935,7 +936,8 @@ public class Ui {
         assert ingredientName != null : "ingredientName cannot be null";
         assert dishName != null : "dishName cannot be null";
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Successfully added " + ingredientName + " as ingredient of " + dishName + System.lineSeparator()
+                + "Successfully added the ingredient '" + ingredientName + "' as an ingredient of '" + dishName + "'!"
+                + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
@@ -1006,19 +1008,19 @@ public class Ui {
 
     public void printLimitExceeded(String input) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Wastage of '" + input + "' has exceeded the limit" + System.lineSeparator()
+                + "Wastage of '" + input + "' has exceeded the limit!" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
     public void printLimitSet(String name, double limit) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "The limit for '" + name + "' is now " + limit + " kg" + System.lineSeparator()
+                + "The limit for '" + name + "' is now " + limit + " kg!" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
     public void printExcessParamMsg(String name) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Warning: The command '" + name + "' does not need any excess parameters" + System.lineSeparator()
+                + "Warning: The command '" + name + "' does not need any excess parameters!" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
@@ -1048,42 +1050,42 @@ public class Ui {
 
     public void printInvalidIngrWeight(String ingredientName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "The weight of " + ingredientName + " cannot be negative!" + System.lineSeparator()
+                + "The weight of '" + ingredientName + "' cannot be negative!" + System.lineSeparator()
                 + "Please enter a weight that is not negative:" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
     public void printInvalidIngrWasteValue(String ingredientName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "The weight of " + ingredientName + " wasted cannot be negative!" + System.lineSeparator()
+                + "The weight of '" + ingredientName + "' wasted cannot be negative!" + System.lineSeparator()
                 + "Please enter a weight that is not negative:" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
     public void printInvalidUpdateIngrValue(String ingredientName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "The weight of " + ingredientName + " to be stored cannot be negative!" + System.lineSeparator()
+                + "The weight of '" + ingredientName + "' to be stored cannot be negative!" + System.lineSeparator()
                 + "Please enter a weight that is not negative:" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
     public void printInvalidIngrLimitValue(String ingredientName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "The limit of " + ingredientName + "  cannot be negative!" + System.lineSeparator()
+                + "The limit of '" + ingredientName + "'  cannot be negative!" + System.lineSeparator()
                 + "Please enter a weight that is not negative:" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
     public void printInvalidDishWasteValue(String dishName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "The weight of " + dishName + " wasted cannot be negative!" + System.lineSeparator()
+                + "The weight of '" + dishName + "' wasted cannot be negative!" + System.lineSeparator()
                 + "Please enter a weight that is not negative:" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
     public void printDishWasteValueHigh(String dishName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "The weight of " + dishName + " wasted is unusually greater than 10,000kg!" + System.lineSeparator()
+                + "The weight of '" + dishName + "' wasted is unusually greater than 10,000kg!" + System.lineSeparator()
                 + "Are you sure you want to add this weight?" + System.lineSeparator()
                 + "Please type 'y'/'yes' to confirm, or 'n'/'no' to type a new weight:" + System.lineSeparator()
                 + LINE_DIVIDER);
@@ -1091,7 +1093,7 @@ public class Ui {
 
     public void printIngrValueHigh(String ingrName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "The weight of " + ingrName + " is unusually greater than 10,000kg!" + System.lineSeparator()
+                + "The weight of '" + ingrName + "' is unusually greater than 10,000kg!" + System.lineSeparator()
                 + "Are you sure you want to add this weight?" + System.lineSeparator()
                 + "Enter 'y' to continue, or 'n' to type a new weight" + System.lineSeparator()
                 + LINE_DIVIDER);
@@ -1099,7 +1101,7 @@ public class Ui {
 
     public void printIngrWasteValueHigh(String ingrName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "The weight of " + ingrName + " wasted is unusually greater than 10,000kg!" + System.lineSeparator()
+                + "The weight of '" + ingrName + "' wasted is unusually greater than 10,000kg!" + System.lineSeparator()
                 + "Are you sure you want to add this weight?" + System.lineSeparator()
                 + "Please type 'y'/'yes' to confirm, or 'n'/'no' to type a new weight:" + System.lineSeparator()
                 + LINE_DIVIDER);
@@ -1107,20 +1109,20 @@ public class Ui {
 
     public String printNumericalInputInvalid(String type) {
         return LINE_DIVIDER + System.lineSeparator()
-                + "The " + type + " is out of bounds. The Command has been disregarded."
+                + "The " + type + " is out of bounds. The command has been disregarded."
                 + System.lineSeparator() + LINE_DIVIDER;
     }
 
     public void printInvalidDishLimitValue(String dishName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "The limit of " + dishName + "  cannot be negative!" + System.lineSeparator()
+                + "The limit of '" + dishName + "'  cannot be negative!" + System.lineSeparator()
                 + "Please enter a weight that is not negative:" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
     public void printConfirmDishWaste(String dishName, double dishWasteWeight) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Are you sure you want to add wasted " + dishName + " that weighs " + dishWasteWeight + "kg?"
+                + "Are you sure you want to add wasted '" + dishName + "' that weighs " + dishWasteWeight + "kg?"
                 + System.lineSeparator()
                 + "Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:" + System.lineSeparator()
                 + System.lineSeparator() + LINE_DIVIDER);
