@@ -56,6 +56,7 @@ This section provides a list 3rd-party libraries adapted in the development of *
 3. [Apache Commons IO](https://commons.apache.org/proper/commons-io/)
 4. [Checkstyle](https://checkstyle.sourceforge.io/)
 5. [JUnit](https://junit.org)
+6. [Google Material Icons](https://google.github.io/material-design-icons/)
 
 ## 2. Setting up, getting started
 This section provides instructions on how to set up the development environment of the **SchedUrMods** application.
