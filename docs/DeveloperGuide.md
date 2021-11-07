@@ -455,7 +455,10 @@ Food-related commands operate on a list of food records, and a food storage obje
 how the storage in a text file, and the current food list interact with each other.
 Food storage object contains static methods to read and write data from said list.
 The saving of data from the list to the storage file is elaborated further in the diagram below.
-StallManager
+Additionally, StallsManager is implemented to support the `food view` commands, which include a reference food court
+, Technoedge.This class includes all stalls, food items sold by the store as well as the calorie count for the food items.
+Furthermore, methods that involve sorting and filtering food items by calorie count and name are implemented in StallsManager
+for the user to easily find items.
 ![](./images/food/foodClassDiagram.png)
 
 ##### Sequence diagram when food is parsed

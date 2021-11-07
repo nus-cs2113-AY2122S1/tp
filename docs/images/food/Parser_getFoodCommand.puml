@@ -10,7 +10,7 @@ activate ":Parser"
 deactivate ":Parser"
 alt suffix = "add"
     create ":AddFoodCommand"
-    ":Parser" -> ":AddFoodCommand" : AddFoodCommand()
+    ":Parser" -> ":AddFoodCommand" :
     activate ":AddFoodCommand"
     ":AddFoodCommand" --> ":Parser" : input
     ":Parser" -> ":Parser" : Parse input
@@ -18,41 +18,82 @@ alt suffix = "add"
     ":Parser" --> ":AddFoodCommand" : Food Record
     deactivate ":Parser"
     ":AddFoodCommand" -> ":StorageFood" : Add Food Record
-    ":AddFoodCommand" --> ":Parser" : Finish command
+    ":AddFoodCommand" --> ":Parser"
     deactivate ":AddFoodCommand"
     destroy ":AddFoodCommand"
+else suffix = "radd"
 
 else suffix = "delete"
     create ":DeleteFoodCommand"
-    ":Parser" -> ":DeleteFoodCommand" : DeleteFoodCommand()
+    ":Parser" -> ":DeleteFoodCommand"
     activate ":DeleteFoodCommand"
     ":DeleteFoodCommand" -> ":Parser" : Get Index
     ":Parser" --> ":DeleteFoodCommand" : Index
     ":DeleteFoodCommand" -> ":StorageFood" : Delete Food
-    ":DeleteFoodCommand" --> ":Parser" : Finish command
+    ":DeleteFoodCommand" --> ":Parser"
     deactivate ":DeleteFoodCommand"
     destroy ":DeleteFoodCommand"
 
 else suffix = "clear"
     create ":ClearFoodCommand"
-    ":Parser" -> ":ClearFoodCommand" : ClearFoodCommand()
+    ":Parser" -> ":ClearFoodCommand"
     activate ":ClearFoodCommand"
     ":ClearFoodCommand" -> ":StorageFood" : Clear list
-    ":ClearFoodCommand" --> ":Parser" : Finish command
+    ":ClearFoodCommand" --> ":Parser"
     deactivate ":ClearFoodCommand"
     destroy ":ClearFoodCommand"
 
 else suffix = "list"
     create ":ListFoodCommand"
-    ":Parser" -> ":ListFoodCommand" : ListFoodCommand()
+    ":Parser" -> ":ListFoodCommand"
     activate ":ListFoodCommand"
     ":ListFoodCommand" -> ":StorageFood" : List food records
-    ":ListFoodCommand" --> ":Parser" : Finish Command
+    ":ListFoodCommand" --> ":Parser"
     deactivate ":ListFoodCommand"
     destroy ":ListFoodCommand"
 
+else suffix = "find"
+    create ":FindFoodWithDateCommand"
+    ":Parser" -> ":FindFoodWithDateCommand"
+    activate ":FindFoodWithDateCommand"
+    ":FindFoodWithDateCommand" -> ":StorageFood" : Find food records matching date
+    return
+
+else suffix = "clt"
+    create ":FindFoodByCalorieCountCommand"
+    ":Parser" -> ":FindFoodByCalorieCountCommand"
+    activate ":FindFoodByCalorieCountCommand"
+    ":FindFoodByCalorieCountCommand" -> ":StallsManager" : Find food records with <= calorie input
+    return
+
+else suffix = "view"
+    create ":ViewReferenceFoodCommand"
+    ":Parser" -> ":ViewReferenceFoodCommand"
+
+    ":Parser" -> ":ViewReferenceFoodCommand"
+      activate ":ViewReferenceFoodCommand"
+     ":ViewReferenceFoodCommand" -> ":StallsManager"
+
+    ":StallsManager" --> ":ViewReferenceFoodCommand" : lists all stalls
+    return
+    opt all
+    ":Parser" -> ":ViewReferenceFoodCommand"
+     activate ":ViewReferenceFoodCommand"
+
+    ":ViewReferenceFoodCommand" -> ":StallsManager"
+    ":StallsManager" --> ":ViewReferenceFoodCommand" : lists all food items
+    return
+
+    else stall index
+
+    ":Parser" -> ":ViewReferenceFoodCommand"
+     activate ":ViewReferenceFoodCommand"
+    ":ViewReferenceFoodCommand" -> ":StallsManager"
+    ":StallsManager" --> ":ViewReferenceFoodCommand" : lists all items sold by the store
+    return
+    end
 else incorrect syntax
     ":Parser"-->User : Throw Exception
-    destroy ":Parser"
+
 end
 @enduml
