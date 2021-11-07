@@ -29,12 +29,8 @@ public class ConverterToCsvTest {
 
         csvCreator.convertToCsvFile(recordListNew, "./data/2018.csv");
 
-        File dataDirectory = new File("./data/");
-        File[] dataDirectoryList = dataDirectory.listFiles();
-
-        if (dataDirectoryList.length != 0) {
-            isExist = true;
-        }
+        File tempFile = new File("./data/2018.csv");
+        isExist = tempFile.exists();
 
         assertTrue(isExist);
     }
