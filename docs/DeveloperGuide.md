@@ -627,7 +627,7 @@ exploratory testing.
 1. Prerequisite: Module CS2040C should already exist.
 2. Adding a valid GradableTask to module.
     1. Run the command: `/m cs2040c addgradable finals /by 11/11/2021 1000 /w 50`
-    2. Expected:
+    2. Expected:<br>
     ```
     Added new task to CS2040C
     finals by: 11 Nov 2021 10:00 AM Weightage 50% [ ]
