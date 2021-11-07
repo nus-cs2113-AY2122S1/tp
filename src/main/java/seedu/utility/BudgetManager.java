@@ -15,7 +15,7 @@ import seedu.reminder.BudgetSetReminder;
 import seedu.reminder.DoubleExceededBudgetReminder;
 import seedu.reminder.DoubleNearingBudgetReminder;
 import seedu.reminder.ExceededBudgetNearingOverallReminder;
-import seedu.reminder.NearingBudgetExceededOverallReminder;
+import seedu.reminder.NoReminder;
 import seedu.reminder.SingleExceededReminder;
 import seedu.reminder.SingleNearingReminder;
 import seedu.reminder.SingleReminder;
@@ -48,11 +48,16 @@ public class BudgetManager {
         budgets.add(miscBudget);
     }
 
-    public BudgetReminder handleBudget(Expense expense, ArrayList<Expense> expenses, LocalDate date) {
+    public BudgetReminder handleBudget(Expense expense, ArrayList<Expense> expenses) {
         Budget budget = expenseCategoryToBudget(expense.getCategory());
+        LocalDate date = expense.getDate();
         String month = date.getMonth().toString();
         double currBudgetAmount = budget.calAmount(expenses, date);
         double currOverallAmount = overallBudget.calAmount(expenses, date);
+
+        if (isNotCurrentMonth(date)) {
+            return new NoReminder();
+        }
 
         if (isNearingLimit(budget, currBudgetAmount) & isNearingLimit(overallBudget, currOverallAmount)) {
 
@@ -80,6 +85,10 @@ public class BudgetManager {
             }
 
         }
+    }
+
+    private boolean isNotCurrentMonth(LocalDate date) {
+        return date.getMonth() != LocalDate.now().getMonth() | date.getYear() != LocalDate.now().getYear();
     }
 
     private double getThresholdLimit(double budgetLimit) {
