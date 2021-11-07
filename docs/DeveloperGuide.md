@@ -190,13 +190,13 @@ Given below is an example usage scenario and how the delete feature behaves at e
 * By using substring method, description, indexes, and month of the expenditures are extracted in ```deleteParams```, ```prepareDeleteCommand(commandParams)``` calls ```DeleteExpenditureParser.parse(deleteParams)``` to parse the params more specifically.
 * Method ```parse(String args)``` in class ```DeleteExpenditureParser``` returns newly created object ```DeleteMultipleExpenditureCommand(startIndex, endIndex, month)```.
 <br/>
-  ![Figure Delete_Parse](images/parseDeleteInputCommand-Sequence_Diagram.png)
+  ![Figure Delete_Parse](images/DeleteDiagram2.png)
 
 **Step 5**. The newly created object ```DeleteExpenditureCommand``` will execute the deletion:
 * ```execute(boolean isLoadinStorage)``` runs a for loop to delete the related expenditures in the expenditure ArrayList.
 * ```for(int i = startIndex; i <= endIndex; i++)``` iterates the 3 expenditures, everytime it just calls ```allRecordList.deleteExpenditure(startIndex, month)``` to delete each expenditure.
 <br/>
-  ![Figure Delete_Execute](images/DeleteMultipleExpenditureCommand-Sequence_Diagram.png)
+  ![Figure Delete_Execute](images/DeleteDiagram1.png)
 
 
 ### <a id=""></a> Edit feature
