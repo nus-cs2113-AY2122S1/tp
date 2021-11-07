@@ -157,6 +157,16 @@ file to the new state of the data in the App.
 - Then the loop will continue. For commands that will not change the data in the app such as `list`, `find`...
 The reloadArrayToStorage() method will not be called. 
 
+3) Class Diagram of the Storage component
+
+![Storage Sequence Diagram](images/Storage-Class_Diagram.png)
+
+- All the multiplicity of the BudgetTracker to Storage, Command and Parser are 1 to 1. 
+- The multiplicity of Storage to ReadTextFile is 1 to 1. 
+- The multiplicity of Command to WriteToTextFile is 1 to 1. 
+- There is BudgetTracker consist of Storage, Command and Parser. Storage consist of ReadTextFile and Command
+consist of WriteToTextFile. 
+
 ## <a id="implementation"></a> Implementation
 
 ### <a id=""></a> Delete - Basic Command Logic
