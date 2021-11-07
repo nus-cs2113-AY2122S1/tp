@@ -50,7 +50,7 @@ class FindCommandTest {
     void findResult_noFlag_correctErrorMessage() throws DukeException, NoCommandAttributesException,
             InvalidItemTypeException {
         createEventsList();
-        Command command = Parser.parseCommand("find abc");
+        Parser.parseCommand("find abc");
         String expectedOutput = "Please add -e to find event(s)!" + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString());
     }
