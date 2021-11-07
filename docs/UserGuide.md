@@ -63,7 +63,7 @@ Displays the list of all classes in the class list.
 
 Format: `list_classes`
 
-Expected Output:
+Expected Output:<br>
 ![ListClassesCommand](images/class/ListClassesCommand.png)
 
 <br>
@@ -82,7 +82,7 @@ Examples:
 * `add_class n/Sectional Group C03 i/CS2101-C03`
 * `add_class i/CS2102`
 
-Expected Output:
+Expected Output:<br>
 ![AddClassesCommand](images/class/AddClassCommand.png)
 
 <br>
@@ -104,7 +104,7 @@ Examples:
 * `edit_class c/cs2113t-f12 n/Class F12`
 * `edit_class c/CS2113T-F12 i/CS2113T-F13 n/Class-F13 of Software Engineering`
 
-Expected Output:
+Expected Output:<br>
 ![EditClassesCommand](images/class/EditClassCommand.png)
 
 <br>
@@ -119,7 +119,7 @@ Examples:
 * `delete_class c/cs2113t-f12`
 * `delete_class c/CS2101-C03`
 
-Expected Output:
+Expected Output:<br>
 ![DeleteClassesCommand](images/class/DeleteClassCommand.png)
 
 <br>
@@ -570,10 +570,9 @@ Format: `exit`
 ### Archiving data: `archive`
 Saves the current program data to an archive.
 
-By default, archive file is stored in the `<TAA Root>/data/archive` folder.
+Archive files are stored in the `<TAA Root>/data/archive` folder.
 
-Format: `archive [f/<FILENAME>]`
-* `FILENAME` [Optional] refers to the name of the file to save the archive as.
+Format: `archive`
 
 <br>
 
