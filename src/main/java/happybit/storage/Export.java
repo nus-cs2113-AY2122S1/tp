@@ -239,17 +239,20 @@ public class Export {
      * Exports a Habit object.
      *
      * @param habit the object to be written to storage
-     * @param index the index of the goal the habit is under
+     * @param goalIndex the index of the goal the habit is under
      * @throws HaBitStorageException error when writing to storage file
      */
-    protected void exportHabit(Habit habit, int index) throws HaBitStorageException {
+    protected void exportHabit(Habit habit, int goalIndex, int habitIndex) throws HaBitStorageException {
         this.setWritable();
 
         try {
             FileWriter fileWriter = new FileWriter(this.filePath, true);
-            String habitToWrite = this.habitString(habit, index);
+            String habitToWrite = this.habitString(habit, goalIndex);
+            ArrayList<Interval> intervals = habit.getIntervals();
+
 
             fileWriter.write(habitToWrite);
+            this.writeInterval(fileWriter, intervals, goalIndex, habitIndex);
             fileWriter.close();
         } catch (IOException e) {
             throw new HaBitStorageException(e.getMessage());
