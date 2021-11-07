@@ -57,7 +57,7 @@ public class DeletePrescriptionCommandTest {
 
         executeDeletePrescriptionCommand();
 
-        String expectedOutput = "Prescription deleted for Prescription Id 1";
+        String expectedOutput = "Prescription deleted for Prescription ID 1";
 
         assertEquals(expectedOutput.trim(), outContent.toString().trim());
 

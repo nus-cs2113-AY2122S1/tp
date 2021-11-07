@@ -72,7 +72,7 @@ Meaning of Icons:
 
 1. Ensure that you have **Java 11** or above installed.
 2. Download the latest version of `MediVault.jar`
-   from [here](https://github.com/AY2122S1-CS2113T-T10-1/tp/releases/tag/v1.0).
+   from [here](https://github.com/AY2122S1-CS2113T-T10-1/tp/releases/tag/v2.1).
 3. Copy the file to the folder you want to use as the **home** folder for `MediVault`.
 4. In the terminal, run `Java -jar MediVault.jar`.
 5. You should see the following prompt if the program has started successfully.
