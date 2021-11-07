@@ -8,6 +8,7 @@ import semester.Semester;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
 import command.Logger;
 
 public class NoCap {
