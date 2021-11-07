@@ -47,6 +47,7 @@ public class Parser {
     protected String line;
     protected Scanner in;
 
+    public static final int INVALID_INDEX = -1;
     public static final int NAME_INDEX = 0;
     public static final int INGREDIENTS_INDEX = 1;
     public static final int STEPS_INDEX = 2;
@@ -152,7 +153,7 @@ public class Parser {
     public String parseName(String line) throws GordonException {
         int spaceIndex = line.indexOf(" ");
 
-        if (spaceIndex == -1) {
+        if (spaceIndex == INVALID_INDEX) {
             throw new GordonException(GordonException.COMMAND_INVALID);
         }
 
@@ -181,7 +182,7 @@ public class Parser {
 
     public void parseIngredients(String line, Recipe r) throws GordonException {
         int ingredientsIndex = line.indexOf(SET_FIND_INGREDIENTS_PROMPT);
-        if (ingredientsIndex == -1) {
+        if (ingredientsIndex == INVALID_INDEX) {
             throw new GordonException(GordonException.INGREDIENTS_FORMAT);
         } else if (line.trim().equalsIgnoreCase("ingredients")) {
             throw new GordonException(GordonException.EMPTY_INGREDIENT);
@@ -206,7 +207,7 @@ public class Parser {
 
     public void parseSteps(String line, Recipe r) throws GordonException {
         int stepsIndex = line.indexOf(SET_FIND_STEPS_PROMPT);
-        if (stepsIndex == -1) {
+        if (stepsIndex == INVALID_INDEX) {
             throw new GordonException(GordonException.STEPS_FORMAT);
         } else if (line.trim().equalsIgnoreCase("steps")) {
             throw new GordonException(GordonException.EMPTY_STEP);
