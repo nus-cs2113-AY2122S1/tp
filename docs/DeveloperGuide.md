@@ -609,6 +609,8 @@ commands.
     1. Test case: `edit 1 p/99999999 n/John Xavier Doe`<br>
        Expected:
         ```
+        The information of patient with ID 1 has been edited to:
+       
         Patient ID: 1
         IC: S7812345X
         Name: John Xavier Doe
