@@ -28,7 +28,8 @@ means of input.
       3. [Editing a finance record: `edit-finance`](#2ivc-editing-a-finance-record-edit-finance)
       4. [Showing total account of finance records: `show-finance`](#2ivd-showing-total-account-of-finance-records-show-finance)
       5. [Listing all finance records: `list-finance`](#2ive-listing-all-finance-records-list-finance)
-   5. [Exiting the program: `bye`](#2v-exiting-the-program-bye)
+   5. [Listing all commands: `help`](#2v-listing-all-commands-help)
+   6. [Exiting the program: `bye`](#2vi-exiting-the-program-bye)
 3. [FAQ](#3-faq)
 4. [Command Summary](#4-command-summary)
 
@@ -364,8 +365,53 @@ Example:
 ---------------------------------------------
 ```
 
+### 2.v Listing all commands: `help`
 
-### 2.v Exiting the program: `bye`
+Lists all commands.
+
+Format: `help`
+
+Example: `help`
+
+```
+---------------------------------------------
+Hello! You seem like you need a hand to get started.
+To interact with Restaurant Buddy, type in any of the following commands and press Enter!
+The words that are CAPITALISED are the parameters that you can change.
+---------------------------------------------
+- Employee Commands:
+add-employee/EMPLOYEE_NAME/PHONE_NUMBER/EMPLOYMENT_STATUS/SALARY
+remove-employee/EMPLOYEE_INDEX
+list-employee
+---------------------------------------------
+- Menu Commands:
+add-dish/DISH_NAME/PRICE
+remove-dish/DISH_INDEX
+edit-dish/DISH_INDEX/NEW_PRICE
+discount-dish/DISH_INDEX/DISCOUNT(%)
+list-dish
+---------------------------------------------
+- Ingredient Commands:
+add-ingredient/INGREDIENT_NAME/QUANTITY
+remove-ingredient/INGREDIENT_INDEX
+list-ingredient
+---------------------------------------------
+- Finance Commands:
+add-finance/DATE/ACCOUNT
+remove-finance/FINANCE_INDEX
+edit-finance/FINANCE_INDEX/NEW_ACCOUNT
+show-finance
+list-finance
+---------------------------------------------
+To exit the program safely, please type in the command:
+bye
+---------------------------------------------
+If you require more help, please refer to the User Guide on Github.
+Let's get started at once! Feel free to try out the commands :D
+---------------------------------------------
+```
+
+### 2.vi Exiting the program: `bye`
 Exits the program.
 
 Format: `bye`
@@ -411,4 +457,5 @@ Example:
 | edit-finance | `edit-finance/FINANCE_INDEX/NEW_ACCOUNT` |
 | show-finance | `show-finance` |
 | list-finance | `list-finance` |
+| help | `help` |
 | bye | `bye` |

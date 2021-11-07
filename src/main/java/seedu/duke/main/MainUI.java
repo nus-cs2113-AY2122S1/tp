@@ -79,7 +79,7 @@ public class MainUI {
         System.out.println("bye");
         printSingleLine();
         System.out.println("If you require more help, please refer to the User Guide on Github.");
-        System.out.println("Let's get start at once! Feel free to try out the commands :D");
+        System.out.println("Let's get started at once! Feel free to try out the commands :D");
         printSingleLine();
     }
 }
