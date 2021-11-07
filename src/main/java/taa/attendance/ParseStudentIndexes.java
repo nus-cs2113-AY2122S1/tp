@@ -12,6 +12,7 @@ public class ParseStudentIndexes {
     private static final String MESSAGE_INVALID_RANGE_FORMAT = "Invalid range format.";
     private static final String MESSAGE_INVALID_SELECTED_FORMAT = "Invalid format for selected indexes.";
     private static final String MESSAGE_INVALID_STUDENT_INDEX = "Invalid student index.";
+    private static final int NUMBER_OF_SPLIT = 2;
     private static int startIndex;
     private static int endIndex;
 
@@ -22,7 +23,7 @@ public class ParseStudentIndexes {
      * @throws TaaException If the user inputs an invalid format.
      */
     public static void getRange(String rangeInput) throws TaaException {
-        String[] indexRange = rangeInput.split("-", 2);
+        String[] indexRange = rangeInput.split("-", NUMBER_OF_SPLIT);
         if (!Util.isStringInteger(indexRange[0]) | !Util.isStringInteger(indexRange[1])) {
             throw new TaaException(MESSAGE_INVALID_RANGE_FORMAT);
         }

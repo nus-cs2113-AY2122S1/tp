@@ -435,7 +435,7 @@ Examples:
 
 Method 2: Sets the attendance for selected student indexes for a lesson.
 
-Format: `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX>,<STUDENT_INDEX>,<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
+Format: `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX>,<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 * `LESSON_NUMBER` refers to the lesson number.
@@ -444,7 +444,6 @@ Format: `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX>,<STUDENT_INDEX>,<STUDENT_
 Examples:
 * `set_attendance c/CS2113T-F12 s/1,3,5 l/1 p/1`
 * `set_attendance c/CS2101-D03 s/1,3,4,5,6 l/2 p/0`
-
 
 <br>
 
