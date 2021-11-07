@@ -27,7 +27,7 @@ public class CurrencyManager {
             convertBudgets(budgets, from, to);
         }
     }
-    
+
     public CurrencyType getCurrency() {
         assert currency != null;
         return currency;
