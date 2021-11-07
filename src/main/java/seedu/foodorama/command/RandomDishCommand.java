@@ -5,6 +5,14 @@ import seedu.foodorama.Ui;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Allows the user to generate a random dish name
+ * from a fixed pool of vocabulary containing
+ * Carbohydrates, Proteins, Sauces and Cooking Methods.
+ * Format: rdish
+ *
+ * @author jhsee5
+ */
 public class RandomDishCommand extends Command {
 
     private String randomDishName;
@@ -61,23 +69,53 @@ public class RandomDishCommand extends Command {
         }
     };
 
+    /**
+     * Getter for carbohydrates String ArrayList.
+     *
+     * @return String ArrayList carbohydrates
+     * @author jhsee5
+     */
     public ArrayList<String> getCarbohydrates() {
         return carbohydrates;
     }
 
+    /**
+     * Getter for proteins String ArrayList.
+     *
+     * @return String ArrayList proteins
+     * @author jhsee5
+     */
     public ArrayList<String> getProteins() {
         return proteins;
     }
 
+    /**
+     * Getter for sauces String ArrayList.
+     *
+     * @return String ArrayList sauces
+     * @author jhsee5
+     */
     public ArrayList<String> getSauces() {
         return sauces;
     }
 
+    /**
+     * Getter for cookingMethods String ArrayList.
+     *
+     * @return String ArrayList cookingMethods
+     * @author jhsee5
+     */
     public ArrayList<String> getCookingMethods() {
         return cookingMethods;
     }
 
 
+    /**
+     * User command to generate a random DISH_NAME.
+     *
+     * @param parameters contains a blank since rdish does not take in parameters
+     * @author jhsee5
+     */
     @Override
     public void execute(ArrayList<String> parameters) {
 

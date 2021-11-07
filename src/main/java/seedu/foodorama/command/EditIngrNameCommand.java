@@ -28,13 +28,13 @@ public class EditIngrNameCommand extends Command {
      * Parameters can either accept the [INGR_NAME] of the ingredient to be edited
      * or the [INDEX] of the ingredient in the ingredient list.
      * The method checks if the [INGR_INDEX] is an integer and is out of bounds of the size of the ingredient list
-     * or if the [INGR_NAME] doesn't exists in the list and throws an exception.
+     * or if the [INGR_NAME] doesn't exist in the list and throws an exception.
      *
      * <p>If no exceptions are thrown, the user is prompted to provide the new name for the ingredient.</p>
      *
      * @param parameters contains the [INGR_NAME] or [INGR_INDEX] of the ingredient to edit name of
-     * @throws FoodoramaException if [INGR_NAME] doesnt exist in the ingredient list or if [INDEX] is not an integer,
-     *      [INDEX] is an integer thats out of bounds
+     * @throws FoodoramaException if [INGR_NAME] doesn't exist in the ingredient list or if [INDEX] is not an integer,
+     *      [INDEX] is an integer that's out of bounds
      * @author Rakesh12000
      */
     @Override
