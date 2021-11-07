@@ -22,6 +22,7 @@ motivated us to build this application.
       * [User-Interface Component](#user-interface-component)
       * [Exceptions](#exceptions)
       * [Command Abstraction](#command-abstraction)
+      * [Input Validation](#input-validation)
     * [Implementation](#implementation)
       * [Edit](#edit)
       * [Graph](#graph)
@@ -192,10 +193,30 @@ the exception.getMessage() method which is part of the base Exception class
 
 * Different Command Classes that perform different tasks by calling various functions of the Object Classes.
 * All inherit from an abstract `Command` class with one execute method that takes an Arraylist<String> as input.
+* These command classes help perform a more specialized input validation so ensure the inputs match the specific command 
+  that has been invoked
 
+### Input validation
+
+In addition to the input parser, due to the different types of inputs foodorama deals with,
+there exists a second round of input validation to help seperate the invalid inputs from those that are valid
+
+The sequence diagram for the validation of Numerical Inputs is given below
+
+![](images/input_validation_number.png)
+
+As you can see the system filters out the numerical inputs from the text strings and chceks if the numerical inputs are
+integers or not providing the actual methods that do the computation the only valid inputs that are integers in thsi case.
+The same process can be done to include doubles as well by excluding the final integer check.
+
+The sequence diagram for the validation of Text strings is given below
+
+![](images/input_validation_number.png)
+
+The process of input validation for strings is quite similar to that for integers except
+the roles are reversed
 
 ## Implementation
-
 
 ### Find
 
@@ -222,7 +243,7 @@ the one shown above in their implementation.
 
 ### Graph
 
-![](images/graph_class_dig.png)
+
 
 ![](images/graph_sequence.png)
 

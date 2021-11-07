@@ -23,20 +23,21 @@ activate GraphCommand
 alt case DISH
     GraphCommand -> DishList: DishList.graph
     DishList -> Ui: printDishGraph()
-    Ui --> User: output on the terminal
+
 
 else case INGR
     GraphCommand -> IngredientList : IngredientList.graph
     IngredientList -> Ui: printIngrGraph()
+    Ui --> User: output on the terminal
 
 else default
     create FoodoramaException
     InputParser -> FoodoramaException: throw new
     activate FoodoramaException
 
-    FoodoramaException -> Ui: getInvalidCommandMsg()
+    FoodoramaException -> Ui: getInvalidTypeMsg()
     activate Ui
-    FoodoramaException<-- Ui : INVALID_COMMAND
+    FoodoramaException<-- Ui : INVALID_TYPE_FIND
     deactivate Ui
     FoodoramaException --> Foodorama: exceptionMsg
 end
