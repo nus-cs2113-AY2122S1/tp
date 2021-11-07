@@ -6,6 +6,7 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import seedu.duke.attendance.Attendance;
 import seedu.duke.attendance.AttendanceList;
 import seedu.duke.exception.InvalidCommandException;
@@ -22,55 +23,55 @@ public class Parser {
     }
 
     public static boolean hasListTrainingKeyword(String arg) {
-        return arg.trim().equalsIgnoreCase("list /t");
+        return arg.trim().toLowerCase().matches("^list /t");
     }
 
     public static boolean hasListAttendanceKeyword(String arg) {
-        return arg.trim().toLowerCase().contains("list /att");
+        return arg.trim().toLowerCase().matches("^list /att");
     }
 
     public static boolean hasAddMemberKeyword(String arg) {
-        return arg.trim().toLowerCase().contains("add /m");
+        return arg.trim().toLowerCase().matches("^add /m .*");
     }
 
     public static boolean hasAddTrainingKeyword(String arg) {
-        return arg.trim().toLowerCase().contains("add /t");
+        return arg.trim().toLowerCase().matches("^add /t .*");
     }
 
     public static boolean hasAddAttendanceKeyword(String arg) {
-        return arg.trim().toLowerCase().contains("add /att");
+        return arg.trim().toLowerCase().matches("^add /att .*");
     }
 
     public static boolean hasDeleteMemberKeyword(String arg) {
-        return arg.trim().toLowerCase().contains("delete /m");
+        return arg.trim().toLowerCase().matches("^delete /m .*");
     }
 
     public static boolean hasDeleteTrainingKeyword(String arg) {
-        return arg.trim().toLowerCase().contains("delete /t");
+        return arg.trim().toLowerCase().matches("^delete /t .*");
     }
 
     public static boolean hasDeleteAttendanceKeyword(String arg) {
-        return arg.trim().toLowerCase().contains("delete /att /t");
+        return arg.trim().toLowerCase().matches("^delete /att /t .*");
     }
 
     public static boolean hasFindMemberKeyword(String arg) {
-        return arg.trim().toLowerCase().contains("find /m");
+        return arg.trim().toLowerCase().matches("^find /m .*");
     }
 
     public static boolean hasFindTrainingKeyword(String arg) {
-        return arg.trim().toLowerCase().contains("find /t");
+        return arg.trim().toLowerCase().matches("^find /t .*");
     }
 
     public static boolean hasEditTrainingKeyword(String arg) {
-        return arg.trim().toLowerCase().contains("edit /t");
+        return arg.trim().toLowerCase().matches("^edit /t .*");
     }
 
     public static boolean hasEditMemberKeyword(String arg) {
-        return arg.trim().toLowerCase().contains("edit /m");
+        return arg.trim().toLowerCase().matches("^edit /m .*");
     }
 
     public static boolean hasExitKeyword(String arg) {
-        return arg.trim().toLowerCase().contains("bye");
+        return arg.trim().toLowerCase().matches("^bye");
     }
 
     /**
