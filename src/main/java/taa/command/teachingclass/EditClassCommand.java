@@ -14,9 +14,9 @@ public class EditClassCommand extends Command {
     private static final String KEY_NEW_CLASS_ID = "i";
     private static final String KEY_NEW_CLASS_NAME = "n";
     private static final String[] EDIT_CLASS_ARGUMENT_KEYS = {
-            KEY_CLASS_ID,
-            KEY_NEW_CLASS_ID,
-            KEY_NEW_CLASS_NAME
+        KEY_CLASS_ID,
+        KEY_NEW_CLASS_ID,
+        KEY_NEW_CLASS_NAME
     };
 
     private static final String MESSAGE_FORMAT_EDIT_CLASS_USAGE = "%s %s/<CLASS_ID> "
