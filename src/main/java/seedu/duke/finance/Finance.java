@@ -12,7 +12,7 @@ public class Finance {
     /**
      * Constructs an instance of Finance.
      *
-     * @param date Date of the account.
+     * @param date    Date of the account.
      * @param account Number of the account.
      */
     public Finance(LocalDate date, String account) {

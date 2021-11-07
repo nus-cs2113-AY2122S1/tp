@@ -14,18 +14,18 @@ public class Employee {
      * TEMP represents temporary or part-time employees.
      * ADHOC represents adhoc employees, usually a one-time basis.
      */
-    public enum employmentStatus {
+    public enum EmploymentStatus {
+        ADHOC,
         PERM,
-        TEMP,
-        ADHOC
+        TEMP
     }
 
     private String name;
     private int phoneNum;
-    private employmentStatus status;
+    private EmploymentStatus status;
     private int salary;
 
-    public Employee(String name, int phoneNum, employmentStatus status, int salary) {
+    public Employee(String name, int phoneNum, EmploymentStatus status, int salary) {
         this.name = name;
         this.phoneNum = phoneNum;
         this.status = status;
@@ -49,7 +49,7 @@ public class Employee {
         return phoneNum;
     }
 
-    public employmentStatus getStatus() {
+    public EmploymentStatus getStatus() {
         return status;
     }
 

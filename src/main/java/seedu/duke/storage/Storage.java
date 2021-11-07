@@ -29,12 +29,12 @@ public class Storage {
     public static final String FILE_NAME = "Duke.txt";
 
     /**
-     * Load data from the default file
+     * Load data from the default file.
      *
-     * @param employeeList the list of employees
-     * @param menu the list of dishes
+     * @param employeeList   the list of employees
+     * @param menu           the list of dishes
      * @param ingredientList the list of ingredients
-     * @param financeList the list of accounts
+     * @param financeList    the list of accounts
      */
     public static void loadStorage(EmployeeList employeeList, Menu menu, IngredientList ingredientList,
                                    FinanceList financeList) {
@@ -74,7 +74,7 @@ public class Storage {
     }
 
     /**
-     * Decode the account from in the file
+     * Decode the account from in the file.
      *
      * @param toRead the string format of the account
      * @return the decoded account
@@ -86,7 +86,7 @@ public class Storage {
     }
 
     /**
-     * Encode the account to be stored in the file
+     * Encode the account to be stored in the file.
      *
      * @param toWrite the account to be encoded
      * @return the string format of the account
@@ -99,19 +99,20 @@ public class Storage {
     }
 
     /**
-     * Decode the ingredient from the file
+     * Decode the ingredient from the file.
      *
      * @param toRead the string format of the ingredient
      * @return the decoded ingredient
      */
     private static Ingredient decodeIngredient(String toRead) {
         String[] description = toRead.trim().split("\\|", 5);
-        Ingredient ingredient = new Ingredient(description[1], description[2], description[3], LocalDate.parse(description[4]));
+        Ingredient ingredient = new Ingredient(description[1], description[2],
+                description[3], LocalDate.parse(description[4]));
         return ingredient;
     }
 
     /**
-     * Encode the ingredient to be stored in the file
+     * Encode the ingredient to be stored in the file.
      *
      * @param toWrite the ingredient to be encoded
      * @return the string format of the ingredient
@@ -129,7 +130,7 @@ public class Storage {
     }
 
     /**
-     * Decode the dish from the file
+     * Decode the dish from the file.
      *
      * @param toRead the string format of the dish
      * @return the decoded dish
@@ -144,7 +145,7 @@ public class Storage {
     }
 
     /**
-     * Encode the dish to be stored in the file
+     * Encode the dish to be stored in the file.
      *
      * @param dish the dish to be encoded
      * @return the string format of the dish
@@ -157,12 +158,12 @@ public class Storage {
     }
 
     /**
-     * Save the date into the default file
+     * Save the date into the default file.
      *
-     * @param employeeList the list of employees
-     * @param menu the list of dishes
+     * @param employeeList   the list of employees
+     * @param menu           the list of dishes
      * @param ingredientList the list of ingredients
-     * @param financeList the list of accounts
+     * @param financeList    the list of accounts
      */
     public static void saveStorage(EmployeeList employeeList, Menu menu,
                                    IngredientList ingredientList, FinanceList financeList) {
