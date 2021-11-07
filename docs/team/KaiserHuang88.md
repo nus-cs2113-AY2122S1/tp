@@ -49,7 +49,7 @@ Given below are my contributions to the project:
 
 * **Community:**
     * Managed all releases
-    * Reported bugs and suggestions for other teams in the class (Examples: [1](https://github.com/AY2122S1-CS2113T-W12-1/tp/pull/238#issuecomment-952551758), [2](https://github.com/AY2122S1-CS2113T-W12-1/tp/pull/238#issuecomment-952553178), [3](https://github.com/AY2122S1-CS2113T-W12-1/tp/pull/238#issuecomment-952556032) [4](https://github.com/AY2122S1-CS2113T-W12-1/tp/pull/238#issuecomment-952557341))
+    * Fixed DG and UML Diagram-Related issues for other team members.
 
 
 * **Tools**
