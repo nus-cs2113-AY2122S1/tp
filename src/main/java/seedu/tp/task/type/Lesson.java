@@ -109,7 +109,7 @@ public class Lesson extends Event {
         return LESSON_ICON + " " + this.getModuleCode() + ' ' + this.getClassNo() + ": "
                 + DateParser.dateToString(getStartDate())
                 + " to " + DateParser.dateToString(getEndDate())
-                + ' ' + (hasLink() ? LINK_INDICATOR : "");
+                + " Priority: " + getPriority().toString() + " " + (hasLink() ? LINK_INDICATOR : "");
     }
 
     @Override
