@@ -257,6 +257,8 @@ ____________________________________________________________
 
 **[Back to Table of Contents](#toc)**
 
+<div style="page-break-after: always;"></div>
+
 <a name="delete"></a>
 ### Deleting a contact: `rm`
 Removes the contact with a specified index from the ConTech Book. The `rm` command can also be used to delete 
@@ -281,10 +283,11 @@ Command formats:
 * The `NAME` (denoted by `-n`) *cannot* be deleted. To delete entire contacts, please use `rm <INDEX>`.
 * If the specified detail is already empty, no deletion will take place for that detail.
 
-<div style="page-break-after: always;"></div>
 
 `rm all`
 * Deletes all contacts in the ConTech Book.
+
+<div style="page-break-after: always;"></div>
 
 Expected outcome of usages:
 
@@ -298,8 +301,6 @@ Delete this contact?  (y/n)
 0. 
 Name:     Alex Lee
 Github:   github.com/alexlee
-Email:    alex.lee@contech.sg
-Telegram: t.me/alex133
 ____________________________________________________________
 
 y
@@ -308,8 +309,6 @@ ConTech has removed the specified contact: Alex Lee
 You now have 2 contact(s).
 ____________________________________________________________
 ```
-
-<div style="page-break-after: always;"></div>
 
 * Remove specific details of a contact:
 
@@ -320,7 +319,6 @@ Delete the following fields for Le Zong?  (y/n)
 
 Github:   github.com/lezongmun
 Telegram: t.me/lezongg
-Email:    lezongmun@gmail.com
 ____________________________________________________________
 
 y
@@ -577,7 +575,6 @@ We hope you have enjoyed using it.
 ____________________________________________________________
 ```
 
-**[Back to Table of Contents](#toc)**
 
 ## FAQ
 
