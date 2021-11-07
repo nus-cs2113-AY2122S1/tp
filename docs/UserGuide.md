@@ -452,6 +452,8 @@ workspace.
 
 Example 1: `view`
 
+<div style="page-break-after: always;"></div>
+
 Expected Output 1:
 
 ```
@@ -626,6 +628,8 @@ Views a list of schedules in the module when in the schedule workspace.
 
 Example 1: `view`
 
+<div style="page-break-after: always;"></div>
+
 Expected Output 1:
 
 ```
@@ -687,6 +691,8 @@ List of Question workspace commands:
 |help|view all commands and their usage in the question workspace|
 |back|escape and return to the module workspace|
 |exit|exit and closes TermiNUS|
+
+<div style="page-break-after: always;"></div>
 
 ### Accessing question workspace
 
@@ -782,6 +788,8 @@ Expected Output:
 Your question on 'What is 1+1?' has been deleted!
 [CS2113T > question] >>> 
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### Testing Yourself with Active Recall
 
