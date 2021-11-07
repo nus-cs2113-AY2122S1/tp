@@ -1,7 +1,6 @@
 package seedu.duke.parser;
 
 
-import seedu.duke.Duke;
 import seedu.duke.Ui;
 import seedu.duke.commands.ByeCommand;
 
@@ -14,14 +13,17 @@ import seedu.duke.exceptions.parserexceptions.AttributeNotFoundException;
 import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
 import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
 import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
-import seedu.duke.items.Item;
-import seedu.duke.parser.commandparser.*;
+import seedu.duke.parser.commandparser.AddParser;
+import seedu.duke.parser.commandparser.ListParser;
+import seedu.duke.parser.commandparser.NextParser;
+import seedu.duke.parser.commandparser.SelectParser;
+import seedu.duke.parser.commandparser.UpdateParser;
+import seedu.duke.parser.commandparser.DoneUndoParser;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 
 public abstract class Parser {
@@ -184,13 +186,6 @@ public abstract class Parser {
 
     public static String convertDateTimeForSaving(LocalDateTime dateTime) {
         return dateTime.format(formatter1);
-    }
-
-    public static ArrayList<Item> makeMainList() {
-        ArrayList<Item> sortedList = new ArrayList<>();
-        sortedList.addAll(Duke.eventCatalog);
-        sortedList.addAll(Duke.taskList);
-        return sortedList;
     }
 
     /**
