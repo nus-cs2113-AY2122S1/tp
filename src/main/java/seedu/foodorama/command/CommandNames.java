@@ -1,5 +1,11 @@
 package seedu.foodorama.command;
 
+/**
+ * Contains names of all Commands and the User Input Strings that will call the
+ * respective Commands.
+ *
+ * @author Dniv-ra
+ */
 public enum CommandNames {
     ADD_DISH_WASTE("add dish waste", new AddDishWasteCommand()),
     ADD_INGR_WASTE("add ingr waste", new AddIngrWasteCommand()),
@@ -37,10 +43,22 @@ public enum CommandNames {
         this.callbackCommand = callbackCommand;
     }
 
+    /**
+     * Returns name of a Command.
+     *
+     * @return name of Command as a String
+     * @author Dniv-ra
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns a Command associated with the name of Command.
+     *
+     * @return callbackCommand
+     * @author Dniv-ra
+     */
     public Command getCallbackCommand() {
         return callbackCommand;
     }

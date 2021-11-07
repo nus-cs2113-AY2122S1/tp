@@ -9,6 +9,12 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Allows the user to remove a particular ingredient.
+ * Format: del ingr [INGR_NAME]/[INDEX]
+ *
+ * @author Rakesh12000
+ */
 public class DeleteIngrCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger("EditIngrCommand");
     private static final Ui UI = new Ui();
@@ -17,6 +23,12 @@ public class DeleteIngrCommand extends Command {
         LoggerManager.setupLogger(LOGGER);
     }
 
+    /**
+     * User command to remove a particular ingredient.
+     * This method calls .delete(ingrIndex) method in IngredientList, deleting the corresponding ingredient.
+     *
+     * @author Rakesh12000
+     */
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         LOGGER.log(Level.INFO, "Start of process");
@@ -49,6 +61,13 @@ public class DeleteIngrCommand extends Command {
         LOGGER.log(Level.INFO, "End of process.");
     }
 
+    /**
+     * Checks if the parameter numberString is a number.
+     *
+     * @param numberString the String to check if it is a number
+     * @return true if the String is a number, false if it is not a number
+     * @author Dniv-ra
+     */
     public boolean isNumber(String numberString) {
         try {
             double number = Double.parseDouble(numberString);
@@ -58,6 +77,13 @@ public class DeleteIngrCommand extends Command {
         }
     }
 
+    /**
+     * Checks if the parameter numberString is an integer.
+     *
+     * @param numberString the String to check if it is an integer
+     * @return true if the String is an integer, false if it is not an integer
+     * @author Dniv-ra
+     */
     public boolean isInteger(String numberString) {
         if (isNumber(numberString)) {
             double number = Double.parseDouble(numberString);
