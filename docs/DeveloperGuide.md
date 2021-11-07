@@ -154,7 +154,7 @@ The sequence diagram shown below illustrates how the `add_class` command works:
 Below is an example scenario of how the add class feature behaves at each step:<br>
 * Step 1 - The user executes `add_class i/CS2113T-F12 n/Tutorial Group F12` to add a class. The `add_class` command calls the
 `AddClassCommand.execute` method.
-* Step 2 - Within `AddClassCommand.execute`, `ClassList.getModule("CS2113T-F12")` is called to ensure that
+* Step 2 - Within `AddClassCommand.execute`, `ClassList.getClassWithId("CS2113T-F12")` is called to ensure that
 there is no existing class with ID `CS2113T-F12`.
 * Step 3 - If no existing class with ID `CS2113T-F12` is found, a new `TeachingClass` object with ID and name set to `CS2113T-F12`
 and `Tutorial Group F12` respectively.
