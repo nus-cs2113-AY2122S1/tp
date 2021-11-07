@@ -459,3 +459,71 @@ Test case: `delete task m`
 
 Expected output: A message is displayed stating that the index of the task entered is not a number.
 
+### Testing commands for lessons
+
+#### Adding a lesson
+
+Test case: `add lesson CS2113T tutorial -d wed -s 11:00 -e 12:00 -l zoom.us/a19b3jkdjk93`
+
+Expected output: The lesson is successfully added and a message with the added lesson is displayed.
+
+#### Adding a lesson without required flags
+
+Test case: `add lesson CS2113T tutorial`
+
+Expected output: A message is displayed about missing flags in the input.
+
+#### Adding a lesson with empty title
+
+Test case: `add lesson -d mon -s 11:00 -e 12:00`
+
+Expected output: A message is displayed that the title cannot be blank.
+
+#### Listing lessons
+
+Test case: `list lesson`
+
+Expected output: The full list of lessons is displayed.
+
+#### Listing lessons on a day of the week
+
+Test case: `list lesson wed`
+
+Expected output: A list of lessons on Wednesday is displayed. 
+
+#### Finding lessons with keyword
+
+Test case: `find lesson tutorial`
+
+Expected output: A message is displayed with the lessons that contain the keyword.
+
+#### Finding lessons with empty keyword
+
+Test case: `find lesson`
+
+Expected output: A message is displayed stating that the wrong format is used for the command.
+
+#### Deleting a lesson
+
+Test case: `delete lesson 1`
+
+Expected output: The lesson is successfully deleted and a message with the deleted lesson is displayed.
+
+#### Deleting a non-existent lesson
+
+Test case: `delete lesson 0`
+
+Expected output: A message is displayed stating that the index of the lesson entered is invalid.
+
+#### Deleting a lesson with an index that is not a number
+
+Test case: `delete lesson m`
+
+Expected output: A message is displayed stating that the index of the lesson entered is not a number.
+
+#### Launching a lesson with a URL
+
+Test case: `launch lesson 1`
+
+Expected output: The lesson's URL is launched in a browser if it exists. Otherwise, a message is displayed stating that no link is provided.
+
