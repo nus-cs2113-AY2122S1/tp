@@ -4,6 +4,7 @@ package taa.command.assessment;
 import taa.Ui;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
+import taa.student.Student;
 import taa.teachingclass.ClassList;
 import taa.teachingclass.TeachingClass;
 import taa.command.Command;
@@ -138,6 +139,7 @@ public class EditAssessmentCommand extends Command {
             assessment.setMaximumMarks(newMaximumMarks);
         }
         if (hasValidNewName) {
+            changeAssessmentNameForResults(teachingClass, name, newName);
             assessment.setName(newName);
         }
 
@@ -197,6 +199,14 @@ public class EditAssessmentCommand extends Command {
             throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_NEW_NAME));
         }
         return true;
+    }
+
+    public void changeAssessmentNameForResults(TeachingClass teachingClass, String oldName, String newName) {
+        String oldNameWithCorrectCase = teachingClass.getAssessmentList().getAssessment(oldName).getName();
+        ArrayList<Student> students = teachingClass.getStudentList().getStudents();
+        for (Student s : students) {
+            s.changeAssessmentName(oldNameWithCorrectCase, newName);
+        }
     }
 
     @Override

@@ -136,7 +136,7 @@ public class Student implements ClassChecker {
      */
     public void changeAssessmentName(String oldName, String newName) {
         double value = results.get(oldName);
-        results.remove(oldName);
+        results.remove(oldName, value);
         results.put(newName, value);
     }
 
