@@ -117,8 +117,19 @@ public abstract class RegexParser {
         }
     }
 
+    /**
+     * Throws an exception if the Twitter username does not comply with the regex.
+     * If the Twitter username passes the regex check nothing is returned and program
+     * flow continues.
+     * The regex only allows usernames in lowercase letters, numbers, and underscore
+     * with a max length of 15 characters.
+     *
+     * @param detailToParse Twitter username id to be checked
+     * @throws InvalidTwitterUsernameException If Twitter username does not match regex
+     */
     protected void checkTwitterUsernameRegex(String detailToParse) throws InvalidTwitterUsernameException {
-        //allows lowercase, numbers and underscore. Length must be max 15 characters
+        // Allows lowercase, numbers and underscore
+        // Length must be max 15 characters
         String twitterRegex = "^[a-z0-9_]{1,15}$";
         if (!detailToParse.matches(twitterRegex)) {
             LOGGER.log(Level.FINE, "Regex check for Name failed");
