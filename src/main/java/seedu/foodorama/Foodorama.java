@@ -27,6 +27,7 @@ public class Foodorama {
      * @param args is the whole user input from the command line
      *             which will include the command
      *             followed by necessary parameters or no parameters at all.
+     * @author Dniv-ra, renzocanare, jhsee5, Rakesh12000
      */
     public static void main(String[] args) {
         Logger logger = Logger.getLogger(Foodorama.class.getName());
