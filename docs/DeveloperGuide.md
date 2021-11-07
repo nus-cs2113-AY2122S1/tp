@@ -44,6 +44,28 @@ realise the target user profile that motivated us to build this application.
 This section brings developers through the general flow of the programme, the various components involved, and the overall design of their
 implementation.
 
+# Design
+
+### Main Components
+
+This section describes the overall design architecture of _Foodorama_.
+
+The `Main` class is responsible for initializing the main components upon start-up of the application, and
+deciding the execution path of the application through the main components based on reading the user inputs.
+
+The application consists of the following main components responsible for the high-level execution of a user input:
+1. `Foodorama`: Initializes all the other components and coordinates them.
+2. `Ui`: Handles the displaying of all command results and error messages to the user.
+3. `Storage`: Handles the creation, reading from and writing from the `/data` directory 
+4. `InputParser`: Makes sense from the user input and decides which `Command` class to call.
+5. `DishList`: Handles the collection of Dish objects used by Foodorama
+6. `IngredientList`: Handles the collection of Ingredient objects used by Foodorama.
+7. `Command`: Collection of classes that handle the different user commands
+
+The architecture diagram below shows a high-level overview of the structure between different components.
+
+![](images/architecture_diagram.png)
+
 ### General Flow
 
 Describes the step-by-step sequence from User Input to the Output.
@@ -84,17 +106,19 @@ The `Storage` class is responsible for the reading and writing of *Food-O-Rama* 
 ArrayList, `IngredientList.ingredientList`
 * Then, after accessing `dishes.txt`, `dishList.add()` is called for every dish that exists in the list and is added to the active
   ArrayList, `DishList.dishList`
+* Any inputs in the data file that are invalid get disregarded and only valid inputs get loaded. 
+  As a result the invalid inputs get sanitized once Foodorama is started 
 * Finally, the method also sets up the `formats.txt` file that contains all the relevant formats in which the data is saved along with examples
   * This is present in the load method as opposed to the write method as it only needs to be called once per run of *Food-O-Rama*
   
-❕ *Note: `dishes.txt`,`ingredients.txt` and `formats.txt` can be found in the `data` folder from the root directory.*    
+❕ *Note: `dishes.txt`,`ingredients.txt` and `formats.txt` can be found in the `data` folder from the root directory.*
 
 #### Saving Data
 ![](images/storage_write_sequence.png)
 
 * After every command, Duke calls `Storage.write(Ingredient)`, then `Storage.write(Dish)`.
   * This method in the `Storage` class is responsible for writing to the respective text file depending on the mode.
-* `Storage.write()` will access the respective text file and save to its respective save format.
+* `Storage.write()` will access the respective text file and save to It's respective save format.
 
 
 * ❕ **Save Formats:**
@@ -103,8 +127,9 @@ ArrayList, `IngredientList.ingredientList`
     * ❕ Limit is -1 if limit has not been defined.
     * ❕ DISH_WASTAGE / NUM_OF_LINKED_INGREDIENTS is DISH_WASTAGE if no ingredients have been linked.
   * Ingredients
-    * `INGREDIENT_NAME | INGREDIENT_STORAGE | INGREDIENT_WASTAGE | LIMIT`
+    * `INGREDIENT_NAME | INGREDIENT_STORAGE | INGREDIENT_WASTAGE | LIMIT | EXPIRY`
     * ❕ Limit is -1 if limit has not been defined.
+    * ❕ Expiry is null if expiry has not been defined.
 
 ### Data Structures
 
@@ -116,8 +141,8 @@ manipulation of the *Food-O-Rama* data.
 * The `Dish` class contains the Dish's Name, its wastage and its constituents.
 * The `Ingredient` class contains the Ingredient's Name, the weight of Ingredient in storage, the weight of Ingredient
 wasted as well as the weight of Ingredient wasted from Dish wastage.
-* The `DishList` class comprises an array of `Dish` along with Sort and Graph functions.
-* The `IngredientList` class comprises an array of `Ingredient` along with Sort and Graph functions.
+* The `DishList` class comprises an array of `Dish` along with functions to find, retrieve and modify dishes.
+* The `IngredientList` class comprises an array of `Ingredient` along with functions to find, retrieve and modify ingredients.
   * The Sort function arranges Dishes / Ingredients in descending order of their wastage.
   * The Graph function visualises the wastage of Dishes / Ingredients for easier analysis.
 
@@ -174,6 +199,20 @@ type in correct Commands/Parameters.
 
 * Different Command Classes that perform different tasks by calling various functions of the Object Classes.  
 * All inherit from an abstract `Command` class with one execute method that takes an Arraylist<String> as input.
+
+#Implementation
+
+### Find
+
+### Edit
+
+### Set
+
+### Graph
+
+### Random dish
+
+### Sort
 
 ## 📂 Product Scope
 
