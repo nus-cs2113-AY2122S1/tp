@@ -18,7 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * This class deals with reading and writing to the data folder in the root directory of foodorama
+ * This class deals with reading and writing to the data folder in the root directory of foodorama.
  *
  * @author Dniv-ra
  */
@@ -33,8 +33,8 @@ public class Storage {
     private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     /**
-     * Deals with writing the data that's present during runtime into a text file
-     * Creates data directory and files if files aren't present
+     * Deals with writing the data that's present during runtime into a text file.
+     * Creates data directory and files if files aren't present.
      * @param mode String that determines which of the text files the writing happens to
      *
      * @author Dniv-ra
@@ -76,8 +76,8 @@ public class Storage {
     }
 
     /**
-     * Deals with writing the data that's present during runtime into a text file
-     * Calls the respective load commands corresponding to each text file
+     * Deals with writing the data that's present during runtime into a text file.
+     * Calls the respective load commands corresponding to each text file.
      * Is called once when Foodorama is started
      * Creates data directory and empty files if files aren't present
      *

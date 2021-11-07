@@ -8,7 +8,7 @@ import seedu.foodorama.exceptions.FoodoramaException;
 import java.util.ArrayList;
 
 /**
- * Allows the user to see a graphical representation of the dishes or ingredients present
+ * Allows the user to see a graphical representation of the dishes or ingredients present.
  * Format: graph dish | graph ingr
  *
  * @author Dniv-ra

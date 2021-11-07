@@ -739,7 +739,7 @@ public class Ui {
     }
 
     /**
-     * Prints the bars for the graph given the coordinates of a particular point in the grid
+     * Prints the bars for the graph given the coordinates of a particular point in the grid.
      * @param graphPortions maximum number of bars in the graph
      * @param lengths collection of the lengths of all the bars in the graph
      * @param i x coordinate of the point
@@ -774,7 +774,7 @@ public class Ui {
     }
 
     /**
-     * Prints the wastage of an array of dishes in a graphical format
+     * Prints the wastage of an array of dishes in a graphical format.
      * @param dishList list of dishes to be converted into a bar graph
      *
      * @author Dniv-ra
@@ -813,7 +813,7 @@ public class Ui {
     }
 
     /**
-     * Prints the legend and the scale at the side of the graph
+     * Prints the legend and the scale at the side of the graph.
      * @param dishList list of dishes to be used for the legend
      * @param i current row in the grid
      *
@@ -831,7 +831,7 @@ public class Ui {
     }
 
     /**
-     * Prints the wastage of an array of ingredients in a graphical format
+     * Prints the wastage of an array of ingredients in a graphical format.
      * @param ingredientList list of ingredients to be converted into a bar graph
      *
      * @author Dniv-ra
@@ -870,7 +870,7 @@ public class Ui {
     }
 
     /**
-     * Prints the legend and the scale at the side of the graph
+     * Prints the legend and the scale at the side of the graph.
      * @param ingredientList list of ingredients to be used for the legend
      * @param i current row in the grid
      *

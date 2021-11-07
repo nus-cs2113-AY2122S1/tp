@@ -34,8 +34,7 @@ public class EditIngrWasteCommand extends Command {
      *
      * @param parameters contains the [INGR_NAME] or [INGR_INDEX] of the ingredient to edit wastage of
      * @throws FoodoramaException if [INGR_NAME] doesn't exist in the ingredient list or if [INDEX] is not an integer,
-     * [INDEX] is an integer that's out of bounds
-     *
+     *      [INDEX] is an integer that's out of bounds
      * @author renzocanare
      */
     @Override
@@ -76,7 +75,7 @@ public class EditIngrWasteCommand extends Command {
     }
 
     /**
-     * Checks if given string can be converted into a number
+     * Checks if given string can be converted into a number.
      * @param numberString string to be checked
      * @return true if string can be converted into a double, false otherwise
      *
@@ -92,7 +91,7 @@ public class EditIngrWasteCommand extends Command {
     }
 
     /**
-     * Checks if given string can be converted into an integer
+     * Checks if given string can be converted into an integer.
      * @param numberString string to be checked
      * @return true if string can be converted into an integer, false otherwise
      *

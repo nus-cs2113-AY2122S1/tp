@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Class that handles the collection of ingredient objects at runtime
+ * Class that handles the collection of ingredient objects at runtime.
  * @author renzocanare, jhsee5, Rakesh12000, Dniv-ra
  */
 public class IngredientList {
@@ -27,7 +27,7 @@ public class IngredientList {
     public static ArrayList<Ingredient> ingredientList = new ArrayList<>();
 
     /**
-     * Adds a new ingredient to the ingredient list
+     * Adds a new ingredient to the ingredient list.
      * @param ingredientName name of the ingredient to be added
      * @throws FoodoramaException if the weight of the ingredient is invalid
      *
@@ -82,7 +82,7 @@ public class IngredientList {
     }
 
     /**
-     * Checks if an ingredient exists in the ingredient list and returns it index
+     * Checks if an ingredient exists in the ingredient list and returns it index.
      * @param ingredientName name of ingredient being searched for
      * @return -1 if not present, index if present
      *
@@ -98,7 +98,7 @@ public class IngredientList {
     }
 
     /**
-     * Gets the value of the ingredient with the largest waste
+     * Gets the value of the ingredient with the largest waste.
      * @return largest wastage present in the list
      *
      * @author Dniv-ra
@@ -116,7 +116,7 @@ public class IngredientList {
     }
 
     /**
-     * Calls the graph function for ingredients
+     * Calls the graph function for ingredients.
      *
      * @author Dniv-ra
      */
@@ -125,7 +125,7 @@ public class IngredientList {
     }
 
     /**
-     * Calls the list function for ingredients
+     * Calls the list function for ingredients.
      *
      * @author renzocanare
      */
@@ -134,7 +134,7 @@ public class IngredientList {
     }
 
     /**
-     * Deletes an ingredient from the ingredient list
+     * Deletes an ingredient from the ingredient list.
      * @param ingredientIndex index of the item to be deleted
      *
      * @author Rakesh12000
@@ -176,7 +176,7 @@ public class IngredientList {
     }
 
     /**
-     * Clears the ingredient list
+     * Clears the ingredient list.
      *
      * @author Rakesh12000
      */
@@ -201,7 +201,7 @@ public class IngredientList {
     }
 
     /**
-     * Edits the name of one of the ingredients present in the list
+     * Edits the name of one of the ingredients present in the list.
      * @param ingredientIndex index of item to be edited
      * @throws FoodoramaException if new name is blank
      *
@@ -241,7 +241,7 @@ public class IngredientList {
     }
 
     /**
-     * Check if the given date matches the proper date formatting
+     * Check if the given date matches the proper date formatting.
      * @param expiryDateString date string to be checked
      * @return true if follows the correct format, false otherwise
      *
@@ -258,7 +258,7 @@ public class IngredientList {
 
     /**
      * Checks if the expiry date is too far away in the future
-     * or in the past and prompts the user if that's the case
+     * or in the past and prompts the user if that's the case.
      * @param daysBetweenExpiryToday time till the expiry date
      * @param ingrName name of the ingredient its getting expiry updated
      * @return false if expiry is in the past or too far away in the future, true otherwise
@@ -288,7 +288,7 @@ public class IngredientList {
     }
 
     /**
-     * Add expiry date for an ingredient
+     * Add expiry date for an ingredient.
      * @param ingredientIndex index of the ingredient expiry is being added to
      *
      * @author renzocanare
@@ -324,7 +324,7 @@ public class IngredientList {
     }
 
     /**
-     * Edits the wastage of one of the ingredients present in the list
+     * Edits the wastage of one of the ingredients present in the list.
      * @param ingrIndex index of item to be edited
      * @throws FoodoramaException if new wastage is negative or infinity
      *
@@ -395,7 +395,7 @@ public class IngredientList {
     }
 
     /**
-     * Edits the storage of one of the ingredients present in the list
+     * Edits the storage of one of the ingredients present in the list.
      * @param ingrIndex index of item to be edited
      * @throws FoodoramaException if new storage is negative or infinity
      *
@@ -460,7 +460,7 @@ public class IngredientList {
     }
 
     /**
-     * Checks if given string can be converted into a number
+     * Checks if given string can be converted into a number.
      * @param numberString string to be checked
      * @return true if string can be converted into a double, false otherwise
      *
@@ -476,7 +476,7 @@ public class IngredientList {
     }
 
     /**
-     * Get user confirmation through a prompt
+     * Get user confirmation through a prompt.
      * @param confirmAdd user input as a string
      * @return final user input if it is not invalid
      *

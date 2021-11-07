@@ -5,7 +5,7 @@ import seedu.foodorama.Ui;
 import java.util.ArrayList;
 
 /**
- * Shows the user a list of all available commands with the correct formats
+ * Shows the user a list of all available commands with the correct formats.
  * Format: help
  *
  * @author Rakesh12000

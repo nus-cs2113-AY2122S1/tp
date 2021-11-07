@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Allows the user to link an existing dish with an existing ingredient
+ * Allows the user to link an existing dish with an existing ingredient.
  * Format: link [DISH_NAME] / [INGR_NAME]
  *
  * @author Dniv-ra

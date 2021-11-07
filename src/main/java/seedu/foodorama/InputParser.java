@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Handles the parsing of user inputs to extract the command and parameters
+ * Handles the parsing of user inputs to extract the command and parameters.
  */
 public class InputParser {
     public Ui ui = new Ui();
 
     /**
-     * Gets the command type the user gave from the input
+     * Gets the command type the user gave from the input.
      * @param input text the user inputted
      * @return the respective command if it exists
      * @throws FoodoramaException if no command can be found in users input
@@ -30,7 +30,7 @@ public class InputParser {
     }
 
     /**
-     * Extracts the parameters of a command from the user input into an ArrayList<String>
+     * Extracts the parameters of a command from the user input into an ArrayList.
      * @param input user input
      * @param inputCommand the type of command the input is
      * @return parameters of the command present in the input
