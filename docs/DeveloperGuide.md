@@ -241,7 +241,7 @@ The Storage is handled by the `DataManager` class.
  - The logger will automatically log your message in the following format:
 ```
 [YYYY-MM-dd HH:mm:ss] [full.class.path]
-<Log Message here> 
+SEVERITY: Log Message Here 
 ```
 - The way the logger gets the class name is by using the `Thread.currentThread().getStackTrace()` function to determine which class called the log function.
 - All individual class loggers are stored in a hashmap `Map<String, Logger>` where if a class name is not already in the hashmap on calling any log function, it will be added automatically.
