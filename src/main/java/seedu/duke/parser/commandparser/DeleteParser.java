@@ -11,7 +11,9 @@ import seedu.duke.parser.ItemType;
 import seedu.duke.parser.Parser;
 
 import static seedu.duke.Duke.eventCatalog;
-import static seedu.duke.parser.ItemType.*;
+import static seedu.duke.parser.ItemType.EVENT;
+import static seedu.duke.parser.ItemType.TASK;
+import static seedu.duke.parser.ItemType.MEMBER;
 
 public abstract class DeleteParser extends Parser {
 
@@ -21,6 +23,9 @@ public abstract class DeleteParser extends Parser {
 
     public static Command getDeleteCommand(String[] command, String commandDetails) {
         try {
+            if (isDeleteAll(command)) {
+                return new DeleteCommand();
+            }
             ItemType itemType = getItemType(commandDetails);
             switch (itemType) {
             case EVENT:
@@ -112,7 +117,7 @@ public abstract class DeleteParser extends Parser {
         throw new DukeException("No matching names found!");
     }
 
-    private boolean isDeleteAll(String[] command) {
+    private static boolean isDeleteAll(String[] command) {
         if (command.length == 2) {
             return (command[1].trim().equalsIgnoreCase("all"));
         }
