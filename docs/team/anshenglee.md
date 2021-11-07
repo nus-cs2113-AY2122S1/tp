@@ -90,7 +90,8 @@ Link to code contribution: [RepoSense Link](https://nus-cs2113-ay2122s1.github.i
 
 - Parser component.
 - Data saving component.
-  - Contributed 1 class diagram and 5 sequence diagrams.
+  - Contributed **1** class diagram and **5** sequence diagrams.
+- Added user stories for v2.0.
 
 #### Contributions to team-based tasks
 
@@ -100,19 +101,40 @@ Link to code contribution: [RepoSense Link](https://nus-cs2113-ay2122s1.github.i
 - Ensured forking workflow.
 - Managed milestones. Ensured everything was done before deadlines. Adjusted milestone deadlines when needed.
 - Managed issues. Ensured duplicate issues are marked. Labelled issues with the appropriate labels.
+- Fix multiple bugs found during PED
+  - **6** PED bugs were fixed. Here are the issue links:
+    - [#192](https://github.com/AY2122S1-CS2113T-T12-3/tp/issues/192)
+    - [#173](https://github.com/AY2122S1-CS2113T-T12-3/tp/issues/173)
+    - [#170](https://github.com/AY2122S1-CS2113T-T12-3/tp/issues/170)
+    - [#167](https://github.com/AY2122S1-CS2113T-T12-3/tp/issues/167)
+    - [#157](https://github.com/AY2122S1-CS2113T-T12-3/tp/issues/157)
+    - [#155](https://github.com/AY2122S1-CS2113T-T12-3/tp/issues/155)
 
-#### Review/mentoring contributions
+#### Review/mentoring contributions during team project
 
-- Links to PRs reviewed:
-  - [#]()
-  - [#]()
+- Total PRs reviewed: 32
+- Links to PRs with non-trivial reviews:
+  - [#210](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/210)
+  - [#208](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/208)
+  - [#122](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/122)
+  - [#56](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/56)
+  - [#49](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/49)
+  - [#45](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/45)
+  - [#32](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/32)
+  - [#27](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/27)
+  - [#20](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/20)
 
 - Other forms of help:
   - Helped other teammates through streaming channels like Zoom and Discord.
+  - Helped through telegram group chat.
 
 #### Contributions beyond the project team
 
+- Links to PRs reviewed during iP:
+  - [[Silin Chen] iP #192](https://github.com/nus-cs2113-AY2122S1/ip/pull/192)
+  - [[Swati] iP #10](https://github.com/nus-cs2113-AY2122S1/ip/pull/10)
 
-
-
+- Links to PRs reviewed during tP:
+  - [[CS2113-F11-3] TourPlanner #42](https://github.com/nus-cs2113-AY2122S1/tp/pull/42)
+  - [[CS2113T-W12-4] Fridget #3](https://github.com/nus-cs2113-AY2122S1/tp/pull/3)
   
