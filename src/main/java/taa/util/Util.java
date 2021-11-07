@@ -32,6 +32,24 @@ public class Util {
         return isInt;
     }
 
+    private static boolean checkDecimalPlaces(String string, int maxDp) {
+        String[] splitString = string.split("\\.");
+        if (splitString.length == 1) {
+            return true;
+        }
+
+        if (splitString.length != 2) {
+            return false;
+        }
+
+        String secondString = splitString[1];
+        if (secondString.isEmpty()) {
+            return true;
+        }
+
+        return secondString.length() <= maxDp;
+    }
+
     /**
      * Checks if a string can be converted to a double.
      *
@@ -47,6 +65,29 @@ public class Util {
         try {
             double value = Double.parseDouble(string);
             isDouble = true;
+        } catch (NumberFormatException e) {
+            isDouble = false;
+        }
+
+        return isDouble;
+    }
+
+    /**
+     * Checks if a string can be converted to a double and the no. of decimal places.
+     *
+     * @param string The string to check.
+     * @param maxDp The no. of decimal places to allow.
+     * @return true if string can be converted and is within the no. of decimal places allowed.
+     */
+    public static boolean isStringDouble(String string, int maxDp) {
+        if (string == null || string.isEmpty()) {
+            return false;
+        }
+
+        boolean isDouble;
+        try {
+            double value = Double.parseDouble(string);
+            isDouble = checkDecimalPlaces(string, maxDp);
         } catch (NumberFormatException e) {
             isDouble = false;
         }
