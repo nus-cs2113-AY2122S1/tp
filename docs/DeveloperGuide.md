@@ -1,5 +1,3 @@
-## Developer Guide
-
 ### Table of Content
 - [Acknowledgements](#acknowledgements)
 - [Common Notations In DG](#notations)
@@ -847,8 +845,6 @@ exploratory testing.
        Github:   github.com/alexlee
        Email:    alex.lee@email.com
        Telegram: t.me/alexlee
-       LinkedIn: linkedin.com/in/alexlee
-       Twitter:  twitter.com/alexl33
        ____________________________________________________________
        ```
 
@@ -862,8 +858,6 @@ exploratory testing.
        Github:   github.com/alexlee
        Email:    alex.lee@email.com
        Telegram: t.me/alexlee
-       LinkedIn: linkedin.com/in/alexlee
-       Twitter:  twitter.com/alexl33
        ____________________________________________________________
        ```
 
