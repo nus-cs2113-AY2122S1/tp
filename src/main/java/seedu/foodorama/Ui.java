@@ -795,7 +795,7 @@ public class Ui {
             System.out.print("   "); //Every other column is blank
         } else if (i >= graphPortions - 1 - integralPart) {
             if (i == graphPortions - 1 - integralPart) {
-                if(fractionalPart == 0) {
+                if (fractionalPart == 0) {
                     System.out.print("   ");
                 } else {
                     System.out.print("[" + (int) (fractionalPart * 10) + "]");
