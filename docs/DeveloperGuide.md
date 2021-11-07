@@ -551,3 +551,13 @@ To check if the data file is read-only and if it is possible to corrupt data fil
 3. Try to save the changes and there should be an error message preventing you to do so.
 
 ![Error Changing File](Display_Images/ErrorChangingFile.png)
+
+To check that in the event the data file is corrupted, all the data will be wiped off:
+
+1. If the data file is for some reason corrupted, note that you will lose **all** data.
+2. Once you enter the application, and it detects that the file is corrupted, it will clear the file.
+
+![Corrupted File](Display_Images/CorruptedFile.png)
+
+3. Without adding any data in the application, exit the program and check back to the corrupted file.
+  It should be empty.
