@@ -76,8 +76,8 @@ total workload:
     > e.g. in `show <MODULE_CODE>`, <MODULE_CODE> is a parameter and be called like so : `show CS2113T`.
     <br /><br />
 > - Items in square brackets are optional <br />
-    > e.g. find `search <KEYWORD> [-l]`
-    > can be called as `search GEH` OR `search GEH -l`.
+    > e.g. find `search <KEYWORD> [-flag]`
+    > can be called as `search GEH` OR `search GEH -q`.
     <br /><br />
 > - Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `bye`) will be ignored.<br />
     > e.g. `help abc` will be interpreted as  `help`
@@ -169,7 +169,7 @@ Exam Date(s): Sem 1: Tue Nov 30 09:00 AM - 11:00 AM
 
 <br>
 
-## Search Module: `search <KEYWORD> [-f]`
+## Search Module: `search <KEYWORD> [-flag]`
 
 Maybe you don't know what modules are out there, and want to know what GEH modules are available.
 
@@ -595,7 +595,7 @@ and is very similar to just running `update`.
 | Command                         | Meaning                                                                                            |
 | --------------                  | ----------                                                                                         |
 | `help`                          | Shows available commands and flags. <br> Example: `help`                                           |
-| `search <KEYWORD> [-q]`         | Lists modules that have partial matches by regex to the keyword. <br> Example: `search GEH -l 1000`|
+| `search <KEYWORD> [-flag]`      | Lists modules that have partial matches by regex to the keyword. <br> Example: `search GEH -q`     |
 | `show <MODULE_CODE>`            | Display relevant module information. <br> Example: `show CS2113T`                                  |
 | `update`                        | Fetches all mods from the API to a local save. <br> Example: `update`                              |
 | `add`                           | Adds modules or events to the timetable. <br> Example: `add`                                       |
