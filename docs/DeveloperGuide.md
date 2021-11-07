@@ -19,6 +19,7 @@
 - [4. Implementation](#4-implementation)
   - [4.1 Task Factories](#41-task-factories)
   - [4.2 Filtering the tasklist](#42-filtering-the-tasklist)
+  - [4.3 [Proposed] Refactor TaskManager](#43-proposed-refactor-taskmanager)
 - [5. Appendix: Requirements](#5-appendix-requirements)
   - [5.1 Product scope](#51-product-scope)
   - [5.2 User stories](#52-user-stories)
@@ -323,6 +324,9 @@ pre-formatted `String` containing a neat list of the final filtered tasks that m
 
 **Step 6**: A `CommandResult` object is then created and stores the `String` containing the filtered tasklist
 as the command execution message to be handled by the `Ui` and displayed to the user on the terminal interface.
+
+### 4.3 [Proposed] Refactor `TaskManager`
+The team has thought of refactoring `TaskManager` because as of currently, it does not seem to be following the 'Single Responsibility Principle'. Because `TaskManager` both manages the `taskList` and `latestFilteredList`, it seems that it is having 2 responsibilities. The team believes that this issue can be fixed using either the 'Facade', 'Decorator' or 'Proxy' design pattern. However, due to lack of time, we have bundled the two Task lists into one class.
 
 ## 5. Appendix: Requirements
 
