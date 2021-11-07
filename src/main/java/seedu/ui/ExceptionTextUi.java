@@ -215,7 +215,7 @@ public class ExceptionTextUi {
             message = "There seems to be missing or invalid index in your request.\n"
                     + "Please enter command in the following way:\n"
                     + "      rm <INDEX> {REMOVE_DETAIL_FLAGS}\n"
-                    + "Enter <INDEX> as 0 or 1";
+                    + "Enter <INDEX> as 0 as only one contact is stored";
         } else {
             message = "There seems to be missing or invalid index in your request.\n"
                     + "Please enter command in the following way:\n"
