@@ -19,45 +19,19 @@ import seedu.commands.general.FindCommand;
 import seedu.commands.general.HelpCommand;
 import seedu.commands.general.ShowGraphByYearCommand;
 import seedu.commands.general.ShowGraphCommand;
-import seedu.commands.income.AddIncomeCommand;
 import seedu.commands.budget.CheckBudgetCommand;
-import seedu.commands.Command;
 import seedu.commands.currency.CurrencyConversionCommand;
 import seedu.commands.currency.CurrencyType;
-import seedu.commands.expense.DeleteExpenseCommand;
-import seedu.commands.income.DeleteIncomeCommand;
 import seedu.commands.InvalidCommand;
-import seedu.commands.expense.ListExpenseCommand;
-import seedu.commands.income.ListIncomeCommand;
 import seedu.commands.budget.SetBudgetCommand;
 import seedu.commands.budget.SetThresholdCommand;
 import seedu.commands.expense.TotalExpenseBetweenCommand;
 import seedu.commands.expense.TotalExpenseCommand;
 import seedu.commands.income.TotalIncomeBetweenCommand;
 import seedu.commands.income.TotalIncomeCommand;
-
-import seedu.commands.general.FindCommand;
 import seedu.commands.budget.BalanceCommand;
-import seedu.commands.general.ClearAllEntriesCommand;
-import seedu.commands.general.ExitCommand;
-import seedu.commands.general.HelpCommand;
-import seedu.commands.general.ShowGraphCommand;
-
 import seedu.commands.currency.ListCurrencyTypesCommand;
-import seedu.commands.currency.CheckCurrentCurrencyCommand;
-import seedu.commands.currency.CurrencyConversionCommand;
-import seedu.commands.currency.CurrencyType;
 
-import seedu.commands.budget.SetBudgetCommand;
-import seedu.commands.budget.SetThresholdCommand;
-import seedu.commands.budget.CheckBudgetCommand;
-
-import seedu.commands.InvalidCommand;
-import seedu.commands.budget.BalanceCommand;
-import seedu.entry.Expense;
-import seedu.entry.ExpenseCategory;
-import seedu.entry.Income;
-import seedu.entry.IncomeCategory;
 import seedu.exceptions.BlankCurrencyTypeException;
 import seedu.exceptions.InputException;
 import seedu.exceptions.InvalidBudgetAmountException;
@@ -68,10 +42,6 @@ import seedu.exceptions.InvalidIndexException;
 import seedu.exceptions.InvalidSettingsDataException;
 import seedu.exceptions.InvalidThresholdValueException;
 import seedu.utility.tools.DateRange;
-
-import seedu.exceptions.BlankCurrencyTypeException;
-import seedu.exceptions.BlankExpenseCategoryException;
-import seedu.exceptions.BlankIncomeCategoryException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -110,6 +80,7 @@ import static seedu.utility.tools.DateOperator.getYearFormat;
 import static seedu.utility.tools.DateOperator.isValidDateRange;
 import static seedu.utility.tools.Extractor.extractAmount;
 import static seedu.utility.tools.Extractor.extractBudgetAmount;
+import static seedu.utility.tools.Extractor.extractCurrencyType;
 import static seedu.utility.tools.Extractor.extractDescription;
 import static seedu.utility.tools.Extractor.extractExpenseCategory;
 import static seedu.utility.tools.Extractor.extractIncomeCategory;
@@ -696,24 +667,6 @@ public class Parser {
             }
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
-    }
-
-    private CurrencyType extractCurrencyType(Matcher matcher)
-            throws BlankCurrencyTypeException, InvalidCurrencyTypeException {
-        String newCurrency = matcher.group("currency").trim();
-        if (newCurrency.isBlank()) {
-            throw new BlankCurrencyTypeException(Messages.BLANK_CURRENCY_TYPE_MESSAGE);
-        }
-        switch (newCurrency.toUpperCase()) {
-        case "USD":
-            return CurrencyType.USD;
-        case "SGD":
-            return CurrencyType.SGD;
-        case "INR":
-            return CurrencyType.INR;
-        default:
-            throw new InvalidCurrencyTypeException(Messages.INVALID_CURRENCY_TYPE_MESSAGE);
-        }
     }
 
     private Command prepareListCurrencyTypes(String arguments) {

@@ -154,6 +154,24 @@ public abstract class Extractor {
         }
     }
 
+    public static CurrencyType extractCurrencyType(Matcher matcher)
+            throws BlankCurrencyTypeException, InvalidCurrencyTypeException {
+        String newCurrency = matcher.group("currency").trim();
+        if (newCurrency.isBlank()) {
+            throw new BlankCurrencyTypeException(Messages.BLANK_CURRENCY_TYPE_MESSAGE);
+        }
+        switch (newCurrency.toUpperCase()) {
+        case "USD":
+            return CurrencyType.USD;
+        case "SGD":
+            return CurrencyType.SGD;
+        case "INR":
+            return CurrencyType.INR;
+        default:
+            throw new InvalidCurrencyTypeException(Messages.INVALID_CURRENCY_TYPE_MESSAGE);
+        }
+    }
+
     public static double extractThresholdValue(Matcher matcher) throws InvalidThresholdValueException {
         String userGivenThreshold = matcher.group("threshold").trim();
         return parseThresholdValue(userGivenThreshold);
