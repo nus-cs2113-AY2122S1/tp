@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.function.Predicate;
@@ -126,5 +127,11 @@ public abstract class DateOperator {
         LocalDate endDate = LocalDate.parse(end, DateTimeFormatter.ofPattern(DATE_FORMAT));
         return new DateRange(startDate,endDate);
     }
-    
+
+    //@@author AnShengLee 
+    public static LocalDate extractDate(Matcher matcher) throws DateTimeParseException {
+        String date = matcher.group("date").trim();
+        return LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT));
+    }
+    //@@author AnShengLee
 }
