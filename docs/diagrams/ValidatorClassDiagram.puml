@@ -15,11 +15,12 @@ class "{abstract}\n MedicineValidator"{
     +containsInvalidParameterValues(): boolean &#123;abstract&#125;
     +isValidColumn(): boolean &#123;abstract&#125;
     +containsInvalidParametersAndValues(): boolean
+    +getInvalidParameters(): ArrayList<String>
     +containsInvalidParameters(): boolean
     +isValidName(): boolean
     +isValidQuantity(): boolean
     +hasNameParamChecker(): boolean
-    +hasQuantityParamChecker: boolean
+    +hasQuantityParamChecker(): boolean
 }
 
 class "StockValidator"{
@@ -38,7 +39,7 @@ class "StockValidator"{
 class "PrescriptionValidator"{
     +PrescriptionValidator()
     +containsInvalidParameterValues(): boolean;
-    +isValidDispenseId(): boolean
+    +isValidPrescriptionId(): boolean
     +isValidCustomerId(): boolean
     +isValidStaffName(): boolean
     +isValidColumn(): boolean
