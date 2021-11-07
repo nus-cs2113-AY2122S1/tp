@@ -5,10 +5,8 @@
 box Command COMMAND_BOX_COLOR
 participant ":TimetableCommand" as TimetableCommand COMMAND_COLOR
 endbox
-
 participant ":Timetable" as Timetable
 
-participant ":StringBuilder" as StringBuilder
 
 box Module MODULE_BOX_COLOR
 participant ":ModuleManager" as ModuleManager MODULE_COLOR
@@ -21,11 +19,6 @@ participant ":Link" as Link CONTENT_COLOR
 endbox
 
 activate TimetableCommand
-create StringBuilder
-TimetableCommand -> StringBuilder: StringBuilder()
-Activate StringBuilder
-StringBuilder --> TimetableCommand
-Deactivate StringBuilder
 
 create Timetable
 TimetableCommand -> Timetable: Timetable(moduleManager)
@@ -38,81 +31,18 @@ alt isStringNullOrEmpty(day)
 TimetableCommand -> Timetable: getWeeklySchedule()
 Activate Timetable
 
-Timetable -> StringBuilder: StringBuilder()
-Activate StringBuilder
-StringBuilder --> Timetable
-Deactivate StringBuilder
 
 loop For each day in DaysOfWeekEnum
-ref over TimetableCommand, StringBuilder, Timetable, ModuleManager, NusModule, ContentManager, Link: getDailySchedule
+ref over TimetableCommand, Timetable, ModuleManager, NusModule, ContentManager, Link: getDailySchedule
 end
 Timetable --> TimetableCommand: weeklyScehdule
 Deactivate Timetable
 
 
-else else
-TimetableCommand -> Timetable: getDailySchedule()
-Activate Timetable
-
-Timetable -> StringBuilder: StringBuilder()
-Activate StringBuilder
-StringBuilder --> Timetable
-Deactivate StringBuilder
-
-Timetable -> ModuleManager: getAllModules()
-Activate ModuleManager
-NusModule --> ModuleManager: modules
-Activate NusModule
-
-loop For each NusModule in modules
-    ModuleManager -> NusModule: getModule(NusModule)
-
-
-    Deactivate ModuleManager
-
-    NusModule -> ContentManager : getContentManager()
-
-    Activate ContentManager
-    Deactivate NusModule
-
-        loop For each Link in ContentManager
-
-            ContentManager -> Link: getContents()
-            Activate Link
-            Deactivate ContentManager
-
-            Link->Link: getDay()
-            Activate Link #DarkSalmon
-            Link --> Link: currentDay
-
-            opt if currentDay equals to user argument Day
-            Deactivate Link
-
-            Link -> Link: getViewDescription()
-            Activate Link #DarkSalmon
-
-            Link --> Link: description
-            Deactivate Link
-            Link -> StringBuilder: append(description)
-            Activate StringBuilder
-            Deactivate Link
-        end
-
+else
+ref over TimetableCommand, Timetable, ModuleManager, NusModule, ContentManager
+getDailySchedule
 end
-StringBuilder -> StringBuilder: toString()
-Activate StringBuilder
-StringBuilder --> StringBuilder: dailySchedule
-Deactivate StringBuilder
-StringBuilder --> Timetable: dailySchedule
-Deactivate StringBuilder
-Timetable --> TimetableCommand: DailyScedule
-Deactivate Timetable
-Deactivate TimetableCommand
-end
-
-
-
-
 
 end
 
