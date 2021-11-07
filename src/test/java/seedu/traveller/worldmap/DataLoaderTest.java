@@ -12,6 +12,7 @@ class DataLoaderTest {
     private final String missingSeparatorInput = "SIN|MLY|CHN|JAPAN|SKR";
     private final String nonNumberDistance = "a|b|c|d|e";
     private final String negativeNumberDistance = "-1|3|0|-4|6";
+    private final String filePath = "./flightData/time.txt";
 
     public DataLoaderTest() {
         this.graphList = new GraphList();
@@ -25,16 +26,16 @@ class DataLoaderTest {
     @Test
     public void loadCountries_exceptionThrown() {
         assertThrows(IllegalFlightFileException.class,
-            () -> dataLoader.loadCountries(parseInput(missingCountryInput, 5), graphList));
+            () -> dataLoader.loadCountries(parseInput(missingCountryInput, 5), graphList, filePath));
         assertThrows(IllegalFlightFileException.class,
-            () -> dataLoader.loadCountries(parseInput(missingSeparatorInput, 5), graphList));
+            () -> dataLoader.loadCountries(parseInput(missingSeparatorInput, 5), graphList, filePath));
     }
 
     @Test
     public void loadDistances_exceptionThrown() {
         assertThrows(IllegalFlightFileException.class,
-            () -> dataLoader.loadDistances(parseInput(nonNumberDistance, 5), graphList));
+            () -> dataLoader.loadDistances(parseInput(nonNumberDistance, 5), graphList, filePath));
         assertThrows(IllegalFlightFileException.class,
-            () -> dataLoader.loadDistances(parseInput(negativeNumberDistance, 5), graphList));
+            () -> dataLoader.loadDistances(parseInput(negativeNumberDistance, 5), graphList, filePath));
     }
 }

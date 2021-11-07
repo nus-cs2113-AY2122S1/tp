@@ -28,15 +28,17 @@ public class DataLoader {
      * This function is responsible for adding the countries (vertexes).
      * @param countryCodes The relevant line that is read from the text file.
      * @param graphList The graphList that contains the country and distance matrices.
+     * @param filePath To identify which text file throws an exception.
      * @throws IllegalFlightFileException When the text file contains unreadable data. (Invalid Country Codes)
      */
-    protected void loadCountries(String[] countryCodes, GraphList graphList) throws IllegalFlightFileException {
+    protected void loadCountries(String[] countryCodes, GraphList graphList, String filePath)
+            throws IllegalFlightFileException {
         logger.log(Level.INFO, "Loading countries: " + Arrays.toString(countryCodes));
         assert countryCodes.length == numberOfCountries;
         for (int j = 0; j < numberOfCountries; j++) {
             String countryCode = countryCodes[j];
             if (countryCode.length() != countryCodeLength) {
-                throw new IllegalFlightFileException();
+                throw new IllegalFlightFileException(filePath);
             }
             int countryIndex = j + 1;
             Country current = new Country(countryCode, countryIndex);
@@ -48,9 +50,11 @@ public class DataLoader {
      * This function is responsible for adding the distances (edges) between two countries (vertexes).
      * @param rawDistances The relevant line that is read from the text file.
      * @param graphList The graphList that contains the country and distance matrices.
+     * @param filePath To identify which text file throws an exception.
      * @throws IllegalFlightFileException When the text file contains unreadable data. (Negative / Non numbers)
      */
-    protected void loadDistances(String[] rawDistances, GraphList graphList) throws IllegalFlightFileException {
+    protected void loadDistances(String[] rawDistances, GraphList graphList, String filePath)
+            throws IllegalFlightFileException {
         logger.log(Level.INFO, "Loading distances: " + Arrays.toString(rawDistances));
         assert rawDistances.length <= numberOfCountries;
         for (int k = 0; k < rawDistances.length; k++) {
@@ -58,10 +62,10 @@ public class DataLoader {
             try {
                 distance = Double.parseDouble(rawDistances[k]);
             } catch (NumberFormatException e) {
-                throw new IllegalFlightFileException();
+                throw new IllegalFlightFileException(filePath);
             }
             if (distance < 0) {
-                throw new IllegalFlightFileException();
+                throw new IllegalFlightFileException(filePath);
             }
             ArrayList<Country> countryArray = graphList.getVertexArray();
             Country sourceCountry = countryArray.get(k);
@@ -95,9 +99,9 @@ public class DataLoader {
         int i = 0;
         while (scanner.hasNext() && i < numberOfCountries) {
             if (i == 0) {
-                readCountries(scanner, graphList);
+                readCountries(scanner, graphList, filePath);
             } else {
-                readDistance(scanner, graphList, i);
+                readDistance(scanner, graphList, i, filePath);
             }
             i++;
         }
@@ -126,9 +130,9 @@ public class DataLoader {
         int i = 0;
         while (scanner.hasNext() && i < numberOfCountries) {
             if (i == 0) {
-                readCountries(scanner, graphList);
+                readCountries(scanner, graphList, filePath2);
             } else {
-                readDistance(scanner, graphList, i);
+                readDistance(scanner, graphList, i, filePath2);
             }
             i++;
         }
@@ -139,14 +143,15 @@ public class DataLoader {
      * This function reads the country data from the text file.
      * @param scanner Scanner object to read from the text file.
      * @param graphList GraphList to add countries to.
+     * @param filePath To identify which text file throws an exception.
      * @throws IllegalFlightFileException If the text file contains invalid data (More country codes than expected.)
      */
-    public void readCountries(Scanner scanner, GraphList graphList) throws IllegalFlightFileException {
+    public void readCountries(Scanner scanner, GraphList graphList, String filePath) throws IllegalFlightFileException {
         String[] rawInput = parseNextLine(scanner, numberOfCountries);
         if (rawInput.length != numberOfCountries) {
-            throw new IllegalFlightFileException();
+            throw new IllegalFlightFileException(filePath);
         }
-        loadCountries(rawInput, graphList);
+        loadCountries(rawInput, graphList, filePath);
     }
 
     /**
@@ -154,15 +159,17 @@ public class DataLoader {
      * @param scanner Scanner object to read from the text file.
      * @param graphList GraphList to add time/cost to.
      * @param i Variable to ensure that data is read in lower triangular matrix. (Which the text file will contain.)
+     * @param filePath To identify which text file throws an exception.
      * @throws IllegalFlightFileException If the text file contains invalid data
      *     (More time/cost numbers than expected.)
      */
-    private void readDistance(Scanner scanner, GraphList graphList, int i) throws IllegalFlightFileException {
+    private void readDistance(Scanner scanner, GraphList graphList, int i, String filePath)
+            throws IllegalFlightFileException {
         String[] rawInput = parseNextLine(scanner, i);
         if (rawInput.length != i) {
-            throw new IllegalFlightFileException();
+            throw new IllegalFlightFileException(filePath);
         }
-        loadDistances(rawInput, graphList);
+        loadDistances(rawInput, graphList, filePath);
     }
 
     /**

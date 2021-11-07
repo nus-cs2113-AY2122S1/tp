@@ -373,6 +373,12 @@ Exits the program.
 
 ## 3. FAQ
 
+**Q**: Why does Traveller keep exiting when I run it?
+
+**A**: Traveller only exits when its data files *time.txt* and *cost.txt* are tampered with. Please check
+if the files have been changed and re-download them from our 
+[release.](https://github.com/AY2122S1-CS2113T-W13-1/tp/releases)
+
 **Q**: How do I transfer my data to another computer? 
 
 **A**: Transfer the entire folder containing the items listed below to the other computer. 
@@ -436,7 +442,7 @@ Action | Format
 **delete** | `delete TRIP_NAME`
 **delete-day** | `delete-day TRIP_NAME /day DAY_INDEX`
 **delete-item** | `delete-item TRIP_NAME /day DAY_INDEX /item ITEM_INDEX`
-**edit** | `edit TRIP_NAME /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
+**edit** | `edit TRIP_NAME /name NEW_TRIP_NAME /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
 **edit-item** | `edit-item TRIP_NAME /day DAY_NUMBER /index ITEM_INDEX /time NEW_ITEM_TIME /name NEW_ITEM_NAME`
 **search-item** |  `search-item TRIP_NAME /day DAY_INDEX /key KEYWORD`
 **shortest-time** | `shortest-time /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
