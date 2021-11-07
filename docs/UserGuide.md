@@ -10,7 +10,7 @@ MedBot can allow head nurses to get their management tasks done quicker and more
 
 ### Installation
 
-1. Ensure that you have Java 11. 
+1. Ensure that you are currently using `Java 11`. 
 2. Download the latest version of `tp.jar` from [here](https://github.com/AY2122S1-CS2113-T13-1/tp/releases).
 3. Move the file to the folder that you want to use as the MedBot's root folder.
 4. Execute the `java -jar tp.jar` command in the terminal in the same folder as the `tp.jar` file to launch

@@ -1,8 +1,8 @@
 package medbot.list;
 
-
 import static medbot.ui.Ui.END_LINE;
 
+//@@author jushg
 public class MedicalStaffList extends PersonList {
 
     @Override

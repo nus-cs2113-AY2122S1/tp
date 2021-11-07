@@ -5,6 +5,7 @@ import medbot.ui.StaffUi;
 import medbot.ui.Ui;
 import medbot.command.personcommand.ListPersonCommand;
 
+//@@author jushg
 public class ListStaffCommand extends ListPersonCommand {
     public ListStaffCommand(boolean getHidden) {
         super(getHidden);

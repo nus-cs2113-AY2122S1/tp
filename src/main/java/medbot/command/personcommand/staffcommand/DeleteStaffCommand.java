@@ -6,6 +6,7 @@ import medbot.command.personcommand.DeletePersonCommand;
 import medbot.exceptions.MedBotException;
 import medbot.utilities.ViewType;
 
+//@@author jushg
 public class DeleteStaffCommand extends DeletePersonCommand {
     public DeleteStaffCommand(int staffId) {
         super(staffId);

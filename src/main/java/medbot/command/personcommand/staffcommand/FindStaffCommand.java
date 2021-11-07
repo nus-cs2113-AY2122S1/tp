@@ -8,6 +8,7 @@ import medbot.utilities.ViewType;
 
 import java.util.List;
 
+//@@author jushg
 public class FindStaffCommand extends FindPersonCommand {
     public FindStaffCommand(String[] parameters) {
         super(parameters);
