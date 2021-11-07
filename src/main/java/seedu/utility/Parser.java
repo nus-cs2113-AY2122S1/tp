@@ -48,6 +48,7 @@ import seedu.exceptions.InvalidIncomeIndexException;
 import seedu.exceptions.InvalidInputAmountValueException;
 import seedu.exceptions.InvalidSettingsDataException;
 import seedu.exceptions.InvalidThresholdValueException;
+import seedu.utility.tools.DateRange;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -56,8 +57,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.utility.tools.DateOperator.getYearFormat;
-import static seedu.utility.tools.DateOperator.isValidDateRange;
+import static seedu.utility.tools.DateOperator.*;
 
 public class Parser {
 
@@ -168,7 +168,7 @@ public class Parser {
             + DATA_SEPARATOR + "(?<medical>.+)" + DATA_SEPARATOR + "(?<bills>.+)" + DATA_SEPARATOR 
             + "(?<entertainment>.+)" + DATA_SEPARATOR + "(?<misc>.+)" + DATA_SEPARATOR + "(?<overall>.+)");
 
-    private static final String DATE_FORMAT = "dd/MM/yyyy";
+    public static final String DATE_FORMAT = "dd/MM/yyyy";
     private static final double ENTRY_AMOUNT_LIMIT = 1000000;
 
     /**
@@ -320,12 +320,9 @@ public class Parser {
             return new InvalidCommand(Messages.PARAMETERS_ERROR_MESSAGE);
         }
         try {
-            String start = matcher.group("start").trim();
-            LocalDate startDate = LocalDate.parse(start, DateTimeFormatter.ofPattern(DATE_FORMAT));
-            String end = matcher.group("end").trim();
-            LocalDate endDate = LocalDate.parse(end, DateTimeFormatter.ofPattern(DATE_FORMAT));
-            if (isValidDateRange(startDate,endDate)) {
-                return new TotalIncomeBetweenCommand(startDate, endDate);
+            DateRange dateRange = extractStartAndEndDate(matcher);
+            if (isValidDateRange(dateRange)) {
+                return new TotalIncomeBetweenCommand(dateRange);
             }
             return new InvalidCommand(Messages.INVALID_DATE_RANGE_MESSAGE);
         } catch (DateTimeParseException e) {
@@ -339,12 +336,9 @@ public class Parser {
             return new InvalidCommand(Messages.PARAMETERS_ERROR_MESSAGE);
         }
         try {
-            String start = matcher.group("start").trim();
-            LocalDate startDate = LocalDate.parse(start, DateTimeFormatter.ofPattern(DATE_FORMAT));
-            String end = matcher.group("end").trim();
-            LocalDate endDate = LocalDate.parse(end, DateTimeFormatter.ofPattern(DATE_FORMAT));
-            if (isValidDateRange(startDate,endDate)) {
-                return new TotalExpenseBetweenCommand(startDate, endDate);
+            DateRange dateRange = extractStartAndEndDate(matcher);
+            if (isValidDateRange(dateRange)) {
+                return new TotalExpenseBetweenCommand(dateRange);
             } 
             return new InvalidCommand(Messages.INVALID_DATE_RANGE_MESSAGE);
         } catch (DateTimeParseException e) {
