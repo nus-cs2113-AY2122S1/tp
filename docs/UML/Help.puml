@@ -11,6 +11,7 @@ LifeLineBackgroundColor peachpuff
 
 skinparam sequenceArrowColor black
 
+-> ":Parser": parseMaster()
 
 activate ":Parser"
 

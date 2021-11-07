@@ -35,14 +35,11 @@ public class GordonException extends Exception {
     public static final String NO_RECIPE_FOUND = "No such recipe exists.";
     public static final String NO_TAG_FOUND = "No such tag exists.";
 
-    public static final String TAG_NONE_DETECTED = "No tags detected, try again.";
     public static final String TAG_FORMAT_TOOSHORT = "Please use 'tag / recipeName / tagName1 + tagName2 + ...'";
-    public static final String TAG_FORMAT_NOTAGS = "Please state which tags you wish to use.";
-    public static final String DUPLICATE_TAG_NAME = "No duplicate tag names allowed within the same recipe.";
     public static final String UNTAG_FORMAT_TOOSHORT = "Please use 'untag / recipeName / tagName1 + tagName2 + ...'";
-    public static final String UNTAG_FORMAT_NOTAGS = "Please state which tags you wish to untag.";
     public static final String DELETETAG_FORMAT_TOOSHORT = "Please use 'deleteTag / tagName1 + tagName2 + ...'";
-    public static final String DELETETAG_FORMAT_NOTAGS = "Please say which tags you wish to delete.";
+    public static final String TAG_FORMAT_EMPTY = "tagNames cannot be left empty.";
+    public static final String DUPLICATE_TAG_NAME = "No duplicate tag names allowed within the same recipe.";
 
     public GordonException(String errorMessage) {
         super(errorMessage);
