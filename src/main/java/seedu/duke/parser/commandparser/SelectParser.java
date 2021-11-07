@@ -80,7 +80,7 @@ public abstract class SelectParser extends Parser {
         memberIndexToSelect = getMemberIndexFromQuery(memberName);
     }
 
-    private static int getIndexFromCommand(String indexAsString) throws InvalidIndexException {
+    private static int getIndexFromCommand(String indexAsString) {
         return Integer.parseInt(indexAsString.trim()) - 1;
     }
 
