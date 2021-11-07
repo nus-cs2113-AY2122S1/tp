@@ -223,7 +223,8 @@ It contains functions that can help control the date inside the list.
 clear the data from the list. `getTrip` and `getTripIndex` can return the specific `Trip` data by giving the name 
 or the index of the Also, the `getSize` functions will return the size of the `TripsList`. 
 
-{TODO: Add details}
+![](documentationPics/TripsList.jpeg)
+<div style="text-align: center;">Figure 6: TripsList Diagram</div>
 
 #### 1.2.4. Ui class
 The `Ui` class processes the interactions with users. The functions in `Ui` class will be called in `command` and then 
@@ -254,7 +255,7 @@ Loading the save file is similar to the main `run` function of Traveller, as the
 Following the loading of the save file, writing of the save file is handled as shown below.
 
 ![](documentationPics/saveSequenceDiagram.jpg)
-<div style="text-align: center;">Figure 6: Save Sequence Diagram</div>
+<div style="text-align: center;">Figure 7: Save Sequence Diagram</div>
 
 The functions `getSaveTrip()`, `getSaveDay()` and `getSaveItem()` return `strings` that corresponds to the 
 command that will be executed in order to add a trip, day or item to the TripList, DaysList or ItemsList respectively.
