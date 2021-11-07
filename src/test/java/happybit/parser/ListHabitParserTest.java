@@ -9,12 +9,14 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class ListHabitParserTest {
 
-    private static final String ERROR_GOAL_INDEX_FORMAT = "The command is missing the 'g/' flag";
-    private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The flag 'g/' has to be followed by a number";
+    private static final String ERROR_GOAL_INDEX_FORMAT = "The command is missing the 'g/' flag.";
+    private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The flag 'g/' has to be followed by a number.";
     private static final String ERROR_GOAL_INDEX_NEGATIVE_NUM =
-            "The flag 'g/' has to be followed by a positive integer";
+            "The flag 'g/' has to be followed by a positive integer.";
     private static final String ERROR_GOAL_INDEX_ZERO_NUM =
-            "The flag 'g/' has to be followed by a number greater than 0";
+            "The flag 'g/' has to be followed by a number greater than 0.";
+    private static final String ERROR_FLAG_INDEX_MISSING_PARAMETER = "Index expected after '%1$s' flag missing.";
+
 
     @Test
     void parseListHabitCommand_validInput_success() throws HaBitParserException {
@@ -38,7 +40,7 @@ class ListHabitParserTest {
             ListHabitParser.parseListHabitCommand("g/");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_GOAL_INDEX_FORMAT, e.getMessage());
+            assertEquals(String.format(ERROR_FLAG_INDEX_MISSING_PARAMETER, "g/"), e.getMessage());
         }
     }
 
