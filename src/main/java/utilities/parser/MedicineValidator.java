@@ -15,11 +15,12 @@ import java.util.logging.Logger;
 public abstract class MedicineValidator {
     private static Logger logger = Logger.getLogger("MedicineValidator");
 
-    public MedicineValidator(){
+    public MedicineValidator() {
     }
 
     public abstract boolean containsInvalidParameterValues(Ui ui, LinkedHashMap<String, String> parameters,
-                                                           ArrayList<Medicine> medicines, String commandSyntax);
+                                                           ArrayList<Medicine> medicines, String commandSyntax,
+                                                           ArrayList<String> invalidParameters);
 
     public abstract boolean isValidColumn(Ui ui, String columnName);
 
@@ -48,14 +49,49 @@ public abstract class MedicineValidator {
             return true;
         }
 
+        int requiredParametersLength = requiredParameters.length;
+        int optionalParametersLength = optionalParameters.length;
+        // Combine both parameter array to check if optional parameter is valid
+        String[] mergedParameters = new String[requiredParametersLength + optionalParametersLength];
+        System.arraycopy(requiredParameters, 0, mergedParameters, 0, requiredParametersLength);
+        System.arraycopy(optionalParameters, 0, mergedParameters, requiredParametersLength, optionalParametersLength);
+
+        ArrayList<String> invalidParameters = getInvalidParameters(parameters, mergedParameters);
+
         boolean isInvalidParameterValues = validator.containsInvalidParameterValues(ui, parameters,
-                medicines, commandSyntax);
+                medicines, commandSyntax, invalidParameters);
         if (isInvalidParameterValues) {
             logger.log(Level.WARNING, "Invalid parameters values given by user");
             return true;
         }
 
         return false;
+    }
+
+    /**
+     * Filter out the invalid parameters provided by user.
+     *
+     * @param parameters       Parameters entered in by the user.
+     * @param mergedParameters Parameters that are both required and optional.
+     * @return ArrayList of invalid parameters.
+     */
+    private ArrayList<String> getInvalidParameters(LinkedHashMap<String, String> parameters,
+                                                   String[] mergedParameters) {
+        ArrayList<String> invalidParameters = new ArrayList<>();
+        for (String parameter : parameters.keySet()) {
+            boolean found = false;
+            for (String mergedParameter : mergedParameters) {
+                if (parameter.equalsIgnoreCase(mergedParameter)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                continue;
+            }
+            invalidParameters.add(parameter);
+        }
+        return invalidParameters;
     }
 
 
