@@ -84,11 +84,7 @@ public class UiMain extends UiManager {
      * Loads in data from an external storage.
      */
     private void loadData() {
-        try {
-            this.goalList = this.storage.load();
-        } catch (HaBitStorageException e) {
-            printManager.printError(e.getMessage());
-        }
+        this.goalList = this.storage.load();
     }
 
     /**
