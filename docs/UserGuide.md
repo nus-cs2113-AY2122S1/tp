@@ -81,7 +81,8 @@ No ingredients expiring by [5 days from current date]
 No ingredients with stock less than 1.0 kg
 ____________________________________________________
 ```
-   
+> **IMPORTANT**: **DO NOT** edit any files in the `data/` folder! This can cause major bugs in loading data and you 
+> may have to delete the folder completely to use SITUS again!
 ## 2. Features
 
 This section covers the commands SITUS can execute - how you can use them and their expected outputs. 
