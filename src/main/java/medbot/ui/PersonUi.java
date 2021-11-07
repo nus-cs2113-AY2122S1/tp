@@ -219,7 +219,7 @@ public abstract class PersonUi {
      * @param personInfo the info of the person to be printed.
      * @return String containing the information of the person
      */
-    protected static String getPersonInfo(String person, String personInfo) {
+    protected static String getViewPersonMessage(String person, String personInfo) {
         return "Here's the requested " + person + ":" + END_LINE + END_LINE
                 + personInfo + END_LINE;
     }

@@ -133,6 +133,11 @@ public class SchedulerUi {
                 + TABLE_ROW_SEPARATOR;
     }
 
+    public static String getViewAppointmentMessage(String appointmentInfo) {
+        return "Here is the requested appointment information:" + END_LINE
+                + appointmentInfo;
+    }
+
     /**
      * Returns a String containing information of all appointments in a table.
      *

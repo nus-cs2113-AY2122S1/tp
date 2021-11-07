@@ -120,6 +120,20 @@ public class Ui {
         }
     }
 
+    public static String getViewMessage(String info, ViewType viewType) throws MedBotException {
+        switch (viewType) {
+        case PATIENT_INFO:
+            return PatientUi.getViewPatientMessage(info);
+        case SCHEDULER:
+            return SchedulerUi.getViewAppointmentMessage(info);
+        case MEDICAL_STAFF_INFO:
+            return StaffUi.getViewStaffMessage(info);
+        default:
+            assert false;
+            throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
+        }
+    }
+
     /**
      * Returns the information of the filtered patients.
      *
@@ -450,6 +464,7 @@ public class Ui {
     }
 
     //@@author Kureans
+
     /**
      * Utility function that performs a pseudo-clear of the console.
      */

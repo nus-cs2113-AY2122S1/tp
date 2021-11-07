@@ -152,8 +152,8 @@ public class PatientUi extends PersonUi {
      * @param patientInfo the info of the patient to be printed.
      * @return String containing the information of the patient
      */
-    public static String getPatientInfo(String patientInfo) {
-        return getPersonInfo(PATIENT, patientInfo);
+    public static String getViewPatientMessage(String patientInfo) {
+        return getViewPersonMessage(PATIENT, patientInfo);
     }
 
     /**

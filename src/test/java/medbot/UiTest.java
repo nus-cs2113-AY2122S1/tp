@@ -3,7 +3,6 @@ package medbot;
 import medbot.exceptions.MedBotException;
 import medbot.list.MedicalStaffList;
 import medbot.list.PatientList;
-import medbot.list.PersonList;
 import medbot.person.Patient;
 import medbot.person.Staff;
 import medbot.ui.PatientUi;
@@ -299,7 +298,7 @@ class UiTest {
         try {
             patientList.addPerson(patient);
             String patientInfo = patient.toString();
-            assertEquals(expectedOutput, PatientUi.getPatientInfo(patientInfo));
+            assertEquals(expectedOutput, PatientUi.getViewPatientMessage(patientInfo));
 
         } catch (MedBotException e) {
             fail();
@@ -323,7 +322,7 @@ class UiTest {
         try {
             staffList.addPerson(staff);
             String staffInfo = staff.toString();
-            assertEquals(expectedOutput, StaffUi.getStaffInfo(staffInfo));
+            assertEquals(expectedOutput, StaffUi.getViewStaffMessage(staffInfo));
         } catch (MedBotException e) {
             fail();
         }

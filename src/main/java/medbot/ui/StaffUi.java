@@ -152,8 +152,8 @@ public class StaffUi extends PersonUi {
      * @param staffInfo the info of the staff to be printed.
      * @return String containing the information of the staff
      */
-    public static String getStaffInfo(String staffInfo) {
-        return getPersonInfo(STAFF, staffInfo);
+    public static String getViewStaffMessage(String staffInfo) {
+        return getViewPersonMessage(STAFF, staffInfo);
     }
 
     /**
