@@ -239,7 +239,7 @@ America | 02 Feb 2021
 
 #### - List Trips
 
-Lists all the Trips that you have created. 
+Lists all the Trips that you have created along with their index numbers. 
 
 This command can only be used if no Trip is open.
 
@@ -268,7 +268,7 @@ List of Trips:
 
 Lists the persons involved in a particular Trip. 
 
-This command can only be used if you have opened a Trip.
+This command can only be used if you have a Trip opened.
 
 Input syntax:
 ```
@@ -317,14 +317,14 @@ Your trip to America on 02 Feb 2021 has been successfully removed.
 
 #### - Edit Trip
 
-Edit attributes of a Trip
+Edit the attributes of a Trip
 
 Input syntax:
 ```
 edit [trip-num] -[attribute] [new-value]
 ```
 All fields are compulsory. Note the following:
-- The following attributes can be edited: 
+- The following are the attributes that can be edited along with their corresponding syntax: 
   - Location: `-location`
   - Date: `-date`
   - Exchange Rate: `-exchangerate`
@@ -350,9 +350,9 @@ The location of your trip has been changed from tokyo to japan.
 
 ### Expenses
 #### - Create Expense
-Creates a new expense entry for the current Trip. 
+Creates a new expense entry for the current opened Trip. 
 
-This command can only be used if you have opened a Trip.
+This command can only be used if you have a Trip opened.
 
 Input syntax:
 ````  
@@ -399,6 +399,7 @@ There is USD $30.00 left to be assigned. How much did Tom spend?:
 ````
 - The program will automatically cycle through every person involved in the expense.
 - Entering `equal` when the program asks for the amount spent for the first person will cause the program to evenly split the expense among all the people involved in it.
+  - Note: If the amount is not perfectly divisible by the number of people, the payer will bear the surplus or deficit.
 
 If there is no amount remaining but there are still people left to be assigned, PayMeBack will prompt the user if they would like to assign 0 to the rest of the people involved in the expense:
 ````
@@ -487,7 +488,7 @@ If successful, the output will be as follows:
 <br />
 
 #### - Filter Expenses By Attribute
-Allows the user to view specific expenses based on an attribute of their choice.
+Allows the user to view specific expenses and index numbers based on an attribute of their choice.
 
 This command can only be used if a trip is open, and there is at least 1 expense.
 
@@ -550,29 +551,21 @@ delete 1
 ````
 If successful, the output will be as follows:
 ```
-Your expense of SGD 50.00 has been successfully removed.
+Your expense of SGD $50.00 has been successfully removed.
 ```
 <br />
 
 ### Settling Expenses
 There are 2 commands that you can run to get a list of who pays who (WPW) to 
 settle expenses. `amount` displays the WPW for 1 person, while `optimize` displays the WPW for everyone in 
-the trip. We recommend you use `optimize` most of the time.
+the trip.
 
 <br />
 
 #### Amount
-Shows the transactions that the input person have to make to ensure that everyone is being paid back. User needs to have opened a trip and have expenses to use the command. Note that the WPW list is not optimized, and you will encounter cases where the WPW list will list:
-
-```
-Adam needs to pay USD 10.00 (SGD 10.00) to Eve
-Eve needs to pay USD 3.00 (SGD 3.00) to Adam
-```
-instead of
-```
-Adam needs to pay USD 7.00 (SGD 7.00) to Eve
-```
-<br />
+Shows the transactions that a person will have to engage in so that the person will not owe or be owed any money.
+User needs to have a trip opened and have expenses added to use this command. Note that this list is not optimized, 
+if you would like to settle all payments, please use `optimize` instead.
 
 Input syntax:
 ```
@@ -590,10 +583,10 @@ amount Ben
 If successful, the output will be as follows:
 
 ```
-Ben spent SGD $3050.50 (SGD $3050.50) on the trip so far
-Ben owes SGD $3000.00 (SGD $3000.00) to Jerry
+Ben spent USD $350.50 (SGD $473.65) on the trip so far
+Ben owes USD $30.00 (SGD $40.54) to Jerry
 Ben does not owe anything to Dick
-Ben needs to pay USD 7.00 (SGD 7.00) to Eve
+Ben owes USD $7.00 (SGD $9.46) to Eve
 ```
 <br /><br />
 #### Optimize Transactions
@@ -618,8 +611,8 @@ If successful, the output will be as follows:
 
 ```
 Here is the optimized payment transactions:
-yuzhao needs to pay USD 8.00 (SGD 8.00) to yikai
-yuzhao needs to pay USD 13.00 (SGD 13.00) to qian
+yuzhao needs to pay USD $8.00 (SGD $8.00) to yikai
+yuzhao needs to pay USD $13.00 (SGD $13.00) to qian
 ```
 
 If no transactions are required, the user will see this message:
