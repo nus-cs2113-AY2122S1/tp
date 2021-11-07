@@ -734,6 +734,7 @@ any command.
 Hyphen before square brackets (eg `summary -[name]`) denotes optional arguments
 
 ### General commands
+
 Action | Command syntax
 ---|---
 Display help|`help`
