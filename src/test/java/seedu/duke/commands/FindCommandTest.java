@@ -51,7 +51,7 @@ class FindCommandTest {
             InvalidItemTypeException {
         createEventsList();
         Command command = Parser.parseCommand("find abc");
-        String expectedOutput = "Please add -e to find event(s)!" + System.getProperty("line.separator");
+        String expectedOutput = "Please add -e to find event(s)!" + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString());
     }
 
