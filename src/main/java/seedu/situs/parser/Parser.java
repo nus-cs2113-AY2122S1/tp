@@ -24,7 +24,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Parser {
@@ -46,11 +47,9 @@ public class Parser {
 
     public static final String DIVIDER = "____________________________________________________\n";
     private static final String INVALID_COMMAND_MESSAGE = "Invalid command!";
-    private static final String DELETE_ERROR_MESSAGE = "Nothing to remove!";
     private static final String NUMBER_FORMAT_ERROR_MESSAGE = "Invalid number format!";
     private static final String INVALID_INDEX_MESSAGE = "The index given is in an incorrect format!\n"
             + "The index MUST be of the form: X.Y (e.g. 1.1, 2.3, etc.)";
-    private static final String NOT_FOUND_MESSAGE = "Ingredient not found!";
     private static final String INCORRECT_PARAMETERS_MESSAGE = "The number of parameters is wrong!";
     private static final String INCORRECT_PARAMETER_FORMAT_MESSAGE = "The parameter format is wrong!";
     private static final String EXPIRY_FORMAT_ERROR_MESSAGE = "Invalid expiry date format!"
