@@ -636,7 +636,7 @@ Expected Output 1:
 
 Example 2 (List pending orders): `listorder s/pending`
 
-Expected output:
+Expected Output 2:
 
 ```
 +====+==============+==========+============+=========+
