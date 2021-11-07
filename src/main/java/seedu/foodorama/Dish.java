@@ -8,6 +8,15 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Represents a Dish which contains
+ * the dishName,
+ * weight of DIsh wasted,
+ * limit of the weight of Dish wasted and
+ * the Ingredients that make up the Dish.
+ *
+ * @author renzocanare, jhsee5, Rakesh12000, Dniv-ra
+ */
 public class Dish implements Comparable<Dish> {
     private static final Logger LOGGER = Logger.getLogger("Dish class");
     private ArrayList<Ingredient> parts = new ArrayList<>();
@@ -23,6 +32,12 @@ public class Dish implements Comparable<Dish> {
     //Each dish contributes a portion of its wastage to part ingredients
     private double ingredientContribution;
 
+    /**
+     * Default constructor for instances of the Dish object being created.
+     *
+     * @param dishName takes in the String that will become the name of the Dish.
+     * @author Dniv-ra
+     */
     public Dish(String dishName) {
         LoggerManager.setupLogger(LOGGER);
         LOGGER.log(Level.INFO, "Calling default constructor");
@@ -32,6 +47,15 @@ public class Dish implements Comparable<Dish> {
         this.limit = -1;
     }
 
+    /**
+     * Loading constructor for instances of the Dish object being created.
+     *
+     * @param dishName               takes in the String that will become the name of the Dish.
+     * @param wastage                takes in the double that will become the weight wasted of the Dish.
+     * @param ingredientContribution takes in the Double of an Ingredient
+     *                               that will represent its contribution fraction to the Dish.
+     * @author Dniv-ra
+     */
     public Dish(String dishName, double wastage, double ingredientContribution) {
         LoggerManager.setupLogger(LOGGER);
         LOGGER.log(Level.INFO, "Calling loading constructor");
@@ -41,30 +65,73 @@ public class Dish implements Comparable<Dish> {
         this.limit = -1;
     }
 
+    /**
+     * Returns the name of the Dish.
+     *
+     * @return dishName which is the name of the Dish as a String.
+     * @author Dniv-ra
+     */
     public String getDishName() {
         return dishName;
     }
 
+    /**
+     * Returns the wastage weight limit of the Dish.
+     *
+     * @return limit which is the limit of the wastage weight of the Dish.
+     * @author Dniv-ra
+     */
     public double getLimit() {
         return limit;
     }
 
+    /**
+     * Returns the wastage weight of the Dish.
+     *
+     * @return wastage weight of the Dish.
+     * @author Dniv-ra
+     */
     public double getWastage() {
         return wastage;
     }
 
+    /**
+     * Sets the wastage weight limit of the Dish.
+     *
+     * @param limit limit which is the limit of the wastage weight of the Dish.
+     * @author Dniv-ra
+     */
     public void setLimit(double limit) {
         this.limit = limit;
     }
 
+    /**
+     * Sets the name of the Dish.
+     *
+     * @param dishName which is the name of the Dish as a String.
+     * @author Dniv-ra
+     */
     public void setDishName(String dishName) {
         this.dishName = dishName;
     }
 
+    /**
+     * Sets the wastage weight of the Dish.
+     *
+     * @param wastage wastage weight of the Dish.
+     * @author renzocanare
+     */
     public void setDishWastage(Double wastage) {
         this.wastage = wastage;
     }
 
+    /**
+     * Allow setting of Limit based on the user input.
+     *
+     * @throws FoodoramaException when user types in a String instead of number for the limit
+     *                            or when the user types in Infinity for the limit.
+     * @author Dniv-ra
+     */
     public void setLimitValue() throws FoodoramaException {
         UI.printEnterLimitFor(dishName);
         Scanner in = new Scanner(System.in);
@@ -88,14 +155,35 @@ public class Dish implements Comparable<Dish> {
         UI.printLimitSet(dishName, limit);
     }
 
+
+    /**
+     * Gets the portion of the Ingredient
+     * which is part of the Dish as a double.
+     *
+     * @return ingredientContribution which is the portion of the Ingredient which is part of the Dish as a double.
+     * @author Dniv-ra
+     */
     public double getIngredientContribution() {
         return ingredientContribution;
     }
 
+
+    /**
+     * Gets an ArrayList of Ingredients which are parts that make up the Dish.
+     *
+     * @return parts which is the ArrayList of Ingredients that make up the DIsh.
+     * @author jhsee5
+     */
     public ArrayList<Ingredient> getParts() {
         return parts;
     }
 
+    /**
+     * Adds the Ingredient [ingredientName] to the Dish as a part of the Dish.
+     *
+     * @param ingredientName which is the name of the Ingredient to be associated with the Dish.
+     * @author Dniv-ra
+     */
     public void addPart(String ingredientName) {
         int ingredientIndex = IngredientList.find(ingredientName);
         if (ingredientIndex == -1) {
@@ -119,6 +207,13 @@ public class Dish implements Comparable<Dish> {
         }
     }
 
+    /**
+     * Takes in the weight of Dish wasted from the command line interface
+     * from the user input.
+     *
+     * @throws FoodoramaException when the input is not a number or when the number entered is out of bounds,
+     * @author Dniv-ra
+     */
     public void addWaste() throws FoodoramaException {
         UI.printEnterWasteWeightOf(dishName);
         Scanner in = new Scanner(System.in);
@@ -178,6 +273,13 @@ public class Dish implements Comparable<Dish> {
 
     }
 
+    /**
+     * Checks if the parameter numberString is a number.
+     *
+     * @param numberString the String to check if it is a number
+     * @return true is the String is a number, false if it is not a number
+     * @author Dniv-ra
+     */
     private boolean isNumber(String numberString) {
         try {
             double number = Double.parseDouble(numberString);
@@ -188,6 +290,12 @@ public class Dish implements Comparable<Dish> {
     }
 
 
+    /**
+     * Modifies the printing of a Dish when required to print to show the user.
+     *
+     * @return Dish profile: [DISH_NAME], wastage weight, Ingredients associated with the Dish & wastage weight limit.
+     * @author Dniv-ra
+     */
     @Override
     public String toString() {
         String limitString;
@@ -215,11 +323,26 @@ public class Dish implements Comparable<Dish> {
                 + "   Limit: " + limitString;
     }
 
+    /**
+     * Calculates the height of the bar belonging to the Dish
+     * when 'graph dish' is called.
+     *
+     * @param max        is a double which is the maximum weight wasted among all Dishes in the Dish List.
+     * @param resolution is the resolution of the graph.
+     * @return num which is the height of the bar that is associated to the Dish that compares to other Dishes.
+     * @author Dniv-ra
+     */
     public double getGraphHeight(double max, int resolution) {
         double num = (resolution * wastage / max);
         return num;
     }
 
+    /**
+     * Allow storage into the text file dishes.txt.
+     *
+     * @return output which is the text to be written to dishes.txt to store the user data of Dishes
+     * @author Dniv-ra
+     */
     public String formatData() {
         String output = "";
         output = output + dishName + "|" + wastage + "|" + ingredientContribution + "|" + limit;
@@ -229,12 +352,28 @@ public class Dish implements Comparable<Dish> {
         return output;
     }
 
+    /**
+     * Comparator function to compare the wastage of all Dishes in the Dish List
+     * which the SortDishCOmmand utilises.
+     *
+     * @param o is the Dish that will be passed into the method for comparison with this Dish.
+     * @return diff which is either 0, 1 or -1. 0 means no difference. 1 means greater than, -1 means smaller than.
+     * @author Dniv-ra, jhsee5
+     */
     @Override
     public int compareTo(Dish o) {
         double diff = (o.wastage - wastage);
         return (diff >= 0) ? (diff == 0) ? 0 : 1 : -1;
     }
 
+    /**
+     * Allow for user confirmation between yes 'y' and no 'n' on methods that involve Dishes.
+     *
+     * @param confirmAdd is a String either 'y' / 'yes' meaning yes or 'n'/'no' meaning no
+     *                   and cannot take other strings.
+     * @return confirmAdd returns 'y'/'yes'/'n'/'no' which will be used in other methods for user confirmation.
+     * @author Rakesh12000
+     */
     public String getConfirmation(String confirmAdd) {
         Scanner input = new Scanner(System.in);
         while (!confirmAdd.matches(YES_NO_REGEX)) {
