@@ -448,7 +448,7 @@ public class IngredientList {
      * Checks if the parameter numberString is a number.
      *
      * @param numberString the String to check if it is a number
-     * @return true is the String is a number, false if it is not a number
+     * @return true if the String is a number, false if it is not a number
      * @author Dniv-ra
      */
     public static boolean isNumber(String numberString) {
