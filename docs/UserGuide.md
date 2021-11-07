@@ -318,6 +318,13 @@ ________________________________________________________________________________
 
 ```
 
+> ![](documentationPics/tip.png) Edit-item only allows you to change the time or name of a given item, 
+> not the name or source and destination countries of your trip.  
+> To do so, use [edit](#29-edit-a-trip-edit) instead!
+> 
+> ![](documentationPics/warning.png) Edit-item allows you to edit either the time or name (and both too!) 
+> of a given item, but both cannot be left empty!
+
 <br/>
 
 ### 2.11. Searching for an item: `search-item`
@@ -340,6 +347,12 @@ ________________________________________________________________________________
 _________________________________________________________________________________
 ```
 
+> ![](documentationPics/tip.png) Search allows you to find words that contain the phrase, no 
+> matter how large or small! Eg 'a', 'apple'.
+>
+> ![](documentationPics/warning.png) Search only allows you to find words that contain exactly 
+> the phrase, so do search carefully! Eg 'ice-cream' will not be returned if you search 'ice cream'!
+
 ### 2.12. Shortest time: `shortest-time`
 Returns the shortest flight time from the source to destination country.
 
@@ -356,6 +369,10 @@ ____________________________________________________________
 	5.0
 ____________________________________________________________
 ```
+> ![](documentationPics/tip.png) shortest-time allows you to find the shortest time from one country to 
+> another! If you wish to find or research on costs instead, do take a look at our shortest cost function 
+> at [shortest-cost](#213-least-cost-shortest-cost)
+
 
 ### 2.13. Least cost: `shortest-cost`
 Returns the least expensive flight path from the source to destination country.
@@ -373,7 +390,9 @@ ____________________________________________________________
 	400.0
 ____________________________________________________________
 ```
-
+> ![](documentationPics/tip.png) shortest-cost allows you to find the least cost from one country to
+> another! If you wish to find or research in terms of flight time instead, do take a look at our 
+> time function instead at [shortest-time](#212-shortest-time-shortest-time)
 
 
 ### 2.14 Exiting the program: `exit`
