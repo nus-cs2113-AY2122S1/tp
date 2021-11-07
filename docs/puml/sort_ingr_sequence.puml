@@ -2,33 +2,31 @@
 'https://plantuml.com/sequence-diagram
 
 box
-
--> SortIngrCommand: parameters
+actor User
+User -> SortIngrCommand: UserCommand
 
 activate SortIngrCommand
 
-SortIngrCommand -> IngredientList: execute();
+SortIngrCommand -> IngredientList: ingredientList.sort(ingrComparator)
 
 activate IngredientList
 
-SortIngrCommand -> UI : execute();
+SortIngrCommand -> UI : printSortIngrMsg()
 
 activate UI
 
-IngredientList -> IngredientList: ingredientList.sort(ingrComparator)
+SortIngrCommand -> IngredientList: list()
+deactivate SortIngrCommand
 
-UI -> UI: ui.printSortIngrMsg();
-
-IngredientList -> IngredientList : list();
-
-<-- UI: output to be displayed
+IngredientList -> UI: printIngrList(ingredientList)
+deactivate IngredientList
+User <-- UI: output to be displayed
 
  deactivate UI
 
-<-- IngredientList: output to be displayed
 
- deactivate IngredientList
 
- deactivate SortIngrCommand
+
+
 
 @enduml
