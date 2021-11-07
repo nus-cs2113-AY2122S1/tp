@@ -609,6 +609,8 @@ commands.
     1. Test case: `edit 1 p/99999999 n/John Xavier Doe`<br>
        Expected:
         ```
+        The information of patient with ID 1 has been edited to:
+       
         Patient ID: 1
         IC: S7812345X
         Name: John Xavier Doe
@@ -709,7 +711,8 @@ commands.
     1. Test case: `edit 3 s/1`<br>
        Expected:
         ```
-        Appointment 3 changed to Appointment Id: 3
+        Appointment 3 now has the following details:
+       
         Patient ID: 2
         Staff ID: 1
         Date/Time: 01 Dec 21 1100HRS

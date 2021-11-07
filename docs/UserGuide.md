@@ -37,9 +37,9 @@ command, which will be explained further down below.
 
 These notes apply to all commands that are supported by MedBot.
 * Words in upper case are the required parameters.
-  * e.g. in `delete PATIENT_ID`, a `PATIENT_ID` is required for this command. 
+    * e.g. in `delete PATIENT_ID`, a `PATIENT_ID` is required for this command.
 * Words in square brackets are optional parameters.
-  * e.g. in `help [COMMAND]`, the `COMMAND` is optional for this command.
+    * e.g. in `help [COMMAND]`, the `COMMAND` is optional for this command.
 
 ### General Commands
 
@@ -112,7 +112,7 @@ You are currently in the Patient's View.
 
 ### Accessing user guide: `help`
 
-Provides an internal user guide that is accessible via the command line. 
+Provides an internal user guide that is accessible via the command line.
 
 Format: `help [COMMAND]`
 
@@ -169,7 +169,7 @@ Added patient with patient ID: PATIENT_ID
 Examples:
 `add i/S7812345X n/John Doe p/87654321 e/john.doe@gmail.com a/John Street, block 1234, #01-01`
 
-#### Notes:
+#### Notes for adding a patient:
 
 - `NAME` and `ADDRESS` will be auto-capitalized for every word from user input.
 - `EMAIL` must be in a valid email format
@@ -273,7 +273,7 @@ Address: ADDRESS
 ```
 
 Notes:
-Refer to [Adding a patient - notes](#notes)
+Refer to [Adding a patient - notes](#notes-for-adding-a-patient)
 
 ### Find patients based on attributes: `find`
 
@@ -380,7 +380,12 @@ Format: `edit APPOINTMENT_ID [p/PAITENT_ID] [s/STAFF_ID] [d/DATE_TIME]`
 Expected output:
 
 ```
-Appointment APPOINTMENT_ID changed to Appointment Id: APPOINTMENT_ID Date/Time: DATE_TIME Patient ID: PATIENT_ID Staff ID: STAFF_ID
+Appointment APPOINTMENT_ID now has the following details:
+
+Appointment Id: APPOINTMENT_ID 
+Date/Time: DATE_TIME
+Patient ID: PATIENT_ID
+Staff ID: STAFF_ID
 ```
 
 ### Viewing an appointment's information: `view`
@@ -422,15 +427,14 @@ Here is a list of all appointments:
     * To maintain the table layout and prevent overflow of a cell.
 * To get the full information without the truncated details, use `VIEW APPOINTMENT_ID`.
 
-
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: All data will be stored in the `MedBotData` directory that is created in the same working directory as `medbot.jar`. There are 3
-text files in `MedBotData` - `patient.txt`, `staff.txt` and `appointment.txt`. Simply transfer the `MedBotData` directory containing the
-three text files to the other computer, and run the `medbot.jar` in the same new location as the `MedBotData` directory.
-
+**A**: All data will be stored in the `MedBotData` directory that is created in the same working directory as `tp.jar`.
+There are 3 text files in `MedBotData` - `patient.txt`, `staff.txt` and `appointment.txt`. Simply transfer
+the `MedBotData` directory containing the three text files to the other computer, and run the `tp.jar` in the same new
+location as the `MedBotData` directory.
 
 ## Command Summary
 
