@@ -293,7 +293,7 @@ Lessons for all modules have been successfully added
 
 <br></br>
 
-### Adding an Event to timetable
+### Add an Event to timetable
 
 Perhaps you have a team meeting that takes place every Monday, you can likewise add your personal events into the timetable
 
@@ -324,8 +324,7 @@ has been freed up.
 
 <br>
 
-
-## Delete from timetable: `delete <module_code>`
+## Delete from timetable: `delete <MODULE_CODE>`
 
 You can remove any module that you added to your timetable using this command.
 
@@ -451,7 +450,7 @@ __________________________________________________________________________
 
 <br>
 
-## Remove modules from the list of completed modules: `remove <module_code>`
+## Remove modules from the list of completed modules: `remove <MODULE_CODE>`
 
 You can remove any module that you added to your list of completed modules using this command.
 
@@ -598,7 +597,7 @@ and is very similar to just running `update`.
 | `search <KEYWORD> [-l]`         | Lists modules that have partial matches by regex to the keyword. <br> Example: `search GEH -l 1000`|
 | `show <MODULE_CODE>`            | Display relevant module information. <br> Example: `show CS2113T`                                  |
 | `update`                        | Fetches all mods from the API to a local save. <br> Example: `update`                              |
-| `add`                           | Adds modules or tasks to the timetable. <br> Example: `add`                                        |
+| `add`                           | Adds modules or events to the timetable. <br> Example: `add`                                       |
 | `delete <MODULE_CODE/TASK>`     | Deletes the module from the timetable. <br> Example: `delete CS2113T`                              |
 | `clear`                         | Deletes all modules from the timetable. <br> Example: `clear`                                      |
 | `edit`                          | Edit a personal task in the timetable. <br> Example: `edit`                                        |

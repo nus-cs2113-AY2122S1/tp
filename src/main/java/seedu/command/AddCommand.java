@@ -44,6 +44,7 @@ public class AddCommand extends Command {
     }
 
     public void execute() throws FetchException, ModuleExistException, AddException {
+        assert getFlag() != AddFlag.INVALID;
         if (getFlag() == AddFlag.LESSON) {
             Module module;
             String moduleCode = addUI.getModuleCode();
