@@ -69,7 +69,7 @@ public class AddCommand extends Command {
             String date = getDate();
             String startTime = getStartTime();
             String endTime = getEndTime();
-            verifyCorrectTime(startTime, endTime);
+            //verifyCorrectTime(startTime, endTime);
             String location = getLocation();
             event = new TimetableUserItem(description, date, startTime, endTime, location);
             verifyNoConflict(event);
@@ -104,11 +104,12 @@ public class AddCommand extends Command {
         try {
             Integer.parseInt(endTime);
         } catch (NumberFormatException e) {
-            throw new AddException("Invalid End Time Entered (Format: 0000 - 2359)");
+            throw new AddException("Invalid End Time Entered (Format: 0000 - 2300)");
         }
-        if (isValidTime(endTime)) {
-            throw new AddException("Invalid End Time Entered (Format: 0000 - 2359)");
-        }
+//        if (isValidTime(endTime)) {
+//            throw new AddException("Invalid End Time Entered (Format: 0000 - 2300)." +
+//                    " Note that all events are strictly within a 1 hour interval");
+//        }
         return endTime;
     }
 
@@ -117,10 +118,11 @@ public class AddCommand extends Command {
         try {
             Integer.parseInt(startTime);
         } catch (NumberFormatException e) {
-            throw new AddException("Invalid Start Time Entered (Format: 0000 - 2359)");
+            throw new AddException("Invalid Start Time Entered (Format: 0000 - 2300)");
         }
         if (isValidTime(startTime)) {
-            throw new AddException("Invalid Start Time Entered (Format: 0000 - 2359)");
+            throw new AddException("Invalid End Time Entered (Format: 0000 - 2300)." +
+                    " Note that all events are strictly within a 1 hour interval");
         }
         return startTime;
     }
@@ -260,6 +262,11 @@ public class AddCommand extends Command {
     }
 
     public boolean isValidTime(String input) {
+        if (input.length() != 4) {
+            return true;
+        } else if (Integer.parseInt(input.substring(2)) != 0) {
+            return true;
+        }
         return Integer.parseInt(input) < 0 || Integer.parseInt(input) >= 2360
                 || Integer.parseInt(input.substring(2)) >= MAX_TIME;
     }

@@ -319,6 +319,7 @@ Location of Event (Optional): Discord
 Alright!! Event: Team Meeting CS2113T on Monday, from 2000 to 2100 at Discord has been added to your timetable
 ```
 `NOTE:` The time format works in 1 hr interval, therefore events starting and ending within the same hour will be counted as happening on that hour.
+And start and end time with minutes are NOT allowed
 
 `NOTE:` If the selected timeslot is already occupied, the program will let you know and the event will not be added until the timeslot
 has been freed up.
