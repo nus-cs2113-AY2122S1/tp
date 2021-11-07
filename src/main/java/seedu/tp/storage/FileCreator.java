@@ -13,8 +13,12 @@ public class FileCreator {
     private static final String LIST_STORAGE_FILE = "tasks.dat";
 
     private File taskFile;
+    private boolean hasCreatedFolder = true;
     private static final String IO_EXCEPTION_MESSAGE = "IO Exception occurred while trying to create "
-        + "file for saving tasks: %s";
+        + "file for saving tasks: " + LIST_STORAGE_FOLDER + LIST_STORAGE_FILE;
+
+    private static final String FILE_ALREADY_EXISTS = "File 'data' already exists in project folder."
+        + " Please remove it and restart the application to be able to save tasks!";
 
     /**
      * Creates the files required for storing tasks if they are not already created.
@@ -24,12 +28,16 @@ public class FileCreator {
         try {
             taskFile = createFile(LIST_STORAGE_FOLDER + LIST_STORAGE_FILE);
         } catch (IOException e) {
-            Log.severe(String.format(IO_EXCEPTION_MESSAGE, getTaskFileName()));
+            Log.severe(IO_EXCEPTION_MESSAGE);
         }
     }
 
     private void createFolder() {
         File newFolder = new File(LIST_STORAGE_FOLDER);
+        if (newFolder.exists() && !newFolder.isDirectory()) {
+            Log.severe(FILE_ALREADY_EXISTS);
+            hasCreatedFolder = false;
+        }
         if (!newFolder.exists()) {
             newFolder.mkdir();
         }
@@ -55,5 +63,12 @@ public class FileCreator {
      */
     public String getTaskFileName() {
         return taskFile.getAbsolutePath();
+    }
+
+    /**
+     * Returns whether the {@link #LIST_STORAGE_FOLDER} has been created.
+     */
+    public boolean hasCreatedFolder() {
+        return hasCreatedFolder;
     }
 }

@@ -17,8 +17,12 @@ public class SchedUrMods {
         ui = new Ui();
 
         FileCreator fileCreator = new FileCreator();
-        DataManager dataManager = new DataManager(fileCreator);
-        taskManager = new TaskManager(dataManager);
+        if (fileCreator.hasCreatedFolder()) {
+            DataManager dataManager = new DataManager(fileCreator);
+            taskManager = new TaskManager(dataManager);
+        } else {
+            taskManager = new TaskManager();
+        }
     }
 
     public CommandResult runCommand(Command userCommand) {
