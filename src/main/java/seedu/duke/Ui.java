@@ -35,7 +35,7 @@ public class Ui {
     public static final String BYE_MESSAGE = "Thanks for using TourPlanner. Goodbye!";
 
     public static final String SORT_TOUR_ID_MESSAGE = "Sorted by tour id alphabetically";
-    private static final String SORT_TOUR_NAME_MESSAGE = "Sorted by tour name alphabetically";
+    public static final String SORT_TOUR_NAME_MESSAGE = "Sorted by tour name alphabetically";
     public static final String SORT_TOUR_PRICE_MESSAGE = "Sorted by price in ascending order";
     public static final String SORT_CLIENT_ID_MESSAGE = "Sorted by client id alphabetically";
     public static final String SORT_CLIENT_NAME_MESSAGE = "Sorted by client name alphabetically";
