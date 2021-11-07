@@ -24,6 +24,7 @@ public class Terminus {
 
     private ModuleManager moduleManager;
     private StorageManager storageManager;
+    private Path dataDirectory;
 
     private static final Path DATA_DIRECTORY = Path.of(System.getProperty("user.dir"), "data");
     private static final String MAIN_JSON = "main.json";
@@ -36,12 +37,13 @@ public class Terminus {
     }
     
     Terminus() {
-        this(Ui.getInstance(), MainCommandParser.getInstance());
+        this(Ui.getInstance(), MainCommandParser.getInstance(), DATA_DIRECTORY);
     }
     
-    Terminus(Ui ui, CommandParser parser) {
+    Terminus(Ui ui, CommandParser parser, Path dataDirectory) {
         this.ui = ui;
         this.parser = parser;
+        this.dataDirectory = dataDirectory;
     }
 
     /**
@@ -58,7 +60,7 @@ public class Terminus {
             TerminusLogger.initializeLogger();
             TerminusLogger.info("Starting Terminus...");
             this.workspace = "";
-            this.storageManager = new StorageManager(DATA_DIRECTORY, MAIN_JSON);
+            this.storageManager = new StorageManager(dataDirectory, MAIN_JSON);
             this.moduleManager = this.storageManager.initialize();
         } catch (IOException e) {
             TerminusLogger.warning("Log file loading has failed.", e.fillInStackTrace());
