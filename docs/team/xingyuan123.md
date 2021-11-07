@@ -25,3 +25,4 @@ you may have in order to help you organise your CCA's timetable.
   * Set up `Storage` section. Mostly gives warnings about what not to do regarding Storage.
 
 * DG Contributions
+  * Set up `Storage` DeveloperGuide.md.

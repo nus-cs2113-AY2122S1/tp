@@ -213,22 +213,26 @@ The `Attendance` component,
 
 **API** : [Storage]()
 
-The `Storage` component consists of 3 sub-components, corresponding to `member storage` , `attendance storage` 
-and `training schedule storage`
+The `Storage` component consists of 3 sub-components, corresponding to `MemberStorage` , `AttendanceStorage` 
+and `SrainingStorage`
 
-The `member storage` component
+The `MemberStorage` component
 * can save members' data in CSV format and read them back into the `MemberList` object.
 * automatically adds to DukeMembers.csv whenever a new member is added to the `MemberList` object.
 * automatically edits to DukeMembers.csv whenever member details are edited in the `MemberList` object.
 * automatically deletes to DukeMembers.csv whenever a member is deleted from the `MemberList` object.
 
-The `attendance storage` component
+The `AttendanceStorage` component
 * can save attendance data in CSV format and read them back into the `AttendanceList` object.
 * automatically deletes to AttendanceStorage.csv whenever a member is deleted from the `AttendanceList` object.
 
-The `training schedule` component
+The `TrainingStorage` component
 * can save trainings schedules and read them back into the `TrainingList` object. 
 * automatically deletes in the file whenever a training schedule is deleted from the `TrainingList` object.
+
+When the program is run, it will either create the relevant files if it is the first time running, or it will load the relevant files.
+While loading, if there is any invalid fields in any of the data files,it will terminate the program with a message prompt telling the user 
+to make all inputs valid before running the program again.
 
 ## Restrictions
 # IMPORTANT!

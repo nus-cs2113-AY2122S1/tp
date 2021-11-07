@@ -433,6 +433,8 @@ program again.
 ⚠ No blank lines should be left between entries when editing in Microsoft Excel.This will lead to data verification failing and program will terminate, 
 citing invalid fields.
 
+⚠ Do not rename or move the CSV files.
+
 ## Command Summary
 
 A 'cheat sheet' of commands here
