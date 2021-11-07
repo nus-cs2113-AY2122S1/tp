@@ -149,6 +149,10 @@ public class ContactsDecoder extends RegexParser {
         }
     }
 
+//    private void checkNameNotNull(String name) throws InvalidNameException {
+//        if (name.equalsIgnoreCase("null"))
+//    }
+
     /**
      * Prints the relevant message for invalid details pertaining to the parsed contacts.
      * @param e Exception that was caught
@@ -191,6 +195,9 @@ public class ContactsDecoder extends RegexParser {
             InvalidLinkedinUsernameException, InvalidEmailException {
         String[] destructuredInputs = contactText.split(SEPARATOR);
         String[] compiledDetails = new String[NUMBER_OF_FIELDS];
+        if (destructuredInputs[0].equals("null")) {
+            throw new InvalidNameException();
+        }
         for (int i = 0; i < NUMBER_OF_FIELDS; i++) {
             if (destructuredInputs[i].equals("null")) {
                 compiledDetails[i] = null;

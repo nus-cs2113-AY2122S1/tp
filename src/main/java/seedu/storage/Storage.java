@@ -9,7 +9,9 @@ import seedu.parser.AddPersonalContactParser;
 import seedu.ui.TextUi;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Storage {
     public static final String SEPARATOR = ",";
@@ -53,14 +55,21 @@ public class Storage {
     }
 
     //@@author lezongmun
-
     /**
      * Checks if there exists an empty local storage file.
      *
      * @return True if empty local storage file exists
      */
-    private boolean hasEmptyExistingPersonalContactFile() {
-        return personalContactFile.exists() && personalContactFile.length() == 0;
+    private boolean hasEmptyExistingPersonalContactFile() throws FileErrorException {
+        try {
+            Scanner fileScanner = new Scanner(personalContactFile);
+            if (personalContactFile.exists() && fileScanner.nextLine().trim().isEmpty()) {
+                return true;
+            }
+            return false;
+        } catch (FileNotFoundException e) {
+            throw new FileErrorException();
+        }
     }
 
     //@@author marcusbory
