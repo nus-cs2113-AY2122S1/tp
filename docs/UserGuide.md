@@ -998,7 +998,7 @@ solve the issue. Secondly, if you are running macOS or Linux, we do not delete f
 **not uppercase** (e.g. `CS2113T` will be deleted but `CS2113t` will not be).
 
 **Q:** What will happen if my data is **not loaded properly** when entering TermiNUS?  
-**A:** Any existing data may be **overwritten** in the `data` folder when you perform any command within this state.
+**A:** Any existing data may be **overwritten** in the `data` folder when you perform any command within this state. If you do encounter this error, please copy the `json` file as soon as possible before exiting TermiNUS to prevent any loss of data.
 
 **Q:** Why will storage be disabled?  
 **A:** This is to **avoid a loss of data** when there is an error with loading or saving data into the `data` folder. Hence, if an error occurs, all storage operations will cease to work only until you exit the program where TermiNUS will attempt to save your data one last time.
