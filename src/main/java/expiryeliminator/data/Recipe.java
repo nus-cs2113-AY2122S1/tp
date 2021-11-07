@@ -17,7 +17,7 @@ import expiryeliminator.data.exception.NotFoundException;
 public class Recipe {
     private String name;
     private final TreeMap<String, IngredientQuantity> ingredientQuantities = new TreeMap<>();
-    private final static Logger logger = LogsCenter.getLogger(Recipe.class);
+    private static final Logger logger = LogsCenter.getLogger(Recipe.class);
 
     /**
      * Initialises a recipe.
@@ -85,8 +85,8 @@ public class Recipe {
         }
         final IngredientQuantity ingredientQuantity = new IngredientQuantity(ingredient, quantity);
         assert quantity > 0 : "Quantity for an ingredient in the recipe cannot be zero";
-        logger.log(Level.INFO, String.format("Adding ingredient %1$s with quantity %2$s " +
-                "into IngredientQuantities",ingredientName,quantity));
+        logger.log(Level.INFO, String.format("Adding ingredient %1$s with quantity %2$s "
+                + "into IngredientQuantities",ingredientName,quantity));
         ingredientQuantities.put(ingredientQuantity.getName(), ingredientQuantity);
         return ingredientNameIfNotInList;
     }

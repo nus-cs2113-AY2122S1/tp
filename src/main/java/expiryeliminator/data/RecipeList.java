@@ -13,7 +13,7 @@ import expiryeliminator.data.exception.NotFoundException;
  */
 public class RecipeList {
     private TreeMap<String, Recipe> recipes;
-    private final Logger logger = LogsCenter.getLogger(RecipeList.class);
+    private static final Logger logger = LogsCenter.getLogger(RecipeList.class);
 
     /**
      * Constructs Recipe List with no recipes.

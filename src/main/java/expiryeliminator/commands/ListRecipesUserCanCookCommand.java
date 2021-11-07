@@ -30,7 +30,7 @@ public class ListRecipesUserCanCookCommand extends Command {
             + "you currently have.\n"
             + "Example: " + COMMAND_WORD;
 
-    private final static Logger logger = LogsCenter.getLogger(ListRecipesUserCanCookCommand.class);
+    private static final Logger logger = LogsCenter.getLogger(ListRecipesUserCanCookCommand.class);
 
     private String checkForExpiredIngredients(TreeMap<String, IngredientQuantity> ingredientsFromRecipe,
                                                 IngredientRepository ingredients) {

@@ -31,7 +31,7 @@ public class CookedRecipeCommand extends Command {
             + " r/Chicken Soup";
 
     private final String name;
-    private final static Logger logger = LogsCenter.getLogger(CookedRecipeCommand.class);
+    private static final Logger logger = LogsCenter.getLogger(CookedRecipeCommand.class);
 
     public CookedRecipeCommand(String name) {
         assert name != null : "The recipe name cannot be null";
