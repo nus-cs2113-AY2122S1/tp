@@ -93,7 +93,8 @@ The `Expense` class deals with most functionalities related to adding an expense
 When `Parser` calls the `executeExpense` method, it creates an expense object, and also calls the `promptDate` method to set that expense object’s date. `promptDate` calls `isDateValid` to validate user input.
 
 
-## Product scope
+## Appendix: Requirements
+
 ### Target user profile
 
 {Describe the target user profile}
@@ -102,21 +103,23 @@ When `Parser` calls the `executeExpense` method, it creates an expense object, a
 
 {Describe the value proposition: what problem does it solve?}
 
-## User Stories
+### Appendix A: Product scope
+
+### Appendix B: User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
-## Non-Functional Requirements
+### Appendix C: Non-Functional Requirements
 
 {Give non-functional requirements}
 
-## Glossary
+### Appendix D: Glossary
 
 * *glossary item* - Definition
 
-## Instructions for manual testing
+### Appendix E: Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
