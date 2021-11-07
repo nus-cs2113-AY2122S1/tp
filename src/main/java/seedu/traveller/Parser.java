@@ -460,6 +460,9 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new InvalidEditItemIndexException(rawIndex);
         }
+        if (itemIndex < 0) {
+            throw new InvalidEditItemIndexException(rawIndex);
+        }
 
         return itemIndex;
     }
