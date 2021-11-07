@@ -464,12 +464,17 @@ for the user to easily find items.
 ##### Sequence diagram when food is parsed
 
 The following diagram displays the interactions between the classes when the user enters a command starting with
-"food". You should take note of the interactions between the constructed command classes, and the current list it's
+"food".\
+Do note that an important call is left out of this diagram for readability - the call to execute the command.
+This was intentionally left out for readability, and a high level view was covered in [Architecture](#31-architecture)\
+You should take note of the interactions between the constructed command classes, and the current list it's
 iterating over - `WhatIAteTodayList`, especially the updates shown after the  end of every  command. An update is 
-defined as a manual overwrite over the text file saved in the user's hard disk. By convention, this text file is saved
-in the directory `fooddata` , with the text file named aptly as `food.txt`. Current improvements in this functionality
-would be to integrate the dates in `Calendar` with  the `food.txt` file, enabling the user to search what they ate on a
-given day.
+defined as a manual overwrite over the text file saved in the user's hard disk. \
+By convention, this text file is saved
+in the directory `fooddata` in `storage`, with the text file named aptly as `food.txt`. \
+Additionally, `StallsManager` 
+is referenced in multiple commands, for instance `food radd`. This is due to the nature of the class, which contains the
+information of a food court, which includes the Stall name, and food items sold by each store. 
 ![](./images/food/food_architecture.png)
 
 #### 4.5.2 Feature List
