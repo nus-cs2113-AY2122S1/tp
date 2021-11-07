@@ -46,13 +46,16 @@ public class AddStudentCommand extends Command {
      */
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
+        assert argumentMap.containsKey(KEY_CLASS_ID);
         String classId = argumentMap.get(KEY_CLASS_ID);
         TeachingClass teachingClass = classList.getClassWithId(classId);
         if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
+        assert argumentMap.containsKey(KEY_STUDENT_ID);
         String studentId = argumentMap.get(KEY_STUDENT_ID);
+        assert argumentMap.containsKey(KEY_STUDENT_NAME);
         String studentName = argumentMap.get(KEY_STUDENT_NAME);
 
         StudentList studentList = teachingClass.getStudentList();
@@ -64,8 +67,10 @@ public class AddStudentCommand extends Command {
         student = new Student(studentId, studentName);
         studentList.addStudent(student);
 
+        assert storage != null : "storage should exist.";
         storage.save(classList);
         String message = String.format(MESSAGE_STUDENT_ADDED_FORMAT, classId, student);
+        assert ui != null : "ui should exist.";
         ui.printMessage(message);
     }
 

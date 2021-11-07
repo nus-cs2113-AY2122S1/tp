@@ -48,12 +48,14 @@ public class FindStudentCommand extends Command {
      */
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
+        assert argumentMap.containsKey(KEY_CLASS_ID);
         String classId = argumentMap.get(KEY_CLASS_ID);
         TeachingClass teachingClass = classList.getClassWithId(classId);
         if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
+        assert argumentMap.containsKey(KEY_KEYWORD);
         String keyword = argumentMap.get(KEY_KEYWORD);
         StudentList studentList = teachingClass.getStudentList();
         HashMap<Integer, Student> studentsFound = studentList.findStudents(keyword);
@@ -72,6 +74,7 @@ public class FindStudentCommand extends Command {
             }
         }
 
+        assert ui != null : "ui should exist.";
         ui.printMessage(stringBuilder.toString());
     }
 

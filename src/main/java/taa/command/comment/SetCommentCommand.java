@@ -51,12 +51,14 @@ public class SetCommentCommand extends Command {
      */
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
+        assert argumentMap.containsKey(KEY_CLASS_ID);
         String classId = argumentMap.get(KEY_CLASS_ID);
         TeachingClass teachingClass = classList.getClassWithId(classId);
         if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
+        assert argumentMap.containsKey(KEY_STUDENT_INDEX);
         String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
         assert Util.isStringInteger(studentIndexInput);
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;
@@ -71,7 +73,9 @@ public class SetCommentCommand extends Command {
 
         student.setComment(comment);
 
+        assert storage != null : "storage should exist.";
         storage.save(classList);
+        assert ui != null : "ui should exist.";
         ui.printMessage(String.format(MESSAGE_FORMAT_SET_COMMENT, student, comment));
     }
 
