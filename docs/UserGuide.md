@@ -32,7 +32,7 @@ Target users includes:
 1. A person making a large order for himself or others.
 2. Someone who has to track multiple different food orders.
 3. Order collators (Middleman).
-4. Dinners.
+4. Diners.
 
 ---
 
