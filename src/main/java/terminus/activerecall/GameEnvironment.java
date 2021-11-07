@@ -94,7 +94,7 @@ public class GameEnvironment {
             difficulty = Integer.parseInt(input);
             
         } while (difficulty == INVALID_DIFFICULTY);
-        assert difficulty <= HARD_DIFFICULTY && difficulty >= -EASY_DIFFICULTY;
+        assert difficulty <= HARD_DIFFICULTY && difficulty >= EXIT_CODE;
         return difficulty;
     }
     

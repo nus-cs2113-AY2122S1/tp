@@ -34,8 +34,10 @@ activate GameEnvironment
     ref over GameEnvironment, DifficultyModifier, Question : updateQuestionDifficulty
     |||
   end
+  destroy QuestionGenerator
 return
 
 return CommandResult(true)
+destroy GameEnvironment
 
 @enduml

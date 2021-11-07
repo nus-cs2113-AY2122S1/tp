@@ -18,7 +18,7 @@ endbox
 
 activate Terminus
 opt CommandResult has data change
-Terminus -> StorageManager : executeCommandResult(:ModuleManager, :CommandResult)
+Terminus -> StorageManager : executeCommandResult(moduleManager, commandResult)
 activate StorageManager
 StorageManager -> StorageManager : execute()
 activate StorageManager

@@ -18,36 +18,36 @@ endnote
 GameEnvironment ..>  Question
 
 class TestCommand COMMAND_COLOR{
-  + execute(ModuleManager moduleManager): void
+  + execute(moduleManager: ModuleManager): void
 }
 
 class GameEnvironment ACTIVERECALL_COLOR{
-  GameEnvironment(Ui ui, QuestionGenerator generator)
+  GameEnvironment(ui: Ui, generator: QuestionGenerator)
   + run(): void
   - showPreGameInformation(): void
   - promptQuestion(): Question
   - getUserFeedback(): int
-  - updateQuestionDifficulty(Question question, int difficulty): void
-  + {static} createNewEnvironment(List<Question> questions, int questionCount)
+  - updateQuestionDifficulty(question: Question, difficulty: int): void
+  + {static} createNewEnvironment(questions: List<Question>, questionCount: int)
 }
 
 class QuestionGenerator ACTIVERECALL_COLOR{
   - random: Random
   - total: double
   - questionCount: int
-  + QuestionGenerator(List<Question> questionBank, int questionCount)
-  + QuestionGenerator(List<Question> questionBank, int questionCount, Random random)
+  + QuestionGenerator(questionBank: List<Question>, questionCount: int)
+  + QuestionGenerator(questionBank: List<Question>, questionCount: int, random: Random)
   + hasNext(): boolean
   + next(): Question
   + getQuestionPoolSize(): int
-  - addQuestion(Question question): void
+  - addQuestion(question: Question): void
 }
 
 class Question ACTIVERECALL_COLOR{
   - name
   - data
   - weight
-  + Question(String question, String answer)
+  + Question(question: String, answer: String)
 }
 
 note bottom of Question
@@ -56,15 +56,15 @@ note bottom of Question
 endnote
 
 class Ui {
-  + printSection(String... strings): void
-  + getUserInput(String prompt): String
+  + printSection(strings: String...): void
+  + getUserInput(prompt: String): String
   + {static} getInstance(): Ui
 }
 
 class DifficultyModifier ACTIVERECALL_COLOR{
-  + {static} tweakEasyQuestionDifficulty(double initial): double
-  + {static} tweakHardQuestionDifficulty(double initial): double
-  - {static} getCurveValue(double x): double
+  + {static} tweakEasyQuestionDifficulty(initial: double): double
+  + {static} tweakHardQuestionDifficulty(initial: double): double
+  - {static} getCurveValue(x: double): double
 }
 
 
