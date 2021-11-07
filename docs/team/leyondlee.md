@@ -47,9 +47,13 @@ Given below are my contributions to the project.
   * Created labels for issue tracker
   * Assisted in the management of releases `v1.0` - `v2.1` (3 releases) on GitHub
 
-* **Enhancements to existing features**:
-  * Wrote additional tests for `Parser` to ensure that it is working as intended. ([#216](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/216/files))
-  * Wrote deserializers for `GSON` to ensure that the appropriate constructors are called. ([#77](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/77/files))
+* **Enhancements to existing features**: #290 #260 #267
+  * Wrote additional tests for existing features to increase coverage. (
+    [#216](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/216),
+    [#260](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/260),
+    [#267](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/267),
+    [#290](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/290))
+  * Wrote deserializers for `GSON` to ensure that the appropriate constructors are called. ([#77](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/77))
     * Note: By default, `GSON` calls the default (no-args) constructor to initialize a class.
 
 * **Documentation**:
@@ -59,7 +63,7 @@ Given below are my contributions to the project.
       [#215](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/215),
       [#224](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/224))
     * Added documentation for `archive` and `reset` commands. ([#147](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/147))
-    * Added horizontal lines between command categories to improve readability. (([#223](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/223))
+    * Added horizontal lines between command categories to improve readability. ([#223](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/223))
   * Developer Guide:
     * Added implementation details and sequence diagram of the `add_class` feature. ([#90](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/90))
     * Added Architecture and Architecture Sequence Diagrams ([#90](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/90),

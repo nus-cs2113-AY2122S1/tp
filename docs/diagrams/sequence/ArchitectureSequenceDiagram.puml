@@ -53,23 +53,27 @@ deactivate parser
 taa -> command : checkArgument()
 activate command
 
-command -> util
+command -> util : isStringDouble(string:String)
 activate util
-util --> command
+util --> command : :boolean
 deactivate util
 
+alt Argument check failed
+command --> taa : throw :TaaException
+taa -> ui : printException(message:String)
+activate ui
+ui -> user : Display exception message
+ui --> taa
+deactivate ui
+
+else else
 command --> taa
 deactivate command
 
 taa -> command : execute(classList:ClassList,\n\tui:Ui, storage:Storage)
 activate command
 
-command -> util
-activate util
-util --> command
-deactivate util
-
-command -> classList
+command -> classList : addClass(teachingClass:TeachingClass)
 activate classList
 classList --> command
 deactivate classList
@@ -97,6 +101,7 @@ taa -[hidden]-> command
 destroy command
 taa -[hidden]-> command
 
+end
 end
 deactivate taa
 

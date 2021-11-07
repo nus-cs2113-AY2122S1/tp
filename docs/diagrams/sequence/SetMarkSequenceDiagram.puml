@@ -5,7 +5,7 @@ Actor User as user
 Participant ":Taa" as taa
 Participant ":SetMarkCommand" as setMarkCommand
 Participant ":ClassList" as classList
-Participant ":TeachingClass" as class
+Participant ":TeachingClass" as teachingClass
 Participant ":AssessmentList" as assessmentList
 Participant ":StudentList" as studentList
 Participant ":Student" as student
@@ -17,40 +17,46 @@ activate taa
 taa -> setMarkCommand : execute(classList:ClassList, \nui:Ui, storage:Storage)
 activate setMarkCommand
 
-setMarkCommand -> classList : getClassWithId(id:String)
+setMarkCommand -> classList : getClassWithId("CS2113T-F12")
 activate classList
-classList --> setMarkCommand : class:Class
+classList --> setMarkCommand : teachingClass:TeachingClass
 deactivate classList
 
-setMarkCommand -> class : getStudentList()
-activate class
-class --> setMarkCommand : studentList:StudentList
-deactivate class
+alt teachingClass != null
+setMarkCommand -> teachingClass : getStudentList()
+activate teachingClass
+teachingClass --> setMarkCommand : studentList:StudentList
+deactivate teachingClass
 
-setMarkCommand -> class : getAssessmentList()
-activate class
-class --> setMarkCommand : assessmentList:AssessmentList
-deactivate class
+setMarkCommand -> teachingClass : getAssessmentList()
+activate teachingClass
+teachingClass --> setMarkCommand : assessmentList:AssessmentList
+deactivate teachingClass
 
-setMarkCommand -> assessmentList : getAssessment(assessmentName:String)
+setMarkCommand -> assessmentList : getAssessment("Midterms")
 activate assessmentList
 assessmentList --> setMarkCommand : assessment:Assessment
 deactivate assessmentList
 
-setMarkCommand -> studentList : getStudentAt(studentIndex:Integer)
+alt assessment != null
+setMarkCommand -> studentList : getStudentAt(1)
 activate studentList
 studentList --> setMarkCommand : student:Student
 deactivate studentList
 
-setMarkCommand -> student : setMarks(assessmentName:String, \nmarks:Double)
+alt student != null
+setMarkCommand -> student : setMarks("Midterms", 60)
 activate student
 student --> setMarkCommand
 deactivate student
 
-setMarkCommand -> storage : save(classList:ClassList)
+setMarkCommand -> storage : save(classList)
 activate storage
 storage --> setMarkCommand
 deactivate storage
+end
+end
+end
 
 setMarkCommand --> taa
 deactivate setMarkCommand
