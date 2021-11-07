@@ -6,7 +6,7 @@ public class PatientList extends PersonList {
 
     @Override
     protected String getPersonNotFoundErrorMessage(int patientId) {
-        return "No Patient with ID " + patientId + " found." + END_LINE;
+        return "No patient with ID " + patientId + " found." + END_LINE;
     }
 
     @Override

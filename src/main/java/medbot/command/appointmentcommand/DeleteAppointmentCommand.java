@@ -1,6 +1,7 @@
 package medbot.command.appointmentcommand;
 
 import medbot.Scheduler;
+import medbot.ui.SchedulerUi;
 import medbot.ui.Ui;
 import medbot.command.Command;
 import medbot.exceptions.MedBotException;
@@ -15,6 +16,7 @@ public class DeleteAppointmentCommand extends Command {
     @Override
     public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
         scheduler.deleteAppointment(appointmentId);
-        ui.printOutput("deleted appointment with Id: " + appointmentId);
+        String deleteAppointmentMessage = SchedulerUi.getDeleteAppointmentMessage(appointmentId);
+        ui.printOutput(deleteAppointmentMessage);
     }
 }

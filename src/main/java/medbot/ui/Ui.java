@@ -120,6 +120,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Returns a message String containing the information of the object.
+     *
+     * @param info the information of the object
+     * @param viewType the viewType context of the command.
+     * @return message String containing the information of the object
+     */
     public static String getViewMessage(String info, ViewType viewType) throws MedBotException {
         switch (viewType) {
         case PATIENT_INFO:

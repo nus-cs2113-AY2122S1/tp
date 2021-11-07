@@ -68,7 +68,7 @@ public class ListTest {
             patientList.getPersonInfo(nonExistentPatientId);
         });
 
-        String expectedMessage = "No Patient with ID " + nonExistentPatientId + " found." + END_LINE;
+        String expectedMessage = "No patient with ID " + nonExistentPatientId + " found." + END_LINE;
         String actualMessage = medBotException.getMessage();
 
         assertEquals(expectedMessage, actualMessage);
@@ -109,7 +109,7 @@ public class ListTest {
             patientList.hidePerson(nonExistentPatientId);
         });
 
-        String expectedMessage = "No Patient with ID " + nonExistentPatientId + " found." + END_LINE;
+        String expectedMessage = "No patient with ID " + nonExistentPatientId + " found." + END_LINE;
         String actualMessage = medBotException.getMessage();
 
         assertEquals(expectedMessage, actualMessage);
@@ -143,7 +143,7 @@ public class ListTest {
             patientList.showPerson(nonExistentPatientId);
         });
 
-        String expectedMessage = "No Patient with ID " + nonExistentPatientId + " found." + END_LINE;
+        String expectedMessage = "No patient with ID " + nonExistentPatientId + " found." + END_LINE;
         String actualMessage = medBotException.getMessage();
 
         assertEquals(expectedMessage, actualMessage);
