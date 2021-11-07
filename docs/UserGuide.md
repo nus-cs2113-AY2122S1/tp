@@ -117,7 +117,7 @@ This section will detail the `TermiNUS` installation guide, as well a quick guid
     [] >>>  
     ```
 
-7. For more information of each command, please refer to the [Features](#section-note) below.
+7. For more information of each command, please refer to the [Features](#section-managing-all-your-modules) below.
 
 ### Quick Guide of TermiNUS
 
@@ -158,6 +158,7 @@ The below table represents what each means.
 |`start_time`|The `start time` must be in a **HH:mm** format which follows the **24-hour notation**. For example, `14:20` is valid which represents `2:20 pm`.|
 |`day`|The `day` must be a day spelled out fully and is case-insensitive. For example, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday` are the only **7** valid days.|
 |`duration`|The `duration` must be a **positive** integer and upon addition with `start_time`, it must not exceed the 24-hour limit of the day. For example, if `start_time` is `21:00`, `2` is a valid `duration` but `-1` and `4` are not.|
+|`valid_file_name`|Any value that has the tag `valid file name` cannot be empty, cannot have more than **30** characters and can only contains [ASCII](https://www.asciitable.com/) characters **between the dec value of 32 and 126 inclusive** with the **exception** of `/`, `\n`, `\r`, `\t`, `\0`, `\f`, `'`, `?`, `*`, `\ `, `<`, `>`, `"`, `:`, `.` , <code>&#124;</code> |
 
 ## Section: Managing all your modules
 
@@ -209,7 +210,7 @@ List of Module Management workspace commands:
 
 Adds a module when in the module management workspace.
 
-> ⚠️The `<module code>` will be converted to **UPPERCASE** and cannot be more than **30** characters and cannot have any `spaces` in it.
+> ⚠️The `<module_code>` will be converted to **UPPERCASE** and cannot be more than **30** characters and cannot have any `spaces` in it. It follows the condition of a `valid_file_name`.
 
 > 💡 When executing this command, it will add the module into TermiNUS and creates a folder with the
 > module code in **uppercase** (e.g. creating `cs2113t` will create a folder in `data` called `CS2113T`).
@@ -403,7 +404,7 @@ List of Note workspace commands:
 |add|add a note for the module|
 |view|view notes information from the module|
 |delete|delete a note from the module|
-|reload|reload all the notes from the `data/<module code>` folder|
+|reload|reload all the notes from the `data/<module_code>` folder|
 |export|export all current notes for the module as a pdf|
 |help|view all commands and their usage in the note workspace|
 |back|escape and return to the module workspace|
@@ -415,7 +416,7 @@ List of Note workspace commands:
 
 Adds a note when in the note workspace.
 
-> ⚠️The `<name>` cannot be more than **30** characters.
+> ⚠️The `<name>` cannot be more than **30** characters and cannot be a name that already exists in this module. It follows the condition of a `valid_file_name`.
 
 > 💡 When executing this command, it will add the note into its module and creates a `.txt` file inside the module folder. The `.txt` file will be named after the newly added note name.
 
@@ -495,6 +496,10 @@ Reloads all the notes found within your `data/<module code>`.
 
 > 💡 This command is useful when you have updated your notes file in another application, and would 
 > wish to update the contents into TermiNUS.
+
+> ⚠️ Any note file that do not follow the same restriction as mentioned in [Adding a Note](#adding-a-module) will be ignored.
+
+> ⚠️ If there are any 2 or more note files with the same exact name regardless of case sensitivity, only 1 of them will be loaded.
 
 Example: `reload`
 
@@ -986,7 +991,10 @@ lowercase (i.e. `cS2113t` or `cs2113t`), the **content within will be ignored** 
 operating system. This means there might be other applications using the file, which is preventing 
 TermiNUS from deleting the folder cleanly. Usually restarting the computer and deleting it will 
 solve the issue. Secondly, if you are running macOS or Linux, we do not delete folders that are 
-**not uppercase** (e.g. `CS2113T` will be deleted but `CS2113t` will not be). 
+**not uppercase** (e.g. `CS2113T` will be deleted but `CS2113t` will not be).
+
+**Q:** What will happen if my data is **not loaded properly** when entering TermiNUS?  
+**A:** Any existing data may be **overwritten** in the `data` folder when you perform any command within this state.
 
 ___  
 
@@ -1011,7 +1019,7 @@ ___
 |module management|add module|`add "<module_code>"`|`add "CS2113T"`|
 |module management|update module |`update <index> "<new_module_code>"`|`update 1 "CS2113"`|
 |note|add note|`add "<name>" "<content>"`|`add "Note1" "Hello world."`|
-|note|export note|`export`|`export`|
+|note|export notes|`export`|`export`|
 |note|reload notes|`reload`|`reload`|
 |schedule|add schedule|`add "<description>" "<day>" "<start_time>" "<duration>" <zoom_link>"`|`add "CS2113T Tutorial 1" "Thursday" "10:00" "1" "https://zoom.us/test"`|
 |question|add question|`add "<question>" "<answer>"`|`add "What is 1+1?" "2"`|
