@@ -16,6 +16,7 @@ public class NextCommand extends Command {
     public CommandResult execute() {
         switch (nextItem) {
         case "event":
+            Ui.printMonth(Duke.eventCatalog.get(eventIndex).getDateTime());
             Ui.printEvent(Duke.eventCatalog.get(eventIndex));
             break;
         case "task":

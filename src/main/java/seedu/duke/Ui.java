@@ -5,6 +5,8 @@ import seedu.duke.items.Task;
 import seedu.duke.items.characteristics.Member;
 import seedu.duke.parser.Parser;
 
+import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -293,4 +295,38 @@ public class Ui {
                 + Ui.getLineBreak());
     }
 
+    public static void printMonth(LocalDateTime date) {
+        int year = date.getYear();
+        int month = date.getMonthValue();
+        YearMonth ym = YearMonth.of(year, month);
+        System.out.print(date.getMonth() + "  ");
+        System.out.println(year + "\n------------------------------");
+        System.out.println("Sun Mon Tue Wed Thu Fri Sat");
+        int counter = 1;
+
+        int dayValue = LocalDateTime.of(year, month, 1, 12,30).getDayOfWeek().getValue();
+        if (dayValue != 7)
+            for (int i = 0; i < dayValue; i++, counter++) {
+                System.out.printf("%-4s", "  ");
+            }
+        if (date.getDayOfMonth() == 1) {
+            System.out.printf("%-4s", "*1");
+            counter++;
+        }
+        for (int i = 1; i <= ym.getMonth().length(ym.isLeapYear()); i++, counter++) {
+            if (date.getDayOfMonth() == 1) {
+                System.out.printf("%-4s", "*1");
+                counter++;
+            } else {
+                System.out.printf("%-4d", i);
+                if (i == date.getDayOfMonth() - 1) {
+                    System.out.print("*");
+                }
+            }
+            if (counter % 7 == 0) {
+                System.out.println();
+            }
+        }
+        System.out.println("\n" + Ui.getLineBreak());
+    }
 }
