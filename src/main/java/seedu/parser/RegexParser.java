@@ -180,8 +180,20 @@ public abstract class RegexParser {
         }
     }
 
+    /**
+     * Throws an exception if the Name does not comply with the regex.
+     * If the Name passes the regex check nothing is returned and program
+     * flow continues.
+     * The regex only allows Names in lowercase and uppercase letters with
+     * symbols fullstop, apostrophe and slash. Space is also allowed between
+     * words.
+     *
+     * @param detailToParse Name to be checked
+     * @throws InvalidNameException If Name does not match regex
+     */
     protected void checkNameRegex(String detailToParse) throws InvalidNameException {
-        //only letters and spaces allowed
+        // Allows uppercase, lowercase, fullstop, apostrophe and slash
+        // Allows one space between consecutive words
         String nameRegex = "^([a-zA-Z.'/]+\\s)*[a-zA-Z.'/]+$";
         if (!detailToParse.matches(nameRegex)) {
             LOGGER.log(Level.FINE, "Regex check for name failed");
