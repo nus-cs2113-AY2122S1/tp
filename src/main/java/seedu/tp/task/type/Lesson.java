@@ -66,21 +66,21 @@ public class Lesson extends Event {
         return this.TASK_TYPE;
     }
 
-    public void setModuleCode(String moduleCode) {
+    private void setModuleCode(String moduleCode) {
         this.moduleCode = moduleCode;
     }
 
     private String moduleCode;
 
-    public String getClassNo() {
-        return classNo;
+    public String getClassNumber() {
+        return classNumber;
     }
 
-    public void setClassNo(String classNo) {
-        this.classNo = classNo;
+    private void setClassNumber(String classNumber) {
+        this.classNumber = classNumber;
     }
 
-    private String classNo;
+    private String classNumber;
 
     @Override
     protected void taskEdit(Map<String, String> arguments) throws URISyntaxException {
@@ -89,16 +89,16 @@ public class Lesson extends Event {
         }
     }
 
-    public Lesson(String moduleCode, String classNo, DayOfWeek weekday, LocalTime start, LocalTime end, int[] weeks) {
-        super(moduleCode, Semester.getSemester().getStartingMonday().with(weekday).atTime(start),
-                Semester.getSemester().getStartingMonday().with(weekday).atTime(end),
+    public Lesson(String moduleCode, String classNumber, DayOfWeek dayOfWeek, LocalTime start, LocalTime end, int[] weeks) {
+        super(moduleCode, Semester.getSemester().getStartingMonday().with(dayOfWeek).atTime(start),
+                Semester.getSemester().getStartingMonday().with(dayOfWeek).atTime(end),
                 RecurrenceEnum.WEEKLY);
         setModuleCode(moduleCode);
-        setClassNo(classNo);
+        setClassNumber(classNumber);
         setOccurrences(weeks);
     }
 
-    public void setOccurrences(int[] occurrences) {
+    private void setOccurrences(int[] occurrences) {
         this.occurrences = occurrences;
     }
 
@@ -106,7 +106,7 @@ public class Lesson extends Event {
 
     @Override
     public String getTaskEntryDescription() {
-        return LESSON_ICON + " " + this.getModuleCode() + ' ' + this.getClassNo() + ": "
+        return LESSON_ICON + " " + this.getModuleCode() + ' ' + this.getClassNumber() + ": "
                 + DateParser.dateToString(getStartDate())
                 + " to " + DateParser.dateToString(getEndDate())
                 + " Priority: " + getPriority().toString() + " " + (hasLink() ? LINK_INDICATOR : "");
