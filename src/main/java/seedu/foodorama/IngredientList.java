@@ -34,7 +34,7 @@ public class IngredientList {
      * @author jhsee5
      */
     public static void add(String ingredientName) throws FoodoramaException {
-        UI.printEnterWeightOf(ingredientName);
+        UI.printEnterStoredWeightOf(ingredientName);
         Scanner in = new Scanner(System.in);
         String ingredientWeight = in.nextLine();
 

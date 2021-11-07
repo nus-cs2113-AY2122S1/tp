@@ -72,8 +72,8 @@ to you, and includes a **[List of Commands](#-list-of-commands)** for your quick
 2. Download the latest version of `Food-O-Rama`
    from [here](https://github.com/AY2122S1-CS2113T-W11-4/tp/releases).
 3. Copy 'Food-O-Rama.jar' into an empty folder.
-4. Open command prompt, navigate to where 'Food-O-Rama.jar' is located. e.g. 'cd [FILE_PATH]'
-5. Launch 'Food-O-Rama' using 'java -jar Food-O-Rama.jar'.
+4. Open command prompt, navigate to where 'Food-O-Rama.jar' is located. e.g. `cd [FILE_PATH]`.
+5. Launch 'Food-O-Rama' using `java -jar Food-O-Rama.jar`.
 6. Enter commands to use Food-O-Rama.
 
 Your screen will look like this when you start *Food-O-Rama*!
@@ -97,7 +97,7 @@ java -jar Food-O-Rama.jar
 ################################################################################################################
 ```
 
-Congratulations! Now, the **List of Commands** below will teach you how to use all the *Commands in Food-O-Rama*.
+Congratulations! Now, the **List of Commands** below will teach you how to use all the *commands in Food-O-Rama*.
 
 ## 💽 List of Commands
 
@@ -144,7 +144,7 @@ The list teaches you how to use all commands available in *Food-O-Rama*.
 
 Format: `help`
 
-* *Note* 💡 Only the command `help` is required.
+* 💡 *Note*: `help` does not require additional parameters.
 
 Example of usage:
 
@@ -245,19 +245,19 @@ Incur wastage on an existing dish.
 
 Format: `add dish waste [DISH_NAME]`
 
-* Can only be performed on existing `DISH_NAME`
-* ❕ *Tip*: You can replace `[DISH_NAME]` with `[DISH_INDEX]` to quickly choose which dish to add weight to.
+* Can only be performed on existing `DISH_NAME`.
+* ❕ *Tip*: You can replace `[DISH_NAME]` with `[DISH_INDEX]` to quickly choose which dish to add wastage to.
 * 💡 *Note*:  You will be prompted to enter the weight of `DISH_NAME` wasted in the next step.
 
 Example of usage:
 
-`add dish waste chicken rice`
+`add dish waste chicken rice` or `add dish waste 1`
 
 Expected Outcome:
 
 ```
 ____________________________________________________________
-Enter the weight of chicken rice in kg:
+Please enter the wastage weight of 'chicken rice' in kg:
 ____________________________________________________________
 ```
 
@@ -269,7 +269,7 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Wastage of 'chicken rice' is now 2.5 kg
+Wastage of 'chicken rice' has been added and is now 2.5 kg!
 ____________________________________________________________
 ```
 
@@ -282,20 +282,12 @@ initially*.
 
 Format: `set dish limit [DISH_NAME]`
 
-* Can only be performed on existing `DISH_NAME`
+* Can only be performed on existing `DISH_NAME`.
 * 💡 *Note*:  You will be prompted to enter the limit to watch out for in the next step.
 
 Example of usage:
 
 `set dish limit chicken rice`
-
-Expected Outcome:
-
-```
-____________________________________________________________
-The limit for 'chicken rice' is now 3.5 kg
-____________________________________________________________
-```
 
 Example of usage:
 
@@ -305,11 +297,11 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-The limit for chicken rice is now 3.5 kg
+The limit for 'chicken rice' is now 3.5 kg!
 ____________________________________________________________
 ```
 
-💡 *Note*:
+❕ *Tip*:
 
 * When adding new wastage to the Dish exceeds the limit, you will receive a prompt that the current Dish limit has
   exceeded.
@@ -319,14 +311,14 @@ Expected outcome:
 
 ```
 ____________________________________________________________
-Enter the weight of chicken rice in kg:
+Please enter the wastage weight of 'chicken rice' in kg:
 ____________________________________________________________
 4.5
 ____________________________________________________________
-Wastage of chicken rice is now 4.5 kg
+Wastage of 'chicken rice' has been added and is now 4.5 kg!
 ____________________________________________________________
 ____________________________________________________________
-Wastage of chicken rice has exceeded the limit
+Wastage of 'chicken rice' has exceeded the limit!
 ____________________________________________________________
 ```
 
@@ -352,7 +344,7 @@ name of the dish*
 
 Format: `edit dish name [DISH_NAME]`
 
-* Can only be performed on existing `DISH_NAME`
+* Can only be performed on existing `DISH_NAME`.
 * ❕ *Tip*: You can replace `[DISH_NAME]` with `[DISH_INDEX]` to quickly choose which dish to edit.
 * 💡 *Note*:  You will be prompted to enter the new dish name in the next step, and a confirmation message afterwards.
 
@@ -376,7 +368,8 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Are you sure you want to change Dish Name from 'chicken rice' to 'roasted chicken rice'? Type y for Yes and n for No.
+Are you sure you want to change Dish Name from 'chicken rice' to 'roasted chicken rice'?
+Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:
 ____________________________________________________________
 ```
 
@@ -388,7 +381,7 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-chicken rice has been updated to 'roasted chicken rice'!
+'chicken rice' has been updated to 'roasted chicken rice'!
 ____________________________________________________________
 
 ```
@@ -440,7 +433,8 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Are you sure you want to change the wastage weight (in kg) from '50.0' to '5.0'? Type y for Yes and n for No.
+Are you sure you want to change the wastage weight (in kg) from '4.5' to '5.0'?
+Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:
 ____________________________________________________________
 ```
 
@@ -452,9 +446,8 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Wastage of roasted chicken rice has been updated to '5.0' kg!
+Wastage of 'roasted chicken rice' has been updated to 5.0 kg!
 ____________________________________________________________
-
 ```
 
 Example of usage (selecting **no**):
@@ -480,19 +473,20 @@ Delete an existing Dish from your Dish list.
 Format: `del dish [DISH_NAME]`
 
 * The `DISH_NAME` has to be existing in the Dish list for it to be deleted.
+* ❕ *Tip*: You can replace `[DISH_NAME]` with `[DISH_INDEX]` to quickly choose which dish to delete.
 * 💡 *Note*:  You will be prompted with a confirmation message to delete the dish.
-    * Enter `y` to confirm deletion.
-    * Enter `n` to abort deletion.
+
 
 Example of usage:
 
-`del dish roasted chicken rice`
+`del dish roasted chicken rice` or `del dish 1`
 
 Expected Outcome:
 
 ```
 ____________________________________________________________
-Are you sure you want to remove this Dish? Type y to confirm or n to disregard
+Are you sure you want to remove 'roasted chicken rice'?
+Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:
 ____________________________________________________________
 ```
 
@@ -504,7 +498,7 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-roasted chicken rice has been removed!
+'roasted chicken rice' has been removed from your dish list!
 ____________________________________________________________
 
 ```
@@ -519,7 +513,6 @@ Expected Outcome:
 ____________________________________________________________
 Your previous command is disregarded.
 ____________________________________________________________
-
 ```
 
 <br/>
@@ -528,11 +521,11 @@ ____________________________________________________________
 
 Views all existing Dishes in your Dish list.
 
-❕ *Tip*:  Useful to check all your Dishes available.
+❕ *Tip*:  Useful to check all your Dishes available in your list.
 
 Format: `list dish`
 
-* The `list` must come before `dish`.
+* 💡 *Note*: `list dish` does not require additional parameters.
 
 Example of usage:
 
@@ -553,15 +546,15 @@ ____________________________________________________________
 
 <br/>
 
-### Generate a random Dish name : `rdish`
+### Generate a random dish name : `rdish`
 
 Generates a random Dish name from a fixed list of Carbohydrates, Proteins, Sauces and Cooking Methods.
 
-❕ *Tip*:  Useful to give new Dish idea for Restaurant's menu.
+❕ *Tip*:  Useful to give new Dish ideas for Restaurant's menu.
 
 Format: `rdish`
 
-* Only requires`rdish`.
+* 💡 *Note*: `rdish` does not require additional parameters.
 
 Example of usage:
 
@@ -572,7 +565,7 @@ Expected Outcome:
 ```
 ____________________________________________________________
 Here's an idea for a new Dish!
-smoked mustard turkey noodles 
+steamed chili pork noodles
 ____________________________________________________________
 ```
 
@@ -586,7 +579,7 @@ Add a new Ingredient to your Ingredient list.
 
 Format: `add ingr [INGR_NAME]`
 
-* ❕ *Tip*:  You will be prompted to enter the weight of `INGR_NAME` in the next step.
+* 💡 *Note*: You will be prompted to enter the weight of `INGR_NAME` in the next step.
 
 Example of usage:
 
@@ -596,7 +589,7 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Enter the weight of chicken in kg:
+Please enter the storage weight of 'chicken' in kg:
 ____________________________________________________________
 ```
 
@@ -608,7 +601,7 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Ingredient added to list: chicken (Weight: 2.0 kg)
+Ingredient added to list: chicken (Storage weight: 2.0 kg)
 ____________________________________________________________
 
 ```
@@ -623,18 +616,19 @@ Add more storage to an Ingredient that exists in the Ingredient list by weight.
 
 Format: `add ingr stored [INGR_NAME]`
 
-* The `INGR_NAME` has to be an existing Ingredient in the Ingredient list.
+* Can only be performed on existing `[INGR_NAME]`. 
+* ❕ *Tip*: You can replace `[INGR_NAME]` with `[INGR_INDEX]` to quickly choose which ingredient to add storage to.
 * 💡 *Note*:  You will be prompted to enter the weight of additional `INGR_NAME` stored in the next step.
 
 Example of usage:
 
-`add ingr stored chicken`
+`add ingr stored chicken` or `add ingr stored 1`
 
 Expected Outcome:
 
 ```
 ____________________________________________________________
-Enter the weight of chicken in kg:
+Please enter the storage weight of 'chicken' in kg:
 ____________________________________________________________
 ```
 
@@ -646,7 +640,7 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Storage of chicken is now 7.0 kg
+Storage of 'chicken' has been added and is now 7.0 kg!
 ____________________________________________________________
 ```
 
@@ -660,20 +654,20 @@ Incur wastage on an existing Ingredient.
 
 Format: `add ingr waste [INGR_NAME]`
 
-* Can only be performed on existing `[INGR_NAME]`
+* Can only be performed on existing `[INGR_NAME]`.
+* ❕ *Tip*: You can replace `[INGR_NAME]` with `[INGR_INDEX]` to quickly choose which ingredient to add wastage to.
 * 💡 *Note*:  You will be prompted to enter the weight of `[INGR_NAME]` wasted in the next step.
 
 Example of usage:
 
-`add ingr waste chicken`
+`add ingr waste chicken` or `add ingr waste 1`
 
 Expected Outcome:
 
 ```
 ____________________________________________________________
-Enter the weight of chicken in kg:
+Please enter the wastage weight of 'chicken' in kg:
 ____________________________________________________________
-
 ```
 
 Example of usage:
@@ -684,31 +678,32 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Wastage of chicken is now 1.5 kg
+Wastage of 'chicken' has been added and is now 1.5 kg!
 ____________________________________________________________
 ```
 
 ### Set a limit for an ingredient's wastage : `set ingr limit`
 
-Set a limit for wastage of an existing Ingredient
+Set a limit for wastage of an existing Ingredient.
 
 *This is so that you will not have to deal with errors arising from having more Ingredients wasted than what was stored
 initially*.
 
 Format: `set ingr limit [INGR_NAME]`
 
-* Can only be performed on existing `INGR_NAME`
+* Can only be performed on existing `INGR_NAME`.
+* ❕ *Tip*: You can replace `[INGR_NAME]` with `[INGR_INDEX]` to quickly choose which ingredient to set a limit to.
 * 💡 *Note*:  You will be prompted to enter the limit to watch out for in the next step.
 
 Example of usage:
 
-`set ingr limit chicken`
+`set ingr limit chicken` or `set ingr limit 1`
 
 Expected Outcome:
 
 ```
 ____________________________________________________________
-Enter the limit for chicken in kg:
+Please enter the limit for 'chicken' in kg:
 ____________________________________________________________
 ```
 
@@ -720,7 +715,7 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-The limit for chicken is now 7.7 kg
+The limit for 'chicken' is now 7.7 kg!
 ____________________________________________________________
 ```
 
@@ -735,24 +730,25 @@ Expected outcome:
 
 ```
 ____________________________________________________________
-Enter the weight of chicken in kg:
+Please enter the wastage weight of 'chicken' in kg:
 ____________________________________________________________
 8.45
 ____________________________________________________________
-Wastage of chicken is now 8.45 kg
+Wastage of 'chicken' has been added and is now 8.45 kg!
 ____________________________________________________________
 ____________________________________________________________
-Wastage of chicken has exceeded the limit
+Wastage of 'chicken' has exceeded the limit!
 ____________________________________________________________
 ```
 
 ```
 ____________________________________________________________
-Here are the ingredients you have: 
+Here are the ingredients you have:
 1. chicken
-   Storage: 2.2 kg
+   Storage: 7.0 kg
    Wastage: 8.45 kg
    Limit: 7.7 (exceeded)
+   Expiry Date: No expiry date has been set
 You can use command 'add' to add new ingredients!
 ____________________________________________________________
 ```
@@ -767,8 +763,8 @@ Set an expiry date for an existing ingredient.
 
 Format: `set ingr expiry [INGR_NAME]`
 
-* Can only be performed on existing `INGR_NAME`
-* ❕ *Tip*: You can replace `[INGR_NAME]` with `[INGR_INDEX]` to quickly choose which ingredient to edit.
+* Can only be performed on existing `INGR_NAME`.
+* ❕ *Tip*: You can replace `[INGR_NAME]` with `[INGR_INDEX]` to quickly choose which ingredient to set an expiry date to.
 * 💡 *Note*:  You will be prompted to enter the expiry date of the ingredient in the next step.
 
 Example of usage:
@@ -779,7 +775,7 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-What is the expiry date of 'chicken'?
+What is the expiry date of 'chicken' in 'dd/MM/yyyy' format?
 ____________________________________________________________
 ```
 
@@ -796,12 +792,12 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-The expiry date of 'chicken' has been set to 20/12/2021 (47 day(s) from today)
+The expiry date of 'chicken' has been set to 20/12/2021 (43 day(s) from today)
 ____________________________________________________________
 ```
 
 💡 *Note*: The number of days shown to expiry is relative to the date set on your PC and does not strictly follow the
-outcome shown above.
+outcome shown above. This applies to the expiry dates similarly found in `list ingr`.
 
 <br/>
 
@@ -814,7 +810,7 @@ to the name of the ingredient*
 
 Format: `edit ingr name [INGR_NAME]`
 
-* Can only be performed on existing `INGR_NAME`
+* Can only be performed on existing `INGR_NAME`.
 * ❕ *Tip*: You can replace `[INGR_NAME]` with `[INGR_INDEX]` to quickly choose which ingredient to edit.
 * 💡 *Note*:  You will be prompted to enter the new ingredient name in the next step, and a confirmation message
   afterwards.
@@ -839,7 +835,8 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Are you sure you want to change ingredient name from 'chicken' to 'chicken breast'? Type y for Yes and n for No.
+Are you sure you want to change the ingredient name from 'chicken' to 'chicken breast'?
+Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:
 ____________________________________________________________
 ```
 
@@ -851,9 +848,8 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-chicken has been updated to 'chicken breast'!
+'chicken' has been updated to 'chicken breast'!
 ____________________________________________________________
-
 ```
 
 Example of usage (selecting **no**):
@@ -879,7 +875,7 @@ weight.*
 
 Format: `edit ingr stored [INGR_NAME]`
 
-* Can only be performed on existing `INGR_NAME`
+* Can only be performed on existing `INGR_NAME`.
 * ❕ *Tip*: You can replace `[INGR_NAME]` with `[INGR_INDEX]` to quickly choose which ingredient to edit.
 * 💡 *Note*:  You will be prompted to enter the new ingredient storage in the next step, and a confirmation message
   afterwards.
@@ -898,14 +894,16 @@ ____________________________________________________________
 
 Example of usage:
 
-`50`
+`53.2`
 
 Expected Outcome:
 
 ```
 ____________________________________________________________
-Are you sure you want to change the storage weight (in kg) from '10.0' to '50.0'? Type y for Yes and n for No.
+Are you sure you want to change the storage weight (in kg) from '7.0' to '53.2'?
+Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:
 ____________________________________________________________
+
 ```
 
 Example of usage (selecting **yes**):
@@ -916,7 +914,7 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Storage of chicken breast has been updated to '50.0' kg!
+Storage of 'chicken breast' has been updated to 53.2 kg!
 ____________________________________________________________
 
 ```
@@ -944,7 +942,7 @@ weight.*
 
 Format: `edit ingr waste [INGR_NAME]`
 
-* Can only be performed on existing `INGR_NAME`
+* Can only be performed on existing `INGR_NAME`.
 * ❕ *Tip*: You can replace `[INGR_NAME]` with `[INGR_INDEX]` to quickly choose which ingredient to edit.
 * 💡 *Note*:  You will be prompted to enter the new ingredient wastage in the next step, and a confirmation message
   afterwards.
@@ -963,13 +961,14 @@ ____________________________________________________________
 
 Example of usage:
 
-`5`
+`5.3`
 
 Expected Outcome:
 
 ```
 ____________________________________________________________
-Are you sure you want to change the wastage weight (in kg) from '50.0' to '5.0'? Type y for Yes and n for No.
+Are you sure you want to change the wastage weight (in kg) from '8.45' to '5.3'?
+Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:
 ____________________________________________________________
 ```
 
@@ -981,9 +980,8 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Wastage of chicken breast has been updated to '5.0' kg!
+Wastage of 'chicken breast' has been updated to 5.3 kg!
 ____________________________________________________________
-
 ```
 
 Example of usage (selecting **no**):
@@ -1004,21 +1002,21 @@ ____________________________________________________________
 
 Link an existing Ingredient to an existing Dish.
 
-*To define the Dish in terms of what Ingredients make it up*
+*To define the Dish in terms of what Ingredients make it up.*
 
 Format: `link [DISH_NAME] / [INGR_NAME]`
 
-* `[DISH_NAME]` space `/` space `[INGR_NAME]`
+* Can only be performed on existing `DISH_NAME` and `INGR_NAME`.
 
 Example of usage:
 
-`link chicken rice / chicken breast`
+`link roasted chicken rice / chicken breast`
 
 Expected Outcome:
 
 ```
 ____________________________________________________________
-Successfully added chicken breast as ingredient of chicken rice
+Successfully added 'chicken breast' as an ingredient of 'roasted chicken rice'!
 ____________________________________________________________
 ```
 
@@ -1032,20 +1030,20 @@ Delete an existing Ingredient from your Ingredient list.
 
 Format: `del ingr [INGR_NAME]`
 
-* The `INGR_NAME` has to be existing in the Ingredient list for it to be deleted.
-* 💡 *Note*:   You will be prompted with a confirmation message to delete the ingredient.
-    * Enter `y` to confirm deletion.
-    * Enter `n` to abort deletion.
+* Can only be performed on existing `INGR_NAME`.
+* ❕ *Tip*: You can replace `[INGR_NAME]` with `[INGR_INDEX]` to quickly choose which ingredient to delete.
+* 💡 *Note*: You will be prompted with a confirmation message to delete the ingredient.
 
 Example of usage:
 
-`del ingr chicken breast`
+`del ingr chicken breast` or `del ingr 1`
 
 Expected Outcome:
 
 ```
 ____________________________________________________________
-Are you sure you want to remove this Ingredient? Type y to confirm or n to disregard
+Are you sure you want to remove 'chicken breast'?
+Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:
 ____________________________________________________________
 ```
 
@@ -1057,9 +1055,8 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-chicken breast has been removed!
+'chicken breast' has been removed from your ingredient list!
 ____________________________________________________________
-
 ```
 
 Example of usage (when selecting **no**):
@@ -1085,7 +1082,7 @@ View all existing Ingredients in the Ingredient list.
 
 Format: `list ingr`
 
-* The `list` must come before `ingr`.
+* 💡 *Note*: `list ingr` does not require additional parameters.
 
 Example of usage:
 
@@ -1095,12 +1092,17 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Here are the ingredients you have: 
+Here are the ingredients you have:
 1. chicken breast
    Storage: 2.2 kg
    Wastage: 0.0 kg
    Limit: No limit has been set
    Expiry Date: No expiry date has been set
+2. beef
+   Storage: 2.95 kg
+   Wastage: 0.0 kg
+   Limit: No limit has been set
+   Expiry Date: 23/05/2023 (562 day(s) from today)
 You can use command 'add' to add new ingredients!
 ____________________________________________________________
 ```
@@ -1115,10 +1117,10 @@ Display a graph to show Dish wastage.
 
 Format: `graph dish`
 
-* `graph dish` does not require additional parameters.
-  * 💡 *Note*:  Due to the limitations of a CLI based application, 
-  we are unable to print half a character and as a result the graphs are unable to display fractional values (e.g. 2.5 units is impossible)
-    * The scaling is instead done by getting the actual value and rounding it up to the nearest integer (e.g 3.2 units would show as 4 units)
+* 💡 *Note*:
+    * `graph dish` does not require additional parameters. 
+    *  Due to the limitations of a CLI based application, the terminal is unable to print half a character and 
+  as a result the graphs are unable to display fractional values (e.g. 2.5 units is impossible)
 
 Example of usage:
 
@@ -1129,19 +1131,18 @@ Expected Outcome:
 ```
 ____________________________________________________________
 
-         [|]                 Legend:              Scale: 1 unit = 3.45kg
+         [|]                 Legend:              Scale: 1 unit [|] = 3.45kg
          [|]                 A. cake: 3.45kg
          [|]                 B. chicken rice: 34.5kg
          [|]                 C. hamburger: 7.22kg
          [|]                 D. prata: 15.7kg
+         [|]         [5]
          [|]         [|]
-         [|]         [|]
-         [|]   [|]   [|]
-         [|]   [|]   [|]
+         [|]   [0]   [|]
+   [0]   [|]   [|]   [|]
    [|]   [|]   [|]   [|]
-    A     B     C     D 
+    A     B     C     D
 ____________________________________________________________
-
 ```
 
 <br/>
@@ -1154,11 +1155,11 @@ Displays a graph to show Ingredient wastage.
 
 Format: `graph ingr`
 
-* `graph ingr` does not require additional parameters.
-* 💡 *Note*:  Due to the limitations of a CLI based application,
-  we are unable to print half a character and as a result the graphs are unable to display fractional values (e.g. 2.5 units is impossible)
-  * The scaling is instead done by getting the actual value and rounding it up to the nearest integer (e.g 3.2 units would show as 4 units)
-
+* 💡 *Note*:
+    * `graph ingr` does not require additional parameters.
+    *  Due to the limitations of a CLI based application, the terminal is unable  to print half a character and
+       as a result the graphs are unable to display fractional values (e.g. 2.5 units is impossible)
+       
 Example of usage:
 
 `graph ingr`
@@ -1172,13 +1173,13 @@ ____________________________________________________________
                            [|]     A. chicken: 2.56kg
                            [|]     B. rice: 21.56kg
                            [|]     C. flour: 24.56kg
-                     [|]   [|]     D. potato: 26.56kg
-         [|]   [|]   [|]   [|]     E. corn: 50.0kg
+                     [3]   [|]     D. potato: 26.56kg
+         [3]   [9]   [|]   [|]     E. corn: 50.0kg
          [|]   [|]   [|]   [|]
          [|]   [|]   [|]   [|]
          [|]   [|]   [|]   [|]
-   [|]   [|]   [|]   [|]   [|]
-    A     B     C     D     E 
+   [5]   [|]   [|]   [|]   [|]
+    A     B     C     D     E
 ____________________________________________________________
 ```
 
@@ -1188,11 +1189,9 @@ ____________________________________________________________
 
 Retrieves a list of Dishes inclusive of the matching keyword.
 
-❕ *Tip*:  Useful to find certain Dishes available in your Dish list
+❕ *Tip*:  Useful to find certain Dishes available in your Dish list.
 
 Format: `find dish [KEYWORD]`
-
-* `find dish` comes before `[KEYWORD]`.
 
 Example of usage:
 
@@ -1204,18 +1203,36 @@ Expected Outcome:
 ____________________________________________________________
 As requested, here are the matching dishes in your list:
 1. pasta
-   Wastage: 1.0 kg
+   Wastage: 1.57 kg
    Ingredients Linked: None
    Limit: No limit has been set
 3. krabby patty
-   Wastage: 0.0 kg
+   Wastage: 38.4 kg
    Ingredients Linked: None
    Limit: No limit has been set
 ____________________________________________________________
-
 ```
 
 💡 *Note*: `find dish [KEYWORD]` will print the index of matching dishes as how it appears in the dish list.
+* Example original Dish list:
+    ```
+    ____________________________________________________________
+    Here are the dishes you have:
+    1. pasta
+       Wastage: 1.57 kg
+       Ingredients Linked: None
+       Limit: No limit has been set
+    2. chicken rice
+       Wastage: 37.5 kg
+       Ingredients Linked: None
+       Limit: No limit has been set
+    3. krabby patty
+       Wastage: 38.4 kg
+       Ingredients Linked: None
+       Limit: No limit has been set
+    You can use command 'add' to add new dishes!
+    ____________________________________________________________
+    ```
 
 <br/>
 
@@ -1227,8 +1244,6 @@ Retrieves a list of Ingredients inclusive of the matching keyword.
 
 Format: `find ingr [KEYWORD]`
 
-* `find ingr` comes before `[KEYWORD]`.
-
 Example of usage:
 
 `find ingr chi`
@@ -1238,13 +1253,13 @@ Expected Outcome:
 ```
 ____________________________________________________________
 As requested, here are the matching ingredients in your list:
-2. chicken
-   Storage: 7.0 kg
+2. chicken breast
+   Storage: 21.12 kg
    Wastage: 0.0 kg
    Limit: No limit has been set
    Expiry Date: No expiry date has been set
 3. chickpea
-   Storage: 3.5 kg
+   Storage: 32.3 kg
    Wastage: 0.0 kg
    Limit: No limit has been set
    Expiry Date: No expiry date has been set
@@ -1252,21 +1267,43 @@ ____________________________________________________________
 ```
 
 💡 *Note*: `find ingr [KEYWORD]` will print the index of matching ingredients as how it appears in the ingredient list.
-
+* Example original Ingredient list:
+  
+    ```
+    ____________________________________________________________
+    Here are the ingredients you have:
+    1. beef
+       Storage: 23.3 kg
+       Wastage: 0.0 kg
+       Limit: No limit has been set
+       Expiry Date: No expiry date has been set
+    2. chicken breast
+       Storage: 21.12 kg
+       Wastage: 0.0 kg
+       Limit: No limit has been set
+       Expiry Date: No expiry date has been set
+    3. chickpea
+       Storage: 32.3 kg
+       Wastage: 0.0 kg
+       Limit: No limit has been set
+       Expiry Date: No expiry date has been set
+    You can use command 'add' to add new ingredients!
+    ____________________________________________________________
+    ```
+  
 <br/>
 
 ### Remove all dishes : `clear dish`
 
-Removes all existing Dishes from the list of Ingredients.
+Removes all existing Dishes from the list of Dishes.
 
 ❕ *Tip*:  Useful to obtain an empty Dish list.
 
 Format: `clear dish`
 
-* `clear dish` does not require additional parameters
-* 💡 *Note*: You will be prompted with a confirmation message to delete all dishes.
-    * Enter `y` to confirm deletion.
-    * Enter `n` to abort deletion.
+* 💡 *Note*:
+    * `clear dish` does not require additional parameters. 
+    * You will be prompted with a confirmation message to delete all Dishes.
 
 Example of usage:
 
@@ -1276,7 +1313,8 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Are you sure you want to remove all Dishes? Type y to confirm or n to disregard
+Are you sure you want to remove all Dishes?
+Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:
 ____________________________________________________________
 ```
 
@@ -1310,16 +1348,15 @@ ____________________________________________________________
 
 ### Remove all ingredients : `clear ingr`
 
-Removes all existing Ingredients from the list of ingredients.
+Removes all existing Ingredients from the list of Ingredients.
 
 ❕ *Tip*:  Useful to obtain an empty Ingredient list.
 
 Format: `clear ingr`
 
-* `clear ingr` does not require additional parameters
-* 💡 *Note*: You will be prompted with a confirmation message to delete all ingredients.
-    * Enter `y` to confirm deletion.
-    * Enter `n` to abort deletion.
+* 💡 *Note*:
+    * `clear ingr` does not require additional parameters.
+    * You will be prompted with a confirmation message to delete all Ingredients.
 
 Example of usage:
 
@@ -1329,7 +1366,8 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Are you sure you want to remove all Ingredients? Type y to confirm or n to disregard
+Are you sure you want to remove all Ingredients?
+Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:
 ____________________________________________________________
 ```
 
@@ -1363,14 +1401,13 @@ ____________________________________________________________
 
 Removes all existing Dishes and Ingredients from their respective lists.
 
-❕ *Tip*: Useful to obtain both empty Ingredient list & Dish list.
+❕ *Tip*: Useful to obtain both empty Dish and Ingredient lists.
 
 Format: `clear all`
 
-* `clear all` does not require additional parameters
-* 💡 *Note*: You will be prompted with a confirmation message to delete all dishes and ingredients.
-    * Enter `y` to confirm deletion.
-    * Enter `n` to abort deletion.
+* 💡 *Note*:
+    * `clear all` does not require additional parameters.
+    * You will be prompted with a confirmation message to delete all Dishes and Ingredients.
 
 Example of usage:
 
@@ -1380,7 +1417,8 @@ Expected Outcome:
 
 ```
 ____________________________________________________________
-Are you sure you want to remove all Dishes and Ingredients? Type y to confirm or n to disregard
+Are you sure you want to remove all Dishes and Ingredients?
+Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:
 ____________________________________________________________
 ```
 
@@ -1412,13 +1450,13 @@ ____________________________________________________________
 
 ### Sort dishes by amount of wastage : `sort dish`
 
-Sorts all Dishes in **descending order** of wastage.
+Sorts all Dishes in **descending order** of **wastage**.
 
 ❕ *Tip*: Useful to immediately see the most wasted Dish.
 
 Format: `sort dish`
 
-* `sort dish` does not require additional parameters
+* 💡 *Note*: `sort dish` does not require additional parameters.
 
 Example of usage:
 
@@ -1429,18 +1467,20 @@ Expected Outcome:
 ```
 ____________________________________________________________
 List of Dishes has been sorted.
-
 ____________________________________________________________
 Here are the dishes you have:
 1. krabby patty
-   Wastage: 9.0 kg
-   Constituents: chicken,beef,fish
+   Wastage: 9.36 kg
+   Ingredients Linked: None
+   Limit: No limit has been set
 2. chicken rice
-   Wastage: 8.0 kg
-   Constituents: chicken,beef,fish
-3. meatballs spaghetti
-   Wastage: 7.0 kg
-   Constituents: chicken,beef,fish
+   Wastage: 8.55 kg
+   Ingredients Linked: None
+   Limit: No limit has been set
+3. meatballs and spaghetti
+   Wastage: 7.38 kg
+   Ingredients Linked: None
+   Limit: No limit has been set
 You can use command 'add' to add new dishes!
 ____________________________________________________________
 ```
@@ -1449,13 +1489,13 @@ ____________________________________________________________
 
 ### Sort ingredients by amount of wastage : `sort ingr`
 
-Sorts all Ingredients in **descending order** of wastage.
+Sorts all Ingredients in **descending order** of **wastage**.
 
 ❕ *Tip*: Useful to immediately see the most wasted Ingredient.
 
 Format: `sort ingr`
 
-* `sort ingr` does not require additional parameters
+* 💡 *Note*: `sort ingr` does not require additional parameters.
 
 Example of usage:
 
@@ -1466,21 +1506,28 @@ Expected Outcome:
 ```
 ____________________________________________________________
 List of Ingredients has been sorted.
-
 ____________________________________________________________
-Here are the ingredients you have: 
+Here are the ingredients you have:
 1. chicken
-   Storage: 9.0 kg
-   Wastage: 14.0 kg
+   Storage: 9.32 kg
+   Wastage: 14.32 kg
+   Limit: No limit has been set
+   Expiry Date: No expiry date has been set
 2. beef
-   Storage: 8.0 kg
-   Wastage: 13.0 kg
+   Storage: 8.3 kg
+   Wastage: 13.53 kg
+   Limit: No limit has been set
+   Expiry Date: No expiry date has been set
 3. pork
    Storage: 6.0 kg
-   Wastage: 9.0 kg
+   Wastage: 9.57 kg
+   Limit: No limit has been set
+   Expiry Date: No expiry date has been set
 4. fish
    Storage: 7.0 kg
-   Wastage: 4.0 kg
+   Wastage: 4.98 kg
+   Limit: No limit has been set
+   Expiry Date: No expiry date has been set
 You can use command 'add' to add new ingredients!
 ____________________________________________________________
 ```
@@ -1493,7 +1540,7 @@ Exit Food-O-Rama and save all data entries.
 
 Format: `bye`
 
-* 💡 *Note*:  All data will be saved automatically.
+* All data will be saved automatically.
 
 Example of usage:
 
@@ -1543,18 +1590,19 @@ no need to save manually.
 
 ### Accessing the data
 
-Food-O-Rama data is saved as 2 files: *dishes.txt* and *ingredients.txt*. These files can be found under the *'Data'*
-folder in the same directory as the .jar file.
+Food-O-Rama data is saved as 2 files: *dishes.txt* and *ingredients.txt*. These files can be found in the *`data`*
+folder in the same directory as the `Food-O-Rama.jar` file.
 
 <br/>
 
 ### Manipulating the data
 
-Food-O-Rama data can be written manually by editing the text files in *'Data'*. Refer to *Instructions for Manual
-Testing* in the Developer Guide for the appropriate data format.
+Food-O-Rama data can be written manually by editing the text files in the *`data`* folder. 
 
-Dish
-Format: `[DISH_NAME] | [AMOUNT_WASTED_IN_KG] | [WASTAGE_DIVIDED_BY_NUM_OF_LINKED_INGR] | [WASTAGE_LIMIT] | [INGR_1|INGR_2|etc.]`
+❕ *Tip*: Manual editing is **not recommended** unless you are sure of the changes that you are making. You may instead 
+utilize the various `edit` commands in the program to edit your Dish and Ingredient data.
+
+Dish Format: `[DISH_NAME] | [AMOUNT_WASTED_IN_KG] | [WASTAGE_DIVIDED_BY_NUM_OF_LINKED_INGR] | [WASTAGE_LIMIT] | [INGR_1|INGR_2|etc.]`
 
 * 💡 *Note*: `[WASTAGE_LIMIT]` is `-1` when no limit is set.
 
@@ -1593,7 +1641,11 @@ chicken|2.0|1.0|2.5|30/10/2021
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: Copy the data folder and its contents over to the new computer.
+**A**: Copy the `data` folder over to the new computer and put it in the same directory
+as `Food-O-Rama.jar`.
+
+Example:
+![DataImage](https://user-images.githubusercontent.com/69526313/140649444-5e3e073b-87a7-42eb-8fb4-5e72e5b487cb.png)
 
 ## 👋 Final Notes
 
