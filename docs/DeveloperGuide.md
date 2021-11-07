@@ -530,4 +530,15 @@ To check if the program can create a storage file if it doesn't exist:
 ![Storage File](Display_Images/tpFolder.png)
 
 2. Launch the program and enter the application.
-3. Type `list` to see that the storage data file was deleted, hence no goals exist.
+3. Type `list` to see that no goals exists since the storage file was deleted. A new empty storage file
+  will be created by the program.
+
+![Data Deleted](Display_Images/DataDeleted.png)
+
+To check if the data file is read-only and if it is possible to corrupt data file:
+
+1. The storage file is set to read-only. To test this, go to `data` folder and open the `.txt` file.
+2. Randomly edit the text file to corrupt it.
+3. Try to save the changes and there should be an error message preventing you to do so.
+
+![Error Changing File](Display_Images/ErrorChangingFile.png)
