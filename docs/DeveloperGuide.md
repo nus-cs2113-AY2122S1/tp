@@ -251,7 +251,7 @@ This section describes some noteworthy details on how the main features are impl
 
 ### 4.1. Adding a Goal 
 
-First, a `AddHabitCommand` object is returned from the `AddParser` if the users input is successfully parsed.
+First, a `AddHabitCommand` object is returned from the `AddParser` if the users input is successfully parsed as shown below.
 
 ![](Diagram Images/Implementation Diagram Images/AddGoalCommandParserSequenceDiagram.png)
 
@@ -261,11 +261,11 @@ The `runCommand` method is then executed for the `AddHabitCommand` object.
 
 ### 4.2. Adding a Habit
 
-First, a `AddHabitCommand` object is returned from the `AddParser` if the users input is successfully parsed.
+A `AddHabitCommand` object is returned from the `AddParser` if the users input is successfully parsed as shown below.
 
 ![](Diagram Images/Implementation Diagram Images/AddHabitCommandParserSequenceDiagram.png)
 
-The `runCommand` method is then executed for the `AddHabitCommand` object.
+The `runCommand` method is then executed for the `AddHabitCommand` object as seen.
 
 ![](Diagram Images/Implementation Diagram Images/AddHabitCommandSequenceDiagram.png)
 
@@ -276,24 +276,37 @@ the `addHabit` method.
 
 ### 4.3. Listing all Goals
 
-When the `runCommand` method is executed for the `ListGoalsCommand` object, the following steps as indicated by the
-sequence diagram below is carried out:
+A `ListGoalCommand` object is returned from the `ListGoalParser` as long as the user's command contains the prompt `list`.
+All other inputs are treated as "gibberish" which the user accidentally typed.
+
+The `runCommand` method is then executed for the `ListGoalsCommand` object. The following steps as indicated by the
+sequence diagram below is then carried out:
 
 ![](Diagram Images/Implementation Diagram Images/ListGoalsCommandSequenceDiagram.png)
 
 ### 4.4. Listing all Habits
 
-When the `runCommand` method is executed for the `ListHabitsCommand` object, the following steps as indicated by the
-sequence diagram below is carried out:
+A `ListHabitCommand` object is returned from the `ListHabitParser` if the users input is successfully parsed as shown below.
+
+![](Diagram Images/Implementation Diagram Images/ListHabitsCommandParserSequenceDiagram.png)
+
+The `runCommand` method is then executed for the `ListHabitsCommand` object as seen.
 
 ![](Diagram Images/Implementation Diagram Images/ListHabitsCommandSequenceDiagram.png)
 
 ### 4.5. Completing a Habit
 
-When the `runCommand` method is executed for the `DoneHabitCommand` object, the following steps as indicated by the
-sequence diagram below is carried out:
+A `DoneHabitCommand` object is returned from the `DoneParser` if the users input is successfully parsed as shown below.
+
+![](Diagram Images/Implementation Diagram Images/DoneCommandParserSequenceDiagram.png)
+
+The `runCommand` method is then executed for the `DoneHabitCommand` object as seen.
 
 ![](Diagram Images/Implementation Diagram Images/DoneCommandSequenceDiagram.png)
+
+The method `doneHabitFromGoal` will obtain the specified Habit from the Goal indicated by the user and execute the 
+`doneHabit` method within the Goal class. If at any point during the execution, if an invalid index for either the 
+Goal or the Habit is detected, an exception will be thrown.
 
 ### 4.6. Updating a Goal
 
