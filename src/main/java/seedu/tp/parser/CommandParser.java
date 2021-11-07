@@ -24,7 +24,6 @@ import seedu.tp.task.taskmanager.TaskManager;
 import seedu.tp.utility.Utility;
 
 //@@author APZH
-
 /**
  * Parses user input.
  */
@@ -37,7 +36,6 @@ public class CommandParser {
     private static final String INVALID_TASK_INDEX = "%s is not an integer!";
 
     //@@author APZH
-
     /**
      * Returns a {@code Map} mapping command flags to the arguments entered by the user.
      *
@@ -73,7 +71,6 @@ public class CommandParser {
     }
 
     //@@author APZH
-
     /**
      * Creates a {@code Command} object based on the {@code commandSyntax}.
      *
@@ -115,7 +112,6 @@ public class CommandParser {
     }
 
     //@@author APZH
-
     /**
      * Returns the {@code Command} to be executed based on the {@code userInput}.
      *
