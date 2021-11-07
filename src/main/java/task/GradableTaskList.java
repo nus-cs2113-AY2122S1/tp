@@ -68,7 +68,7 @@ public class GradableTaskList extends TaskList {
         return total <= MAXWEIGHTAGE;
     }
 
-    private boolean inputChecks(int weightage, String date) {
+    private boolean inputChecks(int weightage, String date, String description) {
         if (weightage == 0) {
             return false;
         }
@@ -77,6 +77,9 @@ public class GradableTaskList extends TaskList {
             return false;
         } else if (date.isBlank()) {
             Ui.missingDate();
+            return false;
+        } else if (description.isBlank()) {
+            Ui.missingDescription();
             return false;
         }
         return true;
@@ -95,9 +98,9 @@ public class GradableTaskList extends TaskList {
         logger.log(Level.INFO, "Successfully added task");
         String date = getDate(userInput);
         int weightage = getWeightage(userInput);
-        if (inputChecks(weightage, date)) {
+        String description = removeDate(userInput);
+        if (inputChecks(weightage, date, description)) {
             try {
-                String description = removeDate(userInput);
                 DateParser.parseDate(date);
                 GradableTask newGradableTask = new GradableTask(description, date, weightage);
                 this.gradableTaskList.add(taskCount, newGradableTask);

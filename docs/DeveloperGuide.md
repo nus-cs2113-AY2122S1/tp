@@ -190,15 +190,6 @@ The modules are stored in an ArrayList and ModuleList uses the Module.get(int in
   constructing a Time Table.
 - ModuleList contains getter method find(String input) which returns a module by the same name as the input.
 
-How printing a timetable works:
-
-1. ModuleList first extracts day of week and timeslot information from different schedules.
-2. It then prints out the Timetable one line at a time. At the same time it checks if the day of week and the timeslot
-   corresponds to the schedule.
-
-- If day of week and timeslot corresponds, venue and comments information is printed out
-- If day of week and timeslot does not correspond, and blank character &quot; &quot; is printed instead.
-
 # ![modulePrintTimetableSeq](media/ModuleListseq.png)
 
 How printing a timetable works:
@@ -638,7 +629,7 @@ exploratory testing.
     1. Run the command: `/m cs2040c addgradable finals /by 11/11/2021 1000 /w 50`
     2. Expected:  
     ```
-     Added new task to CS2040C
+    Added new task to CS2040C
     finals by: 11 Nov 2021 10:00 AM Weightage 50% [ ]
     BREAKDOWN:
     <======================50%=======================>
@@ -664,17 +655,17 @@ exploratory testing.
 3. Run the command: `/m cs2040c addgradable midterms /by 11/09/2021 1300 /w 50`
 4. Run the command: `/m CS2040C list gradable`
 5. Expected:
-    ```
+   ```
    BREAKDOWN:
-    <======================50%=======================><======================50%=======================>
-    ##################################################@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-    |-----------------------1------------------------||-----------------------2------------------------|
-    1: finals
-    2: midterms
-
-    1 finals by: 11 Nov 2021 10:00 AM Weightage 50% [ ]
-    2 midterms by: 11 Sep 2021 01:00 PM Weightage 50% [ ]
-    ``` 
+   <======================50%=======================><======================50%=======================>
+   ##################################################@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+   |-----------------------1------------------------||-----------------------2------------------------|
+   1: finals
+   2: midterms
+   
+   1 finals by: 11 Nov 2021 10:00 AM Weightage 50% [ ]
+   2 midterms by: 11 Sep 2021 01:00 PM Weightage 50% [ ]
+   ``` 
 
 ## Editing a task
 
