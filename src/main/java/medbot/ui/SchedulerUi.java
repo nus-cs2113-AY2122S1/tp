@@ -23,8 +23,8 @@ public class SchedulerUi {
                 + "exit" + END_LINE + END_LINE
                 + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
-                + "*Note that all commands will remove any '|' inputs for format parsing purposes. For " + END_LINE
-                + "examples of the expected output, please refer to the actual user guide." + END_LINE;
+                + "*Note that all commands will remove any '|' inputs for format parsing purposes." + END_LINE
+                + "For expected output examples, please refer to the actual user guide." + END_LINE;
     }
     //@@author
 
