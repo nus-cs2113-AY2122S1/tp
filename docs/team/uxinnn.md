@@ -1,14 +1,12 @@
 # Foong Xin Yu - Project Portfolio Page
 
 ## Overview
-Hi! I'm a Year 2 Computer Engineering student at NUS.
-
-Please see below for my contributions to Traveller.
+Hi! I'm a Year 2 Computer Engineering student at NUS. Please see below for my contributions to Traveller.
 
 ### Summary of Contributions
 
 #### Code Contributions
-* RepoSense Link: [here](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=Uxinnn&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
+* RepoSense Link: [here](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&tabAuthor=Uxinnn&tabRepo=AY2122S1-CS2113T-W13-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
   * Refer to this link for details of my code contributions.
 
 #### Enhancements Implemented
@@ -37,12 +35,11 @@ Please see below for my contributions to Traveller.
   * Debugged DG.
   * Wrote preface, Table of Contents, Design & Implementation header paragraph, World Map header paragraph,
     Main Traveller header paragraph, Traveller class, Parser class.
-  * UML diagrams done:
-    * [Parser sequence diagram](../documentationPics/parserSequenceDiagram.jpeg)
-    * [WorldMap class diagram](../documentationPics/worldMapClassDiagram.jpeg)
-    * [Design overview](../documentationPics/designOverview.jpeg) (Not UML)
-    * [WorldMap design](../documentationPics/worldMapDesign.png) (Not UML)
-    * [MainTraveller design](../documentationPics/mainTravellerDesign.png) (Not UML)
+  * UML diagrams done: [Parser sequence diagram](../documentationPics/parserSequenceDiagram.jpeg), 
+[WorldMap class diagram](../documentationPics/worldMapClassDiagram.jpeg), 
+[Design overview](../documentationPics/designOverview.jpeg) (Not UML), 
+[WorldMap design](../documentationPics/worldMapDesign.png) (Not UML), 
+[MainTraveller design](../documentationPics/mainTravellerDesign.png) (Not UML)
 
 #### Contributions to Team-based tasks
 * Set up GitHub team org and repo.
@@ -54,7 +51,7 @@ Please see below for my contributions to Traveller.
 
 #### Review/mentoring contributions
 * PRs merged: [#167](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/167), 
-[](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/166), 
+[#166](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/166), 
 [#155](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/155), 
 [#154](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/154), 
 [#153](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/153), 
