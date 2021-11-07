@@ -299,6 +299,7 @@ public class AddCommandTest {
             System.out.println("Total number of people cannot be more than 99. \n");
         }
     }
+
     /**
      * Checks that when number of orders in the order list will be exceeded, it will not be accepted.
      */
