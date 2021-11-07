@@ -59,7 +59,7 @@ Terminology | Meaning
 Stock | Refers to a medication.
 Prescription | Refers to a prescription.
 Order | Refers to ordering new medications to replenish the stocks.
-Parameters | Prefixes for MediVault to understand the type of information you provide.
+Parameters | Prefixes for MediVault to understand the type of information you provide. Parameters must be specified with a `/`. For example `list sort/n` is considered a valid parameter whereas `list sort` is not a valid parameter.
 
 Meaning of Icons:
 - :information_source: Note
@@ -72,7 +72,7 @@ Meaning of Icons:
 
 1. Ensure that you have **Java 11** or above installed.
 2. Download the latest version of `MediVault.jar`
-   from [here](https://github.com/AY2122S1-CS2113T-T10-1/tp/releases/tag/v1.0).
+   from [here](https://github.com/AY2122S1-CS2113T-T10-1/tp/releases/tag/v2.1).
 3. Copy the file to the folder you want to use as the **home** folder for `MediVault`.
 4. In the terminal, run `Java -jar MediVault.jar`.
 5. You should see the following prompt if the program has started successfully.
@@ -190,7 +190,8 @@ Example 2 (If medication and expiry date exists): `addstock n/panadol q/50 e/19-
 Expected Output 2:
 
 ```
-Same Medication and Expiry Date exist. Using existing price, description and maximum quantity. Updating existing quantity.
+Same Medication and Expiry Date exist. Using existing price, description and 
+maximum quantity. Updating existing quantity.
 +====+=========+=======+==========+=============+=============+==============+
 | ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | 
 +====+=========+=======+==========+=============+=============+==============+
@@ -222,7 +223,7 @@ Lists all existing medications in the inventory.
 * `low/LESS_THAN_OR_EQUAL_QUANTITY` and `expiring/LESS_THAN_OR_EQUAL_EXPIRY_DATE` parameters can be used to search for
 stocks with low **total** remaining quantity and expiring stocks respectively.
 
-Format: `liststock {i/ID p/PRICE q/QUANTITY low/LESS_THAN_OR_EQUAL_QUANTITY e/EXPIRY_DATE expiring/LESS_THAN_OR_EQUAL_EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN_NAME}`
+Format: `liststock {i/ID n/NAME p/PRICE q/QUANTITY low/LESS_THAN_OR_EQUAL_QUANTITY e/EXPIRY_DATE expiring/LESS_THAN_OR_EQUAL_EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN_NAME}`
 
 Example 1 (Listing all medications): `liststock`
 
@@ -360,7 +361,8 @@ Adds a prescription record and subtracts the medication quantity from stocks.
 If the remaining quantity of the current batch of medication is insufficient, the next batch of medication will be used to supplement the prescription.
 > * MediVault will add another entry to prescription even if the medication name, customer's ID, date and staff name is exactly the same. 
 This is so that MediVault can track all entries.
->  * If users want to increase the quantity of medication prescribed, users can use `updateprescription` command instead.
+> * If users want to increase the quantity of medication prescribed, users can use `updateprescription` command instead.
+> * MediVault will set the prescription date as today's date.
 
 
 Format: `addprescription n/NAME q/QUANTITY s/STAFF c/CUSTOMER_ID`
@@ -370,7 +372,7 @@ Example: `addprescription n/panadol q/5 s/john c/123`
 Expected Output:
 
 ```
-Prescribed:PANADOL Quantity:1 Expiry Date:14-09-2021
+Prescribed:PANADOL Quantity:5 Expiry Date:14-09-2021
 +====+=========+==========+=============+============+=======+==========+
 | ID |  NAME   | QUANTITY | CUSTOMER_ID |    DATE    | STAFF | STOCK_ID | 
 +====+=========+==========+=============+============+=======+==========+
@@ -436,7 +438,7 @@ Updates an existing prescription information.
 > * You **cannot** update the Stock or the Prescription ID. 
 > * The allocation of Prescription ID is determined by MediVault.
 > * Your provided `n/NAME` parameter **must** exist in stocks.
-> * When you update a prescription record, the stock information may be affected as well
+> * When you update a prescription record, the stock information may be affected as well.
 > * MediVault does not combine prescription information even if the column information are the same.
 > * You **cannot** update an existing prescription information with 0 quantity. You must use the `deleteprescription` 
 command instead.
@@ -606,7 +608,7 @@ Pending order quantity: 250
 Lists all order records in the application.
 
 * All parameters for `listorder` command are optional, you can choose to list the records by any of the parameters.
-* You are able to listorder by id, name, quantity, date, status and also sort and reverse sort by columns.
+* You are able to `listorder` by any column and sort or reverse sort them.
 
 Format: `listorder {i/ID n/NAME q/QUANTITY d/DATE s/STATUS sort/COLUMN_NAME rsort/COLUMN_NAME}`
 
@@ -708,10 +710,10 @@ Order deleted for Order ID 1
 
 ### Receiving orders: `receiveorder`
 
-Adds the received medication into the current stocks.
+Adds the medication you ordered into the current stocks.
 
 > :information_source: Note:
-> * Your input Order ID must exist
+> * Your input Order ID must exist.
 > * When you run `receiveorder` with the required parameters, the medication you ordered will be automatically added into your current stocks.
 > * The `e/EXPIRY_DATE` parameter is required so that MediVault knows the expiry date of the stock that just arrived.
 > * The `p/PRICE` parameter is also required so that stocks with different remaining shelf life can have different prices.
@@ -741,7 +743,8 @@ Example 2 (If medication exists) : `receiveorder i/2 p/20 e/25-10-2021`
 Expected Output 2:
 
 ```
-Same Medication and Expiry Date exist. Using existing price, description and maximum quantity. Updating existing quantity.
+Same Medication and Expiry Date exist. Using existing price, description and
+maximum quantity. Updating existing quantity.
 +====+=========+========+==============+=============+=============+==============+
 | ID |  NAME   | PRICE  |   QUANTITY   | EXPIRY_DATE | DESCRIPTION | MAX_QUANTITY | 
 +====+=========+========+==============+=============+=============+==============+
@@ -773,7 +776,7 @@ Example: `archiveorder d/10-10-2021`
 Expected Output:
 
 ```
-Archived orders from 10-10-2021
+Archived 2 delivered orders from 10-10-2021
 ```
 
 Expected Output (in data/order_archive.txt):
@@ -802,7 +805,7 @@ Example: `archiveprescription d/10-10-2021`
 Expected Output:
 
 ```
-Archived prescriptions from 10-10-2021
+Archived 2 prescriptions from 10-10-2021
 ```
 
 Expected Output (in data/prescription_archive.txt):
@@ -814,7 +817,7 @@ Expected Output (in data/prescription_archive.txt):
 
 ### Purging existing data : `purge`
 
-Deletes all data in MediVault.
+Should you want to clear all data in MediVault, you can use the `purge` command.
 
 Format: `purge`
 
@@ -832,7 +835,7 @@ All data has been cleared!
 
 ### Showing help page : `help`
 
-Displays the command syntax of all accepted commands by MediVault.
+Should you require assistance on how to use MediVault, you can use the `help` command.
 
 Format:`help`
 
@@ -844,13 +847,15 @@ Expected Output:
 Welcome to the help page.
 Your current mode is indicated in the square brackets at the bottom left of the console.
 It allows you to type add, list, update, delete without typing in the full command.
+Additionally, you can type archive in both prescription and order mode and receive in
+order mode.
 Type stock, prescription or order to change to respective modes.
 Note that parameters in {curly braces} are optional.
 Parameters in [square braces] indicate that at least one of the parameter(s) must be
 provided.
-Parameters enclosed in (round brackets) are conditional optional parameters. For example, 
-the parameters d/DESCRIPTION and m/MAX_QUANTITY in addstock and receiveorder will be
-optional only if the stock exists.
+Parameters enclosed in (round brackets) are conditional optional parameters.
+For example, the parameters d/DESCRIPTION and m/MAX_QUANTITY in addstock and
+receiveorder will be optional only if the stock exists.
 +=====================+====================================================+
 |       COMMAND       |                   COMMAND SYNTAX                   | 
 +=====================+====================================================+
@@ -862,8 +867,9 @@ optional only if the stock exists.
 |     updatestock     | updatestock i/ID [n/NAME p/PRICE q/QUANTITY        | 
 |                     | e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY]        | 
 +---------------------+----------------------------------------------------+
-|      liststock      | liststock {i/ID p/PRICE q/QUANTITY                 | 
-|                     | low/LESS_THAN_OR_EQUAL_QUANTITY e/EXPIRY_DATE      | 
+|      liststock      | liststock {i/ID n/NAME p/PRICE                     | 
+|                     | q/QUANTITYlow/LESS_THAN_OR_EQUAL_QUANTITY          | 
+|                     | e/EXPIRY_DATE                                      | 
 |                     | expiring/LESS_THAN_OR_EQUAL_EXPIRY_DATE            | 
 |                     | d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME      | 
 |                     | rsort/COLUMN_NAME}                                 | 
@@ -907,7 +913,7 @@ For more information, refer to User Guide: https://ay2122s1-cs2113t-t10-1.github
 
 ### Exiting MediVault : `exit`
 
-Exits MediVault.
+Should you want to quit the program, you can use the `exit` command.
 
 Format: `exit`
 
@@ -929,9 +935,12 @@ specific format with fields delimited by a pipe `|`.
 
 Data formats:
 
-* For `data/stock.txt`: `ID|NAME|PRICE|QUANTITY|EXPIRY_DATE|DESCRIPTION|MAX_QUANTITY|ISDELETED`
-* For `data/order.txt`: `ID|NAME|QUANTITY|DATE|STATUS`
-* For `data/prescription.txt`: `ID|NAME|QUANTITY|CUSTOMER_ID|DATE|STAFF|STOCK_ID`
+* For `data/stock.txt`:
+  * `ID|NAME|PRICE|QUANTITY|EXPIRY_DATE|DESCRIPTION|MAX_QUANTITY|ISDELETED`
+* For `data/order.txt`:
+  * `ID|NAME|QUANTITY|DATE|STATUS`
+* For `data/prescription.txt`:
+  * `ID|NAME|QUANTITY|CUSTOMER_ID|DATE|STAFF|STOCK_ID`
 
 ### Data Editing
 
@@ -939,17 +948,17 @@ Data formats:
 > * It is possible for you to directly edit the data files, but it is **NOT** recommended unless you know exactly what you are doing because you risk corrupting it.
 > * If MediVault detects corruption or invalid data, you will **NOT** be able to start MediVault.
 > * In order for MediVault to work, you have to fix the error in the data file.
-> * Invalid data will be highlighted on starting MediVault and hint you in the direction to fix it.
+> * Invalid data detected by MediVault will be highlighted on launch to hint you in the direction to fix it.
 > * In the worst case scenario where you are unable to fix it, you may have to delete the corresponding data file.
-> * It may result in unintended behaviour if data file is tampered with while the program is running.
-> * Editing the data directly poses a significant risk to corruption of data.
+> * It may result in **unintended behaviour** if data file is tampered with while the program is running.
+> * Editing the data directly poses a significant risk to corruption of data and may lead to **unintended behaviour**.
 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: You can transfer data to another computer by moving the 3 data files into the folder where MediVault.jar is.
-Ensure that the data files are in a folder named `data`. You should expect to see `stock.txt, order.txt, prescription.txt` in that folder.
+**A**: You can transfer data to another computer by moving the `data` folder containing the 3 data files to where `MediVault.jar` is.
+You should expect to see `stock.txt`, `order.txt`, `prescription.txt` in that folder.
 
 ## Command Summary
 
@@ -958,7 +967,7 @@ Command | Command Syntax
 addstock | `addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE (d/DESCRIPTION m/MAX_QUANTITY)`
 deletestock | `deletestock [i/ID expiring/DATE]`
 updatestock | `updatestock i/ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY]`
-liststock | `liststock {i/ID p/PRICE q/QUANTITY low/LESS_THAN_OR_EQUAL_QUANTITY e/EXPIRY_DATE expiring/LESS_THAN_OR_EQUAL_EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN_NAME}`
+liststock | `liststock {i/ID n/NAME p/PRICE q/QUANTITY low/LESS_THAN_OR_EQUAL_QUANTITY e/EXPIRY_DATE expiring/LESS_THAN_OR_EQUAL_EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN_NAME}`
 addprescription | `addprescription n/NAME q/QUANTITY c/CUSTOMER_ID s/STAFF_NAME`
 deleteprescription | `deleteprescription i/ID`
 updateprescription | `updateprescription i/ID [n/NAME q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME]`
