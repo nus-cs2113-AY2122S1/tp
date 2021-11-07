@@ -6,8 +6,12 @@ import seedu.duke.exceptions.LotsException;
 
 public class UiTest {
 
+    /**
+     * To testing List command with an extra input behind.
+     * Expects an exception.
+     */
     @Test
-    void execute_inputContainsExtraInputs_throwsLotsException() throws LotsException {
+    void execute_inputContainsExtraInputs_throwsLotsException() {
         try {
             Command command;
             command = Parser.getCommand("list a");
