@@ -350,8 +350,7 @@ and pass the contact index to the execution of the `edit` command accordingly.
     * Pros: Easy to implement as rm is a much simpler feature which only takes an index.
       Much easier exception handling also and thus less error-prone.
     * Cons: Less user intuitive and takes two steps when the user wants to edit a contact and also delete fields
-
-
+    
 
 ## <a name="scope"></a>Product scope
 

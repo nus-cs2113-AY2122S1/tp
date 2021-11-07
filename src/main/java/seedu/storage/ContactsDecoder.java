@@ -52,25 +52,43 @@ public class ContactsDecoder extends RegexParser {
         return updatedContactList;
     }
 
-    //@@author lezongmun
+    //@author lezongmun
+    /**
+     * Returns the personal contact after parsing inputs from the specified
+     * personal contact file in local storage.
+     *
+     * @param personalContactFile Specified file to be read
+     * @return Personal contact of user
+     * @throws FileErrorException If the program faces issues relating to local storage
+     */
     public Contact readPersonalContact(File personalContactFile)
             throws FileErrorException {
-        Contact personalContact = new Contact(null, null, null, null, null, null);
+        Contact nullContact = new Contact(null, null, null, null, null, null);
         try {
             Scanner fileScanner = new Scanner(personalContactFile);
             if (fileScanner.hasNext()) {
                 String contactText = fileScanner.nextLine();
-                personalContact = decodePersonalContact(contactText, personalContact);
+                Contact personalContact = decodePersonalContact(contactText);
+                return personalContact;
             }
         } catch (FileNotFoundException e) {
             throw new FileErrorException();
         }
-        return personalContact;
+        return nullContact;
     }
 
     //@author lezongmun
-    private Contact decodePersonalContact(String contactText, Contact contact) {
-        Contact personalContact = contact;
+    /**
+     * Returns the personal contact created from decoding a string read from
+     * the personal contact file. If there are errors in the file, and
+     * the data cannot be loaded, user's personal contact details will
+     * be collected to create a new personal contact
+     *
+     * @param contactText String read from the file
+     * @return Contact personal contact with details read from file
+     */
+    private Contact decodePersonalContact(String contactText) {
+        Contact personalContact = new Contact(null, null, null, null, null, null);
         try {
             String[] compiledDetails = decodeDetails(contactText);
             String contactName = compiledDetails[DetailType.NAME.getIndex()];
@@ -173,8 +191,11 @@ public class ContactsDecoder extends RegexParser {
             InvalidLinkedinUsernameException, InvalidEmailException {
         String[] destructuredInputs = contactText.split(SEPARATOR);
         String[] compiledDetails = new String[NUMBER_OF_FIELDS];
+        if (destructuredInputs[0].equalsIgnoreCase("null")) {
+            throw new InvalidNameException();
+        }
         for (int i = 0; i < NUMBER_OF_FIELDS; i++) {
-            if (destructuredInputs[i].equals("null")) {
+            if (destructuredInputs[i].equalsIgnoreCase("null")) {
                 compiledDetails[i] = null;
             } else {
                 checkRegex(FLAG_SEQUENCE[i], destructuredInputs[i]);

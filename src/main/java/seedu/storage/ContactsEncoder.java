@@ -13,7 +13,14 @@ import static seedu.storage.Storage.SEPARATOR;
  * This class facilitates the saving of the user's contact list to their local storage file.
  */
 public class ContactsEncoder {
+
     //@@author lezongmun
+    /**
+     * This method saves the personal contact to a specified file path.
+     * @param contactFilePath Destination for person contact to be saved
+     * @param personalContact Personal contact to be saved
+     * @throws FileErrorException If there is an error writing to the file destination
+     */
     public void savePersonalContact(String contactFilePath, Contact personalContact) throws FileErrorException {
         try {
             FileWriter fileWriter = new FileWriter(contactFilePath);
@@ -30,7 +37,7 @@ public class ContactsEncoder {
      * Saves a specified ContactList to a specified file path.
      * @param contactFilePath Destination for the contact list to be saved
      * @param contactList Contact list to be saved
-     * @throws FileErrorException If there an error writing to the file destination
+     * @throws FileErrorException If there is an error writing to the file destination
      */
     public void saveContacts(String contactFilePath, ContactList contactList) throws FileErrorException {
         try {
