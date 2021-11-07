@@ -141,20 +141,24 @@ according to how it is written in *time.txt* and *cost.txt*.
 `numberOfCountries - 1 (4)`, to ensure that duplicate edges are not added.
 
 >![](documentationPics/info.png) Trivial points are omitted from the sequence diagram to keep it more concise.
-> For example, getting the reference of `sourceCountry:Country` and `destinationCountry:Country` 
-> from the `countryArray`. As well as the parsing of each newline read from `scanner` to ensure that the data is read
+> For example, 
+> 1. Getting the reference of `sourceCountry:Country` and `destinationCountry:Country` 
+> from the `countryArray`. 
+> 2. The parsing of each newline read from `scanner` to ensure that the data is read
 > properly. To read more about how data in *time.txt* and *cost.txt* is saved and thus parsed/read, 
-> [click here](#61-data-file).
+> [click here](#61-data-file). 
+> 3. The passing of the filePath that is also not shown in the sequence diagram is purely for 
+> exception handling and does not affect functionality.
 
 >![](documentationPics/tip.png) As *time.txt* and *cost.txt* are both read in a specific way, 
 > there are certain things to take note when modifying it.
->1. Country codes must only be 3 letters.
->2. Distances must be numbers as it will be parsed into a double.
->3. **numberOfCountries** should be changed to the number of countries on the first line.
->4. Total number of lines in both text files must be **numberOfCountries**.
+> 1. Country codes must only be 3 letters.
+> 2. Distances must be numbers as it will be parsed into a double.
+> 3. **numberOfCountries** should be changed to the number of countries on the first line.
+> 4. Total number of lines in both text files must be **numberOfCountries**.
 > 
 > ![](documentationPics/warning.png) Invalid information that cannot be read by DataLoader will result in the 
-> disregard of the entire text file.
+> disregard of the **entire** text file and the **exiting** of Traveller.
 > Please follow the format as stated above for [manual testing](#6-instructions-for-manual-testing).
 
 ### 1.2. Main Traveller

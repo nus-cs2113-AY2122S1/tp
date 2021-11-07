@@ -208,34 +208,6 @@ public class Parser {
      * @return Command An <code>EditCommand</code> object.
      * @throws TravellerException Will be thrown if the user input cannot be understood.
      */
-    /*private static Command parseEditCommand(String userInput) throws TravellerException {
-        logger.log(Level.INFO, "Edit command input");
-        Command command;
-        try {
-            int fromIdx = getFromFlagIndex(userInput);
-            int toIdx = getToFlagIndex(userInput);
-            String tripName;
-            String newTripName;
-            if (userInput.contains("/name")) {
-                int nameIdx = getNameFlagIndex(userInput);
-                tripName = parseFieldValue(userInput, 0, nameIdx);
-                newTripName = parseFieldValue(userInput, nameIdx + NAME_LENGTH, fromIdx);
-            } else {
-                tripName = parseFieldValue(userInput, 0, fromIdx);
-                newTripName = tripName;
-            }
-            String startCountryCode = parseFieldValue(userInput,
-                fromIdx + FROM_LENGTH, toIdx).toUpperCase();
-            String endCountryCode = parseFieldValue(userInput,
-                toIdx + TO_LENGTH, userInput.length()).toUpperCase();
-            parseValidTripName(tripName);
-            command = new EditCommand(tripName, newTripName, startCountryCode, endCountryCode);
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new InvalidEditFormatException();
-        }
-        return command;
-    }*/
-
     private static Command parseEditCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Edit command input");
         Command command;
@@ -261,6 +233,12 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Parses userInput to give <code>TripName</code>.
+     * @param userInput Raw user input, with the first command option (edit) removed.
+     * @return String Name of the Trip.
+     * @throws TravellerException Will be thrown if the user input cannot be understood.
+     */
     private static String parseEditTripName(String userInput) throws TravellerException {
         String tripName;
         if (userInput.contains("/name")) {
@@ -278,6 +256,12 @@ public class Parser {
         return tripName;
     }
 
+    /**
+     * Parses userInput to give <code>NewTripName</code>.
+     * @param userInput Raw user input, with the first command option (edit) removed.
+     * @return String New name of the Trip to be changed to in edit command.
+     * @throws TravellerException Will be thrown if the user input cannot be understood.
+     */
     private static String parseEditNewTripName(String userInput) throws TravellerException {
         int nameIdx = getNameFlagIndex(userInput);
         String newTripName;
@@ -295,6 +279,12 @@ public class Parser {
         return newTripName;
     }
 
+    /**
+     * Parses userInput to give <code>StartCountryCode</code>.
+     * @param userInput Raw user input, with the first command option (edit) removed.
+     * @return String Start Country Code to be changed in edit command.
+     * @throws TravellerException Will be thrown if the user input cannot be understood.
+     */
     private static String parseEditStartCountryCode(String userInput) throws TravellerException {
         int fromIdx = getFromFlagIndex(userInput);
         String startCountryCode;
@@ -310,6 +300,12 @@ public class Parser {
         return startCountryCode;
     }
 
+    /**
+     * Parses userInput to give <code>EndCountryCode</code>.
+     * @param userInput Raw user input, with the first command option (edit) removed.
+     * @return String End Country Code to be changed in edit command.
+     * @throws TravellerException Will be thrown if the user input cannot be understood.
+     */
     private static String parseEditEndCountryCode(String userInput) throws TravellerException {
         int toIdx = getToFlagIndex(userInput);
         String endCountryCode = parseFieldValue(userInput,

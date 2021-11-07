@@ -276,10 +276,13 @@ Edits any main aspect about an existing trip.
 
 
 #### Usage Example:
-   * `edit FamilyTrip2021 /from SKR /to JPN` edits an existing trip called `FamilyTrip2021` to be from South Korea to
-Japan.
-   * `edit FamilyTrip2021 /name SoloTrip2021` edits an existing trip called `FamilyTrip2021` to now be called 
-`SoloTrip2021`
+```
+_________________________________________________________________________________
+$ edit FamilyTrip2021 /name SoloTrip2021 /from SKR /to JPN
+_________________________________________________________________________________
+	You have just edited a trip called FamilyTrip2021.
+_________________________________________________________________________________
+```
 
 > ![](documentationPics/tip.png) Edit only allows you to change the name, to and from of a trip.
 > To change your trip itinerary use [edit-item](#210-edit-an-item-edit-item) instead!
@@ -370,6 +373,12 @@ Exits the program.
 
 ## 3. FAQ
 
+**Q**: Why does Traveller keep exiting when I run it?
+
+**A**: Traveller only exits when its data files *time.txt* and *cost.txt* are tampered with. Please check
+if the files have been changed and re-download them from our 
+[release.](https://github.com/AY2122S1-CS2113T-W13-1/tp/releases)
+
 **Q**: How do I transfer my data to another computer? 
 
 **A**: Transfer the entire folder containing the items listed below to the other computer. 
@@ -433,7 +442,7 @@ Action | Format
 **delete** | `delete TRIP_NAME`
 **delete-day** | `delete-day TRIP_NAME /day DAY_INDEX`
 **delete-item** | `delete-item TRIP_NAME /day DAY_INDEX /item ITEM_INDEX`
-**edit** | `edit TRIP_NAME /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
+**edit** | `edit TRIP_NAME /name NEW_TRIP_NAME /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
 **edit-item** | `edit-item TRIP_NAME /day DAY_NUMBER /index ITEM_INDEX /time NEW_ITEM_TIME /name NEW_ITEM_NAME`
 **search-item** |  `search-item TRIP_NAME /day DAY_INDEX /key KEYWORD`
 **shortest-time** | `shortest-time /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
