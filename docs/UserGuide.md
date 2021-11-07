@@ -44,9 +44,9 @@ SEPlanner can streamline your planning process when compared to other Graphical 
 
 ## Program overview
 
-This SEPlanner allows the user to search for pre-approved module mappings through our platform. To do so, users can follow the following steps:
-1. Add partner universities the user is interested in.
-2. Add potential NUS modules that the user wants to add.
+This SEPlanner allows you to search for pre-approved module mappings through our platform. To do so, you can follow the following steps:
+1. Add partner universities that you are interested in.
+2. Add potential NUS modules that you want to add.
 3. Search for potential mapping for a particular selected university.
 4. Select a mapping and add the mapping.
 
@@ -102,7 +102,7 @@ Don't worry, the features of SEPlanner still work regardless of window size, but
 </div>
 
 ## How to use this guide
-This user guide provides useful tools to help the reader acclimatise to SEPlanner. 
+This user guide provides useful tools to help you acclimatise to SEPlanner. 
 Here is a list of the different types of text formatting and what they mean. 
 
 <div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
@@ -118,7 +118,7 @@ Notes are important pieces of information.
 </div>
 
 ```
-Code blocks contain either user inputs or program outputs.  
+Code blocks contain either your inputs or program outputs.  
 ```
 
 
@@ -126,7 +126,7 @@ Code blocks contain either user inputs or program outputs.
 
 ### Viewing all available universities: 
 
-Displays all modules from the master list of universities that the user can choose from.  
+Displays all modules from the master list of universities that you can choose from.  
 
 #### Format: `list /muni`  
 
@@ -150,7 +150,7 @@ Here are the universities and module mappings in the list:
 
 ### Viewing all available modules: 
 
-Displays all modules from the master list of modules that the user can choose from.
+Displays all modules from the master list of modules that you can choose from.
 
 <div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
 The master list of modules also displays each modules module credits on the right. 
@@ -174,7 +174,7 @@ Here are the modules in the list:
 
 ### Adding a partner university
 
-Add a partner university the user is interested into the user selected university list.
+Add a partner university that you are interested into your selected university list.
 
 #### Format: `add /uni <UNIVERSITY_INDEX>` `add /uni <UNIVERSITY_NAME>`
 
@@ -200,7 +200,7 @@ New university added:
 
 ### Adding a NUS module
 
-Add a NUS module that the user wants to complete during SEP into the user selected module list.  
+Add a NUS module that you want to complete during SEP into your selected module list.  
 
 #### Format: `add /mod <MODULE_INDEX>` `add /mod <MODULE_CODE>` 
 
@@ -226,7 +226,7 @@ New module added:
 
 ### Viewing all selected universities:
 
-Displays all universities added, as well as all module mappings added to the university by the user.
+Displays all universities added, as well as all module mappings added to the university by you.
 
 #### Format: `list /suni`
 
@@ -242,7 +242,7 @@ Here are the universities and module mappings in your list:
 
 ### Viewing all selected modules
 
-Displays all modules from the master list of modules that the user can choose from.
+Displays all modules from the master list of modules that you can choose from.
 
 #### Format: `list /smod`
 
@@ -334,7 +334,7 @@ New module mapping added:
 
 ### Finding a specific university
 
-Look for universities that matches the user entered keyword.
+Look for universities that matches your entered keyword.
 The output also consists of the index of the university, which is needed for subsequent commands.  
 
 
