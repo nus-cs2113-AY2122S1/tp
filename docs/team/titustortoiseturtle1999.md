@@ -1,5 +1,10 @@
 # titustortoiseturtle1999 - Project Portfolio Page
 
+---
+layout: page
+title: Titus Ng's Project Portfolio Page
+---
+
 ### Project: SEPlanner
 
 SEPlanner is a lightweight desktop application for Computer Engineering undergraduates to plan for the Student
