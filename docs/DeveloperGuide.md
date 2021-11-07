@@ -500,10 +500,11 @@ The Storage component consists of:
 3. FlightStorage.java: Reading and saving files which record all flights.
 4. TourStorage.java: Reading and saving files which record all tours.
 
-To add on Storage component is designed to access only hte following folder:
+To add on Storage component is designed to access only the following folder:
 1. `data/`
 
 <br>
+
 ## Product scope
 
 <hr>
