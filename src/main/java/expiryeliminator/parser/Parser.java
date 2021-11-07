@@ -216,7 +216,7 @@ public class Parser {
         if (ingredients.size() != quantities.size()) {
             return new IncorrectCommand("Should have same number of ingredient names and quantities");
         }
-        assert !recipe.isBlank();
+        assert !recipe.isBlank() : "Recipe must have a name";
         return new AddRecipeCommand(recipe, ingredients, quantities);
     }
 

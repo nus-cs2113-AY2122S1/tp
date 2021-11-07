@@ -31,7 +31,8 @@ class AddRecipeCommandTest {
                 TestUtil.generateQuantitiesForRecipe(1,20));
         String errorMessage = String.format(AddRecipeCommand.MESSAGE_DUPLICATE_INGREDIENT, TestUtil.EXAMPLE_RECIPE_NAME,
                 TestUtil.EXAMPLE_INGREDIENT_NAME);
-        assertEquals(command.execute(ingredientRepository, recipes), errorMessage);
+        assertEquals(errorMessage, command.execute(ingredientRepository, recipes));
+        assertEquals(0, ingredientRepository.size());
     }
 
     @Test
@@ -42,7 +43,7 @@ class AddRecipeCommandTest {
                 TestUtil.generateIngredientNamesForRecipe("Chicken","Salt"),
                 TestUtil.generateQuantitiesForRecipe(1,0));
         String errorMessage = AddRecipeCommand.MESSAGE_ILLEGAL_VALUE_ERROR;
-        assertEquals(command.execute(ingredientRepository, recipes), errorMessage);
+        assertEquals(errorMessage, command.execute(ingredientRepository, recipes));
     }
 
     @Test

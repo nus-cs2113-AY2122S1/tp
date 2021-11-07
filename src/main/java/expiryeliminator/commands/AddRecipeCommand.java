@@ -57,6 +57,11 @@ public class AddRecipeCommand extends Command {
         final Recipe recipe = new Recipe(name);
         String message = "";
 
+        String duplicateIngredient = recipe.sameIngredientNames(ingredientNames);
+        if (!duplicateIngredient.isBlank()) {
+            return String.format(MESSAGE_DUPLICATE_INGREDIENT, name, duplicateIngredient);
+        }
+
         for (int i = 0; i < ingredientNames.size(); i++) {
             try {
                 message += recipe.addIngredient(ingredientNames.get(i), quantities.get(i), ingredients);

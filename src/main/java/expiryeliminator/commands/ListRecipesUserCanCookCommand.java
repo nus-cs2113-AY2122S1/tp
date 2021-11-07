@@ -1,5 +1,6 @@
 package expiryeliminator.commands;
 
+import expiryeliminator.common.LogsCenter;
 import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.IngredientQuantity;
@@ -8,6 +9,8 @@ import expiryeliminator.data.Recipe;
 
 import java.time.LocalDate;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Lists recipes that can be cooked with the current amount of ingredients.
@@ -27,17 +30,7 @@ public class ListRecipesUserCanCookCommand extends Command {
             + "you currently have.\n"
             + "Example: " + COMMAND_WORD;
 
-    private boolean allIngredientsAreSufficient(TreeMap<String, IngredientQuantity> ingredientsFromRecipe,
-                                                IngredientRepository ingredients) {
-        for (IngredientQuantity i : ingredientsFromRecipe.values()) {
-            IngredientStorage ingredient = ingredients.findWithNullReturn(i.getName());
-            assert ingredient != null : "Ingredient should be in the repository after the recipe is added";
-            if (ingredient.getQuantity() < i.getQuantity()) {
-                return false;
-            }
-        }
-        return true;
-    }
+    private static final Logger logger = LogsCenter.getLogger(ListRecipesUserCanCookCommand.class);
 
     private String checkForExpiredIngredients(TreeMap<String, IngredientQuantity> ingredientsFromRecipe,
                                                 IngredientRepository ingredients) {
@@ -46,6 +39,7 @@ public class ListRecipesUserCanCookCommand extends Command {
             IngredientStorage ingredient = ingredients.findWithNullReturn(i.getName());
             assert ingredient != null : "Ingredient should be in the repository after the recipe is added";
             LocalDate expiryDate = ingredient.getEarliestExpiryDate();
+            logger.log(Level.INFO,"Checking if some of " + ingredient.getIngredient() + " are expired.");
             if (expiryDate.isBefore(LocalDate.now())) {
                 expiredIngredients += ingredient.getIngredient() + "\n";
             }
@@ -58,8 +52,10 @@ public class ListRecipesUserCanCookCommand extends Command {
         String recipeList = "";
         String expiredIngredients = "";
         for (Recipe r : recipes.getRecipes().values()) {
-            if (allIngredientsAreSufficient(r.getIngredientQuantities(),ingredients)) {
+            logger.log(Level.INFO,"Checking if " + r.getName() + " can be cooked");
+            if (r.allIngredientsAreSufficient(ingredients)) {
                 recipeList += r + "\n";
+                logger.log(Level.INFO,"Checking if there are any expired ingredients for recipe " + r.getName());
                 expiredIngredients += checkForExpiredIngredients(r.getIngredientQuantities(),ingredients);
             }
         }
