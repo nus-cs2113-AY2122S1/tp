@@ -183,8 +183,8 @@ changes.
 Command: `update [GROUP_INDEX.INGREDIENT_INDEX] a/[AMOUNT]`
 
 The parameters used in the command are:
-* `GROUP_INDEX`: the index of the group the ingredient to update is in
-* `INGREDIENT_INDEX` : the index of the ingredient to update within its group
+* `GROUP_INDEX`: the index of the group the ingredient to be updated is in
+* `INGREDIENT_INDEX` : the index within the group of the ingredient to be updated
 * `AMOUNT`: the ingredient amount to be updated, in kilograms
 
 Example: `update 1.1 a/100`
