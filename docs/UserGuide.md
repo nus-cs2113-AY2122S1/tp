@@ -45,7 +45,7 @@ SEPlanner can streamline your planning process when compared to other Graphical 
 ## Program Overview
 
 This SEPlanner allows you to search for pre-approved module mappings through our platform. To do so, you can follow the following steps:
-1. Add partner universities you are interested in.
+1. Add partner universities that you are interested in.
 2. Add potential NUS modules that you want to add.
 3. Search for potential mapping for a particular selected university.
 4. Select a mapping and add the mapping.
@@ -101,8 +101,9 @@ If the visual that appears does not look like this, you might want maximize your
 Don't worry, the features of SEPlanner still work regardless of window size, but doing so allows you to enjoy the beautiful ASCII art!
 </div>
 
-## How To Use This Guide
-This user guide provides useful tools to help the reader acclimatise to SEPlanner. 
+## How to use this guide
+This user guide provides useful tools to help you acclimatise to SEPlanner. 
+
 Here is a list of the different types of text formatting and what they mean. 
 
 <div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
@@ -174,7 +175,7 @@ Here are the modules in the list:
 
 ### Adding a partner university
 
-Add a partner university you are interested into the *Selected University List*.
+Add a partner university that you are interested into your selected university list.
 
 #### Format: `add /uni <UNIVERSITY_INDEX>` `add /uni <UNIVERSITY_NAME>`
 
@@ -200,7 +201,7 @@ New university added:
 
 ### Adding a NUS module
 
-Add a NUS module that you want to complete during SEP into the *Selected Module List*.  
+Add a NUS module that you want to complete during SEP into your *Selected Module List*.
 
 #### Format: `add /mod <MODULE_INDEX>` `add /mod <MODULE_CODE>` 
 
@@ -226,7 +227,7 @@ New module added:
 
 ### Viewing all selected universities:
 
-Displays all universities added into the *Selected University List*, as well as all module mappings added to the university by you.
+Displays all universities added into your *Selected University List*, as well as all module mappings added to the university by you.
 
 #### Format: `list /suni`
 
@@ -291,8 +292,8 @@ Displays all available module mappings for all the universities in the *Selected
 
 #### Format: `searchmap all`
 
-* Example 1
-  Input: `searchmap all`
+* Example 1  
+  Input: `searchmap all`  
   Expected Output: 
 ```
 Potential mappings for Aarhus School of Business [1]  :
@@ -425,7 +426,7 @@ Look for modules with module codes that matches your entered keyword.
 
 Remove a partner university from the *Selected University List*.
 
-#### Format: `remove /uni <UNIVERSITY_INDEX>` `remove /uni <UNIVERSITY_NAME` 
+#### Format: `remove /uni <UNIVERSITY_INDEX>` `remove /uni <UNIVERSITY_NAME>` 
 
 * Example 1: using index   
 Input: `remove /uni 4`   
