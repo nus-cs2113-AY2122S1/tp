@@ -12,6 +12,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class UpcomingCommand extends Command {
+
+    public static final String NO_UPCOMING_MESSAGE = "[!] There is no upcoming task in your tasklist.";
+
     public UpcomingCommand(TaskManager taskManager, Map<String, String> commandOptions) {
         super(taskManager, commandOptions);
     }
@@ -35,7 +38,6 @@ public class UpcomingCommand extends Command {
         Period distance = Period.ofWeeks(1);
         LocalDateTime end = LocalDateTime.now().plus(distance);
         String message = taskManager.getAllTasksView().stream().filter(task -> {
-            RecurrenceEnum re = task.getRecurrence();
             LocalDateTime startTime = task.getHappenTime();
             LocalDateTime next;
             if (startTime == null) {
@@ -50,6 +52,9 @@ public class UpcomingCommand extends Command {
             return end.isAfter(next);
         }).sorted(new SortByTaskHappenTime()).map(Task::getTaskEntryDescription)
                 .collect(Collectors.joining(System.lineSeparator()));
+        if (message.isEmpty()) {
+            message = NO_UPCOMING_MESSAGE;
+        }
         return new CommandResult(message, false);
     }
 }
