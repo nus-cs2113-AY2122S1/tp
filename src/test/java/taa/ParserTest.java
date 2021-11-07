@@ -59,7 +59,7 @@ class ParserTest {
         String inputString = "c/ n/Software Engineering and Object-oriented Programming c/Test";
         String[] keys = {"c", "n"};
         assertThrows(DuplicatedArgumentException.class,
-                () -> Parser.getArgumentsFromString(inputString, keys, true));
+            () -> Parser.getArgumentsFromString(inputString, keys, true));
     }
 
     @Test
