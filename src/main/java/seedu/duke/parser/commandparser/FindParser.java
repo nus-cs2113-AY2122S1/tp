@@ -1,11 +1,10 @@
 package seedu.duke.parser.commandparser;
 
-import seedu.duke.Duke;
+
 import seedu.duke.commands.Command;
 import seedu.duke.commands.FindCommand;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
-import seedu.duke.items.Event;
 import seedu.duke.parser.ItemType;
 import seedu.duke.parser.Parser;
 
@@ -14,15 +13,14 @@ import static seedu.duke.parser.ItemType.EVENT;
 
 public abstract class FindParser extends Parser {
 
-    private static int numberOfEventsFound;
-    private static String result;
+    private static String keywords;
 
     public static Command getFindCommand(String[] command, String commandDetails) {
         try {
             ItemType itemType = getItemType(commandDetails);
             if (itemType == EVENT) {
                 parseFindKeyword(command);
-                return new FindCommand(result);
+                return new FindCommand(keywords);
             }
             throw new InvalidItemTypeException();
         } catch (InvalidItemTypeException e) {
@@ -34,11 +32,7 @@ public abstract class FindParser extends Parser {
     }
 
     private static void parseFindKeyword(String[] command) throws DukeException {
-        String keyword = extractKeywords(command);
-        result = filterEvents(keyword);
-        if (noEventsFound()) {
-            throw new DukeException("No matching events found!");
-        }
+        keywords = extractKeywords(command);
     }
 
     private static String extractKeywords(String[] command) throws DukeException {
@@ -53,21 +47,4 @@ public abstract class FindParser extends Parser {
         return keyword.toString().trim();
     }
 
-    private static String filterEvents(String keyword) {
-        StringBuilder result = new StringBuilder();
-        numberOfEventsFound = 0;
-        for (int i = 0; i < Duke.eventCatalog.size(); i++) {
-            Event event = Duke.eventCatalog.get(i);
-            if (event.getTitle().toLowerCase().contains(keyword.toLowerCase())) {
-                result.append(i + 1).append(". ");
-                result.append(event.getTitle()).append("\n");
-                numberOfEventsFound++;
-            }
-        }
-        return result.toString();
-    }
-
-    private static boolean noEventsFound() {
-        return numberOfEventsFound == 0;
-    }
 }
