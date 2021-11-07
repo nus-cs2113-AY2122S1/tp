@@ -1,16 +1,54 @@
 # User Guide
 
-## Introduction
+Table of Contents
+=================
+* [1. Introduction](#1-introduction)
+* [2. Quick Start Guide](#2-quick-start-guide)
+  * [2.1 Installation](#21-installation)
+  * [2.2 Using MedBot](#22-using-medbot)
+* [3. Features](#3-features)
+* [4. Commands](#4-commands)
+  * [4.1 General Notes](#41-general-notes)
+  * [4.2 General Commands](#42-general-commands)
+    * [4.2.1 Switching between views: switch](#421-switching-between-views-switch)
+    * [4.2.2 Exit program: exit](#422-exit-program-exit)
+    * [4.2.3 Get the current view: get view](#423-get-the-current-view-get-view)
+    * [4.2.4 Accessing user guide: help](#424-accessing-user-guide-help)
+  * [4.3 Patient/Medical Staff Information Commands](#43-patientmedical-staff-information-commands)
+    * [4.3.1 Adding a patient: add](#431-adding-a-patient-add)
+    * [4.3.2 Delete a patient: delete](#432-delete-a-patient-delete)
+    * [4.3.3 View a patient’s information: view](#433-view-a-patients-information-view)
+    * [4.3.4 List information of all current patients: list](#434-list-information-of-all-current-patients-list)
+    * [4.3.5 Edit information of a patient: edit](#435-edit-information-of-a-patient-edit)
+    * [4.3.6 Find patients based on attributes: find](#436-find-patients-based-on-attributes-find)
+    * [4.3.7 Hide a patient: hide](#437-hide-a-patient-hide)
+    * [4.3.8 Show a patient: show](#438-show-a-patient-show)
+  * [4.4 Scheduler Commands](#44-scheduler-commands)
+    * [4.4.1 Adding an appointment: add](#441-adding-an-appointment-add)
+    * [4.4.2 Deleting an appointment: delete](#442-deleting-an-appointment-delete)
+    * [4.4.3 Editing an appointment's information: edit](#443-editing-an-appointments-information-edit)
+    * [4.4.4 Viewing an appointment's information: view](#444-viewing-an-appointments-information-view)
+    * [4.4.5 Listing information of all appointments: list](#445-listing-information-of-all-appointments-list)
+    * [4.4.6 Find appointment(s): find](#446-find-appointments-find)
+  * [5. FAQ](#5-faq)
+  * [6. Command Summary](#6-command-summary)
+    * [6.1 View Independent Commands](#61-view-independent-commands)
+    * [6.2 Patient/Medical Staff Information View](#62-patientmedical-staff-information-view)
+    * [6.3 Scheduler View](#63-scheduler-view)
+
+
+
+## 1. Introduction
 
 MedBot is a Command Line Interface (CLI) application for head nurses to manage patients’ personal and medical
 information. By utilising text-based commands instead of traditional Graphical User Interface (GUI) based navigation,
 MedBot can allow head nurses to get their management tasks done quicker and more efficiently.
 
-## Quick Start Guide
+## 2. Quick Start Guide
 
-### Installation
+### 2.1 Installation
 
-1. Ensure that you have Java 11. 
+1. Ensure that you are currently using `Java 11`. 
 2. Download the latest version of `tp.jar` from [here](https://github.com/AY2122S1-CS2113-T13-1/tp/releases).
 3. Move the file to the folder that you want to use as the MedBot's root folder.
 4. Execute the `java -jar tp.jar` command in the terminal in the same folder as the `tp.jar` file to launch
@@ -20,12 +58,12 @@ Hello, I'm MedBot!
 How can I help you today?
 ```
 
-### Using MedBot
+### 2.2 Using MedBot
 
 1. Type in commands into the terminal and press **Enter** to execute it.
-2. Refer to the [Commands](#commands) below for details on each command.
+2. Refer to the [Commands](#4-commands) below for details on each command.
 
-## Features
+## 3. Features
 
 These are the main features of MedBot:
 
@@ -35,9 +73,9 @@ These are the main features of MedBot:
 Each feature is contained inside a different view/tab in MedBot, which can be switched between using the `switch`
 command, explained further down below.
 
-## Commands
+## 4. Commands
 
-### General Notes
+### 4.1 General Notes
 
 These notes apply to all commands that are supported by MedBot.
 * Words in upper case are the required parameters.
@@ -45,11 +83,11 @@ These notes apply to all commands that are supported by MedBot.
 * Words in square brackets are optional parameters.
     * e.g. in `help [COMMAND]`, the `COMMAND` is optional for this command.
 
-### General Commands
+### 4.2 General Commands
 
 These commands will work the same for any view that you are currently in.
 
-### Switching between views: `switch`
+#### 4.2.1 Switching between views: `switch`
 
 Switches between the different views of MedBot. If the switch command is called without any parameters, the view that is
 switched to will depend on the current view in the order shown below.
@@ -89,7 +127,7 @@ Using either specifier will switch to the corresponding view.
 
 I.e., `switch m` and `switch 2` will both switch to the Medical Staff Info view
 
-### Exit program: `exit`
+#### 4.2.2 Exit program: `exit`
 
 Exits the program.
 
@@ -102,7 +140,7 @@ Thank you for using MedBot!
 See you again!
 ```
 
-### Get the current view: `get view`
+#### 4.2.3 Get the current view: `get view`
 
 Gets the current view type of the program.
 
@@ -114,7 +152,7 @@ Expected Output (when the program is in Patient's View):
 You are currently in the Patient's View.
 ```
 
-### Accessing user guide: `help`
+#### 4.2.4 Accessing user guide: `help`
 
 Provides an internal user guide that is accessible via the command line.
 
@@ -150,14 +188,14 @@ help [COMMAND]
 For expected output examples, please refer to the User Guide.
 ```
 
-### Patient/Medical Staff Information Commands
+### 4.3 Patient/Medical Staff Information Commands
 
 Functionally, the commands for the patient information view and medical staff information view are the same. Here, we'll
 be using
 `PATIENT_INFO_VIEW`-specific examples, but these commands would apply exactly the same for the `STAFF_INFO_VIEW` as
 well.
 
-### Adding a patient: `add`
+#### 4.3.1 Adding a patient: `add`
 
 Adds a patient to the patient list.
 
@@ -174,7 +212,7 @@ Added patient with patient ID: PATIENT_ID
 Examples:
 `add i/S7812345X n/John Doe p/87654321 e/john.doe@gmail.com a/John Street, block 1234, #01-01`
 
-#### Notes for adding a patient:
+##### Notes for adding a patient:
 
 - `NAME` and `ADDRESS` will be auto-capitalized for every word from user input.
 - `EMAIL` must be in a valid email format
@@ -185,7 +223,7 @@ Examples:
 - No fields are made compulsory. The purpose is to allow adding an urgent (e.g. car accident) patient
   into MedBot in case all information is not yet available, to allow scheduling an urgent appointment.
 
-### Delete a patient: `delete`
+#### 4.3.2 Delete a patient: `delete`
 
 Deletes a patient from the list.
 
@@ -197,18 +235,19 @@ Expected Output:
 Patient with id PATIENT_ID deleted from system.
 ```
 
-Examples:
+Example:
 `delete 123` deletes the patient with PATIENT_ID 123 in the list.
 
-#### Notes:
+##### Notes:
 
 * The patient being deleted does not affect the data of the rest of the patients, i.e. the ID will 
 remain the same. 
 <br>Reasons :
   * ID uniquely identifies a patient and should not be changed.
   * ID does not indicate the row number in the patient list.
+* Deleting a patient also deletes all appointments associated with the patient.
 
-### View a patient’s information: `view`
+#### 4.3.3 View a patient’s information: `view`
 
 View a patient’s personal information.
 
@@ -227,7 +266,7 @@ Email: EMAIL
 Address: ADDRESS
 ```
 
-### List information of all current patients: `list`
+#### 4.3.4 List information of all current patients: `list`
 
 List all patients in the patient list.
 
@@ -251,7 +290,7 @@ For full details of each patient, please use the command "view PATIENT_ID"
  ----------------------------------------------------------------------------------------------------- 
 ```
 
-#### Notes:
+##### Notes:
 
 * `Name`, `Email`, `Address` that are longer than 20 characters will be truncated to the first 17 characters with a 
 `...` appended.
@@ -259,7 +298,7 @@ For full details of each patient, please use the command "view PATIENT_ID"
   * To maintain the table layout and prevent overflow of a cell.
 * To get the full information of a particular patient without the truncated details, use `VIEW PATIENT_ID`.
 
-### Edit information of a patient: `edit`
+#### 4.3.5 Edit information of a patient: `edit`
 
 Edit the personal information of a patient in the list.
 
@@ -278,11 +317,11 @@ Email: EMAIL
 Address: ADDRESS
 ```
 
-#### Notes: 
+##### Notes: 
 
 Refer to [notes for adding a patient](#notes-for-adding-a-patient)
 
-### Find patients based on attributes: `find`
+#### 4.3.6 Find patients based on attributes: `find`
 
 Find all patients that contain the given attributes.
 
@@ -303,7 +342,7 @@ For full details of each patient, please use the command "view PATIENT_ID"
  ----------------------------------------------------------------------------------------------------- 
 ```
 
-#### Notes:
+##### Notes:
 
 * The attributes given do not have to be in full.
 * At least one attribute must be present.
@@ -311,7 +350,7 @@ For full details of each patient, please use the command "view PATIENT_ID"
 * An empty value for a parameter will return rows with an empty value for the particular parameter
     * e.g. `find n/ e/` will show all patients with empty Name and Email.
 
-### Hide a patient: `hide`
+#### 4.3.7 Hide a patient: `hide`
 
 Hides a patient in the list. Hidden patients are not shown with `list` command. To show all hidden patients,
 use `list -h`.
@@ -324,7 +363,7 @@ Expected output:
 
 `The patient with ID: 1 is now hidden.`
 
-### Show a patient: `show`
+#### 4.3.8 Show a patient: `show`
 
 Show a patient in the list. Shown (not-hidden) patients are shown on `list`
 
@@ -336,9 +375,9 @@ Expected output:
 
 `The patient with ID: 1 is now not hidden.`
 
-### Scheduler Commands
+### 4.4 Scheduler Commands
 
-### Adding an appointment: `add`
+#### 4.4.1 Adding an appointment: `add`
 
 Adds an appointment to the list. MedBot will check if the appointment clashes with others and display an error message
 if it does.
@@ -355,13 +394,13 @@ Patient ID: PATIENT_ID
 Staff ID: STAFF_ID 
 Date/Time: DATE_TIME
 ```
-#### Notes:
+##### Notes:
 - Appointments are managed at an hourly basis. 
   - e.g. any appointments set to any time between 0800HRS and 0859HRS will be treated as an appointment from 0800HRS to 
   0859HRS. 
   - No subsequent appointment can then be scheduled for both the patient and the medical staff during that time frame.
 
-### Deleting an appointment: `delete`
+#### 4.4.2 Deleting an appointment: `delete`
 
 Delete an appointment from the list.
 
@@ -373,7 +412,7 @@ Expected output:
 deleted appointment with Id: APPOINTMENT_ID
 ```
 
-#### Notes:
+##### Notes:
 
 * Deleting an appointment will not affect the appointment IDs of other appointments.
   <br>Reasons :
@@ -381,7 +420,7 @@ deleted appointment with Id: APPOINTMENT_ID
     * ID does not indicate the row number in the appointment list.
 * However, deleting a patient/medical staff will also delete all appointments associated with them.
 
-### Editing an appointment's information: `edit`
+#### 4.4.3 Editing an appointment's information: `edit`
 
 Edit an appointment's information. MedBot will check if the edited appointment clashes with others and display an error
 message if it does.
@@ -399,7 +438,7 @@ Patient ID: PATIENT_ID
 Staff ID: STAFF_ID
 ```
 
-### Viewing an appointment's information: `view`
+#### 4.4.4 Viewing an appointment's information: `view`
 
 View the information of an appointment.
 
@@ -414,7 +453,7 @@ Staff ID: STAFF_ID
 Date/Time: DATE_TIME
 ```
 
-### Listing information of all appointments: `list`
+#### 4.4.5 Listing information of all appointments: `list`
 
 List the information of all appointments, including those of hidden patients.
 
@@ -434,14 +473,15 @@ Here is a list of all appointments:
  -------------------------------------------------------------------------------------------------- 
 ```
 
-#### Notes:
+##### Notes:
 
-* `Patient Name` and `Staff Name` that are longer than 20 characters will be truncated to first 17 characters with a `...` appended.
+* `Patient Name` and `Staff Name` that are longer than 20 characters will be truncated to first 17 characters 
+with a `...` appended.
   <br>Reason:
     * To maintain the table layout and prevent overflow of a cell.
 * To get the full information without the truncated details, use `VIEW APPOINTMENT_ID`.
 
-### Find appointment(s): `find`
+#### 4.4.6 Find appointment(s): `find`
 
 - Finds a person’s (patient or medical staff) list of appointments. 
 - The search query can be filtered by date/time to display the list of appointments before/after a certain date 
@@ -482,12 +522,12 @@ Example Output
  -------------------------------------------------------------------------------------------------- 
 ```
 
-#### Notes:
+##### Notes:
 - Before or after DATE_TIME also includes the appointment (if any) at the date/time specified.
 
 
 
-## FAQ
+## 5. FAQ
 
 **Q**: How do I transfer my data to another computer?
 
@@ -496,9 +536,9 @@ There are 3 text files in `MedBotData` - `patient.txt`, `staff.txt` and `appoint
 the `MedBotData` directory containing the three text files to the other computer, and run the `tp.jar` in the same new
 location as the `MedBotData` directory.
 
-## Command Summary
+## 6. Command Summary
 
-### View Independent Commands
+### 6.1 View Independent Commands
 
 | Action       | Format + Examples |
 | :---         | :-----            |
@@ -507,7 +547,7 @@ location as the `MedBotData` directory.
 | **get view**     | `get view`|
 | **exit**     | `exit`|
 
-### Patient/Medical Staff Information View
+### 6.2 Patient/Medical Staff Information View
 
 | Action       | Format + Examples        |
 | :---         | :---                     |
@@ -520,7 +560,7 @@ location as the `MedBotData` directory.
 | **hide**     | `hide PATIENT_ID`<br/>eg., `hide 1`|
 | **show**     | `show PATIENT_ID`<br/>eg., `show 1`|
 
-### Scheduler View
+### 6.3 Scheduler View
 
 | Action       | Format + Examples        |
 | :---         | :---                     |
