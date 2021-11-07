@@ -75,6 +75,7 @@ v2.1 tasks:
     - Added documentation for `mode`, `purge`, `exit`, `help`, `listprescription` and `receiveorder`. [[#97](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/97), [#208](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/208)]
     - Added command summary. [[#97](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/97)]
     - Reordered the sections into add, list, delete and update. [[#229](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/229)]
+    - Added glossary section [[#309](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/309)]
 
 - [Developer Guide](../DeveloperGuide.md)
   - Design
@@ -90,7 +91,8 @@ v2.1 tasks:
 - Hosting weekly team meetings.
 - Release management.
 - Ensured UG and DG has a consistent format.
+- Pull Requests reviewed with non-trivial review comments. [[#74](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/74), [#143](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/143), [#172](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/172)]
+
 
 ### Community
-
-- Pull Requests reviewed with non-trivial review comments. [[#74](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/74), [#143](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/143), [#172](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/172)]
+- Reported bugs and suggestions for other teams in the class. [[#1](https://github.com/alvintan01/ped/issues/1), [#2](https://github.com/alvintan01/ped/issues/2), [#3](https://github.com/alvintan01/ped/issues/3), [#4](https://github.com/alvintan01/ped/issues/4), [#5](https://github.com/alvintan01/ped/issues/5), [#6](https://github.com/alvintan01/ped/issues/6), [#7](https://github.com/alvintan01/ped/issues/7), [#8](https://github.com/alvintan01/ped/issues/8), [#9](https://github.com/alvintan01/ped/issues/9), [#10](https://github.com/alvintan01/ped/issues/10)]
