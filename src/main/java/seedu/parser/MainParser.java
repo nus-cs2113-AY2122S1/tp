@@ -163,9 +163,11 @@ public class MainParser {
     }
 
     //@@author marcusbory
+
     /**
      * Returns an AddContactCommand after parsing the user's input if the specified input command was for adding a
      * contact.
+     *
      * @param userInput String that user has input
      * @return Command AddContactCommand if the parsing was successful
      */
@@ -191,6 +193,12 @@ public class MainParser {
         }
     }
 
+    /**
+     * Parses the edit command and returns a new command with the required parameters.
+     *
+     * @param userInput The command input from the user in full.
+     * @return new EditContactCommand with the edited details and contact index
+     */
     //@@author ng-andre
     private Command parseEditContact(String userInput) { // userInput is raw user input
         try {
@@ -243,6 +251,7 @@ public class MainParser {
     }
 
     //@@author ashrafjfr
+
     /**
      * This method parses the userInput according to the view command. After parsing for the viewedIndex, it will
      * initialise a new ViewContactCommand.
@@ -278,6 +287,12 @@ public class MainParser {
         }
     }
 
+    /**
+     * Parses the search command and returns a new command with the required parameters.
+     *
+     * @param userInput The command input from the user in full.
+     * @return new SearchContactCommand with query and detailFlag
+     */
     //@@author ng-andre
     private Command parseSearchCommand(String userInput) {
         try {
