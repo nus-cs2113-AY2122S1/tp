@@ -3,8 +3,9 @@ package seedu.duke.commands;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
+import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
 import seedu.duke.items.Event;
 import seedu.duke.items.Task;
 import seedu.duke.parser.Parser;
@@ -41,14 +42,64 @@ public class UpdateCommandTest {
     }
 
     @Test
-    public void updateCommand_updateNameDateOfEvent_success() throws DukeException {
+    public void updateCommand_updateNameOfEvent_success() throws DukeException, NoCommandAttributesException,
+            InvalidItemTypeException {
         final InputStream sysInBackup = System.in;
-        setInput("title/Charlie Puth Concert> date/21-02-2022 2000");
+        setInput("n/Charlie Puth Concert");
 
         Command command1 = Parser.parseCommand("update 2");
         command1.execute();
         assertEquals("Charlie Puth Concert", eventCatalog.get(1).getTitle());
-        assertEquals("21 Feb 2022 - 20:00", eventCatalog.get(1).getStringDateTime());
+        System.setIn(sysInBackup);
+    }
+
+    @Test
+    public void updateCommand_updateDateOfEvent_success() throws DukeException, NoCommandAttributesException,
+            InvalidItemTypeException {
+        final InputStream sysInBackup = System.in;
+        setInput("d/31-12-2022 1800");
+
+        Command command1 = Parser.parseCommand("update 2");
+        command1.execute();
+        assertEquals("31 Dec 2022 - 18:00", eventCatalog.get(1).getStringDateTime());
+        System.setIn(sysInBackup);
+    }
+
+    @Test
+    public void updateCommand_updateVenueOfEvent_success() throws DukeException, NoCommandAttributesException,
+            InvalidItemTypeException {
+        final InputStream sysInBackup = System.in;
+        setInput("v/mfr");
+
+        Command command1 = Parser.parseCommand("update 2");
+        command1.execute();
+        assertEquals("mfr", eventCatalog.get(1).getVenue());
+        System.setIn(sysInBackup);
+    }
+
+    @Test
+    public void updateCommand_updateDescriptionOfEvent_success() throws DukeException, NoCommandAttributesException,
+            InvalidItemTypeException {
+        final InputStream sysInBackup = System.in;
+        setInput("p/Cool coool cool, awesome, top 16 fruit tree");
+
+        Command command1 = Parser.parseCommand("update 2");
+        command1.execute();
+        assertEquals("Cool coool cool, awesome, top 16 fruit tree", eventCatalog.get(1).getDescription());
+        System.setIn(sysInBackup);
+    }
+
+    @Test
+    public void updateCommand_updateBudgetOfEvent_success() throws DukeException, NoCommandAttributesException,
+            InvalidItemTypeException {
+        final InputStream sysInBackup = System.in;
+        setInput("b/10000.53");
+
+        Command command1 = Parser.parseCommand("update 2");
+        command1.execute();
+        String actualBudget = Double.toString(eventCatalog.get(1).getBudget());
+
+        assertEquals("10000.53", actualBudget);
         System.setIn(sysInBackup);
     }
 

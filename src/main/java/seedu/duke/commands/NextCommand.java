@@ -6,50 +6,31 @@ import seedu.duke.Ui;
 
 public class NextCommand extends Command {
     protected static String nextItem;
-    protected static String[] userCommand;
+    protected static int eventIndex;
 
-    public NextCommand(String[] command) {
-        userCommand = command;
-        if (command.length < 2 || command.length > 3) {
-            nextCommandErrorMessage();
-            nextItem = "others";
-        } else {
-            nextItem = command[1];
-        }
-    }
-
-    private void nextCommandErrorMessage() {
-        System.out.println("please follow the correct format"
-                + System.lineSeparator()
-                + "next event : View details of the upcoming events"
-                + System.lineSeparator()
-                + "next task [Event index]: View details of the task with the closest deadline in a particular "
-                + "event"
-                + System.lineSeparator()
-                + Ui.getLineBreak());
+    public NextCommand(String command, int index) {
+        nextItem = command;
+        eventIndex = index;
     }
 
     public CommandResult execute() {
-        String errorMessage = "This Event has no tasks!";
-        try {
-            if (nextItem.equalsIgnoreCase("task")) {
-                if (userCommand.length != 3) {
-                    nextCommandErrorMessage();
-                }
-                if (Integer.parseInt(userCommand[2]) - 1 > Duke.eventCatalog.size()
-                        || Integer.parseInt(userCommand[2]) - 1 < 0) {
-                    errorMessage = "This Event does not exist";
-                }
-                Ui.printTask(Duke.eventCatalog.get(Integer.parseInt(userCommand[2]) - 1).getFromTaskList(0));
-            } else if (nextItem.equalsIgnoreCase("event")) {
-                Ui.printEvent((Duke.eventCatalog.get(0)));
-            } else {
-                nextCommandErrorMessage();
-            }
-        } catch (NumberFormatException e) {
-            nextCommandErrorMessage();
-        } catch (IndexOutOfBoundsException e) {
-            return new CommandResult(errorMessage);
+        switch (nextItem) {
+        case "event":
+            Ui.printEvent(Duke.eventCatalog.get(eventIndex));
+            break;
+        case "task":
+            Ui.printTask(Duke.eventCatalog.get(eventIndex).getFromTaskList(0));
+            break;
+        case "noTask":
+            return new CommandResult("This Event has no Tasks!");
+        default:
+            return new CommandResult("please specify type for list "
+                    + System.lineSeparator()
+                    + "[list: to see overall schedule"
+                    + System.lineSeparator()
+                    + "list [EVENT_NUM] -t : to see tasks in an Event"
+                    + System.lineSeparator()
+                    + "list [Event Index] t/[Task Index] : to see members in a Task");
         }
         return new CommandResult("Hope you have prepared everything!");
     }

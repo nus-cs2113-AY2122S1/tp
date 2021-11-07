@@ -7,7 +7,9 @@ public enum ItemAttribute {
     TITLE("title", "n/"),
     DATE("date", "d/"),
     VENUE("venue", "v/"),
-    BUDGET("budget", "b/");
+    BUDGET("budget", "b/"),
+    DESCRIPTION("description", "p/"),
+    TASK("task", "t/");
 
     private static final Map<ItemAttribute, String> BY_ATTRIBUTE_NAME = new HashMap<>();
     private static final Map<ItemAttribute, String> BY_ATTRIBUTE_FLAG = new HashMap<>();

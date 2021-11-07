@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
+import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
 import seedu.duke.items.Event;
 import seedu.duke.items.Task;
 import seedu.duke.parser.Parser;
@@ -32,9 +34,10 @@ public class NextCommandTest {
     }
 
     @Test
-    public void nextCommandResult_nextEarliestEvent() throws DukeException {
+    public void nextCommandResult_nextEarliestEvent() throws DukeException, NoCommandAttributesException,
+            InvalidItemTypeException {
         setUp();
-        Command command1 = Parser.parseCommand("next event");
+        Command command1 = Parser.parseCommand("next -e");
         Ui.printEvent(eventCatalog.get(0));
         String expectedOutput = "Title: Peppa Pig's Concert"
                 + System.lineSeparator()
@@ -58,9 +61,10 @@ public class NextCommandTest {
     }
 
     @Test
-    public void nextCommandResult_nextEarliestTask_taskExists() throws DukeException {
+    public void nextCommandResult_nextEarliestTask_taskExists() throws DukeException, NoCommandAttributesException,
+            InvalidItemTypeException {
         setUp();
-        Command command1 = Parser.parseCommand("next task 1");
+        Command command1 = Parser.parseCommand("next -t 1");
         Ui.printTask(eventCatalog.get(0).getFromTaskList(0));
         String expectedOutput = "Title: Collect Tickets"
                 + System.lineSeparator()
@@ -76,10 +80,11 @@ public class NextCommandTest {
     }
 
     @Test
-    public void nextCommandResult_nextEarliestTask_noTaskExists() throws DukeException {
+    public void nextCommandResult_nextEarliestTask_noTaskExists() throws DukeException, NoCommandAttributesException,
+            InvalidItemTypeException {
         setUp();
-        Command command1 = Parser.parseCommand("next task 2");
-        assertEquals("This Event has no tasks!", command1.execute().feedbackToUser);
+        Command command1 = Parser.parseCommand("next -t 2");
+        assertEquals("This Event has no Tasks!", command1.execute().feedbackToUser);
         eventCatalog.clear();
     }
 
