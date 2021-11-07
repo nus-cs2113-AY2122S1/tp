@@ -20,7 +20,7 @@ public class AddParser extends Parser {
     private static final String ERROR_DATE_FORMAT = "Use the date format: 'ddMMyyyy'.";
     private static final String ERROR_END_DATE_FORMAT = "Use 'e/ddMMyyyy' to define the end date. Exp: e/25122021";
     private static final String ERROR_START_DATE_FORMAT = "Use 's/ddMMyyyy' to define the start date. Exp: s/25122021";
-    private static final String ERROR_PAST_DATE = "All dates have to come after today's date";
+    private static final String ERROR_PAST_DATE = "All dates have to come after today's date.";
     private static final String ERROR_CHRONOLOGICAL_DATE = "Start Date has to come before End Date.";
 
     private static final int START_DATE = 0;

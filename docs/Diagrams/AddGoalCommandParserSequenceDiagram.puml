@@ -10,6 +10,7 @@ activate ":AddParser"
 ":AddParser" -> ":AddParser": getGoal(commandInstruction:String)
 activate ":AddParser"
 ":AddParser" --> ":AddParser": goal: Goal
+deactivate ":AddParser"
 
 <-- ":AddParser": AddGoalCommand(goal)
 deactivate ":AddParser"

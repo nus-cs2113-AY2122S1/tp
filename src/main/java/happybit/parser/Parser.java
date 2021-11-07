@@ -34,16 +34,20 @@ public class Parser {
     private static final String ERROR_GOAL_TYPE_FORMAT = "Use the 't/' flag to define the goal type. Exp: t/df";
     private static final String ERROR_GOAL_UPDATE_FORMAT = "Missing additional goal name, goal end date, or "
             + "goal type parameter needed for update.";
-    private static final String ERROR_INTEGER_FLAG_FORMAT = "The command is missing the '%1$s' flag";
-    private static final String ERROR_CONVERT_NUM = "The flag '%1$s' has to be followed by a number";
+    private static final String ERROR_INTEGER_FLAG_FORMAT = "The command is missing the '%1$s' flag.";
+    private static final String ERROR_CONVERT_NUM = "The flag '%1$s' has to be followed by a number.";
     private static final String ERROR_UNDEFINED_GOAL_TYPE_LABEL =
-            "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'";
-    private static final String ERROR_NEGATIVE_NUM = "The flag '%1$s' has to be followed by a positive integer";
-    private static final String ERROR_ZERO_NUM = "The flag '%1$s' has to be followed by a number greater than 0";
+            "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'.";
+    private static final String ERROR_NEGATIVE_NUM = "The flag '%1$s' has to be followed by a positive integer.";
+    private static final String ERROR_ZERO_NUM = "The flag '%1$s' has to be followed by a number greater than 0.";
     protected static final String ERROR_INTERVAL_TOO_LARGE = "Interval size is capped at 365 days.";
-    private static final String ERROR_NO_DESCRIPTION = "Use a description of at least 1 character";
+    private static final String ERROR_NO_DESCRIPTION = "Use a description of at least 1 character.";
     private static final String ERROR_LONG_DESCRIPTION = "Use a description no more than 50 characters "
             + "(current: %1$s characters)";
+
+    protected static final String ERROR_FLAG_TEXT_MISSING_PARAMETER = "Text expected after '%1$s' flag missing.";
+    protected static final String ERROR_FLAG_INDEX_MISSING_PARAMETER = "Index expected after '%1$s' flag missing.";
+    protected static final String ERROR_FLAG_DATE_MISSING_PARAMETER = "Date expected after '%1$s' flag missing.";
 
     private static final int FLAG_LENGTH = 2;
     private static final int MAX_NAME_LENGTH = 50;
@@ -169,14 +173,13 @@ public class Parser {
      * When adding new habit, interval can be 0.
      *
      * @param parameters String array of command parameters.
-     * @param flag Flag of parameter being checked.
      * @return New interval to be changed to.
      * @throws HaBitParserException If interval is less than or equal to 0.
      */
-    protected static int getUpdateInterval(ArrayList<String> parameters, String flag) throws HaBitParserException {
-        int interval = getNumber(parameters, flag);
+    protected static int getUpdateInterval(ArrayList<String> parameters) throws HaBitParserException {
+        int interval = getNumber(parameters, Parser.FLAG_INTERVAL);
         if (interval == 0) {
-            throw new HaBitParserException(String.format(ERROR_ZERO_NUM, flag));
+            throw new HaBitParserException(String.format(ERROR_ZERO_NUM, Parser.FLAG_INTERVAL));
         }
         return interval;
     }
@@ -220,12 +223,40 @@ public class Parser {
             throw new HaBitParserException(errorMessage);
         } else if (parameter.equals(FLAG_NAME) || parameter.equals(FLAG_INTERVAL)) {
             return parameter;
-        } else if (parameter.equals(flag)) {
-            throw new HaBitParserException(errorMessage);
+        } else if (isParamIsFlagForIndex(parameter, flag)) {
+            throw new HaBitParserException(String.format(ERROR_FLAG_INDEX_MISSING_PARAMETER, flag));
+            //throw new HaBitParserException(errorMessage);
+        } else if (isParamIsFlagForText(parameter, flag)) {
+            throw new HaBitParserException(String.format(ERROR_FLAG_TEXT_MISSING_PARAMETER, flag));
+        } else if (isParamIsFlagForStringDate(parameter, flag)) {
+            throw new HaBitParserException(String.format(ERROR_FLAG_DATE_MISSING_PARAMETER, flag));
         } else {
             return parameter;
         }
     }
+
+    private static boolean isParamIsFlagForIndex(String parameter, String flag) {
+        if (parameter.equals(flag) && (flag.equals(FLAG_GOAL_INDEX)
+                || flag.equals(FLAG_HABIT_INDEX) || flag.equals(FLAG_INTERVAL))) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isParamIsFlagForText(String parameter, String flag) {
+        if (parameter.equals(flag) && (flag.equals(FLAG_NAME) || flag.equals(FLAG_GOAL_TYPE))) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isParamIsFlagForStringDate(String parameter, String flag) {
+        if (parameter.equals(flag) && (flag.equals(FLAG_START_DATE) || flag.equals(FLAG_END_DATE))) {
+            return true;
+        }
+        return false;
+    }
+
 
     /**
      * Checks if the input is too long.

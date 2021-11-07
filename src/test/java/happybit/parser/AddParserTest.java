@@ -19,22 +19,23 @@ class AddParserTest {
 
     private static final String ERROR_GOAL_INDEX_FORMAT = "The command is missing the 'g/' flag";
     private static final String ERROR_NAME_FORMAT = "Use the 'n/' flag to define the name. Exp: n/Foo";
-    private static final String ERROR_NO_DESCRIPTION = "Use a description of at least 1 character";
+    private static final String ERROR_NO_DESCRIPTION = "Use a description of at least 1 character.";
     private static final String ERROR_GOAL_TYPE_FORMAT = "Use the 't/' flag to define the goal type. Exp: t/df";
-    private static final String ERROR_INTERVAL_FORMAT = "The flag 'i/' has to be followed by a number";
+    private static final String ERROR_INTERVAL_FORMAT = "The flag 'i/' has to be followed by a number.";
     private static final String ERROR_DATE_FORMAT = "Use the date format: 'ddMMyyyy'.";
     private static final String ERROR_END_DATE_FORMAT = "Use 'e/ddMMyyyy' to define the end date. Exp: e/25122021";
     private static final String ERROR_START_DATE_FORMAT = "Use 's/ddMMyyyy' to define the start date. Exp: s/25122021";
-    private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The flag 'g/' has to be followed by a number";
-    private static final String ERROR_INTERVAL_NON_INTEGER = "The flag 'i/' has to be followed by a number";
-    private static final String ERROR_INTERVAL_NEGATIVE = "The flag 'i/' has to be followed by a positive integer";
+    private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The flag 'g/' has to be followed by a number.";
+    private static final String ERROR_INTERVAL_NON_INTEGER = "The flag 'i/' has to be followed by a number.";
+    private static final String ERROR_INTERVAL_NEGATIVE = "The flag 'i/' has to be followed by a positive integer.";
     private static final String ERROR_GOAL_INDEX_NEGATIVE_NUM =
-            "The flag 'g/' has to be followed by a positive integer";
+            "The flag 'g/' has to be followed by a positive integer.";
     private static final String ERROR_GOAL_INDEX_ZERO_NUM =
-            "The flag 'g/' has to be followed by a number greater than 0";
-    private static final String ERROR_GOAL_TYPE_LABEL = "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'";
-    private static final String ERROR_PAST_DATE = "All dates have to come after today's date";
+            "The flag 'g/' has to be followed by a number greater than 0.";
+    private static final String ERROR_GOAL_TYPE_LABEL = "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'.";
+    private static final String ERROR_PAST_DATE = "All dates have to come after today's date.";
     private static final String ERROR_CHRONOLOGICAL_DATE = "Start Date has to come before End Date.";
+    protected static final String ERROR_FLAG_INDEX_MISSING_PARAMETER = "Index expected after '%1$s' flag missing.";
 
     /*
      * NOTE : ==================================================================
@@ -218,7 +219,7 @@ class AddParserTest {
             AddParser.parseAddHabitCommand(" n/ Test  g/ i/3  ");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_GOAL_INDEX_FORMAT, e.getMessage());
+            assertEquals(String.format(ERROR_FLAG_INDEX_MISSING_PARAMETER, "g/"), e.getMessage());
         }
     }
 

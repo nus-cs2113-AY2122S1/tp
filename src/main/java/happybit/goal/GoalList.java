@@ -175,7 +175,7 @@ public class GoalList {
             throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
         ArrayList<Habit> habitList = goal.getHabitList();
-        Habit habit = getHabit(habitList,habitIndex);
+        Habit habit = getHabit(habitList, habitIndex);
         goal.removeHabit(habitIndex);
         printManager.printRemovedHabit(goal.getDescription(), habit.getHabitName());
     }
