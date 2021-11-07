@@ -1,6 +1,7 @@
 package seedu.duke.items;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 
 import seedu.duke.parser.Parser;
 
@@ -19,6 +20,19 @@ public abstract class Item {
         this.dateTime = dateTime;
         isDone = false;
     }
+
+    public static Comparator<Item> DateTimeComparator = (item1, item2) -> {
+        LocalDateTime dateTime1 = item1.getDateTime();
+        LocalDateTime dateTime2 = item2.getDateTime();
+
+        if (dateTime1.isBefore(dateTime2)) {
+            return -1;
+        }
+        if (dateTime1.isAfter(dateTime2)) {
+            return 1;
+        }
+        return 0;
+    };
 
     public void setTitle(String title) {
         this.title = title;

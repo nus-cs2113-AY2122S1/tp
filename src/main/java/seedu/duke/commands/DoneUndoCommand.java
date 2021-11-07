@@ -1,6 +1,7 @@
 package seedu.duke.commands;
 
 import seedu.duke.Duke;
+import seedu.duke.items.Event;
 import seedu.duke.parser.Parser;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.mainlists.EventCatalog;
@@ -96,10 +97,10 @@ public class DoneUndoCommand extends Command {
                             + "'select' command. ");
                 }
                 for (int index : indexes) {
-                    Duke.eventCatalog.get(Parser.getIndexOfLastSelectedEvent())
-                            .getFromTaskList(index - 1).undo();
-                    listOfItems.append(Duke.eventCatalog.get(Parser.getIndexOfLastSelectedEvent())
-                            .getFromTaskList(index - 1)).append("\n");
+                    Event eventOfTask = Duke.eventCatalog.get(Parser.getIndexOfLastSelectedEvent());
+                    eventOfTask.getFromTaskList(index - 1).undo();
+                    String taskToAdd = eventOfTask.getFromTaskList(index - 1).toString();
+                    listOfItems.append(taskToAdd).append("\n");
                 }
             }
             if (itemType.equalsIgnoreCase(EVENT_FLAG)) {
