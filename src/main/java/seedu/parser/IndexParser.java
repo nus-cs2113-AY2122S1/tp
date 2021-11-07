@@ -1,4 +1,4 @@
-//@@author lezongmun
+//@@author ng-andre
 
 package seedu.parser;
 
