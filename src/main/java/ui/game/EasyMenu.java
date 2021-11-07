@@ -113,25 +113,6 @@ public class EasyMenu extends Menu {
         }
     }
 
-    private int startGuessNum() {
-        int cardId;
-
-        while (true) {
-            System.out.println(Strings.GUESS_NUM_START);
-            GuessingNumGame guessingNumGame = new GuessingNumGame();
-            cardId = guessingNumGame.execute(true);
-            Player.winCard(cardId);
-
-            Player.addEasyGameRecord(guessingNumGame);
-
-            System.out.print(guessingNumGame.getName());
-            int playStatus = setPlayStatus();
-            if (playStatus != 2) {
-                return playStatus;
-            }
-        }
-    }
-
     private int startQuizGame() {
         int cardId;
 
@@ -144,6 +125,25 @@ public class EasyMenu extends Menu {
             Player.addEasyGameRecord(quizGame);
 
             System.out.print(quizGame.getName());
+            int playStatus = setPlayStatus();
+            if (playStatus != 2) {
+                return playStatus;
+            }
+        }
+    }
+
+    private int startGuessNum() {
+        int cardId;
+
+        while (true) {
+            System.out.println(Strings.GUESS_NUM_START);
+            GuessingNumGame guessingNumGame = new GuessingNumGame();
+            cardId = guessingNumGame.execute(true);
+            Player.winCard(cardId);
+
+            Player.addEasyGameRecord(guessingNumGame);
+
+            System.out.print(guessingNumGame.getName());
             int playStatus = setPlayStatus();
             if (playStatus != 2) {
                 return playStatus;
