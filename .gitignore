@@ -3,6 +3,7 @@
 /out/
 /*.iml
 */.idea/
+/.run/
 
 # Gradle build files
 /.gradle/
