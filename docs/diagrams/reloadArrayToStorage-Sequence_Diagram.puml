@@ -10,10 +10,13 @@ create File
 WriteToTextFile -> File: new File(storageDirectory)
 activate File
 
+File --> WriteToTextFile: File
+deactivate File
 alt is not a valid file directory
-    File --> WriteToTextFile
     <-- WriteToTextFile
 end
+
+
 
 create PrintWriter
 WriteToTextFile -> PrintWriter: new PrintWriter()
@@ -26,7 +29,7 @@ activate FileWriter
 FileWriter --> PrintWriter: FileWriter
 deactivate FileWriter
 
-PrintWriter --> WriteToTextFile: FileWriter
+PrintWriter --> WriteToTextFile: PrintWriter
 deactivate PrintWriter
 
 loop until all the 12 months of budget have been stored into storage
@@ -97,8 +100,13 @@ end
 
 end
 
+WriteToTextFile -> PrintWriter: close()
+activate PrintWriter
+PrintWriter --> WriteToTextFile
+deactivate PrintWriter
+
 return
-<-- WriteToTextFile
+
 deactivate WriteToTextFile
 
 @enduml
