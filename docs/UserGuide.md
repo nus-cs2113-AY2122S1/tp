@@ -421,6 +421,7 @@ Attendance data are stored in a sub-folder called `Attendance`. There, the filen
 ## Storage
 CCA Manager data are saved in the hard disk automatically after any commands that changes the data.
 There is no need to save manually.
+It is recommended that the CSV file be opened and edited with Microsoft Excel if absolutely necessary.
 
 ⚠ Please refrain from editing the data directly from the CSV file.
 However, if you do so the program is able to run fine if the data changes are valid.
@@ -428,6 +429,11 @@ Else, the program will terminate. You should make sure all data is valid before 
 program again.
 
 ⚠ Do not use commas when manually editing the CSV file.It might cause unintended errors in the program.
+
+⚠ No blank lines should be left between entries when editing in Microsoft Excel.This will lead to data verification failing and program will terminate, 
+citing invalid fields.
+
+⚠ Do not rename or move the CSV files.
 
 ## Command Summary
 
