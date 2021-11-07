@@ -23,7 +23,7 @@ public class Log {
     private static final String LOG_FORMAT = "[%1$tF %1$tT] [%2$-7s]%n%4$s: %3$s %n";
     private static final String IOEXCEPTION_MESSAGE = "Failed to initialise log file.";
 
-    private static final int METHOD_STACKTRACE_POSITION = 3;
+    private static final int METHOD_STACKTRACE_POSITION = 4;
 
     private static final boolean DO_APPEND_TO_FILE = true;
     private static final boolean USE_DEFAULT_HANDLERS = false;

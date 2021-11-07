@@ -4,6 +4,7 @@ import org.apache.commons.lang3.EnumUtils;
 import seedu.tp.command.Command;
 import seedu.tp.command.flags.ListFlag;
 import seedu.tp.command.flags.SortFlag;
+import seedu.tp.exception.EmptyDescriptionException;
 import seedu.tp.exception.EmptySortCriteriaException;
 import seedu.tp.exception.EmptyTasklistException;
 import seedu.tp.exception.InvalidFlagsException;
@@ -493,7 +494,7 @@ public class TaskManager implements Subject {
      */
     //@@author SeanRobertDH
     public Task editFilteredTask(int index, Map<String, String> arguments) throws InvalidTaskIndexException,
-        InvalidPriorityException, InvalidRecurrenceException, ParseDateFailedException,
+        InvalidPriorityException, InvalidRecurrenceException, ParseDateFailedException, EmptyDescriptionException,
         StartDateAfterEndDateException, URISyntaxException, InvalidFlagsException {
         checkFilteredListIndexValid(index);
         Task toEdit = latestFilteredList.get(index);
