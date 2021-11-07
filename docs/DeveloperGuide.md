@@ -163,7 +163,7 @@ The `Parser` logic component handles the parsing of the input passed in by the u
 object that will be executed. Within the component itself, there are more specific and detailed `Parser` classes for
 handling various inputs from the user.
 
-![](Diagram Images/MainParser.png)
+![](Diagram Images/Design Diagram Images/MainParser.png)
 
 * `AddParser` - Handles the parsing of inputs starting with `set` and `add` keywords
 * `DeleteParser` - Handles the parsing of inputs starting with `remove` and `delete`
@@ -218,7 +218,7 @@ The class diagram shows the interactions between the different classes.
 
 The sequence diagram shows how the program imports data from storage file.
 
-![Import Sequence Diagram](Diagram%20Images/ImportSequenceDiagram.png)
+![Import Sequence Diagram](Diagram Images/Implementation Diagram Images/ImportSequenceDiagram.png)
 
 The program uses `Storage` class to import data from the storage file.
 * `Storage` interacts with `Import` to access the data stored in storage file.
@@ -229,7 +229,7 @@ The program uses `Storage` class to import data from the storage file.
 
 The sequence diagram shows how the program exports data to storage file.
 
-![Export Sequence Diagram](Diagram%20Images/ExportSequenceDiagram.png)
+![Export Sequence Diagram](Diagram Images/Implementation Diagram Images/ExportSequenceDiagram.png)
 
 `Storage` class can also export data to storage file with `Export` class.
 It takes in a `GoalList` object and converts the data into string to be stored in storage file.
@@ -252,14 +252,14 @@ sequence diagram below is carried out:
 When the `runCommand` function is executed for the `ListGoalsCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
 
-![](Diagram Images/ListGoalsCommandSequenceDiagram.png)
+![](Diagram Images/Implementation Diagram Images/ListGoalsCommandSequenceDiagram.png)
 
 ### 4.4. Listing all Habits
 
 When the `runCommand` function is executed for the `ListHabitsCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
 
-![](Diagram Images/ListHabitsCommandSequenceDiagram.png)
+![](Diagram Images/Implementation Diagram Images/ListHabitsCommandSequenceDiagram.png)
 
 ### 4.5. Completing a Habit
 
@@ -272,7 +272,7 @@ can type to execute a certain command.
 When the `runCommand` function is executed for the `DoneHabitCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
 
-![](Diagram Images/DoneCommandSequenceDiagram.png)
+![](Diagram Images/Implementation Diagram Images/DoneCommandSequenceDiagram.png)
 
 ### 4.6. Updating a Goal
 
@@ -283,14 +283,14 @@ sequence diagram below is carried out:
 When the `runCommand` function is executed for the `DeleteGoalCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
 
-![](Diagram Images/DeleteGoalCommandSequenceDiagram.png)
+![](Diagram Images/Implementation Diagram Images/DeleteGoalCommandSequenceDiagram.png)
 
 ### 4.9. Deleting a Habit
 
 When the `runCommand` function is executed for the `DeleteHabitCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
 
-![](Diagram Images/DeleteHabitCommandSequenceDiagram.png)
+![](Diagram Images/Implementation Diagram Images/DeleteHabitCommandSequenceDiagram.png)
 
 ### 4.10. Getting Help
 
