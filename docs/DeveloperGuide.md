@@ -9,7 +9,8 @@ Third party library used: GSON under Apache License 2.0
 
 ### Architecture
 
-![](images/Arch_Diag.JPG)
+![](images/Architectural_Diagram.JPG)
+
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
@@ -24,19 +25,19 @@ Further elaboration on these classes will be in the following sections later.
 
 The remaining components are as follows:
 
-`Ui`: The User Interface of the App
+`Ui`: The User Interface of the App.
 
-`Parser`: The command executor
+`Parser`: The command handler and executor. Holds the main logic for handling any command.
 
-`Storage`: Holds the data of the App in memory, and also reads and writes data to the hard disk
+`Storage`: Holds the data of the App in memory, and also reads and writes data to the hard disk.
 
 **How the architecture components interact with one another**
 
-The ***Sequence Diagram*** below shows how the components interact with each other.
+The ***Sequence Diagram*** below shows a brief overview of how the components interact with each other.
 For this particular interaction, the user has issued the command
 `create` with the correct input parameters.
 
-![](images/ExampleSeq_Diag.JPG)
+![](images/Architectural_Sequence_Diagram.JPG)
 
 The sections below provide more details of the components and classes in them.
 
@@ -58,8 +59,11 @@ save file) in order for any other features to be available. If there are no trip
 will repeatedly prompt the user to add a new trip.
 
 ### `Person` Class
+Below details the UML diagram for the `Person` class.
+![](images/Person_Diagram.JPG)
+
 The  Person Class,
-* Represents an individual that participated in an expense or a whole trip.
+Represents an individual that participated in an expense or a whole trip.
 * A user-defined amount of `Person` objects will be created by the user during the create function of the `Trip` Class.
 * Every time an object is created of the `Expense` Class, the user may define the people who were involved in the expense, however the people who are added to the expense must be already a `Person` object in the `Trip` object that the expense was made.
 * One `Person` object who was involved in the expense will then be appointed as the payer of the group, the user will then have to indicate how much (in foreign currency) each of the participating persons spent for that particular expense. This is then stored and updated in each of the respective `Person` object’s `moneyOwed` HashMap,  where a positive double refers to how much the person owes the respective Person object (i.e. the key of the HashMap) and a negative double refers to how much the Person object (i.e. the key of the HashMap) owes to that instance of the Person object.
@@ -90,7 +94,7 @@ The `Parser` class
 
 ### `Expense` Class
 The `Expense` class deals with most functionalities related to adding an expense inside a trip. The sequence diagram below shows how an expense is initialised.
-![](../Resources/Expense%20Sequence%20Diagram.jpeg)
+![](images/Expense%20Sequence%20Diagram.jpeg)
 
 When `Parser` calls the `executeExpense` method, it creates an expense object, and also calls the `promptDate` method to set that expense object’s date. `promptDate` calls `isDateValid` to validate user input.
 
