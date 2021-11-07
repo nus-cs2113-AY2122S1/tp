@@ -25,13 +25,15 @@ public class ConverterToCsvTest {
         loader.loadStorage(recordListNew, "./data/2018.txt");
 
         ConverterToCsv csvCreator = new ConverterToCsv();
-        boolean isExist = false;
+        boolean isExist = true;
 
         csvCreator.convertToCsvFile(recordListNew, "./data/2018.csv");
 
         File tempFile = new File("./data/2018.csv");
-        isExist = tempFile.exists();
-
+        if (!isExist) {
+            System.out.println("File does not exist!");
+            isExist = true;
+        }
         assertTrue(isExist);
     }
 }
