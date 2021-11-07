@@ -3,10 +3,12 @@ package expiryeliminator.commands;
 
 import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.RecipeList;
+
 //@@author kairuihu
 /**
  * Lists all recipes, together with its associated ingredients.
  */
+
 public class ListRecipeCommand extends Command {
 
     /**

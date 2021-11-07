@@ -9,6 +9,7 @@ import expiryeliminator.data.exception.NotFoundException;
 /**
  * Finds a specific recipe, together with its associated ingredients.
  */
+
 public class ViewRecipeCommand extends Command {
     /**
      * Unique word associated with the command.
