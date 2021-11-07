@@ -24,8 +24,8 @@ motivated us to build this application.
       * [Command Abstraction](#command-abstraction)
       * [Input Validation](#input-validation)
     * [Implementation](#implementation)
-      * [Edit](#edit)
-      * [Graph](#graph)
+        * [Edit](#edit)
+        * [Graph](#graph)
 * [Product Scope](#-product-scope)
     * [Target User Profile](#target-user-profile)
     * [Value Proposition](#value-proposition)
@@ -136,7 +136,7 @@ under *'Data'* folder.
 ![](images/storage_write_sequence.png)
 
 * After every command, Duke calls `Storage.write(Ingredient)`, then `Storage.write(Dish)`.
-  * This method in the `Storage` class is responsible for writing to the respective text file depending on the mode.
+    * This method in the `Storage` class is responsible for writing to the respective text file depending on the mode.
 * `Storage.write()` will access the respective text file and save to its respective save format.
 
 * ❕ **Save Formats:**
@@ -221,23 +221,24 @@ the roles are reversed
 ### Find
 
 ### Edit
-The implementation of the Edit function allows the User to edit several 
-instance variables of the Dishes and Ingredients present in the DishList and
-IngredientList.
+
+The implementation of the Edit function allows the User to edit several instance variables of the Dishes and Ingredients
+present in the DishList and IngredientList.
 
 ![](images/edit_dish_name_sequence_diagram.png)
 This Sequence Diagram shows how the `EditDishNameCommand` class functions.
 
 Currently the User is able to edit the following:
+
 * Dish Name
 * Dish Wastage Weight
 * Ingr Name
 * Ingr Wastage Weight
 * Ingr Storage Weight
 
-The remaining Edit classes, namely `EditDishWasteCommand`, `EditIngrNameCommand`, 
-`EditIngrStoredCommand` and `EditIngrWasteCommand` follow sequences similar to 
-the one shown above in their implementation.
+The remaining Edit classes, namely `EditDishWasteCommand`, `EditIngrNameCommand`,
+`EditIngrStoredCommand` and `EditIngrWasteCommand` follow sequences similar to the one shown above in their
+implementation.
 
 ### Set
 
@@ -258,17 +259,17 @@ Below is a sequence diagram that shows how the GraphCommand functions
 
 ![](images/graph_sequence.png)
 
-Graph works by creating a 2d grid and printing the bars based on the current position of the terminal cursor. 
-This lets us bypass the restriction in a CLI based application where you can only print from up to down and 
-the bars can get printed "vertically". This is done by calculating the lengths of the bars beforehand and 
-using these lengths along with the current coordinates to print either an empty space or a bar. 
+Graph works by creating a 2d grid and printing the bars based on the current position of the terminal cursor. This lets
+us bypass the restriction in a CLI based application where you can only print from up to down and the bars can get
+printed "vertically". This is done by calculating the lengths of the bars beforehand and using these lengths along with
+the current coordinates to print either an empty space or a bar.
 
-Despite this due to CLI and ascii limitations, printing of fractional values posed an issue. This was because you are unable
-to print half a character and using special unicode characters would break cross-platform functionality. The solution 
-that we implemented was to have a digit in the top most bar if we have fractional heights. This way while we still don't get 
-a perfect representation, we are capable of giving the value accurate to one decimal place. So if the height was 3.33 units
-it would be represented by 3 filled bars and the 4th bar will have a 3 within indicating its value is between 3.3 to 3.4 
-as shown in the figure below
+Despite this due to CLI and ascii limitations, printing of fractional values posed an issue. This was because you are
+unable to print half a character and using special unicode characters would break cross-platform functionality. The
+solution that we implemented was to have a digit in the top most bar if we have fractional heights. This way while we
+still don't get a perfect representation, we are capable of giving the value accurate to one decimal place. So if the
+height was 3.33 units it would be represented by 3 filled bars and the 4th bar will have a 3 within indicating its value
+is between 3.3 to 3.4 as shown in the figure below
 
 ____________________________________________________________
 
@@ -283,6 +284,7 @@ ____________________________________________________________
          [|]   [|]   [|]   [|]
     [5]  [|]   [|]   [|]   [|]
      A    B     C     D     E
+
 ____________________________________________________________
 
 ### Random dish
@@ -290,11 +292,15 @@ ____________________________________________________________
 ### Sort
 
 ### Terminal refreshing
-The interface of the program utilizes the ClearScreen class to clear the terminal after every user input through the built-in `ProcessBuilder` Java class. Such a feature allows greater readability and focus for the user as the terminal will not be cluttered with past commands.
+
+The interface of the program utilizes the ClearScreen class to clear the terminal after every user input through the
+built-in `ProcessBuilder` Java class. Such a feature allows greater readability and focus for the user as the terminal
+will not be cluttered with past commands.
 `Ui` will call `ClearScreen.clearConsole()` method to clear the terminal.
 
 The ProcessBuilder class will send a respective command to the terminal depending on the Operating System of the user.
 The command it sends to the terminal is as follows:
+
 * `cls` for Windows CMD Terminals.
 * `clear` for Linux/MacOS Terminals.
 
@@ -325,7 +331,6 @@ The command it sends to the terminal is as follows:
     }
 ```
 
-
 ## 📂 Product Scope
 
 Provides Developers with insights into our intended customers and the background to the problem to which
@@ -339,9 +344,9 @@ the Command Line Interface.
 ### Value Proposition
 
 By presenting the wastage statistics, we can help restaurant owners figure out which dishes are contributing the most to
-wastage at the restaurant. This way, they can allocate their resources more efficiently to better doing dishes. Thus, we 
-are reducing time wastage due to cooking of excess dishes and also saving money from purchasing unnecessary ingredients. 
-Therefore, there’s a two-fold saving. Additionally, we are also contributing to reducing Singapore's contribution to
+wastage at the restaurant. This way, they can allocate their resources more efficiently to better doing dishes. Thus, we
+are reducing time wastage due to cooking of excess dishes and also saving money from purchasing unnecessary ingredients.
+Therefore, there’s a two-fold saving. Additionally, we are also contributing to reducing Singapore's contribution to    
 global food wastage.
 
 ## 🎤 User Stories
@@ -400,7 +405,7 @@ Brings developers through the requirements of Users the *Food-O-Rama* team consi
 
     * Test case: `add dish chicken rice`
 
-      Expected: Initially the Dish List is empty, One Dish `chicken rice` is added amd a success message will be printed
+      Expected: Initially the Dish List is empty, One Dish `chicken rice` is added and a success message will be printed
       to the CLI.
 
     * Test case: `add dish 5`
@@ -419,35 +424,36 @@ Brings developers through the requirements of Users the *Food-O-Rama* team consi
 
     * Test case:`add dish waste chicken rice`
 
-      Expected: Dish List contains `chicken rice`. A message will be printed to the CLI to prompt user for the wasteage
+      Expected: Dish List contains `chicken rice`. A message will be printed to the CLI to prompt user for the wastage
       weight of `chiccken rice` in kg.
 
     * Test case:`add dish waste 1`
 
       Expected: Dish List contains `chicken rice`, and `chicken rice` is at the first position in the Dish List. A
-      message will be printed to the CLI to prompt user for the wasteage weight of `chiccken rice` in kg.
+      message will be printed to the CLI to prompt user for the wastage weight of `chiccken rice` in kg.
 
     * Test case:`add dish waste abcde`
 
       Expected: Dish List does not contain `abcde`. An error message will be printed to the CLI to let user know
-      that `abcde` does not exist in the Dish List.
+      that `abcde` does not exist in the Dish List. The command is disregarded.
+
 
 3. Set a Limit for Dish Wastage
 
     * Test case:`set dish limit chicken`
 
       Expected: Dish List contains `chicken rice`. A message will be printed to the CLI to prompt user to enter the
-      limit of wasteage weight of `chiccken rice` in kg.
+      limit of wastage weight of `chiccken rice` in kg.
 
     * Test case:`set dish limit 1`
 
       Expected: Dish List contains `chicken rice` and `chicken rice` is at the first position in the Dish List. A
-      message will be printed to the CLI to prompt user to enter the limit of wasteage weight of `chiccken rice` in kg.
+      message will be printed to the CLI to prompt user to enter the limit of wastage weight of `chiccken rice` in kg.
 
     * Test case:`set dish limit abcde`
 
       Expected: Dish List does not contain `abcde`. An error message will be printed to the CLI to let user know
-      that `abcde` does not exist in the Dish List.
+      that `abcde` does not exist in the Dish List. The command is disregarded.
 
 
 4. Edit a Dish's Name
@@ -465,7 +471,8 @@ Brings developers through the requirements of Users the *Food-O-Rama* team consi
     * Test case:`edit dish name abcde`
 
       Expected: Dish List does not contain `abcde`. An error message will be printed to the CLI to let user know
-      that `abcde` does not exist in the Dish List.
+      that `abcde` does not exist in the Dish List. The command is disregarded.
+
 
 5. Edit a Dish's Wastage
 
@@ -482,7 +489,8 @@ Brings developers through the requirements of Users the *Food-O-Rama* team consi
     * Test case:`edit dish waste abcde`
 
       Expected: Dish List does not contain `abcde`. An error message will be printed to the CLI to let user know
-      that `abcde` does not exist in the Dish List.
+      that `abcde` does not exist in the Dish List. The command is disregarded.
+
 
 6. Delete existing Dish
 
@@ -499,7 +507,8 @@ Brings developers through the requirements of Users the *Food-O-Rama* team consi
     * Test case:`del dish abcde`
 
       Expected: Dish List does not contain `abcde`. An error message will be printed to the CLI to let user know
-      that `abcde` does not exist in the Dish List.
+      that `abcde` does not exist in the Dish List. The command is disregarded.
+
 
 7. View Existing Dishes
 
@@ -511,6 +520,7 @@ Brings developers through the requirements of Users the *Food-O-Rama* team consi
 
       Expected: A list of existing Dishes will be printed onto the CLI.
 
+
 8. Generate a random Dish Name
 
     * Test case: `rdish`
@@ -518,3 +528,304 @@ Brings developers through the requirements of Users the *Food-O-Rama* team consi
       Expected: A random name for a Dish will be printed onto the CLI. e.g. `roasted chili fish potatoes`
 
 ### Testing the Ingredient commands
+
+1. Add new Ingredient
+
+    * Test case: `add ingr duck`
+
+      Expected: Initially the Ingredient List is empty, One Ingredient `duck` is added and a message will be printed to
+      the CLI to prompt user for the weight of `duck` in kg. Upon entering a valid weight, e.g. `5`or `5.5`, a success
+      message will be printed to the CLI. Upon entering an invalid weight that is not a number, e.g. `abc`, an error
+      message will be printed to the CLI, disregarding the invalid command.
+
+    * Test case: `add ingr 5`
+    * Test case: `add ingr 5.5`
+      Expected: Name of Ingredient cannot be a number. An error message will be printed to the CLI, disregarding the
+      invalid command.
+
+    * Test case: `add ingr duck`
+      Expected: Ingredient List already contains `duck`. An error message will be printed to the CLI, disregarding the
+      command.
+
+
+2. Add Storage to an existing Ingredient
+
+    * Test case: `add ingr stored duck`
+      Expected: Ingredient List contains `duck`. A message will be printed to the CLI to prompt user for the additional
+      storage weight of `duck` in kg.
+
+    * Test case: `add ingr stored 1`
+      Expected: Ingredient List contains `duck` and `duck` is at the first position in the Ingredient List. A message
+      will be printed to the CLI to prompt user for the additional storage weight of `duck` in kg.
+
+    * Test case: `add ingr stored lmnop`
+      Expected: Ingredient List does not contain `lmnop`. An error message will be printed to the CLI to let user know
+      that `lmnop` does not exist in the Ingredient List. The command is disregarded.
+
+
+3. Add the Ingredient Wastage
+
+    * Test case: `add ingr waste duck`
+      Expected: Ingredient List contains `duck`. A message will be printed to the CLI to prompt user for the wastage
+      weight of `duck` in kg.
+
+    * Test case: `add ingr waste 1`
+      Expected: Ingredient List contains `duck` and `duck` is at the first position in the Ingredient List. A message
+      will be printed to the CLI to prompt user for the wastage weight of `duck` in kg.
+
+    * Test case: `add ingr waste lmnop`
+      Expected: Ingredient List does not contain `lmnop`. An error message will be printed to the CLI to let user know
+      that `lmnop` does not exist in the Ingredient List. The command is disregarded.
+
+
+4. Set a Limit for Ingredient Stored
+
+    * Test case:`set ingr limit duck`
+
+      Expected: Ingredient List contains `duck`. A message will be printed to the CLI to prompt user to enter the limit
+      of storage weight of `duck` in kg.
+
+    * Test case:`set ingr limit 1`
+
+      Expected: Ingredient List contains `duck` and `duck` is at the first position in the Ingredient List. A message
+      will be printed to the CLI to prompt user to enter the limit of storage weight of `duck` in kg.
+
+    * Test case:`set ingr limit lmnop`
+
+      Expected: Ingredient List does not contain `lmnop`. An error message will be printed to the CLI to let user know
+      that `lmnop` does not exist in the Ingredient List. The command is disregarded.
+
+
+5. Set an Expiry Date for an existing Ingredient
+
+    * Test case:`set ingr expiry duck`
+
+      Expected: Ingredient List contains `duck`. A message will be printed to the CLI to prompt user for the expiry date
+      of `duck` in 'dd/MM/yyyy' format. Upon entering a valid expiry date, e.g. `08/11/2021`, a success message will be
+      printed to the CLI. Upon entering an invalid date that does not follow 'dd/MM/yyyy', e.g. `abc`, an error message
+      will be printed to the CLI, until the user enters a date in 'dd/MM/yyyy' format.
+
+    * Test case:`set ingr expiry 1`
+
+      Expected: Ingredient List contains `duck` and `duck` is at the first position in the Ingredient List. A message
+      will be printed to the CLI to prompt user for the expiry date of `duck` in 'dd/MM/yyyy' format. Upon entering a
+      valid expiry date, e.g. `08/11/2021`, a success message will be printed to the CLI. Upon entering an invalid date
+      that does not follow 'dd/MM/yyyy', e.g. `abc`, an error message will be printed to the CLI, until the user enters
+      a date in 'dd/MM/yyyy' format.
+
+    * Test case:`set ingr expiry lmnop`
+
+      Expected: Ingredient List does not contain `lmnop`. An error message will be printed to the CLI to let user know
+      that `lmnop` does not exist in the Ingredient List. The command is disregarded.
+
+
+6. Edit an Ingredient's Name
+
+    * Test case:`edit ingr name duck`
+
+      Expected: Ingredient List contains `duck`. A message will be printed to the CLI to prompt user for the new
+      Ingredient Name of `duck`.
+
+    * Test case:`edit ingr name 1`
+
+      Expected: Ingredient List contains `duck` and `duck` is at the first position in the Ingredient List. A message
+      will be printed to the CLI to prompt user for the new Ingredient Name of `duck`.
+
+    * Test case:`edit ingr name lmnop`
+
+      Expected: Ingredient List does not contain `lmnop`. An error message will be printed to the CLI to let user know
+      that `lmnop` does not exist in the Ingredient List. The command is disregarded.
+
+
+7. Edit an Ingredient's Storage
+
+    * Test case:`edit ingr stored duck`
+
+      Expected: Ingredient List contains `duck`. A message will be printed to the CLI to prompt user for the new storage
+      weight of `duck`.
+
+    * Test case:`edit ingr stored 1`
+
+      Expected: Ingredient List contains `duck` and `duck` is at the first position in the Ingredient List. A message
+      will be printed to the CLI to prompt user for the new storage weight of `duck`.
+
+    * Test case:`edit ingr stored lmnop`
+
+      Expected: Ingredient List does not contain `lmnop`. An error message will be printed to the CLI to let user know
+      that `lmnop` does not exist in the Ingredient List. The command is disregarded.
+
+
+8. Edit an Ingredient's Wastage
+
+    * Test case:`edit ingr waste duck`
+
+      Expected: Ingredient List contains `duck`. A message will be printed to the CLI to prompt user for the new wastage
+      weight of `duck`.
+
+    * Test case:`edit ingr waste 1`
+
+      Expected: Ingredient List contains `duck` and `duck` is at the first position in the Ingredient List. A message
+      will be printed to the CLI to prompt user for the new wastage weight of `duck`.
+
+    * Test case:`edit ingr waste lmnop`
+
+      Expected: Ingredient List does not contain `lmnop`. An error message will be printed to the CLI to let user know
+      that `lmnop` does not exist in the Ingredient List. The command is disregarded.
+
+
+9. Link a Dish with an Ingredient
+
+    * Dish Index and Ingredient Index do not work here. i.e. Numbers don't work for `link` command.
+    * Test case:`link chiken rice / duck`
+
+      Expected: Dish List contains `chicken rice`. Ingredient List contains `duck`. A success message will be printed to
+      the CLI to inform user that `duck` has been associated with `chicken rice`.
+
+    * Test case:`link chiken rice / lmnop`
+
+      Expected: Dish List contains `chicken rice`. Ingredient List does not contain `lmnop`. An error message will be
+      printed to the CLI to let user know that `lmnop` does not exist in the Ingredient List. The command is
+      disregarded.
+
+    * Test case:`link abcde / duck`
+
+      Expected: Dish List does not contain `abcde`. Ingredient List contains `duck`. An error message will be printed to
+      the CLI to let user know that `abcde` does not exist in the Dish List. The command is disregarded.
+
+
+10. Delete an existing Ingredient
+
+    * Test case:`del ingr duck`
+
+      Expected: Ingredient List List contains `duck`. A message will be printed to the CLI to ask user on confirming
+      deletion for `duck`.
+
+    * Test case:`del ingr 1`
+
+      Expected: Ingredient List contains `duck`, and `duck` is at the first position in the Ingredient List. A message
+      will be printed to the CLI to ask user on confirming deletion for `duck`.
+
+    * Test case:`del ingr lmnop`
+
+      Expected: Ingredient List does not contain `abcde`. An error message will be printed to the CLI to let user know
+      that `lmnop` does not exist in the Ingredient List. The command is disregarded.
+
+
+11. View Existing Ingredients
+
+    * Test case: `list ingr` but no Ingredient added to the Ingredient List in the first place.
+
+      Expected: An empty list of existing Ingredients with message to tell user to add Ingredients will be printed onto
+      the CLI.
+
+    * Test case: `list ingr`
+
+      Expected: A list of existing Ingredients will be printed onto the CLI.
+
+### Testing the Graph commands
+
+1. Display Graph of Dish Wastage
+
+    * Test case: `graph dish` but no Dish added to the Dish List in the first place.
+
+    * Expected: A message will be printed to the CLI to let user know that the Dish List is empty. There is nothing to
+      show.
+
+    * Test case: `graph dish`
+
+    * Expected: A graph of existing Dishes will be printed onto the CLI.
+
+
+3. Display Graph of Ingredient Wastage
+
+    * Test case: `graph ingr` but no Ingredient added to the Ingredient List in the first place.
+
+    * Expected: A message will be printed to the CLI to let user know that the Ingredient List is empty. There is
+      nothing to show.
+
+    * Test case: `graph ingr`
+
+    * Expected: A graph of existing Ingredients will be printed onto the CLI.
+
+### Testing the Find commands
+
+1. Find a Dish
+
+    * Test case: `find dish [keyword]` but no Dish added to the Dish List in the first place.
+
+    * Expected: A message will be printed to the CLI to let user know that the Dish List is empty. The keyword cannot
+      find anything.
+
+    * Test case: `find dish [keyword]`
+
+    * Expected: A list of existing Dishes that matches `[keyword]` will be printed onto the CLI.
+
+
+2. Find a Ingredient
+
+    * Test case: `find ingr [keyword]` but no Dish added to the Dish List in the first place.
+
+    * Expected: A message will be printed to the CLI to let user know that the Ingredient List is empty. The keyword
+      cannot find anything.
+
+    * Test case: `find ingr [keyword]`
+
+    * Expected: A list of existing Ingredients that matches `[keyword]` will be printed onto the CLI.
+
+### Testing the Clear commands
+
+1. Remove all Dishes
+
+    * Test case: `clear dish`
+
+    * Expected: A message will be printed to the CLI to ask user on confirming deletion of all Dishes from the Dish
+      List.
+
+
+2. Remove all Ingredients
+
+    * Test case: `clear ingr`
+
+    * Expected: A message will be printed to the CLI to ask user on confirming deletion of all Ingredients from
+      Ingredient List.
+
+
+3. Remove all Dishes and Ingredients
+
+    * Test case: `clear all`
+
+    * Expected: A message will be printed to the CLI to ask user on confirming deletion of all Dishes from Dish List and
+      all Ingredients from Ingredient List.
+
+### Testing the Sort Commands
+
+1. Sort the Dishes by amount of wastage
+
+    * Test case: `sort dish` but no Dish added to the Dish List in the first place.
+
+      Expected: An empty list of Dishes with message to tell user to add Dishes will be printed onto the CLI.
+
+    * Test case: `sort dish`
+
+      Expected: All existing Dishes in the Dish List will be sorted from having the most weight wastage to the least
+      weight wastage. A sorted list of existing Dishes will be printed onto the CLI.
+
+
+2. Sort the Ingredients by amount of wastage
+
+    * Test case: `sort ingr` but no Dish added to the Dish List in the first place.
+
+      Expected: An empty list of Ingredients with message to tell user to add Ingredients will be printed onto the CLI.
+
+    * Test case: `sort ingr`
+
+      Expected: All existing Ingredients in the Ingredient List will be sorted from having the most weight wastage to
+      the least weight wastage. A sorted list of existing Ingredients will be printed onto the CLI.
+
+### Testing the Exit Command
+
+1. Exit Food-O-Rama and Save User Data
+    * Test case: `bye`
+
+      Expected: Food-O-Rama terminates and saves user data in dishes.txt and ingredients.txt. When Food-O-Rama run
+      again, previously saved user data will exist.
