@@ -12,53 +12,32 @@ As LOTS is a CLI program, this would greatly benefit any user that excels in typ
 
 **Link to Project List Page** - [Project List Page](https://github.com/AY2122S1-CS2113-T13-2/tp/pulls?q=is%3Apr+author%3AWaiKit-nus)
 
-### Added Features:
+### Added Features/Tests:
 * **Add Command Feature**:
     * **Function:** Allow adding of people into the list.
-    * **Justification:** The program requires people to be added into the list to manage the orders.
-    
-### Added Classes:
 * `Person Class`
     * **Function:** To hold all the information regarding the individual person.
     * **Justification:** Utilising OOP to better manage the individual's data.
-    
 * `PeopleManager Class`
     * **Function:** To manage a list of people.
     * **Justification:** Utilising OOP to allow for better tracking of the list of person.
-    
-### Testing:
-* **AddCommandTest:** 
+* **AddCommandTest Junit:** 
     * **Function:** To test and capture as many edge cases as possible.
-    * **Justification:** Reduce the number of bugs in the code.
-    
 * **Final Product Testing:**
     * **Function:** To try and break the program by throwing as many edge cases as possible at it.
-    * **Justification:** Reduce the number of bugs in the code.
-    
-    
 ### Enhancements implemented:
-* Made all the person's name uppercase. 
-    * **Justification:** To ensure that the person's names are standardised during storage, to prevent
-    duplicates.
-* Added Total Cost and Total Quantity of everyone in the list.
-    * **Justification:** Increase convenience to users, allowing them to view the total cost and
-      quantity easily for everyone.
+* Made all the person's name uppercase to prevent duplicates.
+* Added Total Cost and Total Quantity of everyone in the list for better UI.
 * Added `executeFromFile` function to allow data to be added from storage into the list.
-    * **Justification:** Allows retrieval of data from the storage.
 * Edited error messages for Add Command in response to issue (Issues [#177](https://github.com/AY2122S1-CS2113-T13-2/tp/issues/177), 
   [#190](https://github.com/AY2122S1-CS2113-T13-2/tp/issues/190), 
   [#205](https://github.com/AY2122S1-CS2113-T13-2/tp/issues/205),
   [#208](https://github.com/AY2122S1-CS2113-T13-2/tp/issues/208)).
-    * **Justification:** A better error message has been crafted to allow users to understand the error.
-  
 ### Contributions to UG
 * Added the guideline for `Add Function` in the user guide. (Pull Request [#243](https://github.com/AY2122S1-CS2113-T13-2/tp/pull/243)).
-
 ### Contributions to DG
-* Manager Component with diagram under Design.
+* Manager Component with diagram under Design and added `MenuAndOrdersSequenceDiagram`.
 * Add, Delete, Edit, Orders and Find Command Classes under Implementation.
-* Added `MenuAndOrdersSequenceDiagram`.
-
 ### Contributions to team-based tasks
 * Creating User Stories.
 * Maintaining Issue Trackers.
