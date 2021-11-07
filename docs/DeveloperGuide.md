@@ -210,6 +210,23 @@ type in correct Commands/Parameters.
 ### Find
 
 ### Edit
+The implementation of the Edit function allows the User to edit several 
+instance variables of the Dishes and Ingredients present in the DishList and
+IngredientList.
+
+![](images/edit_dish_name_sequence_diagram.png)
+This Sequence Diagram shows how the `EditDishNameCommand` class functions.
+
+Currently the User is able to edit the following:
+* Dish Name
+* Dish Wastage Weight
+* Ingr Name
+* Ingr Wastage Weight
+* Ingr Storage Weight
+
+The remaining Edit classes, namely `EditDishWasteCommand`, `EditIngrNameCommand`, 
+`EditIngrStoredCommand` and `EditIngrWasteCommand` follow sequences similar to 
+the one shown above in their implementation.
 
 ### Set
 
