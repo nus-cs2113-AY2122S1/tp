@@ -75,7 +75,7 @@ public class AddOrderCommand extends Command {
             nameToAdd = parameters.get(CommandParameters.NAME);
             for (Medicine medicine : medicines) {
                 if (medicine instanceof Stock && medicine.getMedicineName().equalsIgnoreCase(nameToAdd)
-                && !((Stock) medicine).isDeleted()) {
+                    && !((Stock) medicine).isDeleted()) {
                     nameExistsInStock = true;
                     break;
                 }
