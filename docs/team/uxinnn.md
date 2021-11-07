@@ -7,43 +7,76 @@ Please see below for my contributions to Traveller.
 
 ### Summary of Contributions
 
-#### Features
-* `new`: Allow users to create new trips.
-  * Core part of Traveller, which is to enable users to plan trips.
-* `view`: Allow users to view trips created.
-  * Core part of Traveller, enable users to view their created trips.
-* `add-day`: Allow users to add days to each trip.
-  * Usually, people plan trips by day. This enables users to do just that using Traveller, without having
-1 large lump of activities to do without any indication of which day each activity will be done on.
-* `add-item`: Allow users to add items to each day.
-  * Represents an activity that someone on the trip will do. Enable users to have multiple items in a day so that
-they can plan multiple activities per day.
-  * Has an added time field to help users easily organise the duration of each item.
-* `exit`: Exits the application.
+#### Code Contributions
+* RepoSense Link: [here](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=Uxinnn&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
+  * Refer to this link for details of my code contributions.
 
-#### Other code contributions
-* Implemented the main structure of Traveller.
-* Restructured code to streamline architecture of Traveller.
-* Added a lot of exceptions, assertions, logging, test cases to overall code, 
-including classes/methods not written by me.
-* Checked for bugs before deadlines.
+#### Enhancements Implemented
+* **Features**
+  * `new`: Allow users to create new trips.
+  * `view`: Allow users to view trips created.
+  * `add-day`: Allow users to add days to each trip.
+  * `add-item`: Allow users to add items to each day.
+  * `exit`: Exits the application.
+* **Others**
+  * Implemented the main structure of Traveller.
+  * Restructured code to streamline architecture of Traveller.
+  * Added a lot of exceptions, assertions, logging, test cases to overall code,
+    including classes/methods not written by me.
+  * Checked for bugs before deadlines.
 
-#### Project Management
-* Created and assigned issues to group members for v2.0.
-* Reviewed multiple PRs.
-* Keep track of deadlines.
+#### Contributions to UG
+* Created overall structure of the UG.
+* Kept it updated and debugged.
+* Wrote Introduction, Contents Table, Quick Start, new, add-day, add-item, view sections.
+* Contributed to FAQ.
 
-#### Documentation
-* User Guide (UG)
-  * Created overall structure of the UG.
-  * Kept it updated and debugged.
-  * Wrote Introduction, Contents Table, Quick Start, new, add-day, add-item, view sections.
-  * Contributed to FAQ.
+#### Contributions to DG
 * Developer Guide (DG)
   * Created overall structure of the DG.
   * Debugged DG.
-  * Wrote preface, Table of Contents, Design & Implementation header paragraph, World Map header paragraph, 
-Main Traveller header paragraph, Traveller class, Parser class.
+  * Wrote preface, Table of Contents, Design & Implementation header paragraph, World Map header paragraph,
+    Main Traveller header paragraph, Traveller class, Parser class.
+  * UML diagrams done:
+    * [Parser sequence diagram](../documentationPics/parserSequenceDiagram.jpeg)
+    * [WorldMap class diagram](../documentationPics/worldMapClassDiagram.jpeg)
+    * [Design overview](../documentationPics/designOverview.jpeg) (Not UML)
+    * [WorldMap design](../documentationPics/worldMapDesign.png) (Not UML)
+    * [MainTraveller design](../documentationPics/mainTravellerDesign.png) (Not UML)
 
-RepoSense Link: [here](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=Uxinnn&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
-  * Refer to this link for details of my code contributions.
+#### Contributions to Team-based tasks
+* Set up GitHub team org and repo.
+* Maintained issue tracker.
+* Created and assigned issues to group members for v2.0 and v2.1.
+* Released v2.0 and v2.1.
+* Wrote sections not specific to features in UG and DG (Detailed above in the UG DG points).
+* Kept track of deadlines.
+
+#### Review/mentoring contributions
+* PRs merged: [#167](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/167), 
+[](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/166), 
+[#155](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/155), 
+[#154](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/154), 
+[#153](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/153), 
+[#151](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/151), 
+[#149](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/149), 
+[#112](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/112), 
+[#101](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/101), 
+[#100](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/100), 
+[#99](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/99), 
+[#96](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/96), 
+[#92](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/92), 
+[#91](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/91), 
+[#77](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/77), 
+[#72](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/72), 
+[#70](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/70), 
+[#46](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/46), 
+[#22](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/22), 
+[#15](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/15)
+
+* Comments: [#54](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/54)
+  * Subsequent comments were done on Telegram.
+
+#### Contributions beyond the project team
+* Bugs found during PED.
+* Comments given during UG/DG peer review.
