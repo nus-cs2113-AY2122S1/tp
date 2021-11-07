@@ -175,8 +175,8 @@ the high level representation of the component.
 
 **API:** `Parser.java`
 
-1. A user input is given to `MainParser` that determines which subclass of `Parser` is required
-2. Inputs starting with `help`, `return`, and `exit` are handled by `MainParser`
+1. A user input is given to `ParserManager` that determines which subclass of `Parser` is required
+2. Inputs starting with `help`, `return`, and `exit` are handled by `ParserManager`
 3. Other inputs are handled by `Parser`, which has a total of 7 subclasses
 4. `AddParser` handles the parsing of inputs starting with `set` and `add`
 5. `DeleteParser` handles the parsing of inputs starting with `remove` and `delete`
