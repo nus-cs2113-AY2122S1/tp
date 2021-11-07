@@ -64,9 +64,10 @@ public class MainUI {
         System.out.println("list-dish");
         printSingleLine();
         System.out.println("- Ingredient Commands:");
-        System.out.println("add-ingredient/INGREDIENT_NAME/QUANTITY");
+        System.out.println("add-ingredient/INGREDIENT_NAME/QUANTITY/PRICE/EXPIRY_DATE");
         System.out.println("remove-ingredient/INGREDIENT_INDEX");
         System.out.println("list-ingredient");
+        System.out.println("find-expired-ingredient/INPUT_DATE");
         printSingleLine();
         System.out.println("- Finance Commands:");
         System.out.println("add-finance/DATE/ACCOUNT");
