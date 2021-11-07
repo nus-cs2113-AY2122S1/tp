@@ -26,12 +26,12 @@ public class ExpenditureTest {
 
 
     @Test
-    public void toStringWithIndex_tooLongDescription_truncatedDescription(){
+    public void toStringWithIndex_tooLongDescription_truncatedDescription() {
         AllRecordList testRecordList = new AllRecordList();
         Expenditure testExpenditure = new ExpenditureBuilder().build();
 
-        Expenditure tooLongDescriptionExpenditure = new ExpenditureBuilder().
-                withDescription(TOO_LONG_DESCRIPTION).build();
+        Expenditure tooLongDescriptionExpenditure = new ExpenditureBuilder()
+                .withDescription(TOO_LONG_DESCRIPTION).build();
 
         String expectedDescriptionToPrint = TOO_LONG_DESCRIPTION.substring(0, TRUNCATION_INDEX) + ELLIPSES;
 
@@ -44,7 +44,7 @@ public class ExpenditureTest {
     }
 
     @Test
-    public void equals(){
+    public void equals() {
         Expenditure testExpenditure = new ExpenditureBuilder().build();
 
         // same object -> returns true
