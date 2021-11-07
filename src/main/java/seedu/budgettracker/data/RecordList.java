@@ -107,12 +107,6 @@ public class RecordList {
         return loanRecords.get(index);
     }
 
-    public boolean checkOverspending() {
-        double totalSpending = getTotalAmountSpentOnExpenditures();
-
-        return (totalSpending > budget.getAmount() && budget.getAmount() > 0);
-    }
-
     /**
      * Returns the total amount spent on expenditures in this month.
      *

@@ -5,9 +5,10 @@ import seedu.budgettracker.data.records.Expenditure;
 import seedu.budgettracker.logic.commands.exceptions.CommandException;
 import seedu.budgettracker.ui.TextUi;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 
-import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_EXPENDITURE_AMOUNT;
+import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_AMOUNT;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_YEAR;
 import static seedu.budgettracker.common.Messages.MESSAGE_AMOUNT_EXCEEDED;
 
@@ -17,6 +18,8 @@ import static seedu.budgettracker.common.Messages.MESSAGE_AMOUNT_EXCEEDED;
 public class AddExpenditureCommand extends AddCommand {
 
     public static final boolean IS_NOT_LOADING_STORAGE = false;
+
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     private final String description;
     private final double spending;
@@ -50,7 +53,7 @@ public class AddExpenditureCommand extends AddCommand {
      */
     public void execute() throws CommandException {
         if (spending <= 0) {
-            throw new CommandException(MESSAGE_INVALID_EXPENDITURE_AMOUNT);
+            throw new CommandException(MESSAGE_INVALID_AMOUNT);
         }
         if (spending > 1000000000) {
             throw new CommandException(MESSAGE_AMOUNT_EXCEEDED);

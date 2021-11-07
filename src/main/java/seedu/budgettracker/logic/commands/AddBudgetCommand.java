@@ -5,7 +5,7 @@ import seedu.budgettracker.logic.commands.exceptions.CommandException;
 import seedu.budgettracker.ui.TextUi;
 
 import static seedu.budgettracker.common.Messages.MESSAGE_AMOUNT_EXCEEDED;
-import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_BUDGET_AMOUNT;
+import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_AMOUNT;
 
 public class AddBudgetCommand extends AddCommand {
 
@@ -27,7 +27,7 @@ public class AddBudgetCommand extends AddCommand {
 
     public void execute() throws CommandException {
         if (amount <= 0) {
-            throw new CommandException(MESSAGE_INVALID_BUDGET_AMOUNT);
+            throw new CommandException(MESSAGE_INVALID_AMOUNT);
         }
         if (amount > 1000000000) {
             throw new CommandException(MESSAGE_AMOUNT_EXCEEDED);

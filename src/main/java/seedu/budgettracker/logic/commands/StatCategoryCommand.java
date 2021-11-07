@@ -7,6 +7,8 @@ import seedu.budgettracker.ui.TextUi;
 public class StatCategoryCommand extends StatCommand {
     int month;
 
+
+
     public StatCategoryCommand(int month) {
         this.month = month;
     }

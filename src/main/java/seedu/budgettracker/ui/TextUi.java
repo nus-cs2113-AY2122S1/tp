@@ -47,13 +47,6 @@ public class TextUi {
         in = new Scanner(System.in);
     }
 
-    //    public static void showRecordsListView(RecordList budgetList) {
-    //        int budgetListLength = RecordList.numberOfRecords;
-    //        for (int i = 0; i < budgetListLength; i += 1) {
-    //            System.out.println(budgetList.getRecord(i));
-    //        }
-    //    }
-
     public static void showWelcomeMessage() {
         DateTimeFormatter dateTime = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
         LocalDateTime now = LocalDateTime.now();
@@ -169,9 +162,9 @@ public class TextUi {
     }
 
     public static void showBudgetEditedMessage(Budget newBudget) {
-        assert newBudget.getAmount() > 0 : "Edited Expenditure should have a positive amount";
+        assert newBudget.getAmount() > 0 : "Edited Budget should have a positive amount";
 
-        System.out.println("Loan has been successfully edited!");
+        System.out.println("Budget has been successfully edited!");
         System.out.println("New values: ");
         showBudgetDetails(newBudget);
 
@@ -204,7 +197,7 @@ public class TextUi {
     }
 
     public static void showLoanEditedMessage(Loan newLoan) {
-        assert newLoan.getAmount() > 0 : "Edited Expenditure should have a positive amount";
+        assert newLoan.getAmount() > 0 : "Edited Loan should have a positive amount";
 
         System.out.println("Loan has been successfully edited!");
         System.out.println("New values: ");
@@ -476,7 +469,7 @@ public class TextUi {
     public static void displayStats(double[] categoryPercentage, String topCategory, double topCategorySpending) {
         drawHorizontalGraph(categoryPercentage);
         System.out.println("The category you spent the most on is: " + topCategory);
-        System.out.println("The amount you spent on this category is: $" + topCategorySpending);
+        System.out.println("The amount you spent on this category is: $" + df.format(topCategorySpending));
         printDivider();
     }
 

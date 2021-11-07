@@ -2,10 +2,8 @@ package seedu.budgettracker.common;
 
 public class Messages {
 
-    public static final String MESSAGE_INVALID_EXPENDITURE_AMOUNT = "Amount entered must be greater than 0.";
-    public static final String MESSAGE_AMOUNT_EXCEEDED = "Expenditure amount more than "
-            + "1 billion is currently not supported";
-    public static final String MESSAGE_INVALID_BUDGET_AMOUNT = "Amount entered must be greater than or equals to 0.";
+    public static final String MESSAGE_INVALID_AMOUNT = "Amount entered must be greater than 0.";
+    public static final String MESSAGE_AMOUNT_EXCEEDED = "Amount more than 1 billion is currently not supported";
     public static final String MESSAGE_INVALID_DATE = "Date entered is invalid\n%1$s";
     public static final String MESSAGE_INVALID_YEAR = "The date entered belongs to a year outside of your "
             + "current storage file. \n"
