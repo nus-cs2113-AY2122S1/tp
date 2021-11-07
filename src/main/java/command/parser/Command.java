@@ -291,6 +291,7 @@ public class Command {
         Task selectedTask = parserChecks.getTaskFromIndex(taskType, module.taskList.getTaskList());
         if (selectedTask != null) {
             selectedTask.parseDeadline(taskDescription);
+            Ui.printUpdateTaskDeadline(selectedTask);
         }
     }
 
