@@ -376,8 +376,7 @@ To help young adults who are living in their own home keep track of ingredients 
      Expected: No recipe added. Details of the error are shown, command usage message is shown.
    2. Test case: `add recipe r/Chicken Soup q/1 i/Salt q/20` <br/>
     Expected: Similar to previous.
-
-<<<<<<< HEAD
+   
 ### Delete a recipe
 1. Delete a recipe
     1. Prerequisite: The recipe "Chicken Soup" exist in the RecipeList.
@@ -391,6 +390,66 @@ To help young adults who are living in their own home keep track of ingredients 
     1. Prerequisite: The recipe "Apple Pie" doesn't exist in the RecipeList.
     2. Test case: `delete recipe r/Apple Pie` <br/>
        Expected: No recipe deleted. Details of the error is shown.
+
+### List recipes
+1. List recipes when there are some recipes stored in the recipe list.
+    1. Test case: `list recipes` <br/>
+       Expected: A list of recipes with all ingredients in this recipe.<br/><br/>
+
+2. List recipes when the recipe does not exist in the recipe list.
+    1. Test case: `list recipes` <br/>
+       Expected: A message that tells you the recipe list is empty appears.<br/><br/>
+
+### View a recipe
+1. View a recipe that is stored in the recipe list.
+    1. Prerequisite: The recipe "Apple Pie" exists in the recipe list.
+    2. Test case: `view recipe r/Apple Pie` <br/>
+       Expected: The recipe named "Apple Pie" and its ingredients with corresponding quantities and units.<br/><br/>
+
+2. View a recipe which does not exist.
+    1. Prerequisite: The recipe "Chicken Soup" does not exist in the recipe list.
+    2. Test case: `view recipe r/Chicken Soup` <br/>
+       Expected: The message "Sorry. No matching recipes found!"<br/><br/>
+
+### Update a recipe
+1. Update a recipe which does not exist in the recipe list.
+    1. Prerequisite: The recipe "Apple Pie" does not exist in the recipe list.
+    2. Test case: `update recipe r/Apple Pie i/Flour q/10` <br/>
+       Expected: The message "Unable to update this recipe: Apple Pie. No matching recipes or ingredients found, please 
+       check your input again."<br/><br/>
+
+2. Update a recipe by adding an new ingredient
+    1. Prerequisite: The recipe "Chicken Soup" exists in the recipe list, and the ingredient "Chicken" was not 
+       added before.
+    2. Test case: `update recipe r/Chicken Soup i/Chicken q/10` <br/>
+       Expected: The message "I've updated this recipe: Chicken Soup. You may want to use the 'list recipes' 
+       command to check the whole recipe list."<br/><br/>
+   
+3. Update a recipe by deleting an ingredient in this recipe (not the last ingredient)
+    1. Prerequisite: The recipe "Chicken Soup" exists in the recipe list, and the ingredient "Chicken" has been
+       added before, and "Chicken" is not the last ingredient in the recipe. i.e., after deleting "Chicken", there
+       are still some ingredients in this "Chicken Soup" recipe.
+    2. Test case: `update recipe r/Chicken Soup i/Chicken q/0` <br/>
+       Expected: The message "I've updated this recipe: Chicken Soup. You may want to use the 'list recipes'
+       command to check the whole recipe list."<br/><br/>
+
+4. Update a recipe by deleting an ingredient in this recipe (the last ingredient)
+    1. Prerequisite: The recipe "Chicken Soup" exists in the recipe list, and the ingredient "Chicken" has been
+       added before, and "Chicken" is exactly the last ingredient in the recipe. i.e., after deleting "Chicken", there
+       are no ingredients in this "Chicken Soup" recipe.
+    2. Test case: `update recipe r/Chicken Soup i/Chicken q/0` <br/>
+       Expected: The message "Unable to update this recipe: Chicken Soup. Why update fails: There should be at least 
+       one ingredient in the recipe. But your command may result in a recipe without any ingredients. Therefore, please
+       add another ingredient first if you still want to delete this ingredient."<br/><br/>
+
+5. Update a recipe by modifying the quantity of ingredients in the recipe
+    1. Prerequisite: The recipe "Chicken Soup" exists in the recipe list, and the ingredient "Chicken" has been
+       added before, and its quantity is not 0. In fact, you are allowed to update multiple ingredients in the recipe 
+       at one time by typing in more "i/" and "q/" for each ingredient.
+    2. Test case: `update recipe r/Chicken Soup i/Chicken q/10` <br/>
+       Expected: The message "I've updated this recipe: Chicken Soup. You may want to use the 'list recipes'
+       command to check the whole recipe list."<br/><br/>
+
 
 ### Cooked a recipe
 
