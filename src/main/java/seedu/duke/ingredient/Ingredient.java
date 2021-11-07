@@ -1,7 +1,13 @@
+//@@author leecheokfeng
+
 package seedu.duke.ingredient;
 
 import java.time.LocalDate;
 
+/**
+ * Represents each different ingredient in the restaurant's ingredient inventory.
+ * Contains information about the ingredient's name, quantity, price and expiry date.
+ */
 public class Ingredient {
 
     private String name;
