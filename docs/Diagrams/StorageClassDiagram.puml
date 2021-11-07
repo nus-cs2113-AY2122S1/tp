@@ -16,6 +16,10 @@ class Habit
 
 ImportParser -> Habit
 
+class Interval
+
+ImportParser -> Interval
+
 package "goal" {
 class Goal
 class GoalList

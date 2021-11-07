@@ -2,12 +2,10 @@
 
 !include Style.puml
 
-header DeleteHabitCommand Feature
+-> ": DeleteHabitCommand": runCommand\n(goalList: GoalList,\n printManager: PrintManager,\n storage: Storage)
+activate ": DeleteHabitCommand"
 
--> ": DeleteGoalCommand": runCommand(goalList: GoalList,\n printManager: PrintManager,\n storage: Storage)
-activate ": DeleteGoalCommand"
-
-": DeleteGoalCommand" -> "goalList: GoalList": deleteHabitFromGoal(goalIndex: int,\n printManager: PrintManager)
+": DeleteHabitCommand" -> "goalList: GoalList": deleteHabitFromGoal\n(goalIndex: int,\n habitIndex: int,\n printManager: PrintManager)
 activate "goalList: GoalList"
 
 create "goal: Goal"
@@ -15,25 +13,32 @@ create "goal: Goal"
 activate "goal: Goal"
 "goalList: GoalList" <-- "goal: Goal"
 
-create "habits: ArrayList<habit>"
-"goalList: GoalList" -> "habits: ArrayList<habit>"
-activate "habits: ArrayList<habit>"
-"goal: Goal" <- "habits: ArrayList<habit>": getHabitList()
-"goalList: GoalList" <-- "goal: Goal"
+create "habitList: ArrayList<habit>"
+"goalList: GoalList" -> "habitList: ArrayList<habit>"
+activate "habitList: ArrayList<habit>"
+"goal: Goal" <- "habitList: ArrayList<habit>": getHabitList()
+"goal: Goal" --> "habitList: ArrayList<habit>"
+"goalList: GoalList" <-- "habitList: ArrayList<habit>"
 
 create "habit: Habit"
 "goalList: GoalList" -> "habit: Habit"
 activate "habit: Habit"
-"habits: ArrayList<habit>" <- "habit: Habit": get(habitIndex: int)
-"habits: ArrayList<habit>" --> "habit: Habit"
+"habitList: ArrayList<habit>" <- "habit: Habit": getHabit\n(habitList: ArrayList<Habit>,\n habitIndex: int)
+"habitList: ArrayList<habit>" --> "habit: Habit": habit
+"goalList: GoalList" <-- "habit: Habit"
+
 
 "goalList: GoalList" -> "goal: Goal": removeHabit(habitIndex: int)
 "goal: Goal" -> "goal: Goal": remove(habitIndex: int)
 activate "goal: Goal"
+"goal: Goal" --> "goal: Goal"
 deactivate "goal: Goal"
+"goalList: GoalList" <-- "goal: Goal"
 
 
-"goalList: GoalList" -> ": PrintManager": printRemovedHabit\n(goal.getDescription(): String,\n habit.getHabitName(): String)
+"goalList: GoalList" -> "goal: Goal": printRemovedHabit\n(goal.getDescription(): String,\n habit.getHabitName(): String)
+"goal: Goal" -> "habit: Habit"
+"habit: Habit" -> ": PrintManager"
 activate ": PrintManager"
 
 @enduml

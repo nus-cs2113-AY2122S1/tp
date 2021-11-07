@@ -1,0 +1,48 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+-> ":UpdateGoalCommand": runCommand(goalList: GoalList,\nprintManager: PrintManager,\nstorage: Storage
+activate ":UpdateGoalCommand"
+
+":UpdateGoalCommand" -> "goalList: GoalList": updateGoalAttributes(goalIndex,\nnewGoalName, newGoalType,\nnewGoalEndDate, updateAttributes,\nexcessAttributes, printManager)
+activate "goalList: GoalList"
+
+"goalList: GoalList" -> "printManager: PrintManager": printUpdateGoalMessageStart()
+activate "printManager: PrintManager"
+"printManager: PrintManager" --> "goalList: GoalList"
+deactivate "printManager: PrintManager"
+
+alt#gold #lightblue updateAttributes[0] == 1
+"goalList: GoalList" -> "goalList: GoalList": updateGoalName(goalIndex,\nnewGoalName, printManager)
+activate "goalList: GoalList"
+"goalList: GoalList" --> "goalList: GoalList":
+deactivate "goalList: GoalList"
+end
+
+alt#gold #lightblue updateAttributes[1] == 1
+"goalList: GoalList" -> "goalList: GoalList": updateGoalType(goalIndex,\nnewGoalType, printManager)
+activate "goalList: GoalList"
+"goalList: GoalList" --> "goalList: GoalList":
+deactivate "goalList: GoalList"
+end
+
+alt#gold #lightblue updateAttributes[2] == 1
+"goalList: GoalList" -> "goalList: GoalList": updateGoalEndDate(goalIndex,\nnewGoalEndDate, printManager)
+activate "goalList: GoalList"
+"goalList: GoalList" --> "goalList: GoalList":
+deactivate "goalList: GoalList"
+end
+
+"goalList: GoalList" -> "printManager: PrintManager": printUpdateGoalMessageEnd\n(excessAttributes)
+activate "printManager: PrintManager"
+"printManager: PrintManager" --> "goalList: GoalList"
+deactivate "printManager: PrintManager"
+
+"goalList: GoalList" --> ":UpdateGoalCommand"
+deactivate "goalList: GoalList"
+
+<-- ":UpdateGoalCommand"
+deactivate ":UpdateGoalCommand"
+
+@enduml

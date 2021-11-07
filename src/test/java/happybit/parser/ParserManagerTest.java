@@ -19,98 +19,98 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-class MainParserTest {
+class ParserManagerTest {
 
     @Test
     void parse_emptyInput_exceptionThrown() {
         try {
-            MainParser.parse("");
+            ParserManager.parse("");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(MainParser.ERROR_NO_INPUT, e.getMessage());
+            assertEquals(ParserManager.ERROR_NO_INPUT, e.getMessage());
         }
         try {
-            MainParser.parse("    ");
+            ParserManager.parse("    ");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(MainParser.ERROR_NO_INPUT, e.getMessage());
+            assertEquals(ParserManager.ERROR_NO_INPUT, e.getMessage());
         }
     }
 
     @Test
     void parse_invalidInput_exceptionThrown() {
         try {
-            MainParser.parse("   aaa@@@aaa  ");
+            ParserManager.parse("   aaa@@@aaa  ");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(MainParser.ERROR_INVALID_INPUT, e.getMessage());
+            assertEquals(ParserManager.ERROR_INVALID_INPUT, e.getMessage());
         }
     }
 
     @Test
     void parse_validSetInput_expectAddGoalCommand() throws HaBitParserException {
-        assertEquals(AddGoalCommand.class, MainParser.parse("set n/Reduce spending e/31122022").getClass());
+        assertEquals(AddGoalCommand.class, ParserManager.parse("set n/Reduce spending e/31122022").getClass());
     }
 
     @Test
     void parse_validAddInput_expectAddHabitCommand() throws HaBitParserException {
-        assertEquals(AddHabitCommand.class, MainParser.parse("add n/Don't drink BBT g/1 i/3").getClass());
+        assertEquals(AddHabitCommand.class, ParserManager.parse("add n/Don't drink BBT g/1 i/3").getClass());
     }
 
     @Test
     void parse_validGoalInput_expectAddHabitCommand() throws HaBitParserException {
-        assertEquals(SetCommand.class, MainParser.parse("goal g/1").getClass());
+        assertEquals(SetCommand.class, ParserManager.parse("goal g/1").getClass());
     }
 
     @Test
     void parse_validListInput_expectListGoalsCommand() throws HaBitParserException {
-        assertEquals(ListGoalsCommand.class, MainParser.parse("  list  ").getClass());
+        assertEquals(ListGoalsCommand.class, ParserManager.parse("  list  ").getClass());
     }
 
     @Test
     void parse_validViewInput_expectListHabitsCommand() throws HaBitParserException {
-        assertEquals(ListHabitsCommand.class, MainParser.parse("view g/1").getClass());
+        assertEquals(ListHabitsCommand.class, ParserManager.parse("view g/1").getClass());
     }
 
     @Test
     void parse_validRemoveInput_expectDeleteGoalCommand() throws HaBitParserException {
-        assertEquals(DeleteGoalCommand.class, MainParser.parse("remove g/1").getClass());
+        assertEquals(DeleteGoalCommand.class, ParserManager.parse("remove g/1").getClass());
     }
 
     @Test
     void parse_validDeleteInput_expectDeleteHabitCommand() throws HaBitParserException {
-        assertEquals(DeleteHabitCommand.class, MainParser.parse("delete g/1 h/1").getClass());
+        assertEquals(DeleteHabitCommand.class, ParserManager.parse("delete g/1 h/1").getClass());
     }
 
     @Test
     void parse_validDoneInput_expectDoneHabitCommand() throws HaBitParserException {
-        assertEquals(DoneHabitCommand.class, MainParser.parse("done g/1 h/1").getClass());
+        assertEquals(DoneHabitCommand.class, ParserManager.parse("done g/1 h/1").getClass());
     }
 
     @Test
     void parse_validUpdateInput_expectUpdateGoalCommand() throws HaBitParserException {
-        assertEquals(UpdateGoalCommand.class, MainParser.parse("update g/1 n/Read more").getClass());
+        assertEquals(UpdateGoalCommand.class, ParserManager.parse("update g/1 n/Read more").getClass());
     }
 
     @Test
     void parse_validChangeInput_expectUpdateHabitCommand() throws HaBitParserException {
-        assertEquals(UpdateHabitCommand.class, MainParser.parse("change g/2 h/1 i/7").getClass());
+        assertEquals(UpdateHabitCommand.class, ParserManager.parse("change g/2 h/1 i/7").getClass());
     }
 
     @Test
     void parse_validExitInput_expectExitCommand() throws HaBitParserException {
-        assertEquals(ExitCommand.class, MainParser.parse("  exit aaa ").getClass());
+        assertEquals(ExitCommand.class, ParserManager.parse("  exit aaa ").getClass());
     }
 
     @Test
     void parse_validReturnInput_expectReturnCommand() throws HaBitParserException {
-        assertEquals(ReturnCommand.class, MainParser.parse("  return  aaa  ").getClass());
+        assertEquals(ReturnCommand.class, ParserManager.parse("  return  aaa  ").getClass());
 
     }
 
     @Test
     void parse_validHelpInput_expectHelpCommand() throws HaBitParserException {
-        assertEquals(HelpCommand.class, MainParser.parse(" help aaa  ").getClass());
-        assertEquals(HelpCommand.class, MainParser.parse(" aaa ").getClass());
+        assertEquals(HelpCommand.class, ParserManager.parse(" help aaa  ").getClass());
+        assertEquals(HelpCommand.class, ParserManager.parse(" aaa ").getClass());
     }
 }
