@@ -99,7 +99,7 @@ class MemberListTest {
         try {
             assertEquals(fullMemberList.getMember(1).getName(), "IAN HWANG");
             assertEquals(fullMemberList.getMember(1).getStudentNumber(), "A0123456A");
-            assertEquals(fullMemberList.getMember(1).getGender(), "M");
+            assertEquals(fullMemberList.getMember(1).getGender(), "F");
             assertEquals(fullMemberList.getMember(1).getPhoneNumber(), "98441232");
         } catch (InvalidMemberException e) {
             System.out.println(e.getMessage());
