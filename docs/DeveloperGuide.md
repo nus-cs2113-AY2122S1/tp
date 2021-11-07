@@ -28,7 +28,7 @@ and third-party libraries -- include links to the original source as well}
 > can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. 
 
 ### Architecture
-(Some architecture diagram)
+![](diagrams/architecture.png)
 The Architecture diagram above explains the high-level design of the Typists app.  
 Given below is a quick overview of main components and how they interact with each other.
 
