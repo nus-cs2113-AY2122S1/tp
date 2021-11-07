@@ -5,6 +5,7 @@ import seplanner.commands.RemoveMapCommand;
 import seplanner.commands.RemoveModCommand;
 import seplanner.commands.RemoveUniCommand;
 import seplanner.constants.Constants;
+import seplanner.exceptions.AddParseException;
 import seplanner.exceptions.RemoveParseException;
 import seplanner.modules.Module;
 import seplanner.modules.ModuleList;
@@ -179,8 +180,16 @@ public class RemoveCommandParser {
         String secondParam = argumentSubstrings[1].trim();
         if (ParseCondition.isNumeric(firstParam) && ParseCondition.isNumeric(secondParam)) {
             uniIndex = Integer.parseInt(firstParam);
+            if (ParseCondition.isIndexOutOfBounds(uniIndex, universityMasterList)) {
+                logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
+                throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNIINDEXNOTAVAILABLE, 1, false);
+            }
             mapIndex = Integer.parseInt(secondParam);
             university = universityMasterList.get(uniIndex - 1);
+            if (ParseCondition.isIndexOutOfBounds(uniIndex, universityMasterList)) {
+                logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
+                throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNIINDEXNOTAVAILABLE, 1, false);
+            }
         } else {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             String error = (ParseCondition.isNumeric(firstParam)) ? Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING
@@ -195,7 +204,8 @@ public class RemoveCommandParser {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1, false);
         }
-        if (ParseCondition.isIndexOutOfBounds(uniIndex, mapIndex, universityMasterList, moduleSelectedList)) {
+        if (ParseCondition.isRemovedMappingIndexOutOfBounds(uniIndex, mapIndex, universityMasterList,
+                universitySelectedList)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
             throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING, 1, false);
         }

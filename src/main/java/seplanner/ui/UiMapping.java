@@ -13,6 +13,7 @@ public class UiMapping extends Ui {
      * @param index The index of the module mapping.
      */
     public static void printMapping(ModuleMapping mm, int index, boolean printMC) {
+        out.print(Constants.INDENTATION);
         printIndex(index, false);
         String mappingDetails = " " + mm.getLocalModule().getModuleCode()
                 + Constants.MODULE_MAPPING_SEPARATOR + mm.getMappedModule().getModuleCode()
