@@ -199,7 +199,7 @@ On executing the command (`executeCommand()` called), the `CommandResult` should
     <img src="images/SeanUMLDiagrams/TaskManager_Object_Diagram.png" width="850">
 </p>
 
-The `TaskManager` component is what manages all the Tasks in the program
+The `TaskManager` component is what manages all the Tasks in the program.  
 In `TaskManager`, there are 2 lists. `taskList` and `latestFilteredList`.
 - `taskList`: corresponds to the list of all tasks currently stored in the `TaskManager`.
 - `latestFilteredList`: corresponds to the latest list that was printed by the `list` command.
