@@ -2,6 +2,8 @@
 
 ![](https://melmagazine.com/wp-content/uploads/2019/07/Stonks_Meme.jpg)
 
+---
+
 ## Introduction
 
 Stonks XD is your go-to smart money management application that is able to: 
@@ -56,6 +58,7 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
    2.6 Currency Conversion
    * [Set currency: `set_curr`](#set-currency-set_curr)
    * [Check current currency: `check_curr`](#check-current-currency-check_curr)
+   * [List all currency conversions: `list_curr`](#list-currency-list_curr)
 
    2.7 Graphing
    * [View yearly report: `show_graph`](#view-yearly-report-show_graph)
@@ -79,27 +82,47 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
 ## 1. Quick Start
 
 1. Ensure that you have Java 11 or above installed.
+
+
 2. Download the latest version of `StonksXD.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-3/tp/releases).
+
+
 3. Copy the file to the folder you want to use as the home folder for your `Stonks XD`.
-4. Open the Command-Line interface (CLI) and navigate to the directory where you saved the `.jar` file and run 
+
+
+4. Open the Command-Line interface (CLI) and navigate to the directory where you saved the `.jar` file and run
 `java -jar StonksXD.jar` in the command line. `Stonks XD` will start up.
+
+
 5. In `Stonks XD`, type the command in the CLI and press `Enter` on your keyboard to execute it. (Tip: type `help` 
 to show all available commands and their format.)
+
+
 6. Use the format `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY` to add expense entries to `Stonks XD`.
+
+
 7. Use the format `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY` to add income entries to `Stonks XD`.
+
+
 8. Type `balance` to view your net saving or type `show_graph` to see an overview of your finances!
+
+
 9. Refer to the [Features](#features) below for details of each command.
 
 ---
 
 ## 2. Features 
 
-### Notes
+### Notes:
 
 - Words in `UPPER_CASE` are the parameters to be supplied by you, the user.
   e.g. in add `a/AMOUNT`, `AMOUNT` is a parameter which can be typed as `a/12.30`.
+
+
 - Parameters surrounded with `[` and `]` are optional parameters which you might consider including to your input.
   e.g. in the add expense/income feature, an optional date parameter `[D/DATE]` may be added which can be typed as `D/19/10/2021` 
+
+
 - Most features below have a collapsible section that allows you to see the run time output. Do check them out if you want to visualize what the product looks like!
 
 ---
@@ -136,6 +159,7 @@ To Check Budgets: check_budget c/CATEGORY
 To Set Threshold Value for Reminders: set_threshold t/THRESHOLD
 To change entries into a different currency: set_curr c/CURRENCY
 To check the currency that entries are currently in: check_curr
+Listing available currency types for conversion: list_curr
 To View Your Yearly Report: show_graph
 To Clear All Expense And Income Entries: clear_all_entries
 To Terminate The Program: end
@@ -788,6 +812,26 @@ You currency setting currently: SGD
 </details>
 <br>
 
+### List all currency conversions: `list_curr`
+
+This shows you what currency setting you are currently on.
+
+Format: `list_curr`
+
+<details>
+<summary> ▼ Expected output in run window </summary>
+<br>
+If you are unsure as to what currency types you can convert to, just enter <code>list_curr</code> and it will show the following message:
+<pre>
+-----------------------------------------------------------------------------------------------------
+Here is a list of available currencies you can convert to!
+1. USD
+2. SGD
+-----------------------------------------------------------------------------------------------------
+</pre>
+</details>
+<br>
+
 ---
 ### 2.7 Graphing
 
@@ -902,23 +946,33 @@ when not using the program.
 
 - `.csv` files should not be open concurrently while Stonks XD is running. In other words, never have two programs 
 writing / reading the `.csv` files at the same time. This will very likely cause a saving error and lost of data.
+
+
 - Restrictions and rules for different variables are the same as how you would enter them in the CLI, as specified 
-above.
+above:<br></br>
   - For example, when editing an expense entry in `StonksXD_Entries.csv`, `entry_description` should not be blank.
   - Another example, when editing an income entry in `StonksXD_Entries.csv`, `amount` has to be a positive number and 
   less than 1000000000.
   - Another example, when editing `threshold` in `StonksXD_Settings.csv`, ensure it is between 0 and 1. 
   - Another example, when editing an expense entry in `StonksXD_Entries.csv`, category should be the ones available and 
   specified ealier on in the user guide.
+
+
 - Do not alter / delete the headers of `.csv` files. Stonks XD is able to minimise the damage if you do so but to 
 ensure your data is saved / loaded properly, please do not edit anything unexpected.
+
+
 - Stonks XD expects the dates in `StonksXD_Entries.csv` to be in `DD/MM/YYYY` format i.e., `11/12/2021` when loading 
 data.
   When opening `StonksXD_Entries.csv` in Excel, Excel might change the format of the dates. Do ensure Excel's date 
 format is in `DD/MM/YYYY` when dealing with `StonksXD_Entries.csv`. Entries with a different date format will be 
 considered corrupted and not be loaded into Stonks XD.
+
+
 - Changing the currency setting in `StonksXD_Settings.csv` is not recommended. This is because it will
   cause all your entries and budgets to be recognised as a different currency.
+
+
 - Do not edit the amount of your expenses / incomes drastically such that they exceed the limit per entry or the 
 total limit of 100000000000 for expense / income. Entries that cause you to exceed either limit will be considered 
 corrupted.
@@ -932,7 +986,11 @@ edited things you are not suppose to, or you have edited wrongly. There is a way
 optional, and you do not have to do this if you are fine with losing data). 
 Here are the steps:
 1. When you ended Stonks XD already but wants to edit the `.csv` files, make a copy of them first.
+
+
 2. When you run Stonks XD and receive corruption errors, end the program.
+
+
 3. Copy and paste the contents from your copies back into `StonksXD_Entries.csv` and `StonksXD_Settings.csv`. This 
 means all your edits are gone. But this pretty much ensures that there will be no corrupted data. 
 
@@ -973,6 +1031,7 @@ means all your edits are gone. But this pretty much ensures that there will be n
 | View Yearly Report | `show_graph` | - |
 | Set currency | `set_curr c/CURRENCY` | `set_curr c/usd` |
 | Check current currency | `check_curr` | - |
+| List all currency conversions | `list_curr` | - |
 | To terminate program | `end` | - |
 
 
