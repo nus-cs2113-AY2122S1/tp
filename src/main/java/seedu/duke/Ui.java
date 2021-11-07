@@ -43,6 +43,9 @@ public class Ui {
     public static final String SORT_FLIGHT_BY_ARRIVAL_MESSAGE = "Sorted by returning flight times";
     public static final String SORT_FLIGHT_ID_MESSAGE = "Sorted by flight id alphabetically";
 
+    private static final String FILE_CORRUPT = "TourPlanner can't read your corrupted file.\n"
+            + "Please delete your 'data' folder and try again.";
+
     private static final Scanner in = new Scanner(System.in);
 
     /**
@@ -464,6 +467,12 @@ public class Ui {
      */
     public void showBye() {
         show(BYE_MESSAGE);
+        showLine();
+    }
+
+    public void showFileError() {
+        showLine();
+        show(FILE_CORRUPT);
         showLine();
     }
 }

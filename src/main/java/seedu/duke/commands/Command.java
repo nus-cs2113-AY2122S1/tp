@@ -20,7 +20,7 @@ public abstract class Command {
     /**
      * Executes the specific command depending on the command constructed.
      */
-    public abstract void execute() throws TourPlannerException;
+    public abstract void execute();
 
     /**
      * Setter for ClientList, FlightList, TourList, ClientPackageList and Ui
