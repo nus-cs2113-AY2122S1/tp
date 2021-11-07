@@ -205,11 +205,15 @@ The next sequence diagram shows an instance the main logic loop.
 
 The next sequence diagram shows an instance of command execution.
 ![](attachments/loopLogic.png)
-  
+
+<div style="page-break-after: always;"></div>
+
 The next sequence diagram show the termination of `Terminus`  
 
 ![](attachments/MainExit.png)
-  
+
+<div style="page-break-after: always;"></div>
+
 ### 3.2 UI Component
 ![](attachments/UIClassDiagram.png)
 
@@ -224,6 +228,7 @@ The `Ui` implements the following functionality:
 - Getting of user input through `getUserInput()` and `requestCommand()`.
 - Printing string arrays to the output through `printSection()`.
 
+<div style="page-break-after: always;"></div>
 
 ### 3.3 Parser Component
 ![](attachments/ParserClassDiagram.png)
@@ -238,6 +243,7 @@ The `CommandParser` implements the following functionality:
 - Keeps track of the workspace.
 - Provides functionality to list all commands for the help `Command`.
 
+<div style="page-break-after: always;"></div>
 
 ### 3.4 Command Component
 ![](attachments/CommandClassDiagram.png)
@@ -253,6 +259,7 @@ The `CommandResult` will contains certain attributes that will indicate certain 
 - Indicate the if file operations are required and the corresponding actions.
 - Tracks if the program should terminate.
 
+<div style="page-break-after: always;"></div>
 
 ### 3.5 Module Component
 
@@ -269,6 +276,7 @@ The `ModuleManager` implements the below functionality:
 - Grants access to the different types of content stored by `NusModule`.
 
 
+<div style="page-break-after: always;"></div>
 
 ### 3.6 Content Component
 ![](attachments/Content.png)
@@ -285,6 +293,7 @@ which inherit from the abstract `Content` class. The `ContentManager` allows a g
 - Accessing the arraylist of contents.
 
 
+<div style="page-break-after: always;"></div>
 
 ### 3.7 Active Recall Component
 ![Active Recall Class Diagram](attachments/ActiveRecallClassDiagram.png)
@@ -307,6 +316,7 @@ For further details on the implementation, head to
 [4.2 Active Recall Implementation](#42-active-recall-implementation).
 
 
+<div style="page-break-after: always;"></div>
 
 ### 3.8 Storage Component
 
@@ -326,6 +336,7 @@ The `StorageManager` component:
 data easily with any available text editor.
 
 
+<div style="page-break-after: always;"></div>
 
 ## 4. Implementation
 
@@ -393,6 +404,7 @@ This section shows the design considerations that were taken into account when i
 Moreover, implementing a timetable for each module might be slightly redundant as a view schedule command could offer a similar functionality albeit not sorted out.
 
 
+<div style="page-break-after: always;"></div>
 
 ### 4.2 Active Recall Implementation
 
@@ -486,7 +498,7 @@ tweak the curve parameters if needed.
 The parameters of the logistic curve can be viewed here:
 [https://www.desmos.com/calculator/qefovvnuhx](https://www.desmos.com/calculator/qefovvnuhx).
 
-
+<div style="page-break-after: always;"></div>
 
 ### 4.3 Workspace Implementation
 
@@ -608,7 +620,7 @@ Eventually the team decide to go with the second implementation, as we require m
 workspaces and would like to create our own workspace for each feature. Aside from that the 
 `Command` provides common functionality that many commands need hence reducing repetition of code.
 
-
+<div style="page-break-after: always;"></div>
 
 ### 4.4 Conflict Manager Implementation
 
@@ -659,6 +671,8 @@ This section shows the design considerations that were taken into account when i
 We hope that all users are aware of the conflicts as soon as possible, so that conflicts can be resolved quickly. 
 Although it is slightly challenging to identify conflicts when not adding a new schedule,
 we think that the timetable feature can help in identifying conflicts manually.
+
+<div style="page-break-after: always;"></div>
 
 ### 4.5 Storage Implementation
 
@@ -806,6 +820,9 @@ requirements from the execution of a `Command`.
 **Chosen Solution:** Separate file I/O operation by the type of file involved first which is the solution of
 StorageType first. This means that each Storage type have a higher decoupling from one another.
 
+
+<div style="page-break-after: always;"></div>
+
 ### 4.6 Adding Content Implementation
 
 This section details the technical information of adding a `Content` into `ContentManager`.
@@ -843,6 +860,8 @@ its respective message for user `Ui` response purposes.
 **Chosen Solution:** To validate arguments in the AddCommand instead. This is due to the generic type of
 `ContentManager` that may lead to nested conditions if the arguments are checked within the `ContentManager`.
 
+<div style="page-break-after: always;"></div>
+
 ### 4.7 Deleting Content Implementation
 
 This section details the technical information of deleting a `Content` from `ContentManager`.
@@ -871,6 +890,8 @@ for user `Ui` response purposes.
 
 **Chosen Solution:** To avoid the mixing up of content number and array index, we decided to pass the content number
 into `ContentManager` where it will subtract the given number by 1 to get the index number for the arraylist.
+
+<div style="page-break-after: always;"></div>
 
 ## 5. Documentation, Logging, Testing and DevOps
 
