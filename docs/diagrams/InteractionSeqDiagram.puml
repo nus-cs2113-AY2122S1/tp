@@ -3,12 +3,12 @@
 
 skinparam maxMessageSize 150
 actor User as U
-participant UI UI_COLOUR
-participant Main as M MAIN_COLOUR
-participant Parser as P PARSER_COLOUR
-participant XYZCommand as C COMMAND_COLOUR
-participant IngredientList as IL INGREDIENTLIST_COLOUR
-participant Storage as S STORAGE_COLOUR
+participant ":UI" UI_COLOUR
+participant ":Main" as M MAIN_COLOUR
+participant ":Parser" as P PARSER_COLOUR
+participant ":XYZCommand" as C COMMAND_COLOUR
+participant ":IngredientList" as IL INGREDIENTLIST_COLOUR
+participant ":Storage" as S STORAGE_COLOUR
 
 activate UI UI_COLOUR
 
