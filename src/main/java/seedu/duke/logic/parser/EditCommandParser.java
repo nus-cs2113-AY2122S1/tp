@@ -2,31 +2,20 @@ package seedu.duke.logic.parser;
 
 import seedu.duke.commons.core.CommandFlag;
 import seedu.duke.commons.core.CommandType;
-import seedu.duke.commons.core.Message;
 import seedu.duke.logic.commands.Command;
-import seedu.duke.logic.commands.lesson.AddLessonCommand;
-import seedu.duke.logic.commands.module.AddModuleCommand;
-import seedu.duke.logic.commands.task.AddTaskCommand;
-import seedu.duke.logic.commands.task.DoneTaskCommand;
+import seedu.duke.logic.commands.module.EditModuleCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
-import java.time.LocalTime;
 import java.util.HashMap;
 
-import static seedu.duke.commons.core.CommandFormat.ADD_LESSON_FORMAT;
-import static seedu.duke.commons.core.CommandFormat.ADD_MODULE_FORMAT;
-import static seedu.duke.commons.core.CommandFormat.ADD_TASK_FORMAT;
-import static seedu.duke.commons.core.CommandFormat.DONE_TASK_FORMAT;
+import static seedu.duke.commons.core.CommandFormat.EDIT_LESSON_FORMAT;
+import static seedu.duke.commons.core.CommandFormat.EDIT_MODULE_FORMAT;
+import static seedu.duke.commons.core.CommandFormat.EDIT_TASK_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.promptFormat;
-import static seedu.duke.commons.core.Priority.LOW;
 import static seedu.duke.commons.util.StringUtil.removeFirstParam;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
-import static seedu.duke.logic.parser.ParserUtil.parseDayOfTheWeek;
-import static seedu.duke.logic.parser.ParserUtil.parseGrade;
-import static seedu.duke.logic.parser.ParserUtil.parsePriority;
-import static seedu.duke.logic.parser.ParserUtil.parseTime;
-import static seedu.duke.logic.parser.ParserUtil.parseTitle;
-import static seedu.duke.logic.parser.ParserUtil.parseToZeroIndex;
+import static seedu.duke.logic.parser.ParserUtil.parseModuleCode;
+import static seedu.duke.logic.parser.ParserUtil.parseModuleGrade;
 
 //@@author richwill28
 public class EditCommandParser {
@@ -35,22 +24,43 @@ public class EditCommandParser {
 
         String simplifiedUserResponse;
         switch (commandType) {
+        case LESSON:
+            simplifiedUserResponse = removeFirstParam(userResponse, "lesson");
+            return parseEditLessonCommand(simplifiedUserResponse);
         case TASK:
             simplifiedUserResponse = removeFirstParam(userResponse, "task");
-            return parseDoneTaskCommand(simplifiedUserResponse);
+            return parseEditTaskCommand(simplifiedUserResponse);
+        case MODULE:
+            simplifiedUserResponse = removeFirstParam(userResponse, "module");
+            return parseEditModuleCommand(simplifiedUserResponse);
         case INVALID:
             // Fallthrough
         default:
-            throw new ParseException(promptFormat(DONE_TASK_FORMAT));
+            throw new ParseException(promptFormat(EDIT_TASK_FORMAT, EDIT_LESSON_FORMAT, EDIT_MODULE_FORMAT));
         }
     }
 
-    private static Command parseDoneTaskCommand(String userResponse) throws ParseException {
-        try {
-            int taskIndex = parseToZeroIndex(Integer.parseInt(userResponse));
-            return new DoneTaskCommand(taskIndex);
-        } catch (NumberFormatException e) {
-            throw new ParseException(Message.ERROR_INVALID_NUMBER);
+    private static Command parseEditLessonCommand(String userResponse) throws ParseException {
+        // to be implemented
+        return null;
+    }
+
+    private static Command parseEditTaskCommand(String userResponse) throws ParseException {
+        // to be implemented
+        return null;
+    }
+
+    private static Command parseEditModuleCommand(String userResponse) throws ParseException {
+        HashMap<String, String> flagMap = ParserUtil.getFlagMap(userResponse, CommandFlag.GRADE);
+
+        if (!flagMap.containsKey(CommandFlag.GRADE)) {
+            throw new ParseException("No grade parameter provided.");
         }
+
+        String[] params = userResponse.split(CommandFlag.MODULE);
+        String moduleCode = parseModuleCode(params[0]);
+        String moduleGrade = parseModuleGrade(flagMap.get(CommandFlag.GRADE));
+
+        return new EditModuleCommand(moduleCode, moduleGrade);
     }
 }

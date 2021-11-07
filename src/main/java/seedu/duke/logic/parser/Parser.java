@@ -24,6 +24,9 @@ public class Parser {
         case DONE:
             simplifiedUserResponse = removeFirstParam(userResponse, "done");
             return DoneCommandParser.parse(simplifiedUserResponse);
+        case EDIT:
+            simplifiedUserResponse = removeFirstParam(userResponse, "edit");
+            return EditCommandParser.parse(simplifiedUserResponse);
         case FIND:
             simplifiedUserResponse = removeFirstParam(userResponse, "find");
             return FindCommandParser.parse(simplifiedUserResponse);
@@ -33,9 +36,6 @@ public class Parser {
         case LIST:
             simplifiedUserResponse = removeFirstParam(userResponse, "list");
             return ListCommandParser.parse(simplifiedUserResponse);
-//        case SET:
-//            simplifiedUserResponse = removeFirstParam(userResponse, "set");
-//            return SetCommandParser.parse(simplifiedUserResponse);
         case HELP:
             simplifiedUserResponse = removeFirstParam(userResponse, "help");
             return HelpCommandParser.parse(simplifiedUserResponse);

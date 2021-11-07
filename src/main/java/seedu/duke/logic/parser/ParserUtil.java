@@ -28,7 +28,15 @@ public class ParserUtil {
         return index - 1;
     }
 
-    public static String parseGrade(String param) throws ParseException {
+    public static String parseModuleCode(String param) throws ParseException {
+        String moduleCode = param.strip().toUpperCase();
+        if (moduleCode.isBlank()) {
+            throw new ParseException("No module code was provided.");
+        }
+        return moduleCode;
+    }
+
+    public static String parseModuleGrade(String param) throws ParseException {
         String grade = param.strip().toUpperCase();
         if (!isValid(grade)) {
             throw new ParseException("Invalid grade input.");

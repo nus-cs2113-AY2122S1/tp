@@ -20,7 +20,8 @@ import static seedu.duke.commons.core.Priority.LOW;
 import static seedu.duke.commons.util.StringUtil.removeFirstParam;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
 import static seedu.duke.logic.parser.ParserUtil.parseDayOfTheWeek;
-import static seedu.duke.logic.parser.ParserUtil.parseGrade;
+import static seedu.duke.logic.parser.ParserUtil.parseModuleCode;
+import static seedu.duke.logic.parser.ParserUtil.parseModuleGrade;
 import static seedu.duke.logic.parser.ParserUtil.parsePriority;
 import static seedu.duke.logic.parser.ParserUtil.parseTime;
 import static seedu.duke.logic.parser.ParserUtil.parseTitle;
@@ -115,11 +116,11 @@ public class AddCommandParser {
         HashMap<String, String> flagMap = ParserUtil.getFlagMap(userResponse, CommandFlag.GRADE);
 
         String[] params = userResponse.split(CommandFlag.MODULE);
-        String moduleCode = params[0].strip().toUpperCase();
+        String moduleCode = parseModuleCode(params[0]);
         String moduleGrade = DEFAULT_GRADE;
 
         if (flagMap.containsKey(CommandFlag.GRADE)) {
-            moduleGrade = parseGrade(flagMap.get(CommandFlag.GRADE));
+            moduleGrade = parseModuleGrade(flagMap.get(CommandFlag.GRADE));
         }
 
         return new AddModuleCommand(moduleCode, moduleGrade);

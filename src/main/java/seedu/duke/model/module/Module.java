@@ -1,10 +1,13 @@
 package seedu.duke.model.module;
 
-import seedu.duke.commons.core.Message;
-import seedu.duke.ui.Ui;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import seedu.duke.commons.core.Message;
+import seedu.duke.model.module.exceptions.InvalidGradeException;
+import seedu.duke.ui.Ui;
+
+import static seedu.duke.commons.core.Grade.isValid;
 
 //@@author ptejasv
 public class Module {
@@ -69,10 +72,6 @@ public class Module {
     }
 
     //@@author rebchua39
-    public void setGrade(String grade) {
-        this.grade = grade;
-    }
-
     public String getGrade() {
         return grade;
     }
@@ -104,6 +103,13 @@ public class Module {
         default:
             return -1;
         }
+    }
+
+    public void setGrade(String grade) throws InvalidGradeException {
+        if (!isValid(grade)) {
+            throw new InvalidGradeException("Invalid grade");
+        }
+        this.grade = grade;
     }
 
     //@@author Roycius
