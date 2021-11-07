@@ -24,7 +24,7 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
     * Added a LoanReminder to remind user of loans that due already every time when user start our app (Pull requests [#146](https://github.com/AY2122S1-CS2113T-F11-2/tp/pull/146), [#154](https://github.com/AY2122S1-CS2113T-F11-2/tp/pull/154)).
     * Fixed a bug to make all amount in budget, expenditure, loan defaulted to be displayed as 2 decimal points whenever needs to be printed out (Pull requests [#201](https://github.com/AY2122S1-CS2113T-F11-2/tp/pull/201), [#204](https://github.com/AY2122S1-CS2113T-F11-2/tp/pull/204)).
-    * Fixed a bug that deleting with range of indexes make the UI look very messy (Pull request [#224](https://github.com/AY2122S1-CS2113T-F11-2/tp/issues/224)).
+    * Fixed a bug that deleting with range of indexes make the UI look very messy (Pull request [#225](https://github.com/AY2122S1-CS2113T-F11-2/tp/pull/225)).
 
 * **Team-based tasks** :
     * Actively participated in weekly project meeting.
