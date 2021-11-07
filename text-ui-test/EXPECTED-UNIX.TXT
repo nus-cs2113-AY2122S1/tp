@@ -108,9 +108,9 @@ ____________________________________________________________
 ____________________________________________________________
 The email id is not correctly formatted,
 Rules for email id :
-    * Lowercase letters only
+    * Lowercase and uppercase letters allowed
     * Numbers, underscore, hyphen and dot allowed
-    * @ cannot be at the start or end
+    * @ cannot be at the start or end and only one allowed
 ____________________________________________________________
 
 ____________________________________________________________
@@ -437,9 +437,9 @@ ____________________________________________________________
 ____________________________________________________________
 The name is not correctly formatted,
 Rules for name :
-    * Uppercase and lowercase letters
-    * Spaces
-    * No numbers or special characters
+    * Uppercase and lowercase letters allowed
+    * Spaces, fullstops, apostrophes and slashes allowed
+    * No numbers or other special characters
     * Cannot be "null"
 ____________________________________________________________
 
@@ -545,9 +545,9 @@ ____________________________________________________________
 ____________________________________________________________
 The email id is not correctly formatted,
 Rules for email id :
-    * Lowercase letters only
+    * Lowercase and uppercase letters allowed
     * Numbers, underscore, hyphen and dot allowed
-    * @ cannot be at the start or end
+    * @ cannot be at the start or end and only one allowed
 ____________________________________________________________
 
 ____________________________________________________________
@@ -564,9 +564,9 @@ ____________________________________________________________
 ____________________________________________________________
 The name is not correctly formatted,
 Rules for name :
-    * Uppercase and lowercase letters
-    * Spaces
-    * No numbers or special characters
+    * Uppercase and lowercase letters allowed
+    * Spaces, fullstops, apostrophes and slashes allowed
+    * No numbers or other special characters
     * Cannot be "null"
 ____________________________________________________________
 
