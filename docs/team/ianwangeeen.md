@@ -29,9 +29,11 @@ Features Implemented
   * Handled version 2 of `deleteAttendance` class; changed delete attendance parameters to be more specific to training name
   * Handled Exceptions for `AttendanceStorage` class
   * Handled Exceptions for `deleteAttendance` class
+  * Handled more OOP for some commands
 
 UG Contributions
 * Set up `Introduction` section of UserGuide.md
+* Set up `Purpose of this guide` section of UserGuide.md
 * Set up `List` portions of UserGuide.md
 * Set up `Format` portions of UserGuide.md
 * Set up `Examples` portions of UserGuide.md

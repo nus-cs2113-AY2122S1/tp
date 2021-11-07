@@ -1,3 +1,5 @@
+//@@author ianwangeeen
+
 package seedu.duke;
 
 import seedu.duke.attendance.Attendance;
