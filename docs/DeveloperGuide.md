@@ -123,9 +123,17 @@ Each method is abstracted into an appropriate child class (for e.g. `AddExpenseC
 
 After obtaining the attributes of an entry from the `entry` class and the required command given by the user from the `parser` class, it directs the inputs to the respective methods for execution.
 
-The image below shows the sequence diagram of how the `AddExpenseCommand` class is used and, the other classes involved with it as well.
+The image below shows the sequence diagram of how the `AddExpenseCommand` class is used and, the other classes involved with it as well. 
+`AddExpenseCommand` inherits from the `command` parent class and contains a method `execute` that adds an expense entry into `FinancialTracker`.
 
 ![](AddExpenseCommandSD.drawio.png)
+
+How the Command compoment works:
+
+1. When `execute` is called, it calls a `addExpense()` method in `FinancialTracker` which adds a `expense` object associated to the command into `FinancialTracker`.
+2. Next, the added object will be printed by the `Ui` class using the `printExpenseAdded()` method as feedback to the user.
+3. Lastly, based on the `expense` added, `BudgetManager` will update the budget related to the category of the object using the `handleBudget()` method.
+4. The updated budget will then be reflected to the user by the `printBudgetReminder` method in `Ui`. 
 
 ---
 
@@ -138,40 +146,6 @@ The `Parser` class is in charge of:
 #### Implementation
 
 `Parser` mainly uses regex to parse items.
-
----
-
-### Financial Tracker Component
-
-The `FinancialTracker` class is in charge of storing, deleting, and retrieving income and 
-expense related calculations while the program is running. It performs these operations based
-on the different commands it receives from the user.
-
-The class diagram below shows the structure of `FinancialTracker`.
-
-![](FinancialTrackerCD.drawio.png) 
-
-The `FinancialTracker` component,
-
-- Uses `ArrayList` called `incomes` and `expenses` to store `income` and `expense` objects, which inherits from the parent class `entry`.
-- It also uses `DateOperator` and `FinancialCalculator` as helper class, used to perform calculation and dates related operation
-
-The sequence diagram below is used to illustrate how `FinancialTracker` utilizes the helper classes.
-It shows the hypothetical scenario where its `getExpenseBetween` method.
-
-![](FinancialTrackerSD.drawio.png)
-
-1. `getExpenseBetween` is implemented using streams. It filters through the entire `expenses` ArrayList,
-checking if the date associated to that entry lies within the given date range provided as input parameters.
-Those that passes this check are stored in a `List` using the method `.collect(Collections.toList())` method, called on the stream. 
-2. This check is done by the `entryDateInRange` method in `DateOperator`. `DateOperator` stores and carries out all date related operations. 
-3. The list is then passes into another method `getSumOfEntries`, which is a method in `FinancialCalculator` class.
-4. The method makes use of streams as well. It replaces all the entries with doubles associate to that entry
-   using the method `mapToDouble` which uses the `getvalue` method in `Entry` to get the value of the entry.
-5. Finally, the method `sum()` is called on the stream which returns the sum of all the values inside the stream. This value 
-   is then returned at the end of the function call.
-
----
 
 ##### Converting user inputs to commands
 
@@ -191,6 +165,42 @@ Every important field will be separated by `Parser` with a `,` before saving the
 
 When a line of data is obtained from the `csv` file, `Parser` will check if the line fits the required format using
 regex.
+
+---
+
+### Financial Tracker Component
+
+The `FinancialTracker` class is in charge of storing, deleting, and retrieving income and
+expense related calculations while the program is running. It performs these operations based
+on the different commands it receives from the user.
+
+The class diagram below shows the structure of `FinancialTracker`.
+
+![](FinancialTrackerCD.drawio.png)
+
+The `FinancialTracker` component,
+
+- Uses `ArrayList` called `incomes` and `expenses` to store `income` and `expense` objects, which inherits from the parent class `entry`.
+- It also uses `DateOperator` and `FinancialCalculator` as helper class, used to perform calculation and dates related operation
+
+The sequence diagram below is used to illustrate how `FinancialTracker` utilizes the helper classes.
+It shows the hypothetical scenario where its `getExpenseBetween` method.
+
+![](FinancialTrackerSD.drawio.png)
+
+How the Financial Tracker compoment works:
+
+1. `getExpenseBetween` is implemented using streams. It filters through the entire `expenses` ArrayList,
+   checking if the date associated to that entry lies within the given date range provided as input parameters.
+   Those that passes this check are stored in a `List` using the method `.collect(Collections.toList())` method, called on the stream.
+2. This check is done by the `entryDateInRange` method in `DateOperator`. `DateOperator` stores and carries out all date related operations.
+3. The list is then passes into another method `getSumOfEntries`, which is a method in `FinancialCalculator` class.
+4. The method makes use of streams as well. It replaces all the entries with doubles associate to that entry
+   using the method `mapToDouble` which uses the `getvalue` method in `Entry` to get the value of the entry.
+5. Finally, the method `sum()` is called on the stream which returns the sum of all the values inside the stream. This value
+   is then returned at the end of the function call.
+
+---
 
 ### Budget Component
 
