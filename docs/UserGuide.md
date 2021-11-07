@@ -511,10 +511,9 @@ Format: `exit`
 ### Archiving data: `archive`
 Saves the current program data to an archive.
 
-By default, archive file is stored in the `<TAA Root>/data/archive` folder.
+Archive files are stored in the `<TAA Root>/data/archive` folder.
 
-Format: `archive [f/<FILENAME>]`
-* `FILENAME` [Optional] refers to the name of the file to save the archive as.
+Format: `archive`
 
 <br>
 
