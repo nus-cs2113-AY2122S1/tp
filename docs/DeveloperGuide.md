@@ -24,8 +24,12 @@
    according to the expiry date.
  - `Ingredient` stores the information of the ingredients, which are its name and unit, 
    e.g. Chicken and grams.
-- Each command takes an `Ingredient Repository` and a `RecipeList` as an input to modify the ingredients and recipes
-  based on the command.
+
+![](diagrams/DataInteraction.png)
+
+ - A command in the logic takes the `Ingredient Repository` and `RecipeList` as an input to modify the ingredients and recipes
+   based on the command.
+ - The storage takes the `Ingredient Repository` and `Recipe List` as an input to save data to the file / load data from the file.
 
 
 ### Parser
