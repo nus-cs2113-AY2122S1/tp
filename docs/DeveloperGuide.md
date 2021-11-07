@@ -149,18 +149,19 @@ used as an argument for the *Object* constructor.
 
 Here's a (partial) class diagram of Command component:
 
-![Command class](https://user-images.githubusercontent.com/70316271/140176181-47f4dd25-6c60-4c9a-8b4a-dd21f916a52a.png)
+![Command class (2)](https://user-images.githubusercontent.com/70316271/140637570-e6a9f453-ea88-46a8-8f3c-e1913e7e938d.png)
 
-*Note: This diagram and explanation includes only commands related to the `Client` class. The same workflow applies for
-classes `Flight`, `Tour` and `ClientPackage`, only with a difference in command naming.*
+Note: `XYZ` in this diagram is a placeholder for the specific data type (e.g. `Client`, `Flight`, `Tour`, `ClientPackage`).
+A similar workflow applies for these classes depending on the availability of the command for the specific data type.
 
 How the `Command` works:
 
-**Step 1.** Based on the user input, `Parser` returns a `Command` to `TourPlanner` *(main class)*.
+**Step 1.** Based on the user input, `Parser` returns one of the subclasses of `Command` to `TourPlanner` *(main class)*.
 
 **Step 2.** `TourPlanner` calls `Command.execute()`.
 
-**Step 3.** Corresponding command uses associate classes, `ClientList` and `Ui` to carry out its function.
+**Step 3.** Corresponding command uses associate classes, `XYZList` (`XYZ` is a placeholder for the specific data type
+e.g. `Client`) and `Ui` to carry out its function.
 
 <br>
 
@@ -290,7 +291,7 @@ Given below is an example usage of `cut -p p001` to deletes client package with 
 
 Here is a (partial) sequence diagram of above user input:
 
-![CutClientPackageCommand](https://user-images.githubusercontent.com/70316271/140183929-2968d7c1-6a93-4378-8389-a3f7a3413cbe.png)
+![CutClientPackageCommand](https://user-images.githubusercontent.com/70316271/140637935-a64ba82f-a9d1-4439-ad04-157ad0ecaad3.png)
 
 **Step 1.** `Parser` returns `CutClientPackageCommand("p001")`.
 
@@ -308,7 +309,7 @@ and all corresponding client packages that contain deleted client.
 
 Here is a (partial) sequence diagram for above user input:
 
-![CutClientCommand](https://user-images.githubusercontent.com/70316271/140184002-db955693-ac5e-44c5-9c13-e18df17a8974.png)
+![CutClientCommand](https://user-images.githubusercontent.com/70316271/140637934-08e0a09e-bf63-4f16-b84f-faa7a852b2d3.png)
 
 **Step 1.** `Parser` returns `CutClientCommand("c001")`.
 
@@ -338,7 +339,10 @@ It implements these following types of list commands:
 * `list -f`: Lists all existing flights
 * `list -p`: Lists all clients and their corresponding tours and flights
 
-Given below is an example usage of command `list -c`:
+Given below is an example usage of command `list -c` that lists all `Client` objects in `ClientList`:
+
+Here is a (partial) sequence diagram for the above user input:
+![ListClientCommand](https://user-images.githubusercontent.com/70316271/140637940-066bab37-d9dd-4efa-b0ee-e681fcd5b139.png)
 
 **Step 1**: After adding a few clients to the database, user inputs `list -c`. This command is passed to `parse()`
 method in the `Parser` class.
@@ -499,7 +503,8 @@ Given below is an example usage of `sort -c /id`:
 
 Here is a (partial) sequence diagram of the above user input:
 
-![SortClientCommand](https://user-images.githubusercontent.com/70316271/140540865-4e29204d-d501-4968-b69a-b7fbbdfe399c.png)
+![SortClientCommand](https://user-images.githubusercontent.com/70316271/140637939-1ff5b961-31fa-4afa-b834-316066362ffd.png)
+
 
 **Step 1**: After adding a few clients to the database, user inputs `sort -c /id`. This command is passed to `parse()`
 method in the `Parser` class.
@@ -547,6 +552,22 @@ The diagram below shows the class diagram of the Ui component, in relation with 
 
 <br>
 
+## Storage Component
+
+<hr>
+
+**API: `ClientPackageStorage.java` `ClientStorage.java` `FlightStorage.java` `TourStorage.java`**
+
+The Storage component consists of:
+1. ClientPackageStorage.java: Reading and saving files which record all clientpackages.
+2. ClientStorage.java: Reading and saving files which record all clients.
+3. FlightStorage.java: Reading and saving files which record all flights.
+4. TourStorage.java: Reading and saving files which record all tours.
+
+To add on Storage component is designed to access only hte following folder:
+1. `data/`
+
+<br>
 ## Product scope
 
 <hr>
