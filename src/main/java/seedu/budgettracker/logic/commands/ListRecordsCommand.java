@@ -6,8 +6,11 @@ import seedu.budgettracker.ui.TextUi;
 public class ListRecordsCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
-    public static final String COMMAND_DESC = "Displays all records as a list with index numbers.";
-    public static final String MESSAGE_USAGE = "list m/MONTH";
+    public static final String MESSAGE_USAGE = ("Lists the budget, expenditures and loans recorded.\n"
+            + "Parameters: m/MONTH c/CATEGORY\n"
+            + "Note:\n"
+            + " * If MONTH is not specified, records of all months will be listed.\n"
+            + " * If CATEGORY is not specified, expenditures of all categories will be listed.");
     public static int month;
     public static boolean isListAll = false;
     public static Category category = Category.ALL;

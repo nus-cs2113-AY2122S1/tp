@@ -5,7 +5,9 @@
 * [Getting started](#getting-started)
 * [Design](#design)
   * [Architecture](#architecture)
+  * [UI Component](#ui-component)
 * [Implementation](#implementation)
+  * [Delete - Basic Command Logic](#delete---basic-command-logic)
 * [Product scope](#product-scope)
   * [Target user profile](#Target-user-profile)
   * [Value proposition](#value-proposition)
@@ -25,6 +27,7 @@
 
 ## Design 
 
+###Architecture
 ![Figure_Architecture_Diagram](images/ArchitectureDiagram.png)
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
@@ -55,8 +58,20 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 ![Figure_Architecture__Sequence_Diagram](images/ArchitectureSequenceDiagram.png)
 
+###UI Component
+**API**: [`ui.java`](https://github.com/AY2122S1-CS2113T-F11-2/tp/tree/master/src/main/java/seedu/budgettracker/ui)
+
+![Figure_UiComponent_Component_Diagram](images/UiComponent.png)
+
+The `Ui` component:
+- Reads in user input from the Command Line Interface (CLI).
+- Prints welcome screen, database information and messages prompting the user for input.
+- Other components call methods in Ui class to print corresponding output on the terminal.
+
+
 ## Implementation
-###Delete
+
+###Delete - Basic Command Logic
 
 The delete feature collaborates with other classes like Parser, RecordList, etc. Basically it contains three usages which are deletion of Budget, Expenditure(s), and Loan(s).
 
@@ -149,7 +164,10 @@ from the ArrayList to ensure that data is saved at every step.
 The yearly Records is stored in the form of <year>.txt. Each year contains all the monthly budget as
 well as all the expenditure tied to that month.
 
-## Product scope
+## List of Commands
+
+
+## Appendix A: Product scope
 
 ### Target user profile
 
@@ -161,10 +179,10 @@ well as all the expenditure tied to that month.
 
 ### Value proposition
 
-Value proposition: allow users to record and track expenses more conveniently,
-and thereby encourage them to have greater control over their finances.
+This application allows users to record and track expenses more conveniently,
+and thereby encourages them to have greater control over their finances.
 
-## User Stories
+## Appendix B: User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
@@ -183,14 +201,16 @@ and thereby encourage them to have greater control over their finances.
 |v2.0|user|categorize my spendings|see what I spend most money on|
 |v2.0|user|analyze my spendings with a chart|get my spendings components in a more direct and easier way|
 
-## Non-Functional Requirements
+## Appendix C: Non-Functional Requirements
 
+**1**. Should work on any mainstream OS as long as it has Java 11 or above installed.
+<br/> **2**. 
 {Give non-functional requirements}
 
-## Glossary
+## Appendix D: Glossary
 
-* *glossary item* - Definition
+* *Mainstream OS*: Windows, Linux, Unix, OS-X
 
-## Instructions for manual testing
+## Appendix E: Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}

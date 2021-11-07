@@ -32,6 +32,7 @@ public class ReadTextFile {
 
         if (!inFile.isFile()) {
             System.out.println("Parameter is not an existing file");
+            return arrayListOfRawCommands;
         }
 
         BufferedReader fileReader = new BufferedReader(new FileReader(fileDirectory));

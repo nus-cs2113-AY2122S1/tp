@@ -544,17 +544,17 @@ _________________________________________________________
 
 
 
-### `-l` : View Statistics for the Year
+### `-y` : View Statistics for the Year
 
 Display the statistics for a particular the current database year which the user is working on. 
 
-Format: `stat -l t/TYPE_OF_GRAPHICAL_VIEW`
+Format: `stat -y t/TYPE_OF_GRAPHICAL_VIEW`
 
 * The `TYPE_OF_GRAPHICAL_VIEW` is ... 
 
 Example of usage:
 
-`stat -l t/1`
+`stat -y t/1`
 
 Expected outcome: A histogram of the percentage of money spend for each month of the year will be shown
 with vertical axis showing percentage ranging from 0 to 100%.
@@ -576,7 +576,73 @@ Percentage of Money Spent in 2021
 ========================================================
 ```
 
-`stat -l t/2`
+`stat -y t/2`
+
+Expected outcome: An overall percentage bar graph showing the amount of money spent in that particular year and if the 
+overall expenditure exceeds the budget available, an explosion will be shown on the graph.
+
+```
+========================================================
+Percentage of Money Spent throughout the year
+
+Percentage: 56.00%
+100%                  .....
+95%                   .....
+90%                   .....
+85%                   .....
+80%                   .....
+75%                   .....
+70%                   .....
+65%                   .....
+60%                   .....
+55%                   #####
+50%                   #####
+45%                   #####
+40%                   #####
+35%                   #####
+30%                   #####
+25%                   #####
+20%                   #####
+15%                   #####
+10%                   #####
+5%                    #####
+========================================================
+```
+
+```
+Percentage: 143.03%
+              _.-^^---....,,---_
+           _--                  --_
+          <          Overspent!       >)
+           \._                   _./
+              ```--. . , ; .--'''
+                    | |   |
+                 .-=||  | |=-.
+                 `-=#$%&%$#=-'
+                    | ;  :|
+           _____.,-#%&$@%#&#~,._____
+100%                  #####
+95%                   #####
+90%                   #####
+85%                   #####
+80%                   #####
+75%                   #####
+70%                   #####
+65%                   #####
+60%                   #####
+55%                   #####
+50%                   #####
+45%                   #####
+40%                   #####
+35%                   #####
+30%                   #####
+25%                   #####
+20%                   #####
+15%                   #####
+10%                   #####
+5%                    #####
+========================================================
+```
 
 <br />
 
