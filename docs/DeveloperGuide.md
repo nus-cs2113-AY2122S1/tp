@@ -551,7 +551,8 @@ exploratory testing.
        Rules for email id :
            * Lowercase letters only
            * Numbers, underscore, hyphen and dot allowed
-           * @ cannot be at the start or end
+           * Only one @ character allowed
+           * Email cannot start or end with a symbol
        ____________________________________________________________
        ``` 
 
