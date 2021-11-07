@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-interface FilterFinder {
+public interface FilterFinder {
 
     DateTimeFormatter inputPattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -156,9 +156,8 @@ interface FilterFinder {
             if (Parser.doesDateReallyExist(inputDate)) {
                 LocalDate.parse(inputDate, inputPattern);
                 return true;
-            } else {
-                return false;
             }
+            return false;
         } catch (DateTimeParseException e) {
             Storage.getLogger().log(Level.INFO, "Invalid date format entered");
             Ui.viewFilterDateFormatInvalid();
