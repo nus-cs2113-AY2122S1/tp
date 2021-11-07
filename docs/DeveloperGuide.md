@@ -366,7 +366,10 @@ GUI: Graphical User Interface
 
 ## Appendix: Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+* [Testing commands for tasks](#testing-commands-for-tasks)
+* [Testing commands for lessons](#testing-commands-for-lessons)
+* [Testing commands for modules](#testing-commands-for-modules)
+
 ### Testing commands for tasks
 
 #### Adding a task
