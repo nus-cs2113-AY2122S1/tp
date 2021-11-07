@@ -254,6 +254,7 @@ public class Parser {
             }
             String tripName = parseEditTripName(userInput);
             parseValidTripName(tripName);
+            parseValidTripName(newTripName);
             command = new EditCommand(tripName, newTripName, startCountryCode, endCountryCode);
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidEditFormatException();
