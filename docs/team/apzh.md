@@ -44,22 +44,15 @@ Given below are the contributions I have made to this project.
     - **Justification:** Improves the user experience by allowing users to sort their tasklist in a certain order to maintain the
     neatness of the tasklist. Without this command, the ordering of the tasklist will be based on the order in which the tasks are added,
     which reduces the logical grouping of tasks in the user's tasklist.
-
----
-
-- **Enhancements implemented**:
-  - **Enhancement 1:** Added the general abstraction/skeleton of the TP program based on my IP program structure.
-  - **Enhancement 2:** Renamed exception messages to follow a standardised format to be shown to the user. 
-
+  - **Feature 5:** Added general skeleton of the TP code based on my IP program structure.
+  
 ---
 
 - **Contributions to the UG**: 
 [#159](https://github.com/AY2122S1-CS2113T-W13-3/tp/pull/159) (C1-C5)
   - **Contribution 1:** Created and maintained the skeleton/overview for the User Guide to help the team be consistent when adding information.
   - **Contribution 2:** Added the documentation in "1. Quick Start".
-  - **Contribution 3:** Added the documentation in "2.4 Listing your tasks: `list`".
-    - Including all it's sub-sections: "2.4.1 Listing your entire tasklist", "2.4.2 Filtering your tasklist", and
-      "2.4.3 Listing the recurrence of a task".
+  - **Contribution 3:** Added the documentation in "2.4 Listing your tasks: `list`" + all it's sub-sections.
   - **Contribution 4:** Added the documentation in "2.5 Sorting your tasklist: `sort`".
   - **Contribution 5:** Updated "4. Command Summary" table with changes made to the `list` and `sort` command.
 
@@ -75,19 +68,15 @@ Given below are the contributions I have made to this project.
     - Including all it's sub-sections: "1.1 Purpose" and "1.2 Acknowledgments".
   - **Contribution 3:** Added the documentation in "2. Setting up, getting started".
     - Including all it's sub-sections: "2.1 Pre-requisites", "2.2 Download the project on your computer", and "2.3 Setting up the project in IntelliJ".
-  - **Contribution 4:** Added the documentation in "3.1 Architecture"
-    - All text descriptions in this section.
+  - **Contribution 4:** Added the documentation in "3.1 Architecture".
     -  **Architecture Diagram** [Image] - Showing the main components and flow of the general program
     -  **Sequence Diagram** [Image] - Showing how the components interact with each other for the scenario 
     where the user inputs any valid command in to the application. 
-  - **Contribution 5:** Added the information in "3.2 UI Component"
-    - All text descriptions in this section.
+  - **Contribution 5:** Added the information in "3.2 UI Component".
     - **Class Diagram** [Image] of the Ui component.
-  - **Contribution 6:** Added the information in "3.3 Parser Component"
-    - All text descriptions in this section.
+  - **Contribution 6:** Added the information in "3.3 Parser Component".
     - **Class Diagram** [Image] of the Parser component.
   - **Contribution 7:** Added the information in "4.2 Filtering the tasklist".
-    - All text descriptions in this section.
     - **Sequence Diagram** [Image] - Showing how the process of filtering the user's tasklist that is managed 
     by the TaskManager class.
   - **Contribution 8:** Added instructions for manual testing for "Launch and Exit", "Listing the Tasklist", "Filtering the Tasklist", "Sorting the Tasklist",
