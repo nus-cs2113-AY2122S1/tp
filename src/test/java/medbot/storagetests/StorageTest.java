@@ -41,8 +41,8 @@ class StorageTest {
     /**
      * Loads Patient Storage with a mix of valid storage lines and invalid storage lines.
      * Tests for both correct error message and correct loading of storage.
-     * <p>
-     * Expected: patients added through the program
+     *
+     * <p>Expected: patients added through the program
      * Actual: Patients added through loading storage
      *
      * @throws MedBotException       if unable to initialize PatientStorageStub or
@@ -72,8 +72,8 @@ class StorageTest {
     /**
      * Loads Patient Storage with only valid storage lines.
      * Tests for both correct error message (none here) and correct loading of storage.
-     * <p>
-     * Expected: patients added through the program
+     *
+     * <p>Expected: patients added through the program
      * Actual: Patients added through loading storage
      *
      * @throws FileNotFoundException if unable to load patient storage.
@@ -99,8 +99,8 @@ class StorageTest {
     /**
      * Loads Staff Storage with a mix of valid storage lines and invalid storage lines.
      * Tests for both correct error message and correct loading of storage.
-     * <p>
-     * Expected: staff added through the program
+     *
+     * <p>Expected: staff added through the program
      * Actual: staff added through loading storage
      *
      * @throws MedBotException       if unable to initialize StaffStorageStub or
@@ -129,8 +129,8 @@ class StorageTest {
     /**
      * Loads Staff Storage with only valid storage lines.
      * Tests for both correct error message (none) and correct loading of storage.
-     * <p>
-     * Expected: staff added through the program
+     *
+     * <p>Expected: staff added through the program
      * Actual: staff added through loading storage
      *
      * @throws MedBotException       if unable to initialize StaffStorageStub or
@@ -155,8 +155,8 @@ class StorageTest {
     /**
      * Loads Appointment Storage with a mix of valid storage lines and invalid storage lines.
      * Tests for both correct error message and correct loading of storage.
-     * <p>
-     * Expected: appointment added through the program
+     *
+     * <p>Expected: appointment added through the program
      * Actual: appointment added through loading storage
      *
      * @throws MedBotException       if unable to initialize StaffStorageStub or
@@ -193,8 +193,8 @@ class StorageTest {
     /**
      * Loads Appointment Storage with only valid storage lines.
      * Tests for both correct error message (none) and correct loading of storage.
-     * <p>
-     * Expected: appointment added through the program
+     *
+     * <p>Expected: appointment added through the program
      * Actual: appointment added through loading storage
      *
      * @throws MedBotException       if unable to initialize StaffStorageStub or
@@ -226,8 +226,8 @@ class StorageTest {
 
     /**
      * Test the saving of data of to all three storage files.
-     * <p>
-     * Expected: Scanned contents from storage files with the expected contents.
+     *
+     * <p>Expected: Scanned contents from storage files with the expected contents.
      * Actual: Scanned contents from the storage files that were created from this test.
      *
      * @throws MedBotException if unable to initialize any of the StorageStubs or any
