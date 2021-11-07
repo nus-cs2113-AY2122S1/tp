@@ -132,7 +132,7 @@ public class ContactsDecoder extends RegexParser {
     }
 
     /**
-     * Prints the relevant message for invalid details pertaining to the parsed contacts
+     * Prints the relevant message for invalid details pertaining to the parsed contacts.
      * @param e Exception that was caught
      * @param lineIndex Line in the file which the exception was thrown
      * @param contactFilePath File path of specified file
@@ -155,7 +155,7 @@ public class ContactsDecoder extends RegexParser {
     }
 
     /**
-     * Returns a String array containing parsed details relating to a contact
+     * Returns a String array containing parsed details relating to a contact.
      * @param contactText String read from the file
      * @return String[] String array containing parsed contact details
      * @throws IndexOutOfBoundsException If contactText contains fewer fields than required

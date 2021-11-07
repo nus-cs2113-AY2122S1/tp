@@ -23,7 +23,7 @@ public abstract class Command {
     public abstract void execute();
 
     /**
-     * Returns true if the Command given is an ExitCommand
+     * Returns true if the Command given is an ExitCommand.
      * @return boolean True if ExitCommand is given by user
      */
     public boolean isExit() {

@@ -47,7 +47,7 @@ public class ContactsEncoder {
     }
 
     /**
-     * Returns a String containing the encoded details of a contact
+     * Returns a String containing the encoded details of a contact.
      * @param contact Contact in the contact list
      * @return String Returns a string containing encoded details
      */
