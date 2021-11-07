@@ -23,7 +23,7 @@ deactivate ":Parser"
 
 
 
-
+create ":SetCaloriesCommand"
 ":Parser" -> ":SetCaloriesCommand": SetCaloriesCommand(String recipeName, int cal)
 activate ":SetCaloriesCommand"
 

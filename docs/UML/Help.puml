@@ -15,8 +15,15 @@ skinparam sequenceArrowColor black
 
 activate ":Parser"
 
+create ":HelpCommand"
 ":Parser" -> ":HelpCommand": HelpCommand()
 activate ":HelpCommand"
+
+":Parser" -> ":Parser": helpParse()
+activate ":Parser"
+
+":Parser" --> ":Parser"
+deactivate ":Parser"
 
 ":HelpCommand" -> ":UI" : printHelp()
 activate ":UI"
