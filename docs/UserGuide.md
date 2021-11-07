@@ -58,6 +58,9 @@ User Interface (GUI) apps.
 ## Features
 
 ### Class
+> 💡 **Note(s):**<br />
+> * `CLASS_ID` will be converted to UPPERCASE.
+
 #### Listing all classes: `list_classes`
 Displays the list of all classes in the class list.
 
@@ -126,6 +129,9 @@ Expected Output:<br>
 <hr>
 
 ### Student
+> 💡 **Note(s):**<br />
+> * `STUDENT_ID` will be converted to UPPERCASE.
+
 #### Listing all students in a class: `list_students`
 Shows a list of all students in a particular class.
 
@@ -156,8 +162,6 @@ Examples:
 
 Expected Output: <br>
 ![img.png](images/students/AddStudentCommand.png)
-> 💡 **Note:**<br />
-> The `STUDENT_ID` will be converted to UPPERCASE.
 
 <br>
 
@@ -176,9 +180,6 @@ Examples:
 
 Expected Output: <br>
 ![img.png](images/students/EditStudentCommand.png)
-
-> 💡 **Note:**<br />
-> The `STUDENT_ID` will be converted to UPPERCASE.
 
 <br>
 
@@ -215,9 +216,10 @@ Expected Output: <br>
 <hr>
 
 ### Assessment
-> 💡 **Notes:**<br />
-> If multiple input fields are incorrect, only one of the errors will be explicitly shown.
-> For decimal values, only up to 2 decimal places will be displayed.
+> 💡 **Note(s):**<br />
+> * If multiple input fields are incorrect, only one of the errors will be explicitly shown.
+> * For decimal values, only up to 2 decimal places will be displayed.
+
 #### Listing all assessments in a class: `list_assessments`
 List all assessments in a class.
 
@@ -229,7 +231,8 @@ Examples:
 * `list_assessments c/CS2101-C03`
 
 Expected Output: <br>
-![img.png](images/assessment/ListAssessmentsCommand.PNG)
+![img.png](images/assessment/ListAssessmentsCommand.png)
+
 <br>
 
 #### Adding an assessment to a class: `add_assessment`
@@ -246,7 +249,8 @@ Examples:
 * `add_assessment c/CS2101-C03 n/OP2 m/25 w/15`
 
 Expected Output: <br>
-![img.png](images/assessment/AddAssessmentCommand.PNG)
+![img.png](images/assessment/AddAssessmentCommand.png)
+
 <br>
 
 #### Editing an assessment in a class: `edit_assessment`
@@ -269,7 +273,8 @@ Examples:
 * `edit_assessment c/CS2101-C03 a/OP2 n/UGDG`
 
 Expected Output: <br>
-![img.png](images/assessment/EditAssessmentCommand.PNG)
+![img.png](images/assessment/EditAssessmentCommand.png)
+
 <br>
 
 #### Deleting an assessment from a class: `delete_assessment`
@@ -284,7 +289,8 @@ Examples:
 * `delete_assessment c/CS2101-C03 a/OP2`
 
 Expected Output: <br>
-![img.png](images/assessment/DeleteAssessmentCommand.PNG)
+![img.png](images/assessment/DeleteAssessmentCommand.png)
+
 <br>
 <hr>
 
@@ -582,14 +588,28 @@ Saves the current program data to an archive.
 
 Archive files are stored in the `<TAA Root>/data/archive` folder.
 
+> 💡 **Note:**<br />
+> You will be prompted to enter `yes` (case-sensitive) if you wish to delete all data in the current storage. Enter
+> anything else (e.g. `no`) to abort the action.
+
 Format: `archive`
+
+Expected Output: <br>
+![ArchiveCommand](images/ArchiveCommand.png)
 
 <br>
 
 ### Resetting/Removing all data: `reset`
 Removes all saved data from the current program.
 
+> 💡 **Note:**<br />
+> You will be prompted to enter `yes` (case-sensitive) if you wish to continue deleting all data in the current storage.
+> Enter anything else (e.g. `no`) to abort the action.
+
 Format: `reset`
+
+Expected Output: <br>
+![ResetCommand](images/ResetCommand.png)
 
 <br>
 
