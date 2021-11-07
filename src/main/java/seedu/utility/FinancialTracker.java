@@ -1,9 +1,9 @@
 package seedu.utility;
 
+import seedu.commands.currency.CurrencyType;
 import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.Income;
-import seedu.commands.currency.CurrencyType;
 import seedu.exceptions.ExpenseEntryNotFoundException;
 import seedu.exceptions.ExpenseOverflowException;
 import seedu.exceptions.IncomeEntryNotFoundException;
@@ -24,13 +24,15 @@ public class FinancialTracker {
     private static final double TOTAL_INCOME_LIMIT = 100000000000.00;
     private ArrayList<Expense> expenses;
     private ArrayList<Income> incomes;
+    private CurrencyManager currencyManager;
 
     /**
      * Constructor for financial tracker initialises two empty ArrayList, one for expenses and one for incomes.
      */
-    public FinancialTracker() {
+    public FinancialTracker(CurrencyManager currencyManager) {
         this.expenses = new ArrayList<>();
         this.incomes = new ArrayList<>();
+        this.currencyManager = currencyManager;
     }
 
     /**
@@ -54,9 +56,20 @@ public class FinancialTracker {
         if (isOverflowedExpense(expense)) {
             throw new ExpenseOverflowException(Messages.EXPENSE_OVERFLOW_ERROR);
         }
+        //so now each expense/income have their og value&curr stored
+        expense.setCurrentDetails(expense.getValue(), currencyManager.getCurrency());
+
         expenses.add(expense);
+
         assert !expenses.isEmpty();
         assert expenses.size() > expenseSize;
+    }
+
+    public void getOriginalEntries() {
+        ArrayList<Entry> entries = new ArrayList<>();
+        for (Entry entry : entries) {
+            entry.setCurrentDetails(entry.getOriginalValue(), CurrencyType.SGD);
+        }
     }
 
     private boolean isOverflowedExpense(Expense expense) {

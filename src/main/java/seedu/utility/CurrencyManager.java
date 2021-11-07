@@ -12,12 +12,14 @@ public class CurrencyManager {
 
     protected double exchangeRate;
     private CurrencyType currency = CurrencyType.SGD;
-    private ArrayList<CurrencyType> currencyTypes = new ArrayList<>();
+    private final ArrayList<CurrencyType> currencyTypes = new ArrayList<>();
 
     public void currencyConvertor(CurrencyType from, CurrencyType to, FinancialTracker finances,
                                    BudgetManager budgetManager) throws SameCurrencyTypeException {
         if (getCurrency() == to) {
             throw new SameCurrencyTypeException(Messages.SAME_CURRENCY_TYPE_MESSAGE);
+        } else if (to == CurrencyType.SGD) {
+            convertOriginal(finances.getEntries());
         } else {
             ArrayList<Entry> entries = finances.getEntries();
             ArrayList<Budget> budgets = budgetManager.getBudgets();
@@ -26,6 +28,9 @@ public class CurrencyManager {
         }
     }
 
+//So add a condition when converting to OG currency, just set the value of the Entry into OG Value
+    //if command is ->USD and ur current currency is USD , ignore
+    //if command is ->USD and ur sgd, take ogvalue*usd multiplier.
     public CurrencyType getCurrency() {
         assert currency != null;
         return currency;
@@ -43,16 +48,25 @@ public class CurrencyManager {
     public double determineExchangeRate(CurrencyType to) {
         switch (to) {
         case USD:
-            return exchangeRate = 0.74;
+            return exchangeRate = 5.00;
+        case INR:
+            return exchangeRate = 2.00;
         case SGD:
-            return exchangeRate = 1.35;
-        default:
             return exchangeRate = 1.00;
+        default:
+            return 0;
         }
     }
 
     public boolean isBaseCurrency(CurrencyType from) {
         return !from.equals(CurrencyType.SGD);
+    }
+
+    public void convertOriginal(ArrayList<Entry> entries) {
+        for (Entry entry : entries) {
+            entry.setValue(entry.getOriginalValue());
+        }
+        setCurrency(CurrencyType.SGD);
     }
 
     public void convertEntries(ArrayList<Entry> entries, CurrencyType from, CurrencyType to) {

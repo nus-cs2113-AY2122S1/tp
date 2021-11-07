@@ -52,6 +52,7 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
    * [Set_threshold: `set_threshold`](#set-threshold-set_threshold)
 
    2.6 Currency Conversion
+   * [List available currencies: `list_curr`](#list-currency-list_curr)
    * [Set currency: `set_curr`](#set-currency-set_curr)
    * [Check current currency: `check_curr`](#check-current-currency-check_curr)
 
@@ -132,6 +133,7 @@ To Check Budgets: check_budget c/CATEGORY
 To Set Threshold Value for Reminders: set_threshold t/THRESHOLD
 To change entries into a different currency: set_curr c/CURRENCY
 To check the currency that entries are currently in: check_curr
+To view a list of available currency conversions: list_curr
 To View Your Yearly Report: show_graph
 To Clear All Expense And Income Entries: clear_all_entries
 To Terminate The Program: end

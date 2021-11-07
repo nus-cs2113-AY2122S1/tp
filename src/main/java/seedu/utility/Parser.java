@@ -1,37 +1,39 @@
 package seedu.utility;
 
-import seedu.commands.currency.ListCurrencyTypesCommand;
-import seedu.commands.expense.AddExpenseCommand;
-import seedu.commands.currency.CheckCurrentCurrencyCommand;
-import seedu.commands.income.AddIncomeCommand;
-import seedu.commands.budget.CheckBudgetCommand;
-import seedu.commands.general.ClearAllEntriesCommand;
-import seedu.commands.Command;
-import seedu.commands.currency.CurrencyConversionCommand;
-import seedu.commands.currency.CurrencyType;
-import seedu.commands.expense.DeleteExpenseCommand;
-import seedu.commands.income.DeleteIncomeCommand;
-import seedu.commands.general.ExitCommand;
-import seedu.commands.general.HelpCommand;
-import seedu.commands.InvalidCommand;
-import seedu.commands.expense.ListExpenseCommand;
-import seedu.commands.income.ListIncomeCommand;
-import seedu.commands.budget.SetBudgetCommand;
-import seedu.commands.budget.SetThresholdCommand;
-import seedu.commands.general.ShowGraphCommand;
-import seedu.commands.expense.TotalExpenseBetweenCommand;
-import seedu.commands.expense.TotalExpenseCommand;
-import seedu.commands.income.TotalIncomeBetweenCommand;
-import seedu.commands.income.TotalIncomeCommand;
-import seedu.commands.general.FindCommand;
-import seedu.commands.budget.BalanceCommand;
 import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 import seedu.entry.IncomeCategory;
-import seedu.exceptions.BlankCurrencyTypeException;
-import seedu.exceptions.BlankExpenseCategoryException;
-import seedu.exceptions.BlankIncomeCategoryException;
+
+import seedu.commands.Command;
+import seedu.commands.expense.AddExpenseCommand;
+import seedu.commands.income.AddIncomeCommand;
+import seedu.commands.expense.DeleteExpenseCommand;
+import seedu.commands.income.DeleteIncomeCommand;
+import seedu.commands.expense.ListExpenseCommand;
+import seedu.commands.income.ListIncomeCommand;
+import seedu.commands.expense.TotalExpenseBetweenCommand;
+import seedu.commands.expense.TotalExpenseCommand;
+import seedu.commands.income.TotalIncomeBetweenCommand;
+import seedu.commands.income.TotalIncomeCommand;
+
+import seedu.commands.general.FindCommand;
+import seedu.commands.budget.BalanceCommand;
+import seedu.commands.general.ClearAllEntriesCommand;
+import seedu.commands.general.ExitCommand;
+import seedu.commands.general.HelpCommand;
+import seedu.commands.general.ShowGraphCommand;
+
+import seedu.commands.currency.ListCurrencyTypesCommand;
+import seedu.commands.currency.CheckCurrentCurrencyCommand;
+import seedu.commands.currency.CurrencyConversionCommand;
+import seedu.commands.currency.CurrencyType;
+
+import seedu.commands.budget.SetBudgetCommand;
+import seedu.commands.budget.SetThresholdCommand;
+import seedu.commands.budget.CheckBudgetCommand;
+
+import seedu.commands.InvalidCommand;
 import seedu.exceptions.InputException;
 import seedu.exceptions.InvalidCurrencyTypeException;
 import seedu.exceptions.InvalidExpenseAmountException;
@@ -47,6 +49,10 @@ import seedu.exceptions.InvalidIncomeIndexException;
 import seedu.exceptions.InvalidInputAmountValueException;
 import seedu.exceptions.InvalidSettingsDataException;
 import seedu.exceptions.InvalidThresholdValueException;
+
+import seedu.exceptions.BlankCurrencyTypeException;
+import seedu.exceptions.BlankExpenseCategoryException;
+import seedu.exceptions.BlankIncomeCategoryException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -274,6 +280,23 @@ public class Parser {
         }
     }
 
+    private Command prepareGeneralRelatedCommand(String commandWord, String arguments) {
+        switch (commandWord) {
+        case HELP_COMMAND_KEYWORD:
+            return prepareHelp(arguments);
+        case FIND_KEYWORD:
+            return prepareFind(arguments);
+        case EXIT_KEYWORD:
+            return prepareExit(arguments);
+        case SHOW_GRAPH_KEYWORD:
+            return prepareShowGraph(arguments);
+        case CLEAR_ALL_ENTRIES_KEYWORD:
+            return prepareClearAllEntries(arguments);
+        default:
+            return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+        }
+    }
+
     private Command prepareBudgetRelatedCommand(String commandWord, String arguments) {
         switch (commandWord) {
         case BALANCE_KEYWORD:
@@ -297,23 +320,6 @@ public class Parser {
             return prepareConvertCurrency(arguments);
         case LIST_CURRENCY_TYPES_KEYWORD:
             return prepareListCurrencyTypes(arguments);
-        default:
-            return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
-        }
-    }
-
-    private Command prepareGeneralRelatedCommand(String commandWord, String arguments) {
-        switch (commandWord) {
-        case HELP_COMMAND_KEYWORD:
-            return prepareHelp(arguments);
-        case FIND_KEYWORD:
-            return prepareFind(arguments);
-        case EXIT_KEYWORD:
-            return prepareExit(arguments);
-        case SHOW_GRAPH_KEYWORD:
-            return prepareShowGraph(arguments);
-        case CLEAR_ALL_ENTRIES_KEYWORD:
-            return prepareClearAllEntries(arguments);
         default:
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
@@ -612,13 +618,6 @@ public class Parser {
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
-    private Command prepareCheckCurrentCurrency(String arguments) {
-        if (arguments.isBlank()) {
-            return new CheckCurrentCurrencyCommand();
-        }
-        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
-    }
-
     private Command prepareExit(String arguments) {
         if (arguments.isBlank()) {
             return new ExitCommand();
@@ -864,6 +863,20 @@ public class Parser {
         return new SetThresholdCommand(thresholdValue);
     }
 
+    private Command prepareCheckCurrentCurrency(String arguments) {
+        if (arguments.isBlank()) {
+            return new CheckCurrentCurrencyCommand();
+        }
+        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+    }
+
+    private Command prepareListCurrencyTypes(String arguments) {
+        if (arguments.isBlank()) {
+            return new ListCurrencyTypesCommand();
+        }
+        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+    }
+
     private Command prepareConvertCurrency(String arguments) {
         final Matcher matcher = CURRENCY_CONVERSION_FORMAT.matcher(arguments);
         if (isMatch(matcher)) {
@@ -888,16 +901,11 @@ public class Parser {
             return CurrencyType.USD;
         case "SGD":
             return CurrencyType.SGD;
+        case "INR":
+            return CurrencyType.INR;
         default:
             throw new InvalidCurrencyTypeException(Messages.INVALID_CURRENCY_TYPE_MESSAGE);
         }
-    }
-
-    private Command prepareListCurrencyTypes(String arguments) {
-        if (arguments.isBlank()) {
-            return new ListCurrencyTypesCommand();
-        }
-        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
     
     public String convertSettingsToData(FinancialTracker financialTracker, BudgetManager budgetManager,
