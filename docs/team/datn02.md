@@ -31,7 +31,7 @@ Users interact with in through a CLI, and is written in Java.
      - **Justification**: deleting by their numbers in lists and groups provides a faster way to operate this command.
   7. Others
      - Participated in early stages of `AlertExpiringSoon` command, which later completed by [@mudkip8](https://github.com/mudkip8).
-     - Added sorting methods in the `IngredientGroup` class.
+     - Implemented sorting order by date-time ascending in the `IngredientGroup` class.
      - Added `add()` and `deleteIngredientFromGroup()` methods in `IngredientList` class for adding and removing ingredients.
      - Debugged and fixed `SubtractCommand` and `UpdateCommand` with their respecting methods `subtractIngredientFromGroup()` and `update()` in `IngredientList` class.
 - **User Guide**: The user guide can be found [here](https://ay2122s1-cs2113t-t09-3.github.io/tp/UserGuide.html)
