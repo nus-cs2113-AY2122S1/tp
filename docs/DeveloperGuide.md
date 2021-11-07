@@ -55,12 +55,15 @@ The rest of the app consists of 4 components:
 4. Storage: Reads and writes data to and from the hard disk
 
 ### 1.2 Employee Component
+
+![employee](Diagrams/employee/employee_class_diagram.png)
+
 The employee component consists of the following four classes: `Employee`, `EmployeeList`, `EmployeeParser` 
 and `EmployeeUI`.
 
-* `Employee` stores the name and phone number of an individual employee working at the restaurant, as well as methods 
+* `Employee` stores the name, phone number, employment status and salary of an individual employee working at the restaurant, as well as methods 
 to retrieve employee information.
-* `EmployeeList` is an array list of Employees.
+* `EmployeeList` is an array list of multiple Employee.
 * `EmployeeParser` contains operations that decode user inputs into meaningful commands, and modifies the list of 
 employees accordingly.
 * `EmployeeUI` contains methods that display messages that interacts with the user.
