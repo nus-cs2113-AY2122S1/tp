@@ -56,12 +56,12 @@ public abstract class ListParser extends Parser {
         String[] taskStringIndex = index[2].trim().split("/+");
         String[] eventStringIndex = index[3].trim().split("/+");
         int eventIndex = Integer.parseInt(taskStringIndex[1]) - 1;
-        if (eventIndex >= Duke.eventCatalog.size()) {
+        if (eventIndex >= Duke.eventCatalog.size() || eventIndex < 0) {
             System.out.println("Event does not exist!");
             throw new NumberFormatException();
         }
         int taskIndex = Integer.parseInt(eventStringIndex[1]) - 1;
-        if (taskIndex >= Duke.eventCatalog.get(eventIndex).getTaskList().size()) {
+        if (taskIndex >= Duke.eventCatalog.get(eventIndex).getTaskList().size() || taskIndex < 0) {
             System.out.println("Task does not exist!");
             throw new NumberFormatException();
         }
