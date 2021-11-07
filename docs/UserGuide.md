@@ -175,7 +175,7 @@ Here are the modules in the list:
 
 ### Adding a partner university
 
-Add a partner university that you are interested into your selected university list.
+Adds a partner university that you are interested into your selected university list.
 
 #### Format: `add /uni <UNIVERSITY_INDEX>` `add /uni <UNIVERSITY_NAME>`
 
@@ -201,7 +201,7 @@ New university added:
 
 ### Adding a NUS module
 
-Add a NUS module that you want to complete during SEP into your *Selected Module List*.
+Adds a NUS module that you want to complete during SEP into your *Selected Module List*.
 
 #### Format: `add /mod <MODULE_INDEX>` `add /mod <MODULE_CODE>` 
 
@@ -335,7 +335,7 @@ New module mapping added:
 
 ### Finding a specific university
 
-Look for universities that matches your entered keyword.
+Looks for universities that matches your entered keyword.
 The output also consists of the index of the university, which is needed for subsequent commands.  
 
 
@@ -373,7 +373,7 @@ Expected output:
 
 ### Finding a specific module by module name
 
-Look for modules with module names that matches your entered keyword.
+Looks for modules with module names that matches your entered keyword.
 * The output also consists of the index of the module, which is needed for subsequent commands.
 
 #### Format: `find /mod <KEYWORD>`
@@ -398,7 +398,7 @@ Expected output:
 
 ### Finding a specific module by module code
 
-Look for modules with module codes that matches your entered keyword.
+Looks for modules with module codes that matches your entered keyword.
 * The output also consists of the index of the module, which is needed for subsequent commands.
 
 #### Format: `find /code <KEYWORD>`
@@ -424,7 +424,7 @@ Look for modules with module codes that matches your entered keyword.
 
 ### Removing a selected university
 
-Remove a partner university from the *Selected University List*.
+Removes a partner university from the *Selected University List*.
 
 #### Format: `remove /uni <UNIVERSITY_INDEX>` `remove /uni <UNIVERSITY_NAME>` 
 
