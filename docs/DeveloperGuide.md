@@ -556,7 +556,7 @@ into the file named `data/order_archive.txt`
 
 > :information_source: Note:
 > * MediVault archive order information when `parameter` and `parameterValues` provided by the user are valid.
-> * MediVault outputs the order information into a user readable format in `data/prescription_archive.txt`.
+> * MediVault outputs the order information into a user readable format in `data/order_archive.txt`.
 > * To modify the format, edit the code in `toArchiveFormat()` method in the Order Class.
 
 The sequence diagram for ArchiveOrderCommand is shown below.
@@ -564,7 +564,7 @@ The sequence diagram for ArchiveOrderCommand is shown below.
 ![ArchiveOrderSequenceDiagram](diagrams/diagram_images/ArchiveOrderSequenceDiagram.png)
 
 * `stringToDate()` helps to parse a string to a Date object.
-* `prescriptionsToArchive()` checks through all orders and look for records that are DELIVERED and have order date 
+* `ordersToArchive()` checks through all orders and look for records that are DELIVERED and have order date 
 before or equals to the specified date.
 * `removeFromOrders()` removes orders from order list after archive.
 
