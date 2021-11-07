@@ -7,6 +7,7 @@ import happybit.habit.Habit;
 import happybit.ui.PrintManager;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -23,6 +24,8 @@ public class Storage {
     private static final String FILE_FOUND = "Storage file found at " + DEFAULT_FILEPATH + ".";
     private static final String READ_ONLY = "Storage file is set to read only.";
     private static final String SET_READ_ONLY_FAILED = "Failed to set storage file as read only.";
+    private static final String EMPTY = "";
+    private static final String FILE_CORRUPTED = "File is corrupted. All the data will be cleared.";
 
     protected String filePath;
     protected String fileDir;
@@ -45,12 +48,19 @@ public class Storage {
      * It will import the data from storage file into GoalList object.
      *
      * @return a GoalList object
-     * @throws HaBitStorageException when errors occurred with the importing of data
      */
-    public GoalList load() throws HaBitStorageException {
+    public GoalList load() {
         this.createStorageFile(this.filePath, this.fileDir);
+        GoalList goalList = new GoalList();
 
-        return Import.importStorage(this.filePath);
+        try {
+            goalList = Import.importStorage(this.filePath);
+        } catch (HaBitStorageException e) {
+            this.clearFile();
+            this.setReadOnly(new File(this.filePath));
+            printManager.printError(e.getMessage());
+        }
+        return goalList;
     }
 
     /**
@@ -85,6 +95,34 @@ public class Storage {
             this.printManager.printStorageMessage(DIR_CREATED);
         } else {
             this.printManager.printStorageMessage(DIR_NOT_CREATED);
+        }
+    }
+
+    /**
+     * Clears the storage file.
+     */
+    protected void clearFile() {
+        this.setWritable();
+
+        try {
+            FileWriter fileWriter = new FileWriter(this.filePath);
+
+            fileWriter.write(EMPTY);
+            fileWriter.close();
+        } catch (IOException e) {
+            printManager.printError(e.getMessage());
+        }
+    }
+
+    /**
+     * Allows writing to the storage file which was set as read only.
+     */
+    protected void setWritable() {
+        File storageFile = new File(this.filePath);
+        boolean isWriteable = storageFile.setWritable(true);
+
+        if (isWriteable) {
+            this.printManager.printStorageMessage(FILE_CORRUPTED);
         }
     }
 

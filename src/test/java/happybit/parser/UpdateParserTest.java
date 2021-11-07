@@ -75,14 +75,22 @@ class UpdateParserTest {
 
     private static final String ERROR_INVALID_UPDATE_COMMAND = "There is no update command for goals in this format, "
             + "do check your parameters one more time.";
-
+    private static final String ERROR_INTEGER_FLAG_FORMAT = "The command is missing the '%1$s' flag.";
     private static final String ERROR_UPDATE_START_DATE = "The start date cannot be updated once set. Start on time!";
 
     private static final String ERROR_CHANGE_COMMAND_MISSING_INDEXES = "A goal index and a habit index has to be "
-            + "provided using the g/ and h/ flags respectively for Change commands";
+            + "provided using the g/ and h/ flags respectively for Change commands.";
 
     private static final String ERROR_INVALID_CHANGE_COMMAND = "There is no change command for habits in this format, "
             + "do check your parameters one more time.";
+    private static final String ERROR_FLAG_GOAL_INDEX_MISSING_INTEGER = "The 'g/' flag is missing an index.";
+    private static final String ERROR_NO_FLAGS_UPDATE_COMMAND = "No flags detected for update command. "
+            + "Please try again.";
+    private static final String ERROR_NO_REQUIRED_FLAGS_UPDATE_COMMAND = "Required flags for update command missing. "
+            + "Please try again.";
+    private static final String ERROR_FLAG_INDEX_MISSING_PARAMETER = "Index expected after '%1$s' flag missing.";
+
+
     /*
     Tests for parseUpdateGoalCommands()
      */
@@ -151,13 +159,19 @@ class UpdateParserTest {
     }
 
     @Test
-    void parseUpdateGoalCommands_invalidInputs_exceptionThrown() throws HaBitParserException {
+    void parseUpdateGoalCommands_invalidInputs_exceptionThrown() {
+
+        try {
+            UpdateParser.parseUpdateGoalCommands("dilly dally do 1 2 3");
+        } catch (HaBitParserException e) {
+            assertEquals(String.format(ERROR_INTEGER_FLAG_FORMAT, "g/"), e.getMessage());
+        }
 
         try {
             UpdateParser.parseUpdateGoalCommands(" i/3 h/3");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_UPDATE_COMMAND_NO_GOAL_INDEX, e.getMessage());
+            assertEquals(String.format(ERROR_INTEGER_FLAG_FORMAT, "g/"), e.getMessage());
         }
 
         try {
@@ -165,6 +179,20 @@ class UpdateParserTest {
             fail();
         } catch (HaBitParserException e) {
             assertEquals(ERROR_INVALID_UPDATE_COMMAND, e.getMessage());
+        }
+
+        try {
+            UpdateParser.parseUpdateGoalCommands("g/");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(String.format(ERROR_FLAG_INDEX_MISSING_PARAMETER, "g/"), e.getMessage());
+        }
+
+        try {
+            UpdateParser.parseUpdateGoalCommands("g/5");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_NO_REQUIRED_FLAGS_UPDATE_COMMAND, e.getMessage());
         }
 
         try {
@@ -198,7 +226,28 @@ class UpdateParserTest {
     }
 
     @Test
-    void parseUpdateHabitCommands_invalidInputs_exceptionThrown() throws HaBitParserException {
+    void parseUpdateHabitCommands_invalidInputs_exceptionThrown() {
+        try {
+            UpdateParser.parseUpdateHabitCommands("g/ h/");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(String.format(ERROR_FLAG_INDEX_MISSING_PARAMETER, "g/"), e.getMessage());
+        }
+
+        try {
+            UpdateParser.parseUpdateHabitCommands("g/2 h/");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(String.format(ERROR_FLAG_INDEX_MISSING_PARAMETER, "h/"), e.getMessage());
+        }
+
+        try {
+            UpdateParser.parseUpdateHabitCommands("g/2 h/5");
+            fail();
+        } catch (HaBitParserException e) {
+            assertEquals(ERROR_NO_REQUIRED_FLAGS_UPDATE_COMMAND, e.getMessage());
+        }
+
         try {
             UpdateParser.parseUpdateHabitCommands("t/ex e/31122021");
             fail();
