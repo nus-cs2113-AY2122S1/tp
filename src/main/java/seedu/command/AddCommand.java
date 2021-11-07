@@ -28,10 +28,7 @@ public class AddCommand extends Command {
     private static final String THIRD_QN = "Starting time of Event (E.g. 1600): ";
     private static final String FOURTH_QN = "Ending time of Event (E.g. 1800): ";
     private static final String FIFTH_QN = "Location of Event (Optional): ";
-    private static final String MAX_TIME = "2400";
-    private static final String HOUR_LIMIT = "2300";
     private static final int TIME_LIMIT = 2400;
-    private static final int HOUR = 100;
     private static final int ZERO = 0;
     private static final int FOUR = 4;
     private static final int TWO = 2;
@@ -113,8 +110,8 @@ public class AddCommand extends Command {
             throw new AddException("Invalid End Time Entered (Format: 0000 - 2400)");
         }
         if (isNotValidTime(endTime)) {
-            throw new AddException("Invalid End Time Entered (Format: 0000 - 2400)." +
-                    " Note that all events are strictly within a 1 hour interval");
+            throw new AddException("Invalid End Time Entered (Format: 0000 - 2400)."
+                    + " Note that all events are strictly within a 1 hour interval");
         }
         return endTime;
     }
@@ -127,8 +124,8 @@ public class AddCommand extends Command {
             throw new AddException("Invalid Start Time Entered (Format: 0000 - 2400)");
         }
         if (isNotValidTime(startTime)) {
-            throw new AddException("Invalid End Time Entered (Format: 0000 - 2400)." +
-                    " Note that all events are strictly within a 1 hour interval");
+            throw new AddException("Invalid End Time Entered (Format: 0000 - 2400)."
+                    + " Note that all events are strictly within a 1 hour interval");
         }
         return startTime;
     }

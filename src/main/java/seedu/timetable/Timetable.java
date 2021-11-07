@@ -226,7 +226,7 @@ public class Timetable implements Comparable<Timetable> {
     }
 
     /**
-     * Function is used to find the true end time of an event in order to account for 2400
+     * Function is used to find the true end time of an event in order to account for 2400.
      * @param end the hour in which the event ends
      * @return the true end time
      */
