@@ -93,7 +93,7 @@ public class Storage {
      *
      * @see FileStorage#writeToFile(String, String)
      */
-    protected static void writeToFile(String filePath) throws IOException {
+    public static void writeToFile(String filePath) throws IOException {
         String jsonString = FileStorage.getGson().toJson(listOfTrips);
         FileStorage.writeToFile(jsonString, filePath);
     }
@@ -199,7 +199,7 @@ public class Storage {
      *
      * @see Storage#getOpenTrip()
      */
-    public static void promptUserForValidTrip() throws ForceCancelException {
+    private static void promptUserForValidTrip() throws ForceCancelException {
         try {
             System.out.print("Please enter the trip you would like to open: ");
             String input = Ui.receiveUserInput();
