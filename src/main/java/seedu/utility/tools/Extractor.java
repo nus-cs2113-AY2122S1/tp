@@ -2,7 +2,12 @@ package seedu.utility.tools;
 
 import seedu.entry.ExpenseCategory;
 import seedu.entry.IncomeCategory;
-import seedu.exceptions.*;
+import seedu.exceptions.BlankExpenseCategoryException;
+import seedu.exceptions.BlankIncomeCategoryException;
+import seedu.exceptions.InvalidDescriptionException;
+import seedu.exceptions.InvalidExpenseCategoryException;
+import seedu.exceptions.InvalidIncomeCategoryException;
+import seedu.exceptions.InvalidIndexException;
 import seedu.utility.Messages;
 
 import java.util.regex.Matcher;
