@@ -20,6 +20,7 @@
   - [Listing all contacts](#List)
   - [Importing contacts](#Import)
   - [Contact index parser](#IndexParser)
+  - [Design Considerations](#DesignConsiderations)
 - [Product Scope](#scope)
   - [Target user profile](#target)
   - [Value proposition](#value)
@@ -316,6 +317,29 @@ specified contact index given as an integer, which will then be used in the exec
 
 For example, if `edit 2 -n Marcus Bobo` is given as the input, the Index Parser will identify the contact index to be `2`
 and pass the contact index to the execution of the `edit` command accordingly.
+
+### <a name="DesignConsiderations"></a>Design Considerations
+
+**Aspect: Implementation of removing fields of a contact**
+
+* **Alternative 1: Implement under `edit` feature**
+  <br /> Specify empty flags while using the `edit` command and the program would
+  delete those fields from the contact<br />
+  Example : `edit 2 -n Jim -e -g` would change the name field for contact and would remove the email
+  and github field from the contact.
+
+    * Pros: Editing and removing fields can be done in one step.
+    * Cons: Difficult to implement and makes the program more error-prone as flag descriptions can now be empty.
+
+* **Alternative 2 (current choice): Implement under `rm` feature**
+  <br /> Specify flags while using the `rm` command and the program would delete those fields from the contact<br />
+  Example : `rm 2 -e -g` would remove the email and github field from the contact at index 2.
+
+    * Pros: Easy to implement as rm is a much simpler feature which only takes an index.
+      Much easier exception handling also and thus less error-prone.
+    * Cons: Less user intuitive and takes two steps when the user wants to edit a contact and also delete fields
+
+
 
 ## <a name="scope"></a>Product scope
 
