@@ -14,8 +14,6 @@ endbox
 box "Active Recall" #lightblue
 participant ":GameEnvironment" as GameEnvironment #lightskyblue
 participant ":QuestionGenerator" as QuestionGenerator #lightskyblue
-participant ":DifficultyModifier" as DifficultyModifier #lightskyblue
-participant ":Question" as Question #lightskyblue
 endbox
 
 -> TestCommand : execute(moduleManager)
