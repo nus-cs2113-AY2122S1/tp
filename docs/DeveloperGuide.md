@@ -484,6 +484,22 @@ The diagram below shows the class diagram of the Ui component, in relation with 
 
 <br>
 
+## Storage Component
+
+<hr>
+
+**API: `ClientPackageStorage.java` `ClientStorage.java` `FlightStorage.java` `TourStorage.java`**
+
+The Storage component consists of:
+1. ClientPackageStorage.java: Reading and saving files which record all clientpackages.
+2. ClientStorage.java: Reading and saving files which record all clients.
+3. FlightStorage.java: Reading and saving files which record all flights.
+4. TourStorage.java: Reading and saving files which record all tours.
+
+To add on Storage component is designed to access only hte following folder:
+1. `data/`
+
+<br>
 ## Product scope
 
 <hr>
