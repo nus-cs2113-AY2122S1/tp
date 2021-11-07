@@ -47,8 +47,19 @@ class PaymentOptimizerTest {
         person3.setMoneyOwed(person1, -3.0);
         exp1.setAmountSplit(person2, 4.0);
         exp1.setAmountSplit(person3, 4.0);
+        Expense exp2 = new Expense(16.00, "food", listOfPersons, "chicken");
+        exp1.setPayer(person2);
+        person2.setMoneyOwed(person2, -16.0);
+        person2.setMoneyOwed(person1, 10.0);
+        person1.setMoneyOwed(person2, -10.0);
+        person2.setMoneyOwed(person3, 6.0);
+        person3.setMoneyOwed(person2, -6.0);
+        exp2.setAmountSplit(person2, 10.0);
         exp1.setDate("11-02-2021");
+        exp2.setAmountSplit(person3, 6.0);
+        exp2.setDate("11-02-2021");
         trip.addExpense(exp1);
+        trip.addExpense(exp2);
     }
 
     @Test
@@ -57,9 +68,15 @@ class PaymentOptimizerTest {
         Person person1 = openTrip.getListOfPersons().get(0);
         Person person2 = openTrip.getListOfPersons().get(1);
         Person person3 = openTrip.getListOfPersons().get(2);
-        HashMap<String, Double> hashmap = person1.getOptimizedMoneyOwed();
+        HashMap<String, Double> hashMapBen = person1.getOptimizedMoneyOwed();
+        HashMap<String, Double> hashMapJerry = person2.getOptimizedMoneyOwed();
+        HashMap<String, Double> hashMapTom = person3.getOptimizedMoneyOwed();
         PaymentOptimizer.optimizePayments(openTrip);
-        System.out.println(hashmap.get("tom"));
+        assertEquals(hashMapBen.get("jerry"), -2.0);
+        assertEquals(hashMapJerry.get("ben"), 2.0);
+        assertEquals(hashMapTom.get("jerry"), -9.0);
+        assertEquals(hashMapJerry.get("tom"), 9.0);
+
     }
 
 
