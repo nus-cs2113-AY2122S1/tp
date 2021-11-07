@@ -3,32 +3,32 @@
 
 actor User
 
-participant Parser #LightGreen
-User -> Parser ++ #LightGreen: "add /uni 1"
+participant ":Parser" #LightGreen
+User -> ":Parser" ++ #LightGreen: "add /uni 1"
 
-participant Command #Yellow
-Parser -> Command ++ #Yellow : addUniCommand(University U)
+participant ":Command" #Yellow
+":Parser" -> ":Command" ++ #Yellow : addUniCommand(University: U)
 
-participant Model #Orange
-Command -> Model ++ #Orange: selectedUniversityList.addUniversity(U)
+participant ":Model" #Orange
+":Command" -> ":Model" ++ #Orange: selectedUniversityList.addUniversity(University: U)
 return
-deactivate Model
+deactivate ":Model"
 
-participant Storage #LightGrey
-Command -> Storage ++ #LightGrey: updateSelectedUniversityList(selectedUniversityList)
+participant ":Storage" #LightGrey
+":Command" -> ":Storage" ++ #LightGrey: updateSelectedUniversityList(selectedUniversityList: list)
 return
-deactivate Storage
+deactivate ":Storage"
 
-participant Ui #DarkGrey
-Command -> Ui ++ #DarkGrey : printUniversity(U)
+participant ":Ui" #DarkGrey
+":Command" -> ":Ui" ++ #DarkGrey : printUniversity(University: U)
 return
-deactivate Ui
+deactivate ":Ui"
 
-Command --> Parser
-deactivate Command
+":Command" --> ":Parser"
+deactivate ":Command"
 
-Parser --> User
-deactivate Parser
+":Parser" --> User
+deactivate ":Parser"
 
 
 @enduml
