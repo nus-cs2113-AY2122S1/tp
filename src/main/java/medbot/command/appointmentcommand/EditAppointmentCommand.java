@@ -19,6 +19,7 @@ public class EditAppointmentCommand extends Command {
     public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
         scheduler.editAppointment(appointmentId, appointment);
         Appointment editedAppointment = scheduler.getAppointment(appointmentId);
-        ui.printOutput("Appointment " + appointmentId + " changed to " + editedAppointment);
+        ui.printOutput("Appointment " + appointmentId + " now has the following details:\n\n"
+                + editedAppointment);
     }
 }
