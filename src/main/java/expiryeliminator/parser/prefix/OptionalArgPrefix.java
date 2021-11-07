@@ -5,11 +5,11 @@ package expiryeliminator.parser.prefix;
  */
 public class OptionalArgPrefix extends SingleArgPrefix {
     /**
-     * Initialises optional arg prefix with a prefix string.
+     * Initialises optional arg prefix.
      *
-     * @param prefix Prefix.
+     * @param singleArgPrefix Prefix that should be allowed to be optional.
      */
-    public OptionalArgPrefix(String prefix) {
-        super(prefix);
+    public OptionalArgPrefix(SingleArgPrefix singleArgPrefix) {
+        super(singleArgPrefix.getPrefix());
     }
 }
