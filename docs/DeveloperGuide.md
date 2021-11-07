@@ -64,11 +64,13 @@ to plan for their Student Exchange Programme, optimised for use via Command Line
 
 ## Getting started 
 
-Refer to our user guide [here](https://ay2122s1-cs2113t-t09-2.github.io/tp/UserGuide.html#quick-start)
+Refer to our user guide [here](https://ay2122s1-cs2113t-t09-2.github.io/tp/UserGuide.html#quick-start).
 
 ## Design & implementation
 
-<img src="images/architecture.png" width = "280"/>  
+<p align = "center">
+<img src="images/architecture.png" width = "800"/>  
+</p>
 
 The ***Architecture Diagram*** above explains the high-level design of the App. 
 
