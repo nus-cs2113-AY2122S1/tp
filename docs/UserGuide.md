@@ -10,10 +10,10 @@ or you simply wish to explore SEPlanner to its fullest potential, this is the pa
 to easily access the different sections of this guide, and we hope you have a pleasant experience.
 
 ## Content Page
-* [Introduction](#Introduction)
+* [Introduction](#introduction)
 * [Program overview](#program-overview)
 * [Quick Start](#quick-start)  
-* [How to use this guide](#How-to-use-this-guide)
+* [How to use this guide](#how-to-use-this-guide)
 * [Universities, Modules and Module Mappings](#Universities,-Modules-and-Module-Mappings)
 * [Features](#features)  
   * [Viewing all available universities](#viewing-all-available-universities)
