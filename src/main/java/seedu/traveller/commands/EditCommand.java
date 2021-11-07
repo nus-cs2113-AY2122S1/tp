@@ -73,7 +73,6 @@ public class EditCommand extends Command {
     }
 
     public void execute(TripsList tripsList, Ui ui) throws TravellerException {
-        int errorFlag = 1;
         int tripIndex = tripsList.getTripIndex(this.tripName);
         if (tripIndex == -1) {
             throw new TripNotFoundException();
@@ -89,6 +88,7 @@ public class EditCommand extends Command {
         assert !this.newTripName.equals("") && !this.startCountry.equals("") && !this.endCountry.equals("");
 
         MinCalcResult result = WorldMap.calcMinTime(this.startCountry, this.endCountry);
+        int errorFlag = 1;
         if (result.getError() == errorFlag) {
             return;
         }

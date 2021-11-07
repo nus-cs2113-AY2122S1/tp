@@ -14,14 +14,15 @@ public class WorldMapTest {
         WorldMap.initWorldMap();
     }
 
+    //@@author Uxinnn
     @Test
-    public void getCountry_sin_success() throws EmptyVertexException {
+    public void getCountry_sin_success() {
         Country countrySin = WorldMap.getValidCountry("SIN");
         assertEquals(new Country("SIN", 0).toString(), countrySin.toString());
     }
 
     @Test
-    public void calcMinDistance_sinMly_success() throws EmptyVertexException {
+    public void calcMinDistance_sinMly_success() {
         Country countrySin = new Country("SIN", 0);
         Country countryMly = new Country("MLY", 1);
 
@@ -37,9 +38,10 @@ public class WorldMapTest {
         assertEquals(minCalcResult.toString(),
                 WorldMap.calcMinTime("SIN", "MLY").toString());
     }
-    
+
+    //@@author
     @Test
-    public void calcMinCost_sinMly_success() throws EmptyVertexException {
+    public void calcMinCost_sinMly_success() {
         Country countrySin = new Country("SIN", 0);
         Country countryMly = new Country("MLY", 1);
 
@@ -57,7 +59,7 @@ public class WorldMapTest {
     }
 
     @Test
-    public void calcMinDistance_sinJpn_success() throws EmptyVertexException {
+    public void calcMinDistance_sinJpn_success() {
         Country countrySin = new Country("SIN", 0);
         Country countryMly = new Country("MLY", 1);
         Country countryJpn = new Country("JPN", 3);
@@ -78,7 +80,7 @@ public class WorldMapTest {
     }
 
     @Test
-    public void calcMinDistance_jpnSin_success() throws EmptyVertexException {
+    public void calcMinDistance_jpnSin_success() {
         Country countrySin = new Country("SIN", 0);
         Country countryMly = new Country("MLY", 1);
         Country countryJpn = new Country("JPN", 3);
@@ -101,7 +103,7 @@ public class WorldMapTest {
     }
 
     @Test
-    public void updateMinDistance_jpnSin_success() throws EmptyVertexException {
+    public void updateMinDistance_jpnSin_success() {
         WorldMap.printWorld();
         Country countrySin = WorldMap.getValidCountry("SIN");
         Country countryJpn = WorldMap.getValidCountry("JPN");
@@ -123,7 +125,7 @@ public class WorldMapTest {
     }
 
     @Test
-    public void calcMinCost_sinJpn_success() throws EmptyVertexException {
+    public void calcMinCost_sinJpn_success() {
         Country countrySin = new Country("SIN", 0);
         Country countryChn = new Country("CHN", 2);
         Country countryJpn = new Country("JPN", 3);
@@ -144,7 +146,7 @@ public class WorldMapTest {
     }
 
     @Test
-    public void calcMinCost_jpnSin_success() throws EmptyVertexException {
+    public void calcMinCost_jpnSin_success() {
         Country countrySin = new Country("SIN", 0);
         Country countryChn = new Country("CHN", 2);
         Country countryJpn = new Country("JPN", 3);

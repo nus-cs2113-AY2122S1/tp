@@ -233,6 +233,7 @@ the parser on whether to show all trips or just the trip with name `all` when th
 * Day index must be a non-negative integer.
 * Item index must be a non-negative integer.
 * Time field value should be in a valid 24hr format (A 4-digit value ranging from 0000 to 2359).
+* When adding days using `add-day`, the days added should be a positive integer.
 
 
 #### 1.2.3. TripsList class

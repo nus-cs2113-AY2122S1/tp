@@ -123,6 +123,7 @@ public class Parser {
     }
 
 
+    //@@author Uxinnn
     /**
      * Parses user input to give an <code>AddItemCommand</code>.
      * @param userInput Raw user input, with the first command option (add-item) removed.
@@ -157,6 +158,7 @@ public class Parser {
         return command;
     }
 
+    //@@author Uxinnn
     /**
      * Parses user input to give a <code>NewCommand</code>.
      * @param userInput Raw user input, with the first command option (new) removed.
@@ -189,6 +191,7 @@ public class Parser {
         return command;
     }
 
+    //@@author
     /**
      * Parses user input to give a <code>DeleteCommand</code>.
      * @param userInput Raw user input, with the first command option (delete) removed.
@@ -382,6 +385,7 @@ public class Parser {
         return command;
     }
 
+    //@@author Uxinnn
     /**
      * Parses user input to give a <code>ViewCommand</code>.
      * @return Command A <code>ViewCommand</code> object.
@@ -394,6 +398,7 @@ public class Parser {
         return command;
     }
 
+    //@@author
     /**
      * Parses user input to give an <code>EditItemCommand</code>.
      * @param userInput Raw user input, with the first command option (edit-item) removed.
@@ -498,6 +503,7 @@ public class Parser {
     }
 
 
+    //@@author Uxinnn
     /**
      * Parses user input to give an <code>AddDayCommand</code>.
      * @param userInput Raw user input, with the first command option (add-day) removed.
@@ -528,6 +534,7 @@ public class Parser {
         return command;
     }
 
+    //@@author
     /**
      * Parses user input to give a <code>ShortestCommand</code>.
      * @param userInput Raw user input, with the first command option (shortest-dist) removed.
@@ -616,6 +623,7 @@ public class Parser {
         return new HelpCommand();
     }
 
+    //@@author Uxinnn
     /**
      * Parses a field value to remove leading and trailing whitespaces and check for validity.
      * @param userInput Raw string that the user has entered.
@@ -633,6 +641,7 @@ public class Parser {
         return fieldValue;
     }
 
+    //@@author Uxinnn
     /**
      * Used to check if a user input value for the day/item field is valid.
      * @param rawIndex Raw day/item index as inputted by user.
@@ -653,6 +662,7 @@ public class Parser {
         return index;
     }
 
+    //@@author Uxinnn
     /**
      * Used to check if a user input value for the time field is valid.
      * @param rawTime Raw time as inputted by user.
@@ -673,6 +683,7 @@ public class Parser {
         }
     }
 
+    //@@author Uxinnn
     /**
      * Used to check if a user input value for the tripName field is valid.
      * @param tripName TripName that user has entered.
@@ -684,6 +695,7 @@ public class Parser {
         }
     }
 
+    //@@author Uxinnn
     /**
      * Used to parse flags in raw user input.
      * @param userInput Input string which contains /from flag.
@@ -694,6 +706,7 @@ public class Parser {
         return userInput.indexOf(fromSeparator);
     }
 
+    //@@author Uxinnn
     /**
      * Used to parse flags in raw user input.
      * @param userInput Input string which contains /to flag.
@@ -704,6 +717,7 @@ public class Parser {
         return userInput.indexOf(toSeparator);
     }
 
+    //@@author Uxinnn
     /**
      * Used to parse flags in raw user input.
      * @param userInput Input string which contains /day flag.
@@ -714,6 +728,7 @@ public class Parser {
         return userInput.indexOf(daySeparator);
     }
 
+    //@@author Uxinnn
     /**
      * Used to parse flags in raw user input.
      * @param userInput Input string which contains /time flag.
@@ -724,6 +739,7 @@ public class Parser {
         return userInput.indexOf(timeSeparator);
     }
 
+    //@@author Uxinnn
     /**
      * Used to parse flags in raw user input.
      * @param userInput Input string which contains /name flag.
@@ -734,6 +750,7 @@ public class Parser {
         return userInput.indexOf(nameSeparator);
     }
 
+    //@@author Uxinnn
     /**
      * Used to parse flags in raw user input.
      * @param userInput Input string which contains /item flag.
@@ -744,6 +761,7 @@ public class Parser {
         return userInput.indexOf(itemSeparator);
     }
 
+    //@@author Uxinnn
     /**
      * Used to parse flags in raw user input.
      * @param userInput Input string which contains /key flag.
@@ -754,6 +772,7 @@ public class Parser {
         return userInput.indexOf(keywordSeparator);
     }
 
+    //@@author Uxinnn
     /**
      * Used to parse flags in raw user input.
      * @param userInput Input string which contains /index flag.
