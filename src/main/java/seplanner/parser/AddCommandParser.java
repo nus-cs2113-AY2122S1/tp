@@ -185,6 +185,10 @@ public class AddCommandParser {
         String secondParam = argumentSubstrings[1].trim();
         if (ParseCondition.isNumeric(firstParam) && ParseCondition.isNumeric(secondParam)) {
             uniIndex = Integer.parseInt(firstParam);
+            if (ParseCondition.isIndexOutOfBounds(uniIndex, universityMasterList)) {
+                logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
+                throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNIINDEXNOTAVAILABLE, 1, false);
+            }
             mapIndex = Integer.parseInt(secondParam);
             university = universityMasterList.get(uniIndex - 1);
         } else {
@@ -201,7 +205,8 @@ public class AddCommandParser {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1, false);
         }
-        if (ParseCondition.isIndexOutOfBounds(uniIndex, mapIndex, universityMasterList, moduleSelectedList)) {
+        if (ParseCondition.isAddedMappingIndexOutOfBounds(uniIndex, mapIndex, universityMasterList,
+                moduleSelectedList)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING, 1, false);
         }

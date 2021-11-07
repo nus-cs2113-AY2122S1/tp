@@ -26,6 +26,9 @@
 package seplanner.parser;
 
 import org.junit.jupiter.api.Test;
+import seplanner.commands.ListUniCommand;
+import seplanner.enumerations.ListType;
+import seplanner.exceptions.ListParseException;
 import seplanner.modules.ModuleList;
 import seplanner.storage.Storage;
 import seplanner.universities.UniversityList;
@@ -59,8 +62,31 @@ public class ListCommandParserTest {
         String flag = "";
         ListCommandParser lcp = new ListCommandParser();
 
-        assertThrows(ParseException.class, () -> lcp.parse(flag, universitySelectedList,
-                moduleSelectedList, universityMasterList, moduleMasterList));
+        assertThrows(ParseException.class, () -> lcp.parse(flag, universityMasterList,
+                moduleMasterList, universitySelectedList, moduleSelectedList));
     }
 
+    @Test
+    public void test_wrongFlag_exceptionThrown() {
+        String flag = "asdf";
+        ListCommandParser lcp = new ListCommandParser();
+
+        assertThrows(ListParseException.class, () -> lcp.parse(flag, universityMasterList,
+                moduleMasterList, universitySelectedList, moduleSelectedList));
+    }
+
+    /*
+    @Test
+    public void test_selectedUni_expectListUniCommand() {
+        String flag = "/suni";
+        ListCommandParser lcp = new ListCommandParser();
+
+        try {
+            ListUniCommand luc = new ListUniCommand(universitySelectedList, ListType.SELECTED);
+            assertEquals(luc, () -> lcp.parse(flag, universityMasterList, moduleMasterList, universitySelectedList, moduleMasterList));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    */
 }

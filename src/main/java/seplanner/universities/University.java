@@ -44,7 +44,6 @@ public class University implements Comparator<University> {
     public void listAllMappings() {
         for (int i = 0; i < list.size(); i++) {
             ModuleMapping currentMapping = list.get(i);
-            System.out.print(Constants.INDENTATION);
             UiMapping.printMapping(currentMapping, i + 1, true);
         }
     }

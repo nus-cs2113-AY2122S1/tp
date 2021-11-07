@@ -12,7 +12,7 @@ public class UiInvalid extends Ui {
     }
 
     public static void printParseException(String errorMessage, String format, boolean isPrintFormat) {
-        out.println("There is an error in your inputs: " + errorMessage + "\n");
+        out.println(errorMessage + "\n");
         if (isPrintFormat) {
             printFormat(format);
         }
