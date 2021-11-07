@@ -32,25 +32,19 @@ v2.1:
 * Implemented `Prescription Validator` method. [[#86](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/86)]
     * Functionality: Checks if prescription ID,customer ID, Staff Name,prescription date and prescription column/alias is valid.
     * Justification: This method can be called for any of the prescription command that need to check for any of the inputs as stated above.
-
-
+    
 * Implemented `Order Validator` method. [[#119](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/119)]
     * Functionality: Checks if order ID, order status,order date and order column/alias is valid.
     * Justification: This method can be called for any of the order command that need to check for any of the inputs as stated above.
-
-
+    
 * Implemented `getNotExpiredStockQuantity` method in `PrescriptionManager`. [[#295](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/295)]
-  * Functionality: Retrieves the total stock quantity for medicine with same name that has not expired.
-  * Justification: This method can be called for any of the prescription command that need to retrieve quantity that has not expired.
+
+* Added functionality for `addstock` command to limit number of medication for stock. [[#42](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/42)]
 
 * Included JUnit tests for:
-    * `Prescription Validator` class. [[#89](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/89)]
-    * `Order Validator` class. [[#140](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/140)]
-    * `AddStock`, `AddPrescription`, `DeletePrescription` and `DeleteStock`. [[#306](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/306)]
-* Added functionality for `addstock` command to limit number of medication for stock. [[#42](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/42)]
-    * Functionality: User will not be able to input quantity above the maximum quantity. 
-    * Justification: Prevents user from adding too much medication to the stock.
-
+  * `Prescription Validator` class. [[#89](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/89)]
+  * `Order Validator` class. [[#140](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/140)]
+  * `AddStock`, `AddPrescription`, `DeletePrescription` and `DeleteStock`. [[#306](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/306)]
 
 ### Documentation
 
