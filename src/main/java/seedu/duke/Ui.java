@@ -325,4 +325,11 @@ public class Ui {
                 + Ui.getLineBreak());
     }
 
+    public static void printLoadingMessage() {
+        System.out.println("Save file detected! Loading...");
+    }
+
+    public static void printLoadSuccesfulMessage() {
+        System.out.println("...File loading process complete!\n" + getLineBreak());
+    }
 }

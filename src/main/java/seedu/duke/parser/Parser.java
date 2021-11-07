@@ -189,6 +189,10 @@ public abstract class Parser {
         return dateTime.format(formatter1);
     }
 
+    public static LocalDateTime convertDateTimeForLoading(String dateTime) {
+        return LocalDateTime.parse(dateTime, formatter1);
+    }
+  
     /**
      * Converts a budget as a string and formats it into a double.
      *
