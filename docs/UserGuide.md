@@ -500,8 +500,8 @@ help     | `help`                                           | `help`            
 todo     | `todo <description> [--flag <argument>]`         | `todo read book`                                                                                     |
 deadline | `deadline <description> [--flag <argument>]`     |`deadline CS2106 Lab 3 --priority high --due 20-10-2021 02:00:00`                                     |
 event    | `event <description> [--flag <argument>]`        | `event Marquee Christmas Party --priority high --start 25-12-2020 22:00:00 --end 26-12-2020 04:00:00`|
-module   |                                                  |                                                                                                      | 
-browse   |                                                  |                                                                                                      |
+module   | `module {<module code>:{<class number>,}...;}...`| `module CS2113T:C02;LAJ2203:1,A2,B4`                                                                 | 
+browse   | `browse <index>`                                 | `browse 2`                                                                                           |
 list     | `list [--filter <argument>]` or `list [task id]` | `list` or `list --type todo --priority medium` or `list 3`                                           |
 reminder |                                                  |                                                                                                      |
 sort     | `sort --by <criteria>`                           | `sort --by priority`                                                                                 |
