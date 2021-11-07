@@ -316,6 +316,7 @@ sequence diagram below is then carried out:
 ### 4.4. Listing all Habits
 
 A `ListHabitCommand` object is returned from the `ListHabitParser` if the users input is successfully parsed as shown below.
+If no goal index or invalid goal index is detected, an exception is thrown.
 
 ![](Diagram_Images/Implementation_Diagram_Images/ListHabitsCommandParserSequenceDiagram.png)
 
@@ -339,7 +340,15 @@ Goal or the Habit is detected, an exception will be thrown.
 
 ### 4.6. Updating a Goal
 
+A `UpdateGoalCommand` object is returned from the `UpdateParser` if the users input is successfully parsed as shown below.
+
+The `runCommand` method is then executed for the `UpdateGoalCommand` object as seen.
+
 ### 4.7. Updating a Habit
+
+A `UpdateHabitCommand` object is returned from the `UpdateParser` if the users input is successfully parsed as shown below.
+
+The `runCommand` method is then executed for the `UpdateHabitCommand` object as seen.
 
 ### 4.8. Deleting a Goal
 
@@ -530,4 +539,15 @@ To check if the program can create a storage file if it doesn't exist:
 ![Storage File](Display_Images/tpFolder.png)
 
 2. Launch the program and enter the application.
-3. Type `list` to see that the storage data file was deleted, hence no goals exist.
+3. Type `list` to see that no goals exists since the storage file was deleted. A new empty storage file
+  will be created by the program.
+
+![Data Deleted](Display_Images/DataDeleted.png)
+
+To check if the data file is read-only and if it is possible to corrupt data file:
+
+1. The storage file is set to read-only. To test this, go to `data` folder and open the `.txt` file.
+2. Randomly edit the text file to corrupt it.
+3. Try to save the changes and there should be an error message preventing you to do so.
+
+![Error Changing File](Display_Images/ErrorChangingFile.png)
