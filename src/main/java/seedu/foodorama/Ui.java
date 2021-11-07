@@ -471,7 +471,7 @@ public class Ui {
         assert ingredientWeight != -1 : "ingredientWeight cannot be negative";
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "Ingredient added to list: " + ingredientToAdd.getIngredientName()
-                + " (Weight: " + ingredientWeight + " kg)" + System.lineSeparator()
+                + " (Storage weight: " + ingredientWeight + " kg)" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
@@ -640,7 +640,7 @@ public class Ui {
                 + "Are you sure you want to change the storage weight (in kg) from '" + currStorage + "' to '"
                 + newStorage + "'?" + System.lineSeparator()
                 + "Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:" + System.lineSeparator()
-                + System.lineSeparator() + LINE_DIVIDER);
+                + LINE_DIVIDER);
     }
 
     public void printDishNameChanged(String dishName, String newName) {
@@ -670,9 +670,9 @@ public class Ui {
 
     public void printConfirmIngrEditMsg(String ingrName, String newName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Are you sure you want to change ingredient name from '" + ingrName + "' to '"
+                + "Are you sure you want to change the Ingredient name from '" + ingrName + "' to '"
                 + newName + "'?" + System.lineSeparator()
-                + "Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:"
+                + "Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
@@ -936,7 +936,7 @@ public class Ui {
         assert ingredientName != null : "ingredientName cannot be null";
         assert dishName != null : "dishName cannot be null";
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Successfully added the ingredient '" + ingredientName + "' as an ingredient of '" + dishName + "'!"
+                + "Successfully added '" + ingredientName + "' as an ingredient of '" + dishName + "'!"
                 + System.lineSeparator()
                 + LINE_DIVIDER);
     }
@@ -965,7 +965,7 @@ public class Ui {
     public void printEnterLimitFor(String name) {
         assert name != null : "name cannot be null";
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Enter the limit for '" + name + "' in kg:" + System.lineSeparator()
+                + "Please enter the limit for '" + name + "' in kg:" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
@@ -989,7 +989,7 @@ public class Ui {
         assert name != null : "name cannot be null";
         assert wastage != -1 : "wastage cannot be negative";
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Wastage of '" + name + "' is now " + wastage + " kg" + System.lineSeparator()
+                + "Wastage of '" + name + "' has been added and is now " + wastage + " kg!" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
@@ -997,7 +997,7 @@ public class Ui {
         assert name != null : "name cannot be null";
         assert storage != -1 : "storage cannot be negative";
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Storage of '" + name + "' is now " + storage + " kg" + System.lineSeparator()
+                + "Storage of '" + name + "' has been added and is now " + storage + " kg!" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
