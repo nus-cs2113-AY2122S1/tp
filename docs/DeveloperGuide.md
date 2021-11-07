@@ -527,3 +527,58 @@ Test case: `launch lesson 1`
 
 Expected output: The lesson's URL is launched in a browser if it exists. Otherwise, a message is displayed stating that no link is provided.
 
+### Testing commands for modules
+
+#### Adding a module
+
+Test case: `add module CS2113T`
+
+Expected output: The module is successfully added and a message with the added module is displayed.
+
+#### Adding a module that is already in the list
+
+Test case: `add module CS2113T`, then `add module CS2113T` again
+
+Expected output: When attempting to add the module a second time, a message stating that the module has already been added is displayed.
+
+#### Adding a module with an invalid module code
+
+Test case: `add module CS211`
+
+Expected output: A message stating that the module does not exist is displayed.
+
+#### Listing modules
+
+Test case: `list module`
+
+Expected output: A list of all modules added is displayed.
+
+#### Listing modules with details
+
+Test case: `list module verbose`
+
+Expected output: A list of all modules and their details is displayed.
+
+#### Finding information for a module
+
+Test case: `find module CS2113T`
+
+Expected output: The module is successfully added and a message with information for the module is displayed.
+
+#### Finding information for a module with an invalid module code
+
+Test case: `find module CS211`
+
+Expected output: A message stating that the module does not exist is displayed.
+
+#### Deleting a module
+
+Test case: `delete module CS2113T`
+
+Expected output: The module is successfully deleted and a message with information for the module is displayed.
+
+#### Deleting a module with invalid code or a module not in the list
+
+Test case: `delete module CS123`
+
+Expected output: A message is displayed stating that the module is not in the list.
