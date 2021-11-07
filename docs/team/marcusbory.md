@@ -36,8 +36,6 @@ The link to the User Guide (UG) can be found [here](https://ay2122s1-cs2113t-t09
 - Added documentation for `import` function
 - Updated documentation formatting and overall readability
 
-<div style="page-break-after: always;"></div>
-
 ### Contributions to DG
 The link to the Developer Guide (DG) can be found [here](https://ay2122s1-cs2113t-t09-1.github.io/tp/DeveloperGuide.html).
 - Added documentation for `add` function
@@ -45,17 +43,14 @@ The link to the Developer Guide (DG) can be found [here](https://ay2122s1-cs2113
 - Added UML diagrams for all the above-mentioned features
 
 ### Team-based tasks
-- Hosted and conducted weekly brainstorming session during ideation phases (V1.0, V2.0, V2.1)
+- Conducted weekly brainstorming session during ideation phases (V1.0, V2.0, V2.1)
 - Set up the Github team organisation and repository
-- Maintained issue tracker (ensured that PRs were tagged to according Milestones and labels)
-- Updated User Guide (UG) and Developer Guide (DG) documentation that were not specific to any feature:
-  - UG: Added sections "How to use the User Guide", "Common Notations used"
-  - DG: Set up DG with System Architecture diagram, Product Scope, Non-functional Requirements
+- Maintained issue tracker (tagged PRs according to Milestones and labels)
+- Updated User Guide (UG) and Developer Guide (DG) generic documentation:
+  - UG: Added "How to use the User Guide", "Common Notations used"
+  - DG: Set up DG, System Architecture diagram, Product Scope, Non-functional Requirements
 - Refactored entire codebase (on 27/10/21) to improve code quality (apply SLAP) and fix any coding standard violations
 - Updated `runtest.bat` and `runtest.sh` to automatically delete data files, and work with `import` feature
 
 ### Review/mentoring contributions
 - Reviewed PRs and ensured overall code quality/formatting was up to standard
-
-### Community
-- Reported Bugs during PE Dry Run.
