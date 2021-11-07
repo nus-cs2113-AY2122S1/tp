@@ -1,8 +1,4 @@
-# titustortoiseturtle - Project Portfolio Page
----
-layout: page
-title: Titus Ng's Project Portfolio Page
----
+# titustortoiseturtle1999 - Project Portfolio Page
 
 ### Project: SEPlanner
 
