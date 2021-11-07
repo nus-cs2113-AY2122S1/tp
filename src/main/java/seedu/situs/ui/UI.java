@@ -8,7 +8,15 @@ public class UI {
     Scanner line = new Scanner(System.in);
 
     public static final String DIVIDER = "____________________________________________________\n";
-    private static final String WELCOME_MESSAGE = DIVIDER
+    public static final String SITUS = "###################################\n"
+            + "#    _____ ____________  _______  #\n"
+            + "#   / ___//  _/_  __/ / / / ___/  #\n"
+            + "#   \\__ \\ / /  / / / / / /\\__ \\   #\n"
+            + "#  ___/ // /  / / / /_/ /___/ /   #\n"
+            + "# /____/___/ /_/  \\____//____/    #\n"
+            + "#                                 #\n"
+            + "###################################\n";
+    private static final String WELCOME_MESSAGE = SITUS + DIVIDER
             + "Welcome to SITUS!\n"
             + "What would you like to do first?\n"
             + "To see what I can do, use \"help\"\n";

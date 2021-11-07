@@ -50,6 +50,7 @@ public class Ingredient {
                  + Ingredient.dateToString(getExpiry());
     }
 
+    //@@author ngoivanessa
     /**
      * Reads in expiry as string from user input, converts to LocalDate variable.
      *
@@ -60,6 +61,7 @@ public class Ingredient {
         return LocalDate.parse(dateString, dateFormat);
     }
 
+    //@@author ngoivanessa
     /**
      * Prints date in dd (name of month) yyyy (e.g. 21 NOVEMBER 2021).
      *
@@ -72,6 +74,7 @@ public class Ingredient {
         return date.format(dateFormat);
     }
 
+    //@@author ngoivanessa
     /**
      * Calculates the number of calendar days from current date.
      *

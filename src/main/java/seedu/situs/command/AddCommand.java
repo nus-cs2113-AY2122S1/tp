@@ -26,6 +26,9 @@ public class AddCommand extends Command {
     public String run() throws SitusException {
         try {
             IngredientList.getInstance().add(this.ingredient);
+
+            assert (IngredientList.getInstance() != null);
+
             String resultMsg = ADDED_MESSAGE
                     + ingredient.getName() + " | " + ingredient.toString() + '\n'
                     + "Current inventory has " + IngredientList.getInstance().getSize()

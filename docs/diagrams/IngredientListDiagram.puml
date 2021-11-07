@@ -9,7 +9,6 @@ skinparam class {
     BorderColor #Black
 }
 
-
 Package "IngredientList"<<RECTANGLE>>{
     class IngredientList INGREDIENTLIST_COLOUR
     class IngredientGroup INGREDIENTGROUP_COLOUR
@@ -17,6 +16,7 @@ Package "IngredientList"<<RECTANGLE>>{
  }
 
 class Storage STORAGE_COLOUR
+
 
 IngredientList --> "0..*" IngredientGroup
 IngredientGroup : totalAmount: Double

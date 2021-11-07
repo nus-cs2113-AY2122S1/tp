@@ -101,7 +101,7 @@ These are the commands I can currently carry out:
 	1. add an ingredient - add n/INGREDIENT_NAME a/AMOUNT e/EXPIRY
 	2. list all ingredients - list
 	3. update an ingredient - update GROUP_INDEX.INGREDIENT_INDEX a/AMOUNT
-	4. subtract an ingredient's stock - subtract GROUP_INDEX a/AMOUNT
+	4. subtract an ingredient's stock - subtract n/NAME a/AMOUNT
 	5. delete an ingredient - delete GROUP_INDEX.INGREDIENT_INDEX
 	6. search ingredients by expiry - expire DATE
 	7. search ingredients by name - find INGREDIENT_NAMES
@@ -322,7 +322,8 @@ I found these ingredients for "pumpkin":
 		3.2. Amount Left: 1.000 kg | Expiry Date: 21/11/2021
 ____________________________________________________
 ```
-
+> Note: The output also gives the actual index of the ingredients in the full ingredient list. This is hence useful if you 
+> need the index of an ingredient (e.g. to `delete` or `update` it) but have too many ingredients to manually find it using `list`.
 
 ### 2.9. Display Alerts
 
