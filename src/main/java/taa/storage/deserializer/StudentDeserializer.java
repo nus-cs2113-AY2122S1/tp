@@ -69,7 +69,7 @@ public class StudentDeserializer extends StorageDeserializer implements JsonDese
 
     private void deserializeAttendanceList(JsonElement attendanceListJson, Student student)
             throws JsonParseException {
-        if (attendanceListJson == null) {
+        if (attendanceListJson == null || !attendanceListJson.isJsonObject()) {
             return;
         }
 
@@ -89,7 +89,7 @@ public class StudentDeserializer extends StorageDeserializer implements JsonDese
     }
 
     private void deserializeResults(JsonElement resultsJson, Student student) {
-        if (resultsJson == null) {
+        if (resultsJson == null || !resultsJson.isJsonObject()) {
             return;
         }
 
@@ -100,7 +100,7 @@ public class StudentDeserializer extends StorageDeserializer implements JsonDese
         try {
             Type resultsType = new TypeToken<HashMap<String, Double>>() {}.getType();
             results = gson.fromJson(resultsJson, resultsType);
-        } catch (JsonParseException e) {
+        } catch (JsonParseException | NumberFormatException e) {
             results = null;
         }
 
