@@ -1,6 +1,7 @@
 package taa.command;
 
 //@@author leyondlee
+
 import taa.teachingclass.ClassList;
 import taa.storage.Storage;
 import taa.exception.TaaException;
@@ -50,13 +51,16 @@ public abstract class Command {
     protected static final String MESSAGE_INVALID_STUDENT_INDEX = "Invalid student index.";
     protected static final String MESSAGE_INVALID_LESSON_NUMBER = "Invalid lesson number.";
     protected static final String MESSAGE_INVALID_ASSESSMENT_NAME = "Invalid assessment name.";
-    protected static final String MESSAGE_INVALID_MARKS = "Invalid marks.";
+    protected static final String MESSAGE_INVALID_MARKS = "Invalid marks. Marks must be a double with at most 2 "
+            + "decimal points.";
     protected static final String MESSAGE_NO_STUDENTS = "There are no students in this class";
     protected static final String MESSAGE_NO_MARKS = "This student has not been marked yet.";
     protected static final String MESSAGE_ALREADY_MARKED = "This student has already been marked.";
-    protected static final String MESSAGE_NO_COMMENT_ADDED = "This student has no comment set";
+    protected static final String MESSAGE_NO_COMMENT_ADDED = "This student has no comment set.";
     protected static final String MESSAGE_DATA_REMOVED = "All data have been removed.";
-    protected static final String MESSAGE_ABORT = "Abort.";
+    protected static final String MESSAGE_ABORTED = "Aborted.";
+    protected static final String MESSAGE_INVALID_CLASS_ID = "Invalid class ID. Class ID cannot be empty or "
+            + "contain spaces.";
 
     // Common message formats
     protected static final String MESSAGE_FORMAT_GENERIC_USAGE = "%s";

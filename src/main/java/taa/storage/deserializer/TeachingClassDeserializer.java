@@ -1,6 +1,7 @@
 package taa.storage.deserializer;
 
 //@@author leyondlee
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -33,10 +34,13 @@ public class TeachingClassDeserializer extends StorageDeserializer implements Js
         }
 
         JsonElement idJson = jsonObject.get(MEMBER_ID);
-        String id = idJson.getAsString();
+        String id = getJsonElementAsString(idJson);
 
         JsonElement nameJson = jsonObject.get(MEMBER_NAME);
-        String name = nameJson.getAsString();
+        String name = getJsonElementAsString(nameJson);
+        if (name == null) {
+            name = "";
+        }
 
         if (!Parser.isValueValid(id) || !Parser.isValueValid(name)) {
             return null;
@@ -44,35 +48,58 @@ public class TeachingClassDeserializer extends StorageDeserializer implements Js
 
         TeachingClass teachingClass = new TeachingClass(id, name);
 
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(StudentList.class, new StudentListDeserializer());
-        gsonBuilder.registerTypeAdapter(AssessmentList.class, new AssessmentListDeserializer());
-        Gson gson = gsonBuilder.create();
-
         JsonElement studentListJson = jsonObject.get(MEMBER_STUDENTLIST);
-        if (studentListJson != null) {
-            StudentList studentList = gson.fromJson(studentListJson, StudentList.class);
-            if (studentList != null) {
-                for (Student student : studentList.getStudents()) {
-                    teachingClass.getStudentList().addStudent(student);
-                }
-            }
-        }
+        deserializeStudentList(studentListJson, teachingClass);
 
         JsonElement assessmentListJson = jsonObject.get(MEMBER_ASSESSMENTLIST);
-        if (assessmentListJson != null) {
-            AssessmentList assessmentList = gson.fromJson(assessmentListJson, AssessmentList.class);
-            if (assessmentList != null) {
-                for (Assessment assessment : assessmentList.getAssessments()) {
-                    teachingClass.getAssessmentList().addAssessment(assessment);
-                }
-            }
-        }
+        deserializeAssessmentList(assessmentListJson, teachingClass);
 
         if (!teachingClass.verify()) {
             return null;
         }
 
         return teachingClass;
+    }
+
+    private void deserializeStudentList(JsonElement studentListJson, TeachingClass teachingClass)
+            throws JsonParseException {
+        if (studentListJson == null || !studentListJson.isJsonObject()) {
+            return;
+        }
+
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(StudentList.class, new StudentListDeserializer());
+        Gson gson = gsonBuilder.create();
+
+        StudentList deserializedStudentList = gson.fromJson(studentListJson, StudentList.class);
+        if (deserializedStudentList == null) {
+            return;
+        }
+
+        StudentList studentList = teachingClass.getStudentList();
+        for (Student student : deserializedStudentList.getStudents()) {
+            studentList.addStudent(student);
+        }
+    }
+
+    private void deserializeAssessmentList(JsonElement assessmentListJson, TeachingClass teachingClass)
+            throws JsonParseException {
+        if (assessmentListJson == null || !assessmentListJson.isJsonObject()) {
+            return;
+        }
+
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(AssessmentList.class, new AssessmentListDeserializer());
+        Gson gson = gsonBuilder.create();
+
+        AssessmentList deserializedAssessmentList = gson.fromJson(assessmentListJson, AssessmentList.class);
+        if (deserializedAssessmentList == null) {
+            return;
+        }
+
+        AssessmentList assessmentList = teachingClass.getAssessmentList();
+        for (Assessment assessment : deserializedAssessmentList.getAssessments()) {
+            assessmentList.addAssessment(assessment);
+        }
     }
 }

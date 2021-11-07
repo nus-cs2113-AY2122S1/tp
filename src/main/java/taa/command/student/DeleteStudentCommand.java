@@ -60,11 +60,11 @@ public class DeleteStudentCommand extends Command {
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;
 
         StudentList studentList = teachingClass.getStudentList();
-        assert studentIndex >= 0 && studentIndex < teachingClass.getStudentList().getSize();
         Student student = studentList.deleteStudentAt(studentIndex);
         if (student == null) {
             throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
+        assert studentIndex >= 0 && studentIndex < teachingClass.getStudentList().getSize();
 
         storage.save(classList);
         ui.printMessage(String.format(MESSAGE_FORMAT_STUDENT_DELETED, classId, student));

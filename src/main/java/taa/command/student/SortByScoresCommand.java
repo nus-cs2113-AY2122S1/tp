@@ -116,10 +116,10 @@ public class SortByScoresCommand extends Command {
     @Override
     protected String getUsage() {
         return String.format(
-        MESSAGE_FORMAT_SORT_SCORES_USAGE,
-        COMMAND_SORT_BY_SCORES,
+            MESSAGE_FORMAT_SORT_SCORES_USAGE,
+            COMMAND_SORT_BY_SCORES,
             KEY_CLASS_ID,
-        KEY_SORT_ORDER
+            KEY_SORT_ORDER
         );
     }
 }

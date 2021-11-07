@@ -69,11 +69,11 @@ public class EditStudentCommand extends Command {
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;
 
         StudentList studentList = teachingClass.getStudentList();
-        assert studentIndex >= 0 && studentIndex < teachingClass.getStudentList().getSize();
         Student student = studentList.getStudentAt(studentIndex);
         if (student == null) {
             throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
+        assert studentIndex >= 0 && studentIndex < teachingClass.getStudentList().getSize();
 
         String newId = argumentMap.get(KEY_NEW_ID);
         String newName = argumentMap.get(KEY_NEW_NAME);

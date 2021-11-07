@@ -14,6 +14,12 @@ activate taa
 taa -> addClassCommand : execute(classList:ClassList,\nui:Ui, storage:Storage)
 activate addClassCommand
 
+addClassCommand -> classList : getClassWithId("CS2113T-F12")
+activate classList
+classList --> addClassCommand : teachingClass:TeachingClass
+deactivate classList
+
+alt teachingClass == null
 create teachingClass
 addClassCommand -> teachingClass
 activate teachingClass
@@ -29,6 +35,7 @@ addClassCommand -> storage : save(classList)
 activate storage
 storage --> addClassCommand
 deactivate storage
+end
 
 addClassCommand --> taa
 deactivate addClassCommand

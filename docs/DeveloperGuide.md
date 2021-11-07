@@ -154,7 +154,7 @@ The sequence diagram shown below illustrates how the `add_class` command works:
 Below is an example scenario of how the add class feature behaves at each step:<br>
 * Step 1 - The user executes `add_class i/CS2113T-F12 n/Tutorial Group F12` to add a class. The `add_class` command calls the
 `AddClassCommand.execute` method.
-* Step 2 - Within `AddClassCommand.execute`, `ClassList.getModule("CS2113T-F12")` is called to ensure that
+* Step 2 - Within `AddClassCommand.execute`, `ClassList.getClassWithId("CS2113T-F12")` is called to ensure that
 there is no existing class with ID `CS2113T-F12`.
 * Step 3 - If no existing class with ID `CS2113T-F12` is found, a new `TeachingClass` object with ID and name set to `CS2113T-F12`
 and `Tutorial Group F12` respectively.
@@ -169,11 +169,13 @@ The sequence diagram shown below illustrates how the `add_student` command works
 
 Below is an example scenario of how the add student feature behaves at each step:<br>
 * Step 1 - The user executes `add_student c/CS2113T i/a0217978j n/jonny` to add a student. The `add_student` command 
-calls the `AddStudentCommand.execute` method. Within `AddStudentCommand.execute`, `ModuleList.getModule("CS2113T")` is 
-called to ensure that there is an existing module with code `CS2113T`.
-* Step 2 - If an existing module with code `CS2113T` is found, a new `Student` object with id and name set to 
-`a0217978j` and `jonny` respectively. Then, `StudentList.addModule` is called to add the newly created `Student` 
-object into the `students` ArrayList within `StudentList`.
+  calls the `AddStudentCommand.execute` method.
+* Step 2 - Within `AddStudentCommand.execute`, `ClassList.getClassWithId("CS2113T")` is 
+  called to ensure that there is an existing class with ID `CS2113T`.
+* Step 3 - If an existing class with code `CS2113T` is found, a new `Student` object with id and name set to 
+  `a0217978j` and `jonny` respectively.
+* Step 4 - Then, `StudentList.addStudent` is called to add the newly created `Student` 
+  object into the `students` ArrayList within `StudentList`.
 
 <br>
 
@@ -183,41 +185,38 @@ The sequence diagram shown below illustrates how the `add_assessment` command wo
 
 Below is an example scenario of how the add assessment feature behaves at each step:
 * Step 1 - The user executes `add_assessment c/cs2113t n/midterms m/20 w/10` to add an assessment. The `add_assessment`
-  command calls the `AddAssessmentCommand.execute` method. Within `AddAssessmentCommand.execute`,
-  `ModuleList.getModuleWithCode("cs2113t")` is called to ensure that there is an existing module with code `cs2113t`.
-* Step 2 - If an existing module with code `cs2113t` is found, the `MAXIMUM_MARKS` and `WEIGHTAGE` arguments are checked
+  command calls the `AddAssessmentCommand.execute` method.
+* Step 2 - Within `AddAssessmentCommand.execute`, `ClassList.getClassWithId("cs2113t")` is called to ensure that there
+  is an existing class with code `cs2113t`.
+* Step 3 - If an existing class with code `cs2113t` is found, the `MAXIMUM_MARKS` and `WEIGHTAGE` arguments are checked
   to ensure that they are valid.
-* Step 3 - If the `MAXIMUM_MARKS` and `WEIGHTAGE` arguments are valid, a new `Assessment` object with name,
-  maximum marks and weightage set to `midterms`, `20` and `10` respectively is created under the existing `Module` with
+* Step 4 - If the `MAXIMUM_MARKS` and `WEIGHTAGE` arguments are valid, a new `Assessment` object with name,
+  maximum marks and weightage set to `midterms`, `20` and `10` respectively is created under the existing `TeachingClass` with
   code `cs2113t`. Then, `AssessmentList.addAssessment` is called to add the newly created `Assessment` object into the
   `assessments` ArrayList within `AssessmentList`.
-* Step 4 - Within `AssessmentList.addAssessment`, the name of the newly created `Assessment` object is checked to ensure
+* Step 5 - Within `AssessmentList.addAssessment`, the name of the newly created `Assessment` object is checked to ensure
   there is no existing assessment with name `midterms`. At the same time, the weightage of the newly created
-  `Assessment` object is also checked to ensure that the total weightage of the assessments in the `cs2113t` module
+  `Assessment` object is also checked to ensure that the total weightage of the assessments in the `cs2113t` class
   will not exceed 100 with the addition of the weightage of the newly created `Assessment` object.
-* Step 5 - If the name and weightage of the newly created `Assessment` object are valid, the newly created `Assessment`
+* Step 6 - If the name and weightage of the newly created `Assessment` object are valid, the newly created `Assessment`
   object is added into the `assessments` ArrayList within `AssessmentList`.
 
 <br>
 
-### Set Marks
+### Set Mark
 The sequence diagram shown below illustrates how the `set_mark` command works:
 ![SetMarkSequenceDiagram](diagrams/sequence/SetMarkSequenceDiagram.png)
 
-Steps:
-1. The `Taa` instance reads in a user input through the `Ui.getUserInput()` method.
-2. The user input is then parsed using the `Parser.parseUserInput(userInput:String)` static method and a `Command` object
-   is returned.
-3. `AddModuleCommand.checkArguments()` is then called to check if the arguments are valid.
-4. After checking the arguments, `Command.execute(moduleList:ModuleList, ui:Ui, storage:Storage)` will be called.
-5. The `module:Module` which the student and assessment belongs to is retrieved with 
-`getModuleWithCode(moduleCode:String)`.
-6. Using `module:Module`, we are able to get the `studentList:StudentList` and `assessmentList:AssessmentList`.
-7. The `student:Student` and `assessment:Assessment` are then retrieved from their lists using 
-`getStudentAt(studentIndex:Integer)` and `getAssessment(assessmentName:String)` respectively.
-8. Finally, `setMarks(assessmentName:String, marks:Double)` is called to set the marks of the assessment in the 
-student's `results` HashMap.
-9. A message will then be printed out to indicate to the user that the marks have been set successfully.
+Below is an example scenario of how the set mark feature behaves at each step:
+* Step 1 - The user executes `set_marks c/CS2113T-F12 \ns/1 a/Midterms m/60` to set the mark of a student for an assessment.
+  The `set_mark` command calls the `SetMarkCommand.execute` method.
+* Step 2 - Within `SetMarkCommand.execute`, `ClassList.getClassWithId("CS2113T-F12")` is called to ensure that there
+  is an existing class with code `CS2113T-F12`.
+* Step 3 - `ClassList.getStudentList` and `ClassList.getAssessmentList` are called to get the respective lists.
+* Step 4 - `assessmentList.getAssessment("Midterms")` is called to retrieve the respective `Assessment` object.
+* Step 5 - If the `Assessment` object for `Midterms` exists, `studentList.getStudentAt(1)` is to retrieve the `Student` object.
+* Step 6 - If the `Student` object exists, `student.setMarks("Midterms", 60)` is called to set the mark of the student
+  for `Midterms`.
 
 <br>
 

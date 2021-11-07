@@ -1,6 +1,7 @@
 package taa.teachingclass;
 
 //@@author leyondlee
+
 import taa.ClassChecker;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
@@ -32,7 +33,7 @@ public class TeachingClass implements ClassChecker {
     }
 
     public void setId(String id) {
-        this.id = id.toLowerCase();
+        this.id = id.toUpperCase();
     }
 
     public void setName(String name) {

@@ -21,6 +21,7 @@ activate classList
 classList --> addStudentCommand : teachingClass:TeachingClass
 deactivate classList
 
+alt teachingClass != null
 addStudentCommand -> teachingClass : getStudentList()
 activate teachingClass
 teachingClass --> addStudentCommand : studentList:StudentList
@@ -32,15 +33,16 @@ activate student
 student --> addStudentCommand : student:Student
 deactivate student
 
-addStudentCommand -> studentList : addStudent(Student student)
+addStudentCommand -> studentList : addStudent(student)
 activate studentList
 studentList --> addStudentCommand
 deactivate studentList
 
-addStudentCommand -> storage : save(classList:ClassList)
+addStudentCommand -> storage : save(classList)
 activate storage
 storage --> addStudentCommand
 deactivate storage
+end
 
 addStudentCommand --> taa
 deactivate addStudentCommand

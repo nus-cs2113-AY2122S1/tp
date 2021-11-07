@@ -24,7 +24,7 @@ class AssessmentListTest {
     @Test
     void addAssessment_userInput_assessmentAddedCorrectly() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2113t_f12 n/software engineering (class-f12)";
         Command command1 = Parser.parseUserInput(classInput);
@@ -60,7 +60,7 @@ class AssessmentListTest {
     @Test
     void deleteAssessment_userInput_emptyAssessmentList() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2113t_f12 n/software engineering (F_12)";
         Command command1 = Parser.parseUserInput(classInput);
@@ -89,7 +89,7 @@ class AssessmentListTest {
     @Test
     void addAssessment_userInputRepeatedAssessmentName_nameExistsErrorThrown() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2113t-f12 n/software engineering class F12";
         Command command1 = Parser.parseUserInput(classInput);
@@ -117,7 +117,7 @@ class AssessmentListTest {
     @Test
     void addAssessment_userInputNegativeWeightage_WeightageErrorThrown() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2113t-f12 n/software engineering class F12";
         Command command1 = Parser.parseUserInput(classInput);
@@ -140,7 +140,7 @@ class AssessmentListTest {
     @Test
     void addAssessment_userInputNegativeMaximumMarks_MaximumMarksErrorThrown() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2113t-f12 n/software engineering class F12";
         Command command1 = Parser.parseUserInput(classInput);
@@ -168,7 +168,7 @@ class AssessmentListTest {
     @Test
     void addAssessment_userInputOverflowWeightage_weightageErrorThrown() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2113t-f12 n/software engineering class F12";
         Command command1 = Parser.parseUserInput(classInput);
@@ -192,7 +192,7 @@ class AssessmentListTest {
     @Test
     void editAssessment_userInputFourEdits_assessmentEditedCorrectly() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2113t-f12 n/software engineering class F12";
         Command command1 = Parser.parseUserInput(classInput);
@@ -249,7 +249,7 @@ class AssessmentListTest {
     @Test
     void editAssessment_userInputNegativeWeightage_weightageErrorThrown() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2113t-f12 n/software engineering class F12";
         Command command1 = Parser.parseUserInput(classInput);
@@ -278,7 +278,7 @@ class AssessmentListTest {
     @Test
     void editAssessment_userInputOverflowWeightage_weightageErrorThrown() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2113t-f12 n/software engineering class F12";
         Command command1 = Parser.parseUserInput(classInput);
@@ -312,7 +312,7 @@ class AssessmentListTest {
     @Test
     void editAssessment_userInputNegativeMaximumMarks_MaximumMarksErrorThrown() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2113t-f12 n/software engineering class F12";
         Command command1 = Parser.parseUserInput(classInput);
@@ -342,7 +342,7 @@ class AssessmentListTest {
     @Test
     void editAssessment_userInputRepeatedAssessmentName_nameExistsErrorThrown() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2113t-f12 n/software engineering class F12";
         Command command1 = Parser.parseUserInput(classInput);
@@ -377,7 +377,7 @@ class AssessmentListTest {
     @Test
     void addAssessment_userInputMaximumMarksAndWeightageCornerCase_validWeightage() throws TaaException {
         Ui ui = new Ui();
-        Storage storage = new Storage("./data/taa_data.json");
+        Storage storage = new Storage(null);
         ClassList classList = new ClassList();
         String classInput = "add_class i/cs2113t-f12 n/software engineering class F12";
         Command command1 = Parser.parseUserInput(classInput);

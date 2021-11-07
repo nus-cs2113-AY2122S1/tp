@@ -1,6 +1,7 @@
 package taa.storage.deserializer;
 
 //@@author leyondlee
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -31,11 +32,21 @@ public class AssessmentListDeserializer extends StorageDeserializer implements J
             return null;
         }
 
+        AssessmentList assessmentList = new AssessmentList();
+        deserializeAssessments(assessmentsJson, assessmentList);
+        if (!assessmentList.verify()) {
+            return null;
+        }
+
+        return assessmentList;
+    }
+
+    private void deserializeAssessments(JsonElement assessmentsJson, AssessmentList assessmentList)
+            throws JsonParseException {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(Assessment.class, new AssessmentDeserializer());
         Gson gson = gsonBuilder.create();
 
-        AssessmentList assessmentList = new AssessmentList();
         JsonArray assessmentsJsonArray = assessmentsJson.getAsJsonArray();
         for (JsonElement assessmentJson : assessmentsJsonArray) {
             Assessment assessment = gson.fromJson(assessmentJson, Assessment.class);
@@ -43,11 +54,5 @@ public class AssessmentListDeserializer extends StorageDeserializer implements J
                 assessmentList.addAssessment(assessment);
             }
         }
-
-        if (!assessmentList.verify()) {
-            return null;
-        }
-
-        return assessmentList;
     }
 }

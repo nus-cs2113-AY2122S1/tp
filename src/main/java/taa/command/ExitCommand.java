@@ -1,6 +1,7 @@
 package taa.command;
 
 //@@author leyondlee
+
 import taa.teachingclass.ClassList;
 import taa.storage.Storage;
 import taa.exception.TaaException;
@@ -24,8 +25,8 @@ public class ExitCommand extends Command {
      * Executes the exit command and exits the program.
      *
      * @param classList The list of classes.
-     * @param ui         The ui instance to handle interactions with the user.
-     * @param storage    The storage instance to handle saving.
+     * @param ui        The ui instance to handle interactions with the user.
+     * @param storage   The storage instance to handle saving.
      * @throws TaaException If the user inputs an invalid command.
      */
     @Override
