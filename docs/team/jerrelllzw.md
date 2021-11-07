@@ -2,7 +2,7 @@
 
 ## Project: Restaurant Buddy
 Restaurant Buddy is a desktop CLI application used to help restaurant managers keep track of their data. It is written
-in Java and has about x kLoC.
+in Java and has about 3 kLoC.
 
 ## Contributions
 
