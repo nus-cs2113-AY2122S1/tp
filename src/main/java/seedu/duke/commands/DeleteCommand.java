@@ -4,7 +4,6 @@ package seedu.duke.commands;
 import seedu.duke.Duke;
 import seedu.duke.Ui;
 import seedu.duke.items.Event;
-import seedu.duke.items.Item;
 import seedu.duke.items.Task;
 import seedu.duke.items.characteristics.Member;
 import seedu.duke.parser.ItemType;
@@ -50,11 +49,9 @@ public class DeleteCommand extends Command {
         Event event = Duke.eventCatalog.get(index);
         String eventTitle = event.getTitle();
         Parser.updateIndexOfLastSelectedEvent(index);
-        // for each task in the event, use deleteTask to handle deletion of tasks from member's tasklist
         for (int i = 0; i < event.getTaskList().size(); i++) {
             deleteTask(i);
         }
-
         Duke.eventCatalog.remove(index);
         Parser.updateIndexToNoEventSelected();
         return eventTitle;
@@ -66,16 +63,6 @@ public class DeleteCommand extends Command {
         String parentEventTitle = parentEvent.getTitle();
         Task taskToDelete = Duke.eventCatalog.get(lastEventIndex).getFromTaskList(index);
         String taskTitle = taskToDelete.getTitle();
-
-        // go to taskToDelete
-        // obtain that taskToDelete's member list
-        // for each member,
-            // access the member's task list
-            // iterate through the task list,
-                // if the task's title matches taskToDelete's title AND the task's event matches
-                // taskToDelete's event, delete the task
-        // finally, delete the task from the event in eventCatalog
-        // return the taskTitle
 
         ArrayList<Member> memberList = taskToDelete.getMemberList();
         deleteTaskFromMemberTaskList(memberList, taskTitle, parentEventTitle);
