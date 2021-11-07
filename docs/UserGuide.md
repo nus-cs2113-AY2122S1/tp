@@ -36,10 +36,10 @@ and that `java` is in your `PATH` environment variable.
 2. Download the latest `SchedUrMods.jar` from [here](https://github.com/AY2122S1-CS2113T-W13-3/tp/releases/latest).
 
    > **⚠️Warning**: Do *not* decompress the jar file even if it shows as an archive on your file manager.
-3. Copy the file to the folder you want to use as the _home folder_ for Duke.
+3. Copy the file to the folder you want to use as the _home folder_ for SchedUrMods.
    >💡 **Note**: Ensure you have permission to create files and folders in this _home folder_.
 5. Open a terminal window in the _home folder_.
-6. Type `java -jar SchedUrMods.jar` into the terminal to start Duke.
+6. Type `java -jar SchedUrMods.jar` into the terminal to start SchedUrMods.
 7. The following display should appear in a few seconds:
 
 ```
@@ -226,6 +226,7 @@ List all tasks currently stored locally in your tasklist.
 **Expected Outcome**:
 
 ```
+-------------------------------------------------------------------------
 [user]: list
 || -------------
 ||  MY TASKLIST
@@ -237,6 +238,7 @@ List all tasks currently stored locally in your tasklist.
 || 5. [T] wash clothes <medium> {weekly} (doOn: 10-11-2021 02:00)
 || 6. [D] project submission <high> {monthly} (dueDate: 21-11-2021 03:00)
 || 7. [E] movie screening <low> {daily} (startDate: 05-11-2021 04:00 - endDate: 05-11-2021 05:00)
+-------------------------------------------------------------------------
 ```
 
 #### 2.4.2 Filtering your tasklist
@@ -254,12 +256,14 @@ Filters the tasklist for specific tasks that matches the filters applied.
 **Expected Outcome**:
 
 ```
+-------------------------------------------------------------------------
 [user]: list --type todo --priority medium
 || -------------
 ||  MY TASKLIST
 || -------------
 || 1. [T] exercise <medium> {none} (doOn: 04-11-2021 18:00)
 || 2. [T] wash clothes <medium> {weekly} (doOn: 10-11-2021 02:00)
+-------------------------------------------------------------------------
 ```
 
 #### 2.4.3 Listing the recurrence of a task
@@ -274,6 +278,7 @@ Displays the next 4 recurrences of a task.
 **Expected Outcome**:
 
 ```
+-------------------------------------------------------------------------
 [user]: list 3
 || -------------
 ||  MY TASKLIST
@@ -284,6 +289,7 @@ Displays the next 4 recurrences of a task.
 || -> 22-01-2022 04:00
 || -> 22-02-2022 04:00
 || -> 22-03-2022 04:00
+-------------------------------------------------------------------------
 ```
 
 >💡 **Note**: To obtain the correct task id of each task, please use the `list` command without any filters.
@@ -304,6 +310,7 @@ Sorts your task list by a given criteria.
 **Expected Outcome**:
 
 ```
+-------------------------------------------------------------------------
 [user]: sort --by priority
 || [!] Tasklist has been sorted by: priority
 -------------------------------------------------------------------------
@@ -318,25 +325,39 @@ Sorts your task list by a given criteria.
 || 5. [T] wash clothes <medium> {weekly} (doOn: 10-11-2021 02:00)
 || 6. [T] read book <low> {daily} (doOn: 05-11-2021 02:00)
 || 7. [E] movie screening <low> {daily} (startDate: 05-11-2021 04:00 - endDate: 05-11-2021 05:00)
+-------------------------------------------------------------------------
 ```
 
 ### 2.6 Setting reminders to your tasks: `reminder`
 
 ### 2.7 Editing your tasks: `edit`
+Edits a single [Todo](#221-todo-todo), [Deadline](#222-deadline-deadline) or [Event](#223-event-event) based on the flags entered.
+**Format**: `edit <index> <--flag <value>> [--flag <value>] [--flag <value>]...`
+- `<index>` is the index of the task you want to edit from the most recent [list](#24-listing-your-tasks-list) command that you have run.
+   >💡 **Note**: if the task you want to edit was not in your most recent [list](#24-listing-your-tasks-list) command, simply type `list` to list all tasks and use its corresponding index to edit it.
+- at least one `<--flag <value>>` must be specified, though you can edit multiple values at once by providing multiple more `[--flag <value>]` arguments.
+- **Flags**
+  - `--description <description>` modifies Task description.
+  - `--priority <high|medium|low>` modifies Task priority.
+  - `--recur <daily|weekly|monthly|yearly>` modifies Task recurrence.
+  - <code>--doOn <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Todo](#221-todo-todo) is to be done.
+  - <code>--due <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Deadline](#222-deadline-deadline) is due.
+  - <code>--start <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Event](#223-event-event) starts.
+  - <code>--end <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Event](#223-event-event) ends.
+  - `--link <url>` modifies your Lesson link.
 
 ### 2.8 Deleting your tasks: `delete`
-Deletes tasks specified in comma-seperated argument.
+Deletes Tasks specified in comma-seperated argument.
+**Format**: `delete <indexes>`
+- `<indexes>` are the indexes of the task you want to edit from the most recent [list](#24-listing-your-tasks-list) command that you have run.
+   >💡 **Note**: if the task(s) you want to delete was not in your most recent [list](#24-listing-your-tasks-list) command, simply type `list` to list the tasks and use their indexes to delete them.
+  - Indexes should be comma seperated single integers such as `5` and/or ranges of two indexes such as `1-3`.
+  - **Example**:
+   - `delete 1,3,5` would delete tasks with indexes 1, 3 and 5.
+   - `delete 1-3` would delete tasks with indexes 1, 2 and 3.
+   - `delete 1-3, 5` would delete tasks with indexes 1, 2, 3 and 5.
+      >💡 **Note**: Whether there are any spaces between the commas, it does not matter.
 
-**Format**: `delete <indexes of tasks to delete>`
-
-Index should be specified in either,
-- Single index, such as `3`
-- A range of two indexes, such as `1-3`. This is a shorthand for `1,2,3`.
-- task indexes should be comma seperated.
-  - `delete 1,3,5` would delete tasks with indexes 1, 3 and 5.
-  - `delete 1-3` would delete tasks with indexes 1, 2 and 3.
-  - `delete 1-3, 5` would delete tasks with indexes 1, 2, 3 and 5.  
- >💡 **Note**: Whether there are any spaces between the commas, it does not matter.
 
 **Example**: `delete 1-3, 5`
 - delete tasks with indexes 1, 2, 3 and 5.
@@ -349,24 +370,24 @@ Index should be specified in either,
 || -------------
 ||  MY TASKLIST
 || -------------
-|| 1. read book [low] (doOn: 20-10-2021 02:00:00)
-|| 2. return book [medium] (dueDate: 21-10-2021 03:00:00)
-|| 3. project meeting [high] (startDate: 22-10-2021 04:00:00 - endDate: 22-10-2021 05:00:00)
-|| 4. wash clothes [medium] (doOn: 20-10-2021 02:00:00)
-|| 5. homework [low] (dueDate: 21-10-2021 03:00:00)
-|| 6. movie screening [low] (startDate: 22-10-2021 04:00:00 - endDate: 22-10-2021 05:00:00)
------
+|| 1. [T] read book <low> {none} (doOn: 20-10-2021 02:00)
+|| 2. [T] return book <low> {none} (doOn: 21-10-2021 03:00)
+|| 3. [E] project meeting <high> {none} (startDate: 22-10-2021 04:00 - endDate: 22-10-2021 05:00)
+|| 4. [T] wash clothes <medium> {none} (doOn: 20-10-2021 02:00)
+|| 5. [D] homework <low> {none} (dueDate: 21-10-2021 03:00)
+|| 6. [E] movie screening <low> {none} (startDate: 22-10-2021 04:00 - endDate: 22-10-2021 05:00)
+-------------------------------------------------------------------------
 ```
 **Expected Outcome**:
 
 ```
 -------------------------------------------------------------------------
 [user]: delete 1-3,5
-|| Tasks deleted:
-|| read book [low] (doOn: 20-10-2021 02:00:00)
-|| return book [medium] (dueDate: 21-10-2021 03:00:00)
-|| project meeting [high] (startDate: 22-10-2021 04:00:00 - endDate: 22-10-2021 05:00:00)
-|| homework [low] (dueDate: 21-10-2021 03:00:00)
+|| Task(s) deleted:
+|| [T] read book <low> {none} (doOn: 20-10-2021 02:00)
+|| [T] return book <low> {none} (doOn: 21-10-2021 03:00)
+|| [E] project meeting <high> {none} (startDate: 22-10-2021 04:00 - endDate: 22-10-2021 05:00)
+|| [D] homework <low> {none} (dueDate: 21-10-2021 03:00)
 -------------------------------------------------------------------------
 ```
 
@@ -378,8 +399,8 @@ Index should be specified in either,
 || -------------
 ||  MY TASKLIST
 || -------------
-|| 1. wash clothes [medium] (doOn: 20-10-2021 02:00:00)
-|| 2. movie screening [low] (startDate: 22-10-2021 04:00:00 - endDate: 22-10-2021 05:00:00)
+|| 1. [T] wash clothes <medium> {none} (doOn: 20-10-2021 02:00)
+|| 2. [E] movie screening <low> {none} (startDate: 22-10-2021 04:00 - endDate: 22-10-2021 05:00)
 -------------------------------------------------------------------------
 ```
 
