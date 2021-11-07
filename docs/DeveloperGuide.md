@@ -508,3 +508,242 @@ Exiting the application:
 
     **Expected Output**: The next 4 recurrences of the task that are in increments of the type of recurrence.
 
+### Adding a task to task list
+
+>💡 **Pre-requisite**: None
+
+**Case A**: Adding a deadline
+1. Type `deadline CS2106 Lab 3 --priority high --due 20-10-2021 02:00`
+
+   **Expected Output**:
+```
+-------------------------------------------------------------------------
+[user]: deadline CS2106 Lab 3 --priority high --due 20-10-2021 02:00
+|| Task created!
+|| [D] CS2106 Lab 3 <high> {none} (dueDate: 20-10-2021 02:00)
+-------------------------------------------------------------------------
+```
+
+**Case B**: Adding an event
+1. Type `event Marquee Christmas Party --priority high --start 25-12-2020 22:00 --end 26-12-2020 04:00`
+
+   **Expected Output**:
+```
+-------------------------------------------------------------------------
+[user]: event Marquee Christmas Party --priority high --start 25-12-2020 22:00 --end 26-12-2020 04:00
+|| Task created!
+|| [E] Marquee Christmas Party <high> {none} (startDate: 25-12-2020 22:00 - endDate: 26-12-2020 04:00)
+-------------------------------------------------------------------------
+```
+
+**Case C**: Adding an invalid event (start date after end date)
+1. Type `event Marquee Christmas Party --priority high --start 26-12-2020 22:00 --end 26-12-2020 04:00`
+
+   **Expected Output**:
+```
+-------------------------------------------------------------------------
+[user]: event Marquee Christmas Party --priority high --start 26-12-2020 22:00 --end 26-12-2020 04:00
+|| Start date provided cannot be after End date!
+-------------------------------------------------------------------------
+```
+
+**Case D**: Adding an invalid deadline (no due date)
+1. Type `deadline CS2106 Lab 3 --priority high`
+
+   **Expected Output**:
+```
+-------------------------------------------------------------------------
+[user]: deadline CS2106 Lab 3 --priority high
+|| Required argument 'due' was not provided when creating new deadline.
+-------------------------------------------------------------------------
+```
+
+**Case E**: Adding an invalid todo (no arguments)
+1. Type `todo`
+
+   **Expected Output**:
+```
+-------------------------------------------------------------------------
+[user]: todo
+|| Usage: -> Adding a todo: todo <description> [--doOn dd-MM-yyyy HH:mm] [--priority high|medium|low] [--recur daily|weekly|monthly|yearly]
+-------------------------------------------------------------------------
+```
+**After all your commands**:
+You can type `list` to ensure that all the valid commands have indeed been added to the `TaskManager` `taskList`.
+
+>💡 **Note**: This is a non-exhaustive list of test cases. refer to the user guide on the `todo`, `deadline` and `event` commands usage to perform more exploratory testing.
+
+### Editing a task in task list
+
+>💡 **Pre-requisite**: Use the index from **the most recent list command** to edit the task you wish to edit.
+
+**Case A**: editing an event
+
+1. Type `event Marquee Christmas Party --priority high --start 25-12-2020 22:00 --end 26-12-2020 04:00`.
+2. Type `list --priority high`.
+3. find the index corresponding to the event `Marquee Christmas Party`. Let's call this {index}.
+4. Type `edit {index} --description stay home and celebrate Christmas alone --start 25-12-2020 12:00`.
+
+   **Expected Output**:
+```
+-------------------------------------------------------------------------
+[user]: edit {index} --description stay home and celebrate Christmas alone --start 25-12-2020 12:00
+|| Task(s) edited:
+|| [E] stay home and celebrate Chritmas alone <high> {none} (startDate: 25-12-2020 12:00 - endDate: 26-12-2020 04:00)
+-------------------------------------------------------------------------
+```
+5. Type `list` to see that the task has been edited accordingly.
+
+**Case B**: editing an event with invalid argument (start date would end up being after end date)
+
+1. Type `event Marquee Christmas Party --priority high --start 25-12-2020 22:00 --end 26-12-2020 04:00`.
+2. Type `list --recur none`.
+3. find the index corresponding to the event `Marquee Christmas Party`. Let's call this {index}.
+4. Type `edit {index} --description Endigomon says "Go back to the beginning." --end 6-10-2000 12:00`.
+
+   **Expected Output**:
+```
+-------------------------------------------------------------------------
+[user]: edit {index} --description Endigomon says "Go back to the beginning." --end 6-10-2000 12:00
+|| Start date provided cannot be after End date!
+-------------------------------------------------------------------------
+```
+5. Type `list` to see that the task description has been edited but not the end date.
+
+**Case C**: editing an event with invalid argument (flag blarg)
+
+1. Type `event Marquee Christmas Party --priority high --start 25-12-2020 22:00 --end 26-12-2020 04:00`.
+2. Type `list --type event`.
+3. find the index corresponding to the event `Marquee Christmas Party`. Let's call this {index}.
+4. Type `edit {index} --description I ran out of ideas --blarg wibble`.
+
+   **Expected Output**:
+```
+-------------------------------------------------------------------------
+[user]: edit 5 --blarg wibble
+|| Invalid flags Entered:
+|| blarg
+|| Type 'edit' to see command usage.
+-------------------------------------------------------------------------
+```
+5. Type `list` to see that the event has not been edited.
+
+>💡 **Note**: This is a non-exhaustive list of test cases. refer to the user guide on the `edit` command usage to perform more exploratory testing.
+
+
+### Deleting tasks in task list
+
+>💡 **Pre-requisite**: Use the indexes from **the most recent list command** to delete the tasks you wish to delete.
+
+**Case A**: deleting low priority tasks
+
+1. Ensure task list is empty
+   - You can type `list` folowed by `delete 1-{last index in list}` to delete all your tasks from your task list.
+2. Type `event event1 --priority low --start 25-12-2020 22:00 --end 26-12-2020 04:00`.
+3. Type `event event2 --priority high --start 25-12-2020 22:00 --end 26-12-2020 04:00`.
+4. Type `event event3 --priority high --start 25-12-2020 22:00 --end 26-12-2020 04:00`.
+5. Type `deadline deadline1 --priority low --due 20-10-2021 02:00`.
+6. Type `deadline deadline2 --priority low --due 20-10-2021 02:00`.
+7. Type `list --priority low`.
+
+   **Expected Output**:
+```
+-------------------------------------------------------------------------
+[user]: list --priority low
+|| -------------
+||  MY TASKLIST
+|| -------------
+|| 1. [E] event1 <low> {none} (startDate: 25-12-2020 22:00 - endDate: 26-12-2020 04:00)
+|| 2. [D] deadline1 <low> {none} (dueDate: 20-10-2021 02:00)
+|| 3. [D] deadline2 <low> {none} (dueDate: 20-10-2021 02:00)
+-------------------------------------------------------------------------
+```
+8. Type `delete 1-3`.
+
+   **Expected Output**:
+```
+-------------------------------------------------------------------------
+[user]: delete 1-3
+|| Task(s) deleted:
+|| [E] event1 <low> {none} (startDate: 25-12-2020 22:00 - endDate: 26-12-2020 04:00)
+|| [D] deadline1 <low> {none} (dueDate: 20-10-2021 02:00)
+|| [D] deadline2 <low> {none} (dueDate: 20-10-2021 02:00)
+-------------------------------------------------------------------------
+```
+9. Type `list`.
+
+   **Expected Output**:
+```
+-------------------------------------------------------------------------
+[user]: list
+|| -------------
+||  MY TASKLIST
+|| -------------
+|| 1. [E] event2 <high> {none} (startDate: 25-12-2020 22:00 - endDate: 26-12-2020 04:00)
+|| 2. [E] event3 <high> {none} (startDate: 25-12-2020 22:00 - endDate: 26-12-2020 04:00)
+-------------------------------------------------------------------------
+```
+
+**Case B**: Comma Seperated delete
+
+1. Follow `Case A` step 1-6
+2. Type `list`.
+
+   **Expected Output**:
+```
+-------------------------------------------------------------------------
+[user]: list
+|| -------------
+||  MY TASKLIST
+|| -------------
+|| 1. [E] event1 <low> {none} (startDate: 25-12-2020 22:00 - endDate: 26-12-2020 04:00)
+|| 2. [E] event2 <high> {none} (startDate: 25-12-2020 22:00 - endDate: 26-12-2020 04:00)
+|| 3. [E] event3 <high> {none} (startDate: 25-12-2020 22:00 - endDate: 26-12-2020 04:00)
+|| 4. [D] deadline1 <low> {none} (dueDate: 20-10-2021 02:00)
+|| 5. [D] deadline2 <low> {none} (dueDate: 20-10-2021 02:00)
+-------------------------------------------------------------------------
+```
+3. Type `delete 1,3-4`.
+
+   **Expected Output**:
+```
+-------------------------------------------------------------------------
+[user]: list
+|| -------------
+||  MY TASKLIST
+|| -------------
+|| 1. [E] event1 <low> {none} (startDate: 25-12-2020 22:00 - endDate: 26-12-2020 04:00)
+|| 2. [E] event2 <high> {none} (startDate: 25-12-2020 22:00 - endDate: 26-12-2020 04:00)
+|| 3. [E] event3 <high> {none} (startDate: 25-12-2020 22:00 - endDate: 26-12-2020 04:00)
+|| 4. [D] deadline1 <low> {none} (dueDate: 20-10-2021 02:00)
+|| 5. [D] deadline2 <low> {none} (dueDate: 20-10-2021 02:00)
+-------------------------------------------------------------------------
+```
+4. Type `list`.
+
+   **Expected Output**:
+```
+-------------------------------------------------------------------------
+[user]: list
+|| -------------
+||  MY TASKLIST
+|| -------------
+|| 1. [E] event2 <high> {none} (startDate: 25-12-2020 22:00 - endDate: 26-12-2020 04:00)
+|| 2. [D] deadline2 <low> {none} (dueDate: 20-10-2021 02:00)
+-------------------------------------------------------------------------
+```
+
+**Case C**: invalid index
+1. Select a very large index that does not correspond to any task in your list. e.g. '1337'.
+2. Type `list`. 
+3. Type `delete 1337`.
+
+   **Expected Output**:
+```
+-------------------------------------------------------------------------
+[user]: delete 1337
+|| [!] Task index '1337' does not correspond to any task!
+-------------------------------------------------------------------------
+```
+
+>💡 **Note**: This is a non-exhaustive list of test cases. refer to the user guide on the `delete` command usage to perform more exploratory testing.
