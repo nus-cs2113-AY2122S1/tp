@@ -352,10 +352,6 @@ NUS undergraduate students who prefer typing over using a mouse and proficient w
 |v2.0|user|sort my task in order of importance|see the important ones first|
 |v2.0|NUS student|be able to keep track of my CAP score|gauge my current undergraduate performance|
 
-### Use cases
-
-{Describe the use cases}
-
 ### Non-Functional Requirements
 
 {Give non-functional requirements}
