@@ -1,6 +1,7 @@
 package taa;
 
 //@@author leyondlee
+
 import taa.command.ArchiveCommand;
 import taa.command.ResetCommand;
 import taa.command.assessment.AddAssessmentCommand;
@@ -49,7 +50,7 @@ public class Parser {
     private static final String MESSAGE_UNKNOWN_COMMAND = "Unknown Command";
 
     private static final String MESSAGE_FORMAT_INVALID_VALUE = "Invalid characters in value(s). Only alphanumeric "
-        + "characters, spaces, and certain special characters are allowed.\nAllowed special characters: %s";
+            + "characters, spaces, and certain special characters are allowed.\nAllowed special characters: %s";
 
     public static Command parseUserInput(String userInput) throws TaaException {
         String[] userInputSplit = splitFirstSpace(userInput);
@@ -199,35 +200,23 @@ public class Parser {
     }
 
     /**
-     * Gets argument values specified by argumentKeys. Keys with empty values are not included in the returned HashMap.
-     * e.g.
-     * string: "add_class c/CS2113T-F12 n/Class F12", argumentKeys: {"c","n"}
-     * Result: HashMap(
-     *             "c":"CS2113T-F12",
-     *             "n":"Class F12"
-     *         )
+     * Gets the argument indexes as a argumentKey:index pair.
      *
-     * @param string       The string to parse.
-     * @param argumentKeys The argument keys to find.
-     * @return HashMap - argumentKey:argumentValue pair.
-     * @throws TaaException if there are any duplicated keys found within string or value is invalid.
+     * @param string       The string to find the indexes in.
+     * @param argumentKeys The argumentKeys to search for.
+     * @return A HashMap - argumentKey:index pair.
+     * @throws DuplicatedArgumentException if there are duplicated keys found.
      */
-    public static HashMap<String, String> getArgumentsFromString(String string, String[] argumentKeys,
-                                                                 boolean includeEmptyValues) throws TaaException {
-        if (argumentKeys == null || argumentKeys.length == 0) {
-            return new HashMap<>();
-        }
-
+    private static HashMap<String, Integer> getArgumentIndexMap(String string, String[] argumentKeys)
+            throws DuplicatedArgumentException {
         String argumentString = " " + string;
         HashMap<String, Integer> argumentIndexMap = new HashMap<>();
-        ArrayList<Integer> argumentIndexes = new ArrayList<>();
         ArrayList<String> duplicatedKeys = new ArrayList<>();
         for (String key : argumentKeys) {
             String searchString = String.format(" %s/", key);
             int index = argumentString.indexOf(searchString);
             if (index != -1) {
                 argumentIndexMap.put(key, index);
-                argumentIndexes.add(index);
 
                 String trailingString = argumentString.substring(index + 3);
                 if (trailingString.contains(searchString)) {
@@ -240,7 +229,48 @@ public class Parser {
             throw new DuplicatedArgumentException(duplicatedKeys);
         }
 
+        return argumentIndexMap;
+    }
+
+    /**
+     * Gets a sorted ArrayList of argument indexes.
+     *
+     * @param argumentIndexMap The argumentKey:index pair.
+     * @return A sorted ArrayList of indexes.
+     */
+    private static ArrayList<Integer> getSortedArgumentIndexes(HashMap<String, Integer> argumentIndexMap) {
+        ArrayList<Integer> argumentIndexes = new ArrayList<>();
+        for (String key : argumentIndexMap.keySet()) {
+            int index = argumentIndexMap.get(key);
+            argumentIndexes.add(index);
+        }
         Collections.sort(argumentIndexes);
+
+        return argumentIndexes;
+    }
+
+    /**
+     * Gets argument values specified by argumentKeys. Keys with empty values are not included in the returned HashMap.
+     * e.g.
+     * string: "add_class c/CS2113T-F12 n/Class F12", argumentKeys: {"c","n"}
+     * Result: HashMap(
+     *             "c":"CS2113T-F12",
+     *             "n":"Class F12"
+     *         )
+     *
+     * @param string       The string to parse.
+     * @param argumentKeys The argument keys to find.
+     * @return A HashMap - argumentKey:argumentValue pair.
+     * @throws TaaException if there are any duplicated keys found within string or value is invalid.
+     */
+    public static HashMap<String, String> getArgumentsFromString(String string, String[] argumentKeys,
+                                                                 boolean includeEmptyValues) throws TaaException {
+        if (argumentKeys == null || argumentKeys.length == 0) {
+            return new HashMap<>();
+        }
+
+        HashMap<String, Integer> argumentIndexMap = getArgumentIndexMap(string, argumentKeys);
+        ArrayList<Integer> argumentIndexes = getSortedArgumentIndexes(argumentIndexMap);
 
         HashMap<String, String> result = new HashMap<>();
         for (String key : argumentIndexMap.keySet()) {
@@ -271,6 +301,12 @@ public class Parser {
         return result;
     }
 
+    /**
+     * Checks if a value is valid. Value is considered valid if it is empty or matches the regex pattern.
+     *
+     * @param value The value to check.
+     * @return true if it is valid, else false.
+     */
     public static boolean isValueValid(String value) {
         if (value.isEmpty()) {
             return true;
@@ -291,7 +327,7 @@ public class Parser {
 
     /**
      * Converts character into a regex pattern string. Character is escaped if needed.
-     * Note: This method is not complete and may not escape all characters which may need to be escaped.
+     * Note: This method is incomplete and may not escape all characters which may need to be escaped.
      *
      * @param c The character to convert.
      * @return A regex pattern string.
