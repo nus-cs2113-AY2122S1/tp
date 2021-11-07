@@ -32,6 +32,7 @@ opt isStockParametersValid
     receiveordercommand -> addstockcommand : new AddStockCommand(parameters: LinkedHashMap<String, String>)
     receiveordercommand <-- addstockcommand
     receiveordercommand -> addstockcommand : execute()
+    receiveordercommand <-- addstockcommand
     deactivate addstockcommand
 end
 
