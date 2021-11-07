@@ -739,12 +739,12 @@ public class Ui {
     }
 
     /**
-     * Prints the graph of.
+     * Prints the bars for the graph given the coordinates of a particular point in the grid.
+     * @param graphPortions maximum number of bars in the graph
+     * @param lengths collection of the lengths of all the bars in the graph
+     * @param i x coordinate of the point
+     * @param j y coordinate of the point
      *
-     * @param graphPortions //
-     * @param lengths //
-     * @param i //
-     * @param j //
      * @author Dniv-ra
      */
     private void printGraph(int graphPortions, ArrayList<Double> lengths, int i, int j) {
@@ -774,9 +774,9 @@ public class Ui {
     }
 
     /**
-     * Prints the graph of.
+     * Prints the wastage of an array of dishes in a graphical format.
+     * @param dishList list of dishes to be converted into a bar graph
      *
-     * @param dishList //
      * @author Dniv-ra
      */
     public void printDishListGraph(ArrayList<Dish> dishList) {
@@ -813,10 +813,10 @@ public class Ui {
     }
 
     /**
-     * Prints the legend.
+     * Prints the legend and the scale at the side of the graph.
+     * @param dishList list of dishes to be used for the legend
+     * @param i current row in the grid
      *
-     * @param dishList //
-     * @param i //
      * @author Dniv-ra
      */
     private void printDishLegend(ArrayList<Dish> dishList, int i) {
@@ -831,9 +831,9 @@ public class Ui {
     }
 
     /**
-     * Prints the graph of.
+     * Prints the wastage of an array of ingredients in a graphical format.
+     * @param ingredientList list of ingredients to be converted into a bar graph
      *
-     * @param ingredientList //
      * @author Dniv-ra
      */
     public void printIngrListGraph(ArrayList<Ingredient> ingredientList) {
@@ -870,10 +870,10 @@ public class Ui {
     }
 
     /**
-     * Prints the legend.
+     * Prints the legend and the scale at the side of the graph.
+     * @param ingredientList list of ingredients to be used for the legend
+     * @param i current row in the grid
      *
-     * @param ingredientList //
-     * @param i //
      * @author Dniv-ra
      */
     private void printIngrLegend(ArrayList<Ingredient> ingredientList, int i) {
