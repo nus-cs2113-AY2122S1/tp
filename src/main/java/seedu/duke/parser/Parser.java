@@ -31,6 +31,7 @@ public class Parser extends CommandHandler {
         if (rawInput.length == SPLIT_COMMAND_FROM_INFO_LENGTH) {
             inputParams = rawInput[INPUT_INFO];
         }
+
         try {
             if (inputCommand.equals(QUIT_COMMAND)) {
                 Ui.goodBye();
@@ -138,6 +139,12 @@ public class Parser extends CommandHandler {
     }
 
     //@@author lixiyuan416
+
+    /**
+     * Helper function to get user to confirm y/n
+     *
+     * @return true if user agrees, false otherwise
+     */
     public static boolean getUserToConfirm() {
         boolean isValidInput = false;
         boolean doesUserAgree = false;
