@@ -166,12 +166,14 @@ public class Parser {
             = Pattern.compile("I" + DATA_SEPARATOR + "(?<description>.+)" + DATA_SEPARATOR
             + "(?<amount>.+)" + DATA_SEPARATOR + "(?<category>.+)" + DATA_SEPARATOR + "(?<date>.+)");
     private static final Pattern SETTINGS_DATA_FORMAT = Pattern.compile("(?<currency>.+)" + DATA_SEPARATOR
-            + "(?<threshold>.+)" + DATA_SEPARATOR + "(?<food>.+)" + DATA_SEPARATOR + "(?<transport>.+)" 
-            + DATA_SEPARATOR + "(?<medical>.+)" + DATA_SEPARATOR + "(?<bills>.+)" + DATA_SEPARATOR 
-            + "(?<entertainment>.+)" + DATA_SEPARATOR + "(?<misc>.+)" + DATA_SEPARATOR + "(?<overall>.+)");
+            + "(?<threshold>.+)" + DATA_SEPARATOR + "(?<overall>.+)" + DATA_SEPARATOR + "(?<food>.+)"
+            + DATA_SEPARATOR + "(?<transport>.+)" + DATA_SEPARATOR + "(?<medical>.+)"
+            + DATA_SEPARATOR + "(?<bills>.+)" + DATA_SEPARATOR + "(?<entertainment>.+)"
+            + DATA_SEPARATOR + "(?<misc>.+)");
 
     public static final String DATE_FORMAT = "dd/MM/yyyy";
     private static final double ENTRY_AMOUNT_LIMIT = 1000000;
+    private static final double BUDGET_AMOUNT_LIMIT = 100000000000.00;
 
     /**
      * Parses user input into command for execution.
@@ -805,7 +807,10 @@ public class Parser {
         String dataAmount = matcher.group("amount").trim();
         if (dataAmount.isBlank()) {
             return new InvalidCommand(Messages.BLANK_AMOUNT_MESSAGE);
+        }  else if (hasMoreThanTwoDecimalPlaces(dataAmount)) {
+            return new InvalidCommand(Messages.TOO_MANY_DP_MESSAGE);
         }
+
         double budgetAmount;
         try {
             budgetAmount = Double.parseDouble(dataAmount);
@@ -816,6 +821,8 @@ public class Parser {
             return new InvalidCommand(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
         } else if (Double.isInfinite(budgetAmount) || Double.isNaN(budgetAmount)) {
             return new InvalidCommand(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
+        } else if (budgetAmount > BUDGET_AMOUNT_LIMIT) {
+            return new InvalidCommand(Messages.INVALID_BUDGET_VALUE);
         }
 
         String expenseCategory = matcher.group("category").trim().toUpperCase();
@@ -927,8 +934,8 @@ public class Parser {
         StringBuilder data = new StringBuilder(currency.toString() + ",");
         data.append(budgetManager.getThreshold()).append(",");
         for (ExpenseCategory category : ExpenseCategory.values()) {
-            // NULL is the category after OVERALL. We do not expect NULL to have a value thus we break here.
-            if (category == ExpenseCategory.OVERALL) {
+            // NULL is the category after MISC. We do not expect NULL to have a value thus we break here.
+            if (category == ExpenseCategory.MISC) {
                 data.append(budgetManager.getBudget(category));
                 break;
             }
