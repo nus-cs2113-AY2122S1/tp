@@ -1,16 +1,20 @@
 package seedu.duke.task.type;
 
 import seedu.duke.command.flags.LessonFlag;
+import seedu.duke.log.Log;
 import seedu.duke.parser.DateParser;
 import seedu.duke.task.TypeEnum;
-import seedu.duke.task.reminder.ReminderInformation;
 import seedu.duke.nusmods.Semester;
 import seedu.duke.task.RecurrenceEnum;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -20,6 +24,21 @@ public class Lesson extends Event {
 
     private static final String LESSON_ICON = "[L]";
     private static final TypeEnum TASK_TYPE = TypeEnum.LESSON;
+
+    public LocalDateTime getNextOccurrence() {
+        LocalDateTime nearest = Arrays.stream(occurrences).mapToObj(occurrence -> getStartDate()
+                .plusWeeks(occurrence - 1))
+                .filter(date -> date.isAfter(LocalDateTime.now()))
+                .min(LocalDateTime::compareTo)
+                .orElseThrow();
+        Log.info(Arrays.toString(occurrences));
+        Log.info(nearest.toString());
+        return nearest;
+    }
+
+    /**
+     * 1-based occurrence.
+     */
     private int[] occurrences;
 
     public URI getLink() {

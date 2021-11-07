@@ -3,6 +3,8 @@ package seedu.duke.task.type;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.Map;
+
+import org.jetbrains.annotations.Nullable;
 import seedu.duke.command.flags.EventFlag;
 import seedu.duke.exception.ParseDateFailedException;
 import seedu.duke.exception.StartDateAfterEndDateException;
@@ -52,6 +54,11 @@ public class Event extends Task {
 
     public TypeEnum getTaskType() {
         return this.TASK_TYPE;
+    }
+
+    @Override
+    public LocalDateTime getHappenTime() {
+        return getStartDate();
     }
 
     public LocalDateTime getStartDate() {
