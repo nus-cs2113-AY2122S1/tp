@@ -24,6 +24,7 @@ import java.util.logging.Level;
  */
 public class Timetable implements Comparable<Timetable> {
 
+    private static final int HOUR = 100;
     private static final int TIME_LIMIT = 23;
     private static final int ONE = 1;
     private static final int DEFAULT_START = 9;
@@ -207,15 +208,19 @@ public class Timetable implements Comparable<Timetable> {
      *                      lesson to
      */
     private void addEventToSchedule(TimetableUserItem timetableUserItem, TimetableItem[] schedule) {
-        int start = timetableUserItem.getStartHour();
-        int end = timetableUserItem.getEndHour();
+        int start = Integer.parseInt(timetableUserItem.getStartTime());
+        int end = Integer.parseInt(timetableUserItem.getEndTime());
+        start /= HOUR;
+        end /= HOUR;
         end = endTimeEqualizer(end);
         for (int i = start; i <= end; i++) {
             schedule[i] = timetableUserItem;
             earliestHours.add(start);
             latestHours.add(end);
         }
-        latestHours.add(end + ONE);
+        if (end == TIME_LIMIT) {
+            latestHours.add(end + ONE);
+        }
         adjustStartAndEndHours();
         isEmpty = false;
     }

@@ -116,9 +116,6 @@ public class AddCommand extends Command {
             throw new AddException("Invalid End Time Entered (Format: 0000 - 2400)." +
                     " Note that all events are strictly within a 1 hour interval");
         }
-//        if (endTime.equals(MAX_TIME)) {
-//            endTime = HOUR_LIMIT;
-//        }
         return endTime;
     }
 
