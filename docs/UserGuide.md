@@ -67,10 +67,10 @@ This section provides a guide on how to get Traveller up and running on your com
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `Traveller.zip` from [here](https://github.com/AY2122S1-CS2113T-W13-1/tp/releases).
 3. Unzip the downloaded folder in an empty directory of your choice.
-4. Navigate to the directory containing `Traveller.jar` in your command prompt and run `java -jar Traveller.jar`.
+4. Navigate to the directory containing `Traveller.jar` in your desired CLI and run `java -jar Traveller.jar`.
    You should see Traveller's welcome message as shown below.
 
-![Welcome](./documentationPics/welcome.png)
+   ![Welcome](./documentationPics/welcome.png)
 
 5. Enter a command.
 
@@ -104,8 +104,7 @@ The purpose of the help command is to ensure that even if there is no internet c
 Creates a new trip.
 
 #### Format: `new TRIP_NAME /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
-   * The name of the trip must be one word. 
-   * Keywords `/from` and `/to` must be included before the START and END destinations respectively.
+   * Keywords `/from` and `/to` must be included **before** the SOURCE_COUNTRY and DESTINATION_COUNTRY respectively.
    * `SOURCE_COUNTRY` and `DESTINATION_COUNTRY` destinations must be [supported countries codes](#4-supported-countries-summary).
 
 #### Usage Example:
@@ -203,8 +202,8 @@ ____________________________________________________________
 			 Path: [SIN, MLY]
 			 Time: [1.0]
 			 Days: 
-				Day 0: 
-					0:	1900		Check-in at HolidayInn
+			    Day 0: 
+					0:  1900  Check-in at HolidayInn
 ____________________________________________________________
 ```
 > ![](documentationPics/info.png) Viewing a trip shows you your trip's start country, destination country, 
@@ -228,6 +227,8 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
+> ![](documentationPics/warning.png) Be careful when deleting your trips, a delete command is irreversible!
+
 <br/>
 
 ### 2.7. Deleting a day from a trip: `delete-day`
@@ -244,6 +245,8 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
+> ![](documentationPics/warning.png) Be careful when deleting your trips, a delete-day command is irreversible!
+
 <br/>
 
 ### 2.8. Deleting an item from a day: `delete-item`
@@ -256,21 +259,24 @@ Deletes an existing item from a trip.
 ____________________________________________________________
 $ delete-item FamilyTrip2021 /day 1 /item 0
 ____________________________________________________________
-	You have just deleted item 0 of FamilyTrip2021 day 1
+	You have just deleted item 0 of FamilyTrip2021 day 1.
 ____________________________________________________________
 ```
+
+> ![](documentationPics/warning.png) Be careful when deleting your trips, a delete-item command is irreversible!
 
 <br/>
 
 ### 2.9 Edit a trip: `edit`
-Edits any main aspect about an existing trip.
+Edits any main field about an existing trip.
 
 #### Format: `edit TRIP_NAME /name NEW_TRIP_NAME /from NEW_SOURCE_COUNTRY /to NEW_DESTINATION_COUNTRY`
 
-   * If you want to edit multiple aspects, the format order must be as shown above.
+   * If you want to edit multiple fields, the fields must be in the same order as shown above (`/name` comes first, 
+then `/from` and finally `/to`.)
    * If you only want to edit a trip's name : `edit TRIP_NAME /name NEW_TRIP_NAME`.
    * If you only want to edit a trip's source country : `edit TRIP_NAME /from NEW_SOURCE_COUNTRY`.
-   * If you only want to edit a trip's destination country : `edit TRIP_NAME /from NEW_DESTINATON_COUNTRY`.
+   * If you only want to edit a trip's destination country : `edit TRIP_NAME /to NEW_DESTINATON_COUNTRY`.
    * If you want to edit a trip's name and destination country : 
 `edit TRIP_NAME /name NEW_TRIP_NAME /to NEW_SOURCE_COUNTRY`.
 
@@ -296,7 +302,7 @@ Edits and updates existing item from a trip and updates it to a new correspondin
 _________________________________________________________________________________
 $ edit-item trip1 /day 1 /index 1 /time 0900 /name later breakfast
 _________________________________________________________________________________
-	You have just edited item 1 on day 1 of trip1 to later breakfast at 0900
+	You have just edited item 1 on day 1 of trip1 to later breakfast at 0900.
 _________________________________________________________________________________
 ```
 
@@ -307,18 +313,18 @@ Searches for an item keyword from a trip and returns the resulting matching item
 
 #### Format: `search-item TRIP_NAME /day DAY_INDEX /key KEYWORD`
 
-> ![](documentationPics/info.png) KEYWORD must be one word and not have any white spaces before or after.
+> ![](documentationPics/info.png) `KEYWORD` must be one word and not have any white spaces before or after.
 
 #### Usage Example:
 ```
 _________________________________________________________________________________
-$ search-item FamilyTrip2021 /day 1 /key mealtime
+$ search-item FamilyTrip2021 /day 1 /key time
 _________________________________________________________________________________
-	You have just search item keyword n on day 1 in trip called FamilyTrip2021
+	You have just search item keyword time on day 1 in trip called FamilyTrip2021
 	
 	Results: 
-	1. 1400		lunch
-	2. 1700		dinner
+	1. 1400		lunch time
+	2. 1700		dinner time
 _________________________________________________________________________________
 ```
 
@@ -380,8 +386,12 @@ Exits the program.
 **Q**: Why does it keep saying "Country 'X' doesn't exist!"?
 
 **A**: Traveller can only read specific words as countries.
-Please check in *flightData/time.txt* or *flightData/cost.txt* for all supported destinations and their specific 
+Please check [here](#4-supported-countries-summary) for all supported destinations and their specific 
 wordings.
+
+If the problem persists, then your data in *flightData/time.txt* or *flightData/cost.txt* may have been corrupted.
+Download a new copy of Traveller from [this link](https://github.com/AY2122S1-CS2113T-W13-1/tp/releases) to get a new
+uncorrupted version of the flight and cost data.
 
 **Q**: What should I do when creating a new trip if my trip span multiple countries?
 
