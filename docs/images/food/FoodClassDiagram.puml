@@ -40,7 +40,7 @@ class StorageFood {
 }
 
 WhatIAteList -u StorageFood : < reads and writes
-WhatIAteList --> FoodRecord
+WhatIAteList -d-> FoodRecord
 
-
+StallsManager - FoodRecord : > contains information of
 @enduml

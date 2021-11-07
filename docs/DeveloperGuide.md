@@ -86,7 +86,7 @@ The steps are as follows:
 ![](./images/ClickRun.png)
 
 You should note that this is a general overview of the Click functionality, and the `:Command` entity simply represents a Command to be called by the Parser.
-Another point for you to note is the difference between a Click exception and other exception. Click, as aptly referenced from our project, has unique
+Another point for you to note is the difference between a Click exception and other exceptions. Click, as aptly referenced from our project, has unique
 exceptions that belong to our program. For instance, invalid dates extending beyond a  student's  matriculation,  or a  lack of entries when adding a journal. 
 This is different from that of an "other" exception, which could be briefly categorized as a general exception. For instance, a `NumberFormatException` on the parsing
 of a String to an Integer.
