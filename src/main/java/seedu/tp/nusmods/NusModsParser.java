@@ -24,6 +24,10 @@ import java.util.stream.StreamSupport;
 
 import static org.apache.commons.io.FileUtils.copyURLToFile;
 
+//@@author SuibianP
+/**
+ * Utility class for fetching and parsing NUSMods API.
+ */
 public class NusModsParser {
     public static final String CACHEDIR = "cache/";
     private static final String ENDPOINT = "https://api.nusmods.com/v2/";

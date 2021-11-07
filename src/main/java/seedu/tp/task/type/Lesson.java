@@ -16,6 +16,7 @@ import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Map;
 
+//@@author SuibianP
 /**
  * A single lesson class e.g. CS2101 C02 Thursday
  */

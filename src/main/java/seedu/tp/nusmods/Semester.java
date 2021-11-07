@@ -11,6 +11,10 @@ import java.util.stream.IntStream;
 
 import static java.time.temporal.TemporalAdjusters.firstInMonth;
 
+//@@author SuibianP
+/**
+ * Enumeration class for NUS semesters.
+ */
 public enum Semester {
     S1, S2, ST1, ST2;
 
@@ -19,6 +23,11 @@ public enum Semester {
         return Semester.values()[n - 1];
     }
 
+    /**
+     * Get the semester which the date is in.
+     * @param date A date to be queried
+     * @return The semester of the date
+     */
     public static Semester getSemester(LocalDate date) {
         for (Semester s : Semester.values()) {
             if (ChronoUnit.DAYS.between(s.getStartingMonday(), date) <= s.getWeekLength() * 7) {
@@ -32,6 +41,10 @@ public enum Semester {
         return getSemester(LocalDate.now());
     }
 
+    /**
+     * Get the standard number of weeks in a particular semester.
+     * @return The number of weeks in the semester
+     */
     public long getWeekLength() {
         switch (this) {
         case S1:
@@ -45,10 +58,20 @@ public enum Semester {
         }
     }
 
+    /**
+     * Convert academic weeks to real weeks, accounting for recess weeks, etc.
+     * @param acadWeeks An array of academic weeks
+     * @return An array of real weeks
+     */
     public static int[] acadWeeksToRealWeeks(int[] acadWeeks) {
         return IntStream.of(acadWeeks).map(i -> i > 6 ? i + 1 : i).toArray();
     }
 
+    /**
+     * Get the starting Monday of a semester in a year.
+     * @param year A year
+     * @return The starting Monday
+     */
     public LocalDate getStartingMonday(Year year) {
         switch (this) {
         case S1:

@@ -12,6 +12,10 @@ import seedu.tp.utility.ExternalHelper;
 import java.net.URI;
 import java.util.Map;
 
+//@@author SuibianP
+/**
+ * The command for browsing a link within a Lesson.
+ */
 public class BrowseCommand extends Command {
     private static final String USAGE = "-> Launching a link tagged to a task: browse <index>";
 

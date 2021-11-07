@@ -187,7 +187,62 @@ The accepted date formats in our program:
 
 #### 2.3.1 Module: `module`
 
+Add one or multiple classes of one or multiple modules into the task list.
+
+**Format**: `module {<module code>:{<class number>,}...;}...`
+
+- `<module code>` is the official code of a module, such as `CS2113T`.
+- `<class number>` is the number of class group, such as `C02`.
+
+**Example**: `module CS2113T:C02;LAJ2203:1,A2,B4`
+
+- Add class C02 of module CS2113T
+- Add class 1, A2 and B4 of module LAJ2203
+
+**Expected outcome**:
+
+```
+-------------------------------------------------------------------------
+[user]: module CS2113T:C02;LAJ2203:1,A2,B4
+|| Added CS2113T C02
+|| Added LAJ2203 1
+|| Added LAJ2203 A2
+|| Added LAJ2203 B4
+-------------------------------------------------------------------------
+```
+
 #### 2.3.2 Browse: `browse`
+
+Browse the previously added link inside a lesson.
+
+**Format**: `browse <index>`
+
+**Example**: `browse 2`
+
+**Expected outcome**:
+```
+-------------------------------------------------------------------------
+[user]: browse 1
+|| https://google.com
+-------------------------------------------------------------------------
+```
+
+>💡 **Note**: The opening of the link is delegated to the operating system. As such, the actual protocols supported is
+> dependent on the OS.
+
+
+>💡 **Note**: There may be possible error messages printed on your terminal. They are from the associated application
+> for opening the link, such as Chrome, and not SchedUrMods.
+
+>💡 **Note**: If there is no link in the lesson being specified, you will be prompted with an error like,
+>
+> ```
+> -------------------------------------------------------------------------
+> [user]: browse 2
+> || There is no link associated with the requested task.
+> -------------------------------------------------------------------------
+> ```
+> You can conveniently list the tasks and see if the lesson has a link.
 
 ### 2.4 Listing your tasks: `list`
 

@@ -9,9 +9,13 @@ import seedu.tp.task.taskmanager.TaskManager;
 import java.util.Arrays;
 import java.util.Map;
 
+//@@author SuibianP
+/**
+ * Command to add module lessons.
+ */
 public class ModuleCommand extends Command {
 
-    private static final String USAGE = "-> Adding a module: module {<module code>:<class number>...}...";
+    private static final String USAGE = "-> Adding a module: module {<module code>:{<class number>,}...;}...";
 
     public ModuleCommand(TaskManager taskManager, Map<String, String> commandArguments) {
         super(taskManager, commandArguments);
