@@ -43,14 +43,12 @@ public class Expense implements ExpenseSplitter {
         this.amountSplit = amountSplit;
         this.personsList = personsList;
     }
-    //@@author
 
     /**
      * Constructor for {@link Expense} class - contains parsing and amount assignment.
      *
      * @param inputDescription String of user input to be parsed and assigned to expense attributes
      */
-
     public Expense(String inputDescription) throws ForceCancelException {
         String[] expenseInfo = inputDescription.split(" ", 3);
         setAmountSpent(expenseInfo[0]);
@@ -152,10 +150,7 @@ public class Expense implements ExpenseSplitter {
         }
     }
 
-    //@@author
 
-
-    //expense details
     @Override
     public String toString() {
         return ("\t" + this.getDescription()
@@ -172,6 +167,7 @@ public class Expense implements ExpenseSplitter {
                 + "\t" + "Category: " + this.category)
                 + System.lineSeparator();
     }
+    //@@author
 
     public String getPersonExpense() {
         StringBuilder returnString = new StringBuilder();
