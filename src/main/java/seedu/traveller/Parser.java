@@ -569,9 +569,6 @@ public class Parser {
             endCountryCode = parseFieldValue(userInput,
                     toIndex + TO_LENGTH, userInput.length()).toUpperCase();
 
-            WorldMap.getValidCountry(startCountryCode);
-            WorldMap.getValidCountry(endCountryCode);
-
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
             assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
 
@@ -603,9 +600,6 @@ public class Parser {
                     fromIndex + FROM_LENGTH, toIndex).toUpperCase();
             endCountryCode = parseFieldValue(userInput,
                     toIndex + TO_LENGTH, userInput.length()).toUpperCase();
-
-            WorldMap.getValidCountry(startCountryCode);
-            WorldMap.getValidCountry(endCountryCode);
 
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
             assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
