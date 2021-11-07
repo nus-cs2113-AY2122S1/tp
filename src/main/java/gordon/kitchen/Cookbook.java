@@ -303,12 +303,6 @@ public class Cookbook {
         try {
             Tag extractedTag = extractCookbookTag(tagName);
             extractedTag.removeAssociatedRecipeName(recipeName);
-
-            if (extractedTag.numberOfAssociatedRecipes() == 0) {
-                System.out.println(tagName
-                        + " tag will no longer have any recipes under it. You might want to delete it!");
-            }
-
         } catch (GordonException e) {
             System.out.println("GordonException: " + e.getMessage());
         }
@@ -343,7 +337,6 @@ public class Cookbook {
         for (Recipe recipe : recipes) {
             if (recipe.getName().equalsIgnoreCase(recipeName) && tag.containsAssociatedRecipeNames(recipe.getName())) {
                 recipe.deleteTagFromRecipe(tag);
-                tag.removeAssociatedRecipeName(recipe.getName());
                 System.out.println("Successfully untagged " + recipeName + " from " + tag.getTagName().trim());
                 return;
             }

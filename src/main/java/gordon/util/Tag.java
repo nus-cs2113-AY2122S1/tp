@@ -31,7 +31,14 @@ public class Tag {
     }
 
     public void removeAssociatedRecipeName(String recipeName) {
+        int initialSize = associatedRecipeNames.size();
         associatedRecipeNames.remove(recipeName);
+        int finalSize = associatedRecipeNames.size();
+
+        if (finalSize == 0 && initialSize != finalSize) {
+            System.out.println(this.tagName
+                    + " tag will no longer have any recipes under it. You might want to delete it!");
+        }
     }
 
     public int numberOfAssociatedRecipes() {
