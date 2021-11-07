@@ -32,7 +32,7 @@ Listed below are my contributions to Traveller.
 #### Documentation
 * User Guide (UG)
   * Created some overall structure of the UG. Further updated by 
-  [Xin Yu.](https://ay2122s1-cs2113t-w13-1.github.io/tp/team/Uxinnn.html)
+  [Xin Yu.](https://ay2122s1-cs2113t-w13-1.github.io/tp/team/uxinnn.html)
   * Kept it updated and debugged.
   * Wrote first draft of UG which includes Quick Start, Features (new, view, delete, edit, exit), 
   FAQ and Command Summary.
