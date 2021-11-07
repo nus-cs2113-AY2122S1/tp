@@ -94,7 +94,8 @@ PrintWriter --> WriteToTextFile
 deactivate PrintWriter
 
 end
-
+WriteToTextFile -> PrintWriter: close()
+PrintWriter --> WriteToTextFile
 end
 
 return
