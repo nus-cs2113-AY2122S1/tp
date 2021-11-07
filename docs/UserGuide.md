@@ -588,14 +588,28 @@ Saves the current program data to an archive.
 
 Archive files are stored in the `<TAA Root>/data/archive` folder.
 
+> 💡 **Note:**<br />
+> You will be prompted to enter `yes` (case-sensitive) if you wish to delete all data in the current storage. Enter
+> anything else (e.g. `no`) to abort the action.
+
 Format: `archive`
+
+Expected Output: <br>
+![ArchiveCommand](images/ArchiveCommand.png)
 
 <br>
 
 ### Resetting/Removing all data: `reset`
 Removes all saved data from the current program.
 
+> 💡 **Note:**<br />
+> You will be prompted to enter `yes` (case-sensitive) if you wish to continue deleting all data in the current storage.
+> Enter anything else (e.g. `no`) to abort the action.
+
 Format: `reset`
+
+Expected Output: <br>
+![ResetCommand](images/ResetCommand.png)
 
 <br>
 
