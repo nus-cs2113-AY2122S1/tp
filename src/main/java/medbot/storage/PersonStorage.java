@@ -15,6 +15,9 @@ import static medbot.parser.ParserUtils.updatePersonalInformation;
 public abstract class PersonStorage extends Storage {
 
     private static final String[] parameterPrefixes = {"i/", "n/", "p/", "e/", "a/"};
+    private static final String STORAGE_SHOW_PARAMETER = "S";
+    private static final String STORAGE_HIDE_PARAMETER = "H";
+    private static final String ERROR_STORAGE_HIDE_PARAMETER = "Invalid storage hide parameter";
 
     /**
      * Generic constructor for PatientStorage and StaffStorage.
@@ -87,11 +90,9 @@ public abstract class PersonStorage extends Storage {
         Integer listItemId = Integer.parseInt(listItemParameters[0]);
 
         for (int i = 0; i < parameterPrefixes.length; i++) {
-            // i + 1, since listItemParameters[0] is the listItemId
             if (isStorageParameterNull(listItemParameters[i + 1])) {
                 continue;
             }
-            // i + 1, since listItemParameters[0] is the listItemId
             String prefixPlusListItemParameter = parameterPrefixes[i] + listItemParameters[i + 1];
             prefixPlusListItemParameters.add(prefixPlusListItemParameter);
         }
@@ -105,14 +106,22 @@ public abstract class PersonStorage extends Storage {
     }
 
 
+    /**
+     * Convert the Hide parameter extracted from a storage line to boolean.
+     * @param storageHideParameter "H" for hide, "S" for show
+     * @return True if storageHideParameter == "H", false if storageHideParameter == "S"
+     * @throws MedBotException if storageHideParameter is neither "H" nor "S"
+     */
     protected static boolean convertStorageHideParameterToBoolean(String storageHideParameter)
             throws MedBotException {
-        if (storageHideParameter.equals("S")) {
+
+        switch (storageHideParameter) {
+        case (STORAGE_SHOW_PARAMETER):
             return false;
-        } else if (storageHideParameter.equals("H")) {
+        case (STORAGE_HIDE_PARAMETER):
             return true;
-        } else {
-            throw new MedBotException("Invalid storage hide parameter");
+        default:
+            throw new MedBotException(ERROR_STORAGE_HIDE_PARAMETER);
         }
     }
 }
