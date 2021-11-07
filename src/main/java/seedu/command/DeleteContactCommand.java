@@ -25,7 +25,14 @@ public class DeleteContactCommand extends Command {
         return contactIndex;
     }
 
-
+    /**
+     * This method is used to delete one specified contact given by the user. It finds
+     * the contact to be deleted and prompts the user for confirmation to delete, before
+     * executing any deletion of a contact.
+     *
+     * @throws IndexOutOfBoundsException If index given in the DeleteContactCommand is
+     *      outside the size of the Contact List.
+     */
     private void deleteSelectedContact() throws IndexOutOfBoundsException {
         // throws IndexOutOfBoundsException if index is outside of the range
         Contact deletedContact = contactList.getContactAtIndex(contactIndex);
@@ -45,6 +52,11 @@ public class DeleteContactCommand extends Command {
         }
     }
 
+    /**
+     * This method is used to delete all of the contacts in the Contact List. It
+     * prompts the user for confirmation to delete before executing any deletion
+     * of all the contacts.
+     */
     private void deleteAllContacts() {
         TextUi.confirmDeleteAllMessage();
         String userConfirmation = UserInputTextUi.getUserConfirmation();
@@ -58,6 +70,11 @@ public class DeleteContactCommand extends Command {
         }
     }
 
+    /**
+     * This method is used to delete specified fields of a selected contact. It
+     * finds the selected contact with fields to be deleted, and prompts the user
+     * for confirmation to delete before executing any deletion of fields.
+     */
     private void deleteFields() {
         Contact deletedContact = contactList.getContactAtIndex(contactIndex);
         assert contactIndex >= 0 && contactIndex < contactList.getListSize();
@@ -77,6 +94,11 @@ public class DeleteContactCommand extends Command {
         }
     }
 
+    /**
+     * This method executes the deletion process of the DeleteContactCommand. It
+     * checks whether the deletion is for all contacts, a single contact or a
+     * contact's fields, before running their corresponding delete methods
+     */
     public void execute() {
         try {
             if (contactIndex == DELETE_ALL_CONTACTS_INDEX) {
