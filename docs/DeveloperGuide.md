@@ -85,8 +85,12 @@ while `altWorldMap` boots up a side, read-only World Map based on the flight cos
 
 NOTE: As of V2.1 `EditMap` is no longer used. 
 
-![](documentationPics/worldmap2.png)
-<div style="text-align: center;">Figure 3.1: World Map Sequence Diagram</div>
+![](documentationPics/worldmap2.1.png)
+<div style="text-align: center;">Figure 3.1.1: World Map Sequence Diagram Part 1</div>
+
+![](documentationPics/worldmap2.2.png)
+<div style="text-align: center;">Figure 3.1.2: World Map Sequence Diagram Part 2</div>
+(The diagrams are split into 2 parts to ensure higher picture resolution)
 
 The `initWorldMap` command is called which then processes the flight data by calling `readData`, with the data
 corresponding to the flight times. Alternatively, to process the flight costs data, the The `altWorldMap` command 
@@ -131,6 +135,18 @@ The list of distances are all stored in a matrix which is called by `getEdgeMatr
 ![](documentationPics/graphlist.png)
 <div style="text-align: center;">Figure 3.2: Graph List Sequence Diagram</div>
 
+>![](documentationPics/info.png) Both functions `modifyEdge` and `createEdge` have a very similar flow and structure.
+> While `modifyEdge` desires to update the path and hence calls `updateNeighbour`, `createEdge` desires to add a new
+> path into the existing database and hence calls `addNeighbour`.
+
+The breakdown of these functionalities as illustrated by Figure 3.2 is summarised below.
+
+`modifyEdge` and `createEdge`
+1. Calling `getKey` for both the starting and ending country returns the unique tags for the corresponding countries,
+which is then used to access and hence update the corresponding path linking both countries. 
+2. `updateNeighbour` (or `addNeighbour`) is then called on both countries to ensure the bi-directional edge is 
+correctly updated (or added to the existing database).
+
 #### 1.1.3. Logic class
 The `Logic` class is the main class driving the logic from the overarching `WorldMap` class. 
 Namely, it runs Dijkstra's algorithm on the given WorldMap.
@@ -143,6 +159,14 @@ in reverse order. Note that `getToGoal` returns an object of `MinCalcResult` typ
 
 ![](documentationPics/logic.png)
 <div style="text-align: center;">Figure 3.3: Logic Sequence Diagram</div>
+
+The breakdown as illustrated by Figure 3.3 is summarised below.
+1. Firstly, `computeSource` calls `getVertexArray` which returns the list of all countries presently in the database.
+2. A `PriorityQueue` is then utilised which starts from the initial source country and expands to all other countries, 
+returning the shortest paths across the entire network of countries, in other words the implementation of Dijkstra's 
+algorithm.
+3. Then, `getToGoal` is a backtracking mechanism searching from the destination country back towards the country of 
+origin, and the function eventually returns an object of `MinCalcResult` class.
 
 #### 1.1.4. DataLoader class
 The `DataLoader` class reads in data from *flightData/time.txt* or *flightData/cost.txt* to create the vertexes 
