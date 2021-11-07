@@ -106,6 +106,7 @@ Creates a new trip.
 #### Format: `new TRIP_NAME /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
    * Keywords `/from` and `/to` must be included **before** the SOURCE_COUNTRY and DESTINATION_COUNTRY respectively.
    * `SOURCE_COUNTRY` and `DESTINATION_COUNTRY` destinations must be [supported countries codes](#4-supported-countries-summary).
+   * Trips cannot be named `all` or contain the character `/`.
 
 #### Usage Example:
 
@@ -183,6 +184,9 @@ ____________________________________________________________
 > the [delete-item](#28-deleting-an-item-from-a-day-delete-item) command.
 > 
 > ![](documentationPics/tip.png) If your item spans the whole day, just type in `All day` for the time field!
+> 
+> ![](documentationPics/tip.png) As of the current version (v2.1), items in each day are not sorted by time and will 
+> appear in the order in which they are added. As such, do add items in chronological order if the order is important.
 
 <br/>
 

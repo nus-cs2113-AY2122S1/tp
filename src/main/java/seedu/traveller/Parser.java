@@ -208,34 +208,6 @@ public class Parser {
      * @return Command An <code>EditCommand</code> object.
      * @throws TravellerException Will be thrown if the user input cannot be understood.
      */
-    /*private static Command parseEditCommand(String userInput) throws TravellerException {
-        logger.log(Level.INFO, "Edit command input");
-        Command command;
-        try {
-            int fromIdx = getFromFlagIndex(userInput);
-            int toIdx = getToFlagIndex(userInput);
-            String tripName;
-            String newTripName;
-            if (userInput.contains("/name")) {
-                int nameIdx = getNameFlagIndex(userInput);
-                tripName = parseFieldValue(userInput, 0, nameIdx);
-                newTripName = parseFieldValue(userInput, nameIdx + NAME_LENGTH, fromIdx);
-            } else {
-                tripName = parseFieldValue(userInput, 0, fromIdx);
-                newTripName = tripName;
-            }
-            String startCountryCode = parseFieldValue(userInput,
-                fromIdx + FROM_LENGTH, toIdx).toUpperCase();
-            String endCountryCode = parseFieldValue(userInput,
-                toIdx + TO_LENGTH, userInput.length()).toUpperCase();
-            parseValidTripName(tripName);
-            command = new EditCommand(tripName, newTripName, startCountryCode, endCountryCode);
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new InvalidEditFormatException();
-        }
-        return command;
-    }*/
-
     private static Command parseEditCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Edit command input");
         Command command;
@@ -704,7 +676,7 @@ public class Parser {
      * @throws TravellerException If <code>TripName</code> is not a valid <code>TripName</code>.
      */
     private static void parseValidTripName(String tripName) throws TravellerException {
-        if (tripName.equals("all")) {
+        if (tripName.equals("all") || tripName.contains("/")) {
             throw new IllegalTripNameException(tripName);
         }
     }
