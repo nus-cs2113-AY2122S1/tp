@@ -16,7 +16,7 @@ import seedu.tp.task.type.Deadline;
  */
 public class DeadlineFactory extends TaskFactory {
 
-    private static final TypeEnum taskType = TypeEnum.DEADLINE;
+    private static final TypeEnum TASK_TYPE = TypeEnum.DEADLINE;
 
     LocalDateTime dueDate;
 
@@ -26,7 +26,7 @@ public class DeadlineFactory extends TaskFactory {
      * @param flags the <code>Map&lt;String, String&gt;</code> of flags to their values.
      */
     public DeadlineFactory(Map<String, String> flags) {
-        super(taskType, DeadlineFlag.REQUIRED_FLAGS, flags);
+        super(TASK_TYPE, DeadlineFlag.REQUIRED_FLAGS, flags);
     }
 
 

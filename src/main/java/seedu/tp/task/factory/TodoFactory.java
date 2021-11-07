@@ -15,7 +15,7 @@ import seedu.tp.task.type.Todo;
  * Factory class used to create {@link seedu.tp.task.type.Todo}.
  */
 public class TodoFactory extends TaskFactory {
-    private static final TypeEnum taskType = TypeEnum.TODO;
+    private static final TypeEnum TASK_TYPE = TypeEnum.TODO;
 
     LocalDateTime doOnDate;
 
@@ -26,7 +26,7 @@ public class TodoFactory extends TaskFactory {
      * @param flags the <code>Map&lt;String, String&gt;</code> of flags to their values.
      */
     public TodoFactory(Map<String, String> flags) {
-        super(taskType, TodoFlag.REQUIRED_FLAGS, flags);
+        super(TASK_TYPE, TodoFlag.REQUIRED_FLAGS, flags);
     }
 
 
