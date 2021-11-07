@@ -26,7 +26,7 @@ public class DaysList {
 
     public void addDay() throws TravellerException {
         logger.log(Level.INFO, "Added a day to daysList");
-        if (getSize() >= maxDaysAllowed) {
+        if (getSize() >= getMaxDaysAllowed()) {
             throw new MaxNumberOfDaysAllowedExceededException();
         }
         Day newDay = new Day();
@@ -50,6 +50,10 @@ public class DaysList {
         } catch (IndexOutOfBoundsException e) {
             throw new DayNotFoundException(dayNumber);
         }
+    }
+
+    public int getMaxDaysAllowed() {
+        return maxDaysAllowed;
     }
 
     public int getSize() {

@@ -161,6 +161,7 @@ ____________________________________________________________
 Use this command to add an item to a day of your trip. An item represents an activity that you will do in a day.
 
 #### Format: `add-item TRIP_NAME /day DAY_INDEX /time ITEM_TIME /name ITEM_NAME`
+   * The maximum number of items allowed per day is 50 days.
 
 #### Usage Example:
 

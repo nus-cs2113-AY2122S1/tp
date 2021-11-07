@@ -2,6 +2,7 @@ package seedu.traveller.objects;
 
 import seedu.traveller.exceptions.DuplicateItemException;
 import seedu.traveller.exceptions.ItemNotFoundException;
+import seedu.traveller.exceptions.MaxNumberOfItemsAllowedExceededException;
 import seedu.traveller.exceptions.TravellerException;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.logging.Logger;
 public class ItemsList {
     private static final Logger logger = Logger.getLogger(TripsList.class.getName());
     private final ArrayList<Item> items;
+    private final int maxItemsAllowed = 50;
 
     public ItemsList() {
         logger.setLevel(Level.INFO);
@@ -25,6 +27,9 @@ public class ItemsList {
     }
 
     public void addItem(Item item) throws TravellerException {
+        if (getSize() >= getMaxItemsAllowed()) {
+            throw new MaxNumberOfItemsAllowedExceededException();
+        }
         String itemTime = item.getItemTime();
         String itemName = item.getItemName();
         if (isInList(itemTime, itemName)) {
@@ -80,6 +85,10 @@ public class ItemsList {
         } catch (IndexOutOfBoundsException e) {
             throw new ItemNotFoundException(itemNumber);
         }
+    }
+
+    public int getMaxItemsAllowed() {
+        return maxItemsAllowed;
     }
 
     public int getSize() {
