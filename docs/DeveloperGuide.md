@@ -1,8 +1,8 @@
 # Developer Guide
 
-This document describes the architecture and software implementation of the application, _Ha(ppy)Bit_. The document is 
-meant for developers who wish to gain insight into the design considerations and implementation of features, and 
-possibly expand on the application.
+This document describes the architecture and software implementation of the application, _Ha(ppy)Bit_. 
+The document will be great for you if you are a developer who wish to gain insight into 
+the design considerations and implementation of features, and possibly expand on the application.
 
 * [Acknowledgements](#acknowledgements)
 * [1. Introduction](#1-introduction)
@@ -96,9 +96,9 @@ The following section covers basic setup instructions to get you up and running 
 
 ### 2.1. Application Requirements
 
-1. Ensure that you have installed Java SE Development Kit (JDK) 11 on your computer. If you do not have it installed, 
+1. Ensure that you have installed Java SE Development Kit (JDK) `11` on your computer. If you do not have it installed, 
    you may download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
-2. Recommended to use [IntelliJ IDEA](https://www.jetbrains.com/idea/download/).
+2. We recommend using [IntelliJ IDEA](https://www.jetbrains.com/idea/download/).
 3. Fork this [repository](https://github.com/AY2122S1-CS2113T-F14-1/tp), and clone the fork to your computer.
 
 ### 2.2. Project Set-Up
@@ -290,7 +290,7 @@ your personal account which will be stored in the `GoalList` class.
 
 ### 4.2. Adding a Habit
 
-A `AddHabitCommand` object is returned from the `AddParser` if the users input is successfully parsed as shown below.
+A `AddHabitCommand` object is returned from the `AddParser` if the user input is successfully parsed as shown below.
 
 ![](Diagram_Images/Implementation_Diagram_Images/AddHabitCommandParserSequenceDiagram.png)
 
@@ -315,7 +315,7 @@ sequence diagram below is then carried out:
 
 ### 4.4. Listing all Habits
 
-A `ListHabitCommand` object is returned from the `ListHabitParser` if the users input is successfully parsed as shown below.
+A `ListHabitCommand` object is returned from the `ListHabitParser` if the user input is successfully parsed as shown below.
 If no goal index or invalid goal index is detected, an exception is thrown.
 
 ![](Diagram_Images/Implementation_Diagram_Images/ListHabitsCommandParserSequenceDiagram.png)
@@ -326,7 +326,7 @@ The `runCommand` method is then executed for the `ListHabitsCommand` object as s
 
 ### 4.5. Completing a Habit
 
-A `DoneHabitCommand` object is returned from the `DoneParser` if the users input is successfully parsed as shown below.
+A `DoneHabitCommand` object is returned from the `DoneParser` if the user input is successfully parsed as shown below.
 
 ![](Diagram_Images/Implementation_Diagram_Images/DoneCommandParserSequenceDiagram.png)
 
@@ -340,7 +340,7 @@ Goal or the Habit is detected, an exception will be thrown.
 
 ### 4.6. Updating a Goal
 
-A `UpdateGoalCommand` object is returned from the `UpdateParser` if the users input is successfully parsed as shown below.
+A `UpdateGoalCommand` object is returned from the `UpdateParser` if the user input is successfully parsed as shown below.
 If the update command is not provided with a goal index, or without any update flags it will throw an exception.
 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateGoalCommandParserSequenceDiagram.png)
@@ -351,7 +351,7 @@ The `runCommand` method is then executed for the `UpdateGoalCommand` object as s
 
 ### 4.7. Updating a Habit
 
-A `UpdateHabitCommand` object is returned from the `UpdateParser` if the users input is successfully parsed as shown below.
+A `UpdateHabitCommand` object is returned from the `UpdateParser` if the user input is successfully parsed as shown below.
 If the update command is not provided with a goal index and a habit index, or without any update flags it will throw an exception.
 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateHabitCommandParserSequenceDiagram.png)
@@ -362,6 +362,11 @@ The `runCommand` method is then executed for the `UpdateHabitCommand` object as 
 
 
 ### 4.8. Deleting a Goal
+This command allows you to delete goals from _Ha(ppy)Bit_. This allows them to rid the app of goals 
+you decide not to pursue any further or may deem to be irrelevant.
+
+A `DeleteGoalCommand` object is returned from the `DeleteParser` if the user input is successfully parsed as shown below.
+If the delete command is not provided with a goal index, it will throw an exception.
 
 When the `runCommand` method is executed for the `DeleteGoalCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
@@ -458,23 +463,23 @@ The instructions below are for the manual testing of the program.
 ### Launching and Exiting the Program
 
 1. Launch
-  * Download the jar file [here](UserGuide.md#1-quick-start) and copy the file into an empty folder.
-  * Open your terminal and type in the command `java -jar happybit.jar` to start up the program.
-  * You should see the start-up page with the start-up menu as shown below.
+   * Download the jar file [here](UserGuide.md#1-quick-start) and copy the file into an empty folder.
+   * Open your terminal and type in the command `java -jar happybit.jar` to start up the program.
+   * You should see the start-up page with the start-up menu as shown below.
   
 ![Start Up Page](Display_Images/StartUpPage.png)
 
 2. Navigation
-  * Select from the start-up menu by typing in the corresponding option number.
-  * You can find out more about the various options at our [User Guide](UserGuide.md#12-main-interface).
-  * There will be an error message shown if you select an invalid option.
-  * Test: `-1` to see the error message.
+   * Select what you are interested in from the start-up menu by typing in the corresponding option number.
+   * You can find out more about the various options at our [User Guide](UserGuide.md#12-main-interface).
+   * There will be an error message shown if you select an invalid option.
+   * Test: `-1` to see the error message.
 
 ![Menu Error Message](Display_Images/MenuError.png)
 
 3. Exit
-  * To exit the program, select option `6`.
-  * You should see the exit message before the program terminates as shown below.
+   * To exit the program, select option `6`. 
+   * You should see the exit message before the program terminates as shown below.
   
 ![Exit Message](Display_Images/ExitMessage.png)
 
@@ -485,12 +490,12 @@ The instructions below are for the manual testing of the program.
 
 ![Start Application](Display_Images/StartApp.png)
 
-3. Command screen takes in user's input at `Command: `. Press 'enter' after typing in your command.
+3. Command screen takes in your input at `Command: `. Press 'enter' after typing in your command.
 4. For example, to set a goal: `set n/Wake up at 8am everyday t/sl s/08112021 e/15112021`
-  * The name of goal: `Wake up at 8am everyday`
-  * The goal is classified as a sleeping goal: `sl`
-  * Start the goal at: `08112021` (08 Nov 2021)
-  * End the goal at: `15112021` (15 Nov 2021)
+   * The name of goal: `Wake up at 8am everyday`
+   * The goal is classified as a sleeping goal: `sl`
+   * Start the goal at: `08112021` (08 Nov 2021)
+   * End the goal at: `15112021` (15 Nov 2021)
 5. After you have entered the command to add a goal, you should see that the goal was successfully added.
 
 ![Added Goal](Display_Images/AddGoal.png)
@@ -507,26 +512,27 @@ After adding in a substantial number of goals and habits, you can test out the d
 ![List of Goals](Display_Images/ListOfGoals.png)
 
 2. To delete a goal, use the command `remove`.
-  * Test: `remove g/6` to remove goal at index `6`.
+   * Test: `remove g/6` to remove goal at index `6`.
 
 ![Delete Goal 1](Display_Images/DeleteGoal1.png)
 
-  * Use the command `list` to see the new index of the goals.
-
+   * Use the command `list` to see the new index of the goals.
+   
 ![New List of Goals](Display_Images/NewListOfGoals.png)
 
 3. Next, use `view` to see the index of the habit under a goal that you want to delete.
+   * Test: `view g/6` to view the habits under goal `6`.
 
 ![View Habits](Display_Images/ViewHabits.png)
 
 5. To delete a habit, use the command `delete`.
-  * Test: `delete g/6 h/1` to delete habit `1` under goal `6`.
+   * Test: `delete g/6 h/1` to delete habit `1` under goal `6`.
 
 ![Delete Habit 1](Display_Images/DeleteHabit1.png)
 
 6. After any deletion, the index of the goals or habits will change. Therefore, make sure to use commands
   `list` and/or `view` to check for the new index of the goals and habits.
-  * Test: `remove g/7` to remove a goal at index `7` that does not exist. Error will be thrown.
+   * Test: `remove g/7` to remove a goal at index `7` that does not exist. Error will be thrown.
 
 ![Delete Error](Display_Images/DeleteError.png)
 
@@ -565,7 +571,7 @@ To check if the data file is read-only and if it is possible to corrupt data fil
 
 To check that in the event the data file is corrupted, all the data will be wiped off:
 
-1. If the data file is for some reason corrupted, note that you will lose **all** data.
+1. If the data file is for some reason corrupted, note that you will lose **all** your data.
 2. Once you enter the application, and it detects that the file is corrupted, it will clear the file.
 
 ![Corrupted File](Display_Images/CorruptedFile.png)
