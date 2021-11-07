@@ -665,6 +665,7 @@ exploratory testing.
    
    1 finals by: 11 Nov 2021 10:00 AM Weightage 50% [ ]
    2 midterms by: 11 Sep 2021 01:00 PM Weightage 50% [ ]
+   
    ``` 
 
 ## Editing a task
