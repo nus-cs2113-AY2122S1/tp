@@ -114,7 +114,7 @@ How the `StorageEncoder` class works:
    saved
 2. If the save file directory has not been created yet, it is first created in order to store the save file
 3. Similarly, an empty file is created to store the data if it has not been created yet
-4. Then, the object `SemesterList` is  converted into a JSON file with an `ObjectMapper`
+4. Then, the object `SemesterList` which holds all NoCap information is  converted into a JSON file with an `ObjectMapper`
    object from the  `jackson-databind` library
 5. Upon completion, the data file is saved in a default data directory.
 
@@ -620,14 +620,15 @@ exploratory testing.
     4. Expected:
     ```
     You are missing a description!
-    ```
+   ```
 
 ## Adding a GradableTask to module
 
 1. Prerequisite: Module CS2040C should already exist.
 2. Adding a valid GradableTask to module.
     1. Run the command: `/m cs2040c addgradable finals /by 11/11/2021 1000 /w 50`
-    2. Expected:  
+    2. Expected:
+
     ```
     Added new task to CS2040C
     finals by: 11 Nov 2021 10:00 AM Weightage 50% [ ]
@@ -636,9 +637,10 @@ exploratory testing.
     ##################################################
     |-----------------------1------------------------|
     1: finals
-    
+        
     1 finals by: 11 Nov 2021 10:00 AM Weightage 50% [ ]
-    ```
+    ``` 
+    
 3. Adding a GradableTask with an invalid syntax.
     1. Run the command : `/m cs2040c addgradable finals /by 00/00/00 /w 50`
     2. Expected:
@@ -665,6 +667,7 @@ exploratory testing.
    
    1 finals by: 11 Nov 2021 10:00 AM Weightage 50% [ ]
    2 midterms by: 11 Sep 2021 01:00 PM Weightage 50% [ ]
+   
    ``` 
 
 ## Editing a task
