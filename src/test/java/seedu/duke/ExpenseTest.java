@@ -9,16 +9,9 @@ import seedu.duke.expense.Expense;
 import seedu.duke.trip.FilterFinder;
 import seedu.duke.trip.Trip;
 
-<<<<<<<<< Temporary merge branch 1
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-=========
 import java.io.ByteArrayInputStream;
->>>>>>>>> Temporary merge branch 2
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
