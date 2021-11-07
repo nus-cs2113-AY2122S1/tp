@@ -46,12 +46,15 @@ to default SDK.
 ![Intellij ProjectStructure](https://github.com/AY2122S1-CS2113T-F11-2/tp/blob/master/docs/images/ProjectStructureSettings.png)
 
 4) Importing project
-Follow the guide at IDEA: Importing a Gradle project to import the forked project into Intellij.
-❗Note: Importing a Gradle project is slightly different from importing a normal Java project.
+Right click on the Repository folder that you have clone into your machine and select "Open Folder as Intellij IDEA Community Edition Project".
+When you are asked whether to trust and open gradle project, click trust. 
 
-5) Verifying setup
-Run the decodex.Decodex.java and try a few commands.
-Run the tests to ensure they all pass.
+![Intellij ProjectStructure](https://github.com/AY2122S1-CS2113T-F11-2/tp/blob/master/docs/images/TrustGradle.png)
+
+5) Verifying BudgetTracker Runs
+Right click on BudgetTracker then click on run to test our our BudgetTracker App. 
+
+![Intellij Run BudgetTracker](https://github.com/AY2122S1-CS2113T-F11-2/tp/blob/master/docs/images/BudgetTrackerRun.png)
 
 ### Additional Consideration
 
