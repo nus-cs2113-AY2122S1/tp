@@ -1,0 +1,33 @@
+@startuml
+!include SequenceStyle.puml
+skinparam actorStyle awesome
+actor User as user
+package UI UI_BOX_COLOR
+package Terminus TERMINUS_BOX_COLOR
+package Parser PARSER_BOX_COLOR
+package Command COMMAND_BOX_COLOR
+package Module MODULE_BOX_COLOR
+package Content CONTENT_BOX_COLOR
+package ActiveRecall ACTIVERECALL_BOX_COLOR
+package Storage STORAGE_BOX_COLOR
+file data [
+  <size:100><&document></size>
+]
+
+user -> UI
+Terminus ..> UI
+Terminus ..> Parser
+Terminus ..> Command
+Parser ..> Command
+Content <.r. Module
+Command ..> Module
+ActiveRecall ...> UI
+Command ..> ActiveRecall
+Terminus ..> Storage
+
+ActiveRecall ..> Module
+Storage ..> Command
+Storage ..> Module
+Storage -> data
+Terminus ..> Module
+@enduml

@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include ../SequenceStyle.puml
+
+mainframe sd createGameEnvironment
+
+box "Commands" #thistle
+participant ":TestCommand" as TestCommand #violet
+endbox
+box "Ui" #bisque
+participant ":Ui" as Ui
+endbox
+box "Active Recall" #lightblue
+participant ":GameEnvironment" as GameEnvironment #lightskyblue
+participant ":QuestionGenerator" as QuestionGenerator #lightskyblue
+participant ":DifficultyModifier" as DifficultyModifier #lightskyblue
+participant ":Question" as Question #lightskyblue
+endbox
+
+-> TestCommand : execute(moduleManager)
+activate TestCommand
+TestCommand -> GameEnvironment : createNewEnvironment(questions, count)
+activate GameEnvironment
+  GameEnvironment -> Ui : getInstance()
+  activate Ui
+  return ui
+  create QuestionGenerator
+  GameEnvironment -> QuestionGenerator : new QuestionGenerator(questions, count)
+  activate QuestionGenerator
+  return QuestionGenerator
+return GameEnvironment
+
+@enduml

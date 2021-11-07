@@ -1,0 +1,30 @@
+@startuml
+!include SequenceStyle.puml
+box "Main" TERMINUS_BOX_COLOR
+participant ":Terminus" as Terminus TERMINUS_COLOR
+endbox
+box "Parser" PARSER_BOX_COLOR
+participant ":MainCommandParser" as MainCommandParser PARSER_COLOR
+participant ":NoteCommandParser" as NoteCommandParser PARSER_COLOR
+participant ":ModuleWorkspaceCommandParser" as ModuleWorkspaceCommandParser PARSER_COLOR
+endbox
+box "Command" COMMAND_BOX_COLOR
+participant ":GoCommand" as GoCommand COMMAND_COLOR
+participant ":NoteCommand" as NoteCommand COMMAND_COLOR
+participant ":AddNoteCommand" as AddNoteCommand COMMAND_COLOR
+participant ":CommandResult" as CommandResult COMMAND_COLOR
+endbox
+box "Module" MODULE_BOX_COLOR
+participant  ":ModuleManager" as ModuleManger MODULE_COLOR
+endbox
+autoactivate on
+
+Terminus -> MainCommandParser: parseCommand(command)
+  MainCommandParser -> GoCommand: parseArguments(arguments)
+  return
+return GoCommand
+Terminus -> GoCommand: execute(moduleManager)
+
+ref over NoteCommandParser, ModuleManger:Go Execution
+return CommandResult
+@enduml

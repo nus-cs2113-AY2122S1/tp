@@ -1,26 +1,54 @@
+
 Welcome to TermiNUS!
+You have no schedule for today.
+
+Type any of the following to get started:
+> exit
+> help
+> module
+> go
+> timetable
+
+[] >>> Command not found! Type 'help' for a list of commands.
+[] >>> Command not found! Type 'help' for a list of commands.
+[] >>> Command not found! Type 'help' for a list of commands.
+[] >>> Module TEST has been added
+[] >>> 
+Entering TEST workspace
 
 Type any of the following to get started:
 > exit
 > help
 > note
 > schedule
+> question
+> back
 
-[] >>> Command not found! Type 'help' for a list of commands.
-[] >>> Command not found! Type 'help' for a list of commands.
-[] >>> Command not found! Type 'help' for a list of commands.
-[] >>> note has been added!
-[] >>> 1. CS2113T
+[TEST] >>> Error: Missing arguments or Invalid arguments.
+Format: note add "<note name>" "<note content>"
+[TEST] >>> Your note on 'CS2113T' has been added!
+[TEST] >>> List of Content
+---------------
+1. CS2113T
 
-[] >>> Error: Invalid numerical value provided.
-[] >>> Error: Content not found.
-[] >>> Name: CS2113T
-Content: Week 8 test
+Rerun the same command with an index behind to view the content.
+[TEST] >>> Error: Invalid numerical value provided or content could not be found.
+Format: note view {item number}
+[TEST] >>> Error: Invalid numerical value provided or content could not be found.
+[TEST] >>> Name: CS2113T
+Content:
+Week 8 test
 
-[] >>> Error: Invalid numerical value provided.
-[] >>> Error: Content not found.
-[] >>> Note 'CS2113T' has been deleted!
-[] >>> exit : Exits the program.
+[TEST] >>> Error: Missing arguments or Invalid arguments.
+Format: note delete <item number>
+[TEST] >>> Error: Invalid numerical value provided or content could not be found.
+Format: note delete <item number>
+[TEST] >>> Error: Invalid numerical value provided or content could not be found.
+[TEST] >>> Your note on 'CS2113T' has been deleted!
+[TEST] >>> 
+Help Menu
+---------
+exit : Exits the program.
 Format: exit
 
 help : Prints the help page.
@@ -32,19 +60,39 @@ Format: note
 schedule : Move to schedules workspace.
 Format: schedule
 
-[] >>> schedule has been added!
-[] >>> schedule has been added!
-[] >>> Command not found! Type 'help' for a list of commands.
-[] >>> 1. CS2113T Tutorial, Thursday, 10:00, zoom.nus.sg
-2. CS2113T Lecture, Friday, 16:00, zoom.com
+question : Move to questions workspace.
+Format: question
 
-[] >>> Error: Content not found.
-[] >>> CS2113T Lecture, Friday, 16:00, zoom.com
-[] >>> Error: Content not found.
-[] >>> Link 'CS2113T Tutorial' has been deleted!
-[] >>> 1. CS2113T Lecture, Friday, 16:00, zoom.com
+back : Returns to the parent workspace.
+Format: back
 
-[] >>> Command not found! Type 'help' for a list of commands.
-[] >>> Command not found! Type 'help' for a list of commands.
-[] >>> Link 'CS2113T Lecture' has been deleted!
-[] >>> Goodbye!
+[TEST] >>> Error: Missing arguments or Invalid arguments.
+Format: schedule add "<link description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"
+[TEST] >>> Error: Missing arguments or Invalid arguments.
+Format: schedule add "<link description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"
+[TEST] >>> Error: Missing arguments or Invalid arguments.
+Format: schedule add "<link description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"
+[TEST] >>> Your schedule on 'CS2113T Tutorial' has been added!
+[TEST] >>> Your schedule on 'CS2113T Lecture' has been added!
+[TEST] >>> Command not found! Type 'help' for a list of commands.
+[TEST] >>> List of Content
+---------------
+1. CS2113T Tutorial (Thursday, 10:00 - 12:00): https://zoom.us/test
+2. CS2113T Lecture (Friday, 16:00 - 18:00): https://zoom.us/test
+
+Rerun the same command with an index behind to view the content.
+[TEST] >>> Error: Invalid numerical value provided or content could not be found.
+[TEST] >>> CS2113T Lecture (Friday, 16:00 - 18:00): https://zoom.us/test
+[TEST] >>> Error: Missing arguments or Invalid arguments.
+Format: schedule delete <item number>
+[TEST] >>> Error: Invalid numerical value provided or content could not be found.
+[TEST] >>> Your link on 'CS2113T Tutorial' has been deleted!
+[TEST] >>> List of Content
+---------------
+1. CS2113T Lecture (Friday, 16:00 - 18:00): https://zoom.us/test
+
+Rerun the same command with an index behind to view the content.
+[TEST] >>> Command not found! Type 'help' for a list of commands.
+[TEST] >>> Command not found! Type 'help' for a list of commands.
+[TEST] >>> Your link on 'CS2113T Lecture' has been deleted!
+[TEST] >>> Goodbye!

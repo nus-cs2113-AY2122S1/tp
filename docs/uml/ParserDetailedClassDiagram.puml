@@ -1,0 +1,27 @@
+@startuml
+!include ClassStyle.puml
+
+!includesub ParserClassDiagram.puml!COMMANDPARSER
+
+abstract class "{abstract}\nInnerModuleCommandParser" as InnerModuleCommandParser PARSER_COLOR extends CommandParser {
+-moduleName: String
++parseCommand(command: String): Command
+ }
+
+class QuestionCommandParser PARSER_COLOR extends InnerModuleCommandParser {
+- {static} parser: QuestionCommandParser
++{static}getInstance(): QuestionCommandParser
+}
+class LinkCommandParser PARSER_COLOR extends InnerModuleCommandParser {
+- {static} parser: LinkCommandParser
++{static}getInstance(): LinkCommandParser
+}
+class NoteCommandParser PARSER_COLOR extends InnerModuleCommandParser {
+- {static} parser: NoteCommandParser
++{static}getInstance(): NoteCommandParser
+}
+class XYZCommandParser PARSER_COLOR extends CommandParser {
+- {static} parser: XYZCommandParser
++{static}getInstance(): XYZCommandParser
+}
+@enduml

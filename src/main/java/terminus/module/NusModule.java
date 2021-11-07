@@ -1,64 +1,53 @@
 package terminus.module;
 
-import java.util.ArrayList;
+import terminus.common.TerminusLogger;
 import terminus.content.Content;
 import terminus.content.ContentManager;
 import terminus.content.Link;
 import terminus.content.Note;
+import terminus.content.Question;
 
+/**
+ * NusModule class to represent a Module object.
+ */
 public class NusModule {
 
-    private ArrayList<Content> notes;
-    private ArrayList<Content> links;
+    private final transient ContentManager<Note> noteManager;
+    private final ContentManager<Link> linkManager;
+    private final ContentManager<Question> questionManager;
 
-    private ContentManager contentManager;
-
+    /**
+     * Creates a NusModule object.
+     */
     public NusModule() {
-        contentManager = new ContentManager();
-        notes = new ArrayList<Content>();
-        links = new ArrayList<Content>();
+        noteManager = new ContentManager<>();
+        linkManager = new ContentManager<>();
+        questionManager = new ContentManager<>();
     }
 
-    public ContentManager getContentManager() {
-        return contentManager;
-    }
-
-    public ArrayList<Content> getNotes() {
-        return notes;
-    }
-
-    public void setNotes(ArrayList<Content> notes) {
-        this.notes = notes;
-    }
-
-    public ArrayList<Content> getLinks() {
-        return links;
-    }
-
-    public void setLinks(ArrayList<Content> links) {
-        this.links = links;
-    }
-
-    public <T> void set(T type, ArrayList<Content> contents) {
+    /**
+     * Returns a ContentManager object based on the provided class type.
+     *
+     * @param type Content class type.
+     * @param <T>  Content object type.
+     * @return The ContentManager object based on the provided class type.
+     */
+    public <T extends Content> ContentManager<T> getContentManager(Class<T> type) {
+        TerminusLogger.info(String.format("Get ContentManager from NusModule with provided class type: %s", type));
+        ContentManager<T> result = null;
         if (type == Note.class) {
-            this.notes = contents;
+            result = (ContentManager<T>) this.noteManager;
         } else if (type == Link.class) {
-            this.links = contents;
+            result = (ContentManager<T>) this.linkManager;
+        } else if (type == Question.class) {
+            result = (ContentManager<T>) this.questionManager;
         } else {
-            //error encountered
+            // Fatal error encountered
+            TerminusLogger.severe(String.format("Class type provided not found: %s", type));
+            assert false;
+            return null;
         }
-    }
-
-    public <T> ArrayList<Content> get(T type) {
-        ArrayList<Content> result = new ArrayList<>();
-        if (type == Note.class) {
-            result = this.notes;
-        } else if (type == Link.class) {
-            result = this.links;
-        } else {
-            //error encountered
-        }
+        TerminusLogger.info("ContentManager found");
         return result;
     }
-
 }

@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include SequenceStyle.puml
+box "Command" COMMAND_BOX_COLOR
+participant ":NoteCommand" as NoteCommand COMMAND_COLOR
+participant ":AddNoteCommand" as AddNoteCommand COMMAND_COLOR
+participant ":CommandResult" as CommandResult COMMAND_COLOR
+endbox
+
+box "Parser" PARSER_BOX_COLOR
+participant ":NoteCommandParser" as NoteCommandParser PARSER_COLOR
+endbox
+autoactivate on
+mainframe sd Note Execution
+
+-> NoteCommand:execute(moduleManager)
+  alt if arguments != null
+    NoteCommand -> NoteCommandParser: setModule(moduleName)
+    return
+    NoteCommand -> NoteCommandParser: parseCommand(arguments)
+    return AddNoteCommand
+    NoteCommand -> AddNoteCommand: setModule(moduleName)
+    return
+    NoteCommand -> AddNoteCommand: execute(moduleManager)
+      create CommandResult
+      AddNoteCommand -> CommandResult
+    return CommandResult
+  return CommandResult
+  else else
+    create CommandResult
+    NoteCommand -> CommandResult
+    return CommandResult
+  end
+return CommandResult
+@enduml

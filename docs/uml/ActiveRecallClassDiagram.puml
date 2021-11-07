@@ -1,0 +1,71 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+!include ClassStyle.puml
+
+TestCommand ..> GameEnvironment
+
+GameEnvironment -> "1" Ui : "ui"
+Ui <. GameEnvironment
+GameEnvironment *--> "1" QuestionGenerator : "questionGenerator"
+DifficultyModifier <. GameEnvironment
+QuestionGenerator -> "1..*" Question : "questionBank"
+note top on link 
+  questionBank is stored as
+  a Map<Double, Question>
+  where Double is the weight
+endnote
+GameEnvironment ..>  Question
+
+class TestCommand COMMAND_COLOR{
+  + execute(ModuleManager moduleManager): void
+}
+
+class GameEnvironment ACTIVERECALL_COLOR{
+  GameEnvironment(Ui ui, QuestionGenerator generator)
+  + run(): void
+  - showPreGameInformation(): void
+  - promptQuestion(): Question
+  - getUserFeedback(): int
+  - updateQuestionDifficulty(Question question, int difficulty): void
+  + {static} createNewEnvironment(List<Question> questions, int questionCount)
+}
+
+class QuestionGenerator ACTIVERECALL_COLOR{
+  - random: Random
+  - total: double
+  - questionCount: int
+  + QuestionGenerator(List<Question> questionBank, int questionCount)
+  + QuestionGenerator(List<Question> questionBank, int questionCount, Random random)
+  + hasNext(): boolean
+  + next(): Question
+  + getQuestionPoolSize(): int
+  - addQuestion(Question question): void
+}
+
+class Question ACTIVERECALL_COLOR{
+  - name
+  - data
+  - weight
+  + Question(String question, String answer)
+}
+
+note bottom of Question
+  The name and data represents
+  question and answer respectively.
+endnote
+
+class Ui {
+  + printSection(String... strings): void
+  + getUserInput(String prompt): String
+  + {static} getInstance(): Ui
+}
+
+class DifficultyModifier ACTIVERECALL_COLOR{
+  + {static} tweakEasyQuestionDifficulty(double initial): double
+  + {static} tweakHardQuestionDifficulty(double initial): double
+  - {static} getCurveValue(double x): double
+}
+
+
+@enduml

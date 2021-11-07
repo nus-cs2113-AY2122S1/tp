@@ -1,0 +1,46 @@
+@startuml
+!include ClassStyle.puml
+!includesub Module.puml!MODULEMANAGER
+!includesub ParserClassDiagram.puml!COMMANDPARSER
+
+
+!startsub COMMAND
+abstract class "{abstract}\nCommand" as Command COMMAND_COLOR {
+  # arguments: String
+  - moduleName: String
+  + {abstract} getFormat(): String
+  + {abstract} getHelpMessage(): String
+  + parseArguments(arguments: String): void
+  + {abstract} execute(moduleManager: ModuleManager): CommandResult
+
+}
+!endsub
+class XYZCommand COMMAND_COLOR {
+  + execute(moduleManager: ModuleManager): CommandResult
+  + getHelpMessage(): String
+  + getFormat(): String
+}
+
+class CommandResult COMMAND_COLOR {
+
+  # newCommandParser: CommandParser
+  # hasChange: boolean
+  # isExit: boolean
+  # message: String[]
+  # storageAction: StorageActionEnum
+  # storageType: StorageTypeEnum
+  # module: String
+  + isExit(): boolean
+  + getNewCommandParser(): CommandParser
+  + getMessage(): String[]
+  + getStorageAction(): StorageActionEnum
+  + getStorageType(): StorageTypeEnum
+}
+
+Command ..> "1" CommandResult: returns >
+Command ..> "1" ModuleManager: modifies
+CommandResult ..> "0..1" CommandParser: contains >
+CommandParser -> "2..*" Command: has >
+XYZCommand --|> Command
+
+@enduml

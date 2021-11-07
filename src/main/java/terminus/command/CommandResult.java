@@ -1,71 +1,113 @@
 package terminus.command;
 
 import terminus.parser.CommandParser;
+import terminus.storage.StorageActionEnum;
+import terminus.storage.StorageTypeEnum;
 
 public class CommandResult {
 
-    protected CommandParser additionalData;
-    protected boolean isOk;
+    protected boolean hasChange;
+    protected CommandParser newCommandParser;
+    protected String[] message;
     protected boolean isExit;
-    protected String errorMessage;
 
-    public CommandResult(boolean isOk, boolean isExit, CommandParser additionalData, String errorMessage) {
-        this.additionalData = additionalData;
-        this.isOk = isOk;
-        this.errorMessage = errorMessage;
+    protected StorageActionEnum storageAction;
+    protected StorageTypeEnum storageType;
+    protected String module;
+
+    protected String deletedItemName;
+
+    public CommandResult(String... message) {
+        this(false, null, message);
+    }
+
+    public CommandResult(CommandParser parser) {
+        this(false, parser);
+    }
+
+    public CommandResult(boolean isExit) {
+        this(isExit, null);
+    }
+
+    public CommandResult(boolean isExit, CommandParser newCommandParser, String... message) {
+        this.message = message;
+        this.newCommandParser = newCommandParser;
         this.isExit = isExit;
+        this.hasChange = false;
     }
 
-    public CommandResult(boolean isOk, boolean isExit) {
-        this(isOk, isExit, null, null);
-    }
-
-    public CommandResult(boolean isOk, CommandParser additionalData) {
-        this(isOk, false, additionalData, null);
-    }
-
-    public CommandResult(boolean isOk, String errorMessage) {
-        this(isOk, false, null, errorMessage);
-    }
-
-    public CommandResult(boolean isOk) {
-        this(isOk, false, null, null);
+    public CommandResult(String module, StorageActionEnum action, StorageTypeEnum type, String... message) {
+        this(message);
+        this.storageAction = action;
+        this.storageType = type;
+        this.module = module;
+        this.hasChange = true;
     }
 
     /**
      * Returns the CommandParser that is required to switch workspaces.
      * If additionalData will be null.
      *
-     * @return The CommandParser object for the workspace or else null
+     * @return The CommandParser object for the workspace or else null.
      */
-    public CommandParser getAdditionalData() {
-        return additionalData;
+    public CommandParser getNewCommandParser() {
+        return newCommandParser;
+    }
+
+    /**
+     * Returns the message that the command wishes to output.
+     *
+     * @return The message that the command wishes to output.
+     */
+    public String[] getMessage() {
+        return message;
     }
 
     /**
      * Returns the result of the command execution.
      *
-     * @return True if successful or else false
+     * @return True if successful or else false.
      */
+    @Deprecated
     public boolean isOk() {
-        return isOk;
+        return true;
     }
 
     /**
      * Returns the result to exit or not.
      *
-     * @return True if 'exit' command is sent
+     * @return True if 'exit' command is sent.
      */
     public boolean isExit() {
         return isExit;
     }
 
     /**
-     * Returns the error message as a String.
+     * Returns the information to alter data in file storage.
      *
-     * @return The String object containing the error
+     * @return True if it requires file storage or else false.
      */
-    public String getErrorMessage() {
-        return errorMessage;
+    public boolean hasChange() {
+        return hasChange;
+    }
+
+    public StorageActionEnum getStorageAction() {
+        return storageAction;
+    }
+
+    public StorageTypeEnum getStorageType() {
+        return storageType;
+    }
+
+    public String getModule() {
+        return module;
+    }
+
+    public String getDeletedItemName() {
+        return deletedItemName;
+    }
+
+    public void setDeletedItemName(String deletedItemName) {
+        this.deletedItemName = deletedItemName;
     }
 }

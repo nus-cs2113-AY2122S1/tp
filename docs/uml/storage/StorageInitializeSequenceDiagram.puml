@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include ../SequenceStyle.puml
+
+box Main TERMINUS_BOX_COLOR
+participant ":Terminus" as Terminus TERMINUS_COLOR
+endbox
+
+box Storage STORAGE_BOX_COLOR
+participant ":StorageManager" as StorageManager STORAGE_COLOR
+participant ":JsonStorage" as JsonStorage STORAGE_COLOR
+participant ":NoteStorage" as NoteStorage STORAGE_COLOR
+participant ":PdfStorage" as PdfStorage STORAGE_COLOR
+participant ":FolderStorage" as FolderStorage STORAGE_COLOR
+endbox
+
+-> Terminus : initialize()
+activate Terminus
+
+create StorageManager
+  Terminus -> StorageManager : StorageManager(:Path, :String)
+  activate StorageManager
+    create JsonStorage
+      StorageManager -> JsonStorage : JsonStorage(:Path, :String)
+      activate JsonStorage
+    return jsonStorage
+    create NoteStorage
+      StorageManager -> NoteStorage : NoteStorage(:Path)
+      activate NoteStorage
+    return noteStorage
+    create PdfStorage
+      StorageManager -> PdfStorage : PdfStorage(:Path)
+      activate PdfStorage
+    return pdfStorage
+    create FolderStorage
+      StorageManager -> FolderStorage : FolderStorage(:Path)
+      activate FolderStorage
+    return folderStorage
+  return storageManager
+|||
+
+@enduml

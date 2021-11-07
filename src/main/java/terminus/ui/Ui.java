@@ -1,35 +1,37 @@
 package terminus.ui;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Scanner;
+import terminus.module.ModuleManager;
 import terminus.parser.CommandParser;
 
 public class Ui {
 
-    private static final String BANNER = "Welcome to TermiNUS!";
     private static final String PROMPT = "[%s] >>> ";
+    private static final Ui UI = new Ui();
 
     private final Scanner scanner;
 
-    public Ui() {
-        this.scanner = new Scanner(System.in);
+    private Ui() {
+        this(System.in);
     }
-
-    /**
-     * Prints the banner.
-     */
-    public void printBanner() {
-        System.out.println(BANNER);
+    
+    public Ui(InputStream in) {
+        this.scanner = new Scanner(in);
     }
 
     /**
      * Prints the banner for a workspace, which includes all the commands in the parser.
      */
-    public void printParserBanner(CommandParser parser) {
-        printSection(parser.getCommandList()
-            .stream()
-            .reduce("\nType any of the following to get started:\n",
-                (x, y) -> String.format("%s> %s\n", x, y))
+    public void printParserBanner(CommandParser parser, ModuleManager moduleManager) {
+        printSection(
+            "",
+            parser.getWorkspaceBanner(moduleManager),
+            parser.getCommandList()
+                .stream()
+                .reduce("\nType any of the following to get started:\n",
+                    (x, y) -> String.format("%s> %s\n", x, y))
         );
     }
 
@@ -44,8 +46,7 @@ public class Ui {
         if (validatedWorkspaceName == null) {
             validatedWorkspaceName = "";
         }
-        System.out.printf(PROMPT, validatedWorkspaceName);
-        return scanner.nextLine();
+        return getUserInput(String.format(PROMPT, validatedWorkspaceName));
     }
 
     /**
@@ -62,5 +63,19 @@ public class Ui {
      */
     public void printExitMessage() {
         System.out.println("Goodbye!");
+    }
+
+    /**
+     * Get the input of the user through the Scanner.
+     * 
+     * @return The user input from the Scanner.
+     */
+    public String getUserInput(String prompt) {
+        System.out.print(prompt);
+        return scanner.nextLine();
+    }
+    
+    public static Ui getInstance() {
+        return UI;
     }
 }

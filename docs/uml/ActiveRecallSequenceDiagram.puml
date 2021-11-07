@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include SequenceStyle.puml
+
+box "Commands" #thistle
+participant ":TestCommand" as TestCommand #violet
+endbox
+box "Ui" #bisque
+participant ":Ui" as Ui
+endbox
+box "Active Recall" #lightblue
+participant ":GameEnvironment" as GameEnvironment #lightskyblue
+participant ":QuestionGenerator" as QuestionGenerator #lightskyblue
+participant ":DifficultyModifier" as DifficultyModifier #lightskyblue
+participant ":Question" as Question #lightskyblue
+endbox
+
+-> TestCommand : execute(moduleManager)
+activate TestCommand
+ref over TestCommand, GameEnvironment, QuestionGenerator : createGameEnvironment
+
+TestCommand -> GameEnvironment : run()
+activate GameEnvironment
+  GameEnvironment -> GameEnvironment : showPreGameInformation()
+  activate GameEnvironment 
+  return
+  loop questionGenerator.hasNext()
+    ref over Ui, GameEnvironment, QuestionGenerator : showQuestion
+    ref over Ui, GameEnvironment : getUserFeedback
+    break difficulty == EXIT_CODE
+      note across: Breaks the loop and returns to TestCommand
+    end
+    ref over GameEnvironment, DifficultyModifier, Question : updateQuestionDifficulty
+    |||
+  end
+return
+
+return CommandResult(true)
+
+@enduml

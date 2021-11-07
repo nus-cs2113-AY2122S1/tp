@@ -1,16 +1,15 @@
 package terminus.command;
 
+import terminus.common.CommonUtils;
+import terminus.common.Messages;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
-import terminus.exception.InvalidTimeFormatException;
-import terminus.module.NusModule;
-import terminus.ui.Ui;
+import terminus.module.ModuleManager;
 
 public abstract class Command {
 
-    public Command() {
-
-    }
+    protected String arguments;
+    private String moduleName;
 
     /**
      * Returns the format for the command.
@@ -30,24 +29,41 @@ public abstract class Command {
      * Parses remaining arguments for the command.
      *
      * @param arguments The string arguments to be parsed in to the respective fields.
-     * @throws InvalidArgumentException Exception for when arguments parsing fails
-     * @throws InvalidTimeFormatException Exception for when time format is invalid
+     * @throws InvalidArgumentException when arguments parsing fails.
      */
-    public void parseArguments(String arguments) throws InvalidArgumentException, InvalidTimeFormatException {
-
+    public void parseArguments(String arguments)
+        throws InvalidArgumentException {
+        if (!CommonUtils.isStringNullOrEmpty(arguments)) {
+            throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_INVALID_INPUT);
+        }
     }
 
     /**
      * Executes the command.
-     * Prints the required result to the Ui.
      *
-     * @param ui     The Ui object to send messages to the users.
-     * @param module The NusModule contain the list of all notes and schedules.
+     * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return The CommandResult object indicating the success of failure including additional options.
-     * @throws InvalidCommandException  Exception for when the command could not be found.
-     * @throws InvalidArgumentException Exception for when arguments parsing fails
-     * @throws InvalidTimeFormatException Exception for when time format is invalid
+     * @throws InvalidCommandException  when the command could not be found.
+     * @throws InvalidArgumentException when arguments parsing fails.
      */
-    public abstract CommandResult execute(Ui ui, NusModule module)
-            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException;
+    public abstract CommandResult execute(ModuleManager moduleManager)
+            throws InvalidCommandException, InvalidArgumentException;
+
+    /**
+     * Returns the module name.
+     *
+     * @return The String containing the module name
+     */
+    public String getModuleName() {
+        return moduleName;
+    }
+
+    /**
+     * Sets the module name.
+     *
+     * @param moduleName The String containing the module name to set
+     */
+    public void setModuleName(String moduleName) {
+        this.moduleName = moduleName;
+    }
 }

@@ -6,19 +6,25 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.ExitCommand;
+import terminus.command.GoCommand;
 import terminus.command.HelpCommand;
-import terminus.command.NotesCommand;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
-import terminus.exception.InvalidTimeFormatException;
+import terminus.module.ModuleManager;
 
 public class MainCommandParserTest {
-    
+
     private MainCommandParser commandParser;
+
+    private ModuleManager moduleManager;
+    private String tempModule = "test";
 
     @BeforeEach
     void setUp() {
         this.commandParser = MainCommandParser.getInstance();
+        moduleManager = new ModuleManager();
+        moduleManager.addModule(tempModule);
+
     }
 
     @Test
@@ -26,24 +32,22 @@ public class MainCommandParserTest {
         assertThrows(InvalidCommandException.class, () -> commandParser.parseCommand("ex it"));
         assertThrows(InvalidCommandException.class, () -> commandParser.parseCommand("helpa"));
         assertThrows(InvalidCommandException.class, () -> commandParser.parseCommand(""));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("eXiT a"));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("HeLp    a"));
     }
 
     @Test
-    void parseCommand_resolveExitCommand_success()
-            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
+    void parseCommand_resolveExitCommand_success() throws InvalidCommandException, InvalidArgumentException {
         assertTrue(commandParser.parseCommand("exit") instanceof ExitCommand);
         assertTrue(commandParser.parseCommand("EXIT") instanceof ExitCommand);
         assertTrue(commandParser.parseCommand("   exit   ") instanceof ExitCommand);
-        assertTrue(commandParser.parseCommand("eXiT a") instanceof ExitCommand);
     }
-    
+
     @Test
-    void parseCommand_resolveHelpCommand_success()
-            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
+    void parseCommand_resolveHelpCommand_success() throws InvalidCommandException, InvalidArgumentException {
         assertTrue(commandParser.parseCommand("help") instanceof HelpCommand);
         assertTrue(commandParser.parseCommand("HELP") instanceof HelpCommand);
         assertTrue(commandParser.parseCommand("   help   ") instanceof HelpCommand);
-        assertTrue(commandParser.parseCommand("HeLp    a") instanceof HelpCommand);
     }
 
     @Test
@@ -51,15 +55,14 @@ public class MainCommandParserTest {
         assertTrue(commandParser.getCommandList().contains("exit"));
         assertTrue(commandParser.getCommandList().contains("help"));
     }
-    
+
     @Test
-    void parseCommand_resolveNoteCommand_success()
-            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
-        assertTrue(commandParser.parseCommand("note") instanceof NotesCommand);
-        assertTrue(commandParser.parseCommand("NOTE") instanceof NotesCommand);
-        assertTrue(commandParser.parseCommand("   note   ") instanceof NotesCommand);
-        assertTrue(commandParser.parseCommand("note    help") instanceof NotesCommand);
-        assertTrue(commandParser.parseCommand("note    exit") instanceof NotesCommand);
+    void parseCommand_resolveNoteCommand_success() throws InvalidCommandException, InvalidArgumentException {
+        assertTrue(commandParser.parseCommand("go " + tempModule + " note") instanceof GoCommand);
+        assertTrue(commandParser.parseCommand("go " + tempModule + " NOTE") instanceof GoCommand);
+        assertTrue(commandParser.parseCommand("go " + tempModule + "    note   ") instanceof GoCommand);
+        assertTrue(commandParser.parseCommand("go " + tempModule + " note    help") instanceof GoCommand);
+        assertTrue(commandParser.parseCommand("go " + tempModule + " note    exit") instanceof GoCommand);
     }
 
     @Test

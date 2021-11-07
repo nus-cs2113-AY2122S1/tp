@@ -1,0 +1,26 @@
+@startuml
+!include ClassStyle.puml
+!includesub CommandClassDiagram.puml!COMMAND
+
+!startsub COMMANDPARSER
+abstract class "{abstract}\nCommandParser" as CommandParser PARSER_COLOR{
+ - workplace: String
+ + CommandParser(workspace: String)
+ + {abstract} parseCommand(command: String): Command
+ + getHelpMenu(): String[]
+}
+!endsub
+
+class XYZCommandParser PARSER_COLOR{
+- commandParser: XYZCommandParser
++ parseCommand(command: String): Command
++ {static} getInstance(): XYZCommandParser
+}
+
+class Terminus TERMINUS_COLOR
+
+CommandParser --> "2..*" Command: has >
+Terminus -> "0..1" CommandParser: commandParser
+XYZCommandParser --|>  CommandParser
+
+@enduml

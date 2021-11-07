@@ -1,15 +1,16 @@
 package terminus.command;
 
+import java.util.Arrays;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
+import terminus.common.TerminusLogger;
 import terminus.exception.InvalidCommandException;
-import terminus.module.NusModule;
+import terminus.module.ModuleManager;
 import terminus.parser.CommandParser;
-import terminus.ui.Ui;
 
 public class HelpCommand extends Command {
 
-    private CommandParser commandMap;
+    private final CommandParser commandMap;
 
     public HelpCommand(CommandParser commandMap) {
         this.commandMap = commandMap;
@@ -26,13 +27,13 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void parseArguments(String arguments) {
-
-    }
-
-    @Override
-    public CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException {
-        ui.printSection(commandMap.getHelpMenu());
-        return new CommandResult(true);
+    public CommandResult execute(ModuleManager moduleManager) throws InvalidCommandException {
+        TerminusLogger.info("Executing Help Command");
+        StringBuilder stringBuilder = new StringBuilder(Messages.HELP_MENU_MESSAGE);
+        String helpMessage = Arrays.stream(commandMap.getHelpMenu())
+            .reduce((x, y) -> x + "\n" + y)
+            .orElse("There are no commands in this workspace.");
+        stringBuilder.append(helpMessage);
+        return new CommandResult(stringBuilder.toString());
     }
 }

@@ -1,0 +1,70 @@
+@startuml
+
+!include SequenceStyle.puml
+
+box Command COMMAND_BOX_COLOR
+participant ":AddLinkCommand" as AddLinkCommand COMMAND_COLOR
+endbox
+
+participant ":ConflictManager" as ConflictManager
+
+box Module MODULE_BOX_COLOR
+participant ":ModuleManager" as ModuleManager MODULE_COLOR
+participant ":NusModule" as NusModule MODULE_COLOR
+endbox
+
+box Content CONTENT_BOX_COLOR
+participant ":ContentManager" as ContentManager CONTENT_COLOR
+endbox
+
+participant ":StringBuilder" as StringBuilder
+
+Activate AddLinkCommand
+create ConflictManager
+AddLinkCommand -> ConflictManager: ConflictManager()
+Activate ConflictManager
+
+ConflictManager -> ConflictManager: getConflictingSchedule()
+Activate ConflictManager
+
+ConflictManager -> ConflictManager: getAllLinks()
+Activate ConflictManager
+
+ConflictManager -> ModuleManager: getAllModules()
+Activate ModuleManager
+NusModule --> ModuleManager: modules
+Activate NusModule
+
+loop For each NusModule in modules
+    ModuleManager -> NusModule: getModule(NusModule)
+    Deactivate ModuleManager
+    NusModule -> ContentManager : getContentManager()
+    Activate ContentManager
+    Deactivate NusModule
+    ContentManager -> ContentManager: getContents()
+    Activate ContentManager
+    ContentManager --> ContentManager: contents
+    Deactivate ContentManager
+    ContentManager --> ConflictManager: addAll(contents)
+    Deactivate ContentManager
+    ConflictManager --> ConflictManager: AllLinks
+    Deactivate ConflictManager
+
+    create StringBuilder
+    ConflictManager -> StringBuilder: StringBuilder()
+    Activate StringBuilder
+
+    loop For each Link in AllLinks
+        alt same day && overlapping start-time or end-time
+        ConflictManager -> StringBuilder: append(LinkDescription)
+        StringBuilder --> ConflictManager: conflictingSchedule
+        Deactivate StringBuilder
+    end
+end
+
+ConflictManager --> ConflictManager: conflictingSchedule
+Deactivate ConflictManager
+end
+
+ConflictManager --> AddLinkCommand: conflictingSchedule
+@enduml

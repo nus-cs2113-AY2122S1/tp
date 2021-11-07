@@ -1,0 +1,44 @@
+@startuml
+!include ClassStyle.puml
+
+Content <|-- Note
+Content <|-- Link
+Content <|-- Question
+
+ContentManager  --> "*" Content : contents
+ContentManager ..>  Note
+ContentManager ..>  Link
+ContentManager ..> Question
+
+
+!startsub CONTENTMANAGER
+class ContentManager <T extends Content> CONTENT_COLOR {
+  + add(content: T): void
+  + deleteContent(contentNumber: int): String
+  + getContentData(contentNumber: int): String
+  + getContents(contents: ArrayList<T> ): String
+  + getTotalContents() : int
+  + listAllContents(): String
+  + setContent(contents: ArrayList<T> ): void
+}
+!endsub
+
+class "{abstract}\nContent" as Content CONTENT_COLOR {
+  # name: String
+  # data: String
+}
+
+class Link CONTENT_COLOR {
+  - day: String
+  - startTime: LocalTime
+  - link: String
+  + Link(name: String, day: String, startTime: LocalTime, link: String)
+}
+
+class Note CONTENT_COLOR
+
+class Question CONTENT_COLOR {
+   - weight: double
+   + Question(question: String, answer: String)
+}
+@enduml
