@@ -636,7 +636,7 @@ exploratory testing.
     ##################################################
     |-----------------------1------------------------|
     1: finals
-    
+        
     1 finals by: 11 Nov 2021 10:00 AM Weightage 50% [ ]
     ``` 
 3. Adding a GradableTask with an invalid syntax.
