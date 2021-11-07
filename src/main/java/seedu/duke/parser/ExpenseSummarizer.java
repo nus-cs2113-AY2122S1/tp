@@ -14,6 +14,11 @@ import java.util.Map;
 //@@author itsleeqian
 public interface ExpenseSummarizer {
 
+    /**
+     * Prints the summary of expenses in a trip for a Person.
+     * @param person The person to print for.
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
+     */
     static void getIndividualExpenseSummary(Person person) throws ForceCancelException {
         double currentAmount; //amount paid for current expense
         double totalAmountSpent = 0;

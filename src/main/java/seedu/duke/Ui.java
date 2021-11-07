@@ -122,7 +122,7 @@ public class Ui {
     }
 
     public static void printExpenseAddedSuccess() {
-        System.out.println("Your expense has been added successfully");
+        System.out.println("Your expense has been added successfully!");
     }
 
     public static void printExpensesInList(ArrayList<Expense> listOfExpenses) {
@@ -158,6 +158,16 @@ public class Ui {
                 + System.lineSeparator()
                 + "expense [amount] [category] [people] /[description].");
     }
+
+    public static void printEditFormatError() {
+        System.out.println("Please format your inputs as follows: "
+                + System.lineSeparator()
+                + "edit [trip num] [attribute] [new value]"
+                + System.lineSeparator()
+                + "attributes: -location, -date, -exchange rate, -forcur, -homecur"
+                + System.lineSeparator());
+    }
+
 
     public static void printFilterFormatError() {
         System.out.println("Please format your inputs as follows: "
@@ -243,6 +253,7 @@ public class Ui {
         printAllTrips();
     }
 
+    //@@author itsleeqian
     public static void printAllTrips() {
         System.out.println("List of Trips: ");
         ArrayList<Trip> listOfTrips = Storage.getListOfTrips();
@@ -253,6 +264,7 @@ public class Ui {
                     + listOfTrips.get(i).getDateOfTripString());
         }
     }
+    //@@author
 
     public static void emptyArgForOpenCommand() {
         System.out.println();
@@ -317,7 +329,7 @@ public class Ui {
         System.out.println("The person you entered is not in the expense, please try again.");
     }
 
-
+    //@@author joshualeeky
     public static void printAmount(Person person, Trip trip) {
         System.out.println(person.getName() + " spent "
                 + stringForeignMoney(person.getMoneyOwed().get(person.getName()))
@@ -341,6 +353,7 @@ public class Ui {
             }
         }
     }
+    //@@author
 
     public static void printIncorrectAmount(double amount) {
         System.out.println("The amount you have entered is incorrect, it is either too high or low. The total "
@@ -510,11 +523,6 @@ public class Ui {
         System.out.println("Enter \"equal\" if expense is to be evenly split, enter individual spending otherwise");
     }
 
-    public static void autoAssignIndividualSpending() {
-        System.out.println("Finished allocating expense amount. There are people involved that did not need to pay.");
-        System.out.println();
-    }
-
     public static void askUserToConfirm() {
         System.out.print("There will be people involved that don't need to pay, are you sure? (y/n): ");
     }
@@ -539,27 +547,27 @@ public class Ui {
 
     public static void changeForeignCurrencySuccessful(Trip tripToEdit, String original) {
         System.out.println("Your foreign spending currency has been changed from "
-                + original + " to " + tripToEdit.getForeignCurrency());
+                + original + " to " + tripToEdit.getForeignCurrency() + ".");
     }
 
     public static void changeHomeCurrencySuccessful(Trip tripToEdit, String original) {
         System.out.println("Your home currency has been changed from "
-                + original + " to " + tripToEdit.getRepaymentCurrency());
+                + original + " to " + tripToEdit.getRepaymentCurrency() + ".");
     }
 
     public static void changeExchangeRateSuccessful(Trip tripToEdit, double original) {
         System.out.println("The exchange rate has been changed from "
-                + original + " to " + tripToEdit.getExchangeRate());
+                + original + " to " + tripToEdit.getExchangeRate() + ".");
     }
 
     public static void changeDateSuccessful(Trip tripToEdit, String original) {
         System.out.println("The date of your trip has been changed from "
-                + original + " to " + tripToEdit.getDateOfTripString());
+                + original + " to " + tripToEdit.getDateOfTripString() + ".");
     }
 
     public static void changeLocationSuccessful(Trip tripToEdit, String original) {
         System.out.println("The location of your trip has been changed from "
-                + original + " to " + tripToEdit.getLocation());
+                + original + " to " + tripToEdit.getLocation() + ".");
     }
 
     public static void printCouldNotSaveMessage() {
@@ -587,7 +595,7 @@ public class Ui {
 
     public static void duplicateTripWarning() {
         System.out.println("A trip with similar information may already exist. Please confirm if you wish to proceed"
-                + "with creating this trip.");
+                + " with creating this trip.");
         System.out.print("Enter 'y' if you wish to create this trip, or 'n' to cancel: ");
     }
 }

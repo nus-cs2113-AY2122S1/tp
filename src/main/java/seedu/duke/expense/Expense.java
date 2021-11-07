@@ -29,16 +29,19 @@ public class Expense implements ExpenseSplitter {
      *
      * @param amountSpent   (placeholder)
      * @param category      (placeholder)
-     * @param listOfPersons (placeholder)
+     * @param personsList (placeholder)
      * @param description   (placeholder)
      */
     //@@author lixiyuan416
-    public Expense(Double amountSpent, String category, ArrayList<Person> listOfPersons,
-                   String description) {
+    public Expense(double amountSpent, String description, ArrayList<Person> personsList,
+                   String category, LocalDate date, Person payer, HashMap<String, Double> amountSplit) {
         this.amountSpent = amountSpent;
         this.description = description;
         this.category = category;
-        this.personsList = listOfPersons;
+        this.date = date;
+        this.payer = payer;
+        this.amountSplit = amountSplit;
+        this.personsList = personsList;
     }
     //@@author
 
@@ -116,22 +119,6 @@ public class Expense implements ExpenseSplitter {
         return validListOfPeople;
     }
 
-    public void setPayer(Person person) {
-        this.payer = person;
-    }
-
-    public Person getPayer() {
-        return payer;
-    }
-
-
-    public void setAmountSplit(Person person, double amount) {
-        amountSplit.put(person.getName(), amount);
-    }
-
-    public HashMap<String, Double> getAmountSplit() {
-        return amountSplit;
-    }
 
     //@@author lixiyuan416
     /**
@@ -203,20 +190,6 @@ public class Expense implements ExpenseSplitter {
         return returnString.toString();
     }
 
-    //Getters and setters
-
-    public ArrayList<Person> getPersonsList() {
-        return personsList;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public double getAmountSpent() {
-        return amountSpent;
-    }
-
     //@@author itsleeqian
     public void setAmountSpent(String amount) throws ForceCancelException {
         try {
@@ -242,12 +215,42 @@ public class Expense implements ExpenseSplitter {
         this.category = category;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
     public LocalDate getDate() {
         return date;
     }
 
     public String getStringDate() {
         return date.format(outputPattern);
+    }
+
+    public ArrayList<Person> getPersonsList() {
+        return personsList;
+    }
+
+    public double getAmountSpent() {
+        return amountSpent;
+    }
+
+
+    public void setPayer(Person person) {
+        this.payer = person;
+    }
+
+    public Person getPayer() {
+        return payer;
+    }
+
+
+    public void setAmountSplit(Person person, double amount) {
+        amountSplit.put(person.getName(), amount);
+    }
+
+    public HashMap<String, Double> getAmountSplit() {
+        return amountSplit;
     }
 
 }

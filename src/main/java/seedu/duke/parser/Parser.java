@@ -3,7 +3,6 @@ package seedu.duke.parser;
 import seedu.duke.exceptions.ForceCancelException;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
-import seedu.duke.trip.Trip;
 
 import java.time.LocalDate;
 import java.util.logging.Level;
@@ -161,6 +160,7 @@ public class Parser extends CommandHandler {
         return Storage.getValidCommands().contains(inputCommand);
     }
 
+    //@@author yeezao
     public static boolean doesUserWantToForceCancel(String userInput) {
         return userInput.equals("-cancel");
     }
@@ -169,7 +169,6 @@ public class Parser extends CommandHandler {
     private static final int MONTHMM = 1;
     private static final int YEARYYYY = 2;
 
-    //@@author yeezao
     /**
      * Checks if the user-entered date is a date that actually exists.
      *
