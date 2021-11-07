@@ -290,10 +290,9 @@ Examples:
 * `list_marks c/CS2101-C03 a/Oral Presentation`
 
 Expected Output: <br>
-![img.png](images/marks/list_marks.png)
+![list_marks.png](images/marks/list_marks.png)
 
 <br>
-<hr>
 
 #### Setting mark for a student's assessment: `set_mark`
 Adds a student's marks for an assessment.
@@ -590,12 +589,13 @@ Format: `reset`
 **A**: Simply transfer the `data` folder to your new computer and ensure that it is in the same folder as the jar file.
 
 ## Command Summary
+`edit_class c/<CLASS_ID> [i/<NEW_CLASS_ID> | n/<NEW_CLASS_NAME>]`
 
 Category | Action | Format |
  ----- | ------ | --------------- |
 Class | Listing all classes | `list_classes`
 Class | Adding a class | `add_class i/<CLASS_ID> [n/<CLASS_NAME>]`
-Class | Editing a class | `edit_class c/<CLASS_ID> [i/<NEW_CLASS_ID> \| n/<NEW_CLASS_NAME>]`
+Class | Editing a class | <code> edit_class c/<CLASS_ID> [i/<NEW_CLASS_ID> &#124; n/<NEW_CLASS_NAME>]</code>
 Class | Deleting a class | `delete_class c/<CLASS_ID>`
 Student | Listing all students in a class | `list_students c/<CLASS_ID>`
 Student | Adding a student to a class | `add_student c/<CLASS_ID> i/<STUDENT_ID> n/<STUDENT_NAME>`
@@ -604,7 +604,7 @@ Student | Deleting a student from a class | `delete_student c/<CLASS_ID> s/<STUD
 Student | Finding students in a class given a keyword | `find_student c/<CLASS_ID> k/<KEYWORD>`
 Assessment | Listing all assessments in a class | `list_assessments c/<CLASS_ID>`
 Assessment | Adding an assessment to a class | `add_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME> m/<MAXIMUM_MARKS> w/<WEIGHTAGE>`
-Assessment | Editing an assessment in a class | `edit_assessment c/<CLASS_ID> a/<ASSESSMENT_NAME> [n/<NEW_ASSESSMENT_NAME> \| m/<NEW_MAXIMUM_MARKS> \| w/<NEW_WEIGHTAGE>]`
+Assessment | Editing an assessment in a class | <code> edit_assessment c/<CLASS_ID> a/<ASSESSMENT_NAME> [n/<NEW_ASSESSMENT_NAME> &#124; m/<NEW_MAXIMUM_MARKS> &#124; w/<NEW_WEIGHTAGE>] </code>
 Assessment | Deleting an assessment from a class | `delete_assessment c/<CLASS_ID> a/<ASSESSMENT_NAME>`
 Mark | Listing marks for an assessment: | `list_marks c/<CLASS_ID> a/<ASSESSMENT_NAME>`
 Mark | Setting mark for a student's assessment | `set_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<MARKS>`
