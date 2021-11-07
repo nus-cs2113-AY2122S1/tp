@@ -19,6 +19,7 @@
     - [4.3 Edit Feature](#43-edit-feature)
     - [4.4 Appointment Management](#44-appointment-management)
 - [Appendix A: Product Scope](#appendix-a-product-scope)
+- [Appendix B: ]
 
 ## 1. Acknowledgements
 

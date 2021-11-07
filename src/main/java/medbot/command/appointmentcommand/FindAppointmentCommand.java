@@ -32,7 +32,6 @@ public class FindAppointmentCommand extends Command {
         case STAFF:
             output = scheduler.listMedicalStaffAppointments(personId, filterType, dateTimeCode);
             break;
-        default:
         }
         if (output.isEmpty()) {
             output = SchedulerUi.getNoAppointmentsFoundMessage();
