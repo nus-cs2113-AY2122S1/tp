@@ -12,12 +12,12 @@ As LOTS is a CLI program, this would greatly benefit any user that excels in typ
 
 **Link to Project List Page** - [Project List Page](https://github.com/AY2122S1-CS2113-T13-2/tp/pulls?q=is%3Apr+author%3AWaiKit-nus)
 
-###Added Features:
+### Added Features:
 * **Add Command Feature**:
     * **Function:** Allow adding of people into the list.
     * **Justification:** The program requires people to be added into the list to manage the orders.
     
-###Added Classes:
+### Added Classes:
 * `Person Class`
     * **Function:** To hold all the information regarding the individual person.
     * **Justification:** Utilising OOP to better manage the individual's data.
@@ -26,7 +26,7 @@ As LOTS is a CLI program, this would greatly benefit any user that excels in typ
     * **Function:** To manage a list of people.
     * **Justification:** Utilising OOP to allow for better tracking of the list of person.
     
-###Testing:
+### Testing:
 * **AddCommandTest:** 
     * **Function:** To test and capture as many edge cases as possible.
     * **Justification:** Reduce the number of bugs in the code.
@@ -36,7 +36,7 @@ As LOTS is a CLI program, this would greatly benefit any user that excels in typ
     * **Justification:** Reduce the number of bugs in the code.
     
     
-###Enhancements implemented:
+### Enhancements implemented:
 * Made all the person's name uppercase. 
     * **Justification:** To ensure that the person's names are standardised during storage, to prevent
     duplicates.
@@ -51,22 +51,22 @@ As LOTS is a CLI program, this would greatly benefit any user that excels in typ
   [#208](https://github.com/AY2122S1-CS2113-T13-2/tp/issues/208)).
     * **Justification:** A better error message has been crafted to allow users to understand the error.
   
-###Contributions to UG
+### Contributions to UG
 * Added the guideline for `Add Function` in the user guide. (Pull Request [#243](https://github.com/AY2122S1-CS2113-T13-2/tp/pull/243)).
 
-###Contributions to DG
+### Contributions to DG
 * Manager Component with diagram under Design.
 * Add, Delete, Edit, Orders and Find Command Classes under Implementation.
 * Added `MenuAndOrdersSequenceDiagram`.
 
-###Contributions to team-based tasks
+### Contributions to team-based tasks
 * Creating User Stories.
 * Maintaining Issue Trackers.
 * Testing the overall program.
 * Keeps track of whole program flow using Google Jamboard.
 * Proactive in participating during discussions and distribution of issues to manage.
 
-###Review/Mentoring Contributions:
+### Review/Mentoring Contributions:
 * PRs Reviewed: [#262](https://github.com/AY2122S1-CS2113-T13-2/tp/pull/262),
   [#260](https://github.com/AY2122S1-CS2113-T13-2/tp/pull/260),
   [#242](https://github.com/AY2122S1-CS2113-T13-2/tp/pull/242),

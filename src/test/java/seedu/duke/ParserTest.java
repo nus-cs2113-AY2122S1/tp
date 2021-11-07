@@ -9,18 +9,28 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParserTest {
+    /**
+     * Passing an empty command into the parser. Expects UnknownCommand object.
+     */
     @Test
     public void getCommand_emptyCommand_nullReturned() throws Exception {
         Command output = Parser.getCommand("");
         assertTrue(output instanceof UnknownCommand);
     }
 
+    /**
+     * Passing a command with spaces into the parser. Expects UnknownCommand object.
+     */
     @Test
     public void getCommand_spaces_nullReturned() throws Exception {
         Command output = Parser.getCommand("     ");
         assertTrue(output instanceof UnknownCommand);
     }
 
+    /**
+     * Test adding more than 99 unique names into the list.
+     * Expects an exception in at the last input.
+     */
     @Test
     public void addCommand_AddMoreThan99_ErrorThrown() throws Exception {
         String com;
@@ -38,8 +48,12 @@ public class ParserTest {
         assertThrows(LotsException.class,() -> output.execute());
     }
 
+    /**
+     * Testing to add more than 999 quantity to 1 order.
+     * Expects an exception.
+     */
     @Test
-    public void addCommand_AddMoreThan999Quanitity_ThrowError() throws Exception {
+    public void addCommand_AddMoreThan999Quantity_ThrowError() throws Exception {
         String com = "add /n a /i 1 /q 999";
         PeopleManager manager = new PeopleManager();
         PeopleManager.clearListOfPeople();
