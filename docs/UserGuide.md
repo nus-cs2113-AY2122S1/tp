@@ -27,6 +27,7 @@ when learning how to use **ConTech**.
 
 <div style="page-break-after: always;"></div>
 
+<a name="toc"></a>
 ### Table Of Contents
 
 * **[Quick Start](#start)**
@@ -48,6 +49,8 @@ when learning how to use **ConTech**.
 
 <br />
 
+<div style="page-break-after: always;"></div>
+
 <a name="start"></a>
 ## Quick Start
 
@@ -68,9 +71,7 @@ This section aims to get you started with using **ConTech**.
    * `view 1`: Displays all the details of the contact at index `1`.   
    * `rm 1`: Deletes the contact at index `1` in the list.
    * `exit`: Exits the program.
-
-<div style="page-break-after: always;"></div>
-
+    
 If you have reached this step without any issues, congratulations! You have successfully set up **ConTech**.
 
 >:information_source: You are advised to go through the following two sections.
@@ -94,6 +95,8 @@ fulfilled. These `flags` include:
 - `-te`: for your contact's Telegram handle
 - `-tw`: for your contact's Twitter handle
 - `-e`: for your contact's email address
+
+<div style="page-break-after: always;"></div>
 
 <a name="notations"></a>
 ### Common notations used
@@ -147,6 +150,10 @@ You now have 1 contact(s).
 ____________________________________________________________
 ```
 
+**[Back to Table of Contents](#toc)**
+
+<div style="page-break-after: always;"></div>
+
 <a name="list"></a>
 ### Listing all contacts: `ls`
 
@@ -172,6 +179,10 @@ ____________________________________________________________
 4. Mayank
 ____________________________________________________________
 ```
+
+**[Back to Table of Contents](#toc)**
+
+<div style="page-break-after: always;"></div>
 
 <a name="view"></a>
 ### Viewing a contact: `view`
@@ -219,6 +230,10 @@ Email:    marcus.bo@contech.sg
 ____________________________________________________________
 ```
 
+**[Back to Table of Contents](#toc)**
+
+<div style="page-break-after: always;"></div>
+
 <a name="me"></a>
 ### Viewing personal contact: `me`
 Displays all your details saved to the personal contact in the ConTech Book.
@@ -239,6 +254,8 @@ Github:   github.com/marcusbohre
 Email:    marcus.bo@contech.sg
 ____________________________________________________________
 ```
+
+**[Back to Table of Contents](#toc)**
 
 <a name="delete"></a>
 ### Deleting a contact: `rm`
@@ -263,6 +280,8 @@ Command formats:
 * While all fields are optional, minimally **one** must be specified for any effect to take place.
 * The `NAME` (denoted by `-n`) *cannot* be deleted. To delete entire contacts, please use `rm <INDEX>`.
 * If the specified detail is already empty, no deletion will take place for that detail.
+
+<div style="page-break-after: always;"></div>
 
 `rm all`
 * Deletes all contacts in the ConTech Book.
@@ -324,6 +343,10 @@ ConTech has removed all 2 of your contact(s).
 ____________________________________________________________
 ```
 
+**[Back to Table of Contents](#toc)**
+
+<div style="page-break-after: always;"></div>
+
 <a name="edit"></a>
 ### Editing a contact : `edit`
 
@@ -383,6 +406,10 @@ Telegram: t.me/boryy
 ____________________________________________________________
 ```
 
+**[Back to Table of Contents](#toc)**
+
+<div style="page-break-after: always;"></div>
+
 <a name="search"></a>
 ### Searching for a contact: `search`
 
@@ -414,6 +441,8 @@ Email:    john.lee@contech.sg
 Telegram: t.me/johnlee123
 ____________________________________________________________
 ```
+
+**[Back to Table of Contents](#toc)**
 
 <div style="page-break-after: always;"></div>
 
@@ -461,6 +490,8 @@ ____________________________________________________________
 ConTech has successfully imported 4 lines
 ____________________________________________________________
 ```
+
+**[Back to Table of Contents](#toc)**
 
 <div style="page-break-after: always;"></div>
 
@@ -526,6 +557,8 @@ import: Imports contacts from a CSV Text File.
 ____________________________________________________________
 ```
 
+**[Back to Table of Contents](#toc)**
+
 <div style="page-break-after: always;"></div>
 
 <a name="exit"></a>
@@ -543,6 +576,8 @@ ConTech will now shutdown.
 We hope you have enjoyed using it.
 ____________________________________________________________
 ```
+
+**[Back to Table of Contents](#toc)**
 
 ## FAQ
 
@@ -565,6 +600,7 @@ editing the save data files. For adding a large number of contacts at once, the 
 a future revision with more granular controls to allow users to easily handle multiple duplicate contacts when importing.
 For more information on the implementation, please refer to the [Developer Guide](https://ay2122s1-cs2113t-t09-1.github.io/tp/DeveloperGuide.html#ComingSoon).
 
+**[Back to Table of Contents](#toc)**
 
 <div style="page-break-after: always;"></div>
 
@@ -589,3 +625,5 @@ Delete a contact | `rm <INDEX>` | `rm 1`
 Search for a contact | <code>search {-n &#124; -g &#124; -l &#124; -te &#124; -tw &#124; -e} &#60;QUERY&#62;</code> | `search Ashraf` <br />`search -g revflash`<br/>
 Import contacts from .txt file |`import` | `import`
 Exit ConTech | `exit` | `exit`
+
+**[Back to Table of Contents](#toc)**
