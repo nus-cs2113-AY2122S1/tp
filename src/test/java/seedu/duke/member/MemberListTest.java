@@ -74,7 +74,6 @@ class MemberListTest {
         final String string = "delete /m 1";
         int index = Parser.getIndex(string);
         new DeleteMember(fullMemberList, index);
-        //Parser.deleteMember(fullMemberList, string);
         assertEquals(4, fullMemberList.getMemberList().size());
     }
 
@@ -83,7 +82,6 @@ class MemberListTest {
         final String string = "add /m /n Lorem Ipsum /s A1231234B /g M /p 91118888";
         Member newMember = Parser.getMemberDetails(string, Keyword.ADD_MEMBER_KEYWORD);
         new AddMember(fullMemberList, newMember);
-        //Parser.makeMemberEntry(fullMemberList, string);
 
         assertEquals(fullMemberList.getMemberName(6), "LOREM IPSUM");
         assertEquals(fullMemberList.getMemberStudentNumber(6), "A1231234B");
@@ -101,8 +99,24 @@ class MemberListTest {
         try {
             assertEquals(fullMemberList.getMember(1).getName(), "IAN HWANG");
             assertEquals(fullMemberList.getMember(1).getStudentNumber(), "A0123456A");
+            assertEquals(fullMemberList.getMember(1).getGender(), "M");
+            assertEquals(fullMemberList.getMember(1).getPhoneNumber(), "98441232");
         } catch (InvalidMemberException e) {
             System.out.println(e.getMessage());
         }
     }
+
+    @Test
+    void findMemberEntry() {
+        MemberList foundMember = fullMemberList.findMember("GLEN");
+        try {
+            assertEquals(foundMember.getMember(1).getName(), "GLENN");
+            assertEquals(foundMember.getMember(1).getStudentNumber(), "A0345678C");
+            assertEquals(foundMember.getMember(1).getGender(), "M");
+            assertEquals(foundMember.getMember(1).getPhoneNumber(), "91233344");
+        } catch (InvalidMemberException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
