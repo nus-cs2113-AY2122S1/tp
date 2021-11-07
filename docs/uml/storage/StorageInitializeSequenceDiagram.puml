@@ -19,22 +19,22 @@ endbox
 activate Terminus
 
 create StorageManager
-  Terminus -> StorageManager : StorageManager(:Path, :String)
+  Terminus -> StorageManager : StorageManager(baseDir, jsonPath)
   activate StorageManager
     create JsonStorage
-      StorageManager -> JsonStorage : JsonStorage(:Path, :String)
+      StorageManager -> JsonStorage : JsonStorage(baseDir, jsonPath)
       activate JsonStorage
     return jsonStorage
     create NoteStorage
-      StorageManager -> NoteStorage : NoteStorage(:Path)
+      StorageManager -> NoteStorage : NoteStorage(baseDir)
       activate NoteStorage
     return noteStorage
     create PdfStorage
-      StorageManager -> PdfStorage : PdfStorage(:Path)
+      StorageManager -> PdfStorage : PdfStorage(baseDir)
       activate PdfStorage
     return pdfStorage
     create FolderStorage
-      StorageManager -> FolderStorage : FolderStorage(:Path)
+      StorageManager -> FolderStorage : FolderStorage(baseDir)
       activate FolderStorage
     return folderStorage
   return storageManager
