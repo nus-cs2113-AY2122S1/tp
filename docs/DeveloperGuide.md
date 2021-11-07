@@ -14,7 +14,6 @@
   - [3.4 Command Component](#34-command-component)
   - [3.5 TaskManager Component](#35-taskmanager-component)
   - [3.5 Storage Component](#36-storage-component)
-  - [3.6 Utility Component](#37-utility-component)
   - [3.7 Logger Component](#38-logger-component)
   - [3.8 NUSMods API Component](#39-nusmods-api-component)
 - [4. Implementation](#4-implementation)
@@ -187,10 +186,10 @@ associated with it.
     <img src="images/SeanUMLDiagrams/Command_Class_Diagram.png" width="850">
 </p>
 
-The `Command` component consists of an abstract class `Command` that all commands should inherit from. There are then 3 seperate types of Commands. 
-- `XYZCommand`: These are commands that do not interact with `TaskManager` and need no flags. e.g. the 'bye' command.
-- `XYZTaskManagerCommand`: These are commands that perform a function with `TaskManager` based on the flags that are entered in the `Map<String, String>` e.g. the 'edit' or 'sort' command.
-- `TaskCommand` these are commands that add Tasks to the `TaskManager`. individual TaaskCommands will inherit from this class and set the `TaskFactory` and Task usage e.g. the 'Deadline' command.
+The `Command` component consists of an abstract class `Command` that all commands should inherit from. There are then 3 seperate types of Commands.
+ - `XYZCommand`: These are commands that do not interact with `TaskManager` and need no flags. e.g. the 'bye' command.
+ - `XYZTaskManagerCommand`: These are commands that perform a function with `TaskManager` based on the flags that are entered in the `Map<String, String>` e.g. the 'edit' or 'sort' command.
+ - `TaskCommand` these are commands that add Tasks to the `TaskManager`. individual TaaskCommands will inherit from this class and set the `TaskFactory` and Task usage e.g. the 'Deadline' command.
    >💡 **Note**: The `ModuleCommand` is implemented with `XYZTaskManagerCommand` instead of `TaskCommand` as it does **not** use a `TaskFactory`.  
 
 On executing the command (`executeCommand()` called), the `CommandResult` should be returned with 2 variables. `message` is the message to be printed back to the user and `isExited` is whether the program should exit after this command.
@@ -199,13 +198,54 @@ On executing the command (`executeCommand()` called), the `CommandResult` should
 <p align="center">
     <img src="images/SeanUMLDiagrams/TaskManager_Object_Diagram.png" width="850">
 </p>
+
 The `TaskManager` component is what manages all the Tasks in the program
+In `TaskManager`, there are 2 lists. `taskList` and `latestFilteredList`.
+- `taskList`: corresponds to the list of all tasks currently stored in the `TaskManager`.
+- `latestFilteredList`: corresponds to the latest list that was printed by the `list` command.
+   - This list was created to make it easier for users to delete and edit tasks as they can use the index in `latestFilteredList`. E.g. if they wanted to delete all `low` priority tasks, they can list with a filter of `low` priority and delete all those tasks.
+
+When listing tasks. `refreshDate()` is called before listing tasks. This is to enure that all dates are recurred to the latest date if they have a `recurrence` that is not `none`.
+The `Task` object is what is managed by the `TaskManager`. 
+ - Each Task has a `description`, `priority` and `recurrence` with concrete Tasks adding any additional variables and formatting the `getTaskEntryDescription()` method respectively.
+ - They also each have their own `TaskFlag` class which includes a list of all valid flags for agruments in creating the specific task.
+   - This is used in the '`checkAllEditFlagsValid()` in the `edit` command function in editing tasks to ensure that all the flags entered by the user are correct for the respective task.  
+ - `taskEdit()` is to be overridden to check the `Map<String, String>` for the respective flags in the concrete `Taskflag` and edit the parameters in the concrete `Task` object respectively.
 
 ### 3.6 Storage Component
+<p align="center">
+    <img src="images/SeanUMLDiagrams/Storage_Sequence_Diagram1.png">
+</p>
 
-### 3.7 Utility Component
+The Storage is handled by the `DataManager` class.
+ - All of the objects are initialised on starting the program in `SchedUrMods` class.
+ - The `DataManager` class takes in a `FileCreator` which creates the file for storing the task data.
+ - The `TaskManager` class takes in a `DataManager` and loads the `taskList` using the DataManager. It also adds the `DataManager` as an `Observer` so that it can update the `DataManager` whenever `taskList` changes.
+ - The `DataManager` has been designed with **Dependency injection** in mind so that programmers would know what objects are required for each class.
+   >💡 **Note**: `TaskManager` can be initialised without any `DataManager` as an argument. In which case it would still work albeit without any storage functionality. (useful for testing)
+
+<p align="center">
+    <img src="images/SeanUMLDiagrams/Storage_Sequence_Diagram2.png">
+</p>
+
+ - Whenever a Create, Read or Update function is performed in TaskManager on `taskList`, the `updateObservers()` function should be called so that `DataManager` can write the updated `taskList` to the Task save file.
+ - Because `taskList` is created in `DataManager` and returned to `TaskManager` (as seen in the first sequence diagram), there is no need to constantly pass the `taskList` as an argument to `DataManager` when calling `update()` as they **both** have the same reference to `taskList`.
+ - The Tasks are stored in a `json` format in the file `data/tasks.dat` and are parsed using the [`Gson`](https://github.com/google/gson) library.
+
+>💡 **Note**: The storage component has been implemented using the [Observer Design Pattern](https://en.wikipedia.org/wiki/Observer_pattern) where `TaskManager` implements `Subject` and `DataManager` implements `Observer`.
 
 ### 3.8 Logger Component
+ - The Logger has been implemented with the `java.util.logging` library.
+ - It's designed to be as easy to use as possible where in order to log any message, you only have to use `Log.<severity>(message)`.
+   - E.g. `Log.info("this is an info log")`.
+ - The logger will automatically log your message in the following format:
+```
+[YYYY-MM-dd HH:mm:ss] [full.class.path]
+<Log Message here> 
+```
+- The way the logger gets the class name is by using the `Thread.currentThread().getStackTrace()` function to determine which class called the log function.
+- All individual class loggers are stored in a hashmap `Map<String, Logger>` where if a class name is not already in the hashmap on calling any log function, it will be added automatically.
+- All log messages above `Level.SEVERE` will be printed to console and all log messages above `Level.FINE` will be added to the log file `log.txt`.
 
 ### 3.9 NUSMods API Component
 
