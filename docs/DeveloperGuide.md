@@ -5,13 +5,31 @@ meant for developers who wish to gain insight into the design considerations and
 possibly expand on the application.
 
 * [Acknowledgements](#acknowledgements)
-* [Design and Implementation](#3-design-and-implementation)
-  * [Architecture](#31-overall-architecture)
-  * [UI component](#32-ui-component)
-  * [Parser component](#parser-component)
-  * [Command component](#command-component)
-  * [GoalList component](#goallist-component)
-  * [Storage component](#storage-component)
+* [1. Introduction](#1-introduction)
+  * [1.1. Overview of Ha(ppy)Bit](#11-overview-of-happybit)
+  * [1.2. Terminology](#12-terminology)
+  * [1.3. Icons and Format](#13-icons-and-format)
+* [2. Setting Up](#2-setting-up)
+  * [2.1. Application Requirements](#21-application-requirements)
+  * [2.2. Project Set Up](#22-project-set-up)
+* [3. Design](#3-design)
+  * [3.1. Overall Architecture](#31-overall-architecture)
+  * [3.2. UI Component](#32-ui-component)
+  * [3.3. Parser Component](#33-parser-component)
+  * [3.4. Command Component](#34-command-component)
+  * [3.5. Goal Component](#35-goal-component)
+  * [3.6. Storage Component](#36-storage-component)
+* [4. Implementation](#4-implementation)
+  * [4.1. Adding a Goal](#41-adding-a-goal)
+  * [4.2. Adding a Habit](#42-adding-a-habit)
+  * [4.3. Listing all Goals](#43-listing-all-goals)
+  * [4.4. Listing all Habits](#44-listing-all-habits)
+  * [4.5. Completing a Habit](#45-completing-a-habit)
+  * [4.6. Updating a Goal](#46-updating-a-goal)
+  * [4.7. Updating a Habit](#47-updating-a-habit)
+  * [4.8. Deleting a Goal](#48-deleting-a-goal)
+  * [4.9. Deleting a Habit](#49-deleting-a-habit)
+  * [4.10. Getting Help](#410-getting-help)
 * [Appendix A: Product Scope](#appendix-a-product-scope)
   * [Target user profile](#target-user-profile)
   * [Value proposition](#value-proposition)
@@ -70,10 +88,6 @@ One habit can have one or more intervals.
 
 > 💡 **Pro-Tip!** additional information that may make your tracking journey easier
 
-> 😀 &#8594; Used to show the developers' exuberance!!!
-
-> 👍 &#8594; Used to show the developers' love and support for you.
-
 ## 2. Setting Up
 
 ### 2.1. Application Requirements
@@ -99,13 +113,13 @@ One habit can have one or more intervals.
 7. Locate the `main` method and click the green triangle on the left of it
 8. If the code builds and runs with no issues, you are good.
 
-## 3. Design and Implementation
+## 3. Design
 
 ### 3.1. Overall Architecture
 
 The architecture diagram below describes the high-level design of the application.
 
-![Ui Diagram](Diagram Images/OverallArchitecture.png)
+![Ui Diagram](Diagram%20Images/Design%20Diagram%20Images/OverallArchitecture.png)
 
 The 5 main components of the architecture diagram are:
 1. `Ui` : User interface of the application
@@ -117,33 +131,49 @@ The 5 main components of the architecture diagram are:
 The sequence diagram below shows how the components interact with each other for the scenario where the user issues the
 command `remove g/1` to remove the goal at index 1.
 
-![Ui Diagram](Diagram Images/ArchitectureSequenceDiagram.png)
+![Ui Diagram](Diagram%20Images/Design%20Diagram%20Images/ArchitectureSequenceDiagram.png)
 
-### 3.2. UI component
+### 3.2. UI Component
 
-**API:** `Ui.java`
+The UI component is responsible for all user interfaces of the application. However, the component is further divided
+into 2 sub-components: `UiManager.java` for static interface displays, and `PrintManager.java` for dynamic interface
+displays (display messages in response to user input).
 
-How the `Ui` component works:
-1. The `Ui` is called in 2 main classes - `GoalList` and `UiOverall`
-2. For `GoalList`, functions that require printing of information will call `Ui`
-   1. confirmation message of `addGoal()`
-   2. confirmation message of `addHabitToGoal()`
-   3. removed goal of `deleteGoal()`
-   4. removed habit of `deleteHabitFromGoal()`
-   5. confirmation message of `doneHabitFromGoal()`
-   6. update message of `updateGoalName()`
-   7. list of goals of `listGoals()`
-   8. list of habits of `listHabitsFromGoal()`
-3. For `UiOverall`, there is an inheritance of 2 classes - `UiStartup` and `UiMain`
-   1. `UiStartup` handles the interface that provides a brief introduction to the application, and links to external 
-      documentation.
-   2. `UiMain` handles the interface for the main application.
-4. The `Ui` is responsible for printing error messages raised by exceptions.
+**API:** `UiManager.java`
 
-The Sequence Diagram below illustrates the interactions within the `Ui` component when `run()` is called in the main
-class `HappyBit.java`
+![Ui Manager](Diagram%20Images/Design%20Diagram%20Images/UiManager.png)
 
-![Ui Diagram](Diagram Images/UiDiagramCopy.png)
+1. `UiStartup` will be called upon starting the application (we refer to this as the start state).
+2. `UiMain` will be called upon entering the main state of the application (the main state is entered when you select
+    the option `[5] Start Application` in the start state).
+3. `UiMain` calls `Goal` to display a static view of all habits to be done for the day.
+4. `UiMain` calls `Storage` to display alerts for status of storage imports and exports.
+
+**API:** `PrintManager.java`
+
+![Print Manager](Diagram%20Images/Design%20Diagram%20Images/PrintManager.png)
+
+1. `PrintManager` is called upon by user commands to display text or error messages.
+2. `PrintManager` may call `PrintTable` to print a list of items in a tabular format.
+3. `PrintManager` calls `Goal` to obtain goal-related information for printing.
+
+### 3.3. Parser Component
+
+The `Parser` logic component handles the parsing of the input passed in by the user and returns a suitable `Command`
+object that will be executed. Within the component itself, there are more specific and detailed `Parser` classes for
+handling various inputs from the user.
+
+![](Diagram Images/MainParser.png)
+
+* `AddParser` - Handles the parsing of inputs starting with `set` and `add` keywords
+* `DeleteParser` - Handles the parsing of inputs starting with `remove` and `delete`
+* `DoneParser` - Handles the parsing of inputs starting with `done`
+* `ListParser` - Handles the parsing of inputs starting with `view`
+* `SetParser` - Handles the parsing of inputs starting with `goal`
+
+For inputs of `bye`, `help` `list` their respective functions are run immediately without the need to parse further.
+
+For any other invalid inputs that do not start with the listed keywords, the `HelpCommand` functionality is invoked.
 
 While the Sequence Diagram represents the normal flow of logic, there is a recursive definition that is not represented.
 1. `:HappyBit` calls the method `handleState()` in `:State`
@@ -151,31 +181,9 @@ While the Sequence Diagram represents the normal flow of logic, there is a recur
 3. `mainState()` will create a new `:UiMain` and calls a method `run()` on itself
 4. `run()` returns a boolean value equivalent to whether the recursive call should be made
 5. If the boolean value is true, `handleState()` would recursively call itself
-6. If the boolean value is false, `handleState()` would pass the call back to `:HappyBit`
+6. If the boolean value is false, `handleState()` would pass the call back to `:HappyBit`.
 
-### Parser component
-
-The `Parser` logic component handles the parsing of the input passed in by the user and returns a suitable `Command`
-object that will be executed. Within the component itself, there are more specific and detailed `Parser` classes based 
-on the commandWord and commandInstruction from the user, as indicated in the diagram below.
-
-![](Diagram Images/MainParser.png)
-
-Below are the specific parsers that will be called depending on the user's commandWord.
-
-* `AddParser` - Handles the parsing of inputs starting with `set` and `add` keywords
-* `DeleteParser` - Handles the parsing of inputs starting with `remove` and `delete`
-* `UpdateParser` - Handles the parsing of inputs starting with `update` and `change`
-* `DoneParser` - Handles the parsing of inputs starting with `done`
-* `ListGoalParser` - Handles the parsing of inputs starting with `list`
-* `ListHabitParser` - Handles the parsing of inputs starting with `view`
-* `SetParser` - Handles the parsing of inputs starting with `goal`
-
-For inputs of `exit`, `help`, `list` and `return` their respective functions are run immediately without the need to parse further.
-
-For any other invalid inputs that do not start with the listed keywords, the `HelpCommand` functionality is invoked.
-
-### Command component
+### 3.4. Command Component
 
 When the user runs the Program, the main function dealing with the user's inputs is the `processInput` function in `UiMain.java`
 which obtains a `Command` object after parsing the input using the `Parser` component.
@@ -195,70 +203,18 @@ which obtains a `Command` object after parsing the input using the `Parser` comp
 The respective `runCommand` functions of the returned command object is then executed.
 In the sections below we will be providing implementation details for each of the commands.
 
-#### `AddGoalCommand`
-
-When the `runCommand` function is executed for the `AddGoalCommand` object, the following steps as indicated by the
-sequence diagram below is carried out:
-
-![](https://www.planttext.com/api/plantuml/img/ZLB1QiCm3BtxAqGltI1fxcQCZWvwwM2mwouY5fuXbZDRsVVFIGepn2sxoUz9xptBFYR1A9CVrFvBP4owwyO1UKOEVV1Tek-9kAVMEBGHlMgVOQVXnPXpmE4Kl4Ss6OWJNmyFDXCNbqJ3-LeryCbZT2nlo6WfQdWlJWqa2J5N6ZxMub5XB-u7XIfUIcqnc5DjVNCZherBg9Leu7QKqhWYbwqhw69-MtC7UdNCcUalpC6Il5Bgenl51PxldfjicU2EPZt8KzlUdpBqF_NQYXVnsb9AqHg_36wViHpRiaTYa__WBm00)
-
-#### `AddHabitCommand`
-
-#### `UpdateGoalNameCommand`
-
-#### `DeleteGoalCommand`
-
-When the `runCommand` function is executed for the `DeleteGoalCommand` object, the following steps as indicated by the
-sequence diagram below is carried out:
-
-![](Diagram Images/DeleteGoalCommandSequenceDiagram.png)
-
-#### `DeleteHabitCommand`
-
-When the `runCommand` function is executed for the `DeleteHabitCommand` object, the following steps as indicated by the
-sequence diagram below is carried out:
-
-![](Diagram Images/DeleteHabitCommandSequenceDiagram.png)
-
-#### `DoneHabitCommand`
-
-When the `runCommand` function is executed for the `DoneHabitCommand` object, the following steps as indicated by the 
-sequence diagram below is carried out:
-
-![](Diagram Images/DoneCommandSequenceDiagram.png)
-
-#### `ListGoalCommand`
-
-When the `runCommand` function is executed for the `ListGoalsCommand` object, the following steps as indicated by the
-sequence diagram below is carried out:
-
-![](Diagram Images/ListGoalsCommandSequenceDiagram.png)
-
-#### `ListHabitCommand`
-
-When the `runCommand` function is executed for the `ListHabitsCommand` object, the following steps as indicated by the
-sequence diagram below is carried out:
-
-![](Diagram Images/ListHabitsCommandSequenceDiagram.png)
-
-#### `HelpCommand`
-
-When the `runCommand` function is executed for the `HelpCommand` object, it instantiates a `PrintManager` object and 
-calls the `printCommandList` method which prints out a pre-set message informing the user of all the inputs they
-can type to execute a certain command.
-
-### GoalList component
+### 3.5. Goal Component
 
 The `GoalList` component is the component that holds and manipulates the list of all the Goals set by the user.
 All `runCommands` of all of the `Command` objects directly access the `GoalList` component to retrieve and change      
 the user's data.
 
-### Storage component
+### 3.6. Storage Component
 
 The `Storage` class allows data to be read from and saved to a storage file.
 The class diagram shows the interactions between the different classes.
 
-![Storage Class Diagram](Diagram%20Images/StorageClassDiagram.png)
+![Storage Class Diagram](Diagram%20Images/Design%20Diagram%20Images/StorageClassDiagram.png)
 
 The sequence diagram shows how the program imports data from storage file.
 
@@ -278,6 +234,69 @@ The sequence diagram shows how the program exports data to storage file.
 `Storage` class can also export data to storage file with `Export` class.
 It takes in a `GoalList` object and converts the data into string to be stored in storage file.
 
+## 4. Implementation
+
+This section describes some noteworthy details on how certain features are implemented.
+
+### 4.1. Adding a Goal
+
+When the `runCommand` function is executed for the `AddGoalCommand` object, the following steps as indicated by the
+sequence diagram below is carried out:
+
+![](https://www.planttext.com/api/plantuml/img/ZLB1QiCm3BtxAqGltI1fxcQCZWvwwM2mwouY5fuXbZDRsVVFIGepn2sxoUz9xptBFYR1A9CVrFvBP4owwyO1UKOEVV1Tek-9kAVMEBGHlMgVOQVXnPXpmE4Kl4Ss6OWJNmyFDXCNbqJ3-LeryCbZT2nlo6WfQdWlJWqa2J5N6ZxMub5XB-u7XIfUIcqnc5DjVNCZherBg9Leu7QKqhWYbwqhw69-MtC7UdNCcUalpC6Il5Bgenl51PxldfjicU2EPZt8KzlUdpBqF_NQYXVnsb9AqHg_36wViHpRiaTYa__WBm00)
+
+### 4.2. Adding a Habit
+
+### 4.3. Listing all Goals
+
+When the `runCommand` function is executed for the `ListGoalsCommand` object, the following steps as indicated by the
+sequence diagram below is carried out:
+
+![](Diagram Images/ListGoalsCommandSequenceDiagram.png)
+
+### 4.4. Listing all Habits
+
+When the `runCommand` function is executed for the `ListHabitsCommand` object, the following steps as indicated by the
+sequence diagram below is carried out:
+
+![](Diagram Images/ListHabitsCommandSequenceDiagram.png)
+
+### 4.5. Completing a Habit
+
+When the `runCommand` function is executed for the `HelpCommand` object, it instantiates a `PrintManager` object and 
+calls the `printCommandList` method which prints out a pre-set message informing the user of all the inputs they
+can type to execute a certain command.
+
+### GoalList component
+
+When the `runCommand` function is executed for the `DoneHabitCommand` object, the following steps as indicated by the
+sequence diagram below is carried out:
+
+![](Diagram Images/DoneCommandSequenceDiagram.png)
+
+### 4.6. Updating a Goal
+
+### 4.7. Updating a Habit
+
+### 4.8. Deleting a Goal
+
+When the `runCommand` function is executed for the `DeleteGoalCommand` object, the following steps as indicated by the
+sequence diagram below is carried out:
+
+![](Diagram Images/DeleteGoalCommandSequenceDiagram.png)
+
+### 4.9. Deleting a Habit
+
+When the `runCommand` function is executed for the `DeleteHabitCommand` object, the following steps as indicated by the
+sequence diagram below is carried out:
+
+![](Diagram Images/DeleteHabitCommandSequenceDiagram.png)
+
+### 4.10. Getting Help
+
+When the `runCommand` function is executed for the `HelpCommand` object, it instantiates a `PrintManager` object and
+calls the `printCommandList` method which prints out a pre-set message informing the user of all the inputs they
+can type to execute a certain command.
 
 ---------------------------------------------------------------------------------------------------------
 
@@ -339,8 +358,7 @@ The instructions below are for the manual testing of the program.
   * Download the jar file [here](UserGuide.md#1-quick-start) and copy the file into an empty folder.
   * Open your terminal and type in the command `java -jar happybit.jar` to start up the program.
   * You should see the start-up page with the start-up menu as shown below.
-
-
+  
 ![Start Up Page](Display_Images/StartUpPage.png)
 
 
@@ -352,6 +370,24 @@ The instructions below are for the manual testing of the program.
 3. Exit
   * To exit the program, select option `6`.
   * You should see the exit message before the program terminates as shown below.
-
-
+  
 ![Exit Message](Display_Images/ExitMessage.png)
+
+### Starting the Application
+
+1. Launch the program and select option `5` to start using the application.
+2. Upon starting the application, you should see the command screen as shown below.
+
+![Start Application](Display_Images/StartApp.png)
+
+3. Command screen takes in user's input at `Command: `. Press 'enter' after typing in your command.
+4. For example, to set a goal: `set n/Wake up at 8am everyday t/sl s/08112021 e/15112021`
+  * The name of goal: `Wake up at 8am everyday`
+  * The goal is classified as a sleeping goal: `sl`
+  * Start the goal at: `08112021` (08 Nov 2021)
+  * End the goal at: `15112021` (15 Nov 2021)
+5. After you have entered the command to add a goal, you should see that the goal was successfully added.
+
+![Added Goal](Display_Images/AddGoal.png)
+
+6. Press enter again to return to command screen.
