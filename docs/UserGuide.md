@@ -82,6 +82,8 @@ Terminologies used throughout this guide:
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ## Getting Started
 
 This section will detail the `TermiNUS` installation guide, as well a quick guide on how to use 
@@ -159,6 +161,8 @@ The below table represents what each means.
 |`day`|The `day` must be a day spelled out fully and is case-insensitive. For example, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday` are the only **7** valid days.|
 |`duration`|The `duration` must be a **positive** integer and upon addition with `start_time`, it must not exceed the 24-hour limit of the day. For example, if `start_time` is `21:00`, `2` is a valid `duration` but `-1` and `4` are not.|
 |`valid_file_name`|Any value that has the tag `valid file name` cannot be empty, cannot have more than **30** characters and can only contains [ASCII](https://www.asciitable.com/) characters **between the dec value of 32 and 126 inclusive** with the **exception** of `/`, `\n`, `\r`, `\t`, `\0`, `\f`, `'`, `?`, `*`, `\ `, `<`, `>`, `"`, `:`, `.` , <code>&#124;</code> |
+
+<div style="page-break-after: always;"></div>
 
 ## Section: Managing all your modules
 
@@ -284,6 +288,8 @@ Updated CS2113T to CS2113 successfully.
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ## Returning to previous workspace
 
 **Format:** `back`
@@ -363,6 +369,8 @@ List of Module workspace commands:
 |exit|exit and closes TermiNUS|
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ## Section: Note
 
@@ -539,6 +547,8 @@ Exporting notes... Check the data folder.
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ## Section: Schedule
 
 All commands related to the workspace `Schedule` will be displayed in this section. These commands
@@ -656,6 +666,8 @@ Your link on 'CS2113T Tutorial 1' has been deleted!
 ```
 
 ---
+
+<div style="page-break-after: always;"></div>
 
 ## Section: Question
 
@@ -852,6 +864,8 @@ Returning you back to main program.
 
 ---
 
+<div style="page-break-after: always;"></div>
+
 ## Displaying all schedules across all modules
 
 **Format:** `timetable {day}`
@@ -933,6 +947,8 @@ Format: timetable {day}
 [] >>> 
 ```
 
+<div style="page-break-after: always;"></div>
+
 ## Advanced Usage of Commands
 
 **Format:** `<workspace> <available workspace command>`
@@ -976,6 +992,8 @@ Your question on 'What is Java?' has been added!
 
 ___  
 
+<div style="page-break-after: always;"></div>
+
 ## FAQ
 **Q:** Can I edit the information in the`data` directory?  
 **A:** Yes! **TermiNUS** saves and loads your information from the `data` folder. You are able to edit the files
@@ -1004,6 +1022,8 @@ solve the issue. Secondly, if you are running macOS or Linux, we do not delete f
 **A:** This is to **avoid a loss of data** when there is an error with loading or saving data into the `data` folder. Hence, if an error occurs, all storage operations will cease to work only until you exit the program where TermiNUS will attempt to save your data one last time.
 
 ___  
+
+<div style="page-break-after: always;"></div>
 
 ## Workspace Command Summary
 
