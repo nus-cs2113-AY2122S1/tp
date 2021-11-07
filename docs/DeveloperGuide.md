@@ -370,11 +370,17 @@ a list of potential exchange Universities based on the users study plan, module 
 |v1.0|user|enter commands and arguments to the application|interact with the application on the command line in an efficient way
 |v2.0|familiar user|save my university and module information|maintain access to my information when I restart the application|
 |v2.0|new user|view the program instructions|refer to them when I forget how to use the application|
-|v2.0|familiar user|find a University by name|locate a University without having to go through the entire list|
-|v2.0|familiar user|search the available module mappings for a University based on the selected module list|get a list of module mappings for this university based on my selected modules|
+|v2.0|familiar user|find a university by name|locate a University without having to go through the entire list|
+|v2.0|familiar user|search the available module mappings for a university based on the selected module list|get a list of module mappings for this university based on my selected modules|
 |v2.0|familiar user|add a pair of module mapping for a university|save a module mapping under the university that I selected|
 |v2.0|familiar user|delete a mapping pair of module for a university|remove a module mapping under a selected university|
-|v2.0|familiar user|pass in University as command argument using its index in the master list|access the exact University I want without having to type out its full name and facing bugs caused by typo|
+|v2.0|familiar user|pass in university as command argument using its index in the master list|access the exact University I want without having to type out its full name and facing bugs caused by typo|
+|v2.1|familiar user|add a university to the selected list by name or index|store a university entering either its name or index|
+|v2.1|familiar user|add a module to the selected list by code or index|store a module entering either its code or index|
+|v2.1|familiar user|remove a university to the selected list by name or index|delete a university entering either its name or index|
+|v2.1|familiar user|remove a module to the selected list by code or index|delete a module entering either its code or index|
+|v2.1|familiar user|search the mappings for all universities in the selected list|browse through all modules mappings for my selected universities|
+|v2.1|familiar user|find a module by name or code|locate a module without having to go through the entire list|
 
 ## Non-Functional Requirements
 
@@ -505,7 +511,7 @@ These instructions only provide a starting point for testers to work on; testers
     1. Test case: `find /code CS1231`
 
        Expected: The related information for CS1231 is printed.
-    2. Test case: `find /mod abc`
+    2. Test case: `find /code abc`
 
     Expected: No module is found. Error message is printed to indicate university is not available.
 
@@ -811,4 +817,169 @@ These instructions only provide a starting point for testers to work on; testers
        Expected: No module will be removed. Error message indicating wrong flags is shown, together with the correct format for `remove` command.
 
 ### Saving data
+1. Dealing with missing directory
+    1. Missing `data` directory
+       
+       Expected: New directory will be created along with two empty text files inside.
+    2. Missing `log` directory
+       
+       Expected: New directory will be created along with an empty log file inside.
+   
+2. Dealing with missing file
+    1. Missing `selectedModules.txt` file
+       
+       Expected: New empty text file is created in the `data` directory.
+    2. Missing `selectedUniversities.txt` file
+       
+       Expected: New empty text file is created in the `data` directory.
+    3. Missing `logs.log` file
+       
+       Expected: New empty text file is created in the `log` directory.
 
+3. Dealing with corrupted data
+    1. Invalid module in `selectedModules.txt`
+       File content before run: 
+       ```
+       ACC2706 # Managerial Accounting # 4.0
+       CS1261B # Discrete Structures # 4.0
+       ```
+       
+       File content after run:
+       ```
+       ACC2706 # Managerial Accounting # 4.0
+       ```
+       
+       Expected output in console:
+       ```
+       =================================================================================
+        Invalid modules found in the file are deleted.
+        WARNING: Do not tamper the files. You would lose some records.
+       =================================================================================
+       ```
+       
+    2. Invalid module mapping in `selectedUniversities.txt`
+       File content before run:
+       ```
+       Boston University
+       CS1261B # Discrete Structures # 4.0 # MET CS 249 # Discrete Mathematics # 3.0
+       ```
+       
+       File content after run:
+       ```
+       Boston University
+       ```
+       
+       Expected output in console:
+       ```
+       =================================================================================
+        Invalid mappings found in the file are deleted.
+        WARNING: Do not tamper the files. You would lose some records.
+       =================================================================================
+       ```
+       
+    3. Invalid university in `selectedUniversities.txt`
+       File content before run:
+       ```
+       Aarhus University
+       Buston University
+       CS1231 # Discrete Structures # 4.0 # MET CS 248 # Discrete Mathematics # 3.0
+       ```
+       
+       File content after run:
+       ```
+       Aarhus University
+       ```
+       
+       Expected output in console:
+       ```
+       =================================================================================
+        Invalid university names found in the file. So, these universities and its associated mappings are deleted.
+        Other invalid mappings may have been deleted.
+        WARNING: Do not tamper the files. You would lose some records.
+       =================================================================================
+       ```
+       
+4. Dealing with duplicate data
+    1. Duplicate modules in `selectedModules.txt`
+       File content before run:
+       ```
+       ACC2706 # Managerial Accounting # 4.0
+       CS1231 # Discrete Structures # 4.0
+       CS1231 # Discrete Structures # 4.0
+       CS1231 # Discrete Structures # 4.0
+       MKT1705 # Principles of Marketing # 4.0
+       ```
+       
+       File content after run:
+       ```
+       ACC2706 # Managerial Accounting # 4.0
+       CS1231 # Discrete Structures # 4.0
+       MKT1705 # Principles of Marketing # 4.0
+       ```
+       
+       Expected output in console:
+       ```
+       =================================================================================
+        Invalid modules found in the file are deleted.
+        WARNING: Do not tamper the files. You would lose some records.
+       =================================================================================
+       
+    2. Duplicate module mappings in `selectedUniversities.txt`
+       File content before run:
+       ```
+       Aarhus University
+       Boston University
+       CS1231 # Discrete Structures # 4.0 # MET CS 248 # Discrete Mathematics # 3.0
+       CS1231 # Discrete Structures # 4.0 # MET CS 248 # Discrete Mathematics # 3.0
+       CS1231 # Discrete Structures # 4.0 # MET CS 248 # Discrete Mathematics # 3.0
+       ```
+       
+       File content after run:
+       ```
+       Aarhus University
+       Boston University
+       CS1231 # Discrete Structures # 4.0 # MET CS 248 # Discrete Mathematics # 3.0
+       ```
+       
+       Expected output in console:
+       ```
+       =================================================================================
+        Invalid mappings found in the file are deleted.
+        WARNING: Do not tamper the files. You would lose some records.
+       =================================================================================
+       ```
+    
+    3. Duplicate universities in `selectedUniversities.txt`
+       File content before run:
+       ```
+       Aarhus University
+       Boston University
+       CS1231 # Discrete Structures # 4.0 # MET CS 248 # Discrete Mathematics # 3.0
+       CS1231 # Discrete Structures # 4.0 # CAS CS131 # Combinatoric Structures # 4.0
+       Boston University
+       CS1231 # Discrete Structures # 4.0 # MET CS 248 # Discrete Mathematics # 3.0
+       ```
+       
+       File content after run:
+       ```
+       Aarhus University
+       Boston University
+       CS1231 # Discrete Structures # 4.0 # MET CS 248 # Discrete Mathematics # 3.0
+       CS1231 # Discrete Structures # 4.0 # CAS CS131 # Combinatoric Structures # 4.0
+       ```
+       
+       Expected output in console:
+       ```
+       =================================================================================
+        Invalid university names found in the file. So, these universities and its associated mappings are deleted.
+        Other invalid mappings may have been deleted.
+        WARNING: Do not tamper the files. You would lose some records.
+       =================================================================================
+       ```
+       
+
+
+       
+
+
+       

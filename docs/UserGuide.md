@@ -132,7 +132,10 @@ Displays all modules from the master list of universities that you can choose fr
 
 #### Example of usage:
 
-* Input: `list /muni`  
+* Input:  
+```
+list /muni
+```  
 Expected output:
 ```
 Here are the universities and module mappings in the list:  
@@ -506,7 +509,7 @@ for you.
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?  
+**Q**: How do I transfer my data to another computer?  
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that 
 contains the data of your previous SEPlanner home folder.
 
