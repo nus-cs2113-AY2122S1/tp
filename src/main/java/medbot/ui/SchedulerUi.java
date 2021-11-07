@@ -134,7 +134,7 @@ public class SchedulerUi {
     }
 
     public static String getViewAppointmentMessage(String appointmentInfo) {
-        return "Here is the requested appointment information:" + END_LINE
+        return "Here is the requested appointment information:" + END_LINE + END_LINE
                 + appointmentInfo;
     }
 

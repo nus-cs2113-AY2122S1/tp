@@ -220,7 +220,7 @@ public abstract class PersonUi {
      * @return String containing the information of the person
      */
     protected static String getViewPersonMessage(String person, String personInfo) {
-        return "Here's the requested " + person + ":" + END_LINE + END_LINE
+        return "Here's the requested " + person + " information:" + END_LINE + END_LINE
                 + personInfo + END_LINE;
     }
 
@@ -232,7 +232,7 @@ public abstract class PersonUi {
      * @return String indicating that the person with the specified ID is now set to hidden
      */
     protected static String getHidePersonMessage(String person, int id) {
-        return "The " + person + " with ID: " + id + " is now hidden." + END_LINE;
+        return "The " + person + " with ID " + id + " is now hidden." + END_LINE;
     }
 
     /**
@@ -243,7 +243,7 @@ public abstract class PersonUi {
      * @return String indicating that the person with the specified ID is now shown
      */
     protected static String getShowPersonMessage(String person, int id) {
-        return "The " + person + " with ID: " + id + " is now not hidden." + END_LINE;
+        return "The " + person + " with ID " + id + " is now not hidden." + END_LINE;
     }
 
     /**

@@ -252,7 +252,7 @@ class UiTest {
         Scheduler scheduler = new Scheduler();
 
         String expectedOutput = "The information of appointment with ID 1 has been edited to:" + END_LINE + END_LINE
-                + "Appointment Id: 1" + END_LINE
+                + "Appointment ID: 1" + END_LINE
                 + "Patient ID: 2" + END_LINE
                 + "Staff ID: 1" + END_LINE
                 + "Date/Time: 01 Nov 21 0800HRS" + END_LINE
@@ -288,7 +288,7 @@ class UiTest {
         Patient patient = new Patient();
         patient.setName("John Doe");
         patient.setEmailAddress("John@gmail.com");
-        String expectedOutput = "Here's the requested patient:" + END_LINE + END_LINE
+        String expectedOutput = "Here's the requested patient information:" + END_LINE + END_LINE
                 + "Patient ID: 1" + END_LINE
                 + "IC: " + END_LINE
                 + "Name: John Doe" + END_LINE
@@ -312,7 +312,7 @@ class UiTest {
         staff.setName("John Doe");
         staff.setEmailAddress("John@gmail.com");
 
-        String expectedOutput = "Here's the requested staff:" + END_LINE + END_LINE
+        String expectedOutput = "Here's the requested staff information:" + END_LINE + END_LINE
                 + "Staff ID: 1 " + END_LINE
                 + "IC: " + END_LINE
                 + "Name: John Doe" + END_LINE
@@ -577,7 +577,7 @@ class UiTest {
     @Test
     public void testGetHidePatientMessage() {
         int patientId = 1;
-        String expectedOutput = "The patient with ID: " + patientId + " is now hidden." + END_LINE;
+        String expectedOutput = "The patient with ID " + patientId + " is now hidden." + END_LINE;
 
         try {
             assertEquals(expectedOutput, Ui.getHidePersonMessage(patientId, ViewType.PATIENT_INFO));
@@ -589,7 +589,7 @@ class UiTest {
     @Test
     public void testGetShowStaffMessage() {
         int staffId = 1;
-        String expectedOutput = "The staff with ID: " + staffId + " is now not hidden." + END_LINE;
+        String expectedOutput = "The staff with ID " + staffId + " is now not hidden." + END_LINE;
 
         try {
             assertEquals(expectedOutput, Ui.getShowPersonMessage(staffId, ViewType.MEDICAL_STAFF_INFO));
