@@ -13,60 +13,39 @@ code. [[RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=al
 
 v1.0 tasks:
 
-- Implemented skeleton code for MediVault.
-    - Functionality: Users were able to type commands and parameters into MediVault.
-    - Justification: Valid commands will be accepted by MediVault. Else, InvalidCommandException will be thrown.
-    - Pull request [[#10](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/10)]
-- Implemented `Ui` class for MediVault.
-    - Functionality: Handles all the printing done by MediVault.
-    - Justification: Users will be able to view the stocks, prescriptions and orders in a table format and any messages.
-    - Pull request [[#10](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/10)]
-- Implemented sort for `liststock` command.
-    - Functionality: Users will be able to sort any columns of the stocks in ascending or descending order.
-    - Justification: Users will be able to view the stocks in sorted order such as ascending price.
-    - Pull request [[#45](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/45)]
+- Implemented skeleton code for MediVault. [[#10](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/10)]
+- Implemented `Ui` class for MediVault. [[#10](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/10)]
+- Implemented sort for `liststock` command. [[#45](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/45)]
 - Implemented `exit`, `purge` and `help` command. [[#10](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/10), [#13](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/13), [#45](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/45)]
 
 v2.0 tasks:
 
-- Implemented `listprescription` command.
-    - Functionality: Users will be able to view all the prescriptions in a table and filter them.
-    - Justification: Users will be filter the prescriptions by any column such as by customer ID.
-    - Pull request [[#181](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/181)]
-- Implemented `receiveorder` command.
-    - Functionality: Users will be able to receive an order and add the order to the stocks.
-    - Justification: Users will be able to mark an order as received and add it to the stocks in one step.
-    - Pull request [[#208](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/208)]
+- Implemented `listprescription` command. [[#181](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/181)]
+- Implemented `receiveorder` command. [[#208](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/208)]
 - Implemented sort for `listorder` command and mode feature. [[#162](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/162), [#123](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/123)]
 
 v2.1 tasks:
 
-- Fixed bug where ID does not reset after `purge`, `receiveorder` does not mark an order as delivered and whitespace renders command invalid.
-  - Pull request [[#280](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/280)]
+- Fixed bug where ID does not reset after `purge`, `receiveorder` does not mark an order as delivered and whitespace renders command invalid. [[#280](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/280)]
 - Demo video for stock features.
-    
 
 ### Enhancements to Existing Features
 
-- Added order quantity to `liststock` command.
+- Added order quantity to `liststock` command. [[#109](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/109)]
     - Functionality: `liststock` command would show the current pending order quantity in the quantity column.
     - Justification: To allow pharmacists to know easily if a new order was already placed.
-    - Pull request [[#109](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/109)]
-- Refactor `HashMap<String, String>` to `LinkedHashMap<String, String>`.
+- Refactor `HashMap<String, String>` to `LinkedHashMap<String, String>`. [[#123](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/123)]
     - Functionality: `LinkedHashMap<String, String>` would preserve the order of parameters
       unlike `HashMap<String, String>`.
     - Justification: This helps preserve the order of parameters input by the user as MediVault will take the last
       occurrence if the same parameter is provided multiple times.
-    - Pull request [[#123](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/123)]
-- Refactor `command` objects.
+- Refactor `command` objects. [[#133](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/133)]
     - Functionality: Removed the input parameters of the `execute()` function.
     - Justification: Most of the parameters like `Ui` can be made into a singleton.
-    - Pull request [[#133](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/133)]
-- Refactor `Dispense` to `Prescription`
+- Refactor `Dispense` to `Prescription` [[#208](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/208)]
     - Functionality: Refactor `Dispense` object to `Prescription`.
     - Justification: From peer feedback, users were confused what `Dispense` was, as such our team decided
       that `Prescription` is a better word to use.
-    - Pull request [[#208](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/208)]
 - Included JUnit tests for `CommandParser`, `ListPrescription`, `Help`, `Purge` and sort for `ListOrder` and `ListStock`. [[#92](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/92), [#305](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/305)]
 
 ### Documentation
