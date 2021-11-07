@@ -255,18 +255,18 @@ ArrayList within `AttendanceList`.
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|Teaching Assistant|Add module|Keep track of all the modules that I am teaching|
-|v1.0|Teaching Assistant|Add student|Keep track of students taking the module|
-|v1.0|Teaching Assistant|Add assessment|Monitor what assessments there are in the module|
+|v1.0|Teaching Assistant|Add class|Keep track of all the classes that I am teaching|
+|v1.0|Teaching Assistant|Add student|Keep track of students taking the class|
+|v1.0|Teaching Assistant|Add assessment|Monitor what assessments there are in the class|
 |v1.0|Teaching Assistant|Set marks|Record how much marks students score for the assessment|
 |v1.0|Teaching Assistant|Set attendance|Monitor the attendance of students|
 |v1.0|Teaching Assistant|Calculate the average marks of an assessment|Estimate the capabilities of students|
-|v2.0|Teaching Assistant|Edit module|Change module details (e.g. code and name)|
-|v2.0|Teaching Assistant|Delete module|Remove unnecessary data and reduce clutter|
+|v2.0|Teaching Assistant|Edit class|Change class details (e.g. ID and name)|
+|v2.0|Teaching Assistant|Delete class|Remove unnecessary data and reduce clutter|
 |v2.0|Teaching Assistant|Edit student|Change any student's information|
 |v2.0|Teaching Assistant|Delete student|Remove students who are no longer part of the class|
 |v2.0|Teaching Assistant|Edit assessment|Change the name or weightage of the assessment|
-|v2.0|Teaching Assistant|Delete assessment|Remove a particular assessment from the module|
+|v2.0|Teaching Assistant|Delete assessment|Remove a particular assessment from the class|
 |v2.0|Teaching Assistant|Edit marks|Modify the marks of the student for a particular assessment|
 |v2.0|Teaching Assistant|Delete marks|Remove the marks entry of a student for a particular assessment|
 |v2.0|Teaching Assistant|Delete attendance|Remove the attendance entry of a student|

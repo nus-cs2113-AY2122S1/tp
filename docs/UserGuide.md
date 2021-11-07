@@ -420,10 +420,13 @@ Examples:
 
 Expected Output: <br>
 (Ascending) <br>
-![img.png](images/students/SortByScoresCommand_asc.png)
+![img.png](images/students/SortByScoresCommandAsc.png)
 
 (Descending) <br>
-![img.png](images/students/SortByScoresCommand_desc.png)
+![img.png](images/students/SortByScoresCommandDesc.png)
+
+> 💡 **Notes:**<br />
+> Student scores will be displayed up to 6 decimal points.
 
 <br>
 <hr>
@@ -565,6 +568,7 @@ Examples:
 
 Expected Output: <br>
 ![img.png](images/students/DeleteCommentCommand.png)
+
 <br>
 <hr>
 

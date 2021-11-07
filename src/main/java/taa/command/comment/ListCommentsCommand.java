@@ -43,6 +43,7 @@ public class ListCommentsCommand extends Command {
      */
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
+        assert argumentMap.containsKey(KEY_CLASS_ID);
         String classId = argumentMap.get(KEY_CLASS_ID);
         TeachingClass teachingClass = classList.getClassWithId(classId);
         if (teachingClass == null) {
@@ -61,6 +62,7 @@ public class ListCommentsCommand extends Command {
             stringBuilder.append(student.getComment());
             studentIndex += 1;
         }
+        assert ui != null : "ui should exist.";
         ui.printMessage(stringBuilder.toString());
     }
 

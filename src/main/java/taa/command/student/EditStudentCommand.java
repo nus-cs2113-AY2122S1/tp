@@ -58,12 +58,14 @@ public class EditStudentCommand extends Command {
      */
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
+        assert argumentMap.containsKey(KEY_CLASS_ID);
         String classId = argumentMap.get(KEY_CLASS_ID);
         TeachingClass teachingClass = classList.getClassWithId(classId);
         if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
+        assert argumentMap.containsKey(KEY_STUDENT_INDEX);
         String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
         assert Util.isStringInteger(studentIndexInput);
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;
@@ -75,7 +77,9 @@ public class EditStudentCommand extends Command {
         }
         assert studentIndex >= 0 && studentIndex < teachingClass.getStudentList().getSize();
 
+        assert argumentMap.containsKey(KEY_NEW_ID);
         String newId = argumentMap.get(KEY_NEW_ID);
+        assert argumentMap.containsKey(KEY_NEW_NAME);
         String newName = argumentMap.get(KEY_NEW_NAME);
         Student existingStudent = studentList.getStudentWithId(newId);
         if (existingStudent != null && existingStudent != student) {
@@ -85,7 +89,9 @@ public class EditStudentCommand extends Command {
         student.setId(newId);
         student.setName(newName);
 
+        assert storage != null : "storage should exist.";
         storage.save(classList);
+        assert ui != null : "ui should exist.";
         ui.printMessage(String.format(MESSAGE_FORMAT_STUDENT_EDITED, student));
     }
 
