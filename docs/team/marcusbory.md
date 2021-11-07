@@ -10,7 +10,6 @@ iteration so that we were able to comfortably deliver our features.
 ## Summary of contributions
 ### Code contributed
 The code written by me (`marcusbory`) can be found [here](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=marcusbory&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&tabAuthor=marcusbory&tabRepo=AY2122S1-CS2113T-T09-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false).
-<br />
 
 ### Enhancements implemented
 1. Application System Architecture
