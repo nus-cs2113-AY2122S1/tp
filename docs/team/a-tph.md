@@ -6,7 +6,7 @@ This is a student project for a university software development course and I am 
 
 Given below are my contributions to the project.
 
-Code contributed: more than 2000 lines of
+Code contributed: more than 3000 lines of
 code. [[RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=a-tph&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&tabAuthor=a-tph&tabRepo=AY2122S1-CS2113T-T10-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)]
 
 ### Features
@@ -30,6 +30,17 @@ code. [[RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=a-
     * Justification: Refrain the need to use both add and delete prescription command.
     * Pull request: [[#184](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/184)]
 
+#### v2.1:
+
+* Fixed functionality and documentation bugs raised during PE.
+    * Pull request: [[#296](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/296)]
+
+* Fixed bugs found in `updateprescription` command.
+    * Pull request: [[#324](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/324)]
+
+* Fixed bug found in `MedicineValidator` class.
+    * Pull request: [[#328](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/328)]
+
 ### Enhancements to Existing Features
 
 * Implemented universal `containsInvalidParameterValues()` method.
@@ -39,10 +50,12 @@ code. [[RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=a-
     * Pull request: [[#40](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/40)]
 
 * Included JUnit tests for:
-    * `StockValidator` class
+    * `StockValidator`
         * Pull request: [[#59](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/59)]
-    * `MedicineManager` class
+    * `MedicineManager`
         * Pull request: [[#93](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/93)]
+    * `UpdateStockCommand`, `UpdateOrderCommand` and `UpdatePrescriptionCommand`
+        * Pull request: [[#316](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/316)]
 
 * Wrote and refractored `Manager` classes for `stock`, `prescription` and `order`.
     * Functionality: Contains methods that does specific `stock`, `prescription` or `order` method calls or operations.
