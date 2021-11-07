@@ -1,8 +1,5 @@
 # madhanse - Project Portfolio Page
----
-layout: page
-title: Madhan Selvapandian's Project Portfolio Page
----
+
 ### Project: SEPlanner
 
 SEPlanner is a lightweight desktop application for Computer Engineering undergraduates from NUS to plan for the Student
