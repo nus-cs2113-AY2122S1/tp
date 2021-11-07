@@ -208,6 +208,7 @@ In `TaskManager`, there are 2 lists. `taskList` and `latestFilteredList`.
 When listing tasks. `refreshDate()` is called before listing tasks. This is to enure that all dates are recurred to the latest date if they have a `recurrence` that is not `none`.
 The `Task` object is what is managed by the `TaskManager`. 
  - Each Task has a `description`, `priority` and `recurrence` with concrete Tasks adding any additional variables and formatting the `getTaskEntryDescription()` method respectively.
+   >💡 **Note**: Fixed values such as `priority` and `recurrence` are stored as an enum to ensure standardisation and that there are no invalid values being stored.
  - They also each have their own `TaskFlag` class which includes a list of all valid flags for agruments in creating the specific task.
    - This is used in the '`checkAllEditFlagsValid()` in the `edit` command function in editing tasks to ensure that all the flags entered by the user are correct for the respective task.  
  - `taskEdit()` is to be overridden to check the `Map<String, String>` for the respective flags in the concrete `Taskflag` and edit the parameters in the concrete `Task` object respectively.
@@ -272,7 +273,7 @@ conversion between java time API and semesters. The enumeration class `Semester`
     <img src="images/SeanUMLDiagrams/TaskFactory_Sequence_Diagram.png">
 </p>
 
-`Todo`, `Deadline` and `Event` Tasks are created using Task factories.
+`Todo`, `Deadline` and `Event` Tasks are created using their respective Task factories.
  - All Task factories inherit from the abstract `TaskFactory` class and are created using similar steps:
    1. It firstly checks that all the required flags for making the concrete Task are present and throws `RequiredArgmentNotProvidedException` if a flag is missing.
    2. It then initialises the `description`, `priority` and `recurrence`. 
@@ -290,21 +291,6 @@ The `TaskFactory` has been designed using the [Factory Method Pattern](https://e
 2. From there you have to override the `setAdditionalVariables()` function to set any new variables that are unique to the concrete Task you want to impelment.
 3. override `createTask()` to return the constructed Task (you can ignore `priority` and `recurrence` as they are set in `TaskFactory`)
 4. optional: you may override `getTask()` to return the concrete Task instead of the abstract `Task`.
-
-The Class diagrams for the different Tasks:  
-<img src="https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/docs/images/Task%20Inheritence.jpeg?raw=true" alt="TodoFactory Sequence Diagram" width="650"/>  
-
-Fixed values such as priority and recurrence are stored as an enum to ensure standardisation and that there are no invalid values being stored. The TaskTypes are also stored as an enum so that we can easily get the taskType when we have the task (and by extension the name of the task) for anything to do with parsing.  
-<img src="https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/docs/images/Task%20Enums.jpeg?raw=true" alt="TodoFactory Sequence Diagram" width="600"/>  
-
-The creation of tasks with the td, deadline r event cmmands are done using their respecive Task Factories  
-<img src="https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/docs/images/TodoFactory%20Sequence%20Diagram.JPG?raw=true" alt="TodoFactory Sequence Diagram" width="500"/>  
-The sequence diagram above shows the creation of a Todo Task using TodoFactory.
-1. It checks if it has the required arguments and then throws an exception for any required argument that does not exist e.g. description.
-1. After that it parses the dates, priority and recurrence arguments into the appropriate objects that are stored in the Task object
-1. Finally, it calls getConstructor() with the parameters. getConstructor()'s logic will find and call the appropriate Task constructor and return the Task created.  
-
-The same logical structure is used in the Deadline and Event factories.  
 
 ### 4.2 Filtering the tasklist
 
