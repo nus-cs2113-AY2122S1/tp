@@ -33,13 +33,9 @@ v2.1:
 ### Enhancements to Existing Features
 
 * Implemented `Prescription Validator` method. [[#86](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/86)]
-    * Functionality: Checks if prescription ID,customer ID, Staff Name,prescription date and prescription column/alias is valid.
-    * Justification: This method can be called for any of the prescription command that need to check for any of the inputs as stated above.
-    
+
 * Implemented `Order Validator` method. [[#119](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/119)]
-    * Functionality: Checks if order ID, order status,order date and order column/alias is valid.
-    * Justification: This method can be called for any of the order command that need to check for any of the inputs as stated above.
-    
+
 * Implemented `getNotExpiredStockQuantity` method in `PrescriptionManager`. [[#295](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/295)]
 
 * Added functionality for `addstock` command to limit number of medication for stock. [[#42](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/42)]
