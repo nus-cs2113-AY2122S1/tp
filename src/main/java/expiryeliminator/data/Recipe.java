@@ -1,7 +1,12 @@
 package expiryeliminator.data;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import expiryeliminator.common.LogsCenter;
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.IllegalValueException;
 import expiryeliminator.data.exception.NotFoundException;
@@ -12,6 +17,7 @@ import expiryeliminator.data.exception.NotFoundException;
 public class Recipe {
     private String name;
     private final TreeMap<String, IngredientQuantity> ingredientQuantities = new TreeMap<>();
+    private final static Logger logger = LogsCenter.getLogger(Recipe.class);
 
     /**
      * Initialises a recipe.
@@ -64,9 +70,14 @@ public class Recipe {
             throws DuplicateDataException, IllegalValueException {
         String ingredientNameIfNotInList = "";
         final IngredientStorage ingredientStorage = ingredientRepository.findWithNullReturn(ingredientName);
+        if (ingredientQuantities.containsKey(ingredientName)) {
+            throw new DuplicateDataException();
+        }
         Ingredient ingredient;
         if (ingredientStorage == null) {
+            logger.log(Level.INFO, ingredientName + " not in Ingredient Repository.");
             ingredientRepository.add(ingredientName);
+            logger.log(Level.INFO, "Adding " + ingredientName + " to the Ingredient Repository.");
             ingredientNameIfNotInList = ingredientName + "\n";
             ingredient = new Ingredient(ingredientName);
         } else {
@@ -74,9 +85,8 @@ public class Recipe {
         }
         final IngredientQuantity ingredientQuantity = new IngredientQuantity(ingredient, quantity);
         assert quantity > 0 : "Quantity for an ingredient in the recipe cannot be zero";
-        if (ingredientQuantities.containsKey(ingredientQuantity.getName())) {
-            throw new DuplicateDataException();
-        }
+        logger.log(Level.INFO, String.format("Adding ingredient %1$s with quantity %2$s " +
+                "into IngredientQuantities",ingredientName,quantity));
         ingredientQuantities.put(ingredientQuantity.getName(), ingredientQuantity);
         return ingredientNameIfNotInList;
     }

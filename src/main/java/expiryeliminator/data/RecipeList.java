@@ -1,10 +1,10 @@
 package expiryeliminator.data;
 
-import expiryeliminator.data.exception.IllegalValueException;
-
-import java.util.Iterator;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import expiryeliminator.common.LogsCenter;
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.NotFoundException;
 
@@ -13,6 +13,7 @@ import expiryeliminator.data.exception.NotFoundException;
  */
 public class RecipeList {
     private TreeMap<String, Recipe> recipes;
+    private final Logger logger = LogsCenter.getLogger(RecipeList.class);
 
     /**
      * Constructs Recipe List with no recipes.
@@ -31,10 +32,12 @@ public class RecipeList {
         if (recipes.containsKey(recipe.getName())) {
             throw new DuplicateDataException();
         } else {
+            logger.log(Level.INFO,String.format("Adding recipe %1$s into RecipeList",recipe.getName()));
             recipes.put(recipe.getName(), recipe);
         }
     }
 
+    //@@author vincentlauhl
     /**
      * Removes a recipe from the recipe list.
      *
@@ -47,9 +50,11 @@ public class RecipeList {
         if (recipe == null) {
             throw new NotFoundException();
         }
+        logger.log(Level.INFO,String.format("Removing recipe %1$s in RecipeList",recipe.getName()));
         recipes.remove(name);
         return recipe;
     }
+    //@@author
 
     /**
      * Returns the list of recipes.

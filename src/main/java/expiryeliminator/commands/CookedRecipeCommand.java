@@ -1,7 +1,10 @@
 package expiryeliminator.commands;
 
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import expiryeliminator.common.LogsCenter;
 import expiryeliminator.data.IngredientQuantity;
 import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.IngredientStorage;
@@ -19,7 +22,7 @@ public class CookedRecipeCommand extends Command {
 
     public static final String MESSAGE_RECIPE_COOKED = "Now you have these quantities left for your ingredients:\n"
             + "\n%1$s\n";
-    public static final String MESSAGE_INSUFFICIENT_QUANTITY = "You don't have enough ingredients! "
+    public static final String MESSAGE_INSUFFICIENT_QUANTITY = "You don't have enough ingredients!\n"
             + "Generate a shopping list to see what ingredients you're missing.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the ingredients' quantities based on"
             + "the recipe cooked.\n"
@@ -28,6 +31,7 @@ public class CookedRecipeCommand extends Command {
             + " r/Chicken Soup";
 
     private final String name;
+    private final static Logger logger = LogsCenter.getLogger(CookedRecipeCommand.class);
 
     public CookedRecipeCommand(String name) {
         assert name != null : "The recipe name cannot be null";
@@ -59,7 +63,9 @@ public class CookedRecipeCommand extends Command {
             for (String s : ingredientsInRecipe.keySet()) {
                 IngredientStorage ingredient = ingredients.findWithNullReturn(s);
                 assert ingredient != null : "Ingredient should be added in when recipe is added.";
-                ingredient.remove(ingredientsInRecipe.get(s).getQuantity());
+                int quantity = ingredientsInRecipe.get(s).getQuantity();
+                logger.log(Level.INFO,"Removing " + quantity + " amount of " + ingredient.getIngredient());
+                ingredient.remove(quantity);
                 ingredientsLeft += ingredient + "\n";
             }
         } catch (NotFoundException e) {
