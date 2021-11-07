@@ -120,9 +120,7 @@ public class Task {
     public void updateOverdue() throws NullPointerException {
         try {
             LocalDateTime currentDateTime = LocalDateTime.now();
-            if (!(this.isDone) && currentDateTime.isAfter(this.deadline)) {
-                this.isLate = true;
-            }
+            this.isLate = !(this.isDone) && currentDateTime.isAfter(this.deadline);
         } catch (NullPointerException e) {
             Ui.printInvalidIndex();
         }
