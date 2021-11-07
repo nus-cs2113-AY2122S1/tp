@@ -9,9 +9,12 @@ import seedu.duke.expense.Expense;
 import seedu.duke.trip.FilterFinder;
 import seedu.duke.trip.Trip;
 
-import java.io.ByteArrayInputStream;
+<<<<<<<<< Temporary merge branch 1
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+=========
+import java.io.ByteArrayInputStream;
+>>>>>>>>> Temporary merge branch 2
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -38,7 +41,6 @@ class ExpenseTest {
         trip.addExpense(exp);
         System.setOut(System.out);
     }
-
 
     @Test
     void testGetAmountSpent() {
