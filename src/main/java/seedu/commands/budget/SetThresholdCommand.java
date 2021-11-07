@@ -15,7 +15,7 @@ public class SetThresholdCommand extends Command {
 
     /**
      * Constructor initializing the threshold value to be set.
-     * @param threshold
+     * @param threshold Threshold value to be set
      */
     public SetThresholdCommand(double threshold) {
         this.threshold = threshold;

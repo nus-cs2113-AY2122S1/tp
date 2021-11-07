@@ -3,7 +3,7 @@ package seedu.budget;
 import seedu.entry.ExpenseCategory;
 
 /**
- * Class representing the transport budget category
+ * Class representing the transport budget category.
  */
 public class TransportBudget extends Budget {
 

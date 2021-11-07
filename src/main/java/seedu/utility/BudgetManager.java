@@ -105,7 +105,7 @@ public class BudgetManager {
     }
 
     /**
-     * Returns true if approaching the budget limit (diff is smaller than thresholdLimit)
+     * Returns true if approaching the budget limit (diff is smaller than thresholdLimit).
      * @param budget Budget to check
      * @param currBudgetAmount Current amount spent in the budget
      * @return boolean signifying if approaching budget limit
@@ -138,7 +138,7 @@ public class BudgetManager {
     }
 
     /**
-     * Returns the threshold value
+     * Returns the threshold value.
      * @return threshold value
      */
     public double getThreshold() {
