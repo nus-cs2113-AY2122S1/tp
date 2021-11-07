@@ -31,6 +31,14 @@
    based on the command.
  - The storage takes the `Ingredient Repository` and `Recipe List` as an input to save data to the file / load data from the file.
 
+### Logic
+![](diagrams/Logic.png)
+
+- The `Logic' component:
+  - When ExpiryEliminator is called upon to execute a command, it uses the Parser class to parse the user command.
+  - This results in a Command object (more precisely, an object of one of its subclasses e.g., AddCommand) which is executed by ExpiryEliminator.
+  - The command can communicate with the Model when it is executed (e.g. to add an ingredient).
+
 
 ### Parser
 
@@ -257,7 +265,7 @@ To help young adults who are living in their own home keep track of ingredients 
 |v2.0|user|list recipes i can cook based on the ingredients I have|save time on checking the ingredients I have|
 |v2.0|user|generate a shopping list for a particular recipe/recipes|know what ingredients to buy|
 |v2.0|user|delete all ingredients that have expired at one go|all ingredients I keep track of are not expired|
-
+|v2.0|user|update the units of an ingredient|accurately quantify each ingredient
 ## Non-Functional Requirements
 
 1. Should work on Windows, Mac, and any mainstream Linux OS as long as it has Java 11 or above installed.
@@ -279,6 +287,66 @@ To help young adults who are living in their own home keep track of ingredients 
 2. Shutdown
     1. Type `bye`
        Expected: the program exits.
+
+
+### List
+1. List ingredients when ingredient repository contains ingredients.
+   1. Test case: `list` <br/>
+      Expected: A list of each ingredient and each of its batches.
+
+2. List ingredients when ingredient repository does not contain ingredients.
+   1. Test case: `list` <br/>
+      Expected: A message that tells you the ingredient repository is empty appears.
+
+### List Expiring
+1. List expiring ingredients when ingredient repository contains ingredients expiring within the week.
+   1. Test case: `list expiring` <br/>
+      Expected: A list of the ingredient and its batches that are expiring.
+
+2. List expiring ingredients when ingredient repository does not contain ingredients expiring within the week.
+   1. Test case: `list expiring` <br/>
+      Expected: The message "Here are the expiring ingredients in your list", however, no ingredients are listed out.
+
+### List Expired
+1. List expired ingredients when ingredient repository contains ingredients that have expired.
+    1. Test case: `list expired` <br/>
+       Expected: A list of the ingredient and its batches that have expired.
+
+2. List expired ingredients when ingredient repository does not contain ingredients that have expired.
+    1. Test case: `list expired` <br/>
+       Expected: The message "Here are the expired ingredients in your list", however, no ingredients are listed out.
+
+### View an ingredient
+1. View an ingredient which exits.
+   1. Prerequisite: The ingredient "Chicken" exists in the ingredient repository.
+   2. Test case: `view i/chicken` <br/>
+   Expected: A list of that specific ingredient and all its batches.
+   
+2. View an ingredient which does not exist.
+   1. Prerequisite: The ingredient "Chicken" does not exist in the ingredient repository.
+   2. Test case: `view i/chicken` <br/>
+   Expected: The message "Sorry. No matching ingredients found!"
+
+### Update units of an ingredient
+1. Update units of an ingredient that exists.
+   1. Prerequisite: The ingredient "Chicken" exists in the ingredient repository.
+   2. Test case: `update units i/chicken u/kg` <br/>
+   Expected: The message "The units for this ingredient has been updated to kg."
+
+2. Update units of an ingredient that does not exist.
+   1. Prerequisite: The ingredient "Beef" does not exist in the ingredient repository.
+   2. Test case: `update units i/beef u/kg` <br/>
+   Expected: The message "Sorry. No matching ingredients found!"
+
+3. Delete the units of an ingredient.
+   1. Prerequisite: The ingredient "Chicken" exists in the ingredient repository.
+   2. Test case: `update units i/chicken u/` <br/>
+   Expected: The message "The units for this ingredient has been deleted."
+
+4. Update units of an ingredient to a number.
+   1. Prerequisite: The ingredient "Chicken" exists in the ingredient repository.
+   2. Test case: `update units i/chicken u/6` <br/>
+   Expected: Units are not updated. Error message thrown.
 
 ### Add a recipe
 1. Add a recipe 
@@ -309,6 +377,7 @@ To help young adults who are living in their own home keep track of ingredients 
    2. Test case: `add recipe r/Chicken Soup q/1 i/Salt q/20` <br/>
     Expected: Similar to previous.
 
+<<<<<<< HEAD
 ### Delete a recipe
 1. Delete a recipe
     1. Prerequisite: The recipe "Chicken Soup" exist in the RecipeList.
@@ -370,3 +439,22 @@ To help young adults who are living in their own home keep track of ingredients 
     1. Prerequisite: RecipeList is empty
     2. Test case: `list recipe i can cook` <br/>
        Expected: Informs user that the RecipeList is empty.
+=======
+### Generate a shopping list
+1. Generate a shopping list for one recipe.
+   1. Prerequisite: The recipe "Chicken Soup" exists in the recipe list.
+   2. Test case: `shopping list r/chicken soup` <br/>
+   Expected: A list of ingredients and quantities needed to be bought on top of ingredients that already exist in the ingredient repository to make that recipe.
+2. Generate a shopping list for multiple recipes.
+   1. Prerequisite: The recipes "Chicken Soup" and "Pork Soup" exist in the recipe list.
+   2. Test case: `shopping list r/chicken soup r/pork soup` <br/>
+   Expected: A list of ingredients and quantities needed to be bought on top of ingredients that already exist in the ingredient repository to make those recipes.
+3. Generate a shopping list for recipe that is not in the recipe list.
+   1. Prerequisite: The recipes "Apple Pie" does not exist in the recipe list.
+   2. Test case: `shopping list r/apple pie` <br/>
+   3. Expected: Error message "Sorry. One or more of your recipes are not found!"
+4. Generate a shopping list for multiple recipes, and one of those recipes is not in recipe list.
+   1. Prerequisite: The recipe "Chicken Soup" exists but the recipe and "Apple Pie" does not exist in the recipe list.
+   2. Test case: `shopping list r/chicken soup r/apple pie` <br/>
+   Expected: Error message "Sorry. One or more of your recipes are not found!"
+>>>>>>> cfa6233bc6a085f8c8f25c52145e4344c0d5c1fe
