@@ -6,7 +6,7 @@ import happybit.command.HelpCommand;
 import happybit.command.ReturnCommand;
 import happybit.exception.HaBitParserException;
 
-public class MainParser {
+public class ParserManager {
 
     private static final String DELIMITER = "@@@";
     private static final String SPACE = " ";

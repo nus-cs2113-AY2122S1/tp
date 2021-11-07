@@ -3,10 +3,9 @@ package happybit.ui;
 import happybit.command.Command;
 import happybit.exception.HaBitCommandException;
 import happybit.exception.HaBitParserException;
-import happybit.exception.HaBitStorageException;
 import happybit.goal.GoalList;
 import happybit.goal.GoalType;
-import happybit.parser.MainParser;
+import happybit.parser.ParserManager;
 import happybit.storage.Storage;
 
 import java.util.ArrayList;
@@ -98,7 +97,7 @@ public class UiMain extends UiManager {
         while (!isExit && !isReturn) {
             userInput = readUserInput(in);
             try {
-                Command command = MainParser.parse(userInput);
+                Command command = ParserManager.parse(userInput);
                 command.runCommand(goalList, printManager, storage);
                 isExit = isExitCommand(command);
                 isReturn = isReturnCommand(command);
