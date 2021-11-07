@@ -17,6 +17,14 @@ public class EditIngrStoredCommand extends Command {
         LoggerManager.setupLogger(LOGGER);
     }
 
+    /**
+     * Checks if the input parameters of the edit ingredient stored command are valid
+     * before calling the appropriate function in the IngredientList class
+     * @param parameters parameters for the edit ingredient stored command
+     * @throws FoodoramaException if the input parameters are invalid
+     *
+     * @author renzocanare
+     */
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         LOGGER.log(Level.INFO, "Start of process");
@@ -43,7 +51,13 @@ public class EditIngrStoredCommand extends Command {
         LOGGER.log(Level.INFO, "End of process.");
     }
 
-
+    /**
+     * Checks if given string can be converted into a number
+     * @param numberString string to be checked
+     * @return true if string can be converted into a double, false otherwise
+     *
+     * @author Rakesh12000
+     */
     public boolean isNumber(String numberString) {
         try {
             double number = Double.parseDouble(numberString);
@@ -53,6 +67,13 @@ public class EditIngrStoredCommand extends Command {
         }
     }
 
+    /**
+     * Checks if given string can be converted into an integer
+     * @param numberString string to be checked
+     * @return true if string can be converted into an integer, false otherwise
+     *
+     * @author Dniv-ra
+     */
     public boolean isInteger(String numberString) {
         if (isNumber(numberString)) {
             double number = Double.parseDouble(numberString);

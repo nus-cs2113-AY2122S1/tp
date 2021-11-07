@@ -5,9 +5,20 @@ import seedu.foodorama.exceptions.FoodoramaException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles the parsing of user inputs to extract the command and parameters
+ */
 public class InputParser {
     public Ui ui = new Ui();
 
+    /**
+     * Gets the command type the user gave from the input
+     * @param input text the user inputted
+     * @return the respective command if it exists
+     * @throws FoodoramaException if no command can be found in users input
+     *
+     * @author Dniv-ra
+     */
     public CommandNames getCommandName(String input) throws FoodoramaException {
         String trimmedInput = input.trim() + " ";
         for (CommandNames command : CommandNames.values()) {
@@ -18,6 +29,15 @@ public class InputParser {
         throw new FoodoramaException(ui.getInvalidCommandMsg());
     }
 
+    /**
+     * Extracts the parameters of a command from the user input into an ArrayList<String>
+     * @param input user input
+     * @param inputCommand the type of command the input is
+     * @return parameters of the command present in the input
+     * @throws FoodoramaException if certain command types are missing parameters
+     *
+     * @author Dniv-ra
+     */
     public ArrayList<String> getParameters(String input, CommandNames inputCommand) throws FoodoramaException {
         Ui ui  = new Ui();
         ArrayList<String> parameters = new ArrayList<>();

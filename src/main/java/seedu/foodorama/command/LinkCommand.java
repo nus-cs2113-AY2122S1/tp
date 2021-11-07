@@ -17,6 +17,14 @@ public class LinkCommand extends Command {
         LoggerManager.setupLogger(LOGGER);
     }
 
+    /**
+     * Checks if the input parameters of the link command are valid before
+     * calling the appropriate function in the DishList class
+     * @param parameters parameters for the link command
+     * @throws FoodoramaException if the dish input doesn't exist in the list of dishes
+     *
+     * @author Dniv-ra
+     */
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         LOGGER.log(Level.INFO, "Start of process");

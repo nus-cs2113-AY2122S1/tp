@@ -733,6 +733,15 @@ public class Ui {
         return INVALID_DISH_NAME;
     }
 
+    /**
+     * Prints the bars for the graph given the coordinates of a particular point in the grid
+     * @param graphPortions maximum number of bars in the graph
+     * @param lengths collection of the lengths of all the bars in the graph
+     * @param i x coordinate of the point
+     * @param j y coordinate of the point
+     *
+     * @author Dniv-ra
+     */
     private void printGraph(int graphPortions, ArrayList<Double> lengths, int i, int j) {
         int integralPart = (int) Math.floor(lengths.get(j / 2));
         double fractionalPart = lengths.get(j / 2) - integralPart;
@@ -759,6 +768,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the wastage of an array of dishes in a graphical format
+     * @param dishList list of dishes to be converted into a bar graph
+     *
+     * @author Dniv-ra
+     */
     public void printDishListGraph(ArrayList<Dish> dishList) {
         assert dishList != null : "dishList cannot be null";
         int graphPortions = 10;
@@ -792,6 +807,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the legend and the scale at the side of the graph
+     * @param dishList list of dishes to be used for the legend
+     * @param i current row in the grid
+     *
+     * @author Dniv-ra
+     */
     private void printDishLegend(ArrayList<Dish> dishList, int i) {
         if (i == 0) {
             System.out.print("     Legend:         ");
@@ -803,6 +825,12 @@ public class Ui {
         System.out.print(System.lineSeparator());
     }
 
+    /**
+     * Prints the wastage of an array of ingredients in a graphical format
+     * @param ingredientList list of ingredients to be converted into a bar graph
+     *
+     * @author Dniv-ra
+     */
     public void printIngrListGraph(ArrayList<Ingredient> ingredientList) {
         assert ingredientList != null : "ingredientList cannot be null";
         int graphPortions = 10;
@@ -836,6 +864,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints the legend and the scale at the side of the graph
+     * @param ingredientList list of ingredients to be used for the legend
+     * @param i current row in the grid
+     *
+     * @author Dniv-ra
+     */
     private void printIngrLegend(ArrayList<Ingredient> ingredientList, int i) {
         //Scale on first line
         if (i == 0) {

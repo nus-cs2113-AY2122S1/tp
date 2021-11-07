@@ -15,6 +15,13 @@ public class FindCommand extends Command {
     private static final String INGR = "ingr";
     private static final Ui UI = new Ui();
 
+    /**
+     * Checks if the input parameters of the find command are valid before calling the appropriate function
+     * @param parameters parameters for the find command
+     * @throws FoodoramaException if no keyword to search for or find type isn't dish or ingredient
+     *
+     * @author renzocanare
+     */
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         String commandToExecute = parameters.get(0);

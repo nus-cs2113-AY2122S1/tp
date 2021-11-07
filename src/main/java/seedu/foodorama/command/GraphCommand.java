@@ -12,6 +12,13 @@ public class GraphCommand extends Command {
     private static final String INGR = "ingr";
     private static final Ui UI = new Ui();
 
+    /**
+     * Checks if the input parameters of the graph command are valid before calling the appropriate function
+     * @param parameters parameters for the graph command
+     * @throws FoodoramaException if graph type isn't dish or ingredient
+     *
+     * @author Dniv-ra
+     */
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         switch (parameters.get(0)) {
