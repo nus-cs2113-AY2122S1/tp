@@ -19,7 +19,8 @@ public abstract class MedicineValidator {
     }
 
     public abstract boolean containsInvalidParameterValues(Ui ui, LinkedHashMap<String, String> parameters,
-                                                           ArrayList<Medicine> medicines, String commandSyntax);
+                                                           ArrayList<Medicine> medicines, String commandSyntax,
+                                                           ArrayList<String> invalidParameters);
 
     public abstract boolean isValidColumn(Ui ui, String columnName);
 
@@ -57,12 +58,8 @@ public abstract class MedicineValidator {
 
         ArrayList<String> invalidParameters = getInvalidParameters(parameters, mergedParameters);
 
-        for (String invalidParameter : invalidParameters) {
-            parameters.remove(invalidParameter);
-        }
-
         boolean isInvalidParameterValues = validator.containsInvalidParameterValues(ui, parameters,
-                medicines, commandSyntax);
+                medicines, commandSyntax, invalidParameters);
         if (isInvalidParameterValues) {
             logger.log(Level.WARNING, "Invalid parameters values given by user");
             return true;
@@ -84,7 +81,7 @@ public abstract class MedicineValidator {
         for (String parameter : parameters.keySet()) {
             boolean found = false;
             for (String mergedParameter : mergedParameters) {
-                if (parameter.equals(mergedParameter)) {
+                if (parameter.equalsIgnoreCase(mergedParameter)) {
                     found = true;
                     break;
                 }

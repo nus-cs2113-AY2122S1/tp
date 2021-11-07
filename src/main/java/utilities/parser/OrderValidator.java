@@ -22,16 +22,28 @@ public class OrderValidator extends MedicineValidator {
     /**
      * Checks if parameter values are valid for Order objects.
      *
-     * @param ui            Reference to the UI object to print messages.
-     * @param parameters    LinkedHashMap Key-Value set for parameter and user specified parameter value.
-     * @param medicines     Arraylist of all medicines.
-     * @param commandSyntax The command's valid syntax.
+     * @param ui                Reference to the UI object to print messages.
+     * @param parameters        LinkedHashMap Key-Value set for parameter and user specified parameter value.
+     * @param medicines         Arraylist of all medicines.
+     * @param commandSyntax     The command's valid syntax.
+     * @param invalidParameters Parameters to be ignored for checking.
      * @return A boolean value indicating whether parameter values are valid.
      */
     @Override
     public boolean containsInvalidParameterValues(Ui ui, LinkedHashMap<String, String> parameters,
-                                                  ArrayList<Medicine> medicines, String commandSyntax) {
+                                                  ArrayList<Medicine> medicines, String commandSyntax,
+                                                  ArrayList<String> invalidParameters) {
         for (String parameter : parameters.keySet()) {
+            boolean ignore = false;
+            for (String invalidParameter : invalidParameters) {
+                if (parameter.equalsIgnoreCase(invalidParameter)) {
+                    ignore = true;
+                    break;
+                }
+            }
+            if (ignore) {
+                continue;
+            }
             boolean isValid = false;
             String parameterValue = parameters.get(parameter);
 
