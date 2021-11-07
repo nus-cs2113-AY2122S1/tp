@@ -74,45 +74,42 @@ public class AddOrderCommand extends Command {
         if (parameters.containsKey(CommandParameters.NAME)) {
             nameToAdd = parameters.get(CommandParameters.NAME);
             for (Medicine medicine : medicines) {
-                if (medicine instanceof Stock && medicine.getMedicineName().equalsIgnoreCase(nameToAdd)) {
+                if (medicine instanceof Stock && medicine.getMedicineName().equalsIgnoreCase(nameToAdd)
+                && !((Stock) medicine).isDeleted()) {
                     nameExistsInStock = true;
                     break;
                 }
             }
         }
 
-        if (nameExistsInOrder) {
-            if (!nameExistsInStock) {
-                if (orderQuantity < maxQuantity) {
-                    addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(dateToAdd));
-                }
-            } else {
-                int existingOrdersQuantity = OrderManager.getTotalOrderQuantity(medicines, nameToAdd);
-                int existingStockQuantity = StockManager.getTotalStockQuantity(medicines, nameToAdd);
-                int totalQuantity = existingStockQuantity + existingOrdersQuantity;
-                maxQuantity = StockManager.getMaxStockQuantity(medicines, nameToAdd);
-
-                if (orderQuantity + totalQuantity <= maxQuantity) {
-                    addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(dateToAdd));
-                } else {
-                    ui.print("Unable to add order as total order quantity exceeds maximum stock quantity of "
-                            + maxQuantity + ".\nExisting quantity in stock: " + existingStockQuantity
-                            + "\nPending order quantity: " + existingOrdersQuantity);
-                }
+        if (nameExistsInOrder && !nameExistsInStock) {
+            if (orderQuantity < maxQuantity) {
+                addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(dateToAdd));
             }
-        } else {
-            if (!nameExistsInStock) {
+        } else if (nameExistsInOrder && nameExistsInStock) {
+            int existingOrdersQuantity = OrderManager.getTotalOrderQuantity(medicines, nameToAdd);
+            int existingStockQuantity = StockManager.getTotalStockQuantity(medicines, nameToAdd);
+            int totalQuantity = existingStockQuantity + existingOrdersQuantity;
+            maxQuantity = StockManager.getMaxStockQuantity(medicines, nameToAdd);
+
+            if (orderQuantity + totalQuantity <= maxQuantity) {
                 addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(dateToAdd));
             } else {
-                int existingStockQuantity = StockManager.getTotalStockQuantity(medicines, nameToAdd);
-                maxQuantity = StockManager.getMaxStockQuantity(medicines, nameToAdd);
-                if (orderQuantity + existingStockQuantity <= maxQuantity) {
-                    addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(dateToAdd));
-                } else {
-                    ui.print("Unable to add order as total order quantity exceeds maximum stock quantity of "
-                            + maxQuantity + ".\nExisting quantity in stock: " + existingStockQuantity);
-                }
+                ui.print("Unable to add order as total order quantity exceeds maximum stock quantity of "
+                        + maxQuantity + ".\nExisting quantity in stock: " + existingStockQuantity
+                        + "\nPending order quantity: " + existingOrdersQuantity);
             }
+        } else if (!nameExistsInOrder && nameExistsInStock) {
+            int existingStockQuantity = StockManager.getTotalStockQuantity(medicines, nameToAdd);
+            maxQuantity = StockManager.getMaxStockQuantity(medicines, nameToAdd);
+            if (orderQuantity + existingStockQuantity <= maxQuantity) {
+                addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(dateToAdd));
+            } else {
+                ui.print("Unable to add order as total order quantity exceeds maximum stock quantity of "
+                        + maxQuantity + ".\nExisting quantity in stock: " + existingStockQuantity);
+            }
+        } else {
+            addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(dateToAdd));
         }
     }
 

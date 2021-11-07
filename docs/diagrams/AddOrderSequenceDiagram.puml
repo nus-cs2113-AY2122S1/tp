@@ -16,47 +16,34 @@ autoactivate on
 mainFrame sd Logic for AddOrderCommand
 activate addorder
 alt orderQuantity != 0
-    alt nameExistsInorder
-        alt !nameExistsInStock
-               alt orderQuantity < maxQuantity
-                   addorder -> addorder : addDate(dateToAdd)
-                   addorder --> addorder
-                   addorder -> addorder : addOrder(ui: Ui, medicines: ArrayList<Medicine>, name: String, \nquantity: int, date: Date)
-                   addorder --> addorder
-               end
-           else nameExistsInStock
-               addorder -> ordermanager : getTotalOrderQuantity()
-               addorder <-- ordermanager : TotalOrderQuantity
-               addorder -> stockmanager : getTotalStockQuantity()
-               addorder <-- stockmanager : TotalStockQuantity
-               addorder -> stockmanager : getMaxStockQuantity()
-               addorder <-- stockmanager : MaxStockQuantity
-               alt orderQuantity + totalExistingQuantity <= maxQuantity
-                   addorder -> addorder : addDate(dateToAdd)
-                   addorder --> addorder
-                   addorder -> addorder : addOrder(ui: Ui, medicines: ArrayList<Medicine>, name: String, \nquantity: int, date: Date)
-                   addorder --> addorder
-               end
-           end
-    else !nameExistsInorder
-        alt !nameExistsInStock
-            addorder -> addorder : addDate(dateToAdd)
-            addorder --> addorder
-            addorder -> addorder : addOrder(ui: Ui, medicines: ArrayList<Medicine>, name: String, \nquantity: int, date: Date)
-            addorder --> addorder
-        else nameExistsInStock
-            addorder -> stockmanager : getTotalStockQuantity()
-            addorder <-- stockmanager : TotalStockQuantity
-            addorder -> stockmanager : getMaxStockQuantity()
-            addorder <-- stockmanager : MaxStockQuantity
-            alt orderQuantity + existingStockQuantity <= maxQuantity
-                addorder -> addorder : addDate(dateToAdd)
-                addorder --> addorder
-                addorder -> addorder : addOrder(ui: Ui, medicines: ArrayList<Medicine>, name: String, \nquantity: int, date: Date)
-                addorder --> addorder
-            end
+    alt nameExistsInOrder && !nameExistsInStock
+        alt orderQuantity < maxQuantity
+           addorder -> addorder : addDate(dateToAdd)
+           addorder --> addorder
+           addorder -> addorder : addOrder(ui: Ui, medicines: ArrayList<Medicine>, name: String, \nquantity: int, date: Date)
+           addorder --> addorder
         end
-    end
+    else nameExistsInOrder && nameExistsInStock
+        addorder -> ordermanager : getTotalOrderQuantity()
+        addorder <-- ordermanager : TotalOrderQuantity
+        addorder -> stockmanager : getTotalStockQuantity()
+        addorder <-- stockmanager : TotalStockQuantity
+        addorder -> stockmanager : getMaxStockQuantity()
+        addorder <-- stockmanager : MaxStockQuantity
+        alt orderQuantity + totalExistingQuantity <= maxQuantity
+           addorder -> addorder : addDate(dateToAdd)
+           addorder --> addorder
+           addorder -> addorder : addOrder(ui: Ui, medicines: ArrayList<Medicine>, name: String, \nquantity: int, date: Date)
+           addorder --> addorder
+        end
+    note right
+        This diagram shows the process for
+        adding order when medicine exist in
+        orders.
+        It does not include the process by
+        which medicine does not exist in
+        orders.    
+    end note
 end
 deactivate addorder
 @enduml
