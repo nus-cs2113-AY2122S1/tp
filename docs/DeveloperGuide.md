@@ -220,7 +220,7 @@ from the CSV type files (`University.csv` and `modules.csv`) stored in the resou
 The following diagram is the class diagram of the university related classes:
 
 <p align = "center">
-<img src="images/universities.png" width = "800" />
+<img src="images/universities.png" width = "400" />
 </p>
 
 This component consist of the following classes:  
@@ -245,7 +245,7 @@ This component consist of the following classes:
 The following diagram is the class diagram for the module related classes:  
 
 <p align = "center">
-<img src="images/modules.png" width = "800" />
+<img src="images/modules.png" width = "400" />
 </p>
 
 This component consist of the following classes:  
@@ -276,7 +276,7 @@ This component consist of the following classes:
 The parser component is made up of the following classes:
 
 <p align = "center">
-<img src="images/parser.png" width = "1600" />
+<img src="images/parser.png" width = "2400" />
 </p>
 
 Parser component is used to make do the following:

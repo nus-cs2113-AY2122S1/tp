@@ -4,15 +4,15 @@
 hide circle
 skinparam classAttributeIconSize 0
 skinparam groupInheritance 2
-skinparam maxWidth 128
+skinparam maxWidth 256
 
+HelpCommandParser <-- Parser
+ExitCommandParser <-- Parser
 Parser --> AddCommandParser
 Parser --> RemoveCommandParser
 Parser --> FindCommandParser
 Parser --> SearchMapCommandParser
 Parser --> ListCommandParser
-Parser --> HelpCommandParser
-Parser --> ExitCommandParser
 
 AddCommandParser --> AddParseException
 RemoveCommandParser --> RemoveParseException
