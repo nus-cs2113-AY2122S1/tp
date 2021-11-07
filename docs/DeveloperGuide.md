@@ -367,6 +367,11 @@ a list of potential exchange Universities based on the users study plan, module 
 |v2.0|familiar user|add a pair of module mapping for a university|save a module mapping under the university that I selected|
 |v2.0|familiar user|delete a mapping pair of module for a university|remove a module mapping under a selected university|
 |v2.0|familiar user|pass in University as command argument using its index in the master list|access the exact University I want without having to type out its full name and facing bugs caused by typo|
+|v2.1|familiar user|add a University to the selected list by name or index|add a University without having to go through the entire list|
+|v2.1|familiar user|search the available module mappings for a University based on the selected module list|get a list of module mappings for this university based on my selected modules|
+|v2.1|familiar user|add a pair of module mapping for a university|save a module mapping under the university that I selected|
+|v2.1|familiar user|delete a mapping pair of module for a university|remove a module mapping under a selected university|
+|v2.1|familiar user|pass in University as command argument using its index in the master list|access the exact University I want without having to type out its full name and facing bugs caused by typo|
 
 ## Non-Functional Requirements
 
@@ -492,7 +497,7 @@ These instructions only provide a starting point for testers to work on; testers
     1. Test case: `find /code CS1231`
 
        Expected: The related information for CS1231 is printed.
-    2. Test case: `find /mod abc`
+    2. Test case: `find /code abc`
 
     Expected: No module is found. Error message is printed to indicate university is not available.
 
