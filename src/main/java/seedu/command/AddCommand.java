@@ -28,6 +28,10 @@ public class AddCommand extends Command {
     private static final String THIRD_QN = "Starting time of Event (E.g. 1600): ";
     private static final String FOURTH_QN = "Ending time of Event (E.g. 1800): ";
     private static final String FIFTH_QN = "Location of Event (Optional): ";
+    private static final int TIME_LIMIT = 2400;
+    private static final int ZERO = 0;
+    private static final int FOUR = 4;
+    private static final int TWO = 2;
     private final int semester;
     private final Timetable timetable;
     private final AddFlag flag;
@@ -103,10 +107,11 @@ public class AddCommand extends Command {
         try {
             Integer.parseInt(endTime);
         } catch (NumberFormatException e) {
-            throw new AddException("Invalid End Time Entered (Format: 1600)");
+            throw new AddException("Invalid End Time Entered (Format: 0000 - 2400)");
         }
-        if (isValidTime(endTime)) {
-            throw new AddException("Invalid End Time Entered (Format: 1600)");
+        if (isNotValidTime(endTime)) {
+            throw new AddException("Invalid End Time Entered (Format: 0000 - 2400)."
+                    + " Note that all events are strictly within a 1 hour interval");
         }
         return endTime;
     }
@@ -116,10 +121,11 @@ public class AddCommand extends Command {
         try {
             Integer.parseInt(startTime);
         } catch (NumberFormatException e) {
-            throw new AddException("Invalid Start Time Entered (Format: 1600)");
+            throw new AddException("Invalid Start Time Entered (Format: 0000 - 2400)");
         }
-        if (isValidTime(startTime)) {
-            throw new AddException("Invalid Start Time Entered (Format: 1600)");
+        if (isNotValidTime(startTime)) {
+            throw new AddException("Invalid End Time Entered (Format: 0000 - 2400)."
+                    + " Note that all events are strictly within a 1 hour interval");
         }
         return startTime;
     }
@@ -215,8 +221,12 @@ public class AddCommand extends Command {
     public void checkModuleExist(Module mod) throws ModuleExistException {
         for (Module module : timetable.getModules()) {
             String moduleCode = module.getModuleCode();
-            if (moduleCode.equals(mod.getModuleCode())) {
-                throw new ModuleExistException("Module currently already exist in your timetable");
+            try {
+                if (moduleCode.equals(mod.getModuleCode())) {
+                    throw new ModuleExistException("Module currently already exist in your timetable");
+                }
+            } catch (NullPointerException e) {
+                throw new ModuleExistException("Module does not exist");
             }
         }
     }
@@ -247,19 +257,23 @@ public class AddCommand extends Command {
     }
 
     public boolean isValidDescription(String input) {
-        return !(input.length() > 0);
+        return !(input.length() > ZERO);
     }
 
     public boolean isValidDate(String input) {
         return parseDate(input).equals("Invalid");
     }
 
-    public boolean isValidTime(String input) {
-        return Integer.parseInt(input) < 0 || Integer.parseInt(input) >= 2400;
+    public boolean isNotValidTime(String input) {
+        if (input.length() != FOUR) {
+            return true;
+        } else if (Integer.parseInt(input.substring(TWO)) != ZERO) {
+            return true;
+        }
+        return Integer.parseInt(input) < ZERO || Integer.parseInt(input) > TIME_LIMIT;
     }
 
     public boolean isEndBeforeStart(String startTime, String endTime) {
         return Integer.parseInt(startTime) >= Integer.parseInt(endTime);
     }
-
 }
