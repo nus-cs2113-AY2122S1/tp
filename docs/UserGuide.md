@@ -289,9 +289,9 @@ For example:
 
 If all lesson types have been successfully added, program will print out 
 ```shell
-Lessons for all modules have been successfully added
+Module and any selected lesson(s) has been added to timetable
 ```
-
+`NOTE:` Modules that contains no lessons will likewise be added into list of modules taken this semester
 <br></br>
 
 ### Add an Event to timetable
@@ -317,10 +317,12 @@ Date of Event (E.g. Monday): Monday
 Starting time of Event (E.g. 1600): 2000
 Ending time of Event (E.g. 1800): 2100
 Location of Event (Optional): Discord
-Alright!! Event: Team Meeting CS2113T on Monday, from 2000 to 2100 at Team Meeting CS2113T has been added to your timetable
+Alright!! Event: Team Meeting CS2113T on Monday, from 2000 to 2100 at Discord has been added to your timetable
 ```
+`NOTE:` All events will occur within will fit within an hourly timeframe, you are not able to add start and end timing
+with minutes. E.g. 1034
 
-If the selected timeslot is already occupied, the program will let you know and the event will not be added until the timeslot
+`NOTE:` If the selected timeslot is already occupied, the program will let you know and the event will not be added until the timeslot
 has been freed up.
 
 <br>

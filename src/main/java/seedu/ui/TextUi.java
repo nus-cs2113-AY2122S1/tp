@@ -213,7 +213,7 @@ public class TextUi {
     }
 
     public static void printLessonAdded() {
-        System.out.println("Lessons for all modules have been successfully added");
+        System.out.println("Module and any selected lesson(s) has been added to timetable");
     }
 
     public static void printModuleDeleted(String moduleCode) {
