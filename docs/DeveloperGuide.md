@@ -17,7 +17,7 @@
   - [3.7 Logger Component](#38-logger-component)
   - [3.8 NUSMods API Component](#39-nusmods-api-component)
 - [4. Implementation](#4-implementation)
-  - [4.1 Adding Tasks](#41-adding-tasks)
+  - [4.1 Task Factories](#41-task-factories)
   - [4.2 Filtering the tasklist](#42-filtering-the-tasklist)
 - [5. Appendix: Requirements](#5-appendix-requirements)
   - [5.1 Product scope](#51-product-scope)
@@ -267,13 +267,29 @@ conversion between java time API and semesters. The enumeration class `Semester`
 
 ## 4. Implementation
 
-### 4.1 Adding Tasks
-Tasks are managed by the `TaskManager` class and are all stored in memory using a `private static ArrayList<Task>`.
-The TaskManager provides functionality such as:
-* listing the tasks `listTaskList(HashMap<String, String> filter)`.
-* getting the taskList size `getTaskListSize()`.
-* checking whether the list is empty `isEmpty()`.
-* and adding Tasks `addTask()`.
+### 4.1 Task Factories
+<p align="center">
+    <img src="images/SeanUMLDiagrams/TaskFactory_Sequence_Diagram.png">
+</p>
+
+`Todo`, `Deadline` and `Event` Tasks are created using Task factories.
+ - All Task factories inherit from the abstract `TaskFactory` class.
+   1. It checks that all the required flags for making the concrete Task are present and throws an exception if a flag is missing.
+   2. I then initialises the `description`, `priority` and `recurrence`. 
+   3. From there it sets any additional variables that are present in the concrete task.
+   4. It creates the task and sets the `priority` and `rcurrence` if they are not `null`
+   5. It returns the created concrete task.
+
+<p align="center">
+    <img src="images/SeanUMLDiagrams/TaskFactory_Object_Diagram.png">
+</p>
+
+1. To extend the `TaskFactory`, you should create a constructor which takes in a `Map<String, String> flags` argument and define `TypeEnum taskType` and `String[] requiredFlags` as constants.
+2. From there you have to override the `setAdditionalVariables()` function to set any new variables that are unique to the concrete Task you want to impelment.
+3. override `createTask()` to return the constructed task (you can ignore `priority` and `recurrence` as they are set in `TaskFactory`)
+4. optional: you may override `getTask()` to return the concrete Task instead of the abstract `Task`.
+
+The `TaskFactory` has been designed in a way to be easily extendable to allow for more concrete Task factories to be easily added. Each set of variables are initialised in their respective factories. e.g. `priority` is a `Task` variable so it's initialised and set in `TaskFactory` while `dueDate` is a `Deadline` variable so it's initialised and set in `DeadlineFactory`.
 
 The Class diagrams for the different Tasks:  
 <img src="https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/docs/images/Task%20Inheritence.jpeg?raw=true" alt="TodoFactory Sequence Diagram" width="650"/>  
