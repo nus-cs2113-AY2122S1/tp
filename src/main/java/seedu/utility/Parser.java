@@ -171,6 +171,7 @@ public class Parser {
 
     private static final String DATE_FORMAT = "dd/MM/yyyy";
     private static final double ENTRY_AMOUNT_LIMIT = 1000000;
+    private static final double BUDGET_AMOUNT_LIMIT = 100000000000.00;
 
     /**
      * Parses user input into command for execution.
@@ -810,7 +811,10 @@ public class Parser {
         String dataAmount = matcher.group("amount").trim();
         if (dataAmount.isBlank()) {
             return new InvalidCommand(Messages.BLANK_AMOUNT_MESSAGE);
+        }  else if (hasMoreThanTwoDecimalPlaces(dataAmount)) {
+            return new InvalidCommand(Messages.TOO_MANY_DP_MESSAGE);
         }
+
         double budgetAmount;
         try {
             budgetAmount = Double.parseDouble(dataAmount);
@@ -821,6 +825,8 @@ public class Parser {
             return new InvalidCommand(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
         } else if (Double.isInfinite(budgetAmount) || Double.isNaN(budgetAmount)) {
             return new InvalidCommand(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
+        } else if (budgetAmount > BUDGET_AMOUNT_LIMIT) {
+            return new InvalidCommand(Messages.INVALID_BUDGET_VALUE);
         }
 
         String expenseCategory = matcher.group("category").trim().toUpperCase();

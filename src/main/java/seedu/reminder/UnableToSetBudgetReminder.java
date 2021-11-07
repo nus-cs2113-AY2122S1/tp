@@ -22,16 +22,16 @@ public class UnableToSetBudgetReminder extends BudgetReminder {
             return budgetName + " budget must be greater than current " + budgetName + " spending of $"
                     + roundTwoDecimalPlace(currBudgetAmount) + "."
                     + "\nWith new " + budgetName
-                    + " budget, total of all sub-budgets/spending exceeds OVERALL budget ($"
-                    + roundTwoDecimalPlace(newTotalBudget) + "/$ " + roundTwoDecimalPlace(overallLimit) + ")."
+                    + " budget, total of all sub-budgets/spending will exceed OVERALL budget ($"
+                    + roundTwoDecimalPlace(newTotalBudget) + "/$" + roundTwoDecimalPlace(overallLimit) + ")."
                     + "\nIncrease your OVERALL budget first!";
         } else if (newBudgetLimit < currBudgetAmount) {
             return budgetName + " budget must be greater than current " + budgetName + " spending of $"
                     + roundTwoDecimalPlace(currBudgetAmount) + ".";
         } else {
             return "With new " + budgetName
-                    + " budget, total of all sub-budgets/spending exceeds OVERALL budget ($"
-                    + roundTwoDecimalPlace(newTotalBudget) + "/$ " + roundTwoDecimalPlace(overallLimit) + ")."
+                    + " budget, total of all sub-budgets/spending will exceed OVERALL budget ($"
+                    + roundTwoDecimalPlace(newTotalBudget) + "/$" + roundTwoDecimalPlace(overallLimit) + ")."
                     + "\nIncrease your OVERALL budget first!";
         }
     }

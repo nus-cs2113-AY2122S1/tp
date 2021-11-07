@@ -16,7 +16,7 @@ public class ExceededBudgetNearingOverallReminder extends DoubleReminder {
 
     @Override
     public String toString() {
-        double extendedBudget = overallLimit - totalBudget + budgetLimit;
+        double extendedBudget = overallLimit - totalBudget + currBudgetAmount;
         if (extendedBudget < currBudgetAmount) {
             return "Exceeded " + month + " " + budgetName + " budget ($"
                     + roundTwoDecimalPlace(currBudgetAmount) + "/$" + roundTwoDecimalPlace(budgetLimit)
