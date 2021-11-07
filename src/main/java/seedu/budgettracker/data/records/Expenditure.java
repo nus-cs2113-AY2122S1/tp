@@ -37,6 +37,11 @@ public class Expenditure extends Record {
         return date.toString();
     }
 
+    /**
+     * Gets category which expenditure falls under.
+     *
+     * @return Category category which expenditure belongs to
+     */
     public Category getCategory() {
         return category;
     }
@@ -56,10 +61,6 @@ public class Expenditure extends Record {
 
     public void setDate(LocalDate date) {
         this.date = date;
-    }
-
-    public Category returnCategory() {
-        return category;
     }
 
 

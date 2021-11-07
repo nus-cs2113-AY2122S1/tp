@@ -9,12 +9,7 @@ public abstract class Record {
     protected int month;
 
     public Record(double amount, int month) {
-        if (amount < 0.00) {
-            this.amount = 0.00;
-        } else {
-            this.amount = amount;
-        }
-
+        this.amount = amount;
         this.month = month;
     }
 
@@ -23,11 +18,7 @@ public abstract class Record {
     }
 
     public void setAmount(double amount) {
-        if (amount < 0.00) {
-            this.amount = 0.00;
-        } else {
-            this.amount = amount;
-        }
+        this.amount = amount;
     }
 
     public int getMonth() {
