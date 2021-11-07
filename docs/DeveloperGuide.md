@@ -345,6 +345,7 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 |***|v1.0|user|add recipes to my cookbook|try them in the future|
 |***|v1.0|user|delete recipes from my cookbook|remove recipes I'm no longer interested in|
 |***|v1.0|user|list out all the recipes|see all of the recipes in my cookbook|
+|**|v2.0|organised user|set different parameters to my recipes|further customise my recipes
 |**|v2.0|disorganised user|find recipes by ingredient|see what recipes I can make with the food in my pantry|
 |**|v2.0|health-conscious user|find recipes by calorie count|eat healthier by managing calories|
 |**|v2.0|budget-conscious user|find recipes by pricing|go for the most cost-efficient recipe|
