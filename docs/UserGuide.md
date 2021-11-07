@@ -129,8 +129,8 @@ All fields are compulsory. Note the following:
 
 #### Compatible Currencies
 
-Currency Name | ISO Code | Symbol?
------------- | ----------- | -------
+Currency Name | ISO Code | Is Symbol available?
+--- | --- | --- |
 United States Dollar | USD | Yes
 Singapore Dollar | SGD | Yes
 Australian Dollar | AUD | Yes

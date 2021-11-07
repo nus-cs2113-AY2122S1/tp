@@ -86,7 +86,6 @@ public class Expense implements ExpenseSplitter {
         ArrayList<String> listOfPeopleNamesUpperCase = new ArrayList<>();
         ArrayList<Person> validListOfPeople = new ArrayList<>();
         ArrayList<String> invalidListOfPeople = new ArrayList<>();
-        Storage.getLogger().log(Level.INFO, "Checking if names are valid");
         if (listOfPeople.length == 1 && listOfPeople[0].strip().equalsIgnoreCase("-all")) {
             return Storage.getOpenTrip().getListOfPersons();
         }
