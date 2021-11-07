@@ -51,6 +51,14 @@ class AssessmentListDeserializerTest {
     }
 
     @Test
+    void deserialize_emptyStringAssessmentsMember_expectNull() {
+        String input = "{\"assessments\":\"\"}";
+
+        AssessmentList assessmentList = jsonToAssessmentList(input);
+        assertNull(assessmentList);
+    }
+
+    @Test
     void deserialize_oneNullAssessment_expectOneItem() {
         String input = "{\"assessments\":[{\"name\":\"Midterm\",\"maximumMarks\":30.0,\"weightage\":30.0},"
                 + "null]}";

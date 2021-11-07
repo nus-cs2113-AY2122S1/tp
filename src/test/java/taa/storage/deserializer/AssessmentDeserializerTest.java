@@ -74,7 +74,7 @@ class AssessmentDeserializerTest {
     }
 
     @Test
-    void deserialize_emptyMaximumMarksMember_expectNull() {
+    void deserialize_emptyStringMaximumMarksMember_expectNull() {
         String input = "{\"name\":\"Midterm\",\"maximumMarks\":\"\",\"weightage\":30.0}";
 
         Assessment assessment = jsonToAssessment(input);
@@ -130,7 +130,7 @@ class AssessmentDeserializerTest {
     }
 
     @Test
-    void deserialize_emptyWeightageMember_expectNull() {
+    void deserialize_emptyStringWeightageMember_expectNull() {
         String input = "{\"name\":\"Midterm\",\"maximumMarks\":30.0,\"weightage\":\"\"}";
 
         Assessment assessment = jsonToAssessment(input);
