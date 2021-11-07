@@ -158,7 +158,7 @@ public class Recipe {
 
     public boolean doesRecipeTagExists(String tagName) {
         for (String recipeTag : recipeTags) {
-            if (recipeTag.toLowerCase().trim().equals(tagName.toLowerCase())) {
+            if (recipeTag.trim().equals(tagName)) {
                 return true;
             }
         }
@@ -167,12 +167,10 @@ public class Recipe {
     }
 
     public boolean containsTags(ArrayList<String> search) {
-        ArrayList<String> tagsToLowercase = new ArrayList<>(recipeTags);
-        tagsToLowercase.replaceAll(String::trim);
-        tagsToLowercase.replaceAll(String::toLowerCase);
+        ArrayList<String> caseSensitiveTags = new ArrayList<>(recipeTags);
+        caseSensitiveTags.replaceAll(String::trim);
         search.replaceAll(String::trim);
-        search.replaceAll(String::toLowerCase);
-        return tagsToLowercase.containsAll(search);
+        return caseSensitiveTags.containsAll(search);
     }
 
     /////////////////////////// GET/SET FUNCTIONALITIES ///////////////////////////

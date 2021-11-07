@@ -152,7 +152,7 @@ public class TagTest {
                 + "tag / Chicken Rice / Hawker Food + Poultry + Favorite"
                 + System.lineSeparator()
                 + "untag / Chicken Rice / ++";
-        String expected = formatException(GordonException.TAG_NONE_DETECTED);
+        String expected = formatException(GordonException.TAG_FORMAT_EMPTY);
         inputOutputTest(input,expected);
     }
 
@@ -283,14 +283,14 @@ public class TagTest {
     @Test
     public void testDeleteTag_WrongFormat2() {
         String input = "deleteTag /++";
-        String expected = formatException(GordonException.TAG_NONE_DETECTED);
+        String expected = formatException(GordonException.TAG_FORMAT_EMPTY);
         inputOutputTest(input,expected);
     }
 
     @Test
     public void testDeleteTag_WrongFormat3() {
         String input = "deleteTag / + +";
-        String expected = formatException(GordonException.DELETETAG_FORMAT_NOTAGS);
+        String expected = formatException(GordonException.TAG_FORMAT_EMPTY);
         inputOutputTest(input,expected);
     }
 
@@ -326,6 +326,30 @@ public class TagTest {
                 + System.lineSeparator()
                 + "===================="
                 + System.lineSeparator();
+        inputOutputTest(input,expected);
+    }
+
+    @Test
+    public void testTag_CaseSensitivity() {
+        String input = "addRecipe Coffee /ingredients Beans /steps Brew"  + System.lineSeparator()
+                + "addRecipe Tea / ingredients Leaves /steps Brew" + System.lineSeparator()
+                + "tag / Coffee / favorites" + System.lineSeparator()
+                + "tag / Tea / FAVORITES" + System.lineSeparator()
+                + "untag / Coffee / FAVORITES" + System.lineSeparator()
+                + "deleteTag / FAVORITES" + System.lineSeparator()
+                + "check Coffee";
+
+        String expected = "Finding recipes called Coffee....." + System.lineSeparator()
+                + "====================" + System.lineSeparator()
+                + "Coffee" + System.lineSeparator()
+                + "Ingredients needed: " + System.lineSeparator()
+                + "1. Beans" + System.lineSeparator()
+                + "Method: " + System.lineSeparator()
+                + "1. Brew" + System.lineSeparator()
+                + "Tags: " + System.lineSeparator()
+                + "1. favorites" + System.lineSeparator()
+                + "====================" + System.lineSeparator();
+
         inputOutputTest(input,expected);
     }
 

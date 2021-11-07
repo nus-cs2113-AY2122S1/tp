@@ -282,7 +282,9 @@ Sets the attributes of recipes, e.g. time needed, calories etc.
 
 **Format:** `set RECIPE_NAME /ATTRIBUTE_TYPE ATTRIBUTE_VALUE`
 
-* The program first looks for the recipe using `RECIPE_NAME`, similar to find.
+* The program first looks for the recipe using `RECIPE_NAME`.
+  * `RECIPE_NAME` is not case-sensitive.
+  * `RECIPE_NAME` must match the name of an existing recipe exactly.
 * `ATTRIBUTE_TYPE` can be any one of the following:
   * `/Calories` (`ATTRIBUTE_VALUE` must be an integer)
   * `/Difficulty` (`ATTRIBUTE_VALUE` must be one of these: `None`, `Easy`, `Medium` and `Hard`)
@@ -290,6 +292,9 @@ Sets the attributes of recipes, e.g. time needed, calories etc.
   * `/Time` (`ATTRIBUTE_VALUE` must be two integers, separated by a comma)
     * The first integer represents the preparation time required for the dish
     * The next integer then represents the cooking time
+  * `/Ingredients` (`ATTRIBUTE_VALUE` must be ingredients separated by '+', similar to addRecipe)
+  * `/Steps` (`ATTRIBUTE_VALUE` must be steps separated by '+', similar to addRecipe)
+  * `/Tag` (Refer to [this section](#94-find-a-recipe-by-their-tags-find) for more details)
 * For `/Calories`, `/Price` and `/Time`, setting the `ATTRIBUTE_VALUE` to `-1` in a recipe will prevent that attribute from showing up in that recipe.
 * Any values below -1 are not accepted.
 * `ATTRIBUTE_TYPE` is not case-sensitive.
@@ -299,7 +304,9 @@ Sets the attributes of recipes, e.g. time needed, calories etc.
 `set Chicken Rice /calories 350`  
 `set Chicken Rice /difficulty hard`  
 `set Chicken Rice /price 3.00`  
-`set Chicken Rice /time 20, 40`
+`set Chicken Rice /time 20, 40`  
+`set Chicken Rice /ingredients Chicken + Rice`  
+`set Chicken Rice /steps Boil chicken + Cook rice + Serve`  
 
 ```
 Setting calories...
@@ -310,6 +317,10 @@ Setting price...
 Price set successfully.
 Setting times...
 Times set successfully.
+Setting ingredients...
+Ingredients set successfully.
+Setting steps...
+Steps set successfully.
 ```
 
 **Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
@@ -325,9 +336,17 @@ Finds recipes by their attributes, e.g. time needed, calories etc.
 * For `/Calories`, `/Price`, and `/Time`;
   * I'll automatically sort the results from greatest to smallest `ATTRIBUTE_VALUE`.
   * I'll show you recipes whose `ATTRIBUTE_TYPE` is less than or equal to the `ATTRIBUTE_VALUE` you specified.
+    
+
 * For `/Ingredients` and `/Difficulty`;
   * I'll automatically sort the results in alphabetical order.
   * I'll show you recipes with the exact `ATTRIBUTE_VALUE` you are looking for.
+    
+
+* For `/tag`, see [9.4](#94-find-a-recipe-by-their-tags-find) for more details!
+
+  
+
 * If the `ATTRIBUTE_TYPE` of any recipe is not set, I'll send you an error.
 * **Warning:** When using the `deleteRecipe` command, `RECIPE_INDEX` refers to the index given by the `listRecipes` command and not the `find` command. Keep this in mind before deleting a recipe.
 
@@ -375,6 +394,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > * I'll name your tag as defined in `TAG_NAME`
 > * Within a recipe, you are not allowed to have duplicate tag names
 > * You can associate multiple tags to a single recipe in one command
+> * Tags are case-sensitive! (favorites is **NOT** the same as FAVORITES)
 > 
 > #### Example of usage:
 > 
@@ -400,6 +420,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > * I'll untag all tags as defined in `TAG_NAME`, from your Recipe.
 > * You can untag multiple tags from a single recipe in one command.
 > * If untagging causes the Tag to have no associated recipes, a prompt will be shown.
+> * Tags are case-sensitive! (favorites is **NOT** the same as FAVORITES)
 >
 > #### Example of usage:
 >
@@ -426,6 +447,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > * I'll delete all tags as defined in `TAG_NAME` from your Cookbook.
 > * Note that deleting a tag will remove **ALL** instances of that tag from **ALL** recipes!
 > * You can delete multiple tags from your Cookbook in one command.
+> * Tags are case-sensitive! (favorites is **NOT** the same as FAVORITES)
 >
 > #### Example of usage:
 > 
@@ -445,6 +467,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > #### Format: `find /tag TAG_NAME1 + TAG_NAME2 + ...`
 > 
 > * I'll search for recipes that have **ALL** tags as defined in `TAG_NAME`.
+> * Tags are case-sensitive! (favorites is **NOT** the same as FAVORITES)
 >
 > #### Example of usage:
 > 
@@ -519,4 +542,4 @@ Instruction | Command format
 [Tag a recipe](#91-adding-tags-to-recipes-tag) | `tag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
 [Untag a recipe](#92-untagging-tags-from-recipes-untag) | `untag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
 [Delete a tag](#93-deleting-tags-from-cookbook-deletetag) | `deleteTag / TAG_NAME1 + TAG_NAME2 + ...`
-[List all tags](#94-find-a-recipe-by-their-tags-find) | `listTags`
+[List all tags](#95-list-all-your-tags-listtags) | `listTags`
