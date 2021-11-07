@@ -501,6 +501,8 @@ Reloads all the notes found within your `data/<module_code>`.
 
 > ⚠️ If there are any 2 or more note files with the same exact name regardless of case sensitivity, only 1 of them will be loaded.
 
+> ⚠️ If storage is disabled, this command will not work as intended.
+
 Example: `reload`
 
 Expected Output:
@@ -522,6 +524,8 @@ note workspace as a PDF file.
 
 > ⚠️ The export process can take a while.   
 > A very large text can cause the program to take a long time to export.
+
+> ⚠️ If storage is disabled, this command will not work as intended.
 
 Example: `export`
 
@@ -995,6 +999,9 @@ solve the issue. Secondly, if you are running macOS or Linux, we do not delete f
 
 **Q:** What will happen if my data is **not loaded properly** when entering TermiNUS?  
 **A:** Any existing data may be **overwritten** in the `data` folder when you perform any command within this state.
+
+**Q:** Why will storage be disabled?  
+**A:** To avoid loss of data due to an error when loading/saving data into the `data` folder. Hence, if an error occurs, all storage operations will cease to work only until you exit the program where TermiNUS will attempt to save your data one last time.
 
 ___  
 
