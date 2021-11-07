@@ -83,8 +83,9 @@ public class Task {
         try {
             logger.log(Level.INFO, "Successfully set Task deadline...");
             setDeadline(DateParser.parseDate(date));
+            Ui.printUpdateTaskDeadline(this);
         } catch (DateTimeException e) {
-            Ui.missingDate();
+            Ui.wrongDateTimeFormat();
         }
     }
 
@@ -120,9 +121,7 @@ public class Task {
     public void updateOverdue() throws NullPointerException {
         try {
             LocalDateTime currentDateTime = LocalDateTime.now();
-            if (!(this.isDone) && currentDateTime.isAfter(this.deadline)) {
-                this.isLate = true;
-            }
+            this.isLate = !(this.isDone) && currentDateTime.isAfter(this.deadline);
         } catch (NullPointerException e) {
             Ui.printInvalidIndex();
         }
