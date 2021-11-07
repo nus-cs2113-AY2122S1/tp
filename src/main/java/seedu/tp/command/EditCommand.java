@@ -79,7 +79,7 @@ public class EditCommand extends Command {
         String message = TASK_EDITED;
         try {
             String mainArgument = getMainArgument();
-            if (mainArgument == null || mainArgument.equals("")) {
+            if (mainArgument == null || mainArgument.equals("") || commandArguments.size() == 1) {
                 throw new NullPointerException();
             }
             if (taskManager.isEmpty()) {
