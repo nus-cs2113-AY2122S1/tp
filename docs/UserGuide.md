@@ -138,7 +138,7 @@ Congratulations! Now, the **List of Commands** below will teach you how to use a
 
 > 💡 **Command Format Notes**:
 > * Words in `UPPER_CASE` are to be supplied by the user.  
-> e.g. `add dish [DISH_NAME]`, where `[DISH_NAME]` is a parameter which can be used as add `dish chicken rice`.
+> e.g. `add dish [DISH_NAME]`, where `[DISH_NAME]` is a parameter which can be used as `add dish chicken rice`.
 > * All text supplied by the user are automatically converted into lowercase format.
 
 ### List all commands : `help`
