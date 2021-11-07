@@ -470,5 +470,22 @@ After adding in a substantial number of goals and habits, you can test out the d
 
 ### Storage of Data
 
+To check if the program can save and load your data:
 
+1. Exit the application using command `exit`.
+2. Launch the program and enter the application again.
+3. Type `list` to check that all your previous data are present.
+4. If your data are all present, it means that the program successfully saved and loaded your data
+  from the storage file.
 
+> ⚠ The subsequent steps might cause you to lose your data.
+
+To check if the program can create a storage file if it doesn't exist:
+
+1. Go to the folder containing the jar file. You should see a folder `data` that contains a `.txt` file
+  which contains your data. Delete the folder `data` or move it somewhere else.
+
+![Storage File](Display_Images/tpFolder.png)
+
+2. Launch the program and enter the application.
+3. Type `list` to see that the storage data file was deleted, hence no goals exist.
