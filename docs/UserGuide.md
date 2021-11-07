@@ -16,7 +16,7 @@ its developers (😀 us!) at our [Main Page](README.md).
 
 * [1. Quick Start](#1-quick-start)
   * [1.1 Start-Up Interface](#11-start-up-interface)
-  * [1. 2 Main Interface](#12-main-interface)
+  * [1.2 Main Interface](#12-main-interface)
 * [2. Using this Guide](#2-using-this-guide)
   * [2.1 Terminology](#21-terminology)
   * [2.2 Icons](#22-icons)
