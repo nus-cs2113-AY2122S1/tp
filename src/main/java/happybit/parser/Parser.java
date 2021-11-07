@@ -35,7 +35,6 @@ public class Parser {
     private static final String ERROR_GOAL_UPDATE_FORMAT = "Missing additional goal name, goal end date, or "
             + "goal type parameter needed for update.";
     private static final String ERROR_INTEGER_FLAG_FORMAT = "The command is missing the '%1$s' flag";
-    private static final String ERROR_INTEGER_FLAG_MISSING_INTEGER = "The '%1$s' flag is missing an index.";
     private static final String ERROR_CONVERT_NUM = "The flag '%1$s' has to be followed by a number";
     private static final String ERROR_UNDEFINED_GOAL_TYPE_LABEL =
             "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'";
@@ -110,8 +109,7 @@ public class Parser {
      * @throws HaBitParserException If the name cannot be obtained from the user input.
      */
     protected static String getName(ArrayList<String> parameters) throws HaBitParserException {
-        String nameWithFlag = getAndCheckParameter(parameters, FLAG_NAME, ERROR_NAME_FORMAT,
-                ERROR_INTEGER_FLAG_MISSING_INTEGER);
+        String nameWithFlag = getAndCheckParameter(parameters, FLAG_NAME, ERROR_NAME_FORMAT);
         String name = nameWithFlag.substring(FLAG_LENGTH).trim();
         checkStringLength(name);
         return name;
@@ -126,8 +124,7 @@ public class Parser {
      * @throws HaBitParserException If the number cannot be obtained from the user input.
      */
     protected static int getNumber(ArrayList<String> parameters, String flag) throws HaBitParserException {
-        String indexWithFlag = getAndCheckParameter(parameters, flag, String.format(ERROR_INTEGER_FLAG_FORMAT, flag),
-                String.format(ERROR_INTEGER_FLAG_MISSING_INTEGER, flag));
+        String indexWithFlag = getAndCheckParameter(parameters, flag, String.format(ERROR_INTEGER_FLAG_FORMAT, flag));
         String index = indexWithFlag.substring(FLAG_LENGTH).trim();
         return stringToInt(index, flag);
     }
@@ -212,21 +209,19 @@ public class Parser {
      *
      * @param parameters   String array of command parameters.
      * @param flag         Command flag.
-     * @param firstErrorMessage Error message to call if input parameter is invalid.
+     * @param errorMessage Error message to call if input parameter is invalid.
      * @return Parameter.
      * @throws HaBitParserException If parameter is absent.
      */
-    private static String getAndCheckParameter(ArrayList<String> parameters, String flag,
-                                               String firstErrorMessage, String secondErrorMessage)
+    private static String getAndCheckParameter(ArrayList<String> parameters, String flag, String errorMessage)
             throws HaBitParserException {
         String parameter = getParameter(parameters, flag);
         if (parameter == null) {
-            throw new HaBitParserException(firstErrorMessage);
+            throw new HaBitParserException(errorMessage);
         } else if (parameter.equals(FLAG_NAME) || parameter.equals(FLAG_INTERVAL)) {
             return parameter;
         } else if (parameter.equals(flag)) {
-            //todo throw wrong message with update g/ n/
-            throw new HaBitParserException(secondErrorMessage);
+            throw new HaBitParserException(errorMessage);
         } else {
             return parameter;
         }

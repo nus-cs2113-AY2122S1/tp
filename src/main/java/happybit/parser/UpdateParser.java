@@ -33,6 +33,9 @@ public class UpdateParser extends Parser {
     private static final String ERROR_CHANGE_COMMAND_MISSING_INDEXES = "A goal index and a habit index has to be "
             + "provided using the g/ and h/ flags respectively for Change commands";
     private static final String ERROR_UPDATE_START_DATE = "The start date cannot be updated once set. Start on time!";
+    private static final String ERROR_FLAG_GOAL_INDEX_MISSING_INTEGER = "The '%1$s' flag is missing an index.";
+    private static final String ERROR_FLAG_GOAL_AND_HABIT_INDEX_MISSING_INTEGER = "Both/either the '%1$s' "
+            + "and/or the '%2$s' are/is missing an index.";
 
     private static final String ERROR_CHANGE_HABIT_NAME_WITH_UPDATE_COMMAND = "Are you perhaps trying to change a "
             + "habit name? Please use the 'change' command instead.";
@@ -71,12 +74,10 @@ public class UpdateParser extends Parser {
         GoalType newGoalType = null;
         Date newGoalEndDate = null;
 
-        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
         int[] updateAttributes = getUpdateGoalAttributes(parameters);
         boolean isUpdateGoalName = (updateAttributes[0] == 1);
         boolean isUpdateGoalType = (updateAttributes[1] == 1);
         boolean isUpdateGoalEndDate = (updateAttributes[2] == 1);
-
         if (isUpdateGoalName) {
             newGoalName = getName(parameters);
         }
@@ -86,6 +87,7 @@ public class UpdateParser extends Parser {
         if (isUpdateGoalEndDate) {
             newGoalEndDate = getDate(parameters);
         }
+        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
         ArrayList<String> excessAttributes = getExcessGoalAttributes(parameters);
         return new UpdateGoalCommand(goalIndex, newGoalName, newGoalType, newGoalEndDate,
                 updateAttributes, excessAttributes);
@@ -106,8 +108,6 @@ public class UpdateParser extends Parser {
         }
         assert (input.contains(FLAG_GOAL_INDEX));
         assert (input.contains(FLAG_HABIT_INDEX));
-        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
-        int habitIndex = getIndex(parameters, FLAG_HABIT_INDEX);
 
         String newHabitName = null;
         int newHabitInterval = 0;
@@ -122,6 +122,8 @@ public class UpdateParser extends Parser {
         if (isUpdateHabitInterval) {
             newHabitInterval = getUpdateInterval(parameters, FLAG_INTERVAL);
         }
+        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
+        int habitIndex = getIndex(parameters, FLAG_HABIT_INDEX);
         ArrayList<String> excessAttributes = getExcessHabitAttributes(parameters);
         return new UpdateHabitCommand(goalIndex, habitIndex, newHabitName, newHabitInterval,
                 updateAttributes, excessAttributes);
@@ -157,7 +159,9 @@ public class UpdateParser extends Parser {
         if (isContainFlag(parameters, FLAG_END_DATE)) {
             updateAttributes[2] = 1;
         }
-        if (nothingToUpdate(updateAttributes)) {
+        if (nothingToUpdate((updateAttributes)) && isContainFlag(parameters, FLAG_GOAL_INDEX)) {
+            throw new HaBitParserException(String.format(ERROR_FLAG_GOAL_INDEX_MISSING_INTEGER, FLAG_GOAL_INDEX));
+        } else if (nothingToUpdate(updateAttributes)) {
             throw new HaBitParserException(ERROR_NO_FLAG_UPDATE_COMMAND);
         }
         return updateAttributes;
@@ -205,7 +209,11 @@ public class UpdateParser extends Parser {
             updateAttributes[1] = 1;
         }
         if (nothingToUpdate(updateAttributes)) {
-            throw new HaBitParserException(ERROR_INVALID_CHANGE_COMMAND);
+            if (isContainFlag(parameters, FLAG_GOAL_INDEX) && isContainFlag(parameters, FLAG_HABIT_INDEX)) {
+                throw new HaBitParserException(ERROR_FLAG_GOAL_AND_HABIT_INDEX_MISSING_INTEGER);
+            } else {
+                throw new HaBitParserException(ERROR_INVALID_CHANGE_COMMAND);
+            }
         }
         return updateAttributes;
     }
