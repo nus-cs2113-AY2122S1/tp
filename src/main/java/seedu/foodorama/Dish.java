@@ -209,7 +209,7 @@ public class Dish implements Comparable<Dish> {
 
     /**
      * Takes in the weight of Dish wasted from the command line interface
-     * from the user input.
+     * and adds to existing Dish Waste.
      *
      * @throws FoodoramaException when the input is not a number or when the number entered is out of bounds,
      * @author Dniv-ra
@@ -328,7 +328,7 @@ public class Dish implements Comparable<Dish> {
      * when 'graph dish' is called.
      *
      * @param max        is a double which is the maximum weight wasted among all Dishes in the Dish List.
-     * @param resolution is the resolution of the graph.
+     * @param resolution is the number of units along height of the graph.
      * @return num which is the height of the bar that is associated to the Dish that compares to other Dishes.
      * @author Dniv-ra
      */
@@ -354,7 +354,7 @@ public class Dish implements Comparable<Dish> {
 
     /**
      * Comparator function to compare the wastage of all Dishes in the Dish List
-     * which the SortDishCOmmand utilises.
+     * which the SortDishCommand utilises.
      *
      * @param o is the Dish that will be passed into the method for comparison with this Dish.
      * @return diff which is either 0, 1 or -1. 0 means no difference. 1 means greater than, -1 means smaller than.
