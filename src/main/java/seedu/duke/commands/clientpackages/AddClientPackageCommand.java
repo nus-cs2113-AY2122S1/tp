@@ -19,16 +19,26 @@ public class AddClientPackageCommand extends Command {
 
     @Override
     public void execute() {
-        try {
-            createClientPackage();
-            ClientPackage existingClientPackage = clientPackages.getClientPackageById(clientPackage.getId());
-            System.out.println("Client package ID already exists. Please try another client package ID.");
-        } catch (TourPlannerException e) {
-            if (!clientPackage.getClient().equals(null) && !clientPackage.getTour().equals(null)
-                    && !clientPackage.getFlight().equals(null)) {
-                clientPackages.add(clientPackage);
-                ui.showAdd(clientPackage);
+        if (!clientPackage.getClient().equals(null) && !clientPackage.getTour().equals(null)
+                && !clientPackage.getFlight().equals(null)) {
+            int count = clientPackages.getClientPackageCount();
+            for (int i = 0; i < count; i++) {
+                ClientPackage currPackage = clientPackages.getClientPackageByIndex(i);
+                boolean sameId = currPackage.getId().equals(clientPackage.getId());
+                if (sameId) {
+                    System.out.println("ERROR: Client package ID already exists. Please try another client package ID.");
+                    return;
+                }
+                boolean sameClient = currPackage.getClient().equals(clientPackage.getClient());
+                boolean sameTour = currPackage.getTour().equals(clientPackage.getTour());
+                boolean sameFlight = currPackage.getFlight().equals(clientPackage.getFlight());
+                if (sameClient && sameTour && sameFlight) {
+                    System.out.println("ERROR: Client Package with same fields already exists with different ID.");
+                    return;
+                }
             }
+            clientPackages.add(clientPackage);
+            ui.showAdd(clientPackage);
         }
     }
 

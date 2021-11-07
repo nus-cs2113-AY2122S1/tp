@@ -5,8 +5,11 @@ import seedu.duke.TourPlannerException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * List of tours.
+ */
 public class TourList {
-    private static final String TOUR_NOT_FOUND_MESSAGE = "Tour cannot be found. Please try another tour ID";
+    private static final String TOUR_NOT_FOUND_MESSAGE = "Tour cannot be found. Please try another tour ID.";
 
     private final ArrayList<Tour> tours;
     private final ArrayList<String> tourIds;
@@ -15,6 +18,9 @@ public class TourList {
     private ArrayList<String> iteratedTourIds;
     private int tourCount;
 
+    /**
+     * Class constructor for TourList.
+     */
     public TourList() {
         tours = new ArrayList<>();
         tourIds = new ArrayList<>();
@@ -23,6 +29,11 @@ public class TourList {
         tourCount = 0;
     }
 
+    /**
+     * Main method for adding a tour.
+     *
+     * @param tour the tour to-be-added
+     */
     public void add(Tour tour) {
         tours.add(tour);
         tourIds.add(tour.getId());
@@ -50,10 +61,21 @@ public class TourList {
         return tourNames;
     }
 
+    /**
+     * Getter for number of tours in the tour list.
+     *
+     * @return the number of tours in tour list.
+     */
     public int getTourCount() {
         return tourCount;
     }
 
+    /**
+     * Getter for a specific tour based on its index in the list.
+     *
+     * @param index the index which the tour is found at.
+     * @return a specific tour with a certain index.
+     */
     public Tour getTourByIndex(int index) {
         return tours.get(index);
     }
@@ -62,6 +84,12 @@ public class TourList {
         iteratedTourIds = new ArrayList<String>();
     }
 
+    /**
+     * Getter for a specific tour based on its price.
+     *
+     * @param price the price which the tour is supposed to be priced at.
+     * @return a specific tour with a certain price.
+     */
     public Tour getTourByPrice(Float price) throws TourPlannerException {
         for (Tour currTour : tours) {
             String currTourId = currTour.getId();
@@ -73,6 +101,12 @@ public class TourList {
         throw new TourPlannerException(TOUR_NOT_FOUND_MESSAGE);
     }
 
+    /**
+     * Getter for a specific tour based on its name.
+     *
+     * @param name the name which the tour is supposed to be named.
+     * @return a specific tour with a certain name.
+     */
     public Tour getTourByName(String name) throws TourPlannerException {
         for (int i = 0; i < tourCount; i++) {
             Tour currentTour = tours.get(i);
@@ -83,6 +117,12 @@ public class TourList {
         throw new TourPlannerException(TOUR_NOT_FOUND_MESSAGE);
     }
 
+    /**
+     * Getter for a specific tour based on its ID.
+     *
+     * @param id the ID which the tour is supposed to have.
+     * @return a specific tour with a certain ID.
+     */
     public Tour getTourById(String id) throws TourPlannerException {
         for (int i = 0; i < tourCount; i++) {
             Tour currentTour = tours.get(i);
@@ -93,6 +133,9 @@ public class TourList {
         throw new TourPlannerException(TOUR_NOT_FOUND_MESSAGE);
     }
 
+    /**
+     * Main method for deleting a tour.
+     */
     public void cut(Tour tour) {
         tours.remove(tour);
         tourCount--;

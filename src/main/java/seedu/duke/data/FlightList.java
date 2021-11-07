@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class FlightList {
-    private static final String FLIGHT_NOT_FOUND_MESSAGE = "Flight cannot be found. Please try another flight ID";
+    private static final String FLIGHT_NOT_FOUND_MESSAGE = "Flight cannot be found. Please try another flight ID.";
 
     private final ArrayList<Flight> flights;
     private ArrayList<String> flightIds;

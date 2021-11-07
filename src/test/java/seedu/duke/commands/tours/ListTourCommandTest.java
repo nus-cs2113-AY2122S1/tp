@@ -17,6 +17,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ListTourCommandTest {
 
+    private static Tour TEST_TOUR_ONE = new Tour(new String[]{"JPN", "Japan Basic Tour", "1500.00"});
+    private static Tour TEST_TOUR_TWO = new Tour(new String[]{"KOR", "Korea Cultural Tour", "3000.00"});
+    private static final String VALID_DATA_OUTPUT = "Here is a list of all tours:\n"
+            + "1. " + TEST_TOUR_ONE + "\n\n"
+            + "2. " + TEST_TOUR_TWO + "\n\n"
+            + "Total Tours: 2";
+    private static final String NO_DATA_OUTPUT = "I'm sorry, there seems to be no tours";
+
     PrintStream previousConsole = System.out;
     ByteArrayOutputStream newConsole = new ByteArrayOutputStream();
 
@@ -30,22 +38,16 @@ public class ListTourCommandTest {
     void listClientCommand_validData_correctlyConstructed() throws TourPlannerException {
         System.setOut(new PrintStream(newConsole));
 
-        Tour jpn = new Tour(new String[]{"JPN", "Japan Basic Tour", "1500.00"});
-        Tour kor = new Tour(new String[]{"KOR", "Korea Cultural Tour", "3000.00"});
-        testTourList.add(jpn);
-        testTourList.add(kor);
+        testTourList.add(TEST_TOUR_ONE);
+        testTourList.add(TEST_TOUR_TWO);
         Command listTour = new ListTourCommand();
         listTour.setData(dummyClientList, dummyFlightList, testTourList, dummyPackageList, testUi);
         listTour.execute();
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "Here is a list of all tours:\n"
-                + "1. " + jpn + "\n\n"
-                + "2. " + kor + "\n\n"
-                + "Total Tours: 2";
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
-        assertEquals(expectedString, actualString);
+        assertEquals(VALID_DATA_OUTPUT, actualString);
     }
 
     @Test
@@ -58,8 +60,7 @@ public class ListTourCommandTest {
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "I'm sorry, there seems to be no tours";
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
-        assertEquals(expectedString, actualString);
+        assertEquals(NO_DATA_OUTPUT, actualString);
     }
 }

@@ -454,6 +454,12 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Throws exceptions if the values of certain fields for a Tour are invalid.
+     *
+     * @param values array of values representing the id, name and price of the tour respectively
+     * @throws TourPlannerException if the at least one field has incorrect formatting.
+     */
     private static void handleTourException(String[] values) throws TourPlannerException {
         String price = values[2];
         int decimalCount = (int) price.chars().filter(ch -> ch == '.').count();
@@ -478,6 +484,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Throws exceptions if the values of certain fields for a Flight are invalid.
+     *
+     * @param values array of values representing the id, departure destination, return destination,
+     * departure date and return date respectively.
+     * @throws TourPlannerException if the at least one field has incorrect formatting.
+     */
     private static void handleFlightException(String[] values) throws TourPlannerException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yy HH:mm");
         LocalDateTime start;
@@ -559,6 +572,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the parameters given to determine which ListXYZCommand to be called for.
+     *
+     * @param params full user's argument string
+     * @throws TourPlannerException if there are missing fields, duplicated or missing prefixes
+     * @returns a ListXYZCommand of a specific data type (client, tour, flight, client package)
+     */
     private static Command parseList(String params) throws TourPlannerException {
         switch (params) {
         case CLIENT_IDENTIFIER:
@@ -593,6 +613,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the parameters given to determine which FindXYZCommand to be called for.
+     *
+     * @param params full user's argument string
+     * @throws TourPlannerException if there are missing fields, duplicated or missing prefixes
+     * @returns a FindXYZCommand of a specific data type (client, tour, flight, client package)
+     */
     private static Command parseFind(String params) throws TourPlannerException {
         String[] prefixSuffix = params.split(" ", 2);
         if (prefixSuffix.length < 2) {

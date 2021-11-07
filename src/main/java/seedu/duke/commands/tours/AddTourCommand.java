@@ -2,6 +2,7 @@ package seedu.duke.commands.tours;
 
 import seedu.duke.TourPlannerException;
 import seedu.duke.commands.Command;
+import seedu.duke.data.Client;
 import seedu.duke.data.Tour;
 
 /**
@@ -36,13 +37,23 @@ public class AddTourCommand extends Command {
     @Override
     public void execute() {
         int newTourCount = tours.getTourCount() + 1;
-        try {
-            Tour existingTour = tours.getTourById(tour.getId());
-            System.out.println("Tour code already exists. Please try another tour code.");
-        } catch (TourPlannerException e) {
-            tours.add(tour);
-            ui.showAdd(tour);
+        int count = tours.getTourCount();
+        for (int i = 0; i < count; i++) {
+            Tour currTour = tours.getTourByIndex(i);
+            boolean sameId = currTour.getId().equals(tour.getId());
+            if (sameId) {
+                System.out.println("ERROR: Tour code already exists. Please try another tour code.");
+                return;
+            }
+            boolean sameName = currTour.getName().equals(tour.getName());
+            boolean samePrice = currTour.getPrice().equals(tour.getPrice());
+            if (sameName && samePrice) {
+                System.out.println("ERROR: Tour with same fields already exists with different ID.");
+                return;
+            }
         }
+        tours.add(tour);
+        ui.showAdd(tour);
         assert newTourCount == tours.getTourCount();
     }
 

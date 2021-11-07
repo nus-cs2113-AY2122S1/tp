@@ -14,6 +14,7 @@
        - [Cut feature](#ucut-featureu)
        - [List feature](#ulist-featureu)
        - [Find feature](#ufind-featureu)
+       - [Sort feature](#usort-featureu)
    - [Ui component](#ui-component)
    - [Storage component (chengxu to do)]()
 
@@ -325,10 +326,10 @@ executed with the parameter ```bo```
 
 
 
-**Step 2**: The ```FindClientCommand``` iterates through each ```Client``` object in the ```ClientList```.
+**Step 2**: The ```FindClientCommand``` is executed and iterates through each ```Client``` object in the ```ClientList```.
 For every ```Client```, the ```getName()``` function is called to retrieve the name attribute of the Client.
 The name attribute is then converted to lower case for comparison with the substring.
-If the name attribute is contains the substring```bo```, the ```Client``` object
+If the name attribute contains the substring```bo```, the ```Client``` object
 is printed onto the console terminal.
 
 **Step 3**: In addition, the ```FindClientCommand``` iterates through each ```ClientPackage``` object in the ```ClientPackageList```.
@@ -353,7 +354,7 @@ queried for. The second word (```-f```) means that a the ```FindTourCommand()```
 executed with the parameter ```JPN```
 
 
-**Step 2**: The ```FindTourCommand``` iterates through each ```Tour``` object in the ```TourList```.
+**Step 2**: The ```FindTourCommand``` is executed and iterates through each ```Tour``` object in the ```TourList```.
 For every ```Tour```, the ```getCode()``` function is called to retrieve the code attribute of the Tour.
 If the tour attribute is equals to ```JPN```, the ```Tour``` object
 is printed onto the console terminal.
@@ -389,7 +390,7 @@ queried for. The second word (```-f```) means that a the ```FindFlightCommand()`
 executed with the parameter ```SQ-JPN```
 
 
-**Step 2**: The ```FindFlightCommand``` iterates through each ```Flight``` object in the ```FlightList```.
+**Step 2**: The ```FindFlightCommand``` is executed and iterates through each ```Flight``` object in the ```FlightList```.
 For every ```Flight```, the ```getCode()``` function is called to retrieve the code attribute of the Tour.
 If the tour attribute is equals to ```SQ-JPN```, the ```Flight``` object
 is printed onto the console terminal.

@@ -169,6 +169,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Ui response to ListClientCommand.
+     * Shows all clients in the clientList on the terminal.
+     *
+     * @param clients the ClientList from which the clients are obtained from.
+     */
     public void showListClient(ClientList clients) {
         int count = clients.getClientCount();
         if (count == 0) {
@@ -211,6 +217,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Ui response to ListTourCommand.
+     * Shows all tours in the tourList on the terminal.
+     *
+     * @param tours the TourList from which the tours are obtained from.
+     */
     public void showListTour(TourList tours) {
         int count = tours.getTourCount();
         if (count == 0) {
@@ -238,11 +250,12 @@ public class Ui {
                 Tour currTour = clientPackages.getClientPackageByIndex(i).getTour();
                 if (currTour.equals(foundTour)) {
                     String currClientName = clientPackages.getClientPackageByIndex(i).getClient().getName();
-                    show((i + 1) + ". " + currClientName + "\n");
+                    String currClientId = clientPackages.getClientPackageByIndex(i).getClient().getId();
+                    show((subbedClients + 1) + ". " + currClientName + " (ID: " + currClientId + ")");
                     subbedClients++;
                 }
             }
-            show("Total Subscribed Clients: " + subbedClients);
+            show("\n" + "Total Subscribed Clients: " + subbedClients);
         } else {
             show(FIND_FAIL_MESSAGE_LEFT + "tours " + FIND_MESSAGE_RIGHT);
         }
@@ -395,6 +408,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Ui response to ListFlightCommand.
+     * Shows all flights in the flightList on the terminal.
+     *
+     * @param flights the FlightList from which the flights are obtained from.
+     */
     public void showListFlight(FlightList flights) {
         int count = flights.getFlightCount();
         if (count == 0) {
@@ -422,16 +441,23 @@ public class Ui {
                 Flight currFlight = clientPackages.getClientPackageByIndex(i).getFlight();
                 if (currFlight.equals(foundFlight)) {
                     String currClientName = clientPackages.getClientPackageByIndex(i).getClient().getName();
-                    show((i + 1) + ". " + currClientName + "\n");
+                    String currClientId = clientPackages.getClientPackageByIndex(i).getClient().getId();
+                    show((passengers + 1) + ". " + currClientName + " (ID: " + currClientId + ")");
                     passengers++;
                 }
             }
-            show("Total Passengers: " + passengers);
+            show("\n" + "Total Passengers: " + passengers);
         } else {
             show(FIND_FAIL_MESSAGE_LEFT + "flights " + FIND_MESSAGE_RIGHT);
         }
     }
 
+    /**
+     * Ui response to ListClientPackageCommand.
+     * Shows all client packages in the clientPackageList on the terminal.
+     *
+     * @param clientPackages the ClientPackageList from which the client packages are obtained from.
+     */
     public void showListClientPackage(ClientPackageList clientPackages) {
         int count = clientPackages.getClientPackageCount();
         if (count == 0) {
@@ -443,17 +469,7 @@ public class Ui {
             ClientPackage currPackage = clientPackages.getClientPackageByIndex(i);
             show((i + 1) + ". " + currPackage + "\n" + "\n");
         }
-        show("Total Packages:" + count);
-    }
-
-    public void showFindClientPackage(ClientPackageList packages, int index) {
-        ClientPackage foundPackage = packages.getClientPackageByIndex(index - 1);
-        if (foundPackage != null) {
-            show(FIND_SUCCESS_MESSAGE_LEFT + "package " + FIND_MESSAGE_RIGHT);
-            show(foundPackage + "\n" + "\n");
-        } else {
-            show(FIND_FAIL_MESSAGE_LEFT + "package " + FIND_MESSAGE_RIGHT);
-        }
+        show("Total Packages: " + count);
     }
 
     /**
