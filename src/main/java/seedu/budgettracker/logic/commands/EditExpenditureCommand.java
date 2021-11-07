@@ -1,9 +1,12 @@
 package seedu.budgettracker.logic.commands;
 
 import seedu.budgettracker.data.records.Expenditure;
+import seedu.budgettracker.logic.commands.exceptions.CommandException;
 import seedu.budgettracker.ui.TextUi;
 
 import java.time.LocalDate;
+
+import static seedu.budgettracker.common.Messages.MESSAGE_AMOUNT_EXCEEDED;
 
 public class EditExpenditureCommand extends EditCommand {
     public int month;
@@ -26,7 +29,10 @@ public class EditExpenditureCommand extends EditCommand {
         this.description = description;
     }
 
-    public void execute() {
+    public void execute() throws CommandException{
+        if (amount > 1000000000) {
+            throw new CommandException(MESSAGE_AMOUNT_EXCEEDED);
+        }
         Expenditure targetExpenditure = allRecordList.editExpenditure(month, index,
                 amount, description, date);
         TextUi.showExpenditureEditedMessage(targetExpenditure, allRecordList);

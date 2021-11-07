@@ -34,9 +34,8 @@ class RecordList {
  boolean isLoadingStorage): void
  + addExpenditure(String description, double amount,
  LocalDate date, Category category): void
- + public void addLoan(String name, double amount,
+ + void addLoan(String name, double amount,
   LocalDate date)
- + checkOverspending(): boolean
 }
 
 class Expenditure {

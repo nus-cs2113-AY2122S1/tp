@@ -25,8 +25,8 @@ package "User" <<Rectangle>> {
 
 User .right> TextUi
 Main -> "1" TextUi
-Main -> Parser
-Main -> Command
+Main -up-> Parser
+Main -up> Command
 Parser -> TextUi
 Command -> TextUi
 Storage ..> TextUi

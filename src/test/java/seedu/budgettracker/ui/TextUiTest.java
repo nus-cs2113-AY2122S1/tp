@@ -1,5 +1,5 @@
 package seedu.budgettracker.ui;
 
-public class UiTest {
+public class TextUiTest {
 
 }

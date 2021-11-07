@@ -84,6 +84,8 @@ Adds a new budget to a specific month.
 Format: `add -b a/AMOUNT m/<MONTH>`
 
 * The `AMOUNT` can be entered with 2 decimal places or without decimal places.
+  * Note: `Amount` with more than 2d.p. will be rounded up from 0.006 onwards.
+  * E.g. $1.006 will be rounded up to $1.01.
 * The `MONTH` must strictly be within the range of 1 to 12.
 
 Example of usage:
@@ -94,7 +96,7 @@ Expected outcome: Budget of $500.00 is added to the month of December of that pa
 
 ```
 ========================================================
-Your budget of 500.0 for December is successfully added!
+Your budget of $500.00 for December is successfully set!
 ========================================================
 ```
 <br />
@@ -108,11 +110,13 @@ Adds a new expenditure to a month.
 Format: `add -e n/DESCRIPTION a/AMOUNT d/<DATE_OF_EXPENDITURE> c/<CATEGORY>`
 
 * The `DESCRIPTION` can be in a natural language format.
-  * NOTE: **Description column has a 30characters limit, including index.**
+  * NOTE: **If Description column exceeds 30characters limit, it will be truncated during list view**
 * The `AMOUNT` entered can be up to 2 decimal places and cannot be empty.
 * The `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_. 
   * If left empty, the current date according to the
   system will be entered by default.
+  * Note: **YYYY value should correspond to the current storage file year, please use `year` 
+  command to switch to the correct year before entering an expenditure of another year**
 * The `<CATEGORY>` must be one of the following values:
   * _GENERAL, CLOTHES, FOOD, ENTERTAINMENT, GIFTS, HEALTH_
   * If left empty, the default value will be _GENERAL_
@@ -507,7 +511,7 @@ _________________________________________________________
 <br />
 
 
-### `-e` : View Statistics for the Month by categories
+### `-c` : View Statistics for the Month by categories
 
 
 Display the statistics for a particular month's budget and expenditure by categories. 

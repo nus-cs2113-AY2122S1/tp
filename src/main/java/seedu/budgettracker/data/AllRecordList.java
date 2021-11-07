@@ -204,10 +204,6 @@ public class AllRecordList {
         return allRecordList.get(month).getLoan(index);
     }
 
-    public boolean checkOverspending(int month) {
-        return allRecordList.get(month).checkOverspending();
-    }
-
     public int getMonthNumberOfExpenditures(int month) {
         return allRecordList.get(month).getNumberOfExpenditures();
     }
