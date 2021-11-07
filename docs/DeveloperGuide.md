@@ -266,8 +266,10 @@ Currently, a maximum of 30 days can be added per trip, and a maximum of 50 items
 The `Ui` class processes the interactions with users. The functions in `Ui` class will be called in `command` and then 
 print messages in the interface.
 
-{TODO: Add graft}
-The steps illustated by Figure 6 is summarised now.
+![](documentationPics/Ui.png)
+<div style="text-align: center;">Figure 7: TripsList Diagram</div>
+
+The steps illustated by Figure 7 is summarised now.
 1. Run the `printWelcome` to greet the users.
 2. Read user input and pass it to the `Parser`
 3. Functions in `Ui` will be repeatedly called by `Command` class.
@@ -291,7 +293,7 @@ Loading the save file is similar to the main `run` function of Traveller, as the
 Following the loading of the save file, writing of the save file is handled as shown below.
 
 ![](documentationPics/saveSequenceDiagram.jpg)
-<div style="text-align: center;">Figure 7: Save Sequence Diagram</div>
+<div style="text-align: center;">Figure 8: Save Sequence Diagram</div>
 
 The functions `getSaveTrip()`, `getSaveDay()` and `getSaveItem()` return `strings` that corresponds to the 
 command that will be executed in order to add a trip, day or item to the TripList, DaysList or ItemsList respectively.
