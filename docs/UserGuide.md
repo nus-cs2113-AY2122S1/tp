@@ -104,7 +104,7 @@ The purpose of the help command is to ensure that even if there is no internet c
 Creates a new trip.
 
 #### Format: `new TRIP_NAME /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
-   * Keywords `/from` and `/to` must be included **before** the SOURCE_COUNTRY and DESTINATION_COUNTRY respectively.
+   *  Keywords `/from` and `/to` must be included **before** the SOURCE_COUNTRY and DESTINATION_COUNTRY respectively.
    * `SOURCE_COUNTRY` and `DESTINATION_COUNTRY` destinations must be [supported countries codes](#4-supported-countries-summary).
    * Trips cannot be named `all` or contain the character `/`.
 
