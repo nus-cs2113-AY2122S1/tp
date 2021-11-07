@@ -316,7 +316,7 @@ Date of Event (E.g. Monday): Monday
 Starting time of Event (E.g. 1600): 2000
 Ending time of Event (E.g. 1800): 2100
 Location of Event (Optional): Discord
-Alright!! Event: Team Meeting CS2113T on Monday, from 2000 to 2100 at Team Meeting CS2113T has been added to your timetable
+Alright!! Event: Team Meeting CS2113T on Monday, from 2000 to 2100 at Discord has been added to your timetable
 ```
 
 If the selected timeslot is already occupied, the program will let you know and the event will not be added until the timeslot

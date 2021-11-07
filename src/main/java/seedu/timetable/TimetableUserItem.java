@@ -67,5 +67,8 @@ public class TimetableUserItem extends TimetableItem {
         return output;
     }
 
+    public String getLocation() {
+        return venue;
+    }
 
 }

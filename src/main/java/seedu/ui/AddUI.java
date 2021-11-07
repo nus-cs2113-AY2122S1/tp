@@ -283,7 +283,7 @@ public class AddUI {
         String output = "Alright!! Event: " + event.getTitle() + " on " + event.getDay() + ", from "
                 + startTime + " to " + endTime;
         if (event.isDescription()) {
-            output = output.concat(" at " + event.getDescription());
+            output = output.concat(" at " + event.getLocation());
         }
         output = output.concat(" has been added to your timetable");
         System.out.println(output);

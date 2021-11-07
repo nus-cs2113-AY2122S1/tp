@@ -116,10 +116,10 @@ public class AddCommand extends Command {
         try {
             Integer.parseInt(startTime);
         } catch (NumberFormatException e) {
-            throw new AddException("Invalid Start Time Entered (Format: 1600)");
+            throw new AddException("Invalid Start Time Entered (Format: 0000 - 2359)");
         }
         if (isValidTime(startTime)) {
-            throw new AddException("Invalid Start Time Entered (Format: 1600)");
+            throw new AddException("Invalid Start Time Entered (Format: 0000 - 2359)");
         }
         return startTime;
     }
