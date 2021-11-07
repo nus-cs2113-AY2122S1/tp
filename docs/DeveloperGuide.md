@@ -151,10 +151,7 @@ The `FinancialTracker` component,
 
 The sequence diagram below is used to illustrate how `FinancialTracker` utilizes the helper classes.
 
-<to be updated> 
-
 ---
-
 
 ##### Converting user inputs to commands
 
