@@ -17,7 +17,7 @@ public class Ingredient implements Comparable<Ingredient> {
     private static final Ui UI = new Ui();
     private String ingredientName;
     private double ingredientWeight;
-    private double ingredientWasteIngr;
+    private double ingredientWaste;
     private double ingredientWasteDish;
     private double limit;
     private LocalDate expiryDate;
@@ -26,7 +26,7 @@ public class Ingredient implements Comparable<Ingredient> {
     public Ingredient(String ingredientName, double ingredientWeight) {
         this.ingredientName = ingredientName;
         this.ingredientWeight = ingredientWeight;
-        this.ingredientWasteIngr = 0;
+        this.ingredientWaste = 0;
         this.limit = -1;
         this.expiryDate = null;
     }
@@ -34,7 +34,7 @@ public class Ingredient implements Comparable<Ingredient> {
     public Ingredient(String ingredientName, double ingredientWeight, double ingredientWaste, String savedDate) {
         this.ingredientName = ingredientName;
         this.ingredientWeight = ingredientWeight;
-        this.ingredientWasteIngr = ingredientWaste;
+        this.ingredientWaste = ingredientWaste;
         this.limit = -1;
         if (savedDate.equals("null")) {
             this.expiryDate = null;
@@ -56,7 +56,7 @@ public class Ingredient implements Comparable<Ingredient> {
     }
 
     public void setIngredientWaste(double newWeight) {
-        this.ingredientWasteIngr = newWeight;
+        this.ingredientWaste = newWeight;
     }
 
     public void setLimit(double limit) {
@@ -191,8 +191,8 @@ public class Ingredient implements Comparable<Ingredient> {
 
         ingredientWeightValue = Double.parseDouble(ingredientWeight);
 
-        ingredientWasteIngr += ingredientWeightValue;
-        double totalWaste = ingredientWasteIngr + ingredientWasteDish;
+        ingredientWaste += ingredientWeightValue;
+        double totalWaste = ingredientWaste + ingredientWasteDish;
         UI.printWastage(ingredientName, totalWaste);
         if (totalWaste >= limit && limit != -1) {
             UI.printLimitExceeded(ingredientName);
@@ -200,12 +200,12 @@ public class Ingredient implements Comparable<Ingredient> {
     }
 
     public double getWastage() {
-        return ingredientWasteIngr + ingredientWasteDish;
+        return ingredientWaste + ingredientWasteDish;
     }
 
     @Override
     public String toString() {
-        double totalWaste = ingredientWasteIngr + ingredientWasteDish;
+        double totalWaste = ingredientWaste + ingredientWasteDish;
         String limitString;
         String expiryDateString;
         if (limit == -1) {
@@ -242,7 +242,7 @@ public class Ingredient implements Comparable<Ingredient> {
         } else {
             expiryDateString = expiryDate.format(dtf);
         }
-        return ingredientName + "|" + ingredientWeight + "|" + ingredientWasteIngr + "|" + limit + "|"
+        return ingredientName + "|" + ingredientWeight + "|" + ingredientWaste + "|" + limit + "|"
                 + expiryDateString;
     }
 
@@ -252,14 +252,14 @@ public class Ingredient implements Comparable<Ingredient> {
     }
 
     public double getGraphHeight(double max, int resolution) {
-        double wastage = ingredientWasteDish + ingredientWasteIngr;
+        double wastage = ingredientWasteDish + ingredientWaste;
         double num = resolution * wastage / max;
         return num;
     }
 
     @Override
     public int compareTo(Ingredient o) {
-        double wastage = ingredientWasteDish + ingredientWasteIngr;
+        double wastage = ingredientWasteDish + ingredientWaste;
         double diff = (o.getWastage() - wastage);
         return (diff >= 0) ? (diff == 0) ? 0 : 1 : -1;
     }
