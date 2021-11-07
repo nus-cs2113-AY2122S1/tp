@@ -311,13 +311,15 @@ public class Ui {
         System.out.println("Welcome to the help page.");
         System.out.println("Your current mode is indicated in the square brackets at the bottom left of the console.");
         System.out.println("It allows you to type add, list, update, delete without typing in the full command.");
+        System.out.println("Additionally, you can type archive in both prescription and order mode and receive in order"
+                + " mode.");
         System.out.println("Type stock, prescription or order to change to respective modes.");
         System.out.println("Note that parameters in {curly braces} are optional.");
         System.out.println("Parameters in [square braces] indicate that at least one of the parameter(s) must be "
                 + "provided.");
-        System.out.println("Parameters enclosed in (round brackets) are conditional optional parameters. For example,"
-                + " the parameters d/DESCRIPTION and m/MAX_QUANTITY in addstock and receiveorder will be optional only"
-                + " if the stock exists.");
+        System.out.println("Parameters enclosed in (round brackets) are conditional optional parameters.");
+        System.out.println("For example, the parameters d/DESCRIPTION and m/MAX_QUANTITY in addstock and receiveorder "
+                + "will be optional only if the stock exists.");
         printHeaderBorder(columnWidths);
         System.out.println(headers);
         printHeaderBorder(columnWidths);
