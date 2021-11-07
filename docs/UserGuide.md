@@ -21,9 +21,18 @@ displays a summary of all the orders along with other information such as an ind
 corresponding cost, total cost of all the orders and more. As LOTS is a CLI program, this would 
 greatly benefit any user that excels in typing.
 
+Value Proposition:
+* Allows users to keep track of bulk orders easily.
+* Knows which order belongs to which person.
+* Easily tracks the total cost.
+* Easily tracks the total number of orders.  
+* Operations can be done quickly by a proficient keyboard user.
+
 Target users includes:
-1. Dinners
-2. Order collators (Middleman)
+1. A person making a large order for himself or others.
+2. Someone who has to track multiple different food orders.
+3. Order collators (Middleman).
+4. Diners.
 
 ---
 
