@@ -1,7 +1,7 @@
 @startuml
 !include style.puml
 
-Participant ":AlertExpringSoonCommand" as alert_exp COMMAND_COLOUR_S1
+Participant ":AlertExpiringSoonCommand" as alert_exp COMMAND_COLOUR_S1
 Participant ":CurrentDate" as date DATE_COLOUR
 Participant ":IngredientList" as ing_list INGREDIENTLIST_COLOUR
 Participant ":IngredientGroup" as ing_group INGREDIENTGROUP_COLOUR
