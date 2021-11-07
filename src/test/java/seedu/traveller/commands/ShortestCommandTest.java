@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+//@@author Cuiminjing
 public class ShortestCommandTest {
     @Test
     public void shortestCommand_create_success() {
