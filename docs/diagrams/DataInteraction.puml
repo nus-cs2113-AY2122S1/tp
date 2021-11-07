@@ -1,0 +1,25 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+!include style.puml
+
+hide members
+
+component Data {
+class RecipeList
+class IngredientRepository
+}
+
+component Storage {
+}
+
+component Logic {
+}
+
+Storage ..> RecipeList
+Storage ..> IngredientRepository
+
+Logic ..> RecipeList
+Logic ..> IngredientRepository
+
+@enduml
