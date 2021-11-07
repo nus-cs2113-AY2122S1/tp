@@ -38,10 +38,8 @@ Users interact with in through a CLI, and is written in Java.
   * Section on how to use the UG
   * Help Command Section
   * Find Command Section
-  * Part of Testing Features Section
   * Command Summary Section
   * Overview for most sections and features (first paragraph of the sections/subsections)
-  * Use of "you" language 
 * **Developer Guide Contributions** (found [here](https://ay2122s1-cs2113t-t09-3.github.io/tp/DeveloperGuide.html)): 
   * Sequence diagram of the overall interaction of different components of SITUS
   * Diagram of interaction between `Parser` and `Command` classes
@@ -53,5 +51,6 @@ Users interact with in through a CLI, and is written in Java.
   * Documentation of value proposition in DG
   * "How to Use This Guide" section in UG
   * Documentation of code methods 
+  * Edits to overall language and formatting 
 * **Community**:
   * Participated in PE Dry Run (bugs reported can be found [here](https://github.com/nishantrai-nus/ped/issues))
