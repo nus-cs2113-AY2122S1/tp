@@ -342,7 +342,7 @@ The sequence diagram for `UpdateStockCommand` is shown below.
 MediVault retrieves the stock object using the `i/ID` parameter specified by the user using the `extractStockObject()` 
 method. MediVault conducts another validation check on the provided `q/QUANTITY`,`m/MAX_QUANTITY` and `e/EXPIRY_DATE`
 against the stock object retrieved earlier. This validation check is separated from the initial validation checker
-as enforcing `q/QUANTITY` <= `m/MAX_QUANTITY` can only be done **after** MediVault confirms what user input is
+as enforcing `q/QUANTITY <= m/MAX_QUANTITY` can only be done **after** MediVault confirms what user input is
 provided. This is because the backend processing for either one or both parameters provided by the user are different.
 
 MediVault adds a new stock record when a user update contains the `n/NAME` parameter. The old stock record still
