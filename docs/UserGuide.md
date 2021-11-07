@@ -20,14 +20,14 @@
     - [Accessing a specific module workspace : `go <module_code>`](#accessing-a-specific-module-workspace)
     - [Section: Note](#section-note)
         * [Accessing note workspace : `note`](#accessing-note-workspace)
-        * [Adding a Note : `add "<name>" "<content>"`](#adding-a-note)
+        * [Adding a Note : `add "<note_name>" "<note_content>"`](#adding-a-note)
         * [Viewing note information : `view {index}`](#viewing-note-information)
         * [Deleting a Note : `delete <index>`](#deleting-a-note)
         * [Reloading all notes: `reload`](#reloading-all-notes)
         * [Exporting all notes: `export`](#exporting-all-notes)
     - [Section: Schedule](#section-schedule)
         * [Accessing schedule workspace : `schedule`](#accessing-schedule-workspace)
-        * [Adding a Schedule : `add "<description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"`](#adding-a-schedule)
+        * [Adding a Schedule : `add "<link_description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"`](#adding-a-schedule)
         * [Viewing schedule information : `view {index}`](#viewing-schedule-information)
         * [Deleting a Schedule : `delete <index>`](#deleting-a-schedule)
     - [Section: Question](#section-question)
@@ -35,7 +35,7 @@
         * [Adding a Question : `add "<question>" "<answer>"` ](#adding-a-question)
         * [Viewing question information : `view {index}`](#viewing-question-information)
         * [Deleting a Question : `delete <index>`](#deleting-a-question)
-        * [Testing Yourself with Active Recall : `test {count}`](#testing-yourself-with-active-recall)
+        * [Testing Yourself with Active Recall : `test {question_count}`](#testing-yourself-with-active-recall)
 - [Displaying all schedules across all modules : `timetable {day}`](#displaying-all-schedules-across-all-modules)
 - [Exiting TermiNUS : `exit`](#exiting-terminus)
 - [Accessing Help : `help`](#accessing-help)
@@ -329,7 +329,7 @@ enter the module workspace in Terminus.
 
 Enters the module workspace to access data within the module.
 
-> ⚠ The module code is **case-insensitive** and will be converted to **UPPERCASE** as shown below.
+> ⚠️The `module_code` is **case-insensitive** and will be converted to **UPPERCASE** as shown below.
 
 Example: `go cs2113t`
 
@@ -412,11 +412,11 @@ List of Note workspace commands:
 
 ### Adding a Note
 
-**Format:** `add "<name>" "<content>"`
+**Format:** `add "<note_name>" "<note_content>"`
 
 Adds a note when in the note workspace.
 
-> ⚠️The `<name>` cannot be more than **30** characters and cannot be a name that already exists in this module. It follows the condition of a `valid_file_name`.
+> ⚠️The `<note_name>` cannot be more than **30** characters and cannot be a name that already exists in this module. It follows the condition of a `valid_file_name`.
 
 > 💡 When executing this command, it will add the note into its module and creates a `.txt` file inside the module folder. The `.txt` file will be named after the newly added note name.
 
@@ -492,7 +492,7 @@ Your note on 'coding style' has been deleted!
 
 **Format:** `reload`
 
-Reloads all the notes found within your `data/<module code>`.
+Reloads all the notes found within your `data/<module_code>`.
 
 > 💡 This command is useful when you have updated your notes file in another application, and would 
 > wish to update the contents into TermiNUS.
@@ -500,6 +500,8 @@ Reloads all the notes found within your `data/<module code>`.
 > ⚠️ Any note file that do not follow the same restriction as mentioned in [Adding a Note](#adding-a-module) will be ignored.
 
 > ⚠️ If there are any 2 or more note files with the same exact name regardless of case sensitivity, only 1 of them will be loaded.
+
+> ⚠️ If storage is disabled, this command will not work as intended.
 
 Example: `reload`
 
@@ -523,13 +525,15 @@ note workspace as a PDF file.
 > ⚠️ The export process can take a while.   
 > A very large text can cause the program to take a long time to export.
 
+> ⚠️ If storage is disabled, this command will not work as intended.
+
 Example: `export`
 
 Expected Output:
 
 ```
 [CS2113T > note] >>> export
-Exported notes! Check the data folder.
+Exporting notes... Check the data folder.
 [CS2113T > note] >>> 
 ```
 
@@ -579,7 +583,7 @@ List of Schedule workspace commands:
 
 ### Adding a Schedule
 
-**Format:** `add "<description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"`
+**Format:** `add "<link_description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"`
 
 Adds a schedule when in the schedule workspace.
 
@@ -769,20 +773,20 @@ Your question on 'What is 1+1?' has been deleted!
 
 ### Testing Yourself with Active Recall
 
-**Format:** `test {count}`
+**Format:** `test {question_count}`
 
 Starts an Active Recall session.
 
-You may specify the number of questions to be tested by adding a `{count}` at the end of the 
+You may specify the number of questions to be tested by adding a `{question_count}` at the end of the 
 command. 
 
 > ⚠ To start a session, there must be at least 1 question contained within the question workspace.
 
-> 💡 By default, `{count}` will be set to **10** questions if left unspecified. 
+> 💡 By default, `{question_count}` will be set to **10** questions if left unspecified. 
 > 
 > If there are not enough questions, it will take the whole pool of questions in the module 
 > (i.e. if you have 7 questions in your current module, you will only receive 7 questions when you 
-> indicate a `{count}` greater than 7 or leave it empty).
+> indicate a `{question_count}` greater than 7 or leave it empty).
 
 When you begin, you will be prompted with the following:
 
@@ -823,8 +827,8 @@ You took 172 seconds to reveal the answer.
 Answer:
 Equivalence partitioning
 
-How did you find the question? (Compare against past attempts if any)
-[1] Easy; [2] Normal / Same; [3] Hard; [E] Exit
+How did you find the question?
+[1] Easy; [2] Normal; [3] Hard; [E] Exit
 [1/2/3/E] >> 
 ```
 
@@ -921,7 +925,7 @@ module : Move to the module workspace
 Format: module
 
 go : Go to a specific module's workspace
-Format: go <module name>
+Format: go <module_code>
 
 timetable : Displays all your schedule.
 Format: timetable {day}
@@ -996,6 +1000,9 @@ solve the issue. Secondly, if you are running macOS or Linux, we do not delete f
 **Q:** What will happen if my data is **not loaded properly** when entering TermiNUS?  
 **A:** Any existing data may be **overwritten** in the `data` folder when you perform any command within this state.
 
+**Q:** Why will storage be disabled?  
+**A:** To avoid loss of data due to an error when loading/saving data into the `data` folder. Hence, if an error occurs, all storage operations will cease to work only until you exit the program where TermiNUS will attempt to save your data one last time.
+
 ___  
 
 ## Workspace Command Summary
@@ -1018,12 +1025,12 @@ ___
 | ----------- | ----------- | ----------- |----------- |
 |module management|add module|`add "<module_code>"`|`add "CS2113T"`|
 |module management|update module |`update <index> "<new_module_code>"`|`update 1 "CS2113"`|
-|note|add note|`add "<name>" "<content>"`|`add "Note1" "Hello world."`|
+|note|add note|`add "<note_name>" "<note_content>"`|`add "Note1" "Hello world."`|
 |note|export notes|`export`|`export`|
 |note|reload notes|`reload`|`reload`|
-|schedule|add schedule|`add "<description>" "<day>" "<start_time>" "<duration>" <zoom_link>"`|`add "CS2113T Tutorial 1" "Thursday" "10:00" "1" "https://zoom.us/test"`|
+|schedule|add schedule|`add "<link_description>" "<day>" "<start_time>" "<duration>" <zoom_link>"`|`add "CS2113T Tutorial 1" "Thursday" "10:00" "1" "https://zoom.us/test"`|
 |question|add question|`add "<question>" "<answer>"`|`add "What is 1+1?" "2"`|
-|question|active learning|`test {count}`|`test`, `test 3`|
+|question|active learning|`test {question_count}`|`test`, `test 3`|
 |default|view timetable|`timetable {day}`|`timetable`, `timetable Thursday`|
 |**ALL** except module|delete item|`delete <index>`|`delete 1`|
 |**ALL** except module|view item information|`view {index}`|`view`, `view 1`|
