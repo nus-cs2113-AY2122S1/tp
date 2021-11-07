@@ -63,7 +63,7 @@ public class TeachingClassDeserializer extends StorageDeserializer implements Js
 
     private void deserializeStudentList(JsonElement studentListJson, TeachingClass teachingClass)
             throws JsonParseException {
-        if (studentListJson == null) {
+        if (studentListJson == null || !studentListJson.isJsonObject()) {
             return;
         }
 
@@ -84,7 +84,7 @@ public class TeachingClassDeserializer extends StorageDeserializer implements Js
 
     private void deserializeAssessmentList(JsonElement assessmentListJson, TeachingClass teachingClass)
             throws JsonParseException {
-        if (assessmentListJson == null) {
+        if (assessmentListJson == null || !assessmentListJson.isJsonObject()) {
             return;
         }
 
