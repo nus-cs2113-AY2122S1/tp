@@ -5,22 +5,22 @@ Here are the list of commands:
 
 help
 add
-list
-view
-edit
-find
 delete
-switch
-exit
+edit
+view
+list
+find
 hide
 show
+switch
 get view
+exit
 
 To obtain more information on each command and their respective required inputs, type:
 help [COMMAND]
 
 *Note that all commands will remove any '|' inputs for format parsing purposes.
-For expected output examples, please refer to the actual user guide.
+For expected output examples, please refer to the User Guide.
 
 Adds a patient to the patient list.
 Format:
