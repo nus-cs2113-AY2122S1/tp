@@ -19,7 +19,10 @@
     - [4.3 Edit Feature](#43-edit-feature)
     - [4.4 Appointment Management](#44-appointment-management)
 - [Appendix A: Product Scope](#appendix-a-product-scope)
-- [Appendix B: ]
+- [Appendix B: User Stories](#appendix-b-user-stories)
+- [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
+- [Appendix D: Glossary](#appendix-d-glossary)
+- [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
 
 ## 1. Acknowledgements
 
@@ -160,7 +163,7 @@ The Command class and its subclasses are responsible for handling the execution 
 
 Each individual Command object includes:
 
-* `isExit()`: Return true only if it is an `ExitCommand` .
+* `isExit()`: Return true only if it is an `Exit Command` .
 * `execute(Scheduler, Ui)`: Using the `Ui` class and data from the `Scheduler` to execute and print out the result to
   the user.
 * Various attributes specific to the command, some common ones:
@@ -173,19 +176,22 @@ Three major types of Commands:
 2. `Appointment` commands: to interact with the appointment between doctors/nurses and patients.
 3. General commands: included are `help`, `exit`, `switch`, `getCurrentView`.
 
-Given below are class diagrams of how the `Command` class and its subclasses are implemented.
+Given below are the complete list of implemented commands and their types:
 
-#### Command class and general commands
-
-![General Command Class Diagram](diagrams/general_command.png)
-
-#### Person-related commands
-
-![Person Command Class Diagram](diagrams/person_command.png)
-
-#### Appointment-related commands
-
-![Appointment Command Class Diagram](diagrams/appointment_command.png)
+|Command name| Type |
+|--------|---|
+|Exit Command|General|
+|Get View Command|General|
+|Help Command|General|
+|Switch Command|General|
+|Add Person/Appointment Command|Person/Appointment|
+|Edit Person/Appointment Command|Person/Appointment|
+|Delete Person/Appointment Command|Person/Appointment|
+|Find Person/Appointment Command|Person/Appointment|
+|List Person/Appointment Command|Person/Appointment|
+|View Person/Appointment Command|Person/Appointment|
+|Hide Person Command|Person|
+|Show Person Command|Person|
 
 ## 4. Implementation
 
@@ -206,23 +212,21 @@ of the `Parser`. The 3 possible views and the corresponding user input commands 
 * `switch` - will switch to another view depending on the current view.
 
 Each command evokes the `Parser#setViewType(ViewType)` method, which will set the corresponding
-`ViewType` property in the `Parser` class. Additionally, the `Ui#clearConsoleFromIde` method will
-be evoked, which performs a pseudo clear of the console before printing a message that indicates
-the user has switched view.
+`ViewType` property in the `Parser` class. Additionally, the `Ui#clearConsoleFromIde` method will be evoked, which
+performs a pseudo clear of the console before printing a message that indicates the user has switched view.
 
 #### Design Considerations:
 
 **Aspect: How console is cleared:**
+
 * Alternative 1(Current Choice)
-  * Perform a pseudo-clear using multiple `System.lineSeparator()` to move the current console outputs
-    upwards.
-    * Pros: Easy to implement, system independent
-    * Cons: Only works for terminals up to a certain size (bigger terminals can still see previous console outputs)
-  * Perform an actual clear using the `ProcessBuilder` / `Runtime` class in java.
-    * Pros: Size of terminal doesn't matter since it actually clears the console.
-    * Cons: More complex implementation, need to consider different sets of implementation for different OSes,
-            does not work on IDE.
-    
+    * Perform a pseudo-clear using multiple `System.lineSeparator()` to move the current console outputs upwards.
+        * Pros: Easy to implement, system independent
+        * Cons: Only works for terminals up to a certain size (bigger terminals can still see previous console outputs)
+    * Perform an actual clear using the `ProcessBuilder` / `Runtime` class in java.
+        * Pros: Size of terminal doesn't matter since it actually clears the console.
+        * Cons: More complex implementation, need to consider different sets of implementation for different OSes, does
+          not work on IDE.
 
 ### 4.2 Find feature
 
@@ -368,7 +372,7 @@ for their daily jobs
 ## Appendix C: Non-Functional Requirements
 
 1. Should work on any *mainstream OS* as long as it has Java `11` or above installed.
-2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) 
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 3. Should be able to hold up to a thousand appointments and patient/staff records without any noticeable decrease in
    performance.
@@ -379,241 +383,270 @@ for their daily jobs
 
 ## Appendix E: Instructions for manual testing
 
-Here are the instructions to perform manual testing of the application:
+Below are instructions to perform manual testing of the application. Please refer to the
+[User Guide](https://ay2122s1-cs2113-t13-1.github.io/tp/UserGuide.html) for more details on the usage of the various
+commands.
 
 ### Launch and exit
 
-1. Initial launch
+1. Launch
     1. Please follow the instructions in
-       the [Quick Start Guide](https://github.com/AY2122S1-CS2113-T13-1/tp/blob/master/docs/UserGuide.md#quick-start-guide)
+       the [Quick Start Guide](https://ay2122s1-cs2113-t13-1.github.io/tp/UserGuide.html#quick-start-guide)
        to launch the application.
-    2. Enter `exit` to quit MedBot.
+2. Exit
+    1. Enter `exit` to quit MedBot.
 
 ### Switching Views
 
-1. Switching between the different views of MedBot
-    1. Test case: `switch`
-       Expected: MedBot will switch to the next view, in this order:
+1. Switching between the different views of MedBot, in any view
+    1. Test case: `switch` <br>
+       Expected: MedBot will switch to the next view. The views switch in this order, and loop back: <br>
        (PATIENT_INFO --> MEDICAL_STAFF_INFO --> SCHEDULER --> PATIENT_INFO)
-    2. Test case: `switch m` when in PATIENT_INFO view or SCHEDULER view Expected: MedBot will switch to
-       MEDICAL_STAFF_INFO view, and print:
-    ``` 
-    ___ _____ _   ___ ___  
-    / __|_   _/_\ | __| __| 
-    \__ \ | |/ _ \| _|| _|  
-    |___/_|_/_/_\_\_| |_|   
-    |_ _| \| | __/ _ \      
-    | || .` | _| (_) |     
-    |___|_|\_|_|_\___/    __
-    \ \ / /_ _| __\ \    / /
-    \ V / | || _| \ \/\/ / 
-    \_/ |___|___| \_/\_/  
 
-    View has been switched to MEDICAL_STAFF_INFO
-    ```
-    4. Test case: `switch 3` when in the `SCHEDULER` view Expected: View remains the same,
-       prints: `You are already in the Scheduler view.`
-    5. Test case (invalid command): `switch 100`, `switch abc`, ... Expected: View remains the same,
+2. Switching from other views to MEDICAL_STAFF_INFO view specifically
+    1. Test case: `switch m` when in PATIENT_INFO view or SCHEDULER view <br>
+       Expected: MedBot will switch to MEDICAL_STAFF_INFO view, and print: <br>
+
+        ``` 
+          ___ _____ _   ___ ___  
+         / __|_   _/_\ | __| __| 
+         \__ \ | |/ _ \| _|| _|  
+         |___/_|_/_/_\_\_| |_|   
+         |_ _| \| | __/ _ \      
+          | || .` | _| (_) |     
+         |___|_|\_|_|_\___/    __
+         \ \ / /_ _| __\ \    / /
+          \ V / | || _| \ \/\/ / 
+           \_/ |___|___| \_/\_/  
+        View has been switched to MEDICAL_STAFF_INFO
+        ```
+
+3. Switching view to the current view
+    1. Test case: `switch 3` when in the `SCHEDULER` view <br>
+       Expected: View remains the same, prints: `You are already in the Scheduler view.`
+4. Invalid switch commands
+    1. Test case: `switch 100`, `switch abc`, ... <br> Expected: View remains the same,
        prints: `Invalid view type code.`
 
 ### Get current view
 
 1. Get the current view type of MedBot
-    1. Test case: `get view` when in the `SCHEDULER` view Expected: `You are currently in the Scheduler's View.`
+    1. Test case: `get view` when in the `SCHEDULER` view <br>Expected: `You are currently in the Scheduler's View.`
 
 ### Accessing user guide
 
-1. Prints out useful information on how to use MedBot. Help information is dependent on the current view.
-    1. Test case: `help` in SCHEDULER view. Expected:
-    ```
-    Here are the list of commands:
+1. Using `help` in the SCHEDULER view
+    1. Test case: `help` in SCHEDULER view. <br>Expected:
+        ```
+        Here are the list of commands:
+    
+        help
+        add
+        list
+        view
+        edit
+        find
+        delete
+        get view
+        switch
+        exit
+    
+        To obtain more information on each command and their respective required inputs, type:
+        help [COMMAND]
 
-    help
-    add
-    list
-    view
-    edit
-    find
-    delete
-    get view
-    switch
-    exit
-
-    To obtain more information on each command and their respective required inputs, type:
-    help [COMMAND]
-
-    *Note that all commands will remove any '|' inputs for format parsing purposes. For 
-    examples of the expected output, please refer to the actual user guide.
-    ```
-    2. Test case: `help add` in PATIENT_INFO view Expected:
-    ```
-    Adds a patient to the patient list.
-    Format:
-    add i/PATIENT_IC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]
-    ```
-    3. Test case (Invalid commands): `help abc` in any view Expected: `Unable to parse command.`
+        *Note that all commands will remove any '|' inputs for format parsing purposes. For 
+        examples of the expected output, please refer to the actual user guide.
+        ```
+2. Getting view specific help for a specific command
+    1. Test case: `help add` in PATIENT_INFO view <br>Expected:
+        ```
+        Adds a patient to the patient list.
+        Format:
+        add i/PATIENT_IC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]
+        ```
+3. Invalid `help` usage
+    1. Test case: `help abc` in any view <br>Expected: `Unable to parse command.`
 
 ### Patient/Medical Staff Information Commands
 
-1. The commands for `PATIENT_INFO_VIEW` and `STAFF_INFO_VIEW` are the same, but apply to patients and staff
-   respectively.
-   `PATIENT_INFO_VIEW` examples will be used here, but feel free to test the same commands for `STAFF_INFO_VIEW`.
-2. Note that the Patient ID/STAFF ID will be dependent on the existing patients/staff that exist in MedBot. But they
-   will be unique.
-3. The expected output of the test cases below assumes that the commands are executed in the order that they are
-   presented.
+* The commands for `PATIENT_INFO_VIEW` and `STAFF_INFO_VIEW` are the same, but apply to patients and staff respectively.
+  `PATIENT_INFO_VIEW` examples will be used here, but feel free to test the same commands for `STAFF_INFO_VIEW`.
+* Note that the Patient ID/STAFF ID generated is dependent on the existing patients/staff information in MedBot.
+* The expected output of the test cases below assumes that the commands are executed in the order that they are
+  presented in this guide.
 
 #### Adding a patient
 
-1. Adds a patient to the patient list.
-    1. Test case: `add i/S7812345X n/John Doe p/87654321 e/john.doe@gmail.com a/John Street, block 1234, #01-01`
+1. Add a patient to the patient list with all details filled.
+    1. Test case: `add i/S7812345X n/John Doe p/87654321 e/john.doe@gmail.com a/John Street, block 1234, #01-01` <br>
        Expected:
-    ```
-    Added patient with Patient ID: 1
-    IC: S7812345X
-    Name: John Doe
-    H/P: 87654321
-    Email: john.doe@gmail.com
-    Address: John Street, Block 1234, #01-01
-    ```
-    2. Test case: `add e/jimbob@hotmail.com n/jIm boB`
+        ```
+        Added patient with Patient ID: 1
+        IC: S7812345X
+        Name: John Doe
+        H/P: 87654321
+        Email: john.doe@gmail.com
+        Address: John Street, Block 1234, #01-01
+        ```
+2. Add a patient to the patient list with some details filled.
+    1. Test case: `add e/jimbob@hotmail.com n/jIm boB` <br>
        Expected:
-    ```
-    Added patient with Patient ID: 2
-    IC: 
-    Name: Jim Bob
-    H/P: 
-    Email: jimbob@hotmail.com
-    Address: 
-    ```
-    3. Test case `add n/Raven Darkholme i/S8912345A`
+        ```
+        Added patient with Patient ID: 2
+        IC: 
+        Name: Jim Bob
+        H/P: 
+        Email: jimbob@hotmail.com
+        Address: 
+        ```
+    2. Test case `add n/Raven Darkholme i/S8912345A` <br>
        Expected:
-    ```
-    Added patient with Patient ID: 3
-    IC: S8912345A
-    Name: Raven Darkholme
-    H/P: 
-    Email: 
-    Address: 
-    ```
-
-    4. Test case (Invalid command): `add h/`
+        ```
+        Added patient with Patient ID: 3
+        IC: S8912345A
+        Name: Raven Darkholme
+        H/P: 
+        Email: 
+        Address: 
+        ```
+3. Add a patient using an invalid attribute specifier
+    1. Test case (Invalid command): `add h/` <br>
        Expected: `"h/" is not a valid attribute specifier`
-    5. Test case (Invalid command): `add i/S7812345X`
+4. Add a patient with an NRIC that already exists in MedBot
+    1. Test case (Invalid command): `add i/S7812345X` <br>
        Expected: `The patient with IC S7812345X is already in the record.`
 
 #### Delete a patient
 
-1. Deletes a patient from the list.
-    1. Test case: `delete 3`
+1. Delete an existing patient from the list.
+    1. Test case: `delete 3`<br>
        Expected: `Patient with id 3 deleted from system.`
-    2. Test case: `delete 4`
+2. Delete a non-existent patient from the list.
+    1. Test case: `delete 4`<br>
        Expected: `No Patient with ID 4 found.`
-    3. Test case (Invalid command): `delete asd`
+3. Invalid usage of `delete`
+    1. Test case (Invalid command): `delete asd`<br>
        Expected: `ID not specified or not a number.`
 
 #### View a patient's information
 
-1. View a patient's information.
-    1. Test case: `view 2`
+1. View an existing patient's information.
+    1. Test case: `view 2` <br>
        Expected:
-    ```
-    Here's the requested patient:
+        ```
+        Here's the requested patient:
 
-    Patient ID: 2
-    IC: 
-    Name: Jim Bob
-    H/P: 
-    Email: jimbob@hotmail.com
-    Address: 
-    ```
-    2. Test case (Invalid command): `view 89`
+        Patient ID: 2
+        IC: 
+        Name: Jim Bob
+        H/P: 
+        Email: jimbob@hotmail.com
+        Address: 
+        ```
+2. View a non-existent patient's information.
+    1. Test case: `view 89` <br>
        Expected: `No Patient with ID 89 found.`
-
-//TODO check if link works
 
 #### Hide a patient
 
-1. Hides a patient in the list. Refer to [this](#List-infromation-of-all-current-patients) on how `hide` affects `list`
-    1. Test case: `hide 2`
+* Refer to [this](#list-information-of-all-current-patients) to understand how `hide` affects `list`.
+* Feel free to test `hide`, `show` and `list` together.
+
+1. Hide a patient in the list.
+    1. Test case: `hide 2`<br>
        Expected: `The patient with ID: 2 is now hidden.`
-    2. Test case: `hide 1`
+    2. Test case: `hide 1`<br>
        Expected: `The patient with ID: 1 is now hidden.`
-    3. Test case (Invalid command): `hide ab`
+2. Invalid usage of `hide`
+    1. Test case (Invalid command): `hide ab`<br>
        Expected: `ID not specified or not a number.`
 
 #### Show a patient
 
-1. Show a previously hidden patient in the list. Refer to [this](#List-infromation-of-all-current-patients) on
-   how `show` affects `list`
-    1. Test case: `show 1`
+* Refer to [this](#list-information-of-all-current-patients) to understand how `show` affects `list`
+* Feel free to test `hide`, `show` and `list` together.
+
+1. Show a previously hidden patient in the list.
+    1. Test case: `show 1`<br>
        Expected: `The patient with ID: 1 is now not hidden.`
-    2. Test case: `show ab`
+2. Invalid usage of `show`
+    1. Test case: `show ab`<br>
        Expected: `ID not specified or not a number.`
 
 #### List information of all current patients
 
-1. List all patients in the patient list.
-2. `list` shows all non-hidden patients.
-3. `list -h` shows all hidden patients.
-    1. Test case: `list`
+* `list` shows all non-hidden patients.
+* `list -h` shows all hidden patients.
+
+1. List all non-hidden patients
+    1. Test case: `list`<br>
        Expected:
-    ```
-    Here is a list of all patients:
-    For full details of each patient, please use the command "view PATIENT_ID"
-    ----------------------------------------------------------------------------------------------------- 
-    |  ID  | IC Number |         Name         | Phone No. |        Email         |       Address        | 
-    ----------------------------------------------------------------------------------------------------- 
-    | 1    | S7812345X | John Doe             | 87654321  | john.doe@gmail.com   | John Street, Bloc... | 
-    ----------------------------------------------------------------------------------------------------- 
-    ```
-    2. Test case: `list -h`
+        ```
+        Here is a list of all patients:
+        For full details of each patient, please use the command "view PATIENT_ID"
+        ----------------------------------------------------------------------------------------------------- 
+        |  ID  | IC Number |         Name         | Phone No. |        Email         |       Address        | 
+        ----------------------------------------------------------------------------------------------------- 
+        | 1    | S7812345X | John Doe             | 87654321  | john.doe@gmail.com   | John Street, Bloc... | 
+        ----------------------------------------------------------------------------------------------------- 
+        ```
+2. List all hidden patients
+    1. Test case: `list -h`<br>
        Expected:
-    ```
-    Here is a list of all patients:
-    For full details of each patient, please use the command "view PATIENT_ID"
-    ----------------------------------------------------------------------------------------------------- 
-    |  ID  | IC Number |         Name         | Phone No. |        Email         |       Address        | 
-    ----------------------------------------------------------------------------------------------------- 
-    | 2    |           | Jim Bob              |           | jimbob@hotmail.com   |                      | 
-    ----------------------------------------------------------------------------------------------------- 
-    ```
-    3. Test case: `list -l`
+        ```
+        Here is a list of all patients:
+        For full details of each patient, please use the command "view PATIENT_ID"
+        ----------------------------------------------------------------------------------------------------- 
+        |  ID  | IC Number |         Name         | Phone No. |        Email         |       Address        | 
+        ----------------------------------------------------------------------------------------------------- 
+        | 2    |           | Jim Bob              |           | jimbob@hotmail.com   |                      | 
+        ----------------------------------------------------------------------------------------------------- 
+        ```
+3. Invalid usage of `list`
+    1. Test case: `list -l`<br>
        Expected: `Parameter type specified is not valid.`
 
 #### Edit information of a patient
 
-1. Edits a patient's personal information.
-    1. Test case: `edit 1 p/99999999 n/John Xavier Doe `
+1. Edit an existing patient's personal information, selected by ID.
+    1. Test case: `edit 1 p/99999999 n/John Xavier Doe`<br>
        Expected:
-    ```
-    Patient ID: 1
-    IC: S7812345X
-    Name: John Xavier Doe
-    H/P: 99999999
-    Email: john.doe@gmail.com
-    Address: John Street, Block 1234, #01-01
-    ```
-    2. Test case (Invalid command): `edit 898 n/BOb`
+        ```
+        The information of patient with ID 1 has been edited to:
+       
+        Patient ID: 1
+        IC: S7812345X
+        Name: John Xavier Doe
+        H/P: 99999999
+        Email: john.doe@gmail.com
+        Address: John Street, Block 1234, #01-01
+        ```
+2. Edit a non-existent patient's personal information
+    1. Test case: `edit 898 n/BOb`<br>
        Expected: `No Patient with ID 898 found.`
 
 #### Find patients based on attributes
 
-1. Search for (non-hidden) patients whose attributes contain the given search query.
-    1. Test case: `find i/12345`
+1. Search for non-hidden patients with NRIC containing "12345"
+    1. Test case: `find i/12345`<br>
        Expected:
-    ```
-    Patient ID: 1
-    IC: S7812345X
-    Name: John Xavier Doe
-    H/P: 99999999
-    Email: john.doe@gmail.com
-    Address: John Street, Block 1234, #01-01
-    ```
-    2. Test case (Invalid command): `find g/`
+        ```
+        Here is a list of all patients:
+        For full details of each patient, please use the command "view PATIENT_ID"
+        ----------------------------------------------------------------------------------------------------- 
+        |  ID  | IC Number |         Name         | Phone No. |        Email         |       Address        |
+        ----------------------------------------------------------------------------------------------------- 
+        | 1    | S7812345X | John Xavier Doe      | 99999999  | john.doe@gmail.com   | John Street, Bloc... |
+        ----------------------------------------------------------------------------------------------------- 
+        ```
+
+2. Invalid usage of `find`
+    2. Test case: `find g/`<br>
        Expected: `The specifier g/ is invalid.`
 
 ### Scheduler Commands
+
+#### Prerequisites
 
 * Run the following commands before running the `Scheduler` commands to populate the patient and medical staff lists
   with more data:
@@ -626,77 +659,84 @@ Here are the instructions to perform manual testing of the application:
 
 #### Adding an appointment
 
-1. Adds an appointment to the scheduler list. MedBot will check if there are any clashes in the appointments and display
-   and error message if there are any.
-2. The format for DATE_TIME is DDMMYY hhmm. I.e. 9 February 2021, 0800HRS should be written as 090221 0800
-3. Do note that the appointments are managed at an hourly basis. For example, any appointments set to any time between
-   0800HRS and 0859HRS will be treated as an appointment from 0800HRS to 0859HRS. No subsequent appointment can then be
-   scheduled for either the patient and the medical staff during that window.
-    1. Test case: `add p/1 s/1 d/011221 0900`
+* Adds an appointment to the scheduler list. MedBot will check if there are any clashes in the appointments and display
+  and error message if there are any.
+* The format for DATE_TIME is DDMMYY hhmm. I.e. 9 February 2021, 0800HRS should be written as 090221 0800
+* Do note that the appointments are managed at an hourly basis. For example, any appointments set to any time between
+  0800HRS and 0859HRS will be treated as an appointment from 0800HRS to 0859HRS. No subsequent appointment can then be
+  scheduled for either the patient and the medical staff during that window.
+
+1. Add a valid appointment with no clashes
+    1. Test case: `add p/1 s/1 d/011221 0900`<br>
        Expected:
-    ```
-    Added appointment with Appointment Id: 1
-    Patient ID: 1
-    Staff ID: 1
-    Date/Time: 01 Dec 21 0900HRS
-    ```
-    2. Test case: `add p/1 s/2 d/011221 1000`
+        ```
+        Added appointment with Appointment Id: 1
+        Patient ID: 1
+        Staff ID: 1
+        Date/Time: 01 Dec 21 0900HRS
+        ```
+    2. Test case: `add p/1 s/2 d/011221 1000`<br>
        Expected:
-    ```
-    Added appointment with Appointment Id: 2
-    Patient ID: 1
-    Staff ID: 2
-    Date/Time: 01 Dec 21 1000HRS
-    ```
-    3. Test case: `add p/1 s/2 d/011221 1105`
+        ```
+        Added appointment with Appointment Id: 2
+        Patient ID: 1
+        Staff ID: 2
+        Date/Time: 01 Dec 21 1000HRS
+        ```
+2. Valid appointment, but the time is corrected to the hour
+    1. Test case: `add p/1 s/2 d/011221 1105`<br>
        Expected:
-   ```
-   Added appointment with Appointment Id: 3
-   Patient ID: 2
-   Staff ID: 2
-   Date/Time: 01 Dec 21 1100HRS
-   ```
-    4. Test case (Invalid): `add p/2 s/1 d/011221 0900`
+       ```
+       Added appointment with Appointment Id: 3
+       Patient ID: 2
+       Staff ID: 2
+       Date/Time: 01 Dec 21 1100HRS
+       ```
+3. Adding a clashing appointment
+    1. Test case (Invalid): `add p/2 s/1 d/011221 0900`<br>
        Expected: `Staff unavailable, appointment 1 at that time. `
-    5. Test case (Invalid): `add p/1 s/2 d/01122123`
+4. Adding an appointment with invalid date/time format
+    1. Test case (Invalid): `add p/1 s/2 d/01122123`<br>
        Expected: `Incorrect Date/Time format.`
 
 #### Delete an appointment
 
-1. Delete an appointment from the scheduler.
-    1. Test case: `delete 2`
+1. Delete an existing appointment from the scheduler.
+    1. Test case: `delete 2`<br>
        Expected: `deleted appointment with Id: 2`
-    2. Test case: `delete 89`
+2. Delete a non-existent appointment from the scheduler.
+    1. Test case: `delete 89`<br>
        Expected: `No appointment with ID 89 found.`
-
-//TODO format change?? for output
 
 #### Editing an appointment's information
 
-1. Edit an appointment's information
-    1. Test case: `edit 3 s/1`
+1. Edit an existing appointment's information
+    1. Test case: `edit 3 s/1`<br>
        Expected:
-    ```
-    Appointment 3 changed to Appointment Id: 3
-    Patient ID: 2
-    Staff ID: 1
-    Date/Time: 01 Dec 21 1100HRS
-    ```
-    2. Test case (Invalid): `edit 3 d/011221 0900`
+        ```
+        Appointment 3 now has the following details:
+       
+        Patient ID: 2
+        Staff ID: 1
+        Date/Time: 01 Dec 21 1100HRS
+        ```
+2. Edit an appointment to clash with another appointment
+    1. Test case (Invalid): `edit 3 d/011221 0900`<br>
        Expected: `Staff unavailable, appointment 1 at that time.`
 
 #### Viewing an appointment's information
 
-1. View an appointment's information
-    1. Test case: `view 1`
+1. View an existing appointment's information
+    1. Test case: `view 1`<br>
        Expected:
-    ```
-    Appointment Id: 1
-    Patient ID: 1
-    Staff ID: 1
-    Date/Time: 01 Dec 21 0900HRS
-    ```
-    2. Test case (Invalid): `view 9`
+        ```
+        Appointment Id: 1
+        Patient ID: 1
+        Staff ID: 1
+        Date/Time: 01 Dec 21 0900HRS
+        ```
+2. View a non-existing appointment's information
+    1. Test case (Invalid): `view 9`<br>
        Expected: `No appointment with ID 9 found.`
 
 #### Listing information of all appointments
@@ -704,23 +744,65 @@ Here are the instructions to perform manual testing of the application:
 1. List the information of all appointments, including those of hidden patients and medical staff.
     1. Test case: `list`
        Expected:
-    ```
-    Here is a list of all appointments:
-    -------------------------------------------------------------------------------------------------- 
-    |  ID  |     Date/Time     | Patient ID |     Patient Name     | Staff ID |      Staff Name      | 
-    -------------------------------------------------------------------------------------------------- 
-    | 1    | 01 Dec 21 0900HRS | 1          | John Xavier Doe      | 1        | Doctor One           | 
-    | 3    | 01 Dec 21 1100HRS | 2          | Jim Bob              | 1        | Doctor One           | 
-    -------------------------------------------------------------------------------------------------- 
-    ```
+        ```
+       Here is a list of all appointments:
+       -------------------------------------------------------------------------------------------------- 
+       |  ID  |     Date/Time     | Patient ID |     Patient Name     | Staff ID  |      Staff Name       |
+       -------------------------------------------------------------------------------------------------- 
+       | 1    | 01 Dec 21 0900HRS | 1          | John Xavier Doe      | 1        | Doctor One           |
+       | 3    | 01 Dec 21 1100HRS | 2          | Jim Bob              | 1        | Doctor One           |
+       -------------------------------------------------------------------------------------------------- 
+        ```
 
 ### Saving data
 
-    1. Dealing with missing or corrupted data files
+* Persistent storage can be found in the `MedBotData` directory, in the same directory as the JAR file.
+* Inside MedBotData, there is `appointment.txt`, `patient.txt` and `staff.txt`.
 
+1. Dealing with corrupted data files
+    1. Loading from storage, an appointment with non-existent staff ID (staff ID 10)
+        1. Test case: Replace the current contents in the text file `appointment.txt` to this:
+            ```
+            1 | 011221 0900 | 1 | 10
+            3 | 011221 1100 | 2 | 1
+            ```
+           and then launch MedBot using the terminal.<br><br> Expected:
+            ```
+            Hello, I'm MedBot!
+     
+            Error: Line 1 of MedBotData/appointment.txt is invalid!
+     
+            Please decide if you wish to:
+     
+            1. Enter 'exit' to exit MedBot to correct the storage files
+            2. Enter other valid commands to OVERWRITE all invalid data!
+         
+            How can I help you today?
+            ```
 
+        * Do not enter any commands after this output. Close the terminal window and move on the next test case.<br>
 
+    2. Loading from storage, patients with invalid phone number and invalid NRIC.
+        1. Test case: Replace the current contents in the text file `patient.txt` to this:
+            ```
+               1 | S7812345X | John Xavier Doe | 899999999 | john.doe@gmail.com | John Street, Block 1234, #01-01 | S
+               2 | X | Jim Bob | X | jimbob@hotmail.com | X | H
+               3 | A8367812K | Sasha Alexander | 91238765 | X | Mauville City 2nd Street | S
+            ```
+           Expected:
+            ```
+                Hello, I'm MedBot!
+     
+                Error: Line 1 of MedBotData/patient.txt is invalid!
 
+                Error: Line 3 of MedBotData/patient.txt is invalid!
 
-
-    //TODO to preload MedBot with some data right away.... 
+                Error: Line 1 of MedBotData/appointment.txt is invalid!
+         
+                Please decide if you wish to:
+         
+                1. Enter 'exit' to exit MedBot to correct the storage files
+                2. Enter other valid commands to OVERWRITE all invalid data!
+             
+                How can I help you today?
+            ```

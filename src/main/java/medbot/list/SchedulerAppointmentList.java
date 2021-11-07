@@ -1,6 +1,5 @@
 package medbot.list;
 
-
 import java.util.HashMap;
 
 import java.util.LinkedList;
@@ -51,7 +50,7 @@ public class SchedulerAppointmentList {
         assert appointment.isComplete();
         int appointmentId = appointment.getId();
         if (appointments.containsKey(appointmentId)) {
-            throw new MedBotException("Appointment with id " + appointmentId + " already exits!");
+            throw new MedBotException("Appointment with ID " + appointmentId + " already exits!");
         }
         if (appointmentId == 0) {
             appointmentId = generateAppointmentId();

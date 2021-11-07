@@ -10,11 +10,15 @@ MedBot can allow head nurses to get their management tasks done quicker and more
 
 ### Installation
 
-1. Ensure that you have Java 11 or above installed.
+1. Ensure that you have Java 11. 
 2. Download the latest version of `tp.jar` from [here](https://github.com/AY2122S1-CS2113-T13-1/tp/releases).
 3. Move the file to the folder that you want to use as the MedBot's root folder.
 4. Execute the `java -jar tp.jar` command in the terminal in the same folder as the `tp.jar` file to launch
    MedBot. The following output should be observed:
+```
+Hello, I'm MedBot!
+How can I help you today?
+```
 
 ### Using MedBot
 
@@ -23,13 +27,13 @@ MedBot can allow head nurses to get their management tasks done quicker and more
 
 ## Features
 
-The main features of MedBot are:
+These are the main features of MedBot:
 
 * Manage patient and medical staff information efficiently
 * Schedule medical appointments for patients seamlessly
 
 Each feature is contained inside a different view/tab in MedBot, which can be switched between using the `switch`
-command, which will be explained further down below.
+command, explained further down below.
 
 ## Commands
 
@@ -37,9 +41,9 @@ command, which will be explained further down below.
 
 These notes apply to all commands that are supported by MedBot.
 * Words in upper case are the required parameters.
-  * e.g. in `delete PATIENT_ID`, a `PATIENT_ID` is required for this command. 
+    * e.g. in `delete PATIENT_ID`, a `PATIENT_ID` is required for this command.
 * Words in square brackets are optional parameters.
-  * e.g. in `help [COMMAND]`, the `COMMAND` is optional for this command.
+    * e.g. in `help [COMMAND]`, the `COMMAND` is optional for this command.
 
 ### General Commands
 
@@ -112,7 +116,7 @@ You are currently in the Patient's View.
 
 ### Accessing user guide: `help`
 
-Provides an internal user guide that is accessible via the command line. 
+Provides an internal user guide that is accessible via the command line.
 
 Format: `help [COMMAND]`
 
@@ -128,21 +132,22 @@ Here are the list of commands:
 
 help
 add
-list
-view
-edit
-find
 delete
-switch
-exit
-help
+edit
+view
+list
+find
+hide
 show
+switch
 get view
+exit
 
 To obtain more information on each command and their respective required inputs, type:
 help [COMMAND]
 
-*Note that all commands will remove any '|' inputs for format parsing purposes
+*Note that all commands will remove any '|' inputs for format parsing purposes.
+For expected output examples, please refer to the User Guide.
 ```
 
 ### Patient/Medical Staff Information Commands
@@ -158,7 +163,7 @@ Adds a patient to the patient list.
 
 Format: `add [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
-At least one parameter must be provided, they can be entered in any order.
+At least one parameter must be provided, and they can be entered in any order.
 
 Expected output:
 
@@ -169,14 +174,14 @@ Added patient with patient ID: PATIENT_ID
 Examples:
 `add i/S7812345X n/John Doe p/87654321 e/john.doe@gmail.com a/John Street, block 1234, #01-01`
 
-#### Notes:
+#### Notes for adding a patient:
 
 - `NAME` and `ADDRESS` will be auto-capitalized for every word from user input.
 - `EMAIL` must be in a valid email format
     - eg. tim_ong@example.com
 - `PATIENT_IC` must be in a valid NRIC format:
     - The checksum of the NRIC will not be checked.
-    - Alphabets will be auto-capitalized. The input alphabets therefore non-case-sensitive.
+    - Alphabets will be auto-capitalized. The input alphabets therefore are non-case-sensitive.
 - No fields are made compulsory. The purpose is to allow adding an urgent (e.g. car accident) patient
   into MedBot in case all information is not yet available, to allow scheduling an urgent appointment.
 
@@ -248,14 +253,15 @@ For full details of each patient, please use the command "view PATIENT_ID"
 
 #### Notes:
 
-* `Name`, `Email`, `Address` that are longer than 20 characters will be truncated to first 17 characters with a `...` appended.
+* `Name`, `Email`, `Address` that are longer than 20 characters will be truncated to the first 17 characters with a 
+`...` appended.
 <br>Reason:
   * To maintain the table layout and prevent overflow of a cell.
-* To get the full information without the truncated details, use `VIEW PATIENT_ID`.
+* To get the full information of a particular patient without the truncated details, use `VIEW PATIENT_ID`.
 
 ### Edit information of a patient: `edit`
 
-Edit the personal and medical information of a patient in the list.
+Edit the personal information of a patient in the list.
 
 Format: `edit PATIENT_ID [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
@@ -272,12 +278,13 @@ Email: EMAIL
 Address: ADDRESS
 ```
 
-Notes:
-Refer to [Adding a patient - notes](#notes)
+#### Notes: 
+
+Refer to [notes for adding a patient](#notes-for-adding-a-patient)
 
 ### Find patients based on attributes: `find`
 
-Find all patients that contains the given attributes.
+Find all patients that contain the given attributes.
 
 Format `find [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
@@ -343,12 +350,16 @@ The format for `DATE_TIME` is `DDMMYY hhmm`. I.e. 9 February 2021, 0800HRS shoul
 Expected output:
 
 ```
-Appointment added: Appointment Id: APPOINTMENT_ID Date/Time: DATE_TIME Patient ID: PATIENT_ID Staff ID: STAFF_ID
+Added appointment with Appointment Id: APPOINTMENT_ID
+Patient ID: PATIENT_ID
+Staff ID: STAFF_ID 
+Date/Time: DATE_TIME
 ```
-
-Do note that the appointments are managed at an hourly basis. For example, any appointments set to any time between
-0800HRS and 0859HRS will be treated as an appointment from 0800HRS to 0859HRS. No subsequent appointment can then be
-scheduled for either the patient and the medical staff during that window.
+#### Notes:
+- Appointments are managed at an hourly basis. 
+  - e.g. any appointments set to any time between 0800HRS and 0859HRS will be treated as an appointment from 0800HRS to 
+  0859HRS. 
+  - No subsequent appointment can then be scheduled for both the patient and the medical staff during that time frame.
 
 ### Deleting an appointment: `delete`
 
@@ -364,23 +375,28 @@ deleted appointment with Id: APPOINTMENT_ID
 
 #### Notes:
 
-* The appointment being deleted does not affect the rest of the appointments, i.e. the ID will
-  remain the same.
+* Deleting an appointment will not affect the appointment IDs of other appointments.
   <br>Reasons :
     * ID uniquely identifies an appointment and should not be changed.
     * ID does not indicate the row number in the appointment list.
+* However, deleting a patient/medical staff will also delete all appointments associated with them.
 
 ### Editing an appointment's information: `edit`
 
 Edit an appointment's information. MedBot will check if the edited appointment clashes with others and display an error
 message if it does.
 
-Format: `edit APPOINTMENT_ID [p/PAITENT_ID] [s/STAFF_ID] [d/DATE_TIME]`
+Format: `edit APPOINTMENT_ID [p/PATIENT_ID] [s/STAFF_ID] [d/DATE_TIME]`
 
 Expected output:
 
 ```
-Appointment APPOINTMENT_ID changed to Appointment Id: APPOINTMENT_ID Date/Time: DATE_TIME Patient ID: PATIENT_ID Staff ID: STAFF_ID
+Appointment APPOINTMENT_ID now has the following details:
+
+Appointment Id: APPOINTMENT_ID 
+Date/Time: DATE_TIME
+Patient ID: PATIENT_ID
+Staff ID: STAFF_ID
 ```
 
 ### Viewing an appointment's information: `view`
@@ -392,7 +408,10 @@ Format: `view APPOINTMENT_ID`
 Expected output:
 
 ```
-Appointment Id: APPOINTMENT_ID Date/Time: DATE_TIME Patient ID: PATIENT_ID Staff ID: STAFF_ID
+Added appointment with Appointment Id: APPOINTMENT_ID
+Patient ID: PATIENT_ID
+Staff ID: STAFF_ID
+Date/Time: DATE_TIME
 ```
 
 ### Listing information of all appointments: `list`
@@ -422,15 +441,60 @@ Here is a list of all appointments:
     * To maintain the table layout and prevent overflow of a cell.
 * To get the full information without the truncated details, use `VIEW APPOINTMENT_ID`.
 
+### Find appointment(s): `find`
+
+- Finds a person’s (patient or medical staff) list of appointments. 
+- The search query can be filtered by date/time to display the list of appointments before/after a certain date 
+involving the particular person.
+
+Format: `find PERSON_TYPE/PERSON_ID [FILTER_TYPE/DATE_TIME]`
+- The format for DATE_TIME is DDMMYY hhmm. I.e. 9 February 2021, 0800HRS should be written as 090221 0800
+- `PERSON_TYPE` is p (patient) or s (staff)
+- `FILTER_TYPE` is b (before) or a (after)
+
+Example Usage: `find p/6`
+
+Example Output:
+```
+Here is a list of matched appointments:
+ -------------------------------------------------------------------------------------------------- 
+ |  ID  |     Date/Time     | Patient ID |     Patient Name     | Staff ID |      Staff Name        | 
+ -------------------------------------------------------------------------------------------------- 
+ | 6    | 04 Jan 22 1300HRS | 6          | Emma                 | 2        | Doctor Two           | 
+ | 10   | 04 Jan 22 1800HRS | 6          | Emma                 | 2        | Doctor Two           | 
+ | 11   | 05 Jan 22 1300HRS | 6          | Emma                 | 2        | Doctor Two           | 
+ | 12   | 06 Jan 22 1300HRS | 6          | Emma                 | 2        | Doctor Two           | 
+ | 13   | 07 Jan 22 1300HRS | 6          | Emma                 | 2        | Doctor Two           | 
+ | 14   | 08 Jan 22 1300HRS | 6          | Emma                 | 2        | Doctor Two           | 
+ -------------------------------------------------------------------------------------------------- 
+```
+
+Example Usage `find p/6 a/060122 0000`
+
+Example Output
+```
+ -------------------------------------------------------------------------------------------------- 
+ |  ID  |     Date/Time     | Patient ID |     Patient Name     | Staff ID  |      Staff Name       | 
+ -------------------------------------------------------------------------------------------------- 
+ | 12   | 06 Jan 22 1300HRS | 6          | Emma                 | 2        | Doctor Two           | 
+ | 13   | 07 Jan 22 1300HRS | 6          | Emma                 | 2        | Doctor Two           | 
+ | 14   | 08 Jan 22 1300HRS | 6          | Emma                 | 2        | Doctor Two           | 
+ -------------------------------------------------------------------------------------------------- 
+```
+
+#### Notes:
+- Before or after DATE_TIME also includes the appointment (if any) at the date/time specified.
+
+
 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: All data will be stored in the `MedBotData` directory that is created in the same working directory as `medbot.jar`. There are 3
-text files in `MedBotData` - `patient.txt`, `staff.txt` and `appointment.txt`. Simply transfer the `MedBotData` directory containing the
-three text files to the other computer, and run the `medbot.jar` in the same new location as the `MedBotData` directory.
-
+**A**: All data will be stored in the `MedBotData` directory that is created in the same working directory as `tp.jar`.
+There are 3 text files in `MedBotData` - `patient.txt`, `staff.txt` and `appointment.txt`. Simply transfer
+the `MedBotData` directory containing the three text files to the other computer, and run the `tp.jar` in the same new
+location as the `MedBotData` directory.
 
 ## Command Summary
 
@@ -448,7 +512,7 @@ three text files to the other computer, and run the `medbot.jar` in the same new
 | Action       | Format + Examples        |
 | :---         | :---                     |
 | **add**      | `add i/PERSON_ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br/>eg.,`add i/S1231234A n/John Smith p/91234567 e/johnsmit@eg.com a/ABC Street 123`|
-| **list**     | `list`|
+| **list**     | `list [-h]`|
 | **edit**     | `edit PERSON_ID [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br/>eg., `edit 2 n/Bob Smith`|
 | **view**     | `view [PERSON_ID]`<br/>eg., `view 3`|
 | **delete**   | `delete [PERSON_ID]`<br/>eg., `delete 2`|
@@ -462,7 +526,8 @@ three text files to the other computer, and run the `medbot.jar` in the same new
 | :---         | :---                     |
 | **add**      | `add p/PERSON_ID s/STAFF_ID d/DATE_TIME` <br/> E.g., `add p/19 s/1 d/090222 0900`|
 | **delete**   | `delete APPOINTMENT_ID`  |
-| **edit**     | `edit APPOINTMENT_ID [p/PAITENT_ID] [s/STAFF_ID] [d/DATE_TIME]` <br/> E.g., `edit 2 s/3 d/100322 0800`|         
+| **edit**     | `edit APPOINTMENT_ID [p/PATIENT_ID] [s/STAFF_ID] [d/DATE_TIME]` <br/> E.g., `edit 2 s/3 d/100322 0800`|         
+| **find**     | `find PERSON_TYPE/PERSON_ID [FILTER_TYPE/DATE_TIME]`<br/> E.g., `find s/3 b/100322 0800`|         
 | **list**     | `list`                   |
 | **view**     | `view APPOINTMENT_ID` <br/> E.g., `view 3` |
 

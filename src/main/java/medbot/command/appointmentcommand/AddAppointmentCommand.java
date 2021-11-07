@@ -17,7 +17,7 @@ public class AddAppointmentCommand extends Command {
     @Override
     public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
         scheduler.addAppointment(appointment);
-        String addAppointmentMessage = Ui.getAddMessage(ViewType.SCHEDULER, appointment.toString());
+        String addAppointmentMessage = Ui.getAddMessage(appointment.toString(), ViewType.SCHEDULER);
         ui.printOutput(addAppointmentMessage);
     }
 

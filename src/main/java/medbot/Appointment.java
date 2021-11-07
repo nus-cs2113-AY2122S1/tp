@@ -14,7 +14,7 @@ public class Appointment implements ListItem {
     private static final ZoneOffset ZONE_OFFSET = ZoneOffset.ofHours(8);
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yy HH00");
     private static final DateTimeFormatter DATE_TIME_FORMATTER_STORAGE = DateTimeFormatter.ofPattern("ddMMyy HH00");
-    private static String END_LINE = System.lineSeparator();
+    private static final String END_LINE = System.lineSeparator();
 
     private int appointmentId = 0;
     private int patientId = 0;

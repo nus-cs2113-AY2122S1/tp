@@ -18,6 +18,7 @@ public abstract class Command {
      * Abstract method that executes the command.
      *
      * @param scheduler the scheduler that will be read or modified
+     * @param ui Ui class instance used to print output messages
      */
     public abstract void execute(Scheduler scheduler, Ui ui) throws MedBotException;
 }
