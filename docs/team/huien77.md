@@ -44,3 +44,4 @@ Users can only run the app on a Command Line Interface (CLI).
   * Wrote the skeleton for DG, which includes introduction, content page, acknowledgement and
   headers in content page.
   * _Storage component_ section.
+  * _Appendix E: Instructions for Manual Testing_ section.
