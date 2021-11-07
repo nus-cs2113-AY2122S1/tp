@@ -11,7 +11,7 @@ import java.util.List;
  * List of clients.
  */
 public class ClientList {
-    private static final String CLIENT_NOT_FOUND_MESSAGE = "ERROR: Client cannot be found. "
+    public static final String CLIENT_NOT_FOUND_MESSAGE = "ERROR: Client cannot be found. "
             + "Please try another client ID";
 
     private final ArrayList<Client> clients;
@@ -30,6 +30,11 @@ public class ClientList {
         clientCount = 0;
     }
 
+    /**
+     * Getter for clients.
+     *
+     * @return ArrayList containing all clients in the database.
+     */
     public ArrayList<Client> getClients() {
         return clients;
     }
@@ -53,6 +58,13 @@ public class ClientList {
         return clients.get(index);
     }
 
+    /**
+     * Getter for client object in the client list, corresponding to the client id given.
+     *
+     * @param clientId client id of the specific client in the client list
+     * @return the client object corresponding to the client id
+     * @throws TourPlannerException if client object with clientId cannot be found in clients
+     */
     public Client getClientById(String clientId) throws TourPlannerException {
         for (Client client : clients) {
             if (client.getId().equals(clientId)) {
@@ -62,6 +74,12 @@ public class ClientList {
         throw new TourPlannerException(CLIENT_NOT_FOUND_MESSAGE);
     }
 
+    /**
+     * Getter for client object in the client list, corresponding to the client name given.
+     *
+     * @param clientName the name of a client in the clientList
+     * @return the client object corresponding to the name
+     */
     public Client getClientByName(String clientName) throws TourPlannerException {
         for (Client currClient : clients) {
             String clientId = currClient.getId();

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class TourList {
-    private static final String TOUR_NOT_FOUND_MESSAGE = "Tour cannot be found. Please try another tour ID";
+    public static final String TOUR_NOT_FOUND_MESSAGE = "Tour cannot be found. Please try another tour ID";
 
     private final ArrayList<Tour> tours;
     private final ArrayList<String> tourIds;

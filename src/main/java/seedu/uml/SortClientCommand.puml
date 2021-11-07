@@ -9,14 +9,15 @@ participant ":Ui" as Ui
 activate Parser
 Parser -> Parser : parseSort("-c /id")
 activate Parser
-Parser --> Parser
-deactivate Parser
 
 create SCC
 Parser -> SCC
 activate SCC
 SCC --> Parser
 deactivate SCC
+Parser --> Parser
+deactivate Parser
+
 <-- Parser: SortClientCommand
 deactivate Parser
 
@@ -33,7 +34,9 @@ SCC -> Ui : showSortedClientById()
 activate Ui
 loop until all clientIds iterated
     Ui -> ClientList : getClientById(clientId)
+    activate ClientList
     ClientList --> Ui: Client
+    deactivate ClientList
     Ui -> Ui: show Client
     activate Ui
     Ui --> Ui

@@ -9,7 +9,7 @@ public class CutClientPackageCommand extends Command {
     private ClientPackage clientPackage;
 
     /**
-     * Class constructor for CutCommand.
+     * Class constructor for CutClientPackageCommand.
      *
      * @param clientPackageId ID of to-be-deleted clientPackage in the clientPackage list
      */
@@ -19,6 +19,7 @@ public class CutClientPackageCommand extends Command {
 
     /**
      * Executes the deletion of a specific clientPackage from clientPackage list, according to the clientPackageId.
+     * If client package id cannot be found, nothing will be deleted from the list.
      */
     @Override
     public void execute() {

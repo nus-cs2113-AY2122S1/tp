@@ -32,11 +32,9 @@ public class SortClientCommand extends Command {
      * Executes the printing of the sorted client list, specified by the filter.
      * If filter given is /n, sorts the clients by name (in alphabetical order).
      * If filter given is /id, sorts the clients by ID (in alphabetical order).
-     *
-     * @throws TourPlannerException if unable to find client from a given name, or given id.
      */
     @Override
-    public void execute() throws TourPlannerException {
+    public void execute() {
         try {
             switch (filter) {
             case SORT_NAME_FILTER:

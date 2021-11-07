@@ -21,7 +21,7 @@ public class CutTourCommand extends Command {
     }
 
     /**
-     * Executes the deletion of a specific client from client list, corresponding to his/her index in the list.
+     * Executes deletion of the specific tour and related client packages, according to the tourId.
      */
     @Override
     public void execute() {
@@ -35,6 +35,11 @@ public class CutTourCommand extends Command {
         }
     }
 
+    /**
+     * Executes deletion of the specific tour from the tour list.
+     *
+     * @throws TourPlannerException if tour cannot be found based on the tour id
+     */
     private void cutTour() throws TourPlannerException {
         this.tour = tours.getTourById(tourId);
         int newTourCount = tours.getTourCount() - 1;
@@ -44,6 +49,9 @@ public class CutTourCommand extends Command {
         assert newTourCount >= 0;
     }
 
+    /**
+     * Executes deletion of the client packages containing the specific tour from the client package list.
+     */
     private void cutTourPackage() {
         ArrayList<ClientPackage> clientPackagesWithTour = clientPackages.getClientPackageByTour(tour);
         for (ClientPackage clientPackage: clientPackagesWithTour) {

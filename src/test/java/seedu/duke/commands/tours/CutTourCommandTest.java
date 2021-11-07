@@ -20,6 +20,22 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CutTourCommandTest {
+    public static final String TOUR_ID_2 = "KOR";
+
+    public static final String[] TOUR_JPN = {"JPN", "Japan Basic Tour", "1500.00"};
+    public static final String[] TOUR_KOR = {TOUR_ID_2, "Korea Cultural Tour", "3000.00"};
+    public static final String[] TOUR_ZWM = {"ZWM", "Zimbabwe Tour", "1700.00"};
+
+    public static final String[] FLIGHT_SQJPN = {"SQ-JPN", "JPN", "SG", "20/10/21 18:00", "21/10/21 03:00"};
+    public static final String[] FLIGHT_SQKOR = {"SQ-KOR", "KOR", "SG", "23/10/2021 18:00", "30/10/2021 03:00"};
+
+    public static final String[] CLIENT_BOTUAN = {"c001", "Bo Tuan", "93338333", "bt@mail.com"};
+    public static final String[] CLIENT_WAYNE = {"c002", "Wayne", "56667888", "wen@mail.com"};
+
+    public static final String CLIENT_PACKAGE_ID_1 = "p001";
+    public static final String CLIENT_PACKAGE_ID_2 = "p002";
+    public static final String TOUR_ID_WRONG = "1234po0o";
+
     PrintStream previousConsole;
     ByteArrayOutputStream newConsole;
 
@@ -36,18 +52,18 @@ public class CutTourCommandTest {
         previousConsole = System.out;
         newConsole = new ByteArrayOutputStream();
 
-        Tour jpn = new Tour(new String[]{"JPN", "Japan Basic Tour", "1500.00"});
-        Tour kor = new Tour(new String[]{"KOR", "Korea Cultural Tour", "3000.00"});
-        Tour zwm = new Tour(new String[]{"ZWM", "Zimbabwe Tour", "1700.00"});
+        Tour jpn = new Tour(TOUR_JPN);
+        Tour kor = new Tour(TOUR_KOR);
+        Tour zwm = new Tour(TOUR_ZWM);
 
-        Flight sqjpn = new Flight(new String[]{"SQ-JPN", "JPN", "SG", "20/10/21 18:00", "21/10/21 03:00"});
-        Flight sqkor = new Flight(new String[]{"SQ-KOR", "KOR", "SG", "23/10/2021 18:00", "30/10/2021 03:00"});
+        Flight sqjpn = new Flight(FLIGHT_SQJPN);
+        Flight sqkor = new Flight(FLIGHT_SQKOR);
 
-        Client botuan = new Client(new String[]{"c001", "Bo Tuan", "93338333", "bt@mail.com"});
-        Client wayne = new Client(new String[]{"c002", "Wayne", "56667888", "wen@mail.com"});
+        Client botuan = new Client(CLIENT_BOTUAN);
+        Client wayne = new Client(CLIENT_WAYNE);
 
-        ClientPackage korPack1 = new ClientPackage("p001", botuan, kor, sqjpn);
-        ClientPackage korPack2 = new ClientPackage("p002", wayne, kor, sqkor);
+        ClientPackage korPack1 = new ClientPackage(CLIENT_PACKAGE_ID_1, botuan, kor, sqjpn);
+        ClientPackage korPack2 = new ClientPackage(CLIENT_PACKAGE_ID_2, wayne, kor, sqkor);
 
         tours = createTourList(jpn, kor, zwm);
         toursWithoutKor = createTourList(jpn, zwm);
@@ -58,7 +74,7 @@ public class CutTourCommandTest {
     @Test
     public void cutTourCommand_validTourId_tourDeleted() throws TourPlannerException {
         assertEquals(tours.getTourCount(), 3);
-        Command cutTourCommand = new CutTourCommand("KOR");
+        Command cutTourCommand = new CutTourCommand(TOUR_ID_2);
         cutTourCommand.setData(clients, flights, tours, clientPackages, ui);
         cutTourCommand.execute();
         assertEquals(tours.getTourCount(), toursWithoutKor.getTourCount());
@@ -69,7 +85,7 @@ public class CutTourCommandTest {
 
     @Test
     public void cutTourCommand_validTourId_clientPackagesDeleted() throws TourPlannerException {
-        Command cutTourCommand = new CutTourCommand("KOR");
+        Command cutTourCommand = new CutTourCommand(TOUR_ID_2);
         cutTourCommand.setData(clients, flights, tours, clientPackages, ui);
         cutTourCommand.execute();
         assertEquals(clientPackages.getClientPackageCount(), 0);
@@ -79,13 +95,13 @@ public class CutTourCommandTest {
     public void cutTourCommand_invalidTourId_tourNotFoundMessage() throws TourPlannerException {
         System.setOut(new PrintStream(newConsole));
 
-        Command cutTourCommand = new CutTourCommand("1234po0o");
+        Command cutTourCommand = new CutTourCommand(TOUR_ID_WRONG);
         cutTourCommand.setData(clients, flights, tours, clientPackages, ui);
         cutTourCommand.execute();
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "Tour cannot be found. Please try another tour ID";
+        String expectedString = TourList.TOUR_NOT_FOUND_MESSAGE;
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
         assertEquals(expectedString, actualString);
     }
