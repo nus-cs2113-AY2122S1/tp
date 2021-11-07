@@ -199,10 +199,10 @@ public class IngredientList {
 
     //@@author AayushMathur7
     /**
-     * Removes low amount ingredient
+     * Removes low amount ingredient.
      *
      * @param currentGroup the group of the ingredient to remove low amount ingredients from.
-     * @throws SitusException
+     * @throws SitusException if the ingredients cannot be removed
      */
     public void removeLowAmountIngredientFromGroup(IngredientGroup currentGroup) throws SitusException {
         int i = 0;
