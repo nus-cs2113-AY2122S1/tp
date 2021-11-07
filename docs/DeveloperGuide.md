@@ -342,7 +342,7 @@ The sequence diagram for `UpdateStockCommand` is shown below.
 MediVault retrieves the stock object using the `i/ID` parameter specified by the user using the `extractStockObject()` 
 method. MediVault conducts another validation check on the provided `q/QUANTITY`,`m/MAX_QUANTITY` and `e/EXPIRY_DATE`
 against the stock object retrieved earlier. This validation check is separated from the initial validation checker
-as enforcing `q/QUANTITY` <= `m/MAX_QUANTITY` can only be done **after** MediVault confirms what user input is
+as enforcing `q/QUANTITY <= m/MAX_QUANTITY` can only be done **after** MediVault confirms what user input is
 provided. This is because the backend processing for either one or both parameters provided by the user are different.
 
 MediVault adds a new stock record when a user update contains the `n/NAME` parameter. The old stock record still
@@ -556,7 +556,7 @@ into the file named `data/order_archive.txt`
 
 > :information_source: Note:
 > * MediVault archive order information when `parameter` and `parameterValues` provided by the user are valid.
-> * MediVault outputs the order information into a user readable format in `data/prescription_archive.txt`.
+> * MediVault outputs the order information into a user readable format in `data/order_archive.txt`.
 > * To modify the format, edit the code in `toArchiveFormat()` method in the Order Class.
 
 The sequence diagram for ArchiveOrderCommand is shown below.
@@ -564,7 +564,7 @@ The sequence diagram for ArchiveOrderCommand is shown below.
 ![ArchiveOrderSequenceDiagram](diagrams/diagram_images/ArchiveOrderSequenceDiagram.png)
 
 * `stringToDate()` helps to parse a string to a Date object.
-* `prescriptionsToArchive()` checks through all orders and look for records that are DELIVERED and have order date 
+* `ordersToArchive()` checks through all orders and look for records that are DELIVERED and have order date 
 before or equals to the specified date.
 * `removeFromOrders()` removes orders from order list after archive.
 
