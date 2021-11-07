@@ -1,6 +1,8 @@
 # Teo Chin Kai Remus - Project Portfolio Page
 
-This is a student project for a university software development course and I am one of the contributors to `MediVault`.
+This is a student project for a university software development course and I am one of the contributors to `MediVault`. 
+
+`MediVault` is a Command Line Interface (CLI) application that will help to manage medication supplies within a pharmacy. It is an integrated solution that provides real-time tracking of stocks, prescriptions and orders.
 
 ## Summary of Contributions
 
