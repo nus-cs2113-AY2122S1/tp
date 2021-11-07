@@ -4,11 +4,17 @@ import seedu.foodorama.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * Shows the user a list of all available commands with the correct formats
+ * Format: help
+ *
+ * @author Rakesh12000
+ */
 public class HelpCommand extends Command {
     private static final Ui UI = new Ui();
 
     /**
-     * Calls the help command in Ui
+     * User command to display the help message.
      * @param parameters user input parameters
      *
      * @author Rakesh12000

@@ -4,6 +4,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Class that handles all User-interface outputs that prints to the terminal.
+ *
+ * @author renzocanare, Dniv-ra, Rakesh12000, jhsee5
+ */
 public class Ui {
     private static final String LINE_DIVIDER = "____________________________________________________________";
     private static final String START_LOGO =
@@ -902,6 +907,12 @@ public class Ui {
     }
 
 
+    /**
+     * Prints the list of ingredients that match the KEYWORD input by the user in the find command.
+     *
+     * @param matchedIngrList the list of ingredients that match the KEYWORD
+     * @author renzocanare
+     */
     public void printMatchedIngredients(ArrayList<Ingredient> matchedIngrList) {
         assert matchedIngrList != null : "matchedIngrList cannot be null";
         System.out.println(LINE_DIVIDER + System.lineSeparator()
@@ -1083,6 +1094,14 @@ public class Ui {
                 + "The weight of " + ingrName + " is unusually greater than 10,000kg!" + System.lineSeparator()
                 + "Are you sure you want to add this weight?" + System.lineSeparator()
                 + "Enter 'y' to continue, or 'n' to type a new weight" + System.lineSeparator()
+                + LINE_DIVIDER);
+    }
+
+    public void printIngrWasteValueHigh(String ingrName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "The weight of " + ingrName + " wasted is unusually greater than 10,000kg!" + System.lineSeparator()
+                + "Are you sure you want to add this weight?" + System.lineSeparator()
+                + "Please type 'y'/'yes' to confirm, or 'n'/'no' to type a new weight:" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
