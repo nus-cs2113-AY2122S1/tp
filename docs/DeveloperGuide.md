@@ -169,11 +169,13 @@ The sequence diagram shown below illustrates how the `add_student` command works
 
 Below is an example scenario of how the add student feature behaves at each step:<br>
 * Step 1 - The user executes `add_student c/CS2113T i/a0217978j n/jonny` to add a student. The `add_student` command 
-calls the `AddStudentCommand.execute` method. Within `AddStudentCommand.execute`, `ModuleList.getModule("CS2113T")` is 
-called to ensure that there is an existing module with code `CS2113T`.
-* Step 2 - If an existing module with code `CS2113T` is found, a new `Student` object with id and name set to 
-`a0217978j` and `jonny` respectively. Then, `StudentList.addModule` is called to add the newly created `Student` 
-object into the `students` ArrayList within `StudentList`.
+  calls the `AddStudentCommand.execute` method.
+* Step 2 - Within `AddStudentCommand.execute`, `ClassList.getClassWithId("CS2113T")` is 
+  called to ensure that there is an existing class with ID `CS2113T`.
+* Step 3 - If an existing class with code `CS2113T` is found, a new `Student` object with id and name set to 
+  `a0217978j` and `jonny` respectively.
+* Step 4 - Then, `StudentList.addStudent` is called to add the newly created `Student` 
+  object into the `students` ArrayList within `StudentList`.
 
 <br>
 
