@@ -29,7 +29,7 @@ and third-party libraries -- include links to the original source as well}
 
 ### Architecture
 
-![](diagrams/architecture.png)
+![](diagrams/arch.png)
 
 The Architecture diagram above explains the high-level design of the Typists app.  
 Given below is a quick overview of main components and how they interact with each other.
