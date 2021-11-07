@@ -10,6 +10,19 @@ title: Developer Guide
 * [Design & Implementation](#design--implementation)
   * [Main Components](#main-components) 
   * [Command Implementation](#command-implementation)
+    * [AddModCommand](#AddModCommand)
+    * [AddUniCommand](#AddUniCommand)
+    * [AddMapCommand](#AddMapCommand)
+    * [RemoveModCommand](#RemoveModCommand)
+    * [RemoveUniCommand](#RemoveUniCommand)
+    * [RemoveMapCommand](#RemoveMapCommand)
+    * [ListModCommand](#ListModCommand)
+    * [ListUniCommand](#ListUniCommand)
+    * [FindModCommand](#FindModCommand)
+    * [FindUniCommand](#FindUniCommand)
+    * [SearchMapCommand](#SearchMapCommand)
+    * [HelpCommand](#HelpCommand)
+    * [ExitCommand](#ExitCommand)
   * [User Interface](#user-interface)
   * [Storage](#storage)
   * [University and module related classes](#university-and-module-related-classes)
@@ -87,7 +100,7 @@ by passing the university to display the message of adding the selected universi
 ### Command Implementation
 
 <p align = "center">
-<img src="images/commands.png" width = "800" />
+<img src="images/command.png" width = "1600" />
 </p>
 
 
