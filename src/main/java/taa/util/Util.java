@@ -1,6 +1,7 @@
 package taa.util;
 
 //@@author leyondlee
+
 import taa.exception.FileCreationException;
 
 import java.io.File;
@@ -96,7 +97,7 @@ public class Util {
         boolean result;
         try {
             boolean hasCreatedDir = true;
-            if (parentFile != null && (!parentFile.exists() || !parentFile.isDirectory())) {
+            if (parentFile != null) {
                 boolean parentFileExists = parentFile.exists();
                 boolean parentFileIsDir = parentFile.isDirectory();
                 boolean needCreateParent = !parentFileExists || !parentFileIsDir;
