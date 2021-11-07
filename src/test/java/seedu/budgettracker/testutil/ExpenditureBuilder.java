@@ -28,7 +28,7 @@ public class ExpenditureBuilder {
         description = expenditureToCopy.getDescription();
         date = expenditureToCopy.getDate();
         category = expenditureToCopy.getCategory();
-        amount = DEFAULT_AMOUNT;
+        amount = expenditureToCopy.getAmount();
     }
 
     public ExpenditureBuilder withDescription(String description) {

@@ -281,7 +281,7 @@ public class TextUi {
         ArrayList<Expenditure> currentMonthRecordList = records.getExpenditureRecords(i);
 
         for (Expenditure expenditure : currentMonthRecordList) {
-            if (expenditure.returnCategory() == category || category == Category.ALL) {
+            if (expenditure.getCategory() == category || category == Category.ALL) {
                 totalSpending += expenditure.getAmount();
             }
         }
@@ -354,7 +354,7 @@ public class TextUi {
     private static void printEnumeratedExpenditureList(ArrayList<Expenditure> monthExpenditureList, Category category) {
         for (int i = 0; i < monthExpenditureList.size(); i++) {
             Expenditure currentExpenditure = monthExpenditureList.get(i);
-            if (currentExpenditure.returnCategory() == category || category == Category.ALL) {
+            if (currentExpenditure.getCategory() == category || category == Category.ALL) {
                 System.out.println(currentExpenditure.toString(i));
             }
         }

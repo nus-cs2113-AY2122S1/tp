@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.2
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR_T3
+
+package "Main" <<Rectangle>> {
+
+}
+
+package "Storage" <<Rectangle>> {
+}
+
+package "Logic" <<Rectangle>> {
+class Parser
+class Command
+}
+
+package "TextUi" <<Rectangle>> {
+class TextUi
+}
+package "User" <<Rectangle>> {
+
+}
+
+User .right> TextUi
+Main -> "1" TextUi
+Main -> Parser
+Main -> Command
+Parser -> TextUi
+Command -> TextUi
+Storage ..> TextUi
+
+hide members
+@enduml

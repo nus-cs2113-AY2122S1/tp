@@ -5,7 +5,9 @@
 * [Getting started](#getting-started)
 * [Design](#design)
   * [Architecture](#architecture)
+  * [UI Component](#ui-component)
 * [Implementation](#implementation)
+  * [Delete - Basic Command Logic](#delete---basic-command-logic)
 * [Product scope](#product-scope)
   * [Target user profile](#Target-user-profile)
   * [Value proposition](#value-proposition)
@@ -24,7 +26,7 @@
   original source as well}
 
 ## Design 
-###Architecture
+### Architecture
 ![Figure_Architecture_Diagram](images/ArchitectureDiagram.png)
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
@@ -53,7 +55,24 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `add -e m/1 a/500`.
 
-![Figure_Architecture__Sequence_Diagram](images/ArchitectureSequenceDiagram.png)
+![Figure_Architecture_Sequence_Diagram](images/ArchitectureSequenceDiagram.png)
+
+### UI Component
+**API**: [`ui.java`](https://github.com/AY2122S1-CS2113T-F11-2/tp/tree/master/src/main/java/seedu/budgettracker/ui)
+
+![Figure_UiComponent_Component_Diagram](images/UiComponent.png)
+
+The `Ui` component:
+- Reads in user input from the Command Line Interface (CLI).
+- Prints welcome screen, database information and messages prompting the user for input.
+- Other components call methods in Ui class to print corresponding output on the terminal.
+
+### Data Component
+Below is a partial class diagram that shows an overview of the `Data` component.
+
+![Figure_DataComponent_Partial_Class_Diagram](images/DataPartialClassDiagram.png)
+
+The `Data` component
 
 ###Logic Component (Parser and Commands)
 ![Figure_ParserDiagram](images/ParserDiagram.png)
@@ -69,7 +88,8 @@ Given below is the Sequence Diagram for interactions with the Parser and Command
 Figure 4. Sequence Diagram of program's logic with a `add -b a/400` call.
 
 ## Implementation
-###Delete
+
+### Delete - Basic Command Logic
 
 The delete feature collaborates with other classes like Parser, RecordList, etc. Basically it contains three usages which are deletion of Budget, Expenditure(s), and Loan(s).
 
@@ -109,7 +129,7 @@ Given below is an example usage scenario and how the delete feature behaves at e
   ![Figure Delete_Execute](images/DeleteMultipleExpenditureCommand-Sequence_Diagram.png)
 
 
-###Edit feature
+### Edit feature
 
 The edit mechanism is facilitated by AllRecordList which extends from RecordList. It implements the following operations:
 * ```AllRecordList#editBudget()``` — Edits a budget to the record list.
