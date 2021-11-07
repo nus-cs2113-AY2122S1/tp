@@ -81,6 +81,7 @@ The dish component consists of the `Dish`, `Menu`, `DishParser`, and `DishUI` cl
 
 ### 1.4 Ingredient Component
 ![ingredient](Diagrams/ingredient/Ingredient.png)
+
 The ingredient component consists of the `Ingredient`, `IngredientList`, `IngredientParser`, and `IngredientUI` classes.  
 
 * `Ingredient` stores the name and quantity of a particular ingredient used by the restaurant, as well as methods to 
@@ -112,6 +113,8 @@ methods to encode and decode data.
 The mechanism of adding an employee into the list of employees is facilitated by `EmployeeParser`. It first creates a 
 new instance of `Employee`, and adds it to the existing instance of `EmployeeList`. A confirmation message is then 
 displayed to the user.
+
+![add](Diagrams/employee/add_employee_sequence_diagram.png)
 
 ### 2.i.b Remove Employee
 The mechanism of removing an employee from the employee list is facilitated by `EmployeeParser`. It identifies the
