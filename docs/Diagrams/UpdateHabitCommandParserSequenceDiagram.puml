@@ -1,11 +1,50 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+!include Style.puml
+mainframe sd Update Habit Parsing
 
-autonumber
+-> ":UpdateParser": parseUpdateHabitCommands\n(commandInstruction: String)
+activate ":UpdateParser"
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+":UpdateParser" -> ":Parser": splitInput\n(commandInstruction)
+activate ":Parser"
+":Parser" --> ":UpdateParser": parameters: ArrayList<String>
+deactivate ":Parser"
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+":UpdateParser" -> ":UpdateParser": getUpdateHabitAttributes\n(parameters)
+activate ":UpdateParser"
+":UpdateParser" --> ":UpdateParser": updateAttributes: int[2]
+deactivate ":UpdateParser"
+
+alt#gold #lightblue isUpdateHabitName
+":UpdateParser" -> ":Parser": getName(parameters)
+activate ":Parser"
+":Parser" --> ":UpdateParser": newHabitName: String
+deactivate ":Parser"
+end
+alt#gold #lightblue isUpdateHabitInterval
+":UpdateParser" -> ":Parser": getUpdateInterval(parameters)
+activate ":Parser"
+":Parser" --> ":UpdateParser": newHabitInterval: String
+deactivate ":Parser"
+end
+
+":UpdateParser" -> ":Parser": getIndex(parameters, "/g")
+activate ":Parser"
+":Parser" --> ":UpdateParser": goalIndex: int
+deactivate ":Parser"
+
+":UpdateParser" -> ":Parser": getIndex(parameters, "/h")
+activate ":Parser"
+":Parser" --> ":UpdateParser": habitIndex: int
+deactivate ":Parser"
+
+":UpdateParser" -> ":UpdateParser": getExcessHabitAttributes\n(parameters)
+activate ":UpdateParser"
+":UpdateParser" --> ":UpdateParser": excessAttributes:\nArrayList<String>
+deactivate ":UpdateParser"
+
+<-- ":UpdateParser": UpdateHabitCommand\n(goalIndex, habitIndex,\nnewHabitName, newHabitInterval\nupdateAttributes, excessAttributes)
+deactivate ":UpdateParser"
+
 @enduml

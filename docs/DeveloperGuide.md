@@ -341,14 +341,25 @@ Goal or the Habit is detected, an exception will be thrown.
 ### 4.6. Updating a Goal
 
 A `UpdateGoalCommand` object is returned from the `UpdateParser` if the users input is successfully parsed as shown below.
+If the update command is not provided with a goal index, or without any update flags it will throw an exception.
+
+![](Diagram_Images/Implementation_Diagram_Images/UpdateGoalCommandParserSequenceDiagram.png)
 
 The `runCommand` method is then executed for the `UpdateGoalCommand` object as seen.
+
+![](Diagram_Images/Implementation_Diagram_Images/UpdateGoalCommandSequenceDiagram.png)
 
 ### 4.7. Updating a Habit
 
 A `UpdateHabitCommand` object is returned from the `UpdateParser` if the users input is successfully parsed as shown below.
+If the update command is not provided with a goal index and a habit index, or without any update flags it will throw an exception.
+
+![](Diagram_Images/Implementation_Diagram_Images/UpdateHabitCommandParserSequenceDiagram.png)
 
 The `runCommand` method is then executed for the `UpdateHabitCommand` object as seen.
+
+![](Diagram_Images/Implementation_Diagram_Images/UpdateHabitCommandSequenceDiagram.png)
+
 
 ### 4.8. Deleting a Goal
 

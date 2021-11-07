@@ -45,7 +45,7 @@ activate ":UpdateParser"
 ":UpdateParser" --> ":UpdateParser": excessAttributes:\nArrayList<String>
 deactivate ":UpdateParser"
 
-<-- ":UpdateParser": UpdateGoalCommand\n(goalIndex, newGoalName,\nnewGoalType, new GoalEndDate\nupdateAttributes, excessAttributes)
+<-- ":UpdateParser": UpdateGoalCommand\n(goalIndex, newGoalName,\nnewGoalType, newGoalEndDate\nupdateAttributes, excessAttributes)
 deactivate ":UpdateParser"
 
 @enduml

@@ -1,11 +1,35 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+!include Style.puml
 
-autonumber
+-> ":UpdateHabitCommand": runCommand(goalList: GoalList,\nprintManager: PrintManager,\nstorage: Storage
+activate ":UpdateHabitCommand"
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+":UpdateHabitCommand" -> "goalList: GoalList": updateHabitAttributes(goalIndex,\nhabitIndex, newHabitName,\nnewHabitInterval, updateAttributes,\nexcessAttributes, printManager)
+activate "goalList: GoalList"
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+"goalList: GoalList" -> "printManager: PrintManager": printUpdateHabitMessageStart()
+
+alt#gold #lightblue updateAttributes[0] == 1
+"goalList: GoalList" -> "goalList: GoalList": updateHabitNameFromGoal(goalIndex,\nhabitIndex, newHabitName, printManager)
+activate "goalList: GoalList"
+"goalList: GoalList" --> "goalList: GoalList":
+deactivate "goalList: GoalList"
+end
+
+alt#gold #lightblue updateAttributes[1] == 1
+"goalList: GoalList" -> "goalList: GoalList": updateHabitIntervalFromGoal(goalIndex, \nhabitIndex, newHabitInterval, printManager);
+activate "goalList: GoalList"
+"goalList: GoalList" --> "goalList: GoalList":
+deactivate "goalList: GoalList"
+end
+
+"goalList: GoalList" -> "printManager: PrintManager": printUpdateHabitMessageEnd\n(excessAttributes)
+
+"goalList: GoalList" --> ":UpdateHabitCommand"
+deactivate "goalList: GoalList"
+
+<-- ":UpdateHabitCommand"
+deactivate ":UpdateHabitCommand"
+
 @enduml
