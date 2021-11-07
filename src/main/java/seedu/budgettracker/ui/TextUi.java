@@ -447,9 +447,9 @@ public class TextUi {
             }
 
             if (barPercentage < i * 5) {
-                System.out.print("             .....");
+                System.out.print("            .....");
             } else {
-                System.out.print("             #####");
+                System.out.print("            #####");
             }
 
             System.out.print(LS);
