@@ -461,4 +461,15 @@ public class Ui {
     public static void invalidGrade() {
         System.out.println("Invalid grade!");
     }
+
+    public static void wrongListFormat() {
+        System.out.println("Incorrect list command format!");
+        System.out.println("Refer to the UG for the correct format");
+    }
+
+    public static void cheekyErrorMessage() {
+        System.out.println("Y U DO THIS");
+        System.out.println("Pls use 'bye' command, honey");
+    }
+
 }

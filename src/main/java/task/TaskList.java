@@ -19,6 +19,7 @@ public class TaskList {
     protected static final int DAYS_IN_A_WEEK = 7;
     protected static final int DAYS_IN_A_MONTH = 31;
     protected static final int DAYS_IN_A_YEAR = 366;
+    protected static final int LENGTH_OF_MARKER = 3;
     private static final Logger logger = command.Logger.myLogger();
     protected ArrayList<Task> taskList;
     protected int taskCount;
@@ -68,8 +69,8 @@ public class TaskList {
 
     protected static String getDate(String description) {
         try {
-            int datePos = description.indexOf(ParserChecks.START_OF_DATE);
-            return description.substring(datePos).replace(ParserChecks.START_OF_DATE, EMPTY_STRING).trim();
+            int datePos = description.indexOf(ParserChecks.START_OF_DATE) + LENGTH_OF_MARKER;
+            return description.substring(datePos).trim();
         } catch (StringIndexOutOfBoundsException e) {
             return EMPTY_STRING;
         }
