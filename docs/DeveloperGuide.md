@@ -326,7 +326,7 @@ The `Module` object representing the particular module from Selected Module List
 
 #### SearchMapCommandParser
 
-* This object when invoked, will take the first argument and convert it into an integer representing `<UNI_INDEX>` and pass it to the constructor for `SearchMapCommand`.
+* This object when invoked, will take the first argument and determine if it is an integer representing `<UNI_INDEX>` or the flag `all` and pass it to the constructor for `SearchMapCommand`.
 
 #### HelpCommandParser
 
@@ -776,7 +776,7 @@ These instructions only provide a starting point for testers to work on; testers
 
        Expected: No module will be removed. Error message indicating wrong flags is shown, together with the correct format for `remove` command.
 
-### Removing a mapping (rmb to verify test case with actual data)
+### Removing a mapping
 
 1. Removing a mapping for a selected university and module
     1. Prerequisites: Delete the data folder and restart the program. Run the command `add /uni 75`, `add /mod 1` and `add /map 75 1`.

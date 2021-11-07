@@ -9,10 +9,15 @@ skinparam maxWidth 256
 HelpCommandParser <-- Parser
 ExitCommandParser <-- Parser
 Parser --> AddCommandParser
-Parser --> RemoveCommandParser
+Parser ---> RemoveCommandParser
 Parser --> FindCommandParser
-Parser --> SearchMapCommandParser
+Parser ---> SearchMapCommandParser
 Parser --> ListCommandParser
+<<<<<<< HEAD
+Parser ---> HelpCommandParser
+Parser --> ExitCommandParser
+=======
+>>>>>>> 7a0bb6cd7df8bab61c29f7540bf9933ad09827c7
 
 AddCommandParser --> AddParseException
 RemoveCommandParser --> RemoveParseException
@@ -38,24 +43,7 @@ class Parser {
     + ParseCommand(userInput: String): Command
 }
 
-class AddCommandParser {
-    - flag:String
-    - uniIndex: int
-    - mapIndex: int
-    - university: University;
-    - module: Module
-    - logger: Logger
 
-    + parse(arguments: String, universityMasterList: UniversityList, moduleMasterList: ModuleList,
-    universitySelectedList: UniversityList, moduleSelectedList: ModuleList): Command
-    - identifyFlagAndSplitArgs(arguments: String): String
-    - handleUniFlagArgs(arguments: String, universityMasterList: UniversityList,
-    universitySelectedList: UniversityList): void
-    - handleModFlagArgs(arguments: String,
-      moduleMasterList: ModuleList, moduleSelectedList: ModuleList): void
-    - handleMapFlagArgs(arguments: String, universitySelectedList: UniversityList,
-      moduleSelectedList: ModuleList, universityMasterList: UniversityList): void
-}
 
 class ExitCommandParser {
     + parse(): ExitCommand
@@ -96,6 +84,25 @@ class RemoveCommandParser {
       universitySelectedList: UniversityList): void
     - handleModFlagArgs(arguments: String, moduleMasterList: ModuleList,
       moduleSelectedList: ModuleList): void
+    - handleMapFlagArgs(arguments: String, universitySelectedList: UniversityList,
+      moduleSelectedList: ModuleList, universityMasterList: UniversityList): void
+}
+
+class AddCommandParser {
+    - flag:String
+    - uniIndex: int
+    - mapIndex: int
+    - university: University;
+    - module: Module
+    - logger: Logger
+
+    + parse(arguments: String, universityMasterList: UniversityList, moduleMasterList: ModuleList,
+    universitySelectedList: UniversityList, moduleSelectedList: ModuleList): Command
+    - identifyFlagAndSplitArgs(arguments: String): String
+    - handleUniFlagArgs(arguments: String, universityMasterList: UniversityList,
+    universitySelectedList: UniversityList): void
+    - handleModFlagArgs(arguments: String,
+      moduleMasterList: ModuleList, moduleSelectedList: ModuleList): void
     - handleMapFlagArgs(arguments: String, universitySelectedList: UniversityList,
       moduleSelectedList: ModuleList, universityMasterList: UniversityList): void
 }

@@ -4,7 +4,8 @@ package seplanner.exceptions;
 
 public class SearchMapParseException extends ParserClassException {
     String format = "searchmap <uni index> ~~~~~~~~~~~~~~~ Display the available module mappings for "
-            + "selected modules for that university\n";
+            + "selected modules for that university\n"
+            + "searchmap all ------------------------ Display available module mappings for all universities\n";
 
     /**
      * Constructs an SearchMapParseException with the specified detail message and

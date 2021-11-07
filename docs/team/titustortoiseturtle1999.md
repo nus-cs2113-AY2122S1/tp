@@ -25,7 +25,7 @@ Given below are my contributions to the project.
 * **Enhancements to existing features**:
     * Added ASCII graphics for welcome and exit. (Pull requests [\#54](https://github.com/AY2122S1-CS2113T-T09-2/tp/pull/54), [\#55](https://github.com/AY2122S1-CS2113T-T09-2/tp/pull/55), [\#153](https://github.com/AY2122S1-CS2113T-T09-2/tp/pull/153))
     * Added help command to display the list of commands for the user (Pull request [\#95](https://github.com/AY2122S1-CS2113T-T09-2/tp/pull/95))
-* 
+ 
 * **Documentation**:
     * User Guide:
         * Added documentation for the `add /uni`, `add /mod` and `searchmap all` commands: [\#44](https://github.com/AY2122S1-CS2113T-T09-2/tp/pull/44), [\#251](https://github.com/AY2122S1-CS2113T-T09-2/tp/pull/251)
