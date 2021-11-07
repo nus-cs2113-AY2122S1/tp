@@ -1,6 +1,7 @@
 package taa.storage.deserializer;
 
 //@@author leyondlee
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -34,10 +35,10 @@ public class StudentDeserializer extends StorageDeserializer implements JsonDese
         }
 
         JsonElement idJson = jsonObject.get(MEMBER_ID);
-        String id = idJson.getAsString();
+        String id = getJsonElementAsString(idJson);
 
         JsonElement nameJson = jsonObject.get(MEMBER_NAME);
-        String name = nameJson.getAsString();
+        String name = getJsonElementAsString(nameJson);
 
         if (!Parser.isValueValid(id) || !Parser.isValueValid(name)) {
             return null;
@@ -47,35 +48,17 @@ public class StudentDeserializer extends StorageDeserializer implements JsonDese
 
         JsonElement commentJson = jsonObject.get(MEMBER_COMMENT);
         if (commentJson != null) {
-            String comment = commentJson.getAsString();
+            String comment = getJsonElementAsString(commentJson);
             if (Parser.isValueValid(comment)) {
                 student.setComment(comment);
             }
         }
 
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        Gson gson = gsonBuilder.create();
-
         JsonElement attendanceListJson = jsonObject.get(MEMBER_ATTENDANCELIST);
-        if (attendanceListJson != null) {
-            AttendanceList attendanceList = gson.fromJson(attendanceListJson, AttendanceList.class);
-            if (attendanceList != null) {
-                for (Attendance attendance : attendanceList.getAttendances()) {
-                    student.getAttendanceList().addAttendance(attendance);
-                }
-            }
-        }
+        deserializeAttendanceList(attendanceListJson, student);
 
         JsonElement resultsJson = jsonObject.get(MEMBER_RESULTS);
-        if (resultsJson != null) {
-            HashMap<String, Double> results = convertResultsJson(gson, resultsJson);
-            if (results != null) {
-                for (String key : results.keySet()) {
-                    double value = results.get(key);
-                    student.setMarks(key, value);
-                }
-            }
-        }
+        deserializeResults(resultsJson, student);
 
         if (!student.verify()) {
             return null;
@@ -84,15 +67,50 @@ public class StudentDeserializer extends StorageDeserializer implements JsonDese
         return student;
     }
 
-    private HashMap<String, Double> convertResultsJson(Gson gson, JsonElement resultsJson) {
+    private void deserializeAttendanceList(JsonElement attendanceListJson, Student student)
+            throws JsonParseException {
+        if (attendanceListJson == null) {
+            return;
+        }
+
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(AttendanceList.class, new AttendanceListDeserializer());
+        Gson gson = gsonBuilder.create();
+
+        AttendanceList deserializedAttendanceList = gson.fromJson(attendanceListJson, AttendanceList.class);
+        if (deserializedAttendanceList == null) {
+            return;
+        }
+
+        AttendanceList attendanceList = student.getAttendanceList();
+        for (Attendance attendance : deserializedAttendanceList.getAttendances()) {
+            attendanceList.addAttendance(attendance);
+        }
+    }
+
+    private void deserializeResults(JsonElement resultsJson, Student student) {
+        if (resultsJson == null) {
+            return;
+        }
+
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson gson = gsonBuilder.create();
+
         HashMap<String, Double> results;
         try {
-            Type resultsType = new TypeToken<HashMap<String, Double>>(){}.getType();
+            Type resultsType = new TypeToken<HashMap<String, Double>>() {}.getType();
             results = gson.fromJson(resultsJson, resultsType);
         } catch (JsonParseException e) {
             results = null;
         }
 
-        return results;
+        if (results == null) {
+            return;
+        }
+
+        for (String key : results.keySet()) {
+            double value = results.get(key);
+            student.setMarks(key, value);
+        }
     }
 }

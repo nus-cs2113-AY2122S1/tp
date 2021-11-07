@@ -1,6 +1,7 @@
 package taa.command.teachingclass;
 
 //@@author leyondlee
+
 import taa.command.Command;
 import taa.storage.Storage;
 import taa.exception.TaaException;
@@ -27,8 +28,8 @@ public class ListClassesCommand extends Command {
      * Executes the list_classes command and lists all the classes.
      *
      * @param classList The ClassGroupList instance.
-     * @param ui         The ui instance to handle interactions with the user.
-     * @param storage    The storage instance to handle saving.
+     * @param ui        The ui instance to handle interactions with the user.
+     * @param storage   The storage instance to handle saving.
      * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
     @Override
@@ -46,8 +47,8 @@ public class ListClassesCommand extends Command {
     @Override
     protected String getUsage() {
         return String.format(
-            MESSAGE_FORMAT_GENERIC_USAGE,
-            COMMAND_LIST_CLASSES
+                MESSAGE_FORMAT_GENERIC_USAGE,
+                COMMAND_LIST_CLASSES
         );
     }
 }

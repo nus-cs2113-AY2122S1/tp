@@ -1,6 +1,7 @@
 package taa.command.teachingclass;
 
 //@@author leyondlee
+
 import taa.Ui;
 import taa.teachingclass.TeachingClass;
 import taa.teachingclass.ClassList;
@@ -19,10 +20,10 @@ public class EditClassCommand extends Command {
     };
 
     private static final String MESSAGE_FORMAT_EDIT_CLASS_USAGE = "%s %s/<CLASS_ID> "
-        + "[%s/<NEW_CLASS_ID> | %s/<NEW_CLASS_NAME>]";
+            + "[%s/<NEW_CLASS_ID> | %s/<NEW_CLASS_NAME>]";
     private static final String MESSAGE_FORMAT_CLASS_EDITED = "Class edited:\n  %s";
     private static final String MESSAGE_FORMAT_CLASS_EXISTS = "CLASS_ID: %s already exists. "
-        + "Please use a different CLASS_ID.";
+            + "Please use a different CLASS_ID.";
 
     public EditClassCommand(String argument) {
         super(argument, EDIT_CLASS_ARGUMENT_KEYS, true);
@@ -92,11 +93,11 @@ public class EditClassCommand extends Command {
     @Override
     protected String getUsage() {
         return String.format(
-            MESSAGE_FORMAT_EDIT_CLASS_USAGE,
-            COMMAND_EDIT_CLASS,
-            KEY_CLASS_ID,
-            KEY_NEW_CLASS_ID,
-            KEY_NEW_CLASS_NAME
+                MESSAGE_FORMAT_EDIT_CLASS_USAGE,
+                COMMAND_EDIT_CLASS,
+                KEY_CLASS_ID,
+                KEY_NEW_CLASS_ID,
+                KEY_NEW_CLASS_NAME
         );
     }
 }

@@ -1,6 +1,7 @@
 package taa;
 
 //@@author leyondlee
+
 import taa.teachingclass.ClassList;
 import taa.command.Command;
 import taa.exception.TaaException;
@@ -31,10 +32,10 @@ public class Taa {
     }
 
     public void run() {
+        ui.printWelcomeMessage();
+
         loadClassListFromStorage();
         assert classList != null;
-
-        ui.printWelcomeMessage();
 
         boolean isExit = false;
         do {
