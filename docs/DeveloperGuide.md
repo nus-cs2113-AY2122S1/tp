@@ -43,22 +43,23 @@ You may run the following command: `java -version` to check for the current Java
 If you are using Intellij, please check that your project structure's project SDK is set to Java 11 and Project Language Level is set
 to default SDK.
 
-![Intellij ProjectStructure](https://github.com/AY2122S1-CS2113T-F11-2/tp/blob/master/docs/images/ProjectStructureSettings.png)
+![Intellij ProjectStructure](images/ProjectStructureSettings.png)
 
 4) Importing project
 Right click on the Repository folder that you have clone into your machine and select "Open Folder as Intellij IDEA Community Edition Project".
 When you are asked whether to trust and open gradle project, click trust. 
 
-![Intellij ProjectStructure](https://github.com/AY2122S1-CS2113T-F11-2/tp/blob/master/docs/images/TrustGradle.png)
+![Intellij ProjectStructure](images/TrustGradle.png)
 
 5) Verifying BudgetTracker Runs
 Right click on BudgetTracker then click on run to test our our BudgetTracker App. 
 
-![Intellij Run BudgetTracker](https://github.com/AY2122S1-CS2113T-F11-2/tp/blob/master/docs/images/BudgetTrackerRun.png)
+![Intellij Run BudgetTracker](images/BudgetTrackerRun.png)
 
 ### Additional Consideration
 
 ## <a id="design"></a> Design 
+
 ### Architecture
 ![Figure_Architecture_Diagram](images/ArchitectureDiagram.png)
 
@@ -105,7 +106,8 @@ Below is a partial class diagram that shows an overview of the `Data` component.
 
 ![Figure_DataComponent_Partial_Class_Diagram](images/DataPartialClassDiagram.png)
 
-The `Data` component
+The `Data` component:
+
 
 ### <a id=""></a> Logic Component (Parser and Commands)
 ![Figure_ParserDiagram](images/ParserDiagram.png)
@@ -119,6 +121,22 @@ Figure 3. Structure of the program's logic
 Given below is the Sequence Diagram for interactions with the Parser and Command components for the `parseCommand("add -b a/400")` call.
 ![Figure_LogicSequenceDiagram](images/LogicSequenceDiagram.png)
 Figure 4. Sequence Diagram of program's logic with a `add -b a/400` call.
+
+### <a id=""></a> Storage Component (Loading and Storing Data)
+
+The Storage component consists of:
+
+The `Storage` component:
+
+- During the first launch of the app, it creates a new current year database text file if there isn't any. 
+it will then load the data from the database text file into the app. 
+- Allows user to change the data base to the year he wants. 
+- It also allows the conversion of a database into CSV format so that the user can perform more sophisticated statistical analysis.
+- Upon performing any commands that will perform changes to the database such as `add`, `edit`, `delete`
+Storage will reload the data in the app into the database text file. 
+
+![Storage Sequence Diagram](images/Storage.png)
+
 
 ## <a id="implementation"></a> Implementation
 
@@ -205,8 +223,8 @@ Given below is an example usage scenario and how the list feature behaves at eac
 
 ### <a id=""></a> Storage 
 
-The storage stores the exact add command of budget and expenditures into the text file containing 
-in the current ArrayList. The reason it is implemented in this manner is that we could reuse
+The storage stores the exact `add` command of budget, expenditures and loan into the text file containing 
+in the current AllRecordList. The reason it is implemented in this manner is so that we could reuse
 code that have been written for adding of budget and expenditures directly when loading from storage.
 
 Everytime a deleted, edit or add command is called, the txt file is automatically wiped and re-written 
@@ -214,6 +232,14 @@ from the ArrayList to ensure that data is saved at every step.
 
 The yearly Records is stored in the form of <year>.txt. Each year contains all the monthly budget as
 well as all the expenditure tied to that month.
+
+
+![Storage Sequence Diagram](images/readTextFileToString.png)
+
+![Storage Sequence Diagram](images/reloadArrayToStorage.png)
+
+![Storage Sequence Diagram](images/convertToCsvFile.png)
+
 
 ## <a id=""></a> List of Commands
 
