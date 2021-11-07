@@ -1,12 +1,16 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.commands.clientpackages.ListClientPackageCommand;
 import seedu.duke.commands.clients.AddClientCommand;
 import seedu.duke.commands.Command;
+import seedu.duke.commands.clients.ListClientCommand;
 import seedu.duke.commands.clients.SortClientCommand;
 import seedu.duke.commands.flights.AddFlightCommand;
+import seedu.duke.commands.flights.ListFlightCommand;
 import seedu.duke.commands.flights.SortFlightCommand;
 import seedu.duke.commands.tours.AddTourCommand;
+import seedu.duke.commands.tours.ListTourCommand;
 import seedu.duke.commands.tours.SortTourCommand;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -43,10 +47,18 @@ public class ParserTest {
     private static final String CORRECT_SORT_TOUR = "sort -t /p";
     private static final String CORRECT_SORT_CLIENT = "sort -c /n";
     private static final String CORRECT_SORT_FLIGHT = "sort -f /d";
+    public static final String CORRECT_LIST_FLIGHT = "list -f";
+    public static final String CORRECT_LIST_CLIENT = "list -c";
+    public static final String CORRECT_LIST_TOUR = "list -t";
+    public static final String CORRECT_LIST_PACKAGE = "list -p";
     private static final String WRONG_ADD_FLIGHT_DATETIME_FORMAT =
             "add -f SQ-JPN1 /d JPN /r SG /dd 23/10/21 25:00 /rd 27/10/21 02:00";
     private static final String WRONG_ADD_FLIGHT_LOGIC_ERROR =
             "add -f SQ-JPN1 /d JPN /r SG /dd 23/11/21 21:00 /rd 19/10/21 02:00";
+    public static final String WRONG_MISSING_IDENTIFIER_ONE = "list /f";
+    public static final String WRONG_IDENTIFIER_GIVEN = "sort -o /n";
+    public static final String WRONG_MISSING_IDENTIFIER_TWO = "cut c001";
+
 
     @Test
     void parse_addClientCommand_correctCommandCreated() throws TourPlannerException {
@@ -82,10 +94,25 @@ public class ParserTest {
     }
 
     @Test
-    void parse_sortClientCommand_correctCommandCreated() throws TourPlannerException {
+    void parse_sortCommand_correctCommand() throws TourPlannerException {
         parseAndAssertCommandType(CORRECT_SORT_TOUR, SortTourCommand.class);
         parseAndAssertCommandType(CORRECT_SORT_CLIENT, SortClientCommand.class);
         parseAndAssertCommandType(CORRECT_SORT_FLIGHT, SortFlightCommand.class);
+    }
+
+    @Test
+    void parse_listCommand_correctCommand() throws TourPlannerException {
+        parseAndAssertCommandType(CORRECT_LIST_FLIGHT, ListFlightCommand.class);
+        parseAndAssertCommandType(CORRECT_LIST_CLIENT, ListClientCommand.class);
+        parseAndAssertCommandType(CORRECT_LIST_TOUR, ListTourCommand.class);
+        parseAndAssertCommandType(CORRECT_LIST_PACKAGE, ListClientPackageCommand.class);
+    }
+
+    @Test
+    void parse_missingIdentifier_failure() {
+        assertParseFailure(WRONG_MISSING_IDENTIFIER_ONE, Parser.ERROR_MISSING_IDENTIFIER);
+        assertParseFailure(WRONG_IDENTIFIER_GIVEN, Parser.ERROR_MISSING_IDENTIFIER);
+        assertParseFailure(WRONG_MISSING_IDENTIFIER_TWO, Parser.ERROR_MISSING_IDENTIFIER);
     }
 
     @Test
