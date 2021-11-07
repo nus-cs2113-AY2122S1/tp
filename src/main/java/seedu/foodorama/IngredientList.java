@@ -24,6 +24,7 @@ public class IngredientList {
     private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_FORMAT);
     private static final int TEN_YEARS_IN_DAYS = 3650;
     private static final int ZERO_DAYS = 0;
+    private static final int SOFT_WEIGHT_LIMIT = 10000;
     public static ArrayList<Ingredient> ingredientList = new ArrayList<>();
 
     /**
@@ -55,7 +56,7 @@ public class IngredientList {
             }
             if (Double.isInfinite(ingredientWeightValue) | Double.isNaN(ingredientWeightValue)) {
                 throw new FoodoramaException(UI.printNumericalInputInvalid("dish waste"));
-            } else if (ingredientWeightValue > 10000) {
+            } else if (ingredientWeightValue > SOFT_WEIGHT_LIMIT) {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printIngrValueHigh(ingredientName);
                 confirmAdd = in.nextLine();
@@ -69,7 +70,7 @@ public class IngredientList {
                 }
             }
             if ((isNumber(ingredientWeight) && (ingredientWeightValue >= 0)
-                    && (ingredientWeightValue <= 10000)) | confirmAdd.startsWith(YES)) {
+                    && (ingredientWeightValue <= SOFT_WEIGHT_LIMIT)) | confirmAdd.startsWith(YES)) {
                 loop = EXIT;
             }
         }
