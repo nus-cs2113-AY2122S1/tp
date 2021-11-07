@@ -2,8 +2,16 @@ package seedu.budgettracker.storage;
 
 import org.junit.jupiter.api.Test;
 import seedu.budgettracker.BudgetTracker;
+import seedu.budgettracker.data.AllRecordList;
+import seedu.budgettracker.data.RecordList;
+import seedu.budgettracker.data.records.exceptions.DuplicateBudgetException;
+import seedu.budgettracker.storage.textfiletools.ReadTextFile;
+import seedu.budgettracker.storage.textfiletools.WriteToTextFile;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Hashtable;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -48,5 +56,31 @@ public class StorageTest {
         }
 
         assertTrue(directoryFiles1 == directoryFiles2);
+    }
+
+    @Test
+    void loadStorage_dataFiles_dataIntegrity()  {
+        Storage storage = new Storage();
+        storage.makeStorageTextFile("./data/2019.txt");
+
+        Hashtable<Integer, RecordList> allRecordList = new Hashtable<>();
+        for (int i = 1; i <= 12; i++) {
+            allRecordList.put(i, new RecordList(i));
+        }
+
+        try {
+            allRecordList.get(10).addBudget(100, false);
+        } catch (DuplicateBudgetException e) {
+            System.out.println("ERROR!");
+        }
+
+        WriteToTextFile textFileWriter = new WriteToTextFile();
+        textFileWriter.reloadArrayToStorage(allRecordList, "./data/2019.txt");
+
+        Storage loader = new Storage();
+        AllRecordList recordListNew = new AllRecordList();
+        loader.loadStorage(recordListNew, "./data/2019.txt");
+
+        assertTrue(100.00 == recordListNew.getBudget(10).getAmount());
     }
 }
