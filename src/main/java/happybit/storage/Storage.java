@@ -147,10 +147,11 @@ public class Storage {
      * Exports a habit to storage file.
      *
      * @param habit a Habit object
-     * @param index the index of the goal the habit is under
+     * @param goalIndex the index of the goal the habit is under
+     * @param habitIndex the index of the habit in the goal
      * @throws HaBitStorageException IOException
      */
-    public void export(Habit habit, int index) throws HaBitStorageException {
-        this.export.exportHabit(habit, index);
+    public void export(Habit habit, int goalIndex, int habitIndex) throws HaBitStorageException {
+        this.export.exportHabit(habit, goalIndex, habitIndex);
     }
 }
