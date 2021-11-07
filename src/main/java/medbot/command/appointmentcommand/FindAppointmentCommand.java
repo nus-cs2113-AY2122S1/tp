@@ -19,7 +19,6 @@ public class FindAppointmentCommand extends Command {
         this.personType = personType;
         this.filterType = filterType;
         this.dateTimeCode = dateTimeCode;
-
     }
 
     @Override

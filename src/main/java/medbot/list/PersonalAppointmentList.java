@@ -118,7 +118,7 @@ public class PersonalAppointmentList {
      * Returns the list of appointment after the date time indicated.
      *
      * @param dateTimeCode the date time of the appointments to look for.
-     * @returnThe list of appointments after the date.
+     * @return the list of appointments after the date.
      */
     public List<Integer> listAppointmentsAfter(int dateTimeCode) {
         Appointment referenceAppointment = new Appointment();
@@ -135,7 +135,7 @@ public class PersonalAppointmentList {
      * Returns the list of appointment before the date time indicated.
      *
      * @param dateTimeCode the date time of the appointments to look for.
-     * @returnThe list of appointments before the date.
+     * @return the list of appointments before the date.
      */
     public List<Integer> listAppointmentsBefore(int dateTimeCode) {
         Appointment referenceAppointment = new Appointment();
