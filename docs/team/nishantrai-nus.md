@@ -2,9 +2,8 @@
 
 ## Project: SITUS (Smart Inventory Tracking and Updating System)
 
-The Smart Inventory Tracking and Updating System (SITUS) is a desktop app
-for tracking ingredient inventory designed for restaurant/ F&B inventory managers.
-Users interact with in through a CLI, and is written in Java.
+The Smart Inventory Tracking and Updating System (SITUS) is a CLI application written in Java
+for tracking ingredient inventory, designed for restaurant/ F&B inventory managers.
 
 ### Summary of Contributions
 
@@ -23,34 +22,36 @@ Users interact with in through a CLI, and is written in Java.
      * **What it does**: Allows users to search for ingredients in their inventory by name(s). Multiple keywords
      to search for can be entered.
      * **Rationale**: Saves users from having to look through the entire list for ingredients they want to check stock 
-     of, especially if there are a large amount of ingredients in the list.
+     of, especially if there are a large amount of ingredients in the list (also allows users to get the index of an ingredient to use for other commands
+     like `update` or `delete`).
   4. Improvement to `delete` and `update` features
      * **What it does**: Initially, `delete` and `update` were implemented with the following command formats:
        * `delete` (or `update`) `n/NAME a/AMOUNT e/EXPIRY_DATE`
      * This was then improved on using Vanessa's new ingredient group implementation, allowing the following formats:
        * `delete GROUP_INDEX.INGREDIENT_INDEX` (e.g. `delete 1.2`)
        * `update GROUP_INDEX.INGREDIENT_INDEX a/AMOUNT` (e.g. `update 1.2 a/40`)
-     * **Rationale**: Saves time having to repeatedly type the expiry date of an ingredient (as well as having to find the ingredient's
-     expiry date in the first place). After this implementation, the expiry date of an ingredient only has to be typed when adding the
-     ingredient to the list.
+     * **Rationale**: Saves time having to repeatedly type all the details of an ingredient as well as having to find the ingredient's
+     expiry date and amount to use the command in the first place (significant since our aim is to make our CLI application faster for typists than using a mouse with GUI). 
+     After this implementation, the expiry date of an ingredient only has to be typed when adding the ingredient to the list (or if searching by 
+     expiry date using `expire` which is a given).
 * **User Guide Contributions** (found [here](https://ay2122s1-cs2113t-t09-3.github.io/tp/UserGuide.html)):
-  * Contents Section
-  * Section on how to use the UG
   * Help Command Section
   * Find Command Section
-  * Command Summary Section
   * Overview for most sections and features (first paragraph of the sections/subsections)
 * **Developer Guide Contributions** (found [here](https://ay2122s1-cs2113t-t09-3.github.io/tp/DeveloperGuide.html)): 
   * Sequence diagram of the overall interaction of different components of SITUS
-  * Diagram of interaction between `Parser` and `Command` classes
+  * Class diagram of interaction between `Parser` and `Command` classes
+  * Sequence diagram for implementation of `find` and `expire` commands 
   * Short descriptions for `UI`, `Parser` and `Command` components
-  * Instructions for manual testing
+  * Descriptions of implementations for `find` and `expire` commands
 * **Team-based Contributions**:
   * Lead the setting up of team organisation and repo
+  * Contents and "How to Use this Guide" sections in UG
+  * Command summary section in UG
   * Documentation of target user in both UG and DG 
   * Documentation of value proposition in DG
-  * "How to Use This Guide" section in UG
-  * Documentation of code methods 
-  * Edits to overall language and formatting 
+  * Instructions for manual testing in DG
+  * User Stories in DG
+  * Some overall language and formatting assistance 
 * **Community**:
   * Participated in PE Dry Run (bugs reported can be found [here](https://github.com/nishantrai-nus/ped/issues))
