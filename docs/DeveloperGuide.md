@@ -13,13 +13,18 @@ motivated us to build this application.
 * [Acknowledgements](#-acknowledgements)
 * [Setting Up & Getting Started](#-setting-up--getting-started)
 * [Design & Implementations](#-design--implementation)
-    * [General Flow](#general-flow)
-    * [Input Parsing](#input-parsing)
-    * [Storage](#storage)
-    * [Data Structures](#data-structures)
-    * [User-Interface Component](#user-interface-component)
-    * [Exceptions](#exceptions)
-    * [Command Abstraction](#command-abstraction)
+    * [Design](#design)
+      * [Main Components](#main-components)
+      * [General Flow](#general-flow)
+      * [Input Parsing](#input-parsing)
+      * [Storage](#storage)
+      * [Data Structures](#data-structures)
+      * [User-Interface Component](#user-interface-component)
+      * [Exceptions](#exceptions)
+      * [Command Abstraction](#command-abstraction)
+    * [Implementation](#implementation)
+      * [Edit](#edit)
+      * [Graph](#graph)
 * [Product Scope](#-product-scope)
     * [Target User Profile](#target-user-profile)
     * [Value Proposition](#value-proposition)
@@ -46,7 +51,7 @@ motivated us to build this application.
 This section brings developers through the general flow of the programme, the various components involved, and the
 overall design of their implementation.
 
-# Design
+## Design
 
 ### Main Components
 
@@ -130,9 +135,8 @@ under *'Data'* folder.
 ![](images/storage_write_sequence.png)
 
 * After every command, Duke calls `Storage.write(Ingredient)`, then `Storage.write(Dish)`.
-    * This method in the `Storage` class is responsible for writing to the respective text file depending on the mode.
-* `Storage.write()` will access the respective text file and save to It's respective save format.
-
+  * This method in the `Storage` class is responsible for writing to the respective text file depending on the mode.
+* `Storage.write()` will access the respective text file and save to its respective save format.
 
 * ❕ **Save Formats:**
     * Dishes
@@ -219,19 +223,104 @@ Commands/Parameters.
 * Different Command Classes that perform different tasks by calling various functions of the Object Classes.
 * All inherit from an abstract `Command` class with one execute method that takes an Arraylist<String> as input.
 
-# Implementation
+
+## Implementation
+
 
 ### Find
 
 ### Edit
+The implementation of the Edit function allows the User to edit several 
+instance variables of the Dishes and Ingredients present in the DishList and
+IngredientList.
+
+![](images/edit_dish_name_sequence_diagram.png)
+This Sequence Diagram shows how the `EditDishNameCommand` class functions.
+
+Currently the User is able to edit the following:
+* Dish Name
+* Dish Wastage Weight
+* Ingr Name
+* Ingr Wastage Weight
+* Ingr Storage Weight
+
+The remaining Edit classes, namely `EditDishWasteCommand`, `EditIngrNameCommand`, 
+`EditIngrStoredCommand` and `EditIngrWasteCommand` follow sequences similar to 
+the one shown above in their implementation.
 
 ### Set
 
 ### Graph
 
+![](images/graph_class_dig.png)
+
+Graph works by creating a 2d grid and printing the bars based on the current position of the terminal cursor. 
+This lets us bypass the restriction in a CLI based application where you can only print from up to down and 
+the bars can get printed "vertically". This is done by calculating the lengths of the bars beforehand and 
+using these lengths along with the current coordinates to print either an empty space or a bar. 
+
+Despite this due to CLI and ascii limitations, printing of fractional values posed an issue. This was because you are unable
+to print half a character and using special unicode characters would break cross-platform functionality. The solution 
+that we implemented was to have a digit in the top most bar if we have fractional heights. This way while we still don't get 
+a perfect representation, we are capable of giving the value accurate to one decimal place. So if the height was 3.33 units
+it would be represented by 3 filled bars and the 4th bar will have a 3 within indicating its value is between 3.3 to 3.4 
+as shown in the figure below
+
+____________________________________________________________
+
+                           [|]     Legend:              Scale: 1 unit = 5.0kg
+                           [|]     A. chicken: 2.56kg
+                           [|]     B. rice: 21.56kg
+                           [|]     C. flour: 24.56kg
+                     [3]   [|]     D. potato: 26.56kg
+         [3]   [9]   [|]   [|]     E. corn: 50.0kg
+         [|]   [|]   [|]   [|]
+         [|]   [|]   [|]   [|]
+         [|]   [|]   [|]   [|]
+    [5]  [|]   [|]   [|]   [|]
+     A    B     C     D     E
+____________________________________________________________
+
 ### Random dish
 
 ### Sort
+
+### Terminal refreshing
+The interface of the program utilizes the ClearScreen class to clear the terminal after every user input through the built-in `ProcessBuilder` Java class. Such a feature allows greater readability and focus for the user as the terminal will not be cluttered with past commands.
+`Ui` will call `ClearScreen.clearConsole()` method to clear the terminal.
+
+The ProcessBuilder class will send a respective command to the terminal depending on the Operating System of the user.
+The command it sends to the terminal is as follows:
+* `cls` for Windows CMD Terminals.
+* `clear` for Linux/MacOS Terminals.
+
+`ClearConsole()` Code Snippet:
+
+```
+ public static void clearConsole() {
+        try {
+            // Get current operating system
+            String getOS = System.getProperty("os.name");
+
+            if (getOS.contains("Windows")) {
+                // Try clear for Windows
+                // "/c" - execute string as command, "cls" -  Clear terminal
+                ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls");
+                Process startProcess = pb.inheritIO().start();
+                startProcess.waitFor();
+            } else {
+                // Try clear for MacOS/Linux
+                // "clear" - Clear terminal
+                ProcessBuilder pb = new ProcessBuilder("clear");
+                Process startProcess = pb.inheritIO().start();
+                startProcess.waitFor();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+```
+
 
 ## 📂 Product Scope
 
@@ -246,8 +335,8 @@ the Command Line Interface.
 ### Value Proposition
 
 By presenting the wastage statistics, we can help restaurant owners figure out which dishes are contributing the most to
-wastage at the restaurant. This way, they can allocate their resources more efficiently to better doing dishes. Thus we
-are reducing time wastage due to cooking of excess dishes and also saving money from purchasing unnecessary ingredients.
+wastage at the restaurant. This way, they can allocate their resources more efficiently to better doing dishes. Thus, we 
+are reducing time wastage due to cooking of excess dishes and also saving money from purchasing unnecessary ingredients. 
 Therefore, there’s a two-fold saving. Additionally, we are also contributing to reducing Singapore's contribution to
 global food wastage.
 
@@ -269,6 +358,10 @@ Brings developers through the requirements of Users the *Food-O-Rama* team consi
 | v2.0 | Restaurant owner | Clear all the Dishes and/or Ingredients present in my data | Restart my data collection |
 | v2.0 | Restaurant owner | View a graph of wastage for my Dishes and Ingredients | Understand the wastage trends of Dishes and Ingredients at a glance |
 | v2.0 | Restaurant owner | Refresh my Command Line Interface after every User Command | Not have a cluttered terminal and instead focus on my tasks |
+| v2.0 | Restaurant owner | Set limits for wastage | Get prompted when I waste too much as opposed to checking constantly |
+| v2.1 | Restaurant owner | Edit my dishes | Fix my mistakes and not have to worry about perfectly inputting details all the time |
+| v2.1 | Restaurant owner | Get a random dish name | Expand my collection of dishes |
+| v2.1 | Restaurant owner | Set an expiry date for ingredients | Track if my ingredients are fresh |
 
 ## 🚦 Non-Functional Requirements
 
