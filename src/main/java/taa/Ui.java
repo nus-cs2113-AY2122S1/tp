@@ -1,6 +1,7 @@
 package taa;
 
 //@@author leyondlee
+
 import taa.command.Command;
 
 import java.util.NoSuchElementException;
@@ -14,14 +15,14 @@ public class Ui {
 
     private static final String MESSAGE_FORMAT_EXCEPTION = "An exception has occurred:\n%s";
     private static final String MESSAGE_FORMAT_WELCOME = "Welcome to\n" + "\n"
-        + ".___________.    ___           ___\n"
-        + "|           |   /   \\         /   \\\n"
-        + "`---|  |----`  /  ^  \\       /  ^  \\\n"
-        + "    |  |      /  /_\\  \\     /  /_\\  \\\n"
-        + "    |  |     /  _____  \\   /  _____  \\\n"
-        + "    |__|    /__/     \\__\\ /__/     \\__\\\n" + "\n"
-        + "What can I do for you?\n"
-        + "Enter \"%s\" to view the list of commands";
+            + ".___________.    ___           ___\n"
+            + "|           |   /   \\         /   \\\n"
+            + "`---|  |----`  /  ^  \\       /  ^  \\\n"
+            + "    |  |      /  /_\\  \\     /  /_\\  \\\n"
+            + "    |  |     /  _____  \\   /  _____  \\\n"
+            + "    |__|    /__/     \\__\\ /__/     \\__\\\n" + "\n"
+            + "What can I do for you?\n"
+            + "Enter \"%s\" to view the list of commands";
 
     private final Scanner scanner;
 
@@ -42,7 +43,7 @@ public class Ui {
      * Gets a user input.
      *
      * @param inputPrompt The prompt to display before asking for user input.
-     * @param allowEmpty true to allow empty user input, else false.
+     * @param allowEmpty  true to allow empty user input, else false.
      * @return A string if successful, else null.
      */
     public String getUserInput(String inputPrompt, boolean allowEmpty) {
