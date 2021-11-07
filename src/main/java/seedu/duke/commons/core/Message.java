@@ -49,6 +49,9 @@ public final class Message {
     public static final String ERROR_INVALID_TIME_FORMAT =
             "Sorry, the input time format should be HH:MM.";
 
+    public static final String ERROR_INVALID_TIME_SEQUENCE =
+            "Sorry, the starting time of a lesson needs to be before its ending time.";
+
     public static final String ERROR_INVALID_TITLE =
             "Sorry, the field for title cannot be blank.";
 
