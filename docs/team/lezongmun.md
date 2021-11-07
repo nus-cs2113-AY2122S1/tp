@@ -29,10 +29,12 @@ The code written by me (`lezongmun`) can be found [here](https://nus-cs2113-ay21
       for commands involving `Contact` indexes like `rm`, `view` and `edit` commands.
 
 ### Contributions to UG
+The link to the User Guide (UG) can be found [here](https://ay2122s1-cs2113t-t09-1.github.io/tp/UserGuide.html).
 - Added documentation for features `me` and `rm`
 - Updated documentation (command formats, usages, examples) for features with `all` and `me` as inputs
 
 ### Contributions to DG
+The link to the Developer Guide (DG) can be found [here](https://ay2122s1-cs2113t-t09-1.github.io/tp/DeveloperGuide.html).
 - Added implementation details and class diagram for `Storage` system
 - Added implementation details for `Command` and `ContactList` system
 - Added implementation details and sequence diagrams for `rm` feature (delete selected contacts, delete all contacts and
@@ -47,3 +49,9 @@ The code written by me (`lezongmun`) can be found [here](https://nus-cs2113-ay21
 - Regular debugging and testing of the application to find bugs and make sure the app works
 - Made general code enhancements by refactoring/abstracting code that was too lengthy to make them more readable 
 - Updated exceptions and error messages to make them more consistent
+
+### Review/mentoring contributions
+- Reviewed PRs and provided suggestions to improve overall code quality/formatting
+
+### Community
+- Reported Bugs during PE Dry Run
