@@ -223,8 +223,7 @@ It contains functions that can help control the date inside the list.
 clear the data from the list. `getTrip` and `getTripIndex` can return the specific `Trip` data by giving the name 
 or the index of the Also, the `getSize` functions will return the size of the `TripsList`. 
 
-![](documentationPics/TripsList.jpeg)
-<div style="text-align: center;">Figure 6: TripsList Diagram</div>
+
 
 #### 1.2.4. Ui class
 The `Ui` class processes the interactions with users. The functions in `Ui` class will be called in `command` and then 
