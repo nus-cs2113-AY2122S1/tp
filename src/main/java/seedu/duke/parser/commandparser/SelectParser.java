@@ -111,7 +111,6 @@ public abstract class SelectParser extends Parser {
                 return i;
             }
         }
-        // a matching member is never found
         throw new DukeException("No matching names found!");
     }
 }

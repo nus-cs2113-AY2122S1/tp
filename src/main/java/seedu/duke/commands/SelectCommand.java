@@ -23,7 +23,7 @@ public class SelectCommand extends Command {
         assert itemType.equals(EVENT) | itemType.equals(MEMBER);
         if (itemType.equals(EVENT)) {
             eventIndex = index;
-        } else if (itemType.equals(MEMBER)) {
+        } else {
             memberIndex = index;
         }
     }
