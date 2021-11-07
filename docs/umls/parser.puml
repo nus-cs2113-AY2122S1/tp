@@ -13,11 +13,6 @@ Parser ---> RemoveCommandParser
 Parser --> FindCommandParser
 Parser ---> SearchMapCommandParser
 Parser --> ListCommandParser
-<<<<<<< HEAD
-Parser ---> HelpCommandParser
-Parser --> ExitCommandParser
-=======
->>>>>>> 7a0bb6cd7df8bab61c29f7540bf9933ad09827c7
 
 AddCommandParser --> AddParseException
 RemoveCommandParser --> RemoveParseException
@@ -114,7 +109,7 @@ class SearchMapCommandParser {
     universitySelectedList: UniversityList, moduleSelectedList: ModuleList): SearchMapCommand
 }
 
-enum ListType {
+enum ListType <<enumeration>> {
 MASTER
 SELECTED
 }
