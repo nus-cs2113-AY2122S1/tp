@@ -3,6 +3,11 @@ package seedu.traveller.worldmap;
 import java.util.List;
 
 //@@author jach23
+/**
+ * This class is mainly used by the WorldMap class to store the path of the
+ * shortest time or cost, containing both starting and ending countries
+ * along with the shortest path.
+ */
 public class MinCalcResult {
     private final Country startCountry;
     private final Country endCountry;

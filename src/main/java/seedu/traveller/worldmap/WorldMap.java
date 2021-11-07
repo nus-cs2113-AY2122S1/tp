@@ -89,7 +89,7 @@ public class WorldMap {
     }
 
     /**
-     * This function is responsible for finding the shortest cost between two countries and returning the
+     * This function is responsible for finding the least cost between two countries and returning the
      * corresponding path.
      * @param sourceCountryName The starting country.
      * @param targetCountryName The destination country.

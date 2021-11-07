@@ -6,9 +6,19 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 //@@author jach23
+/**
+ * This class is the key logic of the World Map function by implementing
+ * Dijkstra's algorithm.
+ */
 public class Logic {
     private final double[][] adjMatrix = new double[10][10];
 
+    /**
+     * This function is responsible for implementing Dijkstra's algorithm and searching for the shortest paths from the
+     * given starting country to all other countries.
+     * @param src The starting country.
+     * @param graphList The set of distances and countries stored as vertex and edges respectively.
+     */
     public void computeSource(Country src, GraphList graphList) {
         ArrayList<Country> vertexArray = graphList.getVertexArray();
         for (Country v: vertexArray) {
@@ -39,6 +49,13 @@ public class Logic {
         }
     }
 
+    /**
+     * This function is responsible for finding the shortest path from the source to the target country, where the
+     * shortest path refers to the path of least time or smallest cost.
+     * @param sourceCountry The starting country.
+     * @param targetCountry The destination country.
+     * @return MinCalcResult which contains the source and destination countries along with the shortest path.
+     */
     public MinCalcResult getToGoal(Country sourceCountry, Country targetCountry) {
         List<Country> path = new ArrayList<>();
         List<Double> accumDist = new ArrayList<>();
