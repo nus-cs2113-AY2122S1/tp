@@ -1,13 +1,17 @@
 package seedu.duke;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.ForceCancelException;
 import seedu.duke.exceptions.SameNameException;
 import seedu.duke.expense.Expense;
+import seedu.duke.trip.FilterFinder;
 import seedu.duke.trip.Trip;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -32,6 +36,8 @@ class ExpenseTest {
         Storage.setScanner(new Scanner(System.in));
         exp = new Expense("600 food Albert, Betty, Chris /Dinner at fancy restaurant");
         trip.addExpense(exp);
+        exp = new Expense(amountSpent, description, personsList, category, date, payer, amountSplit);
+        System.setOut(System.out);
     }
 
     @Test
@@ -71,7 +77,7 @@ class ExpenseTest {
 
     @Test
     void testGetPersonsList() {
-        assertEquals("[Albert, Betty, Chris]",exp.getPersonsList().toString());
+        assertEquals("[Albert, Betty, Chris]", exp.getPersonsList().toString());
     }
 
     @Test
@@ -125,4 +131,51 @@ class ExpenseTest {
         assertEquals(300.33, testExpense.getAmountSplit().get("Don"));
         assertEquals(300.33, testExpense.getAmountSplit().get("Betty"));
     }
+
+    //@@author lixiyuan416
+    //Tests expense filtering methods
+    @Test
+    void findMatchingPersonExpenses_validName_printExpense() {
+        ByteArrayOutputStream bo = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bo));
+        trip.addExpense(exp);
+        String correctOutput = "1. \tDinner at fancy restaurant" + System.lineSeparator()
+                + "\tDate: 02 Dec 2020" + System.lineSeparator()
+                + "\tAmount Spent: USD $600.00" + System.lineSeparator()
+                + "\tPeople involved:" + System.lineSeparator()
+                + "\t\t1) Albert, USD $100.00" + System.lineSeparator()
+                + "\t\t2) Betty, USD $200.00" + System.lineSeparator()
+                + "\t\t3) Chris, USD $300.00" + System.lineSeparator()
+                + "\tPayer: Chris" + System.lineSeparator()
+                + "\tCategory: food";
+        FilterFinder.findMatchingPersonExpenses(trip.getListOfExpenses(), "Chris");
+        assertEquals(bo.toString().trim(), correctOutput);
+    }
+
+    @Test
+    void findMatchingPersonExpenses_invalidName_printNotFound() {
+        ByteArrayOutputStream bo = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bo));
+        FilterFinder.findMatchingPersonExpenses(trip.getListOfExpenses(), "Mr Muscle");
+
+        assertEquals(bo.toString().trim(), "No matching expenses found.");
+    }
+
+    @Test
+    void findMatchingDateExpensesReturnsEmpty() {
+        ByteArrayOutputStream bo = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(bo));
+        try {
+            FilterFinder.findMatchingDateExpenses(trip.getListOfExpenses(), "01-12-4000");
+        } catch (ForceCancelException e) {
+            e.printStackTrace();
+        }
+        assertEquals(bo.toString().trim(), "No matching expenses found.");
+    }
+
+    @AfterAll
+    static void restoreSystemOut() {
+        System.setOut(System.out);
+    }
+
 }
