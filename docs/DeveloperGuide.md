@@ -20,13 +20,12 @@
 * Inspiration for User Guide and Developer Guide: AddressBook (Level 3)
   * https://se-education.org/addressbook-level3/UserGuide.html
   * https://se-education.org/addressbook-level3/DeveloperGuide.html
-
+* The ParserUtil class under our logic component was inspired from AddressBook (Level 3)'s [ParserUtil class](https://github.com/se-edu/addressbook-level3/blob/ba53b8cea3aa025d17094dbd6c541b046a5f5d7a/src/main/java/seedu/address/logic/parser/ParserUtil.java). We followed the same naming style but use our own unique methods.
   
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
   original source as well}
 
 ## Design 
-
 ### Architecture
 ![Figure_Architecture_Diagram](images/ArchitectureDiagram.png)
 
@@ -74,6 +73,19 @@ Below is a partial class diagram that shows an overview of the `Data` component.
 ![Figure_DataComponent_Partial_Class_Diagram](images/DataPartialClassDiagram.png)
 
 The `Data` component
+
+###Logic Component (Parser and Commands)
+![Figure_ParserDiagram](images/ParserDiagram.png)
+Figure 3. Structure of the program's logic
+
+1. `BudgetTracker` uses `Parser` to parse user input into a `Command`.
+2. This results in the creation of an `XYZParser` (where 'XYZ' represents 'AddBudget', 'EditLoan', etc.) which in turn creates a `XYZCommand`.
+3. The `XYZCommand` being executed affects the `Data` component.
+4. Additionally, during execution of `XYZCommand`, `Ui` (not shown) will display helpful messages to the user.
+
+Given below is the Sequence Diagram for interactions with the Parser and Command components for the `parseCommand("add -b a/400")` call.
+![Figure_LogicSequenceDiagram](images/LogicSequenceDiagram.png)
+Figure 4. Sequence Diagram of program's logic with a `add -b a/400` call.
 
 ## Implementation
 
