@@ -3,6 +3,7 @@
 hide circle
 skinparam classAttributeIconSize 0
 skinparam groupInheritance 1
+skinparam maxLength 128
 
 package "ui" <<Frame>> #DDDDDD {
     abstract class Ui {
