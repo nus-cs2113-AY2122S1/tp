@@ -30,9 +30,9 @@ public class SetCommandParser {
             String[] params = userResponse.split(" ");
             String moduleCode = params[0].toUpperCase();
             String grade = params[1].toUpperCase();
-            if (!isValidGrade(grade)) {
-                throw new ParseException("The grade you entered is invalid.");
-            }
+//            if (!isValidGrade(grade)) {
+//                throw new ParseException("The grade you entered is invalid.");
+//            }
             return new SetGradeCommand(moduleCode, grade);
         } catch (IndexOutOfBoundsException e) {
             throw new ParseException(Message.ERROR_INVALID_COMMAND);

@@ -76,7 +76,7 @@ public class AddCommandParser {
         String meetingUrl = DEFAULT_URL;
 
         if (flagMap.containsKey(CommandFlag.LINK)) {
-            meetingUrl = flagMap.get(CommandFlag.LINK);
+            meetingUrl = flagMap.get(CommandFlag.LINK).strip();
         }
 
         if (LocalTime.parse(startTime).isAfter(LocalTime.parse(endTime))) {
@@ -104,7 +104,7 @@ public class AddCommandParser {
             priority = parsePriority(flagMap.get(CommandFlag.PRIORITY));
         }
         if (flagMap.containsKey(CommandFlag.INFORMATION)) {
-            information = flagMap.get(CommandFlag.INFORMATION);
+            information = flagMap.get(CommandFlag.INFORMATION).strip();
         }
 
         return new AddTaskCommand(title, dayOfTheWeek, priority, information);
@@ -115,7 +115,7 @@ public class AddCommandParser {
         HashMap<String, String> flagMap = ParserUtil.getFlagMap(userResponse, CommandFlag.GRADE);
 
         String[] params = userResponse.split(CommandFlag.MODULE);
-        String moduleCode = params[0];
+        String moduleCode = params[0].strip();
         String moduleGrade = DEFAULT_GRADE;
 
         if (flagMap.containsKey(CommandFlag.GRADE)) {

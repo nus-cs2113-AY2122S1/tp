@@ -28,11 +28,12 @@ public class ParserUtil {
         return index - 1;
     }
 
-    public static String parseGrade(String grade) throws ParseException {
-        if (!isValid(grade.toUpperCase())) {
+    public static String parseGrade(String param) throws ParseException {
+        String grade = param.strip().toUpperCase();
+        if (!isValid(grade)) {
             throw new ParseException("Invalid grade input.");
         }
-        return grade.toUpperCase();
+        return grade;
     }
 
     //@@author Roycius
