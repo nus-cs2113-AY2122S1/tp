@@ -9,7 +9,6 @@ import seplanner.storage.Storage;
 import seplanner.universities.University;
 import seplanner.universities.UniversityList;
 
-import java.awt.image.MemoryImageSource;
 import java.io.IOException;
 import java.util.ArrayList;
 

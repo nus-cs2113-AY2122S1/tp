@@ -76,11 +76,10 @@ public class SelectedUniversityStorage extends UserStorage {
                     universityMasterList);
         }
         updateFile(universitySelectedList);
-        if (!isMappingValid) {
-            System.out.println(UiStorage.getInvalidMappingMessage());
-        }
         if (!isUniversityValid) {
             System.out.println(UiStorage.getInvalidUniversityMessage());
+        } else if (!isMappingValid) {
+            System.out.println(UiStorage.getInvalidMappingMessage());
         }
         logger.log(Level.INFO, "Module mappings stored in the file are successfully loaded");
         return universitySelectedList;
@@ -110,7 +109,8 @@ public class SelectedUniversityStorage extends UserStorage {
                 parseDouble(attributes[5]), 0);
         ModuleMapping newMapping = new ModuleMapping(local, mapped);
         University currentUni = universityMasterList.getUniversity(universityName);
-        if ((local.getIndex() != -1) && currentUni.isExistMapping(newMapping)
+        if ((local.getIndex() != -1) && (currentUni != null)
+                && currentUni.isExistMapping(newMapping)
                 && !(isMappingExist(moduleMappings, newMapping))) {
             moduleMappings.add(newMapping);
         } else {
