@@ -29,6 +29,8 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2021-09-25&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=hozhenhong99&tabRepo=AY2122S1-CS2113T-F12-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
+<div style="page-break-after: always;"></div>
+
 * **Project management**:
   * Managed releases `v1.0` - `v2.1` (3 releases) on GitHub
 
