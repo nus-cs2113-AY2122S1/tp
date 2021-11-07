@@ -21,6 +21,7 @@ activate ":Parser"
 ":Parser" --> ":Parser"
 deactivate ":Parser"
 
+create ":FindIngredientsCommand"
 ":Parser" -> ":FindIngredientsCommand": FindIngredientsCommand(ArrayList<String> ingredients)
 activate ":FindIngredientsCommand"
 
