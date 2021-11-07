@@ -5,6 +5,10 @@ package seedu.command;
 import seedu.ui.TextUi;
 
 public class ListContactsCommand extends Command {
+    /**
+     * Prints all the contacts stored with the respective index
+     * and name.
+     */
     public void execute() {
         int listSize = contactList.getListSize();
         if (listSize == 0) {
