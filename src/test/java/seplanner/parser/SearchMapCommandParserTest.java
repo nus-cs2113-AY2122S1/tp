@@ -12,6 +12,7 @@ import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//@@author titustortoiseturtle1999
 public class SearchMapCommandParserTest {
 
     private static Storage storage = new Storage();
@@ -31,7 +32,7 @@ public class SearchMapCommandParserTest {
     }
 
     @Test
-    public void testCorrectUniversityName_success() throws IOException {
+    public void test_CorrectUniversityName_success() throws IOException {
         try {
             SearchMapCommand command = new SearchMapCommandParser().parse("Boston University",
                     universityMasterList, universitySelectedList, moduleSelectedList);
