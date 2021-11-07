@@ -215,8 +215,12 @@ public class AddCommand extends Command {
     public void checkModuleExist(Module mod) throws ModuleExistException {
         for (Module module : timetable.getModules()) {
             String moduleCode = module.getModuleCode();
-            if (moduleCode.equals(mod.getModuleCode())) {
-                throw new ModuleExistException("Module currently already exist in your timetable");
+            try {
+                if (moduleCode.equals(mod.getModuleCode())) {
+                    throw new ModuleExistException("Module currently already exist in your timetable");
+                }
+            } catch (NullPointerException e) {
+                throw new ModuleExistException("Module does not exist");
             }
         }
     }

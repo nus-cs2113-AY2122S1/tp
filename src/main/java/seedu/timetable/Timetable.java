@@ -449,4 +449,14 @@ public class Timetable implements Comparable<Timetable> {
     public void addToEvents(TimetableUserItem timetableUserItem) {
         events.add(timetableUserItem);
     }
+
+    public void removeFromSchedules(String title) {
+        deleteItemFromSchedule(title, monday);
+        deleteItemFromSchedule(title, tuesday);
+        deleteItemFromSchedule(title, wednesday);
+        deleteItemFromSchedule(title, thursday);
+        deleteItemFromSchedule(title, friday);
+        deleteItemFromSchedule(title, saturday);
+        deleteItemFromSchedule(title, sunday);
+    }
 }

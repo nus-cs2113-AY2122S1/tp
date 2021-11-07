@@ -1,6 +1,7 @@
 package seedu.ui;
 
 import seedu.exceptions.IntegerException;
+import seedu.exceptions.UniModsException;
 import seedu.module.Lesson;
 import seedu.module.Module;
 import seedu.timetable.Timetable;
@@ -53,7 +54,7 @@ public class AddUI {
      * @param module    the chosen module by the user
      */
     public void printLessonDetails(ArrayList<Lesson> lec, ArrayList<Lesson> tt, ArrayList<Lesson> lab,
-                                   Timetable timetable, Module module) {
+                                   Timetable timetable, Module module) throws UniModsException {
         ArrayList<String> lectureLessons;
         ArrayList<String> tutorialLessons;
         ArrayList<String> labLessons;
@@ -70,7 +71,13 @@ public class AddUI {
             TextUi.printLessonAdded();
         } catch (IntegerException e) {
             e.printMessage();
+            timetable.removeFromSchedules(module.getModuleCode());
+            timetable.deleteModuleFromList(module.getModuleCode());
             logger.log(Level.WARNING, "Invalid Lesson Selection, Add Module aborted");
+        } finally {
+            if (!isArrayExist(lec, ZERO) && !isArrayExist(tt, ZERO) && !isArrayExist(lab, ZERO)) {
+                timetable.addModuleToList(module);
+            }
         }
     }
 
@@ -369,7 +376,7 @@ public class AddUI {
         } catch (NumberFormatException e) {
             throw new IntegerException("Input is not an integer, try adding the module again");
         } catch (IndexOutOfBoundsException e) {
-            throw new IntegerException("Input is out of range, try adding the module");
+            throw new IntegerException("Input is out of range, try adding the module again");
         }
     }
 }
