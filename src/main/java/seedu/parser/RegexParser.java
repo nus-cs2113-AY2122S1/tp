@@ -72,8 +72,22 @@ public abstract class RegexParser {
         }
     }
 
+    /**
+     * Throws an exception if the email id does not comply with the regex.
+     * If the email passes the regex check nothing is returned and program
+     * flow continues.
+     * The function only allows emails in lowercase and uppercase letters,
+     * numbers, with symbols including hyphens, underscores, "@" and dot.
+     * The symbols cannot be placed at the start or end of the
+     * email or be consecutive. Also, only one "@" symbol allowed.
+     *
+     * @param detailToParse email id to be checked
+     * @throws InvalidEmailException If email does not match regex
+     */
     protected void checkEmailRegex(String detailToParse) throws InvalidEmailException {
-        //allow lowercase email ids
+        // Allows lowercase, uppercase, numbers, hyphen, underscore, "@" and dot.
+        // Blocks consecutive symbols or if placed at start or end
+        // Only one "@" symbol allowed
         String emailRegex = "^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|"
                 + "(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|"
                 + "(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
