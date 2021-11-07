@@ -14,6 +14,8 @@ public class FindAppointmentCommand extends Command {
     protected FilterType filterType;
     protected int dateTimeCode;
 
+    private static final String ERROR_PERSON_TYPE_INVALID = "Person type specified is not valid.";
+
     public FindAppointmentCommand(int personId, PersonType personType, FilterType filterType, int dateTimeCode) {
         this.personId = personId;
         this.personType = personType;
@@ -23,7 +25,7 @@ public class FindAppointmentCommand extends Command {
 
     @Override
     public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
-        String output = "";
+        String output;
         switch (personType) {
         case PATIENT:
             output = scheduler.listPatientAppointments(personId, filterType, dateTimeCode);
@@ -32,6 +34,7 @@ public class FindAppointmentCommand extends Command {
             output = scheduler.listMedicalStaffAppointments(personId, filterType, dateTimeCode);
             break;
         default:
+            throw new MedBotException(ERROR_PERSON_TYPE_INVALID);
         }
         if (output.isEmpty()) {
             output = SchedulerUi.getNoAppointmentsFoundMessage();

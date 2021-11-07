@@ -57,7 +57,6 @@ public abstract class ParserUtils {
 
     private static final String REGEX_VERTICAL_LINE = "\\|";
     private static final String REGEX_INPUT_PARAMETER = "[a-zA-Z]/";
-    private static final String REGEX_INPUT_PARAMETER_FILTER_COMMAND = "[abdps]/";
     private static final String REGEX_EMAIL = "(([a-zA-Z0-9][\\w-.]*[a-zA-Z0-9])|[a-zA-Z0-9])@([\\w]+\\.)+[\\w]+";
     private static final String REGEX_IC = "[STFGM][0-9]{7}[A-Z]";
     private static final String REGEX_PHONE_NUMBER = "[\\d]{8}";
@@ -147,7 +146,7 @@ public abstract class ParserUtils {
     }
 
     static List<String> getSpecifiers(String userInput) throws MedBotParserException {
-        Pattern pattern = Pattern.compile(REGEX_INPUT_PARAMETER_FILTER_COMMAND);
+        Pattern pattern = Pattern.compile(REGEX_INPUT_PARAMETER);
         Matcher matcher = pattern.matcher(userInput);
         List<String> specifiers = new ArrayList<>();
 
