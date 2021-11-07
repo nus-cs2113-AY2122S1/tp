@@ -21,7 +21,7 @@ public class EventDecoder {
         String eventTitle = eventDetails[INDEX_OF_TITLE];
         String eventStatus = eventDetails[INDEX_OF_STATUS];
         String eventDescription = eventDetails[INDEX_OF_DESCRIPTION];
-        LocalDateTime eventDateTime = Parser.convertDateTime(eventDetails[INDEX_OF_DATETIME]);
+        LocalDateTime eventDateTime = Parser.convertDateTimeForLoading(eventDetails[INDEX_OF_DATETIME]);
         String eventVenue = eventDetails[INDEX_OF_VENUE];
         double eventBudget = Double.parseDouble(eventDetails[INDEX_OF_BUDGET]);
 
