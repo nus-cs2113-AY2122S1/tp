@@ -16,7 +16,7 @@ its developers (😀 us!) at our [Main Page](README.md).
 
 * [1. Quick Start](#1-quick-start)
   * [1.1 Start-Up Interface](#11-start-up-interface)
-  * [1. 2 Main Interface](#12-main-interface)
+  * [1.2 Main Interface](#12-main-interface)
 * [2. Using this Guide](#2-using-this-guide)
   * [2.1 Terminology](#21-terminology)
   * [2.2 Icons](#22-icons)
@@ -543,15 +543,18 @@ ________________________________________________________________________________
 
 Whenever you run the program, the program will **automatically** look for any
 saved data in the relative storage path, `data/habits.txt`.
-* If the storage file is found, `File exists` will be printed.
+* If the storage file is found, data in the storage file will be loaded into the program.
 * If the storage file is not found, the program will create
   one for you at the relative storage path, `data/habits.txt`.
 
+> 📃 The storage file will be set to read-only. This is such that users do not accidentally edit the
+data stored in the storage file and corrupt it.
+
 **Saving data:**
 
-* Everytime you make changes to any of your goals and habits, the changes
+* Everytime you make changes to any of your data, the changes
   are **immediately** reflected in the storage file. This is to ensure that in the
-  event you closed the program without using the command `bye`, we can ensure that
+  event you closed the program without using the command `exit`, we can ensure that
   **most of your data are saved**.
 * Before you exit the program, the goals you set and the habits you have added
   are **automatically** saved in a text file at the relative storage path, `data/habits.txt`.
