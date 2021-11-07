@@ -34,7 +34,7 @@ each other. Further explanation will be given in depth in the **Design** section
 ### Main components of the architecture
 1. **Main** consists of the Duke class, which is responsible for initializing the various components of the LOTS program
    at startup, and the handling of the interactions between classes.
-2. **UI** handles the UI portion of the LOTS program.
+2. **UI** handles any interactions between the user and LOTS program.
 3. **Logic** deals with the parsing and execution of user inputs.
 4. **Manager** deals with the various types of data that is stored within the LOTS program.
 5. **Storage** deals with the reading and writing of data onto the hard disk.
