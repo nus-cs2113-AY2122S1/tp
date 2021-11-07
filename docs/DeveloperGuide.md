@@ -734,6 +734,7 @@ You can type `list` to ensure that all the valid commands have indeed been added
 ```
 
 **Case C**: invalid index
+
 1. Select a very large index that does not correspond to any task in your list. e.g. '1337'.
 2. Type `list`. 
 3. Type `delete 1337`.
@@ -747,3 +748,33 @@ You can type `list` to ensure that all the valid commands have indeed been added
 ```
 
 >💡 **Note**: This is a non-exhaustive list of test cases. refer to the user guide on the `delete` command usage to perform more exploratory testing.
+
+
+### Saving files
+
+As of currently, it is out of scope for our program to handle corrupted data files. As such, we have put a disclaimer in the user guide that the team is not responsible for any loss of data or undefined behaviour if users directly modify the task save file.
+
+**Case A**: No permission to write to task save file
+1. Modify `date\tasks.dat` to read only
+2. Try to create a Task e.g. Type `Todo blah`
+   **Expected Output**:
+```
+-------------------------------------------------------------------------
+[user]: todo blah
+|| Task created!
+[2021-11-08 06:04:47] [seedu.tp.storage.DataManager]
+SEVERE: No permission to write to save file. Ensure the program has write access to C:\Users\seand\Documents\tp\data\tasks.dat
+and restart the program to allow created tasks to be saved! 
+|| [T] blah <medium> {none} (doOn: 08-11-2021 07:00)
+-------------------------------------------------------------------------
+```
+The todo will be shown in the task list but will not be reflected in the data folder.
+
+**Case A**: File exists with save folder name
+On program run:
+   **Expected Output**:
+```
+[2021-11-08 06:03:21] [seedu.tp.storage.FileCreator]
+SEVERE: File 'data' already exists in project folder. Please remove it and restart the application to be able to save tasks!
+```
+
