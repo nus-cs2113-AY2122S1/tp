@@ -10,101 +10,66 @@ Code contributed: more than 2300 lines of
 code. [RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=deonchung&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25)
 ### Features
 
-#### v1.0:
+v1.0:
 
-* Implemented `addstock` command.
-    * Functionality: Users are able to add stock information with one command.
-    * Justification: User will be able to add medication's price, quantity, maximum quantity, 
-  description and expiry date using a single command.
-    * Pull request: [[#23](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/23)]
+* Implemented `addstock` command. [[#23](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/23)]
 
-#### v2.0:
+v2.0:
 
-* Implemented `addprescription` command.
-    * Functionality: Users are able to add prescription information with one command.
-    * Justification: Users will be able to track prescription of customers and also deducting the stock when prescribing medication.
-    * Pull request: [[#74](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/74)]
+* Implemented `addprescription` command. [[#74](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/74)]
+* Implemented `deleteprescription` command. [[#147](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/147)]
+* Implemented `deleteorder` command. [[#119](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/119)]
 
-* Implemented `deleteprescription` command.
-    * Functionality: Users are able to delete prescription information with one command.
-    * Justification: Users will be able to delete prescription from prescription list and 
-  also deducting the adding the stock quantity back to stock with a single command.
-    * Pull request: [[#147](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/147)]
+v2.1:
 
-* Implemented `deleteorder` command.
-    * Functionality: Users are able to delete order information with one command.
-    * Justification: Users will be able to delete order from the order list.
-    * Pull request: [[#119](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/119)]
-
-#### v2.1:
-
-* Fix bug in `addstock` where maximum quantity can be exceeded if the same medication with the same expiry date is added.
-  * Pull request: [[#255](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/255)]
-* Fix bug in `addprescription` where expired medication can be prescribed. 
-  * Pull request: [[#295](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/295)]
-* Fix bug in `addprescription` where the wrong error message is shown.
-  * Pull request: [[#306](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/306)]
+* Fix bug in `addstock` where maximum quantity can be exceeded if the same medication with the same expiry date is added. [[#255](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/255)]
+* Fix bug in `addprescription` where expired medication can be prescribed. [[#295](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/295)]
+* Fix bug in `addprescription` where the wrong error message is shown. [[#306](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/306)]
 * Demo video for prescription features.
     
 ### Enhancements to Existing Features
 
-* Implemented `Prescription Validator` method.
+* Implemented `Prescription Validator` method. [[#86](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/86)]
     * Functionality: Checks if prescription ID,customer ID, Staff Name,prescription date and prescription column/alias is valid.
     * Justification: This method can be called for any of the prescription command that need to check for any of the inputs as stated above.
-    * Pull request: [[#86](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/86)]
 
-* Implemented `Order Validator` method.
+
+* Implemented `Order Validator` method. [[#119](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/119)]
     * Functionality: Checks if order ID, order status,order date and order column/alias is valid.
     * Justification: This method can be called for any of the order command that need to check for any of the inputs as stated above.
-    * Pull request: [[#119](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/119)]
 
-* Implemented `getNotExpiredStockQuantity` method in `PrescriptionManager`
+
+* Implemented `getNotExpiredStockQuantity` method in `PrescriptionManager`. [[#295](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/295)]
   * Functionality: Retrieves the total stock quantity for medicine with same name that has not expired.
   * Justification: This method can be called for any of the prescription command that need to retrieve quantity that has not expired.
-  * Pull request: [[#295](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/295)]
 
 * Included JUnit tests for:
-    * `Prescription Validator` class
-        * Pull request: [[#89](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/89)]
-    * `Order Validator` class
-        * Pull request: [[#140](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/140)]
-    * `AddStock`, `AddPrescription`, `DeletePrescription` and `DeleteStock`
-      * Pull request: [[#306](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/306)]
-* Added functionality for `addstock` command to limit number of medication for stock.
+    * `Prescription Validator` class. [[#89](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/89)]
+    * `Order Validator` class. [[#140](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/140)]
+    * `AddStock`, `AddPrescription`, `DeletePrescription` and `DeleteStock`. [[#306](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/306)]
+* Added functionality for `addstock` command to limit number of medication for stock. [[#42](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/42)]
     * Functionality: User will not be able to input quantity above the maximum quantity. 
     * Justification: Prevents user from adding too much medication to the stock.
-    * Pull request: [[#42](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/42)]
+
 
 ### Documentation
 
 * [User Guide](../UserGuide.md)
-    * Added documentation for `addstock` commands
-      . [[#96](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/96)]
-    * Added documentation for `addprescription`, `deleteprescription` and `deleteorder` commands
-      . [[#171](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/171)]
+    * Added documentation for `addstock` commands. [[#96](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/96)]
+    * Added documentation for `addprescription`, `deleteprescription` and `deleteorder` commands. [[#171](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/171)]
 
 * [Developer Guide](../DeveloperGuide.md) 
-  * Acknowledgement 
-    * [[#194](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/194)]
-  * Setting up environment
-    * Added explanation on how to set up and start the program.
-             [[#194](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/194)]
-  * Implementation
-    * `addstock`, `addprescription` ,`deleteprescription` and `UpdateOrderCommand` sequence diagrams and detailed explanation.
-             [[#171](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/171)]
-  * User stories
-    * Added all the user stories.
-             [[#255](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/255)]
-  * Instruction for manual testing
-    * Added details and explanation for manual testing.
-             [[#258](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/258)]
+  * Acknowledgement. [[#194](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/194)]
+  * Setting up environment. [[#194](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/194)]
+  * Section on `addstock`, `addprescription` ,`deleteprescription` and `UpdateOrderCommand` and their respective sequence diagrams. [[#171](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/171)]
+  * User stories. [[#255](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/255)]
+  * Instruction for manual testing. [[#258](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/258)]
 
 ### Team-Based
 
-* Attended weekly team meetings.
-* Release management.
+* Attended all weekly team meetings.
 * Documentation of acknowledgement, setting up environment, user stories and instruction for manual testing in DG.
-* Pull Requests reviewed with non-trivial review comments. [[#298](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/298)]
+* Pull Requests reviewed with non-trivial review comments [[#298](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/298)].
 
 ### Community
 
