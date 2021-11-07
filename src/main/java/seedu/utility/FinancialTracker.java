@@ -3,27 +3,29 @@ package seedu.utility;
 import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.Income;
-import seedu.commands.currency.CurrencyType;
 import seedu.exceptions.ExpenseEntryNotFoundException;
 import seedu.exceptions.ExpenseOverflowException;
 import seedu.exceptions.IncomeEntryNotFoundException;
 import seedu.exceptions.IncomeOverflowException;
-import seedu.utility.datetools.DateOperator;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
+import static seedu.utility.tools.DateOperator.entryDateInRange;
+import static seedu.utility.tools.DateOperator.sameEntryYear;
+import static seedu.utility.tools.FinancialCalculator.getSumOfEntries;
+import static seedu.utility.tools.FinancialCalculator.sortEntriesByMonth;
 
 
 /**
  * A Financial tracker that contains 2 separate list of income and expense entries and a net balance.
  */
 public class FinancialTracker {
-    private static final double TOTAL_EXPENSE_LIMIT = 100000000000.00;
-    private static final double TOTAL_INCOME_LIMIT = 100000000000.00;
-    private ArrayList<Expense> expenses;
-    private ArrayList<Income> incomes;
+    public static final double TOTAL_ENTRIES_LIMIT = 100000000000.00;
+    private final ArrayList<Expense> expenses;
+    private final ArrayList<Income> incomes;
 
     /**
      * Constructor for financial tracker initialises two empty ArrayList, one for expenses and one for incomes.
@@ -60,7 +62,7 @@ public class FinancialTracker {
     }
 
     private boolean isOverflowedExpense(Expense expense) {
-        return expense.getValue() + getTotalExpense() > TOTAL_EXPENSE_LIMIT;
+        return expense.getValue() + getTotalExpense() > TOTAL_ENTRIES_LIMIT;
     }
 
     /**
@@ -81,7 +83,7 @@ public class FinancialTracker {
     }
 
     private boolean isOverflowedIncome(Income income) {
-        return income.getValue() + getTotalIncome() > TOTAL_INCOME_LIMIT;
+        return income.getValue() + getTotalIncome() > TOTAL_ENTRIES_LIMIT;
     }
 
     private int indexOffset(int index) {
@@ -98,6 +100,7 @@ public class FinancialTracker {
     public Expense removeExpense(int expenseIndex) throws ExpenseEntryNotFoundException {
         try {
             Expense removedExpense =  expenses.remove(indexOffset(expenseIndex));
+            assert expenses.stream().noneMatch(expense -> expense == removedExpense);
             return removedExpense;
         } catch (IndexOutOfBoundsException e) {
             throw new ExpenseEntryNotFoundException(Messages.UNABLE_TO_DELETE_MESSAGE);
@@ -114,6 +117,7 @@ public class FinancialTracker {
     public Income removeIncome(int incomeIndex) throws IncomeEntryNotFoundException {
         try {
             Income removedIncome = incomes.remove(indexOffset(incomeIndex));
+            assert incomes.stream().noneMatch(expense -> expense == removedIncome);
             return removedIncome;
         } catch (IndexOutOfBoundsException e) {
             throw new IncomeEntryNotFoundException(Messages.UNABLE_TO_DELETE_MESSAGE);
@@ -164,17 +168,10 @@ public class FinancialTracker {
             totalExpense += expense.getValue();
         }
         assert totalExpense >= 0;
+        assert totalExpense <= TOTAL_ENTRIES_LIMIT;
         return totalExpense;
     }
-
-    private double getTotalExpense(List<Expense> accumulatedExpense) {
-        double totalExpense = 0;
-        for (Expense expense: accumulatedExpense) {
-            totalExpense += expense.getValue();
-        }
-        return totalExpense;
-    }
-
+    
     /**
      * Returns the total income of all incomes in the financial tracker.
      *
@@ -187,14 +184,7 @@ public class FinancialTracker {
             totalIncome += income.getValue();
         }
         assert totalIncome >= 0;
-        return totalIncome;
-    }
-
-    private double getTotalIncome(List<Income> accumulatedIncome) {
-        double totalIncome = 0;
-        for (Income income: accumulatedIncome) {
-            totalIncome += income.getValue();
-        }
+        assert totalIncome <= TOTAL_ENTRIES_LIMIT;
         return totalIncome;
     }
 
@@ -206,19 +196,12 @@ public class FinancialTracker {
      * @return Total expense between two given dates.
      */
     public double getExpenseBetween(LocalDate startDate, LocalDate endDate) {
-        List<Expense> accumulatedExpense = expenses.stream()
-                .filter(DateOperator.entryDateInRange(startDate, endDate))
-                .collect(Collectors.toList());
-        return getTotalExpense(accumulatedExpense);
+        List<Entry> accumulatedExpense = expenses.stream()
+                .filter(entryDateInRange(startDate, endDate))
+                .collect(toList());
+        return getSumOfEntries(accumulatedExpense);
     }
     
-    private double getMonthlyExpense(int inputMonth, List<Expense> yearlyExpense) {
-        List<Expense> monthlyAccumulatedExpense = yearlyExpense.stream()
-                .filter(DateOperator.sameEntryMonth(inputMonth))
-                .collect(Collectors.toList());
-        return getTotalExpense(monthlyAccumulatedExpense);
-    }
-
     /**
      * Returns an ArrayList of size 12, where each element stores the total expense of that month in the given year.
      *
@@ -226,14 +209,10 @@ public class FinancialTracker {
      * @return ArrayList of elements representing total expense in each month.
      */
     public ArrayList<Double> getMonthlyExpenseBreakdown(int inputYear) {
-        List<Expense> yearlyAccumulatedExpense = expenses.stream()
-                .filter(DateOperator.sameEntryYear(inputYear))
-                .collect(Collectors.toList());
-        ArrayList<Double> monthlyBreakdown = new ArrayList<>();
-        for (int i = 1; i <= 12; i++) {
-            monthlyBreakdown.add(getMonthlyExpense(i,yearlyAccumulatedExpense));
-        }
-        return monthlyBreakdown;
+        List<Entry> yearlyAccumulatedExpense = expenses.stream()
+                .filter(sameEntryYear(inputYear))
+                .collect(toList());
+        return sortEntriesByMonth(yearlyAccumulatedExpense);
     }
 
     /**
@@ -244,17 +223,10 @@ public class FinancialTracker {
      * @return Total income between two given dates.
      */
     public double getIncomeBetween(LocalDate startDate, LocalDate endDate) {
-        List<Income> accumulatedIncome = incomes.stream()
-                .filter(DateOperator.entryDateInRange(startDate, endDate))
-                .collect(Collectors.toList());
-        return getTotalIncome(accumulatedIncome);
-    }
-    
-    private double getMonthlyIncome(int inputMonth, List<Income> yearlyIncome) {
-        List<Income> monthlyAccumulatedIncome = yearlyIncome.stream()
-                .filter(DateOperator.sameEntryMonth(inputMonth))
-                .collect(Collectors.toList());
-        return getTotalIncome(monthlyAccumulatedIncome);
+        List<Entry> accumulatedIncome = incomes.stream()
+                .filter(entryDateInRange(startDate, endDate))
+                .collect(toList());
+        return getSumOfEntries(accumulatedIncome);
     }
 
     /**
@@ -264,14 +236,10 @@ public class FinancialTracker {
      * @return ArrayList of elements representing total income in each month.
      */
     public ArrayList<Double> getMonthlyIncomeBreakdown(int inputYear) {
-        List<Income> yearlyAccumulatedIncome = incomes.stream()
-                .filter(DateOperator.sameEntryYear(inputYear))
-                .collect(Collectors.toList());
-        ArrayList<Double> monthlyBreakdown = new ArrayList<>();
-        for (int i = 1; i <= 12; i++) {
-            monthlyBreakdown.add(getMonthlyIncome(i, yearlyAccumulatedIncome));
-        }
-        return monthlyBreakdown;
+        List<Entry> yearlyAccumulatedIncome = incomes.stream()
+                .filter(sameEntryYear(inputYear))
+                .collect(toList());
+        return sortEntriesByMonth(yearlyAccumulatedIncome);
     }
 
     /**
