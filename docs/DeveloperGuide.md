@@ -16,7 +16,7 @@
 * [Glossary](#glossory)
 * [Instructions for manual testing](#Instructions-for-manual-testing)
 
-## Acknowledgements
+## <a id="acknowledgements"></a> Acknowledgements
 * Inspiration for User Guide and Developer Guide: AddressBook (Level 3)
   * https://se-education.org/addressbook-level3/UserGuide.html
   * https://se-education.org/addressbook-level3/DeveloperGuide.html
@@ -25,7 +25,9 @@
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
   original source as well}
 
-## Design 
+## <a id="getting-started"></a> Getting started
+
+## <a id="design"></a> Design 
 ### Architecture
 ![Figure_Architecture_Diagram](images/ArchitectureDiagram.png)
 
@@ -57,7 +59,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 ![Figure_Architecture_Sequence_Diagram](images/ArchitectureSequenceDiagram.png)
 
-### UI Component
+### <a id="ui-component"></a> UI Component
 **API**: [`ui.java`](https://github.com/AY2122S1-CS2113T-F11-2/tp/tree/master/src/main/java/seedu/budgettracker/ui)
 
 ![Figure_UiComponent_Component_Diagram](images/UiComponent.png)
@@ -67,14 +69,14 @@ The `Ui` component:
 - Prints welcome screen, database information and messages prompting the user for input.
 - Other components call methods in Ui class to print corresponding output on the terminal.
 
-### Data Component
+### <a id=""></a> Data Component
 Below is a partial class diagram that shows an overview of the `Data` component.
 
 ![Figure_DataComponent_Partial_Class_Diagram](images/DataPartialClassDiagram.png)
 
 The `Data` component
 
-###Logic Component (Parser and Commands)
+### <a id=""></a> Logic Component (Parser and Commands)
 ![Figure_ParserDiagram](images/ParserDiagram.png)
 Figure 3. Structure of the program's logic
 
@@ -87,9 +89,9 @@ Given below is the Sequence Diagram for interactions with the Parser and Command
 ![Figure_LogicSequenceDiagram](images/LogicSequenceDiagram.png)
 Figure 4. Sequence Diagram of program's logic with a `add -b a/400` call.
 
-## Implementation
+## <a id="implementation"></a> Implementation
 
-### Delete - Basic Command Logic
+### <a id=""></a> Delete - Basic Command Logic
 
 The delete feature collaborates with other classes like Parser, RecordList, etc. Basically it contains three usages which are deletion of Budget, Expenditure(s), and Loan(s).
 
@@ -129,7 +131,7 @@ Given below is an example usage scenario and how the delete feature behaves at e
   ![Figure Delete_Execute](images/DeleteMultipleExpenditureCommand-Sequence_Diagram.png)
 
 
-### Edit feature
+### <a id=""></a> Edit feature
 
 The edit mechanism is facilitated by AllRecordList which extends from RecordList. It implements the following operations:
 * ```AllRecordList#editBudget()``` — Edits a budget to the record list.
@@ -151,7 +153,7 @@ Given below is an example usage scenario and how the ```edit``` mechanism behave
 <br/> **Step 3**. The user now realises that there was a mistake in the record added, and decides to edit the record by executing the ```edit``` command. The edit command will call ```AllRecordList#edit…``` based on the record type.
 
 
-### Listing
+### <a id=""></a> Listing
 
 The list feature works with Parser, Recordlist and TextUi, and allows users to see the listing of the budget and expenditures in either a specific month or every month.
 
@@ -170,7 +172,7 @@ Given below is an example usage scenario and how the list feature behaves at eac
 <br/> **Step 5**. The Parser starts to parse the command, it extracts month 5. As this is a specific month to be listed, the Parser class calls ListRecordsCommand to work. By finding May, the expenditures list and budget of May are successfully found and prints out a showRecordsListView from TextUi class.
 
 
-### Storage 
+### <a id=""></a> Storage 
 
 The storage stores the exact add command of budget and expenditures into the text file containing 
 in the current ArrayList. The reason it is implemented in this manner is that we could reuse
@@ -182,12 +184,12 @@ from the ArrayList to ensure that data is saved at every step.
 The yearly Records is stored in the form of <year>.txt. Each year contains all the monthly budget as
 well as all the expenditure tied to that month.
 
-## List of Commands
+## <a id=""></a> List of Commands
 
 
-## Appendix A: Product scope
+## <a id=""></a> Appendix A: Product scope
 
-### Target user profile
+### <a id=""></a> Target user profile
 
 - has a need to manage a significant number of expenditures
 - prefer desktop apps over other types
@@ -195,12 +197,12 @@ well as all the expenditure tied to that month.
 - prefers typing to mouse interactions
 - is reasonably comfortable using CLI apps
 
-### Value proposition
+### <a id=""></a> Value proposition
 
 This application allows users to record and track expenses more conveniently,
 and thereby encourages them to have greater control over their finances.
 
-## Appendix B: User Stories
+## <a id=""></a> Appendix B: User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
@@ -219,16 +221,16 @@ and thereby encourages them to have greater control over their finances.
 |v2.0|user|categorize my spendings|see what I spend most money on|
 |v2.0|user|analyze my spendings with a chart|get my spendings components in a more direct and easier way|
 
-## Appendix C: Non-Functional Requirements
+## <a id=""></a> Appendix C: Non-Functional Requirements
 
 **1**. Should work on any mainstream OS as long as it has Java 11 or above installed.
 <br/> **2**. 
 {Give non-functional requirements}
 
-## Appendix D: Glossary
+## <a id=""></a> Appendix D: Glossary
 
 * *Mainstream OS*: Windows, Linux, Unix, OS-X
 
-## Appendix E: Instructions for manual testing
+## <a id=""></a> Appendix E: Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
