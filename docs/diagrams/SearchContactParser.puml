@@ -1,0 +1,37 @@
+@startuml
+hide footbox
+'https://plantuml.com/sequence-diagram
+mainframe sd Detailed Search Query Parsing
+->":SearchContactParser":parseSearchQuery(searchInput:String)
+activate ":SearchContactParser"
+":SearchContactParser"->":SearchContactParser": searchInput.split(\n\tSPACE:String, \n\tNUMBER_OF_DETAILS:int\n)
+activate ":SearchContactParser"
+":SearchContactParser"-->":SearchContactParser": destructuredInputs:String[]
+deactivate ":SearchContactParser"
+
+opt#gold #lightgreen searchInput begins with '-'
+<--":SearchContactParser":destructuredInputs[NUMBER_OF_DETAILS - 1]:String
+end
+
+<--":SearchContactParser":searchInput:String
+deactivate ":SearchContactParser"
+
+->":SearchContactParser":getDetailFlag(searchInput:String)
+activate ":SearchContactParser"
+opt#gold #lightgreen searchInput begins with '-'
+":SearchContactParser"->":SearchContactParser": searchInput.split(\n\tSPACE:String, \n\tNUMBER_OF_DETAILS:int\n)
+activate ":SearchContactParser"
+":SearchContactParser"-->":SearchContactParser": destructuredInputs:String[]
+deactivate ":SearchContactParser"
+
+":SearchContactParser"->":ContactDetails": getIndexToStore(flag:String)
+activate ":ContactDetails"
+":ContactDetails"-->":SearchContactParser": flagIndex:int
+deactivate ":ContactDetails"
+<--":SearchContactParser":flagIndex:int
+end
+
+<--":SearchContactParser":NAME_INDEX:int
+deactivate ":SearchContactParser"
+
+@enduml

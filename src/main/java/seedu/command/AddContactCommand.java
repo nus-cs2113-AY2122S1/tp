@@ -70,6 +70,15 @@ public class AddContactCommand extends Command {
     }
 
     //@@author ashrafjfr
+    /**
+     * This method takes in the addedContact and contactList and checks whether there are any contacts already in the
+     * contactList that are duplicates to the addedContact. If there are duplicates, a confirmation message will be
+     * output to confirm whether the user would like to still add the duplicated contact.
+     *
+     * @param addedContact Contact that user has just input to add
+     * @param contactList List of current contacts
+     * @throws InvalidFlagException If the flag given is not recognised
+     */
     private boolean hasDuplicates(Contact addedContact, ContactList contactList) throws InvalidFlagException {
         ArrayList<Integer> duplicatedIndex = new ArrayList<>();
         String[] addedContactDetails = addedContact.getContactStringArray();
@@ -92,11 +101,26 @@ public class AddContactCommand extends Command {
         return false;
     }
 
+    /**
+     * Returns true if the input string is equal to the similar field of a saved contact indicating a
+     * duplicate.
+     *
+     * @param input String of field that user has input to add
+     * @param saved String of field that is already in the list of contacts
+     * @return boolean
+     */
     private boolean hasDuplicateField(String input, String saved) {
-        return stringCleaner(saved).equals(stringCleaner(input));
+        return cleanString(saved).equals(cleanString(input));
     }
 
-    private String stringCleaner(String input) {
+    /**
+     * This method cleans a string by removing all spaces and converting each letter to lower case for ease of
+     * comparison.
+     *
+     * @param input String of a contact detail
+     * @return input String that is cleaned
+     */
+    private String cleanString(String input) {
         return input.replace(" ", "").toLowerCase();
     }
     //@@author

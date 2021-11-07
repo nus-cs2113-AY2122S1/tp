@@ -1,0 +1,28 @@
+@startuml
+hide footbox
+'https://plantuml.com/sequence-diagram
+mainframe sd Detailed Edit Contact Parsing
+->":EditContactParser":parseContactDetails(userInput:String)
+activate ":EditContactParser"
+
+":EditContactParser"->":EditContactParser":userInput.split(\n\tSPACE:String, \n\tNUMBER_OF_EDIT_ARGS:int\n)
+activate ":EditContactParser"
+":EditContactParser"-->":EditContactParser":inputDetails:String[]
+deactivate ":EditContactParser"
+
+":EditContactParser"->":EditContactParser":inputDetails.split(DETAIL_SEPARATOR:String)
+activate ":EditContactParser"
+":EditContactParser"-->":EditContactParser":destructuredInputs:String[]
+deactivate ":EditContactParser"
+
+
+loop until all fields are parsed
+":EditContactParser"->":EditContactParser":parseDetail(\n\tcontactDetails:String[],\n\tdestructuredInputs:String[]\n)
+activate ":EditContactParser"
+":EditContactParser"-->":EditContactParser"
+deactivate ":EditContactParser"
+end
+
+<--":EditContactParser":contactDetails:String[]
+deactivate ":EditContactParser"
+@enduml

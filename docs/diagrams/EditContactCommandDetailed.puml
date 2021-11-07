@@ -1,0 +1,46 @@
+@startuml
+hide footbox
+'https://plantuml.com/sequence-diagram
+mainframe sd Edit Personal Contact Parsing
+activate ":EditContactCommand"
+
+create "editedContact:Contact"
+":EditContactCommand" -> "editedContact:Contact":duplicateContact()
+activate "editedContact:Contact"
+
+loop until all details are updated
+"editedContact:Contact" ->  "editedContact:Contact" : setDetail(contactDetails[i]:String, i:int)
+activate  "editedContact:Contact"
+"editedContact:Contact" -->  "editedContact:Contact"
+deactivate  "editedContact:Contact"
+
+end
+
+"editedContact:Contact" --> ":EditContactCommand" : editedContact:Contact
+deactivate "editedContact:Contact"
+
+alt#gold #lightgreen hasDuplicates(editedContact:Contact, contactList:ContactList, contactIndex:int)
+    ":EditContactCommand" -> ":TextUi":ignoreContact(type:String)
+    activate ":TextUi"
+    ":TextUi" --> ":EditContactCommand"
+    deactivate ":TextUi"
+
+else #lightblue else
+    ":EditContactCommand" -> ":EditContactCommand":updateContact(postEditContact:Contact)
+    activate ":EditContactCommand"
+    ":EditContactCommand" -> ":ContactList":editContactAtIndex(contactDetails:String[], contactIndex:int)
+    activate ":ContactList"
+    ":ContactList" --> ":EditContactCommand"
+    deactivate ":ContactList"
+
+    ":EditContactCommand" -> ":TextUi":editContactMessage(editedContact:Contact)
+    activate ":TextUi"
+    ":TextUi" --> ":EditContactCommand"
+    deactivate ":TextUi"
+    ":EditContactCommand" --> ":EditContactCommand"
+    deactivate ":EditContactCommand"
+
+
+end
+deactivate ":EditContactCommand"
+@enduml

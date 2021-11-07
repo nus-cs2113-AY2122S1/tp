@@ -61,6 +61,15 @@ public class EditContactCommand extends Command {
     }
 
     //@@author ashrafjfr
+    /**
+     * This method takes in the postEditcontact, contactList and contactIndex to check whether there are any contacts
+     * already in the contactList that are duplicates to the postEditContact. If there are duplicates, a confirmation
+     * message will be output to confirm whether the user would like to still edit the duplicated contact.
+     *
+     * @param postEditContact Contact that has been edited with fields user intends to edit to
+     * @param contactList List of current contacts
+     * @param contactIndex int to know which index of contactList is being edited
+     */
     private boolean hasDuplicates(Contact postEditContact, ContactList contactList, int contactIndex) {
         ArrayList<Integer> duplicatedIndex = new ArrayList<>();
         boolean[] hasEditedField = hasEditedFields(contactDetails);
@@ -89,10 +98,25 @@ public class EditContactCommand extends Command {
         return false;
     }
 
+    /**
+     * Returns true if the input string is equal to the similar field of a saved contact indicating a
+     * duplicate.
+     *
+     * @param input String of field that user has input to add
+     * @param saved String of field that is already in the list of contacts
+     * @return boolean
+     */
     private boolean hasDuplicateField(String input, String saved) {
         return cleanString(saved).equals(cleanString(input));
     }
 
+    /**
+     * This method cleans a string by removing all spaces and converting each letter to lower case for ease of
+     * comparison.
+     *
+     * @param input String of a contact detail
+     * @return input String that is cleaned
+     */
     private String cleanString(String input) {
         return input.replace(" ", "").toLowerCase();
     }

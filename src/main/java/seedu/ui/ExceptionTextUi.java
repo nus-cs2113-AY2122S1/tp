@@ -213,17 +213,17 @@ public class ExceptionTextUi {
             message = "There seems to be missing or invalid index in your request.\n"
                     + "Please enter command in the following way:\n"
                     + "      rm <INDEX> {REMOVE_DETAIL_FLAGS}\n"
-                    + "Enter <INDEX> as \"me\" to view personal contact";
+                    + "Enter <INDEX> as 0";
         } else if (listSize == 1) {
             message = "There seems to be missing or invalid index in your request.\n"
                     + "Please enter command in the following way:\n"
                     + "      rm <INDEX> {REMOVE_DETAIL_FLAGS}\n"
-                    + "Enter <INDEX> as 0 or \"me\" (personal contact)";
+                    + "Enter <INDEX> as 0 or 1";
         } else {
             message = "There seems to be missing or invalid index in your request.\n"
                     + "Please enter command in the following way:\n"
                     + "      rm <INDEX> {REMOVE_DETAIL_FLAGS}\n"
-                    + "Enter <INDEX> between 0 and " + (listSize - 1) + ", \"me\" (personal contact) or \"all\"";
+                    + "Enter <INDEX> between 0 and " + (listSize - 1);
         }
         printDoubleLineMessage(message);
     }
