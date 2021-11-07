@@ -5,7 +5,7 @@ import happybit.goal.GoalList;
 import happybit.storage.Storage;
 import happybit.ui.PrintManager;
 
-public class UpdateCommand extends Command {
+public abstract class UpdateCommand extends Command {
 
     /**
      * Template method that runs update commands.
