@@ -2,8 +2,8 @@
 
 Display | Name | Github Profile | Portfolio 
 --------|:----:|:--------------:|:---------:
-![](https://via.placeholder.com/100.png?text=Photo) | Edly | [Github](https://github.com/edlyIrsyad) | [Portfolio](team/edlyIrsyad.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Huang Che Yen | [Github](https://github.com/KaiserHuang88) | [Portfolio](team/KaiserHuang88.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Damien Lim | [Github](https://github.com/dlimyh98) | [Portfolio](team/dlimyh98.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Darren Khoo | [Github](https://github.com/rondayvoo) | [Portfolio](team/rondayvoo.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Chua Xiong Wei | [Github](https://github.com/ChuaXiongWei) | [Portfolio](team/ChuaXiongWei.md)
+![Edly](team%20member%20portraits/edly.jpg) | Edly | [edlyIrsyad](https://github.com/edlyIrsyad) | [edlyirsyad.md](team/edlyirsyad.md)
+![Che Yen](team%20member%20portraits/Che%20Yen.jpg) | Huang Che Yen | [KaiserHuang88](https://github.com/KaiserHuang88) | [KaiserHuang88.md](team/KaiserHuang88.md)
+![Damien](team%20member%20portraits/Damien.jpg) | Damien Lim | [dlimyh98](https://github.com/dlimyh98) | [dlimyh98.md](team/dlimyh98.md)
+![Darren](team%20member%20portraits/Darren.JPG) | Darren Khoo | [rondayvoo](https://github.com/rondayvoo) | [rondayvoo.md](team/rondayvoo.md)
+![Xiong Wei](team%20member%20portraits/Xiong%20Wei.jpg) | Chua Xiong Wei | [ChuaXiongWei](https://github.com/ChuaXiongWei) | [ChuaXiongWei.md](team/ChuaXiongWei.md)
