@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.ForceCancelException;
 import seedu.duke.exceptions.SameNameException;
+import seedu.duke.expense.Expense;
 import seedu.duke.parser.Parser;
 import seedu.duke.trip.Trip;
 
