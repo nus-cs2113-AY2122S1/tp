@@ -768,8 +768,8 @@ Bye, see you again soon!
 **A**: Copy the data folder from the source computer to the destination computer on the same directory as the tp.jar file.
 
 ## Command Summary
- |no. | `Command` | `Description` 
- |--- | --------- | --------------------------------------- 
+ |no. | `Command` | `Description` |
+ |--- | --------- | --------------------------------------- |
  |1.  | `add -b a/<AMOUNT> m/<MONTH>` | `add budget of $AMOUNT to MONTH of the year` |
  |2.  | `add -e c/<DESCRIPTION> a/<AMOUNT> d/<DATE_OF_EXPENDITURE> [c/<CATEGORY>]` | `add expenditure with DESCRIPTION of CATEGORY which cost $<AMOUNT> on <DATE>` |
  |3.  | `add -l n/<NAME_OF_LOAN_BORROWER> a/<AMOUNT> d/<DUE_DATE_OF_LOAN>` | `add a loan of $AMOUNT borrowed by NAME_OF_LOAN_BORROWER due on <DUE_DATE_OF_LOAN>` |
