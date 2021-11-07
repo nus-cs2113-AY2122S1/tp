@@ -48,6 +48,7 @@ end
 list --> list : filtered*
 
 list -> ui : print*(medicines: Arraylist<*>)
+list <-- ui
 deactivate ui
 
 note left of object

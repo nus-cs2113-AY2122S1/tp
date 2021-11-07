@@ -8,11 +8,11 @@ purpose of this guide is to help developers set up and continue with the develop
 
 ## Acknowledgements
 
-* Inspiration for App Idea and OOP Structure: https://github.com/se-edu/addressbook-level2
-* Inspiration for User Guide: https://se-education.org/addressbook-level3/UserGuide.html
-* Inspiration for Developer Guide: https://se-education.org/addressbook-level3/DeveloperGuide.html
-* PlantUML Tutorial: https://se-education.org/guides/tutorials/plantUml.html
-* Gradle: https://github.com/gradle/gradle
+* Inspiration for App Idea and OOP Structure: [https://github.com/se-edu/addressbook-level2](https://github.com/se-edu/addressbook-level2)
+* Inspiration for User Guide: [https://se-education.org/addressbook-level3/UserGuide.html](https://se-education.org/addressbook-level3/UserGuide.html)
+* Inspiration for Developer Guide: [https://se-education.org/addressbook-level3/DeveloperGuide.html](https://se-education.org/addressbook-level3/DeveloperGuide.html)
+* PlantUML Tutorial: [https://se-education.org/guides/tutorials/plantUml.html](https://se-education.org/guides/tutorials/plantUml.html)
+* Gradle: [https://github.com/gradle/gradle](https://github.com/gradle/gradle)
 
 ## Contents
 
@@ -117,7 +117,7 @@ The main class that runs MediVault is called `MediVault`. It is responsible for,
 The rest of the program consist of four components.
 * `Command`: Executes command based on the user input that is processed by `Utilities`
   component. The list of commands can be found in our User Guide [here](UserGuide.md).
-* `Utilities`: Contains important driver classes for MediVault
+* `Utilities`: Contains important driver classes for MediVault.
   * Includes `parser`, `ui`, `storage` and `comparators`.
 * `Inventory`: Contains a collection of classes used by MediVault to represent
 different medication information.
@@ -227,11 +227,11 @@ Otherwise, it creates a new instance of the `Ui` and/or `Medicine` class.
 respective `*`.
 3. `*Command` runs `containsInvalidParametersAndValues()` and does validation checks explained in detail in **Step 4** 
 and **Step 5**.
-4. The `MedicineValidator` class runs `containsInvalidParameters()` to check if **parameters** input by the user are valid.
+4. The `MedicineValidator` class runs `containsInvalidParameters()` to check if parameters input by the user are valid.
 5. Then, `MedicineValidator` class runs `containsInvalidParameterValues()` in `*Validator` to check if 
-**parameter values** input by the user is valid.
+parameter values input by the user is valid.
 6. `MedicineValidator` will return the result of the validity checks back to `*Command`.
-7. After running the Logic for `*Command`, commands that **modifies** the `*` information attempts to get the instance of 
+7. After running the Logic for `*Command`, commands that modifies the `*` information attempts to get the instance of 
 `Storage` class which is a singleton if it exists. MediVault runs `saveData()` to save the latest information into the text file.
 
 The motivation to implement an **initial validity checker** was because most of the commands requires MediVault to check 
@@ -266,7 +266,7 @@ The sequence diagram below shows how the `list` operation works in general.
 
 #### AddStockCommand
 
-MediVault creates an `AddStockCommand` object when CommandParser identifies `addstock` or `add` in `stock`
+MediVault creates an `AddStockCommand` object when `CommandParser` identifies `addstock` or `add` in `stock`
 mode.
 > :information_source: Note:
 > * MediVault adds medicine stock when the `parameter` and `parameterValues` provided by the user are valid.
@@ -282,12 +282,12 @@ MediVault will determine if there exist the medication with the same name.
 * If there exist medication with the same name, MediVault will check if there exist the same expiry date using the `isExpiryExist()` method.
   * MediVault will then check if the quantity is valid using the `isValidQuantity()` method.
   * If the same name and expiry date exist, Medivault will update the quantity of the existing stock.
-  * If it does not exist the same expiry date, MediVault will add the medication using the existing description and maximum quantity.
-* If it does not exist the same medication in MediVault, MediVault will then check if the quantity is valid using the `isValidQuantity()` method and a new medication will be added.
+  * If the same expiry date does not exist, MediVault will add the medication using the existing description and maximum quantity.
+* If the same medication does not exist in MediVault, MediVault will then check if the quantity is valid using the `isValidQuantity()` method and a new medication will be added.
 
 #### DeleteStockCommand
 
-MediVault creates an `DeleteStockCommand` object when CommandParser identifies `deletestock` or the `delete` keyword
+MediVault creates an `DeleteStockCommand` object when `CommandParser` identifies `deletestock` or the `delete` keyword
 in `stock` mode.
 
 * MediVault allows deletion of a stock by specifying stock id through `i/ID`.
@@ -300,6 +300,7 @@ in `stock` mode.
 > * MediVault will not execute if both id and expiry date are specified. 
 > * MediVault will not actually delete the stock. Rather, it will set it as deleted and hide from user view. This is 
 for the purpose of retaining stock information in case it is needed again in the future.
+>   * For example, if a prescription was deleted, the information of the medicine will still be intact even if the stock was deleted.
 
 The sequence diagram for `DeleteStockCommand` is shown below.
 
@@ -312,26 +313,26 @@ The sequence diagram for deletion by stock id is shown below.
 
 ![DeletionOfStockByIdSequenceDiagram](diagrams/diagram_images/DeletionOfStockByIdSequenceDiagram.png)
 
-* `deleteStockById()` deletion of stock given an id.
+* `deleteStockById()` helps to delete a stock given an id.
   * Loops through all medicines to `getStockId()` to compare and get the specified stock.
   * Then call `setDeleted()` to delete the stock.
 
 If MediVault determines that it is executing deletion by expiry date, it will execute accordingly. The behaviour of
-this command is to delete all stock that have <= specified date. This is because we would want to delete all expired
-stock and if a date is specified, all the date before will also be expired hence implement deletion of <= date.
+this command is to delete all stock before or equals to the specified date. This is because we would want to delete all
+expired stock and if a date is specified, all the date before will also be expired.
 
 The sequence diagram for delete by expiry date is shown below.
 
 ![DeletionOfStockByIdSequenceDiagram](diagrams/diagram_images/DeletionOfStockByExpirySequenceDiagram.png)
 
-* `deleteStockByExpiry()` deletion of stock given an id.
+* `deleteStockByExpiry()` helps to delete stocks given an expiry date.
   * `stringToDate()` helps to parse a string to a Date object.
   * Loops through all medicines to `getExpiry()` to compare and get the all expired stock.
-  * Then call `setDeleted()` to delete the stock.
+  * Then calls `setDeleted()` to delete the stock.
 
 #### UpdateStockCommand
 
-MediVault creates an `UpdateStockCommand` object when CommandParser identifies `updatestock` or
+MediVault creates an `UpdateStockCommand` object when `CommandParser` identifies `updatestock` or
 the `update` keyword in `stock` mode.
 
 The sequence diagram for `UpdateStockCommand` is shown below.
@@ -352,8 +353,7 @@ unable to delete a prescription record when the medicine stock name gets updated
 
 #### AddPrescriptionCommand
 
-MediVault creates an `AddPrescriptionCommand` object when CommandParser identifies `addprescription` or  
-`add` in `prescription` mode.
+MediVault creates an `AddPrescriptionCommand` object when `CommandParser` identifies `addprescription` or `add` in `prescription` mode.
 
 > :information_source: Note:
 > * MediVault adds the prescription when the `parameter` and `parameterValues` provided by the user are valid.
@@ -371,27 +371,27 @@ The sequence diagram for `AddPrescriptionCommand` is shown below.
 
 #### DeletePrescriptionCommand
 
-MediVault creates a `DeletePrescriptionCommand` object when CommandParser identifies `deleteprescription` or
+MediVault creates a `DeletePrescriptionCommand` object when `CommandParser` identifies `deleteprescription` or
 `delete` in `prescription` mode.
 
 > :information_source: Note:
 > * MediVault deletes the prescription when the `parameter` and `parameterValues` provided by the user are valid.
 > * MediVault will delete the prescription based on the user input of `PRESCRIPTION_ID`.
 > * MediVault will add the prescription quantity to the stock quantity after successful deletion of prescription.
-> * User will not be able to delete prescriptions if the total quantity after prescription will be more than the maximum
+> * Users will not be able to delete prescriptions if the total quantity after prescription will be more than the maximum
   quantity.
+> * If the stock is deleted, MediVault will recover the stock and add the prescription quantity to the stock.
 
 The sequence diagram for `DeletePrescriptionCommand` is shown below.
 
 ![DeletePrescriptionCommandDiagram](diagrams/diagram_images/DeletePrescriptionSequenceDiagram.png)
 
-> :bulb: Tip: If the stock is deleted, MediVault will recover the stock and add the prescription quantity to the stock.
-
-- `setStockQuantity()` method will check stock if stock exist. If stock exist, add the quantity to the stock quantity.
+- `setStockQuantity()` method helps to check if a stock exists. If the stock exists, it adds the prescribed quantity to the current stock quantity.
+- `isValidPrescriptionParameters()` helps to ensure that the parameters for the prescription to be deleted are valid.
 
 #### UpdatePrescriptionCommand
 
-MediVault initialises an `UpdatePrescriptionCommand` class when CommandParser identifies
+MediVault initialises an `UpdatePrescriptionCommand` class when `CommandParser` identifies
 `updateprescription` or the `update` keyword in `prescription` mode.
 
 The sequence diagram for `UpdatePrescriptionCommand` is shown below.
@@ -417,7 +417,7 @@ The main update logic is split into four sections.
    2. Otherwise, MediVault restores the stock quantity for `n/NAME` present in the prescription object with the
    difference between the **updated** and **original** `q/QUANTITY`.
 4. User did not provide both `q/QUANTITY` and `n/NAME` parameter.
-   1. Restoring or decrement is needed.
+   1. Restoring or decrement is not needed.
 
 Other parameters like `d/DATE`, `c/CUSTOMER_ID` and `s/STAFF` are not affected because they share the same
 update logic for sections 1 to 4 mentioned above.
@@ -429,14 +429,14 @@ This approach solves the issue when a medication is prescribed to a user with an
 **more than** the current batch of stock with the same Stock ID but **less than** the total 
 stock quantity. 
 
-> :bulb: Tip: MediVault automatically adds new prescription records when a medication is prescribed
+> :information_source: Note: MediVault automatically adds new prescription records when a medication is prescribed
 > from stocks with different Stock IDs.
 
 ### Order Commands
 
 #### AddOrderCommand
 
-MediVault creates an `AddOrderCommand` object when CommandParser identifies `addorder` or the `add` keyword
+MediVault creates an `AddOrderCommand` object when `CommandParser` identifies `addorder` or the `add` keyword
 in `order` mode.
 
 > :information_source: Note:
@@ -448,9 +448,9 @@ The sequence diagram for `AddOrderCommand` is shown below.
 
 ![AddOrderCommandDiagram](diagrams/diagram_images/AddOrderSequenceDiagram.png)
 
-`addDate()` method will add order date based on whether the user provided the date parameter or not.
+`addDate()` method adds the order date based on whether the user provided the date parameter or not.
 
-`addOrder()` method will add order based on user input.
+`addOrder()` method adds the order based on user input.
 
 MediVault will determine if there exist the medication with the same name in order and in stock.
 
@@ -467,7 +467,7 @@ will simply add the order as a new order.
 
 #### DeleteOrderCommand
 
-MediVault creates a `DeleteOrderCommand` object when CommandParser identifies `deleteorder` or  `delete` in `order`
+MediVault creates a `DeleteOrderCommand` object when `CommandParser` identifies `deleteorder` or  `delete` in `order`
 mode.
 
 > :information_source: Note:
@@ -477,9 +477,11 @@ The sequence diagram for `DeleteOrderCommand` is shown below.
 
 ![DeleteOrderCommandDiagram](diagrams/diagram_images/DeleteOrderSequenceDiagram.png)
 
+- `isValidOrderParameters()` helps to ensure that the parameters for the order to be deleted are valid.
+
 #### UpdateOrderCommand
 
-MediVault creates an `UpdateOrderCommand` object when CommandParser identifies
+MediVault creates an `UpdateOrderCommand` object when `CommandParser` identifies
 `updateorder` or the `update` keyword in `order` mode.
 
 The sequence diagram for `UpdateOrderCommand` is shown below.
@@ -493,12 +495,12 @@ MediVault retrieves the order object using the `i/ID` parameter specified by the
 > * MediVault disables updating an order that has been delivered. Users can only update information for pending orders.
 
 MediVault conducts a check if an order quantity is valid with the provided `q/QUANTITY`.
-This validation check is separated from the initial validation checker as enforcing `q/QUANTITY` <= `m/MAX_QUANTITY` in 
+This validation check is separated from the initial validation checker as enforcing `q/QUANTITY <= m/MAX_QUANTITY` in 
 stocks can only be done **after** MediVault confirms that the user provides a `q/QUANTITY` is an integer.
 
 MediVault updates the order information only when all of the validation checks stated above are successful.
 
-### ReceiveOrderCommand
+#### ReceiveOrderCommand
 
 MediVault creates an `ReceiveOrderCommand` object when `CommandParser` identifies
 `receiveorder` or the `receive` keyword in `order` mode.
@@ -524,12 +526,12 @@ only after the stock is successfully added, then the order would be complete.
 
 #### ArchivePrescriptionCommand
 
-MediVault creates an `ArchivePrescriptionCommand` object when CommandParser identifies `archiveprescription` or the 
+MediVault creates an `ArchivePrescriptionCommand` object when `CommandParser` identifies `archiveprescription` or the 
 `archive` keyword in `prescription` mode.
 
 * MediVault archives prescription records by specifying a date through `d/DATE`.
-* MediVault will remove prescription records that have date <= specified date and output it into the file named
-  `data/prescription_archive.txt`
+* MediVault will remove prescription records that have date before or equals to the specified date and output it into 
+the file named `data/prescription_archive.txt`
 
 > :information_source: Note:
 > * MediVault archive prescription information when `parameter` and `parameterValues` provided by the user are valid.
@@ -541,18 +543,18 @@ The sequence diagram for ArchivePrescriptionCommand is shown below.
 ![ArchivePrescriptionSequenceDiagram](diagrams/diagram_images/ArchivePrescriptionSequenceDiagram.png)
 
 * `stringToDate()` helps to parse a string to a Date object.
-* `prescriptionsToArchive()` checks through all prescriptions and look for records that have prescription date <= 
-specified date.
+* `prescriptionsToArchive()` checks through all prescriptions and look for records that have prescription date before or
+equals to the specified date.
 * `removeFromPrescriptions()` removes prescriptions from prescription list after archive.
 
 #### ArchiveOrderCommand
 
-MediVault creates an `ArchiveOrderCommand` object when CommandParser identifies `archiveorder` or the
+MediVault creates an `ArchiveOrderCommand` object when `CommandParser` identifies `archiveorder` or the
 `archive` keyword in `order` mode.
 
 * MediVault archives order records by specifying a date through `d/DATE`.
-* MediVault will remove only DELIVERED order records that have date <= specified date and output it into the file named
-`data/order_archive.txt`
+* MediVault will remove only DELIVERED order records that have date before or equals to the specified date and output it
+into the file named `data/order_archive.txt`
 
 > :information_source: Note:
 > * MediVault archive order information when `parameter` and `parameterValues` provided by the user are valid.
@@ -564,25 +566,25 @@ The sequence diagram for ArchiveOrderCommand is shown below.
 ![ArchiveOrderSequenceDiagram](diagrams/diagram_images/ArchiveOrderSequenceDiagram.png)
 
 * `stringToDate()` helps to parse a string to a Date object.
-* `prescriptionsToArchive()` checks through all orders and look for records that are DELIVERED and have order date <=
-  specified date.
+* `prescriptionsToArchive()` checks through all orders and look for records that are DELIVERED and have order date 
+before or equals to the specified date.
 * `removeFromOrders()` removes orders from order list after archive.
 
 ## Product Scope
 
 ### Target User Profile
 
-* Pharmacist handling storing, ordering and prescribing of medication
-* Has a need to manage large number of stocks in the pharmacy
-* May forget how much medicine stock is left in the pharmacy
-* Is a fast typist
+* Handles storing, ordering and prescribing of medication.
+* Has a need to manage large number of stocks in the pharmacy.
+* May forget how much medicine stock is left in the pharmacy.
+* Is a fast typist.
 
 ### Value Proposition
 
 The main value proposition of MediVault is such that it provides the user with an interface for efficient stock taking
 purposes. It eradicates the need for manual tracking of medications which will greatly lessen the administrative 
 workload of a pharmacist. It automates stock taking process to a certain extent because it is a 3 in 1 integrated 
-solution that provides real-time tracking of stock, prescriptions and orders in a pharmacy,  
+solution that provides real-time tracking of stock, prescriptions and orders in a pharmacy.
 
 ## User Stories
 
@@ -639,7 +641,7 @@ messages to suggest correct input to user.
 * **Interoperability Requirements:** MediVault should be able to run on minimally Windows, Linux and macOS.
 * **Privacy Requirements:** MediVault may contain sensitive information such as customer health records. Thus, we should not 
 publish our data to the internet and only store it on our local computer.
-* **Portability Requirements:** MediVault should be able to run on any computer that has Java 11 and MediVault.jar. Data
+* **Portability Requirements:** MediVault should be able to run on any computer that has Java 11 and `MediVault.jar`. Data
 should also be portable such that we can easily transfer data when changing computers.
 * **Reliability Requirements:** MediVault should not crash at any point in time. Even if it does, it must retain data.
 * **Response Time Requirements:** MediVault basic operations should respond within 3 seconds. For other processing heavy
@@ -666,24 +668,24 @@ redirection tests.
 
 ### Saving Data
 
-All data files are located in the data folder.
+All data files are located in the `data` folder.
 
-1. Data is saved in stock.txt, prescription.txt, order.txt.
+1. Data is saved in `stock.txt`, `prescription.txt`, `order.txt`.
     * Test Case:
         1. Run the application.
         2. Add an entry to stock, prescription and order into MediVault.
-        3. Exit MediVault. The stock.txt, prescription.txt and order.txt will have one entry.
+        3. Exit MediVault. The `stock.txt`, `prescription.txt` and `order.txt` will have one entry.
         4. Run the application.
         5. Delete entry to stock, prescription and order into MediVault.
         6. Exit MediVault.
-    * Expected: stock.txt, prescription.txt and order.txt will be empty.
-2. Archive data is saved in order_archive.txt and prescription_archive.txt.
+    * Expected: `stock.txt`, `prescription.txt` and `order.txt` will be empty.
+2. Archive data is saved in `order_archive.txt` and `prescription_archive.txt`.
     * Test Case:
         1. Run the application.
         2. Add entries to prescription and order into MediVault.
         3. Run the `archiveorder` and `archiveprescription` command with date specified.
         4. Exit MediVault.
-    * Expected: order_archive.txt and prescription_archive.txt will have entries.
+    * Expected: `order_archive.txt` and `prescription_archive.txt` will have entries.
 
 ## Instructions for Automated Testing
 
@@ -691,7 +693,7 @@ All data files are located in the data folder.
 
 MediVault uses Gradle for Continuous Integration during development. Gradle performs automated checking of 
 coding style which helps in ensuring adherence to Java Coding Standards. Gradle also helps to automate testing by running
-our JUnit test cases to ensure that MediVault bug-free to the extent of our testing and working as intended. It is helpful
+our JUnit test cases to ensure that MediVault is bug-free based on our testing and is working as intended. It is helpful
 in catching unintended bugs while we continuously develop MediVault.
 
 ### JUnit Tests

@@ -72,9 +72,9 @@ Meaning of Icons:
 
 1. Ensure that you have **Java 11** or above installed.
 2. Download the latest version of `MediVault.jar`
-   from [here](https://github.com/AY2122S1-CS2113T-T10-1/tp/releases/tag/v2.1).
+   from [here](https://github.com/AY2122S1-CS2113T-T10-1/tp/releases/download/v2.1/MediVault.jar).
 3. Copy the file to the folder you want to use as the **home** folder for `MediVault`.
-4. In the terminal, run `Java -jar MediVault.jar`.
+4. In the terminal, run `java -jar MediVault.jar`.
 5. You should see the following prompt if the program has started successfully.
 
 ```
@@ -721,7 +721,7 @@ Adds the medication you ordered into the current stocks.
 > :warning: Warning:
 > * If medication exists, `d/DESCRIPTION` and `m/MAX_QUANTITY` will be optional parameters. If you include `d/DESCRIPTION` or `m/MAX_QUANTITY` parameter, it will be ignored and MediVault will add the medication with the existing description and existing maximum quantity in stocks.
 > * If medication exists, the medication to be added has the same `e/EXPIRY_DATE`, the value in the `p/PRICE` parameter will be ignored and the existing price will be used.
-> * You may not be able to `receiveorder` if the order quantity + current stock quantity > max quantity.
+> * You may not be able to `receiveorder` if the order `quantity + current stock quantity > max quantity`.
 
 Format: `receiveorder i/ID p/PRICE e/EXPIRY_DATE (d/DESCRIPTION m/MAX_QUANTITY)`
 
