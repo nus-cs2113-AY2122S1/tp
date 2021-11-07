@@ -25,11 +25,11 @@ public class AddIngrCommand extends Command {
 
     /**
      * User command to add an ingredient to the ingredient list.
-     * The INGR_NAME to be added is stored in ArrayList<String> parameters. The method checks if the input
+     * The INGR_NAME to be added is stored in parameters. The method checks if the input
      * is empty, if the ingredient already exists in the list or if the input is an number only, and throws
      * an exception.
      *
-     * If no exceptions are thrown, INGR_NAME in ArrayList<String> parameters is added to the ingredient list.
+     * <p>If no exceptions are thrown, INGR_NAME in parameters is added to the ingredient list.</p>
      *
      * @param parameters contains the user input for INGR_NAME
      * @throws FoodoramaException when the INGR_NAME is missing/blank, already exists in the list or is a number

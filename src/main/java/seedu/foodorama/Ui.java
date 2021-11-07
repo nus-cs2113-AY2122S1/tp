@@ -739,12 +739,12 @@ public class Ui {
     }
 
     /**
-     * Prints the graph of
+     * Prints the graph of.
      *
-     * @param graphPortions
-     * @param lengths
-     * @param i
-     * @param j
+     * @param graphPortions //
+     * @param lengths //
+     * @param i //
+     * @param j //
      * @author Dniv-ra
      */
     private void printGraph(int graphPortions, ArrayList<Double> lengths, int i, int j) {
@@ -774,9 +774,9 @@ public class Ui {
     }
 
     /**
-     * Prints the graph of
+     * Prints the graph of.
      *
-     * @param dishList
+     * @param dishList //
      * @author Dniv-ra
      */
     public void printDishListGraph(ArrayList<Dish> dishList) {
@@ -813,10 +813,10 @@ public class Ui {
     }
 
     /**
-     * Prints the legend
+     * Prints the legend.
      *
-     * @param dishList
-     * @param i
+     * @param dishList //
+     * @param i //
      * @author Dniv-ra
      */
     private void printDishLegend(ArrayList<Dish> dishList, int i) {
@@ -831,9 +831,9 @@ public class Ui {
     }
 
     /**
-     * Prints the graph of
+     * Prints the graph of.
      *
-     * @param ingredientList
+     * @param ingredientList //
      * @author Dniv-ra
      */
     public void printIngrListGraph(ArrayList<Ingredient> ingredientList) {
@@ -870,10 +870,10 @@ public class Ui {
     }
 
     /**
-     * Prints the legend
+     * Prints the legend.
      *
-     * @param ingredientList
-     * @param i
+     * @param ingredientList //
+     * @param i //
      * @author Dniv-ra
      */
     private void printIngrLegend(ArrayList<Ingredient> ingredientList, int i) {

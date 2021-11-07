@@ -64,7 +64,7 @@ public class DishList {
      * @return the index of the dish in the dish list
      * @author Dniv-ra
      */
-//Returns -1 if not present, index if present
+    //Returns -1 if not present, index if present
     public static int find(String dishName) {
         for (Dish dish : dishList) {
             if (dish.getDishName().equals(dishName)) {

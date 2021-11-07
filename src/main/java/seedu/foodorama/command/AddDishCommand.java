@@ -26,10 +26,10 @@ public class AddDishCommand extends Command {
 
     /**
      * User command to add a dish to the dish list.
-     * The DISH_NAME to be added is stored in ArrayList<String> parameters. The method checks if the input
+     * The DISH_NAME to be added is stored in parameters. The method checks if the input
      * is empty, if the dish already exists in the list or if the input is an number only, and throws an exception.
      *
-     * If no exceptions are thrown, DISH_NAME in ArrayList<String> parameters is added to the dish list.
+     * <p>If no exceptions are thrown, DISH_NAME in parameters is added to the dish list.</p>
      *
      * @param parameters contains the user input for DISH_NAME
      * @throws FoodoramaException when the DISH_NAME is missing/blank, already exists in the list or is a number

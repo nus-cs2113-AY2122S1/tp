@@ -26,16 +26,17 @@ public class AddIngrStoredCommand extends Command {
 
     /**
      * User command to add storage to an ingredient in the ingredient list.
-     * The [INGR_NAME]/[INGR_INDEX] to add storage to is stored in ArrayList<String> parameters.
+     * The [INGR_NAME]/[INGR_INDEX] to add storage to is stored in parameters.
      * The method checks if either [INGR_NAME] or [INGR_INDEX] is input by the user, and finds the corresponding
      * ingredient in the ingredient list. The method throws an exception if the ingredient does not exist or the
      * ingredient index is not within the boundaries of the ingredient list.
      *
-     * If no exceptions are thrown, the user will be prompted to add storage weight for [INGR_NAME] or [INGR_INDEX].
+     * <p>If no exceptions are thrown, the user will be prompted to add storage weight for [INGR_NAME] or [INGR_INDEX].
+     * </p>
      *
      * @param parameters contains the [INGR_NAME] or [INGR_INDEX] to add storage to
      * @throws FoodoramaException when the ingredient to add storage weight to does not exist or
-     * the ingredient index is not within boundaries of the ingredient list
+     *      the ingredient index is not within boundaries of the ingredient list
      * @author renzocanare
      */
     @Override

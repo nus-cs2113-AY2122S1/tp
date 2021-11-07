@@ -27,16 +27,17 @@ public class AddDishWasteCommand extends Command {
 
     /**
      * User command to add wastage to a dish in the dish list.
-     * The [DISH_NAME]/[DISH_INDEX] to add wastage to is stored in ArrayList<String> parameters.
+     * The [DISH_NAME]/[DISH_INDEX] to add wastage to is stored in parameters.
      * The method checks if either [DISH_NAME] or [DISH_INDEX] is input by the user, and finds the corresponding
      * dish in the dish list. The method throws an exception if the dish does not exist or the dish index is not within
      * the boundaries of the dish list.
      *
-     * If no exceptions are thrown, the user will be prompted to add wastage weight for [DISH_NAME] or [DISH_INDEX].
+     * <p>If no exceptions are thrown, the user will be prompted to add wastage weight for [DISH_NAME] or [DISH_INDEX].
+     * </p>
      *
      * @param parameters contains the [DISH_NAME] or [DISH_INDEX] to add wastage to
      * @throws FoodoramaException when the dish to add weight to does not exist or the dish index is not within
-     * boundaries of the dish list
+     *      boundaries of the dish list
      * @author Dniv-ra
      */
     @Override
