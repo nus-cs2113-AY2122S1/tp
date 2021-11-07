@@ -1,7 +1,6 @@
-# madhanse - Project Portfolio Page
 ---
 layout: page
-title: Madhan Selvapandian's Project Portfolio Page
+title: Madhan's Project Portfoilo Page
 ---
 ### Project: SEPlanner
 

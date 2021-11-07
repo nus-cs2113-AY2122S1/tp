@@ -3,9 +3,9 @@ hide circle
 skinparam classAttributeIconSize 0
 skinparam groupInheritance 2
 
-University "1..*" <--* UniversityList
-University <.. UniversityList
-UniversityList <.. University
+University "*" <---* UniversityList
+University <... UniversityList
+UniversityList <... University
 
 class University {
     - index: int
@@ -19,7 +19,7 @@ class University {
     + getSelectedMappings(selectedModuleList: ModuleList)): ArrayList<ModuleMapping>
     + getList(): ArrayList<ModuleMapping>
     + getSelectedMappingListSize(): int
-    + getSelectedMappingListSize():int
+    + getSelectedMappingListSize(): int
     + getName(): String
     + getIndex(): int
     + getMasterListIndex(universityMasterList: UniversityList): int

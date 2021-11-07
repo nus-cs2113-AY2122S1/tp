@@ -9,7 +9,6 @@ import seplanner.storage.Storage;
 import seplanner.universities.University;
 import seplanner.universities.UniversityList;
 
-import java.awt.image.MemoryImageSource;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -150,9 +149,9 @@ public class AddCommandParserTest {
         moduleSelectedList.addModule(addedMod);
         University addedUni = universityMasterList.get(4);
         universityMasterList.addUniversity(addedUni);
-        assertThrows(AddParseException.class, () -> acp.parse(inputExceedLowerBounds, universityMasterList, moduleMasterList,
-                universitySelectedList, moduleSelectedList));
-        assertThrows(AddParseException.class, () -> acp.parse(inputExceedUpperBounds, universityMasterList, moduleMasterList,
-                universitySelectedList, moduleSelectedList));
+        assertThrows(AddParseException.class, () -> acp.parse(inputExceedLowerBounds, universityMasterList,
+                moduleMasterList, universitySelectedList, moduleSelectedList));
+        assertThrows(AddParseException.class, () -> acp.parse(inputExceedUpperBounds, universityMasterList,
+                moduleMasterList, universitySelectedList, moduleSelectedList));
     }
 }

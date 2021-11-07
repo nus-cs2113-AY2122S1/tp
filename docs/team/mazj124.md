@@ -1,7 +1,6 @@
-# MAZJ124 - Project Portfolio Page
 ---
 layout: page
-title: Ma Zijian's Project Portfolio Page
+title: Ma Zijian's Project Portfoilo Page
 ---
 ### Project: SEPlanner
 
