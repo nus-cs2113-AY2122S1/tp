@@ -19,7 +19,7 @@ public class Expense extends Entry {
         this.date = date;
         this.category = category;
     }
-    
+
     @Override
     public ExpenseCategory getCategory() {
         return category;
@@ -27,8 +27,7 @@ public class Expense extends Entry {
     
     @Override
     public String toString() {
-        String valueTwoDecimalPoint = String.format("%.2f",value);
-        return "[E] " + description + " - $" + valueTwoDecimalPoint + " ("
-                + date.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + ")";
+        String expenseDate = date.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        return String.format("[E] %s - $%.2f (%s)", description, value, expenseDate);
     }
 }

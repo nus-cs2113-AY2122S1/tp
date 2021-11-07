@@ -7,27 +7,47 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 import seedu.commands.Command;
-import seedu.commands.DeleteIncomeCommand;
-import seedu.commands.HelpCommand;
+import seedu.commands.budget.BalanceCommand;
+import seedu.commands.budget.SetThresholdCommand;
+import seedu.commands.expense.AddExpenseCommand;
+import seedu.commands.general.ClearAllEntriesCommand;
+import seedu.commands.currency.CurrencyType;
+import seedu.commands.general.ShowGraphByYearCommand;
+import seedu.commands.general.ShowGraphCommand;
+import seedu.commands.income.AddIncomeCommand;
+import seedu.commands.income.DeleteIncomeCommand;
+import seedu.commands.general.HelpCommand;
 import seedu.commands.InvalidCommand;
-import seedu.commands.ListExpenseCommand;
-import seedu.commands.ListIncomeCommand;
-import seedu.commands.TotalIncomeCommand;
+import seedu.commands.expense.ListExpenseCommand;
+import seedu.commands.income.ListIncomeCommand;
+import seedu.commands.income.TotalIncomeCommand;
 import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 import seedu.entry.IncomeCategory;
-import seedu.exceptions.InvalidExpenseAmountException;
+import seedu.exceptions.BlankCurrencyTypeException;
+import seedu.exceptions.InputException;
+import seedu.exceptions.InvalidCurrencyTypeException;
+import seedu.exceptions.InvalidAmountException;
 import seedu.exceptions.InvalidExpenseDataFormatException;
-import seedu.exceptions.InvalidIncomeAmountException;
 import seedu.exceptions.InvalidIncomeDataFormatException;
+import seedu.exceptions.InvalidSettingsDataException;
+import seedu.utility.BudgetManager;
+import seedu.utility.CurrencyManager;
+import seedu.utility.FinancialTracker;
+import seedu.utility.Messages;
 import seedu.utility.Parser;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class ParserTest {
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
+    private static final String DATA_SEPARATOR = ",";
+    private static final int TOTAL_EXPENSE_CATEGORY = 7;
+
     @Test
     public void parseCommand_validHelpCommand_returnHelpCommand() {
         Parser testParser = new Parser();
@@ -96,7 +116,7 @@ public class ParserTest {
         Parser testParser = new Parser();
         Command underTest = testParser.parseCommand("del_ex      i/12a              ");
         InvalidCommand test = (InvalidCommand) underTest; 
-        assertSame("Only numeric inputs are allowed for index.", test.getMessage());
+        assertSame("Index given is either out of range or not an integer.", test.getMessage());
     }
 
     @Test
@@ -140,7 +160,7 @@ public class ParserTest {
         Parser testParser = new Parser();
         Command underTest = testParser.parseCommand("del_in i/aa");
         InvalidCommand test = (InvalidCommand) underTest;
-        assertSame("Only numeric inputs are allowed for index.", test.getMessage());
+        assertSame("Index given is either out of range or not an integer.", test.getMessage());
     }
 
     @Test
@@ -162,63 +182,66 @@ public class ParserTest {
     @Test
     public void convertExpenseToData_validExpense_correctDataOutput() {
         Parser testParser = new Parser();
-        LocalDate date = LocalDate.parse("2121-11-11", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate date = LocalDate.parse("11/11/2121", DateTimeFormatter.ofPattern(DATE_FORMAT));
         Expense testExpense = new Expense("buy book", 12.33, ExpenseCategory.FOOD, date);
         String testData = testParser.convertExpenseToData(testExpense);
-        assertEquals("E, buy book, 12.33, FOOD, 2121-11-11", testData);
+        assertEquals("E" + DATA_SEPARATOR + "buy book" + DATA_SEPARATOR + 12.33 + DATA_SEPARATOR + "FOOD" 
+                + DATA_SEPARATOR + "11/11/2121", testData);
     }
 
     @Test
     public void convertIncomeToData_validIncome_correctDataOutput() {
         Parser testParser = new Parser();
-        LocalDate date = LocalDate.parse("2121-11-11", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate date = LocalDate.parse("11/11/2121", DateTimeFormatter.ofPattern(DATE_FORMAT));
         Income testIncome = new Income("job", 1233.0, IncomeCategory.ADHOC, date);
         String testData = testParser.convertIncomeToData(testIncome);
-        assertEquals("I, job, 1233.0, ADHOC, 2121-11-11", testData);
+        assertEquals("I" + DATA_SEPARATOR + "job" + DATA_SEPARATOR + 1233.0 + DATA_SEPARATOR + "ADHOC" 
+                + DATA_SEPARATOR + "11/11/2121", testData);
     }
 
     @Test
-    public void convertDataToExpense_validExpenseData_outputExpense() throws InvalidExpenseAmountException,
+    public void convertDataToExpense_validExpenseData_outputExpense() throws InputException,
             InvalidExpenseDataFormatException {
         Parser testParser = new Parser();
-        Expense testExpense = testParser.convertDataToExpense("E, sfa, 12, q, 2121-11-11");
-        assertEquals("FAIL EXPENSE", testExpense.getDescription());
-        assertEquals(9999999.0, testExpense.getValue());
+        Expense testExpense = testParser.convertDataToExpense("E,sfa,12,food,11/11/2121");
+        assertEquals("sfa", testExpense.getDescription());
+        assertEquals(12, testExpense.getValue());
     }
 
     @Test
     public void convertDataToExpense_invalidExpenseDataWithBlankDescription_throwsException() {
         Parser testParser = new Parser();
-        assertThrows(InvalidExpenseDataFormatException.class, () -> testParser.convertDataToExpense("E, , 12"));
+        assertThrows(InvalidExpenseDataFormatException.class, () -> testParser.convertDataToExpense("E, ,"));
     }
 
     @Test
     public void convertDataToExpense_invalidExpenseDataWithInvalidAmount_throwsException() {
         Parser testParser = new Parser();
-        assertThrows(InvalidExpenseAmountException.class,
+        assertThrows(InvalidAmountException.class,
             () -> testParser.convertDataToExpense("E, asd, 12a, qwe, 21-11-11"));
     }
 
     @Test
-    public void convertDataToIncome_validIncomeData_outputIncome() throws InvalidIncomeAmountException,
+    public void convertDataToIncome_validIncomeData_outputIncome() throws InputException, 
             InvalidIncomeDataFormatException, DateTimeException {
         Parser testParser = new Parser();
-        Income testIncome = testParser.convertDataToIncome("I, sfa, 12, qwe, 2121-11-11");
-        assertEquals("FAIL INCOME", testIncome.getDescription());
-        assertEquals(999999.0, testIncome.getValue());
+        Income testIncome = testParser.convertDataToIncome("I" + DATA_SEPARATOR + "pay" + DATA_SEPARATOR 
+                + 1000 + DATA_SEPARATOR + "SALARY" + DATA_SEPARATOR + "11/11/2121");
+        assertEquals("pay", testIncome.getDescription());
+        assertEquals(1000.0, testIncome.getValue());
     }
 
     @Test
     public void convertDataToIncome_invalidIncomeDataWithBlankDescription_throwsException() {
         Parser testParser = new Parser();
-        assertThrows(InvalidIncomeDataFormatException.class, 
+        assertThrows(InputException.class, 
             () -> testParser.convertDataToIncome("I, , 12, q, 2121-11-11"));
     }
 
     @Test
     public void convertDataToIncome_invalidIncomeDataWithInvalidAmount_throwsException() {
         Parser testParser = new Parser();
-        assertThrows(InvalidIncomeAmountException.class, 
+        assertThrows(InvalidAmountException.class, 
             () -> testParser.convertDataToIncome("I, asd, 12a, q, 2121-11-11"));
     }
 
@@ -233,6 +256,161 @@ public class ParserTest {
     public void convertDataToIncome_invalidIncomeDataWithInvalidSeparator_throwsException() {
         Parser testParser = new Parser();
         assertThrows(InvalidIncomeDataFormatException.class, 
-            () -> testParser.convertDataToIncome("I,asd, 12, q, 2121-11-11"));
+            () -> testParser.convertDataToIncome("I" + DATA_SEPARATOR + "pay" + DATA_SEPARATOR + 1000 + DATA_SEPARATOR 
+                    + "SALARY" + "|" + "11/11/2121"));
+    }
+    
+    @Test
+    public void convertSettingsToData_validSettings_validData() {
+        BudgetManager testBudgetManager = new BudgetManager();
+        FinancialTracker financialTracker = new FinancialTracker();
+        for (ExpenseCategory category : ExpenseCategory.values()) {
+            if (category == ExpenseCategory.NULL) {
+                break;
+            }
+            if (category == ExpenseCategory.OVERALL) {
+                testBudgetManager.setBudget(12, category, financialTracker.getExpenses());
+            } else {
+                testBudgetManager.setBudget(1, category, financialTracker.getExpenses());
+            }
+        }
+        testBudgetManager.setThreshold(0.2);
+        Parser testParser = new Parser();
+        CurrencyManager currencyManager = new CurrencyManager();
+        String testData = testParser.convertSettingsToData(testBudgetManager, currencyManager);
+        assertEquals("SGD,0.2,12.0,1.0,1.0,1.0,1.0,1.0,1.0", testData);
+        
+    }
+    
+    @Test
+    public void convertDataToBudgetSettings_validData_validBudgets() throws InvalidSettingsDataException {
+        String testData = "SGD,0.1,12.0,1.0,1.0,1.0,1.0,1.0,1.0";
+        Parser parser = new Parser();
+        ArrayList<Double> testBudgets = parser.convertDataToBudgetSettings(testData);
+        for (int i = 0; i < TOTAL_EXPENSE_CATEGORY; i++) {
+            if (i == 0) {
+                assertEquals(12, testBudgets.get(i));
+            } else {
+                assertEquals(1, testBudgets.get(i));
+            }
+        }
+    }
+    
+    @Test 
+    public void convertDataToCurrencySetting_validData_validCurrency() throws InvalidCurrencyTypeException, 
+            InvalidSettingsDataException, BlankCurrencyTypeException {
+        String testData = "SGD,0.0,12.0,12.0,12.0,12.0,12.0,12.0,12";
+        Parser parser = new Parser();
+        CurrencyType currency = parser.convertDataToCurrencySetting(testData);
+        assertEquals(currency.toString(), "SGD");
+    }
+    
+    @Test
+    public void parseCommand_expenseInputWithDate_validCommand() {
+        Parser testParser = new Parser();
+        String userInput = "add_ex_d D/11/11/2121 d/asf a/10 c/food";
+        Command testCommand = testParser.parseCommand(userInput);
+        assertEquals(testCommand.getClass(), AddExpenseCommand.class);
+    }
+
+    @Test
+    public void parseCommand_incomeInputWithoutDate_validCommand() {
+        Parser testParser = new Parser();
+        String userInput = "add_in c/salary d/a/g/adg/ad/gd/fag/ a/10";
+        Command testCommand = testParser.parseCommand(userInput);
+        assertEquals(testCommand.getClass(), AddIncomeCommand.class);
+    }
+
+    @Test
+    public void betweenIncome_invalidDateRange_invalidCommand() {
+        Parser testParser = new Parser();
+        String userInput = "btw_in s/11/12/2100 e/11/11/2100";
+        Command testCommand = testParser.parseCommand(userInput);
+        assertEquals(testCommand.getClass(), InvalidCommand.class);
+    }
+
+    @Test
+    public void betweenExpense_invalidDateRange_invalidCommand() {
+        Parser testParser = new Parser();
+        String userInput = "btw_ex s/11/12/2100 e/11/11/2100";
+        Command testCommand = testParser.parseCommand(userInput);
+        assertEquals(testCommand.getClass(), InvalidCommand.class);
+    }
+
+    @Test
+    public void parseAddExpenseCommand_invalidExpenseValue_invalidCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("add_ex d/food a/1000000000.001 c/food");
+        assertSame(InvalidCommand.class, underTest.getClass());
+    }
+
+    @Test
+    public void parseAddIncomeCommand_invalidIncomeValue_invalidCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("add_in d/salary a/1000000000.0011 c/salary");
+        assertSame(InvalidCommand.class, underTest.getClass());
+    }
+    
+    @Test
+    public void parseCommand_validThresholdInput_correctCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("set_threshold t/0.5");
+        assertSame(SetThresholdCommand.class, underTest.getClass());
+    }
+
+    @Test
+    public void parseCommand_validClearAllCommand_correctCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("clear_all_entries");
+        assertSame(ClearAllEntriesCommand.class, underTest.getClass());
+    }
+
+    @Test
+    public void parseCommand_validShowGraphCommand_correctCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("show_graph");
+        assertSame(ShowGraphCommand.class, underTest.getClass());
+    }
+
+    @Test
+    public void parseCommand_validYearInputShowGraphCommand_correctCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("show_graph Y/   2021    ");
+        assertSame(ShowGraphByYearCommand.class, underTest.getClass());
+    }
+
+    @Test
+    public void parseCommand_invalidYearInputShowGraphCommand_correctCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("show_graph Y/2023 12as d v ");
+        assertEquals(Messages.INVALID_YEAR_MESSAGE,((InvalidCommand)underTest).getMessage());
+    }
+    
+    @Test
+    public void parseCommand_validExpenseInputD_C_A_validCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("add_ex d//fa/gd/ff/s/f/sf/s/f/ c/food a/100");
+        assertEquals(AddExpenseCommand.class, underTest.getClass());
+    }
+
+    @Test
+    public void parseCommand_validExpenseInputC_D_A_validCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("add_ex c/food d//fa/gd/ff/s/f/sf/s/f/ a/100");
+        assertEquals(AddExpenseCommand.class, underTest.getClass());
+    }
+
+    @Test
+    public void parseCommand_validExpenseInputA_C_D_validCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("add_ex a/100 c/food d//fa/gd/ff/s/f/sf/s/f/");
+        assertEquals(AddExpenseCommand.class, underTest.getClass());
+    }
+    
+    @Test
+    public void parseCommand_validBalanceCommand_validBalanceCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("balance");
+        assertEquals(BalanceCommand.class, underTest.getClass());
     }
 }

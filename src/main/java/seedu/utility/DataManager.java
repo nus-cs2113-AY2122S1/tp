@@ -1,105 +1,270 @@
 package seedu.utility;
 
+import seedu.commands.currency.CurrencyType;
 import seedu.entry.Expense;
+import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
-import seedu.exceptions.InvalidExpenseAmountException;
+import seedu.exceptions.BlankCurrencyTypeException;
+import seedu.exceptions.ExpenseOverflowException;
+import seedu.exceptions.IncomeOverflowException;
+import seedu.exceptions.InputException;
+import seedu.exceptions.InvalidCurrencyTypeException;
 import seedu.exceptions.InvalidExpenseDataFormatException;
-import seedu.exceptions.InvalidIncomeAmountException;
 import seedu.exceptions.InvalidIncomeDataFormatException;
+import seedu.exceptions.InvalidSettingsDataException;
+import seedu.exceptions.InvalidThresholdValueException;
 
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.DateTimeException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
- * Saves entries that StonksXD is currently tracking into a csv file so that entries can be saved and be easily
- * manipulated by user.
- * Also loads all saved entries when a new instance of StonksXD starts.
+ * Saves entries (expenses and incomes) Stonks XD is tracking into a csv file.
+ * Also saves Stonks XD settings into another csv file. Settings include: currency state, amount for each budget
+ * category and the reminder threshold value.
  */
 public class DataManager {
 
-    private static final String NEWLINE = "\n";
-    private static final String FILE_NAME = "./StonksXD_Data.csv";
-    private static final String CSV_HEADER = "entry_type, entry_description, amount, category, date";
+    private static final String NEWLINE = System.lineSeparator();
+    private static final String ENTRIES_FILE_NAME = "./StonksXD_Entries.csv";
+    private static final String ENTRIES_CSV_HEADER = "entry_type,entry_description,amount,category,date";
+    private static final String SETTINGS_FILE_NAME = "./StonksXD_Settings.csv";
+    private static final String SETTINGS_CSV_HEADER = "currency,threshold,overall,food,transport,medical,"
+            + "bills,entertainment,misc";
+    private final Parser parser;
+    private final Ui ui;
+    private final FinancialTracker financialTracker;
+    private final CurrencyManager currencyManager;
+    private final BudgetManager budgetManager;
 
     /**
-     * Saves all entries StonksXD is currently tracking into a csv file StonksXD_Data.csv.
-     * This allows users to not lose all their entries when program closes.
-     * 
-     * @param parser Does the conversion from entries to data for saving.
-     * @param financialTracker Provides the ArrayList of expenses and the ArrayList of incomes.
-     * @param ui Prints saving error.
+     * Constructs a instance of DataManager.
+     *
+     * @param parser           The parser will be used to convert settings and entries to data, vice verse.
+     * @param financialTracker The finantialTracker will provide all the entries Stonks XD is tracking currently.
+     * @param ui               The ui will be used to print out any warnings or messages to the user.
+     * @param budgetManager    The budgetManager will provide all the budget settings to be saved / loaded.
+     * @param currencyManager  The currencyManager will provide the currency setting.
      */
-    public void save(Parser parser, FinancialTracker financialTracker, Ui ui) {
+    public DataManager(Parser parser, FinancialTracker financialTracker, Ui ui, BudgetManager budgetManager,
+                       CurrencyManager currencyManager) {
+        this.parser = parser;
+        this.financialTracker = financialTracker;
+        this.ui = ui;
+        this.budgetManager = budgetManager;
+        this.currencyManager = currencyManager;
+    }
+
+    /**
+     * Saves all entries and settings.
+     * This method will be used more frequently as we typically want to save both entries and settings together.
+     */
+    public void saveAll() {
+        saveEntries();
+        saveSettings();
+    }
+
+    /**
+     * Loads all entries and settings.
+     * This method will be used more frequently as we typically want to load both entries and settings together.
+     */
+    public void loadAll() {
+        loadSettings();
+        loadEntries();
+    }
+
+    /**
+     * Saves all entries StonksXD is currently tracking into a csv file.
+     * This allows users to not lose all their entries when program closes.
+     */
+    private void saveEntries() {
         try {
-            FileWriter writer = new FileWriter(FILE_NAME);
+            FileWriter writer = new FileWriter(ENTRIES_FILE_NAME);
             BufferedWriter buffer = new BufferedWriter(writer);
-            String data;
 
-            // Categories header for the CSV file
-            buffer.write(CSV_HEADER);
+            buffer.write(ENTRIES_CSV_HEADER);
             buffer.write(NEWLINE);
-            ArrayList<Expense> expenses = financialTracker.getExpenses();
-            for (Expense expense : expenses) {
-                data = parser.convertExpenseToData(expense);
-                buffer.write(data);
-                buffer.write(NEWLINE);
-            }
-            ArrayList<Income> incomes = financialTracker.getIncomes();
-            for (Income income : incomes) {
-                data = parser.convertIncomeToData(income);
-                buffer.write(data);
-                buffer.write(NEWLINE);
-            }
-
+            writeExpenses(buffer);
+            writeIncomes(buffer);
             buffer.close();
         } catch (IOException e) {
-            ui.printError(Messages.ERROR_SAVING_ENTRIES);
+            ui.printError(Messages.ERROR_SAVING_ENTRIES_MESSAGE);
+        }
+    }
+
+    private void writeIncomes(BufferedWriter buffer) throws IOException {
+        String data;
+        ArrayList<Income> incomes = financialTracker.getIncomes();
+        for (Income income : incomes) {
+            data = parser.convertIncomeToData(income);
+            buffer.write(data);
+            buffer.write(NEWLINE);
+        }
+    }
+
+    private void writeExpenses(BufferedWriter buffer) throws IOException {
+        String data;
+        ArrayList<Expense> expenses = financialTracker.getExpenses();
+        for (Expense expense : expenses) {
+            data = parser.convertExpenseToData(expense);
+            buffer.write(data);
+            buffer.write(NEWLINE);
         }
     }
 
     /**
      * Loads all entries from StonksXD_Data.csv into StonksXD.
      * This allows users to not lose all their entries when the previous instance of StonksXD closed.
-     *
-     * @param parser Does the conversion from data in csv file to income and expense entries.
-     * @param financialTracker Stores all expenses and incomes after being converted from data format.
-     * @param ui Prints loading errors.
      */
-    public void load(Parser parser, FinancialTracker financialTracker, Ui ui) {
-        boolean hasCorruptedLines = false;
+    private void loadEntries() {
         FileInputStream fis;
         try {
-            fis = new FileInputStream(FILE_NAME);
+            fis = new FileInputStream(ENTRIES_FILE_NAME);
         } catch (FileNotFoundException e) {
-            ui.printError(Messages.UNABLE_TO_FIND_DATA_FILE);
+            ui.printLoadingError(Messages.UNABLE_TO_FIND_DATA_FILE);
             return;
         }
+        boolean hasCorruptedLines = false;
         Scanner sc = new Scanner(fis);
-        sc.nextLine();
-
+        checkForEntriesFileHeader(sc);
         while (sc.hasNextLine()) {
             String data = sc.nextLine();
             try {
-                Expense expense = parser.convertDataToExpense(data);
-                financialTracker.addExpense(expense);
-            } catch (InvalidExpenseAmountException | InvalidExpenseDataFormatException | DateTimeException ee) {
+                loadAsExpense(data);
+            } catch (InputException | InvalidExpenseDataFormatException | DateTimeParseException
+                    | ExpenseOverflowException e) {
                 try {
-                    Income income = parser.convertDataToIncome(data);
-                    financialTracker.addIncome(income);
-                } catch (InvalidIncomeAmountException | InvalidIncomeDataFormatException | DateTimeException ie) {
+                    loadAsIncome(data);
+                } catch (InputException | InvalidIncomeDataFormatException | DateTimeParseException
+                        | IncomeOverflowException ie) {
                     hasCorruptedLines = true;
                 }
             }
         }
-        
         if (hasCorruptedLines) {
-            ui.printError(Messages.HAS_CORRUPTED_DATA_ENTRIES);
-        } 
+            ui.printLoadingError(Messages.HAS_CORRUPTED_DATA_ENTRIES);
+        }
+    }
+
+    private void loadAsIncome(String data) throws InputException, InvalidIncomeDataFormatException,
+            IncomeOverflowException {
+        Income income = parser.convertDataToIncome(data);
+        financialTracker.addIncome(income);
+    }
+
+    private void loadAsExpense(String data) throws InputException, InvalidExpenseDataFormatException,
+            ExpenseOverflowException {
+        Expense expense = parser.convertDataToExpense(data);
+        financialTracker.addExpense(expense);
+    }
+
+    private void checkForEntriesFileHeader(Scanner sc) {
+        String data;
+        try {
+            data = sc.nextLine();
+        } catch (NoSuchElementException e) {
+            ui.printLoadingError(Messages.INCOMPLETE_ENTRIES_CSV_HEADER_MESSAGE);
+            return;
+        }
+
+        if (!data.equals(ENTRIES_CSV_HEADER)) {
+            ui.printLoadingError(Messages.INCOMPLETE_ENTRIES_CSV_HEADER_MESSAGE);
+        }
+    }
+
+    private void checkForSettingsFileHeader(Scanner sc) {
+        String data;
+        try {
+            data = sc.nextLine();
+        } catch (NoSuchElementException e) {
+            ui.printLoadingError(Messages.INCOMPLETE_SETTINGS_CSV_HEADER_MESSAGE);
+            return;
+        }
+
+        if (!data.equals(SETTINGS_CSV_HEADER)) {
+            ui.printLoadingError(Messages.INCOMPLETE_SETTINGS_CSV_HEADER_MESSAGE);
+        }
+    }
+
+    /**
+     * Saves all settings into a csv file.
+     * This allows users to not lose all their settings when program closes.
+     */
+    private void saveSettings() {
+        try {
+            FileWriter writer = new FileWriter(SETTINGS_FILE_NAME);
+            BufferedWriter buffer = new BufferedWriter(writer);
+
+            buffer.write(SETTINGS_CSV_HEADER);
+            buffer.write(NEWLINE);
+            writeSettings(buffer);
+            buffer.close();
+        } catch (IOException e) {
+            ui.printError(Messages.ERROR_SAVING_SETTINGS_MESSAGE);
+        }
+    }
+
+    private void writeSettings(BufferedWriter buffer) throws IOException {
+        String data;
+        data = parser.convertSettingsToData(budgetManager, currencyManager);
+        buffer.write(data);
+        buffer.write(NEWLINE);
+    }
+
+    /**
+     * Loads all settings from StonksXD_Settings.csv into StonksXD.
+     * This allows users to not lose all their settings when the previous instance of
+     * StonksXD closed.
+     */
+    private void loadSettings() {
+        FileInputStream fis;
+        try {
+            fis = new FileInputStream(SETTINGS_FILE_NAME);
+        } catch (FileNotFoundException e) {
+            ui.printLoadingError(Messages.UNABLE_TO_FIND_SETTINGS_FILE);
+            return;
+        }
+
+        Scanner sc = new Scanner(fis);
+        try {
+            checkForSettingsFileHeader(sc);
+            String data = sc.nextLine();
+            CurrencyType currency = parser.convertDataToCurrencySetting(data);
+            loadCurrencySetting(currency);
+            double thresholdValue = parser.convertDataToThresholdSetting(data);
+            loadThresholdSetting(thresholdValue);
+            ArrayList<Double> budgetSettings = parser.convertDataToBudgetSettings(data);
+            loadBudgetSettings(budgetSettings);
+        } catch (NullPointerException | NumberFormatException | InvalidSettingsDataException
+                | InvalidCurrencyTypeException | BlankCurrencyTypeException | NoSuchElementException
+                | InvalidThresholdValueException e) {
+            ui.printLoadingError(Messages.HAS_CORRUPTED_SETTINGS);
+        }
+    }
+
+    private void loadCurrencySetting(CurrencyType currency) {
+        currencyManager.setCurrency(currency);
+    }
+
+    private void loadBudgetSettings(ArrayList<Double> budgetSettings) {
+        int budgetIndex = 0;
+        for (ExpenseCategory category : ExpenseCategory.values()) {
+            // Not expected to have a budget related to NULL
+            if (category == ExpenseCategory.NULL) {
+                break;
+            }
+            budgetManager.setBudget(budgetSettings.get(budgetIndex), category, financialTracker.getExpenses());
+            budgetIndex += 1;
+        }
+    }
+
+    private void loadThresholdSetting(double thresholdValue) {
+        budgetManager.setThreshold(thresholdValue);
     }
 }
