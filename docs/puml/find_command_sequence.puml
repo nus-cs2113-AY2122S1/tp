@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor User
+Box
+User -> Foodorama: userInput
+activate Foodorama
+Foodorama -> InputParser: getCommandName()
+activate InputParser
+Foodorama <-- InputParser: userCommandName
+Foodorama -> InputParser: getCommandParameters()
+return parameters
+create FindCommand
+Foodorama -> FindCommand: execute(parameters)
+deactivate InputParser
+activate FindCommand
+
+alt SWITCH: DISH
+    alt if keyword isBlank
+        FindCommand --> FoodoramaException: Missing Parameter
+        activate FoodoramaException
+        FoodoramaException -> Ui: getFindMissingParamMsg()
+    activate Ui
+        User <-- Ui: Missing Param Message
+    else else
+        FindCommand -> Ui: printMatchedDishes(matchedDishList)
+        User <-- Ui: List of Dishes with Matching Keyword
+    end
+
+else SWITCH: INGR
+    alt if keyword isBlank
+        FindCommand --> FoodoramaException: Missing Parameter
+        FoodoramaException -> Ui: getFindMissingParamMsg()
+        User <-- Ui: Missing Param Message
+    else else
+        FindCommand -> Ui: printMatchedIngredient(matchedIngrList)
+        User <-- Ui: List of Ingredients with Matching Keyword
+    end
+
+else SWITCH: else
+    FindCommand --> FoodoramaException: Invalid Parameter
+    deactivate FindCommand
+
+    FoodoramaException -> Ui: getInvalidParamMsg()
+    deactivate FoodoramaException
+    User <-- Ui: Invalid Parameter Message
+    deactivate Ui
+end
+
+deactivate Foodorama
+
+@enduml

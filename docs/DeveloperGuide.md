@@ -1,4 +1,4 @@
-# Food-O-Rama Developer Guide ✍
+# Food-O-Rama Developer Guide
 
 ## 🌑 Introduction
 
@@ -7,6 +7,10 @@
 This Developer Guide serves to inform developers on the design and implementation of
 *Food-O-Rama* to assist them in the development process of APIs. It also helps them realise the target user profile that
 motivated us to build this application.
+
+| Legend |  Description |
+| --- | --- |
+| 💡 *Note*  | Lightbulb requires your attention. |
 
 ## 🧾 Table of Contents
 
@@ -180,6 +184,7 @@ For simplicity’s sake the ui class has been minimized into 3 components:
  * Functions that get a string from UI to be used elsewhere (e.g. Exception classes getting error messages)
  * Functions that print command outputs
 
+
 ### Exceptions
 
 The `FoodoramaException` class is responsible for handling errors such as unrecognised user commands and improper
@@ -218,7 +223,90 @@ the roles are reversed
 
 ## Implementation
 
+### Add
+The add command allows for the addition of dishes and ingredients, and wastage weights and storage weights.
+
+#### Adding Dishes and Ingredients
+The `add dish` and `add ingr` commands are handled by the `AddDishCommand` and `AddIngrCommand` classes respectively.
+Both commands have a similar implementation, with the difference being that `add ingr` has an additional weight input as
+further described in the sequence diagram below.
+
+![](images/add_ingr_command_sequence.png)
+
+For `add dish` and `add ingr` commands:
+
+1. `AddDishCommand` or `AddIngredientCommand` will proceed with basic Input Validation, and call `TYPEList.add[DISH/INGR_NAME]`,
+where `TYPE` is either `Dish` or `Ingredient` respectively.
+   
+        For Adding Dishes, skip to Step 6.
+
+2. For Adding Ingredients, `IngredientList.add()` will prompt storage weight input of the Ingredient from the user and throw
+exceptions if the storage weight is not an integer, is `Infinity` is `NaN`, or is negative.
+   
+3. If storage weight input is greater than 10000kg (*soft limit*), the user will be prompted with a confirmation message.
+   
+4. If the user enters `n` or `no`, the input weight prompt will loop until the user inputs a valid number.
+
+5. Else, the ingredient is added to the ingredient list.
+
+6. Dishes will be added to the dish list without the prompt for storage weight input.
+
+7. The Ui class is then called to print a success message to the user.
+
+#### Adding Wastage to Dishes and Ingredients, Storage to Ingredients
+The `add dish waste`, `add ingr waste` and `add ingr storage` commands are handled by the `AddDishWasteCommand`, `AddIngrWasteCommand` and `AddIngrStoredCommand` classes respectively.
+All three commands have similar implementation as described by the sequence diagram below for Adding Wastage to Dishes.
+
+![](images/add_dish_waste_command_sequence.png)
+
+For `add dish waste`, `add ingr waste` and `add ingr stored` commands:
+
+1. The input will be handled by their respective command classes with Basic Input Validation and call the `Dish` or `List`
+   class methods `addWeight` (for waste) or `updateIngredientStoredWeight` (for ingredient stored.) 
+   
+2. The methods will prompt weight input from the user and throw exceptions if the weight is not an integer, is `Infinity`, is `NaN` or
+   is negative.
+
+3. If weight input is greater than 10000kg (*soft limit*), the user will be prompted with a confirmation message.
+
+4. If the user enters `n` or `no`, the input weight prompt will loop until the user inputs a valid number.
+
+5. Else, the weight input is added to the dish/ingredient wastage or ingredient storage.
+
+6. The Ui class is then called to print a success message to the user.
+
+The difference between the three commands lies in the `add dish waste` command, where the wastage must be added to the
+ingredients linked to it as seen in the Code Snippet below.
+
+Code Snippet:
+```
+    if (!parts.isEmpty()) {
+        ingredientContribution = wastage / parts.size();
+        for (Ingredient ingredient : parts) {
+            // Change in contribution is change in wastage / num of parts
+            ingredient.addDishWaste(inputWastage / parts.size());
+        }
+    }
+```
+
 ### Find
+The find commands (`find dish` and `find ingr`) implement the `FindCommand` class to allow the user to search for 
+a particular `KEYWORD` and return a list of Dishes or Ingredients that match the keyword.
+
+![](images/find_command_sequence.png)
+
+For `find` commands, the handling method `FindCommand.execute()`: 
+
+1. Parses the input and determines if a dish or ingredient is to be found, and uses corresponding switch cases. If it is neither,
+throw an Invalid Parameter error via Foodorama Exception.
+
+2. If the keyword to be found is blank, throw a Missing Parameter error via FoodoramaException.
+
+3. Else, checks if the input keyword exists in the name of every Dish or Ingredient in their respective list classes.
+
+4. Stores all Dishes or Ingredients with a matching name in a new ArrayList.
+
+5. Calls the Ui class to print the new ArrayList to the user.
 
 ### Edit
 
@@ -226,12 +314,10 @@ The implementation of the Edit function allows the User to edit several
 instance variables of the Dishes and Ingredients present in the DishList and
 IngredientList.
 
-![](images/edit_dish_name_sequence.png)
-
+![](images/edit_dish_name_sequence_diagram.png)
 This Sequence Diagram shows how the `EditDishNameCommand` class functions.
 
 Currently the User is able to edit the following:
-
 * Dish Name
 * Dish Wastage Weight
 * Ingr Name
@@ -293,6 +379,7 @@ still don't get a perfect representation, we are capable of giving the value acc
 height was 3.33 units it would be represented by 3 filled bars and the 4th bar will have a 3 within indicating its value
 is between 3.3 to 3.4 as shown in the figure below
 
+```
 ____________________________________________________________
 
                            [|]     Legend:              Scale: 1 unit = 5.0kg
@@ -308,6 +395,7 @@ ____________________________________________________________
      A    B     C     D     E
 
 ____________________________________________________________
+```
 
 ### Random dish
 
@@ -325,11 +413,8 @@ Using this, they sort the Dishes and Ingredients in descending order of their Wa
 * The list() function calls upon the `Ui` class to print the list of Dishes or Ingredients
 via the printDishList(dishList) or printIngrList(ingredientList) functions.
 
-### Terminal refreshing
-
-The interface of the program utilizes the ClearScreen class to clear the terminal after every user input through the
-built-in `ProcessBuilder` Java class. Such a feature allows greater readability and focus for the user as the terminal
-will not be cluttered with past commands.
+### Terminal Refreshing / Clear Screen
+The interface of the program utilizes the ClearScreen class to clear the terminal after every user input through the built-in `ProcessBuilder` Java class. Such a feature allows greater readability and focus for the user as the terminal will not be cluttered with past commands.
 `Ui` will call `ClearScreen.clearConsole()` method to clear the terminal.
 
 The ProcessBuilder class will send a respective command to the terminal depending on the Operating System of the user.
@@ -423,15 +508,42 @@ Brings developers through the requirements of Users the *Food-O-Rama* team consi
 
 ## 🧪 Instructions for Manual Testing
 
-* For Manual Testing, you can write sample data into data text files (`dishes.txt` & `ingredients.txt`).
-* Write data in appropriate format
-    * Dishes: [DISH_NAME] | [WEIGHT_IN_KG (dishWaste)] | [dishWaste divided by number of constituents]
-      | [Wastage limit (if present else -1)] | [ingredient 1|ingredient 2|etc]
-        * Example: chicken rice|2.0|1.0|17.7|chicken|rice
-    * Ingredients: [INGR_NAME] | [WEIGHT_IN_KG (ingrStored)] | [WEIGHT_IN_KG (ingrWasted)]
-      | [Wastage limit (if present else -1)]
-        * Example:chicken|2.33|1.0|22.2
-* The appropriate formats are also present in a text file called formats.txt for your usage
+* For Manual Testing, you can write sample data into data text files (`dishes.txt` & `ingredients.txt`). 
+  
+Dish Format: `[DISH_NAME] | [AMOUNT_WASTED_IN_KG] | [WASTAGE_DIVIDED_BY_NUM_OF_LINKED_INGR] | [WASTAGE_LIMIT] | [INGR_1|INGR_2|etc.]`
+
+* 💡 *Note*: `[WASTAGE_LIMIT]` is `-1` when no limit is set.
+
+Dish example of usage:
+
+```
+No Linked Ingredients, No Limit, Wastage of 2kg:
+prata|2.0|2.0|-1
+
+2 Linked Ingredients (flour and egg), Wastage of 2kg, No Limit:
+prata|2.0|1.0|-1|flour|egg
+
+2 Linked Ingredients (flour and egg), Wastage of 2kg, Limit of 3kg:
+prata|2.0|1.0|3|flour|egg
+```
+
+Ingredient Format: `[INGR_NAME] | [AMOUNT_STORED_IN_KG] | [AMOUNT_WASTED_IN_KG] | [WASTAGE_LIMIT] | [EXPIRY_DATE]`
+
+* 💡 *Note*:
+
+    * `[WASTAGE_LIMIT]` is `-1` when no limit is set.
+    * `[EXPIRY_DATE]` follows the format `dd/MM/yyyy`.
+    * `[EXPIRY_DATE]` is `null` when no expiry date is set.
+
+Ingredient example of usage:
+
+```
+No Limit, No Expiry, Storage of 2kg, Wastage of 1kg:
+chicken|2.0|1.0|-1|null
+
+Limit of 2.5kg, Expiry Set, Storage of 2kg, Wastage of 1kg:
+chicken|2.0|1.0|2.5|30/10/2021
+```
 
 ### Testing the Dish commands
 
