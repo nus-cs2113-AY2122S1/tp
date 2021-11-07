@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 public class DeleteParser extends Parser {
 
+    //@@author
     /**
      * Parses user input to delete a goal.
      *

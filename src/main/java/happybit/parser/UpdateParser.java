@@ -24,13 +24,17 @@ public class UpdateParser extends Parser {
     private static final String ERROR_DATE_FORMAT = "Use the date format: 'ddMMyyyy'.";
     private static final String ERROR_INVALID_UPDATE_COMMAND = "There is no update command for goals in this format, "
             + "do check your parameters one more time.";
+    private static final String ERROR_NO_REQUIRED_FLAGS_UPDATE_COMMAND = "Required flags for update command missing. "
+            + "Please try again.";
     private static final String ERROR_INVALID_CHANGE_COMMAND = "There is no change command for habits in this format, "
             + "do check your parameters one more time.";
     private static final String ERROR_UPDATE_COMMAND_NO_GOAL_INDEX = "A goal index has to be provided with the "
             + "g/ flag for Update commands.";
     private static final String ERROR_CHANGE_COMMAND_MISSING_INDEXES = "A goal index and a habit index has to be "
-            + "provided using the g/ and h/ flags respectively for Change commands";
+            + "provided using the g/ and h/ flags respectively for Change commands.";
+    private static final String ERROR_MISSING_GOAL_HABIT_FLAGS_CHANG_COMMAND = "";
     private static final String ERROR_UPDATE_START_DATE = "The start date cannot be updated once set. Start on time!";
+    //todo delete/replace?
 
     private static final String ERROR_CHANGE_HABIT_NAME_WITH_UPDATE_COMMAND = "Are you perhaps trying to change a "
             + "habit name? Please use the 'change' command instead.";
@@ -47,21 +51,16 @@ public class UpdateParser extends Parser {
     private static final int FLAG_LENGTH = 2;
 
     /**
-     * Examines user input to decide which goal attribute user wants to update.
+     * Examines user input to extract which goal attribute(s) user wants to update.
+     * Goal attributes that can be updated: Goal name, Goal Type, Goal End Date.
      *
      * @param input User input.
-     * @return Parse command specifically for updating the chosen goal attribute.
-     * @throws HaBitParserException Thrown when parameters given are for changing habit rather than updating goal
-     *                              or when parameters are not in the expected format.
+     * @return UpdateGoalCommand to specifically update the chosen goal attribute(s).
+     * @throws HaBitParserException Thrown when user types an Update command  without a g/ flag.
      *
      */
     public static Command parseUpdateGoalCommands(String input) throws HaBitParserException {
         ArrayList<String> parameters = splitInput(input);
-        // check if contains FLAG_GOAL_INDEX
-        if (!isContainFlag(parameters, FLAG_GOAL_INDEX)) {
-            throw new HaBitParserException(ERROR_UPDATE_COMMAND_NO_GOAL_INDEX);
-        }
-        assert (input.contains(FLAG_GOAL_INDEX));
 
         // check if it contains n/, t/ and e/ flag
         // if yes, mark as 1 in int array
@@ -70,13 +69,20 @@ public class UpdateParser extends Parser {
         Date newGoalEndDate = null;
 
         int[] updateAttributes = getUpdateGoalAttributes(parameters);
-        if (updateAttributes[0] == 1) {
+
+        assert (input.contains(FLAG_GOAL_INDEX) && (input.contains(FLAG_NAME)
+                || input.contains(FLAG_GOAL_TYPE) || input.contains(FLAG_END_DATE)));
+
+        boolean isUpdateGoalName = (updateAttributes[0] == 1);
+        boolean isUpdateGoalType = (updateAttributes[1] == 1);
+        boolean isUpdateGoalEndDate = (updateAttributes[2] == 1);
+        if (isUpdateGoalName) {
             newGoalName = getName(parameters);
         }
-        if (updateAttributes[1] == 1) {
+        if (isUpdateGoalType) {
             newGoalType = getType(parameters);
         }
-        if (updateAttributes[2] == 1) {
+        if (isUpdateGoalEndDate) {
             newGoalEndDate = getDate(parameters);
         }
         int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
@@ -85,26 +91,36 @@ public class UpdateParser extends Parser {
                 updateAttributes, excessAttributes);
     }
 
-
-
+    /**
+     * Examines user input to extract which habit attribute(s) user wants to update.
+     * Habit attributes that can be updated: Habit Name, Habit Interval.
+     *
+     * @param input User input.
+     * @return UpdateHabitCommand to specifically update the chosen habit attribute(s).
+     * @throws HaBitParserException Thrown when user types a Change command without g/ and h/ flags.
+     */
     public static Command parseUpdateHabitCommands(String input) throws HaBitParserException {
         ArrayList<String> parameters = splitInput(input);
-        if (!isContainFlag(parameters, FLAG_GOAL_INDEX) || !isContainFlag(parameters, FLAG_HABIT_INDEX)) {
-            throw new HaBitParserException(ERROR_CHANGE_COMMAND_MISSING_INDEXES);
-        }
-        assert (input.contains(FLAG_GOAL_INDEX));
-        assert (input.contains(FLAG_HABIT_INDEX));
-        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
-        int habitIndex = getIndex(parameters, FLAG_HABIT_INDEX);
+
         String newHabitName = null;
         int newHabitInterval = 0;
+
         int[] updateAttributes = getUpdateHabitAttributes(parameters);
-        if (updateAttributes[0] == 1) {
+
+        assert (input.contains(FLAG_GOAL_INDEX) && input.contains(FLAG_HABIT_INDEX)
+                && (input.contains(FLAG_NAME) || input.contains(FLAG_INTERVAL)));
+
+        boolean isUpdateHabitName = (updateAttributes[0] == 1);
+        boolean isUpdateHabitInterval = (updateAttributes[1] == 1);
+
+        if (isUpdateHabitName) {
             newHabitName = getName(parameters);
         }
-        if (updateAttributes[1] == 1) {
-            newHabitInterval = getUpdateInterval(parameters, FLAG_INTERVAL);
+        if (isUpdateHabitInterval) {
+            newHabitInterval = getUpdateInterval(parameters);
         }
+        int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
+        int habitIndex = getIndex(parameters, FLAG_HABIT_INDEX);
         ArrayList<String> excessAttributes = getExcessHabitAttributes(parameters);
         return new UpdateHabitCommand(goalIndex, habitIndex, newHabitName, newHabitInterval,
                 updateAttributes, excessAttributes);
@@ -118,6 +134,16 @@ public class UpdateParser extends Parser {
      * =========================================================================
      */
 
+    /**
+     * Confirms what attributes exist in the user input.
+     * Finds the flags for those attributes (goal name, goal type, and goal end date).
+     * Updates the int[] updateAttributes from 0 to 1 if it finds the flag,
+     * signalling what goal attributes the user wants to update.
+     *
+     * @param parameters ArrayList of parameters of user input.
+     * @return ArrayList containing 1s or 0s that represent the presence or absence of a flag.
+     * @throws HaBitParserException Thrown if user input does not contain required information.
+     */
     private static int[] getUpdateGoalAttributes(ArrayList<String> parameters) throws HaBitParserException {
         int[] updateAttributes = new int[3];
         // check updateGoalName
@@ -130,12 +156,28 @@ public class UpdateParser extends Parser {
         if (isContainFlag(parameters, FLAG_END_DATE)) {
             updateAttributes[2] = 1;
         }
+
         if (nothingToUpdate(updateAttributes)) {
-            throw new HaBitParserException(ERROR_INVALID_UPDATE_COMMAND);
+
+            int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
+            if (isContainFlag(parameters, FLAG_HABIT_INDEX) && isContainFlag(parameters, FLAG_INTERVAL)) {
+                throw new HaBitParserException(ERROR_INVALID_UPDATE_COMMAND);
+            } else if (isContainFlag(parameters, FLAG_GOAL_INDEX + (goalIndex + 1))) {
+                throw new HaBitParserException(ERROR_NO_REQUIRED_FLAGS_UPDATE_COMMAND);
+            }
         }
         return updateAttributes;
     }
 
+    /**
+     * Confirms what excess attributes exist in the user input.
+     * Find excess flags and their attributes that user may have included accidentally.
+     * Saves the excess flags in an ArrayList for printing to user later.
+     *
+     * @param parameters ArrayList of parameters of user input.
+     * @return ArrayList containing (if any) excess flags from user input.
+     * @throws HaBitParserException Thrown if user attempts to update start date.
+     */
     private static ArrayList<String> getExcessGoalAttributes(ArrayList<String> parameters) throws HaBitParserException {
         ArrayList<String> excess = new ArrayList<>();
         if (isContainFlag(parameters, FLAG_HABIT_INDEX)) {
@@ -150,6 +192,16 @@ public class UpdateParser extends Parser {
         return excess;
     }
 
+    /**
+     * Confirms what attributes exist in the user input.
+     * Finds the flags for those attributes (habit name, habit interval).
+     * Updates the int[] updateAttributes from 0 to 1 if it finds the flag,
+     * signalling what habit attributes the user wants to update.
+     *
+     * @param parameters ArrayList of parameters of user input.
+     * @return ArrayList containing 1s or 0s that represent the presence or absence of a flag.
+     * @throws HaBitParserException Thrown if user input does not contain any flags.
+     */
     private static int[] getUpdateHabitAttributes(ArrayList<String> parameters) throws HaBitParserException {
         int[] updateAttributes = new int[2];
         if (isContainFlag(parameters, FLAG_NAME)) {
@@ -159,11 +211,35 @@ public class UpdateParser extends Parser {
             updateAttributes[1] = 1;
         }
         if (nothingToUpdate(updateAttributes)) {
-            throw new HaBitParserException(ERROR_INVALID_CHANGE_COMMAND);
+
+            if (!isContainFlag(parameters, FLAG_GOAL_INDEX) && !isContainFlag(parameters, FLAG_HABIT_INDEX)) {
+                throw new HaBitParserException(ERROR_CHANGE_COMMAND_MISSING_INDEXES);
+            }
+
+            int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
+            int habitIndex = getIndex(parameters, FLAG_HABIT_INDEX);
+
+            if (isContainFlag(parameters, FLAG_GOAL_TYPE) || isContainFlag(parameters, FLAG_END_DATE)) {
+                throw new HaBitParserException(ERROR_INVALID_CHANGE_COMMAND);
+            } else if (isContainFlag(parameters, FLAG_GOAL_INDEX + (goalIndex + 1))
+                    && isContainFlag(parameters, FLAG_HABIT_INDEX + (habitIndex + 1))) {
+                throw new HaBitParserException(ERROR_NO_REQUIRED_FLAGS_UPDATE_COMMAND);
+            } else {
+                throw new HaBitParserException(ERROR_INVALID_CHANGE_COMMAND);
+            }
         }
         return updateAttributes;
     }
 
+    /**
+     * Confirms what excess attributes exist in the user input.
+     * Find excess flags and their attributes that user may have included accidentally.
+     * Saves the excess flags in an ArrayList for printing to user later.
+     *
+     * @param parameters ArrayList of parameters of user input.
+     * @return ArrayList containing (if any) excess flags from user input.
+     * @throws HaBitParserException Thrown if user attempts to update start date.
+     */
     private static ArrayList<String> getExcessHabitAttributes(ArrayList<String> parameters)
             throws HaBitParserException {
         ArrayList<String> excess = new ArrayList<>();
@@ -179,6 +255,12 @@ public class UpdateParser extends Parser {
         return excess;
     }
 
+    /**
+     * Checks the int[] array to find if any attributes the user wishes to update.
+     *
+     * @param updateAttributes int[] array containing 1s or 0s that represent the presence or absence of a flag.
+     * @return True if there exists at least one attribute to be updated. False otherwise.
+     */
     private static boolean nothingToUpdate(int[] updateAttributes) {
         for (int attribute : updateAttributes) {
             if (attribute == 1) {
@@ -188,6 +270,13 @@ public class UpdateParser extends Parser {
         return true;
     }
 
+    /**
+     * Scans the ArrayList to ascertain whether a certain flag is in it.
+     *
+     * @param parameters ArrayList of parameters of user input.
+     * @param flag Flag that prefixes a parameter to denote what type of parameter is entered.
+     * @return True if there exists said flag in the ArrayList, false otherwise.
+     */
     private static boolean isContainFlag(ArrayList<String> parameters, String flag) {
         for (String param : parameters) {
             if (param.contains(flag)) {
