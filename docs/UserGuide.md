@@ -132,7 +132,10 @@ Displays all modules from the master list of universities that the user can choo
 
 #### Example of usage:
 
-* Input: `list /muni`  
+* Input:  
+```
+list /muni
+```  
 Expected output:
 ```
 Here are the universities and module mappings in the list:  
