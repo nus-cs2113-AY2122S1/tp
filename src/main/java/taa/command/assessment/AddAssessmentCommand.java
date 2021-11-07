@@ -32,11 +32,11 @@ public class AddAssessmentCommand extends Command {
     private static final String MESSAGE_FORMAT_INVALID_NAME = "Invalid assessment name. "
             + "Assessment already exists.";
     private static final String MESSAGE_FORMAT_INVALID_WEIGHTAGE = "Invalid weightage. "
-        + "Weightage must be between %,.2f (inclusive) and %,.2f (inclusive)";
+        + "Weightage must a number be between %,.2f (inclusive) and %,.2f (inclusive)";
     private static final String MESSAGE_FORMAT_INVALID_TOTAL_WEIGHTAGE = "Invalid weightage. "
             + "Total new weightage exceeds %,.2f%%.";
     private static final String MESSAGE_FORMAT_INVALID_MAXIMUM_MARKS = "Invalid maximum marks. "
-        + "Maximum marks must be larger than %,.2f (inclusive)";
+        + "Maximum marks must be a number larger than %,.2f (inclusive)";
     private static final String MESSAGE_FORMAT_ASSESSMENT_ADDED = "Assessment added to %s:\n"
         + "  %s\nThere are %d assessments in %s.";
 
