@@ -2,6 +2,9 @@
 
 This is a student project for a university software development course and I am one of the contributors to `MediVault`.
 
+`MediVault` is a Command Line Interface (CLI) application that will help to manage medication supplies within a pharmacy.
+It is an integrated solution that provides real-time tracking of stocks, prescriptions and orders.
+
 ## Summary of Contributions
 
 Given below are my contributions to the project.
@@ -32,14 +35,9 @@ v2.1 tasks:
 ### Enhancements to Existing Features
 
 - Added order quantity to `liststock` command. [[#109](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/109)]
-    - Justification: To allow pharmacists to know easily if a new order was already placed.
 - Refactor `HashMap<String, String>` to `LinkedHashMap<String, String>`. [[#123](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/123)]
-    - Justification: This helps preserve the order of parameters input by the user as MediVault will take the last
-      occurrence if the same parameter is provided multiple times.
 - Refactor `command` objects. [[#133](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/133)]
 - Refactor `Dispense` to `Prescription` [[#208](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/208)]
-    - Justification: From peer feedback, users were confused what `Dispense` was, as such our team decided
-      that `Prescription` is a better word to use.
 - Included JUnit tests for `CommandParser`, `ListPrescription`, `Help`, `Purge` and sort for `ListOrder` and `ListStock`. [[#92](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/92), [#305](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/305)]
 
 ### Documentation
