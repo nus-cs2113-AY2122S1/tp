@@ -173,6 +173,9 @@ Goal     | A long term achievement you wish to accomplish.                  |`Lo
 Habit    | Checkpoints; small, actionable tasks to be done to achieve goal. |`Run 5km`
 Interval | The frequency (in days) which you want the habit to recur.       |`Run 5km every 7 days` 
 
+![](Display_Images/HappyBit_Visual_Explain.png)
+_A timeline of what a goal should look like._ | Made with Canva
+
 **Goals and habits** <br>
 Here we distinguish between goals and habits. Although they are commonly used words, the way we
 design _Ha(ppy)Bit_ is tightly integral to the way we define them above. We would also like you
