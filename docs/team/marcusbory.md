@@ -36,6 +36,8 @@ The link to the User Guide (UG) can be found [here](https://ay2122s1-cs2113t-t09
 - Added documentation for `import` function
 - Updated documentation formatting and overall readability
 
+<div style="page-break-after: always;"></div>
+
 ### Contributions to DG
 The link to the Developer Guide (DG) can be found [here](https://ay2122s1-cs2113t-t09-1.github.io/tp/DeveloperGuide.html).
 - Added documentation for `add` function
