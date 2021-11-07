@@ -11,13 +11,13 @@ code. [[RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=a-
 
 ### Features
 
-#### v1.0:
+v1.0:
 
 * Implemented `updatestock` command. [[#25](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/25)]
     * Functionality: Users are able to update stock information with one command.
     * Justification: Refrain the need to use both add and delete stock command.
 
-#### v2.0:
+v2.0:
 
 * Implemented `updateorder` command. [[#121](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/121)]
     * Functionality: Users are able to update order information with one command.
@@ -27,7 +27,7 @@ code. [[RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=a-
     * Functionality: Users are able to update prescription information with one command.
     * Justification: Refrain the need to use both add and delete prescription command.
 
-#### v2.1:
+v2.1:
 
 * Fixed functionality and documentation bugs raised during PE. [[#296](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/296)]
 * Fixed bugs found in `updateprescription` command. [[#324](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/324)]
