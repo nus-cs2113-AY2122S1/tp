@@ -7,7 +7,7 @@
   * [Architecture](#architecture)
   * [UI Component](#ui-component)
 * [Implementation](#implementation)
-  * [Delete - Basic Command Logic](#delete---basic-command-logic)
+  * [Delete feature](#delete-feature)
 * [Product scope](#product-scope)
   * [Target user profile](#Target-user-profile)
   * [Value proposition](#value-proposition)
@@ -159,7 +159,7 @@ The reloadArrayToStorage() method will not be called.
 
 ## <a id="implementation"></a> Implementation
 
-### <a id=""></a> Delete - Basic Command Logic
+### <a id="delete-feature"></a> Delete feature
 
 The delete feature collaborates with other classes like Parser, RecordList, etc. Basically it contains three usages which are deletion of Budget, Expenditure(s), and Loan(s).
 
