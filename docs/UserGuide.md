@@ -156,7 +156,7 @@ Expected outcome of usage:
 ```
 ls
 ____________________________________________________________
-ConTech has 7 contacts stored.
+ConTech has 5 contacts stored.
 Here's the list :
 ____________________________________________________________
 
@@ -165,8 +165,6 @@ ____________________________________________________________
 2. Le Zong
 3. Ashraf
 4. Mayank
-5. Jim
-6. Akshay
 ____________________________________________________________
 ```
 
@@ -203,7 +201,6 @@ ____________________________________________________________
 Name:     Alex Lee
 Github:   github.com/alexlee
 Email:    alex.lee@contech.sg
-Telegram: t.me/alexl33
 ____________________________________________________________
 ```
 * View personal contact:
