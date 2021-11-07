@@ -1,70 +1,42 @@
 package seedu.duke.commands;
 
-import seedu.duke.Duke;
-import seedu.duke.exceptions.DukeException;
-import seedu.duke.items.Event;
-import java.util.Arrays;
 
+import seedu.duke.Duke;
+import seedu.duke.items.Event;
 
 public class FindCommand extends Command {
 
-    private static final int MAX_SIZE = Duke.eventCatalog.size();
+    private final String keywords;
+    private static int numberOfEventsFound;
 
-    private static String keyword;
-    private static Event[] filteredList = new Event[MAX_SIZE];
-    //private static ArrayList<Event> filteredList = new ArrayList<>();
-    private static int numberOfEvents;
 
-    public FindCommand(String[] command) {
-        try {
-            if (command.length == 1) {
-                throw new DukeException("Please specify what Events you wish to find.");
-            }
-            keyword = getKeywordFromCommand(command);
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-        } catch (StringIndexOutOfBoundsException e) {
-            System.out.println("Please enter at least one keyword!");
-        }
+    public FindCommand(String keywords) {
+        this.keywords = keywords;
     }
 
     public CommandResult execute() {
-        filterEventsByString(keyword);
-        System.out.println("Here are the events you wished to find:");
-        printFilteredEvents();
-        if (numberOfEvents == 0) {
-            return new CommandResult("No matching events were found.");
+        String findResults = filterEvents(keywords);
+        if (noEventsFound()) {
+            return new CommandResult("No matching events found!");
         }
-        return new CommandResult(numberOfEvents + " events found.");
+        return new CommandResult(findResults);
     }
 
-    private static String convertArrayToString(String[] command) {
-        return Arrays.toString(command);
-    }
-
-    private static String getKeywordFromCommand(String[] command) {
-        String commandAsString = convertArrayToString(command);
-        int endIndex = commandAsString.length();
-        int startOfKeyword = commandAsString.trim().indexOf(" ") + 1;
-        return commandAsString.substring(startOfKeyword, endIndex - 1).trim();
-    }
-
-    private static void filterEventsByString(String keyword) {
+    private static String filterEvents(String keyword) {
+        StringBuilder result = new StringBuilder();
+        numberOfEventsFound = 0;
         for (int i = 0; i < Duke.eventCatalog.size(); i++) {
             Event event = Duke.eventCatalog.get(i);
             if (event.getTitle().toLowerCase().contains(keyword.toLowerCase())) {
-                filteredList[i] = event;
+                result.append(i + 1).append(". ");
+                result.append(event.getTitle()).append("\n");
+                numberOfEventsFound++;
             }
         }
+        return result.toString();
     }
 
-    private static void printFilteredEvents() {
-        for (int i = 0; i < filteredList.length; i++) {
-            if (filteredList[i] == null) {
-                continue;
-            }
-            System.out.println((i + 1) + ". " + filteredList[i].getTitle());
-            numberOfEvents++;
-        }
+    private static boolean noEventsFound() {
+        return numberOfEventsFound == 0;
     }
 }
