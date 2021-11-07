@@ -32,10 +32,8 @@ public class ConverterToCsvTest {
         File dataDirectory = new File("./data/");
         File[] dataDirectoryList = dataDirectory.listFiles();
 
-        for (int i = 0; i < dataDirectoryList.length; i++) {
-            if (dataDirectoryList[i].isFile() && dataDirectoryList[i].getName().equals("2018.csv")) {
-                isExist = true;
-            }
+        if (dataDirectoryList.length != 0) {
+            isExist = true;
         }
 
         assertTrue(isExist);
