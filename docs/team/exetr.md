@@ -13,23 +13,43 @@ Designed for fast typists, it can help to augment the day-to-day tasks of a libr
 
 ### Enhancements Implemented
 
-1. Implemented `AddCommand` and all child classes related to creating new items of different categories and inserting them into the catalogue
-2. Implemented `Parser` class and method to parse for attributes specified when interacting with items, along with handling of invalid inputs
-3. Implemented `Storage` and `JsonFactory` classes used in reading, writing and processing of application data between restarts
+1. Added subclasses that extend the main `Item` class, which include the `Audio`, `Book`, `Magazine`, `Video` and `Miscellaneous` classes. ([#62](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/62))
+
+2. Added the `TextUI` class, which handles recording inputs from the user and displaying messages from the application. ([#15](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/15))
+
+1. Implemented `AddCommand` and all child classes ([#87](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/87)).
+<br> _What it does:_  It allows users to creating new items of different categories (audio, book, magazine, video, miscellaneous) and insert them into the catalogue.
+
+2. Implemented `RemoveCommand` class
+<br> _What it does_: Provides method to remove a specific item from the catalogue.
+
+3. Added `UnreserveCommand` ([#92](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/92)).
+<br> _What it does_: Provides functionality to make available an item that has been previously reserved by some user.
+<br> _Justification_: In the case where a previous reservation has been invalidated or cancelled, it allows the referenced item to be loaned out by other users.
+
+3. Implemented `Parser` class to handle user commands ([#174](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/174)).
+<br> _What it does_: Identifies the specific command issued by the user and Separates the attributes or flags and the related values supplied by the user. It also handles invalid entries such as empty or duplicate attributes.
+<br> _Justification_: Serves as an abstraction so that developers working on individual commands do not have to write custom code to parse for input and to handle errors.
+
+4. Implemented `Storage` and `JsonFactory` classes 
+<br> _What it does_: The `storage` class acts as an interface that `libmgr` uses to perform reading and writing operations to and from `data.json`. Within this process, the `JsonFactory` is used to serialize and deserialize the contents of the catalogue.
 
 ### Contributions to the User Guide
 
-1. Created base format of the Markdown document including different sections and table of contents.
+1. Created base format of the Markdown document including different section templates, table of contents and FAQ. ([#84](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/84)).
+2. Added usage for `rm`, `res` and `unres` commands. ([#104](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/104)).
+3. Added command usage summary table ([#171](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/171)).
+
 
 ### Contributions to the Developer Guide
 
-1. Created base format of the Markdown document including different sections and table of contents.
-2. Designed high-level architecture diagram for the program
-3. Created sequence diagrams for
-   1. Application launch and overall component interaction
-   2. Data component
-   3. Storage component
-   4. UI component
+1. Created base format of the Markdown document including different sections and table of contents. ([#191](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/191/files)).
+2. Designed high-level architecture diagram for the program ([#191](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/191/files)).
+3. Added the following diagrams ([#191](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/191/files)).
+   - Application launch and overall component interaction sequence diagrams.
+   - Data, storage and UI components
+   - Sequence and object diagram for usage of add command `add b t/1984 i/91 a/George Orwell`
+   - Sequence diagram for operations involved when `data.json` is read from or written to.
 
 ### Contributions to team-based-tasks
 
@@ -37,5 +57,15 @@ Designed for fast typists, it can help to augment the day-to-day tasks of a libr
 2. Helped in maintaining the issue tracker.
 3. Managed `v1.0` and `v2.0` releases.
 4. Incorporated `Jackson Databind` and `Jackson Datatype JSR310` to simplify serialization and deserialization of items within the catalogue.
+5. Added assertions and logging.
+
 
 ### Review/mentoring contributions
+- Pull Requests reviewed (with non-trivial review comments): [#32](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/32), [#37](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/37), [#70](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/70), [#81](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/81)
+- Reported bugs and suggestions for other teams in the class (
+   [1](https://github.com/exetr/ped/issues/1),
+   [2](https://github.com/exetr/ped/issues/2),
+   [3](https://github.com/exetr/ped/issues/3),
+   [4](https://github.com/exetr/ped/issues/4),
+   [5](https://github.com/exetr/ped/issues/5)
+)
