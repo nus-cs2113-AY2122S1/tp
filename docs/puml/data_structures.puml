@@ -3,20 +3,19 @@
 hide circle
 skinparam classAttributeIconSize 0
 
-class seedu.duke.IngredientList {
-+ {static} ArrayList<Ingredient> ingredientList
+class seedu.foodorama.IngredientList {
 - {static} Ui ui
 + {static} void add(String)
 + {static} int find(String)
 + {static} double getGreatestWaste()
 + {static} void graph()
++ {static} void sort()
 + {static} void list()
 + {static} void delete(String)
 + {static} void clearList()
 }
-class seedu.duke.Dish {
+class seedu.foodorama.Dish {
 - {static} Logger logger
-- ArrayList<Ingredient> constituents
 - {static} Ui ui
 - String dishName
 - double wastage
@@ -32,18 +31,18 @@ class seedu.duke.Dish {
 + String formatData()
 + int compareTo(Dish)
 }
-class seedu.duke.DishList {
-+ {static} ArrayList<Dish> dishList
-+ {static} Ui ui
+class seedu.foodorama.DishList {
++ {static} Ui UI
 + {static} void add(String)
 + {static} double getGreatestWaste()
 + {static} int find(String)
 + {static} void list()
++ {static} void sort()
 + {static} void graph()
 + {static} void delete(String)
 + {static} void clearList()
 }
-class seedu.duke.Ingredient {
+class seedu.foodorama.Ingredient {
 - {static} Ui ui
 - String ingredientName
 - double ingredientWeight
@@ -62,9 +61,9 @@ class seedu.duke.Ingredient {
 }
 
 
-seedu.duke.Comparable <|.. seedu.duke.Dish
-seedu.duke.DishList o-- seedu.duke.Dish : dishList
-seedu.duke.Comparable <|.. seedu.duke.Ingredient
-seedu.duke.IngredientList o-- seedu.duke.Ingredient :ingredientList
-seedu.duke.Dish o- seedu.duke.Ingredient :constituents
+seedu.foodorama.Comparable <|.. seedu.foodorama.Dish
+seedu.foodorama.DishList o-- seedu.foodorama.Dish : dishList
+seedu.foodorama.Comparable <|.. seedu.foodorama.Ingredient
+seedu.foodorama.IngredientList o-- seedu.foodorama.Ingredient :ingredientList
+seedu.foodorama.Dish o- seedu.foodorama.Ingredient :constituents
 @enduml

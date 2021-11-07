@@ -82,7 +82,7 @@ Describes the step-by-step sequence from User Input to the Output.
 
 * User is greeted by welcome screen.
 * User begins typing inputs.
-* Inputs get parsed by InputParser returning the appropriate Command.
+* Inputs get parsed by InputParser returning the appropriate type of command and respective parameters.
 * Command gets executed and respective output gets displayed.
 * Once user is done using the application, he can send an exit message prompting a goodbye message.
 * Application exits.
@@ -153,7 +153,7 @@ under *'Data'* folder.
 The `Dish`, `DishList`, `Ingredient` and `IngredientList` classes are responsible for the handling and manipulation of
 the *Food-O-Rama* data.
 
-![](images/dish_ingredient.png)
+![](images/data_structures.png)
 
 * The `Dish` class contains the Dish's Name, its wastage and its constituents.
 * The `Ingredient` class contains the Ingredient's Name, the weight of Ingredient in storage, the weight of Ingredient
@@ -166,55 +166,25 @@ the *Food-O-Rama* data.
 
 ### User-Interface Component
 
-![](images/UiClass.png)
-
 The `Ui` Class is responsible for the printing of interactive messages whenever a user types an input. It handles print
 messages to the Command Line Interface from when the program loads, to after every input by the user and finally when
 the user exits the program.
 
-The interface of the program utilizes the ClearScreen class to clear the terminal after every user input through the
-built-in `ProcessBuilder` Java class. Such a feature allows greater readability and focus for the user as the terminal
-will not be cluttered with past commands.
-`Ui` will call `ClearScreen.clearConsole()` method to clear the terminal.
+The below class diagram shows the structure and relations of the Ui class in Foodorama.
 
-The ProcessBuilder class will send a respective command to the terminal depending on the Operating System of the user.
-The command it sends to the terminal is as follows:
+![](images/UiClass.png)
 
-* `cls` for Windows CMD Terminals.
-* `clear` for Linux/MacOS Terminals.
-
-`ClearConsole()` Code Snippet:
-
-```
- public static void clearConsole() {
-        try {
-            // Get current operating system
-            String getOS = System.getProperty("os.name");
-
-            if (getOS.contains("Windows")) {
-                // Try clear for Windows
-                // "/c" - execute string as command, "cls" -  Clear terminal
-                ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls");
-                Process startProcess = pb.inheritIO().start();
-                startProcess.waitFor();
-            } else {
-                // Try clear for MacOS/Linux
-                // "clear" - Clear terminal
-                ProcessBuilder pb = new ProcessBuilder("clear");
-                Process startProcess = pb.inheritIO().start();
-                startProcess.waitFor();
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-```
+For simplicity’s sake the ui class has been minimized into 3 components: 
+ * The strings containing the various messages
+ * Functions that get a string from UI to be used elsewhere (e.g. Exception classes getting error messages)
+ * Functions that print command outputs
 
 ### Exceptions
 
 The `FoodoramaException` class is responsible for handling errors such as unrecognised user commands and improper
-parameters. It does so by calling the `Ui` class to print error messages that prompt the User to type in correct
-Commands/Parameters.
+parameters. It does so by calling the `Ui` class to provide the error messages and throwing the exception 
+up to the highest level, that is the Foodorama class where it then gets caught and the message is printed with
+the exception.getMessage() method which is part of the base Exception class
 
 ### Command Abstraction
 
