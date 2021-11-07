@@ -59,7 +59,7 @@ Terminology | Meaning
 Stock | Refers to a medication.
 Prescription | Refers to a prescription.
 Order | Refers to ordering new medications to replenish the stocks.
-Parameters | Prefixes for MediVault to understand the type of information you provide.
+Parameters | Prefixes for MediVault to understand the type of information you provide. Parameters must be specified with a `/`. For example `list sort/n` is considered a valid parameter whereas `list sort` is not a valid parameter.
 
 Meaning of Icons:
 - :information_source: Note
@@ -939,10 +939,10 @@ Data formats:
 > * It is possible for you to directly edit the data files, but it is **NOT** recommended unless you know exactly what you are doing because you risk corrupting it.
 > * If MediVault detects corruption or invalid data, you will **NOT** be able to start MediVault.
 > * In order for MediVault to work, you have to fix the error in the data file.
-> * Invalid data will be highlighted on starting MediVault and hint you in the direction to fix it.
+> * Invalid data detected by MediVault will be highlighted on launch to hint you in the direction to fix it.
 > * In the worst case scenario where you are unable to fix it, you may have to delete the corresponding data file.
 > * It may result in unintended behaviour if data file is tampered with while the program is running.
-> * Editing the data directly poses a significant risk to corruption of data.
+> * Editing the data directly poses a significant risk to corruption of data and may lead to **unintended behaviour**.
 
 ## FAQ
 
