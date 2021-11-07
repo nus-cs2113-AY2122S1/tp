@@ -1,6 +1,6 @@
+//@@author Cesare4869
 package seedu.duke.finance;
 
-import seedu.duke.ingredient.Ingredient;
 
 import java.util.ArrayList;
 
