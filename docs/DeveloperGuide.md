@@ -1,4 +1,4 @@
-# Food-O-Rama Developer Guide ✍
+# Food-O-Rama Developer Guide
 
 ## 🌑 Introduction
 
@@ -7,6 +7,10 @@
 This Developer Guide serves to inform developers on the design and implementation of
 *Food-O-Rama* to assist them in the development process of APIs. It also helps them realise the target user profile that
 motivated us to build this application.
+
+| Legend |  Description |
+| --- | --- |
+| 💡 *Note*  | Lightbulb requires your attention. |
 
 ## 🧾 Table of Contents
 
@@ -177,38 +181,6 @@ built-in `ProcessBuilder` Java class. Such a feature allows greater readability 
 will not be cluttered with past commands.
 `Ui` will call `ClearScreen.clearConsole()` method to clear the terminal.
 
-The ProcessBuilder class will send a respective command to the terminal depending on the Operating System of the user.
-The command it sends to the terminal is as follows:
-
-* `cls` for Windows CMD Terminals.
-* `clear` for Linux/MacOS Terminals.
-
-`ClearConsole()` Code Snippet:
-
-```
- public static void clearConsole() {
-        try {
-            // Get current operating system
-            String getOS = System.getProperty("os.name");
-
-            if (getOS.contains("Windows")) {
-                // Try clear for Windows
-                // "/c" - execute string as command, "cls" -  Clear terminal
-                ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls");
-                Process startProcess = pb.inheritIO().start();
-                startProcess.waitFor();
-            } else {
-                // Try clear for MacOS/Linux
-                // "clear" - Clear terminal
-                ProcessBuilder pb = new ProcessBuilder("clear");
-                Process startProcess = pb.inheritIO().start();
-                startProcess.waitFor();
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-```
 
 ### Exceptions
 
@@ -226,8 +198,32 @@ Commands/Parameters.
 
 ## Implementation
 
+### Add
+
+#### Adding Dishes and Ingredients
+
+#### Adding Wastage to Dishes and Ingredients
+
+#### Adding Storage to Ingredients
 
 ### Find
+The find commands (`find dish` and `find ingr`) implement the `FindCommand` class to allow the user to search for 
+a particular `KEYWORD` and return a list of Dishes or Ingredients that match the keyword.
+
+![](images/find_command_sequence.png)
+
+For find commands, the handling method `FindCommand.execute()`: 
+
+1. Parses the input and determines if a dish or ingredient is to be found, and uses corresponding switch cases. If it is neither,
+throw an Invalid Parameter error via Foodorama Exception.
+
+2. If the keyword to be found is blank, throw a Missing Parameter error via FoodoramaException.
+
+3. Else, checks if the input keyword exists in the name of every Dish or Ingredient in their respective list classes.
+
+4. Stores all Dishes or Ingredients with a matching name in a new ArrayList.
+
+5. Calls the Ui class to print the new ArrayList to the user.
 
 ### Edit
 The implementation of the Edit function allows the User to edit several 
@@ -237,7 +233,7 @@ IngredientList.
 ![](images/edit_dish_name_sequence_diagram.png)
 This Sequence Diagram shows how the `EditDishNameCommand` class functions.
 
-Currently the User is able to edit the following:
+Currently, the User is able to edit the following:
 * Dish Name
 * Dish Wastage Weight
 * Ingr Name
@@ -266,6 +262,7 @@ a perfect representation, we are capable of giving the value accurate to one dec
 it would be represented by 3 filled bars and the 4th bar will have a 3 within indicating its value is between 3.3 to 3.4 
 as shown in the figure below
 
+```
 ____________________________________________________________
 
                            [|]     Legend:              Scale: 1 unit = 5.0kg
@@ -280,12 +277,13 @@ ____________________________________________________________
     [5]  [|]   [|]   [|]   [|]
      A    B     C     D     E
 ____________________________________________________________
+```
 
 ### Random dish
 
 ### Sort
 
-### Terminal refreshing
+### Terminal Refreshing / Clear Screen
 The interface of the program utilizes the ClearScreen class to clear the terminal after every user input through the built-in `ProcessBuilder` Java class. Such a feature allows greater readability and focus for the user as the terminal will not be cluttered with past commands.
 `Ui` will call `ClearScreen.clearConsole()` method to clear the terminal.
 
