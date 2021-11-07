@@ -24,6 +24,7 @@ Please see below for my contributions to Traveller.
 #### Project Management
 * Reviewed multiple PRs.
 * Assisted in fixing multiple gradle issues
+* Add exceptions and test cases
 * Develop functionalities of V2.0
 
 #### Documentation
@@ -32,6 +33,7 @@ Please see below for my contributions to Traveller.
   * Wrote section of delete, delete-item and delete-day function.
 * Developer Guide (DG)
   * Wrote section of Ui class and Triplist class.
-  * * Kept it updated and debugged.
+  * Draw the diagrams of develop guide
+  * Kept it updated and debugged.
 
 RepoSense Link: [here](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=cuiminjing&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=zoom&zA=conradwee&zR=AY2122S1-CS2113T-W13-1%2Ftp%5Bmaster%5D&zACS=172.5020920502092&zS=2021-09-25&zFS=w13&zU=2021-11-03&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)

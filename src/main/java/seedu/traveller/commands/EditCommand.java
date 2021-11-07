@@ -88,6 +88,10 @@ public class EditCommand extends Command {
         assert !this.newTripName.equals("") && !this.startCountry.equals("") && !this.endCountry.equals("");
 
         MinCalcResult result = WorldMap.calcMinTime(this.startCountry, this.endCountry);
+        int errorFlag = 1;
+        if (result.getError() == errorFlag) {
+            return;
+        }
         List<Country> path = result.getPath();
         List<Double> time = result.getTime();
         editTripInfo(current, path, time);
