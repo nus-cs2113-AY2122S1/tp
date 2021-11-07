@@ -115,6 +115,8 @@ These are the diagrams (General, Class, Sequence...) I have added into the Devel
     <img src="../images/AmosUMLDiagrams/SD_ValidInput.png">
 </p>
 
+<div style="page-break-after: always;"></div>
+
 #### For "3.2 UI Component"...
 <p align="center">
     <img src="../images/AmosUMLDiagrams/CD_UIComponent.png">
@@ -124,6 +126,8 @@ These are the diagrams (General, Class, Sequence...) I have added into the Devel
 <p align="center">
     <img src="../images/AmosUMLDiagrams/CD_ParserComponent.png">
 </p>
+
+<div style="page-break-after: always;"></div>
 
 #### For"4.2 Filtering the tasklist"...
 <p align="center">
