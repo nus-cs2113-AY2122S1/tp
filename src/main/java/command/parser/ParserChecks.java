@@ -171,6 +171,10 @@ public class ParserChecks {
      */
     boolean hasWeightageDescription(String input) {
         int typePos = input.indexOf(START_OF_WEIGHTAGE);
+        if (typePos == -1) {
+            Ui.invalidWeightage();
+            return false;
+        }
         String secondPart = input.substring(typePos);
         if (secondPart.contains(START_OF_DATE)) {
             Ui.invalidWeightage();

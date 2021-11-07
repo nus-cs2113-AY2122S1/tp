@@ -90,7 +90,7 @@ public class Schedule {
     }
 
     /**
-     * Reformats Schedule for easier viewing.
+     * Reformats Schedule for simpler viewing.
      */
     @Override
 
