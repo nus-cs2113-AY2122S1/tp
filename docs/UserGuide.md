@@ -10,11 +10,15 @@ MedBot can allow head nurses to get their management tasks done quicker and more
 
 ### Installation
 
-1. Ensure that you have Java 11 or above installed.
+1. Ensure that you have Java 11. 
 2. Download the latest version of `tp.jar` from [here](https://github.com/AY2122S1-CS2113-T13-1/tp/releases).
 3. Move the file to the folder that you want to use as the MedBot's root folder.
 4. Execute the `java -jar tp.jar` command in the terminal in the same folder as the `tp.jar` file to launch
    MedBot. The following output should be observed:
+```
+Hello, I'm MedBot!
+How can I help you today?
+```
 
 ### Using MedBot
 
@@ -23,13 +27,13 @@ MedBot can allow head nurses to get their management tasks done quicker and more
 
 ## Features
 
-The main features of MedBot are:
+These are the main features of MedBot:
 
 * Manage patient and medical staff information efficiently
 * Schedule medical appointments for patients seamlessly
 
 Each feature is contained inside a different view/tab in MedBot, which can be switched between using the `switch`
-command, which will be explained further down below.
+command, explained further down below.
 
 ## Commands
 
@@ -128,21 +132,22 @@ Here are the list of commands:
 
 help
 add
-list
-view
-edit
-find
 delete
-switch
-exit
-help
+edit
+view
+list
+find
+hide
 show
+switch
 get view
+exit
 
 To obtain more information on each command and their respective required inputs, type:
 help [COMMAND]
 
-*Note that all commands will remove any '|' inputs for format parsing purposes
+*Note that all commands will remove any '|' inputs for format parsing purposes.
+For expected output examples, please refer to the User Guide.
 ```
 
 ### Patient/Medical Staff Information Commands
@@ -158,7 +163,7 @@ Adds a patient to the patient list.
 
 Format: `add [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
-At least one parameter must be provided, they can be entered in any order.
+At least one parameter must be provided, and they can be entered in any order.
 
 Expected output:
 
@@ -176,7 +181,7 @@ Examples:
     - eg. tim_ong@example.com
 - `PATIENT_IC` must be in a valid NRIC format:
     - The checksum of the NRIC will not be checked.
-    - Alphabets will be auto-capitalized. The input alphabets therefore non-case-sensitive.
+    - Alphabets will be auto-capitalized. The input alphabets therefore are non-case-sensitive.
 - No fields are made compulsory. The purpose is to allow adding an urgent (e.g. car accident) patient
   into MedBot in case all information is not yet available, to allow scheduling an urgent appointment.
 
@@ -248,14 +253,15 @@ For full details of each patient, please use the command "view PATIENT_ID"
 
 #### Notes:
 
-* `Name`, `Email`, `Address` that are longer than 20 characters will be truncated to first 17 characters with a `...` appended.
+* `Name`, `Email`, `Address` that are longer than 20 characters will be truncated to the first 17 characters with a 
+`...` appended.
 <br>Reason:
   * To maintain the table layout and prevent overflow of a cell.
-* To get the full information without the truncated details, use `VIEW PATIENT_ID`.
+* To get the full information of a particular patient without the truncated details, use `VIEW PATIENT_ID`.
 
 ### Edit information of a patient: `edit`
 
-Edit the personal and medical information of a patient in the list.
+Edit the personal information of a patient in the list.
 
 Format: `edit PATIENT_ID [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
@@ -272,12 +278,13 @@ Email: EMAIL
 Address: ADDRESS
 ```
 
-Notes:
-Refer to [Adding a patient - notes](#notes-for-adding-a-patient)
+#### Notes: 
+
+Refer to [notes for adding a patient](#notes-for-adding-a-patient)
 
 ### Find patients based on attributes: `find`
 
-Find all patients that contains the given attributes.
+Find all patients that contain the given attributes.
 
 Format `find [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`
 
@@ -343,12 +350,16 @@ The format for `DATE_TIME` is `DDMMYY hhmm`. I.e. 9 February 2021, 0800HRS shoul
 Expected output:
 
 ```
-Appointment added: Appointment Id: APPOINTMENT_ID Date/Time: DATE_TIME Patient ID: PATIENT_ID Staff ID: STAFF_ID
+Added appointment with Appointment Id: APPOINTMENT_ID
+Patient ID: PATIENT_ID
+Staff ID: STAFF_ID 
+Date/Time: DATE_TIME
 ```
-
-Do note that the appointments are managed at an hourly basis. For example, any appointments set to any time between
-0800HRS and 0859HRS will be treated as an appointment from 0800HRS to 0859HRS. No subsequent appointment can then be
-scheduled for either the patient and the medical staff during that window.
+#### Notes:
+- Appointments are managed at an hourly basis. 
+  - e.g. any appointments set to any time between 0800HRS and 0859HRS will be treated as an appointment from 0800HRS to 
+  0859HRS. 
+  - No subsequent appointment can then be scheduled for both the patient and the medical staff during that time frame.
 
 ### Deleting an appointment: `delete`
 
@@ -364,18 +375,18 @@ deleted appointment with Id: APPOINTMENT_ID
 
 #### Notes:
 
-* The appointment being deleted does not affect the rest of the appointments, i.e. the ID will
-  remain the same.
+* Deleting an appointment will not affect the appointment IDs of other appointments.
   <br>Reasons :
     * ID uniquely identifies an appointment and should not be changed.
     * ID does not indicate the row number in the appointment list.
+* However, deleting a patient/medical staff will also delete all appointments associated with them.
 
 ### Editing an appointment's information: `edit`
 
 Edit an appointment's information. MedBot will check if the edited appointment clashes with others and display an error
 message if it does.
 
-Format: `edit APPOINTMENT_ID [p/PAITENT_ID] [s/STAFF_ID] [d/DATE_TIME]`
+Format: `edit APPOINTMENT_ID [p/PATIENT_ID] [s/STAFF_ID] [d/DATE_TIME]`
 
 Expected output:
 
@@ -397,7 +408,10 @@ Format: `view APPOINTMENT_ID`
 Expected output:
 
 ```
-Appointment Id: APPOINTMENT_ID Date/Time: DATE_TIME Patient ID: PATIENT_ID Staff ID: STAFF_ID
+Added appointment with Appointment Id: APPOINTMENT_ID
+Patient ID: PATIENT_ID
+Staff ID: STAFF_ID
+Date/Time: DATE_TIME
 ```
 
 ### Listing information of all appointments: `list`
@@ -466,7 +480,7 @@ location as the `MedBotData` directory.
 | :---         | :---                     |
 | **add**      | `add p/PERSON_ID s/STAFF_ID d/DATE_TIME` <br/> E.g., `add p/19 s/1 d/090222 0900`|
 | **delete**   | `delete APPOINTMENT_ID`  |
-| **edit**     | `edit APPOINTMENT_ID [p/PAITENT_ID] [s/STAFF_ID] [d/DATE_TIME]` <br/> E.g., `edit 2 s/3 d/100322 0800`|         
+| **edit**     | `edit APPOINTMENT_ID [p/PATIENT_ID] [s/STAFF_ID] [d/DATE_TIME]` <br/> E.g., `edit 2 s/3 d/100322 0800`|         
 | **list**     | `list`                   |
 | **view**     | `view APPOINTMENT_ID` <br/> E.g., `view 3` |
 
