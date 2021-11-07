@@ -354,7 +354,9 @@ NUS undergraduate students who prefer typing over using a mouse and proficient w
 
 ### Non-Functional Requirements
 
-{Give non-functional requirements}
+* The application should work on the major operating systems (Windows, Mac and Linux) if it has Java 11 installed.
+* The application should be able to perform each command within 1 second.
+* The application should allow users who are comfortable with typing to perform tasks faster than with on an application with a GUI.
 
 ### Glossary
 
