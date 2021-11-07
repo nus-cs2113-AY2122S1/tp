@@ -7,6 +7,7 @@ import medbot.exceptions.MedBotException;
 import medbot.person.Staff;
 import medbot.utilities.ViewType;
 
+//@@author jushg
 public class EditStaffCommand extends EditPersonCommand {
     public EditStaffCommand(int staffId, Staff staff) {
         super(staffId, staff);

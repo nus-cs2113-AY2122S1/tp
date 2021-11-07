@@ -206,10 +206,13 @@ The switch view mechanism is heavily linked to the `Parser` class. By having a
 appropriate `SwitchCommand` class, which modifies the corresponding `ViewType`
 of the `Parser`. The 3 possible views and the corresponding user input commands are as follows:
 
-* `switch p` or `switch 1` - switches to the patient info view.
-* `switch m` or `switch 2` - switches to the medical staff info view.
-* `switch s` or `switch 3` - switches to the scheduler view.
-* `switch` - will switch to another view depending on the current view.
+* `switch p` or `switch 1` - switches to the `PATIENT_INFO` view.
+* `switch m` or `switch 2` - switches to the `MEDICAL_STAFF_INFO` view.
+* `switch s` or `switch 3` - switches to the `SCHEDULER` view.
+* `switch` - will switch to another view depending on the current view in the order shown below:
+
+  `PATIENT_INFO` --> `MEDICAL_STAFF_INFO` --> `SCHEDULER` --> `PATIENT_INFO`
+
 
 Each command evokes the `Parser#setViewType(ViewType)` method, which will set the corresponding
 `ViewType` property in the `Parser` class. Additionally, the `Ui#clearConsoleFromIde` method will be evoked, which
@@ -241,28 +244,24 @@ the `execute()` method to achieve the desired functionality.
 
 The example below gives a direction on how this command behaves.
 
-Step 1.
-<br>
-A User execute the `find n/John` command. The `Parser#parseCommand()` method will parse this command and eventually
+
+1. User executes the `find n/John` command. The `Parser#parseCommand()` method will parse this command and eventually
 returns a `new FindPatientCommand()` object.
 
-Step 2.
-<br>
-The `MedBot#interactWithUser()` method will run the `execute()` method in the `new FindPatientCommand()` object.
 
-Step 3.
-<br>
-The `execute()` method will call `PersonList#findPersons()` method with the parameter `n/John` passed in.
+2. The `MedBot#interactWithUser()` method will run the `execute()` method in the `new FindPatientCommand()` object.
 
-Step 4.
-<br>
-`PersonList#findPersons()` will check all the `persons` list and returns all `Person` in the list whose name contains
+
+3. The `execute()` method will call `PersonList#findPersons()` method with the parameter `n/John` passed in.
+
+
+4. `PersonList#findPersons()` will check all the `persons` list and returns all `Person` in the list whose name contains
 the string `john`. The attribute match is case-insensitive.
 
-Step 5.
-<br>
-The filtered `Person` list is then passed into the `Ui` class to be displayed into a table format through
+
+5. The filtered `Person` list is then passed into the `Ui` class to be displayed into a table format through
 `Ui#getFindPatientsMessage()`.
+
 
 ### 4.3 Edit feature
 
@@ -277,28 +276,23 @@ the `execute()` method to achieve the desired functionality.
 
 The example below gives a direction on how this command behaves.
 
-Step 1.
-<br>
-A User execute the `edit n/John` command when the attribute `Parser#viewType` is `PATIENT_INFO`.
+
+1. User executes the `edit n/John` command when the attribute `Parser#viewType` is `PATIENT_INFO`.
 The `Parser#parseCommand()` method will parse this command and eventually returns a `new EditPatientCommand()` object.
 
-Step 2.
-<br>
-The `MedBot#interactWithUser()` method will run the `execute()` method in the `new EditPatientCommand()` object.
 
-Step 3.
-<br>
-The `execute()` method will call `PersonList#editPerson()` method with the new `Person` object having the parameter
+2. The `MedBot#interactWithUser()` method will run the `execute()` method in the `new EditPatientCommand()` object.
+
+
+3. The `execute()` method will call `PersonList#editPerson()` method with the new `Person` object having the parameter
 `n/John` passed in. (All other attributes of the object are set to `null`)
 
-Step 4.
-<br>
-`PersonList#editPerson()` will attempt to replace all attributes of the old `Person`
+
+4. `PersonList#editPerson()` will attempt to replace all attributes of the old `Person`
 object with the non-null attributes given in the new `Person`.
 
-Step 5.
-<br>
-The edited `Person` is then passed into the `Ui` class to be displayed through`Ui#getEditPatientMessage()`.
+
+5. The edited `Person` is then passed into the `Ui` class to be displayed through`Ui#getEditPatientMessage()`.
 
 ### 4.4 Appointment management
 
@@ -309,7 +303,7 @@ patients while ensuring that there are no appointment clashes for both staff and
 
 Below is a list of key design considerations for this feature:
 
-* Upon adding/editing an appointment, MedBot will check if the new appointment clash with an existing appointment and
+* Upon adding/editing an appointment, MedBot will check if the new appointment clashes with an existing appointment and
   prevent such additions/edits.
 * Users should be able to edit the date/time of appointments to reschedule appointments, or to fix mistakes.
     * Users should also be able to change the staff involved in that appointment for cases where the original staff is
@@ -366,12 +360,12 @@ for their daily jobs
 |v2.0|user|add appointment timeslots for medical staff|easily administer their visiting hours|
 |v2.0|user|be informed if there are any conflicting visiting timings for medical staff|reschedule to more appropriate timings.
 |v2.0|user|edit appointment timeslots for medical staff|account for changes in schedule of the medical staff|
-|v2.0|user|see all available appointment timeslots for medical staff|I will not assign any conflicting timings|
-|v2.0|user|filter appointments by date/time|I can decide how to assign new appointments more quickly|
+|v2.0|user|see all available appointment timeslots for medical staff|know to not assign any conflicting timings|
+|v2.0|user|filter appointments by date/time|decide how to assign new appointments more quickly|
 
 ## Appendix C: Non-Functional Requirements
 
-1. Should work on any *mainstream OS* as long as it has Java `11` or above installed.
+1. Should work on any *mainstream OS* as long as it has `Java 11` or above installed.
 2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 3. Should be able to hold up to a thousand appointments and patient/staff records without any noticeable decrease in
