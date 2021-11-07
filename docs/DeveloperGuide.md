@@ -219,7 +219,7 @@ The `Task` object is what is managed by the `TaskManager`.
 
 The Storage is handled by the `DataManager` class.
  - All of the objects are initialised on starting the program in `SchedUrMods` class.
- - The `DataManager` class takes in a `FileCreator` which creates the file for storing the task data.
+ - The `DataManager` class takes in a `FileCreator` which creates the file for storing the Task data.
  - The `TaskManager` class takes in a `DataManager` and loads the `taskList` using the DataManager. It also adds the `DataManager` as an `Observer` so that it can update the `DataManager` whenever `taskList` changes.
  - The `DataManager` has been designed with **Dependency injection** in mind so that programmers would know what objects are required for each class.
    >💡 **Note**: `TaskManager` can be initialised without any `DataManager` as an argument. In which case it would still work albeit without any storage functionality. (useful for testing)
@@ -273,10 +273,10 @@ conversion between java time API and semesters. The enumeration class `Semester`
 </p>
 
 `Todo`, `Deadline` and `Event` Tasks are created using Task factories.
- - All Task factories inherit from the abstract `TaskFactory` class.
-   1. It checks that all the required flags for making the concrete Task are present and throws an exception if a flag is missing.
-   2. I then initialises the `description`, `priority` and `recurrence`. 
-   3. From there it sets any additional variables that are present in the concrete task.
+ - All Task factories inherit from the abstract `TaskFactory` class and are created using similar steps:
+   1. It firstly checks that all the required flags for making the concrete Task are present and throws an exception if a flag is missing.
+   2. It then initialises the `description`, `priority` and `recurrence`. 
+   3. From there it sets any additional variables that are present in the concrete Task.
    4. It creates the task and sets the `priority` and `rcurrence` if they are not `null`
    5. It returns the created concrete task.
 
@@ -286,7 +286,7 @@ conversion between java time API and semesters. The enumeration class `Semester`
 
 1. To extend the `TaskFactory`, you should create a constructor which takes in a `Map<String, String> flags` argument and define `TypeEnum taskType` and `String[] requiredFlags` as constants.
 2. From there you have to override the `setAdditionalVariables()` function to set any new variables that are unique to the concrete Task you want to impelment.
-3. override `createTask()` to return the constructed task (you can ignore `priority` and `recurrence` as they are set in `TaskFactory`)
+3. override `createTask()` to return the constructed Task (you can ignore `priority` and `recurrence` as they are set in `TaskFactory`)
 4. optional: you may override `getTask()` to return the concrete Task instead of the abstract `Task`.
 
 The `TaskFactory` has been designed in a way to be easily extendable to allow for more concrete Task factories to be easily added. Each set of variables are initialised in their respective factories. e.g. `priority` is a `Task` variable so it's initialised and set in `TaskFactory` while `dueDate` is a `Deadline` variable so it's initialised and set in `DeadlineFactory`.
