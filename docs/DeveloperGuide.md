@@ -30,6 +30,7 @@ possibly expand on the application.
   * [4.8. Deleting a Goal](#48-deleting-a-goal)
   * [4.9. Deleting a Habit](#49-deleting-a-habit)
   * [4.10. Getting Help](#410-getting-help)
+  * [4.11. Storage of Information](#411-storage-of-information)
 * [Appendix A: Product Scope](#appendix-a-product-scope)
   * [Target user profile](#target-user-profile)
   * [Value proposition](#value-proposition)
@@ -184,54 +185,60 @@ The sequence diagram below illustrates the flow of logic when a generic user inp
 
 ### 3.4. Command Component
 
-When the user runs the Program, the main function dealing with the user's inputs is the `processInput` function in `UiMain.java`
-which obtains a `Command` object after parsing the input using the `Parser` component.
+The Command component is responsible for executing the application logic based on the parsed user input. The diagram
+below illustrates the high level representation of the component.
 
-`Command` objects available are:
-* `AddGoalCommand` - Adds a new Goal to the GoalList.
-* `AddHabitCommand` - Adds a new Habit object to a specified Goal set by the user.
-* `UpdateGoalCommand` - Updates attributes for a Goal [Name, End Date or Type]
-* `UpdateHabitCommand` - Updates attributes for a Habit [Name or Interval]
-* `DeleteGoalCommand` - Deletes a Goal from the GoalList
-* `DeleteHabitCommand` - Deletes a Habit object from a specified Goal set by the user.
-* `DoneHabitCommand` - Marks a Habit object under a Goal as done.
-* `ListGoalCommand` - Lists out all the Goals set by the user.
-* `ListHabitCommand` - Lists out all the Habits set under a Goal.
-* `HelpCommand` - Prints out message indicating all the available Commands
+![Command Component](Diagram%20Images/Design%20Diagram%20Images/CommandComponent.png)
 
-The respective `runCommand` functions of the returned command object is then executed.
-In the sections below we will be providing implementation details for each of the commands.
+**API:** `Command.java`
+
+1. `Command` obtains the breakdown of required parameters from Parser - this means that no logic is performed here.
+2. Add, update, done and delete commands updates the GoalList.
+3. Commands that update the GoalList, as well as `ExitCommand` and `ReturnCommand`, updates the Storage.
+4. The following describes the features of each command:
+   * `AddGoalCommand` - Adds a new Goal to the GoalList.
+   * `AddHabitCommand` - Adds a new Habit to a specified Goal set by the user.
+   * `UpdateGoalCommand` - Updates one or more attributes (Name, End Date, Type) for a Goal.
+   * `UpdateHabitCommand` - Updates one or more attributes (Name, Interval) for a Habit.
+   * `DoneHabitCommand` - Marks a Habit from a specified Goal as completed.
+   * `ListGoalCommand` - Lists out all the Goals set by the user.
+   * `ListHabitCommand` - Lists out all the Habits set under a Goal.
+   * `DeleteGoalCommand` - Deletes a Goal from the GoalList.
+   * `DeleteHabitCommand` - Deletes a Habit from a specified Goal set by the user.
+   * `SetCommand` - Indexes into a Goal so that commands can be called without stating a Goal's index (not implemented).
+   * `HelpCommand` - Prints out table of all available commands.
+   * `ReturnCommand` - Returns the user to start state of the application (Refer to Section 3.2. for _start state_).
+   * `ExitCommand` - Saves all changes and exits the application.
 
 ### 3.5. Goal Component
 
-The `GoalList` component is the component that holds and manipulates the list of all the Goals set by the user.
-All `runCommands` of all of the `Command` objects directly access the `GoalList` component to retrieve and change      
-the user's data.
+The Goal component is responsible for maintaining and updating all goals set by the user. This includes running logic to
+ensure that there are no violations when modifying information related to a goal. The diagram below illustrates the high
+level representation of the component.
+
+![Goal Component](Diagram%20Images/Design%20Diagram%20Images/GoalComponent.png)
+
+**API:** `Goal.java`
+
+1. 0 or more `Goal` are associated with a `GoalList`.
+2. A `Goal` must have exactly 1 `GoalType`. If not specified, the `GoalType` will be DEFAULT.
+3. 0 or more `Habit` are associated with a `Goal`.
+4. `Habit` may call `HabitDateManager` to handle date related logic.
+5. 1 or more `Interval` are associated with a `Habit`.
 
 ### 3.6. Storage Component
 
-The `Storage` class allows data to be read from and saved to a storage file.
-The class diagram shows the interactions between the different classes.
+The Storage component allows data to be read from and saved to a storage file. The diagram below illustrates the high
+level representation of the component and the interactions between the other components.
 
-![Storage Class Diagram](Diagram%20Images/Design%20Diagram%20Images/StorageClassDiagram.png)
+![Storage Class Diagram](Diagram%20Images/Design%20Diagram%20Images/StorageComponent.png)
 
-The sequence diagram shows how the program imports data from storage file.
+**API:** `Storage.java`
 
-![Import Sequence Diagram](Diagram Images/Implementation Diagram Images/ImportSequenceDiagram.png)
-
-The program uses `Storage` class to import data from the storage file.
-* `Storage` interacts with `Import` to access the data stored in storage file.
-* `Import` will depend on `ImportParser` to decipher the data stored, and return 
-  a `Goal`, `Habit` or `Interval` object back to `Import` correspondingly.
-* `Import` will then populate `GoalList` accordingly
-  before returning `GoalList` back to `Storage` and back to user.
-
-The sequence diagram shows how the program exports data to storage file.
-
-![Export Sequence Diagram](Diagram Images/Implementation Diagram Images/ExportSequenceDiagram.png)
-
-`Storage` class can also export data to storage file with `Export` class.
-It takes in a `GoalList` object and converts the data into string to be stored in storage file.
+1. `Storage` calls `Export` when saving data from the `GoalList` to an external storage file.
+2. `Storage` calls `Import` when reading data from the external storage file to the `GoalList`.
+3. `Import` calls `ImportParser` to decode the data extracted from the external storage file.
+4. `ImportParser` calls `Goal`, `Habit`, and `Interval` in that order to load data into the `GoalList`.
 
 ## 4. Implementation
 
@@ -294,6 +301,26 @@ sequence diagram below is carried out:
 When the `runCommand` function is executed for the `HelpCommand` object, it instantiates a `PrintManager` object and
 calls the `printCommandList` method which prints out a pre-set message informing the user of all the inputs they
 can type to execute a certain command.
+
+### 4.11. Storage of Information
+
+The sequence diagram shows how the program imports data from storage file.
+
+![Import Sequence Diagram](Diagram Images/Implementation Diagram Images/ImportSequenceDiagram.png)
+
+The program uses `Storage` class to import data from the storage file.
+* `Storage` interacts with `Import` to access the data stored in storage file.
+* `Import` will depend on `ImportParser` to decipher the data stored, and return
+  a `Goal`, `Habit` or `Interval` object back to `Import` correspondingly.
+* `Import` will then populate `GoalList` accordingly
+  before returning `GoalList` back to `Storage` and back to user.
+
+The sequence diagram shows how the program exports data to storage file.
+
+![Export Sequence Diagram](Diagram Images/Implementation Diagram Images/ExportSequenceDiagram.png)
+
+`Storage` class can also export data to storage file with `Export` class.
+It takes in a `GoalList` object and converts the data into string to be stored in storage file.
 
 ---------------------------------------------------------------------------------------------------------
 
