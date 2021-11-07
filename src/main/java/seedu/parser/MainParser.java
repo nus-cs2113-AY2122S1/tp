@@ -71,11 +71,25 @@ public class MainParser {
         return command;
     }
 
+    /**
+     * Returns the command word string given in the user input.
+     *
+     * @param userInput String that user has input
+     * @return String command word in user input
+     */
     public String getCommandWord(String userInput) {
         String[] destructuredInputs = userInput.split(" ", ISOLATE_COMD_WORD);
         return destructuredInputs[COMD_WORD_INDEX];
     }
 
+    /**
+     * Returns the command type of the command given in the user input. This method
+     * differentiates the command given by user into either manipulation, query or
+     * control type.
+     *
+     * @param userInput String that user has input
+     * @return CommandType command type of the command given in user input
+     */
     public CommandType getCommandType(String userInput) {
         String commandWord = getCommandWord(userInput);
         CommandType commandType;
@@ -271,6 +285,13 @@ public class MainParser {
     }
 
     //@@author lezongmun
+    /**
+     * Returns a DeleteContactCommand after parsing the user's input if the
+     * specified input command was for deletion.
+     *
+     * @param userInput String that user has input
+     * @return Command DeleteContactCommand
+     */
     private Command parseDeleteContact(String userInput) {
         try {
             boolean[] hasDeletedDetail = deleteContactParser.hasDeletedDetail(userInput);
@@ -309,6 +330,12 @@ public class MainParser {
     }
 
     //@author lezongmun
+    /**
+     * Returns a PersonalContactCommand after parsing the user's input if the specified
+     * input command was for viewing personal contact.
+     *
+     * @return Command PersonalContactCommand
+     */
     private Command parsePersonalContact() {
         return new PersonalContactCommand();
     }

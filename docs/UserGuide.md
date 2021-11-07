@@ -432,7 +432,8 @@ marcus,null,null,null,null,null
 - Additional input after the `import` command will be treated as erroneous input and discarded.
 - However, there is a limitation that duplicates will not be checked for when performing contact imports. Do import 
   with caution.
-- Coming Soon: Duplicate checks for importing contacts will be added in future versions, with more granular controls.
+  
+:date: Coming Soon: Duplicate checks for importing contacts will be added in future versions, with more granular controls.
 
 
 Expected outcome of usage:

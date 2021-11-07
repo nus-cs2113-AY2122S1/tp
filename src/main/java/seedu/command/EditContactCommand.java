@@ -42,11 +42,24 @@ public class EditContactCommand extends Command {
         }
     }
 
+    /**
+     * This method edits the fields of the personal contact, based on
+     * the contactDetails of the EditContactCommand.
+     */
     private void updatePersonalContact() {
         personalContact.editContact(contactDetails);
         TextUi.editPersonalContactMessage(personalContact);
     }
 
+    /**
+     * This method is used to check whether the EditContactCommand has to
+     * handle any contact duplicates in the Contact List or to edit the
+     * contact's details.
+     *
+     * @param postEditContact Contact that has been edited with fields user intends to edit to
+     * @throws IndexOutOfBoundsException If index given in the EditContactCommand by user is
+     *      outside the size of the Contact List.
+     */
     private void handleDuplicates(Contact postEditContact) throws IndexOutOfBoundsException {
         if (hasDuplicates(postEditContact, contactList, contactIndex)) {
             TextUi.ignoreContact(EDIT_TYPE);
@@ -55,6 +68,14 @@ public class EditContactCommand extends Command {
         }
     }
 
+    /**
+     * This method edits the fields of the selected contact in the Contact List,
+     * based on the contactDetails of the EditContactCommand.
+     *
+     * @param postEditContact Contact that has been edited with fields user intends to edit to
+     * @throws IndexOutOfBoundsException If index given in the EditContactCommand by user is
+     *      outside the size of the Contact List.
+     */
     private void updateContact(Contact postEditContact) throws IndexOutOfBoundsException {
         contactList.editContactAtIndex(contactDetails, contactIndex);
         //sort the contact list based on name after a contact has been edited
