@@ -26,6 +26,7 @@ public class Timetable implements Comparable<Timetable> {
 
     private static final int DEFAULT_START = 9;
     private static final int DEFAULT_END = 16;
+    private static final int ZERO = 0;
 
     private int semester;
     private int earliestHour;
@@ -288,7 +289,7 @@ public class Timetable implements Comparable<Timetable> {
      * clearTimetableFromLessons() function to delete all the scheduled lessons.
      */
     public void clearTimetable() throws UniModsException {
-        if (isEmpty) {
+        if (modules.size() == ZERO && events.size() == ZERO) {
             throw new UniModsException(TextUi.ERROR_EMPTY_TIMETABLE);
         }
         modules.clear();

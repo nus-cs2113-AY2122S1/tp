@@ -252,6 +252,7 @@ public class ModuleRecord {
         }
         gradedModules.clear();
         ungradedModules.clear();
+        moduleCodes.clear();
         TextUi.printTranscriptCleared();
     }
 

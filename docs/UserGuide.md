@@ -30,7 +30,9 @@ lessons in your daily schedule and your total workload:
         * [Add a Module](#add-a-module-to-timetable )
         * [Add an Event](#add-an-event-to-timetable)
     * [Delete from Timetable](#delete-from-timetable-delete-module_code)
-    * [Clear Timetable](#clear-timetable-clear)
+    * [Clear From Timetable or Transcript]()
+        * [Clear from Timetable]()
+        * [CLear from Transcript]()
     * [View Timetable](#view-timetable-timetable)
     * [Changing Semester](#changing-semester)
     * [Storing grades secured in past modules](#store-grades-secured-in-various-modules-store-grade--module_code)
@@ -61,6 +63,7 @@ lessons in your daily schedule and your total workload:
        - show <module_code>: displays the module information
        - add <module_code> : to add the module to the timetable
        - delete <module_code> : to remove the module from the timetable
+       - delete <event_name> : to remove the event/task from the timetable
        - timetable : lists all modules added to the timetable
        - exit : Exits the app.
        - Refer to the Features below for details of each command.
@@ -335,40 +338,89 @@ Location of Event (Optional): Discord
 Alright!! Event: Team Meeting CS2113T on Monday, from 2000 to 2100 at Team Meeting CS2113T has been added to your timetable
 ```
 
-
-If the selected timeslot is already occupied, the program will let you know and the event will not be added until the timeslot
-has been freed up.
+If the selected timeslot is already occupied, the program will let you know and the event will not be added until the
+timeslot has been freed up.
 <br>
 
-## Delete from timetable: `delete <MODULE_CODE>`
+## Delete from timetable: `delete <MODULE_CODE>` OR `delete <EVENT_NAME>`
 
-You can remove any module that you added to your timetable using this command.
+You can remove any module or personal task that you added to your timetable using this command.
 
-For example: If you have CS2113T already added to your timetable. You can type
+For example: If you have CS2113T module already added to your timetable. You can type
 `delete CS2113T` to remove this module from your timetable.
 
 ```shell
-~$ delete CS2113T
+~$  delete CS2113T
 CS2113T is successfully deleted from your Timetable.
+________________________________________________________________________________________________________________________
+
+```
+
+Similarly, if you want to delete a personal task called `Complete Reading` from your timetable then simply
+type `delete Complete Reading` to remove this task from your timetable.
+
+```shell
+~$  delete Complete Reading
+COMPLETE READING is successfully deleted from your Timetable.
+________________________________________________________________________________________________________________________
 ```
 
 <br>
 
-## Clear timetable: `clear`
+## Clear from Timetable or Transcript : `clear`
 
-You can remove **all** added modules from your timetable by typing `clear`. You can then view the empty timetable by
+You can use the `clear` to remove all modules and events from the timetable or to remove all completed modules with
+their corresponding grades from your Transcript. For Example: type `clear` to see what you can clear using this command.
+
+```shell
+==> clear
+What would you like to clear ?
+1. Timetable
+2. Transcript
+Choose your option: 
+```
+
+You can choose what you want to clear completely and choose the corresponding number i.e. `1` or `2`.
+
+### Clear from Timetable
+
+You can remove **all** added modules from your timetable by typing `clear`. On being prompted to choose a number,
+choose `1` and this should clear your timetable of all modules and events. You can then view the empty timetable by
 typing the command `timetable`.
 
 For Example:
 
 ```shell
 ~$ clear
+What would you like to clear ?
+1. Timetable
+2. Transcript
+Choose your option: 1
 All modules have been successfully removed from your Timetable.
-
+________________________________________________________________________________________________________________________
 ```
 
 <br>
 
+### Clear from Transcript
+
+You can remove **all** completed modules and their grades from your timetable by typing `clear`. On being prompted to
+choose a number, choose `2` and this should clear your transcript of all modules and grades. You can then view the empty
+transcript by typing the command `transcript`.
+
+For Example:
+
+```shell
+~$  clear
+What would you like to clear ?
+1. Timetable
+2. Transcript
+Choose your option: 2
+All modules have been successfully removed from your Transcript.
+________________________________________________________________________________________________________________________
+```
+
+<br>
 ## View timetable: `timetable`
 
 You can view the current timetable which details your daily schedule as well as the total MCs taken and classes and time
@@ -428,8 +480,8 @@ Total MCs taken this semester: 4.0
 
 ## Store grades secured in various modules: `store <GRADE> > <MODULE_CODE>`
 
-You can store the grades you have secured for various modules by using this command.These will be stored in the list of
-completed modules and will be used for CAP calculation.
+You can store the grades you have secured for various modules by using this command.These modules along with their
+grades will be stored in the list of completed modules in the Transcript.
 
 For Example : Let's store `A+` grade for `CS2113T` module in the records.
 
@@ -437,8 +489,9 @@ You can type `store A+ > CS2113T` to store A+ grade for the module CS2113T in th
 
 ```shell
 ~$ store A+ > CS2113T
-CS2113T with grade A+ has been added to the list of modules completed.
-__________________________________________________________________________
+CS2113T with grade A+ has been added to your Transcript
+________________________________________________________________________________________________________________________
+
 
 ```
 
@@ -449,8 +502,8 @@ For Example : Let's store `CS` grade for `CFG1002` module in the records.
 
 ```shell
 ~$ store CS > CFG1002
-CFG1002 with grade CS has been added to the list of modules completed.
-__________________________________________________________________________
+CFG1002 with grade CS has been added to your Transcript
+________________________________________________________________________________________________________________________
 
 ```
 
@@ -458,22 +511,21 @@ You can choose to store modules for which you have exercised the S/U option. The
 CAP calculation. For Example : Let's store `S` grade for `CS1231` module in the records.
 
 ```shell
-~$ store S > CS1231
-CS1231 with grade S has been added to the list of modules completed.
-__________________________________________________________________________
+~$  store S > CS1231
+CS1231 with grade S has been added to your Transcript
+________________________________________________________________________________________________________________________
 
 ```
 
 <br>
 
-
 ## Remove modules from the list of completed modules: `remove <MODULE_CODE>`
 
+You can remove any module and grade that you added to your list of completed modules in the transcript by using this
+command.
 
-You can remove any module that you added to your list of completed modules or transcript using this command.
-
-For example: If you have CS2113T already to your list of completed modules. You can type
-`remove CS2113T` to remove this module and its corresponding grade from the list of modules completed.
+For example: If you have CS2113T already in your list of completed modules. You can type
+`remove CS2113T` to remove this module and its corresponding grade from the Transcript.
 
 ```shell
 ~$ remove CS2113T
@@ -483,17 +535,17 @@ __________________________________________________________________________
 
 <br>
 
-## Calculate CAP : `calculate cap`
+## Calculate CAP : `calculate`
 
 You can calculate your **CAP** based on the list of modules you have completed and the corresponding grades scored in
 them.
 
-You can type `calculate cap` to view your Cumulative Average Point.
+You can type `calculate` to view your Cumulative Average Point.
 
 For Example:
 
 ```shell
-~$ calculate cap
+~$ calculate
 Cumulative Average Point : 3.0
 __________________________________________________________________________
 
@@ -551,6 +603,7 @@ check whether you have met all the pre-requisites for a module!
 
 For example let's say you wish to take CS2040. <br>
 Example output (If you had not taken CS1010):
+
 ```shell
 ~$ check CS2040
 Oops, you have not met the module's prerequisite: 
@@ -559,6 +612,7 @@ ________________________________________________________________________________
 ```
 
 Example output (If you had taken CS1010):
+
 ```shell
 ~$ check CS2040
 Yes! You are eligible to take up: CS2040 Data Structures and Algorithms 4MC

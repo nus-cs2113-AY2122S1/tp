@@ -106,6 +106,7 @@ public class TextUi {
     }
 
     public static ClearFlag getClearFlag() throws UniModsException {
+        System.out.println("What would you like to clear ?");
         System.out.println(OPTION_1 + DELIMITER_DOT + CLEAR_TIMETABLE);
         System.out.println(OPTION_2 + DELIMITER_DOT + CLEAR_TRANSCRIPT);
         System.out.print("Choose your option: ");
@@ -272,7 +273,7 @@ public class TextUi {
     }
 
     public static void printAddedGrade(String moduleCode, String grade) {
-        System.out.println(moduleCode + " with grade " + grade + " has been added to the list of modules completed.");
+        System.out.println(moduleCode + " with grade " + grade + " has been added to your Transcript");
     }
 
     public static void printCap(double cap) {
