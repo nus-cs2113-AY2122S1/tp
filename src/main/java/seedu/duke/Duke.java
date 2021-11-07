@@ -1,21 +1,47 @@
 package seedu.duke;
 
+import seedu.duke.employee.EmployeeList;
+import seedu.duke.ingredient.IngredientList;
+import seedu.duke.main.MainParser;
+import seedu.duke.main.MainUI;
+import seedu.duke.dish.Menu;
+import seedu.duke.finance.FinanceList;
+import seedu.duke.storage.Storage;
+
 import java.util.Scanner;
 
 public class Duke {
-    /**
-     * Main entry-point for the java.duke.Duke application.
-     */
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
 
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+    public static void main(String[] args) {
+        EmployeeList employeeList = new EmployeeList();
+        Menu menu = new Menu();
+        IngredientList ingredientList = new IngredientList();
+        FinanceList financeList = new FinanceList();
+
+        // Load Storage
+        Storage.loadStorage(employeeList, menu, ingredientList, financeList);
+
+        // Hello
+        MainUI.printWelcomeMessage();
+
+        // Active Chat
+        Scanner input = new Scanner(System.in);
+        String userInput;
+        boolean isBye = false;
+
+        while (!isBye) {
+            //store input into String
+            userInput = input.nextLine();
+            //process input
+            isBye = MainParser.handleCommand(employeeList, menu, ingredientList, financeList, userInput);
+        }
+
+        // Bye
+        MainUI.printGoodbyeMessage();
+
+        // Save Storage
+        Storage.saveStorage(employeeList, menu, ingredientList, financeList);
+        MainUI.printStorageSaved();
     }
+
 }
