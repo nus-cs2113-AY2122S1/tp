@@ -16,6 +16,7 @@ import seedu.reminder.SingleNearingReminder;
 import seedu.reminder.SingleReminder;
 import seedu.reminder.UnableToSetBudgetReminder;
 import seedu.utility.BudgetManager;
+import seedu.utility.CurrencyManager;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
 
@@ -30,8 +31,9 @@ public class BudgetManagerTest {
     private static final String currentMonth =
             LocalDate.now().getMonth().toString();
 
+    private final CurrencyManager currencyManager = new CurrencyManager();
     private final BudgetManager budgetManager = new BudgetManager();
-    private final FinancialTracker finances = new FinancialTracker();
+    private final FinancialTracker finances = new FinancialTracker(currencyManager);
 
     @Test
     public void setBudget_validEntry_correctBudget() {
@@ -76,7 +78,7 @@ public class BudgetManagerTest {
         finances.addExpense(new Expense("mcdonalds", 5, ExpenseCategory.FOOD));
         Expense testExpense = new Expense("dinner", 6, ExpenseCategory.FOOD);
         finances.addExpense(testExpense);
-        BudgetReminder reminder = budgetManager.handleBudget(testExpense, finances.getExpenses(), LocalDate.now());
+        BudgetReminder reminder = budgetManager.handleBudget(testExpense, finances.getExpenses());
         BudgetReminder expectedReminder = new DoubleNearingBudgetReminder(currentMonth,
                 "FOOD", 11, 12, 11, 13, 12);
         assertEquals(expectedReminder.toString(), reminder.toString());
@@ -91,7 +93,7 @@ public class BudgetManagerTest {
         budgetManager.setThreshold(0.9);
         Expense testExpense = new Expense("breakfast", 11, ExpenseCategory.FOOD);
         finances.addExpense(testExpense);
-        BudgetReminder reminder = budgetManager.handleBudget(testExpense, finances.getExpenses(), LocalDate.now());
+        BudgetReminder reminder = budgetManager.handleBudget(testExpense, finances.getExpenses());
         BudgetReminder expectedReminder = new ExceededBudgetNearingOverallReminder(currentMonth,
                 "FOOD", 11, 4, 11,12, 11);
         assertEquals(expectedReminder.toString(), reminder.toString());
@@ -105,7 +107,7 @@ public class BudgetManagerTest {
         budgetManager.setThreshold(0.9);
         Expense testExpense = new Expense("breakfast", 15, ExpenseCategory.FOOD);
         finances.addExpense(testExpense);
-        BudgetReminder reminder = budgetManager.handleBudget(testExpense, finances.getExpenses(), LocalDate.now());
+        BudgetReminder reminder = budgetManager.handleBudget(testExpense, finances.getExpenses());
         BudgetReminder expectedReminder = new DoubleExceededBudgetReminder(currentMonth,
                 "FOOD", 15, 4, 15,12, 15);
         assertEquals(expectedReminder.toString(), reminder.toString());
@@ -119,7 +121,7 @@ public class BudgetManagerTest {
         budgetManager.setThreshold(0.9);
         Expense testExpense = new Expense("breakfast", 5, ExpenseCategory.FOOD);
         finances.addExpense(testExpense);
-        BudgetReminder reminder = budgetManager.handleBudget(testExpense, finances.getExpenses(), LocalDate.now());
+        BudgetReminder reminder = budgetManager.handleBudget(testExpense, finances.getExpenses());
         BudgetReminder expectedReminder = new SingleExceededReminder(currentMonth,
                 "FOOD", 5, 4);
         assertEquals(expectedReminder.toString(), reminder.toString());
@@ -133,7 +135,7 @@ public class BudgetManagerTest {
         budgetManager.setThreshold(0.9);
         Expense testExpense = new Expense("breakfast", 3.9, ExpenseCategory.FOOD);
         finances.addExpense(testExpense);
-        BudgetReminder reminder = budgetManager.handleBudget(testExpense, finances.getExpenses(), LocalDate.now());
+        BudgetReminder reminder = budgetManager.handleBudget(testExpense, finances.getExpenses());
         BudgetReminder expectedReminder = new SingleNearingReminder(currentMonth,
                 "FOOD", 3.9, 4);
         assertEquals(expectedReminder.toString(), reminder.toString());
@@ -147,7 +149,7 @@ public class BudgetManagerTest {
         budgetManager.setThreshold(0.9);
         Expense testExpense = new Expense("breakfast", 1.20, ExpenseCategory.FOOD);
         finances.addExpense(testExpense);
-        BudgetReminder reminder = budgetManager.handleBudget(testExpense, finances.getExpenses(), LocalDate.now());
+        BudgetReminder reminder = budgetManager.handleBudget(testExpense, finances.getExpenses());
         BudgetReminder expectedReminder = new SingleReminder(currentMonth,
                 "FOOD", 1.20, 4);
         assertEquals(expectedReminder.toString(), reminder.toString());

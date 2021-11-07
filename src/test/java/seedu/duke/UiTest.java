@@ -52,9 +52,9 @@ public class UiTest {
 
     
     private final Ui testUI = new Ui();
-    private final FinancialTracker financialTracker = new FinancialTracker();
-    private BudgetManager budgetManager = new BudgetManager();
     private CurrencyManager currencyManager = new CurrencyManager();
+    private final FinancialTracker financialTracker = new FinancialTracker(currencyManager);
+    private BudgetManager budgetManager = new BudgetManager();
 
     public void initialiseFinancialTracker() throws IncomeOverflowException, ExpenseOverflowException {
         financialTracker.addIncome(new Income("Paycheck August", 25.0, IncomeCategory.SALARY));
@@ -293,7 +293,7 @@ public class UiTest {
                 + "x   Account Balance: $0.00                                                 Legend:                 x"
                 + "x   Current month total expense: $0.00                                # is Expense      x"
                 + "x   Current month total income: $0.00                                 o is Income       x"
-                + "x   Your Yearly Report                                                     Unit: 0.01              x"
+                + "x   Your Year Report                                                       Unit: 0.01              x"
                 + "x ------------------------------------------------------------------------------------------------ x"
                 + "x                                                                                                  x"
                 + "x                                                                                                  x"
