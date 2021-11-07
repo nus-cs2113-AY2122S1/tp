@@ -59,6 +59,7 @@ public class University implements Comparator<University> {
         }
     }
 
+    //@@author MZJ124
     /**
      * Generates an array list storing all mappings from the university with local module from the selected module list.
      * @param selectedModuleList RThe selected module list
@@ -77,8 +78,6 @@ public class University implements Comparator<University> {
     public ArrayList<ModuleMapping> getList() {
         return list;
     }
-
-    //@@author Ma Zijian
 
     /**
      * Calculates the number of mappings for the university with local module from the selected module list.

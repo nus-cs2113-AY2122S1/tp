@@ -9,6 +9,7 @@ import seplanner.universities.UniversityList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+//@@ author MAZJ124
 public class ParseCondition {
 
     /**

@@ -1,7 +1,7 @@
 package seplanner.modules;
 
 import java.util.ArrayList;
-
+//@@author MAZJ124
 public class ModuleList {
     protected ArrayList<Module> list;
 
