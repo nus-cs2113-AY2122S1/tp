@@ -34,7 +34,7 @@ This is a simplified class diagram of the Parser component, which provides a hig
 
 ![](diagrams/ParserClassDiagramSimplified.png)
 
-This is a more detailed class diagram of the `Parser`, `ArgsParser`, and `Prefix` classes. Note that `Parser` has 4 single arg prefixes, 3 multiple arg prefixes, and 3 optional arg prefixes. These prefixes correspond to the various arguments that are accepted by the various commands.
+This is a more detailed class diagram of the `Parser`, `ArgsParser`, and `Prefix` classes. Note that `Parser` has 4 single arg prefixes, 3 multiple arg prefixes, and 1 optional arg prefix. These prefixes correspond to the various arguments that are accepted by the various commands.
 
 ![](diagrams/ParserClassDiagram.png)
 
