@@ -12,13 +12,16 @@ realise the target user profile that motivated us to build this application.
 * [Acknowledgements](#-acknowledgements)
 * [Setting Up & Getting Started](#-setting-up--getting-started)
 * [Design & Implementations](#-design--implementation)
-  * [General Flow](#general-flow)
-  * [Input Parsing](#input-parsing)
-  * [Storage](#storage)
-  * [Data Structures](#data-structures)
-  * [User-Interface Component](#user-interface-component)
-  * [Exceptions](#exceptions)
-  * [Command Abstraction](#command-abstraction)
+    * [Design](#design)
+      * [Main Components](#main-components)
+      * [General Flow](#general-flow)
+      * [Input Parsing](#input-parsing)
+      * [Storage](#storage)
+      * [Data Structures](#data-structures)
+      * [User-Interface Component](#user-interface-component)
+      * [Exceptions](#exceptions)
+      * [Command Abstraction](#command-abstraction)
+    * [Implementation](#implementation)
 * [Product Scope](#-product-scope)
   * [Target User Profile](#target-user-profile)
   * [Value Proposition](#value-proposition)
@@ -44,7 +47,7 @@ realise the target user profile that motivated us to build this application.
 This section brings developers through the general flow of the programme, the various components involved, and the overall design of their
 implementation.
 
-# Design
+## Design
 
 ### Main Components
 
@@ -200,7 +203,7 @@ type in correct Commands/Parameters.
 * Different Command Classes that perform different tasks by calling various functions of the Object Classes.  
 * All inherit from an abstract `Command` class with one execute method that takes an Arraylist<String> as input.
 
-#Implementation
+## Implementation
 
 ### Find
 
@@ -209,6 +212,17 @@ type in correct Commands/Parameters.
 ### Set
 
 ### Graph
+
+Graph works by creating a 2d grid and printing the bars based on the current position of the terminal cursor. 
+This lets us bypass the restriction in a CLI based application where you can only print from up to down and 
+the bars can get printed "vertically". This is done by calculating the lengths of the bars beforehand and 
+using these lengths along with the current coordinates to print either an empty space or a bar. 
+
+Despite this due to CLI and ascii limitations, printing of fractional values posed an issue. This was because you are unable
+to print half a character and using special unicode characters would break cross-platform functionality. The solution 
+that we implemented was to have a digit in the top most bar if we have fractional heights. This way while we still dont get 
+a perfect representation, we are capable of giving the value accurate to one decimal place. So if the height was 3.33 units
+it would be represented by 3 filled bars and the 4th bar will have a 3 within indicating it's value is between 3.3 to 3.4
 
 ### Random dish
 
