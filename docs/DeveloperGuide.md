@@ -62,6 +62,7 @@ upon.
 
 The Architecture Diagram given below explains the high-level design of the App. 
 Given below is a quick overview of main components and how they interact with each other.
+
 ![Unimods](./resources/architecture.png)
 
 #### Main components of the architecture
@@ -160,7 +161,7 @@ emulates that of the json, with each `Module` containing an `Attributes` object 
 #### Parsing and Saving of Weeks via Gson
 Gson was unable to parse the weeks key as provided by the NUSMods API as the value expected for the key can be of two different data types.
 
-```
+```json
 {
 "classNo": "16",
 "startTime": "1600",
@@ -176,7 +177,7 @@ Gson was unable to parse the weeks key as provided by the NUSMods API as the val
 
 An example of a lesson in the *timetable* array in a normal semester, where *weeks* contains an array.
 
-```
+```json
 {
 "classNo": "03",
 "startTime": "1530",
@@ -238,6 +239,8 @@ The following implemented functions are utilized heavily:
 * `searchFiles()` : attempts to search from all jsons in the local data folder.
 * `loadModInfo()` : directly loads the json with the specified module code.
 
+<br>
+
 #### Search
 
 ![SearchDiagram](uml-diagrams/Search.png)
@@ -252,6 +255,8 @@ flags. `saveModInfo()` is always used after fetching a json to keep the local da
 If the module matches the search term and all flags, then it is printed. If either `getOnlineModList()` or 
 `getOnlineModInfo()` fail at the start, then `searchFiles()` will execute instead to fetch data locally.
 
+<br>
+
 #### Show
 
 ![ShowCommandDiagram](uml-diagrams/Show.png)
@@ -260,12 +265,16 @@ Similar to search, except it directly uses `getOnlineModInfo()` instead. If the 
 Again, `saveModInfo()` is always used after fetching a json to keep the local database as up to date as possible. 
 If `getOnlineModInfo()` fails at the start, then `loadModInfo()` will execute instead.
 
+<br>
+
 #### Update
 
 ![UpdateCommandDiagram](uml-diagrams/Update.png)
 
 Fetches the json from all mods in the NUSMods database. Utilizes `getOnlineModList()` to get all mods from online. 
 `getOnlineModInfo()` and `saveModInfo()` is run for every mod in the list to update all mods in the local database.
+
+<br>
 
 ### Maintaining Timetable
 
@@ -276,27 +285,140 @@ Fetches locally stored timetable json, utilizing Gson to convert it to a `Timeta
 
 In the event that the json save file is empty or does not exist, a new empty `Timetable` object is created
 
+<br>
+
 #### Save
 ![](uml-diagrams/TimetableSave.png)
 
 `Timetable` is converted to a `TimetableDto` object in order to separate different `TimetableItem` types. The `TimetableDto` object is then saved to a local json file via Gson.
 
+<br>
+
 #### Add
-Utilizes `getLessonDetails` for each LessonType found in the Semester of the module. 
-Details of all lessons will be displayed and sorted based on classNo. 
-In the event where the lesson conflicts (another lesson is within the same time slot) 
-with any existing lessons, a `<CONFLICT>` line will be displayed beside the lesson. 
-For each lessonType, `getCommand` is utilized to collect input of the Lesson to be added into the timetable. 
-The `addModuleToList()` and `addLesson()` functions are called, and the modules are added to the module 
-list and each applicable timetable slot.
+![](uml-diagrams/AddCommand.png)
+
+If AddCommand is executed with a `LESSON` flag, `fetchModule()` will be executed. Module data will be fetched similar to the process of getting module detail in [Search](#fetch,-save-and-load-mod),
+and for each existing lesson type, details of the lesson will be printed through the `getLessonDetails()` method.
+For each lessonType, `getCommand()` is utilized to collect input of the Lesson to be added into the timetable.
+
+If AddCommand is executed with a `EVENT` flag, `getEvent()` will be executed. Which subsequently calls `addEvent()` to add 
+event to the timetable.
+
+<br>
 
 #### Delete
 
+<br>
+
 #### Clear Timetable
 
+<br>
+
 #### Show Timetable
+![](uml-diagrams/ViewTimetable.png)
+
+Viewing the timetable follows a systematic step-by-step process. It first calls `printScheduleHours()`
+to print the horizontal-axis (hourly timeslot) for the grid-like timetable visualisation.
+It then prints three lines of information for each day, the Title, type and venue for each scheduled item.
+This is done within `printLine(LineType)`, which internally calls `addInfoToString`, which adds the Title/Type/Venue
+varying information to the string to be printed depending on which `printLine(LineType)` was called.
+Finally, it prints all the modules taken, together with their exam dates, and the total number of MCs taken,
+by incrementing a counter for each module tracked within the timetable instance's `modules` array.
+
+<br>
+
+#### Checking Pre-requisite
+
+The pre-requisite tree for a particular module can be found under `prerequisiteTree` in the json obtained from NUSMods API.
+The pre-requisite tree varies from module to module and can be deeply recursive.
+
+Example of deeply recursive pre-requisite tree (CS4243):
+```json
+"prereqTree": {
+    "and": [
+      {
+        "or": [
+          "CS1020",
+          {
+            "and": [
+              {
+                "or": [
+                  "CS2030",
+                  "CS2113",
+                  "CS2113T"
+                ]
+              },
+              "CS2040"
+            ]
+          }
+        ]
+      },
+      {
+        "or": [
+          "MA1101R",
+          "MA1311",
+          "MA1508E",
+          "MA1513"
+        ]
+      },
+      {
+        "or": [
+          "MA1102R",
+          "MA1505",
+          "MA1507",
+          {
+            "and": [
+              "MA1511",
+              "MA1512"
+            ]
+          },
+          "MA1521"
+        ]
+      },
+      {
+        "or": [
+          "EE2012",
+          "EE2012A",
+          "MA2216",
+          "ST1131",
+          "ST1131A",
+          "ST1232",
+          "ST2131",
+          "ST2334"
+        ]
+      }
+    ]
+  },
+```
+
+Compared to a simple pre-requisite tree (CS2040)
+```json
+"prereqTree": "CS1010"
+```
+
+To determine if the user meets the pre-requisites the following sequence takes place:
+
+![](uml-diagrams/CheckPrerequisite.png)
+
+Checking if the user has met the module's prerequisite utlises the same `fetchMod` explored earlier 
+in [Search](#search). If the module code given is valid, the module's prerequisite tree is checked for satisfiability
+given the user's `ModuleRecord` found in his `Profile`. 
+
+The sequence for checking if the pre-requisite tree is satisfied is complicated and is shown as follows:
+![](uml-diagrams/TreeSatisfied.png)
+
+Checking for Tree Satisfaction involves recursive calls of `isAndTreeSatisfied()` and `isOrTreeSatisfied()`, 
+since each  Tree can consists of several
+sub-trees. Each tree has a condition (AND/OR) that determines the logic of checking for satisfaction.
+This recursive method has to be implemented this way due to huge variations in pre-requisites for different
+modules.
+
+
+<br>
 
 ## Appendix: Requirements
+
+<br>
 
 ### Product Scope
 

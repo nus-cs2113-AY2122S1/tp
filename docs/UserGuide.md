@@ -32,8 +32,12 @@ lessons in your daily schedule and your total workload:
     * [Delete from Timetable](#delete-from-timetable-delete-module_code)
     * [Clear Timetable](#clear-timetable-clear)
     * [View Timetable](#view-timetable-timetable)
+    * [Changing Semester](#changing-semester)
+    * [Storing grades secured in past modules](#store-grades-secured-in-various-modules-store-grade--module_code)
+    * [Removing modules from stored grades](#remove-modules-from-the-list-of-completed-modules-remove-module_code)
     * [Calculate CAP](#calculate-cap--calculate-cap)
     * [View Unofficial Transcript](#view-unofficial-transcript--transcript)
+    * [Checking eligibility from a module's pre-requisite](#checking-for-module-pre-requisite-check-module_code)
     * [Exit](#exit-exit)
 - [FAQ](#faq)
 - [Command Summary]()
@@ -89,27 +93,33 @@ Output:
 
 ```shell
 ~$ help
-__________________________________________________________________________
+________________________________________________________________________________________________________________________
 	UNIMods accepts the following commands:-
-		| No.| Command Syntax                |            Command Action                      |
-		| 1. | search <module_code>          | Search module based on the given partial regex |
-		| 2. | show <module_code>            | Display module information                     |
-		| 3. | add <module_code>             | Add module to the Timetable                    |
-		| 4. | delete <module_code>          | Deletes module from the Timetable              |
-		| 5. | clear                         | Deletes all modules from the Timetable         |
-		| 6. | timetable                     | Display the Timetable                          |
-		| 7. | store <grade> > <module_code> | Stores the grades scored in the Transcript     |
-		| 8. | remove <module_code>          | Remove the module from the Transcript          |
-		| 9. | calculate cap                 | Displays the Cumulative Average Point          |
-		| 10.| exit                          | Exit From Program                              |
+		| No.| Command Syntax                  | Command Action                                         |
+		| 1. | help                            | Displays all the available commands                    |
+		| 2. | search <MODULE_CODE>            | Searches for modules that match the search expression  |
+		| 3. | show <MODULE_CODE>              | Displays the module's information and S/U-ability      |
+		| 4. | update                          | Fetches all modules from API to a local save           |
+		| 5. | add                             | Add modules or tasks to the Timetable                  |
+		| 6. | delete <MODULE_CODE/TASK>       | Removes the module or personal task from timetable     |
+		| 7. | clear                           | Clears the timetable of everything                     |
+		| 8. | edit                            | Edit a personal task in the timetable                  |
+		| 9. | timetable                       | Displays the timetable in a weekly grid format         |
+		| 10.| semester                        | Changes the academic semester that you wish to plan for|
+		| 11.| check <MODULE_CODE>             | Check whether the module's pre-requisite is met        |
+		| 12.| store <GRADE> <MODULE_CODE>     | Assigns a grade to a module and stores it on record    |
+		| 13.| remove <MODULE_CODE>            | Removes the module from the profile's record           |
+		| 14.| calculate                       | Calculates your CAP from your profile.                 |
+		| 15.| transcript                      | Creates and displays an unofficial transcript          |
+		| 16.| exit                            | Saves the current state and exits UniMods safely       |
 	 ** Note: For details, refer to the User Guide of NUSModsLite at: 
 		https://ay2122s1-cs2113t-w12-2.github.io/tp/UserGuide.html
-__________________________________________________________________________
 
+________________________________________________________________________________________________________________________
 
 ```
 
-To begin, perhaps try looking up CS2113T by running the following command:
+To begin, perhaps try looking up CS2113T by using the [show Command](#display-module-info-show-module_code)
 
 <br>
 
@@ -294,7 +304,9 @@ If all lesson types have been successfully added, program will print out
 Lessons for all modules have been successfully added
 ```
 
-### Adding an Event to timetable
+<br></br>
+
+### Add an Event to timetable
 
 Perhaps you have a team meeting that takes place every Monday, you can likewise add your personal events into the
 timetable
@@ -323,11 +335,12 @@ Location of Event (Optional): Discord
 Alright!! Event: Team Meeting CS2113T on Monday, from 2000 to 2100 at Team Meeting CS2113T has been added to your timetable
 ```
 
-If the selected timeslot is already occupied, the program will let you know and the event will not be added until the
-timeslot has been freed up.
+
+If the selected timeslot is already occupied, the program will let you know and the event will not be added until the timeslot
+has been freed up.
 <br>
 
-## Delete from timetable: `delete <module_code>`
+## Delete from timetable: `delete <MODULE_CODE>`
 
 You can remove any module that you added to your timetable using this command.
 
@@ -399,13 +412,17 @@ Simply type `timetable` into the input and voila!
 *******************
 Modules taken this semester: 
 
-CS2113T Software Engineering & Object-Oriented Programming 4MC
+CS2113T Software Engineering & Object-Oriented Programming 4MC (Exam: Tue Nov 30 09:00 AM - 11:00 AM)
 
 Total MCs taken this semester: 4.0
 
 *******************
 
 ```
+
+<br>
+
+## Changing semester
 
 <br>
 
@@ -449,7 +466,9 @@ __________________________________________________________________________
 
 <br>
 
-## Remove modules from the Transcript: `remove <module_code>`
+
+## Remove modules from the list of completed modules: `remove <MODULE_CODE>`
+
 
 You can remove any module that you added to your list of completed modules or transcript using this command.
 
@@ -525,6 +544,27 @@ ________________________________________________________________________________
 
 <br>
 
+## Checking for module pre-requisite: `check <MODULE_CODE>`
+
+After [assigning grades to past modules](#store-grades-secured-in-various-modules-store-grade--module_code), you can
+check whether you have met all the pre-requisites for a module!
+
+For example let's say you wish to take CS2040. <br>
+Example output (If you had not taken CS1010):
+```shell
+~$ check CS2040
+Oops, you have not met the module's prerequisite: 
+CS1010 or its equivalent
+________________________________________________________________________________________________________________________
+```
+
+Example output (If you had taken CS1010):
+```shell
+~$ check CS2040
+Yes! You are eligible to take up: CS2040 Data Structures and Algorithms 4MC
+________________________________________________________________________________________________________________________
+```
+
 ---
 
 # FAQ
@@ -578,7 +618,7 @@ and is very similar to just running `update`.
 | `search <KEYWORD> [-l]`         | Lists modules that have partial matches by regex to the keyword. <br> Example: `search GEH -l 1000`|
 | `show <MODULE_CODE>`            | Display relevant module information. <br> Example: `show CS2113T`                                  |
 | `update`                        | Fetches all mods from the API to a local save. <br> Example: `update`                              |
-| `add`                           | Adds modules or tasks to the timetable. <br> Example: `add`                                        |
+| `add`                           | Adds modules or events to the timetable. <br> Example: `add`                                       |
 | `delete <MODULE_CODE/TASK>`     | Deletes the module from the timetable. <br> Example: `delete CS2113T`                              |
 | `clear`                         | Deletes all modules from the timetable. <br> Example: `clear`                                      |
 | `edit`                          | Edit a personal task in the timetable. <br> Example: `edit`                                        |

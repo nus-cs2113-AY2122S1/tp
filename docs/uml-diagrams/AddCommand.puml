@@ -1,0 +1,45 @@
+@startuml
+[-> AddCommand : execute()
+activate AddCommand
+
+alt AddFlag equals to LESSON
+    AddCommand -> NusMods : fetchModuleCode()
+    activate NusMods
+    NusMods --> AddCommand : module
+    deactivate NusMods
+    alt moduleExist
+        Loop for each lesson type
+            AddCommand -> AddCommand : getLessonDetails()
+            activate AddCommand
+            AddCommand --> AddCommand : lesson details
+            deactivate AddCommand
+        end
+        AddCommand -> AddUi : printLessonDetails
+        activate AddUi
+        loop for each lesson type
+            AddUi -> AddUi : getCommand()
+            activate AddUi
+            AddUi -> timetable : addLesson()
+            activate timetable
+            timetable --> AddUi
+            deactivate timetable
+            AddUi --> AddUi
+            deactivate AddUi
+        end
+        AddUi --> AddCommand
+        deactivate AddUi
+    end
+else AddFlag equals to EVENT
+    AddCommand -> AddCommand : getEvent()
+    activate AddCommand
+    AddCommand -> timetable : addEvent()
+    activate timetable
+    timetable --> AddCommand
+    deactivate timetable
+    AddCommand --> AddCommand
+    deactivate AddCommand
+end
+<-- AddCommand
+deactivate AddCommand
+
+@enduml
