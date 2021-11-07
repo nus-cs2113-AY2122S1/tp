@@ -1,6 +1,7 @@
 package taa.command;
 
 //@@author leyondlee
+
 import taa.Ui;
 import taa.command.comment.DeleteCommentCommand;
 import taa.teachingclass.ClassList;
@@ -163,8 +164,8 @@ public class HelpCommand extends Command {
     @Override
     protected String getUsage() {
         return String.format(
-            MESSAGE_FORMAT_GENERIC_USAGE,
-            COMMAND_HELP
+                MESSAGE_FORMAT_GENERIC_USAGE,
+                COMMAND_HELP
         );
     }
 }

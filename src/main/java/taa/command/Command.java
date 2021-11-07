@@ -1,6 +1,7 @@
 package taa.command;
 
 //@@author leyondlee
+
 import taa.teachingclass.ClassList;
 import taa.storage.Storage;
 import taa.exception.TaaException;
@@ -58,7 +59,7 @@ public abstract class Command {
     protected static final String MESSAGE_DATA_REMOVED = "All data have been removed.";
     protected static final String MESSAGE_ABORT = "Abort.";
     protected static final String MESSAGE_INVALID_CLASS_ID = "Invalid class ID. Class ID cannot be empty or "
-        + "contain spaces.";
+            + "contain spaces.";
 
     // Common message formats
     protected static final String MESSAGE_FORMAT_GENERIC_USAGE = "%s";

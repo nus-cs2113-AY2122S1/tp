@@ -1,6 +1,7 @@
 package taa.command.teachingclass;
 
 //@@author leyondlee
+
 import taa.teachingclass.TeachingClass;
 import taa.teachingclass.ClassList;
 import taa.command.Command;
@@ -43,8 +44,8 @@ public class AddClassCommand extends Command {
      * Executes the add_class command and adds a class.
      *
      * @param classList The list of classes.
-     * @param ui         The ui instance to handle interactions with the user.
-     * @param storage    The storage instance to handle saving.
+     * @param ui        The ui instance to handle interactions with the user.
+     * @param storage   The storage instance to handle saving.
      * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
     @Override
@@ -70,10 +71,10 @@ public class AddClassCommand extends Command {
     @Override
     protected String getUsage() {
         return String.format(
-            MESSAGE_FORMAT_ADD_CLASS_USAGE,
-            COMMAND_ADD_CLASS,
-            KEY_CLASS_ID,
-            KEY_CLASS_NAME
+                MESSAGE_FORMAT_ADD_CLASS_USAGE,
+                COMMAND_ADD_CLASS,
+                KEY_CLASS_ID,
+                KEY_CLASS_NAME
         );
     }
 }
