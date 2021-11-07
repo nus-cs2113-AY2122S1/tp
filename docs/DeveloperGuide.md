@@ -455,8 +455,7 @@ Food-related commands operate on a list of food records, and a food storage obje
 how the storage in a text file, and the current food list interact with each other.
 Food storage object contains static methods to read and write data from said list.
 The saving of data from the list to the storage file is elaborated further in the diagram below.
-Further discussion on the design considerations of writing an abstract class are discussed in 
-design considerations.
+StallManager
 ![](./images/food/foodClassDiagram.png)
 
 ##### Sequence diagram when food is parsed

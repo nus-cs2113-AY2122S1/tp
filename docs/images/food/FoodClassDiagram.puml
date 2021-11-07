@@ -39,7 +39,7 @@ class StorageFood {
 {static} +load() : WhatIAteList
 }
 
-WhatIAteList -u StorageFood : < reads and writes
+StorageFood -> WhatIAteList : > reads and writes
 WhatIAteList -d-> FoodRecord
 
 StallsManager - FoodRecord : > contains information of
