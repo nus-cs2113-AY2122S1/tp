@@ -1,5 +1,7 @@
-# leowyy99 - Project Portfolio Page
-
+---
+layout: page
+title: Leow Yuan Yang's Project Portfoilo Page
+---
 ### Project: SEPlanner
 
 SEPlanner is a lightweight desktop application for Computer Engineering undergraduates from NUS to plan for the Student
