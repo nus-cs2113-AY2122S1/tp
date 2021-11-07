@@ -32,6 +32,8 @@ public class ModuleCommandParserTest {
         assertThrows(InvalidCommandException.class, () -> commandParser.parseCommand("vie wer"));
         assertThrows(InvalidCommandException.class, () -> commandParser.parseCommand("deleterr"));
         assertThrows(InvalidCommandException.class, () -> commandParser.parseCommand(""));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("eXiT a"));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("HeLp    a"));
     }
 
     @Test
@@ -40,7 +42,6 @@ public class ModuleCommandParserTest {
         assertTrue(commandParser.parseCommand("exit") instanceof ExitCommand);
         assertTrue(commandParser.parseCommand("EXIT") instanceof ExitCommand);
         assertTrue(commandParser.parseCommand("   exit   ") instanceof ExitCommand);
-        assertTrue(commandParser.parseCommand("eXiT a") instanceof ExitCommand);
     }
 
     @Test
@@ -49,7 +50,6 @@ public class ModuleCommandParserTest {
         assertTrue(commandParser.parseCommand("help") instanceof HelpCommand);
         assertTrue(commandParser.parseCommand("HELP") instanceof HelpCommand);
         assertTrue(commandParser.parseCommand("   help   ") instanceof HelpCommand);
-        assertTrue(commandParser.parseCommand("HeLp    a") instanceof HelpCommand);
     }
 
     @Test
@@ -65,7 +65,6 @@ public class ModuleCommandParserTest {
     void parseCommand_resolveAddCommand_success() throws InvalidCommandException, InvalidArgumentException {
         assertTrue(commandParser.parseCommand("add \"test\" ") instanceof AddModuleCommand);
         assertTrue(commandParser.parseCommand("add \"username\"") instanceof AddModuleCommand);
-        assertTrue(commandParser.parseCommand("add \"test1\"test2\"") instanceof AddModuleCommand);
     }
 
     @Test
@@ -73,6 +72,8 @@ public class ModuleCommandParserTest {
         assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("delete"));
         assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("delete abcd"));
         assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("delete -5"));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("add \"test1\"test2\""));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("add \"test1\" \"test2\""));
     }
 
     @Test

@@ -1,28 +1,15 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-
-
-'abstract class DGS
-'abstract AbstractCollection
-'interface List
-'interface Collection
-'
-'List <|-- AbstractList
-'Collection -- AbstractCollection
-'
-'Collection <|- List
-'AbstractCollection <|- AbstractList
-'AbstractList <|-- ArrayList
-
+!include ClassStyle.puml
 
 NusModule -> "1" ContentManager: noteManager
 NusModule -> "1" ContentManager: linkManager
 NusModule -> "1" ContentManager: questionManager
 
-ModuleManager  --> "0..*" NusModule :  has >
+ModuleManager  --> "*" NusModule :  has >
 !startsub MODULEMANAGER
-class ModuleManager {
+class ModuleManager MODULE_COLOR {
   + getAllModules(): String []
   + getModule(moduleName: String): NusModule
   + removeModule(moduleName: String): void
@@ -30,7 +17,7 @@ class ModuleManager {
 }
 !endsub
 
-class NusModule {
+class NusModule MODULE_COLOR {
   + getContentManager (type: Class<T>): ContentManager<T>
 }
 

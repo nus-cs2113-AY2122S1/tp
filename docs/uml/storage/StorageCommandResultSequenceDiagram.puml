@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include ../SequenceStyle.puml
+
+box Main TERMINUS_BOX_COLOR
+participant ":Terminus" as Terminus TERMINUS_COLOR
+endbox
+
+box Storage STORAGE_BOX_COLOR
+participant ":StorageManager" as StorageManager STORAGE_COLOR
+participant ":JsonStorage" as JsonStorage STORAGE_COLOR
+participant ":PdfStorage" as PdfStorage STORAGE_COLOR
+participant ":FolderStorage" as FolderStorage STORAGE_COLOR
+participant ":NoteStorage" as NoteStorage STORAGE_COLOR
+endbox
+
+
+activate Terminus
+opt CommandResult has data change
+Terminus -> StorageManager : executeCommandResult(:ModuleManager, :CommandResult)
+activate StorageManager
+StorageManager -> StorageManager : execute()
+activate StorageManager
+note right : execute() takes in the following arguments \n\nmoduleManager : ModuleManager \naffectedModule : String \ndeletedItemName : String \nstorageAction : StorageActionEnum \nstorageType : StorageTypeEnum
+alt StorageTypeEnum == JSON
+StorageManager -> JsonStorage : execute(moduleManager, storageAction)
+activate JsonStorage
+return
+else PDF
+StorageManager -> PdfStorage : execute(affectedModule, deletedItemName, storageAction)
+activate PdfStorage
+return
+else FOLDER
+StorageManager -> FolderStorage : execute(affectedModule, deletedItemName, storageAction)
+activate FolderStorage
+return
+else NOTE
+StorageManager -> NoteStorage : execute(moduleManager, affectedModule, deletedItemName, storageAction)
+activate NoteStorage
+return
+end
+return
+return
+end
+
+
+
+
+@enduml

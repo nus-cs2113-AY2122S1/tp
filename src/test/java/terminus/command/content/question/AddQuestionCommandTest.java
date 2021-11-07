@@ -1,6 +1,7 @@
 package terminus.command.content.question;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
@@ -43,5 +44,19 @@ public class AddQuestionCommandTest {
             assertTrue(addResult.isOk());
         }
         assertEquals(6, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
+    }
+
+    @Test
+    void execute_invalidArguments_exceptionThrown() {
+        assertThrows(InvalidArgumentException.class,
+            () -> commandParser.parseCommand("add \" \"test\"").execute(moduleManager));
+        assertThrows(InvalidArgumentException.class,
+            () -> commandParser.parseCommand("add \"t\" \"\"").execute(moduleManager));
+        assertThrows(InvalidArgumentException.class,
+            () -> commandParser.parseCommand("add \"\" \"test\"").execute(moduleManager));
+        assertThrows(InvalidArgumentException.class,
+            () -> commandParser.parseCommand("add \"test\" \"test\"\"\"").execute(moduleManager));
+        assertThrows(InvalidArgumentException.class,
+            () -> commandParser.parseCommand("add \" \" \" \"").execute(moduleManager));
     }
 }

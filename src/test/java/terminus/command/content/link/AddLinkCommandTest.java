@@ -2,12 +2,12 @@ package terminus.command.content.link;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.ArrayList;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.Command;
@@ -20,8 +20,6 @@ import terminus.module.ModuleManager;
 import terminus.parser.LinkCommandParser;
 import terminus.timetable.ConflictManager;
 import terminus.ui.Ui;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AddLinkCommandTest {
 
@@ -41,7 +39,7 @@ public class AddLinkCommandTest {
 
     @Test
     void parseArguments_addLinkCommand_success() {
-        String addLinkInput = "add \"test\" \"Thursday\" \"00:00\" \"2\"\"https://zoom.us/test\"";
+        String addLinkInput = "\"test\" \"Thursday\" \"00:00\" \"2\" \"https://zoom.us/test\"";
         ArrayList<String> parsedArguments = CommonUtils.findArguments(addLinkInput);
         assertEquals("test", parsedArguments.get(0));
         assertEquals("Thursday", parsedArguments.get(1));
@@ -89,5 +87,7 @@ public class AddLinkCommandTest {
             () -> linkCommandParser.parseCommand("add \"test desc\" \"friday\" \"00:00\" \"2.5\" \"https://zoom.us/test\""));
         assertThrows(InvalidArgumentException.class,
             () -> linkCommandParser.parseCommand("add \"test desc\" \"friday\" \"00:00\" \"a\" \"https://zoom.us/test\""));
+        assertThrows(InvalidArgumentException.class,
+            () -> linkCommandParser.parseCommand("add \" \" \" \" \" \" \" \" \" \""));
     }
 }

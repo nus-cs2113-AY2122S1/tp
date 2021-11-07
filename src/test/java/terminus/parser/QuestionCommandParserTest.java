@@ -34,6 +34,8 @@ public class QuestionCommandParserTest {
         assertThrows(InvalidCommandException.class, () -> commandParser.parseCommand("vie wer"));
         assertThrows(InvalidCommandException.class, () -> commandParser.parseCommand("deleterr"));
         assertThrows(InvalidCommandException.class, () -> commandParser.parseCommand(""));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("eXiT a"));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("HeLp    a"));
     }
 
     @Test
@@ -42,7 +44,6 @@ public class QuestionCommandParserTest {
         assertTrue(commandParser.parseCommand("exit") instanceof ExitCommand);
         assertTrue(commandParser.parseCommand("EXIT") instanceof ExitCommand);
         assertTrue(commandParser.parseCommand("   exit   ") instanceof ExitCommand);
-        assertTrue(commandParser.parseCommand("eXiT a") instanceof ExitCommand);
     }
 
     @Test
@@ -51,7 +52,6 @@ public class QuestionCommandParserTest {
         assertTrue(commandParser.parseCommand("help") instanceof HelpCommand);
         assertTrue(commandParser.parseCommand("HELP") instanceof HelpCommand);
         assertTrue(commandParser.parseCommand("   help   ") instanceof HelpCommand);
-        assertTrue(commandParser.parseCommand("HeLp    a") instanceof HelpCommand);
     }
 
     @Test
@@ -98,6 +98,9 @@ public class QuestionCommandParserTest {
     @Test
     void parseCommand_resolveTestCommand_exceptionThrown() {
         assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("test abcd"));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("test -1"));
+        assertThrows(InvalidArgumentException.class,
+            () -> commandParser.parseCommand("test " + ((long) Integer.MAX_VALUE) + 1));
     }
 
     @Test

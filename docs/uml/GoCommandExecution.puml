@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include SequenceStyle.puml
+
+box "Command" COMMAND_BOX_COLOR
+participant ":GoCommand" as GoCommand COMMAND_COLOR
+participant ":NoteCommand" as NoteCommand COMMAND_COLOR
+participant ":AddNoteCommand" as AddNoteCommand COMMAND_COLOR
+participant ":CommandResult" as CommandResult COMMAND_COLOR
+endbox
+
+box "Parser" PARSER_BOX_COLOR
+participant ":NoteCommandParser" as NoteCommandParser PARSER_COLOR
+participant ":ModuleWorkspaceCommandParser" as ModuleWorkspaceCommandParser PARSER_COLOR
+endbox
+
+box "Module" MODULE_BOX_COLOR
+participant  ":ModuleManager" as ModuleManger MODULE_COLOR
+endbox
+autoactivate on
+mainframe sd Go Execution
+-> GoCommand:execute(moduleManager)
+  GoCommand -> ModuleManger: getModule(moduleName)
+  return NusModule
+  GoCommand -> ModuleWorkspaceCommandParser: setWorkspace(workspace)
+  return
+  alt if arguments != null
+      GoCommand -> ModuleWorkspaceCommandParser:parseCommand(command)
+      return NoteCommand
+      GoCommand -> NoteCommand : execute(moduleManager)
+      ref over NoteCommand, NoteCommandParser: Note Execution
+      return CommandResult
+      else else
+        Create CommandResult
+        GoCommand -> CommandResult
+        return CommandResult
+      end
+return CommandResult
+@enduml

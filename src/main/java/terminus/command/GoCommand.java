@@ -1,6 +1,5 @@
 package terminus.command;
 
-import java.io.IOException;
 import terminus.common.CommonFormat;
 import terminus.common.CommonUtils;
 import terminus.common.Messages;
@@ -44,7 +43,7 @@ public class GoCommand extends WorkspaceCommand {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
         String[] args = arguments.strip().split(CommonFormat.SPACE_DELIMITER, 2);
-        moduleName = args[0];
+        moduleName = args[0].toUpperCase();
         if (args.length > 1) {
             super.parseArguments(args[1]);
         } else {
@@ -54,10 +53,10 @@ public class GoCommand extends WorkspaceCommand {
 
     @Override
     public CommandResult execute(ModuleManager moduleManager)
-        throws InvalidCommandException, InvalidArgumentException, IOException {
+        throws InvalidCommandException, InvalidArgumentException {
         NusModule module = moduleManager.getModule(moduleName);
         if (module == null) {
-            throw new InvalidArgumentException("Module not found! Type 'module view' for the list of modules.");
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MODULE_NOT_FOUND);
         }
         commandMap.setWorkspace(moduleName);
         return super.execute(moduleManager);

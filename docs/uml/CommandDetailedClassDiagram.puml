@@ -1,30 +1,29 @@
 @startuml
-skinparam classAttributeIconSize 0
-hide circle
+!include ClassStyle.puml
 !includesub CommandClassDiagram.puml!COMMAND
 
-abstract class  "{abstract}\nWorkspaceCommand" as WorkspaceCommand extends Command {
+abstract class  "{abstract}\nWorkspaceCommand" as WorkspaceCommand COMMAND_COLOR extends Command  {
 # commandMap: CommandParser
 + WorkSpaceCommand(commandMap: CommandParser)
 + execute(ui: Ui, moduleManager: ModuleManager): CommandResult
 }
 
-abstract class "{abstract}\nInnerModuleCommand" as InnerModuleCommand extends WorkspaceCommand {
+abstract class "{abstract}\nInnerModuleCommand" as InnerModuleCommand COMMAND_COLOR extends WorkspaceCommand {
 - commandMap: InnerModuleCommandParser
 + InnerModuleCommand(commandMap: InnerModuleCommandParser)
 + execute(ui: Ui, moduleManager: ModuleManager): CommandResult
 }
 
-class GoCommand extends WorkspaceCommand {
+class GoCommand COMMAND_COLOR extends WorkspaceCommand {
 - moduleName: String
 + parseArguments(arguments: String): void
 + execute(ui: Ui, moduleManager: ModuleManager): CommandResult
 }
-class ModuleCommand extends WorkspaceCommand
+class ModuleCommand COMMAND_COLOR extends WorkspaceCommand
 
-class NotesCommand extends InnerModuleCommand
-class ScheduleCommand extends InnerModuleCommand
-class QuestionCommand extends InnerModuleCommand
-class XYZCommand extends Command
+class NotesCommand COMMAND_COLOR extends InnerModuleCommand
+class ScheduleCommand COMMAND_COLOR extends InnerModuleCommand
+class QuestionCommand COMMAND_COLOR extends InnerModuleCommand
+class XYZCommand COMMAND_COLOR extends Command
 
 @enduml

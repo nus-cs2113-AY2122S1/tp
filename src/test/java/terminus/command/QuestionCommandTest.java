@@ -51,7 +51,8 @@ public class QuestionCommandTest {
         assertThrows(InvalidArgumentException.class,
             () -> commandParser.parseCommand("go " + tempModule + " question view 100").execute(moduleManager));
         assertThrows(InvalidArgumentException.class,
+            () -> commandParser.parseCommand("go " + tempModule + " question delete").execute(moduleManager));
+        assertThrows(InvalidArgumentException.class,
             () -> commandParser.parseCommand("go " + tempModule + " question delete -1").execute(moduleManager));
-
     }
 }

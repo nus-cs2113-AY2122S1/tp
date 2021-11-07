@@ -1,27 +1,32 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+!include SequenceStyle.puml
+box "Main" TERMINUS_BOX_COLOR
+participant ":Terminus" as Terminus TERMINUS_COLOR
+endbox
+box "Storage" STORAGE_BOX_COLOR
+participant ":StorageManager" as StorageManager STORAGE_COLOR
+endbox
+box "Module" MODULE_BOX_COLOR
+participant ":ModuleManager" as ModuleManager MODULE_COLOR
+endbox
 
 autoactivate on
-mainframe sd start
-  Terminus -> Terminus: start()
-    create Ui
-    Terminus -> Ui
-    return
-    Terminus -> CommandParser : getInstance()
-      create Command
-      CommandParser -> Command
-      return
-    return CommandParser
-    Terminus -> ModuleStorage : getInstance ()
-    return ModuleStorage
-    Terminus -> ModuleStorage: init (filePath)
-    return
-    Terminus -> ModuleStorage: loadFile()
+
+mainframe sd Intialization
+
+ -> Terminus: initialize()
+
+    create StorageManager
+    Terminus -> StorageManager : StorageManager(DATA_DIRECTORY, MAIN_JSON)
+    return StorageManager
+    Terminus -> StorageManager: initialize()
     return ModuleManager
     opt moduleManager == null
       create ModuleManager
-      Terminus -> ModuleManager
-      return
+      Terminus -> ModuleManager: ModuleManager()
+      return ModuleManager
     end
   return
+
 @enduml

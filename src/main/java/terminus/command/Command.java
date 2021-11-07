@@ -1,6 +1,7 @@
 package terminus.command;
 
-import java.io.IOException;
+import terminus.common.CommonUtils;
+import terminus.common.Messages;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
@@ -31,8 +32,10 @@ public abstract class Command {
      * @throws InvalidArgumentException when arguments parsing fails.
      */
     public void parseArguments(String arguments)
-            throws InvalidArgumentException {
-        this.arguments = arguments;
+        throws InvalidArgumentException {
+        if (!CommonUtils.isStringNullOrEmpty(arguments)) {
+            throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_INVALID_INPUT);
+        }
     }
 
     /**
@@ -42,10 +45,9 @@ public abstract class Command {
      * @return The CommandResult object indicating the success of failure including additional options.
      * @throws InvalidCommandException  when the command could not be found.
      * @throws InvalidArgumentException when arguments parsing fails.
-     * @throws IOException              when the file to be saved is inaccessible (e.g. file is locked by OS).
      */
     public abstract CommandResult execute(ModuleManager moduleManager)
-            throws InvalidCommandException, InvalidArgumentException, IOException;
+            throws InvalidCommandException, InvalidArgumentException;
 
     /**
      * Returns the module name.

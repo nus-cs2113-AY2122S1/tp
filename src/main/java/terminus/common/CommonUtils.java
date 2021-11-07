@@ -10,7 +10,6 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import terminus.exception.InvalidArgumentException;
 
 /**
@@ -28,7 +27,10 @@ public class CommonUtils {
     public static ArrayList<String> findArguments(String arg) {
         assert arg != null;
         ArrayList<String> argsArray = new ArrayList<>();
-        Pattern p = Pattern.compile("\"(.*?)\"");
+        if (!arg.matches(CommonFormat.STRICT_WHITE_REGEX)) {
+            return argsArray;
+        }
+        Pattern p = Pattern.compile(CommonFormat.QUOTE_REGEX_DELIMITER);
         Matcher m = p.matcher(arg);
         while (m.find()) {
             argsArray.add(m.group(1));
@@ -165,7 +167,6 @@ public class CommonUtils {
      * @return True if name is a valid file name, false otherwise.
      */
     public static boolean isValidFileName(String name) {
-
         if (name == null || name.isBlank() || name.length() > CommonFormat.MAX_FILENAME_LENGTH) {
             return false;
         }
@@ -176,7 +177,7 @@ public class CommonUtils {
             return false;
         }
         try {
-            Paths.get(name);
+            Paths.get(name.trim());
             return true;
         } catch (InvalidPathException e) {
             return false;

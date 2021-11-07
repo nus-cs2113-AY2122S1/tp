@@ -1,38 +1,46 @@
 @startuml
+!include ClassStyle.puml
+!includesub Module.puml!MODULEMANAGER
+!includesub ParserClassDiagram.puml!COMMANDPARSER
 
-Command ..> "1" CommandResult: returns >
-Command ..> "1" ModuleManager: modifies
-Command ..> "1" Ui: uses
-CommandResult ..> "0..1" CommandParser: contains >
-CommandParser -> "2..*" Command: has >
 
 !startsub COMMAND
-abstract class "{abstract}\nCommand" as Command {
+abstract class "{abstract}\nCommand" as Command COMMAND_COLOR {
   # arguments: String
   - moduleName: String
   + {abstract} getFormat(): String
   + {abstract} getHelpMessage(): String
   + parseArguments(arguments: String): void
-  + {abstract} execute(ui: Ui, moduleManager: ModuleManager): CommandResult
+  + {abstract} execute(moduleManager: ModuleManager): CommandResult
 
 }
 !endsub
-
-class XYZCommand extends Command {
-  + execute(ui: Ui, moduleManager: ModuleManager): CommandResult
+class XYZCommand COMMAND_COLOR {
+  + execute(moduleManager: ModuleManager): CommandResult
   + getHelpMessage(): String
   + getFormat(): String
 }
 
-class CommandResult {
-  # additionalData: CommandParser
-  # isOk: boolean
+class CommandResult COMMAND_COLOR {
+
+  # newCommandParser: CommandParser
+  # hasChange: boolean
   # isExit: boolean
+  # message: String[]
+  # storageAction: StorageActionEnum
+  # storageType: StorageTypeEnum
+  # module: String
   + isExit(): boolean
-  + getAdditionalData(): CommandParser
+  + getNewCommandParser(): CommandParser
+  + getMessage(): String[]
+  + getStorageAction(): StorageActionEnum
+  + getStorageType(): StorageTypeEnum
 }
 
-class Ui
-!includesub Module.puml!MODULEMANAGER
-!includesub ParserClassDiagram.puml!COMMANDPARSER
+Command ..> "1" CommandResult: returns >
+Command ..> "1" ModuleManager: modifies
+CommandResult ..> "0..1" CommandParser: contains >
+CommandParser -> "2..*" Command: has >
+XYZCommand --|> Command
+
 @enduml
