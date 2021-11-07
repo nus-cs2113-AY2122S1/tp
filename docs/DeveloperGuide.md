@@ -124,7 +124,7 @@ The following section covers basic setup instructions to get you up and running 
 
 The architecture diagram below describes the high-level design of the application.
 
-![Ui Diagram](Diagram%20Images/Design%20Diagram%20Images/OverallArchitecture.png)
+![Ui Diagram](Diagram_Images/Design_Diagram_Images/OverallArchitecture.png)
 
 The 5 main components of the architecture diagram are:
 1. `Ui` : User interface of the application
@@ -136,7 +136,7 @@ The 5 main components of the architecture diagram are:
 The sequence diagram below shows how the components interact with each other for the scenario where the user issues the
 command `remove g/1` to remove the goal at index 1.
 
-![Architecture Sequence Diagram](Diagram%20Images/Design%20Diagram%20Images/ArchitectureSequenceDiagram.png)
+![Architecture Sequence Diagram](Diagram_Images/Design_Diagram_Images/ArchitectureSequenceDiagram.png)
 
 ### 3.2. UI Component
 
@@ -146,7 +146,7 @@ displays (display messages in response to user input). The diagrams below illust
 each sub-component.
 
 ### 3.2.1 UiManager
-![Ui Manager](Diagram%20Images/Design%20Diagram%20Images/UiManagerComponent.png)
+![Ui Manager](Diagram_Images/Design_Diagram_Images/UiManagerComponent.png)
 
 **API:** `UiManager.java`
 
@@ -157,7 +157,7 @@ each sub-component.
 4. `UiMain` calls `Storage` to display alerts for status of storage imports and exports.
 
 ### 3.2.2 PrintManager
-![Print Manager](Diagram%20Images/Design%20Diagram%20Images/PrintManagerComponent.png)
+![Print Manager](Diagram_Images/Design_Diagram_Images/PrintManagerComponent.png)
 
 **API:** `PrintManager.java`
 
@@ -171,7 +171,7 @@ the `help` command to view a summary of formats of relevant commands in a tabula
 The Parser component is responsible for parsing and checking the logic of the user input. The diagram below illustrates
 the high level representation of the component.
 
-![Parser Component](Diagram%20Images/Design%20Diagram%20Images/ParserComponent.png)
+![Parser Component](Diagram_Images/Design_Diagram_Images/ParserComponent.png)
 
 **API:** `Parser.java`
 
@@ -188,14 +188,14 @@ the high level representation of the component.
 
 The sequence diagram below illustrates the flow of logic when a generic user input is entered into the application.
 
-![](Diagram Images/Design Diagram Images/MainParserSequenceDiagram.png)
+![](Diagram_Images/Design_Diagram_Images/MainParserSequenceDiagram.png)
 
 ### 3.4. Command Component
 
 The Command component is responsible for executing the application logic based on the parsed user input. The diagram
 below illustrates the high level representation of the component.
 
-![Command Component](Diagram%20Images/Design%20Diagram%20Images/CommandComponent.png)
+![Command Component](Diagram_Images/Design_Diagram_Images/CommandComponent.png)
 
 **API:** `Command.java`
 
@@ -223,7 +223,7 @@ The Goal component is responsible for maintaining and updating all goals set by 
 ensure that there are no violations when modifying information related to a goal. The diagram below illustrates the high
 level representation of the component.
 
-![Goal Component](Diagram%20Images/Design%20Diagram%20Images/GoalComponent.png)
+![Goal Component](Diagram_Images/Design_Diagram_Images/GoalComponent.png)
 
 **API:** `Goal.java`
 
@@ -238,7 +238,7 @@ level representation of the component.
 The Storage component allows data to be read from and saved to a storage file. The diagram below illustrates the high
 level representation of the component and the interactions between the other components.
 
-![Storage Class Diagram](Diagram%20Images/Design%20Diagram%20Images/StorageComponent.png)
+![Storage Class Diagram](Diagram_Images/Design_Diagram_Images/StorageComponent.png)
 
 **API:** `Storage.java`
 
@@ -268,7 +268,7 @@ your personal account which will be stored in the `GoalList` class.
    the end date, in addition to both dates needing to come after the date when the goal was created.
 3. An `AddGoalCommand(goal)` object is created from this method.
 
-![](Diagram Images/Implementation Diagram Images/AddGoalCommandParserSequenceDiagram.png)
+![](Diagram_Images/Implementation_Diagram_Images/AddGoalCommandParserSequenceDiagram.png)
 
 4. The `AddGoalCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the 
    `GoalList#addGoal(goal, printManager)` method.
@@ -292,11 +292,11 @@ your personal account which will be stored in the `GoalList` class.
 
 A `AddHabitCommand` object is returned from the `AddParser` if the users input is successfully parsed as shown below.
 
-![](Diagram Images/Implementation Diagram Images/AddHabitCommandParserSequenceDiagram.png)
+![](Diagram_Images/Implementation_Diagram_Images/AddHabitCommandParserSequenceDiagram.png)
 
 The `runCommand` method is then executed for the `AddHabitCommand` object as seen.
 
-![](Diagram Images/Implementation Diagram Images/AddHabitCommandSequenceDiagram.png)
+![](Diagram_Images/Implementation_Diagram_Images/AddHabitCommandSequenceDiagram.png)
 
 The method `addHabitToGoal` within the GoalList components is called, which will get the Goal to add the Habit under. 
 Before adding, the Habit is checked to ensure that it can be added. Once it is determined that it can be added, the method
@@ -311,28 +311,28 @@ All other inputs are treated as "gibberish" which the user accidentally typed.
 The `runCommand` method is then executed for the `ListGoalsCommand` object. The following steps as indicated by the
 sequence diagram below is then carried out:
 
-![](Diagram Images/Implementation Diagram Images/ListGoalsCommandSequenceDiagram.png)
+![](Diagram_Images/Implementation_Diagram_Images/ListGoalsCommandSequenceDiagram.png)
 
 ### 4.4. Listing all Habits
 
 A `ListHabitCommand` object is returned from the `ListHabitParser` if the users input is successfully parsed as shown below.
 If no goal index or invalid goal index is detected, an exception is thrown.
 
-![](Diagram Images/Implementation Diagram Images/ListHabitsCommandParserSequenceDiagram.png)
+![](Diagram_Images/Implementation_Diagram_Images/ListHabitsCommandParserSequenceDiagram.png)
 
 The `runCommand` method is then executed for the `ListHabitsCommand` object as seen.
 
-![](Diagram Images/Implementation Diagram Images/ListHabitsCommandSequenceDiagram.png)
+![](Diagram_Images/Implementation_Diagram_Images/ListHabitsCommandSequenceDiagram.png)
 
 ### 4.5. Completing a Habit
 
 A `DoneHabitCommand` object is returned from the `DoneParser` if the users input is successfully parsed as shown below.
 
-![](Diagram Images/Implementation Diagram Images/DoneCommandParserSequenceDiagram.png)
+![](Diagram_Images/Implementation_Diagram_Images/DoneCommandParserSequenceDiagram.png)
 
 The `runCommand` method is then executed for the `DoneHabitCommand` object as seen.
 
-![](Diagram Images/Implementation Diagram Images/DoneCommandSequenceDiagram.png)
+![](Diagram_Images/Implementation_Diagram_Images/DoneCommandSequenceDiagram.png)
 
 The method `doneHabitFromGoal` will obtain the specified Habit from the Goal indicated by the user and execute the 
 `doneHabit` method within the Goal class. If at any point during the execution, if an invalid index for either the 
@@ -355,14 +355,14 @@ The `runCommand` method is then executed for the `UpdateHabitCommand` object as 
 When the `runCommand` method is executed for the `DeleteGoalCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
 
-![](Diagram Images/Implementation Diagram Images/DeleteGoalCommandSequenceDiagram.png)
+![](Diagram_Images/Implementation_Diagram_Images/DeleteGoalCommandSequenceDiagram.png)
 
 ### 4.9. Deleting a Habit
 
 When the `runCommand` method is executed for the `DeleteHabitCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
 
-![](Diagram Images/Implementation Diagram Images/DeleteHabitCommandSequenceDiagram.png)
+![](Diagram_Images/Implementation_Diagram_Images/DeleteHabitCommandSequenceDiagram.png)
 
 ### 4.10. Getting Help
 
@@ -374,7 +374,7 @@ can type to execute a certain command.
 
 The sequence diagram shows how the program imports data from storage file.
 
-![Import Sequence Diagram](Diagram Images/Implementation Diagram Images/ImportSequenceDiagram.png)
+![Import Sequence Diagram](Diagram_Images/Implementation_Diagram_Images/ImportSequenceDiagram.png)
 
 The program uses `Storage` class to import data from the storage file.
 * `Storage` interacts with `Import` to access the data stored in storage file.
@@ -385,7 +385,7 @@ The program uses `Storage` class to import data from the storage file.
 
 The sequence diagram shows how the program exports data to storage file.
 
-![Export Sequence Diagram](Diagram Images/Implementation Diagram Images/ExportSequenceDiagram.png)
+![Export Sequence Diagram](Diagram_Images/Implementation_Diagram_Images/ExportSequenceDiagram.png)
 
 `Storage` class can also export data to storage file with `Export` class.
 It takes in a `GoalList` object and converts the data into string to be stored in storage file.
@@ -539,4 +539,15 @@ To check if the program can create a storage file if it doesn't exist:
 ![Storage File](Display_Images/tpFolder.png)
 
 2. Launch the program and enter the application.
-3. Type `list` to see that the storage data file was deleted, hence no goals exist.
+3. Type `list` to see that no goals exists since the storage file was deleted. A new empty storage file
+  will be created by the program.
+
+![Data Deleted](Display_Images/DataDeleted.png)
+
+To check if the data file is read-only and if it is possible to corrupt data file:
+
+1. The storage file is set to read-only. To test this, go to `data` folder and open the `.txt` file.
+2. Randomly edit the text file to corrupt it.
+3. Try to save the changes and there should be an error message preventing you to do so.
+
+![Error Changing File](Display_Images/ErrorChangingFile.png)
