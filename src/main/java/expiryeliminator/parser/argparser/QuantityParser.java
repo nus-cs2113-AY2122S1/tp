@@ -6,6 +6,7 @@ import expiryeliminator.parser.exception.InvalidArgFormatException;
  * Parses quantity.
  */
 public class QuantityParser extends MultipleArgParser<Integer> {
+    public static final String MESSAGE_BLANK_QUANTITY = "Quantity cannot be blank";
     private static final String MESSAGE_INVALID_NUMBER = "Quantity must be a valid number.";
     private static final String MESSAGE_NEGATIVE_NUMBER = "Quantity cannot be a negative number.";
 
@@ -18,7 +19,7 @@ public class QuantityParser extends MultipleArgParser<Integer> {
      */
     @Override
     public Integer parse(String quantityString) throws InvalidArgFormatException {
-        checkArgNotBlank(quantityString, "Quantity cannot be blank.");
+        checkArgNotBlank(quantityString, MESSAGE_BLANK_QUANTITY);
         try {
             final int quantity = Integer.parseInt(quantityString);
             if (quantity < 0) {

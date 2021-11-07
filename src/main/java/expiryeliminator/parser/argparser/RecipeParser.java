@@ -7,6 +7,7 @@ import expiryeliminator.parser.exception.InvalidArgFormatException;
  * Parses recipe name.
  */
 public class RecipeParser extends MultipleArgParser<String> {
+    public static final String MESSAGE_BLANK_RECIPE = "Recipe name cannot be blank";
     private static final String MESSAGE_INVALID_RECIPE = "Recipe name must only consist of letters, "
             + "not numbers or other special digits.";
 
@@ -18,7 +19,7 @@ public class RecipeParser extends MultipleArgParser<String> {
      * @throws InvalidArgFormatException If the string is blank.
      */
     public String parse(String recipeString) throws InvalidArgFormatException {
-        checkArgNotBlank(recipeString, "Recipe name cannot be blank.");
+        checkArgNotBlank(recipeString, MESSAGE_BLANK_RECIPE);
         if (!Utils.isAlphabetic(recipeString)) {
             throw new InvalidArgFormatException(MESSAGE_INVALID_RECIPE);
         }
