@@ -190,7 +190,7 @@ Given below is an example usage scenario and how the delete feature behaves at e
 * By using substring method, description, indexes, and month of the expenditures are extracted in ```deleteParams```, ```prepareDeleteCommand(commandParams)``` calls ```DeleteExpenditureParser.parse(deleteParams)``` to parse the params more specifically.
 * Method ```parse(String args)``` in class ```DeleteExpenditureParser``` returns newly created object ```DeleteMultipleExpenditureCommand(startIndex, endIndex, month)```.
 <br/>
-  ![Figure Delete_Parse](https://github.com/AY2122S1-CS2113T-F11-2/tp/blob/master/docs/images/parseDeleteInputCommand-Sequence_Diagram.png)
+  ![Figure Delete_Parse](images/parseDeleteInputCommand-Sequence_Diagram.png)
 
 **Step 5**. The newly created object ```DeleteExpenditureCommand``` will execute the deletion:
 * ```execute(boolean isLoadinStorage)``` runs a for loop to delete the related expenditures in the expenditure ArrayList.
