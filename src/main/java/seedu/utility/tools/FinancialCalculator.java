@@ -45,11 +45,10 @@ public abstract class FinancialCalculator {
      * @return The sum of all the entries stored as a double.
      */
     public static double getSumOfEntries(List<Entry> accumulatedEntries) {
-        double totalEntry = 0;
-        for (Entry entry : accumulatedEntries) {
-            totalEntry += entry.getValue();
-        }
-        assert totalEntry < TOTAL_ENTRIES_LIMIT;
+        double totalEntry = accumulatedEntries.stream()
+                .mapToDouble(Entry::getValue)
+                .sum();
+        assert totalEntry <= TOTAL_ENTRIES_LIMIT;
         return totalEntry;
     }
 }

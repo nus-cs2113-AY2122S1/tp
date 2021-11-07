@@ -144,9 +144,10 @@ The class diagram below shows the structure of `FinancialTracker`.
 
 ![](FinancialTrackerCD.drawio.png) 
 
-<to be updated>
-  
+<to be updated> 
+
 ---
+
 
 ##### Converting user inputs to commands
 
