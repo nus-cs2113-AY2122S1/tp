@@ -144,6 +144,13 @@ The class diagram below shows the structure of `FinancialTracker`.
 
 ![](FinancialTrackerCD.drawio.png) 
 
+The `FinancialTracker` component,
+
+- Uses `ArrayList` to store `income` and `expense` objects, which inherits from the parent class `entry`.
+- It also uses `DateOperator` and `FinancialCalculator` as helper class, used to perform calculation and dates related operation
+
+The sequence diagram below is used to illustrate how `FinancialTracker` utilizes the helper classes.
+
 <to be updated> 
 
 ---
