@@ -41,7 +41,7 @@ Given below are my contributions to the project:
 * **Enhancements to existing features:**
   * Added more descriptive exceptions to let the user know what they should do ([#258](https://github.com/AY2122S1-CS2113T-W13-2/tp/pull/258))
   * Added methods to Parser to streamline testing and reduce clutter ([#77](https://github.com/AY2122S1-CS2113T-W13-2/tp/pull/77))
-  * Incorporate a Command class that makes code more atomic ([#72](https://github.com/AY2122S1-CS2113T-W13-2/tp/pull/77))
+  * Incorporate a Command class that makes code more atomic ([#77](https://github.com/AY2122S1-CS2113T-W13-2/tp/pull/77))
   * Wrote additional tests for existing features to increase method coverage from 54% to 90% ([#58](https://github.com/AY2122S1-CS2113T-W13-2/tp/pull/58), [#111](https://github.com/AY2122S1-CS2113T-W13-2/tp/pull/111))
 
 * **Documentation:**
