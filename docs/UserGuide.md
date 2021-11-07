@@ -329,7 +329,7 @@ enter the module workspace in Terminus.
 
 Enters the module workspace to access data within the module.
 
-> ⚠ The module code is **case-insensitive** and will be converted to **UPPERCASE** as shown below.
+> ⚠️The `module_code` is **case-insensitive** and will be converted to **UPPERCASE** as shown below.
 
 Example: `go cs2113t`
 
@@ -529,7 +529,7 @@ Expected Output:
 
 ```
 [CS2113T > note] >>> export
-Exported notes! Check the data folder.
+Exporting notes... Check the data folder.
 [CS2113T > note] >>> 
 ```
 
