@@ -31,20 +31,13 @@ import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 import seedu.entry.IncomeCategory;
 import seedu.exceptions.BlankCurrencyTypeException;
-import seedu.exceptions.BlankExpenseCategoryException;
-import seedu.exceptions.BlankIncomeCategoryException;
 import seedu.exceptions.InputException;
 import seedu.exceptions.InvalidCurrencyTypeException;
 import seedu.exceptions.InvalidExpenseAmountException;
-import seedu.exceptions.InvalidExpenseCategoryException;
 import seedu.exceptions.InvalidExpenseDataFormatException;
-import seedu.exceptions.InvalidExpenseDescriptionException;
-import seedu.exceptions.InvalidExpenseIndexException;
 import seedu.exceptions.InvalidIncomeAmountException;
-import seedu.exceptions.InvalidIncomeCategoryException;
 import seedu.exceptions.InvalidIncomeDataFormatException;
-import seedu.exceptions.InvalidIncomeDescriptionException;
-import seedu.exceptions.InvalidIncomeIndexException;
+import seedu.exceptions.InvalidIndexException;
 import seedu.exceptions.InvalidInputAmountValueException;
 import seedu.exceptions.InvalidSettingsDataException;
 import seedu.exceptions.InvalidThresholdValueException;
@@ -57,9 +50,14 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static seedu.utility.tools.DateOperator.extractDate;
 import static seedu.utility.tools.DateOperator.extractStartAndEndDate;
 import static seedu.utility.tools.DateOperator.getYearFormat;
 import static seedu.utility.tools.DateOperator.isValidDateRange;
+import static seedu.utility.tools.Extractor.extractDescription;
+import static seedu.utility.tools.Extractor.extractExpenseCategory;
+import static seedu.utility.tools.Extractor.extractIncomeCategory;
+import static seedu.utility.tools.Extractor.extractIndex;
 
 public class Parser {
 
@@ -319,11 +317,11 @@ public class Parser {
     }
 
     private Command prepareIncomeRange(String arguments) {
-        final Matcher matcher = DATE_RANGE_ARGUMENT_FORMAT.matcher(" " + arguments);
-        if (!matcher.matches()) {
-            return new InvalidCommand(Messages.PARAMETERS_ERROR_MESSAGE);
-        }
         try {
+            final Matcher matcher = DATE_RANGE_ARGUMENT_FORMAT.matcher(" " + arguments);
+            if (!matcher.matches()) {
+                return new InvalidCommand(Messages.PARAMETERS_ERROR_MESSAGE);
+            }
             DateRange dateRange = extractStartAndEndDate(matcher);
             if (isValidDateRange(dateRange)) {
                 return new TotalIncomeBetweenCommand(dateRange);
@@ -335,11 +333,11 @@ public class Parser {
     }
 
     private Command prepareExpenseRange(String arguments) {
-        final Matcher matcher = DATE_RANGE_ARGUMENT_FORMAT.matcher(" " + arguments);
-        if (!matcher.matches()) {
-            return new InvalidCommand(Messages.PARAMETERS_ERROR_MESSAGE);
-        }
         try {
+            final Matcher matcher = DATE_RANGE_ARGUMENT_FORMAT.matcher(" " + arguments);
+            if (!matcher.matches()) {
+                return new InvalidCommand(Messages.PARAMETERS_ERROR_MESSAGE);
+            }
             DateRange dateRange = extractStartAndEndDate(matcher);
             if (isValidDateRange(dateRange)) {
                 return new TotalExpenseBetweenCommand(dateRange);
@@ -380,7 +378,7 @@ public class Parser {
         if (matcher.matches()) {
             try {
                 double expenseAmount = extractExpenseAmount(matcher);
-                String expenseDescription = extractExpenseDescription(matcher);
+                String expenseDescription = extractDescription(matcher);
                 ExpenseCategory expenseCategory = extractExpenseCategory(matcher);
                 Expense expense = new Expense(expenseDescription, expenseAmount, expenseCategory);
                 assert !expenseCategory.equals(ExpenseCategory.NULL);
@@ -398,9 +396,9 @@ public class Parser {
         if (matcher.matches()) {
             try {
                 double expenseAmount = extractExpenseAmount(matcher);
-                String expenseDescription = extractExpenseDescription(matcher);
+                String expenseDescription = extractDescription(matcher);
                 ExpenseCategory expenseCategory = extractExpenseCategory(matcher);
-                LocalDate expenseDate = extractExpenseDate(matcher);
+                LocalDate expenseDate = extractDate(matcher);
                 Expense expense = new Expense(expenseDescription, expenseAmount, expenseCategory, expenseDate);
                 assert !expenseCategory.equals(ExpenseCategory.NULL);
                 return new AddExpenseCommand(expense);
@@ -412,39 +410,6 @@ public class Parser {
         } else {
             return new InvalidCommand(Messages.PARAMETERS_ERROR_MESSAGE);
         }
-    }
-
-    private ExpenseCategory extractExpenseCategory(Matcher matcher) throws
-            BlankExpenseCategoryException, InvalidExpenseCategoryException {
-        String expenseCategory = matcher.group("category").trim();
-        if (expenseCategory.isBlank()) {
-            throw new BlankExpenseCategoryException(Messages.BLANK_CATEGORY_MESSAGE);
-        }
-        switch (expenseCategory.toUpperCase()) {
-        case "FOOD":
-            return ExpenseCategory.FOOD;
-        case "TRANSPORT":
-            return ExpenseCategory.TRANSPORT;
-        case "MEDICAL":
-            return ExpenseCategory.MEDICAL;
-        case "BILLS":
-            return ExpenseCategory.BILLS;
-        case "ENTERTAINMENT":
-            return ExpenseCategory.ENTERTAINMENT;
-        case "MISC":
-            return ExpenseCategory.MISC;
-        default:
-            throw new InvalidExpenseCategoryException(Messages.INVALID_EXPENSE_CATEGORY_MESSAGE);
-        }
-    }
-
-    private String extractExpenseDescription(Matcher matcher) throws
-            InvalidExpenseDescriptionException {
-        String expenseDescription = matcher.group("description").trim();
-        if (expenseDescription.isBlank()) {
-            throw new InvalidExpenseDescriptionException(Messages.BLANK_DESCRIPTION_MESSAGE);
-        }
-        return expenseDescription;
     }
 
     private double extractExpenseAmount(Matcher matcher) 
@@ -462,7 +427,7 @@ public class Parser {
         if (matcher.matches()) {
             try {
                 double incomeAmount = extractIncomeAmount(matcher);
-                String incomeDescription = extractIncomeDescription(matcher);
+                String incomeDescription = extractDescription(matcher);
                 IncomeCategory incomeCategory = extractIncomeCategory(matcher);
                 Income income = new Income(incomeDescription, incomeAmount, incomeCategory);
                 assert !incomeCategory.equals(IncomeCategory.NULL);
@@ -480,9 +445,9 @@ public class Parser {
         if (matcher.matches()) {
             try {
                 double incomeAmount = extractIncomeAmount(matcher);
-                String incomeDescription = extractIncomeDescription(matcher);
+                String incomeDescription = extractDescription(matcher);
                 IncomeCategory incomeCategory = extractIncomeCategory(matcher);
-                LocalDate incomeDate = extractIncomeDate(matcher);
+                LocalDate incomeDate = extractDate(matcher);
                 Income income = new Income(incomeDescription, incomeAmount, incomeCategory, incomeDate);
                 assert !incomeCategory.equals(IncomeCategory.NULL);
                 return new AddIncomeCommand(income);
@@ -494,35 +459,6 @@ public class Parser {
         } else {
             return new InvalidCommand(Messages.PARAMETERS_ERROR_MESSAGE);
         }
-    }
-
-    private IncomeCategory extractIncomeCategory(Matcher matcher) throws
-            BlankIncomeCategoryException, InvalidIncomeCategoryException {
-        String incomeCategory = matcher.group("category").trim();
-        if (incomeCategory.isBlank()) {
-            throw new BlankIncomeCategoryException(Messages.BLANK_CATEGORY_MESSAGE);
-        }
-        switch (incomeCategory.toUpperCase()) {
-        case "ALLOWANCE":
-            return IncomeCategory.ALLOWANCE;
-        case "SALARY":
-            return IncomeCategory.SALARY;
-        case "ADHOC":
-            return IncomeCategory.ADHOC;
-        case "OTHERS":
-            return IncomeCategory.OTHERS;
-        default:
-            throw new InvalidIncomeCategoryException(Messages.INVALID_INCOME_CATEGORY_MESSAGE);
-        }
-    }
-
-    private String extractIncomeDescription(Matcher matcher) throws
-            InvalidIncomeDescriptionException {
-        String incomeDescription = matcher.group("description").trim();
-        if (incomeDescription.isBlank()) {
-            throw new InvalidIncomeDescriptionException(Messages.BLANK_DESCRIPTION_MESSAGE);
-        }
-        return incomeDescription;
     }
 
     private double extractIncomeAmount(Matcher matcher) 
@@ -548,8 +484,8 @@ public class Parser {
         String userGivenIndex = matcher.group("index").trim();
         int deleteExpenseIndex;
         try {
-            deleteExpenseIndex = parseExpenseIndex(userGivenIndex);
-        } catch (InvalidExpenseIndexException e) {
+            deleteExpenseIndex = extractIndex(userGivenIndex);
+        } catch (InvalidIndexException e) {
             return new InvalidCommand(e.getMessage());
         }
         assert deleteExpenseIndex >= 1;
@@ -570,8 +506,8 @@ public class Parser {
         String userGivenIndex = matcher.group("index").trim();
         int deleteIncomeIndex;
         try {
-            deleteIncomeIndex = parseIncomeIndex(userGivenIndex);
-        } catch (InvalidIncomeIndexException e) {
+            deleteIncomeIndex = extractIndex(userGivenIndex);
+        } catch (InvalidIndexException e) {
             return new InvalidCommand(e.getMessage());
         }
         assert deleteIncomeIndex >= 1;
@@ -695,32 +631,6 @@ public class Parser {
             return false;
         }
     }
-
-    private int parseExpenseIndex(String userGivenIndex) throws InvalidExpenseIndexException {
-        int deleteExpenseIndex;
-        try {
-            deleteExpenseIndex = Integer.parseInt(userGivenIndex);
-        } catch (NumberFormatException e) {
-            throw new InvalidExpenseIndexException(Messages.INVALID_INDEX_MESSAGE);
-        }
-        if (deleteExpenseIndex <= 0) {
-            throw new InvalidExpenseIndexException(Messages.NON_POSITIVE_INTEGER_INDEX_MESSAGE);
-        }
-        return deleteExpenseIndex;
-    }
-
-    private int parseIncomeIndex(String userGivenIndex) throws InvalidIncomeIndexException {
-        int deleteIncomeIndex;
-        try {
-            deleteIncomeIndex = Integer.parseInt(userGivenIndex);
-        } catch (NumberFormatException e) {
-            throw new InvalidIncomeIndexException(Messages.INVALID_INDEX_MESSAGE);
-        }
-        if (deleteIncomeIndex <= 0) {
-            throw new InvalidIncomeIndexException(Messages.NON_POSITIVE_INTEGER_INDEX_MESSAGE);
-        }
-        return deleteIncomeIndex;
-    }
     
     private double parseThresholdValue(String userGivenThreshold) throws InvalidThresholdValueException {
         double thresholdValue;
@@ -760,10 +670,10 @@ public class Parser {
             DateTimeParseException {
         final Matcher matcher = EXPENSE_DATA_FORMAT.matcher(data.trim());
         if (matcher.matches()) {
-            String expenseDescription = extractExpenseDescription(matcher);
+            String expenseDescription = extractDescription(matcher);
             double expenseAmount = extractExpenseAmount(matcher);
             ExpenseCategory expenseCategory = extractExpenseCategory(matcher);
-            LocalDate expenseDate = extractExpenseDate(matcher);
+            LocalDate expenseDate = extractDate(matcher);
             assert expenseAmount > 0;
             assert !expenseDescription.isBlank();
             return new Expense(expenseDescription, expenseAmount, expenseCategory, expenseDate);
@@ -772,30 +682,20 @@ public class Parser {
         }
     }
 
-    private LocalDate extractExpenseDate(Matcher matcher) throws DateTimeParseException {
-        String date = matcher.group("date").trim();
-        return LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT));
-    }
-
     public Income convertDataToIncome(String data) throws InputException, InvalidIncomeDataFormatException,
             DateTimeParseException {
         final Matcher matcher = INCOME_DATA_FORMAT.matcher(data.trim());
         if (matcher.matches()) {
-            String incomeDescription = extractIncomeDescription(matcher);
+            String incomeDescription = extractDescription(matcher);
             double incomeAmount = extractIncomeAmount(matcher);
             IncomeCategory incomeCategory = extractIncomeCategory(matcher);
-            LocalDate incomeDate = extractIncomeDate(matcher);
+            LocalDate incomeDate = extractDate(matcher);
             assert incomeAmount > 0;
             assert !incomeDescription.isBlank();
             return new Income(incomeDescription, incomeAmount, incomeCategory, incomeDate);
         } else {
             throw new InvalidIncomeDataFormatException();
         }
-    }
-
-    private LocalDate extractIncomeDate(Matcher matcher) throws DateTimeParseException {
-        String date = matcher.group("date").trim();
-        return LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 
     private Command prepareSetBudget(String arguments) {
