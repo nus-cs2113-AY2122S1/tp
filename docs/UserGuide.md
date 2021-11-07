@@ -69,7 +69,7 @@ NOTE: **These parameters cannot be left empty.**
 
 # <a id="commands"></a> Commands
 
-# <a id="add"></a> &nbsp;&nbsp; `add`
+# <a id="add"></a> `add`
 
 The command word `add` adds a record of either Budget, Expenditure, or Loan to the record list. 
 The type of record is determined by the identifier tag after the `add` command word.
