@@ -324,5 +324,6 @@ workload or commitments.
 
 ## Appendix E: Instructions for Manual Testing
 
-{Someone shall give instructions on how to do a manual product testing 
-e.g., how to load sample data to be used for testing}
+The instructions below are for the manual testing of the program.
+
+### Launching and Exiting the Program
