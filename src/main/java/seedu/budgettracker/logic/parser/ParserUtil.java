@@ -50,8 +50,7 @@ public class ParserUtil {
             throw new ParserException("Please ensure your indexes are valid integers!");
         }
 
-        int[] indexArray = {startIndex, endIndex};
-        return indexArray;
+        return new int[]{startIndex, endIndex};
     }
 
     public static String parseDescription(String descString, boolean isCompulsory) throws ParserException {
