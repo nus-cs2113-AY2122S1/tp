@@ -1,5 +1,4 @@
-# Developer Guide
-
+### Developer Guide 
 ### Table of Content
 - [Acknowledgements](#acknowledgements)
 - [Common Notations In DG](#notations)
@@ -36,6 +35,7 @@
   - [Searching for a contact](#testing-search)
   - [Importing contacts](#testing-import)
 
+<div style="page-break-after: always;"></div>
 
 ## <a name="acknowledgements"></a>Acknowledgements
 
@@ -82,6 +82,8 @@ ConTech comprises five main components, namely:
 - `Command`: Command to be executed upon input parsing.
 - `ContactList`: Data structure to store `Contact`s while running ConTech.
 - `Storage`: Reads from and writes to [`LocalStorage`](#local-storage).
+
+<div style="page-break-after: always;"></div>
 
 **How the architecture components interact with each other**
 
@@ -157,6 +159,8 @@ The currently supported contact details are provided in the table below:
 |`-tw`|Twitter handle|
 |`-e`|Email|
 
+<div style="page-break-after: always;"></div>
+
 ### <a name="Add"></a>Adding a contact: `add`
 This feature is processed using `AddContactCommand`. This feature allows a user to add a contact to their contact list.
 The user is able to add a contact by entering a command in the form of `add <-n> <NAME> {-g <GITHUB>} {-l <LINKEDIN>} 
@@ -180,6 +184,8 @@ Upon parsing the user's input, the details are passed to an `AddContactCommand`,
 executed in `ConTech`. The sequence diagram below illustrates the process of executing `AddContactCommand`.
 
 ![Add Sequence Diagram](images/AddContactCommandSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 ### <a name="View"></a>Viewing a contact: `view`
 This feature is processed using `ViewContactCommand`. Whenever a user wants to view a specific contact from the
@@ -216,6 +222,8 @@ contact list to be edited.The sequence diagram below shows how the String array 
 
 ![Edit Sequence Diagram](images/EditContactParserSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 Once the user's input is parsed and the index specified is obtained, an `EditContactCommand` with the specified 
 parameters will then be created and executed in `ConTech`. The sequence diagram below depicts the execution of 
 `EditContactCommand` for the index `me` as well as an invalid index `all`.
@@ -244,6 +252,8 @@ A `DeleteContactCommand` with the specified parameters will then be created in t
 
 ![Delete Sequence Diagram](images/DeleteContactCommandSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 To _delete all contacts_, a user must enter the command `rm all`. 
 
 The sequence diagram below shows how the removal of all contacts works. Before any deletion, the user will be
@@ -263,6 +273,8 @@ confirms deletion, deletion of the selected contact will be executed, along with
 been executed. If user cancels deletion, a message is printed to show that the deletion has been cancelled.
 
 ![Delete Selected Sequence Diagram](images/DeleteSelectedContact.png)
+
+<div style="page-break-after: always;"></div>
 
 To _delete specific details_ of a selected contact, a user must enter a command in the form `rm <INDEX> {-g} {-l} {-te}
 {-tw} {-e}`. 
@@ -287,6 +299,8 @@ methods respectively. The sequence diagram below shows how the required paramete
 
 ![Search Sequence Diagram](images/SearchContactParserSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 A `SearchContactCommand` with the specified parameters will then be created and executed in `ConTech`. The sequence 
 diagram below shows how the `SearchContactCommand` is executed.
 
@@ -310,6 +324,8 @@ If the `contactListSize` is `0` it prints an error message from the `TextUI` cla
 If the list is not empty the method `listAllContacts` uses a loop to get the `Contact` object at 
 every available index and print it using the `printContactWithIndex`
 method in `TextUi` class.
+
+<div style="page-break-after: always;"></div>
 
 ### <a name="Import"></a>Importing contacts: `import`
 This feature is processed using the `ImportContactCommand`. This feature allows a user to import contacts over from 
@@ -342,7 +358,7 @@ Current implementation ideas include:
 - allow Windows-style duplicate handling (Ignore, Ignore all, Cancel)
 - summarise every single duplicate and give user a one time confirmation to add/discard (no granularity)
 
-
+<div style="page-break-after: always;"></div>
 
 ### <a name="IndexParser"></a>Index Parser
 
@@ -463,6 +479,8 @@ exploratory testing.
        We hope you have enjoyed using it.
        ____________________________________________________________
        ```
+
+<div style="page-break-after: always;"></div>
 
 ### <a name="testing-add"></a>Adding a contact
 1. Adding a contact with all fields
@@ -741,6 +759,8 @@ exploratory testing.
        ____________________________________________________________
        ```
 
+<div style="page-break-after: always;"></div>
+
 ### <a name="testing-delete"></a>Deleting a contact
 1. Deleting a contact that is in the contact list
     1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
@@ -826,8 +846,6 @@ exploratory testing.
        Github:   github.com/alexlee
        Email:    alex.lee@email.com
        Telegram: t.me/alexlee
-       LinkedIn: linkedin.com/in/alexlee
-       Twitter:  twitter.com/alexl33
        ____________________________________________________________
        ```
 
@@ -841,8 +859,6 @@ exploratory testing.
        Github:   github.com/alexlee
        Email:    alex.lee@email.com
        Telegram: t.me/alexlee
-       LinkedIn: linkedin.com/in/alexlee
-       Twitter:  twitter.com/alexl33
        ____________________________________________________________
        ```
 
