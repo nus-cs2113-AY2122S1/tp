@@ -24,8 +24,8 @@ import static seedu.utility.tools.FinancialCalculator.sortEntriesByMonth;
  */
 public class FinancialTracker {
     public static final double TOTAL_ENTRIES_LIMIT = 100000000000.00;
-    private ArrayList<Expense> expenses;
-    private ArrayList<Income> incomes;
+    private final ArrayList<Expense> expenses;
+    private final ArrayList<Income> incomes;
 
     /**
      * Constructor for financial tracker initialises two empty ArrayList, one for expenses and one for incomes.
@@ -168,7 +168,7 @@ public class FinancialTracker {
             totalExpense += expense.getValue();
         }
         assert totalExpense >= 0;
-        assert totalExpense < TOTAL_ENTRIES_LIMIT;
+        assert totalExpense <= TOTAL_ENTRIES_LIMIT;
         return totalExpense;
     }
     
@@ -184,7 +184,7 @@ public class FinancialTracker {
             totalIncome += income.getValue();
         }
         assert totalIncome >= 0;
-        assert totalIncome < TOTAL_ENTRIES_LIMIT;
+        assert totalIncome <= TOTAL_ENTRIES_LIMIT;
         return totalIncome;
     }
 

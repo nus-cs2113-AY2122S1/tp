@@ -31,23 +31,15 @@ import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 import seedu.entry.IncomeCategory;
 import seedu.exceptions.BlankCurrencyTypeException;
-import seedu.exceptions.BlankExpenseCategoryException;
-import seedu.exceptions.BlankIncomeCategoryException;
 import seedu.exceptions.InputException;
+import seedu.exceptions.InvalidBudgetAmountException;
 import seedu.exceptions.InvalidCurrencyTypeException;
-import seedu.exceptions.InvalidExpenseAmountException;
-import seedu.exceptions.InvalidExpenseCategoryException;
 import seedu.exceptions.InvalidExpenseDataFormatException;
-import seedu.exceptions.InvalidExpenseDescriptionException;
-import seedu.exceptions.InvalidExpenseIndexException;
-import seedu.exceptions.InvalidIncomeAmountException;
-import seedu.exceptions.InvalidIncomeCategoryException;
 import seedu.exceptions.InvalidIncomeDataFormatException;
-import seedu.exceptions.InvalidIncomeDescriptionException;
-import seedu.exceptions.InvalidIncomeIndexException;
-import seedu.exceptions.InvalidInputAmountValueException;
+import seedu.exceptions.InvalidIndexException;
 import seedu.exceptions.InvalidSettingsDataException;
 import seedu.exceptions.InvalidThresholdValueException;
+import seedu.utility.tools.DateRange;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -56,11 +48,43 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static seedu.utility.CommandKeywords.ADD_EXPENSE_KEYWORD;
+import static seedu.utility.CommandKeywords.ADD_EXPENSE_WITH_DATE_KEYWORD;
+import static seedu.utility.CommandKeywords.ADD_INCOME_KEYWORD;
+import static seedu.utility.CommandKeywords.ADD_INCOME_WITH_DATE_KEYWORD;
+import static seedu.utility.CommandKeywords.BALANCE_KEYWORD;
+import static seedu.utility.CommandKeywords.CHECK_BUDGET_KEYWORD;
+import static seedu.utility.CommandKeywords.CHECK_CURRENT_CURRENCY_KEYWORD;
+import static seedu.utility.CommandKeywords.CLEAR_ALL_ENTRIES_KEYWORD;
+import static seedu.utility.CommandKeywords.CONVERT_CURRENCY_KEYWORD;
+import static seedu.utility.CommandKeywords.DELETE_EXPENSE_KEYWORD;
+import static seedu.utility.CommandKeywords.DELETE_INCOME_KEYWORD;
+import static seedu.utility.CommandKeywords.EXIT_KEYWORD;
+import static seedu.utility.CommandKeywords.EXPENSE_RANGE_KEYWORD;
+import static seedu.utility.CommandKeywords.FIND_KEYWORD;
+import static seedu.utility.CommandKeywords.HELP_COMMAND_KEYWORD;
+import static seedu.utility.CommandKeywords.INCOME_RANGE_KEYWORD;
+import static seedu.utility.CommandKeywords.LIST_CURRENCY_TYPES_KEYWORD;
+import static seedu.utility.CommandKeywords.LIST_EXPENSE_KEYWORD;
+import static seedu.utility.CommandKeywords.LIST_INCOME_KEYWORD;
+import static seedu.utility.CommandKeywords.SET_BUDGET_KEYWORD;
+import static seedu.utility.CommandKeywords.SET_THRESHOLD_KEYWORD;
+import static seedu.utility.CommandKeywords.SHOW_GRAPH_KEYWORD;
+import static seedu.utility.CommandKeywords.TOTAL_EXPENSE_KEYWORD;
+import static seedu.utility.CommandKeywords.TOTAL_INCOME_KEYWORD;
+import static seedu.utility.tools.DateOperator.extractDate;
+import static seedu.utility.tools.DateOperator.extractStartAndEndDate;
 import static seedu.utility.tools.DateOperator.getYearFormat;
 import static seedu.utility.tools.DateOperator.isValidDateRange;
+import static seedu.utility.tools.Extractor.extractAmount;
+import static seedu.utility.tools.Extractor.extractBudgetAmount;
+import static seedu.utility.tools.Extractor.extractDescription;
+import static seedu.utility.tools.Extractor.extractExpenseCategory;
+import static seedu.utility.tools.Extractor.extractIncomeCategory;
+import static seedu.utility.tools.Extractor.extractIndex;
+import static seedu.utility.tools.Extractor.extractThresholdValue;
 
 public class Parser {
-
     /**
      * Used for initial separation of command word and args.
      * This was adapted from addressbook-level2 source code here:
@@ -73,14 +97,14 @@ public class Parser {
      * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
      */
     private static final Pattern ADD_EXPENSE_ARGUMENT_FORMAT =
-            Pattern.compile("^(?= [cda]/)(?=.* d/(?<description>.+?)( [ca]/|$))" 
-                    + "(?=.* a/(?<amount>.+?)( [dc]/|$))" 
+            Pattern.compile("^(?= [cda]/)(?=.* d/(?<description>.+?)( [ca]/|$))"
+                    + "(?=.* a/(?<amount>.+?)( [dc]/|$))"
                     + "(?=.* c/(?<category>.+?)( [da]/|$)).*$");
 
     private static final Pattern ADD_EXPENSE_ARGUMENT_FORMAT_WITH_DATE =
             Pattern.compile("^(?= [cdaD]/)(?=.* d/(?<description>.+?)( [caD]/|$))"
                     + "(?=.* a/(?<amount>.+?)( [dcD]/|$))"
-                    + "(?=.* c/(?<category>.+?)( [daD]/|$))" 
+                    + "(?=.* c/(?<category>.+?)( [daD]/|$))"
                     + "(?=.* D/(?<date>.+?)( [dac]/|$)).*$");
 
     /**
@@ -114,7 +138,7 @@ public class Parser {
     private static final Pattern DATE_RANGE_ARGUMENT_FORMAT =
             Pattern.compile("^(?= [se]/)(?=.* s/(?<start>.+?)( [e]/|$))"
                     + "(?=.* e/(?<end>.+?)( [s]/|$)).*$");
-    
+
     private static final Pattern SET_BUDGET_ARGUMENT_FORMAT =
             Pattern.compile("^(?= [ca]/)(?=.* c/(?<category>.+?)( [a]/|$))"
                     + "(?=.* a/(?<amount>.+?)( [c]/|$)).*$");
@@ -131,31 +155,7 @@ public class Parser {
     private static final Pattern SHOW_GRAPH_BY_YEAR_FORMAT =
             Pattern.compile("Y/(?<year>.+)");
 
-    private static final String HELP_COMMAND_KEYWORD = "help";
-    private static final String ADD_EXPENSE_KEYWORD = "add_ex";
-    private static final String ADD_EXPENSE_WITH_DATE_KEYWORD = "add_ex_d";
-    private static final String ADD_INCOME_KEYWORD = "add_in";
-    private static final String ADD_INCOME_WITH_DATE_KEYWORD = "add_in_d";
-    private static final String DELETE_EXPENSE_KEYWORD = "del_ex";
-    private static final String DELETE_INCOME_KEYWORD = "del_in";
-    private static final String LIST_EXPENSE_KEYWORD = "list_ex";
-    private static final String LIST_INCOME_KEYWORD = "list_in";
-    private static final String TOTAL_EXPENSE_KEYWORD = "total_ex";
-    private static final String TOTAL_INCOME_KEYWORD = "total_in";
-    private static final String FIND_KEYWORD = "find";
-    private static final String BALANCE_KEYWORD = "balance";
-    private static final String EXIT_KEYWORD = "end";
-    private static final String EXPENSE_RANGE_KEYWORD = "btw_ex";
-    private static final String INCOME_RANGE_KEYWORD = "btw_in";
-    private static final String SHOW_GRAPH_KEYWORD = "show_graph";
-    private static final String CLEAR_ALL_ENTRIES_KEYWORD = "clear_all_entries";
-    private static final String SET_BUDGET_KEYWORD = "set_budget";
-    private static final String CHECK_BUDGET_KEYWORD = "check_budget";
-    private static final String SET_THRESHOLD_KEYWORD = "set_threshold";
-    private static final String CONVERT_CURRENCY_KEYWORD = "set_curr";
-    private static final String CHECK_CURRENT_CURRENCY_KEYWORD = "check_curr";
-    private static final String LIST_CURRENCY_TYPES_KEYWORD = "list_curr";
-    
+
     private static final String DATA_SEPARATOR = ",";
     private static final Pattern EXPENSE_DATA_FORMAT
             = Pattern.compile("E" + DATA_SEPARATOR + "(?<description>.+)" + DATA_SEPARATOR
@@ -164,12 +164,12 @@ public class Parser {
             = Pattern.compile("I" + DATA_SEPARATOR + "(?<description>.+)" + DATA_SEPARATOR
             + "(?<amount>.+)" + DATA_SEPARATOR + "(?<category>.+)" + DATA_SEPARATOR + "(?<date>.+)");
     private static final Pattern SETTINGS_DATA_FORMAT = Pattern.compile("(?<currency>.+)" + DATA_SEPARATOR
-            + "(?<threshold>.+)" + DATA_SEPARATOR + "(?<food>.+)" + DATA_SEPARATOR + "(?<transport>.+)" 
-            + DATA_SEPARATOR + "(?<medical>.+)" + DATA_SEPARATOR + "(?<bills>.+)" + DATA_SEPARATOR 
-            + "(?<entertainment>.+)" + DATA_SEPARATOR + "(?<misc>.+)" + DATA_SEPARATOR + "(?<overall>.+)");
+            + "(?<threshold>.+)" + DATA_SEPARATOR + "(?<overall>.+)" + DATA_SEPARATOR + "(?<food>.+)"
+            + DATA_SEPARATOR + "(?<transport>.+)" + DATA_SEPARATOR + "(?<medical>.+)"
+            + DATA_SEPARATOR + "(?<bills>.+)" + DATA_SEPARATOR + "(?<entertainment>.+)"
+            + DATA_SEPARATOR + "(?<misc>.+)");
 
-    private static final String DATE_FORMAT = "dd/MM/yyyy";
-    private static final double ENTRY_AMOUNT_LIMIT = 1000000;
+    public static final String DATE_FORMAT = "dd/MM/yyyy";
 
     /**
      * Parses user input into command for execution.
@@ -187,7 +187,7 @@ public class Parser {
 
         final String commandWord = matcher.group("commandWord");
         String arguments = matcher.group("arguments").trim();
-        
+
         if (isExpenseRelatedCommand(commandWord)) {
             return prepareExpenseRelatedCommand(commandWord, arguments);
         } else if (isIncomeRelatedCommand(commandWord)) {
@@ -315,17 +315,14 @@ public class Parser {
     }
 
     private Command prepareIncomeRange(String arguments) {
-        final Matcher matcher = DATE_RANGE_ARGUMENT_FORMAT.matcher(" " + arguments);
-        if (!matcher.matches()) {
-            return new InvalidCommand(Messages.PARAMETERS_ERROR_MESSAGE);
-        }
         try {
-            String start = matcher.group("start").trim();
-            LocalDate startDate = LocalDate.parse(start, DateTimeFormatter.ofPattern(DATE_FORMAT));
-            String end = matcher.group("end").trim();
-            LocalDate endDate = LocalDate.parse(end, DateTimeFormatter.ofPattern(DATE_FORMAT));
-            if (isValidDateRange(startDate,endDate)) {
-                return new TotalIncomeBetweenCommand(startDate, endDate);
+            final Matcher matcher = DATE_RANGE_ARGUMENT_FORMAT.matcher(" " + arguments);
+            if (!matcher.matches()) {
+                return new InvalidCommand(Messages.PARAMETERS_ERROR_MESSAGE);
+            }
+            DateRange dateRange = extractStartAndEndDate(matcher);
+            if (isValidDateRange(dateRange)) {
+                return new TotalIncomeBetweenCommand(dateRange);
             }
             return new InvalidCommand(Messages.INVALID_DATE_RANGE_MESSAGE);
         } catch (DateTimeParseException e) {
@@ -334,18 +331,15 @@ public class Parser {
     }
 
     private Command prepareExpenseRange(String arguments) {
-        final Matcher matcher = DATE_RANGE_ARGUMENT_FORMAT.matcher(" " + arguments);
-        if (!matcher.matches()) {
-            return new InvalidCommand(Messages.PARAMETERS_ERROR_MESSAGE);
-        }
         try {
-            String start = matcher.group("start").trim();
-            LocalDate startDate = LocalDate.parse(start, DateTimeFormatter.ofPattern(DATE_FORMAT));
-            String end = matcher.group("end").trim();
-            LocalDate endDate = LocalDate.parse(end, DateTimeFormatter.ofPattern(DATE_FORMAT));
-            if (isValidDateRange(startDate,endDate)) {
-                return new TotalExpenseBetweenCommand(startDate, endDate);
-            } 
+            final Matcher matcher = DATE_RANGE_ARGUMENT_FORMAT.matcher(" " + arguments);
+            if (!matcher.matches()) {
+                return new InvalidCommand(Messages.PARAMETERS_ERROR_MESSAGE);
+            }
+            DateRange dateRange = extractStartAndEndDate(matcher);
+            if (isValidDateRange(dateRange)) {
+                return new TotalExpenseBetweenCommand(dateRange);
+            }
             return new InvalidCommand(Messages.INVALID_DATE_RANGE_MESSAGE);
         } catch (DateTimeParseException e) {
             return new InvalidCommand(Messages.DATE_FORMAT_MESSAGE);
@@ -381,8 +375,8 @@ public class Parser {
         final Matcher matcher = ADD_EXPENSE_ARGUMENT_FORMAT.matcher(" " + arguments);
         if (matcher.matches()) {
             try {
-                double expenseAmount = extractExpenseAmount(matcher);
-                String expenseDescription = extractExpenseDescription(matcher);
+                double expenseAmount = extractAmount(matcher);
+                String expenseDescription = extractDescription(matcher);
                 ExpenseCategory expenseCategory = extractExpenseCategory(matcher);
                 Expense expense = new Expense(expenseDescription, expenseAmount, expenseCategory);
                 assert !expenseCategory.equals(ExpenseCategory.NULL);
@@ -399,10 +393,10 @@ public class Parser {
         final Matcher matcher = ADD_EXPENSE_ARGUMENT_FORMAT_WITH_DATE.matcher(" " + arguments);
         if (matcher.matches()) {
             try {
-                double expenseAmount = extractExpenseAmount(matcher);
-                String expenseDescription = extractExpenseDescription(matcher);
+                double expenseAmount = extractAmount(matcher);
+                String expenseDescription = extractDescription(matcher);
                 ExpenseCategory expenseCategory = extractExpenseCategory(matcher);
-                LocalDate expenseDate = extractExpenseDate(matcher);
+                LocalDate expenseDate = extractDate(matcher);
                 Expense expense = new Expense(expenseDescription, expenseAmount, expenseCategory, expenseDate);
                 assert !expenseCategory.equals(ExpenseCategory.NULL);
                 return new AddExpenseCommand(expense);
@@ -416,55 +410,12 @@ public class Parser {
         }
     }
 
-    private ExpenseCategory extractExpenseCategory(Matcher matcher) throws
-            BlankExpenseCategoryException, InvalidExpenseCategoryException {
-        String expenseCategory = matcher.group("category").trim();
-        if (expenseCategory.isBlank()) {
-            throw new BlankExpenseCategoryException(Messages.BLANK_CATEGORY_MESSAGE);
-        }
-        switch (expenseCategory.toUpperCase()) {
-        case "FOOD":
-            return ExpenseCategory.FOOD;
-        case "TRANSPORT":
-            return ExpenseCategory.TRANSPORT;
-        case "MEDICAL":
-            return ExpenseCategory.MEDICAL;
-        case "BILLS":
-            return ExpenseCategory.BILLS;
-        case "ENTERTAINMENT":
-            return ExpenseCategory.ENTERTAINMENT;
-        case "MISC":
-            return ExpenseCategory.MISC;
-        default:
-            throw new InvalidExpenseCategoryException(Messages.INVALID_EXPENSE_CATEGORY_MESSAGE);
-        }
-    }
-
-    private String extractExpenseDescription(Matcher matcher) throws
-            InvalidExpenseDescriptionException {
-        String expenseDescription = matcher.group("description").trim();
-        if (expenseDescription.isBlank()) {
-            throw new InvalidExpenseDescriptionException(Messages.BLANK_DESCRIPTION_MESSAGE);
-        }
-        return expenseDescription;
-    }
-
-    private double extractExpenseAmount(Matcher matcher) 
-            throws InvalidExpenseAmountException, InvalidInputAmountValueException {
-        String userGivenAmount = matcher.group("amount").trim();
-        double expenseAmount = parseExpenseAmount(userGivenAmount);
-        if (expenseAmount > ENTRY_AMOUNT_LIMIT) { 
-            throw new InvalidInputAmountValueException(Messages.INVALID_EXPENSE_VALUE);
-        }
-        return expenseAmount;
-    }
-
     private Command prepareAddIncomeWithoutDate(String arguments) {
         final Matcher matcher = ADD_INCOME_ARGUMENT_FORMAT.matcher(" " + arguments);
         if (matcher.matches()) {
             try {
-                double incomeAmount = extractIncomeAmount(matcher);
-                String incomeDescription = extractIncomeDescription(matcher);
+                double incomeAmount = extractAmount(matcher);
+                String incomeDescription = extractDescription(matcher);
                 IncomeCategory incomeCategory = extractIncomeCategory(matcher);
                 Income income = new Income(incomeDescription, incomeAmount, incomeCategory);
                 assert !incomeCategory.equals(IncomeCategory.NULL);
@@ -481,10 +432,10 @@ public class Parser {
         final Matcher matcher = ADD_INCOME_ARGUMENT_FORMAT_WITH_DATE.matcher(" " + arguments);
         if (matcher.matches()) {
             try {
-                double incomeAmount = extractIncomeAmount(matcher);
-                String incomeDescription = extractIncomeDescription(matcher);
+                double incomeAmount = extractAmount(matcher);
+                String incomeDescription = extractDescription(matcher);
                 IncomeCategory incomeCategory = extractIncomeCategory(matcher);
-                LocalDate incomeDate = extractIncomeDate(matcher);
+                LocalDate incomeDate = extractDate(matcher);
                 Income income = new Income(incomeDescription, incomeAmount, incomeCategory, incomeDate);
                 assert !incomeCategory.equals(IncomeCategory.NULL);
                 return new AddIncomeCommand(income);
@@ -496,45 +447,6 @@ public class Parser {
         } else {
             return new InvalidCommand(Messages.PARAMETERS_ERROR_MESSAGE);
         }
-    }
-
-    private IncomeCategory extractIncomeCategory(Matcher matcher) throws
-            BlankIncomeCategoryException, InvalidIncomeCategoryException {
-        String incomeCategory = matcher.group("category").trim();
-        if (incomeCategory.isBlank()) {
-            throw new BlankIncomeCategoryException(Messages.BLANK_CATEGORY_MESSAGE);
-        }
-        switch (incomeCategory.toUpperCase()) {
-        case "ALLOWANCE":
-            return IncomeCategory.ALLOWANCE;
-        case "SALARY":
-            return IncomeCategory.SALARY;
-        case "ADHOC":
-            return IncomeCategory.ADHOC;
-        case "OTHERS":
-            return IncomeCategory.OTHERS;
-        default:
-            throw new InvalidIncomeCategoryException(Messages.INVALID_INCOME_CATEGORY_MESSAGE);
-        }
-    }
-
-    private String extractIncomeDescription(Matcher matcher) throws
-            InvalidIncomeDescriptionException {
-        String incomeDescription = matcher.group("description").trim();
-        if (incomeDescription.isBlank()) {
-            throw new InvalidIncomeDescriptionException(Messages.BLANK_DESCRIPTION_MESSAGE);
-        }
-        return incomeDescription;
-    }
-
-    private double extractIncomeAmount(Matcher matcher) 
-            throws InvalidIncomeAmountException, InvalidInputAmountValueException {
-        String userGivenAmount = matcher.group("amount").trim();
-        double incomeAmount = parseIncomeAmount(userGivenAmount);
-        if (incomeAmount > ENTRY_AMOUNT_LIMIT) {
-            throw new InvalidInputAmountValueException(Messages.INVALID_INCOME_VALUE);
-        } 
-        return incomeAmount;
     }
 
     /**
@@ -550,8 +462,8 @@ public class Parser {
         String userGivenIndex = matcher.group("index").trim();
         int deleteExpenseIndex;
         try {
-            deleteExpenseIndex = parseExpenseIndex(userGivenIndex);
-        } catch (InvalidExpenseIndexException e) {
+            deleteExpenseIndex = extractIndex(userGivenIndex);
+        } catch (InvalidIndexException e) {
             return new InvalidCommand(e.getMessage());
         }
         assert deleteExpenseIndex >= 1;
@@ -572,8 +484,8 @@ public class Parser {
         String userGivenIndex = matcher.group("index").trim();
         int deleteIncomeIndex;
         try {
-            deleteIncomeIndex = parseIncomeIndex(userGivenIndex);
-        } catch (InvalidIncomeIndexException e) {
+            deleteIncomeIndex = extractIndex(userGivenIndex);
+        } catch (InvalidIndexException e) {
             return new InvalidCommand(e.getMessage());
         }
         assert deleteIncomeIndex >= 1;
@@ -634,7 +546,6 @@ public class Parser {
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
-    
 
     private Command prepareCheckCurrentCurrency(String arguments) {
         if (arguments.isBlank()) {
@@ -650,42 +561,6 @@ public class Parser {
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
-    private double parseExpenseAmount(String userGivenAmount) throws InvalidExpenseAmountException {
-        double expenseAmount;
-        try {
-            expenseAmount = Double.parseDouble(userGivenAmount);
-        } catch (NumberFormatException e) {
-            throw new InvalidExpenseAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
-        }
-        if (hasMoreThanTwoDecimalPlaces(userGivenAmount)) {
-            throw new InvalidExpenseAmountException(Messages.TOO_MANY_DP_MESSAGE);
-        } else if (expenseAmount <= 0) {
-            throw new InvalidExpenseAmountException(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
-        } else if (Double.isNaN(expenseAmount) || Double.isInfinite(expenseAmount)) {
-            throw new InvalidExpenseAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
-        }
-        assert expenseAmount > 0;
-        return expenseAmount;
-    }
-
-    private double parseIncomeAmount(String userGivenAmount) throws InvalidIncomeAmountException {
-        double incomeAmount;
-        try {
-            incomeAmount = Double.parseDouble(userGivenAmount);
-        } catch (NumberFormatException e) {
-            throw new InvalidIncomeAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
-        }
-        if (hasMoreThanTwoDecimalPlaces(userGivenAmount)) {
-            throw new InvalidIncomeAmountException(Messages.TOO_MANY_DP_MESSAGE);
-        } else if (incomeAmount <= 0) {
-            throw new InvalidIncomeAmountException(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
-        } else if (Double.isNaN(incomeAmount) || Double.isInfinite(incomeAmount)) {
-            throw new InvalidIncomeAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
-        }
-        assert incomeAmount > 0;
-        return incomeAmount;
-    }
-    
     private boolean hasMoreThanTwoDecimalPlaces(String userGivenAmount) {
         boolean hasDecimal = userGivenAmount.contains(".");
         if (hasDecimal) {
@@ -698,128 +573,17 @@ public class Parser {
         }
     }
 
-    private int parseExpenseIndex(String userGivenIndex) throws InvalidExpenseIndexException {
-        int deleteExpenseIndex;
-        try {
-            deleteExpenseIndex = Integer.parseInt(userGivenIndex);
-        } catch (NumberFormatException e) {
-            throw new InvalidExpenseIndexException(Messages.INVALID_INDEX_MESSAGE);
-        }
-        if (deleteExpenseIndex <= 0) {
-            throw new InvalidExpenseIndexException(Messages.NON_POSITIVE_INTEGER_INDEX_MESSAGE);
-        }
-        return deleteExpenseIndex;
-    }
-
-    private int parseIncomeIndex(String userGivenIndex) throws InvalidIncomeIndexException {
-        int deleteIncomeIndex;
-        try {
-            deleteIncomeIndex = Integer.parseInt(userGivenIndex);
-        } catch (NumberFormatException e) {
-            throw new InvalidIncomeIndexException(Messages.INVALID_INDEX_MESSAGE);
-        }
-        if (deleteIncomeIndex <= 0) {
-            throw new InvalidIncomeIndexException(Messages.NON_POSITIVE_INTEGER_INDEX_MESSAGE);
-        }
-        return deleteIncomeIndex;
-    }
-    
-    private double parseThresholdValue(String userGivenThreshold) throws InvalidThresholdValueException {
-        double thresholdValue;
-        try {
-            thresholdValue = Double.parseDouble(userGivenThreshold);
-        } catch (NumberFormatException e) {
-            throw new InvalidThresholdValueException(Messages.NON_NUMERIC_THRESHOLD_MESSAGE);
-        }
-        if ((thresholdValue < 0) | (thresholdValue > 1)) {
-            throw new InvalidThresholdValueException(Messages.INVALID_THRESHOLD_MESSAGE);
-        } else if (Double.isNaN(thresholdValue) || Double.isInfinite(thresholdValue)) {
-            throw new InvalidThresholdValueException(Messages.NON_NUMERIC_THRESHOLD_MESSAGE);
-        } else if (hasMoreThanTwoDecimalPlaces(userGivenThreshold)) {
-            throw new InvalidThresholdValueException(Messages.TOO_MANY_DP_MESSAGE);
-        }
-        return thresholdValue;
-    }
-    
-    private double extractThresholdValue(Matcher matcher) throws InvalidThresholdValueException {
-        String userGivenThreshold = matcher.group("threshold").trim();
-        return parseThresholdValue(userGivenThreshold);
-    }
-
-    public String convertExpenseToData(Expense expense) {
-        return "E" + DATA_SEPARATOR + expense.getDescription() + DATA_SEPARATOR + expense.getValue() + DATA_SEPARATOR
-                + expense.getCategory() + DATA_SEPARATOR
-                + expense.getDate().format(DateTimeFormatter.ofPattern(DATE_FORMAT));
-    }
-
-    public String convertIncomeToData(Income income) {
-        return "I" + DATA_SEPARATOR + income.getDescription() + DATA_SEPARATOR + income.getValue() + DATA_SEPARATOR
-                + income.getCategory() + DATA_SEPARATOR
-                + income.getDate().format(DateTimeFormatter.ofPattern(DATE_FORMAT));
-    }
-
-    public Expense convertDataToExpense(String data) throws InputException, InvalidExpenseDataFormatException,
-            DateTimeParseException {
-        final Matcher matcher = EXPENSE_DATA_FORMAT.matcher(data.trim());
-        if (matcher.matches()) {
-            String expenseDescription = extractExpenseDescription(matcher);
-            double expenseAmount = extractExpenseAmount(matcher);
-            ExpenseCategory expenseCategory = extractExpenseCategory(matcher);
-            LocalDate expenseDate = extractExpenseDate(matcher);
-            assert expenseAmount > 0;
-            assert !expenseDescription.isBlank();
-            return new Expense(expenseDescription, expenseAmount, expenseCategory, expenseDate);
-        } else {
-            throw new InvalidExpenseDataFormatException();
-        }
-    }
-
-    private LocalDate extractExpenseDate(Matcher matcher) throws DateTimeParseException {
-        String date = matcher.group("date").trim();
-        return LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT));
-    }
-
-    public Income convertDataToIncome(String data) throws InputException, InvalidIncomeDataFormatException,
-            DateTimeParseException {
-        final Matcher matcher = INCOME_DATA_FORMAT.matcher(data.trim());
-        if (matcher.matches()) {
-            String incomeDescription = extractIncomeDescription(matcher);
-            double incomeAmount = extractIncomeAmount(matcher);
-            IncomeCategory incomeCategory = extractIncomeCategory(matcher);
-            LocalDate incomeDate = extractIncomeDate(matcher);
-            assert incomeAmount > 0;
-            assert !incomeDescription.isBlank();
-            return new Income(incomeDescription, incomeAmount, incomeCategory, incomeDate);
-        } else {
-            throw new InvalidIncomeDataFormatException();
-        }
-    }
-
-    private LocalDate extractIncomeDate(Matcher matcher) throws DateTimeParseException {
-        String date = matcher.group("date").trim();
-        return LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT));
-    }
-
     private Command prepareSetBudget(String arguments) {
         final Matcher matcher = SET_BUDGET_ARGUMENT_FORMAT.matcher(" " + arguments);
         if (!matcher.matches()) {
             return new InvalidCommand(Messages.PARAMETERS_ERROR_MESSAGE);
         }
 
-        String dataAmount = matcher.group("amount").trim();
-        if (dataAmount.isBlank()) {
-            return new InvalidCommand(Messages.BLANK_AMOUNT_MESSAGE);
-        }
         double budgetAmount;
         try {
-            budgetAmount = Double.parseDouble(dataAmount);
-        } catch (NumberFormatException e) {
-            return new InvalidCommand(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
-        }
-        if (budgetAmount < 0) {
-            return new InvalidCommand(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
-        } else if (Double.isInfinite(budgetAmount) || Double.isNaN(budgetAmount)) {
-            return new InvalidCommand(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
+            budgetAmount = extractBudgetAmount(matcher);
+        } catch (InvalidBudgetAmountException e) {
+            return new InvalidCommand(e.getMessage());
         }
 
         String expenseCategory = matcher.group("category").trim().toUpperCase();
@@ -886,7 +650,7 @@ public class Parser {
         } catch (InvalidThresholdValueException e) {
             return new InvalidCommand(e.getMessage());
         }
-        
+
         return new SetThresholdCommand(thresholdValue);
     }
 
@@ -925,14 +689,58 @@ public class Parser {
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
-    
+
+    public String convertExpenseToData(Expense expense) {
+        return "E" + DATA_SEPARATOR + expense.getDescription() + DATA_SEPARATOR + expense.getValue() + DATA_SEPARATOR
+                + expense.getCategory() + DATA_SEPARATOR
+                + expense.getDate().format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+    }
+
+    public String convertIncomeToData(Income income) {
+        return "I" + DATA_SEPARATOR + income.getDescription() + DATA_SEPARATOR + income.getValue() + DATA_SEPARATOR
+                + income.getCategory() + DATA_SEPARATOR
+                + income.getDate().format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+    }
+
+    public Expense convertDataToExpense(String data) throws InputException, InvalidExpenseDataFormatException,
+            DateTimeParseException {
+        final Matcher matcher = EXPENSE_DATA_FORMAT.matcher(data.trim());
+        if (matcher.matches()) {
+            String expenseDescription = extractDescription(matcher);
+            double expenseAmount = extractAmount(matcher);
+            ExpenseCategory expenseCategory = extractExpenseCategory(matcher);
+            LocalDate expenseDate = extractDate(matcher);
+            assert expenseAmount > 0;
+            assert !expenseDescription.isBlank();
+            return new Expense(expenseDescription, expenseAmount, expenseCategory, expenseDate);
+        } else {
+            throw new InvalidExpenseDataFormatException();
+        }
+    }
+
+    public Income convertDataToIncome(String data) throws InputException, InvalidIncomeDataFormatException,
+            DateTimeParseException {
+        final Matcher matcher = INCOME_DATA_FORMAT.matcher(data.trim());
+        if (matcher.matches()) {
+            String incomeDescription = extractDescription(matcher);
+            double incomeAmount = extractAmount(matcher);
+            IncomeCategory incomeCategory = extractIncomeCategory(matcher);
+            LocalDate incomeDate = extractDate(matcher);
+            assert incomeAmount > 0;
+            assert !incomeDescription.isBlank();
+            return new Income(incomeDescription, incomeAmount, incomeCategory, incomeDate);
+        } else {
+            throw new InvalidIncomeDataFormatException();
+        }
+    }
+
     public String convertSettingsToData(BudgetManager budgetManager, CurrencyManager currencyManager) {
         CurrencyType currency = currencyManager.getCurrency();
         StringBuilder data = new StringBuilder(currency.toString() + ",");
         data.append(budgetManager.getThreshold()).append(",");
         for (ExpenseCategory category : ExpenseCategory.values()) {
-            // NULL is the category after OVERALL. We do not expect NULL to have a value thus we break here.
-            if (category == ExpenseCategory.OVERALL) {
+            // NULL is the category after MISC. We do not expect NULL to have a value thus we break here.
+            if (category == ExpenseCategory.MISC) {
                 data.append(budgetManager.getBudget(category));
                 break;
             }
@@ -940,6 +748,25 @@ public class Parser {
             data.append(DATA_SEPARATOR);
         }
         return data.toString();
+    }
+
+    public CurrencyType convertDataToCurrencySetting(String data) throws InvalidCurrencyTypeException,
+            BlankCurrencyTypeException, InvalidSettingsDataException {
+        final Matcher matcher = SETTINGS_DATA_FORMAT.matcher(data.trim());
+        if (matcher.matches()) {
+            return extractCurrencyType(matcher);
+        }
+        throw new InvalidSettingsDataException();
+
+    }
+
+    public double convertDataToThresholdSetting(String data) throws InvalidThresholdValueException,
+            InvalidSettingsDataException {
+        final Matcher matcher = SETTINGS_DATA_FORMAT.matcher(data.trim());
+        if (matcher.matches()) {
+            return extractThresholdValue(matcher);
+        }
+        throw new InvalidSettingsDataException();
     }
 
     public ArrayList<Double> convertDataToBudgetSettings(String data) throws NumberFormatException,
@@ -955,25 +782,6 @@ public class Parser {
                 budgetSettings.add(Double.parseDouble(matcher.group(category.toString().toLowerCase())));
             }
             return budgetSettings;
-        }
-        throw new InvalidSettingsDataException();
-    }
-
-    public CurrencyType convertDataToCurrencySetting(String data) throws InvalidCurrencyTypeException,
-            BlankCurrencyTypeException, InvalidSettingsDataException {
-        final Matcher matcher = SETTINGS_DATA_FORMAT.matcher(data.trim());
-        if (matcher.matches()) {
-            return extractCurrencyType(matcher);
-        }
-        throw new InvalidSettingsDataException();
-
-    }
-    
-    public double convertDataToThresholdSetting(String data) throws InvalidThresholdValueException, 
-            InvalidSettingsDataException {
-        final Matcher matcher = SETTINGS_DATA_FORMAT.matcher(data.trim());
-        if (matcher.matches()) {
-            return extractThresholdValue(matcher);
         }
         throw new InvalidSettingsDataException();
     }
