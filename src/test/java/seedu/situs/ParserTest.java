@@ -31,13 +31,6 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCommand_invalidCommandInput_success() throws SitusException {
-        String inputString = "foo 2";
-        String resultMsg = Parser.parse(inputString);
-        assertEquals("Invalid command!", resultMsg);
-    }
-
-    @Test
     public void parseAddCommand_insufficientCommandParameters_expectException() {
         try {
             String inputString = "add carrot";
@@ -91,6 +84,14 @@ public class ParserTest {
         } catch (SitusException e) {
             assertEquals("Ingredient number does not exist!", e.getMessage());
         }
+    }
+
+    //@@author nishantrai-nus
+    @Test
+    public void parseCommand_invalidCommandInput_success() throws SitusException {
+        String inputString = "foo 2";
+        String resultMsg = Parser.parse(inputString);
+        assertEquals("Invalid command!", resultMsg);
     }
 
     @Test
