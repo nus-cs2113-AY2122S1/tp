@@ -23,7 +23,7 @@ its developers (😀 us!) at our [Main Page](README.md).
 * [3. Using _Ha(ppy)Bit_](#3-using-_happybit_)
   * [3.1 Instructions from _Ha(ppy)Bit_](#31-instructions-from-_happybit_)
   * [3.2 Command Format](#32-command-format)
-* [4. Features](#features)
+* [4. Features](#4-features)
     * [4.1 Ask for Help: `help`](#41-ask-for-help-help)
     * [4.2 Set a Goal: `set`](#42-set-a-goal-set)
     * [4.3 List all Goals: `list`](#43-list-all-goals-list)
@@ -173,6 +173,10 @@ Goal     | A long term achievement you wish to accomplish.                  |`Lo
 Habit    | Checkpoints; small, actionable tasks to be done to achieve goal. |`Run 5km`
 Interval | The frequency (in days) which you want the habit to recur.       |`Run 5km every 7 days` 
 
+
+![](Display_Images/HappyBit_Visual_Explain.png)
+_A timeline of what a goal should look like._ | Made with Canva
+
 **Goals and habits** <br>
 Here we distinguish between goals and habits. Although they are commonly used words, the way we
 design _Ha(ppy)Bit_ is tightly integral to the way we define them above. We would also like you
@@ -180,16 +184,17 @@ to know that the purpose of `habits` is to break down daunting, colossal `goals`
 `habits`; tasks that you can complete within a day or as defined by your `interval`.
 
 **Intervals** <br>
-An `interval` is user-defined. It is for `habits` that will occur periodically, saving you the hassle
-of keying in individual `habits` every time it occurs. It is also the window period for you to complete a `habit`.
+An `interval` is the number of days between a habit. It is for habits that will occur periodically,
+saving you the hassle of keying in individual habits every time it occurs.
+It is also the window period for you to complete a habit.
 Here are three things to note:
-1. `interval` is not allowed to extend longer than your `goal` time frame. <br>
-To explain with an example, a goal that starts and ends within a month is _not_ to have a`habit` with an `interval` 
-longer than 30 days, otherwise it should've been a one-off `habit`! 
-2. One-off `habits` (hey, an oxymoron!) are habits that do not repeat. <br>
+1. `interval` is not allowed to extend longer than your goal time frame. <br>
+To explain with an example, a goal that starts and ends within a month is _not_ to have a habit with an interval 
+longer than 30 days, otherwise it should've been a one-off habit! 
+2. `One-off habits` (hey, an oxymoron!) are habits that do not repeat. <br>
 This is achieved by setting the `interval` as `0`, rather than any positive integer.
 3. _Ha(ppy)Bit_ does not allow for an `interval` to be shorter than 1 day. <br>
-This if for those who are planning to do a habit more than once a day. 
+This is for those who are planning to do a habit more than once a day. 
 You may consider having multiple recurring habits instead.
 
 ### 2.2 Icons
@@ -221,7 +226,7 @@ register your input. On the topic of inputs...
 
 ### 3.2 Command Format
 _Ha(ppy)Bit_ is very particular about your commands. You begin off with a "command word" to tell _Ha(ppy)Bit_ the exact 
-action to carry out (See [Command Summary](#command-summary) for all actions). The actions are then followed up with
+action to carry out (See [Command Summary](#7-command-summary) for all actions). The actions are then followed up with
 "parameters", which are information you wish to pass to _Ha(ppy)Bit_ to carry out the actions with it. To indicate the 
 type of parameters, they are prefixed with "flags". The flags help _Ha(ppy)Bit_ identify and distinguish the type of
 parameters.
@@ -232,7 +237,7 @@ A command could look like this: `add n/Run 2.4km g/1 i/7`. Where, <br>
 and `n/`, `g/`, and `i/` are flags.
 
 Here are guidelines and tips for the command format:
-* **Commands** are only accepted when you see `Command: ` on the screen (See [Main Interface](#main-interface)). 
+* **Commands** are only accepted when you see `Command: ` on the screen (See [Main Interface](#12-main-interface)). 
   Your inputs appearing after `Command: ` indicates you're doing it right.
 * **Commands** may require one or more flags. You may choose to use the flags in any order but ensure that all flags 
   for that command are present.\

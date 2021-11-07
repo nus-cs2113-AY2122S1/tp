@@ -47,7 +47,7 @@ This application adapted the Developer Guide and User Guide from:
 
 The diagram below shows the higher-level implementation of the interactions of all the components within `HappyBit` 
 
-![Ui Diagram](Diagram Images/SystemArchitecture.png)
+![Ui Diagram](Diagram_Images/SystemArchitecture.png)
 
 In the sections below, we will be explaining in detail how each component works.
 
@@ -75,7 +75,7 @@ How the `Ui` component works:
 The Sequence Diagram below illustrates the interactions within the `Ui` component when `run()` is called in the main
 class `HappyBit.java`
 
-![Ui Diagram](Diagram Images/UiDiagramCopy.png)
+![Ui Diagram](Diagram_Images/UiDiagramCopy.png)
 
 While the Sequence Diagram represents the normal flow of logic, there is a recursive definition that is not represented.
 1. `:HappyBit` calls the method `handleState()` in `:State`
@@ -120,35 +120,35 @@ sequence diagram below is carried out:
 When the `runCommand` function is executed for the `DeleteGoalCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
 
-![](Diagram Images/DeleteGoalCommandSequenceDiagram.png)
+![](Diagram_Images/DeleteGoalCommandSequenceDiagram.png)
 
 #### `DeleteHabitCommand`
 
 When the `runCommand` function is executed for the `DeleteHabitCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
 
-![](Diagram Images/DeleteHabitCommandSequenceDiagram.png)
+![](Diagram_Images/DeleteHabitCommandSequenceDiagram.png)
 
 #### `DoneHabitCommand`
 
 When the `runCommand` function is executed for the `DoneHabitCommand` object, the following steps as indicated by the 
 sequence diagram below is carried out:
 
-![](Diagram Images/DoneCommandSequenceDiagram.png)
+![](Diagram_Images/DoneCommandSequenceDiagram.png)
 
 #### `ListGoalCommand`
 
 When the `runCommand` function is executed for the `ListGoalsCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
 
-![](Diagram Images/ListGoalsCommandSequenceDiagram.png)
+![](Diagram_Images/ListGoalsCommandSequenceDiagram.png)
 
 #### `ListHabitCommand`
 
 When the `runCommand` function is executed for the `ListHabitsCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
 
-![](Diagram Images/ListHabitsCommandSequenceDiagram.png)
+![](Diagram_Images/ListHabitsCommandSequenceDiagram.png)
 
 #### `HelpCommand`
 
@@ -183,7 +183,7 @@ the user's data.
 The `Storage` class allows data to be read from and saved to a storage file.
 The class diagram shows the interactions between the different classes.
 
-![Storage Class Diagram](Diagram%20Images/StorageClassDiagram.png)
+![Storage Class Diagram](Diagram_Images/StorageClassDiagram.png)
 
 The program uses `Storage` class to import data from the storage file.
 * `Storage` interacts with `Import` to access the data stored in storage file.
