@@ -130,6 +130,38 @@ public class Ui {
         return message.toString();
     }
 
+    public static String getItemsMarkedDoneMessage(String listOfItemsMarkedDone, String listOfAlreadyDoneItems) {
+        StringBuilder message = new StringBuilder();
+        if (!listOfItemsMarkedDone.isBlank()) {
+            message.append("Nice! I have marked these items as done: \n").append(listOfItemsMarkedDone);
+            message.append("--------LIST UPDATED-----------");
+        }
+        if (!listOfAlreadyDoneItems.isBlank()) {
+            if (!listOfItemsMarkedDone.isBlank()) {
+                message.append("\n");
+            }
+            message.append("These items are already done: \n").append(listOfAlreadyDoneItems);
+            message.append("There's no need for me to re-mark them. ");
+        }
+        return message.toString();
+    }
+
+    public static String getItemsUnmarkedMessage(String listOfItemsUnmarked, String listOfUndoneItems) {
+        StringBuilder message = new StringBuilder();
+        if (!listOfItemsUnmarked.isBlank()) {
+            message.append("Okay, I have unmarked these items: \n").append(listOfItemsUnmarked);
+            message.append("--------LIST UPDATED-----------");
+        }
+        if (!listOfUndoneItems.isBlank()) {
+            if (!listOfItemsUnmarked.isBlank()) {
+                message.append("\n");
+            }
+            message.append("These items are not done yet: \n").append(listOfUndoneItems);
+            message.append("They can't be unmarked. ");
+        }
+        return message.toString();
+    }
+
     public static void printGreetingMessage() {
         System.out.println("Greetings mortal. How may you be served today?\n"
                 + "TIP: enter \"help\" if you are weak and clueless!\n"
@@ -304,7 +336,7 @@ public class Ui {
         System.out.println("Sun Mon Tue Wed Thu Fri Sat");
         int counter = 1;
 
-        int dayValue = LocalDateTime.of(year, month, 1, 12,30).getDayOfWeek().getValue();
+        int dayValue = LocalDateTime.of(year, month, 1, 12, 30).getDayOfWeek().getValue();
         if (dayValue != 7)
             for (int i = 0; i < dayValue; i++, counter++) {
                 System.out.printf("%-4s", "  ");
@@ -328,5 +360,13 @@ public class Ui {
             }
         }
         System.out.println("\n" + Ui.getLineBreak());
+    }
+
+    public static void printLoadingMessage() {
+        System.out.println("Save file detected! Loading...");
+    }
+
+    public static void printLoadSuccesfulMessage() {
+        System.out.println("...File loading process complete!\n" + getLineBreak());
     }
 }
