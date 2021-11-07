@@ -141,7 +141,7 @@ public class Parser extends CommandHandler {
     //@@author lixiyuan416
 
     /**
-     * Helper function to get user to confirm y/n
+     * Helper function to get user to confirm y/n.
      *
      * @return true if user agrees, false otherwise
      */

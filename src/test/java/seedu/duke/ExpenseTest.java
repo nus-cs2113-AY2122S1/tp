@@ -108,8 +108,8 @@ class ExpenseTest {
                 + "\t\t1) Albert, USD $100.00" + System.lineSeparator()
                 + "\t\t2) Betty, USD $200.00" + System.lineSeparator()
                 + "\t\t3) Chris, USD $300.00" + System.lineSeparator()
-                + "\tPayer: Chris" + System.lineSeparator() +
-                "\tCategory: food";
+                + "\tPayer: Chris" + System.lineSeparator()
+                + "\tCategory: food";
         FilterFinder.findMatchingPersonExpenses(trip.getListOfExpenses(), "Chris");
         assertEquals(bo.toString().trim(), correctOutput);
     }

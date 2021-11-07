@@ -20,7 +20,7 @@ public interface FilterFinder {
     //@@author lixiyuan416
 
     /**
-     * Filters expenses inside a trip by date
+     * Filters expenses inside a trip by date.
      * See parent method {@link Trip#getFilteredExpenses(String, String)}
      *
      * @param listOfCurrentExpenses expense list of a trip
@@ -122,7 +122,7 @@ public interface FilterFinder {
     //@@author lixiyuan416
 
     /**
-     * Filters expenses inside a trip by person
+     * Filters expenses inside a trip by person.
      * See parent method {@link Trip#getFilteredExpenses(String, String)}
      *
      * @param listOfCurrentExpenses list of expenses of a trip
