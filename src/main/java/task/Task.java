@@ -33,7 +33,6 @@ public class Task {
         setDate(date);
         setDone(false);
         setLate(false);
-        parseDeadline(date);
     }
 
     /**
@@ -77,12 +76,14 @@ public class Task {
 
     public void setDate(String date) {
         this.date = date;
+        setDeadline(DateParser.parseDate(date));
     }
 
     public void parseDeadline(String date) throws DateTimeException {
         try {
             logger.log(Level.INFO, "Successfully set Task deadline...");
-            setDeadline(DateParser.parseDate(date));
+            setDate(date);
+            updateOverdue();
             Ui.printUpdateTaskDeadline(this);
         } catch (DateTimeException e) {
             Ui.wrongDateTimeFormat();
