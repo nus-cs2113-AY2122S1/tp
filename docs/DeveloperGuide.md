@@ -1,13 +1,14 @@
 # Developer Guide
 
 ## Acknowledgements
-Snippets of code from Baeldung’s guide to unit testing of system.out.println() with junit were used.
 
-Source: https://www.baeldung.com/java-testing-system-out-println
 
-Snippets of code from addressbook-level2’s Parser.java were used.
+Source:
+1. Snippets of code from [addressbook-level2’s Parser.java](https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java) were used.
+2. Snippets of code from [Baeldung’s guide to unit testing](https://www.baeldung.com/java-testing-system-out-println) of system.out.println() with junit were used.
 
-Source: https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
+
+---
 
 ## Design & implementation
 ### Architecture
@@ -87,11 +88,29 @@ It interacts with `FinancialTracker` and `BudgetManager` and receives commands f
 
 `DataManager` &larr; `StonksXD_data.csv`
 
-The Sequence Diagram below shows how the components interact with each other in a typical feedback loop.
-It is illustrated using the hypothetical scenario where the user issues the command `del_ex i/1`.
+---
+### Main Component 
+The main component is made up of the StonksXD class that contains references to the various other components such as Parser and BudgetManager.
+When the program first starts, the StonksXD class will call its constructor and load up the data stored in a csv file into the FinancialTracker component.
+After that it would take inputs from the user and parse it to identify which command it is. This process will continue until a termination command is identified
+which will then stop the feedback loop and end the program.
+
+
+The Sequence Diagram below shows how the main component interacts with other components in a typical feedback loop.
+The diagram below represents the use of delete expense command.
 
 ![](StonksXDSequenceDiagram.drawio.png)
-The sections below provide more information on the respective components.
+
+How the feedback loop of the main components works
+1. The main component will call the run() method which begins the program after the initial constructor is done.
+2. There will be a terminating flag called isNonTerminatingCommand which will be set to false when an exit command is detected.
+3. While this flag is true, the stonks program will constantly read and execute the given input.
+4. The parser would break down and identify the given input and create the respective commands 
+5. The commands will then be executed based on their different functionality.
+6. In the example above, delete expense command is created and executed, hence calling removeExpense() method.
+7. In most cases the method called would have feedback printing messages that requires the use of the Ui component, in this case the printing method is called printIncomeDeleted.
+8. After everything is completed, the isExit() method will check if the command given is a terminating command to adjust the terminating flag accordingly.
+9. If it is terminated the main component will print the termination message through the Ui.
 
 ---
 
@@ -100,7 +119,7 @@ Ui contains a Scanner object that takes in user inputs from the command line.
 The Ui’s main role is to provide feedback whenever the user enters a command through the form of messages. It also 
 handles the indexing of each element in the listing methods before printing out to the standard output for users to see.
 
-The image below illustrates the sequence diagram in the context of listing methods
+The sequence diagram below illustrates the sequence diagram in the context of listing methods
 which includes listExpense, listIncome and listFind
 
 
@@ -123,7 +142,7 @@ Each method is abstracted into an appropriate child class (for e.g. `AddExpenseC
 
 After obtaining the attributes of an entry from the `entry` class and the required command given by the user from the `parser` class, it directs the inputs to the respective methods for execution.
 
-The image below shows the sequence diagram of how the `AddExpenseCommand` class is used and, the other classes involved with it as well.
+The sequence diagram below shows how the `AddExpenseCommand` class is used and, the other classes involved with it as well
 
 ![](AddExpenseCommandSD.drawio.png)
 
@@ -147,7 +166,7 @@ The `FinancialTracker` class is in charge of storing, deleting, and retrieving i
 expense related calculations while the program is running. It performs these operations based
 on the different commands it receives from the user.
 
-The class diagram below shows the structure of `FinancialTracker`.
+The class diagram below shows the structure of `FinancialTracker`
 
 ![](FinancialTrackerCD.drawio.png) 
 
@@ -191,6 +210,8 @@ Every important field will be separated by `Parser` with a `,` before saving the
 
 When a line of data is obtained from the `csv` file, `Parser` will check if the line fits the required format using
 regex.
+
+---
 
 ### Budget Component
 
@@ -374,6 +395,7 @@ details to reduce complexity.
 
 ![](.png)
 
+---
 
 ## Product scope
 ### Target user profile
