@@ -90,7 +90,8 @@ public class Assessment implements ClassChecker {
     @Override
     public boolean verify() {
         int validMaximumMarks = Double.compare(maximumMarks, MINIMUM_MARKS);
-        boolean isValidMaximumMarks = validMaximumMarks < 0;
+        boolean isValidMaximumMarks = validMaximumMarks >= 0;
+
         if (name.isEmpty() || !isWeightageWithinRange(weightage) || !isValidMaximumMarks) {
             return false;
         }
