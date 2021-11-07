@@ -1,5 +1,12 @@
 package seedu.duke.logic.parser;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
 import seedu.duke.commons.core.CommandType;
 import seedu.duke.commons.core.DayOfTheWeek;
 import seedu.duke.commons.core.Message;
@@ -8,12 +15,7 @@ import seedu.duke.commons.core.exceptions.DayOfTheWeekException;
 import seedu.duke.commons.core.exceptions.PriorityException;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import static seedu.duke.commons.core.Grade.isValid;
 
 //@@author richwill28
 public class ParserUtil {
@@ -26,17 +28,14 @@ public class ParserUtil {
         return index - 1;
     }
 
-    public static String removeFirstParam(String userResponse, String firstParam) {
-        return userResponse.replaceFirst(firstParam, "").strip();
-    }
-
-    public static boolean isVerbose(String userResponse) {
-        return userResponse.equalsIgnoreCase("verbose")
-                || userResponse.equalsIgnoreCase("-v");
+    public static String parseGrade(String grade) throws ParseException {
+        if (!isValid(grade.toUpperCase())) {
+            throw new ParseException("Invalid grade input.");
+        }
+        return grade.toUpperCase();
     }
 
     //@@author Roycius
-
     /**
      * Checks if the number of items in an array of Strings is within a certain range.
      *

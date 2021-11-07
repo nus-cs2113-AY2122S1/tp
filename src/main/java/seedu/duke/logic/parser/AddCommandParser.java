@@ -17,12 +17,13 @@ import static seedu.duke.commons.core.CommandFormat.ADD_LESSON_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.ADD_MODULE_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.promptFormat;
 import static seedu.duke.commons.core.Priority.LOW;
+import static seedu.duke.commons.util.StringUtil.removeFirstParam;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
-import static seedu.duke.logic.parser.ParserUtil.parsePriority;
 import static seedu.duke.logic.parser.ParserUtil.parseDayOfTheWeek;
+import static seedu.duke.logic.parser.ParserUtil.parseGrade;
+import static seedu.duke.logic.parser.ParserUtil.parsePriority;
 import static seedu.duke.logic.parser.ParserUtil.parseTime;
 import static seedu.duke.logic.parser.ParserUtil.parseTitle;
-import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
 //@@author richwill28
 public class AddCommandParser {
@@ -118,7 +119,7 @@ public class AddCommandParser {
         String moduleGrade = DEFAULT_GRADE;
 
         if (flagMap.containsKey(CommandFlag.GRADE)) {
-            moduleGrade = flagMap.get(CommandFlag.GRADE);
+            moduleGrade = parseGrade(flagMap.get(CommandFlag.GRADE));
         }
 
         return new AddModuleCommand(moduleCode, moduleGrade);

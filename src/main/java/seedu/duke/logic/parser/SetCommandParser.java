@@ -8,14 +8,11 @@ import seedu.duke.logic.parser.exceptions.ParseException;
 
 import static seedu.duke.commons.core.CommandFormat.promptFormat;
 import static seedu.duke.commons.core.CommandFormat.SET_GRADE_FORMAT;
+import static seedu.duke.commons.util.StringUtil.removeFirstParam;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
-import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
 //@@author rebchua39
 public class SetCommandParser {
-    private static final String[] GRADES = {"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "D+", "D", "F", "S", "U",
-        "CS", "CU", "NONE"};
-
     public static Command parse(String userResponse) throws ParseException {
         CommandType commandType = parseCommandType(userResponse);
         String simplifiedUserResponse;
@@ -40,14 +37,5 @@ public class SetCommandParser {
         } catch (IndexOutOfBoundsException e) {
             throw new ParseException(Message.ERROR_INVALID_COMMAND);
         }
-    }
-
-    private static boolean isValidGrade(String param) {
-        for (String grade : GRADES) {
-            if (param.equals(grade)) {
-                return true;
-            }
-        }
-        return false;
     }
 }

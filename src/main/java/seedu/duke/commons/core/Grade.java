@@ -27,7 +27,7 @@ public class Grade {
             "NONE"  // Custom default grade
     };
 
-    public static boolean isValidGrade(String param) {
+    public static boolean isValid(String param) {
         for (String grade : GRADES) {
             if (param.equals(grade)) {
                 return true;

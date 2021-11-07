@@ -5,8 +5,8 @@ import seedu.duke.commons.core.Message;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
+import static seedu.duke.commons.util.StringUtil.removeFirstParam;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
-import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
 //@@author richwill28
 public class Parser {

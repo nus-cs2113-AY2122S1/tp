@@ -8,9 +8,9 @@ import seedu.duke.logic.parser.exceptions.ParseException;
 
 import static seedu.duke.commons.core.CommandFormat.LAUNCH_LESSON_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.promptFormat;
+import static seedu.duke.commons.util.StringUtil.removeFirstParam;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
 import static seedu.duke.logic.parser.ParserUtil.parseToZeroIndex;
-import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
 //@@author richwill28
 public class LaunchCommandParser {
