@@ -419,7 +419,13 @@ public class Ui {
 
     public static void printUpdateTaskDescription(Task t) {
         System.out.println("Task is updated with a new description."
-                + System.lineSeparator() + "This is your new Task:"
+                + System.lineSeparator() + "This is your updated Task:"
+                + System.lineSeparator() + t);
+    }
+
+    public static void printUpdateTaskDeadline(Task t) {
+        System.out.println("Task is updated with a new deadline."
+                + System.lineSeparator() + "This is your updated Task:"
                 + System.lineSeparator() + t);
     }
 
