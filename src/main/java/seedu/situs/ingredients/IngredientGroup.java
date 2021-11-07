@@ -52,6 +52,7 @@ public class IngredientGroup {
         return totalAmount;
     }
 
+    //@@author AayushMathur7
     /**
      * Updates total amount of ingredient.
      * @param currentAmount previous amount of ingredient with specific expiry date
@@ -62,6 +63,7 @@ public class IngredientGroup {
         this.totalAmount -= currentAmount;
     }
 
+    //@@author AayushMathur7
     /**
      * Subtracts amount from total amount.
      * @param subtractAmount amount to subtract from total amount

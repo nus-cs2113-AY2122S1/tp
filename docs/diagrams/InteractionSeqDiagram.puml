@@ -25,13 +25,13 @@ P -> P: parseAddCommand("add n/carrot a/1 e/2021-11-12")
 activate P
 P -> I **: Ingredient(carrot, 1, date)
 activate I
-return i
-P -> C **: AddCommand(i)
+return ingr
+P -> C **: AddCommand(ingr)
 activate C
 return
 P -> C: run()
 activate C
-C -> IL: add(i)
+C -> IL: add(ingr)
 activate IL
 IL -> S: writeIngredientsToMemory()
 activate S
@@ -43,6 +43,6 @@ return resultMsg
 return resultMsg
 M -> UI: printCommandOutput(resultMsg)
 activate UI
-UI --> U
+UI --> M
 deactivate UI
 @enduml

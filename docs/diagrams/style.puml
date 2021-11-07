@@ -24,8 +24,13 @@ skinparam DefaultTextAlignment center
 skinparam packageStyle Rectangle
 
 skinparam Class {
+    classFontSize 12
     BorderThickness 1
     BorderColor #FFFFFF
+}
+
+skinparam sequenceDiagram {
+    ParticipantFontSize 12
 }
 
 hide footbox

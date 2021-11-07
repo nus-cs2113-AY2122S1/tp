@@ -15,6 +15,6 @@ class XYZCommand #orchid {
 }
 
 XYZCommand --|> Command
-Parser "executes" --> XYZCommand
+Parser "executes" ..> XYZCommand
 
 @enduml

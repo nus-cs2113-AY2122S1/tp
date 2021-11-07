@@ -88,11 +88,14 @@ public class Situs {
                 UI.printCommandOutput(resultMsg);
             }
         }
+        exit();
+    }
+
+    public Situs() {
+        initialize();
     }
 
     public static void main(String[] args) {
-        initialize();
-        run();
-        exit();
+        new Situs().run();
     }
 }

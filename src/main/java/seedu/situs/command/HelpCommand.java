@@ -9,7 +9,7 @@ public class HelpCommand extends Command {
             + "\t1. add an ingredient - add n/INGREDIENT_NAME a/AMOUNT e/EXPIRY\n"
             + "\t2. list all ingredients - list\n"
             + "\t3. update an ingredient - update GROUP_INDEX.INGREDIENT_INDEX a/AMOUNT\n"
-            + "\t4. subtract an ingredient's stock - subtract GROUP_INDEX a/AMOUNT\n"
+            + "\t4. subtract an ingredient's stock - subtract n/NAME a/AMOUNT\n"
             + "\t5. delete an ingredient - delete GROUP_INDEX.INGREDIENT_INDEX\n"
             + "\t6. search ingredients by expiry - expire DATE\n"
             + "\t7. search ingredients by name - find INGREDIENT_NAMES\n"
