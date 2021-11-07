@@ -4,39 +4,48 @@ skinparam classAttributeIconSize 0
 skinparam groupInheritance 2
 
 ModuleStorage "1" ---* Storage
-    ModuleStorage : + readModuleList(InputStream inputStream) : ArrayList<Module>
-    ModuleStorage : - extractAttributes(String line) : String[]
+    ModuleStorage : - {static} logger: Logger
+    ModuleStorage : + readModuleList(inputStream: InputStream) : ArrayList<Module>
+    ModuleStorage : - extractAttributes(line: String) : String[]
 
 UserStorage <|-- SelectedUniversityStorage
 SelectedUniversityStorage "1" -----* Storage
-    SelectedUniversityStorage : + updateFile(UniversityList universityList)
-    SelectedUniversityStorage : + readFile(UniversityList universityMasterList, ModuleList moduleMasterList) : UniversityList
-    SelectedUniversityStorage : - updateMappings(ArrayList<ModuleMapping> moduleMappings, String line, ModuleList moduleMasterList, UniversityList universityMasterList, String universityName)
-    SelectedUniversityStorage : - updateUniversityList(String universityName, ArrayList<ModuleMapping> moduleMappings, UniversityList universitySelectedList, UniversityList universityMasterList)
-    SelectedUniversityStorage : - isMappingExist(ArrayList<ModuleMapping> mappings, ModuleMapping searchMapping) : boolean
+    SelectedUniversityStorage : - {static} logger: Logger
+    SelectedUniversityStorage : - {static} FILE_PATH: String
+    SelectedUniversityStorage : - {static} isMappingValid: boolean
+    SelectedUniversityStorage : - {static} isUniversityValid: boolean
+    SelectedUniversityStorage : + updateFile(universityList: UniversityList) : void
+    SelectedUniversityStorage : + readFile(universityMasterList: UniversityList , moduleMasterList: ModuleList) : UniversityList
+    SelectedUniversityStorage : - updateMappings(moduleMappings: ArrayList<ModuleMapping>, line: String, moduleMasterList: ModuleList, universityMasterList: UniversityList, universityName: String) : void
+    SelectedUniversityStorage : - updateUniversityList(universityName: String, moduleMappings: ArrayList<ModuleMapping>, universitySelectedList: UniversityList, universityMasterList: UniversityList) : void
+    SelectedUniversityStorage : - isMappingExist(mappings: ArrayList<ModuleMapping>, searchMapping: ModuleMapping) : boolean
 
 UserStorage <|-- SelectedModuleStorage
-SelectedModuleStorage "1" ------* Storage
-
-     SelectedModuleStorage : + updateFile(ModuleList moduleList)
-     SelectedModuleStorage : + readFile(ModuleList moduleMasterList) : ModuleList
-     SelectedModuleStorage : - updateList(ModuleList moduleList, String line, ModuleList moduleMasterList)
+SelectedModuleStorage "1" -----* Storage
+     SelectedModuleStorage : - {static} logger: Logger
+     SelectedModuleStorage : - {static} FILE_PATH: String
+     SelectedModuleStorage : - {static} isModuleValid: boolean
+     SelectedModuleStorage : + updateFile(moduleList: ModuleList) : void
+     SelectedModuleStorage : + readFile(moduleMasterList: ModuleList) : ModuleList
+     SelectedModuleStorage : - updateList(moduleList: ModuleList, line: String, moduleMasterList: ModuleList)
 
 UniversityStorage "1" ---* Storage
-    UniversityStorage : + readFile(InputStream inputStream, ModuleList moduleMasterList) : ArrayList<University>
-    UniversityStorage : - extractAttributes(String line) : String[]
-    UniversityStorage : - editMappedModuleCode(String[] attributes) : String[]
+    UniversityStorage : - {static} logger: Logger
+    UniversityStorage : + readFile(inputStream: InputStream, moduleMasterList: ModuleList) : ArrayList<University>
+    UniversityStorage : - extractAttributes(line: String) : String[]
+    UniversityStorage : - editMappedModuleCode(attributes: String[]) : String[]
 
 class UserStorage {
-    # loadFile(String filepath) : File
+    # loadFile(filepath: String) : File
 }
 
 class Storage {
+    - {static} logger: Logger
     + readModuleList() : ArrayList<Module>
-    + readUniversityList(ModuleList moduleMasterList) : ArrayList<University>
-    + readSelectedModuleList(ModuleList moduleMasterList) : ModuleList
-    + readSelectedUniversityList(UniversityList universityMasterList, ModuleList moduleMasterList) : UniversityList
-    + updateSelectedModuleList(ModuleList moduleList)
-    + updateSelectedUniversityList(UniversityList universityList)
+    + readUniversityList(moduleMasterList: ModuleList) : ArrayList<University>
+    + readSelectedModuleList(moduleMasterList: ModuleList) : ModuleList
+    + readSelectedUniversityList(universityMasterList: UniversityList, moduleMasterList: ModuleList) : UniversityList
+    + updateSelectedModuleList(moduleList: ModuleList)
+    + updateSelectedUniversityList(universityList: UniversityList)
 }
 @enduml
