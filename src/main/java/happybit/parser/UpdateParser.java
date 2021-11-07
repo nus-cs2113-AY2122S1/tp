@@ -24,18 +24,17 @@ public class UpdateParser extends Parser {
     private static final String ERROR_DATE_FORMAT = "Use the date format: 'ddMMyyyy'.";
     private static final String ERROR_INVALID_UPDATE_COMMAND = "There is no update command for goals in this format, "
             + "do check your parameters one more time.";
-    private static final String  ERROR_NO_FLAG_UPDATE_COMMAND = "Missing required flags for update command. "
+    private static final String ERROR_NO_REQUIRED_FLAGS_UPDATE_COMMAND = "Required flags for update command missing. "
             + "Please try again.";
     private static final String ERROR_INVALID_CHANGE_COMMAND = "There is no change command for habits in this format, "
             + "do check your parameters one more time.";
     private static final String ERROR_UPDATE_COMMAND_NO_GOAL_INDEX = "A goal index has to be provided with the "
             + "g/ flag for Update commands.";
     private static final String ERROR_CHANGE_COMMAND_MISSING_INDEXES = "A goal index and a habit index has to be "
-            + "provided using the g/ and h/ flags respectively for Change commands";
+            + "provided using the g/ and h/ flags respectively for Change commands.";
+    private static final String ERROR_MISSING_GOAL_HABIT_FLAGS_CHANG_COMMAND = "";
     private static final String ERROR_UPDATE_START_DATE = "The start date cannot be updated once set. Start on time!";
-    private static final String ERROR_FLAG_GOAL_INDEX_MISSING_INTEGER = "The '%1$s' flag is missing an index.";
-    private static final String ERROR_FLAG_GOAL_AND_HABIT_INDEX_MISSING_INTEGER = "Both/either the '%1$s' "
-            + "and/or the '%2$s' are/is missing an index.";
+    //todo delete/replace?
 
     private static final String ERROR_CHANGE_HABIT_NAME_WITH_UPDATE_COMMAND = "Are you perhaps trying to change a "
             + "habit name? Please use the 'change' command instead.";
@@ -62,11 +61,6 @@ public class UpdateParser extends Parser {
      */
     public static Command parseUpdateGoalCommands(String input) throws HaBitParserException {
         ArrayList<String> parameters = splitInput(input);
-        // check if contains FLAG_GOAL_INDEX
-        if (!isContainFlag(parameters, FLAG_GOAL_INDEX)) {
-            throw new HaBitParserException(ERROR_UPDATE_COMMAND_NO_GOAL_INDEX);
-        }
-        assert (input.contains(FLAG_GOAL_INDEX));
 
         // check if it contains n/, t/ and e/ flag
         // if yes, mark as 1 in int array
@@ -75,6 +69,10 @@ public class UpdateParser extends Parser {
         Date newGoalEndDate = null;
 
         int[] updateAttributes = getUpdateGoalAttributes(parameters);
+
+        assert (input.contains(FLAG_GOAL_INDEX) && (input.contains(FLAG_NAME)
+                || input.contains(FLAG_GOAL_TYPE) || input.contains(FLAG_END_DATE)));
+
         boolean isUpdateGoalName = (updateAttributes[0] == 1);
         boolean isUpdateGoalType = (updateAttributes[1] == 1);
         boolean isUpdateGoalEndDate = (updateAttributes[2] == 1);
@@ -103,16 +101,15 @@ public class UpdateParser extends Parser {
      */
     public static Command parseUpdateHabitCommands(String input) throws HaBitParserException {
         ArrayList<String> parameters = splitInput(input);
-        if (!isContainFlag(parameters, FLAG_GOAL_INDEX) || !isContainFlag(parameters, FLAG_HABIT_INDEX)) {
-            throw new HaBitParserException(ERROR_CHANGE_COMMAND_MISSING_INDEXES);
-        }
-        assert (input.contains(FLAG_GOAL_INDEX));
-        assert (input.contains(FLAG_HABIT_INDEX));
 
         String newHabitName = null;
         int newHabitInterval = 0;
 
         int[] updateAttributes = getUpdateHabitAttributes(parameters);
+
+        assert (input.contains(FLAG_GOAL_INDEX) && input.contains(FLAG_HABIT_INDEX)
+                && (input.contains(FLAG_NAME) || input.contains(FLAG_INTERVAL)));
+
         boolean isUpdateHabitName = (updateAttributes[0] == 1);
         boolean isUpdateHabitInterval = (updateAttributes[1] == 1);
 
@@ -145,7 +142,7 @@ public class UpdateParser extends Parser {
      *
      * @param parameters ArrayList of parameters of user input.
      * @return ArrayList containing 1s or 0s that represent the presence or absence of a flag.
-     * @throws HaBitParserException Thrown if user input does not contain any flags.
+     * @throws HaBitParserException Thrown if user input does not contain required information.
      */
     private static int[] getUpdateGoalAttributes(ArrayList<String> parameters) throws HaBitParserException {
         int[] updateAttributes = new int[3];
@@ -159,10 +156,15 @@ public class UpdateParser extends Parser {
         if (isContainFlag(parameters, FLAG_END_DATE)) {
             updateAttributes[2] = 1;
         }
-        if (nothingToUpdate((updateAttributes)) && isContainFlag(parameters, FLAG_GOAL_INDEX)) {
-            throw new HaBitParserException(String.format(ERROR_FLAG_GOAL_INDEX_MISSING_INTEGER, FLAG_GOAL_INDEX));
-        } else if (nothingToUpdate(updateAttributes)) {
-            throw new HaBitParserException(ERROR_NO_FLAG_UPDATE_COMMAND);
+
+        if (nothingToUpdate(updateAttributes)) {
+
+            int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
+            if (isContainFlag(parameters, FLAG_HABIT_INDEX) && isContainFlag(parameters, FLAG_INTERVAL)) {
+                throw new HaBitParserException(ERROR_INVALID_UPDATE_COMMAND);
+            } else if (isContainFlag(parameters, FLAG_GOAL_INDEX + (goalIndex + 1))) {
+                throw new HaBitParserException(ERROR_NO_REQUIRED_FLAGS_UPDATE_COMMAND);
+            }
         }
         return updateAttributes;
     }
@@ -209,8 +211,19 @@ public class UpdateParser extends Parser {
             updateAttributes[1] = 1;
         }
         if (nothingToUpdate(updateAttributes)) {
-            if (isContainFlag(parameters, FLAG_GOAL_INDEX) && isContainFlag(parameters, FLAG_HABIT_INDEX)) {
-                throw new HaBitParserException(ERROR_FLAG_GOAL_AND_HABIT_INDEX_MISSING_INTEGER);
+
+            if (!isContainFlag(parameters, FLAG_GOAL_INDEX) && !isContainFlag(parameters, FLAG_HABIT_INDEX)) {
+                throw new HaBitParserException(ERROR_CHANGE_COMMAND_MISSING_INDEXES);
+            }
+
+            int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
+            int habitIndex = getIndex(parameters, FLAG_HABIT_INDEX);
+
+            if (isContainFlag(parameters, FLAG_GOAL_TYPE) || isContainFlag(parameters, FLAG_END_DATE)) {
+                throw new HaBitParserException(ERROR_INVALID_CHANGE_COMMAND);
+            } else if (isContainFlag(parameters, FLAG_GOAL_INDEX + (goalIndex + 1))
+                    && isContainFlag(parameters, FLAG_HABIT_INDEX + (habitIndex + 1))) {
+                throw new HaBitParserException(ERROR_NO_REQUIRED_FLAGS_UPDATE_COMMAND);
             } else {
                 throw new HaBitParserException(ERROR_INVALID_CHANGE_COMMAND);
             }
