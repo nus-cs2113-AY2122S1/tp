@@ -44,7 +44,7 @@ public class ResetCommand extends Command {
 
             message = MESSAGE_DATA_REMOVED;
         } else {
-            message = MESSAGE_ABORT;
+            message = MESSAGE_ABORTED;
         }
 
         ui.printMessage(String.format("\n%s", message), false);
