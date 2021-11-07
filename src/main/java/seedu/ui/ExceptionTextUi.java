@@ -376,7 +376,8 @@ public class ExceptionTextUi {
                 + "Rules for email id :\n"
                 + "    * Lowercase and uppercase letters allowed\n"
                 + "    * Numbers, underscore, hyphen and dot allowed\n"
-                + "    * @ cannot be at the start or end and only one allowed";
+                + "    * Only one @ character allowed\n"
+                + "    * Email cannot start or end with a symbol";
         printDoubleLineMessage(message);
     }
 

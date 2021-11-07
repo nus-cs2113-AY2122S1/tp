@@ -110,7 +110,8 @@ The email id is not correctly formatted,
 Rules for email id :
     * Lowercase and uppercase letters allowed
     * Numbers, underscore, hyphen and dot allowed
-    * @ cannot be at the start or end and only one allowed
+    * Only one @ character allowed
+    * Email cannot start or end with a symbol
 ____________________________________________________________
 
 ____________________________________________________________
@@ -547,7 +548,8 @@ The email id is not correctly formatted,
 Rules for email id :
     * Lowercase and uppercase letters allowed
     * Numbers, underscore, hyphen and dot allowed
-    * @ cannot be at the start or end and only one allowed
+    * Only one @ character allowed
+    * Email cannot start or end with a symbol
 ____________________________________________________________
 
 ____________________________________________________________
