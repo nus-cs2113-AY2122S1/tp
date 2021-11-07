@@ -6,7 +6,7 @@ This is a student project for a university software development course and I am 
 
 Given below are my contributions to the project.
 
-Code contributed: more than 2000 lines of
+Code contributed: more than 2300 lines of
 code. [RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=deonchung&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25)
 ### Features
 
@@ -103,6 +103,7 @@ code. [RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=deo
 
 * Attended weekly team meetings.
 * Release management.
+* Documentation of acknowledgement, setting up environment, user stories and instruction for manual testing in DG.
 * Pull Requests reviewed with non-trivial review comments. [[#298](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/298)]
 
 ### Community
