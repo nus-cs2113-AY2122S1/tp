@@ -288,8 +288,8 @@ Displays all available module mappings for all the universities in the selected 
 
 #### Format: `searchmap all`
 
-* Example 1
-  Input: `searchmap all`
+* Example 1  
+  Input: `searchmap all`  
   Expected Output: 
 ```
 Potential mappings for Aarhus School of Business [1]  :
@@ -422,7 +422,7 @@ Look for modules with module codes that matches the user entered keyword.
 
 Remove a partner university from the user selected university list.
 
-#### Format: `remove /uni <UNIVERSITY_INDEX>` `remove /uni <UNIVERSITY_NAME` 
+#### Format: `remove /uni <UNIVERSITY_INDEX>` `remove /uni <UNIVERSITY_NAME>` 
 
 * Example 1: using index   
 Input: `remove /uni 4`   
