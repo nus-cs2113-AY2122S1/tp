@@ -546,7 +546,7 @@ commands.
 
 #### Hide a patient
 
-* Refer to [this](#List-information-of-all-current-patients) to understand how `hide` affects `list`.
+* Refer to [this](#list-information-of-all-current-patients) to understand how `hide` affects `list`.
 * Feel free to test `hide`, `show` and `list` together.
 
 1. Hide a patient in the list.
@@ -560,7 +560,7 @@ commands.
 
 #### Show a patient
 
-* Refer to [this](#List-information-of-all-current-patients) to understand how `show` affects `list`
+* Refer to [this](#list-information-of-all-current-patients) to understand how `show` affects `list`
 * Feel free to test `hide`, `show` and `list` together.
 
 1. Show a previously hidden patient in the list.
