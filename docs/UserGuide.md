@@ -1064,6 +1064,7 @@ when **not** using the program. It is easy to make mistakes when editing the `cs
 
 #### When editing csv files
 
+<<<<<<< HEAD
 - `.csv` files **must not** be open concurrently while Stonks XD is running. In other words, never have two programs 
 writing / reading the `.csv` files at the same time. This will very likely cause a saving / loading error and 
 lost of data.
@@ -1087,6 +1088,19 @@ Interface, as specified above.
   specified ealier on in the user guide.
 
 
+=======
+- `.csv` files should not be open concurrently while Stonks XD is running. In other words, never have two programs 
+writing / reading the `.csv` files at the same time. This will very likely cause a saving error and loss of data.
+- Restrictions and rules for different variables are the same as how you would enter them in the CLI, as specified 
+above:<br></br>
+  - For example, when editing an expense entry in `StonksXD_Entries.csv`, `entry_description` should not be blank.
+  - Another example, when editing an income entry in `StonksXD_Entries.csv`, `amount` has to be a positive number and 
+  less than 1,000,000.
+  - Another example, when editing `threshold` in `StonksXD_Settings.csv`, ensure it is between 0 and 1. 
+  - Another example, when editing an expense entry in `StonksXD_Entries.csv`, category should be the ones available and 
+
+  specified earlier on in the user guide.
+>>>>>>> 774198baf9abb04eb64e363849dd33919decc8ed
 - Do not alter / delete the headers of `.csv` files. Stonks XD is able to minimise the damage if you do so but to 
 ensure your data is saved / loaded properly, please do not edit anything unexpected.
 
@@ -1101,6 +1115,13 @@ considered corrupted and not be loaded into Stonks XD.
   cause all your entries and budgets to be recognised as a different currency.
 
 
+<<<<<<< HEAD
+=======
+- Do not edit the amount of your expenses / incomes drastically such that they exceed the limit per entry or the 
+total limit of 100,000,000,000 for expense / income. Entries that cause you to exceed either limit will be considered 
+corrupted.
+cause all your entries and budgets to be recognised as a different currency.
+>>>>>>> 774198baf9abb04eb64e363849dd33919decc8ed
 - Do not edit the amount of your entries drastically such that they exceed the max amount per entry or the 
 total limit of 100,000,000,000 for expenses / incomes. Entries that cause you to exceed either of the 2 limit will be 
 considered corrupted and not be loaded.
