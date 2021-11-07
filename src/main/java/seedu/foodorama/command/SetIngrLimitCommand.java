@@ -8,9 +8,18 @@ import seedu.foodorama.exceptions.FoodoramaException;
 
 import java.util.ArrayList;
 
+
+/**
+ * Represents the Command to set the weight limit of an ingredient in storage
+ * because it is not possible to have an unlimited amount of ingredients
+ */
 public class SetIngrLimitCommand extends Command {
     private static final Ui UI = new Ui();
 
+    /**
+     * @param parameters
+     * @throws FoodoramaException
+     */
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         String ingr = parameters.get(0);

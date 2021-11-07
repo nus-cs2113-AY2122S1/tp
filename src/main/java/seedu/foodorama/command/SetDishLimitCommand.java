@@ -7,6 +7,9 @@ import seedu.foodorama.exceptions.FoodoramaException;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ */
 public class SetDishLimitCommand extends Command {
     private static final Ui UI = new Ui();
 
