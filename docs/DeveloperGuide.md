@@ -314,7 +314,8 @@ The implementation of the Edit function allows the User to edit several
 instance variables of the Dishes and Ingredients present in the DishList and
 IngredientList.
 
-![](images/edit_dish_name_sequence_diagram.png)
+![](images/edit_dish_name_sequence.png)
+
 This Sequence Diagram shows how the `EditDishNameCommand` class functions.
 
 Currently the User is able to edit the following:
