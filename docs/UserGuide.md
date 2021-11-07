@@ -215,6 +215,9 @@ Expected Output: <br>
 <hr>
 
 ### Assessment
+> 💡 **Notes:**<br />
+> If multiple input fields are incorrect, only one of the errors will be explicitly shown.
+> For decimal values, only up to 2 decimal places will be displayed.
 #### Listing all assessments in a class: `list_assessments`
 List all assessments in a class.
 
@@ -225,6 +228,8 @@ Examples:
 * `list_assessments c/CS2113T-F12`
 * `list_assessments c/CS2101-C03`
 
+Expected Output: <br>
+![img.png](images/assessment/ListAssessmentsCommand.PNG)
 <br>
 
 #### Adding an assessment to a class: `add_assessment`
@@ -240,6 +245,8 @@ Examples:
 * `add_assessment c/CS2101-C03 n/OP1 m/20 w/10`
 * `add_assessment c/CS2101-C03 n/OP2 m/25 w/15`
 
+Expected Output: <br>
+![img.png](images/assessment/AddAssessmentCommand.PNG)
 <br>
 
 #### Editing an assessment in a class: `edit_assessment`
@@ -258,9 +265,11 @@ Format: `edit_assessment c/<CLASS_ID> a/<ASSESSMENT_NAME> [n/<NEW_ASSESSMENT_NAM
 > * `NEW_WEIGHTAGE`
 
 Examples:
-* `edit_assessment c/CS2101-C03 n/OP1 m/20 w/10`
-* `edit_assessment c/CS2101-C03 n/OP2 nn/UGDG`
+* `edit_assessment c/CS2101-C03 a/OP1 m/30 w/15`
+* `edit_assessment c/CS2101-C03 a/OP2 n/UGDG`
 
+Expected Output: <br>
+![img.png](images/assessment/EditAssessmentCommand.PNG)
 <br>
 
 #### Deleting an assessment from a class: `delete_assessment`
@@ -271,9 +280,11 @@ Format: `delete_assessment c/<CLASS_ID> a/<ASSESSMENT_NAME>`
 * `ASSESSMENT_NAME` refers to the name of the assessment (e.g. Midterm, Assignment 1, etc.).
 
 Examples:
-* `delete_assessment c/CS2101-C03 n/OP1`
-* `delete_assessment c/CS2101-C03 n/OP2`
+* `delete_assessment c/CS2101-C03 a/OP1`
+* `delete_assessment c/CS2101-C03 a/OP2`
 
+Expected Output: <br>
+![img.png](images/assessment/DeleteAssessmentCommand.PNG)
 <br>
 <hr>
 
