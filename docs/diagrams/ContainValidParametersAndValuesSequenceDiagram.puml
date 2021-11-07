@@ -33,11 +33,11 @@ activate command
     create xvalidator
     command -> xvalidator: new *Validator()
     command <-- xvalidator
-    command -> medicinevalidator: containsInvalidParametersAndValues()
-        medicinevalidator -> medicinevalidator: containsInvalidParameters()
+    command -> medicinevalidator: containsInvalidParametersAndValues(ui: Ui,\nparameters: LinkedHashMap<String, String>,\nmedicines: ArrayList<Medicine>, requiredParameters: String[],\noptionalParameters: String[], commandSyntax: String,\nrequiresOptionalParameters: boolean, validator: MedicineValidator)
+        medicinevalidator -> medicinevalidator: containsInvalidParameters(ui: Ui,\nparameters: LinkedHashMap<String, String>,\nrequiredParameters: String[],\noptionalParameters: String[],\ncommandSyntax: String,\nrequiresOptionalParameters: boolean)
         medicinevalidator --> medicinevalidator: isInvalidParameter
         opt !isInvalidParameter
-            medicinevalidator -> xvalidator: containsInvalidParameterValues()
+            medicinevalidator -> xvalidator: containsInvalidParameterValues(ui: Ui,\nparameters: LinkedHashMap<String,String>,\nmedicines: ArrayList<Medicine>,\ncommandSyntax: String,\ninvalidParameters: ArrayList<String>)
             medicinevalidator <-- xvalidator: isInvalidParameterValues
         end
         command <-- medicinevalidator: isInvalidInput
