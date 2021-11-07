@@ -1,6 +1,7 @@
 package taa.storage.deserializer;
 
 //@@author leyondlee
+
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -25,16 +26,22 @@ public class AttendanceDeserializer extends StorageDeserializer implements JsonD
         }
 
         JsonElement lessonNumberJson = jsonObject.get(MEMBER_LESSONNUMBER);
-        if (!Util.isStringInteger(lessonNumberJson.getAsString())) {
+        if (!Util.isStringInteger(getJsonElementAsString(lessonNumberJson))) {
             return null;
         }
         int lessonNumber = lessonNumberJson.getAsInt();
 
         JsonElement isPresentJson = jsonObject.get(MEMBER_ISPRESENT);
-        if (!Util.isStringBoolean(isPresentJson.getAsString())) {
+        String isPresentString = getJsonElementAsString(isPresentJson);
+        if (isPresentString == null) {
             return null;
         }
-        boolean isPresent = isPresentJson.getAsBoolean();
+
+        String isPresentStringLower = isPresentString.toLowerCase();
+        if (!Util.isStringBoolean(isPresentStringLower)) {
+            return null;
+        }
+        boolean isPresent = Boolean.parseBoolean(isPresentStringLower);
 
         Attendance attendance = new Attendance(lessonNumber, isPresent);
         if (!attendance.verify()) {

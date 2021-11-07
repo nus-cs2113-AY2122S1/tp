@@ -1,6 +1,7 @@
 package taa.command;
 
 //@@author leyondlee
+
 import taa.teachingclass.ClassList;
 import taa.storage.Storage;
 import taa.exception.TaaException;
@@ -29,7 +30,7 @@ public abstract class Command {
     public static final String COMMAND_DELETE_ASSESSMENT = "delete_assessment";
     public static final String COMMAND_EDIT_ASSESSMENT = "edit_assessment";
     public static final String COMMAND_LIST_MARKS = "list_marks";
-    public static final String COMMAND_AVERAGE_MARKS = "average_marks";
+    public static final String COMMAND_AVERAGE_MARK = "average_mark";
     public static final String COMMAND_MEDIAN_MARK = "median_mark";
     public static final String COMMAND_SET_MARKS = "set_mark";
     public static final String COMMAND_EDIT_MARK = "edit_mark";
@@ -37,7 +38,7 @@ public abstract class Command {
     public static final String COMMAND_SORT_BY_SCORES = "sort_by_scores";
     public static final String COMMAND_SET_COMMENT = "set_comment";
     public static final String COMMAND_DELETE_COMMENT = "delete_comment";
-    public static final String COMMAND_LIST_COMMENT = "list_comment";
+    public static final String COMMAND_LIST_COMMENT = "list_comments";
     public static final String COMMAND_HELP = "help";
     public static final String COMMAND_ARCHIVE = "archive";
     public static final String COMMAND_RESET = "reset";
@@ -50,13 +51,16 @@ public abstract class Command {
     protected static final String MESSAGE_INVALID_STUDENT_INDEX = "Invalid student index.";
     protected static final String MESSAGE_INVALID_LESSON_NUMBER = "Invalid lesson number.";
     protected static final String MESSAGE_INVALID_ASSESSMENT_NAME = "Invalid assessment name.";
-    protected static final String MESSAGE_INVALID_MARKS = "Invalid marks.";
+    protected static final String MESSAGE_INVALID_MARKS = "Invalid marks. Marks must be a double with at most 2 "
+            + "decimal points.";
     protected static final String MESSAGE_NO_STUDENTS = "There are no students in this class";
     protected static final String MESSAGE_NO_MARKS = "This student has not been marked yet.";
     protected static final String MESSAGE_ALREADY_MARKED = "This student has already been marked.";
-    protected static final String MESSAGE_NO_COMMENT_ADDED = "This student has no comment set";
+    protected static final String MESSAGE_NO_COMMENT_ADDED = "This student has no comment set.";
     protected static final String MESSAGE_DATA_REMOVED = "All data have been removed.";
-    protected static final String MESSAGE_ABORT = "Abort.";
+    protected static final String MESSAGE_ABORTED = "Aborted.";
+    protected static final String MESSAGE_INVALID_CLASS_ID = "Invalid class ID. Class ID cannot be empty or "
+            + "contain spaces.";
 
     // Common message formats
     protected static final String MESSAGE_FORMAT_GENERIC_USAGE = "%s";

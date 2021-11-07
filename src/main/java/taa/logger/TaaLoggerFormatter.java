@@ -1,6 +1,7 @@
 package taa.logger;
 
 //@@author leyondlee
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Formatter;
@@ -16,11 +17,11 @@ public class TaaLoggerFormatter extends Formatter {
         String dateTimeString = msToDateTimeString(record.getMillis());
 
         return String.format(
-            MESSAGE_FORMAT_LOG_OUTPUT,
-            record.getSequenceNumber(),
-            dateTimeString,
-            record.getLevel().getName(),
-            record.getMessage()
+                MESSAGE_FORMAT_LOG_OUTPUT,
+                record.getSequenceNumber(),
+                dateTimeString,
+                record.getLevel().getName(),
+                record.getMessage()
         );
     }
 

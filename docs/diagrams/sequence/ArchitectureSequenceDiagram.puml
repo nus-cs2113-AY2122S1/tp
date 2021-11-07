@@ -1,0 +1,108 @@
+@startuml
+!include SequenceStyle.puml
+
+Actor User as user
+Participant ":Ui" as ui
+Participant ":Taa" as taa
+Participant "<<class>>\nParser" as parser
+Participant ":Command" as command
+Participant "<<class>>\nUtil" as util
+Participant ":ClassList" as classList
+Participant ":Storage" as storage
+
+activate taa
+
+taa -> taa : loadClassListFromStorage()
+activate taa
+
+taa -> storage : load()
+activate storage
+
+create classList
+storage -> classList
+activate classList
+classList --> storage
+deactivate classList
+
+storage --> taa : classList:ClassList
+deactivate storage
+
+taa --> taa
+deactivate taa
+
+loop !isExit
+taa -> ui : getUserInput()
+activate ui
+
+user -> ui : User input command
+ui --> taa : userInput:String
+deactivate ui
+
+taa -> parser : parseUserInput(userInput:String)
+activate parser
+
+create command
+parser -> command
+activate command
+command --> parser
+deactivate command
+
+parser --> taa : command:Command
+deactivate parser
+
+taa -> command : checkArgument()
+activate command
+
+command -> util : isStringDouble(string:String)
+activate util
+util --> command : :boolean
+deactivate util
+
+alt Argument check failed
+command --> taa : throw :TaaException
+taa -> ui : printException(message:String)
+activate ui
+ui -> user : Display exception message
+ui --> taa
+deactivate ui
+
+else else
+command --> taa
+deactivate command
+
+taa -> command : execute(classList:ClassList,\n\tui:Ui, storage:Storage)
+activate command
+
+command -> classList : addClass(teachingClass:TeachingClass)
+activate classList
+classList --> command
+deactivate classList
+
+command -> storage : save(classList)
+activate storage
+storage --> command
+deactivate storage
+
+command -> ui : printMessage(message:String)
+activate ui
+ui -> user : Display message
+ui --> command
+deactivate ui
+
+command --> taa
+deactivate command
+
+taa -> command : isExit()
+activate command
+command --> taa : isExit:boolean
+deactivate command
+
+taa -[hidden]-> command
+destroy command
+taa -[hidden]-> command
+
+end
+end
+deactivate taa
+
+@enduml

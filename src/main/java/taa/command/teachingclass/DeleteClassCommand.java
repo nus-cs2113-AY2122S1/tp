@@ -1,6 +1,7 @@
 package taa.command.teachingclass;
 
 //@@author leyondlee
+
 import taa.Ui;
 import taa.teachingclass.ClassList;
 import taa.teachingclass.TeachingClass;

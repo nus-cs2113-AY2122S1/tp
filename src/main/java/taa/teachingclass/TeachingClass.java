@@ -33,7 +33,7 @@ public class TeachingClass implements ClassChecker {
     }
 
     public void setId(String id) {
-        this.id = id.toLowerCase();
+        this.id = id.toUpperCase();
     }
 
     public void setName(String name) {
@@ -68,7 +68,7 @@ public class TeachingClass implements ClassChecker {
     }
 
     /**
-     * Checks if the variables in the class are valid.
+     * Checks if the variables in the class are valid. Filters out invalid marks for each Student.
      *
      * @return true if valid, else false.
      */
@@ -80,21 +80,16 @@ public class TeachingClass implements ClassChecker {
 
         assert (assessmentList != null && studentList != null);
 
-        HashMap<String, Assessment> assessmentMap = new HashMap<>();
-        for (Assessment assessment : assessmentList.getAssessments()) {
-            assessmentMap.put(assessment.getName(), assessment);
-        }
-
         for (Student student : studentList.getStudents()) {
             ArrayList<String> invalidMarks = new ArrayList<>();
             HashMap<String, Double> results = student.getResults();
             for (String assessmentName : results.keySet()) {
-                if (!assessmentMap.containsKey(assessmentName)) {
+                Assessment assessment = assessmentList.getAssessment(assessmentName);
+                if (assessment == null) {
                     invalidMarks.add(assessmentName);
                     continue;
                 }
 
-                Assessment assessment = assessmentMap.get(assessmentName);
                 double marks = results.get(assessmentName);
                 if (!assessment.isMarksValid(marks)) {
                     invalidMarks.add(assessmentName);

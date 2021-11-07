@@ -49,12 +49,14 @@ public class DeleteCommentCommand extends Command {
      */
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
+        assert argumentMap.containsKey(KEY_CLASS_ID);
         String classId = argumentMap.get(KEY_CLASS_ID);
         TeachingClass teachingClass = classList.getClassWithId(classId);
         if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
+        assert argumentMap.containsKey(KEY_STUDENT_INDEX);
         String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
         assert Util.isStringInteger(studentIndexInput);
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;
@@ -70,7 +72,9 @@ public class DeleteCommentCommand extends Command {
 
         student.setComment("");
 
+        assert storage != null : "storage should exist.";
         storage.save(classList);
+        assert ui != null : "ui should exist.";
         ui.printMessage(String.format(MESSAGE_FORMAT_DELETE_COMMENT, student));
     }
 
@@ -78,8 +82,8 @@ public class DeleteCommentCommand extends Command {
     protected String getUsage() {
         return String.format(
                 MESSAGE_FORMAT_DELETE_COMMAND_USAGE,
-                COMMAND_SET_COMMENT,
-            KEY_CLASS_ID,
+                COMMAND_DELETE_COMMENT,
+                KEY_CLASS_ID,
                 KEY_STUDENT_INDEX
         );
     }

@@ -41,14 +41,24 @@ public class SortByScoresCommand extends Command {
         }
     }
 
+    /**
+     * Executes the sort_by_scores command and lists the students and their scores.
+     *
+     * @param classList The list of classes.
+     * @param ui         The ui instance to handle interactions with the user.
+     * @param storage    The storage instance to handle saving.
+     * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
+     */
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
+        assert argumentMap.containsKey(KEY_CLASS_ID);
         String classId = argumentMap.get(KEY_CLASS_ID);
         TeachingClass teachingClass = classList.getClassWithId(classId);
         if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
+        assert argumentMap.containsKey(KEY_SORT_ORDER);
         String order = argumentMap.get(KEY_SORT_ORDER);
         if (!order.equalsIgnoreCase("asc") && !order.equalsIgnoreCase("desc")) {
             throw new TaaException(MESSAGE_INVALID_SORT_ORDER);
@@ -82,44 +92,67 @@ public class SortByScoresCommand extends Command {
     }
 
     /**
-     * Returns a string with the student name and the marks associated with the student.
+     * Returns a string with the student and the marks associated with the student.
      *
-     * @param studentName Name of the student.
-     * @param score       Score of the student.
+     * @param student Student
+     * @param score Score of the student.
      * @return String with the name and score of the student separated with a vertical line.
      */
-    public String marksToString(String studentName, double score) {
-        return studentName + " | " + score;
+    public String marksToString(Student student, double score) {
+        return student + " | " + String.format("%.6f", score);
     }
 
+    /**
+     * Appends the student and the score to the string builder.
+     *
+     * @param stringBuilder The string builder
+     * @param student The student to be appended
+     * @param score The score of the student to be appended
+     */
     private void appendStudentScore(StringBuilder stringBuilder, Student student, double score) {
         stringBuilder.append("\n");
-        stringBuilder.append(marksToString(student.getName(), score));
+        stringBuilder.append(marksToString(student, score));
     }
 
+    /**
+     * Prints out the list of the students and their scores in ascending order.
+     *
+     * @param ui The ui instance to handle interactions with the user.
+     * @param students The ArrayList of students.
+     * @param unsortedScores The hashmap of students and their scores.
+     */
     private void printAscending(Ui ui, ArrayList<Student> students, HashMap<Student, Double> unsortedScores) {
         StringBuilder stringBuilder = new StringBuilder(MESSAGE_LIST_MARKS_HEADER);
         for (int i = 0; i < students.size(); i += 1) {
             appendStudentScore(stringBuilder, students.get(i), unsortedScores.get(students.get(i)));
         }
+        assert ui != null : "ui should exist.";
         ui.printMessage(stringBuilder.toString());
     }
 
+    /**
+     * Prints out the list of the students and their scores in descending order.
+     *
+     * @param ui The ui instance to handle interactions with the user.
+     * @param students The ArrayList of students.
+     * @param unsortedScores The hashmap of students and their scores.
+     */
     private void printDescending(Ui ui, ArrayList<Student> students, HashMap<Student, Double> unsortedScores) {
         StringBuilder stringBuilder = new StringBuilder(MESSAGE_LIST_MARKS_HEADER);
         for (int i = students.size() - 1; i >= 0; i -= 1) {
             appendStudentScore(stringBuilder, students.get(i), unsortedScores.get(students.get(i)));
         }
+        assert ui != null : "ui should exist.";
         ui.printMessage(stringBuilder.toString());
     }
 
     @Override
     protected String getUsage() {
         return String.format(
-        MESSAGE_FORMAT_SORT_SCORES_USAGE,
-        COMMAND_SORT_BY_SCORES,
+            MESSAGE_FORMAT_SORT_SCORES_USAGE,
+            COMMAND_SORT_BY_SCORES,
             KEY_CLASS_ID,
-        KEY_SORT_ORDER
+            KEY_SORT_ORDER
         );
     }
 }

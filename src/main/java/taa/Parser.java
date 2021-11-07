@@ -8,7 +8,7 @@ import taa.command.assessment.AddAssessmentCommand;
 import taa.command.attendance.ListLessonAttendanceCommand;
 import taa.command.teachingclass.AddClassCommand;
 import taa.command.student.AddStudentCommand;
-import taa.command.mark.AverageMarksCommand;
+import taa.command.mark.AverageMarkCommand;
 import taa.command.Command;
 import taa.command.assessment.DeleteAssessmentCommand;
 import taa.command.attendance.DeleteAttendanceCommand;
@@ -33,7 +33,7 @@ import taa.command.mark.SetMarkCommand;
 import taa.command.student.SortByScoresCommand;
 import taa.command.comment.SetCommentCommand;
 import taa.command.comment.DeleteCommentCommand;
-import taa.command.comment.ListCommentCommand;
+import taa.command.comment.ListCommentsCommand;
 import taa.exception.DuplicatedArgumentException;
 import taa.exception.TaaException;
 
@@ -50,7 +50,7 @@ public class Parser {
     private static final String MESSAGE_UNKNOWN_COMMAND = "Unknown Command";
 
     private static final String MESSAGE_FORMAT_INVALID_VALUE = "Invalid characters in value(s). Only alphanumeric "
-        + "characters, spaces, and certain special characters are allowed.\nAllowed special characters: %s";
+            + "characters, spaces, and certain special characters are allowed.\nAllowed special characters: %s";
 
     public static Command parseUserInput(String userInput) throws TaaException {
         String[] userInputSplit = splitFirstSpace(userInput);
@@ -147,8 +147,8 @@ public class Parser {
             command = new DeleteMarkCommand(argument);
             break;
 
-        case Command.COMMAND_AVERAGE_MARKS:
-            command = new AverageMarksCommand(argument);
+        case Command.COMMAND_AVERAGE_MARK:
+            command = new AverageMarkCommand(argument);
             break;
 
         case Command.COMMAND_MEDIAN_MARK:
@@ -172,7 +172,7 @@ public class Parser {
             break;
 
         case Command.COMMAND_LIST_COMMENT:
-            command = new ListCommentCommand(argument);
+            command = new ListCommentsCommand(argument);
             break;
 
         case Command.COMMAND_ARCHIVE:
@@ -190,13 +190,63 @@ public class Parser {
         return command;
     }
 
-    public static String[] splitFirstSpace(String string) {
+    private static String[] splitFirstSpace(String string) {
         String[] result = string.trim().split("\\s+", 2);
         if (result.length != 2) {
             return new String[]{result[0], ""};
         }
 
         return result;
+    }
+
+    /**
+     * Gets the argument indexes as a argumentKey:index pair.
+     *
+     * @param string       The string to find the indexes in.
+     * @param argumentKeys The argumentKeys to search for.
+     * @return A HashMap - argumentKey:index pair.
+     * @throws DuplicatedArgumentException if there are duplicated keys found.
+     */
+    private static HashMap<String, Integer> getArgumentIndexMap(String string, String[] argumentKeys)
+            throws DuplicatedArgumentException {
+        String argumentString = " " + string;
+        HashMap<String, Integer> argumentIndexMap = new HashMap<>();
+        ArrayList<String> duplicatedKeys = new ArrayList<>();
+        for (String key : argumentKeys) {
+            String searchString = String.format(" %s/", key);
+            int index = argumentString.indexOf(searchString);
+            if (index != -1) {
+                argumentIndexMap.put(key, index);
+
+                String trailingString = argumentString.substring(index + 3);
+                if (trailingString.contains(searchString)) {
+                    duplicatedKeys.add(key);
+                }
+            }
+        }
+
+        if (!duplicatedKeys.isEmpty()) {
+            throw new DuplicatedArgumentException(duplicatedKeys);
+        }
+
+        return argumentIndexMap;
+    }
+
+    /**
+     * Gets a sorted ArrayList of argument indexes.
+     *
+     * @param argumentIndexMap The argumentKey:index pair.
+     * @return A sorted ArrayList of indexes.
+     */
+    private static ArrayList<Integer> getSortedArgumentIndexes(HashMap<String, Integer> argumentIndexMap) {
+        ArrayList<Integer> argumentIndexes = new ArrayList<>();
+        for (String key : argumentIndexMap.keySet()) {
+            int index = argumentIndexMap.get(key);
+            argumentIndexes.add(index);
+        }
+        Collections.sort(argumentIndexes);
+
+        return argumentIndexes;
     }
 
     /**
@@ -210,7 +260,7 @@ public class Parser {
      *
      * @param string       The string to parse.
      * @param argumentKeys The argument keys to find.
-     * @return HashMap - argumentKey:argumentValue pair.
+     * @return A HashMap - argumentKey:argumentValue pair.
      * @throws TaaException if there are any duplicated keys found within string or value is invalid.
      */
     public static HashMap<String, String> getArgumentsFromString(String string, String[] argumentKeys,
@@ -219,29 +269,8 @@ public class Parser {
             return new HashMap<>();
         }
 
-        String argumentString = " " + string;
-        HashMap<String, Integer> argumentIndexMap = new HashMap<>();
-        ArrayList<Integer> argumentIndexes = new ArrayList<>();
-        ArrayList<String> duplicatedKeys = new ArrayList<>();
-        for (String key : argumentKeys) {
-            String searchString = String.format(" %s/", key);
-            int index = argumentString.indexOf(searchString);
-            if (index != -1) {
-                argumentIndexMap.put(key, index);
-                argumentIndexes.add(index);
-
-                String trailingString = argumentString.substring(index + 3);
-                if (trailingString.contains(searchString)) {
-                    duplicatedKeys.add(key);
-                }
-            }
-        }
-
-        if (!duplicatedKeys.isEmpty()) {
-            throw new DuplicatedArgumentException(duplicatedKeys);
-        }
-
-        Collections.sort(argumentIndexes);
+        HashMap<String, Integer> argumentIndexMap = getArgumentIndexMap(string, argumentKeys);
+        ArrayList<Integer> argumentIndexes = getSortedArgumentIndexes(argumentIndexMap);
 
         HashMap<String, String> result = new HashMap<>();
         for (String key : argumentIndexMap.keySet()) {
@@ -272,7 +301,17 @@ public class Parser {
         return result;
     }
 
+    /**
+     * Checks if a value is valid. Value is considered valid if it is empty or matches the regex pattern.
+     *
+     * @param value The value to check.
+     * @return true if it is valid, else false.
+     */
     public static boolean isValueValid(String value) {
+        if (value == null) {
+            return false;
+        }
+
         if (value.isEmpty()) {
             return true;
         }
@@ -292,7 +331,7 @@ public class Parser {
 
     /**
      * Converts character into a regex pattern string. Character is escaped if needed.
-     * Note: This method is not complete and may not escape all characters which may need to be escaped.
+     * Note: This method is incomplete and may not escape all characters which may need to be escaped.
      *
      * @param c The character to convert.
      * @return A regex pattern string.

@@ -1,5 +1,6 @@
 package taa.command.mark;
 
+//@@author jon-the-melon
 import taa.Ui;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
@@ -50,7 +51,7 @@ public class EditMarkCommand extends Command {
         }
 
         String marksInput = argumentMap.get(KEY_NEW_MARKS);
-        if (!Util.isStringDouble(marksInput)) {
+        if (!Util.isStringDouble(marksInput, 2)) {
             throw new TaaException(MESSAGE_INVALID_MARKS);
         }
     }

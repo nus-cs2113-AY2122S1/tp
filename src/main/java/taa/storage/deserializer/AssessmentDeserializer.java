@@ -1,6 +1,7 @@
 package taa.storage.deserializer;
 
 //@@author leyondlee
+
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -27,23 +28,23 @@ public class AssessmentDeserializer extends StorageDeserializer implements JsonD
         }
 
         JsonElement nameJson = jsonObject.get(MEMBER_NAME);
-        String name = nameJson.getAsString();
+        String name = getJsonElementAsString(nameJson);
 
         if (!Parser.isValueValid(name)) {
             return null;
         }
 
         JsonElement weightageJson = jsonObject.get(MEMBER_WEIGHTAGE);
-        if (!Util.isStringDouble(weightageJson.getAsString())) {
+        if (!Util.isStringDouble(getJsonElementAsString(weightageJson))) {
             return null;
         }
         double weightage = weightageJson.getAsDouble();
 
         JsonElement maximumMarksJson = jsonObject.get(MEMBER_MAXIMUM_MARKS);
-        if (!Util.isStringInteger(maximumMarksJson.getAsString())) {
+        if (!Util.isStringDouble(getJsonElementAsString(maximumMarksJson))) {
             return null;
         }
-        int maximumMarks = maximumMarksJson.getAsInt();
+        double maximumMarks = maximumMarksJson.getAsDouble();
 
         Assessment assessment = new Assessment(name, maximumMarks, weightage);
         if (!assessment.verify()) {

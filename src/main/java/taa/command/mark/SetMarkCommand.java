@@ -1,5 +1,6 @@
 package taa.command.mark;
 
+//@@author jon-the-melon
 import taa.teachingclass.TeachingClass;
 import taa.command.Command;
 import taa.storage.Storage;
@@ -53,7 +54,7 @@ public class SetMarkCommand extends Command {
         }
 
         String marksInput = argumentMap.get(KEY_MARKS);
-        if (!Util.isStringDouble(marksInput)) {
+        if (!Util.isStringDouble(marksInput, 2)) {
             throw new TaaException(MESSAGE_INVALID_MARKS);
         }
     }
@@ -68,6 +69,7 @@ public class SetMarkCommand extends Command {
      */
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
+
         String classId = argumentMap.get(KEY_CLASS_ID);
         TeachingClass teachingClass = classList.getClassWithId(classId);
         if (teachingClass == null) {

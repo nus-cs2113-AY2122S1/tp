@@ -1,6 +1,7 @@
 package taa.command;
 
 //@@author leyondlee
+
 import taa.Ui;
 import taa.teachingclass.ClassList;
 import taa.exception.TaaException;
@@ -10,8 +11,8 @@ public class ResetCommand extends Command {
     private static final String MESSAGE_NO_DATA = "There is no data to reset.";
 
     private static final String MESSAGE_FORMAT_CONFIRMATION_PROMPT = "Are you sure that you want to remove all data?\n"
-        + "WARNING: This action cannot be reversed.\n"
-        + "Type [%s] to continue: ";
+            + "WARNING: This action cannot be reversed.\n"
+            + "Type [%s] to continue: ";
 
     private static final String CONFIRM_VALUE = "yes";
 
@@ -43,7 +44,7 @@ public class ResetCommand extends Command {
 
             message = MESSAGE_DATA_REMOVED;
         } else {
-            message = MESSAGE_ABORT;
+            message = MESSAGE_ABORTED;
         }
 
         ui.printMessage(String.format("\n%s", message), false);
@@ -53,8 +54,8 @@ public class ResetCommand extends Command {
     @Override
     protected String getUsage() {
         return String.format(
-            MESSAGE_FORMAT_GENERIC_USAGE,
-            COMMAND_RESET
+                MESSAGE_FORMAT_GENERIC_USAGE,
+                COMMAND_RESET
         );
     }
 }

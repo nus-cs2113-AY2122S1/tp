@@ -1,6 +1,7 @@
 package taa.command;
 
 //@@author leyondlee
+
 import taa.Ui;
 import taa.command.comment.DeleteCommentCommand;
 import taa.teachingclass.ClassList;
@@ -11,7 +12,7 @@ import taa.command.assessment.ListAssessmentsCommand;
 import taa.command.attendance.DeleteAttendanceCommand;
 import taa.command.attendance.ListAttendanceCommand;
 import taa.command.attendance.SetAttendanceCommand;
-import taa.command.mark.AverageMarksCommand;
+import taa.command.mark.AverageMarkCommand;
 import taa.command.mark.DeleteMarkCommand;
 import taa.command.mark.EditMarkCommand;
 import taa.command.mark.ListMarksCommand;
@@ -25,7 +26,7 @@ import taa.command.student.AddStudentCommand;
 import taa.command.student.DeleteStudentCommand;
 import taa.command.student.EditStudentCommand;
 import taa.command.student.FindStudentCommand;
-import taa.command.comment.ListCommentCommand;
+import taa.command.comment.ListCommentsCommand;
 import taa.command.student.ListStudentsCommand;
 import taa.command.comment.SetCommentCommand;
 import taa.command.student.SortByScoresCommand;
@@ -88,7 +89,7 @@ public class HelpCommand extends Command {
             new SetMarkCommand(""),
             new EditMarkCommand(""),
             new DeleteMarkCommand(""),
-            new AverageMarksCommand(""),
+            new AverageMarkCommand(""),
             new MedianMarkCommand(""),
             new SortByScoresCommand("")
         };
@@ -102,7 +103,7 @@ public class HelpCommand extends Command {
         commandUsages.put(STRING_ATTENDANCE, getUsagesFromCommands(attendanceCommands));
 
         Command[] commentCommands = {
-            new ListCommentCommand(""),
+            new ListCommentsCommand(""),
             new SetCommentCommand(""),
             new DeleteCommentCommand("")
         };
@@ -163,8 +164,8 @@ public class HelpCommand extends Command {
     @Override
     protected String getUsage() {
         return String.format(
-            MESSAGE_FORMAT_GENERIC_USAGE,
-            COMMAND_HELP
+                MESSAGE_FORMAT_GENERIC_USAGE,
+                COMMAND_HELP
         );
     }
 }

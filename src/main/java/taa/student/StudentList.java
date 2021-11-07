@@ -4,6 +4,7 @@ package taa.student;
 import taa.ClassChecker;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class StudentList implements ClassChecker {
     private final ArrayList<Student> students;
@@ -78,16 +79,16 @@ public class StudentList implements ClassChecker {
      * @param keyword The keyword to search for.
      * @return A list of students with the keyword.
      */
-    public ArrayList<Student> findStudents(String keyword) {
+    public HashMap<Integer, Student> findStudents(String keyword) {
         String keywordLower = keyword.toLowerCase();
 
-        ArrayList<Student> studentsFound = new ArrayList<>();
-        for (Student student : students) {
-            String id = student.getId();
-            String name = student.getName();
+        HashMap<Integer, Student> studentsFound = new HashMap<>();
+        for (int i = 0; i < students.size(); i += 1) {
+            String id = students.get(i).getId();
+            String name = students.get(i).getName();
 
             if (id.toLowerCase().contains(keywordLower) || name.toLowerCase().contains(keywordLower)) {
-                studentsFound.add(student);
+                studentsFound.put(i, students.get(i));
             }
         }
 

@@ -49,24 +49,28 @@ public class DeleteStudentCommand extends Command {
      */
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
+        assert argumentMap.containsKey(KEY_CLASS_ID);
         String classId = argumentMap.get(KEY_CLASS_ID);
         TeachingClass teachingClass = classList.getClassWithId(classId);
         if (teachingClass == null) {
             throw new TaaException(MESSAGE_CLASS_NOT_FOUND);
         }
 
+        assert argumentMap.containsKey(KEY_STUDENT_INDEX);
         String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
         assert Util.isStringInteger(studentIndexInput);
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;
 
         StudentList studentList = teachingClass.getStudentList();
-        assert studentIndex >= 0 && studentIndex < teachingClass.getStudentList().getSize();
         Student student = studentList.deleteStudentAt(studentIndex);
         if (student == null) {
             throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
+        assert studentIndex >= 0 && studentIndex < teachingClass.getStudentList().getSize();
 
+        assert storage != null : "storage should exist.";
         storage.save(classList);
+        assert ui != null : "ui should exist.";
         ui.printMessage(String.format(MESSAGE_FORMAT_STUDENT_DELETED, classId, student));
     }
 

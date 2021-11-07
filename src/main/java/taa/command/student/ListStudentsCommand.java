@@ -43,6 +43,7 @@ public class ListStudentsCommand extends Command {
      */
     @Override
     public void execute(ClassList classList, Ui ui, Storage storage) throws TaaException {
+        assert argumentMap.containsKey(KEY_CLASS_ID);
         String classId = argumentMap.get(KEY_CLASS_ID);
         TeachingClass teachingClass = classList.getClassWithId(classId);
         if (teachingClass == null) {
@@ -57,6 +58,7 @@ public class ListStudentsCommand extends Command {
             message = String.format(MESSAGE_FORMAT_OUTPUT, teachingClass, studentList);
         }
 
+        assert ui != null : "ui should exist.";
         ui.printMessage(message);
     }
 

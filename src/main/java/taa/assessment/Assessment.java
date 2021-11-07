@@ -4,13 +4,13 @@ import taa.ClassChecker;
 
 public class Assessment implements ClassChecker {
     public static final double[] WEIGHTAGE_RANGE = {0, 100};
-    public static final int MINIMUM_MARKS = 0;
+    public static final double MINIMUM_MARKS = 0;
 
     private String name;
-    private int maximumMarks;
+    private double maximumMarks;
     private double weightage;
 
-    public Assessment(String name, int maximumMarks, double weightage) {
+    public Assessment(String name, double maximumMarks, double weightage) {
         this.name = name;
         this.maximumMarks = maximumMarks;
         this.weightage = weightage;
@@ -23,7 +23,19 @@ public class Assessment implements ClassChecker {
      * @return true if valid, else false.
      */
     public static boolean isWeightageWithinRange(double weightage) {
-        return (weightage > WEIGHTAGE_RANGE[0] && weightage <= WEIGHTAGE_RANGE[1]);
+        int lowerBoundary = Double.compare(weightage, WEIGHTAGE_RANGE[0]);
+        int upperBoundary = Double.compare(weightage, WEIGHTAGE_RANGE[1]);
+        //valid lower boundary values are >=0
+        //valid upper boundary values are <=0
+        boolean isValidLowerBoundary = lowerBoundary >= 0;
+        boolean isValidUpperBoundary = upperBoundary <= 0;
+        return (isValidLowerBoundary && isValidUpperBoundary);
+    }
+
+    public static boolean isMaximumMarksValid(double maximumMarks) {
+        int lowerBoundary = Double.compare(maximumMarks, MINIMUM_MARKS);
+        boolean isValidLowerBoundary = lowerBoundary >= 0;
+        return (isValidLowerBoundary);
     }
 
     public String getName() {
@@ -35,10 +47,14 @@ public class Assessment implements ClassChecker {
     }
 
     public boolean isMarksValid(double marks) {
-        return ((marks >= MINIMUM_MARKS) && (marks <= maximumMarks));
+        int lowerBoundary = Double.compare(marks, MINIMUM_MARKS);
+        int upperBoundary = Double.compare(marks, maximumMarks);
+        boolean isValidLowerBoundary = lowerBoundary >= 0;
+        boolean isValidUpperBoundary = upperBoundary <= 0;
+        return (isValidLowerBoundary && isValidUpperBoundary);
     }
 
-    public int getMaximumMarks() {
+    public double getMaximumMarks() {
         return maximumMarks;
     }
 
@@ -46,7 +62,7 @@ public class Assessment implements ClassChecker {
         this.name = name;
     }
 
-    public void setMaximumMarks(int maximumMarks) {
+    public void setMaximumMarks(double maximumMarks) {
         this.maximumMarks = maximumMarks;
     }
 
@@ -63,7 +79,7 @@ public class Assessment implements ClassChecker {
      */
     @Override
     public String toString() {
-        return String.format("%s (%d, %,.2f%%)", name, maximumMarks, weightage);
+        return String.format("%s (%,.2f, %,.2f%%)", name, maximumMarks, weightage);
     }
 
     /**
@@ -73,7 +89,9 @@ public class Assessment implements ClassChecker {
      */
     @Override
     public boolean verify() {
-        if (name.isEmpty() || !isWeightageWithinRange(weightage) || maximumMarks < MINIMUM_MARKS) {
+        int validMaximumMarks = Double.compare(maximumMarks, MINIMUM_MARKS);
+        boolean isValidMaximumMarks = validMaximumMarks >= 0;
+        if (name.isEmpty() || !isWeightageWithinRange(weightage) || !isValidMaximumMarks) {
             return false;
         }
 

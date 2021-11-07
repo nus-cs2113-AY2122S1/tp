@@ -130,6 +130,17 @@ public class Student implements ClassChecker {
     }
 
     /**
+     * Changes the assessment name in the results Hashmap from oldName to newName.
+     * @param oldName Previous assessment name
+     * @param newName New assessment name
+     */
+    public void changeAssessmentName(String oldName, String newName) {
+        double value = results.get(oldName);
+        results.remove(oldName);
+        results.put(newName, value);
+    }
+
+    /**
      * Overrides default toString method with the custom print message.
      *
      * @return the custom print message
