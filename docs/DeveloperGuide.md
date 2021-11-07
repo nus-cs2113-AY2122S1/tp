@@ -263,7 +263,7 @@ This component consist of the following classes:
 The parser component is made up of the following classes:
 
 <p align = "center">
-<img src="images/parser.png" width = "800" />
+<img src="images/parser.png" width = "1600" />
 </p>
 
 Parser component is used to make do the following:
