@@ -213,7 +213,7 @@ public class IngredientList {
 
         Scanner input = new Scanner(System.in);
         String newName = input.nextLine().toLowerCase();
-        while (isNumber(newName)) {
+        while (isNumber(newName) | isDouble(newName)) {
             UI.clearTerminalAndPrintNewPage();
             UI.printInvalidIngredientName();
             newName = input.nextLine().toLowerCase();
@@ -342,7 +342,7 @@ public class IngredientList {
         double ingredientWeightValue;
         while (loop == LOOP) {
             String confirmAdd = "e";
-            if (!isNumber(inputIngredientWeight)) {
+            if (!isDouble(inputIngredientWeight)) {
                 throw new FoodoramaException(UI.getInvalidNumberMsg());
             }
 
@@ -368,7 +368,7 @@ public class IngredientList {
                     ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
                 }
             }
-            if ((isNumber(inputIngredientWeight) && (ingredientWeightValue >= 0)
+            if ((isDouble(inputIngredientWeight) && (ingredientWeightValue >= 0)
                     && (ingredientWeightValue <= 10000)) | confirmAdd.startsWith(YES)) {
                 loop = EXIT;
             }
@@ -445,13 +445,28 @@ public class IngredientList {
     }
 
     /**
+     * Checks if the parameter numberString is a number.
+     *
+     * @param numberString the String to check if it is a number
+     * @return true is the String is a number, false if it is not a number
+     * @author Dniv-ra
+     */
+    public static boolean isNumber(String numberString) {
+        if (numberString.matches("^[\\d\\s.]+$")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Checks if given string can be converted into a number
      * @param numberString string to be checked
      * @return true if string can be converted into a double, false otherwise
      *
      * @author Rakesh12000
      */
-    public static boolean isNumber(String numberString) {
+    public static boolean isDouble(String numberString) {
         try {
             double numberInteger = Double.parseDouble(numberString);
             return true;
