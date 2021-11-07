@@ -17,6 +17,7 @@ SelectedUniversityStorage "1" -----* Storage
 
 UserStorage <|-- SelectedModuleStorage
 SelectedModuleStorage "1" ------* Storage
+
      SelectedModuleStorage : + updateFile(ModuleList moduleList)
      SelectedModuleStorage : + readFile(ModuleList moduleMasterList) : ModuleList
      SelectedModuleStorage : - updateList(ModuleList moduleList, String line, ModuleList moduleMasterList)
