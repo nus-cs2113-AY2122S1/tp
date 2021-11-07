@@ -16,6 +16,7 @@ public class WorldMap {
             graphList = loader.readData();
         } catch (WorldMapException e) {
             System.out.println(e.getMessage());
+            System.exit(0);
         }
     }
 
@@ -24,6 +25,7 @@ public class WorldMap {
             graphList = loader.readAltData();
         } catch (WorldMapException e) {
             System.out.println(e.getMessage());
+            System.exit(0);
         }
     }
 
