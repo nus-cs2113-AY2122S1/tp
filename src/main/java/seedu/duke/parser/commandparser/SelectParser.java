@@ -69,7 +69,7 @@ public abstract class SelectParser extends Parser {
         lastEventIndex = getIndexOfLastSelectedEvent();
         int index = getIndexFromCommand(command[2]);
         if (!isValidTaskIndex(lastEventIndex, taskIndexToSelect)) {
-            throw new InvalidIndexException("Invalid index range. Choose a number between 0 to "
+            throw new InvalidIndexException("Invalid index range. Choose a number between 1 to "
                     + eventCatalog.get(lastEventIndex).getTaskList().size() + ".");
         }
         taskIndexToSelect = index;
@@ -89,7 +89,7 @@ public abstract class SelectParser extends Parser {
     }
 
     private static boolean isValidTaskIndex(int eventIndex, int taskIndex) {
-        return taskIndex >= 0 && taskIndex < Duke.eventCatalog.get(eventIndex).getTaskList().size();
+        return taskIndex >= 0 && taskIndex < Duke.eventCatalog.get(eventIndex).getTaskList().size() - 1;
     }
 
     private static String getMemberNameFromCommand(String[] command) throws DukeException {
