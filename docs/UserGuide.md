@@ -187,7 +187,7 @@ Exits the LOTS program.
 |Delete|Format: `delete [PERSON_INDEX]/[FOOD_INDEX]`<br>Example: `delete 1/2` (Deletes the order of index ‘2’ from the person of index ‘1’.)|
 |Edit|Format: `edit [PERSON_INDEX]/[FOOD_INDEX] /q [QUANTITY]` <br>Example: `edit 3/1 /q 8` (Changes the quantity of the order with index '1' from the person of index '3' to 8.)|
 |Find|Format: `find /n [SEARCH_STRING]` <br>Example:`find /n drew` (Searches for names containing 'drew'.)|
-|Menu|Example: `menu`|
-|List|Example: `list`|
-|Bye|Example: `bye`|
+|Menu|Format: `menu`|
+|List|Format: `list`|
+|Bye|Format: `bye`|
 
