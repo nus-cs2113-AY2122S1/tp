@@ -1119,8 +1119,10 @@ Format: `graph dish`
 
 * 💡 *Note*:
     * `graph dish` does not require additional parameters. 
-    *  Due to the limitations of a CLI based application, the terminal is unable to print half a character and 
-  as a result the graphs are unable to display fractional values (e.g. 2.5 units is impossible)
+    * Due to the limitations of a CLI based application, the terminal is unable to print half a character and 
+      as a result the graphs are unable to display fractional values (e.g. 2.5 units is impossible)
+    * To circumvent this limitation we have added a bar that has a digit instead of a | inside to indicate fractional units
+      (e.g 4.5 units will have four bars followed by a bar that contains a 5). This is still only capable of representing up to one decimal place.
 
 Example of usage:
 
@@ -1139,9 +1141,9 @@ ____________________________________________________________
          [|]         [5]
          [|]         [|]
          [|]   [0]   [|]
-   [0]   [|]   [|]   [|]
+         [|]   [|]   [|]
    [|]   [|]   [|]   [|]
-    A     B     C     D
+    A     B     C     D 
 ____________________________________________________________
 ```
 
@@ -1157,8 +1159,10 @@ Format: `graph ingr`
 
 * 💡 *Note*:
     * `graph ingr` does not require additional parameters.
-    *  Due to the limitations of a CLI based application, the terminal is unable  to print half a character and
+    * Due to the limitations of a CLI based application, the terminal is unable  to print half a character and
        as a result the graphs are unable to display fractional values (e.g. 2.5 units is impossible)
+    * To circumvent this limitation we have added a bar that has a digit instead of a | inside to indicate fractional units
+      (e.g 4.9 units will have four bars followed by a bar that contains a 9). This is still only capable of representing up to one decimal place.
        
 Example of usage:
 

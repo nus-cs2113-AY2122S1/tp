@@ -228,6 +228,43 @@ it would be represented by 3 filled bars and the 4th bar will have a 3 within in
 
 ### Sort
 
+### Terminal refreshing
+The interface of the program utilizes the ClearScreen class to clear the terminal after every user input through the built-in `ProcessBuilder` Java class. Such a feature allows greater readability and focus for the user as the terminal will not be cluttered with past commands.
+`Ui` will call `ClearScreen.clearConsole()` method to clear the terminal.
+
+The ProcessBuilder class will send a respective command to the terminal depending on the Operating System of the user.
+The command it sends to the terminal is as follows:
+* `cls` for Windows CMD Terminals.
+* `clear` for Linux/MacOS Terminals.
+
+`ClearConsole()` Code Snippet:
+
+```
+ public static void clearConsole() {
+        try {
+            // Get current operating system
+            String getOS = System.getProperty("os.name");
+
+            if (getOS.contains("Windows")) {
+                // Try clear for Windows
+                // "/c" - execute string as command, "cls" -  Clear terminal
+                ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls");
+                Process startProcess = pb.inheritIO().start();
+                startProcess.waitFor();
+            } else {
+                // Try clear for MacOS/Linux
+                // "clear" - Clear terminal
+                ProcessBuilder pb = new ProcessBuilder("clear");
+                Process startProcess = pb.inheritIO().start();
+                startProcess.waitFor();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+```
+
+
 ## 📂 Product Scope
 
 Provides Developers with insights into our intended customers and the background to the problem to which
