@@ -20,6 +20,7 @@
   - [Listing all contacts](#List)
   - [Importing contacts](#Import)
   - [Contact index parser](#IndexParser)
+  - [Design Considerations](#DesignConsiderations)
 - [Product Scope](#scope)
   - [Target user profile](#target)
   - [Value proposition](#value)
@@ -38,6 +39,8 @@
 - Inspiration for App Idea and OOP Structure: [AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2) <br />
 - Inspiration for User Guide and Developer Guide: AddressBook (Level 3) [[DG]](https://se-education.org/addressbook-level3/DeveloperGuide.html) <br />
   [[UG]](https://se-education.org/addressbook-level3/UserGuide.html)
+- Inspiration for Regular expression for [GitHub username](https://github.com/shinnn/github-username-regex) validation
+- Regular expression for [email](https://emailregex.com/) validation
 - [Converting text for ConTech](https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20) <br />
 - [GitHub Markdown Emoji Syntax](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md) for User Guide: <br />
 - [PlantUML Tutorial](https://se-education.org/guides/tutorials/plantUml.html) <br />
@@ -271,11 +274,21 @@ diagram below shows how the `SearchContactCommand` is executed.
 ![Search Sequence Diagram](images/SearchContactCommandSequenceDiagram.png)
 
 ### <a name="List"></a>Listing all contacts: `ls`
-This feature is processed using `MainParser`. The control is sent to `ListContactsCommand` under `Command` to execute the
-command which uses a loop to get the Contact object at every available index and print it using the `printContactWithIndex`
-function in `TextUi` class.
+This feature is processed under `ListContactsCommand`. The feature allows the user to list all their stored contacts
+in an easy to understand manner, by entering the command `ls`. The output is the names of all the contacts stored
+with their respective indexes. 
+
+The user’s input is parsed in `MainParser` which invokes the `execute` method in `ListContactsCommand`. The sequence
+diagram below shows the series of steps to obtain and print all the contacts.
 
 ![List Sequence Diagram](images/ListContactsCommandSequenceDiagram.png)
+
+The `execute` method gets the list size from `ConatactList` class using the `getListSize` method.
+If the `contactListSize` is `0` it prints an error message from the `TextUI` class using the method
+`contactsEmptyListMessage`. 
+If the list is not empty the method `listAllContacts` uses a loop to get the `Contact` object at 
+every available index and print it using the `printContactWithIndex`
+method in `TextUi` class.
 
 ### <a name="Import"></a>Importing contacts: `import`
 This feature is processed using the `ImportContactCommand`. This feature allows a user to import contacts over from 
@@ -317,6 +330,27 @@ specified contact index given as an integer, which will then be used in the exec
 For example, if `edit 2 -n Marcus Bobo` is given as the input, the Index Parser will identify the contact index to be `2`
 and pass the contact index to the execution of the `edit` command accordingly.
 
+### <a name="DesignConsiderations"></a>Design Considerations
+
+**Aspect: Implementation of removing fields of a contact**
+
+* **Alternative 1: Implement under `edit` feature**
+  <br /> Specify empty flags while using the `edit` command and the program would
+  delete those fields from the contact<br />
+  Example : `edit 2 -n Jim -e -g` would change the name field for contact and would remove the email
+  and github field from the contact.
+
+    * Pros: Editing and removing fields can be done in one step.
+    * Cons: Difficult to implement and makes the program more error-prone as flag descriptions can now be empty.
+
+* **Alternative 2 (current choice): Implement under `rm` feature**
+  <br /> Specify flags while using the `rm` command and the program would delete those fields from the contact<br />
+  Example : `rm 2 -e -g` would remove the email and github field from the contact at index 2.
+
+    * Pros: Easy to implement as rm is a much simpler feature which only takes an index.
+      Much easier exception handling also and thus less error-prone.
+    * Cons: Less user intuitive and takes two steps when the user wants to edit a contact and also delete fields
+    
 
 ## <a name="scope"></a>Product scope
 
@@ -516,7 +550,8 @@ exploratory testing.
        Rules for email id :
            * Lowercase letters only
            * Numbers, underscore, hyphen and dot allowed
-           * @ cannot be at the start or end
+           * Only one @ character allowed
+           * Email cannot start or end with a symbol
        ____________________________________________________________
        ``` 
 
