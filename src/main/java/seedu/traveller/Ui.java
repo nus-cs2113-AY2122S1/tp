@@ -61,27 +61,7 @@ public class Ui {
         }
     }
 
-    public void printExit() {
-        System.out.println("\tBye! Have fun on your trips! :)");
-    }
-
-    public void printNewTripCreated(String tripName) {
-        assert !tripName.equals("all") : "'all' is an invalid tripName.";
-        assert !tripName.equals("") : "'' is an invalid tripName.";
-        System.out.println("\tYou have just created a new trip called " + tripName + ".");
-    }
-
-    public void printDelete(String tripName) {
-        System.out.println("\tYou have just deleted a trip called " + tripName + ".");
-    }
-
-    public void printDeleteDay(String tripName, int index) {
-        System.out.println("\tYou have just deleted day " + index + " of " + tripName + ".");
-    }
-
-    public void printDeleteItem(String tripName, int dayIndex, int itemIndex) {
-        System.out.println("\tYou have just deleted item " + itemIndex + " of " + tripName + " day " + dayIndex + ".");
-    }
+   
 
     public void printSearchItem(String tripName, int dayIndex, String itemKey, ArrayList<Item> keyString) {
         System.out.println("\tYou have just search item keyword " + itemKey
