@@ -54,15 +54,16 @@ class FindCommandTest {
         String expectedOutput = "Please add -e to find event(s)!" + System.getProperty("line.separator");
         assertEquals(expectedOutput, outContent.toString());
     }
-    //
-    //    @Test
-    //    void findResult_noEventsFound_correctErrorMessage() throws DukeException, NoCommandAttributesException,
-    //            InvalidItemTypeException {
-    //        createEventsList();
-    //        Command command = Parser.parseCommand("find -e abc");
-    //        String expectedOutput = "No matching events found!";
-    //        assertEquals(expectedOutput, outContent.toString());
-    //    }
+
+    @Test
+    void findResult_noEventsFound_correctErrorMessage() throws DukeException, NoCommandAttributesException,
+            InvalidItemTypeException {
+        createEventsList();
+        Command command = Parser.parseCommand("find -e abc");
+        CommandResult feedback = command.execute();
+        String expectedOutput = "No matching events found!";
+        assertEquals(expectedOutput, feedback.feedbackToUser);
+    }
 
     private void createEventsList() throws DukeException {
         eventCatalog.clear();
