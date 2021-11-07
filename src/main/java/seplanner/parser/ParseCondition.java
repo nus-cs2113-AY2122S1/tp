@@ -84,7 +84,7 @@ public class ParseCondition {
     }
 
     /**
-     * Checks whether the index of university from user is valid
+     * Checks whether the index of university from user is valid.
      * @param uniIndex Index from user
      * @param universityMasterList The university master list
      * @return True if the index is out of bounds, false otherwise
@@ -96,7 +96,7 @@ public class ParseCondition {
     }
 
     /**
-     * Checks whether the index of module from user is valid
+     * Checks whether the index of module from user is valid.
      * @param modIndex Index from user
      * @param moduleMasterList The module master list
      * @return True if the index is out of bounds, false otherwise
@@ -108,15 +108,15 @@ public class ParseCondition {
     }
 
     /**
-     * Checks whether the index of mapping to add from user for a specific university is valid
+     * Checks whether the index of mapping to add from user for a specific university is valid.
      * @param uniIndex Index of university from user
      * @param mapIndex Index of mapping from user
      * @param universityMasterList The university master list
      * @param moduleSelectedList The selected module list
      * @return True if the index is out of bounds, false otherwise
      */
-    public static boolean isAddedMappingIndexOutOfBounds(int uniIndex, int mapIndex, UniversityList universityMasterList,
-                                             ModuleList moduleSelectedList) {
+    public static boolean isAddedMappingIndexOutOfBounds(int uniIndex, int mapIndex,
+                          UniversityList universityMasterList, ModuleList moduleSelectedList) {
         University uni = universityMasterList.get(uniIndex - 1);
         int mapSize = uni.getSelectedMappingListSize(moduleSelectedList);
         boolean isExceedUpperBound = mapIndex > mapSize;
@@ -125,15 +125,15 @@ public class ParseCondition {
     }
 
     /**
-     * Checks whether the index of mapping to remove from user for a specific university is valid
+     * Checks whether the index of mapping to remove from user for a specific university is valid.
      * @param uniIndex Index of university from user
      * @param mapIndex Index of mapping from user
      * @param universityMasterList The university master list
      * @param universitySelectedList The selected university list
      * @return True if the index is out of bounds, false otherwise
      */
-    public static boolean isRemovedMappingIndexOutOfBounds(int uniIndex, int mapIndex, UniversityList universityMasterList,
-                                             UniversityList universitySelectedList) {
+    public static boolean isRemovedMappingIndexOutOfBounds(int uniIndex, int mapIndex,
+                          UniversityList universityMasterList, UniversityList universitySelectedList) {
         University uniMasterObject = universityMasterList.get(uniIndex - 1);
         University uni = universitySelectedList.getUniversity(uniMasterObject.getName());
         int mapSize = uni.getList().size();
@@ -143,7 +143,7 @@ public class ParseCondition {
     }
 
     /**
-     * Checks whether university with the given name exists
+     * Checks whether university with the given name exists.
      * @param universityMasterList The university master list
      * @param uniName Name of the university
      * @return True if university with given name exists, false otherwise
@@ -153,7 +153,7 @@ public class ParseCondition {
     }
 
     /**
-     * Checks whether university with given name has already been added to the selected list
+     * Checks whether university with given name has already been added to the selected list.
      * @param universitySelectedList The selected university list
      * @param uniName Name of the university
      * @return True if the university has already been added, false otherwise
@@ -163,7 +163,7 @@ public class ParseCondition {
     }
 
     /**
-     * Checks whether module has already been added in the selected list
+     * Checks whether module has already been added in the selected list.
      * @param moduleSelectedList The selected module list
      * @param module The module object
      * @return True if the module has been added, false otherwise
@@ -174,7 +174,7 @@ public class ParseCondition {
     }
 
     /**
-     * Checks whether the mapping from user has already been added for the university
+     * Checks whether the mapping from user has already been added for the university.
      * @param university The university object from the selected list
      * @param uniIndex Index of the university
      * @param mapIndex Index of the mapping
@@ -190,7 +190,7 @@ public class ParseCondition {
     }
 
     /**
-     * Checks whether university has been added to the selected list
+     * Checks whether university has been added to the selected list.
      * @param uniIndex Index of university
      * @param universitySelectedList The selected university list
      * @param universityMasterList The university master list
@@ -203,7 +203,7 @@ public class ParseCondition {
     }
 
     /**
-     * Return the corresponding object of a university in the selected university list
+     * Return the corresponding object of a university in the selected university list.
      * @param uniIndex Index of university
      * @param universitySelectedList The selected university list
      * @param universityMasterList The university master list
@@ -216,7 +216,7 @@ public class ParseCondition {
     }
 
     /**
-     * Checks whether there is no mapping available for a university based on the current selected modules
+     * Checks whether there is no mapping available for a university based on the current selected modules.
      * @param uni University to be checked
      * @param moduleSelectedList The selected module list
      * @return True if there is no mapping available, false otherwise
@@ -227,7 +227,7 @@ public class ParseCondition {
     }
 
     /**
-     * Checks whether the university in selected list has any assigned mappings
+     * Checks whether the university in selected list has any assigned mappings.
      * @param uni University object to be checked
      * @param universitySelectedList The selected university list
      * @return True if there is no mappings assigned, false otherwise 
