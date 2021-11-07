@@ -465,8 +465,8 @@ for the user to easily find items.
 
 The following diagram displays the interactions between the classes when the user enters a command starting with
 "food".\
-Do note that an important call is left out of this diagram for readability - the call to execute the command.
-This was intentionally left out for readability, and a high level view was covered in [Architecture](#31-architecture)\
+Do note that important calls are left out of this diagram (command execution) and the parser replaces Click for this.
+A high level view of command execution is covered in [Architecture](#31-architecture)\
 You should take note of the interactions between the constructed command classes, and the current list it's
 iterating over - `WhatIAteTodayList`, especially the updates shown after the  end of every  command. An update is 
 defined as a manual overwrite over the text file saved in the user's hard disk. \
@@ -482,42 +482,98 @@ information of a food court, which includes the Stall name, and food items sold 
 > **Note**: the methods invoked in the following commands are visually depicted in the sequence  diagram,
 > and thus only the general functionality  is discussed, as  well as the design considerations taken.
 
-##### Adding Food Record
+##### Adding Food Record 
+
+`food add n/ Samurai Burger c/ 433`
 
 This feature allows user to add a new Food Record.
 Tags `n/` `c/` stand for name and calorie count respectively.
 
+As depicted in the [class diagram](#451-architecture), the user's input undergoes the following sequence when it's
+converted to a food record to be added to the user's list.
+1. `Parser` invokes `parseFoodRecord` which takes in the `inputString`
+1. `storage` accesses it's `whatIAteTodayList` and calls it's `addToList` method, adding the
+   record to the list
+1.  As the parameter `isSilent` in  `addToList` is `false`, 
+    the user would be shown a message acknowledging an addition of data
+1. `StorageFood` saves the list to `food.txt` in <kbd>storage/fooddata</kbd>
 
-**Code example**
-
-`food add n/ Samurai Burger c/ 433`
 
 ##### Removing Food Record
 
+`food delete [INDEX]`
+
 This feature allows user to remove a Food Record created in the past.
 
+Similar to [adding a food record](#adding-food-record), the following steps are taken when deleting a food record.
+1. `indexToDelete` is extracted from `inputString` by a dedicated method
+1. A `FoodRecord` `toDelete` is then retrieved from `storage`, which has a `whatIAteTodayList` reference, by\
+   the `getList()` method, and retrieves the desired food record using `indexToDelete`
+1. `deleteFoodRecordAndSave` is then called, which does the following:
+   1. remove `toDelete` from `storage`
+   1. print a message to the user indicating that the record is deleted
+   1. call `saveList` method in `StorageFood` to update the `food.txt` file
 
-**Code example**
-
-`food delete [INDEX]`
 
 ##### Listing All Food Records
 
-This feature allows user to view all Food Records.
-
-This would be particularly useful for deleting items.
-
-**Code example**
-
 `food list`
+
+This feature allows user to view all Food Records, which would be particularly useful for deleting items.
+```
+
+	__________________________________________________
+	1st,You consumed  Samurai Burger , which has a calorie count of : 433 on Sunday, 7 November 2021!
+	You consumed 433 calories in total!
+	                    ...
+	__________________________________________________
+```
+Upon viewing the output of this feature, you may notice that it prints out a suffix along with the index of the
+items. Additionally, a line corresponding to the sum of calories recorded.
+
+To understand how these user-oriented additions were implemented, consider the execution path of food list.\
+When this feature is called, the following steps take place:
+1. `storage` accesses `whatIAteTodayList` by reference
+1. `whatIAteTodayList` invokes the `printList` method, with the `withMessages` parameter having a `true` value
+
+In particular, this method iterates through the list, and invokes the method `printIndexWithSuffix` to tag the correct
+suffix with each index.\
+Note that with each item iterated in the list, the corresponding calorie count is added to a `calorieSum` variable which
+stores the sum so far.\
+Following that, since `withMessages` is true, the user interface `Ui` would indicate the `calorieSum`
+calculated.
+
+These additions were not trivial, and were made with readability and user-oriented focus of Click in mind.
+
+##### Finding food records given a date
+
+`food find [DATE]`
+
+This feature also relies on the `storage` component in the following sequence:
+1. `Parser` filters out the relevant part of the user input relating to `LocalDate` type,
+   and a `DateTimeFormatter` formats that portion into a `dateInput`
+1. `storage` accesses `whatIAteTodayList` by reference
+1. `whatIAteTodayList` invokes it's method `printFoodWithFoundDate`, taking `dateInput` as an input, which does the following:
+   1. Create a temporary `WhatIAteList`
+   1. Call `addRecordIfFound`, which iterates through the current list and matches records with the same date as `dateInput`
+   1. Print out the temporary list, along with a nicely formatted date string of `FormatStyle.FULL`, representing
+   the full string of a month rather than the conventional MM format.\
+      For example, `Nice, I found the items you ate on Sunday, 7 November 2021`
+      
+Again, the formatting was carefully considered to be user-oriented and readable.
 
 ##### Clearing food list
 
-This feature allows users to clear their Food List.
-
-**Code example**
-
 `food clear`
+
+This feature allows users to clear their Food List. 
+
+`storage` accesses `whatIAteTodayList` by reference, and calls it's `clearList` method, clearing all entries from the list
+
+following that, `StorageFood` invokes `saveList` to update the `food.txt` file.
+
+##### Viewing from a reference list
+
 
 ##### Saving food list on successful command
 
