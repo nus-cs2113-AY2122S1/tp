@@ -373,7 +373,7 @@ for their daily jobs
 
 ## Appendix D: Glossary
 
-* *Mainstream OS* - Windows, Linux, Unix, OS-X
+* *Mainstream OS* - Windows, GNU/Linux, Unix, OS-X
 
 ## Appendix E: Instructions for manual testing
 
@@ -573,8 +573,9 @@ commands.
 * `list -h` shows all hidden patients.
 
 1. List all non-hidden patients
-    1. Test case: `list`<br>
-       Expected:
+    1. Test case: `list`
+    <br>Expected:
+    
         ```
         Here is a list of all patients:
         For full details of each patient, please use the command "view PATIENT_ID"
@@ -585,8 +586,9 @@ commands.
         ----------------------------------------------------------------------------------------------------- 
         ```
 2. List all hidden patients
-    1. Test case: `list -h`<br>
-       Expected:
+    1. Test case: `list -h`
+    <br>Expected:
+     
         ```
         Here is a list of all patients:
         For full details of each patient, please use the command "view PATIENT_ID"
@@ -737,7 +739,7 @@ commands.
 
 1. List the information of all appointments, including those of hidden patients and medical staff.
     1. Test case: `list`
-       Expected:
+       <br>Expected:
         ```
        Here is a list of all appointments:
        -------------------------------------------------------------------------------------------------- 
@@ -747,6 +749,49 @@ commands.
        | 3    | 01 Dec 21 1100HRS | 2          | Jim Bob              | 1        | Doctor One           |
        -------------------------------------------------------------------------------------------------- 
         ```
+
+#### Find appointments
+* Prerequisites:
+   * Execute the following commands first to populate the `Scheduler` with more data:
+      1. `switch 3`
+      2. `switch 1`
+      3. `show 2`
+      4. `switch 2`
+      5. `show 2`
+      6. `switch 3`
+      7. `add p/1 s/2 d/021221 0900`
+      8. `add p/2 s/2 d/031221 0900`
+      9. `add p/3 s/2 d/041221 0900`
+      10. `add p/2 s/2 d/051221 0900`
+      11. `add p/3 s/2 d/061221 0900`
+
+1. Find all appointments that involve a particular medical staff
+   1. Test case: `find s/2`
+   <br>Expected:
+    ```
+   Here is a list of matched appointments:
+    -------------------------------------------------------------------------------------------------- 
+    |  ID  |     Date/Time     | Patient ID |     Patient Name     | Staff ID  |      Staff Name       | 
+    -------------------------------------------------------------------------------------------------- 
+    | 4    | 02 Dec 21 0900HRS | 1          | John Xavier Doe      | 2        | Nurse One            | 
+    | 5    | 03 Dec 21 0900HRS | 2          | Jim Bob              | 2        | Nurse One            | 
+    | 6    | 04 Dec 21 0900HRS | 3          | Sasha Alexander      | 2        | Nurse One            | 
+    | 7    | 05 Dec 21 0900HRS | 2          | Jim Bob              | 2        | Nurse One            | 
+    | 8    | 06 Dec 21 0900HRS | 3          | Sasha Alexander      | 2        | Nurse One            | 
+    -------------------------------------------------------------------------------------------------- 
+    ```
+2. Find all appointments that involve a particular medical staff, after a certain date/time
+   1. Test case: `find s/2 a/051221 0000`
+   <br>Expected: 
+   ```
+    Here is a list of matched appointments:
+     -------------------------------------------------------------------------------------------------- 
+     |  ID  |     Date/Time     | Patient ID |     Patient Name     | Staff ID  |      Staff Name       | 
+     -------------------------------------------------------------------------------------------------- 
+     | 7    | 05 Dec 21 0900HRS | 2          | Jim Bob              | 2        | Nurse One            | 
+     | 8    | 06 Dec 21 0900HRS | 3          | Sasha Alexander      | 2        | Nurse One            | 
+     -------------------------------------------------------------------------------------------------- 
+   ```
 
 ### Saving data
 
