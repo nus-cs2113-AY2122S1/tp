@@ -268,7 +268,7 @@ The `ModuleManager` implements the below functionality:
 - List all module names.
 - Grants access to the different types of content stored by `NusModule`.
 
-<div style="page-break-after: always;"></div>
+
 
 ### 3.6 Content Component
 ![](attachments/Content.png)
@@ -284,7 +284,7 @@ which inherit from the abstract `Content` class. The `ContentManager` allows a g
 - Listing all contents.
 - Accessing the arraylist of contents.
 
-<div style="page-break-after: always;"></div>
+
 
 ### 3.7 Active Recall Component
 ![Active Recall Class Diagram](attachments/ActiveRecallClassDiagram.png)
@@ -306,7 +306,7 @@ after the user has provided feedback on the difficulty of the question. It uses 
 For further details on the implementation, head to 
 [4.2 Active Recall Implementation](#42-active-recall-implementation).
 
-<div style="page-break-after: always;"></div>
+
 
 ### 3.8 Storage Component
 
@@ -325,7 +325,7 @@ The `StorageManager` component:
 `TermiNUS` saved these data as either a `.json` or `.txt` file so users will be able to edit saved
 data easily with any available text editor.
 
-<div style="page-break-after: always;"></div>
+
 
 ## 4. Implementation
 
@@ -608,7 +608,7 @@ Eventually the team decide to go with the second implementation, as we require m
 workspaces and would like to create our own workspace for each feature. Aside from that the 
 `Command` provides common functionality that many commands need hence reducing repetition of code.
 
-<div style="page-break-after: always;"></div>
+
 
 ### 4.4 Conflict Manager Implementation
 
@@ -711,7 +711,7 @@ checks and third party imports on top of it.
 
 This section details the technical information of `StorageManager` when `Terminus` loads data in the `data` directory.
 
-<div style="page-break-after: always;"></div>
+
 
 ##### 4.5.2.1 Current Implementation
 
@@ -777,7 +777,7 @@ the main `data` directory or the `main.json` file.
 
 This section details the technical information of `StorageManager` when `Terminus` performs required file I/O operations stated in `CommandResult` after an execution of a `Command`.
 
-<div style="page-break-after: always;"></div>
+
 
 ##### 4.5.3.1 Current Implementation
 
@@ -829,7 +829,7 @@ store in its arraylist of `Note`.
 **Step 4** Upon, the successful execution of adding the new `Note` into `ContentManager`, it will return a `CommandResult` with
 its respective message for user `Ui` response purposes.
 
-<div style="page-break-after: always;"></div>
+
 
 #### 4.6.2 Design Consideration
 
@@ -1002,7 +1002,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
 <br/>
 
-<div style="page-break-after: always;"></div>
+
 
 ### D.3: Timetable Feature
 
@@ -1140,7 +1140,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
 <br/>
 
-<div style="page-break-after: always;"></div>
+
 
 ### D.10: Test Feature
 
@@ -1211,8 +1211,6 @@ You may monitor your Codecov progress in your pull request if you successfully p
    c. `view` from the main workspace (To view notes, execute `view` from the note workspace)
 
 <br/>
-
-<div style="page-break-after: always;"></div>
 
 ### D.14: Delete Note
 
