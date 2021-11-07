@@ -14,18 +14,18 @@ Please see below for my contributions to Traveller.
   * Core part of Traveller, enable users to view their created trips.
 * `add-day`: Allow users to add days to each trip.
   * Usually, people plan trips by day. This enables users to do just that using Traveller, without having
-1 large lump of activities to do without any indication of which day each activity will be done on.
+    1 large lump of activities to do without any indication of which day each activity will be done on.
 * `add-item`: Allow users to add items to each day.
   * Represents an activity that someone on the trip will do. Enable users to have multiple items in a day so that
-they can plan multiple activities per day.
+    they can plan multiple activities per day.
   * Has an added time field to help users easily organise the duration of each item.
 * `exit`: Exits the application.
 
 #### Other code contributions
 * Implemented the main structure of Traveller.
 * Restructured code to streamline architecture of Traveller.
-* Added a lot of exceptions, assertions, logging, test cases to overall code, 
-including classes/methods not written by me.
+* Added a lot of exceptions, assertions, logging, test cases to overall code,
+  including classes/methods not written by me.
 * Checked for bugs before deadlines.
 
 #### Project Management
@@ -42,8 +42,8 @@ including classes/methods not written by me.
 * Developer Guide (DG)
   * Created overall structure of the DG.
   * Debugged DG.
-  * Wrote preface, Table of Contents, Design & Implementation header paragraph, World Map header paragraph, 
-Main Traveller header paragraph, Traveller class, Parser class.
+  * Wrote preface, Table of Contents, Design & Implementation header paragraph, World Map header paragraph,
+    Main Traveller header paragraph, Traveller class, Parser class.
 
 RepoSense Link: [here](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=Uxinnn&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
-  * Refer to this link for details of my code contributions.
+* Refer to this link for details of my code contributions.
