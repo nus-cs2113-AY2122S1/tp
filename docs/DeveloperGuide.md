@@ -638,6 +638,7 @@ exploratory testing.
     1: finals
     
     1 finals by: 11 Nov 2021 10:00 AM Weightage 50% [ ]
+    
     ``` 
 3. Adding a GradableTask with an invalid syntax.
     1. Run the command : `/m cs2040c addgradable finals /by 00/00/00 /w 50`
