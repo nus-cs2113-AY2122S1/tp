@@ -83,9 +83,6 @@ public abstract class Parser {
 
     private static Command singleWordCommandProtocol(String[] command, String commandType) throws DukeException {
         switch (commandType) {
-
-        case "delete":
-            return new DeleteCommand(command);
         case "bye":
             return new ByeCommand();
         case "help":
