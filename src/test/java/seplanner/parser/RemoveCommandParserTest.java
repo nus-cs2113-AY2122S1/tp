@@ -85,6 +85,8 @@ class RemoveCommandParserTest {
         String uniExceedUpperBound = "/uni 100";
         String modExceedLowerBound = "/mod 0";
         String modExceedUpperBound = "/mod 1000";
+        String mapExceedLowerBound = "/map 0 1";
+        String mapExceedUpperBound = "/map 100 1";
         assertThrows(RemoveParseException.class, () -> rcp.parse(uniExceedLowerBound, universityMasterList,
                 moduleMasterList, universitySelectedList, moduleSelectedList));
         assertThrows(RemoveParseException.class, () -> rcp.parse(uniExceedUpperBound, universityMasterList,
@@ -92,6 +94,10 @@ class RemoveCommandParserTest {
         assertThrows(RemoveParseException.class, () -> rcp.parse(modExceedLowerBound, universityMasterList,
                 moduleMasterList, universitySelectedList, moduleSelectedList));
         assertThrows(RemoveParseException.class, () -> rcp.parse(modExceedUpperBound, universityMasterList,
+                moduleMasterList, universitySelectedList, moduleSelectedList));
+        assertThrows(RemoveParseException.class, () -> rcp.parse(mapExceedLowerBound, universityMasterList,
+                moduleMasterList, universitySelectedList, moduleSelectedList));
+        assertThrows(RemoveParseException.class, () -> rcp.parse(mapExceedUpperBound, universityMasterList,
                 moduleMasterList, universitySelectedList, moduleSelectedList));
     }
 
@@ -115,9 +121,12 @@ class RemoveCommandParserTest {
     public void parse_invalidArgumentForRemoveMapping_exceptionThrown() {
         String firstInput = "/map 1 @.@";
         String secondInput = "/map >.< 1";
+        String thirdInput = "/map >.< @.@";
         assertThrows(RemoveParseException.class, () -> rcp.parse(firstInput, universityMasterList,
                 moduleMasterList, universitySelectedList, moduleSelectedList));
         assertThrows(RemoveParseException.class, () -> rcp.parse(secondInput, universityMasterList,
+                moduleMasterList, universitySelectedList, moduleSelectedList));
+        assertThrows(RemoveParseException.class, () -> rcp.parse(thirdInput, universityMasterList,
                 moduleMasterList, universitySelectedList, moduleSelectedList));
     }
 
@@ -154,7 +163,6 @@ class RemoveCommandParserTest {
                 moduleMasterList, universitySelectedList, moduleSelectedList));
         assertThrows(RemoveParseException.class, () -> rcp.parse(inputExceedUpperBounds, universityMasterList,
                 moduleMasterList, universitySelectedList, moduleSelectedList));
-
     }
 
 }
