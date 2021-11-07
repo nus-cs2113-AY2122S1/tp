@@ -125,6 +125,7 @@ Examples:
 Expected Output:<br>
 ![DeleteClassesCommand](images/class/DeleteClassCommand.png)
 
+<br>
 <hr>
 
 ### Student
@@ -211,6 +212,7 @@ Examples:
 Expected Output: <br>
 ![img_1.png](images/students/FindStudentCommand.png)
 
+<br>
 <hr>
 
 ### Assessment
@@ -289,6 +291,7 @@ Examples:
 Expected Output: <br>
 ![img.png](images/assessment/DeleteAssessmentCommand.png)
 
+<br>
 <hr>
 
 ### Mark
@@ -422,6 +425,7 @@ Expected Output: <br>
 (Descending) <br>
 ![img.png](images/students/SortByScoresCommand_desc.png)
 
+<br>
 <hr>
 
 ### Attendance
@@ -511,6 +515,7 @@ Examples:
 * `delete_attendance c/CS2113T-F12 s/1 l/1`
 * `delete_attendance c/CS2101-D03 s/4 l/2`
 
+<br>
 <hr>
 
 ### Comment
