@@ -3,22 +3,22 @@
 
 hide circle
 skinparam classAttributeIconSize 0
-skinparam groupInheritance 2
-skinparam maxWidth 128
+skinparam groupInheritance 1
+skinparam maxLength 128
 
-Command --> AddModCommand
-Command --> AddUniCommand
-Command --> AddMapCommand
-Command --> RemoveModCommand
-Command --> RemoveUniCommand
-Command --> RemoveMapCommand
+AddModCommand <-- Command
+AddUniCommand <-- Command
+AddMapCommand <-- Command
+RemoveModCommand <-- Command
+RemoveUniCommand <-- Command
+RemoveMapCommand --> Command
 Command --> ListModCommand
 Command --> ListUniCommand
 Command --> FindModCommand
 Command --> FindUniCommand
 Command --> SearchMapCommand
-Command --> HelpCommand
-Command --> ExitCommand
+Command <-- HelpCommand
+Command <-- ExitCommand
 
 class Command {
     # storage: Storage
@@ -65,8 +65,8 @@ class RemoveUniCommand {
 
 class RemoveMapCommand {
 
-    + RemoveMapCommand(universityIndexToMap: int, selectedMappingIndex: int, universityMasterList: UniversityList,
-    universitySelectedList: UniversityList, universityMasterList: UniversityList)
+    + RemoveMapCommand(universityIndexToMap: int, selectedMappingIndex: int,
+    universityMasterList: UniversityList, universitySelectedList: UniversityList, universityMasterList: UniversityList)
 }
 
 class ListModCommand {
