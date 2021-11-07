@@ -135,10 +135,6 @@ public class DataManager {
         checkForEntriesFileHeader(sc);
         while (sc.hasNextLine()) {
             String data = sc.nextLine();
-            if (data.isBlank()) {
-                hasCorruptedLines = true;
-                continue;
-            }
             try {
                 loadAsExpense(data);
             } catch (InputException | InvalidExpenseDataFormatException | DateTimeParseException
