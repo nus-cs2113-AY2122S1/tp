@@ -27,6 +27,14 @@
 - Each command takes an `Ingredient Repository` and a `RecipeList` as an input to modify the ingredients and recipes
   based on the command.
 
+### Logic
+![](diagrams/Logic.png)
+
+- The `Logic' component:
+  - When ExpiryEliminator is called upon to execute a command, it uses the Parser class to parse the user command.
+  - This results in a Command object (more precisely, an object of one of its subclasses e.g., AddCommand) which is executed by ExpiryEliminator.
+  - The command can communicate with the Model when it is executed (e.g. to add an ingredient).
+
 
 ### Parser
 

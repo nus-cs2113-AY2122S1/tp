@@ -2,7 +2,7 @@
 'https://plantuml.com/component-diagram
 !include style.puml
 
-component Logic {
+
 
 component ExpiryEliminator
 component Parser
@@ -17,12 +17,12 @@ Parser ..> XYZCommand : creates >
 
 
 XYZCommand --|> Command
-}
+
 
 component Storage
 ExpiryEliminator --> Storage
 
-note right of XYZCommand
+note left of XYZCommand
 XYZCommand = AddCommand,
 DeleteCommand, etc
 end note
