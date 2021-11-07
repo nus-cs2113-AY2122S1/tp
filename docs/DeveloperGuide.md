@@ -169,7 +169,9 @@ The `Command` component directly interacts with the `Member`, `Training` or `Att
 **API** : [Member](https://github.com/AY2122S1-CS2113T-F12-4/tp/tree/master/src/main/java/seedu/duke/member)
 
 
-The `Member` component,
+The `Member` component consist of `MemberList` and `Member`. `Member` consist of important member information such as `name`, `studentName`, `gender`, `phoneNumber` and `index` which is the index of member shown to user of the program. 
+
+**Current Functionalities**
 * instantiates an `MemberList` object comprising 0 `Member` objects.
 * stores inputted `Member` objects in a list as an `ArrayList<Member>` in `MemberList` class.
 * stores the `MemberList` object in a csv file with the help of `MemberStorage`.
