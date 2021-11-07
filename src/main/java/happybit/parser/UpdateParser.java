@@ -117,7 +117,7 @@ public class UpdateParser extends Parser {
             newHabitName = getName(parameters);
         }
         if (isUpdateHabitInterval) {
-            newHabitInterval = getUpdateInterval(parameters, FLAG_INTERVAL);
+            newHabitInterval = getUpdateInterval(parameters);
         }
         int goalIndex = getIndex(parameters, FLAG_GOAL_INDEX);
         int habitIndex = getIndex(parameters, FLAG_HABIT_INDEX);
