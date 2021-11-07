@@ -135,7 +135,11 @@ public class Ui {
             message.append("--------LIST UPDATED-----------");
         }
         if (!listOfAlreadyDoneItems.isBlank()) {
+            if (!listOfItemsMarkedDone.isBlank()) {
+                message.append("\n");
+            }
             message.append("These items are already done: \n").append(listOfAlreadyDoneItems);
+            message.append("There's no need for me to re-mark them. ");
         }
         return message.toString();
     }
@@ -147,7 +151,11 @@ public class Ui {
             message.append("--------LIST UPDATED-----------");
         }
         if (!listOfUndoneItems.isBlank()) {
+            if (!listOfItemsUnmarked.isBlank()) {
+                message.append("\n");
+            }
             message.append("These items are not done yet: \n").append(listOfUndoneItems);
+            message.append("I won't do anything with them. ");
         }
         return message.toString();
     }
