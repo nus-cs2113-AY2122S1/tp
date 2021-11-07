@@ -76,7 +76,7 @@ Given below are the contributions I have made to this project.
        "Deleting tasks in task list" and "Saving files".
 ---
 
-- **Contributions to GitHub Pages**:[link](https://ay2122s1-cs2113t-w13-3.github.io/tp/)
+- **Contributions to GitHub Pages**: [link](https://ay2122s1-cs2113t-w13-3.github.io/tp/)
     - **Contribution 1:** Added the `UserGuide`, `DeveloperGuide` and `AboutUs` to the GitHub pages header to allow
        for easier navigation through the documents.
     - **Contribution 2:** Added an arrow icon at the bottom right of the different page documents to allow 
