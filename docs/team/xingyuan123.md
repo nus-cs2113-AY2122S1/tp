@@ -1,4 +1,4 @@
-# xingyuan123 - Project Portfolio Page
+# Kom Xing Yuan - Project Portfolio Page
 
 ## Overview
 
