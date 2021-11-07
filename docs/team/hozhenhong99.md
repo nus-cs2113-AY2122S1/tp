@@ -34,7 +34,9 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
     * Wrote additional tests for existing features to increase coverage
-      (Pull request [\#234](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/234/files)) TO EDIT
+      (Pull request [\#254](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/254/files)
+  , [\#255](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/255/files))
+  
 
 * **Documentation**:
     * User Guide:
