@@ -19,46 +19,13 @@ participant ":StorageManager" as StorageManager STORAGE_COLOR
 endbox
 autoactivate on
 
--> Terminus: run()
+-> Terminus: start()
 Terminus -> Terminus: initialize()
 ref over Terminus,CommandParser: Initialization
 return
   Terminus -> Terminus : runCommandsUntilExit()
     loop True
-      Terminus -> Ui : requestCommand ()
-      return String
-      Terminus -> Terminus: handleUserInput(input)
-        Terminus -> CommandParser: parseCommand(input)
-        return Command
-        Terminus -> Command : execute(moduleManager)
-        create CommandResult
-        Command -> CommandResult
-        return CommandResult
-     return CommandResult
-   return CommandResult
-      break commandResult.isExit() == true
-        note over Terminus, CommandResult : Breaks out of loop and Returns runCommandsUntilExit()
-      end
-      Terminus -> Terminus: handleCommandResult(commandResult)
-        alt commandResult.getNewCommandParser() != null
-          Terminus -> CommandResult: getNewCommandParser()
-          return CommandParser
-          Terminus -> Ui:printParserBanner(parser, moduleManager)
-          return
-        else else
-          Terminus -> Ui:printSection(commandResult.getMessage())
-          return
-        end
-      return
-      Terminus -> Terminus: handleStorage(commandResult)
-        opt commandResult.hasChange() == true
-          Terminus -> StorageManager: executeCommandResult(moduleManager, commandResult)
-          return
-        end
-        Terminus -> StorageManager: updateMainJsonFile(moduleManager)
-        return
-      return
-      destroy CommandResult
+    ref over Terminus, StorageManager: Loop Logic
     end
     return
         Terminus -> Terminus :exit()

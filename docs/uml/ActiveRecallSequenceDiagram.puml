@@ -37,7 +37,7 @@ activate GameEnvironment
   destroy QuestionGenerator
 return
 
-return CommandResult(true)
+return CommandResult
 destroy GameEnvironment
 
 @enduml

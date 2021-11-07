@@ -172,7 +172,7 @@ commands enable users to create, delete and view `modules` within TermiNUS.
 Enters the Module Management workspace.
 
 Example: `module`
-
+<div style="page-break-after: always;"></div>
 Expected Output:
 
 ```
@@ -683,7 +683,7 @@ List of Question workspace commands:
 Enters the Question workspace.
 
 Example: `question`
-
+<div style="page-break-after: always;"></div>
 Expected Output:
 
 ```
@@ -787,7 +787,7 @@ command.
 > If there are not enough questions, it will take the whole pool of questions in the module 
 > (i.e. if you have 7 questions in your current module, you will only receive 7 questions when you 
 > indicate a `{question_count}` greater than 7 or leave it empty).
-
+<div style="page-break-after: always;"></div>
 When you begin, you will be prompted with the following:
 
 ```
