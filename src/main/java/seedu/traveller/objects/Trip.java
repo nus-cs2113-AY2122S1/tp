@@ -89,7 +89,7 @@ public class Trip {
         return daysList.getDay(dayNumber);
     }
 
-    public void addDay() {
+    public void addDay() throws TravellerException {
         daysList.addDay();
     }
 

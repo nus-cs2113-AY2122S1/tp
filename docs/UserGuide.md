@@ -137,6 +137,7 @@ Your overseas trip may span multiple days.
 This command allows you to create any number of days in your trip.
 
 #### Format: `add-day TRIP_NAME /day NUMBER_OF_DAYS`
+   * The maximum number of days allowed per trip is 30 days.
 
 #### Usage Example:
 

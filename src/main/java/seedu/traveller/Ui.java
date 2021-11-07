@@ -150,39 +150,42 @@ public class Ui {
     public void printHelp() {
         System.out.println("\tSome of our basic commands are:\n"
                 + "\tnew FamilyTrip2021 /from SIN /to MLY : "
-                + "\n\tAdds a new trip called FamilyTrip2021 from Singapore "
+                + "\n\t\tAdds a new trip called FamilyTrip2021 from Singapore "
                 + "(SIN) to Malaysia (MLY).\n"
 
                 + "\tadd-day myTrip 3 : "
-                + "Adds 3 days to trip myTrip.\n"
+                + "\n\t\tAdds 3 days to trip myTrip.\n"
 
                 + "\tadd-item trip1 /day 0 /time 7pm /name Check-in to HolidayInn : "
-                + "\n\tAdds item Check-in to HolidayInn to day 0 of trip1.\n"
+                + "\n\t\tAdds item Check-in to HolidayInn to day 0 of trip1.\n"
 
-                + "\tview FamilyTrip2021: Views your trip named FamilyTrip2021 and their detail.\n"
+                + "\tview FamilyTrip2021: "
+                + "\n\t\tViews your trip named FamilyTrip2021 and their detail.\n"
 
-                + "\tdelete FamilyTrip2021 : Deletes the trip called FamilyTrip2021.\n"
+                + "\tdelete FamilyTrip2021 : "
+                + "\n\t\tDeletes the trip called FamilyTrip2021.\n"
 
                 + "\tdelete-day myTrip /day 0 : "
-                + "Deletes day 0 of myTrip.\n"
+                + "\n\t\tDeletes day 0 of myTrip.\n"
 
                 + "\tdelete-item myTrip /day 0 /item 0 : "
-                + "Deletes item 0 of myTrip on day 0.\n"
+                + "\n\t\tDeletes item 0 of myTrip on day 0.\n"
 
                 + "\tedit FamilyTrip2021 /from SKR /to JPN : "
-                + "\n\tEdits an existing trip called FamilyTrip2021"
+                + "\n\t\tEdits an existing trip called FamilyTrip2021"
                 + "to have new START and END destinations.\n"
 
                 + "\tedit-item 1 trip1 /day 1 /time 7am /name wake up from bed : "
-                + "\n\tEdits item1 of trip 1 to wake up from bed at 7am.\n"
+                + "\n\t\tEdits item1 of trip 1 to wake up from bed at 7am.\n"
 
                 + "\tsearch-item trip1 /name sleep at home : "
-                + "\n\tSearches item keyword sleep at home in trip called trip1.\n"
+                + "\n\t\tSearches item keyword sleep at home in trip called trip1.\n"
 
                 + "\tshortest-time /from SKR /to JPN : "
-                + "Returns the shortest time from SKR to JPN.\n"
+                + "\n\t\tReturns the shortest time from SKR to JPN.\n"
 
-                + "\texit : Exits the program.");
+                + "\texit : "
+                + "\n\t\tExits the program.");
     }
 
     public void printReadSaveError(int lineNumber) {

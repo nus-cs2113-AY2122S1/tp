@@ -1,6 +1,7 @@
 package seedu.traveller.objects;
 
 import seedu.traveller.exceptions.DayNotFoundException;
+import seedu.traveller.exceptions.MaxNumberOfDaysAllowedExceededException;
 import seedu.traveller.exceptions.TravellerException;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.logging.Logger;
 public class DaysList {
     private static final Logger logger = Logger.getLogger(TripsList.class.getName());
     private final ArrayList<Day> days;
+    private final int maxDaysAllowed = 30;
 
     public DaysList() {
         logger.setLevel(Level.INFO);
@@ -22,8 +24,11 @@ public class DaysList {
         this.days = new ArrayList<>();
     }
 
-    public void addDay() {
+    public void addDay() throws TravellerException {
         logger.log(Level.INFO, "Added a day to daysList");
+        if (getSize() >= maxDaysAllowed) {
+            throw new MaxNumberOfDaysAllowedExceededException();
+        }
         Day newDay = new Day();
         days.add(newDay);
     }
