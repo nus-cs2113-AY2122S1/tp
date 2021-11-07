@@ -115,6 +115,12 @@ Command-Line Interface for NUSMODS                               (v2.1.0)
 The Architecture Diagram above shows the high-level design of **SchedUrMods** 
 and how **SchedUrMods** main components are connected.
 
+<p align="center">
+    <img src="images/SeanUMLDiagrams/SchedUrMods_Architecture.png">
+</p>
+
+The Diagram above shows the class associations on a more granular level.
+
 **Main components of the architecture**
 
 `SchedUrMods` contains the main method of the application. It is responsible for,
