@@ -97,8 +97,19 @@ public abstract class RegexParser {
         }
     }
 
+    /**
+     * Throws an exception if the LinkedIn username does not comply with the regex.
+     * If the LinkedIn username passes the regex check nothing is returned and program
+     * flow continues.
+     * The regex only allows usernames in lowercase letters, numbers, underscore and
+     * hyphen with a length between 3 and 100 characters.
+     *
+     * @param detailToParse LinkedIn username to be checked
+     * @throws InvalidLinkedinUsernameException If LinkedIn does not match regex
+     */
     protected void checkLinkedinUsernameRegex(String detailToParse) throws InvalidLinkedinUsernameException {
-        //allows lowercase, numbers, underscore and hyphen. Length must be 3-100 characters
+        // Allows lowercase, numbers, underscore and hyphen
+        // Length must be 3-100 characters
         String linkedinRegex = "^[a-z0-9-_]{3,100}$";
         if (!detailToParse.matches(linkedinRegex)) {
             LOGGER.log(Level.FINE, "Regex check for Linkedin failed");
