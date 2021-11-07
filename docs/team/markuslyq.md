@@ -37,5 +37,5 @@ Large Order Tracking System (LOTS) is a Command Line (CLI) program that enables 
 * Contributed to the structure of the program by setting up the `PeopleManager`,`Command`, `LotsException` and `Order` class.
 
 ### Beyond Project Team
-* DG bugs and suggestions for other teams. (Examples: [1](https://github.com/nus-cs2113-AY2122S1/tp/pull/41/files#r738028340), [2](https://github.com/nus-cs2113-AY2122S1/tp/pull/41/files#r738029816), [3](https://github.com/nus-cs2113-AY2122S1/tp/pull/41/files#r738031424), [4](https://github.com/nus-cs2113-AY2122S1/tp/pull/41/files#r738036851), [5](https://github.com/nus-cs2113-AY2122S1/tp/pull/41/files#r738034950), [6](https://github.com/nus-cs2113-AY2122S1/tp/pull/41/files#r738038405))
+* DG bugs and suggestions for other teams. (Examples can been seen [here](https://github.com/nus-cs2113-AY2122S1/tp/pull/41#pullrequestreview-791380202))
 * Function bugs and suggestions for other teams. (Examples can be seen [here](https://github.com/markuslyq/ped/issues))
