@@ -8,11 +8,28 @@ import seedu.foodorama.exceptions.FoodoramaException;
 import java.util.ArrayList;
 
 /**
- * 
+ * Allows the user to set a limit to the amount of weight
+ * of a dish being wasted.
+ * Format: set dish limit [DISH_NAME]
+ *
+ * @author Dniv-ra
  */
 public class SetDishLimitCommand extends Command {
     private static final Ui UI = new Ui();
 
+    /**
+     * User command to set limit to the wasted weight of the dish
+     * selected by the index of the DIsh in the dishList or
+     * the DISH_NAME in the dishList.
+     *
+     * @param parameters contains either the index of the Dish
+     *                   the user intends to set wastage weight limit for or
+     *                   the name of the Dish the user intends to set wastage weight limit for.
+     * @throws FoodoramaException when invalid dish index is being input, user enters an empty dish index
+     *                            or a dish index that is not a number, or when the dish index is not
+     *                            found in the dish list.
+     * @author Dniv-ra
+     */
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         String dish = parameters.get(0);
@@ -43,6 +60,15 @@ public class SetDishLimitCommand extends Command {
         }
     }
 
+
+    /**
+     * Checks if the parameter numberString is a number.
+     *
+     * @param numberString the String to check if it is a number
+     * @return true is the String is a number, false if it is not a number
+     * @author Dniv-ra
+     */
+
     public boolean isNumber(String numberString) {
         try {
             double number = Double.parseDouble(numberString);
@@ -52,6 +78,13 @@ public class SetDishLimitCommand extends Command {
         }
     }
 
+    /**
+     * Checks if the parameter numberString is an integer.
+     *
+     * @param numberString the String to check if it is an integer
+     * @return true is the String is an integer, false if it is not an integer
+     * @author Dniv-ra
+     */
     public boolean isInteger(String numberString) {
         if (isNumber(numberString)) {
             double number = Double.parseDouble(numberString);

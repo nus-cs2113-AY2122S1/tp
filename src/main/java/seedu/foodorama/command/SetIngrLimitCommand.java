@@ -10,15 +10,24 @@ import java.util.ArrayList;
 
 
 /**
- * Represents the Command to set the weight limit of an ingredient in storage
- * because it is not possible to have an unlimited amount of ingredients
+ * Allows the user to set a weight limit
+ * on the Ingredient being stored.
+ * Format: set ingr limit
+ *
+ * @author Dniv-ra
  */
 public class SetIngrLimitCommand extends Command {
     private static final Ui UI = new Ui();
 
     /**
-     * @param parameters
-     * @throws FoodoramaException
+     * User command to set weight limit to the Ingredient stored
+     * selected by the index of the Ingredient in the ingredientList or
+     * the INGR_NAME in the ingredientList.
+     *
+     * @param parameters Contains ingrIndex or INGR_NAME of the selected Ingredient
+     *                   to set weight limit stored.
+     * @throws FoodoramaException when the INGR_NAME or ingrIndex is not found in the ingredientList
+     * @author Dniv-ra
      */
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
@@ -50,6 +59,13 @@ public class SetIngrLimitCommand extends Command {
         }
     }
 
+    /**
+     * Checks if the parameter numberString is a number.
+     *
+     * @param numberString the String to check if it is a number
+     * @return true is the String is a number, false if it is not a number
+     * @author Dniv-ra
+     */
     public boolean isNumber(String numberString) {
         try {
             double number = Double.parseDouble(numberString);
@@ -59,6 +75,13 @@ public class SetIngrLimitCommand extends Command {
         }
     }
 
+    /**
+     * Checks if the parameter numberString is an integer.
+     *
+     * @param numberString the String to check if it is an integer
+     * @return true is the String is an integer, false if it is not an integer
+     * @author Dniv-ra
+     */
     public boolean isInteger(String numberString) {
         if (isNumber(numberString)) {
             double number = Double.parseDouble(numberString);

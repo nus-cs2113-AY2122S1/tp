@@ -8,18 +8,25 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 /**
- * Represents the Command to Sort the ingredientList from
+ * Allows the user to Sort the ingredientList from
  * most wasted Ingredient in terms of weight to the
- * least wasted Ingredient
+ * least wasted Ingredient.
+ * Format: sort ingr
+ *
+ * @author jhsee5
  */
 public class SortIngrCommand extends Command {
     private static final Ui UI = new Ui();
     Comparator<Ingredient> ingrComparator;
 
-
     /**
-     * @param parameters ingredient comparator used to sort Ingredients
-     *                   by largest to smallest weight
+     * User command to Sort the ingredeintList from
+     * most wasted Ingredient in terms of weight to the
+     * least wasted Ingredient.
+     *
+     * @param parameters Contains ingrComparator used to sort Ingredients
+     *                   from most to least wasted weight.
+     * @author jhsee5
      */
     @Override
     public void execute(ArrayList<String> parameters) {

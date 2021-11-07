@@ -11,12 +11,22 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//TODO add limit function
 
-
+/**
+ * Main code to run Food-O-Rama.
+ *
+ * @author Dniv-ra, renzocanare, jhsee5, Rakesh12000
+ */
 public class Foodorama {
+
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * The main function of Food-O-Rama takes in the whole user input
+     * from the command line which will include the command
+     * followed by necessary parameters or no parameters at all.
+     *
+     * @param args is the whole user input from the command line
+     *             which will include the command
+     *             followed by necessary parameters or no parameters at all.
      */
     public static void main(String[] args) {
         Logger logger = Logger.getLogger(Foodorama.class.getName());
@@ -26,7 +36,7 @@ public class Foodorama {
         InputParser parser = new InputParser();
         Storage.load();
         Scanner input = new Scanner(System.in);
-        Ui ui =  new Ui();
+        Ui ui = new Ui();
 
         // Start interfacing with user
         ClearScreen.clearConsole();
