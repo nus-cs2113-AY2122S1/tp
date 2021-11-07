@@ -25,9 +25,13 @@
 
 ### 1.1 Background
 
-**_Welcome to Click_!** It's a Java-based  Command-Line Interface for Cramming and Knowledge (CLICK), providing a one-stop access point
-for managing various parts of your Computing student life here at NUS. We aim to provide a simple interface 
-that quantifies how you use your time and if you're taking care of your overall well-being. 
+Click is a Java-based Command-Line Application targeted at Computing students at NUS. 
+
+Click aims to provide an all-in-one platform for students to:
+1. Manage modules and zoom links
+1. Manage tasks and compile them onto a calendar
+1. Manage journals and notebooks
+1. Manage food intake and consumption
 
 ### 1.2 Purpose
 
@@ -67,7 +71,7 @@ ii. Go to `src/test/java/seedu.duke` and run `Tests in seedu.duke` to ensure the
 
 ### 3.1. Architecture
 
-This section is designed to demonstrate our software design description, and aims to provide you with an overall guidance to the architecture of Duke.
+This section is designed to demonstrate our software design description, and aims to provide you with an overall guidance to the architecture of Click.
 
 The following sequence diagram illustrates a command call by the user to Click. 
 The steps are as follows:
