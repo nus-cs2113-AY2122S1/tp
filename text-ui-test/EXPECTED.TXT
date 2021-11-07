@@ -19,8 +19,8 @@ get view
 To obtain more information on each command and their respective required inputs, type:
 help [COMMAND]
 
-*Note that all commands will remove any '|' inputs for format parsing purposes. For
-examples of the expected output, please refer to the actual user guide.
+*Note that all commands will remove any '|' inputs for format parsing purposes.
+For expected output examples, please refer to the actual user guide.
 
 Adds a patient to the patient list.
 Format:
