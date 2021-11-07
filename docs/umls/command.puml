@@ -6,19 +6,21 @@ skinparam classAttributeIconSize 0
 skinparam groupInheritance 1
 skinparam maxLength 128
 
-AddModCommand <-- Command
-AddUniCommand <-- Command
-AddMapCommand <-- Command
-RemoveModCommand <-- Command
-RemoveUniCommand <-- Command
-RemoveMapCommand --> Command
-Command --> ListModCommand
-Command --> ListUniCommand
-Command --> FindModCommand
-Command --> FindUniCommand
-Command --> SearchMapCommand
-Command <-- HelpCommand
-Command <-- ExitCommand
+AddModCommand <--- Command
+AddUniCommand <--- Command
+AddMapCommand <--- Command
+ListModCommand <--- Command
+RemoveMapCommand <- Command
+HelpCommand <- Command
+ExitCommand <- Command
+Command -> RemoveModCommand
+Command -> ListUniCommand
+Command ---> FindModCommand
+Command ---> FindUniCommand
+Command ---> SearchMapCommand
+Command ---> RemoveUniCommand
+
+
 
 class Command {
     # storage: Storage
