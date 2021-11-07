@@ -2,23 +2,15 @@ package seplanner.parser;
 
 import org.junit.jupiter.api.Test;
 
-import seplanner.commands.Command;
-import seplanner.commands.FindModCommand;
-import seplanner.commands.SearchMapCommand;
-import seplanner.exceptions.AddParseException;
 import seplanner.exceptions.FindParseException;
-import seplanner.exceptions.SearchMapParseException;
-import seplanner.modules.Module;
 import seplanner.modules.ModuleList;
 import seplanner.storage.Storage;
-import seplanner.universities.University;
 import seplanner.universities.UniversityList;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 //@@author titustortoiseturtle1999
 public class FindCommandParserTest {
