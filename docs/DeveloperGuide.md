@@ -238,9 +238,10 @@ Given below is an example usage scenario and how the list feature behaves at eac
 
 1) How are the data stored?
 
-The storage stores the exact `add` command of budget, expenditures and loan into the text file containing 
-in the current AllRecordList. Everytime a deleted, edit or add command is called, the txt file is automatically 
-wiped and re-written from the ArrayList to ensure that data is saved at every step. 
+The storage stores the exact `add` command of budget, expenditures and loan into the text 
+file containing in the current AllRecordList. Everytime a deleted, edit or add command is called, 
+the txt file is automatically wiped and re-written from the ArrayList to ensure that data is saved 
+at every step. 
 
 ![dataSample](images/dataSample.png)
 
@@ -249,30 +250,78 @@ wiped and re-written from the ArrayList to ensure that data is saved at every st
 The reason it is implemented in this manner is so that we could reuse
 code that have been written for adding of budget and expenditures directly when loading from storage.
 
-This implementation makes Storage very versitile even when there are substantiate changes in the architecture 
-of our app. Some examples are the changes to Parser, Logic and Commands. Even with these stated changes, 
-the Storage needs very little tweaks to the Storage for it to work with the new implementation. The reason
-is that Storage uses the code used in Parser to load the data into the app. For the saving of data, only the 
-reloading method needs to be editted to adhere to the new changes such that the adding command stored is of
-the correct format.
+This implementation makes Storage very versitile even when there are substantiate changes in 
+the architecture of our app. Some examples are the changes to Parser, Logic and Commands. 
+Even with these stated changes, the Storage needs very little tweaks to the Storage for it 
+to work with the new implementation. The reasonis that Storage uses the code used in Parser to 
+load the data into the app. For the saving of data, only the reloading method needs to be 
+editted to adhere to the new changes such that the adding command stored is ofthe correct format.
 
-The way the database is organized is that each yearly Records is stored in the form of <year>.txt. Each year 
-contains all the monthly budget as well as all the expenditure and loan tied to that month. 
+The way the database is organized is that each yearly Records is stored in the form of 
+<year>.txt. Each year contains all the monthly budget as well as all the expenditure and 
+loan tied to that month. 
 
 3) How does some of the key method work?
 
+`readTextFileToString()`
+
 ![readTextFileToString Sequence Diagram](images/readTextFileToString.png)
+
+This method reads the list of command in the data text file converts them into 
+a ArrayList of String. readTextFileToString() method will first create a new ArrayList 
+which will later be used to store all the commands in the data text file into 1 Strings 
+per command. A BufferReader object is then created to read the data text file in the 
+specified directory. The BufferReader object will read the content of the data text file 
+line by line or command by command (since each command is separated by a "\n" character).
+
+The BufferReader continues reading until the end of the data text-file and then return the 
+filled ArrayList of String. 
+
+This ArrayList of String will later be passed into the Parser which will load all the 
+command and thus load data into the App.
+
+`reloadArrayToStorage() & convertToCsvFile()`
 
 ![reloadArrayToStorage Sequence Diagram](images/reloadArrayToStorage.png)
 
 ![convertToCsvFile Sequence Diagram](images/convertToCsvFile.png)
 
-4) How switching database work?
+When reloadArrayToStorage() method is called, it creates a new File object into the specified directory
+(file directory to reload data files). The isFile() of the File Class is called to check if the data file
+exist. If it doesn't, a error message will be shown to the user and the method terminates. Otherwiese, it 
+continues to create a new FileWrite object which will clear the existing data text file first. The FileWrite 
+object will then be passed into the new PrintWriter object that will be created. 
 
-When the `year <SELECTED DATABASE YEAR>` command is called eg. `year 2020`, the Parser will call the YearCommand
-and it will run the method "execute()". "execute()" first clears the allRecordList by calling clearAll() from 
-the AllRecordList class. And setYear(2020) method is called from AllRecordList Class to set the year to 2020. 
-Then the loadStorage method of Storage Class will be called to load the datafile "2020.txt" into the app.  
+Then a for loop is used to loop through the 12 months of the RecordList to obtain the amount for each
+month and convert it into a command such as "add -b a/1000.00 m/10". Each of these command will be "flush" into 
+the text file with 1 line per command. 
+
+2 inner for loop is also used to loop through all the expenditure and loan of a particular month respectively and 
+convert them into their respective add commands. For example, "add -e n/Chicken Rice a/100.0 d/2021-10-10 c/FOOD" and 
+"add -l n/Benjamin a/1000.00 d/2021-10-27".
+
+Both reloadArrayToStorage() and convertToCsvFile() method are similar in the way they read 
+data from the App and save it into the data files. The only difference is on the type of file they
+save into. reloadArrayToStorage() save into ".txt" type files while convertToCsvFile() save into 
+".csv" type files. 
+
+4) Why does `edit` and `delete` command work with reloadArrayToStorage() method? 
+
+`edit` command can change the attribute of budget, expenditure and loan such as description, amount... 
+Reloading the data text files after the `edit` will just update the `add` command attribute's value to their
+attribute's value after the edit. That is the reason why it reloadArrayToStorage() can still work. 
+
+`delete` command on the other hand just removes a particular budget, expenditure or loan entry. Thus
+reloading the data text files after the `delete` command will just remove a particular `add` line 
+of command from the data text file. 
+
+5) How switching database work?
+
+When the `year <SELECTED DATABASE YEAR>` command is called eg. `year 2020`, the Parser will 
+call the YearCommand and it will run the method "execute()". "execute()" first clears the 
+allRecordList by calling clearAll() from the AllRecordList class. And setYear(2020) method 
+is called from AllRecordList Class to set the year to 2020. Then the loadStorage method of Storage 
+Class will be called to load the datafile "2020.txt" into the app.  
 
 ## <a id=""></a> List of Commands
 
