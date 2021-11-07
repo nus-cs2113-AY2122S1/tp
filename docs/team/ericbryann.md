@@ -33,7 +33,7 @@ scheduler appointments between them and medical staff.
 * Documentations:
   * UG:
     * Added information for `find`, `hide`, and `show` commands.
-    * Added additional notes for some commands under `Notes` for possible edge cases or
+    * Added additional notes for some commands under `Notes` and `General Notes` for possible edge cases or
       additional useful information.
   * DG:
     * Added implementation details for `Ui` and `find`
@@ -41,6 +41,3 @@ scheduler appointments between them and medical staff.
 * Contributions to team task:
   * Occasional refactoring of codes to follow more OOP principles. [#30](https://github.com/AY2122S1-CS2113-T13-1/tp/pull/30), [#92](https://github.com/AY2122S1-CS2113-T13-1/tp/pull/92), [#163](https://github.com/AY2122S1-CS2113-T13-1/tp/pull/163)
   * Assigned milestone `v1.0` due dates.
-* Review / mentoring contributions:
-  * Pointing out other team members' bugs.
-  * Suggest possible improvements for the features they implemented.
