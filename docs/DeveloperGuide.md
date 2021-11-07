@@ -9,7 +9,7 @@ Third party library used: GSON under Apache License 2.0
 
 ### Architecture
 
-![](../Resources/Arch_Diag.JPG)
+![](images/Arch_Diag.JPG)
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
@@ -25,7 +25,9 @@ Further elaboration on these classes will be in the following sections later.
 The remaining components are as follows:
 
 `Ui`: The User Interface of the App
+
 `Parser`: The command executor
+
 `Storage`: Holds the data of the App in memory, and also reads and writes data to the hard disk
 
 **How the architecture components interact with one another**
@@ -34,7 +36,7 @@ The ***Sequence Diagram*** below shows how the components interact with each oth
 For this particular interaction, the user has issued the command
 `create` with the correct input parameters.
 
-![](../Resources/ExampleSeq_Diag.JPG)
+![](images/ExampleSeq_Diag.JPG)
 
 The sections below provide more details of the components and classes in them.
 
