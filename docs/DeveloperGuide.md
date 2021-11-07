@@ -274,11 +274,21 @@ diagram below shows how the `SearchContactCommand` is executed.
 ![Search Sequence Diagram](images/SearchContactCommandSequenceDiagram.png)
 
 ### <a name="List"></a>Listing all contacts: `ls`
-This feature is processed using `MainParser`. The control is sent to `ListContactsCommand` under `Command` to execute the
-command which uses a loop to get the Contact object at every available index and print it using the `printContactWithIndex`
-function in `TextUi` class.
+This feature is processed under `ListContactsCommand`. The feature allows the user to list all their stored contacts
+in an easy to understand manner, by entering the command `ls`. The output is the names of all the contacts stored
+with their respective indexes. 
+
+The user’s input is parsed in `MainParser` which invokes the `execute` method in `ListContactsCommand`. The sequence
+diagram below shows the series of steps to obtain and print all the contacts.
 
 ![List Sequence Diagram](images/ListContactsCommandSequenceDiagram.png)
+
+The `execute` method gets the list size from `ConatactList` class using the `getListSize` method.
+If the `contactListSize` is `0` it prints an error message from the `TextUI` class using the method
+`contactsEmptyListMessage`. 
+If the list is not empty the method `listAllContacts` uses a loop to get the `Contact` object at 
+every available index and print it using the `printContactWithIndex`
+method in `TextUi` class.
 
 ### <a name="Import"></a>Importing contacts: `import`
 This feature is processed using the `ImportContactCommand`. This feature allows a user to import contacts over from 
