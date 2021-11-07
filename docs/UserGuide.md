@@ -820,7 +820,7 @@ ________________________________________________________
 This occurs when the `data` folder in which the GetJack'D data file is stored fails to be created. You could:
 
 * Go to the folder where GetJack'D is saved and search for any **files** named `data`. If such a file exists then either delete or relocate it.
-* Reinstall GetJack'D and try mocing the application JAR file to another location.
+* Reinstall GetJack'D and try moving the application JAR file to another location.
 
 <div style="page-break-after: always;"></div>
 
