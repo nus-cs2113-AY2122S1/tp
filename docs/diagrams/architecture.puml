@@ -51,6 +51,7 @@ Command *- Main
 Animation *-- TextUi
 GameUi *-- Game
 SummaryUi *-- Game
+SummaryManager *-- Game
 GameRecordsManager *-- Game
 Game *-- GameCommand
 GameUi *-- GameCommand
@@ -73,5 +74,6 @@ TextUi *-- TimeLimitGame
 TextUi *-- WordLimitGame
 GameRecord *-- FileParser
 GameRecord *-- Storage
+StringParser *-- WordLimitGame
 
 @enduml
