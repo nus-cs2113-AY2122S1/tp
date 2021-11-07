@@ -163,7 +163,7 @@ The Command class and its subclasses are responsible for handling the execution 
 
 Each individual Command object includes:
 
-* `isExit()`: Return true only if it is an `ExitCommand` .
+* `isExit()`: Return true only if it is an `Exit Command` .
 * `execute(Scheduler, Ui)`: Using the `Ui` class and data from the `Scheduler` to execute and print out the result to
   the user.
 * Various attributes specific to the command, some common ones:
@@ -176,19 +176,22 @@ Three major types of Commands:
 2. `Appointment` commands: to interact with the appointment between doctors/nurses and patients.
 3. General commands: included are `help`, `exit`, `switch`, `getCurrentView`.
 
-Given below are class diagrams of how the `Command` class and its subclasses are implemented.
+Given below are the complete list of implemented commands and their types:
 
-#### Command class and general commands
-
-![General Command Class Diagram](diagrams/general_command.png)
-
-#### Person-related commands
-
-![Person Command Class Diagram](diagrams/person_command.png)
-
-#### Appointment-related commands
-
-![Appointment Command Class Diagram](diagrams/appointment_command.png)
+|Command name| Type |
+|--------|---|
+|Exit Command|General|
+|Get View Command|General|
+|Help Command|General|
+|Switch Command|General|
+|Add Person/Appointment Command|Person/Appointment|
+|Edit Person/Appointment Command|Person/Appointment|
+|Delete Person/Appointment Command|Person/Appointment|
+|Find Person/Appointment Command|Person/Appointment|
+|List Person/Appointment Command|Person/Appointment|
+|View Person/Appointment Command|Person/Appointment|
+|Hide Person Command|Person|
+|Show Person Command|Person|
 
 ## 4. Implementation
 
