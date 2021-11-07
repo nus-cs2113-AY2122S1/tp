@@ -71,7 +71,7 @@ public class DataConverterTest {
     @Test
     public void convertDataToExpense_invalidExpenseDataWithInvalidAmount_throwsException() {
         assertThrows(InvalidAmountException.class,
-                () -> convertDataToExpense("E, asd, 12a, qwe, 21-11-11"));
+            () -> convertDataToExpense("E, asd, 12a, qwe, 21-11-11"));
     }
 
     @Test
@@ -86,25 +86,25 @@ public class DataConverterTest {
     @Test
     public void convertDataToIncome_invalidIncomeDataWithBlankDescription_throwsException() {
         assertThrows(InputException.class,
-                () -> convertDataToIncome("I, , 12, q, 2121-11-11"));
+            () -> convertDataToIncome("I, , 12, q, 2121-11-11"));
     }
 
     @Test
     public void convertDataToIncome_invalidIncomeDataWithInvalidAmount_throwsException() {
         assertThrows(InvalidAmountException.class,
-                () -> convertDataToIncome("I, asd, 12a, q, 2121-11-11"));
+            () -> convertDataToIncome("I, asd, 12a, q, 2121-11-11"));
     }
 
     @Test
     public void convertDataToIncome_invalidIncomeDataWithInvalidMarker_throwsException() {
         assertThrows(InvalidIncomeDataFormatException.class,
-                () -> convertDataToIncome("E, asd, 12a, q, 2121-11-11"));
+            () -> convertDataToIncome("E, asd, 12a, q, 2121-11-11"));
     }
 
     @Test
     public void convertDataToIncome_invalidIncomeDataWithInvalidSeparator_throwsException() {
         assertThrows(InvalidIncomeDataFormatException.class,
-                () -> convertDataToIncome("I" + DATA_SEPARATOR + "pay" + DATA_SEPARATOR + 1000 + DATA_SEPARATOR
+            () -> convertDataToIncome("I" + DATA_SEPARATOR + "pay" + DATA_SEPARATOR + 1000 + DATA_SEPARATOR
                         + "SALARY" + "|" + "11/11/2121"));
     }
 
