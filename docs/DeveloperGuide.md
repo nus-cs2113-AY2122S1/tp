@@ -114,6 +114,8 @@ expands outwards to all other countries, yielding the least distances to all oth
 Then, `getToGoal` backtracks from the target country to trace the shortest path to the source country, 
 in reverse order. Note that `getToGoal` returns an object of `MinCalcResult` type.
 
+{TODO: Add diagram}
+
 #### 1.1.4. DataLoader class
 The `DataLoader` class reads in data from *flightData/time.txt* or *flightData/cost.txt* to create the vertexes 
 and edges in `GraphList`.
