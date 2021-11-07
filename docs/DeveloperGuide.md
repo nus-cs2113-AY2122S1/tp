@@ -78,6 +78,8 @@ Along the way you might encounter several icons. These icons will provide you wi
 
 > 📝 **Note:** This icon represents additional information that might be useful when using our application.
 
+For UML Sequence Diagram, do take note that there is a limitation in `puml` hence the lifeline will still continue even after the `X` has already taken place.
+
 Lastly, text that is blue like this [example](#test), are clickable links that will bring you to the relevant part of this developer guide.
 
 ## 2. Setting up
