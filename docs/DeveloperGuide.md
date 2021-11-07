@@ -620,15 +620,15 @@ exploratory testing.
     4. Expected:
     ```
     You are missing a description!
-    ```
+   ```
 
 ## Adding a GradableTask to module
 
 1. Prerequisite: Module CS2040C should already exist.
 2. Adding a valid GradableTask to module.
     1. Run the command: `/m cs2040c addgradable finals /by 11/11/2021 1000 /w 50`
-    2. Expected:  
-    ```
+    2. Expected:
+   ```
     Added new task to CS2040C
     finals by: 11 Nov 2021 10:00 AM Weightage 50% [ ]
     BREAKDOWN:
@@ -638,7 +638,7 @@ exploratory testing.
     1: finals
     
     1 finals by: 11 Nov 2021 10:00 AM Weightage 50% [ ]
-    ```
+   ``` 
 3. Adding a GradableTask with an invalid syntax.
     1. Run the command : `/m cs2040c addgradable finals /by 00/00/00 /w 50`
     2. Expected:
