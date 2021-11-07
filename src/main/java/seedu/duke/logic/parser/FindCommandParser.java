@@ -50,10 +50,10 @@ public class FindCommandParser {
 
     private static Command parseFindTaskCommand(String userResponse) throws ParseException {
         if (userResponse.isBlank()) {
-            throw new ParseException(Message.ERROR_INVALID_COMMAND);
+            throw new ParseException(promptFormat(FIND_TASK_FORMAT));
         }
 
-        return new FindTaskCommand(promptFormat(FIND_TASK_FORMAT));
+        return new FindTaskCommand(userResponse.toLowerCase());
     }
 
     private static Command parseFindModuleCommand(String userResponse) throws ParseException {

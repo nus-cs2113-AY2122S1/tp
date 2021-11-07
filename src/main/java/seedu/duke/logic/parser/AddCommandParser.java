@@ -1,5 +1,6 @@
 package seedu.duke.logic.parser;
 
+import java.time.LocalTime;
 import java.util.HashMap;
 
 import seedu.duke.commons.core.CommandType;
@@ -79,6 +80,11 @@ public class AddCommandParser {
         if (flagMap.containsKey(LINK_FLAG)) {
             meetingUrl = flagMap.get(LINK_FLAG);
         }
+
+        if (LocalTime.parse(startTime).isAfter(LocalTime.parse(endTime))) {
+            throw new ParseException(Message.ERROR_INVALID_TIME_SEQUENCE);
+        }
+
         return new AddLessonCommand(title, dayOfTheWeek, startTime, endTime, meetingUrl);
     }
 

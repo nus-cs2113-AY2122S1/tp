@@ -21,10 +21,12 @@
 * [Appendix: Requirements](#appendix-requirements)
     * [Product scope](#product-scope)
     * [User stories](#user-stories)
-    * [Use cases](#use-cases)
     * [Non-Functional Requirements](#non-functional-requirements)
     * [Glossary](#glossary)
 * [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+  * [Testing commands for tasks](#testing-commands-for-tasks)
+  * [Testing commands for lessons](#testing-commands-for-lessons)
+  * [Testing commands for modules](#testing-commands-for-modules)
 
 ## Acknowledgements
 
@@ -352,16 +354,236 @@ NUS undergraduate students who prefer typing over using a mouse and proficient w
 |v2.0|user|sort my task in order of importance|see the important ones first|
 |v2.0|NUS student|be able to keep track of my CAP score|gauge my current undergraduate performance|
 
-### Use cases
-
-{Describe the use cases}
-
 ### Non-Functional Requirements
 
-{Give non-functional requirements}
+* The application should work on the major operating systems (Windows, Mac and Linux) if it has Java 11 installed.
+* The application should be able to perform each command within 1 second.
+* The application should allow users who are comfortable with typing to perform tasks faster than with on an application with a GUI.
 
 ### Glossary
 
+CLI: Command Line Interface
+
+GUI: Graphical User Interface
+
 ## Appendix: Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+* [Testing commands for tasks](#testing-commands-for-tasks)
+* [Testing commands for lessons](#testing-commands-for-lessons)
+* [Testing commands for modules](#testing-commands-for-modules)
+
+### Testing commands for tasks
+
+#### Adding a task
+
+Test case: `add task CS2113T assignment -d tue -i add feature -p low`
+
+Expected output: The task is successfully added and a message with the added task is displayed.
+
+#### Adding a task without required flags
+
+Test case: `add task CS2113T assignment`
+
+Expected output: A message is displayed about missing flags in the input.
+
+#### Adding a task with empty title
+
+Test case: `add task -d tue -i add feature`
+
+Expected output: A message is displayed that the title cannot be blank.
+
+#### Listing all tasks
+
+Test case: `list task`
+
+Expected output: The full list of tasks is displayed.
+
+#### Listing tasks sorted by priority
+
+Test case: `list task priority`
+
+Expected output: The full list of tasks is displayed, sorted according to the priority assigned for each task (HIGH, MEDIUM or LOW).
+
+#### Listing tasks on a day of the week
+
+Test case: `list task tue`
+
+Expected output: A list of tasks on Tuesday is displayed.
+
+#### Listing tasks with invalid day of the week
+
+Test case: `list task t`
+
+Expected output: A message is displayed stating that the wrong format is used for the command.
+
+#### Finding tasks with keyword
+
+Test case: `find task assignment`
+
+Expected output: A message is displayed with the tasks that contain the keyword.
+
+#### Finding tasks with empty keyword
+
+Test case: `find task`
+
+Expected output: A message is displayed stating that the wrong format is used for the command.
+
+#### Marking a task as done
+
+Test case: `done task 1`
+
+Expected output: The task is successfully marked as done and a message with the task marked as done is displayed.
+
+#### Marking a task with invalid index
+
+Test case: `done task 0`
+
+Expected output: A message is displayed stating that the index of the task entered is invalid.
+
+#### Marking a task with an index that is not a number
+
+Test case: `done task m`
+
+Expected output: A message is displayed stating that the index of the task entered is not a number.
+
+#### Deleting a task
+
+Test case: `delete task 1`
+
+Expected output: The task is successfully deleted and a message with the deleted task is displayed.
+
+#### Deleting a non-existent task
+
+Test case: `delete task 0`
+
+Expected output: A message is displayed stating that the index of the task entered is invalid.
+
+#### Deleting a task with an index that is not a number
+
+Test case: `delete task m`
+
+Expected output: A message is displayed stating that the index of the task entered is not a number.
+
+### Testing commands for lessons
+
+#### Adding a lesson
+
+Test case: `add lesson CS2113T tutorial -d wed -s 11:00 -e 12:00 -l zoom.us/a19b3jkdjk93`
+
+Expected output: The lesson is successfully added and a message with the added lesson is displayed.
+
+#### Adding a lesson without required flags
+
+Test case: `add lesson CS2113T tutorial`
+
+Expected output: A message is displayed about missing flags in the input.
+
+#### Adding a lesson with empty title
+
+Test case: `add lesson -d mon -s 11:00 -e 12:00`
+
+Expected output: A message is displayed that the title cannot be blank.
+
+#### Listing lessons
+
+Test case: `list lesson`
+
+Expected output: The full list of lessons is displayed.
+
+#### Listing lessons on a day of the week
+
+Test case: `list lesson wed`
+
+Expected output: A list of lessons on Wednesday is displayed. 
+
+#### Finding lessons with keyword
+
+Test case: `find lesson tutorial`
+
+Expected output: A message is displayed with the lessons that contain the keyword.
+
+#### Finding lessons with empty keyword
+
+Test case: `find lesson`
+
+Expected output: A message is displayed stating that the wrong format is used for the command.
+
+#### Deleting a lesson
+
+Test case: `delete lesson 1`
+
+Expected output: The lesson is successfully deleted and a message with the deleted lesson is displayed.
+
+#### Deleting a non-existent lesson
+
+Test case: `delete lesson 0`
+
+Expected output: A message is displayed stating that the index of the lesson entered is invalid.
+
+#### Deleting a lesson with an index that is not a number
+
+Test case: `delete lesson m`
+
+Expected output: A message is displayed stating that the index of the lesson entered is not a number.
+
+#### Launching a lesson with a URL
+
+Test case: `launch lesson 1`
+
+Expected output: The lesson's URL is launched in a browser if it exists. Otherwise, a message is displayed stating that no link is provided.
+
+### Testing commands for modules
+
+#### Adding a module
+
+Test case: `add module CS2113T`
+
+Expected output: The module is successfully added and a message with the added module is displayed.
+
+#### Adding a module that is already in the list
+
+Test case: `add module CS2113T`, then `add module CS2113T` again
+
+Expected output: When attempting to add the module a second time, a message stating that the module has already been added is displayed.
+
+#### Adding a module with an invalid module code
+
+Test case: `add module CS211`
+
+Expected output: A message stating that the module does not exist is displayed.
+
+#### Listing modules
+
+Test case: `list module`
+
+Expected output: A list of all modules added is displayed.
+
+#### Listing modules with details
+
+Test case: `list module verbose`
+
+Expected output: A list of all modules and their details is displayed.
+
+#### Finding information for a module
+
+Test case: `find module CS2113T`
+
+Expected output: The module is successfully added and a message with information for the module is displayed.
+
+#### Finding information for a module with an invalid module code
+
+Test case: `find module CS211`
+
+Expected output: A message stating that the module does not exist is displayed.
+
+#### Deleting a module
+
+Test case: `delete module CS2113T`
+
+Expected output: The module is successfully deleted and a message with information for the module is displayed.
+
+#### Deleting a module with invalid code or a module not in the list
+
+Test case: `delete module CS123`
+
+Expected output: A message is displayed stating that the module is not in the list.
