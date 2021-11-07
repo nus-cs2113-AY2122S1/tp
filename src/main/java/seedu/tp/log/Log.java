@@ -20,7 +20,7 @@ public class Log {
     private static final Level DEFAULT_CONSOLE_SEVERITY = Level.SEVERE;
     private static final Level DEFAULT_LOG_FILE_SEVERITY = Level.FINE;
     private static final String LOG_FILE_NAME = "log.txt";
-    private static final String LOG_FORMAT = "[%1$tF %1$tT] [%2$-7s]%n%3$s %n";
+    private static final String LOG_FORMAT = "[%1$tF %1$tT] [%2$-7s]%n%4$s: %3$s %n";
     private static final String IOEXCEPTION_MESSAGE = "Failed to initialise log file.";
 
     private static final int METHOD_STACKTRACE_POSITION = 3;
@@ -83,7 +83,7 @@ public class Log {
             public synchronized String format(
                 LogRecord logRecord) {
                 return String.format(format, new Date(logRecord.getMillis()),
-                    logRecord.getLoggerName(), logRecord.getMessage());
+                    logRecord.getLoggerName(), logRecord.getMessage(), logRecord.getLevel());
             }
         };
     }
