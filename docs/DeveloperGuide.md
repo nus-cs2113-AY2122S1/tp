@@ -104,10 +104,35 @@ The following partial sequence diagram dictates the flow of events when the user
 ![](images/ParserSequenceDiagram.png)
 
 ### `Expense` Class
-The `Expense` class deals with most functionalities related to adding an expense inside a trip. The sequence diagram below shows how an expense is initialised.
-![](images/Expense%20Sequence%20Diagram.jpeg)
+The `Expense` class deals with most functionalities related to adding an expense inside a trip. The following partial class diagram
+shows the interactions between the `Expense` class and other classes and interfaces.
 
-When `Parser` calls the `executeExpense` method, it creates an expense object, and also calls the `promptDate` method to set that expense object’s date. `promptDate` calls `isDateValid` to validate user input.
+
+![](images/ExpenseClassDiagram.png)
+
+The `Expense` class,
+- Stores amount spent
+- Stores description
+- Stores category
+- Stores persons involved
+
+The sequence diagram below shows how an expense is initialised.
+![](images/ExpenseSequenceDiagram.png)
+
+
+When `CommandExecutor` calls the `executeCreateExpense()` function, the open trip will be retrieved, and an expense will be intialized.
+During the initialization fo a new `Expense`, the amount spent for the expense is set using `setAmountSpent()`, the category is set
+using `setCategory` and the date of the `Expense` is being prompted using `promptDate()`. 
+
+In `promptDate()`, the date is checked if it is valid and will only return if it is. Otherwise, the program will keep prompting the user.
+
+If no date is entered, `LocalDate` will return the date which the user entered the expense. 
+Otherwise, `LocalDate` will parse the date according to the given format.
+
+If there is only 1 `Person` in the expense, then `Expense` will call the corresponding methods in `ExpenseSplitter`. `CommandExecutor` will
+call `addExpense()` and `setLastExpense` to add the expense to the trip and set it as the last expense added. Then, a success message is printed using
+`printExpensesAddedSuccess()` of `Ui`.
+
 
 ### `Storage` Component
 
