@@ -69,10 +69,10 @@ to you, and includes a **[List of Commands](#-list-of-commands)** for your quick
 ## 📖 Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `Food-O-Rama`
+2. Download the latest version of `Food-O-Rama.jar`
    from [here](https://github.com/AY2122S1-CS2113T-W11-4/tp/releases).
-3. Copy 'Food-O-Rama.jar' into an empty folder.
-4. Open command prompt, navigate to where 'Food-O-Rama.jar' is located. e.g. `cd [FILE_PATH]`.
+3. Copy `Food-O-Rama.jar` into an empty folder.
+4. Open command prompt, navigate to where `Food-O-Rama.jar` is located. e.g. `cd [FILE_PATH]`.
 5. Launch 'Food-O-Rama' using `java -jar Food-O-Rama.jar`.
 6. Enter commands to use Food-O-Rama.
 
@@ -135,6 +135,11 @@ Congratulations! Now, the **List of Commands** below will teach you how to use a
 | Exit *Food-O-Rama* | `bye` |
 
 ## 👍 Features
+
+> 💡 **Command Format Notes**:
+> * Words in `UPPER_CASE` are to be supplied by the user.  
+> e.g. `add dish [DISH_NAME]`, where `[DISH_NAME]` is a parameter which can be used as `add dish chicken rice`.
+> * All text supplied by the user are automatically converted into lowercase format.
 
 ### List all commands : `help`
 
@@ -288,6 +293,12 @@ Format: `set dish limit [DISH_NAME]`
 Example of usage:
 
 `set dish limit chicken rice`
+
+```
+____________________________________________________________
+Please enter the limit for 'chicken rice' in kg:
+____________________________________________________________
+```
 
 Example of usage:
 
@@ -721,7 +732,7 @@ ____________________________________________________________
 
 💡 *Note*:
 
-When adding new wastage to the Ingredient exceeds the limit, you will receive a prompt that the current Dish limit has
+When adding new wastage to the Ingredient exceeds the limit, you will receive a prompt that the current Ingredient limit has
 exceeded.
 
 An indicator *(exceeded)* shows the Ingredient that has exceeded its limit.
@@ -797,7 +808,7 @@ ____________________________________________________________
 ```
 
 💡 *Note*: The number of days shown to expiry is relative to the date set on your PC and does not strictly follow the
-outcome shown above. This applies to the expiry dates similarly found in `list ingr`.
+outcome shown above. This applies to the expiry dates similarly found in `list ingr` and `find ingr`.
 
 <br/>
 
@@ -1111,7 +1122,7 @@ ____________________________________________________________
 
 ### Display graph of dish wastage : `graph dish`
 
-Display a graph to show Dish wastage.
+Display a graph to show Dish **wastage**.
 
 *Gives you a visual representation of the Dish wastage in your restaurant.*
 
@@ -1119,8 +1130,10 @@ Format: `graph dish`
 
 * 💡 *Note*:
     * `graph dish` does not require additional parameters. 
-    *  Due to the limitations of a CLI based application, the terminal is unable to print half a character and 
-  as a result the graphs are unable to display fractional values (e.g. 2.5 units is impossible)
+    * Due to the limitations of a CLI based application, the terminal is unable to print half a character and 
+      as a result the graphs are unable to display fractional values (e.g. 2.5 units is impossible)
+    * To circumvent this limitation we have added a bar that has a digit instead of a | inside to indicate fractional units
+      (e.g 4.5 units will have four bars followed by a bar that contains a 5). This is still only capable of representing up to one decimal place.
 
 Example of usage:
 
@@ -1139,9 +1152,9 @@ ____________________________________________________________
          [|]         [5]
          [|]         [|]
          [|]   [0]   [|]
-   [0]   [|]   [|]   [|]
+         [|]   [|]   [|]
    [|]   [|]   [|]   [|]
-    A     B     C     D
+    A     B     C     D 
 ____________________________________________________________
 ```
 
@@ -1149,16 +1162,18 @@ ____________________________________________________________
 
 ### Display a graph of ingredient wastage : `graph ingr`
 
-Displays a graph to show Ingredient wastage.
+Displays a graph to show Ingredient **wastage**.
 
-*Gives you a visual representation of the Ingredients' wastage in your restaurant.*
+*Gives you a visual representation of the Ingredient wastage in your restaurant.*
 
 Format: `graph ingr`
 
 * 💡 *Note*:
     * `graph ingr` does not require additional parameters.
-    *  Due to the limitations of a CLI based application, the terminal is unable  to print half a character and
+    * Due to the limitations of a CLI based application, the terminal is unable  to print half a character and
        as a result the graphs are unable to display fractional values (e.g. 2.5 units is impossible)
+    * To circumvent this limitation we have added a bar that has a digit instead of a | inside to indicate fractional units
+      (e.g 4.9 units will have four bars followed by a bar that contains a 9). This is still only capable of representing up to one decimal place.
        
 Example of usage:
 
@@ -1215,6 +1230,7 @@ ____________________________________________________________
 
 💡 *Note*: `find dish [KEYWORD]` will print the index of matching dishes as how it appears in the dish list.
 * Example original Dish list:
+  
     ```
     ____________________________________________________________
     Here are the dishes you have:
@@ -1612,7 +1628,7 @@ Dish example of usage:
 No Linked Ingredients, No Limit, Wastage of 2kg:
 prata|2.0|2.0|-1
 
-2 Linked Ingredients (flour and egg), No Limit, Wastage of 2kg:
+2 Linked Ingredients (flour and egg), Wastage of 2kg, No Limit:
 prata|2.0|1.0|-1|flour|egg
 
 2 Linked Ingredients (flour and egg), Wastage of 2kg, Limit of 3kg:
@@ -1645,7 +1661,8 @@ chicken|2.0|1.0|2.5|30/10/2021
 as `Food-O-Rama.jar`.
 
 Example:
-![DataImage](https://user-images.githubusercontent.com/69526313/140649444-5e3e073b-87a7-42eb-8fb4-5e72e5b487cb.png)
+
+![DataImage](https://user-images.githubusercontent.com/69526313/140651833-d6e15a84-a8d0-4b05-bfdb-3352c5633846.png)
 
 ## 👋 Final Notes
 
