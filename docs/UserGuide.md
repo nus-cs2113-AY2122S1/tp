@@ -139,14 +139,14 @@ list /muni
 ```  
 Expected output:
 ```
-Here are the universities and module mappings in the list:  
-[1]  - Aarhus School of Business  
-[2]  - Aarhus University  
-[3]  - Arizona State University  
+Here are the universities for exchange:  
+[1]  Aarhus School of Business
+[2]  Aarhus University
+[3]  Arizona State University  
 ...  
-[78] - Uppsala University  
-[79] - Waseda University  
-[80] - Western University  
+[78] Uppsala University
+[79] Waseda University
+[80] Western University 
 ```
 
 ### Viewing all available modules: 
@@ -275,10 +275,10 @@ Mappings here are labeled with a mapping index, which will be used for `add /map
   Expected Output:
 ```
 Potential mappings for Boston University [4]  :
-1 | CS2030 - MET CS 232 : Programming with Java
-2 | BT4222 - MET CS688 : Web Analytics and Mining
-3 | BT3102 - CAS MA 589 : Computational Statistics
-4 | CS2040 - Cs112 : Introduction to Computer Science 2
+      [1]   CS2030 - MET CS 232 : Programming with Java : 4.0
+      [2]   BT4222 - MET CS688 : Web Analytics and Mining : 4.0
+      [3]   BT3102 - CAS MA 589 : Computational Statistics : 4.0
+      [4]   CS2040 - Cs112 : Introduction to Computer Science 2 : 4.0
 ```
 <div markdown="span" class="alert alert-primary"> :information_source: **Note:**
 The output of this command might differ from the example given, based on the modules added into the selected module 
@@ -298,11 +298,11 @@ Displays all available module mappings for all the universities in the *Selected
 ```
 Potential mappings for Aarhus School of Business [1]  :
 Potential mappings for Boston University [4]  :
-1 | CS3244 - ENG EC 414 : Introduction to Machine Learning : 4.0
-2 | CS3243 - MET CS 664 : Artificial Intelligence : 4.0
+      [1]   CS3244 - ENG EC 414 : Introduction to Machine Learning : 4.0
+      [2]   CS3243 - MET CS 664 : Artificial Intelligence : 4.0
 Potential mappings for ETH Zurich [17] :
-1 | CS3244 - 252-0220-00L : Learning and Intelligent Systems : 4.0
-2 | CS3244 - 227-0105-00L : Introduction to Estimation and Machine Learning : 4.0
+      [1]   CS3244 - 252-0220-00L : Learning and Intelligent Systems : 4.0
+      [2]   CS3244 - 227-0105-00L : Introduction to Estimation and Machine Learning : 4.0
 Potential mappings for Korea Advanced Inst of Sci & Tech [24] :
 Potential mappings for University of California [59] :
 ```
@@ -330,7 +330,7 @@ Input: `add /map 4 2`
 Expected output:
 ```
 New module mapping added: 
-[2]   BT4222 - MET CS688 : Web Analytics and Mining
+      [2]   BT4222 - MET CS688 : Web Analytics and Mining
 ```
 
 ### Finding a specific university
@@ -453,14 +453,14 @@ Removes a module from the *Selected Module List*.
 Input: `remove /mod 81`  
 Expected output:
 ```
-The following module has been removed: 
+This module is removed: 
 [81]  CS1231   : Discrete Structures
 ```
 * Example 2: using module code  
 Input: `remove /mod CS1231`  
 Expected output:
 ```
-The following module has been removed: 
+This module is removed: 
 [81]  CS1231   : Discrete Structures
 ```
 
@@ -475,9 +475,8 @@ Removes a module mapping under a selected university.
 Input: `remove /map 4 2`  
 Expected output:  
 ```
-The following module mapping has been removed:
 This module mapping is removed: 
-[2]   CS1231 - CAS CS131 : Combinatoric Structures
+      [2]   CS1231 - CAS CS131 : Combinatoric Structures
 ```
  
 <div markdown="block" class="alert alert-info"> :information_source: **Note:**
