@@ -47,11 +47,13 @@ It ensures the appropriate input format, and passes the input data to the approp
 
 `Command` is the class responsible for the execution of all commands.
 It contains child classes for all possible commands.
-It interacts with `FinancialTracker` and `BudgetManager` to execute commands, before sending information to `Ui` for output.
+It interacts with `FinancialTracker`, `BudgetManager` and `CurrencyConversion` to execute commands, before sending information to `Ui` for output.
 
 `Parser` &rarr; `Command` &harr; `FinancialTracker`
 
 `Parser` &rarr; `Command` &harr; `BudgetManager`
+
+`Parser` &rarr; `Command` &harr; `CurrencyConversion`
 
 `Ui` &larr; `Command`
 
@@ -67,6 +69,16 @@ It also retrieves data from `DataManager` when the program is loaded.
 
 <br>
 
+`CurrencyConversion` is the class containing and handling all currency related information an operations.
+It interacts with Command to execute tasks, and writes to DataManager to save its data.
+It also retrieves data from `DataManager` when the program is loaded.
+
+`Command` &harr; `CurrencyConversion`
+
+`CurrencyConversion` &harr; `DataManager`
+
+<br>
+
 `BudgetManager` is the class containing and handling all budget information.
 It interacts with `Command` to execute tasks, and writes to `DataManager` to save its data.
 It also retrieves data from `DataManager` when the program is loaded.
@@ -79,11 +91,13 @@ It also retrieves data from `DataManager` when the program is loaded.
 
 `DataManager` is the class responsible for reading data from the `StonksXD_entries.csv` and `StonksXD_budget.csv` files upon boot up,
 and writing save data to the files before terminating the program.
-It interacts with `FinancialTracker` and `BudgetManager` and receives commands from `StonksXD`.
+It interacts with `FinancialTracker`, `BudgetManager`, `CurrencyConversion` and receives commands from `StonksXD`.
 
 `FinancialTracker` &harr; `DataManager`
 
 `BudgetManager` &harr; `DataManager`
+
+`CurrencyConversion` &harr; `DataManager`
 
 `DataManager` &larr; `StonksXD_data.csv`
 
@@ -150,6 +164,20 @@ The `FinancialTracker` component,
 - It also uses `DateOperator` and `FinancialCalculator` as helper class, used to perform calculation and dates related operation
 
 The sequence diagram below is used to illustrate how `FinancialTracker` utilizes the helper classes.
+
+---
+
+### Currency Conversion Component
+
+The `CurrencyConversion` class is responsible for all currency related operations performed on entries in Stonks XD. 
+It can convert all these entries to a given currency type, track the current type and list the available types for conversion
+as prompted by the user using appropriate commands.
+
+The class diagram below shows the structure of the `CurrencyConversion` class:
+
+-- Work in progress --
+
+
 
 ---
 
