@@ -3,6 +3,7 @@ package seedu.tp.command.addtask;
 import seedu.tp.command.Command;
 import seedu.tp.command.CommandResult;
 import seedu.tp.exception.ModuleStringFormatIncorrectException;
+import seedu.tp.exception.NoSuchModuleException;
 import seedu.tp.nusmods.NusModsParser;
 import seedu.tp.task.taskmanager.TaskManager;
 
@@ -43,6 +44,8 @@ public class ModuleCommand extends Command {
             }
         } catch (ModuleStringFormatIncorrectException msfie) {
             message = msfie.getMessage();
+        } catch (NoSuchModuleException nsme) {
+            message = nsme.getMessage();
         }
         return new CommandResult(message, false);
     }

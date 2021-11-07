@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import seedu.tp.exception.GetTaskFailedException;
+import seedu.tp.exception.NoSuchModuleException;
 import seedu.tp.task.type.Lesson;
 
 import java.io.File;
@@ -40,7 +41,7 @@ public class NusModsParser {
      * @return An array of Lessons denoting all class occurrences
      * @throws GetTaskFailedException If there is neither network connection nor local cache
      */
-    public Lesson[] getLessons(String moduleCode, String classNo) throws GetTaskFailedException {
+    public Lesson[] getLessons(String moduleCode, String classNo) throws GetTaskFailedException, NoSuchModuleException {
         Reader moduleReader;
         try {
             moduleReader = getModuleReader(moduleCode);
@@ -69,6 +70,9 @@ public class NusModsParser {
                         Semester.acadWeeksToRealWeeks((new Gson()).fromJson(l.get("weeks"), int[].class)));
                 })
                 .toArray(Lesson[]::new);
+        }
+        if (lessons.length == 0) {
+            throw new NoSuchModuleException();
         }
         return lessons;
     }
