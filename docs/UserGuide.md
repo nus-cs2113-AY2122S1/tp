@@ -625,6 +625,7 @@ Example of adding with a date
 
 ```
 food add n/ something i ate 2 weeks ago but forgot to record c/ 300 d/ 13-10-2021
+
 	__________________________________________________
 	Nice.  I've added something i ate 2 weeks ago but forgot to record to the list, with 300 calories!
 	__________________________________________________
@@ -649,20 +650,17 @@ Expected outcome:
 food list
 
 	__________________________________________________
-	1st,You consumed  something i ate 2 weeks ago but forgot to record , which has a calorie count of : 300 on Wednesday, 13 October 2021!
-	2nd,You consumed  Samurai Burger , which has a calorie count of : 433 on Sunday, 7 November 2021!
-	3rd,You consumed  Seaweed Shaker Fries Seasoning , which has a calorie count of : 15 on Sunday, 7 November 2021!
-	4th,You consumed  Large Fries , which has a calorie count of : 461 on Sunday, 7 November 2021!
-	5th,You consumed  Caramel Frappé - Medium , which has a calorie count of : 624 on Sunday, 7 November 2021!
-	6th,You consumed  A Thousand Tide Pods , which has a calorie count of : 92 on Sunday, 7 November 2021!
-	7th,You consumed  Seaweed Shaker Fries Seasoning , which has a calorie count of : 15 on Sunday, 7 November 2021!
-	8th,You consumed  Large Fries , which has a calorie count of : 461 on Sunday, 7 November 2021!
-	9th,You consumed  Caramel Frappé - Medium , which has a calorie count of : 624 on Sunday, 7 November 2021!
-	10th,You consumed  A Thousand Tide Pods , which has a calorie count of : 92 on Sunday, 7 November 2021!
-	11th,You consumed  something i ate 2 weeks ago but forgot to record , which has a calorie count of : 300 on Wednesday, 13 October 2021!
+	1st,You consumed  Samurai Burger , which has a calorie count of : 433 on Sunday, 7 November 2021!
+	2nd,You consumed  Seaweed Shaker Fries Seasoning , which has a calorie count of : 15 on Sunday, 7 November 2021!
+	3rd,You consumed  Large Fries , which has a calorie count of : 461 on Sunday, 7 November 2021!
+	4th,You consumed  Caramel Frappé - Medium , which has a calorie count of : 624 on Sunday, 7 November 2021!
+	5th,You consumed  A Thousand Tide Pods , which has a calorie count of : 92 on Sunday, 7 November 2021!
+	6th,You consumed  something i ate 2 weeks ago but forgot to record , which has a calorie count of : 300 on Wednesday, 13 October 2021!
 	Wow, that's a lot of food! Finished reading the list
-	You consumed 3417 calories in total!
+	You consumed 1925 calories in total!
 	__________________________________________________
+
+
 ```
 
 #### 3.5.2b Finding food records with a date:  `food find`
@@ -719,6 +717,8 @@ Format : `food clear`
 Expected outcome:
 
 ```
+food clear
+
 	__________________________________________________
 	Cleared food record list for today!
 	__________________________________________________
