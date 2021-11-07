@@ -164,7 +164,6 @@ The Parser component is responsible for parsing and checking the logic of the us
 the high level representation of the component.
 
 ![Parser Component](Diagram%20Images/Design%20Diagram%20Images/ParserComponent.png)
-![](Diagram Images/Design Diagram Images/MainParserSequenceDiagram.png)
 
 **API:** `Parser.java`
 
@@ -181,7 +180,7 @@ the high level representation of the component.
 
 The sequence diagram below illustrates the flow of logic when a generic user input is entered into the application.
 
-![](Diagram Images/Design Diagram Images/MainParser.png)
+![](Diagram Images/Design Diagram Images/MainParserSequenceDiagram.png)
 
 ### 3.4. Command Component
 
