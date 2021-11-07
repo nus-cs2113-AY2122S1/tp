@@ -5,7 +5,7 @@
 ---
 
 ## Introduction
-
+   
 Stonks XD is your go-to smart money management application that is able to: 
 - track your daily expenses 
 - set/adjust your spending limits
@@ -43,11 +43,11 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
    * [View total expense: `total_ex`](#view-total-expense-total_ex)
    * [View total income: `total_in`](#view-total-income-total_in)
    * [View total balance: `balance`](#view-total-balance-balance)
-   * [Show total expense between 2 dates: `btw_ex s/START_DATE e/END_DATE`](#show-total-expense-between-2-dates-btw_ex)
-   * [Show total income between 2 dates: `btw_in s/START_DATE e/END_DATE`](#show-total-income-between-2-dates-btw_in)
+   * [Show total expense between 2 dates: `btw_ex`](#show-total-expense-between-2-dates-btw_ex)
+   * [Show total income between 2 dates: `btw_in `](#show-total-income-between-2-dates-btw_in)
 
    2.4 Finding Entries
-   * [Find entry using date: `find DD/MM/YYYY`](#find-entry-using-date-find-ddmmyyyy)
+   * [Find entry using date: `find DATE`](#find-entry-using-date-find-ddmmyyyy)
    * [Find entry using keyword: `find KEYWORD`](#find-entry-using-keyword-find-keyword)
 
    2.5 Budget Setting 
@@ -56,6 +56,7 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
    * [Set_threshold: `set_threshold`](#set-threshold-set_threshold)
 
    2.6 Currency Conversion
+   * [List available currencies: `list_curr`](#list-currency-list_curr)
    * [Set currency: `set_curr`](#set-currency-set_curr)
    * [Check current currency: `check_curr`](#check-current-currency-check_curr)
    * [List all currency conversions: `list_curr`](#list-currency-list_curr)
@@ -109,6 +110,16 @@ to show all available commands and their format.)
 
 9. Refer to the [Features](#features) below for details of each command.
 
+5. The image shown below is what the program should look like for first time users like yourself!   
+![image](https://user-images.githubusercontent.com/69465661/140613991-7848997a-e97b-4c65-825a-1e126590b6a0.png)
+
+6. In `Stonks XD`, type the command in the CLI and press `Enter` on your keyboard to execute it. (Tip: type `help` 
+to show all available commands and their format.)
+7. Use the format `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY` to add expense entries to `Stonks XD`.
+8. Use the format `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY` to add income entries to `Stonks XD`.
+9. Type `balance` to view your net saving or type `show_graph` to see an overview of your finances!
+10. Refer to the [Features](#features) below for details of each command.
+
 ---
 
 ## 2. Features 
@@ -116,6 +127,7 @@ to show all available commands and their format.)
 ### Notes:
 
 - Words in `UPPER_CASE` are the parameters to be supplied by you, the user.
+
   e.g. in add `a/AMOUNT`, `AMOUNT` is a parameter which can be typed as `a/12.30`.
 
 
@@ -124,6 +136,13 @@ to show all available commands and their format.)
 
 
 - Most features below have a collapsible section that allows you to see the run time output. Do check them out if you want to visualize what the product looks like!
+e.g. in add `a/AMOUNT`, `AMOUNT` is a parameter which can be typed as `a/12.30`.
+- Parameters can be in any order.
+e.g. if the command specifies `c/CATEGORY a/AMOUNT`, `a/AMOUNT c/CATEGORY` is also acceptable.
+- If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence 
+of the parameter will be taken. e.g. if you gave `a/100 a/1000`, only `a/1000` will be read in.
+- Most features below have a collapsible section that allows you to see the run time output. Do check them out if you 
+want to visualize what the product looks like!
 
 ---
 ### 2.1 Help
@@ -141,9 +160,9 @@ Format: `help`
 This is a list of commands and their format!
 -----------------------------------------------------------------------------------------------------
 List Out All Commands: help
-Adding Expense: add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY
+Adding Expense (Date Format: DD/MM/YYYY): add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY [D/DATE]
 Deleting Expense: del_ex i/INDEX
-Adding Income: add_in d/DESCRIPTION a/AMOUNT c/CATEGORY
+Adding Income (Date Format: DD/MM/YYYY): add_in d/DESCRIPTION a/AMOUNT c/CATEGORY [D/DATE]
 Deleting Income: del_in i/INDEX
 Listing Expense: list_ex
 Listing Income: list_in
@@ -159,8 +178,16 @@ To Check Budgets: check_budget c/CATEGORY
 To Set Threshold Value for Reminders: set_threshold t/THRESHOLD
 To change entries into a different currency: set_curr c/CURRENCY
 To check the currency that entries are currently in: check_curr
+<<<<<<< HEAD
 Listing available currency types for conversion: list_curr
+=======
+<<<<<<< HEAD
+To view a list of available currency conversions: list_curr
+>>>>>>> BugFixes-v2.0
 To View Your Yearly Report: show_graph
+=======
+To View Your Yearly Report (Year Format: YYYY): show_graph [Y/YEAR]
+>>>>>>> 9f29390ee50261bcbcbd370c1d5fb753c4482a24
 To Clear All Expense And Income Entries: clear_all_entries
 To Terminate The Program: end
 -----------------------------------------------------------------------------------------------------
@@ -180,15 +207,15 @@ This command adds an expense entry to your list. Use this to keep track of your 
 Format: `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY [D/DATE]`
 
 - `DESCRIPTION` has to be non-empty.
-- `AMOUNT` has to be a positive amount.
+- `AMOUNT` has to be a positive amount that has a maximum of 2 decimal points.
 - `CATEGORY` has to be either `food`, `transport`, `bills`, `medical`, `entertainment`, or `misc`.
 - `DATE` is an optional input you can add which specifies when the entry is made. It must be in the DD/MM/YYYY format.
 
 Note:
 
 - The default date of the added expense will be the date in which the expense is added.
-- Each expense entry can only have a maximum value of 1,000,000,000 (1Billion).
-- The sum of all your entries cannot be more than 100,000,000,000 (100Billion).
+- Each expense entry can only have a maximum value of 1,000,000 (1 Million).
+- The sum of all your entries cannot be more than 100,000,000,000 (100 Billion).
 
 Examples:
 
@@ -205,7 +232,7 @@ Your most recent spending:
 <pre>
 -----------------------------------------------------------------------------------------------------
 Your most recent spending: 
-[E] McDonalds dinner - $7.20 (20/10/2021)
+[E] McDonalds dinner - $7.50 (20/10/2021)
 -----------------------------------------------------------------------------------------------------
 </pre>
 
@@ -226,7 +253,7 @@ You can directly increase your OCTOBER FOOD budget up to $32.00!
 
 ### Delete expense entry: `del_ex`
 
-This deletes an unwanted expense entry by providing the index of said entry. 
+You can delete an incorrect expense entry by providing the index of said entry. 
 Index can be found via the `list_ex` command below.
 
 Format: `del_ex i/INDEX`
@@ -285,8 +312,8 @@ Format: `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY [D/DATE]`
 Note:
 
 - The default date of the added income will be the date in which the income is added.
-- Each income entry can only have a maximum value of 1,000,000,000 (1Billion).
-- The sum of all your entries cannot be more than 100,000,000,000 (100Billion).
+- Each income entry can only have a maximum value of 1,000,000 (1 Million).
+- The sum of all your entries cannot be more than 100,000,000,000 (100 Billion).
 
 Examples:
 
@@ -313,7 +340,7 @@ Your most recent earning:
 
 ### Delete income entry: `del_in`
 
-This deletes an unwanted income entries by providing the index of said entry.
+You can delete an incorrect income entry by providing the index of said entry.
 The index can be found using the `list_in` command found below.
 
 Format: `del_in i/INDEX`
@@ -848,8 +875,9 @@ We recommend using this function after your daily logging of expenses for a one-
 
 2. It would be ideal not to have entries with big differences as the Stonks XD app is meant for daily logging.
 
+Format: `show_graph [Y/YEAR]`
 
-Format: `show_graph`
+- `YEAR` is an optional input which you may include. It will show the graph that corresponds to the given year. It must be in the YYYY format
 
 <details>
 <summary> ▼ Expected output in run window </summary>
@@ -934,16 +962,28 @@ Here's our tip for the day: Try using the 50/30/20 rule to budget. 50% for needs
 
 ### Saving of Data
 
-Stonks XD will save / load data from `StonksXD_Entries.csv` and `StonksXD_Settings.csv`. 
+Stonks XD will save / load your data from `StonksXD_Entries.csv` and `StonksXD_Settings.csv`. This ensures that you 
+will not lose your important data when Stonks XD changes.
 
-- `StonksXD_Entries.csv` will store all the expense and income entries Stonks XD is currently tracking.
-- `StonksXD_Settings.csv` will store all the budget values, the currency setting and the threshold value.
+The 2 `csv` files will be stored in the same directory as `StonksXD.jar`.
+
+`StonksXD_Entries.csv` will store all your entries. They are:
+1. `Expense` entries.
+2. `Income` entries.
+
+`StonksXD_Settings.csv` will store all the important settings. They are:
+1. Currency setting
+2. Threshold setting
+3. Budget settings for different expense categories.
+
+All important fields will be separated by a `,`.
 
 The reason for data files to be in `.csv` format is so that you can have an easier time editing those data in Excel 
-when not using the program.
+when **not** using the program. It is easy to make mistakes when editing the `csv` files manually so do be careful.
 
 #### When editing csv files
 
+<<<<<<< HEAD
 - `.csv` files should not be open concurrently while Stonks XD is running. In other words, never have two programs 
 writing / reading the `.csv` files at the same time. This will very likely cause a saving error and lost of data.
 
@@ -951,31 +991,49 @@ writing / reading the `.csv` files at the same time. This will very likely cause
 - Restrictions and rules for different variables are the same as how you would enter them in the CLI, as specified 
 above:<br></br>
   - For example, when editing an expense entry in `StonksXD_Entries.csv`, `entry_description` should not be blank.
+=======
+- `.csv` files **must not** be open concurrently while Stonks XD is running. In other words, never have two programs 
+writing / reading the `.csv` files at the same time. This will very likely cause a saving / loading error and 
+lost of data.
+- Restrictions and rules for different variables are the same as how you would enter them in the Command Line 
+Interface, as specified above.
+  - For example, when editing an expense entry in `StonksXD_Entries.csv`, `entry_description` must not be blank.
+>>>>>>> BugFixes-v2.0
   - Another example, when editing an income entry in `StonksXD_Entries.csv`, `amount` has to be a positive number and 
-  less than 1000000000.
+  less than 1000000.
   - Another example, when editing `threshold` in `StonksXD_Settings.csv`, ensure it is between 0 and 1. 
   - Another example, when editing an expense entry in `StonksXD_Entries.csv`, category should be the ones available and 
+<<<<<<< HEAD
   specified ealier on in the user guide.
 
 
+=======
+  specified earlier on in the user guide.
+>>>>>>> BugFixes-v2.0
 - Do not alter / delete the headers of `.csv` files. Stonks XD is able to minimise the damage if you do so but to 
 ensure your data is saved / loaded properly, please do not edit anything unexpected.
 
 
 - Stonks XD expects the dates in `StonksXD_Entries.csv` to be in `DD/MM/YYYY` format i.e., `11/12/2021` when loading 
-data.
-  When opening `StonksXD_Entries.csv` in Excel, Excel might change the format of the dates. Do ensure Excel's date 
+data. When opening `StonksXD_Entries.csv` in Excel, Excel might change the format of the dates. Do ensure Excel's date 
 format is in `DD/MM/YYYY` when dealing with `StonksXD_Entries.csv`. Entries with a different date format will be 
 considered corrupted and not be loaded into Stonks XD.
 
 
 - Changing the currency setting in `StonksXD_Settings.csv` is not recommended. This is because it will
+<<<<<<< HEAD
   cause all your entries and budgets to be recognised as a different currency.
 
 
 - Do not edit the amount of your expenses / incomes drastically such that they exceed the limit per entry or the 
 total limit of 100000000000 for expense / income. Entries that cause you to exceed either limit will be considered 
 corrupted.
+=======
+cause all your entries and budgets to be recognised as a different currency.
+- Do not edit the amount of your entries drastically such that they exceed the max amount per entry or the 
+total limit of 100000000000 for expenses / incomes. Entries that cause you to exceed either of the 2 limit will be 
+considered corrupted and not be loaded.
+>>>>>>> BugFixes-v2.0
 
 
 #### In the event of corrupted data
