@@ -14,17 +14,14 @@ code. [[RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=a-
 v1.0:
 
 * Implemented `updatestock` command. [[#25](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/25)]
-    * Functionality: Users are able to update stock information with one command.
     * Justification: Refrain the need to use both add and delete stock command.
 
 v2.0:
 
 * Implemented `updateorder` command. [[#121](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/121)]
-    * Functionality: Users are able to update order information with one command.
     * Justification: Refrain the need to use both add and delete order command.
 
 * Implemented `updateprescription` command. [[#184](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/184)]
-    * Functionality: Users are able to update prescription information with one command.
     * Justification: Refrain the need to use both add and delete prescription command.
 
 v2.1:
@@ -36,7 +33,6 @@ v2.1:
 ### Enhancements to Existing Features
 
 * Implemented universal `containsInvalidParameterValues()` method. [[#40](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/40)]
-    * Functionality: Checks if all values provided by the user are valid.
     * Justification: This method can be called at the start of `Command` classes that requires checking of valid user
       inputs for all parameters.
 
@@ -46,12 +42,9 @@ v2.1:
     * `UpdateStockCommand`, `UpdateOrderCommand` and `UpdatePrescriptionCommand` [[#316](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/316)]
 
 * Wrote and refractored `Manager` classes for `stock`, `prescription` and `order`. [[#69](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/69), [#141](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/141)]
-    * Functionality: Contains methods that does specific `stock`, `prescription` or `order` method calls or operations.
     * Justification: Makes the overall code cleaner as methods are separated based on their different functionalities.
 
 * Added functionality for `deletestock` command to delete all expired stocks. [[#135](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/135)]
-    * Functionality: Users can delete stocks given a specific date. All current existing stocks before the given
-      specific date will be deleted.
     * Justification: Prevents user from prescribing expired medication to customers.
 
 ### Documentation
