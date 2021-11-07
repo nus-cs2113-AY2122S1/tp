@@ -67,13 +67,15 @@ public class Constants {
     public static final String LOGMSG_PARSEFAILED = "Parse failed";
 
     // Storage
-    public static final String STORAGE_INVALID_MODULE = "Invalid module found in the file. "
-            + "Deleting it....";
-    public static final String STORAGE_INVALID_UNIVERSITY = "Invalid university name"
-            + " found in the file. Deleting the university and its associated mappings...";
-    public static final String STORAGE_INVALID_MAPPING = "Invalid mapping found in the file."
-            + " Deleting it....";
+    public static final String STORAGE_INVALID_MODULE = "Invalid modules found in the "
+            + "file are deleted.";
+    public static final String STORAGE_INVALID_UNIVERSITY = "Invalid university names"
+            + " found in the file. So, these universities and its associated mappings "
+            + "are deleted." + System.lineSeparator() + "Other invalid mappings may"
+            + " have been deleted.";
+    public static final String STORAGE_INVALID_MAPPING = "Invalid mappings found in the"
+            + " file are deleted.";
     public static final String STORAGE_WARNING_MESSAGE = "WARNING: Do not tamper the files."
-            + "You would lose some records.";
+            + " You would lose some records.";
 
 }
