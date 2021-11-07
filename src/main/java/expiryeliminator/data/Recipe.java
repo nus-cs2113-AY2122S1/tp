@@ -2,6 +2,7 @@ package expiryeliminator.data;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -99,10 +100,11 @@ public class Recipe {
      * @return empty string if no same ingredients and the ingredient name otherwise.
      */
     public String sameIngredientNames(ArrayList<String> ingredientNames) {
-        Collections.sort(ingredientNames);
-        for (int i = 0; i < ingredientNames.size() - 1; i++) {
-            String testIngredient = ingredientNames.get(i);
-            if (testIngredient.equals(ingredientNames.get(i + 1))) {
+        List<String> testIngredientNames = new ArrayList<>(ingredientNames);
+        for (int i = 0; i < ingredientNames.size(); i++) {
+            String testIngredient = testIngredientNames.get(0);
+            testIngredientNames.remove(0);
+            if (testIngredientNames.contains(testIngredient)) {
                 return testIngredient;
             }
         }
