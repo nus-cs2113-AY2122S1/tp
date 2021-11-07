@@ -190,7 +190,7 @@ In the printUniversity Method,
 
 ### Storage
 
-#### API : [`Storage.java`](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob/master/src/main/java/seedu/duke/storage/Storage.java)
+#### API : [`Storage.java`](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob/master/src/main/java/seplanner/storage/Storage.java)
 
 <p align = "center">
 <img src="images/storage.png" width = "800" />
@@ -819,7 +819,8 @@ These instructions only provide a starting point for testers to work on; testers
 
 3. Dealing with corrupted data
     1. Invalid module in `selectedModules.txt`
-       File content before run: 
+   
+       Prerequisites: 
        ```
        ACC2706 # Managerial Accounting # 4.0
        CS1261B # Discrete Structures # 4.0
@@ -830,16 +831,11 @@ These instructions only provide a starting point for testers to work on; testers
        ACC2706 # Managerial Accounting # 4.0
        ```
        
-       Expected output in console:
-       ```
-       =================================================================================
-        Invalid modules found in the file are deleted.
-        WARNING: Do not tamper the files. You would lose some records.
-       =================================================================================
-       ```
+       Expected: Error message printed to the console indicating that invalid modules are found and warning the user not to tamper the file.
        
     2. Invalid module mapping in `selectedUniversities.txt`
-       File content before run:
+   
+       Prerequisites:
        ```
        Boston University
        CS1261B # Discrete Structures # 4.0 # MET CS 249 # Discrete Mathematics # 3.0
@@ -849,17 +845,12 @@ These instructions only provide a starting point for testers to work on; testers
        ```
        Boston University
        ```
-       
-       Expected output in console:
-       ```
-       =================================================================================
-        Invalid mappings found in the file are deleted.
-        WARNING: Do not tamper the files. You would lose some records.
-       =================================================================================
-       ```
+
+       Expected: Error message printed to the console indicating that invalid mappings are found and warning the user not to tamper the file.
        
     3. Invalid university in `selectedUniversities.txt`
-       File content before run:
+   
+       Prerequisites:
        ```
        Aarhus University
        Buston University
@@ -870,19 +861,13 @@ These instructions only provide a starting point for testers to work on; testers
        ```
        Aarhus University
        ```
-       
-       Expected output in console:
-       ```
-       =================================================================================
-        Invalid university names found in the file. So, these universities and its associated mappings are deleted.
-        Other invalid mappings may have been deleted.
-        WARNING: Do not tamper the files. You would lose some records.
-       =================================================================================
-       ```
+
+       Expected: Error message printed to the console indicating that invalid university names are found and warning the user not to tamper the file.
        
 4. Dealing with duplicate data
     1. Duplicate modules in `selectedModules.txt`
-       File content before run:
+   
+       Prerequisites:
        ```
        ACC2706 # Managerial Accounting # 4.0
        CS1231 # Discrete Structures # 4.0
@@ -897,16 +882,12 @@ These instructions only provide a starting point for testers to work on; testers
        CS1231 # Discrete Structures # 4.0
        MKT1705 # Principles of Marketing # 4.0
        ```
-       
-       Expected output in console:
-       ```
-       =================================================================================
-        Invalid modules found in the file are deleted.
-        WARNING: Do not tamper the files. You would lose some records.
-       =================================================================================
-       
+
+       Expected: Error message printed to the console indicating that invalid modules are found and warning the user not to tamper the file.
+
     2. Duplicate module mappings in `selectedUniversities.txt`
-       File content before run:
+   
+       Prerequisites:
        ```
        Aarhus University
        Boston University
@@ -921,17 +902,12 @@ These instructions only provide a starting point for testers to work on; testers
        Boston University
        CS1231 # Discrete Structures # 4.0 # MET CS 248 # Discrete Mathematics # 3.0
        ```
-       
-       Expected output in console:
-       ```
-       =================================================================================
-        Invalid mappings found in the file are deleted.
-        WARNING: Do not tamper the files. You would lose some records.
-       =================================================================================
-       ```
+
+       Expected: Error message printed to the console indicating that invalid mappings are found and warning the user not to tamper the file.
     
     3. Duplicate universities in `selectedUniversities.txt`
-       File content before run:
+   
+       Prerequisites:
        ```
        Aarhus University
        Boston University
@@ -948,19 +924,5 @@ These instructions only provide a starting point for testers to work on; testers
        CS1231 # Discrete Structures # 4.0 # MET CS 248 # Discrete Mathematics # 3.0
        CS1231 # Discrete Structures # 4.0 # CAS CS131 # Combinatoric Structures # 4.0
        ```
-       
-       Expected output in console:
-       ```
-       =================================================================================
-        Invalid university names found in the file. So, these universities and its associated mappings are deleted.
-        Other invalid mappings may have been deleted.
-        WARNING: Do not tamper the files. You would lose some records.
-       =================================================================================
-       ```
-       
-
-
-       
-
-
-       
+    
+       Expected: Error message printed to the console indicating that invalid university names are found and warning the user not to tamper the file.
