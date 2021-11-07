@@ -33,7 +33,7 @@ public class Terminus {
      * Enters the main entry-point for the terminus.Terminus application.
      */
     public static void main(String[] args) {
-        new Terminus().run();
+        new Terminus().start();
     }
     
     Terminus() {
@@ -49,26 +49,31 @@ public class Terminus {
     /**
      * Starts the program.
      */
-    public void run() {
+    public void start() {
         initialize();
         runCommandsUntilExit();
         exit();
     }
 
+    /**
+     * Initializes all the file-related information for TermiNUS.
+     */
     void initialize() {
         try {
             TerminusLogger.initializeLogger();
-            TerminusLogger.info("Starting Terminus...");
+        } catch (IOException e) {
+            ui.printSection(
+                String.format(Messages.ERROR_MESSAGE_FILE, e.getMessage()),
+                "TermiNUS is unable to interact with the logging file.",
+                "Any logs generated in this session will not be saved."
+            );
+        }
+
+        TerminusLogger.info("Starting Terminus...");
+        try {
             this.workspace = "";
             this.storageManager = new StorageManager(dataDirectory, MAIN_JSON);
             this.moduleManager = this.storageManager.initialize();
-        } catch (IOException e) {
-            TerminusLogger.warning("Log file loading has failed.", e.fillInStackTrace());
-            ui.printSection(
-                String.format(Messages.ERROR_MESSAGE_FILE, e.getMessage()),
-                "TermiNUS may still run, but your changes may not be saved.",
-                "Check 'terminus.log' for more information."
-            );
         } catch (InvalidFileException e) {
             TerminusLogger.warning("Data file loading has failed.", e.fillInStackTrace());
             ui.printSection(e.getMessage(),
@@ -88,7 +93,7 @@ public class Terminus {
         
         TerminusLogger.info("Terminus has started.");
     }
-    
+
     CommandResult handleUserInput(String input) {
         try {
             Command command = parser.parseCommand(input);
