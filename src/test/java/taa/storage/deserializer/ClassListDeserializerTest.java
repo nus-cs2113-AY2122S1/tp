@@ -21,19 +21,19 @@ class ClassListDeserializerTest {
 
     @Test
     void deserialize_validMembers_expectTwoTeachingClasses() {
-        String input = "{\"classes\":[" +
-                "{\"id\":\"CS2113T-F12\",\"name\":\"\",\"studentList\":{\"students\":[" +
-                "{\"id\":\"A1234567B\",\"name\":\"Jon Lim\",\"comment\":\"\"," +
-                "\"attendanceList\":{\"attendances\":[" +
-                "{\"lessonNumber\":1,\"isPresent\":true},{\"lessonNumber\":4,\"isPresent\":false}]}," +
-                "\"results\":{\"Midterm\":25.0,\"Quiz 1\":5.56}}," +
-                "{\"id\":\"A7654321Z\",\"name\":\"Hello-world_123 (Nothing)\",\"comment\":\"\"," +
-                "\"attendanceList\":{\"attendances\":[]},\"results\":{}}]}," +
-                "\"assessmentList\":{\"assessments\":[" +
-                "{\"name\":\"Midterm\",\"maximumMarks\":30.0,\"weightage\":30.0}," +
-                "{\"name\":\"Quiz 1\",\"maximumMarks\":10.0,\"weightage\":5.0}]}}," +
-                "{\"id\":\"CS2101-C03\",\"name\":\"Sectional Group C03\"," +
-                "\"studentList\":{\"students\":[]},\"assessmentList\":{\"assessments\":[]}}]}";
+        String input = "{\"classes\":["
+                + "{\"id\":\"CS2113T-F12\",\"name\":\"\",\"studentList\":{\"students\":["
+                + "{\"id\":\"A1234567B\",\"name\":\"Jon Lim\",\"comment\":\"\","
+                + "\"attendanceList\":{\"attendances\":["
+                + "{\"lessonNumber\":1,\"isPresent\":true},{\"lessonNumber\":4,\"isPresent\":false}]},"
+                + "\"results\":{\"Midterm\":25.0,\"Quiz 1\":5.56}},"
+                + "{\"id\":\"A7654321Z\",\"name\":\"Hello-world_123 (Nothing)\",\"comment\":\"\","
+                + "\"attendanceList\":{\"attendances\":[]},\"results\":{}}]},"
+                + "\"assessmentList\":{\"assessments\":["
+                + "{\"name\":\"Midterm\",\"maximumMarks\":30.0,\"weightage\":30.0},"
+                + "{\"name\":\"Quiz 1\",\"maximumMarks\":10.0,\"weightage\":5.0}]}},"
+                + "{\"id\":\"CS2101-C03\",\"name\":\"Sectional Group C03\","
+                + "\"studentList\":{\"students\":[]},\"assessmentList\":{\"assessments\":[]}}]}";
 
         ClassList classList = jsonToClassList(input);
         assertEquals(classList.getSize(), 2);
@@ -81,19 +81,19 @@ class ClassListDeserializerTest {
 
     @Test
     void deserialize_duplicatedClasses_expectOneTeachingClasses() {
-        String input = "{\"classes\":[" +
-                "{\"id\":\"CS2113T-F12\",\"name\":\"\",\"studentList\":{\"students\":[" +
-                "{\"id\":\"A1234567B\",\"name\":\"Jon Lim\",\"comment\":\"\"," +
-                "\"attendanceList\":{\"attendances\":[" +
-                "{\"lessonNumber\":1,\"isPresent\":true},{\"lessonNumber\":4,\"isPresent\":false}]}," +
-                "\"results\":{\"Midterm\":25.0,\"Quiz 1\":5.56}}," +
-                "{\"id\":\"A7654321Z\",\"name\":\"Hello-world_123 (Nothing)\",\"comment\":\"\"," +
-                "\"attendanceList\":{\"attendances\":[]},\"results\":{}}]}," +
-                "\"assessmentList\":{\"assessments\":[" +
-                "{\"name\":\"Midterm\",\"maximumMarks\":30.0,\"weightage\":30.0}," +
-                "{\"name\":\"Quiz 1\",\"maximumMarks\":10.0,\"weightage\":5.0}]}}," +
-                "{\"id\":\"CS2113T-F12\",\"name\":\"Sectional Group C03\"," +
-                "\"studentList\":{\"students\":[]},\"assessmentList\":{\"assessments\":[]}}]}";
+        String input = "{\"classes\":["
+                + "{\"id\":\"CS2113T-F12\",\"name\":\"\",\"studentList\":{\"students\":["
+                + "{\"id\":\"A1234567B\",\"name\":\"Jon Lim\",\"comment\":\"\","
+                + "\"attendanceList\":{\"attendances\":["
+                + "{\"lessonNumber\":1,\"isPresent\":true},{\"lessonNumber\":4,\"isPresent\":false}]},"
+                + "\"results\":{\"Midterm\":25.0,\"Quiz 1\":5.56}},"
+                + "{\"id\":\"A7654321Z\",\"name\":\"Hello-world_123 (Nothing)\",\"comment\":\"\","
+                + "\"attendanceList\":{\"attendances\":[]},\"results\":{}}]},"
+                + "\"assessmentList\":{\"assessments\":["
+                + "{\"name\":\"Midterm\",\"maximumMarks\":30.0,\"weightage\":30.0},"
+                + "{\"name\":\"Quiz 1\",\"maximumMarks\":10.0,\"weightage\":5.0}]}},"
+                + "{\"id\":\"CS2113T-F12\",\"name\":\"Sectional Group C03\","
+                + "\"studentList\":{\"students\":[]},\"assessmentList\":{\"assessments\":[]}}]}";
 
         ClassList classList = jsonToClassList(input);
         assertEquals(classList.getSize(), 1);
@@ -101,18 +101,18 @@ class ClassListDeserializerTest {
 
     @Test
     void deserialize_oneNullClass_expectOneTeachingClasses() {
-        String input = "{\"classes\":[" +
-                "{\"id\":\"CS2113T-F12\",\"name\":\"\",\"studentList\":{\"students\":[" +
-                "{\"id\":\"A1234567B\",\"name\":\"Jon Lim\",\"comment\":\"\"," +
-                "\"attendanceList\":{\"attendances\":[" +
-                "{\"lessonNumber\":1,\"isPresent\":true},{\"lessonNumber\":4,\"isPresent\":false}]}," +
-                "\"results\":{\"Midterm\":25.0,\"Quiz 1\":5.56}}," +
-                "{\"id\":\"A7654321Z\",\"name\":\"Hello-world_123 (Nothing)\",\"comment\":\"\"," +
-                "\"attendanceList\":{\"attendances\":[]},\"results\":{}}]}," +
-                "\"assessmentList\":{\"assessments\":[" +
-                "{\"name\":\"Midterm\",\"maximumMarks\":30.0,\"weightage\":30.0}," +
-                "{\"name\":\"Quiz 1\",\"maximumMarks\":10.0,\"weightage\":5.0}]}}," +
-                "null]}";
+        String input = "{\"classes\":["
+                + "{\"id\":\"CS2113T-F12\",\"name\":\"\",\"studentList\":{\"students\":["
+                + "{\"id\":\"A1234567B\",\"name\":\"Jon Lim\",\"comment\":\"\","
+                + "\"attendanceList\":{\"attendances\":["
+                + "{\"lessonNumber\":1,\"isPresent\":true},{\"lessonNumber\":4,\"isPresent\":false}]},"
+                + "\"results\":{\"Midterm\":25.0,\"Quiz 1\":5.56}},"
+                + "{\"id\":\"A7654321Z\",\"name\":\"Hello-world_123 (Nothing)\",\"comment\":\"\","
+                + "\"attendanceList\":{\"attendances\":[]},\"results\":{}}]},"
+                + "\"assessmentList\":{\"assessments\":["
+                + "{\"name\":\"Midterm\",\"maximumMarks\":30.0,\"weightage\":30.0},"
+                + "{\"name\":\"Quiz 1\",\"maximumMarks\":10.0,\"weightage\":5.0}]}},"
+                + "null]}";
 
         ClassList classList = jsonToClassList(input);
         assertEquals(classList.getSize(), 1);
