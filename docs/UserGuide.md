@@ -424,9 +424,10 @@ Expected Output: <br>
 
 (Descending) <br>
 ![img.png](images/students/SortByScoresCommandDesc.png)
-<br>
+
 > 💡 **Notes:**<br />
 > Student scores will be displayed up to 6 decimal points.
+
 <br>
 <hr>
 
