@@ -7,9 +7,9 @@
 ## Introduction
    
 Stonks XD is your go-to smart money management application that is able to: 
-- track your daily expenses 
-- set/adjust your spending limits
-- provide you with helpful financial tips and insights
+- Track your daily expenses 
+- Set/adjust your spending limits
+- Provide you with helpful financial tips and insights
 
 It is optimised as a daily journal, so you can key in your entries while you unwind at the end of the day. 
 It also allows you to view your financial records in different currencies through both text and graphs,
@@ -18,13 +18,12 @@ so you can use this application anywhere around the world!
 With this guide, you will be able to learn how to use all the functionalities of this application through step-by-step instructions 
 without having to learn how to write a single line of code.
 
-Before you learn how to use the app, take a look at the [quickstart](#quick-start) guide on how to install and prepare the application for use.
+Before you learn how to use the app, take a look at the [Quick Start](#quick-start) guide on how to install and prepare the application for use.
 
 ---
 
 ## Table of Contents
 1. [Quick Start](#1-quick-start)
-
 
 2. [Features](#2-features)
 
@@ -113,9 +112,10 @@ to show all available commands and their format.)
 
 
 10. The image shown below is what the program should look like for first time users like yourself!   
+
 ![image](https://user-images.githubusercontent.com/69465661/140613991-7848997a-e97b-4c65-825a-1e126590b6a0.png)
 
-11. In `Stonks XD`, type the command in the CLI and press `Enter` on your keyboard to execute it. (Tip: type `help` 
+12. In `Stonks XD`, type the command in the CLI and press `Enter` on your keyboard to execute it. (Tip: type `help` 
 to show all available commands and their format.)
 
 
@@ -1064,7 +1064,7 @@ when **not** using the program. It is easy to make mistakes when editing the `cs
 
 #### When editing csv files
 
-<<<<<<< HEAD
+
 - `.csv` files **must not** be open concurrently while Stonks XD is running. In other words, never have two programs 
 writing / reading the `.csv` files at the same time. This will very likely cause a saving / loading error and 
 lost of data.
@@ -1087,8 +1087,7 @@ Interface, as specified above.
   - Another example, when editing an expense entry in `StonksXD_Entries.csv`, category should be the ones available and
   specified ealier on in the user guide.
 
-
-=======
+    
 - `.csv` files should not be open concurrently while Stonks XD is running. In other words, never have two programs 
 writing / reading the `.csv` files at the same time. This will very likely cause a saving error and loss of data.
 - Restrictions and rules for different variables are the same as how you would enter them in the CLI, as specified 
@@ -1100,7 +1099,7 @@ above:<br></br>
   - Another example, when editing an expense entry in `StonksXD_Entries.csv`, category should be the ones available and 
 
   specified earlier on in the user guide.
->>>>>>> 774198baf9abb04eb64e363849dd33919decc8ed
+
 - Do not alter / delete the headers of `.csv` files. Stonks XD is able to minimise the damage if you do so but to 
 ensure your data is saved / loaded properly, please do not edit anything unexpected.
 
@@ -1114,14 +1113,12 @@ considered corrupted and not be loaded into Stonks XD.
 - Changing the currency setting in `StonksXD_Settings.csv` is not recommended. This is because it will
   cause all your entries and budgets to be recognised as a different currency.
 
-
-<<<<<<< HEAD
-=======
+  
 - Do not edit the amount of your expenses / incomes drastically such that they exceed the limit per entry or the 
 total limit of 100,000,000,000 for expense / income. Entries that cause you to exceed either limit will be considered 
 corrupted.
 cause all your entries and budgets to be recognised as a different currency.
->>>>>>> 774198baf9abb04eb64e363849dd33919decc8ed
+
 - Do not edit the amount of your entries drastically such that they exceed the max amount per entry or the 
 total limit of 100,000,000,000 for expenses / incomes. Entries that cause you to exceed either of the 2 limit will be 
 considered corrupted and not be loaded.
@@ -1167,24 +1164,26 @@ means all your edits are gone. But this pretty much ensures that there will be n
 | Create expense entry | `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY`  |  `add_ex d/KFC lunch a/10.20 c/food` |
 | Create expense entry with date | `add_ex_d d/DESCRIPTION a/AMOUNT c/CATEGORY D/DATE`  |  `add_ex_d d/KFC lunch a/10.20 c/food D/20/08/2021` |
 | Delete expense entry | `del_ex i/INDEX` | `del_ex i/3` |
-| List all expense entries | `list_ex` | - |
-| View total expense | `total_ex` | - |
 | Create income entry | `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY`  | `add_in d/work a/3200 c/salary` |
 | Create income entry with date | `add_in_d d/DESCRIPTION a/AMOUNT c/CATEGORY D/DATE`  |  `add_in_d d/work a/10.20 c/salary D/20/08/2021` |
 | Delete income entry | `del_in i/INDEX` | `del_in i/2` |
+| List all expense entries | `list_ex` | - |
 | List all income entries | `list_in` | - |
+| View total expense | `total_ex` | - |
 | View total income | `total_in` | - |
-| Find entry using date | `find YYYY-MM-DD` | `find 19/10/2021` |
-| Find entry using keyword | `find KEYWORD` | `find food`<br>`find 3` |
 | View total balance | `balance` | - |
 | Show total expense between 2 dates | `btw_ex s/START_DATE e/END_DATE` | `btw_ex s/10/07/2021 e/23/10/2021` |
 | Show total income between 2 dates | `btw_in s/START_DATE e/END_DATE` | `btw_in s/10/07/2021 e/23/10/2021`  |
-| Clear all entries | `clear_all_entries` | - |
-| View Yearly Report | `show_graph` | - |
-| View Input Year Report|`show_graph Y/YYYY`|`show_graph Y/2023`|
+| Find entry using date | `find YYYY-MM-DD` | `find 19/10/2021` |
+| Find entry using keyword | `find KEYWORD` | `find food`<br>`find 3` |
+| Set budget | `set_budget c/CATEGORY a/AMOUNT` | `set_budget c/bills a/100` |
+| Check budget | `check_budget c/CATEGORY` | `check_budget c/bills` |
+| Set threshold | `set_threshold t/THRESHOLD` | `set_threshold t/0.2` |
 | Set currency | `set_curr c/CURRENCY` | `set_curr c/usd` |
 | Check current currency | `check_curr` | - |
 | List all currency conversions | `list_curr` | - |
+| View Yearly Report |`show_graph Y/YYYY`|`show_graph Y/2023`|
+| Clear all entries | `clear_all_entries` | - |
 | To terminate program | `end` | - |
 
 
