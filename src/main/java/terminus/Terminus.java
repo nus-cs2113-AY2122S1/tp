@@ -70,7 +70,7 @@ public class Terminus {
         } catch (InvalidFileException e) {
             TerminusLogger.warning("Data file loading has failed.", e.fillInStackTrace());
             ui.printSection(e.getMessage(),
-                "TermiNUS may still run, but your changes may not be saved.",
+                "TermiNUS may still run, but your data may not have loaded properly.",
                 "Check 'terminus.log' for more information."
             );
         }
