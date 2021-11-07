@@ -29,6 +29,9 @@ public class AddCommandTest {
         }
     }
 
+    /**
+     * Checks that same name will not be repeated.
+     */
     @Test
     public void execute_sameNameInput_listSizeRemainsThree() throws LotsException {
         String input = "add /n Adam /i 3 /q 3";
@@ -38,6 +41,9 @@ public class AddCommandTest {
         assertEquals(3, peopleManager.getSize());
     }
 
+    /**
+     * Checks that when food index is negative, it will not be accepted.
+     */
     @Test
     public void execute_foodIndexIsNegative_throwsLotsException()
             throws Exception {
@@ -50,6 +56,9 @@ public class AddCommandTest {
         }
     }
 
+    /**
+     * Checks that when food quantity is negative, it will not be accepted.
+     */
     @Test
     public void execute_quantityIsNegative_throwsLotsException()
             throws Exception {
@@ -62,6 +71,9 @@ public class AddCommandTest {
         }
     }
 
+    /**
+     * Checks that when food index is zero, it will not be accepted.
+     */
     @Test
     public void execute_foodIndexIsZero_throwsLotsException()
             throws Exception {
@@ -74,6 +86,9 @@ public class AddCommandTest {
         }
     }
 
+    /**
+     * Checks that when food quantity is zero, it will not be accepted.
+     */
     @Test
     public void execute_quantityIsZero_throwsLotsException()
             throws Exception {
@@ -86,6 +101,9 @@ public class AddCommandTest {
         }
     }
 
+    /**
+     * Checks that when food index is not positively in range, it will not be accepted.
+     */
     @Test
     public void execute_foodIndexPositiveButOutOfRange_throwsLotsException()
             throws Exception {
@@ -98,6 +116,9 @@ public class AddCommandTest {
         }
     }
 
+    /**
+     * Checks that when food quantity is not positively in range, it will not be accepted.
+     */
     @Test
     public void execute_quantityPositiveButOutOfRange_throwsLotsException()
             throws Exception {
@@ -110,6 +131,9 @@ public class AddCommandTest {
         }
     }
 
+    /**
+     * Checks that when format is wrong, exception will be thrown.
+     */
     @Test
     public void execute_wrongNumberOfSlashes_throwsLotsException()
             throws Exception {
@@ -122,6 +146,9 @@ public class AddCommandTest {
         }
     }
 
+    /**
+     * Checks that when person name is not alphanumeric, it will throw an exception.
+     */
     @Test
     public void execute_alphaNumericNamesOnly_throwsLotsException()
             throws Exception {
@@ -134,6 +161,9 @@ public class AddCommandTest {
         }
     }
 
+    /**
+     * Checks that when food index is not positively in range, it will not be accepted.
+     */
     @Test
     public void execute_inputForNameIsSpaces_throwsLotsException()
             throws Exception {
@@ -146,6 +176,9 @@ public class AddCommandTest {
         }
     }
 
+    /**
+     * Checks that when food index is not positively in range, it will not be accepted.
+     */
     @Test
     public void execute_inputForFoodIndexIsSpaces_throwsLotsException()
             throws Exception {
@@ -158,6 +191,9 @@ public class AddCommandTest {
         }
     }
 
+    /**
+     * Checks that when quantity is spaces, it will not be accepted.
+     */
     @Test
     public void execute_inputForQuantityIsSpaces_throwsLotsException()
             throws Exception {
@@ -170,6 +206,9 @@ public class AddCommandTest {
         }
     }
 
+    /**
+     * Checks that when index is not integer, it will not be accepted.
+     */
     @Test
     public void execute_foodIndexCannotBeInWord_throwsLotsException()
             throws Exception {
@@ -182,6 +221,9 @@ public class AddCommandTest {
         }
     }
 
+    /**
+     * Checks that when quantity is not index, it will not be accepted.
+     */
     @Test
     public void execute_quantityCannotBeInWord_throwsLotsException()
             throws Exception {
@@ -194,6 +236,9 @@ public class AddCommandTest {
         }
     }
 
+    /**
+     * Checks that when index contains special characters, it will not be accepted.
+     */
     @Test
     public void execute_foodIndexContainsCharacters_throwsLotsException()
             throws Exception {
@@ -206,6 +251,9 @@ public class AddCommandTest {
         }
     }
 
+    /**
+     * Checks that when quantity contains special characters, it will not be accepted.
+     */
     @Test
     public void execute_quantityContainsCharacters_throwsLotsException()
             throws Exception {
@@ -218,6 +266,9 @@ public class AddCommandTest {
         }
     }
 
+    /**
+     * Checks that when name contains more than 50 characters, it will not be accepted.
+     */
     @Test
     public void execute_inputForNameIsMoreThan50Characters_throwsLotsException()
             throws Exception {
@@ -231,6 +282,9 @@ public class AddCommandTest {
         }
     }
 
+    /**
+     * Checks that when number of people in the list will be exceeded, it will not be accepted.
+     */
     @Test
     public void execute_numberOfPeopleExceedsLimit_throwsLotsException() throws Exception {
         try {
@@ -246,6 +300,9 @@ public class AddCommandTest {
         }
     }
 
+    /**
+     * Checks that when number of orders in the order list will be exceeded, it will not be accepted.
+     */
     @Test
     public void execute_numberOfTotalOrdersExceedsLimit_throwsLotsException() throws Exception {
         try {
