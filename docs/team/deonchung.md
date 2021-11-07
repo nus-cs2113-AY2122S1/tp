@@ -2,6 +2,9 @@
 
 This is a student project for a university software development course and I am one of the contributors to `MediVault`.
 
+`MediVault` is a Command Line Interface (CLI) application that will help to manage medication supplies within a pharmacy.
+It is an integrated solution that provides real-time tracking of stocks, prescriptions and orders.
+
 ## Summary of Contributions
 
 Given below are my contributions to the project.
@@ -42,15 +45,13 @@ v2.1:
 * Added functionality for `addstock` command to limit number of medication for stock. [[#42](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/42)]
 
 * Included JUnit tests for:
-  * `Prescription Validator` class. [[#89](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/89)]
-  * `Order Validator` class. [[#140](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/140)]
+  * `Prescription Validator` and `Order Validator` class. [[#89](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/89) , [#140](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/140)]
   * `AddStock`, `AddPrescription`, `DeletePrescription` and `DeleteStock`. [[#306](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/306)]
 
 ### Documentation
 
 * [User Guide](../UserGuide.md)
-    * Added documentation for `addstock` commands. [[#96](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/96)]
-    * Added documentation for `addprescription`, `deleteprescription` and `deleteorder` commands. [[#171](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/171)]
+    * Added documentation for `addstock`, `addprescription`, `deleteprescription` and `deleteorder` commands. [[#96](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/96) , [#171](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/171)]
 
 * [Developer Guide](../DeveloperGuide.md) 
   * Acknowledgement. [[#194](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/194)]
