@@ -17,8 +17,6 @@ box Content CONTENT_BOX_COLOR
 participant ":ContentManager" as ContentManager CONTENT_COLOR
 endbox
 
-participant ":StringBuilder" as StringBuilder
-
 Activate AddLinkCommand
 create ConflictManager
 AddLinkCommand -> ConflictManager: ConflictManager()
@@ -50,20 +48,15 @@ loop For each NusModule in modules
     ConflictManager --> ConflictManager: AllLinks
     Deactivate ConflictManager
 
-    create StringBuilder
-    ConflictManager -> StringBuilder: StringBuilder()
-    Activate StringBuilder
-
     loop For each Link in AllLinks
         alt same day && overlapping start-time or end-time
-        ConflictManager -> StringBuilder: append(LinkDescription)
-        StringBuilder --> ConflictManager: conflictingSchedule
-        Deactivate StringBuilder
+        ConflictManager -> ConflictManager: append(LinkDescription)
+        ConflictManager --> ConflictManager: conflictingSchedule
+        Deactivate ConflictManager
     end
 end
 
-ConflictManager --> ConflictManager: conflictingSchedule
-Deactivate ConflictManager
+
 end
 
 ConflictManager --> AddLinkCommand: conflictingSchedule
