@@ -107,7 +107,7 @@ public class QuizGame extends Game implements Serializable {
     }
 
     public void getQuestion(String[] questions, String[] answers) {
-        int index = chooseQuestion(questions);
+        final int index = chooseQuestion(questions);
         Scanner in = new Scanner(System.in);
         String answer = in.nextLine();
         answer = answer.replace("(","");
