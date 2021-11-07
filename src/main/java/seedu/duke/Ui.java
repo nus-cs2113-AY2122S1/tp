@@ -155,7 +155,7 @@ public class Ui {
                 message.append("\n");
             }
             message.append("These items are not done yet: \n").append(listOfUndoneItems);
-            message.append("I won't do anything with them. ");
+            message.append("They can't be unmarked. ");
         }
         return message.toString();
     }
