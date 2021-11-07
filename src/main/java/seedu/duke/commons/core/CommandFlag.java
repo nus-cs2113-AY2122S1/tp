@@ -11,6 +11,6 @@ public final class CommandFlag {
     public static final String START = "-s";
 
     public static final String LESSON = "-d |-s |-e |-l ";
-    public static final String TASK = "-d |-p |-i ";
     public static final String MODULE = "-g ";
+    public static final String TASK = "-d |-p |-i ";
 }
