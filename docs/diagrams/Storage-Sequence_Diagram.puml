@@ -1,0 +1,73 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+activate BudgetTracker
+
+create Parser
+BudgetTracker -> Parser: new Parser()
+activate Parser
+
+create Storage
+
+BudgetTracker -> Storage: new Storage()
+activate Storage
+
+Storage -> Storage: makeStorageTextFile()
+
+Storage -> Parser: loadStorage()
+
+Parser --> Storage
+
+Storage --> BudgetTracker
+
+loop while isExit is still false
+    BudgetTracker -> Parser: userInput: String
+
+    Parser -> Parser: parseCommand()
+    activate Parser
+    Parser --> Parser: command: Command
+    deactivate Parser
+
+    Parser --> BudgetTracker: command: Command
+
+    BudgetTracker -> Command
+    activate Command
+    Command -> Command: setAllRecordList()
+
+    activate Command
+
+    Command --> BudgetTracker
+    deactivate Command
+
+    BudgetTracker -> Command: command:Command
+
+    activate Command
+
+    Command -> Command: execute()
+
+    Command -> WriteToTextFile: new WriteToTextFile()
+    activate WriteToTextFile
+
+    WriteToTextFile -> WriteToTextFile: reloadArrayToStorage
+    activate WriteToTextFile
+
+    WriteToTextFile --> WriteToTextFile
+
+    deactivate WriteToTextFile
+
+
+    WriteToTextFile --> Command
+    deactivate WriteToTextFile
+    deactivate Command
+
+    Command --> BudgetTracker
+
+end
+
+deactivate Storage
+
+deactivate BudgetTracker
+
+
+@enduml
