@@ -21,10 +21,10 @@ public class SetAttendanceCommand extends Command {
     private static final String KEY_LESSON_NUMBER = "l";
     private static final String KEY_PRESENT = "p";
     private static final String[] SET_ATTENDANCE_ARGUMENT_KEYS = {
-            KEY_CLASS_ID,
-            KEY_STUDENT_INDEX,
-            KEY_LESSON_NUMBER,
-            KEY_PRESENT
+        KEY_CLASS_ID,
+        KEY_STUDENT_INDEX,
+        KEY_LESSON_NUMBER,
+        KEY_PRESENT
     };
 
     private static final String MESSAGE_INVALID_LESSON_NUMBER = "Invalid lesson number.";
