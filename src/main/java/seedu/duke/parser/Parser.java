@@ -427,13 +427,13 @@ public class Parser {
         if (calendarArguments.length != 3) {
             throw new IncorrectNumberOfArgumentsException(CALENDAR_EDIT_DELETE_INVALID_ARGS);
         }
-        int indexOfTaskToBeEdited = 0;
+        int indexOfTaskToBeDeleted = 0;
         try {
-            indexOfTaskToBeEdited = Integer.parseInt(calendarArguments[2]);
+            indexOfTaskToBeDeleted = Integer.parseInt(calendarArguments[2]);
         } catch (NumberFormatException e) {
             throw new NumberFormatException(PRINT_NOT_AN_INT);
         }
-        return indexOfTaskToBeEdited;
+        return indexOfTaskToBeDeleted;
     }
 
     private int getTaskIndexForEdit(String[] calendarArguments) throws IncorrectNumberOfArgumentsException {
@@ -453,13 +453,13 @@ public class Parser {
         if (calendarArguments.length != 3) {
             throw new IncorrectNumberOfArgumentsException("Lecture index not entered...");
         }
-        int indexOfTaskToBeEdited = 0;
+        int indexOfLecture = 0;
         try {
-            indexOfTaskToBeEdited = Integer.parseInt(calendarArguments[2]);
+            indexOfLecture = Integer.parseInt(calendarArguments[2]);
         } catch (NumberFormatException e) {
             throw new NumberFormatException(PRINT_NOT_AN_INT);
         }
-        return indexOfTaskToBeEdited;
+        return indexOfLecture;
     }
     //@@author
 

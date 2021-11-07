@@ -60,7 +60,8 @@ public class DisplayCommand extends Command {
             } else {
                 this.inputYearMonth = YearMonth.of(year, month);
             }
-        } catch (IndexOutOfBoundsException | NumberFormatException c) {
+            Ui.printCalenderTitle(inputYearMonth);
+        } catch (IndexOutOfBoundsException | NumberFormatException | NullPointerException e) {
             ClickLogger.getNewLogger().log(Level.WARNING, "Calendar display failed...");
             Ui.printInvalidCalendarInput();
         }
@@ -75,9 +76,12 @@ public class DisplayCommand extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage) {
-        Ui.printCalenderTitle(inputYearMonth);
-        Schedule.arrangeTaskList(storage.tasksList, calendarTasks, this.month, this.year);
-        Schedule.arrangeLectureList(storage.lectureList, calendarLectures, this.month, this.year);
-        Schedule.displayCalendar(inputYearMonth, calendarTasks, calendarLectures);
+        try {
+            Schedule.arrangeTaskList(storage.tasksList, calendarTasks, this.month, this.year);
+            Schedule.arrangeLectureList(storage.lectureList, calendarLectures, this.month, this.year);
+            Schedule.displayCalendar(inputYearMonth, calendarTasks, calendarLectures);
+        } catch (NullPointerException e) {
+            //This exception throws an error message prior to this.
+        }
     }
 }

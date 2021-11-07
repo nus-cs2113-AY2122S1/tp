@@ -281,7 +281,7 @@ public class ParserJournal {
             throw new EmptyDeleteNoteException();
         }
         try {
-            if (Integer.parseInt(indexOfDeletedNotebook) > 1) {
+            if (Integer.parseInt(indexOfDeletedNotebook) >= 1) {
                 return Integer.parseInt(indexOfDeletedNotebook);
             } else {
                 throw new InvalidDeleteNoteArgumentException();

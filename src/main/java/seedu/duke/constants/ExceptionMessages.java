@@ -25,7 +25,8 @@ public class ExceptionMessages {
             + "A new file has been created.";
     public static final String MESSAGE_ILLEGAL_MODULE_COMMAND = "Illegal Module command. "
             + "Enter help to get the supported commands.";
-
+    public static final String START_AFTER_END_DATE_ILLEGAL = "The start "
+            + "date cannot be after the end date for lecture!";
     public static final String MESSAGE_ILLEGAL_CALENDAR_INDEX = "Cannot "
             + "find index of " + "task to delete! Use 'calendar list task' first"
             + " to find desired task index";

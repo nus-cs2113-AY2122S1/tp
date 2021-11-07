@@ -58,9 +58,9 @@ public class Messages {
     public static final String PRINT_MISSING_DIVIDER = "Missing divider: ";
     public static final String PRINT_MISSING_ARGUMENT = "Missing arguments!";
     public static final String PRINT_MISSING_SPECIFIC_ARGUMENT = "Missing argument: ";
-    //@author swatim
+
+    //@author swatimahadevan
     //SCHEDULE BEGIN
-    public static String CALENDAR_HEADER_LINE = "________________________________________________________";
     public static final String INVALID_CALENDAR_INPUT = " Invalid Input for Calendar Command! ";
     public static final int MONTH_UPPER_LIMIT = 12;
     public static final int MONTH_LOWER_LIMIT = 1;
@@ -88,8 +88,22 @@ public class Messages {
     public static final String NO_TASK_IN_DAY = "                 |";
     public static final String DELETED_TASK = "Task has been deleted!";
     public static final String CALENDAR_INVALID_ARGS = "'calendar' should be followed by a suffixed command!";
+    public static final String NAME_DIVIDER = "n/";
+    public static final String DATE_DIVIDER = "d/";
+    public static final String MODULE_DIVIDER = "m/";
+    public static final String START_DATE_DIVIDER = "s/";
+    public static final String END_DATE_DIVIDER = "e/";
+    public static final String MODULE_DIVIDER_NOT_FOUND = "m/ not found in command!";
+    public static final String STARTDATE_DIVIDER_NOT_FOUND = "s/ not found in command!";
+    public static final String ENDDATE_DIVIDER_NOT_FOUND = "e/ not found in command!";
+    public static final String NAME_DIVIDER_NOT_FOUND = "n/ not found in command!";
+    public static final String DATE_DIVIDER_NOT_FOUND = "d/ not found in command!";
     public static final String CALENDAR_EDIT_DELETE_INVALID_ARGS = "Task index not entered...";
-    public static final String NAME_ABSENT = " Task name not found after n/";
+    public static final String NAME_ABSENT = " Task name not found after n/...";
+    public static final String DATE_ABSENT = " Task date not found after d/...";
+    public static final String MODULE_ABSENT = " Lecture module not found after m/...";
+    public static final String START_DATE_ABSENT = " Lecture start date not found after s/...";
+    public static final String END_DATE_ABSENT = " Lecture end date not found after e/...";
     public static final String DELIMITER_DATE = "-";
     public static final int CALENDAR_COMMAND_SPLIT = 9;
     public static final int INDEX_ZERO = 0;

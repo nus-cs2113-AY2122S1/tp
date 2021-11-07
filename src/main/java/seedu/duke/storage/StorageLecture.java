@@ -10,7 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//@author swatim
+//@@author swatimahadevan
 public class StorageLecture {
     public static final String folderName = "storage/tasksdata/";
     public static final String fileName   = "scheduleLectures.txt";

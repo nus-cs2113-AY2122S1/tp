@@ -1,7 +1,5 @@
 package seedu.duke.ui;
 
-import seedu.duke.commands.calendar.DisplayCommand;
-import seedu.duke.exceptions.calendar.IncorrectNumberOfArgumentsException;
 import seedu.duke.food.FoodRecord;
 import seedu.duke.constants.Messages;
 import seedu.duke.schedule.lecture.Lecture;
@@ -224,17 +222,6 @@ public class Ui {
         ui.printLine();
         ui.printMessage(INVALID_CALENDAR_INPUT);
         ui.printLine();
-    }
-
-    /**
-     * Prints calendar for current month (intro display).
-     */
-    public static void printCurrentMonthCalendar() throws
-            IncorrectNumberOfArgumentsException {
-        YearMonth currentYearMonth = YearMonth.now();
-        String month = String.valueOf(currentYearMonth.getMonthValue());
-        String year = String.valueOf(currentYearMonth.getYear());
-        new DisplayCommand("calendar " + month + "-" + year).execute(ui, storage);
     }
 
     /**

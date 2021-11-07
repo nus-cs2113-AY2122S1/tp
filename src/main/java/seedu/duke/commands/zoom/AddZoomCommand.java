@@ -58,7 +58,7 @@ public class AddZoomCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage) throws IOException, IllegalModuleException,
             StorageException, InvalidZoomLinkException {
-        if (zoomLink.contains("https://")) {
+        if (zoomLink.contains("https://") && zoomLink.contains("nus-sg")) {
             ui.printLine();
             try {
                 StorageZoom.saveLink(moduleName, zoomLink);

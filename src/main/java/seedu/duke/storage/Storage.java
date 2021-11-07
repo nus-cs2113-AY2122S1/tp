@@ -78,8 +78,14 @@ public class Storage {
     }
     //@@author
 
-    //@author swatim
-    //Loads data in the form of ArrayList<String> data from the save file
+    //@author swatimahadevan
+    /**
+     * Loads data in the form of ArrayList data from the save file.
+     *
+     * @param filePath the filepath of the storage file.
+     * @return data as ArrayList.
+     * @throws IOException in case of loading from save file error.
+     */
     public static ArrayList<String> loadDataFromSaveFile(String filePath) throws IOException {
         FileReader fileReader = new FileReader(filePath);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -88,7 +94,12 @@ public class Storage {
         return data;
     }
 
-    //Write data from ArrayList<String> data onto save file
+    /**
+     * Write data from ArrayList data onto save file.
+     *
+     * @param filePath the filepath of the storage file.
+     * @throws IOException in case of writing to save file error.
+     */
     public static void writeDataOntoSaveFile(String filePath, ArrayList<String> data) throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath));
         for (String dataObject : data) {
@@ -96,4 +107,5 @@ public class Storage {
         }
         bufferedWriter.close();
     }
+    //@@author
 }

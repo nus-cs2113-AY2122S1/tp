@@ -203,6 +203,14 @@ public class Schedule {
         }
     }
 
+    /**
+     * Prints tasks followed by lectures for a calendar week.
+     *
+     * @param calendarTasks ArrayList of tasks.
+     * @param calendarLectures ArrayList of lectures.
+     * @param calendar ArrayList of calendar dates in string format.
+     * @param indexOfDay index of the day of the month.
+     */
     private static void printTaskLectureForWeek(ArrayList<ArrayList<String>>
         calendarTasks, ArrayList<ArrayList<String>> calendarLectures,
         ArrayList<String> calendar, int indexOfDay) {
@@ -226,8 +234,6 @@ public class Schedule {
             calendarRow2++;
         }
     }
-
-
 
     private static void printTasksCalendar(ArrayList<ArrayList<String>>
         calendarTasks, ArrayList<String> calendarDates, int indexOfDay, int calendarRow, int day) {

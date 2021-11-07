@@ -2,14 +2,10 @@ package seedu.duke.parser.schedule;
 
 import seedu.duke.exceptions.calendar.IncorrectNumberOfArgumentsException;
 import seedu.duke.exceptions.calendar.InvalidDateException;
-import seedu.duke.exceptions.syntax.ArgumentsNotFoundException;
-import seedu.duke.parser.Parser;
 
-import java.text.SimpleDateFormat;
 import java.time.YearMonth;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import static seedu.duke.constants.Messages.TODO;
@@ -17,8 +13,21 @@ import static seedu.duke.constants.Messages.CALENDAR_COMMAND_SPLIT;
 import static seedu.duke.constants.Messages.DELIMITER_DATE;
 import static seedu.duke.constants.Messages.MONTH_UPPER_LIMIT;
 import static seedu.duke.constants.Messages.INDEX_ZERO;
-import static seedu.duke.constants.Messages.INDEX_ONE;
+import static seedu.duke.constants.Messages.MODULE_DIVIDER_NOT_FOUND;
+import static seedu.duke.constants.Messages.STARTDATE_DIVIDER_NOT_FOUND;
+import static seedu.duke.constants.Messages.ENDDATE_DIVIDER_NOT_FOUND;
 import static seedu.duke.constants.Messages.NAME_ABSENT;
+import static seedu.duke.constants.Messages.DATE_ABSENT;
+import static seedu.duke.constants.Messages.MODULE_ABSENT;
+import static seedu.duke.constants.Messages.START_DATE_ABSENT;
+import static seedu.duke.constants.Messages.END_DATE_ABSENT;
+import static seedu.duke.constants.Messages.DATE_DIVIDER_NOT_FOUND;
+import static seedu.duke.constants.Messages.NAME_DIVIDER_NOT_FOUND;
+import static seedu.duke.constants.Messages.DATE_DIVIDER;
+import static seedu.duke.constants.Messages.NAME_DIVIDER;
+import static seedu.duke.constants.Messages.MODULE_DIVIDER;
+import static seedu.duke.constants.Messages.START_DATE_DIVIDER;
+import static seedu.duke.constants.Messages.END_DATE_DIVIDER;
 
 public class ParserSchedule {
 
@@ -51,6 +60,56 @@ public class ParserSchedule {
         return parseTodoArgumentsArray(input);
     }
 
+    private static void checkForDividersAddTaskCommand(String input) throws IncorrectNumberOfArgumentsException {
+        if (!input.contains(NAME_DIVIDER)) {
+            throw new IncorrectNumberOfArgumentsException(NAME_DIVIDER_NOT_FOUND);
+        }
+        if (!input.contains(DATE_DIVIDER)) {
+            throw new IncorrectNumberOfArgumentsException(DATE_DIVIDER_NOT_FOUND);
+        }
+    }
+
+    private static void checkForDividersAddLectureCommand(String input) throws IncorrectNumberOfArgumentsException {
+        if (!input.contains(MODULE_DIVIDER)) {
+            throw new IncorrectNumberOfArgumentsException(MODULE_DIVIDER_NOT_FOUND);
+        }
+        if (!input.contains(START_DATE_DIVIDER)) {
+            throw new IncorrectNumberOfArgumentsException(STARTDATE_DIVIDER_NOT_FOUND);
+        }
+        if (!input.contains(END_DATE_DIVIDER)) {
+            throw new IncorrectNumberOfArgumentsException(ENDDATE_DIVIDER_NOT_FOUND);
+        }
+    }
+
+    private static void checkEmptyIncorrectArgsAddTaskCommand(String description, String date)
+            throws IncorrectNumberOfArgumentsException, InvalidDateException {
+        if (description.equals("")) {
+            throw new IncorrectNumberOfArgumentsException(NAME_ABSENT);
+        }
+        if (date.equals("")) {
+            throw new IncorrectNumberOfArgumentsException(DATE_ABSENT);
+        } else if (date.length() != 10) {
+            throw new InvalidDateException();
+        }
+    }
+
+    private static void checkEmptyIncorrectArgsAddLectureCommand(String name, String fromDate, String toDate)
+            throws IncorrectNumberOfArgumentsException, InvalidDateException {
+        if (name.equals("")) {
+            throw new IncorrectNumberOfArgumentsException(MODULE_ABSENT);
+        }
+        if (fromDate.equals("")) {
+            throw new IncorrectNumberOfArgumentsException(START_DATE_ABSENT);
+        } else if (fromDate.length() != 10) {
+            throw new InvalidDateException();
+        }
+        if (toDate.equals("")) {
+            throw new IncorrectNumberOfArgumentsException(END_DATE_ABSENT);
+        } else if (toDate.length() != 10) {
+            throw new InvalidDateException();
+        }
+    }
+
     /**
      * Parsing of todo arguments.
      *
@@ -61,20 +120,14 @@ public class ParserSchedule {
      */
     public static ArrayList<String> parseTodoArgumentsArray(String input)
             throws IncorrectNumberOfArgumentsException, InvalidDateException {
+        checkForDividersAddTaskCommand(input);
         String todoDetails = input.trim().substring(CALENDAR_COMMAND_SPLIT);
-
-        String descriptionAndDate = todoDetails.substring(todoDetails.indexOf("n/")).trim();
-        String description = descriptionAndDate.substring(descriptionAndDate.indexOf("n/")
-                + 2, descriptionAndDate.indexOf("d/")).trim();
-        String date = descriptionAndDate.substring(descriptionAndDate.indexOf("d/") + 2).trim();
-        if (description.equals("")) {
-            throw new IncorrectNumberOfArgumentsException("Task name not found after n/...");
-        }
-        if (date.equals("")) {
-            throw new IncorrectNumberOfArgumentsException("Task date not found after d/...");
-        } else if (date.length() != 10) {
-            throw new InvalidDateException();
-        }
+        int nameIndex = todoDetails.indexOf(NAME_DIVIDER);
+        String descriptionAndDate = todoDetails.substring(nameIndex).trim();
+        int dateIndex = descriptionAndDate.indexOf(DATE_DIVIDER);
+        String description = descriptionAndDate.substring(nameIndex + 2, dateIndex).trim();
+        String date = descriptionAndDate.substring(dateIndex + 2).trim();
+        checkEmptyIncorrectArgsAddTaskCommand(description, date);
         List<String> todoInformation = Arrays.asList(TODO, description, date);
         return new ArrayList<>(todoInformation);
     }
@@ -113,26 +166,19 @@ public class ParserSchedule {
      */
     public static ArrayList<String> parseLectureArgumentsArray(String input)
             throws IncorrectNumberOfArgumentsException, InvalidDateException {
+        checkForDividersAddLectureCommand(input);
         String lectureDetails = input.trim().substring(17);
-
-        String nameAndDate = lectureDetails.substring(lectureDetails.indexOf("m/")).trim();
-        String name = nameAndDate.substring(nameAndDate.indexOf("m/") + 2, nameAndDate.indexOf("s/")).trim();
-        String dayAndLimits = nameAndDate.substring(nameAndDate.indexOf("s/")).trim();
-        String fromDate = dayAndLimits.substring(dayAndLimits.indexOf("s/") + 2, dayAndLimits.indexOf("e/")).trim();
-        String toDate = dayAndLimits.substring(dayAndLimits.indexOf("e/") + 2).trim();
-        if (name.equals("")) {
-            throw new IncorrectNumberOfArgumentsException("Module name not found after m/...");
-        }
-        if (fromDate.equals("")) {
-            throw new IncorrectNumberOfArgumentsException("Module name not found after m/...");
-        } else if (fromDate.length() != 10) {
-            throw new InvalidDateException();
-        }
-        if (toDate.equals("")) {
-            throw new IncorrectNumberOfArgumentsException("Module end date not found after e/...");
-        } else if (toDate.length() != 10) {
-            throw new InvalidDateException();
-        }
+        int moduleIndexFormer = lectureDetails.indexOf(MODULE_DIVIDER);
+        String nameAndDate = lectureDetails.substring(moduleIndexFormer).trim();
+        int moduleIndexLatter = nameAndDate.indexOf(MODULE_DIVIDER);
+        int startDateIndexFormer = nameAndDate.indexOf(START_DATE_DIVIDER);
+        String name = nameAndDate.substring(moduleIndexLatter + 2, startDateIndexFormer).trim();
+        String dayAndLimits = nameAndDate.substring(startDateIndexFormer).trim();
+        int startDateIndexLatter = dayAndLimits.indexOf(START_DATE_DIVIDER);
+        int endDateIndex = dayAndLimits.indexOf(END_DATE_DIVIDER);
+        String fromDate = dayAndLimits.substring(startDateIndexLatter + 2,  endDateIndex).trim();
+        String toDate = dayAndLimits.substring(endDateIndex + 2).trim();
+        checkEmptyIncorrectArgsAddLectureCommand(name, fromDate, toDate);
         List<String> lectureInformation = Arrays.asList(name, fromDate, toDate);
         return new ArrayList<>(lectureInformation);
     }
