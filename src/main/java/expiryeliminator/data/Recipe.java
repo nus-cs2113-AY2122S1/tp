@@ -90,6 +90,36 @@ public class Recipe {
         ingredientQuantities.put(ingredientQuantity.getName(), ingredientQuantity);
         return ingredientNameIfNotInList;
     }
+
+    /**
+     * Checks if the ingredient name in the recipe is the same to prevent ingredients from being added
+     * into the Ingredient Repository without the recipe being added.
+     *
+     * @param ingredientNames Array List of ingredientNames
+     * @return empty string if no same ingredients and the ingredient name otherwise.
+     */
+    public String sameIngredientNames(ArrayList<String> ingredientNames) {
+        Collections.sort(ingredientNames);
+        for (int i = 0; i < ingredientNames.size() - 1; i++) {
+            String testIngredient = ingredientNames.get(i);
+            if (testIngredient.equals(ingredientNames.get(i + 1))) {
+                return testIngredient;
+            }
+        }
+        return "";
+    }
+
+    public boolean allIngredientsAreSufficient(IngredientRepository ingredients) {
+        for (IngredientQuantity i : ingredientQuantities.values()) {
+            IngredientStorage ingredient = ingredients.findWithNullReturn(i.getName());
+            assert ingredient != null : "Ingredient should be in the repository after the recipe is added";
+            logger.log(Level.INFO,"Checking if " + ingredient.getIngredient() + " has sufficient quantity");
+            if (ingredient.getQuantity() < i.getQuantity()) {
+                return false;
+            }
+        }
+        return true;
+    }
     //@@author
 
     /**

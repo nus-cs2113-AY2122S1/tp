@@ -39,25 +39,13 @@ public class CookedRecipeCommand extends Command {
         this.name = name;
     }
 
-    private boolean allIngredientsAreSufficient(TreeMap<String, IngredientQuantity> ingredientsFromRecipe,
-                                                IngredientRepository ingredients) {
-        for (IngredientQuantity i : ingredientsFromRecipe.values()) {
-            IngredientStorage ingredient = ingredients.findWithNullReturn(i.getName());
-            assert ingredient != null : "Ingredient should be in the repository after the recipe is added";
-            if (ingredient.getQuantity() < i.getQuantity()) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     @Override
     public String execute(IngredientRepository ingredients, RecipeList recipes) {
         String ingredientsLeft = "";
         try {
             Recipe recipe = recipes.findRecipe(name);
             TreeMap<String, IngredientQuantity> ingredientsInRecipe = recipe.getIngredientQuantities();
-            if (!allIngredientsAreSufficient(ingredientsInRecipe, ingredients)) {
+            if (!recipe.allIngredientsAreSufficient(ingredients)) {
                 return MESSAGE_INSUFFICIENT_QUANTITY;
             }
             for (String s : ingredientsInRecipe.keySet()) {
