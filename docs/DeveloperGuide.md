@@ -811,4 +811,169 @@ These instructions only provide a starting point for testers to work on; testers
        Expected: No module will be removed. Error message indicating wrong flags is shown, together with the correct format for `remove` command.
 
 ### Saving data
+1. Dealing with missing directory
+    1. Missing `data` directory
+       
+       Expected: New directory will be created along with two empty text files inside.
+    2. Missing `log` directory
+       
+       Expected: New directory will be created along with an empty log file inside.
+   
+2. Dealing with missing file
+    1. Missing `selectedModules.txt` file
+       
+       Expected: New empty text file is created in the `data` directory.
+    2. Missing `selectedUniversities.txt` file
+       
+       Expected: New empty text file is created in the `data` directory.
+    3. Missing `logs.log` file
+       
+       Expected: New empty text file is created in the `log` directory.
 
+3. Dealing with corrupted data
+    1. Invalid module in `selectedModules.txt`
+       File content before run: 
+       ```
+       ACC2706 # Managerial Accounting # 4.0
+       CS1261B # Discrete Structures # 4.0
+       ```
+       
+       File content after run:
+       ```
+       ACC2706 # Managerial Accounting # 4.0
+       ```
+       
+       Expected output in console:
+       ```
+       =================================================================================
+        Invalid modules found in the file are deleted.
+        WARNING: Do not tamper the files. You would lose some records.
+       =================================================================================
+       ```
+       
+    2. Invalid module mapping in `selectedUniversities.txt`
+       File content before run:
+       ```
+       Boston University
+       CS1261B # Discrete Structures # 4.0 # MET CS 249 # Discrete Mathematics # 3.0
+       ```
+       
+       File content after run:
+       ```
+       Boston University
+       ```
+       
+       Expected output in console:
+       ```
+       =================================================================================
+        Invalid mappings found in the file are deleted.
+        WARNING: Do not tamper the files. You would lose some records.
+       =================================================================================
+       ```
+       
+    3. Invalid university in `selectedUniversities.txt`
+       File content before run:
+       ```
+       Aarhus University
+       Buston University
+       CS1231 # Discrete Structures # 4.0 # MET CS 248 # Discrete Mathematics # 3.0
+       ```
+       
+       File content after run:
+       ```
+       Aarhus University
+       ```
+       
+       Expected output in console:
+       ```
+       =================================================================================
+        Invalid university names found in the file. So, these universities and its associated mappings are deleted.
+        Other invalid mappings may have been deleted.
+        WARNING: Do not tamper the files. You would lose some records.
+       =================================================================================
+       ```
+       
+4. Dealing with duplicate data
+    1. Duplicate modules in `selectedModules.txt`
+       File content before run:
+       ```
+       ACC2706 # Managerial Accounting # 4.0
+       CS1231 # Discrete Structures # 4.0
+       CS1231 # Discrete Structures # 4.0
+       CS1231 # Discrete Structures # 4.0
+       MKT1705 # Principles of Marketing # 4.0
+       ```
+       
+       File content after run:
+       ```
+       ACC2706 # Managerial Accounting # 4.0
+       CS1231 # Discrete Structures # 4.0
+       MKT1705 # Principles of Marketing # 4.0
+       ```
+       
+       Expected output in console:
+       ```
+       =================================================================================
+        Invalid modules found in the file are deleted.
+        WARNING: Do not tamper the files. You would lose some records.
+       =================================================================================
+       
+    2. Duplicate module mappings in `selectedUniversities.txt`
+       File content before run:
+       ```
+       Aarhus University
+       Boston University
+       CS1231 # Discrete Structures # 4.0 # MET CS 248 # Discrete Mathematics # 3.0
+       CS1231 # Discrete Structures # 4.0 # MET CS 248 # Discrete Mathematics # 3.0
+       CS1231 # Discrete Structures # 4.0 # MET CS 248 # Discrete Mathematics # 3.0
+       ```
+       
+       File content after run:
+       ```
+       Aarhus University
+       Boston University
+       CS1231 # Discrete Structures # 4.0 # MET CS 248 # Discrete Mathematics # 3.0
+       ```
+       
+       Expected output in console:
+       ```
+       =================================================================================
+        Invalid mappings found in the file are deleted.
+        WARNING: Do not tamper the files. You would lose some records.
+       =================================================================================
+       ```
+    
+    3. Duplicate universities in `selectedUniversities.txt`
+       File content before run:
+       ```
+       Aarhus University
+       Boston University
+       CS1231 # Discrete Structures # 4.0 # MET CS 248 # Discrete Mathematics # 3.0
+       CS1231 # Discrete Structures # 4.0 # CAS CS131 # Combinatoric Structures # 4.0
+       Boston University
+       CS1231 # Discrete Structures # 4.0 # MET CS 248 # Discrete Mathematics # 3.0
+       ```
+       
+       File content after run:
+       ```
+       Aarhus University
+       Boston University
+       CS1231 # Discrete Structures # 4.0 # MET CS 248 # Discrete Mathematics # 3.0
+       CS1231 # Discrete Structures # 4.0 # CAS CS131 # Combinatoric Structures # 4.0
+       ```
+       
+       Expected output in console:
+       ```
+       =================================================================================
+        Invalid university names found in the file. So, these universities and its associated mappings are deleted.
+        Other invalid mappings may have been deleted.
+        WARNING: Do not tamper the files. You would lose some records.
+       =================================================================================
+       ```
+       
+
+
+       
+
+
+       
