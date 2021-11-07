@@ -12,86 +12,32 @@ Code contributed: more than 2400 lines of code. [[RepoSense](https://nus-cs2113-
 
 #### v1.0:
 
-* Implemented `deletestock` command.
-    * Functionality: Users are able to delete stock information with one command.
-    * Justification: Allow user to delete stock information for whatever reason
-    * Pull request: [[#19](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/19)]
-  
-
-* Implemented `help` command. (Only implemented in 1.0, did not maintain it till the end)
-  * Functionality: Users are able to display help information with one command.
-  * Justification: Allow user to have some place to reference command usage.
-  * Pull request: [[#27](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/27)]
+* Implemented `deletestock` command. [[#19](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/19)]
+* Implemented `help` command. [[#27](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/27)]
   
 #### v2.0:
 
-* Implemented `listorder` command.
-    * Functionality: Users are able to list order information along with optional parameters.
-    * Justification: Allow user to see current order information.
-    * Pull request: [[#116](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/116), [#134](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/134), [#178](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/178)]
+* Implemented `listorder` command. [[#116](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/116), [#134](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/134), [#178](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/178)]
+* Implemented `Storage` class. [[#127](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/127), [#183](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/183)]
+* Implemented `FileParser` class. [[#154](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/154), [#200](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/200)]
+* Implemented `archiveprescription` and `archiveorder` command. [[#193](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/193), [#226](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/226)]
 
-
-* Implemented `Storage` class. 
-    * Functionality: Persistent Data Storage for Stock, Prescription & Order.
-    * Justification: Allow user to retain data across sessions. 
-    * Pull request: [[#127](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/127), [#183](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/183)]
-  
-
-* Implemented `FileParser` class. 
-    * Functionality: Data Validation for Stock, Prescription & Order data files. Throw error suggesting specific line in specific file to fix error if detected.
-    * Justification: Prevent invalid input from entering MediVault through direct tampering of data file.
-    * Pull request: [[#154](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/154), [#200](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/200)]
-
-
-* Implemented `archiveprescription` and `archiveorder` command.
-    * Functionality: Archive orders and prescriptions to remove records <= specified date and append into a static file that has readable format. 
-    * Justification: Allow user to remove cluttered records. After long term usage will have many insignificant records. 
-    * Pull request: [[#193](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/193), [#226](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/226)]
-
-  
 #### v2.1:
 
-* Fix bug for `archive*` commands where time affected exact date matching.
-  * Pull request: [[#222](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/222/files)]
-
-
-* Improved `archiveorder` and `archiveprescription` commands.
-    * Functionality: To show number of records archived.
-    * Justification: Provide more information to the user.
-    * Pull request: [[#297](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/297)]
-
-
-* Standardized data in storage and archive to Upper Case for consistency.
-  * Pull request: [[#314](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/314)]
-
+* Fix bug for `archive*` commands where time affected exact date matching. [[#222](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/222/files)]
+* Improved `archiveorder` and `archiveprescription` commands. [[#297](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/297)]
+* Standardized data in storage and archive to Upper Case for consistency. [[#314](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/314)]
 
 ### Enhancements to Existing Features
 
-* Added checking for existing stock in `StockValidator isValidStockId()` method.
-    * Functionality: Check if stock already exists.
-    * Justification: Cannot be a valid stockId if already exists in stock.
-    * Pull request: [[#19](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/19)]
-
-
+* Added checking for existing stock in `StockValidator isValidStockId()` method. [[#19](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/19)]
 * Included JUnit tests:
-    * `isValidStockId()` method
-        * Pull request: [[#55](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/55)]
-    * `DateParserTest`
-        * Pull request: [[#90](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/90), [#125](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/125), [#304](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/304)]
-    * `DeleteStockCommandTest`
-        * Pull request: [[#304](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/304)]
-    * `ListOrderCommandTest`, `ArchiveOrderCommandTest`, `ArchivePrescriptionCommandTest`
-        * Pull request: [[#314](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/314)]
-   
- 
-* Refactor all usage of `stockID` to `stockId` to maintain consistency with `orderId` and `prescriptionId`.
-    * Pull requests: [[#200](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/200)]
-
-
-* Implemented `removeTime()` method in `DateParser`.
-    * Functionality: Remove time from Date object.
-    * Justification: For use when archiving to match user specified date.
-    * Pull request: [[#222](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/222)]
+    * `isValidStockId()`. [[#55](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/55)]
+    * `DateParserTest`. [[#90](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/90), [#125](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/125), [#304](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/304)]
+    * `DeleteStockCommandTest`. [[#304](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/304)]
+    * `ListOrderCommandTest`, `ArchiveOrderCommandTest`, `ArchivePrescriptionCommandTest`. [[#314](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/314)]
+* Refactor all usage of `stockID` to `stockId` to maintain consistency with `orderId` and `prescriptionId`. [[#200](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/200)]
+* Implemented `removeTime()` method in `DateParser`. [[#222](https://github.com/AY2122S1-CS2113T-T10-1/tp/pull/222)]
 
 ### Documentation
 
