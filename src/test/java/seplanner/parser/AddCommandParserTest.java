@@ -150,9 +150,9 @@ public class AddCommandParserTest {
         moduleSelectedList.addModule(addedMod);
         University addedUni = universityMasterList.get(4);
         universityMasterList.addUniversity(addedUni);
-        assertThrows(AddParseException.class, () -> acp.parse(inputExceedLowerBounds, universityMasterList, moduleMasterList,
-                universitySelectedList, moduleSelectedList));
-        assertThrows(AddParseException.class, () -> acp.parse(inputExceedUpperBounds, universityMasterList, moduleMasterList,
-                universitySelectedList, moduleSelectedList));
+        assertThrows(AddParseException.class, () -> acp.parse(inputExceedLowerBounds, universityMasterList,
+                moduleMasterList, universitySelectedList, moduleSelectedList));
+        assertThrows(AddParseException.class, () -> acp.parse(inputExceedUpperBounds, universityMasterList,
+                moduleMasterList, universitySelectedList, moduleSelectedList));
     }
 }
