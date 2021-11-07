@@ -101,7 +101,7 @@ These are the commands I can currently carry out:
 	1. add an ingredient - add n/INGREDIENT_NAME a/AMOUNT e/EXPIRY
 	2. list all ingredients - list
 	3. update an ingredient - update GROUP_INDEX.INGREDIENT_INDEX a/AMOUNT
-	4. subtract an ingredient's stock - subtract GROUP_INDEX a/AMOUNT
+	4. subtract an ingredient's stock - subtract n/NAME a/AMOUNT
 	5. delete an ingredient - delete GROUP_INDEX.INGREDIENT_INDEX
 	6. search ingredients by expiry - expire DATE
 	7. search ingredients by name - find INGREDIENT_NAMES

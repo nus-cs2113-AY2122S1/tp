@@ -1,5 +1,6 @@
 package seedu.situs.parser;
 
+import seedu.situs.Situs;
 import seedu.situs.command.AddCommand;
 import seedu.situs.command.AlertExpiringSoonCommand;
 import seedu.situs.command.AlertLowStockCommand;
@@ -23,6 +24,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Parser {
@@ -44,11 +47,9 @@ public class Parser {
 
     public static final String DIVIDER = "____________________________________________________\n";
     private static final String INVALID_COMMAND_MESSAGE = "Invalid command!";
-    private static final String DELETE_ERROR_MESSAGE = "Nothing to remove!";
     private static final String NUMBER_FORMAT_ERROR_MESSAGE = "Invalid number format!";
     private static final String INVALID_INDEX_MESSAGE = "The index given is in an incorrect format!\n"
             + "The index MUST be of the form: X.Y (e.g. 1.1, 2.3, etc.)";
-    private static final String NOT_FOUND_MESSAGE = "Ingredient not found!";
     private static final String INCORRECT_PARAMETERS_MESSAGE = "The number of parameters is wrong!";
     private static final String INCORRECT_PARAMETER_FORMAT_MESSAGE = "The parameter format is wrong!";
     private static final String EXPIRY_FORMAT_ERROR_MESSAGE = "Invalid expiry date format!"
@@ -86,6 +87,7 @@ public class Parser {
     private static final int DELETE_COMMAND_ARGUMENT_COUNT = 2;
     private static final int SET_COMMAND_ARGUMENT_COUNT = 3;
 
+    private static final Logger LOGGER = Logger.getLogger(Situs.class.getName());
 
     public static boolean isExit(String command) {
         return (command.equals(COMMAND_EXIT));
@@ -157,6 +159,7 @@ public class Parser {
      * @throws SitusException If no keywords are entered
      */
     private static String parseAndRunFindCommand(String command) throws SitusException {
+        LOGGER.log(Level.INFO, "parsing find command");
         String parsedCommand = command.substring(COMMAND_FIND.length()).trim();
         String[] keywords = parsedCommand.split(SPACE_SEPARATOR);
         Set<String> keywordsUnique = new HashSet<>();
@@ -165,10 +168,12 @@ public class Parser {
 
         for (int i = 0; i < keywords.length; i++) {
             if (keywords[i].isEmpty()) {
+                LOGGER.log(Level.WARNING, "error in parsing find command");
                 throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
             }
             keywords[i] = keywords[i].trim();
             if (containsInvalidCharacters(keywords[i])) {
+                LOGGER.log(Level.WARNING, "error in parsing find command");
                 throw new SitusException(INVALID_CHARACTERS_FIND_MESSAGE);
             }
             keywordsUnique.add(keywords[i]);
@@ -179,6 +184,7 @@ public class Parser {
             if (!resultMsg.isEmpty()) {
                 resultMsg += "\n";
             }
+            LOGGER.log(Level.INFO, "searching for keywords");
             resultMsg += new FindCommand(keyword).run();
         }
         return resultMsg;
