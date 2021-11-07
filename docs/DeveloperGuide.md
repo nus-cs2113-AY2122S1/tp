@@ -35,7 +35,6 @@
 - [5. Documentation, Logging, Testing and DevOps](#5-documentation-logging-testing-and-devops)
     * [5.1 Documentation](#51-documentation)
     * [5.2 Logging](#52-logging)
-    * [5.2 Logging](#52-logging)
     * [5.3 Testing](#53-testing)
     * [5.4 DevOps](#54-devops)
 - [Appendix A: Product Scope](#appendix-a-product-scope)
