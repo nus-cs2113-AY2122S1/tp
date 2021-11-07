@@ -10,5 +10,5 @@ Prerequisites: `JDK 11`, update Intellij to the most recent version.
 
 [Developer Guide](https://ay2122s1-cs2113t-f12-4.github.io/tp/DeveloperGuide.html) - View the developers guide here
 
-[About Us](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/docs/AboutUs.md) - Learn more about the developer here
+[About Us](https://ay2122s1-cs2113t-f12-4.github.io/tp/AboutUs.html) - Learn more about the developer here
 

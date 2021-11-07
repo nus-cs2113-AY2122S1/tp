@@ -1,3 +1,5 @@
+//@@author ianwangeeen
+
 package seedu.duke;
 
 import seedu.duke.attendance.Attendance;
@@ -19,6 +21,8 @@ import seedu.duke.storage.MemberStorage;
 import seedu.duke.storage.TrainingStorage;
 import seedu.duke.training.TrainingList;
 import seedu.duke.training.TrainingSchedule;
+
+import java.util.Scanner;
 
 public class Entry {
 
@@ -57,6 +61,10 @@ public class Entry {
                 Ui.printList(trainings);
                 break;
             case LIST_ATTENDANCE_KEYWORD:
+                if (attendanceList.getAttendanceListSize() == 0) {
+                    System.out.println("Attendance list is empty!");
+                    break;
+                }
                 Ui.printList(Parser.getFilteredAttendanceList(attendanceList, entry));
                 Parser.askToListAll(attendanceList);
                 break;

@@ -154,6 +154,11 @@ public class Ui {
         System.out.println("Added an Attendance entry: " + "\n" + attendance);
     }
 
+    public static void printDeleteAttendanceErrorMessage(String errorMessage) {
+        System.out.println("Error when deleting attendance entry:");
+        System.out.println("    " + errorMessage);
+    }
+
     public static void printEditMessage(Member oldMember, Member newMember) {
         System.out.println("Edited member:\n" + oldMember);
         System.out.println("To become:\n" + newMember);
@@ -197,10 +202,8 @@ public class Ui {
     }
 
     public static void printList(AttendanceList attendanceList) {
-        int display = 1;
         for (Attendance attendance : attendanceList.getAttendanceList()) {
-            System.out.println("[" + display + "] " + attendance.toString());
-            display++;
+            System.out.println(attendance.toString());
         }
     }
 
@@ -209,8 +212,8 @@ public class Ui {
                 + "    add [/m </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>] \n"
                 + "    add [/t </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>] \n"
                 + "    add [/att </m MEMBER_NAME> </n TRAINING_NAME> </d 1_OR_0>] \n"
-                + "    delete [/m <MEMBER_INDEX_NUMBER>] \n"
-                + "    delete [/t <TRAINING_INDEX_NUMBER>] \n"
+                + "    delete [/m <MEMBER_INDEX_NUMBER>] [/m MEMBER_NAME] \n"
+                + "    delete [/t <TRAINING_INDEX_NUMBER>] [/t TRAINING_NAME] \n"
                 + "    delete [/att /t <TRAINING_NAME> /i <ATTENDANCE_INDEX_TO_DELETE>] \n"
                 + "    edit [/m <MEMBER_INDEX_NUMBER> </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE "
                 + "NUMBER>]\n"

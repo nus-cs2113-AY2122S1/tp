@@ -1,3 +1,7 @@
+//@@author izdiyadfrhn
+//@@author xingyuan123
+
+
 package seedu.duke.command;
 
 import seedu.duke.Ui;
@@ -37,6 +41,8 @@ public class AddAttendance {
         try {
             boolean validAttendance = verifyAttendanceDetails(attendance, members, trainings, attendanceList);
             if (validAttendance) {
+                int newAttendanceIndex = attendanceList.getAttendanceListSize() + 1;
+                attendance.setIndex(newAttendanceIndex);
                 attendanceList.addAttendance(attendance);
                 Ui.printAddedAttendanceMessage(attendance);
                 AttendanceStorage.writeToAttendance(attendanceList, attendance);

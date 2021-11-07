@@ -25,4 +25,3 @@ public class InvalidMemberException extends Exception {
         this.members = members;
     }
 }
-//@@author

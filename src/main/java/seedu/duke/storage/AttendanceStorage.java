@@ -1,17 +1,22 @@
+//@@author xingyuan123
+
 package seedu.duke.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.Locale;
 
 import seedu.duke.Ui;
 import seedu.duke.attendance.Attendance;
 import seedu.duke.attendance.AttendanceList;
+import seedu.duke.attendance.exception.InvalidAttendanceException;
 import seedu.duke.command.exception.InvalidAddAttendanceException;
 import seedu.duke.command.exception.InvalidAddMemberException;
 
@@ -105,7 +110,7 @@ public class AttendanceStorage {
      * Checks for any duplicates in the list.
      *
      * @param pendingList current list of Strings to check.
-     * @throws InvalidAddMemberException if there are any duplicates.
+     * @throws InvalidAddAttendanceException if there are any duplicates.
      */
     private static void checkDuplicates(List<String> pendingList) throws InvalidAddAttendanceException {
         for (int i = 0; i < pendingList.size(); i++) {
@@ -169,7 +174,7 @@ public class AttendanceStorage {
      * Checks if member name is valid.
      *
      * @param name the member name to be checked.
-     * @throws InvalidAddMemberException when member name is invalid.
+     * @throws InvalidAddAttendanceException when member name is invalid.
      */
     private static void verifyMemberName(String name) throws InvalidAddAttendanceException {
         boolean nameEmpty = (name == null || name.trim().isEmpty());
@@ -194,13 +199,16 @@ public class AttendanceStorage {
         try {
             Scanner dukeAttendanceScanner = new Scanner(attendanceCsvFile);
             dukeAttendanceScanner.nextLine();
+            int index = 1;
             while (dukeAttendanceScanner.hasNextLine()) {
                 String fullAttendanceDetails = dukeAttendanceScanner.nextLine();
                 String[] attendanceDetails = fullAttendanceDetails.split("\\,", 2);
                 name = attendanceDetails[0];
                 attended = attendanceDetails[1];
                 Attendance attendance = new Attendance(name, trainingName, attended);
+                attendance.setIndex(index);
                 attendanceList.addAttendance(attendance);
+                index++;
             }
         } catch (FileNotFoundException e) {
             System.out.println("file not found!");
@@ -286,7 +294,7 @@ public class AttendanceStorage {
             dukeAttendanceWriter.write(',');
             dukeAttendanceWriter.write('\n');
             for (int i = 1; i <= attendanceListSize; i++) {
-                if (attendanceList.getAttendanceTrainingName(i).equals(trainingName)) {
+                if (attendanceList.getAttendanceTrainingName(i).equals(trainingName.toUpperCase(Locale.ROOT))) {
                     dukeAttendanceWriter.write(attendanceList.getAttendanceMemberName(i));
                     dukeAttendanceWriter.write(',');
                     dukeAttendanceWriter.write(attendanceList.getAttendancePresentOrLate(i));
@@ -321,18 +329,24 @@ public class AttendanceStorage {
      * @param index          index of attendance.
      */
     public static void deleteAttendance(AttendanceList attendanceList, String trainingName, int index) {
-        assert index >= 1;
-        int count = 1;
-        for (int i = 1; i <= attendanceList.getAttendanceListSize(); i++) {
-            if (attendanceList.getAttendanceTrainingName(i).equals(trainingName)) {
-                if (count == index) {
-                    Attendance toDelete = attendanceList.deleteAttendance(i);
-                    Ui.printDeletedAttendanceMessage(toDelete);
-                    break;
-                } else {
-                    count++;
+        try {
+            assert index >= 1;
+            int count = 1;
+            for (int i = 1; i <= attendanceList.getAttendanceListSize(); i++) {
+                if (attendanceList.getAttendanceTrainingName(i).equals(trainingName.toUpperCase(Locale.ROOT))) {
+                    if (count == index) {
+                        Attendance toDelete = attendanceList.deleteAttendance(i);
+                        Ui.printDeletedAttendanceMessage(toDelete);
+                        break;
+                    } else {
+                        count++;
+                    }
                 }
             }
+        } catch (IndexOutOfBoundsException | AssertionError e) {
+            Ui.printDeleteAttendanceErrorMessage("Please input a valid attendance index.");
+        } catch (InvalidAttendanceException e) {
+            Ui.printDeleteAttendanceErrorMessage(e.getMessage());
         }
     }
 

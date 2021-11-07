@@ -8,13 +8,13 @@ of information** on CCA members, training schedules and attendance records which
 Line Interface (CLI). CCA Manager aims to **centralise and optimize** all CCA-related information, so that you can focus on
 improving other aspects of the CCA.
 
-This user guide will help you get started on using CCA Manager. [Pre-requisites](#pre-requisites---_things-to-prepare-before-you-start-using-cca-manager_) will show you how to 
+This user guide will help you get started on using CCA Manager. [Pre-requisites](#pre-requisites---things-to-prepare-before-you-start-using-cca-manager) will show you how to 
 set up CCA Manager on your computer. The [Commands](#commands) section will show you the list of commands and how to use
 them. Finally, [Command Summary](#command-summary) provides you with an overview of all the commands you can execute.
 
 ## Table of contents
 * [Acknowledgements](#acknowledgements)
-* [Pre-requisites](#pre-requisites---_things-to-prepare-before-you-start-using-cca-manager_)
+* [Pre-requisites](#pre-requisites---things-to-prepare-before-you-start-using-cca-manager)
 * [Commands](#commands)
   * [Warning Labels](#warning-labels) ⚠️
   * [Members](#member-commands)
@@ -33,6 +33,8 @@ them. Finally, [Command Summary](#command-summary) provides you with an overview
     * [add /att](#add-attendance)
     * [delete /att](#delete-attendance)
     * [list /att](#list-attendance)
+* [FAQ](#faq-frequently-asked-questions)
+* [Storage](#Storage)
 * [Command Summary](#command-summary)
 
 ## Acknowledgements
@@ -72,19 +74,23 @@ With **CCA Manager**, you can organize your data with the help of useful command
 
 
 ## Member Commands
-### Add Member
-**CCA Manager** has an add feature which lets you key in necessary information such as your members' information and attendance, as well 
-as any training-related information regarding your CCA's venue bookings and timings.
+Members of CCA will be added using the `add` member command. The key information needed for a member will be the member's name, student number, gender and phone number. It is important to take note that name, student number and phone number cannot have duplicates. Members of CCA can be deleted with the `delete` member command and can be edited with the `edit` member command. To look for member, you can use the `find` member function. The instructions on how you can use the commands are listed below. To show all members, you can use the `list` member function.
 
+### Add Member
 To start, you can populate the member list of **CCA Manager** with the help of the `add` member command. This command lets you key in necessary information such as your members' particulars
 
 * `add /m` This adds entries to the Member List stored in CCA Manager.
     * The `add /m` keyword requires 4 different arguments:
         * use `/n` to input _name_ of your member. 
+          * ⚠️ Member name of each entry must be _unique_. Different member entries with the same member name are not allowed.
+          * ⚠️ Member name can only have letters and spaces. Anything else will be rejected.
         * use `/s` to input _student number_ of your member.
           * ⚠️ Student Number of each entry must be _unique_. Different member entries with the same student number are not allowed.
+          * ⚠️ Student Number must start with A, then 7 numbers and ends with any letters.
         * use `/g` to input _gender_ of your member. Either _M_ for male or _F_ for female.
         * use `/p` to input _phone number_ of your member.
+          * ⚠️ Phone number of each entry must be _unique_. Different member entries with the same phone number are not allowed.
+          * ⚠️ Phone number must be a Singapore phone number that starts with 9 or 8 and have only 8 digits.
    
     * **Format:**
       * `add /m [/n MEMBER_NAME] [/s STUDENT_NUMBER] [/g GENDER] [/p PHONE NUMBER]`
@@ -98,6 +104,12 @@ To start, you can populate the member list of **CCA Manager** with the help of t
    [1] Name: JOHN HWEE | Student Number: A0248192K | Gender: M | Phone Number: 91128888
    ```
    
+   * **Expected Output for duplicate member:**
+    ```
+    Error when adding member:
+        Duplicate name found. Please enter a different name
+    ```
+    
 ### Delete Member
 If one of your CCA members has quit, or your senior has graduated, you can remove their entry from **CCA Manager** to keep your member list up to date.
 
@@ -112,19 +124,15 @@ If one of your CCA members has quit, or your senior has graduated, you can remov
    * **Examples:**
      * `delete /m 1` Deletes the first member on the member list.
      * `delete /m John` Deletes a member with the name 'John'.
-       * If there is more than 1 John in the member list, a prompt will show up, indicating that you may not add a duplicate member. 
+       * If unable to find a direct match to the name, similar names with John in them will be shown so that you can specify the full name of the person you want to delete. 
        _To avoid this error, you may want to key in the full name of your memebers!_
+   
    * **Expected Output:**
    
    ```
     You have removed member: 
     [1] Name: JOHN HWEE | Student Number: A0248192K | Gender: M | Phone Number: 91128888
    ```
-   * **Expected Output for duplicate member:**
-    ```
-    Error when adding member:
-        Duplicate name found. Please enter a different name
-    ```
 
 ### List Member
 **CCA Manager** allows you to list out all the recorded members in your member list.
@@ -347,7 +355,7 @@ Have too many training schedules, and can't find the one you want? Just use the 
     * **Expected Output:**
    ```
    Added an Attendance entry:
-   Name: JOHN HWEE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
+   [1] Name: JOHN HWEE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
    ```
 
 ### Delete Attendance
@@ -373,7 +381,7 @@ You can delete existing attendance entries with the help of the `delete /att` co
    n
    => delete /att /t WEEKLY FRIDAY TRAINING 1 /i 1
    You have removed attendance entry:
-   Name: ADAM | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
+   [1] Name: ADAM | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
    ```
 
 ### List Attendance
@@ -381,19 +389,15 @@ You can delete existing attendance entries with the help of the `delete /att` co
 
 * `list /att` This lists out entries in CCA Manager's Attendance List.
     * `list /att` takes in several arguments
-      * use `/t <TRAINING_NAME>` to look for all attendances for a particular training
-      * use `/d <1 OR 0>` to further filter the list to show attendances of people who were present or absent
-        * 1 displays the entries of members who were present for that training
-        * 0 displays the entries of members who were absent for that training
+      * use `/t <TRAINING_NAME>` to look for all attendances for a particular training.
     * In addition, there will be a prompt to view the full attendance list that consists of all trainings such as:
       ```
       ===== Would you like to list the full attendance sheet? (y / n) =====
       ```
     * **Format:**
-        * `list /att [/t TRAINING_NAME] [/d 1_OR_0]`
+        * `list /att [/t TRAINING_NAME]`
     * **Examples:**
         * `list /att /t Weekly Friday Training 1`
-        * `list /att /t Weekly Friday Training 1 /d 1`
     * **Expected Output:**
       * Attendance entries for particular training 'Weekly Friday Training 1':
         ```
@@ -401,11 +405,35 @@ You can delete existing attendance entries with the help of the `delete /att` co
         [2] Name: MARK LEE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [0]
         [3] Name: BILLIE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
         ```
-      * Filtered attendance list of 'Weekly Friday Training 1' for those who were present:
-        ```
-        [1] Name: JOHN HWEE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
-        [2] Name: BILLIE | Training Name: WEEKLY FRIDAY TRAINING 1 | Present: [1]
-        ```
+
+### FAQ (Frequently Asked Questions)
+
+**Q**: Where can I find the file that my data is stored on?<br />
+**A**: Members data are stored in `CCAMembers.csv` and Trainings data are stored in `CCATrainings.csv`. These two files are found in the same folder location as your `CCAManager.jar`.<br />
+
+Attendance data are stored in a sub-folder called `Attendance`. There, the filename of your data is the Training Name of the attendance. The `Attendance` subfolder is found in the same folder location as your `CCAManager.jar`.
+
+
+**Q**: It appears that I can input String data into the `date/time` field of Training data. Is this intentional?<br />
+**A**: Yes, it is a feature. This is to support the use of relative date/time addressing, such as `After next meeting` or `Recess week`, for example. <br />This gives more flexibility to the user to store training data for trainings that may not have a set date currently. 
+<br />However, a side effect is that gibberish String such as `ABCABC` or `DUMMYTEXT` can be stored in the `date/time` field, which is discouraged.
+
+## Storage
+CCA Manager data are saved in the hard disk automatically after any commands that changes the data.
+There is no need to save manually.
+It is recommended that the CSV file be opened and edited with Microsoft Excel if absolutely necessary.
+
+⚠ Please refrain from editing the data directly from the CSV file.
+However, if you do so the program is able to run fine if the data changes are valid.
+Else, the program will terminate. You should make sure all data is valid before trying to run the
+program again.
+
+⚠ Do not use commas when manually editing the CSV file.It might cause unintended errors in the program.
+
+⚠ No blank lines should be left between entries when editing in Microsoft Excel.This will lead to data verification failing and program will terminate, 
+citing invalid fields.
+
+⚠ Do not rename or move the CSV files.
 
 ## Command Summary
 
@@ -425,4 +453,4 @@ Action| Syntax |Remarks|
 |find training| `find [/t TRAINING_NAME_KEYWORD]` | Searches for valid entries based on training name
 |list member| `list /m` |
 |list trainings| `list [/t]` |
-|list attendance entries | `list /att [/t TRAINING_NAME] [/d 1_OR_0]` |Training name is compulsory, 1_OR_0 is an optional field.
+|list attendance entries | `list /att [/t TRAINING_NAME]` |

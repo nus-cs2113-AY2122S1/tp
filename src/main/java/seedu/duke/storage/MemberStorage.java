@@ -149,7 +149,7 @@ public class MemberStorage {
             while (memberScanner.hasNextLine()) {
                 String fullMemberDetails = memberScanner.nextLine();
                 String[] memberDetails = fullMemberDetails.split("\\,", 4);
-                name = memberDetails[0];
+                name = memberDetails[0].toUpperCase();
                 pendingMemberNames.add(name);
             }
         } catch (FileNotFoundException e) {
@@ -292,7 +292,7 @@ public class MemberStorage {
                 studentNumber = memberDetails[1];
                 gender = memberDetails[2];
                 phoneNumber = memberDetails[3];
-                Member member = new Member(name, studentNumber, gender, phoneNumber, true);
+                Member member = new Member(name.toUpperCase(), studentNumber, gender.toUpperCase(), phoneNumber, true);
                 member.setIndex(index);
                 memberList.addMember(member);
                 index++;
