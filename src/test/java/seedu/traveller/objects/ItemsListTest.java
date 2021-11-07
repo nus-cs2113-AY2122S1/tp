@@ -19,6 +19,7 @@ public class ItemsListTest {
         this.itemsList = new ItemsList();
     }
 
+    //@@author Uxinnn
     @Test
     public void addItem_success() throws TravellerException {
         Item item1 = new Item("1900", "Eat dinner");
@@ -30,6 +31,7 @@ public class ItemsListTest {
         assertEquals(2, itemsList.getSize());
     }
 
+    //@@author Uxinnn
     @Test
     public void deleteDay_success() throws TravellerException {
         Item item1 = new Item("1900", "Eat dinner");
@@ -41,6 +43,7 @@ public class ItemsListTest {
         assertEquals(1, itemsList.getSize());
     }
 
+    //@@author
     @Test
     public void editItem_success() throws TravellerException {
         Item item1 = new Item("1900", "Check-in HolidayInn");

@@ -41,7 +41,8 @@ public class ViewCommand extends Command {
         } else {
             int tripIndex = tripsList.getTripIndex(getTripName());
             assert tripIndex < tripsList.getSize() : "The trip index is out of bound.";
-            if (tripIndex == -1) {
+            int tripNotFoundFlag = -1;
+            if (tripIndex == tripNotFoundFlag) {
                 throw new TripNotFoundException();
             }
 

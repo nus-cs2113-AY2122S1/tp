@@ -24,7 +24,9 @@ they can plan multiple activities per day.
 #### Other code contributions
 * Implemented the main structure of Traveller.
 * Restructured code to streamline architecture of Traveller.
-* Added exceptions, assertions, logging, test cases to overall code.
+* Added a lot of exceptions, assertions, logging, test cases to overall code, 
+including classes/methods not written by me.
+* Checked for bugs before deadlines.
 
 #### Project Management
 * Created and assigned issues to group members for v2.0.
@@ -36,9 +38,12 @@ they can plan multiple activities per day.
   * Created overall structure of the UG.
   * Kept it updated and debugged.
   * Wrote Introduction, Contents Table, Quick Start, new, add-day, add-item, view sections.
+  * Contributed to FAQ.
 * Developer Guide (DG)
   * Created overall structure of the DG.
+  * Debugged DG.
   * Wrote preface, Table of Contents, Design & Implementation header paragraph, World Map header paragraph, 
 Main Traveller header paragraph, Traveller class, Parser class.
 
 RepoSense Link: [here](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=Uxinnn&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
+  * Refer to this link for details of my code contributions.
