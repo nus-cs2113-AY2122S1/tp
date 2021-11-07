@@ -133,7 +133,7 @@ class AssessmentListTest {
             command2.execute(classList, ui, storage);
         } catch (Exception e) {
             assertEquals("Invalid weightage. "
-                    + "Weightage must a number be between 0.00 (inclusive) and 100.00 (inclusive).", e.getMessage());
+                    + "Weightage must be number a between 0.00 (inclusive) and 100.00 (inclusive).", e.getMessage());
         }
     }
 
@@ -184,7 +184,7 @@ class AssessmentListTest {
             command2.execute(classList, ui, storage);
         } catch (Exception e) {
             assertEquals("Invalid maximum marks. "
-                    + "Maximum marks must a number be between 0.00 (inclusive) and 1,000.00 (inclusive).",
+                    + "Maximum marks must be number a between 0.00 (inclusive) and 1,000.00 (inclusive).",
                     e.getMessage());
         }
     }
@@ -334,7 +334,7 @@ class AssessmentListTest {
             command3.execute(classList, ui, storage);
         } catch (Exception e) {
             assertEquals("Invalid new maximum marks. "
-                    + "Maximum marks must a number be between 0.00 (inclusive) and 1,000.00 (inclusive).",
+                    + "Maximum marks must be number a between 0.00 (inclusive) and 1,000.00 (inclusive).",
                     e.getMessage());
         }
     }

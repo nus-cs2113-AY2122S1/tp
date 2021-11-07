@@ -34,7 +34,7 @@ public class EditAssessmentCommand extends Command {
     private static final String MESSAGE_FORMAT_INVALID_NEW_TOTAL_WEIGHTAGE = "Invalid new weightage. "
         + "Total new weightage exceeds %,.2f%%.";
     private static final String MESSAGE_FORMAT_INVALID_NEW_MAXIMUM_MARKS = "Invalid new maximum marks. "
-        + "Maximum marks must a number be between %,.2f (inclusive) and %,.2f (inclusive).";
+        + "Maximum marks must be number a between %,.2f (inclusive) and %,.2f (inclusive).";
     private static final String MESSAGE_FORMAT_INVALID_NEW_NAME = "Invalid new name. "
         + "An assessment with the same name already exists.";
     private static final String MESSAGE_FORMAT_ASSESSMENT_EDITED = "Assessment in %s updated:\n  %s";
