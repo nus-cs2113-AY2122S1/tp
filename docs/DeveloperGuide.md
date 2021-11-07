@@ -195,6 +195,11 @@ The `Training` component,
   * Training Name
   * Training Date
   * Training Venue
+* stores `TrainingSchedule` in `TrainingList` whenever `addTrainingSchedule()` is called
+* edits `TrainingSchedule` in `TrainingList` whenever `EditTraining()` is called
+* removes `TrainingSchedule` from `TrainingList` whenever `deleteTrainingSchedule()` is called
+* returns a list of matching `TrainingSchedule` whenever `findTraining()` is called
+* stores `TrainingList` entries on disk in `CCATrainings.csv`
 
 
 ### Attendance component
@@ -211,7 +216,7 @@ The `Attendance` component,
 
 ### Storage component
 
-**API** : [Storage]()
+**API** : [Storage](https://github.com/AY2122S1-CS2113T-F12-4/tp/tree/master/src/main/java/seedu/duke/storage)
 
 The `Storage` component consists of 3 sub-components, corresponding to `MemberStorage` , `AttendanceStorage` 
 and `SrainingStorage`
