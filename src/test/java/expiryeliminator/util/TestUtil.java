@@ -6,11 +6,11 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
+import expiryeliminator.data.IngredientQuantity;
 import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.IngredientStorage;
 import expiryeliminator.data.Recipe;
 import expiryeliminator.data.RecipeList;
-import expiryeliminator.data.IngredientQuantity;
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.IllegalValueException;
 import expiryeliminator.data.exception.NotFoundException;
@@ -29,8 +29,8 @@ public class TestUtil {
         final IngredientRepository ingredientRepository = generateIngredientRepositoryForRecipe();
         assert ingredientRepository != null;
         try {
-            recipe.add("Chicken", 1, ingredientRepository);
-            recipe.add("Salt", 20, ingredientRepository);
+            recipe.addIngredient("Chicken", 1, ingredientRepository);
+            recipe.addIngredient("Salt", 20, ingredientRepository);
         } catch (DuplicateDataException | IllegalValueException e) {
             fail("Recipe should be valid by definition");
         }
@@ -40,19 +40,19 @@ public class TestUtil {
         final IngredientRepository ingredientRepository = generateIngredientRepositoryForRecipe();
         assert ingredientRepository != null;
         try {
-            recipe.add("Pork", 1, ingredientRepository);
-            recipe.add("Salt", 20, ingredientRepository);
+            recipe.addIngredient("Pork", 1, ingredientRepository);
+            recipe.addIngredient("Salt", 20, ingredientRepository);
         } catch (DuplicateDataException | IllegalValueException e) {
             fail("Recipe should be valid by definition");
         }
     }
 
     public static void addIngredientsWithoutUnitsToRecipe(Recipe recipe) {
-        final IngredientRepository ingredientRepository = generateIngredientRepositoryForExampleRecipe(1,20);
+        final IngredientRepository ingredientRepository = generateIngredientRepositoryForExampleRecipe(1, 20);
         assert ingredientRepository != null;
         try {
-            recipe.add("Chicken", 1, ingredientRepository);
-            recipe.add("Salt", 20, ingredientRepository);
+            recipe.addIngredient("Chicken", 1, ingredientRepository);
+            recipe.addIngredient("Salt", 20, ingredientRepository);
         } catch (DuplicateDataException | IllegalValueException e) {
             fail("Recipe should be valid by definition");
         }
@@ -177,11 +177,19 @@ public class TestUtil {
 
         try {
             //expiring
-            ingredientRepository.add("Chicken", null, quantity1, currentDatePlusThreeDays);
+            if (quantity1 <= 0) {
+                ingredientRepository.add("Chicken");
+            } else {
+                ingredientRepository.add("Chicken", null, quantity1, currentDatePlusThreeDays);
+            }
             //fresh
-            ingredientRepository.add("Salt", null, quantity2, currentDatePlusThreeWeeks);
+            if (quantity2 <= 0) {
+                ingredientRepository.add("Salt");
+            } else {
+                ingredientRepository.add("Salt", null, quantity2, currentDatePlusThreeWeeks);
+            }
             return ingredientRepository;
-        } catch (DuplicateDataException e) {
+        } catch (DuplicateDataException | IllegalValueException e) {
             fail("Ingredient repository should be valid by definition");
             return null;
         }
@@ -205,7 +213,7 @@ public class TestUtil {
             ingredientRepository.add("Chicken", null, quantity1, currentDateMinusThreeDays);
             ingredientRepository.add("Salt", null, quantity2, currentDateMinusThreeWeeks);
             return ingredientRepository;
-        } catch (DuplicateDataException e) {
+        } catch (DuplicateDataException | IllegalValueException e) {
             fail("Ingredient repository should be valid by definition");
             return null;
         }
@@ -222,9 +230,9 @@ public class TestUtil {
 
         try {
             final IngredientRepository ingredients = new IngredientRepository();
-            ingredients.add("Chicken",null, 1, currentDatePlusThreeDays);
+            ingredients.add("Chicken", null, 1, currentDatePlusThreeDays);
             return ingredients.find("Chicken");
-        } catch (DuplicateDataException e) {
+        } catch (DuplicateDataException | IllegalValueException e) {
             fail("Ingredient repository should be valid by definition");
             return null;
         } catch (NotFoundException e) {
@@ -244,9 +252,9 @@ public class TestUtil {
 
         try {
             final IngredientRepository ingredients = new IngredientRepository();
-            ingredients.add("Salt",null, 20, currentDatePlusThreeWeeks);
+            ingredients.add("Salt", null, 20, currentDatePlusThreeWeeks);
             return ingredients.find("Salt");
-        } catch (DuplicateDataException e) {
+        } catch (DuplicateDataException | IllegalValueException e) {
             fail("Ingredient repository should be valid by definition");
             return null;
         } catch (NotFoundException e) {
@@ -284,7 +292,7 @@ public class TestUtil {
             //fresh
             ingredientRepository.add("Green Apple", null, 3, currentDatePlusThreeWeeks);
             return ingredientRepository;
-        } catch (DuplicateDataException e) {
+        } catch (DuplicateDataException | IllegalValueException e) {
             fail("Ingredient repository should be valid by definition");
             return null;
         }
@@ -308,7 +316,7 @@ public class TestUtil {
             //fresh
             ingredientRepository.add("Green Apple", null, 3, currentDatePlusThreeWeeks);
             return ingredientRepository;
-        } catch (DuplicateDataException e) {
+        } catch (DuplicateDataException | IllegalValueException e) {
             fail("Ingredient repository should be valid by definition");
             return null;
         }

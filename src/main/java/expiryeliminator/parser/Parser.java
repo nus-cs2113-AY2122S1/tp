@@ -58,7 +58,8 @@ public class Parser {
     private static final SingleArgPrefix PREFIX_INGREDIENT = new SingleArgPrefix("i");
     private static final SingleArgPrefix PREFIX_QUANTITY = new SingleArgPrefix("q");
     private static final SingleArgPrefix PREFIX_EXPIRY = new SingleArgPrefix("e");
-    private static final OptionalArgPrefix PREFIX_OPTIONAL_UNIT = new OptionalArgPrefix("u");
+    private static final SingleArgPrefix PREFIX_UNIT = new SingleArgPrefix("u");
+    private static final OptionalArgPrefix PREFIX_OPTIONAL_UNIT = new OptionalArgPrefix(PREFIX_UNIT);
     private static final MultipleArgPrefix PREFIX_MULTIPLE_INGREDIENT = new MultipleArgPrefix(PREFIX_INGREDIENT);
     private static final MultipleArgPrefix PREFIX_MULTIPLE_QUANTITY = new MultipleArgPrefix(PREFIX_QUANTITY);
     private static final MultipleArgPrefix PREFIX_MULTIPLE_RECIPE = new MultipleArgPrefix(PREFIX_RECIPE);
@@ -80,7 +81,7 @@ public class Parser {
         if (!matcher.matches()) {
             return new IncorrectCommand(MESSAGE_UNRECOGNISED_COMMAND);
         }
-        final String command = matcher.group("command");
+        final String command = matcher.group("command").trim();
         String args = matcher.group("args");
 
         try {
@@ -190,6 +191,7 @@ public class Parser {
     }
 
     //@@author vincentlauhl
+
     /**
      * Creates a AddRecipeCommand from the inputs.
      *
@@ -287,6 +289,7 @@ public class Parser {
     }
 
     //@@author vincentlauhl
+
     /**
      * Creates a CookedRecipeCommand from the inputs.
      *
@@ -351,7 +354,7 @@ public class Parser {
      * @return a DeleteRecipeCommand with the recipe name if successful and an IncorrectCommand if not.
      */
     private static Command prepareUpdateUnits(String args) throws InvalidArgFormatException {
-        final ArgsParser argsParser = new ArgsParser(PREFIX_INGREDIENT, PREFIX_OPTIONAL_UNIT);
+        final ArgsParser argsParser = new ArgsParser(PREFIX_INGREDIENT, PREFIX_UNIT);
 
         try {
             argsParser.parse(args);
@@ -361,7 +364,7 @@ public class Parser {
         }
 
 
-        final String unitString = new UnitParser().parse(argsParser.getSingleArg(PREFIX_OPTIONAL_UNIT));
+        final String unitString = new UnitParser().parse(argsParser.getSingleArg(PREFIX_UNIT));
         final String ingredient = new IngredientParser().parse(argsParser.getSingleArg(PREFIX_INGREDIENT));
 
         return new UpdateUnitsCommand(ingredient, unitString);

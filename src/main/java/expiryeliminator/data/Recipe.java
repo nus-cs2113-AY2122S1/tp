@@ -50,16 +50,17 @@ public class Recipe {
     }
 
     //@@author vincentlauhl
+
     /**
      * Adds an ingredient and its associated quantity to the recipe.
      *
-     * @param ingredientName       Name of ingredient to be added.
-     * @param quantity             Quantity of ingredient to be added.
+     * @param ingredientName Name of ingredient to be added.
+     * @param quantity Quantity of ingredient to be added.
      * @param ingredientRepository Ingredient repository.
      * @throws DuplicateDataException If ingredient already exists in the recipe.
-     * @throws IllegalValueException  If quantity is less than or equal to 0.
+     * @throws IllegalValueException If quantity is less than or equal to 0.
      */
-    public String add(String ingredientName, int quantity, IngredientRepository ingredientRepository)
+    public String addIngredient(String ingredientName, int quantity, IngredientRepository ingredientRepository)
             throws DuplicateDataException, IllegalValueException {
         String ingredientNameIfNotInList = "";
         final IngredientStorage ingredientStorage = ingredientRepository.findWithNullReturn(ingredientName);
@@ -101,7 +102,7 @@ public class Recipe {
      * Updates the quantity of ingredients in a recipe.
      *
      * @param ingredientName Name of ingredient to be added.
-     * @param quantity       quantity of ingredient to be updated to.
+     * @param quantity quantity of ingredient to be updated to.
      */
     public void update(String ingredientName, int quantity) throws NotFoundException, IllegalValueException {
         if (!contains(ingredientName)) {

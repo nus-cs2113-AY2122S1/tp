@@ -52,6 +52,7 @@ public class Ingredient {
      * @param unit The unit for the ingredient.
      */
     void setUnit(String unit) {
+        assert unit == null || !unit.isBlank();
         this.unit = unit;
     }
 

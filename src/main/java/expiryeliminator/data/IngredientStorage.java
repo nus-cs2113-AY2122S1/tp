@@ -68,8 +68,12 @@ public class IngredientStorage {
      *
      * @param quantity Quantity of batch of ingredients to be added.
      * @param expiryDate Expiry date of batch of ingredients to be added.
+     * @throws IllegalValueException If quantity to be added is less than or equal to 0.
      */
-    public void add(int quantity, LocalDate expiryDate) {
+    public void add(int quantity, LocalDate expiryDate) throws IllegalValueException {
+        if (quantity <= 0) {
+            throw new IllegalValueException();
+        }
         assert expiryDate != null : "Expiry date cannot be null";
         if (ingredientBatches.containsKey(expiryDate)) {
             ingredientBatches.replace(expiryDate, ingredientBatches.get(expiryDate) + quantity);
@@ -80,26 +84,19 @@ public class IngredientStorage {
     }
 
     /**
-     * Updates the quantity of a batch of ingredients based on the given expiry date.
-     *
-     * @param quantity New quantity.
-     * @param expiryDate Expiry date of batch of ingredients to update.
-     */
-    public void update(int quantity, LocalDate expiryDate) {
-        assert expiryDate != null : "Expiry date cannot be null";
-        ingredientBatches.put(expiryDate, quantity);
-    }
-
-    /**
      * Removes a quantity of ingredients from the storage.
      * Removes from the earliest batch of expiry date first.
      *
      * @param quantity Quantity to be removed.
-     * @throws IllegalValueException If quantity to be removed exceeds the current available quantity.
+     * @throws IllegalValueException If quantity to be removed exceeds the current available quantity or if
+     *         quantity to be removed is less than or equal to 0.
      */
     public void remove(int quantity) throws IllegalValueException {
         if (this.quantity < quantity) {
-            throw new IllegalValueException();
+            throw new IllegalValueException("Quantity to be removed exceeds current available quantity");
+        }
+        if (quantity <= 0) {
+            throw new IllegalValueException("Quantity to be removed is less than or equal to 0");
         }
 
         int toRemove = quantity;
@@ -124,7 +121,7 @@ public class IngredientStorage {
      * @param expiryDate Expiry date of batch of ingredients to be removed.
      */
     public void remove(LocalDate expiryDate) {
-        //assert expiryDate != null : "Expiry date cannot be null";
+        assert expiryDate != null : "Expiry date cannot be null";
         final Integer quantity = ingredientBatches.remove(expiryDate);
         this.quantity -= quantity;
     }

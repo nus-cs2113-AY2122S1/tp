@@ -9,5 +9,20 @@ package expiryeliminator.data.exception;
  * Signals that some given data does not fulfill some constraints.
  */
 public class IllegalValueException extends Exception {
+    /**
+     * Initialises exception without any error message.
+     */
+    public IllegalValueException() {
+        super();
+    }
+
+    /**
+     * Initialises exception and stores error message.
+     *
+     * @param message Error message.
+     */
+    public IllegalValueException(String message) {
+        super(message);
+    }
 }
 //@@author
