@@ -173,6 +173,7 @@ We will be waiting for you and the cards!
 
 ### Card Page
 - Enter card page by choosing `card`, and you will see this:
+
 ```markdown
 Code Hunt [GAME MENU] > card
 
