@@ -118,6 +118,7 @@ Here is your game record of easy level:
 Here is your game record of difficult level:
 =========================================================
 ```
+
 - `card`        Manage your holding cards. You can refer to detailed introduction about `card` here [Card Page](#card page)
 - `back`        Back to main menu
 - `exit`        Exit Code Hunt
@@ -151,6 +152,7 @@ Good luck!
 We will be waiting for you and the cards!
 =========================================================
 ```
+
 - There are 4 levels of games in each mode, you can refer to [Games](#Games) to see the detailed instructions of each game
     1. `Hangman Game`
     2. `Guessing Number Game`
@@ -241,36 +243,36 @@ this username next time.
 
 ## Command Summary
 ### Main page
-| Action |  Format | Function   |
+| Action       |  Format       | Function      |
 | ------------ | ------------- | ------------- |
-| newgame | newgame | Start a new game  |
-| continue | econtinue | Continue the game stored previously  |
-| help | help | Display a list of available commands  |
-| about | about | Display information about Code Hunt  |
-| exit | exit | Exit Code Hunt  |
-| start | start | Start the game  |
-| check | check | Check current game progress  |
-| card | card | Manage your holding cards  |
-| back | back | Back to main menu  |
+| newgame      | newgame       | Start a new game  |
+| continue     | econtinue     | Continue the game stored previously  |
+| help         | help          | Display a list of available commands  |
+| about        | about         | Display information about Code Hunt  |
+| exit         | exit          | Exit Code Hunt  |
+| start        | start         | Start the game  |
+| check        | check         | Check current game progress  |
+| card         | card          | Manage your holding cards  |
+| back         | back          | Back to main menu  |
 
 ### Intermediate page
-| Action |  Format | Function    |
-| ------------ | ------------- | -------------  |
-| start | start | Start the game and then choose your difficulty level.  |
-| check | check | Check current game progress.  |
-| card | card |  Manage your holding cards.  |
-| back | back | Back to main menu  |
-| exit | exit | Exit Code Hunt  |
+| Action       |  Format       | Function      |
+| ------------ | ------------- | ------------- |
+| start        | start         | Start the game and then choose your difficulty level.  |
+| check        | check         | Check current game progress.  |
+| card         | card          |  Manage your holding cards.  |
+| back         | back          | Back to main menu  |
+| exit         | exit          | Exit Code Hunt  |
 
 ### Card Page
-| Action |  Format | Function  |
-| ------------ | ------------- | -------------  |
-| list  | list | List all the cards you gained for different game levels  |
-| delete | delete +  CARD_INDEX | Delete an unwanted card in your package.  |
-| find | find + CARD_INDEX |  Search cards by index.  |
-| help | help | Display a list of available commands.  |
-| back | back | Back to game menu |
-| exit | exit | Exit Code Hunt |
+| Action       |  Format                    | Function      |
+| ------------ | -------------------------- | ------------- |
+| list         | list                       | List all the cards you gained for different game levels  |
+| delete       | delete +  CARD_INDEX       | Delete an unwanted card in your package.  |
+| find         | find + CARD_INDEX          |  Search cards by index.  |
+| help         | help                       | Display a list of available commands.  |
+| back         | back                       | Back to game menu |
+| exit         | exit                       | Exit Code Hunt |
 
 
 
