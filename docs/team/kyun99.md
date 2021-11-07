@@ -61,7 +61,9 @@ Given below are my contributions to the project.
     - Supplemented add_in, add_ex commands. [#208](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/208)
     - Added FAQ. [#105](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/105)
   - Developer Guide:
-    
+    - Add Financial Tracker component
+    - Add StonksXD sequence diagram
+    - Add Command component sequence diagram
 
 
 - **Community**: 
