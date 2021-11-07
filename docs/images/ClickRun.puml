@@ -23,7 +23,13 @@ deactivate ":Parser"
 alt command is valid
     create ":Command"
     ":Parser" -> ":Command"
-    ":Click" -> ":Command" : execute()
+    activate ":Command"
+    return
+    ":Click" -> ":Command" : execute command
+    activate ":Command"
+    ":Command" -> ":Command" : execute()
+    ":Command" --> ":Command"
+    deactivate ":Command"
     ":Command" --> ":Click"
     deactivate ":Command"
     destroy ":Command"
