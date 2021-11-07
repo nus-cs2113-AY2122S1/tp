@@ -137,11 +137,12 @@ command `remove g/1` to remove the goal at index 1.
 
 The UI component is responsible for all user interfaces of the application. However, the component is further divided
 into 2 sub-components: `UiManager.java` for static interface displays, and `PrintManager.java` for dynamic interface
-displays (display messages in response to user input).
+displays (display messages in response to user input). The diagrams below illustrates the high level representation of
+each sub-component.
+
+![Ui Manager](Diagram%20Images/Design%20Diagram%20Images/UiManagerComponent.png)
 
 **API:** `UiManager.java`
-
-![Ui Manager](Diagram%20Images/Design%20Diagram%20Images/UiManager.png)
 
 1. `UiStartup` will be called upon starting the application (we refer to this as the start state).
 2. `UiMain` will be called upon entering the main state of the application (the main state is entered when you select
@@ -149,9 +150,9 @@ displays (display messages in response to user input).
 3. `UiMain` calls `Goal` to display a static view of all habits to be done for the day.
 4. `UiMain` calls `Storage` to display alerts for status of storage imports and exports.
 
-**API:** `PrintManager.java`
+![Print Manager](Diagram%20Images/Design%20Diagram%20Images/PrintManagerComponent.png)
 
-![Print Manager](Diagram%20Images/Design%20Diagram%20Images/PrintManager.png)
+**API:** `PrintManager.java`
 
 1. `PrintManager` is called upon by user commands to display text or error messages.
 2. `PrintManager` may call `PrintTable` to print a list of items in a tabular format.
@@ -159,29 +160,27 @@ displays (display messages in response to user input).
 
 ### 3.3. Parser Component
 
-The `Parser` logic component handles the parsing of the input passed in by the user and returns a suitable `Command`
-object that will be executed. Within the component itself, there are more specific and detailed `Parser` classes for
-handling various inputs from the user.
+The Parser component is responsible for parsing and checking the logic of the user input. The diagram below illustrates
+the high level representation of the component.
+
+![Parser Component](Diagram%20Images/Design%20Diagram%20Images/ParserComponent.png)
+
+**API:** `Parser.java`
+
+1. A user input is given to `MainParser` that determines which subclass of `Parser` is required
+2. Inputs starting with `help`, `return`, and `exit` are handled by `MainParser`
+3. Other inputs are handled by `Parser`, which has a total of 7 subclasses
+4. `AddParser` handles the parsing of inputs starting with `set` and `add`
+5. `DeleteParser` handles the parsing of inputs starting with `remove` and `delete`
+6. `DoneParser` handles the parsing of inputs starting with `done`
+7. `ListGoalParser` handles the parsing of inputs starting with `list`
+8. `ListHabitParser` handles the parsing of inputs starting with `view`
+9. `UpdateParser` handles the parsing of inputs starting with `update` and `change`
+10. `SetParser` Handles the parsing of inputs starting with `goal`
+
+The sequence diagram below illustrates the flow of logic when a generic user input is entered into the application.
 
 ![](Diagram Images/Design Diagram Images/MainParser.png)
-
-* `AddParser` - Handles the parsing of inputs starting with `set` and `add` keywords
-* `DeleteParser` - Handles the parsing of inputs starting with `remove` and `delete`
-* `DoneParser` - Handles the parsing of inputs starting with `done`
-* `ListParser` - Handles the parsing of inputs starting with `view`
-* `SetParser` - Handles the parsing of inputs starting with `goal`
-
-For inputs of `bye`, `help` `list` their respective functions are run immediately without the need to parse further.
-
-For any other invalid inputs that do not start with the listed keywords, the `HelpCommand` functionality is invoked.
-
-While the Sequence Diagram represents the normal flow of logic, there is a recursive definition that is not represented.
-1. `:HappyBit` calls the method `handleState()` in `:State`
-2. `handleState()` calls another method `mainState()` also in `:State`
-3. `mainState()` will create a new `:UiMain` and calls a method `run()` on itself
-4. `run()` returns a boolean value equivalent to whether the recursive call should be made
-5. If the boolean value is true, `handleState()` would recursively call itself
-6. If the boolean value is false, `handleState()` would pass the call back to `:HappyBit`.
 
 ### 3.4. Command Component
 
