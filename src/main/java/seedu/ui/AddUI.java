@@ -6,7 +6,6 @@ import seedu.module.Lesson;
 import seedu.module.Module;
 import seedu.timetable.Timetable;
 import seedu.timetable.TimetableUserItem;
-import seedu.logger.TimetableLogger;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,7 +15,6 @@ import java.util.logging.Logger;
 public class AddUI {
 
     private static final String FIXED_LENGTH_FORMAT = "%-56.56s";
-    private static final String FIXED_TIME_FORMAT = "%04d";
     private static final String SMALL_GAP = "%14s";
     private static final String FIXED_FORMAT = "%93.93s";
     private static final String LECTURE = "Lecture";
@@ -28,7 +26,6 @@ public class AddUI {
     private static final int BALANCE_ARRAY = 1;
     private static final int SERIAL_STARTING = 1;
     private static final int ZERO = 0;
-    private static final int TIME = 100;
     private static final String RUN = "Run";
     private static final String EXIT = "Exit";
     private static final String LINE = "_________________________________________________   |   ";
@@ -277,16 +274,7 @@ public class AddUI {
      * @param event The event that is to be printed
      */
     public void printEventMessage(TimetableUserItem event) {
-        String startTime = String.format(FIXED_TIME_FORMAT, event.getStartHour() * TIME);
-        String endTime = String.format(FIXED_TIME_FORMAT, event.getEndHour() * TIME);
-
-        String output = "Alright!! Event: " + event.getTitle() + " on " + event.getDay() + ", from "
-                + startTime + " to " + endTime;
-        if (event.isDescription()) {
-            output = output.concat(" at " + event.getLocation());
-        }
-        output = output.concat(" has been added to your timetable");
-        System.out.println(output);
+        System.out.println(event.toString());
     }
 
     public String getModuleCode() {

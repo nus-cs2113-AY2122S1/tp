@@ -6,7 +6,8 @@ import java.time.DayOfWeek;
 import java.util.ArrayList;
 
 public class TimetableUserItem extends TimetableItem {
-
+    private static final String FIXED_TIME_FORMAT = "%04d";
+    private static final int TIME = 100;
 
     private final String day;
 
@@ -41,8 +42,8 @@ public class TimetableUserItem extends TimetableItem {
         return getTitle();
     }
 
-    public boolean isDescription() {
-        return getTitle().length() > 0;
+    public boolean isLocation() {
+        return getLocation().length() > 0;
     }
 
     public String getStartTime() {
@@ -59,11 +60,15 @@ public class TimetableUserItem extends TimetableItem {
 
     @Override
     public String toString() {
-        String output = "Event: " + getTitle() + " on " + getDay() + ", from " + startTime + " to "
-                + endTime;
-        if (isDescription()) {
-            output = output.concat(" at " + getDescription());
+        String startTime = String.format(FIXED_TIME_FORMAT, getStartHour() * TIME);
+        String endTime = String.format(FIXED_TIME_FORMAT, getEndHour() * TIME);
+
+        String output = "Alright!! Event: " + getTitle() + " on " + getDay() + ", from "
+                + startTime + " to " + endTime;
+        if (isLocation()) {
+            output = output.concat(" at " + getLocation());
         }
+        output = output.concat(" has been added to your timetable");
         return output;
     }
 

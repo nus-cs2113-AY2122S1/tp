@@ -28,6 +28,7 @@ public class AddCommand extends Command {
     private static final String THIRD_QN = "Starting time of Event (E.g. 1600): ";
     private static final String FOURTH_QN = "Ending time of Event (E.g. 1800): ";
     private static final String FIFTH_QN = "Location of Event (Optional): ";
+    private static final int MAX_TIME = 60;
     private final int semester;
     private final Timetable timetable;
     private final AddFlag flag;
@@ -103,10 +104,10 @@ public class AddCommand extends Command {
         try {
             Integer.parseInt(endTime);
         } catch (NumberFormatException e) {
-            throw new AddException("Invalid End Time Entered (Format: 1600)");
+            throw new AddException("Invalid End Time Entered (Format: 0000 - 2359)");
         }
         if (isValidTime(endTime)) {
-            throw new AddException("Invalid End Time Entered (Format: 1600)");
+            throw new AddException("Invalid End Time Entered (Format: 0000 - 2359)");
         }
         return endTime;
     }
@@ -259,7 +260,8 @@ public class AddCommand extends Command {
     }
 
     public boolean isValidTime(String input) {
-        return Integer.parseInt(input) < 0 || Integer.parseInt(input) >= 2400;
+        return Integer.parseInt(input) < 0 || Integer.parseInt(input) >= 2360
+                || Integer.parseInt(input.substring(2)) >= MAX_TIME;
     }
 
     public boolean isEndBeforeStart(String startTime, String endTime) {
