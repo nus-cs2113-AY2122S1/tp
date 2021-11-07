@@ -7,6 +7,17 @@ import happybit.ui.PrintManager;
 
 public class ListGoalsCommand extends ListCommand {
 
+    protected String gibberish;
+
+    /**
+     * Constructor for ListGoalsCommand.
+     *
+     * @param gibberish Extra nonsense user types AFTER 'list', a one-word command.
+     */
+    public ListGoalsCommand(String gibberish) {
+        this.gibberish = gibberish;
+    }
+
     /**
      * Executes list goals command and prints out all goals in the goalList.
      *
@@ -17,7 +28,7 @@ public class ListGoalsCommand extends ListCommand {
      */
     @Override
     public void runCommand(GoalList goalList, PrintManager printManager, Storage storage) throws HaBitCommandException {
-        goalList.listGoals(printManager);
+        goalList.listGoals(printManager, gibberish);
     }
 
 }

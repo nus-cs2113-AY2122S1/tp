@@ -8,16 +8,14 @@ import java.util.ArrayList;
 public class PrintManager {
 
     private static final String LS = System.lineSeparator();
-    private static final String HORIZONTAL_SYMBOL = "-";
-    private static final String BAR_AND_SPACE = "| ";
     private static final String PERCENT_SYMBOL = "%";
-    private static final String BLANK = " ";
     private static final String LINE = "______________________________________________________________"
             + "__________________________________________________________";
 
     private static final String MSG_ERROR = "Error Detected: %1$s" + LS;
     private static final String MSG_LIST_COMMAND = "Here are the list of commands:";
     private static final String MSG_LIST_GOAL = "%1$s goal(s) currently being tracked:" + LS;
+    private static final String MSG_LIST_GOAL_EXCESS_TEXT = "Gibberish found: %1$s. Anyway," + LS;
     private static final String MSG_LIST_HABIT = "%1$s habit(s) currently being tracked for %2$s:" + LS;
     private static final String MSG_ADD_GOAL = "The goal '%1$s' has been added." + LS;
     private static final String MSG_ADD_HABIT = "The habit '%1$s' has been added to goal '%2$s'" + LS;
@@ -25,16 +23,30 @@ public class PrintManager {
     private static final String MSG_DELETE_HABIT = "The habit '%1$s' of goal '%2$s' has been deleted." + LS;
     private static final String MSG_DONE_HABIT = "The habit '%1$s' of goal '%2$s' has been completed for %3$s to %4$s."
             + LS + "The next interval will begin on %5$s" + LS;
+    private static final String MSG_UPDATE_GOAL_START = "Updating goal in progress ..." + LS;
     private static final String MSG_UPDATE_GOAL_NAME = "The goal name '%1$s' has been updated to '%2$s'." + LS;
     private static final String MSG_UPDATE_GOAL_TYPE = "The goal type '%1$s' has been updated to '%2$s'." + LS;
     private static final String MSG_UPDATE_GOAL_END_DATE = "The goal end date of goal '%1$s' has been changed from "
             + "'%2$s' to '%3$s'." + LS;
+    private static final String MSG_UPDATE_GOAL_END = "All updatable attributes in the goal have been updated."
+            + LS;
+    private static final String MSG_UPDATE_GOAL_EXCESS_END_ONE = "However, we noticed that you added in these extra "
+            + "parameters: " + LS;
+    private static final String MSG_UPDATE_GOAL_EXCESS_END_TWO = "These can only be updated using the change command "
+            + "on a habit within a goal." + LS;
+    private static final String MSG_UPDATE_HABIT_START = "Updating habit in progress ..." + LS;
     private static final String MSG_UPDATE_HABIT_NAME = "The habit '%1$s' of goal '%2$s' has been changed to '%3$s'"
             + LS;
     private static final String MSG_UPDATE_HABIT_INTERVAL = "The habit '%1$s' of goal '%2$s' has its interval changed "
             + "to '%3$s'" + LS;
+    private static final String MSG_UPDATE_HABIT_END = "All updatable attributes in the habit have been updated."
+            + LS;
+    private static final String MSG_UPDATE_HABIT_EXCESS_END_ONE = "However, we noticed that you added in these extra "
+            + "parameters: " + LS;
+    private static final String MSG_UPDATE_HABIT_EXCESS_END_TWO = "These can only be updated using the update command "
+            + "on a goal." + LS;
     private static final String MSG_EXIT = "Thanks for using Ha(ppy)Bit, see you in a \033[3mbit\033[0m! (hehe)" + LS
-            + "\"We are what we repeatedly do. Excellence, then, is not an act, but a habit.\"" + LS
+            + LS + "\"We are what we repeatedly do. Excellence, then, is not an act, but a habit.\"" + LS
             + " — Will Durant";
 
     private static final String COMMAND_HELP = "open command list";
@@ -53,10 +65,10 @@ public class PrintManager {
     private static final String INSTR_HELP = "help";
     private static final String INSTR_ADD_GOAL = "set n/<goal_name> { t/<goal_type> s/<start_date> } e/<end_date>";
     private static final String INSTR_ADD_HABIT = "add g/<goal_index> n/<habit_name> i/<interval>";
-    private static final String INSTR_UPDATE_GOAL = "update g/<goal_index> { n/<goal_name> t/<goal_type> "
-            + "e/<end_date> }";
-    private static final String INSTR_UPDATE_HABIT = "change g/<goal_index> h/<habit_index> { n/<habit_name> "
-            + "i/<interval> }";
+    private static final String INSTR_UPDATE_GOAL = "update g/<goal_index> [ n/<goal_name> t/<goal_type> "
+            + "e/<end_date> ]";
+    private static final String INSTR_UPDATE_HABIT = "change g/<goal_index> h/<habit_index> [ n/<habit_name> "
+            + "i/<interval> ]";
     private static final String INSTR_LIST_GOAL = "list";
     private static final String INSTR_LIST_HABIT = "view g/<goal_index>";
     private static final String INSTR_DELETE_GOAL = "remove g/<goal_index>";
@@ -67,10 +79,12 @@ public class PrintManager {
 
     private static final String COMMAND_NOTE_1 = "* Replace <> with relevant terms (Exp: <goal_name> --> goal 1)";
     private static final String COMMAND_NOTE_2 = "* Items enclosed within { } are optional";
-    private static final String COMMAND_NOTE_3 = "* Use 'list' and 'view' to check the goal and habit indexes "
+    private static final String COMMAND_NOTE_3 = "* Items enclosed within [ ] need to have at least one of the "
+            + "parameters specified inside.";
+    private static final String COMMAND_NOTE_4 = "* Use 'list' and 'view' to check the goal and habit indexes "
             + "respectively";
 
-    private static final String[] COMMAND_HEADERS = {"Description", "Format"};
+    private static final String[] COMMAND_HEADERS = {"Action", "Format"};
     private static final String[] GOAL_HEADERS = {"Index", "Name", "Type", "Start Date", "End Date", "Habit Count",
         "Completion Rate"};
     private static final String[] HABIT_HEADERS = {"Index", "Name", "Interval", "Completion", "Completed", "Remaining",
@@ -97,17 +111,15 @@ public class PrintManager {
     private static final int COMMAND_INDEX = 0;
     private static final int INSTR_INDEX = 1;
 
-    private static final int FRONT_1_BACK_2_PADDING = 3;
-    private static final int BACK_2_PADDING = 2;
-    private static final int START_SINGLE_BAR = 1;
+    private static final int MAX_GIBBERISH_LENGTH = 40;
 
     /**
      * Prints the list of commands.
      */
     public void printCommandList() {
         System.out.println(MSG_LIST_COMMAND);
-        printTable(COMMAND_HEADERS, populateCommandData());
-        System.out.println(COMMAND_NOTE_1 + LS + COMMAND_NOTE_2 + LS + COMMAND_NOTE_3);
+        PrintTable.printTable(COMMAND_HEADERS, populateCommandData());
+        System.out.println(COMMAND_NOTE_1 + LS + COMMAND_NOTE_2 + LS + COMMAND_NOTE_3 + LS + COMMAND_NOTE_4);
     }
 
     /**
@@ -116,10 +128,11 @@ public class PrintManager {
      * @param goals      List of goals.
      * @param numOfGoals Number of goals in the goal list.
      */
-    public void printGoalList(ArrayList<Goal> goals, int numOfGoals) {
+    public void printGoalList(ArrayList<Goal> goals, int numOfGoals, String gibberish) {
         String[][] data = populateGoalData(goals, numOfGoals, GOAL_HEADERS.length);
+        printGibberish(gibberish);
         System.out.printf(MSG_LIST_GOAL, numOfGoals);
-        printTable(GOAL_HEADERS, data);
+        PrintTable.printTable(GOAL_HEADERS, data);
     }
 
     /**
@@ -132,7 +145,7 @@ public class PrintManager {
     public void printHabitList(String goalDescription, ArrayList<Habit> habits, int numOfHabits) {
         String[][] data = populateHabitData(habits, numOfHabits, HABIT_HEADERS.length);
         System.out.printf(MSG_LIST_HABIT, numOfHabits, goalDescription);
-        printTable(HABIT_HEADERS, data);
+        PrintTable.printTable(HABIT_HEADERS, data);
     }
 
     /**
@@ -194,6 +207,11 @@ public class PrintManager {
         printLine();
     }
 
+    public void printUpdateGoalMessageStart() {
+        printLine();
+        System.out.printf(MSG_UPDATE_GOAL_START);
+    }
+
     /**
      * Prints a confirmation message upon successful update of a goal name.
      * Note: Only the goal name has been changed.
@@ -202,21 +220,32 @@ public class PrintManager {
      * @param newGoalDescription String of updated goal name and type.
      */
     public void printUpdatedGoalName(String oldGoalDescription, String newGoalDescription) {
-        printLine();
         System.out.printf(MSG_UPDATE_GOAL_NAME, oldGoalDescription, newGoalDescription);
-        printLine();
     }
 
     public void printUpdatedGoalType(String oldGoalTypeName, String newGoalTypeName) {
-        printLine();
         System.out.printf(MSG_UPDATE_GOAL_TYPE, oldGoalTypeName, newGoalTypeName);
-        printLine();
     }
 
     public void printUpdatedGoalEndDate(String goalName, String oldGoalEndDate, String newGoalEndDate) {
-        printLine();
         System.out.printf(MSG_UPDATE_GOAL_END_DATE, goalName, oldGoalEndDate, newGoalEndDate);
+    }
+
+    public void printUpdateGoalMessageEnd(ArrayList<String> excess) {
+        System.out.printf(MSG_UPDATE_GOAL_END);
+        if (!excess.isEmpty()) {
+            System.out.printf(MSG_UPDATE_GOAL_EXCESS_END_ONE);
+            for (String flag : excess) {
+                System.out.println(flag);
+            }
+            System.out.printf(MSG_UPDATE_GOAL_EXCESS_END_TWO);
+        }
         printLine();
+    }
+
+    public void printUpdateHabitMessageStart() {
+        printLine();
+        System.out.printf(MSG_UPDATE_HABIT_START);
     }
 
     /**
@@ -227,9 +256,7 @@ public class PrintManager {
      * @param newHabitDescription String of updated habit name.
      */
     public void printUpdatedHabitName(String goalDescription, String oldHabitDescription, String newHabitDescription) {
-        printLine();
         System.out.printf(MSG_UPDATE_HABIT_NAME, oldHabitDescription, goalDescription, newHabitDescription);
-        printLine();
     }
 
     /**
@@ -240,13 +267,23 @@ public class PrintManager {
      * @param interval         New interval length.
      */
     public void printUpdatedHabitInterval(String goalDescription, String habitDescription, int interval) {
-        printLine();
         System.out.printf(MSG_UPDATE_HABIT_INTERVAL, habitDescription, goalDescription, interval);
-        printLine();
     }
 
     public void printStorageMessage(String storageMessage) {
         System.out.println(storageMessage);
+    }
+
+    public void printUpdateHabitMessageEnd(ArrayList<String> excess) {
+        System.out.printf(MSG_UPDATE_HABIT_END);
+        if (!excess.isEmpty()) {
+            System.out.printf(MSG_UPDATE_HABIT_EXCESS_END_ONE);
+            for (String flag : excess) {
+                System.out.println(flag);
+            }
+            System.out.printf(MSG_UPDATE_HABIT_EXCESS_END_TWO);
+        }
+        printLine();
     }
 
     /**
@@ -269,22 +306,6 @@ public class PrintManager {
         printLine();
     }
 
-    /**
-     * Prints data in a tabular format.
-     *
-     * @param headers 1D string array containing names of headers.
-     * @param data    2D string array containing data.
-     */
-    public void printTable(String[] headers, String[][] data) {
-        int numOfRows = data.length;
-        int numOfColumns = headers.length;
-        int[] columnLengths = getColumnLengths(numOfRows, numOfColumns, headers, data);
-        int totalLength = getTotalLength(columnLengths);
-        String lineSeparator = HORIZONTAL_SYMBOL.repeat(totalLength);
-        printHeaders(lineSeparator, headers, columnLengths, numOfColumns);
-        printData(numOfRows, numOfColumns, columnLengths, data, lineSeparator);
-    }
-
     /*
      * NOTE : ==================================================================
      * The following are private methods that are used to implement SLAP for the
@@ -301,119 +322,31 @@ public class PrintManager {
         System.out.println(LINE);
     }
 
-    /* The following are sub-methods of the printTable() method.
-     * getColumnLengths()
-     * getMinimumLength()
-     * getTotalLength()
-     * printHeaders()
-     * printData()
-     * printRow()
-     */
-
+    //@@author kahhe
     /**
-     * Get the column lengths for the table.
+     * Prints the excess text from user after 'line' command if it exists.
      *
-     * @param numOfRows    Number of data rows.
-     * @param numOfColumns Number of data columns.
-     * @param headers      1D string array containing names of headers.
-     * @param data         2D string array containing data.
-     * @return Integer array containing the column lengths.
+     * @param gibberish Excess text from user after the one-word command 'line'.
      */
-    private int[] getColumnLengths(int numOfRows, int numOfColumns, String[] headers, String[][] data) {
-        int[] columnLengths = new int[numOfColumns];
-        int minimumLength;
-        for (int columnIndex = 0; columnIndex < numOfColumns; columnIndex++) {
-            minimumLength = headers[columnIndex].length() + FRONT_1_BACK_2_PADDING;
-            columnLengths[columnIndex] = getMinimumLength(minimumLength, columnIndex, numOfRows, data);
-        }
-        return columnLengths;
-    }
-
-    /**
-     * Get the minimum length that a column can be from the size of each data entry.
-     *
-     * @param minimumLength Minimum column length based off the column header.
-     * @param columnIndex   Column index of the data.
-     * @param numOfRows     Number of data rows.
-     * @param data          2D string array containing data.
-     * @return Minimum length of a column.
-     */
-    private int getMinimumLength(int minimumLength, int columnIndex, int numOfRows, String[][] data) {
-        for (int rowIndex = 0; rowIndex < numOfRows; rowIndex++) {
-            int comparedLength = data[rowIndex][columnIndex].length() + BACK_2_PADDING;
-            if (comparedLength > minimumLength) {
-                minimumLength = comparedLength;
-            }
-        }
-        return minimumLength;
-    }
-
-    /**
-     * Get the total length for a row.
-     *
-     * @param columnLengths 1D array containing all column lengths.
-     * @return Total length for a row.
-     */
-    private int getTotalLength(int[] columnLengths) {
-        int totalLength = START_SINGLE_BAR;
-        for (int length : columnLengths) {
-            totalLength += length + BACK_2_PADDING;
-        }
-        return totalLength;
-    }
-
-    /**
-     * Prints the headers of the table.
-     *
-     * @param lineSeparator Line that separates the rows of the table.
-     * @param headers       1D string array containing names of headers.
-     * @param columnLengths 1D array containing all column lengths.
-     * @param numOfColumns  Number of data columns.
-     */
-    private void printHeaders(String lineSeparator, String[] headers, int[] columnLengths, int numOfColumns) {
-        System.out.println(lineSeparator);
-        System.out.print(BAR_AND_SPACE);
-        for (int columnIndex = 0; columnIndex < numOfColumns; columnIndex++) {
-            System.out.print(headers[columnIndex]);
-            System.out.print(BLANK.repeat(columnLengths[columnIndex] - headers[columnIndex].length()));
-            System.out.print(BAR_AND_SPACE);
-        }
-        System.out.println(LS + lineSeparator);
-    }
-
-    /**
-     * Prints the data entries of the table.
-     *
-     * @param numOfRows     Number of data rows.
-     * @param numOfColumns  Number of data columns.
-     * @param columnLengths 1D array containing all column lengths.
-     * @param data          2D string array containing data.
-     * @param lineSeparator Line that separates the rows of the table.
-     */
-    private void printData(int numOfRows, int numOfColumns, int[] columnLengths, String[][] data,
-                           String lineSeparator) {
-        for (int rowIndex = 0; rowIndex < numOfRows; rowIndex++) {
-            printRow(rowIndex, numOfColumns, columnLengths, data, lineSeparator);
+    private void printGibberish(String gibberish) {
+        if (!gibberish.isBlank()) {
+            gibberish = trimGibberish(gibberish);
+            System.out.printf(MSG_LIST_GOAL_EXCESS_TEXT, gibberish);
         }
     }
 
     /**
-     * Prints a row of the data entries.
+     * Shortens the gibberish text if it's too long.
+     * To prevent abuse from user by typing lengthy characters.
      *
-     * @param rowIndex      Column index of the data.
-     * @param numOfColumns  Number of data columns.
-     * @param columnLengths 1D array containing all column lengths.
-     * @param data          2D string array containing data.
-     * @param lineSeparator Line that separates the rows of the table.
+     * @param gibberish Excess text from user after the one-word command 'line'.
+     * @return Trimmed gibberish to a respectable length.
      */
-    private void printRow(int rowIndex, int numOfColumns, int[] columnLengths, String[][] data, String lineSeparator) {
-        System.out.print(BAR_AND_SPACE);
-        for (int columnIndex = 0; columnIndex < numOfColumns; columnIndex++) {
-            System.out.print(data[rowIndex][columnIndex]);
-            System.out.print(BLANK.repeat(columnLengths[columnIndex] - data[rowIndex][columnIndex].length()));
-            System.out.print(BAR_AND_SPACE);
+    private String trimGibberish(String gibberish) {
+        if (gibberish.length() > MAX_GIBBERISH_LENGTH) {
+            return gibberish.substring(0, MAX_GIBBERISH_LENGTH) + "..";
         }
-        System.out.println(LS + lineSeparator);
+        return gibberish;
     }
 
     /* The following are sub-methods of list printing.
@@ -458,11 +391,12 @@ public class PrintManager {
             data[habitIndex][INDEX_INDEX] = String.valueOf(habitIndex + 1);
             data[habitIndex][HABIT_NAME_INDEX] = habits.get(habitIndex).getHabitName();
             data[habitIndex][HABIT_INTERVAL_INDEX] = String.valueOf(habits.get(habitIndex).getIntervalLength());
-            int[] habitStatistics = habits.get(habitIndex).getListStatistics();
-            data[habitIndex][HABIT_COMPLETION_RATE_INDEX] = habitStatistics[COMPLETION_RATE_INDEX] + PERCENT_SYMBOL;
-            data[habitIndex][HABIT_COMPLETED_INDEX] = String.valueOf(habitStatistics[COMPLETED_INDEX]);
-            data[habitIndex][HABIT_REMAINING_INDEX] = String.valueOf(habitStatistics[REMAINING_INDEX]);
-            data[habitIndex][HABIT_EXPIRED_INDEX] = String.valueOf(habitStatistics[EXPIRED_INDEX]);
+            double[] habitStatistics = habits.get(habitIndex).getListStatistics();
+            data[habitIndex][HABIT_COMPLETION_RATE_INDEX] =
+                    String.format("%.2f", habitStatistics[COMPLETION_RATE_INDEX]) + PERCENT_SYMBOL;
+            data[habitIndex][HABIT_COMPLETED_INDEX] = String.valueOf((int)(habitStatistics[COMPLETED_INDEX]));
+            data[habitIndex][HABIT_REMAINING_INDEX] = String.valueOf((int)(habitStatistics[REMAINING_INDEX]));
+            data[habitIndex][HABIT_EXPIRED_INDEX] = String.valueOf((int)(habitStatistics[EXPIRED_INDEX]));
             data[habitIndex][HABIT_STREAK_INDEX] = String.valueOf(habits.get(habitIndex).getStreak());
         }
         return data;

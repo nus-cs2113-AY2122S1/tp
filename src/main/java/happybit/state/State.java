@@ -13,6 +13,7 @@ public class State {
     protected PrintManager printManager;
     protected Storage storage;
     protected boolean isExit = false;
+    protected boolean isExitFromStartup = false;
 
     public State(GoalList goalList, PrintManager printManager, Storage storage) {
         this.goalList = goalList;
@@ -25,6 +26,9 @@ public class State {
      */
     public void handleState() {
         startupState();
+        if (isExitFromStartup) {
+            return;
+        }
         mainState();
         if (!this.isExit) {
             handleState();
@@ -38,6 +42,7 @@ public class State {
         try {
             UiStartup uiStartup = new UiStartup();
             uiStartup.run();
+            isExitFromStartup = uiStartup.getIsExitFromStartup();
         } catch (HaBitUiException e) {
             printManager.printError(e.getMessage());
         }

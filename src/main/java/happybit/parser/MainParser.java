@@ -1,7 +1,6 @@
 package happybit.parser;
 
 import happybit.command.Command;
-import happybit.command.ListGoalsCommand;
 import happybit.command.ExitCommand;
 import happybit.command.HelpCommand;
 import happybit.command.ReturnCommand;
@@ -24,6 +23,9 @@ public class MainParser {
     private static final String COMMAND_COMPLETE_HABIT = "done";
     private static final String COMMAND_RETURN = "return";
     private static final String COMMAND_EXIT = "exit";
+
+    protected static final String ERROR_NO_PARAMS = "Command cannot be called without parameters. "
+            + "Enter the help command to view command formats";
 
     /**
      * Parses the user input.
@@ -82,9 +84,9 @@ public class MainParser {
      * @param words String array of user input command delimited by whitespaces.
      * @return String containing the remainder of the user input without the command word.
      */
-    private static String getCommandInstruction(String[] words) {
-        if (words.length == 1) {
-            return null;
+    private static String getCommandInstruction(String[] words) throws HaBitParserException {
+        if (words.length < 1) {
+            throw new HaBitParserException(ERROR_NO_PARAMS);
         }
         return concatenateString(words);
     }
@@ -122,7 +124,7 @@ public class MainParser {
         case COMMAND_SET_GOAL:
             return SetParser.parseSetGoalCommand(details);
         case COMMAND_LIST_GOAL:
-            return new ListGoalsCommand();
+            return ListGoalParser.parseListGoalCommand(details);
         case COMMAND_LIST_HABIT:
             return ListHabitParser.parseListHabitCommand(details);
         case COMMAND_DELETE_GOAL:
