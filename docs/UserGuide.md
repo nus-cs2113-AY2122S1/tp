@@ -338,8 +338,10 @@ Location of Event (Optional): Discord
 Alright!! Event: Team Meeting CS2113T on Monday, from 2000 to 2100 at Team Meeting CS2113T has been added to your timetable
 ```
 
-If the selected timeslot is already occupied, the program will let you know and the event will not be added until the
-timeslot has been freed up.
+
+If the selected timeslot is already occupied, the program will let you know and the event will not be added until the timeslot
+has been freed up.
+
 <br>
 
 ## Delete from timetable: `delete <MODULE_CODE>` OR `delete <EVENT_NAME>`
@@ -519,7 +521,11 @@ ________________________________________________________________________________
 
 <br>
 
+
+
 ## Remove modules from the list of completed modules: `remove <MODULE_CODE>`
+
+
 
 You can remove any module and grade that you added to your list of completed modules in the transcript by using this
 command.
