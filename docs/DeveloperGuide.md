@@ -21,6 +21,8 @@ possibly expand on the application.
   * [3.6. Storage Component](#36-storage-component)
 * [4. Implementation](#4-implementation)
   * [4.1. Adding a Goal](#41-adding-a-goal)
+    * [4.1.1. Implementation](#411-implementation)
+    * [4.1.2. Design Considerations](#412-design-considerations)
   * [4.2. Adding a Habit](#42-adding-a-habit)
   * [4.3. Listing all Goals](#43-listing-all-goals)
   * [4.4. Listing all Habits](#44-listing-all-habits)
@@ -251,13 +253,40 @@ This section describes some noteworthy details on how the main features are impl
 
 ### 4.1. Adding a Goal 
 
-First, a `AddHabitCommand` object is returned from the `AddParser` if the users input is successfully parsed as shown below.
+This section describes the implementation of how you can add a goal to your tracking list.
+
+#### 4.1.1 Implementation
+
+Adding a goal is amongst the first feature that you will interact with as you begin your goal achieving journey. The add
+goal feature is implemented using the `AddParser` and `AddGoalCommand` class. It allows you to create a new goal on
+your personal account which will be stored in the `GoalList` class. 
+
+1. The `AddParser#parseAddGoalCommand()` method is called, which in turns calls the 
+   `AddParser#getGoal(commandInstruction)` method.
+2. The `AddParser#getGoal(commandInstruction)` method will internally check for name, goal type, start date, and end
+   date parameters. The name parameter has been limited to a maximum of 50 characters. The start date has to come after
+   the end date, in addition to both dates needing to come after the date when the goal was created.
+3. An `AddGoalCommand(goal)` object is created from this method.
 
 ![](Diagram Images/Implementation Diagram Images/AddGoalCommandParserSequenceDiagram.png)
 
-The `runCommand` method is then executed for the `AddHabitCommand` object.
+4. The `AddGoalCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the 
+   `GoalList#addGoal(goal, printManager)` method.
+5. The `GoalList#addGoal(goal, printManager)` method checks for duplicated goal names before adding a goal to the list.
+6. The `PrintManager#printAddedGoal(description)` method prints an acknowledgement message that the goal has been added.
 
 ![](https://www.planttext.com/api/plantuml/img/ZLB1QiCm3BtxAqGltI1fxcQCZWvwwM2mwouY5fuXbZDRsVVFIGepn2sxoUz9xptBFYR1A9CVrFvBP4owwyO1UKOEVV1Tek-9kAVMEBGHlMgVOQVXnPXpmE4Kl4Ss6OWJNmyFDXCNbqJ3-LeryCbZT2nlo6WfQdWlJWqa2J5N6ZxMub5XB-u7XIfUIcqnc5DjVNCZherBg9Leu7QKqhWYbwqhw69-MtC7UdNCcUalpC6Il5Bgenl51PxldfjicU2EPZt8KzlUdpBqF_NQYXVnsb9AqHg_36wViHpRiaTYa__WBm00)
+
+#### 4.1.2 Design Considerations
+
+**Aspect:** Limiting number of characters for goal name
+* **Alternative 1:** No limit imposed, but cut-off after a fixed number of characters and replace with ellipsis when
+                 printing the list.
+  * Pros: Table will be of a fixed size and reduced chance of error if the character limit is exceeded. 
+  * Cons: Important information regarding the name may be unintentionally cut-off.
+* **Alternative 2 (current choice):** A 50-character limit is imposed
+  * Pros: Entire name will be visible when printing the list, also no chance of exceeding character limit.
+  * Cons: Table may be misaligned if the user's monitor is too small, name has to conform within the limit.
 
 ### 4.2. Adding a Habit
 
@@ -492,5 +521,22 @@ After adding in a substantial number of goals and habits, you can test out the d
 
 ### Storage of Data
 
+To check if the program can save and load your data:
 
+1. Exit the application using command `exit`.
+2. Launch the program and enter the application again.
+3. Type `list` to check that all your previous data are present.
+4. If your data are all present, it means that the program successfully saved and loaded your data
+  from the storage file.
 
+> ⚠ The subsequent steps might cause you to lose your data.
+
+To check if the program can create a storage file if it doesn't exist:
+
+1. Go to the folder containing the jar file. You should see a folder `data` that contains a `.txt` file
+  which contains your data. Delete the folder `data` or move it somewhere else.
+
+![Storage File](Display_Images/tpFolder.png)
+
+2. Launch the program and enter the application.
+3. Type `list` to see that the storage data file was deleted, hence no goals exist.

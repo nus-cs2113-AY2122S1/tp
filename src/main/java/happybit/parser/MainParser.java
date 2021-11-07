@@ -9,6 +9,7 @@ import happybit.exception.HaBitParserException;
 public class MainParser {
 
     private static final String DELIMITER = "@@@";
+    private static final String SPACE = " ";
 
     private static final String COMMAND_HELP = "help";
     private static final String COMMAND_ADD_GOAL = "set";
@@ -20,12 +21,14 @@ public class MainParser {
     private static final String COMMAND_LIST_HABIT = "view";
     private static final String COMMAND_DELETE_GOAL = "remove";
     private static final String COMMAND_DELETE_HABIT = "delete";
-    private static final String COMMAND_COMPLETE_HABIT = "done";
+    private static final String COMMAND_DONE_HABIT = "done";
     private static final String COMMAND_RETURN = "return";
     private static final String COMMAND_EXIT = "exit";
 
-    protected static final String ERROR_NO_PARAMS = "Command cannot be called without parameters. "
+    protected static final String ERROR_NO_INPUT = "No user command detected"
+            + "Command cannot be called without parameters. "
             + "Enter the help command to view command formats";
+    protected static final String ERROR_INVALID_INPUT = "Invalid character in the user input";
 
     /**
      * Parses the user input.
@@ -36,9 +39,9 @@ public class MainParser {
      */
     public static Command parse(String userInput) throws HaBitParserException {
         String treatedUserInput = treatUserInput(userInput);
-        String[] words = treatedUserInput.split(" ");
-        String commandWord = words[0];
+        String[] words = treatedUserInput.split(SPACE);
         String commandInstruction = getCommandInstruction(words);
+        String commandWord = words[0];
         return parseCommand(commandWord, commandInstruction);
     }
 
@@ -59,9 +62,9 @@ public class MainParser {
      */
     private static String treatUserInput(String userInput) throws HaBitParserException {
         if (userInput.contains(DELIMITER)) {
-            throw new HaBitParserException("Invalid character in the user input");
+            throw new HaBitParserException(ERROR_INVALID_INPUT);
         }
-        String treatedInput = userInput.strip().replaceAll("\\s+"," ");
+        String treatedInput = userInput.strip().replaceAll("\\s+",SPACE);
         testEmptyString(treatedInput);
         return treatedInput;
     }
@@ -74,7 +77,7 @@ public class MainParser {
      */
     private static void testEmptyString(String userInput) throws HaBitParserException {
         if (userInput.isEmpty()) {
-            throw new HaBitParserException("No user command detected");
+            throw new HaBitParserException(ERROR_NO_INPUT);
         }
     }
 
@@ -84,10 +87,7 @@ public class MainParser {
      * @param words String array of user input command delimited by whitespaces.
      * @return String containing the remainder of the user input without the command word.
      */
-    private static String getCommandInstruction(String[] words) throws HaBitParserException {
-        if (words.length < 1) {
-            throw new HaBitParserException(ERROR_NO_PARAMS);
-        }
+    private static String getCommandInstruction(String[] words) {
         return concatenateString(words);
     }
 
@@ -102,7 +102,7 @@ public class MainParser {
         for (int i = 1; i < words.length; i++) {
             instruction.append(words[i]);
             if (i != words.length - 1) {
-                instruction.append(" ");
+                instruction.append(SPACE);
             }
         }
         return instruction.toString();
@@ -131,7 +131,7 @@ public class MainParser {
             return DeleteParser.parseDeleteGoalCommand(details);
         case COMMAND_DELETE_HABIT:
             return DeleteParser.parseDeleteHabitCommand(details);
-        case COMMAND_COMPLETE_HABIT:
+        case COMMAND_DONE_HABIT:
             return DoneParser.parseDoneHabitCommand(details);
         case COMMAND_UPDATE_GOALS:
             return UpdateParser.parseUpdateGoalCommands(details);
@@ -142,6 +142,7 @@ public class MainParser {
         case COMMAND_RETURN:
             return new ReturnCommand();
         case COMMAND_HELP:
+            // Fallthrough
         default:
             return new HelpCommand();
         }
