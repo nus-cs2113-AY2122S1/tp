@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/component-diagram
+skinparam classAttributeIconSize 0
+
+Package Member <<Rectangle>> {
+
+Class MemberList{
+- ArrayList<Member> MemberList
++addMember()
++deleteMemberByName(): Member
++deleteMemberByIndex(): Member
++findMember(): MemberList
++verifyNoDuplicates(): boolean
+}
+
+Class Member {
+# String name
+# String studentName
+# String gender
+# String phoneNumber
+# int index
+}
+
+}
+
+Package Storage <<Rectangle>> {
+Class MemberStorage
+hide member
+}
+
+Package Attendance <<Rectangle>> {
+Class Attendance
+hide member
+}
+
+MemberStorage "1"..>"1" MemberList
+MemberList "1"..>"*" Member
+Member "1"..right>"*" Attendance
+
+hide circle
+@enduml
