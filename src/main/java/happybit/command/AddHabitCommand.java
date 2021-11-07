@@ -2,10 +2,13 @@ package happybit.command;
 
 import happybit.exception.HaBitCommandException;
 import happybit.exception.HaBitStorageException;
+import happybit.goal.Goal;
 import happybit.goal.GoalList;
 import happybit.habit.Habit;
 import happybit.storage.Storage;
 import happybit.ui.PrintManager;
+
+import java.util.ArrayList;
 
 public class AddHabitCommand extends AddCommand {
 
@@ -36,7 +39,11 @@ public class AddHabitCommand extends AddCommand {
         goalList.addHabitToGoal(this.habit, goalIndex, printManager);
 
         try {
-            storage.export(this.habit, goalIndex);
+            ArrayList<Goal> goals = goalList.getGoalList();
+            Goal goal = goals.get(goalIndex);
+            ArrayList<Habit> habits = goal.getHabitList();
+            int habitIndex = habits.indexOf(this.habit);
+            storage.export(this.habit, goalIndex, habitIndex);
         } catch (HaBitStorageException e) {
             printManager.printError(e.getMessage());
         }
