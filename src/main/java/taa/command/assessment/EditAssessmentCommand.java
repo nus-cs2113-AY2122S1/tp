@@ -127,7 +127,8 @@ public class EditAssessmentCommand extends Command {
         if (newMaximumMarksString != null) {
             hasValidNewMaximumMarks = checkMaximumMarks(name, newMaximumMarksString, teachingClass);
             if (!hasValidNewMaximumMarks) {
-                int numberOfStudentsExceedingNewMaximumMarks = countNumberOfStudentsExceedingNewMaximumMarks(name, newMaximumMarksString, teachingClass);
+                int numberOfStudentsExceedingNewMaximumMarks =
+                    countNumberOfStudentsExceedingNewMaximumMarks(name, newMaximumMarksString, teachingClass);
                 throw new TaaException(String.format(MESSAGE_FORMAT_NEW_MAXIMUM_MARKS_EXCEED_STUDENTS_CURRENT_MARKS,
                         numberOfStudentsExceedingNewMaximumMarks));
             }
@@ -188,7 +189,8 @@ public class EditAssessmentCommand extends Command {
         return true;
     }
 
-    public boolean checkMaximumMarks(String name, String newMaximumMarksString, TeachingClass teachingClass) throws TaaException {
+    public boolean checkMaximumMarks(String name, String newMaximumMarksString, TeachingClass teachingClass)
+            throws TaaException {
         assert Util.isStringDouble(newMaximumMarksString, 2);
         ArrayList<Student> students = teachingClass.getStudentList().getStudents();
         double newMaximumMarks = Double.parseDouble(newMaximumMarksString);
@@ -214,7 +216,8 @@ public class EditAssessmentCommand extends Command {
         return true;
     }
 
-    public int countNumberOfStudentsExceedingNewMaximumMarks(String name, String newMaximumMarksString, TeachingClass teachingClass) {
+    public int countNumberOfStudentsExceedingNewMaximumMarks(String name, String newMaximumMarksString,
+                                                             TeachingClass teachingClass) {
         assert Util.isStringDouble(newMaximumMarksString, 2);
         ArrayList<Student> students = teachingClass.getStudentList().getStudents();
         double newMaximumMarks = Double.parseDouble(newMaximumMarksString);
