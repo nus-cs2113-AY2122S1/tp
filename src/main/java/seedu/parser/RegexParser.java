@@ -137,8 +137,19 @@ public abstract class RegexParser {
         }
     }
 
+    /**
+     * Throws an exception if the Telegram username does not comply with the regex.
+     * If the Telegram username passes the regex check nothing is returned and program
+     * flow continues.
+     * The regex only allows usernames in lowercase and uppercase letters, numbers, and underscore
+     * with a length of at least 5 characters.
+     *
+     * @param detailToParse Telegram username to be checked
+     * @throws InvalidTelegramUsernameException If Telegram username does not match regex
+     */
     protected void checkTelegramUsernameRegex(String detailToParse) throws InvalidTelegramUsernameException {
-        //allows uppercase, lowercase, numbers and underscore. Length must be at least 5 characters
+        // Allows uppercase, lowercase, numbers and underscore
+        // Length must be at least 5 characters
         String telegramRegex = "^[a-zA-Z0-9_]{5,}$";
         if (!detailToParse.matches(telegramRegex)) {
             LOGGER.log(Level.FINE, "Regex check for Telegram username failed");
