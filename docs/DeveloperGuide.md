@@ -344,3 +344,41 @@ workload or commitments.
 The instructions below are for the manual testing of the program.
 
 ### Launching and Exiting the Program
+
+1. Launch
+  * Download the jar file [here](UserGuide.md#1-quick-start) and copy the file into an empty folder.
+  * Open your terminal and type in the command `java -jar happybit.jar` to start up the program.
+  * You should see the start-up page with the start-up menu as shown below.
+  
+![Start Up Page](Display_Images/StartUpPage.png)
+
+
+2. Navigation
+  * Select from the start-up menu by typing in the corresponding option number.
+  * You can find out more about the various options at our [User Guide](UserGuide.md#12-main-interface).
+
+
+3. Exit
+  * To exit the program, select option `6`.
+  * You should see the exit message before the program terminates as shown below.
+  
+![Exit Message](Display_Images/ExitMessage.png)
+
+### Starting the Application
+
+1. Launch the program and select option `5` to start using the application.
+2. Upon starting the application, you should see the command screen as shown below.
+
+![Start Application](Display_Images/StartApp.png)
+
+3. Command screen takes in user's input at `Command: `. Press 'enter' after typing in your command.
+4. For example, to set a goal: `set n/Wake up at 8am everyday t/sl s/08112021 e/15112021`
+  * The name of goal: `Wake up at 8am everyday`
+  * The goal is classified as a sleeping goal: `sl`
+  * Start the goal at: `08112021` (08 Nov 2021)
+  * End the goal at: `15112021` (15 Nov 2021)
+5. After you have entered the command to add a goal, you should see that the goal was successfully added.
+
+![Added Goal](Display_Images/AddGoal.png)
+
+6. Press enter again to return to command screen.
