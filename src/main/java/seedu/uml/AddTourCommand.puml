@@ -1,0 +1,46 @@
+@startuml
+
+participant ":Parser" as Parser
+participant ":AddTourCommand" as ATC
+participant ":TourList" as TourList
+participant ":Ui" as Ui
+
+-> Parser : parse("add -t t001 ARGS")
+activate Parser
+    Parser -> Parser: parseAdd("-t t001 ARGS")
+    activate Parser
+    create ATC
+    Parser -> ATC : new AddTourCommand()
+    activate ATC
+    ATC --> Parser : AddTourCommand
+    deactivate ATC
+    Parser --> Parser: AddTourCommand
+    deactivate Parser
+    <-- Parser: AddTourCommand
+deactivate Parser
+
+-> ATC : execute()
+    activate ATC
+        ATC -> TourList : getTourById("t001")
+        activate TourList
+        ATC <--TourList : Tour "t001" exists/does not exist
+        deactivate TourList
+
+    alt#Gold #LightBlue if tour does not exist in TourList
+
+        ATC -> TourList: add(Tour tour)
+        activate TourList
+        ATC <-- TourList:
+        deactivate TourList
+        ATC -> Ui : showAdd(Tour tour)
+        activate Ui
+        ATC <-- Ui : add message
+        deactivate Ui
+        <-- ATC : add message
+        destroy ATC
+        deactivate ATC
+
+    destroy ATC
+    deactivate ATC
+    end
+@enduml

@@ -108,7 +108,7 @@ public class TourPlanner {
                 isExit = specificCommand.isExit();
             } catch (TourPlannerException e) {
                 System.out.println(e.getMessage());
-                logr.log(Level.SEVERE, e.getMessage());
+                logr.log(Level.INFO, e.getMessage());
             } finally {
                 ui.showLine();
                 saveToStorage();

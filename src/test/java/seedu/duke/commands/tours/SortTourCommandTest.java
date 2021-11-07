@@ -18,15 +18,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SortTourCommandTest {
 
     public static final String VALID_SORT_BY_PRICE_FILTER = "/p";
+    private static final String VALID_SORT_BY_NAME_FILTER = "/n";
     private static final String VALID_SORT_BY_ID_FILTER = "/id";
     private static final String INVALID_FILTER = "/i";
     private static final String EMPTY_FILTER = "";
-    public static final String PRICE_ORDER_ONE = "1500.00";
-    public static final String PRICE_ORDER_THREE = "3000.00";
-    public static final String PRICE_ORDER_TWO = "1800.00";
+
     public static final String ID_ORDER_TWO = "JPN";
     public static final String ID_ORDER_THREE = "KOR";
     public static final String ID_ORDER_ONE = "AUS";
+
+    public static final String NAME_ORDER_ONE = "Australia Romantic Tour";
+    public static final String NAME_ORDER_TWO = "Japan Basic Tour";
+    public static final String NAME_ORDER_THREE = "Korea Cultural Tour";
+
+    public static final String PRICE_ORDER_ONE = "1500.00";
+    public static final String PRICE_ORDER_THREE = "3000.00";
+    public static final String PRICE_ORDER_TWO = "1800.00";
 
     PrintStream previousConsole = System.out;
     ByteArrayOutputStream newConsole = new ByteArrayOutputStream();
@@ -38,9 +45,9 @@ class SortTourCommandTest {
     Ui testUi = new Ui();
 
     void initialiseTourListForTesting() {
-        Tour jpn = new Tour(new String[]{ID_ORDER_TWO, "Japan Basic Tour", PRICE_ORDER_ONE});
-        Tour kor = new Tour(new String[]{ID_ORDER_THREE, "Korea Cultural Tour", PRICE_ORDER_THREE});
-        Tour aus = new Tour(new String[]{ID_ORDER_ONE, "Australia Romantic Tour", PRICE_ORDER_TWO});
+        Tour jpn = new Tour(new String[]{ID_ORDER_TWO, NAME_ORDER_TWO, PRICE_ORDER_ONE});
+        Tour kor = new Tour(new String[]{ID_ORDER_THREE, NAME_ORDER_THREE, PRICE_ORDER_THREE});
+        Tour aus = new Tour(new String[]{ID_ORDER_ONE, NAME_ORDER_ONE, PRICE_ORDER_TWO});
         testTourList.add(jpn);
         testTourList.add(kor);
         testTourList.add(aus);
@@ -89,6 +96,28 @@ class SortTourCommandTest {
                 + "1. " + testTourList.getTourById(ID_ORDER_ONE) + "\n\n"
                 + "2. " + testTourList.getTourById(ID_ORDER_TWO) + "\n\n"
                 + "3. " + testTourList.getTourById(ID_ORDER_THREE);
+
+        String actualString = newConsole.toString().trim().replace("\r\n", "\n");
+        assertEquals(expectedString, actualString);
+    }
+
+    @Test
+    void sortTourCommand_validFilterByName_correctlySortedNameAscending() throws TourPlannerException {
+        System.setOut(new PrintStream(newConsole));
+        initialiseTourListForTesting();
+
+        Command testSortTourCommand = new SortTourCommand(VALID_SORT_BY_NAME_FILTER);
+        testSortTourCommand.setData(dummyClientList, dummyFlightList, testTourList, dummyPackageList, testUi);
+        testSortTourCommand.execute();
+
+        previousConsole.println(newConsole.toString());
+        System.setOut(previousConsole);
+
+        testTourList.initTempArray();
+        String expectedString = Ui.SORT_TOUR_NAME_MESSAGE + "\n"
+                + "1. " + testTourList.getTourByName(NAME_ORDER_ONE) + "\n\n"
+                + "2. " + testTourList.getTourByName(NAME_ORDER_TWO) + "\n\n"
+                + "3. " + testTourList.getTourByName(NAME_ORDER_THREE);
 
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
         assertEquals(expectedString, actualString);

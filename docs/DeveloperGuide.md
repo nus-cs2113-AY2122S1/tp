@@ -88,6 +88,8 @@ The diagram below shows how the components interact with each other if the user 
 
 The Sequence Diagram below illustrates the flow of parsing a command:
 
+Here is a class diagram of Parser component:
+
 ![Parser](https://user-images.githubusercontent.com/62021897/140608448-dc37fb49-dbab-4279-9067-770af331d19a.PNG)
 
 The flow of **parse** in `Parser` is as follows:
@@ -102,6 +104,42 @@ The flow of **parse** in `Parser` is as follows:
 **Step 4.** `XYZCommand` is returned to `TourPlanner`.
 
 <br>
+
+### Example of parse mechanism - `ParseAdd`
+
+Given below is an example scenario, outlining how parseAdd behaves at each step.
+
+**Step 1.** `Parser` first identifies the identifier for add, namely `-c` (add client), `-t` (add tour), `-f` (add
+flight), `-p` (add package), by splitting the identifier and the rest of the string by spaces.
+
+```
+-t JPN /n Japan Tour /p 1500 --> [-t, JPN, /n, Japan Tour, /p 1500]
+```
+
+**Step 2.** Next, `Parser` checks if all prefixes for data fields e.g. name, price, id are present.
+
+**Step 3.** To sort the values for addition, the prefixes and their corresponding indexes are stored as key-value pairs
+into a TreeMap. A TreeMap helps to sort the pairs by the natural ordering of the keys.
+
+```
+^JPN ^/n Japan Tour ^/p 1500 --> [(0, null), (4, /n), (18, /p)] (sorted)
+```
+
+**Step 4.** The prefix and its index will facilitate splitting the string into substrings, containing both the prefix
+and the value corresponding to the prefix.
+
+```
+-t JPN /n Japan Tour /p 1500 --> [JPN, /n Japan Tour, /p 1500] 
+```
+
+**Step 5.** Given the prefix, the array index that the value will be inserted into is predetermined.
+
+```
+[JPN, /n Japan Tour, /p 1500] --> [JPN, Japan Tour, 1500] 
+```
+
+**Step 6.** The value is extracted from the substring by removing the prefix, and inserted into an array. The array is
+used as an argument for the *Object* constructor.
 
 ## Command component
 
@@ -140,53 +178,77 @@ Here are sample add command inputs that can be parsed.
 
 Example add commands:
 
-* `add -c NAME /cn 91234567`
-* `add -t JPN /n Hokkaido-A /p 1500`
-* `add -f SQ-JPN /t JPN /f SG dt 20-10-2021 18:00 /df 21-10-2021 03:00`
-* `add -p ID /c NAME /t JPN /f SQ-JPN`
+* `add -c c001 /n Bo Tuan /cn 91234567 /m bobotea@gmail.com`
+* `add -f SQ-JPN1 /d Japan /r Singapore /dd 29/10/21 13:00 /rd 5/11/21 02:00`
+* `add -t t001 /n AustralianRomance /p 1500`
+* `add -p p001 /c c001 /f SQ-JPN1 /t t001`
 
-Given below is an example scenario, outlining how the add mechanism behaves at each step.
+In general, there is a sequence of steps when any of the 4 `add` commands are called.
 
-**Step 1.** `Parser` first identifies the identifier for add, namely `-c` (add client), `-t` (add tour), `-f` (add
-flight), `-p` (add package), by splitting the identifier and the rest of the string, separated by white space.
+Here is an example usage of `add -c` to add client "c001":
 
-```
--t JPN /n Hokkaido-A /p 1500 --> -t <<split>> JPN /n Hokkaido-A /p 1500 --> [-t, JPN /n Hokkaido-A /p 1500]
-```
+**Step 1.** User inputs `add -c c001 [ARGS...]`. This command is passed to `parse()` method in the `Parser` class.
 
-**Step 2.** Next, `Parser` checks if all prefixes e.g.  `/p, /f` are present.
+**Step 2.** Based on the user input, `parse()` identifies that it is of type `add` command and calls `ParseAdd()`.
 
-**Step 3.** To sort the values for addition, the prefixes and their corresponding indexes are stored as key-value pairs
-into a TreeMap. A TreeMap helps to sort the pairs by the natural ordering of the keys.
+**Step 3** `ParseAdd()` executes three instructions:
 
-```
-extract(JPN /n Hokkaido-A /p 1500) --> ^JPN ^/n Hokkaido-A ^/p 1500 --> [(0, null), (4, /n), (18, /p)] (sorted)
-```
+* Extract values from user's input and creates a `values` Array
+* Handle exceptions to the `values` Array, determined by the data type identifier (e.g. `-c`, `-t`)
+* Instantiates a `Client`/`Tour`/`Flight`/`ClientPackage` *Object*, determined by the same data type identifier.
+* Returns an `AddXYZCommand` based on the same data type identifier, passing in the *Object* as an argument for adding.
 
-**Step 4.** The prefix and its index will facilitate splitting the string into substrings, containing both the prefix
-and the value corresponding to the prefix.
+Depending on the type of add command being called, these command types will be returned:
 
-```
-obtainSubstring(JPN /n Hokkaido-A /p 1500, indexes) --> <<split>>JPN <<split>>/n Hokkaido-A <<split>>/p 1500 
---> [JPN, /n Hokkaido-A, /p 1500] 
-```
+* `add -c`: `AddClientCommand`
+* `add -f`: `AddFlightCommand`
+* `add -t`: `AddTourCommand`
+* `add -p`: `AddClientPackageCommand`
 
-**Step 5.** Given the prefix, the array index that the value will be inserted into is predetermined.
+The following 2 sections focuses on add for the specific classes.
 
-**Step 6.** The value is extracted from the substring by removing the prefix, and inserted into the array.
+<br>
 
-```
-extractValue(/n Hokkaido-A) --> Hokkaido-A 
-```
+#### <u>Adding a client package</u>
 
-**Step 7.** Depending on the identifier, a corresponding object is initialised.
+Given below is an example usage of `add -p p001 ARGS...` to add client package "p001".
 
-* `-c : Client`
-* `-t : Tour`
-* `-f : Flight`
-* `-p : Package`
+Here is a (partial) sequence diagram of above user input:
 
-**Step 8.** `AddCommand(Object o)` constructor is called, passing in the created object.
+**Step 1.** Parser creates a `values` array, upon extracting values from user's input.
+Returns `AddClientPackageCommand(values)`, determined by the datatype identifier `-p`.
+
+**Step 2.** Then, `execute()` method in `AddClientCommand` is called. `getClientPackageById("p001")` is called, which
+finds the `ClientPackage` based on the `CLIENT_PACKAGE_ID` "p001".
+
+**Step 3.** If the `CLIENT_PACKAGE_ID` "t001" already exists, an error message is returned.
+
+**Step 4.** Else, the `CLIENT_PACKAGE_ID` "p001" does not exist, `execute()` calls `add` in `ClientPackageList`, to
+add the specific tour and its arguments into the `ClientPackageList`.
+
+**Step 5.** `execute()` calls `showAdd` in `Ui`, which prints out the Object, `CLIENTPACKAGE` that was added.
+
+<br>
+
+#### <u>Adding a particular client / tour / flight</u>
+
+Given below is an example usage of `add -t t001 ARGS...` to add tour with the respective arguments.
+
+Here is a (partial) sequence diagram for above user input:
+![AddCommand](https://user-images.githubusercontent.com/62021897/140637968-b8ac7b0e-4ab3-42f4-a6b7-f526bfe80215.png)
+
+**Step 1.** `Parser` parses the input and instantiates `AddTourCommand`. It then returns it to `TourPlanner`.
+
+**Step 2.** Then, `execute()` method in `AddTourCommand` is called. `getTourById("t001")` is called, which finds
+the `Tour` based on the `TOUR_ID` "t001".
+
+**Step 3.** If the `TOUR_ID` "t001" already exists, an error message is returned.
+
+**Step 4.** Else, the `TOUR_ID` "t001" does not exist, `execute()` calls `add` in `TourList`, to add the specific tour
+and its arguments into the `TourList`.
+
+**Step 5.** `execute()` calls `showAdd` in `Ui`, which prints out the Object, `Tour` that was added.
+
 
 <br>
 
@@ -231,7 +293,7 @@ Here is a (partial) sequence diagram of above user input:
 
 ![CutClientPackageCommand](https://user-images.githubusercontent.com/70316271/140637935-a64ba82f-a9d1-4439-ad04-157ad0ecaad3.png)
 
-**Step 1.** `Parser` returns `CutClientPackageCommand("p001)`.
+**Step 1.** `Parser` returns `CutClientPackageCommand("p001")`.
 
 **Step 2.** Then, `execute()` method in `CutClientPackageCommand` calls `getClientPackageById("p001")`
 which finds the `ClientPackage` based on the `CLIENTPACKAGE_ID` "p001".
@@ -249,7 +311,7 @@ Here is a (partial) sequence diagram for above user input:
 
 ![CutClientCommand](https://user-images.githubusercontent.com/70316271/140637934-08e0a09e-bf63-4f16-b84f-faa7a852b2d3.png)
 
-**Step 1.** `Parser` returns `CutClientCommand("c001)`.
+**Step 1.** `Parser` returns `CutClientCommand("c001")`.
 
 **Step 2.** Then, `execute()` method in `CutClientCommand` calls `getClientById("c001")`
 which finds the `Client` based on the `CLIENT_ID` "c001".
@@ -323,7 +385,7 @@ the ```ClientList```, ```TourList```, ```FlightList``` and ```PackageList``` res
 commands were exceuted.
 
 * ```add -c c001 /n Bo Tuan /cn 93338333 /m borangutuan@mail.com```
-* ```add -t JPN /n Japan Tour /p 1500 ```
+* ```add -t JPN /n Japan Tour /p 1500```
 * ```add -f SQ-JPN /d JPN /r SG /dd 20/10/2021 18:00 /rd 21/10/2021 03:00```
 * ```add -p p001 /c c001 /t JPN /f SQ-JPN```
 
@@ -440,7 +502,9 @@ It implements these following types of `sort` commands:
 Given below is an example usage of `sort -c /id`:
 
 Here is a (partial) sequence diagram of the above user input:
+
 ![SortClientCommand](https://user-images.githubusercontent.com/70316271/140637939-1ff5b961-31fa-4afa-b834-316066362ffd.png)
+
 
 **Step 1**: After adding a few clients to the database, user inputs `sort -c /id`. This command is passed to `parse()`
 method in the `Parser` class.
@@ -485,6 +549,23 @@ After the user typed in an input into the console terminal and presses 'Enter':
 The diagram below shows the class diagram of the Ui component, in relation with other major components:
 
 <img width="289" alt="ui" src="https://user-images.githubusercontent.com/79963329/140464630-a8a8000c-fb45-44af-9cc2-d146ae5ea5c8.PNG">
+
+<br>
+
+## Storage Component
+
+<hr>
+
+**API: `ClientPackageStorage.java` `ClientStorage.java` `FlightStorage.java` `TourStorage.java`**
+
+The Storage component consists of:
+1. ClientPackageStorage.java: Reading and saving files which record all clientpackages.
+2. ClientStorage.java: Reading and saving files which record all clients.
+3. FlightStorage.java: Reading and saving files which record all flights.
+4. TourStorage.java: Reading and saving files which record all tours.
+
+To add on Storage component is designed to access only the following folder:
+1. `data/`
 
 <br>
 
