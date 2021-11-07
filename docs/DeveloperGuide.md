@@ -22,6 +22,8 @@ realise the target user profile that motivated us to build this application.
       * [Exceptions](#exceptions)
       * [Command Abstraction](#command-abstraction)
     * [Implementation](#implementation)
+      * [Edit](#edit)
+      * [Graph](#graph)
 * [Product Scope](#-product-scope)
   * [Target User Profile](#target-user-profile)
   * [Value Proposition](#value-proposition)
@@ -121,7 +123,7 @@ ArrayList, `IngredientList.ingredientList`
 
 * After every command, Duke calls `Storage.write(Ingredient)`, then `Storage.write(Dish)`.
   * This method in the `Storage` class is responsible for writing to the respective text file depending on the mode.
-* `Storage.write()` will access the respective text file and save to It's respective save format.
+* `Storage.write()` will access the respective text file and save to its respective save format.
 
 
 * ❕ **Save Formats:**
@@ -213,6 +215,8 @@ type in correct Commands/Parameters.
 
 ### Graph
 
+[](images/graph_class_dig.png)
+
 Graph works by creating a 2d grid and printing the bars based on the current position of the terminal cursor. 
 This lets us bypass the restriction in a CLI based application where you can only print from up to down and 
 the bars can get printed "vertically". This is done by calculating the lengths of the bars beforehand and 
@@ -220,9 +224,25 @@ using these lengths along with the current coordinates to print either an empty 
 
 Despite this due to CLI and ascii limitations, printing of fractional values posed an issue. This was because you are unable
 to print half a character and using special unicode characters would break cross-platform functionality. The solution 
-that we implemented was to have a digit in the top most bar if we have fractional heights. This way while we still dont get 
+that we implemented was to have a digit in the top most bar if we have fractional heights. This way while we still don't get 
 a perfect representation, we are capable of giving the value accurate to one decimal place. So if the height was 3.33 units
-it would be represented by 3 filled bars and the 4th bar will have a 3 within indicating it's value is between 3.3 to 3.4
+it would be represented by 3 filled bars and the 4th bar will have a 3 within indicating its value is between 3.3 to 3.4 
+as shown in the figure below
+
+____________________________________________________________
+
+                           [|]     Legend:              Scale: 1 unit = 5.0kg
+                           [|]     A. chicken: 2.56kg
+                           [|]     B. rice: 21.56kg
+                           [|]     C. flour: 24.56kg
+                     [3]   [|]     D. potato: 26.56kg
+         [3]   [9]   [|]   [|]     E. corn: 50.0kg
+         [|]   [|]   [|]   [|]
+         [|]   [|]   [|]   [|]
+         [|]   [|]   [|]   [|]
+    [5]  [|]   [|]   [|]   [|]
+     A    B     C     D     E
+____________________________________________________________
 
 ### Random dish
 
@@ -278,7 +298,7 @@ the Command Line Interface.
 ### Value Proposition
 
 By presenting the wastage statistics, we can help restaurant owners figure out which dishes are contributing the most to
-wastage at the restaurant. This way, they can allocate their resources more efficiently to better doing dishes. Thus we 
+wastage at the restaurant. This way, they can allocate their resources more efficiently to better doing dishes. Thus, we 
 are reducing time wastage due to cooking of excess dishes and also saving money from purchasing unnecessary ingredients. 
 Therefore, there’s a two-fold saving. Additionally, we are also contributing to reducing Singapore's contribution to 
 global food wastage.

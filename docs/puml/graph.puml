@@ -1,0 +1,15 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+class GraphCommand {
+}
+
+
+GraphCommand -> UI
+DishList .. UI
+IngredientList .. UI
+
+
+@enduml
