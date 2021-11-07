@@ -76,6 +76,7 @@ public class IngredientList {
     }
 
     //@@author ngoivanessa
+
     /**
      * Uses ingredient name as key to search if ingredient currently exists in ingredient list.
      *
@@ -92,6 +93,7 @@ public class IngredientList {
     }
 
     //@@author ngoivanessa
+
     /**
      * Uses ingredient name as key to find the index of the corresponding ingredient.
      * in the ingredient list.
@@ -110,11 +112,12 @@ public class IngredientList {
     }
 
     //@@author ngoivanessa
+
     /**
      * Adds ingredient to ingredient list.
      *
      * @param ingredient ingredient to be added
-     * @throws IOException if memory could not be written to
+     * @throws IOException               if memory could not be written to
      * @throws IndexOutOfBoundsException if an error occurred when adding ingredient
      */
     public void add(Ingredient ingredient) throws IOException, IndexOutOfBoundsException {
@@ -135,13 +138,15 @@ public class IngredientList {
     }
 
     //@@author AayushMathur7
+
     /**
      * Subtracts amount from total ingredient amount.
+     *
      * @param ingredientName the name of the ingredient to subtract from
      * @param subtractAmount amount to be subtracted from total amount
      * @return name of the subtracted ingredient
      * @throws SitusException if the ingredient and/or expiry date are not matched
-     * @throws IOException if the removed ingredient cannot be removed from memory
+     * @throws IOException    if the removed ingredient cannot be removed from memory
      */
     public String subtractIngredientFromGroup(String ingredientName, Double subtractAmount) throws
             SitusException, IOException, IndexOutOfBoundsException {
@@ -198,11 +203,12 @@ public class IngredientList {
     }
 
     //@@author AayushMathur7
+
     /**
-     * Removes low amount ingredient
+     * Removes low amount ingredient.
      *
      * @param currentGroup the group of the ingredient to remove low amount ingredients from.
-     * @throws SitusException
+     * @throws SitusException when error removing low amount
      */
     public void removeLowAmountIngredientFromGroup(IngredientGroup currentGroup) throws SitusException {
         int i = 0;
@@ -217,14 +223,15 @@ public class IngredientList {
     }
 
     //@@author datn02
+
     /**
      * Removes an ingredient from ingredient group.
      *
-     * @param groupNumber the group number of the ingredient to remove
+     * @param groupNumber      the group number of the ingredient to remove
      * @param ingredientNumber the number of the ingredient within group to remove
      * @return an ingredient object of the removed ingredient
      * @throws SitusException if the ingredient and/or expiry date are not matched
-     * @throws IOException if the removed ingredient cannot be removed from memory
+     * @throws IOException    if the removed ingredient cannot be removed from memory
      */
     public Ingredient removeIngredientFromGroup(int groupNumber, int ingredientNumber)
             throws IndexOutOfBoundsException, SitusException, IOException {
@@ -243,6 +250,7 @@ public class IngredientList {
     }
 
     //@@author ngoivanessa
+
     /**
      * Get ingredient group based on ingredient number (i.e. all duplicates of the same ingredient).
      *
@@ -255,15 +263,16 @@ public class IngredientList {
     }
 
     //@@author AayushMathur7
+
     /**
      * Get ingredient group based on ingredient name (i.e. all duplicates of the same ingredient).
      *
-     * @param groupNumber group number of ingredient to be updated
+     * @param groupNumber      group number of ingredient to be updated
      * @param ingredientNumber number of ingredient within group to be updated
-     * @param newAmount the new amount of the ingredient to be updated
+     * @param newAmount        the new amount of the ingredient to be updated
      * @return the updated ingredient
      * @throws SitusException index out of bounds, cannot access
-     * @throws IOException if the ingredient list could not be saved to memory
+     * @throws IOException    if the ingredient list could not be saved to memory
      */
     public Ingredient update(int groupNumber, int ingredientNumber, double newAmount)
             throws IndexOutOfBoundsException, IOException {
