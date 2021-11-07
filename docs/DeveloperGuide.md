@@ -1,6 +1,6 @@
 # Developer Guide
 
-## Table of Content
+## Table of Contents
 
 - [1. Acknowledgements](#1-acknowledgements)
 - [2. Introduction](#2-introduction)
