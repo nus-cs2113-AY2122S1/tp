@@ -10,18 +10,20 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class DeleteParserTest {
 
-    private static final String ERROR_GOAL_INDEX_FORMAT = "The command is missing the 'g/' flag";
-    private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The flag 'g/' has to be followed by a number";
-    private static final String ERROR_HABIT_INDEX_FORMAT = "The command is missing the 'h/' flag";
-    private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The flag 'h/' has to be followed by a number";
+    private static final String ERROR_GOAL_INDEX_FORMAT = "The command is missing the 'g/' flag.";
+    private static final String ERROR_GOAL_INDEX_NON_INTEGER = "The flag 'g/' has to be followed by a number.";
+    private static final String ERROR_HABIT_INDEX_FORMAT = "The command is missing the 'h/' flag.";
+    private static final String ERROR_HABIT_INDEX_NON_INTEGER = "The flag 'h/' has to be followed by a number.";
     private static final String ERROR_GOAL_INDEX_NEGATIVE_NUM =
-            "The flag 'g/' has to be followed by a positive integer";
+            "The flag 'g/' has to be followed by a positive integer.";
     private static final String ERROR_GOAL_INDEX_ZERO_NUM =
-            "The flag 'g/' has to be followed by a number greater than 0";
+            "The flag 'g/' has to be followed by a number greater than 0.";
     private static final String ERROR_HABIT_INDEX_NEGATIVE_NUM =
-            "The flag 'h/' has to be followed by a positive integer";
+            "The flag 'h/' has to be followed by a positive integer.";
     private static final String ERROR_HABIT_INDEX_ZERO_NUM =
-            "The flag 'h/' has to be followed by a number greater than 0";
+            "The flag 'h/' has to be followed by a number greater than 0.";
+    private static final String ERROR_FLAG_INDEX_MISSING_PARAMETER = "Index expected after '%1$s' flag missing.";
+
 
     /*
      * NOTE : ==================================================================
@@ -51,7 +53,7 @@ class DeleteParserTest {
             DeleteParser.parseDeleteGoalCommand("g/");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_GOAL_INDEX_FORMAT, e.getMessage());
+            assertEquals(String.format(ERROR_FLAG_INDEX_MISSING_PARAMETER, "g/"), e.getMessage());
         }
     }
 
@@ -89,16 +91,6 @@ class DeleteParserTest {
         }
     }
 
-    @Test
-    void parseDeleteGoalCommand_nullInput_exceptionThrown() {
-        try {
-            DeleteParser.parseDeleteGoalCommand(null);
-            fail();
-        } catch (HaBitParserException e) {
-            assertEquals(Parser.ERROR_NO_PARAMS, e.getMessage());
-        }
-    }
-
     /*
      * NOTE : ==================================================================
      * The following are tests for parseDeleteHabitCommand.
@@ -128,7 +120,7 @@ class DeleteParserTest {
             DeleteParser.parseDeleteHabitCommand("g/");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_GOAL_INDEX_FORMAT, e.getMessage());
+            assertEquals(String.format(ERROR_FLAG_INDEX_MISSING_PARAMETER, "g/"), e.getMessage());
         }
     }
 
@@ -155,7 +147,7 @@ class DeleteParserTest {
             DeleteParser.parseDeleteHabitCommand("g/1 h/");
             fail();
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_HABIT_INDEX_FORMAT, e.getMessage());
+            assertEquals(String.format(ERROR_FLAG_INDEX_MISSING_PARAMETER, "h/"), e.getMessage());
         }
 
         try {
@@ -197,16 +189,6 @@ class DeleteParserTest {
             fail();
         } catch (HaBitParserException e) {
             assertEquals(ERROR_HABIT_INDEX_ZERO_NUM, e.getMessage());
-        }
-    }
-
-    @Test
-    void parseDeleteHabitCommand_nullInput_exceptionThrown() {
-        try {
-            DeleteParser.parseDeleteHabitCommand(null);
-            fail();
-        } catch (HaBitParserException e) {
-            assertEquals(Parser.ERROR_NO_PARAMS, e.getMessage());
         }
     }
 }

@@ -3,18 +3,16 @@ package happybit.parser;
 import happybit.exception.HaBitParserException;
 import happybit.goal.GoalType;
 
+import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.function.Function;
-import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
 
-    protected static final String DELIMITER = "\u0001";
-    protected static final String LABEL_SYNTAX = "[a-zA-Z]/";
+    protected static final String LABEL_SYNTAX = "(?<=\\s|^)[a-zA-Z]/.*?((?=\\s+[a-zA-Z]/)|$)";
     protected static final String DATE_FORMAT = "ddMMyyyy";
 
     protected static final String FLAG_GOAL_INDEX = "g/";
@@ -32,17 +30,24 @@ public class Parser {
     private static final String DEFAULT_LABEL = "df";
 
     private static final String ERROR_NAME_FORMAT = "Use the 'n/' flag to define the name. Exp: n/Foo";
+    private static final String ERROR_GOAL_END_DATE_FORMAT = "Use the e/ flag to set the new goal end dateEg: ";
     private static final String ERROR_GOAL_TYPE_FORMAT = "Use the 't/' flag to define the goal type. Exp: t/df";
-    private static final String ERROR_INTEGER_FLAG_FORMAT = "The command is missing the '%1$s' flag";
-    private static final String ERROR_CONVERT_NUM = "The flag '%1$s' has to be followed by a number";
-    private static final String ERROR_NEGATIVE_NUM = "The flag '%1$s' has to be followed by a positive integer";
-    private static final String ERROR_ZERO_NUM = "The flag '%1$s' has to be followed by a number greater than 0";
-    private static final String ERROR_GOAL_TYPE_LABEL = "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'";
+    private static final String ERROR_GOAL_UPDATE_FORMAT = "Missing additional goal name, goal end date, or "
+            + "goal type parameter needed for update.";
+    private static final String ERROR_INTEGER_FLAG_FORMAT = "The command is missing the '%1$s' flag.";
+    private static final String ERROR_CONVERT_NUM = "The flag '%1$s' has to be followed by a number.";
+    private static final String ERROR_UNDEFINED_GOAL_TYPE_LABEL =
+            "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'.";
+    private static final String ERROR_NEGATIVE_NUM = "The flag '%1$s' has to be followed by a positive integer.";
+    private static final String ERROR_ZERO_NUM = "The flag '%1$s' has to be followed by a number greater than 0.";
     protected static final String ERROR_INTERVAL_TOO_LARGE = "Interval size is capped at 365 days.";
-    protected static final String ERROR_NO_PARAMS = "Command cannot be called without parameters. "
-            + "Enter the help command to view command formats";
-    private static final String ERROR_LONG_STRING = "Use a description no more than 50 characters "
+    private static final String ERROR_NO_DESCRIPTION = "Use a description of at least 1 character.";
+    private static final String ERROR_LONG_DESCRIPTION = "Use a description no more than 50 characters "
             + "(current: %1$s characters)";
+
+    protected static final String ERROR_FLAG_TEXT_MISSING_PARAMETER = "Text expected after '%1$s' flag missing.";
+    protected static final String ERROR_FLAG_INDEX_MISSING_PARAMETER = "Index expected after '%1$s' flag missing.";
+    protected static final String ERROR_FLAG_DATE_MISSING_PARAMETER = "Date expected after '%1$s' flag missing.";
 
     private static final int FLAG_LENGTH = 2;
     private static final int MAX_NAME_LENGTH = 50;
@@ -54,13 +59,14 @@ public class Parser {
      * @param input User input.
      * @return String array containing the parameters.
      */
-    protected static String[] splitInput(String input) {
-        Function<MatchResult, String> replace = x -> DELIMITER + x.group();
+    protected static ArrayList<String> splitInput(String input) {
         Pattern pattern = Pattern.compile(LABEL_SYNTAX);
         Matcher matcher = pattern.matcher(input);
-        String processedInput = matcher.replaceAll(replace);
-        String[] parameters = processedInput.split(DELIMITER);
-        return trimParameters(parameters);
+        ArrayList<String> listMatches = new ArrayList<>();
+        while (matcher.find()) {
+            listMatches.add(matcher.group());
+        }
+        return trimParameters(listMatches);
     }
 
     /**
@@ -70,25 +76,13 @@ public class Parser {
      * @param label      Label of a parameter.
      * @return Parameter if it exists, null otherwise.
      */
-    protected static String getParameter(String[] parameters, String label) {
+    protected static String getParameter(ArrayList<String> parameters, String label) {
         for (String parameter : parameters) {
             if (parameter.contains(label)) {
                 return parameter;
             }
         }
         return null;
-    }
-
-    /**
-     * Checks if the input is null.
-     *
-     * @param input String of the user input.
-     * @throws HaBitParserException If the user input is null (blank).
-     */
-    protected static void checkNoDescription(String input) throws HaBitParserException {
-        if (input == null) {
-            throw new HaBitParserException(ERROR_NO_PARAMS);
-        }
     }
 
     /**
@@ -118,7 +112,7 @@ public class Parser {
      * @return Name of a goal/habit.
      * @throws HaBitParserException If the name cannot be obtained from the user input.
      */
-    protected static String getName(String[] parameters) throws HaBitParserException {
+    protected static String getName(ArrayList<String> parameters) throws HaBitParserException {
         String nameWithFlag = getAndCheckParameter(parameters, FLAG_NAME, ERROR_NAME_FORMAT);
         String name = nameWithFlag.substring(FLAG_LENGTH).trim();
         checkStringLength(name);
@@ -126,14 +120,14 @@ public class Parser {
     }
 
     /**
-     * Gets the index of a goal/habit from the user input.
+     * Gets the number of a goal/habit from the user input.
      *
      * @param parameters String array of command parameters.
      * @param flag       Goal/habit flag.
      * @return Index of a goal/habit.
-     * @throws HaBitParserException If the index cannot be obtained from the user input.
+     * @throws HaBitParserException If the number cannot be obtained from the user input.
      */
-    protected static int getNumber(String[] parameters, String flag) throws HaBitParserException {
+    protected static int getNumber(ArrayList<String> parameters, String flag) throws HaBitParserException {
         String indexWithFlag = getAndCheckParameter(parameters, flag, String.format(ERROR_INTEGER_FLAG_FORMAT, flag));
         String index = indexWithFlag.substring(FLAG_LENGTH).trim();
         return stringToInt(index, flag);
@@ -146,7 +140,7 @@ public class Parser {
      * @return Goal type parameter.
      * @throws HaBitParserException If the goal type flag is used without fielding a proper goal type.
      */
-    protected static GoalType getType(String[] parameters) throws HaBitParserException {
+    protected static GoalType getType(ArrayList<String> parameters) throws HaBitParserException {
         String flag = getParameter(parameters, FLAG_GOAL_TYPE);
         if (flag == null) {
             return GoalType.DEFAULT;
@@ -165,7 +159,7 @@ public class Parser {
      * @return Integer of goal / habit user wanted.
      * @throws HaBitParserException If index entered by user is less than or equal to 0.
      */
-    protected static int getIndex(String[] parameters, String flag) throws HaBitParserException {
+    protected static int getIndex(ArrayList<String> parameters, String flag) throws HaBitParserException {
         int number = getNumber(parameters, flag);
         if (number == 0) {
             throw new HaBitParserException(String.format(ERROR_ZERO_NUM, flag));
@@ -179,14 +173,13 @@ public class Parser {
      * When adding new habit, interval can be 0.
      *
      * @param parameters String array of command parameters.
-     * @param flag Flag of parameter being checked.
      * @return New interval to be changed to.
      * @throws HaBitParserException If interval is less than or equal to 0.
      */
-    protected static int getUpdateInterval(String[] parameters, String flag) throws HaBitParserException {
-        int interval = getNumber(parameters, flag);
+    protected static int getUpdateInterval(ArrayList<String> parameters) throws HaBitParserException {
+        int interval = getNumber(parameters, Parser.FLAG_INTERVAL);
         if (interval == 0) {
-            throw new HaBitParserException(String.format(ERROR_ZERO_NUM, flag));
+            throw new HaBitParserException(String.format(ERROR_ZERO_NUM, Parser.FLAG_INTERVAL));
         }
         return interval;
     }
@@ -205,9 +198,11 @@ public class Parser {
      * @param parameters String array of command parameters.
      * @return String array of command parameters that have been trimmed of leading/trailing whitespaces.
      */
-    private static String[] trimParameters(String[] parameters) {
-        for (int i = 1; i < parameters.length; i++) {
-            parameters[i] = parameters[i].substring(0, 2) + parameters[i].substring(2).trim();
+    private static ArrayList<String> trimParameters(ArrayList<String> parameters) {
+        for (int i = 0; i < parameters.size(); ++i) {
+            String parameter = parameters.get(i);
+            String trimmedParameter = parameter.substring(0,2).trim() + parameter.substring(2).trim();
+            parameters.set(i, trimmedParameter);
         }
         return parameters;
     }
@@ -221,14 +216,47 @@ public class Parser {
      * @return Parameter.
      * @throws HaBitParserException If parameter is absent.
      */
-    private static String getAndCheckParameter(String[] parameters, String flag, String errorMessage)
+    private static String getAndCheckParameter(ArrayList<String> parameters, String flag, String errorMessage)
             throws HaBitParserException {
         String parameter = getParameter(parameters, flag);
-        if (parameter == null || parameter.equals(flag)) {
+        if (parameter == null) {
             throw new HaBitParserException(errorMessage);
+        } else if (parameter.equals(FLAG_NAME) || parameter.equals(FLAG_INTERVAL)) {
+            return parameter;
+        } else if (isParamIsFlagForIndex(parameter, flag)) {
+            throw new HaBitParserException(String.format(ERROR_FLAG_INDEX_MISSING_PARAMETER, flag));
+            //throw new HaBitParserException(errorMessage);
+        } else if (isParamIsFlagForText(parameter, flag)) {
+            throw new HaBitParserException(String.format(ERROR_FLAG_TEXT_MISSING_PARAMETER, flag));
+        } else if (isParamIsFlagForStringDate(parameter, flag)) {
+            throw new HaBitParserException(String.format(ERROR_FLAG_DATE_MISSING_PARAMETER, flag));
+        } else {
+            return parameter;
         }
-        return parameter;
     }
+
+    private static boolean isParamIsFlagForIndex(String parameter, String flag) {
+        if (parameter.equals(flag) && (flag.equals(FLAG_GOAL_INDEX)
+                || flag.equals(FLAG_HABIT_INDEX) || flag.equals(FLAG_INTERVAL))) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isParamIsFlagForText(String parameter, String flag) {
+        if (parameter.equals(flag) && (flag.equals(FLAG_NAME) || flag.equals(FLAG_GOAL_TYPE))) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isParamIsFlagForStringDate(String parameter, String flag) {
+        if (parameter.equals(flag) && (flag.equals(FLAG_START_DATE) || flag.equals(FLAG_END_DATE))) {
+            return true;
+        }
+        return false;
+    }
+
 
     /**
      * Checks if the input is too long.
@@ -237,8 +265,10 @@ public class Parser {
      * @throws HaBitParserException If the input is more than 50 characters.
      */
     private static void checkStringLength(String input) throws HaBitParserException {
-        if (input.length() > MAX_NAME_LENGTH) {
-            throw new HaBitParserException(String.format(ERROR_LONG_STRING, input.length()));
+        if (input.isEmpty()) {
+            throw new HaBitParserException(ERROR_NO_DESCRIPTION);
+        } else if (input.length() > MAX_NAME_LENGTH) {
+            throw new HaBitParserException(String.format(ERROR_LONG_DESCRIPTION, input.length()));
         }
     }
 
@@ -282,7 +312,7 @@ public class Parser {
         case DEFAULT_LABEL:
             return GoalType.DEFAULT;
         default:
-            throw new HaBitParserException(ERROR_GOAL_TYPE_LABEL);
+            throw new HaBitParserException(ERROR_UNDEFINED_GOAL_TYPE_LABEL);
         }
     }
 

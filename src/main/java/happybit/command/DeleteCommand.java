@@ -5,7 +5,7 @@ import happybit.goal.GoalList;
 import happybit.storage.Storage;
 import happybit.ui.PrintManager;
 
-public class DeleteCommand extends Command {
+public abstract class DeleteCommand extends Command {
 
     /**
      * Template method that runs delete commands.
