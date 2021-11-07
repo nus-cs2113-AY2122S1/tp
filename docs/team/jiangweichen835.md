@@ -60,7 +60,6 @@ code. [[RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&s
 ### Team-Based
 
 * Attended weekly team meetings.
-* Release management.
 
 ### Community
 
