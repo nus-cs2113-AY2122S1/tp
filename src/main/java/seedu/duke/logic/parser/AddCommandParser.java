@@ -115,7 +115,7 @@ public class AddCommandParser {
         HashMap<String, String> flagMap = ParserUtil.getFlagMap(userResponse, CommandFlag.GRADE);
 
         String[] params = userResponse.split(CommandFlag.MODULE);
-        String moduleCode = params[0].strip();
+        String moduleCode = params[0].strip().toUpperCase();
         String moduleGrade = DEFAULT_GRADE;
 
         if (flagMap.containsKey(CommandFlag.GRADE)) {

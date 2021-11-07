@@ -51,6 +51,7 @@ public class FullModuleList {
      * @throws ModuleNotFoundException the exception thrown when there is no corresponding module found on NUSMods
      */
     public Module findModule(String moduleCode) throws ModuleNotFoundException {
+        moduleCode = moduleCode.toUpperCase();
         if (!moduleMap.containsKey(moduleCode)) {
             throw new ModuleNotFoundException(Message.ERROR_MODULE_NOT_FOUND);
         }

@@ -7,8 +7,16 @@ public class StringUtil {
                 || userResponse.equalsIgnoreCase("-v");
     }
 
+    /**
+     * Remove the first occurence of the specified parameter
+     * (case-insensitive) from the user response.
+     *
+     * @param userResponse user response
+     * @param firstParam first parameter of the user response
+     * @return modified user response with the first parameter removed
+     */
     public static String removeFirstParam(String userResponse, String firstParam) {
-        return userResponse.replaceFirst(firstParam, "").strip();
+        return userResponse.replaceFirst("(?i)" + firstParam, "").strip();
     }
 
     public static String[] splitToLength(String string, int length) {
