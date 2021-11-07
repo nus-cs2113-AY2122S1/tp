@@ -7,11 +7,16 @@ app for NUS students!
 
 ### Summary of Contributions
 * **Code Contributed:** [RepoSense Link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=f11-1&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabAuthor=jiexiong-zeng&tabRepo=AY2122S1-CS2113T-F11-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&tabType=authorship)
-* **Enhancement Implemented:** Parser package consisting of: Parser, ListParser, DateParser, ParserChecks, Command
+* **Enhancement Implemented:** 
+  * Parser package consisting of: Parser, ListParser, DateParser, ParserChecks, Command
   * Processes all user inputs and parses them for information, calling the corresponding methods from other classes. Checks for input validity errors (Whether the desired input exists, eg: missing date time string).
-
-* **Contributions to UG:** Command Summary, Reorganise structure, clean up and uniform syntax. 
-* **Contributions to DG:** Design and Implementation Parser section, Appendix B: User Stories.
+* **Contributions to UG:** 
+  * Command Summary
+  * Reorganise structure, clean up and uniform syntax
+* **Contributions to DG:** 
+  * Design and Implementation Parser section 
+  * Appendix B: User Stories
+  * Reorganise structure, clean up and uniform syntax
 * **Contributions to team-based tasks:** 
   * Setting up the GitHub team org/repo.
   * Scribing to-dos in team meetings and creating corresponding issue trackers.
@@ -75,10 +80,5 @@ name implies, this method sorts all tasks by date and prints them.
 > If **TaskType** does not match, then an error message is displayed.  
 > If **TaskDescription** does not match, all tasks are printed by default.
 
-
-<br/><br/>
 Step 6: The full command is carried out and the application returns to NoCap and waits for new User Input.<br/><br/>
 
-The diagram below illustrates the `splitString` process:
-
-![alt_text](../media/splitStringDiagram.JPG)
