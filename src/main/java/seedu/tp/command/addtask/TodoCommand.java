@@ -4,7 +4,6 @@ import java.util.Map;
 
 import seedu.tp.command.flags.TodoFlag;
 import seedu.tp.parser.DateParser;
-import seedu.tp.task.factory.TaskFactory;
 import seedu.tp.task.factory.TodoFactory;
 import seedu.tp.task.taskmanager.TaskManager;
 
@@ -31,7 +30,7 @@ public class TodoCommand extends TaskCommand {
     }
 
     @Override
-    TaskFactory setTaskFactory() {
+    TodoFactory setTaskFactory() {
         return new TodoFactory(commandArguments);
     }
 

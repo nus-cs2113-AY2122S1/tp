@@ -5,7 +5,6 @@ import java.util.Map;
 import seedu.tp.command.flags.EventFlag;
 import seedu.tp.parser.DateParser;
 import seedu.tp.task.factory.EventFactory;
-import seedu.tp.task.factory.TaskFactory;
 import seedu.tp.task.taskmanager.TaskManager;
 
 //@@author SeanRobertDH
@@ -31,7 +30,7 @@ public class EventCommand extends TaskCommand {
     }
 
     @Override
-    TaskFactory setTaskFactory() {
+    EventFactory setTaskFactory() {
         return new EventFactory(commandArguments);
     }
 
