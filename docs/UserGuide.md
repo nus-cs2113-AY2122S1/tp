@@ -35,7 +35,7 @@ User Interface (GUI) apps.
     * [Setting attendance for a particular lesson for student/(s): `set_attendance`](#setting-attendance-for-a-particular-lesson-for-students-set_attendance)
     * [Deleting attendance for a particular lesson for a student: `delete_attendance`](#deleting-attendance-for-a-particular-lesson-for-a-student-delete_attendance)
   * [Comment](#comment)
-    * [Listing comments for all students in a class: `list_comment`](#listing-comments-for-all-students-in-a-class-list_comment)
+    * [Listing comments for all students in a class: `list_comments`](#listing-comments-for-all-students-in-a-class-list_comments)
     * [Setting comment for a particular student: `set_comment`](#setting-comment-for-a-particular-student-set_comment)
     * [Deleting comment for a particular student: `delete_comment`](#deleting-comment-for-a-particular-student-delete_comment)
   * [Other](#other)
@@ -513,10 +513,10 @@ Examples:
 <hr>
 
 ### Comment
-#### Listing comments for all students in a class: `list_comment`
+#### Listing comments for all students in a class: `list_comments`
 List comments for all students in a class
 
-Format: `list_comment c/<CLASS_ID>`
+Format: `list_comments c/<CLASS_ID>`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 
 Examples:
@@ -627,7 +627,7 @@ Mark | Sorting and listing students in a class by their overall score | `sort_by
 Attendance | Listing attendance for a particular student | `list_attendance c/<CLASS_ID> s/<STUDENT_INDEX>`
 Attendance | Setting attendance for a particular lesson for a student | `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
 Attendance | Deleting attendance for a particular lesson for a student | `delete_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER>`
-Comment | Listing comments for all students in a class | `list_comment c/<CLASS_ID>`
+Comment | Listing comments for all students in a class | `list_comments c/<CLASS_ID>`
 Comment | Setting comment for a particular student | `set_comment c/<CLASS_ID> s/<STUDENT_INDEX> t/<COMMENT>`
 Comment | Deleting comment for a particular student | `delete_comment c/<CLASS_ID> s/<STUDENT_INDEX>`
 Other | Viewing help | `help`
