@@ -56,7 +56,7 @@ public class CommandTest {
         assertEquals(module.getTaskList().toString(), "[[ ] test2 by: 10 Oct 2010 12:00 AM]");
 
         command.commandEditDeadline(module, "1", "11 11 11");
-        assertEquals(module.getTaskList().toString(), "[[ ] test2 by: 11 Nov 2011 12:00 AM]");
+        assertEquals(module.getTaskList().toString(), "[[LATE][ ] test2 by: 11 Nov 2011 12:00 AM]");
     }
 
     @Test
