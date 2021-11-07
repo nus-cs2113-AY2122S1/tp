@@ -241,7 +241,7 @@ The `CommandParser` implements the following functionality:
 The Command Component `Command` class, `CommandResult` class and multiple `XYZCommand` 
 each representing a specific type of command. Each `Command` will `parseArguments` and set them 
 to private variables, and then `execute` would run specific operation specified by `XYZCommand`.
-The `Command` would then store the required changes needed to be made in `ModuleManager` and the resulting output message in `CommandResult`.   
+The `Command` would then store the required changes needed to be made in the `Storage` component and the resulting output message in `CommandResult`.   
 
 The `CommandResult` will contains certain attributes that will indicate certain operations:
 - Contains a `message` to be printed as the output for the `Command`.
