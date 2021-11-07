@@ -109,11 +109,20 @@ public abstract class DateOperator {
         return item -> isSameYear(inputYear, item);
     }
 
+
+    /**
+     * Returns the current month as an index.
+     * @return The current month as an index of data type int.
+     */
     public static int currentMonthInIndex() {
         LocalDate currentDate = LocalDate.now();
         return currentDate.getMonthValue() - 1;
     }
 
+    /**
+     * Returns the current month.
+     * @return The current month as an object.
+     */
     public static Month currentMonth() {
         LocalDate currentDate = LocalDate.now();
         return currentDate.getMonth();
