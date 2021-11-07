@@ -109,6 +109,8 @@ Below is a partial class diagram that shows an overview of the `Data` component.
 The `Data` component:
 
 
+![Figure_DataComponent_Partial_Class_Diagram](images/Data.png)
+
 ### <a id=""></a> Logic Component (Parser and Commands)
 ![Figure_ParserDiagram](images/ParserDiagram.png)
 Figure 3. Structure of the program's logic
