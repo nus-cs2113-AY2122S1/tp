@@ -274,22 +274,22 @@ conversion between java time API and semesters. The enumeration class `Semester`
 
 `Todo`, `Deadline` and `Event` Tasks are created using Task factories.
  - All Task factories inherit from the abstract `TaskFactory` class and are created using similar steps:
-   1. It firstly checks that all the required flags for making the concrete Task are present and throws an exception if a flag is missing.
+   1. It firstly checks that all the required flags for making the concrete Task are present and throws `RequiredArgmentNotProvidedException` if a flag is missing.
    2. It then initialises the `description`, `priority` and `recurrence`. 
    3. From there it sets any additional variables that are present in the concrete Task.
-   4. It creates the task and sets the `priority` and `rcurrence` if they are not `null`
-   5. It returns the created concrete task.
+   4. It creates the task and sets the `priority` and `recurrence` if they are not `null`
+   5. It returns the created concrete Task.
 
 <p align="center">
     <img src="images/SeanUMLDiagrams/TaskFactory_Object_Diagram.png">
 </p>
 
+The `TaskFactory` has been designed using the [Factory Method Pattern](https://en.wikipedia.org/wiki/Factory_method_pattern#UML_class_diagram). It was also designed to be easily extendable to allow for more concrete Task factories to be easily added. Each set of variables are initialised in their respective factories. e.g. `priority` is a `Task` variable so it's initialised and set in `TaskFactory` while `dueDate` is a `Deadline` variable so it's initialised and set in `DeadlineFactory`.
+
 1. To extend the `TaskFactory`, you should create a constructor which takes in a `Map<String, String> flags` argument and define `TypeEnum taskType` and `String[] requiredFlags` as constants.
 2. From there you have to override the `setAdditionalVariables()` function to set any new variables that are unique to the concrete Task you want to impelment.
 3. override `createTask()` to return the constructed Task (you can ignore `priority` and `recurrence` as they are set in `TaskFactory`)
 4. optional: you may override `getTask()` to return the concrete Task instead of the abstract `Task`.
-
-The `TaskFactory` has been designed in a way to be easily extendable to allow for more concrete Task factories to be easily added. Each set of variables are initialised in their respective factories. e.g. `priority` is a `Task` variable so it's initialised and set in `TaskFactory` while `dueDate` is a `Deadline` variable so it's initialised and set in `DeadlineFactory`.
 
 The Class diagrams for the different Tasks:  
 <img src="https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/docs/images/Task%20Inheritence.jpeg?raw=true" alt="TodoFactory Sequence Diagram" width="650"/>  
