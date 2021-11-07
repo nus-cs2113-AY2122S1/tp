@@ -27,10 +27,7 @@ public class CurrencyManager {
             convertBudgets(budgets, from, to);
         }
     }
-
-//So add a condition when converting to OG currency, just set the value of the Entry into OG Value
-    //if command is ->USD and ur current currency is USD , ignore
-    //if command is ->USD and ur sgd, take ogvalue*usd multiplier.
+    
     public CurrencyType getCurrency() {
         assert currency != null;
         return currency;
