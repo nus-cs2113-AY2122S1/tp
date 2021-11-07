@@ -48,6 +48,9 @@ public abstract class DeleteParser extends Parser {
     private static void parseEvent(String[] command) throws InvalidIndexException {
         int eventIndex = getIndexFromCommand(command[2]);
         if (!isValidEventIndex(eventIndex)) {
+            if (eventCatalog.isEmpty()) {
+                throw new InvalidIndexException("There are no events to delete.");
+            }
             throw new InvalidIndexException("Invalid index range. Choose a number between 1 and "
                     + eventCatalog.size() + ".");
         }
@@ -58,13 +61,16 @@ public abstract class DeleteParser extends Parser {
         int taskIndex = getIndexFromCommand(command[2]);
         int lastEventIndex = Parser.getIndexOfLastSelectedEvent();
         if (!isValidTaskIndex(lastEventIndex, taskIndex)) {
-            throw new InvalidIndexException("Invalid index range. Choose a number between 0 to "
+            if (eventCatalog.get(lastEventIndex).getTaskList().isEmpty()) {
+                throw new InvalidIndexException("There are no tasks to delete.");
+            }
+            throw new InvalidIndexException("Invalid index range. Choose a number between 1 to "
                     + eventCatalog.get(lastEventIndex).getTaskList().size() + ".");
         }
         taskIndexToDelete = taskIndex;
     }
 
-    private static int getIndexFromCommand(String indexAsString) throws InvalidIndexException {
+    private static int getIndexFromCommand(String indexAsString) {
         return Integer.parseInt(indexAsString.trim()) - 1;
     }
 
