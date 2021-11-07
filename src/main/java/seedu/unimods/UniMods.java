@@ -14,11 +14,8 @@ import seedu.timetable.Timetable;
 import seedu.ui.TextUi;
 import seedu.user.Profile;
 
-import java.util.ArrayList;
-
 public class UniMods {
-    private static String path = "data/Modules.json";
-    private static String timetablePath = "data/timetable.json";
+    private static final String timetablePath = "data/timetable.json";
     public static Timetable timetable;
     public static TimetableStorage timetableStorage;
     public static ProfileStorage profileStorage;

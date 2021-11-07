@@ -11,8 +11,8 @@ public class ClearCommand extends Command {
     public static final String commandSyntax = "clear";
     public static final String commandAction = "Clears the timetable of everything";
 
-    private static Logger logger = Logger.getLogger("");
-    private Timetable timetable;
+    private static final Logger logger = Logger.getLogger("");
+    private final Timetable timetable;
 
     public ClearCommand(Timetable timetable) {
         this.timetable = timetable;

@@ -20,9 +20,8 @@ public class RemoveCommand extends Command {
     }
 
     public void execute() {
-        Module module;
         try {
-            module = NusMods.fetchModOnline(moduleToBeRemoved);
+            Module module = NusMods.fetchModOnline(moduleToBeRemoved);
             Profile currentProfile = UniMods.getProfileInUse();
             currentProfile.getRecord().removeModuleFromTranscript(moduleToBeRemoved);
         } catch (FetchException e) {

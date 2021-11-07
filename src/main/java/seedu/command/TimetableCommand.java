@@ -8,8 +8,8 @@ public class TimetableCommand extends Command {
     public static final String commandAction =
             "Displays the timetable in a weekly grid format";
 
-    private Timetable timeTable;
-    private boolean showUserItemsOnly;
+    private final Timetable timeTable;
+    private final boolean showUserItemsOnly;
 
     public TimetableCommand(Timetable timeTable, boolean showUserItemsOnly) {
         this.timeTable = timeTable;

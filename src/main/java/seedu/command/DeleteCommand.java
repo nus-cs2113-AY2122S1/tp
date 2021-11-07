@@ -1,11 +1,7 @@
 package seedu.command;
 
-import seedu.exceptions.FetchException;
 import seedu.exceptions.UniModsException;
-import seedu.module.Module;
-import seedu.online.NusMods;
 import seedu.timetable.Timetable;
-import seedu.ui.TextUi;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

@@ -9,10 +9,10 @@ ModReg is about to start, and you have no idea what modules to take and what you
 
 Introducing **UNI Mods**, an easy-to-use application for NUS students that provides information on all available NUS
 modules and lets you pick and choose the modules and classes you want to take for that semester!
-Depending on the classes you decide to take, a timetable will be generated to keep track of your daily schedule and your
+Depending on the classes you decide to take, a timetable will be generated to keep track of your personal tasks, school lessons in your daily schedule and your
 total workload:
 
-![timetable](./resources/timetable.png)
+![Capture](https://user-images.githubusercontent.com/69495787/139837067-aed633dc-43f0-4748-9738-1dc6302d3c1f.JPG)
 
 <br>
 
@@ -26,10 +26,18 @@ total workload:
     * [Show Module Info](#display-module-info-show-module_code)
     * [Search Module](#search-module-search-keyword--l)
     * [Update Local Database](#update-local-database-update)
-    * [Add to Timetable](#add-to-timetable-add-module_code)
+    * [Add to Timetable](#add-to-timetable)
+      * [Add a Module](#add-a-module-to-timetable )
+      * [Add an Event](#add-an-event-to-timetable)
     * [Delete from Timetable](#delete-from-timetable-delete-module_code)
     * [Clear Timetable](#clear-timetable-clear)
     * [View Timetable](#view-timetable-timetable)
+    * [Changing Semester](#changing-semester)
+    * [Storing grades secured in past modules](#store-grades-secured-in-various-modules-store-grade--module_code)
+    * [Removing modules from stored grades](#remove-modules-from-the-list-of-completed-modules-remove-module_code)
+    * [Calculating your CAP](#calculate-cap--calculate-cap)
+    * [Viewing your unoffical transcript](#view-unofficial-transcript--transcript)
+    * [Checking eligibility from a module's pre-requisite](#checking-for-module-pre-requisite-check-module_code)
     * [Exit](#exit-exit)
 - [FAQ](#faq)
 - [Command Summary]()
@@ -85,27 +93,33 @@ Output:
 
 ```shell
 ~$ help
-__________________________________________________________________________
+________________________________________________________________________________________________________________________
 	UNIMods accepts the following commands:-
-		| No.| Command Syntax                |            Command Action                      |
-		| 1. | search <module_code>          | Search module based on the given partial regex |
-		| 2. | show <module_code>            | Display module information                     |
-		| 3. | add <module_code>             | Add module to the Timetable                    |
-		| 4. | delete <module_code>          | Deletes module from the Timetable              |
-		| 5. | clear                         | Deletes all modules from the Timetable         |
-		| 6. | timetable                     | Display the Timetable                          |
-		| 7. | store <grade> > <module_code> | Stores the grades scored in the Transcript     |
-		| 8. | remove <module_code>          | Remove the module from the Transcript          |
-		| 9. | calculate cap                 | Displays the Cumulative Average Point          |
-		| 10.| exit                          | Exit From Program                              |
+		| No.| Command Syntax                  | Command Action                                         |
+		| 1. | help                            | Displays all the available commands                    |
+		| 2. | search <MODULE_CODE>            | Searches for modules that match the search expression  |
+		| 3. | show <MODULE_CODE>              | Displays the module's information and S/U-ability      |
+		| 4. | update                          | Fetches all modules from API to a local save           |
+		| 5. | add                             | Add modules or tasks to the Timetable                  |
+		| 6. | delete <MODULE_CODE/TASK>       | Removes the module or personal task from timetable     |
+		| 7. | clear                           | Clears the timetable of everything                     |
+		| 8. | edit                            | Edit a personal task in the timetable                  |
+		| 9. | timetable                       | Displays the timetable in a weekly grid format         |
+		| 10.| semester                        | Changes the academic semester that you wish to plan for|
+		| 11.| check <MODULE_CODE>             | Check whether the module's pre-requisite is met        |
+		| 12.| store <GRADE> <MODULE_CODE>     | Assigns a grade to a module and stores it on record    |
+		| 13.| remove <MODULE_CODE>            | Removes the module from the profile's record           |
+		| 14.| calculate                       | Calculates your CAP from your profile.                 |
+		| 15.| transcript                      | Creates and displays an unofficial transcript          |
+		| 16.| exit                            | Saves the current state and exits UniMods safely       |
 	 ** Note: For details, refer to the User Guide of NUSModsLite at: 
 		https://ay2122s1-cs2113t-w12-2.github.io/tp/UserGuide.html
-__________________________________________________________________________
 
+________________________________________________________________________________________________________________________
 
 ```
 
-To begin, perhaps try looking up CS2113T by running the following command:
+To begin, perhaps try looking up CS2113T by using the [show Command](#display-module-info-show-module_code)
 
 <br>
 
@@ -215,35 +229,102 @@ start of a new semester, when mods are being updated for the coming semester.
 
 <br>
 
-## Add to timetable: `add <MODULE_CODE>`
+## Add to timetable: `add`
+
+### Add a module to timetable 
 
 You have finally decided on the modules you want to take. Try adding your first module to your timetable!
 
 Let's add for example, `CG2271` to the timetable
 
-You can type `add CG2271` to see all the available lessons.
-
+You can type `add` to see what you can add to the timetable.
 ```shell
-~$ add CG2271
-Now adding CG2271 into timetable
-         Lecture Lesson Slots                         Tutorial Lesson Slots                         Laboratory Lesson Slots
-1: Wednesday, 0900-1100, 01, E-Learn_A    |   1: Thursday, 1100-1200, 01, E-Learn_A     |   1: Friday, 0800-1000, 01, E4A-04-08       |   
-_______________________________________   |   _______________________________________   |   _______________________________________   |   
-                                              2: Tuesday, 0800-0900, 02, E-Learn_A      |   2: Friday, 1000-1200, 02, E4A-04-08       |   
-                                              _______________________________________   |   _______________________________________   |   
-                                              3: Friday, 1400-1500, 03, E-Learn_A       |   
-                                              _______________________________________   | 
+What would you like to do?
+==>add
+1. Module
+2. Event
+Choose your option: 
 ```
+You can choose either Module or Event, since you are adding a module, you enter 1 into the terminal
+```shell
+Choose your option: 1
+Enter Module Code to add it into Timetable: cg2271
+Now adding CG2271 into timetable
+[DISCLAIMER] Lessons with the same class number are packed together
+[DISCLAIMER] Adding any type of lesson will add all lessons with similar class number into timetable
 
+              Lecture Lesson Slots                                    Tutorial Lesson Slots                                   Laboratory Lesson Slots
+1: Wednesday, 0900-1100, 01, E-Learn_A                  1: Thursday, 1100-1200, 01, E-Learn_A                   1: Friday, 0800-1000, 01, E4A-04-08                     
+_________________________________________________   |   _________________________________________________   |   _________________________________________________   |   
+                                                        2: Tuesday, 0800-0900, 02, E-Learn_A                    2: Friday, 1000-1200, 02, E4A-04-08                     
+                                                        _________________________________________________   |   _________________________________________________   |   
+                                                        3: Friday, 1400-1500, 03, E-Learn_A                     
+                                                        _________________________________________________   |   
+```
 If lessons are found, a prompt to indicate a choice for each lesson type will be shown as such.
-
 ```shell
 Which Lecture would you like to choose? 
+Which Tutorial would you like to choose? 
+Which Laboratory would you like to choose? 
 ```
+For modules where lessons belong to the same class number, lessons will be packed together with a divider between each different class.
+
+For Example CS2113T lecture slot: 
+```shell
+Lecture Lesson Slots  
+1: Friday, 1600-1800, C01, E-Learn_C  
+1: Monday, 1200-1400, C01, E-Learn_C  
+1: Thursday, 1200-1400, C01, E-Learn_C                  
+1: Wednesday, 1200-1300, C01, E-Learn_C  
+_________________________________________________   | 
+```
+In addition, lessons that are currently in conflict with the timetable will be displayed with a disclaimer, and prompt you whether you want to proceed.
+
+For example:
+```shell
+1: Wednesday, 0900-1200, 01, E4A-04-08 [CONFLICT]
+```
+`NOTE:`Lessons that are added into timetable with existing lessons/events will override the slot
+
+If all lesson types have been successfully added, program will print out 
+```shell
+Lessons for all modules have been successfully added
+```
+
+<br></br>
+
+### Add an Event to timetable
+
+Perhaps you have a team meeting that takes place every Monday, you can likewise add your personal events into the timetable
+
+Let's add for example, `Team Meeting on Monday, 8-9pm on Zoom` to your timetable
+
+This time after typing `add` select the event option.
+```shell
+1. Module
+2. Event
+Choose your option: 2
+Description of Event (E.g. Read Micah): 
+```
+
+Fill in all the relevant information and take note that time is strictly using 24-hr time format
+
+For example:
+```shell
+Description of Event (E.g. Read Micah): Team Meeting CS2113T
+Date of Event (E.g. Monday): Monday
+Starting time of Event (E.g. 1600): 2000
+Ending time of Event (E.g. 1800): 2100
+Location of Event (Optional): Discord
+Alright!! Event: Team Meeting CS2113T on Monday, from 2000 to 2100 at Team Meeting CS2113T has been added to your timetable
+```
+
+If the selected timeslot is already occupied, the program will let you know and the event will not be added until the timeslot
+has been freed up.
 
 <br>
 
-## Delete from timetable: `delete <module_code>`
+## Delete from timetable: `delete <MODULE_CODE>`
 
 You can remove any module that you added to your timetable using this command.
 
@@ -315,13 +396,17 @@ Simply type `timetable` into the input and voila!
 *******************
 Modules taken this semester: 
 
-CS2113T Software Engineering & Object-Oriented Programming 4MC
+CS2113T Software Engineering & Object-Oriented Programming 4MC (Exam: Tue Nov 30 09:00 AM - 11:00 AM)
 
 Total MCs taken this semester: 4.0
 
 *******************
 
 ```
+
+<br>
+
+## Changing semester
 
 <br>
 
@@ -365,7 +450,7 @@ __________________________________________________________________________
 
 <br>
 
-## Remove modules from the list of completed modules: `remove <module_code>`
+## Remove modules from the list of completed modules: `remove <MODULE_CODE>`
 
 You can remove any module that you added to your list of completed modules using this command.
 
@@ -408,7 +493,7 @@ You can type `transcript` to view your Unofficial Transcript.
 For Example:
 
 ```shell
-~$==>transcript
+~$ transcript
 								--	National University of Singapore	--
 									--	Unofficial Transcript	--
 									------------------------------
@@ -436,6 +521,27 @@ __________________________________________________________________________
 ```
 
 <br>
+
+## Checking for module pre-requisite: `check <MODULE_CODE>`
+
+After [assigning grades to past modules](#store-grades-secured-in-various-modules-store-grade--module_code), you can
+check whether you have met all the pre-requisites for a module!
+
+For example let's say you wish to take CS2040. <br>
+Example output (If you had not taken CS1010):
+```shell
+~$ check CS2040
+Oops, you have not met the module's prerequisite: 
+CS1010 or its equivalent
+________________________________________________________________________________________________________________________
+```
+
+Example output (If you had taken CS1010):
+```shell
+~$ check CS2040
+Yes! You are eligible to take up: CS2040 Data Structures and Algorithms 4MC
+________________________________________________________________________________________________________________________
+```
 
 ---
 
@@ -491,7 +597,7 @@ and is very similar to just running `update`.
 | `search <KEYWORD> [-l]`         | Lists modules that have partial matches by regex to the keyword. <br> Example: `search GEH -l 1000`|
 | `show <MODULE_CODE>`            | Display relevant module information. <br> Example: `show CS2113T`                                  |
 | `update`                        | Fetches all mods from the API to a local save. <br> Example: `update`                              |
-| `add`                           | Adds modules or tasks to the timetable. <br> Example: `add`                                        |
+| `add`                           | Adds modules or events to the timetable. <br> Example: `add`                                       |
 | `delete <MODULE_CODE/TASK>`     | Deletes the module from the timetable. <br> Example: `delete CS2113T`                              |
 | `clear`                         | Deletes all modules from the timetable. <br> Example: `clear`                                      |
 | `edit`                          | Edit a personal task in the timetable. <br> Example: `edit`                                        |

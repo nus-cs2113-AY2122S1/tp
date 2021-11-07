@@ -4,6 +4,7 @@ import seedu.module.Module;
 import seedu.online.NusMods;
 import seedu.ui.TextUi;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ShowCommand extends Command {
@@ -11,7 +12,7 @@ public class ShowCommand extends Command {
     public static final String commandSyntax = "show <MODULE_CODE>";
     public static final String commandAction = "Displays the module's information and S/U-ability";
 
-    private static Logger logger = Logger.getLogger("");
+    private static final Logger logger = Logger.getLogger("");
 
     private final String searchTerm;
 
@@ -28,8 +29,11 @@ public class ShowCommand extends Command {
         Module module = NusMods.fetchMod(moduleCode);
         if (module != null) {
             TextUi.printModFullDescription(module);
+            logger.log(Level.INFO, "User searched for " + searchTerm);
         } else {
             TextUi.printNotFoundMessage();
+            logger.log(Level.INFO, "User searched for " + searchTerm + " no results were found");
         }
+
     }
 }

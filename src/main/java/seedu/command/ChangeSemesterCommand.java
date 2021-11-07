@@ -16,8 +16,8 @@ public class ChangeSemesterCommand extends Command {
     public static final Integer MAX_OPTION = 5;
     public static final Integer KEEP_SEMESTER = 5;
 
-    private static Logger logger = Logger.getLogger("");
-    private Timetable timetable;
+    private static final Logger logger = Logger.getLogger("");
+    private final Timetable timetable;
 
     public ChangeSemesterCommand(Timetable timetable) {
         this.timetable = timetable;

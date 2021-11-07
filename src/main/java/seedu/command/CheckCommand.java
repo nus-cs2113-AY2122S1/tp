@@ -5,8 +5,6 @@ import seedu.online.NusMods;
 import seedu.ui.TextUi;
 import seedu.user.Profile;
 
-import java.io.IOException;
-
 public class CheckCommand extends Command {
 
     public static final String commandSyntax = "check <MODULE_CODE>";
