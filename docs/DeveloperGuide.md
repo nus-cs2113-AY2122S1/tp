@@ -25,6 +25,9 @@
     * [Non-Functional Requirements](#non-functional-requirements)
     * [Glossary](#glossary)
 * [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+  * [Testing commands for tasks](#testing-commands-for-tasks)
+  * [Testing commands for lessons](#testing-commands-for-lessons)
+  * [Testing commands for modules](#testing-commands-for-modules)
 
 ## Acknowledgements
 
