@@ -1003,7 +1003,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
 1.  To exit **TermiNUS**, enter the `exit` command.
 
-<br/>
+
 
 
 ### D.2: Workspace Navigation
@@ -1025,7 +1025,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
 > 💡 Advanced users can navigate to sub-workspaces using a single command. E.g. `go cs2113T schedule`
 
-<br/>
+
 
 
 
@@ -1044,7 +1044,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    b. `timetable 1` (1 is not a valid day)
 
-<br/>
+
 
 
 ### D.4: Module Workspace
@@ -1071,7 +1071,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
     c. `update 0 "cs2101"` (Invalid module index to be updated)
 
-<br/>
+
 
 
 ### D.5: Accessing a Specific Module
@@ -1088,7 +1088,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
     b. `go X` (Where X is not an existing user module)
 
-<br/>
+
 
 
 ### D.6: Accessing the Question Workspace
@@ -1106,7 +1106,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
     c. `question` from the main workspace (Question workspace can not be accessed from the main workspace)
 
-<br/>
+
 
 
 ### D.7: Add Question
@@ -1124,7 +1124,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `add` (A pair of question and answer must be present for an add command)
 
-<br/>
+
 
 
 ### D.8: View Questions
@@ -1145,7 +1145,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `view` from the main workspace (To view questions, execute `view` from the question workspace)
 
-<br/>
+
 
 
 ### D.9: Delete Question
@@ -1163,7 +1163,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `delete` (The delete command has to be followed by a valid index)
 
-<br/>
+
 
 
 
@@ -1178,7 +1178,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    a. `test` from the main workspace (The test feature can only be accessed from the question workspace)
 
-<br/>
+
 
 
 ### D.11: Accessing the Note Workspace
@@ -1196,7 +1196,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `note` from the main workspace (Note workspace can not be accessed from the main workspace)
 
-<br/>
+
 
 
 ### D.12: Add Note
@@ -1214,7 +1214,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `add` (A pair of note title and content must be present for an add command)
 
-<br/>
+
 
 
 ### D.13: View Notes
@@ -1235,7 +1235,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `view` from the main workspace (To view notes, execute `view` from the note workspace)
 
-<br/>
+
 
 ### D.14: Delete Note
 
@@ -1252,7 +1252,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `delete` (The delete command has to be followed by a valid index)
 
-<br/>
+
 
 
 ### D.15: Export Notes
@@ -1268,7 +1268,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    b. `export` from the main workspace (The export command must be executed in the note workspace)
 
-<br/>
+
 
 
 ### D.16: Accessing the Schedule Workspace
@@ -1286,7 +1286,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `schedule` from the main workspace (Schedule workspace can not be accessed from the main workspace)
 
-<br/>
+
 
 
 ### D.17: Add Schedule
@@ -1304,7 +1304,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `add` (All arguments must be present for a valid add command)
 
-<br/>
+
 
 
 ### D.18: View Schedules
@@ -1325,7 +1325,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `view` from the main workspace (To view schedules, execute `view` from the schedule workspace)
 
-<br/>
+
 
 
 ### D.19: Delete Schedule
@@ -1343,7 +1343,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `delete` (The delete command has to be followed by a valid index)
 
-<br/>
+
 
 
 ### D.20: Help Feature
@@ -1357,7 +1357,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
     
     a. `help X` (Where X is any trailing number or word)
 
-<br/>
+
 
 
 ### D.21: Navigate to Previous Workspace
@@ -1373,4 +1373,4 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
     b. `back` from the main workspace (The back command cannot be used in the main workspace)
 
-<br/>
+
