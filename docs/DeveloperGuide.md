@@ -277,3 +277,16 @@ without crashing.
     * Example:chicken|2.33|1.0|22.2
 * The appropriate formats are also present in a text file called formats.txt for your usage
 
+5. View timetable
+
+  * Test case: `timetable view`
+
+    Expected: Timetable will be printed onto the CLI
+
+Number. Random Dish Name Generator
+
+  * Test case: `rdish`
+
+    Expected: A random name for a Dish will be printed onto the CLI. e.g. `roasted chili fish potatoes`
+  
+  
