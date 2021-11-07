@@ -287,6 +287,7 @@ sequence diagram below is then carried out:
 ### 4.4. Listing all Habits
 
 A `ListHabitCommand` object is returned from the `ListHabitParser` if the users input is successfully parsed as shown below.
+If no goal index or invalid goal index is detected, an exception is thrown.
 
 ![](Diagram Images/Implementation Diagram Images/ListHabitsCommandParserSequenceDiagram.png)
 
@@ -310,7 +311,15 @@ Goal or the Habit is detected, an exception will be thrown.
 
 ### 4.6. Updating a Goal
 
+A `UpdateGoalCommand` object is returned from the `UpdateParser` if the users input is successfully parsed as shown below.
+
+The `runCommand` method is then executed for the `UpdateGoalCommand` object as seen.
+
 ### 4.7. Updating a Habit
+
+A `UpdateHabitCommand` object is returned from the `UpdateParser` if the users input is successfully parsed as shown below.
+
+The `runCommand` method is then executed for the `UpdateHabitCommand` object as seen.
 
 ### 4.8. Deleting a Goal
 
