@@ -103,30 +103,30 @@ These are the diagrams (General, Class, Sequence...) I have added into the Devel
 
 #### For "3.1 Architecture"...
 <p align="center">
-    <img src="images/SeanUMLDiagrams/SchedUrMods_Architecture.png">
+    <img src="../images/SeanUMLDiagrams/SchedUrMods_Architecture.png">
 </p>
 
 #### For "3.5 TaskManager Component"...
 <p align="center">
-    <img src="images/SeanUMLDiagrams/TaskManager_Object_Diagram.png" width="850">
+    <img src="../images/SeanUMLDiagrams/TaskManager_Object_Diagram.png" width="850">
 </p>
 
 #### For "3.6 Storage Component"...
 <p align="center">
-    <img src="images/SeanUMLDiagrams/Storage_Sequence_Diagram1.png">
+    <img src="../images/SeanUMLDiagrams/Storage_Sequence_Diagram1.png">
 </p>
 
 <p align="center">
-    <img src="images/SeanUMLDiagrams/Storage_Sequence_Diagram2.png">
+    <img src="../images/SeanUMLDiagrams/Storage_Sequence_Diagram2.png">
 </p>
 
 #### For"4.1 Task Factories"...
 <p align="center">
-    <img src="images/SeanUMLDiagrams/TaskFactory_Sequence_Diagram.png">
+    <img src="../images/SeanUMLDiagrams/TaskFactory_Sequence_Diagram.png">
 </p>
 
 <p align="center">
-    <img src="images/SeanUMLDiagrams/TaskFactory_Object_Diagram.png">
+    <img src="../images/SeanUMLDiagrams/TaskFactory_Object_Diagram.png">
 </p>
 
 ---
