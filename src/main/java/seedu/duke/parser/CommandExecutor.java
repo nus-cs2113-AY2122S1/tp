@@ -14,6 +14,7 @@ import seedu.duke.expense.Expense;
 import java.util.ArrayList;
 
 abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
+
     private static final int ATTRIBUTE_DATA = 1;
     private static final int EDIT_ATTRIBUTE = 0;
     private static final String EDIT_LOCATION = "-location";
@@ -28,6 +29,10 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
      * Creates a new instance of {@link Trip}.
      *
      * @param attributesInString attributes of the trip to be added (in a single {@link String}), before being parsed.
+     *
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
+     * @throws IndexOutOfBoundsException if the user has not entered sufficient attributes to create a new trip.
+     * @throws SameNameException if the user enters multiple persons with the same name.
      */
     protected static void executeCreateTrip(String attributesInString)
             throws ForceCancelException, IndexOutOfBoundsException, SameNameException {
@@ -100,8 +105,11 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
      *
      * @param inputDescription - user input of trip index and trip attributes to edit.
      *
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
+     *
      * @see Parser#editTripWithIndex(String)
      * @see Parser#editTripPerAttribute(Trip, String)
+     *
      */
     protected static void executeEditTrip(String inputDescription) throws ForceCancelException {
         String[] tripToEditInfo = inputDescription.split(" ", 2);
@@ -124,6 +132,8 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
      * Sets the user-specified trip as opened. Requires that the {@code listOfTrips} has at least one open trip.
      *
      * @param indexAsString index of trip to open, as a {@link String} to be parsed.
+     *
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
      */
     protected static void executeOpen(String indexAsString) throws ForceCancelException {
         //assumes that listOfTrips have at least 1 trip
@@ -170,6 +180,12 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
     //@@author
 
     //@@author leeyikai
+
+    /**
+     * Checks to see which expenses user wants to see and calls the appropriate method.
+     * @param inputParams contains the information that determines what expenses user wants to see
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
+     */
     protected static void executeView(String inputParams) throws ForceCancelException {
         Trip openTrip = Storage.getOpenTrip();
         if (inputParams == null) {
@@ -206,6 +222,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
             }
         }
     }
+    //@@author
 
     //@@author yeezao
     /**
@@ -213,6 +230,8 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
      * and calls the appropriate method.
      *
      * @param inputParams attributes of trip to be deleted (if valid, this should be the trip/expense index)
+     *
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
      *
      * @see Parser#executeDeleteTrip(int)
      * @see Parser#executeDeleteExpense(int)
@@ -271,6 +290,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
     /**
      * Prints how much a Person object owe other Person object and/or how much other Person objects owe the Person
      * object.
+     *
      * @param inputParams the input of the user.
      * @throws ForceCancelException allows the user to cancel an operation when an input is required.
      */
@@ -303,6 +323,14 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
     }
     //@@author
 
+    //@@author leeyikai
+
+    /**
+     * Check that there are expenses in the current open trip. If there is, execute the optimization method.
+     *
+     * @throws NoExpensesException stops the optimize command when there is no expenses available to optimize.
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
+     */
     protected static void executeOptimize() throws NoExpensesException, ForceCancelException {
         if (Storage.getOpenTrip().getListOfExpenses().size() > 0) {
             checkForOptimization();
@@ -310,6 +338,7 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
             throw new NoExpensesException();
         }
     }
+    //@@author
 
     //@@author joshualeeky
     private static void executeDeleteExpense(int expenseIndex) throws ForceCancelException {
@@ -343,9 +372,11 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
      *
      * @param tripToEdit user-specified trip to be edited
      * @param attributeToEdit String of all attributes to be added and their new values
+     *
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
      */
     private static void editTripPerAttribute(Trip tripToEdit, String attributeToEdit) throws ForceCancelException {
-        String[] splitCommandAndData = attributeToEdit.split(" ");
+        String[] splitCommandAndData = attributeToEdit.split(" ", 2);
         String data = splitCommandAndData[ATTRIBUTE_DATA];
         switch (splitCommandAndData[EDIT_ATTRIBUTE]) {
         case EDIT_LOCATION:
@@ -426,10 +457,18 @@ abstract class CommandExecutor implements PaymentOptimizer, ExpenseSummarizer {
     }
     //@@author
 
+    //@author leeyikai
 
+    /**
+     * Gets the necessary information and carry out the optimized payment function. When finished optimizing,
+     * this method will call the appropriate method in {@link Ui} and print the optimized transactions out.
+     *
+     * @throws ForceCancelException allows the user to cancel an operation when an input is required.
+     */
     private static void checkForOptimization() throws ForceCancelException {
         Trip trip = Storage.getOpenTrip();
         PaymentOptimizer.optimizePayments(trip);
         Ui.printOptimizedAmounts();
     }
+    //@@author
 }

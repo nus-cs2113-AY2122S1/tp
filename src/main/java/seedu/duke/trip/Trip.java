@@ -37,6 +37,7 @@ public class Trip implements FilterFinder {
     private static final String PERSON = "person";
     private static final String DATE = "date";
 
+    //@@author yeezao
     /**
      * Empty {@link Trip} constructor (included for legacy test support).
      */
@@ -101,7 +102,7 @@ public class Trip implements FilterFinder {
 
     }
 
-
+    //@@author yeezao
     public LocalDate getDateOfTrip() {
         return dateOfTrip;
     }
@@ -252,6 +253,7 @@ public class Trip implements FilterFinder {
     }
     //@@author
 
+    //@@author yeezao
     public String getLocation() {
         return this.location;
     }
@@ -275,8 +277,9 @@ public class Trip implements FilterFinder {
         if (location.isBlank()) {
             Ui.locationIsBlank();
             setLocation(Ui.receiveUserInput());
+        } else {
+            this.location = location;
         }
-        this.location = location;
     }
 
     public Expense getLastExpense() {
@@ -291,6 +294,7 @@ public class Trip implements FilterFinder {
         Person personToEdit = listOfPersons.get(indexOfPerson);
         personToEdit.setName(newName);
     }
+    //@@author
 
     public void addExpense(Expense expense) {
         listOfExpenses.add(expense);
