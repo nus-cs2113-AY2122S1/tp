@@ -13,54 +13,54 @@ public class PatientUi extends PersonUi {
     }
 
     /**
-     * Returns a message String with help about the add command.
+     * Returns a message String with help about the add patient command.
      *
-     * @return String with help about the add command
+     * @return String with help about the add patient command
      */
     public static String getAddPatientHelpMessage() {
         return getAddHelpMessage(PATIENT);
     }
 
     /**
-     * Returns a message String with help about the delete command.
+     * Returns a message String with help about the delete patient command.
      *
-     * @return String with help about the delete command
+     * @return String with help about the delete patient command
      */
     public static String getDeletePatientHelpMessage() {
         return getDeleteHelpMessage(PATIENT);
     }
 
     /**
-     * Returns a message String with help about the edit command.
+     * Returns a message String with help about the edit patient command.
      *
-     * @return String with help about the edit command
+     * @return String with help about the edit patient command
      */
     public static String getEditPatientHelpMessage() {
         return getEditHelpMessage(PATIENT);
     }
 
     /**
-     * Returns a message String with help about the view command.
+     * Returns a message String with help about the view patient command.
      *
-     * @return String with help about the view command
+     * @return String with help about the view patient command
      */
     public static String getViewPatientHelpMessage() {
         return getViewHelpMessage(PATIENT);
     }
 
     /**
-     * Returns a message String with help about the list command.
+     * Returns a message String with help about the list patient command.
      *
-     * @return String with help about the list command
+     * @return String with help about the list patient command
      */
     public static String getListPatientHelpMessage() {
         return getListHelpMessage(PATIENT);
     }
 
     /**
-     * Returns a message String with help about the find command.
+     * Returns a message String with help about the find patient command.
      *
-     * @return String with help about the find command
+     * @return String with help about the find patient command
      */
     public static String getFindPatientHelpMessage() {
         return getFindHelpMessage(PATIENT);

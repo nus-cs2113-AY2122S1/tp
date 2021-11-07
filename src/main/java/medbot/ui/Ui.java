@@ -269,7 +269,7 @@ public class Ui {
         case MEDICAL_STAFF_INFO:
             return StaffUi.getListStaffHelpMessage();
         case SCHEDULER:
-            return SchedulerUi.getListSchedulerHelpMessage();
+            return SchedulerUi.getListAppointmentHelpMessage();
         default:
             assert false;
             throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
@@ -290,7 +290,7 @@ public class Ui {
         case MEDICAL_STAFF_INFO:
             return StaffUi.getViewStaffHelpMessage();
         case SCHEDULER:
-            return SchedulerUi.getViewSchedulerHelpMessage();
+            return SchedulerUi.getViewAppointmentHelpMessage();
         default:
             assert false;
             throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
@@ -311,7 +311,7 @@ public class Ui {
         case MEDICAL_STAFF_INFO:
             return StaffUi.getAddStaffHelpMessage();
         case SCHEDULER:
-            return SchedulerUi.getAddSchedulerHelpMessage();
+            return SchedulerUi.getAddAppointmentHelpMessage();
         default:
             assert false;
             throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
@@ -332,7 +332,7 @@ public class Ui {
         case MEDICAL_STAFF_INFO:
             return StaffUi.getEditStaffHelpMessage();
         case SCHEDULER:
-            return SchedulerUi.getEditSchedulerHelpMessage();
+            return SchedulerUi.getEditAppointmentHelpMessage();
         default:
             assert false;
             throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
@@ -352,7 +352,7 @@ public class Ui {
         case MEDICAL_STAFF_INFO:
             return StaffUi.getDeleteStaffHelpMessage();
         case SCHEDULER:
-            return SchedulerUi.getDeleteSchedulerHelpMessage();
+            return SchedulerUi.getDeleteAppointmentHelpMessage();
         default:
             assert false;
             throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
@@ -373,7 +373,7 @@ public class Ui {
         case MEDICAL_STAFF_INFO:
             return StaffUi.getFindStaffHelpMessage();
         case SCHEDULER:
-            return SchedulerUi.getFindSchedulerHelpMessage();
+            return SchedulerUi.getFindAppointmentHelpMessage();
         default:
             assert false;
             throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);

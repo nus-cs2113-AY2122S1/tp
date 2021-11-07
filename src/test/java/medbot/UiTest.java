@@ -419,8 +419,8 @@ class UiTest {
                 + "hide" + END_LINE
                 + "show" + END_LINE
                 + "switch" + END_LINE
-                + "exit" + END_LINE
-                + "get view" + END_LINE + END_LINE
+                + "get view" + END_LINE
+                + "exit" + END_LINE + END_LINE
                 + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes." + END_LINE
@@ -447,8 +447,8 @@ class UiTest {
                 + "hide" + END_LINE
                 + "show" + END_LINE
                 + "switch" + END_LINE
-                + "exit" + END_LINE
-                + "get view" + END_LINE + END_LINE
+                + "get view" + END_LINE
+                + "exit" + END_LINE + END_LINE
                 + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes." + END_LINE
@@ -465,10 +465,18 @@ class UiTest {
     public void testGetSchedulerCommandListMessage() {
 
         String expectedOutput = "Here are the list of commands:" + END_LINE + END_LINE
-                + "help" + END_LINE + "add" + END_LINE + "list" + END_LINE + "view" + END_LINE + "edit" + END_LINE
-                + "find" + END_LINE + "delete" + END_LINE + "get view" + END_LINE + "switch" + END_LINE + "exit"
-                + END_LINE + END_LINE + "To obtain more information on each command and their respective required "
-                + "inputs, type:" + END_LINE + "help [COMMAND]" + END_LINE + END_LINE
+                + "help" + END_LINE
+                + "add" + END_LINE
+                + "delete" + END_LINE
+                + "edit" + END_LINE
+                + "view" + END_LINE
+                + "list" + END_LINE
+                + "find" + END_LINE
+                + "switch" + END_LINE
+                + "get view" + END_LINE
+                + "exit" + END_LINE + END_LINE
+                + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
+                + "help [COMMAND]" + END_LINE + END_LINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes. For " + END_LINE
                 + "examples of the expected output, please refer to the actual user guide." + END_LINE;
 

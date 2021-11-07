@@ -23,8 +23,8 @@ public abstract class PersonUi {
                 + "hide" + END_LINE
                 + "show" + END_LINE
                 + "switch" + END_LINE
-                + "exit" + END_LINE
-                + "get view" + END_LINE + END_LINE
+                + "get view" + END_LINE
+                + "exit" + END_LINE + END_LINE
                 + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes." + END_LINE
