@@ -146,7 +146,7 @@ public class Trip implements FilterFinder {
         userInputDateError();
     }
 
-    public void userInputDateError() throws ForceCancelException {
+    private void userInputDateError() throws ForceCancelException {
         String newInput = Ui.receiveUserInput();
         setDateOfTrip(newInput);
     }
