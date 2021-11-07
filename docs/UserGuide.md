@@ -108,7 +108,7 @@ Adds a new expenditure to a month.
 Format: `add -e n/DESCRIPTION a/AMOUNT d/<DATE_OF_EXPENDITURE> c/<CATEGORY>`
 
 * The `DESCRIPTION` can be in a natural language format.
-  * NOTE: **Description has a 30characters limit**
+  * NOTE: **Description column has a 30characters limit, including index.**
 * The `AMOUNT` entered can be up to 2 decimal places and cannot be empty.
 * The `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_. 
   * If left empty, the current date according to the

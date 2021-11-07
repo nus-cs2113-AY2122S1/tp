@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class WriteToTextFileTest {
     @Test
-    void reloadArrayToStorage_() {
+    void reloadArrayToStorage_storageTxtSample_expectDataSuccessfullyWritten() {
         Storage storage = new Storage();
         storage.makeStorageTextFile("./data/2019.txt");
 

@@ -28,7 +28,6 @@ public class RecordList {
 
     public void addBudget(double spendingLimit, boolean isLoadingStorage) throws DuplicateBudgetException {
         if (!hasBudget) {
-            budget.clearAmount();
             budget.setAmount(spendingLimit);
             assert budget.getAmount() == spendingLimit;
             if (!isLoadingStorage) {

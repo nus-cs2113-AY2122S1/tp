@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+autonumber
+participant "parser:Parser" as P
+participant AddBudgetParser as ABP <<class>>
+participant ParserUtil as PU <<class>>
+
+?-> P : parseCommand("add -b a/400")
+activate P
+P -> P : prepareAddCommand("-b a/400")
+activate P
+P -> ABP : parse("a/400")
+activate ABP
+ABP -> P : splitArgs("a/400",["a/","m/"])
+activate P
+return
+ABP -> PU : parseMonth("")
+activate PU
+return
+ABP -> PU : parseAmount("400")
+activate PU
+return
+create ":AddBudgetCommand" as ABC
+ABP -> ABC
+activate ABC
+return :AddBudgetCommand
+return :AddBudgetCommand
+return :AddBudgetCommand
+return :AddBudgetCommand
+
+
+@enduml
