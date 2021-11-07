@@ -47,6 +47,11 @@ title: Developer Guide
 * [Glossary](#glossary)
 * [Instructions for manual testing](#instructions-for-manual-testing)
 * [Possible future updates](#possible-future-updates)
+  * [Automatically update database](#automatically-update-database)
+  * [Move database online for better security](#move-database-online-for-better-security)
+  * [Include more information on partner universities](#include-more-information-on-partner-universities)
+  * [Integrate SEP application process](#integrate-sep-application-process)
+  * [Bring SEPlanner to students from other faculties](#bring-seplanner-to-students-from-other-faculties)
 
 ## About SEPlanner
 SEPlanner is a lightweight desktop application for Computer Engineering undergraduates from the National University of Singapore
@@ -221,7 +226,7 @@ from the CSV type files (`University.csv` and `modules.csv`) stored in the resou
 The following diagram is the class diagram of the university related classes:
 
 <p align = "center">
-<img src="images/universities.png" width = "400" />
+<img src="images/universities.png" width = "300" />
 </p>
 
 This component consist of the following classes:  
@@ -241,12 +246,14 @@ This component consist of the following classes:
 * Can be used under the following 2 circumstances:
   * Stores the master list containing all universities available for CEG SEP application. This list is directly read from an external file `University.csv`.
   * Stores the selected list containing all universities added by the user. This list can be amended by the user, and all change to it will be stored under `data/selectedUniversities.txt`.
-* Contains methods to search, filter, or amend the list based on command from the user. 
+* Contains methods to search, filter, or amend the list based on command from the user.
+* There can be 2 `University` objects for the same university, one stored in each of the lists mentioned above. The object stored in the master list contains all the possible module mappings for this university based on our database, while the object stored in the selected list 
+stores the mappings added by the user. These 2 objects cannot be used interchangeably. While holding reference onto one of the objects, the user needs to call the method `getUniversity(universityName)` to access the corresponding object from the other list.
 
 The following diagram is the class diagram for the module related classes:  
 
 <p align = "center">
-<img src="images/modules.png" width = "400" />
+<img src="images/modules.png" width = "300" />
 </p>
 
 This component consist of the following classes:  
@@ -407,8 +414,9 @@ SEPlanner provides the users with a fast and easy experience to organise the map
 is done, users will still have to return to EduRec to submit their actual SEP application (which is extremely sow and inefficient as mentioned). The team 
 could look into further integration with EduRec in the future, and perform the application for users as well. This will make SEPlanner itself a sufficient 
 app for the entire SEP planning and applying process. 
+### Bring SEPlanner to students from other faculties
 The current version is only designed for CEG students from NUS, the team can further improve in the future by including more details for students from other 
-faculties, thus making SEPlanner the go-to choice for every single NUS student planning for their SEP.
+faculties, and a graphical interface, thus making SEPlanner the go-to choice for every single NUS student planning for their SEP.
 
 ## Instructions for manual testing
 
