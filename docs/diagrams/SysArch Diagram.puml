@@ -3,6 +3,8 @@
 !include <office/Users/user>
 !include style.puml
 
+hide members
+
 Package "SITUS"<<Rectangle>>{
     Class UI UI_COLOUR
     Class Parser PARSER_COLOUR
