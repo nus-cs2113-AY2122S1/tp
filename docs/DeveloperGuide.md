@@ -76,20 +76,21 @@ Name     | Description                                                 | Example
 -----    | ----------------------------------------------------------- | ---------------------
 Goal     | A long term achievement you wish to accomplish.             |`Lose 5kg by Dec`
 Habit    | Small, actionable tasks to be done to achieve goal.         |`Run 5km`
-Interval | The frequency (in days) which you want the habit to recur.  |`Run 5km every 7 days`
+Interval | The time period (in days) which you want the habit to recur.  |`Run 5km every 7 days`
 
-One goal can have one or more habits.\
-One habit can have one or more intervals.
+A goal can have one or more habits.\
+A habit can have one or more intervals.
 
 ### 1.3. Icons and Format
 
-> 📃 **Notes**: important information you should take note off (especially if you encounter input errors)
+> 📃 **Note**: important information you should take note off (especially if you encounter input errors)
 
-> ⚠ **Warning**: avoid doing the things mentioned here at all costs (unless you're feeling lucky)
+> ⚠️ **Warning**: avoid doing the things mentioned here at all costs (unless you're feeling lucky)
 
 > 💡 **Pro-Tip!** additional information that may make your tracking journey easier
 
 ## 2. Setting Up
+The following section covers basic setup instructions to get you up and running on the HappyBit development environment.
 
 ### 2.1. Application Requirements
 
@@ -100,7 +101,7 @@ One habit can have one or more intervals.
 
 ### 2.2. Project Set-Up
 
-> ⚠ Follow the steps in the following guide exactly. Any deviations may result in the code failing to run as intended.
+> ⚠️ **Warning**: Follow the steps in the following guide exactly. Any deviations may result in the code failing to run as intended.
 
 1. Start IntelliJ IDEA.
 2. If you are currently on a project, close the project.
@@ -132,7 +133,7 @@ The 5 main components of the architecture diagram are:
 The sequence diagram below shows how the components interact with each other for the scenario where the user issues the
 command `remove g/1` to remove the goal at index 1.
 
-![Ui Diagram](Diagram%20Images/Design%20Diagram%20Images/ArchitectureSequenceDiagram.png)
+![Architecture Sequence Diagram](Diagram%20Images/Design%20Diagram%20Images/ArchitectureSequenceDiagram.png)
 
 ### 3.2. UI Component
 
@@ -141,6 +142,7 @@ into 2 sub-components: `UiManager.java` for static interface displays, and `Prin
 displays (display messages in response to user input). The diagrams below illustrates the high level representation of
 each sub-component.
 
+### 3.2.1 UiManager
 ![Ui Manager](Diagram%20Images/Design%20Diagram%20Images/UiManagerComponent.png)
 
 **API:** `UiManager.java`
@@ -151,13 +153,16 @@ each sub-component.
 3. `UiMain` calls `Goal` to display a static view of all habits to be done for the day.
 4. `UiMain` calls `Storage` to display alerts for status of storage imports and exports.
 
+### 3.2.2 PrintManager
 ![Print Manager](Diagram%20Images/Design%20Diagram%20Images/PrintManagerComponent.png)
 
 **API:** `PrintManager.java`
 
 1. `PrintManager` is called upon by user commands to display text or error messages.
-2. `PrintManager` may call `PrintTable` to print a list of items in a tabular format.
-3. `PrintManager` calls `Goal` to obtain goal-related information for printing.
+2. `PrintManager` may call `PrintTable` to print a list of items in a tabular format, for example when a user inputs
+the `help` command to view a summary of formats of relevant commands in a tabular form.
+3. `PrintManager` depends on `Goal` and `Habit` to print goal-related and habit-related information respectively.
+// TODO: Update the Print Manager diagram above to include the Habit class
 
 ### 3.3. Parser Component
 
@@ -242,11 +247,11 @@ level representation of the component and the interactions between the other com
 
 ## 4. Implementation
 
-This section describes some noteworthy details on how certain features are implemented.
+This section describes some noteworthy details on how the main features are implemented.
 
 ### 4.1. Adding a Goal
 
-When the `runCommand` function is executed for the `AddGoalCommand` object, the following steps as indicated by the
+When the `runCommand` method is executed for the `AddGoalCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
 
 ![](https://www.planttext.com/api/plantuml/img/ZLB1QiCm3BtxAqGltI1fxcQCZWvwwM2mwouY5fuXbZDRsVVFIGepn2sxoUz9xptBFYR1A9CVrFvBP4owwyO1UKOEVV1Tek-9kAVMEBGHlMgVOQVXnPXpmE4Kl4Ss6OWJNmyFDXCNbqJ3-LeryCbZT2nlo6WfQdWlJWqa2J5N6ZxMub5XB-u7XIfUIcqnc5DjVNCZherBg9Leu7QKqhWYbwqhw69-MtC7UdNCcUalpC6Il5Bgenl51PxldfjicU2EPZt8KzlUdpBqF_NQYXVnsb9AqHg_36wViHpRiaTYa__WBm00)
@@ -259,21 +264,21 @@ sequence diagram below is carried out:
 
 ### 4.3. Listing all Goals
 
-When the `runCommand` function is executed for the `ListGoalsCommand` object, the following steps as indicated by the
+When the `runCommand` method is executed for the `ListGoalsCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
 
 ![](Diagram Images/Implementation Diagram Images/ListGoalsCommandSequenceDiagram.png)
 
 ### 4.4. Listing all Habits
 
-When the `runCommand` function is executed for the `ListHabitsCommand` object, the following steps as indicated by the
+When the `runCommand` method is executed for the `ListHabitsCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
 
 ![](Diagram Images/Implementation Diagram Images/ListHabitsCommandSequenceDiagram.png)
 
 ### 4.5. Completing a Habit
 
-When the `runCommand` function is executed for the `DoneHabitCommand` object, the following steps as indicated by the
+When the `runCommand` method is executed for the `DoneHabitCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
 
 ![](Diagram Images/Implementation Diagram Images/DoneCommandSequenceDiagram.png)
@@ -284,21 +289,21 @@ sequence diagram below is carried out:
 
 ### 4.8. Deleting a Goal
 
-When the `runCommand` function is executed for the `DeleteGoalCommand` object, the following steps as indicated by the
+When the `runCommand` method is executed for the `DeleteGoalCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
 
 ![](Diagram Images/Implementation Diagram Images/DeleteGoalCommandSequenceDiagram.png)
 
 ### 4.9. Deleting a Habit
 
-When the `runCommand` function is executed for the `DeleteHabitCommand` object, the following steps as indicated by the
+When the `runCommand` method is executed for the `DeleteHabitCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
 
 ![](Diagram Images/Implementation Diagram Images/DeleteHabitCommandSequenceDiagram.png)
 
 ### 4.10. Getting Help
 
-When the `runCommand` function is executed for the `HelpCommand` object, it instantiates a `PrintManager` object and
+When the `runCommand` method is executed for the `HelpCommand` object, it instantiates a `PrintManager` object and
 calls the `printCommandList` method which prints out a pre-set message informing the user of all the inputs they
 can type to execute a certain command.
 
