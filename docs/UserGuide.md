@@ -1,50 +1,11 @@
 # User Guide
 
-## Introduction
 Restaurant Buddy is a desktop application designed for restaurant managers to help **keep track of restaurant data** 
 such as its employees, dishes in the menu and ingredients in storage via a **Command Line Interface (CLI)**.
 In particular, Restaurant Buddy was developed specifically for users who can type fast and prefer typing to other 
 means of input. 
 
-## Purpose
-This user guide is designed for managers (or employees undertaking managerial roles) who oversee operations 
-at a restaurant. This user guide provides the necessary information on how to utilise Restaurant Buddy 
-to its fullest potential. There is little to no prior technical knowledge needed, everything you need to get
-started will be included in the next section under "How To Use". However, a simple understanding of how
-a restaurant runs is assumed.
-
-## How To Use
-Restaurant Buddy is a Command-Line-Interface (CLI) application. This means that the interaction between you
-and the application is purely through a single line of words. In order to do a desired action, simply type in the 
-command according to a specified format and press enter on your keyboard. The format of inputs that you can type 
-into the application is specified in the document later on from Section 2: Features onwards. These are also highlighted
-throughout the user guide.
-
-In this user guide, there are multiple references to terms like 'employee', 'dish', 'ingredient' and 'finance'.
-These four terms are the key areas that Restaurant Buddy aims to help restaurant managers through. These four
-terms are defined below:
-- 'Employee' refers to any person working for the restaurant.
-- 'Dish' refers to any individual food or beverage that is sold at the restaurant. Multiple 'dish' collated in
-a single list makes up a 'menu'.
-- 'Ingredient' refers to any materials that is used to create a 'dish' that is currently in storage at the restaurant.
-- 'Finance' refers to the amount of money earned or spent, recorded at the end of the day or week.
-
-In addition, there are certain conventions throughout the user guide:
-- highlighted words such as `add-employee/EMPLOYEE_NAME/PHONE_NUMBER` indicates a command that can be typed onto
-the command line interface
-- expected output is placed inside a box such as the box below
-```
----------------------------------------------
-This is an example of expected outputs.
-Restaurant Buddy communicates with you this way!
----------------------------------------------
-```
-- hyperlinks (which brings you directly to the section of the user guide you are interested in) are words in the 
-colour blue - an example is the blue text in the contents section below
-
-
-## Contents
-1. [Quick start](#1-quick-start)
+1. [Quick Start](#1-quick-start-for-windows)
 2. [Features](#2-features)
    1. [Employee](#2i-employee)
       1. [Adding an employee: `add-employee`](#2ia-adding-an-employee-add-employee)
@@ -67,12 +28,15 @@ colour blue - an example is the blue text in the contents section below
       3. [Editing a finance record: `edit-finance`](#2ivc-editing-a-finance-record-edit-finance)
       4. [Showing total account of finance records: `show-finance`](#2ivd-showing-total-account-of-finance-records-show-finance)
       5. [Listing all finance records: `list-finance`](#2ive-listing-all-finance-records-list-finance)
-   5. [Exiting the program: `bye`](#2v-exiting-the-program-bye)
+   5. [Listing all commands: `help`](#2v-listing-all-commands-help)
+   6. [Exiting the program: `bye`](#2vi-exiting-the-program-bye)
 3. [FAQ](#3-faq)
 4. [Command Summary](#4-command-summary)
 
-## 1. Quick start
-1. Ensure you have **Java 11** or above installed on your computer.
+---
+
+## 1. Quick Start for Windows
+1. Ensure you have **Java 11** or above installed on your Windows computer.
 2. Download the latest `tp.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-4/tp/releases).
 3. Copy the file to the folder you want to use as the _home folder_ for Restaurant Buddy.
 4. Navigate to your _home folder_ as chosen in step 3 in command prompt.
@@ -83,6 +47,8 @@ colour blue - an example is the blue text in the contents section below
 5. Type `java -jar tp.jar` in the command prompt and press enter to run Restaurant Buddy.
 6. Type a command in Restaurant Buddy's command box and press enter to execute it.
 7. Refer to the **[Features](#2-features)** below for details of all available commands.
+
+---
 
 ## 2. Features
 **Notes about the command format:**
@@ -399,8 +365,53 @@ Example:
 ---------------------------------------------
 ```
 
+### 2.v Listing all commands: `help`
 
-### 2.v Exiting the program: `bye`
+Lists all commands.
+
+Format: `help`
+
+Example: `help`
+
+```
+---------------------------------------------
+Hello! You seem like you need a hand to get started.
+To interact with Restaurant Buddy, type in any of the following commands and press Enter!
+The words that are CAPITALISED are the parameters that you can change.
+---------------------------------------------
+- Employee Commands:
+add-employee/EMPLOYEE_NAME/PHONE_NUMBER/EMPLOYMENT_STATUS/SALARY
+remove-employee/EMPLOYEE_INDEX
+list-employee
+---------------------------------------------
+- Menu Commands:
+add-dish/DISH_NAME/PRICE
+remove-dish/DISH_INDEX
+edit-dish/DISH_INDEX/NEW_PRICE
+discount-dish/DISH_INDEX/DISCOUNT(%)
+list-dish
+---------------------------------------------
+- Ingredient Commands:
+add-ingredient/INGREDIENT_NAME/QUANTITY
+remove-ingredient/INGREDIENT_INDEX
+list-ingredient
+---------------------------------------------
+- Finance Commands:
+add-finance/DATE/ACCOUNT
+remove-finance/FINANCE_INDEX
+edit-finance/FINANCE_INDEX/NEW_ACCOUNT
+show-finance
+list-finance
+---------------------------------------------
+To exit the program safely, please type in the command:
+bye
+---------------------------------------------
+If you require more help, please refer to the User Guide on Github.
+Let's get started at once! Feel free to try out the commands :D
+---------------------------------------------
+```
+
+### 2.vi Exiting the program: `bye`
 Exits the program.
 
 Format: `bye`
@@ -417,10 +428,14 @@ Example:
 ---------------------------------------------
 ```
 
+---
+
 ## 3. FAQ
 **Q**: How do I transfer my data to another computer?
 
 **A**: Copy the _home folder_ of Restaurant Buddy over to the other computer and run it as usual.
+
+---
 
 ## 4. Command Summary
 
@@ -442,4 +457,5 @@ Example:
 | edit-finance | `edit-finance/FINANCE_INDEX/NEW_ACCOUNT` |
 | show-finance | `show-finance` |
 | list-finance | `list-finance` |
+| help | `help` |
 | bye | `bye` |

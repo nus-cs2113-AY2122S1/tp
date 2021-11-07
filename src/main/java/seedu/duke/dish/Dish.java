@@ -14,7 +14,7 @@ public class Dish {
     /**
      * Constructs an instance of Dish.
      *
-     * @param name Name of the dish.
+     * @param name  Name of the dish.
      * @param price Price of the dish.
      */
     public Dish(String name, double price) {

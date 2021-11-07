@@ -20,8 +20,8 @@ public class IngredientUI {
         MainUI.printSingleLine();
         System.out.println(" Invalid command syntax!");
         printSampleCommandSyntaxMessage(command);
-        System.out.println(" Please refer to our user guide for more details: " +
-                "https://ay2122s1-cs2113t-t12-4.github.io/tp/UserGuide.html");
+        System.out.println(" Please refer to our user guide for more details: "
+                + "https://ay2122s1-cs2113t-t12-4.github.io/tp/UserGuide.html");
         MainUI.printSingleLine();
     }
 

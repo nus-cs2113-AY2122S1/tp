@@ -2,8 +2,6 @@
 
 package seedu.duke.employee;
 
-import seedu.duke.main.MainUI;
-
 import java.security.InvalidParameterException;
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -22,7 +20,7 @@ public class EmployeeParser {
      * Requires critical information of the employee to be added such as name, phone number,
      * employment status and salary.
      *
-     * @param command contains the input from users.
+     * @param command    contains the input from users.
      * @param masterList references to the list of employees where changes will be made.
      */
     public void addEmployee(String[] command, EmployeeList masterList) {
@@ -32,7 +30,7 @@ public class EmployeeParser {
             Employee employee = new Employee(command[1].stripLeading().stripTrailing(),
                     checkNumber(command[2].stripLeading().stripTrailing()),
                     convertToStatus(command[3].stripLeading().stripTrailing()),
-                    checkSalary(command[4].stripLeading().stripTrailing()) );
+                    checkSalary(command[4].stripLeading().stripTrailing()));
 
             checkDuplicate(employee, masterList);
 
@@ -54,11 +52,11 @@ public class EmployeeParser {
     /**
      * Checks for duplicate entries by comparing user input with every single existing employee.
      *
-     * @param employee contains the user input for the new employee.
+     * @param employee   contains the user input for the new employee.
      * @param masterList references to the list of employees where changes will be made
      */
     private void checkDuplicate(Employee employee, EmployeeList masterList) {
-        for(int i = 0; i < masterList.totalEmployee; i += 1) {
+        for (int i = 0; i < masterList.totalEmployee; i += 1) {
             compareEmployee(employee, masterList, i);
         }
     }
@@ -66,22 +64,44 @@ public class EmployeeParser {
     /**
      * Checks for duplicate entries by comparing user input with a single employee.
      *
-     * @param employee contains the user input for the new employee.
+     * @param employee   contains the user input for the new employee.
      * @param masterList references to the list of employees where changes will be made
-     * @param i refers to the index of the current employee in the existing list that the
-     *          new employee is being compared to.
+     * @param i          refers to the index of the current employee in the existing list that the
+     *                   new employee is being compared to.
      */
-    private void compareEmployee(Employee employee, EmployeeList masterList, int i) {
+    public void compareEmployee(Employee employee, EmployeeList masterList, int i) {
         if (Objects.equals(employee.getName(), masterList.employeeList.get(i).getName())) {
             if (Objects.equals(employee.getPhoneNum(), masterList.employeeList.get(i).getPhoneNum())) {
                 if (Objects.equals(employee.getStatus(), masterList.employeeList.get(i).getStatus())) {
-                    if(Objects.equals(employee.getSalary(), masterList.employeeList.get(i).getSalary())) {
+                    if (Objects.equals(employee.getSalary(), masterList.employeeList.get(i).getSalary())) {
                         EmployeeUI.printDuplicateEntryMessage(i);
                         throw new InvalidParameterException();
                     }
                 }
             }
         }
+    }
+
+    /**
+     * Checks for duplicate entries by comparing user input with a single employee.
+     *
+     * @param employee   contains the user input for the new employee.
+     * @param masterList references to the list of employees where changes will be made
+     * @param i          refers to the index of the current employee in the existing list that the
+     *                   new employee is being compared to.
+     */
+    public boolean isDuplicateEmployee(Employee employee, EmployeeList masterList, int i) {
+        if (Objects.equals(employee.getName(), masterList.employeeList.get(i).getName())) {
+            if (Objects.equals(employee.getPhoneNum(), masterList.employeeList.get(i).getPhoneNum())) {
+                if (Objects.equals(employee.getStatus(), masterList.employeeList.get(i).getStatus())) {
+                    if (Objects.equals(employee.getSalary(), masterList.employeeList.get(i).getSalary())) {
+                        EmployeeUI.printDuplicateEntryMessage(i);
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -92,7 +112,7 @@ public class EmployeeParser {
      * @return the user input in integer format.
      * @throws NumberFormatException If input from user is invalid.
      */
-    private int checkSalary(String number) {
+    public int checkSalary(String number) {
         int num = Integer.parseInt(number);
         if (num <= 0) {
             EmployeeUI.printInvalidSalaryMessage();
@@ -109,7 +129,7 @@ public class EmployeeParser {
      * @return the user input in integer format.
      * @throws NumberFormatException If input from user is invalid.
      */
-    private int checkNumber(String number) {
+    public int checkNumber(String number) {
         int num = Integer.parseInt(number);
         if (num <= 0) {
             EmployeeUI.printInvalidPhoneNumberMessage();
@@ -123,14 +143,15 @@ public class EmployeeParser {
      * Requires critical information of the employee to be added such as name, phone number,
      * employment status and salary.
      *
-     * @param command contains the input from storage.
+     * @param command    contains the input from storage.
      * @param masterList references to the list of employees where changes will be made.
      */
     public void addEmployeeFromStorage(String[] command, EmployeeList masterList) {
         logger.log(Level.FINE, "going to add employee");
 
-        Employee.employmentStatus status = convertToStatus(command[3]);
-        Employee employee = new Employee(command[1], Integer.parseInt(command[2]), status, Integer.parseInt(command[4]));
+        Employee.EmploymentStatus status = convertToStatus(command[3]);
+        Employee employee = new Employee(command[1], Integer.parseInt(command[2]),
+                status, Integer.parseInt(command[4]));
 
         masterList.employeeList.add(employee);
         masterList.totalEmployee += 1;
@@ -147,18 +168,18 @@ public class EmployeeParser {
      * @return enum of employment status.
      * @throws InvalidParameterException If input from user is invalid.
      */
-    private Employee.employmentStatus convertToStatus(String input) throws InvalidParameterException {
+    public Employee.EmploymentStatus convertToStatus(String input) throws InvalidParameterException {
         logger.log(Level.FINE, "going to convert employee status from string to enum");
         switch (input) {
         case "perm":
         case "PERM":
-            return Employee.employmentStatus.PERM;
+            return Employee.EmploymentStatus.PERM;
         case "temp":
         case "TEMP":
-            return Employee.employmentStatus.TEMP;
+            return Employee.EmploymentStatus.TEMP;
         case "adhoc":
         case "ADHOC":
-            return Employee.employmentStatus.ADHOC;
+            return Employee.EmploymentStatus.ADHOC;
         default:
             EmployeeUI.printInvalidEmploymentStatusMessage();
             throw new InvalidParameterException();
@@ -169,7 +190,7 @@ public class EmployeeParser {
      * Deletes a single employee from the list of employees.
      * Requires information on which employee to remove, which must be specified by user.
      *
-     * @param command contains the input from storage.
+     * @param command    contains the input from storage.
      * @param masterList references to the list of employees where changes will be made.
      */
     public void deleteEmployee(String[] command, EmployeeList masterList) {

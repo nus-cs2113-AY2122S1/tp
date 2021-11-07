@@ -23,7 +23,7 @@ public class IngredientParserTest {
         IngredientList ingredients = new IngredientList();
         IngredientParser ingredientParser = new IngredientParser();
         String[] addCommand = "add-ingredient/Banana/30/1.50/2021-12-01".trim().split("/");
-        String[] removeCommand= "remove-ingredient/1".trim().split("/");
+        String[] removeCommand = "remove-ingredient/1".trim().split("/");
         ingredientParser.addIngredient(addCommand, ingredients);
         ingredientParser.deleteIngredient(removeCommand, ingredients);
         assertEquals(0, ingredients.ingredientList.size());

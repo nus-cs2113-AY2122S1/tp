@@ -75,7 +75,7 @@ public class EmployeeUI {
     public static void printDuplicateEntryMessage(int i) {
         MainUI.printSingleLine();
         System.out.println("You have entered the exact same employee details before.");
-        System.out.println("Refer to your employee with index \'" + (i+1) + "\' when you type in list-employee.");
+        System.out.println("Refer to your employee with index \'" + (i + 1) + "\' when you type in list-employee.");
         System.out.println("This is a duplicate!");
         MainUI.printSingleLine();
     }

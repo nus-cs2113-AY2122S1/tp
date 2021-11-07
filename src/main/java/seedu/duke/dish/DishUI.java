@@ -12,7 +12,7 @@ public class DishUI {
     /**
      * Prints a message to the user whenever a dish is added.
      *
-     * @param newDish Dish added.
+     * @param newDish   Dish added.
      * @param dishIndex Index number of the added dish as shown in the displayed menu.
      */
     public static void printAddDishMessage(Dish newDish, int dishIndex) {
@@ -25,7 +25,7 @@ public class DishUI {
     /**
      * Prints a message to the user whenever a dish is removed.
      *
-     * @param oldDish Dish removed.
+     * @param oldDish   Dish removed.
      * @param dishIndex Index number of the added dish as shown in the displayed menu.
      */
     public static void printRemoveDishMessage(Dish oldDish, int dishIndex) {
@@ -68,7 +68,7 @@ public class DishUI {
     /**
      * Prints a message to the user whenever a dish's price is edited.
      *
-     * @param newDish Dish which price has been edited.
+     * @param newDish   Dish which price has been edited.
      * @param dishIndex Index number of the added dish as shown in the displayed menu.
      */
     public static void printEditDishMessage(Dish newDish, int dishIndex) {
@@ -82,7 +82,7 @@ public class DishUI {
      * Prints a message to the user whenever a discount is added to a dish.
      *
      * @param discountedDish Dish which a discount has been added to.
-     * @param dishIndex Index number of the added dish as shown in the displayed menu.
+     * @param dishIndex      Index number of the added dish as shown in the displayed menu.
      */
     public static void printDiscountDishMessage(Dish discountedDish, int dishIndex) {
         boolean originalPrice = discountedDish.getDiscount() == 0;
