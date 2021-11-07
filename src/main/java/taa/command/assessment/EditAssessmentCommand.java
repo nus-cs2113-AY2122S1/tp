@@ -31,11 +31,12 @@ public class EditAssessmentCommand extends Command {
     private static final String MESSAGE_FORMAT_EDIT_ASSESSMENT_USAGE = "%s %s/<CLASS_ID> "
         + "%s/<ASSESSMENT_NAME> [%s/<NEW_ASSESSMENT_NAME> | %s/<NEW_MAXIMUM_MARKS> | %s/<NEW_WEIGHTAGE>]";
     private static final String MESSAGE_FORMAT_INVALID_NEW_WEIGHTAGE = "Invalid new weightage. "
-        + "Weightage must be a number between %,.2f (inclusive) and %,.2f (inclusive).";
+        + "Weightage must be a number with at most 2 decimal places between %,.2f (inclusive) and %,.2f (inclusive).";
     private static final String MESSAGE_FORMAT_INVALID_NEW_TOTAL_WEIGHTAGE = "Invalid new weightage. "
         + "Total new weightage exceeds %,.2f%%.";
     private static final String MESSAGE_FORMAT_INVALID_NEW_MAXIMUM_MARKS = "Invalid new maximum marks. "
-        + "Maximum marks must be number a between %,.2f (inclusive) and %,.2f (inclusive).";
+        + "Maximum marks must be a number with at most 2 decimal places "
+        + "between %,.2f (inclusive) and %,.2f (inclusive).";
     private static final String MESSAGE_FORMAT_INVALID_NEW_NAME = "Invalid new name. "
         + "An assessment with the same name already exists.";
     private static final String MESSAGE_FORMAT_ASSESSMENT_EDITED = "Assessment in %s updated:\n  %s";
@@ -63,7 +64,7 @@ public class EditAssessmentCommand extends Command {
 
         String newMaximumMarksString = argumentMap.getOrDefault(KEY_NEW_MAXIMUM_MARKS, null);
         if (newMaximumMarksString != null) {
-            if (!Util.isStringDouble(newMaximumMarksString)) {
+            if (!Util.isStringDouble(newMaximumMarksString, 2)) {
                 throw new TaaException(String.format(
                     MESSAGE_FORMAT_INVALID_NEW_MAXIMUM_MARKS,
                     Assessment.MAXIMUM_MARKS_RANGE[0],
@@ -74,7 +75,7 @@ public class EditAssessmentCommand extends Command {
 
         String newWeightageString = argumentMap.getOrDefault(KEY_NEW_WEIGHTAGE, null);
         if (newWeightageString != null) {
-            if (!Util.isStringDouble(newWeightageString)) {
+            if (!Util.isStringDouble(newWeightageString, 2)) {
                 throw new TaaException(String.format(
                     MESSAGE_FORMAT_INVALID_NEW_WEIGHTAGE,
                     Assessment.WEIGHTAGE_RANGE[0],
@@ -153,7 +154,7 @@ public class EditAssessmentCommand extends Command {
 
     public boolean checkWeightage(String newWeightageString, AssessmentList assessmentList, String name)
             throws TaaException {
-        assert Util.isStringDouble(newWeightageString);
+        assert Util.isStringDouble(newWeightageString, 2);
         double newWeightage = Double.parseDouble(newWeightageString);
         if (!Assessment.isWeightageWithinRange(newWeightage)) {
             throw new TaaException(String.format(
@@ -180,7 +181,7 @@ public class EditAssessmentCommand extends Command {
     }
 
     public boolean checkMaximumMarks(String newMaximumMarksString) throws TaaException {
-        assert Util.isStringDouble(newMaximumMarksString);
+        assert Util.isStringDouble(newMaximumMarksString, 2);
         double newMaximumMarks = Double.parseDouble(newMaximumMarksString);
         if (!Assessment.isMaximumMarksValid(newMaximumMarks)) {
             throw new TaaException(String.format(
