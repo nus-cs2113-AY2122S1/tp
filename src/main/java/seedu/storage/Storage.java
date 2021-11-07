@@ -52,6 +52,12 @@ public class Storage {
     }
 
     //@@author marcusbory
+    /**
+     * Checks if there is already an existing local storage file, and attempts to create a new local storage file for
+     * data persistence if one does not exist.
+     * @return boolean Returns true if local storage file exists
+     * @throws FileErrorException If there are errors writing or checking for local storage files
+     */
     private boolean hasExistingContactFile() throws FileErrorException {
         try {
             if (!contactFile.exists()) {
@@ -67,6 +73,12 @@ public class Storage {
         return true;
     }
 
+    /**
+     * Attempts to decode and retrieve existing contacts from a user's local storage file, or returns a new contact
+     * list if no local storage files are found.
+     * @return ContactList Decoded contact list from local storage file
+     * @throws FileErrorException If there are errors reading from local storage file
+     */
     public ContactList loadExistingContacts() throws FileErrorException {
         if (!hasExistingContactFile()) {
             return new ContactList();
