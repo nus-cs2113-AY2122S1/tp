@@ -52,25 +52,43 @@ public class ContactsDecoder extends RegexParser {
         return updatedContactList;
     }
 
-    //@@author lezongmun
+    //@author lezongmun
+    /**
+     * This method returns the personal contact after parsing inputs from the specified
+     * personal contact file in local storage.
+     *
+     * @param personalContactFile Specified file to be read
+     * @return Personal contact of user
+     * @throws FileErrorException If the program faces issues relating to local storage
+     */
     public Contact readPersonalContact(File personalContactFile)
             throws FileErrorException {
-        Contact personalContact = new Contact(null, null, null, null, null, null);
+        Contact nullContact = new Contact(null, null, null, null, null, null);
         try {
             Scanner fileScanner = new Scanner(personalContactFile);
             if (fileScanner.hasNext()) {
                 String contactText = fileScanner.nextLine();
-                personalContact = decodePersonalContact(contactText, personalContact);
+                Contact personalContact = decodePersonalContact(contactText);
+                return personalContact;
             }
         } catch (FileNotFoundException e) {
             throw new FileErrorException();
         }
-        return personalContact;
+        return nullContact;
     }
 
     //@author lezongmun
-    private Contact decodePersonalContact(String contactText, Contact contact) {
-        Contact personalContact = contact;
+    /**
+     * This method decodes a string read from the personal contact file and
+     * attempts to parse it as a contact. If there are errors in the file,
+     * and the data cannot be loaded, user's personal contact details will
+     * be prompted to create a new personal contact
+     *
+     * @param contactText String read from the file
+     * @return personal contact with details read from file
+     */
+    private Contact decodePersonalContact(String contactText) {
+        Contact personalContact = new Contact(null, null, null, null, null, null);
         try {
             String[] compiledDetails = decodeDetails(contactText);
             String contactName = compiledDetails[DetailType.NAME.getIndex()];
