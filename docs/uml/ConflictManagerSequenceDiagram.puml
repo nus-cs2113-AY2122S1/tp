@@ -9,6 +9,7 @@ endbox
 box Content CONTENT_BOX_COLOR
 participant ":ConflictManager" as ConflictManager CONTENT_COLOR
 participant ":ContentManager" as ContentManager CONTENT_COLOR
+participant ":Link" as Link CONTENT_COLOR
 endbox
 
 box Module MODULE_BOX_COLOR
@@ -16,49 +17,36 @@ participant ":ModuleManager" as ModuleManager MODULE_COLOR
 participant ":NusModule" as NusModule MODULE_COLOR
 endbox
 
+autoactivate on
 
-Activate AddLinkCommand
+activate AddLinkCommand
 create ConflictManager
-AddLinkCommand -> ConflictManager: ConflictManager()
-Activate ConflictManager
+AddLinkCommand -> ConflictManager: ConflictManager(moduleManager, newLink)
+return
+AddLinkCommand -> ConflictManager: getConflictingSchedule()
+  ConflictManager -> ConflictManager: getAllLinks()
+    ConflictManager -> ModuleManager: getAllModules()
+    return modules
 
-ConflictManager -> ConflictManager: getConflictingSchedule()
-Activate ConflictManager
+    loop For each NusModule in modules
 
-ConflictManager -> ConflictManager: getAllLinks()
-Activate ConflictManager
+      ConflictManager -> ModuleManager: getModule(NusModule)
+      return NusModule
 
-ConflictManager -> ModuleManager: getAllModules()
-Activate ModuleManager
-NusModule --> ModuleManager: modules
-Activate NusModule
+     ConflictManager-> NusModule : getContentManager()
+     return ContentManager
 
-loop For each NusModule in modules
-    ModuleManager -> NusModule: getModule(NusModule)
-    Deactivate ModuleManager
-    NusModule -> ContentManager : getContentManager()
-    Activate ContentManager
-    Deactivate NusModule
-    ContentManager -> ContentManager: getContents()
-    Activate ContentManager
-    ContentManager --> ContentManager: contents
-    Deactivate ContentManager
-    ContentManager --> ConflictManager: addAll(contents)
-    Deactivate ContentManager
-    ConflictManager --> ConflictManager: AllLinks
-    Deactivate ConflictManager
-
+      ConflictManager -> ContentManager: getContents()
+      return Links
+    end
+    return Links
     loop For each Link in AllLinks
         opt same day && overlapping start-time to end-time
-        ConflictManager -> ConflictManager: append(LinkDescription)
-        ConflictManager --> ConflictManager: conflictingSchedule
-        Deactivate ConflictManager
+          ConflictManager -> Link :getViewDescription()
+          return description
+        end
     end
-end
 
-
-end
-
-ConflictManager --> AddLinkCommand: conflictingSchedule
+return conflictingSchedule
 destroy ConflictManager
 @enduml
