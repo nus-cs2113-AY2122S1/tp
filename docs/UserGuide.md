@@ -312,10 +312,10 @@ Format: `set_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<MARKS>`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 * `ASSESSMENT_NAME` refers to the name of the particular assessment.
-* `MARKS` refers to the marks given for the assessment.
+* `MARKS` refers to the marks given for the assessment. Input can only have 2 decimal points at most.
 
 Examples:
-* `set_mark c/CS2113T s/1 a/Midterms m/70.6`
+* `set_mark c/CS2113T s/1 a/Midterms m/70.65`
 * `set_mark c/CS2101 s/3 a/Oral Presentation m/80`
 
 Expected Output: <br>
@@ -330,10 +330,10 @@ Format: `edit_mark c/<CLASS_ID> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<NEW_MAR
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 * `ASSESSMENT_NAME` refers to the name of the particular assessment.
-* `NEW_MARKS` refers to the new marks to be given for the assessment.
+* `NEW_MARKS` refers to the new marks to be given for the assessment. Input can only have 2 decimal points at most.
 
 Examples:
-* `edit_mark c/CS2113T-F12 s/1 a/Midterms m/80.6`
+* `edit_mark c/CS2113T-F12 s/1 a/Midterms m/80.65`
 * `edit_mark c/CS2101-C03 s/3 a/Oral Presentation m/90`
 
 Expected Output: <br>
