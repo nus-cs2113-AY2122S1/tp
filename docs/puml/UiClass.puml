@@ -3,155 +3,47 @@
 hide circle
 skinparam classAttributeIconSize 0
 
-class seedu.duke.Duke {
+class seedu.foodorama.Foodorama {
 + {static} void main(String[])
 }
-class seedu.duke.Ingredient {
-- {static} Ui ui
-- String ingredientName
-- double ingredientWeight
-- double ingredientWasteIngr
-+ double ingredientWasteDish
-+ String getIngredientName()
-+ double getIngredientWeight()
-+ void updateIngredientWeight()
-+ void addWaste()
-+ double getWastage()
-+ String toString()
-+ String formatData()
-+ void addDishWaste(Double)
-+ String toGraph(double)
-+ int compareTo(Ingredient)
+class seedu.foodorama.Ingredient {
+
 }
-class seedu.duke.DishList {
-+ {static} ArrayList<Dish> dishList
-+ {static} Ui ui
-+ {static} void add(String)
-+ {static} double getGreatestWaste()
-+ {static} int find(String)
-+ {static} void list()
-+ {static} void graph()
-+ {static} void delete(String)
-+ {static} void clearList()
+class seedu.foodorama.DishList {
+
 }
-class seedu.duke.ClearScreen {
+class seedu.foodorama.ClearScreen {
 + {static} void main(String[])
 + {static} void clearConsole()
 }
-class seedu.duke.Ui {
-- {static} String LINE_DIVIDER
-- {static} String START_LOGO
-- {static} String EXIT_LOGO
-- {static} String WELCOME_MESSSAGE
-- {static} String NEWPAGE_MESSSAGE
-- {static} String HELP_ME
-- {static} String EXIT_MESSAGE
-- {static} String INVALID_COMMAND
-- {static} String INVALID_PARAMETERS
-+ {static} String INVALID_NUMBER
-- {static} String LIST_MISSING_PARAM
-- {static} String DISH_EXISTS
-- {static} String DISH_NOTEXIST
-- {static} String DISHNAME_MISSING
-- {static} String DISH_SORT
-- {static} String DISH_LIST_CLEARED
-- {static} String INGRNAME_MISSING
-- {static} String INGR_NOTEXIST
-- {static} String INGR_EXISTS
-- {static} String INGR_SORT
-- {static} String INGR_LIST_CLEARED
-- {static} String ALL_CLEARED
-+ {static} String FIND_MISSING_PARAM
-+ {static} String FIND_INVALID_PARAM
-+ {static} String GRAPH_INVALID_PARAM
-+ void printLogo()
-+ void printWelcomeMsg()
-+ void printExitMsg()
-+ String getLineDivider()
-+ String getInvalidCommandMsg()
-+ String getInvalidNumberMsg()
-+ String getListMissingParamMsg()
-+ String getDishNameMissingMsg()
-+ String getDishNotExistMsg(String)
-+ void printDishNotExistMsg()
-+ void printDishExistsMsg()
-+ void printAddedDish(String)
-+ void printDishNameRemoved(String)
-+ void printDishList(ArrayList<Dish>)
-+ void printAddedIngredient(Ingredient,double)
-+ void printIngrList(ArrayList<Ingredient>)
-+ void printIngrNameRemoved(String)
-+ String getIngrNameMissingMsg()
-+ String getIngrNotExistMsg()
-+ void printIngrNotExistMsg()
-+ String getIngrExistsMsg(String)
-+ void printInvalidParamMsg()
-+ {static} String getHelpMsg()
-+ void printHelpMsg()
-+ void printDishListCleared()
-+ void printIngrListCleared()
-+ void printAllCleared()
-+ void printSortIngrMsg()
-+ void printSortDishMsg()
-+ void printDishListGraph(ArrayList<Dish>)
-+ void printIngrListGraph(ArrayList<Ingredient>)
-+ void printMatchedDishes(ArrayList<Dish>)
-+ void printMatchedIngredients(ArrayList<Ingredient>)
-+ void printAddedConstituentOf(String,String)
-+ void printEnterWeightOf(String)
-+ String getFindMissingParamMsg()
-+ String getFindInvalidParamMsg()
-+ String getGraphInvalidParamMsg()
-+ void printWastage(String,double)
-+ void printStorage(String,double)
-+ void clearTerminalAndPrintNewPage()
+class seedu.foodorama.Ui {
+{static} messageStrings
+void getFunctions()
+void printFunctions()
 }
-class seedu.duke.IngredientList {
-+ {static} ArrayList<Ingredient> ingredientList
-- {static} Ui ui
-+ {static} void add(String)
-+ {static} int find(String)
-+ {static} double getGreatestWaste()
-+ {static} void graph()
-+ {static} void list()
-+ {static} void delete(String)
-+ {static} void clearList()
+class seedu.foodorama.IngredientList {
+
 }
-class seedu.duke.Dish {
-- {static} Logger logger
-- ArrayList<Ingredient> constituents
-- {static} Ui ui
-- String dishName
-- Double wastage
-- Double ingredientContribution
-+ String getDishName()
-+ Double getWastage()
-+ Double getIngredientContribution()
-+ ArrayList<Ingredient> getConstituents()
-+ void addConstituent(String)
-+ void addWaste()
-+ String toString()
-+ String toGraph(double)
-+ String formatData()
-+ int compareTo(Dish)
+class seedu.foodorama.Dish {
+
 }
-abstract class seedu.duke.command.Command {
+abstract class seedu.foodorama.command.Command {
 + {abstract}void execute(ArrayList<String>)
 }
-class seedu.duke.InputParser {
+class seedu.foodorama.InputParser {
 - {static} Ui ui
 + CommandNames getCommandName(String)
 + ArrayList<String> getParameters(String,CommandNames)
 }
 
-seedu.duke.Ui <-- seedu.duke.Dish
-seedu.duke.Dish o-- seedu.duke.DishList
-seedu.duke.Ingredient o-- seedu.duke.IngredientList
-seedu.duke.Ui <-- seedu.duke.Ingredient
-seedu.duke.Ui <-- seedu.duke.Duke
-seedu.duke.Ui <-- seedu.duke.DishList
-seedu.duke.Ui <-- seedu.duke.ClearScreen
-seedu.duke.Ui <-- seedu.duke.IngredientList
-seedu.duke.Ui <-- seedu.duke.InputParser
-seedu.duke.Ui <-- seedu.duke.command.Command
+seedu.foodorama.Ui <- seedu.foodorama.Dish
+seedu.foodorama.Dish --o seedu.foodorama.DishList
+seedu.foodorama.Ingredient --o seedu.foodorama.IngredientList
+seedu.foodorama.Ui <- seedu.foodorama.Ingredient
+seedu.foodorama.Ui <-- seedu.foodorama.Foodorama
+seedu.foodorama.Ui <-- seedu.foodorama.DishList
+seedu.foodorama.Ui <-- seedu.foodorama.ClearScreen
+seedu.foodorama.Ui <-- seedu.foodorama.IngredientList
+seedu.foodorama.Ui <-- seedu.foodorama.InputParser
+seedu.foodorama.Ui <-- seedu.foodorama.command.Command
 @enduml

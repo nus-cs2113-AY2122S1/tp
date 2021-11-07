@@ -2,13 +2,13 @@
 'https://plantuml.com/sequence-diagram
 
 Box
--> Duke: After a Command
-activate Duke
-Duke -> Storage: write(mode: Ingredient)
+-> Foodorama: After a Command
+activate Foodorama
+Foodorama -> Storage: write(mode: Ingredient)
 activate Storage
 Storage -> ingredients.txt : Write to ingredients.txt
 Duke -> Storage: write(mode: Dish)
 Storage -> dishes.txt: Write to dishes.txt
-deactivate Duke
+deactivate Foodorama
 
 @enduml

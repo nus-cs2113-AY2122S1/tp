@@ -1,28 +1,35 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
+actor User
+
 Box
--> Duke: userInput
-activate Duke
-Duke -> InputParser: getCommandName(userInput)
+User-> Foodorama: userInput
+activate Foodorama
+Foodorama -> InputParser: getCommandName(userInput)
 activate InputParser
-activate FoodoramaException
-  alt if exception
+alt if exception
+
+create FoodoramaException
 InputParser -> FoodoramaException: throw new
-activate Ui
+activate FoodoramaException
+
 FoodoramaException -> Ui: getInvalidCommandMsg()
-FoodoramaException<- Ui : INVALID_COMMAND
-FoodoramaException -> Duke: exceptionMsg
+activate Ui
+FoodoramaException<-- Ui : INVALID_COMMAND
 deactivate Ui
+FoodoramaException --> Foodorama: exceptionMsg
+
 deactivate FoodoramaException
+
 else else
-InputParser -> Duke: userCommandName
+InputParser --> Foodorama: userCommandName
 end
-Duke -> InputParser: getParameters(userInput, userCommandName)
-InputParser -> Duke: parameters
+Foodorama -> InputParser: getParameters(userInput, userCommandName)
+InputParser --> Foodorama: parameters
 deactivate InputParser
 
 
-deactivate Duke
+deactivate Foodorama
 
 @enduml

@@ -1,0 +1,60 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+box
+create SetExpiryCommand
+ -> SetExpiryCommand : execute(parameters)
+activate SetExpiryCommand
+
+alt case NAME
+    SetExpiryCommand -> IngredientList: IngredientList.find(name)
+    activate IngredientList
+    IngredientList --> SetExpiryCommand: ingrIndex
+
+
+else case INDEX
+    SetExpiryCommand -> SetExpiryCommand: ingrIndex = INDEX
+
+end
+Participant Ui
+endbox
+Actor User
+SetExpiryCommand -> IngredientList: IngredientList.addExpiry(ingrIndex)
+IngredientList -> IngredientList: checkValidDate()
+activate IngredientList#salmon
+deactivate IngredientList#salmon
+loop while exit == false
+    User -> IngredientList: User input
+    alt if !ValidDate
+        IngredientList -> Ui: printAskIngrExpiryDate()
+        Ui -> User: Prompt to try again
+    else if ValidDate
+        alt if daysBeforeExpiry < 0
+            IngredientList -> Ui: printAskIngrExpiryDate()
+            Ui -> User: Prompt to try again
+        else if daysBeforeExpiry > 10000
+            IngredientList -> Ui: printConfirmationRequest()
+            Ui -> User: Ask for confirmation
+            alt if user input 'y'
+                IngredientList -> IngredientList: exit = true
+                activate IngredientList#salmon
+                deactivate IngredientList#salmon
+            else if user input 'n'
+                IngredientList -> Ui: printAskIngrExpiryDate()
+                Ui -> User: Prompt to enter a new input
+            end
+        end
+        else
+            IngredientList -> IngredientList: exit = true
+            activate IngredientList#salmon
+            deactivate IngredientList#salmon
+    end
+end
+
+IngredientList -> Ui: Print updated ingredient
+Ui -> User: Show updated expiry value
+
+
+
+@enduml

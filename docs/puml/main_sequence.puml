@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor User
+
+Box
+User-> Foodorama: User input
+Foodorama -> InputParser: getCommandName()
+activate InputParser
+Foodorama <-- InputParser: userCommandName
+
+Foodorama -> InputParser: getCommandParameters()
+
+return parameters
+
+create Command
+Foodorama -> Command: execute()
+activate Command
+UI <- Command: show execution result
+activate UI
+UI -> ClearScreen: ClearScreen()
+activate ClearScreen
+ClearScreen -> ClearScreen : clearConsole()
+activate ClearScreen#LightSalmon
+deactivate ClearScreen#LightSalmon
+return
+User <-- UI: output to be displayed
+
+@enduml

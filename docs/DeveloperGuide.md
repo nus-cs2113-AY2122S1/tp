@@ -18,14 +18,15 @@ motivated us to build this application.
 * [Setting Up & Getting Started](#-setting-up--getting-started)
 * [Design & Implementations](#-design--implementation)
     * [Design](#design)
-        * [Main Components](#main-components)
-        * [General Flow](#general-flow)
-        * [Input Parsing](#input-parsing)
-        * [Storage](#storage)
-        * [Data Structures](#data-structures)
-        * [User-Interface Component](#user-interface-component)
-        * [Exceptions](#exceptions)
-        * [Command Abstraction](#command-abstraction)
+      * [Main Components](#main-components)
+      * [General Flow](#general-flow)
+      * [Input Parsing](#input-parsing)
+      * [Storage](#storage)
+      * [Data Structures](#data-structures)
+      * [User-Interface Component](#user-interface-component)
+      * [Exceptions](#exceptions)
+      * [Command Abstraction](#command-abstraction)
+      * [Input Validation](#input-validation)
     * [Implementation](#implementation)
         * [Edit](#edit)
         * [Graph](#graph)
@@ -86,7 +87,7 @@ Describes the step-by-step sequence from User Input to the Output.
 
 * User is greeted by welcome screen.
 * User begins typing inputs.
-* Inputs get parsed by InputParser returning the appropriate Command.
+* Inputs get parsed by InputParser returning the appropriate type of command and respective parameters.
 * Command gets executed and respective output gets displayed.
 * Once user is done using the application, he can send an exit message prompting a goodbye message.
 * Application exits.
@@ -157,7 +158,7 @@ under *'Data'* folder.
 The `Dish`, `DishList`, `Ingredient` and `IngredientList` classes are responsible for the handling and manipulation of
 the *Food-O-Rama* data.
 
-![](images/dish_ingredient.png)
+![](images/data_structures.png)
 
 * The `Dish` class contains the Dish's Name, its wastage and its constituents.
 * The `Ingredient` class contains the Ingredient's Name, the weight of Ingredient in storage, the weight of Ingredient
@@ -170,23 +171,26 @@ the *Food-O-Rama* data.
 
 ### User-Interface Component
 
-![](images/UiClass.png)
-
 The `Ui` Class is responsible for the printing of interactive messages whenever a user types an input. It handles print
 messages to the Command Line Interface from when the program loads, to after every input by the user and finally when
 the user exits the program.
 
-The interface of the program utilizes the ClearScreen class to clear the terminal after every user input through the
-built-in `ProcessBuilder` Java class. Such a feature allows greater readability and focus for the user as the terminal
-will not be cluttered with past commands.
-`Ui` will call `ClearScreen.clearConsole()` method to clear the terminal.
+The below class diagram shows the structure and relations of the Ui class in Foodorama.
+
+![](images/UiClass.png)
+
+For simplicity’s sake the ui class has been minimized into 3 components: 
+ * The strings containing the various messages
+ * Functions that get a string from UI to be used elsewhere (e.g. Exception classes getting error messages)
+ * Functions that print command outputs
 
 
 ### Exceptions
 
 The `FoodoramaException` class is responsible for handling errors such as unrecognised user commands and improper
-parameters. It does so by calling the `Ui` class to print error messages that prompt the User to type in correct
-Commands/Parameters.
+parameters. It does so by calling the `Ui` class to provide the error messages and throwing the exception 
+up to the highest level, that is the Foodorama class where it then gets caught and the message is printed with
+the exception.getMessage() method which is part of the base Exception class
 
 ### Command Abstraction
 
@@ -194,6 +198,28 @@ Commands/Parameters.
 
 * Different Command Classes that perform different tasks by calling various functions of the Object Classes.
 * All inherit from an abstract `Command` class with one execute method that takes an Arraylist<String> as input.
+* These command classes help perform a more specialized input validation so ensure the inputs match the specific command 
+  that has been invoked
+
+### Input validation
+
+In addition to the input parser, due to the different types of inputs foodorama deals with,
+there exists a second round of input validation to help seperate the invalid inputs from those that are valid
+
+The sequence diagram for the validation of Numerical Inputs is given below
+
+![](images/input_validation_number.png)
+
+As you can see the system filters out the numerical inputs from the text strings and chceks if the numerical inputs are
+integers or not providing the actual methods that do the computation the only valid inputs that are integers in thsi case.
+The same process can be done to include doubles as well by excluding the final integer check.
+
+The sequence diagram for the validation of Text strings is given below
+
+![](images/input_validation_number.png)
+
+The process of input validation for strings is quite similar to that for integers except
+the roles are reversed
 
 ## Implementation
 
@@ -288,7 +314,8 @@ The implementation of the Edit function allows the User to edit several
 instance variables of the Dishes and Ingredients present in the DishList and
 IngredientList.
 
-![](images/edit_dish_name_sequence_diagram.png)
+![](images/edit_dish_name_sequence.png)
+
 This Sequence Diagram shows how the `EditDishNameCommand` class functions.
 
 Currently the User is able to edit the following:
@@ -304,6 +331,14 @@ implementation.
 
 ### Set
 
+The implementation of the set function allows the User to set the expiry date for ingredients
+
+Below is a sequence diagram that shows how the SetExpiryCommand functions
+
+![](images/set_expiry.png)
+
+There is currently a soft limit of 10000 days for the expiry. If this limit is exceeded the user will be prompted for 
+confirmation before proceeding as 10000 is an unusual amount for the field and might be a misinput.
 
 ### Link
 The Link function allows Users to link existing Ingredients in the IngredientList 
@@ -327,7 +362,11 @@ Wastes to the Dish's Waste.
 
 ### Graph
 
-![](images/graph_class_dig.png)
+The implementation of the Edit function allows Foodorama to display a graph of the Dishes and Ingredients present in the DishList and
+IngredientList to the User
+Below is a sequence diagram that shows how the GraphCommand functions
+
+![](images/graph_sequence.png)
 
 Graph works by creating a 2d grid and printing the bars based on the current position of the terminal cursor. This lets
 us bypass the restriction in a CLI based application where you can only print from up to down and the bars can get

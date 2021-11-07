@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+Box
+create Command
+
+ -> Command: execute(parameters)
+activate Command
+alt if isBlank
+    Command -> FoodoramaException: Missing Parameter
+
+    FoodoramaException -> Ui: getMissingParameterMessage()
+    activate Ui
+    FoodoramaException <-- Ui: MISSING_PARAM
+    deactivate Ui
+
+else if isNumber
+    Command --> FoodoramaException: Parameter is not a string
+    FoodoramaException -> Ui: getInvalidStringMsg()
+    activate Ui
+    Ui --> FoodoramaException: INVALID_STRING
+    deactivate Ui
+
+else if !isNumber
+    Command -> : Results of execution
+end
+
+deactivate Command
+FoodoramaException ->  :ExceptionMessage
+
+deactivate Foodorama
+
+@enduml

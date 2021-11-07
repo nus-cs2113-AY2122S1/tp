@@ -2,9 +2,9 @@
 'https://plantuml.com/sequence-diagram
 
 Box
--> Duke: Start of Program
-activate Duke
-Duke -> Storage: load()
+-> Foodorama: Start of Program
+activate Foodorama
+Foodorama -> Storage: load()
 activate Storage
 Storage -> Storage : loadIngredients()
 activate Storage#DarkSalmon
@@ -17,6 +17,6 @@ deactivate Storage#LightSalmon
 Storage -> Storage : loadFormat()
 activate Storage#LightSalmon
 deactivate Storage#LightSalmon
-deactivate Duke
+deactivate Foodorama
 
 @enduml
