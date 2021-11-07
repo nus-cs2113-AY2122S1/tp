@@ -20,7 +20,7 @@ public class MainParser {
 
         String[] command = userInput.trim().split("/", 5);
 
-        switch (command[0]) {
+        switch (command[0].stripLeading().stripTrailing().toLowerCase()) {
         case "add-employee":
             employeeParser.addEmployee(command, employeeList);
             break;
@@ -71,6 +71,9 @@ public class MainParser {
             break;
         case "edit-finance":
             financeParser.editFinance(command, financeList);
+            break;
+        case "help":
+            MainUI.printHelpMessage();
             break;
         case "bye":
             return true;
