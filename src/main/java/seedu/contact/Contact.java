@@ -61,6 +61,10 @@ public class Contact {
     }
 
     //@@author marcusbory
+    /**
+     * Attempts to remove fields in the given contact.
+     * @param hasDeletedDetails boolean[] Array of whether a specified field is to be deleted
+     */
     public void deleteContactFields(boolean[] hasDeletedDetails) {
         for (int i = GITHUB_INDEX; i <= EMAIL_INDEX; i++) {
             if (hasDeletedDetails[i]) {

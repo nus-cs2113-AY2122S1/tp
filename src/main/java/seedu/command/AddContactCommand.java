@@ -55,6 +55,10 @@ public class AddContactCommand extends Command {
         return github;
     }
 
+    /**
+     * Executes the AddContactCommand with the supplied fields to add a new contact to the contact list.
+     * This method also checks for existing duplicates in the contact list.
+     */
     public void execute() {
         try {
             Contact addedContact = new Contact(name, github, linkedin, telegram, twitter, email);

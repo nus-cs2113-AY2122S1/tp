@@ -163,6 +163,12 @@ public class MainParser {
     }
 
     //@@author marcusbory
+    /**
+     * Returns an AddContactCommand after parsing the user's input if the specified input command was for adding a
+     * contact.
+     * @param userInput String that user has input
+     * @return Command AddContactCommand if the parsing was successful
+     */
     private Command parseAddContact(String userInput) {
         try {
             String[] details = addContactParser.parseContactDetails(userInput);
