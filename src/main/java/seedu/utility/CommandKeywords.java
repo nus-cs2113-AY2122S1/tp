@@ -1,5 +1,8 @@
 package seedu.utility;
 
+/**
+ * Contains all the possible command words that users can give.
+ */
 public class CommandKeywords {
     public static final String HELP_COMMAND_KEYWORD = "help";
     public static final String ADD_EXPENSE_KEYWORD = "add_ex";
