@@ -1,6 +1,7 @@
 package seedu.tp.task.type;
 
 import seedu.tp.command.flags.LessonFlag;
+import seedu.tp.exception.NoLinkException;
 import seedu.tp.log.Log;
 import seedu.tp.parser.DateParser;
 import seedu.tp.task.TypeEnum;
@@ -10,10 +11,8 @@ import seedu.tp.task.RecurrenceEnum;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -42,7 +41,14 @@ public class Lesson extends Event {
      */
     private int[] occurrences;
 
-    public URI getLink() {
+    public boolean hasLink() {
+        return link != null;
+    }
+
+    public URI getLink() throws NoLinkException {
+        if (!hasLink()) {
+            throw new NoLinkException();
+        }
         return link;
     }
 
@@ -96,11 +102,14 @@ public class Lesson extends Event {
         this.occurrences = occurrences;
     }
 
+    private static final String LINK_INDICATOR = "(with link)";
+
     @Override
     public String getTaskEntryDescription() {
         return LESSON_ICON + " " + this.getModuleCode() + ' ' + this.getClassNo() + ": "
                 + DateParser.dateToString(getStartDate())
-                + " to " + DateParser.dateToString(getEndDate());
+                + " to " + DateParser.dateToString(getEndDate())
+                + ' ' + (hasLink() ? LINK_INDICATOR : "");
     }
 
     @Override

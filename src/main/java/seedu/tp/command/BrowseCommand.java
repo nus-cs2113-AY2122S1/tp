@@ -2,6 +2,7 @@ package seedu.tp.command;
 
 import seedu.tp.exception.BrowseFailException;
 import seedu.tp.exception.InvalidTaskIndexException;
+import seedu.tp.exception.NoLinkException;
 import seedu.tp.parser.CommandParser;
 import seedu.tp.task.Task;
 import seedu.tp.task.taskmanager.TaskManager;
@@ -49,6 +50,8 @@ public class BrowseCommand extends Command {
             message = itie.getMessage();
         } catch (BrowseFailException bfe) {
             message = bfe.getMessage();
+        } catch (NoLinkException nle) {
+            message = nle.getMessage();
         }
         return new CommandResult(message, false);
     }
