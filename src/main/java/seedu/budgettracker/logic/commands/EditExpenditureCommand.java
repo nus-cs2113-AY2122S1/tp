@@ -29,7 +29,7 @@ public class EditExpenditureCommand extends EditCommand {
         this.description = description;
     }
 
-    public void execute() throws CommandException{
+    public void execute() throws CommandException {
         if (amount > 1000000000) {
             throw new CommandException(MESSAGE_AMOUNT_EXCEEDED);
         }

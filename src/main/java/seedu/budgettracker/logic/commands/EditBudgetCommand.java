@@ -15,7 +15,7 @@ public class EditBudgetCommand extends EditCommand {
         this.amount = amount;
     }
 
-    public void execute() throws CommandException{
+    public void execute() throws CommandException {
         if (amount > 1000000000) {
             throw new CommandException(MESSAGE_AMOUNT_EXCEEDED);
         }
