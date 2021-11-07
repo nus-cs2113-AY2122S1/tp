@@ -238,6 +238,9 @@ Here are guidelines and tips for the command format:
   for that command are present.\
   (e.g. `add` requires the `n/`, `g/` and `i/` flag, and possible variations include `add n/habit 1 g/1 i/1` and
   `add i/1 n/habit 1 g/1`)
+* **Commands** with repeated parameters with the same flag will be accepted without error,
+  however only the parameter than came first will be taken as valid.
+  (e.g. `update g/1 n/gibberish n/malarkey` will be accepted as if it was `update g/1 n/gibberish`)
 * **Parameters** `<goal_index>` and `<habit_index>`can be checked with the commands `list` and `view` respectively.
 * **Parameters** enclosed in angle brackets `<>` are meant to be replaced.\
   (e.g. `view g/<goal_index>` could be `view g/1`)
