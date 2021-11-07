@@ -100,6 +100,8 @@ Methods for printing **error messages** have been separated
 from the main feature outputs. These methods have been placed in the `ExceptionTextUi` class within the same `ui` package
 as `TextUi`. 
 
+<div style="page-break-after: always;"></div>
+
 ### <a name="main-parser"></a>MainParser
 The `MainParser` component is responsible for making sense of the user's inputs. It functions as the
 not only the identifier for commands, but also calls its relevant sub-parsers to further destructure
@@ -172,12 +174,12 @@ The diagram below shows the process of parsing the user's input.
 
 ![Add Contact Parsing](images/AddContactParsingSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 Upon parsing the user's input, the details are passed to an `AddContactCommand`, and this command will be 
 executed in `ConTech`. The sequence diagram below illustrates the process of executing `AddContactCommand`.
 
 ![Add Sequence Diagram](images/AddContactCommandSequenceDiagram.png)
-
-<div style="page-break-after: always;"></div>
 
 ### <a name="View"></a>Viewing a contact: `view`
 This feature is processed using `ViewContactCommand`. Whenever a user wants to view a specific contact from the
@@ -195,6 +197,8 @@ the contact, the `viewContactMessage` method in `TextUi` will be called. The seq
 process of viewing a contact.
 
 ![View Sequence Diagram](images/ViewContactCommandSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 ### <a name="Edit"></a>Editing a contact: `edit`
 This feature is processed using `EditContactCommand`. This feature allows the user to edit a contact in their contact 
@@ -217,6 +221,8 @@ parameters will then be created and executed in `ConTech`. The sequence diagram 
 `EditContactCommand` for the index `me` as well as an invalid index `all`.
 
 ![Edit Sequence Diagram](images/EditContactCommandSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 If a valid contact index in the contact book is specified, the details to be edited will first be checked against the 
 contact book for duplicates. If there are duplicates, ConTech will prompt the user for confirmation before editing the 
@@ -246,6 +252,8 @@ deletion will be executed, along with a message to show that deletion has been e
 If user cancels deletion, a message is printed to show that the deletion has been cancelled.
 
 ![Delete All Sequence Diagram](images/DeleteAllContacts.png) 
+
+<div style="page-break-after: always;"></div>
 
 To _delete a selected contact_, a user must enter a command in the form `rm <INDEX>`.
 
@@ -313,6 +321,8 @@ integrity of imported contacts. To achieve this, the `ContactsDecoder` class inh
 class, as depicted below.
 
 ![ContactsDecoder Class Diagram](images/ContactsDecoderClassDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 With this implementation in place, the `ImportContactCommand` will firstly check if there exists a file `import.txt` 
 stored in the `data/` directory (ie. stored in `data/import.txt`). Should the `import.txt` file exist, it will then 
@@ -502,8 +512,6 @@ exploratory testing.
        ____________________________________________________________
        ```
 
-<div style="page-break-after: always;"></div>
-
 4. Adding a contact with duplicates
     1. Prerequisites: A contact with similar either similar name or details must already be in the contact list. For
        simplicity, we will re-use the same command from `1`.
@@ -528,7 +536,6 @@ exploratory testing.
        ```
     3. Follow up: You can either input `y` which stands for **yes** allowing you to still add the contact despite having
        a duplicate field or `n` which stands for **no** to disregard adding the contact.
-       
        
 
 5. Adding a contact with a wrong flag
@@ -561,7 +568,7 @@ exploratory testing.
 
 7. Adding a contact with an invalid field format
     1. Test case: `add -n George -e george`<br>
-    2. Expected: An error message will notify user on the field with the invalid format. For this test case, the email
+       Expected: An error message will notify user on the field with the invalid format. For this test case, the email
        has the wrong format.
        ```
        ____________________________________________________________
@@ -573,6 +580,8 @@ exploratory testing.
            * Email cannot start or end with a symbol
        ____________________________________________________________
        ``` 
+
+<div style="page-break-after: always;"></div>
 
 ### <a name="testing-view"></a>Viewing a contact
 1. Viewing a contact that is in the contact list
@@ -592,9 +601,10 @@ exploratory testing.
 
 2. Viewing user's own personal contact
     1. Test case: `view me`
-    2. Expected: All personal details of the user will be displayed.
-
-<div style="page-break-after: always;"></div>
+       Expected: All personal details of the user will be displayed.
+    2. Test case: `me`
+       Expected: All personal details of the user will be displayed. 
+       
 
 3. Viewing a contact with a missing or invalid index
     1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
@@ -616,7 +626,9 @@ exploratory testing.
        Enter <INDEX> between 0 and 2 or "me" (personal contact)
        ____________________________________________________________
        ```
-  
+
+<div style="page-break-after: always;"></div>
+
 ### <a name="testing-edit"></a>Editing a contact
 1. Editing a contact with all fields
     1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
@@ -666,8 +678,7 @@ exploratory testing.
        Otherwise, input index "me" if you wish to edit your Personal Contact details.
        ____________________________________________________________
        ```
-
-<div style="page-break-after: always;"></div>
+    
 
 4. Editing a user's personal contact
     1. Test case: `edit me -n Zack -g zackster -e zack@email.com`<br>
