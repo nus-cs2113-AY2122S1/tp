@@ -8,6 +8,7 @@ box Command COLOR_COMMAND_BOX
 end box
 
 box Utilities COLOR_UTILITIES_BOX
+    participant "<<class>>\n:Ui" as ui COLOR_UTILITIES
     participant ":OrderManager" as ordermanager COLOR_UTILITIES
     participant ":StockManager" as stockmanager COLOR_UTILITIES
 end box
@@ -22,6 +23,9 @@ alt orderQuantity != 0
            addorder --> addorder
            addorder -> addorder : addOrder(ui: Ui, medicines: ArrayList<Medicine>, name: String, \nquantity: int, date: Date)
            addorder --> addorder
+        else !orderQuantity < maxQuantity
+           addorder -> ui : print()
+           addorder <-- ui
         end
     else nameExistsInOrder && nameExistsInStock
         addorder -> ordermanager : getTotalOrderQuantity()
@@ -35,6 +39,9 @@ alt orderQuantity != 0
            addorder --> addorder
            addorder -> addorder : addOrder(ui: Ui, medicines: ArrayList<Medicine>, name: String, \nquantity: int, date: Date)
            addorder --> addorder
+        else !orderQuantity + totalExistingQuantity <= maxQuantity
+            addorder -> ui : print()
+            addorder <-- ui
         end
     note right
         This diagram shows the process for
