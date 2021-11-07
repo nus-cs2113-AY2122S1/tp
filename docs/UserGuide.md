@@ -232,7 +232,7 @@ Format: `edit_assessment c/<CLASS_ID> a/<ASSESSMENT_NAME> [n/<NEW_ASSESSMENT_NAM
 
 Examples:
 * `edit_assessment c/CS2101-C03 a/OP1 m/30 w/15`
-* `edit_assessment c/CS2101-C03 a/OP2 nn/UGDG`
+* `edit_assessment c/CS2101-C03 a/OP2 n/UGDG`
 
 Expected Output: <br>
 ![img.png](images/assessment/EditAssessmentCommand.PNG)
