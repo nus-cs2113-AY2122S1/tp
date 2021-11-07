@@ -3,7 +3,7 @@ hide circle
 skinparam classAttributeIconSize 0
 skinparam groupInheritance 2
 
-ModuleList "1..*" *--> Module
+ModuleList *--> "*" Module
 Module "1" <--* "1" ModuleMapping
 Module <.. ModuleMapping
 ModuleList <.. Module

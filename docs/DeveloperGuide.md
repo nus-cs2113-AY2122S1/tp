@@ -4,7 +4,7 @@ title: Developer Guide
 ---
 
 ## Contents 
-* [About SEPlanner](#About-SEPanner)
+* [About SEPlanner](#about-seplanner)
 * [Acknowledgements](#acknowledgements)
 * [Getting Started](#getting-started)
 * [Design & Implementation](#design--implementation)
@@ -46,6 +46,12 @@ title: Developer Guide
 * [Non-Functional Requirements](#non-functional-requirements)
 * [Glossary](#glossary)
 * [Instructions for manual testing](#instructions-for-manual-testing)
+* [Possible future updates](#possible-future-updates)
+  * [Automatically update database](#automatically-update-database)
+  * [Move database online for better security](#move-database-online-for-better-security)
+  * [Include more information on partner universities](#include-more-information-on-partner-universities)
+  * [Integrate SEP application process](#integrate-sep-application-process)
+  * [Bring SEPlanner to students from other faculties](#bring-seplanner-to-students-from-other-faculties)
 
 ## About SEPlanner
 SEPlanner is a lightweight desktop application for Computer Engineering undergraduates from the National University of Singapore
@@ -220,7 +226,7 @@ from the CSV type files (`University.csv` and `modules.csv`) stored in the resou
 The following diagram is the class diagram of the university related classes:
 
 <p align = "center">
-<img src="images/universities.png" width = "400" />
+<img src="images/universities.png" width = "300" />
 </p>
 
 This component consist of the following classes:  
@@ -240,12 +246,14 @@ This component consist of the following classes:
 * Can be used under the following 2 circumstances:
   * Stores the master list containing all universities available for CEG SEP application. This list is directly read from an external file `University.csv`.
   * Stores the selected list containing all universities added by the user. This list can be amended by the user, and all change to it will be stored under `data/selectedUniversities.txt`.
-* Contains methods to search, filter, or amend the list based on command from the user. 
+* Contains methods to search, filter, or amend the list based on command from the user.
+* There can be 2 `University` objects for the same university, one stored in each of the lists mentioned above. The object stored in the master list contains all the possible module mappings for this university based on our database, while the object stored in the selected list 
+stores the mappings added by the user. These 2 objects cannot be used interchangeably. While holding reference onto one of the objects, the user needs to call the method `getUniversity(universityName)` to access the corresponding object from the other list.
 
 The following diagram is the class diagram for the module related classes:  
 
 <p align = "center">
-<img src="images/modules.png" width = "400" />
+<img src="images/modules.png" width = "300" />
 </p>
 
 This component consist of the following classes:  
@@ -386,24 +394,29 @@ a list of potential exchange Universities based on the users study plan, module 
 * *SEP* - Student Exchange Programme
 * *NUS* - National University of Singapore
 
-## Possible further updates in the future 
-* Currently, data for universities and mappings are directly retrieved from EduRec website provided by NUS, and stored in csv files.
+## Possible future updates
+### Automatically update database
+Currently, data for universities and mappings are directly retrieved from EduRec website provided by NUS, and stored in csv files.
 There is no current way to automatically update the data retrieved. As such, one of the future updates the team can look into will be to 
 retrieve the data from EduRec automatically such that the universities, modules and mappings in the database will always be up-to-date.
-* Data entered by users (selected module and university list) are currently only stored in the user's local machine. This introduces a certain
+### Move database online for better security
+Data entered by users (selected module and university list) are currently only stored in the user's local machine. This introduces a certain
 amount of uncertainty to the users since the data might be easily corrupted or lost if the local machine malfunctions, thus the team should also
 look into storing all the data on the cloud such that data from the users can be stored more safely.
-* SEPlanner's current database includes crucial information for SEP planning, such as universities, NUS modules, and corresponding module mappings. 
+### Include more information on partner universities 
+SEPlanner's current database includes crucial information for SEP planning, such as universities, NUS modules, and corresponding module mappings. 
 These data are chosen for the first 2 versions of the app since the process of accessing these data on EduRec is extremely slow and unorganised. 
 However, there are other information which are not included in SEPlanner right now, including the time of exchange for each partner university, number of 
 vacancies etc. Information mentioned here are not provided by EduRec, and is easy for the user to access. However, it will be good for the team to include
- all these details in future versions of SEPlanner, so that the application itself will be sufficient for the SEP application for a CEG undergraduate in NUS.
-* SEPlanner provides the users with a fast and easy experience to organise the mappings and universities for SEP, but SEPlanner alone is not enough for users to complete their SEP application. Unfortunately, after the planning 
+ all these details in future versions of SEPlanner, so that the application itself will be providing sufficient information for a NUS CEG student for his/her SEP application.
+### Integrate SEP application process 
+SEPlanner provides the users with a fast and easy experience to organise the mappings and universities for SEP, but SEPlanner alone is not enough for users to complete their SEP application. Unfortunately, after the planning 
 is done, users will still have to return to EduRec to submit their actual SEP application (which is extremely sow and inefficient as mentioned). The team 
 could look into further integration with EduRec in the future, and perform the application for users as well. This will make SEPlanner itself a sufficient 
 app for the entire SEP planning and applying process. 
-* The current version is only designed for CEG students from NUS, the team can further improve in the future by including more details for students from other 
-faculties, thus making SEPlanner the go-to choice for every single NUS student planning for their SEP.
+### Bring SEPlanner to students from other faculties
+The current version is only designed for CEG students from NUS, the team can further improve in the future by including more details for students from other 
+faculties, and a graphical interface, thus making SEPlanner the go-to choice for every single NUS student planning for their SEP.
 
 ## Instructions for manual testing
 
