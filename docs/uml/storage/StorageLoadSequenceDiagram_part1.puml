@@ -20,19 +20,19 @@ Create Storage
   StorageManager -> Storage : Storage()
   activate Storage
 return storage
-StorageManager -> Storage : createFolder(:Path)
+StorageManager -> Storage : createFolder(baseDir)
 activate Storage
 |||
 return
-StorageManager -> JsonStorage : execute(null : ModuleManager, CREATE : StorageActionEnum)
+StorageManager -> JsonStorage : execute(null, StorageActionEnum.CREATE)
 activate JsonStorage
 note left: Create data folder and \nmain json file \nif they do not exists
   JsonStorage -> JsonStorage : createJson()
   activate JsonStorage
-  JsonStorage -> JsonStorage : createFolder(:Path)
+  JsonStorage -> JsonStorage : createFolder(baseDir)
   activate JsonStorage
   return
-  JsonStorage -> JsonStorage : createFile(:Path)
+  JsonStorage -> JsonStorage : createFile(jsonPath)
   activate JsonStorage
   return
 return
