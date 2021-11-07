@@ -11,10 +11,15 @@ LifeLineBackgroundColor peachpuff
 
 skinparam sequenceArrowColor black
 
---> ":Parser": addTagParse()
+--> ":Parser": parseMaster()
 activate ":Parser"
 
 ' Name
+":Parser" -> ":Parser": addTagParse()
+activate ":Parser"
+
+":Parser" --> ":Parser"
+deactivate ":Parser"
 
 ":Parser" -> ":AddTagCommand": AddTagCommand(String recipeName, String[] splitTagNames)
 activate ":AddTagCommand"

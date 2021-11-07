@@ -11,15 +11,18 @@ LifeLineBackgroundColor peachpuff
 
 skinparam sequenceArrowColor black
 
---> ":Parser": setParse()
+--> ":Parser": parseMaster()
 activate ":Parser"
 
 ' Name
-":Parser" -> ":Parser": parseName(String line)
+":Parser" -> ":Parser": setParse()
 activate ":Parser"
 
 ":Parser" --> ":Parser"
 deactivate ":Parser"
+
+
+
 
 ":Parser" -> ":SetCaloriesCommand": SetCaloriesCommand(String recipeName, int cal)
 activate ":SetCaloriesCommand"

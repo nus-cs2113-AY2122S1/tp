@@ -11,11 +11,11 @@ LifeLineBackgroundColor peachpuff
 
 skinparam sequenceArrowColor black
 
---> ":Parser": setParse()
+--> ":Parser": parseMaster()
 activate ":Parser"
 
 ' Name
-":Parser" -> ":Parser": parseName(String line)
+":Parser" -> ":Parser": findParse()
 activate ":Parser"
 
 ":Parser" --> ":Parser"
@@ -27,13 +27,11 @@ activate ":FindIngredientsCommand"
 ":FindIngredientsCommand" -> ":Cookbook" : filterByIngredients(ArrayList<String> ingredients)
 activate ":Cookbook"
 
-loop no. of recipes
 ":Cookbook" -> ":Recipe": containsIngredients(ArrayList<String> ingredients)
 activate ":Recipe"
 
 ":Recipe" --> ":Cookbook"
 destroy ":Recipe"
-end
 
 ":Cookbook" --> ":FindIngredientsCommand"
 destroy ":Cookbook"
