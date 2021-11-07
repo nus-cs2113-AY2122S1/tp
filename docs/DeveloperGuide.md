@@ -18,6 +18,11 @@
   * [Product Scope](#product-scope)
   * [User Stories](#user-stories)
   * [Non-functional Requirements](#non-functional-requirements)
+* [Appendix: Manual Testing](#appendix-manual-testing)
+  * [Testing Member Features](#testing-member-related-features)
+  * [Testing Training Features](#testing-training-related-features)
+  * [Testing Attendance Features](#testing-attendance-related-features)
+* [Exit](#exit)
   
 ## Introduction
 
@@ -300,6 +305,90 @@ User can update CCA information faster than using a GUI, and offers a centralize
 ### Running Commands
 1. You can refer to the list of commands [here](https://ay2122s1-cs2113t-f12-4.github.io/tp/UserGuide.html)
 2. Upon a successful command run, data will be saved to `DukeMembers.csv`
+
+### Testing Member-related features
+1. Storing a new member, with a unique student ID
+   * Input: `add /m /n John Hwee /s A1231234B /g M /p 98765432`
+   * Expected Output: Assuming that the program is run for the first time, `John Hwee` will be the first entry in `MemberList` and given an index of `1`
+   * A new .csv file named `CCAMembers.csv` will be created and `John Hwee` will be recorded in it
+
+
+2. Storing a new member, with an existing student ID
+   * Input: `add /m /n Frank Han /s A1231234B /g M /p 91231234`
+   * Expected Output: Since `John Hwee` already has the student number `A1231234B`, this command will not succeed. An error message will be printed.
+
+
+3. Editing a member's information
+   * Input: `edit /m 1 /p 91234567`
+   * Expected Output: `John Hwee` was assigned the index `1` above, so this command will update his phone number to `91234567`
+   * The change will be recorded in `CCAMembers.csv` as well
+
+
+4. Listing out all members
+   * Input: `list /m`
+   * Expected Output: Since `Frank Han` was not successfully added, only `John Hwee` exists in the member list. Hence, this command will show only 1 member: `John Hwee`
+
+
+5. Delete member
+   * By name
+      * Input: `delete /m John`
+      * Expected Output: Since there is only one member in the list, whose name is `John Hwee`, his entry will be deleted
+   * By index
+         * Input: `delete /m 1`
+         * Expected Output: Since `John Hwee` is assigned index `1`, his details will be deleted from the list.
+   * The entry will be deleted from `CCAMembers.csv` as well 
+
+
+### Testing Training-related features
+1. Storing a new training, with a unique training name
+   * Input: `add /t /n Friday Training 1 /a 5 Nov 2021 /v MPSH1`
+   * Expected Output: Assuming that the program is run for the first time, `Friday Training 1` will be the first entry in `TrainingList` and given an index of `1`
+   * A new .csv file named `CCATrainings.csv` will be created and `Friday Training 1` will be recorded in it
+
+
+2. Editing an existing training detail
+   * Input: `edit /t 1 /v MPSH2`
+   * Expected Output: Since `Friday Training 1` is assigned the index `1`, its venue will be updated from `MPSH1` to `MPSH2`
+   * This change will be reflected in `CCATrainings.csv`
+
+
+3. Listing out all trainings
+  * Input: `list /t`
+  * Expected Output: Since there is only 1 training entry, `Friday Training 1`, the list command will succeed nad show the details of `Friday Training 1`
+
+
+4. Delete an existing training
+   * By name
+      * Input: `delete /t Friday`
+      * Expected Output: Since there is only one training entry in the list, `Friday Training 1`, it will be deleted since it matches the search `Friday`
+      * If there are more than 1 entries in the training list that contains `Friday`, you will be given an additional prompt to key in the index matching the training you wish to delete
+   * By index
+      * Input: `delete /t 1`
+      * Expected Output: Since `Friday Training 1` is index `1`, it will be deleted
+   * `Friday Training 1` will be removed from `CCATrainings.csv` as well
+
+
+### Testing Attendance-related features
+1. Adding a new attendance
+   * Input: `add /att /m John Hwee /n Friday Training 1 /d 1`
+   * Expected Output: If there is a `John Hwee` in the Member list AND there is a `Friday Training 1` in the Training List, this command will succeed
+   * Attendance entries are reliant on the members and trainings already existing beforehand
+   * If this command succeeds, `John Hwee` will be added as an entry to `Friday Training 1.csv`, located in the `Attendance` sub-folder.
+     * If `Friday Training 1.csv` did not exist before, it will be created
+   * 1 represents 'Present', 0 represents 'Absent'
+
+
+2. Deleting a valid attendance
+   * Input: `delete /att /t Friday Training 1 /i 1`
+   * Expected Output: This will delete the first member in the `Friday Training 1` attendance list. In the above case, if the command succeeded then `John Hwee` would be index `1`. Hence, his entry would be deleted
+
+
+3. Listing all attendance entries
+   * Input: `list /att /t Friday Training 1 /d 1`
+   * Expected Output: This will list ALL the members who were present for `Friday Training 1`. In this case, only `John Hwee` would be listed.
+   * Regardless of whether your syntax is correct or not, there will be a prompt to ask whether you would like to list the FULL attendance list
+     * Reply with `y` to see the full attendance list, and `n` to skip
+
 
 ### Exit
 1. Call `bye` to exit CCA Manager.

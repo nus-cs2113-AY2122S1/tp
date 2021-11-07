@@ -37,6 +37,7 @@ you may have in order to help you organise your CCA's timetable.
   * Handled exceptions for the above commands
   * Set up file read/write operations, training schedule details are stored in `CCATrainings.csv`
 
+* Set up test cases for `Training` related in `TrainingListTest`
 
 ## UG Contributions
 [User Guide](https://ay2122s1-cs2113t-f12-4.github.io/tp/UserGuide.html)
