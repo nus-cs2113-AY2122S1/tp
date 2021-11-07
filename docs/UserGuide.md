@@ -69,7 +69,7 @@ NOTE: **These parameters cannot be left empty.**
 
 # <a id="commands"></a> Commands
 
-# <a id="add"></a> `add`
+# <a id="add"></a> &nbsp; &nbsp;Add: `add`
 
 The command word `add` adds a record of either Budget, Expenditure, or Loan to the record list. 
 The type of record is determined by the identifier tag after the `add` command word.
@@ -77,9 +77,9 @@ The type of record is determined by the identifier tag after the `add` command w
 ______________
 <br />
 
-### <a id="add-budget"></a> `-b` : Add a Budget
+### <a id="add-budget"></a> `-b` : Adds a Budget
 
-Adds a new budget to a specific month.
+Sets a new budget for a specific month.
 
 Format: `add -b a/AMOUNT m/<MONTH>`
 
@@ -103,15 +103,15 @@ Your budget of $500.00 for December is successfully set!
 
 ________________________
 
-### <a id="add-expenditure"></a> `-e` : Add an expenditure
+### <a id="add-expenditure"></a> `-e` : Adds an expenditure
 
-Adds a new expenditure to a month.
+Records the details of a new expenditure including the _description_, the _amount spent_, the _date on which expenditure was made_ and the _category which the expenditure falls under_ .
 
 Format: `add -e n/DESCRIPTION a/AMOUNT d/<DATE_OF_EXPENDITURE> c/<CATEGORY>`
 
 * The `DESCRIPTION` can be in a natural language format.
   * NOTE: **If Description column exceeds 30characters limit, it will be truncated during list view**
-* The `AMOUNT` entered can be up to 2 decimal places and cannot be empty.
+* The `AMOUNT` entered can be specified up to 2 decimal places.
 * The `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_. 
   * If left empty, the current date according to the
   system will be entered by default.
@@ -125,7 +125,7 @@ Example of usage:
 
 `add -e n/CS2113T Textbooks a/60 d/2021-08-20 c/GENERAL`
 
-Expected outcome: Expenditure of $60.00 2021-08-20 on has been successfully added.
+Expected outcome: The buying of CS2113T textbooks, costing $60.00, on the 20th of August 2021 has been successfully added.
 
 ```
 ========================================================
@@ -142,15 +142,16 @@ Category: GENERAL
 _________________________________________________________
 
 
-### <a id="add-loan"></a> `-l` : Add a Loan
+### <a id="add-loan"></a> `-l` : Adds a Loan
 
-Adds a new loan to a month.
+Records down a loan record specifying when and who the money was lent out to.
 
 Format: `add -e n/<BORROWER_NAME> a/AMOUNT d/<DATE_OF_EXPENDITURE>`
 
-* `AMOUNT` entered can be up to 2 decimal places and cannot be empty.
-* `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_. If left empty, the current date according to the
-  system will be entered by default.
+* `AMOUNT` entered can be up to 2 decimal places.
+* `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_. 
+  * If left empty, the current date according to the
+    system will be entered by default.
 
 Example of usage:
 
@@ -181,7 +182,7 @@ Edits a budget or expenditure entry.
 _________________________________________________________
 
 
-### Edit Budget: `edit`  
+### `-b` : Edit a Budget
 
 Edit the amount of budget allowance for a particular month.
 
@@ -207,7 +208,7 @@ to $10000.
 _________________________________________________________
 
 
-### Edit Expenditure: `edit` 
+### `-e` : Edit an Expenditure 
 
 Edit the amount of budget allowance for a particular month.
 
@@ -236,7 +237,7 @@ have been changed to $1000 with description of Chicken Rice.
 _________________________________________________________
 
 
-### Edit Loan: `edit` 
+### `-e` : Edit a Loan
 Edits the loan for a particular month.
 
 Format: `edit -l m/MONTH i/INDEX <a/AMOUNT> <d/DATE_OF_LOAN> <n/BORROWER_NAME>`
@@ -565,7 +566,7 @@ HEALTH                                                                     0%
 TECH          ######                                                       11.9%
 ALL                                                                        0%
 The category you spent the most on is: FOOD
-The amount you spent on this category is: $5136.5
+The amount you spent on this category is: $5136.50
 ========================================================
 ```
 <br />
@@ -768,7 +769,7 @@ Bye, see you again soon!
 **A**: Copy the data folder from the source computer to the destination computer on the same directory as the tp.jar file.
 
 ## Command Summary
- |no. | `Command` | `Description` |
+ |no. | Command | Description |
  |--- | --------- | --------------------------------------- |
  |1.  | `add -b a/<AMOUNT> m/<MONTH>` | `add budget of $AMOUNT to MONTH of the year` |
  |2.  | `add -e c/<DESCRIPTION> a/<AMOUNT> d/<DATE_OF_EXPENDITURE> [c/<CATEGORY>]` | `add expenditure with DESCRIPTION of CATEGORY which cost $<AMOUNT> on <DATE>` |
