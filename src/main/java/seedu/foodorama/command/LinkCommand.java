@@ -9,6 +9,12 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Allows the user to link an existing dish with an existing ingredient.
+ * Format: link [DISH_NAME] / [INGR_NAME]
+ *
+ * @author Dniv-ra
+ */
 public class LinkCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger("AddingDishIngrCommand.execute()");
     private static final Ui UI = new Ui();
@@ -17,6 +23,17 @@ public class LinkCommand extends Command {
         LoggerManager.setupLogger(LOGGER);
     }
 
+    /**
+     * User command to link an ingredient and a dish object.
+     * Checks if the input parameters of the link command are valid before
+     * calling the appropriate function in the DishList class
+     *
+     * <p>If no exceptions are thrown, [INGR_NAME] is linked to [DISH_NAME].</p>
+     * @param parameters parameters for the link command
+     * @throws FoodoramaException if the dish input doesn't exist in the list of dishes
+     *
+     * @author Dniv-ra
+     */
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         LOGGER.log(Level.INFO, "Start of process");

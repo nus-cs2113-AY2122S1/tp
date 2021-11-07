@@ -10,11 +10,27 @@ import seedu.foodorama.exceptions.FoodoramaException;
 
 import java.util.ArrayList;
 
+/**
+ * Allows the user to find a dish or an ingredient with a keyword.
+ * Format: find dish [KEYWORD] | find ingr [KEYWORD]
+ *
+ * @author renzocanare
+ */
 public class FindCommand extends Command {
     private static final String DISH = "dish";
     private static final String INGR = "ingr";
     private static final Ui UI = new Ui();
 
+    /**
+     * User command to find ingredients or dishes from their respective lists using a keyword.
+     * Checks if the input parameters of the find command are valid before calling the appropriate function
+     *
+     * <p>If no exceptions are thrown, the user is shown a list of objects that match the keyword.</p>
+     * @param parameters parameters for the find command
+     * @throws FoodoramaException if no keyword to search for or find type isn't dish or ingredient
+     *
+     * @author renzocanare
+     */
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         String commandToExecute = parameters.get(0);
