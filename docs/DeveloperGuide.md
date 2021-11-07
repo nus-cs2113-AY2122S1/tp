@@ -78,16 +78,14 @@ It instantiates all its subsequent classes, `GraphList`, `DataLoader`, and `Logi
 Its main functionalities are in the `calcMinDistance` function which calculates the least distance to get from a given source 
 to destination country. Similarly, the `calcMinCost` function calculates the least cost. 
 Then, the function then reads either *time.txt* or *cost.txt* and runs `computeSource` and `getToGoal`, 
-both from the `Logic` class. Also, another key functionality is the `editMap` which is linked to the `Parser` class, 
-which enables the user to edit a distance from a given source to destination country.
+both from the `Logic` class.
 
 As a side note, `initWorldMap` initialises the main World Map which is based on distances, 
 while `altWorldMap` boots up a side, read-only World Map based on the flight cost paths.     
 
-`WorldMap` also throws various exceptions to ensure the distances and costs are updated in the correct format. 
-For example, `distanceNonZero` and `distanceNonString` ensure the user's input is non-zero and is a number-type.
+NOTE: As of V2.1 `EditMap` is no longer used. 
 
-{TODO: Add diagram}
+![](documentationPics/worldmap2.png)
 
 #### 1.1.2. GraphList class
 The `GraphList` class is based off the `WorldMap` overarching class and translate it into a more simplistic graph 
@@ -102,7 +100,7 @@ creating a bidirectional edge for both countries of interest.
 Similarly, the `modifyEdge` function calls the subsequent function `updateNeighbour` from the Country class. 
 The list of distances are all stored in a matrix which is called by `getEdgeMatrix` by the `WorldMap` class.
 
-{TODO: Add diagram}
+![](documentationPics/graphlist.png)
 
 #### 1.1.3. Logic class
 The `Logic` class is the main class driving the logic from the overarching `WorldMap` class. 
@@ -114,7 +112,7 @@ expands outwards to all other countries, yielding the least distances to all oth
 Then, `getToGoal` backtracks from the target country to trace the shortest path to the source country, 
 in reverse order. Note that `getToGoal` returns an object of `MinCalcResult` type.
 
-{TODO: Add diagram}
+![](documentationPics/logic.png)
 
 #### 1.1.4. DataLoader class
 The `DataLoader` class reads in data from *flightData/time.txt* or *flightData/cost.txt* to create the vertexes 

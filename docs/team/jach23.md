@@ -6,7 +6,7 @@ Hi! I'm a Year 2 NUS Computer Engineering student.
 Please see below for my contributions to Traveller.
 
 ### Summary of Contributions
-* WorldMap
+* World Map
   * Implementation of Dijkstra's algorithm
   * Implementing key functionalities as conceptualised as a graph 
   * Allowing searching for the most optimal costs or time
@@ -34,23 +34,22 @@ Please see below for my contributions to Traveller.
   * event again.
 
 #### Other code contributions
-* Conceptualised the basic architecture for Traveller's WorldMap Optimiser.
+* Conceptualised the basic architecture for Traveller's World Map Optimiser.
 * Implemented its basic structure as modelled by a graph, such as MinCalcResult.
 * Added exceptions, assertions, logging
-* Creating major test cases for the WorldMap functionalities.
+* Creating major test cases for the World Map functionalities.
 
 #### Project Management
 * Reviewed multiple PRs.
 
 #### Documentation
 * User Guide (UG)
-  * Wrote all key WorldMap sections and functions.
+  * Wrote all key World Map sections and functions.
   * Wrote the sections corresponding to Searching and Editing of Items.
 
 * Developer Guide (DG)
-  * Created overall structure of the DG.
-  * Wrote preface, Table of Contents, Design & Implementation header paragraph, World Map header paragraph,
-    Main Traveller header paragraph, Traveller class, Parser class.
+  * Wrote the header paragraph for World Map and its sub-classes.
+  * Wrote the classes for World Map, Graph List, and Logic.
 
 RepoSense Link: [here](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=jach23&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&since=2021-09-25)
 
