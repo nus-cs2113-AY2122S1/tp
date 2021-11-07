@@ -86,7 +86,7 @@ class ParserTest {
     @Test
     public void prepareDeleteRecipe_incorrectFormat_ErrorMessage() {
         String test = "delete recipe r/";
-        assertEquals(parseCommand(test).execute(null, null),
-                String.format(Parser.MESSAGE_INVALID_ARGUMENT_FORMAT, RecipeParser.MESSAGE_BLANK_RECIPE));
+        assertEquals(String.format(Parser.MESSAGE_INVALID_ARGUMENT_FORMAT, RecipeParser.MESSAGE_BLANK_RECIPE),
+                parseCommand(test).execute(null, null));
     }
 }
