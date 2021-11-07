@@ -104,6 +104,11 @@ public class Ui {
         return String.format("This member has been removed: %s\n", name);
     }
 
+    public static String getUnableToDeleteMemberMessage(String message) {
+        return "Please assign more members to these tasks:" + System.lineSeparator()
+                + message;
+    }
+
     public static String getTaskAddedMessage(int eventIndex, Task task) {
         assert eventIndex < Duke.eventCatalog.size() : "Number entered cannot be more than "
                 + "number of events";

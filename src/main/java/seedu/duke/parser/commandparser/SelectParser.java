@@ -68,8 +68,8 @@ public abstract class SelectParser extends Parser {
         }
         lastEventIndex = getIndexOfLastSelectedEvent();
         int index = getIndexFromCommand(command[2]);
-        if (!isValidTaskIndex(lastEventIndex, taskIndexToSelect)) {
-            throw new InvalidIndexException("Invalid index range. Choose a number between 0 to "
+        if (!isValidTaskIndex(lastEventIndex, index)) {
+            throw new InvalidIndexException("Invalid index range. Choose a number between 1 to "
                     + eventCatalog.get(lastEventIndex).getTaskList().size() + ".");
         }
         taskIndexToSelect = index;
@@ -80,7 +80,7 @@ public abstract class SelectParser extends Parser {
         memberIndexToSelect = getMemberIndexFromQuery(memberName);
     }
 
-    private static int getIndexFromCommand(String indexAsString) throws InvalidIndexException {
+    private static int getIndexFromCommand(String indexAsString) {
         return Integer.parseInt(indexAsString.trim()) - 1;
     }
 
@@ -111,7 +111,6 @@ public abstract class SelectParser extends Parser {
                 return i;
             }
         }
-        // a matching member is never found
         throw new DukeException("No matching names found!");
     }
 }
