@@ -1,0 +1,50 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam groupInheritance 2
+
+ModuleList "1..*" *--> Module
+Module "1" <--* "1" ModuleMapping
+Module <.. ModuleMapping
+ModuleList <.. Module
+Module <.. ModuleList
+
+Class Module {
+    - index: int
+    - moduleCode: String
+    - moduleName: String
+    - moduleCredits: double
+
+    + getIndex(): int
+    + getModuleCode(): String
+    + getModuleName(): String
+    + getModuleCredits: String
+    + getMasterListIndex(moduleMasterList: ModuleList): int
+    + isEqual(searchModule: Module): boolean
+    + toFileFormat(): String
+    + compare(m: Module, m1: Module): int
+}
+
+class ModuleList {
+    - list: ArrayList<Module>
+
+    + addModule(module: Module): void
+    + removeModule(moduleCode: String): void
+    + getSize(): int
+    + get(index: int): Module
+    + isModuleExist(moduleCode: String): boolean
+    + isModuleExist(searchModule: Module): boolean
+    + getModule(moduleCode: String): Module
+    + getList(): ArrayList<Module>
+}
+
+Class ModuleMapping {
+    - localModule: Module
+    - mappedModule: Module
+
+    + isEqual(searchMapping: ModuleMapping): boolean
+    + getLocalModule(): Module
+    + getMappedModule(): Module
+}
+
+@enduml

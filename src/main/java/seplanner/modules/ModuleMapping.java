@@ -1,8 +1,8 @@
 package seplanner.modules;
 
 public class ModuleMapping {
-    public Module localModule;
-    public Module mappedModule;
+    protected Module localModule;
+    protected Module mappedModule;
 
     //@@author titustortoiseturtle1999
     public ModuleMapping(Module localModule, Module mappedModule) {

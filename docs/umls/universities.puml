@@ -1,0 +1,44 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam groupInheritance 2
+
+University "1..*" <--* UniversityList
+University <.. UniversityList
+UniversityList <.. University
+
+class University {
+    - index: int
+    - name: String
+    - list: ArrayList<ModuleMapping>
+
+    + addMapping(moduleMapping: ModuleMapping): void
+    + removeMapping(moduleMapping: ModuleMapping): void
+    + listAllMappings(): void
+    + listSelectedMappings(selectedModuleList: ModuleList): void
+    + getSelectedMappings(selectedModuleList: ModuleList)): ArrayList<ModuleMapping>
+    + getList(): ArrayList<ModuleMapping>
+    + getSelectedMappingListSize(): int
+    + getSelectedMappingListSize():int
+    + getName(): String
+    + getIndex(): int
+    + getMasterListIndex(universityMasterList: UniversityList): int
+    + isExistMapping(mapping: ModuleMapping): boolean
+    + toFileFormat(): String
+    + compare(u: University, u1: University): int
+    + getMC(): double
+}
+
+Class UniversityList {
+    - list: ArrayList<University>
+
+    + addUniversity(addedUniversity: University): void
+    + removeUniversity(universityName: String): void
+    + getSize(): int
+    + getList(): ArrayList<University>
+    + get(index: int): University
+    + isExistUniversity(universityName: String): boolean
+    + getUniversity(universityName: String)): University
+}
+
+@enduml

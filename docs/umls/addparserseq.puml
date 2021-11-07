@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+participant Parser
+participant AddCommandParser
+participant ParseCondition
+
+Parser -> AddCommandParser ++ : AddCommandParser()
+AddCommandParser -> AddCommandParser ++: identifyFlagsAndSplitArgs()
+deactivate AddCommandParser
+
+alt "/uni"
+    AddCommandParser -> AddCommandParser ++ : handleUniFlagArgs()
+
+    alt isText()
+        AddCommandParser -> ParseCondition ++ : isValidUniversity()
+        ParseCondition --> AddCommandParser
+        deactivate ParseCondition
+    else isNumeric()
+        AddCommandParser -> ParseCondition ++ : isValidUniversity()
+        ParseCondition --> AddCommandParser
+        deactivate ParseCondition
+    end
+    AddCommandParser --> Parser : new AddUniCommand()
+    deactivate AddCommandParser
+else "/mod"
+    AddCommandParser -> AddCommandParser ++ : handleModFlagArgs()
+
+    AddCommandParser --> Parser : new AddModCommand()
+    deactivate AddCommandParser
+else "/map"
+    AddCommandParser -> AddCommandParser ++ : handleMapFlagArgs()
+
+    AddCommandParser --> Parser : new AddMapCommand()
+    deactivate AddCommandParser
+    end
+AddCommandParser -> ParseCondition ++ :
+
+
+
+@enduml

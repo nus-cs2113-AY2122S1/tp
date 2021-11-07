@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+participant Parser
+participant SearchMapCommandParser
+participant ParseCondition
+
+-> Parser ++ : parseCommand(input: String, universityMasterList: UniversityList, universitySelectedList: UniversityList, moduleSelectedList: ModuleList)
+Parser -> SearchMapCommandParser ++ : parse(arguments: String, universityMasterList: UniversityList, universitySelectedList: UniversityList, moduleSelectedList: ModuleList)
+
+SearchMapCommandParser -> ParseCondition ++ : isEmptyInput(input: String)
+ParseCondition --> SearchMapCommandParser
+deactivate ParseCondition
+SearchMapCommandParser -> ParseCondition ++ : isNumeric(input: String)
+ParseCondition --> SearchMapCommandParser
+deactivate ParseCondition
+SearchMapCommandParser -> ParseCondition ++ : isIndexOutOfBounds(uniIndex: int, universityMasterList: UniversityList)
+ParseCondition --> SearchMapCommandParser
+deactivate ParseCondition
+SearchMapCommandParser -> ParseCondition ++ : isNullUniversity(university: University)
+ParseCondition --> SearchMapCommandParser
+deactivate ParseCondition
+SearchMapCommandParser -> ParseCondition ++ : isNoPotentialMapping(university: University, moduleSelectedList: ModuleList)
+ParseCondition --> SearchMapCommandParser
+deactivate ParseCondition
+
+SearchMapCommandParser --> Parser : new SearchMapCommand(university:University, universitySelectedList: UniversityList, universityMasterList: UniversityList, moduleSelectedList: ModuleList)
+
+@enduml

@@ -44,7 +44,6 @@ public class University implements Comparator<University> {
     public void listAllMappings() {
         for (int i = 0; i < list.size(); i++) {
             ModuleMapping currentMapping = list.get(i);
-            System.out.print(Constants.INDENTATION);
             UiMapping.printMapping(currentMapping, i + 1, true);
         }
     }
@@ -68,7 +67,7 @@ public class University implements Comparator<University> {
     public ArrayList<ModuleMapping> getSelectedMappings(ModuleList selectedModuleList) {
         ArrayList<ModuleMapping> selectedMappings = new ArrayList<>();
         for (ModuleMapping currentMapping : list) {
-            if (selectedModuleList.isModuleExist(currentMapping.localModule.getModuleCode())) {
+            if (selectedModuleList.isModuleExist(currentMapping.getLocalModule().getModuleCode())) {
                 selectedMappings.add(currentMapping);
             }
         }
