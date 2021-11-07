@@ -35,6 +35,7 @@ to easily access the different sections of this guide, and we hope you have a pl
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 * [Glossary](#glossary)
+* [Troubleshooting](#troublesho)
 
 ## Introduction
 
