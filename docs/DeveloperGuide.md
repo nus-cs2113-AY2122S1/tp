@@ -87,7 +87,10 @@ It interacts with `FinancialTracker` and `BudgetManager` and receives commands f
 
 `DataManager` &larr; `StonksXD_data.csv`
 
+The Sequence Diagram below shows how the components interact with each other in a typical feedback loop.
+It is illustrated using the hypothetical scenario where the user issues the command `del_ex i/1`.
 
+![](StonksXDSequenceDiagram.drawio.png)
 The sections below provide more information on the respective components.
 
 ---
@@ -121,19 +124,48 @@ The image below shows the sequence diagram of how the `AddExpenseCommand` class 
 
 ### Parser component
 
-The `Parser` class is in charge of converting user input to a command. It is also in charge of converting important 
-information such as users' entries to easy-to-store data, and vice versa.
+The `Parser` class is in charge of:
+1. Converting user inputs to commands. 
+2. It is also in charge of converting important user information to `csv` data, vice versa.
 
 #### Implementation
 
-`Parser` mainly uses regex to parse items. Here are the uses of regex in the `Parser` class.
-1. To determine if user inputs are in the correct format. 
-2. To split up user input to their respective parameters with the help of flags such as `a/` and `d/`. 
-3. To determine if data from the `csv` files are in the correct format.
-4. To split up data from the `csv` files into their respective parameters with the help of commas since our data are
-stored in `csv` files.
+`Parser` mainly uses regex to parse items.
 
 ---
+
+### Financial Tracker Component
+
+The `FinancialTracker` class is in charge of storing, deleting, and retrieving income and 
+expense related calculations while the program is running. It performs these operations based
+on the different commands it receives from the user.
+
+The class diagram below shows the structure of `FinancialTracker`.
+
+![](FinancialTrackerCD.drawio.png) 
+
+<to be updated>
+  
+---
+
+##### Converting user inputs to commands
+
+1. When the user gives an input, it will first be split into 2 parts command word and arguments using regex.
+2. The command word will be matched with the list of expected command words. If there is no match, return an 
+invalid command and the process stops here.
+3. If there is a match, `Parser` will check the validity of the arguments the user gave. This is also done
+using regex.
+4. If the arguments are valid, the corresponding command will be returned.
+5. If invalid, return an invalid command.
+
+##### Converting user information to `csv` data
+
+Every important field will be separated by `Parser` with a `,` before saving them into the respective `csv` files.
+
+##### Converting `csv` data to user information
+
+When a line of data is obtained from the `csv` file, `Parser` will check if the line fits the required format using
+regex.
 
 ### Budget Component
 
@@ -210,102 +242,111 @@ Below is a sequential diagram for the constructor of StonksGraph that shows the 
 
 ---
 
-
 ### Data storage Component
-The saving and loading of data is handled by the `DataManager` class. Data will be saved and loaded from 
-`StonksXD_Entries.csv` and `StonksXD_Settings.csv`, which will be located in the same directory as the program. 
 
-- `StonksXD_Entries.csv` will be storing users' income and expense entries.
-- `StonksXD_Settings.csv` will be storing users' budget values, threshold value and currency setting.
+The saving and loading of data is handled by the `DataManager` class. There are 2 `csv` files that will be storing 
+data. 
+
+First file is `StonksXD_Entries.csv` which will be storing entries. They are:
+1. `Expense` entries.
+2. `Income` entries.
+
+Second file is `StonksXD_Settings.csv` which will be storing settings. They are:
+1. Budget settings for various expense category.
+2. The currency setting.
+3. The threshold setting.
+
+Every important fields will be separate by a `,`. 
+These 2 files will be located in the same directory as `StonksXD.jar`.
 
 `DataManager` requires an instance of the `Parser`, `FinancialTracker`, `Ui`, `CurrencyManager` and `BudgetManager` 
 at the moment of creation. 
 
 - When saving data into the csv files, `DataManager` uses Java's `FileWriter` and `BufferedWriter` class to 
-interact with the csv file.
+interact with the csv files.
 - When loading data from the csv files, `DataManager` uses Java's `FileInputStream` and `Scanner` to interact with 
-the csv file. 
+the csv files. 
 
 The image below illustrates the class diagram in the context of data saving and loading.
 
-![img_3.png](DataManagerCD.drawio.png)
+![](DataManagerCD.drawio.png)
 
+#### Loading of data
+
+Loading of data will take place immediately when `StonksXD` starts. Settings will be loaded in first followed by 
+entries immediately.
+
+##### Loading of settings from `StonksXD_Settings.csv`
+
+1. Create a `FileInputStream`.
+2. Create a `Scanner` with the `FileInputStream`.
+3. Check if the first line of the `csv` file has the correct header. If the header is not correct, a warning will be 
+shown to the user.
+4. Read the second line,called `data`, which should contain all the settings.
+5. Pass `data` into `Parser` to obtain the `CurrencyType` and load it into `CurrencyManager`.
+6. Pass `data` into `Parser` to obtain the threshold value and load it into `BudgetManager`.
+7. Pass `data` into `Parser` to obtain the different budget settings and load them into `BudgetManager`.
+8. Return.
+9. Now DataManager will begin loading all the entries from `StonksXD_Entries.csv`.
+
+##### Loading of Entries from `StonksXD_Entries.csv`
+
+9. Create a `FileInputStream` to the `csv` file.
+10. Create a `Scanner` with the `FileInputStream`.
+11. Check if the first line of the `csv` file has the correct header. If the header is not correct, a warning will be
+shown to the user.
+12. Read from the `csv` file line by line.
+13. For every line, `x`, 3 things can happen (they will not happen concurrently):
+    - If `x` is blank we immediately read the next line.
+    - If `x` can be loaded as an `Expense` entry, `Parser` will convert it to an `Expense` and load it into 
+    `FinancialTracker`. Start reading the next line.
+    - If `x` can be loaded as an `Income` entry, `Parser` will convert it to an `Income` and load it into
+      `FinancialTracker`. Start reading the next line.
+14. If there are corrupted entries (blank or cannot be loaded as `Expense` or `Income), a warning will be 
+shown to the user.
+15. Return the control to caller.
+
+The sequence diagrams below will illustrate the loading process. Note that the diagrams do not show the full
+details to reduce complexity.
+
+![](.png)
 
 #### Saving
-This process will occur after every user command to ensure data security.
-
-When saving data,
-1. The main class (StonksXD) will call `saveAll()` which causes `DataManager` to start saving data.
-2. `DataManager` will call `saveEntries()`, to save all the expense and income entries into `StonksXD_Entries.csv` 
-first.
-3. A `FileWriter` to `StonksXD_Entries.csv` is created. A `BufferedWriter` is then created using the created 
-`FileWriter`. Using `BufferedWriter` should make the saving process more efficient since multiple writes will 
-take place. 
-4. The `csv` header will be written to `StonksXD_Entries.csv`. 
-The header: entry_type,entry_description,amount,category,date
-5. `DataManager` will obtain all the expenses that Stonks XD is tracking from `FinancialTracker`.
-6. For each expense, it will be converted to a `String` with each field being separated by a comma in `Parser`.
-The `String` will then be written to `StonksXD_Entries.csv`.
-7. Repeat step 5 and step 6 for incomes. (This process is omitted in the sequence diagram as it is 
-a repeat.)
-8. Close the `BufferedWriter` and return from `saveEntries()`, deleting both the `FileWriter` and `BufferedWriter`.
-9. `DataManager` will now call `saveSettings()`, to save the users' budget values, threshold value and currency setting 
-into `StonksXD_Settings.csv`. (This process will be shown in a separate sequence diagram to reduce complexity 
-and confusion. The steps will carry on after showing the sequence diagrams.)
-
-The sequence diagrams below illustrate the saving process (note that the diagrams are not exhaustive).
-
-![img_4.png](SavingFeatureSD.drawio.png)
-
-10. Create a `FileWriter` to `StonksXD_Settings.csv`. Followed by the `BufferedWriter`.
-11. The `csv` header will be written to `StonksXD_Settings.csv`.
-The header: currency,threshold,food,transport,medical,bills,entertainment,misc,overall
-12. The users' budget values, threshold value and currency setting will be converted to a `String` with each 
-important field separated by a comma in `Parser`. The `String` will then be written to `StonksXD_Settings.csv`.
-13. Close the `BufferedWriter` and return from `saveSettings()`, deleting both the `FileWriter` and `BufferedWriter`.
-14. Now all entries and settings are saved. Control is returned to main.
 
 
-#### Loading
-This process will occur the moment Stonks XD starts to run.
+Saving of data will take place after every user input. Entries will be saved first followed by
+settings immediately.
 
-When loading data,
-1. The main class (StonksXD) will call `loadAll()` which causes `DataManager` to start loading data.
-2. `DataManager` will call `loadSettings()`, to load users' budget values, threshold value and currency setting first.
-   1. `DataManager` will look for `StonksXD_Settings.csv` and create a `FileInputStream`. If file cannot be found, a new
-   `StonksXD_Settings.csv` will be created and the loading process for settings will end here.
-   2. A `Scanner` is created using the `FileInputStream` to read from `StonksXD_Settings.csv`.
-   3. `Scanner` reads the first line which should be the `csv` header. If the header is found to be corrupted, an error
-   message will be shown to the user through `Ui`. Error messages are constants in the `Message` class.
-   4. `Scanner` reads the second line (let's call it `data`) which should contain all the settings. If there is something 
-   wrong with the format or there is no second line at all, an error will be shown and the settings will not be loaded.
-   5. `Parser` will take in `data` and return the `CurrencyType`.
-   6. The `CurrencyType` will then be loaded into `CurrencyManager`.
-   7. `Parser` will take in `data` again and return the `thresholdValue`.
-   8. The `thresholdValue` will then be loaded into `BudgetManager`.
-   9. Now `DataManager` will be loading the users' budget values. (this process will not be shown in the sequence 
-   diagram below to reduce complexity)
-   10. `Parser` will take in `data` again and return an `ArrayList<double>`. Each double representing the budget value 
-   for an expense category.
-   11. Each budget value will be loaded into their respective categories in `BudgetManager`.
-3. `DataManager` will now call `loadEntries()`, to load users' expense and income entries (this process is omitted 
-from the sequence diagram to reduce complexity).
-   1. `DataManager` will look for `StonksXD_Entries.csv` and create a `FileInputStream`. If file cannot be found, a new
-      `StonksXD_Entries.csv` will be created and the loading process for settings will end here.
-   2. A `Scanner` is created using the `FileInputStream` to read from `StonksXD_Entries.csv`.
-   3. `Scanner` reads the first line which should be the `csv` header. If the header is found to be corrupted, an error
-      message will be shown to the user through `Ui`. Error messages are constants in the `Message` class.
-   4. `Scanner` will now read line by line till the end of file. For every line, `DataManager` will pass it to `Parser` to 
-   attempt to convert it to either an expense or an income. If it can be converted, it will be loaded into 
-   `FinancialTracker`. If the line cannot be understood by `Parser`, it will be deemed as a corrupted line, and it will
-   not be loaded.
-   5. When the end of line is reached, `DataManager` will let the users know if there are any corrupted lines. At this 
-   point, all valid entries are loaded already.
-4. Now all entries and settings are loaded. Control is returned to main.
+##### Saving of entries into `StonksXD_Entries.csv`
 
-The sequence diagram below illustrates the loading process (note that the diagram is not exhaustive).
+1. Create a `FileWriter` to the `csv` file.
+2. Create a `BufferedWriter` using the `FileWriter`. `BufferedWriter` is used as since we are writing many times, it
+could be the faster option.
+3. Write in the `csv` header.
+4. Obtain all `Expense` entries from `FinancialTracker`.
+5. For each `Expense`, convert it to a `String` through `Parser` and write the `String` to the `csv` file.
+6. Obtain all `Income` entries from `FinancialTracker`. (Will not be shown in diagram as it is similar to step 4.)
+7. For each `Income`, convert it to a `String` through `Parser` and write the `String` to the `csv` file.
+(Will not be shown in diagram as it is similar to step 5.)
+8. Close the buffer and return.
+9. Begin saving the settings.
 
----
+##### Saving of settings into `StonksXD_Settings.csv`
+
+10. Create a `FileWriter` to the `csv` file.
+11. Create a `BufferedWriter` using the `FileWriter`. `BufferedWriter` is used as since we are writing many times, it
+could be the faster option.
+12. Write in the `csv` header.
+13. Use `Parser` to convert all settings to a `String`.
+14. Write the `String` to the `csv` file.
+15. Close the buffer.
+16. Return the control to the caller.
+
+The sequence diagrams below will illustrate the saving process. Note that the diagrams do not show the full
+details to reduce complexity.
+
+![](.png)
+
 
 ## Product scope
 ### Target user profile
@@ -316,7 +357,11 @@ It is designed to fit the needs of students who travel frequently and prefer log
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+StonksXD a global financial tracking journal, capable of both budgeting and 
+analysis to serve financial needs while traveling. It is highly operable and 
+intuitive command line program that is simple to use and is optimized for 
+anyone on the go. Using a minimalistic command format, we aim to empower 
+youth to manage their finances by making personal finance entries simple.
 
 ---
 
@@ -463,7 +508,7 @@ Below is a list of the currently available tests:
 Intellij comes with an in-built Gradle Daemon that can be used to run the following test:
 
 - `.\gradlew test` to check if all test files have passed.
-- `.\graldew checkStyleTest` to check if test files comply with certain coding standards and conventions.
+- `.\gradlew checkStyleTest` to check if test files comply with certain coding standards and conventions.
 - `.\gradlew checkStyleMain` to check if main program complies with all JAVA coding standards.
 <br>
 
