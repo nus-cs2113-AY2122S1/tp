@@ -8,7 +8,6 @@ User Interface (GUI)
 based navigation, MedBot allows head nurses to complete their management tasks done quicker and more efficiently.
 
 ### Summary of Contributions
-
 * Code
   contributed: [RepoSense link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&tabAuthor=CrimsonTitan79&tabRepo=AY2122S1-CS2113-T13-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 * Enhancements implemented
@@ -22,12 +21,17 @@ based navigation, MedBot allows head nurses to complete their management tasks d
 
 * Documentations:
     * User Guide Contribution
-        * Explanation for how persistent data is stored for MedBot.
+      * Update User Guide with the latest features and expected outputs after changes in MedBot code
+        * Added find appointments section 
+      * Explanation for how persistent data is stored for MedBot.
+      * Edits to refine certain explanations and certain edge cases
+      * Add contents page for easy navigation
     * Developer Guide Contribution
-        * Added implementation details for Storage component.
-        * Added Sequence diagram for `Storage`.
+      * Section on instructions for manual testing
+      * Implementation details for Storage component.
+      * Sequence diagram for `Storage`.
 
 * Review/mentoring contributions
-    * Fix minor bugs from other components when they arise.
+    * Fix minor bugs from other components when they arise. (e.g. erroneous UI print messages )
     * Occasional PR reviews: [link](https://github.com/AY2122S1-CS2113-T13-1/tp/pull/46).
 
