@@ -10,7 +10,7 @@ public class SchedulerUi {
 
     //@@author Kureans
     public static String getSchedulerCommandList() {
-        return "Here are the list of commands:" + END_LINE + END_LINE
+        return "Here is the list of commands:" + END_LINE + END_LINE
                 + "help" + END_LINE
                 + "add" + END_LINE
                 + "delete" + END_LINE
@@ -21,7 +21,7 @@ public class SchedulerUi {
                 + "switch" + END_LINE
                 + "get view" + END_LINE
                 + "exit" + END_LINE + END_LINE
-                + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
+                + "To view more information about each command and their respective command formats, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes." + END_LINE
                 + "For expected output examples, please refer to the actual user guide." + END_LINE;
@@ -97,8 +97,8 @@ public class SchedulerUi {
      * @return String with help about the delete appointment command
      */
     public static String getDeleteAppointmentHelpMessage() {
-        return "Delete an appointment from the list.\n" + END_LINE
-                + "Format: delete APPOINTMENT_ID\n" + END_LINE;
+        return "Delete an appointment from the list." + END_LINE
+                + "Format: delete APPOINTMENT_ID" + END_LINE;
     }
 
     /**
@@ -170,7 +170,7 @@ public class SchedulerUi {
      * @return String indicating that the specified appointment has been deleted from the system
      */
     public static String getDeleteAppointmentMessage(int id) {
-        return "Appointment with id " + id + " deleted from system." + END_LINE;
+        return "Appointment with ID " + id + " deleted from system." + END_LINE;
     }
 
     /**
@@ -192,6 +192,6 @@ public class SchedulerUi {
      * @return String indicating the current view.
      */
     public static String getCurrentViewMessage() {
-        return "You are currently in the Scheduler's View.";
+        return "You are currently in the Scheduler view.";
     }
 }
