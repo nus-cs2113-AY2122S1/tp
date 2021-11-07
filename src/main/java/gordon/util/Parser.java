@@ -406,6 +406,24 @@ public class Parser {
         }
     }
 
+    private void checkForEmptyTags(String[] splitTagNames) throws GordonException {
+        if (splitTagNames.length == 0) {
+            throw new GordonException(GordonException.TAG_FORMAT_EMPTY);
+        }
+
+        for (String splitTagName : splitTagNames) {
+            if (splitTagName.trim().isEmpty())  {
+                throw new GordonException(GordonException.TAG_FORMAT_EMPTY);
+            }
+        }
+    }
+
+    private void checkForRecipeName(String recipeName) throws GordonException {
+        if (recipeName.isEmpty()) {
+            throw new GordonException(GordonException.EMPTY_RECIPE_NAME);
+        }
+    }
+
     public Command addTagParse() throws GordonException {
         String[] splitContent = line.split("/");
 
@@ -417,19 +435,8 @@ public class Parser {
         String tagNames = splitContent[2].trim();
         String[] splitTagNames = tagNames.split("\\+");
 
-        try {
-            if (splitTagNames[0].trim().isEmpty()) {
-                throw new GordonException(GordonException.TAG_FORMAT_NOTAGS);
-            }
-
-            if (recipeName.isEmpty()) {
-                throw new GordonException(GordonException.EMPTY_RECIPE_NAME);
-            }
-
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new GordonException(GordonException.TAG_NONE_DETECTED);
-        }
-
+        checkForEmptyTags(splitTagNames);
+        checkForRecipeName(recipeName);
         return new TagAddCommand(recipeName, splitTagNames);
     }
 
@@ -443,15 +450,7 @@ public class Parser {
         String tagNames = splitContent[1].trim();
         String[] splitTagNames = tagNames.split("\\+");
 
-        try {
-            if (splitTagNames[0].trim().isEmpty()) {
-                throw new GordonException(GordonException.DELETETAG_FORMAT_NOTAGS);
-            }
-
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new GordonException(GordonException.TAG_NONE_DETECTED);
-        }
-
+        checkForEmptyTags(splitTagNames);
         return new TagDeleteCommand(splitTagNames);
     }
 
@@ -466,19 +465,8 @@ public class Parser {
         String tagNames = splitContent[2].trim();
         String[] splitTagNames = tagNames.split("\\+");
 
-        try {
-            if (splitTagNames[0].trim().isEmpty()) {
-                throw new GordonException(GordonException.UNTAG_FORMAT_NOTAGS);
-            }
-
-            if (recipeName.isEmpty()) {
-                throw new GordonException(GordonException.EMPTY_RECIPE_NAME);
-            }
-
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new GordonException(GordonException.TAG_NONE_DETECTED);
-        }
-
+        checkForEmptyTags(splitTagNames);
+        checkForRecipeName(recipeName);
         return new TagUntagCommand(recipeName, splitTagNames);
     }
 }

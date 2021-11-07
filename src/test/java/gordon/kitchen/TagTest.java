@@ -152,7 +152,7 @@ public class TagTest {
                 + "tag / Chicken Rice / Hawker Food + Poultry + Favorite"
                 + System.lineSeparator()
                 + "untag / Chicken Rice / ++";
-        String expected = formatException(GordonException.TAG_NONE_DETECTED);
+        String expected = formatException(GordonException.TAG_FORMAT_EMPTY);
         inputOutputTest(input,expected);
     }
 
@@ -283,14 +283,14 @@ public class TagTest {
     @Test
     public void testDeleteTag_WrongFormat2() {
         String input = "deleteTag /++";
-        String expected = formatException(GordonException.TAG_NONE_DETECTED);
+        String expected = formatException(GordonException.TAG_FORMAT_EMPTY);
         inputOutputTest(input,expected);
     }
 
     @Test
     public void testDeleteTag_WrongFormat3() {
         String input = "deleteTag / + +";
-        String expected = formatException(GordonException.DELETETAG_FORMAT_NOTAGS);
+        String expected = formatException(GordonException.TAG_FORMAT_EMPTY);
         inputOutputTest(input,expected);
     }
 
