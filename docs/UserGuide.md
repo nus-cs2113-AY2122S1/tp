@@ -67,6 +67,7 @@ Code Hunt is a text-based adventure game using command lines for children aged 4
 ***
     
 ### Main page:
+
 ```markdown
  ____          _        _   _             _  
 / ___|___   __| | ___  | | | |_   _ _ __ | |_
@@ -102,6 +103,7 @@ Please choose your game mode:
 (1) Easy Mode | (2) Difficult Mode.
 ```
 - `check`       Check current game progress. You will see something like this:
+
 ```markdown
 Code Hunt [GAME MENU] > check
    ____      _      __  __  U _____ u       ____    U _____ u   ____   U  ___ u   ____     ____    
@@ -126,6 +128,7 @@ Here is your game record of difficult level:
 
 ### Game page
 - Enter game page by choosing `start` and `game level` in the main page, and you will see this:
+
 ```markdown
             _.------.                        .----.__
            /         \_.       ._           /---.__  \
@@ -171,6 +174,7 @@ We will be waiting for you and the cards!
 
 ### Card Page
 - Enter card page by choosing `card`, and you will see this:
+
 ```markdown
 Code Hunt [GAME MENU] > card
 
@@ -241,36 +245,36 @@ this username next time.
 
 ## Command Summary
 ### Main page
-| Action |  Format | Function   |
+| Action       |  Format       | Function      |
 | ------------ | ------------- | ------------- |
-| newgame | newgame | Start a new game  |
-| continue | econtinue | Continue the game stored previously  |
-| help | help | Display a list of available commands  |
-| about | about | Display information about Code Hunt  |
-| exit | exit | Exit Code Hunt  |
-| start | start | Start the game  |
-| check | check | Check current game progress  |
-| card | card | Manage your holding cards  |
-| back | back | Back to main menu  |
+| newgame      | newgame       | Start a new game  |
+| continue     | econtinue     | Continue the game stored previously  |
+| help         | help          | Display a list of available commands  |
+| about        | about         | Display information about Code Hunt  |
+| exit         | exit          | Exit Code Hunt  |
+| start        | start         | Start the game  |
+| check        | check         | Check current game progress  |
+| card         | card          | Manage your holding cards  |
+| back         | back          | Back to main menu  |
+
 
 ### Intermediate page
-| Action |  Format | Function    |
-| ------------ | ------------- | -------------  |
-| start | start | Start the game and then choose your difficulty level.  |
-| check | check | Check current game progress.  |
-| card | card |  Manage your holding cards.  |
-| back | back | Back to main menu  |
-| exit | exit | Exit Code Hunt  |
+| Action       |  Format       | Function      |
+| ------------ | ------------- | ------------- |
+| start        | start         | Start the game and then choose your difficulty level.  |
+| check        | check         | Check current game progress.  |
+| card         | card          |  Manage your holding cards.  |
+| back         | back          | Back to main menu  |
+| exit         | exit          | Exit Code Hunt  |
 
 ### Card Page
-| Action |  Format | Function  |
-| ------------ | ------------- | -------------  |
-| list  | list | List all the cards you gained for different game levels  |
-| delete | delete +  CARD_INDEX | Delete an unwanted card in your package.  |
-| find | find + CARD_INDEX |  Search cards by index.  |
-| help | help | Display a list of available commands.  |
-| back | back | Back to game menu |
-| exit | exit | Exit Code Hunt |
-
+| Action       |  Format                    | Function      |
+| ------------ | -------------------------- | ------------- |
+| list         | list                       | List all the cards you gained for different game levels  |
+| delete       | delete +  CARD_INDEX       | Delete an unwanted card in your package.  |
+| find         | find + CARD_INDEX          |  Search cards by index.  |
+| help         | help                       | Display a list of available commands.  |
+| back         | back                       | Back to game menu |
+| exit         | exit                       | Exit Code Hunt |
 
 
