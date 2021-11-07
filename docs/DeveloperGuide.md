@@ -215,7 +215,7 @@ type in correct Commands/Parameters.
 
 ### Graph
 
-[](images/graph_class_dig.png)
+![](images/graph_class_dig.png)
 
 Graph works by creating a 2d grid and printing the bars based on the current position of the terminal cursor. 
 This lets us bypass the restriction in a CLI based application where you can only print from up to down and 
