@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+-> ":MainParser": parse(userInput)
+activate ":MainParser"
+
+":MainParser" -> ":MainParser":treatUserInput(userInput)
+activate ":MainParser"
+":MainParser" --> ":MainParser": treatedUserInput: String
+deactivate ":MainParser"
+
+":MainParser" -> ":String": treatedUserInput.split(regex)
+activate ":String"
+":String" --> ":MainParser": word(String[])
+deactivate ":String"
+
+":MainParser" -> ":MainParser": getCommandInstruction
+activate ":MainParser"
+":MainParser" --> ":MainParser": commandInstruction: String
+deactivate ":MainParser"
+":MainParser" --> ":MainParser": commandWord: String = words[0]
+
+":MainParser" -> ":MainParser": parseCommand(commandWord, commandInstruction)
+
+ref over ":MainParser": Parsing based on: \ncommandWord\ncommandInstruction
+<--":MainParser": Command
+
+@enduml

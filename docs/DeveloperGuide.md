@@ -8,8 +8,8 @@ possibly expand on the application.
 * [Design and Implementation](#3-design-and-implementation)
   * [Architecture](#31-overall-architecture)
   * [UI component](#32-ui-component)
+  * [Parser component](#parser-component)
   * [Command component](#command-component)
-  * [Parser logic component](#parser-logic-component)
   * [GoalList component](#goallist-component)
   * [Storage component](#storage-component)
 * [Appendix A: Product Scope](#appendix-a-product-scope)
@@ -153,15 +153,38 @@ While the Sequence Diagram represents the normal flow of logic, there is a recur
 5. If the boolean value is true, `handleState()` would recursively call itself
 6. If the boolean value is false, `handleState()` would pass the call back to `:HappyBit`
 
+### Parser component
+
+The `Parser` logic component handles the parsing of the input passed in by the user and returns a suitable `Command`
+object that will be executed. Within the component itself, there are more specific and detailed `Parser` classes based 
+on the commandWord and commandInstruction from the user, as indicated in the diagram below.
+
+![](Diagram Images/MainParser.png)
+
+Below are the specific parsers that will be called depending on the user's commandWord.
+
+* `AddParser` - Handles the parsing of inputs starting with `set` and `add` keywords
+* `DeleteParser` - Handles the parsing of inputs starting with `remove` and `delete`
+* `UpdateParser` - Handles the parsing of inputs starting with `update` and `change`
+* `DoneParser` - Handles the parsing of inputs starting with `done`
+* `ListGoalParser` - Handles the parsing of inputs starting with `list`
+* `ListHabitParser` - Handles the parsing of inputs starting with `view`
+* `SetParser` - Handles the parsing of inputs starting with `goal`
+
+For inputs of `exit`, `help`, `list` and `return` their respective functions are run immediately without the need to parse further.
+
+For any other invalid inputs that do not start with the listed keywords, the `HelpCommand` functionality is invoked.
+
 ### Command component
 
-When the user runs the Program, the main function dealing with the user's inputs is the `handleUserInput()` function
+When the user runs the Program, the main function dealing with the user's inputs is the `processInput` function in `UiMain.java`
 which obtains a `Command` object after parsing the input using the `Parser` component.
 
 `Command` objects available are:
 * `AddGoalCommand` - Adds a new Goal to the GoalList.
 * `AddHabitCommand` - Adds a new Habit object to a specified Goal set by the user.
-* `UpdateGoalNameCommand` - Updates the name of a Goal specified by the user.
+* `UpdateGoalCommand` - Updates attributes for a Goal [Name, End Date or Type]
+* `UpdateHabitCommand` - Updates attributes for a Habit [Name or Interval]
 * `DeleteGoalCommand` - Deletes a Goal from the GoalList
 * `DeleteHabitCommand` - Deletes a Habit object from a specified Goal set by the user.
 * `DoneHabitCommand` - Marks a Habit object under a Goal as done.
@@ -223,22 +246,6 @@ sequence diagram below is carried out:
 When the `runCommand` function is executed for the `HelpCommand` object, it instantiates a `PrintManager` object and 
 calls the `printCommandList` method which prints out a pre-set message informing the user of all the inputs they
 can type to execute a certain command.
-
-### Parser logic component
-
-The `Parser` logic component handles the parsing of the input passed in by the user and returns a suitable `Command` 
-object that will be executed. Within the component itself, there are more specific and detailed `Parser` classes for 
-handling various inputs from the user.
-
-* `AddParser` - Handles the parsing of inputs starting with `set` and `add` keywords
-* `DeleteParser` - Handles the parsing of inputs starting with `remove` and `delete`
-* `DoneParser` - Handles the parsing of inputs starting with `done`
-* `ListParser` - Handles the parsing of inputs starting with `view`
-* `SetParser` - Handles the parsing of inputs starting with `goal`
-
-For inputs of `bye`, `help` `list` their respective functions are run immediately without the need to parse further.
-
-For any other invalid inputs that do not start with the listed keywords, the `HelpCommand` functionality is invoked.
 
 ### GoalList component
 
