@@ -89,7 +89,8 @@ public class Lesson extends Event {
         }
     }
 
-    public Lesson(String moduleCode, String classNumber, DayOfWeek dayOfWeek, LocalTime start, LocalTime end, int[] weeks) {
+    public Lesson(String moduleCode, String classNumber,
+            DayOfWeek dayOfWeek, LocalTime start, LocalTime end, int[] weeks) {
         super(moduleCode, Semester.getSemester().getStartingMonday().with(dayOfWeek).atTime(start),
                 Semester.getSemester().getStartingMonday().with(dayOfWeek).atTime(end),
                 RecurrenceEnum.WEEKLY);
