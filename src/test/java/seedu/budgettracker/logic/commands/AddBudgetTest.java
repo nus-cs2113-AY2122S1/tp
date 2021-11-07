@@ -3,9 +3,13 @@ package seedu.budgettracker.logic.commands;
 import org.junit.jupiter.api.Test;
 import seedu.budgettracker.data.RecordList;
 import seedu.budgettracker.data.records.exceptions.DuplicateBudgetException;
+import seedu.budgettracker.logic.commands.exceptions.CommandException;
+
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class AddBudgetTest {
 
@@ -23,18 +27,36 @@ public class AddBudgetTest {
     }
 
     @Test
-    void addBudget_addingToExistingBudget_expectFail() {
-        double amount = 20.00;
-        int month = 10;
+    void execute_invalidAmount_throwsCommandException() {
+        double negativeAmount = -20.00;
+        double zeroAmount = 0.00;
+        double tooLargeAmount = 1000000001;
+        int month = LocalDate.now().getMonthValue();
 
-        RecordList currentBudgetList = new RecordList(month);
+        AddBudgetCommand addNegativeBudgetCommand = new AddBudgetCommand(negativeAmount, month);
+        assertThrows(CommandException.class, addNegativeBudgetCommand::execute);
 
-        try {
-            currentBudgetList.addBudget(amount, false);
-        } catch (DuplicateBudgetException e) {
-            e.printStackTrace();
-        }
+        AddBudgetCommand addZeroBudgetCommand = new AddBudgetCommand(zeroAmount, month);
+        assertThrows(CommandException.class, addZeroBudgetCommand::execute);
 
-        assertThrows(DuplicateBudgetException.class, () -> currentBudgetList.addBudget(100, false));
+        AddBudgetCommand addTooLargeBudgetCommand = new AddBudgetCommand(tooLargeAmount, month);
+        assertThrows(CommandException.class, addTooLargeBudgetCommand::execute);
+    }
+
+    @Test
+    public void equals() {
+        AddBudgetCommand addTest1Command = new AddBudgetCommand(100,
+                LocalDate.now().getMonthValue());
+        AddBudgetCommand addTest2Command = new AddBudgetCommand(200,
+                LocalDate.now().getMonthValue());
+
+        //same object -> returns true
+        assertEquals(addTest1Command, addTest1Command);
+
+        //different types -> returns false
+        assertFalse(addTest1Command.equals(1));
+
+        // different expenditures -> returns false
+        assertFalse(addTest1Command.equals(addTest2Command));
     }
 }
