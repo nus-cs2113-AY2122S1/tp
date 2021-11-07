@@ -40,8 +40,14 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.utility.tools.DateOperator.*;
-import static seedu.utility.tools.Extractor.*;
+import static seedu.utility.tools.DateOperator.extractDate;
+import static seedu.utility.tools.DateOperator.extractStartAndEndDate;
+import static seedu.utility.tools.DateOperator.getYearFormat;
+import static seedu.utility.tools.DateOperator.isValidDateRange;
+import static seedu.utility.tools.Extractor.extractDescription;
+import static seedu.utility.tools.Extractor.extractExpenseCategory;
+import static seedu.utility.tools.Extractor.extractIncomeCategory;
+import static seedu.utility.tools.Extractor.extractIndex;
 
 public class Parser {
 
