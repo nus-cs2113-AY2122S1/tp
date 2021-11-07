@@ -189,7 +189,7 @@ is sufficient to be deducted.
 
 ![](diagrams/CookedRecipe.png)
 
-> **Note**: The lifelines for `CookedRecipeComand` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reach the end of diagram.
+> **Note**: The lifeline for `CookedRecipeComand` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reach the end of diagram.
 
 The feature leaves the responsibility of dealing with expired ingredients to the user, and
 will remove ingredients starting from the earliest batch of ingredients. (ingredients that 
@@ -213,7 +213,7 @@ Here is the sequence diagram for how list recipe user can cook works
 
 ![](diagrams/ListRecipesUserCanCook.png)
 
-> **Note**: The lifelines for `ListRecipesUserCanCookComand` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reach the end of diagram.
+> **Note**: The lifeline for `ListRecipesUserCanCookComand` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reach the end of diagram.
 
 The feature will indicate that the `Recipe` can be cooked even if some of the ingredients have
 expired. However, it will inform the user that there are expiring ingredients. The responsibility
@@ -280,7 +280,7 @@ To help young adults who are living in their own home keep track of ingredients 
 1. Add a recipe 
     1. Prerequisite: 
     The ingredient "Chicken" and "Salt" exist in the IngredientRepository. The recipe "Chicken Soup" doesn't exist in the RecipeList.
-    2. Test case: `add recipe r/Chicken Soup i/Chicken q/1 i/Salt q/20`
+    2. Test case: `add recipe r/Chicken Soup i/Chicken q/1 i/Salt q/20` <br/>
        Expected: Recipe added. Details of the recipe added shown. Number of recipes in the RecipeList shown.
     3. Test case: `add recipe` <br/>
     Expected: No recipe added, Details of error shown.
@@ -290,17 +290,79 @@ To help young adults who are living in their own home keep track of ingredients 
 
 2. Add a recipe when the recipe already exists.
     1. Prerequisite: The recipe "Chicken Soup" exists in the RecipeList.
-    2. Test case: `add recipe r/Chicken Soup i/Chicken q/1 i/Salt q/20`
+    2. Test case: `add recipe r/Chicken Soup i/Chicken q/1 i/Salt q/20` <br/>
        Expected: No recipe added. Details of the error are shown.
 
 
 3. Add a recipe with zero quantity for an ingredient.
-    1. Test case: `add recipe r/Chicken Soup i/Chicken q/0 i/Salt q/20`
+    1. Test case: `add recipe r/Chicken Soup i/Chicken q/0 i/Salt q/20` <br/>
        Expected: No recipe added. Details of the error are shown.
 
 
 4. Add a recipe with some ingredients having no quantity or vice versa.
-   1. Test case: `add recipe r/Chicken Soup i/Chicken i/Salt q/20` <br/.
+   1. Test case: `add recipe r/Chicken Soup i/Chicken i/Salt q/20` <br/>
      Expected: No recipe added. Details of the error are shown, command usage message is shown.
    2. Test case: `add recipe r/Chicken Soup q/1 i/Salt q/20` <br/>
     Expected: Similar to previous.
+
+### Delete a recipe
+1. Delete a recipe
+    1. Prerequisite: The recipe "Chicken Soup" exist in the RecipeList.
+    2. Test case: `delete recipe r/Chicken Soup` <br/>
+       Expected: Recipe deleted. Details of the deleted recipe shown. Number of recipes in the RecipeList shown.
+    3. Incorrect delete recipe command to try: `delete recipe`, `delete recipe r/1`,`...` <br/>
+       Expected: No recipe deleted. Details of the errors are shown.
+
+
+2. Delete a recipe that doesn't exist in the RecipeList.
+    1. Prerequisite: The recipe "Apple Pie" doesn't exist in the RecipeList.
+    2. Test case: `delete recipe r/Apple Pie` <br/>
+       Expected: No recipe deleted. Details of the error is shown.
+
+### Cooked a recipe
+
+1. Cooked a recipe
+    1. Prerequisite: 
+       - The recipe "Chicken Soup" exist in the RecipeList, with 1 quantity for "Chicken" and 20 quantities for "Salt". 
+       - The ingredients "Chicken" and "Salt" exist in the IngredientRepository with at least 1 and 20 quantities respectively.
+    2. Test case: `cooked r/Chicken Soup` <br/>
+       Expected: Quantities of remaining ingredients in the IngredientRepository shown.
+    3. Incorrect cooked recipe commands to try: `cooked`, `cooked r/1`, `...` <br/>
+       Expected: No ingredients deleted, Details of error messages shown.
+
+
+2. Try to cook a recipe with insufficient ingredients
+    1. Prerequisite: 
+       - The recipe "Chicken Soup" exist in the RecipeList, with 1 quantity for "Chicken" and 20 quantities for "Salt".
+       - The ingredients "Chicken" and "Salt" exist in the IngredientRepository with less than 1 and 20 quantities respectively.
+    2. Test case: `cooked r/Chicken Soup` <br/>
+       Expected: No ingredients deleted. Informs the user to generate a shopping list to determine ingredients they're missing.
+
+
+3. Try to cook a recipe that doesn't exist in the RecipeList.
+    1. Prerequisite: The recipe "Apple Pie" doesn't exist in the RecipeList.
+    2. Test case: `cooked r/Apple Pie` <br/>
+       Expected: No ingredients deleted. Details of error message shown.
+
+### List recipes user can cook
+
+1. Sufficient ingredients to cook a certain recipe
+    1. Prerequisite: 
+       - The recipe "Chicken Soup" exist in the RecipeList, with 1 quantity for "Chicken" and 20 quantities for "Salt". 
+       - The ingredients "Chicken" and "Salt" exist in the IngredientRepository with at least 1 and 20 quantities respectively.
+    2. Test case: `list recipes i can cook` <br/>
+       Expected: Recipes that can be cooked are shown. A reminder will be given to user if some of the ingredients are expired.
+
+    
+2. Insufficient ingredients to cook a certain recipe
+    1. Prerequisite: 
+       - The recipe "Chicken Soup" exist in the RecipeList, with 1 quantity for "Chicken" and 20 quantities for "Salt". 
+       - The ingredients "Chicken" and "Salt" exist in the IngredientRepository with less than 1 and 20 quantities respectively.
+    2. Test case: `list recipe i can cook` <br/>
+       Expected: No recipes shown. Informs user they don't have enough ingredients.
+
+
+3. No recipes in RecipeList
+    1. Prerequisite: RecipeList is empty
+    2. Test case: `list recipe i can cook` <br/>
+       Expected: Informs user that the RecipeList is empty.
