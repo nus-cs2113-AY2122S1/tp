@@ -10,8 +10,6 @@ import seedu.duke.items.characteristics.Member;
 import seedu.duke.parser.ItemType;
 import seedu.duke.parser.Parser;
 
-import java.util.ArrayList;
-
 import static seedu.duke.Duke.eventCatalog;
 import static seedu.duke.parser.ItemType.MEMBER;
 import static seedu.duke.parser.ItemType.EVENT;
@@ -98,7 +96,7 @@ public abstract class SelectParser extends Parser {
         if (command.length < 3) {
             throw new DukeException("Please enter a name!");
         }
-        StringBuilder memberNameQuery = new StringBuilder("");
+        StringBuilder memberNameQuery = new StringBuilder();
         for (int i = 2; i < command.length; i++) {
             memberNameQuery.append(command[i].trim());
             memberNameQuery.append(" ");
