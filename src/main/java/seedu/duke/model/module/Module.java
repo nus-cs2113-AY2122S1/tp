@@ -20,14 +20,12 @@ public class Module {
     private String grade;
 
     public Module(String moduleCode, String title, String moduleCredit) {
-        // subject to change
         this.moduleCode = moduleCode;
         this.title = title;
         this.moduleCredit = moduleCredit;
     }
 
     public Module(String moduleCode, String title, String moduleCredit, String grade) {
-        // subject to change
         this.moduleCode = moduleCode;
         this.title = title;
         this.moduleCredit = moduleCredit;
@@ -110,7 +108,6 @@ public class Module {
 
     //@@author Roycius
     public String serialize() {
-        // subject to change
         return moduleCode + " | " + title + " | " + moduleCredit + " | " + grade;
     }
 
@@ -131,6 +128,7 @@ public class Module {
         }
     }
 
+    //@@author richwill28
     /**
      * Returns the full module information as a string in a ready to print format. This should only be called
      * on a module retrieved from FullModuleList.

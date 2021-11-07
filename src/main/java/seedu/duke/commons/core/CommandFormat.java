@@ -3,7 +3,7 @@ package seedu.duke.commons.core;
 import static seedu.duke.ui.Ui.PADDING;
 
 //@@author Roycius
-public class CommandFormat {
+public final class CommandFormat {
     public static final String ADD_TASK_FORMAT =
             "add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}";
 
