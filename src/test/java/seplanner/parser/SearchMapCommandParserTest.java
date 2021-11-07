@@ -2,6 +2,7 @@ package seplanner.parser;
 
 import org.junit.jupiter.api.Test;
 import seplanner.commands.SearchMapCommand;
+import seplanner.exceptions.SearchMapParseException;
 import seplanner.modules.ModuleList;
 import seplanner.storage.Storage;
 import seplanner.universities.UniversityList;
@@ -35,7 +36,7 @@ public class SearchMapCommandParserTest {
             SearchMapCommand command = new SearchMapCommandParser().parse("Boston University",
                     universityMasterList, universitySelectedList, moduleSelectedList);
             assertEquals("Boston University", command.getSelectedUniversity().getName());
-        } catch (ParseException e) {
+        } catch (SearchMapParseException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -45,7 +46,7 @@ public class SearchMapCommandParserTest {
         try {
             new SearchMapCommandParser().parse("non existent", universityMasterList,
                     universitySelectedList, moduleSelectedList);
-        } catch (ParseException e) {
+        } catch (SearchMapParseException e) {
             assertEquals("University not found.", e.getMessage());
         }
     }
@@ -54,8 +55,26 @@ public class SearchMapCommandParserTest {
     public void test_EmptyUniversityName_exceptionThrown() {
         try {
             new SearchMapCommandParser().parse("", universityMasterList, universitySelectedList, moduleSelectedList);
-        } catch (ParseException e) {
+        } catch (SearchMapParseException e) {
             assertEquals("Missing arguments.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void test_IndexNotExist_exceptionThrown() {
+        try {
+            new SearchMapCommandParser().parse("0", universityMasterList, universitySelectedList, moduleSelectedList);
+        } catch (SearchMapParseException e) {
+            assertEquals("This university index does not exist.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void test_NoAvailableMappings_exceptionThrown() {
+        try {
+            new SearchMapCommandParser().parse("1", universityMasterList, universitySelectedList, moduleSelectedList);
+        } catch (SearchMapParseException e) {
+            assertEquals("This university has no available mappings.", e.getMessage());
         }
     }
 }
