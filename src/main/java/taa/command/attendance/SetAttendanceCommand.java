@@ -37,11 +37,11 @@ public class SetAttendanceCommand extends Command {
     private static final String ABSENT_VALUE = "0";
 
     private static final String MESSAGE_FORMAT_SET_ATTENDANCE_USAGE =
-            "\nSet attendance for one student: %s %s/<CLASS_ID> %s/<STUDENT_INDEX> %s/<LESSON_NUMBER> %s/<PRESENT>" +
-            "\nSet attendance for a range of students: %s %s/<CLASS_ID> %s/<START_STUDENT_INDEX>-<END_STUDENT_INDEX>" +
-            " %s/<LESSON_NUMBER> %s/<PRESENT>" +
-            "\nSet attendance for a selection of students: %s %s/<CLASS_ID> %s/<STUDENT_INDEX>,<STUDENT_INDEX>," +
-            " %s/<LESSON_NUMBER> %s/<PRESENT>";
+            "\nSet attendance for one student: %s %s/<CLASS_ID> %s/<STUDENT_INDEX> %s/<LESSON_NUMBER> %s/<PRESENT>"
+            + "\nSet attendance for a range of students: %s %s/<CLASS_ID> %s/<START_STUDENT_INDEX>-<END_STUDENT_INDEX>"
+            + " %s/<LESSON_NUMBER> %s/<PRESENT>"
+            + "\nSet attendance for a selection of students: %s %s/<CLASS_ID> %s/<STUDENT_INDEX>,<STUDENT_INDEX>,"
+            + " %s/<LESSON_NUMBER> %s/<PRESENT>";
 
     public SetAttendanceCommand(String argument) {
         super(argument, SET_ATTENDANCE_ARGUMENT_KEYS);
