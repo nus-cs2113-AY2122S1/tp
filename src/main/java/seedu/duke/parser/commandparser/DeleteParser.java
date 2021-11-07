@@ -3,10 +3,8 @@ package seedu.duke.parser.commandparser;
 import seedu.duke.Duke;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteCommand;
-import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.parserexceptions.InvalidIndexException;
 import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
-import seedu.duke.items.Task;
 import seedu.duke.parser.ItemType;
 import seedu.duke.parser.Parser;
 
@@ -19,11 +17,8 @@ public abstract class DeleteParser extends Parser {
     private static int eventIndexToDelete;
     private static int taskIndexToDelete;
 
-    public Command getDeleteCommand(String[] command, String commandDetails) {
+    public static Command getDeleteCommand(String[] command, String commandDetails) {
         try {
-            if (isDeleteAll(command)) {
-                //return new DeleteAllCommand();
-            }
             ItemType itemType = getItemType(commandDetails);
             switch (itemType) {
             case EVENT:
@@ -44,6 +39,8 @@ public abstract class DeleteParser extends Parser {
             System.out.println("Please enter a number for the item index!");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Please select an index!");
+        } catch (InvalidIndexException e) {
+            System.out.println(e.getMessage());
         }
         return null;
     }
