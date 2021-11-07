@@ -402,11 +402,13 @@ The instructions below are for the manual testing of the program.
   
 ![Start Up Page](Display_Images/StartUpPage.png)
 
-
 2. Navigation
   * Select from the start-up menu by typing in the corresponding option number.
   * You can find out more about the various options at our [User Guide](UserGuide.md#12-main-interface).
+  * There will be an error message shown if you select an invalid option.
+  * Test: `-1` to see the error message.
 
+![Menu Error Message](Display_Images/MenuError.png)
 
 3. Exit
   * To exit the program, select option `6`.
@@ -462,6 +464,11 @@ After adding in a substantial number of goals and habits, you can test out the d
 
 6. After any deletion, the index of the goals or habits will change. Therefore, make sure to use commands
   `list` and/or `view` to check for the new index of the goals and habits.
+  * Test: `remove g/7` to remove a goal at index `7` that does not exist. Error will be thrown.
+
+![Delete Error](Display_Images/DeleteError.png)
+
+### Storage of Data
 
 
 
