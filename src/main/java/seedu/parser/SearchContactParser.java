@@ -9,6 +9,13 @@ import static seedu.parser.ContactParser.NUMBER_OF_DETAILS;
 
 //@@author ng-andre
 public class SearchContactParser implements ContactDetails {
+    /**
+     * Takes in the searchInput and returns a String array of the contact's fields to be edited.
+     *
+     * @param searchInput The command input from the user without the command word 'search'
+     * @return String array of size 6 containing user details to be edited, or null if field is not specified.
+     * @throws MissingArgSearchException if the searchInput is missing parameters eg query
+     */
     //return only search query as a String
     public String parseSearchQuery(String searchInput) throws MissingArgSearchException {
         String[] destructuredInputs = searchInput.trim().split(" ", NUMBER_OF_DETAILS);
@@ -23,6 +30,14 @@ public class SearchContactParser implements ContactDetails {
         return searchInput;
     }
 
+    /**
+     * Parses the detail flag from searchInput and returns an int representing the flag index.
+     *
+     * @param searchInput The command input from the user without the command word 'search'
+     * @return Integer representing the flag index from the user input
+     * @throws MissingArgSearchException if the searchInput is missing parameters eg query
+     * @throws InvalidFlagException if the flag specified is not one of the six flags allowed.
+     */
     public int getDetailFlag(String searchInput) throws MissingArgSearchException, InvalidFlagException {
         //userInput is not null since searchInput was obtained from getSearchInput
         if (searchInput.trim().charAt(FLAG_INDEX_IN_DETAILS) == '-') {
@@ -39,6 +54,13 @@ public class SearchContactParser implements ContactDetails {
         return DetailType.NAME.getIndex(); //search names
     }
 
+    /**
+     * Removes the search command word from the userInput.
+     *
+     * @param userInput The command input from the user in full.
+     * @return userInput without the search command word.
+     * @throws MissingArgSearchException if the searchInput is missing parameters eg query
+     */
     public String getSearchInput(String userInput) throws MissingArgSearchException {
         //remove the search command
         String[] destructuredInputs = userInput.trim().split(" ", NUMBER_OF_DETAILS);

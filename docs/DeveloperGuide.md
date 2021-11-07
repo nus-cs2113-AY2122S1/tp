@@ -20,6 +20,7 @@
   - [Listing all contacts](#List)
   - [Importing contacts](#Import)
   - [Contact index parser](#IndexParser)
+  - [Design Considerations](#DesignConsiderations)
 - [Product Scope](#scope)
   - [Target user profile](#target)
   - [Value proposition](#value)
@@ -32,12 +33,17 @@
   - [Viewing a contact](#testing-view)
   - [Editing a contact](#testing-edit)
   - [Deleting a contact](#testing-delete)  
+  - [Searching for a contact](#testing-search)
+  - [Importing contacts](#testing-import)
+
 
 ## <a name="acknowledgements"></a>Acknowledgements
 
 - Inspiration for App Idea and OOP Structure: [AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2) <br />
 - Inspiration for User Guide and Developer Guide: AddressBook (Level 3) [[DG]](https://se-education.org/addressbook-level3/DeveloperGuide.html) <br />
   [[UG]](https://se-education.org/addressbook-level3/UserGuide.html)
+- Inspiration for Regular expression for [GitHub username](https://github.com/shinnn/github-username-regex) validation
+- Regular expression for [email](https://emailregex.com/) validation
 - [Converting text for ConTech](https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20) <br />
 - [GitHub Markdown Emoji Syntax](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md) for User Guide: <br />
 - [PlantUML Tutorial](https://se-education.org/guides/tutorials/plantUml.html) <br />
@@ -56,6 +62,8 @@ The common notations listed below will be used throughout the Developer Guide.
     - The `-g` flag is optional, however, if used, a `GITHUB` detail would have to be specified.
 - Items specified with a pipe `|` denote an either-or field.
   - e.g. For `{-n | -g | -l | -te | -tw | -e}`, only **up to** one `flag` is allowed, but there are **six** choices.
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="design"></a>Design
 
@@ -91,6 +99,8 @@ commands, a relevant method in the `TextUi` class will be called.
 Methods for printing **error messages** have been separated
 from the main feature outputs. These methods have been placed in the `ExceptionTextUi` class within the same `ui` package
 as `TextUi`. 
+
+<div style="page-break-after: always;"></div>
 
 ### <a name="main-parser"></a>MainParser
 The `MainParser` component is responsible for making sense of the user's inputs. It functions as the
@@ -131,7 +141,7 @@ As the `Storage` component is also responsible for loading these data into their
 `Contact` objects, it is dependent on the classes, `ContactList` and `Contact`.
 
 
-
+<div style="page-break-after: always;"></div>
 
 ## <a name="implementation"></a>Implementation
 
@@ -164,6 +174,8 @@ The diagram below shows the process of parsing the user's input.
 
 ![Add Contact Parsing](images/AddContactParsingSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 Upon parsing the user's input, the details are passed to an `AddContactCommand`, and this command will be 
 executed in `ConTech`. The sequence diagram below illustrates the process of executing `AddContactCommand`.
 
@@ -185,6 +197,8 @@ the contact, the `viewContactMessage` method in `TextUi` will be called. The seq
 process of viewing a contact.
 
 ![View Sequence Diagram](images/ViewContactCommandSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 ### <a name="Edit"></a>Editing a contact: `edit`
 This feature is processed using `EditContactCommand`. This feature allows the user to edit a contact in their contact 
@@ -208,12 +222,16 @@ parameters will then be created and executed in `ConTech`. The sequence diagram 
 
 ![Edit Sequence Diagram](images/EditContactCommandSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 If a valid contact index in the contact book is specified, the details to be edited will first be checked against the 
 contact book for duplicates. If there are duplicates, ConTech will prompt the user for confirmation before editing the 
 contact. If the user accepts or there are no duplicates, the `EditContactCommand` will be executed. The sequence diagram
 below depicts the execution of `EditContactCommand` for a contact in the contact list.
 
 ![Edit Sequence Diagram](images/EditContactCommandDetailedSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 ### <a name="Delete"></a>Deleting contacts: `rm`
 This feature is processed using the `DeleteContactCommand`. Users can delete a specified contact, delete all contacts at
@@ -235,6 +253,8 @@ If user cancels deletion, a message is printed to show that the deletion has bee
 
 ![Delete All Sequence Diagram](images/DeleteAllContacts.png) 
 
+<div style="page-break-after: always;"></div>
+
 To _delete a selected contact_, a user must enter a command in the form `rm <INDEX>`.
 
 The sequence diagram below shows how the removal of the selected contact works. Before any deletion, details of the 
@@ -255,6 +275,8 @@ cancelled.
 
 ![Delete Fields Sequence Diagram](images/DeleteContactFieldsSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 ### <a name="Search"></a>Searching a contact: `search`
 This feature is processed using `SearchContactParser` under `MainParser`. In order to edit a contact in the contact list,
 a user must enter a command in the form `search {-n | -g | -l | -te | -tw | -e} <SEARCH QUERY>`. If no flag is specified, 
@@ -270,12 +292,24 @@ diagram below shows how the `SearchContactCommand` is executed.
 
 ![Search Sequence Diagram](images/SearchContactCommandSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 ### <a name="List"></a>Listing all contacts: `ls`
-This feature is processed using `MainParser`. The control is sent to `ListContactsCommand` under `Command` to execute the
-command which uses a loop to get the Contact object at every available index and print it using the `printContactWithIndex`
-function in `TextUi` class.
+This feature is processed under `ListContactsCommand`. The feature allows the user to list all their stored contacts
+in an easy to understand manner, by entering the command `ls`. The output is the names of all the contacts stored
+with their respective indexes. 
+
+The user’s input is parsed in `MainParser` which invokes the `execute` method in `ListContactsCommand`. The sequence
+diagram below shows the series of steps to obtain and print all the contacts.
 
 ![List Sequence Diagram](images/ListContactsCommandSequenceDiagram.png)
+
+The `execute` method gets the list size from `ConatactList` class using the `getListSize` method.
+If the `contactListSize` is `0` it prints an error message from the `TextUI` class using the method
+`contactsEmptyListMessage`. 
+If the list is not empty the method `listAllContacts` uses a loop to get the `Contact` object at 
+every available index and print it using the `printContactWithIndex`
+method in `TextUi` class.
 
 ### <a name="Import"></a>Importing contacts: `import`
 This feature is processed using the `ImportContactCommand`. This feature allows a user to import contacts over from 
@@ -287,6 +321,8 @@ integrity of imported contacts. To achieve this, the `ContactsDecoder` class inh
 class, as depicted below.
 
 ![ContactsDecoder Class Diagram](images/ContactsDecoderClassDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 With this implementation in place, the `ImportContactCommand` will firstly check if there exists a file `import.txt` 
 stored in the `data/` directory (ie. stored in `data/import.txt`). Should the `import.txt` file exist, it will then 
@@ -317,6 +353,28 @@ specified contact index given as an integer, which will then be used in the exec
 For example, if `edit 2 -n Marcus Bobo` is given as the input, the Index Parser will identify the contact index to be `2`
 and pass the contact index to the execution of the `edit` command accordingly.
 
+### <a name="DesignConsiderations"></a>Design Considerations
+
+**Aspect: Implementation of removing fields of a contact**
+
+* **Alternative 1: Implement under `edit` feature**
+  <br /> Specify empty flags while using the `edit` command and the program would
+  delete those fields from the contact<br />
+  Example : `edit 2 -n Jim -e -g` would change the name field for contact and would remove the email
+  and github field from the contact.
+
+    * Pros: Editing and removing fields can be done in one step.
+    * Cons: Difficult to implement and makes the program more error-prone as flag descriptions can now be empty.
+
+* **Alternative 2 (current choice): Implement under `rm` feature**
+  <br /> Specify flags while using the `rm` command and the program would delete those fields from the contact<br />
+  Example : `rm 2 -e -g` would remove the email and github field from the contact at index 2.
+
+    * Pros: Easy to implement as rm is a much simpler feature which only takes an index.
+      Much easier exception handling also and thus less error-prone.
+    * Cons: Less user intuitive and takes two steps when the user wants to edit a contact and also delete fields
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="scope"></a>Product scope
 
@@ -358,6 +416,8 @@ additional devices or platforms.
 
 * <a name="os"></a>**Mainstream Operating Systems** - Windows, macOS, *NIX
 * <a name="local-storage"></a>**LocalStorage** - Refers to user's hard disk storage
+
+<div style="page-break-after: always;"></div>
 
 ## <a name="manual-test"></a>Instructions for manual testing
 
@@ -451,7 +511,7 @@ exploratory testing.
               Order of parameters do not matter
        ____________________________________________________________
        ```
-       
+
 4. Adding a contact with duplicates
     1. Prerequisites: A contact with similar either similar name or details must already be in the contact list. For
        simplicity, we will re-use the same command from `1`.
@@ -508,7 +568,7 @@ exploratory testing.
 
 7. Adding a contact with an invalid field format
     1. Test case: `add -n George -e george`<br>
-    2. Expected: An error message will notify user on the field with the invalid format. For this test case, the email
+       Expected: An error message will notify user on the field with the invalid format. For this test case, the email
        has the wrong format.
        ```
        ____________________________________________________________
@@ -516,9 +576,12 @@ exploratory testing.
        Rules for email id :
            * Lowercase letters only
            * Numbers, underscore, hyphen and dot allowed
-           * @ cannot be at the start or end
+           * Only one @ character allowed
+           * Email cannot start or end with a symbol
        ____________________________________________________________
        ``` 
+
+<div style="page-break-after: always;"></div>
 
 ### <a name="testing-view"></a>Viewing a contact
 1. Viewing a contact that is in the contact list
@@ -538,8 +601,10 @@ exploratory testing.
 
 2. Viewing user's own personal contact
     1. Test case: `view me`
-    2. Expected: All personal details of the user will be displayed.
-  
+       Expected: All personal details of the user will be displayed.
+    2. Test case: `me`
+       Expected: All personal details of the user will be displayed. 
+       
 
 3. Viewing a contact with a missing or invalid index
     1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
@@ -561,7 +626,9 @@ exploratory testing.
        Enter <INDEX> between 0 and 2 or "me" (personal contact)
        ____________________________________________________________
        ```
-  
+
+<div style="page-break-after: always;"></div>
+
 ### <a name="testing-edit"></a>Editing a contact
 1. Editing a contact with all fields
     1. Prerequisites: List all contacts using the `ls` command to find the index of specific contact.
@@ -611,6 +678,7 @@ exploratory testing.
        Otherwise, input index "me" if you wish to edit your Personal Contact details.
        ____________________________________________________________
        ```
+    
 
 4. Editing a user's personal contact
     1. Test case: `edit me -n Zack -g zackster -e zack@email.com`<br>
@@ -671,7 +739,7 @@ exploratory testing.
        ConTech is unable to understand your request.
        Please try again with a valid command.
        ____________________________________________________________
-       ```  
+       ```
 
 ### <a name="testing-delete"></a>Deleting a contact
 1. Deleting a contact that is in the contact list
@@ -745,3 +813,101 @@ exploratory testing.
     3. Follow up: You can either input `y` which stands for **yes** allowing you to delete the field from the contact
        or `n` which stands for **no** to cancel deleting the field from the contact.
 
+<div style="page-break-after: always;"></div>
+
+### <a name="testing-search"></a>Searching for a contact
+1. Search for a contact that is in the contact list
+    1. Test case: `search alex`<br>
+       Expected: All contacts with `alex` in their name will be listed
+       ```
+       ____________________________________________________________      
+       1.
+       Name:     Alex Lee
+       Github:   github.com/alexlee
+       Email:    alex.lee@email.com
+       Telegram: t.me/alexlee
+       LinkedIn: linkedin.com/in/alexlee
+       Twitter:  twitter.com/alexl33
+       ____________________________________________________________
+       ```
+
+2. Search for a contact with a specified field
+    1. Test case: `search -g alexlee`<br>
+       Expected: All contacts with the GitHub username containing `alexlee` will be listed.
+       ```
+       ____________________________________________________________      
+        1.
+       Name:     Alex Lee
+       Github:   github.com/alexlee
+       Email:    alex.lee@email.com
+       Telegram: t.me/alexlee
+       LinkedIn: linkedin.com/in/alexlee
+       Twitter:  twitter.com/alexl33
+       ____________________________________________________________
+       ```
+
+3. Search for a contact that is not in the contact list
+    1. Test case: `search mebe`<br>
+       Expected: Error message will notify users that no contacts are found. 
+       ```
+       ____________________________________________________________
+       No search results found.
+       ____________________________________________________________
+       ```
+
+4. Search with no parameters specified
+    1. Test case: `search`<br>
+       Expected: Error message will notify user that the command is invalid.
+       ```
+       ____________________________________________________________
+       There seems to be missing parameters in your request.
+       Please enter command in this format:
+       search {FLAG} <QUERY>
+       example : search Ashraf
+       search -g revflash
+       NOTE : Flag is optional and only one can be specified
+       ____________________________________________________________
+       ```
+
+<div style="page-break-after: always;"></div>
+
+### <a name="testing-import"></a>Importing contacts
+1. Importing contacts with all valid details
+    1. Test case: `import`<br>
+       Expected: All contacts will be imported successfully.
+       ```
+       ____________________________________________________________      
+       ConTech has successfully imported 3 lines
+       ____________________________________________________________
+       ```
+
+2. Importing a contact with invalid fields
+    1. Test case: `import`<br>
+       Expected: Error message will notify the user that there is an invalid field.
+
+        ```
+       data/import.txt:1 - There is an invalid field.
+       ____________________________________________________________
+       The github username is not correctly formatted,
+       Rules for Github username :
+       * Only contain alphanumeric characters or hyphens
+       * Only lowercase allowed
+       * Maximum 39 characters allowed
+       * Cannot have multiple consecutive hyphens
+       * Cannot begin or end with a hyphen
+       ____________________________________________________________
+       
+       ____________________________________________________________
+       ConTech has successfully imported 0 lines
+       ____________________________________________________________
+       ```
+
+3. Importing a contact with missing fields
+    1. Test case: `import`<br>
+       Expected: Error message will notify the user that there are missing fields.
+       ```
+       data/import.txt:1 - "ashraf,ashrafjfr,null,null" is corrupted and not loaded.
+       ____________________________________________________________
+       ConTech has successfully imported 0 lines
+       ____________________________________________________________
+       ```
