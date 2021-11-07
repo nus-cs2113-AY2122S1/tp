@@ -17,6 +17,7 @@ import java.util.regex.Matcher;
  */
 public abstract class DateOperator {
     public static final String DATE_FORMAT = "dd/MM/yyyy";
+    
     /**
      * Checks if the date of a given entry is within a valid date range, 
      * where startDate is earlier than or the same as endDate.
