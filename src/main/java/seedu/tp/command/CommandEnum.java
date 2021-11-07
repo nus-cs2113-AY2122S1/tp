@@ -5,7 +5,7 @@ package seedu.tp.command;
  * {@link java.lang.Enum} class used to store the names of all commands.
  */
 public enum CommandEnum {
-    BYE, HELP, TODO, DEADLINE, EVENT, LIST, DELETE, REMINDER, SORT, MODULE, EDIT, BROWSE, INVALID;
+    BYE, HELP, TODO, DEADLINE, EVENT, LIST, DELETE, REMINDER, SORT, MODULE, EDIT, BROWSE, INVALID, UPCOMING;
 
     /**
      * Returns the {@link seedu.tp.command.CommandEnum} corresponding to String command.

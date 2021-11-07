@@ -4,7 +4,10 @@ import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+
+import org.jetbrains.annotations.Nullable;
 import seedu.tp.command.Command;
 import seedu.tp.command.flags.TaskFlag;
 import seedu.tp.exception.InvalidFlagsException;
@@ -133,6 +136,13 @@ public abstract class Task {
         }
         taskEdit(arguments);
     }
+
+    /*
+     * Get the time of the happening, or null if the task does not have the sense of time
+     * @return The start time, of the first occurrence if multiple
+     */
+    @Nullable
+    public abstract LocalDateTime getHappenTime();
 
     //@@author SeanRobertDH
     /**

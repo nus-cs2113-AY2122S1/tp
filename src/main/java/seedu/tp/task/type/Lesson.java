@@ -2,6 +2,7 @@ package seedu.tp.task.type;
 
 import seedu.tp.command.flags.LessonFlag;
 import seedu.tp.exception.NoLinkException;
+import seedu.tp.log.Log;
 import seedu.tp.parser.DateParser;
 import seedu.tp.task.TypeEnum;
 import seedu.tp.nusmods.Semester;
@@ -10,7 +11,9 @@ import seedu.tp.task.RecurrenceEnum;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -20,6 +23,21 @@ public class Lesson extends Event {
 
     private static final String LESSON_ICON = "[L]";
     private static final TypeEnum TASK_TYPE = TypeEnum.LESSON;
+
+    public LocalDateTime getNextOccurrence() {
+        LocalDateTime nearest = Arrays.stream(occurrences).mapToObj(occurrence -> getStartDate()
+                .plusWeeks(occurrence - 1))
+                .filter(date -> date.isAfter(LocalDateTime.now()))
+                .min(LocalDateTime::compareTo)
+                .orElseThrow();
+        Log.info(Arrays.toString(occurrences));
+        Log.info(nearest.toString());
+        return nearest;
+    }
+
+    /**
+     * 1-based occurrence.
+     */
     private int[] occurrences;
 
     public boolean hasLink() {
