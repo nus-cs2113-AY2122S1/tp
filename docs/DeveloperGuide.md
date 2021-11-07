@@ -86,6 +86,34 @@ while `altWorldMap` boots up a side, read-only World Map based on the flight cos
 NOTE: As of V2.1 `EditMap` is no longer used. 
 
 ![](documentationPics/worldmap2.png)
+<div style="text-align: center;">Figure 3.1: World Map Sequence Diagram</div>
+
+The `initWorldMap` command is called which then processes the flight data by calling `readData`, with the data
+corresponding to the flight times. Alternatively, to process the flight costs data, the The `altWorldMap` command 
+processes the costs-based World Map. `getValidCountry` ensures the given country is valid by checking against the 
+current database in the system.
+
+The breakdown of more complicated functionalities illustrated by Figure 3.1 is summarised below.
+
+`printWorld`
+1. `getNameArray` returns the array of country codes in String form.
+2. Subsequently, `getNameArray.size` returns the size of the String which is the corresponding number of countries.
+3. The double nested for-loop iterates through all pairs of countries and returns the distance between all pairs by 
+calling the `getEdgeMatrix` which looks up the distances inside the corresponding matrix `EdgeMatrix`.  
+
+   
+>![](documentationPics/info.png) Both functions `calcMinTime` and `calcMinCost` are based off the same parent function,
+> with the main difference being that `calcMinCost` needs to initialise the alternative World Map and re-boots the 
+> original, time-based World Map just before the function returns, thereby restoring the World Map back to its original 
+> time-based state. Below is the overview of how both functions work in general. 
+
+`calcMinTime` and `calcMinCost` 
+1. The source and destination country are firstly checked to ensure they are valid through `getValidCountry`.
+2. `MinCalcResult` is then instantiated which passes in the two countries and a blank list which will eventually 
+contain the shortest path, whether cost or time-based.
+3. `computeSource` and `getToGoal` is then used to find the shortest path between the two countries, which is then 
+returned by the function as a `MinCalcResult` class.
+
 
 #### 1.1.2. GraphList class
 The `GraphList` class is based off the `WorldMap` overarching class and translate it into a more simplistic graph 
@@ -101,6 +129,7 @@ Similarly, the `modifyEdge` function calls the subsequent function `updateNeighb
 The list of distances are all stored in a matrix which is called by `getEdgeMatrix` by the `WorldMap` class.
 
 ![](documentationPics/graphlist.png)
+<div style="text-align: center;">Figure 3.2: Graph List Sequence Diagram</div>
 
 #### 1.1.3. Logic class
 The `Logic` class is the main class driving the logic from the overarching `WorldMap` class. 
@@ -113,6 +142,7 @@ Then, `getToGoal` backtracks from the target country to trace the shortest path 
 in reverse order. Note that `getToGoal` returns an object of `MinCalcResult` type.
 
 ![](documentationPics/logic.png)
+<div style="text-align: center;">Figure 3.3: Logic Sequence Diagram</div>
 
 #### 1.1.4. DataLoader class
 The `DataLoader` class reads in data from *flightData/time.txt* or *flightData/cost.txt* to create the vertexes 
@@ -125,7 +155,7 @@ number by changing the variable `numberOfCountries` in the class. Reading on, `n
 variable number.
 
 ![](documentationPics/dataSequenceDiagram.jpg)
-<div style="text-align: center;">Figure 3: DataLoader Sequence Diagram</div>
+<div style="text-align: center;">Figure 3.4: DataLoader Sequence Diagram</div>
 
 The first line of *time.txt* or *cost.txt* contains the 5 country codes, which are read added as vertexes.
 The remaining lines contain the country to country distances, which are in a lower triangular matrix, and are added as 
@@ -191,12 +221,12 @@ function is detailed below.
 The `Parser` class processes raw user input to return a `Command` object, which can be executed to execute the action
 specified by the command.
 It's main function is the `parse` function, which takes in a user input string obtained by a `Ui` object and output the 
-`Command` object. Figure 4 below illustrates the code of the `parse` function via a sequence diagram.
+`Command` object. Figure 5 below illustrates the code of the `parse` function via a sequence diagram.
 
 ![](documentationPics/parserSequenceDiagram.jpeg)
 <div style="text-align: center;">Figure 5: Parser Sequence Diagram</div>
 
-The steps illustrated by Figure 4 is summarised below.
+The steps illustrated by Figure 5 is summarised below.
 1. The `parse` command is called once per iteration of the main `run` loop in `Traveller`.
 2. Based on the user input, `parse` calls a private `parseAbcCommand`, which parses the user input for each available
 command.
@@ -207,7 +237,7 @@ viewing trips, or deleting trips.
 thrown.
 
 
-   An example of an iteration elaborated above in Figure 4 is detailed here:
+   An example of an iteration elaborated above in Figure 5 is detailed here:
 
 1.The user enters `add-day myFabulousTrip /day 3`.
 2.Parser parses the user input string.
