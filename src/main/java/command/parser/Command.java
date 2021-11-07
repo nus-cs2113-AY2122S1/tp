@@ -271,7 +271,7 @@ public class Command {
     void commandEditDescription(Module module, String taskType, String taskDescription) {
         TaskList list = module.getTaskList();
         Task selectedTask = parserChecks.getTaskFromIndex(taskType, module.taskList.getTaskList());
-        if (taskDescription.isBlank()) {
+        if (selectedTask != null && taskDescription.isBlank()) {
             Ui.missingDescription();
             return;
         }
