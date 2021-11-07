@@ -122,33 +122,6 @@ public class DifficultMenu extends Menu {
         }
     }
 
-    private int startGuessNum() {
-        int cardId;
-
-        while (true) {
-            System.out.println(Strings.GUESS_NUM_START);
-            GuessingNumGame guessingNumGame = new GuessingNumGame();
-            cardId = guessingNumGame.execute(false);
-            Player.winCard(cardId);
-
-            if (cardId != 0) { // Win the Game
-                Player.addDifficultGameRecord(guessingNumGame);
-
-                System.out.print(guessingNumGame.getName());
-                int playStatus = setPlayStatus();
-                if (playStatus != 2) {
-                    return playStatus;
-                }
-            } else {
-                System.out.print(guessingNumGame.getName());
-                int playStatus = setPlayStatusLoss();
-                if (playStatus == 3) {
-                    return playStatus;
-                }
-            }
-        }
-    }
-
     private int startQuizGame() {
         int cardId;
 
@@ -168,6 +141,33 @@ public class DifficultMenu extends Menu {
                 }
             } else {
                 System.out.print(quizGame.getName());
+                int playStatus = setPlayStatusLoss();
+                if (playStatus == 3) {
+                    return playStatus;
+                }
+            }
+        }
+    }
+
+    private int startGuessNum() {
+        int cardId;
+
+        while (true) {
+            System.out.println(Strings.GUESS_NUM_START);
+            GuessingNumGame guessingNumGame = new GuessingNumGame();
+            cardId = guessingNumGame.execute(false);
+            Player.winCard(cardId);
+
+            if (cardId != 0) { // Win the Game
+                Player.addDifficultGameRecord(guessingNumGame);
+
+                System.out.print(guessingNumGame.getName());
+                int playStatus = setPlayStatus();
+                if (playStatus != 2) {
+                    return playStatus;
+                }
+            } else {
+                System.out.print(guessingNumGame.getName());
                 int playStatus = setPlayStatusLoss();
                 if (playStatus == 3) {
                     return playStatus;
