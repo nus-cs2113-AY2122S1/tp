@@ -29,7 +29,7 @@
 
 ### Setting up IDE and Repository
 
-1) Forking and cloning
+1) Forking and Cloning
 Fork our repository from this [link](https://github.com/AY2122S1-CS2113T-F11-2/tp).
 Then, clone your fork into your local computer. 
 
@@ -39,19 +39,23 @@ is the recommended IDE to view and edit our source code.
 
 3) Configure JDK
 Ensure that the correct version of JDK is downloaded and installed as our app is only tested on Java 11.
-You may run the following command: `java -version` to check for the current Java version which your computer is running.
-If you are using Intellij, please check that your project structure's project SDK is set to Java 11 and Project Language Level is set
-to default SDK.
+You may run the following command: `java -version` to check for the current Java version which your 
+computer is running. If you are using Intellij, please check that your project structure's project 
+SDK is set to Java 11 and Project Language Level is set to default SDK.
 
 ![Intellij ProjectStructure](images/ProjectStructureSettings.png)
 
-4) Importing project
-Right click on the Repository folder that you have clone into your machine and select "Open Folder as Intellij IDEA Community Edition Project".
-When you are asked whether to trust and open gradle project, click trust. 
+4) Adding Exception to your Anti-Virus
+Add an exception to the directory which you will be cloning the forked project to your anti-virus.
+
+5) Importing Project
+Right click on the Repository folder that you have clone into your machine and select "Open Folder 
+as Intellij IDEA Community Edition Project". When you are asked whether to trust and open gradle 
+project, click trust. 
 
 ![Intellij ProjectStructure](images/TrustGradle.png)
 
-5) Verifying BudgetTracker Runs
+6) Verifying BudgetTracker Runs
 Right click on BudgetTracker then click on run to test our our BudgetTracker App. 
 
 ![Intellij Run BudgetTracker](images/BudgetTrackerRun.png)
