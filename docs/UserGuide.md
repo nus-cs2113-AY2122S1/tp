@@ -274,7 +274,9 @@ List all tasks currently stored locally in your tasklist.
     - For a `Deadline`, it represents the due date of the task.
     - For an `Event`, it represents the date and duration of the event.
     - For a `Lesson`, it represents the date and duration of the lesson.
-    
+
+>💡 **Note**: For type `Lesson` tasks, the task date field is combined with the task description.
+
 **Example**: `list`
 - List all tasks currently stored locally in your tasklist.
 
@@ -354,13 +356,13 @@ Sorts your task list by a given criteria.
 
 **Format**: `sort --by <criteria>`
 - `<criteria>` specifies what to sort your task list by.
-  - Type of task: `type`.
+  - Type of task: `type`
   - Description of task: `description`
   - Priority of the task: `priority`
 
 **Example**: `sort --by priority` + `list`
-- Sort your current task list by `priority` from `high` to `low`
-- Print out the sorted list with the `list` command
+- Sort your current task list by `priority` from `high` to `low`.
+- Print out the sorted list with the `list` command.
 
 **Expected Outcome**:
 

@@ -110,7 +110,9 @@ public class Lesson extends Event {
         return LESSON_ICON + " " + this.getModuleCode() + ' ' + this.getClassNumber() + ": "
                 + DateParser.dateToString(getStartDate())
                 + " to " + DateParser.dateToString(getEndDate())
-                + " Priority: " + getPriority().toString() + " " + (hasLink() ? LINK_INDICATOR : "");
+                + " <" + getPriority().toString() + ">"
+                + " {" + getRecurrence().toString() + "} "
+                + (hasLink() ? LINK_INDICATOR : "");
     }
 
     @Override
