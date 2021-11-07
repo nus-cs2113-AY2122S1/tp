@@ -5,6 +5,7 @@ import seedu.budgettracker.ui.TextUi;
 
 import java.time.LocalDate;
 
+//@@author jyxhazcake
 public class EditLoanCommand extends EditCommand {
     public int month;
     public int index;

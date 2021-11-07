@@ -48,6 +48,7 @@ public class Parser {
         return new String[]{split[0].toLowerCase(), ""};
     }
 
+    //@@author jyxhazcake
     /**
      * Splits the command arguments by their command prefixes.
      *
@@ -72,6 +73,7 @@ public class Parser {
         return argumentMap;
     }
 
+    //@@author jyxhazcake
     private static void checkValidArguments(String commandParams, int counter) throws ParserException {
         String[] split = commandParams.split("[a-zA-Z]/");
         if (split.length - 1 > counter) {
@@ -82,6 +84,7 @@ public class Parser {
         }
     }
 
+    //@@author jyxhazcake
     private static String findArgValue(String commandParams, String prefix) {
         int startIndex = commandParams.indexOf(prefix) + 2;
         String substring = commandParams.substring(startIndex);
@@ -162,6 +165,7 @@ public class Parser {
         }
     }
 
+    //@@author jyxhazcake
     private Command prepareEditCommand(String commandParams) throws ParserException {
         try {
             String editOption = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
@@ -189,6 +193,7 @@ public class Parser {
         }
     }
 
+    //@@author jyxhazcake
     /**
      * Splits params into the different add commands.
      *
@@ -239,6 +244,7 @@ public class Parser {
         }
     }
 
+    //@@author jyxhazcake
     /**
      * Splits params into the different delete commands.
      *

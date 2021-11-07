@@ -5,6 +5,7 @@ import seedu.budgettracker.logic.parser.exceptions.ParserException;
 
 import java.util.HashMap;
 
+//@@author jyxhazcake
 public class StatYearParser implements ParserPrefix {
     public static final String[] PREFIX_ARRAY = {
         PREFIX_TYPE };
