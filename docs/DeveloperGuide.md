@@ -74,10 +74,10 @@ applications.
 
 ### 1.2. Terminology
 
-Name     | Description                                                 | Example
------    | ----------------------------------------------------------- | ---------------------
-Goal     | A long term achievement you wish to accomplish.             |`Lose 5kg by Dec`
-Habit    | Small, actionable tasks to be done to achieve goal.         |`Run 5km`
+Name     | Description                                                   | Example
+-----    | ------------------------------------------------------------- | ---------------------
+Goal     | A long term achievement you wish to accomplish.               |`Lose 5kg by Dec`
+Habit    | Small, actionable tasks to be done to achieve goal.           |`Run 5km`
 Interval | The time period (in days) which you want the habit to recur.  |`Run 5km every 7 days`
 
 A goal can have one or more habits.\
@@ -290,11 +290,11 @@ your personal account which will be stored in the `GoalList` class.
 
 ### 4.2. Adding a Habit
 
-First, a `AddHabitCommand` object is returned from the `AddParser` if the users input is successfully parsed.
+A `AddHabitCommand` object is returned from the `AddParser` if the users input is successfully parsed as shown below.
 
 ![](Diagram Images/Implementation Diagram Images/AddHabitCommandParserSequenceDiagram.png)
 
-The `runCommand` method is then executed for the `AddHabitCommand` object.
+The `runCommand` method is then executed for the `AddHabitCommand` object as seen.
 
 ![](Diagram Images/Implementation Diagram Images/AddHabitCommandSequenceDiagram.png)
 
@@ -305,24 +305,37 @@ the `addHabit` method.
 
 ### 4.3. Listing all Goals
 
-When the `runCommand` method is executed for the `ListGoalsCommand` object, the following steps as indicated by the
-sequence diagram below is carried out:
+A `ListGoalCommand` object is returned from the `ListGoalParser` as long as the user's command contains the prompt `list`.
+All other inputs are treated as "gibberish" which the user accidentally typed.
+
+The `runCommand` method is then executed for the `ListGoalsCommand` object. The following steps as indicated by the
+sequence diagram below is then carried out:
 
 ![](Diagram Images/Implementation Diagram Images/ListGoalsCommandSequenceDiagram.png)
 
 ### 4.4. Listing all Habits
 
-When the `runCommand` method is executed for the `ListHabitsCommand` object, the following steps as indicated by the
-sequence diagram below is carried out:
+A `ListHabitCommand` object is returned from the `ListHabitParser` if the users input is successfully parsed as shown below.
+
+![](Diagram Images/Implementation Diagram Images/ListHabitsCommandParserSequenceDiagram.png)
+
+The `runCommand` method is then executed for the `ListHabitsCommand` object as seen.
 
 ![](Diagram Images/Implementation Diagram Images/ListHabitsCommandSequenceDiagram.png)
 
 ### 4.5. Completing a Habit
 
-When the `runCommand` method is executed for the `DoneHabitCommand` object, the following steps as indicated by the
-sequence diagram below is carried out:
+A `DoneHabitCommand` object is returned from the `DoneParser` if the users input is successfully parsed as shown below.
+
+![](Diagram Images/Implementation Diagram Images/DoneCommandParserSequenceDiagram.png)
+
+The `runCommand` method is then executed for the `DoneHabitCommand` object as seen.
 
 ![](Diagram Images/Implementation Diagram Images/DoneCommandSequenceDiagram.png)
+
+The method `doneHabitFromGoal` will obtain the specified Habit from the Goal indicated by the user and execute the 
+`doneHabit` method within the Goal class. If at any point during the execution, if an invalid index for either the 
+Goal or the Habit is detected, an exception will be thrown.
 
 ### 4.6. Updating a Goal
 
@@ -410,7 +423,7 @@ workload or commitments.
 |App should be operable on Windows, macOS, and Ubuntu running Java `11` or above.|Technical|
 |App can be learned anyone who is familiar with computer within minutes of use.|Quality|
 |App should be a helpful, encouraging, and a joy to use.|Quality|
-| |Performance|
+| {feel free to add something here}|Performance|
 
 ## Appendix D: Glossary
 
@@ -431,11 +444,13 @@ The instructions below are for the manual testing of the program.
   
 ![Start Up Page](Display_Images/StartUpPage.png)
 
-
 2. Navigation
   * Select from the start-up menu by typing in the corresponding option number.
   * You can find out more about the various options at our [User Guide](UserGuide.md#12-main-interface).
+  * There will be an error message shown if you select an invalid option.
+  * Test: `-1` to see the error message.
 
+![Menu Error Message](Display_Images/MenuError.png)
 
 3. Exit
   * To exit the program, select option `6`.
@@ -461,3 +476,41 @@ The instructions below are for the manual testing of the program.
 ![Added Goal](Display_Images/AddGoal.png)
 
 6. Press enter again to return to command screen.
+
+### Deleting Goals or Habits
+
+After adding in a substantial number of goals and habits, you can test out the deletion commands as shown below.
+
+1. To see all the goals you have added, use command `list`. You should take note of the index of the goal that you
+  want to delete. We will be using the list shown below as an example.
+
+![List of Goals](Display_Images/ListOfGoals.png)
+
+2. To delete a goal, use the command `remove`.
+  * Test: `remove g/6` to remove goal at index `6`.
+
+![Delete Goal 1](Display_Images/DeleteGoal1.png)
+
+  * Use the command `list` to see the new index of the goals.
+
+![New List of Goals](Display_Images/NewListOfGoals.png)
+
+3. Next, use `view` to see the index of the habit under a goal that you want to delete.
+
+![View Habits](Display_Images/ViewHabits.png)
+
+5. To delete a habit, use the command `delete`.
+  * Test: `delete g/6 h/1` to delete habit `1` under goal `6`.
+
+![Delete Habit 1](Display_Images/DeleteHabit1.png)
+
+6. After any deletion, the index of the goals or habits will change. Therefore, make sure to use commands
+  `list` and/or `view` to check for the new index of the goals and habits.
+  * Test: `remove g/7` to remove a goal at index `7` that does not exist. Error will be thrown.
+
+![Delete Error](Display_Images/DeleteError.png)
+
+### Storage of Data
+
+
+

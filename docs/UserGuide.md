@@ -173,6 +173,9 @@ Goal     | A long term achievement you wish to accomplish.                  |`Lo
 Habit    | Checkpoints; small, actionable tasks to be done to achieve goal. |`Run 5km`
 Interval | The frequency (in days) which you want the habit to recur.       |`Run 5km every 7 days` 
 
+![](Display_Images/HappyBit_Visual_Explain.png)
+_A timeline of what a goal should look like._ | Made with Canva
+
 **Goals and habits** <br>
 Here we distinguish between goals and habits. Although they are commonly used words, the way we
 design _Ha(ppy)Bit_ is tightly integral to the way we define them above. We would also like you
@@ -221,7 +224,7 @@ register your input. On the topic of inputs...
 
 ### 3.2 Command Format
 _Ha(ppy)Bit_ is very particular about your commands. You begin off with a "command word" to tell _Ha(ppy)Bit_ the exact 
-action to carry out (See [Command Summary](#command-summary) for all actions). The actions are then followed up with
+action to carry out (See [Command Summary](#7-command-summary) for all actions). The actions are then followed up with
 "parameters", which are information you wish to pass to _Ha(ppy)Bit_ to carry out the actions with it. To indicate the 
 type of parameters, they are prefixed with "flags". The flags help _Ha(ppy)Bit_ identify and distinguish the type of
 parameters.
@@ -232,7 +235,7 @@ A command could look like this: `add n/Run 2.4km g/1 i/7`. Where, <br>
 and `n/`, `g/`, and `i/` are flags.
 
 Here are guidelines and tips for the command format:
-* **Commands** are only accepted when you see `Command: ` on the screen (See [Main Interface](#main-interface)). 
+* **Commands** are only accepted when you see `Command: ` on the screen (See [Main Interface](#12-main-interface)). 
   Your inputs appearing after `Command: ` indicates you're doing it right.
 * **Commands** may require one or more flags. You may choose to use the flags in any order but ensure that all flags 
   for that command are present.\
