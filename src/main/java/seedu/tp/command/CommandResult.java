@@ -7,20 +7,12 @@ public class CommandResult {
 
     private static final String MESSAGE_NOT_NULL_ASSERTION = "Command Result message cannot be null!";
 
-    private boolean isExited;
-    private String message;
+    private final boolean isExited;
+    private final String message;
 
     public CommandResult(String message, boolean isExited) {
-        this.isExited = isExited;
-        this.message = message;
-    }
-
-    public void setExited(boolean exited) {
-        isExited = exited;
-    }
-
-    public void setMessage(String message) {
         assert message != null : MESSAGE_NOT_NULL_ASSERTION;
+        this.isExited = isExited;
         this.message = message;
     }
 

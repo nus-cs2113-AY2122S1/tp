@@ -19,11 +19,6 @@ public abstract class Command {
         this.commandArguments = null;
     }
 
-    public Command(TaskManager taskManager) {
-        this.taskManager = taskManager;
-        this.commandArguments = null;
-    }
-
     public Command(TaskManager taskManager, Map<String, String> commandArguments) {
         this.taskManager = taskManager;
         this.commandArguments = commandArguments;

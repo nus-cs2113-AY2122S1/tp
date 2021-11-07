@@ -5,7 +5,6 @@ import java.util.Map;
 import seedu.tp.command.flags.DeadlineFlag;
 import seedu.tp.parser.DateParser;
 import seedu.tp.task.factory.DeadlineFactory;
-import seedu.tp.task.factory.TaskFactory;
 import seedu.tp.task.taskmanager.TaskManager;
 
 //@@author SeanRobertDH
@@ -31,7 +30,7 @@ public class DeadlineCommand extends TaskCommand {
     }
 
     @Override
-    TaskFactory setTaskFactory() {
+    DeadlineFactory setTaskFactory() {
         return new DeadlineFactory(commandArguments);
     }
 

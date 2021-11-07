@@ -41,7 +41,7 @@ public enum PriorityEnum {
      *
      * @param priorityNumber the priority <code>int</code> corresponding to the {@link PriorityEnum} you want to obtain.
      * @return {@link PriorityEnum} enum corresponding to <code>int priorityNumber</code> argument.
-     * @throws seedu.tp.exception.InvalidPriorityException if <code>priorityNumber</code> does not
+     * @throws InvalidPriorityException if <code>priorityNumber</code> does not
      *     correspond to a valid {@link seedu.tp.task.PriorityEnum}.
      */
     public static PriorityEnum getPriority(int priorityNumber) throws InvalidPriorityException {
@@ -58,7 +58,7 @@ public enum PriorityEnum {
      *
      * @param priority the priority <code>String</code> corresponding to the {@link PriorityEnum} you want to obtain.
      * @return {@link PriorityEnum} enum corresponding to <code>int priorityNumber</code> argument.
-     * @throws seedu.tp.exception.InvalidPriorityException if <code>priority</code> does not
+     * @throws InvalidPriorityException if <code>priority</code> does not
      *     correspond to a valid {@link seedu.tp.task.PriorityEnum}.
      */
     public static PriorityEnum getPriority(String priority) throws InvalidPriorityException {

@@ -6,8 +6,6 @@ import seedu.tp.exception.GetTaskFailedException;
 import seedu.tp.exception.ParseDateFailedException;
 import seedu.tp.exception.StartDateAfterEndDateException;
 import seedu.tp.command.flags.EventFlag;
-import seedu.tp.task.PriorityEnum;
-import seedu.tp.task.RecurrenceEnum;
 import seedu.tp.task.Task;
 import seedu.tp.task.TypeEnum;
 import seedu.tp.task.type.Event;
@@ -54,37 +52,14 @@ public class EventFactory extends TaskFactory {
 
     @Override
     Task createTask() {
-        if (priorityEnum == null) {
-            return getEventWithDefaultPriority(description, startDate, endDate, recurrenceEnum);
-        } else {
-            return getEventWithPriority(description, startDate, endDate, priorityEnum, recurrenceEnum);
-        }
-    }
-
-    private static Event getEventWithDefaultPriority(String description,
-            LocalDateTime start, LocalDateTime end, RecurrenceEnum recurrence) {
-        if (recurrence == null) {
-            return new Event(description, start, end);
-        } else {
-            return new Event(description, start, end, recurrence);
-        }
-    }
-
-    private static Event getEventWithPriority(String description,
-            LocalDateTime start, LocalDateTime end, PriorityEnum priority, RecurrenceEnum recurrence) {
-        if (recurrence == null) {
-            return new Event(description,
-                start, end, priority);
-        } else {
-            return new Event(description, start, end, priority, recurrence);
-        }
+        return new Event(description, startDate, endDate);
     }
 
     /**
      * Returns the {@link seedu.tp.task.type.Event} created.
      *
      * @return created {@link seedu.tp.task.type.Event}.
-     * @throws seedu.tp.exception.GetTaskFailedException General Exception
+     * @throws GetTaskFailedException General Exception
      *     thrown when creating {@link seedu.tp.task.Task} fails.
      */
     @Override

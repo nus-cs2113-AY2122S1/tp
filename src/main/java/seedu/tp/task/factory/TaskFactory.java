@@ -63,7 +63,11 @@ public abstract class TaskFactory {
             recurrenceEnum = getRecurrenceEnum(recurrence);
 
             setAdditionalVariables();
-            return createTask();
+
+            Task task = createTask();
+            setOptionalTaskVariables(task);
+
+            return task;
         } catch (RequiredArgmentNotProvidedException ranpe) {
             throw new GetTaskFailedException(ranpe.getMessage());
         } catch (InvalidPriorityException ipe) {
@@ -74,6 +78,16 @@ public abstract class TaskFactory {
             throw new GetTaskFailedException(gtfe.getMessage());
         }
     }
+
+    private void setOptionalTaskVariables(Task task) {
+        if (priorityEnum != null) {
+            task.setPriority(priorityEnum);
+        }
+        if (recurrenceEnum != null) {
+            task.setRecurrence(recurrenceEnum);
+        }
+    }
+
 
     /**
      * Checks that all required flags are present in <code>flags</code>.
