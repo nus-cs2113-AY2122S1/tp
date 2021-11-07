@@ -19,7 +19,7 @@ public class Ui {
     private static final String TABLE_ROW_SEPARATOR = " ------------------------------------------------"
             + "----------------------------------------------------- " + END_LINE;
 
-    private Scanner inputScanner = new Scanner(System.in);
+    private final Scanner inputScanner = new Scanner(System.in);
 
     /**
      * Gets user input from terminal and returns it as a String.
