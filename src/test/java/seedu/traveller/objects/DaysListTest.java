@@ -17,14 +17,14 @@ public class DaysListTest {
     }
 
     @Test
-    public void addDay_success() throws TravellerException {
+    public void addDay_success() {
         daysList.addDay();
         daysList.addDay();
         assertEquals(2, daysList.getSize());
     }
 
     @Test
-    public void deleteDay_success() throws TravellerException {
+    public void deleteDay_success() {
         daysList.addDay();
         daysList.addDay();
         try {

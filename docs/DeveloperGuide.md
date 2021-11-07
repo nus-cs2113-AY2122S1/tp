@@ -173,6 +173,10 @@ Additionally, the `Command` class is used to execute various actions in the vari
 
 
 
+
+
+
+
 Details of each of the sub-components can be found in the subsequent sub-sections.
 
 #### 1.2.1. Traveller class

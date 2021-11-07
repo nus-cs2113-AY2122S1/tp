@@ -30,9 +30,9 @@ public class Traveller {
             try {
                 String fullCommand = ui.readCommand();
                 ui.printLine();
-                Command command = Parser.parse(fullCommand);
-                command.execute(tripsList, ui);
-                isExit = command.getExit();
+                Command c = Parser.parse(fullCommand);
+                c.execute(tripsList, ui);
+                isExit = c.getExit();
             } catch (TravellerException e) {
                 ui.printError(e.getMessage());
             } finally {

@@ -19,7 +19,6 @@ public class ItemsListTest {
         this.itemsList = new ItemsList();
     }
 
-    //@@author Uxinnn
     @Test
     public void addItem_success() throws TravellerException {
         Item item1 = new Item("1900", "Eat dinner");

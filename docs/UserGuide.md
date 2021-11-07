@@ -67,10 +67,10 @@ This section provides a guide on how to get Traveller up and running on your com
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `Traveller.zip` from [here](https://github.com/AY2122S1-CS2113T-W13-1/tp/releases).
 3. Unzip the downloaded folder in an empty directory of your choice.
-4. Navigate to the directory containing `Traveller.jar` in your desired CLI and run `java -jar Traveller.jar`.
+4. Navigate to the directory containing `Traveller.jar` in your command prompt and run `java -jar Traveller.jar`.
    You should see Traveller's welcome message as shown below.
 
-   ![Welcome](./documentationPics/welcome.png)
+![Welcome](./documentationPics/welcome.png)
 
 5. Enter a command.
 

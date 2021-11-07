@@ -2,7 +2,6 @@ package seedu.traveller.objects;
 
 import seedu.traveller.exceptions.DuplicateItemException;
 import seedu.traveller.exceptions.ItemNotFoundException;
-import seedu.traveller.exceptions.MaxNumberOfItemsAllowedExceededException;
 import seedu.traveller.exceptions.TravellerException;
 
 import java.util.ArrayList;

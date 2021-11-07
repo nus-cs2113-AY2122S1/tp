@@ -1,7 +1,6 @@
 package seedu.traveller.objects;
 
 import seedu.traveller.exceptions.DayNotFoundException;
-import seedu.traveller.exceptions.MaxNumberOfDaysAllowedExceededException;
 import seedu.traveller.exceptions.TravellerException;
 
 import java.util.ArrayList;
