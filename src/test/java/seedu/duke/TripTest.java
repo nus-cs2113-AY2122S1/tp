@@ -72,6 +72,11 @@ class TripTest {
     }
 
     @Test
+    public void testNewTripsWithDuplicates() {
+        //TODO: add test
+    }
+
+    @Test
     public void testEditLocation() throws ForceCancelException {
         testTrip1.setLocation("under the rainbow");
         assertEquals("under the rainbow", testTrip1.getLocation());
@@ -155,11 +160,9 @@ class TripTest {
 
     @Test
     public void testEditExRateNotParsableWithForceCancel() {
-        assertThrows(ForceCancelException.class, () -> {
-            System.setIn(new ByteArrayInputStream("-cancel".getBytes()));
-            Storage.setScanner(new Scanner(System.in));
-            testTrip1.setExchangeRate("something");
-        });
+        System.setIn(new ByteArrayInputStream("-cancel".getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        assertThrows(ForceCancelException.class, () -> testTrip1.setExchangeRate("something"));
     }
 
     @Test
