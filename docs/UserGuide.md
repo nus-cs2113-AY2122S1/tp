@@ -84,7 +84,7 @@ Adds a new budget to a specific month.
 Format: `add -b a/AMOUNT m/<MONTH>`
 
 * The `AMOUNT` can be entered with 2 decimal places or without decimal places.
-  * Note: `Amount` with more than 2d.p. will be rounded up from 0.006 onwards.
+  * Note: `Amount` will be rounded up to 2dp (for budget, expenditure, and loan).
   * E.g. $1.006 will be rounded up to $1.01.
 * The `MONTH` must strictly be within the range of 1 to 12.
 
@@ -461,9 +461,29 @@ Examples of usage:
 Expected outcome:
 ```
 ========================================================
-Successfully deleted Expenditure 3.chicken rice3          | $5.0               | 2021-10-21       
-Successfully deleted Expenditure 4.chicken rice4          | $5.0               | 2021-10-21       
-Successfully deleted Expenditure 5.chicken rice5          | $5.0               | 2021-10-21     
+Successfully deleted Expenditure 3:
+Description: breakfast
+Amount: $100.00
+Date: 2021-10-10
+Category: GENERAL
+Total Amount Spent in October: $300.00
+Percentage of Budget Left: 97.00%
+========================================================
+Successfully deleted Expenditure 4:
+Description: lunch
+Amount: $100.00
+Date: 2021-10-10
+Category: GENERAL
+Total Amount Spent in October: $200.00
+Percentage of Budget Left: 98.00%
+========================================================
+Successfully deleted Expenditure 5:
+Description: dinner
+Amount: $100.00
+Date: 2021-10-10
+Category: GENERAL
+Total Amount Spent in October: $100.00
+Percentage of Budget Left: 99.00%
 ========================================================
 ```
 <br />
@@ -486,14 +506,20 @@ Format:`delete -l m/MONTH`
 
 Examples of usage:
 
- `delete -l m/10 i/3-5`
+ `delete -l m/10 i/1-2`
 
 Expected outcome:
 ```
 ========================================================
-Successfully deleted Loan 3.Wei Xuan               | $1000.0            | 2021-10-24       
-Successfully deleted Loan 4.Luoyuang               | $1000.0            | 2021-10-24       
-Successfully deleted Loan 5.Yixuan                 | $1000.0            | 2021-10-24      
+Successfully deleted Loan 1:
+Debtor: xinghan
+Amount: $100.00
+Date: 2021-10-10
+========================================================
+Successfully deleted Loan 2:
+Debtor: kobe
+Amount: $200.00
+Date: 2021-10-03
 ========================================================
 ```
 <br />
