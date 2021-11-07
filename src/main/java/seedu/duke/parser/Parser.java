@@ -193,6 +193,10 @@ public abstract class Parser {
         return dateTime.format(formatter1);
     }
 
+    public static LocalDateTime convertDateTimeForLoading(String dateTime) {
+        return LocalDateTime.parse(dateTime, formatter1);
+    }
+
     public static ArrayList<Item> makeMainList() {
         ArrayList<Item> sortedList = new ArrayList<>();
         sortedList.addAll(Duke.eventCatalog);
