@@ -2,17 +2,18 @@
 'https://plantuml.com/component-diagram
 
 
-Package Training <<Rectangle>> {
-Class TrainingList
-Class TrainingSchedule
+Package Member <<Rectangle>> {
+
+Class MemberList
+Class Member
 }
 
 Package Storage <<Rectangle>> {
-Class TrainingStorage
+Class MemberStorage
 }
 
-TrainingStorage ..> TrainingList
-TrainingList ..>"*" TrainingSchedule
+MemberStorage ..>   "1"MemberList
+MemberList "1"..>"*" Member
 
 hide members
 hide circle
