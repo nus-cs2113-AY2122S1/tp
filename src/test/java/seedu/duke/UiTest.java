@@ -286,14 +286,14 @@ public class UiTest {
     @Test
     public void printGraph_validStonksGraph_printCorrectGraph() {
         //empty financialtracker
-        StonksGraph stonksGraph = new StonksGraph(financialTracker);
+        StonksGraph stonksGraph = new StonksGraph(financialTracker,LocalDate.now().getYear());
         String expectedOutput = SEPARATOR_LINE
                 + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
                 + "x                                                                                                  x"
                 + "x   Account Balance: $0.00                                                 Legend:                 x"
                 + "x   Current month total expense: $0.00                                # is Expense      x"
                 + "x   Current month total income: $0.00                                 o is Income       x"
-                + "x   Your Yearly Report                                                                             x"
+                + "x   Your Yearly Report                                                     Unit: 0.01              x"
                 + "x ------------------------------------------------------------------------------------------------ x"
                 + "x                                                                                                  x"
                 + "x                                                                                                  x"
@@ -317,97 +317,6 @@ public class UiTest {
 
         assertEquals(expectedOutput, outputToBeTested);
     }
-    
-    @Test
-    public void printOverallBudgetWarning_givenBudget_printBudgetWarningMsg() {
-        String expectedOutput = "You are almost reaching the OCTOBER OVERALL budget: $49.00/$50.00" + newLine
-                + "Consider readjusting your OCTOBER OVERALL budget!" + newLine
-                + SEPARATOR_LINE;
-        testUI.printOverallBudgetWarning("OCTOBER", 49, 50);
-        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
-    }
-
-    @Test
-    public void printOverallBudgetExceeded_exceeded_printBudgetExceededMsg() {
-        String expectedOutput = "You have exceeded the OCTOBER OVERALL budget: $900.00/$50.00" + newLine
-                + "Consider readjusting your OCTOBER OVERALL budget!" + newLine
-                + SEPARATOR_LINE;
-        testUI.printOverallBudgetExceeded("OCTOBER", 900, 50);
-        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
-    }
-
-    @Test
-    public void printOverallExceededBudgetWarning_givenBudget_printBudgetWarningMsg() {
-        String expectedOutput = "You are almost reaching the OCTOBER MEDICAL budget: $200.00/$201.00" + newLine
-                + "Since you have already exceeded your OCTOBER OVERALL budget: $502.00/$500.00" + newLine
-                + "Consider readjusting your OCTOBER OVERALL budget before readjusting your OCTOBER MEDICAL budget!"
-                + newLine + SEPARATOR_LINE;
-        testUI.printOverallExceededBudgetWarning("OCTOBER", "MEDICAL", 200, 201,
-                502, 500);
-        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
-    }
-
-    @Test
-    public void printOverallExceededBudgetExceeded_givenBudget_printBudgetWarningMsg() {
-        String expectedOutput = "You have exceeded the OCTOBER MEDICAL budget: $201.00/$201.00" + newLine
-                + "Since you have also exceeded your OCTOBER OVERALL budget: $502.00/$500.00" + newLine
-                + "Consider readjusting your OCTOBER OVERALL budget before readjusting your OCTOBER MEDICAL budget!"
-                + newLine + SEPARATOR_LINE;
-        testUI.printOverallExceededBudgetExceeded("OCTOBER", "MEDICAL", 201, 201,
-                502, 500);
-        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
-    }
-
-    @Test
-    public void printOverallNotExceededBudgetWarning_givenBudget_printDirectlyReadjustMessage() {
-        String expectedOutput = "You are almost reaching the OCTOBER MEDICAL budget: $200.00/$201.00" + newLine
-                + "Since you have not yet exceeded your OCTOBER OVERALL budget: $250.00/$300.00" + newLine
-                + "You can directly increase your OCTOBER MEDICAL budget up to $251.00!"
-                + newLine + SEPARATOR_LINE;
-        testUI.printOverallNotExceededBudgetWarning("OCTOBER", "MEDICAL", 200, 201,
-                250, 300);
-        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
-    }
-
-    @Test
-    public void printOverallNotExceededBudgetWarning_givenBudget_printOnlyBudgetReadjustMessage() {
-        String expectedOutput = "You are almost reaching the OCTOBER MEDICAL budget: $200.00/$201.00" + newLine
-                + "Consider readjusting your OCTOBER MEDICAL budget!" + newLine
-                + SEPARATOR_LINE;
-        testUI.printOverallNotExceededBudgetWarning("OCTOBER", "MEDICAL", 200, 201,
-                250, 0);
-        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
-    }
-
-    @Test
-    public void printOverallNotExceededBudgetExceeded_givenBudget_printDirectlyReadjustMessage() {
-        String expectedOutput = "You have exceeded the OCTOBER MEDICAL budget: $200.00/$190.00" + newLine
-                + "Since you have not yet exceeded your OCTOBER OVERALL budget: $250.00/$300.00"
-                + newLine
-                + "You can directly increase your OCTOBER MEDICAL budget up to $250.00!"
-                + newLine + SEPARATOR_LINE;
-        testUI.printOverallNotExceededBudgetExceeded("OCTOBER", "MEDICAL", 200, 190,
-                250, 300);
-        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
-    }
-
-    @Test
-    public void printOverallNotExceededBudgetExceeded_givenBudget_printOnlyBudgetReadjustMessage() {
-        String expectedOutput = "You have exceeded the OCTOBER MEDICAL budget: $200.00/$150.00" + newLine
-                + "Consider readjusting your OCTOBER MEDICAL budget!"
-                + newLine + SEPARATOR_LINE;
-        testUI.printOverallNotExceededBudgetExceeded("OCTOBER", "MEDICAL", 200, 150,
-                290, 0);
-        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
-    }
-
-    @Test
-    public void printBudgetSetConfirmation_setBudget_printBudgetSetMessage() {
-        String expectedOutput = SEPARATOR_LINE + newLine
-                + "FOOD budget has been set to $56.71" + newLine + SEPARATOR_LINE;
-        testUI.printBudgetSetConfirmation(56.71, ExpenseCategory.FOOD);
-        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
-    }
 
     @Test
     public void printBudget_givenBudget_printBudgetMsg() {
@@ -421,9 +330,10 @@ public class UiTest {
     @Test
     public void printThresholdConfirmation_validThreshold_printThresholdMsg() {
         String expectedOutput = SEPARATOR_LINE + newLine
-                + "Threshold for budget reminders set to 58.71" + newLine
+                + "Threshold for budget reminders set to 0.58" + newLine
+                + "We'll warn you when you spend 58.0% of your budget!" + newLine
                 + SEPARATOR_LINE;
-        testUI.printThresholdConfirmation(58.71);
+        testUI.printThresholdConfirmation(0.58);
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
 

@@ -9,7 +9,6 @@ public class Messages {
     public static final String NON_NUMERIC_AMOUNT_MESSAGE = "Only numeric inputs are allowed for amount.";
     public static final String NON_NUMERIC_THRESHOLD_MESSAGE = "Threshold value given is either out of range or " 
             + "non-numeric. Please try again.";
-    public static final String NON_NUMERIC_INDEX_MESSAGE = "Only numeric inputs are allowed for index";
     public static final String NON_POSITIVE_AMOUNT_MESSAGE = "Only positive values are allowed for amount.";
     public static final String NON_POSITIVE_INTEGER_INDEX_MESSAGE = "Only positive integers are allowed for index.";
     public static final String BLANK_AMOUNT_MESSAGE = "No amount inputted!";
@@ -72,6 +71,8 @@ public class Messages {
             + "Are you sure you have spent that much?";
     public static final String INVALID_INCOME_VALUE = "Wow! That's a lot of money."
             + "I don't think we can handle that much money";
+    public static final String INVALID_BUDGET_VALUE = "Wow! That's a lot of money."
+            + "I don't think we can handle that much money";
     public static final String INCOMPLETE_ENTRIES_CSV_HEADER_MESSAGE = "The CSV header for StonksXD_Entries.csv " 
             + "seems to be incomplete or missing.\nDo not worry, we will put back the CSV header.\nNote: If you " 
             + "replaced the CSV header with an entry, that entry will not be loaded.";
@@ -88,5 +89,6 @@ public class Messages {
             + "StonksXD_Settings.csv, some or all settings maybe lost.";
     public static final String TOO_MANY_DP_MESSAGE = "Only 2 or less decimal places are allowed!";
     public static final String INVALID_DATE_FORMAT = "Your date format is invalid. Please use DD/MM/YYYY";
-
+    public static final String INVALID_INDEX_MESSAGE = "Index given is either out of range or not an integer.";
+    public static final String INVALID_YEAR_MESSAGE = "The given year must be in the YYYY format.";
 }

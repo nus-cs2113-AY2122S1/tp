@@ -21,8 +21,10 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
 ---
 
 ## Table of Contents
-1. [Quick Start](#quick-start)
-2. [Features](#features)
+1. [Quick Start](#1-quick-start)
+
+
+2. [Features](#2-features)
 
    2.1 Help 
    * [View all possible commands: `help`](#view-all-possible-commands-help)
@@ -39,11 +41,11 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
    * [View total expense: `total_ex`](#view-total-expense-total_ex)
    * [View total income: `total_in`](#view-total-income-total_in)
    * [View total balance: `balance`](#view-total-balance-balance)
-   * [Show total expense between 2 dates: `btw_ex s/START_DATE e/END_DATE`](#show-total-expense-between-2-dates-btw_ex)
-   * [Show total income between 2 dates: `btw_in s/START_DATE e/END_DATE`](#show-total-income-between-2-dates-btw_in)
+   * [Show total expense between 2 dates: `btw_ex`](#show-total-expense-between-2-dates-btw_ex)
+   * [Show total income between 2 dates: `btw_in `](#show-total-income-between-2-dates-btw_in)
 
    2.4 Finding Entries
-   * [Find entry using date: `find DD/MM/YYYY`](#find-entry-using-date-find-ddmmyyyy)
+   * [Find entry using date: `find DATE`](#find-entry-using-date-find-ddmmyyyy)
    * [Find entry using keyword: `find KEYWORD`](#find-entry-using-keyword-find-keyword)
 
    2.5 Budget Setting 
@@ -68,8 +70,10 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
    2.10 Saving of Data
    * [Saving of data](#saving-of-data)
    
-4. [FAQ](#faq)
-5. [Command Summary](#command-summary)
+3. [FAQ](#3-faq)
+
+
+4. [Command Summary](#4-command-summary)
 
 ---
 
@@ -80,12 +84,16 @@ Before you learn how to use the app, take a look at the [quickstart](#quick-star
 3. Copy the file to the folder you want to use as the home folder for your `Stonks XD`.
 4. Open the Command-Line interface (CLI) and navigate to the directory where you saved the `.jar` file and run 
 `java -jar StonksXD.jar` in the command line. `Stonks XD` will start up.
-5. In `Stonks XD`, type the command in the CLI and press `Enter` on your keyboard to execute it. (Tip: type `help` 
+
+5. The image shown below is what the program should look like for first time users like yourself!   
+![image](https://user-images.githubusercontent.com/69465661/140613991-7848997a-e97b-4c65-825a-1e126590b6a0.png)
+
+6. In `Stonks XD`, type the command in the CLI and press `Enter` on your keyboard to execute it. (Tip: type `help` 
 to show all available commands and their format.)
-6. Use the format `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY` to add expense entries to `Stonks XD`.
-7. Use the format `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY` to add income entries to `Stonks XD`.
-8. Type `balance` to view your net saving or type `show_graph` to see an overview of your finances!
-9. Refer to the [Features](#features) below for details of each command.
+7. Use the format `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY` to add expense entries to `Stonks XD`.
+8. Use the format `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY` to add income entries to `Stonks XD`.
+9. Type `balance` to view your net saving or type `show_graph` to see an overview of your finances!
+10. Refer to the [Features](#features) below for details of each command.
 
 ---
 
@@ -94,10 +102,13 @@ to show all available commands and their format.)
 ### Notes
 
 - Words in `UPPER_CASE` are the parameters to be supplied by you, the user.
-  e.g. in add `a/AMOUNT`, `AMOUNT` is a parameter which can be typed as `a/12.30`.
-- Parameters surrounded with `[` and `]` are optional parameters which you might consider including to your input.
-  e.g. in the add expense/income feature, an optional date parameter `[D/DATE]` may be added which can be typed as `D/19/10/2021` 
-- Most features below have a collapsible section that allows you to see the run time output. Do check them out if you want to visualize what the product looks like!
+e.g. in add `a/AMOUNT`, `AMOUNT` is a parameter which can be typed as `a/12.30`.
+- Parameters can be in any order.
+e.g. if the command specifies `c/CATEGORY a/AMOUNT`, `a/AMOUNT c/CATEGORY` is also acceptable.
+- If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence 
+of the parameter will be taken. e.g. if you gave `a/100 a/1000`, only `a/1000` will be read in.
+- Most features below have a collapsible section that allows you to see the run time output. Do check them out if you 
+want to visualize what the product looks like!
 
 ---
 ### 2.1 Help
@@ -115,9 +126,9 @@ Format: `help`
 This is a list of commands and their format!
 -----------------------------------------------------------------------------------------------------
 List Out All Commands: help
-Adding Expense: add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY
+Adding Expense (Date Format: DD/MM/YYYY): add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY [D/DATE]
 Deleting Expense: del_ex i/INDEX
-Adding Income: add_in d/DESCRIPTION a/AMOUNT c/CATEGORY
+Adding Income (Date Format: DD/MM/YYYY): add_in d/DESCRIPTION a/AMOUNT c/CATEGORY [D/DATE]
 Deleting Income: del_in i/INDEX
 Listing Expense: list_ex
 Listing Income: list_in
@@ -133,8 +144,12 @@ To Check Budgets: check_budget c/CATEGORY
 To Set Threshold Value for Reminders: set_threshold t/THRESHOLD
 To change entries into a different currency: set_curr c/CURRENCY
 To check the currency that entries are currently in: check_curr
+<<<<<<< HEAD
 To view a list of available currency conversions: list_curr
 To View Your Yearly Report: show_graph
+=======
+To View Your Yearly Report (Year Format: YYYY): show_graph [Y/YEAR]
+>>>>>>> 9f29390ee50261bcbcbd370c1d5fb753c4482a24
 To Clear All Expense And Income Entries: clear_all_entries
 To Terminate The Program: end
 -----------------------------------------------------------------------------------------------------
@@ -154,15 +169,15 @@ This command adds an expense entry to your list. Use this to keep track of your 
 Format: `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY [D/DATE]`
 
 - `DESCRIPTION` has to be non-empty.
-- `AMOUNT` has to be a positive amount.
+- `AMOUNT` has to be a positive amount that has a maximum of 2 decimal points.
 - `CATEGORY` has to be either `food`, `transport`, `bills`, `medical`, `entertainment`, or `misc`.
 - `DATE` is an optional input you can add which specifies when the entry is made. It must be in the DD/MM/YYYY format.
 
 Note:
 
 - The default date of the added expense will be the date in which the expense is added.
-- Each expense entry can only have a maximum value of 1,000,000,000 (1Billion).
-- The sum of all your entries cannot be more than 100,000,000,000 (100Billion).
+- Each expense entry can only have a maximum value of 1,000,000 (1 Million).
+- The sum of all your entries cannot be more than 100,000,000,000 (100 Billion).
 
 Examples:
 
@@ -179,7 +194,7 @@ Your most recent spending:
 <pre>
 -----------------------------------------------------------------------------------------------------
 Your most recent spending: 
-[E] McDonalds dinner - $7.20 (20/10/2021)
+[E] McDonalds dinner - $7.50 (20/10/2021)
 -----------------------------------------------------------------------------------------------------
 </pre>
 
@@ -200,7 +215,7 @@ You can directly increase your OCTOBER FOOD budget up to $32.00!
 
 ### Delete expense entry: `del_ex`
 
-This deletes an unwanted expense entry by providing the index of said entry. 
+You can delete an incorrect expense entry by providing the index of said entry. 
 Index can be found via the `list_ex` command below.
 
 Format: `del_ex i/INDEX`
@@ -259,8 +274,8 @@ Format: `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY [D/DATE]`
 Note:
 
 - The default date of the added income will be the date in which the income is added.
-- Each income entry can only have a maximum value of 1,000,000,000 (1Billion).
-- The sum of all your entries cannot be more than 100,000,000,000 (100Billion).
+- Each income entry can only have a maximum value of 1,000,000 (1 Million).
+- The sum of all your entries cannot be more than 100,000,000,000 (100 Billion).
 
 Examples:
 
@@ -287,7 +302,7 @@ Your most recent earning:
 
 ### Delete income entry: `del_in`
 
-This deletes an unwanted income entries by providing the index of said entry.
+You can delete an incorrect income entry by providing the index of said entry.
 The index can be found using the `list_in` command found below.
 
 Format: `del_in i/INDEX`
@@ -391,24 +406,35 @@ Format: `total_ex`
 
 Note:
 
-- `total_in` command is only able to print values less than 100,000,000,000 (100Billion).
+- `total_ex` command is only able to print values less than 100,000,000,000 (100Billion).
 
+Examples:
+<ol>
+<li>
+Let's say you have made expense entries consistently for a couple of months since you downloaded the application and you want to know the total expense you have logged.
+</li>
+</ol>
 <details>
 <summary> ▼ Expected output in run window </summary>
 <br>
-Here we have a simple expense list with three items:
+These are the expense entries you have made in the past couple of months. 
 <pre>
 -----------------------------------------------------------------------------------------------------
-1: [E] bought cookies - $100.00 (18/01/2021)
-2: [E] bought home - $200.50 (18/07/2021)
-3: [E] bought car - $300.00 (18/06/2021)
+1: [E] Lunch with Friends - $22.00 (02/01/2021)
+2: [E] Movie date - $50.00 (07/01/2021)
+3: [E] ORD PARTY!! - $150.00 (12/01/2021)
+4: [E] Top up my bus card for the month of Feb - $150.00 (02/02/2021)
+5: [E] Roses - $30.00 (14/02/2021)
+6: [E] Dinner with Friends - $37.00 (24/02/2021)
+7: [E] Mum's birthday treat - $120.00 (07/03/2021)
+8: [E] Grab food delivery - $45.00 (24/03/2021)
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-If we give the command <code>total_ex</code>, it will display the total expenditure:
+Simply type in the command <code>total_ex</code>, and the program will display the total expense entries you have made:
 <pre>
 -----------------------------------------------------------------------------------------------------
-Your total expense is: $600.50
+Your total income is: $604.00
 -----------------------------------------------------------------------------------------------------
 </pre>
 </details>
@@ -417,7 +443,7 @@ Your total expense is: $600.50
 
 ### View total income: `total_in`
 
-This displays the sum of all income entries in you have made in your list.
+This will give you the sum of all income entries in you have made in your list.
 This is great for giving you a quick snapshot of how much you've earned!
 
 
@@ -427,22 +453,34 @@ Note:
 
 - `total_in` command is only able to print values less than 100,000,000,000 (100Billion).
 
+Examples:
+<ol>
+<li>
+Let's say you have made income entries consistently for a couple of months since you downloaded the application and you want to know the total income you have logged.
+</li>
+</ol>
 <details>
 <summary> ▼ Expected output in run window </summary>
 <br>
-Here we have a simple income list with three items:
+These are the income entries you have made in the past couple of months. 
 <pre>
 -----------------------------------------------------------------------------------------------------
-1: [I] rob a church - $300.00 (18/11/2021)
-2: [I] rob a car - $400.00 (18/12/2021)
-3: [I] rob a home - $500.00 (18/09/2021)
+1: [I] Allowance for the month of Jan - $250.00 (02/01/2021)
+2: [I] Allowance for the month of Feb - $250.00 (04/02/2021)
+3: [I] Money from teaching tuition  - $800.00 (07/03/2021)
+4: [I] Part time job - $1000.00 (20/04/2021)
+5: [I] Part time job - $1000.00 (20/05/2021)
+6: [I] Part time job - $1000.00 (20/06/2021)
+7: [I] Part time job - $1000.00 (20/07/2021)
+8: [I] Allowance for the month of Aug - $350.00 (01/08/2021)
+9: [I] Allowance for the month of Sept - $350.00 (11/09/2021)
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-If we give the command <code>total_in</code>, it will display the total income:
+Simply type in the command <code>total_in</code>, and the program will display the total income entries you have made:
 <pre>
 -----------------------------------------------------------------------------------------------------
-Your total income is: $2800.00
+Your total income is: $6000.00
 -----------------------------------------------------------------------------------------------------
 </pre>
 </details>
@@ -477,16 +515,28 @@ Format: `btw_ex s/START_DATE e/END_DATE`
 - `START_DATE` must be before or the same as `END_DATE`.
 
 Examples:
-- <code>btw_ex s/06/12/1987 e/21/11/1999</code> will return the sum of all expense entries between and inclusive of 6th December 1987 to 21st November 1999.
+<ol><li>Let's you have have made a bunch of expense entries in the past 2 weeks, from  10th August 2021 and 23rd August 2021, and you want to find out how much you have spent during this time period.</li>
+<br><li>Simply key in two dates using the command format<code>btw_ex s/10/08/2021 e/23/08/2021</code> to get the total you have spent in those 2 weeks! </li></ol>
 <details>
 <summary> ▼ Expected output in run window </summary>
 <br>
-If you wish to find your income between 10th Aug 2021 and 23rd Oct 2021
-<br>
-<ul><li>Give the command <code>btw_ex s/10/07/2021 e/23/10/2021</code></li></ul>
+These are the expense entries you have made in the past couple of months. 
 <pre>
 -----------------------------------------------------------------------------------------------------
-Your total expense between 10 Jul 2021 and 23 Oct 2021 is : $2300.00
+1: [E] Lunch with Friends - $22.00 (09/07/2021)
+2: [E] Movie date - $50.00 (20/07/2021)
+3: [E] ORD PARTY!! - $150.00 (12/08/2021)
+4: [E] Top up my bus card for the month of Aug - $150.00 (15/08/2021)
+5: [E] Hostel fees - $1873.00 (15/08/2021)
+6: [E] Dinner with Friends - $37.00 (17/08/2021)
+7: [E] Mum's birthday treat - $120.00 (23/08/2021)
+8: [E] Grab food delivery - $45.00 (23/08/2021)
+-----------------------------------------------------------------------------------------------------
+</pre>
+Your total expense that you have logged for the past 2 weeks will be shown:
+<pre>
+-----------------------------------------------------------------------------------------------------
+Your total expense between 10 Aug 2021 and 23 Aug 2021 is : $2375.00
 -----------------------------------------------------------------------------------------------------
 </pre>
 </details>
@@ -504,15 +554,26 @@ Format: `btw_in s/START_DATE e/END_DATE`
 - `START_DATE` must be before or the same as `END_DATE`.
 
 Examples:
-<ul><li><code>btw_in s/06/12/1987 e/21/11/1999</code> will return the sum of all income entries between and inclusive of 6th December 1987 to 21st November 1999.</li></ul>
+<ol><li>Let's you have have made a bunch of income entries in the past 2 weeks, from  10th August 2021 and 23rd August 2021, and you want to find out how much you have received during this time period.</li>
+<br><li>Simply key in two dates using the command format<code>btw_in s/10/08/2021 e/23/08/2021</code> to get the total income you have gotten in those 2 weeks! </li></ol>
 <details>
 <summary> ▼ Expected output in run window </summary>
 <br>
-If you wish to find your income between 10th Aug 2021 and 23rd Oct 2021
-<ul><li>Give the command <code>btw_in s/10/07/2021 e/23/10/2021</code></li></ul>
+These are the income entries you have made in the past couple of months. 
 <pre>
 -----------------------------------------------------------------------------------------------------
-Your total income between 10 Jul 2021 and 23 Oct 2021 is : $2300.00
+1: [I] Allowance for the month of Jul - $350.00 (02/07/2021)
+2: [I] Allowance for the month of Aug - $350.00 (04/08/2021)
+3: [I] Money from teaching tuition  - $800.00 (11/08/2021)
+4: [I] Part time job - $1000.00 (15/08/2021)
+5: [I] Friend finally paid me back for lunch last week -.-" - $23.00 (15/08/2021)
+6: [I] Mahjong ZMMT :) - $50.00 (20/08/2021)
+-----------------------------------------------------------------------------------------------------
+</pre>
+Your total income that you have logged for the past 2 weeks will be shown:
+<pre> 
+-----------------------------------------------------------------------------------------------------
+Your total income between 10 Aug 2021 and 23 Aug 2021 is : $1873.00
 -----------------------------------------------------------------------------------------------------
 </pre>
 </details>
@@ -749,7 +810,16 @@ This shows the monthly breakdown of the finances in a Yearly Report which also
 includes current month spending and earnings.
 We recommend using this function after your daily logging of expenses for a one-stop check-in on the state of your finances!
 
-Format: `show_graph`
+
+#### Note
+1. The graph scales according to your largest monthly total, the scale currently used by the graph will be shown to you on the top right. 1.0E9 for example would mean 1,000,000,000, E stands for exponential.
+
+
+2. It would be ideal not to have entries with big differences as the Stonks XD app is meant for daily logging.
+
+Format: `show_graph [Y/YEAR]`
+
+- `YEAR` is an optional input which you may include. It will show the graph that corresponds to the given year. It must be in the YYYY format
 
 <details>
 <summary> ▼ Expected output in run window </summary>
@@ -758,21 +828,21 @@ show_graph
 -----------------------------------------------------------------------------------------------------
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 x                                                                                                  x
-x   Account Balance: $-398.2                                               Legend:                 x
-x   Current month (OCTOBER) total expense: $410.20                               # is Expense      x
-x   Current month (OCTOBER) total income: $0.00                                  o is Income       x
-x   Your Yearly Report                                                                             x
+x   Account Balance: $-449.50                                              Legend:                 x
+x   Current month (NOVEMBER) total expense: $5454.00                             # is Expense      x
+x   Current month (NOVEMBER) total income: $0.00                                 o is Income       x
+x   Your Yearly Report                                                     Unit: 1000.0            x
 x ------------------------------------------------------------------------------------------------ x
 x                                                                                                  x
 x                                                                                                  x
 x                                                                                                  x
 x                                                                                                  x
 x                                                                                                  x
-x                                                                                                  x
-x                                                                                                  x
-x                                                                                                  x
-x                                                                           #                      x
-x                                                                           #                      x
+x                                                                                   #        o     x
+x                                                                                   #        o     x
+x                                                                                   #        o     x
+x                                                                                   #        o     x
+x                                                                                   #        o     x
 x ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ x
 x   Jan     Feb     Mar     Apr     May     Jun     Jul     Aug     Sept    Oct     Nov     Dec    x
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -834,38 +904,49 @@ Here's our tip for the day: Try using the 50/30/20 rule to budget. 50% for needs
 
 ### Saving of Data
 
-Stonks XD will save / load data from `StonksXD_Entries.csv` and `StonksXD_Settings.csv`. 
+Stonks XD will save / load your data from `StonksXD_Entries.csv` and `StonksXD_Settings.csv`. This ensures that you 
+will not lose your important data when Stonks XD changes.
 
-- `StonksXD_Entries.csv` will store all the expense and income entries Stonks XD is currently tracking.
-- `StonksXD_Settings.csv` will store all the budget values, the currency setting and the threshold value.
+The 2 `csv` files will be stored in the same directory as `StonksXD.jar`.
+
+`StonksXD_Entries.csv` will store all your entries. They are:
+1. `Expense` entries.
+2. `Income` entries.
+
+`StonksXD_Settings.csv` will store all the important settings. They are:
+1. Currency setting
+2. Threshold setting
+3. Budget settings for different expense categories.
+
+All important fields will be separated by a `,`.
 
 The reason for data files to be in `.csv` format is so that you can have an easier time editing those data in Excel 
-when not using the program.
+when **not** using the program. It is easy to make mistakes when editing the `csv` files manually so do be careful.
 
 #### When editing csv files
 
-- `.csv` files should not be open concurrently while Stonks XD is running. In other words, never have two programs 
-writing / reading the `.csv` files at the same time. This will very likely cause a saving error and lost of data.
-- Restrictions and rules for different variables are the same as how you would enter them in the CLI, as specified 
-above.
-  - For example, when editing an expense entry in `StonksXD_Entries.csv`, `entry_description` should not be blank.
+- `.csv` files **must not** be open concurrently while Stonks XD is running. In other words, never have two programs 
+writing / reading the `.csv` files at the same time. This will very likely cause a saving / loading error and 
+lost of data.
+- Restrictions and rules for different variables are the same as how you would enter them in the Command Line 
+Interface, as specified above.
+  - For example, when editing an expense entry in `StonksXD_Entries.csv`, `entry_description` must not be blank.
   - Another example, when editing an income entry in `StonksXD_Entries.csv`, `amount` has to be a positive number and 
-  less than 1000000000.
+  less than 1000000.
   - Another example, when editing `threshold` in `StonksXD_Settings.csv`, ensure it is between 0 and 1. 
   - Another example, when editing an expense entry in `StonksXD_Entries.csv`, category should be the ones available and 
-  specified ealier on in the user guide.
+  specified earlier on in the user guide.
 - Do not alter / delete the headers of `.csv` files. Stonks XD is able to minimise the damage if you do so but to 
 ensure your data is saved / loaded properly, please do not edit anything unexpected.
 - Stonks XD expects the dates in `StonksXD_Entries.csv` to be in `DD/MM/YYYY` format i.e., `11/12/2021` when loading 
-data.
-  When opening `StonksXD_Entries.csv` in Excel, Excel might change the format of the dates. Do ensure Excel's date 
+data. When opening `StonksXD_Entries.csv` in Excel, Excel might change the format of the dates. Do ensure Excel's date 
 format is in `DD/MM/YYYY` when dealing with `StonksXD_Entries.csv`. Entries with a different date format will be 
 considered corrupted and not be loaded into Stonks XD.
 - Changing the currency setting in `StonksXD_Settings.csv` is not recommended. This is because it will
-  cause all your entries and budgets to be recognised as a different currency.
-- Do not edit the amount of your expenses / incomes drastically such that they exceed the limit per entry or the 
-total limit of 100000000000 for expense / income. Entries that cause you to exceed either limit will be considered 
-corrupted.
+cause all your entries and budgets to be recognised as a different currency.
+- Do not edit the amount of your entries drastically such that they exceed the max amount per entry or the 
+total limit of 100000000000 for expenses / incomes. Entries that cause you to exceed either of the 2 limit will be 
+considered corrupted and not be loaded.
 
 
 #### In the event of corrupted data
@@ -883,7 +964,7 @@ means all your edits are gone. But this pretty much ensures that there will be n
 
 ---
 
-## 4. FAQ
+## 3. FAQ
 
 **Q**: How do I transfer my data to another computer? 
 
@@ -895,7 +976,7 @@ means all your edits are gone. But this pretty much ensures that there will be n
 
 ---
 
-## 5. Command Summary
+## 4. Command Summary
 
 | Action | Format | Examples |
 | ------------ | ------------- | ------------- |
@@ -918,5 +999,6 @@ means all your edits are gone. But this pretty much ensures that there will be n
 | Set currency | `set_curr c/CURRENCY` | `set_curr c/usd` |
 | Check current currency | `check_curr` | - |
 | To terminate program | `end` | - |
+
 
 
