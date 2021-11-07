@@ -1,0 +1,62 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+actor User
+Box
+User -> Foodorama: userInput
+activate Foodorama
+Foodorama -> InputParser: getCommandName()
+activate InputParser
+Foodorama <-- InputParser: userCommandName
+Foodorama -> InputParser: getCommandParameters()
+return parameters
+create AddDishWasteCommand
+Foodorama -> AddDishWasteCommand: execute(parameters)
+deactivate InputParser
+activate AddDishWasteCommand
+AddDishWasteCommand -> Dish: addWaste(DISH_INDEX) after Input Validation
+deactivate AddDishWasteCommand
+activate Dish
+User <-- Dish: getWeightInput
+User -> Dish: weightInput
+
+alt if weightInput !isNumber || isInfinity || isNaN || isNegative
+    Dish --> FoodoramaException: Not a valid number
+    activate FoodoramaException
+    FoodoramaException -> Ui: Invalid Input Message
+    deactivate FoodoramaException
+    activate Ui
+    User <-- Ui: Invalid Input Message
+
+else else if weightInput > SOFT_WEIGHT_LIMIT
+    User <-- Dish: Get Confirmation Message
+    User -> Dish: Confirmation Message
+    alt if "y"/"yes"
+        Dish -> Dish: wastage += weightInput
+        activate Dish#DarkSalmon
+        deactivate Dish#DarkSalmon
+    else if "n"/"no
+        loop until Valid weightInput
+            User <-- Dish: getWeightInput
+            User -> Dish: weightInput
+            Dish -> Dish: check Valid weightInput
+            activate Dish#DarkSalmon
+            deactivate Dish#DarkSalmon
+        end
+        Dish -> Dish: wastage += weightInput
+        activate Dish#DarkSalmon
+        deactivate Dish#DarkSalmon
+    end
+else else
+    Dish -> Dish: wastage += weightInput
+    activate Dish#DarkSalmon
+    deactivate Dish#DarkSalmon
+end
+    Dish -> Ui: printWastage(dishName, wastage)
+    deactivate Dish
+    User <-- Ui: Add Dish Wastage Success Message
+    deactivate Ui
+
+
+deactivate Foodorama
+
+@enduml

@@ -1,8 +1,8 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-Box
 actor User
+Box
 User -> Foodorama: userInput
 activate Foodorama
 Foodorama -> InputParser: getCommandName()

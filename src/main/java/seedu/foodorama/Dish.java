@@ -263,10 +263,9 @@ public class Dish implements Comparable<Dish> {
             UI.printLimitExceeded(dishName);
         }
         if (!parts.isEmpty()) {
-            //Todo proportion stuff and prevent feedback loop
             ingredientContribution = wastage / parts.size();
             for (Ingredient ingredient : parts) {
-                //Change in contribution is change in wastage / num of partss
+                // Change in contribution is change in wastage / num of parts
                 ingredient.addDishWaste(inputWastage / parts.size());
             }
         }

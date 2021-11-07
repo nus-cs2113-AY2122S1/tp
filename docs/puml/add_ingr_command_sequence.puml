@@ -1,0 +1,64 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+actor User
+Box
+User -> Foodorama: userInput
+activate Foodorama
+Foodorama -> InputParser: getCommandName()
+activate InputParser
+Foodorama <-- InputParser: userCommandName
+Foodorama -> InputParser: getCommandParameters()
+return parameters
+create AddIngrCommand
+Foodorama -> AddIngrCommand: execute(parameters)
+deactivate InputParser
+activate AddIngrCommand
+AddIngrCommand -> IngredientList: add(INGR_NAME) after Input Validation
+deactivate AddIngrCommand
+activate IngredientList
+User <-- IngredientList: getWeightInput
+User -> IngredientList: weightInput
+
+
+
+alt if weightInput !isNumber || isInfinity || isNaN || isNegative
+    IngredientList --> FoodoramaException: Not a valid number
+    activate FoodoramaException
+    FoodoramaException -> Ui: Invalid Input Message
+    deactivate FoodoramaException
+    activate Ui
+    User <-- Ui: Invalid Input Message
+
+else else if weightInput > SOFT_WEIGHT_LIMIT
+    User <-- IngredientList: Get Confirmation Message
+    User -> IngredientList: Confirmation Message
+    alt if "y"/"yes"
+        IngredientList -> IngredientList: Add to ingredientList ArrayList
+        activate IngredientList#DarkSalmon
+        deactivate IngredientList#DarkSalmon
+    else if "n"/"no
+        loop until Valid weightInput
+            User <-- IngredientList: getWeightInput
+            User -> IngredientList: weightInput
+            IngredientList -> IngredientList: check Valid weightInput
+            activate IngredientList#DarkSalmon
+            deactivate IngredientList#DarkSalmon
+        end
+        IngredientList -> IngredientList: Add to ingredientList ArrayList
+                activate IngredientList#DarkSalmon
+                deactivate IngredientList#DarkSalmon
+    end
+else else
+    IngredientList -> IngredientList: Add to ingredientList ArrayList
+
+    activate IngredientList#DarkSalmon
+    deactivate IngredientList#DarkSalmon
+end
+    IngredientList -> Ui: printAddedIngredient()
+    deactivate IngredientList
+    User <-- Ui: Add Ingredient Success Message
+    deactivate Ui
+
+deactivate Foodorama
+
+@enduml
