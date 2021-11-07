@@ -7,10 +7,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class UtilTest {
-
     @Test
     void isStringInteger_emptyString_expectFalse() {
         assertFalse(Util.isStringInteger(""));
+    }
+
+    @Test
+    void isStringInteger_nullString_expectFalse() {
+        assertFalse(Util.isStringInteger(null));
     }
 
     @Test
@@ -40,6 +44,11 @@ class UtilTest {
     @Test
     void isStringDouble_emptyString_expectFalse() {
         assertFalse(Util.isStringDouble(""));
+    }
+
+    @Test
+    void isStringDouble_nullString_expectFalse() {
+        assertFalse(Util.isStringDouble(null));
     }
 
     @Test
@@ -75,6 +84,11 @@ class UtilTest {
     @Test
     void isStringBoolean_emptyString_expectFalse() {
         assertFalse(Util.isStringBoolean(""));
+    }
+
+    @Test
+    void isStringBoolean_nullString_expectFalse() {
+        assertFalse(Util.isStringBoolean(null));
     }
 
     @Test

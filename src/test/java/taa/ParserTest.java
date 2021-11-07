@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import taa.exception.DuplicatedArgumentException;
 import taa.exception.TaaException;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -72,5 +73,18 @@ class ParserTest {
         String inputString = "c/3654964apfaAFDao_()- n/65496494 649684aofaoAFAOFH9af_-(f0ew7r0FA_)f";
         String[] keys = {"c","n"};
         assertEquals(Parser.getArgumentsFromString(inputString, keys, true).size(), 2);
+    }
+
+    @Test
+    void getArgumentsFromString_nullKeys_expectEmpty() throws TaaException {
+        String inputString = "c/3654964apfaAFDao_()- n/65496494 649684aofaoAFAOFH9af_-(f0ew7r0FA_)f";
+        String[] keys = null;
+        assertEquals(Parser.getArgumentsFromString(inputString, keys, true).size(), 0);
+    }
+
+    @Test
+    void isValidValue_nullValue_expectFalse() {
+        String value = null;
+        assertFalse(Parser.isValueValid(value));
     }
 }
