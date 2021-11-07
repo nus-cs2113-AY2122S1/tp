@@ -590,19 +590,19 @@ These instructions only provide a starting point for testers to work on; testers
 
       Expected: No module will be added. Error message indicating wrong flags is shown, together with the correct format for `add` command.
    
-### Adding a mapping (rmb to verify the commands with actual test case)
+### Adding a mapping
 
    1. Adding a mapping for a selected university and module
-      1. Prerequisites: Module and University has been added and potential mapping is available via `searchmap` command. Run the command `add /uni 75` and `add /mod 77`
+      1. Prerequisites: Module and University has been added and potential mapping is available via `searchmap` command. Run the command `add /uni 75` and `add /mod 1`
       2. Test case: `add /map 75 1`
 
          Expected: Mapping will be added to the Selected University List under the respective university. Success message is shown. Run the command `list /suni` to verify.
    
    2. Adding a mapping to an unselected university and selected module. 
-      1. Prerequisites: Delete the data folder and restart the program. Run the command `add /mod 34`
-      2. Test case: 
+      1. Prerequisites: Delete the data folder and restart the program. Run the command `add /mod 1`
+      2. Test case: `add /map 75 1`
       
-         Expected:
+         Expected: No mapping will be added. Error message indicating university not selected is shown.
    
    3. Adding a non-existent mapping to a university. 
       1. Prerequisites: Module and University has been added and potential mapping is available via `searchmap` command. Run the command `add /uni 75`
@@ -624,10 +624,10 @@ These instructions only provide a starting point for testers to work on; testers
 
           Expected: No module will be added. Error message indicating wrong flags is shown, together with the correct format for `add` command.
 
-### Searching for a mapping (rmb to verify test case)
+### Searching for a mapping
 
 1. Searching for a mapping for a university with mappings to user selected modules.
-   1. Prerequisite: Modules must be added to the Selected Module List with the `add` command. Run the command `add /mod 234`.
+   1. Prerequisite: Modules must be added to the Selected Module List with the `add` command. Run the command `add /mod 1`.
    2. Test case: `searchmap 75`
 
       Expected: List of potential mappings for the particular university is displayed.
@@ -747,7 +747,7 @@ These instructions only provide a starting point for testers to work on; testers
 ### Removing a mapping (rmb to verify test case with actual data)
 
 1. Removing a mapping for a selected university and module
-    1. Prerequisites: Module and University has been removed and potential mapping is available via `searchmap` command. Run the command `remove /uni 75` and `remove /mod 77`
+    1. Prerequisites: Delete the data folder and restart the program. Run the command `add /uni 75`, `add /mod 1` and `add /map 75 1`.
     2. Test case: `remove /map 75 1`
 
        Expected: Mapping will be removed to the Selected University List under the respective university. Success message is shown. Run the command `list /suni` to verify.
