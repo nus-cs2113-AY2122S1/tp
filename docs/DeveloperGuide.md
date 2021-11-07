@@ -171,8 +171,6 @@ Additionally, the `Command` class is used to execute various actions in the vari
 ![](documentationPics/mainTravellerDesign.png)
 <div style="text-align: center;">Figure 4: Design of the Main Traveller</div>
 
-
-
 Details of each of the sub-components can be found in the subsequent sub-sections.
 
 #### 1.2.1. Traveller class
@@ -208,6 +206,40 @@ viewing trips, or deleting trips.
 5. If there is an error encountered by `parse` when processing user input, a corresponding `TravellerException` will be
 thrown.
 
+An example of an iteration elaborated above in Figure 4 is detailed here:
+
+1. The user enters `add-day myFabulousTrip /day 3`.
+2. Parser parses the user input string.
+   1. Parser first separates the command word used (In this case `add-day`), before further parsing the 
+rest of the string.
+   2. If the command word is not recognised, an exception will be thrown.
+   3. Starting from left to right, trip name `myFabulousTrip` and other field values (In this case `3`) 
+are then detected and stored.
+   4. These field values are then checked for validity. Exceptions will be thrown if the field values are not valid.
+      1. In this case, the field value `3` will be checked to ensure it is a non-negative integer.
+3. Using the parsed field values, the relevant command object will be created.
+   1. In this case, the `add-day` command object will be created using field values `myFabulousTrip` and `3`.
+4. The parser will return this command object for the `run` function in the `Traveller` class to execute.
+
+
+Validity checks are also performed on user input to ensure there are no illegal inputs executed. These validity checks 
+are detailed below. Do note that the parser is meant to only check if the format of user input is valid. 
+Checks on whether the command itself is a valid one (E.g. Whether there is enough space left in a day when the 
+`add-item` command is called) should be done elsewhere.
+
+* All fields must be filled up. Leading and trailing whitespaces are removed too. As such, if the field value contains 
+just whitespaces, then it will be counted as an empty field.
+* Trip names cannot contain `/` or be the string `all`.
+  * Rationale: `/` are used to indicate a field flag in the user input. Having trip names containing `/` will 
+potentially cause the parser to mistake the trip name for a field.
+  * Rationale: `all` is used to view all trips by the `view` command. This eliminates the possibility of confusing 
+the parser on whether to show all trips or just the trip with name `all` when the `view all` command is passed.
+* Day index must be a non-negative integer.
+* Item index must be a non-negative integer.
+* Time field value should be in a valid 24hr format (A 4-digit value ranging from 0000 to 2359).
+* When adding days using `add-day`, the days added should be a positive integer.
+
+
 #### 1.2.3. TripsList class
 The `TripsList` class is the main class to store the data.
 This include:
@@ -222,6 +254,8 @@ It contains functions that can help control the date inside the list.
 `addTrip` function will create a new space and store the data in it, while the `deleteTrip` function will delete and 
 clear the data from the list. `getTrip` and `getTripIndex` can return the specific `Trip` data by giving the name 
 or the index of the Also, the `getSize` functions will return the size of the `TripsList`. 
+
+Currently, a maximum of 30 days can be added per trip, and a maximum of 50 items can be added per day.
 
 {TODO: Add details}
 
