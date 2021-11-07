@@ -88,34 +88,6 @@ public class CardMenu extends Menu {
         }
     }
 
-    private void findCard() {
-        int cardId = askCardId();
-        if (cardId != -1) {
-            Player.findCard(cardId);
-        }
-
-    }
-
-    private void deleteCard() {
-        int cardId = askCardId();
-        if (cardId != -1) {
-            Player.deleteCard(cardId);
-        }
-    }
-
-    private int askCardId() {
-        int cardId = IO.readInt(in, Strings.ASK_CARD_INDEX);
-        while (cardId != -1) {
-            if (cardId > 0 && cardId <= Player.getCardSize()) {
-                return cardId;
-            } else {
-                System.out.println(Strings.ERR_INVALID_CARD_ID);
-            }
-            cardId = IO.readInt(in, Strings.ASK_CARD_INDEX);
-        }
-        return -1;
-    }
-
     /**
      * Displays the welcome message.
      */
@@ -147,6 +119,34 @@ public class CardMenu extends Menu {
             System.out.printf("%-12s%s\n", commandType.getCommand(), commandType.getInfo());
         }
         System.out.println();
+    }
+
+    private void findCard() {
+        int cardId = askCardId();
+        if (cardId != -1) {
+            Player.findCard(cardId);
+        }
+
+    }
+
+    private void deleteCard() {
+        int cardId = askCardId();
+        if (cardId != -1) {
+            Player.deleteCard(cardId);
+        }
+    }
+
+    private int askCardId() {
+        int cardId = IO.readInt(in, Strings.ASK_CARD_INDEX);
+        while (cardId != -1) {
+            if (cardId > 0 && cardId <= Player.getCardSize()) {
+                return cardId;
+            } else {
+                System.out.println(Strings.ERR_INVALID_CARD_ID);
+            }
+            cardId = IO.readInt(in, Strings.ASK_CARD_INDEX);
+        }
+        return -1;
     }
 
     /**

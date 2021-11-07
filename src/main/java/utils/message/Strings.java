@@ -100,45 +100,46 @@ public class Strings {
             + "(1) again | (3) exit\n";
     public static final String NO_CARD_MESSAGE = "Sorry! Since you didn't win the game, No CARDS!";
 
-    // Difficult game messages
-    public static final String DIFFICULT_LOGO = "                     ==\\\\\n"
-            + "                     || \\\\\n"
-            + "                  ________\\\n"
-            + "                 |________|\\\n"
-            + "                 | .\\  /. | \\\n"
-            + "                {|   ^^   |}\n"
-            + "                  \\ /||\\ /\n"
-            + "                   \\|__|/\n"
-            + "              =____||  ||____=\n"
-            + "     \\\\/\\    /                \\    /\\//\n"
-            + "    \\\\/  \\  /           .      \\  /  \\//\n"
-            + "     /    \\/                    \\/    \\\n"
-            + "      \\            .                 /\n"
-            + "       \\                            /\n"
-            + "        \\_                        _/\n";
-
-    public static final String FINISH_DIFFICULT_MODE = "Congratulation! "
-            + "You have finished all the tasks of Difficult Mode!!";
-
-    // Card menu messages
-    private static final String PACKAGE = "\n"
-            + "      ___           ___           ___          _____    \n"
-            + "     /  /\\         /  /\\         /  /\\        /  /::\\   \n"
-            + "    /  /:/        /  /::\\       /  /::\\      /  /:/\\:\\  \n"
-            + "   /  /:/        /  /:/\\:\\     /  /:/\\:\\    /  /:/  \\:\\ \n"
-            + "  /  /:/  ___   /  /:/~/::\\   /  /:/~/:/   /__/:/ \\__\\:|\n"
-            + " /__/:/  /  /\\ /__/:/ /:/\\:\\ /__/:/ /:/___ \\  \\:\\ /  /:/\n"
-            + " \\  \\:\\ /  /:/ \\  \\:\\/:/__\\/ \\  \\:\\/:::::/  \\  \\:\\  /:/ \n"
-            + "  \\  \\:\\  /:/   \\  \\::/       \\  \\::/~~~~    \\  \\:\\/:/  \n"
-            + "   \\  \\:\\/:/     \\  \\:\\        \\  \\:\\         \\  \\::/   \n"
-            + "    \\  \\::/       \\  \\:\\        \\  \\:\\         \\__\\/    \n"
-            + "     \\__\\/         \\__\\/         \\__\\/                  \n";
-
-    public static final String CARD_WELCOME_MESSAGE = PACKAGE
-            + "Here is your package of cards!\n" + HELP_MESSAGE;
     public static final String LIST_CARD_MESSAGE = "Here is all of your cards!";
     public static final String CARD_DIVIDER_MESSAGE = "\n♠♡♢♣♤♥♦♧♠♡♢♣♤♥♦♧♠♡♢♣♤♥♦♧♠♡♢♣♤♥♦♧♠♡♢♣♤♥♦♧♠♡♢♣♤♥♦♧\n";
     public static final String ASK_CARD_INDEX = "Enter the ID of card (-1 to exit): ";
+
+    // Difficult game messages
+    public static final String DIFFICULT_LOGO = "                     ==\\\\\n"
+        + "                     || \\\\\n"
+        + "                  ________\\\n"
+        + "                 |________|\\\n"
+        + "                 | .\\  /. | \\\n"
+        + "                {|   ^^   |}\n"
+        + "                  \\ /||\\ /\n"
+        + "                   \\|__|/\n"
+        + "              =____||  ||____=\n"
+        + "     \\\\/\\    /                \\    /\\//\n"
+        + "    \\\\/  \\  /           .      \\  /  \\//\n"
+        + "     /    \\/                    \\/    \\\n"
+        + "      \\            .                 /\n"
+        + "       \\                            /\n"
+        + "        \\_                        _/\n";
+
+    public static final String FINISH_DIFFICULT_MODE = "Congratulation! "
+        + "You have finished all the tasks of Difficult Mode!!";
+
+    // Card menu messages
+    private static final String PACKAGE = "\n"
+        + "      ___           ___           ___          _____    \n"
+        + "     /  /\\         /  /\\         /  /\\        /  /::\\   \n"
+        + "    /  /:/        /  /::\\       /  /::\\      /  /:/\\:\\  \n"
+        + "   /  /:/        /  /:/\\:\\     /  /:/\\:\\    /  /:/  \\:\\ \n"
+        + "  /  /:/  ___   /  /:/~/::\\   /  /:/~/:/   /__/:/ \\__\\:|\n"
+        + " /__/:/  /  /\\ /__/:/ /:/\\:\\ /__/:/ /:/___ \\  \\:\\ /  /:/\n"
+        + " \\  \\:\\ /  /:/ \\  \\:\\/:/__\\/ \\  \\:\\/:::::/  \\  \\:\\  /:/ \n"
+        + "  \\  \\:\\  /:/   \\  \\::/       \\  \\::/~~~~    \\  \\:\\/:/  \n"
+        + "   \\  \\:\\/:/     \\  \\:\\        \\  \\:\\         \\  \\::/   \n"
+        + "    \\  \\::/       \\  \\:\\        \\  \\:\\         \\__\\/    \n"
+        + "     \\__\\/         \\__\\/         \\__\\/                  \n";
+
+    public static final String CARD_WELCOME_MESSAGE = PACKAGE
+        + "Here is your package of cards!\n" + HELP_MESSAGE;
 
     // Error messages
     public static final String ERR_PLAYER_FILE_NOTFOUND_MESSAGE =
