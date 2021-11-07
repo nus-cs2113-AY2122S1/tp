@@ -306,6 +306,12 @@ Edits and updates existing item from a trip and updates it to a new correspondin
 
 #### Format: `edit-item TRIP_NAME /day DAY_NUMBER /index ITEM_INDEX /time NEW_TIME /name NEW_NAME`
 
+   * If you want to edit multiple aspects, the format order must be as shown above.
+   * If you only want to edit a trip item's time : `edit-item TRIP_NAME /day DAY_NUMBER /index ITEM_INDEX /time NEW_TIME`.
+   * If you only want to edit a trip item's name : `edit-item TRIP_NAME /day DAY_NUMBER /index ITEM_INDEX /name NEW_NAME`.
+   * If you want to edit a trip item's time and name :
+  `edit-item TRIP_NAME /day DAY_NUMBER /index ITEM_INDEX /time NEW_TIME /name NEW_NAME`.
+
 #### Usage Example:
 ```
 _________________________________________________________________________________
@@ -313,7 +319,23 @@ $ edit-item trip1 /day 1 /index 1 /time 0900 /name later breakfast
 _________________________________________________________________________________
 	You have just edited item 1 on day 1 of trip1 to later breakfast at 0900.
 _________________________________________________________________________________
+$ edit-item trip1 /day 1 /index 1 /time 1000
+_________________________________________________________________________________
+	You have just edited item 1 on day 1 of trip1 to later breakfast at 1000
+_________________________________________________________________________________
+$ edit-item trip1 /day 1 /index 1 /name buffet breakfast
+_________________________________________________________________________________
+	You have just edited item 1 on day 1 of trip1 to buffet breakfast at 1000
+_________________________________________________________________________________
+
 ```
+
+> ![](documentationPics/tip.png) Edit-item only allows you to change the time or name of a given item, 
+> not the name or source and destination countries of your trip.  
+> To do so, use [edit](#29-edit-a-trip-edit) instead!
+> 
+> ![](documentationPics/warning.png) Edit-item allows you to edit either the time or name (and both too!) 
+> of a given item, but both cannot be left empty!
 
 <br/>
 
@@ -337,6 +359,12 @@ ________________________________________________________________________________
 _________________________________________________________________________________
 ```
 
+> ![](documentationPics/tip.png) Search allows you to find words that contain the phrase, no 
+> matter how large or small! Eg 'a', 'apple'.
+>
+> ![](documentationPics/warning.png) Search only allows you to find words that contain exactly 
+> the phrase, so do search carefully! Eg 'ice-cream' will not be returned if you search 'ice cream'!
+
 ### 2.12. Shortest time: `shortest-time`
 Returns the shortest flight time from the source to destination country.
 
@@ -353,6 +381,10 @@ ____________________________________________________________
 	5.0
 ____________________________________________________________
 ```
+> ![](documentationPics/tip.png) shortest-time allows you to find the shortest time from one country to 
+> another! If you wish to find or research on costs instead, do take a look at our shortest cost function 
+> at [shortest-cost](#213-least-cost-shortest-cost)
+
 
 ### 2.13. Least cost: `shortest-cost`
 Returns the least expensive flight path from the source to destination country.
@@ -370,7 +402,9 @@ ____________________________________________________________
 	400.0
 ____________________________________________________________
 ```
-
+> ![](documentationPics/tip.png) shortest-cost allows you to find the least cost from one country to
+> another! If you wish to find or research in terms of flight time instead, do take a look at our 
+> time function instead at [shortest-time](#212-shortest-time-shortest-time)
 
 
 ### 2.14 Exiting the program: `exit`
@@ -459,7 +493,7 @@ Action | Format
 **delete-day** | `delete-day TRIP_NAME /day DAY_INDEX`
 **delete-item** | `delete-item TRIP_NAME /day DAY_INDEX /item ITEM_INDEX`
 **edit** | `edit TRIP_NAME /name NEW_TRIP_NAME /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
-**edit-item** | `edit-item TRIP_NAME /day DAY_NUMBER /index ITEM_INDEX /time NEW_ITEM_TIME /name NEW_ITEM_NAME`
+**edit-item** | `edit-item TRIP_NAME /day DAY_NUMBER /index ITEM_INDEX /time NEW_TIME /name NEW_NAME`
 **search-item** |  `search-item TRIP_NAME /day DAY_INDEX /key KEYWORD`
 **shortest-time** | `shortest-time /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
 **shortest-cost** | `shortest-cost /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`

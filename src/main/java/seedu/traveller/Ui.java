@@ -11,7 +11,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+//@@author conradwee
 /**
  * Contains all functions that is used to print output to the user's console.
  */

@@ -5,6 +5,7 @@ import seedu.traveller.worldmap.exceptions.IllegalFlightFileException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+//@@author Cuiminjing
 class DataLoaderTest {
     private final GraphList graphList;
     private final DataLoader dataLoader;
