@@ -79,14 +79,25 @@ The `Ui` class,
 ### `Parser` Class
 
 The `Parser` class handles all input and executes the corresponding actions based on the user input. 
-It consists of methods that will execute most commands that is crucial to the functionality of our program.
+It consists of methods that will execute commands that is input by the user which is crucial to the functionality 
+of our program.
 
 `Parser` depends on other classes for the respective inputs and outputs.`Duke` calls the `Parser` class in order for the 
 necessary commands to be executed. However, not all functionality is stored here. Rather, `Parser` acts like an interface 
 that handles all the logic required to pass in the correct information into the different classes to execute.
 
-The `Parser` class
-- Contains the logic to check user commands and break the input into the necessary contents for other classes to use
+The following partial class diagram depicts the relation of the Parser class with other classes that it interacts wtih.
+![](images/ParserClassDiagram.png)
+
+The `Parser` class,
+- Reads in the user input and determines if the command entered is valid.
+- Parser class will then pass it to the abstract class CommandHandler which will then pass it to CommandExecutor, any 
+exceptions thrown here will be caught by the CommandHandler.
+- The CommandExecutor will then execute the commands provided with the relevant method calls from the other classes in the 
+program, again if there is an exception thrown at this stage, it will be caught in the CommandHandler class.
+
+The following partial sequence diagram dictates the flow of events when the user enters a command into the program.
+![](images/ParserSequenceDiagram.png)
 
 ### `Expense` Class
 The `Expense` class deals with most functionalities related to adding an expense inside a trip. The sequence diagram below shows how an expense is initialised.
