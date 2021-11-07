@@ -44,7 +44,7 @@ colour blue - an example is the blue text in the contents section below
 
 
 ## Contents
-1. [Quick start](#1-quick-start)
+1. [Quick Start](#1-quick-start-for-windows)
 2. [Features](#2-features)
    1. [Employee](#2i-employee)
       1. [Adding an employee: `add-employee`](#2ia-adding-an-employee-add-employee)
@@ -71,8 +71,8 @@ colour blue - an example is the blue text in the contents section below
 3. [FAQ](#3-faq)
 4. [Command Summary](#4-command-summary)
 
-## 1. Quick start
-1. Ensure you have **Java 11** or above installed on your computer.
+## 1. Quick Start for Windows
+1. Ensure you have **Java 11** or above installed on your Windows computer.
 2. Download the latest `tp.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-4/tp/releases).
 3. Copy the file to the folder you want to use as the _home folder_ for Restaurant Buddy.
 4. Navigate to your _home folder_ as chosen in step 3 in command prompt.
