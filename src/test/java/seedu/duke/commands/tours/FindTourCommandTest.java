@@ -36,7 +36,7 @@ public class FindTourCommandTest {
             + "Subscribed Clients:\n"
             + "1. Bo Tuan (ID: c001)\n" + "\n"
             + "Total Subscribed Clients: 1";
-    private static final String INVALID_DATA_OUTPUT = "Tour cannot be found. " +
+    private static final String INVALID_DATA_OUTPUT = "ERROR: Tour cannot be found. " +
             "Please try another tour ID.";
 
     PrintStream previousConsole = System.out;

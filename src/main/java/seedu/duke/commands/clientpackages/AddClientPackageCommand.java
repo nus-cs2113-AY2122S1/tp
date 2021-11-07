@@ -7,44 +7,45 @@ import seedu.duke.data.ClientPackage;
 import seedu.duke.data.Flight;
 import seedu.duke.data.Tour;
 
-import java.util.Arrays;
-
 public class AddClientPackageCommand extends Command {
     private ClientPackage clientPackage;
     private String[] rawClientPackage;
 
+    /**
+     * Class constructor of AddClientPackage, used to add a ClientPackage to ClientPackageList.
+     *
+     * @param rawClientPackage the array of values of the client package, ordered in this manner:
+     *                          package id, client id, tour id and flight id
+     */
     public AddClientPackageCommand(String[] rawClientPackage) {
         this.rawClientPackage = rawClientPackage;
     }
 
+    /**
+     * Executes the addition of a ClientPackage to a ClientPackageList.
+     * If given client package ID already exists, the client package will not be added.
+     */
     @Override
     public void execute() {
-        if (!clientPackage.getClient().equals(null) && !clientPackage.getTour().equals(null)
-                && !clientPackage.getFlight().equals(null)) {
-            int count = clientPackages.getClientPackageCount();
-            for (int i = 0; i < count; i++) {
-                ClientPackage currPackage = clientPackages.getClientPackageByIndex(i);
-                boolean sameId = currPackage.getId().equals(clientPackage.getId());
-                if (sameId) {
-                    System.out.println("ERROR: Client package ID already exists. Please try another client package ID.");
-                    return;
-                }
-                boolean sameClient = currPackage.getClient().equals(clientPackage.getClient());
-                boolean sameTour = currPackage.getTour().equals(clientPackage.getTour());
-                boolean sameFlight = currPackage.getFlight().equals(clientPackage.getFlight());
-                if (sameClient && sameTour && sameFlight) {
-                    System.out.println("ERROR: Client Package with same fields already exists with different ID.");
-                    return;
-                }
+        try {
+            createClientPackage();
+            ClientPackage existingClientPackage = clientPackages.getClientPackageById(clientPackage.getId());
+            System.out.println("Client package ID already exists. Please try another client package ID.");
+        } catch (TourPlannerException e) {
+            if (!clientPackage.getClient().equals(null) && !clientPackage.getTour().equals(null)
+                    && !clientPackage.getFlight().equals(null)) {
+                clientPackages.add(clientPackage);
+                ui.showAdd(clientPackage);
             }
-            clientPackages.add(clientPackage);
-            ui.showAdd(clientPackage);
         }
     }
 
+    /**
+     * Executes the addition of a ClientPackage to a ClientPackageList for Storage class.
+     * If given client package ID already exists, the client package will not be added.
+     */
     public void executeStorage() {
         try {
-            System.out.println(Arrays.toString(rawClientPackage));
             createClientPackage();
             ClientPackage existingClientPackage = clientPackages.getClientPackageById(clientPackage.getId());
             System.out.println("Client package ID already exists. Please try another client package ID.");
@@ -56,6 +57,11 @@ public class AddClientPackageCommand extends Command {
         }
     }
 
+    /**
+     * Getter for the clientPackage to be added to clientPackages.
+     *
+     * @return Client Package that will be added to the ClientPackageList
+     */
     public ClientPackage getClientPackage() {
         return clientPackage;
     }
@@ -64,10 +70,10 @@ public class AddClientPackageCommand extends Command {
         try {
             String clientPackageId = rawClientPackage[0];
             String clientId = rawClientPackage[1];
-            String tourCode = rawClientPackage[2];
+            String tourId = rawClientPackage[2];
             String flightId = rawClientPackage[3];
             Client client = extractClient(clientId);
-            Tour tour = extractTour(tourCode);
+            Tour tour = extractTour(tourId);
             Flight flight = extractFlight(flightId);
             clientPackage = new ClientPackage(clientPackageId, client, tour, flight);
         } catch (TourPlannerException e) {

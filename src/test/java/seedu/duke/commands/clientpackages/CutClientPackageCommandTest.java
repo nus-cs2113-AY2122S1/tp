@@ -1,4 +1,4 @@
-package seedu.duke.commands.clients;
+package seedu.duke.commands.clientpackages;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,18 +14,14 @@ import seedu.duke.data.FlightList;
 import seedu.duke.data.Tour;
 import seedu.duke.data.TourList;
 
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CutClientCommandTest {
-    public static final String CLIENT_ID_1 = "c001";
-
-    public static final String[] CLIENT_BOTUAN = {CLIENT_ID_1, "Bo Tuan", "93338333", "bt@mail.com"};
+public class CutClientPackageCommandTest {
+    public static final String[] CLIENT_BOTUAN = {"c001", "Bo Tuan", "93338333", "bt@mail.com"};
     public static final String[] CLIENT_WAYNE = {"c002", "Wayne", "56667888", "wen@mail.com"};
-    public static final String[] CLIENT_CHENGXU = {"c003", "ChengXu", "10101010", "demonshaha@mail.com"};
 
     public static final String[] TOUR_JPN = {"JPN", "Japan Basic Tour", "1500.00"};
     public static final String[] TOUR_KOR = {"KOR", "Korea Cultural Tour", "3000.00"};
@@ -35,7 +31,8 @@ public class CutClientCommandTest {
 
     public static final String PACKAGE_ID_1 = "p001";
     public static final String PACKAGE_ID_2 = "p002";
-    public static final String CLIENT_ID_WRONG = "1234po0o";
+    public static final String PACKAGE_ID_3 = "p003";
+    public static final String PACKAGE_ID_WRONG = "1234po0o";
 
     PrintStream previousConsole;
     ByteArrayOutputStream newConsole;
@@ -46,8 +43,8 @@ public class CutClientCommandTest {
     private ClientPackageList clientPackages;
     private Ui ui = new Ui();
 
-    private ClientList allClients;
-    private ClientList clientsWithoutBotuan;
+    private ClientPackageList allClientPackages;
+    private ClientPackageList clientPackagesWithoutP002;
 
     @BeforeEach
     public void setUp() {
@@ -56,10 +53,6 @@ public class CutClientCommandTest {
 
         Client botuan = new Client(CLIENT_BOTUAN);
         Client wayne = new Client(CLIENT_WAYNE);
-        Client chengxu = new Client(CLIENT_CHENGXU);
-        clients = createClientList(botuan, wayne, chengxu);
-        allClients = createClientList(botuan, wayne, chengxu);
-        clientsWithoutBotuan = createClientList(wayne, chengxu);
 
         Tour jpn = new Tour(TOUR_JPN);
         Tour kor = new Tour(TOUR_KOR);
@@ -69,50 +62,45 @@ public class CutClientCommandTest {
 
         ClientPackage botuanPack1 = new ClientPackage(PACKAGE_ID_1, botuan, jpn, sqjpn);
         ClientPackage botuanPack2 = new ClientPackage(PACKAGE_ID_2, botuan, kor, sqkor);
-        clientPackages = createClientPackageList(botuanPack1, botuanPack2);
+        ClientPackage waynePack = new ClientPackage(PACKAGE_ID_3, wayne, jpn, sqkor);
+        clientPackages = createClientPackageList(botuanPack1, botuanPack2, waynePack);
+
+        allClientPackages = createClientPackageList(botuanPack1, botuanPack2, waynePack);
+        clientPackagesWithoutP002 = createClientPackageList(botuanPack1, waynePack);
     }
 
     @Test
-    public void cutClientCommand_validClientId_clientDeleted() throws TourPlannerException {
-        assertEquals(clients.getClientCount(), 3);
-        Command cutClientCommand = new CutClientCommand(CLIENT_ID_1);
-        cutClientCommand.setData(clients, flights, tours, clientPackages, ui);
-        cutClientCommand.execute();
-        assertEquals(clients.getClientCount(), clientsWithoutBotuan.getClientCount());
-        for (int i = 0; i < clientsWithoutBotuan.getClientCount(); i++) {
-            assertEquals(clients.getClientByIndex(i), clientsWithoutBotuan.getClientByIndex(i));
+    public void cutClientPackageCommand_validClientPackageId_clientPackageDeleted() throws TourPlannerException {
+        assertEquals(clientPackages.getClientPackageCount(), 3);
+        Command cutClientPackageCommand = new CutClientPackageCommand(PACKAGE_ID_2);
+        cutClientPackageCommand.setData(clients, flights, tours, clientPackages, ui);
+        cutClientPackageCommand.execute();
+        assertEquals(clientPackages.getClientPackageCount(), clientPackagesWithoutP002.getClientPackageCount());
+        for (int i = 0; i < clientPackagesWithoutP002.getClientPackageCount(); i++) {
+            assertEquals(clientPackages.getClientPackageByIndex(i),
+                    clientPackagesWithoutP002.getClientPackageByIndex(i));
         }
     }
 
     @Test
-    public void cutClientCommand_validClientId_clientPackagesDeleted() throws TourPlannerException {
-        Command cutClientCommand = new CutClientCommand(CLIENT_ID_1);
-        cutClientCommand.setData(clients, flights, tours, clientPackages, ui);
-        cutClientCommand.execute();
-        assertEquals(clientPackages.getClientPackageCount(), 0);
-    }
-
-    @Test
-    public void cutClientCommand_invalidClientId_clientNotFoundMessage() throws TourPlannerException {
+    public void cutClientPackageCommand_invalidClientPackageId_clientPackageNotFoundMessage()
+            throws TourPlannerException {
         System.setOut(new PrintStream(newConsole));
 
-        Command cutClientCommand = new CutClientCommand(CLIENT_ID_WRONG);
-        cutClientCommand.setData(clients, flights, tours, clientPackages, ui);
-        cutClientCommand.execute();
+        Command cutClientPackageCommand = new CutClientPackageCommand(PACKAGE_ID_WRONG);
+        cutClientPackageCommand.setData(clients, flights, tours, clientPackages, ui);
+        cutClientPackageCommand.execute();
+
+        for (int i = 0; i < allClientPackages.getClientPackageCount(); i++) {
+            assertEquals(clientPackages.getClientPackageByIndex(i),
+                    allClientPackages.getClientPackageByIndex(i));
+        }
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = ClientList.CLIENT_NOT_FOUND_MESSAGE;
+        String expectedString = ClientPackageList.CLIENTPACKAGE_NOT_FOUND_MESSAGE;
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
         assertEquals(expectedString, actualString);
-    }
-
-    private ClientList createClientList(Client...clientList) {
-        ClientList newClientList = new ClientList();
-        for (Client client : clientList) {
-            newClientList.add(client);
-        }
-        return newClientList;
     }
 
     private ClientPackageList createClientPackageList(ClientPackage...clientPackageList) {

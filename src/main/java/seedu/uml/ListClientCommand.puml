@@ -1,0 +1,46 @@
+@startuml
+
+participant ":Parser" as Parser
+participant ":ListClientCommand" as LCC
+participant ":Ui" as Ui
+participant ":ClientList" as ClientList
+
+-> Parser: parse("list -c")
+activate Parser
+Parser -> Parser : parseList("-c")
+activate Parser
+
+create LCC
+Parser -> LCC
+activate LCC
+LCC --> Parser
+deactivate LCC
+Parser --> Parser
+deactivate Parser
+
+<-- Parser: ListClientCommand
+deactivate Parser
+
+-> LCC: execute()
+activate LCC
+
+LCC -> Ui: showListClient(ClientList)
+activate Ui
+loop until all clients iterated
+    Ui -> ClientList : getClientByIndex(index)
+    activate ClientList
+    ClientList --> Ui: Client
+    deactivate ClientList
+    Ui -> Ui: show Client
+    activate Ui
+    Ui --> Ui
+    deactivate Ui
+end
+Ui --> LCC
+deactivate Ui
+
+<-- LCC
+deactivate LCC
+
+destroy LCC
+@enduml

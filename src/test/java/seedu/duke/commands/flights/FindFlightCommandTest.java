@@ -36,7 +36,7 @@ public class FindFlightCommandTest {
             + "Passengers:\n"
             + "1. Bo Tuan (ID: c001)\n" + "\n"
             + "Total Passengers: 1";
-    private static final String INVALID_DATA_OUTPUT = "Flight cannot be found. Please try another flight ID.";
+    private static final String INVALID_DATA_OUTPUT = "ERROR: Flight cannot be found. Please try another flight ID.";
 
     PrintStream previousConsole = System.out;
     ByteArrayOutputStream newConsole = new ByteArrayOutputStream();

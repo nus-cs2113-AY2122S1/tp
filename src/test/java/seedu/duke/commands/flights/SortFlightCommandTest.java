@@ -76,9 +76,9 @@ class SortFlightCommandTest {
 
         testFlightList.initTempArray();
         String expectedString = Ui.SORT_FLIGHT_BY_ARRIVAL_MESSAGE + "\n"
-                + "1. " + testFlightList.getFlightByArriveDate("24/10/21 03:00") + "\n\n"
-                + "2. " + testFlightList.getFlightByArriveDate("28/10/21 05:00") + "\n\n"
-                + "3. " + testFlightList.getFlightByArriveDate("9/11/21 11:00");
+                + "1. " + testFlightList.getFlightByReturnDate("24/10/21 03:00") + "\n\n"
+                + "2. " + testFlightList.getFlightByReturnDate("28/10/21 05:00") + "\n\n"
+                + "3. " + testFlightList.getFlightByReturnDate("9/11/21 11:00");
 
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
         assertEquals(expectedString, actualString);

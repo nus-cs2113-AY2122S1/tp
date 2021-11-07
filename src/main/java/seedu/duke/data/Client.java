@@ -22,6 +22,11 @@ public class Client {
         email = values[3];
     }
 
+    /**
+     * Getter for id value in Client object.
+     *
+     * @return client's id
+     */
     public String getId() {
         return id;
     }
@@ -44,6 +49,11 @@ public class Client {
         return contactNum;
     }
 
+    /**
+     * Getter for email value in Client object.
+     *
+     * @return client's email
+     */
     public String getEmail() {
         return email;
     }
