@@ -133,6 +133,15 @@ public class UpdateParser extends Parser {
      * =========================================================================
      */
 
+    /**
+     * Finds the flags for goal name, goal type, and goal end date.
+     * Updates the int[] updateAttribute from 0 to 1 if it finds the flag,
+     * signalling what goal attributes the user wants to update.
+     *
+     * @param parameters ArrayList containing
+     * @return
+     * @throws HaBitParserException
+     */
     private static int[] getUpdateGoalAttributes(ArrayList<String> parameters) throws HaBitParserException {
         int[] updateAttributes = new int[3];
         // check updateGoalName
