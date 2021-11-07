@@ -1,9 +1,7 @@
 package seedu.duke.storage;
 
-import seedu.duke.Duke;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.items.Event;
 import seedu.duke.items.Task;
 import seedu.duke.items.characteristics.Member;
 import seedu.duke.items.mainlists.EventCatalog;
@@ -26,7 +24,7 @@ public class StorageFile {
 
     private static final String DEFAULT_FILE_PATH = "data/slamData.txt";
     private static final String DEFAULT_DIRECTORY = "data";
-    private static Logger logger = Logger.getLogger("Duke logger");
+    private static final Logger logger = Logger.getLogger("Duke logger");
 
 
     public void save(MemberRoster memberRoster, EventCatalog eventCatalog) {
@@ -78,8 +76,8 @@ public class StorageFile {
 
         String line = "";
         try {
-            for (int i = 0; i < encodedLines.size(); i++) {
-                line = encodedLines.get(i).trim();
+            for (String encodedLine : encodedLines) {
+                line = encodedLine.trim();
                 char classType = line.charAt(0);
                 switch (classType) {
                 case 'm':
@@ -89,11 +87,11 @@ public class StorageFile {
                     eventCatalog.add(EventDecoder.decodeEventFromString(line));
                     break;
                 case 't':
-                    Task task = TaskDecoder.decodeTaskFromString(line);
+                    Task decodedTask = TaskDecoder.decodeTaskFromString(line);
                     // Within the parent event, update its list of tasks
-                    task.getEvent().addToTaskList(task);
+                    decodedTask.getEvent().addToTaskList(decodedTask);
                     // Within each member in the member roster that contains this task, add this task to their task list
-                    updateMemberTasks(task, memberRoster);
+                    updateMemberTasks(decodedTask, memberRoster);
                     break;
                 default:
                     throw new DukeException("Invalid flag at start of line.");

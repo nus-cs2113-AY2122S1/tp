@@ -56,9 +56,13 @@ public class TaskDecoder {
         String[] formattedMemberNamesInString = MemberParser.parseMemberCommand(encodedMembers);
         ArrayList<Member> membersList = new ArrayList<>();
         for (String name : formattedMemberNamesInString) {
-            membersList.add(new Member(name));
+            // If the member in the member roster matches the decoded name, assign this member to the task
+            for (Member member : Duke.memberRoster) {
+                if (member.getName().equals(name)) {
+                    membersList.add(member);
+                }
+            }
         }
-
         return membersList;
     }
 

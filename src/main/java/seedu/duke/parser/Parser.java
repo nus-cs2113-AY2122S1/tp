@@ -14,6 +14,7 @@ import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
 import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
 import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
 import seedu.duke.parser.commandparser.AddParser;
+import seedu.duke.parser.commandparser.DeleteParser;
 import seedu.duke.parser.commandparser.FindParser;
 import seedu.duke.parser.commandparser.ListParser;
 import seedu.duke.parser.commandparser.NextParser;
@@ -60,7 +61,7 @@ public abstract class Parser {
         case "undo":
             return DoneUndoParser.getDoneUndoCommand(command, commandDetails);
         case "delete":
-            return new DeleteCommand(command);
+            return DeleteParser.getDeleteCommand(command, commandDetails);
         case "add":
             return AddParser.getAddCommand(commandDetails);
         case "bye":
@@ -83,9 +84,6 @@ public abstract class Parser {
 
     private static Command singleWordCommandProtocol(String[] command, String commandType) throws DukeException {
         switch (commandType) {
-
-        case "delete":
-            return new DeleteCommand(command);
         case "bye":
             return new ByeCommand();
         case "help":

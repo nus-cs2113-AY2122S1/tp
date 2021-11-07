@@ -1,29 +1,28 @@
 @startuml
-autonumber
 title Save Functionality
 
--> StorageFile: save(eventsList : ArrayList<Event>)
-activate StorageFile #yellow
+-> ":StorageFile": save(eventsList : ArrayList<Event>)
+activate ":StorageFile" #yellow
 
-create File
-StorageFile -> File:new File(DEFAULT_FILE_PATH)
-activate File #lightblue
-return saveFile: File
+create ":File"
+":StorageFile" -> ":File": File(DEFAULT_FILE_PATH)
+activate ":File" #lightblue
+return saveFile
 |||
-StorageFile -> StorageFile: checkFileIsValid(saveFile)
-activate StorageFile #orange
+":StorageFile" -> ":StorageFile": checkFileIsValid
+activate ":StorageFile" #orange
 return
 |||
-StorageFile -> MemberEncoder: encodeMembersList(memberRoster)
-activate MemberEncoder #lightblue
-return MemberEncoder: List<String>
+":StorageFile" -> ":MemberEncoder": encodeMembersList
+activate ":MemberEncoder" #lightblue
+return encodedMembersList
 |||
-StorageFile -> EventEncoder: encodeEventsList(eventsList)
-activate EventEncoder #lightblue
-return encodedEvents: List<String>
+":StorageFile" -> ":EventEncoder": encodeEventsList
+activate ":EventEncoder" #lightblue
+return encodedEventsList
 |||
-StorageFile -> StorageFile: writeToFile(saveFile,\n encodeMembersList,\n encodeMembersList)
-activate StorageFile #orange
+":StorageFile" -> ":StorageFile": writeToFile
+activate ":StorageFile" #orange
 return
 |||
 return

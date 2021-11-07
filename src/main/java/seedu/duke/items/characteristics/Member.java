@@ -43,6 +43,10 @@ public class Member {
         return tasks.toString();
     }
 
+    public ArrayList<Task> getAssignedTasks() {
+        return assignedTasks;
+    }
+
     public void addToAssignedTasks(Task task) {
         assignedTasks.add(task);
     }
