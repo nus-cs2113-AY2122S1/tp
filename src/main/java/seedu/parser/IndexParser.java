@@ -15,6 +15,17 @@ public class IndexParser {
     private static final int REMOVE_ALL_INDEX = -2;
     private static final String numbers = "^-?\\d+$";
 
+    /**
+     * Returns the contact index obtained as an integer from the user input string. It
+     * is used when the user specifies a command with a contact index. This method
+     * will attempt to parse a contact index in a string and return them as an integer.
+     * If "me" or "all" is given as the index, it will return -1 or -2 respectively.
+     *
+     * @param userInput String that user has input
+     * @return int Contact index obtained from the user input string
+     * @throws NumberFormatException If user gives a non-number as the contact index, other than "me" or "all"
+     * @throws MissingIndexException If user does not give any contact index
+     */
     public static int getIndexFromInput(String userInput)
             throws NumberFormatException, MissingIndexException {
         //split user input into 2 strings: command word string and index string

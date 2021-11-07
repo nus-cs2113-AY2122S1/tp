@@ -317,6 +317,7 @@ specified contact index given as an integer, which will then be used in the exec
 For example, if `edit 2 -n Marcus Bobo` is given as the input, the Index Parser will identify the contact index to be `2`
 and pass the contact index to the execution of the `edit` command accordingly.
 
+
 ## <a name="scope"></a>Product scope
 
 ### <a name="target"></a>Target user profile
