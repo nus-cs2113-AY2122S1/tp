@@ -295,6 +295,9 @@ public class AddUI {
      */
     public Lesson lessonEqualizer(ArrayList<Lesson> lessons, int index) {
         int tally = 0;
+        if (index == 0) {
+            return lessons.get(index);
+        }
         for (int i = 1; lessons.size() > i; i++) {
             Lesson prev = lessons.get(i - BALANCE_ARRAY);
             Lesson curr = lessons.get(i);
@@ -320,35 +323,49 @@ public class AddUI {
                 throw e;
             }
             int indexOfLesson = Integer.parseInt(select) - BALANCE_ARRAY;
+
             Lesson selectedLesson = lessonEqualizer(lessons, indexOfLesson);
             classNumber = selectedLesson.getClassNo();
-            flag = checkFlag(timetable, selectedLesson);
+            ArrayList<Lesson> selectedLessons = getSelectedLessons(lessons, classNumber);
+            flag = checkFlag(timetable, selectedLessons);
         }
         addLessonToTimetable(lessons, timetable, module, classNumber);
+    }
+
+    private ArrayList<Lesson> getSelectedLessons(ArrayList<Lesson> lessons, String classNumber) {
+        ArrayList<Lesson> completeList;
+        completeList = new ArrayList<>();
+        for (Lesson lesson : lessons) {
+            if (lesson.getClassNo().equals(classNumber)) {
+                completeList.add(lesson);
+            }
+        }
+        return completeList;
     }
 
     /**
      * Function checks for user response when a conflict occurs when
      * trying to add a lesson into timetable.
      * @param timetable the user's timetable
-     * @param lesson the lesson to be added into the timetable
+     * @param lessons the list of lessons to be added into the timetable
      * @return the flag to determine whether user input is required again
      */
-    public String checkFlag(Timetable timetable, Lesson lesson) {
-        if (timetable.isConflict(lesson)) {
-            String choice = TextUi.printAskConfirmation(lesson);
-            if (choice.equals("y") || choice.equals("yes")) {
-                return EXIT;
-            } else if (choice.equals("n") || choice.equals("no")) {
-                System.out.println("Alright, returning to lesson selection");
-                return RUN;
-            } else {
-                System.out.println("Invalid Command, Try Again");
-                return RUN;
+    public String checkFlag(Timetable timetable, ArrayList<Lesson> lessons) {
+        for (Lesson lesson : lessons) {
+            if (timetable.isConflict(lesson)) {
+                String choice = TextUi.printAskConfirmation(lesson);
+                if (choice.equals("y") || choice.equals("yes")) {
+                    return EXIT;
+                } else if (choice.equals("n") || choice.equals("no")) {
+                    System.out.println("Alright, returning to lesson selection");
+                    return RUN;
+                } else {
+                    System.out.println("Invalid Command, Try Again");
+                    return RUN;
+                }
             }
-        } else {
-            return EXIT;
         }
+        return EXIT;
     }
 
     /**
@@ -361,10 +378,25 @@ public class AddUI {
         try {
             int indexOfLesson = Integer.parseInt(select) - BALANCE_ARRAY;
             Lesson test = lessons.get(indexOfLesson);
+            numberOfUniqueClassNumber(lessons, indexOfLesson);
         } catch (NumberFormatException e) {
             throw new IntegerException("Input is not an integer, try adding the module again");
         } catch (IndexOutOfBoundsException e) {
             throw new IntegerException("Input is out of range, try adding the module again");
+        }
+    }
+
+    public void numberOfUniqueClassNumber(ArrayList<Lesson> lessons, int select) throws IndexOutOfBoundsException {
+        int result = 1;
+        for (int i = 1; lessons.size() > i; i++) {
+            Lesson curr = lessons.get(i);
+            Lesson prev = lessons.get(i - BALANCE_ARRAY);
+            if (!curr.getClassNo().equals(prev.getClassNo())) {
+                result++;
+            }
+        }
+        if (result < select + BALANCE_ARRAY) {
+            throw new IndexOutOfBoundsException("Input is out of range, try adding the module again");
         }
     }
 }

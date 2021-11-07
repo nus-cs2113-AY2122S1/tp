@@ -25,7 +25,7 @@ public class TimetableUI {
 
     /**
      * Prints the list of modules taken in the timetable, and the total number of MCs.
-     * 
+     *
      * @param modules the list of modules taken in the timetable
      */
     public static void printModules(List<Module> modules, int semester) {
@@ -44,7 +44,7 @@ public class TimetableUI {
     /**
      * Displays the first row in the timetable grid starting from the earliest hour in the timetable
      * to the last.
-     * 
+     *
      * @param start the starting hour of the timetable
      * @param end the last hour of the timetable
      */
@@ -61,7 +61,7 @@ public class TimetableUI {
     /**
      * Displays the full-day schedule for a specific day. Prints three lines : Module Code, Lesson
      * Type, and Venue.
-     * 
+     *
      * @param day The day to be printed (Monday/Tuesday/Wednesday... etc.)
      * @param schedule The schedule to be printed for that day
      * @param start the earliest hour that has any activity
@@ -85,7 +85,7 @@ public class TimetableUI {
 
     /**
      * Extracts User created tasks from timetable.
-     * 
+     *
      * @param schedule timetable schedule
      * @return timetable schedule consisting of only user created items
      */
@@ -104,6 +104,10 @@ public class TimetableUI {
         String infoLine = addHeader(day, type);
         TimetableItem prevTimetableItem = null;
         for (int i = start; i <= end; i++) {
+            if (i == 24) {
+                infoLine = infoLine.concat(addInfoToString(null, prevTimetableItem, type));
+                break;
+            }
             TimetableItem timetableItem = schedule[i];
             infoLine = infoLine.concat(addInfoToString(timetableItem, prevTimetableItem, type));
             prevTimetableItem = timetableItem;
