@@ -441,6 +441,52 @@ Here is a list of all appointments:
     * To maintain the table layout and prevent overflow of a cell.
 * To get the full information without the truncated details, use `VIEW APPOINTMENT_ID`.
 
+### Find appointment(s): `find`
+
+- Finds a person’s (patient or medical staff) list of appointments. 
+- The search query can be filtered by date/time to display the list of appointments before/after a certain date 
+involving the particular person.
+
+Format: `find PERSON_TYPE/PERSON_ID [FILTER_TYPE/DATE_TIME]`
+- The format for DATE_TIME is DDMMYY hhmm. I.e. 9 February 2021, 0800HRS should be written as 090221 0800
+- `PERSON_TYPE` is p (patient) or s (staff)
+- `FILTER_TYPE` is b (before) or a (after)
+
+Example Usage: `find p/6`
+
+Example Output:
+```
+Here is a list of matched appointments:
+ -------------------------------------------------------------------------------------------------- 
+ |  ID  |     Date/Time     | Patient ID |     Patient Name     | Staff ID |      Staff Name        | 
+ -------------------------------------------------------------------------------------------------- 
+ | 6    | 04 Jan 22 1300HRS | 6          | Emma                 | 2        | Doctor Two           | 
+ | 10   | 04 Jan 22 1800HRS | 6          | Emma                 | 2        | Doctor Two           | 
+ | 11   | 05 Jan 22 1300HRS | 6          | Emma                 | 2        | Doctor Two           | 
+ | 12   | 06 Jan 22 1300HRS | 6          | Emma                 | 2        | Doctor Two           | 
+ | 13   | 07 Jan 22 1300HRS | 6          | Emma                 | 2        | Doctor Two           | 
+ | 14   | 08 Jan 22 1300HRS | 6          | Emma                 | 2        | Doctor Two           | 
+ -------------------------------------------------------------------------------------------------- 
+```
+
+Example Usage `find p/6 a/060122 0000`
+
+Example Output
+```
+ -------------------------------------------------------------------------------------------------- 
+ |  ID  |     Date/Time     | Patient ID |     Patient Name     | Staff ID  |      Staff Name       | 
+ -------------------------------------------------------------------------------------------------- 
+ | 12   | 06 Jan 22 1300HRS | 6          | Emma                 | 2        | Doctor Two           | 
+ | 13   | 07 Jan 22 1300HRS | 6          | Emma                 | 2        | Doctor Two           | 
+ | 14   | 08 Jan 22 1300HRS | 6          | Emma                 | 2        | Doctor Two           | 
+ -------------------------------------------------------------------------------------------------- 
+```
+
+#### Notes:
+- Before or after DATE_TIME also includes the appointment (if any) at the date/time specified.
+
+
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
@@ -466,7 +512,7 @@ location as the `MedBotData` directory.
 | Action       | Format + Examples        |
 | :---         | :---                     |
 | **add**      | `add i/PERSON_ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br/>eg.,`add i/S1231234A n/John Smith p/91234567 e/johnsmit@eg.com a/ABC Street 123`|
-| **list**     | `list`|
+| **list**     | `list [-h]`|
 | **edit**     | `edit PERSON_ID [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` <br/>eg., `edit 2 n/Bob Smith`|
 | **view**     | `view [PERSON_ID]`<br/>eg., `view 3`|
 | **delete**   | `delete [PERSON_ID]`<br/>eg., `delete 2`|
@@ -481,6 +527,7 @@ location as the `MedBotData` directory.
 | **add**      | `add p/PERSON_ID s/STAFF_ID d/DATE_TIME` <br/> E.g., `add p/19 s/1 d/090222 0900`|
 | **delete**   | `delete APPOINTMENT_ID`  |
 | **edit**     | `edit APPOINTMENT_ID [p/PATIENT_ID] [s/STAFF_ID] [d/DATE_TIME]` <br/> E.g., `edit 2 s/3 d/100322 0800`|         
+| **find**     | `find PERSON_TYPE/PERSON_ID [FILTER_TYPE/DATE_TIME]`<br/> E.g., `find s/3 b/100322 0800`|         
 | **list**     | `list`                   |
 | **view**     | `view APPOINTMENT_ID` <br/> E.g., `view 3` |
 
