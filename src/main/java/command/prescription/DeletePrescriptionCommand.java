@@ -43,7 +43,7 @@ public class DeletePrescriptionCommand extends Command {
 
         int prescriptionId = Integer.parseInt(prescriptionIdToDelete);
 
-        assert prescriptionId <= Prescription.getPrescriptionCount() : "Prescription Id should not exceed max "
+        assert prescriptionId <= Prescription.getPrescriptionCount() : "Prescription ID should not exceed max "
                 + "prescription count";
 
         int stockIdToPrescribe;
@@ -65,7 +65,7 @@ public class DeletePrescriptionCommand extends Command {
                 }
 
                 medicines.remove(prescription);
-                ui.print("Prescription deleted for Prescription Id " + prescriptionId);
+                ui.print("Prescription deleted for Prescription ID " + prescriptionId);
                 Storage storage = Storage.getInstance();
                 storage.saveData(medicines);
                 logger.log(Level.INFO, "Successful deletion of Prescription");
