@@ -203,24 +203,20 @@ Below is an example scenario of how the add assessment feature behaves at each s
 
 <br>
 
-### Set Marks
+### Set Mark
 The sequence diagram shown below illustrates how the `set_mark` command works:
 ![SetMarkSequenceDiagram](diagrams/sequence/SetMarkSequenceDiagram.png)
 
-Steps:
-1. The `Taa` instance reads in a user input through the `Ui.getUserInput()` method.
-2. The user input is then parsed using the `Parser.parseUserInput(userInput:String)` static method and a `Command` object
-   is returned.
-3. `AddModuleCommand.checkArguments()` is then called to check if the arguments are valid.
-4. After checking the arguments, `Command.execute(moduleList:ModuleList, ui:Ui, storage:Storage)` will be called.
-5. The `module:Module` which the student and assessment belongs to is retrieved with 
-`getModuleWithCode(moduleCode:String)`.
-6. Using `module:Module`, we are able to get the `studentList:StudentList` and `assessmentList:AssessmentList`.
-7. The `student:Student` and `assessment:Assessment` are then retrieved from their lists using 
-`getStudentAt(studentIndex:Integer)` and `getAssessment(assessmentName:String)` respectively.
-8. Finally, `setMarks(assessmentName:String, marks:Double)` is called to set the marks of the assessment in the 
-student's `results` HashMap.
-9. A message will then be printed out to indicate to the user that the marks have been set successfully.
+Below is an example scenario of how the set mark feature behaves at each step:
+* Step 1 - The user executes `set_marks c/CS2113T-F12 \ns/1 a/Midterms m/60` to set the mark of a student for an assessment.
+  The `set_mark` command calls the `SetMarkCommand.execute` method.
+* Step 2 - Within `SetMarkCommand.execute`, `ClassList.getClassWithId("CS2113T-F12")` is called to ensure that there
+  is an existing class with code `CS2113T-F12`.
+* Step 3 - `ClassList.getStudentList` and `ClassList.getAssessmentList` are called to get the respective lists.
+* Step 4 - `assessmentList.getAssessment("Midterms")` is called to retrieve the respective `Assessment` object.
+* Step 5 - If the `Assessment` object for `Midterms` exists, `studentList.getStudentAt(1)` is to retrieve the `Student` object.
+* Step 6 - If the `Student` object exists, `student.setMarks("Midterms", 60)` is called to set the mark of the student
+  for `Midterms`.
 
 <br>
 
