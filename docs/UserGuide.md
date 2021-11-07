@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-## Purpose of this User Guide 
+## Purpose Of This User Guide 
 
 This User Guide is an introduction to the features, commands and tips of SEPlanner. If you are first time user, 
 or you simply wish to explore SEPlanner to its fullest potential, this is the page for you. Use the [Content Page](#Content-Page) 
@@ -42,7 +42,7 @@ SEPlanner is a lightweight **desktop application** for Computer Engineering unde
 to plan for their **Student Exchange Program**, optimised for use via **Command Line Interface** (CLI). If you are familiar with command line,
 SEPlanner can streamline your planning process when compared to other Graphical User Interface (GUI) apps.
 
-## Program overview
+## Program Overview
 
 This SEPlanner allows you to search for pre-approved module mappings through our platform. To do so, you can follow the following steps:
 1. Add partner universities that you are interested in.
@@ -103,6 +103,7 @@ Don't worry, the features of SEPlanner still work regardless of window size, but
 
 ## How to use this guide
 This user guide provides useful tools to help you acclimatise to SEPlanner. 
+
 Here is a list of the different types of text formatting and what they mean. 
 
 <div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
@@ -200,7 +201,7 @@ New university added:
 
 ### Adding a NUS module
 
-Add a NUS module that you want to complete during SEP into your selected module list.  
+Add a NUS module that you want to complete during SEP into your *Selected Module List*.
 
 #### Format: `add /mod <MODULE_INDEX>` `add /mod <MODULE_CODE>` 
 
@@ -226,7 +227,7 @@ New module added:
 
 ### Viewing all selected universities:
 
-Displays all universities added, as well as all module mappings added to the university by you.
+Displays all universities added into your *Selected University List*, as well as all module mappings added to the university by you.
 
 #### Format: `list /suni`
 
@@ -261,7 +262,7 @@ Here are the modules in the list:
 
 ### Searching for available module mappings for a specific university:
 
-Displays all available module mappings for a specific university that matches the list of selected modules.
+Displays all available module mappings for a specific university that matches the *Selected Module List*.
 
 <div markdown="block" class="alert alert-info"> :information_source: **Note:**
 Mappings here are labeled with a mapping index, which will be used for `add /map` and `remove /map` commands.
@@ -287,7 +288,7 @@ list. For instance, the above output is executed with the following modules in t
 
 ### Searching for available module mappings for all selected universities:  
 
-Displays all available module mappings for all the universities in the selected university list.
+Displays all available module mappings for all the universities in the *Selected University List* and modules in *Selected Module List*.
 
 #### Format: `searchmap all`
 
@@ -372,7 +373,7 @@ Expected output:
 
 ### Finding a specific module by module name
 
-Look for modules with module names that matches the user entered keyword.
+Look for modules with module names that matches your entered keyword.
 * The output also consists of the index of the module, which is needed for subsequent commands.
 
 #### Format: `find /mod <KEYWORD>`
@@ -397,7 +398,7 @@ Expected output:
 
 ### Finding a specific module by module code
 
-Look for modules with module codes that matches the user entered keyword.
+Look for modules with module codes that matches your entered keyword.
 * The output also consists of the index of the module, which is needed for subsequent commands.
 
 #### Format: `find /code <KEYWORD>`
@@ -423,7 +424,7 @@ Look for modules with module codes that matches the user entered keyword.
 
 ### Removing a selected university
 
-Remove a partner university from the user selected university list.
+Remove a partner university from the *Selected University List*.
 
 #### Format: `remove /uni <UNIVERSITY_INDEX>` `remove /uni <UNIVERSITY_NAME>` 
 
@@ -444,7 +445,7 @@ This university is removed:
 
 ### Removing a selected NUS module
 
-Removes a module from the user selected module list.
+Removes a module from the *Selected Module List*.
 
 #### Format: `remove /mod <MODULE_CODE>` `remove /mod <MODULE_INDEX>`
 
@@ -485,14 +486,14 @@ Removing a module does not automatically remove all module mappings associated w
 
 ### Storage
 
-Your selected module list and selected university list are stored in the text files, `selectedModules.txt` and 
+Your *Selected Module List* and *Selected University List* are stored in the text files, `selectedModules.txt` and 
 `selectedUniveristies.txt` respectively.
 
 <p align = "center">
 <img src="images/Storage_UG.png" />
 </p>
 
-Whenever your selected module list and selected university list gets updated, the data stored in the files will get
+Whenever your *Selected Module List* and *Selected University List* gets updated, the data stored in the files will get
 updated immediately.
 
 <div markdown="span" class="alert alert-warning"> :exclamation: **Caution:**
@@ -538,8 +539,13 @@ Command | Format | Purpose
 
 ## Glossary
 
-1. `UNI_INDEX` - The unique identifier corresponding to a particular university.
-2. `MOD_INDEX` - The unique identifier corresponding to a particular module.
-3. `MAPPING_INDEX` - The identifier corresponding to a particular module mapping withing a university. Note: this value changes accordingly with the selected module list.
-4. `selected university list` - The list of universities and its respective mappings selected by you.
-5. `selected module list` - The list of modules selected by you.
+* *UNI_INDEX* The unique identifier corresponding to a particular university.
+* *MOD_INDEX* The unique identifier corresponding to a particular module.
+* *MAPPING_INDEX* The identifier corresponding to a particular module mapping withing a university.
+* *Master University List* The list of all partner universities.
+* *Master Module List* - The list of all NUS modules available for mapping.
+* *Selected University List* - The list of partner universities you selected along with your selected module mappings
+  for each university
+* *Selected Module List* - The list of NUS modules you selected.
+* *SEP* - Student Exchange Programme
+* *NUS* - National University of Singapore
