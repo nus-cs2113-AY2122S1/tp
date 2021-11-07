@@ -110,7 +110,7 @@ public class AttendanceStorage {
      * Checks for any duplicates in the list.
      *
      * @param pendingList current list of Strings to check.
-     * @throws InvalidAddMemberException if there are any duplicates.
+     * @throws InvalidAddAttendanceException if there are any duplicates.
      */
     private static void checkDuplicates(List<String> pendingList) throws InvalidAddAttendanceException {
         for (int i = 0; i < pendingList.size(); i++) {
@@ -174,7 +174,7 @@ public class AttendanceStorage {
      * Checks if member name is valid.
      *
      * @param name the member name to be checked.
-     * @throws InvalidAddMemberException when member name is invalid.
+     * @throws InvalidAddAttendanceException when member name is invalid.
      */
     private static void verifyMemberName(String name) throws InvalidAddAttendanceException {
         boolean nameEmpty = (name == null || name.trim().isEmpty());
