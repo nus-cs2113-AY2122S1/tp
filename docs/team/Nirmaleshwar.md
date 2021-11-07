@@ -75,6 +75,61 @@ It is also able to give visual representations of financial data through bar gra
 ---
 ###Enhancement to existing features:
 
+* Added JUnit testing for command class [#92](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/92)
+* Refactored Currency commands into separate classes [#213](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/213)
+* Refactored `Parser` to include separate case handling for currency commands [#213](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/213)
+* Added Javadoc comments to improve code readability []()
+
+<br>
+
 ###Contributions to the UG:
 
-* 
+* Created the entire UG for v1.0 release [#76](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/76/files)
+* Implemented drop-down box style descriptions [#76](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/76/files)
+* Included guides for currency related commands for v2.0 release [#137](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/137/files)
+* Made improvements to the structuring and readability of UG [#137](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/137/files)
+
+<br>
+
+###Contributions to the DG:
+
+* Created section pertaining to command class for v1.0 release [#83](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/83)
+* Created entire manual testing section for v1.0 release [#83](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/83)
+* Created section for Currency Conversion class
+* Included both class and sequence diagrams
+
+<br>
+
+###Contributions to team-based tasks:
+
+  * Worked together with teammates for the UG, DG and features for v1.0.
+  * Discussed with teammates regularly on ideas for the development of the product.
+  * Involved in creating releases for `v1.0` & `v2.0`
+  * Handled issues, user stories and PR's during project development.
+  * Facilitated Zoom calls by creating rooms whenever required and taking meeting minutes.
+
+<br>
+
+###Review/mentoring contributions:
+
+* Links to PR's reviewed by me:
+  * [#20](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/20)
+  * [#27](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/27)
+  * [#45](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/45)
+  * [#49](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/49)
+  * [#86](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/86)
+  * [#122](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/122)
+  * [#134](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/134)
+  * [#143](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/143)
+  * [#212](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/212)
+  * [#213](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/213)
+  * [#215](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/215)
+
+<br>
+
+### Other notable contributions not listed above:
+
+* Created the skeleton of entire command class for Stonks XD before refactoring [#20](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/20)
+* Fixed the precision issue of using doubles for currency conversions []()
+
+  
