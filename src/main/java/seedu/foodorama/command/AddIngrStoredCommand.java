@@ -93,7 +93,7 @@ public class AddIngrStoredCommand extends Command {
      * Checks if the parameter numberString is an integer.
      *
      * @param numberString the String to check if it is an integer
-     * @return true is the String is an integer, false if it is not an integer
+     * @return true if the String is an integer, false if it is not an integer
      * @author Dniv-ra
      */
     public boolean isInteger(String numberString) {

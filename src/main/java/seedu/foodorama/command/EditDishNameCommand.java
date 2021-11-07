@@ -9,6 +9,12 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Allows the user to edit the name of a dish.
+ * Format: edit dish name [DISH_NAME]/[INDEX]
+ *
+ * @author Rakesh12000
+ */
 public class EditDishNameCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger("EditDishCommand");
     private static final Ui UI = new Ui();
@@ -17,6 +23,20 @@ public class EditDishNameCommand extends Command {
         LoggerManager.setupLogger(LOGGER);
     }
 
+    /**
+     * User command to edit the name of a dish in the dish list.
+     * Parameters can either accept the [DISH_NAME] of the dish to be edited
+     * or the [INDEX] of the dish in the dish list.
+     * The method checks if the [DISH_INDEX] is an integer and is out of bounds of the size of the dish list
+     * or if the [DISH_NAME] doesn't exist in the list and throws an exception.
+     *
+     * <p>If no exceptions are thrown, the user is prompted to provide the new name for the dish.</p>
+     *
+     * @param parameters contains the [DISH_NAME] or [DISH_INDEX] of the dish to edit name of
+     * @throws FoodoramaException if [DISH_NAME] doesn't exist in the dish list or if [INDEX] is not an integer,
+     *      [INDEX] is an integer that's out of bounds
+     * @author Rakesh12000
+     */
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         LOGGER.log(Level.INFO, "Start of process");
@@ -53,7 +73,13 @@ public class EditDishNameCommand extends Command {
         LOGGER.log(Level.INFO, "End of process.");
     }
 
-
+    /**
+     * Checks if given string can be converted into a number.
+     * @param numberString string to be checked
+     * @return true if string can be converted into a double, false otherwise
+     *
+     * @author Rakesh12000
+     */
     public boolean isNumber(String numberString) {
         try {
             double number = Double.parseDouble(numberString);
@@ -63,6 +89,13 @@ public class EditDishNameCommand extends Command {
         }
     }
 
+    /**
+     * Checks if given string can be converted into an integer.
+     * @param numberString string to be checked
+     * @return true if string can be converted into an integer, false otherwise
+     *
+     * @author Dniv-ra
+     */
     public boolean isInteger(String numberString) {
         if (isNumber(numberString)) {
             double number = Double.parseDouble(numberString);
