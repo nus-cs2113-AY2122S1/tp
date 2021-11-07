@@ -174,7 +174,7 @@ Habit    | Checkpoints; small, actionable tasks to be done to achieve goal. |`Ru
 Interval | The frequency (in days) which you want the habit to recur.       |`Run 5km every 7 days` 
 
 ![](Display_Images/HappyBit_Visual_Explain.png)
-_A timeline of what a goal should look like._ | Made with Canva
+_A timeline of what a goal with three different habits could be._ | Made with Canva
 
 **Goals and habits** <br>
 Here we distinguish between goals and habits. Although they are commonly used words, the way we
@@ -404,7 +404,7 @@ one of these habits will be the metaphorical straw that breaks the camel's back.
 without even pulling a muscle.)
 
 **Format:** `add n/<habit_name> g/<goal_index> i/<interval>`
-* name your habit with an achievable and actionable task (e.g. Run 2.4km, Sleep at 10pm)
+* name your habit with an achievable and actionable task (e.g. Run 2.4 km, Sleep at 10 PM)
 * 'Interval' is a number that indicates the period of time you have to complete the habit before the next cycle
 * 'Interval' defined as 0 indicates a one-off habit; you only have to complete the habit once
 
