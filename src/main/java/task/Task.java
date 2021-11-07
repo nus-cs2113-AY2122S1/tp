@@ -83,8 +83,9 @@ public class Task {
         try {
             logger.log(Level.INFO, "Successfully set Task deadline...");
             setDeadline(DateParser.parseDate(date));
+            Ui.printUpdateTaskDeadline(this);
         } catch (DateTimeException e) {
-            Ui.missingDate();
+            Ui.wrongDateTimeFormat();
         }
     }
 

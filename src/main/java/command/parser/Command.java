@@ -271,6 +271,10 @@ public class Command {
     void commandEditDescription(Module module, String taskType, String taskDescription) {
         TaskList list = module.getTaskList();
         Task selectedTask = parserChecks.getTaskFromIndex(taskType, module.taskList.getTaskList());
+        if (taskDescription.isBlank()) {
+            Ui.missingDescription();
+            return;
+        }
         if (selectedTask != null && !list.hasDuplicateDescription(taskDescription)) {
             selectedTask.setDescription(taskDescription);
             Ui.printUpdateTaskDescription(selectedTask);
@@ -291,7 +295,6 @@ public class Command {
         Task selectedTask = parserChecks.getTaskFromIndex(taskType, module.taskList.getTaskList());
         if (selectedTask != null) {
             selectedTask.parseDeadline(taskDescription);
-            Ui.printUpdateTaskDeadline(selectedTask);
         }
     }
 
