@@ -122,8 +122,6 @@ These are the diagrams (General, Class, Sequence...) I have added into the Devel
     <img src="../images/AmosUMLDiagrams/CD_UIComponent.png">
 </p>
 
-<div style="page-break-after: always;"></div>
-
 #### For "3.3 Parser Component"...
 <p align="center">
     <img src="../images/AmosUMLDiagrams/CD_ParserComponent.png">
