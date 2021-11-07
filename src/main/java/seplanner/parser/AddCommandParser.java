@@ -201,7 +201,8 @@ public class AddCommandParser {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOMAPPING, 1, false);
         }
-        if (ParseCondition.isIndexOutOfBounds(uniIndex, mapIndex, universityMasterList, moduleSelectedList)) {
+        if (ParseCondition.isAddedMappingIndexOutOfBounds(uniIndex, mapIndex, universityMasterList,
+                moduleSelectedList)) {
             logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new AddParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING, 1, false);
         }

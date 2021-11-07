@@ -1,6 +1,6 @@
 package seplanner.parser;
 
-import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
+//import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
 import org.junit.jupiter.api.Test;
 import seplanner.exceptions.AddParseException;
 import seplanner.modules.Module;

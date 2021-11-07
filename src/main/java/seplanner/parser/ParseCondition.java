@@ -108,17 +108,35 @@ public class ParseCondition {
     }
 
     /**
-     * Checks whether the index of mapping from user for a specific university is valid
+     * Checks whether the index of mapping to add from user for a specific university is valid
      * @param uniIndex Index of university from user
      * @param mapIndex Index of mapping from user
      * @param universityMasterList The university master list
      * @param moduleSelectedList The selected module list
      * @return True if the index is out of bounds, false otherwise
      */
-    public static boolean isIndexOutOfBounds(int uniIndex, int mapIndex, UniversityList universityMasterList,
+    public static boolean isAddedMappingIndexOutOfBounds(int uniIndex, int mapIndex, UniversityList universityMasterList,
                                              ModuleList moduleSelectedList) {
         University uni = universityMasterList.get(uniIndex - 1);
         int mapSize = uni.getSelectedMappingListSize(moduleSelectedList);
+        boolean isExceedUpperBound = mapIndex > mapSize;
+        boolean isExceedLowerBound = mapIndex <= 0;
+        return isExceedUpperBound || isExceedLowerBound;
+    }
+
+    /**
+     * Checks whether the index of mapping to remove from user for a specific university is valid
+     * @param uniIndex Index of university from user
+     * @param mapIndex Index of mapping from user
+     * @param universityMasterList The university master list
+     * @param universitySelectedList The selected university list
+     * @return True if the index is out of bounds, false otherwise
+     */
+    public static boolean isRemovedMappingIndexOutOfBounds(int uniIndex, int mapIndex, UniversityList universityMasterList,
+                                             UniversityList universitySelectedList) {
+        University uniMasterObject = universityMasterList.get(uniIndex - 1);
+        University uni = universitySelectedList.getUniversity(uniMasterObject.getName());
+        int mapSize = uni.getList().size();
         boolean isExceedUpperBound = mapIndex > mapSize;
         boolean isExceedLowerBound = mapIndex <= 0;
         return isExceedUpperBound || isExceedLowerBound;
@@ -154,20 +172,6 @@ public class ParseCondition {
         String moduleCode = module.getModuleCode();
         return moduleSelectedList.isModuleExist(moduleCode);
     }
-
-//    /**
-//     * Checks whether there is no mapping available for a university based on the current selected modules
-//     * @param uniIndex Index of the university
-//     * @param universityMasterList The university master list
-//     * @param moduleSelectedList The selected module list
-//     * @return True if there is no mapping available, false otherwise
-//     */
-//    public static boolean isEmptyAvailableMappingList(int uniIndex, UniversityList universityMasterList,
-//                                                      ModuleList moduleSelectedList) {
-//        University uni = universityMasterList.get(uniIndex - 1);
-//        int mapSize = uni.getSelectedMappingListSize(moduleSelectedList);
-//        return mapSize == 0;
-//    }
 
     /**
      * Checks whether the mapping from user has already been added for the university

@@ -23,6 +23,8 @@ public class AddMapCommandParserTest {
     private static UniversityList universityMasterList;
     private static ModuleList moduleMasterList;
 
+    private static AddCommandParser acp = new AddCommandParser();
+
     static {
         try {
             moduleMasterList = new ModuleList(storage.readModuleList());
@@ -36,7 +38,6 @@ public class AddMapCommandParserTest {
     @Test
     public void parse_inputMissingArguments_exceptionThrown() {
         String input = "3 ";
-        AddCommandParser acp = new AddCommandParser();
         assertThrows(AddParseException.class, () -> acp.handleMapFlagArgs(input, universitySelectedList,
                 moduleSelectedList, universityMasterList));
     }
@@ -46,7 +47,6 @@ public class AddMapCommandParserTest {
         String firstInput = "3 ,./";
         String secondInput = ">.< 4";
         String thirdInput = "@.@ ^.^";
-        AddCommandParser acp = new AddCommandParser();
         assertThrows(AddParseException.class, () -> acp.handleMapFlagArgs(firstInput, universitySelectedList,
                 moduleSelectedList, universityMasterList));
         assertThrows(AddParseException.class, () -> acp.handleMapFlagArgs(secondInput, universitySelectedList,
@@ -58,7 +58,6 @@ public class AddMapCommandParserTest {
     @Test
     public void parse_chosenUniNotInSelectedList_exceptionThrown() {
         String input = "1 3";
-        AddCommandParser acp = new AddCommandParser();
         universitySelectedList = new UniversityList();
         assertThrows(AddParseException.class, () -> acp.handleMapFlagArgs(input, universitySelectedList,
                 moduleSelectedList, universityMasterList));
@@ -67,7 +66,6 @@ public class AddMapCommandParserTest {
     @Test
     public void parse_chosenUniHasNoPotentialMapping_exceptionThrown() {
         String input = "1 1";
-        AddCommandParser acp = new AddCommandParser();
         moduleSelectedList = new ModuleList();
         assertThrows(AddParseException.class, () -> acp.handleMapFlagArgs(input, universitySelectedList,
                 moduleSelectedList, universityMasterList));
@@ -77,7 +75,6 @@ public class AddMapCommandParserTest {
     public void parse_uniIndexOutOfBounds_exceptionThrown() {
         String firstInput = "0 1";
         String secondInput = "81 1";
-        AddCommandParser acp = new AddCommandParser();
         assertThrows(AddParseException.class, () -> acp.handleMapFlagArgs(firstInput, universitySelectedList,
                 moduleSelectedList, universityMasterList));
         assertThrows(AddParseException.class, () -> acp.handleMapFlagArgs(secondInput, universitySelectedList,
@@ -88,7 +85,6 @@ public class AddMapCommandParserTest {
     public void parse_mappingIndexOutOfBounds_exceptionThrown() {
         String firstInput = "1 0";
         String secondInput = "1 100";
-        AddCommandParser acp = new AddCommandParser();
         Module dummyMod1 = new Module();
         Module dummyMod2 = new Module();
         ModuleMapping dummyMapping = new ModuleMapping(dummyMod1, dummyMod2);
