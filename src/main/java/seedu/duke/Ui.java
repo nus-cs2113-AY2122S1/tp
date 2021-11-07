@@ -330,17 +330,19 @@ public class Ui {
     public static void printMonth(LocalDateTime date) {
         int year = date.getYear();
         int month = date.getMonthValue();
-        YearMonth ym = YearMonth.of(year, month);
+
         System.out.print(date.getMonth() + "  ");
         System.out.println(year + "\n------------------------------");
         System.out.println("Sun Mon Tue Wed Thu Fri Sat");
         int counter = 1;
 
         int dayValue = LocalDateTime.of(year, month, 1, 12, 30).getDayOfWeek().getValue();
-        if (dayValue != 7)
+        YearMonth ym = YearMonth.of(year, month);
+        if (dayValue != 7) {
             for (int i = 0; i < dayValue; i++, counter++) {
                 System.out.printf("%-4s", "  ");
             }
+        }
         if (date.getDayOfMonth() == 1) {
             System.out.printf("%-4s", "*1");
             counter++;
