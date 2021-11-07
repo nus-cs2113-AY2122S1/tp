@@ -4,20 +4,9 @@
 hide circle
 skinparam classAttributeIconSize 0
 
-actor User
-
-Box
-User -> Foodorama: User input
-Foodorama -> InputParser: getCommandName()
-activate InputParser
-Foodorama <-- InputParser: userCommandName
-
-Foodorama -> InputParser: getCommandParameters()
-
-return parameters
-
+box
 create GraphCommand
-Foodorama -> GraphCommand
+ -> GraphCommand : execute(parameters)
 activate GraphCommand
 
 alt case DISH
@@ -28,18 +17,18 @@ alt case DISH
 else case INGR
     GraphCommand -> IngredientList : IngredientList.graph
     IngredientList -> Ui: printIngrGraph()
-    Ui --> User: output on the terminal
+    Ui --> : output on the terminal
 
 else default
     create FoodoramaException
-    InputParser -> FoodoramaException: throw new
+    GraphCommand -> FoodoramaException: throw new
     activate FoodoramaException
 
     FoodoramaException -> Ui: getInvalidTypeMsg()
     activate Ui
-    FoodoramaException<-- Ui : INVALID_TYPE_FIND
+    FoodoramaException<-- Ui : INVALID_TYPE_GRAPH
     deactivate Ui
-    FoodoramaException --> Foodorama: exceptionMsg
+    FoodoramaException --> : exceptionMsg
 end
 
 @enduml

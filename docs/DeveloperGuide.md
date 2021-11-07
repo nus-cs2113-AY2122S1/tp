@@ -241,9 +241,20 @@ the one shown above in their implementation.
 
 ### Set
 
+The implementation of the set function allows the User to set the expiry date for ingredients
+
+Below is a sequence diagram that shows how the SetExpiryCommand functions
+
+![](images/set_expiry.png)
+
+There is currently a soft limit of 10000 days for the expiry. If this limit is exceeded the user will be prompted for 
+confirmation before proceeding as 10000 is an unusual amount for the field and might be a misinput.
+
 ### Graph
 
-
+The implementation of the Edit function allows Foodorama to display a graph of the Dishes and Ingredients present in the DishList and
+IngredientList to the User
+Below is a sequence diagram that shows how the GraphCommand functions
 
 ![](images/graph_sequence.png)
 
