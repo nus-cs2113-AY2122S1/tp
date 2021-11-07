@@ -242,18 +242,30 @@ It takes in a `GoalList` object and converts the data into string to be stored i
 
 This section describes some noteworthy details on how the main features are implemented.
 
-### 4.1. Adding a Goal
+### 4.1. Adding a Goal 
 
-When the `runCommand` method is executed for the `AddGoalCommand` object, the following steps as indicated by the
-sequence diagram below is carried out:
+First, a `AddHabitCommand` object is returned from the `AddParser` if the users input is successfully parsed.
+
+![](Diagram Images/Implementation Diagram Images/AddGoalCommandParserSequenceDiagram.png)
+
+The `runCommand` method is then executed for the `AddHabitCommand` object.
 
 ![](https://www.planttext.com/api/plantuml/img/ZLB1QiCm3BtxAqGltI1fxcQCZWvwwM2mwouY5fuXbZDRsVVFIGepn2sxoUz9xptBFYR1A9CVrFvBP4owwyO1UKOEVV1Tek-9kAVMEBGHlMgVOQVXnPXpmE4Kl4Ss6OWJNmyFDXCNbqJ3-LeryCbZT2nlo6WfQdWlJWqa2J5N6ZxMub5XB-u7XIfUIcqnc5DjVNCZherBg9Leu7QKqhWYbwqhw69-MtC7UdNCcUalpC6Il5Bgenl51PxldfjicU2EPZt8KzlUdpBqF_NQYXVnsb9AqHg_36wViHpRiaTYa__WBm00)
 
 ### 4.2. Adding a Habit
 
-** insert detailed description **
+First, a `AddHabitCommand` object is returned from the `AddParser` if the users input is successfully parsed.
+
+![](Diagram Images/Implementation Diagram Images/AddHabitCommandParserSequenceDiagram.png)
+
+The `runCommand` method is then executed for the `AddHabitCommand` object.
 
 ![](Diagram Images/Implementation Diagram Images/AddHabitCommandSequenceDiagram.png)
+
+The method `addHabitToGoal` within the GoalList components is called, which will get the Goal to add the Habit under. 
+Before adding, the Habit is checked to ensure that it can be added. Once it is determined that it can be added, the method
+`updateHabitEndDate` and `populateIntervalsDuringHabitCreation` are called before the habit is added under the goal using 
+the `addHabit` method. 
 
 ### 4.3. Listing all Goals
 

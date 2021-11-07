@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+mainframe sd Add Habit Parsing
+
+-> ":AddParser": parseAddHabitCommand\n(commandInstruction:String)
+activate ":AddParser"
+
+":AddParser" -> ":Parser": splitInput(commandInstruction:String)
+activate ":Parser"
+":Parser" --> ":AddParser": parameters(ArrayList<String>)
+deactivate ":Parser"
+
+":AddParser" -> ":Parser": getIndex(parameters, "g/")
+activate ":Parser"
+":Parser" --> ":AddParser": goalIndex: int
+deactivate ":Parser"
+
+":AddParser" -> ":AddParser": getHabit(commandInstruction: String)
+activate ":AddParser"
+":AddParser" --> ":AddParser": habit: Habit
+deactivate ":AddParser"
+
+<-- ":AddParser": AddHabitCommand(habit, goalIndex)
+deactivate ":AddParser"
+
+@enduml

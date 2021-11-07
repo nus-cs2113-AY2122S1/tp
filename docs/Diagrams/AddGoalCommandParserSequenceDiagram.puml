@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+mainframe sd Add Goal Parsing
+
+-> ":AddParser": parseAddGoalCommand\n(commandInstruction:String)
+activate ":AddParser"
+
+":AddParser" -> ":AddParser": getGoal(commandInstruction:String)
+activate ":AddParser"
+":AddParser" --> ":AddParser": goal: Goal
+
+<-- ":AddParser": AddGoalCommand(goal)
+deactivate ":AddParser"
+
+@enduml

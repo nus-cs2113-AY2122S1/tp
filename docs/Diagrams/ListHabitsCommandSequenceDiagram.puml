@@ -14,21 +14,28 @@ deactivate "goalList:GoalList"
 "goalList:GoalList" -> "goal:Goal": getHabitList()
 activate "goal:Goal"
 "goal:Goal" --> "goalList:GoalList": habitList: ArrayList<Habit>
+deactivate "goal:Goal"
+
 "goalList:GoalList" -> "goal:Goal": numberOfHabits()
+activate "goal:Goal"
 "goal:Goal" --> "goalList:GoalList" :numOfHabits: int
 deactivate "goal:Goal"
 
 alt#gold #lightblue numOfHabits = 0
     "goalList:GoalList" -> ":HabitCommandException": HabitCommandException(message:String)
     activate ":HabitCommandException"
+    ":HabitCommandException" --> "goalList:GoalList"
     deactivate ":HabitCommandException"
-else #lightgreen
+else #lightgreen else
     "goalList:GoalList" -> "printManager:PrintManager": printHabitList(goalDescription: String, habitList: ArrayList<Habit>, numOfHabits: int)
     activate "printManager:PrintManager"
+    "printManager:PrintManager" --> "goalList:GoalList"
     deactivate "printManager:PrintManager"
 end
 
+"goalList:GoalList" --> ":ListHabitsCommand"
 deactivate "goalList:GoalList"
+<-- ":ListHabitsCommand"
 deactivate ":ListHabitsCommand"
 
 @enduml

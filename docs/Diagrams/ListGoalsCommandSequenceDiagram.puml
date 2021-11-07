@@ -4,19 +4,25 @@
 -> ":ListGoalsCommand": runCommand(goalList:GoalList,\nprintManager:printManager, storage:Storage)
 activate ":ListGoalsCommand"
 
-":ListGoalsCommand" -> "goalList:GoalList":  listGoals(printManager:PrintManager)
+":ListGoalsCommand" -> "goalList:GoalList":  listGoals(printManager)
 activate "goalList:GoalList"
 alt#gold #lightblue goalList.size == 0
-    "goalList:GoalList" -> ":HabitCommandException": HabitCommandException(message:String)
+    "goalList:GoalList" -> ":HabitCommandException": HabitCommandException\n(message:String)
     activate ":HabitCommandException"
+    ":HabitCommandException" --> "goalList:GoalList"
     deactivate ":HabitCommandException"
 
-else #lightgreen
+else #lightgreen else
     "goalList:GoalList" -> "printManager:PrintManager": printGoalList(goalList:ArrayList<Goal>,  goalList.size:int)
     activate "printManager:PrintManager"
+    "printManager:PrintManager" --> "goalList:GoalList"
     deactivate "printManager:PrintManager"
 end
+
+"goalList:GoalList" --> ":ListGoalsCommand"
 deactivate "goalList:GoalList"
+
+<-- ":ListGoalsCommand"
 deactivate ":ListGoalsCommand"
 
 @enduml
