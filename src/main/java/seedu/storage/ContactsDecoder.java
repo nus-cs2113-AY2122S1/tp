@@ -79,13 +79,13 @@ public class ContactsDecoder extends RegexParser {
 
     //@author lezongmun
     /**
-     * Decodes a string read from the personal contact file and
-     * attempts to parse it as a contact. If there are errors in the file,
-     * and the data cannot be loaded, user's personal contact details will
-     * be prompted to create a new personal contact
+     * Returns the personal contact created from decoding a string read from
+     * the personal contact file. If there are errors in the file, and
+     * the data cannot be loaded, user's personal contact details will
+     * be collected to create a new personal contact
      *
      * @param contactText String read from the file
-     * @return personal contact with details read from file
+     * @return Contact personal contact with details read from file
      */
     private Contact decodePersonalContact(String contactText) {
         Contact personalContact = new Contact(null, null, null, null, null, null);

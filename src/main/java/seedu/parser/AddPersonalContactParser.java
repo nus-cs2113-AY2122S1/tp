@@ -100,12 +100,12 @@ public class AddPersonalContactParser extends RegexParser {
     }
 
     /**
-     * This method is used to check the validity of the Github username given
-     * by the user. Inputs that are blank or adhere to the Github username
+     * Returns a boolean to determine if Github username given by the user
+     * is valid. Inputs that are blank or adhere to the Github username
      * restrictions are allowed.
      *
      * @param userInput String that user has input
-     * @return boolean to determine if Github username is valid
+     * @return boolean True if Github username is valid or blank
      * @throws InvalidGithubUsernameException If input does not adhere to the Github username restrictions
      */
     private boolean checkGithubValidity(String userInput) throws InvalidGithubUsernameException {
@@ -153,12 +153,12 @@ public class AddPersonalContactParser extends RegexParser {
     }
 
     /**
-     * This method is used to check the validity of the Telegram username given
-     * by the user. Inputs that are blank or adhere to the Telegram username
+     * Returns a boolean to determine if Telegram username given by the user
+     * is valid. Inputs that are blank or adhere to the Telegram username
      * restrictions are allowed.
      *
      * @param userInput String that user has input
-     * @return boolean to determine if Telegram username is valid
+     * @return boolean True if Telegram username is valid or blank
      * @throws InvalidTelegramUsernameException If input does not adhere to the Telegram username restrictions
      */
     private boolean checkTelegramValidity(String userInput) throws InvalidTelegramUsernameException {
@@ -206,12 +206,12 @@ public class AddPersonalContactParser extends RegexParser {
     }
 
     /**
-     * This method is used to check the validity of the Twitter username given
-     * by the user. Inputs that are blank or adhere to the Twitter username
+     * Returns a boolean to determine if Twitter username given by the user
+     * is valid. Inputs that are blank or adhere to the Twitter username
      * restrictions are allowed.
      *
      * @param userInput String that user has input
-     * @return boolean to determine if Twitter username is valid
+     * @return boolean True if Twitter username is valid or blank
      * @throws InvalidTwitterUsernameException If input does not adhere to the Twitter username restrictions
      */
     private boolean checkTwitterValidity(String userInput) throws InvalidTwitterUsernameException {
@@ -259,12 +259,12 @@ public class AddPersonalContactParser extends RegexParser {
     }
 
     /**
-     * This method is used to check the validity of the email address given
-     * by the user. Inputs that are blank or adhere to the email address
+     * Returns a boolean to determine if email address given by the user
+     * is valid. Inputs that are blank or adhere to the email address
      * restrictions are allowed.
      *
      * @param userInput String that user has input
-     * @return boolean to determine if email address is valid
+     * @return boolean True if email address is valid or blank
      * @throws InvalidEmailException If input does not adhere to the email address restrictions
      */
     private boolean checkEmailValidity(String userInput) throws InvalidEmailException {
@@ -312,12 +312,12 @@ public class AddPersonalContactParser extends RegexParser {
     }
 
     /**
-     * This method is used to check the validity of the LinkedIn username given
-     * by the user. Inputs that are blank or adhere to the LinkedIn username
+     * Returns a boolean to determine if LinkedIn username given by the user
+     * is valid. Inputs that are blank or adhere to the LinkedIn username
      * restrictions are allowed.
      *
      * @param userInput String that user has input
-     * @return boolean to determine if LinkedIn username is valid
+     * @return boolean True if LinkedIn username is valid or blank
      * @throws InvalidEmailException If input does not adhere to the LinkedIn username restrictions
      */
     private boolean checkLinkedinValidity(String userInput) throws InvalidLinkedinUsernameException {

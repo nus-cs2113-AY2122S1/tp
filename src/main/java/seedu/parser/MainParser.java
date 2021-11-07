@@ -72,10 +72,10 @@ public class MainParser {
     }
 
     /**
-     * This method is used to obtain the command word from the user input.
+     * Returns the command word string given in the user input.
      *
      * @param userInput String that user has input
-     * @return command word string in user input
+     * @return String command word in user input
      */
     public String getCommandWord(String userInput) {
         String[] destructuredInputs = userInput.split(" ", ISOLATE_COMD_WORD);
@@ -83,11 +83,12 @@ public class MainParser {
     }
 
     /**
-     * This method differentiates the command given by user into either manipulation,
-     * query or control type, and then returns the type.
+     * Returns the command type of the command given in the user input. This method
+     * differentiates the command given by user into either manipulation, query or
+     * control type.
      *
      * @param userInput String that user has input
-     * @return command type of the command in user input
+     * @return CommandType command type of the command given in user input
      */
     public CommandType getCommandType(String userInput) {
         String commandWord = getCommandWord(userInput);
@@ -276,11 +277,11 @@ public class MainParser {
 
     //@@author lezongmun
     /**
-     * This method returns a DeleteContactCommand after parsing the user's input if the
+     * Returns a DeleteContactCommand after parsing the user's input if the
      * specified input command was for deletion.
      *
      * @param userInput String that user has input
-     * @return DeleteContactCommand object as a Command type
+     * @return Command DeleteContactCommand
      */
     private Command parseDeleteContact(String userInput) {
         try {
@@ -315,10 +316,10 @@ public class MainParser {
 
     //@author lezongmun
     /**
-     * This method returns a PersonalContactCommand after parsing the user's input if the specified
+     * Returns a PersonalContactCommand after parsing the user's input if the specified
      * input command was for viewing personal contact.
      *
-     * @return PersonalContactCommand object as a Command type
+     * @return Command PersonalContactCommand
      */
     private Command parsePersonalContact() {
         return new PersonalContactCommand();

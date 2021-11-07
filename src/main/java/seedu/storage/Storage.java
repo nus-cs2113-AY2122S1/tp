@@ -99,7 +99,6 @@ public class Storage {
     }
 
     //@@author lezongmun
-
     /**
      * Returns a personal contact by attempting to retrieve any existing personal contact data
      * from user's local storage file. If there does not exist any existing personal contact data,

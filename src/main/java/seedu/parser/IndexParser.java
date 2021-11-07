@@ -16,13 +16,13 @@ public class IndexParser {
     private static final String numbers = "^-?\\d+$";
 
     /**
-     * This method is used to obtain the contact index from the user's input. It
+     * Returns the contact index obtained as an integer from the user input string. It
      * is used when the user specifies a command with a contact index. This method
      * will attempt to parse a contact index in a string and return them as an integer.
      * If "me" or "all" is given as the index, it will return -1 or -2 respectively.
      *
      * @param userInput String that user has input
-     * @return Contact index obtained as an integer from the user input string
+     * @return int Contact index obtained from the user input string
      * @throws NumberFormatException If user gives a non-number as the contact index, other than "me" or "all"
      * @throws MissingIndexException If user does not give any contact index
      */
