@@ -161,7 +161,9 @@ You can download the `xml` file [here](https://github.com/google/styleguide/blob
 This section will provide insight to the general overview of **TermiNUS**'s architecture.
 
 ![](attachments/ArchitectureDiagram.png)  
-
+> 💡 The **dotted arrow** represent a dependency between different components.
+> The **solid arrow** represents an interaction between the component and the external system or user.  
+> 
 The Architecture Diagram above describes the high-level design of **TermiNUS** and 
 how the different components interact with each other. Below we will provide a quick overview of 
 each component involved.  
@@ -197,6 +199,8 @@ The next sequence diagram shows the loading of user data into `Terminus`.
 The next sequence diagram shows an instance of command execution.
 
 ![](attachments/MainLogic.png)
+> 📝 **Note:** The cross on each lifeline represents the end of objects lifeline. 
+> Due to the limitation of PlantUML the line continues to extend. 
 
 The next sequence diagram show the termination of `Terminus`  
 
