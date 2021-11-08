@@ -275,7 +275,7 @@ public class Ui {
                 + System.lineSeparator() + "t/[TASK NUM YOU WANT TO UPDATE]"
                 + System.lineSeparator()
                 + "Only type a singular update at given time!"
-                + "\n Only the first command will be updated if multiple updates are written"
+                + "\nOnly the first command will be updated if multiple updates are written"
                 + System.lineSeparator() + Ui.getLineBreak());
     }
 
