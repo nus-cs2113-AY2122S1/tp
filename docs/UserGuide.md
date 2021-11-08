@@ -129,9 +129,10 @@ Removes an existing recipe from my database of recipes.
 #### Format: `deleteRecipe RECIPE_INDEX`
 
 * The `RECIPE_INDEX` must be a positive integer representing the index of the recipe you want to remove.
-* `RECIPE_INDEX` refers to the index of the recipe after you use listRecipe.
-  * **Warning:** This is not the same index as the index given by the `find` command. Use deleteRecipe with caution to prevent losing your recipes.
-  * I recommend using the `listRecipes` command first to check for the index of the recipe you want to delete.
+* `RECIPE_INDEX` refers to the index of the recipe after you use listRecipe.  
+
+> :exclamation: **Warning:** This is not the same index as the index given by the `find` command. Use deleteRecipe with caution to prevent losing your recipes.
+> I recommend using the `listRecipes` command first to check for the index of the recipe you want to delete.
 
 #### Example of usage:
 
@@ -338,19 +339,13 @@ Finds recipes by their attributes, e.g. time needed, calories etc.
 * For `/Calories`, `/Price`, and `/Time`;
   * I'll automatically sort the results from greatest to smallest `ATTRIBUTE_VALUE`.
   * I'll show you recipes whose `ATTRIBUTE_TYPE` is less than or equal to the `ATTRIBUTE_VALUE` you specified.
-    
-
 * For `/Ingredients` and `/Difficulty`;
   * I'll automatically sort the results in alphabetical order.
   * I'll show you recipes with the exact `ATTRIBUTE_VALUE` you are looking for.
-    
-
 * For `/tag`, see [9.4](#94-find-a-recipe-by-their-tags-find) for more details!
+* If the `ATTRIBUTE_TYPE` of any recipe is not set, I'll send you an error.  
 
-  
-
-* If the `ATTRIBUTE_TYPE` of any recipe is not set, I'll send you an error.
-* **Warning:** When using the `deleteRecipe` command, `RECIPE_INDEX` refers to the index given by the `listRecipes` command and not the `find` command. Keep this in mind before deleting a recipe.
+> :exclamation: **Warning:** When using the `deleteRecipe` command, `RECIPE_INDEX` refers to the index given by the `listRecipes` command and not the `find` command. Keep this in mind before deleting a recipe.
 
 #### Example of usage:
 
