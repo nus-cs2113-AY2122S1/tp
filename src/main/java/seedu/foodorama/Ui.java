@@ -102,7 +102,7 @@ public class Ui {
             + "            #" + System.lineSeparator()
             + "# 4. Deleting a Dish : 'del dish [DISH_NAME/INDEX]                                                 "
             + "            #" + System.lineSeparator()
-            + "# 5. Adding a new Ingredient : 'add ingr [INGR_NAME/INDEX]'                                        "
+            + "# 5. Adding a new Ingredient : 'add ingr [INGR_NAME]'                                              "
             + "            #" + System.lineSeparator()
             + "# 6. Adding storage to an already existing Ingredient : 'add ingr stored [INGR_NAME/INDEX]'        "
             + "            #" + System.lineSeparator()
@@ -110,37 +110,37 @@ public class Ui {
             + "            #" + System.lineSeparator()
             + "# 8. Setting Ingredient Limit : 'set ingr limit [INGR_NAME/INDEX]'                                 "
             + "            #" + System.lineSeparator()
-            + "# 8. Setting Ingredient Expiry Date : 'set ingr expiry [INGR_NAME/INDEX]'                          "
+            + "# 9. Setting Ingredient Expiry Date : 'set ingr expiry [INGR_NAME/INDEX]'                          "
             + "            #" + System.lineSeparator()
-            + "# 9. Linking an Ingredient to a Dish : 'link [DISH_NAME] / [INGR_NAME/INDEX]'                      "
+            + "# 10. Linking an Ingredient to a Dish : 'link [DISH_NAME] / [INGR_NAME]'                      "
             + "            #" + System.lineSeparator()
-            + "# 10. Deleting an Ingredient : 'del ingr [INGR_NAME/INDEX]'                                        "
+            + "# 11. Deleting an Ingredient : 'del ingr [INGR_NAME/INDEX]'                                        "
             + "            #" + System.lineSeparator()
-            + "# 11. Find a Dish/Ingredient : 'find dish [KEYWORD] | find ingr [KEYWORD]'                         "
+            + "# 12. Find a Dish/Ingredient : 'find dish [KEYWORD] | find ingr [KEYWORD]'                         "
             + "            #" + System.lineSeparator()
-            + "# 12. Editing a Dish/Ingredient Name :                                                             "
+            + "# 13. Editing a Dish/Ingredient Name :                                                             "
             + "            #" + System.lineSeparator()
             + "#     'edit dish name [DISH_NAME/INDEX] | edit ingr name [INGR_NAME/INDEX]'                        "
             + "            #" + System.lineSeparator()
-            + "# 13. Editing Ingredient Storage : 'edit ingr stored [INGR_NAME/INDEX]'                            "
+            + "# 14. Editing Ingredient Storage : 'edit ingr stored [INGR_NAME/INDEX]'                            "
             + "            #" + System.lineSeparator()
-            + "# 14. Editing a Dish/Ingredient Waste :                                                            "
+            + "# 15. Editing a Dish/Ingredient Waste :                                                            "
             + "            #" + System.lineSeparator()
             + "      'edit dish waste [DISH_NAME/INDEX] | edit ingr waste [INGR_NAME/INDEX]'                      "
             + "            #" + System.lineSeparator()
-            + "# 15. Viewing all Dishes/Ingredients : 'list dish | list ingr'                                     "
+            + "# 16. Viewing all Dishes/Ingredients : 'list dish | list ingr'                                     "
             + "            #" + System.lineSeparator()
-            + "# 16. View graph of all Dishes/Ingredients : 'graph dish | graph ingr'                             "
+            + "# 17. View graph of all Dishes/Ingredients : 'graph dish | graph ingr'                             "
             + "            #" + System.lineSeparator()
-            + "# 17. Sort list of Dishes/Ingredients : 'sort dish | sort ingr'                                    "
+            + "# 18. Sort list of Dishes/Ingredients : 'sort dish | sort ingr'                                    "
             + "            #" + System.lineSeparator()
-            + "# 18. Clearing saved lists: 'clear dish' | 'clear ingr' | 'clear all'                              "
+            + "# 19. Clearing saved lists: 'clear dish' | 'clear ingr' | 'clear all'                              "
             + "            #" + System.lineSeparator()
-            + "# 19. Creating a Random Dish: 'rdish'                                                              "
+            + "# 20. Creating a Random Dish: 'rdish'                                                              "
             + "            #" + System.lineSeparator()
-            + "# 20. View full list of commands and examples: 'help'                                              "
+            + "# 21. View full list of commands and examples: 'help'                                              "
             + "            #" + System.lineSeparator()
-            + "# 21. Exiting the program: 'bye'                                                                   "
+            + "# 22. Exiting the program: 'bye'                                                                   "
             + "            #" + System.lineSeparator()
             + "###################################################################################################"
             + "#############" + System.lineSeparator()
