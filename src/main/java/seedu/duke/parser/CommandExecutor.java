@@ -25,6 +25,12 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
     private static final String EDIT_FORCUR = "-forcur";
     private static final String EDIT_HOMECUR = "-homecur";
     private static final int NEW_TRIP_ATTRIBUTES_COUNT = 6;
+    private static final int NUMBER_OF_PARAMETERS = 3;
+    private static final int INDEX_OF_SECOND_COMMAND = 0;
+    private static final int INDEX_OF_CATEGORY = 1;
+    private static final int INDEX_OF_EXPENSE_ATTRIBUTE = 2;
+    private static final String LAST = "last";
+    private static final String FILTER = "filter";
 
     //@@author yeezao
     /**
@@ -200,15 +206,15 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
                 System.out.println(openTrip.getLastExpense());
             }
         } else {
-            String[] paramString = inputParams.split(" ", 3);
-            String secondCommand = paramString[0];
+            String[] paramString = inputParams.split(" ", NUMBER_OF_PARAMETERS);
+            String secondCommand = paramString[INDEX_OF_SECOND_COMMAND];
             String expenseCategory = null;
             String expenseAttribute = null;
             if (!isNumeric(secondCommand)) {
-                expenseCategory = paramString[1];
-                expenseAttribute = paramString[2];
+                expenseCategory = paramString[INDEX_OF_CATEGORY];
+                expenseAttribute = paramString[INDEX_OF_EXPENSE_ATTRIBUTE];
             }
-            if (secondCommand.equalsIgnoreCase("filter")) {
+            if (secondCommand.equalsIgnoreCase(FILTER)) {
                 try {
                     openTrip.getFilteredExpenses(expenseCategory, expenseAttribute);
                 } catch (IndexOutOfBoundsException e) {

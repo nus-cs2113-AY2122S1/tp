@@ -39,7 +39,7 @@ public class Trip implements FilterFinder {
 
     //@@author yeezao
     /**
-     * Empty {@link Trip} constructor (included for legacy test support).
+     * Legacy constructor for Trip. Used as stub for testing.
      */
     public Trip() {
         //empty constructor

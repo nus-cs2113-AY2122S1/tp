@@ -13,7 +13,7 @@
 - **Expenses**
     - Added `expense` class
     - Added date input and validation when creating an expense
-    - Added initial expense split confirmation in #143
+    - Added initial expense split confirmation in [#143](https://github.com/AY2122S1-CS2113T-T12-2/tp/pull/143)
         - This is so that users are aware some people in the expense don't need to pay
     
 - **Trips**
@@ -44,15 +44,15 @@
 
 ### Team based tasks Contribution
 - **Added bug report in Issues**
-    - #247
+    - [#247](https://github.com/AY2122S1-CS2113T-T12-2/tp/issues/247)
     
 - **Bug fixes**
-    - View index #144
+    - View index [#144](https://github.com/AY2122S1-CS2113T-T12-2/tp/pull/144)
     
 - **Issued request to improve code quality**
-    - #62
+    - [#62](https://github.com/AY2122S1-CS2113T-T12-2/tp/issues/62)
     
 
 ### Review/mentoring contributions
 - **Non trivial PR reviews with comments**
-    - #219, #146, #141
+    - [#219](https://github.com/AY2122S1-CS2113T-T12-2/tp/pull/219), [#146](https://github.com/AY2122S1-CS2113T-T12-2/tp/pull/146), [#141](https://github.com/AY2122S1-CS2113T-T12-2/tp/pull/141)
