@@ -45,16 +45,23 @@ public class Event extends Item {
         return taskList;
     }
 
+    // @@author alwinangys
     public String getTaskListAsString() {
         StringBuilder tasks = new StringBuilder();
         int counter = 1;
-        for (Task task: taskList) {
+        for (int i = 0; i < taskList.size(); i++ ) {
+            Task task = taskList.get(i);
             tasks.append(counter).append(". ");
-            tasks.append(task.getTitle()).append("\n");
+            tasks.append(task.getTitle());
+            if (i != taskList.size() - 1) {
+                tasks.append("\n");
+            }
             counter++;
         }
+
         return tasks.toString();
     }
+    // @@author alwinangys
 
     @Override
     public String toString() {
