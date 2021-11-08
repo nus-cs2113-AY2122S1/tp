@@ -289,6 +289,12 @@ public class TextUi {
     }
 
     //@@author yeoweihngwhyelab
+    /**
+     * print out the record list.
+     * @param records the record list of budget, expenditures and loans
+     * @param i the month of the record list
+     * @param category the category to be listed
+     */
     private static void printRecordList(AllRecordList records, int i, Category category) {
         String monthString = getMonthString(i);
         double totalSpending = 0.0;

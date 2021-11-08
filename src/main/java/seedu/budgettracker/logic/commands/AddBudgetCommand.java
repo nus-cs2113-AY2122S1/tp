@@ -8,6 +8,9 @@ import static seedu.budgettracker.common.Messages.MESSAGE_AMOUNT_EXCEEDED;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_AMOUNT;
 
 //@@author yeoweihngwhyelab
+/**
+ * This class is responsible for the adding of budget.
+ */
 public class AddBudgetCommand extends AddCommand {
 
     public static final boolean IS_NOT_LOADING_STORAGE = false;
@@ -22,6 +25,13 @@ public class AddBudgetCommand extends AddCommand {
     private final int month;
 
     //@@author yeoweihngwhyelab
+    /**
+     * Constructor of AddBudgetCommand and it assigns the value to the attributes
+     * of this class - amount & month.
+     *
+     * @param amount Budget limit for selected month.
+     * @param month The month which the budget limit is imposed on.
+     */
     public AddBudgetCommand(double amount, int month) {
         this.amount = amount;
         this.month = month;
