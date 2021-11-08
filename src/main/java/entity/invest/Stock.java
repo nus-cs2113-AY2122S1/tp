@@ -24,7 +24,7 @@ public class Stock extends Investment {
     }
 
     public String toFileString() {
-        String price = averagePrice.toString();
+        String price = String.format("%.2f", averagePrice);
         String num =  numOfShares.toString();
         return String.format("%s;%s;%s;%s", type, super.toFileString(), num, price);
     }

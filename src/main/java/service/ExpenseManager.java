@@ -107,7 +107,7 @@ public class ExpenseManager implements LoadableManager {
             ui.printMessage(expenseItem);
         }
 
-        String totalExpenseValue = Double.toString(ExpenseList.getRunningExpenseValue());
+        String totalExpenseValue = String.format("%.2f", ExpenseList.getRunningExpenseValue());
         String totalExpenseValuePrintInfo = String.format("%-5s %34s", "Total:", totalExpenseValue);
         ui.printMessage(totalExpenseValuePrintInfo);
     }

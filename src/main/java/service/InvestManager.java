@@ -82,23 +82,23 @@ public class InvestManager implements LoadableManager {
 
     public void listAllStocks() {
         Ui ui = Ui.getUi();
-        String stockListHeader = String.format("%s | %-10s | %-10s | %-10s", "Id.", "Name", "Number", "Value");
+        String stockListHeader = String.format("%-10s | %-10s | %-10s | %-10s", "Id.", "Name", "Number", "Value");
 
         ui.printMessage(stockListHeader);
         ArrayList<Stock> stocks = StockList.getAllStocks();
         for (int i = 0; i < stocks.size(); i++) {
-            ui.printMessage((i + 1) + ". \t| " + stocks.get(i));
+            ui.printMessage(String.format("%-10s | %s", (i + 1) + ".", stocks.get(i)));
         }
     }
 
     public void listAllSavings() {
         Ui ui = Ui.getUi();
-        String savingsListHeader = String.format("%s | %-10s | %-10s", "Id.", "Name", "Value");
+        String savingsListHeader = String.format("%-10s | %-10s | %-10s", "Id.", "Name", "Value");
 
         ui.printMessage(savingsListHeader);
         ArrayList<Saving> savings = SavingList.getAllSavings();
         for (int i = 0; i < savings.size(); i++) {
-            ui.printMessage((i + 1) + ". \t| " + savings.get(i));
+            ui.printMessage(String.format("%-10s | %s", (i + 1) + ".", savings.get(i)));
         }
     }
 

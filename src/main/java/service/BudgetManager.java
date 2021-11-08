@@ -51,7 +51,7 @@ public class BudgetManager implements LoadableManager {
 
     public void listBudgets() {
         Ui ui = Ui.getUi();
-        String budgetListHeader = String.format("%s |  %-10s |", "Id.", "Value");
+        String budgetListHeader = String.format("%-5s |  %-10s |", "Id.", "Value");
 
         ui.printMessage(budgetListHeader);
         ArrayList<Budget> budgets = BudgetList.getBudgets();

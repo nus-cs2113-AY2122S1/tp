@@ -14,7 +14,7 @@ public class Saving extends Investment {
     }
 
     public String toFileString() {
-        String value = super.getTotalValue().toString();
+        String value = String.format("%.2f", super.getTotalValue());
         return String.format("%s;%s;%s", type, super.toFileString(), value);
     }
 
