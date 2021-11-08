@@ -5,7 +5,6 @@ import seedu.budgettracker.data.records.Expenditure;
 import seedu.budgettracker.logic.commands.exceptions.CommandException;
 import seedu.budgettracker.ui.TextUi;
 
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_AMOUNT;

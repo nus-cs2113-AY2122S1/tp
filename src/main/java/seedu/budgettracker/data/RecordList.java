@@ -31,13 +31,13 @@ public class RecordList {
     /**
      * Adds a budget to the record list.
      *
-     * @param spendingLimit the budget's amount
+     * @param amount the budget's amount
      * @throws DuplicateBudgetException if a budget is already set for the month
      */
-    public void addBudget(double spendingLimit) throws DuplicateBudgetException {
+    public void addBudget(double amount) throws DuplicateBudgetException {
         if (!hasBudget) {
-            budget.setAmount(spendingLimit);
-            assert budget.getAmount() == spendingLimit;
+            budget.setAmount(amount);
+            assert budget.getAmount() == amount;
             hasBudget = true;
         } else {
             throw new DuplicateBudgetException(MESSAGE_DUPLICATE_BUDGET);

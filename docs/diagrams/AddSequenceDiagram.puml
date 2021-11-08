@@ -3,10 +3,40 @@
 hide footbox
 autonumber
 
+Actor User as user
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+user -> ":BudgetTracker" : "add -b m/12 a/100"
+activate ":BudgetTracker"
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+":BudgetTracker" -> ":Parser" : parseCommand("add -b m/12 a/100")
+activate ":Parser"
+
+create ":AddBudgetCommand"
+":Parser" -> ":AddBudgetCommand" : new AddBudgetCommand\n(amount: double, month: int)
+activate ":AddBudgetCommand"
+return
+
+return command:AddBudgetCommand
+
+":BudgetTracker" -> ":AddBudgetCommand" : setRecordList(allRecordList: AllRecordList)
+activate ":AddBudgetCommand"
+return
+
+":BudgetTracker" -> ":AddBudgetCommand" : execute()
+activate ":AddBudgetCommand"
+
+":AddBudgetCommand" -> "allRecordList:AllRecordList" : addBudget(amount : double, month : int,\n IS_NOT_LOADING_STORAGE : boolean)
+activate "allRecordList:AllRecordList"
+
+"allRecordList:AllRecordList" -> ":RecordList" : addBudget(amount : double, month : int)
+activate ":RecordList"
+
+opt !hasBudget
+    ":RecordList" -> "budget:Budget" : setAmount(amount : double)
+    activate "budget:Budget"
+end
+
+":BudgetTracker" --> user
+deactivate ":BudgetTracker"
+
 @enduml

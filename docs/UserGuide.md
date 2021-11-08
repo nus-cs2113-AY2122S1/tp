@@ -117,11 +117,11 @@ Format: `add -e n/DESCRIPTION a/AMOUNT d/<DATE_OF_EXPENDITURE> c/<CATEGORY>`
 * The `DESCRIPTION` can be in a natural language format.
   * NOTE: **If Description column exceeds 30characters limit, it will be truncated during list view**
 * The `AMOUNT` entered can be specified up to 2 decimal places.
+  * NOTE: `Amount` **cannot exceed 1billion (1000000000)**
 * The `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_. 
   * If left empty, the current date according to the
   system will be entered by default.
-  * Note: **YYYY value should correspond to the current storage file year, please use `year` 
-  command to switch to the correct year before entering an expenditure of another year**
+  * NOTE: **YYYY value should correspond to the current storage file year**
 * The `<CATEGORY>` must be one of the following values:
   * _GENERAL, CLOTHES, FOOD, ENTERTAINMENT, GIFTS, HEALTH_
   * If left empty, the default value will be _GENERAL_
@@ -383,13 +383,13 @@ _________________________________________________________
 
 _________________________________________________________
 
-### Listing all Budget & Expenditure: `list`
+### Listing all Budget & Expenditure
 
 List all the Budget and expenditure for that particular year.
 
 Format: `list m/all [c/CATEGORY]`
-
-* The command format must strictly be as shown above.
+* `CATEGORY` filters out the expenditures to show only those falling under the specified category.
+  * Note: If `CATEGORY` is left empty, expenditures of all categories will be shown
 
 Example of usage:
 
@@ -401,55 +401,80 @@ Expected outcome: Listing all the budget and expenditure for the particular year
 ========================================================
 Your budget for January: Not Set
 Your expenditures:
- None 
+No Expenditure records yet.
+Your loans: 
+No Loan records yet. 
 ========================================================
 Your budget for February: Not Set
 Your expenditures:
- None 
+No Expenditure records yet.
+Your loans: 
+No Loan records yet. 
 ========================================================
 Your budget for March: Not Set
 Your expenditures:
- None 
+No Expenditure records yet.
+Your loans: 
+No Loan records yet.
 ========================================================
 Your budget for April: Not Set
 Your expenditures:
- None 
+No Expenditure records yet.
+Your loans: 
+No Loan records yet.
 ========================================================
 Your budget for May: Not Set
 Your expenditures:
- None 
+No Expenditure records yet.
+Your loans: 
+No Loan records yet.
 ========================================================
 Your budget for June: Not Set
 Your expenditures:
- None 
+No Expenditure records yet.
+Your loans: 
+No Loan records yet.
 ========================================================
 Your budget for July: Not Set
 Your expenditures:
- None 
+No Expenditure records yet.
+Your loans: 
+No Loan records yet.
 ========================================================
 Your budget for August: Not Set
 Your expenditures:
-  Description            | Amount             | Date           
-1.CS2113T Textbooks      | $60.0              | 2021-08-20       
+  Description            | Amount             | Date               | Category
+1.CS2113T Textbooks      | $60.00             | 2021-08-20         | GENERAL
+Your loans: 
+No Loan records yet.
 ========================================================
 Your budget for September: Not Set
 Your expenditures:
-  Description            | Amount             | Date           
-1.Chicken Rice1          | $500.0             | 2021-09-13       
+  Description            | Amount             | Date               | Category
+1.Chicken Rice           | $5.00              | 2021-09-13         | FOOD
+Your loans: 
+No Loan records yet.
 ========================================================
-You are spending too much for October !
-Your budget for October: $330.0
+You did not overspend for October, Good JOB!
+1.52% of your overall budget has been spent
+Your budget for October: $330.00
 Your expenditures:
-  Description            | Amount             | Date           
-1.Chicken Rice1          | $500.0             | 2021-10-13       
+  Description            | Amount             | Date               | Category
+1.Chicken Rice           | $5.00              | 2021-10-13         | FOOD
+Your loans: 
+No Loan records yet.
 ========================================================
 Your budget for November: Not Set
 Your expenditures:
- None 
+No Expenditure records yet.
+Your loans: 
+No Loan records yet.
 ========================================================
-Your budget for December: $500.0
+Your budget for December: $500.00
 Your expenditures:
- None 
+No Expenditure records yet.
+Your loans: 
+No Loan records yet.
 ========================================================
 ```
 <br />
@@ -603,8 +628,8 @@ _________________________________________________________
 
 # &nbsp;&nbsp; Stat: `stat`
 
-The command word `stat` display some statistics graphs and paramters about the expenditure for 
-the year or month.
+The command word `stat` display some statistics graphs and information about the expenditure for 
+the year or particular month.
 
 _________________________________________________________
 <br />
