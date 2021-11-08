@@ -2,7 +2,8 @@
   "audio" : [ {
     "title" : "CD",
     "id" : "124",
-    "status" : "AVAILABLE",
+    "status" : "RESERVED",
+    "loanee" : "jack",
     "artist" : "Michael Jackson",
     "duration" : "2h"
   }, {
@@ -15,12 +16,16 @@
   "book" : [ {
     "title" : "Harry Potter",
     "id" : "123",
-    "status" : "AVAILABLE",
+    "status" : "LOANED",
+    "loanee" : "john",
+    "dueDate" : "20-10-2021",
     "author" : "JK Rowling"
   }, {
     "title" : "TITLE",
     "id" : "ID",
-    "status" : "AVAILABLE",
+    "status" : "LOANED",
+    "loanee" : "jack",
+    "dueDate" : "20-10-2021",
     "author" : "AUTHOR"
   } ],
   "item" : [ {
@@ -32,7 +37,9 @@
   }, {
     "title" : "title",
     "id" : "127",
-    "status" : "AVAILABLE"
+    "status" : "LOANED",
+    "loanee" : "john",
+    "dueDate" : "12-11-2021"
   } ],
   "magazine" : [ {
     "title" : "title",
@@ -44,7 +51,9 @@
   "video" : [ {
     "title" : "title",
     "id" : "125",
-    "status" : "AVAILABLE",
+    "status" : "LOANED",
+    "loanee" : "jack",
+    "dueDate" : "20-10-2021",
     "publisher" : "pub",
     "duration" : "dur"
   } ]
