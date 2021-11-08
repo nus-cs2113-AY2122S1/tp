@@ -9,7 +9,11 @@ import seplanner.ui.UiMapping;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+/**
+ * University object to represent a partner university for SEP.
+ */
 public class University implements Comparator<University> {
+
     protected int index;
     protected String name;
     public ArrayList<ModuleMapping> list;

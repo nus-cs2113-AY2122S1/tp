@@ -1,6 +1,10 @@
 package seplanner.modules;
 
+/**
+ * Module mapping class considering one NUS module and one partner university module.
+ */
 public class ModuleMapping {
+
     protected Module localModule;
     protected Module mappedModule;
 

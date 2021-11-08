@@ -213,7 +213,7 @@ In the printUniversity Method,
 #### API : [`Storage.java`](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob/master/src/main/java/seplanner/storage/Storage.java)
 
 <p align = "center">
-<img src="images/storage.png" width = "800" />
+<img src="images/storage.png" width = "1600" />
 </p>
 
 The storage component can implement the below features:
@@ -240,7 +240,7 @@ from the CSV type files (`University.csv` and `modules.csv`) stored in the resou
 The following diagram is the class diagram of the university related classes:
 
 <p align = "center">
-<img src="images/universities.png" width = "300" />
+<img src="images/universities.png" width = "350" />
 </p>
 
 This component consist of the following classes:  

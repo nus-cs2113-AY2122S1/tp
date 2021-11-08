@@ -3,7 +3,12 @@ package seplanner.modules;
 import java.util.Comparator;
 
 //@@author MAZJ124
+
+/**
+ * Module class used to represent NUS or partner university module.
+ */
 public class Module implements Comparator<Module> {
+
     protected int index;
     protected String moduleCode;
     protected String moduleName;
