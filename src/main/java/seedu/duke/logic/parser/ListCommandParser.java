@@ -8,9 +8,9 @@ import seedu.duke.logic.commands.module.ListModuleCommand;
 import seedu.duke.logic.commands.task.ListTaskCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
-import static seedu.duke.commons.core.CommandFormat.LIST_TASK_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.LIST_LESSON_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.LIST_MODULE_FORMAT;
+import static seedu.duke.commons.core.CommandFormat.LIST_TASK_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.promptFormat;
 import static seedu.duke.commons.util.DayUtil.isToday;
 import static seedu.duke.commons.util.DayUtil.isTomorrow;

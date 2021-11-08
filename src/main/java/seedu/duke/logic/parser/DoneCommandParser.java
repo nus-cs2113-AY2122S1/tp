@@ -30,7 +30,6 @@ public class DoneCommandParser {
     }
 
     private static Command parseDoneTaskCommand(String userResponse) throws ParseException {
-        // TODO: Implement batch marking
         try {
             int taskIndex = parseToZeroIndex(Integer.parseInt(userResponse));
             return new DoneTaskCommand(taskIndex);
