@@ -86,19 +86,7 @@ public class SetAttendanceCommand extends Command {
         }
 
         String present = argumentMap.get(KEY_PRESENT);
-        boolean isPresent;
-        switch (present) {
-        case PRESENT_VALUE:
-            isPresent = true;
-            break;
-
-        case ABSENT_VALUE:
-            isPresent = false;
-            break;
-
-        default:
-            throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_PRESENT, PRESENT_VALUE, ABSENT_VALUE));
-        }
+        boolean isPresent = setIsPresent(present);
 
         String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
         StudentIndexArray studentIndexes = new StudentIndexArray();
@@ -130,6 +118,25 @@ public class SetAttendanceCommand extends Command {
         storage.save(classList);
 
         ui.printMessage(String.format(MESSAGE_FORMAT_SET_ATTENDANCE, stringBuilder));
+    }
+
+    /**
+     * Sets the boolean variable isPresent based on the user input for present value.
+     * @param present The present value of the student. Can be 1 or 0.
+     * @return True if present value is 1. False if present value is 0.
+     * @throws TaaException If the user inputs an invalid format for present value.
+     */
+    private boolean setIsPresent(String present) throws TaaException {
+        switch (present) {
+        case PRESENT_VALUE:
+            return true;
+
+        case ABSENT_VALUE:
+            return false;
+
+        default:
+            throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_PRESENT, PRESENT_VALUE, ABSENT_VALUE));
+        }
     }
 
     /**
