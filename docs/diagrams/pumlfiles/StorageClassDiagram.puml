@@ -1,8 +1,17 @@
 @startuml
 hide circle
 skinparam classAttributeIconSize 0
+hide empty members
+
+' @@author CrimsonTitan79
 
 package medbot.storage {
+
+skinparam class {
+    BackgroundColor #CFBFFF
+    BorderColor #13004C
+    ArrowColor #13004C
+}
 
 class StorageManager {
 + StorageManager(scheduler, ui)
@@ -32,6 +41,8 @@ class StaffStorage
 StorageManager --> "1" AppointmentStorage
 PatientStorage "1"<-- StorageManager
 StaffStorage "1"<-- StorageManager
+
+"{abstract} \n Storage" ..> "<<enumeration>> \n ListItemType"
 
 "{abstract} \n Storage" <|-- AppointmentStorage
 "{abstract} \n Storage" <|-- "{abstract} \n PersonStorage"
