@@ -39,9 +39,8 @@ public class SelectCommand extends Command {
 
     @Override
     public void run(DataManager dataManager, ModuleManager moduleManager, Ui ui, RecipeManager recipeManager,
-            Storage storage)
-            throws ModuleManagerException, CommandException, DataManagerException, ModuleException, RecipeException,
-            RecipeManagerException {
+            Storage storage) throws ModuleManagerException, CommandException, DataManagerException, ModuleException,
+            RecipeException, RecipeManagerException {
         assert selectCategory != null : "selectCategory should not be null";
         assert itemName != null : "itemName should not be null";
         assert parameters != null : "parameters should not be null";

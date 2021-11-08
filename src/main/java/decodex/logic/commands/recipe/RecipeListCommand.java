@@ -32,8 +32,7 @@ public class RecipeListCommand extends Command {
 
     @Override
     public void run(DataManager dataManager, ModuleManager moduleManager, Ui ui, RecipeManager recipeManager,
-            Storage storage)
-            throws CommandException, ModuleException, RecipeManagerException {
+            Storage storage) throws CommandException, ModuleException, RecipeManagerException {
         Recipe recipe;
 
         if (recipeName.isBlank()) {

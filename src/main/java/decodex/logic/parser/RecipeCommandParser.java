@@ -88,8 +88,7 @@ public class RecipeCommandParser extends Parser {
      * @param numberOfArguments The valid number of arguments.
      * @throws CommandException If the number of arguments is invalid.
      */
-    private void checkValidNumberOfArguments(String[] subCommandTokens, int numberOfArguments)
-            throws CommandException {
+    private void checkValidNumberOfArguments(String[] subCommandTokens, int numberOfArguments) throws CommandException {
         if (subCommandTokens.length > numberOfArguments) {
             throw new CommandException(ErrorMessages.TOO_MANY_COMMAND_ARGUMENTS);
         } else if (subCommandTokens.length < numberOfArguments) {
