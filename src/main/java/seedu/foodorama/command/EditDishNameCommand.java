@@ -18,6 +18,8 @@ import java.util.logging.Logger;
 public class EditDishNameCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger("EditDishCommand");
     private static final Ui UI = new Ui();
+    private static final int INDEX_ZERO = 0;
+    private static final int INDEX_OFFSET = 1;
 
     EditDishNameCommand() {
         LoggerManager.setupLogger(LOGGER);
@@ -40,11 +42,11 @@ public class EditDishNameCommand extends Command {
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         LOGGER.log(Level.INFO, "Start of process");
-        String dish = parameters.get(0);
+        String dish = parameters.get(INDEX_ZERO);
         int dishIndex;
         if (isNumber(dish)) {
             if (isInteger(dish)) {
-                dishIndex = Integer.parseInt(parameters.get(0)) - 1;
+                dishIndex = Integer.parseInt(parameters.get(INDEX_ZERO)) - INDEX_OFFSET;
                 LOGGER.log(Level.INFO, "Parameter is Integer " + dishIndex);
             } else {
                 throw new FoodoramaException(UI.getInvalidIndexMsg());
@@ -55,9 +57,11 @@ public class EditDishNameCommand extends Command {
         } else {
             dishIndex = DishList.find(dish);
         }
+        // If user input is not a number and index cannot be found
         if (!isNumber(dish) & dishIndex == -1) {
             LOGGER.log(Level.INFO, "Dish does not exist");
             throw new FoodoramaException(UI.getDishNotExistMsg(dish));
+        // If dish index is out of bounds
         } else if (dishIndex < 0 || dishIndex >= DishList.dishList.size()) {
             LOGGER.log(Level.INFO, "Dish Index is not within Dish List Range");
             throw new FoodoramaException(UI.getDishIndexExceedSizeMsg());
@@ -99,6 +103,7 @@ public class EditDishNameCommand extends Command {
     public boolean isInteger(String numberString) {
         if (isNumber(numberString)) {
             double number = Double.parseDouble(numberString);
+            // Check if integer when rounded number - number == 0
             return Math.rint(number) - number == 0;
         } else {
             return false;

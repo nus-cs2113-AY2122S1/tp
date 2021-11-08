@@ -9,7 +9,8 @@ import java.util.List;
  * Handles the parsing of user inputs to extract the command and parameters.
  */
 public class InputParser {
-    public Ui ui = new Ui();
+    private static final Ui UI = new Ui();
+    private static final int SPLIT_LIMIT = 2;
 
     /**
      * Gets the command type the user gave from the input.
@@ -26,7 +27,7 @@ public class InputParser {
                 return command;
             }
         }
-        throw new FoodoramaException(ui.getInvalidCommandMsg());
+        throw new FoodoramaException(UI.getInvalidCommandMsg());
     }
 
     /**
@@ -82,8 +83,8 @@ public class InputParser {
 
         //Multi param is same as one but will need to split further
         case LINK:
-            String[] splitString = parameterString.split("/", 2);
-            if (splitString.length != 2) {
+            String[] splitString = parameterString.split("/", SPLIT_LIMIT);
+            if (splitString.length != SPLIT_LIMIT) {
                 throw new FoodoramaException(ui.getMissingParameters());
             }
             for (String param : splitString) {

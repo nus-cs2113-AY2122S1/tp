@@ -19,7 +19,7 @@ import java.util.Scanner;
  */
 public class Ingredient implements Comparable<Ingredient> {
 
-    public static final String YES_NO_REGEX = "^(y|yes|n|no)$";
+    private static final String YES_NO_REGEX = "^(y|yes|n|no)$";
     private static final String YES = "y";
     private static final String NO = "n";
     private static final int LOOP = 0;
@@ -30,6 +30,7 @@ public class Ingredient implements Comparable<Ingredient> {
     private double ingredientWaste;
     private double ingredientWasteDish;
     private double limit;
+    private static final int WEIGHT_SOFT_LIMIT = 10000;
     private LocalDate expiryDate;
     private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -181,15 +182,16 @@ public class Ingredient implements Comparable<Ingredient> {
             }
 
             ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
+            // while ingredientWeightValue is negative
             while (ingredientWeightValue < 0) {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printInvalidIngrWeight(inputIngredientWeight);
                 inputIngredientWeight = in.nextLine();
                 ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
             }
-            if (Double.isInfinite(ingredientWeightValue) | Double.isNaN(ingredientWeightValue)) {
+            if (Double.isInfinite(ingredientWeightValue) || Double.isNaN(ingredientWeightValue)) {
                 throw new FoodoramaException(UI.printNumericalInputInvalid("dish waste"));
-            } else if (ingredientWeightValue > 10000) {
+            } else if (ingredientWeightValue > WEIGHT_SOFT_LIMIT) {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printIngrValueHigh(ingredientName);
                 confirmAdd = in.nextLine();
@@ -202,8 +204,10 @@ public class Ingredient implements Comparable<Ingredient> {
                     ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
                 }
             }
+            // If inputIngredientWeight is a number and ingredientWeight is zero or positive and inputWastage is less
+            // than or equal to the soft limit
             if ((isNumber(inputIngredientWeight) && (ingredientWeightValue >= 0)
-                    && (ingredientWeightValue <= 10000)) | confirmAdd.startsWith(YES)) {
+                    && (ingredientWeightValue <= WEIGHT_SOFT_LIMIT)) || confirmAdd.startsWith(YES)) {
                 loop = EXIT;
             }
         }
@@ -226,6 +230,7 @@ public class Ingredient implements Comparable<Ingredient> {
         double userLimit;
         try {
             userLimit = Double.parseDouble(inputLimit);
+            // while userLimit is negative
             while (userLimit < 0) {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printInvalidIngrLimitValue(ingredientName);
@@ -235,7 +240,7 @@ public class Ingredient implements Comparable<Ingredient> {
         } catch (NumberFormatException e) {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
-        if (Double.isInfinite(userLimit) | Double.isNaN(userLimit)) {
+        if (Double.isInfinite(userLimit) || Double.isNaN(userLimit)) {
             throw new FoodoramaException(UI.printNumericalInputInvalid("ingredient limit"));
         }
         limit = userLimit;
@@ -269,9 +274,9 @@ public class Ingredient implements Comparable<Ingredient> {
                 ingredientWeight = in.nextLine();
                 ingredientWeightValue = Double.parseDouble(ingredientWeight);
             }
-            if (Double.isInfinite(ingredientWeightValue) | Double.isNaN(ingredientWeightValue)) {
+            if (Double.isInfinite(ingredientWeightValue) || Double.isNaN(ingredientWeightValue)) {
                 throw new FoodoramaException(UI.printNumericalInputInvalid("dish waste"));
-            } else if (ingredientWeightValue > 10000) {
+            } else if (ingredientWeightValue > WEIGHT_SOFT_LIMIT) {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printIngrWasteValueHigh(ingredientName);
                 confirmAdd = in.nextLine();
@@ -285,7 +290,7 @@ public class Ingredient implements Comparable<Ingredient> {
                 }
             }
             if ((isNumber(ingredientWeight) && (ingredientWeightValue >= 0)
-                    && (ingredientWeightValue <= 10000)) | confirmAdd.startsWith(YES)) {
+                    && (ingredientWeightValue <= WEIGHT_SOFT_LIMIT)) || confirmAdd.startsWith(YES)) {
                 loop = EXIT;
             }
         }
@@ -333,6 +338,7 @@ public class Ingredient implements Comparable<Ingredient> {
             expiryDateString = "No expiry date has been set";
         } else {
             long daysBetweenExpiryToday = ChronoUnit.DAYS.between(LocalDate.now(), expiryDate);
+            // if days between expiry and today's date is greater than zero
             if (daysBetweenExpiryToday > 0) {
                 expiryDateString = expiryDate.format(dtf) + " (" + daysBetweenExpiryToday + " day(s) from today)";
             } else {
@@ -403,6 +409,9 @@ public class Ingredient implements Comparable<Ingredient> {
     public int compareTo(Ingredient o) {
         double wastage = ingredientWasteDish + ingredientWaste;
         double diff = (o.getWastage() - wastage);
+        // if (difference is zero or positive) and (difference is zero) return 0;
+        // else if (difference is zero or positive) but (difference is not zero) return 1;
+        // else return -1;
         return (diff >= 0) ? (diff == 0) ? 0 : 1 : -1;
     }
 

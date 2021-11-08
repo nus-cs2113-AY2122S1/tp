@@ -16,9 +16,10 @@ import java.util.logging.Logger;
  * @author Dniv-ra
  */
 public class AddDishCommand extends Command {
-    public static final String numberRegex = "^[\\d\\s.]+$";
+    private static final String numberRegex = "^[\\d\\s.]+$";
     private static Logger LOGGER = Logger.getLogger("AddDishCommand.execute()");
     private static final Ui UI = new Ui();
+    private static final int INDEX_ZERO = 0;
 
     AddDishCommand() {
         LoggerManager.setupLogger(LOGGER);
@@ -37,10 +38,11 @@ public class AddDishCommand extends Command {
      */
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
-        String dish = parameters.get(0);
+        String dish = parameters.get(INDEX_ZERO);
         if (dish.isBlank()) {
             LOGGER.log(Level.INFO, "Dish Name is Empty");
             throw new FoodoramaException(UI.getDishNameMissingMsg());
+        // If can find dish (value is not negative), dish already exists
         } else if (DishList.find(dish) >= 0) {
             LOGGER.log(Level.INFO, "Dish already exists ", dish);
             throw new FoodoramaException(UI.getDishExistsMsg(dish));

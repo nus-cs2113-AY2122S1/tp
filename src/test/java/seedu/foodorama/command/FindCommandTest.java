@@ -35,7 +35,7 @@ class FindCommandTest {
         testFindDishCommand.execute(inputParamsDish);
         String actualOutDish = dishOutput.toString().trim();
 
-        assertTrue(actualOutDish.contains("chicken rice") & actualOutDish.contains("fried rice"));
+        assertTrue(actualOutDish.contains("chicken rice") && actualOutDish.contains("fried rice"));
 
         ArrayList<String> inputParamsIngr = new ArrayList<>();
         inputParamsIngr.add("chicken");

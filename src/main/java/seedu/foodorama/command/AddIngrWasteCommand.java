@@ -19,6 +19,9 @@ import java.util.logging.Logger;
 public class AddIngrWasteCommand extends Command {
     private static Logger LOGGER = Logger.getLogger("AddIngrWasteCommand.execute()");
     private static Ui UI = new Ui();
+    private static final int INDEX_ZERO = 0;
+    private static final int INDEX_OFFSET = 1;
+
 
     AddIngrWasteCommand() {
         LoggerManager.setupLogger(LOGGER);
@@ -46,7 +49,7 @@ public class AddIngrWasteCommand extends Command {
         int ingredientIndex;
         if (isNumber(ingredient)) {
             if (isInteger(ingredient)) {
-                ingredientIndex = Integer.parseInt(ingredient) - 1;
+                ingredientIndex = Integer.parseInt(ingredient) - INDEX_OFFSET;
             } else {
                 throw new FoodoramaException(UI.getInvalidIndexMsg());
             }
@@ -55,9 +58,11 @@ public class AddIngrWasteCommand extends Command {
         }
         if (ingredient.isBlank()) {
             throw new FoodoramaException(UI.getIngrNameMissingMsg());
-        } else if (!isNumber(ingredient) & ingredientIndex == -1) {
+        // If ingredient is not found and is not a number
+        } else if (!isNumber(ingredient) && ingredientIndex == -1) {
             LOGGER.log(Level.INFO, "Ingredient does not exist");
             throw new FoodoramaException(UI.getIngrNotExistMsg());
+        // If ingredient index is out of bounds
         } else if (ingredientIndex < 0 || ingredientIndex >= IngredientList.ingredientList.size()) {
             LOGGER.log(Level.INFO, "Ingredient index is wrong");
             throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());

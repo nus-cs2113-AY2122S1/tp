@@ -19,6 +19,8 @@ import java.util.logging.Logger;
 public class AddIngrStoredCommand extends Command {
     private static final Logger logger = Logger.getLogger("AddIngrStoredCommand.execute()");
     private static final Ui UI = new Ui();
+    private static final int INDEX_ZERO = 0;
+    private static final int INDEX_OFFSET = 1;
 
     AddIngrStoredCommand() {
         LoggerManager.setupLogger(logger);
@@ -42,11 +44,11 @@ public class AddIngrStoredCommand extends Command {
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         logger.log(Level.INFO, "Start of process");
-        String ingredient = parameters.get(0);
+        String ingredient = parameters.get(INDEX_ZERO);
         int ingredientIndex;
         if (isNumber(ingredient)) {
             if (isInteger(ingredient)) {
-                ingredientIndex = Integer.parseInt(ingredient) - 1;
+                ingredientIndex = Integer.parseInt(ingredient) - INDEX_OFFSET;
             } else {
                 throw new FoodoramaException(UI.getInvalidIndexMsg());
             }
@@ -55,9 +57,11 @@ public class AddIngrStoredCommand extends Command {
         }
         if (ingredient.isBlank()) {
             throw new FoodoramaException(UI.getIngrNameMissingMsg());
-        } else if (!isNumber(ingredient) & ingredientIndex == -1) {
+        // If ingredient cannot be found and is not a number
+        } else if (!isNumber(ingredient) && ingredientIndex == -1) {
             logger.log(Level.INFO, "Ingredient does not exist");
             throw new FoodoramaException(UI.getIngrNotExistMsg());
+        // If ingredient index is out of bounds
         } else if (ingredientIndex < 0 || ingredientIndex >= IngredientList.ingredientList.size()) {
             logger.log(Level.INFO, "Ingredient index is wrong");
             throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());
@@ -99,6 +103,7 @@ public class AddIngrStoredCommand extends Command {
     public boolean isInteger(String numberString) {
         if (isNumber(numberString)) {
             double number = Double.parseDouble(numberString);
+            // Check if integer when rounded number - number == 0
             return Math.rint(number) - number == 0;
         } else {
             return false;

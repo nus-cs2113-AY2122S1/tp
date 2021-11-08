@@ -22,6 +22,7 @@ public class ListCommand extends Command {
     private static final String DISH = "dish";
     private static final String INGR = "ingr";
     private static final Ui UI = new Ui();
+    private static final int INDEX_ZERO = 0;
 
     /**
      * User command to view the list of existing ingredients or dishes
@@ -34,7 +35,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
-        switch (parameters.get(0)) {
+        switch (parameters.get(INDEX_ZERO)) {
         case DISH:
             DishList.list();
             break;

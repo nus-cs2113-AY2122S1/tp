@@ -14,7 +14,7 @@ import java.util.Scanner;
  * @author renzocanare, jhsee5, Rakesh12000, Dniv-ra
  */
 public class IngredientList {
-    public static final String YES_NO_REGEX = "^(y|yes|n|no)$";
+    private static final String YES_NO_REGEX = "^(y|yes|n|no)$";
     private static final Ui UI = new Ui();
     private static final String YES = "y";
     private static final String NO = "n";
@@ -25,6 +25,7 @@ public class IngredientList {
     private static final int TEN_YEARS_IN_DAYS = 3650;
     private static final int ZERO_DAYS = 0;
     private static final int SOFT_WEIGHT_LIMIT = 10000;
+    private static final int SIZE_OFFSET = 1;
     public static ArrayList<Ingredient> ingredientList = new ArrayList<>();
 
     /**
@@ -54,7 +55,7 @@ public class IngredientList {
                 ingredientWeight = in.nextLine();
                 ingredientWeightValue = Double.parseDouble(ingredientWeight);
             }
-            if (Double.isInfinite(ingredientWeightValue) | Double.isNaN(ingredientWeightValue)) {
+            if (Double.isInfinite(ingredientWeightValue) || Double.isNaN(ingredientWeightValue)) {
                 throw new FoodoramaException(UI.printNumericalInputInvalid("dish waste"));
             } else if (ingredientWeightValue > SOFT_WEIGHT_LIMIT) {
                 UI.clearTerminalAndPrintNewPage();
@@ -169,7 +170,7 @@ public class IngredientList {
                 }
                 ingredientList.remove(ingredientIndex);
                 UI.printIngrNameRemoved(ingredientName);
-                assert ingredientList.size() == (listSize - 1) : "ingredientList should be of size N-1";
+                assert ingredientList.size() == (listSize - SIZE_OFFSET) : "ingredientList should be of size N-1";
             } else {
                 UI.printDisregardMsg();
             }
@@ -354,9 +355,9 @@ public class IngredientList {
                 inputIngredientWeight = in.nextLine();
                 ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
             }
-            if (Double.isInfinite(ingredientWeightValue) | Double.isNaN(ingredientWeightValue)) {
+            if (Double.isInfinite(ingredientWeightValue) || Double.isNaN(ingredientWeightValue)) {
                 throw new FoodoramaException(UI.printNumericalInputInvalid("dish waste"));
-            } else if (ingredientWeightValue > 10000) {
+            } else if (ingredientWeightValue > SOFT_WEIGHT_LIMIT) {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printIngrValueHigh(ingrName);
                 confirmAdd = in.nextLine();
@@ -370,7 +371,7 @@ public class IngredientList {
                 }
             }
             if ((isDouble(inputIngredientWeight) && (ingredientWeightValue >= 0)
-                    && (ingredientWeightValue <= 10000)) | confirmAdd.startsWith(YES)) {
+                    && (ingredientWeightValue <= SOFT_WEIGHT_LIMIT)) || confirmAdd.startsWith(YES)) {
                 loop = EXIT;
             }
         }
@@ -422,7 +423,7 @@ public class IngredientList {
             } catch (NumberFormatException | FoodoramaException e) {
                 throw new FoodoramaException(UI.getInvalidNumberMsg());
             }
-            if (Double.isInfinite(newWeight) | Double.isNaN(newWeight)) {
+            if (Double.isInfinite(newWeight) || Double.isNaN(newWeight)) {
                 throw new FoodoramaException(UI.printNumericalInputInvalid("ingredient storage"));
             }
             Double ingrWeight = ingredientList.get(ingrIndex).getIngredientWeight();

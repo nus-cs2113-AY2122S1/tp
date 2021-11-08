@@ -21,11 +21,12 @@ public class Dish implements Comparable<Dish> {
     private static final Logger LOGGER = Logger.getLogger("Dish class");
     private ArrayList<Ingredient> parts = new ArrayList<>();
     private static final Ui UI = new Ui();
-    public static final String YES_NO_REGEX = "^(y|yes|n|no)$";
+    private static final String YES_NO_REGEX = "^(y|yes|n|no)$";
     private static final String YES = "y";
     private static final String NO = "n";
     private static final int LOOP = 0;
     private static final int EXIT = 1;
+    private static final int WEIGHT_SOFT_LIMIT = 10000;
     private String dishName;
     private double wastage;
     private double limit;
@@ -39,6 +40,7 @@ public class Dish implements Comparable<Dish> {
      * @author Dniv-ra
      */
     public Dish(String dishName) {
+        // Initialize ingredient fields to zero, set no limit
         LoggerManager.setupLogger(LOGGER);
         LOGGER.log(Level.INFO, "Calling default constructor");
         this.dishName = dishName;
@@ -139,6 +141,7 @@ public class Dish implements Comparable<Dish> {
         double userLimit;
         try {
             userLimit = Double.parseDouble(inputLimit);
+            // While limit is negative
             while (userLimit < 0) {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printInvalidDishLimitValue(dishName);
@@ -148,7 +151,7 @@ public class Dish implements Comparable<Dish> {
         } catch (NumberFormatException e) {
             throw new FoodoramaException(UI.getInvalidNumberMsg());
         }
-        if (Double.isInfinite(userLimit) | Double.isNaN(userLimit)) {
+        if (Double.isInfinite(userLimit) || Double.isNaN(userLimit)) {
             throw new FoodoramaException(UI.printNumericalInputInvalid("dish limit"));
         }
         limit = userLimit;
@@ -186,6 +189,7 @@ public class Dish implements Comparable<Dish> {
      */
     public void addPart(String ingredientName) {
         int ingredientIndex = IngredientList.find(ingredientName);
+        // If ingredientIndex cannot be found
         if (ingredientIndex == -1) {
             UI.printIngrNotExistMsg();
         } else {
@@ -228,15 +232,16 @@ public class Dish implements Comparable<Dish> {
             }
 
             inputWastage = Double.parseDouble(dishWaste);
+            // While inputWastage is negative
             while (inputWastage < 0) {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printInvalidDishWasteValue(dishName);
                 dishWaste = in.nextLine();
                 inputWastage = Double.parseDouble(dishWaste);
             }
-            if (Double.isInfinite(inputWastage) | Double.isNaN(inputWastage)) {
+            if (Double.isInfinite(inputWastage) || Double.isNaN(inputWastage)) {
                 throw new FoodoramaException(UI.printNumericalInputInvalid("dish waste"));
-            } else if (inputWastage > 10000) {
+            } else if (inputWastage > WEIGHT_SOFT_LIMIT) {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printDishWasteValueHigh(dishName);
                 confirmAdd = in.nextLine();
@@ -249,7 +254,10 @@ public class Dish implements Comparable<Dish> {
                     inputWastage = Double.parseDouble(dishWaste);
                 }
             }
-            if ((isNumber(dishWaste) && (inputWastage >= 0) && (inputWastage <= 10000)) | confirmAdd.startsWith(YES)) {
+            // If dishWaste is a number and inputWastage is zero or positive and inputWastage is less than or equal to
+            // the soft limit
+            if ((isNumber(dishWaste) && (inputWastage >= 0) && (inputWastage <= WEIGHT_SOFT_LIMIT))
+                    || confirmAdd.startsWith(YES)) {
                 loop = EXIT;
             }
         }
@@ -362,6 +370,9 @@ public class Dish implements Comparable<Dish> {
     @Override
     public int compareTo(Dish o) {
         double diff = (o.wastage - wastage);
+        // if (difference is zero or positive) and (difference is zero) return 0;
+        // else if (difference is zero or positive) but (difference is not zero) return 1;
+        // else return -1;
         return (diff >= 0) ? (diff == 0) ? 0 : 1 : -1;
     }
 

@@ -18,6 +18,8 @@ import java.util.logging.Logger;
 public class EditDishWasteCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger("EditDishCommand");
     private static final Ui UI = new Ui();
+    private static final int INDEX_ZERO = 0;
+    private static final int INDEX_OFFSET = 1;
 
     EditDishWasteCommand() {
         LoggerManager.setupLogger(LOGGER);
@@ -41,9 +43,9 @@ public class EditDishWasteCommand extends Command {
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         LOGGER.log(Level.INFO, "Start of process");
         int dishIndex;
-        if (isNumber(parameters.get(0))) {
-            if (isInteger(parameters.get(0))) {
-                dishIndex = Integer.parseInt(parameters.get(0)) - 1;
+        if (isNumber(parameters.get(INDEX_ZERO))) {
+            if (isInteger(parameters.get(INDEX_ZERO))) {
+                dishIndex = Integer.parseInt(parameters.get(INDEX_ZERO)) - INDEX_OFFSET;
                 LOGGER.log(Level.INFO, "Parameter is Integer " + dishIndex);
             } else {
                 throw new FoodoramaException(UI.getInvalidIndexMsg());
@@ -89,6 +91,7 @@ public class EditDishWasteCommand extends Command {
     public boolean isInteger(String numberString) {
         if (isNumber(numberString)) {
             double number = Double.parseDouble(numberString);
+            // Check if integer when rounded number - number == 0
             return Math.rint(number) - number == 0;
         } else {
             return false;
