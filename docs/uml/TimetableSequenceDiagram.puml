@@ -5,7 +5,6 @@
 box Command COMMAND_BOX_COLOR
 participant ":TimetableCommand" as TimetableCommand COMMAND_COLOR
 endbox
-participant ":Timetable" as Timetable
 
 
 box Module MODULE_BOX_COLOR
@@ -14,6 +13,7 @@ participant ":NusModule" as NusModule MODULE_COLOR
 endbox
 
 box Content CONTENT_BOX_COLOR
+participant ":Timetable" as Timetable  CONTENT_COLOR
 participant ":ContentManager" as ContentManager CONTENT_COLOR
 participant ":Link" as Link CONTENT_COLOR
 endbox
@@ -39,7 +39,7 @@ Timetable --> TimetableCommand: weeklyScehdule
 Deactivate Timetable
 
 
-else
+else else
 ref over TimetableCommand, Timetable, ModuleManager, NusModule, ContentManager
 getDailySchedule
 end

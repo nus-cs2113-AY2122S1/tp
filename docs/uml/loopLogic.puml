@@ -1,0 +1,58 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include SequenceStyle.puml
+
+box "Main" TERMINUS_BOX_COLOR
+participant ":Terminus" as Terminus TERMINUS_COLOR
+endbox
+box "UI" UI_BOX_COLOR
+participant ":Ui" as Ui
+endbox
+box "Parser" PARSER_BOX_COLOR
+participant ":CommandParser" as CommandParser PARSER_COLOR
+endbox
+box "Command" COMMAND_BOX_COLOR
+participant ":Command" as Command COMMAND_COLOR
+participant ":CommandResult" as CommandResult COMMAND_COLOR
+endbox
+box "Storage" STORAGE_BOX_COLOR
+participant ":StorageManager" as StorageManager STORAGE_COLOR
+endbox
+autoactivate on
+mainframe sd Loop Logic
+activate Terminus
+Terminus -> Ui : requestCommand ()
+return String
+Terminus -> Terminus: handleUserInput(input)
+  Terminus -> CommandParser: parseCommand(input)
+  return Command
+  Terminus -> Command : execute(moduleManager)
+  create CommandResult
+  Command -> CommandResult
+  return CommandResult
+return CommandResult
+return CommandResult
+break commandResult.isExit() == true
+  note over Terminus, CommandResult : Breaks out of loop and Returns runCommandsUntilExit()
+end
+Terminus -> Terminus: handleCommandResult(commandResult)
+  alt commandResult.getNewCommandParser() != null
+    Terminus -> CommandResult: getNewCommandParser()
+    return CommandParser
+    Terminus -> Ui:printParserBanner(parser, moduleManager)
+    return
+  else else
+    Terminus -> Ui:printSection(commandResult.getMessage())
+    return
+  end
+return
+Terminus -> Terminus: handleStorage(commandResult)
+  opt commandResult.hasChange() == true
+    Terminus -> StorageManager: executeCommandResult(moduleManager, commandResult)
+    return
+  end
+  Terminus -> StorageManager: updateMainJsonFile(moduleManager)
+  return
+return
+destroy CommandResult
+@enduml

@@ -62,7 +62,7 @@ class TerminusTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         Terminus terminus = new Terminus(new Ui(in), MainCommandParser.getInstance(), 
             TestFilePath.RESOURCE_DATA_FOLDER);
-        terminus.run();
+        terminus.start();
     }
     
     @Test

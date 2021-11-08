@@ -197,16 +197,23 @@ The next sequence diagram shows the loading of user data into `Terminus`.
 
 ![](attachments/MainInit.png)  
 
-The next sequence diagram shows an instance of command execution.
+The next sequence diagram shows an instance the main logic loop.
 
 ![](attachments/MainLogic.png)
 > 📝 **Note:** The cross on each lifeline represents the end of objects lifeline. 
 > Due to the limitation of PlantUML the line continues to extend. 
 
+The next sequence diagram shows an instance of command execution.
+![](attachments/loopLogic.png)
+
+<div style="page-break-after: always;"></div>
+
 The next sequence diagram show the termination of `Terminus`  
 
 ![](attachments/MainExit.png)
-  
+
+<div style="page-break-after: always;"></div>
+
 ### 3.2 UI Component
 ![](attachments/UIClassDiagram.png)
 
@@ -221,6 +228,7 @@ The `Ui` implements the following functionality:
 - Getting of user input through `getUserInput()` and `requestCommand()`.
 - Printing string arrays to the output through `printSection()`.
 
+<div style="page-break-after: always;"></div>
 
 ### 3.3 Parser Component
 ![](attachments/ParserClassDiagram.png)
@@ -235,6 +243,7 @@ The `CommandParser` implements the following functionality:
 - Keeps track of the workspace.
 - Provides functionality to list all commands for the help `Command`.
 
+<div style="page-break-after: always;"></div>
 
 ### 3.4 Command Component
 ![](attachments/CommandClassDiagram.png)
@@ -250,6 +259,7 @@ The `CommandResult` will contains certain attributes that will indicate certain 
 - Indicate the if file operations are required and the corresponding actions.
 - Tracks if the program should terminate.
 
+<div style="page-break-after: always;"></div>
 
 ### 3.5 Module Component
 
@@ -265,6 +275,9 @@ The `ModuleManager` implements the below functionality:
 - List all module names.
 - Grants access to the different types of content stored by `NusModule`.
 
+
+<div style="page-break-after: always;"></div>
+
 ### 3.6 Content Component
 ![](attachments/Content.png)
 
@@ -278,6 +291,9 @@ which inherit from the abstract `Content` class. The `ContentManager` allows a g
 - Getting the total number of content.
 - Listing all contents.
 - Accessing the arraylist of contents.
+
+
+<div style="page-break-after: always;"></div>
 
 ### 3.7 Active Recall Component
 ![Active Recall Class Diagram](attachments/ActiveRecallClassDiagram.png)
@@ -299,6 +315,9 @@ after the user has provided feedback on the difficulty of the question. It uses 
 For further details on the implementation, head to 
 [4.2 Active Recall Implementation](#42-active-recall-implementation).
 
+
+<div style="page-break-after: always;"></div>
+
 ### 3.8 Storage Component
 
 
@@ -316,6 +335,8 @@ The `StorageManager` component:
 `TermiNUS` saved these data as either a `.json` or `.txt` file so users will be able to edit saved
 data easily with any available text editor.
 
+
+<div style="page-break-after: always;"></div>
 
 ## 4. Implementation
 
@@ -383,6 +404,7 @@ This section shows the design considerations that were taken into account when i
 Moreover, implementing a timetable for each module might be slightly redundant as a view schedule command could offer a similar functionality albeit not sorted out.
 
 
+<div style="page-break-after: always;"></div>
 
 ### 4.2 Active Recall Implementation
 
@@ -476,7 +498,7 @@ tweak the curve parameters if needed.
 The parameters of the logistic curve can be viewed here:
 [https://www.desmos.com/calculator/qefovvnuhx](https://www.desmos.com/calculator/qefovvnuhx).
 
-
+<div style="page-break-after: always;"></div>
 
 ### 4.3 Workspace Implementation
 
@@ -598,6 +620,7 @@ Eventually the team decide to go with the second implementation, as we require m
 workspaces and would like to create our own workspace for each feature. Aside from that the 
 `Command` provides common functionality that many commands need hence reducing repetition of code.
 
+<div style="page-break-after: always;"></div>
 
 ### 4.4 Conflict Manager Implementation
 
@@ -649,6 +672,8 @@ We hope that all users are aware of the conflicts as soon as possible, so that c
 Although it is slightly challenging to identify conflicts when not adding a new schedule,
 we think that the timetable feature can help in identifying conflicts manually.
 
+<div style="page-break-after: always;"></div>
+
 ### 4.5 Storage Implementation
 
 To view the high-level diagram, head to [3.8 Storage](#38-storage-component).
@@ -696,9 +721,13 @@ of file I/O operations using `NIO2` to be in its own class which is in the `Stor
 of the storage type class to inherit the functionality of the `Storage` class while adding their own
 checks and third party imports on top of it.
 
+<div style="page-break-after: always;"></div>
+
 #### 4.5.2 Loading Storage Implementation
 
 This section details the technical information of `StorageManager` when `Terminus` loads data in the `data` directory.
+
+
 
 ##### 4.5.2.1 Current Implementation
 
@@ -760,9 +789,13 @@ create the specified folder. Due to this, it may abort loading of any notes for 
 ModuleManager. Secondly, this method is meant to load existing data and not to create any data that is not
 the main `data` directory or the `main.json` file.
 
+<div style="page-break-after: always;"></div>
+
 #### 4.5.3 Execute CommandResult with Storage Implementation
 
 This section details the technical information of `StorageManager` when `Terminus` performs required file I/O operations stated in `CommandResult` after an execution of a `Command`.
+
+
 
 ##### 4.5.3.1 Current Implementation
 
@@ -791,6 +824,9 @@ requirements from the execution of a `Command`.
 **Chosen Solution:** Separate file I/O operation by the type of file involved first which is the solution of
 StorageType first. This means that each Storage type have a higher decoupling from one another.
 
+
+<div style="page-break-after: always;"></div>
+
 ### 4.6 Adding Content Implementation
 
 This section details the technical information of adding a `Content` into `ContentManager`.
@@ -814,6 +850,8 @@ store in its arraylist of `Note`.
 **Step 4** Upon, the successful execution of adding the new `Note` into `ContentManager`, it will return a `CommandResult` with
 its respective message for user `Ui` response purposes.
 
+
+
 #### 4.6.2 Design Consideration
 
 **Aspect: Checks arguments in ContentManager or the AddCommand.**
@@ -825,6 +863,8 @@ its respective message for user `Ui` response purposes.
 
 **Chosen Solution:** To validate arguments in the AddCommand instead. This is due to the generic type of
 `ContentManager` that may lead to nested conditions if the arguments are checked within the `ContentManager`.
+
+<div style="page-break-after: always;"></div>
 
 ### 4.7 Deleting Content Implementation
 
@@ -854,6 +894,8 @@ for user `Ui` response purposes.
 
 **Chosen Solution:** To avoid the mixing up of content number and array index, we decided to pass the content number
 into `ContentManager` where it will subtract the given number by 1 to get the index number for the arraylist.
+
+<div style="page-break-after: always;"></div>
 
 ## 5. Documentation, Logging, Testing and DevOps
 
@@ -961,7 +1003,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
 1.  To exit **TermiNUS**, enter the `exit` command.
 
-<br/>
+
 
 
 ### D.2: Workspace Navigation
@@ -983,7 +1025,8 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
 > 💡 Advanced users can navigate to sub-workspaces using a single command. E.g. `go cs2113T schedule`
 
-<br/>
+
+
 
 
 ### D.3: Timetable Feature
@@ -1001,7 +1044,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    b. `timetable 1` (1 is not a valid day)
 
-<br/>
+
 
 
 ### D.4: Module Workspace
@@ -1028,7 +1071,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
     c. `update 0 "cs2101"` (Invalid module index to be updated)
 
-<br/>
+
 
 
 ### D.5: Accessing a Specific Module
@@ -1045,7 +1088,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
     b. `go X` (Where X is not an existing user module)
 
-<br/>
+
 
 
 ### D.6: Accessing the Question Workspace
@@ -1063,7 +1106,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
     c. `question` from the main workspace (Question workspace can not be accessed from the main workspace)
 
-<br/>
+
 
 
 ### D.7: Add Question
@@ -1081,7 +1124,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `add` (A pair of question and answer must be present for an add command)
 
-<br/>
+
 
 
 ### D.8: View Questions
@@ -1102,7 +1145,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `view` from the main workspace (To view questions, execute `view` from the question workspace)
 
-<br/>
+
 
 
 ### D.9: Delete Question
@@ -1120,7 +1163,8 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `delete` (The delete command has to be followed by a valid index)
 
-<br/>
+
+
 
 
 ### D.10: Test Feature
@@ -1134,7 +1178,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    a. `test` from the main workspace (The test feature can only be accessed from the question workspace)
 
-<br/>
+
 
 
 ### D.11: Accessing the Note Workspace
@@ -1152,7 +1196,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `note` from the main workspace (Note workspace can not be accessed from the main workspace)
 
-<br/>
+
 
 
 ### D.12: Add Note
@@ -1170,7 +1214,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `add` (A pair of note title and content must be present for an add command)
 
-<br/>
+
 
 
 ### D.13: View Notes
@@ -1191,7 +1235,6 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `view` from the main workspace (To view notes, execute `view` from the note workspace)
 
-<br/>
 
 
 ### D.14: Delete Note
@@ -1209,7 +1252,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `delete` (The delete command has to be followed by a valid index)
 
-<br/>
+
 
 
 ### D.15: Export Notes
@@ -1225,7 +1268,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    b. `export` from the main workspace (The export command must be executed in the note workspace)
 
-<br/>
+
 
 
 ### D.16: Accessing the Schedule Workspace
@@ -1243,7 +1286,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `schedule` from the main workspace (Schedule workspace can not be accessed from the main workspace)
 
-<br/>
+
 
 
 ### D.17: Add Schedule
@@ -1261,7 +1304,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `add` (All arguments must be present for a valid add command)
 
-<br/>
+
 
 
 ### D.18: View Schedules
@@ -1282,7 +1325,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `view` from the main workspace (To view schedules, execute `view` from the schedule workspace)
 
-<br/>
+
 
 
 ### D.19: Delete Schedule
@@ -1300,7 +1343,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
    c. `delete` (The delete command has to be followed by a valid index)
 
-<br/>
+
 
 
 ### D.20: Help Feature
@@ -1314,7 +1357,7 @@ You may monitor your Codecov progress in your pull request if you successfully p
     
     a. `help X` (Where X is any trailing number or word)
 
-<br/>
+
 
 
 ### D.21: Navigate to Previous Workspace
@@ -1330,4 +1373,4 @@ You may monitor your Codecov progress in your pull request if you successfully p
 
     b. `back` from the main workspace (The back command cannot be used in the main workspace)
 
-<br/>
+
