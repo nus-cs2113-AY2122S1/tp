@@ -1,21 +1,20 @@
 @startuml
-!define ENTITY_COLOR_0 #FF4600
-!define ENTITY_COLOR_1 #FF7100
-!define ENTITY_COLOR_2 #FF9700
-!define ENTITY_COLOR_3 #FFBE00
-!define ENTITY_COLOR_4 #FFF400
-!define ENTITY_COLOR_5 #B6F400
-!define ENTITY_COLOR_6 #8CF400
+!define ENTITY_COLOR_0 #FFF400
+!define ENTITY_COLOR_1 #B6F400
+!define ENTITY_COLOR_2 #32FF32
+!define ENTITY_COLOR_3 #26FFE5
+!define ENTITY_COLOR_4 #00A9FF
+!define ENTITY_COLOR_5 #1966FF
+!define ENTITY_COLOR_6 #7032FF
 
-!define ACTIVATION_COLOR_0 #FF8E66
-!define ACTIVATION_COLOR_1 #FFAC6D
-!define ACTIVATION_COLOR_1a #FFC093
-!define ACTIVATION_COLOR_1b #FFD6BA
-!define ACTIVATION_COLOR_2 #FFBF66
-!define ACTIVATION_COLOR_3 #FFD366
-!define ACTIVATION_COLOR_4 #FFF766
-!define ACTIVATION_COLOR_5 #CDF260
-!define ACTIVATION_COLOR_6 #B5F260
+!define ACTIVATION_COLOR_0 #C8EF53
+!define ACTIVATION_COLOR_1A #C7F248
+!define ACTIVATION_COLOR_1B #D1EF77
+!define ACTIVATION_COLOR_2 #66FF66
+!define ACTIVATION_COLOR_3 #99FFF3
+!define ACTIVATION_COLOR_4 #4CC3FF
+!define ACTIVATION_COLOR_5 #4C88FF
+!define ACTIVATION_COLOR_6 #874CFF
 
 participant ":AddAppointmentCommand" as command ENTITY_COLOR_0
 participant ":Scheduler" as scheduler ENTITY_COLOR_1
@@ -26,8 +25,8 @@ participant ":Staff" as staff ENTITY_COLOR_5
 participant ":SchedulerAppointmentList" as AL ENTITY_COLOR_6
 
 autoactivate on
-command -> scheduler ACTIVATION_COLOR_1: addAppointment(appointment)
-scheduler -> scheduler ACTIVATION_COLOR_1a: checkPatientAvailability\n(patientId, dateTimeCode)
+command -> scheduler ACTIVATION_COLOR_1A: addAppointment(appointment)
+scheduler -> scheduler ACTIVATION_COLOR_1B: checkPatientAvailability\n(patientId, dateTimeCode)
 scheduler -> PL ACTIVATION_COLOR_2: getAppointmentId\n(patientId, dateTimeCode)
 PL -> patient ACTIVATION_COLOR_3: getAppointmentId\n(dateTimeCode)
 patient --> PL: appointmentId
@@ -42,7 +41,7 @@ end note
 end
 
 scheduler --> scheduler
-scheduler -> scheduler ACTIVATION_COLOR_1a: checkStaffAvailability\n(staffId, dateTimeCode)
+scheduler -> scheduler ACTIVATION_COLOR_1B: checkStaffAvailability\n(staffId, dateTimeCode)
 scheduler -> SL ACTIVATION_COLOR_4: getAppointmentId\n(staffId, dateTimeCode)
 SL -> staff ACTIVATION_COLOR_5: getAppointmentId\n(dateTimeCode)
 staff --> SL
@@ -57,7 +56,7 @@ end note
 end
 
 scheduler --> scheduler
-scheduler -> scheduler ACTIVATION_COLOR_1a: insertAppointment(appointment)
+scheduler -> scheduler ACTIVATION_COLOR_1B: insertAppointment(appointment)
 scheduler -> AL ACTIVATION_COLOR_6: addAppointment(appointment)
 AL --> scheduler: appointmentId
 scheduler -> PL ACTIVATION_COLOR_2: addAppointment\n(patientId, appointment)

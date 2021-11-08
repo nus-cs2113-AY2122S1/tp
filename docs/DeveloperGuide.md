@@ -30,8 +30,8 @@
 
 ## 2. Introduction
 
-MedBot is a Command Line Interface (CLI) application for head nurses to manage patients’ personal information, and
-scheduler appointments between them and medical staff.
+MedBot is a Command Line Interface (CLI) application for head nurses to manage patients’ and medical staff's personal 
+information, and schedule appointments between them.
 
 ## 3. Design
 
@@ -60,21 +60,31 @@ In addition, the `Command` class facilitates the execution of user instructions.
 Given below is a simplified sequence diagram of how the core components of MedBot interact with each other when the user
 inputs the command `delete 1`.
 
-![MedBot Architecture](diagrams/overallSequenceDiagram.png)
+![MedBot Architecture](diagrams/OverallSequenceDiagram.png)
 
 ### 3.2 Ui Component
 
-The Ui Component is handled by the `Ui` class. It is the main class that a user directly interacts with. This class is
-responsible for reading user inputs and printing outputs to users.
+The Ui Component is responsible for reading user inputs and printing outputs to users.
 
-The `Ui` class serves as an abstraction over these smaller classes:
+#### Ui Class
 
-* `PersonUi`: Handles the Ui for persons
-    * `PatientUi`: Inherits `PersonUi` to handle patient-related Ui
-    * `StaffUi`: Inherits `PersonUi` to handle staff-related Ui
-* `SchedulerUi`: Handles the Ui for schedulers.
+The Ui Component is handled by the `Ui` class. It handles the reading of user inputs and the printing of outputs. 
 
-How `Ui` works:
+It generates output messages through relying on the following classes.
+
+* `PersonUi`: Generates output messages for patient- and staff-management commands.
+    * `PatientUi`: Inherits `PersonUi` to generate output messages for patient-management commands.
+    * `StaffUi`: Inherits `PersonUi` to generate output messages for staff-management commands.
+* `SchedulerUi`: Generates output messages for scheduler commands.
+
+#### How the Ui component works
+
+##### Reading user inputs
+
+When the user inputs a line of text into the terminal, terminated with a newline character, the line will be read by the
+`readInput()` method of the `Ui` class which will return the String to be parsed by the Parser Component
+
+##### Printing outputs
 
 * After user input is parsed by `Parser`, depending on the current `viewType`, the `Ui` will call methods from
   different `Ui` subclasses
@@ -89,19 +99,25 @@ parses `help delete` input given by a user.
 
 ### 3.3 Parser Component
 
-The Parser Component is responsible for parsing the user input and returning the corresponding command class to be
-executed.
+The Parser Component is responsible for parsing the user input and returning the corresponding Command class object to
+be executed.
 
-Here's a partial class diagram to better illustrate the Parser Component:
+Given below is a partial class diagram to better illustrate the Parser Component:
 
 ![ParserClassDiagram](diagrams/ParserClassDiagram.png)
 
-How the `Parser` component works:
+#### How the Parser component works:
 
-* When `Parser` is called by MedBot to parse the user input, it will call the view specific parser `XYZCommandParser`
-  depending on the current view type (`XYZ` is a placeholder for the specific command name eg. `PatientCommandParser`).
-* The `XYZCommandParser` will then create and return the corresponding
-  `XYZcommand` object by utilising the `ParserUtils` to help it process the user input.
+* After getting the user input, MedBot calls the `parseCommand(userInput)` method of the `Parser` class to parse the
+  input.
+* Depending on the current MedBot view, the `Parser` class then calls the `ParseXYZCommand()` method of the view 
+  specific parser `XYZCommandParser`  (`XYZ` is a placeholder for the current view, namely `Patient`, `Staff` and 
+  `Scheduler`).
+* The `XYZCommandParser` then determines the type of command that the user input corresponds to and calls the 
+  corresponding `parseABCCommand()` method which creates and returns the corresponding `Command` object (`ABC` is a 
+  placeholder for the command type, e.g. `AddPatient`, `DeleteStaff`, `ListAppointment`).
+* The methods in `ParserUtils` are used by the `Parser` and `XYZCommandParser` classes to process some parts of the user
+  input.
 
 The sequence diagram below better illustrates the working process described above:
 
@@ -122,13 +138,13 @@ Here is a partial class diagram to better illustrate the Scheduler Component.
 The `Scheduler` class consists of 3 internal lists, `patientList`, `medicalStaffList` and `schedulerAppointmentList`,
 that store patient, staff and appointment information respectively. It has various public methods for the viewing and
 modification of the information stored in the lists, and for the interfacing between the Scheduler and Storage
-components. A `Scheduler` class object is instantiated upon MedBot startup.
+Components. A `Scheduler` class object is instantiated upon MedBot startup.
 
 #### How the Scheduler component works:
 
 * When MedBot calls the `.execute(Scheduler, Ui)` method of a `Command` object, a corresponding method of the
   `Scheduler` object will be called.
-* This method will then view or modify the patient, staff or appointment information as specified.
+* This method will then view or modify the patient, staff or appointment information depending on the command.
 
 For example:
 
@@ -138,60 +154,84 @@ For example:
 
 ### 3.5 Storage Component
 
-The Storage component is responsible for the storage of all patient and staff personal information, and appointment
-details. It creates a directory MedBotData (if it doesn't already exist), and the text files MedBotData/patient.txt,
-MedBotData/staff.txt and MedBotData/appointment.txt.
+The Storage Component is responsible for the storage of all patient and staff personal information, and appointment
+details. It creates a directory MedBotData (if it does not already exist), and the text files patient.txt,
+staff.txt and appointment.txt in a MedBotData directory.
 
-Here's a partial class diagram to better illustrate the Storage component:
+Here is a partial class diagram to better illustrate the Storage Component:
 
 ![SchedulerClassDiagram](diagrams/StorageClassDiagram.png)
 
+#### StorageManager Class
+
+The `StorageManager` class performs the responsibilities of the Storage Component. It consists of a `PatientStorage`, a 
+`StaffStorage` and an `AppointmentStorage` class object. The `PatientStorage`, `StaffStorage` and 
+`AppointmentStorage` classes are subclasses of the `Storage` class and are responsible for the storage of patient,
+staff and appointment information respectively.
+
 #### How the Storage component works:
 
-* When MedBot calls its `interactWithUser()` method, it initializes the `StorageManager` class
-    * this initializes the `PatientStorage`, `StaffStorage` and `AppointmentStorage` classes.
-* These three classes inherit from the `Storage` class.
-* The `PatientStorage`, `StaffStorage` and `AppointmentStorage` objects will call the inherited `loadStorage()` method
-  and read their respective text data files and read them back into the corresponding objects.
-* After a command is executed, the object of `StorageManager` will call its `saveToStorage` method and thus call
-  the `saveData()` method for all three inherited `Storage` objects, thus writing the storage data into the respective
-  data text files.
+##### Loading data:
+
+* On MedBot start up, `MedBot` initializes a `StorageManager` class object.
+* `MedBot` then calls the `initializeStorages()` method of the `StorageManager` class object which initializes the
+  `PatientStorage`, `StaffStorage` and `AppointmentStorage` class objects.
+* The `StorageManager` class then calls the `loadStorage()` methods of the `PatientStorage`, `StaffStorage` and 
+ `AppointmentStorage` class objects.
+* Each of the 3 `Storage` class objects then reads their corresponding text data files and stores the information into 
+  the corresponding lists.
+
+##### Saving data:
+
+* After a command is executed, `MedBot` calls the `saveToStorage()` method of the `StorageManager` class object.
+* The `StorageManager` class object then calls the `saveData()` method of the `PatientStorage`, `StaffStorage` and
+  `AppointmentStorage` class objects.
+* Each of the 3 `Storage` class objects then writes the storage data into the respective data text files.
 
 ### 3.6 Command Class
 
-The Command class and its subclasses are responsible for handling the execution of user input.
+The `Command` class and its subclasses are responsible for handling the execution of user instructions.
 
-Each individual Command object includes:
+Each `Command` subclass contains:
 
-* `isExit()`: Return true only if it is an `Exit Command` .
-* `execute(Scheduler, Ui)`: Using the `Ui` class and data from the `Scheduler` to execute and print out the result to
-  the user.
-* Various attributes specific to the command, some common ones:
-    * `id`: The id of `Person`/`Appointment` object to execute the command on.
-    * `viewType`: The current `ViewType` of the program.
+* An `isExit()` method which return true only if it is an `Exit Command`.
+* An `execute(Scheduler, Ui)` method which performs the specified user instruction and prints the output message to the 
+  user.
 
-Three major types of Commands:
+Some `Command` subclasses also contain attributes specific to that subclass.
+* E.g., the `deletePatientCommand` contains a `personId` attribute that specifies the ID of the patient that is to
+  be deleted from MedBot.
 
-1. `Person` commands: to interact with person objects.
-2. `Appointment` commands: to interact with the appointment between doctors/nurses and patients.
-3. General commands: included are `help`, `exit`, `switch`, `getCurrentView`.
+There are 3 categories of commands:
 
-Given below are the complete list of implemented commands and their types:
+1. General Commands for MedBot navigation and accessing help.
+2. Person Commands which are divided into:
+   1. Patient Commands for patient management in the Patient Management view.
+   2. Staff Commands for staff management in the Staff Management view.
+3. Appointment Commands for appointment management in the Scheduler view.
 
-|Command name| Type |
+Given below is the complete list of commands and their categories:
+
+|Command Name| Type |
 |--------|---|
-|Exit Command|General|
-|Get View Command|General|
 |Help Command|General|
 |Switch Command|General|
-|Add Person/Appointment Command|Person/Appointment|
-|Edit Person/Appointment Command|Person/Appointment|
-|Delete Person/Appointment Command|Person/Appointment|
-|Find Person/Appointment Command|Person/Appointment|
-|List Person/Appointment Command|Person/Appointment|
-|View Person/Appointment Command|Person/Appointment|
+|Get View Command|General|
+|Exit Command|General|
+|Add Person Command|Person|
+|Delete Person Command|Person|
+|View Person Command|Person|
+|List Person Command|Person|
+|Edit Person Command|Person|
+|Find Person Command|Person|
 |Hide Person Command|Person|
 |Show Person Command|Person|
+|Add Appointment Command|Appointment|
+|Delete Appointment Command|Appointment|
+|View Appointment Command|Appointment|
+|List Appointment Command|Appointment|
+|Edit Appointment Command|Appointment|
+|Find Appointment Command|Appointment|
 
 ## 4. Implementation
 

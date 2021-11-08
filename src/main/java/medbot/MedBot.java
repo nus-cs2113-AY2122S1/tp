@@ -27,7 +27,6 @@ public class MedBot {
         ui.printWelcomeMessageOne();
         try {
             storageManager.initializeStorages(scheduler, ui);
-
         } catch (MedBotException e) {
             ui.printOutput(e.getMessage());
             isInteracting = false;

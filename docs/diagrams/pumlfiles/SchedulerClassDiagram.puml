@@ -1,24 +1,25 @@
 @startuml
-!define SCHEDULER_COLOR #CDF260
 
 skinparam class {
-    BackgroundColor SCHEDULER_COLOR
+    BackgroundColor #A5C3FF
+    BorderColor #001A4C
+    ArrowColor #001A4C
 }
 
 hide circle
 hide empty members
 skinparam classAttributeIconSize 0
 
-package "MedBot" <<Rectangle>> {
+package "MedBot" <<Rectangle>> #66FF66 {
 }
 
-package "Storage" <<Rectangle>> {
+package "Storage" <<Rectangle>> #9666FF {
 }
 
-package "Command" <<Rectangle>> {
+package "Command" <<Rectangle>> #4CC3FF {
 }
 
-package "Scheduler Component" <<Rectangle>> {
+package "Scheduler Component" <<Rectangle>> #DDDDDD {
     class Scheduler
     class "{abstract}\nPersonList" as PersonList
     class PatientList
