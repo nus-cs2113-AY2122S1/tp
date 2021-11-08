@@ -413,6 +413,12 @@ Expected Output: <br>
 <hr>
 
 ### Attendance
+
+> 💡 **Note:**<br />
+> Maximum number of lessons are capped at 1000. <br>
+> Reason: We assume that lessons occur no more than twice a day, and that a class lasts for a year at most.
+
+
 #### Listing attendance for a particular student: `list_attendance`
 Lists a student's attendance.
 
@@ -423,6 +429,9 @@ Format: `list_attendance c/<CLASS_ID> s/<STUDENT_INDEX>`
 Examples:
 * `list_attendance c/CS2113T-F12 s/1`
 * `list_attendance c/CS2101-D03 s/3`
+
+Expected Output: <br>
+![img.png](images/attendance/ListAttendanceCommand.png)
 
 <br>
 
@@ -436,6 +445,9 @@ Format: `list_lesson_attendance c/<CLASS_ID> l/<LESSON_NUMBER>`
 Examples:
 * `list_lesson_attendance c/CS2113T-F12 l/1`
 * `list_lesson_attendance c/CS2101-D03 l/3`
+
+Expected Output: <br>
+![img.png](images/attendance/ListLessonAttendanceCommand.png)
 
 <br>
 
@@ -451,6 +463,9 @@ Format: `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRES
 Examples:
 * `set_attendance c/CS2113T-F12 s/1 l/1 p/1`
 * `set_attendance c/CS2113T-F12 s/3 l/2 p/0`
+
+Expected Output: <br>
+![img.png](images/attendance/SetAttendanceCommand(Single).png)
 
 <br>
 
@@ -471,11 +486,17 @@ Examples:
 * `set_attendance c/CS2113T-F12 s/1-5 l/1 p/1`
 * `set_attendance c/CS2101-D03 s/3-8 l/2 p/0`
 
+Expected Output: <br>
+![img.png](images/attendance/SetAttendanceCommand(Range).png)
+
 <br>
 
 Method 2: Sets the attendance for selected student indexes for a lesson.
 
-Format: `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX>,<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
+> 💡 **Note:**<br />
+> Multiple student indexes can be inputted. (Not limited to only 2)
+
+Format: `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX>,<STUDENT_INDEX>,... l/<LESSON_NUMBER> p/<PRESENT>`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 * `LESSON_NUMBER` refers to the lesson number.
@@ -484,6 +505,10 @@ Format: `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX>,<STUDENT_INDEX> l/<LESSON
 Examples:
 * `set_attendance c/CS2113T-F12 s/1,3,5 l/1 p/1`
 * `set_attendance c/CS2101-D03 s/1,3,4,5,6 l/2 p/0`
+
+Expected Output: <br>
+![img.png](images/attendance/SetAttendanceCommand(Selected).png)
+
 
 <br>
 
@@ -498,6 +523,48 @@ Format: `delete_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER>`
 Examples:
 * `delete_attendance c/CS2113T-F12 s/1 l/1`
 * `delete_attendance c/CS2101-D03 s/4 l/2`
+
+Expected Output: <br>
+![img.png](images/attendance/DeleteAttendanceCommand(Single).png)
+
+>This command also allows for the deleting of multiple attendances.
+
+<br>
+
+Method 1: Deletes the attendance for a range of student indexes for a lesson.
+
+Format: `delete_attendance c/<CLASS_ID> s/<START_STUDENT_INDEX>-<END_STUDENT_INDEX> l/<LESSON_NUMBER>`
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
+* `START_STUDENT_INDEX` refers to the start index of the student in the student list of the class.
+* `END_STUDENT_INDEX` refers to the end index of the student in the student list of the class.
+* `LESSON_NUMBER` refers to the lesson number.
+
+Examples:
+* `delete_attendance c/CS2113T-F12 s/1-5 l/1`
+* `delete_attendance c/CS2101-D03 s/3-8 l/2`
+
+Expected Output: <br>
+![img.png](images/attendance/DeleteAttendanceCommand(Range).png)
+
+<br>
+
+Method 2: Deletes the attendance for selected student indexes for a lesson.
+
+> 💡 **Note:**<br />
+> Multiple student indexes can be inputted. (Not limited to only 2)
+
+Format: `delete_attendance c/<CLASS_ID> s/<STUDENT_INDEX>,<STUDENT_INDEX>,... l/<LESSON_NUMBER>`
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
+* `STUDENT_INDEX` refers to the index of the student in the student list of the class.
+* `LESSON_NUMBER` refers to the lesson number.
+
+Examples:
+* `delete_attendance c/CS2113T-F12 s/1,3,5 l/1`
+* `delete_attendance c/CS2101-D03 s/1,3,4,5,6 l/2`
+
+Expected Output: <br>
+![img.png](images/attendance/DeleteAttendanceCommand(Selected).png)
+
 
 <br>
 <hr>

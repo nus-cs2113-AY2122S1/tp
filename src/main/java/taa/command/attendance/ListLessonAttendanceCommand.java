@@ -15,6 +15,7 @@ import taa.util.Util;
 public class ListLessonAttendanceCommand extends Command {
     private static final String KEY_CLASS_ID = "c";
     private static final String KEY_LESSON_NUMBER = "l";
+    private static final int MAX_LESSON_NUMBER = 1000;
     private static final String[] LIST_LESSON_ATTENDANCE_ARGUMENT_KEYS = {KEY_CLASS_ID, KEY_LESSON_NUMBER};
 
     private static final String MESSAGE_FORMAT_LIST_LESSON_ATTENDANCE_USAGE = "%s %s/<CLASS_ID> %s/<LESSON_NUMBER>";
@@ -38,6 +39,9 @@ public class ListLessonAttendanceCommand extends Command {
         String lessonNumberInput = argumentMap.get(KEY_LESSON_NUMBER);
         if (!Util.isStringInteger(lessonNumberInput)) {
             throw new TaaException(MESSAGE_INVALID_LESSON_NUMBER);
+        }
+        if (Integer.parseInt(lessonNumberInput) > MAX_LESSON_NUMBER) {
+            throw new TaaException(MESSAGE_LESSON_NUMBER_EXCEEDS_MAX);
         }
     }
 

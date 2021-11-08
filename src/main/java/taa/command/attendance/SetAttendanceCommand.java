@@ -20,14 +20,13 @@ public class SetAttendanceCommand extends Command {
     private static final String KEY_STUDENT_INDEX = "s";
     private static final String KEY_LESSON_NUMBER = "l";
     private static final String KEY_PRESENT = "p";
+    private static final int MAX_LESSON_NUMBER = 1000;
     private static final String[] SET_ATTENDANCE_ARGUMENT_KEYS = {
         KEY_CLASS_ID,
         KEY_STUDENT_INDEX,
         KEY_LESSON_NUMBER,
         KEY_PRESENT
     };
-
-    private static final String MESSAGE_INVALID_LESSON_NUMBER = "Invalid lesson number.";
 
     private static final String MESSAGE_FORMAT_INVALID_PRESENT = "Invalid present value.\n"
             + "Possible values: %s (Present), %s (Absent)";
@@ -37,11 +36,9 @@ public class SetAttendanceCommand extends Command {
     private static final String ABSENT_VALUE = "0";
 
     private static final String MESSAGE_FORMAT_SET_ATTENDANCE_USAGE =
-            "\nSet attendance for one student: %s %s/<CLASS_ID> %s/<STUDENT_INDEX> %s/<LESSON_NUMBER> %s/<PRESENT>"
-            + "\nSet attendance for a range of students: %s %s/<CLASS_ID> %s/<START_STUDENT_INDEX>-<END_STUDENT_INDEX>"
-            + " %s/<LESSON_NUMBER> %s/<PRESENT>"
-            + "\nSet attendance for a selection of students: %s %s/<CLASS_ID> %s/<STUDENT_INDEX>,<STUDENT_INDEX>,"
-            + " %s/<LESSON_NUMBER> %s/<PRESENT>";
+            "%s %s/<CLASS_ID> %s/[<STUDENT_INDEX> | <START_STUDENT_INDEX>-<END_STUDENT_INDEX> | "
+            + "<STUDENT_INDEX>,<STUDENT_INDEX>,...] %s/<LESSON_NUMBER> %s/<PRESENT>";
+
 
     public SetAttendanceCommand(String argument) {
         super(argument, SET_ATTENDANCE_ARGUMENT_KEYS);
@@ -60,6 +57,9 @@ public class SetAttendanceCommand extends Command {
         String lessonNumberInput = argumentMap.get(KEY_LESSON_NUMBER);
         if (!Util.isStringInteger(lessonNumberInput)) {
             throw new TaaException(MESSAGE_INVALID_LESSON_NUMBER);
+        }
+        if (Integer.parseInt(lessonNumberInput) > MAX_LESSON_NUMBER) {
+            throw new TaaException(MESSAGE_LESSON_NUMBER_EXCEEDS_MAX);
         }
     }
 
@@ -174,16 +174,6 @@ public class SetAttendanceCommand extends Command {
     protected String getUsage() {
         return String.format(
                 MESSAGE_FORMAT_SET_ATTENDANCE_USAGE,
-                COMMAND_SET_ATTENDANCE,
-                KEY_CLASS_ID,
-                KEY_STUDENT_INDEX,
-                KEY_LESSON_NUMBER,
-                KEY_PRESENT,
-                COMMAND_SET_ATTENDANCE,
-                KEY_CLASS_ID,
-                KEY_STUDENT_INDEX,
-                KEY_LESSON_NUMBER,
-                KEY_PRESENT,
                 COMMAND_SET_ATTENDANCE,
                 KEY_CLASS_ID,
                 KEY_STUDENT_INDEX,

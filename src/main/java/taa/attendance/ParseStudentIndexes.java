@@ -24,7 +24,7 @@ public class ParseStudentIndexes {
      */
     public static void getRange(String rangeInput) throws TaaException {
         String[] indexRange = rangeInput.split("-", NUMBER_OF_SPLIT);
-        if (!Util.isStringInteger(indexRange[0]) | !Util.isStringInteger(indexRange[1])) {
+        if (rangeInput.contains("--") | !Util.isStringInteger(indexRange[0]) | !Util.isStringInteger(indexRange[1])) {
             throw new TaaException(MESSAGE_INVALID_RANGE_FORMAT);
         }
         startIndex = Integer.parseInt(indexRange[0]);
