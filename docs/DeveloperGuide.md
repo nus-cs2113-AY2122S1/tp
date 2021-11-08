@@ -364,7 +364,7 @@ Given below is an example of how the display calendar mechanism behaves at each 
 The below sequence diagram shows the execution process of the calendar display feature.
 ![](diagrams/calendar/CalendarDisplaySequence.png)
 
-**Design Considerations**
+**Calendar Design Considerations**
 
 The following design considerations were kept in mind while implementing the calendar display feature,
 - Aspect: Calendar visual display
