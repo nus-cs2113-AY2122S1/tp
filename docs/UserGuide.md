@@ -122,11 +122,11 @@ Creates a new trip.
 #### Usage Example:
 
 ```
-____________________________________________________________
+________________________________________________________________
 $ new FamilyTrip2021 /from SIN /to MLY
-____________________________________________________________
+________________________________________________________________
 	You have just created a new trip called FamilyTrip2021.
-____________________________________________________________
+________________________________________________________________
 ```
 > ![](documentationPics/info.png) A trip is a basic building block of Traveller. To start planning your trips, 
 > create a trip using this command first. Then, when planning your trip, all details will be tagged to this trip that 
@@ -212,15 +212,14 @@ Shows you details of your existing trips.
 ____________________________________________________________
 $ view FamilyTrip2021
 ____________________________________________________________
-	Here are all your trips: 
-		TripName: FamilyTrip2021
-			 Origin: SIN
-			 Destination: MLY
-			 Path: [SIN, MLY]
-			 Time: [1.0]
-			 Days: 
-			    Day 0: 
-					0:  1900  Check-in at HolidayInn
+        TripName: FamilyTrip2021
+             Origin: SIN
+             Destination: MLY
+             Path: [SIN, MLY]
+             Time: [1.0]
+             Days: 
+                Day 0: 
+                    0:  1900  Check-in at HolidayInn
 ____________________________________________________________
 ```
 > ![](documentationPics/info.png) Viewing a trip shows you your trip's start country, destination country, 
@@ -359,15 +358,15 @@ Searches for an item keyword from a trip and returns the resulting matching item
 
 #### Usage Example:
 ```
-___________________________________________________________________________________
+______________________________________________________________________________________
 $ search-item FamilyTrip2021 /day 1 /key time
-___________________________________________________________________________________
+______________________________________________________________________________________
 	You have just search item keyword time on day 1 in trip called FamilyTrip2021.
 	
 	Results: 
 	1. 1400		lunch time
 	2. 1700		dinner time
-___________________________________________________________________________________
+______________________________________________________________________________________
 ```
 
 > ![](documentationPics/tip.png) Search allows you to find words that contain the phrase, no 
