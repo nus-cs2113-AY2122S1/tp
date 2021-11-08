@@ -314,7 +314,7 @@ _See sequence diagram of logic above for an example of `add -b a/400`_.
 
 **Step 3**. The user now realises that there was a mistake in the record added, and decides to edit the record by executing the ```edit``` command. The edit command will call ```AllRecordList#edit…``` based on the record type.
 
-The diagram belows shows the Sequence Diagram of an execute call after the `edit` command.
+The diagram belows shows the Sequence Diagram of an `execute` call after the `edit` command.
 ![Figure_EditCommandDiagram](images/EditCommandDiagram.png)
 
 <br />
