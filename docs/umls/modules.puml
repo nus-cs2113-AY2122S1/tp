@@ -18,7 +18,7 @@ Class Module {
     + getIndex(): int
     + getModuleCode(): String
     + getModuleName(): String
-    + getModuleCredits: String
+    + getModuleCredits(): double
     + getMasterListIndex(moduleMasterList: ModuleList): int
     + isEqual(searchModule: Module): boolean
     + toFileFormat(): String

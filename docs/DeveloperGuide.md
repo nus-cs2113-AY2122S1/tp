@@ -10,19 +10,19 @@ title: Developer Guide
 * [Design & Implementation](#design--implementation)
   * [Main Components](#main-components) 
   * [Command Implementation](#command-implementation)
-    * [AddModCommand](#AddModCommand)
-    * [AddUniCommand](#AddUniCommand)
-    * [AddMapCommand](#AddMapCommand)
-    * [RemoveModCommand](#RemoveModCommand)
-    * [RemoveUniCommand](#RemoveUniCommand)
-    * [RemoveMapCommand](#RemoveMapCommand)
-    * [ListModCommand](#ListModCommand)
-    * [ListUniCommand](#ListUniCommand)
-    * [FindModCommand](#FindModCommand)
-    * [FindUniCommand](#FindUniCommand)
-    * [SearchMapCommand](#SearchMapCommand)
-    * [HelpCommand](#HelpCommand)
-    * [ExitCommand](#ExitCommand)
+    * [AddModCommand](#addmodcommand)
+    * [AddUniCommand](#addunicommand)
+    * [AddMapCommand](#addmapcommand)
+    * [RemoveModCommand](#removemodcommand)
+    * [RemoveUniCommand](#removeunicommand)
+    * [RemoveMapCommand](#removemapcommand)
+    * [ListModCommand](#listmodcommand)
+    * [ListUniCommand](#listunicommand)
+    * [FindModCommand](#findmodcommand)
+    * [FindUniCommand](#findunicommand)
+    * [SearchMapCommand](#searchmapcommand)
+    * [HelpCommand](#helpcommand)
+    * [ExitCommand](#exitcommand)
   * [User Interface](#user-interface)
   * [Storage](#storage)
   * [University and module related classes](#university-and-module-related-classes)
@@ -46,6 +46,18 @@ title: Developer Guide
 * [Non-Functional Requirements](#non-functional-requirements)
 * [Glossary](#glossary)
 * [Instructions for manual testing](#instructions-for-manual-testing)
+  * [Launch and shutdown](#launch-and-shutdown)
+  * [Getting Help](#getting-help)
+  * [Getting university list and module list](#getting-university-list-and-module-list)
+  * [Finding a university](#finding-a-university)
+  * [Finding a module](#finding-a-module)
+  * [Adding a university](#adding-a-university)
+  * [Adding a mapping](#adding-a-mapping)
+  * [Searching for a mapping](#searching-for-a-mapping)
+  * [Removing a university](#removing-a-university)
+  * [Removing a module](#removing-a-module)
+  * [Removing a mapping](#removing-a-mapping)
+  * [Saving data](#saving-data)
 * [Possible future updates](#possible-future-updates)
   * [Automatically update database](#automatically-update-database)
   * [Move database online for better security](#move-database-online-for-better-security)
@@ -201,7 +213,7 @@ In the printUniversity Method,
 #### API : [`Storage.java`](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob/master/src/main/java/seplanner/storage/Storage.java)
 
 <p align = "center">
-<img src="images/storage.png" width = "1600" />
+<img src="images/storage.png" />
 </p>
 
 The storage component can implement the below features:
@@ -228,7 +240,7 @@ from the CSV type files (`University.csv` and `modules.csv`) stored in the resou
 The following diagram is the class diagram of the university related classes:
 
 <p align = "center">
-<img src="images/universities.png" width = "300" />
+<img src="images/universities.png" width = "350" />
 </p>
 
 This component consist of the following classes:  
@@ -286,7 +298,7 @@ This component consist of the following classes:
 The parser component is made up of the following classes:
 
 <p align = "center">
-<img src="images/parser.png" width = "2400" />
+<img src="images/parser.png" width = "4000" />
 </p>
 
 Parser component is used to make do the following:

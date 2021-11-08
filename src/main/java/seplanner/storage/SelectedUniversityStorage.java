@@ -23,15 +23,9 @@ import static java.lang.Double.parseDouble;
  * Handles the storage for user's selected universities and its respective mappings.
  */
 public class SelectedUniversityStorage extends UserStorage {
-    private static Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
-
-    /** File path of the text file used to store selected univeristies */
     private static final String FILE_PATH = "data/selectedUniversities.txt";
-
-    /** Changes to false when there is at least one invalid university */
+    private static Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
     private static Boolean isUniversityValid = true;
-
-    /** Changes to false when there is at least one invalid mapping */
     private static Boolean isMappingValid = true;
 
     /**

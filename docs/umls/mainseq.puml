@@ -7,20 +7,20 @@ participant ":Parser" #LightGreen
 User -> ":Parser" ++ #LightGreen: "add /uni 1"
 
 participant ":Command" #Yellow
-":Parser" -> ":Command" ++ #Yellow : addUniCommand(University: U)
+":Parser" -> ":Command" ++ #Yellow : addUniCommand(U: University)
 
 participant ":Model" #Orange
-":Command" -> ":Model" ++ #Orange: selectedUniversityList.addUniversity(University: U)
+":Command" -> ":Model" ++ #Orange: selectedUniversityList.addUniversity(U: University)
 return
 deactivate ":Model"
 
 participant ":Storage" #LightGrey
-":Command" -> ":Storage" ++ #LightGrey: updateSelectedUniversityList(selectedUniversityList: list)
+":Command" -> ":Storage" ++ #LightGrey: updateSelectedUniversityList(selectedUniversityList: UniversityList)
 return
 deactivate ":Storage"
 
 participant ":Ui" #DarkGrey
-":Command" -> ":Ui" ++ #DarkGrey : printUniversity(University: U)
+":Command" -> ":Ui" ++ #DarkGrey : printUniversity(U: University)
 return
 deactivate ":Ui"
 

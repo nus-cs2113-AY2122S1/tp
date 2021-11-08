@@ -120,7 +120,7 @@ public class RemoveCommandParser {
         // Check if university has been added already
         if (!ParseCondition.isDuplicateUniversity(universitySelectedList, uniName)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
-            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1, false);
+            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTSELECTED, 1, false);
         }
     }
 
@@ -156,7 +156,7 @@ public class RemoveCommandParser {
         // Check if module has been added already
         if (!ParseCondition.isDuplicateModule(moduleSelectedList, module)) {
             logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
-            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1, false);
+            throw new RemoveParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTSELECTED, 1, false);
         }
     }
 

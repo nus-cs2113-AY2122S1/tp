@@ -47,15 +47,15 @@ public class AddCommandParserTest {
     @Test
     public void parse_missingArguments_exceptionThrown() {
         String noUniArgument = "/uni";
-        String noModArgument = "/mod";
-        String noMapArgument = "/map";
-        String missingMapArgument = "/map 1";
         assertThrows(AddParseException.class, () -> acp.parse(noUniArgument, universityMasterList, moduleMasterList,
                 universitySelectedList, moduleSelectedList));
+        String noModArgument = "/mod";
         assertThrows(AddParseException.class, () -> acp.parse(noModArgument, universityMasterList, moduleMasterList,
                 universitySelectedList, moduleSelectedList));
+        String noMapArgument = "/map";
         assertThrows(AddParseException.class, () -> acp.parse(noMapArgument, universityMasterList, moduleMasterList,
                 universitySelectedList, moduleSelectedList));
+        String missingMapArgument = "/map 1";
         assertThrows(AddParseException.class, () -> acp.parse(missingMapArgument, universityMasterList,
                 moduleMasterList, universitySelectedList, moduleSelectedList));
     }
@@ -63,21 +63,21 @@ public class AddCommandParserTest {
     @Test
     public void parse_inputIndexOutOfBounds_exceptionThrown() {
         String uniExceedLowerBound = "/uni 0";
-        String uniExceedUpperBound = "/uni 100";
-        String modExceedLowerBound = "/mod 0";
-        String modExceedUpperBound = "/mod 1000";
-        String mapExceedLowerBound = "/map 0 1";
-        String mapExceedUpperBound = "/map 100 1";
         assertThrows(AddParseException.class, () -> acp.parse(uniExceedLowerBound, universityMasterList,
                 moduleMasterList, universitySelectedList, moduleSelectedList));
+        String uniExceedUpperBound = "/uni 100";
         assertThrows(AddParseException.class, () -> acp.parse(uniExceedUpperBound, universityMasterList,
                 moduleMasterList, universitySelectedList, moduleSelectedList));
+        String modExceedLowerBound = "/mod 0";
         assertThrows(AddParseException.class, () -> acp.parse(modExceedLowerBound, universityMasterList,
                 moduleMasterList, universitySelectedList, moduleSelectedList));
+        String modExceedUpperBound = "/mod 1000";
         assertThrows(AddParseException.class, () -> acp.parse(modExceedUpperBound, universityMasterList,
                 moduleMasterList, universitySelectedList, moduleSelectedList));
+        String mapExceedLowerBound = "/map 0 1";
         assertThrows(AddParseException.class, () -> acp.parse(mapExceedLowerBound, universityMasterList,
                 moduleMasterList, universitySelectedList, moduleSelectedList));
+        String mapExceedUpperBound = "/map 100 1";
         assertThrows(AddParseException.class, () -> acp.parse(mapExceedUpperBound, universityMasterList,
                 moduleMasterList, universitySelectedList, moduleSelectedList));
     }
@@ -85,9 +85,9 @@ public class AddCommandParserTest {
     @Test
     public void parse_nonAlphabeticalOrNumericalInput_exceptionThrown() {
         String inputForUni = "/uni @.@";
-        String inputForMod = "/mod >.<";
         assertThrows(AddParseException.class, () -> acp.parse(inputForUni, universityMasterList, moduleMasterList,
                 universitySelectedList, moduleSelectedList));
+        String inputForMod = "/mod >.<";
         assertThrows(AddParseException.class, () -> acp.parse(inputForMod, universityMasterList, moduleMasterList,
                 universitySelectedList, moduleSelectedList));
     }
@@ -142,15 +142,15 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_addMappingIndexOutOfBounds_exceptionThrown() {
-        String inputExceedLowerBounds = "/map 4 0";
-        String inputExceedUpperBounds = "/map 4 10";
         // this module gives exactly one mapping for Boston University (index 4)
         Module addedMod = moduleMasterList.get(116);
         moduleSelectedList.addModule(addedMod);
         University addedUni = universityMasterList.get(4);
         universityMasterList.addUniversity(addedUni);
+        String inputExceedLowerBounds = "/map 4 0";
         assertThrows(AddParseException.class, () -> acp.parse(inputExceedLowerBounds, universityMasterList,
                 moduleMasterList, universitySelectedList, moduleSelectedList));
+        String inputExceedUpperBounds = "/map 4 10";
         assertThrows(AddParseException.class, () -> acp.parse(inputExceedUpperBounds, universityMasterList,
                 moduleMasterList, universitySelectedList, moduleSelectedList));
     }
