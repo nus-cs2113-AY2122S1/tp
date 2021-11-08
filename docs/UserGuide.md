@@ -10,6 +10,7 @@
    4. [Clear history](#34-clear-past-records-clear)
    5. [Display Summary](#35-view-summary-of-game)
    6. [Save Data](#36-saving-the-data)
+   7. [Man Pages]
 4. [FAQ](#faq)
 5. [Command Summary](#command-summary)
 
@@ -94,7 +95,8 @@ Format: `game -GAME_MODE [GAME_LIMIT] [-c] [-sn]`
 
 * GAME_MODE 
   * `word` for game in Word Limit Mode 
-  * `time` for game in Time Limit Mode
+  * `time` for game in Time Limit Mode  
+
 #### 3.2.1 Word Limit Game
   In a Word-Limit game, user needs to specify the total number of words 
 they want to type. Game will terminate once they finish typing the specified 
@@ -282,6 +284,18 @@ Typists is a game application and only game records will be stored.
 Gamers should not edit the data it will manipulate the integrity of the records.
 In the event where the data is edited and the wrong format is inputted, the file contents will be cleared, 
 hence losing all the game data.
+
+### 3.7 Man Pages: `man`
+
+Review the man pages for different command if you need help.  
+Format: `man [COMMAND]`
+* `man` with out specifying the command will display the default man page.
+
+Example: `man clear`  
+```
+     | Clear all past game records.
+     | Command format: clear [-g GAME_MODE] [-h]
+```
 
 ## FAQ
 
