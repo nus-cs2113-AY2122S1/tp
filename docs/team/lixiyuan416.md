@@ -39,7 +39,8 @@
   
 - **Final Submission**
   - Ui section - [Link to diagram](../images/HelpCommandStates.png)
-  - Wrote header names, Appendixes A-B
+  - Added appendixes, completed Appendixes A-B
+  - Added [sequence diagram](../images/tripSeq.png) for Trip
 
 ### Team based tasks Contribution
 - **Added bug report in Issues**
