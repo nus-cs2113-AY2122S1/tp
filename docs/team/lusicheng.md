@@ -26,6 +26,7 @@ Given below are my contributions to the project:
   with cli and typing) would have a much more convenient, effective and smooth experience using the app. 
   * Highlights: This enhancement affects existing commands and commands to be added in the future. It required 
   rather sophisticated dealing of arraylists, exceptions and constructor overloading for `game` and its subclassess.
+* **New Feature**: Added the feature to display different man pages for different commands.
 
 #### Project Management 
 
@@ -41,8 +42,9 @@ Given below are my contributions to the project:
 #### Documentation
 
 * User Guide:
-  * Added documentation for Open Game section(excluding Word Limit Game section by [Zhansen](shizhansen.md)) and Command Summary: [#152](https://github.com/AY2122S1-CS2113-T13-4/tp/pull/152).
+  * Added documentation for `game` feature (excluding Word Limit Game section by [Zhansen](shizhansen.md)) and Command Summary: [#152](https://github.com/AY2122S1-CS2113-T13-4/tp/pull/152).
   * Added documentations for Introduction, quickstart, table of content and other cosmetic tweaks. 
+  * Added documentations for `man` feature.
 * Developer Guide:
   * Added design detail for Architecture (excluding the diagram by [William](williamwahyudi.md).
   * Added design detail for Command Component, Game Component and Time Limit Game section: [#155](https://github.com/AY2122S1-CS2113-T13-4/tp/pull/155). 

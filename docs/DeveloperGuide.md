@@ -4,21 +4,20 @@
 * [Setting Up, getting started](#setting-up-getting-started)
 * [Design](#design)
   * [Architecture](#architecture)
+  * [Command Component](#command-component)
+  * [Game Component](#game-component)
+  * [Content Component](#choose-the-game-content)
 * [Implementation](#implementation)
 * [Product Scope](#product-scope)
 * [User Stories](#user-stories)
-* [Non-functional Requirements](#non-functional-requirements)
 * [Glossary](#glossary)
+* [Manual Testing](#instructions-for-manual-testing)
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, 
-and third-party libraries -- include links to the original source as well}
 * [reference code for testing System.out.println()](https://www.baeldung.com/java-testing-system-out-println)
-* https://github.com/fastily/jwiki
-
-## Setting Up, getting started
-{Instruction to set up project in intellij}
+* [reference code for accessing wiki](https://github.com/fastily/jwiki)
+* [SE-EDU AB3 Developer Guide Format](https://se-education.org/addressbook-level3/DeveloperGuide.html)
 
 ## Design
 
@@ -57,10 +56,6 @@ How the `Command` component works:
 2. The `CommandFactory` returns a `Command` object (more precisely, an object that implements it e.g., `GameCommand`).
 3. `Main` will then execute the `Command` by calling `.run(args)` method of the `Command`.
 
-The Sequence Diagram below illustrates the interactions between `main` and `Command` component 
-for the `getCommand("game -time")` input:
-{Some sequence diagram}
-
 ### Game Component
 
 **How the Game Component works:**
@@ -90,22 +85,17 @@ Hence, The section below explains in greater detail how [Word Mode](#word-limit-
 
 ### Word Limit Game
 
-Sequence Diagram for Word Mode Game:
+Sequence Diagram for Word Mode Game:  
 
-![](diagrams/WordLimitMode.png)
+![](images/WordLimitMode.png)
 
 The Sequence Diagram above illustrates the working process of the `WordLimitGame` class.
 
 ### Time Limit Game
 
-The Sequence Diagram below illustrates the working process of the `TimeLimitGame` when the `.runGame` method is called:
-<img src="images/TimeGame_SequenceDiagram.png" alt="sequence"/>
-![](images/TimeGame_SequenceDiagram.png)
+The Sequence Diagram below illustrates the working process of the `TimeLimitGame` when the `.runGame` method is called:  
 
-
-## Implementation
-
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+<img src="images/TimeGame_SequenceDiagram.png" height="576"/>
 
 ### Choose the game content
 
@@ -128,6 +118,7 @@ There only exists one private content string for all sessions. Each time a set m
 depending on the choices that the user made throughout the process. Whenever the user starts a game, the getContent() 
 method is called and the text is set accordingly.
 
+## Implementation
 
 ### \[Proposed\] View Statistics feature
 #### \[Proposed Implementation\]
@@ -228,5 +219,8 @@ It solves the lack of entertainment alternatives on the CLI.
 1. Opening a game with optional operands
    1. Test case: `game -time 0`  
       Expected: A warning message about error on limit input is shown. 
-      The game will still start as if no time limit is specified.
-   2. 
+      The game will still start as if no time limit is specified. 
+      User will be asked to "Enter how long you want the game to run: ".
+   2. Test case: `game -time 30 -sn`
+      Expected: A game will start running. Timer starts immediately together the first line of sentence to be typed is displayed.
+      
