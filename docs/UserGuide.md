@@ -71,7 +71,7 @@ The smallest index would naturally be 1. (1-based)
 - The `{}` wrapping indicates an optional parameter.
 
 - Parameters cannot be reordered.
-  Example: If the command specifies `module add c/[MODULE_CODE] n/[M]ODULE_NAME]`, keying in `module add n/[MODULE_NAME] c/[MODULE_CODE]` will result in an invalid command.
+  Example: If the command specifies `module add c/[MODULE_CODE] n/[MODULE_NAME]`, keying in `module add n/[MODULE_NAME] c/[MODULE_CODE]` will result in an invalid command.
 
 > **NOTE**: 
 > We left out some expected commands for readability as they will print out similar messages

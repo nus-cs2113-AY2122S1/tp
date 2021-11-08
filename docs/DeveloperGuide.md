@@ -311,6 +311,10 @@ The `ShowZoomLinks` class extends `Command`.
 
 Syntax: `zoom list`
 
+The following diagram explains the sequence of execution for the zoom list command. 
+![displayZoomLinks](https://user-images.githubusercontent.com/52075633/140744135-56f08325-ab27-4a9b-bf3c-a5fb3c603c7b.png)
+
+
 #### 4.2.2 Adding a new zoom link
 
 This command is implemented by the `AddZoomCommand` class. The basic functionality of this command is to write a new zoom link to a local storage file and associate it to the relevant module code. The `AddZoomCommand`
@@ -318,6 +322,17 @@ class extends `Command`.
 
 Syntax: `zoom add LINK MODULE_CODE`
 Example: `zoom add nus.sg/testlink ABC101`
+
+The following diagram explains the sequence of execution for the add zoom command. 
+![addzoomlink](https://user-images.githubusercontent.com/52075633/140744016-ec5ae524-5cf3-4399-9bb6-8b4566aca1c1.png)
+
+
+#### 4.2.3 Open a zoom link
+
+this command is implemented by the `OpenZoomLink` class. The basic functionality of this command is to open the zoom link associated to the particular module. The `OpenZoomLink` class extends `Command`
+
+Syntax: `zoom open MODULE_CODE`
+Example: `zoom open CS2113T`
 
 
 ### 4.3 Calendar-related Features
@@ -582,7 +597,8 @@ Given below is an example usage scenario and how the delete notebook mechanism b
    delete. \
    ii. `DeleteNoteCommand` checks if index of notebook is in list. If not, throws the
    exception InvalidNotebookIndexException(). \
-   iii. `DeleteNoteCommand` calls `storage.collectionOfNotebooks.deleteNote(indexOfNotebookToDelete, storage)`. \
+   iii. `DeleteNoteCommand` calls `storage.collectionOfNotebooks.deleteNote(indexOfNotebookToDelete, storage)` to 
+   delete the notebook. \
    iv. `DeleteNoteCommand` calls `ui.printDeletedNotebookMessage(indexOfNotebookToDelete)`to indicate that the 
    notebook has been deleted. \
    v. `DeleteNoteCommand` calls `StorageNotes.writeCollectionOfNotebooks(storage.collectionOfNotebooks)` to write 
@@ -670,6 +686,7 @@ This segment focuses on describing the implementation of food-related features,
 the functionality of the commands as well as the design considerations taken.
 
 To begin, consider how a food command is parsed from user input.
+
 ##### Sequence diagram when food is parsed
 
 The following diagram displays the interactions between the classes when the user enters a command starting with
@@ -1038,26 +1055,65 @@ For the positive test cases, just simply follow the UserGuide in the sequence fr
 
 Here are the negative test cases you can test:
 
-* Module-related commands:
-  * Invalid module commands:
-    * `module`
-    * `module a`
-    * `cap`
-  * Invalid add module commands:
-    * `module add`
-    * `module add n/Software Engineering c/CS2113T`
-  * Invalid delete module commands:
-    * `module delete one`
-    * `module delete -1`
-    * `module delete [INDEX_OUT_OF_BOUND]`
-  * Invalid CAP info:
-    * Provide the current CAP which is not a real number
-    * Provide the current CAP which is not in the range [0.0 - 5.5]
-    * Provide the total MC taken which is not a positive integer
-* Calendar-related commands:
+* **Invalid general commands:**
+   * Empty command: ` `
+   * Not supported command: `avengers assemble`
+   
+* **Invalid Module-related commands:**
+   * Invalid module commands:
+      * Missing module command type: `module`
+      * Wrong module command type: `module a`
+      * Missing cap command type: `cap`
+   * Invalid add module commands:
+      * Missing command arguments: `module add`
+      * Invalid order arguments: `module add n/Software Engineering c/CS2113T`
+      * Missing module code: `module add c/ n/Software Engineering`
+      * Invalid modular credit: `module add c/CS2113 n/Software Engineering m/four`
+      * Invalid expected grade: `module add c/CS2113 n/Software Engineering m/4 e/J`
+   * Invalid delete module commands:
+      * Invalid number format: `module delete one`
+      * Invalid module index: `module delete -1`
+      * Invalid module index: `module delete [INDEX_OUT_OF_BOUND]`
+   * Invalid CAP information:
+      * Provide the current CAP which is not a real number (e.g. `four`)
+      * Provide the current CAP which is not in the range [0.0 - 5.0] (e.g. `6`)
+      * Provide the total MC taken which is not a positive integer (e.g. `4.5`)
+
+* **Invalid Zoom-related commands:**
+   * Invalid zoom commands:
+      * Missing zoom suffix: `zoom`
+      * Wrong zoom suffix: `zoom a`
+   * Invalid add zoom commands:
+      * Wrong module: `zoom add a`
+      * Invalid link format: `zoom add CS2113T www.google.com`
+   * Invalid open module commands:
+      * Missing arguments: `zoom open`
+      * Invalid module: `zoom open a`
+
+* **Invalid Food-related commands:**
+   * Wrong divider order : dividers in wrong sequence
+   * Invalid food command type : `food`
+   * Wrong food command type : `food a`
+   * Invalid number format : expected number, input anything else
+   * Missing parameters : include divider, no parameters
+
+   * Invalid `food radd` commands:
+      * Invalid index : `store_index` <= 0, `item_index` <= 0
+      * Index not found : when either index is not found from reference list
+
+   * Invalid `food delete` commands:
+      * Invalid index : when index is not found in list
+
+   * Invalid `food find` commands:
+      * Invalid date entered : when format of `dd-mm-yyyy` is not adhered to
+
+   * Invalid `food view` commands:
+      * Invalid index : `store_index` not found in reference list
+      
+* **Invalid Calendar-related commands:**
    * Invalid display commands:
       * `calendar display`
-      * `calendar display 22-2021` (note that this command will show a warning and then display calendar for current 
+      * `calendar display 22-2021` (note that this command will show a warning and then display calendar for current
         month)
    * Invalid add task commands:
       * `calendar todo n/abc`
@@ -1070,11 +1126,12 @@ Here are the negative test cases you can test:
       * `calendar lecture m/CS2113T s/ e/10-10-2021`
       * `calendar lecture m/CS2113T s/10-10-2021 e/`
       * `calendar lecture m/CS2113T s/10-10-2021 e/09-10-2021` (end date before start date)
-  * Invalid delete task commands:
-     * `calendar delete`
-     * `calendar delete task`
-     * `calendar delete task -1`
-* Journal related commands:
+   * Invalid delete task commands:
+      * `calendar delete`
+      * `calendar delete task`
+      * `calendar delete task -1`
+      
+* **Invalid Journal-related commands:**
    * Invalid add notebook commands:
       * `journal notebook`
       * `journal notebook cs`
@@ -1089,3 +1146,4 @@ Here are the negative test cases you can test:
       * `journal delete_entry n/ e/`
    * Invalid tag commands:
       * `journal tag`
+
