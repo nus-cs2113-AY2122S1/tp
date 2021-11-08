@@ -49,9 +49,6 @@ public final class CommandFormat {
     public static final String HELP_FORMAT =
             "help";
 
-    public static final String SET_GRADE_FORMAT =
-            "set grade [MODULE_CODE] [GRADE]";
-
     public static final String LAUNCH_LESSON_FORMAT =
             "launch lesson [INDEX]";
 
