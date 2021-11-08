@@ -2,38 +2,51 @@
 
 !include Style.puml
 
-header DeleteHabitCommand Feature
+participant ": DeleteHabitCommand" as DeleteHabitCommand COMMAND_COLOUR
+participant "goalList: GoalList" as goalList GOAL_COLOUR
+participant "goal: Goal" as goal GOAL_COLOUR
+participant "printManager: PrintManager" as printManager UI_COLOUR
 
--> ": DeleteGoalCommand": runCommand(goalList: GoalList,\n printManager: PrintManager,\n storage: Storage)
-activate ": DeleteGoalCommand"
+-> DeleteHabitCommand: runCommand(\ngoalList: GoalList,\nprintManager: PrintManager,\nstorage: Storage)
+activate DeleteHabitCommand
 
-": DeleteGoalCommand" -> "goalList: GoalList": deleteHabitFromGoal(goalIndex: int,\n printManager: PrintManager)
-activate "goalList: GoalList"
+DeleteHabitCommand -> goalList: deleteHabitFromGoal(\ngoalIndex: int,\nhabitIndex: int,\nprintManager: PrintManager)
+activate goalList
 
-create "goal: Goal"
-"goalList: GoalList" -> "goal: Goal": getGoal(goalIndex: int)
-activate "goal: Goal"
-"goalList: GoalList" <-- "goal: Goal"
+goalList -> goalList: getGoal(goalIndex: int)
+activate goalList
+goalList --> goalList: goal: Goal
+deactivate goalList
 
-create "habits: ArrayList<habit>"
-"goalList: GoalList" -> "habits: ArrayList<habit>"
-activate "habits: ArrayList<habit>"
-"goal: Goal" <- "habits: ArrayList<habit>": getHabitList()
-"goalList: GoalList" <-- "goal: Goal"
+ref over goalList: Abstracted checks before\ndeleting Goal:\ngoalIndex is a positive integer \nand not out of bounds.
 
-create "habit: Habit"
-"goalList: GoalList" -> "habit: Habit"
-activate "habit: Habit"
-"habits: ArrayList<habit>" <- "habit: Habit": get(habitIndex: int)
-"habits: ArrayList<habit>" --> "habit: Habit"
+goalList -> goalList: goal.getHabitList()
+activate goalList
+goalList --> goalList: habitList: ArrayList<habit>
+deactivate goalList
 
-"goalList: GoalList" -> "goal: Goal": removeHabit(habitIndex: int)
-"goal: Goal" -> "goal: Goal": remove(habitIndex: int)
-activate "goal: Goal"
-deactivate "goal: Goal"
+goalList -> goalList: getHabit(\nhabitList: ArrayList<Habit>,\nhabitIndex: int)
+activate goalList
+goalList --> goalList: habit: Habit
+deactivate goalList
 
+ref over goalList: Abstracted checks before\nremoving Habit:\nhabitIndex is a positive integer \nand not out of bounds.
 
-"goalList: GoalList" -> ": PrintManager": printRemovedHabit\n(goal.getDescription(): String,\n habit.getHabitName(): String)
-activate ": PrintManager"
+goalList -> goal: goal.removeHabit(habitIndex: int)
+activate goal
+return
+
+goalList -> goalList: printRemovedHabit(\ngoal.getDescription(): String,\nhabit.getHabitName(): String)
+activate goalList
+goalList -> printManager
+activate printManager
+
+return
+goalList --> goalList
+deactivate goalList
+
+return
+
+return
 
 @enduml

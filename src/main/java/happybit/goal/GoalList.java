@@ -265,16 +265,17 @@ public class GoalList {
      * @throws HaBitCommandException when any of the update fails
      */
     public void updateGoalAttributes(int goalIndex, String newGoalName, GoalType newGoalType, Date newGoalEndDate,
-            int[] updateAttributes, ArrayList<String> excessAttributes, PrintManager printManager)
+                                     ArrayList<Boolean> updateAttributes, ArrayList<String> excessAttributes,
+                                     PrintManager printManager)
             throws HaBitCommandException {
-        printManager.printUpdateGoalMessageStart();
-        if (updateAttributes[0] == 1) { // update goal name
+        printManager.printLine();
+        if (updateAttributes.get(0)) { // update goal name
             updateGoalName(goalIndex, newGoalName, printManager);
         }
-        if (updateAttributes[1] == 1) { // update goal type
+        if (updateAttributes.get(1)) { // update goal type
             updateGoalType(goalIndex, newGoalType, printManager);
         }
-        if (updateAttributes[2] == 1) { // update goal end date
+        if (updateAttributes.get(2)) { // update goal end date
             updateGoalEndDate(goalIndex, newGoalEndDate, printManager);
         }
         printManager.printUpdateGoalMessageEnd(excessAttributes);
@@ -293,13 +294,14 @@ public class GoalList {
      * @throws HaBitCommandException when any of the update fails
      */
     public void updateHabitAttributes(int goalIndex, int habitIndex, String newHabitName, int newHabitInterval,
-            int[] updateAttributes, ArrayList<String> excessAttributes, PrintManager printManager)
+                                      ArrayList<Boolean> updateAttributes, ArrayList<String> excessAttributes,
+                                      PrintManager printManager)
             throws HaBitCommandException {
-        printManager.printUpdateHabitMessageStart();
-        if (updateAttributes[0] == 1) { // update habit name
+        printManager.printLine();
+        if (updateAttributes.get(0)) { // update habit name
             updateHabitNameFromGoal(goalIndex, habitIndex, newHabitName, printManager);
         }
-        if (updateAttributes[1] == 1) { // update habit interval
+        if (updateAttributes.get(1)) { // update habit interval
             updateHabitIntervalFromGoal(goalIndex, habitIndex, newHabitInterval, printManager);
         }
         printManager.printUpdateHabitMessageEnd(excessAttributes);
@@ -502,7 +504,7 @@ public class GoalList {
      * @param newName New goal or habit name given by user.
      * @throws HaBitCommandException If old and new names are identical.
      */
-    private void compareNewNameWithOldName(String oldName,String newName) throws HaBitCommandException {
+    private void compareNewNameWithOldName(String oldName, String newName) throws HaBitCommandException {
         if (oldName.equals(newName)) {
             throw new HaBitCommandException(ERROR_IDENTICAL_NEW_NAME);
         }

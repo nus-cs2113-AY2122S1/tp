@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+participant ":ParserManager" as ParserManager PARSER_COLOUR
+
+-> ParserManager: parse(userInput)
+activate ParserManager
+
+ParserManager -> ParserManager:treatUserInput(userInput)
+activate ParserManager
+ParserManager --> ParserManager: treatedUserInput: String
+deactivate ParserManager
+
+ParserManager -> ":String": treatedUserInput.split(regex)
+activate ":String"
+":String" --> ParserManager: word(String[])
+deactivate ":String"
+
+ParserManager -> ParserManager: getCommandInstruction
+activate ParserManager
+ParserManager --> ParserManager: commandInstruction: String
+deactivate ParserManager
+ParserManager --> ParserManager: commandWord: String = words[0]
+
+ParserManager -> ParserManager: parseCommand(commandWord, commandInstruction)
+
+ref over ParserManager: Parsing based on: \ncommandWord\ncommandInstruction
+<--ParserManager: Command
+
+@enduml

@@ -1,0 +1,54 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+participant ":UpdateParser" as UpdateParser PARSER_COLOUR
+
+mainframe sd Update Goal Parsing
+
+-> UpdateParser: parseUpdateGoalCommands\n(commandInstruction: String)
+activate UpdateParser
+
+UpdateParser -> UpdateParser: splitInput\n(commandInstruction)
+activate UpdateParser
+UpdateParser --> UpdateParser: parameters: ArrayList<String>
+deactivate UpdateParser
+
+UpdateParser -> UpdateParser: getUpdateGoalAttributes\n(parameters)
+activate UpdateParser
+UpdateParser --> UpdateParser: updateAttributes: ArrayList<Boolean>
+deactivate UpdateParser
+
+alt#gold #lightblue isUpdateGoalName
+UpdateParser -> UpdateParser: getName(parameters)
+activate UpdateParser
+UpdateParser --> UpdateParser: newGoalName: String
+deactivate UpdateParser
+end
+alt#gold #lightblue isUpdateGoalType
+UpdateParser -> UpdateParser: getType(parameters)
+activate UpdateParser
+UpdateParser --> UpdateParser: newGoalType: String
+deactivate UpdateParser
+end
+alt#gold #lightblue isUpdateGoalEndDate
+UpdateParser -> UpdateParser: getDate(parameters)
+activate UpdateParser
+UpdateParser --> UpdateParser: newGoalEndDate: String
+deactivate UpdateParser
+end
+
+UpdateParser -> UpdateParser: getIndex(parameters, "/g")
+activate UpdateParser
+UpdateParser --> UpdateParser: goalIndex: int
+deactivate UpdateParser
+
+UpdateParser -> UpdateParser: getExcessGoalAttributes\n(parameters)
+activate UpdateParser
+UpdateParser --> UpdateParser: excessAttributes:\nArrayList<String>
+deactivate UpdateParser
+
+<-- UpdateParser: UpdateGoalCommand\n(goalIndex, newGoalName,\nnewGoalType, newGoalEndDate\nupdateAttributes, excessAttributes)
+deactivate UpdateParser
+
+@enduml

@@ -1,0 +1,36 @@
+@startuml
+
+!include Style.puml
+
+mainframe sd Add Goal Parsing
+
+participant ":AddParser" as AddParser PARSER_COLOUR
+participant ":Goal" as Goal GOAL_COLOUR
+
+-> AddParser: parseAddGoalCommand\n(commandInstruction:String)
+activate AddParser
+
+AddParser -> AddParser: getGoal(commandInstruction:String)
+activate AddParser
+
+ref over AddParser
+Obtain parameters for Goal:
+goalName
+goalType
+startDate
+endDate
+end
+
+create Goal
+AddParser -> Goal: new Goal(goalName,goalType,startDate, endDate)
+activate Goal
+Goal --> AddParser:
+deactivate Goal
+
+AddParser --> AddParser: goal: Goal
+deactivate AddParser
+
+<-- AddParser: AddGoalCommand(goal)
+deactivate AddParser
+
+@enduml

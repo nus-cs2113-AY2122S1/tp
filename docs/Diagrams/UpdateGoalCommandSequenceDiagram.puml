@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+participant ":UpdateGoalCommand" as UpdateGoalCommand COMMAND_COLOUR
+participant "goalList: GoalList" as goalList GOAL_COLOUR
+participant "printManager: PrintManager" as printManager UI_COLOUR
+
+-> UpdateGoalCommand: runCommand(goalList: GoalList,\nprintManager: PrintManager,\nstorage: Storage
+activate UpdateGoalCommand
+
+UpdateGoalCommand -> goalList: updateGoalAttributes(goalIndex,\nnewGoalName, newGoalType,\nnewGoalEndDate, updateAttributes,\nexcessAttributes, printManager)
+activate goalList
+
+goalList -> printManager: printLine()
+activate printManager
+printManager --> goalList
+deactivate printManager
+
+alt#gold #lightblue updateAttributes.get(0)
+goalList -> goalList: updateGoalName(goalIndex,\nnewGoalName, printManager)
+activate goalList
+goalList --> goalList:
+deactivate goalList
+end
+
+alt#gold #lightblue updateAttributes.get(1)
+goalList -> goalList: updateGoalType(goalIndex,\nnewGoalType, printManager)
+activate goalList
+goalList --> goalList:
+deactivate goalList
+end
+
+alt#gold #lightblue updateAttributes.get(2)
+goalList -> goalList: updateGoalEndDate(goalIndex,\nnewGoalEndDate, printManager)
+activate goalList
+goalList --> goalList:
+deactivate goalList
+end
+
+goalList -> printManager: printUpdateGoalMessageEnd\n(excessAttributes)
+activate printManager
+printManager --> goalList
+deactivate printManager
+
+goalList --> UpdateGoalCommand
+deactivate goalList
+
+<-- UpdateGoalCommand
+deactivate UpdateGoalCommand
+
+@enduml

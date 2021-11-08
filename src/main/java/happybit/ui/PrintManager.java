@@ -23,24 +23,18 @@ public class PrintManager {
     private static final String MSG_DELETE_HABIT = "The habit '%1$s' of goal '%2$s' has been deleted." + LS;
     private static final String MSG_DONE_HABIT = "The habit '%1$s' of goal '%2$s' has been completed for %3$s to %4$s."
             + LS + "The next interval will begin on %5$s" + LS;
-    private static final String MSG_UPDATE_GOAL_START = "Updating goal in progress ..." + LS;
     private static final String MSG_UPDATE_GOAL_NAME = "The goal name '%1$s' has been updated to '%2$s'." + LS;
     private static final String MSG_UPDATE_GOAL_TYPE = "The goal type '%1$s' has been updated to '%2$s'." + LS;
     private static final String MSG_UPDATE_GOAL_END_DATE = "The goal end date of goal '%1$s' has been changed from "
             + "'%2$s' to '%3$s'." + LS;
-    private static final String MSG_UPDATE_GOAL_END = "All updatable attributes in the goal have been updated."
-            + LS;
     private static final String MSG_UPDATE_GOAL_EXCESS_END_ONE = "However, we noticed that you added in these extra "
             + "parameters: " + LS;
     private static final String MSG_UPDATE_GOAL_EXCESS_END_TWO = "These can only be updated using the change command "
             + "on a habit within a goal." + LS;
-    private static final String MSG_UPDATE_HABIT_START = "Updating habit in progress ..." + LS;
     private static final String MSG_UPDATE_HABIT_NAME = "The habit '%1$s' of goal '%2$s' has been changed to '%3$s'"
             + LS;
     private static final String MSG_UPDATE_HABIT_INTERVAL = "The habit '%1$s' of goal '%2$s' has its interval changed "
             + "to '%3$s'" + LS;
-    private static final String MSG_UPDATE_HABIT_END = "All updatable attributes in the habit have been updated."
-            + LS;
     private static final String MSG_UPDATE_HABIT_EXCESS_END_ONE = "However, we noticed that you added in these extra "
             + "parameters: " + LS;
     private static final String MSG_UPDATE_HABIT_EXCESS_END_TWO = "These can only be updated using the update command "
@@ -207,11 +201,6 @@ public class PrintManager {
         printLine();
     }
 
-    public void printUpdateGoalMessageStart() {
-        printLine();
-        System.out.printf(MSG_UPDATE_GOAL_START);
-    }
-
     /**
      * Prints a confirmation message upon successful update of a goal name.
      * Note: Only the goal name has been changed.
@@ -232,20 +221,14 @@ public class PrintManager {
     }
 
     public void printUpdateGoalMessageEnd(ArrayList<String> excess) {
-        System.out.printf(MSG_UPDATE_GOAL_END);
         if (!excess.isEmpty()) {
-            System.out.printf(MSG_UPDATE_GOAL_EXCESS_END_ONE);
+            System.out.println(MSG_UPDATE_GOAL_EXCESS_END_ONE);
             for (String flag : excess) {
                 System.out.println(flag);
             }
-            System.out.printf(MSG_UPDATE_GOAL_EXCESS_END_TWO);
+            System.out.println(MSG_UPDATE_GOAL_EXCESS_END_TWO);
         }
         printLine();
-    }
-
-    public void printUpdateHabitMessageStart() {
-        printLine();
-        System.out.printf(MSG_UPDATE_HABIT_START);
     }
 
     /**
@@ -275,13 +258,12 @@ public class PrintManager {
     }
 
     public void printUpdateHabitMessageEnd(ArrayList<String> excess) {
-        System.out.printf(MSG_UPDATE_HABIT_END);
         if (!excess.isEmpty()) {
-            System.out.printf(MSG_UPDATE_HABIT_EXCESS_END_ONE);
+            System.out.println(MSG_UPDATE_HABIT_EXCESS_END_ONE);
             for (String flag : excess) {
                 System.out.println(flag);
             }
-            System.out.printf(MSG_UPDATE_HABIT_EXCESS_END_TWO);
+            System.out.println(MSG_UPDATE_HABIT_EXCESS_END_TWO);
         }
         printLine();
     }
@@ -306,6 +288,14 @@ public class PrintManager {
         printLine();
     }
 
+    /**
+     * Prints a horizontal line.
+     * Used for enclosing message within 2 such lines.
+     */
+    public void printLine() {
+        System.out.println(LINE);
+    }
+
     /*
      * NOTE : ==================================================================
      * The following are private methods that are used to implement SLAP for the
@@ -313,14 +303,6 @@ public class PrintManager {
      * visualise the actual methods that can be called from outside this class.
      * =========================================================================
      */
-
-    /**
-     * Prints a horizontal line.
-     * Used for enclosing message within 2 such lines.
-     */
-    private void printLine() {
-        System.out.println(LINE);
-    }
 
     //@@author kahhe
     /**

@@ -1,0 +1,53 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+participant ":UpdateParser" as UpdateParser PARSER_COLOUR
+
+mainframe sd Update Habit Parsing
+
+-> UpdateParser: parseUpdateHabitCommands\n(commandInstruction: String)
+activate UpdateParser
+
+UpdateParser -> UpdateParser: splitInput\n(commandInstruction)
+activate UpdateParser
+UpdateParser --> UpdateParser: parameters: ArrayList<String>
+deactivate UpdateParser
+
+UpdateParser -> UpdateParser: getUpdateHabitAttributes\n(parameters)
+activate UpdateParser
+UpdateParser --> UpdateParser: updateAttributes: ArrayList<Boolean>
+deactivate UpdateParser
+
+alt#gold #lightblue isUpdateHabitName
+UpdateParser -> UpdateParser: getName(parameters)
+activate UpdateParser
+UpdateParser --> UpdateParser: newHabitName: String
+deactivate UpdateParser
+end
+alt#gold #lightblue isUpdateHabitInterval
+UpdateParser -> UpdateParser: getUpdateInterval(parameters)
+activate UpdateParser
+UpdateParser --> UpdateParser: newHabitInterval: String
+deactivate UpdateParser
+end
+
+UpdateParser -> UpdateParser: getIndex(parameters, "/g")
+activate UpdateParser
+UpdateParser --> UpdateParser: goalIndex: int
+deactivate UpdateParser
+
+UpdateParser -> UpdateParser: getIndex(parameters, "/h")
+activate UpdateParser
+UpdateParser --> UpdateParser: habitIndex: int
+deactivate UpdateParser
+
+UpdateParser -> UpdateParser: getExcessHabitAttributes\n(parameters)
+activate UpdateParser
+UpdateParser --> UpdateParser: excessAttributes:\nArrayList<String>
+deactivate UpdateParser
+
+<-- UpdateParser: UpdateHabitCommand\n(goalIndex, habitIndex,\nnewHabitName, newHabitInterval\nupdateAttributes, excessAttributes)
+deactivate UpdateParser
+
+@enduml

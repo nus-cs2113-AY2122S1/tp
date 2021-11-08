@@ -1,6 +1,9 @@
 @startuml
 !include Style.puml
 
+participant ":Storage" as Storage STORAGE_COLOUR
+participant ":Export" as Export STORAGE_COLOUR
+
 [-> Storage: export()
 Storage -> Export: exportToStorage(goalList)
 Export -> Export: clearFile()

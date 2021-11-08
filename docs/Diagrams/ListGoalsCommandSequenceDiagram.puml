@@ -1,22 +1,35 @@
 @startuml
+
 !include Style.puml
 
--> ":ListGoalsCommand": runCommand(goalList:GoalList,\nprintManager:printManager, storage:Storage)
-activate ":ListGoalsCommand"
+participant ":ListGoalsCommand" as ListGoalsCommand COMMAND_COLOUR
+participant "goalList:GoalList" as goalList GOAL_COLOUR
+participant "printManager:PrintManager" as printManager UI_COLOUR
 
-":ListGoalsCommand" -> "goalList:GoalList":  listGoals(printManager:PrintManager)
-activate "goalList:GoalList"
-alt#gold #lightblue goalList.size == 0
-    "goalList:GoalList" -> ":HabitCommandException": HabitCommandException(message:String)
+-> ListGoalsCommand: runCommand(\ngoalList:GoalList,\nprintManager:printManager,\nstorage:Storage,\ngibberish: String)
+activate ListGoalsCommand
+
+ListGoalsCommand -> goalList: listGoals(\nprintManager,\ngibberish)
+activate goalList
+
+alt#gold #lightblue goalList.isEmpty()
+    create ":HabitCommandException"
+    "goalList" -> ":HabitCommandException": HabitCommandException(message: String)
     activate ":HabitCommandException"
+    return
     deactivate ":HabitCommandException"
 
-else #lightgreen
-    "goalList:GoalList" -> "printManager:PrintManager": printGoalList(goalList:ArrayList<Goal>,  goalList.size:int)
-    activate "printManager:PrintManager"
-    deactivate "printManager:PrintManager"
+else #lightgreen else
+    goalList -> printManager: printGoalList(\ngoalList: ArrayList<Goal>,\ngoalList.size: int,\ngibberish)
+    activate printManager
+    printManager --> goalList
+    deactivate printManager
 end
-deactivate "goalList:GoalList"
-deactivate ":ListGoalsCommand"
+
+goalList --> ListGoalsCommand
+deactivate goalList
+
+<-- ListGoalsCommand
+deactivate ListGoalsCommand
 
 @enduml

@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+participant ":UpdateHabitCommand" as UpdateHabitCommand COMMAND_COLOUR
+participant "goalList: GoalList" as goalList GOAL_COLOUR
+participant "printManager: PrintManager" as printManager UI_COLOUR
+
+-> UpdateHabitCommand: runCommand(goalList: GoalList,\nprintManager: PrintManager,\nstorage: Storage
+activate UpdateHabitCommand
+
+UpdateHabitCommand -> goalList: updateHabitAttributes(goalIndex,\nhabitIndex, newHabitName,\nnewHabitInterval, updateAttributes,\nexcessAttributes, printManager)
+activate goalList
+
+goalList -> printManager: printLine()
+activate printManager
+printManager --> goalList
+deactivate printManager
+
+alt#gold #lightblue updateAttributes.get(0)
+goalList -> goalList: updateHabitNameFromGoal(goalIndex,\nhabitIndex, newHabitName, printManager)
+activate goalList
+goalList --> goalList:
+deactivate goalList
+end
+
+alt#gold #lightblue updateAttributes.get(1)
+goalList -> goalList: updateHabitIntervalFromGoal(goalIndex, \nhabitIndex, newHabitInterval, printManager);
+activate goalList
+goalList --> goalList:
+deactivate goalList
+end
+
+goalList -> printManager: printUpdateHabitMessageEnd\n(excessAttributes)
+activate printManager
+printManager --> goalList
+deactivate printManager
+
+goalList --> UpdateHabitCommand
+deactivate goalList
+
+<-- UpdateHabitCommand
+deactivate UpdateHabitCommand
+
+@enduml
