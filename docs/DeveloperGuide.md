@@ -66,8 +66,9 @@ title: Developer Guide
   * [Bring SEPlanner to students from other faculties](#bring-seplanner-to-students-from-other-faculties)
 
 ## About SEPlanner
-SEPlanner is a lightweight desktop application for Computer Engineering undergraduates from the National University of Singapore
-to plan for their Student Exchange Programme, optimized for use via Command Line Interface (CLI).
+
+SEPlanner is a lightweight **desktop application** for Computer Engineering undergraduates from the National University of Singapore (NUS)
+to plan for their **Student Exchange Program (SEP)**, optimized for use via **Command Line Interface** (CLI).   
 
 ## Acknowledgements
 
@@ -88,7 +89,7 @@ The ***Architecture Diagram*** above explains the high-level design of the App.
 
 ### Main Components
 
-The main class of SEPlanner is the `Duke` class. It is responsible for initializing the other components when the program 
+The main class of SEPlanner is the `Seplanner` class. It is responsible for initializing the other components when the program 
 gets started while handling interactions between the other components.  
 The other core components of SEPlanner are:  
 `Ui` : Handles the UI of SEPlanner and prints outputs to the user.  
@@ -127,49 +128,51 @@ by passing the university to display the message of adding the selected universi
 
 
 #### AddModCommand
-When the `AddModCommand` method is called in the `AddModCommand` class. It will call the `addModule` method in the `moduleList` class under Model, adding the module in the selected module list. Then it will call the `updateSelectedModuleList` method in the storage class to update the selected list with the new module added. Finally, it will call the `printModule` method in the `UiModule` class to print the message of adding the module to the user.
+When the `AddModCommand` constructor is called in the `AddModCommand` class. It will call the `addModule` method in the `moduleList` class under Model, adding the module in the selected module list. Then it will call the `updateSelectedModuleList` method in the storage class to update the selected list with the new module added. Finally, it will call the `printModule` method in the `UiModule` class to print the message of adding the module to the user.
 
 #### AddUniCommand
-When the `AddUniCommand` method is called in the `AddUniCommand` class. It will call `addUniversity` method in the `universityList` class under Model, adding the university in the selected university list. Then it will call the `updateSelectedUniversityList` method in the storage class to update the selected list with the new university added. Finally, it will call the `printUniversity` method in the `UiUniversity` class to print the message of adding the university to the user.
+When the `AddUniCommand` constructor is called in the `AddUniCommand` class. It will call `addUniversity` method in the `universityList` class under Model, adding the university in the selected university list. Then it will call the `updateSelectedUniversityList` method in the storage class to update the selected list with the new university added. Finally, it will call the `printUniversity` method in the `UiUniversity` class to print the message of adding the university to the user.
 
 #### AddMapCommand 
-When the `addMapCommand` method is called in the `AddMapCommand` class. It will call the `addMapping` method in the `university` class under Model, adding the mapping under the selected university in the selected university list. Then it will call the `updateSelectedUniversity` method in the storage class to update the selected list with the new mapping added. Finally, it will call the `printUniversity` method in the `UiMapping` class to print the message of adding the mapping to the user.
+When the `addMapCommand` constructor is called in the `AddMapCommand` class. It will call the `addMapping` method in the `university` class under Model, adding the mapping under the selected university in the selected university list. Then it will call the `updateSelectedUniversity` method in the storage class to update the selected list with the new mapping added. Finally, it will call the `printUniversity` method in the `UiMapping` class to print the message of adding the mapping to the user.
 
 #### RemoveModCommand 
-When the `RemoveModCommand` method is called in the `RemoveModCommand` class. It will call the `removeModule` method in the `moduleList` class under Model, removing the module in the selected module list. Then it will call the `updateSelectedModuleList` method in the storage class to update the selected list with the module removed. Finally, it will call the `printModule` method in the `UiModule` class to print the message of removing the module to the user.
+When the `RemoveModCommand` constructor is called in the `RemoveModCommand` class. It will call the `removeModule` method in the `moduleList` class under Model, removing the module in the selected module list. Then it will call the `updateSelectedModuleList` method in the storage class to update the selected list with the module removed. Finally, it will call the `printModule` method in the `UiModule` class to print the message of removing the module to the user.
 
 #### RemoveUniCommand 
-When the `RemoveUniCommand` method is called in the `RemoveUniCommand` class. It will call `removeUniversity` method in the `universityList` class under Model, removing the university in the selected university list. Then it will call the `updateSelectedUniversityList` method in the storage class to update the selected list with the university removed. Finally, it will call the `printUniversity` method in the `UiUniversity` class to print the message of removing the university to the user.
+When the `RemoveUniCommand` constructor is called in the `RemoveUniCommand` class. It will call `removeUniversity` method in the `universityList` class under Model, removing the university in the selected university list. Then it will call the `updateSelectedUniversityList` method in the storage class to update the selected list with the university removed. Finally, it will call the `printUniversity` method in the `UiUniversity` class to print the message of removing the university to the user.
 
 #### RemoveMapCommand 
-When the `RemoveMapCommand` method is called in the `RemoveMapCommand` class. It will call the `removeMapping` method in the `university` class under Model, removing the mapping under the selected university in the selected university list. Then it will call the `updateSelectedUniversity` method in the storage class to update the selected list with the mapping removed. Finally, it will call the `printUniversity` method in the `UiMapping` class to print the message of removing the mapping to the user.
+When the `RemoveMapCommand` constructor is called in the `RemoveMapCommand` class. It will call the `removeMapping` method in the `university` class under Model, removing the mapping under the selected university in the selected university list. Then it will call the `updateSelectedUniversity` method in the storage class to update the selected list with the mapping removed. Finally, it will call the `printUniversity` method in the `UiMapping` class to print the message of removing the mapping to the user.
 
 #### ListModCommand 
-When the `ListModCommand` method is called in the `ListModCommand` class. It will call the `getSize()` method in the `moduleList` class to check if the list is empty: if the list is empty, it prints the error message. If the list is not empty, it calls the `printModule` method in the `UiModule` class in a loop to print all modules found.
+When the `ListModCommand` constructor is called in the `ListModCommand` class. It will call the `getSize()` method in the `moduleList` class to check if the list is empty: if the list is empty, it prints the error message. If the list is not empty, it calls the `printModule` method in the `UiModule` class in a loop to print all modules found.
 
 #### ListUniCommand 
-When the `ListUniCommand` method is called in the `ListUniCommand` class. It will call the `getSize()` method in the `UniversityList` class to check if the list is empty: if the list is empty, it prints the error message. If the list is not empty, it checks the type of university list chosen. If the master list is chosen, the `printMasterList` method is called, which calls `printUniversity` method in the `UiUniversity` class to print out all universities in the master list. If the selected list is chosen, `printSelectedList` is called, which calls `printUniversity` method in the `UiUniversity` class to print out all universities in the selected list and calls `listAllMappings` method in the `universityList` class to print all module mappings under each university as well.
+When the `ListUniCommand` constructor is called in the `ListUniCommand` class. It will call the `getSize()` method in the `UniversityList` class to check if the list is empty: if the list is empty, it prints the error message. If the list is not empty, it checks the type of university list chosen. If the master list is chosen, the `printMasterList` method is called, which calls `printUniversity` method in the `UiUniversity` class to print out all universities in the master list. If the selected list is chosen, `printSelectedList` is called, which calls `printUniversity` method in the `UiUniversity` class to print out all universities in the selected list and calls `listAllMappings` method in the `universityList` class to print all module mappings under each university as well.
 
 #### FindModCommand 
-When the `FindModCommand` method is called in the `FindModCommand` class. It will get the list of module results by searching in the `moduleMasterList`. Then it checks if the result list is empty: if the result list is empty, it calls the `printFindModNull` method in the `UiInvalid` class to print the error message. If the result list is not empty, it calls the `printModule` method in the `UiModule` class in a loop to print all modules found.
+When the `FindModCommand` constructor is called in the `FindModCommand` class. It will get the list of module results by searching in the `moduleMasterList`. Then it checks if the result list is empty: if the result list is empty, it calls the `printFindModNull` method in the `UiInvalid` class to print the error message. If the result list is not empty, it calls the `printModule` method in the `UiModule` class in a loop to print all modules found.
 
 #### FindUniCommand 
-When the `FindUniCommand` method is called in the `FindUniCommand` class. It will get the list of university results by searching in the `universityMasterList`. Then it checks if the result list is empty: if the result list is empty, it calls the `printFindUniNull` method in the `UiInvalid` class to print the error message. If the result list is not empty, it calls the `printUniversity` method in the `UiUniversity` class in a loop to print all universities found.
+When the `FindUniCommand` constructor is called in the `FindUniCommand` class. It will get the list of university results by searching in the `universityMasterList`. Then it checks if the result list is empty: if the result list is empty, it calls the `printFindUniNull` method in the `UiInvalid` class to print the error message. If the result list is not empty, it calls the `printUniversity` method in the `UiUniversity` class in a loop to print all universities found.
 
 #### SearchMapCommand 
-When the `SearchMapCommand` method is called in the `SearchMapCommand` class, it will check if `isAll` is true. If `isAll` is true, the `printMappings` method will be called, which prints all mappings from the selected module list for all universities in the selected university list by calling the `printIndex` method in the Ui class and `listSelectedMappings` method in the University class. If isAll is false, it will call the `printMappings` method to print out only the mappings for the selected university only.  
+When the `SearchMapCommand` constructor is called in the `SearchMapCommand` class, it will check if `isAll` is true. If `isAll` is true, the `printMappings` method will be called, which prints all mappings from the selected module list for all universities in the selected university list by calling the `printIndex` method in the Ui class and `listSelectedMappings` method in the University class. If isAll is false, it will call the `printMappings` method to print out only the mappings for the selected university only.  
 The following sequence diagram illustrates how the whole process is carried out.
 <p align = "center">
 <img src="images/searchmapseq.png" width = "800" />
 </p>
 
 #### HelpCommand 
-When the `HelpCommand` method is called in the `HelpCommand` class. It will print out all commands available for SEPlanner.
+When the `HelpCommand` constructor is called in the `HelpCommand` class. It will print out all commands available for SEPlanner.
 
 #### ExitCommand 
-When the `ExitCommand` method is called in the `ExitCommand` class. It will call the `printExit` method in the `UiGeneral` class to exit the program.
+When the `ExitCommand` constructor is called in the `ExitCommand` class. It will call the `printExit` method in the `UiGeneral` class to exit the program.
 
 ### User Interface
+
+#### API : [`Ui.java`](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob/master/src/main/java/seplanner/ui/Ui.java)
 
 The Ui component consolidates and formats the output of the program before displaying it to the user
 in the command line. 
@@ -184,26 +187,26 @@ The Ui class is the parent of every other class in the package.
 * Contains helper methods for the other Ui classes.
 * Provides means of printing constants.
 
-The UiInvalid class contains methods for printing messages from the Parser component.
+The `UiInvalid` class contains methods for printing messages from the Parser component.
 
-The UiMapping class contains methods for printing Module Mappings. 
+The `UiMapping` class contains methods for printing module mappings. 
 
-The UiModule class contains methods for printing Modules. 
+The `UiModule` class contains methods for printing modules. 
 
-The UiUniversity class contains methods for printing Universities. 
+The `UiUniversity` class contains methods for printing universities. 
 
-The UiWelcome class contains a method for printing the welcome greeting. 
+The `UiWelcome` class contains a method for printing the welcome greeting. 
 
-The UiInvalid class contains methods to display error messages to the user. 
+The `UiInvalid` class contains methods to display error messages to the user. 
 
-The UiStorage class contains methods to display error messages from the Storage component to the user. 
+The `UiStorage` class contains methods to display error messages from the Storage component to the user. 
 
 <p align = "center">
 <img src="images/uiseq.png" width = "800" />
 </p>
 
-The sequence diagram above illustrates how the classes in the Ui package interact when a printUniversity() call is made from outside the package.
-In the printUniversity Method,
+The sequence diagram above illustrates how the classes in the Ui package interact when a `printUniversity()` call is made from outside the package.
+In the `printUniversity()` Method,
 1. `printIndex` is called from the Ui class.
 2. Within `printIndex`, we display the index, then do a self-invocation on stringPadder within the Ui class to pad the string to line up the text after. 
 3. After printing the index, print the university name, then depending on the boolean printMC, we pad it again with stringPadder before displaying the Module Credits. 
@@ -218,7 +221,7 @@ In the printUniversity Method,
 <img src="images/storage.png" width = "1600" />
 </p>
 
-The storage component can implement the below features:
+The Storage component can implement the below features:
 
 * Read the list of module mappings offered by each university from the CSV file.
 * Read the list of NUS modules that can be mapped from the CSV file.
@@ -382,20 +385,20 @@ a list of potential exchange Universities based on the user's study plan, module
 |--------|----------|---------------|------------------|
 |v1.0|new user|see the list of possible schools for exchange|view my options for SEP|
 |v1.0|new user|see the list of available NUS modules|decide on which NUS modules I want to complete during SEP|
-|v1.0|beginner user|add a University to my preferred list|view the Universities that I am interested in|
-|v1.0|beginner user|add an NUS Module to my preferred list|save my module preferences for the future|
-|v1.0|beginner user|list down all Universities in my preferred list|keep track of my target schools for SEP|
+|v1.0|beginner user|add a university to my preferred list|view the universities that I am interested in|
+|v1.0|beginner user|add an NUS module to my preferred list|save my module preferences for the future|
+|v1.0|beginner user|list down all universities in my preferred list|keep track of my target schools for SEP|
 |v1.0|beginner user|list down all NUS modules in my preferred list|keep track of the list of NUS modules I want to complete during SEP|
-|v1.0|beginner user|delete a University from the selected list|remove the University that I am not interested in|
+|v1.0|beginner user|delete a university from the selected list|remove the university that I am not interested in|
 |v1.0|beginner user|delete a module from the selected list|remove the module that I do not consider to enroll in the future|
 |v1.0|user|enter commands and arguments to the application|interact with the application on the command line in an efficient way
 |v2.0|familiar user|save my university and module information|maintain access to my information when I restart the application|
 |v2.0|new user|view the program instructions|refer to them when I forget how to use the application|
-|v2.0|familiar user|find a university by name|locate a University without having to go through the entire list|
+|v2.0|familiar user|find a university by name|locate a university without having to go through the entire list|
 |v2.0|familiar user|search the available module mappings for a university based on the selected module list|get a list of module mappings for this university, based on my selected modules|
 |v2.0|familiar user|add a pair of module mapping for a university|save a module mapping under the university that I selected|
 |v2.0|familiar user|delete a mapping pair of modules for a university|remove a module mapping under a selected university|
-|v2.0|familiar user|pass in university as command argument using its index in the master list|access the exact University I want without having to type out its full name and facing bugs caused by typo|
+|v2.0|familiar user|pass in university as command argument using its index in the master list|access the exact university I want without having to type out its full name and facing bugs caused by typo|
 |v2.1|familiar user|add a university to the selected list by name or index|store a university entering either its name or index|
 |v2.1|familiar user|add a module to the selected list by code or index|store a module entering either its code or index|
 |v2.1|familiar user|remove a university to the selected list by name or index|delete a university entering either its name or index|
