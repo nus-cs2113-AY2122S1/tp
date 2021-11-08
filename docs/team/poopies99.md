@@ -39,5 +39,5 @@ Given below are my contributions to the project.
         * Did cosmetic tweaks for UserGuide [\#188](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/188).
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#30](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/30), [\#55](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/55), [\94](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/94), [\#185](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/185)
+    * PRs reviewed (with non-trivial review comments): [\#30](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/30), [\#55](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/55), [\#94](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/94), [\#185](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/185)
     * Reported bugs and suggestions for other teams in the class (example: [\#23](https://github.com/nus-cs2113-AY2122S1/tp/pull/23))
