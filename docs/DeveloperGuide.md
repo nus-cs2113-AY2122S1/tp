@@ -95,7 +95,7 @@ When the user inputs a line of text into the terminal, terminated with a newline
 Given below is a sequence diagram of how the `Ui` component works after the `Parser`
 parses `help delete` input given by a user.
 
-![Ui Sequence Diagram](diagrams/Ui_sequence_diagram.png)
+![Ui Sequence Diagram](diagrams/UiSequenceDiagram.png)
 
 ### 3.3 Parser Component
 
