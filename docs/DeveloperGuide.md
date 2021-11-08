@@ -30,11 +30,23 @@ the design considerations and implementation of features, and possibly expand on
     * [4.3.1. Implementation](#431-implementation)
     * [4.3.2. Design Considerations](#432-design-considerations)
   * [4.4. Listing all Habits](#44-listing-all-habits)
+    * [4.4.1. Implementation](#441-implementation)
+    * [4.4.2. Design Considerations](#442-design-considerations)
   * [4.5. Completing a Habit](#45-completing-a-habit)
+    * [4.5.1. Implementation](#451-implementation)
+    * [4.5.2. Design Considerations](#452-design-considerations)
   * [4.6. Updating a Goal](#46-updating-a-goal)
+    * [4.6.1. Implementation](#461-implentation)
+    * [4.6.2. Design Considerations](#462-design-considerations)
   * [4.7. Updating a Habit](#47-updating-a-habit)
+    * [4.7.1. Implementation](#471-implentation)
+    * [4.7.2. Design Considerations](#472-design-considerations)
   * [4.8. Deleting a Goal](#48-deleting-a-goal)
+    * [4.8.1. Implementation](#481-implentation)
+    * [4.8.2. Design Considerations](#482-design-considerations)
   * [4.9. Deleting a Habit](#49-deleting-a-habit)
+    * [4.9.1. Implementation](#491-implentation)
+    * [4.9.2. Design Considerations](#492-design-considerations)
   * [4.10. Getting Help](#410-getting-help)
   * [4.11. Storage of Information](#411-storage-of-information)
 * [Appendix A: Product Scope](#appendix-a-product-scope)
@@ -459,11 +471,12 @@ The `runCommand` method is then executed for the `UpdateHabitCommand` object as 
 
 
 ### 4.8. Deleting a Goal
-This command allows you to delete goals from _Ha(ppy)Bit_. This allows them to rid the app of goals 
-you decide not to pursue any further or may deem to be irrelevant.
 
-A `DeleteGoalCommand` object is returned from the `DeleteParser` if the user input is successfully parsed as shown below.
-If the delete command is not provided with a goal index, it will throw an exception.
+This section describes the implementation of how the user can delete a goal from their list of tracked goals.
+
+#### 4.8.1. Implementation
+
+
 
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteGoalCommandParserSequenceDiagram.png))
 
