@@ -3,6 +3,7 @@ package seedu.duke.commands.clients;
 import seedu.duke.TourPlannerException;
 import seedu.duke.data.Client;
 import seedu.duke.commands.Command;
+import seedu.duke.data.Flight;
 
 /**
  * Adds a client into the database.
@@ -35,12 +36,25 @@ public class AddClientCommand extends Command {
      */
     @Override
     public void execute() {
-        try {
-            Client existingClient = clients.getClientById(client.getId());
-            System.out.println("ERROR: Client ID already exists. Please try another client ID.");
-        } catch (TourPlannerException e) {
-            clients.add(client);
-            ui.showAdd(client);
+
+        int count = clients.getClientCount();
+        for (int i = 0; i < count; i++) {
+            Client currClient = clients.getClientByIndex(i);
+            boolean sameId = currClient.getId().equals(client.getId());
+            if (sameId) {
+                System.out.println("ERROR: Client ID already exists. Please try another client code.");
+                return;
+            }
+            boolean sameName = currClient.getName().equals(client.getName());
+            boolean sameContactNum = currClient.getContactNum().equals(client.getContactNum());
+            boolean sameEmail = currClient.getEmail().equals(client.getEmail());
+            if (sameName && sameContactNum && sameEmail) {
+                System.out.println("ERROR: Client with same fields already exists with different ID.");
+                return;
+            }
         }
-    }
+        clients.add(client);
+        ui.showAdd(client);
+        }
 }
+

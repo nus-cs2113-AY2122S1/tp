@@ -17,6 +17,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ListClientCommandTest {
 
+    private static Client TEST_CLIENT_ONE = new Client(new String[]{"c001", "Bo Tuan", "93338333", "bt@mail.com"});
+    private static Client TEST_CLIENT_TWO = new Client(new String[]{"c002", "Wayne", "56667888", "wen@mail.com"});
+    private static final String VALID_DATA_OUTPUT = "Here is a list of all clients:\n"
+            + "1. " + TEST_CLIENT_ONE + "\n\n"
+            + "2. " + TEST_CLIENT_TWO + "\n\n"
+            + "Total Clients: 2";
+    private static final String NO_DATA_OUTPUT = "I'm sorry, there seems to be no clients";
+
     PrintStream previousConsole = System.out;
     ByteArrayOutputStream newConsole = new ByteArrayOutputStream();
 
@@ -30,28 +38,16 @@ public class ListClientCommandTest {
     void listClientCommand_validData_correctlyConstructed() throws TourPlannerException {
         System.setOut(new PrintStream(newConsole));
 
-        Client botuan = new Client(new String[]{"c001", "Bo Tuan", "93338333", "bt@mail.com"});
-        Client wayne = new Client(new String[]{"c002", "Wayne", "56667888", "wen@mail.com"});
-        testClientList.add(botuan);
-        testClientList.add(wayne);
+        testClientList.add(TEST_CLIENT_ONE);
+        testClientList.add(TEST_CLIENT_TWO);
         Command listClient = new ListClientCommand();
         listClient.setData(testClientList, dummyFlightList, dummyTourList, dummyPackageList, testUi);
         listClient.execute();
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "Here is a list of all clients:\n"
-                + "1. Client ID: c001\n"
-                + "Name: Bo Tuan\n"
-                + "Contact Number: 93338333\n"
-                + "Email: bt@mail.com\n" + "\n"
-                + "2. Client ID: c002\n"
-                + "Name: Wayne\n"
-                + "Contact Number: 56667888\n"
-                + "Email: wen@mail.com\n" + "\n"
-                + "Total Clients: 2";
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
-        assertEquals(expectedString, actualString);
+        assertEquals(VALID_DATA_OUTPUT, actualString);
     }
 
     @Test
@@ -64,8 +60,7 @@ public class ListClientCommandTest {
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "I'm sorry, there seems to be no clients";
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
-        assertEquals(expectedString, actualString);
+        assertEquals(NO_DATA_OUTPUT, actualString);
     }
 }

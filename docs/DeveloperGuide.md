@@ -15,6 +15,7 @@
        - [Cut feature](#ucut-featureu)
        - [List feature](#ulist-featureu)
        - [Find feature](#ufind-featureu)
+       - [Sort feature](#usort-featureu)
    - [Ui component](#ui-component)
    - [Storage component (chengxu to do)]()
 
@@ -448,24 +449,30 @@ The following activity diagram summarizes the following steps.
 
 #### <u>Finding a particular tour</u>
 
-**Step 1**: The user executes ```find -t JPN``` to query if a tour with code JPN exists in the TourList. The ```parse```
-function in the ```Parser```
+**Step 1**: The user executes ```find -t JPN``` to query if a tour with code
+JPN exists in the TourList. The ```parse``` function in the ```Parser```
 class takes the command, and the first word in it (```find```) means that the
-```parseFind()``` is to be called to determine which type of Object is to be queried for. The second word (```-f```)
-means that a the ```FindTourCommand()``` is executed with the parameter ```JPN```
+```parseFind()``` is to be called to determine which type of Object is to be
+queried for. The second word (```-f```) means that a the ```FindTourCommand()``` is
+executed with the parameter ```JPN```
 
-**Step 2**: The ```FindTourCommand``` iterates through each ```Tour``` object in the ```TourList```. For
-every ```Tour```, the ```getCode()``` function is called to retrieve the code attribute of the Tour. If the tour
-attribute is equals to ```JPN```, the ```Tour``` object is printed onto the console terminal.
 
-**Step 3**: In addition, the ```FindTourCommand``` iterates through each ```ClientPackage``` object in
-the ```ClientPackageList```. For every ```ClientPackage```, the ```getTour()``` function is called to retrieve the tour
-attribute of the ClientPackage. If the tour attribute is equals to the same ```Tour``` object that was found in Step 2,
-the client attribute of that same ClientPackage will be retrieved using the ```getClient()``` function.
+**Step 2**: The ```FindTourCommand``` is executed and iterates through each ```Tour``` object in the ```TourList```.
+For every ```Tour```, the ```getCode()``` function is called to retrieve the code attribute of the Tour.
+If the tour attribute is equals to ```JPN```, the ```Tour``` object
+is printed onto the console terminal.
 
-**Step 4**: The client's name attribute is then retrieved using the ```getName()``` function in the Client class. The
-name is printed onto the console terminal under "Subscribed Clients". Once all  ```ClientPackage``` objects are iterated
-through in the ```ClientPackageList```, the total number of subscribed clients will be printed on the console terminal.
+
+**Step 3**: In addition, the ```FindTourCommand``` iterates through each ```ClientPackage``` object in the ```ClientPackageList```.
+For every ```ClientPackage```, the ```getTour()``` function is called to retrieve the tour attribute of the ClientPackage.
+If the tour attribute is equals to the same ```Tour``` object that was found in Step 2, the client attribute of that same
+ClientPackage will be retrieved using the ```getClient()``` function.
+
+
+**Step 4**: The client's name attribute is then retrieved using the ```getName()``` function in the Client class.
+The name is printed onto the console terminal under "Subscribed Clients". Once all  ```ClientPackage``` objects are
+iterated through in the ```ClientPackageList```, the total number of subscribed clients will be printed on the console
+terminal.
 
 <br>
 
@@ -484,9 +491,10 @@ class takes the command, and the first word in it (```find```) means that the
 ```parseFind()``` is to be called to determine which type of Object is to be queried for. The second word (```-f```)
 means that a the ```FindFlightCommand()``` is executed with the parameter ```SQ-JPN```
 
-**Step 2**: The ```FindFlightCommand``` iterates through each ```Flight``` object in the ```FlightList```. For
-every ```Flight```, the ```getCode()``` function is called to retrieve the code attribute of the Tour. If the tour
-attribute is equals to ```SQ-JPN```, the ```Flight``` object is printed onto the console terminal.
+**Step 2**: The ```FindFlightCommand``` is executed and iterates through each ```Flight``` object in the ```FlightList```.
+For every ```Flight```, the ```getCode()``` function is called to retrieve the code attribute of the Tour.
+If the tour attribute is equals to ```SQ-JPN```, the ```Flight``` object
+is printed onto the console terminal.
 
 **Step 3**: In addition, the ```FindFlightCommand``` iterates through each ```ClientPackage``` object in
 the ```ClientPackageList```. For every ```ClientPackage```, the ```getFlight()``` function is called to retrieve the
@@ -632,6 +640,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |`* *`|user with large amounts of data|find an existing entry of specific data type |locate a specific entry easily|
 |`* *`|user with large amounts of data|sort existing entries of specific data type |make smarter recommendations to clients based on their preferences|
 |`* *`|user|check number of clients subscribed to a tour / flight|check the popularity, vacancy of certain tours / flights|
+
 
 Note: 'specific data type' refers to either clients, tours, flights or tour packages.
 

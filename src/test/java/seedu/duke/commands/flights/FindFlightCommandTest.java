@@ -20,6 +20,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FindFlightCommandTest {
 
+    private static Flight TEST_FLIGHT_ONE = new Flight(new String[]{"SQ-JPN", "JPN", "SG", "20/10/2021 18:00", "21/10/2021 03:00"});
+    private static Flight TEST_FLIGHT_TWO = new Flight(new String[]{"SQ-KOR", "KOR", "SG", "23/10/2021 18:00", "30/10/2021 03:00"});
+    private static Client TEST_CLIENT = new Client(new String[]{"c001", "Bo Tuan", "93338333", "bt@mail.com"});
+    private static Tour TEST_TOUR = new Tour(new String[]{"JPN", "Japan Basic Tour", "1500.00"});
+    private static ClientPackage TEST_CLIENTPACKAGE = new ClientPackage("p001",
+            TEST_CLIENT, TEST_TOUR, TEST_FLIGHT_ONE);
+
+    private static final String VALID_DATA_OUTPUT = "This is the flight that matches your search\n"
+            + TEST_FLIGHT_ONE + "\n\n\n"
+            + "Passengers:\n\n"
+            + "Total Passengers: 0";
+    private static final String VALID_PASSENGER_OUTPUT = "This is the flight that matches your search\n"
+            + TEST_FLIGHT_ONE + "\n\n\n"
+            + "Passengers:\n"
+            + "1. Bo Tuan (ID: c001)\n" + "\n"
+            + "Total Passengers: 1";
+    private static final String INVALID_DATA_OUTPUT = "ERROR: Flight cannot be found. Please try another flight ID.";
+
     PrintStream previousConsole = System.out;
     ByteArrayOutputStream newConsole = new ByteArrayOutputStream();
 
@@ -31,43 +49,29 @@ public class FindFlightCommandTest {
 
     @Test
     void findFlightCommand_validData_correctlyConstructed() throws TourPlannerException {
+
         System.setOut(new PrintStream(newConsole));
 
-        Flight sqjpn = new Flight(new String[]{"SQ-JPN", "JPN", "SG", "20/10/2021 18:00", "21/10/2021 03:00"});
-        Flight sqkor = new Flight(new String[]{"SQ-KOR", "KOR", "SG", "23/10/2021 18:00", "30/10/2021 03:00"});
-        testFlightList.add(sqjpn);
-        testFlightList.add(sqkor);
+        testFlightList.add(TEST_FLIGHT_ONE);
+        testFlightList.add(TEST_FLIGHT_TWO);
         Command findFlight = new FindFlightCommand("SQ-JPN");
         findFlight.setData(dummyClientList, testFlightList, dummyTourList, dummyPackageList, testUi);
         findFlight.execute();
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "This is the flight that matches your search\n"
-                + "Flight ID: SQ-JPN\n"
-                + "Departure Flight: JPN, 20/10/2021 18:00\n"
-                + "Return Flight: SG, 21/10/2021 03:00\n" + "\n" + "\n"
-                + "Passengers:\n"
-                + "Total Passengers: 0";
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
-        assertEquals(expectedString, actualString);
+        assertEquals(VALID_DATA_OUTPUT, actualString);
     }
 
     @Test
     void findFlightCommand_validPassenger_correctlyConstructed() throws TourPlannerException {
         System.setOut(new PrintStream(newConsole));
 
-        Client botuan = new Client(new String[]{"c001", "Bo Tuan", "93338333", "bt@mail.com"});
-        dummyClientList.add(botuan);
-
-        Tour jpn = new Tour(new String[]{"JPN", "Japan Basic Tour", "1500.00"});
-        dummyTourList.add(jpn);
-
-        Flight sqjpn = new Flight(new String[]{"SQ-JPN", "JPN", "SG", "20/10/2021 18:00", "21/10/2021 03:00"});
-        testFlightList.add(sqjpn);
-
-        ClientPackage jpnPackage = new ClientPackage("p001", botuan, jpn, sqjpn);
-        dummyPackageList.add(jpnPackage);
+        dummyClientList.add(TEST_CLIENT);
+        dummyTourList.add(TEST_TOUR);
+        testFlightList.add(TEST_FLIGHT_ONE);
+        dummyPackageList.add(TEST_CLIENTPACKAGE);
 
         Command findFlight = new FindFlightCommand("SQ-JPN");
         findFlight.setData(dummyClientList, testFlightList, dummyTourList, dummyPackageList, testUi);
@@ -75,33 +79,23 @@ public class FindFlightCommandTest {
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "This is the flight that matches your search\n"
-                + "Flight ID: SQ-JPN\n"
-                + "Departure Flight: JPN, 20/10/2021 18:00\n"
-                + "Return Flight: SG, 21/10/2021 03:00\n" + "\n" + "\n"
-                + "Passengers:\n"
-                + "1. Bo Tuan\n" + "\n"
-                + "Total Passengers: 1";
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
-        assertEquals(expectedString, actualString);
+        assertEquals(VALID_PASSENGER_OUTPUT, actualString);
     }
 
     @Test
     void findFlightCommand_invalidData_correctlyConstructed() throws TourPlannerException {
         System.setOut(new PrintStream(newConsole));
 
-        Flight sqjpn = new Flight(new String[]{"SQ-JPN", "JPN", "SG", "20/10/2021 18:00", "21/10/2021 03:00"});
-        Flight sqkor = new Flight(new String[]{"SQ-KOR", "KOR", "SG", "23/10/2021 18:00", "30/10/2021 03:00"});
-        testFlightList.add(sqjpn);
-        testFlightList.add(sqkor);
+        testFlightList.add(TEST_FLIGHT_ONE);
+        testFlightList.add(TEST_FLIGHT_TWO);
         Command findFlight = new FindFlightCommand("SQ-ZBW");
         findFlight.setData(dummyClientList, testFlightList, dummyTourList, dummyPackageList, testUi);
         findFlight.execute();
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "Flight ID cannot be found. Please try another Flight ID.";
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
-        assertEquals(expectedString, actualString);
+        assertEquals(INVALID_DATA_OUTPUT, actualString);
     }
 }
