@@ -1,6 +1,8 @@
 package seedu.utility.tools;
 
 import seedu.entry.Entry;
+import seedu.exceptions.InvalidDateException;
+import seedu.utility.Messages;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -9,15 +11,20 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 
-import static seedu.utility.Parser.DATE_FORMAT;
+import static java.util.stream.Collectors.toList;
+
 
 /**
  * DateOperator is stores useful date manipulation methods which are used for processing data of FinancialTracker.java.
  */
 public abstract class DateOperator {
+    public static final String DATE_FORMAT = "dd/MM/yyyy";
+    
     /**
      * Checks if the date of a given entry is within a valid date range, 
      * where startDate is earlier than or the same as endDate.
@@ -110,28 +117,56 @@ public abstract class DateOperator {
         return item -> isSameYear(inputYear, item);
     }
 
+
+    /**
+     * Returns the current month as an index.
+     * @return The current month as an index of data type int.
+     */
     public static int currentMonthInIndex() {
         LocalDate currentDate = LocalDate.now();
         return currentDate.getMonthValue() - 1;
     }
 
+    /**
+     * Returns the current month.
+     * @return The current month as an object.
+     */
     public static Month currentMonth() {
         LocalDate currentDate = LocalDate.now();
         return currentDate.getMonth();
     }
 
-    public static DateRange extractStartAndEndDate(Matcher matcher) {
+    public static DateRange extractStartAndEndDate(Matcher matcher) throws InvalidDateException {
         String start = matcher.group("start").trim();
-        LocalDate startDate = LocalDate.parse(start, DateTimeFormatter.ofPattern(DATE_FORMAT));
         String end = matcher.group("end").trim();
+        if (isInvalidDate(start) || isInvalidDate(end)) {
+            throw new InvalidDateException(Messages.INVALID_DATE_ERROR);
+        }
+        LocalDate startDate = LocalDate.parse(start, DateTimeFormatter.ofPattern(DATE_FORMAT));
         LocalDate endDate = LocalDate.parse(end, DateTimeFormatter.ofPattern(DATE_FORMAT));
+        
         return new DateRange(startDate,endDate);
     }
 
     //@@author AnShengLee 
-    public static LocalDate extractDate(Matcher matcher) throws DateTimeParseException {
+    public static LocalDate extractDate(Matcher matcher) throws DateTimeParseException, InvalidDateException {
         String date = matcher.group("date").trim();
+        if (isInvalidDate(date)) {
+            throw new InvalidDateException(Messages.INVALID_DATE_ERROR);
+        }
         return LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
     //@@author AnShengLee
+    
+    private static boolean isInvalidDate(String inputDate) {
+        ArrayList<String> date = new ArrayList<>(Arrays.asList(inputDate.split("/")));
+        List<Integer> fields = date.stream().mapToInt(Integer::parseInt).boxed().collect(toList());
+        return fields.get(0) == 29 && fields.get(1) == 2 && isNormalYear(date.get((2)));
+    }
+    
+    private static boolean isNormalYear(String inputYear) {
+        DateTimeFormatter yearFormat = getYearFormat();
+        LocalDate year = LocalDate.parse(inputYear, yearFormat);
+        return !year.isLeapYear();
+    }
 }

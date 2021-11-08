@@ -23,7 +23,8 @@ public class Messages {
     public static final String UNABLE_TO_FIND_SETTINGS_FILE = "Unable to find StonksXD_Settings.csv, a new one " 
             + "has been made.";
     public static final String SEARCH_NO_MATCH_MESSAGE = "Your search did not match any of the entries!";
-    public static final String TYPE_SOMETHING_MESSAGE = "Type something!";
+    public static final String PROMPTING_MESSAGE = "Would you like to set your budget before you begin?\n"
+            + "You can use the set budget commands shown in the help command!";
     public static final String HELP_COMMAND_MESSAGE = "This is a list of commands and their format!";
     public static final String LISTING_EXPENSE_MESSAGE = "Below is a list of all of your recent spending!";
     public static final String LISTING_INCOME_MESSAGE = "Below is a list of all of your recent earnings!";
@@ -37,8 +38,8 @@ public class Messages {
             + "Transport, Bills, Medical, Entertainment or Misc.";
     public static final String INVALID_INCOME_CATEGORY_MESSAGE = "Input only 1 of these 4 categories: Salary, " 
             + "Allowance, Adhoc, or Others.";
-    public static final String INVALID_BUDGET_CATEGORY_MESSAGE = "Input only 1 of these 6 categories: Food, "
-            + "Transport, Bills, Medical, Entertainment or Overall";
+    public static final String INVALID_BUDGET_CATEGORY_MESSAGE = "Input only 1 of these 7 categories: Food, "
+            + "Transport, Bills, Medical, Entertainment, Misc or Overall";
     public static final String INVALID_THRESHOLD_MESSAGE = "Threshold value should between 0 and 1.";
     public static final String INVALID_CURRENCY_TYPE_MESSAGE = "Please enter a valid currency for conversion!";
     public static final String BLANK_CURRENCY_TYPE_MESSAGE = "You have not entered any currency type!";
@@ -63,14 +64,13 @@ public class Messages {
 
     public static final String TIP_HEADER = "Here's our tip for the day: ";
     public static final String DISPLAY_ADVICE_ERROR = "Sorry there is no advice for you at this moment >.<";
-    public static final String CURRENT_CURRENCY_MESSAGE = "You currency setting currently: ";
+    public static final String CURRENT_CURRENCY_MESSAGE = "Your currency setting currently: ";
+    public static final String CURRENCY_CONVERSION_SUCCESSFUL_MESSAGE = "All entries have been converted to ";
     public static final String INVALID_DATE_RANGE_MESSAGE = "Make sure your start date is before your end date";
     public static final String PARAMETERS_ERROR_MESSAGE = "You have missing or invalid parameters. Use help to view " 
             + "commands again!";
     public static final String INVALID_EXPENSE_VALUE = "Wow! That's a lot of money. "
             + "Are you sure you have spent that much?";
-    public static final String INVALID_INCOME_VALUE = "Wow! That's a lot of money."
-            + "I don't think we can handle that much money";
     public static final String INVALID_BUDGET_VALUE = "Wow! That's a lot of money."
             + "I don't think we can handle that much money";
     public static final String INCOMPLETE_ENTRIES_CSV_HEADER_MESSAGE = "The CSV header for StonksXD_Entries.csv " 
@@ -91,4 +91,6 @@ public class Messages {
     public static final String INVALID_DATE_FORMAT = "Your date format is invalid. Please use DD/MM/YYYY";
     public static final String INVALID_INDEX_MESSAGE = "Index given is either out of range or not an integer.";
     public static final String INVALID_YEAR_MESSAGE = "The given year must be in the YYYY format.";
+    public static final String INVALID_DATE_ERROR = "This date is invalid. Try another date!";
+    public static final String AMOUNT_BELOW_MIN_MESSAGE = "The amount you have given is less than 0.05!";
 }

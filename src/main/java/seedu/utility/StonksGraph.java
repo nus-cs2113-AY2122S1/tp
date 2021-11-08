@@ -19,6 +19,7 @@ public class StonksGraph {
     private static final char SEPARATOR_CHAR = '-';
     private static final char BORDER_CHAR = 'x';
     private static final char NON_BORDER_CHAR = ' ';
+    private static final double TOTAL_LIMIT = 100000000000.00;
     private final char[][] grid = new char [ROWS][COLS];
 
     /**
@@ -47,7 +48,7 @@ public class StonksGraph {
     }
 
     /**
-     * Returns true if position is that of each month's expense bar.
+     * Returns true if column is that of each month's expense bar.
      */
     private boolean isExpenseBar(int y) {
         return y == 4 || y == 12 || y == 20 || y == 28 || y == 36 || y == 44 || y == 52 || y == 60
@@ -55,7 +56,7 @@ public class StonksGraph {
     }
 
     /**
-     * Returns true if position is that of each month's income bar.
+     * Returns true if column is that of each month's income bar.
      */
     private boolean isIncomeBar(int y) {
         return y == 5 || y == 13 || y == 21 || y == 29 || y == 37 || y == 45 || y == 53 || y == 61
@@ -156,26 +157,26 @@ public class StonksGraph {
      * @param currExpenseBreakdowns ArrayList containing all the totalExpenses for each month of the current year.
      */
     private void drawCurrentMonth(ArrayList<Double> currIncomeBreakdowns, ArrayList<Double> currExpenseBreakdowns) {
-        
+        int currentYear = LocalDate.now().getYear();
         Month currentMonth = DateOperator.currentMonth();
         int currentMonthInIndex = DateOperator.currentMonthInIndex();
-        String currentExpenseString = "Current month (" + currentMonth + ") total expense: ";
-        String currentIncomeString = "Current month (" + currentMonth + ") total income: ";
+        String currentExpenseString = "Current month (" + currentMonth + " " + currentYear + ") total expense: ";
+        String currentIncomeString = "Current month (" + currentMonth + " " + currentYear + ") total income: ";
         
         double currentMonthExpense = currExpenseBreakdowns.get(currentMonthInIndex);
         writeToGraph(3,4, currentExpenseString);
         String stringCurrentMonthExpense = String.format("$%.2f", currentMonthExpense);
-        writeToGraph(3, 44, stringCurrentMonthExpense);
+        writeToGraph(3, 49, stringCurrentMonthExpense);
 
         double currentMonthIncome = currIncomeBreakdowns.get(currentMonthInIndex);
         writeToGraph(4,4, currentIncomeString);
         String stringCurrentMonthIncome = String.format("$%.2f", currentMonthIncome);
-        writeToGraph(4, 43, stringCurrentMonthIncome);
+        writeToGraph(4, 48, stringCurrentMonthIncome);
 
     }
 
-    private void drawLegendAndTitle() {
-        writeToGraph(5,4, "Your Yearly Report");
+    private void drawLegendAndTitle(int year) {
+        writeToGraph(5,4, String.format("Year %d Report", year));
         writeToGraph(2, 75, "Legend:");
         writeToGraph(3, 80, " # is Expense");
         writeToGraph(4, 80, " o is Income ");
@@ -242,7 +243,7 @@ public class StonksGraph {
      */
     private void drawReport(FinancialTracker finances, int year) {
         drawSeparator();
-        drawLegendAndTitle();
+        drawLegendAndTitle(year);
         drawXAxisLabels();
         drawXAxis();
         ArrayList<Double> searchedIncomeBreakdowns = finances.getMonthlyIncomeBreakdown(year);
@@ -252,7 +253,7 @@ public class StonksGraph {
         values.addAll(searchedExpenseBreakdowns);
         values.addAll(searchedIncomeBreakdowns);
         double biggestTotal = Collections.max(values);
-        assert (biggestTotal <= 100000000000.00) : "Total income/expense should be less than equal to 100Bil";
+        assert (biggestTotal <= TOTAL_LIMIT) : "Total income/expense should be less than equal to 100Bil";
         double barValue = determineBarValue(biggestTotal);
 
         ArrayList<Double> currentIncomeBreakdowns = finances.getMonthlyIncomeBreakdown(LocalDate.now().getYear());
