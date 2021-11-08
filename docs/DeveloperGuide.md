@@ -185,33 +185,6 @@ this, we implemented a custom serialiser and deserialiser specifically for Local
 
 The custom serialiser and deserialiser is implemented as inner classes within the `FileStorage` class.
 
-The code for the custom serialiser is:
-
-```
-private static class LocalDateSerializer implements JsonSerializer<LocalDate> {
-
-    @Override
-    public JsonElement serialize(LocalDate src, Type typeOfSrc, JsonSerializationContext context) {
-        return new JsonPrimitive(src.toString());
-    }
-}
-```
-
-The code for the custom deserialiser is:
-
-```
-private static class LocalDateDeserializer implements JsonDeserializer<LocalDate> {
-
-    @Override
-    public LocalDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-            throws JsonParseException {
-        String dateInString = json.getAsJsonPrimitive().getAsString();
-        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        return LocalDate.parse(dateInString, pattern);
-    }
-}
-```
-
 ## Appendix: Requirements
 
 ### Appendix A: Product scope
