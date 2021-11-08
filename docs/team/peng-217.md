@@ -65,8 +65,8 @@ user.
 
 
   - `Developer Guide`:
-    - Added documentation and UML diagram for 'Ui' component. (Pull request [\#249](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/249/files))
-    - Added documentation and UML diagram for 'Note' component. (Pull request [\#249](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/249/files))
+    - Added documentation and UML diagram for 'Ui' component. (Pull request [\#249](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/249/files)) 
+    - Added documentation and UML diagram for 'Note' component. (Pull request [\#249](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/249/files)) (Pull request [\#240](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/240/files))
 
 
   - `Javadoc`:
