@@ -177,10 +177,8 @@ public abstract class Parser {
             }
             return result;
         } catch (DateTimeParseException e) {
-            System.out.println("Please enter a valid date and time in the format 'dd-MM-yyyy HHmm'.");
-
+            throw new DukeException("Please enter a valid date and time in the format 'dd-MM-yyyy HHmm'.");
         }
-        return null;
     }
 
     public static String convertDateTimeForSaving(LocalDateTime dateTime) {
