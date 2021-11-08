@@ -1,0 +1,13 @@
+@startuml
+
+hide footbox
+
+->":GameDataFileDecoder": getCurrentIndex()
+activate ":GameDataFileDecoder"
+":GameDataFileDecoder" -> ":FileEncoder": readFile()
+activate ":FileEncoder"
+":FileEncoder" --> ":GameDataFileDecoder": lines: String
+deactivate ":FileEncoder"
+<--":GameDataFileDecoder": index: int
+deactivate ":GameDataFileDecoder"
+@enduml

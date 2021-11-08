@@ -1,0 +1,30 @@
+------------------
+| Who Killed Me? |
+------------------
+
+I woke up and found myself dead.
+
+The Spirit Guide from the Hell told me that the only way to revive my soul is for me to find the murderer, eliminating the grudge in my soul.
+
+So I have to go back 24 hours ago and find the murderer from the perspective of my soul.
+
+----------------
+| Instructions |
+----------------
+
+Here are the list of commands available to you.
+You can also check out this webpage for our user guide:
+https://ay2122s1-cs2113-t14-1.github.io/tp/UserGuide.html
+"/help" - view this command list
+"/narrative-lines NUM" - change number of narrative lines print each time to NUM
+"/next" - move on to the next scene or the next stage of a scene
+"/back" - go back to previous scene
+"/view" - view all the clues that you have gathered
+"/note" - create a new note / open a note / delete a note
+"/quit" - quit the note function
+"/restart" - restart the game from beginning
+"/exit" - exit the game
+Key in the index (e.g. 1, 2) in front of the suspect/clue you want to investigate
+To investigate suspects or clues, please input their corresponding number.
+
+Now, enter "/next" to start your journey to the truth.

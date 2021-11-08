@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+'-> ":Parser"
+'activate ":Parser"
+'
+'":Parser" -> ":Parser": getCommandFromUser("/next")
+'":Parser" -> ":NextCommand": new NextCommand()
+'deactivate ":Parser"
+'activate ":NextCommand"
+'
+'":NextCommand" -> "sceneList :SceneList": execute()
+'activate "sceneList :SceneList"
+'
+'"sceneList :SceneList" -> "sceneList :SceneList": getSceneType()
+'"sceneList :SceneList" -> "sceneList :SceneList": updateSceneNumber()
+'"sceneList :SceneList" -> ":NextCommand": runCurrentScene()
+'deactivate "sceneList :SceneList"
+'
+'":NextCommand" -> ":NextCommand": exit()
+'":NextCommand" -> ":Parser"
+
+hide footbox
+
+-> ":Parser"
+activate ":Parser"
+
+":Parser" -> ":Parser": getCommandFromUser("/next")
+":Parser" -> ":NextCommand": new NextCommand()
+deactivate ":Parser"
+
+@enduml

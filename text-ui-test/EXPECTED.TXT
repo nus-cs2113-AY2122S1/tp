@@ -1,9 +1,7 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Welcome to the Classic Adventure Text Game!
 
-What is your name?
-Hello James Gosling
+File not found for scene
+Scene 1 Investigation
+Who do you want to investigate?
+1. Father
+Goodbye.

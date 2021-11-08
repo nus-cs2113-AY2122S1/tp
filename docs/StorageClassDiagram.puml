@@ -1,0 +1,26 @@
+@startuml
+skinparam componentStyle rectangle
+hide circle
+
+class EncryptedFile {
+
+}
+class GameFileManager {
+     {static}   decoder:FileDecoder
+     {static}   encoder:FileEncoder
+     void writeFile(lines: String)
+     String readFile()
+}
+class GameDataFileDecoder {
+    {static} MAX_SCENE_NUMBER: int
+    {static} FACTORY_SETTING: String
+    void setCurrentSceneIndex(index: int)
+    void getCurrentSceneIndex(index: int)
+    boolean isValidFile()
+}
+
+GameFileManager .up-|> EncryptedFile
+GameDataFileDecoder .up-|> GameFileManager
+
+@enduml
+

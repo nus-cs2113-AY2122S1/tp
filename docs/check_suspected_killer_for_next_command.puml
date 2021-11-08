@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+hide footbox
+mainframe **sd**   check suspected killer
+":NextCommand" -> ":Investigation": checkSuspectedKiller()
+    ":Investigation" -> ":SceneList": getCurrentScene()
+    ":Investigation" -> ":Ui": printAllSuspectsMessage()
+    ":Investigation" -> ":SceneList": getSuspectList()
+    ":Investigation" -> ":Ui": printSuspects()
+    ":Investigation" -> ":Ui": printSuspectKillerMessage()
+    ":Investigation" -> ":Ui": readUserInput()
+    ":Investigation" -> ":Investigation": goToCorrectFinalScene(killerFound)
+    ":Investigation" -> ":SceneList": setSceneNumberAfterSuspecting(killerFound)
+    ":SceneList" -> ":GameDataFileDecoder": resetFile(INTRODUCTION_SCENE_INDEX)
+@enduml

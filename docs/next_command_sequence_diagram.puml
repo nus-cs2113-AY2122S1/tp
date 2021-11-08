@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+@startuml
+autonumber
+hide footbox
+
+-> ":NextCommand": execute(ui,investigation,sceneList)
+":NextCommand" -> ":SceneList": getCurrentSceneType()
+":SceneList" -> ":SceneList": getCurrentScene()
+":SceneList" -> ":Scene": getSceneType()
+
+alt #white CORRECT_KILLER_SCENE
+
+autonumber 5
+else WRONG_KILLER_SCENE
+    ":NextCommand" -> ":SceneList": updateSceneNumber()
+    ":SceneList" -> ":SceneList": updateDataFileSceneIndex(currentSceneIndex);
+    ":SceneList" -> ":GameDataFileDecoder": setCurrentSceneIndex(sceneIndex)
+    ref over ":NextCommand", ":Investigation", ":SceneList", ":Scene": run the current scene
+
+autonumber 5
+else TRUTH_SCENE
+    ref over ":NextCommand", ":Investigation", ":SceneList", ":Scene": run the current scene
+
+autonumber 5
+else GUESS_KILLER_SCENE
+    ref over ":NextCommand", ":Investigation", ":SceneList", ":Scene", ":Ui": check suspected killer
+    ref over ":NextCommand", ":Investigation", ":SceneList", ":Scene": run the current scene
+
+autonumber 5
+else default
+    ":NextCommand" -> ":Investigation": setSuspectStage()
+    ":NextCommand" -> ":SceneList": updateSceneNumber()
+    ":SceneList" -> ":SceneList": updateDataFileSceneIndex(currentSceneIndex);
+    ":SceneList" -> ":GameDataFileDecoder": setCurrentSceneIndex(sceneIndex)
+
+    ref over ":NextCommand", ":Investigation", ":SceneList", ":Scene": run the current scene
+end
+
+
+@enduml

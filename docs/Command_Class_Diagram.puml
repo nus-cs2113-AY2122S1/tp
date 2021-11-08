@@ -1,0 +1,41 @@
+@startuml
+
+allowmixing
+hide circle
+skinparam componentStyle rectangle
+
+class Duke
+
+
+component Ui {
+}
+component Storage {
+}
+component Investigation {
+}
+component SceneList {
+}
+component Parser {
+}
+
+component Command {
+    abstract class Command
+    Class XYZCommand
+}
+
+
+Duke --> Parser
+Duke ..> Command: execute >
+Parser ..> XYZCommand: create >
+Command <|-- XYZCommand
+Command ..> Storage
+Command ..> Ui
+
+Investigation <.left. Command
+
+SceneList <.. Command
+note bottom of XYZCommand: XYZCommand = ViewCommand, NextCommand, etc
+
+hide members
+
+@enduml

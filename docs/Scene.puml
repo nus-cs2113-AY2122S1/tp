@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide footbox
+
+autonumber
+":Duke"-> ":SceneListBuilder": buildSceneList(dataFile:GameDataFileDecoder)
+activate ":SceneListBuilder"
+":SceneListBuilder" -> ":SceneListBuilder": getScenesFromFile(fileLocationString)
+activate ":SceneListBuilder"
+loop numOfScenes
+create "narrative:Narrative"
+":SceneListBuilder" -> "narrative:Narrative" :new Narrative(fileLocation:String)
+activate "narrative:Narrative"
+"narrative:Narrative" --> ":SceneListBuilder" :narrative
+deactivate "narrative:Narrative"
+create "suspectList:SuspectList"
+":SceneListBuilder" -> "suspectList:SuspectList" :new SuspectList()
+activate "suspectList:SuspectList"
+"suspectList:SuspectList" --> ":SceneListBuilder" :suspectList
+deactivate "suspectList:SuspectList"
+":SceneListBuilder" -> ":SuspectListBuilder" :"suspectListBuilder(clueFileLocation:String, suspectList:SuspectList)"
+activate ":SuspectListBuilder"
+":SuspectListBuilder" --> ":SceneListBuilder"
+deactivate ":SuspectListBuilder"
+deactivate "suspectList:SuspectList"
+create "scenes:Scene[]"
+":SceneListBuilder" -> "scenes:Scene[]" :new Scene(narrative:Narrative, suspectList:SuspectList, sceneType:Scene.Type)
+activate "scenes:Scene[]"
+"scenes:Scene[]" --> ":SceneListBuilder" :scenes
+deactivate "scenes:Scene[]"
+":SceneListBuilder" --> ":SceneListBuilder"
+deactivate ":SceneListBuilder"
+end
+deactivate "scenes:Scene[]"
+create ":SceneList"
+":SceneListBuilder" -> ":SceneList" :new SceneList(scenes:Scene[], dataFile:GameDataFileDecoder)
+activate ":SceneList"
+":SceneList" --> ":SceneListBuilder"
+deactivate ":SceneList"
+":SceneListBuilder" --> ":Duke"
+deactivate ":SceneListBuilder"
+
+
+@enduml

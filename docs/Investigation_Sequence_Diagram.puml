@@ -1,0 +1,79 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+create ":Duke"
+activate ":Duke"
+
+create ":Investigation"
+":Duke" -> ":Investigation"
+activate ":Investigation"
+return
+
+":Duke" -> ":UI" : printCurrentInvestigation()
+activate ":UI"
+
+":UI" -> ":Investigation": getStage()
+activate ":Investigation"
+return stage
+
+
+alt SUSPECT_STAGE
+    ":UI" -> ":UI": printCurrentSuspectPage()
+    activate ":UI"
+    return
+
+else CLUE_STAGE
+    ":UI" -> ":UI": printCurrentCluePage()
+    activate ":UI"
+    ":UI" -> ":Investigation": getCurrentSuspectName()
+    activate ":Investigation"
+    return currentSuspectName
+    return
+end
+
+return
+
+":Duke" -> ":InvestigateCommand": execute()
+activate ":InvestigateCommand"
+":InvestigateCommand" -> ":Investigation": investigateScene(index, currentScene)
+alt SUSPECT_STAGE
+    activate ":Investigation"
+    ":Investigation" -> ":Parser": getSuspectNameFromIndex(scene, index)
+    activate ":Parser"
+    return currentSuspectName
+
+    ":Investigation" -> ":Investigation": setClueStage()
+    activate ":Investigation"
+    return
+else CLUE_STAGE
+    alt index == 0
+        ":Investigation" -> ":Investigation": setSuspectStage()
+        note top
+            index == 0 implies go back to suspect stage
+        end note
+        activate ":Investigation"
+        return
+    else
+        ":Investigation" -> ":Scene": investigateSuspect(currentSuspectName)
+        activate ":Scene"
+        ":Scene" -> ":Clue": get(index)
+        activate ":Clue"
+        return clue
+        return clue
+        ":Investigation" -> ":SuspectList": setClueChecked(currentSuspectName, clue)
+        activate ":SuspectList"
+        return
+        ":Investigation" -> ":UI": printSelectedClue(clue)
+        activate ":UI"
+        return
+    end
+else
+    ":Investigation" -> ":UI": printInvalidIndex()
+    activate ":UI"
+    return
+end
+
+destroy ":InvestigateCommand"
+
+@enduml

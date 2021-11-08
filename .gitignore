@@ -15,3 +15,12 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+MANIFEST.MF
+
+# Ignore GameData.txt
+/data/GameData.txt
+TP.jar
+/data/notes.txt
+data/data.txt
+data/key.txt
+notes.txt

@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+actor User#maroon
+skinparam componentStyle rectangle
+component {
+    component Duke#lime
+    component Ui#pink
+    component Command#lightblue
+    component Scene#red
+    component Storage#grey
+    component Note#cyan
+    component Suspect#orange
+    component Investigation#gold
+    component Parser#violet
+}
+User ..> Duke#maroon
+Duke -> Ui#lime
+Duke -> Investigation#lime
+Duke -> Storage#lime
+Duke -> Parser#lime
+Duke -> Scene#lime
+Duke -> Suspect#lime
+Duke -> Note#lime
+Duke ..> Command#lime
+Parser ..> Command#magenta
+Command ..> Investigation#lightblue
+Command ..> Ui#lightblue
+Command ..> Scene#lightblue
+Note ..> Ui#cyan
+Command -> Note#lightblue
+Investigation -> Scene#gold
+Investigation -> Suspect#gold
+Storage -> Scene#grey
+Investigation ..> Ui#gold
+
+hide methods
+@enduml

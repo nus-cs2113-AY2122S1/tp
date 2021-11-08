@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+hide footbox
+
+":Duke" -> ":Ui": readUserInput()
+":Duke" <-- ":Ui": userInput: String
+create ":InvalidCommand"
+":Duke" -> ":InvalidCommand": new InvalidCommand()
+activate ":InvalidCommand"
+":Duke" <-- ":InvalidCommand":
+deactivate ":InvalidCommand"
+":Duke" -> ":Parser": getCommandFromUser(userInput)
+create ":NextCommand"
+":Parser" -> ":NextCommand": new NextCommand()
+activate ":NextCommand"
+":Parser" <-- ":NextCommand": Command
+deactivate ":NextCommand"
+":Duke" -> ":NextCommand": execute(ui,investigation,sceneList)
+":NextCommand" -> ":SceneList": getCurrentSceneType()
+":NextCommand" -> ":Investigation": getSuspectStage()
+":NextCommand" -> ":SceneList": updateSceneNumber()
+":SceneList" -> ":Storage": setFile(currentSceneIndex)
+":Storage" -> ":Storage": save to file
+":NextCommand" -> ":SceneList": runCurrentScene()
+":Duke" -> ":NextCommand": exit()
+
+
+@enduml

@@ -1,0 +1,26 @@
+@startuml
+skinparam componentStyle rectangle
+
+component  {
+[Parser]
+[XYZCommand] as xyzCommand
+[{abstract} Command] as command
+}
+
+component Ui {
+}
+
+component Investigation {
+}
+
+component SceneList {
+}
+
+Parser .down.> xyzCommand
+xyzCommand -down-|> command
+command ..> Ui
+command ..> Investigation
+command ..> SceneList
+
+@enduml
+

@@ -1,0 +1,53 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam componentStyle rectangle
+
+component "<<enumeration>>\nInvestigationStages" {
+}
+
+component "<<enumeration>>\nSceneTypes" {
+}
+
+component Ui {
+}
+
+component Scene {
+}
+
+component Narrative {
+}
+
+component Parser {
+}
+
+component Investigation {
+}
+
+component SuspectList {
+}
+
+component Suspect {
+}
+
+component Investigation {
+}
+
+component "{abstract}\nCommand" {
+}
+
+component XYZCommand {
+}
+
+XYZCommand -right-|> "{abstract}\nCommand"
+"{abstract}\nCommand" .right.> Investigation
+Investigation --> Scene
+Investigation ..> Parser
+Investigation ..> Ui
+Investigation ..> "<<enumeration>>\nInvestigationStages"
+Scene --> SuspectList
+Scene --> Narrative
+Scene ..> "<<enumeration>>\nSceneTypes"
+SuspectList --> Suspect
+
+@enduml

@@ -1,0 +1,63 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+hide footbox
+
+ ->":Ui":
+":Ui" -> ":Clue":getClueName()
+activate ":Clue"
+":Clue" --> ":Ui"
+":Ui" -> "investigation:Investigation" : getStages()
+activate "investigation:Investigation"
+"investigation:Investigation" --> ":Ui"
+"investigation:Investigation" -> "investigation:Investigation":getStage()
+":Ui" -> "sceneList:SceneList":getCurrentSceneIndex()
+activate "sceneList:SceneList"
+"sceneList:SceneList" --> ":Ui"
+":Ui" -> "sceneList:SceneList":getCurrentScene()
+"sceneList:SceneList" --> ":Ui"
+":Ui" -> "investigation:Investigation":getCurrentSceneType()
+
+"investigation:Investigation" --> ":Ui"
+deactivate "investigation:Investigation"
+":Ui" -> "sceneList:SceneList":getCurrentSceneType()
+"sceneList:SceneList"-->":Ui"
+deactivate "sceneList:SceneList"
+":Ui" -> ":Scene":investigateSuspect(suspectName)
+activate ":Scene"
+":Scene"-> ":Suspect":getClues()
+activate ":Suspect"
+":Suspect"-->":Scene"
+deactivate ":Suspect"
+":Ui" -> ":Note": getNoteTitle()
+activate ":Note"
+":Note"--> ":Ui"
+":Ui"-> ":Note": getNoteContent()
+":Note" --> ":Ui"
+":Ui" -> "notes:NoteList":getIndexNote()
+activate "notes:NoteList"
+"notes:NoteList" ->":Note": getNoteTitle()
+":Note" --> "notes:NoteList"
+":Ui" -> "notes:NoteList":getIndexNote()
+"notes:NoteList" --> ":Ui"
+
+deactivate ":Note"
+deactivate "notes:NoteList"
+":Ui"-> SuspectList:toString()
+activate SuspectList
+
+":Ui" -> SuspectList:printSuspects(suspects)
+SuspectList --> SuspectList:toString()
+deactivate SuspectList
+":Ui" --> Scene:printAllSuspectInCurrentScene(scene)
+Scene --> Scene: toString()
+deactivate Scene
+":Ui" --> ":Clue":printSelectedClue(scene)
+":Clue" --> ":Clue": toString()
+deactivate ":Clue"
+
+
+
+
+@enduml

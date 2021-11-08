@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+hide footbox
+
+":GameNoteFileManager"<-"notes:NoteList": openNoteFromFile()
+activate "notes:NoteList"
+activate ":GameNoteFileManager"
+":GameNoteFileManager" --> "notes:NoteList"
+":GameNoteFileManager"<-"notes:NoteList": forceClearNote()
+":GameNoteFileManager" --> "notes:NoteList"
+
+"notes:NoteList" -> "notes:NoteList" :getSize()
+"notes:NoteList" -> ":Note":createNote(newNote:Note)
+activate ":Note"
+
+"notes:NoteList" -> "notes:NoteList": processNote(sceneList:SceneList,userChoice:String)
+"notes:NoteList"-> ":Note" : createNoteProcess(sceneList:SceneList)
+"notes:NoteList" -> ":Ui" :printNoteTitleInstructions()
+activate ":Ui"
+"notes:NoteList"-> ":Note" : openNoteProcess()
+"notes:NoteList"->"notes:NoteList":openNoteDirectly(index:String)
+"notes:NoteList"-> ":Ui": printNoteOpenInstructions()
+"notes:NoteList"-> "notes:NoteList": selectSearchMethod()
+"notes:NoteList"-> "notes:NoteList":keywordSearch()
+"notes:NoteList" -> ":Ui" :printNoteSearchInstructions()
+"notes:NoteList" -> ":Ui" :printSelectedNote()
+"notes:NoteList"-> "notes:NoteList":indexSearch()
+"notes:NoteList" -> ":Ui" :printNoteSearchInstructions()
+"notes:NoteList" -> ":Ui" :printSelectedNote()
+"notes:NoteList" -> "notes:NoteList": deleteNoteProcess()
+"notes:NoteList"-> ":Ui" :printNoteListStarter
+"notes:NoteList"-> ":Ui" :printAllNotes(notes:NoteList)
+"notes:NoteList"-> ":Ui": printNoteDeleteInstructions()
+"notes:NoteList" -> ":GameNoteFileManager":deleteNote(index:int)
+"notes:NoteList" -> ":GameNoteFileManager":deleteAllNotes()
+deactivate ":GameNoteFileManager"
+@enduml

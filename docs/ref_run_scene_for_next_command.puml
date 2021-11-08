@@ -1,0 +1,20 @@
+@startuml
+
+hide footbox
+mainframe **sd**   run the current scene
+":NextCommand" -> ":Investigation": runScenes()
+activate ":Investigation"
+":Investigation" -> ":SceneList": runCurrentScene()
+activate ":SceneList"
+":SceneList" -> ":SceneList": getCurrentScene()
+activate ":SceneList"
+return
+":SceneList" -> ":Scene": runScene()
+activate ":Scene"
+":SceneList" <-- ":Scene"
+deactivate ":Scene"
+":Investigation" <-- ":SceneList"
+deactivate ":SceneList"
+":NextCommand" <-- ":Investigation"
+deactivate ":Investigation"
+@enduml
