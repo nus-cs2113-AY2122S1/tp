@@ -53,3 +53,4 @@ Designed for fast typists, it can help to augment the day-to-day tasks of a libr
 #### Teammates' PRs reviewed and merged
 1. https://github.com/AY2122S1-CS2113-T16-1/tp/pull/187
 2. https://github.com/AY2122S1-CS2113-T16-1/tp/pull/23
+3. https://github.com/AY2122S1-CS2113-T16-1/tp/pull/228

@@ -16,6 +16,19 @@ This document is meant to assist developers in better understanding the inner wo
   - [Common Package](#common-component)
 - [Implementation](#implementation)
   - [Add Command](#add-command)
+  - [Edit Command](#edit-command)
+  - [Search Command](#search-command)
+  - [Loan Command](#loan-command)
+  - [Deadline Command](#deadline-command)
+  - [Storage Processes](#storage-processes)
+    - [Reading from file and deserializing](#reading-from-file-and-deserializing)
+    - [Serializing and writing to file](#serializing-and-writing-to-file)
+- [Product Scope](#product-scope)
+  - [Target user profile](#target-user-profile)
+  - [Value proposition](#value-proposition)
+  - [User Stories](#user-stories)
+- [Non-Functional Requirements](#non-functional-requirements)
+- [Instructions for manual testing](#instructions-for-manual-testing)
 
 ## Acknowledgements
 
@@ -96,7 +109,9 @@ The above sequence diagram shows the interactions occurring each time a command 
 
 ### Commands component
 
-![ParserAndCommandClassDiagram](img/ParserAndCommandClassDiagram2.png)
+![ParserAndCommandClassDiagram1](img/ParserAndCommandClassDiagram1.png)
+![ParserAndCommandClassDiagram2](img/ParserAndCommandClassDiagram2.png)
+![ParserAndCommandClassDiagram23](img/ParserAndCommandClassDiagram3.png)
 
 The above partial class diagrams illustrate the classes inside the commands component that correspond to specific functionalities. 
 
@@ -204,7 +219,7 @@ In this instance, the hashmap will contain the following entries
 
 ### Edit Command
 
-![EditCommandSequence](img/EditCommandSequence.png)
+![EditCommandSequence](img/EditCommandSequence1.png)
 
 The Edit Command class handles the functionality to change a specific attribute of an item in the catalogue. The sequence diagram above
 shows the execution when the title attribute of a book with id 123 to "Harry Potter". 
@@ -363,10 +378,6 @@ inventory more efficiently.
 
 1. Should work on Windows, macOSX and Linux as long as it has Java 11 or above installed.
 2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-## Glossary
-
-* *glossary item* - Definition
 
 ## Instructions for manual testing
 
