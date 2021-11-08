@@ -4,6 +4,7 @@ import seedu.duke.commands.Command;
 import seedu.duke.exceptions.storage.StorageException;
 import seedu.duke.exceptions.module.IllegalModuleException;
 import seedu.duke.exceptions.zoom.InvalidZoomLinkException;
+import seedu.duke.exceptions.zoom.MissingParametersException;
 import seedu.duke.storage.Storage;
 import seedu.duke.storage.StorageZoom;
 import seedu.duke.ui.Ui;

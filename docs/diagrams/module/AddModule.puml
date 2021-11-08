@@ -7,17 +7,20 @@ participant ":Click"
 participant ":Parser"
 activate ":Parser"
 create ":AddModuleCommand"
-":Parser" -> ":AddModuleCommand" : new AddMoudleCommand()
+":Parser" -> ":AddModuleCommand" : new AddModuleCommand()
 activate ":AddModuleCommand"
 return
 deactivate ":AddModuleCommand"
-":Parser" -> ":Click" : AddMoudleCommand
+":Parser" -> ":Click" : AddModuleCommand
 deactivate ":Parser"
 ":Click" -> ":AddModuleCommand" : execute()
 activate ":AddModuleCommand"
 
 opt no duplicate parameters
     ":AddModuleCommand" -> ":AddModuleCommand" : getModule()
+    activate ":AddModuleCommand"
+    ":AddModuleCommand" --> ":AddModuleCommand"
+    deactivate ":AddModuleCommand"
     participant "<color red><<class>></color> \n ModuleManager"
     activate "<color red><<class>></color> \n ModuleManager"
     ":AddModuleCommand" -> "<color red><<class>></color> \n ModuleManager" : addNewModule(module)

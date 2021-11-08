@@ -121,7 +121,7 @@ The `UI` component:
 
 1. `Click` uses `Parser` class to parse the user command.
 2. `Parser` checks if the command is valid or not, splits the user input into interpretable portions, and returns the respective commands with arguments.
-3. All commands inherit from the abstract class `Command` with and `execute()` method. 
+3. All commands inherit from the abstract class `Command` with  `execute()` method. 
 4. Command interacts with models, `Storage` to carry out user's command.
 5. Command also makes use of `UI` to display the messages to the user.
 
@@ -219,7 +219,7 @@ When the user types `module add c/CS2113T n/Software Engineering m/4 e/A`, the f
    iv. `AddModuleCommand` calls `moduleManager.addNewModule(module)` to add the new `module` to the module list\
    v. `AddModuleCommand` prompts the successful message to the user.
 
-The sequence diagram below summarizes how adding a module work:
+The sequence diagram below summarizes how adding a module works:
 
 ![AddModule](diagrams/module/AddModule.png)
 
@@ -311,6 +311,10 @@ The `ShowZoomLinks` class extends `Command`.
 
 Syntax: `zoom list`
 
+The following diagram explains the sequence of execution for the zoom list command. 
+![displayZoomLinks](./diagrams/zoom/displayZoomLinks.png)
+
+
 #### 4.2.2 Adding a new zoom link
 
 This command is implemented by the `AddZoomCommand` class. The basic functionality of this command is to write a new zoom link to a local storage file and associate it to the relevant module code. The `AddZoomCommand`
@@ -318,6 +322,17 @@ class extends `Command`.
 
 Syntax: `zoom add LINK MODULE_CODE`
 Example: `zoom add nus.sg/testlink ABC101`
+
+The following diagram explains the sequence of execution for the add zoom command. 
+![addzoomlink](./diagrams/zoom/addzoomlink.png)
+
+
+#### 4.2.3 Open a zoom link
+
+this command is implemented by the `OpenZoomLink` class. The basic functionality of this command is to open the zoom link associated to the particular module. The `OpenZoomLink` class extends `Command`
+
+Syntax: `zoom open MODULE_CODE`
+Example: `zoom open CS2113T`
 
 
 ### 4.3 Calendar-related Features
@@ -999,6 +1014,7 @@ There are two ways to run tests.
 |v1.0|user|have quick access to my zoom links|access zoom links for various modules|
 |v1.0|user|list all food items recorded|view the record of food items eaten|
 |v1.0|user|clear the list of food items|start a new list every week|
+|v1.0|user|see a list of all zoom links|so that I can see all my links at one place
 |v2.0|user|edit my CAP information|record my current CAP and the total MC taken that contribute to the CAP|
 |v2.0|user|get expected CAP based on my CAP information and my modules|revise my module planning to meet my expectation|
 |v2.0|user|display a calendar with lectures and tasks|view all my tasks and lectures in a calendar view|
@@ -1018,7 +1034,9 @@ There are two ways to run tests.
 |v2.0|user| tag what I ate with a date|record down the date I've eaten the item(s)|
 |v2.0|user|search the date to see what food items I've consumed|find what food items i've consumed on that day|
 |v2.0|user|search for food items from a reference list with calorie count <= given amount|plan my diet for the day ahead|
-
+|v2.0|user|add zoom links for modules|so that I can organise based on my modules
+|v2.0|user|edit zoom links for modules|so that I can change my links
+|v2.0|user|open zoom links from command line|so that I can easily access my zoom links
 
 
 ### Appendix C: Non-Functional Requirements

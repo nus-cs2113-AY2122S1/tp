@@ -39,7 +39,7 @@ Jump in to the section [2. Quick Start](#2-quick-start) to get started!
 ## 2. Quick Start
 
 * Ensure you have Java `11` or above installed in your Computer.
-* Download the latest `click.jar` from [here](https://github.com/AY2122S1-CS2113T-T09-4/tp/releases/tag/v2.0).
+* Download the latest `click.jar` from [here](https://github.com/AY2122S1-CS2113T-T09-4/tp/releases/tag/v2.1).
 * Copy the file to the folder you want to use as the _home folder_ for Click.
 * In the home folder for Click, launch the `jar` file using the `java -jar click.jar` command on Command Prompt (for Windows) or Terminal (for Unix-based OS, such as macOS and Linux) to start the app. If the setup is correct, you should see the following:
 
