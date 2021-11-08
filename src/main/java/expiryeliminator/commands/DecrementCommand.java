@@ -19,10 +19,11 @@ public class DecrementCommand extends Command {
 
     private static final String MESSAGE_QUANTITY_ZERO = "Cannot decrement by a quantity of zero.";
     private static final String MESSAGE_INGREDIENT_NOT_FOUND = "Sorry. No matching ingredients found!";
-    private static final String MESSAGE_QUANTITY_TOO_MUCH = "Sorry, you currently only have %1$s of this ingredient.\n"
-            + "You cannot decrease it by %2$s.\n" + "\n%3$s";
-    private static final String MESSAGE_INGREDIENT_DECREMENTED = "I've decremented this ingredient by %1$s:\n"
-            + "\n%2$s";
+    private static final String MESSAGE_QUANTITY_TOO_MUCH =
+            "Sorry, you currently only have %1$s%2$s of this ingredient.\n"
+                    + "You cannot decrease it by %3$s%2$s.";
+    private static final String MESSAGE_INGREDIENT_DECREMENTED = "I've decremented this ingredient by %1$s%2$s:\n"
+            + "\n%3$s";
 
     private final String ingredientName;
     private final int quantity;
@@ -56,10 +57,11 @@ public class DecrementCommand extends Command {
             if (quantity == 0) {
                 return MESSAGE_QUANTITY_ZERO;
             } else {
-                return String.format(MESSAGE_QUANTITY_TOO_MUCH, ingredientStorage.getQuantity(), quantity,
-                        ingredientStorage);
+                return String.format(MESSAGE_QUANTITY_TOO_MUCH, ingredientStorage.getQuantity(),
+                        ingredientStorage.getFormattedUnit(), quantity);
             }
         }
-        return String.format(MESSAGE_INGREDIENT_DECREMENTED, quantity, ingredientStorage);
+        return String.format(MESSAGE_INGREDIENT_DECREMENTED, quantity, ingredientStorage.getFormattedUnit(),
+                ingredientStorage);
     }
 }

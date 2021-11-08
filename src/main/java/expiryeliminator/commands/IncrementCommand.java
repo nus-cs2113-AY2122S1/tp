@@ -21,8 +21,8 @@ public class IncrementCommand extends Command {
 
     private static final String MESSAGE_QUANTITY_ZERO = "Cannot increment by a quantity of zero.";
     private static final String MESSAGE_INGREDIENT_NOT_FOUND = "Sorry. No matching ingredients found!";
-    private static final String MESSAGE_INGREDIENT_INCREMENTED = "I've incremented this ingredient by %1$s:\n"
-            + "\n%2$s";
+    private static final String MESSAGE_INGREDIENT_INCREMENTED = "I've incremented this ingredient by %1$s%2$s:\n"
+            + "\n%3$s";
 
     private final String ingredientName;
     private final int quantity;
@@ -58,6 +58,7 @@ public class IncrementCommand extends Command {
         } catch (IllegalValueException e) {
             return MESSAGE_QUANTITY_ZERO;
         }
-        return String.format(MESSAGE_INGREDIENT_INCREMENTED, quantity, ingredientStorage);
+        return String.format(MESSAGE_INGREDIENT_INCREMENTED, quantity, ingredientStorage.getFormattedUnit(),
+                ingredientStorage);
     }
 }
