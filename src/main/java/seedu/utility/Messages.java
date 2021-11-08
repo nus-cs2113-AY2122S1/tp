@@ -38,8 +38,8 @@ public class Messages {
             + "Transport, Bills, Medical, Entertainment or Misc.";
     public static final String INVALID_INCOME_CATEGORY_MESSAGE = "Input only 1 of these 4 categories: Salary, " 
             + "Allowance, Adhoc, or Others.";
-    public static final String INVALID_BUDGET_CATEGORY_MESSAGE = "Input only 1 of these 6 categories: Food, "
-            + "Transport, Bills, Medical, Entertainment or Overall";
+    public static final String INVALID_BUDGET_CATEGORY_MESSAGE = "Input only 1 of these 7 categories: Food, "
+            + "Transport, Bills, Medical, Entertainment, Misc or Overall";
     public static final String INVALID_THRESHOLD_MESSAGE = "Threshold value should between 0 and 1.";
     public static final String INVALID_CURRENCY_TYPE_MESSAGE = "Please enter a valid currency for conversion!";
     public static final String BLANK_CURRENCY_TYPE_MESSAGE = "You have not entered any currency type!";
