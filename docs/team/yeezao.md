@@ -16,11 +16,12 @@ _PayMeBack_ is a greenfield project. My main responsibilities in this project in
 
 #### Code Contributions
 
+I have contributed over >1800 lines of code and documentation in total.
 Detailed code contribution information can be viewed via RepoSense [here](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&tabAuthor=yeezao&tabRepo=AY2122S1-CS2113T-T12-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false).
 
 - Provided basic skeleton for `Ui`, `Parser`, `Trip`, `Expense`, `Person` classes.
 - Implemented and tested `FileStorage` class, and some of `Trip` and `Storage` classes.
-- Wrote a large part, or the entirety, of `FileTest`, `TripTest`, `ValidityCheckerTest`
+- Wrote a large part, or the entirety, of `FileTest`, `TripTest`, and `ValidityCheckerTest`.
 
 #### Enhancements Implemented:
 
@@ -51,14 +52,18 @@ In addition, I made contributions to the following sections:
 The following sections in the Developer Guide were largely or wholly written by me:
 
 - `Storage` component, and its related diagrams
+- Non-functional Requirements
 
 In addition, I made contributions to the following sections:
 
 - Some text in `Trip` class
+- Manual testing instructions for trip-related features
 
 #### Contributions to Team Tasks:
 
 - Setting up and administration of organisation and team repository
+- Reviewing of Pull Requests
+- Adding templates for User Stories and Bug Reporting in Issues
 - Gradle modifications (for enabling assertions and adding Gson dependency)
 - Managed `v2.0` release
 - Cleanup of PE-D issues (marking duplicate, rejecting non-issues)
