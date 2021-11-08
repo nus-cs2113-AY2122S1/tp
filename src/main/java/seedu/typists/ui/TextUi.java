@@ -7,7 +7,13 @@ import java.text.SimpleDateFormat;
 
 import static java.lang.System.lineSeparator;
 import static java.lang.System.out;
-import static seedu.typists.common.Messages.*;
+import static seedu.typists.common.Messages.CLOCK;
+import static seedu.typists.common.Messages.KEYBOARD;
+import static seedu.typists.common.Messages.LETTER;
+import static seedu.typists.common.Messages.LOGO;
+import static seedu.typists.common.Messages.MESSAGE_ACKNOWLEDGE;
+import static seedu.typists.common.Messages.MESSAGE_MAN;
+import static seedu.typists.common.Messages.MESSAGE_WELCOME;
 
 
 import java.util.Scanner;

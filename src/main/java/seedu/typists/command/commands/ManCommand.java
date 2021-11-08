@@ -21,21 +21,21 @@ public class ManCommand implements Command {
 
         String manType = args.get(1);
         switch (manType) {
-            case "game":
-                uiBot.printScreen(MESSAGE_HELP_GAME);
-                break;
-            case "history":
-                uiBot.printScreen(MESSAGE_HELP_HISTORY);
-                break;
-            case "content":
-                uiBot.printScreen(MESSAGE_HELP_CONTENT);
-                break;
-            case "clear":
-                uiBot.printScreen(MESSAGE_HELP_CLEAR);
-                break;
-            default:
-                uiBot.printScreen("no such command");
-                break;
+        case "game":
+            uiBot.printScreen(MESSAGE_HELP_GAME);
+            break;
+        case "history":
+            uiBot.printScreen(MESSAGE_HELP_HISTORY);
+            break;
+        case "content":
+            uiBot.printScreen(MESSAGE_HELP_CONTENT);
+            break;
+        case "clear":
+            uiBot.printScreen(MESSAGE_HELP_CLEAR);
+            break;
+        default:
+            uiBot.printScreen("no such command");
+            break;
         }
     }
 }
