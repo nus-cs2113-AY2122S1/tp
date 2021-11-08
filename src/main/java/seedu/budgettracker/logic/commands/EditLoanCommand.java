@@ -6,8 +6,11 @@ import seedu.budgettracker.ui.TextUi;
 
 import java.time.LocalDate;
 
-import static seedu.budgettracker.common.Messages.*;
-
+import static seedu.budgettracker.common.Messages.MESSAGE_AMOUNT_EXCEEDED;
+import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_INDEX_OF_EXPENDITURE;
+import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_INDEX_OF_LOAN;
+import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_YEAR;
+import static seedu.budgettracker.common.Messages.MESSAGE_AMOUNT_ZERO_OR_NEGATIVE;
 //@@author jyxhazcake
 
 /**
