@@ -400,7 +400,7 @@ The current implementation of the abstract `Module` class provides a strong foun
 
 ### List of Commands
 
-> :information_source: For the following sequence diagrams for XYZCommands, the parameters in the run() method is omitted to improve readability.
+> :information_source: For the following sequence diagrams for XYZCommands, the parameters in the `run()` method is omitted to improve readability.
 
 #### HelpCommand
 
