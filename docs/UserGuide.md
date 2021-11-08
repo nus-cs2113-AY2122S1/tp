@@ -197,8 +197,10 @@ Edit the _amount_ of budget allowance for a particular month.
 
 Format: `edit -b m/MONTH a/AMOUNT`
 
-* `AMOUNT` can be entered with 2 decimal places or without decimal places and cannot be empty.
-* `MONTH` must strictly be within the range of 1 to 12 and cannot be empty.
+
+* `<AMOUNT>` will be rounded to the nearest 2 decimal places and must be above 0 but cannot exceed 1 billion dollars.
+* The `MONTH` must strictly be within the range of 1 to 12 and cannot be empty.
+
 
 Example of usage:
 
@@ -231,7 +233,7 @@ Format: `edit -e m/MONTH i/INDEX <n/DESCRIPTION> <a/AMOUNT> <d/DATE_OF_EXPENDITU
 
 * `<DESCRIPTION>` can be in a natural language format.
     * Note: **If `<DESCRIPTION>` exceeds 30 characters limit, it will be truncated during list view.**
-* `<AMOUNT>` entered will be rounded to the nearest 2 decimal places and cannot exceed 1 billion dollars.
+* `<AMOUNT>` will be rounded to the nearest 2 decimal places and must be above 0 but cannot exceed 1 billion dollars.
 * `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_.
     * Note: **YYYY value should correspond to the current storage file year, please use `year`
       command to switch to the correct year before entering an expenditure of another year**
@@ -280,7 +282,7 @@ Format: `edit -l m/MONTH i/INDEX <a/AMOUNT> <d/DATE_OF_LOAN> <n/BORROWER_NAME>`
 
 * `<BORROWER_NAME>` can be in a natural language format.
     * Note: **If `<BORROWER_NAME>` exceeds 30 characters limit, it will be truncated during list view.**
-* `<AMOUNT>` entered will be rounded to the nearest 2 decimal places and cannot exceed 1 billion dollars.
+* `<AMOUNT>` will be rounded to the nearest 2 decimal places and must be above 0 but cannot exceed 1 billion dollars.
 * `<DATE_OF_LOAN>` must strictly be in the form of _YYYY-MM-DD_.
     * Note: **YYYY value should correspond to the current storage file year, please use `year`
       command to switch to the correct year before entering an expenditure of another year**
