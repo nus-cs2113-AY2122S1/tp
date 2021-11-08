@@ -64,6 +64,8 @@
   - [Storage of Recipe Files](#storage-of-recipe-files)
 - [Appendix F - Examples of Saved Recipe Files](#appendix-f---examples-of-saved-recipe-files)
 
+<div style="page-break-after: always;"></div>
+
 ## Introduction
 
 Decodex is a **Command Line Interface (CLI) application for Capture-The-Flag (CTF) players to perform [encoding](#terminologies), [decoding](#terminologies), [encryption](#terminologies) and [decryption](#terminologies) of data**, which come in the form of [modules](#terminologies) that can be **executed with ease** and **without any programming** needed. Decodex also provides [recipes](#terminologies) that can also be used to link several of these [modules](#terminologies) together so that they could be executed in one go to speed up repetitive tasks. The intuitive interaction can thus help to speed up a player’s performance during CTFs and save time without having to manually code the tedious [data transformations](#terminologies).
@@ -88,6 +90,8 @@ To better understand this developer guide, it is recommended to start off from t
     5. [AB2 Code Structure](https://github.com/se-edu/addressbook-level2)
 2. [AY2021S2-CS2113-T10-1's Developer Guide](https://ay2021s2-cs2113-t10-1.github.io/tp/DeveloperGuide.html)
 
+<div style="page-break-after: always;"></div>
+
 ## Terminologies
 
 | Terminology                 | Definition                                                                                                                                                    |
@@ -105,6 +109,8 @@ To better understand this developer guide, it is recommended to start off from t
 | Recipe                      | Acts as a container for you to select your modules. When multiple modules are selected, this forms a "module chain". By default, you do not have any recipes. |
 | XYZ                         | Represents a wildcard of the specific mentioned. eg. `XYZCommand` can be `SelectCommand`, `ListCommand` etc.                                                  |
 | Suffix                      | Something that comes at the end. <br>e.g. For for text files like `recipe.txt` then `.txt` is the suffix.                                                     |
+
+<div style="page-break-after: always;"></div>
 
 ## Symbols
 
@@ -139,6 +145,7 @@ To better understand this developer guide, it is recommended to start off from t
     1. Run the `decodex.Decodex.java` and try a few commands.
     2. [Run the tests](https://se-education.org/addressbook-level3/Testing.html) to ensure they all pass.
 
+<div style="page-break-after: always;"></div>
 
 ### Additional Considerations
 
@@ -155,6 +162,8 @@ To better understand this developer guide, it is recommended to start off from t
     3. This structure makes it easier for us as well as developers like you to maintain and further extend the capabilities of our application.
 
 > :exclamation: Before continuing to the Design and Implementation sections, please note that "XYZ" represents a wildcard that is used to mention commands and modules. eg. `XYZCommand` refers to `SelectCommand`, `ListCommand` etc, and `XYZModule` refers to `Base64Encoder`, `HexDecoder`, etc.
+
+<div style="page-break-after: always;"></div>
 
 ## Design
 
@@ -177,6 +186,8 @@ The rest of the program consists of 6 other components:
 - `Data`: Holds the data that is to be encoded or decoded
 - `Storage`: Manages the reading and writing of data to disk
 
+<div style="page-break-after: always;"></div>
+
 ### UI Component
 
 ![UiClass.png](images/dg/UiClassDiagramV2.png)
@@ -190,6 +201,8 @@ The `Ui` component consists of:
 Below is a partial class diagram that shows an overview of the `Logic` component.
 
 ![LogicComponent(4).png](images/dg/LogicComponent.png)
+
+<div style="page-break-after: always;"></div>
 
 The `Logic` component consists of:
 
@@ -236,6 +249,8 @@ Below is the class diagram showing the association between the `Decodex` class, 
 
 ![DataClass.png](images/dg/DataClass.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Module Component
 
 Below is a partial class diagram that shows an overview of the `Module` component.
@@ -255,9 +270,13 @@ Below is the class diagram showing the association between the `Decodex` class, 
 
 ![ModuleManagerClass.png](images/dg/ModuleManagerClass.png)
 
+<div style="page-break-after: always;"></div>
+
 Below is the class diagram showing the association between the abstract `Module` class and its derived `XYZModule` classes.
 
 ![ModuleClassDiagram](images/dg/ModuleClassDiagramv3.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Recipe Component
 
@@ -288,6 +307,8 @@ To add on, the `Storage` component is designed to access only the following fold
 
 > :pen: The rationale behind standardizing a specific folder to read/save to, is to ensure that all relevant files can be found in the same location, which makes it easier for users to find the files they are looking for.
 
+<div style="page-break-after: always;"></div>
+
 ## Implementation
 
 This section focuses on explaining the specific application flows and the interactions between the classes and their methods.
@@ -302,6 +323,8 @@ Below shows the sequence diagram of the initialisation of Decodex.
 
 During the initialisation sequence of Decodex, all the dependencies (i.e `DataManager`, `ModuleManager` .etc) are instantiated, which will later on be passed to the relevant commands and methods for usage.
 
+<div style="page-break-after: always;"></div>
+
 ### Decodex Main Logic
 
 Below is the sequence diagram showing the overall flow of Decodex.
@@ -309,6 +332,8 @@ Below is the sequence diagram showing the overall flow of Decodex.
 ![Decodex Main Logic](images/dg/DecodexMainSeq.png)
 
 This main logic occurs after the initialisation sequence in the previous figure. It comprises of the main loop that provides the interactivity to the user by reading input from them and attempting to execute it as a command. The loop terminates when the user enters the `exit` command.
+
+<div style="page-break-after: always;"></div>
 
 ### Parser - Basic Command Logic
 
@@ -323,6 +348,8 @@ The flow of the `Parser` logic:
     1. However, if the command is a `RecipeXYZCommand`, it will be passed to `RecipeCommandParser` for subcommand parsing.
 3. Returns the `Command` object back to `Decodex`.
 
+<div style="page-break-after: always;"></div>
+
 ### Parser - Recipe Command Logic
 
 Below is the sequence diagram that shows the overall flow of the `RecipeCommandParser` logic.
@@ -334,6 +361,8 @@ The general process of the `RecipeCommandParser` logic consists of:
 1. Receives the user input from `Parser` then parses it to get the subcommand type.
 2. Prepares the corresponding `RecipeXYZCommand`
 3. Returns the `RecipeXYZCommand` object back to `Decodex`.
+
+<div style="page-break-after: always;"></div>
 
 ### Modules
 
@@ -361,6 +390,8 @@ This group of modules require at least one additional parameter as their encodin
 
 The current implementation of the abstract `Module` class provides a strong foundation to be inherited by much more complex modules, and developed into full-functioning modules for Decodex.
 
+<div style="page-break-after: always;"></div>
+
 #### Implemented Modules:
 
 | No Parameters                                                                                | At Least One Parameter |
@@ -378,6 +409,8 @@ The current implementation of the abstract `Module` class provides a strong foun
 When the `Parser` recognises the `help` keyword from the user input, a `HelpCommand` is instantiated.
 
 1. Prints out the list of all available command (`XYZCommand` and `RecipeXYZCommand`) syntaxes, and their corresponding descriptions.
+
+<div style="page-break-after: always;"></div>
 
 #### InputCommand
 
@@ -415,6 +448,8 @@ When the `Parser` recognises the `reset` keyword from the user input, a `ResetCo
 1. Replace the contents of `currentData` in `DataManager` with that of `originalData`.
 2. Prints a successful reset message to the console.
 
+<div style="page-break-after: always;"></div>
+
 #### SelectCommand
 
 ![SelectCommand](images/dg/SelectCommand.png)
@@ -424,6 +459,8 @@ When the `Parser` recognises the `select` keyword from the user input, a `Select
 1. If `selectCategory` is
     1. `module`, the selected `Module` is retrieved and executed on the provided `Data`. See [SelectCommand (Module)](#selectcommand-module) for the full sequence diagram.
     2. `recipe`, the selected `Recipe` is retrieved and its `Module`objects are executed on the provided `Data`. See [SelectCommand (Recipe)](#selectcommand-recipe) for the full sequence diagram.
+
+<div style="page-break-after: always;"></div>
 
 ##### SelectCommand (Module)
 
@@ -435,6 +472,8 @@ When the `Parser` recognises the `select` keyword from the user input, a `Select
 4. Sets the new `Data` object as the current data in `DataManager`.
 5. Prints the contents of the new `Data` object to the console.
 
+<div style="page-break-after: always;"></div>
+
 ##### SelectCommand (Recipe)
 
 ![SelectCommand (Recipe)](images/dg/SelectCommandRecipe.png)
@@ -445,6 +484,8 @@ When the `Parser` recognises the `select` keyword from the user input, a `Select
 4. Sets the new `Data` object as the current data in `DataManager`.
 5. Prints the `Module` objects in the executed `Recipe` to the console.
 6. Prints the content of the new `Data` object to the console.
+
+<div style="page-break-after: always;"></div>
 
 #### ListCommand
 
@@ -460,6 +501,8 @@ The `ListCommand` would then parse any optional arguments, setting the `isPrintM
 2. If `isPrintRecipeList` is true
     1. Retrieves a list of all `Recipe` objects from `RecipeManager`.
     2. Prints the retrieved list of `Recipe` objects to the console.
+
+<div style="page-break-after: always;"></div>
 
 ### Recipe Commands
 
@@ -481,6 +524,8 @@ When the `RecipeCommandParser` recognises the `new` subcommand keyword from the 
 2. Add the newly created `Recipe` into the `RecipeManager`.
 3. Sets `recipeName` as the `editingRecipeName` in `RecipeManager`.
 4. Prints a successful creation message to the console.
+
+<div style="page-break-after: always;"></div>
 
 #### RecipeSelectCommand
 
@@ -514,6 +559,8 @@ When the `RecipeCommandParser` recognises the `list` subcommand keyword from the
 2. Retrieves the list of `Module` objects belonging to the `Recipe` with `recipeName`.
 3. Prints the names and parameters of each `Module` object in the retrieved list.
 
+<div style="page-break-after: always;"></div>
+
 #### RecipePushCommand
 
 ![RecipePushCommand](images/dg/RecipePushCommand.png)
@@ -525,6 +572,8 @@ When the `RecipeCommandParser` recognises the `push` subcommand keyword from the
 3. Adds the retrieved `Module` into the current editing `Recipe`.
 4. Prints the a message of the added `Module` to the console.
 
+<div style="page-break-after: always;"></div>
+
 #### RecipePopCommand
 
 ![RecipePopCommand](images/dg/RecipePopCommand.png)
@@ -534,6 +583,8 @@ When the `RecipeCommandParser` recognises the `pop` subcommand keyword from the 
 1. Retrieves the latest `Module` added to the `Recipe`, and removes it from the `Recipe` after retrieval.
 2. Retrieves the current editing `Recipe`.
 3. Prints the a message of the removed `Module` to the console.
+
+<div style="page-break-after: always;"></div>
 
 #### RecipeResetCommand
 
@@ -545,6 +596,8 @@ When the `RecipeCommandParser` recognises the `Reset` subcommand keyword from th
 2. Removes all modules contained in the `Recipe`
 3. Prints a successful reset message containing the `recipeName` to the console.
 
+<div style="page-break-after: always;"></div>
+
 #### RecipeDeleteCommand
 
 ![RecipeDeleteCommand](images/dg/RecipeDeleteCommand.png)
@@ -553,6 +606,8 @@ When the `RecipeCommandParser` recognises the `delete` subcommand keyword from t
 
 1. Removes the `Recipe` with the `recipeName` from `RecipeManager`.
 2. Prints `recipeName` as the deleted `Recipe` to the console.
+
+<div style="page-break-after: always;"></div>
 
 ## Appendix A: Product Scope
 
@@ -570,6 +625,8 @@ When the `RecipeCommandParser` recognises the `delete` subcommand keyword from t
 This application helps users (mainly CTF players) to quickly transform data from one format to another (e.g., from plain text to base64-encoded text). It includes features such as the ability to perform basic data transformations with a few simple commands. Furthermore, it also includes the use of recipes to allow for multiple modules to be executed in sequence, which would be useful when multiple consecutive data transformations are needed.
 
 To sum it up, this application helps users to reduce the time needed to transform data from one form to another, especially when consecutive data transformations are required.
+
+<div style="page-break-after: always;"></div>
 
 ## Appendix B: User Stories
 
@@ -600,6 +657,8 @@ To sum it up, this application helps users to reduce the time needed to transfor
 3. A CTF participant should be able to work more efficiently on their CTF challenges compared to manual scripting in terms of time.
 4. A user should be able to comfortably use and understand the application if they are within the IT field.
 5. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+
+<div style="page-break-after: always;"></div>
 
 ## Appendix D: Glossary
 
@@ -680,6 +739,8 @@ Here is the list of available recipes:
   myRecipe_123
 ```
 
+<div style="page-break-after: always;"></div>
+
 - Test case `list modules`
     - Expected:
 
@@ -721,6 +782,8 @@ Running the data through multiple modules and resetting it to its original data 
     4. `select module binencode` : Encodes the current data with Binary encoding.
 2. The resulting output would be something unintelligible.
 3. In order to obtain the original data, running `reset` will return the current data back to the original data that was inputted. i.e. `goodbye world` .
+
+<div style="page-break-after: always;"></div>
 
 ### Listing Modules in Recipes
 
@@ -766,6 +829,8 @@ Here is the list of modules in recipe myRecipe1:
 ```
 [+] There are no modules in the recipe
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### Creating Recipes
 
@@ -865,6 +930,8 @@ The following test cases should be run in sequence:
     [+] Added rotencode module to recipe special_Recipe1
     ```
 
+<div style="page-break-after: always;"></div>
+
 ### Running Recipes
 
 Runs the modules in a recipe.
@@ -889,6 +956,8 @@ Deleting a recipe.
 [+] Recipe special_Recipe1 has been deleted
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### Storage of Recipe Files
 
 *Testing of invalid recipe files on startup*
@@ -911,6 +980,8 @@ Details of Recipe Files:
 | Wrong recipe file filetype - `myRecipe.txt` is a directory instead.                                                                                                                                                           | No error messages.                                            | Decodex will try to load the contents of `myRecipe.txt` on startup, but since it is actually a directory, Decodex will treat  it as not a recipe file and ignore it.                                                                                                                                                                                                                                                                                                                                                |
 | Wrong recipe file suffix - `iRecipe.md` is not of `.txt`.                                                                                                                                                                      | No error messages.                                            | Decodex will find that `iRecipe.md` is the `recipe/` directory, but it does not match the valid `.txt` suffix, so it simply ignores it. User can simply change the extension to `.txt` to fix it.                                                                                                                                                                                                                                                                                                                   |
 | Wrong module syntaxes (e.g. If `rotencode` is missing an argument) - `myRecipe.txt` contains invalid module syntaxes.<br><br> For more information on what are some examples of valid/invalid syntaxes, please refer to [Appendix F](#appendix-f---examples-of-saved-recipe-files) | `[x] Failed to load following recipes into Decodex: myRecipe` | Decodex will try to load the contents of `myRecipe.txt` line by line to translate them into modules which are then loaded into the recipe called `myRecipe` in Decodex. Since, in this case, one of the module syntax is incorrect, the recipe fails to be loaded. If there are multiple recipe files that also failed to be loaded due to module syntaxes, then  they are appended in the error message. <br>To avoid this from happening, users are recommended to only use Decodex to make changes to these recipes. |
+
+<div style="page-break-after: always;"></div>
 
 ## Appendix F - Examples of Saved Recipe Files
 
