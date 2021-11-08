@@ -30,6 +30,8 @@ the design considerations and implementation of features, and possibly expand on
     * [4.3.1. Implementation](#431-implementation)
     * [4.3.2. Design Considerations](#432-design-considerations)
   * [4.4. Listing all Habits](#44-listing-all-habits)
+    * [4.4.1. Implementation](#441-implementation)
+    * [4.4.2 Design Considerations](#442-design-considerations)
   * [4.5. Completing a Habit](#45-completing-a-habit)
   * [4.6. Updating a Goal](#46-updating-a-goal)
   * [4.7. Updating a Habit](#47-updating-a-habit)
@@ -345,27 +347,25 @@ This section describes the implementation of how the user can display a list of 
 
 #### 4.3.1. Implementation
 
-//TODO LIST HAS A PARSER
-
-1. The `ListGoalParser#parseListGoalCommand(input)` method is called. Since `list` does not require any parameters,
+1. The `ListGoalsParser#parseListGoalsCommand(input)` method is called. Since `list` does not require any parameters,
    the `input` (extra text) after `list` is there in case you typed anything extra afterwards, intentionally or not.
-2. The `ListGoalParser#parseListGoalCommand(input)` method then returns a `ListGoalsCommand(input)`.
+2. The `ListGoalsParser#parseListGoalsCommand(input)` method then returns a `ListGoalsCommand(input)`.
 
 ![](Diagram_Images/Implementation_Diagram_Images/ListGoalsCommandParserSequenceDiagram.png)
 
-![](Diagram_Images/Implementation_Diagram_Images/ListGoalsCommandSequenceDiagram.png)
-
-// Old text for reference
-
-1. Since the command for listing goals does not require any parameters, using `ParserManager` to detect the command word
-   `list` is sufficient to execute the command.
+1. The `ListGoalsCommand#runCommand(goalList, printManager, storage, gibberish)` method is called, which in turns calls the
+    `GoalList#listGoals(printManager, gibberish)` method.
 2. The `ListGoalsCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
    `GoalList#listGoals(printManager)` method.
-3. If the `GoalList` object is empty, the `GoalList#listGoals(printManager)` method returns an exception indicating that
-   there are no goals to be printed. 
-4. Otherwise, the method calls the `PrintManager#printGoalList(goalList, goalList.size()` method, which iterates through
-   all `Goal` objects and prints their respective description line by line in a table.
+3. If the `GoalList` object is empty, the `GoalList#listGoals(printManager)` method returns an exception to you, 
+   indicating that there are no goals to be printed.
+4. Otherwise, the method calls the `PrintManager#printGoalList(goalList, goalList.size(), gibberish)` method, 
+   which iterates through all `Goal` objects and prints their respective description line by line in a table.
+5. If you so happen to include extra text (delightfully called `gibberish`) after the `list` command, it will be
+   printed out before the table is generated. The `gibberish` is limited to 40 characters and below, any characters
+   after the limit will be trimmed.
 
+![](Diagram_Images/Implementation_Diagram_Images/ListGoalsCommandSequenceDiagram.png)
 
 #### 4.3.2. Design Considerations
 
