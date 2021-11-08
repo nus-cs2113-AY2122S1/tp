@@ -54,6 +54,8 @@ The World Map is the part of the application that handles the calculation of the
 (collectively referred to as distance in this guide) between countries, 
 while the Main Traveller code handles the interaction with users, and the general logic of the application.
 
+<img src="./documentationPics/designOverview.jpeg"  alt="design overview"/>
+
 ![](documentationPics/designOverview.jpeg)
 <div style="text-align: center;">Figure 1: Design Overview of Traveller</div>
 
