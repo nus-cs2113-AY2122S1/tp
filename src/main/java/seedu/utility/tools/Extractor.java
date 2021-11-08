@@ -5,6 +5,7 @@ import seedu.entry.ExpenseCategory;
 import seedu.entry.IncomeCategory;
 import seedu.exceptions.BlankCategoryException;
 import seedu.exceptions.BlankCurrencyTypeException;
+import seedu.exceptions.EntryAmountBelowMinException;
 import seedu.exceptions.EntryAmountExceedLimitException;
 import seedu.exceptions.InvalidAmountException;
 import seedu.exceptions.InvalidBudgetAmountException;
@@ -23,6 +24,7 @@ import java.util.regex.Matcher;
  */
 public abstract class Extractor {
 
+    private static final double ENTRY_AMOUNT_MIN = 0.05;
     private static final double ENTRY_AMOUNT_LIMIT = 1000000;
     private static final double BUDGET_AMOUNT_LIMIT = 100000000000.00;
 
@@ -144,8 +146,8 @@ public abstract class Extractor {
             throw new InvalidBudgetAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
         }
 
-        if (budgetAmount < 0) {
-            throw new InvalidBudgetAmountException(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
+        if (budgetAmount < ENTRY_AMOUNT_MIN) {
+            throw new InvalidBudgetAmountException(Messages.AMOUNT_BELOW_MIN_MESSAGE);
         } else if (Double.isInfinite(budgetAmount) || Double.isNaN(budgetAmount)) {
             throw new InvalidBudgetAmountException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
         } else if (budgetAmount > BUDGET_AMOUNT_LIMIT) {
@@ -161,13 +163,16 @@ public abstract class Extractor {
      * @return The amount, in double format.
      * @throws InvalidAmountException If the amount given does not match the expected guidelines.
      * @throws EntryAmountExceedLimitException If the amount given exceeds the limit.
+     * @throws EntryAmountBelowMinException If the amount given is less than 0.05.
      */
     public static double extractAmount(Matcher matcher) throws InvalidAmountException,
-            EntryAmountExceedLimitException {
+            EntryAmountExceedLimitException, EntryAmountBelowMinException {
         String userGivenAmount = matcher.group("amount").trim();
         double amount = parseAmount(userGivenAmount);
         if (amount > ENTRY_AMOUNT_LIMIT) {
             throw new EntryAmountExceedLimitException(Messages.INVALID_EXPENSE_VALUE);
+        } else if (amount < ENTRY_AMOUNT_MIN) {
+            throw new EntryAmountBelowMinException(Messages.AMOUNT_BELOW_MIN_MESSAGE);
         }
         return amount;
     }

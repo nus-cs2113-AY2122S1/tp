@@ -134,9 +134,8 @@ How the Command compoment works:
 
 ### Parser component
 
-The `Parser` class is in charge of:
-1. Converting user inputs to commands. 
-2. It is also in charge of converting important user information to `csv` data, vice versa.
+The `Parser` class is in charge of converting user inputs to commands. 
+
 
 #### Implementation
 

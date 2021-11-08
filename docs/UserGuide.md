@@ -185,15 +185,16 @@ This command adds an expense entry to your list. Use this to keep track of your 
 
 Format: `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY`
 
-- `DESCRIPTION` has to be non-empty.
-- `AMOUNT` has to be a positive amount that has a maximum of 2 decimal points.
-- `CATEGORY` has to be either `food`, `transport`, `bills`, `medical`, `entertainment`, or `misc`.
 
 Note:
 
-- The default date of the added expense will be the date in which the expense is added.
-- Each expense entry can only have a maximum value of 1,000,000 (1 Million).
+- `DESCRIPTION` has to be non-empty.
+- `AMOUNT` can only have a maximum of 2 decimal points.
+- `AMOUNT` must be more than or equal to 0.05.
+- `AMOUNT` can only have a maximum value of 1,000,000 (1 Million).
 - The sum of all your entries cannot be more than 100,000,000,000 (100 Billion).
+- `CATEGORY` has to be either `food`, `transport`, `bills`, `medical`, `entertainment`, or `misc`.
+- The default date of the added expense will be the date in which the expense is added.
 
 Examples:
 
@@ -228,16 +229,14 @@ This command adds an expense entry to your list with a date of your choice!
 
 Format: `add_ex_d d/DESCRIPTION a/AMOUNT c/CATEGORY D/DATE`
 
+Note:
 - `DESCRIPTION` has to be non-empty.
-- `AMOUNT` has to be a positive amount that has a maximum of 2 decimal points.
+- `AMOUNT` can only have a maximum of 2 decimal points.
+- `AMOUNT` must be more than or equal to 0.05.
+- `AMOUNT` can only have a maximum value of 1,000,000 (1 Million).
+- The sum of all your entries cannot be more than 100,000,000,000 (100 Billion).
 - `CATEGORY` has to be either `food`, `transport`, `bills`, `medical`, `entertainment`, or `misc`.
 - `DATE` must be in the DD/MM/YYYY format.
-
-
-Note:
-
-- Each expense entry can only have a maximum value of 1,000,000 (1 Million).
-- The sum of all your entries cannot be more than 100,000,000,000 (100 Billion).
 
 Examples:
 
@@ -321,15 +320,14 @@ This adds an income entry to your list. Use this to keep track of your income!
 
 Format: `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY`
 
-- `DESCRIPTION` has to be non-empty.
-- `AMOUNT` has to be a positive amount that has a maximum of 2 decimal points.
-- `CATEGORY` has to be either `salary`, `allowance`, `others` or `adhoc`.
-
 Note:
-
-- The default date of the added income will be the date in which the income is added.
-- Each income entry can only have a maximum value of 1,000,000 (1 Million).
+- `DESCRIPTION` has to be non-empty.
+- `AMOUNT` can only have a maximum of 2 decimal points.
+- `AMOUNT` must be more than or equal to 0.05.
+- `AMOUNT` can only have a maximum value of 1,000,000 (1 Million).
 - The sum of all your entries cannot be more than 100,000,000,000 (100 Billion).
+- `CATEGORY` has to be either `salary`, `allowance`, `others` or `adhoc`.
+- The default date of the added income will be the date in which the income is added.
 
 Examples:
 
@@ -354,16 +352,14 @@ This command adds an income entry to your list with a date of your choice!
 
 Format: `add_in_d d/DESCRIPTION a/AMOUNT c/CATEGORY D/DATE`
 
+Note:
 - `DESCRIPTION` has to be non-empty.
-- `AMOUNT` has to be a positive amount that has a maximum of 2 decimal points.
+- `AMOUNT` can only have a maximum of 2 decimal points.
+- `AMOUNT` must be more than or equal to 0.05.
+- `AMOUNT` can only have a maximum value of 1,000,000 (1 Million).
+- The sum of all your entries cannot be more than 100,000,000,000 (100 Billion).
 - `CATEGORY` has to be either `salary`, `allowance`, `others` or `adhoc`.
 - `DATE` must be in the DD/MM/YYYY format.
-
-
-Note:
-
-- Each income entry can only have a maximum value of 1,000,000 (1 Million).
-- The sum of all your entries cannot be more than 100,000,000,000 (100 Billion).
 
 Examples:
 
@@ -781,8 +777,10 @@ The allowable overall limit must be greater than $100 + **$150** + $100 + $100 +
 
 Format: `set_budget c/CATEGORY a/AMOUNT`
 
-- `CATEGORY` has to be one of `food`, `transport`, `bills`, `medical`, `entertainment`, `misc` or `overall`.
-- `AMOUNT` has to be a valid non-negative number less than 100,000,000,000 (100 Billion).
+- `CATEGORY` has to be one of `food`, `transport`, `bills`, `medical`, `entertainment`, `misc` or `overall`. 
+- `AMOUNT` must be more than or equal to 0.05.
+- `AMOUNT` has to be less than 100,000,000,000 (100 Billion).
+- `AMOUNT` has to be in 2 decimal places.
 
 Examples:
 
