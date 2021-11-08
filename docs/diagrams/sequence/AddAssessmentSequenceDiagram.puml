@@ -10,13 +10,13 @@ Participant ":AssessmentList" as assessmentList
 Participant ":Assessment" as assessment
 Participant ":Storage" as storage
 
-user -> taa : "add_assessment c/CS2113T\nn/Finals m/100 w/30"
+user -> taa : "add_assessment c/CS2113T-F12\nn/Finals m/100 w/30"
 activate taa
 
 taa -> addAssessmentCommand : execute(classList:ClassList\nui:Ui, storage:Storage)
 activate addAssessmentCommand
 
-addAssessmentCommand -> classList : getClassWithId("CS2113T")
+addAssessmentCommand -> classList : getClassWithId("CS2113T-F12")
 activate classList
 classList --> addAssessmentCommand : teachingClass:TeachingClass
 deactivate classList
