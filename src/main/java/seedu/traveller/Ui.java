@@ -133,6 +133,7 @@ public class Ui {
         assert !tripName.equals("") : "'' is an invalid tripName.";
         System.out.println("\tAdded " + numberOfDays + " days to trip " + tripName + ".");
     }
+
     //@@author
     public void printAddItemToDay(String tripName, int dayIndex) {
         assert dayIndex >= 0 : "Number of days is negative.";
