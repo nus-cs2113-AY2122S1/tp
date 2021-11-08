@@ -4,26 +4,26 @@ Welcome to **SLAM**! **SLAM** is a desktop application for student group leaders
 ---
 # Table of Contents
 1. [Introduction](#Introduction)
-   1. [Purpose of This Guide](#Purpose of Developer Guide)
+   1. [Purpose of This Guide](#Purpose-of-Developer-Guide)
 2. [Acknowledgements](#Acknowledgements)
 3. [Design](#Design)
    1. [Architecture](#Architecture)
-   2. [Ui component](#Ui component)
-   3. [Logic component](#Logic component)
-   4. [Storage component](#Storage component)
+   2. [Ui component](#Ui-component)
+   3. [Logic component](#Logic-component)
+   4. [Storage component](#Storage-component)
 4. [Implementation](#Implementation)
-   1. [List Functionality](#List Functionality)
-   2. [Next Functionality](#Next Functionality)
-   3. [Update Functionality](#Update Functionality)
-   4. [Delete Functionality](#Delete Functionality)
-   5. [Select Functionality](#Select Functionality)
-5. [Product Scope](#Product scope)
-   1. [Target user profile](#Target user profile)
-   2. [Value proposition](#Value proposition)
-6. [User Stories](#User Stories)
-7. [Non-Functional Requirements](#Non-Functional Requirements)
+   1. [List Functionality](#List-Functionality)
+   2. [Next Functionality](#Next-Functionality)
+   3. [Update Functionality](#Update-Functionality)
+   4. [Delete Functionality](#Delete-Functionality)
+   5. [Select Functionality](#Select-Functionality)
+5. [Product Scope](#Product-scope)
+   1. [Target user profile](#Target-user-profile)
+   2. [Value proposition](#Value-proposition)
+6. [User Stories](#User-Stories)
+7. [Non-Functional Requirements](#Non-Functional-Requirements)
 8. [Glossary](#Glossary)
-9. [Instructions for manual testing](#Instructions for manual testing)
+9. [Instructions for manual testing](#Instructions-for-manual-testing)
 
 
 ## Introduction
@@ -278,7 +278,7 @@ and provide Student leaders, with an application to cater to their specific mana
 |v2.0|Head of a committee|View all the members assigned to a task|Determine whether there is enough manpower allocated for the task|
 |v2.0|Head or member of a committee|Have a calendar view of my next event|Have a better sense of when the next event is happening|
 
-## Non-Functional Requirements
+## Non Functional Requirements
 
 1. Should work on any *mainstream OS* as long as it has java `11` or above installed.
 2. Should be able to hold up to 100 different events without noticeable issues, developing with the application.
