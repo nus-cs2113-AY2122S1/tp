@@ -1,5 +1,6 @@
 package seedu.budgettracker.logic.commands;
 
+import seedu.budgettracker.logic.commands.exceptions.CommandException;
 import seedu.budgettracker.ui.TextUi;
 
 public class DeleteBudgetCommand extends DeleteCommand {
@@ -14,7 +15,7 @@ public class DeleteBudgetCommand extends DeleteCommand {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CommandException {
         allRecordList.deleteBudget(month);
         TextUi.showBudgetDeletedMessage();
     }

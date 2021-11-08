@@ -1,6 +1,9 @@
 package seedu.budgettracker.logic.commands;
 
+import seedu.budgettracker.logic.commands.exceptions.CommandException;
 import seedu.budgettracker.ui.TextUi;
+
+import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_INDEX_OF_LOAN;
 
 public class DeleteSingleLoanCommand extends DeleteCommand {
 
@@ -17,7 +20,10 @@ public class DeleteSingleLoanCommand extends DeleteCommand {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CommandException {
+        if (index <= 0 || index >= allRecordList.getLoanListSize(month)) {
+            throw new CommandException(MESSAGE_INVALID_INDEX_OF_LOAN);
+        }
         TextUi.showSingleLoanDeletedMessage(index + 1,
                 allRecordList.getLoan(index, month));
         allRecordList.deleteLoan(index + 1, month);
