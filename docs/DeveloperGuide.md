@@ -197,7 +197,7 @@ associated with it.
 The `Command` component consists of an abstract class `Command` that all commands should inherit from. There are then 3 seperate types of Commands.
  - `XYZCommand`: These are commands that do not interact with `TaskManager` and need no flags. e.g. the 'bye' command.
  - `XYZTaskManagerCommand`: These are commands that perform a function with `TaskManager` based on the flags that are entered in the `Map<String, String>` e.g. the 'edit' or 'sort' command.
- - `TaskCommand` these are commands that add Tasks to the `TaskManager`. individual TaaskCommands will inherit from this class and set the `TaskFactory` and Task usage e.g. the 'Deadline' command.
+ - `TaskCommand` these are commands that add Tasks to the `TaskManager`. individual TaskCommands will inherit from this class and set the `TaskFactory` and Task usage e.g. the 'Deadline' command.
    >💡 **Note**: The `ModuleCommand` is implemented with `XYZTaskManagerCommand` instead of `TaskCommand` as it does **not** use a `TaskFactory`.  
 
 On executing the command (`executeCommand()` called), the `CommandResult` should be returned with 2 variables. `message` is the message to be printed back to the user and `isExited` is whether the program should exit after this command.
