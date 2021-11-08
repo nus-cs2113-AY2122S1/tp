@@ -44,7 +44,7 @@
 
 <hr>
 
-The diagram above shows the high-level design of TourPlanner.
+The diagram below shows the high-level design of TourPlanner:
 
 <img width="307" alt="component_diagram" src="https://user-images.githubusercontent.com/79963329/140464392-5a1536d2-a5d8-4e57-83f4-f4938ede0cfe.PNG">
 
@@ -56,12 +56,13 @@ Below is an overview of the main components, and how they interact with each oth
 ```TourPlanner``` acts as the main class. It is responsible for:
 
 * At app launch: Initialises the components in the correct sequence, and connects them up with each other.
+* While app is running: Executes commands from the user.
 * At shut down: Shuts down the components and invokes clean-up methods where necessary.
 
 The rest of the app consists of the following components:
 
 * ```Ui```: The UI of the application.
-* ```Parser```: Deciphers user input and executes the appropriate command / error message
+* ```Parser```: Deciphers user input and returns the appropriate command to `TourPlanner`.
 * ```Command```: The different types of commands that can possibly be executed.
 * ```ObjectList```: Holds data in different arrays, based on their type. Namely there are four types of ObjectLists:
     * ClientList
