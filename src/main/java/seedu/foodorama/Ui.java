@@ -112,7 +112,7 @@ public class Ui {
             + "            #" + System.lineSeparator()
             + "# 9. Setting Ingredient Expiry Date : 'set ingr expiry [INGR_NAME/INDEX]'                          "
             + "            #" + System.lineSeparator()
-            + "# 10. Linking an Ingredient to a Dish : 'link [DISH_NAME] / [INGR_NAME]'                      "
+            + "# 10. Linking an Ingredient to a Dish : 'link [DISH_NAME] / [INGR_NAME]'                           "
             + "            #" + System.lineSeparator()
             + "# 11. Deleting an Ingredient : 'del ingr [INGR_NAME/INDEX]'                                        "
             + "            #" + System.lineSeparator()
