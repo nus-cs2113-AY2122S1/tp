@@ -86,8 +86,8 @@ public class UpdateParser extends Parser {
 
         ArrayList<Boolean> updateAttributes = getUpdateHabitAttributes(parameters);
 
-        assert (input.contains(FLAG_GOAL_INDEX) && input.contains(FLAG_HABIT_INDEX)
-                && (input.contains(FLAG_NAME) || input.contains(FLAG_INTERVAL)));
+//        assert (input.contains(FLAG_GOAL_INDEX) && input.contains(FLAG_HABIT_INDEX)
+//                && (input.contains(FLAG_NAME) || input.contains(FLAG_INTERVAL)));
 
         boolean isUpdateHabitName = updateAttributes.get(0);
         boolean isUpdateHabitInterval = updateAttributes.get(1);
