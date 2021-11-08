@@ -3,7 +3,7 @@ SchedUrMods is a **desktop application for NUS Students to manage their NUSMODS 
 everyday tasks optimised for usage via a Command Line Interface (CLI).** If you can type fast, 
 SchedUrMods can help you manage your daily tasks faster than traditional GUI application.  
 
-Below is a guide on how you can get started using our program to start **"Scheduling Ur Mods"**.  
+Below is the guide on how you can get started using our program to start **"Scheduling Ur Mods!"**.  
 
 ## Overview <a id="scrollToHere"></a>
 - [1. Quick Start](#1-quick-start)
@@ -18,10 +18,10 @@ Below is a guide on how you can get started using our program to start **"Schedu
       - [2.3.1 Module: `module`](#231-module-module)
       - [2.3.2 Browse: `browse`](#232-browse-browse)
     - [2.4 Listing your tasks: `list`](#24-listing-your-tasks-list)
-      - [2.4.1 Listing your entire tasklist](#241-listing-your-entire-tasklist)
-      - [2.4.2 Filtering your tasklist](#242-filtering-your-tasklist)
+      - [2.4.1 Listing your entire task list](#241-listing-your-entire-task-list)
+      - [2.4.2 Filtering your task list](#242-filtering-your-task-list)
       - [2.4.3 Listing the recurrence of a task](#243-listing-the-recurrence-of-a-task)
-    - [2.5 Sorting your tasklist: `sort`](#25-sorting-your-task-list-sort)
+    - [2.5 Sorting your task list: `sort`](#25-sorting-your-task-list-sort)
     - [2.6 Setting reminders to your tasks: `reminder`](#26-setting-reminders-to-your-tasks-reminder)
     - [2.7 Editing your tasks: `edit`](#27-editing-your-tasks-edit)
     - [2.8 Deleting your tasks: `delete`](#28-deleting-your-tasks-delete)
@@ -38,9 +38,9 @@ and that `java` is in your `PATH` environment variable.
    > **⚠️Warning**: Do *not* decompress the jar file even if it shows as an archive on your file manager.
 3. Copy the file to the folder you want to use as the _home folder_ for SchedUrMods.
    >💡 **Note**: Ensure you have permission to create files and folders in this _home folder_.
-5. Open a terminal window in the _home folder_.
-6. Type `java -jar SchedUrMods.jar` into the terminal to start SchedUrMods.
-7. The following display should appear in a few seconds:
+4. Open a terminal window in the _home folder_.
+5. Type `java -jar SchedUrMods.jar` into the terminal to start SchedUrMods.
+6. The following display should appear in a few seconds:
 
 ```
  _____        _                _  _   _       ___  ___            _
@@ -56,7 +56,7 @@ Command-Line Interface for NUSMODS                               (v2.1.0)
 ```
 
 7. You may now enter commands into SchedUrMods. Type a command beside
-`[user]:` and press `Enter` on your keyboard to execute the command.
+`[user]:` (as shown above) and press `Enter` on your keyboard to execute the command.
 8. Refer to the [Features](#2-features) below for details of each command.
 
 ## 2. Features
@@ -183,21 +183,190 @@ The accepted date formats in our program:
 - `15:30` translates to `Your current year, month and day at 3.30pm`.
 - `15 12:30` translates to `Your current year and month on the 15th at 12.30pm`.
 
-### 2.3 Adding your NUS timetable:
+### 2.3 Listing your tasks: `list`
 
-#### 2.3.1 Module: `module`
+There are **3 main features** you can use with the list command.
 
-Add one or multiple classes of one or multiple modules into the task list.
+#### 2.3.1 Listing your entire task list
+List all tasks currently stored locally in your task list.
+
+**Format**: `list`
+- The command displays the following information for each task:
+  - **Task id**:
+    - A positive integer i.e. `1.` to identify the task. This is used in the `edit`@@@@@@@@link, `browse` and `delete` command
+  - **Task type**:
+    - A task can be either Todo, Deadline, Event or Lesson and is represented with the first letter of their task type
+    - `[T]` represents a `Todo`
+    - `[D]` represents a `Deadline`
+    - `[E]` represents a `Event`
+    - `[L]` represents a `Lesson`
+  - **Task description**:
+    - General details of the task.
+  - **Task priority `[priority]`**:
+    - A task can either have `low`, `medium`, or `high` priority. 
+    - This value determines the urgency of the task.
+  - **Task recurrence ``**:
+    - A task can either have `none`, `daily`, `weekly`, `monthly`, or `yearly` recurrence.
+    - This value determines how often a task recurs.
+  - **Task date field**:
+    - For a `Todo`, it represents the date and time to do the task.
+    - For a `Deadline`, it represents the due date of the task.
+    - For an `Event`, it represents the start date and end date of the event.
+    - For a `Lesson`, it represents the date and duration of the lesson.
+
+>💡 **Note**: For `Lesson` tasks, the task date field is combined with the task description.
+
+**Example**: `list`
+- List all tasks that are in your task list.
+
+**Expected Outcome**:
+
+```
+-------------------------------------------------------------------------
+[user]: list
+|| -------------
+||  MY TASK LIST
+|| -------------
+|| 1. [T] read book <low> {daily} (doOn: 05-11-2021 02:00)
+|| 2. [D] return book <medium> {weekly} (dueDate: 11-11-2021 03:00)
+|| 3. [E] project meeting <high> {monthly} (startDate: 22-11-2021 04:00 - endDate: 22-11-2021 05:00)
+|| 4. [T] exercise <medium> {none} (doOn: 04-11-2021 18:00)
+|| 5. [T] wash clothes <medium> {weekly} (doOn: 10-11-2021 02:00)
+|| 6. [D] project submission <high> {monthly} (dueDate: 21-11-2021 03:00)
+|| 7. [E] movie screening <low> {daily} (startDate: 05-11-2021 04:00 - endDate: 05-11-2021 05:00)
+-------------------------------------------------------------------------
+```
+
+#### 2.3.2 Filtering your task list
+Filters the task list for all tasks that matches the filters applied.
+
+**Format**: `list [--filter <argument>] [--filter <argument>] ...`
+- `[--flag <argument>]` specifies the filter to be applied to your task list.
+  - Type of task: `[--type <todo|deadline|event|lesson>]`
+  - Priority of the task: `[--priority <low|medium|high>]`
+  - Recurrence of the task: `[--recur <none|daily|weekly|monthly|yearly>]`
+
+**Example**: `list --type todo --priority medium`
+- List all tasks that are of type `Todo` and has a priority of `medium`.
+
+**Expected Outcome**:
+
+```
+-------------------------------------------------------------------------
+[user]: list --type todo --priority medium
+|| -------------
+||  MY TASK LIST
+|| -------------
+|| 1. [T] exercise <medium> {none} (doOn: 04-11-2021 18:00)
+|| 2. [T] wash clothes <medium> {weekly} (doOn: 10-11-2021 02:00)
+-------------------------------------------------------------------------
+```
+
+#### 2.3.3 Listing the recurrence of a task
+Displays the next four recurrences of a task.
+
+**Format 2**: `list [index]`
+- `[index]` specifies the id of the task to display the next four recurrences of.
+  >💡 **Note**: To obtain the correct task id of each task, please use the `list` command without any filters.
+
+**Example (with task id)**: `list 3`
+- Lists the next four recurrences of the task with the index `3`.
+
+**Expected Outcome**:
+
+```
+-------------------------------------------------------------------------
+[user]: list 3
+|| -------------
+||  MY TASK LIST
+|| -------------
+|| Listing next 4 recurrences for:
+|| [E] project meeting <high> {monthly} (startDate: 22-11-2021 04:00 - endDate: 22-11-2021 05:00)
+|| -> 22-12-2021 04:00
+|| -> 22-01-2022 04:00
+|| -> 22-02-2022 04:00
+|| -> 22-03-2022 04:00
+-------------------------------------------------------------------------
+```
+
+#### 2.3.4 Listing your upcoming tasks: `upcoming`
+Allows you to easily list your tasks over the upcoming week.
+
+**Format**: `upcoming`
+
+**Example**:
+
+**Expected Outcome**:
+
+### 2.4 Sorting your task list: `sort`
+Sorts your task list by a given criteria.
+
+**Format**: `sort --by <criteria>`
+- `<criteria>` specifies what to sort your task list by.
+  - Type of the task: `type`
+  - Description of the task: `description`
+  - Priority of the task: `priority`
+
+**Example**: `sort --by priority` + `list`
+- Sort your current task list by `priority` from `high` to `low`.
+- Print out the sorted list with the `list` command.
+
+**Expected Outcome**:
+
+```
+-------------------------------------------------------------------------
+[user]: sort --by priority
+|| [!] Task list has been sorted by: priority
+-------------------------------------------------------------------------
+[user]: list
+|| -------------
+||  MY TASK LIST
+|| -------------
+|| 1. [E] project meeting <high> {monthly} (startDate: 22-11-2021 04:00 - endDate: 22-11-2021 05:00)
+|| 2. [D] project submission <high> {monthly} (dueDate: 21-11-2021 03:00)
+|| 3. [D] return book <medium> {weekly} (dueDate: 11-11-2021 03:00)
+|| 4. [T] exercise <medium> {none} (doOn: 04-11-2021 18:00)
+|| 5. [T] wash clothes <medium> {weekly} (doOn: 10-11-2021 02:00)
+|| 6. [T] read book <low> {daily} (doOn: 05-11-2021 02:00)
+|| 7. [E] movie screening <low> {daily} (startDate: 05-11-2021 04:00 - endDate: 05-11-2021 05:00)
+-------------------------------------------------------------------------
+```
+
+### 2.5 Setting reminders to your tasks: `reminder`
+
+### 2.6 Editing your tasks: `edit`
+Edits a single [Todo](#221-todo-todo), [Deadline](#222-deadline-deadline) or [Event](#223-event-event) based on the flags entered.
+**Format**: `edit <index> <--flag <value>> [--flag <value>] [--flag <value>]...`
+- `<index>` is the index of the task you want to edit from the most recent [list](#24-listing-your-tasks-list) command that you have run.
+   >💡 **Note**: if the task you want to edit was not in your most recent [list](#24-listing-your-tasks-list) command, simply type `list` to list all tasks and use its corresponding index to edit it.
+- at least one `<--flag <value>>` must be specified, though you can edit multiple values at once by providing multiple more `[--flag <value>]` arguments.
+- **Flags**
+  - `--description <description>` modifies task description.
+  - `--priority <high|medium|low>` modifies task priority.
+  - `--recur <daily|weekly|monthly|yearly>` modifies task recurrence.
+  - <code>--doOn <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Todo](#221-todo-todo) is to be done.
+  - <code>--due <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Deadline](#222-deadline-deadline) is due.
+  - <code>--start <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Event](#223-event-event) starts.
+  - <code>--end <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Event](#223-event-event) ends.
+  - `--link <url>` modifies your Lesson link.
+
+
+### 2.6 Adding your NUS timetable:
+
+Allows you to add modules into your task list and browse to their meeting links.
+
+#### 2.7.1 Module: `module`
+
+Adds your modules and classes into your task list.
 
 **Format**: `module {<module code>:{<class number>,}...;}...`
 
-- `<module code>` is the official code of a module, such as `CS2113T`.
-- `<class number>` is the number of class group, such as `C02`.
+- `<module code>` is the official module code of a module. E.g. `CS2113T`.
+- `<class number>` is the official class group number. E.g. `C02`.
 
 **Example**: `module CS2113T:C02;LAJ2203:1,A2,B4`
 
-- Add class C02 of module CS2113T
-- Add class 1, A2 and B4 of module LAJ2203
+- Adds class 'C02' of the module 'CS2113T` and classes '1', 'A2', and 'B4' of the module 'LAJ2203' into the task list.
 
 **Expected outcome**:
 
@@ -211,30 +380,31 @@ Add one or multiple classes of one or multiple modules into the task list.
 -------------------------------------------------------------------------
 ```
 
-#### 2.3.2 Browse: `browse`
+#### 2.7.2 Browse: `browse`
 
-Browse the previously added link inside a lesson.
-
+Browse links that were added to a `Lesson` with the `edit`@@@@@ command.
 **Format**: `browse <index>`
+- `<index>` is the index of the task you want to browse to (open in an internet browser) in the most recent [list](#24-listing-your-tasks-list) command that you have run.
+  >💡 **Note**: if the task you want to browse to was not in your most recent [list](#24-listing-your-tasks-list) command, simply type `list` to list all tasks and use its corresponding index to browse to the task's url.
 
 **Example**: `browse 2`
 
 **Expected outcome**:
 ```
 -------------------------------------------------------------------------
-[user]: browse 1
+[user]: browse 2
 || https://google.com
 -------------------------------------------------------------------------
 ```
 
->💡 **Note**: The opening of the link is delegated to the operating system. As such, the actual protocols supported is
+>💡 **Note**: The opening of the link is done by the operating system. As such, the actual protocols supported is
 > dependent on the OS.
 
 
->💡 **Note**: There may be possible error messages printed on your terminal. They are from the associated application
+>💡 **Note**: There may be possible error messages printed on your terminal. They can be from the associated application
 > for opening the link, such as Chrome, and not SchedUrMods.
 
->💡 **Note**: If there is no link in the lesson being specified, you will be prompted with an error like,
+>💡 **Note**: If there is no link in the lesson being specified, you will be prompted with an error:
 >
 > ```
 > -------------------------------------------------------------------------
@@ -244,177 +414,18 @@ Browse the previously added link inside a lesson.
 > ```
 > You can conveniently list the tasks and see if the lesson has a link.
 
-### 2.4 Listing your tasks: `list`
-
-There are **3 main features** you can use with the list command.
-
-#### 2.4.1 Listing your entire tasklist
-List all tasks currently stored locally in your tasklist.
-
-**Format**: `list`
-- The command displays the following information for each task:
-  - **Task id**:
-    - A positive integer i.e. `1.` to identify the task
-  - **Task type**:
-    - A task can be either Todo, Deadline, Event or Lesson and is represented with the first letter of their task type
-    - `[T]` represents a `Todo`
-    - `[D]` represents a `Deadline`
-    - `[E]` represents a `Event`
-    - `[L]` represents a `Lesson`
-  - **Task description**:
-    - General details of the task
-  - **Task priority `[priority]`**:
-    - A task can either have `low`, `medium`, or `high` priority. 
-    - This value determines the urgency of the task.
-  - **Task recurrence ``**:
-    - A task can either have `none`, `daily`, `weekly`, `monthly`, or `yearly` recurrence.
-    - This value determines how often a task recurs.
-  - **Task date field**:
-    - For a `Todo`, it represents the datetime to perform the task.
-    - For a `Deadline`, it represents the due date of the task.
-    - For an `Event`, it represents the date and duration of the event.
-    - For a `Lesson`, it represents the date and duration of the lesson.
-
->💡 **Note**: For type `Lesson` tasks, the task date field is combined with the task description.
-
-**Example**: `list`
-- List all tasks currently stored locally in your tasklist.
-
-**Expected Outcome**:
-
-```
--------------------------------------------------------------------------
-[user]: list
-|| -------------
-||  MY TASKLIST
-|| -------------
-|| 1. [T] read book <low> {daily} (doOn: 05-11-2021 02:00)
-|| 2. [D] return book <medium> {weekly} (dueDate: 11-11-2021 03:00)
-|| 3. [E] project meeting <high> {monthly} (startDate: 22-11-2021 04:00 - endDate: 22-11-2021 05:00)
-|| 4. [T] exercise <medium> {none} (doOn: 04-11-2021 18:00)
-|| 5. [T] wash clothes <medium> {weekly} (doOn: 10-11-2021 02:00)
-|| 6. [D] project submission <high> {monthly} (dueDate: 21-11-2021 03:00)
-|| 7. [E] movie screening <low> {daily} (startDate: 05-11-2021 04:00 - endDate: 05-11-2021 05:00)
--------------------------------------------------------------------------
-```
-
-#### 2.4.2 Filtering your tasklist
-Filters the tasklist for specific tasks that matches the filters applied.
-
-**Format**: `list [--filter <argument>] [--filter <argument>] ...`
-- `[--flag <argument>]` specifies the filter to be applied to your task list.
-  - Type of task: `[--type <todo|deadline|event|lesson>]`
-  - Priority of the task: `[--priority <low|medium|high>]`
-  - Recurrence of the task: `[--recur <none|daily|weekly|monthly|yearly>]`
-
-**Example**: `list --type todo --priority medium`
-- List all tasks that are type `Todo` and priority is `medium`.
-
-**Expected Outcome**:
-
-```
--------------------------------------------------------------------------
-[user]: list --type todo --priority medium
-|| -------------
-||  MY TASKLIST
-|| -------------
-|| 1. [T] exercise <medium> {none} (doOn: 04-11-2021 18:00)
-|| 2. [T] wash clothes <medium> {weekly} (doOn: 10-11-2021 02:00)
--------------------------------------------------------------------------
-```
-
-#### 2.4.3 Listing the recurrence of a task
-Displays the next 4 recurrences of a task.
-
-**Format 2**: `list [task id]`
-- `[task id]` specifies the id of the task to display the recurrence.
-
-**Example (with task id)**: `list 3`
-- List the next 4 recurrences for task with task id `3`.
-
-**Expected Outcome**:
-
-```
--------------------------------------------------------------------------
-[user]: list 3
-|| -------------
-||  MY TASKLIST
-|| -------------
-|| Listing next 4 recurrences for:
-|| [E] project meeting <high> {monthly} (startDate: 22-11-2021 04:00 - endDate: 22-11-2021 05:00)
-|| -> 22-12-2021 04:00
-|| -> 22-01-2022 04:00
-|| -> 22-02-2022 04:00
-|| -> 22-03-2022 04:00
--------------------------------------------------------------------------
-```
-
->💡 **Note**: To obtain the correct task id of each task, please use the `list` command without any filters.
-
-### 2.5 Sorting your task list: `sort`
-Sorts your task list by a given criteria.
-
-**Format**: `sort --by <criteria>`
-- `<criteria>` specifies what to sort your task list by.
-  - Type of task: `type`
-  - Description of task: `description`
-  - Priority of the task: `priority`
-
-**Example**: `sort --by priority` + `list`
-- Sort your current task list by `priority` from `high` to `low`.
-- Print out the sorted list with the `list` command.
-
-**Expected Outcome**:
-
-```
--------------------------------------------------------------------------
-[user]: sort --by priority
-|| [!] Tasklist has been sorted by: priority
--------------------------------------------------------------------------
-[user]: list
-|| -------------
-||  MY TASKLIST
-|| -------------
-|| 1. [E] project meeting <high> {monthly} (startDate: 22-11-2021 04:00 - endDate: 22-11-2021 05:00)
-|| 2. [D] project submission <high> {monthly} (dueDate: 21-11-2021 03:00)
-|| 3. [D] return book <medium> {weekly} (dueDate: 11-11-2021 03:00)
-|| 4. [T] exercise <medium> {none} (doOn: 04-11-2021 18:00)
-|| 5. [T] wash clothes <medium> {weekly} (doOn: 10-11-2021 02:00)
-|| 6. [T] read book <low> {daily} (doOn: 05-11-2021 02:00)
-|| 7. [E] movie screening <low> {daily} (startDate: 05-11-2021 04:00 - endDate: 05-11-2021 05:00)
--------------------------------------------------------------------------
-```
-
-### 2.6 Setting reminders to your tasks: `reminder`
-
-### 2.7 Editing your tasks: `edit`
-Edits a single [Todo](#221-todo-todo), [Deadline](#222-deadline-deadline) or [Event](#223-event-event) based on the flags entered.
-**Format**: `edit <index> <--flag <value>> [--flag <value>] [--flag <value>]...`
-- `<index>` is the index of the task you want to edit from the most recent [list](#24-listing-your-tasks-list) command that you have run.
-   >💡 **Note**: if the task you want to edit was not in your most recent [list](#24-listing-your-tasks-list) command, simply type `list` to list all tasks and use its corresponding index to edit it.
-- at least one `<--flag <value>>` must be specified, though you can edit multiple values at once by providing multiple more `[--flag <value>]` arguments.
-- **Flags**
-  - `--description <description>` modifies Task description.
-  - `--priority <high|medium|low>` modifies Task priority.
-  - `--recur <daily|weekly|monthly|yearly>` modifies Task recurrence.
-  - <code>--doOn <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Todo](#221-todo-todo) is to be done.
-  - <code>--due <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Deadline](#222-deadline-deadline) is due.
-  - <code>--start <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Event](#223-event-event) starts.
-  - <code>--end <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Event](#223-event-event) ends.
-  - `--link <url>` modifies your Lesson link.
-
 ### 2.8 Deleting your tasks: `delete`
-Deletes Tasks specified in comma-seperated argument.
+Deletes all task(s) specified in a comma-separated argument.
 **Format**: `delete <indexes>`
 - `<indexes>` are the indexes of the task you want to edit from the most recent [list](#24-listing-your-tasks-list) command that you have run.
    >💡 **Note**: if the task(s) you want to delete was not in your most recent [list](#24-listing-your-tasks-list) command, simply type `list` to list the tasks and use their indexes to delete them.
-  - Indexes should be comma seperated single integers such as `5` and/or ranges of two indexes such as `1-3`.
+  - Indexes should be comma separated single integers such as `5` and/or ranges of two indexes such as `1-3`.
   - **Example**:
    - `delete 1,3,5` would delete tasks with indexes 1, 3 and 5.
    - `delete 1-3` would delete tasks with indexes 1, 2 and 3.
    - `delete 1-3, 5` would delete tasks with indexes 1, 2, 3 and 5.
    - `delete 5` would delete the task with index 5.
-      >💡 **Note**: Whether there are any spaces between the commas, it does not matter.
+      >💡 **Note**: It does not matter if there are any spaces in-between the commas.
 
 
 **Example**: `delete 1-3, 5`
@@ -426,7 +437,7 @@ Deletes Tasks specified in comma-seperated argument.
 -------------------------------------------------------------------------
 [user]: list
 || -------------
-||  MY TASKLIST
+||  MY TASK LIST
 || -------------
 || 1. [T] read book <low> {none} (doOn: 20-10-2021 02:00)
 || 2. [T] return book <low> {none} (doOn: 21-10-2021 03:00)
@@ -455,7 +466,7 @@ Deletes Tasks specified in comma-seperated argument.
 -------------------------------------------------------------------------
 [user]: list
 || -------------
-||  MY TASKLIST
+||  MY TASK LIST
 || -------------
 || 1. [T] wash clothes <medium> {none} (doOn: 20-10-2021 02:00)
 || 2. [E] movie screening <low> {none} (startDate: 22-10-2021 04:00 - endDate: 22-10-2021 05:00)
@@ -464,8 +475,6 @@ Deletes Tasks specified in comma-seperated argument.
 
 ### 2.9 Exiting the program: `bye`
 Displays goodbye message and exits the program.
-
-An end-of-file condition in the input, such as <kbd>Ctrl-D</kbd> on Bash, has the same effect as this command.
 
 **Format**: `bye`
 
@@ -479,7 +488,7 @@ An end-of-file condition in the input, such as <kbd>Ctrl-D</kbd> on Bash, has th
 ```
 
 ### 2.10 Storage
-The program will store and automatically update your Tasks in the the file `./data/task.dat` on any change in your Task list.  
+The program will store and automatically update your tasks in the file `[project directory]/data/task.dat` on any change to your task list.  
    > **⚠️Warning**: The team **strongly discourages** users from directly modifying Task data in `task.dat` as it can lead to undefined behaviour. The team **will not be responsible** for any *loss of data* or *undefined behaviour* as a result of users directly modifying values in the save file.
 
 
