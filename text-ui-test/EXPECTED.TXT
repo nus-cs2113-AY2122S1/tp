@@ -1,9 +1,43 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
-What is your name?
-Hello James Gosling
+ ____ ____ ____ ____ ____ ____ ____ 
+||E |||l |||d |||e |||r |||l |||y ||
+||__|||__|||__|||__|||__|||__|||__||
+|/__\|/__\|/__\|/__\|/__\|/__\|/__\|
+ ____ ____                          
+||I |||n ||                         
+||__|||__||                         
+|/__\|/__\|                         
+ ____ ____ ____ ____                
+||Y |||o |||u |||r ||               
+||__|||__|||__|||__||               
+|/__\|/__\|/__\|/__\|               
+ ____ ____ ____ ____                
+||H |||o |||o |||d ||               
+||__|||__|||__|||__||               
+|/__\|/__\|/__\|/__\|               
+[*] Welcome admin. Type after the '>' to start.
+> Invalid input detected 
+Correct input format: [*] Add Elderly format: addelderly u/USERNAME n/NAME r/RISK_LEVEL
+> List of hospitals are shown below:
+  1.changi general hospital
+  2.khoo teck puat hospital
+  3.national university hospital
+  4.ng teng feng general hospital
+  5.singapore general hospital
+  6.tan tock seng hospital
+[*] Enter hospital number choice. (e.g. 1 for Changi General Hospital etc.)
+> [*] Enter elderly condition below. Hit enter when done.
+> [*] Enter notes on care below. Hit enter when done.
+> [*] Elderly, tan bo jiao, has been added!
+> [*] Elderly, lim ah seng, has been added!
+> [*] Medicine has been added!
+> [*] Medicine has been added!
+> Medicine of tan are shown below:
+  1.Medicine Name: panadol, Frequency: once a day
+  2.Medicine Name: azheitynine, Frequency: every hour
+> Medicine of lim are shown below:
+> [*] Appointment has been added!
+> [*] Appointment has been added!
+> Appointments of tan are shown below:
+  1.Location: ktph, Date: 01012021, Time: 1000, Purpose of Visit: eyecheckup
+  2.Location: ktph, Date: 02022021, Time: 1500, Purpose of Visit: general checkup
+> [*] Bye command has been recognized. Goodbye!

@@ -1,0 +1,494 @@
+[
+  {
+    "medicines": [
+      {
+        "medicineName": "penicillin",
+        "frequency": "whenever necessary"
+      }
+    ],
+    "appointments": [],
+    "nextofkins": [
+      {
+        "nokName": "Robert Ng",
+        "nokPhoneNumber": "98392389",
+        "nokEmail": "hello@gmail.com",
+        "nokAddress": "Blk 2 Some Road",
+        "nokRelationship": "Son"
+      }
+    ],
+    "records": [
+      {
+        "elderlyPhoneNumber": "82738734",
+        "elderlyAddress": "Blk 2 Some Road"
+      }
+    ],
+    "username": "nguyin",
+    "name": "rebecca ng",
+    "bloodPressure": [
+      90,
+      120
+    ],
+    "isVaccinated": true,
+    "birthday": "Sep 20, 1987, 12:00:00 AM",
+    "diet": "VEGAN",
+    "medicalHistory": "G6PD",
+    "type": "seedu.duke.common.LowRiskElderly"
+  },
+  {
+    "hospital": {
+      "name": "khoo teck puat hospital",
+      "number": 65558000,
+      "doctorArrayList": [
+        {
+          "name": "adrian vergil",
+          "number": 88129931
+        },
+        {
+          "name": "joline dean",
+          "number": 98672657
+        },
+        {
+          "name": "shui lorin",
+          "number": 99046617
+        },
+        {
+          "name": "britney soh",
+          "number": 91982575
+        },
+        {
+          "name": "aditi nitya",
+          "number": 91208702
+        }
+      ]
+    },
+    "conditions": "mild dizziness upon standing up",
+    "notesOnCare": "abrasion on tigh from fall. Could be fall risk.",
+    "medicines": [
+      {
+        "medicineName": "chlorpheniramine",
+        "frequency": "daily after meals"
+      }
+    ],
+    "appointments": [
+      {
+        "location": "tan tock seng hospital",
+        "date": "29122021",
+        "time": "0900",
+        "purpose": "general checkup"
+      }
+    ],
+    "nextofkins": [
+      {
+        "nokName": "Rita Soh",
+        "nokPhoneNumber": "81111823",
+        "nokEmail": "byebye@gmail.com",
+        "nokAddress": "Blk 5 Some Road",
+        "nokRelationship": "Daughter"
+      }
+    ],
+    "records": [
+      {
+        "elderlyPhoneNumber": "98298938",
+        "elderlyAddress": "Blk 5 Some Road"
+      }
+    ],
+    "username": "owinsoh",
+    "name": "owen soh",
+    "bloodPressure": [
+      120,
+      130
+    ],
+    "isVaccinated": false,
+    "birthday": "Jan 22, 1983, 12:00:00 AM",
+    "diet": "BEEF_FREE",
+    "medicalHistory": "Osteoporosis",
+    "type": "seedu.duke.common.MediumRiskElderly"
+  },
+  {
+    "hospital": {
+      "name": "national university hospital",
+      "number": 67795555,
+      "doctorArrayList": [
+        {
+          "name": "dwain wong",
+          "number": 98105561
+        },
+        {
+          "name": "lim qingchen",
+          "number": 96737937
+        },
+        {
+          "name": "ling li se",
+          "number": 83892911
+        },
+        {
+          "name": "juan chelsie",
+          "number": 97915260
+        },
+        {
+          "name": "lorie pang",
+          "number": 88235081
+        }
+      ]
+    },
+    "conditions": "strong migraines. Currently has concussion",
+    "notesOnCare": "Doctor to monitor status upon routine check ups",
+    "doctor": {
+      "name": "juan chelsie",
+      "number": 97915260
+    },
+    "medicines": [
+      {
+        "medicineName": "paracetemol",
+        "frequency": "daily"
+      }
+    ],
+    "appointments": [
+      {
+        "location": "ng teng fong general hospital",
+        "date": "20112021",
+        "time": "1130",
+        "purpose": "routine checkup"
+      }
+    ],
+    "nextofkins": [
+      {
+        "nokName": "Pita Lee",
+        "nokPhoneNumber": "91898372",
+        "nokEmail": "gg@gg.com",
+        "nokAddress": "Blk 10 Some Road",
+        "nokRelationship": "Cousin"
+      }
+    ],
+    "records": [
+      {
+        "elderlyPhoneNumber": "88883823",
+        "elderlyAddress": "Blk 10 Some Road"
+      }
+    ],
+    "username": "wutdequack",
+    "name": "jonathan lee",
+    "bloodPressure": [
+      60,
+      70
+    ],
+    "isVaccinated": false,
+    "birthday": "Feb 1, 1959, 12:00:00 AM",
+    "diet": "NO_RESTRICTION",
+    "medicalHistory": "Heart Disease",
+    "type": "seedu.duke.common.HighRiskElderly"
+  },
+  {
+    "hospital": {
+      "name": "tan tock seng hospital",
+      "number": 62566011,
+      "doctorArrayList": [
+        {
+          "name": "maralyn harsha",
+          "number": 99026440
+        },
+        {
+          "name": "stace fang",
+          "number": 91074243
+        },
+        {
+          "name": "chantelle jia",
+          "number": 80463166
+        },
+        {
+          "name": "yasmin ang",
+          "number": 81338150
+        },
+        {
+          "name": "wolf emmet",
+          "number": 89490406
+        }
+      ]
+    },
+    "conditions": "Drowsiness at certain times of the day",
+    "notesOnCare": "May need to recline his bed a bit more due to back pain",
+    "doctor": {
+      "name": "stace fang",
+      "number": 91074243
+    },
+    "medicines": [
+      {
+        "medicineName": "Gingko",
+        "frequency": "weekly"
+      },
+      {
+        "medicineName": "Ginseng",
+        "frequency": "twice daily"
+      }
+    ],
+    "appointments": [
+      {
+        "location": "tan tock seng hospital",
+        "date": "09112021",
+        "time": "1345",
+        "purpose": "chiropractor"
+      }
+    ],
+    "nextofkins": [
+      {
+        "nokName": "Ang Ru Ming",
+        "nokPhoneNumber": "98733842",
+        "nokEmail": "rm@gmail.com",
+        "nokAddress": "Blk 2 Some Road",
+        "nokRelationship": "Friend"
+      },
+      {
+        "nokName": "Lin Ming Yi",
+        "nokPhoneNumber": "92313424",
+        "nokEmail": "my@gmail.com",
+        "nokAddress": "Blk 89 Some Road",
+        "nokRelationship": "Wife"
+      }
+    ],
+    "records": [
+      {
+        "elderlyPhoneNumber": "82223323",
+        "elderlyAddress": "Blk 89 Some Road"
+      }
+    ],
+    "username": "ruyian",
+    "name": "ru yi",
+    "bloodPressure": [
+      123,
+      92
+    ],
+    "isVaccinated": true,
+    "birthday": "Oct 29, 1972, 12:00:00 AM",
+    "diet": "DIABETES",
+    "medicalHistory": "Dry eyes",
+    "type": "seedu.duke.common.HighRiskElderly"
+  },
+  {
+    "medicines": [
+      {
+        "medicineName": "paracetmol",
+        "frequency": "daily"
+      }
+    ],
+    "appointments": [
+      {
+        "location": "khoo teck puat hospital",
+        "date": "01122021",
+        "time": "0900",
+        "purpose": "general checkup"
+      }
+    ],
+    "nextofkins": [
+      {
+        "nokName": "Rick Tay",
+        "nokPhoneNumber": "98273423",
+        "nokEmail": "rtay@gmail.com",
+        "nokAddress": "Blk 1 College Drive",
+        "nokRelationship": "Brother"
+      }
+    ],
+    "records": [
+      {
+        "elderlyPhoneNumber": "88374645",
+        "elderlyAddress": "Blk 1 College Drive"
+      }
+    ],
+    "username": "rtay",
+    "name": "richard tay",
+    "bloodPressure": [
+      90,
+      180
+    ],
+    "isVaccinated": false,
+    "birthday": "Aug 12, 1978, 12:00:00 AM",
+    "diet": "BEEF_FREE",
+    "medicalHistory": "Tennis Elbow",
+    "type": "seedu.duke.common.LowRiskElderly"
+  },
+  {
+    "hospital": {
+      "name": "changi general hospital",
+      "number": 67888833,
+      "doctorArrayList": [
+        {
+          "name": "ma xuegang",
+          "number": 97587759
+        },
+        {
+          "name": "xie fang",
+          "number": 99577818
+        },
+        {
+          "name": "peter gang",
+          "number": 94501442
+        },
+        {
+          "name": "jon yi",
+          "number": 83027553
+        },
+        {
+          "name": "han guanting",
+          "number": 95674975
+        }
+      ]
+    },
+    "conditions": "Trigger Finger",
+    "notesOnCare": "May not be able to grip things properly",
+    "medicines": [
+      {
+        "medicineName": "chlorpheniramine",
+        "frequency": "bi weekly"
+      }
+    ],
+    "appointments": [
+      {
+        "location": "national university hospital",
+        "date": "17012022",
+        "time": "1200",
+        "purpose": "general checkup"
+      }
+    ],
+    "nextofkins": [
+      {
+        "nokName": "Peter Lee",
+        "nokPhoneNumber": "97264365",
+        "nokEmail": "plee@gmail.com",
+        "nokAddress": "Blk 87 College Drive",
+        "nokRelationship": "Brother"
+      }
+    ],
+    "records": [
+      {
+        "elderlyPhoneNumber": "92754623",
+        "elderlyAddress": "Blk 87 College Drive"
+      }
+    ],
+    "username": "mlee",
+    "name": "molly lee",
+    "bloodPressure": [
+      89,
+      182
+    ],
+    "isVaccinated": true,
+    "birthday": "Sep 22, 1971, 12:00:00 AM",
+    "diet": "VEGETARIAN",
+    "medicalHistory": "Sinus",
+    "type": "seedu.duke.common.MediumRiskElderly"
+  },
+  {
+    "hospital": {
+      "name": "singapore general hospital",
+      "number": 62223322,
+      "doctorArrayList": [
+        {
+          "name": "nilofer siddhi",
+          "number": 92834168
+        },
+        {
+          "name": "taran nirmala",
+          "number": 90877889
+        },
+        {
+          "name": "paxton jerrod",
+          "number": 94424161
+        },
+        {
+          "name": "piers coleman",
+          "number": 99350450
+        },
+        {
+          "name": "tan cailin",
+          "number": 99897593
+        }
+      ]
+    },
+    "conditions": "Paralyzed from waist down",
+    "notesOnCare": "Needs assistance to move about",
+    "doctor": {
+      "name": "piers coleman",
+      "number": 99350450
+    },
+    "medicines": [
+      {
+        "medicineName": "arcoxia",
+        "frequency": "3 times a day"
+      }
+    ],
+    "appointments": [
+      {
+        "location": "national university hospital",
+        "date": "06112021",
+        "time": "1900",
+        "purpose": "general checkup"
+      }
+    ],
+    "nextofkins": [
+      {
+        "nokName": "Mina Lee",
+        "nokPhoneNumber": "89273642",
+        "nokEmail": "mlee@gmail.com",
+        "nokAddress": "Blk 1 Lorong Chuan",
+        "nokRelationship": "Friend"
+      }
+    ],
+    "records": [
+      {
+        "elderlyPhoneNumber": "97263463",
+        "elderlyAddress": "Blk 2 College Drive"
+      }
+    ],
+    "username": "nchung",
+    "name": "nina chung",
+    "bloodPressure": [
+      99,
+      122
+    ],
+    "isVaccinated": true,
+    "birthday": "Aug 3, 1969, 12:00:00 AM",
+    "diet": "NO_RESTRICTION",
+    "medicalHistory": "Polio",
+    "type": "seedu.duke.common.HighRiskElderly"
+  },
+  {
+    "medicines": [
+      {
+        "medicineName": "panadol",
+        "frequency": "3 times a day"
+      }
+    ],
+    "appointments": [
+      {
+        "location": "singapore general hospital",
+        "date": "06022022",
+        "time": "1330",
+        "purpose": "general checkup"
+      }
+    ],
+    "nextofkins": [
+      {
+        "nokName": "Mina Lee",
+        "nokPhoneNumber": "89273642",
+        "nokEmail": "mlee@gmail.com",
+        "nokAddress": "Blk 1 Lorong Chuan",
+        "nokRelationship": "Friend"
+      }
+    ],
+    "records": [
+      {
+        "elderlyPhoneNumber": "82664734",
+        "elderlyAddress": "Tower 2 College Drive"
+      }
+    ],
+    "username": "rheng",
+    "name": "rachel heng",
+    "bloodPressure": [
+      92,
+      107
+    ],
+    "isVaccinated": false,
+    "birthday": "Sep 22, 1977, 12:00:00 AM",
+    "diet": "VEGAN",
+    "medicalHistory": "Hearing loss on left ear",
+    "type": "seedu.duke.common.LowRiskElderly"
+  }
+]
