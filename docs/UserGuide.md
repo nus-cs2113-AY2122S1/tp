@@ -513,6 +513,8 @@ Reloads all the notes found within your `data/<module_code>`.
 
 > ⚠️ If storage is disabled, this command will not work as intended. For more information, please refer to [FAQ](#faq).
 
+> ⚠️ Any note file within its `data/<module_code>` folder that has an issue while reloading will be ignored.
+
 Example: `reload`
 
 Expected Output:
@@ -852,6 +854,10 @@ How did you find the question?
 [1/2/3/E] >> 
 ```
 
+> 💡 Notice how the program displays the time taken you took to answer the question. For example, the output above displays `172 seconds`.
+> 
+> This is for you to note of how long you took to answer the question and thus giving you an insight of how difficult the question is to you.
+
 After choosing your difficulty, you may proceed to reveal the next question by pressing
 <kbd>Enter</kbd> key again.
 
@@ -961,7 +967,9 @@ Format: timetable {day}
 
 **Format:** `<workspace> <available workspace command>`
 
-Users can access workspace command directly without entering its environment. Seen below are some
+> 💡 Beginner users are not advised to use this advance usage of commands until they are more familiar with the commands provided by TermiNUS. 
+
+Advanced users can access workspace command directly without entering its environment in order to speed up the process of using TermiNUS. Seen below are some
 command examples.
 
 A workspace command is a command that will bring you to its own workspace. Current workspace command
