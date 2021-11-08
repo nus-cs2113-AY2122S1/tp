@@ -77,6 +77,7 @@ public class Student implements ClassChecker {
         return this.id;
     }
 
+    //@@author jon-the-melon
     /**
      * Adds a key,value pair to the hashmap.
      *
@@ -140,6 +141,7 @@ public class Student implements ClassChecker {
         results.put(newName, value);
     }
 
+    //@@author hozhenhong99
     /**
      * Overrides default toString method with the custom print message.
      *
