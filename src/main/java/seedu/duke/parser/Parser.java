@@ -154,7 +154,7 @@ public abstract class Parser {
             throw new AttributeNotFoundException(itemAttribute);
         }
 
-        return result;
+        return result.trim();
     }
     // @@author Alvinlj00
 
