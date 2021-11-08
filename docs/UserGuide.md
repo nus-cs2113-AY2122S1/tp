@@ -358,15 +358,15 @@ Searches for an item keyword from a trip and returns the resulting matching item
 
 #### Usage Example:
 ```
-___________________________________________________________________________________
+______________________________________________________________________________________
 $ search-item FamilyTrip2021 /day 1 /key time
-___________________________________________________________________________________
+______________________________________________________________________________________
 	You have just search item keyword time on day 1 in trip called FamilyTrip2021.
 	
 	Results: 
 	1. 1400		lunch time
 	2. 1700		dinner time
-___________________________________________________________________________________
+______________________________________________________________________________________
 ```
 
 > ![](documentationPics/tip.png) Search allows you to find words that contain the phrase, no 
