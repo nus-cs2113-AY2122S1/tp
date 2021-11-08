@@ -1033,19 +1033,45 @@ For the positive test cases, just simply follow the UserGuide in the sequence fr
 
 Here are the negative test cases you can test:
 
-* Module-related commands:
+* **Invalid general commands:**
+  * Empty command: ` `
+  * Not supported command: `avengers assemble`
+* **Invalid Module-related commands:**
   * Invalid module commands:
-    * `module`
-    * `module a`
-    * `cap`
+    * Missing module command type: `module`
+    * Wrong module command type: `module a`
+    * Missing cap command type: `cap`
   * Invalid add module commands:
-    * `module add`
-    * `module add n/Software Engineering c/CS2113T`
+    * Missing command arguments: `module add`
+    * Invalid order arguments: `module add n/Software Engineering c/CS2113T`
+    * Missing module code: `module add c/ n/Software Engineering`
+    * Invalid modular credit: `module add c/CS2113 n/Software Engineering m/four`
+    * Invalid expected grade: `module add c/CS2113 n/Software Engineering m/4 e/J`
   * Invalid delete module commands:
-    * `module delete one`
-    * `module delete -1`
-    * `module delete [INDEX_OUT_OF_BOUND]`
-  * Invalid CAP info:
-    * Provide the current CAP which is not a real number
-    * Provide the current CAP which is not in the range [0.0 - 5.5]
-    * Provide the total MC taken which is not a positive integer
+    * Invalid number format: `module delete one`
+    * Invalid module index: `module delete -1`
+    * Invalid module index: `module delete [INDEX_OUT_OF_BOUND]`
+  * Invalid CAP information:
+    * Provide the current CAP which is not a real number (e.g. `four`)
+    * Provide the current CAP which is not in the range [0.0 - 5.0] (e.g. `6`)
+    * Provide the total MC taken which is not a positive integer (e.g. `4.5`)
+* **Invalid Food-related commands:**
+  * Wrong divider order : dividers in wrong sequence
+  * Invalid food command type : `food`
+  * Wrong food command type : `food a`
+  * Invalid number format : expected number, input anything else
+  * Missing parameters : include divider, no parameters
+
+  * Invalid `food radd` commands:
+    * Invalid index : `store_index` <= 0, `item_index` <= 0
+    * Index not found : when either index is not found from reference list
+
+  * Invalid `food delete` commands:
+    * Invalid index : when index is not found in list
+
+  * Invalid `food find` commands:
+    * Invalid date entered : when format of `dd-mm-yyyy` is not adhered to
+
+  * Invalid `food view` commands:
+    * Invalid index : `store_index` not found in reference list
+
