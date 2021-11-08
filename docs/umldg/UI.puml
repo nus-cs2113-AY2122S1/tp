@@ -1,0 +1,36 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+hide circle
+hide empty members
+
+together {
+package "Command" {
+abstract class "{abstract} \n Command" as Command #Orange {
+workoutMode: int {static}
+}
+class CommandResult #Orange {
++feedbackToUser: String
++itemList: ArrayList
++map: Map<String, ArrayList>
++isTable: boolean
+}
+
+}
+
+package "Ui" {
+class Ui #White ##Black {
++printWelcomeMessage():void() {static}
++showResultToUser(result: CommandResult):void()
++printErrorMessage(e: GetJackDException):void()
+-printText(message: String)"void()
+-printList(itemList: ArrayList):void()
+-printMap(map: Map<String, ArrayList>):void()
+-printExerciseTable(map: Map<String, ArrayList>):void()
+}
+}
+
+Ui ..> Command : formats <
+Ui .right.> CommandResult : displays >
+
+@enduml

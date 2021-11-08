@@ -1,0 +1,56 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam stereotypeBackgroundColor White
+hide circle
+hide empty members
+left to right direction
+skinparam class {
+BackgroundColor Orange
+ArrowColor Red
+}
+together {
+package "command" {
+abstract "{abstract} \n Command" as Command {
++{static} workoutMode:int
++executeUserCommand(workouts:WorkoutList, ui:Ui, storage:Storage) {abstract}
+}
+package "exercise" {
+class XYZExerciseCommand extends Command {
+~LOGGER:Logger {static}
+-workoutIndex:Integer
+-exerciseIndex:Integer
++XYZExerciseCommand()
++executeUserCommand(workouts:WorkoutList, ui:Ui, storage:Storage):CommandResult
+}
+}
+package "workout" {
+class XYZWorkoutCommand extends Command {
+~LOGGER:Logger {static}
+-toCreate:Workout
+-workoutIndex:Integer
++XYZWorkoutCommand()
++executeUserCommand(workouts:WorkoutList, ui:Ui, storage:Storage):CommandResult
+}
+}
+package "misc" {
+class XYZCommand extends Command {
+~LOGGER:Logger {static}
++ feedbackToUser:String
+- commandDescription:String
+- filterString:String
++XYZCommand()
++executeUserCommand(workouts:WorkoutList, ui:Ui, storage:Storage):CommandResult
+}
+}
+}
+
+package "logger" {
+class LoggerUtil #LightBlue##Blue
+}
+
+XYZCommand..>LoggerUtil
+XYZExerciseCommand..>LoggerUtil
+XYZWorkoutCommand..>LoggerUtil
+}
+
+@enduml

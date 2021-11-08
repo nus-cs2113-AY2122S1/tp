@@ -1,0 +1,39 @@
+@startuml
+skinparam shadowing false
+skinparam sequence {
+    BorderColor Black
+    LifeLineBorderColor Black
+    ParticipantBorderColor Black
+    ArrowColor Black
+}
+
+participant "workouts:WorkoutList" as WorkoutList #Pink
+participant ":Workout" as Workout #Pink
+participant ":Exercise" as Exercise #Pink
+participant ":ExerciseModel" as ExerciseModel #LightGreen
+participant ":WorkoutModel" as WorkoutModel #LightGreen
+participant WorkoutListModel<<class>> #LightGreen
+
+
+-> WorkoutList ++ #Pink : convertAll..()
+loop all workouts
+    WorkoutList -> Workout ++ #Pink : convertToWorkoutStorageModel()
+    Workout -> WorkoutModel ** 
+    activate WorkoutModel #LightGreen
+    return 
+    loop all exercises
+        Workout -> Exercise ++ #Pink : convertToExerciseStorageModel(WorkoutModel)
+        Exercise -> ExerciseModel ** 
+        activate ExerciseModel #LightGreen
+        return
+        Exercise -> WorkoutModel ++ #LightGreen : addToWorkoutModel(ExerciseModel)
+        return
+        return
+    end
+    Workout -> WorkoutListModel ++ #LightGreen : addToWorkoutListModel(WorkoutModel)
+    return
+    return
+end
+return
+     
+@enduml

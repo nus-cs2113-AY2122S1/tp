@@ -1,0 +1,43 @@
+@startuml
+!include <office/Concepts/documents>
+!include <office/Users/user>
+
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+hide circle
+hide empty members
+
+class "<$user>" as User #Red;text:White
+class "<$documents>" as File #Green;text:White##Green
+
+package "" <<Rectangle>>{
+class Main #LightGrey ##Black
+class Storage #LightGreen ##Green
+class " Ui  " as Ui #White ##Black
+class Data #Pink
+class Parser #Yellow ##edba02
+class Command #Orange ##DarkOrange
+together {
+class Logger #LightBlue ##Blue
+class Exceptions #DarkBlue;text:White##Blue
+}
+}
+Command .down[hidden].>Logger
+'Parser .[#edba02]down.> Logger
+'Command .[#DarkOrange]down.> Logger
+Command .right[#DarkOrange].> Data
+Command .left[#DarkOrange].> Storage
+Main .[#Black]down.> Command 
+'Data .down.> Logger
+'Storage .[#Green]down.> Logger
+User .down.> Ui
+Main -[#Black]down-> Data
+Main .down[#Black].> Parser
+'Main .right[#Black].> Logger
+Storage .right[#Green].> File
+Storage .[#Green].> Data
+Main -right[#Black]->  Storage
+Main -up[#Black]->  Ui
+Parser .right[#edba02].> Command
+
+@enduml

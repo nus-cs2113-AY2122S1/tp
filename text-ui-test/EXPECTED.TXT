@@ -1,9 +1,243 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Welcome to
+   ______          _        _____              __      _  ______
+ .' ___  |        / |_     |_   _|            [  |  _ | ||_   _ `.
+/ .'   \_|  .---.`| |-'      | | ,--.   .---.  | | / ]\_|  | | `. \
+| |   ____ / /__\\| |    _   | |`'_\ : / /'`\] | '' <      | |  | |
+\ `.___]  || \__.,| |,  | |__' |// | |,| \__.  | |`\ \    _| |_.' /
+ `._____.'  '.__.'\__/  `.____.'\'-;__/'.___.'[__|  \_]  |______.'
 
-What is your name?
-Hello James Gosling
+Let's begin the journey to achieve the physique you desire!
+If you don't know where to start, type "help" for a list of possible commands.
+Enter your command below.
+________________________________________________________
+________________________________________________________
+Invalid Command
+________________________________________________________
+________________________________________________________
+Here's a list of commands and what they do.
+To find out more information about the command, such as input format and parameters, enter "help COMMAND" where COMMAND is the command you want to know more about
+"add" : Adds an exercise to a workout
+"done" : Marks an exercise as done
+"remove" : Removes an exercise from a workout
+"create" : Creates a new workout
+"delete" : Deletes a workout
+"list" : Lists all your workouts
+"enter" : Enters a specific workout. Workout mode ON
+"back" : Returns to main view. Workout mode OFF
+"recommend" : Recommends workouts of a given difficulty
+"display" : Shows all the exercises in a specified workout
+"edit" : Edits a specific exercise in a specified workout
+"search" : Displays workouts or exercises that contain the specified keyword or date
+"clear" : Clears all exercises in a specified workout or all workouts in the list
+"bye" : Ends the program
+________________________________________________________
+________________________________________________________
+Invalid command format
+
+recommend: Provides a given set of workouts with exercises.
+Format: recommend [Workout level]
+Parameters:
+	Workout level - difficulty of workout [beginner/intermediate/pro]
+Example: recommend beginner
+________________________________________________________
+________________________________________________________
+recommend: Provides a given set of workouts with exercises.
+Format: recommend [Workout level]
+Parameters:
+	Workout level - difficulty of workout [beginner/intermediate/pro]
+Example: recommend beginner
+________________________________________________________
+________________________________________________________
+Invalid command format
+
+create: Creates a new workout.
+Format: create [workout description] or Format: create [workout description], [deadline]
+Parameters:
+	Workout description - description or name of workout
+	Workout deadline - deadline of workout (optional)
+Example: create abs (if no deadline set)
+Example: create abs, 2021-12-25 (if you want to set a deadline)
+________________________________________________________
+________________________________________________________
+create: Creates a new workout.
+Format: create [workout description] or Format: create [workout description], [deadline]
+Parameters:
+	Workout description - description or name of workout
+	Workout deadline - deadline of workout (optional)
+Example: create abs (if no deadline set)
+Example: create abs, 2021-12-25 (if you want to set a deadline)
+________________________________________________________
+________________________________________________________
+New workout created: Legs finish by: 25 Dec 2021
+________________________________________________________
+________________________________________________________
+New workout created: Abs finish by: 21 Oct 2021
+________________________________________________________
+________________________________________________________
+New workout created: Arms
+________________________________________________________
+________________________________________________________
+Workout list:
+1. Abs finish by: 21 Oct 2021
+2. Legs finish by: 25 Dec 2021
+3. Arms
+________________________________________________________
+________________________________________________________
+Invalid command format
+
+add: Adds an exercise to a workout.
+Format: add [exercise description], [sets and reps], [workout index]
+Parameters:
+	Sets and reps: "5 10" - 5 sets of 10 reps
+	Workout index: Index of workout to add exercise to
+Example: add Push-ups, 5 10, 1
+________________________________________________________
+________________________________________________________
+add: Adds an exercise to a workout.
+Format: add [exercise description], [sets and reps], [workout index]
+Parameters:
+	Sets and reps: "5 10" - 5 sets of 10 reps
+	Workout index: Index of workout to add exercise to
+Example: add Push-ups, 5 10, 1
+________________________________________________________
+________________________________________________________
+New exercise added to workout 2 : [ ] Squats | 3 sets of 10 reps
+________________________________________________________
+________________________________________________________
+Invalid command format
+
+done: Marks the exercise in the workout as complete.
+Format: done [Exercise index], [Workout index]
+Parameters:
+	Exercise index - Index of exercise to mark done
+	Workout index - Index of workout containing exercise to mark done
+Example: done 1, 2  - Mark exercise 1 from workout 2 as done
+________________________________________________________
+________________________________________________________
+done: Marks the exercise in the workout as complete.
+Format: done [Exercise index], [Workout index]
+Parameters:
+	Exercise index - Index of exercise to mark done
+	Workout index - Index of workout containing exercise to mark done
+Example: done 1, 2  - Mark exercise 1 from workout 2 as done
+________________________________________________________
+________________________________________________________
+Completed exercise in workout 2 : [X] Squats | 3 sets of 10 reps
+________________________________________________________
+________________________________________________________
+Invalid command format
+
+edit: Edits the exercise in the workout.
+Format: edit [exercise index], [workout index], [new Description], [sets and reps]
+Parameters:
+	Exercise index - Index of exercise to edit
+	Workout index - Index of workout containing exercise to edit
+Example: edit 1, 2, Lunges, 5 10 - edit exercise 1 in workout 2 to Lunges of 5 sets and 10 reps
+________________________________________________________
+________________________________________________________
+edit: Edits the exercise in the workout.
+Format: edit [exercise index], [workout index], [new Description], [sets and reps]
+Parameters:
+	Exercise index - Index of exercise to edit
+	Workout index - Index of workout containing exercise to edit
+Example: edit 1, 2, Lunges, 5 10 - edit exercise 1 in workout 2 to Lunges of 5 sets and 10 reps
+________________________________________________________
+________________________________________________________
+The edited exercise in workout 2 : [X] Lunges | 4 sets of 8 reps
+________________________________________________________
+________________________________________________________
+Invalid command format
+
+display: Displays all exercises in the particular workout.
+Format: display [Workout index]
+Parameters:
+	Workout index - index of workout to display exercises
+Example: display 3
+________________________________________________________
+________________________________________________________
+display: Displays all exercises in the particular workout.
+Format: display [Workout index]
+Parameters:
+	Workout index - index of workout to display exercises
+Example: display 3
+________________________________________________________
+________________________________________________________
+Exercises in (2) Legs finish by: 25 Dec 2021
+1. [X] Lunges | 4 sets of 8 reps
+________________________________________________________
+________________________________________________________
+Invalid command format
+
+remove: Removes the exercise from the workout.
+Format: remove [Exercise index], [Workout index]
+Parameters:
+	Exercise index - Index of exercise to remove
+	Workout index - Index of workout containing exercise to remove
+Example: remove 1, 2  - remove exercise 1 from workout 2
+________________________________________________________
+________________________________________________________
+remove: Removes the exercise from the workout.
+Format: remove [Exercise index], [Workout index]
+Parameters:
+	Exercise index - Index of exercise to remove
+	Workout index - Index of workout containing exercise to remove
+Example: remove 1, 2  - remove exercise 1 from workout 2
+________________________________________________________
+________________________________________________________
+Removed exercise in workout 2 : [X] Lunges | 4 sets of 8 reps
+________________________________________________________
+________________________________________________________
+You have no exercises.
+________________________________________________________
+________________________________________________________
+Invalid command format
+
+delete: Deletes the workout corresponding to the workout index.
+Format: delete [Workout index]
+Parameters:
+	Workout index - Index of workout to delete
+Example: delete 1
+________________________________________________________
+________________________________________________________
+delete: Deletes the workout corresponding to the workout index.
+Format: delete [Workout index]
+Parameters:
+	Workout index - Index of workout to delete
+Example: delete 1
+________________________________________________________
+________________________________________________________
+Deleted workout: Legs finish by: 25 Dec 2021
+________________________________________________________
+________________________________________________________
+Deleted workout: Abs finish by: 21 Oct 2021
+________________________________________________________
+________________________________________________________
+Deleted workout: Arms
+________________________________________________________
+________________________________________________________
+Empty workout list
+________________________________________________________
+________________________________________________________
+New workout created: abs
+________________________________________________________
+			________________________________________________________
+			Now inside workout 1 : abs
+			________________________________________________________
+			________________________________________________________
+			You have no exercises.
+			________________________________________________________
+			________________________________________________________
+			New exercise added to workout 1 : [ ] pushups | 5 sets of 20 reps
+			________________________________________________________
+________________________________________________________
+Back to Main View
+________________________________________________________
+________________________________________________________
+All exercises in workout 1 have been cleared!
+________________________________________________________
+________________________________________________________
+All workouts have been cleared!
+________________________________________________________
+________________________________________________________
+Bye. Hope you get your desired body soon, have a great day!
+________________________________________________________

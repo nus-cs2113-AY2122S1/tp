@@ -1,1 +1,40 @@
-James Gosling
+invalid command
+help
+recommend
+help recommend
+create
+help create
+create Legs, 2021-12-25
+create Abs, 2021-10-21
+create Arms
+list
+add
+help add
+add Squats, 3 10, 2
+done
+help done
+done 1, 2
+edit
+help edit
+edit 1, 2, Lunges, 4 8
+display
+help display
+display 2
+remove
+help remove
+remove 1, 2
+display 2
+delete
+help delete
+delete 2
+delete 1
+delete 1
+list
+create abs
+enter 1
+display
+add pushups, 5 20
+back
+clear exercise 1
+clear workout
+bye

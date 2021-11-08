@@ -1,0 +1,65 @@
+@startuml
+hide stereotype
+skinparam shadowing false
+
+skinparam sequence {
+    BorderColor Black
+    LifeLineBorderColor Black
+    ActorBorderColor Red
+    ParticipantBorderColor<<main>> Black
+    ParticipantBorderColor<<parser>> #edba02
+    ParticipantBorderColor<<storage>> #Green
+}
+
+actor User #Red
+participant ":Ui" as Ui <<main>> #White
+participant ":Main" as Main <<main>> #Grey
+participant ":Parser" as Parser <<parser>> #Yellow
+participant ":Command" as Command <<command>> #Orange
+participant ":Data" as Data #Pink
+participant ":Storage" as Storage <<storage>> #LightGreen
+activate Main #Grey
+
+User -[#Red]> Main : create abs
+'create Parser
+'Main -[#Black]> Parser
+'activate Parser #Yellow
+'Parser -[#Black]-> Main
+deactivate Parser
+Main -[#Black]> Parser : generateCommand("create abs")
+activate Parser #Yellow
+create Command
+Parser -[#edba02]> Command
+activate Command #Orange
+Command --[#edba02]> Parser
+deactivate Command
+Parser --[#Black]> Main : Command 
+deactivate Parser
+destroy Parser
+
+Main -[#Black]> Command : executeUserCommand(Storage,WorkoutList) 
+activate Command #Orange
+Command -[#Orange]> Data : AddWorkout(Workout)
+activate Data #Pink
+Data -[#Orange]-> Command
+deactivate Data
+Command -[#Orange]> Storage : saveData(String)
+activate Storage #LightGreen
+Storage -[#Orange]-> Command
+deactivate Storage
+Command -[#Black]-> Main : CommandResult
+deactivate Command
+destroy Command
+
+create Ui
+Main -[#Black]> Ui
+activate Ui
+Ui --[#Black]> Main
+deactivate Ui
+Main -[#Black]> Ui : **
+activate Ui
+Ui -[#Black]-> Main
+deactivate Ui 
+Main -[#Red]-> User
+
+@enduml

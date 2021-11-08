@@ -13,5 +13,18 @@ src/main/resources/docs/
 *.iml
 bin/
 
+# Data folder
+/data/
+/text-ui-test/data/
+/text-ui-test/log/
+
+# UI test files
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+# Log folder
+/log/
+
+# old Log file
+log
+src/main/java/META-INF/
