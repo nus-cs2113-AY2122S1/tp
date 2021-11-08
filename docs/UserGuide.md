@@ -309,7 +309,7 @@ If all lesson types have been successfully added, program will print out
 Module and any selected lesson(s) has been added to timetable
 ```
 `NOTE:` Modules that contains no lessons will likewise be added into list of modules taken this semester
-<br></br>
+<br>
 
 ### Add an Event to timetable
 
