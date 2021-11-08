@@ -351,12 +351,13 @@ public class IngredientList {
             ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
             while (ingredientWeightValue < 0) {
                 UI.clearTerminalAndPrintNewPage();
-                UI.printInvalidIngrWeight(inputIngredientWeight);
+                UI.printInvalidIngrWasteValue(inputIngredientWeight);
                 inputIngredientWeight = in.nextLine();
                 ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
             }
+
             if (Double.isInfinite(ingredientWeightValue) || Double.isNaN(ingredientWeightValue)) {
-                throw new FoodoramaException(UI.printNumericalInputInvalid("dish waste"));
+                throw new FoodoramaException(UI.printNumericalInputInvalid("ingredient waste"));
             } else if (ingredientWeightValue > SOFT_WEIGHT_LIMIT) {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printIngrValueHigh(ingrName);
@@ -404,46 +405,67 @@ public class IngredientList {
      * @author renzocanare
      */
     public static void editStorage(int ingrIndex) throws FoodoramaException {
-        if (ingrIndex == -1) {
-            throw new FoodoramaException(UI.getIngrNotExistEdit());
-        } else if (ingrIndex < 0 || ingrIndex >= IngredientList.ingredientList.size()) {
-            throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());
-        } else {
-            String ingrName = ingredientList.get(ingrIndex).getIngredientName();
-            UI.printAskNewStorageIngr(ingrName);
 
-            Scanner input = new Scanner(System.in);
-            double newWeight;
+        String ingrName = ingredientList.get(ingrIndex).getIngredientName();
+        UI.printAskNewStorageIngr(ingrName);
 
-            try {
-                newWeight = Double.parseDouble(input.nextLine());
-                if (newWeight < 0) {
-                    throw new FoodoramaException("");
-                }
-            } catch (NumberFormatException | FoodoramaException e) {
+        Scanner in = new Scanner(System.in);
+        String inputIngredientWeight = in.nextLine();
+
+        int loop = LOOP;
+        double ingredientWeightValue;
+        while (loop == LOOP) {
+            String confirmAdd = "e";
+            if (!isDouble(inputIngredientWeight)) {
                 throw new FoodoramaException(UI.getInvalidNumberMsg());
             }
-            if (Double.isInfinite(newWeight) || Double.isNaN(newWeight)) {
-                throw new FoodoramaException(UI.printNumericalInputInvalid("ingredient storage"));
-            }
-            Double ingrWeight = ingredientList.get(ingrIndex).getIngredientWeight();
-
-            UI.clearTerminalAndPrintNewPage();
-            UI.printConfirmIngrStorageEditMsg(ingrWeight, newWeight);
-            String confirmChange = input.nextLine().toLowerCase();
-            while (!confirmChange.matches(YES_NO_REGEX)) {
+            ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
+            while (ingredientWeightValue < 0) {
                 UI.clearTerminalAndPrintNewPage();
-                UI.printInvalidConfirmation();
-                confirmChange = input.nextLine().toLowerCase();
+                UI.printInvalidIngrWeight(inputIngredientWeight);
+                inputIngredientWeight = in.nextLine();
+                ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
             }
-            UI.clearTerminalAndPrintNewPage();
-            if (confirmChange.startsWith(YES)) {
-                ingredientList.get(ingrIndex).setIngredientWeight(newWeight);
-                UI.printIngrStorageChanged(ingrName, newWeight);
-            } else {
-                UI.printDisregardMsg();
+            if (Double.isInfinite(ingredientWeightValue) | Double.isNaN(ingredientWeightValue)) {
+                throw new FoodoramaException(UI.printNumericalInputInvalid("ingredient stored"));
+            } else if (ingredientWeightValue > SOFT_WEIGHT_LIMIT) {
+                UI.clearTerminalAndPrintNewPage();
+                UI.printIngrValueHigh(ingrName);
+                confirmAdd = in.nextLine();
+
+                confirmAdd = getConfirmation(confirmAdd);
+                if (confirmAdd.startsWith(NO)) {
+                    UI.clearTerminalAndPrintNewPage();
+                    UI.printEnterWeightOf(ingrName);
+                    inputIngredientWeight = in.nextLine();
+                    ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
+                }
+            }
+            if ((isDouble(inputIngredientWeight) && (ingredientWeightValue >= 0)
+                    && (ingredientWeightValue <= SOFT_WEIGHT_LIMIT)) | confirmAdd.startsWith(YES)) {
+                loop = EXIT;
             }
         }
+
+        Double newWeight = Double.parseDouble(inputIngredientWeight);
+        Double ingrWeight = ingredientList.get(ingrIndex).getIngredientWeight();
+
+        UI.clearTerminalAndPrintNewPage();
+        UI.printConfirmIngrStorageEditMsg(ingrWeight, newWeight);
+        String confirmChange = in.nextLine().toLowerCase();
+        while (!confirmChange.matches(YES_NO_REGEX)) {
+            UI.clearTerminalAndPrintNewPage();
+            UI.printInvalidConfirmation();
+            confirmChange = in.nextLine().toLowerCase();
+        }
+        UI.clearTerminalAndPrintNewPage();
+        if (confirmChange.startsWith(YES)) {
+            ingredientList.get(ingrIndex).setIngredientWeight(newWeight);
+            UI.printIngrStorageChanged(ingrName, newWeight);
+        } else {
+            UI.printDisregardMsg();
+        }
+
     }
 
     /**

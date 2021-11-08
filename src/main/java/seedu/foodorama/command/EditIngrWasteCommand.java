@@ -61,7 +61,7 @@ public class EditIngrWasteCommand extends Command {
         // If user input is not a number and index cannot be found
         if (!isNumber(ingr) && ingrIndex == -1) {
             LOGGER.log(Level.INFO, "Ingredient does not exist");
-            throw new FoodoramaException(UI.getIngrNotExistMsg());
+            throw new FoodoramaException(UI.getIngrNotExistEdit());
         // If ingr index is out of bounds
         } else if (ingrIndex < 0 || ingrIndex >= IngredientList.ingredientList.size()) {
             LOGGER.log(Level.INFO, "Ingredient Index is not within Ingredient List Range");

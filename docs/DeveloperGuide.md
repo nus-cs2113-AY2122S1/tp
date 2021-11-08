@@ -51,16 +51,13 @@ motivated us to build this application.
 3. Import the project into your IDE.
 4. For optimal results, it is recommended to use JDK 11.
 
-## 📔 Design & Implementation
+## 📔 Design
 
-This section brings developers through the general flow of the programme, the various components involved, and the
-overall design of their implementation.
-
-## Design
+This section brings developers through the general flow of the programme, and the various components involved.
 
 ### Main Components
 
-This section describes the overall design architecture of _Foodorama_.
+This section describes the overall design architecture of *Food-O-Rama*.
 
 The `Main` class is responsible for initializing the main components upon start-up of the application, and deciding the
 execution path of the application through the main components based on reading the user inputs.
@@ -71,8 +68,8 @@ The application consists of the following main components responsible for the hi
 2. `Ui`: Handles the displaying of all command results and error messages to the user.
 3. `Storage`: Handles the creation, reading from and writing from the `/data` directory
 4. `InputParser`: Makes sense from the user input and decides which `Command` class to call.
-5. `DishList`: Handles the collection of Dish objects used by Foodorama
-6. `IngredientList`: Handles the collection of Ingredient objects used by Foodorama.
+5. `DishList`: Handles the collection of Dish objects used by Food-O-Rama
+6. `IngredientList`: Handles the collection of Ingredient objects used by Food-O-Rama.
 7. `Command`: Collection of classes that handle the different user commands
 
 The architecture diagram below shows a high-level overview of the structure between different components.
@@ -85,12 +82,12 @@ Describes the step-by-step sequence from User Input to the Output.
 
 ![](images/main_sequence.png)
 
-* User is greeted by welcome screen.
-* User begins typing inputs.
-* Inputs get parsed by InputParser returning the appropriate type of command and respective parameters.
-* Command gets executed and respective output gets displayed.
-* Once user is done using the application, he can send an exit message prompting a goodbye message.
-* Application exits.
+1. User is greeted by welcome screen.
+2. User begins typing inputs.
+3. Inputs get parsed by InputParser returning the appropriate type of command and respective parameters.
+4. Command gets executed and respective output gets displayed.
+5. Once user is done using the application, he can send an exit message prompting a goodbye message.
+6. Application exits.
 
 ### Input Parsing
 
@@ -98,11 +95,11 @@ The `InputParser` class is responsible for deconstructing User Inputs to identif
 
 ![](images/input_parser_sequence.png)
 
-* Gets command name of user input by checking if the users input starts with any of the strings that are defined for
+1. Gets command name of user input by checking if the users input starts with any of the strings that are defined for
   commands (add dish, list dish, help etc.).
-* Throws an exception if no matching command is found.
-* Takes rest of user input as parameterString.
-* Based on command name splits the parameterString into respective parameters to respective command classes for
+2. Throws an exception if no matching command is found.
+3. Takes rest of user input as parameterString.
+4. Based on command name splits the parameterString into respective parameters to respective command classes for
   execution.
 
 ### Storage
@@ -119,21 +116,21 @@ under *'Data'* folder.
 
 ![](images/storage_load_sequence.png)
 
-* At the start of the program, Duke calls `Storage.load()`
+1. At the start of the program, Duke calls `Storage.load()`
     * This method in the `Storage` class is responsible for invoking `loadIngredients()`, `loadDishes()`
       and `loadFormat()`
-* After accessing `ingredients.txt`, `ingredientList.add()` is called for every ingredient that exists in the list and
+2. After accessing `ingredients.txt`, `ingredientList.add()` is called for every ingredient that exists in the list and
   is added to the active ArrayList, `IngredientList.ingredientList`
-* Then, after accessing `dishes.txt`, `dishList.add()` is called for every dish that exists in the list and is added to
+3. Then, after accessing `dishes.txt`, `dishList.add()` is called for every dish that exists in the list and is added to
   the active ArrayList, `DishList.dishList`
-* Any inputs in the data file that are invalid get disregarded and only valid inputs get loaded. As a result the invalid
-  inputs get sanitized once Foodorama is started
-* Finally, the method also sets up the `formats.txt` file that contains all the relevant formats in which the data is
+4. Any inputs in the data file that are invalid get disregarded and only valid inputs get loaded. As a result the invalid
+  inputs get sanitized once Food-O-Rama is started
+5. Finally, the method also sets up the `formats.txt` file that contains all the relevant formats in which the data is
   saved along with examples
     * This is present in the load method as opposed to the write method as it only needs to be called once per run of *
       Food-O-Rama*
 
-❕ *Note: `dishes.txt`,`ingredients.txt` and `formats.txt` can be found in the `data` folder from the root directory.*
+💡 *Note: `dishes.txt`,`ingredients.txt` and `formats.txt` can be found in the `data` folder from the root directory.*
 
 #### Saving Data
 
@@ -143,15 +140,15 @@ under *'Data'* folder.
     * This method in the `Storage` class is responsible for writing to the respective text file depending on the mode.
 * `Storage.write()` will access the respective text file and save to its respective save format.
 
-* ❕ **Save Formats:**
+* 💡 **Save Formats:**
     * Dishes
         * `DISH_NAME | DISH_WASTAGE | DISH_WASTAGE / NUM_OF_LINKED_INGREDIENTS | LIMIT | INGREDIENTS_LINKED`
-        * ❕ Limit is -1 if limit has not been defined.
-        * ❕ DISH_WASTAGE / NUM_OF_LINKED_INGREDIENTS is DISH_WASTAGE if no ingredients have been linked.
+        * Limit is `-1` if limit has not been defined.
+        * `DISH_WASTAGE/NUM_OF_LINKED_INGREDIENTS` is `DISH_WASTAGE` if no ingredients have been linked.
     * Ingredients
         * `INGREDIENT_NAME | INGREDIENT_STORAGE | INGREDIENT_WASTAGE | LIMIT | EXPIRY`
-        * ❕ Limit is -1 if limit has not been defined.
-        * ❕ Expiry is null if expiry has not been defined.
+        * Limit is `-1` if limit has not been defined.
+        * Expiry is `null` if expiry has not been defined.
 
 ### Data Structures
 
@@ -190,7 +187,7 @@ For simplicity’s sake the ui class has been minimized into 3 components:
 The `FoodoramaException` class is responsible for handling errors such as unrecognised user commands and improper
 parameters. It does so by calling the `Ui` class to provide the error messages and throwing the exception up to the
 highest level, that is the Foodorama class where it then gets caught and the message is printed with the
-exception.getMessage() method which is part of the base Exception class
+exception.getMessage() method which is part of the base Exception class.
 
 ### Command Abstraction
 
@@ -203,7 +200,7 @@ exception.getMessage() method which is part of the base Exception class
 
 ### Input validation
 
-In addition to the input parser, due to the different types of inputs foodorama deals with, there exists a second round
+In addition to the input parser, due to the different types of inputs Food-O-Rama deals with, there exists a second round
 of input validation to help seperate the invalid inputs from those that are valid
 
 The sequence diagram for the validation of Numerical Inputs is given below
@@ -220,7 +217,8 @@ The sequence diagram for the validation of Text strings is given below
 
 The process of input validation for strings is quite similar to that for integers except the roles are reversed
 
-## Implementation
+## ✍ Implementation
+This section explores the overall implementation of the different main functions and how they work.
 
 ### Add
 
@@ -305,7 +303,7 @@ particular `KEYWORD` and return a list of Dishes or Ingredients that match the k
 For `find` commands, the handling method `FindCommand.execute()`:
 
 1. Parses the input and determines if a dish or ingredient is to be found, and uses corresponding switch cases. If it is
-   neither, throw an Invalid Parameter error via Foodorama Exception.
+   neither, throw an Invalid Parameter error via FoodoramaException.
 
 2. If the keyword to be found is blank, throw a Missing Parameter error via FoodoramaException.
 
@@ -354,19 +352,19 @@ that use them. The diagram below showcases the sequence of the `LinkCommand` cla
 
 ![](images/link_sequence.png)
 
-* The LinkCommand calls upon DishList to get the Dish based on the Index given via UserInput
-* DishList then calls on Dish to carry out the addPart(ingredientName) function which is responsible for the linking of
+1. The LinkCommand calls upon DishList to get the Dish based on the Index given via UserInput
+2. DishList then calls on Dish to carry out the addPart(ingredientName) function which is responsible for the linking of
   the Dish and Ingredient
-* Dish calls on IngredientList through the find function, to which IngredientList returns the Index of the Ingredient
-* Given the index is non-negative, the addPart function then removes any old contributions of Ingredient Wastes in the
+3. Dish calls on IngredientList through the find function, to which IngredientList returns the Index of the Ingredient
+4. Given the index is non-negative, the addPart function then removes any old contributions of Ingredient Wastes in the
   current Dish's Waste through a loop
-* Subsequently, it adds the Ingredient to the Dish's parts following which it updates the Dish's own Ingredient
+5. Subsequently, it adds the Ingredient to the Dish's parts following which it updates the Dish's own Ingredient
   Contribution
-* Finally, the function re-updates the contribution of all linked Ingredient's Wastes to the Dish's Waste.
+6. Finally, the function re-updates the contribution of all linked Ingredient's Wastes to the Dish's Waste.
 
 ### Graph
 
-The implementation of the Edit function allows Foodorama to display a graph of the Dishes and Ingredients present in the
+The implementation of the Edit function allows Food-O-Rama to display a graph of the Dishes and Ingredients present in the
 DishList and IngredientList to the User Below is a sequence diagram that shows how the GraphCommand functions
 
 ![](images/graph_sequence.png)
@@ -381,7 +379,7 @@ unable to print half a character and using special unicode characters would brea
 solution that we implemented was to have a digit in the top most bar if we have fractional heights. This way while we
 still don't get a perfect representation, we are capable of giving the value accurate to one decimal place. So if the
 height was 3.33 units it would be represented by 3 filled bars and the 4th bar will have a 3 within indicating its value
-is between 3.3 to 3.4 as shown in the figure below
+is between 3.3 to 3.4 as shown in the figure below.
 
 ```
 ____________________________________________________________
@@ -410,7 +408,7 @@ The random Dish Name is a combination of Strings from 4 different ArrayLists.
 These ArrayLists are carbohydrates, proteins, sauces and cookingMethods. The ArrayLists contain a fixed pool of
 vocabulary.
 
-Code snippet:
+Code Snippet:
 
 ```
 ArrayList<String> carbohydrates = new ArrayList<>() {
@@ -466,7 +464,7 @@ Random Dish Name is then generated by taking a random String element from each o
 space between the Strings. The generated Dish Name is stored in the String variable `generatedDishName` to be printed to
 the user.
 
-Code snippet:
+Code Snippet:
 
 ```
         Ui UI = new Ui();
@@ -595,10 +593,10 @@ Brings developers through the requirements of Users the *Food-O-Rama* team consi
 
 ## 📒 Glossary
 
-* <i>Mainstream OS </i> - Windows, Linux, Unix, OS-X.
-* <i>Ingredient </i> - The basic unit required to create any Dish.
-* <i>Dish </i> - Food prepared using a combination of Ingredients.
-* <i>Wastage </i> - Weight of Dish or Ingredient wasted.
+* *Mainstream OS* - Windows, Linux, Unix, OS-X.
+* *Ingredient* - The basic unit required to create any Dish.
+* *Dish* - Food prepared using a combination of Ingredients.
+* *Wastage* - Weight of Dish or Ingredient wasted.
 
 ## 🧪 Instructions for Manual Testing
 
