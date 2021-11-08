@@ -88,9 +88,9 @@ When the user inputs a line of text into the terminal, terminated with a newline
 
 * After user input is parsed by `Parser`, depending on the current `viewType`, the `Ui` will call methods from
   different `Ui` subclasses
-    * When `viewType` is `PATIENT_INFO`, `PatientUi` methods are called.
-    * When `viewType` is `MEDICAL_STAFF_INFO`, `StaffUi` methods are called.
-    * When `viewType` is `SCHEDULER`, `SchedulerUi` methods are called.
+    * When `viewType` is `Patient Management`, `PatientUi` methods are called.
+    * When `viewType` is `Staff Management`, `StaffUi` methods are called.
+    * When `viewType` is `Scheduler`, `SchedulerUi` methods are called.
 
 Given below is a sequence diagram of how the `Ui` component works after the `Parser`
 parses `help delete` input given by a user.
@@ -246,12 +246,12 @@ The switch view mechanism is heavily linked to the `Parser` class. By having a
 appropriate `SwitchCommand` class, which modifies the corresponding `ViewType`
 of the `Parser`. The 3 possible views and the corresponding user input commands are as follows:
 
-* `switch p` or `switch 1` - switches to the `PATIENT_INFO` view.
-* `switch m` or `switch 2` - switches to the `MEDICAL_STAFF_INFO` view.
-* `switch s` or `switch 3` - switches to the `SCHEDULER` view.
+* `switch p` or `switch 1` - switches to the `Patient Management` view.
+* `switch m` or `switch 2` - switches to the `Staff Management` view.
+* `switch s` or `switch 3` - switches to the `Scheduler` view.
 * `switch` - will switch to another view depending on the current view in the order shown below:
 
-  `PATIENT_INFO` --> `MEDICAL_STAFF_INFO` --> `SCHEDULER` --> `PATIENT_INFO`
+`Patient Management` --> `Staff Management` --> `Scheduler` --> `Patient Management`
 
 
 Each command evokes the `Parser#setViewType(ViewType)` method, which will set the corresponding
@@ -317,7 +317,7 @@ the `execute()` method to achieve the desired functionality.
 The example below gives a direction on how this command behaves.
 
 
-1. User executes the `edit n/John` command when the attribute `Parser#viewType` is `PATIENT_INFO`.
+1. User executes the `edit n/John` command when the attribute `Parser#viewType` is `Patient Management``.
 The `Parser#parseCommand()` method will parse this command and eventually returns a `new EditPatientCommand()` object.
 
 
@@ -435,11 +435,11 @@ commands.
 1. Switching between the different views of MedBot, in any view
     1. Test case: `switch` <br>
        Expected: MedBot will switch to the next view. The views switch in this order, and loop back: <br>
-       (PATIENT_INFO --> MEDICAL_STAFF_INFO --> SCHEDULER --> PATIENT_INFO)
+       `Patient Management` --> `Staff Management` --> `Scheduler` --> `Patient Management`
 
-2. Switching from other views to MEDICAL_STAFF_INFO view specifically
-    1. Test case: `switch m` when in PATIENT_INFO view or SCHEDULER view <br>
-       Expected: MedBot will switch to MEDICAL_STAFF_INFO view, and print: <br>
+2. Switching from other views to `Staff Management` view specifically
+    1. Test case: `switch m` when in `Patient Management` view or `Scheduler` view <br>
+       Expected: MedBot will switch to `Staff Management` view, and print: <br>
 
         ``` 
           ___ _____ _   ___ ___  
@@ -452,11 +452,11 @@ commands.
          \ \ / /_ _| __\ \    / /
           \ V / | || _| \ \/\/ / 
            \_/ |___|___| \_/\_/  
-        View has been switched to MEDICAL_STAFF_INFO
+        View has been switched to Staff Management
         ```
 
 3. Switching view to the current view
-    1. Test case: `switch 3` when in the `SCHEDULER` view <br>
+    1. Test case: `switch 3` when in the `Scheduler` view <br>
        Expected: View remains the same, prints: `You are already in the Scheduler view.`
 4. Invalid switch commands
     1. Test case: `switch 100`, `switch abc`, ... <br> Expected: View remains the same,
@@ -465,12 +465,12 @@ commands.
 ### Get current view
 
 1. Get the current view type of MedBot
-    1. Test case: `get view` when in the `SCHEDULER` view <br>Expected: `You are currently in the Scheduler's View.`
+    1. Test case: `get view` when in the `Scheduler` view <br>Expected: `You are currently in the Scheduler view.`
 
 ### Accessing user guide
 
-1. Using `help` in the SCHEDULER view
-    1. Test case: `help` in SCHEDULER view. <br>Expected:
+1. Using `help` in the `Scheduler` view
+    1. Test case: `help` in `Scheduler` view. <br>Expected:
         ```
         Here are the list of commands:
     
@@ -492,7 +492,7 @@ commands.
         examples of the expected output, please refer to the actual user guide.
         ```
 2. Getting view specific help for a specific command
-    1. Test case: `help add` in PATIENT_INFO view <br>Expected:
+    1. Test case: `help add` in `Patient Management` view <br>Expected:
         ```
         Adds a patient to the patient list.
         Format:
@@ -503,9 +503,9 @@ commands.
 
 ### Patient/Medical Staff Information Commands
 
-* The commands for `PATIENT_INFO_VIEW` and `STAFF_INFO_VIEW` are the same, but apply to patients and staff respectively.
-  `PATIENT_INFO_VIEW` examples will be used here, but feel free to test the same commands for `STAFF_INFO_VIEW`.
-* Note that the Patient ID/STAFF ID generated is dependent on the existing patients/staff information in MedBot.
+* The commands for `Patient Management` view and `Staff Management` view are the same, but apply to patients and staff respectively.
+  `Patient Management` view examples will be used here, but feel free to test the same commands for `Staff Management` view.
+* Note that the Patient ID/Staff ID generated is dependent on the existing patients/staff information in MedBot.
 * The expected output of the test cases below assumes that the commands are executed in the order that they are
   presented in this guide.
 

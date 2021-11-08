@@ -130,9 +130,9 @@ Here is the list of views and their corresponding `[VIEW_TYPE]` specifiers:
 
 | View                     | Specifier | Alternate Specifier |
 | :---                     | :---      | :---                |
-| Patient Management       | `p`       | `1`                 |
-| Medical Staff Management | `m`       | `2`                 |
-| Scheduler                | `s`       | `3`                 |
+| `Patient Management`       | `p`       | `1`                 |
+| `Staff Management` | `m`       | `2`                 |
+| `Scheduler`                | `s`       | `3`                 |
 
 Using either specifier will switch to the corresponding view. I.e., `switch m` and `switch 2` will both switch to the 
 Medical Staff Info view.
@@ -140,7 +140,7 @@ Medical Staff Info view.
 If the switch command is called without any parameters, the view that is switched to will depend on the current view in 
 the following order.
 
-(Patient Info --> Medical Staff Info --> Scheduler --> Patient Info)
+`Patient Management` --> `Staff Management` --> `Scheduler` --> `Patient Management`
 
 Example: `switch p`
 
@@ -158,7 +158,7 @@ Expected Output:
   \ V / | || _| \ \/\/ /          
    \_/ |___|___| \_/\_/           
                                   
-View has been switched to PATIENT_INFO
+View has been switched to Patient Management
 ```
 
 ### 4.2.3 Get current view: `get view`
