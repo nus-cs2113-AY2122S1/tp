@@ -24,7 +24,11 @@ the design considerations and implementation of features, and possibly expand on
     * [4.1.1. Implementation](#411-implementation)
     * [4.1.2. Design Considerations](#412-design-considerations)
   * [4.2. Adding a Habit](#42-adding-a-habit)
+    * [4.2.1. Implementation](#421-implementation)
+    * [4.2.2. Design Considerations](#422-design-considerations)
   * [4.3. Listing all Goals](#43-listing-all-goals)
+    * [4.3.1. Implementation](#431-implementation)
+    * [4.3.2. Design Considerations](#432-design-considerations)
   * [4.4. Listing all Habits](#44-listing-all-habits)
   * [4.5. Completing a Habit](#45-completing-a-habit)
   * [4.6. Updating a Goal](#46-updating-a-goal)
@@ -335,13 +339,30 @@ This section describes the implementation of how the user can add a habit to one
 
 ### 4.3. Listing all Goals
 
-A `ListGoalCommand` object is returned from the `ListGoalParser` as long as the user's command contains the prompt `list`.
-All other inputs are treated as "gibberish" which the user accidentally typed.
+This section describes the implementation of how the user can display a list of all tracked goals.
 
-The `runCommand` method is then executed for the `ListGoalsCommand` object. The following steps as indicated by the
-sequence diagram below is then carried out:
+#### 4.3.1. Implementation
+
+1. Since the command for listing goals does not require any parameters, using `ParserManager` to detect the command word
+   `list` is sufficient to execute the command.
+2. The `ListGoalsCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
+   `GoalList#listGoals(printManager)` method.
+3. If the `GoalList` object is empty, the `GoalList#listGoals(printManager)` method returns an exception indicating that
+   there are no goals to be printed. 
+4. Otherwise, the method calls the `PrintManager#printGoalList(goalList, goalList.size()` method, which iterates through
+   all `Goal` objects and prints their respective description line by line in a table.
 
 ![](Diagram_Images/Implementation_Diagram_Images/ListGoalsCommandSequenceDiagram.png)
+
+#### 4.3.2. Design Considerations
+
+**Aspect:** Information to be included for the list of goals
+* **Alternative 1:** Include minimal information, but add a command that prints in depth statistics of the goal.
+    * Pros: The command to list goals acts as a quick view for the user without the clutter of irrelevant information. 
+    * Cons: Total number of commands required will be increased, resulting in increased application complexity.
+* **Alternative 2 (current choice):** Include all information, inclusive of statistics.
+    * Pros: The command acts as an overview of everything the user may need to know about each goal.
+    * Cons: Too much upfront information, which may lead to a lot of user scrolling if the list is very long.
 
 ### 4.4. Listing all Habits
 
