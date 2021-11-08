@@ -1,6 +1,7 @@
 package taa.command.assessment;
 
 //@@author rachelkeh
+import taa.Taa;
 import taa.Ui;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
@@ -67,7 +68,7 @@ public class EditAssessmentCommand extends Command {
 
         String newMaximumMarksString = argumentMap.getOrDefault(KEY_NEW_MAXIMUM_MARKS, null);
         if (newMaximumMarksString != null) {
-            if (!Util.isStringDouble(newMaximumMarksString, 2)) {
+            if (!Util.isStringDouble(newMaximumMarksString, Taa.DECIMAL_PLACES)) {
                 throw new TaaException(String.format(
                     MESSAGE_FORMAT_INVALID_NEW_MAXIMUM_MARKS,
                     Assessment.MAXIMUM_MARKS_RANGE[0],
@@ -78,7 +79,7 @@ public class EditAssessmentCommand extends Command {
 
         String newWeightageString = argumentMap.getOrDefault(KEY_NEW_WEIGHTAGE, null);
         if (newWeightageString != null) {
-            if (!Util.isStringDouble(newWeightageString, 2)) {
+            if (!Util.isStringDouble(newWeightageString, Taa.DECIMAL_PLACES)) {
                 throw new TaaException(String.format(
                     MESSAGE_FORMAT_INVALID_NEW_WEIGHTAGE,
                     Assessment.WEIGHTAGE_RANGE[0],
@@ -163,7 +164,7 @@ public class EditAssessmentCommand extends Command {
 
     public boolean checkWeightage(String newWeightageString, AssessmentList assessmentList, String name)
             throws TaaException {
-        assert Util.isStringDouble(newWeightageString, 2);
+        assert Util.isStringDouble(newWeightageString, Taa.DECIMAL_PLACES);
         double newWeightage = Double.parseDouble(newWeightageString);
         if (!Assessment.isWeightageWithinRange(newWeightage)) {
             throw new TaaException(String.format(
@@ -191,7 +192,7 @@ public class EditAssessmentCommand extends Command {
 
     public boolean checkMaximumMarks(String name, String newMaximumMarksString, TeachingClass teachingClass)
             throws TaaException {
-        assert Util.isStringDouble(newMaximumMarksString, 2);
+        assert Util.isStringDouble(newMaximumMarksString, Taa.DECIMAL_PLACES);
         ArrayList<Student> students = teachingClass.getStudentList().getStudents();
         double newMaximumMarks = Double.parseDouble(newMaximumMarksString);
         if (!Assessment.isMaximumMarksValid(newMaximumMarks)) {
@@ -218,7 +219,7 @@ public class EditAssessmentCommand extends Command {
 
     public int countNumberOfStudentsExceedingNewMaximumMarks(String name, String newMaximumMarksString,
                                                              TeachingClass teachingClass) {
-        assert Util.isStringDouble(newMaximumMarksString, 2);
+        assert Util.isStringDouble(newMaximumMarksString, Taa.DECIMAL_PLACES);
         ArrayList<Student> students = teachingClass.getStudentList().getStudents();
         double newMaximumMarks = Double.parseDouble(newMaximumMarksString);
         assert Assessment.isMaximumMarksValid(newMaximumMarks);

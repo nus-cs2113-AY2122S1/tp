@@ -15,6 +15,8 @@ public class Taa {
     public static final String DATA_FOLDER = "./data";
     public static final String DATA_FILENAME = "taa_data.json";
 
+    public static final int DECIMAL_PLACES = 2;
+
     private ClassList classList;
     private final Ui ui;
     private final Storage storage;
