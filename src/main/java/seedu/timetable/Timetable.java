@@ -143,7 +143,7 @@ public class Timetable implements Comparable<Timetable> {
     }
 
     public void addEvent(DayOfWeek day, TimetableUserItem event) {
-        addEventToSchedule(event,schedules.get(day));
+        addEventToSchedule(event, schedules.get(day));
         logger.log(Level.INFO, String.format("%s added to timetable", event.getTitle()));
     }
 
@@ -203,8 +203,8 @@ public class Timetable implements Comparable<Timetable> {
      * Adds a timetable event to a specific day schedule.
      *
      * @param timetableUserItem Event to be added to a day's schedule
-     * @param schedule      Day's schedule (i.e monday/tuesday/.. etc) to add the
-     *                      lesson to
+     * @param schedule          Day's schedule (i.e monday/tuesday/.. etc) to add the
+     *                          lesson to
      */
     private void addEventToSchedule(TimetableUserItem timetableUserItem, TimetableItem[] schedule) {
         int start = Integer.parseInt(timetableUserItem.getStartTime());
@@ -226,6 +226,7 @@ public class Timetable implements Comparable<Timetable> {
 
     /**
      * Function is used to find the true end time of an event in order to account for 2400.
+     *
      * @param end the hour in which the event ends
      * @return the true end time
      */
@@ -257,6 +258,7 @@ public class Timetable implements Comparable<Timetable> {
      *                   E.g. CS2113T
      * @see Module
      */
+    //@@author aditichadha1310
     public void deleteModuleFromList(String moduleCode) throws UniModsException {
         for (int i = 0; i < modules.size(); i++) {
             if (modules.get(i).getModuleCode().toUpperCase(Locale.ROOT).equals(moduleCode)) {
@@ -274,6 +276,7 @@ public class Timetable implements Comparable<Timetable> {
      *              Module Code for modules, Descriptions for Personal tasks.
      * @see Module
      */
+    //@@author aditichadha1310
     public void deleteFromSchedules(String title) {
         int countOfDeleted = 0;
         countOfDeleted += deleteItemFromSchedule(title, monday);
@@ -299,6 +302,7 @@ public class Timetable implements Comparable<Timetable> {
      * @param title    Tilte of TimetableItem to be Deleted
      * @see TimetableItem
      */
+    //@@author aditichadha1310
     private int deleteItemFromSchedule(String title, TimetableItem[] schedule) {
         int countOfDeleted = 0;
         for (int i = 0; i < schedule.length; i++) {
@@ -328,6 +332,7 @@ public class Timetable implements Comparable<Timetable> {
      * Removes all modules from the list of modules taken by the user. Calls the
      * clearTimetableFromLessons() function to delete all the scheduled lessons.
      */
+    //@@author aditichadha1310
     public void clearTimetable() throws UniModsException {
         if (modules.size() == ZERO && events.size() == ZERO) {
             throw new UniModsException(TextUi.ERROR_EMPTY_TIMETABLE);
@@ -348,6 +353,7 @@ public class Timetable implements Comparable<Timetable> {
      * Calls the function clearTimetableFromLessons() to clear the scheduled lessons
      * from the timetable's daily plan.
      */
+    //@@author aditichadha1310
     public void clearTimetableFromLessons() {
         clearSchedule(monday);
         clearSchedule(tuesday);
@@ -496,6 +502,7 @@ public class Timetable implements Comparable<Timetable> {
         events.add(timetableUserItem);
     }
 
+    //@@author aditichadha1310
     public void removeFromSchedules(String title) {
         deleteItemFromSchedule(title, monday);
         deleteItemFromSchedule(title, tuesday);
