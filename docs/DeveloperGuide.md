@@ -366,14 +366,36 @@ This section describes the implementation of how the user can display a list of 
 
 ### 4.4. Listing all Habits
 
-A `ListHabitCommand` object is returned from the `ListHabitParser` if the user input is successfully parsed as shown below.
-If no goal index or invalid goal index is detected, an exception is thrown.
+This section describes the implementation of how the user can display a list of all tracked goals.
+
+#### 4.4.1. Implementation
+
+1. The `ListHabitParser#parseListHabitCommand(commandInstruction)` method is called, which starts the process of 
+   extracting parameters from the user input.
+2. The `ListHabitParser#splitInput(commandInstruction)` method splits the user input into an ArrayList of parameters, 
+   while the `ListHabitParser#getIndex(paramters, "g/")` method finds the goal index from the parameters ArrayList and 
+   checks that the index is a positive integer, returning the goalIndex of the specified goal in the goalList.
+3. An `ListHabitsCommand(goalIndex)` object is created and returned from the 
+   `ListHabitParser#parseListHabitCommand(commandInstruction)` method.
 
 ![](Diagram_Images/Implementation_Diagram_Images/ListHabitsCommandParserSequenceDiagram.png)
 
-The `runCommand` method is then executed for the `ListHabitsCommand` object as seen.
+4. The `ListHabitsCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
+   `GoalList#listHabitsFromGoal(goalIndex, printManager)` method.
+5. Within this newly called method, the `GoalList#getGoal(goalIndex)` method is called to retrieve the `Goal` object
+   from the `goalList`. 
+6. The `goal.getHabitList()` is called to retrieve all the habits associated with that `Goal` object.
+7. The `goal.getListLength()` is called to find the number of habits associated with that `Goal` object.
+8. If the habitList is empty, a `HaBitCommandException` is raised to indicate the error that there are no habits
+   associated with that goal.
+9. Otherwise, the `PrintManager#printHabitList(goalName, habitList, numOfHabits)` method prints all habits associated
+   with that goal in a tabular form.
 
 ![](Diagram_Images/Implementation_Diagram_Images/ListHabitsCommandSequenceDiagram.png)
+
+#### 4.4.2. Design Considerations
+
+// TODO
 
 ### 4.5. Completing a Habit
 
