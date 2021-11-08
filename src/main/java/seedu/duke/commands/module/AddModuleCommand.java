@@ -5,6 +5,7 @@ import seedu.duke.exceptions.ClickException;
 import seedu.duke.exceptions.module.DuplicateModuleParamException;
 import seedu.duke.exceptions.module.IllegalModularCreditException;
 import seedu.duke.exceptions.module.IllegalModuleException;
+import seedu.duke.exceptions.module.MissingModuleCodeException;
 import seedu.duke.module.Module;
 import seedu.duke.module.ModuleManager;
 import seedu.duke.storage.Storage;
@@ -102,9 +103,10 @@ public class AddModuleCommand extends Command {
      * @return A new Module based on user's input.
      * @throws IllegalModuleException If user's input is not in the correct format.
      * @throws IllegalModularCreditException If the modular credit is not an integer.
+     * @throws MissingModuleCodeException If the module code is an empty string.
      */
     private Module getModule(int indexOfCode, int indexOfName, int indexOfMc, int indexOfExpectedGrade)
-            throws IllegalModuleException, IllegalModularCreditException {
+            throws IllegalModuleException, IllegalModularCreditException, MissingModuleCodeException {
         String code;
         String name;
         int modularCredits;
@@ -119,13 +121,22 @@ public class AddModuleCommand extends Command {
 
         if (indexOfName == -1 && indexOfMc == -1 && indexOfExpectedGrade == -1) {
             code = commandArgs.substring(indexOfCode + 2).strip().toUpperCase();
+            if (code.length() == 0) {
+                throw new MissingModuleCodeException();
+            }
             module = new Module(code);
         } else if (indexOfMc == -1 && indexOfExpectedGrade == -1) {
             code = commandArgs.substring(indexOfCode + 2, indexOfName).strip().toUpperCase();
+            if (code.length() == 0) {
+                throw new MissingModuleCodeException();
+            }
             name = commandArgs.substring(indexOfName + 2).strip();
             module = new Module(code, name);
         } else if (indexOfExpectedGrade == -1) {
             code = commandArgs.substring(indexOfCode + 2, indexOfName).strip().toUpperCase();
+            if (code.length() == 0) {
+                throw new MissingModuleCodeException();
+            }
             name = commandArgs.substring(indexOfName + 2, indexOfMc).strip();
             try {
                 modularCredits = Integer.parseInt(commandArgs.substring(indexOfMc + 2).strip());
@@ -135,6 +146,9 @@ public class AddModuleCommand extends Command {
             module = new Module(code, name, modularCredits);
         } else {
             code = commandArgs.substring(indexOfCode + 2, indexOfName).strip().toUpperCase();
+            if (code.length() == 0) {
+                throw new MissingModuleCodeException();
+            }
             name = commandArgs.substring(indexOfName + 2, indexOfMc).strip();
             try {
                 modularCredits = Integer.parseInt(commandArgs.substring(indexOfMc + 2, indexOfExpectedGrade).strip());

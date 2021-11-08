@@ -2,6 +2,7 @@ package seedu.duke.commands.food;
 
 import seedu.duke.commands.Command;
 import seedu.duke.exceptions.ClickException;
+import seedu.duke.exceptions.food.InvalidStoreIndexException;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
@@ -34,8 +35,10 @@ public class ViewReferenceFoodCommand extends Command {
      * For instance, food view lists all stalls.
      *               food view all lists all items.
      *               food view [STORE_NUMBER] lists all items sold by that store.
+     * @throws InvalidStoreIndexException if store index is invalid.
      */
-    private void selectExecutionPathAndRun() {
+    private void selectExecutionPathAndRun() throws
+            InvalidStoreIndexException {
         switch (userInput.trim()) {
         case "food view":
             Storage.reference.getTechnoEdge().printStalls();

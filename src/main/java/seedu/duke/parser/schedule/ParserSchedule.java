@@ -30,6 +30,7 @@ import static seedu.duke.constants.Messages.MODULE_DIVIDER;
 import static seedu.duke.constants.Messages.START_DATE_DIVIDER;
 import static seedu.duke.constants.Messages.END_DATE_DIVIDER;
 
+//@@author swatimahadevan
 public class ParserSchedule {
 
     /**
@@ -62,10 +63,11 @@ public class ParserSchedule {
     }
 
     private static void checkForDividersAddTaskCommand(String input) throws IncorrectNumberOfArgumentsException {
-        if (!input.contains(NAME_DIVIDER)) {
+        if (!input.contains(NAME_DIVIDER) && !input.contains(DATE_DIVIDER)) {
+            throw new IncorrectNumberOfArgumentsException("n/ and d/ not found in command!");
+        } else if (!input.contains(NAME_DIVIDER)) {
             throw new IncorrectNumberOfArgumentsException(NAME_DIVIDER_NOT_FOUND);
-        }
-        if (!input.contains(DATE_DIVIDER)) {
+        } else if (!input.contains(DATE_DIVIDER)) {
             throw new IncorrectNumberOfArgumentsException(DATE_DIVIDER_NOT_FOUND);
         }
     }

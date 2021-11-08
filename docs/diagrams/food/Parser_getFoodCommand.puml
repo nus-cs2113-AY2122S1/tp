@@ -33,8 +33,8 @@ else suffix = "radd"
     ":Parser" -> ":AddFoodFromReferenceCommand"
     ":Parser" -> ":AddFoodFromReferenceCommand"
     activate ":AddFoodFromReferenceCommand"
-    ":AddFoodFromReferenceCommand" -> ":StallsManager" : get food record info
-    ":StallsManager" --> ":AddFoodFromReferenceCommand" : food record info
+    ":AddFoodFromReferenceCommand" -> "<color red><<class>></color>\nStallsManager" : get food record info
+    "<color red><<class>></color>\nStallsManager" --> ":AddFoodFromReferenceCommand" : food record info
     ":AddFoodFromReferenceCommand" -> ":StorageFood" : add to list
     deactivate ":AddFoodFromReferenceCommand"
     destroy ":AddFoodFromReferenceCommand"
@@ -79,7 +79,7 @@ else suffix = "find"
 else suffix = "clt"
     create ":FindFoodByCalorieCountCommand"
     ":Parser" -> ":FindFoodByCalorieCountCommand"
-    ":FindFoodByCalorieCountCommand" -> ":StallsManager" : Find food records with <= calorie input
+    ":FindFoodByCalorieCountCommand" -> "<color red><<class>></color>\nStallsManager" : Find food records with <= calorie input
         activate ":FindFoodByCalorieCountCommand"
     return
     destroy ":FindFoodByCalorieCountCommand"
@@ -90,24 +90,24 @@ else suffix = "view"
 
     ":Parser" -> ":ViewReferenceFoodCommand"
       activate ":ViewReferenceFoodCommand"
-     ":ViewReferenceFoodCommand" -> ":StallsManager"
+     ":ViewReferenceFoodCommand" -> "<color red><<class>></color>\nStallsManager"
 
-    ":StallsManager" --> ":ViewReferenceFoodCommand" : lists all stalls
+    "<color red><<class>></color>\nStallsManager" --> ":ViewReferenceFoodCommand" : lists all stalls
     return
     opt all
     ":Parser" -> ":ViewReferenceFoodCommand"
      activate ":ViewReferenceFoodCommand"
 
-    ":ViewReferenceFoodCommand" -> ":StallsManager"
-    ":StallsManager" --> ":ViewReferenceFoodCommand" : lists all food items
+    ":ViewReferenceFoodCommand" -> "<color red><<class>></color>\nStallsManager"
+    "<color red><<class>></color>\nStallsManager" --> ":ViewReferenceFoodCommand" : lists all food items
     return
 
     else stall index
 
     ":Parser" -> ":ViewReferenceFoodCommand"
      activate ":ViewReferenceFoodCommand"
-    ":ViewReferenceFoodCommand" -> ":StallsManager"
-    ":StallsManager" --> ":ViewReferenceFoodCommand" : lists all items sold by the store
+    ":ViewReferenceFoodCommand" -> "<color red><<class>></color>\nStallsManager"
+    "<color red><<class>></color>\nStallsManager" --> ":ViewReferenceFoodCommand" : lists all items sold by the store
     return
     destroy ":ViewReferenceFoodCommand"
     end
