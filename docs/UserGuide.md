@@ -64,7 +64,7 @@ read as the same word by SITUS
 ## 1. Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `Situs` from [here](https://github.com/AY2122S1-CS2113T-T09-3/tp/releases/tag/v2.0).
+2. Download the latest version of `Situs` from [here](https://github.com/AY2122S1-CS2113T-T09-3/tp/releases/tag/v2.1).
 3. Copy the jar file to the folder that you want to use SITUS.
 4. Open a terminal and navigate to the folder containing the jar file.
 5. Type `java -jar Situs.jar` in the terminal window.
