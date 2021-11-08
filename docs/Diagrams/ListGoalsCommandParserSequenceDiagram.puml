@@ -2,8 +2,8 @@
 
 !include Style.puml
 
-participant ListGoalParser as ListGoalParser PARSER_COLOUR
-participant ListGoalsCommand as ListGoalsCommand COMMAND_COLOUR
+participant ": ListGoalParser" as ListGoalParser PARSER_COLOUR
+participant ": ListGoalsCommand" as ListGoalsCommand COMMAND_COLOUR
 
 mainframe sd List Goal Parsing
 
