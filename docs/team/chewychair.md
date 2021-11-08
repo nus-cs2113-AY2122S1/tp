@@ -1,6 +1,8 @@
-### Project: UNIMods
+# ChewyChair's Project Portfolio Page
 
-UNIMods is a light-weight Command Line Interface (CLI) Application that provides a means for students to plan for 
+### Project: UniMods
+
+UniMods is a light-weight Command Line Interface (CLI) Application that provides a means for students to plan for 
 their academic journey in NUS. It is written in Java.
 
 Given below are my contributions to the project.
@@ -42,8 +44,6 @@ Given below are my contributions to the project.
 
 * **Project management**:
     * Managed issues for `v2.0` and `v2.1` on GitHub
-
-* **Enhancements to existing features**:
 
 * **Documentation**:
     * User Guide:

@@ -63,6 +63,8 @@ Given below is a quick overview of main components and how they interact with ea
 
 ![Unimods](./uml-diagrams/Architecture.png)
 
+<div style="page-break-after: always;"></div>
+
 #### Main components of the architecture
 **Unimods**
 
@@ -82,6 +84,8 @@ The rest of the App consists of five components:
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 The **UI** component consists of the `AddUI`, `TextUi`, `TimetableUI` and `TranscriptUi` components.
 
@@ -97,6 +101,8 @@ and `Online`.
 > The `TranscriptUi` component is called only from `Logic`, specifically by the `TranscriptCommand`.
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 The **Logic** component consists of the `CommandParser` , as well as all the valid commands : 
@@ -114,6 +120,8 @@ The **Logic** component consists of the `CommandParser` , as well as all the val
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Online component
 The **Online** component consists of only `NusMods`.
 
@@ -126,6 +134,8 @@ The **Online** component consists of only `NusMods`.
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Timetable component
 The **Timetable** component consists of `Timetable`, `TimetableItem`, `TimetableLesson` and `TimetableUserItem` classes.
 
@@ -136,6 +146,8 @@ The **Timetable** component consists of `Timetable`, `TimetableItem`, `Timetable
 > `TimetableLesson`, and `TimetableUserItem` extends from `TimetableItem`. They are stored in the timetable schedule to differentiate between different type of schedule items
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 The **Storage** component consists of the `ModStorage`, `ProfileStorage` and `TimetableStorage` components. Much like
@@ -151,7 +163,7 @@ their names suggest, they handle the storage of Mods, Profiles and Timetables re
 > 
 > `TimetableStorage` is called by the `UniMods` component to handle saving and loading of timetables.
 
-### Common classes
+<div style="page-break-after: always;"></div>
 
 ## Implementation
 This section covers the important details on how some features are implemented.
@@ -165,6 +177,8 @@ emulates that of the json, with each `Module` containing an `Attributes` object 
 `Semester` containing an array of `Lesson` objects, and  `Lesson` containing an array of `Weeks` objects.
 
 ![FetchModuleDiagram](uml-diagrams/ModuleClassDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 #### Parsing and Saving of Weeks via Gson
 Gson was unable to parse the weeks key as provided by the NUSMods API as the value expected for the key can be of two different data types.
@@ -234,6 +248,8 @@ successfully deserialize the timetable json when it is loaded.  Otherwise it wri
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ### Search/Show/Update module feature
 This feature is implemented using the `ModStorage` and the `NusMods` classes.
 
@@ -249,9 +265,13 @@ The following implemented functions are utilized heavily:
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 #### Search
 
 ![SearchDiagram](uml-diagrams/Search.png)
+
+<div style="page-break-after: always;"></div>
 
 *Fetch, Save and Load Mod*
 
@@ -265,6 +285,8 @@ If the module matches the search term and all flags, then it is printed. If eith
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 #### Show
 
 ![ShowCommandDiagram](uml-diagrams/Show.png)
@@ -275,6 +297,8 @@ If `getOnlineModInfo()` fails at the start, then `loadModInfo()` will execute in
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 #### Update
 
 ![UpdateCommandDiagram](uml-diagrams/Update.png)
@@ -283,6 +307,8 @@ Fetches the json from all mods in the NUSMods database. Utilizes `getOnlineModLi
 `getOnlineModInfo()` and `saveModInfo()` is run for every mod in the list to update all mods in the local database.
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ### Maintaining Timetable
 
@@ -295,12 +321,16 @@ In the event that the json save file is empty or does not exist, a new empty `Ti
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 #### Save
 ![](uml-diagrams/TimetableSave.png)
 
 `Timetable` is converted to a `TimetableDto` object in order to separate different `TimetableItem` types. The `TimetableDto` object is then saved to a local json file via Gson.
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 #### Add
 ![](uml-diagrams/AddCommand.png)
@@ -314,12 +344,16 @@ event to the timetable.
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 #### Delete Modules or Tasks from Timetable
 ![](uml-diagrams/DeleteCommand.png)
 
 Delete command can be executed to delete a module or a task that was added to the timetable. The delete command is executed by calling the `deleteModuleFromList()` function on the current timetable.
 Next, the `deleteFromSchedules()` is run which in turn, calls another function `deleteItemFromSchedule` for all days of the week to delete the module and task from the daily schedule.At last, the `printModuleDeleted()` function is executed to print a statement of successful deletion of the module or the task from the timetable. 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 #### Remove from Transcript
 ![](uml-diagrams/RemoveCommand.png)
@@ -330,6 +364,7 @@ After deletion, the `printModuleRemoved` function is called from the `TextUi` cl
 <br>
 <br>
 
+<div style="page-break-after: always;"></div>
 
 #### Show Timetable
 ![](uml-diagrams/ViewTimetable.png)
@@ -343,6 +378,8 @@ Finally, it prints all the modules taken, together with their exam dates, and th
 by incrementing a counter for each module tracked within the timetable instance's `modules` array.
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 #### Checking Pre-requisite
 
@@ -413,6 +450,8 @@ Compared to a simple pre-requisite tree (CS2040)
 "prereqTree": "CS1010"
 ```
 
+<div style="page-break-after: always;"></div>
+
 To determine if the user meets the pre-requisites the following sequence takes place:
 
 ![](uml-diagrams/CheckPrerequisite.png)
@@ -432,6 +471,8 @@ modules.
 
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 ## Appendix: Requirements
 
