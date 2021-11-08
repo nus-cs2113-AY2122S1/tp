@@ -313,6 +313,13 @@ event to the timetable.
 
 <br>
 
+#### Delete Modules or Tasks from Timetable
+![](uml-diagrams/DeleteCommand.png)
+
+Delete command can be executed to delete a module or a task that was added to the timetable. The delete command is executed by calling the `deleteModuleFromList()` function on the current timetable.
+Next, the `deleteFromSchedules()` is run which in turn, calls another function `deleteItemFromSchedule` for all days of the week to delete the module and task from the daily schedule.At last, the `printModuleDeleted()` function is executed to print a statement of successful deletion of the module or the task from the timetable. 
+<br>
+
 #### Remove from Transcript
 ![](uml-diagrams/RemoveCommand.png)
 Removing modules and their grades from the transcript follows a systematic step-by-step process. It first fetches the module to check if its valid module code. 
