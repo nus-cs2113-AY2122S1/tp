@@ -1,6 +1,6 @@
 # Developer Guide
 
-## UNIMods
+## UniMods
 ![Unimods](./resources/UnimodsLogo.png)
 
 **UniMods** is a light-weight Command Line Interface (CLI) Application that provides a means for students to plan for
@@ -21,7 +21,7 @@ upon.
 - [Implementation](#implementation)
     * [Fetching Module Data](#fetching-module-data)
       * [Parsing of weeks via Gson](#parsing-and-saving-of-weeks-via-gson)
-    * [Search/ Show/ Update Functions](#searchshowupdate-module-feature)
+    * [Search/ Show/ Update Functions](#searchshowupdate-functions)
       * [Search](#search)
       * [Show](#show)
       * [Update](#update)
@@ -249,10 +249,11 @@ successfully deserialize the timetable JSON when it is loaded.  Otherwise it wri
 
 <div style="page-break-after: always;"></div>
 
-### Search/Show/Update module feature
+### Search/Show/Update Functions
 This feature is implemented using the `ModStorage` and the `NusMods` classes.
 
 The following implemented functions are utilized heavily:
+
 `NusMods`:
 * `getOnlineModList()` : gets a list of mods from the NUSMods API.
 * `getOnlineModInfo()` : using a module code, get detailed information about that
