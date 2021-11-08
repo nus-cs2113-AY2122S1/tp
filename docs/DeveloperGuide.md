@@ -512,7 +512,7 @@ Given below is an example of how the edit task mechanism behaves at each step.
    iv. Edit successful message is printed back to the user.\
    iv. `EditTasksCommand` calls `StorageTasks.writeTaskList(Storage.tasksList)` to save the new data to the storage file.
 
-### 4.4 Journaling Feature
+### 4.4 Journal-related Features
 This segment focuses on describing the implementation of journaling-related features, the functionality of the 
 commands as well as the design considerations taken.
 
@@ -531,7 +531,7 @@ Given below is an example of how the add notebook mechanism behaves at each step
    ii. `AddNoteCommand` calls `storage.collectionOfNotebooks.addNote(noteName, "none")`. Here the parameters are the
    notebook name, and the tag name which is "none" by default. \
    iii. `AddNoteCommand` calls `ui.printAddedNoteMessage` and passes in notebook name as parameter to convey
-   successful addition of notebook.
+   successful addition of notebook. \
    iv. `AddNoteCommand` calls `StorageNotes.writeCollectionOfNotebooks(storage.collectionOfNotebooks)` to write the new 
    data to
    the storage file.
