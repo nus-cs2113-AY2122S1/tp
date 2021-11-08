@@ -307,7 +307,9 @@ public class Ui {
      */
     public void showSortedTourById(TourList tours, ArrayList<String> sortedTourIds)
             throws TourPlannerException {
-        if (checkEmptyTours(tours)) return;
+        if (checkEmptyTours(tours)) {
+            return;
+        }
         show(SORT_TOUR_ID_MESSAGE);
         int listIndex = 1;
         for (String tourId : sortedTourIds) {
@@ -325,7 +327,9 @@ public class Ui {
      * @throws TourPlannerException if there is no tours that can be found given the tour price
      */
     public void showSortedTourByPrice(TourList tours, ArrayList<Float> sortedTourPrices) throws TourPlannerException {
-        if (checkEmptyTours(tours)) return;
+        if (checkEmptyTours(tours)) {
+            return;
+        }
         tours.initTempArray();
         show(SORT_TOUR_PRICE_MESSAGE);
         int listIndex = 1;
@@ -344,7 +348,9 @@ public class Ui {
      * @throws TourPlannerException if there is no tours that can be found given the tour name
      */
     public void showSortedTourByName(TourList tours, ArrayList<String> sortedTourNames) throws TourPlannerException {
-        if (checkEmptyTours(tours)) return;
+        if (checkEmptyTours(tours)) {
+            return;
+        }
         tours.initTempArray();
         show(SORT_TOUR_NAME_MESSAGE);
         int listIndex = 1;
@@ -373,7 +379,9 @@ public class Ui {
      */
     public void showSortedClientById(ClientList clients, ArrayList<String> sortedClientIds)
             throws TourPlannerException {
-        if (checkEmptyClients(clients)) return;
+        if (checkEmptyClients(clients)) {
+            return;
+        }
         show(SORT_CLIENT_ID_MESSAGE);
         int listIndex = 1;
         for (String clientId : sortedClientIds) {
@@ -392,7 +400,9 @@ public class Ui {
      */
     public void showSortedClientByName(ClientList clients, ArrayList<String> sortedClientNames)
             throws TourPlannerException {
-        if (checkEmptyClients(clients)) return;
+        if (checkEmptyClients(clients)) {
+            return;
+        }
         clients.initTempArray();
         show(SORT_CLIENT_NAME_MESSAGE);
         int listIndex = 1;
@@ -421,7 +431,9 @@ public class Ui {
      */
     public void showSortedFlightById(FlightList flights, ArrayList<String> sortedIds)
             throws TourPlannerException {
-        if (checkEmptyFlights(flights)) return;
+        if (checkEmptyFlights(flights)) {
+            return;
+        }
         show(SORT_FLIGHT_ID_MESSAGE);
         int listIndex = 1;
         for (String flightId : sortedIds) {
@@ -440,7 +452,9 @@ public class Ui {
      */
     public void showSortedFlightByReturn(FlightList flights, ArrayList<String> sortedFlightByArriveDates)
             throws TourPlannerException {
-        if (checkEmptyFlights(flights)) return;
+        if (checkEmptyFlights(flights)) {
+            return;
+        }
         show(SORT_FLIGHT_BY_ARRIVAL_MESSAGE);
         flights.initTempArray();
         int listIndex = 1;
@@ -460,7 +474,9 @@ public class Ui {
      */
     public void showSortedFlightByDeparture(FlightList flights, ArrayList<String> sortedFlightByDepartureDates)
             throws TourPlannerException {
-        if (checkEmptyFlights(flights)) return;
+        if (checkEmptyFlights(flights)) {
+            return;
+        }
         show(SORT_FLIGHT_BY_DEPARTURE_MESSAGE);
         flights.initTempArray();
         int listIndex = 1;
