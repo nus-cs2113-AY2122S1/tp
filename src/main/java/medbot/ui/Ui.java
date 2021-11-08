@@ -411,7 +411,7 @@ public class Ui {
                 + "Format: switch [VIEW_TYPE]" + END_LINE
                 + "If the switch command is called without any parameters," + END_LINE
                 + "the view that is switched to will depend on the current view." + END_LINE
-                + "(PATIENT_INFO --> MEDICAL_STAFF_INFO --> SCHEDULER --> PATIENT_INFO)" + END_LINE
+                + "(Patient Management --> Staff Management --> Scheduler --> Patient Management)" + END_LINE
                 + "Expected Output:" + END_LINE
                 + "[VIEW_TYPE_ASCI_TEXT_BANNER]" + END_LINE + END_LINE
                 + "View has been switched to [VIEW_TYPE]" + END_LINE;
@@ -498,6 +498,7 @@ public class Ui {
                     + "  \\ V / | || _| \\ \\/\\/ /          \n"
                     + "   \\_/ |___|___| \\_/\\_/           \n"
                     + "                                  ");
+            printOutput("View has been switched to Patient Management");
             break;
         case SCHEDULER:
             printOutput("  ___  ___ _  _ ___ ___  _   _ _    ___ ___ \n"
@@ -508,6 +509,7 @@ public class Ui {
                     + "  \\ V / | || _| \\ \\/\\/ /                    \n"
                     + "   \\_/ |___|___| \\_/\\_/                     \n"
                     + "                                            ");
+            printOutput("View has been switched to Scheduler");
             break;
         case MEDICAL_STAFF_INFO:
             printOutput("  ___ _____ _   ___ ___  \n"
@@ -521,11 +523,12 @@ public class Ui {
                     + "  \\ V / | || _| \\ \\/\\/ / \n"
                     + "   \\_/ |___|___| \\_/\\_/  \n"
                     + "                         ");
+            printOutput("View has been switched to Staff Management");
             break;
         default:
             break;
         }
-        printOutput("View has been switched to " + viewType);
+
     }
 
     /**
