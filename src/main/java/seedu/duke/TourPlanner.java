@@ -10,8 +10,13 @@ import seedu.duke.storage.ClientStorage;
 import seedu.duke.storage.FlightStorage;
 import seedu.duke.storage.TourStorage;
 
+import java.io.IOException;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  * Main entry-point of the TourPlanner application.
@@ -42,9 +47,30 @@ public class TourPlanner {
      * @param args not used
      */
     public static void main(String[] args) {
+        loadLogger();
         loadStorage();
         ui.showWelcome();
         runCommandLoopUntilExitCommand();
+    }
+
+    /**
+     * Sets up logger for TourPlanner.
+     */
+    private static void loadLogger() {
+        LogManager.getLogManager().reset();
+        logr.setLevel(Level.INFO);
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setLevel(Level.OFF);
+        logr.addHandler(consoleHandler);
+
+        try {
+            FileHandler fileHandler = new FileHandler("TourPlannerLogger.log");
+            fileHandler.setLevel(Level.ALL);
+            fileHandler.setFormatter(new SimpleFormatter());
+            logr.addHandler(fileHandler);
+        } catch (IOException e) {
+            logr.log(Level.SEVERE, "File logger not working", e);
+        }
     }
 
     /**
@@ -107,8 +133,8 @@ public class TourPlanner {
                 specificCommand.execute();
                 isExit = specificCommand.isExit();
             } catch (TourPlannerException e) {
-                System.out.println(e.getMessage());
-                logr.log(Level.INFO, e.getMessage());
+                ui.show(e.getMessage());
+                logr.warning(e.getMessage());
             } finally {
                 ui.showLine();
                 saveToStorage();
