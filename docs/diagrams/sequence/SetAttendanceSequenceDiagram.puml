@@ -2,104 +2,99 @@
 !include SequenceStyle.puml
 
 Actor User as user
-Participant ":Ui" as ui
 Participant ":Taa" as taa
-Participant "<<class>>\nParser" as parser
 Participant ":SetAttendanceCommand" as setAttendanceCommand
-Participant ":ModuleList" as moduleList
-Participant ":Module" as module
+Participant ":ClassList" as classList
+Participant ":TeachingClass" as teachingClass
+Participant ":StudentIndexArray" as studentIndexArray
 Participant ":StudentList" as studentList
 Participant ":Student" as student
 Participant ":AttendanceList" as attendanceList
 Participant ":Attendance" as attendance
 Participant ":Storage" as storage
 
+
+user -> taa : "set_attendance c/CS2113T-F12\ns/1-3 l/1 p/1"
 activate taa
-
-taa -> ui : getUserInput()
-activate ui
-
-user -> ui : "set_attendance c/CS2113T\ns/1 l/1 p/1"
-ui --> taa : userInput:String
-deactivate ui
-
-taa -> parser : parseUserInput(userInput)
-activate parser
-
-create setAttendanceCommand
-parser -> setAttendanceCommand
-activate setAttendanceCommand
-setAttendanceCommand -> parser
-deactivate setAttendanceCommand
-
-parser --> taa : setAttendanceCommand:command
-deactivate parser
-
-taa -> setAttendanceCommand : checkArgument()
+taa -> setAttendanceCommand : execute(classList:ClassList,\n ui:Ui, storage:Storage)
 activate setAttendanceCommand
 
-setAttendanceCommand --> taa
-deactivate setAttendanceCommand
+setAttendanceCommand -> classList : getClassWithId(classId:String)
+activate classList
+classList --> setAttendanceCommand : teachingClass:TeachingClass
+deactivate classList
 
-taa -> setAttendanceCommand : execute(moduleList:ModuleList, ui:Ui, storage:Storage)
-activate setAttendanceCommand
+create studentIndexArray
+setAttendanceCommand -> studentIndexArray : new StudentIndexArray()
+activate studentIndexArray
+studentIndexArray --> setAttendanceCommand : studentIndexes:StudentIndexArray
+deactivate studentIndexArray
 
-setAttendanceCommand -> moduleList : getModuleWithCode(moduleCode:String)
-activate moduleList
-moduleList --> setAttendanceCommand : module:Module
-deactivate moduleList
+setAttendanceCommand -> studentIndexArray : setStudentIndexes(studentIndexInput:String)
+activate studentIndexArray
+studentIndexArray --> setAttendanceCommand
+deactivate studentIndexArray
 
+setAttendanceCommand -> studentIndexArray : getSize()
+activate studentIndexArray
+studentIndexArray --> setAttendanceCommand : size:int
+deactivate studentIndexArray
 
-setAttendanceCommand -> module : getStudentList()
-activate module
-module --> setAttendanceCommand : studentList:StudentList
-deactivate module
+setAttendanceCommand -[hidden]-> studentIndexArray
+destroy studentIndexArray
 
-setAttendanceCommand -> studentList : getStudentAt(studentIndex:int)
-activate studentList
-studentList --> setAttendanceCommand : student:StudentList
-deactivate studentList
+loop size
+    setAttendanceCommand -> teachingClass : getStudentList()
+    activate teachingClass
+    teachingClass --> setAttendanceCommand : studentList:StudentList
+    deactivate teachingClass
 
-setAttendanceCommand -> student : getAttendanceList()
-activate student
-student --> setAttendanceCommand : attendanceList:AttendanceList
-deactivate student
+    setAttendanceCommand -> studentList : getStudentAt(studentIndex:int)
+    activate studentList
+    studentList --> setAttendanceCommand : student:StudentList
+    deactivate studentList
 
-setAttendanceCommand -> attendanceList : getAttendance(lessonNumber:int)
-activate attendanceList
-attendanceList --> setAttendanceCommand : attendance:Attendance
-deactivate attendanceList
+    setAttendanceCommand -> student : getAttendanceList()
+    activate student
+    student --> setAttendanceCommand : attendanceList:AttendanceList
+    deactivate student
 
-alt#Gold #LightGreen attendance==null
-    create attendance
-    setAttendanceCommand -> attendance : new Attendance(lessonNumber:int, isPresent:boolean)
-    activate attendance
-    attendance --> setAttendanceCommand : attendance:Attendance
-    deactivate attendance
-
-    setAttendanceCommand -> attendanceList : addAttendance(attendance:Attendance)
+    setAttendanceCommand -> attendanceList : getAttendance(lessonNumber:int)
     activate attendanceList
-    attendanceList --> setAttendanceCommand
+    attendanceList --> setAttendanceCommand : attendance:Attendance
     deactivate attendanceList
 
-else #LightBlue else
-    setAttendanceCommand -> attendance : setPresent(isPresent:boolean)
-    activate attendance
-    attendance --> setAttendanceCommand :
-    deactivate attendance
+    alt#Gold #LightGreen attendance==null
+        create attendance
+        setAttendanceCommand -> attendance : new Attendance(lessonNumber:int, isPresent:boolean)
+        activate attendance
+        attendance --> setAttendanceCommand : attendance:Attendance
+        deactivate attendance
+
+        setAttendanceCommand -> attendanceList : addAttendance(attendance:Attendance)
+        activate attendanceList
+        attendanceList --> setAttendanceCommand
+        deactivate attendanceList
+
+    else #LightBlue else
+        setAttendanceCommand -> attendance : setPresent(isPresent:boolean)
+        activate attendance
+        attendance --> setAttendanceCommand :
+        deactivate attendance
+    end
 end
 
-setAttendanceCommand -> storage : save(moduleList:ModuleList)
+setAttendanceCommand -> storage : save(classList:ClassList)
 activate storage
 storage --> setAttendanceCommand
 deactivate storage
 
-setAttendanceCommand -> ui : printMessage("Attendance set for ...")
-activate ui
-ui -> user : Display message:\n"Attendance set for ..."
-ui --> setAttendanceCommand
-deactivate ui
-
+setAttendanceCommand --> taa
 deactivate setAttendanceCommand
+taa -[hidden]-> setAttendanceCommand
+destroy setAttendanceCommand
+
+taa --> user
+deactivate taa
 
 @enduml

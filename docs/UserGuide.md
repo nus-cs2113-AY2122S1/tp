@@ -4,6 +4,7 @@ students. If you can type fast, TAA can help keep track of your classes and stud
 User Interface (GUI) apps.
 
 * [Quick Start](#quick-start)
+* [Quick Notes](#quick-notes)
 * [Features](#features)
   * [Class](#class)
     * [Listing all classes: `list_classes`](#listing-all-classes-list_classes)
@@ -52,8 +53,22 @@ User Interface (GUI) apps.
 2. Download the latest version of `Taa.jar` from [here](https://github.com/AY2122S1-CS2113T-F12-3/tp/releases).
 3. Create a new folder and place `Taa.jar` inside.
 4. Open Command Prompt/Terminal and navigate to the folder containing `Taa.jar`.
-5. Run `java -jar Taa.jar` in Command Prompt/Terminal to start the app.
+5. Run `java -jar Taa.jar` in Command Prompt/Terminal to start the app. <br>
+   ![QuickStart](images/quickstart/QuickStart.png)
 6. Enter `help` to display the list of available commands. See [Features](#features) for more information.
+
+## Quick Notes
+1. Parameters enclosed within `[  ]` are optional. Do refer to the specific command format to find out the correct way 
+to input your parameters.
+2. The character `|` in the command format parameters has the meaning of OR (e.g. `[n/Option 1 | m/Option 2]` means 
+Option 1 or Option 2)
+3. Allowed characters for values:
+   * Alphanumeric characters: `A-Z`, `a-z`
+   * Numeric characters: `0-9`
+   * Special characters: `-`, `_`, `(`, `)`, `.`, `,`
+   * Whitespaces (unless otherwise stated)
+4. If an entry in the data file `taa_data.json` is manually edited to an invalid entry (e.g. Integer to String), the 
+entry will be ignored.
 
 ## Features
 
@@ -108,7 +123,11 @@ Examples:
 * `edit_class c/CS2113T-F12 i/CS2113T-F13 n/Class-F13 of Software Engineering`
 
 Expected Output:<br>
+(Change name to `Class F12`) <br>
 ![EditClassesCommand](images/class/EditClassCommand.png)
+
+(Change name to empty) <br>
+![EditClassesCommand2](images/class/EditClassCommand2.png)
 
 <br>
 
@@ -216,9 +235,10 @@ Expected Output: <br>
 <hr>
 
 ### Assessment
-> 💡 **Note(s):**<br />
-> * If multiple input fields are incorrect, only one of the errors will be explicitly shown.
-> * For decimal values, only up to 2 decimal places will be displayed.
+> 💡 **Notes:**<br />
+> If multiple input fields are incorrect, only one of the errors will be explicitly shown.
+> For inputs accepting decimal, only up to 2 decimal places will be allowed.
+> Assessments with maximum marks and weightages of 0.00 are accepted taking into account the possibility of ungraded submissions without maximum marks that still need to be accounted for.
 
 #### Listing all assessments in a class: `list_assessments`
 List all assessments in a class.
@@ -241,8 +261,8 @@ Adds an assessment to a class.
 Format: `add_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME> m/<MAXIMUM_MARKS> w/<WEIGHTAGE>`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `ASSESSMENT_NAME` refers to the name of the assessment (e.g. Midterm, Assignment 1, etc.).
-* `MAXIMUM_MARKS` refers to the maximum marks of the assessment (e.g. 100).
-* `WEIGHTAGE` refers to the weightage of the assessment (e.g. 10%).
+* `MAXIMUM_MARKS` refers to the maximum marks of the assessment (e.g. 100). Input can only have 2 decimal places at most.
+* `WEIGHTAGE` refers to the weightage of the assessment (e.g. 10%). Input can only have 2 decimal places at most.
 
 Examples:
 * `add_assessment c/CS2101-C03 n/OP1 m/20 w/10`
@@ -260,8 +280,8 @@ Format: `edit_assessment c/<CLASS_ID> a/<ASSESSMENT_NAME> [n/<NEW_ASSESSMENT_NAM
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `ASSESSMENT_NAME` refers to the name of the assessment (e.g. Midterm, Assignment 1, etc.).
 * `NEW_ASSESSMENT_NAME` [Optional] refers to the new name of the assessment (e.g. Finals, Assignment 2, etc.).
-* `NEW_MAXIMUM_MARKS` [Optional] refers to the new maximum marks of the assessment (e.g. 50).
-* `NEW_WEIGHTAGE` [Optional] refers to the new weightage of the assessment (e.g. 20%).
+* `NEW_MAXIMUM_MARKS` [Optional] refers to the new maximum marks of the assessment (e.g. 50). Input can only have 2 decimal places at most.
+* `NEW_WEIGHTAGE` [Optional] refers to the new weightage of the assessment (e.g. 20%). Input can only have 2 decimal places at most.
 > 💡 **Note:**<br />
 > At least one optional field must be provided:
 > * `NEW_ASSESSMENT_NAME`
@@ -432,6 +452,12 @@ Expected Output: <br>
 <hr>
 
 ### Attendance
+
+> 💡 **Note:**<br />
+> Maximum number of lessons are capped at 1000. <br>
+> Reason: We assume that lessons occur no more than twice a day, and that a class lasts for a year at most.
+
+
 #### Listing attendance for a particular student: `list_attendance`
 Lists a student's attendance.
 
@@ -442,6 +468,9 @@ Format: `list_attendance c/<CLASS_ID> s/<STUDENT_INDEX>`
 Examples:
 * `list_attendance c/CS2113T-F12 s/1`
 * `list_attendance c/CS2101-D03 s/3`
+
+Expected Output: <br>
+![img.png](images/attendance/ListAttendanceCommand.png)
 
 <br>
 
@@ -455,6 +484,9 @@ Format: `list_lesson_attendance c/<CLASS_ID> l/<LESSON_NUMBER>`
 Examples:
 * `list_lesson_attendance c/CS2113T-F12 l/1`
 * `list_lesson_attendance c/CS2101-D03 l/3`
+
+Expected Output: <br>
+![img.png](images/attendance/ListLessonAttendanceCommand.png)
 
 <br>
 
@@ -471,6 +503,9 @@ Examples:
 * `set_attendance c/CS2113T-F12 s/1 l/1 p/1`
 * `set_attendance c/CS2113T-F12 s/3 l/2 p/0`
 
+Expected Output: <br>
+![img.png](images/attendance/SetAttendanceCommand(Single).png)
+
 <br>
 
 >This command also allows for the setting of multiple attendances.
@@ -485,24 +520,41 @@ Format: `set_attendance c/<CLASS_ID> s/<START_STUDENT_INDEX>-<END_STUDENT_INDEX>
 * `END_STUDENT_INDEX` refers to the end index of the student in the student list of the class.
 * `LESSON_NUMBER` refers to the lesson number.
 * `PRESENT` refers to the whether a student is present. (`1` for present, `0` for not present)
+> ❗ **Warning:**<br />
+> Do not use whitespace in the range of student indexes. <br>
+> ❌ e.g. set_attendance c/CS2113T-F12 <span style="color: red;">s/1 - 5</span> l/1 p/1
 
 Examples:
 * `set_attendance c/CS2113T-F12 s/1-5 l/1 p/1`
 * `set_attendance c/CS2101-D03 s/3-8 l/2 p/0`
 
+Expected Output: <br>
+![img.png](images/attendance/SetAttendanceCommand(Range).png)
+
 <br>
 
 Method 2: Sets the attendance for selected student indexes for a lesson.
 
-Format: `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX>,<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
+> 💡 **Note:**<br />
+> Multiple student indexes can be inputted. (Not limited to only 2)
+
+Format: `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX>,<STUDENT_INDEX>,... l/<LESSON_NUMBER> p/<PRESENT>`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 * `LESSON_NUMBER` refers to the lesson number.
 * `PRESENT` refers to the whether a student is present. (`1` for present, `0` for not present)
 
+> ❗ **Warning:**<br />
+> Do not use whitespace in the range of student indexes. <br>
+> ❌ e.g. set_attendance c/CS2113T-F12 <span style="color: red;">s/1 , 3, 5 </span> l/1 p/1
+
 Examples:
 * `set_attendance c/CS2113T-F12 s/1,3,5 l/1 p/1`
 * `set_attendance c/CS2101-D03 s/1,3,4,5,6 l/2 p/0`
+
+Expected Output: <br>
+![img.png](images/attendance/SetAttendanceCommand(Selected).png)
+
 
 <br>
 
@@ -517,6 +569,56 @@ Format: `delete_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER>`
 Examples:
 * `delete_attendance c/CS2113T-F12 s/1 l/1`
 * `delete_attendance c/CS2101-D03 s/4 l/2`
+
+Expected Output: <br>
+![img.png](images/attendance/DeleteAttendanceCommand(Single).png)
+
+>This command also allows for the deleting of multiple attendances.
+
+<br>
+
+Method 1: Deletes the attendance for a range of student indexes for a lesson.
+
+Format: `delete_attendance c/<CLASS_ID> s/<START_STUDENT_INDEX>-<END_STUDENT_INDEX> l/<LESSON_NUMBER>`
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
+* `START_STUDENT_INDEX` refers to the start index of the student in the student list of the class.
+* `END_STUDENT_INDEX` refers to the end index of the student in the student list of the class.
+* `LESSON_NUMBER` refers to the lesson number.
+
+> ❗ **Warning:**<br />
+> Do not use whitespace in the range of student indexes. <br>
+> ❌ e.g. delete_attendance c/CS2113T-F12 <span style="color: red;">s/1 - 5</span> l/1
+
+Examples:
+* `delete_attendance c/CS2113T-F12 s/1-5 l/1`
+* `delete_attendance c/CS2101-D03 s/3-8 l/2`
+
+Expected Output: <br>
+![img.png](images/attendance/DeleteAttendanceCommand(Range).png)
+
+<br>
+
+Method 2: Deletes the attendance for selected student indexes for a lesson.
+
+> 💡 **Note:**<br />
+> Multiple student indexes can be inputted. (Not limited to only 2)
+
+Format: `delete_attendance c/<CLASS_ID> s/<STUDENT_INDEX>,<STUDENT_INDEX>,... l/<LESSON_NUMBER>`
+* `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
+* `STUDENT_INDEX` refers to the index of the student in the student list of the class.
+* `LESSON_NUMBER` refers to the lesson number.
+
+> ❗ **Warning:**<br />
+> Do not use whitespace in the range of student indexes. <br>
+> ❌ e.g. delete_attendance c/CS2113T-F12 <span style="color: red;">s/1, 3, 5</span> l/1
+
+Examples:
+* `delete_attendance c/CS2113T-F12 s/1,3,5 l/1`
+* `delete_attendance c/CS2101-D03 s/1,3,4,5,6 l/2`
+
+Expected Output: <br>
+![img.png](images/attendance/DeleteAttendanceCommand(Selected).png)
+
 
 <br>
 <hr>
@@ -534,6 +636,7 @@ Examples:
 
 Expected Output: <br>
 ![img.png](images/students/ListCommentsCommand.png)
+
 <br>
 
 #### Setting comment for a particular student: `set_comment`
@@ -624,7 +727,6 @@ Expected Output: <br>
 **A**: Simply transfer the `data` folder to your new computer and ensure that it is in the same folder as the jar file.
 
 ## Command Summary
-`edit_class c/<CLASS_ID> [i/<NEW_CLASS_ID> | n/<NEW_CLASS_NAME>]`
 
 Category | Action | Format |
  ----- | ------ | --------------- |

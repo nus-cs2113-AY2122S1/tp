@@ -24,7 +24,7 @@ public class ParseStudentIndexes {
      */
     public static void getRange(String rangeInput) throws TaaException {
         String[] indexRange = rangeInput.split("-", NUMBER_OF_SPLIT);
-        if (!Util.isStringInteger(indexRange[0]) | !Util.isStringInteger(indexRange[1])) {
+        if (rangeInput.contains("--") | !Util.isStringInteger(indexRange[0]) | !Util.isStringInteger(indexRange[1])) {
             throw new TaaException(MESSAGE_INVALID_RANGE_FORMAT);
         }
         startIndex = Integer.parseInt(indexRange[0]);
@@ -41,8 +41,8 @@ public class ParseStudentIndexes {
     public static List<String> getIndexes(String selectionInput) throws TaaException {
         String[] indexes = selectionInput.split(",");
         List<String> studentIndexes = Arrays.asList(indexes);
-        for (int i = 0; i < studentIndexes.size(); i++) {
-            if (!Util.isStringInteger(studentIndexes.get(i))) {
+        for (String studentIndex : studentIndexes) {
+            if (!Util.isStringInteger(studentIndex)) {
                 throw new TaaException(MESSAGE_INVALID_SELECTED_FORMAT);
             }
         }

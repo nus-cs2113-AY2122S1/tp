@@ -40,8 +40,8 @@ public class StudentIndexArray {
      */
     public void setStudentIndexesForSelection(String selectionInput) throws TaaException {
         List<String> studentIndexStrings = ParseStudentIndexes.getIndexes(selectionInput);
-        for (int i = 0; i < studentIndexStrings.size(); i++) {
-            studentIndexes.add(Integer.parseInt(studentIndexStrings.get(i)));
+        for (String studentIndexString : studentIndexStrings) {
+            studentIndexes.add(Integer.parseInt(studentIndexString));
         }
     }
 

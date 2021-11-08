@@ -2,7 +2,7 @@
 
 ## Project: Teaching Assistant's Assistant (TAA)
 Teaching Assistant's Assistant (TAA) is a Command Line Interface (CLI) application for keeping track of classes and students.
-It is written in Java, and has about 9 kLoC.
+It is written in Java, and has about 6 kLoC.
 
 Given below are my contributions to the project.
 * **New Feature**: Added `Student` class.
@@ -27,7 +27,7 @@ Given below are my contributions to the project.
   * **Justification**: These commands are essential in allowing the user to add comment entries to their students to
   keep track of how each student is doing in the class.
 
-* **Code contributed**: [RepoSense link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2021-09-25&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=hozhenhong99&tabRepo=AY2122S1-CS2113T-F12-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
+* **Code contributed**: [RepoSense Link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&since=2021-09-25&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=hozhenhong99&tabRepo=AY2122S1-CS2113T-F12-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 * **Project management**:
   * Managed releases `v1.0` - `v2.1` (3 releases) on GitHub
