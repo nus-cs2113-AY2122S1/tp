@@ -324,6 +324,7 @@ Expected: An error will inform the user that the string or name does not exist i
   e.g. `view something` or `delete 1000` when only 2 expenses are added.
   <br>
   Expected: An error will inform the user that the expense number does not exist.
+
 - `view last` and `delete last` when you have already deleted your most recent expense.
 e.g. `delete last` followed by `delete last` or `view last`.
 <br>
