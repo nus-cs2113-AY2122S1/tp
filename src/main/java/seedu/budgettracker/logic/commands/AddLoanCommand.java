@@ -6,13 +6,17 @@ import seedu.budgettracker.ui.TextUi;
 import java.time.LocalDate;
 
 //@@author jyxhazcake
+
+/**
+ * Command which adds a loan to the record list.
+ */
 public class AddLoanCommand extends AddCommand {
     public String name;
     public double amount;
     LocalDate date;
 
     public static final String MESSAGE_USAGE = "Adds a loan record.\n"
-            + "Parameters: -l n/DEBTOR_NAME a/AMOUNT d/[DATE_OF_LOAN]\n"
+            + "Parameters: -l n/BORROWER_NAME a/AMOUNT d/[DATE_OF_LOAN]\n"
             + "Note: \n"
             + " * If DATE_OF_LOAN is not specified, the current system date will be the default value.";
 
@@ -20,9 +24,9 @@ public class AddLoanCommand extends AddCommand {
      * Constructor for when the user inputs only two parameters, leaving the optional
      * date parameter empty. In that case, the date is set to "today" by default.
      *
-     * @param name name of the person who borrowed from you, e.g. chicken rice
-     * @param amount amount spent for expenditure
-     * @param date date on which expenditure was made
+     * @param name name of the borrower
+     * @param amount amount loaned out
+     * @param date date on which the loan was made
      */
     public AddLoanCommand(String name, double amount, LocalDate date) {
         this.name = name;
@@ -37,7 +41,7 @@ public class AddLoanCommand extends AddCommand {
     }
 
     /**
-     * Adds an expenditure.
+     * Adds a loan to the record list.
      *
      * @param isLoadingStorage boolean to indicate if command is being executed during loading
      *                         or during normal runtime operation

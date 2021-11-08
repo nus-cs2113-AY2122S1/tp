@@ -7,6 +7,7 @@ import seedu.budgettracker.logic.parser.exceptions.ParserException;
 
 import java.util.HashMap;
 
+//@@author LS-Young
 public class ListRecordParser implements ParserPrefix {
     public static final String[] PREFIX_ARRAY = {PREFIX_MONTH, PREFIX_CATEGORY};
 

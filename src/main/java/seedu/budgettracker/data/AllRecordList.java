@@ -5,6 +5,7 @@ import seedu.budgettracker.data.records.Category;
 import seedu.budgettracker.data.records.Expenditure;
 import seedu.budgettracker.data.records.Loan;
 import seedu.budgettracker.data.records.exceptions.DuplicateBudgetException;
+import seedu.budgettracker.data.records.exceptions.EmptyRecordException;
 import seedu.budgettracker.storage.textfiletools.WriteToTextFile;
 import seedu.budgettracker.ui.TextUi;
 
@@ -17,6 +18,9 @@ import java.util.Hashtable;
  * where month ranges from 1 to 12.
  */
 public class AllRecordList {
+    public static final String MESSAGE_N0_BUDGET = "Your budget has not yet been set!"
+            + "Use 'add -b' or see help for more info";
+    public static final LocalDate DATE_EMPTY = LocalDate.of(9898, 1, 1);
     public static String storageDirectory;
     private final Hashtable<Integer, RecordList> allRecordList;
     protected int year;
@@ -95,6 +99,14 @@ public class AllRecordList {
         return addedExpenditure;
     }
 
+    /**
+     * Adds a loan record into the record list.
+     *
+     * @param name the name of the borrower
+     * @param amount how much the borrower owes you
+     * @param date the date of the loan
+     * @param isLoadingStorage whether this method is being run at setup or during runtime
+     */
     public void addLoan(String name, double amount, LocalDate date, boolean isLoadingStorage) {
         int month = date.getMonthValue();
         allRecordList.get(month).addLoan(name, amount, date);
@@ -103,54 +115,87 @@ public class AllRecordList {
         }
     }
 
-    //@@author yeoweihngwhyelab
-    public Budget editBudget(int month, double amount) {
+    /**
+     * Edits the budget amount previously set by the user.
+     *
+     * @param month the corresponding month of the selected budget
+     * @param amount the new amount to be set
+     * @return the edited Budget record
+     */
+    public Budget editBudget(int month, double amount) throws EmptyRecordException {
         Budget targetBudget = allRecordList.get(month).getBudget();
-        if (amount != 0.00) {
+        if (allRecordList.get(month).hasBudget()) {
             targetBudget.setAmount(amount);
+            saveToStorage(storageDirectory);
+        } else {
+            throw new EmptyRecordException(MESSAGE_N0_BUDGET);
         }
-
-        saveToStorage(storageDirectory);
-
         return targetBudget;
     }
 
-    //@@author yeoweihngwhyelab
+    /**
+     * Edits the expenditure previously set by the user.
+     *
+     * @param month the corresponding month of the selected expenditure
+     * @param index the index of the target expenditure
+     * @param amount the amount to be set, if any
+     * @param description the description to be set, if any
+     * @param date the date to be set, if any
+     * @param category the category to be set, if any
+     * @return the expenditure after editing
+     */
     public Expenditure editExpenditure(int month, int index, double amount,
-                                       String description, LocalDate date) {
+                                       String description, LocalDate date, Category category) {
         Expenditure targetExpenditure = allRecordList.get(month).getExpenditure(index);
 
+        setExpValues(amount, description, date, category, targetExpenditure);
+        saveToStorage(storageDirectory);
+        return targetExpenditure;
+    }
+
+    private void setExpValues(double amount, String description, LocalDate date,
+                                        Category category, Expenditure targetExpenditure) {
         if (amount != 0.00) {
             targetExpenditure.setAmount(amount);
         }
         if (!description.equals("")) {
             targetExpenditure.setDescription(description);
         }
-        if (!date.equals(LocalDate.now())) {
+        if (!date.equals(DATE_EMPTY)) {
             targetExpenditure.setDate(date);
         }
-
-        saveToStorage(storageDirectory);
-
-
-        return targetExpenditure;
+        if (!category.equals(Category.INVALID)) {
+            targetExpenditure.setCategory(category);
+        }
     }
 
+    /**
+     * Edits the loan previously set by the user.
+     *
+     * @param month the corresponding month of the selected expenditure
+     * @param index the index of the target expenditure
+     * @param amount the amount to be set, if any
+     * @param name the name to be set, if any
+     * @param date the date to be set, if any
+     * @return the loan after editing
+     */
     public Loan editLoan(int month, int index, double amount, String name, LocalDate date) {
         Loan targetLoan = allRecordList.get(month).getLoan(index);
+        setLoanValues(amount, name, date, targetLoan);
+        saveToStorage(storageDirectory);
+        return targetLoan;
+    }
+
+    private void setLoanValues(double amount, String name, LocalDate date, Loan targetLoan) {
         if (amount != 0.00) {
             targetLoan.setAmount(amount);
         }
         if (!name.equals("")) {
             targetLoan.setName(name);
         }
-        if (!date.equals(LocalDate.now())) {
+        if (!date.equals(DATE_EMPTY)) {
             targetLoan.setDate(date);
         }
-
-        saveToStorage(storageDirectory);
-
-        return targetLoan;
     }
 
     public void clearAll() {
@@ -160,16 +205,33 @@ public class AllRecordList {
         }
     }
 
+    /**
+     * Deletes the budget set specified by the month.
+     *
+     * @param month the target budget's month
+     */
     public void deleteBudget(int month) {
         allRecordList.get(month).deleteBudget();
         saveToStorage(storageDirectory);
     }
 
+    /**
+     * Deletes the expenditure specified by the month and index.
+     *
+     * @param index the target expenditure's index
+     * @param month the target expenditure's month
+     */
     public void deleteExpenditure(int index, int month) {
         allRecordList.get(month).deleteExpenditure(index);
         saveToStorage(storageDirectory);
     }
 
+    /**
+     * Deletes the loan specified by the month and index.
+     *
+     * @param index the target loan's index
+     * @param month the target loan's month
+     */
     public void deleteLoan(int index, int month) {
         allRecordList.get(month).deleteLoan(index);
         saveToStorage(storageDirectory);

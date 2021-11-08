@@ -91,7 +91,7 @@ class ParserUtilTest {
     @Test
     void parseDate_emptyString_LocalDateNow() {
         try {
-            assertEquals(ParserUtil.parseDate(""),LocalDate.now());
+            assertEquals(ParserUtil.parseDate("",true),LocalDate.of(9898,1,1));
         } catch (ParserException e) {
             fail();
         }
@@ -109,7 +109,7 @@ class ParserUtilTest {
     @Test
     void parseCategory_lowerCaseString_upperCaseString() {
         try {
-            assertEquals(ParserUtil.parseCategory("food"), Category.FOOD);
+            assertEquals(ParserUtil.parseCategory("food",false), Category.FOOD);
         } catch (ParserException e) {
             fail();
         }
@@ -118,7 +118,7 @@ class ParserUtilTest {
     @Test
     void parseCategory_emptyString_categoryGeneral() {
         try {
-            assertEquals(ParserUtil.parseCategory(""),Category.GENERAL);
+            assertEquals(ParserUtil.parseCategory("",true),Category.INVALID);
         } catch (ParserException e) {
             fail();
         }

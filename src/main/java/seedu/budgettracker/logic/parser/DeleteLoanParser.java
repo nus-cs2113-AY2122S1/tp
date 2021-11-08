@@ -10,6 +10,9 @@ import seedu.budgettracker.logic.parser.exceptions.ParserException;
 import java.util.HashMap;
 
 //@@author jyxhazcake
+/**
+ * Parser class for parsing user input into a DeleteLoanCommand.
+ */
 public class DeleteLoanParser implements ParserPrefix {
     public static final String[] PREFIX_ARRAY = {
         PREFIX_MONTH,
@@ -21,6 +24,10 @@ public class DeleteLoanParser implements ParserPrefix {
         int month = ParserUtil.parseMonth(argumentMap.get(PREFIX_MONTH),IS_COMPULSORY);
 
         String indexString = argumentMap.get(PREFIX_INDEX);
+        return parseDeleteCommand(month, indexString);
+    }
+
+    private static DeleteCommand parseDeleteCommand(int month, String indexString) throws ParserException {
         if (indexString.equals("")) {
             return new DeleteAllLoanCommand(month);
         } else if (indexString.contains("-")) {

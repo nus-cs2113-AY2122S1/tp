@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class RecordList {
+    public static final String MESSAGE_DUPLICATE_BUDGET = "You have already added a budget to this month! "
+            + "Use edit to change its value instead.";
     private final Budget budget;
     private final ArrayList<Expenditure> expenditureRecords;
     private final ArrayList<Loan> loanRecords;
@@ -26,14 +28,19 @@ public class RecordList {
         loanRecords = new ArrayList<>();
     }
 
+    /**
+     * Adds a budget to the record list.
+     *
+     * @param spendingLimit the budget's amount
+     * @throws DuplicateBudgetException if a budget is already set for the month
+     */
     public void addBudget(double spendingLimit) throws DuplicateBudgetException {
         if (!hasBudget) {
             budget.setAmount(spendingLimit);
             assert budget.getAmount() == spendingLimit;
             hasBudget = true;
         } else {
-            throw new DuplicateBudgetException("You have already added a budget to this month!\n"
-                    + "Use edit to change its value instead.");
+            throw new DuplicateBudgetException(MESSAGE_DUPLICATE_BUDGET);
         }
     }
 
@@ -55,24 +62,37 @@ public class RecordList {
     /**
      * Adds a loan record into the RecordList.
      *
-     * @param name description of the expenditure
-     * @param amount amount spent
-     * @param date date on which the expenditure took place
+     * @param name the borrower's name
+     * @param amount the amount borrowed
+     * @param date date on which the loan took place
      */
     public void addLoan(String name, double amount, LocalDate date) {
         loanRecords.add(new Loan(name, amount, date));
     }
 
+    /**
+     * Deletes the budget.
+     */
     public void deleteBudget() {
         budget.clearAmount();
         assert budget.getAmount() == 0.00;
         hasBudget = false;
     }
 
+    /**
+     * Deletes the specified expenditure.
+     *
+     * @param index the index of the target expenditure
+     */
     public void deleteExpenditure(int index) {
         expenditureRecords.remove(index);
     }
 
+    /**
+     * Deletes the specified loan.
+     *
+     * @param index the index of the target loan
+     */
     public void deleteLoan(int index) {
         loanRecords.remove(index);
     }
@@ -106,6 +126,14 @@ public class RecordList {
     }
 
     //@@author yeoweihngwhyelab
+    /**
+     * Retrieves the hasBudget boolean on whether the record list has a budget.
+     * @return a boolean on whether the budget exists
+     */
+    public boolean hasBudget() {
+        return hasBudget;
+    }
+
     /**
      * Returns the total amount spent on expenditures in this month.
      *

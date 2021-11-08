@@ -643,6 +643,16 @@ public class TextUi {
         System.out.println(FindCommand.DIVIDER);
     }
 
+    /**
+     * Prints a message out to the user with dividers.
+     * @param messages the message shown to the user
+     */
+    public static void showUser(String... messages) {
+        for (String message: messages) {
+            System.out.println(message);
+        }
+        printDivider();
+    }
 
     /**
      * Reads the text entered by the user.

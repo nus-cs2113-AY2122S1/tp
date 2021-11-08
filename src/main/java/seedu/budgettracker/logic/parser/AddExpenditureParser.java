@@ -9,6 +9,9 @@ import java.time.LocalDate;
 import java.util.HashMap;
 
 //@@author jyxhazcake
+/**
+ * Parser class for parsing user input into an AddExpenditureCommand.
+ */
 public class AddExpenditureParser implements ParserPrefix {
     public static final String[] PREFIX_ARRAY = {PREFIX_DESCRIPTION,
         PREFIX_AMOUNT,
@@ -20,8 +23,8 @@ public class AddExpenditureParser implements ParserPrefix {
 
         String description = ParserUtil.parseDescription(argumentMap.get(PREFIX_DESCRIPTION), IS_COMPULSORY);
         double amount = ParserUtil.parseAmount(argumentMap.get(PREFIX_AMOUNT), IS_COMPULSORY);
-        LocalDate date = ParserUtil.parseDate(argumentMap.get(PREFIX_DATE));
-        Category category = ParserUtil.parseCategory(argumentMap.get(PREFIX_CATEGORY));
+        LocalDate date = ParserUtil.parseDate(argumentMap.get(PREFIX_DATE),false);
+        Category category = ParserUtil.parseCategory(argumentMap.get(PREFIX_CATEGORY),false);
 
         return new AddExpenditureCommand(description, amount, date, category);
     }

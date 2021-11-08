@@ -56,6 +56,10 @@ public class Expenditure extends Record {
         return category.toString();
     }
 
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public void setDescription(String description) {
         this.description = description;
     }

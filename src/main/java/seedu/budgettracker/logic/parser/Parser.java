@@ -17,23 +17,37 @@ import seedu.budgettracker.logic.commands.YearCommand;
 
 import java.util.HashMap;
 
+import static seedu.budgettracker.common.Messages.MESSAGE_INCORRECT_OR_MISSING_INPUTS;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_ADD_COMMAND;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_COMMAND;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_DELETE_COMMAND;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_LIST_COMMAND;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_STAT_COMMAND;
+import static seedu.budgettracker.common.Messages.MESSAGE_MISSING_TYPE_INPUTS;
+import static seedu.budgettracker.common.Messages.MESSAGE_TOO_MANY_ARGUMENTS;
 import static seedu.budgettracker.common.Messages.MESSAGE_WARNING_INCORRECT_YEAR_FORMAT;
 
 /**
- * Main Parser class which parses user input into a {@Code Command}.
+ * Main Parser class which parses user input.
  */
 public class Parser {
 
     /** Offset required to convert between 1-indexing and 0-indexing.  */
-    public static final int DISPLAYED_INDEX_OFFSET = 1;
+    public static final int INDEX_OFFSET_DISPLAYED = 1;
+    public static final int INDEX_OFFSET_TYPE = 2;
 
     /** Offset after reading type identifier tag. */
     public static final int TYPE_IDENTIFIER_END_INDEX = 2;
+    public static final int TYPE_IDENTIFIER_START_INDEX = 0;
+
+    public static final int INDEX_SPLIT_ARRAY_TYPE = 0;
+    public static final int INDEX_SPLIT_ARRAY_PARAMS = 1;
+
+    public static final String PREFIX_TYPE_CATEGORY = "-c";
+    public static final String PREFIX_TYPE_YEAR = "-y";
+    public static final String PREFIX_TYPE_BUDGET = "-b";
+    public static final String PREFIX_TYPE_EXPENDITURE = "-e";
+    public static final String PREFIX_TYPE_LOAN = "-l";
 
     /**
      * Splits the user input into the command word and arguments.
@@ -53,46 +67,60 @@ public class Parser {
     /**
      * Splits the command arguments by their command prefixes.
      *
-     * @param commandParams the raw command arguments string
+     * @param prefixParams the raw command arguments string
      * @param prefixes an array of prefix strings that the command should split by
      * @return a HashMap of String keys and values, where keys are command prefixes,
      *     and values are their respective values
      */
-    public static HashMap<String, String> splitArgs(String commandParams, String[] prefixes) throws ParserException {
+    public static HashMap<String, String> splitArgs(String prefixParams, String[] prefixes) throws ParserException {
         int counter = 0;
         HashMap<String, String> argumentMap = new HashMap<>();
         for (String prefix : prefixes) {
-            if (!commandParams.contains(prefix)) {
+            if (!prefixParams.contains(prefix)) {
                 argumentMap.put(prefix, "");
                 continue;
             }
-            String argValue = findArgValue(commandParams, prefix);
+            String argValue = findArgValue(prefixParams, prefix);
             argumentMap.put(prefix, argValue);
             counter++;
         }
-        checkValidArguments(commandParams, counter);
+        checkValidArguments(prefixParams, counter);
         return argumentMap;
     }
 
     //@@author jyxhazcake
-    private static void checkValidArguments(String commandParams, int counter) throws ParserException {
-        String[] split = commandParams.split("[a-zA-Z]/");
-        if (split.length - 1 > counter) {
-            throw new ParserException("You have too many or incorrect arguments!");
+    /**
+     * Checks whether the arguments provided are valid.
+     *
+     * @param prefixParams the arguments from the user command with a "/" prefix
+     * @param counter a value that denotes the correct length of an array split by its arguments
+     * @throws ParserException if arguments are invalid
+     */
+    private static void checkValidArguments(String prefixParams, int counter) throws ParserException {
+        String[] split = prefixParams.split("[a-zA-Z]/");
+        if (split.length - INDEX_OFFSET_DISPLAYED > counter) {
+            throw new ParserException(MESSAGE_TOO_MANY_ARGUMENTS);
         }
-        if (!split[0].trim().equals("")) {
-            throw new ParserException("Your inputs are missing or incorrect!");
+        if (!split[INDEX_SPLIT_ARRAY_TYPE].trim().equals("")) {
+            throw new ParserException(MESSAGE_INCORRECT_OR_MISSING_INPUTS);
         }
     }
 
     //@@author jyxhazcake
-    private static String findArgValue(String commandParams, String prefix) {
-        int startIndex = commandParams.indexOf(prefix) + 2;
-        String substring = commandParams.substring(startIndex);
+    /**
+     * Finds the value of the argument from the corresponding prefix.
+     *
+     * @param prefixParams the arguments from the user command with a "/" prefix
+     * @param prefix a string which denotes the type of arguments (e.g. "n/", "d/", etc.)
+     * @return the argument value that corresponds to the prefix
+     */
+    private static String findArgValue(String prefixParams, String prefix) {
+        int startIndex = prefixParams.indexOf(prefix) + INDEX_OFFSET_TYPE;
+        String substring = prefixParams.substring(startIndex);
         String argValue;
         if (substring.contains("/")) {
-            int endIndex = substring.indexOf("/") - 2;
-            argValue = substring.substring(0, endIndex);
+            int endIndex = substring.indexOf("/") - INDEX_OFFSET_TYPE;
+            argValue = substring.substring(TYPE_IDENTIFIER_START_INDEX, endIndex);
         } else {
             argValue = substring;
         }
@@ -107,8 +135,8 @@ public class Parser {
      */
     public Command parseCommand(String userInput) throws ArrayIndexOutOfBoundsException {
         String[] commandTypeAndParams = splitCommandWordAndArgs(userInput);
-        String commandType = commandTypeAndParams[0];
-        String commandParams = commandTypeAndParams[1].trim();
+        String commandType = commandTypeAndParams[INDEX_SPLIT_ARRAY_TYPE];
+        String commandParams = commandTypeAndParams[INDEX_SPLIT_ARRAY_PARAMS].trim();
         assert commandType.equals(commandType.toLowerCase());
         Command command;
         try {
@@ -147,7 +175,7 @@ public class Parser {
                 command = new DbCommand();
                 break;
             default:
-                command = new InvalidCommand("Sorry. I don't understand your command!");
+                command = new InvalidCommand(MESSAGE_INVALID_COMMAND);
                 break;
             }
         } catch (ParserException e) {
@@ -156,14 +184,21 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Splits the stat command parameters into its respective type and parses accordingly.
+     *
+     * @param commandParams the arguments from the user command after the command keyword
+     * @return the corresponding Command for the input
+     * @throws ParserException if arguments are invalid
+     */
     //@@author yeoweihngwhyelab
     private Command prepareStatCommand(String commandParams) throws ParserException {
-        String statOption = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
+        String statOption = commandParams.substring(TYPE_IDENTIFIER_START_INDEX, TYPE_IDENTIFIER_END_INDEX);
         String statParams = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
         switch (statOption) {
-        case ("-c"):
+        case (PREFIX_TYPE_CATEGORY):
             return StatCategoryParser.parse(statParams);
-        case ("-y"):
+        case (PREFIX_TYPE_YEAR):
             return StatYearParser.parse(statParams);
         default:
             return new InvalidCommand(MESSAGE_INVALID_STAT_COMMAND);
@@ -171,51 +206,66 @@ public class Parser {
     }
 
     //@@author jyxhazcake
+    /**
+     * Splits the edit command parameters into its respective type and parses accordingly.
+     *
+     * @param commandParams the arguments from the user command after the command keyword
+     * @return the corresponding Command for the input
+     * @throws ParserException if arguments are invalid
+     */
     private Command prepareEditCommand(String commandParams) throws ParserException {
         try {
-            String editOption = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
+            String editOption = commandParams.substring(TYPE_IDENTIFIER_START_INDEX, TYPE_IDENTIFIER_END_INDEX);
             String paramsToEdit = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
             switch (editOption) {
-            case ("-b"):
+            case (PREFIX_TYPE_BUDGET):
                 return EditBudgetParser.parse(paramsToEdit);
-            case ("-e"):
+            case (PREFIX_TYPE_EXPENDITURE):
                 return EditExpenditureParser.parse(paramsToEdit);
-            case ("-l"):
+            case (PREFIX_TYPE_LOAN):
                 return EditLoanParser.parse(paramsToEdit);
             default:
-                return new InvalidCommand("Missing inputs! Please indicate '-e', '-b' or '-l");
+                return new InvalidCommand(MESSAGE_MISSING_TYPE_INPUTS);
             }
         } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
-            throw new ParserException("Missing type parameters! Make sure to indicate '-b','-e' or '-l'");
+            throw new ParserException(String.format(MESSAGE_MISSING_TYPE_INPUTS, EditCommand.MESSAGE_USAGE));
         }
     }
 
+    /**
+     * Prepares the list command for parsing.
+     *
+     * @param commandParams the arguments from the user command after the command keyword
+     * @return the corresponding Command for the input
+     * @throws ParserException if arguments are invalid
+     */
     //@@author yeoweihngwhyelab
     private Command prepareListMonthCommand(String commandParams) throws ParserException {
         try {
             return ListRecordParser.parse(commandParams);
-        } catch (StringIndexOutOfBoundsException e) {
+        } catch (StringIndexOutOfBoundsException | NumberFormatException e) {
             throw new ParserException(String.format(MESSAGE_INVALID_LIST_COMMAND, ListRecordsCommand.MESSAGE_USAGE));
         }
     }
 
     //@@author jyxhazcake
     /**
-     * Splits params into the different add commands.
+     * Splits the add command parameters into its respective type and parses accordingly.
      *
-     * @param commandParams raw String commandParams
-     * @return AddBudgetCommand or AddExpenditureCommand depending on the addType
+     * @param commandParams the arguments from the user command after the command keyword
+     * @return the corresponding Command for the input
+     * @throws ParserException if arguments are invalid
      */
     private Command prepareAddCommand(String commandParams) throws ParserException {
         try {
-            String addType = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
+            String addType = commandParams.substring(TYPE_IDENTIFIER_START_INDEX, TYPE_IDENTIFIER_END_INDEX);
             String addParams = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
             switch (addType) {
-            case ("-b"):
+            case (PREFIX_TYPE_BUDGET):
                 return AddBudgetParser.parse(addParams);
-            case ("-e"):
+            case (PREFIX_TYPE_EXPENDITURE):
                 return AddExpenditureParser.parse(addParams);
-            case ("-l"):
+            case (PREFIX_TYPE_LOAN):
                 return AddLoanParser.parse(addParams);
             default:
                 return new InvalidCommand(MESSAGE_INVALID_COMMAND);
@@ -226,6 +276,13 @@ public class Parser {
 
     }
 
+    /**
+     * Prepares the find command for parsing.
+     *
+     * @param commandParams the arguments from the user command after the command keyword
+     * @return the corresponding Command for the input
+     * @throws ParserException if arguments are invalid
+     */
     //@@author yeoweihngwhyelab
     private Command prepareFindCommand(String commandParams) throws ParserException {
         try {
@@ -261,14 +318,14 @@ public class Parser {
      */
     private Command prepareDeleteCommand(String commandParams) throws ParserException {
         try {
-            String deleteType = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
+            String deleteType = commandParams.substring(TYPE_IDENTIFIER_START_INDEX, TYPE_IDENTIFIER_END_INDEX);
             String deleteParams = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
             switch (deleteType) {
-            case ("-b"):
+            case (PREFIX_TYPE_BUDGET):
                 return DeleteBudgetParser.parse(deleteParams);
-            case ("-e"):
+            case (PREFIX_TYPE_EXPENDITURE):
                 return DeleteExpenditureParser.parse(deleteParams);
-            case ("-l"):
+            case (PREFIX_TYPE_LOAN):
                 return DeleteLoanParser.parse(deleteParams);
             default:
                 return new InvalidCommand(MESSAGE_INVALID_COMMAND);
