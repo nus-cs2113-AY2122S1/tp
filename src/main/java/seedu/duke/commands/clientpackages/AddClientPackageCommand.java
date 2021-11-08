@@ -34,8 +34,8 @@ public class AddClientPackageCommand extends Command {
     @Override
     public void execute() {
         createClientPackage();
-        ArrayList<ClientPackage> cPackages = clientPackages.getClientPackages();
-        for (ClientPackage currClientPackage : cPackages) {
+        ArrayList<ClientPackage> checkClientPackage = clientPackages.getClientPackages();
+        for (ClientPackage currClientPackage : checkClientPackage) {
             boolean sameId = currClientPackage.getId().equals(clientPackage.getId());
             if (sameId) {
                 System.out.println(ERROR_CLIENT_PACKAGE_ID_EXISTS);
@@ -62,8 +62,8 @@ public class AddClientPackageCommand extends Command {
      */
     public void executeStorage() {
         createClientPackage();
-        ArrayList<ClientPackage> cPackages = clientPackages.getClientPackages();
-        for (ClientPackage currClientPackage : cPackages) {
+        ArrayList<ClientPackage> checkClientPackage = clientPackages.getClientPackages();
+        for (ClientPackage currClientPackage : checkClientPackage) {
             boolean sameId = currClientPackage.getId().equals(clientPackage.getId());
             if (sameId) {
                 System.out.println(ERROR_CLIENT_PACKAGE_ID_EXISTS);

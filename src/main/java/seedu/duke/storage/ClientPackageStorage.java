@@ -68,11 +68,11 @@ public class ClientPackageStorage {
      * using AddClientPackageCommand.
      *
      * @param clients list of clients retrieved from storage file
-     * @param tours list of tours retrieved from storage file
+     * @param tours   list of tours retrieved from storage file
      * @param flights list of flights retrieved from storage file
-     * @param ui user interface used to display messages to the user
+     * @param ui      user interface used to display messages to the user
      * @throws TourPlannerException if FileNotFoundException or NumberFormatException thrown
-     * due to corrupted or missing file
+     *                              due to corrupted or missing file
      * @see AddClientPackageCommand
      * @see FileNotFoundException
      * @see NumberFormatException
@@ -135,7 +135,7 @@ public class ClientPackageStorage {
     }
 
     /**
-     * Loops through clientPackages and writes into storage file for ClientPackage
+     * Loops through clientPackages and writes into storage file for ClientPackage.
      */
     public void saveFile() {
         try {
