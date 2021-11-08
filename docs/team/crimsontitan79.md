@@ -32,7 +32,7 @@ based navigation, MedBot allows head nurses to complete their management tasks d
       * Sequence diagram for `Storage`.
 
 * Review/mentoring contributions
-    * Fix bugs from other components when they arise. (e.g. erroneous UI print messages )
+    * Fix bugs from other components when they arise. (e.g. erroneous UI print messages)
     * Occasional PR reviews: [link](https://github.com/AY2122S1-CS2113-T13-1/tp/pull/46).
 
 * Team-based tasks
