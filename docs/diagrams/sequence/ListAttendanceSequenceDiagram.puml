@@ -1,0 +1,47 @@
+@startuml
+!include SequenceStyle.puml
+
+Actor User as user
+Participant ":Taa" as taa
+Participant ":ListAttendanceCommand" as listAttendanceCommand
+Participant ":ClassList" as classList
+Participant ":TeachingClass" as teachingClass
+Participant ":StudentList" as studentList
+Participant ":Student" as student
+
+user -> taa : "list_attendance \nc/CS2113T-F12 s/1"
+activate taa
+
+taa -> listAttendanceCommand : execute(classList:ClassList, ui:Ui, storage:Storage)
+activate listAttendanceCommand
+
+listAttendanceCommand -> classList : getClassWithId(classId:String)
+activate classList
+classList --> listAttendanceCommand : teachingClass:TeachingClass
+deactivate classList
+
+
+listAttendanceCommand -> teachingClass : getStudentList()
+activate teachingClass
+teachingClass --> listAttendanceCommand : studentList:StudentList
+deactivate teachingClass
+
+listAttendanceCommand -> studentList : getStudentAt(studentIndex:int)
+activate studentList
+studentList --> listAttendanceCommand : student:StudentList
+deactivate studentList
+
+listAttendanceCommand -> student : getAttendanceList()
+activate student
+student --> listAttendanceCommand : attendanceList:AttendanceList
+deactivate student
+
+listAttendanceCommand --> taa
+deactivate listAttendanceCommand
+taa -[hidden]-> listAttendanceCommand
+destroy listAttendanceCommand
+
+taa --> user
+deactivate taa
+
+@enduml

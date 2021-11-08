@@ -1,0 +1,15 @@
+@startuml
+!include ClassStyle.puml
+
+class Util {
+    {static}+isStringInteger(string: String): boolean
+    {static}+isStringDouble(string: String): boolean
+    {static}+isStringBoolean(string: String): boolean
+    {static}+fileExists(filename: String): boolean
+    {static}+createFile(filename: String): void
+    {static}+getAbsolutePath(pathStr: String): String
+    {static}+isFile(path: String): boolean
+    {static}+isFolder(path: String): boolean
+}
+
+@enduml

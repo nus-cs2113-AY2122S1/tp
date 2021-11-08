@@ -1,0 +1,80 @@
+@startuml
+!include SequenceStyle.puml
+
+Actor User as user
+Participant ":Taa" as taa
+Participant ":DeleteAttendanceCommand" as deleteAttendanceCommand
+Participant ":ClassList" as classList
+Participant ":StudentIndexArray" as studentIndexArray
+Participant ":TeachingClass" as teachingClass
+Participant ":StudentList" as studentList
+Participant ":Student" as student
+Participant ":AttendanceList" as attendanceList
+Participant ":Storage" as storage
+
+
+user -> taa : "delete_attendance \nc/CS2113T-F12 s/1-3 l/1"
+activate taa
+taa -> deleteAttendanceCommand : execute(classList:ClassList,\n ui:Ui, storage:Storage)
+activate deleteAttendanceCommand
+
+deleteAttendanceCommand -> classList : getClassWithId(classId:String)
+activate classList
+classList --> deleteAttendanceCommand : teachingClass:TeachingClass
+deactivate classList
+
+create studentIndexArray
+deleteAttendanceCommand -> studentIndexArray : new StudentIndexArray()
+activate studentIndexArray
+studentIndexArray --> deleteAttendanceCommand : studentIndexes:StudentIndexArray
+deactivate studentIndexArray
+
+deleteAttendanceCommand -> studentIndexArray : setStudentIndexes(studentIndexInput:String)
+activate studentIndexArray
+studentIndexArray --> deleteAttendanceCommand
+deactivate studentIndexArray
+
+deleteAttendanceCommand -> studentIndexArray : getSize()
+activate studentIndexArray
+studentIndexArray --> deleteAttendanceCommand : size:int
+deactivate studentIndexArray
+
+deleteAttendanceCommand -[hidden]-> studentIndexArray
+destroy studentIndexArray
+
+loop size
+    deleteAttendanceCommand -> teachingClass : getStudentList()
+    activate teachingClass
+    teachingClass --> deleteAttendanceCommand : studentList:StudentList
+    deactivate teachingClass
+
+    deleteAttendanceCommand -> studentList : getStudentAt(studentIndex:int)
+    activate studentList
+    studentList --> deleteAttendanceCommand : student:StudentList
+    deactivate studentList
+
+    deleteAttendanceCommand -> student : getAttendanceList()
+    activate student
+    student --> deleteAttendanceCommand : attendanceList:AttendanceList
+    deactivate student
+
+    deleteAttendanceCommand -> attendanceList : deleteAttendance(lessonNumInput:String)
+    activate attendanceList
+    attendanceList --> deleteAttendanceCommand : attendance:Attendance
+    deactivate attendanceList
+end
+
+deleteAttendanceCommand -> storage : save(classList:ClassList)
+activate storage
+storage --> deleteAttendanceCommand
+deactivate storage
+
+deleteAttendanceCommand --> taa
+deactivate deleteAttendanceCommand
+taa -[hidden]-> deleteAttendanceCommand
+destroy deleteAttendanceCommand
+
+taa --> user
+deactivate taa
+
+@enduml

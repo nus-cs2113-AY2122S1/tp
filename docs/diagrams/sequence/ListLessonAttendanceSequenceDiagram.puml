@@ -1,0 +1,49 @@
+@startuml
+!include SequenceStyle.puml
+
+Actor User as user
+Participant ":Taa" as taa
+Participant ":ListLessonAttendanceCommand" as listLessonAttendanceCommand
+Participant ":ClassList" as classList
+Participant ":TeachingClass" as teachingClass
+Participant ":LessonAttendanceList" as lessonAttendanceList
+
+
+user -> taa : "list_lesson_attendance \nc/CS2113T-F12 l/1"
+activate taa
+
+taa -> listLessonAttendanceCommand : execute(classList:ClassList, \nui:Ui, storage:Storage)
+activate listLessonAttendanceCommand
+
+listLessonAttendanceCommand -> classList : getClassWithId(classId:String)
+activate classList
+classList --> listLessonAttendanceCommand : teachingClass:TeachingClass
+deactivate classList
+
+
+listLessonAttendanceCommand -> teachingClass : getStudentList()
+activate teachingClass
+teachingClass --> listLessonAttendanceCommand : studentList:StudentList
+deactivate teachingClass
+
+create lessonAttendanceList
+listLessonAttendanceCommand -> lessonAttendanceList : new LessonAttendanceList()
+activate lessonAttendanceList
+lessonAttendanceList --> listLessonAttendanceCommand : lessonAttendances:lessonAttendanceList
+deactivate lessonAttendanceList
+
+listLessonAttendanceCommand -> lessonAttendanceList : setLessonAttendances(studentList:StudentList, lessonNumber:int)
+activate lessonAttendanceList
+lessonAttendanceList --> listLessonAttendanceCommand :
+deactivate lessonAttendanceList
+
+listLessonAttendanceCommand --> taa
+deactivate listLessonAttendanceCommand
+taa -[hidden]-> listLessonAttendanceCommand
+destroy listLessonAttendanceCommand
+
+taa --> user
+deactivate taa
+
+
+@enduml

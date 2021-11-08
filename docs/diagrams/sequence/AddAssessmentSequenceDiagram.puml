@@ -1,0 +1,55 @@
+@startuml
+!include SequenceStyle.puml
+
+Actor User as user
+Participant ":Taa" as taa
+Participant ":AddAssessmentCommand" as addAssessmentCommand
+Participant ":ClassList" as classList
+Participant ":TeachingClass" as teachingClass
+Participant ":AssessmentList" as assessmentList
+Participant ":Assessment" as assessment
+Participant ":Storage" as storage
+
+user -> taa : "add_assessment c/CS2113T-F12\nn/Finals m/100 w/30"
+activate taa
+
+taa -> addAssessmentCommand : execute(classList:ClassList\nui:Ui, storage:Storage)
+activate addAssessmentCommand
+
+addAssessmentCommand -> classList : getClassWithId("CS2113T-F12")
+activate classList
+classList --> addAssessmentCommand : teachingClass:TeachingClass
+deactivate classList
+
+alt teachingClass != null
+create assessment
+addAssessmentCommand -> assessment
+activate assessment
+assessment --> addAssessmentCommand : assessment:Assessment
+deactivate assessment
+
+addAssessmentCommand -> teachingClass : getAssessmentList()
+activate teachingClass
+teachingClass --> addAssessmentCommand
+deactivate teachingClass
+
+addAssessmentCommand -> assessmentList : addAssessment(assessment)
+activate assessmentList
+assessmentList --> addAssessmentCommand
+deactivate assessmentList
+
+addAssessmentCommand -> storage : save(classList)
+activate storage
+storage --> addAssessmentCommand
+deactivate storage
+end
+
+addAssessmentCommand --> taa
+deactivate addAssessmentCommand
+taa -[hidden]-> addAssessmentCommand
+destroy addAssessmentCommand
+
+taa --> user
+deactivate taa
+
+@enduml

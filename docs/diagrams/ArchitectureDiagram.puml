@@ -1,0 +1,41 @@
+@startuml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+!include sequence/SequenceStyle.puml
+
+skinparam Class {
+    FontColor #FFFFFF
+    BorderThickness 1
+    BorderColor #FFFFFF
+    StereotypeFontColor #FFFFFF
+    FontName Arial
+}
+
+Class "<$user>" as User #Red
+Class "<$documents>" as File #Gray
+
+Package " "<<Rectangle>>{
+    Class UI #ForestGreen
+    Class Taa #Blue
+    Class Storage #DarkGoldenRod
+    Class Main #IndianRed
+    Class Command #DarkSlateBlue
+    Class ClassList #DarkRed
+    Class Parser #Navy
+    Class Util #LightSeaGreen
+}
+
+User <-down-> UI
+UI -down-> Taa
+Main -right-> Taa
+Taa <-down-> Parser
+Taa -right-> Command
+Command <-down-> Util
+Command -up-> UI
+Command -down-> Storage
+Storage -up-> Taa
+Storage <-down-> File
+Command <-right-> ClassList
+
+@enduml
