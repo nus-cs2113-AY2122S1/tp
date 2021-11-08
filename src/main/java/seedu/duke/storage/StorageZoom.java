@@ -1,11 +1,7 @@
 package seedu.duke.storage;
 
-
-<<<<<<< HEAD
 import seedu.duke.exceptions.zoom.InvalidOpenRequestException;
-=======
 import seedu.duke.exceptions.ClickException;
->>>>>>> 5df332fea3894b6168dfbd14b62886a3e9006c9f
 import seedu.duke.exceptions.zoom.InvalidZoomDataPath;
 import seedu.duke.exceptions.zoom.InvalidZoomLinkException;
 import seedu.duke.exceptions.zoom.ModuleNotFoundException;
