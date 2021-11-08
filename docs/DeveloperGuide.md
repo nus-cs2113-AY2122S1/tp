@@ -4,21 +4,20 @@
 * [Setting Up, getting started](#setting-up-getting-started)
 * [Design](#design)
   * [Architecture](#architecture)
+  * [Command Component](#command-component)
+  * [Game Component](#game-component)
+  * [Content Component](#choose-the-game-content)
 * [Implementation](#implementation)
 * [Product Scope](#product-scope)
 * [User Stories](#user-stories)
-* [Non-functional Requirements](#non-functional-requirements)
 * [Glossary](#glossary)
+* [Manual Testing](#instructions-for-manual-testing)
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, 
-and third-party libraries -- include links to the original source as well}
 * [reference code for testing System.out.println()](https://www.baeldung.com/java-testing-system-out-println)
-* https://github.com/fastily/jwiki
-
-## Setting Up, getting started
-{Instruction to set up project in intellij}
+* [reference code for accessing wiki](https://github.com/fastily/jwiki)
+* [SE-EDU AB3 Developer Guide Format](https://se-education.org/addressbook-level3/DeveloperGuide.html)
 
 ## Design
 
@@ -102,10 +101,6 @@ The Sequence Diagram below illustrates the working process of the `TimeLimitGame
 
 <img src="images/TimeGame_SequenceDiagram.png" height="576"/>
 
-## Implementation
-
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
-
 ### Choose the game content
 
 Once the game starts, the main class instantiates a Content object containing a string, which is set to a default 
@@ -127,6 +122,7 @@ There only exists one private content string for all sessions. Each time a set m
 depending on the choices that the user made throughout the process. Whenever the user starts a game, the getContent() 
 method is called and the text is set accordingly.
 
+## Implementation
 
 ### \[Proposed\] View Statistics feature
 #### \[Proposed Implementation\]

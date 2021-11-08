@@ -10,7 +10,7 @@
    4. [Clear history](#34-clear-past-records-clear)
    5. [Display Summary](#35-view-summary-of-game)
    6. [Save Data](#36-saving-the-data)
-   7. [Man Pages]
+   7. [Man Pages](#37-man-pages-man)
 4. [FAQ](#faq)
 5. [Command Summary](#command-summary)
 
