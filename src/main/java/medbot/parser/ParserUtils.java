@@ -358,7 +358,7 @@ public abstract class ParserUtils {
      * @throws MedBotParserException when the person type cannot be parsed.
      */
     public static PersonType parsePersonType(String string) throws MedBotParserException {
-        String attributeSpecifier = string.substring(0, PARAMETER_BUFFER);
+        String attributeSpecifier = string.trim();
         if (attributeSpecifier.equals(PARAMETER_PATIENT)) {
             return PersonType.PATIENT;
         }
