@@ -3,7 +3,7 @@ package seedu.duke.commons.core;
 import static seedu.duke.ui.Ui.PADDING;
 
 //@@author Roycius
-public class CommandFormat {
+public final class CommandFormat {
     public static final String ADD_TASK_FORMAT =
             "add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}";
 
@@ -33,6 +33,9 @@ public class CommandFormat {
 
     public static final String DONE_TASK_FORMAT =
             "done task [INDEX]";
+
+    public static final String EDIT_MODULE_FORMAT =
+            "edit module [MODULE_CODE] -g {GRADE}";
 
     public static final String FIND_TASK_FORMAT =
             "find task [KEYWORD]";

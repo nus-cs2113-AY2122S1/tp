@@ -415,7 +415,7 @@ public class Ui {
      *
      * @param module the module object whose grade has been changed
      */
-    public void printModuleWithGradeChanged(Module module) {
+    public void printModuleGradeChanged(Module module) {
         System.out.print(LINE);
         System.out.println(PADDING + "You have changed your grade for this module: ");
         System.out.println(PADDING + "   " + module);

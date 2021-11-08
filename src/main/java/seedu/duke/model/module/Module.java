@@ -1,10 +1,13 @@
 package seedu.duke.model.module;
 
-import seedu.duke.commons.core.Message;
-import seedu.duke.ui.Ui;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import seedu.duke.commons.core.Message;
+import seedu.duke.model.module.exceptions.InvalidGradeException;
+import seedu.duke.ui.Ui;
+
+import static seedu.duke.commons.core.Grade.isValid;
 
 //@@author ptejasv
 public class Module {
@@ -20,14 +23,12 @@ public class Module {
     private String grade;
 
     public Module(String moduleCode, String title, String moduleCredit) {
-        // subject to change
         this.moduleCode = moduleCode;
         this.title = title;
         this.moduleCredit = moduleCredit;
     }
 
     public Module(String moduleCode, String title, String moduleCredit, String grade) {
-        // subject to change
         this.moduleCode = moduleCode;
         this.title = title;
         this.moduleCredit = moduleCredit;
@@ -71,10 +72,6 @@ public class Module {
     }
 
     //@@author rebchua39
-    public void setGrade(String grade) {
-        this.grade = grade;
-    }
-
     public String getGrade() {
         return grade;
     }
@@ -108,9 +105,15 @@ public class Module {
         }
     }
 
+    public void setGrade(String grade) throws InvalidGradeException {
+        if (!isValid(grade)) {
+            throw new InvalidGradeException("Invalid grade");
+        }
+        this.grade = grade;
+    }
+
     //@@author Roycius
     public String serialize() {
-        // subject to change
         return moduleCode + " | " + title + " | " + moduleCredit + " | " + grade;
     }
 
@@ -131,6 +134,7 @@ public class Module {
         }
     }
 
+    //@@author richwill28
     /**
      * Returns the full module information as a string in a ready to print format. This should only be called
      * on a module retrieved from FullModuleList.

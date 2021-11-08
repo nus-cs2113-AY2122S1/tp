@@ -3,7 +3,6 @@ package seedu.duke.logic.parser;
 import org.junit.jupiter.api.Test;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.lesson.AddLessonCommand;
-import seedu.duke.logic.commands.module.SetGradeCommand;
 import seedu.duke.logic.commands.task.AddTaskCommand;
 import seedu.duke.logic.commands.task.DoneTaskCommand;
 import seedu.duke.DukeException;
@@ -138,34 +137,46 @@ public class ParserTest {
         assertThrows(DukeException.class, (() -> Parser.parse(userResponse)));
     }
 
-    //@@author rebchua39
+    //@@author ptejasv
     @Test
-    public void testSetGrade() {
-        String userResponse = "set grade cs1010 b";
-        try {
-            Command command = Parser.parse(userResponse);
-            assertTrue(command instanceof SetGradeCommand);
-        } catch (DukeException e) {
-            fail();
-        }
+    public void parseListLessons_invalidArgument_exceptionThrown() {
+        String userResponse = "list lesson invalid";
+        assertThrows(DukeException.class, (() -> Parser.parse(userResponse)));
     }
 
     @Test
-    public void setGrade_indexNotANumber_exceptionThrown() {
-        String userResponse = "set grade n m";
-        assertThrows(DukeException.class, () -> Parser.parse(userResponse));
+    public void parseListTasks_invalidArgument_exceptionThrown() {
+        String userResponse = "list task invalid";
+        assertThrows(DukeException.class, (() -> Parser.parse(userResponse)));
     }
 
     @Test
-    public void setGrade_missingArgument_exceptionThrown() {
-        String userResponse = "set grade cs1010";
-        assertThrows(DukeException.class, () -> Parser.parse(userResponse));
+    public void parseListModules_invalidArgument_exceptionThrown() {
+        String userResponse = "list module invalid";
+        assertThrows(DukeException.class, (() -> Parser.parse(userResponse)));
     }
 
     @Test
-    public void parseCommand_extraParameter_exceptionThrown() {
-        assertThrows(DukeException.class, () -> Parser.parse("help invalid"));
-        assertThrows(DukeException.class, () -> Parser.parse("exit invalid"));
-        assertThrows(DukeException.class, () -> Parser.parse("list module invalid"));
+    public void parseDeleteLesson_invalidFormat_exceptionThrown() {
+        String userResponse = "delete lesson";
+        assertThrows(DukeException.class, (() -> Parser.parse(userResponse)));
+    }
+
+    @Test
+    public void parseDeleteLesson_indexIsNotNumber_exceptionThrown() {
+        String userResponse = "delete lesson invalid";
+        assertThrows(DukeException.class, (() -> Parser.parse(userResponse)));
+    }
+
+    @Test
+    public void parseDeleteTask_invalidFormat_exceptionThrown() {
+        String userResponse = "delete task";
+        assertThrows(DukeException.class, (() -> Parser.parse(userResponse)));
+    }
+
+    @Test
+    public void parseDeleteTask_indexIsNotNumber_exceptionThrown() {
+        String userResponse = "delete task invalid";
+        assertThrows(DukeException.class, (() -> Parser.parse(userResponse)));
     }
 }

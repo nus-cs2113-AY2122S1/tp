@@ -12,9 +12,9 @@ import static seedu.duke.commons.core.CommandFormat.DELETE_TASK_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.DELETE_LESSON_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.DELETE_MODULE_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.promptFormat;
+import static seedu.duke.commons.util.StringUtil.removeFirstParam;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
 import static seedu.duke.logic.parser.ParserUtil.parseToZeroIndex;
-import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
 //@@author richwill28
 public class DeleteCommandParser {
@@ -40,6 +40,10 @@ public class DeleteCommandParser {
     }
 
     private static Command parseDeleteLessonCommand(String userResponse) throws ParseException {
+        if (userResponse.isBlank()) {
+            throw new ParseException(promptFormat(DELETE_LESSON_FORMAT));
+        }
+
         try {
             int lessonIndex = parseToZeroIndex(Integer.parseInt(userResponse));
             return new DeleteLessonCommand(lessonIndex);
@@ -50,6 +54,10 @@ public class DeleteCommandParser {
 
     //@@author ptejasv
     private static Command parseDeleteTaskCommand(String userResponse) throws ParseException {
+        if (userResponse.isBlank()) {
+            throw new ParseException(promptFormat(DELETE_TASK_FORMAT));
+        }
+
         try {
             int taskIndex = parseToZeroIndex(Integer.parseInt(userResponse));
             return new DeleteTaskCommand(taskIndex);
@@ -60,11 +68,11 @@ public class DeleteCommandParser {
 
     //@@author Roycius
     private static Command parseDeleteModuleCommand(String userResponse) throws ParseException {
-        try {
-            String moduleCode = userResponse.toUpperCase();
-            return new DeleteModuleCommand(moduleCode);
-        } catch (NumberFormatException e) {
-            throw new ParseException(Message.ERROR_INVALID_NUMBER);
+        if (userResponse.isBlank()) {
+            throw new ParseException(promptFormat(DELETE_MODULE_FORMAT));
         }
+
+        String moduleCode = userResponse.toUpperCase();
+        return new DeleteModuleCommand(moduleCode);
     }
 }
