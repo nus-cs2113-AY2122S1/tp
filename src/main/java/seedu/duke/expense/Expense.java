@@ -28,10 +28,10 @@ public class Expense implements ExpenseSplitter {
     /**
      * Legacy Constructor for {@link Expense} - does not include parsing.
      *
-     * @param amountSpent   (placeholder)
-     * @param category      (placeholder)
+     * @param amountSpent (placeholder)
+     * @param category    (placeholder)
      * @param personsList (placeholder)
-     * @param description   (placeholder)
+     * @param description (placeholder)
      */
     //@@author lixiyuan416
     public Expense(double amountSpent, String description, ArrayList<Person> personsList,
@@ -65,8 +65,10 @@ public class Expense implements ExpenseSplitter {
     }
 
     //@@author joshualeeky
+
     /**
      * Extracts the description of the expense from the user input.
+     *
      * @param userInput the string that the user enters.
      * @return description of the expense.
      */
@@ -77,6 +79,7 @@ public class Expense implements ExpenseSplitter {
     /**
      * Obtains a list of Person objects from a string of names separated by a comma. Also checks if there are repeated
      * names that were entered in the expense.
+     *
      * @param userInput the string that the user enters.
      * @return ArrayList containing the Person objects included in the expense.
      */
@@ -119,6 +122,7 @@ public class Expense implements ExpenseSplitter {
 
 
     //@@author lixiyuan416
+
     /**
      * Prompts user for date.
      *
@@ -134,7 +138,7 @@ public class Expense implements ExpenseSplitter {
             inputDate = Ui.receiveUserInput();
             Storage.getLogger().log(Level.INFO, "Invalid date format entered");
         }
-            return LocalDate.parse(inputDate, inputPattern);
+        return LocalDate.parse(inputDate, inputPattern);
     }
 
     private Boolean isDateValid(String date) {
@@ -144,7 +148,7 @@ public class Expense implements ExpenseSplitter {
         try {
             LocalDate.parse(date, inputPattern);
             //Additional check for weird dates like feb 31
-            if (!Parser.doesDateReallyExist(date)){
+            if (!Parser.doesDateReallyExist(date)) {
                 Ui.expenseDateInvalid();
                 return false;
             }

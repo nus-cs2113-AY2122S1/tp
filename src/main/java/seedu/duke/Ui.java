@@ -424,7 +424,8 @@ public class Ui {
             System.out.println("\tclose: Closes the current trip");
             System.out.println("\topen [trip num]: Closes the current trip, opens another trip");
             System.out.println();
-            System.out.println("\tYou can also create or edit a trip, but it's recommended to close the current trip first");
+            System.out.println("\tYou can also create or edit a trip, "
+                    + "but it's recommended to close the current trip first");
             System.out.println("\tquit: exit the program");
             System.out.println();
         }
