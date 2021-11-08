@@ -14,7 +14,7 @@ It is written in Java, and has about 7 kLoC.
   * What it does: Stores the related `Client`, `Flight` and `Tour` into one `ClientPackage`.
   * Justification: This feature is crucial to TourPlanner and serves as a link between these classes.
   * Highlights: To make it easier to use and more efficient for commands like `find` and `cut` to use,
-`ClientPackage` stores the actual `Client`, `Flight` and `Tour` objects instead of simpy using a reference String id.
+`ClientPackage` stores the actual `Client`, `Flight` and `Tour` objects instead of simply using a reference String id.
   * Highlights: Created methods to get an ArrayList of `ClientPackage` based on the `Client` / `Flight` / `Tour` which 
 were used across a few features.
 
@@ -39,6 +39,7 @@ contains an `Object` which no longer exists.
   * Added `cut` feature
 * Developer guide:
   * Added diagrams and explanations for `cut`, `sort`, `list` feature and `Command` class
+  * Added Appendix D and E
 
 **Contributions to team-based tasks**:
 * Manage issue tracker: In charge of issue tracker for `v2.1`, helped with labels for `v1.0`.
