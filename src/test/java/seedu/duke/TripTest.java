@@ -26,10 +26,12 @@ class TripTest {
 
     private static Trip testTrip1;
     private static InputStream origIn;
+    private static PrintStream origOut;
 
     @BeforeAll
     static void setUp() throws SameNameException, ForceCancelException {
         origIn = System.in;
+        origOut = System.out;
         String[] stringArray = {"", "Canada", "02-03-2021", "cad", "0.123", "ben,jerry,tom"};
         testTrip1 = new Trip(stringArray);
     }
@@ -128,7 +130,6 @@ class TripTest {
 
     @Test
     public void testNewTripSameNameFull() {
-        PrintStream origOut = System.out;
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         Parser.parseUserInput("create /United States of America /02-02-2021 /USD /0.74 /Ben, Ben");
@@ -243,7 +244,6 @@ class TripTest {
 
     @Test
     public void testEditTripExceptions() {
-        PrintStream origOut = System.out;
         createNewTripForTest();
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
@@ -276,7 +276,6 @@ class TripTest {
         createNewTripForTest();
         Parser.parseUserInput("create /United of America /02-02-2021 /USD /0.74 /Ben, Jerry, Tom, Harry, Dick");
         Parser.parseUserInput("open 1");
-        PrintStream origOut = System.out;
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
         Parser.parseUserInput("open 2");
@@ -358,7 +357,6 @@ class TripTest {
 
     @Test
     public void testLastTripNull() {
-        PrintStream origOut = System.out;
         createNewTripForTest();
         Parser.parseUserInput("create /United of America /03-02-2021 /USD /0.74 /Ben, Jerry, Tom, Harry, Dick");
         Storage.closeTrip();
