@@ -272,8 +272,8 @@ When the user types `cap edit`, the following sequence of steps will then occur:
 1. User executes `module list`\
    i. `Click` receives user's input.\
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
-2. Creating `CapEditInfoCommand` object.
-3. Executing command.\
+2. Create `CapEditInfoCommand` object.
+3. Execute command.\
    i. `CapEditInfoCommand` calls `ui.printMessage()` to print the `GET_CAP_QUESTION` to the user\
    ii. `CapEditInfoCommand` gets the current CAP from the user. If the CAP is illegal, `CapEditInfoCommand` throws `IllegalCurrentCapException`\
    iii. `CapEditInfoCommand` calls `ui.printMessage()` to print the `GET_MC_QUESTION` to the user\
@@ -296,8 +296,8 @@ When the user types `cap expected`, the following sequence of steps will then oc
 1. User executes `module list`\
    i. `Click` receives user's input.\
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
-2. Creating `GetCapCommand` object.
-3. Executing command.\
+2. Create `GetCapCommand` object.
+3. Execute command.\
    i. `GetCapCommand` calls `moduleManager.getExpectedCap()` to get the expected CAP.
    ii. If the expected CAP return is not a number, `GetCapCommand` calls `ui.printMessage` to prompt the `MESSAGE_MISSING_CAP_INFO` to the user.
    iii. Else, `GetCapCommand` calls ui.printMessage` to print the information related to the CAP and the expected CAP to the user.
@@ -320,8 +320,8 @@ The following diagram explains the sequence of execution for the zoom list comma
 This command is implemented by the `AddZoomCommand` class. The basic functionality of this command is to write a new zoom link to a local storage file and associate it to the relevant module code. The `AddZoomCommand`
 class extends `Command`.
 
-Syntax: `zoom add LINK MODULE_CODE`
-Example: `zoom add nus.sg/testlink ABC101`
+Syntax: `zoom add [MODULE_CODE] [LINK]`
+Example: `zoom add CS2113T https://nus.sg/testlink`
 
 The following diagram explains the sequence of execution for the add zoom command. 
 ![addzoomlink](./diagrams/zoom/addzoomlink.png)
@@ -331,7 +331,7 @@ The following diagram explains the sequence of execution for the add zoom comman
 
 this command is implemented by the `OpenZoomLink` class. The basic functionality of this command is to open the zoom link associated to the particular module. The `OpenZoomLink` class extends `Command`
 
-Syntax: `zoom open MODULE_CODE`
+Syntax: `zoom open [MODULE_CODE]`
 Example: `zoom open CS2113T`
 
 
@@ -343,7 +343,7 @@ This feature allows the user to view a calendar with tasks and lectures.
 
 The command for displaying the calendar for a specific month is implemented by the `DisplayCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the display calendar mechanism behaves at each step.
+Given below is an example of how the display calendar mechanism behaves at each step.
 
 1. The user enters the command `calendar display 10-2021`. This command is then sent for parsing in the `Click` class to `parseCommand` method in the `Parser` class. The `parseCommand` method first splits the entire command into an array `todoArguments` containing `calendar`, `display` and `10-2021`.
 2. The string `calendar` from the first index of todoArguments is checked against switch cases and is found to match `COMMAND_CALENDAR` which is the constant string "calendar". Upon finding this match, the string from the second index `todoArguments`is further split based on the delimiter of a single white space. The string `display` id checked against possible suffixes and `Command` object `DisplayCommand` is returned to the `Click` class.
