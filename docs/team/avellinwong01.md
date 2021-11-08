@@ -48,7 +48,7 @@ Designed for fast typists, it can help to augment the day-to-day tasks of a libr
 1. Implemented skeleton code for exceptions ([#32](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/32))
 2. Helped in maintaining the issue tracker
 3. Helped in reviewing and merging team members' pull requests
-4. Assisted in product testing and maintaining general code consistency
+4. Assisted in product testing and maintaining general code consistency ([#26](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/26))
 
 ### Review/mentoring contributions
 - Teammates' PRs reviewed and merged (
