@@ -91,8 +91,7 @@ public abstract class SchedulerCommandParser {
      * @param userInput String containing the full user input.
      * @return EditAppointmentCommand with the specified appointment ID and appointment information.
      * @throws MedBotParserException if the appointment ID is not specified or not a positive number,
-     *                               or when the appointment  information given is invalid.
-     *
+     *                               or when the appointment information given is invalid.
      */
     private static EditAppointmentCommand parseEditAppointmentCommand(String userInput) throws MedBotParserException {
         int appointmentId = ParserUtils.parseId(userInput.substring(4));
