@@ -44,8 +44,12 @@ public class DeleteCommandParser {
             throw new ParseException(promptFormat(DELETE_LESSON_FORMAT));
         }
 
-        int lessonIndex = parseToZeroIndex(Integer.parseInt(userResponse));
-        return new DeleteLessonCommand(lessonIndex);
+        try {
+            int lessonIndex = parseToZeroIndex(Integer.parseInt(userResponse));
+            return new DeleteLessonCommand(lessonIndex);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Message.ERROR_INVALID_NUMBER);
+        }
     }
 
     //@@author ptejasv
@@ -54,8 +58,12 @@ public class DeleteCommandParser {
             throw new ParseException(promptFormat(DELETE_TASK_FORMAT));
         }
 
-        int taskIndex = parseToZeroIndex(Integer.parseInt(userResponse));
-        return new DeleteTaskCommand(taskIndex);
+        try {
+            int taskIndex = parseToZeroIndex(Integer.parseInt(userResponse));
+            return new DeleteTaskCommand(taskIndex);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Message.ERROR_INVALID_NUMBER);
+        }
     }
 
     //@@author Roycius

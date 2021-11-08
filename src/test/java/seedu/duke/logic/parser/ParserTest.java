@@ -136,4 +136,47 @@ public class ParserTest {
         String userResponse = "done task m";
         assertThrows(DukeException.class, (() -> Parser.parse(userResponse)));
     }
+
+    //@@author ptejasv
+    @Test
+    public void parseListLessons_invalidArgument_exceptionThrown() {
+        String userResponse = "list lesson invalid";
+        assertThrows(DukeException.class, (() -> Parser.parse(userResponse)));
+    }
+
+    @Test
+    public void parseListTasks_invalidArgument_exceptionThrown() {
+        String userResponse = "list task invalid";
+        assertThrows(DukeException.class, (() -> Parser.parse(userResponse)));
+    }
+
+    @Test
+    public void parseListModules_invalidArgument_exceptionThrown() {
+        String userResponse = "list module invalid";
+        assertThrows(DukeException.class, (() -> Parser.parse(userResponse)));
+    }
+
+    @Test
+    public void parseDeleteLesson_invalidFormat_exceptionThrown() {
+        String userResponse = "delete lesson";
+        assertThrows(DukeException.class, (() -> Parser.parse(userResponse)));
+    }
+
+    @Test
+    public void parseDeleteLesson_indexIsNotNumber_exceptionThrown() {
+        String userResponse = "delete lesson invalid";
+        assertThrows(DukeException.class, (() -> Parser.parse(userResponse)));
+    }
+
+    @Test
+    public void parseDeleteTask_invalidFormat_exceptionThrown() {
+        String userResponse = "delete task";
+        assertThrows(DukeException.class, (() -> Parser.parse(userResponse)));
+    }
+
+    @Test
+    public void parseDeleteTask_indexIsNotNumber_exceptionThrown() {
+        String userResponse = "delete task invalid";
+        assertThrows(DukeException.class, (() -> Parser.parse(userResponse)));
+    }
 }
