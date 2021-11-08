@@ -607,25 +607,36 @@ This section describes the implementation of how the user can delete a goal from
 
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteGoalCommandParserSequenceDiagram.png))
 
-1. The `DeleteParser#parseDeleteGoalCommand(input)` method is called, which starts the process of
-   extracting parameters from the user input.
+1. The `DeleteParser#parseDeleteGoalCommand(input)` method is called, which starts the process of extracting parameters
+   from the user input.
 2. The `DeleteParser#splitInput(input)` method splits the user input into an ArrayList of parameters.
-3. The `goalIndex` to delete is then obtained with `DeleteParser#getIndex(parameters, FLAG_GOAL_INDEX)` method
-4. A `DeleteGoalCommand(goalIndex)` object is created and returned from the
-   `DeleteParser#parseDeleteGoalCommand(input)` method.
+3. The `goalIndex` to delete is then obtained with `DeleteParser#getIndex(parameters, FLAG_GOAL_INDEX)` method.
+4. A `DeleteGoalCommand(goalIndex)` object is created and returned from the `DeleteParser#parseDeleteGoalCommand(input)`
+   method.
 
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteGoalCommandSequenceDiagram.png)
 
 5. The `DeleteGoalCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
-      `GoalList#deleteGoal(goalIndex, printManager)` method. 
+   `GoalList#deleteGoal(goalIndex, printManager)` method.
 6. Within this newly called method, the `GoalList#getGoal(goalIndex)` method is called to retrieve the `Goal` object
    from the `goalList`.
 7. The `GoalList#updateChosenGoalIndex(goalIndex)` method is called to perform checks on the goal to be deleted.
-8. The `Goal` is then deleted with the `goalList` ArrayList method `.remove`
+8. The `Goal` is then deleted with the `GoalList#remove(Goal)` method.
 9. Finally, the `PrintManager#printRemovedGoal(goalDescription)` method is called to print a confirmation message on 
    the successful deletion of a goal.
 
 #### 4.8.2. Design Considerations
+
+**Aspect:** Goal index of remaining goals
+* **Alternative 1:** Maintain the goal index of all other goals after deletion.
+    * Pros: Users that has committed the goal index of their tracked goals to memory do not need to worry about changes
+            to their goals' indexes after a deletion is made.
+    * Cons: Additional logic to be implemented to fill up gaps by deleted goals with new goals.
+* **Alternative 2 (current choice):** Goal indexes are flushed whenever a deletion is made. This means that a goal with
+                                      an original index of '3' will have its index change to '2' if the goal at index 
+                                      '1' is deleted.
+    * Pros: Logic for the goal list is easier to implement (simply use the add() and remove() methods of ArrayList).
+    * Cons: Users need to constantly check their list of tracked goals to ensure that the correct goal is being updated.
 
 ### 4.9. Deleting a Habit
 
