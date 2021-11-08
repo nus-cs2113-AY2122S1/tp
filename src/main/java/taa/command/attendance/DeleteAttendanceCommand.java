@@ -90,7 +90,6 @@ public class DeleteAttendanceCommand extends Command {
 
                 assert studentIndex >= 0 && studentIndex < teachingClass.getStudentList().getSize();
                 Student student = teachingClass.getStudentList().getStudentAt(studentIndex);
-                assert studentIndex >= 0 && studentIndex < teachingClass.getStudentList().getSize();
 
                 AttendanceList attendanceList = student.getAttendanceList();
                 Attendance attendance = attendanceList.deleteAttendance(lessonNumInput);
