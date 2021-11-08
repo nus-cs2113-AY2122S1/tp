@@ -20,7 +20,9 @@ public class UnknownCommand extends Command {
     /**
      * Prints unknown message.
      * Overrides method from parent class.
+     *
      * @param ui Object that handles user IO
+     * @param catalogue Object that encapsulates the library catalogue
      */
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
