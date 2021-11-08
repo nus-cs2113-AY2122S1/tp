@@ -293,7 +293,7 @@ Format: `set dish limit [DISH_NAME]`
 
 Example of usage:
 
-`set dish limit chicken rice`
+`set dish limit chicken rice` or `set dish limit 1`
 
 ```
 ____________________________________________________________
