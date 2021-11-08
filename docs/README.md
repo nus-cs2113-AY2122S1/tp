@@ -13,3 +13,4 @@ Useful links:
   * [Teo Chuan Kai](team/exetr.md)
   * [Dyah Ayu Nurun Nafisah](team/dyahnafisah.md)
   * [Wong Zi Xin, Avellin](team/avellinwong01.md)
+  * [Chen Silin](team/silinche.md)

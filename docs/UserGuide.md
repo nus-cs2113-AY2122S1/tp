@@ -254,15 +254,15 @@ that is, it is **case-sensitive**, and any difference in space or special charac
 For searching by Status, the Status given by the search input must be one of "AVAILABLE", "LOANED" or "RESERVED".
 It is **case-insensitive**.
 
-For searching by Category, the Category given by the search input must be one of "Book"", "Audio", "Video", "Magazine", or "Misc".
+For searching by Category, the Category given by the search input must be one of "Book", "Audio", "Video", "Magazine", or "Misc".
 It is **case-insensitive**.
 
 For searching by Title, the Title given by the search input only needs to partially match the title stored in database.
 It is **case-insensitive** as well.
 
 Any items matching more than one keyword will be listed. 
-Items matching more searching criterea will be listed at a upper position.
-Items matching fewer searching criterea will be listed at a lower position.
+Items matching more searching criteria will be listed at a higher position.
+Items matching fewer searching criteria will be listed at a lower position.
 
 Format: Subset of `search i/ID t/TITLE s/STATUS c/CATEGORY`
 
@@ -286,7 +286,7 @@ An item that is neither loaned nor a book will not be in the search result.
 ```
 
 In the sample output, "The Three Body Problem" is both loaned and a book, matching both of the criteria, it is listed first;
-"Thriller" is loaned but not a book, "Harry Potter" is a book but not loaned, they satisfy only one criteria, therefore they are listed at a lower position.
+"Thriller" is loaned but not a book, "Harry Potter" is a book but not loaned, they satisfy only one criterion, therefore they are listed at a lower position.
 The rest of items do not match any search keyword, and they are not listed.
 
 ### Reserve items
@@ -591,7 +591,7 @@ Upon starting the program, it will search for the presence of a file in the dire
 
 ## FAQ
 
-**Q**: What platforms is `Libmgr` supported on?
+**Q**: What platforms are `Libmgr` supported on?
 
 **A**: This application supports cross-platform operation, as long as Java has been properly configured.
 
@@ -601,7 +601,7 @@ Upon starting the program, it will search for the presence of a file in the dire
 
 **Q**: Can I manually edit the `data.json` file to change contents of the catalogue
 
-**A**: While it is possible for users to manually edit the data using tools such as text editors, we highly recommend against doing so, as the risk of corrupting the file or entering malfomred input is very high.
+**A**: While it is possible for users to manually edit the data using tools such as text editors, we highly recommend against doing so, as the risk of corrupting the file or entering malformed input is very high.
 When `libmgr` detects errors or corruptions in `data.json` it will overwrite the existing catalogue with a new, empty one.
 
 ## Command Summary
