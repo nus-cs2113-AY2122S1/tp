@@ -116,6 +116,8 @@ ultimately saving cost and increasing profits.
           <center>Figure 4: Loading Data Sequence Diagram</center>
           <br>
           
+         <div style="page-break-after: always;"></div>
+
         * `Design - Storage: Saving Data`
           
           <p align="center">
@@ -132,6 +134,8 @@ ultimately saving cost and increasing profits.
           <center>Figure 11: AddIngredientCommand Sequence Diagram</center>          
           <br> 
           
+        <div style="page-break-after: always;"></div>
+    
         * `Implementation - Add: Adding Wastage to Dishes and Ingredients, Storage to Ingredients`
           
           <p align="center">
