@@ -456,12 +456,6 @@ youth to manage their finances by making personal finance entries simple.
 
 ---
 
-## Glossary
-
-* *glossary item* - Definition
-
----
-
 ## Instructions for manual testing
 
 ### Initial start-up guide:

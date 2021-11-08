@@ -166,7 +166,7 @@ To Set Threshold Value for Reminders: set_threshold t/THRESHOLD
 To change entries into a different currency: set_curr c/CURRENCY
 To check the currency that entries are currently in: check_curr
 Lists available currency types for conversion: list_curr
-To View Your Yearly Report (Year format: YYYY): show_graph [Y/YEAR]
+To View Your Year Report (Year format: YYYY): show_graph [Y/YEAR]
 To Clear All Expense And Income Entries: clear_all_entries
 To Terminate The Program: end
 -----------------------------------------------------------------------------------------------------

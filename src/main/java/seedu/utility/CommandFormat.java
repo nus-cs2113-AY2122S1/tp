@@ -33,7 +33,7 @@ public class CommandFormat {
     private static final String SET_THRESHOLD_FORMAT = "To Set Threshold Value for Reminders: "
             + "set_threshold t/THRESHOLD";
     private static final String CLEAR_FORMAT = "To Clear All Expense And Income Entries: clear_all_entries";
-    private static final String GRAPH_FORMAT = "To View Your Yearly Report (Year format: YYYY): show_graph [Y/YEAR]";
+    private static final String GRAPH_FORMAT = "To View Your Year Report (Year format: YYYY): show_graph [Y/YEAR]";
     private static final String CONVERT_CURRENCY_FORMAT
             = "To change entries into a different currency: set_curr c/CURRENCY";
     private static final String CHECK_CURRENCY_FORMAT
