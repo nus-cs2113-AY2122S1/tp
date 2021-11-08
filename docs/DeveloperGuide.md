@@ -220,26 +220,6 @@ How the Financial Tracker compoment works:
 5. Finally, the method `sum()` is called on the stream which returns the sum of all the values inside the stream. This value
    is then returned at the end of the function call.
 
----
-
-##### Converting user inputs to commands
-
-1. When the user gives an input, it will first be split into 2 parts command word and arguments using regex.
-2. The command word will be matched with the list of expected command words. If there is no match, return an 
-invalid command and the process stops here.
-3. If there is a match, `Parser` will check the validity of the arguments the user gave. This is also done
-using regex.
-4. If the arguments are valid, the corresponding command will be returned.
-5. If invalid, return an invalid command.
-
-##### Converting user information to `csv` data
-
-Every important field will be separated by `Parser` with a `,` before saving them into the respective `csv` files.
-
-##### Converting `csv` data to user information
-
-When a line of data is obtained from the `csv` file, `Parser` will check if the line fits the required format using
-regex.
 
 ---
 
