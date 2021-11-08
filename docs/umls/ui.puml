@@ -15,11 +15,13 @@ package "ui" <<Frame>> #DDDDDD {
     UiModule : + printModule(mod: Module, index: int, boolean printMC)
     }
 
-    class UiMapping extends Ui {
+UiMapping ---|> Ui
+    class UiMapping {
     + printMapping(mm: ModuleMapping, index: int, printMC: boolean)
     }
 
-    class UiUniversity extends Ui {
+UiUniversity --|> Ui
+    class UiUniversity{
     + printUniversity(uni: University, printMC: boolean)
     }
 
@@ -31,13 +33,12 @@ UiInvalid --|> Ui
     + printFormat(format: String)
     }
 
-UiGeneral --|> Ui
-    class UiGeneral {
+    class UiGeneral extends Ui{
     + welcome()
     + printExit()
     }
 
-UiStorage --|> Ui
+UiStorage ---> Ui
     class UiStorage {
     + printInvalidModuleMessage()
     + printInvalidMappingMessage()

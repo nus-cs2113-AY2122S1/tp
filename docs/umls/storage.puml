@@ -3,6 +3,7 @@ hide circle
 skinparam classAttributeIconSize 0
 skinparam groupInheritance 2
 skinparam maxLength 128
+skinparam classFontSize 14
 
 class Storage {
     - {static} logger: Logger
