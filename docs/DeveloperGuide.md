@@ -347,6 +347,16 @@ This section describes the implementation of how the user can display a list of 
 
 //TODO LIST HAS A PARSER
 
+1. The `ListGoalParser#parseListGoalCommand(input)` method is called. Since `list` does not require any parameters,
+   the `input` (extra text) after `list` is there in case you typed anything extra afterwards, intentionally or not.
+2. The `ListGoalParser#parseListGoalCommand(input)` method then returns a `ListGoalsCommand(input)`.
+
+![](Diagram_Images/Implementation_Diagram_Images/ListGoalsCommandParserSequenceDiagram.png)
+
+![](Diagram_Images/Implementation_Diagram_Images/ListGoalsCommandSequenceDiagram.png)
+
+// Old text for reference
+
 1. Since the command for listing goals does not require any parameters, using `ParserManager` to detect the command word
    `list` is sufficient to execute the command.
 2. The `ListGoalsCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
@@ -356,7 +366,6 @@ This section describes the implementation of how the user can display a list of 
 4. Otherwise, the method calls the `PrintManager#printGoalList(goalList, goalList.size()` method, which iterates through
    all `Goal` objects and prints their respective description line by line in a table.
 
-![](Diagram_Images/Implementation_Diagram_Images/ListGoalsCommandSequenceDiagram.png)
 
 #### 4.3.2. Design Considerations
 
