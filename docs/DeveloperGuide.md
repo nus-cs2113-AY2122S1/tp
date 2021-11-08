@@ -5,9 +5,10 @@
 
 ## Acknowledgements
 
-- Documentation and code references [Address Book (Level 2)](https://github.com/se-edu/addressbook-level2) and [Address Book (Level 3)](https://github.com/se-edu/addressbook-level3).
-- Some portion of the code references [bernardboey's ip](https://github.com/bernardboey/ip/).
-- Method to convert String to title case references [Baeldung](https://www.baeldung.com/java-string-title-case).
+- The documentation is inspired by and some snippets are adapted from [Address Book (Level 3)](https://github.com/se-edu/addressbook-level3). The `LogsCenter` class also reuses code from [Address Book (Level 3)](https://github.com/se-edu/addressbook-level3), with minor modifications.
+- The `IncorrectCommand`, `IllegalValueException`, and `DuplicateDataException` classes reuse code from [Address Book (Level 2)](https://github.com/se-edu/addressbook-level2), with minor modifications.
+- The `Ui`, `Parser`, `ExpiryEliminator`, `Command`, and `ByeCommand` classes reuses code from [bernardboey's ip](https://github.com/bernardboey/ip/), with minor modifications.
+- Method to convert String to title case references code from [Baeldung](https://www.baeldung.com/java-string-title-case) although there are modifications.
 
 ## Design
 
@@ -56,7 +57,7 @@ This is a simplified class diagram of the Parser component, which provides a hig
 
 ![](diagrams/ParserClassDiagramSimplified.png)
 
-This is a more detailed class diagram of the `Parser`, `ArgsParser`, and `Prefix` classes. Note that `Parser` has 4 single arg prefixes, 3 multiple arg prefixes, and 1 optional arg prefix. These prefixes correspond to the various arguments that are accepted by the various commands.
+This is a more detailed class diagram of the `Parser`, `ArgsParser`, and `Prefix` classes. Note that `Parser` has 5 single arg prefixes, 3 multiple arg prefixes, and 1 optional arg prefix. These prefixes correspond to the various arguments that are accepted by the various commands.
 
 ![](diagrams/ParserClassDiagram.png)
 
@@ -304,16 +305,23 @@ To help young adults who are living in their own home keep track of ingredients 
 |v2.0|user|list recipes i can cook based on the ingredients I have|save time on checking the ingredients I have|
 |v2.0|user|generate a shopping list for a particular recipe/recipes|know what ingredients to buy|
 |v2.0|user|delete all ingredients that have expired at one go|all ingredients I keep track of are not expired|
-|v2.0|user|update the units of an ingredient|accurately quantify each ingredient
-|v2.0|user|update recipes|modify the quantities of ingredients in the recipe according to my own flavour
+|v2.0|user|update the units of an ingredient|accurately quantify each ingredient|
+|v2.0|user|update recipes|modify the quantities of ingredients in the recipe according to my own flavour|
+
 ## Non-Functional Requirements
 
 1. Should work on Windows, Mac, and any mainstream Linux OS as long as it has Java 11 or above installed.
-2. {more to be added}
+2. Should be able to hold up to 100 ingredients and 100 recipes without a noticeable sluggishness in performance for typical usage.
+3. The file size of the executable should be less than 100MB.
+4. The user's data should be safe in the event of an unexpected crash.
+5. The user's data should be able to be transferred to another computer.
 
 ## Glossary
 
-* *glossary item* - Definition
+* *unit / units* - Refers to a unit of measurement (e.g. grams, kilograms, bottles, cans, packs, etc.). Does **not** refer to the amount/quantity of an ingredient.
+* *ingredient batch* - Refers to a group of one or more units of an ingredient, all having the same expiry date (e.g. if there are 3 apples expiring today and 5 apples expiring next week, there are two ingredient batches for apples - one ingredient batch with quantity 3 which is expiring today, and another ingredient batch with quantity 5 which is expiring next week).
+* *ingredient storage* - Collectively refers to all ingredient batches of a single ingredient.
+* *ingredient repository* - Collectively refers to all the ingredient storages. This represents all the ingredients (and quantities) a user has.
 
 ## Instructions for manual testing
 
@@ -327,6 +335,65 @@ To help young adults who are living in their own home keep track of ingredients 
 2. Shutdown
     1. Type `bye`
        Expected: the program exits.
+
+### Add ingredient
+1. Add ingredient.
+   1. Prerequisites: The ingredient "Red Apple" does not exist in the ingredient repository.
+   2. Test case: `add i/Red Apple` <br/>
+      Expected: The ingredient is added.
+   3. Incorrect commands to try: `add`, `add i/Red Apple!!!`, `add Red Apple`, `add i/ Red Apple` <br/>
+      Expected: No ingredient added. Details of the errors are shown.
+2. Add ingredient with unit
+   1. Prerequisites: The ingredient "Salt" does not exist in the ingredient repository.
+   2. Test case: `add i/Salt u/g` <br/>
+      Expected: The ingredient is added, together with the associated unit.
+   3. Incorrect commands to try: `add i/Red Apple u/5` <br/>
+      Expected: No ingredient added. Details of the errors are shown.
+3. Add ingredient that already exists
+   1. Prerequisites: The ingredient "Red Apple" exists in the ingredient repository.
+   2. Test case: `add i/Red Apple` <br/>
+      Expected: The ingredient is added.
+
+### Increment quantities
+1. Increment quantities for ingredient
+   1. Prerequisites: The ingredient "Red Apple" exists in the ingredient repository.
+   2. Test case: `increment i/Red Apple q/5 e/2021-01-01`<br/>
+      Expected: Ingredient quantity is incremented.
+   3. Incorrect commands to try: `increment`, `increment i/Red Apple q/-5 e/2021-01-01`, `increment i/Red Apple q/5 e/June 20`<br/>
+      Expected: Ingredient quantity is not incremented. Details of the errors are shown.
+2. Increment quantities for ingredient that does not exist
+   1. Prerequisites: The ingredient "Dummy" does not exist in the ingredient repository:
+   2. Test case: `increment i/Dummy q/5 e/2021-01-01`<br/>
+      Expected: Ingredient quantity is not incremented. Details of the errors are shown.
+
+### Decrement quantities
+1. Decrement quantities for ingredient
+   1. Prerequisites: The ingredient "Red Apple" exists in the ingredient repository and there are multiple batches of expiry dates and there is at least a quantity of 2.
+   2. Test case: `decrement i/Red Apple q/1`<br/>
+      Expected: Ingredient quantity is decremented from the batch with the oldest expiry date.
+   3. Incorrect commands to try: `decrement`, `decrement i/Red Apple q/-5`, `decrement i/Red Apple q/5.5`<br/>
+      Expected: Ingredient quantity is not decremented. Details of the errors are shown.
+2. Decrement quantities for ingredient that does not have sufficient quantity.
+   1. Prerequisites: The ingredient "Red Apple" exists in the ingredient repository and there are less than 1000 quantities.
+   2. Test case: `decrement i/Red Apple q/1000`<br/>
+      Expected: Ingredient quantity is not decremented. Details of the errors are shown.
+3. Decrement quantities for ingredient that does not exist.
+   1. Prerequisites: The ingredient "Dummy" does not exist in the ingredient repository:
+   2. Test case: `decrement i/Dummy q/1`<br/>
+      Expected: Ingredient quantity is not decremented. Details of the errors are shown.
+
+
+### Delete ingredient
+1. Delete ingredient
+   1. Prerequisites: The ingredient "Red Apple" exists in the ingredient repository.
+   2. Test case: `delete i/Red Apple` <br/>
+      Expected: The ingredient is deleted.
+   3. Incorrect command to try: `delete`, `delete Red Apple` <br/>
+      Expected: No ingredient deleted. Details of the errors are shown.
+2. Delete ingredient that does not exist
+   1. Prerequisites: The ingredient "Dummy" does not exist in the ingredient repository.
+   2. Test case: `delete i/Dummy` <br/>
+      Expected: No ingredient deleted. Details of the errors are shown.
 
 
 ### List
