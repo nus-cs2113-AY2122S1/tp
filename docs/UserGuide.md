@@ -56,21 +56,22 @@ Jump in to the section [2. Quick Start](#2-quick-start) to get started!
 	__________________________________________________
 ```
 
+
 5. Type the valid command into the terminal (or Command Prompt) and press <kbd>return</kbd> (or <kbd>Enter</kbd>) to run the command.
 
 ## 3. Features 
 
 **Before you begin, please note the command format:**
 
-- Words in `UPPER_CASE` are the parameters to be supplied by you.
+- Words in `[UPPER_CASE]` are the parameters to be supplied by you.
   
-- The `INDEX` used in various commands must be a number specifying the order of an item in the list of items.
+- The `[INDEX]` used in various commands must be a number specifying the order of an item in the list of items.
 The smallest index would naturally be 1. (1-based)
   
 - The `{}` wrapping indicates an optional parameter.
 
 - Parameters cannot be reordered.
-  Example: If the command specifies `module add c/MODULE_CODE n/MODULE_NAME`, keying in `module add n/MODULE_NAME c/MODULE_CODE` will result in an invalid command.
+  Example: If the command specifies `module add c/[MODULE_CODE] n/[M]ODULE_NAME]`, keying in `module add n/[MODULE_NAME] c/[MODULE_CODE]` will result in an invalid command.
 
 > **NOTE**: 
 > We left out some expected commands for readability as they will print out similar messages
@@ -102,7 +103,7 @@ Click supports 4 ways of adding Modules:
 
 **Adding with module code, module name, modular credits, and expected grade**
 
-Format: `module add c/MODULE_CODE n/MODULE_NAME m/MODULAR_CREDITS e/EXPECTED_GRADE`
+Format: `module add c/[MODULE_CODE] n/[MODULE_NAME] m/[MODULAR_CREDITS] e/[EXPECTED_GRADE]`
 
 Example: `module add c/CS2113T n/Software Engineering m/4 e/A`
 
@@ -117,7 +118,7 @@ Expected outcome:
 
 **Adding with module code, module name, and modular credits**
 
-Format: `module add c/MODULE_CODE n/MODULE_NAME m/MODULAR_CREDITS`
+Format: `module add c/[MODULE_CODE] n/[MODULE_NAME] m/[MODULAR_CREDITS]`
 
 Example: `module add c/CS1231 n/Discrete Structure m/4`
 
@@ -132,7 +133,7 @@ Expected outcome:
 
 **Adding with module code and module name**
 
-Format: `module add c/MODULE_CODE n/MODULE_NAME`
+Format: `module add c/[MODULE_CODE] n/[MODULE_NAME]`
 
 Example: `module add c/CS1010 n/Programming Methodology`
 
@@ -147,7 +148,7 @@ Expected outcome:
 
 **Adding with module code only**
 
-Format: `module add c/MODULE_CODE`
+Format: `module add c/[MODULE_CODE]`
 
 Example: `module add c/CG2028`
 
@@ -458,7 +459,7 @@ Expected outcome:
 
 Adds a notebook with the desired name.
 
-Format: `journal notebook n/NOTEBOOK_NAME`
+Format: `journal notebook n/[NOTEBOOK_NAME]`
 
 Example: `journal notebook n/Today`
 
@@ -474,7 +475,7 @@ Expected outcome:
 
 Adds an entry with the desired name to a specific notebook
 
-Format: `journal entry n/NOTEBOOK_NAME e/ENTRY_NAME`
+Format: `journal entry n/[NOTEBOOK_NAME] e/[ENTRY_NAME]`
 
 Example: `journal entry n/Today e/Random Observation`
 
@@ -507,7 +508,7 @@ Expected outcome:
 
 Allows you to tag a notebook. By default, the tag of a notebook is `none`.
 
-Format: `journal tag n/NOTE_INDEX t/TAG_NAME`
+Format: `journal tag n/[NOTE_INDEX] t/[TAG_NAME]`
 
 Example: `journal tag n/1 t/important`
 
@@ -523,7 +524,7 @@ Expected outcome:
 
 Allows you to find a notebook which has the required tag.
 
-Format: `journal find TAG_NAME`
+Format: `journal find [TAG_NAME]`
 
 Example: `journal find important`
 
@@ -540,7 +541,7 @@ Expected outcome:
 
 Deletes the entry.
 
-Format: `journal delete_entry n/NOTE_NAME e/ENTRY_NAME`
+Format: `journal delete_entry n/[NOTE_NAME] e/[ENTRY_NAME]`
 
 Example: `journal delete_entry n/Today e/Random Observation`
 
@@ -556,7 +557,7 @@ Expected outcome:
 
 Deletes specific notebook with all its entries.
 
-Format: `journal delete_notebook NOTE_INDEX`
+Format: `journal delete_notebook [NOTE_INDEX]`
 
 Example: `journal delete_notebook 1`
 
@@ -581,7 +582,7 @@ you need every day!
 
 Allows you to add a food item and calorie count
 
-Format: `food add n/FOOD_NAME d/KCALORIE {d/ DATE}`
+Format: `food add n/[FOOD_NAME] d/[KCALORIE] {d/[DATE]}`
 
 For instance, imagine you've just had a nice meal at McDonald's after
 a three-hour-long lecture. You feel guilty about having so much fast food.
@@ -625,7 +626,7 @@ Expected outcome:
 
 Example of adding with a date
 
-Format: `food add n/FOOD_NAME d/KCALORIE d/ DATE`
+Format: `food add n/[FOOD_NAME] d/[KCALORIE] d/[DATE]`
 
 Example: `food add n/something i ate 2 weeks ago but forgot to record c/300 d/13-10-2021`
 
@@ -654,7 +655,7 @@ Expected outcome:
 	1st,You consumed  Samurai Burger , which has a calorie count of : 433 on Sunday, 7 November 2021!
 	2nd,You consumed  Seaweed Shaker Fries Seasoning , which has a calorie count of : 15 on Sunday, 7 November 2021!
 	3rd,You consumed  Large Fries , which has a calorie count of : 461 on Sunday, 7 November 2021!
-	4th,You consumed  Caramel Frappé - Medium , which has a calorie count of : 624 on Sunday, 7 November 2021!
+	4th,You consumed  Caramel Frappe - Medium , which has a calorie count of : 624 on Sunday, 7 November 2021!
 	5th,You consumed  A Thousand Tide Pods , which has a calorie count of : 92 on Sunday, 7 November 2021!
 	6th,You consumed  something i ate 2 weeks ago but forgot to record , which has a calorie count of : 300 on Wednesday, 13 October 2021!
 	Wow, that's a lot of food! Finished reading the list
@@ -664,7 +665,7 @@ Expected outcome:
 
 #### 3.5.2b Finding food records with a date:  `food find`
 
-Format  : `food  find DD-MM-YYYY`
+Format  : `food  find [DD-MM-YYYY]`
 
 Want to go even further and see what you ate on a specific date?
 Simply give Click the date to search for, and the list of food items
@@ -688,7 +689,7 @@ Shows you a list of items you've consumed on that particular day.
 
 #### 3.5.3 Deleting food records: `food delete`
 
-Format: `food delete INDEX`
+Format: `food delete [INDEX]`
 
 Oops, you accidentally entered a wrong food item as you confused your food list with
 your shopping list. 
@@ -816,7 +817,7 @@ Expected outcome:
 **Add Note**|`journal notebook n/[NOTEBOOK_NAME]`
 **Add Entry**|`journal entry n/[NOTEBOOK_NAME] e/[ENTRY_NAME]`
 **Add Todo**|`calendar todo n/[TASK_NAME] d/[DD-MM-YYYY]`
-**Add Zoom**|`zoom add[MODULE_CODE][ZOOM_LINK]`
+**Add Zoom**|`zoom add [MODULE_CODE] [ZOOM_LINK]`
 **Cap Info**|`module info`
 **Clear Food**|`food clear`
 **Delete Entry**|`journal delete_entry n/[NOTE_NAME] e/[ENTRY_NAME]`
@@ -871,6 +872,8 @@ What if my data is corrupted in the text files?
 > This would mean that your previous data is irrecoverable.
 > The developer team is working on undo and redo features for our future implenentation to better
 > serve your needs.
+ 
+
 ## 6. Bug Reports
 
 Found  a ***content error*** or just something which doesn't look right?
