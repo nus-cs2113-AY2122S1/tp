@@ -5,48 +5,45 @@
 participant ": DeleteHabitCommand" as DeleteHabitCommand COMMAND_COLOUR
 participant "goalList: GoalList" as goalList GOAL_COLOUR
 participant "goal: Goal" as goal GOAL_COLOUR
-participant "habitList: ArrayList<habit>" as habitList HABIT_COLOUR
-participant "habit: Habit" as habit HABIT_COLOUR
 participant "printManager: PrintManager" as printManager UI_COLOUR
 
--> DeleteHabitCommand: runCommand(\ngoalList: GoalList,\n printManager: PrintManager,\n storage: Storage)
+-> DeleteHabitCommand: runCommand(\ngoalList: GoalList,\nprintManager: PrintManager,\nstorage: Storage)
 activate DeleteHabitCommand
 
-DeleteHabitCommand -> goalList: deleteHabitFromGoal(\ngoalIndex: int,\n habitIndex: int,\n printManager: PrintManager)
+DeleteHabitCommand -> goalList: deleteHabitFromGoal(\ngoalIndex: int,\nhabitIndex: int,\nprintManager: PrintManager)
 activate goalList
 
-create goal
-goalList -> goal: getGoal(goalIndex: int)
+goalList -> goalList: getGoal(goalIndex: int)
+activate goalList
+goalList --> goalList: goal: Goal
+deactivate goalList
+
+ref over goalList: Abstracted checks before\ndeleting Goal:\ngoalIndex is a positive integer \nand not out of bounds.
+
+goalList -> goalList: goal.getHabitList()
+activate goalList
+goalList --> goalList: habitList: ArrayList<habit>
+deactivate goalList
+
+goalList -> goalList: getHabit(\nhabitList: ArrayList<Habit>,\nhabitIndex: int)
+activate goalList
+goalList --> goalList: habit: Habit
+deactivate goalList
+
+ref over goalList: Abstracted checks before\nremoving Habit:\nhabitIndex is a positive integer \nand not out of bounds.
+
+goalList -> goal: goal.removeHabit(habitIndex: int)
 activate goal
-goalList <-- goal
+return
 
-create habitList
-goalList -> habitList
-activate habitList
-goal <- habitList: getHabitList()
-goal --> habitList
-goalList <-- habitList
-
-create habit
-goalList -> habit
-activate habit
-habitList <- habit: getHabit(\nhabitList: ArrayList<Habit>,\n habitIndex: int)
-habitList --> habit: habit
-goalList <-- habit
-
-
-goalList -> goal: removeHabit(habitIndex: int)
-goal -> goal: remove(habitIndex: int)
-activate goal
-goal --> goal
-deactivate goal
-goalList <-- goal
-
-
-goalList -> goal: printRemovedHabit(\ngoal.getDescription(): String,\n habit.getHabitName(): String)
-goal -> habit
-habit -> printManager
+goalList -> goalList: printRemovedHabit(\ngoal.getDescription(): String,\nhabit.getHabitName(): String)
+activate goalList
+goalList -> printManager
 activate printManager
+
+return
+goalList --> goalList
+deactivate goalList
 
 return
 
