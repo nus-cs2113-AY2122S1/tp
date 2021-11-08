@@ -265,6 +265,7 @@ Shows you the proper format of commands.
 12. Delete tags from Cookbook: deleteTag "/ tagName1 + tagName2 + ..."
 13. List all tags: listTags
 14. Help me: help
+15. Exit the program: exit
 ```
 
 #### Description of the outcome.
