@@ -68,8 +68,8 @@ public class AllRecordList {
      * @param isLoadingStorage indicate if this command is called during setup or runtime
      */
     public void addBudget(double spendingLimit, int month, boolean isLoadingStorage) throws DuplicateBudgetException {
-        assert spendingLimit >= 0 : "Amount should be greater than or equals to 0";
-        allRecordList.get(month).addBudget(spendingLimit, isLoadingStorage);
+        assert spendingLimit > 0 : "Amount should be greater than 0";
+        allRecordList.get(month).addBudget(spendingLimit);
         if (!isLoadingStorage) {
             saveToStorage(storageDirectory);
         }
