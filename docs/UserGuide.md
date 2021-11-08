@@ -414,7 +414,7 @@ calendar display 10-2021
 ```
 
 Expected outcome:
-![](./images/calendar/calendar_full.png)
+![](diagrams/calendar/calendar_full.png)
 
 #### 3.3.7 Deleting a lecture: `calendar delete lec`
 Deletes a lecture item based on the index.
