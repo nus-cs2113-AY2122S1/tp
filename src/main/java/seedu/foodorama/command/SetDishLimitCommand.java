@@ -94,7 +94,7 @@ public class SetDishLimitCommand extends Command {
             double number = Double.parseDouble(numberString);
             // Check if integer when rounded number - number == 0
             if (Math.rint(number) - number == 0) {
-                return (number < Integer.MAX_VALUE);
+                return (number < Integer.MAX_VALUE && number > Integer.MIN_VALUE);
             }
         }
         return false;
