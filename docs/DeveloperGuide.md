@@ -154,9 +154,8 @@ For example:
 
 ### 3.5 Storage Component
 
-The Storage Component is responsible for the storage of all patient and staff personal information, and appointment
-details. It creates a directory MedBotData (if it does not already exist), and the text files patient.txt,
-staff.txt and appointment.txt in a MedBotData directory.
+The Storage Component is responsible for the persistent storage of the personal information of all patients and 
+medical staff, and appointment details between the two parties. 
 
 Here is a partial class diagram to better illustrate the Storage Component:
 
@@ -171,22 +170,73 @@ staff and appointment information respectively.
 
 #### How the Storage component works:
 
-##### Loading data:
+##### Initialization
 
-* On MedBot start up, `MedBot` initializes a `StorageManager` class object.
+* When MedBot is launched, `MedBot` initializes a `StorageManager` class object.
 * `MedBot` then calls the `initializeStorages()` method of the `StorageManager` class object which initializes the
   `PatientStorage`, `StaffStorage` and `AppointmentStorage` class objects.
-* The `StorageManager` class then calls the `loadStorage()` methods of the `PatientStorage`, `StaffStorage` and 
- `AppointmentStorage` class objects.
-* Each of the 3 `Storage` class objects then reads their corresponding text data files and stores the information into 
-  the corresponding lists.
+* These three `Storage` sub-classes will create a `MedBotData` directory in the current working directory if 
+`MedBotData` does not already exist.
+* Each of the three `Storage` classes will create their respective storage text files in `MedBotData` if they do not 
+exist. 
+    * `PatientStorage` will create `patient.txt` in `MedBotData
+    * `StaffStorage` will create `staff.txt` in `MedBotData
+    * `AppointmentStorage` will create `appointment.txt` in `MedBotData
+* If the storage files exist, the respective `Storage` sub-class will ignore it.
+
+##### Loading data:
+
+* `StorageManager` calls the `loadStorage()` method of the `PatientStorage`, `StaffStorage` and 
+ `AppointmentStorage`.
+* Each of the 3 `Storage` sub-class objects then reads their corresponding storage files and stores the information in 
+memory into the corresponding lists of `MedBot`.
+* If there are errors in any of the storage files, an error message will be output to inform the user of the specific
+line and file which has erroneous data
 
 ##### Saving data:
 
 * After a command is executed, `MedBot` calls the `saveToStorage()` method of the `StorageManager` class object.
-* The `StorageManager` class object then calls the `saveData()` method of the `PatientStorage`, `StaffStorage` and
-  `AppointmentStorage` class objects.
-* Each of the 3 `Storage` class objects then writes the storage data into the respective data text files.
+* `StorageManager` then calls the `saveData()` method of the `PatientStorage`, `StaffStorage` and
+  `AppointmentStorage` objects.
+* Each of the 3 `Storage` sub-class objects then writes the storage data into their respective data text files.
+
+
+##### Format of stored data for patients and medical staff
+
+The storage files `patient.txt` and `staff.txt` follow the same storage format when storing data. Each line of these
+two storage files corresponds to the personal information of a patient or medical staff respectively:
+
+Format:
+```
+ID | NRIC | NAME | PHONE_NUMBER | EMAIL | ADDRESS | HIDE_STATUS
+```
+
+Example:
+```
+3 | S8367812K | Sasha Alexander | 91238765 | X | Mauville City 2nd Street | S
+```
+
+Notes:
+* `X`  denotes that the field is empty
+* `HIDE_STATUS` refers to whether the patient/staff is to be shown or hidden
+  * `S` means to "show"
+  * `H` means to "hide"
+
+##### Format of stored data for appointments
+
+Each line of `appointment.txt` corresponds to the details of an appointment.
+
+Format:
+```
+ID | DATE_TIME | PATIENT_ID | STAFF_ID
+```
+
+Example:
+```
+7 | 051221 0900 | 2 | 2
+```
+
+
 
 ### 3.6 Command Class
 
