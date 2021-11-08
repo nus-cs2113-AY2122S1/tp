@@ -31,7 +31,6 @@ Designed for fast typists, it can help to augment the day-to-day tasks of a libr
 
 ### Contributions to team-based-tasks
 1. Helped in maintaining the issue tracker.
-2. Managed `v2.1` releases.
 
 
 ### Review/mentoring contributions
