@@ -13,6 +13,7 @@ public class CurrencyManager {
     protected double exchangeRate;
     private CurrencyType currency = CurrencyType.SGD;
     private final ArrayList<CurrencyType> currencyTypes = new ArrayList<>();
+    
 
     public void currencyConvertor(CurrencyType from, CurrencyType to, FinancialTracker finances,
                                    BudgetManager budgetManager) throws SameCurrencyTypeException {
