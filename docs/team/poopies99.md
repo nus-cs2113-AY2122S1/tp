@@ -33,10 +33,10 @@ Given below are my contributions to the project.
 * **Documentation**:
     * User Guide:
         * Added documentation for the feature `add` [\#188](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/188).
-        * Did cosmetic tweaks for UserGuide [\188](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/188).
+        * Did cosmetic tweaks for UserGuide [\#188](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/188).
     * Developer Guide:
         * Added implementation details of the feature `add` [\#188](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/188). 
-        * Did cosmetic tweaks for UserGuide [\188](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/188).
+        * Did cosmetic tweaks for UserGuide [\#188](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/188).
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#30](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/30), [\#55](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/55), [\94](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/94), [\#185](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/185)
