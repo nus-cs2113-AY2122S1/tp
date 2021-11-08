@@ -68,6 +68,7 @@ trip is input, the app will confirm with the user if he/she wishes to add the du
 
 ### `Person` Class
 Below details the UML diagram for the `Person` class.
+
 ![](images/Person_Diagram.JPG)
 
 The  Person Class,
