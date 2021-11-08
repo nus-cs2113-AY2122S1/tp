@@ -116,6 +116,10 @@ public class Messages {
                     + "**------------**  **------------**  **------------** ";
     //SCHEDULE END
 
+    //ZOOM BEGIN
+    public static final String PRINT_INVALID_ZOOM_DATA_PATH = "Cannot find the requested zoom data file";
+    //ZOOM END
+
     //HELP BEGIN
     public static final String HELP_MESSAGE = "List of valid commands:\n1. module\n2. calendar\n3. food\n"
             + "4. exit\nType help <COMMAND_NAME> to get a detailed description";
