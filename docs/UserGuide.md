@@ -872,7 +872,7 @@ onwards will be treated as the new currency set.
 
 Format: `set_curr c/CURRENCY`
 
-- As of v2.0, Stonks XD supports 2 different currencies: SGD and RMB.
+- As of v2.0, Stonks XD supports 2 different currencies: SGD and HKD.
 - If you try to set currency to currency you're already using, a warning will be shown.
 
 <details>
@@ -885,14 +885,14 @@ Current FOOD limit is $12.50
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-If you wish to convert the above (and all entries) to RMB, simply enter <code>set_curr c/RMB</code>. You will receive the following confirmation message:
+If you wish to convert the above (and all entries) to HKD, simply enter <code>set_curr c/HKD</code>. You will receive the following confirmation message:
 <pre>
 -----------------------------------------------------------------------------------------------------
-All entries have been converted to RMB!
+All entries have been converted to HKD!
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-If we check our budget limit once again, we see that it has now been converted to the appropriate value in RMB!
+If we check our budget limit once again, we see that it has now been converted to the appropriate value in HKD!
 <pre>
 -----------------------------------------------------------------------------------------------------
 Current FOOD limit is $62.50
@@ -934,7 +934,7 @@ If you are unsure as to what currency types you can convert to, just enter <code
 <pre>
 -----------------------------------------------------------------------------------------------------
 Here is a list of available currencies you can convert to!
-1. RMB
+1. HKD
 2. SGD
 -----------------------------------------------------------------------------------------------------
 </pre>
