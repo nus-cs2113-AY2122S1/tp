@@ -1,4 +1,4 @@
-# Cuiminjing - Project Portfolio Page
+# Cui minjing - Project Portfolio Page
 
 ## Overview
 Hi! I'm a Year 2 Computer Engineering student at NUS.
