@@ -518,11 +518,6 @@ Views a specific recipe in the recipe list, along with the corresponding ingredi
 
 Format: `view recipe r/RECIPE`
 
-- The search is case-insensitive. e.g `pasta` will match `Pasta`. 
-- The order of the keywords matter. e.g. `Nasi Padang` will NOT match `Padang Nasi`. 
-- The input should only contain the name of the recipe. 
-- Only the full name will be matched. e.g. `Chicken` will NOT match `Curry Chicken`.
-
 Example of usage:
 - `view recipe r/Curry Chicken`
 
@@ -547,16 +542,17 @@ Output:
 
 <br/>
 
-### Updating quantities of ingredients in a recipe: `update recipe`
+### Updating recipe: `update recipe`
 
-Updates a recipe by modifying the quantity of ingredients in that recipe.
+Updates a recipe by modifying the quantity of ingredients in that recipe, or simply adding or deleting ingredients in the recipe.
 
 Format: `update recipe r/RECIPE i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...`
 
-- It is not possible to update an ingredient to be zero quantity.
+- You may delete an ingredient in the recipe by updating the quantity of an ingredient to 0.
 
 Example of usage:
 - `update recipe r/Apple Pie i/apple q/3 i/flour q/200`
+- `update recipe r/Apple Pie i/flour q/0`
 
 Output:
 - If update a recipe by modifying the quantity of ingredients in the recipe
