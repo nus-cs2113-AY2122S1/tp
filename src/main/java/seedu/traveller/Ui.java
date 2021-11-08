@@ -156,7 +156,7 @@ public class Ui {
                 + "\tadd-day myTrip 3 : "
                 + "\n\t\tAdds 3 days to trip myTrip.\n"
 
-                + "\tadd-item trip1 /day 0 /time 7pm /name Check-in to HolidayInn : "
+                + "\tadd-item trip1 /day 0 /time 1900 /name Check-in to HolidayInn : "
                 + "\n\t\tAdds item Check-in to HolidayInn to day 0 of trip1.\n"
 
                 + "\tview FamilyTrip2021: "
@@ -175,8 +175,8 @@ public class Ui {
                 + "\n\t\tEdits an existing trip called FamilyTrip2021"
                 + "to have new START and END destinations.\n"
 
-                + "\tedit-item 1 trip1 /day 1 /time 7am /name wake up from bed : "
-                + "\n\t\tEdits item1 of trip 1 to wake up from bed at 7am.\n"
+                + "\tedit-item 1 trip1 /day 1 /time 0700 /name wake up from bed : "
+                + "\n\t\tEdits item1 of trip 1 to wake up from bed at 0700.\n"
 
                 + "\tsearch-item trip1 /name sleep at home : "
                 + "\n\t\tSearches item keyword sleep at home in trip called trip1.\n"
