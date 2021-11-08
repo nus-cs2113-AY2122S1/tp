@@ -74,19 +74,4 @@ public class ListCommandParserTest {
         assertThrows(ListParseException.class, () -> lcp.parse(flag, universityMasterList,
                 moduleMasterList, universitySelectedList, moduleSelectedList));
     }
-
-    /*
-    @Test
-    public void test_selectedUni_expectListUniCommand() {
-        String flag = "/suni";
-        ListCommandParser lcp = new ListCommandParser();
-
-        try {
-            ListUniCommand luc = new ListUniCommand(universitySelectedList, ListType.SELECTED);
-            assertEquals(luc, () -> lcp.parse(flag, universityMasterList, moduleMasterList, universitySelectedList, moduleMasterList));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-    */
 }
