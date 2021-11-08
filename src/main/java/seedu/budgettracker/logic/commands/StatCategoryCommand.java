@@ -7,8 +7,8 @@ import seedu.budgettracker.ui.TextUi;
 public class StatCategoryCommand extends StatCommand {
     int month;
 
-    public static final String MESSAGE_USAGE = "Display the statistics for a particular month’s " +
-            "budget and expenditure by categories.\n"
+    public static final String MESSAGE_USAGE = "Display the statistics for a particular month’s "
+            + "budget and expenditure by categories.\n"
             + "Parameters: -c m/MONTH";
 
     public StatCategoryCommand(int month) {
