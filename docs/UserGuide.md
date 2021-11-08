@@ -5,7 +5,7 @@ title: User Guide
 
 ## Purpose Of This User Guide 
 
-This User Guide is an introduction to the features, commands and tips of SEPlanner. If you are first time user, 
+This User Guide is an introduction to the features, commands and tips of SEPlanner. If you are a first time user, 
 or you simply wish to explore SEPlanner to its fullest potential, this is the page for you. Use the [Content Page](#Content-Page) 
 to easily access the different sections of this guide, and we hope you have a pleasant experience.
 

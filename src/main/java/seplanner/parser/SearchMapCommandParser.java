@@ -42,6 +42,10 @@ public class SearchMapCommandParser {
         University university = new University();
 
         if (input.equals("all")) {
+            if (universitySelectedList.getSize() == 0) {
+                logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
+                throw new SearchMapParseException(Constants.ERRORMSG_PARSEEXCEPTION_NOSELECTEDUNI, 1, false);
+            }
             logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
             return new SearchMapCommand(university, universitySelectedList, universityMasterList,
                     moduleSelectedList, true);
