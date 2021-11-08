@@ -27,7 +27,7 @@ Given below are my contributions to the project.
     * Managed issues for `v1.0`, `v2.0` & `v2.1` on GitHub
 
 * **Enhancements to existing features**: 
-    * enhanced `Add` feature by notifying users of potential lesson conflicts when selecting lessons or events. This is especially important when organising timetable since overlapping lessons/events may be an oversight. [\#77](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/77)
+    * enhanced `add` feature by notifying users of potential lesson conflicts when selecting lessons or events. This is especially important when organising timetable since overlapping lessons/events may be an oversight. [\#77](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/77)
     * enhanced `delete`, `timetable`, `timetableUI` to help ensure that all modules, lessons and events can be displayed properly [\#74](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/74), [\#93](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/93/files) [\#191](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/191)
 
 * **Documentation**:
