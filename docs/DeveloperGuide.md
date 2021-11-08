@@ -617,12 +617,24 @@ This segment focuses on describing the not so-simple implementations behind what
 be considered a simple feature. An interesting point for you to note before exploring this portion 
 would be the runtime-analysis of classes  done by the compiler, which reads the classes from the
 source code and extracts the syntax. This is perhaps more functional than printing out a string
-concatenating all command syntax.
+concatenating all command syntax, which is left as a task for the developers. The following segment discusses the different activation paths of help.
 
+#### Developer help command
+The developer team (we) can enter `help rt` in intellij to activate the runtime mode of help, which is further elaborated in the following sections.
+Following that, we manually run `help rt`, and transfers the sorted command names and syntax onto a string, which is printed to the user on `help`.
+
+
+#### For the user
+The user simply enters `help` to have the user interface `Ui` print out the help message,
+
+
+After considering the different functionalities of the `help` command as well as the runtime mode of help,
+the following section would elaborate on how the runtime mode works, and how we integrate this into generating the help message for the user.
 #### 4.6.1 Architecture  of Help Command
 
 The following diagram illustrates the  interactions between the functional class `ClassPackageReader` and
 a particular command `ClickCommand`.
+
 ![](./images/help/helpCommandsClassDiagram.png)
 A class package reader  is implemented in order to:
 1.  Read classes from a specified package
@@ -644,21 +656,24 @@ implement steps 3 & 4:
 
 Next, we decided to run the `ClassPackageReader` through a package rather than iterate through all classes.
 The former is better than the latter considering our implementation of the commands. For instance, all module-
-related commands are grouped together in the `module` package, food-related commands in `food` etc. Thus, by
-accessing the packages and filtering out the commands, the `ClassPackageReader` presents the name of the command
-and the syntax in a readable format to the user. Do note that the packages have to be manually input by the developers.
+related commands are grouped together in the `module` package, food-related commands in `food` etc. \
+Thus, by accessing the packages and filtering out the commands, the `ClassPackageReader` presents the name of the command
+and the syntax in a readable format to the user. \
+
+Do note that the packages have to be manually input by the developers.
 However, the core functionality of Click is already partitioned nicely into the packages and hence we do not expect
 many updates over the lifeline of this project.
 
 #### 4.6.2 Logic of Help Command
 
 After describing the [architecture](#461-architecture--of-help-command) of the help command, this portion will then describe the sequence of activation by
-the user when parsing a `help` command. Take the following sequence diagram for reference.
-![](./images/help/HelpCommand_execute-Help_Commands.png)
+the developer when parsing a `help rt` command. Take the following sequence diagram for reference.
+![](./images/help/HelpCommand_execute-Help_Commands.png)\
 The sequence diagram provides a high-level view on how the entities interact. You should notice the interaction between
 `ClassPackageReader` and the `Command` entities, where the former gets the syntax of the latter by having a class as
 input. This translates into a scalable option on addition of commands, where a syntax attribute is required to be present
 in an empty constructor rather than concatenating additional syntax onto a constant String variable.
+That bit is done by the developers, to create a functional hard-coded string that is guaranteed to work on the user's end.
 
 We reviewed the high-level functionality of `ClassPackageReader`, but it is also important for developers to take note of how
 this class works on a lower-level. The function described here is `getCommandsAndPrintSyntax()`
@@ -683,11 +698,23 @@ to execute.
 | \ | Alternative 1 (current choice): Reads the name and syntax from the Classes | Alternative 2 (previous choice): Prints all available commands from a String, hard-coding every syntax and printing |
 |---|---|---|
 | Pros | 1. Dynamic, works well and sorts the names by order as long as the constructor is included for a command<br>2. Very readable and testable due to sorted names<br>3. OOP implementation with overloaded methods and branching on inheritance<br>4. The user gets to easily view *ALL*  possible commands with a single word | 1. Easy to implement, just adding all available commands into a String and print it out<br>2. Relatively fewer lines of code (LoC)<br>3. User gets specific syntax with command entered |
-| Cons | 1. Possible depreciated methods (`Class.getMethod`, `Class.getDeclaredConstructor`) which may be outdated, however,<br>  are still functional<br>2. Many more lines of code  (LoC) for implementation <br>3. The user  is bombarded with *ALL* possible commands with a single word | 1. Hard-coding and sorting help commands manually is a chore<br>2. User still has to remember the command in order to access the syntax |
+| Cons | 1. Possible deprecated methods (`Class.getMethod`, `Class.getDeclaredConstructor`) which may be outdated, however,<br>  are still functional<br>2. Many more lines of code  (LoC) for implementation <br>3. The user  is bombarded with *ALL* possible commands with a single word | 1. Hard-coding and sorting help commands manually is a chore<br>2. User still has to remember the command in order to access the syntax |
 
-While we submitted Alternative 2 in version 1 due to a lack of time and easier implementation. with more time given in Version 2.0 - we
-decided  to switch over to Alternative 1 for the user to easily view all the syntax at a glance.
+While alternative 1 works when run on intellij as all `.class` files are found easily in `src/`, it does not work when running with a `.jar` file. This was caught with early bug testing by the developer team.
 
+This issue is easily solved with alternative 2, which simply outputs a hard-coded string message to the user.
+
+We decided to include both alternatives in our code with the runtime mode, which is activated by `help rt` and is not included in the user guide to not confuse the user.
+
+Thus, the following steps are taken to combine both the pros of the alternatives. 
+1. Developer opens `Click` on intellij
+1. Developer enters `help rt` to generate sorted help message string
+1. Developer copies and pastes the string into `Messages`, storing the help message
+
+This ensures that:
+1. All commands and syntax are read accordingly / no commands are missed out
+1. Commands are sorted for readability and functionality (adds are group together etc)
+1. The `help` command works on a `.jar` file.
 ### 4.7. Logging
 
 Logging in the application refers to storing exceptions, warnings and messages that occur during the execution of the program. It was included to help developers to identify bugs and to simplify their debugging process.
