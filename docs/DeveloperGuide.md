@@ -69,6 +69,7 @@ How the `Logic` component works:
 4. This results in  `Command` object (more precisely, an object of one of its subclasses e.g. `DeleteCommand`) being returned.
 5. `Duke` then calls `execute()` within the `Command` object which then executes the specified command.
 6. Upon the completion of `execute()` an object of type `CommandResult` is returned to `Duke` and the feedback is displayed to the User
+7. Within the `Parser` classes, all the input of the User will also be checked to ensure that no error messages come up during execution
 
 ### Storage component
 
@@ -125,36 +126,42 @@ Here is a brief overview of the different Commands
 
 #### List Functionality
 
+Below is a brief overview of how the list Functionality works.
+
+![](images/ListDiagram.png)
+
 How List works:
-1. When the `parser` class parses `list` as the command from the user, a new `Command` object, `ListCommand` is created.
-2. The `ListCommand` constructor will parse through the user command to remove the empty space by calling `checkForEmptyCells`
-3. Then it would initialize the `listType` value depending on the `userCommand`
-4. This processed information would be passed back to `parser` then on to `Duke`.
-5. `Duke` then calls the `execute` method in `ListCommand` which will then return an object of type `CommandResult` and would print out the list corresponding to the `listType` in chronological order
-6. list can display 4 types of list depending on the `listType` 
-7. `list` : to list the Overall Schedule 
-8. `list -m` : to list all the members in the Overall Members List
-9. `list {Event_Num} -t` : to display all the tasks in a unique Event
-10. `list {Event_Num} t/{Task_Num}` : to display all the members involved in a specific task
+1. Duke will call `Parser` to parse through the user inputs, when `list` is detected, `ListParser` will be called.
+2. `ListParser` will parse through the user inputs, and create a new `ListCommand` object, which will be returned to Duke.
+7. `Duke` then calls the `execute` method in `ListCommand` which will then return an object of type `CommandResult` and would print out the list corresponding to the `listType` in chronological order.
+8. list can display 4 types of list depending on the `listType` .
+9. `list -e` : to list the Overall Schedule .
+10. `list -m` : to list all the members in the Overall Members List.
+11. `list -t [Event_Num]` : to display all the tasks in a unique Event.
+12. `list -m e/[Event Index] t/[Task Index]` : to display all the members involved in a specific task.
 
 #### Next Functionality
 
+Below is a brief overview of how the next Functionality works.
+
+![](images/NextDiagram.png)
+
 How Next works:
-1. When the `Parser` class parses `next` as the command from the user, a new `Command` object, `NextCommand` is created.
-2. Within the constructor `NextCommand` process the inputs from the user
-3. `Duke` then calls `execute` within the `NextCommand` where in it will display the most upcoming event or task depending on the user input
-4. `task` will display next upcoming task and `event` will display next upcoming event
+1. When `next` is input by the User, the `Parser` class will call `NextParser`.
+2. The `NextParser` class will check and parse the user input, to see which item, to user wants to see next.
+3. The `NextParser` then creates a `NextCommand` object, and sets the relevant date based on the parsed user input.
+4. `Duke` then calls `execute` within the `NextCommand` where in it will display the most upcoming event or task depending on the user input.
+5. `-t [Event_Index]` will display next upcoming task and `-e` will display next upcoming event.
 
 #### Update Functionality
 ![](images/UpdateDiagram.png)
 
 How Updating works:
-1. When the `Parser` class parses `update` as the command from the user, a new `Command` object, `UpdateCommand` is created.
-2. The `UpdateCommand` constructor processes the entire input from the user by calling `prepareUpdates`.
-3. It will the display to the user the selected `Event`
-4. `Duke` then calls the `execute`  method in `UpdateCommand`
-5. `UpdateCommand` will interact with `Duke` and the Users Inputs to finish the updates the User requires within a loop
-6. Once all the updates are completed, and we exit the loop, `UpdateCommand` will return a `postUpdateMessage()` along with `CommandResult` object to show the User the result of the Updates
+1. When the `Parser` class parses `update` it will call `UpdateParser` where the Type of the update will be determined
+2. Based on the Type of update (Whether updating `event details` or `task details`) the `UpdateParser` through the `Ui` will get the relevant information from the user
+3. Once the relevant information is parsed `UpdateParser` will create a new `UpdateCommand` based on the type of update (eg. `UpdateEventCommand` to update details of an event)
+6. `Duke` then calls the `execute`  method in the respective `UpdateCommand` where the updates will be implemented
+8. Once all the updates are completed, `UpdateCommand` will return a `postUpdateMessage()` along with `CommandResult` object to show the User the result of the Updates
 
 #### Delete Functionality
 How deleting works:
