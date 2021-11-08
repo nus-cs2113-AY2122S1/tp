@@ -130,6 +130,9 @@ public class AddParser extends Parser {
     private static Date stringToDate(String strDate) throws HaBitParserException {
         SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
         formatter.setLenient(false);
+        if (strDate.length() != 8) {
+            throw new HaBitParserException(ERROR_DATE_FORMAT);
+        }
         try {
             return formatter.parse(strDate);
         } catch (ParseException e) {
@@ -151,7 +154,7 @@ public class AddParser extends Parser {
         } else if (strStartDate.equals(FLAG_START_DATE)) {
             throw new HaBitParserException(ERROR_START_DATE_FORMAT);
         }
-        return stringToDate(strStartDate.substring(FLAG_LENGTH, FLAG_LENGTH + DATE_LENGTH));
+        return stringToDate(strStartDate.substring(FLAG_LENGTH));
     }
 
     /**
@@ -166,7 +169,7 @@ public class AddParser extends Parser {
         if (strEndDate == null || strEndDate.equals(FLAG_END_DATE)) {
             throw new HaBitParserException(ERROR_END_DATE_FORMAT);
         }
-        return stringToDate(strEndDate.substring(FLAG_LENGTH, FLAG_LENGTH + DATE_LENGTH));
+        return stringToDate(strEndDate.substring(FLAG_LENGTH));
     }
 
     /**

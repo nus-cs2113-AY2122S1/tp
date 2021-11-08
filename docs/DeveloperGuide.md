@@ -507,14 +507,14 @@ This section describes the implementation of how the user can update a goal's na
     new messages being printed.
 11. Based on the `updateAttributes` parameter, if the first element is true, `GoalList#updateGoalName(goalIndex, 
     newGoalName, printManager)` is called to update the goal name, calling the `PrintManager#printUpdatedGoalName(
-    oldGoalDescription, newGoalDescription)` method to print a confirmation message on successful update of goal name.
+    oldGoalDescription, newGoalDescription)` method to print a confirmation message on successful update of goal name.\
     Similarly, if the second element is true, `GoalList#updateGoalType(goalIndex, newGoalType, printManager)` is called 
     to update the goal type, calling the `PrintManager#printUpdatedGoalType(oldGoalTypeName, newGoalTypeName)` 
-    method to print a confirmation message on successful update of goal type. Finally, if the third element is true, 
-    `GoalList#updateGoalEndDate(goalIndex, newGoalEndDate, printManager)` is called to update the goal end date, 
-    calling the `PrintManager#printUpdatedGoalEndDate((goalName, oldDateString, newDateString)` method to print a 
-    confirmation message on successful update of end date after performing some date checking to ensure the end date is
-    valid.
+    method to print a confirmation message on successful update of goal type.\
+    Finally, if the third element is true, `GoalList#updateGoalEndDate(goalIndex, newGoalEndDate, printManager)` is 
+    called to update the goal end date, calling the `PrintManager#printUpdatedGoalEndDate((goalName, oldDateString, 
+    newDateString)` method to print a confirmation message on successful update of end date after performing some date 
+    checking to ensure the end date is valid.
 12. Lastly, the `PrintManager#printUpdateGoalMessageEnd(excessAttributes)` method is called to print a message if
     some excess parameters can be modified with a different command.
 13. Finally, since this command modifies the `goalList` data, the modified data is saved to the program data file with
@@ -570,8 +570,7 @@ This section describes the implementation of how the user can update a habit's n
     `GoalList#updateHabitNameFromGoal(goalIndex, habitIndex, newHabitName, printManager)` is called to update the habit 
     name, calling the `PrintManager#printUpdatedHabitName(goalDescription, oldHabitDescription, newHabitDescription)` 
     method to print a confirmation message on successful update of goal name. This is done after performing some checks 
-    on whether the new habit name is valid. Exceptions are raised if the new habit name is not valid.
-    
+    on whether the new habit name is valid. Exceptions are raised if the new habit name is not valid.\
     Similarly, if the second element of `updateAttributes` is true, 
     `GoalList#updateHabitIntervalFromGoal(goalIndex, habitIndex, newHabitInterval, printManager)` is called
     to update the interval of the specified habit, calling the `PrintManager#printUpdatedHabitInterval(goalDescription, 
@@ -588,6 +587,17 @@ This section describes the implementation of how the user can update a habit's n
 // TODO: Update the diagram to reflect changes to updateAttributes being an ArrayList<Boolean>
 
 #### 4.7.2. Design Considerations
+
+**Aspect:** Update of habit interval lengths
+* **Alternative 1 (current choice):** Allow the length of an interval for a habit to be updated.
+    * Pros: The user may find that an interval is too short or long, and switch up their routine accordingly to suit
+            their needs.
+    * Cons: Since all intervals are generated upon habit creation, logic has to be implemented to remove all existing 
+            future intervals, and new intervals have to be regenerated based off this new interval length.
+* **Alternative 2:** Prevent a user from changing the interval length after a habit has been created.
+    * Pros: The user is prevented from abusing the change of interval length to inflate their completion rate.
+    * Cons: If the habit routine initially created by the user does not suit him/her, the entire habit has to be
+            recreated, meaning that all past data will be lost.
 
 ### 4.8. Deleting a Goal
 
