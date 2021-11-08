@@ -385,7 +385,7 @@ commands, thus loading data into the App.
 
 When _reloadArrayToStorage()_ method is called, it creates a new File object into the specified directory
 (file directory to reload data files). The _isFile()_ method of the File Class is called to check if the data file
-exist. If it doesn't, a error message will be shown to the user and the method terminates. Otherwiese, it 
+exist. If it doesn't, a error message will be shown to the user and the method terminates. Otherwise, it 
 continues to create a new FileWrite object which will clear the existing data text file first. The FileWrite 
 object will then be passed into the new PrintWriter object that will be created. 
 
