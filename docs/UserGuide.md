@@ -150,6 +150,8 @@ Examples of data fields in commands:
     * ```/p``` - sorts tours by *price*
     * ```/n``` - sorts tours by *name*
 
+*Note: TourPlanner does not support the use of special characters or numbers larger than 2 billion.*
+
 <br>
 
 [**Return to Table of Contents**](#table-of-contents)

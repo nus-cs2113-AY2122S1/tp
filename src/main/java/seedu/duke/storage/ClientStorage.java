@@ -14,11 +14,20 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ClientStorage {
+    public static final String EMPTY_STRING = "";
     private final ClientList clients = new ClientList();
     private static final String root = System.getProperty("user.dir");
     private static final Path filePath = Paths.get(root, "data", "TourPlannerClients.txt");
     private static final Path dirPath = Paths.get(root, "data");
 
+    /**
+     * Class constructor for ClientStorage.
+     * Creates directory and files for storage if they do not already exist.
+     *
+     * @throws TourPlannerException if IOException is thrown when creating a new directory/file
+     * @see File
+     * @see IOException
+     */
     public ClientStorage() throws TourPlannerException {
         try {
             File fileDirectory = new File(dirPath.toString());
@@ -29,14 +38,27 @@ public class ClientStorage {
             File dataFile = new File(filePath.toString());
             dataFile.createNewFile();
         } catch (IOException e) {
-            throw new TourPlannerException("File ERROR");
+            throw new TourPlannerException(EMPTY_STRING);
         }
     }
 
+    /**
+     * Getter for ClientList created and populated with clients retrieved from data file
+     * containing previously stored clients.
+     *
+     * @return clients retrieved
+     */
     public ClientList getClients() {
         return clients;
     }
 
+    /**
+     * Reads each line of the file and identifies client fields -- clientId, name, contactNum and mail.
+     * Creates new Client object based on the client fields and adds to ClientList.
+     *
+     * @throws TourPlannerException if FileNotFoundException due to corrupted or missing file
+     * @see FileNotFoundException
+     */
     public void loadFile() throws TourPlannerException {
         try {
             File dataFile = new File(filePath.toString());
@@ -64,10 +86,13 @@ public class ClientStorage {
                 }
             }
         } catch (FileNotFoundException e) {
-            throw new TourPlannerException("File not found!");
+            throw new TourPlannerException(EMPTY_STRING);
         }
     }
 
+    /**
+     * Loops through clients and writes into storage file for Client
+     */
     public void saveFile() {
         try {
             ArrayList<Client> clientList = clients.getClients();

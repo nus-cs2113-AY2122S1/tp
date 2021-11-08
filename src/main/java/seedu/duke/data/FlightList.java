@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class FlightList {
     public static final String FLIGHT_NOT_FOUND_MESSAGE = "ERROR: Flight cannot be found. "
-            + "Please try another flight ID";
+            + "Please try another flight ID.";
 
     private final ArrayList<Flight> flights;
     private ArrayList<String> flightIds;

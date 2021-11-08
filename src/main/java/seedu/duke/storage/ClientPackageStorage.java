@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ClientPackageStorage {
+    public static final String EMPTY_STRING = "";
     private final ClientPackageList clientPackages = new ClientPackageList();
     private static final String root = System.getProperty("user.dir");
     private static final Path filePath = Paths.get(root, "data", "TourPlannerClientPackages.txt");
@@ -30,10 +31,14 @@ public class ClientPackageStorage {
     private static boolean isPackageAdded = false;
     private ArrayList<String> rawClientPackage = new ArrayList<>();
 
-    public ClientPackageList getClientPackages() {
-        return clientPackages;
-    }
-
+    /**
+     * Class constructor for ClientPackageStorage.
+     * Creates directory and files for storage if they do not already exist.
+     *
+     * @throws TourPlannerException if IOException is thrown when creating a new directory/file
+     * @see File
+     * @see IOException
+     */
     public ClientPackageStorage() throws TourPlannerException {
         try {
             File fileDirectory = new File(dirPath.toString());
@@ -44,10 +49,34 @@ public class ClientPackageStorage {
             File dataFile = new File(filePath.toString());
             dataFile.createNewFile();
         } catch (IOException e) {
-            throw new TourPlannerException("File ERROR");
+            throw new TourPlannerException(EMPTY_STRING);
         }
     }
 
+    /**
+     * Getter for ClientPackageList created and populated with client packages retrieved from data file
+     * containing previously stored client packages.
+     *
+     * @return clientPackages retrieved
+     */
+    public ClientPackageList getClientPackages() {
+        return clientPackages;
+    }
+
+    /**
+     * Reads each line of the file and creates the ClientPackage and adds it to the ClientPackageList
+     * using AddClientPackageCommand.
+     *
+     * @param clients list of clients retrieved from storage file
+     * @param tours list of tours retrieved from storage file
+     * @param flights list of flights retrieved from storage file
+     * @param ui user interface used to display messages to the user
+     * @throws TourPlannerException if FileNotFoundException or NumberFormatException thrown
+     * due to corrupted or missing file
+     * @see AddClientPackageCommand
+     * @see FileNotFoundException
+     * @see NumberFormatException
+     */
     public void loadFile(ClientList clients, TourList tours, FlightList flights, Ui ui) throws TourPlannerException {
         try {
             File dataFile = new File(filePath.toString());
@@ -92,7 +121,7 @@ public class ClientPackageStorage {
                 }
             }
         } catch (FileNotFoundException | NumberFormatException e) {
-            throw new TourPlannerException("File not found!");
+            throw new TourPlannerException(EMPTY_STRING);
         }
     }
 
@@ -105,6 +134,9 @@ public class ClientPackageStorage {
         rawClientPackage = new ArrayList<>();
     }
 
+    /**
+     * Loops through clientPackages and writes into storage file for ClientPackage
+     */
     public void saveFile() {
         try {
             ArrayList<ClientPackage> clientPackageList = clientPackages.getClientPackages();

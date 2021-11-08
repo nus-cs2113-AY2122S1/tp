@@ -13,7 +13,7 @@ public class Client {
      * Client object constructor, that inputs the client's information obtained from Add command.
      *
      * @param values the array of values of the client, ordered in this manner:
-     *               name, contact number, flight, accommodation, tour
+     *               name, contact number, email
      */
     public Client(String[] values) {
         id = values[0];
