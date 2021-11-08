@@ -194,7 +194,7 @@ Type "help" to see a list of available commands.
 
 list        Show your package of all holding.
 delete      Delete an unwanted card in your package.
-find        Search cards by keyword.
+find        Search cards by index.
 help        Display a list of available commands.
 back        Back to game menu.
 ```
@@ -245,6 +245,7 @@ this username next time.
 
 ## Command Summary
 ### Main page
+
 | Action       |  Format       | Function      |
 | ------------ | ------------- | ------------- |
 | newgame      | newgame       | Start a new game  |
@@ -259,6 +260,7 @@ this username next time.
 
 
 ### Intermediate page
+
 | Action       |  Format       | Function      |
 | ------------ | ------------- | ------------- |
 | start        | start         | Start the game and then choose your difficulty level.  |
@@ -268,6 +270,7 @@ this username next time.
 | exit         | exit          | Exit Code Hunt  |
 
 ### Card Page
+
 | Action       |  Format                    | Function      |
 | ------------ | -------------------------- | ------------- |
 | list         | list                       | List all the cards you gained for different game levels  |
