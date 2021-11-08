@@ -50,6 +50,12 @@ Given below are my contributions to the project.
     * Developer Guide:
         * Added implementation details and sequence diagram of the `set_attendance` feature.
           ([\#306](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/306/files))
+        * Added implementation details and sequence diagram of the `set_attendance` feature.
+          ([\#326](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/326/files))
+        * Added implementation details and sequence diagram of the `set_attendance` feature.
+          ([\#326](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/326/files))
+        * Added implementation details and sequence diagram of the `set_attendance` feature.
+          ([\#326](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/326/files))
 
 * **Team-Based Tasks**:
     * Participated in Zoom meetings to discuss features and issues
