@@ -3,17 +3,16 @@ package seedu.utility.tools;
 import seedu.commands.currency.CurrencyType;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.IncomeCategory;
+import seedu.exceptions.BlankCategoryException;
 import seedu.exceptions.BlankCurrencyTypeException;
-import seedu.exceptions.BlankExpenseCategoryException;
-import seedu.exceptions.BlankIncomeCategoryException;
-import seedu.exceptions.InvalidCurrencyTypeException;
-import seedu.exceptions.InvalidBudgetAmountException;
-import seedu.exceptions.InvalidDescriptionException;
+import seedu.exceptions.EntryAmountExceedLimitException;
 import seedu.exceptions.InvalidAmountException;
+import seedu.exceptions.InvalidBudgetAmountException;
+import seedu.exceptions.InvalidCurrencyTypeException;
+import seedu.exceptions.InvalidDescriptionException;
 import seedu.exceptions.InvalidExpenseCategoryException;
 import seedu.exceptions.InvalidIncomeCategoryException;
 import seedu.exceptions.InvalidIndexException;
-import seedu.exceptions.EntryAmountExceedLimitException;
 import seedu.exceptions.InvalidThresholdValueException;
 import seedu.utility.Messages;
 
@@ -67,14 +66,14 @@ public abstract class Extractor {
      *
      * @param matcher An engine that performs match operations on a character sequence by interpreting a Pattern.
      * @return The IncomeCategory.
-     * @throws BlankIncomeCategoryException   If the supposed IncomeCategory is blank.
+     * @throws BlankCategoryException   If the supposed IncomeCategory is blank.
      * @throws InvalidIncomeCategoryException If the IncomeCategory given is not expected / not supported.
      */
     public static IncomeCategory extractIncomeCategory(Matcher matcher) throws
-            BlankIncomeCategoryException, InvalidIncomeCategoryException {
+            BlankCategoryException, InvalidIncomeCategoryException {
         String incomeCategory = matcher.group("category").trim();
         if (incomeCategory.isBlank()) {
-            throw new BlankIncomeCategoryException(Messages.BLANK_CATEGORY_MESSAGE);
+            throw new BlankCategoryException(Messages.BLANK_CATEGORY_MESSAGE);
         }
         switch (incomeCategory.toUpperCase()) {
         case "ALLOWANCE":
@@ -95,14 +94,14 @@ public abstract class Extractor {
      *
      * @param matcher An engine that performs match operations on a character sequence by interpreting a Pattern.
      * @return The ExpenseCategory.
-     * @throws BlankExpenseCategoryException   If the supposed ExpenseCategory is blank.
+     * @throws BlankCategoryException   If the supposed ExpenseCategory is blank.
      * @throws InvalidExpenseCategoryException If the ExpenseCategory given is not expected / not supported.
      */
     public static ExpenseCategory extractExpenseCategory(Matcher matcher) throws
-            BlankExpenseCategoryException, InvalidExpenseCategoryException {
+            BlankCategoryException, InvalidExpenseCategoryException {
         String expenseCategory = matcher.group("category").trim();
         if (expenseCategory.isBlank()) {
-            throw new BlankExpenseCategoryException(Messages.BLANK_CATEGORY_MESSAGE);
+            throw new BlankCategoryException(Messages.BLANK_CATEGORY_MESSAGE);
         }
         switch (expenseCategory.toUpperCase()) {
         case "FOOD":
