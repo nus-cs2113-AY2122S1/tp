@@ -309,12 +309,12 @@ Adds a lecture item.
 
 Note: You cannot add a lecture to a module unless the module has been added previously.
 
-Format: `calendar lecture m/ MODULE_CODE s/ DD-MM-YYYY(START_DATE) e/ DD-MM-YYYY(END_DATE)`
+Format: `calendar lecture m/MODULE_CODE s/DD-MM-YYYY(START_DATE) e/DD-MM-YYYY(END_DATE)`
 
 Example:
 ```
-calendar lecture m/ CS1231 s/ 7-10-2021 e/ 31-10-2021
-calendar lecture m/ CS2113T s/ 7-10-2021 e/ 31-10-2021
+calendar lecture m/CS1231 s/7-10-2021 e/31-10-2021
+calendar lecture m/CS2113T s/7-10-2021 e/31-10-2021
 ```
 
 Expected outcome:
@@ -328,12 +328,12 @@ Expected outcome:
 #### 3.3.2 Adding a todo task: `calendar todo`
 Adds a task item.
 
-Format: `calendar todo n/ TASK_NAME d/ DD-MM-YYYY`
+Format: `calendar todo n/TASK_NAME d/DD-MM-YYYY`
 
 Example:
 ```
-calendar todo n/ CS2113T Assignment d/ 14-10-2021
-calendar todo n/ CS1231 Assignment d/ 03-10-2021
+calendar todo n/CS2113T Assignment d/14-10-2021
+calendar todo n/CS1231 Assignment d/03-10-2021
 ```
 
 Expected outcome:
@@ -394,7 +394,7 @@ Expected outcome:
 calendar edit 1
         __________________________________________________
         Enter the entire todo command with the desired description and date that you want to replace in place of the current task at index 1
-calendar todo n/ changed task name d/ 22-12-2021
+calendar todo n/changed task name d/22-12-2021
         Edited Task!
         __________________________________________________
 ```
@@ -456,9 +456,9 @@ Expected outcome:
 
 Adds a notebook with the desired name.
 
-Format: `journal notebook n/ NOTEBOOK_NAME`
+Format: `journal notebook n/NOTEBOOK_NAME`
 
-Example: `journal notebook n/ Today`
+Example: `journal notebook n/Today`
 
 Expected outcome:
 
@@ -472,9 +472,9 @@ Expected outcome:
 
 Adds an entry with the desired name to a specific notebook
 
-Format: `journal entry n/ NOTEBOOK_NAME e/ ENTRY_NAME`
+Format: `journal entry n/NOTEBOOK_NAME e/ENTRY_NAME`
 
-Example: `journal entry n/ Today e/ Random Observation`
+Example: `journal entry n/Today e/Random Observation`
 
 Expected outcome:
 
@@ -505,9 +505,9 @@ Expected outcome:
 
 Allows you to tag a notebook.
 
-Format: `journal tag n/ NOTE_INDEX t/ TAG_NAME`
+Format: `journal tag n/NOTE_INDEX t/TAG_NAME`
 
-Example: `journal tag n/ 1 t/ important`
+Example: `journal tag n/1 t/important`
 
 Expected outcome:
 
@@ -538,9 +538,9 @@ Expected outcome:
 
 Deletes the entry.
 
-Format: `journal delete_entry n/ NOTE_NAME e/ ENTRY_NAME`
+Format: `journal delete_entry n/NOTE_NAME e/ENTRY_NAME`
 
-Example: `journal delete_entry n/ Today e/ Random Observation`
+Example: `journal delete_entry n/Today e/Random Observation`
 
 Expected outcome:
 
@@ -593,11 +593,11 @@ to burn them away!
 Example: 
 
 ```
-food add n/ Samurai Burger c/ 433 
-food add n/ Seaweed Shaker Fries Seasoning c/ 15 
-food add n/ Large Fries c/  461 
-food add n/ Caramel Frappé - Medium c/ 624 
-food add n/ A Thousand Tide Pods c/ 92 
+food add n/Samurai Burger c/433 
+food add n/Seaweed Shaker Fries Seasoning c/15 
+food add n/Large Fries c/461 
+food add n/Caramel Frappé - Medium c/624 
+food add n/A Thousand Tide Pods c/92 
 ```
 
 Expected outcome:
@@ -623,7 +623,7 @@ Expected outcome:
 Example of adding with a date
 
 ```
-food add n/ something i ate 2 weeks ago but forgot to record c/ 300 d/ 13-10-2021
+food add n/something i ate 2 weeks ago but forgot to record c/300 d/13-10-2021
         Nice, I see you consumed something i ate 2 weeks ago but forgot to record on 2021-10-13, and have recorded
         __________________________________________________
         Nice.  I've added something i ate 2 weeks ago but forgot to record to the list, with 300 calories!
@@ -742,7 +742,7 @@ to add to your list.
 
 #### 3.5.7 Adding items from a particular stall to your list `food radd`
 
-Format : `food radd s/ [STORE_INDEX] i/ [ITEM_INDEX]`
+Format : `food radd s/[STORE_INDEX] i/[ITEM_INDEX]`
 
 Expected outcome:
 
@@ -753,7 +753,7 @@ For example, if you had just consumed a chicken burger set (Item index 5) sold b
 Hungry Burger (Store index 5), you should see the following:
 
 ```
-food radd s/ 5 i/ 5
+food radd s/5 i/5
 	__________________________________________________
 	Nice, adding the record - 	Chicken Burger Set  : 607 KCal
 	__________________________________________________
@@ -800,20 +800,20 @@ Expected outcome:
 
 **Action** | **Format, Examples**
 |----------|---------------------|
-**Add Food**|`food add n/ [FOOD_NAME] c/ [CALORIE] {d/ [DD-MM-YYYY(DATE_RECORDED)]}`
-**Add Food From Reference**|`food radd s/ [STORE_INDEX] i/ [ITEM_INDEX]`
-**Add Lecture**|`calendar lecture m/ [MODULE_CODE] s/ [DD-MM-YYYY(START_DATE)] e/ [DD-MM-YYYY(END_DATE)]`
-**Add Module**|- `module add c/[MODULE_CODE] n/[MODULE_NAME] m/[MODULAR_CREDITS] e/EXPECTED_GRADE`<br><br> Example: `module add c/CS2113T n/Software Engineering m/4 e/A`<br><br>- `module add c/MODULE_CODE n/MODULE_NAME m/MODULAR_CREDITS`<br><br> Example: `module add c/CS2113T n/Software Engineering m/4`<br><br>- `module add c/MODULE_CODE n/MODULE_NAME` <br><br> Example: `module add c/CS2113T n/Software Engineering` <br><br>- `module add c/MODULE_CODE`<br><br> Example: `module add c/CS2113T`
-**Add Note**|`journal notebook n/ [NOTEBOOK_NAME]`
-**Add Entry**|`journal entry n/ [NOTEBOOK_NAME] e/ [ENTRY_NAME]`
-**Add Todo**|`calendar todo n/ [TASK_NAME] d/ [DD-MM-YYYY]`
-**Add Zoom**|`zoom add [MODULE_CODE] [ZOOM_LINK]`
+**Add Food**|`food add n/[FOOD_NAME] c/[CALORIE] {d/[DD-MM-YYYY(DATE_RECORDED)]}`
+**Add Food From Reference**|`food radd s/[STORE_INDEX] i/[ITEM_INDEX]`
+**Add Lecture**|`calendar lecture m/[MODULE_CODE] s/[DD-MM-YYYY(START_DATE)] e/[DD-MM-YYYY(END_DATE)]`
+**Add Module**|- `module add c/[MODULE_CODE] {n/[MODULE_NAME] m/[MODULAR_CREDITS] e/EXPECTED_GRADE}`
+**Add Note**|`journal notebook n/[NOTEBOOK_NAME]`
+**Add Entry**|`journal entry n/[NOTEBOOK_NAME] e/[ENTRY_NAME]`
+**Add Todo**|`calendar todo n/[TASK_NAME] d/[DD-MM-YYYY]`
+**Add Zoom**|`zoom add[MODULE_CODE][ZOOM_LINK]`
 **Cap Info**|`module info`
 **Clear Food**|`food clear`
-**Delete Entry**|`journal delete_entry n/ [NOTE_NAME] e/ [ENTRY_NAME]`
+**Delete Entry**|`journal delete_entry n/[NOTE_NAME] e/[ENTRY_NAME]`
 **Delete Food**|`food delete INDEX`
 **Delete Lecture**|`calendar delete lec [LECTURE_INDEX]`
-**Delete Module**|`module delete INDEX`<br><br> Example: `module delete 2`
+**Delete Module**|`module delete INDEX`
 **Delete Note**|`journal delete_notebook [NOTE_INDEX]`
 **Delete Task**|`calendar delete task [TASK_INDEX]`
 **Display**|`calendar display [MM-YYYY]`
@@ -831,7 +831,7 @@ Expected outcome:
 **List Lectures**|`calendar list lec`
 **List Zoom Links**|`zoom list`
 **Open Zoom Link**|`zoom open [MODULE_CODE]`
-**Tag Journal**|`journal tag n/ [NOTE_INDEX] t/ [TAG_NAME]`
+**Tag Journal**|`journal tag n/[NOTE_INDEX] t/[TAG_NAME]`
 **View Reference Food**|`food view, food view [STORE_INDEX], food view all`
 **Exit**|`exit`
 
