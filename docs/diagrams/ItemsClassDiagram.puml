@@ -1,0 +1,63 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+class Catalogue {
+    +getAllItems():ArrayList<Item>
+    +getItem(id:String):Item
+    +add(newItem:Item)
+    +removeItem(id:String):Item
+}
+
+class "{abstract}\n Item" {
+    -title:String
+    -id:String
+    -status:Status
+    -loanee:String
+    -dueDate:LocalDate
+    +toString():String
+}
+
+class Audio {
+    -artist:String
+    -duration:String
+    +toString():String
+}
+
+class Book {
+    -author:String
+    +toString():String
+}
+
+class Magazine {
+    -publisher:String
+    -edition:String
+    +toString():String
+}
+
+class Video {
+    -publisher:String
+    -duration:String
+    +toString():String
+}
+
+class Miscellaneous {
+    +toString():String
+}
+
+enum "<<Enumeration>> \n Status" {
+    AVAILABLE
+    LOANED
+    RESERVED
+}
+
+
+Audio -up-|> "{abstract}\n Item"
+Book -up-|> "{abstract}\n Item"
+Magazine -up-|> "{abstract}\n Item"
+Video -up-|> "{abstract}\n Item"
+Miscellaneous -left-|> "{abstract}\n Item"
+
+"{abstract}\n Item" -u-> "1" "<<Enumeration>> \n Status" : status
+Catalogue -> "*" "{abstract}\n Item" : itemsArrayList
+@enduml

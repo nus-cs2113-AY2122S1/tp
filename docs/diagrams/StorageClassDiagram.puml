@@ -1,0 +1,43 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+package "Storage Component" <<Rectangle>> {
+    class Storage
+    class JsonFactory
+}
+
+class Duke {
+    - ui:TextUI
+    - catalogue:Catalogue
+    - parser:Parser
+    +main()
+}
+
+class Storage {
+    # dataDir:String
+    # dataFile:String
+    - data:File
+    -validatePath() : File
+
+}
+
+class JsonFactory {
+    - {static} mapper:ObjectMapper
+    - allItems:objectNode
+    + fromJson(File data) : ArrayList<Item>
+    - jsonToAudio(ArrayNode arrayNode) : ArrayList<Audio>
+    - jsonToBook(ArrayNode arrayNode) : ArrayList<Book>
+    - jsonToItem(ArrayNode arrayNode) : ArrayList<Miscellaneous>
+    - jsonToMagazine(ArrayNode arrayNode) : ArrayList<Magazine>
+    - jsonToVideo(ArrayNode arrayNode) : ArrayList<Video>
+}
+
+package Catalogue <<Rectangle>> {
+}
+
+Duke -right-> "1" Storage
+Storage -[dashed]right-> JsonFactory : uses >
+Storage -[dashed]down-> Catalogue : accesses >
+JsonFactory -[dashed]down-> Catalogue : converts to JSON >
+@enduml

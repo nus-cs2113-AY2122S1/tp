@@ -1,0 +1,34 @@
+@startuml
+hide footbox
+
+Participant ":Libmgr" as libmgr
+Participant "storage:Storage" as storage
+Participant "jsonFactory:JsonFactory" as json
+Participant "catalogue:Catalogue" as catalogue
+
+activate libmgr
+create storage
+libmgr -> storage:Storage(ui)
+activate storage
+
+storage -> storage:validatePath()
+activate storage
+return data:File
+
+create json
+storage -> json:JsonFactory()
+activate json
+return
+return
+
+libmgr -> storage:read(catalogue)
+activate storage
+storage -> json:fromJson(data:File)
+activate json
+return itemsArrayList:ArrayList<Item>
+storage -> catalogue:setItemsArrayList(itemsArrayList)
+activate catalogue
+return
+return
+
+@enduml

@@ -1,0 +1,67 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+Participant ":Libmgr" as libmgr
+Participant "parser:Parser" as parser
+Participant ":SearchCommand" as searchCommand
+Participant "[number]Match:ArrayList<Item>" as numMatch
+Participant "catalogue:Catalogue" as catalogue
+Participant "ui:TextUI" as ui
+
+-> libmgr
+activate libmgr
+
+libmgr -> parser:parse("search c/book s/loaned")
+activate parser
+parser -> parser:extractArgs("search c/book s/loaned")
+activate parser
+return args:HashMap<String, String>
+return userCommand:SearchCommand
+
+libmgr -> searchCommand:execute(ui, catalogue)
+activate searchCommand
+searchCommand -> searchCommand:handleSearchCommand(ui, catalogue)
+activate searchCommand
+
+ref over searchCommand
+    checkValidArgs(), checkAdditionalArgs(),
+    checkValidStatus(), checkValidCategory(),
+end ref
+
+create numMatch
+searchCommand -> numMatch
+activate numMatch
+return
+
+searchCommand -> catalogue:getAllItems()
+activate catalogue
+return : catalogue
+
+loop temp in catalogue
+    searchCommand -> searchCommand:checkMatches(temp)
+    activate searchCommand
+    return matches:Integer
+    opt matches = num
+        searchCommand -> numMatch:add(temp)
+        activate numMatch
+        return
+    end
+end
+
+loop temp in [number]Match
+    searchCommand -> ui:print(temp)
+    activate ui
+    return
+end
+
+destroy numMatch
+
+return
+return
+destroy searchCommand
+
+
+
+
+@enduml

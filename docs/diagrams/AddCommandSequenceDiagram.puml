@@ -1,0 +1,54 @@
+@startuml
+hide footbox
+
+Participant ":Libmgr" as libmgr
+Participant "parser:Parser" as parser
+Participant "userCommand:AddBookCommand" as cmd
+Participant "newBook:Book" as book
+Participant "catalogue:Catalogue" as catalogue
+
+activate libmgr
+
+
+-> libmgr
+libmgr -> parser:parse("add b t/1984 i/91 a/George Orwell")
+activate parser
+
+parser -> parser:extractArgs("add b t/1984 i/91 a/George Orwell")
+activate parser
+return args:HashMap<String, String>
+
+create cmd
+parser -> cmd:AddBookCommand(args:HashMap<String, String>)
+activate cmd
+return
+
+return userCommand:AddBookCommand
+
+libmgr -> cmd:execute(ui:TextUI, catalogue:Catalogue)
+activate cmd
+
+cmd -> cmd:checkMissingArgs()
+activate cmd
+return isMissingArgs:Boolean
+
+cmd -> cmd:checkAdditionalArgs()
+activate cmd
+return isAdditionalArgs:Boolean
+
+create book
+cmd -> book:Book("1984", "91", "AVAILABLE", null, null, "George Orwell")
+activate book
+return
+
+cmd -> catalogue:add("newBook:Book")
+activate catalogue
+return
+
+return
+
+cmd --[hidden]> cmd
+destroy book
+destroy cmd
+
+@enduml

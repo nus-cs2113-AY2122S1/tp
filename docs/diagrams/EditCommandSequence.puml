@@ -1,0 +1,91 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant ":Libmgr" as Libmgr
+participant "parser:Parser" as Parser
+participant "userCommand:EditCommand" as EditCommand
+participant "catalogue:Catalogue" as Catalogue
+participant "userBookCommand:EditBookCommand" as EditBookCommand
+participant "toEditBook:Book" as Book
+
+hide footbox
+
+activate Libmgr
+Libmgr -> Parser: parse("edit 123 t/Harry Potter")
+activate Parser
+Parser -> Parser: extractArgs("edit 123 t/Harry Potter")
+activate Parser
+Parser --> Parser: args: HashMap<String, String>
+deactivate Parser
+create EditCommand
+Parser -> EditCommand: EditCommand(args: HashMap<String, String>)
+activate EditCommand
+EditCommand --> Parser: userCommand: EditCommand
+deactivate EditCommand
+Parser --> Libmgr: userCommand: EditCommand
+deactivate Parser
+
+Libmgr -> EditCommand: execute(ui: TextUI, catalogue: Catalogue)
+activate EditCommand
+EditCommand -> EditCommand: handlesEditCommand(ui: TextUI, catalogue: Catalogue)
+activate EditCommand
+EditCommand -> EditCommand: processArgs(catalogue: Catalogue)
+activate EditCommand
+
+EditCommand -> Catalogue: getItem(id: String)
+activate Catalogue
+Catalogue --> EditCommand: toEdit: Item
+deactivate Catalogue
+EditCommand --> EditCommand
+deactivate EditCommand
+create EditBookCommand
+EditCommand -> EditBookCommand: EditBookCommand(args: HashMap<String, String>, toEdit: Item)
+activate EditBookCommand
+EditBookCommand -> EditBookCommand: execute(ui: TextUI, catalogue: Catalogue)
+activate EditBookCommand
+EditBookCommand -> EditBookCommand: handlesEditBookCommand(ui: TextUI, catalogue: Catalogue)
+activate EditBookCommand
+EditBookCommand -> EditBookCommand: processArgs()
+activate EditBookCommand
+EditBookCommand --> EditBookCommand
+deactivate EditBookCommand
+EditBookCommand -> EditBookCommand: checkMissingArgs()
+activate EditBookCommand
+EditBookCommand --> EditBookCommand: hasMissingArgs: boolean
+deactivate EditBookCommand
+EditBookCommand -> EditBookCommand: checkEmptyArgs()
+activate EditBookCommand
+EditBookCommand --> EditBookCommand: hasEmptyArgs: boolean
+deactivate EditBookCommand
+EditBookCommand -> EditBookCommand: checkInvalidArgs()
+activate EditBookCommand
+EditBookCommand --> EditBookCommand: hasInvalidArgs: boolean
+deactivate EditBookCommand
+
+create Book
+EditBookCommand -> Book: setTitle(title: String)
+activate Book
+Book --> EditBookCommand
+deactivate Book
+
+EditBookCommand --> EditBookCommand
+deactivate EditBookCommand
+
+EditBookCommand --> EditBookCommand
+deactivate EditBookCommand
+
+EditBookCommand --> EditCommand
+deactivate EditBookCommand
+
+EditCommand --> EditCommand
+deactivate EditCommand
+
+EditCommand --> Libmgr
+deactivate EditCommand
+
+destroy Book
+destroy EditCommand
+destroy EditBookCommand
+
+
+@enduml

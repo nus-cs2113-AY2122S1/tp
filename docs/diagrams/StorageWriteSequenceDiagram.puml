@@ -1,0 +1,23 @@
+@startuml
+hide footbox
+
+Participant ":Libmgr" as libmgr
+Participant "storage:Storage" as storage
+Participant "jsonFactory:JsonFactory" as json
+Participant "catalogue:Catalogue" as catalogue
+
+activate libmgr
+libmgr -> storage:write()
+activate storage
+
+storage -> json:toJson()
+activate json
+
+ref over json, catalogue
+    get list of all items of categories
+    Audio, Book, Magazine, Video, Miscellaneous
+end ref
+return
+return
+
+@enduml

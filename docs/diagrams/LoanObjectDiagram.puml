@@ -1,0 +1,16 @@
+@startuml
+object "__:Book__" as book
+book : title: "To Kill a Mockingbird"
+book : id: 2551
+book : author: "Harper Lee"
+book : dueDate: 12-11-2021
+book : status: LOANED
+book : loanee: "John Smith"
+
+object "__:LoanCommand__" as cmd
+cmd : id: 2551
+cmd : username: "John Smith"
+cmd : dueDate: 12-11-2021
+
+cmd -up-> book
+@enduml
