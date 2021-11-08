@@ -50,6 +50,25 @@ public class IngredientStorage {
         return quantity;
     }
 
+    /**
+     * Returns the unit for the ingredient.
+     *
+     * @return The unit for the ingredient.
+     */
+    public String getUnit() {
+        return ingredient.getUnit();
+    }
+
+    /**
+     * Returns the formatted unit for the ingredient.
+     * It will either be an empty string (i.e. "") or the unit prefixed with a space (e.g. " kg").
+     *
+     * @return The formatted unit for the ingredient.
+     */
+    public String getFormattedUnit() {
+        return ingredient.getFormattedUnit();
+    }
+
     public LocalDate getEarliestExpiryDate() {
         return ingredientBatches.firstKey();
     }
@@ -140,7 +159,7 @@ public class IngredientStorage {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(ingredient.getName()).append(" (qty: ").append(quantity);
-        final String unitString = ingredient.getUnit() == null ? "" : " " + ingredient.getUnit();
+        final String unitString = getFormattedUnit();
         stringBuilder.append(unitString);
         stringBuilder.append(")\n");
         for (Map.Entry<LocalDate, Integer> entry : ingredientBatches.entrySet()) {
