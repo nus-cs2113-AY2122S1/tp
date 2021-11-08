@@ -39,8 +39,8 @@ Designed for fast typists, it can help to augment the day-to-day tasks of a libr
    3. User Stories
    4. Non-functional requirements
 4. Created UML diagrams for
-    1. Design - Commands component (Class Diagram)
-    2. Implementation - Edit Command (Object and Sequence Diagram)
+    1. Design - Commands component (Class Diagrams)
+    2. Implementation - Edit Command (Sequence Diagram)
 
 ### Contributions to team-based-tasks
 
