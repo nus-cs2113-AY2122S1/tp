@@ -12,36 +12,80 @@ Expiry Eliminator is a desktop app for managing the freshness of ingredients in 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `ExpiryEliminator` from [here](https://github.com/AY2122S1-CS2113-T16-3/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for this program.
-4. Open a command prompt / PowerShell / terminal window and run the program with `java -jar [filepath of jar file]`.
+4. Open a command prompt / PowerShell / terminal window and run the program with `java -jar [filepath of jar file]`. You should see the following:
+
+![](images/expiryeliminator-startup.png)
 
 ## Features
 
 > **Notes about the command format:**
 >
 > - Words in UPPER_CASE are the parameters to be supplied by the user (e.g. in `view i/INGREDIENT`, `INGREDIENT` is a parameter which can be used as `view i/Red Apple`).
-> - Parameters in square brackets are optional (e.g. `[u/UNIT]`).
-> - Parameters with `...` after them can be used multiple times, but must appear at least once (e.g. `q/QUANTITY...`).
-> - Parameters can be in any order.
-> - There must be no spaces between / and the parameters. (e.g. `u/ UNITS`).
+> - Parameters in square brackets are optional (e.g. `i/INGREDIENT [u/UNIT]` can be used as `i/Chicken u/kg` or as `i/Chicken`).
+> - Parameters with `...` after them can be used multiple times, but must appear at least once (e.g. `r/RECIPE...` can be used as `r/Apple Pie`, `r/Apple Pie r/Chicken Soup`, etc.).
+> - Parameters can be in any order (e.g. if the command specifies `q/QUANTITY e/EXPIRY_DATE`, `e/EXPIRY_DATE q/QUANTITY` is also acceptable).
+> - Commands are case-insensitive (e.g. if the command specifies `help`, `HELP` and `hElP` are also acceptable).
+> - There must be no spaces between the `/` and the parameters. (e.g. `u/ UNITS` is not allowed).
+> - If a parameter is expected only once in the command, but you specified it multiple times, an error message will be shown.
+> - Extraneous parameters are not allowed. If you provide a parameter that is not accepted, an error message will be shown. 
+
+<br/>
+
+### Viewing help: `help`
+
+Shows a help message explaining the various commands.
+
+Format: `help`
+
+<br/>
+
+### Exiting the program: `bye`
+
+Exits the program.
+
+Format: `bye`
+
+<br/>
 
 ### Adding an ingredient: `add`
 
 Adds an ingredient to the ingredient repository.
 
-Format: `add i/INGREDIENT [u/UNIT] [q/QUANTITY e/EXPIRY_DATE]`
+Format: `add i/INGREDIENT [u/UNIT]`
 
+- Note that this only adds the ingredient name (and optional unit) to the ingredient repository. If you would like to add quantities for an ingredient, please use the `increment` command instead (see [Incrementing quantities for an ingredient](#incrementing-quantities-for-an-ingredient-increment)).
 - Unit is optional.
-- Quantity and expiry date is optional, but you cannot have one and not the other (i.e. you either don't provide both quantity and expiry date, or you provide both quantity and expiry date).
-- Expiry date must be in the format of `yyyy-mm-dd`. It is possible to add an ingredient that has already expired.
-- Quantity must be a positive integer.
 - Note that ingredient names are case-insensitive, and will be automatically stored in title case (e.g. `ReD aPplE` will be stored as `Red Apple`).
-- Ingredient names must be unique.
-- If the ingredient name already exists, an error message will be shown.
+- Ingredient names and units must only contain letters (i.e. `a-Z`) and spaces. Numbers and special characters are not allowed.
+- Ingredient names must be unique. If the ingredient name already exists, an error message will be shown.
 
 Example of usage:
 - `add i/Red Apple`
 - `add i/Salt u/g`
 - `add i/Chicken u/kg`
+
+Output: 
+- If adding ingredient for the first time:
+```
+add i/Chicken u/kg
+    ____________________________________________________________________________________________________
+     I've added this ingredient:
+
+     Chicken (qty: 0 kg)
+
+     Now you have 1 ingredient(s)
+    ____________________________________________________________________________________________________
+```
+
+- If ingredient name already exists:
+```
+add i/Chicken u/kg
+    ____________________________________________________________________________________________________
+     Unable to add ingredient: Chicken
+     You already have it in your list
+     If you are trying to add quantities for an ingredient, please use the `increment` command instead
+    ____________________________________________________________________________________________________
+```
 
 <br/>
 
@@ -63,6 +107,17 @@ Example of usage:
 - `increment i/Chicken q/2 e/2021-11-15`
 - `increment i/Chicken q/2 e/2021-11-08`
 
+Output:
+```
+increment i/Chicken q/2 e/2021-11-08
+    ____________________________________________________________________________________________________
+     I've incremented this ingredient by 2 kg:
+
+     Chicken (qty: 2 kg)
+     - 2 kg (2021-11-08)
+    ____________________________________________________________________________________________________
+```
+
 <br/>
 
 ### Decrementing quantities for an ingredient: `decrement`
@@ -81,6 +136,26 @@ Example of usage:
 - `decrement i/Red Apple q/2`
 - `decrement i/Salt q/10`
 
+Output:
+- If there is sufficient quantity to decrement:
+```
+decrement i/Salt q/10
+    ____________________________________________________________________________________________________
+     I've decremented this ingredient by 10 g:
+
+     Salt (qty: 190 g)
+     - 190 g (2021-10-22)
+    ____________________________________________________________________________________________________
+```
+- If there is insufficient quantity to decrement:
+```
+decrement i/Salt q/1000
+    ____________________________________________________________________________________________________
+     Sorry, you currently only have 190 g of this ingredient.
+     You cannot decrease it by 1000 g.
+    ____________________________________________________________________________________________________
+```
+
 <br/>
 
 ### Updating units of an ingredient: `update units`
@@ -91,7 +166,7 @@ Format: `update units i/INGREDIENT u/UNIT`
 
 - The units will be updated in both the ingredient repository and recipes.
 - If units is left blank, the units will be deleted (back to default value).
-- There cannot be a space between / and your input units 
+- There cannot be a space between `/` and your input units.
 
 Example of usage:
 - `update units i/salt u/grams`
@@ -99,22 +174,24 @@ Example of usage:
 - `update units i/pork u/kg`
 - `update units i/salt u/`
 
-Example incorrect usage:
+Example of incorrect usage:
 - `update units i/salt u/ kilograms`
 - `update units i/salt u/6`
 
 Output: 
-- If ingredient exists:
+- If a new unit is specified:
 ```
+update units i/chicken u/kilograms
     ____________________________________________________________________________________________________
      The units for this ingredient has been updated to kilograms.
     ____________________________________________________________________________________________________
 ```
 
-- If ingredient does not exist
+- If the new unit is specified as blank:
 ```
+update units i/salt u/
     ____________________________________________________________________________________________________
-     Sorry. No matching ingredients found!
+     The units for this ingredient has been deleted
     ____________________________________________________________________________________________________
 ```
 
@@ -236,6 +313,7 @@ Example of usage:
 Output:
 - If ingredient exists:
 ```
+view i/Chicken
     ____________________________________________________________________________________________________
      Here is the ingredient in your list:
 
@@ -245,14 +323,6 @@ Output:
     ____________________________________________________________________________________________________
 ```
 
-- If ingredient does not exist:
-```
-    ____________________________________________________________________________________________________
-     Sorry. No matching ingredients found!
-    ____________________________________________________________________________________________________
-```
-
-
 <br/>
 
 ### Deleting an ingredient: `delete`
@@ -261,19 +331,30 @@ Deletes the specified ingredient from the ingredient repository.
 
 Format: `delete i/INGREDIENT`
 
+- Note that this command should only be used if you no longer want to use this ingredient anymore (e.g. you accidentally added this ingredient due to a typo). If you merely want to decrease the quantity to 0 but keep the ingredient in your repository, please use the `decrement` command instead (see [Decrementing quantities for an ingredient](#decrementing-quantities-for-an-ingredient-decrement)). That way, the ingredient can still be used as part of a recipe.
 - An ingredient cannot be deleted if it is part of a recipe. To delete an ingredient, delete all recipes that contain the ingredient first.
-- To clear all quantities of an ingredient in the ingredient repository, use the `decrement` command instead. That way, the ingredient can still be used as part of a recipe.
 - Names are case-insensitive (e.g. `red apple` will match `Red Apple`).
 - If the ingredient name is not found, an error message will be shown.
 
 Example:
 - `delete i/Red Apple`
 
+Output:
+```
+delete i/red appel
+    ____________________________________________________________________________________________________
+     I've deleted this ingredient for you:
+     Red Appel (qty: 0)
+
+     Now you have 0 ingredient(s)
+    ____________________________________________________________________________________________________
+```
+
 <br/>
 
 ### Deleting all expired ingredients: `delete expired`
 
-Removes all expired batches (not Ingredients) of ingredients from the ingredient repository.
+Removes all expired batches (not the entire ingredient) of ingredients from the ingredient repository.
 
 Format: `delete expired`
 
@@ -305,7 +386,7 @@ Output:
 
 Adds a recipe with its respective ingredients and quantities to the recipe list.
 
-Format: `add recipe r/RECIPE i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...`
+Format: `add recipe r/RECIPE i/INGREDIENT... q/QUANTITY...`
 
 - Adds a recipe with the name `RECIPE` and its `INGREDIENT` with the corresponding `QUANTITY` for each ingredient. 
   `QUANTITY` must be a positive integer. It is not possible to have zero quantity.
@@ -330,36 +411,38 @@ Example of usage:
 
 Output:
 - If the ingredients do not exist in the list,
-  ```
-      ____________________________________________________________________________________________________
-       I've added this recipe:
-
-       Chicken Soup
-        - Chicken (qty: 1)
-        - Salt (qty: 20)
-
-       Now you have 3 recipe(s)
-
-       I've also added these ingredients:
-
-       Chicken
-       Salt
-
-       Please update the unit if required.
-      ____________________________________________________________________________________________________
-  ```
-- If the ingredients exist in the list,
-  ```
-      ____________________________________________________________________________________________________
-       I've added this recipe:
-
-       Chicken Soup
-       - Chicken (qty: 1)
-       - Salt (qty: 20)
-
-       Now you have 3 recipe(s)
-      ____________________________________________________________________________________________________
-  ```
+ ```
+add recipe r/Chicken Soup i/Chicken q/1 i/Salt q/20
+    ____________________________________________________________________________________________________
+    I've added this recipe:
+    
+    Chicken Soup
+    - Chicken (qty: 1)
+    - Salt (qty: 20)
+    
+    Now you have 3 recipe(s)
+    
+    I've also added these ingredients:
+    
+    Chicken
+    Salt
+    
+    Please update the unit if required.
+    ____________________________________________________________________________________________________
+```
+- If the ingredients already exist in the list,
+```
+add recipe r/Chicken Soup i/Chicken q/1 i/Salt q/20
+    ____________________________________________________________________________________________________
+    I've added this recipe:
+    
+    Chicken Soup
+    - Chicken (qty: 1)
+    - Salt (qty: 20)
+    
+    Now you have 3 recipe(s)
+    ____________________________________________________________________________________________________
+```
   
   
 
@@ -382,8 +465,8 @@ Example of usage:
 - `delete recipe r/Chicken Soup`
 
 Output:
-- If recipe is in the list.
 ```
+delete recipe r/Chicken Soup
     ____________________________________________________________________________________________________
      I've deleted this recipe for you:
      
@@ -418,8 +501,9 @@ Example of usage:
 - `cooked r/Chicken Soup`
 
 Output:
-- If there are sufficient ingredients.
+- If there are sufficient ingredients:
 ```
+cooked r/Chicken Soup
     ____________________________________________________________________________________________________
      Now you have these quantities left for your ingredients:
 
@@ -507,12 +591,16 @@ Example of usage:
 
 Updates a recipe by modifying the quantity of ingredients in that recipe.
 
-Format: `update recipe r/RECIPE i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...`
+Format: `update recipe r/RECIPE i/INGREDIENT... q/QUANTITY...`
 
-- It is not possible to update an ingredient to be zero quantity.
+- You can modify the quantities of ingredients in a recipe.
+- You can also add a new ingredient that was previously not in the recipe.
+- You can also delete an ingredient from the recipe by setting the quantity to be zero (i.e. `q/0`).
+- Note that it is not possible to delete ingredients from the recipe if there is only 1 ingredient left.
 
 Example of usage:
 - `update recipe r/Apple Pie i/apple q/3 i/flour q/200`
+- `update recipe r/Apple Pie i/apple q/3 i/flour q/0`
 
 <br/>
 
@@ -532,6 +620,7 @@ Example of usage:
 Output:
 - If recipe exists:
 ```
+shopping list r/Chicken Soup r/Pork Soup
     ____________________________________________________________________________________________________
      Here is your shopping list!
 
@@ -544,6 +633,7 @@ Output:
 
 - If at least one recipe does not exist:
 ```
+shopping list r/Chicken Soup r/Pork Soup
     ____________________________________________________________________________________________________
      Sorry. One or more of your recipes are not found!
     ____________________________________________________________________________________________________
@@ -551,87 +641,69 @@ Output:
 
 <br/>
 
-### Viewing help: `help`
-
-Shows a help message explaining the various commands.
-
-Format: `help`
-
-<br/>
-
-### Exiting the program: `bye`
-
-Exits the program.
-
-Format: `bye`
-
-<br/>
-
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: Download the app on the other computer. Then, copy the data from the original computer (i.e. `data` folder in the `ExpiryEliminator` home folder) and overwrite the data in the `ExpiryEliminator` home folder on the other computer.
 
 ## Command Summary
 
-1. Adding an ingredient
-    - Command: `add i/INGREDIENT [u/UNIT] [q/QUANTITY e/EXPIRY_DATE]`
+1. Viewing help
+    - Command: `help`
+2. Exiting the program
+    - Command: `bye`
+3. Adding an ingredient
+    - Command: `add i/INGREDIENT [u/UNIT]`
     - E.g.: `add i/Red Apple`
     - E.g.: `add i/Salt u/g`
-    - E.g.: `add i/Red Apple q/5 e/2021-10-08`
-    - E.g.: `add i/Salt u/g q/1000 e/2021-01-01`
-2. Incrementing quantities for an ingredient
+4. Incrementing quantities for an ingredient
     - Command: `increment i/INGREDIENT q/QUANTITY e/EXPIRY_DATE`
     - E.g.: `increment i/Red Apple q/6 e/2021-10-22`
     - E.g.: `increment i/Salt q/200 e/2021-10-22`
-3. Decrementing quantities for an ingredient
+5. Decrementing quantities for an ingredient
     - Command: `decrement i/INGREDIENT q/QUANTITY`
     - E.g.: `decrement i/Red Apple q/2`
     - E.g.: `decrement i/Salt q/10`
-4. Updating units of an ingredient
+6. Updating units of an ingredient
     - Command: `update units i/INGREDIENT u/UNIT`
     - E.g.: `update units i/salt u/kilograms`
     - E.g.: `update units i/salt u/`
-5. Listing all ingredients
+7. Listing all ingredients
     - Command: `list`
-6. Listing ingredients that are expiring
+8. Listing ingredients that are expiring
     - Command: `list expiring`
-7. Listing ingredients that have expired
+9. Listing ingredients that have expired
     - Command: `list expired`
-8. Viewing a specific ingredient
-    - Command: `view i/INGREDIENT`
-    - E.g.: `view i/salt`
-9. Deleting an ingredient
-    - Command: `delete i/INGREDIENT`
-    - E.g. `delete i/Red Apple`
-10. Deleting all expired ingredients
+10. Viewing a specific ingredient
+     - Command: `view i/INGREDIENT`
+     - E.g.: `view i/salt`
+11. Deleting an ingredient
+     - Command: `delete i/INGREDIENT`
+     - E.g. `delete i/Red Apple`
+12. Deleting all expired ingredients
     - Command: `delete expired`
-11. Adding a recipe
-    - Command: `add recipe r/RECIPE i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...`
+13. Adding a recipe
+    - Command: `add recipe r/RECIPE i/INGREDIENT... q/QUANTITY...`
     - E.g.: `add recipe r/Chicken Soup i/Chicken q/300 i/Salt q/10`
     - E.g.: `add recipe r/Chicken Soup i/Chicken i/Salt q/300 q/10`
-12. Deleting a recipe
+14. Deleting a recipe
     - Command : `delete recipe r/RECIPE`
     - E.g.: `delete recipe r/Chicken Soup`
-13. Removing ingredients when a recipe is cooked:
+15. Removing ingredients when a recipe is cooked:
     - Command: `cooked r/RECIPE`
     - E.g.: `cooked r/Chicken Soup`
-14. Listing recipes that can be cooked
+16. Listing recipes that can be cooked
     - Command: `list recipes i can cook`
-15. Listing all recipes
+17. Listing all recipes
     - Command: `list recipes`
-16. Viewing a specific recipe
+18. Viewing a specific recipe
     - Command: `view recipe r/RECIPE`
     - E.g.: `view recipe r/Curry Chicken`
-17. Updating quantities of ingredients in a recipe
-    - Command: `update recipe r/RECIPE i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...`
+19. Updating quantities of ingredients in a recipe
+    - Command: `update recipe r/RECIPE i/INGREDIENT... q/QUANTITY...`
     - E.g.: `update recipe r/Apple Pie i/apple q/3 i/flour q/200`
-18. Creating a shopping list of ingredients for a list of recipes
+20. Creating a shopping list of ingredients for a list of recipes
     - Command: `shopping list r/RECIPE...`
     - E.g.: `shopping list r/Chicken Soup`
     - E.g.: `shopping list r/Chicken Soup r/Pork Soup`
-19. Viewing help
-    - Command: `help`
-20. Exiting the program
-    - Command: `bye`
