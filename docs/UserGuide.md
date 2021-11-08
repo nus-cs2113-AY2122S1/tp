@@ -552,8 +552,27 @@ Example Output
 #### Notes:
 - Before or after DATE_TIME also includes the appointment (if any) at the date/time specified.
 
+## 5. Future Implementations [coming in v3.0]
+### 5.1 Table Paging
+* A page in a table shown by `list` will be limited to 50 records.
+* `list` will include paging feature with `next` and `prev` commands to get 
+  to the next page or the previous page, to get the next 50 or the previous 50 records 
+  in the table.
 
-## 5. FAQ
+### 5.2 Patient's Medical Information
+* Patient's medical issues will be added into MedBot so that medical staffs can better 
+  prepare any necessary arrangements before an appointment.
+
+### 5.3 View Patients' or Staffs' Appointments
+* View all appointments scheduled to a particular patient or staff.
+
+### 5.4 Different Identification Numbers
+* Accepting other persons' IDs such as Passport Number.
+
+### 5.5 Different Phone Number Formats
+* Accepting different phone number format from different countries.
+
+## 6. FAQ
 
 **Q**: How do I transfer my data to another computer?
 
@@ -562,9 +581,9 @@ There are 3 text files in `MedBotData` - `patient.txt`, `staff.txt` and `appoint
 the `MedBotData` directory containing the three text files to the other computer, and run the `MedBot.jar` in the same new
 location as the `MedBotData` directory.
 
-## 6. Command Summary
+## 7. Command Summary
 
-### 6.1 General Commands
+### 7.1 General Commands
 
 | Action       | Format + Examples |
 | :---         | :-----            |
@@ -573,7 +592,7 @@ location as the `MedBotData` directory.
 | **get view** | `get view`|
 | **exit**     | `exit`|
 
-### 6.2 Patient/Medical Staff Management Commands
+### 7.2 Patient/Medical Staff Management Commands
 
 | Action       | Format + Examples        |
 | :---         | :---                     |
@@ -586,7 +605,7 @@ location as the `MedBotData` directory.
 | **hide**     | `hide PATIENT_ID`<br/>eg., `hide 1`|
 | **show**     | `show PATIENT_ID`<br/>eg., `show 1`|
 
-### 6.3 Scheduler Commands
+### 7.3 Scheduler Commands
 
 | Action       | Format + Examples        |
 | :---         | :---                     |
