@@ -5,7 +5,11 @@ import seedu.budgettracker.ui.TextUi;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_STAT_COMMAND;
 
 public class StatYearCommand extends StatCommand {
-    private int type = 0;
+    private final int type;
+
+    public static final String MESSAGE_USAGE = "Display the statistics for the current database year "
+            + "being worked on.\n"
+            + "Parameters: -y t/[TYPE]";
 
     public StatYearCommand(int type) {
         this.type = type;
@@ -90,12 +94,10 @@ public class StatYearCommand extends StatCommand {
     @Override
     public void execute() {
         switch (type) {
-        case (1):
-            typeVerticalBarGraph();
-            break;
         case (2):
             typeSingleOverallGraph();
             break;
+        case (1):
         default:
             typeVerticalBarGraph();
             break;

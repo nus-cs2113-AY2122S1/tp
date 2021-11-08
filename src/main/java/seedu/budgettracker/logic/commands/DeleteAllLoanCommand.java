@@ -1,10 +1,11 @@
 package seedu.budgettracker.logic.commands;
 
+import seedu.budgettracker.logic.commands.exceptions.CommandException;
 import seedu.budgettracker.ui.TextUi;
 
 public class DeleteAllLoanCommand extends DeleteCommand {
 
-    public static final String MESSAGE_USAGE = "Delete all loan record.\n"
+    public static final String MESSAGE_USAGE = "Delete all loan records.\n"
             + "Parameters: -l m/MONTH\n";
     public final int month;
 
@@ -13,7 +14,7 @@ public class DeleteAllLoanCommand extends DeleteCommand {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CommandException {
         int sizeBeforeDeletion = allRecordList.getLoanListSize(month);
         for (int i = 1; i <= sizeBeforeDeletion; i++) {
             allRecordList.deleteLoan(1, month);

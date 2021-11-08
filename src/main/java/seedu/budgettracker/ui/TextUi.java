@@ -63,7 +63,7 @@ public class TextUi {
         System.out.println();
 
         System.out.println("Loading... Please Wait");
-        Delay.loadingBar(40);
+        Delay.loadingBar(20);
 
         System.out.println(DIVIDER + LS
                 + LOGO + LS
@@ -116,6 +116,13 @@ public class TextUi {
         double totalMonthExpenditureSpending = recordList.getTotalAmountSpent(month);
 
         spendingNotice(monthString, amount, totalMonthExpenditureSpending);
+    }
+
+    private static void showExpenditureDetailsForDelete(Expenditure newExpenditure) {
+        System.out.println("Description: " + newExpenditure.getDescription()
+                + "\nAmount: $" + df.format(newExpenditure.getAmount())
+                + "\nDate: " + newExpenditure.getDateString()
+                + "\nCategory: " + newExpenditure.getCategoryString());
     }
 
     private static void spendingNotice(String monthString, double amount, double totalMonthExpenditureSpending) {
@@ -311,7 +318,7 @@ public class TextUi {
     }
 
     /**
-     * Possible error: Names/Descriptions longer than 20characters get truncated.
+     * Names/Descriptions longer than 30characters may get truncated.
      */
     private static void getMonthListView(AllRecordList list, int month, String monthString,
                                          String budget, Category category) {
@@ -360,9 +367,9 @@ public class TextUi {
         }
     }
 
-    public static void showSingleExpenditureDeletedMessage(int index, Expenditure deleteExe, AllRecordList recordList) {
+    public static void showSingleExpenditureDeletedMessage(int index, Expenditure delExe, AllRecordList allRecordList) {
         System.out.println("Successfully deleted Expenditure " + index + ":");
-        showExpenditureDetails(deleteExe, recordList);
+        showExpenditureDetails(delExe, allRecordList);
         System.out.println(DIVIDER);
     }
 
@@ -382,9 +389,13 @@ public class TextUi {
         System.out.println(DIVIDER);
     }
 
-    public static void showMultipleExpenditureDeletedMessage(int index, Expenditure delExe, AllRecordList recordList) {
-        System.out.println("Successfully deleted Expenditure " + index + ":");
-        showExpenditureDetails(delExe, recordList);
+    public static void showMultiExpenditureDelMessage(int index1, int index2, Expenditure delExe, AllRecordList list) {
+        System.out.println("Successfully deleted Expenditure " + index1 + ":");
+        if (index1 != index2) {
+            showExpenditureDetailsForDelete(delExe);
+        } else {
+            showExpenditureDetails(delExe, list);
+        }
         System.out.println(DIVIDER);
     }
 
@@ -468,10 +479,14 @@ public class TextUi {
         }
     }
 
-    public static void displayStats(double[] categoryPercentage, String topCategory, double topCategorySpending) {
+    public static void displayStats(int month, double[] categoryPercentage, double monthBudget,
+                                    String topCategory, double topCategorySpending) {
+        String monthString = getMonthString(month);
+        System.out.println("Here are the statistics for the month of " + monthString + ":");
         drawHorizontalGraph(categoryPercentage);
-        System.out.println("The category you spent the most on is: " + topCategory);
-        System.out.println("The amount you spent on this category is: $" + df.format(topCategorySpending));
+        System.out.println("Your budget: $" + df.format(monthBudget));
+        System.out.println("The category you spent the most on: " + topCategory);
+        System.out.println("The amount you spent on this category: $" + df.format(topCategorySpending));
         printDivider();
     }
 
@@ -487,8 +502,9 @@ public class TextUi {
 
     private static void printHorizontalGraphHeader() {
         System.out.printf("%-14s", " ");
+        System.out.printf("%-6s", "0%");
         for (int i = 1; i <= 10; i++) {
-            System.out.printf("%-6s", " " + (i * 10) + "%");
+            System.out.printf("%-6s", (i * 10) + "%");
         }
         System.out.println();
     }
@@ -506,7 +522,7 @@ public class TextUi {
             }
             System.out.print(barToPrint);
         }
-        System.out.print(" " + df.format(percentageToPrint) + "%");
+        System.out.print("     " + df.format(percentageToPrint) + "%");
         System.out.println();
     }
 
@@ -538,9 +554,9 @@ public class TextUi {
 
         ((StatYearCommand) command).overallStatisticsIntro();
 
-        Delay.wait(500);
+        Delay.wait(200);
         System.out.println();
-        Delay.loadingBar(40);
+        Delay.loadingBar(20);
     }
 
     public static void printAvailableDataBase(Storage dataBase) {
