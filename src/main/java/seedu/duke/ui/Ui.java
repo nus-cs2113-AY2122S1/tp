@@ -245,7 +245,7 @@ public class Ui {
         if (filteredTaskList.isEmpty()) {
             System.out.println(PADDING + "There is no task on " + period + ".");
         } else {
-            System.out.println(PADDING + "Here are the tasks on " + period+ ":");
+            System.out.println(PADDING + "Here are the tasks on " + period + ":");
             System.out.print(filteredTaskList);
         }
         System.out.println(LINE);
