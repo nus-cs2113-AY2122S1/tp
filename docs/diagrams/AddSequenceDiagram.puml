@@ -5,7 +5,7 @@
 !include style.puml
 
 
-Participant "<<class>> Parser" as parser PARSER_COLOUR
+Participant ":Parser" as parser PARSER_COLOUR
 Participant ":AddCommand" as add COMMAND_COLOUR
 Participant ":IngredientList" as ingredient_list INGREDIENTLIST_COLOUR
 Participant ":IngredientGroup" as ingredient_group INGREDIENTGROUP_COLOUR

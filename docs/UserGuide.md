@@ -61,28 +61,41 @@ read as the same word by SITUS
 [**3. FAQ**](#3-faq) <br>
 [**4. Command Summary**](#4-command-summary) <br>
 
+<div style="page-break-after: always;"></div>
+
 ## 1. Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `Situs` from [here](https://github.com/AY2122S1-CS2113T-T09-3/tp/releases/tag/v2.0).
+2. Download the latest version of `Situs` from [here](https://github.com/AY2122S1-CS2113T-T09-3/tp/releases/tag/v2.1).
 3. Copy the jar file to the folder that you want to use SITUS.
 4. Open a terminal and navigate to the folder containing the jar file.
 5. Type `java -jar Situs.jar` in the terminal window.
 6. If successful, you should see a similar message when the program starts up:
 
 ```
+###################################
+#    _____ ____________  _______  #
+#   / ___//  _/_  __/ / / / ___/  #
+#   \__ \ / /  / / / / / /\__ \   #
+#  ___/ // /  / / / /_/ /___/ /   #
+# /____/___/ /_/  \____//____/    #
+#                                 #
+###################################
 ____________________________________________________
 Welcome to SITUS!
 What would you like to do first?
 To see what I can do, use "help"
 ____________________________________________________
-____________________________________________________
 No ingredients expiring by [5 days from current date]
+____________________________________________________
 No ingredients with stock less than 1.0 kg
 ____________________________________________________
 ```
 > **IMPORTANT**: **DO NOT** edit any files in the `data/` folder! This can cause major bugs in loading data and you 
 > may have to delete the folder completely to use SITUS again!
+
+<div style="page-break-after: always;"></div>
+
 ## 2. Features
 
 This section covers the commands SITUS can execute - how you can use them and their expected outputs. 
@@ -113,6 +126,8 @@ These are the commands I can currently carry out:
 	12. exit SITUS - exit
 ____________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### 2.2. Add Ingredients
 
@@ -151,6 +166,8 @@ ____________________________________________________
 > `Carrots` as separate ingredients, as SITUS only looks for an exact match when grouping ingredients by name (more on this
 > grouping will be explained in the next section).
 
+<div style="page-break-after: always;"></div>
+
 ### 2.3. List Ingredients
 
 You can view the full list of your ingredients that SITUS is currently tracking. The list shows your ingredients in groups. 
@@ -176,6 +193,8 @@ ____________________________________________________
 > Note: You are recommended to use `list` before most of SITUS's commands as many of them require the index of the 
 > ingredients (the numbers before each ingredient in the list, such as 1.1 or 2.1).
 
+<div style="page-break-after: always;"></div>
+
 ### 2.4. Update Ingredients
 
 You can update the amount of an ingredient in your ingredient list if it needs
@@ -198,6 +217,8 @@ Got it. This ingredient has been updated:
     Carrot | Amount Left: 100.000 kg | Expiry Date: 01/03/2022
 ____________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### 2.5. Subtract Ingredient Stock
 
@@ -224,6 +245,8 @@ Got it. 50.0 kg has been subtracted from Carrot
 ____________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### 2.6. Delete Ingredients
 
 You can delete an ingredient from the ingredient list based on its name and expiry date in the list if you wish to stop 
@@ -245,6 +268,8 @@ Got it. This ingredient has been removed:
     Carrot | Amount Left: 50.000 kg | Expiry Date: 01/03/2022
 ____________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### 2.7. Search Ingredients By Expiry
 
@@ -289,6 +314,8 @@ There are 4 ingredients expiring by: 13/11/2021
 ____________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### 2.8. Search Ingredients By Name
 
 You can search for ingredients using keywords in their names to find specific ingredients without looking through the
@@ -326,6 +353,8 @@ ____________________________________________________
 > Note: The output also gives the actual index of the ingredients in the full ingredient list. This is hence useful if you 
 > need the index of an ingredient (e.g. to `delete` or `update` it) but have too many ingredients to manually find it using `list`.
 
+<div style="page-break-after: always;"></div>
+
 ### 2.9. Display Alerts
 
 You can view the different types of alerts to see which ingredients are running low on stock or expiring.
@@ -355,6 +384,8 @@ There are 3 ingredients with stock less than 10.0 kg
 ____________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### 2.10. Set thresholds
 
 You can set the expiry threshold or the stock threshold for the [alerts](#29-display-alerts) command.
@@ -381,6 +412,7 @@ Successfully set low stock threshold to 4.0 kg
 ____________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
 
 ### 2.11. View/ Set Current Date
 
@@ -420,6 +452,8 @@ ____________________________________________________
 Okay, see you soon! Goodbye.
 ____________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 ## 3. FAQ
 

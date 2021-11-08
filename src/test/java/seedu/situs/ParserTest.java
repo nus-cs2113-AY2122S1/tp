@@ -40,6 +40,7 @@ public class ParserTest {
         }
     }
 
+    //@@author ngoivanessa
     @Test
     public void parseAddCommand_invalidAmountParameter_expectException() {
         try {
@@ -61,6 +62,7 @@ public class ParserTest {
         }
     }
 
+    //@@author ngoivanessa
     @Test
     public void parseAddCommand_invalidExpiryDate_expectException() {
         try {

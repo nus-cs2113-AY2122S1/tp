@@ -8,7 +8,7 @@ import seedu.situs.ingredients.IngredientList;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
-//@@author mudkip8
+//@@author datn02
 
 public class ExpireCommand extends Command {
 

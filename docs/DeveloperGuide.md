@@ -22,11 +22,16 @@
 &nbsp;&nbsp;[4.3. Delete Ingredients](#43-deleting-ingredients) <br>
 &nbsp;&nbsp;[4.4. Updating Ingredients](#44-updating-ingredients) <br>
 &nbsp;&nbsp;[4.5. Subtracting Ingredients](#45-subtracting-ingredients) <br>
+&nbsp;&nbsp;[4.6. Searching for Ingredients](#46-searching-for-ingredients) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.6.1. Searching by Name](#461-searching-by-name) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.6.2. Searching by Expiry Date](#462-searching-by-expiry-date) <br>
 [5. Product scope](#5-product-scope) <br>
 [6. User stories](#6-user-stories) <br>
 [7. Non-functional requirements](#7-non-functional-requirements) <br>
 [8. Instructions for manual testing](#8-instructions-for-manual-testing)<br>
 [9. Acknowledgements](#9-acknowledgements)<br>
+
+<div style="page-break-after: always;"></div>
 
 ## 1. Introduction
 
@@ -36,6 +41,8 @@ Tracking and Updating System (SITUS).
 
 ### 1.2. Audience
 The intended audience for this document are developers looking to introduce new functionalities based on their needs.
+
+<div style="page-break-after: always;"></div>
 
 ## 2. First-time setup
 ### 2.1. Prerequisites
@@ -62,6 +69,7 @@ The intended audience for this document are developers looking to introduce new 
 > are fully deleted. The Junit tests in step 3 will not pass if there are contents already in the storage file.
 3. Run the Junit tests in `/src/test/java/seedu.situs` to make sure the programs passes all tests.
 
+<div style="page-break-after: always;"></div>
 
 ## 3. Design
 
@@ -81,10 +89,12 @@ The App consists of 6 major components:
 * `IngredientList`: Class that holds the list of all ingredients in the inventory. It is made up of multiple instances of `IngredientGroup`.
 * `Storage`: Reads data from, and writes data
 
+<div style="page-break-after: always;"></div>
+
 **Interaction between architecture components**
 
-The _sequence diagram_ below shows how the components interact with each other given a scenario where the user 
-enters the input `add n/carrot a/1 e/2021-11-12`
+The _sequence diagram_ below shows how the components interact with each other for a generic command input. 
+> Note: `XYZCommand` is henceforth used as a placeholder for the different command names, e.g. `AddCommand`
 
 ![image](images/InteractionSeqDiagram.png)
 
@@ -94,11 +104,15 @@ Each of the 5 components (apart from `main`) can be found in their respective pa
 
 The **UI** component can be found in the `UI` package. The UI reads commands from the user, sends the command to `Main` to be executed and prints an output message upon completion of the command or if an error occurred.
 
+<div style="page-break-after: always;"></div>
+
 ### 3.3. Parser component
 
 The **Parser** component can be found in the `parser` package. 
 
-The package consists of the `Parser` class, which parses the command input by the user and executes the required `XYZCommand` class (`XYZ` is henceforth used as a placeholder for the specific command name, e.g. `AddCommand`).
+The package consists of the `Parser` class, which parses the command input by the user and executes the required `XYZCommand` class.
+
+
 
 ### 3.4. Command component
 
@@ -116,7 +130,9 @@ A quick overview of how a command is parsed and executed is as such:
 * `parseXYZCommand()` creates an instance of the corresponding `XYZCommand` class and calls its `run()` method.
 * Thus, the command entered by the user is executed.
 
-###3.5 IngredientGroup component
+<div style="page-break-after: always;"></div>
+
+### 3.5. IngredientGroup component
 The **IngredientGroup** component can be found in the `ingredients` package
 
 An instance `IngredientGroup` is created for each new ingredient. 
@@ -137,6 +153,8 @@ In the example below, there are 2 `IngredientGroup`, Carrot and White Carrot. Ca
     2.3. Amount Left: 10.0 kg | Expiry Date: 01/02/2022
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### 3.6. IngredientList component
 
 The **IngredientList** component can be found in the `ingredients` package
@@ -152,6 +170,8 @@ The `IngredientList` class
 
 Each of the `Ingredient` objects contains information about an ingredient, namely its `name`, `amount` in stock and the `expiry` date.
 
+<div style="page-break-after: always;"></div>
+
 ### 3.7. Storage component
 
 The **Storage** component can be found in the `Storage` package
@@ -165,11 +185,14 @@ The `Storage` class
 * has a public method to return the `ArrayList` of `Ingredient` type in the storage file.
 * has a public method can take an `ArrayList` of `Ingredient` to write to the memory file.
 
-The two public methods mentioned above are the most essential for the storage capablility of the program.
+The two public methods mentioned above are the most essential for the storage capability of the program.
 `IngredientList` object will only use `loadIngredientsFromMemory()` and `writeIngredientsToMemory()` methods
 of the storage class only when there is a change in the ingredient list of the program.
 
+<div style="page-break-after: always;"></div>
+
 ## 4. Implementation
+This sections provides details regarding the implementation of the more significant features of SITUS.
 
 ### 4.1. Adding Ingredients
 Ingredients can be added using the `add` command followed by 3 parameters prefixed with flags for identification by SITUS:
@@ -194,8 +217,10 @@ E.g. `add n/carrots a/200 e/25-12-2021`
 4. The updated `IngredientList` is stored in the external memory through the `Storage` class. 
 
 The overall sequence diagram can be seen below. 
+
 ![image](images/AddSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
 
 ### 4.2. Alerts
 
@@ -210,7 +235,7 @@ The sequence diagram for when the user inputs `alerts all` is shown below.
 
 ![image](images/AlertsAllSequenceDiagram.png)
 
-All constructors for the command classes are called right before the relevant `run()` methods, as in `new XXXCommand().run()`. These are not shown in the diagram for simplicity. 
+All constructors for the command classes are called right before the relevant `run()` methods, as in `new XYZCommand().run()`. These are not shown in the diagram for simplicity. 
 
 The `alerts all` command is passed into the `parser` class's `parse` command, which invokes the `parseAlertsCommand` method.
 
@@ -229,13 +254,16 @@ The current date is obtained via the `CurrentDate` class, with which the thresho
 The expiry date of `Ingredient` object in each `IngredientGroup` in the `IngredientList` class is taken and compared to the threshold date. 
 The information of the `Ingredient` is taken note of to be printed when the function returns.
 
-For `AlertLowStockCommand`, it is less complicated, and the sequence diagram shown below. The user can also call this via `alerts stock`
+<div style="page-break-after: always;"></div>
 
+For `AlertLowStockCommand`, it is less complicated, and the sequence diagram shown below. The user can also call this via `alerts stock`
 
 ![image](images/AlertStockSequenceDiagram.png)
 
 The `totalAmount` for each `IngredientGroup` in the `IngredientList` is obtained and compared to the threshold amount. The 
 information of the `IngredientGroup` is taken note of to be printed when the function is returned.
+
+<div style="page-break-after: always;"></div>
 
 ### 4.3. Deleting ingredients
 
@@ -255,12 +283,19 @@ their groups and numbers in the list. For example, the current ingredient invent
 ```
 Then, calling `delete 1.1` will remove the second entry in the `carrot` category.
 
-The sequence diagram below illustrates the above command example
+The sequence diagram below illustrates the above command example.
 
 ![image](images/DeleteSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 ### 4.4. Updating ingredients
-Updating is performed on individual ingredients within the ingredient groups. For example, the current ingredient inventory is
+Ingredients can be updated using `update` command followed by two parameters - first of which is a number
+indicating the specific ingredient in an ingredient group, followed a parameter prefixed with flag for identification
+by SITUS. 
+
+E.g. `update 1.2 a/150.0`
+1. The current ingredient inventory is:
 ```
 1. Carrot | Total Amount: 18.7 kg
     Amount Left: 10.0 kg | Expiry Date: 23/12/2021
@@ -271,25 +306,63 @@ Updating is performed on individual ingredients within the ingredient groups. Fo
     Amount Left: 5.0 kg | Expiry Date: 25/12/2021
     Amount Left: 2.1 kg | Expiry Date: 12/11/2021
 ```
-Then, calling `update 1.2 a/150.0` will update the second entry in the carrot category. The sequence diagram 
-below illustrates the above command example.
+2. The initial user input is stored as a string. It is pre-processed by the `Parser` class that
+checks the validity of the inputs. If inputs are valid, the string is broken into an array 
+of 3 elements, and it's parameters are converted into it's appropriate data types.
+
+
+3. The 3 elements within the array get passed as arguments in the `UpdateCommand` class that calls the `update`
+method in the `IngredientList` class.
+
+
+4. The `update` method calls the `getIngredientGroup` method in the `IngredientList` class
+to find the ingredient group to be updated.
+
+
+5. Then, in the `IngredientGroup` class, the
+   `get` method is called on the identified ingredient group to get the ingredient 
+   object that is to be updated.
+
+
+6. The total amount of ingredient within the group is updated to the new amount 
+by the `updateTotalAmount` method in the `IngredientGroup` class.
+
+
+7. Next, The ingredient amount of the ingredient is set using the `setAmount` method.
+
+
+8. Lastly, the updated `ingredientList` is stored in the external memory through the `Storage`
+   class.
+
+
+8. After the ingredient has been updated, the ingredient inventory list is:
+```
+1. Carrot | Total Amount: 166.5 kg
+    Amount Left: 10.0 kg | Expiry Date: 23/12/2021
+    Amount Left: 150.0 kg | Expiry Date: 25/12/2021
+    Amount Left: 6.5 kg | Expiry Date: 02/01/2022
+
+2. Potato | Total Amount: 7.1 kg
+    Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+    Amount Left: 2.1 kg | Expiry Date: 12/11/2021
+```
+
+The sequence diagram below illustrates the above command example.
 
 ![image](images/UpdateSequenceDiagram.png)
 
-After individual ingredient has been updated, the ingredient inventory list is
-```
-1. Carrot | Total Amount: 166.5 kg
-    Amount Left: 10.0 kg | Expiry Date: 23/12/2021
-    Amount Left: 150.0 kg | Expiry Date: 25/12/2021
-    Amount Left: 6.5 kg | Expiry Date: 02/01/2022
+<div style="page-break-after: always;"></div>
 
-2. Potato | Total Amount: 7.1 kg
-    Amount Left: 5.0 kg | Expiry Date: 25/12/2021
-    Amount Left: 2.1 kg | Expiry Date: 12/11/2021
-```
+
+<div style="page-break-after: always;"></div>
 
 ### 4.5. Subtracting ingredients
-Subtracting is performed on ingredient groups. For example, the current ingredient inventory is
+Ingredient amount can be subtracted using `subtract` command followed by two parameters that
+contain a prefixed flag for SITUS to identify the ingredient's name and subtract amount.
+
+E.g. `subtract n/carrot a/150.0`
+
+1. The current ingredient inventory is:
 ```
 1. Carrot | Total Amount: 166.5 kg
     Amount Left: 10.0 kg | Expiry Date: 23/12/2021
@@ -300,12 +373,45 @@ Subtracting is performed on ingredient groups. For example, the current ingredie
     Amount Left: 5.0 kg | Expiry Date: 25/12/2021
     Amount Left: 2.1 kg | Expiry Date: 12/11/2021
 ```
-Then, calling `subtract n/carrot a/150.0` will subtract 17.5 kgs from the total amount of carrots (29 kgs). 
-The sequence diagram below illustrates the above command example.
+2. The initial user input is stored as a string. It is pre-processed by the `Parser` class that
+   checks the validity of the inputs. If inputs are valid, the string is broken into an array
+   of 2 elements, and it's parameters are converted into it's appropriate data types.
 
-![image](images/SubtractSequenceDiagram.png)
 
-After ingredient group has been updated, the ingredient inventory list is
+3. The 2 elements within the array get passed as arguments in the `SubtractCommand` class that 
+calls the `SubtractIngredientFromGroup` method in the `IngredientList` class.
+
+
+4. The `SubtractIngredientFromGroup` method calls the `findIngredientIndexInList` method 
+in the `IngredientList` class to find the index of the ingredient to subtract amount from.
+
+
+5. Then, the `getIngredientGroup` method is called to get the ingredient group.
+
+
+6. If the ingredient has a negligible amount remaining, the group is removed,
+the updated ingredientList is stored in the external memory through the `Storage` class, 
+and the function is returned.
+
+
+7. If not, the input subtract amount is subtracted from the ingredient group. The subtraction
+iterates from ingredients with closest to the furthest expiry dates. There are two scenarios during iteration:
+   1. Remaining amount to be subtracted is less than (or equal) current ingredient amount
+      1. The amount to be subtracted is subtracted from the current ingredient amount:
+      2. The amount to be subtracted is set to 0.0.
+   2. Remaining amount to be subtracted is greater than current ingredient amount:
+      1. The current ingredient amount is set to 0.0.
+      2. The current ingredient amount is subtracted from the amount to be subtracted.
+
+
+8. Next, the `removeLowAmountIngredientFromGroup` method is called to remove ingredients with 
+negligible amounts remaining.
+
+
+9. Lastly, the updated `ingredientList` is stored in the external memory through the Storage class.
+
+
+10. After the ingredient amount has been subtracted, the ingredient inventory list is:
 ```
 1. Carrot | Total Amount: 16.5 kg
     Amount Left: 10.0 kg | Expiry Date: 25/12/2021
@@ -316,6 +422,53 @@ After ingredient group has been updated, the ingredient inventory list is
     Amount Left: 2.1 kg | Expiry Date: 12/11/2021
 ```
 
+The sequence diagram below illustrates the above command example.
+
+
+![image](images/SubtractSequenceDiagram.png)
+
+
+
+<div style="page-break-after: always;"></div>
+
+### 4.6. Searching for Ingredients
+Ingredients can be searched for either by name using `find` or by expiry date using `expire`. 
+
+#### 4.6.1. Searching by Name
+The command to find ingredients by name uses the keyword `find` followed by the keywords/names to search the ingredient list for.
+Some examples are `find carrot`, `find potato tomato`. Here is an overview of what happens when a `find` command is run:
+
+1. The initial user input is stored as a string. The word `find` is removed and the remaining string (consisting only of space-separated keywords) 
+is split by spaces and stored as an array of type `String`. 
+
+2. The array of keywords is then iterated through and checked for either empty values (no keyword given) or invalid characters (non-alphanumeric) and an error is thrown if either 
+exist. If these checks pass, the current keyword is added to a `HashSet` object and the next keyword is checked. This avoids duplicate keywords being searched for once the entire array of keywords has been iterated through.
+
+3. The `HashSet` of keywords is then iterated through and for each keyword, an instance of the `FindCommand` class is created and its `run()` method is called. This 
+searches the names in the ingredient list for the given keyword, and displays an output message showing the results found, if any. 
+
+The partial sequence diagram of the above process is shown below:
+![image](images/FindSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
+
+#### 4.6.2. Searching by Expiry Date
+The command to find ingredients by expiry date uses the keyword `expire` followed by the expiry date to search in the format dd/mm/yyyy. 
+The command will display all ingredients in the list that are expiring **by** and **on** the given date. An example of its usage is `expire 23/12/2021`.
+Here is an overview of what happens when an `expire` command is run:
+
+1. The command is stored as a string and split by spaces into its 2 parameters, `expire` and the date to search for. The date given is then converted into a `LocalDate`
+object using the `stringToDate` method of the `Ingredient` class.
+
+2. This date is passed into the constructor of the `ExpireCommand` class and its `run()` method is called. This method iterates through the current ingredient list
+and adds any ingredient whose expiry date and the given date differ by less than 0 days (using the `getNumDaysBetween()` method of the `Command` class) to an `ArrayList`
+object of type `Ingredient`. The ingredients are then sorted by earliest expiring to latest and displayed to the user.
+
+The partial sequence diagram of the above process is shown below:
+![image](images/ExpireSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
+
 ## 5. Product scope
 
 **Target user profile**:
@@ -324,6 +477,8 @@ After ingredient group has been updated, the ingredient inventory list is
 * is comfortable with CLI apps
 
 **Value proposition**: track large amounts of ingredients simply through typing commands faster than a GUI driven application
+
+<div style="page-break-after: always;"></div>
 
 ## 6. User stories
 
@@ -344,6 +499,8 @@ After ingredient group has been updated, the ingredient inventory list is
 
 1. Should work on any *mainstream OS* (Windows, Linus, macOS or Unix) with Java `11` or above installed.
 2. Users proficient at typing should be able to complete tasks faster using commands than using a mouse with a GUI.
+
+<div style="page-break-after: always;"></div>
 
 ## 8. Instructions for manual testing
 
