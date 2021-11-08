@@ -4,12 +4,15 @@ import seedu.duke.TourPlannerException;
 
 import java.util.ArrayList;
 
+/**
+ * List of client packages.
+ */
 public class ClientPackageList {
     public static final String CLIENTPACKAGE_NOT_FOUND_MESSAGE
             = "Client Package cannot be found. Please try another client package ID";
 
     private final ArrayList<ClientPackage> clientPackages;
-    private int clientPackageCount = 0;
+    private int clientPackageCount;
 
     /**
      * Class constructor for ClientPackageList.

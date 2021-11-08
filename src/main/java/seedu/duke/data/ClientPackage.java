@@ -1,5 +1,8 @@
 package seedu.duke.data;
 
+/**
+ * Represents a packaged client under the Tour agency.
+ */
 public class ClientPackage {
     private final String clientPackageId;
     private final Client client;
@@ -10,9 +13,9 @@ public class ClientPackage {
      * Class constructor for ClientPackage.
      *
      * @param clientPackageId unique ID of client package to identify it by
-     * @param client client to be added to the client package
-     * @param tour tour to be added to the client package
-     * @param flight flight to be added to the client package
+     * @param client          client to be added to the client package
+     * @param tour            tour to be added to the client package
+     * @param flight          flight to be added to the client package
      */
     public ClientPackage(String clientPackageId, Client client, Tour tour, Flight flight) {
         this.clientPackageId = clientPackageId;

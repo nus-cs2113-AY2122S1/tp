@@ -1,9 +1,7 @@
 package seedu.duke.commands.flights;
 
-import seedu.duke.TourPlannerException;
 import seedu.duke.commands.Command;
 import seedu.duke.data.Flight;
-import seedu.duke.data.Tour;
 
 /**
  * Adds a flight into the database.
