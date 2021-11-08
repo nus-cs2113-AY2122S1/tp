@@ -253,20 +253,20 @@ This section describes some noteworthy details on how the main features are impl
 
 ### 4.1. Adding a Goal 
 
-This section describes the implementation of how you can add a goal to your tracking list.
+This section describes the implementation of how the user can add a goal to their tracking list.
 
-#### 4.1.1 Implementation
+#### 4.1.1. Implementation
 
-Adding a goal is amongst the first feature that you will interact with as you begin your goal achieving journey. The add
-goal feature is implemented using the `AddParser` and `AddGoalCommand` class. It allows you to create a new goal on
-your personal account which will be stored in the `GoalList` class. 
+Adding a goal is amongst the first feature that the user will interact with as they begin goal tracking. The add goal 
+feature is implemented using the `AddParser` and `AddGoalCommand` class. It allows the user to create a new goal on
+their personal account which will be stored in the `GoalList` class. 
 
-1. The `AddParser#parseAddGoalCommand()` method is called, which in turns calls the 
+1. The `AddParser#parseAddGoalCommand(commandInstruction)` method is called, which in turns calls the 
    `AddParser#getGoal(commandInstruction)` method.
 2. The `AddParser#getGoal(commandInstruction)` method will internally check for name, goal type, start date, and end
    date parameters. The name parameter has been limited to a maximum of 50 characters. The start date has to come after
    the end date, in addition to both dates needing to come after the date when the goal was created.
-3. An `AddGoalCommand(goal)` object is created from this method.
+3. An `AddGoalCommand(goal)` object is created from the `AddParser#parseAddGoalCommand(commandInstruction)` method.
 
 ![](Diagram_Images/Implementation_Diagram_Images/AddGoalCommandParserSequenceDiagram.png)
 
@@ -277,31 +277,61 @@ your personal account which will be stored in the `GoalList` class.
 
 ![](https://www.planttext.com/api/plantuml/img/ZLB1QiCm3BtxAqGltI1fxcQCZWvwwM2mwouY5fuXbZDRsVVFIGepn2sxoUz9xptBFYR1A9CVrFvBP4owwyO1UKOEVV1Tek-9kAVMEBGHlMgVOQVXnPXpmE4Kl4Ss6OWJNmyFDXCNbqJ3-LeryCbZT2nlo6WfQdWlJWqa2J5N6ZxMub5XB-u7XIfUIcqnc5DjVNCZherBg9Leu7QKqhWYbwqhw69-MtC7UdNCcUalpC6Il5Bgenl51PxldfjicU2EPZt8KzlUdpBqF_NQYXVnsb9AqHg_36wViHpRiaTYa__WBm00)
 
-#### 4.1.2 Design Considerations
+#### 4.1.2. Design Considerations
 
 **Aspect:** Limiting number of characters for goal name
 * **Alternative 1:** No limit imposed, but cut-off after a fixed number of characters and replace with ellipsis when
                  printing the list.
   * Pros: Table will be of a fixed size and reduced chance of error if the character limit is exceeded. 
   * Cons: Important information regarding the name may be unintentionally cut-off.
-* **Alternative 2 (current choice):** A 50-character limit is imposed
+* **Alternative 2 (current choice):** A 50-character limit is imposed.
   * Pros: Entire name will be visible when printing the list, also no chance of exceeding character limit.
   * Cons: Table may be misaligned if the user's monitor is too small, name has to conform within the limit.
 
 ### 4.2. Adding a Habit
 
-A `AddHabitCommand` object is returned from the `AddParser` if the user input is successfully parsed as shown below.
+This section describes the implementation of how the user can add a habit to one of their tracked goals.
+
+#### 4.2.1. Implementation
+
+1. The `AddParser#parseAddHabitCommand()` method is called, which starts the process of extracting parameters from the
+   user input.
+2. The `AddParser#splitInput(commandInstruction)` method splits the user input into a string array of parameters, while
+   the `AddParser#getIndex(paramters, "g/")` method finds the goal index from this string array and checks that the
+   index is a positive integer.
+3. The `AddParser#getHabit(commandInstruction)` method creates a `Habit` object from the parameters of the user input. 
+   Within this method, there is a 50-character limit imposed on the name, as well as an integer check for the interval.
+4. An `AddHabitCommand(habit, goalIndex)` object is created from the `AddParser#parseAddHabitCommand()` method.
 
 ![](Diagram_Images/Implementation_Diagram_Images/AddHabitCommandParserSequenceDiagram.png)
 
-The `runCommand` method is then executed for the `AddHabitCommand` object as seen.
+5. The `AddHabitCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
+   `GoalList#addHabitToGoal(habit, goalIndex, printManager)` method.
+6. Within this newly called method, the `GoalList#getGoal(goalIndex)` method is called to ensure that the habit to be
+   added is associated with a goal. Following which, methods of `GoalList` will verify that the habit to be added does 
+   not already exist within that goal, as well as having an interval that is smaller or equal to the number of days
+   between the start and end dates of the goal.
+7. The `GoalList#updateHabitEndDate(goal, habit)` method is called to set the end date of habit similar to that of the
+   associated goal. This was not performed during habit creation since the check for goal existence was not performed
+   within `AddParser`. This method returns a new `Habit` object with its end date filled in.
+8. The `Habit#populateIntervalsDuringHabitCreation()` method is finally called to generate intervals for the new `Habit`
+   object, given that the start date, end date, and interval are known at this point.
+9. The `Habit` object is added to the list of habits associated with the goal (of step 6) through the 
+   `Goal#addHabit(newHabit)` method.
+10. The `PrintManager#printAddedHabit(newHabitName, goalDescription)` method prints an acknowledgement message that the 
+    habit has been successfully added to the goal.
 
 ![](Diagram_Images/Implementation_Diagram_Images/AddHabitCommandSequenceDiagram.png)
 
-The method `addHabitToGoal` within the GoalList components is called, which will get the Goal to add the Habit under. 
-Before adding, the Habit is checked to ensure that it can be added. Once it is determined that it can be added, the method
-`updateHabitEndDate` and `populateIntervalsDuringHabitCreation` are called before the habit is added under the goal using 
-the `addHabit` method. 
+#### 4.2.2. Design Considerations
+
+**Aspect:** Calling constructor of `Habit` object with end date
+* **Alternative 1:** Create `Habit` object in `AddParser` with end date.
+    * Pros: `Habit` constructor can generate all intervals upon habit creation, lesser logic required in `GoalList`.
+    * Cons: A `GoalList` object has to present in `AddParser` to check for a goal's existence (non-trivial).
+* **Alternative 2 (current choice):** Create `Habit` object in `AddParser` without end date and updating in `GoalList`.
+    * Pros: No additional logic required to get the `GoalList` object in `AddParser`.
+    * Cons: Additional logic required in `GoalList` to update end date and populate intervals.
 
 ### 4.3. Listing all Goals
 
