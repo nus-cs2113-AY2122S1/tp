@@ -27,7 +27,7 @@ class AddModuleCommandTest {
         ModuleList moduleList = new ModuleList();
         Duke duke = new Duke(); // ensures that AddModuleCommand can find the static variable fullModuleList
 
-        assertThrows(DukeException.class, () -> new AddModuleCommand("invalidCode")
+        assertThrows(DukeException.class, () -> new AddModuleCommand("invalidCode", "NONE")
                 .execute(ui, storage, taskList, lessonList, moduleList));
     }
 
@@ -42,7 +42,7 @@ class AddModuleCommandTest {
         Duke duke = new Duke(); // ensures that AddModuleCommand can find the static variable fullModuleList
 
         try {
-            new AddModuleCommand("CS2113T").execute(ui, storage, taskList, lessonList, moduleList);
+            new AddModuleCommand("CS2113T", "NONE").execute(ui, storage, taskList, lessonList, moduleList);
             assertEquals(1, moduleList.getSize());
         } catch (DukeException | IOException e) {
             fail();

@@ -1,7 +1,6 @@
 package seedu.duke.logic.parser;
 
 import seedu.duke.commons.core.CommandType;
-import seedu.duke.commons.core.Message;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.lesson.FindLessonCommand;
 import seedu.duke.logic.commands.module.FindModuleCommand;
@@ -12,10 +11,10 @@ import static seedu.duke.commons.core.CommandFormat.FIND_TASK_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.FIND_LESSON_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.FIND_MODULE_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.promptFormat;
+import static seedu.duke.commons.util.StringUtil.isVerbose;
+import static seedu.duke.commons.util.StringUtil.removeFirstParam;
 import static seedu.duke.logic.parser.ParserUtil.checkParamsLength;
-import static seedu.duke.logic.parser.ParserUtil.isVerbose;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
-import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
 //@@author richwill28
 public class FindCommandParser {

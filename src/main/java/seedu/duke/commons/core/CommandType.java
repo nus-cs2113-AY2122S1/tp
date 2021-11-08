@@ -3,20 +3,17 @@ package seedu.duke.commons.core;
 //@@author richwill28
 public enum CommandType {
     ADD,
-    ALL,
     DELETE,
     DONE,
+    EDIT,
     EXIT,
     FIND,
-    GRADE,
     HELP,
     INVALID,
     LAUNCH,
     LESSON,
     LIST,
     MODULE,
-    MODULEINFO,
-    SET,
     TASK;
 
     /**

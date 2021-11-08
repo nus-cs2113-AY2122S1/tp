@@ -50,13 +50,13 @@ public class ModuleList {
         return moduleList.isEmpty();
     }
 
-    public void addModule(Module newModule) throws DukeException {
+    public void addModule(Module newModule, String grade) throws DukeException {
         for (Module module : moduleList) {
             if (module.getModuleCode().equals(newModule.getModuleCode())) {
-                throw new DukeException("You have already added that module.");
+                throw new DukeException("You have already added that module");
             }
         }
-        newModule.setGrade("NONE");
+        newModule.setGrade(grade);
         moduleList.add(newModule);
     }
 

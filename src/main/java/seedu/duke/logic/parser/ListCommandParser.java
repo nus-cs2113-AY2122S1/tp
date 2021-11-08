@@ -14,8 +14,8 @@ import static seedu.duke.commons.core.CommandFormat.LIST_MODULE_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.promptFormat;
 import static seedu.duke.commons.util.DayUtil.isToday;
 import static seedu.duke.commons.util.DayUtil.isTomorrow;
+import static seedu.duke.commons.util.StringUtil.removeFirstParam;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
-import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
 //@@author richwill28
 public class ListCommandParser {

@@ -5,8 +5,8 @@ import seedu.duke.commons.core.Message;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
+import static seedu.duke.commons.util.StringUtil.removeFirstParam;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
-import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
 //@@author richwill28
 public class Parser {
@@ -24,6 +24,9 @@ public class Parser {
         case DONE:
             simplifiedUserResponse = removeFirstParam(userResponse, "done");
             return DoneCommandParser.parse(simplifiedUserResponse);
+        case EDIT:
+            simplifiedUserResponse = removeFirstParam(userResponse, "edit");
+            return EditCommandParser.parse(simplifiedUserResponse);
         case FIND:
             simplifiedUserResponse = removeFirstParam(userResponse, "find");
             return FindCommandParser.parse(simplifiedUserResponse);
@@ -33,9 +36,6 @@ public class Parser {
         case LIST:
             simplifiedUserResponse = removeFirstParam(userResponse, "list");
             return ListCommandParser.parse(simplifiedUserResponse);
-        case SET:
-            simplifiedUserResponse = removeFirstParam(userResponse, "set");
-            return SetCommandParser.parse(simplifiedUserResponse);
         case HELP:
             simplifiedUserResponse = removeFirstParam(userResponse, "help");
             return HelpCommandParser.parse(simplifiedUserResponse);
