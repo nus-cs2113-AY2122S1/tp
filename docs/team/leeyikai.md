@@ -7,7 +7,7 @@ PayMeBack helps travellers who are on a budget manage their finances when travel
 This section documents the summary of the contributions that I have done in this project.
 
 ### Code Contributed
-I have contributed 642 lines of code that is split among functional code, tests and documentation. My code can be 
+I have contributed over 900 lines of code that is split among functional code, tests and documentation. My code can be 
 found at this [link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=leeyikai)
 
 ### Enhancements Implemented
