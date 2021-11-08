@@ -244,7 +244,6 @@ class ExpenseTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Storage.setScanner(new Scanner(System.in));
         Expense testExpense = new Expense("1234 category Albert, Evan, Don /description");
-        trip.addExpense(testExpense);
         assertEquals(1234.0, testExpense.getAmountSplit().get("Albert"));
         assertEquals(0.0, testExpense.getAmountSplit().get("Evan"));
         assertEquals(0.0, testExpense.getAmountSplit().get("Don"));
@@ -257,7 +256,6 @@ class ExpenseTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Storage.setScanner(new Scanner(System.in));
         Expense testExpense = new Expense("1200 category Albert, Evan, Don /description");
-        trip.addExpense(testExpense);
         assertEquals(400.0, testExpense.getAmountSplit().get("Albert"));
         assertEquals(400.0, testExpense.getAmountSplit().get("Evan"));
         assertEquals(400.0, testExpense.getAmountSplit().get("Don"));
@@ -269,7 +267,6 @@ class ExpenseTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Storage.setScanner(new Scanner(System.in));
         Expense testExpense = new Expense("900 category Don, Evan, Betty /description");
-        trip.addExpense(testExpense);
         assertEquals(300.0, testExpense.getAmountSplit().get("Don"));
         assertEquals(300.0, testExpense.getAmountSplit().get("Evan"));
         assertEquals(300.0, testExpense.getAmountSplit().get("Betty"));
@@ -281,7 +278,6 @@ class ExpenseTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Storage.setScanner(new Scanner(System.in));
         Expense testExpense = new Expense("901 category Albert, Don, Betty /description");
-        trip.addExpense(testExpense);
         assertEquals(300.34, testExpense.getAmountSplit().get("Albert"));
         assertEquals(300.33, testExpense.getAmountSplit().get("Don"));
         assertEquals(300.33, testExpense.getAmountSplit().get("Betty"));
@@ -293,7 +289,6 @@ class ExpenseTest {
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         Storage.setScanner(new Scanner(System.in));
         Expense testExpense = new Expense("899 category Albert, Don, Betty /description");
-        trip.addExpense(testExpense);
         assertEquals(299.66, testExpense.getAmountSplit().get("Albert"));
         assertEquals(299.67, testExpense.getAmountSplit().get("Don"));
         assertEquals(299.67, testExpense.getAmountSplit().get("Betty"));
@@ -308,6 +303,7 @@ class ExpenseTest {
         trip.addExpense(testExpense);
         Parser.parseUserInput("delete 2");
         assertEquals(1, trip.getListOfExpenses().size());
+        assertEquals("Dinner at fancy restaurant", trip.getListOfExpenses().get(0).getDescription());
     }
 
     @Test
@@ -318,6 +314,7 @@ class ExpenseTest {
         Parser.parseUserInput("expense 899 category Albert, Don, Betty /description");
         Parser.parseUserInput("delete last");
         assertEquals(1, trip.getListOfExpenses().size());
+        assertEquals("Dinner at fancy restaurant", trip.getListOfExpenses().get(0).getDescription());
     }
 
     @Test
