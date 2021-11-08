@@ -8,11 +8,11 @@ periodically when any item in the fridge is about to expire.
 
 ## Summary of Contributions
 
-###Code Contributed
+### Code Contributed
 
 [Click this to view Anderson's Reposense Page!](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&tabAuthor=uosjapuelks&tabRepo=AY2122S1-CS2113T-W12-4%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&zFR=false)
 
-###Enhancements Implemented
+### Enhancements Implemented
 
 #### New Feature: Added the ability to exit from Fridget.
 
