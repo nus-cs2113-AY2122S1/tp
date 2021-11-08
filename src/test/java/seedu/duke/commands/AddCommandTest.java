@@ -6,17 +6,12 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
 import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
-import seedu.duke.items.Event;
-import seedu.duke.items.Task;
-import seedu.duke.items.characteristics.Member;
 import seedu.duke.parser.Parser;
 
-import javax.swing.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.duke.Duke.eventCatalog;
