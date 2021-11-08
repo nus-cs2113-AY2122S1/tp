@@ -22,35 +22,46 @@ Designed for fast typists, it can help to augment the day-to-day tasks of a libr
 ### Contributions to the User Guide
 
 1. Wrote User Guide for Edit Command, Info Command and Help Command functionalities ([#203](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/203))
-2. Contributed to command summary 
+2. Contributed to command summary ([#203](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/203))
 3. Assisted in maintaining consistency of user guide structure and grammar 
 
 ### Contributions to the Developer Guide
 
-1. Created and set up structure of Developer Guide sections according to Address Book 3 
-2. Wrote documentation for
+1. Created and set up structure of Developer Guide sections according to Address Book 3 ([#126](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/126))
+2. Wrote documentation for ([#126](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/126), [#231](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/231))
    1. Setting up the project
    2. Design - Commands component
    3. Design - Common component 
-   4. Implementation - Edit Command
-3. Contributed documentation for 
-   1. Design - Architecture
-   2. Target User Profile & Value Proposition
-   3. User Stories
-   4. Non-functional requirements
-4. Created UML diagrams for
+   4. Implementation - Edit Command 
+3. Contributed documentation for ([#101](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/101), [#126](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/126), [#231](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/231))
+   1. Contents Page 
+   2. Design - Architecture
+   3. Target User Profile & Value Proposition
+   4. User Stories
+   5. Non-functional requirements
+4. Created UML diagrams for ([#101](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/101), [#103](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/103), [#233](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/233))
     1. Design - Commands component (Class Diagrams)
     2. Implementation - Edit Command (Sequence Diagram)
 
 ### Contributions to team-based-tasks
 
-1. Implemented skeleton code for exceptions 
+1. Implemented skeleton code for exceptions ([#32](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/32))
 2. Helped in maintaining the issue tracker
 3. Helped in reviewing and merging team members' pull requests
 4. Assisted in product testing and maintaining general code consistency
 
 ### Review/mentoring contributions
-#### Teammates' PRs reviewed and merged
-1. https://github.com/AY2122S1-CS2113-T16-1/tp/pull/187
-2. https://github.com/AY2122S1-CS2113-T16-1/tp/pull/23
-3. https://github.com/AY2122S1-CS2113-T16-1/tp/pull/228
+- Teammates' PRs reviewed and merged (
+[#23](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/23),
+[#187](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/187), 
+[#228](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/228), 
+[#235](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/235))
+- Reported bugs and suggestions for other teams in the class (
+    [1](https://github.com/avellinwong01/ped/issues/1),
+    [2](https://github.com/avellinwong01/ped/issues/2),
+    [3](https://github.com/avellinwong01/ped/issues/3),
+    [4](https://github.com/avellinwong01/ped/issues/4),
+    [5](https://github.com/avellinwong01/ped/issues/5),
+    [6](https://github.com/avellinwong01/ped/issues/6),
+    [7](https://github.com/avellinwong01/ped/issues/7)
+    )
