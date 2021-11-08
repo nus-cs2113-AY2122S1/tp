@@ -363,7 +363,9 @@ Updates a parameter of a goal specified by its index.\
 (To err is human. That's why we have the `update` feature; designed to be more forgiving, 
 when we have the occasional oopsies. 👍 )
 
-**Format:** `update g/<goal_index> { n/<goal_name> t/<goal_type> e/<end_date> }`
+**Format:** `update g/<goal_index> [ n/<goal_name> t/<goal_type> e/<end_date> ]`
+
+* Goal Index has to be provided
 
 **Example:**\
 Command 1: `update g/1 n/Read more`\
@@ -374,7 +376,10 @@ Output 1: `The goal name 'Sleep more' has been updated to 'Read more'.`\
 Output 2: `The goal end date of goal 'Exercise more' has been changed from '01-Jan-2022' to '30-Nov-2021'.`\
 Output 3: `The goal type 'Default' has been updated to 'Study'.`
 
-> 📃 Only one parameter can be updated at a time (to be changed to multiple parameters in v2.1)
+> 📃 Multiple parameters can be updated at a time. However, at least one parameter must be updated at a time
+
+**Example:**
+`update g/1 n/Read more e/31122021 t/sd`
 
 ### 4.5 Remove a Goal: `remove`
 Removes a goal specified by its index.\
@@ -423,8 +428,10 @@ Output 3: `The habit 'Learn a vegetarian dish' has been added to goal '[FD] Beco
 Change and update the name and/or interval of a habit.
 
 **Format:** `change g/<goal_index> h/<habit_index> { n/<habit_name> i/<interval> }`
-* You may change either the `habit_name` or `interval` at a time, but not both
-* There must be at least one parameter changed - otherwise why call this command at all?
+
+* Goal Index and Habit Index has to be provided
+* Interval cannot be changed to 0
+* Interval added cannot exceed end date of goal from current date of change
 
 **Example:**\
 Input 1: `change g/2 h/1 i/7`\
@@ -433,7 +440,10 @@ Input 2: `change n/Do 30 pushups h/2 g/1`
 Output 1: `The habit 'Learn a vegetarian dish' of goal 'Become a vegetarian' has its interval changed to '7'`\
 Output 2: `The habit 'Do 20 pushups' of goal 'Exercise more' has been changed to 'Do 30 pushups'`
 
-> 📃 Only one parameter can be updated at a time (to be changed to multiple parameters in v2.1)
+> 📃 Multiple parameters can be changed at a time. However, at least one parameter must be changed at a time
+
+**Example:**
+`change g/1 h/1 n/Read more i/5`
 
 ### 4.8 Complete a Habit: `done`
 Mark a habit under a goal as done.\
