@@ -165,7 +165,7 @@ Expected Output:
   \ V / | || _| \ \/\/ /          
    \_/ |___|___| \_/\_/           
                                   
-View has been switched to Patient Management
+You are now in the Patient Management view.
 ```
 
 ### 4.2.3 Get current view: `get view`
