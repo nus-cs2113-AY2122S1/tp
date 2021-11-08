@@ -1082,8 +1082,8 @@ lost of data.
 Interface, as specified above.
 
   - For example, when editing an expense entry in `StonksXD_Entries.csv`, `entry_description` must not be blank.
-  - Another example, when editing an income entry in `StonksXD_Entries.csv`, `amount` has to be a positive number and 
-  less than 1,000,000.
+  - Another example, when editing an income entry in `StonksXD_Entries.csv`, `amount` has to be between 0.05 and
+  1,000,000 inclusive.
   - Another example, when editing an expense entry in `StonksXD_Entries.csv`, category should be the ones available and
   specified earlier on in the user guide.
 
