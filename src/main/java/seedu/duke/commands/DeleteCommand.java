@@ -136,6 +136,7 @@ public class DeleteCommand extends Command {
                 Task task = member.getAssignedTasks().get(i);
                 if (canDeleteTask(task, taskTitle, parentEventTitle)) {
                     member.deleteTask(i);
+                    i--;
                 }
             }
         }
