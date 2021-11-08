@@ -1,6 +1,7 @@
 package seedu.command;
 
 import org.junit.jupiter.api.Test;
+import seedu.command.flags.ClearFlag;
 import seedu.module.Lesson;
 import seedu.module.Module;
 import seedu.timetable.Timetable;
@@ -38,7 +39,7 @@ class ClearCommandTest {
         tt1.addLesson(testMod2, 1, lesson2);
 
         // Clearing timetable 1
-        Command command = new ClearCommand(tt1);
+        Command command = new ClearCommand(tt1, ClearFlag.TIMETABLE);
         command.execute();
 
         // Comparing the two timetables, flag = 1 represents they are same, and 0

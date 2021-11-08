@@ -9,8 +9,8 @@ ModReg is about to start, and you have no idea what modules to take and what you
 
 Introducing **UNI Mods**, an easy-to-use application for NUS students that provides information on all available NUS
 modules and lets you pick and choose the modules and classes you want to take for that semester!
-Depending on the classes you decide to take, a timetable will be generated to keep track of your personal tasks, school lessons in your daily schedule and your
-total workload:
+Depending on the classes you decide to take, a timetable will be generated to keep track of your personal tasks, school
+lessons in your daily schedule and your total workload:
 
 ![Capture](https://user-images.githubusercontent.com/69495787/139837067-aed633dc-43f0-4748-9738-1dc6302d3c1f.JPG)
 
@@ -27,16 +27,18 @@ total workload:
     * [Search Module](#search-module-search-keyword--l)
     * [Update Local Database](#update-local-database-update)
     * [Add to Timetable](#add-to-timetable)
-      * [Add a Module](#add-a-module-to-timetable )
-      * [Add an Event](#add-an-event-to-timetable)
+        * [Add a Module](#add-a-module-to-timetable )
+        * [Add an Event](#add-an-event-to-timetable)
     * [Delete from Timetable](#delete-from-timetable-delete-module_code)
-    * [Clear Timetable](#clear-timetable-clear)
+    * [Clear From Timetable or Transcript]()
+        * [Clear from Timetable]()
+        * [CLear from Transcript]()
     * [View Timetable](#view-timetable-timetable)
     * [Changing Semester](#changing-semester)
     * [Storing grades secured in past modules](#store-grades-secured-in-various-modules-store-grade--module_code)
     * [Removing modules from stored grades](#remove-modules-from-the-list-of-completed-modules-remove-module_code)
-    * [Calculating your CAP](#calculate-cap--calculate-cap)
-    * [Viewing your unoffical transcript](#view-unofficial-transcript--transcript)
+    * [Calculate CAP](#calculate-cap--calculate-cap)
+    * [View Unofficial Transcript](#view-unofficial-transcript--transcript)
     * [Checking eligibility from a module's pre-requisite](#checking-for-module-pre-requisite-check-module_code)
     * [Exit](#exit-exit)
 - [FAQ](#faq)
@@ -61,6 +63,7 @@ total workload:
        - show <module_code>: displays the module information
        - add <module_code> : to add the module to the timetable
        - delete <module_code> : to remove the module from the timetable
+       - delete <event_name> : to remove the event/task from the timetable
        - timetable : lists all modules added to the timetable
        - exit : Exits the app.
        - Refer to the Features below for details of each command.
@@ -205,6 +208,7 @@ You can also apply the following flags to refine the search:
 - **-f :** search for mods from a faculty e.g. `-f Computing`. Checks if faculty contains keyword.
 - **-d :** search for mods from a department e.g. `-d Computer Science`. Checks if faculty contains keyword.
 
+
 :information_source: Command, search term and flag regex are case-insensitive.
 
 :information_source: Search too slow? See [here](#slow_search).
@@ -217,9 +221,9 @@ You can also apply the following flags to refine the search:
 
 Maybe you are going to be doing some work at the University Sports Center tomorrow. You forsee that you will lack a good
 WiFi connection there, and want to access the latest information offline. Run update, and grab a cup of coffee while
-waiting! 
+waiting!
 
-Update will take up to 10 minutes to complete. If you wish to cancel your search at any time, simply hit 
+Update will take up to 10 minutes to complete. If you wish to cancel your search at any time, simply hit
 `ENTER` to cancel it!
 
 :information_source: Command is case-insensitive.
@@ -232,13 +236,14 @@ start of a new semester, when mods are being updated for the coming semester.
 
 ## Add to timetable: `add`
 
-### Add a module to timetable 
+### Add a module to timetable
 
 You have finally decided on the modules you want to take. Try adding your first module to your timetable!
 
 Let's add for example, `CG2271` to the timetable
 
 You can type `add` to see what you can add to the timetable.
+
 ```shell
 What would you like to do?
 ==>add
@@ -246,7 +251,9 @@ What would you like to do?
 2. Event
 Choose your option: 
 ```
+
 You can choose either Module or Event, since you are adding a module, you enter 1 into the terminal
+
 ```shell
 Choose your option: 1
 Enter Module Code to add it into Timetable: cg2271
@@ -262,15 +269,20 @@ _________________________________________________   |   ________________________
                                                         3: Friday, 1400-1500, 03, E-Learn_A                     
                                                         _________________________________________________   |   
 ```
+
 If lessons are found, a prompt to indicate a choice for each lesson type will be shown as such.
+
 ```shell
 Which Lecture would you like to choose? 
 Which Tutorial would you like to choose? 
 Which Laboratory would you like to choose? 
 ```
-For modules where lessons belong to the same class number, lessons will be packed together with a divider between each different class.
 
-For Example CS2113T lecture slot: 
+For modules where lessons belong to the same class number, lessons will be packed together with a divider between each
+different class.
+
+For Example CS2113T lecture slot:
+
 ```shell
 Lecture Lesson Slots  
 1: Friday, 1600-1800, C01, E-Learn_C  
@@ -279,15 +291,20 @@ Lecture Lesson Slots
 1: Wednesday, 1200-1300, C01, E-Learn_C  
 _________________________________________________   | 
 ```
-In addition, lessons that are currently in conflict with the timetable will be displayed with a disclaimer, and prompt you whether you want to proceed.
+
+In addition, lessons that are currently in conflict with the timetable will be displayed with a disclaimer, and prompt
+you whether you want to proceed.
 
 For example:
+
 ```shell
 1: Wednesday, 0900-1200, 01, E4A-04-08 [CONFLICT]
 ```
+
 `NOTE:`Lessons that are added into timetable with existing lessons/events will override the slot
 
-If all lesson types have been successfully added, program will print out 
+If all lesson types have been successfully added, program will print out
+
 ```shell
 Module and any selected lesson(s) has been added to timetable
 ```
@@ -296,11 +313,13 @@ Module and any selected lesson(s) has been added to timetable
 
 ### Add an Event to timetable
 
-Perhaps you have a team meeting that takes place every Monday, you can likewise add your personal events into the timetable
+Perhaps you have a team meeting that takes place every Monday, you can likewise add your personal events into the
+timetable
 
 Let's add for example, `Team Meeting on Monday, 8-9pm on Zoom` to your timetable
 
 This time after typing `add` select the event option.
+
 ```shell
 1. Module
 2. Event
@@ -311,6 +330,7 @@ Description of Event (E.g. Read Micah):
 Fill in all the relevant information and take note that time is strictly using 24-hr time format
 
 For example:
+
 ```shell
 Description of Event (E.g. Read Micah): Team Meeting CS2113T
 Date of Event (E.g. Monday): Monday
@@ -322,40 +342,91 @@ Alright!! Event: Team Meeting CS2113T on Monday, from 2000 to 2100 at Discord ha
 `NOTE:` All events will occur within will fit within an hourly timeframe, you are not able to add start and end timing
 with minutes. E.g. 1034
 
+
 `NOTE:` If the selected timeslot is already occupied, the program will let you know and the event will not be added until the timeslot
 has been freed up.
 
 <br>
 
-## Delete from timetable: `delete <MODULE_CODE>`
+## Delete from timetable: `delete <MODULE_CODE>` OR `delete <EVENT_NAME>`
 
-You can remove any module that you added to your timetable using this command.
+You can remove any module or personal task that you added to your timetable using this command.
 
-For example: If you have CS2113T already added to your timetable. You can type
+For example: If you have CS2113T module already added to your timetable. You can type
 `delete CS2113T` to remove this module from your timetable.
 
 ```shell
-~$ delete CS2113T
+~$  delete CS2113T
 CS2113T is successfully deleted from your Timetable.
+________________________________________________________________________________________________________________________
+
+```
+
+Similarly, if you want to delete a personal task called `Complete Reading` from your timetable then simply
+type `delete Complete Reading` to remove this task from your timetable.
+
+```shell
+~$  delete Complete Reading
+COMPLETE READING is successfully deleted from your Timetable.
+________________________________________________________________________________________________________________________
 ```
 
 <br>
 
-## Clear timetable: `clear`
+## Clear from Timetable or Transcript : `clear`
 
-You can remove **all** added modules from your timetable by typing `clear`. You can then view the empty timetable by
+You can use the `clear` to remove all modules and events from the timetable or to remove all completed modules with
+their corresponding grades from your Transcript. For Example: type `clear` to see what you can clear using this command.
+
+```shell
+==> clear
+What would you like to clear ?
+1. Timetable
+2. Transcript
+Choose your option: 
+```
+
+You can choose what you want to clear completely and choose the corresponding number i.e. `1` or `2`.
+
+### Clear from Timetable
+
+You can remove **all** added modules from your timetable by typing `clear`. On being prompted to choose a number,
+choose `1` and this should clear your timetable of all modules and events. You can then view the empty timetable by
 typing the command `timetable`.
 
 For Example:
 
 ```shell
 ~$ clear
+What would you like to clear ?
+1. Timetable
+2. Transcript
+Choose your option: 1
 All modules have been successfully removed from your Timetable.
-
+________________________________________________________________________________________________________________________
 ```
 
 <br>
 
+### Clear from Transcript
+
+You can remove **all** completed modules and their grades from your timetable by typing `clear`. On being prompted to
+choose a number, choose `2` and this should clear your transcript of all modules and grades. You can then view the empty
+transcript by typing the command `transcript`.
+
+For Example:
+
+```shell
+~$  clear
+What would you like to clear ?
+1. Timetable
+2. Transcript
+Choose your option: 2
+All modules have been successfully removed from your Transcript.
+________________________________________________________________________________________________________________________
+```
+
+<br>
 ## View timetable: `timetable`
 
 You can view the current timetable which details your daily schedule as well as the total MCs taken and classes and time
@@ -415,8 +486,8 @@ Total MCs taken this semester: 4.0
 
 ## Store grades secured in various modules: `store <GRADE> > <MODULE_CODE>`
 
-You can store the grades you have secured for various modules by using this command.These will be stored in the list of
-completed modules and will be used for CAP calculation.
+You can store the grades you have secured for various modules by using this command.These modules along with their
+grades will be stored in the list of completed modules in the Transcript.
 
 For Example : Let's store `A+` grade for `CS2113T` module in the records.
 
@@ -424,8 +495,9 @@ You can type `store A+ > CS2113T` to store A+ grade for the module CS2113T in th
 
 ```shell
 ~$ store A+ > CS2113T
-CS2113T with grade A+ has been added to the list of modules completed.
-__________________________________________________________________________
+CS2113T with grade A+ has been added to your Transcript
+________________________________________________________________________________________________________________________
+
 
 ```
 
@@ -436,8 +508,8 @@ For Example : Let's store `CS` grade for `CFG1002` module in the records.
 
 ```shell
 ~$ store CS > CFG1002
-CFG1002 with grade CS has been added to the list of modules completed.
-__________________________________________________________________________
+CFG1002 with grade CS has been added to your Transcript
+________________________________________________________________________________________________________________________
 
 ```
 
@@ -445,20 +517,25 @@ You can choose to store modules for which you have exercised the S/U option. The
 CAP calculation. For Example : Let's store `S` grade for `CS1231` module in the records.
 
 ```shell
-~$ store S > CS1231
-CS1231 with grade S has been added to the list of modules completed.
-__________________________________________________________________________
+~$  store S > CS1231
+CS1231 with grade S has been added to your Transcript
+________________________________________________________________________________________________________________________
 
 ```
 
 <br>
 
+
+
 ## Remove modules from the list of completed modules: `remove <MODULE_CODE>`
 
-You can remove any module that you added to your list of completed modules using this command.
 
-For example: If you have CS2113T already to your list of completed modules. You can type
-`remove CS2113T` to remove this module and its corresponding grade from the list of modules completed.
+
+You can remove any module and grade that you added to your list of completed modules in the transcript by using this
+command.
+
+For example: If you have CS2113T already in your list of completed modules. You can type
+`remove CS2113T` to remove this module and its corresponding grade from the Transcript.
 
 ```shell
 ~$ remove CS2113T
@@ -468,17 +545,17 @@ __________________________________________________________________________
 
 <br>
 
-## Calculate CAP : `calculate cap`
+## Calculate CAP : `calculate`
 
 You can calculate your **CAP** based on the list of modules you have completed and the corresponding grades scored in
 them.
 
-You can type `calculate cap` to view your Cumulative Average Point.
+You can type `calculate` to view your Cumulative Average Point.
 
 For Example:
 
 ```shell
-~$ calculate cap
+~$ calculate
 Cumulative Average Point : 3.0
 __________________________________________________________________________
 
@@ -496,31 +573,35 @@ You can type `transcript` to view your Unofficial Transcript.
 For Example:
 
 ```shell
-~$ transcript
-								--	National University of Singapore	--
-									--	Unofficial Transcript	--
-									------------------------------
+~$==>transcript
+                                --	National University of Singapore	--
+                                	--	Unofficial Transcript	--
+                                	------------------------------
 
-Date Issued : 26-10-2021
+
+Name               : Jake Peralta
+Enrolled in Major  : Bachelor of Engineering- Computer Engineering
+Year of study      : 2
+
+Date Issued : 6-11-2021
 
 MODULE                                                                              GRADE  CREDITS
 
 CS2113T     Software Engineering & Object-Oriented Programming                        A+    4.0   
-CS1231      Discrete Structures                                                       A-    4.0   
-MA1512      Differential Equations for Engineering                                    B+    2.0   
-CS1010      Programming Methodology                                                   C+    4.0   
+CS1231      Discrete Structures                                                       A     4.0   
 EE2026      Digital Design                                                            B+    4.0   
-CG2271      Real-Time Operating Systems                                               A     4.0   
-CG1111      Engineering Principles and Practice I                                     S     6.0   
-CG1112      Engineering Principles and Practice II                                    U     6.0   
+CG1111      Engineering Principles and Practice I                                     A-    6.0   
+CS1010      Programming Methodology                                                   B     4.0   
 CFG1002     Career Catalyst                                                           CS    2.0   
+CG1112      Engineering Principles and Practice II                                    S     6.0   
 
-Total Credits Fulfilled : 36.0
+Total Credits Fulfilled : 30.0
 
-Cumulative Average Point : 4.18
+Cumulative Average Point : 4.41
 
 	This is not an official transcript issued by the Office of the Registrar.
-__________________________________________________________________________
+________________________________________________________________________________________________________________________
+
 ```
 
 <br>
@@ -532,6 +613,7 @@ check whether you have met all the pre-requisites for a module!
 
 For example let's say you wish to take CS2040. <br>
 Example output (If you had not taken CS1010):
+
 ```shell
 ~$ check CS2040
 Oops, you have not met the module's prerequisite: 
@@ -540,6 +622,7 @@ ________________________________________________________________________________
 ```
 
 Example output (If you had taken CS1010):
+
 ```shell
 ~$ check CS2040
 Yes! You are eligible to take up: CS2040 Data Structures and Algorithms 4MC
@@ -552,27 +635,26 @@ ________________________________________________________________________________
 
 **Q**: Why does this module not show up even though my search term is its exact title?
 <br>
-**A**: Search keyword is only for the module code. Searching for the title of a module is currently
-unsupported, since NUS modules are far more often referred to by their module code.
+**A**: Search keyword is only for the module code. Searching for the title of a module is currently unsupported, since
+NUS modules are far more often referred to by their module code.
 
 **Q**: Why am I getting garbage characters/ Mojibake when searching for/ showing modules?
 <br>
-**A**: This is unfortunately caused by most shells not using UTF-8 encoding. If possible, running 
+**A**: This is unfortunately caused by most shells not using UTF-8 encoding. If possible, running
 `chcp 65001` or `chcp.com 65001` from your CLI should resolve most issues.
 
 **Q**<a name = "slow_search"></a>: Why is the search taking so long?
 <br>
-**A**: Your query is probably too broad. You can greatly cut down search time by specifying at least the letter codes 
-of the mods you are interested in. If you absolutely need to execute that query, it is recommended to perform a 
-quicksearch with the -q flag instead, which will execute in a matter of seconds. <br>
+**A**: Your query is probably too broad. You can greatly cut down search time by specifying at least the letter codes of
+the mods you are interested in. If you absolutely need to execute that query, it is recommended to perform a quicksearch
+with the -q flag instead, which will execute in a matter of seconds. <br>
 See [here](#extra_info) if you wish to know more about the technical details behind why it takes so long.
 
-**Q**: Alright, I decided to do a quicksearch instead. Why are no mods appearing even though I know some mods must 
-match my search?
+**Q**: Alright, I decided to do a quicksearch instead. Why are no mods appearing even though I know some mods must match
+my search?
 <br>
-**A**: Local search is dependent on local data. If certain modules cannot be found offline, and you are sure that
-they do exist and match your query, then it is likely that you do not have the local data, or your local data is 
-outdated.
+**A**: Local search is dependent on local data. If certain modules cannot be found offline, and you are sure that they
+do exist and match your query, then it is likely that you do not have the local data, or your local data is outdated.
 
 **Q**: How do I save my timetable so I don’t have to add all my modules again?
 <br>
@@ -581,12 +663,12 @@ outdated.
 **Q**<a name = "extra_info"></a>: How does the search actually work?
 <br>
 **A**: Due to how the API works, the search first checks for matches in module code, level and semesters. The app will
-make a request to the API for every match. Hence, including some part of a module code, and or the level/ semester 
-flags will greatly increase search speed by cutting down the number of requests needed to be made.
-Other flags, such as the faculty, department and exams are checked against the mod information after the request and as 
-such have little to no effect on how fast the search goes. The most common cause of a slow search is running `search`
+make a request to the API for every match. Hence, including some part of a module code, and or the level/ semester flags
+will greatly increase search speed by cutting down the number of requests needed to be made. Other flags, such as the
+faculty, department and exams are checked against the mod information after the request and as such have little to no
+effect on how fast the search goes. The most common cause of a slow search is running `search`
 without any search term specified, which means that UNIMods has to make 12000+ requests to the API, one for each mod,
-and is very similar to just running `update`. 
+and is very similar to just running `update`.
 
 <br>
 

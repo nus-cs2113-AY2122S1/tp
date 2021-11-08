@@ -11,6 +11,7 @@ import seedu.ui.TranscriptUi;
 import java.util.ArrayList;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.logging.Level;
 
 
 public class ModuleRecord {
@@ -29,11 +30,16 @@ public class ModuleRecord {
      *
      * @param module Module contains the graded module to be stored in the Transcript
      */
-    public void addModuleToRecord(GradedModule module) {
-        gradedModules.add(module);
-        moduleCodes.add(module.getModuleCode());
-        cap = calculateCapFromList();
-        TextUi.printAddedGrade(module.getModuleCode(), module.getGrade());
+    public void addModuleToRecord(GradedModule module) throws UniModsException {
+        boolean isModInRecords = checkModuleExists(module.getModuleCode());
+        if (isModInRecords) {
+            throw new UniModsException(TextUi.ERROR_MODULE_FOUND);
+        } else {
+            gradedModules.add(module);
+            moduleCodes.add(module.getModuleCode());
+            cap = calculateCapFromList();
+            TextUi.printAddedGrade(module.getModuleCode(), module.getGrade());
+        }
     }
 
     /**
@@ -41,10 +47,15 @@ public class ModuleRecord {
      *
      * @param module Module contains the ungraded module to be stored in the Transcript
      */
-    public void addModuleToRecord(UngradedModule module) {
-        ungradedModules.add(module);
-        moduleCodes.add(module.getModuleCode());
-        TextUi.printAddedGrade(module.getModuleCode(), module.getGrade());
+    public void addModuleToRecord(UngradedModule module) throws UniModsException {
+        boolean isModInRecords = checkModuleExists(module.getModuleCode());
+        if (isModInRecords) {
+            throw new UniModsException(TextUi.ERROR_MODULE_FOUND);
+        } else {
+            ungradedModules.add(module);
+            moduleCodes.add(module.getModuleCode());
+            TextUi.printAddedGrade(module.getModuleCode(), module.getGrade());
+        }
     }
 
 
@@ -61,10 +72,14 @@ public class ModuleRecord {
         } catch (UniModsException e) {
             System.out.println(e.getMessage());
         }
-        if (gradeType.equals(TextUi.GRADED)) {
-            this.addModuleToRecord(module.toGradedModule(grade));
-        } else {
-            this.addModuleToRecord(module.toUngradedModule(grade));
+        try {
+            if (gradeType.equals(TextUi.GRADED)) {
+                this.addModuleToRecord(module.toGradedModule(grade));
+            } else {
+                this.addModuleToRecord(module.toUngradedModule(grade));
+            }
+        } catch (UniModsException e) {
+            System.out.print("");
         }
     }
 
@@ -100,18 +115,18 @@ public class ModuleRecord {
      * @return cap CAP according to the user's grades in the transcript's records.
      */
     private double calculateCapFromList() {
-        double numerator = 0;
-        double denominator = 0;
+        double sumModGradePoints = 0;
+        double sumModCredits = 0;
         double moduleCredits;
         double moduleGradePoint;
         for (int i = 0; i < gradedModules.size(); i++) {
             moduleCredits = (gradedModules.get(i)).getModuleCredit();
             moduleGradePoint = gradedModules.get(i).getEquivalentCap(gradedModules.get(i).getGrade());
-            numerator = (moduleCredits * moduleGradePoint) + numerator;
-            denominator = denominator + moduleCredits;
+            sumModGradePoints = (moduleCredits * moduleGradePoint) + sumModGradePoints;
+            sumModCredits = sumModCredits + moduleCredits;
         }
-        if (denominator != 0) {
-            cap = numerator / denominator;
+        if (sumModCredits != 0) {
+            cap = sumModGradePoints / sumModCredits;
             cap = Math.round(cap * 100) / 100.0;
             return cap;
         }
@@ -230,4 +245,30 @@ public class ModuleRecord {
             TranscriptUi.printUngradedModules(ungradedModules.get(i));
         }
     }
+
+    public void clearTranscript() throws UniModsException {
+        if (gradedModules.size() == TextUi.ZERO && ungradedModules.size() == TextUi.ZERO) {
+            throw new UniModsException(TextUi.ERROR_EMPTY_TRANSCRIPT);
+        }
+        gradedModules.clear();
+        ungradedModules.clear();
+        moduleCodes.clear();
+        TextUi.printTranscriptCleared();
+    }
+
+    public boolean checkModuleExists(String moduleCode) {
+        for (int i = 0; i < gradedModules.size(); i++) {
+            if (gradedModules.get(i).getModuleCode().equals(moduleCode)) {
+                return true;
+            }
+        }
+        for (int i = 0; i < ungradedModules.size(); i++) {
+            if (ungradedModules.get(i).getModuleCode().equals(moduleCode)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
+
+

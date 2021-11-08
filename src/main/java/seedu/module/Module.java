@@ -78,6 +78,7 @@ public class Module extends BaseModule {
     /**
      * Returns a string containing the following information from the module: Title, MCs, Department, Description,
      * Prereqs, S/Uable, Semester Availability.
+     *
      * @return String containing the full information of the module.
      */
     public String getFullInfo() {
@@ -96,13 +97,26 @@ public class Module extends BaseModule {
         return fullInfo;
     }
 
+
+    /**
+     * Returns a string which contains information
+     * about the S/U option of the module.
+     */
+    public String isSuPossible() {
+        String isSuable = "No data";
+        if (attributes != null) {
+            isSuable = attributes.isSUable();
+        }
+        return isSuable;
+    }
+
     /**
      * First checks if the module matches the level specified in searchFlags, and if it does, then checks if the
      * module code contains the searchTerm. These two conditions are classified as preliminary as they can be checked
      * with the information from the moduleList that contains all mods. Further checks require pulling the moduleInfo
      * json for each specific module, and will not be done should this check fail.
      *
-     * @param searchTerm search term that module code is checked to contain.
+     * @param searchTerm  search term that module code is checked to contain.
      * @param searchFlags search flags containing additional conditions.
      * @return true if conditions are met, false otherwise
      */
@@ -282,6 +296,5 @@ public class Module extends BaseModule {
             }
         }
         throw new UniModsException(TextUi.ERROR_INVALID_GRADE);
-
     }
 }
