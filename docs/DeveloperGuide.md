@@ -20,15 +20,13 @@
     - [Storage component](#storage-component)
 
 
-- [Product Scope](#product-scope)
+- [Appendix A: Product Scope](#appendix-a-product-scope)
     - [Target user profile](#target-user-profile)
     - [Value proposition](#value-proposition)
-
-
-- [User Stories](#user-stories)
-
-
-- [Non-Functional Requirements](#non-functional-requirements)
+- [Appendix B: User Stories](#appendix-b-user-stories)
+- [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
+- [Appendix D: Glossary](#appendix-d-glossary)
+- [Appendix E: Instructions for manual testing](#appendix-e-instructions-for-manual-testing)
 
 <br>
 
@@ -608,7 +606,7 @@ To add on Storage component is designed to access only the following folder:
 
 <br>
 
-## Product scope
+## Appendix A: Product scope
 
 <hr>
 
@@ -625,7 +623,7 @@ To add on Storage component is designed to access only the following folder:
 
 <br>
 
-## User Stories
+## Appendix B: User Stories
 
 <hr>
 
@@ -644,7 +642,7 @@ Note: 'specific data type' refers to either clients, tours, flights or client pa
 
 <br>
 
-## Non-Functional Requirements
+## Appendix C: Non-Functional Requirements
 
 <hr>
 
@@ -655,3 +653,49 @@ Note: 'specific data type' refers to either clients, tours, flights or client pa
 
 <br>
 
+## Appendix D: Glossary
+
+<hr>
+
+**ClientPackage:** serves as a link between the client, tour and flight, helps to keep track of the tours (and flights)
+they are subscribed to. `ClientPackage` class stores the actual `Client`, `Flight` and `Tour` objects.
+
+**ArrayList:** acts as a dynamic array, where items can be easily added and removed.
+
+**Subclass:** To say class `A` is a subclass of class `B` would mean that class `A` inherits from class `B`.
+A subclass inherits attributes and methods from the parent class.
+
+**Exceptions:** is any event that interrupts the normal flow of program execution, due to an unwanted event which
+cannot be controlled by developers
+
+<br>
+
+## Appendix E: Instructions for manual testing
+
+<hr>
+
+Given below are instructions to test the app manually.
+
+### Launch and shutdown
+1. Initial launch 
+   1. Download the jar file and copy into an empty folder.
+   2. Run the command ```java -jar TourPlanner.jar``` in a command window to start the program.
+   * Expected: Applications shows welcome messages and allows you to type in commands.
+   
+### Adding and viewing data
+1. Add `Client` to database
+   * Test case: `add -c c001 /n Bo Tuan /cn 93338333 /m borangutuan@mail.com`
+   1. Input the test case to the command window.
+   2. Input `list -c`.
+   * Expected: `Client` with id "c001", name "Bo Tuan", contact "93338333", mail "borangutuan@mail.com"
+is displayed in the list of clients.
+   * *Note: tests can be repeated with `Tour`, `Flight` and `ClientPackage` with the corresponding data fields.*
+
+### Cutting data
+1. Cut `Client` from database
+    * Test case: `cut -c c001` after calling `add -c c001 /n Bo Tuan /cn 93338333 /m borangutuan@mail.com`
+    1. Input the test case to the command window.
+    2. Input `list -c`.
+    * Expected: `Client` with id "c001", name "Bo Tuan", contact "93338333", mail "borangutuan@mail.com"
+      is no longer displayed in the list of clients.
+    * *Note: tests can be repeated with `Tour`, `Flight` and `ClientPackage` with the corresponding data fields.*
