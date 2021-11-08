@@ -221,7 +221,7 @@ public abstract class Parser {
     }
 
     public static ArrayList<Integer> extractIndexes(String input) throws DukeException {
-        String parsedInput = input.replaceAll("[^\\d]", " ").trim();
+        String parsedInput = input.replaceAll(" +", " ").trim();
         if (parsedInput.isBlank()) {
             throw new DukeException("Indexes entered need to be valid numbers. ");
         }

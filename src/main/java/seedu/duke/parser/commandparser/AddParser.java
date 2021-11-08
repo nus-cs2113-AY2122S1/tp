@@ -189,10 +189,12 @@ public abstract class AddParser extends Parser {
                 assert event != null : "Event does not exist";
                 isCorrectEvent = true;
             } catch (NumberFormatException e) {
+                Ui.printLineBreak();
                 System.out.println("Please enter the number corresponding to the event "
                         + "you want to add to. ");
                 Ui.printLineBreak();
             } catch (IndexOutOfBoundsException e) {
+                Ui.printLineBreak();
                 System.out.println("No such event. Please enter a valid event for your task. ");
                 Ui.printLineBreak();
             }
@@ -217,12 +219,16 @@ public abstract class AddParser extends Parser {
                 }
                 isCorrectMember = true;
             } catch (IndexOutOfBoundsException e) {
+                Ui.printLineBreak();
                 System.out.println("One or more of these members do not exist. Please enter the "
                         + "index(es) corresponding to the correct member(s). ");
                 Ui.printLineBreak();
             } catch (DukeException e) {
+                Ui.printLineBreak();
                 System.out.println(e.getMessage());
                 Ui.printLineBreak();
+            } catch (NumberFormatException e) {
+                System.out.println("Please make sure you're only giving me numbers for the indexes!");
             }
         }
         return memberIndexes;

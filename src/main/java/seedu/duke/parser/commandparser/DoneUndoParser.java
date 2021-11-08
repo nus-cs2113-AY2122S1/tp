@@ -41,6 +41,8 @@ public abstract class DoneUndoParser extends Parser {
                     + (action.equals(DONE) ? "done" : "undo") + "' command.");
         } catch (DukeException | InvalidIndexException e) {
             System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Please make sure you're only giving me numbers for the indexes!");
         }
         return null;
     }
