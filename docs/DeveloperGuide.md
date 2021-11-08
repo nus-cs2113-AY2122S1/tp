@@ -3,6 +3,7 @@ Welcome to **SLAM**! **SLAM** is a desktop application for student group leaders
 
 ---
 # Table of Contents
+<<<<<<< HEAD
 1. [Introduction](#Introduction)
    1. [Purpose of This Guide](#Purpose-of-Developer-Guide)
 2. [Acknowledgements](#Acknowledgements)
@@ -18,14 +19,13 @@ Welcome to **SLAM**! **SLAM** is a desktop application for student group leaders
    4. [Next Functionality](#Next-Functionality)
    5. [Update Functionality](#Update-Functionality)
    6. [Select Functionality](#Select-Functionality)
-6. [Product Scope](#Product-scope)
-   1. [Target user profile](#Target-user-profile)
-   2. [Value proposition](#Value-proposition)
-7. [User Stories](#User-Stories)
-8. [Non-Functional Requirements](#Non-Functional-Requirements)
-9. [Glossary](#Glossary)
-10. [Instructions for manual testing](#Instructions-for-manual-testing)
-
+5. [Product Scope](#Product-scope)
+   7. [Target user profile](#Target-user-profile)
+   8. [Value proposition](#Value-proposition)
+6. [User Stories](#User-Stories)
+7. [Non-Functional Requirements](#Non-Functional-Requirements)
+8. [Glossary](#Glossary)
+9. [Instructions for manual testing](#Instructions-for-manual-testing)
 
 ## Introduction
 
