@@ -345,6 +345,8 @@ This section describes the implementation of how the user can display a list of 
 
 #### 4.3.1. Implementation
 
+//TODO LIST HAS A PARSER
+
 1. Since the command for listing goals does not require any parameters, using `ParserManager` to detect the command word
    `list` is sufficient to execute the command.
 2. The `ListGoalsCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
@@ -463,12 +465,16 @@ you decide not to pursue any further or may deem to be irrelevant.
 A `DeleteGoalCommand` object is returned from the `DeleteParser` if the user input is successfully parsed as shown below.
 If the delete command is not provided with a goal index, it will throw an exception.
 
+![](Diagram_Images/Implementation_Diagram_Images/DeleteGoalCommandParserSequenceDiagram.png))
+
 When the `runCommand` method is executed for the `DeleteGoalCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
 
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteGoalCommandSequenceDiagram.png)
 
 ### 4.9. Deleting a Habit
+
+![](Diagram_Images/Implementation_Diagram_Images/DeleteHabitCommandParserSequenceDiagram.png)
 
 When the `runCommand` method is executed for the `DeleteHabitCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:

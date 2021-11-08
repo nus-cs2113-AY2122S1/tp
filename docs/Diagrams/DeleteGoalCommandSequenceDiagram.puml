@@ -14,7 +14,7 @@ activate goalList
 
 goalList -> goalList: getGoal(goalIndex: int)
 activate goalList
-goalList --> goalList
+goalList --> goalList: goal: Goal
 deactivate goalList
 
 ref over goalList: Abstracted checks before\ndeleting Goal:\ngoalIndex  is a positive integer \nand not out of bounds.
@@ -29,7 +29,6 @@ activate goalList
 goalList --> goalList
 deactivate goalList
 
-
 goalList -> goalList: printRemovedGoal(\ngoal.getDescription(): String)
 activate goalList
 goalList -> printManager
@@ -38,8 +37,6 @@ deactivate goalList
 activate printManager
 goalList <-- printManager
 deactivate printManager
-
-return
 
 return
 

@@ -191,7 +191,7 @@ Here are three things to note:
 To explain with an example, a goal that starts and ends within a month is _not_ to have a habit with an interval 
 longer than 30 days, otherwise it should've been a one-off habit! 
 2. `One-off habits` (hey, an oxymoron!) are habits that do not repeat. <br>
-This is achieved by setting the `interval` as `0`, rather than any positive integer.
+This is achieved by setting the `interval` as `0`, rather than any positive integer. Treat them as a singular task.
 3. _Ha(ppy)Bit_ does not allow for an `interval` to be shorter than 1 day. <br>
 This is for those who are planning to do a habit more than once a day. 
 You may consider having multiple recurring habits instead.
@@ -199,7 +199,7 @@ You may consider having multiple recurring habits instead.
 ### 2.2 Icons
 Unfamiliar symbols may confuse. Here is a comprehensive collection of all emojis and syntax we employ.  
 
-> 📃 **Notes**: important information you should take note off (especially if you encounter input errors)
+> 📃 **Notes**: important information you should take note of (especially if you encounter input errors)
 
 > ⚠ **Warning**: avoid doing the things mentioned here at all costs (unless you're feeling lucky)
  
@@ -224,16 +224,19 @@ Do follow the instructions before typing anything, lest _Ha(ppy)Bit_ does not
 register your input. On the topic of inputs...
 
 ### 3.2 Command Format
-_Ha(ppy)Bit_ is very particular about your commands. You begin off with a "command word" to tell _Ha(ppy)Bit_ the exact 
+_Ha(ppy)Bit_ is very particular about your commands. You begin off with a **"command"** word to tell _Ha(ppy)Bit_ the exact 
 action to carry out (See [Command Summary](#7-command-summary) for all actions). The actions are then followed up with
-"parameters", which are information you wish to pass to _Ha(ppy)Bit_ to carry out the actions with it. To indicate the 
-type of parameters, they are prefixed with "flags". The flags help _Ha(ppy)Bit_ identify and distinguish the type of
+**"parameters"**, which are information you wish to pass to _Ha(ppy)Bit_ to carry out the actions with it. To indicate the 
+type of parameters, they are prefixed with **"flags"**. The flags help _Ha(ppy)Bit_ identify and distinguish the type of
 parameters.
 
 A command could look like this: `add n/Run 2.4km g/1 i/7`. Where, <br>
-`add` is the command word, <br>
-`Run 2.4km`, `1`, and `7` are parameters, <br>
-and `n/`, `g/`, and `i/` are flags.
+`add` is the _command_ word, <br>
+`Run 2.4km`, `1`, and `7` are _parameters_, <br>
+and `n/`, `g/`, and `i/` are _flags_.
+
+> 📃 Don't worry if you typed the command wrongly! Helpful error messages will pop up to advise you on what to change. 
+> 👍
 
 Here are guidelines and tips for the command format:
 * **Commands** are only accepted when you see `Command: ` on the screen (See [Main Interface](#12-main-interface)). 
@@ -259,7 +262,7 @@ Below are the commands supported by the application.
 Each section describes the function of each command and its format. <br>
 
 ### 4.1 Ask for Help: `help`
-What did you say? You're not sure what the commands are? Relax, that's why the `help` command exists.\
+What did you say? You're not sure what the commands are? Relax, a `help` command exists.\
 This command displays a list of all possible commands.
 If an invalid command is typed, this command will be invoked by default.
 
