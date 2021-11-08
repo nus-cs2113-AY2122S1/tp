@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 //@@author Roycius
 public class UiTest {
     @Test
-    public void moduleInfo_invalidModuleCode_exceptionThrown() {
+    public void findModule_invalidModuleCode_exceptionThrown() {
         Duke duke = new Duke();
         Ui ui = new Ui();
         assertThrows(DukeException.class, () -> ui.printModuleInfo("hello", false));
