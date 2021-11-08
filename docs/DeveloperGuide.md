@@ -132,6 +132,13 @@ The **Online** component consists of only `NusMods`.
 <br>
 
 ### Timetable component
+The **Timetable** component consists of `Timetable`, `TimetableItem`, `TimetableLesson` and `TimetableUserItem` classes.
+
+![TimetableComponent](./uml-diagrams/TimetableComponent.png)
+
+> `Timetable` stores all timetable information, including weekly schedule, modules taken and the current semester
+> 
+> `TimetableLesson`, and `TimetableUserItem` extends from `TimetableItem`. They are stored in the timetable schedule to differentiate between different type of schedule items
 
 <br>
 
