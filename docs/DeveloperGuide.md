@@ -177,7 +177,9 @@ Below is an example scenario of how the add student feature behaves at each step
 * Step 4 - Then, `StudentList.addStudent` is called to add the newly created `Student` 
   object into the `students` ArrayList within `StudentList`. Below is an object diagram showing the state after 
   completion of the `add_student` command.
-<br>
+
+<br> 
+
 ![AddStudentObjectDiagram](diagrams/object/AddStudentObjectDiagram.png)
 
 <br>
