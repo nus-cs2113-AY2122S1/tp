@@ -3,6 +3,7 @@ package taa.command;
 //@@author leyondlee
 
 import taa.Ui;
+import taa.command.attendance.ListLessonAttendanceCommand;
 import taa.command.comment.DeleteCommentCommand;
 import taa.teachingclass.ClassList;
 import taa.command.assessment.AddAssessmentCommand;
@@ -97,6 +98,7 @@ public class HelpCommand extends Command {
 
         Command[] attendanceCommands = {
             new ListAttendanceCommand(""),
+            new ListLessonAttendanceCommand(""),
             new SetAttendanceCommand(""),
             new DeleteAttendanceCommand("")
         };

@@ -20,14 +20,13 @@ public class SetAttendanceCommand extends Command {
     private static final String KEY_STUDENT_INDEX = "s";
     private static final String KEY_LESSON_NUMBER = "l";
     private static final String KEY_PRESENT = "p";
+    private static final int MAX_LESSON_NUMBER = 1000;
     private static final String[] SET_ATTENDANCE_ARGUMENT_KEYS = {
         KEY_CLASS_ID,
         KEY_STUDENT_INDEX,
         KEY_LESSON_NUMBER,
         KEY_PRESENT
     };
-
-    private static final String MESSAGE_INVALID_LESSON_NUMBER = "Invalid lesson number.";
 
     private static final String MESSAGE_FORMAT_INVALID_PRESENT = "Invalid present value.\n"
             + "Possible values: %s (Present), %s (Absent)";
@@ -37,11 +36,9 @@ public class SetAttendanceCommand extends Command {
     private static final String ABSENT_VALUE = "0";
 
     private static final String MESSAGE_FORMAT_SET_ATTENDANCE_USAGE =
-            "\nSet attendance for one student: %s %s/<CLASS_ID> %s/<STUDENT_INDEX> %s/<LESSON_NUMBER> %s/<PRESENT>"
-            + "\nSet attendance for a range of students: %s %s/<CLASS_ID> %s/<START_STUDENT_INDEX>-<END_STUDENT_INDEX>"
-            + " %s/<LESSON_NUMBER> %s/<PRESENT>"
-            + "\nSet attendance for a selection of students: %s %s/<CLASS_ID> %s/<STUDENT_INDEX>,<STUDENT_INDEX>,"
-            + " %s/<LESSON_NUMBER> %s/<PRESENT>";
+            "%s %s/<CLASS_ID> %s/[<STUDENT_INDEX> | <START_STUDENT_INDEX>-<END_STUDENT_INDEX> | "
+            + "<STUDENT_INDEX>,<STUDENT_INDEX>,...] %s/<LESSON_NUMBER> %s/<PRESENT>";
+
 
     public SetAttendanceCommand(String argument) {
         super(argument, SET_ATTENDANCE_ARGUMENT_KEYS);
@@ -60,6 +57,9 @@ public class SetAttendanceCommand extends Command {
         String lessonNumberInput = argumentMap.get(KEY_LESSON_NUMBER);
         if (!Util.isStringInteger(lessonNumberInput)) {
             throw new TaaException(MESSAGE_INVALID_LESSON_NUMBER);
+        }
+        if (Integer.parseInt(lessonNumberInput) > MAX_LESSON_NUMBER) {
+            throw new TaaException(MESSAGE_LESSON_NUMBER_EXCEEDS_MAX);
         }
     }
 
@@ -86,19 +86,7 @@ public class SetAttendanceCommand extends Command {
         }
 
         String present = argumentMap.get(KEY_PRESENT);
-        boolean isPresent;
-        switch (present) {
-        case PRESENT_VALUE:
-            isPresent = true;
-            break;
-
-        case ABSENT_VALUE:
-            isPresent = false;
-            break;
-
-        default:
-            throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_PRESENT, PRESENT_VALUE, ABSENT_VALUE));
-        }
+        boolean isPresent = setIsPresent(present);
 
         String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
         StudentIndexArray studentIndexes = new StudentIndexArray();
@@ -113,9 +101,11 @@ public class SetAttendanceCommand extends Command {
                 int studentIndex = studentIndexes.getStudentIndex(i) - 1;
 
                 StudentList studentList = teachingClass.getStudentList();
+                assert studentIndex >= 0 && studentIndex < teachingClass.getStudentList().getSize();
                 Student student = studentList.getStudentAt(studentIndex);
 
                 AttendanceList attendanceList = student.getAttendanceList();
+                assert lessonNumber > 0 && lessonNumber <= 1000;
                 Attendance attendance = attendanceList.getAttendance(lessonNumber);
                 if (attendance == null) {
                     attendance = new Attendance(lessonNumber, isPresent);
@@ -133,11 +123,30 @@ public class SetAttendanceCommand extends Command {
     }
 
     /**
+     * Sets the boolean variable isPresent based on the user input for present value.
+     * @param present The present value of the student. Can be 1 or 0.
+     * @return True if present value is 1. False if present value is 0.
+     * @throws TaaException If the user inputs an invalid format for present value.
+     */
+    private boolean setIsPresent(String present) throws TaaException {
+        switch (present) {
+        case PRESENT_VALUE:
+            return true;
+
+        case ABSENT_VALUE:
+            return false;
+
+        default:
+            throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_PRESENT, PRESENT_VALUE, ABSENT_VALUE));
+        }
+    }
+
+    /**
      * Checks whether the inputted student indexes are out of bounds.
      *
      * @param teachingClass  The teachingClass object.
      * @param studentIndexes The studentIndexes object, containing the array of inputted indexes.
-     * @return
+     * @return True if student indexes are out of bounds, False otherwise.
      */
     private boolean isIndexOutOfBounds(TeachingClass teachingClass, StudentIndexArray studentIndexes) {
         for (int i = 0; i < studentIndexes.getSize(); i++) {
@@ -174,16 +183,6 @@ public class SetAttendanceCommand extends Command {
     protected String getUsage() {
         return String.format(
                 MESSAGE_FORMAT_SET_ATTENDANCE_USAGE,
-                COMMAND_SET_ATTENDANCE,
-                KEY_CLASS_ID,
-                KEY_STUDENT_INDEX,
-                KEY_LESSON_NUMBER,
-                KEY_PRESENT,
-                COMMAND_SET_ATTENDANCE,
-                KEY_CLASS_ID,
-                KEY_STUDENT_INDEX,
-                KEY_LESSON_NUMBER,
-                KEY_PRESENT,
                 COMMAND_SET_ATTENDANCE,
                 KEY_CLASS_ID,
                 KEY_STUDENT_INDEX,

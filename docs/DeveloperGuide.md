@@ -225,16 +225,19 @@ The sequence diagram shown below illustrates how the `set_attendance` command wo
 ![SetAttendanceSequenceDiagram](diagrams/sequence/SetAttendanceSequenceDiagram.png)
 
 Below is an example scenario of how the set attendance feature behaves at each step:
-* Step 1 - The user executes `set_attendance c/CS2113T s/1 l/1 p/1` to set an attendance to `Present` for student at 
-index `1`, lesson number `1` to set a student's attendance for a lesson. The `set_attendance` command calls the 
-`SetAttendanceCommand.execute` method. Within `SetAttendanceCommand.execute`, `AttendanceList.getAttendance("1")` is 
-called to ensure that there is no existing attendance with the
-lesson number `1`for student at index `1`.
-* Step 2 - If no existing attendance object with lesson number `1` for student at index `1` is found, a new 
-`Attendance` object
-with lesson number `1` and attendance record `Present` is set as its lesson number and attendance record respectively.
-Then, `AttendanceList.addAttendance` is called to add the newly created `Attendance` object into the `attendances` 
+* Step 1 - The user executes `set_attendance c/CS2113T-F12 s/1-3 l/1 p/1` to set an attendance to `Present` for students 
+at index `1-3`, lesson number `1` to set a student's attendance for a lesson. The `set_attendance` command calls the 
+`SetAttendanceCommand.execute` method.
+* Step 2 - The range of student indexes or selected student indexes are transformed into an array of the consisting
+student indexes. In this case, a `StudentIndexArray` [1,2,3] is set using the `setStudentIndexes` method.
+* Step 3a - If no existing attendance object with lesson number `1` for student at index `1` is found, a new 
+`Attendance` object with lesson number `1` and attendance record `Present` is set as its lesson number and attendance record respectively.
+* Step 3b - Otherwise, the existing attendance record of the attendance object with lesson number `1` is set to
+`Present`.
+* Step 4 - `AttendanceList.addAttendance` is called to add the newly created `Attendance` object into the `attendances` 
 ArrayList within `AttendanceList`.
+* Step 5 - Steps 2-4 are repeated for each element in the `StudentIndexArray`. For our example, steps 2-4 are repeated 
+for students at index `2` and `3`.
 
 <br>
 

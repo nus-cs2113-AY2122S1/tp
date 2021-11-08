@@ -50,6 +50,9 @@ public abstract class Command {
     protected static final String MESSAGE_CLASS_NOT_FOUND = "Class not found.";
     protected static final String MESSAGE_INVALID_STUDENT_INDEX = "Invalid student index.";
     protected static final String MESSAGE_INVALID_LESSON_NUMBER = "Invalid lesson number.";
+    protected static final String MESSAGE_LESSON_NUMBER_EXCEEDS_MAX = "Lesson number exceeds 1000.";
+    protected static final String MESSAGE_INVALID_LESSON_NUMBER_WITH_INFO = "Invalid lesson number for student of "
+            + "index %s (%s).";
     protected static final String MESSAGE_INVALID_ASSESSMENT_NAME = "Invalid assessment name.";
     protected static final String MESSAGE_INVALID_MARKS = "Invalid marks. Marks must be a double with at most 2 "
             + "decimal points.";
