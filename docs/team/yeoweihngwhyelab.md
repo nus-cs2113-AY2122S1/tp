@@ -120,4 +120,4 @@ Given below are my contributions to the team's documentation:
     for each command's description. 
   * Wrote the Command Summary. 
   * Wrote most of the command description such as `stat`, `add`, `edit`, `delete`, `list`
-    `list`, `csv`, `db`
+    `list`, `csv`, `db`. 
