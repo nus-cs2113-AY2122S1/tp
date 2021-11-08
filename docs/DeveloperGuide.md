@@ -507,7 +507,7 @@ Given below is an example usage scenario and how the edit task mechanism behaves
    i. `EditTasksCommand` checks if the index as gotten from `getTaskIndexForEdit()` of `Parser` class is in the task list and if it not then `CalendarIndexNotFoundException()` is thrown.\
    ii. `EditTasksCommand` prompts the user to enter the command to add a todo task and parses the command using `parseTodoCommand()` The date given by the user is checked with `checkIfDateValid(date)` and if the date is incorrect then an exception is thrown.\
    iii. `EditTasksCommand` calls `editTask()` to edit the task.\
-   iv. Edit successful message is printed back to the user.
+   iv. Edit successful message is printed back to the user.\
    iv. `EditTasksCommand` calls `StorageTasks.writeTaskList(Storage.tasksList)` to save the new data to the storage file.
 
 ### 4.4 Journaling Feature
