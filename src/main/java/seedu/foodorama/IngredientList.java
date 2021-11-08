@@ -299,7 +299,7 @@ public class IngredientList {
      *
      * @author renzocanare
      */
-    public static void addExpiry(int ingredientIndex) {
+    public static void addExpiry(int ingredientIndex) throws FoodoramaException {
         String ingrName = ingredientList.get(ingredientIndex).getIngredientName();
         UI.printAskIngrExpiryDate(ingrName);
 
@@ -312,7 +312,7 @@ public class IngredientList {
         while (loop == LOOP) {
             UI.clearTerminalAndPrintNewPage();
             if (!isValidDateFormat(expiryDateString)) {
-                UI.printIncorrectExpiryDateFormatMsg();
+                throw new FoodoramaException(UI.getIncorrectExpiryDateFormatMsg());
             } else if (isValidDateFormat(expiryDateString)) {
                 expiryDate = LocalDate.parse(expiryDateString, dtf);
                 daysBetweenExpiryToday = ChronoUnit.DAYS.between(LocalDate.now(), expiryDate);
