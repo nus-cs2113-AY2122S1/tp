@@ -1,8 +1,8 @@
 @startuml
 'https://plantuml.com/sequence-diagram
-
-box
 actor User
+box
+
 User -> SortIngrCommand: UserCommand
 
 activate SortIngrCommand
