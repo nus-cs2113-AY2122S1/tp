@@ -25,6 +25,13 @@ public class Expense implements ExpenseSplitter {
     private static final DateTimeFormatter inputPattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static final DateTimeFormatter outputPattern = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
+    private static final int NUMBER_OF_INPUTS = 3;
+    private static final int EXPENSE_INDEX = 0;
+    private static final int CATEGORY_INDEX = 1;
+    private static final int PERSONS_INDEX = 2;
+    private static final int PERSONS_AND_DESCRIPTION_INDEX = 2;
+    private static final int INDEX_OF_PERSON = 0;
+
     /**
      * Legacy constructor for Expense. Used as stub for testing. Does not include parsing.
      *
@@ -51,14 +58,16 @@ public class Expense implements ExpenseSplitter {
      * @param inputDescription String of user input to be parsed and assigned to expense attributes
      */
     public Expense(String inputDescription) throws ForceCancelException {
-        String[] expenseInfo = inputDescription.split(" ", 3);
-        setAmountSpent(expenseInfo[0]);
-        setCategory(expenseInfo[1].toLowerCase());
-        this.description = getDescriptionParse(expenseInfo[2]);
-        this.personsList = checkValidPersons(expenseInfo[2]);
+
+
+        String[] expenseInfo = inputDescription.split(" ", NUMBER_OF_INPUTS);
+        setAmountSpent(expenseInfo[EXPENSE_INDEX]);
+        setCategory(expenseInfo[CATEGORY_INDEX].toLowerCase());
+        this.description = getDescriptionParse(expenseInfo[PERSONS_AND_DESCRIPTION_INDEX]);
+        this.personsList = checkValidPersons(expenseInfo[PERSONS_INDEX]);
         this.date = promptDate();
         if (personsList.size() == 1) {
-            ExpenseSplitter.updateOnePersonSpending(this, personsList.get(0));
+            ExpenseSplitter.updateOnePersonSpending(this, personsList.get(INDEX_OF_PERSON));
         } else {
             ExpenseSplitter.updateIndividualSpending(this);
         }
