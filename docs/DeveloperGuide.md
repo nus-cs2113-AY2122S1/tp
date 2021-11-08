@@ -365,26 +365,25 @@ inventory more efficiently.
 |v1.0|librarian|remove items from the catalogue|keep the full catalogue up to date|
 |v1.0|librarian|update the status of an item when it is loaned out|keep the full catalogue up to date|
 |v1.0|librarian|update the status of an item when it is returned|keep the full catalogue up to date|
-|v1.0|librarian|check the list of items available in the library||
-|v1.0|librarian|check the list of items on loan||
-|v1.0|librarian|check the list of all items in the library||
-|v2.0|librarian|categorise different items into media forms. (E.g. book, magazine, audio, video)|better manage my catalogue||
-|v2.0|librarian|edit the details of existing items on the catalogue|keep the full catalogue up to date||
-|v2.0|librarian|reserve and unreserve an item by updating its status|keep the full catalogue up to date||
-|v2.0|librarian|reset the reservation of an item||
-|v2.0|librarian|search for specific items by their title or ID|retrieve the details of items I need||
-|v2.0|librarian|check the list of items on reservation||
-|v2.0|librarian|loan an item for a person specified by their username||
-|v2.0|librarian|reserve an item for a person specified by their username||
-|v2.0|librarian|view the list of items are due to be returned today|| 
-|v2.0|librarian|view the list of overdue items|inform people to return them||
-|v2.1|librarian|view the list of items that are due to be returned on a specific date||
-|v2.1|librarian|search items by their categories (Book, CD, Magazine, etc)||
+|v1.0|librarian|check the list of items available in the library|get an overview what items are still present within the library|
+|v1.0|librarian|check the list of items on loan|expect what items are going to be returned soon|
+|v1.0|librarian|check the list of all items in the library|get an overview of the full inventory of the library|
+|v2.0|librarian|categorise different items into media forms. (E.g. book, magazine, audio, video)|better manage my catalogue|
+|v2.0|librarian|edit the details of existing items on the catalogue|keep the full catalogue up to date|
+|v2.0|librarian|reserve and unreserve an item by updating its status|set aside an item for a user beforehand|
+|v2.0|librarian|search for specific items by their title or ID|retrieve the details of items I need|
+|v2.0|librarian|check the list of items on reservation|make an item available for others to loan|
+|v2.0|librarian|loan an item for a person specified by their username|track who is in possession of a item currently|
+|v2.0|librarian|reserve an item for a person specified by their username|
+|v2.0|librarian|view the list of items are due to be returned today|keep track of what items are expected to be returned today| 
+|v2.0|librarian|view the list of overdue items|inform people to return them|
+|v2.1|librarian|view the list of items that are due to be returned on a specific date|get a list of expected returns in the future|
+|v2.1|librarian|search items by their categories (Book, CD, Magazine, etc)|easily sort through the inventory|
 |v2.1|librarian|retain the items information|keep the details without re-entering it everytime I start the application||
-|v2.1|librarian|search items using multiple parameters (title, id, status, category, etc)||
-|v2.1|librarian|edit the details of the items simultaneously||
-|v2.1|librarian|track miscellaneous items||
-|v2.1|librarian|display the information of the library stats||
+|v2.1|librarian|search items using multiple parameters (title, id, status, category, etc)|narrow down the items based on certain parameters|
+|v2.1|librarian|edit the details of the items simultaneously|quickly make changes to the details of each item|
+|v2.1|librarian|track miscellaneous items|also record items that are not categorised as audio, books, magazines or videos|
+|v2.1|librarian|display the information of the library stats|get a rough gauge about the usage of the library's assets|
 
 ## Non-Functional Requirements
 
