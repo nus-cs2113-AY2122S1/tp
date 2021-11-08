@@ -221,11 +221,20 @@ public class Trip implements FilterFinder {
         return repaymentCurrency;
     }
 
-    public void setRepaymentCurrency(String repaymentCurrency) {
-        this.repaymentCurrency = repaymentCurrency.toUpperCase();
-        setRepaymentCurrencyFormat(this.repaymentCurrency);
-        setRepaymentCurrencySymbol(this.repaymentCurrency);
-
+    //@@author itsleeqian
+    public void setRepaymentCurrency(String repaymentCurrency) throws ForceCancelException {
+        try {
+            if (isNumeric(repaymentCurrency) || repaymentCurrency.length() != ISO_LENGTH) {
+                throw new NumberFormatException();
+            }
+            this.repaymentCurrency = repaymentCurrency.toUpperCase();
+            setRepaymentCurrencyFormat(this.repaymentCurrency);
+            setRepaymentCurrencySymbol(this.repaymentCurrency);
+        } catch (NumberFormatException e) {
+            Ui.printIsoFormatError();
+            String userInput = Ui.receiveUserInput();
+            setRepaymentCurrency(userInput);
+        }
     }
 
     private void setRepaymentCurrencyFormat(String input) {

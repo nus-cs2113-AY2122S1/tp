@@ -222,10 +222,7 @@ GUI.
 - An advanced user should be able to manipulate the save file directly, and the app must be able to handle this scenario
 without error.
 
-### Appendix D: Glossary
 
-* *glossary item* - Definition
-
-### Appendix E: Instructions for manual testing
+### Appendix D: Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}

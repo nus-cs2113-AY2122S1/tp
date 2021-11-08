@@ -131,12 +131,12 @@ public class Expense implements ExpenseSplitter {
     public LocalDate promptDate() throws ForceCancelException {
         Ui.expensePromptDate();
         String inputDate = Ui.receiveUserInput();
-        if (inputDate.isEmpty()) {
-            return LocalDate.now();
-        }
         while (!isDateValid(inputDate)) {
             inputDate = Ui.receiveUserInput();
             Storage.getLogger().log(Level.INFO, "Invalid date format entered");
+        }
+        if (inputDate.isEmpty()) {
+            return LocalDate.now();
         }
         return LocalDate.parse(inputDate, inputPattern);
     }
