@@ -17,21 +17,25 @@ alt ValidInput
 activate Parser
 Parser -> CommandHandler: handleCommand
 activate CommandHandler
+
+else userInput == Quit || Help || Close
+User <-- Parser: Show relevant output
+
 else
 User <-- Parser: Request for command again
+
+
 deactivate Parser
 deactivate Parser
 deactivate Parser
-end
+end ValidInput
 
 CommandHandler -> CommandExecutor: executeCommand
-
 
 activate CommandExecutor
 alt invalidInputParameters
 CommandHandler <-- CommandExecutor: Error with input parameters
 User <-- CommandHandler: Error message
-
 
 else
 CommandExecutor -> : Call relevant functions
@@ -46,13 +50,7 @@ deactivate CommandHandler
 else
 User <--  : Show relevant output
 
-
-
-
-
-
-
-
-end
-end
+end invalidInputParameters
+end invalidParameters
+end loop
 @enduml
