@@ -50,14 +50,17 @@ The family of the `Command` classes is as follows:
 - `ExpenseCommands`: Handles all the expense commands
 - `IncomeCommands`: Handles all the income commands
 - `BudgetCommands`: Handles all the budget commands.
+- `InvestCommands`: Handles all the invest commands.
 
 #### Logic component
 The Logic component contains all the `Manager` classes.
 1. `BudgetManager.java`
 2. `ExpenseManager.java`
 3. `IncomeManager.java`
+4. `InvestManager.java`
 
 Each `Manager` class handles the logic when adding the respective entities into the data persistence, as well as throwing any exceptions encountered back to the command handler.
+Each `Manager` class also implements the interface, `LoadableManager`. This allows the manager to parse user data into the system for use.
 
 Below shows the sequence diagram of how an `Expense` item is added to the `ExpenseList`.
 
@@ -71,13 +74,13 @@ The Storage component handles the reading and writing of user data onto the hard
 - `DataManager` is the facade class to the Storage component, handling requests to write and read user data.
 - The `DataReader` and `DataWriter` handles the actual reading and writing of user data to the hard disk.
 - `DataIntegrityChecker` checks if the user data exists on the hard disk before the actual file I/O.
-- In the case where the user data does not exist, the `StorageGenerator` generates a directory for user data and the respective data files.
 
 #### Model component
 The Model component consists of all the entities, as well as the aggregation of the entities as a list.
 - Stores the budget data
 - Stores the expense data
 - Stores the income data
+- Stores the investment data, namely stocks and savings
 
 ## Implementation
 
@@ -88,7 +91,7 @@ This section describes some noteworthy details on how certain features are imple
 The read user data feature is implemented by `DataManager`. 
 
 The reading of user data follows these steps:
-1. `DataManager` will call `DataIntegrityChecker#check()` to check if the specified directory and the data files for storing user data exists. If the directory or any of the data files does not exist, `DataIntegrityChecker` will call `StorageGenerator` to create the necessary file or directory.
+1. `DataManager` will call `DataIntegrityChecker#check()` to check if the specified directory and the data files for storing user data exists. If the directory or any of the data files does not exist, `DataIntegrityChecker` will create the necessary file or directory.
 2. `DataManager` will call `DataReader#read()` to read the contents of each data file.
 3. After reading one data file, `DataManager` will pass the data (in string format) to the relevant logic handler for parsing and loading of the models.
 
@@ -101,8 +104,8 @@ Below is the sequence diagram for this feature.
 The write user data feature is implemented by `DataManager`. 
 
 The writing of user data follows these steps:
-1. `DataManager` will call `DataIntegrityChecker#check()` to check if the specified directory and the data files for storing user data exists. If the directory or any of the data files does not exist, `DataIntegrityChecker` will call `StorageGenerator` to create the necessary file or directory.
-2. For each logic handler, `DataManager` will call `LoadableManager#toDataString()`. This will return a parsable string that can be saved in the data file, and can be parsed into models after reading the user data.
+1. `DataManager` will call `DataIntegrityChecker#check()` to check if the specified directory and the data files for storing user data exists. If the directory or any of the data files does not exist, `DataIntegrityChecker` will create the necessary file or directory.
+2. For each logic handler, `DataManager` will call `LoadableManager#parse()`. This will return a parsable string that can be saved in the data file, and can be parsed into models after reading the user data.
 3. `DataManager` will then call `DataWriter#write()` to write the data string into each data file.
 
 Below is the sequence diagram for this feature.
@@ -159,7 +162,3 @@ Accouminate helps university students to keep track of their finances to aid the
 
 - Mainstream OS: Windows, MacOS, Ubuntu and other modern flavors of Linux
 - Exploration: Usage of the application without any external assistance or reference to the user guide
-
-## Instructions for manual testing
-
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}

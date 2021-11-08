@@ -17,9 +17,16 @@ public final class HelpMessage {
             + "budget add -v [VALUE]\t Add a new budget\n"
             + "budget list\t List the budget set for current month\n"
             + "budget delete\t Delete the budget for current month\n"
+            + "invest add savings [NAME] -v [VALUE] \t Add savings account\n"
+            + "invest add stocks [NAME] -n [NUM] -p [PRICE] \t Add a stock\n"
+            + "invest delete savings -i [ID] \t Delete savings account\n"
+            + "invest delete stocks -i [ID] \t Delete a stock\n"
+            + "invest list savings \t List all savings accounts\n"
+            + "invest list stocks \t List all stocks\n"
             + "\nOthers:\n"
             + "help\t Displays this help message\n"
             + "exit\t Exit the program";
+
 
     private HelpMessage() {
     }
