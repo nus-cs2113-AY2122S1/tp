@@ -259,6 +259,7 @@ You can delete any existing training schedules with the help of the `delete` com
         * `delete /t Friday` Deletes a training with the name 'John'.
             * If there is more than 1 Friday in the training list, a prompt will show up, and you will need to delete the 'Friday' based on its index number.
     * **Expected Output:**
+    
    ```
    You have removed training entry:
    [1] Training Name: WEEKLY FRIDAY TRAINING 1 | Venue: MPSH 1 | Time: 5 NOV 2021
