@@ -176,7 +176,7 @@ public class TextUi {
 
     }
 
-    //@@author yeoweihngwhyelab
+    //@@author ZenoNexus
     public static void showBudgetAddedMessage(double amount, int month) {
         String monthString = getMonthString(month);
         System.out.println("Your budget of $"
@@ -512,7 +512,7 @@ public class TextUi {
         }
     }
 
-    //@@author yeoweihngwhyelab
+    //@@author ZenoNexus
     public static void displayStats(int month, double[] categoryPercentage, double monthBudget,
                                     String topCategory, double topCategorySpending) {
         String monthString = getMonthString(month);
@@ -544,16 +544,6 @@ public class TextUi {
         System.out.println();
     }
 
-    //@@author yeoweihngwhyelab
-    public static void printYearStatus(int statusMessage) {
-        System.out.print("The data base have been switched to: ");
-        System.out.println(statusMessage);
-
-        System.out.println("You may work on the " + statusMessage + " database!");
-
-        System.out.println(DIVIDER);
-    }
-
     private static void printHorizontalGraphRow(double percentageToPrint) {
         int totalNumberOfBars = 20;
         long numberOfBarsToPrint = round(percentageToPrint / percentageRepresentedByEachBar);
@@ -569,6 +559,16 @@ public class TextUi {
         }
         System.out.print("     " + df.format(percentageToPrint) + "%");
         System.out.println();
+    }
+
+    //@@author yeoweihngwhyelab
+    public static void printYearStatus(int statusMessage) {
+        System.out.print("The data base have been switched to: ");
+        System.out.println(statusMessage);
+
+        System.out.println("You may work on the " + statusMessage + " database!");
+
+        System.out.println(DIVIDER);
     }
 
     public static void showExitMessage() {
@@ -595,10 +595,10 @@ public class TextUi {
 
     //@@author yeoweihngwhyelab
     public static void statsIntro(AllRecordList recordList) {
-        Command command = new StatYearCommand(1);
+        StatYearCommand command = new StatYearCommand(1);
         command.setAllRecordList(recordList);
 
-        ((StatYearCommand) command).overallStatisticsIntro();
+        command.overallStatisticsIntro();
 
         Delay.wait(200);
         System.out.println();

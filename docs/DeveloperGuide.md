@@ -10,6 +10,7 @@ for tech-savvy students who have trouble keeping track of their expenses.
 * [Design](#design)
   * [Architecture](#architecture)
   * [UI Component](#ui-component)
+  * [Data Component](#data-component)
 * [Implementation](#implementation)
   * [Delete feature](#delete-feature)
 * [Product scope](#product-scope)
@@ -60,7 +61,7 @@ project, click trust.
 ![Intellij ProjectStructure](images/TrustGradle.png)
 
 6) Verifying BudgetTracker Runs
-Right click on BudgetTracker then click on run to test our our BudgetTracker App. 
+Right click on BudgetTracker then click on run to test our BudgetTracker App. 
 
 ![Intellij Run BudgetTracker](images/BudgetTrackerRun.png)
 
@@ -84,7 +85,7 @@ At app launch, **`BudgetTracker`** is in charge of initializing the components a
 initialized components into others as parameters. 
 
 For example, an initialized variable of `Data` is passed into an initialized variable of `Storage` for
-the `Storage` component to load hard disk information into the memory.
+the `Storage` component to load hard disk information into the data memory.
 
 [**`Commons`**](#common-classes) consists of the exception classes for exception handling and messages used by other classes.
 
@@ -116,7 +117,7 @@ The `Ui` component:
 
 <br />
 
-### <a id=""></a> Data Component
+### <a id="data-component"></a> Data Component
 Below is a partial class diagram that shows an overview of the `Data` component.
 
 ![Figure_DataComponent_Partial_Class_Diagram](images/DataPartialClassDiagram.png)
@@ -161,7 +162,7 @@ The Storage component consists of:
 
 The `Storage` component:
 
-1) #### What it does?
+1) What it does?
 - During the first launch of the app, it creates a new current year database text file if there isn't any. 
 It will load any existing data from the database text file into the app. 
 - Allows user to change the database to the year he wants. 
@@ -169,7 +170,7 @@ It will load any existing data from the database text file into the app.
 - Upon performing any commands that will change records in the database, such as `add`, `edit`, or `delete`,
 Storage will reload the data in the app into the database text file. 
 
-2) #### Architecture of the Storage component
+2) Architecture of the Storage component
 
 ![Storage Sequence Diagram](images/StorageBasicaArchitecture.png)
 
@@ -189,7 +190,7 @@ file to the new state of the data in the App.
 - Then the loop will continue. For commands that will not change the data in the app such as `list`, `find`...
 The reloadArrayToStorage() method will not be called. 
 
-3) #### Class Diagram of the Storage component
+3) Class Diagram of the Storage component
 
 ![Storage Sequence Diagram](images/Storage-Class_Diagram.png)
 
@@ -340,7 +341,7 @@ at every step.
 
 ![dataSample](images/dataSample.png)
 
-2) Why is the data stored in such a manner?
+2)  Why is the data stored in such a manner?
 
 The reason it is implemented in this manner is so that we could reuse code that have been written 
 for adding of budget and expenditures directly when loading from storage.
@@ -358,7 +359,7 @@ The way the database is organized is that each yearly Records is stored in the f
 _YYYY.txt_. Each year contains all the monthly budget as well as all the expenditure and 
 loan tied to that month. 
 
-3) How do some key methods work?
+3)  How do some key methods work?
 
 `readTextFileToString()`
 
@@ -412,7 +413,7 @@ attribute's value after the edit. That is the reason why it _reloadArrayToStorag
 reloading the data text files after the `delete` command will just remove a particular `add` line 
 of command from the data text file. 
 
-5) How does switching database work?
+5)How does switching database work?
 
 When the `year <SELECTED DATABASE YEAR>` command is called eg. `year 2020`, the Parser will 
 call the YearCommand, and it will run the _execute()_ method. _execute()_ first clears the 
