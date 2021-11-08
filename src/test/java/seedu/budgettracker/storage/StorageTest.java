@@ -69,7 +69,7 @@ public class StorageTest {
         }
 
         try {
-            allRecordList.get(10).addBudget(100, false);
+            allRecordList.get(10).addBudget(100);
         } catch (DuplicateBudgetException e) {
             System.out.println("ERROR!");
         }

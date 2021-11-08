@@ -776,42 +776,92 @@ Example of usage:
 
 `help`
 
-Expected outcome: Listing the budget and all expenditures for that particular month.
+Expected outcome: Lists all available commands and their parameters.
 
 ```
 ========================================================
 1. add
 Adds an expenditure record.
-Parameters: -e c/DESCRIPTION a/COST d/<DATE_OF_EXPENDITURE>
-Note: If DATE_OF_EXPENDITURE is not specified, the current system date will be the default value.
+Parameters: -e n/EXPENDITURE_NAME a/COST d/[DATE_OF_EXPENDITURE] c/[CATEGORY]
+Note:
+ * If DATE_OF_EXPENDITURE is not specified, current system date will be the default value.
+ * If CATEGORY is not specified, GENERAL will be the default category.
 
 Adds a budget record.
-Parameters: -b a/AMOUNT m/MONTH [y/YEAR]
+Parameters: -b a/AMOUNT m/[MONTH]
+Note:
+ * If MONTH is not specified, current system month will be the default value.
 
 Adds a loan record.
 Parameters: l/DEBTOR_NAME a/AMOUNT [d/DATE_OF_LOAN]
 ========================================================
-2. edit m/MONTH b/AMOUNT
+2. edit
+Edits an expenditure record.
+Parameters: -e m/MONTH i/INDEX [a/AMOUNT] [d/DATE_OF_EXPENDITURE] [n/DESCRIPTION]
+Note:
+ * If DATE_OF_EXPENDITURE is not specified, current system date will be the default value.
+ * If CATEGORY is not specified, GENERAL will be the default category.
+
+Edits a budget record:
+Parameters: -b m/MONTH a/NEW_AMOUNT
+
+Edits a loan record:
+Parameters: -l m/MONTH i/INDEX [l/DEBTOR_NAME] [a/AMOUNT] [d/DATE_OF_LOAN]
 ========================================================
-3. edit m/MONTH i/INDEX [e/NEW_EXPENDITURE_NAME] [a/NEW_AMOUNT] [d/NEW_DATE]
+3.find
+Finds all expenditure and loan records with the specified keyword
+Parameters: [KEYWORD]
 ========================================================
-4. edit m/MONTH i/INDEX [l/DEBTOR_NAME] [a/AMOUNT] [d/DATE_OF_LOAN]
+4. list
+Lists all records
+Parameters:  m/all [c/CATEGORY]
+
+Lists records in a specified monthlist m/MONTH [c/CATEGORY]
 ========================================================
-5. find [m/MONTH] b/DESCRIPTION
+5. delete
+Delete a budget record.
+Parameters: -b m/MONTH
+
+Delete all expenditure records.
+Parameters: -e m/MONTH i/INDEX
+
+Delete an expenditure record.
+Parameters: -e i/INDEX_OF_EXPENDITURE m/MONTH
+Note:
+ * If INDEX is not specified, all the expenditure records of this month will be deleted.
+
+Delete multiple expenditure records.
+Parameters: -e m/MONTH i/START_INDEX - END_INDEX
+Note:
+ * If INDEX is not specified, all the expenditure records of this month will be deleted.
+
+Delete all loan records.
+Parameters: -l m/MONTH
+
+Delete a loan record.
+Parameters: -l m/MONTH [i/INDEX_OF_LOAN]
+Note:
+ * If INDEX_OF_LOAN is not specified, all the loan records of this month will be deleted.
+
+Delete multiple loan records.
+Parameters: -l m/MONTH i/START_INDEX - END_INDEX
+Note:
+ * If INDEX is not specified, all the loan records of this month will be deleted.
 ========================================================
-6. list m/all
+6. stat
+Display the statistics for a particular month’s budget and expenditure by categories.
+Parameters: -c m/MONTH
+
+Display the statistics for the current database year being worked on.
+Parameters: -y t/[TYPE]
 ========================================================
-7. list m/MONTH
+7.help
+Get all commands' information.
+Parameters: help
 ========================================================
-8. delete m/MONTH
-========================================================
-9. delete m/MONTH i/INDEX
-========================================================
-10. delete m/MONTH i/INDEX_FROM-INDEX_TO
-========================================================
-11. help
-========================================================
-12. bye
+8.bye
+Exits the app.
+Parameters: bye
 ========================================================
 ```
 
