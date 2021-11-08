@@ -161,10 +161,10 @@ Adds your **event** to your task list.
 When entering dates into SchedUrMods, we accept multiple date formats to allow you to reduce how much you have to type.  
 
 The accepted date formats in SchedUrMods are:
-- `dd/MM/yyyy HH:mm` or `dd/MM/yy HH:mm`
-- `dd/MM/yyyy HH` or `dd/MM/yy HH`
-- `dd/MM HH:mm`
-- `dd/MM HH`
+- `dd-MM-yyyy HH:mm` or `dd-MM-yy HH:mm`
+- `dd-MM-yyyy HH` or `dd-MM-yy HH`
+- `dd-MM HH:mm`
+- `dd-MM HH`
 - `dd HH:mm`
 - `dd HH`
 - `HH`  
@@ -183,7 +183,7 @@ The accepted date formats in SchedUrMods are:
 >💡 **Note**: When minute (`mm`) is unspecified, it will be replaced with `0`.
 
 **Examples**:
-- `03/10/2004 03` translates to `3rd October 2004, 3:00am`.
+- `03-10-2004 03` translates to `3rd October 2004, 3:00am`.
 - `15:30` translates to `Your current year, month and day at 3.30pm`.
 - `15 12:30` translates to `Your current year and month on the 15th at 12.30pm`.
 
