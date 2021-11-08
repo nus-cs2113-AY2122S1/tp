@@ -64,4 +64,5 @@ public class AddCommandTest {
         assertEquals("ALVIN LIM", memberRoster.get(0).getName());
         assertEquals("ALWIN ANG", memberRoster.get(1).getName());
     }
+
 }

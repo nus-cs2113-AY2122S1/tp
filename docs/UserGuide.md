@@ -24,12 +24,14 @@ Welcome to **SLAM**! **SLAM** is a desktop application for student group leaders
    9. [Update an Event](#49-update-an-event)
 5. [Task Commands](#5-task-commands)
    1. [Add a task](#51-add-a-task)
-   2. [Mark a task as done](#52-mark-a-task-as-done)
-   3. [Mark a task as undone](#53-mark-a-task-as-undone)
-   4. [Delete a task](#54-delete-a-task)
+   2. [Select a task](#52-select-a-task)
+   3. [Mark a task as done](#53-mark-a-task-as-done)
+   4. [Mark a task as undone](#54-mark-a-task-as-undone)
+   5. [Delete a task](#55-delete-a-task)
 6. [Member Commands](#6-member-commands)
    1. [Add a member](#61-add-a-member)
-   2. [Delete a member](#62-delete-a-member)
+   2. [Select a member](#62-select-a-member)
+   3. [Delete a member](#63-delete-a-member)
 7. [Saving the data](#7-saving-the-data)
 8. [FAQ](#8-faq)
 9. [Command summary](#9-command-summary)
@@ -190,12 +192,12 @@ To add an event, first describe the event using the following command:
 
 **Format:** `add -e n/TITLE d/DATE_&_TIME v/VENUE b/BUDGET`
 
-**Example:** `add -e n/Temasek Hall Concert d/30-11-2021 2300 v/MPH b/500`
+**Example:** `add -e n/Tembusu Concert d/19-02-2022 2000 v/MPH b/1000`
 
 Following which, **SLAM** will prompt you for an optional description for your event which should look like this:
 
 ```
-> add -e n/Temasek Hall Concert d/30-11-2021 2300 v/MPH b/500
+> add -e n/Tembusu Concert d/19-02-2022 2000 v/MPH b/1000
 ```
 ```
 Please add an optional description for your item and press enter.
@@ -206,12 +208,11 @@ Please add an optional description for your item and press enter.
 Key in your description and press `enter`, or just press `enter` if you have none. You have successfully added an event into **SLAM**!
 
 ### 4.2 Select an Event
-This allows you to select an event from your list using the event’s numerical position in the list (i.e. the event’s ID). Upon selection, more details about that event will be displayed, and you may perform additional commands with the selected event (e.g. adding tasks to complete).
+Selects an Event to view its details. You can then perform additional commands with the selected Event.
 
 **Format:** `select -e EVENT_ID`
 
 **Example:** `select -e 1`
-> 💡 The `select` command is especially useful to keep in mind! An event needs to be selected before any changes to its tasks can be done.
 
 **Expected Output:**
 ```
@@ -225,8 +226,13 @@ Description: Semesterly Arts Week Fundraiser
 Venue: MPH
 Budget: $1000.0
 Tasks:
-1. Make props
+1. Buy stage lights
 ```
+
+> 💡 The `select` command is especially useful to keep in mind! An event needs to be selected before any changes to its tasks can be done.
+>
+> See how to [Select a Task](#52-select-a-task).
+
 
 ### 4.3 Mark an Event as `done`
 This will allow you to mark an event as done after the event is over. 
@@ -276,9 +282,9 @@ Deletes an event from the list.
 This event has been removed: Tembusu Concert
 ```
 ### 4.6 Delete all Events
-This allows you to delete all events.
+This allows you to delete all events, tasks and members.
 
-> 🚨 As this can potentially affect a huge amount of your data, the program will confirm with you again if you want to delete all events.
+> 🚨 As this will affect all your data, please make sure you want to delete everything before proceeding. The program will delete everything once the command is entered!
 
 **Format:** `delete all`
 
@@ -286,17 +292,28 @@ After entering `delete all`, this is what you will see:
 
 ```
 > delete all
-```
-```
-Are you sure you want to delete all events? (Y/N)
-> Y
+
 I have deleted everything!
 ```
-> 🚨 Once you confirmed that you want to delete all events, the action is irreversible!
-
-[Back to table of contents](#table-of-contents)
+> 🚨 This action is irreversible!
 
 ### 4.7 Find Event(s) based on keyword(s)
+Finds one or more Event(s) that matches the keyword(s) that you enter.
+
+**Format** `find -e KEYWORD [KEYWORDS]`
+
+**Expected Output:**
+```
+> find -e Concert
+```
+```
+Here are are the events found:
+1. Tembusu Concert
+```
+> 💡 You can only find Events with this command. After finding the Event(s) of your choice, you could use `select` to further see the details of the event's tasks, and `select` again for a particular task's member.
+>
+> See how to [Select a task](#52-select-a-task) and [Select a member](#62-select-a-member).
+
 
 ### 4.8 Display next upcoming Event
 The next command displays to you the next upcoming event or task of an event on the calendar
@@ -316,7 +333,7 @@ Description: Semesterly Arts Week Fundraiser
 Venue: MPH
 Budget: $1000.0
 Tasks:
-1. Make props
+1. Buy stage lights
 ```
 
 To display the next upcoming task we key in `next task`
@@ -328,11 +345,11 @@ To display the next upcoming task we key in `next task`
 > next task 1
 ```
 ```
-Title: Make props
-Date: 18 Feb 2022 - 20:00
-Description: Semesterly Arts Week Fundraiser
+Title: Buy stage lights
+Date: 10 Feb 2022 - 22:00
+Description: Stage lights for concert
 Members:
-1. John Doe
+1. JOHN DOE
 ```
 ### 4.9 Update an Event
 The Update command can be used to update details of events and tasks
@@ -350,14 +367,14 @@ To begin the update process we first key in `update EVENT_ID`
 ```
 Here are the details of the event:
 ======================================
-Title: Peppa Pig's Concert
+Title: Tembusu Concert
 Date: 19 Feb 2022 - 20:00
-Description: Asia world tour
-Venue: Indoor Stadium
-Budget: $1000.9
+Description: Semesterly Arts Week Fundraiser
+Venue: MPH
+Budget: $1000.0
 Tasks: 
-1. [T][X] Hype myself up (by: 19 Feb 2022 - 19:50)
-2. [T][ ] Enter venue (by: 19 Feb 2022 - 19:55)
+1. [T][X] Buy stage lights (by: 10 Feb 2022 - 22:00)
+2. [T][ ] Stage layout meeting (by: 12 Feb 2022 - 20:00)
 _________________________________________________________________________________
 Please type the item you would like to update in the following manner 
 -----------------------------------------------------------------------   
@@ -377,7 +394,7 @@ We can then update the detail of the specifc event by following the list of comm
 3. `description/[NEW DESCRIPTION]` to update the description of the event
 4. `venue/[NEW VENUE]` to update the venue of the event
 5. `budget/[NEW BUDGET]`to update the budget of the event
-6. `task/[TASK NUM YOU WANT TO UPDATE]` to update information on the taak attached to thes events
+6. `task/[TASK NUM YOU WANT TO UPDATE]` to update information on the task attached to these events
 
 We can then update the detail of the specifc task by keying in `task/[TASK NUM YOU WANT TO UPDATE]` in this segment.
 
@@ -386,12 +403,11 @@ We can then update the detail of the specifc task by keying in `task/[TASK NUM Y
 > task/1
 ```
 ```
-Title: Hype myself up
-Deadline: 19 Feb 2022 - 19:50
-Description: Drink lots of sugar
+Title: Buy stage lights
+Deadline: 10 Feb 2022 - 22:00
+Description: Stage lights for concert
 Members: 
-1. John Doe
-2. Jane Doe
+1. JOHN DOE
 ____________________________________________________________________________________
 Please type the item for task you would like to update in the following manner 
 -----------------------------------------------------------------------
@@ -410,6 +426,9 @@ We can then update the details of the specifc task by following the list of comm
 3. `description/[NEW DESCRIPTION]` to update the description of the event
 4. `member/[MEMBER INDEX]` to change a member assigned to this task
 5. `remove/[MEMBER INDEX]` to remove a member assigned to this task
+
+[Back to table of contents](#table-of-contents)
+
 ---
 
 ## 5. Task Commands
@@ -428,11 +447,48 @@ To add a task, first describe the task using the following command:
 
 **Example:** `add -t n/Buy stage lights d/10-11-2021 1600`
 
-### 5.2 Mark a Task as `done`
+### 5.2 Select a Task
+Select a Task to view its details. You can then perform additional commands with the selected Task.
 
-### 5.3 Mark a Task as `undone`
+**Format**: `select -t TASK_ID`
 
-### 5.4 Delete a Task
+**Example**: `select -t 1`
+
+**Expected Output**:
+```
+> select -t 1
+```
+```
+Here are the details of the task:
+Title: Buy stage lights
+Deadline: 10 Feb 2022 - 22:00
+Description: Stage lights for concert
+Members:
+1. JOHN DOE
+```
+
+> 💡 You can use `select` again to view the details of the Task's `Member`. See [Select a Member](#62-select-a-member).
+
+### 5.3 Mark a Task as `done`
+
+### 5.4 Mark a Task as `undone`
+
+### 5.5 Delete a Task
+Deletes a task from an `Event`.
+
+**Format**: `delete -t TASK_ID`
+
+**Example**: `delete -t 1`
+
+> 🚨 You need to `select` an Event before deleting the task of your choice!
+
+**Expected output**: (after entering `select -e 1` for example)
+```
+> delete -t 1
+```
+```
+This task has been removed: Buy stage lights
+```
 
 [Back to table of contents](#table-of-contents)
 
@@ -443,7 +499,49 @@ This section contains the available commands for managing members in `SLAM`.
 
 ### 6.1 Add a member 
 
-### 6.2 Delete a member
+### 6.2 Select a member
+Selects a member to view what tasks the member is assigned to.
+
+**Format**: `select -m MEMBER_NAME`
+
+**Example**: `select -m JOHN DOE`
+
+**Expected Output**:
+```
+> select -m JOHN DOE
+```
+```
+Here are the details of the member:
+JOHN DOE
+[T][ ] Buy stage lights (by: 10 Feb 2022 - 22:00)
+```
+
+> 💡 You can use `list -m` to first list all the members, then select the member based on name. See [Listing Events, Tasks or Members](#32-listing-events-tasks-or-members).
+
+### 6.3 Delete a member
+Deletes a member. This will also remove the member from all tasks the member is assigned to.
+
+**Format**: `delete -m MEMBER_NAME`
+
+**Example**: `delete -m JOHN DOE`
+
+**Expected Output**:
+```
+> delete -m JOHN DOE
+```
+```
+This member has been removed: JOHN DOE
+```
+
+> 🚨 A task must have at least one `Member`.
+> 
+> If the `Member` you choose to delete is the only `Member` assigned to a task, you will have to assign more members to that particular task first before you can delete the `Member`!
+
+In this case, you will be prompted to add more members to the tasks that only has that member assigned to it. This is what you may see:
+```
+Please assign more members to these tasks:
+[Event: Tembusu Concert; Task: Buy stage lights]
+```
 
 [Back to table of contents](#table-of-contents)
 
