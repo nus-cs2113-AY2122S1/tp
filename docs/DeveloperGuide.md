@@ -399,6 +399,8 @@ The partial sequence diagram of the above process is shown below:
 
 **Value proposition**: track large amounts of ingredients simply through typing commands faster than a GUI driven application
 
+<div style="page-break-after: always;"></div>
+
 ## 6. User stories
 
 |Version| As a ... | I want to ... | So that I can ...|
