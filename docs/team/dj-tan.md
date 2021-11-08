@@ -41,20 +41,15 @@ https://nus-cs2113-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=dj-tan
 - Section 4.1: Adding a Goal (excluding sequence diagram)
 - Section 4.2: Adding a Habit (excluding sequence diagram)
 - Section 4.3: Listing all Goals (excluding sequence diagram)
-- 
+- All Design Considerations for Section 4
 
 #### Contributions to Team-Based Tasks
 
 - Code refactoring (especially for number, name and type checks in Parser)
 - JavaDoc
 - Code testing
-- Reviewed teammates PRs
 
 #### Review/Mentoring Contributions
 
-- 
-
-#### Contributions beyond the Project Team
-
-- 
+- Reviewed teammates PRs
 

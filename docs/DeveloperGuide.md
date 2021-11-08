@@ -647,8 +647,8 @@ tracked goals.
 
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteHabitCommandParserSequenceDiagram.png)
 
-1. The `DeleteParser#parseDeleteHabitCommand(input)` method is called, which starts the process of
-   extracting parameters from the user input.
+1. The `DeleteParser#parseDeleteHabitCommand(input)` method is called, which starts the process of extracting parameters
+   from the user input.
 2. The `DeleteParser#splitInput(input)` method splits the user input into an ArrayList of parameters.
 3. The `goalIndex` of the associated goal from which a habit to deleted is then obtained with 
    `DeleteParser#getIndex(parameters, FLAG_GOAL_INDEX)` method
@@ -659,18 +659,21 @@ tracked goals.
 
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteHabitCommandSequenceDiagram.png)
 
-5. The `DeleteHabitCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
+6. The `DeleteHabitCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
    `GoalList#deleteHabitFromGoal(goalIndex, habitIndex, printManager)` method.
-6. Within this newly called method, the `GoalList#getGoal(goalIndex)` method is called to retrieve the `Goal` object
+7. Within this newly called method, the `GoalList#getGoal(goalIndex)` method is called to retrieve the `Goal` object
    from the `goalList`.
-7. An ArrayList of habits associated with this goal is retrieved with `goal.getHabitList()`.
-8. The `GoalList#getHabit(habitList, habitIndex)` method is called to get the habit to be deleted. If `habitIndex` is
+8. An ArrayList of habits associated with this goal is retrieved with `Goal#getHabitList()`.
+9. The `GoalList#getHabit(habitList, habitIndex)` method is called to get the habit to be deleted. If `habitIndex` is
    invalid, a `HaBitCommandException` is raised.
-9. The `Habit` is then deleted with the `goal.removeHabit(habitIndex)` method.
-10. Finally, the `PrintManager#printRemovedHabit(goalDescription, habitDescription)` method is called to print a 
+10. The `Habit` is then deleted with the `Goal#removeHabit(habitIndex)` method.
+11. Finally, the `PrintManager#printRemovedHabit(goalDescription, habitDescription)` method is called to print a 
     confirmation message on the successful deletion of a habit.
 
 #### 4.9.2. Design Considerations
+
+The design consideration was similar to [Section 4.8.2. Design Considerations](#482-design-considerations), where it was
+ultimately decided that the habit indexes will be flushed to avoid gaps instead of being maintained.
 
 ### 4.10. Getting Help
 
@@ -682,10 +685,20 @@ information of each command in a tabular form.
 1. A `HelpCommand()` object is directly created and returned from the `ParserManager#parseCommand(command, details)` 
    method.
 2. When the `HelpCommand#runCommand(goalList, printManger, storage)` method is executed it calls the 
-   `PrintManager#printCommandList()` method which prints out a pre-set message informing the user of all the possible
-   commands and their respective formats and options.
+   `PrintManager#printCommandList()` method which prints out a table informing the user of all the possible commands and
+   their respective formats and options.
 
 #### 4.10.2. Design Considerations
+
+**Aspect:** Type of display for command list
+* **Alternative 1 (current choice):** In-application display of entire command list.
+    * Pros: The application does not have to be connected to a network if a user needs help with the navigation.
+    * Cons: Limited information can be presented on the application itself. Furthermore, a long command list may result
+            in a significant amount of scrolling for the user.
+* **Alternative 2:** Opens a browser to the command summary of the User Guide.
+    * Pros: Every detail (including possible pitfalls) of the command is made known to the user. 
+    * Cons: Network connection is required for an application that should be able to operate without sustaining one. In
+            addition, a link to the User Guide will be provided in the Start-Up interface.
 
 ### 4.11. Storage of Information
 
@@ -694,48 +707,44 @@ This section describes the implementation of how _Ha(ppy)Bit_ handles and stores
 #### 4.11.1. Implementation
 
 **Importing Data**
-1. The `load()` method runs automatically upon startup.
-2. `Storage` then calls the `importStorage(filePath)` method from the `Import` class.
-3. The save file `hiabit.txt` is then scanned line by line, where every line is parsed
-   into discrete and discernible information and then stored in `String[] lineData`.
-4. `updateGoalList(lineData, GoalList)` is called for every line till all lines have be scanned.
-5. In every iteration of `updateGoalList(lineData, goalList)` being called, the information
+1. The `Storage#load()` method runs automatically upon startup, which calls `Import#importStorage(filePath)`.
+2. The save file `habit.txt` is then scanned line by line, where every line is parsed into discrete and 
+   discernible information and then stored in a string array `lineData`.
+3. `Import#updateGoalList(lineData, GoalList)` is called for every line till all lines have be scanned.
+4. In every iteration of `Import#updateGoalList(lineData, goalList)` being called, the information
    (sorted by goal type) is parsed and stored into `goalList`, updating `goalList`.
-6. The completed `goalList` is returned to `Storage`, and then returned to update the
-   main `goalList` attribute in `UiManager`.
+5. The completed `goalList` is returned to `Storage`, and then returned to update the main `goalList` 
+   attribute in `UiManager`.
 
-The sequence diagram shows how the program imports data from storage file. <Br>
+The sequence diagram shows how the program imports data from storage file.\
 ![Import Sequence Diagram](Diagram_Images/Implementation_Diagram_Images/ImportSequenceDiagram.png)
 
-The program uses `Storage` class to import data from the storage file.
-* `Storage` interacts with `Import` to access the data stored in storage file.
-* `Import` will depend on `ImportParser` to decipher the data stored, and return
-  a `Goal`, `Habit` or `Interval` object back to `Import` correspondingly.
-* `Import` will then populate `GoalList` accordingly
-  before returning `GoalList` back to `Storage` and back to user.
-
 **Exporting Data**
-1. The `export(goalList)` method is called, which in turn the `Storage` class calls
-   `exportToStorage(goalList)`. `exportToStorage(goalList)` runs.
-2. The `habit.txt` filed is cleared of previous text with `clearFile()`.
-3. the `writeToFile(goalList)` then rewrites `habit.txt` using data in `goalList`.
+1. The `Storage#export(goalList)` method is called, which in turn calls `Storage#exportToStorage(goalList)`.
+2. The `habit.txt` filed is cleared of previous text with `Export#clearFile()`.
+3. The `Export#writeToFile(goalList)` then rewrites `habit.txt` using data in `goalList`.
 4. The `goalList` is encoded goal by goal. 
-5. In a `goal` all of its attributes are converted to text in a line. They are segregated
+5. In a `goal` object, all of its attributes are converted to text in a line. They are segregated
    by a delimiter. The habits are then are encoded habit by habit.
-6. In a `habit` all of its attributes are converted to text in a line. They are segreagated
+6. In a `habit` all of its attributes are converted to text in a line. They are segregated
    by a delimiter. The intervals are then encoded interval by interval.
 7. In an `interval` all of its attributes are converted to text in a line. They are segregated
    by a delimiter.
-8. At the end of `writeToFile(goalList)`, all data in `goalList` is stored in `habit.txt`.
+8. At the end of `Export#writeToFile(goalList)`, all data in `goalList` is stored in `habit.txt`.
 
-The sequence diagram shows how the program exports data to storage file. <br>
-![Export Sequence Diagram](Diagram_Images/Implementation_Diagram_Images/ExportSequenceDiagram.png) 
-
-
-`Storage` class can also export data to storage file with `Export` class.
-It takes in a `GoalList` object and converts the data into string to be stored in storage file.
+The sequence diagram shows how the program exports data to storage file./
+![Export Sequence Diagram](Diagram_Images/Implementation_Diagram_Images/ExportSequenceDiagram.png)
 
 #### 4.11.2. Design Considerations
+
+**Aspect:** Storage of application data
+* **Alternative 1 (current choice):** Store all data in a text file.
+    * Pros: The standard Java library already supports reading and writing to text files.
+    * Cons: Interpreting data directly from text files is non-trivial (depending on how the data is saved)
+* **Alternative 2:** Store all data in a JSON format.
+    * Pros: JSON is a widely accepted standard which is well known, allowing anyone to view and modify the save file
+            when necessary.
+    * Cons: Various data types are not supported in JSON formatted files.
 
 ---------------------------------------------------------------------------------------------------------
 
