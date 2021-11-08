@@ -4,7 +4,7 @@ box STORAGE_COLOR
 Participant ":StorageFile" as Storage
 end box
 box FILE_COLOR
-Participant ":file" as File
+Participant ":File" as File
 end box
 box LOGIC_COLOR
 Participant ":XYZDecoder" as XYZDecoder

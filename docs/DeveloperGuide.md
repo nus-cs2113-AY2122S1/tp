@@ -43,7 +43,9 @@ section of this guide.
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+1. Software Engineering Education ([SE-EDU](https://se-education.org/))
+   1. [AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2) for providing us with ideas on how to implement a more OOP-oriented project  
+   2. [AddressBook (Level 3)](https://github.com/se-edu/addressbook-level3) for providing us with references on how to better structuer and format our User and Developer Guides
 
 ## Design
 
@@ -150,6 +152,33 @@ Here is a brief overview of the different Commands
 * DoneUndo
 * Bye
 
+#### Add Functionality
+![](images/AddDiagram.png)
+
+How Add works:
+1. When the `Parser` class parses `add` as the command from the user, a new `Command` object is created by the `AddParser` method `getAddCommand`. This method will create an `AddEventCommand`, `AddTaskCommand` or `AddMemberCommand` object depending on the user input. 
+2. The `getAddCommand` method will parse through the user command to obtain the item flag, which will signify if the user is adding an event, task or member. It will also obtain the attributes of the item the user is adding and parse them into the `AddCommand` object it creates.
+3. The `AddCommand` constructor would then initialize the item attributes obtained from `getAddCommand`. 
+4. After creating the `AddCommand` object, the object is then returned to `Parser` and on to `Duke`.
+5. `Duke` then calls the `execute` method in the specific `AddCommand` object. This adds either an event or a task to the overall `eventCatalog`, or a member to the overall `memberRoster`. It will also return a `CommandResult` object to `Duke` which would print out a message corresponding to the item added.
+6. When adding an item, an event `-e`, task `-t` or member `-m` flag should follow after the `add` command. This should be followed by their respective attributes as shown below. 
+7. The attributes of an event are `n/TITLE`, `d/DATE_AND_TIME`, `v/VENUE` and `b/BUDGET`.
+8. The attributes of a task are `n/TITLE` and `d/DATE_AND_TIME`. A task can only be added after at least one event and at least one member has been added. 
+9. The attribute of a member is just their name, but multiple members can be added at once using a comma and a space `, ` separating the names. 
+
+#### Done and Undo Functionality
+![](images/DoneUndoDiagram.png)
+
+How Done and Undo work:
+1. When the `Parser` class parses `done` or `undo` as the command from the user, a new `DoneUndoCommand` object is created by the `DoneUndoParser` method `getDoneUndoCommand`.
+2. The `getDoneUndoCommand` method will parse through the user command to determine if it is a `done` or an `undo` command, as well as if the item is a `task` or an `event`. It will also retrieve the indexes of the items. 
+3. The `DoneUndoCommand` constructor initializes the array of integers representing the indexes of the items to mark as `done` or `undo`.
+4. After creating the `DoneUndoCommand` object, the object is then returned to `Parser` and on to `Duke`. 
+5. `Duke` then calls the `execute` method in the `DoneUndoCommand` object. This method would either mark the corresponding items as done or undone. Two lists will be created; one of items with changes made and the other with items that are unchanged. These lists will be displayed to the user.
+6. When marking or un-marking an item, the item flag `-e` or `-t` has to be followed after the `done` or `undo` command. 
+7. To mark or un-mark a task, an event has to be selected previously using the `select` command. 
+8. The item flag is then followed by integers representing the indexes of the items to be marked or unmarked, separated by non-numeric characters. 
+
 #### List Functionality
 
 Below is a brief overview of how the list Functionality works.
@@ -231,8 +260,23 @@ and provide Student leaders, with an application to cater to their specific mana
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|Head of a committee|Add events with their dates and timings to my schedule|Keep track of their dates and times|
+|v1.0|Head of a committee|Add tasks with their dates and timings to my schedule|Keep track of their respective deadlines|
+|v1.0|Head or member of a committee|Have an overview of the upcoming events and tasks in chronological order|Plan my schedule and prioritise my time|
+|v1.0|Head of a committee with many events|Find an event by its title|Have a quick glance of the event without having to go through the entire list|
+|v1.0|Head or member of a committee|Save the schedule of tasks and events|Avoid retyping all my events and tasks whenever I start SLAM|
+|v1.0|Head or member of a committee|View the next upcoming event|Know how much time I have to prepare myself for it|
+|v1.0|Head of a committee|Delete events and tasks|Remove events and tasks that I no longer need|
+|v1.0|Head of a committee|Update events and tasks|Edit outdated information regarding these events/tasks with updated ones|
+|v1.0|Head of a committee|Mark events and tasks as done|Keep track of what events and tasks that the committee has completed|
+|v1.0|Head of a committee|Un-mark events and tasks as done|Undo any events and tasks that I might have accidentally marked as done|
+|v2.0|Head of a committee|Add tasks under an event|Keep track of what tasks there are to complete for each specific event|
+|v2.0|Head of a committee|Add members to my roster|Keep track of committee members that I have to work with|
+|v2.0|Head of a committee|Delete members from my roster|Remove members that are no longer part of the committee|
+|v2.0|Head of a committee|Assign members to tasks|Delegate work effectively|
+|v2.0|Head of a committee|View all the tasks assigned to a member|Keep track of that member's workload|
+|v2.0|Head of a committee|View all the members assigned to a task|Determine whether there is enough manpower allocated for the task|
+|v2.0|Head or member of a committee|Have a calendar view of my next event|Have a better sense of when the next event is happening|
 
 ## Non-Functional Requirements
 
