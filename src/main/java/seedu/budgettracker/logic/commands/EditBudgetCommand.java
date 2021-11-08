@@ -8,10 +8,10 @@ import seedu.budgettracker.ui.TextUi;
 import static seedu.budgettracker.common.Messages.MESSAGE_AMOUNT_EXCEEDED;
 import static seedu.budgettracker.common.Messages.MESSAGE_AMOUNT_ZERO_OR_NEGATIVE;
 
-//@@author jyxhazcake
 /**
  * Command that edits a target budget in the record list.
  */
+//@@author yeoweihngwhyelab
 public class EditBudgetCommand extends EditCommand {
     public int month;
     public double amount;
@@ -20,6 +20,7 @@ public class EditBudgetCommand extends EditCommand {
             + "Note:\n"
             + " * MONTH must be strictly within the range of 1 to 12. \n");
 
+    //@@author yeoweihngwhyelab
     public EditBudgetCommand(int month, double amount) {
         this.month = month;
         this.amount = amount;

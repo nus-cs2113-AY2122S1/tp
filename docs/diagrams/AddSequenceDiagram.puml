@@ -1,44 +1,12 @@
 @startuml
-class Task {
-    title: String
-    dayOfTheWeek: String
-    information: String
-    isDone: boolean
+'https://plantuml.com/sequence-diagram
+hide footbox
+autonumber
 
-    serialize()
-    {static} deserialize()
-}
 
-class TaskList {
-    getSize(): int
-    getTask(taskIndex: int): Task
-    getNumberOfPendingTasks(): int
-    isEmpty(): boolean
-    addTask(newTask: Task)
-    deleteTask(taskIndex: int)
-    deleteAllTasks()
-    markTaskAsDone(taskIndex: int)
-    filterTasksByKeyword(keyword: String): TaskList
-    filterTasksByPeriod(period: String): TaskList
-    serialize()
-    {static} deserialize(ui: Ui, data: List<String>)
-}
+Alice -> Bob: Authentication Request
+Bob --> Alice: Authentication Response
 
-TaskList -> "*" Task : taskList
-
-class AddTaskCommand
-class DeleteTaskCommand
-class DoneTaskCommand
-class FindTaskCommand
-class ListTaskCommand
-AddTaskCommand .up.> Task
-AddTaskCommand ..> TaskList
-DeleteTaskCommand .up.>Task
-DeleteTaskCommand ..> TaskList
-DoneTaskCommand .up.> Task
-DoneTaskCommand ..> TaskList
-FindTaskCommand .up.> Task
-FindTaskCommand ..> TaskList
-ListTaskCommand .up.> Task
-ListTaskCommand ..> TaskList
+Alice -> Bob: Another authentication Request
+Alice <-- Bob: another authentication Response
 @enduml

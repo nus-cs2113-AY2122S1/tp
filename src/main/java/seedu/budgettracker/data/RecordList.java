@@ -32,16 +32,13 @@ public class RecordList {
      * Adds a budget to the record list.
      *
      * @param spendingLimit the budget's amount
-     * @param isLoadingStorage whether the program is in setup or during runtime
      * @throws DuplicateBudgetException if a budget is already set for the month
      */
-    public void addBudget(double spendingLimit, boolean isLoadingStorage) throws DuplicateBudgetException {
+    public void addBudget(double spendingLimit) throws DuplicateBudgetException {
         if (!hasBudget) {
             budget.setAmount(spendingLimit);
             assert budget.getAmount() == spendingLimit;
-            if (!isLoadingStorage || budget.getAmount() != 0) {
-                hasBudget = true;
-            }
+            hasBudget = true;
         } else {
             throw new DuplicateBudgetException(MESSAGE_DUPLICATE_BUDGET);
         }
@@ -88,7 +85,7 @@ public class RecordList {
      * @param index the index of the target expenditure
      */
     public void deleteExpenditure(int index) {
-        expenditureRecords.remove(index - 1);
+        expenditureRecords.remove(index);
     }
 
     /**
@@ -97,7 +94,7 @@ public class RecordList {
      * @param index the index of the target loan
      */
     public void deleteLoan(int index) {
-        loanRecords.remove(index - 1);
+        loanRecords.remove(index);
     }
 
     public ArrayList<Expenditure> getExpenditureRecords() {
@@ -128,6 +125,7 @@ public class RecordList {
         return loanRecords.get(index);
     }
 
+    //@@author yeoweihngwhyelab
     /**
      * Retrieves the hasBudget boolean on whether the record list has a budget.
      * @return a boolean on whether the budget exists
