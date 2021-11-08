@@ -32,6 +32,8 @@ for tech-savvy students who have trouble keeping track of their expenses.
     * [Year: `-l`](#stat-year)
   * [Guides](#guides)
     * [Help](#help)
+  * [DB](#db)
+    * [DB](#d-b)
   * [Exit](#exit)
     * [Bye](#bye)
 * [FAQ](#faq)
@@ -191,23 +193,28 @@ _________________________________________________________
 
 ### `-b` : Edit a Budget
 
-Edit the amount of budget allowance for a particular month.
+Edit the _amount_ of budget allowance for a particular month.
 
 Format: `edit -b m/MONTH a/AMOUNT`
+
 
 * `<AMOUNT>` will be rounded to the nearest 2 decimal places and must be above 0 but cannot exceed 1 billion dollars.
 * The `MONTH` must strictly be within the range of 1 to 12 and cannot be empty.
 
+
 Example of usage:
 
-`edit -b m/10 a/10000`
+`edit -b m/10 a/100020`
 
 Expected outcome: A message will be shown to alert the user that the budget for october have been changed 
-to $10000.
+to $100020.00.
 
 ```
 ========================================================
-
+Budget has been successfully edited!
+New values: 
+Amount: $100020.00
+Month: 10
 ========================================================
 ```
 <br />
@@ -719,7 +726,8 @@ Display the statistics for the current database year which the user is working o
 
 Format: `stat -y t/TYPE_OF_GRAPHICAL_VIEW`
 
-* The `TYPE_OF_GRAPHICAL_VIEW` is ... 
+* The `TYPE_OF_GRAPHICAL_VIEW` can only be a value of 1 or 2. Type 1 is a bar graph of monthly percentage
+  (12 bar graph) of budget used. Type 2 is overall yearly percentage (single bar graph) of budget used. 
 
 Example of usage:
 
@@ -836,7 +844,6 @@ Example of usage:
 Expected outcome: Lists all available commands and their parameters.
 
 ```
-========================================================
 1. add
 Adds an expenditure record.
 Parameters: -e n/EXPENDITURE_NAME a/COST d/[DATE_OF_EXPENDITURE] c/[CATEGORY]
@@ -850,20 +857,26 @@ Note:
  * If MONTH is not specified, current system month will be the default value.
 
 Adds a loan record.
-Parameters: l/DEBTOR_NAME a/AMOUNT [d/DATE_OF_LOAN]
+Parameters: -l n/BORROWER_NAME a/AMOUNT d/[DATE_OF_LOAN]
+Note: 
+ * If DATE_OF_LOAN is not specified, the current system date will be the default value.
 ========================================================
 2. edit
-Edits an expenditure record.
-Parameters: -e m/MONTH i/INDEX [a/AMOUNT] [d/DATE_OF_EXPENDITURE] [n/DESCRIPTION]
+Edits a budget record.
+Parameters: -b m/MONTH a/AMOUNT
 Note:
- * If DATE_OF_EXPENDITURE is not specified, current system date will be the default value.
- * If CATEGORY is not specified, GENERAL will be the default category.
+ * MONTH must be strictly within the range of 1 to 12. 
 
-Edits a budget record:
-Parameters: -b m/MONTH a/NEW_AMOUNT
+Edits an expenditure record.
+Parameters: -e m/MONTH i/INDEX [a/AMOUNT] [d/DATE_OF_EXPENDITURE] [n/DESCRIPTION] [c/CATEGORY]
+Note:
+ * AMOUNT, DATE_OF_EXPENDITURE, DESCRIPTION and CATEGORY are optional but at least one must exist to edit.
 
-Edits a loan record:
-Parameters: -l m/MONTH i/INDEX [l/DEBTOR_NAME] [a/AMOUNT] [d/DATE_OF_LOAN]
+Edits a loan record.
+Parameters: -l m/MONTH i/INDEX [a/AMOUNT] [d/DATE_OF_LOAN] [n/BORROWER_NAME]
+Note:
+ * AMOUNT, DATE_OF_LOAN and BORROWER_NAME are optional, but at least one must exist to edit.
+
 ========================================================
 3.find
 Finds all expenditure and loan records with the specified keyword
@@ -928,6 +941,36 @@ _________________________________________________________
 
 <br />
 
+## &nbsp;&nbsp; `db`
+
+### <a id="d-b"></a>  `db`
+
+Displays all the available database. 
+
+Format: `db`
+
+* The format must be strictly as stated above.
+
+Example of usage:
+
+`db`
+
+Expected outcome: Available databases will be shown.
+
+```
+========================================================
+These are the data base you currently have!
+
+2019.txt
+2020.txt
+2021.txt
+========================================================
+```
+
+# &nbsp;&nbsp; `bye`
+
+### Exiting the program: `bye`
+
 # &nbsp;&nbsp; `bye`
 
 ### Exiting the program: `bye`
@@ -964,26 +1007,26 @@ Bye, see you again soon!
 
  |no. | Command | Description |
  |--- | --------- | --------------------------------------- |
- |1.  | `add -b a/<AMOUNT> m/<MONTH>` | `add budget of $AMOUNT to MONTH of the year` |
- |2.  | `add -e c/<DESCRIPTION> a/<AMOUNT> d/<DATE_OF_EXPENDITURE> [c/<CATEGORY>]` | `add expenditure with DESCRIPTION of CATEGORY which cost $AMOUNT on DATE` |
- |3.  | `add -l n/<NAME_OF_LOAN_BORROWER> a/<AMOUNT> d/<DUE_DATE_OF_LOAN>` | `add a loan of $AMOUNT borrowed by NAME_OF_LOAN_BORROWER due on DUE_DATE_OF_LOAN` |
- |4.  | `edit -b m/<MONTH> a/<AMOUNT>` | `edit the MONTH budget to AMOUNT` |
- |5.  | `edit -e m/<MONTH> i/<INDEX> a/<AMOUNT> d/<DATE_OF_EXPENDITURE> n/<DESCRIPTION>` | `edit exependiture of MONTH and INDEX to AMOUNT, DATE_OF_EXPENDITURE and DESCRIPTION` |
- |6.  | `edit -l m/<MONTH> i/<INDEX> a/<AMOUNT> d/<DUE_DATE_OF_LOAN> n/<BORROWER_NAME>` | `edit the loan of MONTH and INDEX to AMOUNT, DUE_DATE_OF_LOAN and BORROWER_NAME ` |
- |7.  | `year <year>` | `switch database to YEAR` |
- |8.  | `find <keyword>` | `find a particular KEYWORD in the database` |
- |9.  | `list m/all [c/<CATEGORY>]` | `list all budget, expenditure and loan entries of the year of CATEGORY` |
- |10. | `list m/<MONTH> [c/<CATEGORY>]` | `list MONTH budget, expenditure and loan entries of CATEGORY` |
- |11. | `delete -b m/<MONTH>` | `delete the budget entry of MONTH` |
- |12. | `delete -e m/<MONTH>` | `delete all expenditure entries of MONTH` |
- |13. | `delete -e  m/<MONTH> i/<INDEX>` | `delete a particular expenditure of INDEX from MONTH` |
- |14. | `delete -e m/<MONTH> i/<INDEX_FROM-INDEX_TO>` | `delete all the expenditure of MONTH of INDEX_FROM-INDEX_TO` |
- |15. | `delete -l m/<MONTH>` | `delete all loan entries of MONTH` |
- |16. | `delete -l m/<MONTH> i/<INDEX>` | `delete a particular loan of INDEX from MONTH` |
- |17. | `delete -l m/<MONTH> i/<INDEX_FROM-INDEX_TO>` | `delete all the loan of MONTH of INDEX_FROM-INDEX_TO` |
- |18. | `stat -e m/<MONTH>` | `show a particualr MONTH statistics breakdown` |
- |18. | `stat -e m/<MONTH>` | `show a particualr MONTH statistics breakdown` |
- |19. | `stat -y t/<TYPE>` | `show overall statistics of TYPE for the entire year` | 
+ |1.  | `add -b a/AMOUNT m/MONTH` | `add budget of $AMOUNT to MONTH of the year` |
+ |2.  | `add -e c/DESCRIPTION a/AMOUNT d/DATE_OF_EXPENDITURE <c/CATEGORY>` | `add expenditure with DESCRIPTION of CATEGORY which cost $AMOUNT on DATE` |
+ |3.  | `add -l n/NAME_OF_LOAN_BORROWER a/AMOUNT d/DUE_DATE_OF_LOAN` | `add a loan of $AMOUNT borrowed by NAME_OF_LOAN_BORROWER due on DUE_DATE_OF_LOAN` |
+ |4.  | `edit -b m/MONTH a/AMOUNT` | `edit the MONTH budget to AMOUNT` |
+ |5.  | `edit -e m/MONTH i/INDEX a/AMOUNT d/DATE_OF_EXPENDITURE n/DESCRIPTION` | `edit exependiture of MONTH and INDEX to AMOUNT, DATE_OF_EXPENDITURE and DESCRIPTION` |
+ |6.  | `edit -l m/MONTH i/INDEX a/AMOUNT d/DUE_DATE_OF_LOAN n/BORROWER_NAME` | `edit the loan of MONTH and INDEX to AMOUNT, DUE_DATE_OF_LOAN and BORROWER_NAME ` |
+ |7.  | `year year` | `switch database to YEAR` |
+ |8.  | `find keyword` | `find a particular KEYWORD in the database` |
+ |9.  | `list m/all <c/CATEGORY>` | `list all budget, expenditure and loan entries of the year of CATEGORY` |
+ |10. | `list m/MONTH <c/CATEGORY>` | `list MONTH budget, expenditure and loan entries of CATEGORY` |
+ |11. | `delete -b m/MONTH` | `delete the budget entry of MONTH` |
+ |12. | `delete -e m/MONTH` | `delete all expenditure entries of MONTH` |
+ |13. | `delete -e  m/MONTH i/INDEX` | `delete a particular expenditure of INDEX from MONTH` |
+ |14. | `delete -e m/MONTH i/INDEX_FROM-INDEX_TO` | `delete all the expenditure of MONTH of INDEX_FROM-INDEX_TO` |
+ |15. | `delete -l m/MONTH` | `delete all loan entries of MONTH` |
+ |16. | `delete -l m/MONTH i/INDEX` | `delete a particular loan of INDEX from MONTH` |
+ |17. | `delete -l m/MONTH i/INDEX_FROM-INDEX_TO` | `delete all the loan of MONTH of INDEX_FROM-INDEX_TO` |
+ |18. | `stat -e m/MONTH` | `show a particualr MONTH statistics breakdown` |
+ |18. | `stat -e m/MONTH` | `show a particualr MONTH statistics breakdown` |
+ |19. | `stat -y t/TYPE` | `show overall statistics of TYPE for the entire year` | 
  |20. | `csv` | `save the current database into text file` | 
  |21. | `db` | `show all the available database in the user's device` | 
  |22. | `help` | `shows a list of command guides` |
