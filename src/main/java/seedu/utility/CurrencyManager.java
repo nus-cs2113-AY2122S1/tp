@@ -17,6 +17,7 @@ public class CurrencyManager {
     protected double exchangeRate;
     private CurrencyType currency = CurrencyType.SGD;
     private final ArrayList<CurrencyType> currencyTypes = new ArrayList<>();
+    
 
     /**
      * Converts all entries and budgets into given currency type
