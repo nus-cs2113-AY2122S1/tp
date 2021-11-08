@@ -24,10 +24,13 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import java.util.ArrayList;
 
 
 public abstract class Parser {
-    protected static DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+    protected static DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd-MM-uuuu HHmm")
+            .withResolverStyle(ResolverStyle.STRICT);
     protected static DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d MMM yyyy - HH:mm");
     private static int indexOfLastSelectedEvent = -1;
 
