@@ -593,7 +593,7 @@ to their Wastages in descending order. This allows the user to view the most was
 <br>
 
 <p align="center">
-    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/sort_dish_sequence.png">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/sort_ingr_sequence.png">
 </p>
 <center>Figure 19: SortIngrCommand Sequence Diagram</center>
 <br>
