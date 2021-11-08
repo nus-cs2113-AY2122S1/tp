@@ -271,6 +271,8 @@ The following implemented functions are utilized heavily:
 
 ![SearchDiagram](uml-diagrams/Search.png)
 
+<div style="page-break-after: always;"></div>
+
 *Fetch, Save and Load Mod*
 
 ![SearchReferenceDiagram](uml-diagrams/SearchRef.png)
@@ -294,6 +296,8 @@ Again, `saveModInfo()` is always used after fetching a json to keep the local da
 If `getOnlineModInfo()` fails at the start, then `loadModInfo()` will execute instead.
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 #### Update
 
