@@ -14,7 +14,7 @@ Designed for fast typists, it can help to augment the day-to-day tasks of a libr
 ### Enhancements Implemented
 
 1. Implemented `AddCommand` class with a single item type in v1.0 ([#32](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/32))
-2. Implemented `EditCommand` class and all associated classes to edit attributes of each item type (Audio, Book, Magazine, Video and Miscellaneous) ([#93](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/93), [#188](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/188))
+2. Implemented `EditCommand` class and all associated classes (`EditAudioCommand`, `EditBookCommand`, `EditMagazineCommand`, `EditMiscellaneousCommand`, `EditVideoCommand`) to edit attributes of each item type (Audio, Book, Magazine, Video and Miscellaneous) ([#93](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/93), [#188](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/188))
 3. Implemented `InfoCommand` class to display a variety of library information to the user ([#182](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/182))
 4. Implemented `HelpCommand` class to display a list of valid input commands to the user ([#185](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/185))
 5. Implemented `UnknownCommand` class to display a message informing the user when he has inputted an invalid command ([#24](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/24))
