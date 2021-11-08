@@ -2,12 +2,7 @@ package happybit.parser;
 
 import happybit.command.Command;
 import happybit.command.UpdateGoalCommand;
-//import happybit.command.UpdateGoalEndDateCommand;
-//import happybit.command.UpdateGoalNameCommand;
-//import happybit.command.UpdateGoalTypeCommand;
 import happybit.command.UpdateHabitCommand;
-//import happybit.command.UpdateHabitIntervalCommand;
-//import happybit.command.UpdateHabitNameCommand;
 import happybit.exception.HaBitParserException;
 import happybit.goal.GoalType;
 
@@ -260,73 +255,6 @@ public class UpdateParser extends Parser {
             }
         }
         return false;
-    }
-
-    private static boolean isUpdateGoalName(ArrayList<String> parameters) {
-        return isContainFlag(parameters, FLAG_GOAL_INDEX) && isContainFlag(parameters, FLAG_NAME)
-                && isContainNoOtherFlag(parameters, FLAG_GOAL_INDEX, FLAG_NAME);
-    }
-
-    private static boolean isUpdateGoalType(ArrayList<String> parameters) {
-        return isContainFlag(parameters, FLAG_GOAL_INDEX) && isContainFlag(parameters, FLAG_GOAL_TYPE)
-                && isContainNoOtherFlag(parameters, FLAG_GOAL_INDEX, FLAG_GOAL_TYPE);
-    }
-
-    private static boolean isUpdateGoalEndDate(ArrayList<String> parameters) {
-        return isContainFlag(parameters, FLAG_GOAL_INDEX) && isContainFlag(parameters, FLAG_END_DATE)
-                && isContainNoOtherFlag(parameters, FLAG_GOAL_INDEX, FLAG_END_DATE);
-    }
-
-    private static boolean isChangeHabitName(ArrayList<String> parameters) {
-        return isContainFlag(parameters, FLAG_GOAL_INDEX) && isContainFlag(parameters, FLAG_HABIT_INDEX)
-                && isContainFlag(parameters, FLAG_NAME);
-    }
-
-    private static boolean isChangeHabitInterval(ArrayList<String> parameters) {
-        return isContainFlag(parameters, FLAG_GOAL_INDEX) && isContainFlag(parameters, FLAG_HABIT_INDEX)
-                && isContainFlag(parameters, FLAG_INTERVAL);
-    }
-
-    /**
-     * Ensures no excess parameters are given.
-     * Excess parameters given can happen when user wrongly uses a command.
-     * e.g. mixing up "update" command for "change" command, adding an extra habit index parameter.
-     * firstFlag and secondFlag are the two flags that is expected from the user.
-     *
-     * @param parameters Array with parameters from user.
-     * @param firstFlag First expected flag from user.
-     * @param secondFlag Second expected flag from user.
-     * @return True if there is no excess parameters in user input. False otherwise.
-     */
-    private static boolean isContainNoOtherFlag(ArrayList<String> parameters, String firstFlag, String secondFlag) {
-        for (String param : parameters) {
-            if (param.contains(FLAG_NAME) && isExcessFlag(FLAG_NAME, firstFlag, secondFlag)) {
-                return false;
-            } else if (param.contains(FLAG_GOAL_TYPE) && isExcessFlag(FLAG_GOAL_TYPE, firstFlag, secondFlag)) {
-                return false;
-            } else if (param.contains(FLAG_INTERVAL) && isExcessFlag(FLAG_INTERVAL, firstFlag, secondFlag)) {
-                return false;
-            } else if (param.contains(FLAG_START_DATE) && isExcessFlag(FLAG_START_DATE, firstFlag, secondFlag)) {
-                return false;
-            } else if (param.contains(FLAG_END_DATE) && isExcessFlag(FLAG_END_DATE, firstFlag, secondFlag)) {
-                return false;
-            } else if (param.contains(FLAG_HABIT_INDEX) && isExcessFlag(FLAG_HABIT_INDEX, firstFlag, secondFlag)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * Compares a reference flag to two other flags to see if reference flag is identical to either of the two flags.
-     *
-     * @param referenceFlag Flag used to compare to firstFlag and secondFlag.
-     * @param firstFlag First expected flag from user.
-     * @param secondFlag Second expected flag from user.
-     * @return True if referenceFlag is not equal to the 2 expected flags. False otherwise.
-     */
-    private static boolean isExcessFlag(String referenceFlag, String firstFlag, String secondFlag) {
-        return !referenceFlag.equals(firstFlag) && !referenceFlag.equals(secondFlag);
     }
 
     private static Date getDate(ArrayList<String> parameters) throws HaBitParserException {

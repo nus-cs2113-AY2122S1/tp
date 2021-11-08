@@ -2,11 +2,16 @@ package happybit.parser;
 
 import happybit.command.Command;
 import happybit.command.ListGoalsCommand;
-import happybit.exception.HaBitParserException;
 
 public class ListGoalsParser extends Parser {
 
-    public static Command parseListGoalsCommand(String input) throws HaBitParserException {
+    /**
+     * Parses user input to list all goals.
+     *
+     * @param input User input containing command parameter: goal number.
+     * @return ListGoalsCommand that will list all goals.
+     */
+    public static Command parseListGoalsCommand(String input) {
         return new ListGoalsCommand(input);
     }
 }

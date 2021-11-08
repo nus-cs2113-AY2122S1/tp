@@ -378,7 +378,6 @@ This section describes the implementation of how the user can display a list of 
 4. Otherwise, the method calls the `PrintManager#printGoalList(goalList, goalList.size()` method, which iterates through
    all `Goal` objects and prints their respective description line by line in a table.
 
-
 #### 4.3.2. Design Considerations
 
 **Aspect:** Information to be included for the list of goals

@@ -55,10 +55,6 @@ public class UpdateGoalCommand extends UpdateCommand {
         return newGoalEndDate;
     }
 
-    public ArrayList<Boolean> getUpdateAttributes() {
-        return updateAttributes;
-    }
-
     public ArrayList<String> getExcessAttributes() {
         return excessAttributes;
     }
