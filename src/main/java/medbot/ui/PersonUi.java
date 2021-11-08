@@ -13,7 +13,7 @@ public abstract class PersonUi {
      * @return String containing a list of valid commands
      */
     protected static String getCommandList() {
-        return "Here are the list of commands:" + END_LINE + END_LINE
+        return "Here is the list of commands:" + END_LINE + END_LINE
                 + "help" + END_LINE
                 + "add" + END_LINE
                 + "delete" + END_LINE
@@ -26,7 +26,7 @@ public abstract class PersonUi {
                 + "switch" + END_LINE
                 + "get view" + END_LINE
                 + "exit" + END_LINE + END_LINE
-                + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
+                + "To view more information about each command and their respective command formats, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes." + END_LINE
                 + "For expected output examples, please refer to the User Guide." + END_LINE;
@@ -213,7 +213,7 @@ public abstract class PersonUi {
     protected static String getDeletePersonMessage(String person, int id) {
         String uppercasePerson = capitalizeFirstLetter(person);
 
-        return uppercasePerson + " with id " + id + " deleted from system." + END_LINE;
+        return uppercasePerson + " with ID " + id + " deleted from system." + END_LINE;
     }
 
     /**
@@ -226,7 +226,7 @@ public abstract class PersonUi {
      * @return String indicating that the specified person's information has been edited
      */
     protected static String getEditPersonMessage(String person, int id, String info) {
-        return "The information of " + person + " with ID " + id + " has been edited to:" + END_LINE + END_LINE
+        return "The information of the " + person + " with ID " + id + " has been edited to:" + END_LINE + END_LINE
                 + info + END_LINE;
     }
 
@@ -238,7 +238,7 @@ public abstract class PersonUi {
      * @return String containing the information of the person
      */
     protected static String getViewPersonMessage(String person, String personInfo) {
-        return "Here's the requested " + person + ":" + END_LINE + END_LINE
+        return "Here's the requested " + person + " information:" + END_LINE + END_LINE
                 + personInfo + END_LINE;
     }
 
@@ -250,7 +250,7 @@ public abstract class PersonUi {
      * @return String indicating that the person with the specified ID is now set to hidden
      */
     protected static String getHidePersonMessage(String person, int id) {
-        return "The " + person + " with ID: " + id + " is now hidden." + END_LINE;
+        return "The " + person + " with ID " + id + " is now hidden." + END_LINE;
     }
 
     /**
@@ -261,7 +261,7 @@ public abstract class PersonUi {
      * @return String indicating that the person with the specified ID is now shown
      */
     protected static String getShowPersonMessage(String person, int id) {
-        return "The " + person + " with ID: " + id + " is now not hidden." + END_LINE;
+        return "The " + person + " with ID " + id + " is now not hidden." + END_LINE;
     }
 
     /**
@@ -271,7 +271,7 @@ public abstract class PersonUi {
      * @return String indicating the current view.
      */
     protected static String getCurrentViewPersonMessage(String person) {
-        return "You are currently in the " + person.toUpperCase() + "'s View.";
+        return "You are currently in the " + capitalizeFirstLetter(person) + " Management view.";
     }
 
     private static String capitalizeFirstLetter(String word) {

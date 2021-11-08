@@ -1,12 +1,14 @@
 @startuml
 'https://plantuml.com/class-diagram
+' @@author Kureans
 
 hide circle
+hide empty members
 skinparam classAttributeIconSize 0
 skinparam class {
-BackgroundColor DarkOrchid
-ArrowColor Purple
-BorderColor Purple
+BackgroundColor #72FFF3
+ArrowColor #004C41
+BorderColor #004C41
 }
 package medbot.parser #DDDDDD {
 class "{abstract}\n Parser"

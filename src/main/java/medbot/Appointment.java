@@ -115,7 +115,7 @@ public class Appointment implements ListItem {
     }
 
     public String toString() {
-        return "Appointment Id: " + appointmentId + END_LINE
+        return "Appointment ID: " + appointmentId + END_LINE
                 + "Patient ID: " + patientId + END_LINE
                 + "Staff ID: " + medicalStaffId + END_LINE
                 + "Date/Time: " + getDateTimeString() + END_LINE;

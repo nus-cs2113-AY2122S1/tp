@@ -6,6 +6,7 @@ import medbot.command.personcommand.ViewPersonCommand;
 import medbot.exceptions.MedBotException;
 import medbot.utilities.ViewType;
 
+//@@author jushg
 public class ViewStaffCommand extends ViewPersonCommand {
     public ViewStaffCommand(int staffId) {
         super(staffId);

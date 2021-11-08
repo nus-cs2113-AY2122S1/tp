@@ -1,7 +1,17 @@
 @startuml ArchitectureDiagram
 !include <office/Concepts/documents>
 !include <office/Users/user>
-!define UI_COLOR #1D8900
+
+' @@author jushg
+
+!define USER_COLOR #FFF400
+!define UI_COLOR #B6F400
+!define MEDBOT_COLOR #32FF32
+!define PARSER_COLOR #26FFE5
+!define COMMAND_COLOR #00A9FF
+!define SCHEDULER_COLOR #1966FF
+!define STORAGE_COLOR #7032FF
+!define DOCUMENT_COLOR #A932FF
 
 ' hide the circles in the diagram
 hide circle
@@ -15,28 +25,28 @@ skinparam Class {
 }
 
 package " "<<Rectangle>>{
-    class MedBot #grey
-    class Ui #green
-    class Parser #lightblue
-    class Command #blue
-    class Scheduler #9D0012
-    class Storage  #A38300
+    class MedBot MEDBOT_COLOR
+    class Ui UI_COLOR
+    class Parser PARSER_COLOR
+    class Command COMMAND_COLOR
+    class Scheduler SCHEDULER_COLOR
+    class Storage  STORAGE_COLOR
 }
 
-class "<$user>" as User  #83E769
-class "<$documents>" as Files  #FFE374
+class "<$user>" as User USER_COLOR
+class "<$documents>" as Files  DOCUMENT_COLOR
 
-User .down[#green].> Ui
-Ui -[#green]left-> Parser
-Parser -[#lightblue]-> Command
-Command -[#blue]-> Scheduler
-Command -[#blue]up-> Ui
-Scheduler -[#9D0012]-> Storage
-MedBot -[#grey]up->Ui
-MedBot -[#grey]-> Storage
-MedBot -[#grey]left-> Parser
-MedBot -[#grey]> Scheduler
-Storage .right[#A38300]..>Files
+User .down[USER_COLOR].> Ui
+Ui -[UI_COLOR]left-> Parser
+Parser -[PARSER_COLOR]-> Command
+Command -[COMMAND_COLOR]-> Scheduler
+Command -[COMMAND_COLOR]up-> Ui
+Scheduler -[SCHEDULER_COLOR]-> Storage
+MedBot -[MEDBOT_COLOR]up->Ui
+MedBot -[MEDBOT_COLOR]-> Storage
+MedBot -[MEDBOT_COLOR]left-> Parser
+MedBot -[MEDBOT_COLOR]> Scheduler
+Storage .right[STORAGE_COLOR]..>Files
 
 
 @enduml

@@ -95,7 +95,7 @@ class UiTest {
             staffList.deletePerson(id);
         });
 
-        String expectedOutput = "No Staff with ID 2 found." + END_LINE;
+        String expectedOutput = "No staff with ID 2 found." + END_LINE;
 
         assertEquals(expectedOutput, medBotException.getMessage());
     }
@@ -103,7 +103,7 @@ class UiTest {
     @Test
     public void testPrintDeletePatientMessage_patientExists_Success() {
         int id = 2;
-        String expectedPatientOutput = "Patient with id 2 deleted from system." + END_LINE;
+        String expectedPatientOutput = "Patient with ID 2 deleted from system." + END_LINE;
 
         try {
             String actualPatientOutput = Ui.getDeleteMessage(id, ViewType.PATIENT_INFO);
@@ -117,7 +117,7 @@ class UiTest {
     @Test
     public void testPrintDeleteStaffMessage_staffExists_Success() {
         int id = 2;
-        String expectedStaffOutput = "Staff with id 2 deleted from system." + END_LINE;
+        String expectedStaffOutput = "Staff with ID 2 deleted from system." + END_LINE;
 
         try {
             String actualStaffOutput = Ui.getDeleteMessage(id, ViewType.MEDICAL_STAFF_INFO);
@@ -144,7 +144,7 @@ class UiTest {
     @Test
     public void testPrintDeleteScheduleMessage_scheduleExists_Success() {
         int id = 2;
-        String expectedScheduleOutput = "Appointment with id 2 deleted from system." + END_LINE;
+        String expectedScheduleOutput = "Appointment with ID 2 deleted from system." + END_LINE;
 
         try {
             String actualScheduleOutput = Ui.getDeleteMessage(id, ViewType.SCHEDULER);
@@ -163,7 +163,7 @@ class UiTest {
             staffList.editPerson(id, new Staff());
         });
 
-        String expectedOutput = "No Staff with ID 2 found." + END_LINE;
+        String expectedOutput = "No staff with ID 2 found." + END_LINE;
 
         assertEquals(expectedOutput, medBotException.getMessage());
     }
@@ -175,7 +175,7 @@ class UiTest {
         patient.setName("John Doe");
         patient.setEmailAddress("John@gmail.com");
         String expectedOutput =
-                "The information of patient with ID 1 has been edited to:" + END_LINE + END_LINE
+                "The information of the patient with ID 1 has been edited to:" + END_LINE + END_LINE
                 + "Patient ID: 1" + END_LINE
                 + "IC: " + END_LINE
                 + "Name: Bob" + END_LINE
@@ -204,7 +204,7 @@ class UiTest {
         staff.setResidentialAddress("25 Dover Road");
         MedicalStaffList staffList = new MedicalStaffList();
         String expectedOutput =
-                "The information of staff with ID 1 has been edited to:" + END_LINE + END_LINE
+                "The information of the staff with ID 1 has been edited to:" + END_LINE + END_LINE
                         + "Staff ID: 1 " + END_LINE
                         + "IC: S1459203K" + END_LINE
                         + "Name: Dr Tan" + END_LINE
@@ -252,7 +252,7 @@ class UiTest {
         Scheduler scheduler = new Scheduler();
 
         String expectedOutput = "The information of appointment with ID 1 has been edited to:" + END_LINE + END_LINE
-                + "Appointment Id: 1" + END_LINE
+                + "Appointment ID: 1" + END_LINE
                 + "Patient ID: 2" + END_LINE
                 + "Staff ID: 1" + END_LINE
                 + "Date/Time: 01 Nov 21 0800HRS" + END_LINE
@@ -277,7 +277,7 @@ class UiTest {
             staffList.getPersonInfo(id);
         });
 
-        String expectedOutput = "No Staff with ID 2 found." + END_LINE;
+        String expectedOutput = "No staff with ID 2 found." + END_LINE;
 
         assertEquals(expectedOutput, medBotException.getMessage());
     }
@@ -288,7 +288,7 @@ class UiTest {
         Patient patient = new Patient();
         patient.setName("John Doe");
         patient.setEmailAddress("John@gmail.com");
-        String expectedOutput = "Here's the requested patient:" + END_LINE + END_LINE
+        String expectedOutput = "Here's the requested patient information:" + END_LINE + END_LINE
                 + "Patient ID: 1" + END_LINE
                 + "IC: " + END_LINE
                 + "Name: John Doe" + END_LINE
@@ -312,7 +312,7 @@ class UiTest {
         staff.setName("John Doe");
         staff.setEmailAddress("John@gmail.com");
 
-        String expectedOutput = "Here's the requested staff:" + END_LINE + END_LINE
+        String expectedOutput = "Here's the requested staff information:" + END_LINE + END_LINE
                 + "Staff ID: 1 " + END_LINE
                 + "IC: " + END_LINE
                 + "Name: John Doe" + END_LINE
@@ -407,7 +407,7 @@ class UiTest {
     @Test
     public void testGetPatientCommandListMessage() {
 
-        String expectedOutput = "Here are the list of commands:" + END_LINE + END_LINE
+        String expectedOutput = "Here is the list of commands:" + END_LINE + END_LINE
                 + "help" + END_LINE
                 + "add" + END_LINE
                 + "delete" + END_LINE
@@ -420,7 +420,7 @@ class UiTest {
                 + "switch" + END_LINE
                 + "get view" + END_LINE
                 + "exit" + END_LINE + END_LINE
-                + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
+                + "To view more information about each command and their respective command formats, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes." + END_LINE
                 + "For expected output examples, please refer to the User Guide." + END_LINE;
@@ -435,7 +435,7 @@ class UiTest {
     @Test
     public void testGetStaffCommandListMessage() {
 
-        String expectedOutput = "Here are the list of commands:" + END_LINE + END_LINE
+        String expectedOutput = "Here is the list of commands:" + END_LINE + END_LINE
                 + "help" + END_LINE
                 + "add" + END_LINE
                 + "delete" + END_LINE
@@ -448,7 +448,7 @@ class UiTest {
                 + "switch" + END_LINE
                 + "get view" + END_LINE
                 + "exit" + END_LINE + END_LINE
-                + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
+                + "To view more information about each command and their respective command formats, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes." + END_LINE
                 + "For expected output examples, please refer to the User Guide." + END_LINE;
@@ -463,7 +463,7 @@ class UiTest {
     @Test
     public void testGetSchedulerCommandListMessage() {
 
-        String expectedOutput = "Here are the list of commands:" + END_LINE + END_LINE
+        String expectedOutput = "Here is the list of commands:" + END_LINE + END_LINE
                 + "help" + END_LINE
                 + "add" + END_LINE
                 + "delete" + END_LINE
@@ -474,7 +474,7 @@ class UiTest {
                 + "switch" + END_LINE
                 + "get view" + END_LINE
                 + "exit" + END_LINE + END_LINE
-                + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
+                + "To view more information about each command and their respective command formats, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes." + END_LINE
                 + "For expected output examples, please refer to the actual user guide." + END_LINE;
@@ -577,7 +577,7 @@ class UiTest {
     @Test
     public void testGetHidePatientMessage() {
         int patientId = 1;
-        String expectedOutput = "The patient with ID: " + patientId + " is now hidden." + END_LINE;
+        String expectedOutput = "The patient with ID " + patientId + " is now hidden." + END_LINE;
 
         try {
             assertEquals(expectedOutput, Ui.getHidePersonMessage(patientId, ViewType.PATIENT_INFO));
@@ -589,7 +589,7 @@ class UiTest {
     @Test
     public void testGetShowStaffMessage() {
         int staffId = 1;
-        String expectedOutput = "The staff with ID: " + staffId + " is now not hidden." + END_LINE;
+        String expectedOutput = "The staff with ID " + staffId + " is now not hidden." + END_LINE;
 
         try {
             assertEquals(expectedOutput, Ui.getShowPersonMessage(staffId, ViewType.MEDICAL_STAFF_INFO));

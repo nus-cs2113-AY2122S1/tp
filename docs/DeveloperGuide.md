@@ -1,6 +1,6 @@
 # Developer Guide
 
-## Table of Content
+## Table of Contents
 
 - [1. Acknowledgements](#1-acknowledgements)
 - [2. Introduction](#2-introduction)
@@ -30,8 +30,8 @@
 
 ## 2. Introduction
 
-MedBot is a Command Line Interface (CLI) application for head nurses to manage patients’ personal information, and
-scheduler appointments between them and medical staff.
+MedBot is a Command Line Interface (CLI) application for head nurses to manage patients’ and medical staff's personal 
+information, and schedule appointments between them.
 
 ## 3. Design
 
@@ -64,17 +64,27 @@ inputs the command `delete 1`.
 
 ### 3.2 Ui Component
 
-The Ui Component is handled by the `Ui` class. It is the main class that a user directly interacts with. This class is
-responsible for reading user inputs and printing outputs to users.
+The Ui Component is responsible for reading user inputs and printing outputs to users.
 
-The `Ui` class serves as an abstraction over these smaller classes:
+#### Ui Class
 
-* `PersonUi`: Handles the Ui for persons
-    * `PatientUi`: Inherits `PersonUi` to handle patient-related Ui
-    * `StaffUi`: Inherits `PersonUi` to handle staff-related Ui
-* `SchedulerUi`: Handles the Ui for schedulers.
+The Ui Component is handled by the `Ui` class. It handles the reading of user inputs and the printing of outputs. 
 
-How `Ui` works:
+It generates output messages through relying on the following classes.
+
+* `PersonUi`: Generates output messages for patient- and staff-management commands.
+    * `PatientUi`: Inherits `PersonUi` to generate output messages for patient-management commands.
+    * `StaffUi`: Inherits `PersonUi` to generate output messages for staff-management commands.
+* `SchedulerUi`: Generates output messages for scheduler commands.
+
+#### How the Ui component works
+
+##### Reading user inputs
+
+When the user inputs a line of text into the terminal, terminated with a newline character, the line will be read by the
+`readInput()` method of the `Ui` class which will return the String to be parsed by the Parser Component
+
+##### Printing outputs
 
 * After user input is parsed by `Parser`, depending on the current `viewType`, the `Ui` will call methods from
   different `Ui` subclasses
@@ -89,19 +99,25 @@ parses `help delete` input given by a user.
 
 ### 3.3 Parser Component
 
-The Parser Component is responsible for parsing the user input and returning the corresponding command class to be
-executed.
+The Parser Component is responsible for parsing the user input and returning the corresponding Command class object to
+be executed.
 
-Here's a partial class diagram to better illustrate the Parser Component:
+Given below is a partial class diagram to better illustrate the Parser Component:
 
 ![ParserClassDiagram](diagrams/ParserClassDiagram.png)
 
-How the `Parser` component works:
+#### How the Parser component works:
 
-* When `Parser` is called by MedBot to parse the user input, it will call the view specific parser `XYZCommandParser`
-  depending on the current view type (`XYZ` is a placeholder for the specific command name eg. `PatientCommandParser`).
-* The `XYZCommandParser` will then create and return the corresponding
-  `XYZcommand` object by utilising the `ParserUtils` to help it process the user input.
+* After getting the user input, MedBot calls the `parseCommand(userInput)` method of the `Parser` class to parse the
+  input.
+* Depending on the current MedBot view, the `Parser` class then calls the `ParseXYZCommand()` method of the view 
+  specific parser `XYZCommandParser`  (`XYZ` is a placeholder for the current view, namely `Patient`, `Staff` and 
+  `Scheduler`).
+* The `XYZCommandParser` then determines the type of command that the user input corresponds to and calls the 
+  corresponding `parseABCCommand()` method which creates and returns the corresponding `Command` object (`ABC` is a 
+  placeholder for the command type, e.g. `AddPatient`, `DeleteStaff`, `ListAppointment`).
+* The methods in `ParserUtils` are used by the `Parser` and `XYZCommandParser` classes to process some parts of the user
+  input.
 
 The sequence diagram below better illustrates the working process described above:
 
@@ -122,13 +138,13 @@ Here is a partial class diagram to better illustrate the Scheduler Component.
 The `Scheduler` class consists of 3 internal lists, `patientList`, `medicalStaffList` and `schedulerAppointmentList`,
 that store patient, staff and appointment information respectively. It has various public methods for the viewing and
 modification of the information stored in the lists, and for the interfacing between the Scheduler and Storage
-components. A `Scheduler` class object is instantiated upon MedBot startup.
+Components. A `Scheduler` class object is instantiated upon MedBot startup.
 
 #### How the Scheduler component works:
 
 * When MedBot calls the `.execute(Scheduler, Ui)` method of a `Command` object, a corresponding method of the
   `Scheduler` object will be called.
-* This method will then view or modify the patient, staff or appointment information as specified.
+* This method will then view or modify the patient, staff or appointment information depending on the command.
 
 For example:
 
@@ -138,60 +154,84 @@ For example:
 
 ### 3.5 Storage Component
 
-The Storage component is responsible for the storage of all patient and staff personal information, and appointment
-details. It creates a directory MedBotData (if it doesn't already exist), and the text files MedBotData/patient.txt,
-MedBotData/staff.txt and MedBotData/appointment.txt.
+The Storage Component is responsible for the storage of all patient and staff personal information, and appointment
+details. It creates a directory MedBotData (if it does not already exist), and the text files patient.txt,
+staff.txt and appointment.txt in a MedBotData directory.
 
-Here's a partial class diagram to better illustrate the Storage component:
+Here is a partial class diagram to better illustrate the Storage Component:
 
 ![SchedulerClassDiagram](diagrams/StorageClassDiagram.png)
 
+#### StorageManager Class
+
+The `StorageManager` class performs the responsibilities of the Storage Component. It consists of a `PatientStorage`, a 
+`StaffStorage` and an `AppointmentStorage` class object. The `PatientStorage`, `StaffStorage` and 
+`AppointmentStorage` classes are subclasses of the `Storage` class and are responsible for the storage of patient,
+staff and appointment information respectively.
+
 #### How the Storage component works:
 
-* When MedBot calls its `interactWithUser()` method, it initializes the `StorageManager` class
-    * this initializes the `PatientStorage`, `StaffStorage` and `AppointmentStorage` classes.
-* These three classes inherit from the `Storage` class.
-* The `PatientStorage`, `StaffStorage` and `AppointmentStorage` objects will call the inherited `loadStorage()` method
-  and read their respective text data files and read them back into the corresponding objects.
-* After a command is executed, the object of `StorageManager` will call its `saveToStorage` method and thus call
-  the `saveData()` method for all three inherited `Storage` objects, thus writing the storage data into the respective
-  data text files.
+##### Loading data:
+
+* On MedBot start up, `MedBot` initializes a `StorageManager` class object.
+* `MedBot` then calls the `initializeStorages()` method of the `StorageManager` class object which initializes the
+  `PatientStorage`, `StaffStorage` and `AppointmentStorage` class objects.
+* The `StorageManager` class then calls the `loadStorage()` methods of the `PatientStorage`, `StaffStorage` and 
+ `AppointmentStorage` class objects.
+* Each of the 3 `Storage` class objects then reads their corresponding text data files and stores the information into 
+  the corresponding lists.
+
+##### Saving data:
+
+* After a command is executed, `MedBot` calls the `saveToStorage()` method of the `StorageManager` class object.
+* The `StorageManager` class object then calls the `saveData()` method of the `PatientStorage`, `StaffStorage` and
+  `AppointmentStorage` class objects.
+* Each of the 3 `Storage` class objects then writes the storage data into the respective data text files.
 
 ### 3.6 Command Class
 
-The Command class and its subclasses are responsible for handling the execution of user input.
+The `Command` class and its subclasses are responsible for handling the execution of user instructions.
 
-Each individual Command object includes:
+Each `Command` subclass contains:
 
-* `isExit()`: Return true only if it is an `Exit Command` .
-* `execute(Scheduler, Ui)`: Using the `Ui` class and data from the `Scheduler` to execute and print out the result to
-  the user.
-* Various attributes specific to the command, some common ones:
-    * `id`: The id of `Person`/`Appointment` object to execute the command on.
-    * `viewType`: The current `ViewType` of the program.
+* An `isExit()` method which return true only if it is an `Exit Command`.
+* An `execute(Scheduler, Ui)` method which performs the specified user instruction and prints the output message to the 
+  user.
 
-Three major types of Commands:
+Some `Command` subclasses also contain attributes specific to that subclass.
+* E.g., the `deletePatientCommand` contains a `personId` attribute that specifies the ID of the patient that is to
+  be deleted from MedBot.
 
-1. `Person` commands: to interact with person objects.
-2. `Appointment` commands: to interact with the appointment between doctors/nurses and patients.
-3. General commands: included are `help`, `exit`, `switch`, `getCurrentView`.
+There are 3 categories of commands:
 
-Given below are the complete list of implemented commands and their types:
+1. General Commands for MedBot navigation and accessing help.
+2. Person Commands which are divided into:
+   1. Patient Commands for patient management in the Patient Management view.
+   2. Staff Commands for staff management in the Staff Management view.
+3. Appointment Commands for appointment management in the Scheduler view.
 
-|Command name| Type |
+Given below is the complete list of commands and their categories:
+
+|Command Name| Type |
 |--------|---|
-|Exit Command|General|
-|Get View Command|General|
 |Help Command|General|
 |Switch Command|General|
-|Add Person/Appointment Command|Person/Appointment|
-|Edit Person/Appointment Command|Person/Appointment|
-|Delete Person/Appointment Command|Person/Appointment|
-|Find Person/Appointment Command|Person/Appointment|
-|List Person/Appointment Command|Person/Appointment|
-|View Person/Appointment Command|Person/Appointment|
+|Get View Command|General|
+|Exit Command|General|
+|Add Person Command|Person|
+|Delete Person Command|Person|
+|View Person Command|Person|
+|List Person Command|Person|
+|Edit Person Command|Person|
+|Find Person Command|Person|
 |Hide Person Command|Person|
 |Show Person Command|Person|
+|Add Appointment Command|Appointment|
+|Delete Appointment Command|Appointment|
+|View Appointment Command|Appointment|
+|List Appointment Command|Appointment|
+|Edit Appointment Command|Appointment|
+|Find Appointment Command|Appointment|
 
 ## 4. Implementation
 
@@ -206,10 +246,13 @@ The switch view mechanism is heavily linked to the `Parser` class. By having a
 appropriate `SwitchCommand` class, which modifies the corresponding `ViewType`
 of the `Parser`. The 3 possible views and the corresponding user input commands are as follows:
 
-* `switch p` or `switch 1` - switches to the patient info view.
-* `switch m` or `switch 2` - switches to the medical staff info view.
-* `switch s` or `switch 3` - switches to the scheduler view.
-* `switch` - will switch to another view depending on the current view.
+* `switch p` or `switch 1` - switches to the `PATIENT_INFO` view.
+* `switch m` or `switch 2` - switches to the `MEDICAL_STAFF_INFO` view.
+* `switch s` or `switch 3` - switches to the `SCHEDULER` view.
+* `switch` - will switch to another view depending on the current view in the order shown below:
+
+  `PATIENT_INFO` --> `MEDICAL_STAFF_INFO` --> `SCHEDULER` --> `PATIENT_INFO`
+
 
 Each command evokes the `Parser#setViewType(ViewType)` method, which will set the corresponding
 `ViewType` property in the `Parser` class. Additionally, the `Ui#clearConsoleFromIde` method will be evoked, which
@@ -241,28 +284,24 @@ the `execute()` method to achieve the desired functionality.
 
 The example below gives a direction on how this command behaves.
 
-Step 1.
-<br>
-A User execute the `find n/John` command. The `Parser#parseCommand()` method will parse this command and eventually
+
+1. User executes the `find n/John` command. The `Parser#parseCommand()` method will parse this command and eventually
 returns a `new FindPatientCommand()` object.
 
-Step 2.
-<br>
-The `MedBot#interactWithUser()` method will run the `execute()` method in the `new FindPatientCommand()` object.
 
-Step 3.
-<br>
-The `execute()` method will call `PersonList#findPersons()` method with the parameter `n/John` passed in.
+2. The `MedBot#interactWithUser()` method will run the `execute()` method in the `new FindPatientCommand()` object.
 
-Step 4.
-<br>
-`PersonList#findPersons()` will check all the `persons` list and returns all `Person` in the list whose name contains
+
+3. The `execute()` method will call `PersonList#findPersons()` method with the parameter `n/John` passed in.
+
+
+4. `PersonList#findPersons()` will check all the `persons` list and returns all `Person` in the list whose name contains
 the string `john`. The attribute match is case-insensitive.
 
-Step 5.
-<br>
-The filtered `Person` list is then passed into the `Ui` class to be displayed into a table format through
+
+5. The filtered `Person` list is then passed into the `Ui` class to be displayed into a table format through
 `Ui#getFindPatientsMessage()`.
+
 
 ### 4.3 Edit feature
 
@@ -277,28 +316,23 @@ the `execute()` method to achieve the desired functionality.
 
 The example below gives a direction on how this command behaves.
 
-Step 1.
-<br>
-A User execute the `edit n/John` command when the attribute `Parser#viewType` is `PATIENT_INFO`.
+
+1. User executes the `edit n/John` command when the attribute `Parser#viewType` is `PATIENT_INFO`.
 The `Parser#parseCommand()` method will parse this command and eventually returns a `new EditPatientCommand()` object.
 
-Step 2.
-<br>
-The `MedBot#interactWithUser()` method will run the `execute()` method in the `new EditPatientCommand()` object.
 
-Step 3.
-<br>
-The `execute()` method will call `PersonList#editPerson()` method with the new `Person` object having the parameter
+2. The `MedBot#interactWithUser()` method will run the `execute()` method in the `new EditPatientCommand()` object.
+
+
+3. The `execute()` method will call `PersonList#editPerson()` method with the new `Person` object having the parameter
 `n/John` passed in. (All other attributes of the object are set to `null`)
 
-Step 4.
-<br>
-`PersonList#editPerson()` will attempt to replace all attributes of the old `Person`
+
+4. `PersonList#editPerson()` will attempt to replace all attributes of the old `Person`
 object with the non-null attributes given in the new `Person`.
 
-Step 5.
-<br>
-The edited `Person` is then passed into the `Ui` class to be displayed through`Ui#getEditPatientMessage()`.
+
+5. The edited `Person` is then passed into the `Ui` class to be displayed through`Ui#getEditPatientMessage()`.
 
 ### 4.4 Appointment management
 
@@ -309,7 +343,7 @@ patients while ensuring that there are no appointment clashes for both staff and
 
 Below is a list of key design considerations for this feature:
 
-* Upon adding/editing an appointment, MedBot will check if the new appointment clash with an existing appointment and
+* Upon adding/editing an appointment, MedBot will check if the new appointment clashes with an existing appointment and
   prevent such additions/edits.
 * Users should be able to edit the date/time of appointments to reschedule appointments, or to fix mistakes.
     * Users should also be able to change the staff involved in that appointment for cases where the original staff is
@@ -366,12 +400,12 @@ for their daily jobs
 |v2.0|user|add appointment timeslots for medical staff|easily administer their visiting hours|
 |v2.0|user|be informed if there are any conflicting visiting timings for medical staff|reschedule to more appropriate timings.
 |v2.0|user|edit appointment timeslots for medical staff|account for changes in schedule of the medical staff|
-|v2.0|user|see all available appointment timeslots for medical staff|I will not assign any conflicting timings|
-|v2.0|user|filter appointments by date/time|I can decide how to assign new appointments more quickly|
+|v2.0|user|see all available appointment timeslots for medical staff|know to not assign any conflicting timings|
+|v2.0|user|filter appointments by date/time|decide how to assign new appointments more quickly|
 
 ## Appendix C: Non-Functional Requirements
 
-1. Should work on any *mainstream OS* as long as it has Java `11` or above installed.
+1. Should work on any *mainstream OS* as long as it has `Java 11` or above installed.
 2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 3. Should be able to hold up to a thousand appointments and patient/staff records without any noticeable decrease in
@@ -379,7 +413,7 @@ for their daily jobs
 
 ## Appendix D: Glossary
 
-* *Mainstream OS* - Windows, Linux, Unix, OS-X
+* *Mainstream OS* - Windows, GNU/Linux, Unix, OS-X
 
 ## Appendix E: Instructions for manual testing
 
@@ -579,8 +613,9 @@ commands.
 * `list -h` shows all hidden patients.
 
 1. List all non-hidden patients
-    1. Test case: `list`<br>
-       Expected:
+    1. Test case: `list`
+    <br>Expected:
+    
         ```
         Here is a list of all patients:
         For full details of each patient, please use the command "view PATIENT_ID"
@@ -591,8 +626,9 @@ commands.
         ----------------------------------------------------------------------------------------------------- 
         ```
 2. List all hidden patients
-    1. Test case: `list -h`<br>
-       Expected:
+    1. Test case: `list -h`
+    <br>Expected:
+     
         ```
         Here is a list of all patients:
         For full details of each patient, please use the command "view PATIENT_ID"
@@ -743,7 +779,7 @@ commands.
 
 1. List the information of all appointments, including those of hidden patients and medical staff.
     1. Test case: `list`
-       Expected:
+       <br>Expected:
         ```
        Here is a list of all appointments:
        -------------------------------------------------------------------------------------------------- 
@@ -753,6 +789,49 @@ commands.
        | 3    | 01 Dec 21 1100HRS | 2          | Jim Bob              | 1        | Doctor One           |
        -------------------------------------------------------------------------------------------------- 
         ```
+
+#### Find appointments
+* Prerequisites:
+   * Execute the following commands first to populate the `Scheduler` with more data:
+      1. `switch 3`
+      2. `switch 1`
+      3. `show 2`
+      4. `switch 2`
+      5. `show 2`
+      6. `switch 3`
+      7. `add p/1 s/2 d/021221 0900`
+      8. `add p/2 s/2 d/031221 0900`
+      9. `add p/3 s/2 d/041221 0900`
+      10. `add p/2 s/2 d/051221 0900`
+      11. `add p/3 s/2 d/061221 0900`
+
+1. Find all appointments that involve a particular medical staff
+   1. Test case: `find s/2`
+   <br>Expected:
+    ```
+   Here is a list of matched appointments:
+    -------------------------------------------------------------------------------------------------- 
+    |  ID  |     Date/Time     | Patient ID |     Patient Name     | Staff ID  |      Staff Name       | 
+    -------------------------------------------------------------------------------------------------- 
+    | 4    | 02 Dec 21 0900HRS | 1          | John Xavier Doe      | 2        | Nurse One            | 
+    | 5    | 03 Dec 21 0900HRS | 2          | Jim Bob              | 2        | Nurse One            | 
+    | 6    | 04 Dec 21 0900HRS | 3          | Sasha Alexander      | 2        | Nurse One            | 
+    | 7    | 05 Dec 21 0900HRS | 2          | Jim Bob              | 2        | Nurse One            | 
+    | 8    | 06 Dec 21 0900HRS | 3          | Sasha Alexander      | 2        | Nurse One            | 
+    -------------------------------------------------------------------------------------------------- 
+    ```
+2. Find all appointments that involve a particular medical staff, after a certain date/time
+   1. Test case: `find s/2 a/051221 0000`
+   <br>Expected: 
+   ```
+    Here is a list of matched appointments:
+     -------------------------------------------------------------------------------------------------- 
+     |  ID  |     Date/Time     | Patient ID |     Patient Name     | Staff ID  |      Staff Name       | 
+     -------------------------------------------------------------------------------------------------- 
+     | 7    | 05 Dec 21 0900HRS | 2          | Jim Bob              | 2        | Nurse One            | 
+     | 8    | 06 Dec 21 0900HRS | 3          | Sasha Alexander      | 2        | Nurse One            | 
+     -------------------------------------------------------------------------------------------------- 
+   ```
 
 ### Saving data
 

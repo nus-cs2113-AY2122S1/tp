@@ -1,13 +1,13 @@
 package medbot.list;
 
-
 import static medbot.ui.Ui.END_LINE;
 
+//@@author jushg
 public class MedicalStaffList extends PersonList {
 
     @Override
     protected String getPersonNotFoundErrorMessage(int staffId) {
-        return "No Staff with ID " + staffId + " found." + END_LINE;
+        return "No staff with ID " + staffId + " found." + END_LINE;
     }
 
     @Override
