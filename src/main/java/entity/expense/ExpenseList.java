@@ -1,5 +1,7 @@
 package entity.expense;
 
+import utils.Money;
+
 import java.util.ArrayList;
 
 public class ExpenseList {
@@ -7,7 +9,7 @@ public class ExpenseList {
     private static double runningExpenseValue = 0;
 
     public static double getRunningExpenseValue() {
-        return runningExpenseValue;
+        return Money.truncate(runningExpenseValue);
     }
 
     public static void setRunningExpenseValue(double newExpenseValue) {
