@@ -522,24 +522,25 @@ commands.
 1. Using `help` in the `Scheduler` view
     1. Test case: `help` in `Scheduler` view. <br>Expected:
         ```
-        Here are the list of commands:
-    
-        help
-        add
-        list
-        view
-        edit
-        find
-        delete
-        get view
-        switch
-        exit
-    
-        To obtain more information on each command and their respective required inputs, type:
-        help [COMMAND]
+       Here is the list of commands:
+       
+       help
+       add
+       delete
+       edit
+       view
+       list
+       find
+       switch
+       get view
+       exit
+       
+       To view more information about each command and their respective command formats, type:
+       help [COMMAND]
+       
+       *Note that all commands will remove any '|' inputs for format parsing purposes.
+       For expected output examples, please refer to the actual user guide.
 
-        *Note that all commands will remove any '|' inputs for format parsing purposes. For 
-        examples of the expected output, please refer to the actual user guide.
         ```
 2. Getting view specific help for a specific command
     1. Test case: `help add` in `Patient Management` view <br>Expected:
@@ -604,7 +605,7 @@ commands.
 
 1. Delete an existing patient from the list.
     1. Test case: `delete 3`<br>
-       Expected: `Patient with id 3 deleted from system.`
+       Expected: `Patient with ID 3 deleted from system.`
 2. Delete a non-existent patient from the list.
     1. Test case: `delete 4`<br>
        Expected: `No Patient with ID 4 found.`
@@ -618,14 +619,14 @@ commands.
     1. Test case: `view 2` <br>
        Expected:
         ```
-        Here's the requested patient:
-
-        Patient ID: 2
-        IC: 
-        Name: Jim Bob
-        H/P: 
-        Email: jimbob@hotmail.com
-        Address: 
+       Here's the requested patient information:
+       
+       Patient ID: 2
+       IC: 
+       Name: Jim Bob
+       H/P: 
+       Email: jimbob@hotmail.com
+       Address: 
         ```
 2. View a non-existent patient's information.
     1. Test case: `view 89` <br>
@@ -638,9 +639,9 @@ commands.
 
 1. Hide a patient in the list.
     1. Test case: `hide 2`<br>
-       Expected: `The patient with ID: 2 is now hidden.`
+       Expected: `The patient with ID 2 is now hidden.`
     2. Test case: `hide 1`<br>
-       Expected: `The patient with ID: 1 is now hidden.`
+       Expected: `The patient with ID 1 is now hidden.`
 2. Invalid usage of `hide`
     1. Test case (Invalid command): `hide ab`<br>
        Expected: `ID not specified or not a positive number.`
@@ -652,7 +653,7 @@ commands.
 
 1. Show a previously hidden patient in the list.
     1. Test case: `show 1`<br>
-       Expected: `The patient with ID: 1 is now not hidden.`
+       Expected: `The patient with ID 1 is now not hidden.`
 2. Invalid usage of `show`
     1. Test case: `show ab`<br>
        Expected: `ID not specified or not a positive number.`
@@ -717,12 +718,11 @@ commands.
     1. Test case: `find i/12345`<br>
        Expected:
         ```
-        Here is a list of all patients:
-        For full details of each patient, please use the command "view PATIENT_ID"
+        Here is a list of matched patients:
         ----------------------------------------------------------------------------------------------------- 
-        |  ID  | IC Number |         Name         | Phone No. |        Email         |       Address        |
+        |  ID  | IC Number |         Name         | Phone No. |        Email         |       Address        | 
         ----------------------------------------------------------------------------------------------------- 
-        | 1    | S7812345X | John Xavier Doe      | 99999999  | john.doe@gmail.com   | John Street, Bloc... |
+        | 1    | S7812345X | John Xavier Doe      | 99999999  | john.doe@gmail.com   | John Street, Bloc... | 
         ----------------------------------------------------------------------------------------------------- 
         ```
 
@@ -756,7 +756,7 @@ commands.
     1. Test case: `add p/1 s/1 d/011221 0900`<br>
        Expected:
         ```
-        Added appointment with Appointment Id: 1
+        Added appointment with Appointment ID: 1
         Patient ID: 1
         Staff ID: 1
         Date/Time: 01 Dec 21 0900HRS
@@ -764,7 +764,7 @@ commands.
     2. Test case: `add p/1 s/2 d/011221 1000`<br>
        Expected:
         ```
-        Added appointment with Appointment Id: 2
+        Added appointment with Appointment ID: 2
         Patient ID: 1
         Staff ID: 2
         Date/Time: 01 Dec 21 1000HRS
@@ -773,7 +773,7 @@ commands.
     1. Test case: `add p/1 s/2 d/011221 1105`<br>
        Expected:
        ```
-       Added appointment with Appointment Id: 3
+       Added appointment with Appointment ID: 3
        Patient ID: 2
        Staff ID: 2
        Date/Time: 01 Dec 21 1100HRS
@@ -789,7 +789,7 @@ commands.
 
 1. Delete an existing appointment from the scheduler.
     1. Test case: `delete 2`<br>
-       Expected: `deleted appointment with Id: 2`
+       Expected: `Appointment with ID 2 deleted from system.`
 2. Delete a non-existent appointment from the scheduler.
     1. Test case: `delete 89`<br>
        Expected: `No appointment with ID 89 found.`
@@ -800,7 +800,7 @@ commands.
     1. Test case: `edit 3 s/1`<br>
        Expected:
         ```
-        Appointment 3 now has the following details:
+       The information of appointment with ID 3 has been edited to:
        
         Patient ID: 2
         Staff ID: 1
@@ -816,6 +816,8 @@ commands.
     1. Test case: `view 1`<br>
        Expected:
         ```
+        Here is the requested appointment information:
+
         Appointment Id: 1
         Patient ID: 1
         Staff ID: 1
