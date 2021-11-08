@@ -101,9 +101,11 @@ public class SetAttendanceCommand extends Command {
                 int studentIndex = studentIndexes.getStudentIndex(i) - 1;
 
                 StudentList studentList = teachingClass.getStudentList();
+                assert studentIndex >= 0 && studentIndex < teachingClass.getStudentList().getSize();
                 Student student = studentList.getStudentAt(studentIndex);
 
                 AttendanceList attendanceList = student.getAttendanceList();
+                assert lessonNumber > 0 && lessonNumber <= 1000;
                 Attendance attendance = attendanceList.getAttendance(lessonNumber);
                 if (attendance == null) {
                     attendance = new Attendance(lessonNumber, isPresent);
