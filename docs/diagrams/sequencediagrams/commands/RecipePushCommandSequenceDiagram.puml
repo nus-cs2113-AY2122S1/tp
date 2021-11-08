@@ -1,0 +1,55 @@
+@startuml
+!include ../../Style.puml
+
+box LOGIC_COLOR
+Participant ":RecipePushCommand" as RecipePushCommand
+end box
+box MODULE_COLOR
+Participant ":ModuleManager" as ModuleManager
+end box
+box RECIPE_COLOR
+Participant ":RecipeManager" as RecipeManager
+end box
+box STORAGE_COLOR
+Participant ":Storage" as Storage
+end box
+box UI_COLOR
+Participant ":Ui" as Ui
+end box
+
+-> RecipePushCommand: run()
+activate RecipePushCommand
+
+alt moduleName is blank
+  <-- RecipePushCommand: CommandException
+else moduleName is not blank
+  RecipePushCommand -> ModuleManager: selectModule(:String, :String[])
+  activate ModuleManager
+  RecipePushCommand <-- ModuleManager: :Module
+  deactivate ModuleManager
+
+  RecipePushCommand -> RecipeManager: getEditingRecipe()
+  activate RecipeManager
+  RecipePushCommand <-- RecipeManager: :Recipe
+  deactivate RecipeManager
+
+  RecipePushCommand -> RecipeManager: pushModuleIntoEditedRecipe(:Module)
+  activate RecipeManager
+  RecipePushCommand <-- RecipeManager
+  deactivate RecipeManager
+
+  RecipePushCommand -> Storage: saveRecipeToFile(:Recipe)
+  activate Storage
+  RecipePushCommand <-- Storage
+  deactivate Storage
+
+  RecipePushCommand -> Ui: printModuleAddedToRecipe(moduleName:String, recipeName:String)
+  activate Ui
+  RecipePushCommand <-- Ui
+  deactivate Ui
+
+  <-- RecipePushCommand
+  deactivate RecipePushCommand
+end
+
+@enduml

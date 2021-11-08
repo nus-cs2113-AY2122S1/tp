@@ -1,0 +1,57 @@
+@startuml
+!include ../Style.puml
+
+box LOGIC_COLOR
+Participant ":Parser" as Parser
+Participant ":XYZCommand" as XYZCommand
+Participant ":RecipeCommandParser" as RecipeCommandParser
+end box
+
+activate Parser
+-> Parser : parseCommand(userInput : String)
+Parser -> Parser : getCommandType(userInput : String)
+activate Parser
+Parser --> Parser : :String
+deactivate Parser
+alt commandType is "xyz"
+  note left
+        "xyz" refers to basic commands
+        such as reset, list, exit.
+  end note
+  Parser -> Parser : prepareXYZCommand()
+  note right
+      XYZCommand = InputCommand,
+      SelectCommand,
+      ListCommand, etc (Excluding
+      RecipeXYZCommand)
+    end note
+  activate Parser
+  create XYZCommand
+  Parser -> XYZCommand : new XYZCommand()
+  activate XYZCommand
+  note left
+      Arguments for prepareXYZCommand()
+      and XYZCommand() are omitted.
+  end note
+  XYZCommand --> Parser : XYZCommand
+  deactivate XYZCommand
+  Parser --> Parser : XYZCommand
+  deactivate Parser
+  <-- Parser : XYZCommand
+else commandType is "recipe"
+  Parser -> RecipeCommandParser: parseCommand(:String)
+  activate RecipeCommandParser
+  ref over RecipeCommandParser: Parsing of Recipe Command
+  Parser <-- RecipeCommandParser: RecipeXYZCommand
+  deactivate RecipeCommandParser
+  <-- Parser: RecipeXYZCommand
+  note left
+    RecipeXYZCommand = RecipePushCommand,
+    RecipePopCommand, etc
+  end note
+else commandType is not valid
+  <-- Parser : ParserException
+  deactivate Parser
+end
+
+@enduml

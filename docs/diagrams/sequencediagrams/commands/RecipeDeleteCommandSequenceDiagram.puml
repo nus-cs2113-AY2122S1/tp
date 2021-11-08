@@ -1,0 +1,41 @@
+@startuml
+!include ../../Style.puml
+
+box LOGIC_COLOR
+Participant ":RecipeDeleteCommand" as RecipeDeleteCommand
+end box
+box RECIPE_COLOR
+Participant ":RecipeManager" as RecipeManager
+end box
+box STORAGE_COLOR
+Participant ":Storage" as Storage
+end box
+box UI_COLOR
+Participant ":Ui" as Ui
+end box
+
+-> RecipeDeleteCommand: run()
+activate RecipeDeleteCommand
+
+alt recipeName is blank
+  <-- RecipeDeleteCommand: CommandException
+else recipeName is not blank
+  RecipeDeleteCommand -> RecipeManager: removeRecipe(:String)
+  activate RecipeManager
+  RecipeDeleteCommand <-- RecipeManager
+  deactivate RecipeManager
+
+  RecipeDeleteCommand -> Storage: deleteRecipeFile(:Recipe)
+  activate Storage
+  RecipeDeleteCommand <-- Storage
+  deactivate Storage
+
+  RecipeDeleteCommand -> Ui: printRecipeDeleted(:String)
+  activate Ui
+  RecipeDeleteCommand <-- Ui
+  deactivate Ui
+  <-- RecipeDeleteCommand
+  deactivate RecipeDeleteCommand
+end
+
+@enduml

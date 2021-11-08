@@ -1,0 +1,10 @@
+Decodex [] > input NTEgMzEgNTIgNDcgNjUgMzAgNGUgNTQgNGQgNmEgNDUgNzggNGQgMzEgNTIgMzk=
+[+] Input: "NTEgMzEgNTIgNDcgNjUgMzAgNGUgNTQgNGQgNmEgNDUgNzggNGQgMzEgNTIgMzk="
+Decodex [] > select module base64decode
+[+] Output: "5131524765304e544d6a45784d315239"
+Decodex [] > select module hexdecode
+[+] Output: "Q1RGe0NTMjExM1R9"
+Decodex [] > select module base64decode
+[+] Output: "CTF{CS2113T}"
+
+https://carbon.now.sh/?bg=rgba%28255%2C255%2C255%2C1%29&t=base16-dark&wt=none&l=text&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=false&pv=0px&ph=0px&ln=false&fl=1&fm=Fira+Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=Decodex%2520%255B%255D%2520%253E%2520input%2520NTEgMzEgNTIgNDcgNjUgMzAgNGUgNTQgNGQgNmEgNDUgNzggNGQgMzEgNTIgMzk%253D%250A%255B%252B%255D%2520Input%253A%2520%2522NTEgMzEgNTIgNDcgNjUgMzAgNGUgNTQgNGQgNmEgNDUgNzggNGQgMzEgNTIgMzk%253D%2522%250ADecodex%2520%255B%255D%2520%253E%2520select%2520module%2520base64decode%250A%255B%252B%255D%2520Output%253A%2520%25225131524765304e544d6a45784d315239%2522%250ADecodex%2520%255B%255D%2520%253E%2520select%2520module%2520hexdecode%250A%255B%252B%255D%2520Output%253A%2520%2522Q1RGe0NTMjExM1R9%2522%250ADecodex%2520%255B%255D%2520%253E%2520select%2520module%2520base64decode%250A%255B%252B%255D%2520Output%253A%2520%2522CTF%257BCS2113T%257D%2522

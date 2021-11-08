@@ -1,0 +1,45 @@
+@startuml
+!include colors.puml
+
+skinparam classAttributeIconSize 0
+hide circle
+
+abstract class "Command\n{abstract}" as Command LOGIC_COLOR {
+  {abstract} +run(dataManager: DataManager, moduleManager: ModuleManager, ui: Ui, recipeManager: RecipeManager): void
+}
+
+Command <|-left- ExitCommand
+Command <|-down- InputCommand
+Command <|-down- ListCommand
+Command <|-right- ResetCommand
+Command <|-up- SelectCommand
+Command <|-up- HelpCommand
+
+class ExitCommand LOGIC_COLOR {
+}
+
+note "run() method omitted \nfrom inheriting classes" as omitMessage
+
+class InputCommand LOGIC_COLOR {
+  - dataString: String
+}
+
+class ListCommand LOGIC_COLOR {
+  - listCategory: String
+}
+
+class ResetCommand LOGIC_COLOR {
+}
+
+class SelectCommand LOGIC_COLOR {
+  - selectCategory: String
+  - itemName: String
+  - parameters: String[]
+}
+
+class HelpCommand LOGIC_COLOR {
+  - {static} BASIC_COMMAND_HELP_MESSAGES: String[]
+  - {static} RECIPE_COMMAND_HELP_MESSAGES: String[]
+}
+
+@enduml

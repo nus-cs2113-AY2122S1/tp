@@ -1,0 +1,29 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+!include colors.puml
+
+Decodex -> "1" ModuleManager
+
+class Decodex DECODEX_COLOR {
+  - initDecodex(): void
+  + run(): void
+  + {static} main(): void
+}
+
+
+class ModuleManager MODULE_COLOR {
+  - {static} MODULE_LIST: String[][]
+  + getModules(): String[][]
+  + selectModule(moduleName: String, parameters: String[]): Module
+  - hasNoParameters(parameters: String): void
+  - prepareXYZModule(parameters: String[]): Module
+}
+
+note right
+  XYZModule = HexEncoder,
+  Base64Decoder, etc
+end note
+
+@enduml

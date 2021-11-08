@@ -1,0 +1,43 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+!include colors.puml
+
+Decodex -> "1" RecipeManager
+RecipeManager -> "*" Recipe
+
+class Decodex DECODEX_COLOR {
+  - initDecodex(): void
+  + run(): void
+  + {static} main(): void
+}
+
+class RecipeManager RECIPE_COLOR {
+  - recipeList: HashMap<String, Recipe>
+  - editingRecipeName: String
+  + getRecipeNames(): String[]
+  + addRecipe(:Recipe): void
+  + removeRecipe(:String): Recipe
+  + getRecipe(:String): Recipe
+  + getEditingRecipe(): Recipe
+  + selectRecipeForEditing(:String): void
+  + pushModuleIntoEditedRecipe(:Module): void
+  + popModuleFromEditedRecipe(): void
+  + resetEditedRecipe(): void
+  + deselectEditingRecipe(): void
+}
+
+class Recipe RECIPE_COLOR {
+  - name: String
+  - moduleList: ArrayList<Module>
+  + getName(): String
+  + setName(:String): void
+  + getModuleList(): ArrayList<Module>
+  + push(:Module): void
+  + pop(): Module
+  + run(:Data): Data
+  + reset(): void
+}
+
+@enduml

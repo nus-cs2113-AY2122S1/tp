@@ -1,0 +1,34 @@
+@startuml
+!include ../../Style.puml
+
+box LOGIC_COLOR
+Participant ":ShowCommand" as ShowCommand
+end box
+
+box UI_COLOR
+Participant ":Ui" as Ui
+end box
+
+box DATA_COLOR
+Participant ":DataManager" as DataManager
+end box
+
+-> ShowCommand: run()
+activate ShowCommand
+ShowCommand -> DataManager: getCurrentData()
+activate DataManager
+ShowCommand <-- DataManager: currentData: Data
+deactivate DataManager
+
+note left
+The toString() method has been
+omitted as it is trivial.
+end note
+ShowCommand -> Ui: printCurrentData(currentDataString: String)
+activate Ui
+ShowCommand <-- Ui
+deactivate Ui
+<-- ShowCommand
+deactivate ShowCommand
+
+@enduml

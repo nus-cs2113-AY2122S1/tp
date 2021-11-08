@@ -1,0 +1,23 @@
+!define DECODEX_COLOR #99D5CA
+!define UI_COLOR #FFC374
+!define LOGIC_COLOR #FF8F80
+!define DATA_COLOR #F9D2DE
+!define RECIPE_COLOR #FFDF71
+!define MODULE_COLOR #C7E8AC
+!define BLUE_COLOR #99D2F2
+!define STORAGE_COLOR #99D2F2
+
+skinparam Sequence {
+    MessageAlign center
+}
+
+hide footbox
+hide members
+hide circle
+
+skinparam DefaultTextAlignment center
+skinparam Shadowing false
+skinparam SequenceGroupBodyBackGroundColor ffffff90
+
+skinparam MinClassWidth 110
+skinparam ParticipantPadding 10

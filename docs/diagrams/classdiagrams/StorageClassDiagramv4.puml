@@ -1,0 +1,23 @@
+@startuml
+!define DECODEX_COLOR #99D5CA
+!define STORAGE_COLOR #99D2F2
+skinparam classAttributeIconSize 0
+hide circle
+
+Decodex -> "1" Storage
+
+note right of Storage: Only the public methods of Storage \nare shown in this Class Diagram.
+
+class Decodex DECODEX_COLOR {
+  - initDecodex(): void
+  + run(): void
+  + {static} main(): void
+}
+
+class Storage STORAGE_COLOR {
+    + loadRecipesFromDirectory(moduleManager: ModuleManager,\n recipeManager: RecipeManager, ui: Ui): void
+    + saveRecipeToFile(recipe: Recipe): void
+    + deleteRecipeFile(recipeName: String): void
+}
+
+@enduml

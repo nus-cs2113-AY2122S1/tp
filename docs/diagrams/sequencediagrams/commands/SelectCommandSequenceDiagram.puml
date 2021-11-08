@@ -1,0 +1,55 @@
+@startuml
+!include ../../Style.puml
+
+box LOGIC_COLOR
+Participant ":SelectCommand" as SelectCommand
+end box
+'box MODULE_COLOR
+'Participant ":ModuleManager" as ModuleManager
+'Participant ":Module" as Module
+'end box
+'box DATA_COLOR
+'Participant ":DataManager" as DataManager
+'end box
+'box UI_COLOR
+'Participant ":Ui" as Ui
+'end box
+'box RECIPE_COLOR
+'Participant ":RecipeManager" as RecipeManager
+'Participant ":Recipe" as Recipe
+'end box
+
+-> SelectCommand: run()
+activate SelectCommand
+
+alt selectCategory = "module"
+  SelectCommand -> SelectCommand: runModule()
+  activate SelectCommand
+  note right
+    Other classes are involved
+    but omitted for readability
+    end note
+  ref over SelectCommand
+    Execution of module
+  end
+
+  SelectCommand --> SelectCommand
+  deactivate SelectCommand
+
+  <-- SelectCommand
+else selectCategory = "recipe"
+  SelectCommand -> SelectCommand: runRecipe()
+  activate SelectCommand
+  ref over SelectCommand
+    Execution of recipe
+  end
+
+  SelectCommand --> SelectCommand
+  deactivate SelectCommand
+  <-- SelectCommand
+else unknown selectCategory
+  <-- SelectCommand: CommandException
+  deactivate SelectCommand
+end
+
+@enduml

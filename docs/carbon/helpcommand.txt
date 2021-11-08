@@ -1,0 +1,15 @@
+Decodex [] > help
+Syntax: < > - mandatory, { } - optional
+
+Here are the basic commands:
+-> Shows list of available commands
+   Syntax: help
+
+-> Exit the program
+   Syntax: exit
+
+-> Input of data
+   Syntax: input <data>
+...
+
+https://carbon.now.sh/?bg=rgba%28255%2C255%2C255%2C1%29&t=base16-dark&wt=none&l=text&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=false&pv=0px&ph=0px&ln=false&fl=1&fm=Fira+Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=Decodex%2520%255B%255D%2520%253E%2520help%250ASyntax%253A%2520%253C%2520%253E%2520-%2520mandatory%252C%2520%257B%2520%257D%2520-%2520optional%250A%250AHere%2520are%2520the%2520basic%2520commands%253A%250A-%253E%2520Shows%2520list%2520of%2520available%2520commands%250A%2520%2520%2520Syntax%253A%2520help%250A%250A-%253E%2520Exit%2520the%2520program%250A%2520%2520%2520Syntax%253A%2520exit%250A%250A-%253E%2520Input%2520of%2520data%250A%2520%2520%2520Syntax%253A%2520input%2520%253Cdata%253E%250A...

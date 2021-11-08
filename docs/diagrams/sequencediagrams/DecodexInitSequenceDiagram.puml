@@ -1,0 +1,100 @@
+@startuml
+!include ../Style.puml
+box DECODEX_COLOR
+Participant "<<class>>\nDecodex" as DecodexClass
+Participant ":Decodex" as Decodex
+end box
+box DATA_COLOR
+Participant ":DataManager" as DataManager
+end box
+box MODULE_COLOR
+Participant ":ModuleManager" as ModuleManager
+end box
+box RECIPE_COLOR
+Participant ":RecipeManager" as RecipeManager
+end box
+box LOGIC_COLOR
+Participant ":Parser" as Parser
+end box
+box STORAGE_COLOR
+Participant ":Storage" as Storage
+end box
+box UI_COLOR
+Participant ":Ui" as Ui
+endbox
+
+-> DecodexClass: main()
+activate DecodexClass
+
+create Decodex
+DecodexClass -> Decodex: new Decodex()
+activate Decodex
+
+Decodex -> Decodex: initDecodex()
+activate Decodex
+
+create DataManager
+  Decodex -> DataManager : new DataManager()
+  activate DataManager
+  Decodex <-- DataManager
+  deactivate DataManager
+
+create ModuleManager
+  Decodex -> ModuleManager : new ModuleManager()
+  activate ModuleManager
+  Decodex <-- ModuleManager
+  deactivate ModuleManager
+
+create RecipeManager
+  Decodex -> RecipeManager : new RecipeManager()
+  activate RecipeManager
+  Decodex <-- RecipeManager
+  deactivate RecipeManager
+
+create Parser
+  Decodex -> Parser : new Parser()
+  activate Parser
+  Decodex <-- Parser
+  deactivate Parser
+
+create Storage
+  Decodex -> Storage : new Storage()
+  activate Storage
+  Decodex <-- Storage
+  deactivate Storage
+
+create Ui
+  Decodex -> Ui : new Ui()
+  activate Ui
+  Decodex <-- Ui
+  deactivate Ui
+
+Decodex -> Decodex: loadSavedRecipes()
+activate Decodex
+
+Decodex -> Storage: loadRecipesFromDirectory()
+activate Storage
+Decodex <-- Storage
+deactivate Storage
+
+Decodex --> Decodex
+deactivate Decodex
+
+Decodex --> Decodex
+deactivate Decodex
+
+DecodexClass <-- Decodex
+deactivate Decodex
+
+'DecodexClass -> Decodex: run()
+'activate Decodex
+'DecodexClass <-- Decodex
+'deactivate Decodex
+'<-- DecodexClass
+'deactivate DecodexClass
+'Decodex -[hidden]> DecodexClass
+'destroy Decodex
+
+DecodexClass <-[hidden]- Decodex
+DecodexClass <-[hidden]- Decodex
+@enduml

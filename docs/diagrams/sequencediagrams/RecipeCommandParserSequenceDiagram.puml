@@ -1,0 +1,52 @@
+@startuml
+!include ../Style.puml
+
+box LOGIC_COLOR
+Participant ":RecipeCommandParser" as RecipeCommandParser
+Participant ":RecipeXYZCommand" as RecipeXYZCommand
+end box
+
+-> RecipeCommandParser: parseCommand(:String)
+activate RecipeCommandParser
+
+RecipeCommandParser -> RecipeCommandParser: getTokens(:String)
+activate RecipeCommandParser
+
+RecipeCommandParser --> RecipeCommandParser
+deactivate RecipeCommandParser
+
+alt length of subCommandTokens < SUBCOMMAND_NO_ARGUMENT_LENGTH
+  <-- RecipeCommandParser: CommandException
+else length of subCommandTokens >= SUBCOMMAND_NO_ARGUMENT_LENGTH
+  alt subCommand = "xyz"
+
+    RecipeCommandParser -> RecipeCommandParser: prepareRecipeXYZCommand
+    activate RecipeCommandParser
+    note left
+      "xyz" refers to recipe commands
+      such as push, pop, reset, etc
+    end note
+    note right
+      RecipeXYZCommand = RecipePushCommand,
+      RecipePopCommand, etc
+    end note
+
+    create RecipeXYZCommand
+    RecipeCommandParser -> RecipeXYZCommand: new RecipeXYZCommand()
+    activate RecipeXYZCommand
+
+    RecipeCommandParser <-- RecipeXYZCommand
+    deactivate RecipeXYZCommand
+
+    RecipeCommandParser --> RecipeCommandParser: :RecipeXYZCommand
+    deactivate RecipeCommandParser
+    <-- RecipeCommandParser: :RecipeXYZCommand
+
+  else subCommand is not valid
+    <-- RecipeCommandParser:
+    deactivate RecipeCommandParser
+  end
+end
+
+
+@enduml

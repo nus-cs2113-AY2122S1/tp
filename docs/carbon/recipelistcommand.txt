@@ -1,0 +1,7 @@
+Decodex [] > recipe list testRecipe
+Here are the list of modules in recipe testRecipe
+  1. hexencode
+  2. base64encode
+  3. base64encode
+
+https://carbon.now.sh/?bg=rgba%28255%2C255%2C255%2C1%29&t=base16-dark&wt=none&l=text&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=false&pv=0px&ph=0px&ln=false&fl=1&fm=Fira+Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=Decodex%2520%255B%255D%2520%253E%2520recipe%2520list%2520testRecipe%250AHere%2520are%2520the%2520list%2520of%2520modules%2520in%2520recipe%2520testRecipe%250A%2520%25201.%2520hexencode%250A%2520%25202.%2520base64encode%250A%2520%25203.%2520base64encode

@@ -1,0 +1,55 @@
+@startuml
+!include ../../Style.puml
+
+box LOGIC_COLOR
+Participant ":SelectCommand" as SelectCommand
+end box
+box MODULE_COLOR
+Participant ":ModuleManager" as ModuleManager
+Participant ":Module" as Module
+end box
+box DATA_COLOR
+Participant ":DataManager" as DataManager
+end box
+box UI_COLOR
+Participant ":Ui" as Ui
+end box
+
+-> SelectCommand: runModule()
+activate SelectCommand
+
+alt itemName is blank
+  <-- SelectCommand: CommandException
+else itemName is not blank
+  SelectCommand -> ModuleManager: selectModule(:String, :String[])
+  activate ModuleManager
+  SelectCommand <-- ModuleManager: :Module
+  deactivate ModuleManager
+
+  SelectCommand -> DataManager: getCurrentData()
+  activate DataManager
+  SelectCommand <-- DataManager: :Data
+  deactivate DataManager
+
+  SelectCommand -> Module: run(:Data)
+  activate Module
+  SelectCommand <-- Module: :Data
+  deactivate Module
+  destroy Module
+
+  SelectCommand -> DataManager: setCurrentData(:Data)
+  activate DataManager
+  SelectCommand <-- DataManager
+  deactivate DataManager
+
+  SelectCommand -> Ui: printOutput(:String)
+  activate Ui
+  SelectCommand <-- Ui
+  deactivate Ui
+
+  SelectCommand <-[hidden]- Ui
+  <-- SelectCommand
+  deactivate SelectCommand
+end
+
+@enduml

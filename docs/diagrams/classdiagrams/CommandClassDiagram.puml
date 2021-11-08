@@ -1,0 +1,22 @@
+@startuml
+!include colors.puml
+
+skinparam classAttributeIconSize 0
+hide circle
+
+abstract class "Command\n{abstract}" as Command LOGIC_COLOR {
+  {abstract} +run(dataManager: DataManager, moduleManager: ModuleManager, ui: Ui, recipeManager: RecipeManager, storage: Storage): void
+}
+
+note "The run() method is omitted from inheriting classes.\nThe attributes and methods are also omitted to improve readability \nsince each respective XYZCommand and RecipeXYZCommand\nhas their own attributes and even additional methods." as omitMessage
+
+Command <|-up- XYZCommand
+Command <|-down- RecipeXYZCommand
+
+class XYZCommand LOGIC_COLOR {
+}
+
+class RecipeXYZCommand LOGIC_COLOR {
+}
+
+@enduml

@@ -1,0 +1,50 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+!include colors.puml
+
+abstract class "Module\n{abstract}" as Module MODULE_COLOR {
+  # name: String
+  # description: String
+  {abstract} +run(data: Data): Data
+}
+
+Module <|-right- Base64Decoder
+Module <|-right- Base64Encoder
+Module <|-left- HexDecoder
+Module <|-left- HexEncoder
+Module <|-down- BinaryEncoder
+Module <|-down- BinaryDecoder
+Module <|-up- RotEncoder
+
+class Base64Encoder MODULE_COLOR {
+  +run(data: Data): Data
+}
+
+class Base64Decoder MODULE_COLOR {
+  +run(data: Data): Data
+}
+
+class HexEncoder MODULE_COLOR {
+  +run(data: Data): Data
+}
+
+class HexDecoder MODULE_COLOR {
+  +run(data: Data): Data
+}
+
+class BinaryEncoder MODULE_COLOR {
+  +run(data: Data): Data
+}
+
+class BinaryDecoder MODULE_COLOR{
+  +run(data: Data): Data
+}
+
+class RotEncoder MODULE_COLOR {
+  - rotateOffset: int
+  +run(data: Data): Data
+}
+
+@enduml

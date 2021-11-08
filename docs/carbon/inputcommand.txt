@@ -1,0 +1,4 @@
+Decodex [] > input SGVsbG9Xb3JsZA==
+[+] Input: "SGVsbG9Xb3JsZA=="
+
+https://carbon.now.sh/?bg=rgba%28255%2C255%2C255%2C1%29&t=base16-dark&wt=none&l=text&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=false&pv=0px&ph=0px&ln=false&fl=1&fm=Fira+Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=Decodex%2520%255B%255D%2520%253E%2520input%2520SGVsbG9Xb3JsZA%253D%253D%250A%255B%252B%255D%2520Input%253A%2520%2522SGVsbG9Xb3JsZA%253D%253D%2522

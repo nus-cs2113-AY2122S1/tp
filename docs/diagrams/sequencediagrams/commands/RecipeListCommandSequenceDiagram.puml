@@ -1,0 +1,42 @@
+@startuml
+!include ../../Style.puml
+
+box LOGIC_COLOR
+Participant ":RecipeListCommand" as RecipeListCommand
+end box
+box RECIPE_COLOR
+Participant ":RecipeManager" as RecipeManager
+end box
+box UI_COLOR
+Participant ":Ui" as Ui
+end box
+
+-> RecipeListCommand: run()
+activate RecipeListCommand
+
+alt recipeName is blank
+  RecipeListCommand -> RecipeManager: getEditingRecipe()
+  activate RecipeManager
+  RecipeListCommand <-- RecipeManager: :Recipe
+  deactivate RecipeManager
+else recipeName is not blank
+  RecipeListCommand -> RecipeManager: getRecipe(:String)
+  activate RecipeManager
+  RecipeListCommand <-- RecipeManager: :Recipe
+  deactivate RecipeManager
+end
+
+RecipeListCommand -> RecipeListCommand: getModuleList(:Recipe)
+activate RecipeListCommand
+RecipeListCommand --> RecipeListCommand: :String
+deactivate RecipeListCommand
+
+RecipeListCommand -> Ui: printRecipeModulesList(moduleList:String, recipeName:String)
+activate Ui
+RecipeListCommand <-- Ui
+deactivate Ui
+
+<-- RecipeListCommand
+deactivate RecipeListCommand
+
+@enduml

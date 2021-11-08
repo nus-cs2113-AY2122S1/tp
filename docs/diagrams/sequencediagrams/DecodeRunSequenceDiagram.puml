@@ -1,0 +1,57 @@
+@startuml
+!include ../Style.puml
+
+box DECODEX_COLOR
+Participant ":Decodex" as Decodex
+end box
+box UI_COLOR
+Participant ":Ui" as Ui
+end box
+box LOGIC_COLOR
+Participant ":Parser" as Parser
+Participant ":XYZCommand" as XYZCommand
+end box
+
+
+-> Decodex: run()
+
+activate Decodex
+
+Decodex -> Ui : printGreeting()
+activate Ui
+Ui --> Decodex
+deactivate Ui
+
+loop command is not instance of ExitCommand
+    Decodex -> Ui : readInput()
+    activate Ui
+    Ui --> Decodex : userInput : String
+    deactivate Ui
+
+    Decodex -> Parser : parseCommand(userInput  :String)
+    activate Parser
+
+    ref over Parser, XYZCommand : Handle selection of Command
+
+    Parser --> Decodex : XYZCommand
+    deactivate Parser
+
+    Decodex -> XYZCommand : run(:DataManager, :ModuleManager, :RecipeManager, :Ui, :Storage)
+    activate XYZCommand
+
+    ref over XYZCommand   : Command execution logic
+
+    XYZCommand --> Decodex
+    deactivate XYZCommand
+    XYZCommand -[hidden]-> Decodex
+
+end
+destroy XYZCommand
+
+<-- Decodex :
+deactivate Decodex
+
+destroy Ui
+destroy Parser
+destroy Decodex
+@enduml

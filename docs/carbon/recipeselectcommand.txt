@@ -1,0 +1,5 @@
+Decodex [] > recipe select testRecipe
+[+] Recipe testRecipe selected for editing.
+Decodex [Editing: testRecipe] >
+
+https://carbon.now.sh/?bg=rgba%28255%2C255%2C255%2C1%29&t=base16-dark&wt=none&l=text&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=false&pv=0px&ph=0px&ln=false&fl=1&fm=Fira+Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=Decodex%2520%255B%255D%2520%253E%2520recipe%2520select%2520testRecipe%250A%255B%252B%255D%2520Recipe%2520testRecipe%2520selected%2520for%2520editing.%250ADecodex%2520%255BEditing%253A%2520testRecipe%255D%2520%253E

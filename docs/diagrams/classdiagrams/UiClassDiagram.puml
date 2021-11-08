@@ -1,0 +1,34 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+!include colors.puml
+
+Decodex -> "1" Ui
+
+note left of Decodex
+    For this and subsequent
+    class diagrams containing Decodex,
+    the loadSavedRecipes() method
+    is omitted to avoid complexity.
+end note
+class Decodex DECODEX_COLOR {
+  - initDecodex(): void
+  + run(): void
+  + {static} main(): void
+}
+
+
+class Ui UI_COLOR {
+  - in: Scanner
+  + readInput(): String
+  + printSuccess(input: String): void
+  + printError(exception: Exception): void
+}
+
+note right
+    Only the commonly used
+    methods are listed.
+end note
+
+@enduml

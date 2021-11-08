@@ -1,0 +1,14 @@
+Decodex [] > list
+Here are the list of supported modules:
+  base64encode - Encodes the data using Base64 format.
+  base64decode - Decodes the data using Base64 format.
+  hexencode    - Converts the input string to hexadecimal bytes
+  hexdecode    - Converts a hexadecimal string back into its raw value
+  binencode    - Encodes the data into binary.
+  bindecode    - Decodes the data from binary.
+  rotencode    - Rotates the alphabets in the input string by a specified amount
+Here are the list of available recipes:
+  testRecipe1
+  testRecipe2
+
+https://carbon.now.sh/?bg=rgba%28255%2C255%2C255%2C1%29&t=base16-dark&wt=none&l=text&ds=false&dsyoff=20px&dsblur=68px&wc=true&wa=false&pv=0px&ph=0px&ln=false&fl=1&fm=Fira+Code&fs=14px&lh=152%25&si=false&es=2x&wm=false&code=Decodex%2520%255B%255D%2520%253E%2520list%250AHere%2520are%2520the%2520list%2520of%2520supported%2520modules%253A%250A%2520%2520base64encode%2520-%2520Encodes%2520the%2520data%2520using%2520Base64%2520format.%250A%2520%2520base64decode%2520-%2520Decodes%2520the%2520data%2520using%2520Base64%2520format.%250A%2520%2520hexencode%2520%2520%2520%2520-%2520Converts%2520the%2520input%2520string%2520to%2520hexadecimal%2520bytes%250A%2520%2520hexdecode%2520%2520%2520%2520-%2520Converts%2520a%2520hexadecimal%2520string%2520back%2520into%2520its%2520raw%2520value%250A%2520%2520binencode%2520%2520%2520%2520-%2520Encodes%2520the%2520data%2520into%2520binary.%250A%2520%2520bindecode%2520%2520%2520%2520-%2520Decodes%2520the%2520data%2520from%2520binary.%250A%2520%2520rotencode%2520%2520%2520%2520-%2520Rotates%2520the%2520alphabets%2520in%2520the%2520input%2520string%2520by%2520a%2520specified%2520amount%250AHere%2520are%2520the%2520list%2520of%2520available%2520recipes%253A%250A%2520%2520testRecipe1%250A%2520%2520testRecipe2

@@ -1,0 +1,23 @@
+@startuml
+!include ../../Style.puml
+
+box LOGIC_COLOR
+Participant ":HelpCommand" as HelpCommand
+end box
+
+box UI_COLOR
+Participant ":Ui" as Ui
+end box
+
+-> HelpCommand: run()
+activate HelpCommand
+HelpCommand -> Ui: printCommandHelp(basicCommandHelpList: String[],\nrecipeCommandHelpList:String[])
+activate Ui
+HelpCommand <-- Ui
+deactivate Ui
+<-- HelpCommand
+
+deactivate HelpCommand
+
+
+@enduml

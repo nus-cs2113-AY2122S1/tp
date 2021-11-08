@@ -1,0 +1,53 @@
+@startuml
+!include ../../Style.puml
+
+box LOGIC_COLOR
+Participant ":RecipeNewCommand" as RecipeNewCommand
+end box
+box RECIPE_COLOR
+Participant ":RecipeManager" as RecipeManager
+Participant ":Recipe" as Recipe
+end box
+box STORAGE_COLOR
+Participant ":Storage" as Storage
+end box
+box UI_COLOR
+Participant ":Ui" as Ui
+end box
+
+-> RecipeNewCommand: run()
+activate RecipeNewCommand
+
+alt recipeName is blank
+  <-- RecipeNewCommand: CommandException
+else recipeName is not blank
+  create Recipe
+  RecipeNewCommand -> Recipe: new Recipe(:String)
+  activate Recipe
+  RecipeNewCommand <-- Recipe
+  deactivate Recipe
+
+  RecipeNewCommand -> RecipeManager: addRecipe(:Recipe)
+  activate RecipeManager
+  RecipeNewCommand <-- RecipeManager
+  deactivate RecipeManager
+
+  RecipeNewCommand -> Storage: saveRecipeToFile(:Recipe)
+  activate Storage
+  RecipeNewCommand <-- Storage
+  deactivate Storage
+
+  RecipeNewCommand -> RecipeManager: selectRecipeForEditing(:String)
+  activate RecipeManager
+  RecipeNewCommand <-- RecipeManager
+  deactivate RecipeManager
+
+  RecipeNewCommand -> Ui: printNewRecipeCreated(:String)
+  activate Ui
+  RecipeNewCommand <-- Ui
+  deactivate Ui
+  <-- RecipeNewCommand
+  deactivate RecipeNewCommand
+end
+
+@enduml

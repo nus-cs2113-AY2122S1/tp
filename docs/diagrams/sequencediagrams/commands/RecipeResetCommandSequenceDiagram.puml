@@ -1,0 +1,43 @@
+@startuml
+!include ../../Style.puml
+
+box LOGIC_COLOR
+Participant ":RecipeResetCommand" as RecipeResetCommand
+end box
+box RECIPE_COLOR
+Participant ":RecipeManager" as RecipeManager
+end box
+box STORAGE_COLOR
+Participant ":Storage" as Storage
+end box
+box UI_COLOR
+Participant ":Ui" as Ui
+end box
+
+-> RecipeResetCommand: run()
+activate RecipeResetCommand
+
+RecipeResetCommand -> RecipeManager: getEditingRecipe()
+activate RecipeManager
+RecipeResetCommand <-- RecipeManager: :Recipe
+deactivate RecipeManager
+
+RecipeResetCommand -> RecipeManager: resetEditedRecipe()
+activate RecipeManager
+RecipeResetCommand <-- RecipeManager
+deactivate RecipeManager
+
+RecipeResetCommand -> Storage: saveRecipeToFile(:Recipe)
+activate Storage
+RecipeResetCommand <-- Storage
+deactivate Storage
+
+RecipeResetCommand -> Ui: printRecipeReset(:String)
+activate Ui
+RecipeResetCommand <-- Ui
+deactivate Ui
+
+<-- RecipeResetCommand
+deactivate RecipeResetCommand
+
+@enduml

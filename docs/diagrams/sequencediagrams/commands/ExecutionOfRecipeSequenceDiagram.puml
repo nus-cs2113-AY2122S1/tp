@@ -1,0 +1,58 @@
+@startuml
+!include ../../Style.puml
+
+box LOGIC_COLOR
+Participant ":SelectCommand" as SelectCommand
+end box
+box DATA_COLOR
+Participant ":DataManager" as DataManager
+end box
+box RECIPE_COLOR
+Participant ":RecipeManager" as RecipeManager
+Participant ":Recipe" as Recipe
+end box
+box UI_COLOR
+Participant ":Ui" as Ui
+end box
+
+-> SelectCommand: runModule()
+activate SelectCommand
+
+alt itemName is blank
+  <-- SelectCommand: CommandException
+else itemName is not blank
+  SelectCommand -> RecipeManager: getRecipe(:String)
+  activate RecipeManager
+  SelectCommand <-- RecipeManager: :Recipe
+  deactivate RecipeManager
+
+  SelectCommand -> DataManager: getCurrentData()
+  activate DataManager
+  SelectCommand <-- DataManager: :Data
+  deactivate DataManager
+
+  SelectCommand -> Recipe: run(:Data)
+  activate Recipe
+  SelectCommand <-- Recipe: :Data
+  deactivate Recipe
+
+  SelectCommand -> DataManager: setCurrentData(:Data)
+  activate DataManager
+  SelectCommand <-- DataManager
+  deactivate DataManager
+
+  SelectCommand -> Ui: printRecipeModules(:Recipe)
+  activate Ui
+  SelectCommand <-- Ui
+  deactivate Ui
+
+  SelectCommand -> Ui: printOutput(:String)
+    activate Ui
+    SelectCommand <-- Ui
+    deactivate Ui
+
+  <-- SelectCommand
+  deactivate SelectCommand
+end
+
+@enduml

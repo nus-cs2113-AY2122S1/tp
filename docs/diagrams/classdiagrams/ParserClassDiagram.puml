@@ -1,0 +1,28 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+!include colors.puml
+
+Decodex -> "1" Parser
+Parser -> "1" RecipeCommandParser
+Parser <|- RecipeCommandParser
+
+class Decodex DECODEX_COLOR {
+  - initDecodex(): void
+  + run(): void
+  + {static} main(): void
+}
+
+class Parser LOGIC_COLOR {
+  + getCommandType(userInput: String): String
+  + getInputString(userInput: String): String
+  + parseCommand(userInput: String): Command
+  # getTokens(userInput: String): String[]
+}
+
+class RecipeCommandParser LOGIC_COLOR {
+  + parseCommand(userInput: String): Command
+}
+
+@enduml

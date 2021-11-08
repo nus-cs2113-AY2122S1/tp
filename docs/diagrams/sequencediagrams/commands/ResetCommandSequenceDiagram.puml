@@ -1,0 +1,30 @@
+@startuml
+!include ../../Style.puml
+
+box LOGIC_COLOR
+Participant ":ResetCommand" as ResetCommand
+end box
+box DATA_COLOR
+Participant ":DataManager" as DataManager
+end box
+box UI_COLOR
+Participant ":Ui" as Ui
+end box
+
+-> ResetCommand: run()
+
+activate ResetCommand
+ResetCommand -> DataManager: resetToOriginalData()
+activate DataManager
+ResetCommand <-- DataManager
+deactivate DataManager
+
+ResetCommand -> Ui: printSuccess(:String)
+activate Ui
+ResetCommand <-- Ui
+deactivate Ui
+
+<-- ResetCommand
+deactivate ResetCommand
+
+@enduml
