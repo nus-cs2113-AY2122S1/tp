@@ -154,7 +154,7 @@ for the user to easily find items.
 
 The storage of `Click` refers to storing files of user's data into respective local subdirectory in a local directory called `storage`, which is in the same directory as the project root.
 
-The respective `.txt` files corresponding to the different features of click are held in their respective subfolders.
+The respective `.txt` files corresponding to the different features of click are held in their respective subfolder.
 
 For example, `food.txt` would be found under `storage/fooddata/`.
 
@@ -239,7 +239,7 @@ When the user types `module delete 2`, the following sequence of steps will then
 2. Create `DeleteModuleCommand` object.
 3. Execute command.\
    i. `DeleteModuleCommand` finds the index of the module to be deleted in user's input.\
-   ii. `DeleteModuleCommand` calls `moduleManager.deleteModule(moduleIndex)` to delete the specifed module and print the message to the user.
+   ii. `DeleteModuleCommand` calls `moduleManager.deleteModule(moduleIndex)` to delete the specified module and print the message to the user.
 
 
 #### 4.1.3 Listing All Modules
@@ -358,7 +358,7 @@ Given below is an example of how the display calendar mechanism behaves at each 
      
       iii. Then, the method `arrangeTaskList` in `Schedule` class is called, and it takes in `storage.tasksList` (the TaskList object with all the currently stored tasks drawn from storage), `calendarTasks` (an ArrayList<ArrayList<String>> object initialized with empty ArrayLists of type String), `month` (the month input by the user, which in this example is the integer `10`) and year `month` (the year input by the user, which in this example is the integer `2021`), and adds the tasks to the days in the empty String ArrayLists initialized before in `calendarTasks`.
      
-      iv.The method `arrangeLectureList` is also called and the process is same as in the previous step, except with `storage.lectureList` and `calendarLecture` replacing the first two input parameters of `arrangeTaskList`.
+      iv.The method `arrangeLectureList` is also called, and the process is same as in the previous step, except with `storage.lectureList` and `calendarLecture` replacing the first two input parameters of `arrangeTaskList`.
      
       v.Then, the method `displayCalendar` in `Schedule` class is called, and it takes in `inputYearMonth` (the YearMonth object created from the month and year parsed from the user input), the `calendarTasks` (that was filled with the tasks for each day in the Step (iii)) and `calendarLecture` (that was filled with the lectures for each day in the Step (iv)). The method `displayCalendar` performs the necessary logic to print out the calendar.
   >  **NOTE:** Two tasks and two lectures are displayed for each day based on the order in which the user added them, and if there are more, they will show as and when the user deletes the tasks/lectures that are currently displayed.
@@ -695,7 +695,7 @@ To begin, consider how a food command is parsed from user input.
 
 The following diagram displays the interactions between the classes when the user enters a command starting with
 "food".\
-Do note that important calls are left out of this diagram (command execution) and the parser replaces Click for this.
+Do note that important calls are left out of this diagram (command execution), and the parser replaces Click for this.
 A high level view of command execution is covered in [Architecture](#31-architecture)\
 You should take note of the interactions between the constructed command classes, and the current list it's
 iterating over - `WhatIAteTodayList`, especially the updates shown after the  end of every  command. An update is
