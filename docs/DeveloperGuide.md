@@ -98,7 +98,7 @@ The _sequence diagram_ below shows how the components interact with each other f
 
 ![image](images/InteractionSeqDiagram.png)
 
-Each of the 5 components (apart from `main`) can be found in their respective packages.
+Each of the 6 components (apart from `main`) can be found in their respective packages.
 
 ### 3.2. UI component
 
@@ -135,13 +135,13 @@ A quick overview of how a command is parsed and executed is as such:
 ### 3.5. IngredientGroup component
 The **IngredientGroup** component can be found in the `ingredients` package
 
-An instance `IngredientGroup` is created for each new ingredient. 
+An instance `IngredientGroup` is created for each new ingredient.
 A new ingredient is defined as one with a different name as compared to all existing ingredients.
 
-Each instance of `IngredientGroup` is made up multiple `Ingredient`. One entry in an `IngredientGroup` corresponds to one `Ingredient`. 
+Each instance of `IngredientGroup` is made up multiple `Ingredient`. One entry in an `IngredientGroup` corresponds to one `Ingredient`.
 All entries with the same ingredient name is stored in the same `IngredientGroup`.
 
-In the example below, there are 2 `IngredientGroup`, Carrot and White Carrot. Carrot contains 2 `Ingredient` (entries) while White Carrot contains 3 `Ingredient` (entries). 
+In the example below, there are 2 `IngredientGroup`, Carrot and White Carrot. Carrot contains 2 `Ingredient` (entries) while White Carrot contains 3 `Ingredient` (entries).
 ```
 1. Carrot | Total Amount: 12.2 kg
     1.1. Amount Left: 10.0 kg | Expiry Date: 23/12/2021 

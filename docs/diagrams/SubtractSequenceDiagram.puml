@@ -30,11 +30,11 @@ subtract -> ingredient_list : subtractIngredientFromGroup("carrot", 150.0)
 activate ingredient_list INGREDIENTLIST_COLOUR
 
 ingredient_list -> ingredient_list : findIngredientIndexInList("Carrot")
-activate ingredient_list INGREDIENTLIST_COLOUR
+activate ingredient_list INGREDIENTLIST_COLOUR_S1
 return ingredientIndex
 
 ingredient_list -> ingredient_list : getIngredientGroup(ingredientIndex + 1)
-activate ingredient_list INGREDIENTLIST_COLOUR
+activate ingredient_list INGREDIENTLIST_COLOUR_S1
 return currentGroup
 
 ingredient_list -> ingredient_group : getIngredientGroupName()
@@ -48,7 +48,7 @@ return totalAmount
 alt totalAmount - 150.0 < 0.001
 
    ingredient_list -> ingredient_list : remove(currentGroup)
-   activate ingredient_list INGREDIENTLIST_COLOUR
+   activate ingredient_list INGREDIENTLIST_COLOUR_S1
    return
 
    ingredient_list -> storage : writeIngredientsToMemory
@@ -107,7 +107,7 @@ loop subtractAmount != 0.0
 end
 
 ingredient_list -> ingredient_list : removeLowAmountIngredientFromGroup(currentGroup)
-activate ingredient_list INGREDIENTLIST_COLOUR
+activate ingredient_list INGREDIENTLIST_COLOUR_S1
 return
 
 ingredient_list -> storage : writeIngredientsToMemory

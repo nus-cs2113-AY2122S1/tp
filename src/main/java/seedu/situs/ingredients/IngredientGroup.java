@@ -1,12 +1,9 @@
 package seedu.situs.ingredients;
 
 import seedu.situs.exceptions.SitusException;
-import seedu.situs.storage.Storage;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 
 //@@author ngoivanessa
@@ -22,7 +19,7 @@ import java.util.Comparator;
  */
 public class IngredientGroup {
 
-    private static final String INVALID_NUMBER = "Ingredient number does not exist!";
+    private static final String INVALID_NUMBER_MESSAGE = "Ingredient number does not exist!";
 
     protected ArrayList<Ingredient> ingredientGroup;
     private String groupName; //name of ingredient
@@ -83,7 +80,7 @@ public class IngredientGroup {
         try {
             return ingredientGroup.get(ingredientNumber - 1).toString();
         } catch (IndexOutOfBoundsException e) {
-            throw new SitusException(INVALID_NUMBER);
+            throw new SitusException(INVALID_NUMBER_MESSAGE);
         }
     }
 
@@ -158,19 +155,8 @@ public class IngredientGroup {
             this.totalAmount -= removedIngredient.getAmount();
             return removedIngredient;
         } catch (IndexOutOfBoundsException e) {
-            throw new SitusException(INVALID_NUMBER);
+            throw new SitusException(INVALID_NUMBER_MESSAGE);
         }
-    }
-
-    /**
-     * Sets the update ingredient to an indexed ingredient in the ingredient list.
-     *
-     * @param ingredientNumber The index of the ingredient to be updated
-     * @param ingredient       The update ingredient object
-     */
-    public void set(int ingredientNumber, Ingredient ingredient) {
-        ingredientGroup.set(ingredientNumber, ingredient);
-        ingredientGroup.sort(Comparator.comparing(Ingredient::getExpiry));
     }
 
     /**
@@ -182,20 +168,5 @@ public class IngredientGroup {
      */
     public Ingredient get(int ingredientNumber) throws IndexOutOfBoundsException {
         return ingredientGroup.get(ingredientNumber - 1);
-    }
-
-    /**
-     * Finds the ingredient index in the group by expiry date.
-     *
-     * @param expiryDate the expiration date of the ingredient
-     * @return the ingredient index by expiration date, -1 if not found
-     */
-    public int findIngredientIndexByExpiry(LocalDate expiryDate) {
-        for (int i = 0; i < ingredientGroup.size(); i++) {
-            if (ingredientGroup.get(i).getExpiry().compareTo(expiryDate) == 0) {
-                return i;
-            }
-        }
-        return -1;
     }
 }

@@ -69,8 +69,6 @@ public class Ingredient {
      * @return Date in string format (dd/mm/yyyy)
      */
     public static String dateToString(LocalDate date) {
-        /*Month month = date.getMonth();
-        return date.getDayOfMonth() + " " + month.toString() + " " + date.getYear();*/
         return date.format(dateFormat);
     }
 
