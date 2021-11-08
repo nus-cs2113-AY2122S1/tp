@@ -159,13 +159,6 @@ public class TextUi {
                 + " has been successfully set!"
                 + LS
                 + DIVIDER);
-
-        if (amount <= 0.00) {
-            System.out.println(WARNING_DIVIDER);
-            System.out.println("You may have entered a negative budget or entered $0.00!");
-            System.out.println("Please make the necessary edit before continuing!");
-            System.out.println(WARNING_DIVIDER);
-        }
     }
 
     public static void showBudgetEditedMessage(Budget newBudget) {
