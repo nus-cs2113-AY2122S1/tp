@@ -327,7 +327,7 @@ public class GoalList {
         try {
             goal = goalList.get(goalIndex);
         } catch (IndexOutOfBoundsException e) {
-            if (goalIndex > 0) {
+            if (goalIndex >= 0) {
                 throw new HaBitCommandException(ERROR_INVALID_GOAL_INDEX);
             } else {
                 throw new HaBitCommandException(ERROR_NON_POSITIVE_GOAL_INDEX);
