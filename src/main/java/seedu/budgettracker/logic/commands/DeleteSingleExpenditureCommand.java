@@ -1,7 +1,10 @@
 package seedu.budgettracker.logic.commands;
 
 import seedu.budgettracker.data.AllRecordList;
+import seedu.budgettracker.logic.commands.exceptions.CommandException;
 import seedu.budgettracker.ui.TextUi;
+
+import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_INDEX_OF_EXPENDITURE;
 
 public class DeleteSingleExpenditureCommand extends DeleteCommand {
 
@@ -18,7 +21,10 @@ public class DeleteSingleExpenditureCommand extends DeleteCommand {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws CommandException {
+        if (index <= 0 || index >= allRecordList.getExpenditureListSize(month)) {
+            throw new CommandException(MESSAGE_INVALID_INDEX_OF_EXPENDITURE);
+        }
         TextUi.showSingleExpenditureDeletedMessage(index + 1,
                 allRecordList.getExpenditure(index, month), allRecordList);
         allRecordList.deleteExpenditure(index + 1, month);

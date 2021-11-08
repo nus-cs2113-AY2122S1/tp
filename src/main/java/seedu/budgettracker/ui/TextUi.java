@@ -118,6 +118,13 @@ public class TextUi {
         spendingNotice(monthString, amount, totalMonthExpenditureSpending);
     }
 
+    private static void showExpenditureDetailsForDelete(Expenditure newExpenditure) {
+        System.out.println("Description: " + newExpenditure.getDescription()
+                + "\nAmount: $" + df.format(newExpenditure.getAmount())
+                + "\nDate: " + newExpenditure.getDateString()
+                + "\nCategory: " + newExpenditure.getCategoryString());
+    }
+
     private static void spendingNotice(String monthString, double amount, double totalMonthExpenditureSpending) {
         System.out.println("Total Amount Spent in "
                 + monthString
@@ -360,9 +367,9 @@ public class TextUi {
         }
     }
 
-    public static void showSingleExpenditureDeletedMessage(int index, Expenditure deleteExe, AllRecordList recordList) {
+    public static void showSingleExpenditureDeletedMessage(int index, Expenditure delExe, AllRecordList allRecordList) {
         System.out.println("Successfully deleted Expenditure " + index + ":");
-        showExpenditureDetails(deleteExe, recordList);
+        showExpenditureDetails(delExe, allRecordList);
         System.out.println(DIVIDER);
     }
 
@@ -382,9 +389,13 @@ public class TextUi {
         System.out.println(DIVIDER);
     }
 
-    public static void showMultipleExpenditureDeletedMessage(int index, Expenditure delExe, AllRecordList recordList) {
-        System.out.println("Successfully deleted Expenditure " + index + ":");
-        showExpenditureDetails(delExe, recordList);
+    public static void showMultiExpenditureDelMessage(int index1, int index2, Expenditure delExe, AllRecordList list) {
+        System.out.println("Successfully deleted Expenditure " + index1 + ":");
+        if (index1 != index2) {
+            showExpenditureDetailsForDelete(delExe);
+        } else {
+            showExpenditureDetails(delExe, list);
+        }
         System.out.println(DIVIDER);
     }
 

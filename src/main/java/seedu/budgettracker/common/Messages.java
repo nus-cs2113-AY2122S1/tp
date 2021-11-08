@@ -8,7 +8,10 @@ public class Messages {
     public static final String MESSAGE_INVALID_YEAR = "The date entered belongs to a year outside of your "
             + "current storage file. \n"
             + "Please use the \"year\" command to switch to the correct storage file before trying again.";
-    public static final String MESSAGE_INVALID_INDEX_OF_EXPENDITURE = "Index of expenditure entered is invalid\n%1$s";
+    public static final String MESSAGE_INVALID_INDEX_OF_EXPENDITURE = "Index of expenditure entered is invalid.\n"
+            + "please enter the index within the list range and without spaces.";
+    public static final String MESSAGE_INVALID_INDEX_OF_LOAN = "Index of loan entered is invalid.\n"
+            + "please enter the index within the list range and without spaces.";
     public static final String MESSAGE_INVALID_MONTH = "Month entered should be in the range of 1 to 12";
     public static final String MESSAGE_INVALID_MONTH_OF_BUDGET = "Month of budget entered is invalid\n%1$s";
     public static final String MESSAGE_INVALID_ADD_COMMAND = "Parameters of add command entered is invalid\n%1$s";
