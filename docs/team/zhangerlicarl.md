@@ -36,7 +36,7 @@ I helped update the user/developer docs and also checked the overall framework o
 
 I helped check and approve other member's PRs and also joined the discussion about the topic actively in our telegram group.
 
-###Contributions beyond the project team
+### Contributions beyond the project team
 
 I shared some resources about the project for other teams and also raised some possible solutions for them.
 
