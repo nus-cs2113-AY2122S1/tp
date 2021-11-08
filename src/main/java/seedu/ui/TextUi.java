@@ -55,6 +55,7 @@ public class TextUi {
     public static final String ERROR_INVALID_RESULT_COMMAND = "OOPS, it seems that your command is in wrong format. "
             + "The correct command format is =>"
             + " \n \"store\" <grade> \">\" <module_code> ";
+    public static final String ERROR_CANNOT_SU ="You cannot exercise S/U option for this module.";
 
     public static final String GRADED = "GRADED";
     public static final String UNGRADED = "UNGRADED";

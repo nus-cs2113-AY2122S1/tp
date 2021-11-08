@@ -21,6 +21,8 @@ import seedu.command.UpdateCommand;
 import seedu.command.flags.AddFlag;
 import seedu.command.flags.ClearFlag;
 import seedu.command.flags.SearchFlags;
+import seedu.exceptions.FetchException;
+import seedu.online.NusMods;
 import seedu.unimods.UniMods;
 import seedu.exceptions.UniModsException;
 import seedu.module.Module;
@@ -139,11 +141,7 @@ public class CommandParser {
             grade = split[0].trim().toUpperCase();
             gradeType = Module.checkGradeType(grade);
             moduleCode = split[1].trim().toUpperCase();
-            if (gradeType.equals("")) {
-                return new InvalidCommand();
-            } else {
-                return new StoreResultsCommand(grade, moduleCode, gradeType, isErrorThrown);
-            }
+            return new StoreResultsCommand(grade, moduleCode, gradeType, isErrorThrown);
         } catch (UniModsException e) {
             System.out.println(e.getMessage());
             return new InvalidCommand();

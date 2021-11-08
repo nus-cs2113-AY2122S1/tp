@@ -42,10 +42,16 @@ public class StoreResultsCommand extends Command {
             }
             module = NusMods.fetchModOnline(moduleCode);
             Profile currentProfile = UniMods.getProfileInUse();
+
             if (gradeType.equals(TextUi.GRADED)) {
                 GradedModule grModule = new GradedModule(module, grade);
                 currentProfile.getRecord().addModuleToRecord(grModule);
             } else if (gradeType.equals(TextUi.UNGRADED)) {
+                String SuOption = module.isSuPossible();
+                boolean isSUable = (SuOption.equals("No") || SuOption.equals("No data")) ? false : true;
+                if ((grade.equals("S") || grade.equals("U")) && !isSUable) {
+                    throw new UniModsException(TextUi.ERROR_CANNOT_SU);
+                }
                 UngradedModule ugModule = new UngradedModule(module, grade);
                 currentProfile.getRecord().addModuleToRecord(ugModule);
             } else {

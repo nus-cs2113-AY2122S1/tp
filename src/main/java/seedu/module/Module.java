@@ -97,6 +97,14 @@ public class Module extends BaseModule {
         return fullInfo;
     }
 
+    public String isSuPossible(){
+        String isSuable ="No data";
+        if (attributes != null) {
+            isSuable = attributes.isSUable();
+        }
+        return isSuable;
+    }
+
     /**
      * First checks if the module matches the level specified in searchFlags, and if it does, then checks if the
      * module code contains the searchTerm. These two conditions are classified as preliminary as they can be checked
