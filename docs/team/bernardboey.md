@@ -1,4 +1,4 @@
-# Bernard Boey - Project Portfolio Page
+# Bernard Boey Khai Chen - Project Portfolio Page
 
 ## Overview
 
