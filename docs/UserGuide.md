@@ -738,7 +738,7 @@ make a request to the API for every match. Hence, including some part of a modul
 will greatly increase search speed by cutting down the number of requests needed to be made. Other flags, such as the
 faculty, department and exams are checked against the mod information after the request and as such have little to no
 effect on how fast the search goes. The most common cause of a slow search is running `search`
-without any search term specified, which means that UNIMods has to make 12000+ requests to the API, one for each mod,
+without any search term specified, which means that UniMods has to make 12000+ requests to the API, one for each mod,
 and is very similar to just running `update`.
 
 <br>

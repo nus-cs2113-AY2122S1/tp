@@ -3,8 +3,8 @@
 ## UNIMods
 ![Unimods](./resources/UnimodsLogo.png)
 
-**UNIMods** is a light-weight Command Line Interface (CLI) Application that provides a means for students to plan for
-their academic journey in NUS. This guide details the implementation design and architecture that Unimods was built
+**UniMods** is a light-weight Command Line Interface (CLI) Application that provides a means for students to plan for
+their academic journey in NUS. This guide details the implementation design and architecture that UniMods was built
 upon.
 
 ## Contents
@@ -18,7 +18,6 @@ upon.
     * [Online component](#online-component)
     * [Timetable component](#timetable-component)
     * [Storage component](#storage-component)
-    * [Common classes](#common-classes)
 - [Implementation](#implementation)
     * [Fetching Module Data](#fetching-module-data)
       * [Parsing of weeks via Gson](#parsing-and-saving-of-weeks-via-gson)
@@ -66,9 +65,9 @@ Given below is a quick overview of main components and how they interact with ea
 <div style="page-break-after: always;"></div>
 
 #### Main components of the architecture
-**Unimods**
+**UniMods**
 
->  **Unimods** has one class called `UniMods`. It is responsible for
+>  **UniMods** has one class called `UniMods`. It is responsible for
 >  - At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 
 <br>
@@ -530,9 +529,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User searches for modules.
-2. UNIMods shows a list of modules matching the search terms.
+2. UniMods shows a list of modules matching the search terms.
 3. User requests to show a specific module in the list.
-4. UNIMods shows module information for that module. <br>
+4. UniMods shows module information for that module. <br>
 Use case ends.
 
 **Extensions**
@@ -549,7 +548,7 @@ Use case ends.
 
 **MSS**
 1. User runs update command.
-2. UNIMods updates local data.
+2. UniMods updates local data.
 
 **Extensions**
 * 1a. User is offline. <br>
@@ -563,12 +562,8 @@ Use case ends.
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to perform local search operations, even on 12000+ module jsons quickly.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be 
-able to accomplish most of the tasks faster using commands than using the mouse.
+3. Should be easily usable by someone who has not used CLI before.
 
 ### Glossary
 
 * **Mainstream OS:** Windows, *nix, MacOS
-* **S/U:** Ability to ignore the letter grade of a mod and not factor it into a CAP as long as a `C` grade or above is 
-obtained
-* **Clash:** When two different modules have a lessons that are in the same slot. 
