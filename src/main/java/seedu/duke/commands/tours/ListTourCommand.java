@@ -1,6 +1,5 @@
 package seedu.duke.commands.tours;
 
-
 import seedu.duke.commands.Command;
 
 /**

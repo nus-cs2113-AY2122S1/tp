@@ -17,43 +17,11 @@ public class FlightList {
             + "Please try another flight ID.";
 
     private final ArrayList<Flight> flights;
-    private ArrayList<String> flightIds;
-    private ArrayList<String> flightReturnDates;
-    private ArrayList<String> flightDepartureDates;
+    private final ArrayList<String> flightIds;
+    private final ArrayList<String> flightReturnDates;
+    private final ArrayList<String> flightDepartureDates;
     private ArrayList<String> iteratedFlightIds;
-    private int flightCount = 0;
-
-    /**
-     * Comparator for extension of Collections.sort() which does not include date-time sort functionality.
-     * Overrides compare method within the Comparator to compare between date-times.
-     *
-     * @see Comparator
-     */
-    private static final Comparator<String> dateTimeStringComparator = new Comparator<String>() {
-        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yy HH:mm");
-
-        @Override
-        public int compare(String dateTimeStringOne, String dateTimeStringTwo) {
-            LocalDateTime dateTimeOne = LocalDateTime.parse(dateTimeStringOne, formatter);
-            LocalDateTime dateTimeTwo = LocalDateTime.parse(dateTimeStringTwo, formatter);
-            if (dateTimeOne.isBefore(dateTimeTwo)) {
-                return -1;
-            } else if (dateTimeOne.isEqual(dateTimeTwo)) {
-                return 0;
-            } else {
-                return 1;
-            }
-        }
-    };
-
-    /**
-     * Getter for flight list.
-     *
-     * @return the list of flights
-     */
-    public ArrayList<Flight> getFlights() {
-        return flights;
-    }
+    private int flightCount;
 
     /**
      * Class constructor for FlightList.
@@ -67,32 +35,14 @@ public class FlightList {
     }
 
     /**
-     * Main method for adding a flight.
-     * Add all information of different fields into their respective ArrayLists.
+     * Getter for flight list.
      *
-     * @param flight the flight to be added
+     * @return the list of flights
      */
-    public void add(Flight flight) {
-        flights.add(flight);
-        flightIds.add(flight.getId());
-        flightReturnDates.add(flight.getReturnDate());
-        flightDepartureDates.add(flight.getDepartDate());
-        flightCount++;
+    public ArrayList<Flight> getFlights() {
+        return flights;
     }
 
-    /**
-     * Main method for cutting a flight.
-     * Removes all information of different fields from their respective ArrayLists.
-     *
-     * @param flight the flight to be added
-     */
-    public void cut(Flight flight) {
-        flights.remove(flight);
-        flightIds.remove(flight.getId());
-        flightReturnDates.remove(flight.getReturnDate());
-        flightDepartureDates.remove(flight.getDepartDate());
-        flightCount--;
-    }
 
     /**
      * Getter for number of flights in the flight list.
@@ -128,6 +78,29 @@ public class FlightList {
         }
         throw new TourPlannerException(FLIGHT_NOT_FOUND_MESSAGE);
     }
+
+    /**
+     * Comparator for extension of Collections.sort() which does not include date-time sort functionality.
+     * Overrides compare method within the Comparator to compare between date-times.
+     *
+     * @see Comparator
+     */
+    private static final Comparator<String> dateTimeStringComparator = new Comparator<>() {
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yy HH:mm");
+
+        @Override
+        public int compare(String dateTimeStringOne, String dateTimeStringTwo) {
+            LocalDateTime dateTimeOne = LocalDateTime.parse(dateTimeStringOne, formatter);
+            LocalDateTime dateTimeTwo = LocalDateTime.parse(dateTimeStringTwo, formatter);
+            if (dateTimeOne.isBefore(dateTimeTwo)) {
+                return -1;
+            } else if (dateTimeOne.isEqual(dateTimeTwo)) {
+                return 0;
+            } else {
+                return 1;
+            }
+        }
+    };
 
     /**
      * Getter for flight object in the flight list, corresponding to the flight return date given.
@@ -213,5 +186,33 @@ public class FlightList {
      */
     public void initTempArray() {
         iteratedFlightIds = new ArrayList<>();
+    }
+
+    /**
+     * Main method for adding a flight.
+     * Add all information of different fields into their respective ArrayLists.
+     *
+     * @param flight the flight to be added
+     */
+    public void add(Flight flight) {
+        flights.add(flight);
+        flightIds.add(flight.getId());
+        flightReturnDates.add(flight.getReturnDate());
+        flightDepartureDates.add(flight.getDepartDate());
+        flightCount++;
+    }
+
+    /**
+     * Main method for cutting a flight.
+     * Removes all information of different fields from their respective ArrayLists.
+     *
+     * @param flight the flight to be added
+     */
+    public void cut(Flight flight) {
+        flights.remove(flight);
+        flightIds.remove(flight.getId());
+        flightReturnDates.remove(flight.getReturnDate());
+        flightDepartureDates.remove(flight.getDepartDate());
+        flightCount--;
     }
 }

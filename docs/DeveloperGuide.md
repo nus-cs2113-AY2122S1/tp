@@ -184,12 +184,14 @@ Here's a (partial) class diagram of Command component:
 
 ![Command class (2)](https://user-images.githubusercontent.com/70316271/140637570-e6a9f453-ea88-46a8-8f3c-e1913e7e938d.png)
 
-Note: `XYZ` in this diagram is a placeholder for the specific data type (e.g. `Client`, `Flight`, `Tour`, `ClientPackage`).
-A similar workflow applies for these classes depending on the availability of the command for the specific data type.
+Note: `XYZ` in this diagram is a placeholder for the specific data type (e.g. `Client`, `Flight`, `Tour`
+, `ClientPackage`). A similar workflow applies for these classes depending on the availability of the command for the
+specific data type.
 
 How the `Command` works:
 
-**Step 1.** Based on the user input, `Parser` returns one of the subclasses of `Command` to `TourPlanner` *(main class)*.
+**Step 1.** Based on the user input, `Parser` returns one of the subclasses of `Command` to `TourPlanner` *(main class)*
+.
 
 **Step 2.** `TourPlanner` calls `Command.execute()`.
 
@@ -256,8 +258,8 @@ finds the `ClientPackage` based on the `CLIENT_PACKAGE_ID` "p001".
 
 **Step 3.** If the `CLIENT_PACKAGE_ID` "t001" already exists, an error message is returned.
 
-**Step 4.** Else, the `CLIENT_PACKAGE_ID` "p001" does not exist, `execute()` calls `add` in `ClientPackageList`, to
-add the specific tour and its arguments into the `ClientPackageList`.
+**Step 4.** Else, the `CLIENT_PACKAGE_ID` "p001" does not exist, `execute()` calls `add` in `ClientPackageList`, to add
+the specific tour and its arguments into the `ClientPackageList`.
 
 **Step 5.** `execute()` calls `showAdd` in `Ui`, which prints out the Object, `CLIENTPACKAGE` that was added.
 
@@ -548,7 +550,6 @@ Here is a (partial) sequence diagram of the above user input:
 
 ![SortClientCommand](https://user-images.githubusercontent.com/70316271/140637939-1ff5b961-31fa-4afa-b834-316066362ffd.png)
 
-
 **Step 1**: After adding a few clients to the database, user inputs `sort -c /id`. This command is passed to `parse()`
 method in the `Parser` class.
 
@@ -602,13 +603,19 @@ The diagram below shows the class diagram of the Ui component, in relation with 
 **API: `ClientPackageStorage.java` `ClientStorage.java` `FlightStorage.java` `TourStorage.java`**
 
 The Storage component consists of:
+
 1. ClientPackageStorage.java: Reading and saving files which record all clientpackages.
 2. ClientStorage.java: Reading and saving files which record all clients.
 3. FlightStorage.java: Reading and saving files which record all flights.
 4. TourStorage.java: Reading and saving files which record all tours.
 
 To add on Storage component is designed to access only the following folder:
+
 1. `data/`
+
+Shown below is the class diagram for TourPlanner's Storage Component:
+
+![Storage](https://user-images.githubusercontent.com/62021897/140651207-73bd0de8-cb0b-469f-9cdd-c9bbc26b8efc.png)
 
 <br>
 

@@ -328,7 +328,7 @@ public class Ui {
     /**
      * Ui response to sort tour by name.
      *
-     * @param tours            the current list of tours in the database
+     * @param tours           the current list of tours in the database
      * @param sortedTourNames the list of sorted tour names (by alphabetical order)
      * @throws TourPlannerException if there is no tours that can be found given the tour name
      */
@@ -456,6 +456,7 @@ public class Ui {
         show("Total Flights: " + count);
     }
 
+<<<<<<< HEAD
     /**
      * Ui response to FindFlightCommand.
      * Shows specific flight based on an ID, as well as the passengers for said flight.
@@ -465,6 +466,10 @@ public class Ui {
      * @param id the ID used to find the specific flight.
      */
     public void showFindFlight(FlightList flights, ClientPackageList clientPackages, String id)
+=======
+
+    public void showFindFlight(FlightList flights, ClientPackageList clientPackages, String code)
+>>>>>>> 66a087701821e87dc5425f35bb0fa7fb3fb50967
             throws TourPlannerException {
         Flight foundFlight = flights.getFlightById(id);
         if (foundFlight != null) {
@@ -516,6 +521,9 @@ public class Ui {
         showLine();
     }
 
+    /**
+     * Shows error message for corrupted storage file.
+     */
     public void showFileError() {
         showLine();
         show(FILE_CORRUPT);

@@ -15,10 +15,10 @@ public class ClientList {
             + "Please try another client ID";
 
     private final ArrayList<Client> clients;
-    private ArrayList<String> clientIds;
-    private ArrayList<String> clientNames;
+    private final ArrayList<String> clientIds;
+    private final ArrayList<String> clientNames;
     private ArrayList<String> iteratedClientIds;
-    private int clientCount = 0;
+    private int clientCount;
 
     /**
      * Class constructor for ClientList.
@@ -122,7 +122,7 @@ public class ClientList {
      * temporary array to prevent duplicates.
      */
     public void initTempArray() {
-        iteratedClientIds = new ArrayList<String>();
+        iteratedClientIds = new ArrayList<>();
     }
 
     /**
@@ -139,6 +139,8 @@ public class ClientList {
 
     /**
      * Main method for deleting a client.
+     *
+     * @param client the client-to-be-deleted
      */
     public void cut(Client client) {
         clientIds.remove(client.getId());

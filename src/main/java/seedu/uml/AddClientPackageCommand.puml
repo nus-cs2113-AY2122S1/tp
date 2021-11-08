@@ -1,0 +1,49 @@
+@startuml
+
+participant ":Parser" as Parser
+participant ":AddClientPackageCommand" as APC
+participant ":ClientPackageList" as ClientPackageList
+participant ":Ui" as Ui
+
+-> Parser : parse("add -p p001 ARGS")
+activate Parser
+    Parser -> Parser: parseAdd("-p p001 ARGS")
+    activate Parser
+    create APC
+    Parser -> APC : new AddClientPackageCommand
+    activate APC
+    APC --> Parser : AddClientPackageCommand
+    deactivate APC
+    Parser --> Parser: AddClientPackageCommand
+    deactivate Parser
+    <-- Parser: AddClientPackageCommand
+deactivate Parser
+
+-> APC : execute()
+    activate APC
+
+
+    alt#Gold #LightBlue if added package is unique and has unique fields
+
+        APC -> APC: createClientPackage()
+        activate APC
+        APC --> APC: clientPackage: package of extracted Objects from ID
+        deactivate APC
+
+        APC -> ClientPackageList: add(clientPackage)
+        activate ClientPackageList
+        APC <-- ClientPackageList:
+        deactivate ClientPackageList
+        APC -> Ui : showAdd(ClientPackage clientPackage)
+        activate Ui
+        APC <-- Ui : add clientPackage Ui display
+        deactivate Ui
+        <-- APC: add clientPackage Ui display
+
+   else #Pink if added package ID already exists or has duplicated fields
+        <-- APC : ERROR message
+
+        deactivate APC
+        destroy APC
+    end
+@enduml

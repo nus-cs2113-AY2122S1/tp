@@ -10,7 +10,7 @@ activate Parser
     Parser -> Parser: parseAdd("-t t001 ARGS")
     activate Parser
     create ATC
-    Parser -> ATC : new AddTourCommand()
+    Parser -> ATC : new AddTourCommand
     activate ATC
     ATC --> Parser : AddTourCommand
     deactivate ATC
@@ -21,12 +21,9 @@ deactivate Parser
 
 -> ATC : execute()
     activate ATC
-        ATC -> TourList : getTourById("t001")
-        activate TourList
-        ATC <--TourList : Tour "t001" exists/does not exist
-        deactivate TourList
 
-    alt#Gold #LightBlue if tour does not exist in TourList
+
+    alt#Gold #LightBlue if added tour is unique and has unique fields
 
         ATC -> TourList: add(Tour tour)
         activate TourList
@@ -34,13 +31,14 @@ deactivate Parser
         deactivate TourList
         ATC -> Ui : showAdd(Tour tour)
         activate Ui
-        ATC <-- Ui : add message
+        ATC <-- Ui : add tour Ui display
         deactivate Ui
-        <-- ATC : add message
-        destroy ATC
-        deactivate ATC
+        <-- ATC: add tour Ui display
 
-    destroy ATC
-    deactivate ATC
+   else #Pink if added tour ID already exists or has duplicated fields
+        <-- ATC : ERROR message
+
+        deactivate ATC
+        destroy ATC
     end
 @enduml

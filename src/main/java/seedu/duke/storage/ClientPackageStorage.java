@@ -1,4 +1,4 @@
-//@@author Demonshaha
+
 
 package seedu.duke.storage;
 
@@ -20,6 +20,11 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//@@author Demonshaha
+
+/**
+ * Storage class for all ClientPackages. Creates and loads up the ClientPackageList.
+ */
 public class ClientPackageStorage {
     public static final String EMPTY_STRING = "";
     private final ClientPackageList clientPackages = new ClientPackageList();

@@ -124,20 +124,20 @@ public class Parser {
         String params = commandAndParams[PARAMS_INDEX];
 
         switch (command) {
-        case "bye":
-            return parseBye(params);
         case "add":
             return parseAdd(params);
+        case "bye":
+            return parseBye(params);
         case "cut":
             return parseCut(params);
-        case "list":
-            return parseList(params);
         case "find":
             return parseFind(params);
-        case "sort":
-            return parseSort(params);
         case "help":
             return parseHelp(params);
+        case "list":
+            return parseList(params);
+        case "sort":
+            return parseSort(params);
         default:
             throw new TourPlannerException(ERROR_INVALID_INPUT);
         }
@@ -620,25 +620,16 @@ public class Parser {
     }
 
     /**
-     * Parses the parameters given to determine which ListXYZCommand to be called for.
+     * Parses arguments with respect to the bye command.
      *
      * @param params full user's argument string
-     * @throws TourPlannerException if there are missing fields, duplicated or missing prefixes
-     * @returns a ListXYZCommand of a specific data type (client, tour, flight, client package)
+     * @return ByeCommand object
      */
-    private static Command parseList(String params) throws TourPlannerException {
-        switch (params) {
-        case CLIENT_IDENTIFIER:
-            return new ListClientCommand();
-        case TOUR_IDENTIFIER:
-            return new ListTourCommand();
-        case FLIGHT_IDENTIFIER:
-            return new ListFlightCommand();
-        case PACKAGE_IDENTIFIER:
-            return new ListClientPackageCommand();
-        default:
-            throw new TourPlannerException(ERROR_MISSING_IDENTIFIER);
+    private static Command parseBye(String params) {
+        if (!params.equals(EMPTY_STRING)) {
+            System.out.println(WARNING_EXTRA_INPUT);
         }
+        return new ByeCommand();
     }
 
     /**
@@ -682,8 +673,8 @@ public class Parser {
      * Parses the parameters given to determine which FindXYZCommand to be called for.
      *
      * @param params full user's argument string
+     * @return a FindXYZCommand of a specific data type (client, tour, flight, client package)
      * @throws TourPlannerException if there are missing fields, duplicated or missing prefixes
-     * @returns a FindXYZCommand of a specific data type (client, tour, flight, client package)
      */
     private static Command parseFind(String params) throws TourPlannerException {
         String[] prefixSuffix = params.split(" ", 2);
@@ -699,6 +690,41 @@ public class Parser {
             return new FindTourCommand(suffix);
         case FLIGHT_IDENTIFIER:
             return new FindFlightCommand(suffix);
+        default:
+            throw new TourPlannerException(ERROR_MISSING_IDENTIFIER);
+        }
+    }
+
+    /**
+     * Parses arguments with respect to the help command.
+     *
+     * @param params full user's argument string
+     * @return HelpCommand object
+     */
+    private static Command parseHelp(String params) {
+        if (!params.equals(EMPTY_STRING)) {
+            System.out.println(WARNING_EXTRA_INPUT);
+        }
+        return new HelpCommand();
+    }
+
+    /**
+     * Parses the parameters given to determine which ListXYZCommand to be called for.
+     *
+     * @param params full user's argument string
+     * @return a ListXYZCommand of a specific data type (client, tour, flight, client package)
+     * @throws TourPlannerException if there are missing fields, duplicated or missing prefixes
+     */
+    private static Command parseList(String params) throws TourPlannerException {
+        switch (params) {
+        case CLIENT_IDENTIFIER:
+            return new ListClientCommand();
+        case TOUR_IDENTIFIER:
+            return new ListTourCommand();
+        case FLIGHT_IDENTIFIER:
+            return new ListFlightCommand();
+        case PACKAGE_IDENTIFIER:
+            return new ListClientPackageCommand();
         default:
             throw new TourPlannerException(ERROR_MISSING_IDENTIFIER);
         }
@@ -725,32 +751,6 @@ public class Parser {
         default:
             throw new TourPlannerException(ERROR_MISSING_IDENTIFIER);
         }
-    }
-
-    /**
-     * Parses arguments with respect to the help command.
-     *
-     * @param params full user's argument string
-     * @return HelpCommand object
-     */
-    private static Command parseHelp(String params) {
-        if (!params.equals(EMPTY_STRING)) {
-            System.out.println(WARNING_EXTRA_INPUT);
-        }
-        return new HelpCommand();
-    }
-
-    /**
-     * Parses arguments with respect to the bye command.
-     *
-     * @param params full user's argument string
-     * @return ByeCommand object
-     */
-    private static Command parseBye(String params) {
-        if (!params.equals(EMPTY_STRING)) {
-            System.out.println(WARNING_EXTRA_INPUT);
-        }
-        return new ByeCommand();
     }
 }
 

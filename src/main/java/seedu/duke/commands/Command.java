@@ -1,6 +1,5 @@
 package seedu.duke.commands;
 
-import seedu.duke.TourPlannerException;
 import seedu.duke.Ui;
 import seedu.duke.data.ClientList;
 import seedu.duke.data.ClientPackageList;
@@ -26,11 +25,11 @@ public abstract class Command {
      * Setter for ClientList, FlightList, TourList, ClientPackageList and Ui
      * for subclasses of Command to access when executing their command.
      *
-     * @param clients list of all clients
-     * @param flights list of all flights
-     * @param tours list of all tours
+     * @param clients        list of all clients
+     * @param flights        list of all flights
+     * @param tours          list of all tours
      * @param clientPackages list of all client packages
-     * @param ui user interface in charge of reading user input and showing messages to user
+     * @param ui             user interface in charge of reading user input and showing messages to user
      */
     public void setData(ClientList clients, FlightList flights, TourList tours,
                         ClientPackageList clientPackages, Ui ui) {
