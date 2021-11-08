@@ -1039,26 +1039,65 @@ For the positive test cases, just simply follow the UserGuide in the sequence fr
 
 Here are the negative test cases you can test:
 
-* Module-related commands:
-  * Invalid module commands:
-    * `module`
-    * `module a`
-    * `cap`
-  * Invalid add module commands:
-    * `module add`
-    * `module add n/Software Engineering c/CS2113T`
-  * Invalid delete module commands:
-    * `module delete one`
-    * `module delete -1`
-    * `module delete [INDEX_OUT_OF_BOUND]`
-  * Invalid CAP info:
-    * Provide the current CAP which is not a real number
-    * Provide the current CAP which is not in the range [0.0 - 5.5]
-    * Provide the total MC taken which is not a positive integer
-* Calendar-related commands:
+* **Invalid general commands:**
+   * Empty command: ` `
+   * Not supported command: `avengers assemble`
+   
+* **Invalid Module-related commands:**
+   * Invalid module commands:
+      * Missing module command type: `module`
+      * Wrong module command type: `module a`
+      * Missing cap command type: `cap`
+   * Invalid add module commands:
+      * Missing command arguments: `module add`
+      * Invalid order arguments: `module add n/Software Engineering c/CS2113T`
+      * Missing module code: `module add c/ n/Software Engineering`
+      * Invalid modular credit: `module add c/CS2113 n/Software Engineering m/four`
+      * Invalid expected grade: `module add c/CS2113 n/Software Engineering m/4 e/J`
+   * Invalid delete module commands:
+      * Invalid number format: `module delete one`
+      * Invalid module index: `module delete -1`
+      * Invalid module index: `module delete [INDEX_OUT_OF_BOUND]`
+   * Invalid CAP information:
+      * Provide the current CAP which is not a real number (e.g. `four`)
+      * Provide the current CAP which is not in the range [0.0 - 5.0] (e.g. `6`)
+      * Provide the total MC taken which is not a positive integer (e.g. `4.5`)
+
+* **Invalid Zoom-related commands:**
+   * Invalid zoom commands:
+      * Missing zoom suffix: `zoom`
+      * Wrong zoom suffix: `zoom a`
+   * Invalid add zoom commands:
+      * Wrong module: `zoom add a`
+      * Invalid link format: `zoom add CS2113T www.google.com`
+   * Invalid open module commands:
+      * Missing arguments: `zoom open`
+      * Invalid module: `zoom open a`
+
+* **Invalid Food-related commands:**
+   * Wrong divider order : dividers in wrong sequence
+   * Invalid food command type : `food`
+   * Wrong food command type : `food a`
+   * Invalid number format : expected number, input anything else
+   * Missing parameters : include divider, no parameters
+
+   * Invalid `food radd` commands:
+      * Invalid index : `store_index` <= 0, `item_index` <= 0
+      * Index not found : when either index is not found from reference list
+
+   * Invalid `food delete` commands:
+      * Invalid index : when index is not found in list
+
+   * Invalid `food find` commands:
+      * Invalid date entered : when format of `dd-mm-yyyy` is not adhered to
+
+   * Invalid `food view` commands:
+      * Invalid index : `store_index` not found in reference list
+
+* **Invalid Calendar-related commands:**
    * Invalid display commands:
       * `calendar display`
-      * `calendar display 22-2021` (note that this command will show a warning and then display calendar for current 
+      * `calendar display 22-2021` (note that this command will show a warning and then display calendar for current
         month)
    * Invalid add task commands:
       * `calendar todo n/abc`
@@ -1071,11 +1110,12 @@ Here are the negative test cases you can test:
       * `calendar lecture m/CS2113T s/ e/10-10-2021`
       * `calendar lecture m/CS2113T s/10-10-2021 e/`
       * `calendar lecture m/CS2113T s/10-10-2021 e/09-10-2021` (end date before start date)
-  * Invalid delete task commands:
-     * `calendar delete`
-     * `calendar delete task`
-     * `calendar delete task -1`
-* Journal related commands:
+   * Invalid delete task commands:
+      * `calendar delete`
+      * `calendar delete task`
+      * `calendar delete task -1`
+
+* **Invalid Journal-related commands:**
    * Invalid add notebook commands:
       * `journal notebook`
       * `journal notebook cs`
