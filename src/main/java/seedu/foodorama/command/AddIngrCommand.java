@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 public class AddIngrCommand extends Command {
     private static Logger LOGGER = Logger.getLogger("AddIngrCommand.execute()");
     private static final Ui UI = new Ui();
+    private static final int INDEX_ZERO = 0;
 
     AddIngrCommand() {
         LoggerManager.setupLogger(LOGGER);
@@ -42,9 +43,10 @@ public class AddIngrCommand extends Command {
         if (ingredient.isBlank()) {
             LOGGER.log(Level.INFO, "Ingredient Name is Empty");
             throw new FoodoramaException(UI.getIngrNameMissingMsg());
+        // If can find ingredient (value is not negative), ingredient already exists
         } else if (IngredientList.find(ingredient) >= 0) {
             LOGGER.log(Level.INFO, "Ingredient already exists", ingredient);
-            throw new FoodoramaException(UI.getIngrExistsMsg(parameters.get(0)));
+            throw new FoodoramaException(UI.getIngrExistsMsg(parameters.get(INDEX_ZERO)));
         } else if (isNumber(ingredient)) {
             LOGGER.log(Level.INFO, "Parameter is Integer ", ingredient);
             throw new FoodoramaException(UI.getInvalidIngredientName());

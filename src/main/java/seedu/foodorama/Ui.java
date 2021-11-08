@@ -394,6 +394,13 @@ public class Ui {
             + "Please enter the link command in the format 'link [DISH_NAME] / [INGR_NAME]'." + System.lineSeparator()
             + LINE_DIVIDER;
 
+    private static final int INDEX_OFFSET = 1;
+    private static final int STARTING_CHAR_OFFSET = 65;
+    private static final int INCREMENTED_STARTING_CHAR_OFFSET = 64;
+    private static final int SCALING_OFFSET = 10;
+    private static final int ROW_OFFSET = 1;
+    private static final int COLUMN_MULTIPLIER = 2;
+
     public void printLogo() {
         System.out.println(START_LOGO);
     }
@@ -460,7 +467,7 @@ public class Ui {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "Here are the dishes you have:");
         for (int i = 0; i < dishList.size(); i++) {
-            System.out.println((i + 1) + ". " + dishList.get(i));
+            System.out.println((i + INDEX_OFFSET) + ". " + dishList.get(i));
         }
         if (dishList.size() == 0) {
             System.out.println("Sorry, there are no Dishes recorded!");
@@ -483,7 +490,7 @@ public class Ui {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "Here are the ingredients you have: ");
         for (int i = 0; i < ingredientList.size(); i++) {
-            System.out.println((i + 1) + ". " + ingredientList.get(i));
+            System.out.println((i + INDEX_OFFSET) + ". " + ingredientList.get(i));
         }
         if (ingredientList.size() == 0) {
             System.out.println("Sorry, there are no Ingredients recorded!");
@@ -764,7 +771,6 @@ public class Ui {
         }
     }
 
-
     /**
      * Prints the X axis for the graph.
      *
@@ -775,7 +781,7 @@ public class Ui {
         if (j % 2 == 0) {
             System.out.print("   ");
         } else {
-            System.out.print(" " + (char) (j / 2 + 65) + " ");
+            System.out.print(" " + (char) (j / 2 + STARTING_CHAR_OFFSET) + " ");
         }
     }
 
@@ -793,12 +799,12 @@ public class Ui {
         double fractionalPart = length - integralPart;
         if (j % 2 == 0) {
             System.out.print("   "); //Every other column is blank
-        } else if (i >= graphPortions - 1 - integralPart) {
-            if (i == graphPortions - 1 - integralPart) {
+        } else if (i >= graphPortions - INDEX_OFFSET - integralPart) {
+            if (i == graphPortions - INDEX_OFFSET - integralPart) {
                 if (fractionalPart == 0) {
                     System.out.print("   ");
                 } else {
-                    System.out.print("[" + (int) (fractionalPart * 10) + "]");
+                    System.out.print("[" + (int) (fractionalPart * SCALING_OFFSET) + "]");
                 }
             } else {
                 System.out.print("[|]");
@@ -828,9 +834,9 @@ public class Ui {
             //2d visualization
             //Nested for 2n columns, 10 rows (n rows but only 10 will be for graph rest for legend)
             int listSize = dishList.size();
-            int rows = (listSize > graphPortions) ? listSize + 1 : graphPortions + 1;
+            int rows = (listSize > graphPortions) ? listSize + ROW_OFFSET : graphPortions + ROW_OFFSET;
             for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < listSize * 2; j++) {
+                for (int j = 0; j < listSize * COLUMN_MULTIPLIER; j++) {
                     printGraph(graphPortions, lengths, i, j);
                 }
                 if (i <= listSize) {
@@ -857,10 +863,11 @@ public class Ui {
     private void printDishLegend(ArrayList<Dish> dishList, int i) {
         if (i == 0) {
             System.out.print("     Legend:         ");
-            System.out.print("     Scale: 1 unit [|] = " + DishList.getGreatestWaste() / 10 + "kg");
+            System.out.print("     Scale: 1 unit [|] = " + DishList.getGreatestWaste() / SCALING_OFFSET + "kg");
         } else {
-            System.out.print("     " + (char) (i + 64) + ". " + dishList.get(i - 1).getDishName()
-                    + ": " + dishList.get(i - 1).getWastage() + "kg");
+            System.out.print("     " + (char) (i + INCREMENTED_STARTING_CHAR_OFFSET) + ". "
+                    + dishList.get(i - INDEX_OFFSET).getDishName()
+                    + ": " + dishList.get(i - INDEX_OFFSET).getWastage() + "kg");
         }
         System.out.print(System.lineSeparator());
     }
@@ -885,9 +892,9 @@ public class Ui {
             //2d visualization
             //Nested for 2n columns, 10 rows (n rows but only 10 will be for graph rest for legend)
             int listSize = ingredientList.size();
-            int rows = (listSize > graphPortions) ? listSize + 1 : graphPortions + 1;
+            int rows = (listSize > graphPortions) ? listSize + ROW_OFFSET : graphPortions + ROW_OFFSET;
             for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < listSize * 2; j++) {
+                for (int j = 0; j < listSize * COLUMN_MULTIPLIER; j++) {
                     printGraph(graphPortions, lengths, i, j);
                 }
                 if (i <= listSize) {
@@ -915,10 +922,11 @@ public class Ui {
         //Scale on first line
         if (i == 0) {
             System.out.print("     Legend:         ");
-            System.out.print("     Scale: 1 unit = " + IngredientList.getGreatestWaste() / 10 + "kg");
+            System.out.print("     Scale: 1 unit = " + IngredientList.getGreatestWaste() / SCALING_OFFSET + "kg");
         } else {
-            System.out.print("     " + (char) (i + 64) + ". " + ingredientList.get(i - 1).getIngredientName()
-                    + ": " + ingredientList.get(i - 1).getWastage() + "kg");
+            System.out.print("     " + (char) (i + INCREMENTED_STARTING_CHAR_OFFSET) + ". "
+                    + ingredientList.get(i - INDEX_OFFSET).getIngredientName()
+                    + ": " + ingredientList.get(i - INDEX_OFFSET).getWastage() + "kg");
         }
         System.out.print(System.lineSeparator());
     }
@@ -935,12 +943,11 @@ public class Ui {
             int dishListIndex;
             for (Dish element : matchedDishList) {
                 dishListIndex = DishList.dishList.indexOf(element);
-                System.out.println(dishListIndex + 1 + ". " + element.toString());
+                System.out.println(dishListIndex + INDEX_OFFSET + ". " + element.toString());
             }
         }
         System.out.println(LINE_DIVIDER);
     }
-
 
     /**
      * Prints the list of ingredients that match the KEYWORD input by the user in the find command.
@@ -960,7 +967,7 @@ public class Ui {
             int ingrListIndex;
             for (Ingredient element : matchedIngrList) {
                 ingrListIndex = IngredientList.ingredientList.indexOf(element);
-                System.out.println(ingrListIndex + 1 + ". " + element.toString());
+                System.out.println(ingrListIndex + INDEX_OFFSET + ". " + element.toString());
             }
         }
         System.out.println(LINE_DIVIDER);
@@ -1161,7 +1168,6 @@ public class Ui {
                 + "Please type 'y'/'yes' to confirm, or 'n'/'no' to disregard:" + System.lineSeparator()
                 + System.lineSeparator() + LINE_DIVIDER);
     }
-
 
     public String getBlankName(String type) {
         return LINE_DIVIDER + System.lineSeparator()

@@ -12,14 +12,15 @@ import java.util.Scanner;
  * @author Dniv-ra, renzocanare, Rakesh12000, jhsee5
  */
 public class DishList {
-    public static final String YES_NO_REGEX = "^(y|yes|n|no)$";
+    private static final String YES_NO_REGEX = "^(y|yes|n|no)$";
     public static ArrayList<Dish> dishList = new ArrayList<>();
-    public static Ui UI = new Ui();
+    private static final Ui UI = new Ui();
     private static final String YES = "y";
     private static final String NO = "n";
     private static final int LOOP = 0;
     private static final int EXIT = 1;
     private static final int WEIGHT_SOFT_LIMIT = 1000;
+    private static final int SIZE_OFFSET = 1;
 
     /**
      * Adds a dish with dishName to the dish list.
@@ -28,6 +29,7 @@ public class DishList {
      * @author Dniv-ra
      */
     public static void add(String dishName) {
+        // if dishName does not exist in DishList
         if (DishList.find(dishName) == -1) {
             assert DishList.find(dishName) < 0;
             Dish dishToAdd = new Dish(dishName);
@@ -46,6 +48,7 @@ public class DishList {
      * @author Dniv-ra
      */
     public static double getGreatestWaste() {
+        // initialize greatest to zero
         double greatest = 0;
         for (Dish dish : dishList) {
             double currWaste = dish.getWastage();
@@ -115,7 +118,7 @@ public class DishList {
         if (confirmDel.startsWith(YES)) {
             dishList.remove(dishIndex);
             UI.printDishNameRemoved(dishName);
-            assert (dishList.size() == (listSize - 1)) : "dishList should be of size N-1";
+            assert (dishList.size() == (listSize - SIZE_OFFSET)) : "dishList should be of size N-1";
         } else {
             UI.printDisregardMsg();
         }
@@ -161,7 +164,7 @@ public class DishList {
 
         Scanner input = new Scanner(System.in);
         String newName = input.nextLine().toLowerCase();
-        while (isNumber(newName) | isDouble(newName)) {
+        while (isNumber(newName) || isDouble(newName)) {
             UI.clearTerminalAndPrintNewPage();
             UI.printInvalidDishName();
             newName = input.nextLine().toLowerCase();
@@ -197,8 +200,10 @@ public class DishList {
      * @author renzocanare
      */
     public static void editWastage(int dishIndex) throws FoodoramaException {
+        // if dishIndex cannot be found
         if (dishIndex == -1) {
             throw new FoodoramaException(UI.getDishNotExistEdit());
+        // if dishIndex is out of bounds
         } else if (dishIndex < 0 || dishIndex >= DishList.dishList.size()) {
             throw new FoodoramaException(UI.getDishIndexExceedSizeMsg());
         } else {
@@ -223,7 +228,7 @@ public class DishList {
                     newWeight = in.nextLine();
                     inputWastage = Double.parseDouble(newWeight);
                 }
-                if (Double.isInfinite(inputWastage) | Double.isNaN(inputWastage)) {
+                if (Double.isInfinite(inputWastage) || Double.isNaN(inputWastage)) {
                     throw new FoodoramaException(UI.printNumericalInputInvalid("dish waste"));
                 } else if (inputWastage > WEIGHT_SOFT_LIMIT) {
                     UI.clearTerminalAndPrintNewPage();
