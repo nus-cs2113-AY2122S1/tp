@@ -629,23 +629,21 @@ Please assign more members to these tasks:
 ## 7. Saving the Data
 **SLAM** data is saved in the hard disk automatically after you exit the program. There is no need to save manually.
 
+> 🚨 WARNING: Do not edit this save file! It might cause the save data to be corrupt and cause errors when starting **SLAM** again.
+
 [Back to table of contents](#table-of-contents)
+
+---
 
 ## 8. FAQ
 
 >**Q**: How do I transfer my data to another computer? 
 >
->**A**: You can transfer your data to another computer by copying the `data` folder found in the directory where SLAM was used, and pasting it in the directory of the device where **SLAM** is intended to be run.
-
->**Q**: Can I delete all members from my current roster using `delete all`? 
-> 
->**A**: The current verson of **SLAM** (2.0) does not allow for this. We are working on this on a future update for v2.1.
-
->**Q**: Will deleting a member from my roster remove that member from all tasks he/she is assigned to? 
->
->**A**: SLAM 2.0 does not support this functionality and we are working on a fix for this for our v2.1 update. Hang on tight in the meanwhile and ensure your members produce work for you before kicking them out! 😉
+>**A**: You can transfer your data to another computer by copying the `data` folder found in the directory where **SLAM** was used, and pasting it in the directory of the device where **SLAM** is intended to be run.
 
 [Back to table of contents](#table-of-contents)
+
+---
 
 ## 9. Command Summary
 
@@ -656,6 +654,7 @@ Please assign more members to these tasks:
 | Display user manual       | `help`                                              |
 | List events/members/tasks | For events: `list`<br />For tasks: `list EVENT_INDEX -t`<br />For members: `list -m`<br />For members assigned to a task: `list EVENT_INDEX t/TASK_INDEX`|
 | Exit program              | `bye`                                               |
+| 
 
 ### Event commands
 
@@ -668,6 +667,8 @@ Please assign more members to these tasks:
 | Find event(s)         | `find EVENT_KEYWORD(S)`                             |
 | Mark event as done    | `done -e INDEX`                                     | 
 | Un-mark event as done | `undo -e INDEX`                                     |
+| Update an event       | `update INDEX`                                      |
+| Next event            | `next -e`                                           |
 
 ### Task commands
 
@@ -678,12 +679,14 @@ Please assign more members to these tasks:
 | Select a task         | `select -t INDEX`             |
 | Mark a task as done   | `done -t INDEX`               |
 | Un-mark a task as done| `undo -t INDEX`               |
+| Next task             | `next -t`                     |
 
 ### Member commands
 
 | **Command**     | **Format**              |
 |-----------------|-------------------------|
-| Add a member    | `add -m MEMBER_NAME`    | 
-| Delete a member | `delete -m MEMBER_NAME` |
+| Add a member    | `add -m MEMBER NAME`    | 
+| Delete a member | `delete -m MEMBER NAME` |
+| Select a member | `select -m MEMBER NAME` | 
 
 [Back to table of contents](#table-of-contents)
