@@ -385,4 +385,17 @@ public class Ui {
     public static void printLoadSuccesfulMessage() {
         System.out.println("...File loading process complete!\n" + getLineBreak());
     }
+
+    public static void printDashboardCalendar() {
+        if (Duke.eventCatalog.size() <= 0) {
+            printMonth(LocalDateTime.now());
+            System.out.println("You have no Upcoming Events");
+            printLineBreak();
+        } else {
+            printMonth(LocalDateTime.now());
+            System.out.println("You're next Event " + Duke.eventCatalog.get(0).getTitle() + " is on "
+                    + Duke.eventCatalog.get(0).getStringDateTime());
+            printLineBreak();
+        }
+    }
 }
