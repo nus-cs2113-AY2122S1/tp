@@ -294,9 +294,21 @@ Allows you to easily list your tasks over the upcoming week.
 
 **Format**: `upcoming`
 
-**Example**:
+**Example**: `upcoming`
 
 **Expected Outcome**:
+```
+-------------------------------------------------------------------------
+[user]: upcoming
+|| [L] CS2113T C02: 10-11-2021 13:00 to 10-11-2021 14:00 <medium> {weekly} 
+|| [T] buy groceries <medium> {none} (doOn: 10-11-2021 17:30)
+|| [L] CS2113T C02: 11-11-2021 14:00 to 11-11-2021 16:00 <medium> {weekly} 
+|| [L] CS2113T C02: 12-11-2021 16:00 to 12-11-2021 18:00 <medium> {weekly} 
+|| [L] CS2113T C02: 15-11-2021 14:00 to 15-11-2021 16:00 <medium> {weekly} 
+|| [E] finals <medium> {none} (startDate: 15-11-2021 15:00 - endDate: 15-11-2021 18:00)
+-------------------------------------------------------------------------
+```
+
 
 ### 2.4 Sorting your task list: `sort`
 Sorts your task list by a given criteria.
