@@ -38,6 +38,7 @@ easy and fuss-free, by helping you calculate how much each person owes every oth
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
+<br>
 
 ## Using this guide
 
@@ -70,7 +71,7 @@ Welcome to
             /____/                                     
 
 ```
-
+<br>
 
 ## Features
 
@@ -79,13 +80,7 @@ Welcome to
 By default, the program attempts to save your data to a file named `trips.json` located in the same directory
 as the app each time after you run a command. This includes the `quit` command.
 
-If the save attempt is unsuccessful, you will see this error message:
-
-```
-Sorry, there was an error saving your data. We'll try to save your data again the next time you enter a command.
-```
-
-The program will then attempt to save again the next time you run a command.
+If the save attempt is unsuccessful, you will see an error message. The program will then attempt to save again the next time you run a command.
 
 <br />
 
@@ -108,17 +103,17 @@ If there is an error loading your save file, please go to the [FAQ](#faq)  for m
 
 #### - Create Trip
 
-Creates a new Trip in the program.
+Creates a new Trip in the program. This command will only work when there is no trip open.
 
 Input syntax:
 ```
-create /[location] /[date] /[foreign-currency-ISO-code] /[exchange-rate] /[persons-in-trip]
+create /[location] /[date] /[foreign-currency] /[exchange-rate] /[persons-in-trip]
 ```
 
 All fields are compulsory. Note the following:
 - `[location]` is the location of the trip. Any string can be entered.
 - `[date]` must follow the format of dd-mm-yyyy.
-- `[foriegn-currency-ISO-code]`: Currently there are 30 currencies supported, the currencies' names and ISO codes are listed below.
+- `[foriegn-currency]`: is the 3-digit ISO code of the foreign currency (e.g USD, GBP). Currently there are 30 currencies supported, the currencies' names and ISO codes are listed below.
   - Some currencies will not have symbols as some terminals may not be able to support displaying of certain symbols.
   - Supported currencies will be rounded to either 2 decimal places or to the nearest whole number, 
   depending on the currency's smallest denomination.
@@ -242,9 +237,7 @@ America | 02 Feb 2021
 
 Lists all the Trips that you have created along with their index numbers. 
 
-This command can only be used if no Trip is open.
-
-Note that if a Trip is open, this command will list down your expenses instead. See [List Expenses](#--list-expenses)
+This command can only be used if no Trip is open. If a trip is open, this command will list down your expenses instead. See [List Expenses](#--list-expenses)
 for more information on listing expenses.
 
 Input syntax:
@@ -293,7 +286,10 @@ These are the people involved in this trip:
 
 #### - Delete Trip
 
-Deletes a Trip from the program.
+Deletes a Trip from the program. 
+
+This command can only be used when no trip is open. If a trip is open, this command will delete an expense instead. See [Delete Expense](#--delete-expense)
+for more information on deleting expenses.
 
 Input syntax:
 ```
@@ -318,7 +314,7 @@ Your trip to America on 02 Feb 2021 has been successfully removed.
 
 #### - Edit Trip
 
-Edit the attributes of a Trip
+Edit the attributes of a Trip. This command can only be used when no trip is open.
 
 Input syntax:
 ```
@@ -428,9 +424,9 @@ Your expense has been added successfully
 #### - List Expenses
 
 List all expenses in the current opened trip.
-This command can only be used if a trip is open.
 
-Note that if a trip is not currently open, this command will list trips instead.
+This command can only be used if a trip is open. If no trip is currently open, this command will list trips instead. See [List Trips](#--list-trips)
+for more information on listing trips.
 
 Input syntax:
 ````  
@@ -535,7 +531,8 @@ If successful, the output will be as follows:
 
 Deletes an expense from a trip.
 
-This command can only be used if a trip is open, and there is at least 1 expense.
+This command can only be used if a trip is open, and there is at least 1 expense. If no trip is open, this command will delete trips instead. See [Delete Trip](#--delete-trip)
+for more information on deleting trips.
 
 Input syntax:
 ```
@@ -661,7 +658,6 @@ Tom has spent USD $75.00 (SGD $101.35) on 3 expenses on the following categories
 food: USD $25.00 (SGD $33.78)
 travel: USD $20.00 (SGD $27.03)
 shopping: USD $30.00 (SGD $40.54)
-
 ```
 
 ### Help
@@ -692,15 +688,7 @@ Type "quit" to exit
 Output for if trip is open:
 ````
 You are inside a trip. Trip specific commands:
-	expense: creates an expense
-	view: list all expenses
-	view filter [options] [search keyword]: list filtered expenses.
-		filter options: [category, description, payer, person, date]
-	view [index]
-	summary: shows how much each person spent in total for this trip
-	amount [person]: for settling repayment at the end of the trip,shows how much this person owes to others, or how much others owe this person
-	open [trip num]: open another trip
-	quit: exit the program
+	<more help information will be displayed here>
 ````
 
 ## FAQ
@@ -711,15 +699,12 @@ You are inside a trip. Trip specific commands:
 app to the device you wish to use. Ensure that the save file is stored in the same directory as the PayMeBack
 app on your destination device before starting the program.
 
+**IMPORTANT!** Before transferring data to the destination device, please ensure that the app is not running on the destination device.
+If the app is running when the save file is pasted, you may accidentally overwrite the data in the save file when you run a command.
+
 **Q**: There was an error loading my save file. What should I do?
 
-**A**: If the program detects the save file as corrupted, it will display the following message:
-
-```
-We couldn't read your save file. It may be corrupted, or may have been wrongly modified outside the program.
-```
-
-If you see this message when starting up the app, it is likely that your save file is corrupted. If you have modified the save file directly using another
+**A**: If you see an error message when starting up the app, it is likely that your save file is corrupted. If you have modified the save file directly using another
 application, you should try to undo those changes. Also ensure that your save file is in the same directory as 
 the jar file.
 
