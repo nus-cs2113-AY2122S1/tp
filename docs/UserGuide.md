@@ -28,7 +28,7 @@ commands that you can execute.
   * [Deleting Tasks, Lessons or Modules - `delete`](#deleting-tasks-lessons-or-modules---delete)
   * [Finding Tasks or lessons by keyword - `find task/lesson`](#finding-tasks-or-lessons-by-keyword---find-tasklesson)
   * [Retrieving Module information - `find module`](#retrieving-module-information---find-module)
-  * [Setting module grade - `set grade`](#setting-module-grade---set-grade)
+  * [Editing module grade - `edit module`](#editing-module-grade---edit-module)
   * [Launching Lesson URL - `launch lesson`](#launching-lesson-url---launch-lesson)
   * [Exiting the program - `exit`](#exiting-the-program---exit)
   * [Saving the data](#saving-the-data)
@@ -92,30 +92,30 @@ Example usage:
 
 ```
 $ help
-    ______________________________________________________________________________________
-     Here are the list of commands that you can try.
-     ------------------------------------------------------------------------------------
-     add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}
-     add lesson [TITLE] -d [DAY_OF_THE_WEEK] -s [START_TIME] -e [END_TIME] -l {MEETING_URL}
-     add module [MODULE_CODE]
-     list task {PERIOD/PRIORITY}
-     list lesson {PERIOD}
-     list module
-     delete task [INDEX]
-     delete lesson [INDEX]
-     delete module [MODULE_CODE]
-     done task [INDEX]
-     find task [KEYWORD]
-     find lesson [KEYWORD]
-     find module [MODULE_CODE] {verbose}
-     set grade [MODULE_CODE] [GRADE]
-     launch lesson [INDEX]
-     exit
+      ______________________________________________________________________________________
+       Here are the list of commands that you can try.
+       ------------------------------------------------------------------------------------
+       add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}
+       add lesson [TITLE] -d [DAY_OF_THE_WEEK] -s [START_TIME] -e [END_TIME] -l {MEETING_URL}
+       add module [MODULE_CODE]
+       list task {PERIOD/PRIORITY}
+       list lesson {PERIOD}
+       list module
+       delete task [INDEX]
+       delete lesson [INDEX]
+       delete module [MODULE_CODE]
+       done task [INDEX]
+       find task [KEYWORD]
+       find lesson [KEYWORD]
+       find module [MODULE_CODE] {verbose}
+       edit module [MODULE_CODE] -g [GRADE]
+       launch lesson [INDEX]
+       exit
 
-     Notes: Square brackets -> [COMPULSORY_PARAMETER]
-            Curly braces    -> {OPTIONAL_PARAMETER}
-            More details: https://ay2122s1-cs2113t-w11-3.github.io/tp/UserGuide.html
-    ______________________________________________________________________________________
+       Notes: Square brackets -> [COMPULSORY_PARAMETER]
+              Curly braces    -> {OPTIONAL_PARAMETER}
+              More details: https://ay2122s1-cs2113t-w11-3.github.io/tp/UserGuide.html
+      ______________________________________________________________________________________
 ```
 
 You can use this as a quick guide while using NUS Buddy. The format of the commands shown by `help` 
@@ -139,7 +139,7 @@ Format: `add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}`
 
 > 💡 The task priority is low by default.
 
-> ❗ Any `|` symbol entered in the title will be replaced by a `/` symbol. 
+> ❗ Any `|` symbol used in the title will be replaced by a `/` symbol. 
 
 Example:
 
@@ -482,7 +482,7 @@ $ list module
 
 #### Task
 
-Finds tasks matching the keyword you specify.
+Find tasks matching the keyword you specify.
 
 Format: `find task [KEYWORD]`
 
@@ -502,7 +502,7 @@ $ find task CS2113T
 
 #### Lesson
 
-Finds lessons matching the keyword you specify.
+Find lessons matching the keyword you specify.
 
 Format: `find lesson [KEYWORD]`
 
@@ -560,27 +560,39 @@ $ find module cs2113t verbose
       ______________________________________________________________________________________
 ```
 
-### Setting module grade - `set grade`
+### Editing module grade - `edit module`
 
 Allows you to set a grade value for a module in your list.
 
-Format: `set grade [MODULE_CODE] [GRADE]`
+Format: `edit module [MODULE_CODE] -g [GRADE]`
 
 Example:
 
 ```
-$ set grade CS2113T A
+$ list module
       ______________________________________________________________________________________
-       You have changed your grade for this module: 
-          CS2113T Software Engineering & Object-Oriented Programming (4MCs) Grade: A
-          Grade: A
+       Here are the modules in your list:
+       1. CS2113T Software Engineering & Object-Oriented Programming (4MCs) | Grade: B
+       2. CS1231 Discrete Structures (4MCs) | Grade: NONE
+       ------------------------------------------------------------------------------------
+       You have a total of 8 MCs
+       Your current CAP is: 3.50
       ______________________________________________________________________________________
 
-$ set grade CG2028 B
+$ edit module cs1231 -g A+
       ______________________________________________________________________________________
        You have changed your grade for this module: 
-          CG2028 Computer Organization (2MCs) Grade: B
-          Grade: B
+          CS1231 Discrete Structures (4MCs) | Grade: A+
+      ______________________________________________________________________________________
+
+$ list module
+      ______________________________________________________________________________________
+       Here are the modules in your list:
+       1. CS2113T Software Engineering & Object-Oriented Programming (4MCs) | Grade: B
+       2. CS1231 Discrete Structures (4MCs) | Grade: A+
+       ------------------------------------------------------------------------------------
+       You have a total of 8 MCs
+       Your current CAP is: 4.25
       ______________________________________________________________________________________
 ```
 
@@ -678,6 +690,6 @@ Modules:
 | [`done task [INDEX]`](#marking-a-task-as-done---done)                                                                    | To mark a task as done                           |
 | [`find [task/lesson] [KEYWORD]`](#finding-tasks-or-lessons-by-keyword---find-tasklesson)                                 | To find tasks/lessons with the specified keyword |
 | [`find module [MODULE_CODE] {verbose}`](#retrieving-module-information---find-module)                                    | To display module details                        |
-| [`set grade [MODULE_CODE] [GRADE]`](#setting-module-grade---set-grade)                                                   | To set the grade for a particular module         |
+| [`edit module [MODULE_CODE] -g [GRADE]`](#editing-module-grade---edit-module)                                            | To set the grade for a particular module         |
 | [`launch lesson [INDEX]`](#launching-lesson-url---launch-lesson)                                                         | To launch a meeting URL                          |
 | [`exit`](#exiting-the-program---exit)                                                                                    | To exit the program                              |
