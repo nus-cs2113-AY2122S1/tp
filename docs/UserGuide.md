@@ -57,12 +57,16 @@ User Interface (GUI) apps.
 6. Enter `help` to display the list of available commands. See [Features](#features) for more information.
 
 ## Quick Notes
+1. Parameters enclosed within `[  ]` are optional. Do refer to the specific command format to find out the correct way 
+to input your parameters.
+2. The character `|` in the command format parameters has the meaning of OR (i.e. `[n/Option 1 | m/Option 2]` means 
+Option 1 or Option 2)
 
-Allowed characters for values:
-* Alphanumeric characters: `A-Z`, `a-z`
-* Numeric characters: `0-9`
-* Special characters: `-`, `_`, `(`, `)`, `.`, `,`
-* Whitespaces
+3. Allowed characters for values:
+   * Alphanumeric characters: `A-Z`, `a-z`
+   * Numeric characters: `0-9`
+   * Special characters: `-`, `_`, `(`, `)`, `.`, `,`
+   * Whitespaces (unless otherwise stated)
 
 ## Features
 
