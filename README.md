@@ -1,6 +1,7 @@
-# Duke project template
+# Code Hunt
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Code Hunt is a text-based adventure game using command lines for children aged 4 to 9 who have little prior coding 
+experience but have an interest in coding to learn basic coding knowledge through playing games and collecting knowledge cards.
 
 ## Setting up in Intellij
 
@@ -9,23 +10,30 @@ Prerequisites: JDK 11 (use the exact version), update Intellij to the most recen
 1. **Ensure Intellij JDK 11 is defined as an SDK**, as described [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk) -- this step is not needed if you have used JDK 11 in a previous Intellij project.
    * In the same dialog, you _may_ have to set the Project language level field to the SDK default option.
 1. **Import the project _as a Gradle project_**, as described [here](https://se-education.org/guides/tutorials/intellijImportGradleProject.html).
-1. **Verify the set up**: After the importing is complete, locate the `src/main/java/seedu/duke/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
+1. **Verify the set up**: After the importing is complete, locate the `src/main/java/game/CodeHunt.java` file, right-click it, and choose `Run CodeHunt.main()`. If the setup is correct, you should see something like the below:
    ```
    > Task :compileJava
    > Task :processResources NO-SOURCE
    > Task :classes
-   
-   > Task :Duke.main()
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   
-   What is your name?
+
+   > Task :CodeHunt.main()
+     ____          _        _   _             _
+   / ___|___   __| | ___  | | | |_   _ _ __ | |_
+   | |   / _ \ / _` |/ _ \ | |_| | | | | '_ \| __|
+   | |__| (_) | (_| |  __/ |  _  | |_| | | | | |_
+   \____\___/ \__,_|\___| |_| |_|\__,_|_| |_|\__|
+   Welcome to A text-based code game for children ages 6 and up(Code Hunt).Are you ready to play?
+   Remember, you can't play the next game until you pass through the processing one. Good luck, young knight! Type "help" to see a list of available commands.
+
+   newgame     Start a new game.
+   continue    Continue the game stored previously.
+   help        Display a list of available commands.
+   about       Display information about Code Hunt.
+   exit        Exit Code Hunt.
+
+   Code Hunt [MAIN MENU] >
    ```
-   Type some word and press enter to let the execution proceed to the end.
+   Type some word and press enter to let the execution proceed.
 
 ## Build automation using Gradle
 
@@ -36,11 +44,10 @@ Prerequisites: JDK 11 (use the exact version), update Intellij to the most recen
 
 ### I/O redirection tests
 
-* To run _I/O redirection_ tests (aka _Text UI tests_), navigate to the `text-ui-test` and run the `runtest(.bat/.sh)` script.
+* To run _I/O redirection_ tests (aka _Text ui tests_), navigate to the `text-ui-test` and run the `runtest(.bat/.sh)` script.
 
 ### JUnit tests
 
-* A skeleton JUnit test (`src/test/java/seedu/duke/DukeTest.java`) is provided with this project template. 
 * If you are new to JUnit, refer to the [JUnit Tutorial at se-education.org/guides](https://se-education.org/guides/tutorials/junit.html).
 
 ## Checkstyle
@@ -54,12 +61,9 @@ The project uses [GitHub actions](https://github.com/features/actions) for CI. W
 
 ## Documentation
 
-`/docs` folder contains a skeleton version of the project documentation.
+`/docs` folder contains the project documentation.
 
-Steps for publishing documentation to the public: 
-1. If you are using this project template for an individual project, go your fork on GitHub.<br>
-   If you are using this project template for a team project, go to the team fork on GitHub.
-1. Click on the `settings` tab.
-1. Scroll down to the `GitHub Pages` section.
-1. Set the `source` as `master branch /docs folder`.
-1. Optionally, use the `choose a theme` button to choose a theme for your documentation.
+Useful links:
+* [User Guide](docs/UserGuide.md)
+* [Developer Guide](docs/DeveloperGuide.md)
+* [About Us](docs/AboutUs.md)

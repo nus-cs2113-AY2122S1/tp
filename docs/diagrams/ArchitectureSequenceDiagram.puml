@@ -1,0 +1,49 @@
+@startuml
+!include style.puml
+
+Actor User as user USER_COLOR
+Participant ":UI" as ui UI_COLOR
+Participant ":Game" as logic LOGIC_COLOR
+Participant ":Player" as model MODEL_COLOR
+Participant ":Storage" as storage STORAGE_COLOR
+
+user -[USER_COLOR]> ui : newgame
+activate ui UI_COLOR
+
+ui -[UI_COLOR]> ui : start
+activate ui UI_COLOR_T1
+ui --[UI_COLOR]> ui
+deactivate ui
+
+ui -[UI_COLOR]> logic : easyMenu.enter()
+activate logic LOGIC_COLOR
+
+logic -[LOGIC_COLOR]> model : loadEasyRecord()
+activate model MODEL_COLOR
+model --[MODEL_COLOR]-> logic
+deactivate model
+
+logic -[LOGIC_COLOR]> logic : startHangMan()
+activate logic LOGIC_COLOR
+logic --[LOGIC_COLOR]> logic
+deactivate logic
+
+logic --[LOGIC_COLOR]> ui
+deactivate logic
+
+ui -[UI_COLOR]> storage : savePlayer()
+activate storage STORAGE_COLOR_T1
+model <[STORAGE_COLOR]- storage : getPlayerData()
+activate model MODEL_COLOR
+model --[MODEL_COLOR]-> storage
+deactivate model
+
+
+storage --[STORAGE_COLOR]> ui
+deactivate storage
+
+deactivate logic
+
+ui--[UI_COLOR]> user
+deactivate ui
+@enduml

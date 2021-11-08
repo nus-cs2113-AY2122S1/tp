@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>data.card.Card</OriginalElement>
+  <nodes>
+    <node x="0.0" y="410.0">data.Player</node>
+    <node x="33.5" y="0.0">data.card.Card</node>
+    <node x="4.5" y="216.0">data.card.CardManager</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="data.card.CardManager" target="data.card.Card" relationship="TO_MANY">
+      <point x="54.75" y="-72.0" />
+      <point x="168.75" y="191.0" />
+      <point x="154.25" y="191.0" />
+      <point x="40.25" y="83.0" />
+    </edge>
+    <edge source="data.Player" target="data.card.CardManager" relationship="TO_ONE">
+      <point x="57.0" y="-105.0" />
+      <point x="171.0" y="385.0" />
+      <point x="168.75" y="385.0" />
+      <point x="54.75" y="72.0" />
+    </edge>
+    <edge source="data.Player" target="data.card.CardManager" relationship="DEPENDENCY">
+      <point x="-57.0" y="-105.0" />
+      <point x="57.0" y="385.0" />
+      <point x="59.25" y="385.0" />
+      <point x="-54.75" y="72.0" />
+    </edge>
+    <edge source="data.card.CardManager" target="data.card.Card" relationship="CREATE">
+      <point x="-54.75" y="-72.0" />
+      <point x="59.25" y="191.0" />
+      <point x="73.75" y="191.0" />
+      <point x="-40.25" y="83.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.0" showDependencies="true" x="114.0" y="310.0" />
+  <SelectedNodes>
+    <node>data.card.Card</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

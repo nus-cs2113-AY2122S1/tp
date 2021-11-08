@@ -1,0 +1,29 @@
+@startuml
+
+hide footbox
+
+actor User as user
+participant ":GameMenu" as ui
+participant ":Player" as model
+
+user -> ui : "check"
+activate ui
+ui -> ui : showRecord()
+
+ui -> model : showEasyGameRecord()
+activate model
+model --> ui
+deactivate model
+
+ui -> model : showDifficultGameRecord()
+activate model
+model --> ui
+deactivate model
+
+ui --> ui
+deactivate ui
+
+ui --> user
+deactivate ui
+
+@enduml

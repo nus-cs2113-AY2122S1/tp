@@ -1,0 +1,134 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Game
+abstract class Menu
+interface Serializable
+
+HangmanGame --|> Game
+GuessingNumGame --|> Game
+QuizGame --|> Game
+TreasureHuntGame --|> Game
+
+GameMainMenu --|> Menu
+CardMenu --|> Menu
+EasyMenu --|> Menu
+DifficultMenu --|> Menu
+GameMenu --|> Menu
+
+Game..|> Serializable
+Card..|> Serializable
+CardManager..|>Serializable
+
+TreasureHuntGame ..> TreasureHuntMap
+
+Card"*" --> CardManager
+CardManager"2" --> Player
+Game"*" --> Player
+
+abstract class Game {
++<<abstract>> execute(boolean): int
++<<abstract>> getName()
+}
+
+abstract class Menu {
++<<abstract>> enter()
+}
+
+Storage ..> Card
+Storage ..>CardManager
+Storage ..> Player
+GameMenu ..>Storage
+GameMainMenu ..> Storage
+class Storage {
+}
+
+class Card {
+-String content
+-boolean isUsed
+-int cardID
+-boolean isCollected
+}
+
+class CardManager {
+-List<Card> card
+}
+
+class TreasureHuntMap {
++int[][][] mapList
+}
+
+class Player{
++List<Integer> collectedCardIDs
++List<Integer> usedCardIDs
+-String name
+-List<String> easyRecords
+-List<String> difficultRecords
+-CardManager cardsCollected
+-CardManager cardToBeCollected
+}
+
+enum CardCommandType {
+LIST
+DELETE
+FIND
+HELP
+BACK
+EXIT
+}
+
+enum GameCommandType {
+START
+CHECK
+CARD
+BACK
+EXIT
+}
+
+enum GameMainMenuCommandType {
+NEWGAME
+CONTINUE
+HELP
+ABOUT
+EXIT
+}
+
+CardMenu ..> CardCommandType
+CardMenu ..>Player
+class CardMenu {
+}
+
+EasyMenu ..> HangmanGame
+EasyMenu ..> QuizGame
+EasyMenu ..> TreasureHuntGame
+EasyMenu ..> GuessingNumGame
+EasyMenu ..> Player
+class EasyMenu {
+-Scanner in
+-StringParser parser
+}
+
+DifficultMenu ..> HangmanGame
+DifficultMenu ..> QuizGame
+DifficultMenu ..> TreasureHuntGame
+DifficultMenu ..> GuessingNumGame
+DifficultMenu ..> Player
+class DifficultMenu {
+-Scanner in
+-StringParser parser
+}
+
+GameMenu ..> EasyMenu: <<create>>
+GameMenu ..> DifficultMenu: <<create>>
+GameMenu ..> CardMenu: <<create>>
+GameMenu ..> GameCommandType
+GameMenu ..> Player
+class GameMenu {
+}
+
+GameMainMenu ..> GameMenu: <<create>>
+GameMainMenu ..> GameMainMenuCommandType
+GameMainMenu ..> Player
+class GameMainMenu {
+}
+@enduml

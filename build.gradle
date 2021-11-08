@@ -29,11 +29,11 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "game.CodeHunt"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = ""
     archiveClassifier = null
 }
 
@@ -42,5 +42,6 @@ checkstyle {
 }
 
 run{
+    enableAssertions = true
     standardInput = System.in
 }

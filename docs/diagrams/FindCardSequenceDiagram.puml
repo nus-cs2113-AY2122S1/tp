@@ -1,0 +1,37 @@
+@startuml
+
+hide footbox
+
+actor User as user
+participant ":CardMenu" as ui
+participant ":Player" as model
+participant ":CardManager" as cm
+
+user -> ui : "find"
+activate ui
+ui -> ui : findCard()
+activate ui
+loop until input valid card index
+    ui -> user : askCardId()
+    user -> ui : cardId
+end
+
+ui -> model : findCard(cardId)
+activate model
+
+model -> cm : findPrintCard(cardId))
+activate cm
+
+cm --> model
+deactivate cm
+
+model --> ui
+deactivate model
+
+ui --> ui
+deactivate ui
+
+ui --> user
+deactivate ui
+
+@enduml

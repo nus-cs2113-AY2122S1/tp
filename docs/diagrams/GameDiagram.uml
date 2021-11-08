@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>data.game.HangmanGame</OriginalElement>
+  <nodes>
+    <node x="0.0" y="81.0">data.game.TreasureHuntGame</node>
+    <node x="408.0" y="202.0">ui.game.DifficultMenu</node>
+    <node x="401.0" y="81.0">data.game.HangmanGame</node>
+    <node x="577.0" y="81.0">data.game.QuizGame</node>
+    <node x="4.964285714285722" y="0.0">data.game.TreasureHuntMap</node>
+    <node x="199.0" y="81.0">data.game.GuessingNumGame</node>
+    <node x="231.0" y="202.0">ui.game.EasyMenu</node>
+    <node x="347.3809523809524" y="0.0">data.game.Game</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="data.game.TreasureHuntGame" target="data.game.Game" relationship="GENERALIZATION">
+      <point x="44.75" y="-15.5" />
+      <point x="134.25" y="56.0" />
+      <point x="392.8809523809524" y="56.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="data.game.HangmanGame" target="data.game.Game" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.5" />
+      <point x="479.0" y="56.0" />
+      <point x="392.8809523809524" y="56.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="ui.game.DifficultMenu" target="data.game.GuessingNumGame" relationship="CREATE">
+      <point x="0.0" y="-15.5" />
+      <point x="479.0" y="132.0" />
+      <point x="290.0" y="132.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="ui.game.EasyMenu" target="data.game.QuizGame" relationship="CREATE">
+      <point x="0.0" y="-15.5" />
+      <point x="290.0" y="172.0" />
+      <point x="637.5" y="172.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="ui.game.EasyMenu" target="data.game.GuessingNumGame" relationship="CREATE">
+      <point x="0.0" y="-15.5" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="data.game.QuizGame" target="data.game.Game" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.5" />
+      <point x="637.5" y="56.0" />
+      <point x="392.8809523809524" y="56.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="data.game.GuessingNumGame" target="data.game.Game" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.5" />
+      <point x="290.0" y="56.0" />
+      <point x="392.8809523809524" y="56.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="ui.game.DifficultMenu" target="data.game.TreasureHuntGame" relationship="CREATE">
+      <point x="0.0" y="-15.5" />
+      <point x="479.0" y="142.0" />
+      <point x="89.5" y="142.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="data.game.TreasureHuntGame" target="data.game.TreasureHuntMap" relationship="CREATE">
+      <point x="-44.75" y="-15.5" />
+      <point x="44.75" y="56.0" />
+      <point x="89.96428571428572" y="56.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="ui.game.DifficultMenu" target="data.game.HangmanGame" relationship="CREATE">
+      <point x="0.0" y="-15.5" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="ui.game.EasyMenu" target="data.game.TreasureHuntGame" relationship="CREATE">
+      <point x="0.0" y="-15.5" />
+      <point x="290.0" y="152.0" />
+      <point x="89.5" y="152.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="ui.game.EasyMenu" target="data.game.HangmanGame" relationship="CREATE">
+      <point x="0.0" y="-15.5" />
+      <point x="290.0" y="162.0" />
+      <point x="479.0" y="162.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="ui.game.DifficultMenu" target="data.game.QuizGame" relationship="CREATE">
+      <point x="0.0" y="-15.5" />
+      <point x="479.0" y="182.0" />
+      <point x="637.5" y="182.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.4499999999999997" showDependencies="true" x="349.0" y="116.49999999999994" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -1,0 +1,19 @@
+@startuml
+
+
+class Storage {
+    + Storage()
+    - void InitCard()
+    + void initEasyGameRecords()
+    + void initDifficultGameRecords()
+    + void initPlayer()
+    + void loadPlayer()
+    + void loadPlayer(String)
+    + void savePlayer()
+}
+
+GameMainMenu ..> Storage
+GameMenu ..> Storage
+GameMainMenu --up|> Menu
+GameMenu --up|> Menu
+@enduml
