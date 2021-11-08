@@ -6,31 +6,33 @@ end box
 activate Duke
 box BLUE_COLOR
 Participant ":Parser" as Parser
+participant ":AddParser" as AddParser
+
 
 Duke -> Parser :parseCommand
 create ":AddParser" as AddParser
-activate Parser
-create ":AddParser" as AddParser
 end box
-Parser -> AddParser: multiWordCommandProtocol
+activate Parser
+
+Parser -> AddParser: getAddCommand
 activate AddParser
 
 box LOGIC_COLOR
 alt isEventFlag
 create ":AddEventCommand" as AddEventCommand
-AddParser -> AddEventCommand: getAddCommand
+AddParser -> AddEventCommand: AddEventCommand
 activate AddEventCommand
 return
 
 else isTaskFlag
 create ":AddTaskCommand" as AddTaskCommand
-AddParser -> AddTaskCommand: getAddCommand
+AddParser -> AddTaskCommand: AddTaskCommand
 activate AddTaskCommand
 return
 
 else isMemberFlag
 create ":AddMemberCommand" as AddMemberCommand
-AddParser -> AddMemberCommand: getAddCommand
+AddParser -> AddMemberCommand: AddMemberCommand
 activate AddMemberCommand
 return
 end
