@@ -8,6 +8,8 @@ import seedu.duke.exceptions.TripNotOpenException;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
 
+import static seedu.duke.Storage.LAST_INTERACTED;
+
 abstract class CommandHandler extends CommandExecutor {
 
     //@@author yeezao
@@ -78,13 +80,13 @@ abstract class CommandHandler extends CommandExecutor {
             }
         } catch (IndexOutOfBoundsException e) {
             if (Storage.checkOpenTrip()) {
-                if (inputParams.equalsIgnoreCase("last")) {
+                if (inputParams.equalsIgnoreCase(LAST_INTERACTED)) {
                     Ui.noRecentExpenseError();
                 } else {
                     Ui.printUnknownExpenseIndexError();
                 }
             } else {
-                if (inputParams.equalsIgnoreCase("last")) {
+                if (inputParams.equalsIgnoreCase(LAST_INTERACTED)) {
                     Ui.printNoLastTripError();
                 } else {
                     Ui.printUnknownTripIndexError();

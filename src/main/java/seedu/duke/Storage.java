@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 public class Storage {
 
     public static final String FILE_PATH = "trips.json";
+    public static final String LAST_INTERACTED = "last";
     private static ArrayList<Trip> listOfTrips = new ArrayList<>();
     private static Trip openTrip = null;
     private static Trip lastTrip = null;
