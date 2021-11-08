@@ -13,7 +13,8 @@ public class ListStaffCommand extends ListPersonCommand {
 
     @Override
     public void execute(Scheduler scheduler, Ui ui) {
-        String allStaffString = StaffUi.getAllStaffsString(scheduler.listStaff(getHidden()));
+        boolean isHidden = getHidden();
+        String allStaffString = StaffUi.getAllStaffsString(scheduler.listStaff(isHidden), isHidden);
         ui.printOutput(allStaffString);
     }
 }

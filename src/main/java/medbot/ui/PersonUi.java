@@ -146,8 +146,8 @@ public abstract class PersonUi {
      * @param personListString String containing information of all persons.
      * @return String containing all Persons' information.
      */
-    protected static String getAllPersonsString(String person, String personListString) {
-        String output = getTableHeader(person);
+    protected static String getAllPersonsString(String person, String personListString, boolean isHiddenPersonList) {
+        String output = getTableHeader(person, isHiddenPersonList);
         output += personListString;
         output += TABLE_ROW_SEPARATOR;
 
@@ -160,10 +160,11 @@ public abstract class PersonUi {
      * @param person String indicating the type of person
      * @return String containing the header of the person information table.
      */
-    protected static String getTableHeader(String person) {
+    protected static String getTableHeader(String person, boolean isHiddenPersonList) {
         String uppercasePerson = person.toUpperCase();
+        String hiddenOrShownPerson = isHiddenPersonList ? "hidden " : "not-hidden ";
 
-        String output = "Here is a list of all " + person + "s:" + END_LINE;
+        String output = "Here is a list of all " + hiddenOrShownPerson + person + "s:" + END_LINE;
         output += "For full details of each " + person + ", please use the command \"view " + uppercasePerson
                 + "_ID\"" + END_LINE;
         output += TABLE_ROW_SEPARATOR;

@@ -162,8 +162,8 @@ public class PatientUi extends PersonUi {
      * @param patientListString String containing information of all patients
      * @return String containing all patient information in a table
      */
-    public static String getAllPatientsString(String patientListString) {
-        return getAllPersonsString(PATIENT, patientListString);
+    public static String getAllPatientsString(String patientListString, boolean isHiddenPersonList) {
+        return getAllPersonsString(PATIENT, patientListString, isHiddenPersonList);
     }
 
     /**
