@@ -488,7 +488,153 @@ A test case for incorrect input when trying to mark an event as undone is as suc
 - **Prerequisite:** There is at least one event in the catalog.
 - **Expected:** The event cannot be marked as undone as `abc` is not a valid index and should be a number instead. Error details shown in the mesage will be printed in the CLI.
 
-#####Managing tasks
+####Managing tasks
+
+#####Adding tasks
+
+Adding tasks can be achieved through the use of the `add` command.
+
+- **Test case:** `add -t n/Buy stage lights d/10-12-2021 1600`
+- **Prerequisite:** 
+  - One event is present in the catalog. This event has no tasks created under it.
+  - At least one member is present in the roster.
+- **Expected:** Program will prompt for an optional description of the task to be added. After which, there will be a prompt to select the event the task will be assigned to, followed by a prompt to select the member to be assigned to the task. After which, the following message should be observed. 
+
+```
+Task added: Buy stage lights
+Total number of tasks in this event = 1
+```
+
+Below are a list of additional test cases for incorrect input regarding task addition to try and their expected results:
+
+- **Test case:** `add -t`
+    - **Expected:** No event is added. Error details shown in the message printed on the CLI.
+- **Test case:** `add -t asdf asdf`
+    - **Expected:** No event is added. Error details regarding a missing field will is printed on the CLI.
+- **Test case:** `add -t n/Buy stage lights d/10-12-2021 1600` with no event in the catalog.
+  - **Expected:** Unable to add task. Error requiring an event to be first created will be printed on the CLI.
+- **Test case:** `add -t n/Buy stage lights d/10-12-2021 1600` with no member in the roster.
+  - **Expected:** Unable to add task. Error requiring a member to be first added to the roster will be printed on the CLI.
+
+#####Deleting tasks
+
+Deleting tasks can be achieved through the use of the `delete` command.
+
+- **Test Case:** `delete -t 1`
+- **Prerequisite:** 
+  - There is at least one event in the catalog. This event is selected using the `select` command.
+  - The selected event has at least one task created under it. 
+- **Expected:** The first task (at index 0) within event's list of tasks is deleted.
+
+```
+This task has been removed: Buy stage lights
+```
+
+Below are a list of additional test cases for incorrect input regarding event deletion to try and their expected results:
+
+- **Test case:** `delete -t 1` when there are 0 tasks under the selected event.
+    - **Expected:** No task is deleted. Error details shown in the message printed on the CLI.
+- **Test case:** `delete -t 1` without having an event selected.
+    - **Expected:** No task is deleted. Error details shown in the message printed on the CLI.
+
+#####Viewing next task
+
+Viewing the next chronological task can be achieved through the `next` command.
+
+- **Test case:** `next -t 1`
+- **Prerequisite:** There is 1 event in the catalog. This event contains at least one task.
+- **Expected:** Details regarding the next chronological task will be printed on the CLI.
+
+A test case for incorrect input regarding the viewing of the next event will be as such:
+
+- **Test case:** `next -t`
+  - **Expected:** No next task is displayed as the index of the event it is created under is not provided. Error details shown in the message printed on the CLI.
+- **Test case:** `next -t 1` when there is only one event in the catalog that contains no tasks.
+  - **Expected:** No next task is displayed. Error details shown in the message printed on the CLI.
+
+#####Listing tasks
+
+To list all the events in the catalog, the `list` command can be used.
+
+- **Test case:** `list -t 1`
+- **Prerequisite:** There is 1 event in the catalog. This event contains at least one task.
+- **Expected:** A list of all the tasks under the provided event will be printed out with their respective indexes. The list of tasks will be sorted in chronological order.
+
+A test case for incorrect input regarding the viewing of the next event will be as such:
+
+- **Test case:** `list -t`
+  - **Expected:** No tasks will be listed as no event index is provided. Error details shown in the message printed on the CLI.
+- **Test case:** `list -t 2`
+  - **Prerequisite:** There is only 1 event in the catalog. 
+  - **Expected:** No tasks will be listed as the event index provided is invalid. Error details shown in the message printed on the CLI.
+
+#####Selecting tasks
+    
+An event can be selected using the `select` command.
+
+- **Test Case:** `select -t 1`
+- **Prerequisite:** 
+  - There is at least one event in the catalog.
+  - This event is selected.
+  - This event contains at least one task. 
+- **Expected:** The first task (at index 0) within the task is selected and more details about it will be printed out on the CLI.
+
+A test case for incorrect input regarding the selection of the task will be as such:
+
+- **Test case:** `select -t`
+- **Expected:** No task will be selected. Error details shown in the message printed on the CLI.
+
+#####Marking a task as done/undone 
+
+Tasks can be marked as done or undone using `done` and `undo` command respectively.
+
+To mark a task/tasks as done:
+
+- **Test case:** `done -t 1 2`
+- **Prerequisite:**
+    - There is one event with two tasks in the catalog.
+    - The event is selected.
+    - Both tasks in that event are not marked as done (i.e. marked as undone). 
+- **Expected:** The first and second tasks (at index 0 and 1) will be marked as done.
+
+```
+Nice! I have marked these items as done: 
+[T][X] Buy stage lights (at: 10 Dec 2021 - 16:00)
+[T][X] Hold meeting (at: 12 Dec 2022 - 10:00)
+--------LIST UPDATED-----------
+```
+
+To mark a task/tasks as undone: 
+
+- **Test case:** `undo -t 1 2`
+- **Prerequisite:**
+    - There is one event with two tasks in the catalog.
+    - The event is selected.
+    - Both tasks in that event are marked as done (i.e. marked as undone).
+- **Expected:** The first and second tasks (at index 0 and 1) in the event will be marked as undone.
+
+```
+Okay, I have unmarked these items: 
+[E][ ] Buy stage lights (at: 10 Dec 2021 - 16:00)
+[E][ ] Hold meeting (at: 12 Dec 2022 - 10:00)
+--------LIST UPDATED-----------
+```
+
+A test case for incorrect input when trying to mark a task as done is as such:
+
+- **Test case:** `done -t 1`
+- **Prerequisite:**
+    - There is at least one event in the catalog containing one task. 
+    - The event is not selected. 
+- **Expected:** The task cannot be marked as done as there is no event selected. Error details shown in the message will be printed on the CLI.
+
+A test case for incorrect input when trying to mark a task as undone is as such: 
+
+- **Test case:** `done -t asdf`
+- **Prerequisite:**
+    - There is at least one event in the catalog containing one task.
+    - The event is selected.
+- **Expected:** The task cannot be marked as done as there is an invalid task index is provided. Error details shown in the message will be printed on the CLI.
 
 
 ####Saving data 
