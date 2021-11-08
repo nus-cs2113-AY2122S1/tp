@@ -38,6 +38,7 @@ easy and fuss-free, by helping you calculate how much each person owes every oth
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
+<br>
 
 ## Using this guide
 
@@ -70,7 +71,7 @@ Welcome to
             /____/                                     
 
 ```
-
+<br>
 
 ## Features
 
@@ -242,9 +243,7 @@ America | 02 Feb 2021
 
 Lists all the Trips that you have created along with their index numbers. 
 
-This command can only be used if no Trip is open.
-
-Note that if a Trip is open, this command will list down your expenses instead. See [List Expenses](#--list-expenses)
+This command can only be used if no Trip is open. If a Trip is open, this command will list down your expenses instead. See [List Expenses](#--list-expenses)
 for more information on listing expenses.
 
 Input syntax:
@@ -293,7 +292,10 @@ These are the people involved in this trip:
 
 #### - Delete Trip
 
-Deletes a Trip from the program.
+Deletes a Trip from the program. 
+
+This command can only be used when no trip is open. If a Trip is open, this command will delete an expense instead. See [Delete Expense](#--delete-expense)
+for more information on deleting expenses.
 
 Input syntax:
 ```
@@ -318,7 +320,7 @@ Your trip to America on 02 Feb 2021 has been successfully removed.
 
 #### - Edit Trip
 
-Edit the attributes of a Trip
+Edit the attributes of a Trip. This command can only be used when no trip is open.
 
 Input syntax:
 ```
@@ -430,7 +432,8 @@ Your expense has been added successfully
 List all expenses in the current opened trip.
 This command can only be used if a trip is open.
 
-Note that if a trip is not currently open, this command will list trips instead.
+Note that if a trip is not currently open, this command will list trips instead. See [List Trips](#--list-trips)
+for more information on listing trips.
 
 Input syntax:
 ````  
@@ -535,7 +538,8 @@ If successful, the output will be as follows:
 
 Deletes an expense from a trip.
 
-This command can only be used if a trip is open, and there is at least 1 expense.
+This command can only be used if a trip is open, and there is at least 1 expense. See [Delete Trip](#--delete-trip)
+for more information on deleting trips.
 
 Input syntax:
 ```
@@ -661,7 +665,6 @@ Tom has spent USD $75.00 (SGD $101.35) on 3 expenses on the following categories
 food: USD $25.00 (SGD $33.78)
 travel: USD $20.00 (SGD $27.03)
 shopping: USD $30.00 (SGD $40.54)
-
 ```
 
 ### Help
