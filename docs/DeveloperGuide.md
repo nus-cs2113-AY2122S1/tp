@@ -48,7 +48,7 @@ The other core components of Typist:
 
 The `Command` component implements the Factory Design Pattern to parse user commands.
 
-Here’s a (partial) class diagram of the `Command` component:
+Here’s a (partial) class diagram of the `Command` component:  
 
 ![](images/command.png)
 
