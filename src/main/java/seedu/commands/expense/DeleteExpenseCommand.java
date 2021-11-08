@@ -14,7 +14,7 @@ public class DeleteExpenseCommand extends Command {
     private int expenseNumber;
 
     /**
-     * Constructor for delete expense command
+     * Constructor for delete expense command.
      * @param expenseNumber index of item to be deleted
      */
     public DeleteExpenseCommand(int expenseNumber) {
@@ -22,7 +22,7 @@ public class DeleteExpenseCommand extends Command {
     }
 
     /**
-     * Executes deletion of expense item
+     * Executes deletion of expense item.
      * @param finances object from FinancialTracker
      * @param ui object from Ui
      * @param budgetManager object from BudgetManager

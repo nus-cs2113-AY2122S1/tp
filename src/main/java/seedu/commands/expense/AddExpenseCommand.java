@@ -17,7 +17,7 @@ public class AddExpenseCommand extends Command {
     private Expense expense;
 
     /**
-     * Constructor for add expense command
+     * Constructor for add expense command.
      * @param expense object to be added
      */
     public AddExpenseCommand(Expense expense) {
@@ -25,7 +25,7 @@ public class AddExpenseCommand extends Command {
     }
 
     /**
-     * Executes adding of expense item
+     * Executes adding of expense item.
      * @param finances object from FinancialTracker
      * @param ui object from Ui
      * @param budgetManager object from BudgetManager

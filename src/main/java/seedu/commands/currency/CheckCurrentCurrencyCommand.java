@@ -11,7 +11,7 @@ import seedu.utility.Ui;
 public class CheckCurrentCurrencyCommand extends Command {
 
     /**
-     * Executes checking of current currency types of entries
+     * Executes checking of current currency types of entries.
      * @param finances object from FinancialTracker
      * @param ui object from Ui
      * @param budgetManager object from BudgetManager

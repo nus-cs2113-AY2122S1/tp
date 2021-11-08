@@ -14,7 +14,7 @@ public class DeleteIncomeCommand extends Command {
     private int incomeNumber;
 
     /**
-     * Constructor for delete income command
+     * Constructor for delete income command.
      * @param incomeNumber index of item to be deleted
      */
     public DeleteIncomeCommand(int incomeNumber) {
@@ -22,7 +22,7 @@ public class DeleteIncomeCommand extends Command {
     }
 
     /**
-     * Executes deletion of income item
+     * Executes deletion of income item.
      * @param finances object from FinancialTracker
      * @param ui object from Ui
      * @param budgetManager object from BudgetManager

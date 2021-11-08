@@ -12,7 +12,7 @@ public class CurrencyConversionCommand extends Command {
     protected CurrencyType to;
 
     /**
-     * Constructor used to assign old and new currency types
+     * Constructor used to assign old and new currency types.
      * @param to new currency type that user wishes to convert to
      */
     public CurrencyConversionCommand(CurrencyType to) {
@@ -22,7 +22,7 @@ public class CurrencyConversionCommand extends Command {
 
 
     /**
-     * Executes conversion of all entries into given currency type
+     * Executes conversion of all entries into given currency type.
      */
     @Override
     public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager,

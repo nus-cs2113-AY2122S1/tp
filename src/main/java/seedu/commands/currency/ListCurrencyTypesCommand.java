@@ -9,7 +9,7 @@ import seedu.utility.Ui;
 public class ListCurrencyTypesCommand extends Command {
 
     /**
-     * Executes listing of available currency types
+     * Executes listing of available currency types.
      * @param finances object from FinancialTracker
      * @param ui object from Ui
      * @param budgetManager object from BudgetManager

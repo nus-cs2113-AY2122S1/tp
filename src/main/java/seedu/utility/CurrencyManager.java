@@ -19,13 +19,12 @@ public class CurrencyManager {
     private final ArrayList<CurrencyType> currencyTypes = new ArrayList<>();
 
     /**
-     * Converts all entries and budgets into given currency type
-     *
+     * Converts all entries and budgets into given currency type.
      * @param from base currency type
      * @param to new currency type that user wishes to convert to
      * @param finances FinancialTracker object that allows access to all stored entries
      * @param budgetManager BudgetManager object that allows access to stored budgets
-     * @throws SameCurrencyTypeException
+     * @throws SameCurrencyTypeException throws error is user tries to convert to same currency type again
      */
     public void currencyConvertor(CurrencyType from, CurrencyType to, FinancialTracker finances,
                                    BudgetManager budgetManager) throws SameCurrencyTypeException {
@@ -40,7 +39,7 @@ public class CurrencyManager {
     }
 
     /**
-     * Returns the current currency state of all entries
+     * Returns the current currency state of all entries.
      * @return currency
      */
     public CurrencyType getCurrency() {
@@ -49,7 +48,7 @@ public class CurrencyManager {
     }
 
     /**
-     * Updates currency type to new currency
+     * Updates currency type to new currency.
      * @param currency
      */
     public void setCurrency(CurrencyType currency) {
@@ -57,7 +56,7 @@ public class CurrencyManager {
     }
 
     /**
-     * Creates arrayList with enums contained in  currencyType class
+     * Creates arrayList with enums contained in  currencyType class.
      * @return currencyTypes
      */
     public ArrayList<CurrencyType> getCurrencyTypes() {

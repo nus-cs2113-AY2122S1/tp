@@ -14,7 +14,7 @@ public class AddIncomeCommand extends Command {
     private Income income;
 
     /**
-     * Constructor for add income command
+     * Constructor for add income command.
      * @param income object to be added
      */
     public AddIncomeCommand(Income income) {
@@ -22,7 +22,7 @@ public class AddIncomeCommand extends Command {
     }
 
     /**
-     * Executes adding of income item
+     * Executes adding of income item.
      * @param finances object from FinancialTracker
      * @param ui object from Ui
      * @param budgetManager object from BudgetManager
