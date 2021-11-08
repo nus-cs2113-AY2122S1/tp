@@ -142,7 +142,7 @@ The sequence diagram below shows how an expense is initialised.
 ![](images/ExpenseSequenceDiagram.png)
 
 
-When `CommandExecutor` calls the `executeCreateExpense()` function, the open trip will be retrieved, and an expense will be intialized.
+When `CommandExecutor` calls the `executeCreateExpense()` function, the open trip will be retrieved, and an expense will be initialized.
 During the initialization fo a new `Expense`, the amount spent for the expense is set using `setAmountSpent()`, the category is set
 using `setCategory` and the date of the `Expense` is being prompted using `promptDate()`. 
 
@@ -181,7 +181,7 @@ The sequence diagram illustrating the process of writing to a save file is below
 
 #### `FileStorage` implementation
 
-The  Gson library we use to serialise and deserialise data to and from the JSON format tdoes not properly parse LocalDate
+The Gson library we use to serialise and deserialise data to and from the JSON format does not properly parse LocalDate
 objects, given that LocalDate cannot be directly instantiated. As a result, using the default implementation of Gson 
 to serialise LocalDate causes an `InaccessibleObjectException` when attempting to deserialise a LocalDate object. To overcome
 this, we implemented a custom serialiser and deserialiser specifically for LocalDate, adapted from the Gson User Guide 
