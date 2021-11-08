@@ -24,7 +24,7 @@
 
 List of sources/references:
 * [GSON](https://github.com/google/gson/) - Read and write JSON files.
-* [Address Book (Level 4)](https://se-education.orAg/addressbook-level4/) - Provide samples of User Guide (UG) and Developer Guide (DG).
+* [Address Book (Level 4)](https://se-education.org/addressbook-level4/) - Provide samples of User Guide (UG) and Developer Guide (DG).
 
 ## Design
 ### Architecture
@@ -219,6 +219,28 @@ Below is an example scenario of how the set mark feature behaves at each step:
   for `Midterms`. Below is an object diagram showing the state after completion of the set_mark command
 
 ![SetMarkObjectDiagram](diagrams/object/SetMarkObjectDiagram.png)
+#### Marks storage
+The `marks` are stored inside each `Student` object under the `results` HashMap, with the `marks` as a value that is 
+mapped by the `assessmentName`. We chose to use this way of storage as the `marks` are unique for each `Student` as well
+as each `Assessment`. Special consideration was taken to preserve the `marks` if the `Assessment` had the name changed. 
+This means that if an `Assessment` had the name changed from `Midterms` to `OP1`, the `assessmentName` key in the 
+`results` HashMap of each `Student` would also follow the change.
+
+Q: Why not use Marks as a separate Class? <br>
+A: The reason is that the HashMap could accomplish the same thing as a separate `Mark` object. <br>
+Detailed here is an alternative implementation using a separate Class to implement `Mark`: <br>
+Creating a `Mark` object to fit our purposes would require creation of a `MarkList` as an attribute in `Student` which 
+would store the `Mark` objects in an ArrayList. The `Mark` object would then contain the `assessmentName` as a String 
+and `mark` as a double attribute. The `MarkList` would be empty in the beginning and only be populated by 
+`SetMarkCommand`, which would create a new`Mark` object when called. To ensure that the same `Assessment` does not have 
+two different `Mark` objects, a check would have to be done using a getter function that depends on the `assessmentName`
+attribute in `Mark` to retrieve any currently existing objects with the same `assessmentName` as the input. The creation
+of the new `Mark` object would only proceed if the getter retrieves a null. In order to have the implementation of 
+changing the `assessmentName` whenever an `Assessment` object has its `name` attribute changed, one can simply use the
+same getter as above to retrieve the `Mark` object with the old `assessmentName` and call a setter to change it to the
+new `assessmentName`.
+Included below is an updated Class Diagram showing this implementation
+
 <br>
 
 ### Set Attendance
