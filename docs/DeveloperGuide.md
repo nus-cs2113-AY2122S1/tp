@@ -144,7 +144,9 @@ The saving of data from the list to the storage file is elaborated further in th
 ![](diagrams/food/foodClassDiagram.png)
 
 Additionally, StallsManager is implemented to support the `food view` commands, which include a reference food court
-, Technoedge.This class includes all stalls, food items sold by the store as well as the calorie count for the food items.
+, Technoedge.
+
+This class includes all stalls, food items sold by the store as well as the calorie count for the food items.
 Furthermore, methods that involve sorting and filtering food items by calorie count and name are implemented in StallsManager
 for the user to easily find items.
 
@@ -652,7 +654,7 @@ i. `TagNotebookCommand` calls `ParserJournal.parseTagNotebookCommand(userInput, 
    v. `TagNotebookCommand` calls `printTaggedNotebookMessage()` to convey that the notebook has been tagged
    successfully. 
 
-**Design Considerations**
+**Notebook Design Considerations**
 
 The following design considerations were kept in mind while implementing the tag notebook feature,
 - Aspect: How to store tag
@@ -713,12 +715,12 @@ information of a food court, which includes the Stall name, and food items sold 
 
 ##### Adding Food Record 
 
-`food add n/ Samurai Burger c/ 433`
+`food add n/Samurai Burger c/433`
 
 This feature allows user to add a new Food Record.
 Tags `n/` `c/` stand for name and calorie count respectively.
 
-As depicted in the [class diagram](#451-architecture), the user's input undergoes the following sequence when it's
+As depicted in the [class diagram](#342-food-related-models), the user's input undergoes the following sequence when it's
 converted to a food record to be added to the user's list.
 1. `Parser` invokes `parseFoodRecord` which takes in the `inputString`
 1. `storage` accesses it's `whatIAteTodayList` and calls it's `addToList` method, adding the
@@ -782,7 +784,7 @@ This feature also relies on the `storage` component in the following sequence:
 1. `Parser` filters out the relevant part of the user input relating to `LocalDate` type,
    and a `DateTimeFormatter` formats that portion into a `dateInput`
 1. `storage` accesses `whatIAteTodayList` by reference
-1. `whatIAteTodayList` invokes it's method `printFoodWithFoundDate`, taking `dateInput` as an input, which does the following:
+1. `whatIAteTodayList` invokes its method `printFoodWithFoundDate`, taking `dateInput` as an input, which does the following:
    1. Create a temporary `WhatIAteList`
    1. Call `addRecordIfFound`, which iterates through the current list and matches records with the same date as `dateInput`
    1. Print out the temporary list, along with a nicely formatted date string of `FormatStyle.FULL`, representing
@@ -805,7 +807,7 @@ Following that, `StorageFood` invokes `saveList` to update the `food.txt` file.
 
 This section covers the implementation, and design consideration of features that involve a reference list.
 
-A reference list is represented by [StallsManager](#class-diagram-of-food), which contains all the information of items sold by a store in
+A reference list is represented by [StallsManager](#342-food-related-models), which contains all the information of items sold by a store in
 a food court, as well as the name of the store.
 
 Additionally, a reference list has multiple features, namely
@@ -838,7 +840,7 @@ This functionality can be read from our [user guide](./UserGuide.md)
 The storage on hard-disk would be automatically
 updated on every successful command entered by the user.
 
-The interworking of this is described in detail in [architecture](#451-architecture).
+The interworking of this is described in detail in [architecture](#342-food-related-models).
 
 ### 4.6  Help command
 
