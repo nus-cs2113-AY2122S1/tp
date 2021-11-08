@@ -274,6 +274,12 @@ public class TextUi {
         }
     }
 
+    /**
+     * print out the record list
+     * @param records the record list of budget, expenditures and loans
+     * @param i the month of the record list
+     * @param category the category to be listed
+     */
     private static void printRecordList(AllRecordList records, int i, Category category) {
         String monthString = getMonthString(i);
         double totalSpending = 0.0;
@@ -299,6 +305,17 @@ public class TextUi {
         recordListPrinter(records, i, category, monthString, totalSpending, currentMonthBudget, budget, printInfo);
     }
 
+    /**
+     * To print the record list
+     * @param records the record list
+     * @param i the month of the record list
+     * @param category the category to be listed
+     * @param monthString the month in the string form
+     * @param totalSpending the overall spending for the month
+     * @param currentMonthBudget the budget of the current month
+     * @param budget the budget in string format
+     * @param printInfo whether the list should be printed
+     */
     private static void recordListPrinter(AllRecordList records, int i, Category category,
                                           String monthString, double totalSpending, double currentMonthBudget,
                                           String budget, boolean printInfo) {
@@ -318,7 +335,13 @@ public class TextUi {
     }
 
     /**
+     * To print the budget, expenditures and loans of the category of the month
      * Names/Descriptions longer than 30characters may get truncated.
+     * @param list the record list
+     * @param month the month of the record list
+     * @param monthString the month in string form
+     * @param budget the budget for the month
+     * @param category the category to be listed
      */
     private static void getMonthListView(AllRecordList list, int month, String monthString,
                                          String budget, Category category) {
