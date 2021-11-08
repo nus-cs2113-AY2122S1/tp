@@ -97,7 +97,7 @@ $ help
        ------------------------------------------------------------------------------------
        add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}
        add lesson [TITLE] -d [DAY_OF_THE_WEEK] -s [START_TIME] -e [END_TIME] -l {MEETING_URL}
-       add module [MODULE_CODE]
+       add module [MODULE_CODE] -g {GRADE}
        list task {PERIOD/PRIORITY}
        list lesson {PERIOD}
        list module
@@ -107,11 +107,11 @@ $ help
        done task [INDEX]
        find task [KEYWORD]
        find lesson [KEYWORD]
-       find module [MODULE_CODE] {verbose}
+       find module [MODULE_CODE] {verbose/-v}
        edit module [MODULE_CODE] -g [GRADE]
        launch lesson [INDEX]
        exit
-
+  
        Notes: Square brackets -> [COMPULSORY_PARAMETER]
               Curly braces    -> {OPTIONAL_PARAMETER}
               More details: https://ay2122s1-cs2113t-w11-3.github.io/tp/UserGuide.html
@@ -207,9 +207,10 @@ $ add lesson CG2028 Tutorial -d thu -s 13:00 -e 14:00
 
 A module is referred to by its module code, and the data is retrieved from [NUSMods](https://nusmods.com/).
 
-Format: `add module [MODULE_CODE]`
+Format: `add module [MODULE_CODE] -g {GRADE}`
 
 * `MODULE_CODE` refers to the module (based on NUSMods), not case-sensitive.
+* `GRADE` refers to your grade for the module (if available)
 
 Example:
 
@@ -221,10 +222,10 @@ $ add module CS2113T
        Now you have 1 modules in the list.
       ______________________________________________________________________________________
 
-$ add module CG2028
+$ add module CG2028 -g A
       ______________________________________________________________________________________
        Noted. I've added this module:
-         CG2028 Computer Organization (2MCs) | Grade: NONE
+         CG2028 Computer Organization (2MCs) | Grade: A
        Now you have 2 modules in the list.
       ______________________________________________________________________________________
 ```
@@ -684,7 +685,7 @@ Modules:
 | :----------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------- |
 | [`add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}`](#adding-a-task-lesson-or-module---add)          | To add a task                                    |
 | [`add lesson [TITLE] -d [DAY_OF] -s [START_TIME] -e [END_TIME] -l {MEETING_URL}`](#adding-a-task-lesson-or-module---add) | To add a lesson                                  |
-| [`add module [MODULE_CODE]`](#adding-a-task-lesson-or-module---add)                                                      | To add a module                                  |
+| [`add module [MODULE_CODE] -g {GRADE}`](#adding-a-task-lesson-or-module---add)                                           | To add a module                                  |
 | [`list task {PERIOD/PRIORITY}`](#listing-tasks-lessons-or-modules---list)                                                | To list all tasks                                |
 | [`list lesson {PERIOD}`](#listing-tasks-lessons-or-modules---list)                                                       | To list all lessons                              |
 | [`list module`](#listing-tasks-lessons-or-modules---list)                                                                | To list all modules                              |
@@ -693,7 +694,7 @@ Modules:
 | [`delete module [MODULE_CODE]`](#deleting-tasks-lessons-or-modules---delete)                                             | To delete a module                               |
 | [`done task [INDEX]`](#marking-a-task-as-done---done)                                                                    | To mark a task as done                           |
 | [`find [task/lesson] [KEYWORD]`](#finding-tasks-or-lessons-by-keyword---find-tasklesson)                                 | To find tasks/lessons with the specified keyword |
-| [`find module [MODULE_CODE] {verbose}`](#retrieving-module-information---find-module)                                    | To display module details                        |
+| [`find module [MODULE_CODE] {verbose/-v}`](#retrieving-module-information---find-module)                                 | To display module details                        |
 | [`edit module [MODULE_CODE] -g [GRADE]`](#editing-module-grade---edit-module)                                            | To edit the grade for a particular module        |
 | [`launch lesson [INDEX]`](#launching-lesson-url---launch-lesson)                                                         | To launch a meeting URL                          |
 | [`exit`](#exiting-the-program---exit)                                                                                    | To exit the program                              |
