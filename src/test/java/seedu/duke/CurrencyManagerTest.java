@@ -18,13 +18,13 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 public class CurrencyManagerTest {
 
     @Test
-    public void checkCurrency_expectedCurrencyTypeSGD() {
+    public void checkCurrency_expectedCurrencyTypeSgd() {
         CurrencyManager currencyManager = new CurrencyManager();
         assertSame(currencyManager.getCurrency(), CurrencyType.SGD);
     }
 
     @Test
-    public void checkCurrency_expectedCurrencyTypeHDK() {
+    public void checkCurrency_expectedCurrencyTypeHdk() {
         Ui ui = new Ui();
         CurrencyManager currencyManager = new CurrencyManager();
         BudgetManager budgetManager = new BudgetManager();
@@ -36,7 +36,7 @@ public class CurrencyManagerTest {
     }
 
     @Test
-    public void convertCurrencyHKD_expectedCurrencyTypeHKD() {
+    public void convertCurrencyHdk_expectedCurrencyTypeHdk() {
         Ui ui = new Ui();
         CurrencyManager currencyManager = new CurrencyManager();
         BudgetManager budgetManager = new BudgetManager();
@@ -47,7 +47,7 @@ public class CurrencyManagerTest {
     }
 
     @Test
-    public void convertCurrencyHKDTwice_SameTypeExceptionThrown_expenseValueNoChange() {
+    public void convertCurrencyHdkTwice_SameTypeExceptionThrown_expenseValueNoChange() {
         Ui ui = new Ui();
         CurrencyManager currencyManager = new CurrencyManager();
         BudgetManager budgetManager = new BudgetManager();
@@ -62,18 +62,18 @@ public class CurrencyManagerTest {
     }
 
     @Test
-    public void convertCurrencyHKD_expectedNewExpenseValue() throws ExpenseOverflowException {
+    public void convertCurrencyHdk_expectedNewExpenseValue() throws ExpenseOverflowException {
         Ui ui = new Ui();
         CurrencyManager currencyManager = new CurrencyManager();
         BudgetManager budgetManager = new BudgetManager();
         FinancialTracker testTracker = new FinancialTracker(currencyManager);
         Expense expense = new Expense("food", 10.0, ExpenseCategory.FOOD);
         testTracker.addExpense(expense);
-        Command testCurrencyConversionToHDK  = new CurrencyConversionCommand(CurrencyType.HKD);
-        testCurrencyConversionToHDK.execute(testTracker, ui, budgetManager, currencyManager);
+        Command testCurrencyConversion  = new CurrencyConversionCommand(CurrencyType.HKD);
+        testCurrencyConversion.execute(testTracker, ui, budgetManager, currencyManager);
         assertEquals(expense.getValue(), 50.00);
-        Command testCurrencyConversionToSGD = new CurrencyConversionCommand(CurrencyType.SGD);
-        testCurrencyConversionToSGD.execute(testTracker, ui, budgetManager, currencyManager);
+        Command testCurrencyConversion2 = new CurrencyConversionCommand(CurrencyType.SGD);
+        testCurrencyConversion2.execute(testTracker, ui, budgetManager, currencyManager);
         assertEquals(expense.getValue(), 10.00);
     }
 }

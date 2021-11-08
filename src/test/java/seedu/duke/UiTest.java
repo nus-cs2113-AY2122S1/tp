@@ -459,7 +459,7 @@ public class UiTest {
     }
 
     @Test
-    public void setCurrencyTypeHDK_matchesCurrencyTypeHDK_printConfirmationMessage() {
+    public void setCurrencyTypeHdk_matchesCurrencyTypeHdk_printConfirmationMessage() {
         CurrencyConversionCommand testCurrencyConversionCommand = new CurrencyConversionCommand(CurrencyType.HKD);
         testCurrencyConversionCommand.execute(financialTracker, testUI, budgetManager, currencyManager);
         String expectedOutput = SEPARATOR_LINE + newLine
@@ -469,7 +469,7 @@ public class UiTest {
     }
 
     @Test
-    public void setCurrencyTypeSGD_matchesCurrencyTypeSGD_printSameTypeExceptionMessage() {
+    public void setCurrencyTypeSgd_matchesCurrencyTypeSgd_printSameTypeExceptionMessage() {
         CurrencyConversionCommand testCurrencyConversionCommand = new CurrencyConversionCommand(CurrencyType.SGD);
         testCurrencyConversionCommand.execute(financialTracker, testUI, budgetManager, currencyManager);
         String expectedOutput = SEPARATOR_LINE + newLine
