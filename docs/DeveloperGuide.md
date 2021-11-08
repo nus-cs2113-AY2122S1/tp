@@ -3,7 +3,6 @@ Welcome to **SLAM**! **SLAM** is a desktop application for student group leaders
 
 ---
 # Table of Contents
-<<<<<<< HEAD
 1. [Introduction](#Introduction)
    1. [Purpose of This Guide](#Purpose-of-Developer-Guide)
 2. [Acknowledgements](#Acknowledgements)
