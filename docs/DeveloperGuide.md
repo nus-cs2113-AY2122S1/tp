@@ -216,6 +216,8 @@ E.g. `add n/carrots a/200 e/25-12-2021`
 
 4. The updated `IngredientList` is stored in the external memory through the `Storage` class. 
 
+<div style="page-break-after: always;"></div>
+
 The overall sequence diagram can be seen below. 
 
 ![image](images/AddSequenceDiagram.png)
@@ -394,7 +396,7 @@ iterates from ingredients with closest to the furthest expiry dates. There are t
       1. The current ingredient amount is set to 0.0.
       2. The current ingredient amount is subtracted from the amount to be subtracted.
 
-<div style="page-break-after: always;"></div>
+   <div style="page-break-after: always;"></div>
 
 8. Next, the `removeLowAmountIngredientFromGroup` method is called to remove ingredients with 
 negligible amounts remaining.
