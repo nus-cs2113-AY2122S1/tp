@@ -94,9 +94,6 @@ public class DeleteAttendanceCommand extends Command {
 
                 AttendanceList attendanceList = student.getAttendanceList();
                 Attendance attendance = attendanceList.deleteAttendance(lessonNumInput);
-                if (attendance == null) {
-
-                }
                 buildString(stringBuilder, i, student, attendance);
             }
         }
@@ -125,7 +122,7 @@ public class DeleteAttendanceCommand extends Command {
                 return;
             }
             Attendance attendance = student.getAttendanceList().getAttendance(lessonNumber);
-            if (attendance == null){
+            if (attendance == null) {
                 throw new TaaException(String.format(MESSAGE_INVALID_LESSON_NUMBER_WITH_INFO, studentIndex + 1,
                         student.getName()));
             }
