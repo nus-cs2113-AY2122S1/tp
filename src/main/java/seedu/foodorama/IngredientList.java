@@ -372,6 +372,9 @@ public class IngredientList {
                     UI.clearTerminalAndPrintNewPage();
                     UI.printEnterWeightOf(ingrName);
                     inputIngredientWeight = in.nextLine();
+                    if (!isDouble(inputIngredientWeight)) {
+                        throw new FoodoramaException(UI.getInvalidNumberMsg());
+                    }
                     ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
                 }
             }
@@ -445,6 +448,9 @@ public class IngredientList {
                     UI.clearTerminalAndPrintNewPage();
                     UI.printEnterWeightOf(ingrName);
                     inputIngredientWeight = in.nextLine();
+                    if (!isDouble(inputIngredientWeight)) {
+                        throw new FoodoramaException(UI.getInvalidNumberMsg());
+                    }
                     ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
                 }
             }
