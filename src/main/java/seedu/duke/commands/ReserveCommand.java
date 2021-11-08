@@ -10,21 +10,21 @@ import java.util.HashMap;
 
 import static seedu.duke.common.Messages.INVALID_ID;
 import static seedu.duke.common.Messages.INVALID_VALUES;
+import static seedu.duke.common.Messages.KEY_ID;
+import static seedu.duke.common.Messages.KEY_USER;
 import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;
-import static seedu.duke.common.Messages.WARN_ADDITIONAL_ARGS;
+import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
 import static seedu.duke.common.Status.AVAILABLE;
 import static seedu.duke.common.Status.RESERVED;
 
 /**
- * Class encapsulating command to update the status of the item to be loaned out.
+ * Class encapsulating command to update the status of the item from AVAILABLE to RESERVED.
  */
 public class ReserveCommand extends Command {
     public static final String COMMAND_FORMAT = "  (!) Format: res i/ID u/USER";
     public static final String COMMAND_WORD = "res";
     public static final String SUCCESS_RES = "  (+) You have successfully reserved an item:";
-    public static final String ERR_RESERVED = "";
-    public static final String KEY_ID = "i";
-    public static final String KEY_USER = "u";
+
 
     protected HashMap<String, String> args;
     protected String id;
@@ -32,7 +32,7 @@ public class ReserveCommand extends Command {
 
     /**
      * Class Constructor.
-     * @param args Arguments supplied by user in the loan command
+     * @param args Arguments supplied by user in the reserve command
      */
     public ReserveCommand(HashMap<String, String> args) {
         this.args = args;
@@ -62,18 +62,18 @@ public class ReserveCommand extends Command {
     }
 
     /**
-     * Processes <b>loan</b> Command, including handle exceptions.
+     * Processes <b>reserve</b> Command, including handle exceptions.
      * @param ui Object that handles user IO
      * @param catalogue Object that encapsulates the library catalogue
      * @throws LibmgrException when user input is invalid
      */
-    public void handleLoanCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
+    public void handleReserveCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
         if (checkMissingArgs()) {
             ui.print(INVALID_VALUES + System.lineSeparator() + COMMAND_FORMAT);
             return;
         }
         if (checkAdditionalArgs()) {
-            ui.print(WARN_ADDITIONAL_ARGS);
+            ui.print(WARN_INVALID_ARGS);
         }
 
         // Get item to be updated
@@ -91,14 +91,14 @@ public class ReserveCommand extends Command {
     }
 
     /**
-     * Executes <b>loan</b> Command.
+     * Executes <b>reserve</b> Command.
      * @param ui Object that handles user IO
      * @param catalogue Object that encapsulates the library catalogue
      */
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
         try {
-            handleLoanCommand(ui, catalogue);
+            handleReserveCommand(ui, catalogue);
         } catch (LibmgrException e) {
             ui.print(e.getMessage());
         } catch (NullPointerException e) {

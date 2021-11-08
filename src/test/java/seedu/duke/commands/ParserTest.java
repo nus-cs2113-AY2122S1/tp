@@ -3,11 +3,8 @@ package seedu.duke.commands;
 import org.junit.jupiter.api.Test;
 import seedu.duke.common.LibmgrException;
 import seedu.duke.common.Status;
-import seedu.duke.data.Audio;
 import seedu.duke.data.Book;
 import seedu.duke.data.Catalogue;
-import seedu.duke.data.Magazine;
-import seedu.duke.data.Video;
 import seedu.duke.ui.TextUI;
 
 import java.util.HashMap;
@@ -235,8 +232,49 @@ class ParserTest {
     }
 
     @Test
+    public void parse_listCommandObject() {
+        Boolean type = parser.parse("list") instanceof ListCommand;
+        assertTrue(type);
+    }
+
+    @Test
+    public void parse_list_FormatIncorrectExceptionThrown() {
+        TextUI ui = new TextUI();
+        Catalogue catalogue = new Catalogue();
+        try {
+            ListCommand l = (ListCommand) parser.parse("list all");
+            l.handlesListCommand(ui, catalogue);
+            fail();
+        } catch (Exception e) {
+            assertEquals(" (!) Invalid listing command" + System.lineSeparator()
+                    + " (!) Format: 'list'", e.getMessage());
+        }
+    }
+
+    @Test
+    public void parse_searchCommandObject() {
+        Boolean type = parser.parse("search i/001") instanceof SearchCommand;
+        assertTrue(type);
+    }
+
+    @Test
+    public void parse_search_FormatIncorrectExceptionThrown() {
+        TextUI ui = new TextUI();
+        Catalogue catalogue = new Catalogue();
+        try {
+            SearchCommand s = (SearchCommand) parser.parse("search q/ssss");
+            s.handlesSearchCommand(ui, catalogue);
+            fail();
+        } catch (Exception e) {
+            assertEquals(" (!) Invalid searching format!" + System.lineSeparator()
+                    + " (!) Format: 'search i/ID t/TITLE s/STATUS(LOANED/AVAILABLE/RESERVED) "
+                    + "c/CATEGORY(Magazine/Book/Audio/Video)' or its subset", e.getMessage());
+        }
+    }
+
+    @Test
     public void parse_edit_EditCommandObject() {
-        boolean type = parser.parse("edit 123 t/The Hunger Games") instanceof EditCommand;
+        boolean type = parser.parse("edit 123 t/The Hunger Games id/124") instanceof EditCommand;
         assertTrue(type);
     }
 
@@ -245,21 +283,20 @@ class ParserTest {
         TextUI ui = new TextUI();
         Catalogue catalogue = new Catalogue();
         try {
-            EditCommand a = (EditCommand) parser.parse("edit hello");
+            EditCommand a = (EditCommand) parser.parse("edit ");
             a.handlesEditCommand(ui, catalogue);
             fail();
         } catch (Exception e) {
             assertEquals("  (!) Invalid/missing values" + System.lineSeparator()
-                    + "  (!) Format: edit ID marker/attribute", e.getMessage());
+                    + "  (!) Format: edit ID KEY/ATTRIBUTE", e.getMessage());
         }
     }
+
 
     @Test
     public void parse_edit_InvalidItemExceptionThrown() {
         TextUI ui = new TextUI();
         Catalogue catalogue = new Catalogue();
-        // AddCommand add = (AddCommand) parser.parse("add b t/The Hunger Games i/123 a/Suzanne Collins");
-        // add.execute(ui, catalogue);
         Book b = new Book("The Hunger Games", "123", Status.AVAILABLE, null, null,"Suzanne Collins");
         try {
             catalogue.add(b);
@@ -276,107 +313,26 @@ class ParserTest {
     }
 
     @Test
-    public void parse_edit_InvalidBookMarkerExceptionThrown() {
-        TextUI ui = new TextUI();
-        Catalogue catalogue = new Catalogue();
-        Book b = new Book("The Hunger Games", "123", Status.AVAILABLE, null, null,"Suzanne Collins");
-        try {
-            catalogue.add(b);
-        } catch (LibmgrException e) {
-            ui.print(e.getMessage());
-        }
-        try {
-            EditCommand a = (EditCommand) parser.parse("edit 123 x/Harry Potter");
-            a.handlesEditCommand(ui, catalogue);
-            fail();
-        } catch (Exception e) {
-            assertEquals("  (!) Attribute Marker not valid for Book" + System.lineSeparator()
-                    + "  (!) Should only be t/, i/ or a/", e.getMessage());
-        }
-    }
-
-    @Test
-    public void parse_edit_InvalidAudioMarkerExceptionThrown() {
-        TextUI ui = new TextUI();
-        Catalogue catalogue = new Catalogue();
-        Audio b = new Audio("The Hunger Games", "123", Status.AVAILABLE, null, null,
-                "Suzanne Collins", "5h");
-        try {
-            catalogue.add(b);
-        } catch (LibmgrException e) {
-            ui.print(e.getMessage());
-        }
-        try {
-            EditCommand a = (EditCommand) parser.parse("edit 123 x/Harry Potter");
-            a.handlesEditCommand(ui, catalogue);
-            fail();
-        } catch (Exception e) {
-            assertEquals("  (!) Attribute Marker not valid for Audio" + System.lineSeparator()
-                    + "  (!) Should only be t/, i/, a/ or d/", e.getMessage());
-        }
-    }
-
-    @Test
-    public void parse_edit_InvalidVideoMarkerExceptionThrown() {
-        TextUI ui = new TextUI();
-        Catalogue catalogue = new Catalogue();
-        Video b = new Video("The Hunger Games", "123", Status.AVAILABLE, null, null, "Suzanne Collins", "5h");
-        try {
-            catalogue.add(b);
-        } catch (LibmgrException e) {
-            ui.print(e.getMessage());
-        }
-        try {
-            EditCommand a = (EditCommand) parser.parse("edit 123 x/Harry Potter");
-            a.handlesEditCommand(ui, catalogue);
-            fail();
-        } catch (Exception e) {
-            assertEquals("  (!) Attribute Marker not valid for Video" + System.lineSeparator()
-                    + "  (!) Should only be t/, i/, p/ or d/", e.getMessage());
-        }
-    }
-
-    @Test
-    public void parse_edit_InvalidMagazineMarkerExceptionThrown() {
-        TextUI ui = new TextUI();
-        Catalogue catalogue = new Catalogue();
-        Magazine b = new Magazine("The Hunger Games", "123", Status.AVAILABLE, null, null,"Suzanne Collins", "2nd");
-        try {
-            catalogue.add(b);
-        } catch (LibmgrException e) {
-            ui.print(e.getMessage());
-        }
-        try {
-            EditCommand a = (EditCommand) parser.parse("edit 123 x/Harry Potter");
-            a.handlesEditCommand(ui, catalogue);
-            fail();
-        } catch (Exception e) {
-            assertEquals("  (!) Attribute Marker not valid for Magazine" + System.lineSeparator()
-                    + "  (!) Should only be t/, i/, p/ or e/", e.getMessage());
-        }
-    }
-
-    @Test
-    public void parse_stats_StatsCommandObject() {
-        boolean type = parser.parse("stats all") instanceof StatsCommand;
+    public void parse_info_InfoCommandObject() {
+        boolean type = parser.parse("info all") instanceof InfoCommand;
         assertTrue(type);
     }
 
     @Test
-    public void parse_stats_StatsInvalidFormatExceptionThrown() {
+    public void parse_info_InfoInvalidFormatExceptionThrown() {
         TextUI ui = new TextUI();
         Catalogue catalogue = new Catalogue();
-        String args = "stats hello";
+        String args = "info hello";
         try {
-            StatsCommand a = (StatsCommand) parser.parse(args);
-            a.handlesStatsCommand(ui, catalogue);
+            InfoCommand a = (InfoCommand) parser.parse(args);
+            a.handlesInfoCommand(ui, catalogue);
             fail();
         } catch (Exception e) {
-            assertEquals("  (!) Invalid Stats command" + System.lineSeparator()
+            assertEquals("  (!) Invalid Info command" + System.lineSeparator()
                     + "  (!) Format:" + System.lineSeparator()
-                    + "  1. stats all" + System.lineSeparator()
-                    + "  2. stats category" + System.lineSeparator()
-                    + "  3. stats status", e.getMessage());
+                    + "  1. info all" + System.lineSeparator()
+                    + "  2. info category" + System.lineSeparator()
+                    + "  3. info status", e.getMessage());
         }
     }
 

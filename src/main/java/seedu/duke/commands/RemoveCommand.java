@@ -4,13 +4,13 @@ import seedu.duke.data.Catalogue;
 import seedu.duke.data.Item;
 import seedu.duke.ui.TextUI;
 
-import static seedu.duke.common.Messages.RM_INVALID_FORMAT;
 import static seedu.duke.common.Messages.INVALID_ID;
+import static seedu.duke.common.Messages.RM_INVALID_FORMAT;
 import static seedu.duke.common.Messages.RM_SUCCESS;
 
 //@@author exetr
 public class RemoveCommand extends Command {
-    public static final String COMMAND_REMOVE = "rm";
+    public static final String COMMAND_WORD = "rm";
     protected String args;
 
     /**
@@ -29,13 +29,13 @@ public class RemoveCommand extends Command {
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
         try {
-            String[] argList = args.split(" ");
+            String[] argList = args.split(" ", 2);
             if (argList.length == 2) {
-                Item removed = catalogue.removeItem(argList[1]);
+                Item removed = catalogue.removeItem(argList[1].strip());
                 assert removed != null : "Removed item returns null";
                 ui.print(RM_SUCCESS, removed);
             } else {
-                ui.print(INVALID_ID);
+                ui.print(RM_INVALID_FORMAT);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             ui.print(RM_INVALID_FORMAT);

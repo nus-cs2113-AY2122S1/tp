@@ -11,12 +11,12 @@ import seedu.duke.ui.TextUI;
 import java.util.HashMap;
 
 import static seedu.duke.common.Messages.INVALID_VALUES;
-import static seedu.duke.common.Messages.WARN_ADDITIONAL_ARGS;
+import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
 
 //@@author exetr
-public class AddItemCommand extends Command {
+public class AddMiscellaneousCommand extends Command {
     public static final String COMMAND_FORMAT = "  Format: add i t/TITLE i/ID";
-    public static final String ADD_MESSAGE = "  (+) Added new item to the catalogue";
+    public static final String ADD_MESSAGE = "  (+) Added new miscellaneous item to the catalogue";
     public static final String COMMAND_WORD = "add i";
     public static final String KEY_TITLE = "t";
     public static final String KEY_ID = "i";
@@ -26,11 +26,12 @@ public class AddItemCommand extends Command {
     private String id;
     private Status status;
 
-    public AddItemCommand(HashMap<String, String> args) {
+    public AddMiscellaneousCommand(HashMap<String, String> args) {
         this.args = args;
         this.title = args.get(KEY_TITLE);
         this.id = args.get(KEY_ID);
         this.status = Status.AVAILABLE;
+        assert args != null : "Args hashmap is null";
     }
 
     /**
@@ -55,7 +56,7 @@ public class AddItemCommand extends Command {
     }
 
     /**
-     * Executes add audio command.
+     * Executes add miscellaneous command.
      * Checks for missing and/or additional arguments, then adds to catalogue.
      * Overrides method from parent Command class.
      * @param ui Object that handles user IO
@@ -68,10 +69,11 @@ public class AddItemCommand extends Command {
             return;
         }
         if (checkAdditionalArgs()) {
-            ui.print(WARN_ADDITIONAL_ARGS);
+            ui.print(WARN_INVALID_ARGS);
         }
         try {
             Miscellaneous newItem = new Miscellaneous(title, id, status, null, null);
+            assert newItem != null : "newItem is null";
             catalogue.add(newItem);
             ui.print(ADD_MESSAGE, newItem);
         } catch (LibmgrException e) {

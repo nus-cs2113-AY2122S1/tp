@@ -9,7 +9,7 @@ class Catalogue {
     +removeItem(id:String):Item
 }
 
-class Item {
+class "{abstract}\n Item" {
     -title:String
     -id:String
     -status:Status
@@ -41,6 +41,10 @@ class Video {
     +toString():String
 }
 
+class Miscellaneous {
+    +toString():String
+}
+
 enum "<<Enumeration>> \n Status" {
     AVAILABLE
     LOANED
@@ -48,11 +52,12 @@ enum "<<Enumeration>> \n Status" {
 }
 
 
-Audio -up-|> Item
-Book -up-|> Item
-Magazine -up-|> Item
-Video -up-|> Item
+Audio -up-|> "{abstract}\n Item"
+Book -up-|> "{abstract}\n Item"
+Magazine -up-|> "{abstract}\n Item"
+Video -up-|> "{abstract}\n Item"
+Miscellaneous -left-|> "{abstract}\n Item"
 
-Item -u-> "1" "<<Enumeration>> \n Status" : status
-Catalogue -> "*" Item : itemsArrayList
+"{abstract}\n Item" -u-> "1" "<<Enumeration>> \n Status" : status
+Catalogue -> "*" "{abstract}\n Item" : itemsArrayList
 @enduml

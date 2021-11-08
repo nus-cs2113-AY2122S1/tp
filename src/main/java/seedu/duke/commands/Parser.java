@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
-import static seedu.duke.commands.RemoveCommand.COMMAND_REMOVE;
-
 /**
  * The parser class contains methods to process the string input by the user.
  */
@@ -28,34 +26,41 @@ public class Parser {
      * @return The specific Command object corresponding to the input
      */
     public Command parse(String input) {
+        String[] inputList = input.strip().split("\\s+");
+        String command = inputList[0];
         try {
-            if (input.equals(ExitCommand.COMMAND_WORD)) {
-                return new ExitCommand();
-            } else if (input.startsWith(COMMAND_REMOVE)) {
+            switch (command) {
+            case ExitCommand.COMMAND_WORD:
+                if (inputList.length == 1) {
+                    return new ExitCommand();
+                } else {
+                    return new UnknownCommand();
+                }
+            case RemoveCommand.COMMAND_WORD:
                 return new RemoveCommand(input);
-            } else if (input.startsWith(ListCommand.COMMAND_WORD)) {
+            case ListCommand.COMMAND_WORD:
                 return new ListCommand(input);
-            } else if (input.startsWith(SearchCommand.COMMAND_WORD)) {
+            case SearchCommand.COMMAND_WORD:
                 return new SearchCommand(extractArgs(input));
-            } else if (input.startsWith(AddCommand.COMMAND_WORD)) {
+            case AddCommand.COMMAND_WORD:
                 return new AddCommand(extractArgs(input));
-            } else if (input.startsWith(LoanCommand.COMMAND_WORD)) {
+            case LoanCommand.COMMAND_WORD:
                 return new LoanCommand(extractArgs(input));
-            } else if (input.startsWith(ReturnCommand.COMMAND_WORD)) {
+            case ReturnCommand.COMMAND_WORD:
                 return new ReturnCommand(input);
-            } else if (input.startsWith(EditCommand.COMMAND_WORD)) {
-                return new EditCommand(input);
-            } else if (input.startsWith(ReserveCommand.COMMAND_WORD)) {
+            case EditCommand.COMMAND_WORD:
+                return new EditCommand(extractArgs(input));
+            case ReserveCommand.COMMAND_WORD:
                 return new ReserveCommand(extractArgs(input));
-            } else if (input.startsWith(DeadlineCommand.COMMAND_WORD)) {
+            case DeadlineCommand.COMMAND_WORD:
                 return new DeadlineCommand(input);
-            } else if (input.startsWith(UnreserveCommand.COMMAND_WORD)) {
+            case UnreserveCommand.COMMAND_WORD:
                 return new UnreserveCommand(input);
-            } else if (input.startsWith(StatsCommand.COMMAND_WORD)) {
-                return new StatsCommand(input);
-            } else if (input.startsWith(HelpCommand.COMMAND_WORD)) {
+            case InfoCommand.COMMAND_WORD:
+                return new InfoCommand(input);
+            case HelpCommand.COMMAND_WORD:
                 return new HelpCommand();
-            } else {
+            default:
                 return new UnknownCommand();
             }
         } catch (LibmgrException e) {
@@ -74,7 +79,7 @@ public class Parser {
     public HashMap<String, String> extractArgs(String input) throws LibmgrException {
         HashMap<String, String> args = new HashMap<>();
         // Configure regex matcher
-        String splitByDelimiter = ".+?(?=\\s\\w/)|.+?$";
+        String splitByDelimiter = ".+?(?=\\s\\w+/)|.+?$";
         Pattern p = Pattern.compile(splitByDelimiter);
         Matcher m = p.matcher(input);
         // Get command word

@@ -33,6 +33,7 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
+        assert args != null : "Args hashmap is null";
         switch (args.get(null)) {
         case AddAudioCommand.COMMAND_WORD:
             new AddAudioCommand(args).execute(ui, catalogue);
@@ -40,8 +41,8 @@ public class AddCommand extends Command {
         case AddBookCommand.COMMAND_WORD:
             new AddBookCommand(args).execute(ui, catalogue);
             break;
-        case AddItemCommand.COMMAND_WORD:
-            new AddItemCommand(args).execute(ui, catalogue);
+        case AddMiscellaneousCommand.COMMAND_WORD:
+            new AddMiscellaneousCommand(args).execute(ui, catalogue);
             break;
         case AddMagazineCommand.COMMAND_WORD:
             new AddMagazineCommand(args).execute(ui, catalogue);

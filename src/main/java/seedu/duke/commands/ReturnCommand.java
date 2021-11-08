@@ -16,7 +16,7 @@ import static seedu.duke.common.Messages.WRONG_ITEM_MESSAGE;
  */
 public class ReturnCommand extends Command {
     public static final String COMMAND_WORD = "return";
-    protected String args; // Format: loan [ID]
+    protected String args; // Format: return [ID]
     protected String id;
 
     /**

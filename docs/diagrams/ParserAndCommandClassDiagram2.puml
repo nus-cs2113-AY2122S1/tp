@@ -1,0 +1,96 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+
+Command <|-up- ListCommand
+Command <|-up- LoanCommand
+Command <|-left- RemoveCommand
+Command <|-- ReserveCommand
+Command <|-- ReturnCommand
+Command <|-right- SearchCommand
+
+
+abstract class Command {
++ execute(ui: TextUI, catalogue: Catalogue)
++ isExit(): Boolean
+}
+
+class ListCommand {
++ {static} {final} COMMAND_WORD: String = "list"
++ input: String = ""
++ ListCommand(input: String)
++ handlesListCommand(ui: TextUI, catalogue: Catalogue)
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+class LoanCommand {
++ {static} {final} COMMAND_FORMAT: String = "  (!) Format: loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)"
++ {static} {final} COMMAND_WORD: String = "loan"
++ {static} {final} SUCCESS_LOAN: String = "  (+) Item has been loaned out:"
++ {static} {final} ERR_RESERVED: String = "  (!) Sorry, the item has already been reserved for someone else"
+# args: HashMap<String, String>
+# id: String
+# username: String
+# dueDate: String
+__
++ LoanCommand(args: HashMap<String, String>)
++ checkMissingArgs(): Boolean
++ checkAdditionalArgs(): Boolean
++ handleLoanCommand(ui: TextUI, catalogue: Catalogue)
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+class RemoveCommand {
++ {static} {final} COMMAND_WORD: String = "rm"
+# args: String
++ RemoveCommand(input: String)
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+class ReserveCommand {
++ {static} {final} COMMAND_WORD: String = "res"
++ {static} {final} COMMAND_FORMAT: String = "  (!) Format: res i/ID u/USER"
++ {static} {final} SUCCESS_RES: String = "  (+) You have successfully reserved an item:"
+# args: HashMap<String, String>
+# id: String
+# username: String
+__
++ ReserveCommand(args: HashMap<String, String>)
++ checkMissingArgs(): Boolean
++ checkAdditionalArgs(): Boolean
++ handleReserveCommand(ui: TextUI, catalogue: Catalogue)
++ execute(ui: TextUI, catalogue: Catalogue)
+
+}
+
+class ReturnCommand {
++ {static} {final} COMMAND_WORD: String = "return"
+# args: String
+# id: String
++ ReturnCommand(args: String)
++ handleReturnCommand(ui: TextUI, catalogue: Catalogue)
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+class SearchCommand {
++ {static} {final} COMMAND_WORD: String = "search"
+- title: String
+- id: String
+- status: String
+- category: String
+# args: HashMap<String, String>
++ SearchCommand(args: HashMap<String, String>)
++ checkValidArgs(): Boolean
++ checkAdditionalArgs(): Boolean
++ checkValidStatus(): Boolean
++ checkValidCategory(): Boolean
++ checkMatches(temp: Item): Integer
++ handlesSearchCommand(ui: TextUI, catalogue: Catalogue)
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+
+
+@enduml
