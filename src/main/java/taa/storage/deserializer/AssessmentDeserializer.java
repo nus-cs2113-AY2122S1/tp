@@ -8,6 +8,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import taa.Parser;
+import taa.Taa;
 import taa.assessment.Assessment;
 import taa.util.Util;
 
@@ -35,13 +36,13 @@ public class AssessmentDeserializer extends StorageDeserializer implements JsonD
         }
 
         JsonElement weightageJson = jsonObject.get(MEMBER_WEIGHTAGE);
-        if (!Util.isStringDouble(getJsonElementAsString(weightageJson))) {
+        if (!Util.isStringDouble(getJsonElementAsString(weightageJson), Taa.DECIMAL_PLACES)) {
             return null;
         }
         double weightage = weightageJson.getAsDouble();
 
         JsonElement maximumMarksJson = jsonObject.get(MEMBER_MAXIMUM_MARKS);
-        if (!Util.isStringDouble(getJsonElementAsString(maximumMarksJson))) {
+        if (!Util.isStringDouble(getJsonElementAsString(maximumMarksJson), Taa.DECIMAL_PLACES)) {
             return null;
         }
         double maximumMarks = maximumMarksJson.getAsDouble();
