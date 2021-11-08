@@ -11,8 +11,7 @@ iteration so that we were able to comfortably deliver our features.
 ## Summary of Contributions
 
 ### Code Contributed
-The code written by me (`ng-andre`) can be found [here](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=ng-andre&sort=groupTitle&sortWithin=title&since=2021-09-25&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=falsehttps://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=ng-andre&sort=groupTitle&sortWithin=title&since=2021-09-25&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false). 
-
+The code written by me (`ng-andre`) can be found [here](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=ng-andre&sort=groupTitle&sortWithin=title&since=2021-09-25&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=falsehttps://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=ng-andre&sort=groupTitle&sortWithin=title&since=2021-09-25&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false).
 
 ### Enhancements Implemented
 
@@ -29,12 +28,12 @@ The code written by me (`ng-andre`) can be found [here](https://nus-cs2113-ay212
    - `EditContactParser.java`: Parses user input, specified index and specified flags, and creates a syntactically valid `EditContactCommand` to be executed
    - `SearchContactParser.java`: Parses user input for search query and optional flag, and creates a syntactically valid `SearchContactCommand` to be executed
    - `IndexParser.java`: Parses the index specified by the user input for all commands and returns the corresponding `int` value
-
-
+   
 ### Contributions to the UG
 - Added documentation for `edit` function
 - Added documentation for `search` function
 - Updated documentation formatting and overall readability
+- Fix formatting errors and ensured overall consistency for UG
 
 ### Contributions to the DG
 - Added documentation for `edit` function
@@ -42,7 +41,9 @@ The code written by me (`ng-andre`) can be found [here](https://nus-cs2113-ay212
 - Added UML diagrams for all the above-mentioned features
 
 ### Contributions to team-based tasks
-- Handled release management and published v1.0 and v2.0 releases
+- Handled release management and published v1.0, v2.0 and v2.1 releases
+- Hosted and attended weekly team meetings for issue review and work allocation
+- Regular debugging and testing of application to ensure basic functionality is present
 - Updated User Guide (UG) and Developer Guide (DG) documentation that were not specific to any feature:
   - Reviewed and updated overall User Guide and fixed inconsistencies between UG and error messages in application
 
@@ -50,3 +51,5 @@ The code written by me (`ng-andre`) can be found [here](https://nus-cs2113-ay212
 - Reviewed PRs and ensured overall code quality/formatting was up to standard
 
 ### Contributions beyond the project team
+- Reported bugs during PE Dry Run 
+- Discussed with other teams and gave suggestions for code improvements 
