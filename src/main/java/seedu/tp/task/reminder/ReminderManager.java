@@ -65,7 +65,12 @@ public class ReminderManager {
                 long userTime = Long.parseLong(commandArguments.get(ReminderFlag.TIME_AHEAD));
                 try {
                     customizeReminderTime(userTime, index - 1, taskManager);
+<<<<<<< HEAD:src/main/java/seedu/tp/task/reminder/ReminderManager.java
                     outMessage += "The time for reminding before task is updated to " + userTime + " minutes.";
+=======
+                    DataManager.updateReminderTime(index - 1, userTime);
+                    outMessage += "The time for reminding before task is updated to " + userTime + " minutes.\n";
+>>>>>>> Xuefei-UserGuide:src/main/java/seedu/duke/task/reminder/ReminderManager.java
                 } catch (InvalidTaskIndexException itie) {
                     return itie.getMessage();
                 } catch (ReminderNotRequiredException rnre) {
@@ -80,7 +85,12 @@ public class ReminderManager {
                 String message = commandArguments.get(ReminderFlag.REMINDER_MESSAGE);
                 try {
                     customizeReminderMessage(message, index - 1, taskManager);
+<<<<<<< HEAD:src/main/java/seedu/tp/task/reminder/ReminderManager.java
                     outMessage += "The reminder message is updated to " + message;
+=======
+                    DataManager.updateReminderMessage(index - 1, message);
+                    outMessage += "The reminder message is updated to \"" + message + "\".";
+>>>>>>> Xuefei-UserGuide:src/main/java/seedu/duke/task/reminder/ReminderManager.java
                 } catch (InvalidTaskIndexException itie) {
                     return itie.getMessage();
                 } catch (ReminderNotRequiredException rnre) {

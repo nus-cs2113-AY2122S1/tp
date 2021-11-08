@@ -386,6 +386,44 @@ Sorts your task list by a given criteria.
 ```
 
 ### 2.6 Setting reminders to your tasks: `reminder`
+By default, a pop-up reminder is displayed 10 minutes before each task.
+
+**Example:**
+```
+-------------------------------------------------------------------------
+Reminder! 10 min before the following task:
+	submit assignment 5 [medium] (dueDate: 02-11-2021 12:00)
+-------------------------------------------------------------------------
+```
+
+You can also choose to **change the reminder message and time**. Each task can have different reminder time and message.
+
+**Format:** `reminder <index of task> [--flag <argument>]`
+- `<index of task>` specifies number of the task you want to change in your current task list.
+- `[--flag <argument>]` specifies additional details you need to provide.
+  - The time *(in minute)* you want the reminder to pop up before it starts/needs to be done: `[--time <minute>]`
+  - The reminder message you want to use: `[--message <your reminder message>]`
+
+>💡 **Note**: The task description cannot be changed. i.e. only the "Reminder! 10 min before the following task:" part can be modified.
+
+**Example:** `reminder 1 --time 30 --message finish it in half an hour!`
+- Change the reminder time to be 30 minute before a task.
+- Change the reminder message to "finish it in half an hour!"    
+    
+**Expected outcome when a reminder is customized:**
+```
+[user]: reminder 1 --time 30 --message finish it in half an hour!
+The time for reminding before task is updated to 30 minutes.
+The reminder message is updated to "finish it in half an hour!".
+```
+
+**Reminder displayed:**
+```
+-------------------------------------------------------------------------
+finish it in half an hour!
+	submit assignment 5 [medium] (dueDate: 02-11-2021 12:00)
+-------------------------------------------------------------------------
+```
 
 ### 2.7 Editing your tasks: `edit`
 Edits a single [Todo](#221-todo-todo), [Deadline](#222-deadline-deadline) or [Event](#223-event-event) based on the flags entered.
@@ -506,7 +544,7 @@ event    | `event <description> [--flag <argument>]`        | `event Marquee Chr
 module   | `module {<module code>:{<class number>,}...;}...`| `module CS2113T:C02;LAJ2203:1,A2,B4`                                                                 | 
 browse   | `browse <index>`                                 | `browse 2`                                                                                           |
 list     | `list [--filter <argument>]` or `list [task id]` | `list` or `list --type todo --priority medium` or `list 3`                                           |
-reminder |                                                  |                                                                                                      |
+reminder | `reminder <index of task> [--flag <argument>]`   | `reminder 1 --time 30 --message finish it in half an hour!`                                               |                                                                                                      |
 sort     | `sort --by <criteria>`                           | `sort --by priority`                                                                                 |
 delete   | `delete <index(es) of task(s) to delete>`        | `delete 1, 2, 4-7`                                                                                   |
 edit     | `edit <index of task to delete>`                 | `edit 3`                                                                                             |
