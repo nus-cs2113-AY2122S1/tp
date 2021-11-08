@@ -1,0 +1,27 @@
+@startuml
+!include Style.puml
+hide circle
+skinparam classAttributeIconSize 0
+
+class Task MODEL_COLOR
+class TaskList MODEL_COLOR
+
+TaskList -[MODEL_COLOR_T1]> "*" Task : taskList
+
+class AddTaskCommand LOGIC_COLOR
+class DeleteTaskCommand LOGIC_COLOR
+class DoneTaskCommand LOGIC_COLOR
+class FindTaskCommand LOGIC_COLOR
+class ListTaskCommand LOGIC_COLOR
+
+AddTaskCommand .down[LOGIC_COLOR_T1].> Task
+AddTaskCommand .down[LOGIC_COLOR_T1].> TaskList
+DeleteTaskCommand .down[LOGIC_COLOR_T1].>Task
+DeleteTaskCommand .down[LOGIC_COLOR_T1].> TaskList
+DoneTaskCommand .up[LOGIC_COLOR_T1].> Task
+DoneTaskCommand .up[LOGIC_COLOR_T1].> TaskList
+FindTaskCommand .up[LOGIC_COLOR_T1].> Task
+FindTaskCommand .up[LOGIC_COLOR_T1].> TaskList
+ListTaskCommand .up[LOGIC_COLOR_T1].> Task
+ListTaskCommand .up[LOGIC_COLOR_T1].> TaskList
+@enduml

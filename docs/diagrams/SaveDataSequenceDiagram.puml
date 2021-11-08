@@ -1,0 +1,59 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include Style.puml
+
+participant ":Storage" as Storage STORAGE_COLOR
+participant "fin:FileReader" as fin
+participant "bin:BufferedReader" as bin
+participant "data:List<String>" as data
+
+[-> Storage: loadData(pathToFile)
+activate Storage
+
+create fin
+Storage -> fin: FileReader(pathToFile.toString())
+activate fin
+
+fin --> Storage
+deactivate fin
+
+create bin
+Storage -> bin: BufferedReader(fin)
+activate bin
+
+bin --> Storage
+deactivate bin
+
+create data
+Storage -> data: ArrayList<>()
+activate data
+
+data --> Storage
+deactivate data
+
+loop until end of file is reached
+    Storage -> bin: readLine()
+    activate bin
+
+    bin --> Storage: line
+    deactivate bin
+
+    Storage -> data: add(line)
+    activate data
+
+    data --> Storage
+    deactivate data
+    end
+
+Storage -> bin: close()
+activate bin
+
+bin --> Storage
+deactivate bin
+
+[<-- Storage: data
+destroy bin
+destroy fin
+deactivate Storage
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+!include Style.puml
+
+class Module MODEL_COLOR
+class ModuleList MODEL_COLOR
+class FullModuleList MODEL_COLOR
+
+ModuleList -down[MODEL_COLOR_T1]-> "*" Module : moduleList
+FullModuleList -[MODEL_COLOR_T1]> "*" Module : fullModuleList
+FullModuleList -[MODEL_COLOR_T1]> "*" Module : moduleMap
+
+hide members
+
+class AddModuleCommand LOGIC_COLOR
+AddModuleCommand .[LOGIC_COLOR_T1].> Module
+AddModuleCommand .[LOGIC_COLOR_T1].> ModuleList
+AddModuleCommand .[LOGIC_COLOR_T1].> FullModuleList
+
+@enduml

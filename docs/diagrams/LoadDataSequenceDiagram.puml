@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include Style.puml
+
+participant ":Storage" as Storage STORAGE_COLOR
+participant "fout:FileWriter" as fout
+participant "bout:BufferedWriter" as bout
+participant "taskList:TaskList" as taskList MODEL_COLOR
+
+[-> Storage: saveData(taskList)
+activate Storage
+
+create fout
+Storage -> fout: FileWriter(PATH_TO_TASK_FILE.toString())
+activate fout
+
+fout --> Storage
+deactivate fout
+
+create bout
+Storage -> bout: BufferedWriter(fout)
+activate bout
+
+bout --> Storage
+deactivate bout
+
+Storage -> taskList: serialize()
+activate taskList
+
+taskList --> Storage: serializedTaskList
+deactivate taskList
+
+Storage -> bout: write(serializedTaskList)
+activate bout
+
+bout --> Storage
+deactivate bout
+
+Storage -> bout: close()
+activate bout
+
+bout --> Storage
+deactivate bout
+
+[<-- Storage
+destroy fout
+destroy bout
+deactivate Storage
+@enduml

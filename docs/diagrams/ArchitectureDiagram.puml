@@ -1,0 +1,30 @@
+@startuml
+!include Style.puml
+
+Package " "<<Rectangle>> {
+    Class Ui UI_COLOR
+    Class Logic LOGIC_COLOR
+    Class Model MODEL_COLOR
+    Class Storage STORAGE_COLOR
+    Class Duke DUKE_COLOR
+    Class Commons COMMONS_COLOR
+}
+
+User .right[#black].> Ui
+
+Ui -down[UI_COLOR_T1]-> Model
+Ui -down[UI_COLOR_T1]-> Logic
+
+Duke -down[DUKE_COLOR_T1]-> Logic
+Duke -down[DUKE_COLOR_T1]-> Model
+Duke -down[DUKE_COLOR_T1]-> Storage
+Duke -up[DUKE_COLOR_T1]-> Ui
+Duke -down[hidden]-> Commons
+
+Logic -left[LOGIC_COLOR_T1]-> Model
+Logic -down[LOGIC_COLOR_T1]-> Storage
+
+Storage .up[STORAGE_COLOR_T1].> Model
+Storage -left[hidden]-> Commons
+Storage .right[STORAGE_COLOR_T1].> Disk
+@enduml

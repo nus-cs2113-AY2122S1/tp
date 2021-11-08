@@ -1,0 +1,23 @@
+@startuml
+!include Style.puml
+
+class Lesson MODEL_COLOR
+class LessonList MODEL_COLOR
+
+LessonList -[MODEL_COLOR_T1]> "*" Lesson : lessonList
+
+class AddLessonCommand LOGIC_COLOR
+class DeleteLessonCommand LOGIC_COLOR
+class FindLessonCommand LOGIC_COLOR
+class ListLessonCommand LOGIC_COLOR
+
+AddLessonCommand .down[LOGIC_COLOR_T1].> Lesson
+AddLessonCommand .down[LOGIC_COLOR_T1].> LessonList
+DeleteLessonCommand .down[LOGIC_COLOR_T1].>Lesson
+DeleteLessonCommand .down[LOGIC_COLOR_T1].> LessonList
+FindLessonCommand .up[LOGIC_COLOR_T1].> Lesson
+FindLessonCommand .up[LOGIC_COLOR_T1].> LessonList
+ListLessonCommand .up[LOGIC_COLOR_T1].> Lesson
+ListLessonCommand .up[LOGIC_COLOR_T1].> LessonList
+
+@enduml

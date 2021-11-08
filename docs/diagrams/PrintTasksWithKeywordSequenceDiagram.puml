@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include Style.puml
+
+participant ":Ui" as ui UI_COLOR
+participant ":TaskList" as tasks MODEL_COLOR
+participant "out:PrintStream" as out
+
+[-> ui : printTasksWithKeyword(taskList, keyword)
+activate ui
+
+ui -> tasks : filterTasksByKeyword(keyword)
+activate tasks
+
+tasks --> ui : :TaskList
+deactivate tasks
+
+alt filteredTaskList.isEmpty()
+
+ui -> out : println("There is no matching task in your list.")
+activate out
+
+out --> ui
+deactivate out
+
+else else
+
+ui -> out : println("Here are the matching tasks in your list:")
+activate out
+
+out --> ui
+deactivate out
+
+ui -> out : println(filteredTaskList)
+activate out
+
+out --> ui
+deactivate out
+
+end
+[<-- ui
+deactivate ui
+destroy tasks
+@enduml

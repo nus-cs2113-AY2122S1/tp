@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include Style.puml
+
+package "Logic" <<Rectangle>> {
+    package "Parser classes" <<Rectangle>> {
+        class Parser LOGIC_COLOR
+        class XYZCommandParser LOGIC_COLOR
+        class ParserUtil LOGIC_COLOR
+    }
+
+    package "Command classes" <<Rectangle>> {
+        class "{abstract} \n Command" LOGIC_COLOR
+        class XYZCommand LOGIC_COLOR
+    }
+}
+
+package "Model" <<Rectangle>> MODEL_COLOR {
+}
+
+package "Storage" <<Rectangle>> STORAGE_COLOR {
+}
+
+package "Ui" <<Rectangle>> UI_COLOR {
+}
+
+Parser .down[LOGIC_COLOR_T1].> ParserUtil
+Parser .down[LOGIC_COLOR_T1].> XYZCommandParser : returns >
+
+XYZCommandParser .right[LOGIC_COLOR_T1].> XYZCommand : creates >
+XYZCommandParser .right[LOGIC_COLOR_T1].> ParserUtil
+
+XYZCommand -up[LOGIC_COLOR_T1]-|> "{abstract} \n Command"
+
+"{abstract} \n Command" .left[LOGIC_COLOR_T1].> Model
+"{abstract} \n Command" .left[LOGIC_COLOR_T1].> Ui
+"{abstract} \n Command" .down[LOGIC_COLOR_T1].> Storage
+
+Storage -left[hidden]-> Ui
+Model -down[hidden]-> Storage
+@enduml

@@ -1,0 +1,88 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include Style.puml
+
+actor User
+
+participant "duke:Duke" as Duke DUKE_COLOR
+participant "ui:Ui" as Ui UI_COLOR
+participant ":Parser" as Parser LOGIC_COLOR
+participant "command:AddTaskCommand" as Command LOGIC_COLOR
+participant "newTask:Task" as Task MODEL_COLOR
+participant "taskList:TaskList" as TaskList MODEL_COLOR
+participant "storage:Storage" as Storage STORAGE_COLOR
+
+activate Duke
+Duke -> Ui: readUserResponse()
+
+activate Ui
+
+Ui -> Ui: Scan input
+activate Ui
+
+User -> Ui: "add task homework -d mon"
+
+Ui --> Ui
+deactivate Ui
+
+Ui --> Duke: userResponse
+deactivate Ui
+
+Duke -> Parser: parse(userResponse)
+activate Parser
+
+Parser --> Duke
+deactivate Parser
+
+create Command
+Duke -> Command: AddTaskCommand("homework", "Monday", "-")
+
+activate Command
+Command --> Duke
+deactivate Command
+
+Duke -> Command: execute(ui, storage, taskList, lessonList, moduleList)
+activate Command
+
+create Task
+Command -> Task: Task("homework", "Monday", "-")
+
+activate Task
+Task --> Command: newTask
+deactivate Task
+
+Command -> TaskList: addTask(newTask)
+activate TaskList
+
+TaskList --> Command
+deactivate TaskList
+
+Command -> Storage: saveData(taskList)
+activate Storage
+
+Storage -> Storage: Save to task.txt
+activate Storage
+
+Storage --> Storage
+deactivate Storage
+
+Storage --> Command
+deactivate Storage
+
+Command --> Ui
+deactivate Command
+
+activate Ui
+Ui --> User
+deactivate Ui
+
+Duke -> Command: isExit()
+activate Command
+
+Command --> Duke: false
+deactivate Command
+
+destroy Task
+destroy Command
+@enduml

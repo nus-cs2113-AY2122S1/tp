@@ -1,0 +1,26 @@
+hide circle
+hide footbox
+hide members
+
+!define UI_COLOR #lightsalmon
+!define UI_COLOR_T1 #orangered
+
+!define LOGIC_COLOR #skyblue
+!define LOGIC_COLOR_T1 #darkblue
+
+!define MODEL_COLOR #plum
+!define MODEL_COLOR_T1 #darkviolet
+
+!define STORAGE_COLOR #moccasin
+!define STORAGE_COLOR_T1 #sienna
+
+!define DUKE_COLOR #lightcoral
+!define DUKE_COLOR_T1 #firebrick
+
+!define COMMONS_COLOR #lightgreen
+!define COMMONS_COLOR_T1 #darkgreen
+
+skinparam Class {
+    BorderThickness 1
+    BorderColor #000000
+}
