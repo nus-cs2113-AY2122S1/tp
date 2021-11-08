@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 //@@author Demonshaha
 /**
  * Storage class for all Tours. Creates and loads up the TourList.
