@@ -3,7 +3,7 @@
 participant ":Parser" as Parser
 participant ":FindTourCommand" as FTC
 participant ":TourList" as TourList
-participant "ClientPackageList" as ClientPackageList
+participant ":ClientPackageList" as ClientPackageList
 
 
 
