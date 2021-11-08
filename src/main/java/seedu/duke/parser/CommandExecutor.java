@@ -363,6 +363,7 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
         Storage.setLastTrip(null);
     }
 
+    private static final int EDIT_ATTR_COUNT = 2;
 
     /**
      * Parses the user input to determine which attributes to edit,
@@ -374,7 +375,7 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
      * @throws ForceCancelException allows the user to cancel an operation when an input is required.
      */
     private static void editTripPerAttribute(Trip tripToEdit, String attributeToEdit) throws ForceCancelException {
-        String[] splitCommandAndData = attributeToEdit.split(" ", 2);
+        String[] splitCommandAndData = attributeToEdit.split(" ", EDIT_ATTR_COUNT);
         String data = splitCommandAndData[ATTRIBUTE_DATA];
         switch (splitCommandAndData[EDIT_ATTRIBUTE]) {
         case EDIT_LOCATION:
