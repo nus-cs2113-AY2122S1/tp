@@ -446,14 +446,55 @@ This section describes the implementation of how the user can display a list of 
 
 ### 4.6. Updating a Goal
 
-A `UpdateGoalCommand` object is returned from the `UpdateParser` if the user input is successfully parsed as shown below.
-If the update command is not provided with a goal index, or without any update flags it will throw an exception.
+This section describes the implementation of how the user can update a goal in the tracking list.
+
+#### 4.6.1. Implementation
+1. The `UpdateParser#parseUpdateGoalCommands(commandInstruction)` method is called, which starts the process of
+   extracting parameters from the user input.
+2. The `UpdateParser#splitInput(commandInstruction)` method splits the user input into an ArrayList of parameters.
+3. The `UpdateParser#getUpdateGoalAttributes(parameters)` method is used to confirm what attributes exist in the user
+   input and finds the flags for those attributes (goal name, goal type, and goal end date).
+4. If `isUpdateGoalName` is true, `UpdateParser#getName(parameter)` is called to get the updated name.
+5. Similarly, `isUpdateGoalType` and `isUpdateGoalEndDate` will call `UpdateParser#getType(parameter)` and
+   `UpdateParser#getDate(parameter)` to get the updated type and updated end date respectively.
+6. The `goalIndex` to update is then obtained with `UpdateParser#getIndex(parameters, FLAG_GOAL_INDEX)` method
+7. The excess attributes provided in the input is found with the `UpdateParser#getExcessGoalAttributes(parameters)`
+   method. This is required as a parameter for the `UpdateGoalCommand` constructor. Its use is detailed in the further
+   steps below.
+8. Finally, a `UpdateGoalCommand(goalIndex, newGoalName, newGoalType, newGoalEndDate, updateAttributes, 
+   excessAttributes)` object is created and returned from the `UpdateParser#parseUpdateGoalCommands(commandInstruction)` 
+   method.
 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateGoalCommandParserSequenceDiagram.png)
+// TODO: Update the diagram to reflect changes to updateAttributes returning an ArrayList<Boolean>
 
-The `runCommand` method is then executed for the `UpdateGoalCommand` object as seen.
+9. The `UpdateGoalCommand#runCommand(goalIndex, newGoalName, newGoalType, newGoalEndDate, updateAttributes,
+   excessAttributes)` method is called, which in turns calls the `GoalList#updateGoalAttributes(goalIndex, newGoalName, 
+   newGoalType, newGoalEndDate, updateAttributes, excessAttributes, printManager)` method.
+10. Within this newly called method, the `PrintManager#printUpdateGoalMessageStart()` method is called to print a
+    message that a goal is being updated.
+11. Based on the `updateAttributes` parameter, if the first element is true, `GoalList#updateGoalName(goalIndex, 
+    newGoalName, printManager)` is called to update the goal name, calling the `PrintManager#printUpdatedGoalName(
+    oldGoalDescription, newGoalDescription)` method to print a confirmation message on successful update of goal name.
+    Similarly, if the second element is true, `GoalList#updateGoalType(goalIndex, newGoalType, printManager)` is called 
+    to update the goal type, calling the `PrintManager#printUpdatedGoalType(ooldGoalTypeName, newGoalTypeName)` 
+    method to print a confirmation message on successful update of goal type. Finally, if the third element is true, 
+    `GoalList#updateGoalEndDate(goalIndex, newGoalEndDate, printManager)` is called to update the goal end date, 
+    calling the `PrintManager#printUpdatedGoalEndDate((goalName, oldDateString, newDateString)` method to print a 
+    confirmation message on successful update of end date after performing some date checking to ensure the end date is
+    valid.
+12. Lastly, the `PrintManager#printUpdateGoalMessageEnd(excessAttributes)` method is called to print a message if
+    some excess parameters can be modified with a different command.
+13. Finally, since this command modifies the `goalList` data, the modified data is saved to the program data file with
+    `Storage#export(goalList)`. If there were any errors raised during this process, the printManager prints the error 
+    with `PrintManager#printError`.
 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateGoalCommandSequenceDiagram.png)
+// TODO: Update the diagram to reflect changes to updateAttributes being an ArrayList<Boolean>
+
+#### 4.6.2. Design Considerations
+
+// TODO
 
 ### 4.7. Updating a Habit
 
@@ -461,10 +502,12 @@ A `UpdateHabitCommand` object is returned from the `UpdateParser` if the user in
 If the update command is not provided with a goal index and a habit index, or without any update flags it will throw an exception.
 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateHabitCommandParserSequenceDiagram.png)
+// TODO: Update the diagram to reflect changes to updateAttributes being an ArrayList<Boolean>
 
 The `runCommand` method is then executed for the `UpdateHabitCommand` object as seen.
 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateHabitCommandSequenceDiagram.png)
+// TODO: Update the diagram to reflect changes to updateAttributes being an ArrayList<Boolean>
 
 
 ### 4.8. Deleting a Goal

@@ -121,7 +121,7 @@ public class UpdateParser extends Parser {
     /**
      * Confirms what attributes exist in the user input.
      * Finds the flags for those attributes (goal name, goal type, and goal end date).
-     * Updates the int[] updateAttributes from 0 to 1 if it finds the flag,
+     * Sets the updateAttributes Boolean ArrayList to true if and only if it finds the flag,
      * signalling what goal attributes the user wants to update.
      *
      * @param parameters ArrayList of parameters of user input.
