@@ -74,7 +74,7 @@ Further elaboration  is given below.
 
 The base `Libmgr` class consists of the main method which is responsible for:
 - Application launch: initializing the components in the correct order and setting up the data containers effectively.
-- Applicaiton teardown: shutting down the components, perform cleaning up and closing of processes where necessary.
+- Application teardown: shutting down the components, perform cleaning up and closing of processes where necessary.
 
 Beyond that, the libmgr application contains a number of other components:
 - `ui`: Contains TextUI, the class which handles user interaction through the command line UI .
