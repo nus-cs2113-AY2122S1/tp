@@ -76,7 +76,7 @@ as major changes to the code architecture were implemented for improved scalabil
 
 * **PR**: [#28](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/28), [#64](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/64), [#84](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/84),
 [#87](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/87), [#114](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/114), [#163](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/163),
-[#173](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/173), [#192](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/192).
+[#173](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/173), [#192](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/192), [#193](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/193).
 
 Most notable enhancement is the [launch lesson](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/114) feature.
 The motivation for developing this comes from the frustration that some terminals do not support URL highlighting,
@@ -90,7 +90,7 @@ Squashed bugs found in PE Dry Run.
 
 ### Contributions to the User Guide
 
-* **PRs**: [#95](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/95), [#106](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/106).
+* **PRs**: [#95](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/95), [#106](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/106), [#193](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/193).
 
 Refactored most sections of UG to improve its layout. Updated User Guide sequentially as the program output changes.
 
