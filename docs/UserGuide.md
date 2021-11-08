@@ -11,7 +11,7 @@ GetJack'D **guarantees faster management of workouts** than traditional GUI appl
 to **help you embark on your fitness journey**, GetJack'D is the one for you!
 
 ## Contents 🔗
-- [Purpose](#purpose-)
+- [Purpose](#purpose⚔️)
 - [Quick Start](#quick-start-)
 - [Features](#features-)
   1. [Creating a new workout: `create`](#1-creating-a-new-workout-create)
@@ -30,14 +30,14 @@ to **help you embark on your fitness journey**, GetJack'D is the one for you!
   14. [Exiting the application: `bye`](#14-exiting-the-application-bye)
   15. [Saving data](#15-saving-data)
   16. [Editable data file](#16-editable-data-file)
-  17. [Troubleshooting](#17-troubleshooting-)
+  17. [Troubleshooting](#17-troubleshooting)
 - [FAQ](#faq-)
 - [Command Summary](#command-summary-)
 
 <div style="page-break-after: always;"></div>
 
 
-## Purpose ⚔️
+## Purpose⚔️
 
 This user guide explains how you can **set up the application and utilise the various features** delivered by GetJack'D.
 
@@ -49,7 +49,7 @@ If you are an **active fitness enthusiast**, you can probably dive straight into
 If you are a **beginner**, you may be more interested in the recommended workouts and work your way up from there as you get more used to
 working out and using GetJack'D.
 
-## Quick Start 🎲️
+## Quick Start 🚀
 
 1. Ensure you have Java `11` or above installed in your computer.
 2. Download the latest `GetJackd.jar` from [here](https://github.com/AY2122S1-CS2113T-F12-2/tp/releases/)
@@ -789,7 +789,7 @@ _**Things to look out for**_ :
 
 <div style="page-break-after: always;"></div>
 
-### 17. Troubleshooting 🔍️
+### 17. Troubleshooting
 
 **1. Unable to create workouts and add exercises.**
 ```text
