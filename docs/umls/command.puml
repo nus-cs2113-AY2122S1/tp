@@ -7,20 +7,18 @@ skinparam groupInheritance 1
 skinparam maxLength 128
 
 AddModCommand <--- Command
-AddUniCommand <--- Command
-AddMapCommand <--- Command
-ListModCommand <--- Command
-RemoveMapCommand <- Command
+AddUniCommand <---- Command
+FindModCommand <---- Command
+ListModCommand <---- Command
+RemoveModCommand <--- Command
 HelpCommand <- Command
 ExitCommand <- Command
-Command -> RemoveModCommand
-Command -> ListUniCommand
-Command ---> FindModCommand
-Command ---> FindUniCommand
-Command ---> SearchMapCommand
+FindUniCommand <- Command
+Command -> AddMapCommand
 Command ---> RemoveUniCommand
-
-
+Command ----> SearchMapCommand
+Command ----> ListUniCommand
+Command ---> RemoveMapCommand
 
 class Command {
     # storage: Storage
