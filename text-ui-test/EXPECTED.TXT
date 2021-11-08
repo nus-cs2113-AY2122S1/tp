@@ -1,9 +1,55 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hello, I'm MedBot!
+How can I help you today?
 
-What is your name?
-Hello James Gosling
+Here is the list of commands:
+
+help
+add
+delete
+edit
+view
+list
+find
+hide
+show
+switch
+get view
+exit
+
+To view more information about each command and their respective command formats, type:
+help [COMMAND]
+
+*Note that all commands will remove any '|' inputs for format parsing purposes.
+For expected output examples, please refer to the User Guide.
+
+Adds a patient to the patient list.
+Format:
+add i/PATIENT_IC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]
+
+Incorrect IC number format.
+
+Incorrect IC number format.
+
+Incorrect IC number format.
+
+Phone number has too few digits.
+
+Phone number contains unexpected characters.
+
+Incorrect email address format.
+
+Incorrect email address format.
+
+Incorrect email address format.
+
+Incorrect email address format.
+
+Added patient with Patient ID: 1
+IC: S1231234A
+Name: John Smith
+H/P: 91234567
+Email: johnsmit@eg.com
+Address: Qweqwqwenoiqwenqw
+
+Thank you for using MedBot!
+See you again!

@@ -1,10 +1,10 @@
-package seedu.duke;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
+package medbot;
 
 import org.junit.jupiter.api.Test;
 
-class DukeTest {
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+class MedBotTest {
     @Test
     public void sampleTest() {
         assertTrue(true);

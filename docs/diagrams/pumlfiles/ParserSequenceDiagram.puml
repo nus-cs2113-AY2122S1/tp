@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+' @@author Kureans
+
+!define MEDBOT_COLOR #32FF32
+!define PARSER_COLOR #26FFE5
+!define PARSER_ACTIVATION_COLOR_1 #72FFF3
+!define PARSER_ACTIVATION_COLOR_2 #A5FFF3
+
+control Medbot as X MEDBOT_COLOR
+box #beige
+participant ":Parser" as A PARSER_COLOR
+participant ":PatientCommandParser" as B PARSER_COLOR
+participant ":ParserUtils" as C PARSER_COLOR
+participant "patient:Patient" as D PARSER_COLOR
+participant "command:AddPatientCommand" as E PARSER_COLOR
+end box
+
+note right of C: Minor utility functions\nin ParserUtils have\nbeen omitted for brevity.
+
+autoactivate on
+
+X -> A PARSER_ACTIVATION_COLOR_1 : parseCommand\n(userInput)
+A -> B PARSER_ACTIVATION_COLOR_1 : parsePatientCommand\n(userInput)
+B -> B PARSER_ACTIVATION_COLOR_2: parseAddCommand(userInput)
+B -> C PARSER_ACTIVATION_COLOR_1 : getParameters(userInput)
+return parameters
+create D
+B -> D PARSER_ACTIVATION_COLOR_1
+return patient
+B -> C PARSER_ACTIVATION_COLOR_1 : updateMultiplePersonalInformation\n(patient, parameters)
+return
+create E
+B -> E PARSER_ACTIVATION_COLOR_1 : AddPatientCommand(patient)
+return command
+return command
+return command
+return command
+
+@enduml

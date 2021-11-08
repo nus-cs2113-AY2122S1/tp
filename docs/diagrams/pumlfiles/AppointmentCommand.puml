@@ -1,0 +1,55 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+skinparam groupInheritance 6
+
+class "{abstract} \n Command"{
+
+    + exit() : boolean
+    + {abstract} execute(Scheduler, Ui)
+}
+
+
+package medbot.command.appointmentcommand {
+class AddAppointmentCommand{
+    # appointment : Appointment
+    + execute(Scheduler, Ui)
+}
+
+class EditAppointmentCommand{
+
+    # appointmentId : int
+    # appointment : Appointment
+    + execute(Scheduler, Ui)
+}
+
+class FindAppointmentCommand{
+    # appointmentId: int
+    # personType : PersonType
+    # filterType : FilterType
+    # dateTimeCode: int
+    + execute(Scheduler, Ui)
+}
+
+class ListAppointmentCommand{
+    + execute(Scheduler, Ui)
+}
+class DeleteAppointmentCommand{
+    # appointmentId: int
+    + execute(Scheduler, Ui)
+}
+class ViewAppointmentCommand{
+    appointmentId: int
+    + execute(Scheduler, Ui)
+}
+"{abstract} \n Command" <|-- AddAppointmentCommand
+"{abstract} \n Command" <|-- EditAppointmentCommand
+"{abstract} \n Command" <|-- DeleteAppointmentCommand
+"{abstract} \n Command" <|-- ListAppointmentCommand
+"{abstract} \n Command" <|-- FindAppointmentCommand
+"{abstract} \n Command" <|-- ViewAppointmentCommand
+}
+
+@enduml

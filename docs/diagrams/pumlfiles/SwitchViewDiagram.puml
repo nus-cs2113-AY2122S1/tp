@@ -1,0 +1,8 @@
+@startuml
+Medbot -> Ui
+Ui -> Parser
+Parser -> Command
+Command --> Ui
+Command -> PatientList
+PatientList --> Ui
+@enduml

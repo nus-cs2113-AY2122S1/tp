@@ -1,0 +1,52 @@
+@startuml ArchitectureDiagram
+!include <office/Concepts/documents>
+!include <office/Users/user>
+
+' @@author jushg
+
+!define USER_COLOR #FFF400
+!define UI_COLOR #B6F400
+!define MEDBOT_COLOR #32FF32
+!define PARSER_COLOR #26FFE5
+!define COMMAND_COLOR #00A9FF
+!define SCHEDULER_COLOR #3F82FF
+!define STORAGE_COLOR #8A59FF
+!define DOCUMENT_COLOR #A932FF
+
+' hide the circles in the diagram
+hide circle
+hide empty members
+skinparam Shadowing false
+skinparam MinClassWidth 50
+
+skinparam Class {
+    BorderThickness 1
+    BorderColor #000000
+}
+
+package " "<<Rectangle>>{
+    class MedBot MEDBOT_COLOR
+    class Ui UI_COLOR
+    class Parser PARSER_COLOR
+    class Command COMMAND_COLOR
+    class Scheduler SCHEDULER_COLOR
+    class Storage  STORAGE_COLOR
+}
+
+class "<$user>" as User USER_COLOR
+class "<$documents>" as Files  DOCUMENT_COLOR
+
+User .down[USER_COLOR].> Ui
+Ui -[UI_COLOR]left-> Parser
+Parser -[PARSER_COLOR]-> Command
+Command -[COMMAND_COLOR]-> Scheduler
+Command -[COMMAND_COLOR]up-> Ui
+Scheduler -[SCHEDULER_COLOR]-> Storage
+MedBot -[MEDBOT_COLOR]up->Ui
+MedBot -[MEDBOT_COLOR]-> Storage
+MedBot -[MEDBOT_COLOR]left-> Parser
+MedBot -[MEDBOT_COLOR]> Scheduler
+Storage .right[STORAGE_COLOR]..>Files
+
+
+@enduml

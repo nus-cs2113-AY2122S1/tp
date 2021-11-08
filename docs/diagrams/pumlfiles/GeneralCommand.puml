@@ -1,0 +1,66 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+skinparam groupInheritance 3
+
+
+package medbot.command {
+enum "<<Enumeration>> \n CommandType" {
+  HELP
+  EXIT
+  SWITCH
+  ADD
+  DELETE
+  EDIT
+  VIEW
+  LIST
+  FIND
+  ARCHIVE
+  UNARCHIVE
+}
+class "{abstract} \n Command"{
+
+    + exit() : boolean
+    + {abstract} execute(Scheduler, Ui)
+}
+
+class ExitCommand {
++ exit() : boolean
++ execute(Scheduler, Ui)
+}
+class GetCurrentViewCommand {
+- viewType: ViewType
++ execute(Scheduler, Ui)
+}
+
+class HelpCommand {
+- viewType: ViewType
+- commandType: CommandType
++ execute(Scheduler, Ui)
+}
+
+class SwitchCommand {
+- newViewType: ViewType
++ execute(Scheduler, Ui)
+}
+
+
+"{abstract} \n Command" <|-- HelpCommand
+"{abstract} \n Command" <|-- ExitCommand
+"{abstract} \n Command" <|-- SwitchCommand
+"{abstract} \n Command" <|-- GetCurrentViewCommand
+
+
+package medbot.command.personcommand {
+
+
+}
+
+package medbot.command.appointmentcommand {
+
+}
+
+}
+@enduml

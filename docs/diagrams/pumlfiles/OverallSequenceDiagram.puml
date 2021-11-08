@@ -1,0 +1,48 @@
+@startuml
+!define ENTITY_COLOR_0 #FFF400
+!define ENTITY_COLOR_1 #B6F400
+!define ENTITY_COLOR_2 #32FF32
+!define ENTITY_COLOR_3 #26FFE5
+!define ENTITY_COLOR_4 #00A9FF
+!define ENTITY_COLOR_5 #3F82FF
+!define ENTITY_COLOR_6 #8A59FF
+
+!define ACTIVATION_COLOR_0 #C8EF53
+!define ACTIVATION_COLOR_1 #C7F248
+!define ACTIVATION_COLOR_2 #66FF66
+!define ACTIVATION_COLOR_3 #99FFF3
+!define ACTIVATION_COLOR_4 #4CC3FF
+!define ACTIVATION_COLOR_5 #5993FF
+!define ACTIVATION_COLOR_6 #874CFF
+
+actor User as user ENTITY_COLOR_0
+participant ":Ui" as ui ENTITY_COLOR_1
+participant ":MedBot" as medbot ENTITY_COLOR_2
+participant "<<Class>>\nParser" as parser ENTITY_COLOR_3
+participant ":DeleteCommand" as command ENTITY_COLOR_4
+participant "scheduler:Scheduler" as scheduler ENTITY_COLOR_5
+participant "storage:Storage" as storage ENTITY_COLOR_6
+
+autoactivate on
+user -> ui ACTIVATION_COLOR_1: "delete 1"
+ui -> medbot ACTIVATION_COLOR_2: "delete 1"
+medbot -> parser ACTIVATION_COLOR_3: parseCommand("delete 1")
+
+parser -> command **: DeleteCommand(1)
+activate command ACTIVATION_COLOR_4
+command --> parser
+parser --> medbot
+medbot -> command ACTIVATION_COLOR_4: execute()
+command -> scheduler ACTIVATION_COLOR_5: deletePatient(1)
+scheduler --> command
+
+command --> medbot ACTIVATION_COLOR_1:
+destroy command
+medbot -> storage ACTIVATION_COLOR_6: saveData()
+storage --> medbot
+medbot --> ui
+ui --> user
+
+
+
+@enduml

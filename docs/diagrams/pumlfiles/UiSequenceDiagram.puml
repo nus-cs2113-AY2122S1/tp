@@ -1,0 +1,46 @@
+@startuml
+!define ENTITY_COLOR_0 #FFF400
+!define ENTITY_COLOR_1 #B6F400
+!define ENTITY_COLOR_2 #32FF32
+!define ENTITY_COLOR_3 #26FFE5
+!define ENTITY_COLOR_4 #00A9FF
+!define ENTITY_COLOR_5 #1966FF
+!define ENTITY_COLOR_6 #7032FF
+
+!define ACTIVATION_COLOR_0 #C8EF53
+!define ACTIVATION_COLOR_1 #C7F248
+!define ACTIVATION_COLOR_2 #66FF66
+!define ACTIVATION_COLOR_3 #99FFF3
+!define ACTIVATION_COLOR_4 #4CC3FF
+!define ACTIVATION_COLOR_5 #4C88FF
+!define ACTIVATION_COLOR_6 #874CFF
+
+participant ":Command" as command ENTITY_COLOR_0
+participant ":Ui" as ui ENTITY_COLOR_1
+participant ":PatientUi" as patientUi ENTITY_COLOR_2
+participant ":StaffUi" as staffUi ENTITY_COLOR_3
+participant ":SchedulerUi" as schedulerUi ENTITY_COLOR_4
+
+command --> ui : getDeleteHelpMessage()
+activate ui ACTIVATION_COLOR_1
+
+alt Patient Info
+    ui -> patientUi : getDeletePatientHelpMessage()
+    activate patientUi ACTIVATION_COLOR_2
+    patientUi --> ui
+    deactivate patientUi
+else Staff Info
+    ui -> staffUi: getDeleteStaffHelpMessage()
+    activate staffUi ACTIVATION_COLOR_3
+    staffUi --> ui
+    deactivate staffUi
+else Scheduler Info
+    ui -> schedulerUi: getDeleteSchedulerHelpMessage()
+    activate schedulerUi ACTIVATION_COLOR_4
+    schedulerUi --> ui
+    deactivate schedulerUi
+end
+
+ui --> command
+deactivate ui
+@enduml

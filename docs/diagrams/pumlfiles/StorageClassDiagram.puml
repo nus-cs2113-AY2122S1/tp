@@ -1,0 +1,59 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+hide empty members
+
+' @@author CrimsonTitan79
+
+package medbot.storage {
+
+skinparam class {
+    BackgroundColor #CFBFFF
+    BorderColor #13004C
+    ArrowColor #13004C
+}
+
+class StorageManager {
++ StorageManager(scheduler, ui)
++ saveToStorage(scheduler)
+}
+
+
+class "{abstract} \n Storage"{
++ loadStorage(listItemType, scheduler): String
++ saveData(storageString: String)
+# createListItem(storageLine, listItemType) {'abstract'}
+}
+
+together {
+class AppointmentStorage {
+# createListItem(storageLine, listItemType)
+}
+
+class "{abstract} \n PersonStorage"{
+# createListItem(storageLine, listItemType)
+}
+
+class PatientStorage
+class StaffStorage
+
+
+StorageManager --> "1" AppointmentStorage
+PatientStorage "1"<-- StorageManager
+StaffStorage "1"<-- StorageManager
+
+"{abstract} \n Storage" ..> "<<enumeration>> \n ListItemType"
+
+"{abstract} \n Storage" <|-- AppointmentStorage
+"{abstract} \n Storage" <|-- "{abstract} \n PersonStorage"
+"{abstract} \n PersonStorage" <|-- PatientStorage
+"{abstract} \n PersonStorage" <|-- StaffStorage
+
+
+enum "<<enumeration>> \n ListItemType"{
+PATIENT
+STAFF
+APPOINTMENT
+}
+
+@enduml

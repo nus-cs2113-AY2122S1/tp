@@ -1,1 +1,13 @@
-James Gosling
+help
+help add
+add i/S1231A n/John Smith
+add i/aaaaaaaaa n/John Smith
+add i/SA999992B n/John Smith
+add i/S1231234A n/John Smith p/912345
+add i/S1231234A n/John Smith p/912345a7
+add i/S1231234A n/John Smith p/91234567 e/johnsmiteg.com a/qweqwqwenoiqwenqw
+add i/S1231234A n/John Smith p/91234567 e/johnsmit@egcom a/qweqwqwenoiqwenqw
+add i/S1231234A n/John Smith p/91234567 e/@eg.com a/qweqwqwenoiqwenqw
+add i/S1231234A n/John Smith p/91234567 e/johnsmiteg.com a/qweqwqwenoiqwenqw
+add i/S1231234A n/John Smith p/91234567 e/johnsmit@eg.com a/qweqwqwenoiqwenqw
+exit
