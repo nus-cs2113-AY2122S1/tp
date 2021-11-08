@@ -112,7 +112,6 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
      */
     protected static void executeEditTrip(String inputDescription) throws ForceCancelException {
         String[] tripToEditInfo = inputDescription.split(" ", 2);
-        assert tripToEditInfo[1] != null;
         String attributesToEdit = tripToEditInfo[1];
         Trip tripToEdit;
         if (tripToEditInfo[0].equals("last")) {

@@ -5,13 +5,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.ForceCancelException;
 import seedu.duke.exceptions.SameNameException;
-import seedu.duke.expense.Expense;
 import seedu.duke.parser.Parser;
 import seedu.duke.trip.Trip;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -26,10 +26,12 @@ class TripTest {
 
     private static Trip testTrip1;
     private static InputStream origIn;
+    private static PrintStream origOut;
 
     @BeforeAll
     static void setUp() throws SameNameException, ForceCancelException {
         origIn = System.in;
+        origOut = System.out;
         String[] stringArray = {"", "Canada", "02-03-2021", "cad", "0.123", "ben,jerry,tom"};
         testTrip1 = new Trip(stringArray);
     }
@@ -75,7 +77,66 @@ class TripTest {
 
     @Test
     public void testNewTripsWithDuplicates() {
-        //TODO: add test
+        String wholeUserInput = "a" + System.lineSeparator() + "n" + System.lineSeparator() + "y";
+        System.setIn(new ByteArrayInputStream(wholeUserInput.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        createNewTripForTest();
+        assertEquals(1, Storage.getListOfTrips().size());
+        String userInput2 = "create /United States of America /02-02-2021 /USD /0.74 /Ben, Jerry, Tom, Harry, Dick";
+        Parser.parseUserInput(userInput2);
+        assertEquals(1, Storage.getListOfTrips().size());
+        Parser.parseUserInput(userInput2);
+        assertEquals(2, Storage.getListOfTrips().size());
+    }
+
+    @Test
+    public void testNewTrip_CheckPerAttributeDuplicate() {
+        createNewTripForTest();
+        assertEquals(1, Storage.getListOfTrips().size());
+        String userInput = "create /United of America /02-02-2021 /USD /0.74 /Ben, Jerry, Tom, Harry, Dick";
+        Parser.parseUserInput(userInput);
+        assertEquals(2, Storage.getListOfTrips().size());
+        userInput = "create /United of America /03-02-2021 /USD /0.74 /Ben, Jerry, Tom, Harry, Dick";
+        Parser.parseUserInput(userInput);
+        assertEquals(3, Storage.getListOfTrips().size());
+        userInput = "create /United of America /03-02-2021 /UAD /0.74 /Ben, Jerry, Tom, Harry, Dick";
+        Parser.parseUserInput(userInput);
+        assertEquals(4, Storage.getListOfTrips().size());
+        userInput = "create /United of America /03-02-2021 /USD /0.75 /Ben, Jerry, Tom, Harry, Dick";
+        Parser.parseUserInput(userInput);
+        assertEquals(5, Storage.getListOfTrips().size());
+    }
+
+    @Test
+    public void testNewTripInsufficientAttributes() {
+        Storage.setListOfTrips(new ArrayList<>());
+        String userInput = "create /United States of America /USD /0.74 /Ben, Jerry, Tom, Harry, Dick";
+        Parser.parseUserInput(userInput);
+        assertEquals(0, Storage.getListOfTrips().size());
+    }
+
+    @Test
+    public void testNewTripBlankName() throws SameNameException, ForceCancelException {
+        String[] input = {" ", "somewhere", "02-02-2021", "USD", "0.22", "Ben, , Jerry"};
+        Trip trip = new Trip(input);
+        assertEquals(2, trip.getListOfPersons().size());
+    }
+
+    @Test
+    public void testNewTripSameName() {
+        String[] input = {" ", "somewhere", "02-02-2021", "USD", "0.22", "Ben, Ben"};
+        assertThrows(SameNameException.class, () -> new Trip(input));
+    }
+
+    @Test
+    public void testNewTripSameNameFull() {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        Parser.parseUserInput("create /United States of America /02-02-2021 /USD /0.74 /Ben, Ben");
+        String errorString = "You have entered people with the same name, please recreate the trip ensuring "
+                + "there are no repeated names for the trip." + System.lineSeparator();
+        assertEquals(errorString, outputStream.toString());
+        System.setOut(origOut);
     }
 
     @Test
@@ -100,6 +161,10 @@ class TripTest {
         Parser.parseUserInput(userInput);
         Trip tripToCheck = Storage.getLastTrip();
         assertEquals("going on a trip", tripToCheck.getLocation());
+        userInput = "edit 1 -location going on the trip";
+        Parser.parseUserInput(userInput);
+        tripToCheck = Storage.getListOfTrips().get(0);
+        assertEquals("going on the trip", tripToCheck.getLocation());
     }
 
     @Test
@@ -162,9 +227,11 @@ class TripTest {
 
     @Test
     public void testEditExRateNotParsableWithForceCancel() {
-        System.setIn(new ByteArrayInputStream("-cancel".getBytes()));
-        Storage.setScanner(new Scanner(System.in));
-        assertThrows(ForceCancelException.class, () -> testTrip1.setExchangeRate("something"));
+        assertThrows(ForceCancelException.class, () -> {
+            System.setIn(new ByteArrayInputStream("-cancel".getBytes()));
+            Storage.setScanner(new Scanner(System.in));
+            testTrip1.setExchangeRate("something");
+        });
     }
 
     @Test
@@ -176,12 +243,55 @@ class TripTest {
     }
 
     @Test
+    public void testEditTripExceptions() {
+        createNewTripForTest();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        Parser.parseUserInput("edit dfg -location somewhere");
+        String errorString = "Please format your inputs as follows: "
+                + System.lineSeparator()
+                + "edit [trip num] [attribute] [new value]"
+                + System.lineSeparator()
+                + "attributes: -location, -date, -exchangerate, -forcur, -homecur"
+                + System.lineSeparator() + System.lineSeparator();
+        assertEquals(errorString, outputStream.toString());
+        outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        Parser.parseUserInput("edit 15 -location somewhere");
+        assertEquals(errorString, outputStream.toString());
+        System.setOut(origOut);
+    }
+
+    @Test
     public void testOpenTripByIndex() throws ForceCancelException {
         createNewTripForTest();
         Storage.setOpenTrip(0);
         assertTrue(Storage.checkOpenTrip());
         assertEquals(Storage.getOpenTrip(), Storage.getListOfTrips().get(0));
         assertEquals(Storage.getLastTrip(), Storage.getListOfTrips().get(0));
+    }
+
+    @Test
+    public void testOpenTripWithAlreadyOpenTrip() throws ForceCancelException {
+        createNewTripForTest();
+        Parser.parseUserInput("create /United of America /02-02-2021 /USD /0.74 /Ben, Jerry, Tom, Harry, Dick");
+        Parser.parseUserInput("open 1");
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        Parser.parseUserInput("open 2");
+        String outputMsgClose = "You have closed the following trip:"
+                + System.lineSeparator()
+                + Storage.getListOfTrips().get(0).getLocation() + " | "
+                + Storage.getListOfTrips().get(0).getDateOfTripString();
+        String outputMsgOpen = "You have opened the following trip: "
+                + System.lineSeparator()
+                + Storage.getListOfTrips().get(1).getLocation() + " | "
+                + Storage.getListOfTrips().get(1).getDateOfTripString();
+        String fullOutput = outputMsgClose + System.lineSeparator() + outputMsgOpen
+                + System.lineSeparator() + System.lineSeparator();
+        assertEquals(fullOutput, outputStream.toString());
+        assertEquals(Storage.getListOfTrips().get(1), Storage.getOpenTrip());
+        System.setOut(origOut);
     }
 
     @Test
@@ -227,13 +337,38 @@ class TripTest {
     }
 
     @Test
-    public void testDeleteTripFull() {
+    public void testDeleteTripFullByIndex() {
         createNewTripForTest();
         Storage.closeTrip();
         String userInput = "delete 1";
         Parser.parseUserInput(userInput);
         assertEquals(0, Storage.getListOfTrips().size());
         assertNull(Storage.getLastTrip());
+    }
+
+    @Test
+    public void testDeleteTripFullByLast() {
+        createNewTripForTest();
+        String userInput = "delete last";
+        Parser.parseUserInput(userInput);
+        assertEquals(0, Storage.getListOfTrips().size());
+        assertNull(Storage.getLastTrip());
+    }
+
+    @Test
+    public void testLastTripNull() {
+        createNewTripForTest();
+        Parser.parseUserInput("create /United of America /03-02-2021 /USD /0.74 /Ben, Jerry, Tom, Harry, Dick");
+        Storage.closeTrip();
+        Parser.parseUserInput("delete 1");
+        assertEquals(1, Storage.getListOfTrips().size());
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+        Parser.parseUserInput("edit last -location somewhere");
+        String errorMsg = "You may have deleted the most recently modified trip. "
+                + "Please try again with the trip number of the trip you wish to edit.";
+        assertEquals(errorMsg + System.lineSeparator(), outputStream.toString());
+        System.setOut(origOut);
     }
 
     @Test
