@@ -50,6 +50,7 @@ The `Command` component implements the Factory Design Pattern to parse user comm
 
 Here’s a (partial) class diagram of the `Command` component:  
 <img src="diagrams/command.puml" width="560">
+[](diagrams/command.puml)  
 
 How the `Command` component works:
 1. Typists `Main` calls upon the `CommandFactory` class to parse the user input.
@@ -95,7 +96,7 @@ There are 3 types:
 
 The following UML diagram illustrates the way content selection works in the program.
 
-![](diagrams/Content.png)
+![](images/Content.png)
 
 There only exists one private content string for all sessions. Each time a set method is called, the string is changed 
 depending on the choices that the user made throughout the process. Whenever the user starts a game, the getContent() 
@@ -107,7 +108,7 @@ Once the CommandFactory reads a 'word' command, a word limit game will begin.
 
 Gonna to change this .puml diagram later - zhansen
 
-![](diagrams/WordLimitMode.png)
+![](images/WordLimitMode.png)
 
 ### \[Proposed\] View Statistics feature
 #### \[Proposed Implementation\]
