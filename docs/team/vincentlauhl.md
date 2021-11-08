@@ -46,9 +46,9 @@ can cook with the ingredients they currently have.
 
 #### Documentation
 - **User Guide**
-    - Added documentations for features `add recipe`, `delete recipe`, `cooked` and `list recipes i can cook` [#86](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/86) [#114](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/114)
+    - Added documentations for features `add recipe`, `delete recipe`, `cooked` and `list recipes i can cook`. [#86](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/86) [#114](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/114)
 - **Developer Guide**
-    - Added implementation details and UML diagrams for features `add recipe`, `delete recipe`, `cooked` and `list recipes i can cook` [#67](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/67) [#119](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/119)
+    - Added implementation details and UML diagrams for features `add recipe`, `delete recipe`, `cooked` and `list recipes i can cook`. [#67](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/67) [#119](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/119)
     - Added design details and UML diagrams for `Data` component. [#67](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/67) [#120](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/120)
 
 #### Review Contribution
