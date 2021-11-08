@@ -107,7 +107,7 @@ public class Module {
 
     public void setGrade(String grade) throws InvalidGradeException {
         if (!isValid(grade)) {
-            throw new InvalidGradeException("Invalid grade");
+            throw new InvalidGradeException(Message.ERROR_INVALID_GRADE);
         }
         this.grade = grade;
     }

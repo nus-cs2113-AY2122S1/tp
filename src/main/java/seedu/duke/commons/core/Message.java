@@ -4,17 +4,11 @@ package seedu.duke.commons.core;
 public final class Message {
     // Error messages, sorted in alphabetical order.
 
-    public static final String ERROR_CREATING_NEW_FILE =
-            "Sorry, I can't create a new save file.";
-
     public static final String ERROR_COMPARING_LESSON =
             "Error: Lesson comparison result is incorrect, the data must be incorrect";
 
     public static final String ERROR_COMPARING_TASK =
             "Error: Lesson comparison result is incorrect, the data must be incorrect";
-
-    public static final String ERROR_DESERIALIZING_DATA =
-            "Sorry, I can't deserialize the save file. Overwriting file..";
 
     public static final String ERROR_DESERIALIZING_LESSON =
             "Saved lesson data is invalid format. Ignoring the line..";
@@ -43,6 +37,9 @@ public final class Message {
     public static final String ERROR_INVALID_DAY =
             "Sorry, the input parameter is not a valid day of the week.";
 
+    public static final String ERROR_INVALID_GRADE =
+            "Sorry, the input grade is invalid. Kindly refer to NUS for a list of valid grades.";
+
     public static final String ERROR_INVALID_INDEX =
             "Sorry, the index is invalid.";
 
@@ -66,6 +63,9 @@ public final class Message {
 
     public static final String ERROR_MISSING_FLAGS =
             "There are missing flags in the input given. Please check again.";
+
+    public static final String ERROR_MODULE_IS_BLANK =
+            "Sorry, no module code was provided.";
 
     public static final String ERROR_MODULE_LOAD_FAILED =
             "Sorry, there was an issue loading NUSMods module information.";
