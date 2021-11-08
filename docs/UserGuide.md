@@ -92,30 +92,30 @@ Example usage:
 
 ```
 $ help
-    ______________________________________________________________________________________
-     Here are the list of commands that you can try.
-     ------------------------------------------------------------------------------------
-     add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}
-     add lesson [TITLE] -d [DAY_OF_THE_WEEK] -s [START_TIME] -e [END_TIME] -l {MEETING_URL}
-     add module [MODULE_CODE]
-     list task {PERIOD/PRIORITY}
-     list lesson {PERIOD}
-     list module
-     delete task [INDEX]
-     delete lesson [INDEX]
-     delete module [MODULE_CODE]
-     done task [INDEX]
-     find task [KEYWORD]
-     find lesson [KEYWORD]
-     find module [MODULE_CODE] {verbose}
-     set grade [MODULE_CODE] [GRADE]
-     launch lesson [INDEX]
-     exit
+      ______________________________________________________________________________________
+       Here are the list of commands that you can try.
+       ------------------------------------------------------------------------------------
+       add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}
+       add lesson [TITLE] -d [DAY_OF_THE_WEEK] -s [START_TIME] -e [END_TIME] -l {MEETING_URL}
+       add module [MODULE_CODE]
+       list task {PERIOD/PRIORITY}
+       list lesson {PERIOD}
+       list module
+       delete task [INDEX]
+       delete lesson [INDEX]
+       delete module [MODULE_CODE]
+       done task [INDEX]
+       find task [KEYWORD]
+       find lesson [KEYWORD]
+       find module [MODULE_CODE] {verbose}
+       edit module [MODULE_CODE] -g [GRADE]
+       launch lesson [INDEX]
+       exit
 
-     Notes: Square brackets -> [COMPULSORY_PARAMETER]
-            Curly braces    -> {OPTIONAL_PARAMETER}
-            More details: https://ay2122s1-cs2113t-w11-3.github.io/tp/UserGuide.html
-    ______________________________________________________________________________________
+       Notes: Square brackets -> [COMPULSORY_PARAMETER]
+              Curly braces    -> {OPTIONAL_PARAMETER}
+              More details: https://ay2122s1-cs2113t-w11-3.github.io/tp/UserGuide.html
+      ______________________________________________________________________________________
 ```
 
 You can use this as a quick guide while using NUS Buddy. The format of the commands shown by `help` 
