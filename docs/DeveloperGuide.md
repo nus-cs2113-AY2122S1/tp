@@ -61,6 +61,11 @@ there must be at least one trip added by the user (either through input or throu
 save file) in order for any other features to be available. If there are no trips added, the program 
 will repeatedly prompt the user to add a new trip.
 
+The sequence diagram below shows what happens when the user creates a new trip. If a duplicate
+trip is input, the app will confirm with the user if he/she wishes to add the duplicate trip.
+
+![](images/tripSeq.png)
+
 ### `Person` Class
 Below details the UML diagram for the `Person` class.
 ![](images/Person_Diagram.JPG)
