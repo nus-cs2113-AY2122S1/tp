@@ -103,11 +103,11 @@ You may use this feature of **SLAM** to view the desired selection of your **SLA
 
 You may choose to view all your scheduled `events` in SLAM. SLAM sorts this chronologically for you so you don't have to. 
 
-**Format:** `list`
+**Format:** `list -e`
 
 **Example:** 
 ```
-> list
+> list -e
 ```
 
 ```
@@ -141,9 +141,9 @@ List of members in MemberRoster
 
 💡 You may also choose to view all the `tasks` you have assigned to any specified event.
 
-**Format:** `list EVENT_INDEX -t`
+**Format:** `list -t EVENT_INDEX`
 
-**Example:** `list 1 -t`
+**Example:** `list -t 1`
 
 **Expected Output:** 
 ```
@@ -159,9 +159,9 @@ Event: Tembusu Concert
 
 💡 **SLAM** also allows you to choose to **view all the assigned members for a particular task** too.
 
-**Format:** `list EVENT_INDEX t/TASK_INDEX`
+**Format:** `list -m e/EVENT_INDEX t/TASK_INDEX`
 
-**Example:** `list 1 t/1`
+**Example:** `list -m e/1 t/1`
 
 **Expected Output:**
 ```
@@ -318,13 +318,13 @@ Here are are the events found:
 ### 4.8 Display next upcoming Event
 The next command displays to you the next upcoming event or task of an event on the calendar
 
-To display the next upcoming event we key in `next event`
+To display the next upcoming event we key in `next -e`
 
-**Format:** `next event`
+**Format:** `next -e`
 
 **Expected Output:**
 ```
-> next event
+> next -e
 ```
 ```
 Title: Tembusu Concert
@@ -336,13 +336,13 @@ Tasks:
 1. Buy stage lights
 ```
 
-To display the next upcoming task we key in `next task`
+To display the next upcoming task we key in `next -e EVENT_ID`
 
-**Format:** `next task EVENT_ID`
+**Format:** `next -t EVENT_ID`
 
 **Expected Output:**
 ```
-> next task 1
+> next -t 1
 ```
 ```
 Title: Buy stage lights
@@ -378,13 +378,14 @@ Tasks:
 _________________________________________________________________________________
 Please type the item you would like to update in the following manner 
 -----------------------------------------------------------------------   
-title/[NEW NAME]   
-date/[NEW DATE[d/dd-MM-yyyy HHmm]]
-description/[NEW DESCRIPTION]
-venue/[NEW VENUE]
-budget/[NEW BUDGET]
-task/[TASK NUM YOU WANT TO UPDATE]
-You may type more then one update at a given time but separate them with a [>]
+n/[NEW NAME]   
+d/[NEW DATE[d/dd-MM-yyyy HHmm]]
+p/[NEW DESCRIPTION]
+v/[NEW VENUE]
+b/[NEW BUDGET]
+t/[TASK NUM YOU WANT TO UPDATE]
+Only type a singular update at given time!
+Only the first command will be updated if multiple updates are written
 _________________________________________________________________________________
 ```
 We can then update the detail of the specifc event by following the list of commands below to update. We can update multiple in a single like by seperating each item by a `>`.
@@ -400,7 +401,7 @@ We can then update the detail of the specifc task by keying in `task/[TASK NUM Y
 
 **Expected Output:**
 ```
-> task/1
+> t/1
 ```
 ```
 Title: Buy stage lights
@@ -411,21 +412,25 @@ Members:
 ____________________________________________________________________________________
 Please type the item for task you would like to update in the following manner 
 -----------------------------------------------------------------------
-title/[NEW NAME]   
-deadline/[NEW DATE[d/dd-MM-yyyy HHmm]]
-description/[NEW DESCRIPTION]
+n/[NEW NAME]   
+d/[NEW DATE[d/dd-MM-yyyy HHmm]]
+p/[NEW DESCRIPTION]
 member/[MEMBER INDEX]
 remove/[MEMBER INDEX]
-You may type more then one update at a given time but separate them with a [>]
+To add a member to a task, enter 'add'
+
+Only type a singular update at given time!
+Only the first command will be updated if multiple updates are written
 ____________________________________________________________________________________
 ```
 We can then update the details of the specifc task by following the list of commands below to update. We can update multiple in a single like by seperating each item by a `>`.
 
-1. `title/NEW_NAME` to update the title of the event
-2. `date/[dd-MM-yyyy HHmm]` to update the date of the event
-3. `description/[NEW DESCRIPTION]` to update the description of the event
+1. `n/[NEW NAME]` to update the title of the event
+2. `d/[NEW DATE[d/dd-MM-yyyy HHmm]]` to update the date of the event
+3. `p/[NEW DESCRIPTION]` to update the description of the event
 4. `member/[MEMBER INDEX]` to change a member assigned to this task
 5. `remove/[MEMBER INDEX]` to remove a member assigned to this task
+6. `add` to assign a member to this task
 
 [Back to table of contents](#table-of-contents)
 
