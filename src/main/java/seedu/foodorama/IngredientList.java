@@ -45,15 +45,17 @@ public class IngredientList {
         double ingredientWeightValue;
         while (loop == LOOP) {
             String confirmAdd = "e";
-            if (!isNumber(ingredientWeight)) {
+            if (!isNumber(ingredientWeight) | !isDouble(ingredientWeight)) {
                 throw new FoodoramaException(UI.getInvalidNumberMsg());
             }
-
             ingredientWeightValue = Double.parseDouble(ingredientWeight);
             while (ingredientWeightValue < 0) {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printInvalidIngrWeight(ingredientName);
                 ingredientWeight = in.nextLine();
+                if(!isDouble(ingredientWeight)) {
+                    throw new FoodoramaException(UI.getInvalidNumberMsg());
+                }
                 ingredientWeightValue = Double.parseDouble(ingredientWeight);
             }
             if (Double.isInfinite(ingredientWeightValue) || Double.isNaN(ingredientWeightValue)) {
@@ -68,6 +70,9 @@ public class IngredientList {
                     UI.clearTerminalAndPrintNewPage();
                     UI.printEnterWeightOf(ingredientName);
                     ingredientWeight = in.nextLine();
+                    if(!isDouble(ingredientWeight)) {
+                        throw new FoodoramaException(UI.getInvalidNumberMsg());
+                    }
                     ingredientWeightValue = Double.parseDouble(ingredientWeight);
                 }
             }
