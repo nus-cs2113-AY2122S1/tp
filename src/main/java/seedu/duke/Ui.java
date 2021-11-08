@@ -195,8 +195,16 @@ public class Ui {
         show("Total Clients: " + count);
     }
 
-    public void showFindClient(ClientList clients, ClientPackageList clientPackages, String name) {
-        String lowercaseName = name.toLowerCase();
+    /**
+     * Ui response to FindClientCommand.
+     * Shows specific client(s) based on a susbtring, as well as the client packages they are a part of.
+     *
+     * @param clients the ClientList from which the clients are obtained from.
+     * @param clientPackages the ClientPackageList from which the client packages of the client are obtained from.
+     * @param substring the substring used to obtain the specific client(s).
+     */
+    public void showFindClient(ClientList clients, ClientPackageList clientPackages, String substring) {
+        String lowercaseName = substring.toLowerCase();
         int foundClients = 0;
         int count = clients.getClientCount();
         for (int i = 0; i < count; i++) {
@@ -215,6 +223,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Shows clientPackages that a certain client is a part of.
+     *
+     * @param currClient the client which the shown clientPackages must contain.
+     * @param clientPackages the ClientPackageList from which the client packages of the client are obtained from.
+     */
     private void showFlightTourOfClient(Client currClient, ClientPackageList clientPackages) {
         ArrayList<ClientPackage> clientPackagesWithClient;
         clientPackagesWithClient = clientPackages.getClientPackageByClient(currClient);
@@ -243,6 +257,14 @@ public class Ui {
         show("Total Tours: " + count);
     }
 
+    /**
+     * Ui response to FindTourCommand.
+     * Shows specific tour based on an ID, as well as the subscribed clients for said tour.
+     *
+     * @param tours the TourList from which the tours are obtained from.
+     * @param clientPackages the ClientPackageList from which the subscribers of the tour are obtained from.
+     * @param id the ID used to find the specific tour.
+     */
     public void showFindTour(TourList tours, ClientPackageList clientPackages, String id)
             throws TourPlannerException {
         Tour foundTour = tours.getTourById(id);
@@ -434,10 +456,18 @@ public class Ui {
         show("Total Flights: " + count);
     }
 
-
-    public void showFindFlight(FlightList flights, ClientPackageList clientPackages, String code)
+    
+    /**
+     * Ui response to FindFlightCommand.
+     * Shows specific flight based on an ID, as well as the passengers for said flight.
+     *
+     * @param flights the FlightList from which the flights are obtained from.
+     * @param clientPackages the ClientPackageList from which the passengers for the flight are obtained from.
+     * @param id the ID used to find the specific flight.
+     */
+    public void showFindFlight(FlightList flights, ClientPackageList clientPackages, String id)
             throws TourPlannerException {
-        Flight foundFlight = flights.getFlightById(code);
+        Flight foundFlight = flights.getFlightById(id);
         if (foundFlight != null) {
             show(FIND_SUCCESS_MESSAGE_LEFT + "flight " + FIND_MESSAGE_RIGHT);
             show(foundFlight + "\n" + "\n");
