@@ -99,23 +99,29 @@ public class SelectedUniversityStorage extends UserStorage {
                                 String line, ModuleList moduleMasterList,
                                 UniversityList universityMasterList,
                                 String universityName) {
-        String[] attributes = line.split(" # ");
-        if (attributes.length != 6) {
-            logger.log(Level.SEVERE, "Invalid mapping found in the file.");
-            isMappingValid = false;
-            return;
-        }
-        Module local = new Module(attributes[0], attributes[1],
-                parseDouble(attributes[2]), moduleMasterList);
-        Module mapped = new Module(attributes[3], attributes[4],
-                parseDouble(attributes[5]), 0);
-        ModuleMapping newMapping = new ModuleMapping(local, mapped);
-        University currentUni = universityMasterList.getUniversity(universityName);
-        if ((local.getIndex() != -1) && (currentUni != null)
-                && currentUni.isExistMapping(newMapping)
-                && !(isMappingExist(moduleMappings, newMapping))) {
-            moduleMappings.add(newMapping);
-        } else {
+        try {
+            String[] attributes = line.split(" # ");
+
+            if (attributes.length != 6) {
+                logger.log(Level.SEVERE, "Invalid mapping found in the file.");
+                isMappingValid = false;
+                return;
+            }
+            Module local = new Module(attributes[0], attributes[1],
+                    parseDouble(attributes[2]), moduleMasterList);
+            Module mapped = new Module(attributes[3], attributes[4],
+                    parseDouble(attributes[5]), 0);
+            ModuleMapping newMapping = new ModuleMapping(local, mapped);
+            University currentUni = universityMasterList.getUniversity(universityName);
+            if ((local.getIndex() != -1) && (currentUni != null)
+                    && currentUni.isExistMapping(newMapping)
+                    && !(isMappingExist(moduleMappings, newMapping))) {
+                moduleMappings.add(newMapping);
+            } else {
+                logger.log(Level.SEVERE, "Invalid mapping found in the file.");
+                isMappingValid = false;
+            }
+        } catch (NumberFormatException ne) {
             logger.log(Level.SEVERE, "Invalid mapping found in the file.");
             isMappingValid = false;
         }
