@@ -44,7 +44,7 @@ public class CommandConstants {
     //note: this string is to be modified by uncommenting the potion in help_command by the dev team
     // so it's only partially "hard-coded"
     public static  String HELP_MESSAGES =
-            "\tAdd Entry  : journal entry n/[NOTEBOOK_NAME] e/[ENTRY_NAME]"
+            "\tAdd Entry  : journal entry n/[NOTEBOOK_NAME] e/[ENTRY_NAME]\n"
                     + "\tAdd Food  : food add n/[FOOD_NAME] c/[CALORIE] {d/DD-MM-YYYY}\n"
                     + "\tAdd Food From Reference  : food radd s/[STORE_INDEX] i/[ITEM_INDEX]\n"
           + "\tAdd Lecture  : calendar lecture m/[MODULE_CODE] s/[DD-MM-YYYY(START_DATE)] e/[DD-MM-YYYY(END_DATE)]\n"

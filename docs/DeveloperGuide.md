@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-[Acknowlegements](#acknowledgements)
+[Acknowledgements](#acknowledgements)
 1. [Introduction](#1-introduction)\
 1.1 [Background](#11-background)\
 1.2 [Purpose](#12-purpose)\
@@ -36,7 +36,7 @@
 [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
 
 
-# Acknowledgements
+## Acknowledgements
 
 `Click` was inspired by the skeleton code and documentation (UG and DG) of [AddressBook Level-3](https://se-education.org/addressbook-level3/).
 
@@ -121,7 +121,7 @@ The `UI` component:
 
 1. `Click` uses `Parser` class to parse the user command.
 2. `Parser` checks if the command is valid or not, splits the user input into interpretable portions, and returns the respective commands with arguments.
-3. All commands inherit from the abstract class `Command` with and `execute()` method. 
+3. All commands inherit from the abstract class `Command` with  `execute()` method. 
 4. Command interacts with models, `Storage` to carry out user's command.
 5. Command also makes use of `UI` to display the messages to the user.
 
@@ -144,7 +144,9 @@ The saving of data from the list to the storage file is elaborated further in th
 ![](diagrams/food/foodClassDiagram.png)
 
 Additionally, StallsManager is implemented to support the `food view` commands, which include a reference food court
-, Technoedge.This class includes all stalls, food items sold by the store as well as the calorie count for the food items.
+, Technoedge.
+
+This class includes all stalls, food items sold by the store as well as the calorie count for the food items.
 Furthermore, methods that involve sorting and filtering food items by calorie count and name are implemented in StallsManager
 for the user to easily find items.
 
@@ -152,7 +154,7 @@ for the user to easily find items.
 
 The storage of `Click` refers to storing files of user's data into respective local subdirectory in a local directory called `storage`, which is in the same directory as the project root.
 
-The respective `.txt` files corresponding to the different features of click are held in their respective subfolders.
+The respective `.txt` files corresponding to the different features of click are held in their respective subfolder.
 
 For example, `food.txt` would be found under `storage/fooddata/`.
 
@@ -211,15 +213,15 @@ When the user types `module add c/CS2113T n/Software Engineering m/4 e/A`, the f
 1. User executes `module add c/CS2113T n/Software Engineering e/A`\
    i. `Click` receives user's input.\
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
-2. Creating `AddModuleCommand` object.
-3. Executing command.\
+2. Create `AddModuleCommand` object.
+3. Execute command.\
    i. `AddModuleCommand` finds `indexOfCode`, `indexOfName`, `indexOfMc` and `indexOfExpectedGrade` in user's input\
    ii. `AddModuleCommand` checks if there are duplicate prefixes in the command or not. If yes, throw `DuplicateModuleParamException`\
    iii. `AddModuleCommand` calls `getModule()` to create a new `module` based on user's input\
    iv. `AddModuleCommand` calls `moduleManager.addNewModule(module)` to add the new `module` to the module list\
    v. `AddModuleCommand` prompts the successful message to the user.
 
-The sequence diagram below summarizes how adding a module work:
+The sequence diagram below summarizes how adding a module works:
 
 ![AddModule](diagrams/module/AddModule.png)
 
@@ -234,10 +236,10 @@ When the user types `module delete 2`, the following sequence of steps will then
 1. User executes `module delete 2`\
    i. `Click` receives user's input.\
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
-2. Creating `DeleteModuleCommand` object.
-3. Executing command.\
+2. Create `DeleteModuleCommand` object.
+3. Execute command.\
    i. `DeleteModuleCommand` finds the index of the module to be deleted in user's input.\
-   ii. `DeleteModuleCommand` calls `moduleManager.deleteModule(moduleIndex)` to delete the specifed module and print the message to the user.
+   ii. `DeleteModuleCommand` calls `moduleManager.deleteModule(moduleIndex)` to delete the specified module and print the message to the user.
 
 
 #### 4.1.3 Listing All Modules
@@ -251,10 +253,10 @@ When the user types `module list`, the following sequence of steps will then occ
 1. User executes `module list`\
    i. `Click` receives user's input.\
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
-2. Creating `ListModuleCommand` object.
-3. Executing command.\
+2. Create `ListModuleCommand` object.
+3. Execute command.\
    i. `ListModuleCommand` calls `storage.StorageModule.readDataFromFile()` to read Module-related data from the storage file.\
-   ii. `ListModuleCommand` check if there is any Modules in the list. If not, prints the message of having no modules then return.\
+   ii. `ListModuleCommand` check if there are any Modules in the list. If not, prints the message of having no modules then return.\
    iii. `ListModuleCommand` prompts the message to list the Modules to the user and prints out the Modules line by line.
 
 The sequence diagram below summarizes how listing modules work:
@@ -272,8 +274,8 @@ When the user types `cap edit`, the following sequence of steps will then occur:
 1. User executes `module list`\
    i. `Click` receives user's input.\
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
-2. Creating `CapEditInfoCommand` object.
-3. Executing command.\
+2. Create `CapEditInfoCommand` object.
+3. Execute command.\
    i. `CapEditInfoCommand` calls `ui.printMessage()` to print the `GET_CAP_QUESTION` to the user\
    ii. `CapEditInfoCommand` gets the current CAP from the user. If the CAP is illegal, `CapEditInfoCommand` throws `IllegalCurrentCapException`\
    iii. `CapEditInfoCommand` calls `ui.printMessage()` to print the `GET_MC_QUESTION` to the user\
@@ -296,8 +298,8 @@ When the user types `cap expected`, the following sequence of steps will then oc
 1. User executes `module list`\
    i. `Click` receives user's input.\
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
-2. Creating `GetCapCommand` object.
-3. Executing command.\
+2. Create `GetCapCommand` object.
+3. Execute command.\
    i. `GetCapCommand` calls `moduleManager.getExpectedCap()` to get the expected CAP.
    ii. If the expected CAP return is not a number, `GetCapCommand` calls `ui.printMessage` to prompt the `MESSAGE_MISSING_CAP_INFO` to the user.
    iii. Else, `GetCapCommand` calls ui.printMessage` to print the information related to the CAP and the expected CAP to the user.
@@ -320,8 +322,8 @@ The following diagram explains the sequence of execution for the zoom list comma
 This command is implemented by the `AddZoomCommand` class. The basic functionality of this command is to write a new zoom link to a local storage file and associate it to the relevant module code. The `AddZoomCommand`
 class extends `Command`.
 
-Syntax: `zoom add LINK MODULE_CODE`
-Example: `zoom add https://nus-sg.com ABC101`
+Syntax: `zoom add [MODULE_CODE] [LINK]`
+Example: `zoom add CS2113T https://nus.sg/testlink`
 
 The following diagram explains the sequence of execution for the add zoom command. 
 ![addzoomlink](./diagrams/zoom/addZoomLinksFinal.png)
@@ -331,7 +333,7 @@ The following diagram explains the sequence of execution for the add zoom comman
 
 this command is implemented by the `OpenZoomLink` class. The basic functionality of this command is to open the zoom link associated to the particular module. The `OpenZoomLink` class extends `Command`
 
-Syntax: `zoom open MODULE_CODE`
+Syntax: `zoom open [MODULE_CODE]`
 Example: `zoom open CS2113T`
 
 
@@ -343,7 +345,7 @@ This feature allows the user to view a calendar with tasks and lectures.
 
 The command for displaying the calendar for a specific month is implemented by the `DisplayCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the display calendar mechanism behaves at each step.
+Given below is an example of how the display calendar mechanism behaves at each step.
 
 1. The user enters the command `calendar display 10-2021`. This command is then sent for parsing in the `Click` class to `parseCommand` method in the `Parser` class. The `parseCommand` method first splits the entire command into an array `todoArguments` containing `calendar`, `display` and `10-2021`.
 2. The string `calendar` from the first index of todoArguments is checked against switch cases and is found to match `COMMAND_CALENDAR` which is the constant string "calendar". Upon finding this match, the string from the second index `todoArguments`is further split based on the delimiter of a single white space. The string `display` id checked against possible suffixes and `Command` object `DisplayCommand` is returned to the `Click` class.
@@ -353,15 +355,18 @@ Given below is an example usage scenario and how the display calendar mechanism 
    
       ii. The `inputYearMonth` is passed into `Ui` class method `printCalenderTitle` and this prints out the title of that month with the month name and the year. In this example, it will display as given in the figure below.
      ![](diagrams/calendar/calendar_header.png)
+     
       iii. Then, the method `arrangeTaskList` in `Schedule` class is called, and it takes in `storage.tasksList` (the TaskList object with all the currently stored tasks drawn from storage), `calendarTasks` (an ArrayList<ArrayList<String>> object initialized with empty ArrayLists of type String), `month` (the month input by the user, which in this example is the integer `10`) and year `month` (the year input by the user, which in this example is the integer `2021`), and adds the tasks to the days in the empty String ArrayLists initialized before in `calendarTasks`.
-      iv.The method `arrangeLectureList` is also called and the process is same as in the previous step, except with `storage.lectureList` and `calendarLecture` replacing the first two input parameters of `arrangeTaskList`.
+     
+      iv.The method `arrangeLectureList` is also called, and the process is same as in the previous step, except with `storage.lectureList` and `calendarLecture` replacing the first two input parameters of `arrangeTaskList`.
+     
       v.Then, the method `displayCalendar` in `Schedule` class is called, and it takes in `inputYearMonth` (the YearMonth object created from the month and year parsed from the user input), the `calendarTasks` (that was filled with the tasks for each day in the Step (iii)) and `calendarLecture` (that was filled with the lectures for each day in the Step (iv)). The method `displayCalendar` performs the necessary logic to print out the calendar.
   >  **NOTE:** Two tasks and two lectures are displayed for each day based on the order in which the user added them, and if there are more, they will show as and when the user deletes the tasks/lectures that are currently displayed.
 
 The below sequence diagram shows the execution process of the calendar display feature.
 ![](diagrams/calendar/CalendarDisplaySequence.png)
 
-**Design Considerations**
+**Calendar Design Considerations**
 
 The following design considerations were kept in mind while implementing the calendar display feature,
 - Aspect: Calendar visual display
@@ -378,7 +383,7 @@ This feature allows user to add a new Task.
 
 The command for adding a task is implemented by the `AddTodoCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the add task mechanism behaves at each step.
+Given below is an example of how the add task mechanism behaves at each step.
 
 1. User executes `calendar todo n/RANDOMNAME d/10-10-2021`\
    i. `Click` receives user's input.\
@@ -402,7 +407,7 @@ This feature allows user to add a new Lecture.
 
 The command for adding a lecture is implemented by the `AddLectureCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the add lecture mechanism behaves at each step.
+Given below is an example of how the add lecture mechanism behaves at each step.
 
 1. User executes `calendar lecture m/CS2113T s/10-10-2021 e/30-10-2021`\
    i. `Click` receives user's input.\
@@ -422,7 +427,7 @@ This feature allows user to view all Tasks.
 
 The command for listing all tasks is implemented by the `ListTasksCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the list task mechanism behaves at each step.
+Given below is an example of how the list task mechanism behaves at each step.
 
 1. User executes `calendar list task`\
    i. `Click` receives user's input.\
@@ -438,7 +443,7 @@ This feature allows user to view all Lectures.
 
 The command for listing all lectures is implemented by the `ListLecturesCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the list lecture mechanism behaves at each step.
+Given below is an example of how the list lecture mechanism behaves at each step.
 
 1. User executes `calendar list lec`\
    i. `Click` receives user's input.\
@@ -454,7 +459,7 @@ This feature allows user to delete a Task created in the past.
 
 The command for deleting a task is implemented by the `DeleteTaskCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the delete task mechanism behaves at each step.
+Given below is an example of how the "delete task" mechanism behaves at each step.
 
 1. User executes `calendar delete task 1`\
    i. `Click` receives user's input.\
@@ -463,7 +468,7 @@ Given below is an example usage scenario and how the delete task mechanism behav
 3. Execution of the command.\
    i. `DeleteTaskCommand` checks if the index as gotten from `getTaskIndex()` of `Parser` class is in the task list and if it not then `CalendarIndexNotFoundException()` is thrown.\
    ii. `DeleteTaskCommand` calls `deleteTask(this.index)` for the index of the task as given by the user to delete the task.\
-   iii. The delete successful message is printed to the user.\
+   iii. The "delete successful" message is printed to the user.\
    iv. `DeleteTaskCommand` calls `StorageTasks.writeTaskList(Storage.tasksList)` to save the new data to the storage file.
 
 Below is a sequence diagram that demonstrates this feature.
@@ -476,7 +481,7 @@ This feature allows user to delete a Lecture created in the past.
 
 The command for deleting a task is implemented by the `DeleteLectureCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the delete lecture mechanism behaves at each step.
+Given below is an example of how the "delete lecture" mechanism behaves at each step.
 
 1. User executes `calendar delete lec 1`\
    i. `Click` receives user's input.\
@@ -485,7 +490,7 @@ Given below is an example usage scenario and how the delete lecture mechanism be
 3. Execution of the command.\
    i. `DeleteLectureCommand` checks if the index as gotten from `getLectureIndex()` of `Parser` class is in the task list and if it not then `LectureIndexNotFoundException()` is thrown.\
    ii. `DeleteLectureCommand` calls `deleteLecture(this.index)` for the index of the lecture as given by the user to delete the lecture.\
-   iii. The delete successful message is printed to the user.\
+   iii. "Delete successful" message is printed to the user.\
    iv. `DeleteLectureCommand` calls `StorageLecture.writeLectureList(Storage.lectureList)` to save the new data to the storage file.
 
 #### 4.3.8 Editing a Task
@@ -494,7 +499,7 @@ This feature allows user to edit a Task created in the past.
 
 The command for editing a task is implemented by the `EditTasksCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the edit task mechanism behaves at each step.
+Given below is an example of how the edit task mechanism behaves at each step.
 
 1. User executes `calendar edit task 1`\
    i. `Click` receives user's input.\
@@ -504,28 +509,27 @@ Given below is an example usage scenario and how the edit task mechanism behaves
    i. `EditTasksCommand` checks if the index as gotten from `getTaskIndexForEdit()` of `Parser` class is in the task list and if it not then `CalendarIndexNotFoundException()` is thrown.\
    ii. `EditTasksCommand` prompts the user to enter the command to add a todo task and parses the command using `parseTodoCommand()` The date given by the user is checked with `checkIfDateValid(date)` and if the date is incorrect then an exception is thrown.\
    iii. `EditTasksCommand` calls `editTask()` to edit the task.\
-   iv. Edit successful message is printed back to the user.
+   iv. Edit successful message is printed back to the user.\
    iv. `EditTasksCommand` calls `StorageTasks.writeTaskList(Storage.tasksList)` to save the new data to the storage file.
 
 ### 4.4 Journaling Feature
 This segment focuses on describing the implementation of journaling-related features, the functionality of the 
 commands as well as the design considerations taken.
 
-#### 4.4.1 Feature list
-#### Add notebook feature
+#### 4.4.1 Add notebook feature
 
 The command for adding notebook is implemented by the `AddNoteCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the add notebook mechanism behaves at each step.
+Given below is an example of how the add notebook mechanism behaves at each step.
 
 1. User inputs `journal notebook n/CS2113` \
    i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
-2. Creating `AddNoteCommand` object.
+2. Create `AddNoteCommand` object.
 3. AddNoteCommand execution. \
    i. `AddNoteCommand` calls `ParserJournal.parseAddNoteCommand(userInput)` which returns the notebook name. \
    ii. `AddNoteCommand` calls `storage.collectionOfNotebooks.addNote(noteName, "none")`. Here the parameters are the
-   notebook name and the tag name which is "none" by default. \
+   notebook name, and the tag name which is "none" by default. \
    iii. `AddNoteCommand` calls `ui.printAddedNoteMessage` and passes in notebook name as parameter to convey
    successful addition of notebook.
    iv. `AddNoteCommand` calls `StorageNotes.writeCollectionOfNotebooks(storage.collectionOfNotebooks)` to write the new 
@@ -535,16 +539,16 @@ Given below is an example usage scenario and how the add notebook mechanism beha
 ![](diagrams/journal/AddNoteCommand.png)
 
 
-#### Add entry feature
+#### 4.4.2 Add entry feature
 
 The command for adding entry is implemented by the `AddEntryCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the add entry mechanism behaves at each step.
+Given below is an example of how the add entry mechanism behaves at each step.
 
 1. User inputs `journal entry n/CS2113 e/HW`\
    i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input. 
-2. Creating `AddEntryCommand` object.
+2. Create `AddEntryCommand` object.
 3. AddEntryCommand execution. \
    i. `AddEntryCommand` calls `ParserJournal.parseAddEntryCommand(userInput)` which returns the notebook name and entry
    name as a
@@ -561,19 +565,19 @@ Given below is an example usage scenario and how the add entry mechanism behaves
 
 ![](diagrams/journal/AddEntryCommand.png)
 
-#### List notebooks and entries
+#### 4.4.3 List notebooks and entries
 
 The command for adding notebook is implemented by the `ListJournalCommand` class that extends `Command`.
 The command for listing is implemented by the `ListJournalCommand` class that extends `Command`.
 
 A list of notebooks along with their entries will be displayed.
 
-Given below is an example usage scenario and how the list mechanism behaves at each step.
+Given below is an example of how the list mechanism behaves at each step.
 
 1. User inputs `journal list` \
    i. `Click` receives the input.\
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
-2. Creating `ListJournalCommand` object. 
+2. Create `ListJournalCommand` object. 
 3. ListJournalCommand execution. \
    i. `ListJournalCommand` calls `storage.collectionOfNotebooks.getNotesArrayList()` which returns an array list of
    Notebook objects. \
@@ -581,17 +585,17 @@ Given below is an example usage scenario and how the list mechanism behaves at e
    Entry objects. \
    iii. `ListJournalCommand` then prints all the notebooks with their entries.
 
-#### Deleting notebook
+#### 4.4.4 Deleting notebook
 
 The command for deleting notebook is implemented by the `DeleteNoteCommand` class that extends `Command`.
 The notebook along with all its entries will be deleted.
 
-Given below is an example usage scenario and how the delete notebook mechanism behaves at each step.
+Given below is an example of how  "delete notebook" mechanism behaves at each step.
 
 1. User inputs `journal delete_notebook 1` \
    i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
-2. Creating `DeleteNoteCommand` object.
+2. Create `DeleteNoteCommand` object.
 3. DeleteNoteCommand execution. \
    i. `DeleteNoteCommand` calls `ParserJournal.parseDeleteNoteCommand(userInput)` to get index of notebook to
    delete. \
@@ -607,16 +611,16 @@ Given below is an example usage scenario and how the delete notebook mechanism b
 
 ![](diagrams/journal/DeleteNoteCommand.png)
 
-#### Deleting Entry
+#### 4.4.5 Deleting Entry
 
 The command for deleting entry is implemented by the `DeleteEntryCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the delete entry mechanism behaves at each step.
+Given below is an example of how the "delete entry" mechanism behaves at each step.
 
 1. User inputs `journal delete_entry n/CS2113 e/HW` \
    i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
-2. Creating `DeleteEntryCommand` object.
+2. Create `DeleteEntryCommand` object.
 3. DeleteEntryCommand execution. \
    i. `DeleteEntryCommand` calls `ParserJournal.parseDeleteEntryCommand(userInput, storage)` to get notebook name and
    entry name. \
@@ -628,17 +632,17 @@ Given below is an example usage scenario and how the delete entry mechanism beha
    data to the storage file. \
    v. `DeleteEntryCommand` calls `printDeletedEntryMessage()` to convey that entry has been deleted successfully.
 
-#### Tagging Notebook
+#### 4.4.6 Tagging Notebook
 
 The command for tagging notebook is implemented by the `TagNotebookCommand` class that extends `Command`.
 
 
-Given below is an example usage scenario and how tag notebook mechanism behaves at each step.
+Given below is an example usage of how tag notebook mechanism behaves at each step.
 
 1. User inputs `journal tag n/1 t/important` \
    i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
-2. Creating `TagNotebookCommand` object.
+2. Create `TagNotebookCommand` object.
 3. TagNotebookCommand execution. \
 i. `TagNotebookCommand` calls `ParserJournal.parseTagNotebookCommand(userInput, storage)` to get notebook index and
    tag name. \
@@ -650,7 +654,7 @@ i. `TagNotebookCommand` calls `ParserJournal.parseTagNotebookCommand(userInput, 
    v. `TagNotebookCommand` calls `printTaggedNotebookMessage()` to convey that the notebook has been tagged
    successfully. 
 
-**Design Considerations**
+**Notebook Design Considerations**
 
 The following design considerations were kept in mind while implementing the tag notebook feature,
 - Aspect: How to store tag
@@ -662,17 +666,17 @@ The following design considerations were kept in mind while implementing the tag
       - Pros : Better time complexity since more optimized.
       - Cons: Takes up storage space.
    
-#### Finding Notebook by tag
+#### 4.4.7 Finding Notebook by tag
 
 The command for finding notebook by a tag is implemented by the `FindNotebooksByTagCommand` class that extends
 `Command`.
 
-Given below is an example usage scenario and how the find notebook by tag mechanism behaves at each step.
+Given below is an example of how the find notebook by tag mechanism behaves at each step.
 
 1. User inputs `journal find tag_name` \
    i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
-2. Creating `FindNotebooksByTagCommand` object.
+2. Create `FindNotebooksByTagCommand` object.
 3. FindNotebooksByTagCommand execution. \
    i. `FindNotebooksByTagCommand` calls `ParserJournal.parseTagForFinding(userInput)` to get tag name. \
    ii. `FindNotebooksByTagCommand` calls `storage.collectionOfNotebooks.getNotesArrayList()` which returns an array 
@@ -691,7 +695,7 @@ To begin, consider how a food command is parsed from user input.
 
 The following diagram displays the interactions between the classes when the user enters a command starting with
 "food".\
-Do note that important calls are left out of this diagram (command execution) and the parser replaces Click for this.
+Do note that important calls are left out of this diagram (command execution), and the parser replaces Click for this.
 A high level view of command execution is covered in [Architecture](#31-architecture)\
 You should take note of the interactions between the constructed command classes, and the current list it's
 iterating over - `WhatIAteTodayList`, especially the updates shown after the  end of every  command. An update is
@@ -711,12 +715,12 @@ information of a food court, which includes the Stall name, and food items sold 
 
 ##### Adding Food Record 
 
-`food add n/ Samurai Burger c/ 433`
+`food add n/Samurai Burger c/433`
 
 This feature allows user to add a new Food Record.
 Tags `n/` `c/` stand for name and calorie count respectively.
 
-As depicted in the [class diagram](#451-architecture), the user's input undergoes the following sequence when it's
+As depicted in the [class diagram](#342-food-related-models), the user's input undergoes the following sequence when it's
 converted to a food record to be added to the user's list.
 1. `Parser` invokes `parseFoodRecord` which takes in the `inputString`
 1. `storage` accesses it's `whatIAteTodayList` and calls it's `addToList` method, adding the
@@ -780,7 +784,7 @@ This feature also relies on the `storage` component in the following sequence:
 1. `Parser` filters out the relevant part of the user input relating to `LocalDate` type,
    and a `DateTimeFormatter` formats that portion into a `dateInput`
 1. `storage` accesses `whatIAteTodayList` by reference
-1. `whatIAteTodayList` invokes it's method `printFoodWithFoundDate`, taking `dateInput` as an input, which does the following:
+1. `whatIAteTodayList` invokes its method `printFoodWithFoundDate`, taking `dateInput` as an input, which does the following:
    1. Create a temporary `WhatIAteList`
    1. Call `addRecordIfFound`, which iterates through the current list and matches records with the same date as `dateInput`
    1. Print out the temporary list, along with a nicely formatted date string of `FormatStyle.FULL`, representing
@@ -803,7 +807,7 @@ Following that, `StorageFood` invokes `saveList` to update the `food.txt` file.
 
 This section covers the implementation, and design consideration of features that involve a reference list.
 
-A reference list is represented by [StallsManager](#class-diagram-of-food), which contains all the information of items sold by a store in
+A reference list is represented by [StallsManager](#342-food-related-models), which contains all the information of items sold by a store in
 a food court, as well as the name of the store.
 
 Additionally, a reference list has multiple features, namely
@@ -836,7 +840,7 @@ This functionality can be read from our [user guide](./UserGuide.md)
 The storage on hard-disk would be automatically
 updated on every successful command entered by the user.
 
-The interworking of this is described in detail in [architecture](#451-architecture).
+The interworking of this is described in detail in [architecture](#342-food-related-models).
 
 ### 4.6  Help command
 
@@ -922,8 +926,8 @@ When the user types `exit`, the following sequence of steps will then occur:
 1. User executes `exit`\
 i. `Click` receives user's input.\
 ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
-2. Creating `ExitCommand` object.
-3. Executing command.\
+2. Create `ExitCommand` object.
+3. Execute command.\
 i. `ExitCommand` calls `ui.printGoodBye()` to print the goodbye message to the user.\
 ii. `ExitCommand` calls `System.exit(0)` to terminate the program.
 
@@ -1011,6 +1015,10 @@ There are two ways to run tests.
 |v1.0|user|add a todo task|to keep track of tasks I need to complete|
 |v1.0|user|delete a todo task|delete a task I have completed/am not going to do|
 |v1.0|user|list all tasks|get the information about my tasks|
+|v1.0|user|add food i've eaten to a list|view what food items I've eaten so far|
+|v1.0|user|have quick access to my zoom links|access zoom links for various modules|
+|v1.0|user|list all food items recorded|view the record of food items eaten|
+|v1.0|user|clear the list of food items|start a new list every week|
 |v1.0|user|see a list of all zoom links|so that I can see all my links at one place
 |v2.0|user|edit my CAP information|record my current CAP and the total MC taken that contribute to the CAP|
 |v2.0|user|get expected CAP based on my CAP information and my modules|revise my module planning to meet my expectation|
@@ -1026,6 +1034,11 @@ There are two ways to run tests.
 |v2.0|user|list notebooks and entries|to keep track of my journal and view notebooks and entries|
 |v2.0|user|tag notebook|so I can organize my journal better|
 |v2.0|user|find notebook by tag|so I can find similar notebooks|
+|v2.0|user|refer to a list of foods sold at my current place of food consumption|view the food options available|
+|v2.0|user|add a food item from a reference list|don't need to type out the food name and calorie count manually|
+|v2.0|user| tag what I ate with a date|record down the date I've eaten the item(s)|
+|v2.0|user|search the date to see what food items I've consumed|find what food items i've consumed on that day|
+|v2.0|user|search for food items from a reference list with calorie count <= given amount|plan my diet for the day ahead|
 |v2.0|user|add zoom links for modules|so that I can organise based on my modules
 |v2.0|user|edit zoom links for modules|so that I can change my links
 |v2.0|user|open zoom links from command line|so that I can easily access my zoom links

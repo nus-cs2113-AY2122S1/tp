@@ -1,4 +1,5 @@
 @startuml
+hide footbox
 Actor User
 User -> ":Click" : "calendar delete task 1"
 participant ":Click"

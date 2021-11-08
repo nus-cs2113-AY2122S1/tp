@@ -1,4 +1,5 @@
 @startuml
+hide footbox
 Actor User
 User -> ":Click" : "calendar display 10-2021"
 participant ":Click"

@@ -1,6 +1,7 @@
 
 
 @startuml
+hide footbox
 Actor User
 User -> ":Click" : "module list"
 participant ":Click"
@@ -18,14 +19,20 @@ deactivate ":Parser"
 activate ":ListModuleCommand"
 ":ListModuleCommand" -> ":Storage" : storageModule.readDataFromFile()
 activate ":Storage"
-return "moduleList"
+return moduleList
 
 alt moduleList is empty
     ":ListModuleCommand" -> ":ListModuleCommand" : print(MESSAGE_NO_MODULE)
+    activate ":ListModuleCommand"
+    return
 else
     ":ListModuleCommand" -> ":ListModuleCommand" : print(MESSAGE_LISTING_MODULES)
+    activate ":ListModuleCommand"
+    return
     loop module in moduleList
         ":ListModuleCommand" -> ":ListModuleCommand" : print(module)
+        activate ":ListModuleCommand"
+        return
     end
 end
 ":ListModuleCommand" --> ":Click"

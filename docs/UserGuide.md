@@ -775,7 +775,7 @@ Format : `food clt [CALORIES_COUNT]`
 
 Expected outcome:
 
-Allows you to view the food items from the reference food court that has an similar to, or lower calorie
+Allows you to view the food items from the reference food court that has a similar to, or lower calorie
  count than the amount you gave Click!
 
 Example : `food clt 0`
@@ -784,14 +784,14 @@ Expected outcome:
 
 Lists all food items sold with a similar to, or lower calorie count than your input.
 ```
-	I've found the following items with 0 calories!
-	__________________________________________________
-	1st,Coke No Sugar  : 0Kcal
-	2nd,Mineral Water  : 0Kcal
-	Wow, that's a lot of food! Finished reading the list
-	__________________________________________________
-	done printing!
-	__________________________________________________
+        I've found the following items with less than or equal to, 0 calories!
+        __________________________________________________
+        1st,Coke No Sugar  : 0Kcal
+        2nd,Mineral Water  : 0Kcal
+        Wow, 0 calories, please add something to the list!
+        __________________________________________________
+        done printing!
+        __________________________________________________
 ```
 ### 3.6 Exit
 

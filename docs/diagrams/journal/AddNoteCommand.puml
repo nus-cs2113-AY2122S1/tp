@@ -1,4 +1,5 @@
 @startuml
+hide footbox
 Actor User
 User -> ":Click" : "journal notebook n/ CS2113"
 participant ":Click"
@@ -13,7 +14,7 @@ return
 deactivate ":AddNoteCommand"
 ":Parser" --> ":Click"
 deactivate ":Parser"
-":Click" --> ":AddNoteCommand" : execute()
+":Click" -> ":AddNoteCommand" : execute()
 activate ":AddNoteCommand"
 participant ":CollectionOfNotebooks"
 ":AddNoteCommand" -> ":CollectionOfNotebooks" : addNote()
