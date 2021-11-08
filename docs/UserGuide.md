@@ -79,7 +79,7 @@ ________________________________________________________
 
 <div style="page-break-after: always;"></div>
 
-## Features 🎨️ 
+## Features ✨ 
 
 GetJack'D maintains a list of workouts (hereafter referred to as the "workout list"), where **each workout is a list of exercises**.
 Using the commands specified in this guide will allow you to manipulate these workouts and the workout list in various ways.
