@@ -33,10 +33,8 @@ Given below are the contributions to the project.
       operations with data. For example, sorting by ascending price can allow tour agency planners to have a
       side-by-side comparison of the budget of tours, from the least expensive to the most expensive tours.
 
-    * Highlights: Sorting is mostly implemented with using the natural sorting of String or Float. Hence,
-      `Collections.sort()` is mainly used to sort an ArrayList of data. Sorting for local date-time is trickier,
-      requiring the need for a defined `Comparator`. The program has allowed for sorting regardless
-      of duplicates in the data.
+    * Highlights: Sorting is mostly implemented with using the natural sorting of String or Float. Sorting for local date-time requires 
+      the need for a defined `Comparator`. The program has allowed for sorting regardless of duplicates in the data.
 
 * Task: General **Parser** methods and code structure
 * Task: **Refactor code** to follow OOP guidelines
