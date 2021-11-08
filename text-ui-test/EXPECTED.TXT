@@ -1,9 +1,121 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
 
-What is your name?
-Hello James Gosling
+(_)   | |    | |(_)
+ _____| |___ | | _ ____  _   _ _   _
+|  _   _) _ \| || |  _ \| | | ( \ / )
+| |  \ \ |_| | || | | | | |_| |) X (
+|_|   \_)___/ \_)_|_| |_|____/(_/ \_)
+Welcome to Kolinux! Enter "help" to view the list of commands
+....................................................................
+All the events in your schedule has been cleared.
+....................................................................
+Here are the list of commands:
+1. cap mc MC/GRADE - Calculates the overall cap from MC
+2. cap code MODULE_CODE/GRADE - Calculates the overall cap from MODULE_CODE
+3. bus /START_POINT /END_POINT - Check for a NUS bus route from stop to another
+4. bus stop list - List all the bus stop names
+5. module view MODULE_CODE - View the module details
+6. module add MODULE_CODE - Add a module to your module list
+7. module delete MODULE_CODE - Delete a module from your module list
+8. module list - List all modules stored in your module list
+9. module grade CODE/GRADE - Update the module CODE from your module list with a new grade GRADE
+10. module cap - Calculate the overall CAP of modules stored in your module list
+11. module cap DESIRED_CAP - Calculate the average minimum grade for the other modules needed
+    to achieve DESIRED_CAP
+12. planner add DESCRIPTION/DATE/START_TIME/END_TIME - Add an event to your schedule
+13. planner list DATE - Lists events on a certain date
+14. planner delete DATE - Delete an event on a certain date
+15. timetable add MODULE_CODE/LESSON_TYPE/DAY/START_TIME/END_TIME - Add lesson to timetable
+16. timetable update MODULE_CODE/LESSON_TYPE/OLD_DAY/OLD_START_TIME/NEW_DAY/NEW_START_TIME
+    - shift a lesson to another timing with the same duration
+17. timetable delete MODULE_CODE/LESSON_TYPE/DAY/START_TIME - delete a specific lesson
+18. timetable view - Print the timetable on CLI
+19. timetable list DAY - List the lessons taking place on a specific day with their timings
+20. help - View this menu again
+21. bye - Exit Kolinux
+....................................................................
+Your overall CAP will be 4.19 if you get your desired grades!
+....................................................................
+Your overall CAP will be 3.00 if you get your desired grades!
+....................................................................
+Invalid module info found: invalid_info_1 invalid_info_2
+....................................................................
+This command is not recognised, please enter "help" for the list of commands...
+....................................................................
+CS2101: Effective Communication for Computing Professionals
+Department: Center for Engl Lang Comms
+Faculty: Computing
+Credits: 4
+Grade: N/A
+Has S/U option: Yes
+This module aims to equip students with the skills
+needed to communicate technical information to technical
+and nontechnical audiences, and to create comprehensible
+software documentation. A student-centric approach
+will be adopted to encourage independent and collaborative
+learning while engaging students in team-based projects.
+Students will learn interpersonal and intercultural
+communication skills as well as hone their oral and
+written communication skills. Assessment modes include
+a variety of oral and written communication tasks
+such as reports, software guides, oral presentations,
+software demonstrations and project blogs.
+....................................................................
+Please enter a valid module code
+....................................................................
+Successfully added module: CS2113T
+....................................................................
+CS2113T is already in the module list
+....................................................................
+Please enter a valid module code
+....................................................................
+Successfully deleted module: CS2113T
+....................................................................
+CS2113T not found in the module list
+....................................................................
+Please use the format: module grade CODE/GRADE
+....................................................................
+Successfully added module: CS2113T
+....................................................................
+CS2113T grade set to A
+....................................................................
+Successfully deleted module: CS2113T
+....................................................................
+An event has been added to your schedule successfully: 2021-10-05 15:00 - 18:00 CG2028 lab
+....................................................................
+An event has been added to your schedule successfully: 2021-10-05 19:00 - 23:00 Project Meeting
+....................................................................
+An event has been added to your schedule successfully: 2021-10-07 09:00 - 12:00 GEA1000 Tutorial
+....................................................................
+Please check the format of your input! Format: planner add DESCRIPTION/DATE/START_TIME/END_TIME
+....................................................................
+Please provide a valid date format. Format: yyyy-MM-dd
+....................................................................
+This date does not exist. Please try again.
+....................................................................
+Please provide a valid time format. Format: HHmm
+....................................................................
+This time is not valid. Please try again.
+....................................................................
+Please check the format of the time! The end time is earlier than the start time...
+....................................................................
+2021-10-05 TUESDAY
+15:00 - 18:00 CG2028 lab
+19:00 - 23:00 Project Meeting
+....................................................................
+Please provide a valid date format. Format: yyyy-MM-dd
+....................................................................
+This date does not exist. Please try again.
+....................................................................
+Successfully added module: CS1010
+....................................................................
+CS1010 TUT has been added to timetable
+....................................................................
+2021-10-19 TUESDAY
+10:00 - 11:00 CS1010 TUT
+....................................................................
+Timetable has been cleared completely
+....................................................................
+Take bus [A2] then change to bus [E] at IT
+....................................................................
+Bye! Thank you for using Kolinux
+....................................................................

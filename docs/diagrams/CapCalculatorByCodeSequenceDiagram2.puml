@@ -1,0 +1,89 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include Style.puml
+
+hide footbox
+
+participant ":CapCalculatorByCode" as calculator CAPCALCULATOR_COLOR
+participant "modules:CalculatorModuleList" as modules MODULE_COLOR
+participant "invalidSuModules:ArrayList" as invalidSuModules MODULE_COLOR
+participant "invalidModules:ArrayList" as invalidModules MODULE_COLOR
+participant "repeatedModules:CalculatorModuleList" as repeatedModules MODULE_COLOR
+
+group sd createCalculator
+
+create modules
+calculator -> modules : new CalculatorModuleList()
+activate modules
+
+modules --> calculator
+deactivate modules
+
+create invalidSuModules
+calculator -> invalidSuModules : new ArrayList<>()
+activate invalidSuModules
+
+invalidSuModules --> calculator
+deactivate invalidSuModules
+
+create invalidModules
+calculator -> invalidModules : new ArrayList<>()
+activate invalidModules
+
+invalidModules --> calculator
+deactivate invalidModules
+
+create repeatedModules
+calculator -> repeatedModules : new CalculatorModuleList()
+activate repeatedModules
+
+repeatedModules --> calculator
+deactivate repeatedModules
+
+calculator -> calculator : getInputModules(input)
+activate calculator
+
+loop for all input modules
+
+alt contains invalid SU grade
+
+calculator -> invalidSuModules : add(moduleDescription)
+activate invalidSuModules
+
+invalidSuModules --> calculator
+deactivate invalidSuModules
+
+else contains invalid format/invalid code/invalid grade
+
+calculator -> invalidModules : add(moduleDescription)
+activate invalidModules
+
+invalidModules --> calculator
+deactivate invalidModules
+
+else module already in calculator module list
+
+calculator -> repeatedModules : storeModuleCodeGrade(moduleCode, grade, moduleDb)
+activate repeatedModules
+
+repeatedModules --> calculator
+deactivate repeatedModules
+
+else else
+calculator -> modules : storeModuleCodeGrade(moduleCode, grade)
+activate modules
+
+modules --> calculator
+deactivate modules
+
+end
+
+end
+
+calculator --> calculator
+deactivate calculator
+
+end
+
+@enduml
