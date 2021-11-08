@@ -34,6 +34,7 @@ import seedu.commands.currency.ListCurrencyTypesCommand;
 
 import seedu.exceptions.InputException;
 import seedu.exceptions.InvalidBudgetAmountException;
+import seedu.exceptions.InvalidDateException;
 import seedu.exceptions.InvalidIndexException;
 import seedu.exceptions.InvalidThresholdValueException;
 import seedu.utility.tools.DateRange;
@@ -315,6 +316,8 @@ public class Parser {
             return new InvalidCommand(Messages.INVALID_DATE_RANGE_MESSAGE);
         } catch (DateTimeParseException e) {
             return new InvalidCommand(Messages.DATE_FORMAT_MESSAGE);
+        } catch (InvalidDateException e) {
+            return new InvalidCommand(e.getMessage());
         }
     }
 
@@ -331,6 +334,8 @@ public class Parser {
             return new InvalidCommand(Messages.INVALID_DATE_RANGE_MESSAGE);
         } catch (DateTimeParseException e) {
             return new InvalidCommand(Messages.DATE_FORMAT_MESSAGE);
+        } catch (InvalidDateException e) {
+            return new InvalidCommand(e.getMessage());
         }
     }
 
