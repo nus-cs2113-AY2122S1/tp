@@ -13,8 +13,8 @@ class Student {
 }
 
 
-ClassList -> TeachingClass
-TeachingClass -down-> "1" StudentList
-StudentList -down-> Student
+ClassList *-> TeachingClass
+TeachingClass *-down-> "1" StudentList
+StudentList *-down-> Student
 
 @enduml
