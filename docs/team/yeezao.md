@@ -29,7 +29,7 @@ Detailed code contribution information can be viewed via RepoSense [here](https:
   out what the trip index is.
 - **New Feature**: Reading from and writing to a save file using the JSON format (through serialisation/deserialisation with Google Gson).
 - **Enhancement to Feature**: Adding custom serialiser/deserialiser to Gson for LocalDate objects.
-- **Enhancement to Feature**: Ability to assist user in overwriting a corrupted save file.
+- **Enhancement to Feature**: Ability to assist user in detecting and overwriting a corrupted save file.
 - **New Feature**: Allowing users to abort a process when asked to correct an erroneous input (completed in collaboration with @joshualeeky)
 
 #### Contributions to User Guide:
@@ -73,7 +73,9 @@ In addition, I made contributions to the following sections:
 
 - Comments on PRs ([#31](https://github.com/AY2122S1-CS2113T-T12-2/tp/pull/31#discussion_r723066635),
   [#42](https://github.com/AY2122S1-CS2113T-T12-2/tp/pull/42#discussion_r725532182), [#55](https://github.com/AY2122S1-CS2113T-T12-2/tp/pull/55#discussion_r726785554))
+- Bug reports - [#135](https://github.com/AY2122S1-CS2113T-T12-2/tp/issues/135), [#49](https://github.com/AY2122S1-CS2113T-T12-2/tp/issues/49), [#45](https://github.com/AY2122S1-CS2113T-T12-2/tp/issues/45), 
 - Mentoring on JUnit tests - simulating user input through `Scanner`, and testing `System.out.println()` statements.
+
 
 #### Contributions beyond the team
 
