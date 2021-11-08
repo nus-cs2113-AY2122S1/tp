@@ -21,7 +21,7 @@ public class Libmgr {
     private static Storage storage;
 
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Main entry-point for the java.seedu.duke.Libmgr application.
      */
     public static void main(String[] args) throws LibmgrException {
         ui = new TextUI();

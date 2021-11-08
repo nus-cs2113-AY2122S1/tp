@@ -85,8 +85,8 @@ public class Messages {
     public static final String EMPTY_DATE = " (!) Oops! Please specify the due date!";
     // Search
     public static final String SEARCH_MESSAGE = "  (+) Here are the searching results in library";
-    public static final String SEARCH_FORMAT_INCORRECT = " (!) Invalid searching format!" + System.lineSeparator()
-            + " (!) Format: 'search i/ID t/TITLE s/STATUS(LOANED/AVAILABLE/RESERVED) "
+    public static final String SEARCH_FORMAT_INCORRECT = "  (!) Invalid searching format!" + System.lineSeparator()
+            + "  (!) Format: 'search i/ID t/TITLE s/STATUS(LOANED/AVAILABLE/RESERVED) "
             + "c/CATEGORY(Magazine/Book/Audio/Video)' or its subset";
     public static final String NO_SEARCH_RESULT = "  (!) No search result! "
             + "Please check again whether your search format is correct." + System.lineSeparator()

@@ -394,9 +394,9 @@ Format: `edit ID KEY/ATTRIBUTE`
 
 ##### Usage Example:
 
-`edit 123 t/Harry Potter`
+`edit 123 t/Harry Potter a/JK Rowling`
 
-Edits the title of an item with ID 123 to Harry Potter
+Edits the title of an item with ID 123 to Harry Potter, and the author to JK Rowling
 
 ##### Expected Output:
 ```

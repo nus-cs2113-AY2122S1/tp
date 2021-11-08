@@ -266,8 +266,8 @@ class ParserTest {
             s.handlesSearchCommand(ui, catalogue);
             fail();
         } catch (Exception e) {
-            assertEquals(" (!) Invalid searching format!" + System.lineSeparator()
-                    + " (!) Format: 'search i/ID t/TITLE s/STATUS(LOANED/AVAILABLE/RESERVED) "
+            assertEquals("  (!) Invalid searching format!" + System.lineSeparator()
+                    + "  (!) Format: 'search i/ID t/TITLE s/STATUS(LOANED/AVAILABLE/RESERVED) "
                     + "c/CATEGORY(Magazine/Book/Audio/Video)' or its subset", e.getMessage());
         }
     }

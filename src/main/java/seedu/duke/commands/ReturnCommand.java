@@ -11,6 +11,7 @@ import static seedu.duke.common.Messages.RETURN_SUCCESS;
 import static seedu.duke.common.Messages.INVALID_ID;
 import static seedu.duke.common.Messages.WRONG_ITEM_MESSAGE;
 
+//@@author dyahnafisah
 /**
  * Class encapsulating command to update the status of the item to be returned.
  */
@@ -21,7 +22,7 @@ public class ReturnCommand extends Command {
 
     /**
      * Class Constructor.
-     * @param args Arguments supplied by user in the loan command
+     * @param args Arguments supplied by user in the return command
      */
     public ReturnCommand(String args) {
         this.args = args;
