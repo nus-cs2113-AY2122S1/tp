@@ -74,7 +74,7 @@ Prerequisites: JDK 11 (use the exact version), update Intellij to the most recen
 
 ```
 
-4. Follow [this guide](https://se-education.org/guides/tutorials/intellijCodeStyle.html) to set up Intellij IDEA to the coding style that matches ours.
+Follow [this guide](https://se-education.org/guides/tutorials/intellijCodeStyle.html) to set up Intellij IDEA to the coding style that matches ours.
 
 ## Design
 
@@ -202,19 +202,52 @@ The ["Commons" folder](https://github.com/AY2122S1-CS2113T-W11-3/tp/tree/master/
 
 #### Core
 
-* The `Messages` class stores string constants for simple success and error messages to be printed to users. (usually 1 liners)
-* The `CommandFormat` class stores string constants representing formats for user commands. 
-It also provides a method that creates a ready-to-print string that suggests selected command formats for the user.
-* The `DayOfTheWeek` class stores enumerations for the Day of the Week. It also provides methods to check the validity of a Day of the Week input and convert it into a `DayOfTheWeek`.
-* The `Priority` class stores enumerations for task priority. It also provides methods to check the validity of a priority input and convert it into a `Priority`.
-* The `CommandType` class stores enumerations for command types. It also provides a method to convert a command word into a `CommandType`.
+* The `CommandFlag` class 
+  * stores string constants representing flags to be used in user inputs.
 
+
+* The `CommandFormat` class 
+  * stores string constants representing formats for user commands. 
+  * provides a method that creates a ready-to-print string that suggests selected command formats for the user.
+
+
+* The `CommandType` class 
+  * stores enumerations for command types. 
+  * provides a method to convert a command word into a `CommandType`.
+
+
+* The `DayOfTheWeek` class 
+  * stores enumerations for the Day of the Week. 
+  * provides methods to check the validity of a Day of the Week input and convert it into a `DayOfTheWeek`.
+
+
+* The `Grade` class 
+  * stores a predefined array of possible grades.
+  * provides a method to check the validity of a Grade input.
+
+
+* The `Messages` class 
+  * stores string constants for simple success and error messages to be printed to users. (usually 1 liners)
+
+
+* The `Priority` class 
+  * stores enumerations for task priority. 
+  * provides methods to check the validity of a priority input and convert it into a `Priority`.
+  
 #### Utility
 
 * The `DayUtil` class contains utility methods that makes use of the `DayOfTheWeek` variable of a class.
+
+
 * The `JsonUtil` class contains utility methods that make use of the `ModuleInfo.Json` file.
+
+
 * The `LinkUtil` class contains utility methods that help in launching URLs.
+
+
 * The `StringUtil` class contains utility methods that manipulates strings.
+
+
 * The `TimeUtil` class contains utility methods that are related to Time.
 
 ## Documentation, logging, testing, configuration, dev-ops
