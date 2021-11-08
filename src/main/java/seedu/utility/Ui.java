@@ -398,24 +398,45 @@ public class Ui {
         printLine();
     }
 
+    /**
+     * Prints confirmation message upon successful conversion of entries.
+     *
+     * @param currency
+     */
     public void printCurrencyChangedConfirmation(CurrencyType currency) {
         printLine();
         System.out.println("All entries have been converted to " + currency + "!");
         printLine();
     }
 
+
+    /**
+     * Prints error message if trying to convert again to the same currency type.
+     *
+     * @param currency
+     */
     public void printSameCurrencyTypeMessage(CurrencyType currency) {
         printLine();
         System.out.println(Messages.SAME_CURRENCY_TYPE_MESSAGE + "- " + currency);
         printLine();
     }
 
+    /**
+     * Prints the current currency type of all entries.
+     *
+     * @param currency
+     */
     public void printCurrentCurrency(CurrencyType currency) {
         printLine();
         System.out.println(Messages.CURRENT_CURRENCY_MESSAGE + currency.toString());
         printLine();
     }
 
+    /**
+     * Prints out list of available currency conversions.
+     *
+     * @param currencyTypes
+     */
     public void printCurrencyTypes(ArrayList<CurrencyType> currencyTypes) {
         printLine();
         System.out.println(Messages.AVAILABLE_CURRENCIES_MESSAGE);

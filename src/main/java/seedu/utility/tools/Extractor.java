@@ -1,7 +1,6 @@
 package seedu.utility.tools;
 
 import seedu.commands.currency.CurrencyType;
-import seedu.commands.InvalidCommand;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.IncomeCategory;
 import seedu.exceptions.BlankCurrencyTypeException;
@@ -154,6 +153,13 @@ public abstract class Extractor {
         }
     }
 
+    /**
+     * Extracts currency parameter from command given by user
+     * @param matcher checks format of command being parsed
+     * @return enum of equivalent currency type
+     * @throws BlankCurrencyTypeException
+     * @throws InvalidCurrencyTypeException
+     */
     public static CurrencyType extractCurrencyType(Matcher matcher)
             throws BlankCurrencyTypeException, InvalidCurrencyTypeException {
         String newCurrency = matcher.group("currency").trim();
@@ -161,12 +167,10 @@ public abstract class Extractor {
             throw new BlankCurrencyTypeException(Messages.BLANK_CURRENCY_TYPE_MESSAGE);
         }
         switch (newCurrency.toUpperCase()) {
-        case "USD":
-            return CurrencyType.USD;
+        case "RMB":
+            return CurrencyType.RMB;
         case "SGD":
             return CurrencyType.SGD;
-        case "INR":
-            return CurrencyType.INR;
         default:
             throw new InvalidCurrencyTypeException(Messages.INVALID_CURRENCY_TYPE_MESSAGE);
         }

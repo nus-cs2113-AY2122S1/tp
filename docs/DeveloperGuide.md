@@ -187,13 +187,13 @@ Those that passes this check are stored in a `List` using the method `.collect(C
 
 ---
 
-### Currency Conversion Component
+### Currency Manager Component
 
-The `CurrencyConversion` class is responsible for all currency related operations performed on entries in Stonks XD. 
+The `CurrencyManager` class is responsible for all currency related operations performed on entries in Stonks XD. 
 It can convert all these entries to a given currency type, track the current type and list the available types for conversion
 as prompted by the user using appropriate commands.
 
-The class diagram below shows the structure of the `CurrencyConversion` class:
+The class diagram below shows the structure of the `CurrencyManager` class:
 
 -- Work in progress --
 
