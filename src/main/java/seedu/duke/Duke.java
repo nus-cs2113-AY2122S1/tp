@@ -39,6 +39,7 @@ public class Duke {
                 feedback = command.execute();
                 System.out.println(feedback.feedbackToUser);
                 Ui.printLineBreak();
+                storage.save(memberRoster, eventCatalog);
             } catch (NullPointerException | NumberFormatException | StringIndexOutOfBoundsException e) {
                 Ui.printLineBreak();
                 System.out.println("Returning to Main Page...");
