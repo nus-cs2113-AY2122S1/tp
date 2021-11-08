@@ -234,8 +234,8 @@ When the user types `module delete 2`, the following sequence of steps will then
 1. User executes `module delete 2`\
    i. `Click` receives user's input.\
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
-2. Creating `DeleteModuleCommand` object.
-3. Executing command.\
+2. Create `DeleteModuleCommand` object.
+3. Execute command.\
    i. `DeleteModuleCommand` finds the index of the module to be deleted in user's input.\
    ii. `DeleteModuleCommand` calls `moduleManager.deleteModule(moduleIndex)` to delete the specifed module and print the message to the user.
 
@@ -251,10 +251,10 @@ When the user types `module list`, the following sequence of steps will then occ
 1. User executes `module list`\
    i. `Click` receives user's input.\
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
-2. Creating `ListModuleCommand` object.
-3. Executing command.\
+2. Create `ListModuleCommand` object.
+3. Execute command.\
    i. `ListModuleCommand` calls `storage.StorageModule.readDataFromFile()` to read Module-related data from the storage file.\
-   ii. `ListModuleCommand` check if there is any Modules in the list. If not, prints the message of having no modules then return.\
+   ii. `ListModuleCommand` check if there are any Modules in the list. If not, prints the message of having no modules then return.\
    iii. `ListModuleCommand` prompts the message to list the Modules to the user and prints out the Modules line by line.
 
 The sequence diagram below summarizes how listing modules work:
