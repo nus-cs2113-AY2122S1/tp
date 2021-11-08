@@ -1,30 +1,41 @@
 @startuml
-title Save Functionality
+!include style.puml
 
--> ":StorageFile": save(eventsList : ArrayList<Event>)
-activate ":StorageFile" #yellow
+box STORAGE_COLOR
+Participant ":StorageFile" as Storage
+end box
+box FILE_COLOR
+Participant ":file" as File
+end box
+box LOGIC_COLOR
+Participant ":MemberEncoder" as MemberEncoder
+Participant ":EventEncoder" as EventEncoder
+end box
 
-create ":File"
-":StorageFile" -> ":File": File(DEFAULT_FILE_PATH)
-activate ":File" #lightblue
+
+-> Storage: save(eventsList : ArrayList<Event>)
+
+activate Storage
+
+Storage -> File : File(DEFAULT_FILE_PATH)
+activate File
 return saveFile
 |||
-":StorageFile" -> ":StorageFile": checkFileIsValid
-activate ":StorageFile" #orange
+Storage --> Storage: checkFileIsValid
+activate Storage #orange
 return
 |||
-":StorageFile" -> ":MemberEncoder": encodeMembersList
-activate ":MemberEncoder" #lightblue
+Storage -> MemberEncoder: encodeMembersList
+activate MemberEncoder
 return encodedMembersList
 |||
-":StorageFile" -> ":EventEncoder": encodeEventsList
-activate ":EventEncoder" #lightblue
+Storage -> EventEncoder: encodeEventsList
+activate EventEncoder
 return encodedEventsList
 |||
-":StorageFile" -> ":StorageFile": writeToFile
-activate ":StorageFile" #orange
+Storage -> Storage: writeToFile
+activate Storage #orange
 return
 |||
 return
-
 @enduml
