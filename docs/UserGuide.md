@@ -122,11 +122,11 @@ Creates a new trip.
 #### Usage Example:
 
 ```
-____________________________________________________________
+________________________________________________________________
 $ new FamilyTrip2021 /from SIN /to MLY
-____________________________________________________________
+________________________________________________________________
 	You have just created a new trip called FamilyTrip2021.
-____________________________________________________________
+________________________________________________________________
 ```
 > ![](documentationPics/info.png) A trip is a basic building block of Traveller. To start planning your trips, 
 > create a trip using this command first. Then, when planning your trip, all details will be tagged to this trip that 
@@ -212,15 +212,14 @@ Shows you details of your existing trips.
 ____________________________________________________________
 $ view FamilyTrip2021
 ____________________________________________________________
-	Here are all your trips: 
-		TripName: FamilyTrip2021
-			 Origin: SIN
-			 Destination: MLY
-			 Path: [SIN, MLY]
-			 Time: [1.0]
-			 Days: 
-			    Day 0: 
-					0:  1900  Check-in at HolidayInn
+        TripName: FamilyTrip2021
+             Origin: SIN
+             Destination: MLY
+             Path: [SIN, MLY]
+             Time: [1.0]
+             Days: 
+                Day 0: 
+                    0:  1900  Check-in at HolidayInn
 ____________________________________________________________
 ```
 > ![](documentationPics/info.png) Viewing a trip shows you your trip's start country, destination country, 
