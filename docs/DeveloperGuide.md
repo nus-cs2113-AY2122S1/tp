@@ -299,3 +299,16 @@ Expected: the program will warn the user, and asks for confirmation from the use
 e.g. `open something` or `delete 1000` when only 2 trips are stored.)
 <br>
 Expected: An error will inform the user that the trip number does not exist.
+
+#### Adding an Expense or Trip with people of the same name
+
+- create an Expense or Trip with the people with identical names (case-insensitive). e.g. `expense 2113 food duke, dUkE /nice dinner` or `create /SOC /SGD /1.00 /DuKE, duKe, DUKE`
+  <br>
+  Expected: An error will inform the user that they have entered people with the same name.
+
+#### Adding an Expense with an invalid amount
+
+- create an Expense with invalid parameters (negative, zero or non-number). e.g. `expense -2113 category Duke, Duke2 /description` or
+  `expense 0 category Duke, Duke2 /description` or `expense notNumber cateogry Duke, Duke2 /description`.
+  <br>
+  Expected: An error will inform the user that the amount is invalid and request the user to enter the amount again.
