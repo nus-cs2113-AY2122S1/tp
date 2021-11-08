@@ -330,7 +330,7 @@ public class TestUtil {
     public static String getUpdatedUnitsForIngredientRepo(IngredientRepository ingredientRepository) {
         try {
             IngredientStorage ingredientStorage = ingredientRepository.find("Salt");
-            return ingredientStorage.getIngredient().getUnit();
+            return ingredientStorage.getUnit();
         } catch (NotFoundException e) {
             e.printStackTrace();
         }
@@ -346,7 +346,7 @@ public class TestUtil {
         try {
             Recipe chickenSoupRecipe = recipes.findRecipe("Chicken Soup");
             IngredientQuantity ingredientAndQuantity = chickenSoupRecipe.getIngredientQuantities().get("Salt");
-            String newUnit = ingredientAndQuantity.getIngredient().getUnit();
+            String newUnit = ingredientAndQuantity.getUnit();
             return newUnit;
         } catch (NotFoundException e) {
             e.printStackTrace();

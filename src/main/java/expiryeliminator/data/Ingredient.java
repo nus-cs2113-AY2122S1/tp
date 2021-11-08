@@ -42,8 +42,17 @@ public class Ingredient {
      *
      * @return The unit for the ingredient.
      */
-    public String getUnit() {
+    String getUnit() {
         return unit;
+    }
+
+    /**
+     * Returns the unit for the ingredient.
+     *
+     * @return The unit for the ingredient.
+     */
+    public String getFormattedUnit() {
+        return unit == null ? "" : " " + unit;
     }
 
     /**
