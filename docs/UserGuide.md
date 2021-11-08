@@ -56,6 +56,7 @@ Jump in to the section [2. Quick Start](#2-quick-start) to get started!
 	__________________________________________________
 ```
 
+
 5. Type the valid command into the terminal (or Command Prompt) and press <kbd>return</kbd> (or <kbd>Enter</kbd>) to run the command.
 
 ## 3. Features 
