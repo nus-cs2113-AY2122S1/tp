@@ -8,7 +8,7 @@ Thank you for choosing to use Traveller!
 
 Traveller is a travel planner app that is designed to help holidaymakers like you plan your overseas trips with ease.
 
-It is created for individuals who prefer to use a Command Line Interface (CLI) over a Graphical User Interface (GUI), 
+Traveller is created for individuals who prefer to use a Command Line Interface (CLI) over a Graphical User Interface (GUI), 
 while still retaining the ease of use of a GUI.
 
 Use Traveller so that you can plan your trips with ease and focus on what matters most: Fun!
@@ -20,12 +20,12 @@ Each computer will have their own CLI, such as the Windows' Powershell and the m
 ### What is this guide for?
 This guide's purpose is to help users like you understand how to use the Traveller application to its fullest potential.
 
-For users who can't wait to start using Traveller, see [here](#1-quick-start) for a quick guide on how to set it up.
-The [command summary](#5-command-summary) provides you with a summary of the various functionalities currently 
+For users who can't wait to start using Traveller, see [here](#1-quick-start) for a quick guide on how to set it up 
+and get started. The [Command Summary](#5-command-summary) provides you with a summary of the various functionalities currently 
 supported by Traveller too.
 
-For users who are seeking to understand the full functionality of Traveller, details, along with tips and tricks, of 
-each functionality are explained in the [features](#2-features) section.
+For users who are seeking to understand the full functionality of Traveller, its details, along with tips and tricks of 
+each functionality. All these are explained in the [Features](#2-features) section.
 
 ### Legend
 
@@ -46,14 +46,14 @@ each functionality are explained in the [features](#2-features) section.
   * [2.3. add-day](#23-adding-a-day-to-trip-add-day)
   * [2.4. add-item](#24-adding-an-item-to-a-day-add-item)
   * [2.5. view](#25-viewing-trips-view)
-  * [2.6. delete](#26-delete-a-trip-delete)
+  * [2.6. delete](#26-deleting-a-trip-delete)
   * [2.7. delete-day](#27-deleting-a-day-from-a-trip-delete-day)
   * [2.8. delete-item](#28-deleting-an-item-from-a-day-delete-item)
-  * [2.9. edit](#29-edit-a-trip-edit)
-  * [2.10. edit-item](#210-edit-an-item-edit-item)
+  * [2.9. edit](#29-editing-a-trip-edit)
+  * [2.10. edit-item](#210-editing-an-item-edit-item)
   * [2.11. search-item](#211-searching-for-an-item-search-item)
-  * [2.12. shortest-time](#212-shortest-time-shortest-time)
-  * [2.13. shortest-cost](#213-least-cost-shortest-cost)
+  * [2.12. shortest-time](#212-finding-the-shortest-time-shortest-time)
+  * [2.13. shortest-cost](#213-finding-the-least-cost-shortest-cost)
   * [2.14. exit](#214-exiting-the-program-exit)
 * [3. FAQ](#3-faq)
 * [4. Supported Countries Summary](#4-supported-countries-summary)
@@ -62,7 +62,7 @@ each functionality are explained in the [features](#2-features) section.
 <br/>
 
 ## 1. Quick Start
-This section provides a guide on how to get Traveller up and running on your computer.
+This section provides you with a guide on how to get Traveller up and running on your computer.
 
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `Traveller.zip` from [here](https://github.com/AY2122S1-CS2113T-W13-1/tp/releases).
@@ -72,7 +72,7 @@ This section provides a guide on how to get Traveller up and running on your com
 
    ![Welcome](./documentationPics/welcome.png)
 
-5. Enter a command.
+5. Type a command and press *Enter*.
 
    Some of our basic commands are:
    * `new FamilyTrip2021 /from SIN /to MLY` : Creates a new trip called `FamilyTrip2021` from Singapore (`SIN`) to Malaysia (`MLY`).
@@ -83,7 +83,8 @@ This section provides a guide on how to get Traveller up and running on your com
 <br/>
 
 ## 2. Features
-This section provides details for all commands that Traveller supports.
+This section provides in-depth explanations for all commands that Traveller supports and how to use them.
+As well as useful tips and tricks for you to fully utilise Traveller.
 
 For a quick summary of all commands, please click [here](#5-command-summary) instead.
 
@@ -122,7 +123,7 @@ ____________________________________________________________
 > you have created.
 > 
 > ![](documentationPics/tip.png) If you have accidentally created unwanted trips, use the 
-> [delete](#26-delete-a-trip-delete) command to delete the unwanted trips.
+> [delete](#26-deleting-a-trip-delete) command to delete the unwanted trips.
 > 
 > ![](documentationPics/tip.png) After creating a trip, you can [view](#25-viewing-trips-view) the trip to find 
 > the shortest flight path to get to your desired country (Yes, it is automated! :)).
@@ -132,7 +133,7 @@ ____________________________________________________________
 
 <br/>
 
-### 2.3. Adding a day to Trip: `add-day`
+### 2.3. Adding a day to trip: `add-day`
 Your overseas trip may span multiple days.
 
 This command allows you to create any number of days in your trip.
@@ -158,7 +159,7 @@ ____________________________________________________________
 
 <br/>
 
-### 2.4. Adding an item to a Day: `add-item`
+### 2.4. Adding an item to a day: `add-item`
 Use this command to add an item to a day of your trip. An item represents an activity that you will do in a day.
 
 #### Format: `add-item TRIP_NAME /day DAY_INDEX /time ITEM_TIME /name ITEM_NAME`
@@ -219,7 +220,7 @@ ____________________________________________________________
 
 <br/>
 
-### 2.6. Delete a trip: `delete`
+### 2.6. Deleting a trip: `delete`
 Deletes an existing trip from the trip list.
 
 #### Format: `delete TRIP_NAME`
@@ -273,7 +274,7 @@ ____________________________________________________________
 
 <br/>
 
-### 2.9 Edit a trip: `edit`
+### 2.9. Editing a trip: `edit`
 Edits any main field about an existing trip.
 
 #### Format: `edit TRIP_NAME /name NEW_TRIP_NAME /from NEW_SOURCE_COUNTRY /to NEW_DESTINATION_COUNTRY`
@@ -297,11 +298,11 @@ ________________________________________________________________________________
 ```
 
 > ![](documentationPics/tip.png) Edit only allows you to change the name, to and from of a trip.
-> To change your trip itinerary use [edit-item](#210-edit-an-item-edit-item) instead!
+> To change your trip itinerary use [edit-item](#210-editing-an-item-edit-item) instead!
 
 <br/>
 
-### 2.10. Edit an item: `edit-item`
+### 2.10. Editing an item: `edit-item`
 Edits and updates existing item from a trip and updates it to a new corresponding item.
 
 #### Format: `edit-item TRIP_NAME /day DAY_NUMBER /index ITEM_INDEX /time NEW_TIME /name NEW_NAME`
@@ -332,7 +333,7 @@ ________________________________________________________________________________
 
 > ![](documentationPics/tip.png) Edit-item only allows you to change the time or name of a given item, 
 > not the name or source and destination countries of your trip.  
-> To do so, use [edit](#29-edit-a-trip-edit) instead!
+> To do so, use [edit](#29-editing-a-trip-edit) instead!
 > 
 > ![](documentationPics/warning.png) Edit-item allows you to edit either the time or name (and both too!) 
 > of a given item, but both cannot be left empty!
@@ -365,7 +366,9 @@ ________________________________________________________________________________
 > ![](documentationPics/warning.png) Search only allows you to find words that contain exactly 
 > the phrase, so do search carefully! Eg 'ice-cream' will not be returned if you search 'ice cream'!
 
-### 2.12. Shortest time: `shortest-time`
+<br/>
+
+### 2.12. Finding the shortest time: `shortest-time`
 Returns the shortest flight time from the source to destination country.
 
 #### Format: `shortest-time /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
@@ -383,10 +386,11 @@ ____________________________________________________________
 ```
 > ![](documentationPics/tip.png) shortest-time allows you to find the shortest time from one country to 
 > another! If you wish to find or research on costs instead, do take a look at our shortest cost function 
-> at [shortest-cost](#213-least-cost-shortest-cost)
+> at [shortest-cost](#213-finding-the-least-cost-shortest-cost)
 
+<br/>
 
-### 2.13. Least cost: `shortest-cost`
+### 2.13. Finding the least cost: `shortest-cost`
 Returns the least expensive flight path from the source to destination country.
 
 #### Format: `shortest-cost /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
@@ -404,10 +408,11 @@ ____________________________________________________________
 ```
 > ![](documentationPics/tip.png) shortest-cost allows you to find the least cost from one country to
 > another! If you wish to find or research in terms of flight time instead, do take a look at our 
-> time function instead at [shortest-time](#212-shortest-time-shortest-time)
+> time function instead at [shortest-time](#212-finding-the-shortest-time-shortest-time)
 
+<br/>
 
-### 2.14 Exiting the program: `exit`
+### 2.14. Exiting the program: `exit`
 Exits the program.
 
 #### Format: `exit`
@@ -425,12 +430,16 @@ Exits the program.
 if the files have been changed and re-download them from our 
 [release.](https://github.com/AY2122S1-CS2113T-W13-1/tp/releases)
 
+<br/>
+
 **Q**: How do I transfer my data to another computer? 
 
 **A**: Transfer the entire folder containing the items listed below to the other computer. 
    * *Traveller.jar*
    * *flightData* folder with *time.txt* and *cost.txt* inside
    * *save* folder with *save.txt* inside
+
+<br/>
 
 **Q**: Why does it keep saying "Country 'X' doesn't exist!"?
 
@@ -442,15 +451,21 @@ If the problem persists, then your data in *flightData/time.txt* or *flightData/
 Download a new copy of Traveller from [this link](https://github.com/AY2122S1-CS2113T-W13-1/tp/releases) to get a new
 uncorrupted version of the flight and cost data.
 
+<br/>
+
 **Q**: What should I do when creating a new trip if my trip span multiple countries?
 
 **A**: As of our current version v2.1, we unfortunately do not support multiple countries in 1 trip.
 However, you can create multiple trips instead, 1 for each country that you plan to go to, and plan your trips from 
 there.
 
+<br/>
+
 **Q**: What unit is time measured in?
 
 **A**: Time is given in hours.
+
+<br/>
 
 **Q**: How do I interpret path and time shown in the `view` command?
 
@@ -477,6 +492,8 @@ Malaysia | **MLY**
 China | **CHN**
 Japan | **JPN**
 South Korea | **SKR**
+
+<br/>
 
 ## 5. Command Summary
 
