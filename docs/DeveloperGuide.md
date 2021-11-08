@@ -13,7 +13,7 @@
   - [3.3 Parser Component](#33-parser-component)
   - [3.4 Command Component](#34-command-component)
   - [3.5 TaskManager Component](#35-taskmanager-component)
-  - [3.5 Storage Component](#36-storage-component)
+  - [3.6 Storage Component](#36-storage-component)
   - [3.7 Logger Component](#38-logger-component)
   - [3.8 NUSMods API Component](#39-nusmods-api-component)
 - [4. Implementation](#4-implementation)
