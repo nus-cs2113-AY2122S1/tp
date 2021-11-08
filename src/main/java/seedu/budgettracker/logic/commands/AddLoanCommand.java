@@ -5,6 +5,7 @@ import seedu.budgettracker.ui.TextUi;
 
 import java.time.LocalDate;
 
+//@@author jyxhazcake
 public class AddLoanCommand extends AddCommand {
     public String name;
     public double amount;

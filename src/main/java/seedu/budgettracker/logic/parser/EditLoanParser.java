@@ -7,6 +7,7 @@ import seedu.budgettracker.logic.parser.exceptions.ParserException;
 import java.time.LocalDate;
 import java.util.HashMap;
 
+//@@author jyxhazcake
 public class EditLoanParser implements ParserPrefix {
     public static final String[] PREFIX_ARRAY = {PREFIX_MONTH,PREFIX_INDEX,PREFIX_NAME,PREFIX_AMOUNT,PREFIX_DATE};
 

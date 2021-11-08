@@ -7,7 +7,7 @@
   * [Architecture](#architecture)
   * [UI Component](#ui-component)
 * [Implementation](#implementation)
-  * [Delete - Basic Command Logic](#delete---basic-command-logic)
+  * [Delete feature](#delete-feature)
 * [Product scope](#product-scope)
   * [Target user profile](#Target-user-profile)
   * [Value proposition](#value-proposition)
@@ -29,7 +29,7 @@
 
 ### Setting up IDE and Repository
 
-1) Forking and cloning
+1) Forking and Cloning
 Fork our repository from this [link](https://github.com/AY2122S1-CS2113T-F11-2/tp).
 Then, clone your fork into your local computer. 
 
@@ -39,19 +39,23 @@ is the recommended IDE to view and edit our source code.
 
 3) Configure JDK
 Ensure that the correct version of JDK is downloaded and installed as our app is only tested on Java 11.
-You may run the following command: `java -version` to check for the current Java version which your computer is running.
-If you are using Intellij, please check that your project structure's project SDK is set to Java 11 and Project Language Level is set
-to default SDK.
+You may run the following command: `java -version` to check for the current Java version which your 
+computer is running. If you are using Intellij, please check that your project structure's project 
+SDK is set to Java 11 and Project Language Level is set to default SDK.
 
 ![Intellij ProjectStructure](images/ProjectStructureSettings.png)
 
-4) Importing project
-Right click on the Repository folder that you have clone into your machine and select "Open Folder as Intellij IDEA Community Edition Project".
-When you are asked whether to trust and open gradle project, click trust. 
+4) Adding Exception to your Anti-Virus
+Add an exception to the directory which you will be cloning the forked project to your anti-virus.
+
+5) Importing Project
+Right click on the Repository folder that you have clone into your machine and select "Open Folder 
+as Intellij IDEA Community Edition Project". When you are asked whether to trust and open gradle 
+project, click trust. 
 
 ![Intellij ProjectStructure](images/TrustGradle.png)
 
-5) Verifying BudgetTracker Runs
+6) Verifying BudgetTracker Runs
 Right click on BudgetTracker then click on run to test our our BudgetTracker App. 
 
 ![Intellij Run BudgetTracker](images/BudgetTrackerRun.png)
@@ -139,6 +143,7 @@ The Storage component consists of:
 
 The `Storage` component:
 
+1) What it does?
 - During the first launch of the app, it creates a new current year database text file if there isn't any. 
 It will load any existing data from the database text file into the app. 
 - Allows user to change the database to the year he wants. 
@@ -146,8 +151,35 @@ It will load any existing data from the database text file into the app.
 - Upon performing any commands that will change records in the database, such as `add`, `edit`, or `delete`,
 Storage will reload the data in the app into the database text file. 
 
+2) Architecture of the Storage component
+
+![Storage Sequence Diagram](images/StorageBasicaArchitecture.png)
+
+The Storage component continuously save every changes to the data in the app and the app loads the 
+data from storage everytime during start up.
+
 ![Storage Sequence Diagram](images/Storage.png)
 
+- Initially, when BudgetTracker App is started, it will create new Parser and Storage object. Storage's 
+makeStorageTextFile() method will be called to either create a new database text file of the current year
+for example "2021.txt" if it does not exist or it will load the existing "2021.txt" into the App by calling 
+loadStorage() method of the Storage Class.
+- Then a while loop will be initialized to check for User Input in the command line to check for user's 
+command. Whenever any command that changes the data in the App is called such as `add`, `edit` and `delete` 
+is called, reloadArrayToStorage() method of the WriteToTextFile class must be called to refresh the data text
+file to the new state of the data in the App. 
+- Then the loop will continue. For commands that will not change the data in the app such as `list`, `find`...
+The reloadArrayToStorage() method will not be called. 
+
+3) Class Diagram of the Storage component
+
+![Storage Sequence Diagram](images/Storage-Class_Diagram.png)
+
+- All the multiplicity of the BudgetTracker to Storage, Command and Parser are 1 to 1. 
+- The multiplicity of Storage to ReadTextFile is 1 to 1. 
+- The multiplicity of Command to WriteToTextFile is 1 to 1. 
+- There is BudgetTracker consist of Storage, Command and Parser. Storage consist of ReadTextFile and Command
+consist of WriteToTextFile. 
 
 ## <a id="implementation"></a> Implementation
 
@@ -172,7 +204,7 @@ which parses the user input and identifies the type of record to be added based 
  - **Step 3.** Based on the type of record to be added, _Parser#parseCommand()_ returns an instance of _AddBudgetCommand,  AddExpenditureCommand_
 or  _AddLoanCommand_ back to the main function. The _execute()_ function of the instance will then be called to add the record into the initialized AllRecordList.
 
-### <a id=""></a> Delete - Basic Command Logic
+### <a id="delete-feature"></a> Delete feature
 
 The delete feature collaborates with other classes like Parser, RecordList, etc. Basically it contains three usages which are deletion of Budget, Expenditure(s), and Loan(s).
 
@@ -203,13 +235,13 @@ Given below is an example usage scenario and how the delete feature behaves at e
 * By using substring method, description, indexes, and month of the expenditures are extracted in ```deleteParams```, ```prepareDeleteCommand(commandParams)``` calls ```DeleteExpenditureParser.parse(deleteParams)``` to parse the params more specifically.
 * Method ```parse(String args)``` in class ```DeleteExpenditureParser``` returns newly created object ```DeleteMultipleExpenditureCommand(startIndex, endIndex, month)```.
 <br/>
-  ![Figure Delete_Parse](images/parseDeleteInputCommand-Sequence_Diagram.png)
+  ![Figure Delete_Parse](images/DeleteDiagram2.png)
 
 **Step 5**. The newly created object ```DeleteExpenditureCommand``` will execute the deletion:
 * ```execute(boolean isLoadinStorage)``` runs a for loop to delete the related expenditures in the expenditure ArrayList.
 * ```for(int i = startIndex; i <= endIndex; i++)``` iterates the 3 expenditures, everytime it just calls ```allRecordList.deleteExpenditure(startIndex, month)``` to delete each expenditure.
 <br/>
-  ![Figure Delete_Execute](images/DeleteMultipleExpenditureCommand-Sequence_Diagram.png)
+  ![Figure Delete_Execute](images/DeleteDiagram1.png)
 
 
 ### <a id=""></a> Edit feature
@@ -255,23 +287,92 @@ Given below is an example usage scenario and how the list feature behaves at eac
 
 ### <a id=""></a> Storage 
 
-The storage stores the exact `add` command of budget, expenditures and loan into the text file containing 
-in the current AllRecordList. The reason it is implemented in this manner is so that we could reuse
+1) How are the data stored?
+
+The storage stores the exact `add` command of budget, expenditures and loan into the text 
+file containing in the current AllRecordList. Everytime a deleted, edit or add command is called, 
+the txt file is automatically wiped and re-written from the ArrayList to ensure that data is saved 
+at every step. 
+
+![dataSample](images/dataSample.png)
+
+2) Why are the data stored in such a manner?
+
+The reason it is implemented in this manner is so that we could reuse
 code that have been written for adding of budget and expenditures directly when loading from storage.
 
-Everytime a deleted, edit or add command is called, the txt file is automatically wiped and re-written 
-from the ArrayList to ensure that data is saved at every step. 
+This implementation makes Storage very versitile even when there are substantiate changes in 
+the architecture of our app. Some examples are the changes to Parser, Logic and Commands. 
+Even with these stated changes, the Storage needs very little tweaks to the Storage for it 
+to work with the new implementation. The reasonis that Storage uses the code used in Parser to 
+load the data into the app. For the saving of data, only the reloading method needs to be 
+editted to adhere to the new changes such that the adding command stored is ofthe correct format.
 
-The yearly Records is stored in the form of <year>.txt. Each year contains all the monthly budget as
-well as all the expenditure tied to that month.
+The way the database is organized is that each yearly Records is stored in the form of 
+<year>.txt. Each year contains all the monthly budget as well as all the expenditure and 
+loan tied to that month. 
 
+3) How does some of the key method work?
 
-![Storage Sequence Diagram](images/readTextFileToString.png)
+`readTextFileToString()`
 
-![Storage Sequence Diagram](images/reloadArrayToStorage.png)
+![readTextFileToString Sequence Diagram](images/readTextFileToString.png)
 
-![Storage Sequence Diagram](images/convertToCsvFile.png)
+This method reads the list of command in the data text file converts them into 
+a ArrayList of String. readTextFileToString() method will first create a new ArrayList 
+which will later be used to store all the commands in the data text file into 1 Strings 
+per command. A BufferReader object is then created to read the data text file in the 
+specified directory. The BufferReader object will read the content of the data text file 
+line by line or command by command (since each command is separated by a "\n" character).
 
+The BufferReader continues reading until the end of the data text-file and then return the 
+filled ArrayList of String. 
+
+This ArrayList of String will later be passed into the Parser which will load all the 
+command and thus load data into the App.
+
+`reloadArrayToStorage() & convertToCsvFile()`
+
+![reloadArrayToStorage Sequence Diagram](images/reloadArrayToStorage.png)
+
+![convertToCsvFile Sequence Diagram](images/convertToCsvFile.png)
+
+When reloadArrayToStorage() method is called, it creates a new File object into the specified directory
+(file directory to reload data files). The isFile() of the File Class is called to check if the data file
+exist. If it doesn't, a error message will be shown to the user and the method terminates. Otherwiese, it 
+continues to create a new FileWrite object which will clear the existing data text file first. The FileWrite 
+object will then be passed into the new PrintWriter object that will be created. 
+
+Then a for loop is used to loop through the 12 months of the RecordList to obtain the amount for each
+month and convert it into a command such as "add -b a/1000.00 m/10". Each of these command will be "flush" into 
+the text file with 1 line per command. 
+
+2 inner for loop is also used to loop through all the expenditure and loan of a particular month respectively and 
+convert them into their respective add commands. For example, "add -e n/Chicken Rice a/100.0 d/2021-10-10 c/FOOD" and 
+"add -l n/Benjamin a/1000.00 d/2021-10-27".
+
+Both reloadArrayToStorage() and convertToCsvFile() method are similar in the way they read 
+data from the App and save it into the data files. The only difference is on the type of file they
+save into. reloadArrayToStorage() save into ".txt" type files while convertToCsvFile() save into 
+".csv" type files. 
+
+4) Why does `edit` and `delete` command work with reloadArrayToStorage() method? 
+
+`edit` command can change the attribute of budget, expenditure and loan such as description, amount... 
+Reloading the data text files after the `edit` will just update the `add` command attribute's value to their
+attribute's value after the edit. That is the reason why it reloadArrayToStorage() can still work. 
+
+`delete` command on the other hand just removes a particular budget, expenditure or loan entry. Thus
+reloading the data text files after the `delete` command will just remove a particular `add` line 
+of command from the data text file. 
+
+5) How switching database work?
+
+When the `year <SELECTED DATABASE YEAR>` command is called eg. `year 2020`, the Parser will 
+call the YearCommand and it will run the method "execute()". "execute()" first clears the 
+allRecordList by calling clearAll() from the AllRecordList class. And setYear(2020) method 
+is called from AllRecordList Class to set the year to 2020. Then the loadStorage method of Storage 
+Class will be called to load the datafile "2020.txt" into the app.  
 
 ## <a id=""></a> List of Commands
 
