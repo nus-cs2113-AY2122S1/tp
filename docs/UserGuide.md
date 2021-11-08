@@ -29,11 +29,17 @@
   - [4.4.4 List information of all appointments](#444-list-information-of-all-appointments-list)
   - [4.4.5 Edit an appointment's information](#445-edit-an-appointments-information-edit)
   - [4.4.6 Find appointments](#446-find-appointments-find)
-- [5 FAQ](#5-faq)
-- [6 Command Summary](#6-command-summary)
-  - [6.1 General Commands](#61-general-commands)
-  - [6.2 Patient/Medical Staff Management Commands](#62-patientmedical-staff-management-commands)
-  - [6.3 Scheduler Commands](#63-scheduler-commands)
+- [5 Future Implementations](#5-future-implementations-coming-in-v30)
+  - [5.1 Table Paging](#51-table-paging)
+  - [5.2 Patient's Medical Information](#52-patients-medical-information)
+  - [5.3 View Patient/Staff Appointments](#53-view-patients-or-staffs-appointments)
+  - [5.4 Different Identification Numbers](#54-different-identification-numbers)
+  - [5.5 Different Phone Number Formats](#55-different-phone-number-formats)
+- [6 FAQ](#6-faq)
+- [7 Command Summary](#7-command-summary)
+  - [7.1 General Commands](#71-general-commands)
+  - [7.2 Patient/Medical Staff Management Commands](#72-patientmedical-staff-management-commands)
+  - [7.3 Scheduler Commands](#73-scheduler-commands)
 
 ## 1. Introduction
 
