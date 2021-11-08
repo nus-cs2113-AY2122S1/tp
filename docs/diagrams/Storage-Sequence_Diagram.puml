@@ -2,51 +2,63 @@
 'https://plantuml.com/sequence-diagram
 hide footbox
 
-activate BudgetTracker
+activate ":BudgetTracker"
 
-create Parser
-BudgetTracker -> Parser: new Parser()
-activate Parser
+create ":Parser"
 
-create Storage
+":BudgetTracker" -> ":Parser": new Parser()
+activate ":Parser"
+":BudgetTracker" <-- ":Parser" : parser: Parser
+deactivate ":Parser"
 
-BudgetTracker -> Storage: new Storage()
-activate Storage
+create ":Storage"
 
-Storage -> Storage: makeStorageTextFile()
+":BudgetTracker" -> ":Storage": new Storage()
+activate ":Storage"
 
-Storage -> Parser: loadStorage()
 
-Parser --> Storage
+":Storage" -> ":Storage": makeStorageTextFile()
+activate ":Storage"
+":Storage" --> ":Storage"
+deactivate ":Storage"
 
-Storage --> BudgetTracker
+
+":Storage" -> ":Parser": loadStorage()
+activate ":Parser"
+":Parser" --> ":Storage"
+deactivate ":Parser"
+
+":BudgetTracker" <-- ":Storage": storage: Storage
+deactivate ":Storage"
 
 loop while isExit is still false
-    BudgetTracker -> Parser: userInput: String
+    ":BudgetTracker" -> ":Parser": userInput: String
+    activate ":Parser"
 
-    Parser -> Parser: parseCommand()
-    activate Parser
-    Parser --> Parser: command: Command
-    deactivate Parser
 
-    Parser --> BudgetTracker: command: Command
+    ":Parser" -> ":Parser": parseCommand()
+    activate ":Parser"
+    ":Parser" --> ":Parser": command: Command
 
-    BudgetTracker -> Command
-    activate Command
-    Command -> Command: setAllRecordList()
+    deactivate ":Parser"
 
-    activate Command
+    ":Parser" --> ":BudgetTracker": command: Command
+    deactivate ":Parser"
 
-    Command --> BudgetTracker
-    deactivate Command
+    ":BudgetTracker" -> ":Command": setAllRecordList()
 
-    BudgetTracker -> Command: command:Command
 
-    activate Command
+    activate ":Command"
 
-    Command -> Command: execute()
+    ":Command" --> ":BudgetTracker"
+    deactivate ":Command"
 
-    Command -> WriteToTextFile: new WriteToTextFile()
+    ":BudgetTracker" -> ":Command": execute()
+
+    activate ":Command"
+
+
+    ":Command" -> WriteToTextFile: new WriteToTextFile()
     activate WriteToTextFile
 
     WriteToTextFile -> WriteToTextFile: reloadArrayToStorage
@@ -57,17 +69,16 @@ loop while isExit is still false
     deactivate WriteToTextFile
 
 
-    WriteToTextFile --> Command
+    WriteToTextFile --> ":Command"
     deactivate WriteToTextFile
-    deactivate Command
 
-    Command --> BudgetTracker
+
+    ":Command" --> ":BudgetTracker"
+    deactivate ":Command"
 
 end
 
-deactivate Storage
-
-deactivate BudgetTracker
+deactivate ":BudgetTracker"
 
 
 @enduml
