@@ -48,3 +48,5 @@ contains an `Object` which no longer exists.
 
 **Review/mentoring contributions**: 
 * Major bug fixes to ClientPackageStorage as the client packages weren't loading properly from storage.
+* Frequently reviewed and approved pull requests.
+* Helped to proof-read Developer's Guide and link everyone's parts to ensure it sounds coherent.
