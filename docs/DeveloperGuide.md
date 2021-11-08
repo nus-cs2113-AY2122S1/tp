@@ -176,22 +176,27 @@ The code for the custom deserialiser is:
 
 ## Appendix: Requirements
 
-### Target user profile
-
-{Describe the target user profile}
-
-### Value proposition
-
-{Describe the value proposition: what problem does it solve?}
-
 ### Appendix A: Product scope
+
+**Target user profile**
+- Students who are travelling overseas and sharing expenses with a group
+- Comfortable with CLI desktop apps
+- Prefers typing to mouse interaction for data input
+
+**Value proposition**
+- Suitable for batch input of expenses
+- PayMeBack data is in JSON, which is lightweight and easily transferable
 
 ### Appendix B: User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| As a ... | I want to ... | So that I can ...|
+|----------|---------------|------------------|
+new user|see help instructions|refer to them when I forget how to use the application
+new user|edit trip attributes|modify them easily when I type them wrongly
+user|have various filters for expenses in a trip|find expenses that are of interest to me, especially when the expense list is large
+user|cancel an operation instead of re-entering my data when prompted|save time and run other commands immediately
+
+
 
 ### Appendix C: Non-Functional Requirements
 
