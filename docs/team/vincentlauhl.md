@@ -22,27 +22,26 @@ preventing users from adding a recipe with no ingredients.
 
 #### Feature: Delete a recipe
 - *What it does* : Allows the user to delete a recipe from the Recipe List.
-- *Justification* : This feature is another core feature of the product, as it allows user to remove a recipe if the user made a mistake in
-naming the recipe or if the user doesn't need to record the recipe anymore.
+- *Justification* : This feature is another core feature of the product, as it allows user to remove a recipe if the user doesn't need to record the recipe anymore.
 
 <div style="page-break-after: always;"></div>
 
 #### Feature: Remove ingredients in the Ingredient Repository based on Recipe cooked
 - *What it does* : Helps user automatically remove the amount of ingredients from the Ingredient Repository based on the amount of ingredients
 in the cooked recipe.
-- *Justification* : This feature helps the user manage their Ingredient Repository more easily as it helps the user do the manual work of removing
+- *Justification* : This feature helps the user do the manual work of removing
 ingredients in the Ingredient Repository after cooking a recipe.
 - *Highlights* : The design of the feature required some analysis. We considered whether we should assume users will use ingredients
 that are expiring the soonest first.
 
 #### Feature: List recipes user can cook
 - *What it does* : Helps user check which recipes the user can cook based on the ingredients they have.
-- *Justification* : This feature helps the user do the manual work of checking the quantities of each ingredients to determine which recipe the user 
+- *Justification* : This feature helps the user do the manual work of checking the quantities of each ingredient to determine which recipe the user 
 can cook with the ingredients they currently have.
 - *Highlights* : The design of the feature required some analysis. We considered whether the ingredients for a recipe is counted as sufficient if some ingredients have expired.
 
 #### Team Based Tasks
-- Managed release of `v2.0` on Github.
+- Managed release of `v2.0` on GitHub.
 - Add Launch and Shutdown part for Instructions for manual testing. [#119](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/119).
 
 #### Documentation
