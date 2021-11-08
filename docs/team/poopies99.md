@@ -35,7 +35,7 @@ Given below are my contributions to the project.
         * Added documentation for the feature `add` [\#188](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/188).
         * Did cosmetic tweaks for UserGuide [\#188](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/188).
     * Developer Guide:
-        * Added implementation details of the feature `add` [\#188](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/188). 
+        * Added implementation details with sequence diagram of the feature `add` [\#188](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/188). 
         * Did cosmetic tweaks for UserGuide [\#188](https://github.com/AY2122S1-CS2113T-W12-2/tp/pull/188).
 
 * **Community**:
