@@ -34,10 +34,10 @@ public class AddBudgetCommand extends AddCommand {
         }
         try {
             allRecordList.addBudget(amount, month, IS_NOT_LOADING_STORAGE);
+            TextUi.showBudgetAddedMessage(amount, month);
         } catch (DuplicateBudgetException e) {
-            System.out.println(e.getMessage());
+            TextUi.showUser(e.getMessage());
         }
-        TextUi.showBudgetAddedMessage(amount, month);
     }
 
     public void execute(boolean isLoadingStorage) {

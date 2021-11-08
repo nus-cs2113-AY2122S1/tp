@@ -80,7 +80,7 @@ public class BudgetTracker {
                 command.setAllRecordList(recordList);
                 command.execute();
                 isExit = command.isExit();
-            } catch (ArrayIndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException e) {
                 System.out.println(MESSAGE_INVALID_INPUT);
                 TextUi.printDivider();
             } catch (NullPointerException npe) {

@@ -6,6 +6,9 @@ import seedu.budgettracker.logic.parser.exceptions.ParserException;
 import java.util.HashMap;
 
 //@@author jyxhazcake
+/**
+ * Parser class for parsing user input into an EditBudgetCommand.
+ */
 public class EditBudgetParser implements ParserPrefix {
     public static final String[] PREFIX_ARRAY = {PREFIX_MONTH,PREFIX_AMOUNT};
 

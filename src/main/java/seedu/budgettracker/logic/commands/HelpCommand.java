@@ -28,19 +28,15 @@ public class HelpCommand extends Command {
         System.out.println(ADD_COMMAND_HELP_INDEX + ". " + AddCommand.COMMAND_WORD);
         System.out.println(AddExpenditureCommand.MESSAGE_USAGE);
         System.out.println(AddBudgetCommand.MESSAGE_USAGE);
-        System.out.println("Adds a loan record." + LS
-                + "Parameters: l/DEBTOR_NAME a/AMOUNT [d/DATE_OF_LOAN]");
+        System.out.println(AddLoanCommand.MESSAGE_USAGE);
         System.out.println(DIVIDER);
     }
 
     private void printEditCommandHelp() {
         System.out.println(EDIT_COMMAND_HELP_INDEX + ". " + EditCommand.COMMAND_WORD);
+        System.out.println(EditBudgetCommand.MESSAGE_USAGE);
         System.out.println(EditExpenditureCommand.MESSAGE_USAGE);
-        System.out.println("Edits a budget record:" + LS
-                + "Parameters: -b m/MONTH a/NEW_AMOUNT");
-        System.out.println();
-        System.out.println("Edits a loan record:" + LS
-                + "Parameters: -l m/MONTH i/INDEX [l/DEBTOR_NAME] [a/AMOUNT] [d/DATE_OF_LOAN]");
+        System.out.println(EditLoanCommand.MESSAGE_USAGE);
         System.out.println(DIVIDER);
     }
 

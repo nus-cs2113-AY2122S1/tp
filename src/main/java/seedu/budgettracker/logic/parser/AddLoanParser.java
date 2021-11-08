@@ -8,6 +8,9 @@ import java.time.LocalDate;
 import java.util.HashMap;
 
 //@@author jyxhazcake
+/**
+ * Parser class for parsing user input into an AddLoanCommand.
+ */
 public class AddLoanParser implements ParserPrefix {
     public static final String[] PREFIX_ARRAY = {
         PREFIX_NAME,
@@ -19,7 +22,7 @@ public class AddLoanParser implements ParserPrefix {
 
         String name = ParserUtil.parseName(argumentMap.get(PREFIX_NAME), IS_NOT_COMPULSORY);
         double amount = ParserUtil.parseAmount(argumentMap.get(PREFIX_AMOUNT), IS_NOT_COMPULSORY);
-        LocalDate date = ParserUtil.parseDate(argumentMap.get(PREFIX_DATE));
+        LocalDate date = ParserUtil.parseDate(argumentMap.get(PREFIX_DATE), false);
 
         return new AddLoanCommand(name,amount,date);
     }
