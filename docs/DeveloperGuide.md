@@ -11,8 +11,9 @@
     * [Model component](#model-component)
     * [Storage component](#storage-component)
     * [Common classes](#common-classes)
-* [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+* [Documentation, logging, testing](#documentation-logging-testing)
     * [Documentation](#documentation)
+    * [Logging](#logging)
     * [Testing](#testing) 
 * [Implementation](#implementation)
     * [Saving data](#saving-data)
@@ -83,6 +84,8 @@ Follow [this guide](https://se-education.org/guides/tutorials/intellijCodeStyle.
 ![ArchitectureDiagram](images/ArchitectureDiagram.png)
 
 The **Architecture Diagram** given above explains the high-level design of the App.
+
+> 📝 **Note:** `DukeException` class is not shown in the diagram for simplicity-sake.
 
 Given below is a quick overview of main components and how they interact with each other.
 
@@ -250,7 +253,7 @@ The ["Commons" folder](https://github.com/AY2122S1-CS2113T-W11-3/tp/tree/master/
 
 * The `TimeUtil` class contains utility methods that are related to Time.
 
-## Documentation, logging, testing, configuration, dev-ops
+## Documentation, logging, testing
 
 ### Documentation
 
@@ -262,6 +265,12 @@ The ["Commons" folder](https://github.com/AY2122S1-CS2113T-W11-3/tp/tree/master/
 **Diagrams:**
 
 For our developer guide diagrams, we use PlantUML. Here is a [guide](https://se-education.org/guides/tutorials/plantUml.html) on how to set it up on Intellij.
+
+### Logging
+
+Logging was performed to record whether Duke is initializing properly.
+Admittedly, this could be improved to record some of the more important operations.
+Implementation-wise, the current logging is designed to be scalable following [AB-3](https://github.com/se-edu/addressbook-level3).
 
 ### Testing
 
