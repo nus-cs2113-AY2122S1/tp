@@ -275,7 +275,7 @@ public class TextUi {
     }
 
     /**
-     * print out the record list
+     * print out the record list.
      * @param records the record list of budget, expenditures and loans
      * @param i the month of the record list
      * @param category the category to be listed
@@ -306,7 +306,7 @@ public class TextUi {
     }
 
     /**
-     * To print the record list
+     * To print the record list.
      * @param records the record list
      * @param i the month of the record list
      * @param category the category to be listed
@@ -335,7 +335,7 @@ public class TextUi {
     }
 
     /**
-     * To print the budget, expenditures and loans of the category of the month
+     * To print the budget, expenditures and loans of the category of the month.
      * Names/Descriptions longer than 30characters may get truncated.
      * @param list the record list
      * @param month the month of the record list
