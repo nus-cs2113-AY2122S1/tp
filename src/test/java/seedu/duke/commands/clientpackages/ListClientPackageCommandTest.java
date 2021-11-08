@@ -22,7 +22,8 @@ public class ListClientPackageCommandTest {
 
     private static Client TEST_CLIENT = new Client(new String[]{"c001", "Bo Tuan", "93338333", "bt@mail.com"});
     private static Tour TEST_TOUR = new Tour(new String[]{"JPN", "Japan Basic Tour", "1500.00"});
-    private static Flight TEST_FLIGHT = new Flight(new String[]{"SQ-JPN", "JPN", "SG", "20/10/2021 18:00", "21/10/2021 03:00"});
+    private static Flight TEST_FLIGHT = new Flight(new String[]{"SQ-JPN", "JPN", "SG", "20/10/2021 18:00",
+        "21/10/2021 03:00"});
     private static ClientPackage TEST_CLIENTPACKAGE = new ClientPackage("p001",
             TEST_CLIENT, TEST_TOUR, TEST_FLIGHT);
     private static final String VALID_DATA_OUTPUT = "Here is a list of all packages:\n"

@@ -34,7 +34,7 @@ public class AddTourCommand extends Command {
      */
     @Override
     public void execute() {
-        int newTourCount = tours.getTourCount() + 1;
+        final int newTourCount = tours.getTourCount() + 1;
         int count = tours.getTourCount();
         for (int i = 0; i < count; i++) {
             Tour currTour = tours.getTourByIndex(i);

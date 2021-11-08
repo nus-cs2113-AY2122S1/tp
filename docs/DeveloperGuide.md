@@ -76,7 +76,7 @@
 
 <hr>
 
-The diagram above shows the high-level design of TourPlanner.
+The diagram below shows the high-level design of TourPlanner:
 
 <img width="307" alt="component_diagram" src="https://user-images.githubusercontent.com/79963329/140464392-5a1536d2-a5d8-4e57-83f4-f4938ede0cfe.PNG">
 
@@ -88,12 +88,13 @@ Below is an overview of the main components, and how they interact with each oth
 ```TourPlanner``` acts as the main class. It is responsible for:
 
 * At app launch: Initialises the components in the correct sequence, and connects them up with each other.
+* While app is running: Executes commands from the user.
 * At shut down: Shuts down the components and invokes clean-up methods where necessary.
 
 The rest of the app consists of the following components:
 
 * ```Ui```: The UI of the application.
-* ```Parser```: Deciphers user input and executes the appropriate command / error message
+* ```Parser```: Deciphers user input and returns the appropriate command to `TourPlanner`.
 * ```Command```: The different types of commands that can possibly be executed.
 * ```ObjectList```: Holds data in different arrays, based on their type. Namely there are four types of ObjectLists:
     * ClientList
@@ -445,7 +446,8 @@ in Step 2, the respective client package will be printed onto the console termin
 
 The following activity diagram summarizes the following steps.
 
-<img width="542" alt="findclient" src="https://user-images.githubusercontent.com/79963329/140464449-0f72431b-8ae5-40e4-add1-aef8fed50031.PNG">
+<img width="517" alt="findclient" src="https://user-images.githubusercontent.com/79963329/140683509-8bc4bb34-a41f-4b57-9a86-e0af13cae0ac.PNG">
+
 
 <br>
 
@@ -480,7 +482,8 @@ terminal.
 
 The following activity diagram summarizes the following steps.
 
-<img width="456" alt="findtour" src="https://user-images.githubusercontent.com/79963329/140464566-248296e9-0e27-4840-9906-5cfdbe57c309.PNG">
+
+<img width="484" alt="findtour" src="https://user-images.githubusercontent.com/79963329/140683529-0d6c02aa-dad4-4078-9404-d2b246604c22.PNG">
 
 
 <br>
@@ -511,7 +514,8 @@ in the ```ClientPackageList```, the total number of passengers will be printed o
 
 The following activity diagram summarizes the following steps.
 
-<img width="508" alt="findflight" src="https://user-images.githubusercontent.com/79963329/140464579-91ab5042-885b-4e55-877c-ac733bd12ce9.PNG">
+<img width="475" alt="findflight" src="https://user-images.githubusercontent.com/79963329/140683549-96857734-6cc5-470c-90a5-c45fc57e30a1.PNG">
+
 
 <br>
 

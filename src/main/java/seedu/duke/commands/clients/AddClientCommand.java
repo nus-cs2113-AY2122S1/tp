@@ -55,6 +55,5 @@ public class AddClientCommand extends Command {
         }
         clients.add(client);
         ui.showAdd(client);
-        }
+    }
 }
-

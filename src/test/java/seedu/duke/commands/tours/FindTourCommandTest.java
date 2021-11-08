@@ -23,7 +23,8 @@ public class FindTourCommandTest {
     private static Tour TEST_TOUR_ONE = new Tour(new String[]{"JPN", "Japan Basic Tour", "1500.00"});
     private static Tour TEST_TOUR_TWO = new Tour(new String[]{"KOR", "Korea Cultural Tour", "3000.00"});
     private static Client TEST_CLIENT = new Client(new String[]{"c001", "Bo Tuan", "93338333", "bt@mail.com"});
-    private static Flight TEST_FLIGHT = new Flight(new String[]{"SQ-JPN", "JPN", "SG", "20/10/2021 18:00", "21/10/2021 03:00"});
+    private static Flight TEST_FLIGHT = new Flight(new String[]{"SQ-JPN", "JPN", "SG", "20/10/2021 18:00",
+        "21/10/2021 03:00"});
     private static ClientPackage TEST_CLIENTPACKAGE = new ClientPackage("p001",
             TEST_CLIENT, TEST_TOUR_ONE, TEST_FLIGHT);
 
@@ -34,10 +35,11 @@ public class FindTourCommandTest {
     private static final String VALID_SUBSCRIPTION_OUTPUT = "This is the tour that matches your search\n"
             + TEST_TOUR_ONE + "\n\n\n"
             + "Subscribed Clients:\n"
-            + "1. Bo Tuan (ID: c001)\n" + "\n"
+            + "1. Bo Tuan (ID: c001)\n"
+            + "\n"
             + "Total Subscribed Clients: 1";
-    private static final String INVALID_DATA_OUTPUT = "ERROR: Tour cannot be found. " +
-            "Please try another tour ID.";
+    private static final String INVALID_DATA_OUTPUT = "ERROR: Tour cannot be found. "
+            + "Please try another tour ID.";
 
     PrintStream previousConsole = System.out;
     ByteArrayOutputStream newConsole = new ByteArrayOutputStream();

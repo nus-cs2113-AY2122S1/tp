@@ -20,8 +20,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FindFlightCommandTest {
 
-    private static Flight TEST_FLIGHT_ONE = new Flight(new String[]{"SQ-JPN", "JPN", "SG", "20/10/2021 18:00", "21/10/2021 03:00"});
-    private static Flight TEST_FLIGHT_TWO = new Flight(new String[]{"SQ-KOR", "KOR", "SG", "23/10/2021 18:00", "30/10/2021 03:00"});
+    private static Flight TEST_FLIGHT_ONE = new Flight(new String[]{"SQ-JPN", "JPN", "SG", "20/10/2021 18:00",
+        "21/10/2021 03:00"});
+    private static Flight TEST_FLIGHT_TWO = new Flight(new String[]{"SQ-KOR", "KOR", "SG", "23/10/2021 18:00",
+        "30/10/2021 03:00"});
     private static Client TEST_CLIENT = new Client(new String[]{"c001", "Bo Tuan", "93338333", "bt@mail.com"});
     private static Tour TEST_TOUR = new Tour(new String[]{"JPN", "Japan Basic Tour", "1500.00"});
     private static ClientPackage TEST_CLIENTPACKAGE = new ClientPackage("p001",

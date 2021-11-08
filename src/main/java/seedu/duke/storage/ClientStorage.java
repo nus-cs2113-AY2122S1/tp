@@ -91,7 +91,7 @@ public class ClientStorage {
     }
 
     /**
-     * Loops through clients and writes into storage file for Client
+     * Loops through clients and writes into storage file for Client.
      */
     public void saveFile() {
         try {
