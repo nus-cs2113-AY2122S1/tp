@@ -312,7 +312,7 @@ The `ShowZoomLinks` class extends `Command`.
 Syntax: `zoom list`
 
 The following diagram explains the sequence of execution for the zoom list command. 
-![displayZoomLinks](https://user-images.githubusercontent.com/52075633/140744135-56f08325-ab27-4a9b-bf3c-a5fb3c603c7b.png)
+![displayZoomLinks](./diagrams/zoom/displayZoomLinks.png)
 
 
 #### 4.2.2 Adding a new zoom link
@@ -324,7 +324,7 @@ Syntax: `zoom add LINK MODULE_CODE`
 Example: `zoom add nus.sg/testlink ABC101`
 
 The following diagram explains the sequence of execution for the add zoom command. 
-![addzoomlink](https://user-images.githubusercontent.com/52075633/140744016-ec5ae524-5cf3-4399-9bb6-8b4566aca1c1.png)
+![addzoomlink](./diagrams/zoom/addzoomlink.png)
 
 
 #### 4.2.3 Open a zoom link
