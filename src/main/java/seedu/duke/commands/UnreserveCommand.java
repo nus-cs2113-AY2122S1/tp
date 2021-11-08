@@ -8,7 +8,13 @@ import seedu.duke.ui.TextUI;
 import static seedu.duke.common.Messages.INVALID_ID;
 import static seedu.duke.common.Messages.INVALID_VALUES;
 
+<<<<<<< HEAD
 //@@author exetr
+=======
+/**
+ * Class encapsulating command to update the status of the item that was previously RESERVED to AVAILABLE.
+ */
+>>>>>>> ffc4fced82adc694ecb8e37f65e29371b4a309a4
 public class UnreserveCommand extends Command {
     public static final String COMMAND_WORD = "unres";
     public static final String COMMAND_FORMAT = "  (!) Format: unres ID";
@@ -18,8 +24,8 @@ public class UnreserveCommand extends Command {
     protected String id;
 
     /**
-     * Sole constructor, takes in full line of input.
-     * @param args Full input as entered by user
+     * Class Constructor.
+     * @param args Arguments supplied by user in the unreserve command
      */
     public UnreserveCommand(String args) {
         this.args = args;
@@ -29,7 +35,7 @@ public class UnreserveCommand extends Command {
      * Gets the ID of object to be un-reserved,
      * Check validity of request and performs operations on item in catalogue.
      * @param ui Object that handles user IO
-     * @param catalogue Underlying list of all items.
+     * @param catalogue Object that encapsulates the library catalogue
      */
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
