@@ -197,8 +197,6 @@ all the legal currency types that can be parsed by the user.
 
 The class diagram below shows the structure of the `CurrencyManager` class and the accompanying `CurrencyType` enum class:
 
-####Class Diagram:
-
 ![](CurrencyManagerCD.drawio.png)
 
 As shown above, the `CurrencyManager` class is the main class. It contains all the methods required
@@ -519,13 +517,9 @@ This is a non-exhaustive list of some common manual tests that can given as comm
      <br>
      Expected : Adds an expense item to the list. Displays confirmation message with timestamp.
   
-  <br>
-  
   * Test Case: `add_ex` but leave `d/`, `/a`, `/c` or all  empty.
   <br>
      Expected : No item is added. Error message displayed showing correct syntax.
-  
-  <br>
   
   *  Test Case: `add_ex` but give non-existent category for `/c`.
      Expected : No item added. Error message displayed showing available categories.
@@ -533,29 +527,19 @@ This is a non-exhaustive list of some common manual tests that can given as comm
 - #### _Delete Income/ Expense entries_
   * Pre-requisite: List expense or income using `list_ex`/ `list_in. Must have one or more entries.
   
-  <br>
-  
   *  Test Case: `del_in i/1` or `del_ex i/1` </p>
      Expected : Deletes the 1st entry in Income/ Expense list. Displays confirmation message.
   
-  <br>
-  
-  *  Test Case: `del_in i/0`, `del_in i/ABC` or `del_in i/-3`.
-  <br>
-     Expected : Displays error message saying invalid index.
-
-  <br>
-  
+  * Test Case: `del_in i/0`, `del_in i/ABC` or `del_in i/-3`.
+    Expected : Displays error message saying invalid index.
+   
   * Test Case: `del_in i/x` where x is larger than list size.
-  <br>
-     Expected : Similar error message as before.
+    Expected : Similar error message as before.
 
 - #### _List Income/ Expense entries_
   * Test Case: `list_ex` or `list_in`
   <br>
-     Expected : Lists all entries added so far.
-  
-  <br>
+    Expected : Lists all entries added so far.
   
   * Test Case: `list_ex` or `list_in` but no items in both lists.
   <br>
