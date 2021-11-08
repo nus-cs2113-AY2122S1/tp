@@ -4,6 +4,7 @@ import seedu.duke.Duke;
 import seedu.duke.Ui;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.NextCommand;
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
 import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
 import seedu.duke.parser.ItemType;
@@ -15,6 +16,7 @@ public class NextParser extends Parser {
             ItemType listType = getItemType(commandDetails);
             switch (listType) {
             case EVENT:
+                checkForEvents();
                 return new NextCommand("event", 0);
             case TASK:
                 return parseListTask(response);
@@ -26,8 +28,16 @@ public class NextParser extends Parser {
             System.out.println("Please key in a valid Event Index!");
         } catch (InvalidItemTypeException e) {
             System.out.println("Please key in the correct next type value (-e, -t)");
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    private static void checkForEvents() throws DukeException {
+        if (Duke.eventCatalog.size() <= 0) {
+            throw new DukeException("There are currently no Events to Display!");
+        }
     }
 
     private static Command parseListTask(String response)
