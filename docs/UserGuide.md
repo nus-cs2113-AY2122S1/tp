@@ -485,6 +485,31 @@ Returns a list of recipes that are stored in the recipe list.
 
 Format: `list recipes`
 
+Output:
+- If the Recipe List is empty
+```
+    ____________________________________________________________________________________________________
+     The recipe list is currently empty!
+    ____________________________________________________________________________________________________
+```
+
+- If the Recipe List is not empty
+```
+    ____________________________________________________________________________________________________
+     Here are the recipes in your recipe list:
+
+     Chicken Soup
+     - Chicken (qty: 10)
+     - Salt (qty: 5)
+
+     Pork Soup
+     - Pork (qty: 10)
+     - Salt (qty: 5)
+
+     You have a total of 2 recipe(s)
+    ____________________________________________________________________________________________________
+```
+
 <br/>
 
 ### Viewing a specific recipe: `view recipe`
@@ -501,6 +526,25 @@ Format: `view recipe r/RECIPE`
 Example of usage:
 - `view recipe r/Curry Chicken`
 
+Output:
+- If there is a matching recipe found in the Recipe List
+```
+    ____________________________________________________________________________________________________
+     Here is the recipe in your recipe list:
+
+     Pork Soup
+     - Pork (qty: 10)
+     - Salt (qty: 5)
+    ____________________________________________________________________________________________________
+```
+
+- If no matching recipe is found in the Recipe List
+```
+    ____________________________________________________________________________________________________
+     Sorry. No matching recipes found!
+    ____________________________________________________________________________________________________
+```
+
 <br/>
 
 ### Updating quantities of ingredients in a recipe: `update recipe`
@@ -513,6 +557,81 @@ Format: `update recipe r/RECIPE i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY 
 
 Example of usage:
 - `update recipe r/Apple Pie i/apple q/3 i/flour q/200`
+
+Output:
+- If update a recipe by modifying the quantity of ingredients in the recipe
+```
+update recipe r/Chicken Soup i/Chicken q/500
+    ____________________________________________________________________________________________________
+     I've updated this recipe:
+
+     Chicken Soup
+     - Chicken (qty: 500)
+     - Salt (qty: 5)
+
+
+     You may want to use the 'list recipes' command to check the whole recipe list.
+    ____________________________________________________________________________________________________
+```
+
+- If update a recipe by adding a new ingredient
+```
+update recipe r/Chicken Soup i/Cabbage q/100
+    ____________________________________________________________________________________________________
+     I've updated this recipe:
+
+     Chicken Soup
+     - Cabbage (qty: 100)
+     - Chicken (qty: 500)
+     - Salt (qty: 5)
+
+
+     You may want to use the 'list recipes' command to check the whole recipe list.
+    ____________________________________________________________________________________________________
+```
+
+- If update a recipe by deleting an ingredient in this recipe (not the last ingredient)
+```
+update recipe r/Chicken Soup i/Cabbage q/0
+    ____________________________________________________________________________________________________
+     I've updated this recipe:
+
+     Chicken Soup
+     - Chicken (qty: 500)
+     - Salt (qty: 5)
+
+
+     You may want to use the 'list recipes' command to check the whole recipe list.
+    ____________________________________________________________________________________________________
+```
+
+- If update a recipe by deleting an ingredient in this recipe (the last ingredient)
+```
+update recipe r/Chicken Soup i/chicken q/0
+    ____________________________________________________________________________________________________
+     Unable to update this recipe:
+
+     Chicken Soup
+
+     Why update fails:
+     There should be at least one ingredient in the recipe.
+     But your command may result in a recipe without any ingredients.
+     Therefore, please add another ingredient first if you still want to delete this ingredient.
+    ____________________________________________________________________________________________________
+```
+
+- If update a recipe by deleting an ingredient which does not exist in the recipe
+```
+update recipe r/Chicken Soup i/dummyInput q/0
+    ____________________________________________________________________________________________________
+     Unable to update this recipe:
+
+     Chicken Soup
+
+     No matching recipes or ingredients found, please check your input again.
+    ____________________________________________________________________________________________________
+```
+
 
 <br/>
 

@@ -428,7 +428,7 @@ To help young adults who are living in their own home keep track of ingredients 
        Expected: The message "Unable to update this recipe: Apple Pie. No matching recipes or ingredients found, please 
        check your input again."<br/><br/>
 
-2. Update a recipe by adding an new ingredient
+2. Update a recipe by adding a new ingredient
     1. Prerequisite: The recipe "Chicken Soup" exists in the recipe list, and the ingredient "Chicken" was not 
        added before.
     2. Test case: `update recipe r/Chicken Soup i/Chicken q/10` <br/>
