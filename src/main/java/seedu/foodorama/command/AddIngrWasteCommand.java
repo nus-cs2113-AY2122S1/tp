@@ -107,10 +107,12 @@ public class AddIngrWasteCommand extends Command {
     public boolean isInteger(String numberString) {
         if (isNumber(numberString)) {
             double number = Double.parseDouble(numberString);
-            return Math.rint(number) - number == 0;
-        } else {
-            return false;
+            // Check if integer when rounded number - number == 0
+            if (Math.rint(number) - number == 0) {
+                return (number < Integer.MAX_VALUE);
+            }
         }
+        return false;
     }
 
 }
