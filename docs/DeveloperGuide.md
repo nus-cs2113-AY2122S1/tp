@@ -94,6 +94,7 @@ The `Ui` class handles everything that the user sees, which includes feedback, e
 <br />
 
 The `help` command is implemented by `Ui.displayHelp()`, and has 3 different states, as shown in the diagram below:
+
 ![](images/HelpCommandStates.png)
 
 
@@ -108,7 +109,8 @@ of our program.
 necessary commands to be executed. However, not all functionality is stored here. Rather, `Parser` acts like an interface 
 that handles all the logic required to pass in the correct information into the different classes to execute.
 
-The following partial class diagram depicts the relation of the Parser class with other classes that it interacts wtih.
+The following partial class diagram depicts the relation of the Parser class with other classes that it interacts with:
+
 ![](images/ParserClassDiagram.png)
 
 The `Parser` class,
@@ -119,6 +121,7 @@ exceptions thrown here will be caught by the CommandHandler.
 program, again if there is an exception thrown at this stage, it will be caught in the CommandHandler class.
 
 The following partial sequence diagram dictates the flow of events when the user enters a command into the program.
+
 ![](images/ParserSequenceDiagram.png)
 
 ### `Expense` Class
@@ -135,6 +138,7 @@ The `Expense` class,
 - Stores persons involved
 
 The sequence diagram below shows how an expense is initialised.
+
 ![](images/ExpenseSequenceDiagram.png)
 
 
