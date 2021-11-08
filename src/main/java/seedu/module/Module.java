@@ -97,8 +97,13 @@ public class Module extends BaseModule {
         return fullInfo;
     }
 
-    public String isSuPossible(){
-        String isSuable ="No data";
+
+    /**
+     * Returns a string which contains information
+     * about the S/U option of the module.
+     */
+    public String isSuPossible() {
+        String isSuable = "No data";
         if (attributes != null) {
             isSuable = attributes.isSUable();
         }
