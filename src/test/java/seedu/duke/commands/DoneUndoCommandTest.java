@@ -113,4 +113,5 @@ public class DoneUndoCommandTest {
         eventCatalog.get(0).addToTaskList(task1);
         eventCatalog.get(0).addToTaskList(task2);
     }
+
 }
