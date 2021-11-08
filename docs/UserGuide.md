@@ -69,7 +69,7 @@ Displays all commands available for the SchedUrMods application.
 ### 2.2 Adding your tasks:
 
 > #### 📝 **Some notes when adding tasks**:
-> - All commands are case-insensitive. For example, `todo` is the same as `Todo` or `TODO`
+> - All commands are case-insensitive. For example, `todo` is the same as `Todo` or `TODO`.
 > - Command arguments within `< >` are **mandatory** fields and must be followed strictly.
 > - Command arguments within `[ ]` are **optional** fields and may be arranged in any order or left out.
 > - Command arguments such as `<a|b|c>` Means that the argument must **strictly** either be `a`, `b` or `c`. 
@@ -82,10 +82,10 @@ Adds your **todo** to your task list.
 **Format**: `todo <description> [--flag <argument>]`
 - `<description>` specifies the description of your todo.
 - `[--flag <argument>]` specifies optional details of your todo.
-  - When your task is to be done: <code>[--doOn <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a>]</code>
+  - When your task is to be done: <code>[--doOn <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a>]</code>.
      >💡 **Note**: if flag is unused, date will be set to the current time rounded up to the nearest hour.
-  - The priority of your task: `[--priority high|medium|low]`
-  - How often your task is to repeat: `[--recur daily|weekly|monthly|yearly]`
+  - The priority of your task: `[--priority high|medium|low]`.
+  - How often your task is to repeat: `[--recur daily|weekly|monthly|yearly]`.
 
 **Example**: `todo read book --doOn 20-10-2021 02:00 --recur daily`
 - Adds a todo task with the description '`read book`' to your task list.
@@ -110,8 +110,8 @@ Adds your **deadline** to your task list.
 - `<description>` specifies the description of your deadline.
 - <code>&lt;--due <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a>&gt;</code> specifies when your deadline is due.
 - `[--flag <argument>]` specifies optional details of your deadline.
-  - The priority of your task: `[--priority <high|medium|low>]`
-  - How often your task is to repeat: `[--recur <none|daily|weekly|monthly|yearly>]`
+  - The priority of your task: `[--priority <high|medium|low>]`.
+  - How often your task is to repeat: `[--recur <none|daily|weekly|monthly|yearly>]`.
 
 **Example**: `deadline CS2106 Lab 3 --priority high --due 20-10-2021 02:00`
 - Adds a deadline task with the description '`CS2106 Lab 3`' to your task list.
@@ -137,8 +137,8 @@ Adds your **event** to your task list.
 - <code>&lt;--start <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a>&gt;</code> specifies when your event starts.
 - <code>&lt;--end <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a>&gt;</code> specifies when your event ends.
 - `[--flag <argument>]` specifies optional details of your event.
-  - The priority of your task: `[--priority <high|medium|low>]`
-  - How often your task is to repeat: `[--recur <none|daily|weekly|monthly|yearly>]`
+  - The priority of your task: `[--priority <high|medium|low>]`.
+  - How often your task is to repeat: `[--recur <none|daily|weekly|monthly|yearly>]`.
 
 **Example**: `event Marquee Christmas Party --priority high --start 25-12-2020 22:00 --end 26-12-2020 04:00`
 - Adds an event task with the description '`Marquee Christmas Party`' to your task list.
@@ -199,11 +199,11 @@ List all tasks currently stored locally in your task list.
   - **Task id**:
     - A positive integer i.e. `1.` which identifies the task. This is used in the [`edit`](#26-editing-your-tasks-edit), [`browse`](#272-browse-browse) and [`delete`](#28-deleting-your-tasks-delete) commands.
   - **Task type**:
-    - A task can either be a Todo, Deadline, Event or Lesson and they are all represented with the first letter of their task type
-    - `[T]` represents a `Todo`
-    - `[D]` represents a `Deadline`
-    - `[E]` represents a `Event`
-    - `[L]` represents a `Lesson`
+    - A task can either be a Todo, Deadline, Event or Lesson and they are all represented with the first letter of their task type.
+    - `[T]` represents a `Todo`.
+    - `[D]` represents a `Deadline`.
+    - `[E]` represents a `Event`.
+    - `[L]` represents a `Lesson`.
   - **Task description**:
     - General details of the task.
   - **Task priority `[priority]`**:
@@ -212,7 +212,7 @@ List all tasks currently stored locally in your task list.
   - **Task recurrence ``**:
     - A task can either have `none`, `daily`, `weekly`, `monthly`, or `yearly` recurrence.
     - This value determines how often a task recurs.
-        >💡 **Note**: Tasks with a recurrence will automatically be recurred to the next date that has not occured yet every time you list them!
+        >💡 **Note**: Tasks with a recurrence will automatically be recurred to the next date that has not occured yet every time you list them.
   - **Task date field**:
     - For a `Todo`, it represents the date and time to do the task.
     - For a `Deadline`, it represents the due date of the task.
@@ -247,9 +247,9 @@ Filters the task list for all tasks that matches the filters applied.
 
 **Format**: `list [--filter <argument>] [--filter <argument>] ...`
 - `[--flag <argument>]` specifies the filter to be applied to your task list.
-  - Type of the task: `[--type <todo|deadline|event|lesson>]`
-  - Priority of the task: `[--priority <low|medium|high>]`
-  - Recurrence of the task: `[--recur <none|daily|weekly|monthly|yearly>]`
+  - Type of the task: `[--type <todo|deadline|event|lesson>]`.
+  - Priority of the task: `[--priority <low|medium|high>]`.
+  - Recurrence of the task: `[--recur <none|daily|weekly|monthly|yearly>]`.
 
 **Example**: `list --type todo --priority medium`
 - List all tasks that are of type `Todo` and has a priority of `medium`.
@@ -308,9 +308,9 @@ Sorts your task list by a given criteria.
 
 **Format**: `sort --by <criteria>`
 - `<criteria>` specifies what to sort your task list by.
-  - Type of the task: `type`
-  - Description of the task: `description`
-  - Priority of the task: `priority`
+  - Type of the task: `type`.
+  - Description of the task: `description`.
+  - Priority of the task: `priority`.
 
 **Example**: `sort --by priority` + `list`
 - Sort your current task list by `priority` from `high` to `low`.
@@ -371,7 +371,7 @@ Adds your modules and classes into your task list.
 
 **Example**: `module CS2113T:C02;LAJ2203:1,A2,B4`
 
-- Adds class 'C02' of the module 'CS2113T` and classes '1', 'A2', and 'B4' of the module 'LAJ2203' into the task list.
+- Adds class '`C02`' of the module '`CS2113T`' and classes '`1`', '`A2`', and '`B4`' of the module '`LAJ2203`' into your task list.
 
 **Expected outcome**:
 
@@ -387,7 +387,7 @@ Adds your modules and classes into your task list.
 
 #### 2.7.2 Browse: `browse`
 
-Browse links that were added to a `Lesson` with the [`edit`](#26-editing-your-tasks-edit) command.
+Browse to links that were added to your `Lesson` with the [`edit`](#26-editing-your-tasks-edit) command.
 **Format**: `browse <index>`
 - `<index>` is the index of the task you want to browse to (open in an internet browser) in the most recent [list](#23-listing-your-tasks-list) command that you have run.
   >💡 **Note**: if the task you want to browse to was not in your most recent [list](#23-listing-your-tasks-list) command, simply type `list` to list all your tasks and use its corresponding index to browse to the task's url.
@@ -494,7 +494,7 @@ Displays goodbye message and exits the program.
 
 ### 2.10 Storage
 The program will store and automatically update your tasks in the file `[project directory]/data/task.dat` on any change to your task list.  
-   > **⚠️Warning**: The team **strongly discourages** users from directly modifying Task data in `task.dat` as it can lead to undefined behaviour. The team **will not be responsible** for any *loss of data* or *undefined behaviour* as a result of users directly modifying values in the save file.
+   > **⚠️Warning**: The SchedUrMods team **strongly discourages** users from directly modifying Task data in `task.dat` as it can lead to undefined behaviour. The team **will not be responsible** for any *loss of data* or *undefined behaviour* as a result of users directly modifying values in the save file.
 
 
 ## 3. FAQ
