@@ -395,8 +395,6 @@ This section describes the implementation of how the user can display a list of 
 
 ![](Diagram_Images/Implementation_Diagram_Images/ListGoalsCommandParserSequenceDiagram.png)
 
-<div style="page-break-after: always;"></div>
-
 3. The `ListGoalsCommand#runCommand(goalList, printManager, storage, gibberish)` method is called, which in turns calls 
    the `GoalList#listGoals(printManager, gibberish)` method. The string variable `gibberish` is logically equivalent to
    the variable `input`.
@@ -409,6 +407,8 @@ This section describes the implementation of how the user can display a list of 
 7. `gibberish` is limited to 40 characters, with any characters after the limit trimmed.
 
 ![](Diagram_Images/Implementation_Diagram_Images/ListGoalsCommandSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.3.2. Design Considerations
 
@@ -628,6 +628,8 @@ This section describes the implementation of how the user can update a habit's n
 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateHabitCommandSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.7.2. Design Considerations
 
 **Aspect:** Update of habit interval lengths
@@ -791,8 +793,6 @@ The sequence diagram shows how the program imports data from storage file.\
 The sequence diagram shows how the program exports data to storage file./
 ![Export Sequence Diagram](Diagram_Images/Implementation_Diagram_Images/ExportSequenceDiagram.png)
 
-<div style="page-break-after: always;"></div>
-
 #### 4.11.2. Design Considerations
 
 **Aspect:** Storage of application data
@@ -819,9 +819,7 @@ The sequence diagram shows how the program exports data to storage file./
 ### Value proposition
 
 Users with _Ha(ppy)Bit_ will find themselves cultivating good habits and breaking bad habits despite hectic 
-workload or commitments. 
-
-<div style="page-break-after: always;"></div>
+workload or commitments.
 
 ## Appendix B: User Stories
 
@@ -863,7 +861,7 @@ The instructions below are for the manual testing of the program.
 
 ### Launching and Exiting the Program
 
-1. Launch
+**Launch**
    * Download the jar file [here](UserGuide.md#1-quick-start) and copy the file into an empty folder.
    * Open your terminal and type in the command `java -jar happybit.jar` to start up the program.
    * You should see the start-up page with the start-up menu as shown below.
@@ -872,7 +870,7 @@ The instructions below are for the manual testing of the program.
 
 <div style="page-break-after: always;"></div>
 
-2. Navigation
+**Navigation**
    * Select what you are interested in from the start-up menu by typing in the corresponding option number.
    * You can find out more about the various options at our [User Guide](UserGuide.md#12-main-interface).
    * There will be an error message shown if you select an invalid option.
@@ -882,7 +880,7 @@ The instructions below are for the manual testing of the program.
 
 <div style="page-break-after: always;"></div>
 
-3. Exit
+**Exit**
    * To exit the program, select option `6`. 
    * You should see the exit message before the program terminates as shown below.
   
@@ -915,12 +913,12 @@ The instructions below are for the manual testing of the program.
 
 After adding in a substantial number of goals and habits, you can test out the deletion commands as shown below.
 
-1. To see all the goals you have added, use command `list`. You should take note of the index of the goal that you
+To see all the goals you have added, use command `list`. You should take note of the index of the goal that you
   want to delete. We will be using the list shown below as an example.
 
 ![List of Goals](Display_Images/ListOfGoals.png)
 
-2. To delete a goal, use the command `remove`.
+To delete a goal, use the command `remove`.
    * Test: `remove g/6` to remove goal at index `6`.
 
 ![Delete Goal 1](Display_Images/DeleteGoal1.png)
@@ -929,21 +927,25 @@ After adding in a substantial number of goals and habits, you can test out the d
    
 ![New List of Goals](Display_Images/NewListOfGoals.png)
 
-3. Next, use `view` to see the index of the habit under a goal that you want to delete.
+Next, use `view` to see the index of the habit under a goal that you want to delete.
    * Test: `view g/6` to view the habits under goal `6`.
 
 ![View Habits](Display_Images/ViewHabits.png)
 
-5. To delete a habit, use the command `delete`.
+<div style="page-break-after: always;"></div>
+
+To delete a habit, use the command `delete`.
    * Test: `delete g/6 h/1` to delete habit `1` under goal `6`.
 
 ![Delete Habit 1](Display_Images/DeleteHabit1.png)
 
-6. After any deletion, the index of the goals or habits will change. Therefore, make sure to use commands
+After any deletion, the index of the goals or habits will change. Therefore, make sure to use commands
   `list` and/or `view` to check for the new index of the goals and habits.
    * Test: `remove g/7` to remove a goal at index `7` that does not exist. Error will be thrown.
 
 ![Delete Error](Display_Images/DeleteError.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Storage of Data
 
