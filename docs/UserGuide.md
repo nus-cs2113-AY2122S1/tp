@@ -899,13 +899,14 @@ Bye, see you again soon!
 ## Command Summary
 
 <> - Parameters that must be stated in the command.
+
 [<>] - Optional parameters that can be ommited.
 
  |no. | Command | Description |
  |--- | --------- | --------------------------------------- |
  |1.  | `add -b a/<AMOUNT> m/<MONTH>` | `add budget of $AMOUNT to MONTH of the year` |
- |2.  | `add -e c/<DESCRIPTION> a/<AMOUNT> d/<DATE_OF_EXPENDITURE> [c/<CATEGORY>]` | `add expenditure with DESCRIPTION of CATEGORY which cost $<AMOUNT> on <DATE>` |
- |3.  | `add -l n/<NAME_OF_LOAN_BORROWER> a/<AMOUNT> d/<DUE_DATE_OF_LOAN>` | `add a loan of $AMOUNT borrowed by NAME_OF_LOAN_BORROWER due on <DUE_DATE_OF_LOAN>` |
+ |2.  | `add -e c/<DESCRIPTION> a/<AMOUNT> d/<DATE_OF_EXPENDITURE> [c/<CATEGORY>]` | `add expenditure with DESCRIPTION of CATEGORY which cost $AMOUNT on DATE` |
+ |3.  | `add -l n/<NAME_OF_LOAN_BORROWER> a/<AMOUNT> d/<DUE_DATE_OF_LOAN>` | `add a loan of $AMOUNT borrowed by NAME_OF_LOAN_BORROWER due on DUE_DATE_OF_LOAN` |
  |4.  | `edit -b m/<MONTH> a/<AMOUNT>` | `edit the MONTH budget to AMOUNT` |
  |5.  | `edit -e m/<MONTH> i/<INDEX> a/<AMOUNT> d/<DATE_OF_EXPENDITURE> n/<DESCRIPTION>` | `edit exependiture of MONTH and INDEX to AMOUNT, DATE_OF_EXPENDITURE and DESCRIPTION` |
  |6.  | `edit -l m/<MONTH> i/<INDEX> a/<AMOUNT> d/<DUE_DATE_OF_LOAN> n/<BORROWER_NAME>` | `edit the loan of MONTH and INDEX to AMOUNT, DUE_DATE_OF_LOAN and BORROWER_NAME ` |
