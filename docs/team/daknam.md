@@ -57,7 +57,7 @@ Given below are my contributions to the project.
         * Added implementation details and sequence diagram of the `delete_attendance` feature.
           ([\#326](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/326/files))
         * Added class diagram for Attendance class.
-        * ([\#332](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/332/files))
+          ([\#332](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/332/files))
 
 * **Team-Based Tasks**:
     * Participated in Zoom meetings to discuss features and issues
