@@ -16,6 +16,7 @@ import java.util.logging.Logger;
  * @author jhsee5
  */
 public class AddIngrCommand extends Command {
+    public static final String NUMBER_REGEX = "^[-\\d\\s.]+$";
     private static Logger LOGGER = Logger.getLogger("AddIngrCommand.execute()");
     private static final Ui UI = new Ui();
     private static final int INDEX_ZERO = 0;
@@ -69,7 +70,7 @@ public class AddIngrCommand extends Command {
      * @author Dniv-ra
      */
     public boolean isNumber(String numberString) {
-        if (numberString.matches("^[\\d\\s.]+$")) {
+        if (numberString.matches(NUMBER_REGEX)) {
             return true;
         } else {
             return false;
