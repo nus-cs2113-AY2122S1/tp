@@ -1,5 +1,6 @@
 @startuml
 'https://plantuml.com/component-diagram
+skinparam classAttributeIconSize 0
 
 Package Attendance <<Rectangle>> {
 Class Attendance
@@ -8,21 +9,36 @@ Class AttendanceList
 
 Package Member <<Rectangle>> {
 Class Member
+hide member
 }
 
 Package Training <<Rectangle>> {
 Class TrainingSchedule
+hide member
 }
 
 Package Storage <<Rectangle>> {
 Class AttendanceStorage
+hide member
 }
 
-AttendanceStorage ..> AttendanceList
+Class Attendance {
+# String memberName
+# String trainingName
+# String attended
+# int index
+}
+
+Class AttendanceList {
+-ArrayList<Attendance> AttendanceList
++addAttendance(): Attendance
++deleteAttendance(): Attendance
+}
+
+AttendanceStorage "1"..>"1" AttendanceList
 AttendanceList ..> "*" Attendance
 Attendance *-left- "1" Member
 Attendance *-right- "1" TrainingSchedule
 
-hide members
 hide circle
 @enduml
