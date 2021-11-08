@@ -32,6 +32,7 @@ public class AllRecordList {
         }
     }
 
+    //@@author yeoweihngwhyelab
     public void statIntro(AllRecordList recordList) {
         TextUi.statsIntro(recordList);
     }
@@ -102,6 +103,7 @@ public class AllRecordList {
         }
     }
 
+    //@@author yeoweihngwhyelab
     public Budget editBudget(int month, double amount) {
         Budget targetBudget = allRecordList.get(month).getBudget();
         if (amount != 0.00) {
@@ -113,6 +115,7 @@ public class AllRecordList {
         return targetBudget;
     }
 
+    //@@author yeoweihngwhyelab
     public Expenditure editExpenditure(int month, int index, double amount,
                                        String description, LocalDate date) {
         Expenditure targetExpenditure = allRecordList.get(month).getExpenditure(index);

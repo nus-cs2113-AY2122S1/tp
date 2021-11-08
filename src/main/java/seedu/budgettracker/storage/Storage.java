@@ -10,10 +10,12 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+//@@author yeoweihngwhyelab
 public class Storage {
     public static String dataStorageDirectory = "./data/";
     public static final String LS = System.lineSeparator();
 
+    //@@author yeoweihngwhyelab
     public String loadStorage(AllRecordList recordList, String recordListDirectory) {
         try {
             ReadTextFile newReader;
@@ -44,6 +46,7 @@ public class Storage {
         return recordListDirectory;
     }
 
+    //@@author yeoweihngwhyelab
     public void makeStorageTextFile(String recordListDirectory) {
         LocalDate date = LocalDate.now();
         if (recordListDirectory.equals("")) {
@@ -67,6 +70,7 @@ public class Storage {
         }
     }
 
+    //@@author yeoweihngwhyelab
     public void directoryListAllFiles() {
         System.out.print(LS);
 
@@ -80,6 +84,15 @@ public class Storage {
         boolean containsJunk = false;
         boolean isValidFileType = true;
 
+        containsJunk = isContainsJunk(dataDirectoryList, dataBaseFileName, dataBaseYearName, isValidName, isFile, containsJunk, isValidFileType);
+
+        if (containsJunk) {
+            System.out.println("Your data directory contains junk files, please clean them up!");
+        }
+    }
+
+    //@@author yeoweihngwhyelab
+    private boolean isContainsJunk(File[] dataDirectoryList, String dataBaseFileName, String dataBaseYearName, boolean isValidName, boolean isFile, boolean containsJunk, boolean isValidFileType) {
         for (int i = 0; i < dataDirectoryList.length; i++) {
             if (dataDirectoryList[i].isFile()) {
                 dataBaseFileName = dataDirectoryList[i].getName();
@@ -108,10 +121,7 @@ public class Storage {
             isValidName = false;
             isFile = true;
         }
-
-        if (containsJunk) {
-            System.out.println("Your data directory contains junk files, please clean them up!");
-        }
+        return containsJunk;
     }
 
 }

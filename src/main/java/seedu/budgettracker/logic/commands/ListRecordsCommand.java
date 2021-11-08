@@ -3,6 +3,7 @@ package seedu.budgettracker.logic.commands;
 import seedu.budgettracker.data.records.Category;
 import seedu.budgettracker.ui.TextUi;
 
+//@@author yeoweihngwhyelab
 public class ListRecordsCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
@@ -15,17 +16,20 @@ public class ListRecordsCommand extends Command {
     public static boolean isListAll = false;
     public static Category category = Category.ALL;
 
+    //@@author yeoweihngwhyelab
     public ListRecordsCommand(int listOption, Category category) {
         this.month = listOption;
         this.isListAll = false;
         this.category = category;
     }
 
+    //@@author yeoweihngwhyelab
     public ListRecordsCommand(Category category) {
         isListAll = true;
         this.category = category;
     }
 
+    //@@author yeoweihngwhyelab
     @Override
     public void execute() {
         TextUi.showRecordsListView(allRecordList, month, isListAll, category);

@@ -9,13 +9,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+//@@author yeoweihngwhyelab
 public class ReadTextFile {
     private final String fileDirectory;
 
+    //@@author yeoweihngwhyelab
     public ReadTextFile(String fileDirectory) {
         this.fileDirectory = fileDirectory;
     }
 
+    //@@author yeoweihngwhyelab
     /**
      * Reads the text file containing all the commands for adding Budget or Expenditure
      * and return an ArrayList of String containing those commands.
