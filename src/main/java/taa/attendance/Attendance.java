@@ -5,6 +5,7 @@ import taa.ClassChecker;
 
 public class Attendance implements ClassChecker {
     private static final int MIN_LESSON_NUMBER = 1;
+    private static final int MAX_LESSON_NUMBER = 1000;
 
     private static final String MESSAGE_FORMAT_ATTENDANCE = "Lesson %d (%s)";
 
@@ -51,7 +52,7 @@ public class Attendance implements ClassChecker {
      */
     @Override
     public boolean verify() {
-        if (lessonNumber < MIN_LESSON_NUMBER) {
+        if (lessonNumber < MIN_LESSON_NUMBER || lessonNumber > MAX_LESSON_NUMBER) {
             return false;
         }
 
