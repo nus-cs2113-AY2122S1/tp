@@ -74,14 +74,24 @@ Represents an individual that participated in an expense or a whole trip.
 
 ### `Ui` Class
 
-The `Ui` class handles everything that the user sees, which includes exception handling messages, outputs to users and feedback.
+The `Ui` class handles everything that the user sees, which includes feedback, error messages, user prompts, and displaying help. All of Ui's methods are static, and are meant to be called by other classes.
 
-`Ui` class consists of multiple print methods, where some are listed above in the UML diagram. `Ui` depends on other classes, 
-such as `Storage`, `Parser`, `Trip` and `Expense` to obtain information stored in these classes.
+<br />
 
-The `Ui` class,
-- Obtains information from Storage, Parser, Trip and Expense components.
-- Prints the information through the terminal.
+**Methods of 'Ui' can be broadly categorised into 2 types:**
+1. Error and feedback messages, which do not contain references to other classes, and are mainly `System.out.println` statements.
+   
+2. Methods that calculates and prints the state of the program. These methods contain references 
+   to other classes, and may require input parameters. An example will be 
+   `public static void printAmount(Person person, Trip trip)`, which generates the total amount 
+   spent and the repayment instructions for `person` in that `trip`.
+
+<br />
+
+The `help` command is implemented by `Ui.displayHelp()`, and has 3 different states, as shown in the diagram below:
+![](images/HelpCommandStates.png)
+
+
 
 ### `Parser` Class
 
