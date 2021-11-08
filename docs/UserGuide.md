@@ -375,7 +375,7 @@ Command: list
 > 📃 Goal index may change if a goal is deleted. e.g. deleting the goal `Exercise more` will cause the index of `Become
 > a vegetarian` to change from 3 to 2.
 
-### 4.4 Update a Goal: `Update`
+### 4.4 Update a Goal: `update`
 Updates a parameter of a goal specified by its index.\
 (To err is human. That's why we have the `update` feature; designed to be more forgiving, 
 when we have the occasional oopsies. 👍 )
