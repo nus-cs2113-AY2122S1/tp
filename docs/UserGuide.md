@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Expiry Eliminator is a desktop app for managing the freshness of ingredients in your kitchen and the recipes you want to cook, optimized for use via a Command Line Interface (CLI). If you can type fast, Expiry Eliminator can help you manage your ingredients and recipes quickly.
+Expiry Eliminator is a desktop app for managing the freshness of ingredients in your kitchen and the recipes you want to cook, optimized for use via a Command Line Interface (CLI). If you are a young adult living in your own home, and you can type fast, Expiry Eliminator can help you manage your ingredients and recipes.
 
 * Table of Contents
 {:toc}
@@ -15,6 +15,16 @@ Expiry Eliminator is a desktop app for managing the freshness of ingredients in 
 4. Open a command prompt / PowerShell / terminal window and run the program with `java -jar [filepath of jar file]`. You should see the following:
 
 ![](images/expiryeliminator-startup.png)
+
+5. Key features to try:
+
+   - [Add ingredients](#adding-an-ingredient-add)
+   - [Increment](#incrementing-quantities-for-an-ingredient-increment)/[decrement](#decrementing-quantities-for-an-ingredient-decrement) quantities for ingredient
+   - [Add recipes](#adding-a-recipe-add-recipe)
+   - [List recipes you can cook](#listing-recipes-that-can-be-cooked-list-recipes-i-can-cook)
+   - List ingredients that are [expiring](#listing-ingredients-that-are-expiring-list-expiring)/[expired](#listing-ingredients-that-have-expired-list-expired)
+   - [Generate shopping list](#creating-a-shopping-list-of-ingredients-for-a-list-of-recipes-shopping-list)
+
 
 ## Features
 
