@@ -1,0 +1,2 @@
+stock;ocbc;100;100.00
+saving;main;55000.00
