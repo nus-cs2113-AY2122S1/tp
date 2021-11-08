@@ -509,6 +509,11 @@ that have the `java 11 jdk` installed on their systems.
 it creates with the `tasks.dat` that you wish to transfer from your previous `SchedUrMods.jar`
 home folder.
 
+**Q**: I encountered an error message `java.lang.reflect.InaccessibleObjectException` when executing the program. How do I fix it?
+
+**A**: Ensure that you have installed and are running `java jdk 11`. Check your java version, by typing `java -version`
+to ensure that the correct jdk version (`11.x.x`) is being recognised by your system.
+
 ## 4. Command Summary
 
 Action   | Format                                           | Example                                                                                              |
