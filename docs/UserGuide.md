@@ -20,18 +20,27 @@ Each computer will have their own CLI, such as the Windows' Powershell and the m
 ### What is this guide for?
 This guide's purpose is to help users like you understand how to use the Traveller application to its fullest potential.
 
-For users who can't wait to start using Traveller, see [here](#1-quick-start) for a quick guide on how to set it up 
-and get started. The [Command Summary](#5-command-summary) provides you with a summary of the various functionalities currently 
-supported by Traveller too.
+### How to use this guide?
+This guide consists of 5 main sections, with each section catering to your different needs, as detailed below. 
 
-For users who are seeking to understand the full functionality of Traveller, its details, along with tips and tricks of 
-each functionality. All these are explained in the [Features](#2-features) section.
+* [Quick Start](#1-quick-start): A quick set up guide for users are new and can't wait to start using Traveller!
+* [Features](#2-features): Details the functionalities of Traveller. For users who are seeking to understand the 
+full functionality of Traveller.
+* [FAQ](#3-faq): A list of commonly asked questions regarding Traveller. If you are facing issues with Traveller, this 
+is the section you are looking for.
+* [Supported Countries Summary](#4-supported-countries-summary): A list of countries currently supported by Traveller. 
+If you want to see if your destination country is supported by Traveller, navigate here.
+* [Command Summary](#5-command-summary): A summary of the various functionalities currently supported by Traveller. See
+here if you forgot how to use the assortment of commands in Traveller.
 
 ### Legend
+These icons here will be used throughout the guide to provide you with more information when using 
+Traveller. Do familiarise yourself with what they mean as they provide very useful information that can help you become 
+an expert Traveller user!
 
 |Icon|Explanation|
 |:---:|:---:|
-|![](documentationPics/info.png)|Shows how this user guide is formatted.|
+|![](documentationPics/info.png)|Shows extra information regarding Traveller.|
 |![](documentationPics/tip.png)|Shows useful tips when using Traveller.|
 |![](documentationPics/warning.png)|Shows potential problems when using Traveller.|
 
@@ -64,7 +73,8 @@ each functionality. All these are explained in the [Features](#2-features) secti
 ## 1. Quick Start
 This section provides you with a guide on how to get Traveller up and running on your computer.
 
-1. Ensure that you have Java 11 or above installed.
+1. Ensure that you have Java 11 or above installed. You can install it from this 
+[link](https://www.oracle.com/java/technologies/downloads/#java11).
 2. Download the latest version of `Traveller.zip` from [here](https://github.com/AY2122S1-CS2113T-W13-1/tp/releases).
 3. Unzip the downloaded folder in an empty directory of your choice.
 4. Navigate to the directory containing `Traveller.jar` in your desired CLI and run `java -jar Traveller.jar`.
@@ -423,6 +433,9 @@ Exits the program.
 <br/>
 
 ## 3. FAQ
+This section contains a list of commonly asked questions about Traveller. If you are facing problems using Traveller, 
+you may look through this section to see if it provides you with a solution. If not, you are always welcomed to email
+the Traveller team at traveller@gmail.com.
 
 **Q**: Why does Traveller keep exiting when I run it?
 
