@@ -307,7 +307,7 @@ Argument:
 Example of usage:
 - `invest add savings Main -v 15000`
 
-<hr />
+<br />
 
 #### Deleting an investment - `delete`
 
@@ -344,7 +344,7 @@ Argument:
 Example of usage:
 - `invest delete savings -i 1`
 
-<hr />
+<br />
 
 #### Listing investments - `list`
 
