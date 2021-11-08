@@ -222,9 +222,7 @@ public class IngredientList {
         Scanner input = new Scanner(System.in);
         String newName = input.nextLine().toLowerCase();
         while (isNumber(newName) | isDouble(newName)) {
-            UI.clearTerminalAndPrintNewPage();
-            UI.printInvalidIngredientName();
-            newName = input.nextLine().toLowerCase();
+            throw new FoodoramaException(UI.getInvalidIngredientName());
         }
 
         if (newName.isBlank()) {
