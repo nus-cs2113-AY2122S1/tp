@@ -1,0 +1,55 @@
+@startuml
+!include style.puml
+
+box DUKE_COLOR
+Participant ":Duke" as Duke
+end box
+box UI_COLOR
+Participant ":Ui" as Ui
+end box
+box BLUE_COLOR
+Participant ":Parser" as Parser
+Participant ":NextParser" as NextParser
+end box
+box LOGIC_COLOR
+Participant ":NextCommand" as NextCommand
+end box
+
+
+activate Duke
+Duke -> Parser : next ItemType
+activate Parser
+
+
+Parser -> NextParser: ItemType
+activate NextParser
+NextParser -> NextCommand : NextCommand(ItemType)
+activate NextCommand
+|||
+return
+return
+return
+destroy Parser
+
+Duke -> NextCommand : execute()
+activate NextCommand
+opt ItemType = event
+  NextCommand -> Ui: printMonth(Date)
+  activate Ui
+  NextCommand -> Ui: printEvent(Event)
+  |||
+  Ui -> Duke
+  deactivate Ui
+end
+opt ItemType = task
+  NextCommand -> Ui: printTask(Task)
+  activate Ui
+  |||
+  Ui -> Duke
+  deactivate Ui
+end
+
+
+NextCommand --> Duke : CommandResult
+deactivate
+@enduml
