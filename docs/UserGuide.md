@@ -437,7 +437,7 @@ This section contains the available commands for managing tasks for events in **
 ### 5.1 Add a task 
 Note: For this current version of **SLAM**, pre-selecting an `Event` is not required for this command.
 
-**Prerequisite:** You must have added at least one event and one member before adding a task.
+**Prerequisite:** You must have added at least one event and at least one member before adding a task.
 
 Adds a task to an existing event in your current catalog of events.
 
@@ -447,12 +447,45 @@ To add a task, first describe the task using the following command:
 
 **Example:** `add -t n/Buy stage lights d/10-11-2021 1600`
 
+Following which, **SLAM** will prompt you for an optional description for your task which should look like this:
+
+```
+> add -t n/Buy stage lights d/10-02-2022 1600
+```
+```
+Please add an optional description for your item and press enter
+```
+```
+>
+```
+After pressing `enter`, **SLAM** will prompt you to select an event to assign your task to. Enter the number corresponding to the event:
+```
+Please choose which event you want to add your task to.
+1. [E][ ] Tembusu Concert (at: 19 Feb 2022 - 20:00)
+```
+```
+> 1
+```
+After pressing `enter` again, **SLAM** will prompt you to select members to assign your task to. You may choose to select multiple members:
+```
+Please choose which member(s) you want to assign your task to. 
+1. AL
+2. BOB
+3. CHARLIE
+```
+```
+> 1 2
+```
+After pressing `enter` for the last time, you have keyed in your description, event and member(s). You have successfully added a task into **SLAM**! 
+
 ### 5.2 Select a Task
 Select a Task to view its details. You can then perform additional commands with the selected Task.
 
 **Format**: `select -t TASK_ID`
 
 **Example**: `select -t 1`
+
+> 🚨 You need to `select` an Event before selecting the task of your choice!
 
 **Expected Output**:
 ```
@@ -461,7 +494,7 @@ Select a Task to view its details. You can then perform additional commands with
 ```
 Here are the details of the task:
 Title: Buy stage lights
-Deadline: 10 Feb 2022 - 22:00
+Deadline: 10 Feb 2022 - 16:00
 Description: Stage lights for concert
 Members:
 1. JOHN DOE
@@ -471,7 +504,40 @@ Members:
 
 ### 5.3 Mark a Task as `done`
 
+This will allow you to mark a task as done after the task is accomplished.
+
+**Format:** `done -t TASK_ID`
+
+**Example:** `done -t 1`
+
+> 🚨 You need to `select` an Event before marking the task of your choice as done!
+
+**Expected Output:**
+```
+> done -t 1
+```
+```
+Nice! I have marked these items as done!
+[T][X] Buy stage lights (at: 10 Feb 2022 - 16:00)
+--------LIST UPDATED--------
+```
+
 ### 5.4 Mark a Task as `undone`
+
+This will allow you to undo a task that was marked done if the task is not done yet.
+
+**Format:** `undo -t TASK_ID`
+
+**Example:** `undo -t 1`
+
+> 🚨 You need to `select` an Event before undoing the task of your choice!
+
+**Expected Output:**
+```
+Ok, I have unmarked these items:
+[T][ ] Buy stage lights (at: 10 Feb 2022 - 16:00)
+--------LIST UPDATED--------
+```
 
 ### 5.5 Delete a Task
 Deletes a task from an `Event`.
@@ -498,6 +564,14 @@ This task has been removed: Buy stage lights
 This section contains the available commands for managing members in `SLAM`.
 
 ### 6.1 Add a member 
+
+Adds a member to your current member roster.
+
+**Format:** `add -m`
+
+**Example:** `add -m John Doe, Bob Tan`
+
+> 💡 You can use a comma and a space to separate different members you want to add, if you choose to add more than one member at a time.
 
 ### 6.2 Select a member
 Selects a member to view what tasks the member is assigned to.

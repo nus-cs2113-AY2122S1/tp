@@ -4,7 +4,7 @@ title AddCommand
 participant ":Duke" as Duke
 activate Duke
 
-create ":Parser" as Parser
+participant ":Parser" as Parser
 Duke -> Parser
 activate Parser #yellow
 create ":AddParser" as AddParser
