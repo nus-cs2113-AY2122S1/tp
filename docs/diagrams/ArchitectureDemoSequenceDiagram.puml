@@ -1,15 +1,17 @@
 @startuml
+'https://plantuml.com/sequence-diagram
+
 !include Style.puml
 
 actor User
 
-participant "duke:Duke" as Duke
-participant "ui:Ui" as Ui
-participant ":Parser" as Parser
-participant "command:AddTaskCommand" as Command
-participant "newTask:Task" as Task
-participant "taskList:TaskList" as TaskList
-participant "storage:Storage" as Storage
+participant "duke:Duke" as Duke DUKE_COLOR
+participant "ui:Ui" as Ui UI_COLOR
+participant ":Parser" as Parser LOGIC_COLOR
+participant "command:AddTaskCommand" as Command LOGIC_COLOR
+participant "newTask:Task" as Task MODEL_COLOR
+participant "taskList:TaskList" as TaskList MODEL_COLOR
+participant "storage:Storage" as Storage STORAGE_COLOR
 
 activate Duke
 Duke -> Ui: readUserResponse()
