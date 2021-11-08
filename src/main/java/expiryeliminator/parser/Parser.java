@@ -260,7 +260,7 @@ public class Parser {
         return new ViewIngredientCommand(ingredient);
     }
 
-    //@@author kairuihu
+    //@@author KairuiHu
 
     /**
      * Creates a UpdateRecipeCommand from the inputs.
@@ -311,7 +311,7 @@ public class Parser {
         return new CookedRecipeCommand(recipe);
     }
 
-    //@@author kairuihu
+    //@@author KairuiHu
 
     /**
      * Creates a ViewRecipeCommand from the inputs.

@@ -4,7 +4,8 @@ package expiryeliminator.commands;
 import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.RecipeList;
 
-//@@author kairuihu
+//@@author KairuiHu
+
 /**
  * Lists all recipes, together with its associated ingredients.
  */

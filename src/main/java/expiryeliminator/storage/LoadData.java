@@ -14,7 +14,8 @@ import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.IllegalValueException;
 
-//@@author kairuihu
+//@@author KairuiHu
+
 public class LoadData {
 
     /**
@@ -36,6 +37,7 @@ public class LoadData {
             SaveData.createFileOrFolder(pathName, fileName);
         }
     }
+    //@@author KairuiHu
 
     /**
      * Store the current recipe from the txt file to the recipe list.
@@ -65,6 +67,7 @@ public class LoadData {
             }
         }
     }
+    //@@author KairuiHu
 
     /**
      * Stores the current ingredient of a recipe from the txt file.
@@ -87,6 +90,7 @@ public class LoadData {
         IngredientQuantity ingredientQuantity = new IngredientQuantity(ingredient, quantity);
         currentRecipe.setIngredientQuantities(ingredientName, ingredientQuantity);
     }
+    //@@author KairuiHu
 
     /**
      * Gets the current unit of an ingredient from the txt file.
@@ -104,6 +108,7 @@ public class LoadData {
         }
         return unit;
     }
+    //@@author KairuiHu
 
     /**
      * Loading the ingredient repository from the txt file.
@@ -123,6 +128,7 @@ public class LoadData {
             e.printStackTrace();
         }
     }
+    //@@author KairuiHu
 
     /**
      * Gets the current quantity of the ingredient with batch number from the txt file.
@@ -137,6 +143,7 @@ public class LoadData {
         quantityWithBatch = Integer.parseInt(theDigits);
         return quantityWithBatch;
     }
+    //@@author KairuiHu
 
     /**
      * Gets the unit of an ingredient in the current recipe from the txt file.
@@ -158,6 +165,7 @@ public class LoadData {
         }
         return unit;
     }
+    //@@author KairuiHu
 
     /**
      * Loads the current ingredient from the txt file.

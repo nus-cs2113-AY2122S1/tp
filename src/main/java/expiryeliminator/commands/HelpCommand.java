@@ -3,7 +3,7 @@ package expiryeliminator.commands;
 import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.RecipeList;
 
-//@@author kairuihu
+//@@author KairuiHu
 
 public class HelpCommand extends Command {
     /**

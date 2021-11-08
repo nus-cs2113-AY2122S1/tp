@@ -5,7 +5,8 @@ import expiryeliminator.data.Recipe;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.NotFoundException;
 
-//@@author kairuihu
+//@@author KairuiHu
+
 /**
  * Finds a specific recipe, together with its associated ingredients.
  */
