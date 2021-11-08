@@ -20,7 +20,7 @@ Use the Table of Contents below to easily navigate to the section you desire.
 
 |Icon|Explanation|
 |:---:|:---:|
-|![](documentationPics/info.png)|Shows how this developer guide is formatted.|
+|![](documentationPics/info.png)|Shows more information regarding this guide or the development of Traveller.|
 |![](documentationPics/tip.png)|Shows useful tips when developing Traveller.|
 |![](documentationPics/warning.png)|Shows potential problems when developing Traveller.|
 
@@ -54,17 +54,19 @@ The World Map is the part of the application that handles the calculation of the
 (collectively referred to as distance in this guide) between countries, 
 while the Main Traveller code handles the interaction with users, and the general logic of the application.
 
-<img src="./documentationPics/designOverview.jpeg"  alt="design overview"/>
-
-![](documentationPics/designOverview.jpeg)
+<p align="center">
+  <img src="documentationPics/designOverview.jpeg"  alt="design overview"/>
+</p>
 <div style="text-align: center;">Figure 1: Design Overview of Traveller</div>
 
 ### 1.1. World Map
 The World Map is 1 of the 2 major components of the Traveller project.
 It implements a key feature of the application, which is to find the shortest travel path from 1 country to another.
 As shown in figure 2, the World Map consists of 4 sub-components, the [`WorldMap`](#111-worldmap-class) class, 
-[`GraphList`](#112-graphlist-class) class, [`Logic`](#113-logic-class) class, and [`DataLoader`](#114-dataloader-class) class.
-Additionally, the World Map uses 2 other classes to pass data around, the `Country` class, and the `Distance` class.
+[`GraphList`](#112-graphlist-class) class, [`Logic`](#113-logic-class) class, and [`DataLoader`](#114-dataloader-class) 
+class.
+Additionally, the World Map uses 3 other classes to pass data around, the `Country` class, the `Distance` class, and 
+the `MinCalcResult` class.
 
 ![](documentationPics/worldMapClassDiagram.jpeg)
 <div style="text-align: center;">Figure 2: Design of the World Map</div>
@@ -83,15 +85,15 @@ Then, the function then reads either *time.txt* or *cost.txt* and runs `computeS
 both from the `Logic` class.
 
 As a side note, `initWorldMap` initialises the main World Map which is based on distances, 
-while `altWorldMap` boots up a side, read-only World Map based on the flight cost paths.     
+while `altWorldMap` boots up a side World Map based on the flight cost paths.     
 
 NOTE: As of V2.1 `EditMap` is no longer used. 
 
 ![](documentationPics/worldmap2.1.png)
-<div style="text-align: center;">Figure 3.1.1: World Map Sequence Diagram Part 1</div>
+<div style="text-align: center;">Figure 3.1: World Map Sequence Diagram Part 1</div>
 
 ![](documentationPics/worldmap2.2.png)
-<div style="text-align: center;">Figure 3.1.2: World Map Sequence Diagram Part 2</div>
+<div style="text-align: center;">Figure 3.1: World Map Sequence Diagram Part 2</div>
 (The diagrams are split into 2 parts to ensure higher picture resolution)
 
 The `initWorldMap` command is called which then processes the flight data by calling `readData`, with the data
@@ -99,32 +101,31 @@ corresponding to the flight times. Alternatively, to process the flight costs da
 processes the costs-based World Map. `getValidCountry` ensures the given country is valid by checking against the 
 current database in the system.
 
-The breakdown of more complicated functionalities illustrated by Figure 3.1 is summarised below.
+The breakdown of more complicated functionalities illustrated by Figure 3 is summarised below.
 
-`printWorld`
-1. `getNameArray` returns the array of country codes in String form.
-2. Subsequently, `getNameArray.size` returns the size of the String which is the corresponding number of countries.
+**`printWorld` method**
+1. `getNameArray()` returns the array of country codes in String form.
+2. Subsequently, `getNameArray().size()` returns the size of the array which is the corresponding number of countries.
 3. The double nested for-loop iterates through all pairs of countries and returns the distance between all pairs by 
-calling the `getEdgeMatrix` which looks up the distances inside the corresponding matrix `EdgeMatrix`.  
+calling the `getEdgeMatrix()` which looks up the distances inside the corresponding matrix `EdgeMatrix`.
 
-   
->![](documentationPics/info.png) Both functions `calcMinTime` and `calcMinCost` are based off the same parent function,
-> with the main difference being that `calcMinCost` needs to initialise the alternative World Map and re-boots the 
-> original, time-based World Map just before the function returns, thereby restoring the World Map back to its original 
-> time-based state. Below is the overview of how both functions work in general. 
-
-`calcMinTime` and `calcMinCost` 
-1. The source and destination country are firstly checked to ensure they are valid through `getValidCountry`.
+**`calcMinTime` and `calcMinCost` methods**
+1. The source and destination country are firstly checked to ensure they are valid through `getValidCountry()`.
 2. `MinCalcResult` is then instantiated which passes in the two countries and a blank list which will eventually 
 contain the shortest path, whether cost or time-based.
-3. `computeSource` and `getToGoal` is then used to find the shortest path between the two countries, which is then 
+3. `computeSource()` and `getToGoal()` is then used to find the shortest path between the two countries, which is then 
 returned by the function as a `MinCalcResult` class.
+
+>![](documentationPics/info.png) Both functions `calcMinTime` and `calcMinCost` are based off the same parent function,
+> with the main difference being that `calcMinCost` needs to initialise the alternative World Map and re-boots the
+> original, time-based World Map just before the function returns, thereby restoring the World Map back to its original
+> time-based state.
 
 
 #### 1.1.2. GraphList class
 The `GraphList` class is based off the `WorldMap` overarching class and translate it into a more simplistic graph 
 format, namely referring to its components as vertices and edges.
-It instantiates subsequent classes like `vertexArray` of Country type and `nameArray` of String type.
+It instantiates subsequent ArrayLists like `vertexArray` of Country type and `nameArray` of String type.
 
 Its main functionalities are `addVertex` and `findVertex` which are then accessed by classes like `DataLoader` and 
 `WorldMap`. 
@@ -135,18 +136,18 @@ Similarly, the `modifyEdge` function calls the subsequent function `updateNeighb
 The list of distances are all stored in a matrix which is called by `getEdgeMatrix` by the `WorldMap` class.
 
 ![](documentationPics/graphlist.png)
-<div style="text-align: center;">Figure 3.2: Graph List Sequence Diagram</div>
+<div style="text-align: center;">Figure 4: Graph List Sequence Diagram</div>
 
 >![](documentationPics/info.png) Both functions `modifyEdge` and `createEdge` have a very similar flow and structure.
 > While `modifyEdge` desires to update the path and hence calls `updateNeighbour`, `createEdge` desires to add a new
 > path into the existing database and hence calls `addNeighbour`.
 
-The breakdown of these functionalities as illustrated by Figure 3.2 is summarised below.
+The breakdown of these functionalities as illustrated by Figure 4 is summarised below.
 
-`modifyEdge` and `createEdge`
-1. Calling `getKey` for both the starting and ending country returns the unique tags for the corresponding countries,
+**`modifyEdge` and `createEdge` methods**
+1. Calling `getKey()` for both the starting and ending country returns the unique tags for the corresponding countries,
 which is then used to access and hence update the corresponding path linking both countries. 
-2. `updateNeighbour` (or `addNeighbour`) is then called on both countries to ensure the bi-directional edge is 
+2. `updateNeighbour()` (or `addNeighbour()`) is then called on both countries to ensure the bi-directional edge is 
 correctly updated (or added to the existing database).
 
 #### 1.1.3. Logic class
@@ -154,24 +155,24 @@ The `Logic` class is the main class driving the logic from the overarching `Worl
 Namely, it runs Dijkstra's algorithm on the given WorldMap.
 
 This is done through both of its functionalities which need to be called together. 
-`computeSource` runs Dijkstra's algorithm from the given starting country and 
+`computeSource()` runs Dijkstra's algorithm from the given starting country and 
 expands outwards to all other countries, yielding the least distances to all other countries as well. 
-Then, `getToGoal` backtracks from the target country to trace the shortest path to the source country, 
-in reverse order. Note that `getToGoal` returns an object of `MinCalcResult` type.
+Then, `getToGoal()` backtracks from the target country to trace the shortest path to the source country, 
+in reverse order. Note that `getToGoal()` returns an object of `MinCalcResult` type.
 
 ![](documentationPics/logic.png)
-<div style="text-align: center;">Figure 3.3: Logic Sequence Diagram</div>
+<div style="text-align: center;">Figure 5: Logic Sequence Diagram</div>
 
-The breakdown as illustrated by Figure 3.3 is summarised below.
-1. Firstly, `computeSource` calls `getVertexArray` which returns the list of all countries presently in the database.
+The breakdown as illustrated by Figure 5 is summarised below.
+1. Firstly, `computeSource()` calls `getVertexArray()` which returns the list of all countries presently in the database.
 2. A `PriorityQueue` is then utilised which starts from the initial source country and expands to all other countries, 
 returning the shortest paths across the entire network of countries, in other words the implementation of Dijkstra's 
 algorithm.
-3. Then, `getToGoal` is a backtracking mechanism searching from the destination country back towards the country of 
+3. Then, `getToGoal()` is a backtracking mechanism searching from the destination country back towards the country of 
 origin, and the function eventually returns an object of `MinCalcResult` class.
 
 #### 1.1.4. DataLoader class
-The `DataLoader` class reads in data from *flightData/time.txt* or *flightData/cost.txt* to create the vertexes 
+The `DataLoader` class reads in data from *flightData/time.txt* or *flightData/cost.txt* to create the vertices 
 and edges in `GraphList`.
 Its main function is the `readData` or `readAltData` function which passes the relevant lines in 
 *time.txt* or *cost.txt* to either `loadCountries` or `loadDistances` to create vertexes or edges respectively.
@@ -181,7 +182,7 @@ number by changing the variable `numberOfCountries` in the class. Reading on, `n
 variable number.
 
 ![](documentationPics/dataSequenceDiagram.jpg)
-<div style="text-align: center;">Figure 3.4: DataLoader Sequence Diagram</div>
+<div style="text-align: center;">Figure 6: DataLoader Sequence Diagram</div>
 
 The first line of *time.txt* or *cost.txt* contains the 5 country codes, which are read added as vertexes.
 The remaining lines contain the country to country distances, which are in a lower triangular matrix, and are added as 
@@ -220,17 +221,17 @@ according to how it is written in *time.txt* and *cost.txt*.
 ### 1.2. Main Traveller
 The Main Traveller is the other of the 2 major components of the Traveller project.
 It implements the essential CRUD features of the application.
-As shown in Figure 3 below, the Main Traveller consists of 5 sub-components: the Traveller class, Parser class, 
+As shown in Figure 7 below, the Main Traveller consists of 5 sub-components: the Traveller class, Parser class, 
 TripsList class, Ui class, and Storage class.
 Additionally, the `Command` class is used to execute various actions in the various sub-components.
 
 ![](documentationPics/mainTravellerDesign.png)
-<div style="text-align: center;">Figure 4: Design of the Main Traveller</div>
+<div style="text-align: center;">Figure 7: Design of the Main Traveller</div>
 
 Details of each of the sub-components can be found in the subsequent sub-sections.
 
 #### 1.2.1. Traveller class
-The main class of the whole project. The 2 major components of Traveller ([World Map](#11-world-map) and 
+The root class of the whole project. The 2 major components of Traveller ([World Map](#11-world-map) and 
 [Main Traveller](#12-main-traveller)) is initialized here. 
 Sub-components of [Main Traveller](#12-main-traveller) is also initialized here.
 
@@ -247,12 +248,14 @@ function is detailed below.
 The `Parser` class processes raw user input to return a `Command` object, which can be executed to execute the action
 specified by the command.
 It's main function is the `parse` function, which takes in a user input string obtained by a `Ui` object and output the 
-`Command` object. Figure 5 below illustrates the code of the `parse` function via a sequence diagram.
+`Command` object. Figure 8 below illustrates the code of the `parse` function via a sequence diagram.
 
-![](documentationPics/parserSequenceDiagram.jpeg)
-<div style="text-align: center;">Figure 5: Parser Sequence Diagram</div>
+<p align="center">
+  <img src="documentationPics/parserSequenceDiagram.jpeg"  alt="parser sequence diagram"/>
+</p>
+<div style="text-align: center;">Figure 8: Parser Sequence Diagram</div>
 
-The steps illustrated by Figure 5 is summarised below.
+The steps illustrated by Figure 8 is summarised below.
 1. The `parse` command is called once per iteration of the main `run` loop in `Traveller`.
 2. Based on the user input, `parse` calls a private `parseAbcCommand`, which parses the user input for each available
 command.
@@ -262,68 +265,69 @@ viewing trips, or deleting trips.
 5. If there is an error encountered by `parse` when processing user input, a corresponding `TravellerException` will be
 thrown.
 
+An example of an iteration elaborated above in Figure 8 is detailed here:
 
-   An example of an iteration elaborated above in Figure 5 is detailed here:
-
-1.The user enters `add-day myFabulousTrip /day 3`.
-2.Parser parses the user input string.
- 1.Parser first separates the command word used (In this case `add-day`), before further parsing the
+1. The user enters `add-day myFabulousTrip /day 3`.
+2. Parser parses the user input string. 
+   1. Parser first separates the command word used (In this case `add-day`), before further parsing the 
    rest of the string.
- 2.If the command word is not recognised, an exception will be thrown. 
- 3.Starting from left to right, trip name `myFabulousTrip` and other field values (In this case `3`)
-    are then detected and stored. 
- 4.These field values are then checked for validity. Exceptions will be thrown if the field values are not valid.
-    1. In this case, the field value `3` will be checked to ensure it is a non-negative integer.
-3.Using the parsed field values, the relevant command object will be created.
-    1.In this case, the `add-day` command object will be created using field values `myFabulousTrip` and `3`.
-4.The parser will return this command object for the `run` function in the `Traveller` class to execute.
+   2. If the command word is not recognised, an exception will be thrown. 
+   3. Starting from left to right, trip name `myFabulousTrip` and other field values (In this case `3`) 
+   are then detected and stored.
+3. These field values are then checked for validity. Exceptions will be thrown if the field values are not valid.
+   1. In this case, the field value `3` will be checked to ensure it is a non-negative integer. 
+4. Using the parsed field values, the relevant command object will be created.
+   1. In this case, the `add-day` command object will be created using field values `myFabulousTrip` and `3`.
+5. The parser will return this command object for the `run` function in the `Traveller` class to execute.
 
 
-Validity checks are also performed on user input to ensure there are no illegal inputs executed. These validity checks
+> ![](documentationPics/tip.png) Validity checks are also performed on user input to ensure there are no illegal inputs executed. These validity checks
 are detailed below. Do note that the parser is meant to only check if the format of user input is valid.
 Checks on whether the command itself is a valid one (E.g. Whether there is enough space left in a day when the
 `add-item` command is called) should be done elsewhere.
-
-* All fields must be filled up. Leading and trailing whitespaces are removed too. As such, if the field value contains
-  just whitespaces, then it will be counted as an empty field.
-* Trip names cannot contain `/` or be the string `all`.
-  * Rationale: `/` are used to indicate a field flag in the user input. Having trip names containing `/` will
-    potentially cause the parser to mistake the trip name for a field.
-  * Rationale: `all` is used to view all trips by the `view` command. This eliminates the possibility of confusing
-    the parser on whether to show all trips or just the trip with name `all` when the `view all` command is passed.
-* Day index must be a non-negative integer.
-* Item index must be a non-negative integer.
-* Time field value should be in a valid 24hr format (A 4-digit value ranging from 0000 to 2359).
-* When adding days using `add-day`, the days added should be a positive integer.
+> * All fields must be filled up. Leading and trailing whitespaces are removed too. As such, if the field value contains
+just whitespaces, then it will be counted as an empty field.
+> * Trip names cannot contain `/` or be the string `all`.
+>   * Rationale: `/` are used to indicate a field flag in the user input. Having trip names containing `/` will
+potentially cause the parser to mistake the trip name for a field.
+>   * Rationale: `all` is used to view all trips by the `view` command. This eliminates the possibility of confusing
+the parser on whether to show all trips or just the trip with name `all` when the `view all` command is passed.
+> * Day index must be a non-negative integer.
+> * Item index must be a non-negative integer.
+> * Time field value should be in a valid 24hr format (A 4-digit value ranging from 0000 to 2359).
+> * When adding days using `add-day`, the days added should be a positive integer.
 
 
 #### 1.2.3. TripsList class
 The `TripsList` class is the main class to store the data.
-This include:
+This includes:
 
-1.`Trip`.
+1. `Trip`
+2. `Day`
+3. `Item`
 
-2.`Day`.
-
-3.`Item`.
-
-It contains functions that can help control the date inside the list. 
+It contains functions that can help control the data inside the list. 
 `addTrip` function will create a new space and store the data in it, while the `deleteTrip` function will delete and 
 clear the data from the list. `getTrip` and `getTripIndex` can return the specific `Trip` data by giving the name 
 or the index of the Also, the `getSize` functions will return the size of the `TripsList`.
 Currently, a maximum of 30 days can be added per trip, and a maximum of 50 items can be added per day.
 
-![](documentationPics/TripsList.jpeg)
-<div style="text-align: center;">Figure 6: TripsList Diagram</div>
+
+<p align="center">
+  <img src="documentationPics/tripsList.jpeg"  alt="trips list diagram"/>
+</p>
+<div style="text-align: center;">Figure 9: TripsList Diagram</div>
 
 #### 1.2.4. Ui class
 The `Ui` class processes the interactions with users. The functions in `Ui` class will be called in `command` and then 
 print messages in the interface.
 
-![](documentationPics/Ui.png)
-<div style="text-align: center;">Figure 7: TripsList Diagram</div>
+<p align="center">
+  <img src="documentationPics/Ui.png"  alt="ui diagram"/>
+</p>
+<div style="text-align: center;">Figure 10: Ui Diagram</div>
 
-The steps illustated by Figure 7 is summarised now.
+The steps illustrated by Figure 10 is summarised now.
 1. Run the `printWelcome` to greet the users.
 2. Read user input and pass it to the `Parser`
 3. Functions in `Ui` will be repeatedly called by `Command` class.
@@ -347,10 +351,10 @@ Loading the save file is similar to the main `run` function of Traveller, as the
 Following the loading of the save file, writing of the save file is handled as shown below.
 
 ![](documentationPics/saveSequenceDiagram.jpg)
-<div style="text-align: center;">Figure 8: Save Sequence Diagram</div>
+<div style="text-align: center;">Figure 11: Save Sequence Diagram</div>
 
-The functions `getSaveTrip()`, `getSaveDay()` and `getSaveItem()` return `strings` that corresponds to the 
-command that will be executed in order to add a trip, day or item to the TripList, DaysList or ItemsList respectively.
+The functions `getSaveTrip()`, `getSaveDay()` and `getSaveItem()` return strings that corresponds to the 
+command that will be executed in order to add a trip, day or item to the TripsList, DaysList or ItemsList respectively.
 
 >![](documentationPics/info.png) Trivial points are omitted from the sequence diagram to keep it more concise.
 > To read up more on what the `SaveLoader` class writes, take a look at the `getSaveX` functions from the `Trip` class
@@ -364,19 +368,28 @@ command that will be executed in order to add a trip, day or item to the TripLis
 > existing trips when Traveller is closed, invalid commands in *save.txt* will be deleted.
 
 ## 2. Product Scope
+The product scope section details the overarching plan for this project and how it will be marketed.
+
 ### 2.1. Target User Profile
-* has a need to plan a trip
-* want to optimise a flight
-* would like to design detailed travel plans
-* prefers desktop and CLI over apps and GUI
-* is familiar with command line interface
-* can type fast
+This section provides a list of what our target user should be like.
+
+The target use is one that...
+* has a need to plan a trip.
+* want to optimise a flight.
+* would like to design detailed travel plans.
+* prefers desktop and CLI over apps and GUI.
+* is familiar with CLI.
+* can type fast.
 
 ### 2.2. Value Proposition
-* plans a trip where a direct flight is not available, giving the shortest route based on time
-* manage trips and itinerary faster than a GUI based app
+This section states the unique selling points of Traveller.
+
+Traveller allows users to...
+* plan trips easily where a direct flight is not available, giving the shortest route based on time or cost.
+* manage trips and itinerary faster than a GUI based app.
 
 ## 3. User Stories
+This section provides the user stories that were implemented as part of version 1.0 and 2.0 of Traveller.
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
@@ -392,17 +405,16 @@ command that will be executed in order to add a trip, day or item to the TripLis
 |v2.0|user|change the criteria of shortest path|plan a trip according to time, distance, or price|
 
 ## 4. Non-Functional Requirements
+This section details the requirements needed for Traveller to work.
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` installed.
-2. Should be able to hold up to 100 trips without any noticeable lag.
-
-_{More to be added}_
+2. Should be able to hold up to 30 trips without any noticeable lag.
 
 ## 5. Glossary
 
 * **CLI** - Command Line Interface
 * **GUI** - Graphical User Interface
-* **Mainstream OS** - Windows, Linux, Unix, macOS
+* **Mainstream OS** - Windows, Linux, macOS
 * **CRUD** - Create, Read, Update, Delete
 
 ## 6. Instructions for manual testing
