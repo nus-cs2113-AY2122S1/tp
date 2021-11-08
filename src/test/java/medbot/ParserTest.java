@@ -186,8 +186,8 @@ class ParserTest {
         String testOutput2 = "add   |n/Tim lee   |e/tim_lee@gmail.com.sg   |a/123 queenstown ave 6 #05-19 ";
         assertEquals(testOutput2, method.invoke(method, testInput2));
 
-        String testInput3 = "addn/Tim leee/tim_lee@gmail.com.sga/123 queenstown ave 6 #05-19 ";
-        String testOutput3 = "add|n/Tim lee|e/tim_lee@gmail.com.sg|a/123 queenstown ave 6 #05-19 ";
+        String testInput3 = "add n/Tim lee e/tim_lee@gmail.com.sg a/123 queenstown ave 6 #05-19 ";
+        String testOutput3 = "add |n/Tim lee |e/tim_lee@gmail.com.sg |a/123 queenstown ave 6 #05-19 ";
         assertEquals(testOutput3, method.invoke(method, testInput3));
     }
 
