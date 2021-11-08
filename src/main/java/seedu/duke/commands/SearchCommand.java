@@ -2,7 +2,14 @@ package seedu.duke.commands;
 
 import seedu.duke.common.LibmgrException;
 import seedu.duke.common.Status;
-import seedu.duke.data.*;
+import seedu.duke.data.Miscellaneous;
+import seedu.duke.data.Book;
+import seedu.duke.data.Magazine;
+import seedu.duke.data.Video;
+import seedu.duke.data.Audio;
+import seedu.duke.data.Item;
+import seedu.duke.data.Catalogue;
+
 import seedu.duke.ui.TextUI;
 
 import java.util.ArrayList;
@@ -21,6 +28,7 @@ import static seedu.duke.common.Messages.KEY_STATUS;
 import static seedu.duke.common.Messages.KEY_ID;
 import static seedu.duke.common.Messages.KEY_CATEGORY;
 import static seedu.duke.common.Messages.KEY_TITLE;
+
 //@@author silinche
 /**
  * Command that lists out all items that matches the search criteria.
@@ -183,6 +191,7 @@ public class SearchCommand extends Command {
                     if (temp instanceof Miscellaneous) {
                         matches++;
                     }
+                    break;
                 default:
                 }
             }
