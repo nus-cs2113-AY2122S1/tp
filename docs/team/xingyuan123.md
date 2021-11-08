@@ -12,11 +12,17 @@ you may have in order to help you organise your CCA's timetable.
 
 * Enhancements Implemented
   * Enhanced `AddMember` command
-    * checks the data to see whether they are valid.
+    * checks the data to see whether they are valid. Checks consist of valid phone number, gender, student number and 
+      name. No duplicates of names, student number and phone number should occur.
   * Set up Storage component
     * Implemented `MemberStorage`, `TrainingStorage` and `AttendanceStorage` classes.
-    * Implemented  a feature that multiple attendance files can be generated based on a single attendance list.
-    * Implemented a feature such that attendance file names is based on training name.
+      * quite straight forward for `MemberStorage` and `TrainingStorage`.
+      * `AttendanceStorage` was hard as originally our team had 1 attendance list for everything, but if the entire list 
+        is a single CSV file it would be trivial and not well-designed. My implementation made it so that each training 
+        name will have its own CSV file, with each attendance file having the training name as its file name. As such,
+        multiple attendance files can be generated based on a single attendance list.
+      * I used CSV as I was unable to implement ics file for training schedule, even after spending a few days trying to 
+        figure it out. Moreover,a CSV can be open with Microsoft Excel which is available for all NUS students.
     * Verification of all the data when manually edit the CSV file.
     * Implemented a feature such that it automatically changes the relevant CSV file whenever a valid command is made.
     * Handled most exceptions in those classes mentioned above.
@@ -26,3 +32,4 @@ you may have in order to help you organise your CCA's timetable.
 
 * DG Contributions
   * Set up `Storage` DeveloperGuide.md.
+  * advised UML diagrams for all.
