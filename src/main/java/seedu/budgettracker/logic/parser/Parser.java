@@ -1,7 +1,10 @@
 package seedu.budgettracker.logic.parser;
 
+import seedu.budgettracker.logic.parser.exceptions.ParserException;
 import seedu.budgettracker.logic.commands.AddCommand;
+import seedu.budgettracker.logic.commands.CsvCommand;
 import seedu.budgettracker.logic.commands.Command;
+import seedu.budgettracker.logic.commands.DbCommand;
 import seedu.budgettracker.logic.commands.DeleteCommand;
 import seedu.budgettracker.logic.commands.EditCommand;
 import seedu.budgettracker.logic.commands.ExitCommand;
@@ -11,8 +14,6 @@ import seedu.budgettracker.logic.commands.InvalidCommand;
 import seedu.budgettracker.logic.commands.ListRecordsCommand;
 import seedu.budgettracker.logic.commands.StatCommand;
 import seedu.budgettracker.logic.commands.YearCommand;
-import seedu.budgettracker.logic.commands.CsvCommand;
-import seedu.budgettracker.logic.parser.exceptions.ParserException;
 
 import java.util.HashMap;
 
@@ -142,6 +143,9 @@ public class Parser {
             case StatCommand.COMMAND_WORD:
                 command = prepareStatCommand(commandParams);
                 break;
+            case DbCommand.COMMAND_WORD:
+                command = new DbCommand();
+                break;
             default:
                 command = new InvalidCommand("Sorry. I don't understand your command!");
                 break;
@@ -152,6 +156,7 @@ public class Parser {
         return command;
     }
 
+    //@@author yeoweihngwhyelab
     private Command prepareStatCommand(String commandParams) throws ParserException {
         String statOption = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
         String statParams = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
@@ -185,6 +190,7 @@ public class Parser {
         }
     }
 
+    //@@author yeoweihngwhyelab
     private Command prepareListMonthCommand(String commandParams) throws ParserException {
         try {
             return ListRecordParser.parse(commandParams);
@@ -220,6 +226,7 @@ public class Parser {
 
     }
 
+    //@@author yeoweihngwhyelab
     private Command prepareFindCommand(String commandParams) throws ParserException {
         try {
             return new FindCommand(commandParams);
@@ -228,6 +235,7 @@ public class Parser {
         }
     }
 
+    //@@author yeoweihngwhyelab
     private Command prepareYearCommand(String commandParams) {
         try {
             boolean isYear = commandParams.matches("^[0-9]{4}$");

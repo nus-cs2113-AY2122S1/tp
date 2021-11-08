@@ -26,15 +26,13 @@ public class RecordList {
         loanRecords = new ArrayList<>();
     }
 
-    public void addBudget(double spendingLimit, boolean isLoadingStorage) throws DuplicateBudgetException {
+    public void addBudget(double spendingLimit) throws DuplicateBudgetException {
         if (!hasBudget) {
             budget.setAmount(spendingLimit);
             assert budget.getAmount() == spendingLimit;
-            if (!isLoadingStorage) {
-                hasBudget = true;
-            }
+            hasBudget = true;
         } else {
-            throw new DuplicateBudgetException("You have already added a budget to this month! "
+            throw new DuplicateBudgetException("You have already added a budget to this month!\n"
                     + "Use edit to change its value instead.");
         }
     }
@@ -107,6 +105,7 @@ public class RecordList {
         return loanRecords.get(index);
     }
 
+    //@@author yeoweihngwhyelab
     /**
      * Returns the total amount spent on expenditures in this month.
      *

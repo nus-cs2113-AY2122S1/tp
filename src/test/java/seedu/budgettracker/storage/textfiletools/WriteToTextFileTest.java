@@ -23,7 +23,7 @@ public class WriteToTextFileTest {
         }
 
         try {
-            allRecordList.get(2).addBudget(10002, false);
+            allRecordList.get(2).addBudget(10002);
         } catch (DuplicateBudgetException e) {
             System.out.println("Error Adding!");
         }

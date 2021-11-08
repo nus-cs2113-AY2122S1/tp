@@ -32,6 +32,7 @@ public class AllRecordList {
         }
     }
 
+    //@@author yeoweihngwhyelab
     public void statIntro(AllRecordList recordList) {
         TextUi.statsIntro(recordList);
     }
@@ -67,8 +68,8 @@ public class AllRecordList {
      * @param isLoadingStorage indicate if this command is called during setup or runtime
      */
     public void addBudget(double spendingLimit, int month, boolean isLoadingStorage) throws DuplicateBudgetException {
-        assert spendingLimit >= 0 : "Amount should be greater than or equals to 0";
-        allRecordList.get(month).addBudget(spendingLimit, isLoadingStorage);
+        assert spendingLimit > 0 : "Amount should be greater than 0";
+        allRecordList.get(month).addBudget(spendingLimit);
         if (!isLoadingStorage) {
             saveToStorage(storageDirectory);
         }
@@ -102,6 +103,7 @@ public class AllRecordList {
         }
     }
 
+    //@@author yeoweihngwhyelab
     public Budget editBudget(int month, double amount) {
         Budget targetBudget = allRecordList.get(month).getBudget();
         if (amount != 0.00) {
@@ -113,6 +115,7 @@ public class AllRecordList {
         return targetBudget;
     }
 
+    //@@author yeoweihngwhyelab
     public Expenditure editExpenditure(int month, int index, double amount,
                                        String description, LocalDate date) {
         Expenditure targetExpenditure = allRecordList.get(month).getExpenditure(index);
