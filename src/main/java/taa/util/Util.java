@@ -183,4 +183,15 @@ public class Util {
         File file = new File(path);
         return file.isDirectory();
     }
+
+    public static double setPrecision(double value, int dp) {
+        String stringFormat = String.format("%%.%df", dp);
+        String string = String.format(stringFormat, value);
+
+        if (isStringDouble(string, dp)) {
+            return Double.parseDouble(string);
+        }
+
+        return 0.0;
+    }
 }
