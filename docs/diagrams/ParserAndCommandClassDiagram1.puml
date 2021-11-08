@@ -11,6 +11,9 @@ Command <.right. Parser: creates
 Command <|-left- DeadlineCommand
 
 class Parser {
+- {static} {final} ERR_EMPTY_ATTRIBUTES: String = "  (!) Attributes cannot be empty!"
+- {static} {final} ERR_DUPLICATE_ATTRIBUTES: String = "  (!) Do not specify an attribute more than once!"
+__
 + Parser()
 + parse(input: String): Command
 + extractArgs(input: String): HashMap<String, String>

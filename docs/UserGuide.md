@@ -75,6 +75,9 @@ e.g. For `add b t/TITLE i/ID ...`, entering `add a t/The Great Gatsbyi/0125` is 
 > ⚠️ Command word must be in lower case
 e.g. For `add b t/TITLE i/ID ...`, entering `ADD a t/The Great Gatsby i/0125` is invalid
 
+> ⚠️ Attribute flags must be in lower case
+e.g. For `add b t/TITLE i/ID ...`, entering `ADD a T/The Great Gatsby I/0125` is invalid
+
 ### Add an item
 Add a new item to the catalogue. Items can fall under one of four categories: Audio, Books, Magazines, Videos
 
@@ -391,9 +394,9 @@ Format: `edit ID KEY/ATTRIBUTE`
 
 ##### Usage Example:
 
-`edit 123 t/Harry Potter`
+`edit 123 t/Harry Potter a/JK Rowling`
 
-Edits the title of an item with ID 123 to Harry Potter
+Edits the title of an item with ID 123 to Harry Potter, and the author to JK Rowling
 
 ##### Expected Output:
 ```

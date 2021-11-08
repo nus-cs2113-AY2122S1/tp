@@ -2,17 +2,15 @@
 'https://plantuml.com/sequence-diagram
 
 participant ":Libmgr" as Libmgr
-participant ":Parser" as Parser
-participant ":EditCommand" as EditCommand
-participant ":Catalogue" as Catalogue
-participant ":EditBookCommand" as EditBookCommand
-participant ":Book" as Book
+participant "parser:Parser" as Parser
+participant "userCommand:EditCommand" as EditCommand
+participant "catalogue:Catalogue" as Catalogue
+participant "userBookCommand:EditBookCommand" as EditBookCommand
+participant "toEditBook:Book" as Book
 
 hide footbox
 
 activate Libmgr
-create Book
-create Parser
 Libmgr -> Parser: parse("edit 123 t/Harry Potter")
 activate Parser
 Parser -> Parser: extractArgs("edit 123 t/Harry Potter")
@@ -22,9 +20,9 @@ deactivate Parser
 create EditCommand
 Parser -> EditCommand: EditCommand(args: HashMap<String, String>)
 activate EditCommand
-EditCommand --> Parser: EditCommand
+EditCommand --> Parser: userCommand: EditCommand
 deactivate EditCommand
-Parser --> Libmgr: EditCommand
+Parser --> Libmgr: userCommand: EditCommand
 deactivate Parser
 
 Libmgr -> EditCommand: execute(ui: TextUI, catalogue: Catalogue)
@@ -33,7 +31,7 @@ EditCommand -> EditCommand: handlesEditCommand(ui: TextUI, catalogue: Catalogue)
 activate EditCommand
 EditCommand -> EditCommand: processArgs(catalogue: Catalogue)
 activate EditCommand
-create Catalogue
+
 EditCommand -> Catalogue: getItem(id: String)
 activate Catalogue
 Catalogue --> EditCommand: toEdit: Item
@@ -64,6 +62,7 @@ activate EditBookCommand
 EditBookCommand --> EditBookCommand: hasInvalidArgs: boolean
 deactivate EditBookCommand
 
+create Book
 EditBookCommand -> Book: setTitle(title: String)
 activate Book
 Book --> EditBookCommand
@@ -86,9 +85,7 @@ deactivate EditCommand
 
 destroy Book
 destroy EditCommand
-destroy Catalogue
 destroy EditBookCommand
-destroy Parser
 
 
 @enduml
