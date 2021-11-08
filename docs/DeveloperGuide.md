@@ -189,15 +189,35 @@ How the Financial Tracker component works:
 
 ---
 
-### Currency Manager Component
+### Currency Component
 
-The `CurrencyManager` class is responsible for all currency related operations performed on entries in Stonks XD. 
-It can convert all these entries to a given currency type, track the current type and list the available types for conversion
-as prompted by the user using appropriate commands.
+The currency component is handled chiefly by the `CurrencyManager` class. 
+It also makes use of an Enum class (`CurrencyType`) that stores 
+all the legal currency types that can be parsed by the user.
 
-The class diagram below shows the structure of the `CurrencyManager` class:
+The class diagram below shows the structure of the `CurrencyManager` class and the accompanying `CurrencyType` enum class:
 
--- Work in progress --
+####Class Diagram:
+
+![](CurrencyManagerCD.drawio.png)
+
+As shown above, the `CurrencyManager` class is the main class. It contains all the methods required
+to perform currency related operations on `income`, `expense` or `budget` objects from their respective classes.
+It also has methods to track the currency type of said objects both during and after the execution of the program.
+
+The enum class is used mainly to prevent erroneous currency types from being parsed by the user.
+It currently supports only two conversions: `SGD` to `HKD` & vice versa. 
+
+####How the Currency component works:
+* Upon start-up, a new `CurrencyManager` is initialised in `StonksXD`.
+* `CurrencyManager` initialises `Entry` and `Budget` objects with their respective values and
+currency types, loaded from `DataManager`.
+* When a user gives the command `set_curr c/HKD`:
+  * The currency type parameter is first extracted by the `Extractor` class and parsed to `CurrencyConversionCommand`.
+  * The command class then passes the argument to the `CurrencyManager` class.
+  * It checks to see if the `getCurrency()` method has the same currency type as the argument.
+  * If true, an error is thrown. Otherwise, it is passed to the `determineExchangeRate()` method.
+  * After the fetching the correct rate, it is multiplied with all `Entry` and `Budget` objects by calling the arrayLists used to store them in their respective classes
 
 ---
 
@@ -373,7 +393,6 @@ details to reduce complexity.
 ![](.png)
 
 #### Saving
-
 
 Saving of data will take place after every user input. Entries will be saved first followed by
 settings immediately.
