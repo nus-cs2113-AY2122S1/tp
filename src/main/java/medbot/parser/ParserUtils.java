@@ -444,7 +444,7 @@ public abstract class ParserUtils {
      */
     private static String preprocessMultiAttributeInput(String input) {
         //replacement function to add a "|" character before an attribute specifier
-        Function<MatchResult, String> replacementFunction = x -> VERTICAL_LINE + x.group();
+        Function<MatchResult, String> replacementFunction = x -> VERTICAL_LINE + x.group().substring(1);
         Pattern pattern = Pattern.compile(REGEX_INPUT_PARAMETER);
         Matcher matcher = pattern.matcher(input);
         return matcher.replaceAll(replacementFunction);
