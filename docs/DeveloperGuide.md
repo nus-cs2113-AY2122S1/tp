@@ -259,7 +259,7 @@ The constructed StonksGraph will then be printed out by the Ui class through the
 
 #### Class Diagram
 
-![](constructorNoReturnType.png)
+![](addedYearParamCD.drawio.png)
 In the class diagram above the StonksGraph class has a 2D array as a private attribute representing the graph.
 It also contains multiple methods used to write the proper characters to each parts of the 2D array.
 
@@ -280,7 +280,7 @@ Below is a list of some of the more important methods
 
 
 
-![](UpdatedWithDateOpSD.drawio.png)
+![](addedYearParamSD.png)
 
 Above is a sequential diagram for the constructor of StonksGraph that shows the different method calls when a new StonksGraph object is instantiated.
 
