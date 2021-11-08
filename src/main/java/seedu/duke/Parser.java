@@ -70,7 +70,7 @@ public class Parser {
             = "ERROR: TourPlanner has detected missing prefixes! Did you miss out some fields?";
     public static final String ERROR_MISSING_NAME_ID = "ERROR: TourPlanner has detected missing name/id!";
     public static final String ERROR_MISSING_ID = "Missing id that you wish to cut from! Please try again.";
-    private static final String ERROR_MISSING_FIELDS = "ERROR: TourPlanner has detected empty fields! "
+    public static final String ERROR_MISSING_FIELDS = "ERROR: TourPlanner has detected empty fields! "
             + "Please enter all fields!";
     public static final String ERROR_FLIGHT_TIME_FORMAT = "ERROR: TourPlanner detected wrong date-time entry "
             + "formatting! \n Please input your date-times with the following format: d/M/yy HH:mm";
@@ -96,16 +96,16 @@ public class Parser {
     public static final int PARAMS_INDEX = 1;
     public static final int MAX_VALUE_ARRAY_SIZE = 5;
 
-    //Client has four prefixes: /id, /n, /cn, /m
+    //Client has three prefixes: /n, /cn, /m
     private static final int CLIENT_PREFIX_NUM = 4;
 
-    //Flight has five prefixes: /id, /d, /r, /dd, /rd
+    //Flight has four prefixes: /d, /r, /dd, /rd
     private static final int FLIGHT_PREFIX_NUM = 5;
 
-    //Tour has three prefixes: /id, /n, /p
+    //Tour has three prefixes: /n, /p
     private static final int TOUR_PREFIX_NUM = 3;
 
-    // Package has four prefixes: /id, /c, /f, /t
+    // Package has four prefixes: /c, /f, /t
     private static final int PACKAGE_PREFIX_NUM = 4;
 
     public static final String EMPTY_STRING = "";
@@ -182,7 +182,7 @@ public class Parser {
         boolean hasUniquePrefixIndexes = prefixIndexes.size() == expectedNumberOfPrefixIndexes;
 
         if (!hasUniquePrefixIndexes) {
-            throw new TourPlannerException(ERROR_MISSING_NAME_ID);
+            throw new TourPlannerException(ERROR_MISSING_FIELDS);
         }
         return prefixIndexes;
     }
