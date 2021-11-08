@@ -80,13 +80,19 @@ The application consists of the following main components responsible for the hi
 
 The architecture diagram below shows a high-level overview of the structure between different components.
 
-![](images/architecture_diagram.png)
+<p align="center">
+<img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/architecture_diagram.png">
+</p>
+<center>Figure 1: Food-O-Rama Overview Architecture Diagram</center>
 
 ### General Flow
 
 Describes the step-by-step sequence from User Input to the Output.
 
 ![](images/main_sequence.png)
+<p align = "center">
+Figure 2: General Flow Sequence Diagram
+</p>
 
 1. User is greeted by welcome screen.
 2. User begins typing inputs.
@@ -100,6 +106,9 @@ Describes the step-by-step sequence from User Input to the Output.
 The `InputParser` class is responsible for deconstructing User Inputs to identify Commands and Parameters for execution.
 
 ![](images/input_parser_sequence.png)
+<p align = "center">
+Figure 3: InputParser Sequence Diagram
+</p>
 
 1. Gets command name of user input by checking if the users input starts with any of the strings that are defined for
   commands (add dish, list dish, help etc.).
@@ -360,31 +369,34 @@ that use them. The diagram below showcases the sequence of the `LinkCommand` cla
 
 ![](images/link_sequence.png)
 
-1. The LinkCommand calls upon DishList to get the Dish based on the Index given via UserInput
+1. The LinkCommand calls upon DishList to get the Dish based on the Index given via UserInput.
 2. DishList then calls on Dish to carry out the addPart(ingredientName) function which is responsible for the linking of
-  the Dish and Ingredient
-3. Dish calls on IngredientList through the find function, to which IngredientList returns the Index of the Ingredient
+  the Dish and Ingredient.
+3. Dish calls on IngredientList through the find function, to which IngredientList returns the Index of the Ingredient.
 4. Given the index is non-negative, the addPart function then removes any old contributions of Ingredient Wastes in the
-  current Dish's Waste through a loop
+  current Dish's Waste through a loop.
 5. Subsequently, it adds the Ingredient to the Dish's parts following which it updates the Dish's own Ingredient
-  Contribution
+  Contribution.
 6. Finally, the function re-updates the contribution of all linked Ingredient's Wastes to the Dish's Waste.
 
 ### Graph
 
 The implementation of the Edit function allows *Food-O-Rama* to display a graph of the Dishes and Ingredients present in the
-DishList and IngredientList to the User Below is a sequence diagram that shows how the GraphCommand functions
+DishList and IngredientList to the User. 
+
+Below is a sequence diagram that shows how the GraphCommand functions.
 
 ![](images/graph_sequence.png)
 
-Graph works by creating a 2d grid and printing the bars based on the current position of the terminal cursor. This lets
+Graph works by creating a 2D grid and printing the bars based on the current position of the terminal cursor. This lets
 us bypass the restriction in a CLI based application where you can only print from up to down and the bars can get
 printed "vertically". This is done by calculating the lengths of the bars beforehand and using these lengths along with
 the current coordinates to print either an empty space or a bar.
 
-Despite this due to CLI and ascii limitations, printing of fractional values posed an issue. This was because you are
-unable to print half a character and using special unicode characters would break cross-platform functionality. The
-solution that we implemented was to have a digit in the top most bar if we have fractional heights. This way while we
+Despite this due to CLI and ASCII limitations, printing of fractional values poses an issue. This was because you are
+unable to print half a character and using special unicode characters would break cross-platform functionality. 
+
+The solution that we implemented was to have a digit in the top most bar if we have fractional heights. This way while we
 still don't get a perfect representation, we are capable of giving the value accurate to one decimal place. So if the
 height was 3.33 units it would be represented by 3 filled bars and the 4th bar will have a 3 within indicating its value
 is between 3.3 to 3.4 as shown in the figure below.
@@ -1074,5 +1086,4 @@ chicken|2.0|1.0|2.5|30/10/2021
 1. Exit Food-O-Rama and Save User Data
     * Test case: `bye`
 
-      Expected: *Food-O-Rama* terminates and saves user data in dishes.txt and ingredients.txt. When *Food-O-Rama* run
-      again, previously saved user data will exist.
+      Expected: *Food-O-Rama* terminates. When *Food-O-Rama* run again, previously saved user data will exist.
