@@ -2,12 +2,7 @@ package seedu.duke.commands;
 
 import seedu.duke.common.LibmgrException;
 import seedu.duke.common.Status;
-import seedu.duke.data.Magazine;
-import seedu.duke.data.Catalogue;
-import seedu.duke.data.Item;
-import seedu.duke.data.Audio;
-import seedu.duke.data.Book;
-import seedu.duke.data.Video;
+import seedu.duke.data.*;
 import seedu.duke.ui.TextUI;
 
 import java.util.ArrayList;
@@ -15,8 +10,17 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import static seedu.duke.common.Messages.*;
-
+import static seedu.duke.common.Messages.SEARCH_FORMAT_INCORRECT;
+import static seedu.duke.common.Messages.INVALID_CATEGORY;
+import static seedu.duke.common.Messages.INVALID_STATUS;
+import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
+import static seedu.duke.common.Messages.DIVIDER;
+import static seedu.duke.common.Messages.SEARCH_MESSAGE;
+import static seedu.duke.common.Messages.NO_SEARCH_RESULT;
+import static seedu.duke.common.Messages.KEY_STATUS;
+import static seedu.duke.common.Messages.KEY_ID;
+import static seedu.duke.common.Messages.KEY_CATEGORY;
+import static seedu.duke.common.Messages.KEY_TITLE;
 //@@author silinche
 /**
  * Command that lists out all items that matches the search criteria.
@@ -127,7 +131,8 @@ public class SearchCommand extends Command {
             }
             if (k.equals(KEY_CATEGORY)) {
                 String v = entry.getValue().toUpperCase(Locale.ROOT);
-                if (!(v.equals("AUDIO") || v.equals("VIDEO") || v.equals("MAGAZINE") || v.equals("BOOK"))) {
+                if (!(v.equals("AUDIO") || v.equals("VIDEO")
+                        || v.equals("MAGAZINE") || v.equals("BOOK") || v.equals("-"))) {
                     return false;
                 }
             }
@@ -174,6 +179,10 @@ public class SearchCommand extends Command {
                         matches++;
                     }
                     break;
+                case "-":
+                    if (temp instanceof Miscellaneous) {
+                        matches++;
+                    }
                 default:
                 }
             }
