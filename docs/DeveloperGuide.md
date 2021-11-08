@@ -22,9 +22,9 @@
 4.4 [Journal-related Features](#44-journaling-feature)\
 4.5 [Food-related Features](#45-food-related-features)\
 4.6 [Help Command](#46--help-command)\
-4.7 [Logging](#47-logging)
+4.7 [Exit Command](#47-exit-command)\
+4.8 [Logging](#48-logging)
 5. [Testing](#5-testing)
-6. [Dev Ops](#6-dev-ops)
 
 ## 1. Introduction
 
@@ -139,19 +139,18 @@ If the creation is successful, a confirmation message on the newly created Modul
 
 The command for listing all modules is implemented by the `AddModuleCommand` class that extends `Command`.
 
-When the user types `module add c/CS2113T n/Software Engineering e/A`, the following sequence of steps will then occur:
+When the user types `module add c/CS2113T n/Software Engineering m/4 e/A`, the following sequence of steps will then occur:
 
 1. User executes `module add c/CS2113T n/Software Engineering e/A`\
    i. `Click` receives user's input.\
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
 2. Creating `AddModuleCommand` object.
 3. Executing command.\
-   i. `AddModuleCommand` find `indexOfCode`, `indexOfName`, and `indexOfExpectedGrade` in user's input.\
-   ii. `AddModuleCommand` calls `getModule()` to create a new `module` based on user's input.\
-   iii. `AddModuleCommand` calls `storage.StorageModule.readDataFromFile()` to read Module-related data `moduleList` from the storage file.\
-   iv. `AddModuleCommand` calls `moduleList.addModule(module)` to add a new `module` to the list.\
+   i. `AddModuleCommand` finds `indexOfCode`, `indexOfName`, `indexOfMc` and `indexOfExpectedGrade` in user's input\
+   ii. `AddModuleCommand` checks if there are duplicate prefixes in the command or not. If yes, throw `DuplicateModuleParamException`\
+   iii. `AddModuleCommand` calls `getModule()` to create a new `module` based on user's input\
+   iv. `AddModuleCommand` calls `moduleManager.addNewModule(module)` to add the new `module` to the module list\
    v. `AddModuleCommand` prompts the successful message to the user.
-   vi. `AddModuleCommand` calls `storage.storageModule.saveDataToFile(moduleList)` to save the new data to the storage file.
 
 #### 4.1.2 Removing a Module
 
@@ -170,13 +169,9 @@ When the user types `module delete 2`, the following sequence of steps will then
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
 2. Creating `DeleteModuleCommand` object.
 3. Executing command.\
-   i. `DeleteModuleCommand` calls `storage.StorageModule.readDataFromFile()` to read Module-related data from the storage file.\
-   ii. `DeleteModuleCommand` finds the `moduleIndex` based on user's input.\
-   iii. `DeleteModuleCommand` checks if `moduleIndex` is valid or not. If not, throw an `IllegalModuleIndexException`.\
-   iv. `DeleteModuleCommand` calls `moduleList.addModule(module)` to add a new `module` to the list.\
-   v. `DeleteModuleCommand` prompts the successful message to the user.\
-   vi. `DeleteModuleCommand` calls `moduleList.removeModuleByIndex(moduleIndex)` to delete the specified module.\
-   vii. `DeleteModuleCommand` calls `storage.storageModule.saveDataToFile(moduleList)` to save the new data to the storage file.
+   i. `DeleteModuleCommand` finds the index of the module to be deleted in user's input.\
+   ii. `DeleteModuleCommand` calls `moduleManager.deleteModule(moduleIndex)` to delete the specifed module and print the message to the user.
+
 
 #### 4.1.3 Listing All Modules
 
@@ -194,13 +189,54 @@ When the user types `module list`, the following sequence of steps will then occ
 2. Creating `ListModuleCommand` object.
 3. Executing command.\
    i. `ListModuleCommand` calls `storage.StorageModule.readDataFromFile()` to read Module-related data from the storage file.\
-   ii. `ListModuleCommand` check if there is any Modules in the list. If not, prints the message of having no Modules then return.\
+   ii. `ListModuleCommand` check if there is any Modules in the list. If not, prints the message of having no modules then return.\
    iii. `ListModuleCommand` prompts the message to list the Modules to the user and prints out the Modules line by line.
 
 The sequence diagram below summarizes how listing modules work:
 
 ![](images/module/ListModule.png)
 
+#### 4.1.4 Edit CAP Information
+
+This feature allows user to edit the information related to the CAP.
+
+**Implementation**
+
+The command for editing CAP information is implemented by the `CapEditInfoCommand` class that extends `Command`.
+
+When the user types `cap edit`, the following sequence of steps will then occur:
+
+1. User executes `module list`\
+   i. `Click` receives user's input.\
+   ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
+2. Creating `CapEditInfoCommand` object.
+3. Executing command.\
+   i. `CapEditInfoCommand` calls `ui.printMessage()` to print the `GET_CAP_QUESTION` to the user\
+   ii. `CapEditInfoCommand` gets the current CAP from the user. If the CAP is illegal, `CapEditInfoCommand` throws `IllegalCurrentCapException`\
+   iii. `CapEditInfoCommand` calls `ui.printMessage()` to print the `GET_MC_QUESTION` to the user\
+   iv. `CapEditInfoCommand` gets the total MC taken from the user. If the total MC taken is illegal, `CapEditInfoCommand` throws `IllegalTotalMcTakenException`.\
+   v. `CapEditInfoCommand` calls `ui.printMessage()` to print the confirmation to the user\
+   vi. `CapEditInfoCommand` calls `moduleManager.setCapInfo()` to save the data.
+
+
+#### 4.1.5 Get Expected CAP
+
+This feature allows user to view the information related to the CAP and the expected CAP.
+
+**Implementation**
+
+The command for getting expected CAP is implemented by the `GetExpectedCapCommand` class that extends `Command`.
+
+When the user types `cap expected`, the following sequence of steps will then occur:
+
+1. User executes `module list`\
+   i. `Click` receives user's input.\
+   ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
+2. Creating `GetCapCommand` object.
+3. Executing command.\
+   i. `GetCapCommand` calls `moduleManager.getExpectedCap()` to get the expected CAP.
+   ii. If the expected CAP return is not a number, `GetCapCommand` calls `ui.printMessage` to prompt the `MESSAGE_MISSING_CAP_INFO` to the user.
+   iii. Else, `GetCapCommand` calls ui.printMessage` to print the information related to the CAP and the expected CAP to the user.
 
 ### 4.2 Zoom related features
 
@@ -724,7 +760,22 @@ to execute.
 While we submitted Alternative 2 in version 1 due to a lack of time and easier implementation. with more time given in Version 2.0 - we
 decided  to switch over to Alternative 1 for the user to easily view all the syntax at a glance.
 
-### 4.7. Logging
+### 4.7. Exit Command
+
+This feature allows user to terminate the program. 
+
+The command for terminating the program is implemented by the `ExitCommand` class that extends `Command`
+
+When the user types `exit`, the following sequence of steps will then occur:
+1. User executes `exit`\
+i. `Click` receives user's input.\
+ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
+2. Creating `ExitCommand` object.
+3. Executing command.\
+i. `ExitCommand` calls `ui.printGoodBye()` to print the goodbye message to the user.\
+ii. `ExitCommand` calls `System.exit(0)` to terminate the program.
+
+### 4.8. Logging
 
 Logging in the application refers to storing exceptions, warnings and messages that occur during the execution of the program. It was included to help developers to identify bugs and to simplify their debugging process.
 
@@ -771,7 +822,6 @@ There are two ways to run tests.
 **Method 2: Using Gradle**
 * To run all tests, open a console and run the command `gradlew clean test` (MacOS/Linus: `./gradlew clean test`)
 
-## 6. Dev Ops
 
 ## Appendices 
 
@@ -826,5 +876,7 @@ There are two ways to run tests.
 
 ### Appendix D: Glossary
 
+**CAP**: Cumulative Average Point
+**MC**: modular credit
 **Mainstream OS**: Windows, Linux, Unix, OS-X
 
