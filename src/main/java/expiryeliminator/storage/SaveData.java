@@ -11,7 +11,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-//@@author kairuihu
+//@@author KairuiHu
+
 public class SaveData {
 
     /**
@@ -19,6 +20,8 @@ public class SaveData {
      *
      * @param recipes The whole recipe list.
      */
+    //@@author KairuiHu
+
     public static void saveRecipeListToFile(RecipeList recipes) {
         String pathName = "./data/";
         String fileName = "recipeList.txt";
@@ -30,6 +33,7 @@ public class SaveData {
             System.out.println("An recipeList IO error has occurred: " + e.getMessage());
         }
     }
+    //@@author KairuiHu
 
     /**
      * Saves the whole ingredient repository to the txt file.
@@ -47,6 +51,7 @@ public class SaveData {
             System.out.println("An IngredientList IO error has occurred: " + e.getMessage());
         }
     }
+    //@@author KairuiHu
 
     /**
      * Flushes the txt file.
@@ -63,6 +68,7 @@ public class SaveData {
             System.out.println("An flush IO error has occurred: " + e.getMessage());
         }
     }
+    //@@author KairuiHu
 
     /**
      * Creates the txt file or the folder.
@@ -90,6 +96,7 @@ public class SaveData {
             System.out.println("An createFile IO error has occurred: " + e.getMessage());
         }
     }
+    //@@author KairuiHu
 
     /**
      * Append text to the txt file.
