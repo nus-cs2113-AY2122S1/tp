@@ -619,6 +619,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the parameters given to determine which ListXYZCommand to be called for.
+     *
+     * @param params full user's argument string
+     * @throws TourPlannerException if there are missing fields, duplicated or missing prefixes
+     * @returns a ListXYZCommand of a specific data type (client, tour, flight, client package)
+     */
     private static Command parseList(String params) throws TourPlannerException {
         switch (params) {
         case CLIENT_IDENTIFIER:
@@ -671,6 +678,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the parameters given to determine which FindXYZCommand to be called for.
+     *
+     * @param params full user's argument string
+     * @throws TourPlannerException if there are missing fields, duplicated or missing prefixes
+     * @returns a FindXYZCommand of a specific data type (client, tour, flight, client package)
+     */
     private static Command parseFind(String params) throws TourPlannerException {
         String[] prefixSuffix = params.split(" ", 2);
         if (prefixSuffix.length < 2) {

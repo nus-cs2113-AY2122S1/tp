@@ -1,6 +1,38 @@
 # Developer Guide
 
-## Getting started
+
+## Table of Contents
+
+- [Getting Started](#getting-started)
+  - [Recommend software (for optimal compatability)](#recommended-software-for-optimal-compatability)
+  - [Setting up this project in your computer](#setting-up-this-project-in-your-computer)
+  
+
+- [Design & Implementation](#design--implementation)
+   - [Architecture](#architecture)
+   - [Command component](#command-component)
+       - [Add feature](#uadd-featureu)
+       - [Cut feature](#ucut-featureu)
+       - [List feature](#ulist-featureu)
+       - [Find feature](#ufind-featureu)
+       - [Sort feature](#usort-featureu)
+   - [Ui component](#ui-component)
+   - [Storage component (chengxu to do)]()
+
+
+- [Product Scope](#product-scope)
+    - [Target user profile](#target-user-profile)
+    - [Value proposition](#value-proposition)
+
+
+- [User Stories](#user-stories)
+
+
+- [Non-Functional Requirements](#non-functional-requirements)
+
+<br>
+
+##Getting Started
 
 <hr>
 
@@ -36,7 +68,7 @@
 
 <br>
 
-## Design & implementation
+## Design & Implementation
 
 <hr>
 
@@ -411,36 +443,44 @@ in Step 2, the respective client package will be printed onto the console termin
 
 The following activity diagram summarizes the following steps.
 
-<img width="542" alt="findclient" src="https://user-images.githubusercontent.com/79963329/140464449-0f72431b-8ae5-40e4-add1-aef8fed50031.PNG">
+<img width="517" alt="findclient" src="https://user-images.githubusercontent.com/79963329/140683509-8bc4bb34-a41f-4b57-9a86-e0af13cae0ac.PNG">
+
 
 <br>
 
 #### <u>Finding a particular tour</u>
 
-**Step 1**: The user executes ```find -t JPN``` to query if a tour with code JPN exists in the TourList. The ```parse```
-function in the ```Parser```
+**Step 1**: The user executes ```find -t JPN``` to query if a tour with code
+JPN exists in the TourList. The ```parse``` function in the ```Parser```
 class takes the command, and the first word in it (```find```) means that the
-```parseFind()``` is to be called to determine which type of Object is to be queried for. The second word (```-f```)
-means that a the ```FindTourCommand()``` is executed with the parameter ```JPN```
+```parseFind()``` is to be called to determine which type of Object is to be
+queried for. The second word (```-f```) means that a the ```FindTourCommand()``` is
+executed with the parameter ```JPN```
 
-**Step 2**: The ```FindTourCommand``` iterates through each ```Tour``` object in the ```TourList```. For
-every ```Tour```, the ```getCode()``` function is called to retrieve the code attribute of the Tour. If the tour
-attribute is equals to ```JPN```, the ```Tour``` object is printed onto the console terminal.
 
-**Step 3**: In addition, the ```FindTourCommand``` iterates through each ```ClientPackage``` object in
-the ```ClientPackageList```. For every ```ClientPackage```, the ```getTour()``` function is called to retrieve the tour
-attribute of the ClientPackage. If the tour attribute is equals to the same ```Tour``` object that was found in Step 2,
-the client attribute of that same ClientPackage will be retrieved using the ```getClient()``` function.
+**Step 2**: The ```FindTourCommand``` is executed and iterates through each ```Tour``` object in the ```TourList```.
+For every ```Tour```, the ```getCode()``` function is called to retrieve the code attribute of the Tour.
+If the tour attribute is equals to ```JPN```, the ```Tour``` object
+is printed onto the console terminal.
 
-**Step 4**: The client's name attribute is then retrieved using the ```getName()``` function in the Client class. The
-name is printed onto the console terminal under "Subscribed Clients". Once all  ```ClientPackage``` objects are iterated
-through in the ```ClientPackageList```, the total number of subscribed clients will be printed on the console terminal.
+
+**Step 3**: In addition, the ```FindTourCommand``` iterates through each ```ClientPackage``` object in the ```ClientPackageList```.
+For every ```ClientPackage```, the ```getTour()``` function is called to retrieve the tour attribute of the ClientPackage.
+If the tour attribute is equals to the same ```Tour``` object that was found in Step 2, the client attribute of that same
+ClientPackage will be retrieved using the ```getClient()``` function.
+
+
+**Step 4**: The client's name attribute is then retrieved using the ```getName()``` function in the Client class.
+The name is printed onto the console terminal under "Subscribed Clients". Once all  ```ClientPackage``` objects are
+iterated through in the ```ClientPackageList```, the total number of subscribed clients will be printed on the console
+terminal.
 
 <br>
 
 The following activity diagram summarizes the following steps.
 
-<img width="456" alt="findtour" src="https://user-images.githubusercontent.com/79963329/140464566-248296e9-0e27-4840-9906-5cfdbe57c309.PNG">
+
+<img width="484" alt="findtour" src="https://user-images.githubusercontent.com/79963329/140683529-0d6c02aa-dad4-4078-9404-d2b246604c22.PNG">
 
 
 <br>
@@ -453,9 +493,10 @@ class takes the command, and the first word in it (```find```) means that the
 ```parseFind()``` is to be called to determine which type of Object is to be queried for. The second word (```-f```)
 means that a the ```FindFlightCommand()``` is executed with the parameter ```SQ-JPN```
 
-**Step 2**: The ```FindFlightCommand``` iterates through each ```Flight``` object in the ```FlightList```. For
-every ```Flight```, the ```getCode()``` function is called to retrieve the code attribute of the Tour. If the tour
-attribute is equals to ```SQ-JPN```, the ```Flight``` object is printed onto the console terminal.
+**Step 2**: The ```FindFlightCommand``` is executed and iterates through each ```Flight``` object in the ```FlightList```.
+For every ```Flight```, the ```getCode()``` function is called to retrieve the code attribute of the Tour.
+If the tour attribute is equals to ```SQ-JPN```, the ```Flight``` object
+is printed onto the console terminal.
 
 **Step 3**: In addition, the ```FindFlightCommand``` iterates through each ```ClientPackage``` object in
 the ```ClientPackageList```. For every ```ClientPackage```, the ```getFlight()``` function is called to retrieve the
@@ -470,7 +511,8 @@ in the ```ClientPackageList```, the total number of passengers will be printed o
 
 The following activity diagram summarizes the following steps.
 
-<img width="508" alt="findflight" src="https://user-images.githubusercontent.com/79963329/140464579-91ab5042-885b-4e55-877c-ac733bd12ce9.PNG">
+<img width="475" alt="findflight" src="https://user-images.githubusercontent.com/79963329/140683549-96857734-6cc5-470c-90a5-c45fc57e30a1.PNG">
+
 
 <br>
 
@@ -569,6 +611,7 @@ To add on Storage component is designed to access only the following folder:
 
 <br>
 
+
 ## Product scope
 
 <hr>
@@ -601,6 +644,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |`* *`|user with large amounts of data|sort existing entries of specific data type |make smarter recommendations to clients based on their preferences|
 |`* *`|user|check number of clients subscribed to a tour / flight|check the popularity, vacancy of certain tours / flights|
 
+
 Note: 'specific data type' refers to either clients, tours, flights or tour packages.
 
 <br>
@@ -615,8 +659,4 @@ Note: 'specific data type' refers to either clients, tours, flights or tour pack
   able to accomplish most of the tasks faster using commands than using the mouse.
 
 <br>
-
-## Instructions for manual testing
-
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 
