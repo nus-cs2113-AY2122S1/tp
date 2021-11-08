@@ -268,7 +268,9 @@ number `1` is set to `Present`.
 * Step 4 - `attendanceList.addAttendance` is called to add the newly created `attendance` object into the `attendances` 
 ArrayList within `attendanceList`.
 * Step 5 - Steps 2-4 are repeated for each element in the `studentIndexArray`. For our example, steps 2-4 are repeated 
-for students at index `2` and `3`.
+for students at index `2` and `3`. <br>
+ClassDiagram:
+![AttendanceAsClassDiagram](diagrams/class/AttendanceAsClassDiagram.png)
 
 <br>
 

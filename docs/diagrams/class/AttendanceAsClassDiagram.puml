@@ -1,0 +1,41 @@
+@startuml
+!include ClassStyle.puml
+
+class ClassList
+class TeachingClass
+class StudentList
+class Student
+class AttendanceList{
+-attendances:ArrayList<Attendance>
++AttendanceList()
++getSize():int
++getAttendances():ArrayList<Attendance>
++getAttendance(lessonNumber:int):Attendance
++isValidIndex(index:int):boolean
++addAttendance(attendance:Attendance):void
++getAttendanceIndex(lessonNumInput:String):int
++deleteAttendance(lessonNumber:String):int
+-sortAttendances():void
++toString():String
++verify():boolean
+}
+class Attendance{
+-lessonNumber:int
+-isPresent:boolean
++Attendance()
++{static}getMinLessonNumber():int
++setPresent():void
++getLessonNumber():int
++getIsPresent():boolean
++toString():String
++verify():boolean
+}
+
+ClassList *-down-> "*" TeachingClass
+TeachingClass *-down-> "1" StudentList
+StudentList *-> "*" Student
+Student *-down-> "1" AttendanceList
+AttendanceList *-right-> "*" Attendance
+
+
+@enduml
