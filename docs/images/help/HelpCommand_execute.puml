@@ -6,13 +6,16 @@ User -> ":Parser" : "help"
 activate ":Parser"
 create ":HelpCommand"
 ":Parser" -> ":HelpCommand" : HelpCommand()
-activate ":HelpCommand"
 ":Parser" -> ":HelpCommand" : execute()
+activate ":HelpCommand"
+
 deactivate ":Parser"
-":HelpCommand" -> "<<static>>\n:ClassPackageReader" : getCommandsAndPrintSyntax()
-"<<static>>\n:ClassPackageReader" -> ":Command" : getSyntax()
-":Command" --> "<<static>>\n:ClassPackageReader" : syntax
-"<<static>>\n:ClassPackageReader" --> User : Prints help messages
+":HelpCommand" -> "<<class>>\n:ClassPackageReader" : getCommandsAndPrintSyntax()
+"<<class>>\n:ClassPackageReader" -> ":Command" : getSyntax()
+":HelpCommand" --> ":Parser"
+deactivate ":HelpCommand"
+":Command" --> "<<class>>\n:ClassPackageReader" : syntax
+"<<class>>\n:ClassPackageReader" --> User : Prints help messages
 destroy ":HelpCommand"
 
 @enduml
