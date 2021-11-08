@@ -384,6 +384,7 @@ inventory more efficiently.
 |v2.1|librarian|edit the details of the items simultaneously|quickly make changes to the details of each item|
 |v2.1|librarian|track miscellaneous items|also record items that are not categorised as audio, books, magazines or videos|
 |v2.1|librarian|display the information of the library stats|get a rough gauge about the usage of the library's assets|
+|v2.1|librarian|access a help guide on how to use the app quickly|use the app more effectively in my job|
 
 ## Appendix C: Non-Functional Requirements
 
