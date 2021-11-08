@@ -76,6 +76,8 @@ public class SortByScoresCommand extends Command {
                 if (assessment.getMaximumMarks() > 0.0) {
                     score += student.getMarks(assessment.getName()) / assessment.getMaximumMarks()
                             * assessment.getWeightage();
+                } else {
+                    score += assessment.getWeightage();
                 }
             }
             unsortedScores.put(student, score);

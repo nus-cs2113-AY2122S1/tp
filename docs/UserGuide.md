@@ -4,6 +4,7 @@ students. If you can type fast, TAA can help keep track of your classes and stud
 User Interface (GUI) apps.
 
 * [Quick Start](#quick-start)
+* [Quick Notes](#quick-notes)
 * [Features](#features)
   * [Class](#class)
     * [Listing all classes: `list_classes`](#listing-all-classes-list_classes)
@@ -59,14 +60,15 @@ User Interface (GUI) apps.
 ## Quick Notes
 1. Parameters enclosed within `[  ]` are optional. Do refer to the specific command format to find out the correct way 
 to input your parameters.
-2. The character `|` in the command format parameters has the meaning of OR (i.e. `[n/Option 1 | m/Option 2]` means 
+2. The character `|` in the command format parameters has the meaning of OR (e.g. `[n/Option 1 | m/Option 2]` means 
 Option 1 or Option 2)
-
 3. Allowed characters for values:
    * Alphanumeric characters: `A-Z`, `a-z`
    * Numeric characters: `0-9`
    * Special characters: `-`, `_`, `(`, `)`, `.`, `,`
    * Whitespaces (unless otherwise stated)
+4. If an entry in the data file `taa_data.json` is manually edited to an invalid entry (e.g. Integer to String), the 
+entry will be ignored.
 
 ## Features
 
