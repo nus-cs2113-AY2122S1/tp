@@ -361,23 +361,22 @@ This section describes the implementation of how the user can display a list of 
 
 #### 4.3.1. Implementation
 
-1. The `ListGoalsParser#parseListGoalsCommand(input)` method is called. Since `list` does not require any parameters,
-   the `input` (extra text) after `list` is there in case you typed anything extra afterwards, intentionally or not.
+1. The `ListGoalsParser#parseListGoalsCommand(input)` method is called. Since the list goals command does not require 
+   any parameters, any extraneous text after the 'list' keyword is treated as the string variable `input`.
 2. The `ListGoalsParser#parseListGoalsCommand(input)` method then returns a `ListGoalsCommand(input)`.
 
 ![](Diagram_Images/Implementation_Diagram_Images/ListGoalsCommandParserSequenceDiagram.png)
 
-1. The `ListGoalsCommand#runCommand(goalList, printManager, storage, gibberish)` method is called, which in turns calls the
-    `GoalList#listGoals(printManager, gibberish)` method.
-2. The `ListGoalsCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
+3. The `ListGoalsCommand#runCommand(goalList, printManager, storage, gibberish)` method is called, which in turns calls 
+   the `GoalList#listGoals(printManager, gibberish)` method. The string variable `gibberish` is logically equivalent to
+   the variable `input`.
+4. The `ListGoalsCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
    `GoalList#listGoals(printManager)` method.
-3. If the `GoalList` object is empty, the `GoalList#listGoals(printManager)` method returns an exception to you, 
-   indicating that there are no goals to be printed.
-4. Otherwise, the method calls the `PrintManager#printGoalList(goalList, goalList.size(), gibberish)` method, 
+5. If the `GoalList` object is empty, the `GoalList#listGoals(printManager)` method returns an exception indicating that
+   there are no goals to be printed.
+6. Otherwise, the method calls the `PrintManager#printGoalList(goalList, goalList.size(), gibberish)` method, 
    which iterates through all `Goal` objects and prints their respective description line by line in a table.
-5. If you so happen to include extra text (delightfully called `gibberish`) after the `list` command, it will be
-   printed out before the table is generated. The `gibberish` is limited to 40 characters and below, any characters
-   after the limit will be trimmed.
+7. `gibberish` is limited to 40 characters, with any characters after the limit trimmed.
 
 ![](Diagram_Images/Implementation_Diagram_Images/ListGoalsCommandSequenceDiagram.png)
 
@@ -393,7 +392,7 @@ This section describes the implementation of how the user can display a list of 
 
 ### 4.4. Listing all Habits
 
-This section describes the implementation of how the user can display a list of all tracked goals.
+This section describes the implementation of how the user can display a list of all habits under a tracked goal.
 
 #### 4.4.1. Implementation
 
@@ -410,9 +409,9 @@ This section describes the implementation of how the user can display a list of 
 4. The `ListHabitsCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
    `GoalList#listHabitsFromGoal(goalIndex, printManager)` method.
 5. Within this newly called method, the `GoalList#getGoal(goalIndex)` method is called to retrieve the `Goal` object
-   from the `goalList`. 
-6. The `goal.getHabitList()` method is called to retrieve all the habits associated with that `Goal` object.
-7. The `goal.getListLength()` method is called to find the number of habits associated with that `Goal` object.
+   from the `GoalList` object. 
+6. The `Goal#getHabitList()` method is called to retrieve all the habits associated with that `Goal` object.
+7. The `Goal#getListLength()` method is called to find the number of habits associated with that `Goal` object.
 8. If the habitList is empty, a `HaBitCommandException` is raised to indicate the error that there are no habits
    associated with that goal.
 9. Otherwise, the `PrintManager#printHabitList(goalName, habitList, numOfHabits)` method prints all habits associated
@@ -422,9 +421,19 @@ This section describes the implementation of how the user can display a list of 
 
 #### 4.4.2. Design Considerations
 
-// TODO
+**Aspect:** The class to get the list of habits from
+* **Alternative 1:** Obtain list of habits directly from `Habit` class.
+    * Pros: Eliminate the need to pass the list of habits between classes before reaching `PrintManager`.
+    * Cons: `GoalList`, `Goal` and `Habit` has to be associated with `PrintManager`, which makes add-ons difficult for
+            future developers that have to deal with the high complexity of class dependency.
+* **Alternative 2 (current choice):** Obtain list of habits indirectly from `GoalList` class
+    * Pros: Only the `GoalList` class will be associated with the `PrintManager` class.
+    * Cons: The list of habits have to passed from the `Habit` class, through the `Goal` class, before being available
+            in the `GoalList` class.
 
 ### 4.5. Completing a Habit
+
+This section describes the implementation of how the user can mark a habit as completed for the current interval.
 
 #### 4.5.1. Implementation
 
@@ -460,7 +469,7 @@ This section describes the implementation of how the user can display a list of 
 
 ### 4.6. Updating a Goal
 
-This section describes the implementation of how the user can update a goal in the tracking list.
+This section describes the implementation of how the user can update a goal's name, type and/or end date.
 
 #### 4.6.1. Implementation
 1. The `UpdateParser#parseUpdateGoalCommands(commandInstruction)` method is called, which starts the process of
@@ -511,7 +520,7 @@ This section describes the implementation of how the user can update a goal in t
 
 ### 4.7. Updating a Habit
 
-This section describes the implementation of how the user can update a goal in the tracking list.
+This section describes the implementation of how the user can update a habit's name and/or interval length.
 
 #### 4.7.1. Implementation
 1. The `UpdateParser#parseUpdateHabitCommands(commandInstruction)` method is called, which starts the process of
