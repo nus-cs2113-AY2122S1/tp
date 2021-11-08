@@ -61,7 +61,7 @@ Allowed characters for values:
 * Alphanumeric characters: `A-Z`, `a-z`
 * Numeric characters: `0-9`
 * Special characters: `-`, `_`, `(`, `)`, `.`, `,`
-* Whitespaces
+* Spaces
 
 ## Features
 
