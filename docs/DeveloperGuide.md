@@ -98,7 +98,7 @@ The above sequence diagram shows the interactions occurring each time a command 
 
 ![ParserAndCommandClassDiagram](img/ParserAndCommandClassDiagram2.png)
 
-The above partial class diagrams illustrate the classes inside the commands component.
+The above partial class diagrams illustrate the classes inside the commands component that correspond to specific functionalities. 
 
 The commands component consists of a `commands` package. Inside the package are the following classes: 
 1. A main `Parser` class to process all the commands 
@@ -130,6 +130,8 @@ The commands component consists of a `commands` package. Inside the package are 
    24. `UnknownCommand`
    25. `UnreserveCommand`
    
+Each individual command class overwrites the `execute(TextUI ui, Catalogue catalogue)` method in the abstract `Command` class 
+to implement its own execution functionality. 
 
 ### Data Component
 
@@ -190,9 +192,9 @@ In this instance, the hashmap will contain the following entries
 |Key (String)|Value (String)|
 |---|---|
 |null|add b|
-|t/|1984|
-|i/|91|
-|a/|George Orwell|
+|t|1984|
+|i|91|
+|a|George Orwell|
 
 3. It then checks the value associated with the `null` key in order to determine which `Command` to generate, in this case the `AddBookCommand` is generated
 4. The newly created `AddBookCommand` object is returned by the `parser`
@@ -204,7 +206,29 @@ In this instance, the hashmap will contain the following entries
 
 ![EditCommandSequence](img/EditCommandSequence.png)
 
-The Edit Command class handles the functionality to change a specific detail of an item in the catalogue.
+The Edit Command class handles the functionality to change a specific attribute of an item in the catalogue. The sequence diagram above
+shows the execution when the title attribute of a book with id 123 to "Harry Potter". 
+
+Firstly, the user types in the edit command: `edit 123 t/Harry Potter`. 
+1. The `main()` method in Libmgr calls `parser.parse()`, supplying the full line of input entered by the user. 
+2. Within `parser.parse()`, `parser.extractArgs(input)` is called, which processes the string into a `HashMap<String, String>` variable. <br> 
+In this instance, the hashmap contains the following entries: 
+
+|Key (String)|Value (String)|
+|---|---|
+|null|edit 123|
+|t|Harry Potter|
+
+3. Since the command word `edit` is detected, a new `EditCommand` object is returned by the `parser`. 
+4. The `execute(ui, catalogue)` method of `EditCommand` is called, which further calls the `handlesEditCommand(ui, catalogue)` method.
+5. In the `handlesEditCommand(ui, catalogue)` method, the `processArgs(catalogue)` method is called, which processes the value associated with 
+   the `null` key, to check if the user inputted a valid item id and to retrieve the item associated with that id from the catalogue. 
+6. In this case, since a valid `Book` object with id 123 exists in the catalogue, a new `EditBookCommand` object is created, which then calls its own
+   `execute(ui, catalogue)` and `handlesEditBookCommand(ui, catalogue)` methods. 
+7. The method `processArgs()` is performed to extract "Harry Potter", the new title of the book. Checks are also performed to ascertain if the attribute
+   to be edited is missing, if there are no valid arguments supplied, or if invalid arguments are supplied, outputting the relevant warning messages for each. 
+8. In this case, since all checks pass, the `setTitle(title)` method of the existing `Book` object with id 123 is called, and its `title` attribute is edited to 
+   "Harry Potter". 
 
 ### Search Command 
 

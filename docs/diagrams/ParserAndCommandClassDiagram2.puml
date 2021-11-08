@@ -19,9 +19,6 @@ abstract class Command {
 
 class ListCommand {
 + {static} {final} COMMAND_WORD: String = "list"
-+ {static} {final} LIST_ALL_COMMAND: String = "list all"
-+ {static} {final} LIST_AVAILABLE_COMMAND: String = "list available"
-+ {static} {final} LIST_LOANED_COMMAND: String = "list loaned"
 + input: String = ""
 + ListCommand(input: String)
 + handlesListCommand(ui: TextUI, catalogue: Catalogue)
@@ -29,28 +26,40 @@ class ListCommand {
 }
 
 class LoanCommand {
++ {static} {final} COMMAND_FORMAT: String = "  (!) Format: loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)"
 + {static} {final} COMMAND_WORD: String = "loan"
-# args: String
++ {static} {final} SUCCESS_LOAN: String = "  (+) Item has been loaned out:"
++ {static} {final} ERR_RESERVED: String = "  (!) Sorry, the item has already been reserved for someone else"
+# args: HashMap<String, String>
 # id: String
 # username: String
 # dueDate: String
-+ LoanCommand(args: String)
+__
++ LoanCommand(args: HashMap<String, String>)
++ checkMissingArgs(): Boolean
++ checkAdditionalArgs(): Boolean
 + handleLoanCommand(ui: TextUI, catalogue: Catalogue)
 + execute(ui: TextUI, catalogue: Catalogue)
 }
 
 class RemoveCommand {
-+ {static} {final} COMMAND_REMOVE: String = "rm"
-+ RemoveCommand(args: String)
++ {static} {final} COMMAND_WORD: String = "rm"
+# args: String
++ RemoveCommand(input: String)
 + execute(ui: TextUI, catalogue: Catalogue)
 }
 
 class ReserveCommand {
-+ {static} {final} COMMAND_WORD: String = "reserve"
-+ args: String
-+ id: String
-+ username: String
-+ ReserveCommand(args: String)
++ {static} {final} COMMAND_WORD: String = "res"
++ {static} {final} COMMAND_FORMAT: String = "  (!) Format: res i/ID u/USER"
++ {static} {final} SUCCESS_RES: String = "  (+) You have successfully reserved an item:"
+# args: HashMap<String, String>
+# id: String
+# username: String
+__
++ ReserveCommand(args: HashMap<String, String>)
++ checkMissingArgs(): Boolean
++ checkAdditionalArgs(): Boolean
 + handleReserveCommand(ui: TextUI, catalogue: Catalogue)
 + execute(ui: TextUI, catalogue: Catalogue)
 
@@ -58,8 +67,8 @@ class ReserveCommand {
 
 class ReturnCommand {
 + {static} {final} COMMAND_WORD: String = "return"
-+ args: String
-+ id: String
+# args: String
+# id: String
 + ReturnCommand(args: String)
 + handleReturnCommand(ui: TextUI, catalogue: Catalogue)
 + execute(ui: TextUI, catalogue: Catalogue)
@@ -67,38 +76,21 @@ class ReturnCommand {
 
 class SearchCommand {
 + {static} {final} COMMAND_WORD: String = "search"
-+ {static} {final} SEARCH_ID_COMMAND: String = "search i/"
-+ {static} {final} SEARCH_TITLE_COMMAND: String = "search t/"
-+ {static} {final} SEARCH_STATUS_COMMAND: String = "search s/"
-+ input: String = ""
-+ SearchCommand(input: String)
+- title: String
+- id: String
+- status: String
+- category: String
+# args: HashMap<String, String>
++ SearchCommand(args: HashMap<String, String>)
++ checkValidArgs(): Boolean
++ checkAdditionalArgs(): Boolean
++ checkValidStatus(): Boolean
++ checkValidCategory(): Boolean
++ checkMatches(temp: Item): Integer
 + handlesSearchCommand(ui: TextUI, catalogue: Catalogue)
 + execute(ui: TextUI, catalogue: Catalogue)
 }
 
 
-
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
-}
-
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
-}
 
 @enduml

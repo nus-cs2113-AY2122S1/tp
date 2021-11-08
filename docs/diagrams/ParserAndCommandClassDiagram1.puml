@@ -53,6 +53,7 @@ class DeadlineCommand {
 + {static} {final} dateFormat: String = "dd-MM-yyyy"
 # dtFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern(dateFormat)
 + input: String = ""
+__
 + DeadlineCommand(input: String)
 + handleDeadlineCommand(ui: TextUI, catalogue: Catalogue)
 + execute(ui: TextUI, catalogue: Catalogue)

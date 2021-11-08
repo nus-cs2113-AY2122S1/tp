@@ -48,6 +48,7 @@ class UnreserveCommand {
 + {static} {final} SUCCESS_UNRES: String = "  (+) Item unreserved:"
 # args: String
 # id: String
+__
 + UnreserveCommand(args: String)
 + execute(ui: TextUI, catalogue: Catalogue)
 
