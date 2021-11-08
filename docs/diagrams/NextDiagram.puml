@@ -11,42 +11,41 @@ box BLUE_COLOR
 Participant ":Parser" as Parser
 Participant ":NextParser" as NextParser
 end box
-box LOGIC_COLOR
-Participant ":NextCommand" as NextCommand
-end box
 
 
+->Duke : runSlam
 activate Duke
-Duke -> Parser : next ItemType
+Duke -> Parser : parseCommand
 activate Parser
 
 
-Parser -> NextParser: ItemType
+Parser -> NextParser
 activate NextParser
-NextParser -> NextCommand : NextCommand(ItemType)
+box LOGIC_COLOR
+create ":NextCommand" as NextCommand
+end box
+NextParser -> NextCommand : NextCommand
+
 activate NextCommand
 |||
 return
 return
 return
-destroy Parser
 
-Duke -> NextCommand : execute()
+
+Duke -> NextCommand : execute
 activate NextCommand
-opt ItemType = event
-  NextCommand -> Ui: printMonth(Date)
+alt ItemType = event
+  NextCommand -> Ui: printMonth
   activate Ui
-  NextCommand -> Ui: printEvent(Event)
+  NextCommand -> Ui: printEvent
   |||
-  Ui -> Duke
-  deactivate Ui
-end
-opt ItemType = task
-  NextCommand -> Ui: printTask(Task)
+  return
+else ItemType = task
+  NextCommand -> Ui: printTask
   activate Ui
   |||
-  Ui -> Duke
-  deactivate Ui
+  return
 end
 
 

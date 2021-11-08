@@ -1,61 +1,60 @@
 @startuml
-title AddCommand
-
-participant ":Duke" as Duke
+!include style.puml
+box DUKE_COLOR
+Participant ":Duke" as Duke
+end box
 activate Duke
+box BLUE_COLOR
+Participant ":Parser" as Parser
 
-participant ":Parser" as Parser
-Duke -> Parser
-activate Parser #yellow
+Duke -> Parser :parseCommand
 create ":AddParser" as AddParser
-Parser -> AddParser: multiWordCommandProtocol()
-activate AddParser #orange
+activate Parser
+create ":AddParser" as AddParser
+end box
+Parser -> AddParser: multiWordCommandProtocol
+activate AddParser
 
+box LOGIC_COLOR
 alt isEventFlag
 create ":AddEventCommand" as AddEventCommand
-AddParser -> AddEventCommand: getAddCommand(commandDetails)
-activate AddEventCommand #lightblue
+AddParser -> AddEventCommand: getAddCommand
+activate AddEventCommand
 return
 
 else isTaskFlag
 create ":AddTaskCommand" as AddTaskCommand
-AddParser -> AddTaskCommand: getAddCommand(commandDetails)
-activate AddTaskCommand #lightblue
+AddParser -> AddTaskCommand: getAddCommand
+activate AddTaskCommand
 return
 
 else isMemberFlag
 create ":AddMemberCommand" as AddMemberCommand
-AddParser -> AddMemberCommand: getAddCommand(commandDetails)
-activate AddMemberCommand #lightblue
+AddParser -> AddMemberCommand: getAddCommand
+activate AddMemberCommand
 return
 end
-
+end box
 return
 return
 
 alt isEventFlag
-Duke -> AddEventCommand
-activate AddEventCommand #lightblue
-AddEventCommand -> AddEventCommand: execute()
-activate AddEventCommand #lightgreen
-return
-return
+Duke -> AddEventCommand : execute
+activate AddEventCommand
+|||
+return CommandResult
 
 else isTaskFlag
-Duke -> AddTaskCommand
-activate AddTaskCommand #lightblue
-AddTaskCommand -> AddTaskCommand: execute()
-activate AddTaskCommand #lightgreen
-return
-return
+Duke -> AddTaskCommand : execute
+activate AddTaskCommand
+|||
+return CommandResult
 
 else isMemberFlag
-Duke -> AddMemberCommand
-activate AddMemberCommand #lightblue
-AddMemberCommand -> AddMemberCommand: execute()
-activate AddMemberCommand #lightgreen
-return
-return
+Duke -> AddMemberCommand : execute
+activate AddMemberCommand
+|||
+return CommandResult
 end
 
 @enduml
