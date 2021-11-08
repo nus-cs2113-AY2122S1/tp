@@ -75,7 +75,7 @@ public class Parser {
     public HashMap<String, String> extractArgs(String input) throws LibmgrException {
         HashMap<String, String> args = new HashMap<>();
         // Configure regex matcher
-        String splitByDelimiter = ".+?(?=\\s\\w/)|.+?$";
+        String splitByDelimiter = ".+?(?=\\s\\w+/)|.+?$";
         Pattern p = Pattern.compile(splitByDelimiter);
         Matcher m = p.matcher(input);
         // Get command word
