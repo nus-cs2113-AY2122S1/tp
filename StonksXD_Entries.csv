@@ -1,7 +1,10 @@
 entry_type,entry_description,amount,category,date
-E,qwe,62.5,FOOD,11/11/2121
-E,qwe,2.5,FOOD,11/11/2121
-E,cookie,101010.0,FOOD,08/11/2021
-E,food,2.0,FOOD,08/11/2021
-I,qwe,62.5,SALARY,11/11/2121
-I,qwe,62.5,ALLOWANCE,11/11/2121
+E,qwe,12.5,FOOD,11/11/2121
+E,qwe,0.5,FOOD,11/11/2121
+E,mcdonalds,20.0,FOOD,08/11/2021
+E,abc,15.0,MISC,08/11/2021
+E,grabfood,15.5,FOOD,08/11/2021
+E,electricity,90.0,BILLS,08/11/2021
+E,water,0.01,BILLS,08/11/2021
+I,qwe,12.5,SALARY,11/11/2121
+I,qwe,12.5,ALLOWANCE,11/11/2121
