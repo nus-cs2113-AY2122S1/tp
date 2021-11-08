@@ -38,10 +38,10 @@ Jump in to the section [2. Quick Start](#2-quick-start) to get started!
 
 ## 2. Quick Start
 
-1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest `click.jar` from [here](https://github.com/AY2122S1-CS2113T-T09-4/tp/releases/tag/v2.0).
-3. Copy the file to the folder you want to use as the _home folder_ for Click.
-4. In the home folder for Click, launch the `jar` file using the `java -jar click.jar` command on Command Prompt (for Windows) or Terminal (for Unix-based OS, such as macOS and Linux) to start the app. If the setup is correct, you should see the following:
+* Ensure you have Java `11` or above installed in your Computer.
+* Download the latest `click.jar` from [here](https://github.com/AY2122S1-CS2113T-T09-4/tp/releases/tag/v2.0).
+* Copy the file to the folder you want to use as the _home folder_ for Click.
+* In the home folder for Click, launch the `jar` file using the `java -jar click.jar` command on Command Prompt (for Windows) or Terminal (for Unix-based OS, such as macOS and Linux) to start the app. If the setup is correct, you should see the following:
 
 ```
 	__________________________________________________
@@ -57,7 +57,7 @@ Jump in to the section [2. Quick Start](#2-quick-start) to get started!
 ```
 
 
-5. Type the valid command into the terminal (or Command Prompt) and press <kbd>return</kbd> (or <kbd>Enter</kbd>) to run the command.
+* Type the valid command into the terminal (or Command Prompt) and press <kbd>return</kbd> (or <kbd>Enter</kbd>) to run the command.
 
 ## 3. Features 
 
@@ -99,6 +99,7 @@ Click supports 4 ways of adding Modules:
 > - The supported expected grades are: `A+`, `A`, `A-`, `B+`, `B`, `B-`, `C+`, `C`, `D+`, `D`, `F`, `CS`, `CU`, `NA`. Specifying the expected grade other than the supported grades will cause an error.
 > - The default values of module name, modular credits, and expected grades are `None`, `4`, and `NA`, respectively.
 > - The modular credit must be a positive integer.
+> - The module code must not be empty.
 
 
 **Adding with module code, module name, modular credits, and expected grade**
@@ -184,7 +185,7 @@ Expected outcome:
 
 Deletes the specified module from the list of modules so that you can get rid of the modules you do not want to take anymore.
 
-Format: `module delete INDEX`
+Format: `module delete [INDEX]`
 
 Example: `module delete 3`
 
@@ -310,7 +311,7 @@ Adds a lecture item.
 
 Note: You cannot add a lecture to a module unless the module has been added previously.
 
-Format: `calendar lecture m/[MODULE_CODE] s/[DD-MM-YYYY](START_DATE) e/[DD-MM-YYYY](END_DATE)`
+Format: `calendar lecture m/[MODULE_CODE] s/[DD-MM-YYYY(START_DATE)] e/[DD-MM-YYYY(END_DATE)]`
 
 Example:
 ```
@@ -449,7 +450,7 @@ Expected outcome:
 ```
         __________________________________________________
         Here is your list of lectures:
-        
+        1. CS2113T (from: 07-10-2021) (to: 31-10-2021)
         __________________________________________________
 ```
 
@@ -813,7 +814,7 @@ Expected outcome:
 **Add Food**|`food add n/[FOOD_NAME] c/[CALORIE] {d/[DD-MM-YYYY(DATE_RECORDED)]}`
 **Add Food From Reference**|`food radd s/[STORE_INDEX] i/[ITEM_INDEX]`
 **Add Lecture**|`calendar lecture m/[MODULE_CODE] s/[DD-MM-YYYY(START_DATE)] e/[DD-MM-YYYY(END_DATE)]`
-**Add Module**|- `module add c/[MODULE_CODE] {n/[MODULE_NAME] m/[MODULAR_CREDITS] e/EXPECTED_GRADE}`
+**Add Module**|- `module add c/[MODULE_CODE] {n/[MODULE_NAME] m/[MODULAR_CREDITS] e/[EXPECTED_GRADE]}`
 **Add Note**|`journal notebook n/[NOTEBOOK_NAME]`
 **Add Entry**|`journal entry n/[NOTEBOOK_NAME] e/[ENTRY_NAME]`
 **Add Todo**|`calendar todo n/[TASK_NAME] d/[DD-MM-YYYY]`
@@ -821,9 +822,9 @@ Expected outcome:
 **Cap Info**|`module info`
 **Clear Food**|`food clear`
 **Delete Entry**|`journal delete_entry n/[NOTE_NAME] e/[ENTRY_NAME]`
-**Delete Food**|`food delete INDEX`
+**Delete Food**|`food delete [INDEX]`
 **Delete Lecture**|`calendar delete lec [LECTURE_INDEX]`
-**Delete Module**|`module delete INDEX`
+**Delete Module**|`module delete [INDEX]`
 **Delete Note**|`journal delete_notebook [NOTE_INDEX]`
 **Delete Task**|`calendar delete task [TASK_INDEX]`
 **Display**|`calendar display [MM-YYYY]`
