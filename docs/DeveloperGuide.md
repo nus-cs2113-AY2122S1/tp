@@ -1,14 +1,39 @@
 # Developer Guide
 
+## Introduction
+
+SLAM is a **command line interface application** for student group leaders in NUS to **manage their group 
+events, tasks and members**, without the need for much programming knowledge. This application allows student leaders to plan and manage the organisation 
+of various events by allowing users to add custom events to their schedule. Users can add tasks to complete 
+under each event and keep track of the progress of such tasks and events. 
+These tasks also have group members assigned to them from a user-generated roster of members. 
+The simple interaction between the **User** and the **command line interface application** makes SLAM an extremely user friendly
+and usable event planner for student leaders.
+
+### Purpose of Developer Guide
+To give an overview on the application, namely overall architecture, implementation design rational, and specificities
+in the algorithms used within SLAM. To get a good grasp of how the application works, it is recommended to look at the Overall Architecture
+section of this guide.
+
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Design & implementation
 
-{TO DELETE: Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+This section describes some noteworthy details on how certain features are designed and implemented within SLAM.
 
-This section describes some noteworthy details on how certain features are designed and implemented.
+### Architecture
+
+The architecture of the entire application revolves around a few different components.
+* `Ui` : This component is responsible for the information displayed to the user from the command line interface
+* `Parser` : This component parses the different data keyed in from the user and prepares the relevant data required to execute the commands
+* `Commands` : These components executes the different commands parsed by the parser from the inputs of the User.
+* `Items` : Represents the different types of items (events, tasks and members) that can be assigned and implemented within the application
+* `Storage` : Manages the writing and reading of data to and from the disk
+
+Below displays how the overall flow and implementation of the application is executed.
+![](images/ArchitectureDiagram.png)
 
 ### Logic component
 
@@ -16,7 +41,6 @@ This section describes some noteworthy details on how certain features are desig
 
 (insert relevant information here about taking in user input and parsing it etc.)
 #### List Functionality
-![](images/ListDiagram.png)
 
 How List works:
 1. When the `parser` class parses `list` as the command from the user, a new `Command` object, `ListCommand` is created.
