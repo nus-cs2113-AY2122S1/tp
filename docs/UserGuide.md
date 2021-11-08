@@ -32,7 +32,7 @@ lessons in your daily schedule and your total workload:
     * [Delete from Timetable](#delete-from-timetable-delete-module_code-or-delete-event_name)
     * [Clear From Timetable or Transcript](#clear-from-timetable-or-transcript--clear)
         * [Clear from Timetable](#clear-from-timetable)
-        * [CLear from Transcript](#clear-from-transcript)
+        * [Clear from Transcript](#clear-from-transcript)
     * [View Timetable](#view-timetable-timetable--flag)
     * [Changing Semester](#changing-semester)
     * [Storing grades secured in past modules](#store-grades-secured-in-various-modules-store-grade--module_code)
@@ -49,6 +49,7 @@ lessons in your daily schedule and your total workload:
 ---
 
 # Quick Start
+This section goes over how to use this application.
 
 1. Ensure you have **Java 11** or above installed in your Computer.
 2. Download the latest **unimods.jar** from here.
@@ -73,6 +74,7 @@ lessons in your daily schedule and your total workload:
 ---
 
 # Features
+This section contains an overview of all the features and associated commands in UniMods.
 
  :information_source: **Notes about the command formats**
  - Words in `<UPPER_CASE>` are the parameters to be given by the user.
@@ -592,11 +594,7 @@ ________________________________________________________________________________
 
 <br>
 
-
-
 ## Remove modules from the list of completed modules: `remove <MODULE_CODE>`
-
-
 
 You can remove any module and grade that you added to your list of completed modules in the transcript by using this
 command.
@@ -716,6 +714,7 @@ ________________________________________________________________________________
 ---
 
 # FAQ
+This section contains a list of some commonly asked questions and their answers.
 
 **Q**: Why does this module not show up even though my search term is its exact title?
 <br>
@@ -759,6 +758,7 @@ and is very similar to just running `update`.
 ---
 
 ## Command Summary
+This section contains a brief summary of all commands available in UniMods.
 
 | Command                         | Meaning                                                                                            |
 | --------------                  | ----------                                                                                         |
