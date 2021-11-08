@@ -69,7 +69,7 @@ public class StorageEntries {
                 collectionOfEntries.addEntry(entries.get(i).getEntryNoteName(), entries.get(i).getNameOfJournalEntry());
             }
             return collectionOfEntries;
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | ArrayIndexOutOfBoundsException e) {
             File f = new File(StorageEntries.filePath);
         }
         return collectionOfEntries;

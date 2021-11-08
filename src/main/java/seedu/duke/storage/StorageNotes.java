@@ -62,7 +62,7 @@ public class StorageNotes {
             for (int i = 0; i < notes.size(); i++) {
                 collectionOfNotebooks.addNote(notes.get(i).getNoteName(), notes.get(i).getTag());
             }
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | ArrayIndexOutOfBoundsException e) {
             ClickLogger.getNewLogger().log(Level.WARNING, "file not found on load");
             File f = new File(StorageNotes.filePath);
         }

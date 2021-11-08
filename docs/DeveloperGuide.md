@@ -306,7 +306,7 @@ The command for adding a task is implemented by the `AddTodoCommand` class that 
 
 Given below is an example usage scenario and how the add task mechanism behaves at each step.
 
-1. User executes `calendar todo n/ RANDOMNAME d/ 10-10-2021`\
+1. User executes `calendar todo n/RANDOMNAME d/10-10-2021`\
    i. `Click` receives user's input.\
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
 2. `AddTodoCommand` object is created.
@@ -330,7 +330,7 @@ The command for adding a lecture is implemented by the `AddLectureCommand` class
 
 Given below is an example usage scenario and how the add lecture mechanism behaves at each step.
 
-1. User executes `calendar lecture m/ CS2113T s/ 10-10-2021 e/ 30-10-2021`\
+1. User executes `calendar lecture m/CS2113T s/10-10-2021 e/30-10-2021`\
    i. `Click` receives user's input.\
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
 2. `AddLectureCommand` object is created.
@@ -444,7 +444,7 @@ The command for adding notebook is implemented by the `AddNoteCommand` class tha
 
 Given below is an example usage scenario and how the add notebook mechanism behaves at each step.
 
-1. User inputs `journal notebook n/ CS2113` \
+1. User inputs `journal notebook n/CS2113` \
    i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
 2. Creating `AddNoteCommand` object.
@@ -467,7 +467,7 @@ The command for adding entry is implemented by the `AddEntryCommand` class that 
 
 Given below is an example usage scenario and how the add entry mechanism behaves at each step.
 
-1. User inputs `journal entry n/ CS2113 e/ HW`\
+1. User inputs `journal entry n/CS2113 e/HW`\
    i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input. 
 2. Creating `AddEntryCommand` object.
@@ -537,7 +537,7 @@ The command for deleting entry is implemented by the `DeleteEntryCommand` class 
 
 Given below is an example usage scenario and how the delete entry mechanism behaves at each step.
 
-1. User inputs `journal delete_entry n/ CS2113 e/ HW` \
+1. User inputs `journal delete_entry n/CS2113 e/HW` \
    i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
 2. Creating `DeleteEntryCommand` object.
@@ -559,7 +559,7 @@ The command for tagging notebook is implemented by the `TagNotebookCommand` clas
 
 Given below is an example usage scenario and how tag notebook mechanism behaves at each step.
 
-1. User inputs `journal tag n/ 1 t/ important` \
+1. User inputs `journal tag n/1 t/important` \
    i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
 2. Creating `TagNotebookCommand` object.
