@@ -26,7 +26,7 @@ class Storage {
 }
 
 class FileStorage {
-    - {static} Gson gson
+    - {static} gson : Gson
 
     + {static} writeToFile()
     + {static} readFromFile() : String
