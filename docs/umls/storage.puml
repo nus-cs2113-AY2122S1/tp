@@ -2,6 +2,17 @@
 hide circle
 skinparam classAttributeIconSize 0
 skinparam groupInheritance 2
+skinparam maxLength 128
+
+class Storage {
+    - {static} logger: Logger
+    + readModuleList() : ArrayList<Module>
+    + readUniversityList(moduleMasterList: ModuleList) : ArrayList<University>
+    + readSelectedModuleList(moduleMasterList: ModuleList) : ModuleList
+    + readSelectedUniversityList(universityMasterList: UniversityList, moduleMasterList: ModuleList) : UniversityList
+    + updateSelectedModuleList(moduleList: ModuleList) : void
+    + updateSelectedUniversityList(universityList: UniversityList) : void
+}
 
 ModuleStorage "1" ---* Storage
     ModuleStorage : - {static} logger: Logger
@@ -27,7 +38,7 @@ SelectedModuleStorage "1" -----* Storage
      SelectedModuleStorage : - {static} isModuleValid: boolean
      SelectedModuleStorage : + updateFile(moduleList: ModuleList) : void
      SelectedModuleStorage : + readFile(moduleMasterList: ModuleList) : ModuleList
-     SelectedModuleStorage : - updateList(moduleList: ModuleList, line: String, moduleMasterList: ModuleList)
+     SelectedModuleStorage : - updateList(moduleList: ModuleList, line: String, moduleMasterList: ModuleList) : void
 
 UniversityStorage "1" ---* Storage
     UniversityStorage : - {static} logger: Logger
@@ -39,13 +50,4 @@ class UserStorage {
     # loadFile(filepath: String) : File
 }
 
-class Storage {
-    - {static} logger: Logger
-    + readModuleList() : ArrayList<Module>
-    + readUniversityList(moduleMasterList: ModuleList) : ArrayList<University>
-    + readSelectedModuleList(moduleMasterList: ModuleList) : ModuleList
-    + readSelectedUniversityList(universityMasterList: UniversityList, moduleMasterList: ModuleList) : UniversityList
-    + updateSelectedModuleList(moduleList: ModuleList)
-    + updateSelectedUniversityList(universityList: UniversityList)
-}
 @enduml
