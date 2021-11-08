@@ -60,7 +60,8 @@ public class Parser {
     public static final String CLIENT_EMAIL_PREFIX = "/m";
 
     public static final String ERROR_INVALID_INPUT = "ERROR: TourPlanner cannot understand the command! "
-            + "Please enter a valid command.";
+            + "Please enter a valid command.\n"
+            + "Type 'help' to view a list of commands available for use.";
     public static final String ERROR_MISSING_IDENTIFIER =
             "ERROR: Missing/wrong command filter used! Please enter a command with this format: COMMAND -FILTER DATA \n"
                     + "Example: find -t TOUR_ID";
