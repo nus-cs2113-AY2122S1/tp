@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+//@@author Uxinnn
 /**
  * Represents a list of items that will be done in a particular day of a trip.
  * Each <code>Day</code> will have 1 <code>ItemsList</code>.
@@ -40,6 +41,7 @@ public class ItemsList {
         items.add(item);
     }
 
+    //@@author jach23
     public void editItem(int index, Item item) {
         logger.log(Level.INFO, "Editing an item to itemsList");
         items.add(item);
@@ -47,6 +49,7 @@ public class ItemsList {
         items.remove(getSize() - 1);
     }
 
+    //@@author jach23
     public ArrayList<Item> searchItem(String keyword) {
         ArrayList<Item> keywordString = new ArrayList<>();
         logger.log(Level.INFO, "Searching for keyword in itemsList");
@@ -58,6 +61,7 @@ public class ItemsList {
         return keywordString;
     }
 
+    //@@author Uxinnn
     public boolean isInList(String itemTime, String itemName) throws TravellerException {
         for (int i = 0; i < getSize(); i++) {
             Item item = getItem(i);
@@ -78,6 +82,7 @@ public class ItemsList {
         return item;
     }
 
+    //@@author Cuiminjing
     public void deleteItem(int itemNumber) throws TravellerException {
         logger.log(Level.INFO, "Deleted an item of index " + itemNumber + " from itemsList");
         try {
@@ -87,6 +92,7 @@ public class ItemsList {
         }
     }
 
+    //@@author
     public int getMaxItemsAllowed() {
         return maxItemsAllowed;
     }
@@ -111,6 +117,7 @@ public class ItemsList {
         return itemsListString.toString();
     }
 
+    //@@author gavienwz
     public String getItemInfo(int itemIndex) throws TravellerException {
         Item current = getItem(itemIndex);
         return " /time " + current.getItemTime() + " /name " + current.getItemName() + "\n";

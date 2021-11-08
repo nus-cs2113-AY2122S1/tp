@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+//@@author Uxinnn
 /**
  * Each TripsList will store an ArrayList of this class.
  * Represents 1 trip plan created by the user.
@@ -93,18 +94,22 @@ public class Trip {
         daysList.addDay();
     }
 
+    //@@author Cuiminjing
     public void deleteDay(int dayNumber) throws TravellerException {
         daysList.deleteDay(dayNumber);
     }
 
+    //@@author gavienwz
     public String getSaveTrip() {
         return "new " + getTripName() + " /from " + getStartCountryCode() + " /to " + getEndCountryCode() + "\n";
     }
 
+    //@@author Uxinnn
     public int getDaySize() {
         return daysList.getSize();
     }
 
+    //@@author gavienwz
     public String getSaveDay() {
         String saveDataForDays = "";
         if (getDaySize() > 0) {
@@ -113,6 +118,7 @@ public class Trip {
         return saveDataForDays;
     }
 
+    //@@author gavienwz
     public String getSaveItem() throws TravellerException {
         String saveDataForItems = "";
         for (int i = 0; i < getDaySize(); i++) {
