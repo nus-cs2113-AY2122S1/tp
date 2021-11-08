@@ -126,7 +126,7 @@ public class Ui {
             + "            #" + System.lineSeparator()
             + "# 15. Editing a Dish/Ingredient Waste :                                                            "
             + "            #" + System.lineSeparator()
-            + "      'edit dish waste [DISH_NAME/INDEX] | edit ingr waste [INGR_NAME/INDEX]'                      "
+            + "#     'edit dish waste [DISH_NAME/INDEX] | edit ingr waste [INGR_NAME/INDEX]'                      "
             + "            #" + System.lineSeparator()
             + "# 16. Viewing all Dishes/Ingredients : 'list dish | list ingr'                                     "
             + "            #" + System.lineSeparator()
