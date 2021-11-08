@@ -35,34 +35,43 @@ public class ConverterToCsv {
             for (int i = 1; i <= 12; i++) {
                 RecordList currentMonthRecordList = monthlyRecordList.getMonthRecord(i);
                 fileWrite.println("BUDGET,MONTH");
+
                 fileWrite.println(currentMonthRecordList.getBudget().getAmount() + "," + i);
                 fileWrite.flush();
 
                 fileWrite.println("DESCRIPTION,AMOUNT,DATE,CATEGORY");
-                for (int j = 0; j < currentMonthRecordList.getExpenditureListSize(); j++) {
-                    ArrayList<Expenditure> expenditureRecords = currentMonthRecordList.getExpenditureRecords();
-                    Expenditure currentExpenditure = expenditureRecords.get(j);
-                    String description = currentExpenditure.getDescription();
-                    double amount = currentExpenditure.getAmount();
-                    String date = currentExpenditure.getDateString();
-                    String category = currentExpenditure.getCategoryString();
-                    fileWrite.println(description + "," + amount + "," + date + "," + category);
-                    fileWrite.flush();
-                }
 
-                for (int k = 0; k < currentMonthRecordList.getLoanListSize(); k++) {
-                    ArrayList<Loan> loanRecords = currentMonthRecordList.getLoanRecords();
-                    Loan currentLoan = loanRecords.get(k);
-                    String name = currentLoan.getName();
-                    double amount = currentLoan.getAmount();
-                    String date = currentLoan.getDate();
-                    fileWrite.println(name + "," + amount + "," + date + "," + "LOAN");
-                    fileWrite.flush();
-                }
+                writeExpensidureCsv(fileWrite, currentMonthRecordList);
+                writeLoanCv(fileWrite, currentMonthRecordList);
             }
             fileWrite.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void writeLoanCv(PrintWriter fileWrite, RecordList currentMonthRecordList) {
+        for (int k = 0; k < currentMonthRecordList.getLoanListSize(); k++) {
+            ArrayList<Loan> loanRecords = currentMonthRecordList.getLoanRecords();
+            Loan currentLoan = loanRecords.get(k);
+            String name = currentLoan.getName();
+            double amount = currentLoan.getAmount();
+            String date = currentLoan.getDate();
+            fileWrite.println(name + "," + amount + "," + date + "," + "LOAN");
+            fileWrite.flush();
+        }
+    }
+
+    private void writeExpensidureCsv(PrintWriter fileWrite, RecordList currentMonthRecordList) {
+        for (int j = 0; j < currentMonthRecordList.getExpenditureListSize(); j++) {
+            ArrayList<Expenditure> expenditureRecords = currentMonthRecordList.getExpenditureRecords();
+            Expenditure currentExpenditure = expenditureRecords.get(j);
+            String description = currentExpenditure.getDescription();
+            double amount = currentExpenditure.getAmount();
+            String date = currentExpenditure.getDateString();
+            String category = currentExpenditure.getCategoryString();
+            fileWrite.println(description + "," + amount + "," + date + "," + category);
+            fileWrite.flush();
         }
     }
 }
