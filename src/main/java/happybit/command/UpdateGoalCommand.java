@@ -15,11 +15,11 @@ public class UpdateGoalCommand extends UpdateCommand {
     protected String newGoalName; // index 0
     protected GoalType newGoalType; // index 1
     protected Date newGoalEndDate; // index 2
-    protected int[] updateAttributes;
+    protected ArrayList<Boolean> updateAttributes;
     protected ArrayList<String> excessAttributes;
 
     public UpdateGoalCommand(int goalIndex, String goalName, GoalType goalType, Date endDate,
-            int[] updateAttributes, ArrayList<String> excessAttributes) {
+                             ArrayList<Boolean> updateAttributes, ArrayList<String> excessAttributes) {
         this.goalIndex = goalIndex;
         this.newGoalName = goalName;
         this.newGoalType = goalType;
@@ -53,10 +53,6 @@ public class UpdateGoalCommand extends UpdateCommand {
 
     public Date getNewGoalEndDate() {
         return newGoalEndDate;
-    }
-
-    public int[] getUpdateAttributes() {
-        return updateAttributes;
     }
 
     public ArrayList<String> getExcessAttributes() {

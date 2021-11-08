@@ -25,9 +25,9 @@ public class ParserManager {
     private static final String COMMAND_RETURN = "return";
     private static final String COMMAND_EXIT = "exit";
 
-    protected static final String ERROR_NO_INPUT = "No user command detected"
-            + "Command cannot be called without parameters. "
-            + "Enter the help command to view command formats";
+    protected static final String ERROR_NO_INPUT = "No user command detected."
+            + " Command cannot be called without parameters."
+            + "\nEnter the help command to view command formats.";
     protected static final String ERROR_INVALID_INPUT = "Invalid character in the user input";
 
     /**
@@ -124,7 +124,7 @@ public class ParserManager {
         case COMMAND_SET_GOAL:
             return SetParser.parseSetGoalCommand(details);
         case COMMAND_LIST_GOAL:
-            return ListGoalParser.parseListGoalCommand(details);
+            return ListGoalsParser.parseListGoalsCommand(details);
         case COMMAND_LIST_HABIT:
             return ListHabitParser.parseListHabitCommand(details);
         case COMMAND_DELETE_GOAL:

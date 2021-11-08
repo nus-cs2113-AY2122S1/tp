@@ -2,22 +2,24 @@
 'https://plantuml.com/sequence-diagram
 !include Style.puml
 
+participant ":ListHabitParser" as ListHabitParser PARSER_COLOUR
+
 mainframe sd List Habits Parsing
 
--> ":ListHabitParser": parseListHabitCommand\n(commandInstruction:String)
-activate ":ListHabitParser"
+-> ListHabitParser: parseListHabitCommand\n(commandInstruction:String)
+activate ListHabitParser
 
-":ListHabitParser" -> ":Parser": splitInput\n(commandInstruction:String)
-activate ":Parser"
-":Parser" --> ":ListHabitParser": parameters:ArrayList<String>
-deactivate ":Parser"
+ListHabitParser -> ListHabitParser: splitInput\n(commandInstruction:String)
+activate ListHabitParser
+ListHabitParser --> ListHabitParser: parameters:ArrayList<String>
+deactivate ListHabitParser
 
-":ListHabitParser" -> ":Parser": getIndex(parameters, "g/")
-activate ":Parser"
-":Parser" --> ":ListHabitParser": goalIndex: int
-deactivate ":Parser"
+ListHabitParser -> ListHabitParser: getIndex(parameters, "g/")
+activate ListHabitParser
+ListHabitParser --> ListHabitParser: goalIndex: int
+deactivate ListHabitParser
 
-<-- ":ListHabitParser": ListHabitsCommand(goalIndex)
-deactivate ":ListHabitParser"
+<-- ListHabitParser: ListHabitsCommand(goalIndex)
+deactivate ListHabitParser
 
 @enduml

@@ -26,6 +26,7 @@ public class AddParser extends Parser {
     private static final int START_DATE = 0;
     private static final int END_DATE = 1;
     private static final int FLAG_LENGTH = 2;
+    private static final int DATE_LENGTH = 8;
 
     /**
      * Parses user input to add a goal.
@@ -129,6 +130,9 @@ public class AddParser extends Parser {
     private static Date stringToDate(String strDate) throws HaBitParserException {
         SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
         formatter.setLenient(false);
+        if (strDate.length() != 8) {
+            throw new HaBitParserException(ERROR_DATE_FORMAT);
+        }
         try {
             return formatter.parse(strDate);
         } catch (ParseException e) {

@@ -3,9 +3,6 @@ package happybit.goal;
 import happybit.habit.Habit;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -286,42 +283,6 @@ public class Goal {
         return dueHabits;
     }
 
-    /* The following commands will be used for implementing the quick view of goal (not implemented)
-     * isCompleted()
-     * getCompletionRates()
-     * getHabitNames()
-     */
-
-    /**
-     * Checks whether the goal is completed.
-     *
-     * @return True if the goal is completed, false if not.
-     */
-    public boolean isCompleted() {
-        Date currDate = new Date();
-        return currDate.after(this.endDate);
-    }
-
-    /**
-     * Gets the completion rate of each habit and the total average.
-     * Total average is saved as the last index in the integer arraylist.
-     *
-     * @return ArrayList containing a list of all completion rates.
-     */
-    public ArrayList<Double> getCompletionRates() {
-        ArrayList<Double> completionRates = new ArrayList<>();
-        double sum = 0;
-        double completionRate;
-        for (Habit habit : this.habitList) {
-            completionRate = habit.computeHabitCompletionRate();
-            completionRates.add(completionRate);
-            sum += completionRate;
-        }
-        double averageCompletionRate = sum / getHabitListSize();
-        completionRates.add(averageCompletionRate);
-        return completionRates;
-    }
-
     /**
      * Gets an arrayList of all the habit names.
      *
@@ -349,41 +310,6 @@ public class Goal {
             }
         }
         return false;
-    }
-
-    public long getNumOfDaysForGoal() {
-        LocalDate startDateLD = convertDateToLocalDate(this.startDate);
-        LocalDate endDateLD = convertDateToLocalDate(this.endDate);
-
-        return ChronoUnit.DAYS.between(endDateLD, startDateLD);
-    }
-
-    /*
-     * NOTE : ==================================================================
-     * The following are private methods that are used to implement SLAP for the
-     * above public methods. These methods are positioned at the bottom to better
-     * visualise the actual methods that can be called from outside this class.
-     * =========================================================================
-     */
-
-    /**
-     * 'Type-casting' a Date to a LocalDate.
-     *
-     * @param date Date to be 'type-casted'.
-     * @return LocalDate that has been 'type-casted' from Date.
-     */
-    private LocalDate convertDateToLocalDate(Date date) {
-        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-    }
-
-    /**
-     * 'Type-casting' a LocalDate to a Date.
-     *
-     * @param localDate LocalDate to be 'type-casted'.
-     * @return Date that has been 'type-casted' from LocalDate.
-     */
-    private Date convertLocalDateToDate(LocalDate localDate) {
-        return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
     }
 
 }

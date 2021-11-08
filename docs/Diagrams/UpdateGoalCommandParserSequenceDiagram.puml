@@ -1,51 +1,54 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 !include Style.puml
+
+participant ":UpdateParser" as UpdateParser PARSER_COLOUR
+
 mainframe sd Update Goal Parsing
 
--> ":UpdateParser": parseUpdateGoalCommands\n(commandInstruction: String)
-activate ":UpdateParser"
+-> UpdateParser: parseUpdateGoalCommands\n(commandInstruction: String)
+activate UpdateParser
 
-":UpdateParser" -> ":Parser": splitInput\n(commandInstruction)
-activate ":Parser"
-":Parser" --> ":UpdateParser": parameters: ArrayList<String>
-deactivate ":Parser"
+UpdateParser -> UpdateParser: splitInput\n(commandInstruction)
+activate UpdateParser
+UpdateParser --> UpdateParser: parameters: ArrayList<String>
+deactivate UpdateParser
 
-":UpdateParser" -> ":UpdateParser": getUpdateGoalAttributes\n(parameters)
-activate ":UpdateParser"
-":UpdateParser" --> ":UpdateParser": updateAttributes: int[3]
-deactivate ":UpdateParser"
+UpdateParser -> UpdateParser: getUpdateGoalAttributes\n(parameters)
+activate UpdateParser
+UpdateParser --> UpdateParser: updateAttributes: ArrayList<Boolean>
+deactivate UpdateParser
 
 alt#gold #lightblue isUpdateGoalName
-":UpdateParser" -> ":Parser": getName(parameters)
-activate ":Parser"
-":Parser" --> ":UpdateParser": newGoalName: String
-deactivate ":Parser"
+UpdateParser -> UpdateParser: getName(parameters)
+activate UpdateParser
+UpdateParser --> UpdateParser: newGoalName: String
+deactivate UpdateParser
 end
 alt#gold #lightblue isUpdateGoalType
-":UpdateParser" -> ":Parser": getType(parameters)
-activate ":Parser"
-":Parser" --> ":UpdateParser": newGoalType: String
-deactivate ":Parser"
+UpdateParser -> UpdateParser: getType(parameters)
+activate UpdateParser
+UpdateParser --> UpdateParser: newGoalType: String
+deactivate UpdateParser
 end
 alt#gold #lightblue isUpdateGoalEndDate
-":UpdateParser" -> ":Parser": getDate(parameters)
-activate ":Parser"
-":Parser" --> ":UpdateParser": newGoalEndDate: String
-deactivate ":Parser"
+UpdateParser -> UpdateParser: getDate(parameters)
+activate UpdateParser
+UpdateParser --> UpdateParser: newGoalEndDate: String
+deactivate UpdateParser
 end
 
-":UpdateParser" -> ":Parser": getIndex(parameters, "/g")
-activate ":Parser"
-":Parser" --> ":UpdateParser": goalIndex: int
-deactivate ":Parser"
+UpdateParser -> UpdateParser: getIndex(parameters, "/g")
+activate UpdateParser
+UpdateParser --> UpdateParser: goalIndex: int
+deactivate UpdateParser
 
-":UpdateParser" -> ":UpdateParser": getExcessGoalAttributes\n(parameters)
-activate ":UpdateParser"
-":UpdateParser" --> ":UpdateParser": excessAttributes:\nArrayList<String>
-deactivate ":UpdateParser"
+UpdateParser -> UpdateParser: getExcessGoalAttributes\n(parameters)
+activate UpdateParser
+UpdateParser --> UpdateParser: excessAttributes:\nArrayList<String>
+deactivate UpdateParser
 
-<-- ":UpdateParser": UpdateGoalCommand\n(goalIndex, newGoalName,\nnewGoalType, newGoalEndDate\nupdateAttributes, excessAttributes)
-deactivate ":UpdateParser"
+<-- UpdateParser: UpdateGoalCommand\n(goalIndex, newGoalName,\nnewGoalType, newGoalEndDate\nupdateAttributes, excessAttributes)
+deactivate UpdateParser
 
 @enduml

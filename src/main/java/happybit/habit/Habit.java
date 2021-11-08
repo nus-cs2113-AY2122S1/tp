@@ -84,10 +84,6 @@ public class Habit {
         return HabitDateManager.dateToString(this.endDate);
     }
 
-    public LocalDate getEndDateLD() {
-        return convertDateToLocalDate(this.endDate);
-    }
-
     /**
      * Get interval set by the user.
      *
@@ -455,16 +451,6 @@ public class Habit {
      */
     private LocalDate convertDateToLocalDate(Date date) {
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-    }
-
-    /**
-     * 'Type-casting' a LocalDate to a Date.
-     *
-     * @param localDate LocalDate to be 'type-casted'.
-     * @return Date that has been 'type-casted' from LocalDate.
-     */
-    private Date convertLocalDateToDate(LocalDate localDate) {
-        return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
     }
 
 }

@@ -39,11 +39,13 @@ The code written by me can be found [here](https://nus-cs2113-ay2122s1.github.io
 
 #### Contributions to DG
 
-* System Architecture Diagram
-* Command Component Overall Description
-* List Goal Command Description + Sequence Diagrams 
-* View Habits Command Description + Sequence Diagrams
-* Done Habits Command Description + Sequence Diagrams
+* Sequence Diagrams
+  * Add Habit: Parser + Implementation
+  * List Goals: Implementation
+  * List Habits: Parser + Implementation
+  * Done Habits: Parser + Implementation
+  * Update Goal: Parser + Implementation
+  * Update Habit: Parser + Implementation
 
 #### Team-based Tasks
 
