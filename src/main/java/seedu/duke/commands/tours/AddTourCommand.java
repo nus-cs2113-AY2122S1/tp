@@ -1,8 +1,6 @@
 package seedu.duke.commands.tours;
 
-import seedu.duke.TourPlannerException;
 import seedu.duke.commands.Command;
-import seedu.duke.data.Client;
 import seedu.duke.data.Tour;
 
 /**

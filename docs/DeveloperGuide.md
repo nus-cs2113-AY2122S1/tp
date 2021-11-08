@@ -605,6 +605,10 @@ To add on Storage component is designed to access only the following folder:
 
 1. `data/`
 
+Shown below is the class diagram for TourPlanner's Storage Component:
+
+![Storage](https://user-images.githubusercontent.com/62021897/140651207-73bd0de8-cb0b-469f-9cdd-c9bbc26b8efc.png)
+
 <br>
 
 ## Product scope
