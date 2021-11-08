@@ -46,10 +46,6 @@ public class WordLimitGame extends Game {
         ui.printLine(displayed);
     }
 
-    public int getTotalSentence() {
-        return eachWord.size();
-    }
-
     public int getWordLimit() {
         ui.printScreen("Enter how many words you want the game to run: ");
         try {

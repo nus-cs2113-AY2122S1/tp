@@ -71,12 +71,17 @@ For instance:
 * Then, `.run()` method of `TimeLimitCommand` is executed, a Time Limit Game will start running 
 until game ends(i.e. timer's up).
 * `.gameSummary()` method will then generate the summary of the game. 
+### Word Limit Game
+
+Sequence Diagram for Time Mode Game:
+![](diagrams/WordLimitMode.png)
+The Sequence Diagram above illustrates the working process of the `WordLimitGame` class.
 
 ### TimeLimitGame Class
 Sequence Diagram for Time Mode Game:
 <img src="https://user-images.githubusercontent.com/69776265/139190231-eb648329-517b-42dc-a088-fbce5c93c616.png" width="574" />
 
-The Sequence Diagram below illustrates the working process of the `TimeModeGame` class.
+The Sequence Diagram above illustrates the working process of the `TimeLimitGame` class.
 
 ## Implementation
 
@@ -103,13 +108,7 @@ There only exists one private content string for all sessions. Each time a set m
 depending on the choices that the user made throughout the process. Whenever the user starts a game, the getContent() 
 method is called and the text is set accordingly.
 
-### Word Limit Game
 
-Once the CommandFactory reads a 'word' command, a word limit game will begin.
-
-Gonna to change this .puml diagram later - zhansen
-
-![](diagrams/WordLimitMode.png)
 
 ### \[Proposed\] View Statistics feature
 #### \[Proposed Implementation\]
