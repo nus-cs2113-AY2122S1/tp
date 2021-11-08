@@ -582,24 +582,6 @@ updated on every successful command entered by the user.
 
 The interworking of this is described in detail in architecture.
 
-#### 4.5.3 Food Design considerations
-
-1. Why is there a need for calorie count?
-   > Health tracking is important for students, especially during the pandemic
-   where we stress eat during online lessons.
-1. Why is there a need to remove a record? We can't un-eat stuff
-   > Yes, however due to the limitations of the CLI interface there may be wrongly spelled
-   entries that the user wouldn't want reflected in the list.
-   Additionally, each food calorie count
-   would be summed up to show the user the total calories consumed per day. If the calories
-   entered are missing or have an additional 0 the sum would be overinflated 
-1. Why implement  `ListOfRecords`?  It seems like a duplicate of `ArrayList<T>`
-    > The abstract class `ListOfRecords` may seem uneventful to you on the surface, however
-    much consideration was taken in account in the making. For instance, in our current iteration
-    we are introducing a way to integrate current food names and calorie count from existing
-    food courts - e.g. TechnoEdge. Another class could inherit from `ListOfRecords` in order to parse in
-    the correct data, hence the generic `T` type used in the list.
-   
 ### 4.6  Help command
 
 This segment focuses on describing the not so-simple implementations behind what would otherwise
