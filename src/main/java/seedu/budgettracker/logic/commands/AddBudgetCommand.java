@@ -1,3 +1,5 @@
+//@@author YEOWEIHNGWHYELAB
+
 package seedu.budgettracker.logic.commands;
 
 import seedu.budgettracker.data.records.exceptions.DuplicateBudgetException;
@@ -7,7 +9,6 @@ import seedu.budgettracker.ui.TextUi;
 import static seedu.budgettracker.common.Messages.MESSAGE_AMOUNT_EXCEEDED;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_AMOUNT;
 
-//@@author yeoweihngwhyelab
 /**
  * This class is responsible for the adding of budget.
  */
@@ -24,7 +25,6 @@ public class AddBudgetCommand extends AddCommand {
     private final double amount;
     private final int month;
 
-    //@@author yeoweihngwhyelab
     /**
      * Constructor of AddBudgetCommand and it assigns the value to the attributes
      * of this class - amount & month.
@@ -37,7 +37,6 @@ public class AddBudgetCommand extends AddCommand {
         this.month = month;
     }
 
-    //@@author yeoweihngwhyelab
     /**
      * Adds a budget to the record list during runtime.
      *
@@ -59,7 +58,6 @@ public class AddBudgetCommand extends AddCommand {
         }
     }
 
-    //@@author yeoweihngwhyelab
     public void execute(boolean isLoadingStorage) {
         if (amount == 0) {
             return;
