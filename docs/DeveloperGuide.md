@@ -319,6 +319,8 @@ their personal account which will be stored in the `GoalList` class.
 5. The `GoalList#addGoal(goal, printManager)` method checks for duplicated goal names before adding a goal to the list.
 6. The `PrintManager#printAddedGoal(description)` method prints an acknowledgement message that the goal has been added.
 
+<div style="page-break-after: always;"></div>
+
 ![](Diagram_Images/Implementation_Diagram_Images/AddGoalCommandSequenceDiagram.png)
 
 #### 4.1.2. Design Considerations
@@ -349,6 +351,8 @@ This section describes the implementation of how the user can add a habit to one
    Within this method, there is a 50-character limit imposed on the name, as well as an integer check for the interval.
 4. An `AddHabitCommand(habit, goalIndex)` object is created from the `AddParser#parseAddHabitCommand()` method.
 
+<div style="page-break-after: always;"></div>
+
 ![](Diagram_Images/Implementation_Diagram_Images/AddHabitCommandParserSequenceDiagram.png)
 
 <div style="page-break-after: always;"></div>
@@ -370,6 +374,8 @@ This section describes the implementation of how the user can add a habit to one
     habit has been successfully added to the goal.
 
 ![](Diagram_Images/Implementation_Diagram_Images/AddHabitCommandSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.2.2. Design Considerations
 
@@ -394,6 +400,8 @@ This section describes the implementation of how the user can display a list of 
 2. The `ListGoalsParser#parseListGoalsCommand(input)` method then returns a `ListGoalsCommand(input)`.
 
 ![](Diagram_Images/Implementation_Diagram_Images/ListGoalsCommandParserSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 3. The `ListGoalsCommand#runCommand(goalList, printManager, storage, gibberish)` method is called, which in turns calls 
    the `GoalList#listGoals(printManager, gibberish)` method. The string variable `gibberish` is logically equivalent to
@@ -453,6 +461,8 @@ This section describes the implementation of how the user can display a list of 
 
 ![](Diagram_Images/Implementation_Diagram_Images/ListHabitsCommandSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.4.2. Design Considerations
 
 **Aspect:** The class to get the list of habits from
@@ -501,6 +511,8 @@ This section describes the implementation of how the user can mark a habit as co
 
 ![](Diagram_Images/Implementation_Diagram_Images/DoneCommandSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.5.2. Design Considerations
 
 **Aspect:** Backtracking for marking habits as completed
@@ -536,6 +548,8 @@ This section describes the implementation of how the user can update a goal's na
 8. Finally, an `UpdateGoalCommand(goalIndex, newGoalName, newGoalType, newGoalEndDate, updateAttributes, 
    excessAttributes)` object is created and returned from the `UpdateParser#parseUpdateGoalCommands(commandInstruction)` 
    method.
+
+<div style="page-break-after: always;"></div>
 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateGoalCommandParserSequenceDiagram.png)
 
@@ -601,6 +615,8 @@ This section describes the implementation of how the user can update a habit's n
 8. Finally, a `UpdateHabitCommand(goalIndex, habitIndex, newHabitName, newHabitInterval, updateAttributes, 
    excessAttributes)` object is created and returned from the 
    `UpdateParser#parseUpdateHabitCommands(commandInstruction)` method.
+
+<div style="page-break-after: always;"></div>
 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateHabitCommandParserSequenceDiagram.png)
 
