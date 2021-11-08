@@ -1,5 +1,7 @@
 package seedu.duke.logic.commands.lesson;
 
+import java.io.IOException;
+
 import seedu.duke.DukeException;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.model.lesson.Lesson;
@@ -8,8 +10,6 @@ import seedu.duke.model.module.ModuleList;
 import seedu.duke.model.task.TaskList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
-
-import java.io.IOException;
 
 //@@author richwill28
 public class LaunchLessonCommand extends Command {
