@@ -426,7 +426,8 @@ ________________________________________________________________________________
 ```
 
 <br>
-## View timetable: `timetable`
+
+## View timetable: `timetable [-flag]`
 
 You can view the current timetable which details your daily schedule as well as the total MCs taken and classes and time
 slots for each day of the week in a timetable structure.
@@ -477,9 +478,74 @@ Total MCs taken this semester: 4.0
 
 ```
 
+In addition, you can add a `-u` flag to the `timetable` command to view only your custom events!
+
+```shell
+~$ timetable -u
+                0900            1000            1100            1200            1300            1400            1500            1600
+--------------------------------------------------------------------------------------------------------------------------------
+                                                                                                                |   Team Meeting|
+     MON                                                                                                        |   TASK        |
+                                                                                                                |   Discord     |
+--------------------------------------------------------------------------------------------------------------------------------
+
+     TUE
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+     WED
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+     THU
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+     FRI
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+     SAT
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+     SUN
+
+
+*******************
+Modules taken this semester:
+
+CS2113T Software Engineering & Object-Oriented Programming 4MC (Exam: Tue Nov 30 09:00 AM - 11:00 AM)
+
+Total MCs taken this semester: 4.0
+
+*******************
+
+```
+
 <br>
 
 ## Changing semester
+
+You can set the semester to align with the current school semester. This will change the modules that you will be allowed to take and their corresponding details, depending on the semester.
+
+You can type `semester` to change the semester.
+
+Do note that changing the semester will reset your timetable if the semester you selected different from your current semester.
+
+```shell
+~$ semester
+Current semester: Semester 1
+1. Semester 1
+2. Semester 2
+3. Special Term 1
+4. Special Term 2
+5. cancel
+Change semester? (This will reset timetable)
+2
+All modules have been successfully removed from your Timetable.
+Current semester: Semester 2
+```
 
 <br>
 
