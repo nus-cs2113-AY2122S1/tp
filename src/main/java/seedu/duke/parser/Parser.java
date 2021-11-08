@@ -334,7 +334,6 @@ public class Parser {
             throw new IllegalArgumentException(Messages.LIST_PROPER_FEATURE +  COMMAND_FOOD);
         }
     }
-    //@@author ngnigel99
 
     //@@author nvbinh15
     /**
@@ -371,7 +370,7 @@ public class Parser {
      */
     private Command getCalendarCommand(String commandArgs, String userInput)
             throws IncorrectNumberOfArgumentsException,
-            IncorrectCommandException, InvalidDateException {
+            IncorrectCommandException, InvalidDateException, WrongDividerOrderException {
         String[] calendarArguments = commandArgs.split(" ");
         switch (calendarArguments[0]) {
         case COMMAND_SUFFIX_LIST:

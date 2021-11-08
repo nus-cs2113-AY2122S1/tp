@@ -4,6 +4,6 @@ import seedu.duke.exceptions.ClickException;
 
 public class NotebookNotFoundForEntry extends ClickException {
     public NotebookNotFoundForEntry() {
-        super("Notebook hasn't been created yet!");
+        super("Notebook doesn't exist!");
     }
 }

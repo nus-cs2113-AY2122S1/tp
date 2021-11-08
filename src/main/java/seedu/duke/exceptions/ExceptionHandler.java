@@ -5,6 +5,8 @@ import seedu.duke.ui.Ui;
 
 import java.time.format.DateTimeParseException;
 
+//@@author nvbinh15
+
 /**
  * A class that handles exceptions thrown by Duke.
  */
@@ -16,6 +18,7 @@ public class ExceptionHandler {
      * Handles duke exceptions.
      *
      * @param e Exception of type DukeException thrown by Duke.
+     * @param userInput The input from user.
      */
     public static void handleClickExceptions(ClickException e, String userInput) {
         ui.printLine();
@@ -23,12 +26,18 @@ public class ExceptionHandler {
         ui.printLine();
     }
 
+    /**
+     * Handles duke exceptions.
+     *
+     * @param e Exception of type DukeException thrown by Duke.
+     */
     public static void handleClickExceptions(ClickException e) {
         ui.printLine();
         ui.printMessage(e.getMessage());
         ui.printLine();
     }
 
+    //@@author ngnigel99
     /**
      * Handles other exceptions.
      *

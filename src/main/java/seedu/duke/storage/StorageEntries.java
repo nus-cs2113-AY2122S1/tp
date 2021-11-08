@@ -4,7 +4,7 @@ package seedu.duke.storage;
 
 import seedu.duke.journal.CollectionOfEntries;
 import seedu.duke.journal.Entry;
-import seedu.duke.journal.Note;
+import seedu.duke.journal.Notebook;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,23 +24,25 @@ public class StorageEntries {
         while (i < dataSize) {
             String dataLine = data.get(i);
             String[] entryArguments = dataLine.split("\\|");
-            entries.add(addEntry(entryArguments));
+            if ("entry".equals(entryArguments[0])) {
+                entries.add(addEntry(entryArguments));
+            }
             i++;
         }
         return entries;
     }
 
-    private static Entry addEntry(String[] noteArguments) {
-        String noteName = noteArguments[0].trim();
-        String entryName = noteArguments[1].trim();
+    private static Entry addEntry(String[] entryArguments) {
+        String noteName = entryArguments[1].trim();
+        String entryName = entryArguments[2].trim();
         return new Entry(noteName, entryName);
     }
 
     public static ArrayList<String> entriesToData(ArrayList<Entry> entries, Storage storage) {
         ArrayList<String> data = new ArrayList<>();
-        ArrayList<Note> notes = storage.collectionOfNotes.getNotesArrayList();
+        ArrayList<Notebook> notes = storage.collectionOfNotebooks.getNotesArrayList();
         for (Entry entry : entries) {
-            for (Note note: notes) {
+            for (Notebook note: notes) {
                 if (entry.getEntryNoteName().equals(note.getNoteName())) {
                     data.add(entry.toSaveFileFormat());
                 }

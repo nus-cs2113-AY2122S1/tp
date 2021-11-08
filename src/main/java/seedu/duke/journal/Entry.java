@@ -42,7 +42,7 @@ public class Entry {
      * @return  formattedNameOfNoteAndEntry names of entry and its notebook in format
      */
     public String toSaveFileFormat() {
-        String formattedNameOfNoteAndEntry =  noteName + "|" + entryName;
+        String formattedNameOfNoteAndEntry =  "entry" + "|" + noteName + "|" + entryName;
         return formattedNameOfNoteAndEntry;
     }
 }

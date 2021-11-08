@@ -1,5 +1,8 @@
 package seedu.duke.storage;
 
+import seedu.duke.commands.calendar.AddLectureCommand;
+import seedu.duke.exceptions.calendar.DuplicateTaskException;
+import seedu.duke.exceptions.calendar.InvalidDateException;
 import seedu.duke.schedule.lecture.Lecture;
 import seedu.duke.schedule.lecture.LectureList;
 import seedu.duke.schedule.task.Task;
@@ -16,15 +19,20 @@ public class StorageLecture {
     public static final String fileName   = "scheduleLectures.txt";
     public static final String filePath = folderName + fileName;
 
-    public static ArrayList<Lecture> dataToLecture(ArrayList<String> data) {
+    public static ArrayList<Lecture> dataToLecture(ArrayList<String> data)
+            throws InvalidDateException, DuplicateTaskException {
         ArrayList<Lecture> lectures = new ArrayList<>();
         int i = 0;
         int dataSize = data.size();
         while (i < dataSize) {
             String dataLine = data.get(i);
             String[] lectureArguments = dataLine.split("\\|");
-            lectures.add(new Lecture(lectureArguments[0].trim(),
-                    lectureArguments[1].trim(), lectureArguments[2].trim()));
+            String moduleName = lectureArguments[0].trim();
+            String startDate = lectureArguments[1].trim();
+            String endDate = lectureArguments[2].trim();
+            AddLectureCommand.checkIfDateValid(startDate);
+            AddLectureCommand.checkIfDateValid(endDate);
+            lectures.add(new Lecture(moduleName, startDate, endDate));
             i++;
         }
         return lectures;
@@ -39,7 +47,9 @@ public class StorageLecture {
         Storage.writeDataOntoSaveFile(StorageLecture.filePath, data);
     }
 
-    public static LectureList readLectureList() throws NullPointerException, IOException {
+    public static LectureList readLectureList()
+            throws NullPointerException,
+            IOException {
         LectureList lectureList = new LectureList();
         ArrayList<Lecture> lectures;
         try {
@@ -50,7 +60,8 @@ public class StorageLecture {
                 lectureList.addLecture(lectures.get(i));
             }
             return lectureList;
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | InvalidDateException
+                | ArrayIndexOutOfBoundsException | DuplicateTaskException e) {
             File f = new File(StorageLecture.filePath);
         }
         return lectureList;

@@ -15,6 +15,8 @@ import java.io.IOException;
 public class GetExpectedCapCommand extends Command {
     public static final String MESSAGE_EXPECTED_CAP = "Your expected CAP based on the modules you are taking is: ";
     public static final String CAP_FORMAT = "%,.2f";
+    public static final String MESSAGE_MISSING_CAP_INFO = "I don't have enough information to calculate"
+            + " your expected CAP. Please add a new module or edit the current CAP information.";
     private static ModuleManager moduleManager = new ModuleManager();
 
     /**
@@ -36,9 +38,13 @@ public class GetExpectedCapCommand extends Command {
     public void execute(Ui ui, Storage storage) throws IOException {
         double expectedCap = moduleManager.getExpectedCap();
         ui.printLine();
-        ui.printMessage("Your current CAP is " + moduleManager.getCurrentCap()
-                + ", and the total of MCs contributing to your CAP is " + moduleManager.getTotalMcTaken());
-        ui.printMessage(MESSAGE_EXPECTED_CAP + String.format(CAP_FORMAT, expectedCap));
+        if (Double.isNaN(expectedCap)) {
+            ui.printMessage(MESSAGE_MISSING_CAP_INFO);
+        } else {
+            ui.printMessage("Your current CAP is " + moduleManager.getCurrentCap()
+                    + ", and the total of MCs contributing to your CAP is " + moduleManager.getTotalMcTaken());
+            ui.printMessage(MESSAGE_EXPECTED_CAP + String.format(CAP_FORMAT, expectedCap));
+        }
         ui.printLine();
     }
 }

@@ -2,6 +2,7 @@ package seedu.duke.parser.schedule;
 
 import seedu.duke.exceptions.calendar.IncorrectNumberOfArgumentsException;
 import seedu.duke.exceptions.calendar.InvalidDateException;
+import seedu.duke.exceptions.syntax.WrongDividerOrderException;
 
 import java.time.YearMonth;
 import java.util.ArrayList;
@@ -56,7 +57,7 @@ public class ParserSchedule {
      * @throws IncorrectNumberOfArgumentsException to check if correct number of arguments.
      */
     public static ArrayList<String> parseTodoCommand(String input)
-            throws IncorrectNumberOfArgumentsException, InvalidDateException {
+            throws IncorrectNumberOfArgumentsException, InvalidDateException, WrongDividerOrderException {
         return parseTodoArgumentsArray(input);
     }
 
@@ -78,18 +79,6 @@ public class ParserSchedule {
         }
         if (!input.contains(END_DATE_DIVIDER)) {
             throw new IncorrectNumberOfArgumentsException(ENDDATE_DIVIDER_NOT_FOUND);
-        }
-    }
-
-    private static void checkEmptyIncorrectArgsAddTaskCommand(String description, String date)
-            throws IncorrectNumberOfArgumentsException, InvalidDateException {
-        if (description.equals("")) {
-            throw new IncorrectNumberOfArgumentsException(NAME_ABSENT);
-        }
-        if (date.equals("")) {
-            throw new IncorrectNumberOfArgumentsException(DATE_ABSENT);
-        } else if (date.length() != 10) {
-            throw new InvalidDateException();
         }
     }
 
@@ -119,15 +108,24 @@ public class ParserSchedule {
      * @throws InvalidDateException if date given by user is invalid.
      */
     public static ArrayList<String> parseTodoArgumentsArray(String input)
-            throws IncorrectNumberOfArgumentsException, InvalidDateException {
+            throws IncorrectNumberOfArgumentsException, InvalidDateException, WrongDividerOrderException {
         checkForDividersAddTaskCommand(input);
+        if (input.indexOf(NAME_DIVIDER) > input.indexOf(DATE_DIVIDER)) {
+            throw new WrongDividerOrderException();
+        }
         String todoDetails = input.trim().substring(CALENDAR_COMMAND_SPLIT);
-        int nameIndex = todoDetails.indexOf(NAME_DIVIDER);
-        String descriptionAndDate = todoDetails.substring(nameIndex).trim();
-        int dateIndex = descriptionAndDate.indexOf(DATE_DIVIDER);
-        String description = descriptionAndDate.substring(nameIndex + 2, dateIndex).trim();
-        String date = descriptionAndDate.substring(dateIndex + 2).trim();
-        checkEmptyIncorrectArgsAddTaskCommand(description, date);
+        String descriptionAndDate = todoDetails.substring(todoDetails.indexOf(NAME_DIVIDER)).trim();
+        String description = descriptionAndDate.substring(descriptionAndDate.indexOf(NAME_DIVIDER)
+                + 2, descriptionAndDate.indexOf(DATE_DIVIDER)).trim();
+        String date = descriptionAndDate.substring(descriptionAndDate.indexOf("d/") + 2).trim();
+        if (description.equals("")) {
+            throw new IncorrectNumberOfArgumentsException(NAME_ABSENT);
+        }
+        if (date.equals("")) {
+            throw new IncorrectNumberOfArgumentsException(DATE_ABSENT);
+        } else if (date.length() != 10) {
+            throw new InvalidDateException();
+        }
         List<String> todoInformation = Arrays.asList(TODO, description, date);
         return new ArrayList<>(todoInformation);
     }
@@ -152,7 +150,7 @@ public class ParserSchedule {
      * @throws InvalidDateException if date given by user is invalid.
      */
     public static ArrayList<String> parseLectureCommand(String input)
-            throws IncorrectNumberOfArgumentsException, InvalidDateException {
+            throws IncorrectNumberOfArgumentsException, InvalidDateException, WrongDividerOrderException {
         return parseLectureArgumentsArray(input);
     }
 
@@ -165,8 +163,13 @@ public class ParserSchedule {
      * @throws InvalidDateException if date given by user is invalid.
      */
     public static ArrayList<String> parseLectureArgumentsArray(String input)
-            throws IncorrectNumberOfArgumentsException, InvalidDateException {
+            throws IncorrectNumberOfArgumentsException, InvalidDateException, WrongDividerOrderException {
         checkForDividersAddLectureCommand(input);
+        if (input.indexOf(MODULE_DIVIDER) >= input.indexOf(START_DATE_DIVIDER)
+                || input.indexOf(START_DATE_DIVIDER) >= input.indexOf(END_DATE_DIVIDER)
+                || input.indexOf(MODULE_DIVIDER) >= input.indexOf(END_DATE_DIVIDER)) {
+            throw new WrongDividerOrderException();
+        }
         String lectureDetails = input.trim().substring(17);
         int moduleIndexFormer = lectureDetails.indexOf(MODULE_DIVIDER);
         String nameAndDate = lectureDetails.substring(moduleIndexFormer).trim();

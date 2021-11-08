@@ -22,7 +22,6 @@ public class ModuleManager {
     private static Ui ui = new Ui();
     private static GradePoints gradePoints = new GradePoints();
     private static StorageModule storageModule = new StorageModule();
-    private static ParserModule parserModule = new ParserModule();
     private static double currentCap = 0.0;
     private static int totalMcTaken = 0;
 

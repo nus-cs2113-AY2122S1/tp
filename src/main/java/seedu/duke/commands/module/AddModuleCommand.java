@@ -11,7 +11,6 @@ import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 import java.io.IOException;
-import java.util.Locale;
 
 //@@author nvbinh15
 
@@ -70,6 +69,16 @@ public class AddModuleCommand extends Command {
         ui.printLine();
     }
 
+    /**
+     * Checks if there is duplicate prefix in the user's command or not.
+     *
+     * @param commandArgs The command argument.
+     * @param indexOfCode Index of Module code.
+     * @param indexOfName Index of Module name.
+     * @param indexOfMc Index of the modular credits.
+     * @param indexOfExpectedGrade Index of Module expected grade.
+     * @return true if there is duplicate prefix and false otherwise.
+     */
     private boolean hasDuplicatePrefix(String commandArgs, int indexOfCode, int indexOfName, int indexOfMc,
                                        int indexOfExpectedGrade) {
         boolean duplicateCode = (indexOfCode != -1) && (indexOfCode != commandArgs.lastIndexOf(PREFIX_CODE));

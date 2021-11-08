@@ -59,6 +59,9 @@ public class StorageModule {
         }
         file.getParentFile().mkdirs();
         file.createNewFile();
+        FileWriter fileWriter = new FileWriter(String.valueOf(PATH_TO_CAP_STORAGE_FILE));
+        fileWriter.write("0|0");
+        fileWriter.close();
     }
 
     /**

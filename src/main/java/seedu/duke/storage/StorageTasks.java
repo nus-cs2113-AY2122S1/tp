@@ -1,5 +1,9 @@
 package seedu.duke.storage;
 
+import seedu.duke.commands.calendar.AddTodoCommand;
+import seedu.duke.exceptions.calendar.IncorrectNumberOfArgumentsException;
+import seedu.duke.exceptions.calendar.InvalidDateException;
+import seedu.duke.exceptions.module.StorageModuleException;
 import seedu.duke.schedule.task.Task;
 import seedu.duke.schedule.task.TaskList;
 import seedu.duke.schedule.task.Todo;
@@ -26,7 +30,9 @@ public class StorageTasks {
      * @param data data from file.
      * @return tasks
      */
-    public static ArrayList<Task> dataToTask(ArrayList<String> data) {
+    public static ArrayList<Task> dataToTask(ArrayList<String> data)
+            throws IncorrectNumberOfArgumentsException,
+            InvalidDateException {
         ArrayList<Task> tasks = new ArrayList<>();
         int i = 0;
         int dataSize = data.size();
@@ -36,6 +42,7 @@ public class StorageTasks {
             if (TODO.equals(todoArguments[INDEX_ZERO])) {
                 String description = todoArguments[INDEX_TODO_DESCRIPTION].trim();
                 String date = todoArguments[INDEX_TODO_DATE].trim();
+                AddTodoCommand.checkIfDateValid(date);
                 tasks.add(new Todo(description, date));
             }
             i++;
@@ -76,7 +83,10 @@ public class StorageTasks {
                 tasksList.addTask(tasks.get(i));
             }
             return tasksList;
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException
+                | IncorrectNumberOfArgumentsException
+                | ArrayIndexOutOfBoundsException
+                | InvalidDateException e) {
             File f = new File(StorageTasks.filePath);
         }
         return tasksList;

@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import seedu.duke.commands.Command;
+import seedu.duke.constants.CommandConstants;
 import seedu.duke.exceptions.calendar.DuplicateTaskException;
 import seedu.duke.exceptions.calendar.InvalidDateException;
 import seedu.duke.schedule.task.Task;
@@ -46,30 +49,16 @@ public class AddTodoCommand extends Command {
     }
 
     /**
-     * Checks if the date provided by the user is valid.
-     *
-     * @param todoDateStringFormat The date from user in string format.
-     * @return True if the date is valid else False.
-     */
-    public static boolean isValid(String todoDateStringFormat) {
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        dateFormat.setLenient(false);
-        try {
-            dateFormat.parse(todoDateStringFormat);
-        } catch (ParseException e) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * Throws exception if date not valid.
      *
      * @param todoDateStringFormat The date from user in string format.
      * @throws InvalidDateException If user provides invalid date.
      */
     public static void checkIfDateValid(String todoDateStringFormat) throws InvalidDateException {
-        if (!isValid(todoDateStringFormat)) {
+        DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern(CommandConstants.DATE_CONSTANT);
+        try {
+            LocalDate inputDate = LocalDate.parse(todoDateStringFormat, localDateFormatter);
+        } catch (Exception e) {
             throw new InvalidDateException();
         }
     }
@@ -86,7 +75,7 @@ public class AddTodoCommand extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage) throws IOException,
-            ParseException, DuplicateTaskException, InvalidDateException {
+            ParseException, InvalidDateException {
         String description = arguments.get(INDEX_TODO_DESCRIPTION).trim();
         String todoDateStringFormat = arguments.get(INDEX_TODO_DATE);
         checkIfDateValid(todoDateStringFormat);

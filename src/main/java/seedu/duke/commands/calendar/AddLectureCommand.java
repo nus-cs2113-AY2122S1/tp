@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import seedu.duke.commands.Command;
+import seedu.duke.constants.CommandConstants;
 import seedu.duke.exceptions.calendar.DuplicateTaskException;
 import seedu.duke.exceptions.calendar.InvalidDateException;
 import seedu.duke.exceptions.calendar.LectureIncorrectDateException;
@@ -62,30 +65,16 @@ public class AddLectureCommand extends Command {
     }
 
     /**
-     * Checks if the date provided by the user is valid.
-     *
-     * @param lectureDateStringFormat The date from user in string format.
-     * @return True if the date is valid else False.
-     */
-    private static boolean isValid(String lectureDateStringFormat) {
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        dateFormat.setLenient(false);
-        try {
-            dateFormat.parse(lectureDateStringFormat);
-        } catch (ParseException e) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * Throws exception if date not valid.
      *
      * @param lectureDateStringFormat The date from user in string format.
      * @throws InvalidDateException If user provides invalid date.
      */
-    private static void checkIfDateValid(String lectureDateStringFormat) throws InvalidDateException {
-        if (!isValid(lectureDateStringFormat)) {
+    public static void checkIfDateValid(String lectureDateStringFormat) throws InvalidDateException {
+        DateTimeFormatter localDateFormatter = DateTimeFormatter.ofPattern(CommandConstants.DATE_CONSTANT);
+        try {
+            LocalDate inputDate = LocalDate.parse(lectureDateStringFormat, localDateFormatter);
+        } catch (Exception e) {
             throw new InvalidDateException();
         }
     }

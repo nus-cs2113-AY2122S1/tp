@@ -9,7 +9,12 @@
 2. [Setting Up](#2-setting-up)\
 2.1 [Prerequisite](#21-prerequisite)\
 2.2 [Setting up the Project in Your Computer](#22-setting-up-the-project-in-your-computer)
-3. [Design](#3-design)
+3. [Design](#3-design)\
+3.1 [Architecture](#31-architecture)\
+3.2 [Ui Component](#32-ui-component)\
+3.3 [Logic Component](#33-logic-component)\
+3.4 [Model Component](#34-model-component)\
+3.5 [Storage Component](#35-storage-component)
 4. [Implementation](#4-implementation)\
 4.1 [Module-related Features](#41-module-related-features)\
 4.2 [Zoom-related Features](#42-zoom-related-features)\
@@ -68,7 +73,6 @@ ii. Go to `src/test/java/seedu.duke` and run `Tests in seedu.duke` to ensure the
 
 ## 3. Design
 
-
 ### 3.1. Architecture
 
 This section is designed to demonstrate our software design description, and aims to provide you with an overall guidance to the architecture of Click.
@@ -107,7 +111,16 @@ The `UI` component:
 4. Command interacts with models, `Storage` to carry out user's command.
 5. Command also makes use of `UI` to display the messages to the user.
 
-### 3.4. Storage Component
+### 3.4. Model Component
+
+#### 3.4.1 Module-related models
+
+Module-related commands are managed by `ModuleManager`, which directly interacts with `StorageModule`. 
+`StorageModule` in turn makes use of `ParserModule` to format and retrieve the module-related information. The following diagram illustrates how the classes related to module interact with each other.
+
+![module architecture](images/module/Module.png)
+
+### 3.5. Storage Component
 
 The storage of `Click` refers to storing files of user's data into respective local subdirectory in a local directory called `storage`, which is in the same directory as the project root.
 
@@ -117,6 +130,8 @@ This  section provides  the mechanisms of the many features of Click, where you 
 as code examples.
 
 ### 4.1. Module-related Features
+
+This segment focuses on describing the implementation of module-related features, the functionality of the commands as well as the design considerations taken.
 
 #### 4.1.1 Adding a Module
 
@@ -191,7 +206,6 @@ The sequence diagram below summarizes how listing modules work:
 ![](images/module/ListModule.png)
 
 
-
 ### 4.2 Zoom related features
 
 #### 4.2.1 Showing all available zoom links
@@ -216,26 +230,20 @@ Example: `zoom add nus.sg/testlink ABC101`
 
 This feature allows the user to view a calendar with tasks and lectures.
 
-**Implementation**
-
 The command for displaying the calendar for a specific month is implemented by the `DisplayCommand` class that extends `Command`.
 
 Given below is an example usage scenario and how the display calendar mechanism behaves at each step.
 
 1. The user enters the command `calendar display 10-2021`. This command is then sent for parsing in the `Click` class to `parseCommand` method in the `Parser` class. The `parseCommand` method first splits the entire command into an array `todoArguments` containing `calendar`, `display` and `10-2021`.
-
 2. The string `calendar` from the first index of todoArguments is checked against switch cases and is found to match `COMMAND_CALENDAR` which is the constant string "calendar". Upon finding this match, the string from the second index `todoArguments`is further split based on the delimiter of a single white space. The string `display` id checked against possible suffixes and `Command` object `DisplayCommand` is returned to the `Click` class.
 3. `Click` class then calls the method `execute` of `DisplayCommand` class. `DisplayCommand` extends `Command` class and has three steps in its `execute` method.\
-         i. The `parseCalendarCommand` is first called, and it returns the year and month values after splitting `10-2021` into `10` and `2021`. This is put together into an YearMonth object `inputYearMonth`\
+         i. The `parseCalendarCommand` is first called, and it returns the year and month values after splitting `10-2021` into `10` and `2021`. This is put together into an YearMonth object `inputYearMonth`
       >  **NOTE:** The input is validated first and if the input date given is invalid, i.e., the month not between 1-12, then the calendar for the current month is displayed.
    
       ii. The `inputYearMonth` is passed into `Ui` class method `printCalenderTitle` and this prints out the title of that month with the month name and the year. In this example, it will display as given in the figure below.
      ![](./images/calendar/calendar_header.png)
-
       iii. Then, the method `arrangeTaskList` in `Schedule` class is called, and it takes in `storage.tasksList` (the TaskList object with all the currently stored tasks drawn from storage), `calendarTasks` (an ArrayList<ArrayList<String>> object initialized with empty ArrayLists of type String), `month` (the month input by the user, which in this example is the integer `10`) and year `month` (the year input by the user, which in this example is the integer `2021`), and adds the tasks to the days in the empty String ArrayLists initialized before in `calendarTasks`.
-
       iv.The method `arrangeLectureList` is also called and the process is same as in the previous step, except with `storage.lectureList` and `calendarLecture` replacing the first two input parameters of `arrangeTaskList`.
-
       v.Then, the method `displayCalendar` in `Schedule` class is called, and it takes in `inputYearMonth` (the YearMonth object created from the month and year parsed from the user input), the `calendarTasks` (that was filled with the tasks for each day in the Step (iii)) and `calendarLecture` (that was filled with the lectures for each day in the Step (iv)). The method `displayCalendar` performs the necessary logic to print out the calendar.
   >  **NOTE:** Two tasks and two lectures are displayed for each day based on the order in which the user added them, and if there are more, they will show as and when the user deletes the tasks/lectures that are currently displayed.
 
@@ -256,8 +264,6 @@ The following design considerations were kept in mind while implementing the cal
 #### 4.3.2 Adding a Task
 
 This feature allows user to add a new Task.
-
-**Implementation**
 
 The command for adding a task is implemented by the `AddTodoCommand` class that extends `Command`.
 
@@ -283,8 +289,6 @@ Below is an activity diagram for the execution of this feature.
 
 This feature allows user to add a new Lecture.
 
-**Implementation**
-
 The command for adding a lecture is implemented by the `AddLectureCommand` class that extends `Command`.
 
 Given below is an example usage scenario and how the add lecture mechanism behaves at each step.
@@ -305,8 +309,6 @@ Given below is an example usage scenario and how the add lecture mechanism behav
 
 This feature allows user to view all Tasks.
 
-**Implementation**
-
 The command for listing all tasks is implemented by the `ListTasksCommand` class that extends `Command`.
 
 Given below is an example usage scenario and how the list task mechanism behaves at each step.
@@ -317,13 +319,11 @@ Given below is an example usage scenario and how the list task mechanism behaves
 2. `ListTasksCommand` object is created.
 3. Execution of the command.\
    i. `ListTasksCommand` calls `StorageTasks.readTaskList()` to read Task-related data from the storage file.\
-   ii. `ListTasksCommand` calls `printTaskList(tasks.getTaskList())` of `Ui` package to print out the tasks to the user.\
+   ii. `ListTasksCommand` calls `printTaskList(tasks.getTaskList())` of `Ui` package to print out the tasks to the user.
 
 #### 4.3.5 Listing All Lectures
 
 This feature allows user to view all Lectures.
-
-**Implementation**
 
 The command for listing all lectures is implemented by the `ListLecturesCommand` class that extends `Command`.
 
@@ -335,13 +335,11 @@ Given below is an example usage scenario and how the list lecture mechanism beha
 2. `ListLecturesCommand` object is created.
 3. Execution of the command.\
    i. `ListLecturesCommand` calls `StorageLecture.readLectureList()` to read Lecture-related data from the storage file.\
-   ii. `ListLecturesCommand` calls `printLectureList(lectures.getLectureList())` of `Ui` package to print out the tasks to the user.\
+   ii. `ListLecturesCommand` calls `printLectureList(lectures.getLectureList())` of `Ui` package to print out the tasks to the user.
 
 #### 4.3.6 Deleting a Task
 
 This feature allows user to delete a Task created in the past.
-
-**Implementation**
 
 The command for deleting a task is implemented by the `DeleteTaskCommand` class that extends `Command`.
 
@@ -365,8 +363,6 @@ Below is a sequence diagram that demonstrates this feature.
 
 This feature allows user to delete a Lecture created in the past.
 
-**Implementation**
-
 The command for deleting a task is implemented by the `DeleteLectureCommand` class that extends `Command`.
 
 Given below is an example usage scenario and how the delete lecture mechanism behaves at each step.
@@ -385,8 +381,6 @@ Given below is an example usage scenario and how the delete lecture mechanism be
 
 This feature allows user to edit a Task created in the past.
 
-**Implementation**
-
 The command for editing a task is implemented by the `EditTasksCommand` class that extends `Command`.
 
 Given below is an example usage scenario and how the edit task mechanism behaves at each step.
@@ -403,44 +397,175 @@ Given below is an example usage scenario and how the edit task mechanism behaves
    iv. `EditTasksCommand` calls `StorageTasks.writeTaskList(Storage.tasksList)` to save the new data to the storage file.
 
 ### 4.4 Journaling Feature
+This segment focuses on describing the implementation of journaling-related features, the functionality of the 
+commands as well as the design considerations taken.
 
 #### 4.4.1 Feature list
 #### Add notebook feature
 
 The command for adding notebook is implemented by the `AddNoteCommand` class that extends `Command`.
-On adding notebook successfully, the message "Great you have added the note: NOTEBOOK_NAME" will be displayed.
+
+Given below is an example usage scenario and how the add notebook mechanism behaves at each step.
+
+1. User inputs `journal notebook n/ CS2113` \
+   i. `Click` receives the input. \
+   ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
+2. Creating `AddNoteCommand` object.
+3. AddNoteCommand execution. \
+   i. `AddNoteCommand` calls `ParserJournal.parseAddNoteCommand(userInput)` which returns the notebook name. \
+   ii. `AddNoteCommand` calls `storage.collectionOfNotebooks.addNote(noteName, "none")`. Here the parameters are the
+   notebook name and the tag name which is "none" by default. \
+   iii. `AddNoteCommand` calls `ui.printAddedNoteMessage` and passes in notebook name as parameter to convey
+   successful addition of notebook.
+   iv. `AddNoteCommand` calls `StorageNotes.writeCollectionOfNotebooks(storage.collectionOfNotebooks)` to write the new 
+   data to
+   the storage file.
+
+![](./images/journal/AddNoteCommand.png)
+
 
 #### Add entry feature
 
 The command for adding entry is implemented by the `AddEntryCommand` class that extends `Command`.
 
-On adding entry successfully, the message "Great you have added the entry: ENTRY_NAME" will be displayed.
+Given below is an example usage scenario and how the add entry mechanism behaves at each step.
+
+1. User inputs `journal entry n/ CS2113 e/ HW`\
+   i. `Click` receives the input. \
+   ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input. 
+2. Creating `AddEntryCommand` object.
+3. AddEntryCommand execution. \
+   i. `AddEntryCommand` calls `ParserJournal.parseAddEntryCommand(userInput)` which returns the notebook name and entry
+   name as a
+   string array. \
+   ii. `AddEntryCommand` calls `storage.collectionOfNotebooks.getNotesArrayList` to get an ArrayList of notebook 
+   objects. \
+   iii. Traverses through all notebooks in the array list using a for loop. \
+   iv. If a notebook has name same as the notebook name in input got after parsing then `AddEntryCommand` calls
+   `storage.collectionOfEntries.addEntry(NOTEBOOK_NAME, ENTRY_NAME)` to add the entry. \
+   v. `AddEntryCommand` calls `ui.printAddedEntryMessage(ENTRY_NAME)` to print a message that the entry has been added.
+   vi. `AddEntryCommand` calls `StorageEntries.writeEntries(storage.collectionOfEntries, storage)` to write the new
+   data to the storage file.
+
+![](./images/journal/AddEntryCommand.png)
 
 #### List notebooks and entries
 
 The command for adding notebook is implemented by the `ListJournalCommand` class that extends `Command`.
+The command for listing is implemented by the `ListJournalCommand` class that extends `Command`.
 
 A list of notebooks along with their entries will be displayed.
 
-#### 4.4.2 Testing
+Given below is an example usage scenario and how the list mechanism behaves at each step.
 
-1. You can enter the command journal notebook n/ <NOTEBOOK_NAME> to add a notebook.
-   You are free to enter a notebook name of your choice and observe the output of this command.
+1. User inputs `journal list` \
+   i. `Click` receives the input.\
+   ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
+2. Creating `ListJournalCommand` object. \
+3. ListJournalCommand execution. 
+   i. `ListJournalCommand` calls `storage.collectionOfNotebooks.getNotesArrayList()` which returns an array list of
+   Notebook objects. \
+   ii. `ListJournalCommand` calls `storage.collectionOfEntries.getEntriesArrayList()` which returns an array list of
+   Entry objects. \
+   iii. `ListJournalCommand` then prints all the notebooks with their entries.
 
-   `Test case: journal notebook n/ TRIAL
-   Expected: Great you have added the notebook: TRIAL`
+#### Deleting notebook
 
-2.You can enter the command journal entry n/ <ENTRY_NAME> to add an entry to a specific notebook.
-You are free to enter an entry name of your choice and observe the output of this command.
+The command for deleting notebook is implemented by the `DeleteNoteCommand` class that extends `Command`.
+The notebook along with all its entries will be deleted.
 
-    Test case: journal entry n/ TRIAL e/ TEST
-    Expected: Great you have added the entry: TEST
+Given below is an example usage scenario and how the delete notebook mechanism behaves at each step.
 
-3.You can enter the command journal list to view list of notebooks and their entries
+1. User inputs `journal delete_notebook 1` \
+   i. `Click` receives the input. \
+   ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
+2. Creating `DeleteNoteCommand` object.
+3. DeleteNoteCommand execution. \
+   i. `DeleteNoteCommand` calls `ParserJournal.parseDeleteNoteCommand(userInput)` to get index of notebook to
+   delete. \
+   ii. `DeleteNoteCommand` checks if index of notebook is in list. If not, throws the
+   exception InvalidNotebookIndexException(). \
+   iii. `DeleteNoteCommand` calls `storage.collectionOfNotebooks.deleteNote(indexOfNotebookToDelete, storage)`. \
+   iv. `DeleteNoteCommand` calls `ui.printDeletedNotebookMessage(indexOfNotebookToDelete)`to indicate that the 
+   notebook has been deleted. \
+   v. `DeleteNoteCommand` calls `StorageNotes.writeCollectionOfNotebooks(storage.collectionOfNotebooks)` to write 
+   the new
+   data to the storage file. 
 
-    Test case: journal list
-    Expected: The notebook TRIAL contains:
-              TEST
+![](./images/journal/DeleteNoteCommand.png)
+
+#### Deleting Entry
+
+The command for deleting entry is implemented by the `DeleteEntryCommand` class that extends `Command`.
+
+Given below is an example usage scenario and how the delete entry mechanism behaves at each step.
+
+1. User inputs `journal delete_entry n/ CS2113 e/ HW` \
+   i. `Click` receives the input. \
+   ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
+2. Creating `DeleteEntryCommand` object.
+3. DeleteEntryCommand execution. \
+   i. `DeleteEntryCommand` calls `ParserJournal.parseDeleteEntryCommand(userInput, storage)` to get notebook name and
+   entry name. \
+   ii. `DeleteEntryCommand` calls `storage.collectionOfEntries.getEntriesArrayList()` which returns an array list of
+   Entry objects.\
+   iii. Traverses entries. If notebook name and entry name match that of Entry object in list, calls `entries.remove(indexOfEntry)`
+   to delete the entry. If entry to delete doesn't exist then throws `EntryDoesNotExistException()`. \
+   iv. `DeleteEntryCommand` calls `StorageEntries.writeEntries(storage.collectionOfEntries, storage)` to write the new
+   data to the storage file. \
+   v. `DeleteEntryCommand` calls `printDeletedEntryMessage()` to convey that entry has been deleted successfully.
+
+#### Tagging Notebook
+
+The command for tagging notebook is implemented by the `TagNotebookCommand` class that extends `Command`.
+
+
+Given below is an example usage scenario and how tag notebook mechanism behaves at each step.
+
+1. User inputs `journal tag n/ 1 t/ important` \
+   i. `Click` receives the input. \
+   ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
+2. Creating `TagNotebookCommand` object.
+3. TagNotebookCommand execution. \
+i. `TagNotebookCommand` calls `ParserJournal.parseTagNotebookCommand(userInput, storage)` to get notebook index and
+   tag name. \
+   ii. `TagNotebookCommand` calls `storage.collectionOfNotebooks.getNotesArrayList()` which returns an array list of
+   Notebook objects. \
+   iii. `TagNotebookCommand` calls `notes.get(NOTEBOOK_INDEX)` to get the required Note object at the index in the
+   array list. \
+   iv. `TagNotebookCommand` calls `noteToBeTagged.tag(TAG_NAME, storage)` to tag the notebook. \
+   v. `TagNotebookCommand` calls `printTaggedNotebookMessage()` to convey that the notebook has been tagged
+   successfully. 
+
+**Design Considerations**
+
+The following design considerations were kept in mind while implementing the tag notebook feature,
+- Aspect: How to store tag
+   - Alternative 1: Store the tag as private string in every Notebook
+      - Pros : Easy to access for printing.
+      - Cons: Not optimized in terms of complexity for finding operation and needs more work for scaling the 
+        application.
+   - Alternative 2: Store as a Hash Table with the key as the tag and value as `Notebook`
+      - Pros : Better time complexity since more optimized.
+      - Cons: Takes up storage space.
+   
+#### Finding Notebook by tag
+
+The command for finding notebook by a tag is implemented by the `FindNotebooksByTagCommand` class that extends
+`Command`.
+
+Given below is an example usage scenario and how the find notebook by tag mechanism behaves at each step.
+
+1. User inputs `journal find tag_name` \
+   i. `Click` receives the input. \
+   ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
+2. Creating `FindNotebooksByTagCommand` object.
+3. FindNotebooksByTagCommand execution. \
+   i. `FindNotebooksByTagCommand` calls `ParserJournal.parseTagForFinding(userInput)` to get tag name. \
+   ii. `FindNotebooksByTagCommand` calls `storage.collectionOfNotebooks.getNotesArrayList()` which returns an array 
+   list of
+   Notebook objects. \
+   iii. If tag name matches tag name of any Notebook objects in the array list then the notebook name is displayed.
 
 ### 4.5 Food related features
 
@@ -784,6 +909,24 @@ public class Click {
 |v1.0|user|add a new module|keep track of the module I'm going to take this semester|
 |v1.0|user|list all modules|get the information about my modules|
 |v1.0|user|delete recorded module|remove a module I'm not taking from the list|
+|v1.0|user|display a calendar|view all my tasks|
+|v1.0|user|add a todo task|to keep track of tasks I need to complete|
+|v1.0|user|delete a todo task|delete a task I have completed/am not going to do|
+|v1.0|user|list all tasks|get the information about my tasks|
+|v2.0|user|display a calendar with lectures and tasks|view all my tasks and lectures in a calendar view|
+|v2.0|user|add a lecture|know which lectures I have on which days|
+|v2.0|user|delete a lecture|delete a lecture that I am not going to do|
+|v2.0|user|edit a task|I do not have to delete a task which I just want to make minor changes to|
+|v2.0|user|list all lectures|get the information about my lectures|
+|v2.0|user|add a notebook|to help me journal|
+|v2.0|user|add an entry to a notebook|to help me journal|
+|v2.0|user|delete notebook|allows me to delete notebook if I don't need it|
+|v2.0|user|delete entry|allows me to delete entry I don't need it|
+|v2.0|user|list notebooks and entries|to keep track of my journal and view notebooks and entries|
+|v2.0|user|tag notebook|so I can organize my journal better|
+|v2.0|user|find notebook by tag|so I can find similar notebooks|
+
+
 
 ### Appendix C: Non-Functional Requirements
 

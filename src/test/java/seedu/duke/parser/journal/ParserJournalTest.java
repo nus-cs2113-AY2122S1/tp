@@ -1,7 +1,7 @@
 package seedu.duke.parser.journal;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.journal.Note;
+import seedu.duke.journal.Notebook;
 import seedu.duke.storage.Storage;
 
 import java.io.IOException;
@@ -44,7 +44,7 @@ class ParserJournalTest {
 
     @Test
     void parserNotebookCommand_duplicateNotebookName_throwDuplicateNoteException() {
-        ArrayList<Note> notes = storage.collectionOfNotes.getNotesArrayList();
+        ArrayList<Notebook> notes = storage.collectionOfNotebooks.getNotesArrayList();
         String noteName = " ";
         try {
             noteName = parser.parseNoteName("journal notebook n/ notInStorageName ", notes);
@@ -52,4 +52,17 @@ class ParserJournalTest {
             assertEquals("notInStorageName", noteName);
         }
     }
+
+    @Test
+    void parserFindCommand_emptyArgument_throwEmptyFindTagException() {
+        ArrayList<Notebook> notes = storage.collectionOfNotebooks.getNotesArrayList();
+        boolean isTagPresent = false;
+        String tagName;
+        try {
+            tagName = ParserJournal.parseTagForFinding("journal find");
+        } catch (Exception e) {
+            assertEquals(false, isTagPresent);
+        }
+    }
+
 }

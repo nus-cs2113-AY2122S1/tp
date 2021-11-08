@@ -4,7 +4,7 @@ package seedu.duke.commands.journal;
 
 import seedu.duke.commands.Command;
 import seedu.duke.exceptions.journal.EmptyFindTagException;
-import seedu.duke.journal.Note;
+import seedu.duke.journal.Notebook;
 import seedu.duke.parser.journal.ParserJournal;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
@@ -47,10 +47,10 @@ public class FindNotebooksByTagCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage) throws IOException, EmptyFindTagException {
         String tagName = ParserJournal.parseTagForFinding(userInput);
-        ArrayList<Note> notes = storage.collectionOfNotes.getNotesArrayList();
+        ArrayList<Notebook> notes = storage.collectionOfNotebooks.getNotesArrayList();
         ui.printLine();
         ui.printMessage("Notebooks with the tag " + tagName.trim() + " are: ");
-        for (Note note: notes) {
+        for (Notebook note: notes) {
             if (note.getTag().equals(tagName.trim())) {
                 ui.printMessage(note.getNoteName());
             }

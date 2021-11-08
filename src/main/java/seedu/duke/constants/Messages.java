@@ -1,5 +1,8 @@
 package seedu.duke.constants;
 
+/**
+ * A class that contains common messages prompted to the user.
+ */
 public class Messages {
 
     public static final String LOGO = " _____ _  _     _\n"
@@ -26,7 +29,7 @@ public class Messages {
     public static final String NON_NULL_INPUT = "Please do not leave fields empty!";
     public static final String RECORD_ATTRIBUTE_DIVIDER = " : ";
     public static final String LIST_PROPER_FEATURE  =  "Please list a proper feature tagged with ";
-    public static final String PRINT_NOT_AN_INT = "Please only enter Integers";
+    public static final String PRINT_NOT_AN_INT = "Invalid number format.";
     public static final String PRINT_ERROR_MESSAGE_GENERAL = "Oops, error encountered.";
     public static final String PRINT_DONE_DELETE_INDEX = "Deleted food record ";
     public static final String CALORIES_NOT_FOUND = "Please enter the calories divider c/";

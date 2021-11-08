@@ -59,25 +59,25 @@ public class DeleteEntryCommand extends Command {
             NotebookNotFoundForEntry, EmptyEntryNameException, EmptyNoteNameException,
             EntryDoesNotExistException, EmptyEntryArgumentsException, InvalidDeleteEntryArgumentException {
         String[] notebookNameAndEntryName = ParserJournal.parseDeleteEntryCommand(userInput, storage);
+        String notebookName = notebookNameAndEntryName[0];
+        String entryName = notebookNameAndEntryName[1];
         ArrayList<Entry> entries = storage.collectionOfEntries.getEntriesArrayList();
         boolean isEntryPresent = false;
         int indexOfEntry = 0;
         for (Entry entry: entries) {
             assert notebookNameAndEntryName != null;
-            if (entry.getEntryNoteName().equals(notebookNameAndEntryName[0])
-                    && (entry.getNameOfJournalEntry().equals(notebookNameAndEntryName[1]))) {
+            if (entry.getEntryNoteName().equals(notebookName) && (entry.getNameOfJournalEntry().equals(entryName))) {
                 isEntryPresent = true;
                 indexOfEntry = entries.indexOf(entry);
                 break;
             }
         }
-        if (isEntryPresent) {
-            entries.remove(indexOfEntry);
-            ui.printDeletedEntryMessage();
-            StorageEntries.writeEntries(storage.collectionOfEntries, storage);
-        } else {
+        if (!isEntryPresent) {
             throw new EntryDoesNotExistException();
         }
+        entries.remove(indexOfEntry);
+        ui.printDeletedEntryMessage();
+        StorageEntries.writeEntries(storage.collectionOfEntries, storage);
     }
 }
 

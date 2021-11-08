@@ -51,7 +51,7 @@ public class AddNoteCommand extends Command {
         String noteName = ParserJournal.parseAddNoteCommand(userInput, storage);
         assert (noteName != null);
         ui.printAddedNoteMessage(noteName);
-        storage.collectionOfNotes.addNote(noteName, "none");
-        StorageNotes.writeCollectionOfNotes(storage.collectionOfNotes);
+        storage.collectionOfNotebooks.addNote(noteName, "none");
+        StorageNotes.writeCollectionOfNotes(storage.collectionOfNotebooks);
     }
 }

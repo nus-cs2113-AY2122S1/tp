@@ -6,6 +6,7 @@ import seedu.duke.exceptions.calendar.IncorrectNumberOfArgumentsException;
 import seedu.duke.exceptions.calendar.InvalidDateException;
 import seedu.duke.exceptions.calendar.CalendarIndexNotFoundException;
 import seedu.duke.exceptions.syntax.ArgumentsNotFoundException;
+import seedu.duke.exceptions.syntax.WrongDividerOrderException;
 import seedu.duke.parser.schedule.ParserSchedule;
 import seedu.duke.storage.Storage;
 import seedu.duke.storage.StorageTasks;
@@ -63,12 +64,15 @@ public class EditTasksCommand extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage) throws IOException, IncorrectNumberOfArgumentsException,
-            CalendarIndexNotFoundException, InvalidDateException, DuplicateTaskException, ArgumentsNotFoundException {
+            CalendarIndexNotFoundException,
+            InvalidDateException,
+            DuplicateTaskException, ArgumentsNotFoundException, WrongDividerOrderException {
         ui.printLine();
         if (this.index > storage.tasksList.getTaskList().size()) {
             throw new CalendarIndexNotFoundException();
         }
         ui.printMessage(MESSAGE_ENTER_TASK_COMMAND + this.index);
+        ui.printLine();
         Scanner in = new Scanner(System.in);
         String followUpInput = in.nextLine();
         ArrayList<String> arguments = ParserSchedule.parseTodoCommand(followUpInput);
@@ -76,6 +80,7 @@ public class EditTasksCommand extends Command {
         String date = arguments.get(INDEX_TODO_DATE);
         AddTodoCommand.checkIfDateValid(date);
         Storage.tasksList.editTask(this.index, description, date);
+        ui.printLine();
         ui.printMessage(MESSAGE_EDITED_TASK);
         ui.printLine();
         StorageTasks.writeTaskList(Storage.tasksList);
