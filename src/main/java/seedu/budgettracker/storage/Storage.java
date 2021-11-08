@@ -11,11 +11,24 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 //@@author yeoweihngwhyelab
+/**
+ * This class is responsible for the initial loading of the data text file from the
+ * data folder to the app or creating the data text file if there isn't any.
+ */
 public class Storage {
     public static String dataStorageDirectory = "./data/";
     public static final String LS = System.lineSeparator();
 
     //@@author yeoweihngwhyelab
+
+    /**
+     * Loads the data text file to the app.
+     *
+     * @param recordList The AllRecordList object which the data from the data text file
+     *                   will be loaded into.
+     * @param recordListDirectory The directory of the data text file.
+     * @return The directory string of the current data text file that have been loaded.
+     */
     public String loadStorage(AllRecordList recordList, String recordListDirectory) {
         try {
             ReadTextFile newReader;
@@ -47,12 +60,17 @@ public class Storage {
     }
 
     //@@author yeoweihngwhyelab
+    /**
+     * Creates the data folder and the data text file if there isn't any.
+     *
+     * @param recordListDirectory The folder directory.
+     */
     public void makeStorageTextFile(String recordListDirectory) {
         LocalDate date = LocalDate.now();
         if (recordListDirectory.equals("")) {
             recordListDirectory = dataStorageDirectory + date.getYear() + ".txt";
         }
-        File dataDirectory = new File("./data");
+        File dataDirectory = new File(dataStorageDirectory);
         File budgetList = new File(recordListDirectory);
         if (!(dataDirectory.exists())) {
             dataDirectory.mkdir();
@@ -71,6 +89,10 @@ public class Storage {
     }
 
     //@@author yeoweihngwhyelab
+    /**
+     * List out all the data text file in the data folder and prints warning to user
+     * if there are junk files.
+     */
     public void directoryListAllFiles() {
         System.out.print(LS);
 
@@ -93,6 +115,20 @@ public class Storage {
     }
 
     //@@author yeoweihngwhyelab
+
+    /**
+     * Check if the data folder has junk files - anything other than "YYYY.txt" file
+     * format. ".csv" file created from the "csv" command is not considered junk file.
+     *
+     * @param dataDirectoryList List of data file names.
+     * @param dataBaseFileName Placeholder for the data file name.
+     * @param dataBaseYearName Placeholder for data file name without the ".txt" - "YYYY"
+     * @param isValidName Placeholder to check for the validity of file name.
+     * @param isFile Placeholder for checking if a directory stated is a file.
+     * @param containsJunk Boolean to check if there is indeed junk files in a directory.
+     * @param isValidFileType Boolean to check if the file is of ".txt"
+     * @return Whether the data folder contains junk files.
+     */
     private boolean isContainsJunk(File[] dataDirectoryList, String dataBaseFileName,
                                    String dataBaseYearName, boolean isValidName,
                                    boolean isFile, boolean containsJunk,

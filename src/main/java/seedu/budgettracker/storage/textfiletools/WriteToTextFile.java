@@ -19,6 +19,13 @@ import static seedu.budgettracker.common.Messages.MESSAGE_FILE_NOT_EXIST;
 //@@author yeoweihngwhyelab
 public class WriteToTextFile {
     //@@author yeoweihngwhyelab
+    /**
+     * Save the monthlyRecordList containing all the data from the app to the data text
+     * file. It deletes the existing text file first before writing to it.
+     *
+     * @param monthlyRecordList RecordList containing all the data from the app.
+     * @param storageDirectory Directory of the data text file.
+     */
     public void reloadArrayToStorage(Hashtable<Integer, RecordList> monthlyRecordList, String storageDirectory) {
         try {
             File inFile = new File(storageDirectory);
@@ -39,11 +46,20 @@ public class WriteToTextFile {
     }
 
     //@@author yeoweihngwhyelab
+    /**
+     * Traverses through the monthlyRecordList 12 times and convert their attribute values
+     * into "add" command format.
+     *
+     * @param monthlyRecordList RecordList containing all the expenditure details.
+     * @param fileWrite The PrintWriter that will be used to write into the text
+     *                  file in the stated directory.
+     */
     private void reloadingRecordList(Hashtable<Integer, RecordList> monthlyRecordList, PrintWriter fileWrite) {
         for (int i = 1; i <= 12; i++) {
             RecordList currentMonthRecordList = monthlyRecordList.get(i);
             fileWrite.println("add -b a/" + currentMonthRecordList.getBudget().getAmount() + " m/" + i);
             fileWrite.flush();
+
             reloadExpenditureRecordList(fileWrite, currentMonthRecordList);
 
             reloadLoanRecordList(fileWrite, currentMonthRecordList);
@@ -51,6 +67,14 @@ public class WriteToTextFile {
     }
 
     //@@author yeoweihngwhyelab
+    /**
+     * Traverse through a particular month's loan attribute values and convert them
+     * into "add" command format.
+     *
+     * @param fileWrite The PrintWriter that will be used to write into the text
+     *                  file in the stated directory.
+     * @param currentMonthRecordList The RecordList containing all the loan details.
+     */
     private void reloadLoanRecordList(PrintWriter fileWrite, RecordList currentMonthRecordList) {
         for (int k = 0; k < currentMonthRecordList.getLoanListSize(); k++) {
             ArrayList<Loan> loanRecords = currentMonthRecordList.getLoanRecords();
@@ -64,6 +88,12 @@ public class WriteToTextFile {
     }
 
     //@@author yeoweihngwhyelab
+
+    /**
+     *
+     * @param fileWrite
+     * @param currentMonthRecordList
+     */
     private void reloadExpenditureRecordList(PrintWriter fileWrite, RecordList currentMonthRecordList) {
         for (int j = 0; j < currentMonthRecordList.getExpenditureListSize(); j++) {
             ArrayList<Expenditure> expenditureRecords = currentMonthRecordList.getExpenditureRecords();
