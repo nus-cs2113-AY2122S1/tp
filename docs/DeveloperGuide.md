@@ -531,7 +531,7 @@ Given below is an example of how the add notebook mechanism behaves at each step
    ii. `AddNoteCommand` calls `storage.collectionOfNotebooks.addNote(noteName, "none")`. Here the parameters are the
    notebook name, and the tag name which is "none" by default. \
    iii. `AddNoteCommand` calls `ui.printAddedNoteMessage` and passes in notebook name as parameter to convey
-   successful addition of notebook.
+   successful addition of notebook. \
    iv. `AddNoteCommand` calls `StorageNotes.writeCollectionOfNotebooks(storage.collectionOfNotebooks)` to write the new 
    data to
    the storage file.
