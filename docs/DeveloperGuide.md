@@ -230,7 +230,7 @@ private static class LocalDateDeserializer implements JsonDeserializer<LocalDate
 | As a ... | I want to ... | So that I can ...|
 |----------|---------------|------------------|
 New user|See help instructions|refer to them when I forget how to use the application
-User|See my nett expenses| I can manage my budget
+User|See my nett expenses|I can manage my budget
 User|Enter my name|I can keep track of whose expenses it is
 User|Enter names of other people|I can track who I went where with
 User|Enter the category of my expenses|I can see how much I spent in certain areas
