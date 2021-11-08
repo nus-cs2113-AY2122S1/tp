@@ -5,7 +5,9 @@
 * [Getting started](#getting-started)
 * [Design](#design)
   * [Architecture](#architecture)
+  * [UI Component](#ui-component)
 * [Implementation](#implementation)
+  * [Delete feature](#delete-feature)
 * [Product scope](#product-scope)
   * [Target user profile](#Target-user-profile)
   * [Value proposition](#value-proposition)
@@ -14,17 +16,55 @@
 * [Glossary](#glossory)
 * [Instructions for manual testing](#Instructions-for-manual-testing)
 
-## Acknowledgements
+## <a id="acknowledgements"></a> Acknowledgements
 * Inspiration for User Guide and Developer Guide: AddressBook (Level 3)
   * https://se-education.org/addressbook-level3/UserGuide.html
   * https://se-education.org/addressbook-level3/DeveloperGuide.html
-
+* The ParserUtil class under our logic component was inspired from AddressBook (Level 3)'s [ParserUtil class](https://github.com/se-edu/addressbook-level3/blob/ba53b8cea3aa025d17094dbd6c541b046a5f5d7a/src/main/java/seedu/address/logic/parser/ParserUtil.java). We followed the same naming style but use our own unique methods.
   
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
   original source as well}
 
-## Design 
+## <a id="getting-started"></a> Getting started
 
+### Setting up IDE and Repository
+
+1) Forking and Cloning
+Fork our repository from this [link](https://github.com/AY2122S1-CS2113T-F11-2/tp).
+Then, clone your fork into your local computer. 
+
+2) Editor
+[Intellij](https://www.jetbrains.com/idea/download/download-thanks.html?platform=windows&code=IIC) 
+is the recommended IDE to view and edit our source code. 
+
+3) Configure JDK
+Ensure that the correct version of JDK is downloaded and installed as our app is only tested on Java 11.
+You may run the following command: `java -version` to check for the current Java version which your 
+computer is running. If you are using Intellij, please check that your project structure's project 
+SDK is set to Java 11 and Project Language Level is set to default SDK.
+
+![Intellij ProjectStructure](images/ProjectStructureSettings.png)
+
+4) Adding Exception to your Anti-Virus
+Add an exception to the directory which you will be cloning the forked project to your anti-virus.
+
+5) Importing Project
+Right click on the Repository folder that you have clone into your machine and select "Open Folder 
+as Intellij IDEA Community Edition Project". When you are asked whether to trust and open gradle 
+project, click trust. 
+
+![Intellij ProjectStructure](images/TrustGradle.png)
+
+6) Verifying BudgetTracker Runs
+Right click on BudgetTracker then click on run to test our our BudgetTracker App. 
+
+![Intellij Run BudgetTracker](images/BudgetTrackerRun.png)
+
+### Additional Consideration
+
+## <a id="design"></a> Design 
+
+### Architecture
 ![Figure_Architecture_Diagram](images/ArchitectureDiagram.png)
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
@@ -53,10 +93,88 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `add -e m/1 a/500`.
 
-![Figure_Architecture__Sequence_Diagram](images/ArchitectureSequenceDiagram.png)
+![Figure_Architecture_Sequence_Diagram](images/ArchitectureSequenceDiagram.png)
 
-## Implementation
-###Delete
+### <a id="ui-component"></a> UI Component
+**API**: [`ui.java`](https://github.com/AY2122S1-CS2113T-F11-2/tp/tree/master/src/main/java/seedu/budgettracker/ui)
+
+![Figure_UiComponent_Component_Diagram](images/UiComponent.png)
+
+The `Ui` component:
+- Reads in user input from the Command Line Interface (CLI).
+- Prints welcome screen, database information and messages prompting the user for input.
+- Other components call methods in Ui class to print corresponding output on the terminal.
+
+### <a id=""></a> Data Component
+Below is a partial class diagram that shows an overview of the `Data` component.
+
+![Figure_DataComponent_Partial_Class_Diagram](images/DataPartialClassDiagram.png)
+
+The `Data` component:
+
+
+![Figure_DataComponent_Partial_Class_Diagram](images/Data.png)
+
+### <a id=""></a> Logic Component (Parser and Commands)
+![Figure_ParserDiagram](images/ParserDiagram.png)
+Figure 3. Structure of the program's logic
+
+1. `BudgetTracker` uses `Parser` to parse user input into a `Command`.
+2. This results in the creation of an `XYZParser` (where 'XYZ' represents 'AddBudget', 'EditLoan', etc.) which in turn creates a `XYZCommand`.
+3. The `XYZCommand` being executed affects the `Data` component.
+4. Additionally, during execution of `XYZCommand`, `Ui` (not shown) will display helpful messages to the user.
+
+Given below is the Sequence Diagram for interactions with the Parser and Command components for the `parseCommand("add -b a/400")` call.
+![Figure_LogicSequenceDiagram](images/LogicSequenceDiagram.png)
+Figure 4. Sequence Diagram of program's logic with a `add -b a/400` call.
+
+### <a id=""></a> Storage Component (Loading and Storing Data)
+
+The Storage component consists of:
+
+The `Storage` component:
+
+1) What it does?
+- During the first launch of the app, it creates a new current year database text file if there isn't any. 
+it will then load the data from the database text file into the app. 
+- Allows user to change the data base to the year he wants. 
+- It also allows the conversion of a database into CSV format so that the user can perform more sophisticated statistical analysis.
+- Upon performing any commands that will perform changes to the database such as `add`, `edit`, `delete`
+Storage will reload the data in the app into the database text file. 
+
+2) Architecture of the Storage component
+
+![Storage Sequence Diagram](images/StorageBasicaArchitecture.png)
+
+The Storage component continuously save every changes to the data in the app and the app loads the 
+data from storage everytime during start up.
+
+![Storage Sequence Diagram](images/Storage.png)
+
+- Initially, when BudgetTracker App is started, it will create new Parser and Storage object. Storage's 
+makeStorageTextFile() method will be called to either create a new database text file of the current year
+for example "2021.txt" if it does not exist or it will load the existing "2021.txt" into the App by calling 
+loadStorage() method of the Storage Class.
+- Then a while loop will be initialized to check for User Input in the command line to check for user's 
+command. Whenever any command that changes the data in the App is called such as `add`, `edit` and `delete` 
+is called, reloadArrayToStorage() method of the WriteToTextFile class must be called to refresh the data text
+file to the new state of the data in the App. 
+- Then the loop will continue. For commands that will not change the data in the app such as `list`, `find`...
+The reloadArrayToStorage() method will not be called. 
+
+3) Class Diagram of the Storage component
+
+![Storage Sequence Diagram](images/Storage-Class_Diagram.png)
+
+- All the multiplicity of the BudgetTracker to Storage, Command and Parser are 1 to 1. 
+- The multiplicity of Storage to ReadTextFile is 1 to 1. 
+- The multiplicity of Command to WriteToTextFile is 1 to 1. 
+- There is BudgetTracker consist of Storage, Command and Parser. Storage consist of ReadTextFile and Command
+consist of WriteToTextFile. 
+
+## <a id="implementation"></a> Implementation
+
+### <a id="delete-feature"></a> Delete feature
 
 The delete feature collaborates with other classes like Parser, RecordList, etc. Basically it contains three usages which are deletion of Budget, Expenditure(s), and Loan(s).
 
@@ -87,16 +205,16 @@ Given below is an example usage scenario and how the delete feature behaves at e
 * By using substring method, description, indexes, and month of the expenditures are extracted in ```deleteParams```, ```prepareDeleteCommand(commandParams)``` calls ```DeleteExpenditureParser.parse(deleteParams)``` to parse the params more specifically.
 * Method ```parse(String args)``` in class ```DeleteExpenditureParser``` returns newly created object ```DeleteMultipleExpenditureCommand(startIndex, endIndex, month)```.
 <br/>
-  ![Figure Delete_Parse](images/parseDeleteInputCommand-Sequence_Diagram.png)
+  ![Figure Delete_Parse](images/DeleteDiagram2.png)
 
 **Step 5**. The newly created object ```DeleteExpenditureCommand``` will execute the deletion:
 * ```execute(boolean isLoadinStorage)``` runs a for loop to delete the related expenditures in the expenditure ArrayList.
 * ```for(int i = startIndex; i <= endIndex; i++)``` iterates the 3 expenditures, everytime it just calls ```allRecordList.deleteExpenditure(startIndex, month)``` to delete each expenditure.
 <br/>
-  ![Figure Delete_Execute](images/DeleteMultipleExpenditureCommand-Sequence_Diagram.png)
+  ![Figure Delete_Execute](images/DeleteDiagram1.png)
 
 
-###Edit feature
+### <a id=""></a> Edit feature
 
 The edit mechanism is facilitated by AllRecordList which extends from RecordList. It implements the following operations:
 * ```AllRecordList#editBudget()``` — Edits a budget to the record list.
@@ -118,7 +236,7 @@ Given below is an example usage scenario and how the ```edit``` mechanism behave
 <br/> **Step 3**. The user now realises that there was a mistake in the record added, and decides to edit the record by executing the ```edit``` command. The edit command will call ```AllRecordList#edit…``` based on the record type.
 
 
-### Listing
+### <a id=""></a> Listing
 
 The list feature works with Parser, Recordlist and TextUi, and allows users to see the listing of the budget and expenditures in either a specific month or every month.
 
@@ -137,24 +255,101 @@ Given below is an example usage scenario and how the list feature behaves at eac
 <br/> **Step 5**. The Parser starts to parse the command, it extracts month 5. As this is a specific month to be listed, the Parser class calls ListRecordsCommand to work. By finding May, the expenditures list and budget of May are successfully found and prints out a showRecordsListView from TextUi class.
 
 
-### Storage 
+### <a id=""></a> Storage 
 
-The storage stores the exact add command of budget and expenditures into the text file containing 
-in the current ArrayList. The reason it is implemented in this manner is that we could reuse
+1) How are the data stored?
+
+The storage stores the exact `add` command of budget, expenditures and loan into the text 
+file containing in the current AllRecordList. Everytime a deleted, edit or add command is called, 
+the txt file is automatically wiped and re-written from the ArrayList to ensure that data is saved 
+at every step. 
+
+![dataSample](images/dataSample.png)
+
+2) Why are the data stored in such a manner?
+
+The reason it is implemented in this manner is so that we could reuse
 code that have been written for adding of budget and expenditures directly when loading from storage.
 
-Everytime a deleted, edit or add command is called, the txt file is automatically wiped and re-written 
-from the ArrayList to ensure that data is saved at every step. 
+This implementation makes Storage very versitile even when there are substantiate changes in 
+the architecture of our app. Some examples are the changes to Parser, Logic and Commands. 
+Even with these stated changes, the Storage needs very little tweaks to the Storage for it 
+to work with the new implementation. The reasonis that Storage uses the code used in Parser to 
+load the data into the app. For the saving of data, only the reloading method needs to be 
+editted to adhere to the new changes such that the adding command stored is ofthe correct format.
 
-The yearly Records is stored in the form of <year>.txt. Each year contains all the monthly budget as
-well as all the expenditure tied to that month.
+The way the database is organized is that each yearly Records is stored in the form of 
+<year>.txt. Each year contains all the monthly budget as well as all the expenditure and 
+loan tied to that month. 
 
-## List of Commands
+3) How does some of the key method work?
+
+`readTextFileToString()`
+
+![readTextFileToString Sequence Diagram](images/readTextFileToString.png)
+
+This method reads the list of command in the data text file converts them into 
+a ArrayList of String. readTextFileToString() method will first create a new ArrayList 
+which will later be used to store all the commands in the data text file into 1 Strings 
+per command. A BufferReader object is then created to read the data text file in the 
+specified directory. The BufferReader object will read the content of the data text file 
+line by line or command by command (since each command is separated by a "\n" character).
+
+The BufferReader continues reading until the end of the data text-file and then return the 
+filled ArrayList of String. 
+
+This ArrayList of String will later be passed into the Parser which will load all the 
+command and thus load data into the App.
+
+`reloadArrayToStorage() & convertToCsvFile()`
+
+![reloadArrayToStorage Sequence Diagram](images/reloadArrayToStorage.png)
+
+![convertToCsvFile Sequence Diagram](images/convertToCsvFile.png)
+
+When reloadArrayToStorage() method is called, it creates a new File object into the specified directory
+(file directory to reload data files). The isFile() of the File Class is called to check if the data file
+exist. If it doesn't, a error message will be shown to the user and the method terminates. Otherwiese, it 
+continues to create a new FileWrite object which will clear the existing data text file first. The FileWrite 
+object will then be passed into the new PrintWriter object that will be created. 
+
+Then a for loop is used to loop through the 12 months of the RecordList to obtain the amount for each
+month and convert it into a command such as "add -b a/1000.00 m/10". Each of these command will be "flush" into 
+the text file with 1 line per command. 
+
+2 inner for loop is also used to loop through all the expenditure and loan of a particular month respectively and 
+convert them into their respective add commands. For example, "add -e n/Chicken Rice a/100.0 d/2021-10-10 c/FOOD" and 
+"add -l n/Benjamin a/1000.00 d/2021-10-27".
+
+Both reloadArrayToStorage() and convertToCsvFile() method are similar in the way they read 
+data from the App and save it into the data files. The only difference is on the type of file they
+save into. reloadArrayToStorage() save into ".txt" type files while convertToCsvFile() save into 
+".csv" type files. 
+
+4) Why does `edit` and `delete` command work with reloadArrayToStorage() method? 
+
+`edit` command can change the attribute of budget, expenditure and loan such as description, amount... 
+Reloading the data text files after the `edit` will just update the `add` command attribute's value to their
+attribute's value after the edit. That is the reason why it reloadArrayToStorage() can still work. 
+
+`delete` command on the other hand just removes a particular budget, expenditure or loan entry. Thus
+reloading the data text files after the `delete` command will just remove a particular `add` line 
+of command from the data text file. 
+
+5) How switching database work?
+
+When the `year <SELECTED DATABASE YEAR>` command is called eg. `year 2020`, the Parser will 
+call the YearCommand and it will run the method "execute()". "execute()" first clears the 
+allRecordList by calling clearAll() from the AllRecordList class. And setYear(2020) method 
+is called from AllRecordList Class to set the year to 2020. Then the loadStorage method of Storage 
+Class will be called to load the datafile "2020.txt" into the app.  
+
+## <a id=""></a> List of Commands
 
 
-## Appendix A: Product scope
+## <a id=""></a> Appendix A: Product scope
 
-### Target user profile
+### <a id=""></a> Target user profile
 
 - has a need to manage a significant number of expenditures
 - prefer desktop apps over other types
@@ -162,12 +357,12 @@ well as all the expenditure tied to that month.
 - prefers typing to mouse interactions
 - is reasonably comfortable using CLI apps
 
-### Value proposition
+### <a id=""></a> Value proposition
 
 This application allows users to record and track expenses more conveniently,
 and thereby encourages them to have greater control over their finances.
 
-## Appendix B: User Stories
+## <a id=""></a> Appendix B: User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
@@ -186,16 +381,16 @@ and thereby encourages them to have greater control over their finances.
 |v2.0|user|categorize my spendings|see what I spend most money on|
 |v2.0|user|analyze my spendings with a chart|get my spendings components in a more direct and easier way|
 
-## Appendix C: Non-Functional Requirements
+## <a id=""></a> Appendix C: Non-Functional Requirements
 
 **1**. Should work on any mainstream OS as long as it has Java 11 or above installed.
 <br/> **2**. A user should be able to comfortably use and understand the application if they are able to read from the output of the help command.
 {Give non-functional requirements}
 
-## Appendix D: Glossary
+## <a id=""></a> Appendix D: Glossary
 
 * *Mainstream OS*: Windows, Linux, Unix, OS-X
 
-## Appendix E: Instructions for manual testing
+## <a id=""></a> Appendix E: Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}

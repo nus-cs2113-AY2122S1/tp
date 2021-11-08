@@ -1,5 +1,6 @@
 package seedu.budgettracker.logic.parser;
 
+//@@author jyxhazcake
 public interface ParserPrefix {
     boolean IS_COMPULSORY = true;
     boolean IS_NOT_COMPULSORY = false;

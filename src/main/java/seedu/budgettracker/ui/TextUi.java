@@ -47,13 +47,6 @@ public class TextUi {
         in = new Scanner(System.in);
     }
 
-    //    public static void showRecordsListView(RecordList budgetList) {
-    //        int budgetListLength = RecordList.numberOfRecords;
-    //        for (int i = 0; i < budgetListLength; i += 1) {
-    //            System.out.println(budgetList.getRecord(i));
-    //        }
-    //    }
-
     public static void showWelcomeMessage() {
         DateTimeFormatter dateTime = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
         LocalDateTime now = LocalDateTime.now();
@@ -94,12 +87,6 @@ public class TextUi {
     public static void showExpenditureAddedMessage(Expenditure addedExpenditure, AllRecordList recordList) {
         assert addedExpenditure.getAmount() > 0 : "Expenditure added should be a positive value";
 
-        System.out.println("Expenditure successfully added!"
-                + LS
-                + "Description: " + addedExpenditure.getDescription()
-                + "\nAmount: $" + addedExpenditure.getAmount()
-                + "\nDate: " + addedExpenditure.getDate()
-                + "\nCategory: " + addedExpenditure.getCategory());
         System.out.println("Expenditure successfully added!");
         showExpenditureDetails(addedExpenditure, recordList);
 
@@ -128,6 +115,10 @@ public class TextUi {
         double amount = recordList.getBudget(month).getAmount();
         double totalMonthExpenditureSpending = recordList.getTotalAmountSpent(month);
 
+        spendingNotice(monthString, amount, totalMonthExpenditureSpending);
+    }
+
+    private static void spendingNotice(String monthString, double amount, double totalMonthExpenditureSpending) {
         System.out.println("Total Amount Spent in "
                 + monthString
                 + ": $" + df.format(totalMonthExpenditureSpending));
@@ -149,7 +140,6 @@ public class TextUi {
             System.out.printf("%.2f", percentageLeft);
             System.out.println("%");
         }
-        printDivider();
 
     }
 
@@ -172,9 +162,9 @@ public class TextUi {
     }
 
     public static void showBudgetEditedMessage(Budget newBudget) {
-        assert newBudget.getAmount() > 0 : "Edited Expenditure should have a positive amount";
+        assert newBudget.getAmount() > 0 : "Edited Budget should have a positive amount";
 
-        System.out.println("Loan has been successfully edited!");
+        System.out.println("Budget has been successfully edited!");
         System.out.println("New values: ");
         showBudgetDetails(newBudget);
 
@@ -207,7 +197,7 @@ public class TextUi {
     }
 
     public static void showLoanEditedMessage(Loan newLoan) {
-        assert newLoan.getAmount() > 0 : "Edited Expenditure should have a positive amount";
+        assert newLoan.getAmount() > 0 : "Edited Loan should have a positive amount";
 
         System.out.println("Loan has been successfully edited!");
         System.out.println("New values: ");
@@ -284,7 +274,7 @@ public class TextUi {
         ArrayList<Expenditure> currentMonthRecordList = records.getExpenditureRecords(i);
 
         for (Expenditure expenditure : currentMonthRecordList) {
-            if (expenditure.returnCategory() == category || category == Category.ALL) {
+            if (expenditure.getCategory() == category || category == Category.ALL) {
                 totalSpending += expenditure.getAmount();
             }
         }
@@ -357,7 +347,7 @@ public class TextUi {
     private static void printEnumeratedExpenditureList(ArrayList<Expenditure> monthExpenditureList, Category category) {
         for (int i = 0; i < monthExpenditureList.size(); i++) {
             Expenditure currentExpenditure = monthExpenditureList.get(i);
-            if (currentExpenditure.returnCategory() == category || category == Category.ALL) {
+            if (currentExpenditure.getCategory() == category || category == Category.ALL) {
                 System.out.println(currentExpenditure.toString(i));
             }
         }
@@ -395,11 +385,13 @@ public class TextUi {
     public static void showMultipleExpenditureDeletedMessage(int index, Expenditure delExe, AllRecordList recordList) {
         System.out.println("Successfully deleted Expenditure " + index + ":");
         showExpenditureDetails(delExe, recordList);
+        System.out.println(DIVIDER);
     }
 
     public static void showMultipleLoanDeletedMessage(int index, Loan deletedLoan) {
         System.out.println("Successfully deleted Loan " + index + ":");
         showLoanDetails(deletedLoan);
+        System.out.println(DIVIDER);
     }
 
     public static void showBudgetDeletedMessage() {
@@ -455,9 +447,9 @@ public class TextUi {
             }
 
             if (barPercentage < i * 5) {
-                System.out.print("             .....");
+                System.out.print("            .....");
             } else {
-                System.out.print("             #####");
+                System.out.print("            #####");
             }
 
             System.out.print(LS);
@@ -479,7 +471,7 @@ public class TextUi {
     public static void displayStats(double[] categoryPercentage, String topCategory, double topCategorySpending) {
         drawHorizontalGraph(categoryPercentage);
         System.out.println("The category you spent the most on is: " + topCategory);
-        System.out.println("The amount you spent on this category is: $" + topCategorySpending);
+        System.out.println("The amount you spent on this category is: $" + df.format(topCategorySpending));
         printDivider();
     }
 

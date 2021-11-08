@@ -1,0 +1,65 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+-> readTextFile: readTextFileToString()
+
+activate readTextFile
+
+create ArrayList
+readTextFile -> ArrayList: new ArrayList()
+
+activate ArrayList
+readTextFile <-- ArrayList: listOfRawCommand: ArrayList<String>
+
+deactivate ArrayList
+
+create File
+
+readTextFile -> File: new File()
+
+activate File
+
+File -> File: isFile()
+
+activate File
+
+deactivate File
+
+
+deactivate File
+
+readTextFile <-- File
+
+create BufferReader
+
+readTextFile -> BufferReader: new BufferReader()
+activate BufferReader
+
+
+BufferReader -> BufferReader: readLine()
+
+activate BufferReader
+
+loop while There are still lines in buffer not read yet
+"BufferReader" -> ":readline()"
+
+BufferReader <-- ":readline()" : line
+
+alt if not null
+    BufferReader <-- ":add()" : line
+end
+
+readTextFile <-- BufferReader: listOfRawCommand: ArrayList<String>
+
+end
+
+deactivate BufferReader
+
+deactivate BufferReader
+
+return listOfRawCommand: ArrayList<String>
+
+deactivate readTextFile
+
+@enduml

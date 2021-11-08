@@ -69,7 +69,7 @@ NOTE: **These parameters cannot be left empty.**
 
 # <a id="commands"></a> Commands
 
-# <a id="add"></a> &nbsp;&nbsp; `add`
+# <a id="add"></a> &nbsp; &nbsp;Add: `add`
 
 The command word `add` adds a record of either Budget, Expenditure, or Loan to the record list. 
 The type of record is determined by the identifier tag after the `add` command word.
@@ -77,13 +77,15 @@ The type of record is determined by the identifier tag after the `add` command w
 ______________
 <br />
 
-### <a id="add-budget"></a> `-b` : Add a Budget
+### <a id="add-budget"></a> `-b` : Adds a Budget
 
-Adds a new budget to a specific month.
+Sets a new budget for a specific month.
 
 Format: `add -b a/AMOUNT m/<MONTH>`
 
 * The `AMOUNT` can be entered with 2 decimal places or without decimal places.
+  * Note: `Amount` will be rounded up to 2dp (for budget, expenditure, and loan).
+  * E.g. $1.006 will be rounded up to $1.01.
 * The `MONTH` must strictly be within the range of 1 to 12.
 
 Example of usage:
@@ -94,25 +96,27 @@ Expected outcome: Budget of $500.00 is added to the month of December of that pa
 
 ```
 ========================================================
-Your budget of 500.0 for December is successfully added!
+Your budget of $500.00 for December is successfully set!
 ========================================================
 ```
 <br />
 
 ________________________
 
-### <a id="add-expenditure"></a> `-e` : Add an expenditure
+### <a id="add-expenditure"></a> `-e` : Adds an expenditure
 
-Adds a new expenditure to a month.
+Records the details of a new expenditure including the _description_, the _amount spent_, the _date on which expenditure was made_ and the _category which the expenditure falls under_ .
 
 Format: `add -e n/DESCRIPTION a/AMOUNT d/<DATE_OF_EXPENDITURE> c/<CATEGORY>`
 
 * The `DESCRIPTION` can be in a natural language format.
-  * NOTE: **Description has a 30characters limit**
-* The `AMOUNT` entered can be up to 2 decimal places and cannot be empty.
+  * NOTE: **If Description column exceeds 30characters limit, it will be truncated during list view**
+* The `AMOUNT` entered can be specified up to 2 decimal places.
 * The `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_. 
   * If left empty, the current date according to the
   system will be entered by default.
+  * Note: **YYYY value should correspond to the current storage file year, please use `year` 
+  command to switch to the correct year before entering an expenditure of another year**
 * The `<CATEGORY>` must be one of the following values:
   * _GENERAL, CLOTHES, FOOD, ENTERTAINMENT, GIFTS, HEALTH_
   * If left empty, the default value will be _GENERAL_
@@ -121,7 +125,7 @@ Example of usage:
 
 `add -e n/CS2113T Textbooks a/60 d/2021-08-20 c/GENERAL`
 
-Expected outcome: Expenditure of $60.00 2021-08-20 on has been successfully added.
+Expected outcome: The buying of CS2113T textbooks, costing $60.00, on the 20th of August 2021 has been successfully added.
 
 ```
 ========================================================
@@ -138,15 +142,16 @@ Category: GENERAL
 _________________________________________________________
 
 
-### <a id="add-loan"></a> `-l` : Add a Loan
+### <a id="add-loan"></a> `-l` : Adds a Loan
 
-Adds a new loan to a month.
+Records down a loan record specifying when and who the money was lent out to.
 
 Format: `add -e n/<BORROWER_NAME> a/AMOUNT d/<DATE_OF_EXPENDITURE>`
 
-* `AMOUNT` entered can be up to 2 decimal places and cannot be empty.
-* `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_. If left empty, the current date according to the
-  system will be entered by default.
+* `AMOUNT` entered can be up to 2 decimal places.
+* `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_. 
+  * If left empty, the current date according to the
+    system will be entered by default.
 
 Example of usage:
 
@@ -177,7 +182,7 @@ Edits a budget or expenditure entry.
 _________________________________________________________
 
 
-### Edit Budget: `edit`  
+### `-b` : Edit a Budget
 
 Edit the amount of budget allowance for a particular month.
 
@@ -203,7 +208,7 @@ to $10000.
 _________________________________________________________
 
 
-### Edit Expenditure: `edit` 
+### `-e` : Edit an Expenditure 
 
 Edit the amount of budget allowance for a particular month.
 
@@ -232,7 +237,7 @@ have been changed to $1000 with description of Chicken Rice.
 _________________________________________________________
 
 
-### Edit Loan: `edit` 
+### `-e` : Edit a Loan
 Edits the loan for a particular month.
 
 Format: `edit -l m/MONTH i/INDEX <a/AMOUNT> <d/DATE_OF_LOAN> <n/BORROWER_NAME>`
@@ -457,9 +462,29 @@ Examples of usage:
 Expected outcome:
 ```
 ========================================================
-Successfully deleted Expenditure 3.chicken rice3          | $5.0               | 2021-10-21       
-Successfully deleted Expenditure 4.chicken rice4          | $5.0               | 2021-10-21       
-Successfully deleted Expenditure 5.chicken rice5          | $5.0               | 2021-10-21     
+Successfully deleted Expenditure 3:
+Description: breakfast
+Amount: $100.00
+Date: 2021-10-10
+Category: GENERAL
+Total Amount Spent in October: $300.00
+Percentage of Budget Left: 97.00%
+========================================================
+Successfully deleted Expenditure 4:
+Description: lunch
+Amount: $100.00
+Date: 2021-10-10
+Category: GENERAL
+Total Amount Spent in October: $200.00
+Percentage of Budget Left: 98.00%
+========================================================
+Successfully deleted Expenditure 5:
+Description: dinner
+Amount: $100.00
+Date: 2021-10-10
+Category: GENERAL
+Total Amount Spent in October: $100.00
+Percentage of Budget Left: 99.00%
 ========================================================
 ```
 <br />
@@ -482,14 +507,20 @@ Format:`delete -l m/MONTH`
 
 Examples of usage:
 
- `delete -l m/10 i/3-5`
+ `delete -l m/10 i/1-2`
 
 Expected outcome:
 ```
 ========================================================
-Successfully deleted Loan 3.Wei Xuan               | $1000.0            | 2021-10-24       
-Successfully deleted Loan 4.Luoyuang               | $1000.0            | 2021-10-24       
-Successfully deleted Loan 5.Yixuan                 | $1000.0            | 2021-10-24      
+Successfully deleted Loan 1:
+Debtor: xinghan
+Amount: $100.00
+Date: 2021-10-10
+========================================================
+Successfully deleted Loan 2:
+Debtor: kobe
+Amount: $200.00
+Date: 2021-10-03
 ========================================================
 ```
 <br />
@@ -507,7 +538,7 @@ _________________________________________________________
 <br />
 
 
-### `-e` : View Statistics for the Month by categories
+### `-c` : View Statistics for the Month by categories
 
 
 Display the statistics for a particular month's budget and expenditure by categories. 
@@ -535,7 +566,7 @@ HEALTH                                                                     0%
 TECH          ######                                                       11.9%
 ALL                                                                        0%
 The category you spent the most on is: FOOD
-The amount you spent on this category is: $5136.5
+The amount you spent on this category is: $5136.50
 ========================================================
 ```
 <br />
@@ -544,17 +575,17 @@ _________________________________________________________
 
 
 
-### `-l` : View Statistics for the Year
+### `-y` : View Statistics for the Year
 
 Display the statistics for a particular the current database year which the user is working on. 
 
-Format: `stat -l t/TYPE_OF_GRAPHICAL_VIEW`
+Format: `stat -y t/TYPE_OF_GRAPHICAL_VIEW`
 
 * The `TYPE_OF_GRAPHICAL_VIEW` is ... 
 
 Example of usage:
 
-`stat -l t/1`
+`stat -y t/1`
 
 Expected outcome: A histogram of the percentage of money spend for each month of the year will be shown
 with vertical axis showing percentage ranging from 0 to 100%.
@@ -576,7 +607,73 @@ Percentage of Money Spent in 2021
 ========================================================
 ```
 
-`stat -l t/2`
+`stat -y t/2`
+
+Expected outcome: An overall percentage bar graph showing the amount of money spent in that particular year and if the 
+overall expenditure exceeds the budget available, an explosion will be shown on the graph.
+
+```
+========================================================
+Percentage of Money Spent throughout the year
+
+Percentage: 56.00%
+100%                  .....
+95%                   .....
+90%                   .....
+85%                   .....
+80%                   .....
+75%                   .....
+70%                   .....
+65%                   .....
+60%                   .....
+55%                   #####
+50%                   #####
+45%                   #####
+40%                   #####
+35%                   #####
+30%                   #####
+25%                   #####
+20%                   #####
+15%                   #####
+10%                   #####
+5%                    #####
+========================================================
+```
+
+```
+Percentage: 143.03%
+              _.-^^---....,,---_
+           _--                  --_
+          <          Overspent!       >)
+           \._                   _./
+              ```--. . , ; .--'''
+                    | |   |
+                 .-=||  | |=-.
+                 `-=#$%&%$#=-'
+                    | ;  :|
+           _____.,-#%&$@%#&#~,._____
+100%                  #####
+95%                   #####
+90%                   #####
+85%                   #####
+80%                   #####
+75%                   #####
+70%                   #####
+65%                   #####
+60%                   #####
+55%                   #####
+50%                   #####
+45%                   #####
+40%                   #####
+35%                   #####
+30%                   #####
+25%                   #####
+20%                   #####
+15%                   #####
+10%                   #####
+5%                    #####
+========================================================
+```
 
 <br />
 
@@ -672,28 +769,28 @@ Bye, see you again soon!
 **A**: Copy the data folder from the source computer to the destination computer on the same directory as the tp.jar file.
 
 ## Command Summary
- no. | `Command` | `Description` 
- --- | -------- | -------------- 
- 1. | `add -b a/<AMOUNT> m/<MONTH>` | `add budget of $AMOUNT to MONTH of the year` 
- 2. | `add -e c/<DESCRIPTION> a/<AMOUNT> d/<DATE_OF_EXPENDITURE> [c/<CATEGORY>]` | `add expenditure with DESCRIPTION of CATEGORY which cost $<AMOUNT> on <DATE>` 
- 3. | `add -l n/<NAME_OF_LOAN_BORROWER> a/<AMOUNT> d/<DUE_DATE_OF_LOAN>` | `add a loan of $AMOUNT borrowed by NAME_OF_LOAN_BORROWER due on <DUE_DATE_OF_LOAN>` 
- 4. | `edit -b m/<MONTH> a/<AMOUNT>` | `edit the MONTH budget to AMOUNT` 
- 5. | `edit -e m/<MONTH> i/<INDEX> a/<AMOUNT> d/<DATE_OF_EXPENDITURE> n/<DESCRIPTION>` | `edit exependiture of MONTH and INDEX to AMOUNT, DATE_OF_EXPENDITURE and DESCRIPTION` |
- 6. | `edit -l m/<MONTH> i/<INDEX> a/<AMOUNT> d/<DUE_DATE_OF_LOAN> n/<BORROWER_NAME>` | `edit the loan of MONTH and INDEX to AMOUNT, DUE_DATE_OF_LOAN and BORROWER_NAME ` 
- 7. | `year <year>` | `switch database to YEAR` 
- 8. | `find <keyword>` | `find a particular KEYWORD in the database` 
- 9. | `list m/all [c/<CATEGORY]` | `list all budget, expenditure and loan entries of the year of CATEGORY` 
- 10. | `list m/MONTH [c/<CATEGORY]` | `list MONTH budget, expenditure and loan entries of CATEGORY` 
- 11. | `delete -b m/<MONTH>` | `delete the budget entry of MONTH` 
- 12. | `delete -e m/MONTH` | `delete all expenditure entries of MONTH` 
- 13. | `delete -e  m/MONTH i/INDEX` | `delete a particular expenditure of INDEX from MONTH` 
- 14. | `delete -e m/MONTH/ i/INDEX_FROM-INDEX_TO` | `delete all the expenditure of MONTH of INDEX_FROM-INDEX_TO` 
- 15. | `delete -l m/MONTH` | `delete all loan entries of MONTH` 
- 16. | `delete -l m/MONTH i/INDEX` | `delete a particular loan of INDEX from MONTH` 
- 17. | `delete -l m/MONTH i/INDEX_FROM-INDEX_TO` | `delete all the loan of MONTH of INDEX_FROM-INDEX_TO` ` 
- 18. | `stat -e m/MONTH` | `show a particualr MONTH statistics breakdown` 
- 19. | `stat -l t/<TYPE>` | `show overall statistics of TYPE for the entire year` 
- 20. | `help` | `shows a list of command guides` 
- 21. | `bye` | `terminates the app` 
+ |no. | Command | Description |
+ |--- | --------- | --------------------------------------- |
+ |1.  | `add -b a/<AMOUNT> m/<MONTH>` | `add budget of $AMOUNT to MONTH of the year` |
+ |2.  | `add -e c/<DESCRIPTION> a/<AMOUNT> d/<DATE_OF_EXPENDITURE> [c/<CATEGORY>]` | `add expenditure with DESCRIPTION of CATEGORY which cost $<AMOUNT> on <DATE>` |
+ |3.  | `add -l n/<NAME_OF_LOAN_BORROWER> a/<AMOUNT> d/<DUE_DATE_OF_LOAN>` | `add a loan of $AMOUNT borrowed by NAME_OF_LOAN_BORROWER due on <DUE_DATE_OF_LOAN>` |
+ |4.  | `edit -b m/<MONTH> a/<AMOUNT>` | `edit the MONTH budget to AMOUNT` |
+ |5.  | `edit -e m/<MONTH> i/<INDEX> a/<AMOUNT> d/<DATE_OF_EXPENDITURE> n/<DESCRIPTION>` | `edit exependiture of MONTH and INDEX to AMOUNT, DATE_OF_EXPENDITURE and DESCRIPTION` |
+ |6.  | `edit -l m/<MONTH> i/<INDEX> a/<AMOUNT> d/<DUE_DATE_OF_LOAN> n/<BORROWER_NAME>` | `edit the loan of MONTH and INDEX to AMOUNT, DUE_DATE_OF_LOAN and BORROWER_NAME ` |
+ |7.  | `year <year>` | `switch database to YEAR` |
+ |8.  | `find <keyword>` | `find a particular KEYWORD in the database` |
+ |9.  | `list m/all [c/<CATEGORY]` | `list all budget, expenditure and loan entries of the year of CATEGORY` |
+ |10. | `list m/MONTH [c/<CATEGORY]` | `list MONTH budget, expenditure and loan entries of CATEGORY` |
+ |11. | `delete -b m/<MONTH>` | `delete the budget entry of MONTH` |
+ |12. | `delete -e m/MONTH` | `delete all expenditure entries of MONTH` |
+ |13. | `delete -e  m/MONTH i/INDEX` | `delete a particular expenditure of INDEX from MONTH` |
+ |14. | `delete -e m/MONTH/ i/INDEX_FROM-INDEX_TO` | `delete all the expenditure of MONTH of INDEX_FROM-INDEX_TO` |
+ |15. | `delete -l m/MONTH` | `delete all loan entries of MONTH` |
+ |16. | `delete -l m/MONTH i/INDEX` | `delete a particular loan of INDEX from MONTH` |
+ |17. | `delete -l m/MONTH i/INDEX_FROM-INDEX_TO` | `delete all the loan of MONTH of INDEX_FROM-INDEX_TO` |
+ |18. | `stat -e m/MONTH` | `show a particualr MONTH statistics breakdown` |
+ |19. | `stat -l t/<TYPE>` | `show overall statistics of TYPE for the entire year` | 
+ |20. | `help` | `shows a list of command guides` |
+ |21. | `bye` | `terminates the app` |
 
 

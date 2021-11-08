@@ -1,9 +1,11 @@
 package seedu.budgettracker.logic.commands;
 
+import seedu.budgettracker.data.records.exceptions.DuplicateBudgetException;
 import seedu.budgettracker.logic.commands.exceptions.CommandException;
 import seedu.budgettracker.ui.TextUi;
 
-import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_BUDGET_AMOUNT;
+import static seedu.budgettracker.common.Messages.MESSAGE_AMOUNT_EXCEEDED;
+import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_AMOUNT;
 
 public class AddBudgetCommand extends AddCommand {
 
@@ -24,14 +26,25 @@ public class AddBudgetCommand extends AddCommand {
     }
 
     public void execute() throws CommandException {
-        if (amount < 0) {
-            throw new CommandException(MESSAGE_INVALID_BUDGET_AMOUNT);
+        if (amount <= 0) {
+            throw new CommandException(MESSAGE_INVALID_AMOUNT);
         }
-        allRecordList.addBudget(amount, month, IS_NOT_LOADING_STORAGE);
+        if (amount > 1000000000) {
+            throw new CommandException(MESSAGE_AMOUNT_EXCEEDED);
+        }
+        try {
+            allRecordList.addBudget(amount, month, IS_NOT_LOADING_STORAGE);
+        } catch (DuplicateBudgetException e) {
+            System.out.println(e.getMessage());
+        }
         TextUi.showBudgetAddedMessage(amount, month);
     }
 
     public void execute(boolean isLoadingStorage) {
-        allRecordList.addBudget(amount, month, isLoadingStorage);
+        try {
+            allRecordList.addBudget(amount, month, isLoadingStorage);
+        } catch (DuplicateBudgetException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

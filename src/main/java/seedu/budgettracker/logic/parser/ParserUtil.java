@@ -8,6 +8,7 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+//@@author jyxhazcake
 public class ParserUtil {
 
     public static int parseMonth(String monthString) throws NumberFormatException {
@@ -50,8 +51,7 @@ public class ParserUtil {
             throw new ParserException("Please ensure your indexes are valid integers!");
         }
 
-        int[] indexArray = {startIndex, endIndex};
-        return indexArray;
+        return new int[]{startIndex, endIndex};
     }
 
     public static String parseDescription(String descString, boolean isCompulsory) throws ParserException {
@@ -97,7 +97,7 @@ public class ParserUtil {
             return Category.GENERAL;
         }
         try {
-            return Category.valueOf(categoryString);
+            return Category.valueOf(categoryString.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new ParserException("Specified category name does not exist!");
         }

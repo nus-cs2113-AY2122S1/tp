@@ -1,17 +1,112 @@
 @startuml
 'https://plantuml.com/sequence-diagram
+hide footbox
 
-[-> Storage: loadStorage(AllRecordList recordList, String recordListDirectory)
+-> WriteToTextFile: reloadArrayToStorage(Hashtable<Integer, RecordList> monthlyRecordList, String storageDirectory)
 
-Storage -> LocalDate: now()
-activate LocalDate
+activate WriteToTextFile
 
-Storage <--
-deactivate LocalDate
+create File
+WriteToTextFile -> File: new File(storageDirectory)
+activate File
 
-alt recordListDirectory.equals("")
-    recordListDirectory <- String: Load Directory '
+File --> WriteToTextFile: File
+deactivate File
+alt is not a valid file directory
+    <-- WriteToTextFile
 end
 
-[<--Storage
+
+
+create PrintWriter
+WriteToTextFile -> PrintWriter: new PrintWriter()
+activate PrintWriter
+
+create FileWriter
+PrintWriter -> FileWriter: new FileWriter(storageDirectory)
+activate FileWriter
+
+FileWriter --> PrintWriter: FileWriter
+deactivate FileWriter
+
+PrintWriter --> WriteToTextFile: PrintWriter
+deactivate PrintWriter
+
+loop until all the 12 months of budget have been stored into storage
+
+WriteToTextFile -> RecordList: monthlyRecordList
+activate RecordList
+RecordList -> RecordList:get()
+activate RecordList
+RecordList --> RecordList
+deactivate RecordList
+RecordList --> WriteToTextFile: rawAddBudgetCommand
+deactivate RecordList
+
+
+WriteToTextFile -> PrintWriter: println(rawAddBudgetCommand)
+activate PrintWriter
+PrintWriter --> WriteToTextFile
+deactivate PrintWriter
+
+WriteToTextFile -> PrintWriter: flush()
+activate PrintWriter
+PrintWriter --> WriteToTextFile
+deactivate PrintWriter
+
+loop until each month's expenditure have been stored into storage
+WriteToTextFile -> RecordList: getExpenditureRecord()
+activate RecordList
+RecordList -> RecordList:get()
+activate RecordList
+RecordList --> RecordList
+deactivate RecordList
+RecordList --> WriteToTextFile:
+deactivate RecordList
+
+WriteToTextFile -> PrintWriter: println(rawAddExpenditureCommand)
+activate PrintWriter
+PrintWriter --> WriteToTextFile
+deactivate PrintWriter
+
+WriteToTextFile -> PrintWriter: flush()
+activate PrintWriter
+PrintWriter --> WriteToTextFile
+deactivate PrintWriter
+
+end
+
+loop until each month's loan have been stored into storage
+WriteToTextFile -> RecordList: getLoanRecord()
+activate RecordList
+RecordList -> RecordList:get()
+activate RecordList
+RecordList --> RecordList
+deactivate RecordList
+RecordList --> WriteToTextFile
+deactivate RecordList
+
+WriteToTextFile -> PrintWriter: println(rawAddLoanCommand)
+activate PrintWriter
+PrintWriter --> WriteToTextFile
+deactivate PrintWriter
+
+WriteToTextFile -> PrintWriter: flush()
+activate PrintWriter
+PrintWriter --> WriteToTextFile
+deactivate PrintWriter
+
+end
+
+end
+
+WriteToTextFile -> PrintWriter: close()
+activate PrintWriter
+PrintWriter --> WriteToTextFile
+deactivate PrintWriter
+
+return
+
+deactivate WriteToTextFile
+
 @enduml
