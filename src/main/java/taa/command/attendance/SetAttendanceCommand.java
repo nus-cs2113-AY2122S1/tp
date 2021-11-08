@@ -137,7 +137,7 @@ public class SetAttendanceCommand extends Command {
      *
      * @param teachingClass  The teachingClass object.
      * @param studentIndexes The studentIndexes object, containing the array of inputted indexes.
-     * @return
+     * @return True if student indexes are out of bounds, False otherwise.
      */
     private boolean isIndexOutOfBounds(TeachingClass teachingClass, StudentIndexArray studentIndexes) {
         for (int i = 0; i < studentIndexes.getSize(); i++) {

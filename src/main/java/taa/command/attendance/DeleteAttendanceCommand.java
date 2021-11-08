@@ -1,7 +1,6 @@
 package taa.command.attendance;
 
 //@@author daknam2001
-import taa.Taa;
 import taa.Ui;
 import taa.attendance.Attendance;
 import taa.attendance.AttendanceList;
@@ -108,7 +107,7 @@ public class DeleteAttendanceCommand extends Command {
      *
      * @param teachingClass  The teachingClass object.
      * @param studentIndexes The studentIndexes object, containing the array of inputted indexes.
-     * @return
+     * @param lessonNumber The inputted lessonNumber.
      */
     private void checkIndexOutOfBounds(TeachingClass teachingClass, StudentIndexArray studentIndexes,
                                        int lessonNumber) throws TaaException {
