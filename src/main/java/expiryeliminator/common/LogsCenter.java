@@ -27,7 +27,7 @@ public class LogsCenter {
         try {
             FileHandler fileHandler = new FileHandler(LOG_FILE, MAX_FILE_SIZE_IN_BYTES, MAX_FILE_COUNT, true);
             fileHandler.setFormatter(new SimpleFormatter());
-            fileHandler.setLevel(Level.INFO);
+            fileHandler.setLevel(Level.FINER);
             logger.addHandler(fileHandler);
         } catch (IOException e) {
             logger.warning("Error adding file handler for logger.");

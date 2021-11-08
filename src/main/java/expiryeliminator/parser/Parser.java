@@ -2,6 +2,8 @@ package expiryeliminator.parser;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,6 +29,7 @@ import expiryeliminator.commands.UpdateRecipeCommand;
 import expiryeliminator.commands.UpdateUnitsCommand;
 import expiryeliminator.commands.ViewIngredientCommand;
 import expiryeliminator.commands.ViewRecipeCommand;
+import expiryeliminator.common.LogsCenter;
 import expiryeliminator.parser.argparser.ExpiryDateParser;
 import expiryeliminator.parser.argparser.IngredientParser;
 import expiryeliminator.parser.argparser.QuantityParser;
@@ -68,6 +71,7 @@ public class Parser {
     public static final String MESSAGE_INVALID_ARGUMENT_FORMAT = "Invalid argument format!\n%1$s";
     private static final String MESSAGE_UNRECOGNISED_COMMAND = "I'm sorry, but I don't know what that means :-(\n"
             + "For help, please type `help`.";
+    private static final Logger logger = LogsCenter.getLogger(Parser.class);
 
     /**
      * Parses user input as a command.
@@ -83,6 +87,7 @@ public class Parser {
         }
         final String command = matcher.group("command").trim();
         String args = matcher.group("args");
+        logger.log(Level.FINER, "Parsed command: '" + command + "', parsed args:'" + args + "'");
 
         try {
             switch (command) {

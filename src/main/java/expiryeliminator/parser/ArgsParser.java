@@ -3,9 +3,12 @@ package expiryeliminator.parser;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import expiryeliminator.common.LogsCenter;
 import expiryeliminator.parser.exception.InvalidPrefixException;
 import expiryeliminator.parser.exception.MissingPrefixException;
 import expiryeliminator.parser.exception.MultipleArgsException;
@@ -30,6 +33,7 @@ class ArgsParser {
     private static final Pattern ARGS_FORMAT = Pattern.compile("\\w+/([^/\\s]*( +|$))+");
 
     private final ArrayList<Prefix> prefixList;
+    private static final Logger logger = LogsCenter.getLogger(ArgsParser.class);
 
     /**
      * Initialises argument parser and stores prefix list.
@@ -77,6 +81,7 @@ class ArgsParser {
         while (matcher.find()) {
             final String match = matcher.group().trim();
             final String[] prefixAndArg = match.split("/");
+            logger.log(Level.FINEST, "Parsing prefixAndArg: '" + Arrays.toString(prefixAndArg) + "'");
             final String prefix = prefixAndArg[0];
             String arg = null;
             if (prefixAndArg.length == 2) {
@@ -87,6 +92,7 @@ class ArgsParser {
                 }
                 arg = arg.trim();
             }
+            logger.log(Level.FINEST, "Parsed prefix: '" + prefix + "', parsed arg:'" + arg + "'");
             try {
                 prefixesToArgs.get(prefix).add(arg);
             } catch (NullPointerException error) {
