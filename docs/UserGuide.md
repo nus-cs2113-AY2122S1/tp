@@ -55,6 +55,14 @@ User Interface (GUI) apps.
 5. Run `java -jar Taa.jar` in Command Prompt/Terminal to start the app.
 6. Enter `help` to display the list of available commands. See [Features](#features) for more information.
 
+## Quick Notes
+
+Allowed characters for values:
+* Alphanumeric characters: `A-Z`, `a-z`
+* Numeric characters: `0-9`
+* Special characters: `-`, `_`, `(`, `)`, `.`, `,`
+* Whitespaces
+
 ## Features
 
 ### Class
