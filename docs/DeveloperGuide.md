@@ -23,7 +23,7 @@
 &nbsp;&nbsp;[4.4. Updating Ingredients](#44-updating-ingredients) <br>
 &nbsp;&nbsp;[4.5. Subtracting Ingredients](#45-subtracting-ingredients) <br>
 &nbsp;&nbsp;[4.6. Searching for Ingredients](#46-searching-for-ingredients) <br>
-&nbsp;&nbsp;&nbsp;&nbsp;[4.6.1 Searching by Name](#461-searching-by-name) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;[4.6.1. Searching by Name](#461-searching-by-name) <br>
 &nbsp;&nbsp;&nbsp;&nbsp;[4.6.2. Searching by Expiry Date](#462-searching-by-expiry-date) <br>
 [5. Product scope](#5-product-scope) <br>
 [6. User stories](#6-user-stories) <br>
