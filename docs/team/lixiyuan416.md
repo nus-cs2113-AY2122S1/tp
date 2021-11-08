@@ -40,7 +40,7 @@
 - **Final Submission**
   - Ui section - [Link to diagram](../images/HelpCommandStates.png)
   - Added appendixes, completed Appendixes A-B
-  - Added [sequence diagram](../images/tripSeq.png) and [class diagram](../images/TripClassDiagram.png) for Trip
+  - Added [sequence diagram](../images/tripSeq.png) and [class diagram](../images/TripClassDiagramMod.png) for Trip
 
 ### Team based tasks Contribution
 - **Added bug report in Issues**
