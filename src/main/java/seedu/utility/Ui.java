@@ -45,6 +45,7 @@ public class Ui {
         System.out.println(Messages.LOGO_MESSAGE);
         printLine();
         System.out.println(Messages.PROMPTING_MESSAGE);
+        printLine();
     }
 
     private void printLine() {
@@ -408,7 +409,7 @@ public class Ui {
      */
     public void printCurrencyChangedConfirmation(CurrencyType currency) {
         printLine();
-        System.out.println("All entries have been converted to " + currency + "!");
+        System.out.println(Messages.CURRENCY_CONVERSION_SUCCESSFUL_MESSAGE + currency + "!");
         printLine();
     }
 

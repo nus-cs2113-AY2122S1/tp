@@ -38,7 +38,7 @@ Before you learn how to use the app, take a look at the [Quick Start](#quick-sta
    * [Create income entry with date: `add_in_d`](#create-income-entry-with-date-add_in_d)
    * [Delete income entry: `del_in`](#delete-income-entry-del_in)
 
-   2.3 List / View information
+   2.3 List / View Information
    * [List all expense entries: `list_ex`](#list-all-expense-entries-list_ex)
    * [List all income entries: `list_in`](#list-all-income-entries-list_in)
    * [View total expense: `total_ex`](#view-total-expense-total_ex)
@@ -85,7 +85,7 @@ Before you learn how to use the app, take a look at the [Quick Start](#quick-sta
 1. Ensure that you have Java 11 or above installed.
 
 
-2. Download the latest version of `StonksXD.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-3/tp/releases).
+2. Download the latest version of `StonksXD.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-3/tp/releases/tag/v2.1).
 
 
 3. Copy the file to the folder you want to use as the home folder for your `Stonks XD`.
@@ -97,10 +97,10 @@ Before you learn how to use the app, take a look at the [Quick Start](#quick-sta
 
 5. Once the program is up and running, the image shown below is what you can expect the program should look like!   
 
-![image](https://user-images.githubusercontent.com/69465661/140690502-73964f95-4a07-4ea4-8ef4-83341e4fe268.png)
+![image](https://user-images.githubusercontent.com/77761339/140724500-ea056343-86d5-4a9c-ba82-db8de51dd595.png)
 
 6. If you are a first time user, the first command you want to key in is the [help](#view-all-possible-commands-help) command.
-It will guide you to the possible commands you can enter into Stonks XD. (Tip! Refer to the [Features](#features) below for details of each command.)
+It will guide you to the possible commands you can enter into `Stonks XD`. (Tip! Refer to the [Features](#features) below for details of each command.)
     
 ---
 
@@ -114,7 +114,7 @@ It will guide you to the possible commands you can enter into Stonks XD. (Tip! R
 
 
 - Parameters surrounded with `[` and `]` are optional parameters which you might consider including to your input.
-  e.g. in the add expense/income feature, an optional date parameter `[D/DATE]` may be added which can be typed as `D/19/10/2021` 
+  e.g. in the show graph feature: `show_graph [Y/YEAR]`, an optional `YEAR` parameter may be added to show graphs of different years.
 
 
 - Most features below have a collapsible section that allows you to see the run time output. Do check them out if you want to visualize what the product looks like!
@@ -133,7 +133,9 @@ of the parameter will be taken. e.g. if you gave `a/100 a/1000`, only `a/1000` w
 ### 2.1 Help
 
 ### View all possible commands: `help`
-This shows a list of all possible commands. Use this command when you are lost while using the app!
+This shows a list of all possible commands. 
+If you are a first time user, this is the perfect opportunity for you to get familiarize with the application.
+Feel free to use this command whenever you are lost while using the app!
 
 Format: `help`
 
@@ -183,19 +185,22 @@ This command adds an expense entry to your list. Use this to keep track of your 
 
 Format: `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY`
 
-- `DESCRIPTION` has to be non-empty.
-- `AMOUNT` has to be a positive amount that has a maximum of 2 decimal points.
-- `CATEGORY` has to be either `food`, `transport`, `bills`, `medical`, `entertainment`, or `misc`.
 
 Note:
 
-- The default date of the added expense will be the date in which the expense is added.
-- Each expense entry can only have a maximum value of 1,000,000 (1 Million).
+- `DESCRIPTION` has to be non-empty.
+- `AMOUNT` can only have a maximum of 2 decimal points.
+- `AMOUNT` must be more than or equal to 0.05.
+- `AMOUNT` can only have a maximum value of 1,000,000 (1 Million).
 - The sum of all your entries cannot be more than 100,000,000,000 (100 Billion).
+- `CATEGORY` has to be either `food`, `transport`, `bills`, `medical`, `entertainment`, or `misc`.
+- The default date of the added expense will be the date in which the expense is added.
 
 Examples:
 
-- `add_ex d/KFC lunch a/10.20 c/food` Adds an expense entry regarding lunch that costs $10.20.
+- Let's say you just had KFC for lunch today, and you want to log it down. Type in
+  `add_ex d/KFC lunch a/10.20 c/food` into the command line. This adds an expense entry regarding lunch that costs $10.20.
+
 <details>
 <summary> ▼ Expected output in run window </summary>
 <pre>
@@ -210,12 +215,9 @@ Note: Budget reminders of different kinds might also appear when expenses are ad
 They might look something like this.
 
 <pre>-----------------------------------------------------------------------------------------------------
-You are almost reaching the OCTOBER OVERALL budget: $48.40/$50.00
-Consider readjusting your OCTOBER OVERALL budget!
------------------------------------------------------------------------------------------------------
-You have exceeded the OCTOBER FOOD budget: $30.40/$30.00
-Since you have not yet exceeded your OCTOBER OVERALL budget: $48.40/$50.00
-You can directly increase your OCTOBER FOOD budget up to $32.00!
+Exceeded both NOVEMBER FOOD budget ($35.50/$30.00) and NOVEMBER OVERALL budget ($50.50/$50.00).
+Consider adjusting your OVERALL budget to $50.50 before adjusting your FOOD budget!
+Currently you cannot extend your FOOD budget without first extending your OVERALL budget!
 -----------------------------------------------------------------------------------------------------
 </pre>
 </details>
@@ -227,20 +229,21 @@ This command adds an expense entry to your list with a date of your choice!
 
 Format: `add_ex_d d/DESCRIPTION a/AMOUNT c/CATEGORY D/DATE`
 
+Note:
 - `DESCRIPTION` has to be non-empty.
-- `AMOUNT` has to be a positive amount that has a maximum of 2 decimal points.
+- `AMOUNT` can only have a maximum of 2 decimal points.
+- `AMOUNT` must be more than or equal to 0.05.
+- `AMOUNT` can only have a maximum value of 1,000,000 (1 Million).
+- The sum of all your entries cannot be more than 100,000,000,000 (100 Billion).
 - `CATEGORY` has to be either `food`, `transport`, `bills`, `medical`, `entertainment`, or `misc`.
 - `DATE` must be in the DD/MM/YYYY format.
 
-
-Note:
-
-- Each expense entry can only have a maximum value of 1,000,000 (1 Million).
-- The sum of all your entries cannot be more than 100,000,000,000 (100 Billion).
-
 Examples:
 
-- `add_ex_d d/McDonalds dinner a/7.50 c/food D/20/10/2021` Adds a dinner expense entry that costs $7.50 that is made on 20th October 2021.
+- Let's say you had McDonald's for dinner 2 days ago, and you only remembered about it today. You can type in
+  `add_ex_d d/McDonalds dinner a/7.50 c/food D/20/10/2021` into the command line. This will adds a dinner expense 
+  entry that costs $7.50 that is made on 20th October 2021.
+  
 <details>
 <summary> ▼ Expected output in run window </summary>
 <pre>
@@ -254,12 +257,9 @@ Note: Budget reminders of different kinds might also appear when expenses are ad
 They might look something like this.
 
 <pre>-----------------------------------------------------------------------------------------------------
-You are almost reaching the OCTOBER OVERALL budget: $48.40/$50.00
-Consider readjusting your OCTOBER OVERALL budget!
------------------------------------------------------------------------------------------------------
-You have exceeded the OCTOBER FOOD budget: $30.40/$30.00
-Since you have not yet exceeded your OCTOBER OVERALL budget: $48.40/$50.00
-You can directly increase your OCTOBER FOOD budget up to $32.00!
+Exceeded both NOVEMBER FOOD budget ($35.50/$30.00) and NOVEMBER OVERALL budget ($50.50/$50.00).
+Consider adjusting your OVERALL budget to $50.50 before adjusting your FOOD budget!
+Currently you cannot extend your FOOD budget without first extending your OVERALL budget!
 -----------------------------------------------------------------------------------------------------
 </pre>
 </details>
@@ -279,35 +279,40 @@ Format: `del_ex i/INDEX`
 
 Examples:
 
-- `del_ex i/1` Deletes the 1st entry from the expense list.
+- Let's say you have made a mistake while entering `expense` entries, and you want to remove the entry you made.
+  What you want to do is get the list of `expense` first, to find the index corresponding to that entry.
 
 <details>
 <summary> ▼ Expected output in run window </summary>
 <br>
-Before deletion the expense list is as follows:
+Before deletion, view the expense list using the <code>list_ex</code> command. The expected output will be as follows:
 <pre>
 -----------------------------------------------------------------------------------------------------
 Below is a list of all of your recent spending!
 -----------------------------------------------------------------------------------------------------
-1: [E] pillow - $500.00 (18/10/2021)
-2: [E] bought cookies - $500.00 (18/01/2021)
+1: [E] pillow - $5.00 (18/10/2021)
+2: [E] bought cookies - $5.00 (18/01/2021)
 3: [E] bought home - $555.00 (18/07/2021)
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-When command <code>del_ex i/1</code> is given, you get the following message:
+You want to delete the last entry, with index 3 because the description you entered was incorrect.
+You can enter the command <code>del_ex i/3</code> into the command line to delete that entry.
+<br>
+<br>
+When entry is deleted, you should expect the following message from the program:
 <pre>
 -----------------------------------------------------------------------------------------------------
 You removed this: 
-[E] pillow - $500.00 (18/10/2021)
+[E] bought home - $555.00 (18/07/2021)
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-After deletion, we see that the list has removed the previous first entry!
+After deletion, we view the list again to see that the list no longer contains the entry you deleted!
 <pre>
 -----------------------------------------------------------------------------------------------------
-1: [E] bought cookies - $500.00 (18/01/2021)
-2: [E] bought home - $555.00 (18/07/2021)
+1: [E] pillow - $5.00 (18/10/2021)
+2: [E] bought cookies - $5.00 (18/01/2021)
 -----------------------------------------------------------------------------------------------------
 </pre>
 </details>
@@ -320,19 +325,20 @@ This adds an income entry to your list. Use this to keep track of your income!
 
 Format: `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY`
 
-- `DESCRIPTION` has to be non-empty.
-- `AMOUNT` has to be a positive amount that has a maximum of 2 decimal points.
-- `CATEGORY` has to be either `salary`, `allowance`, `others` or `adhoc`.
-
 Note:
-
-- The default date of the added income will be the date in which the income is added.
-- Each income entry can only have a maximum value of 1,000,000 (1 Million).
+- `DESCRIPTION` has to be non-empty.
+- `AMOUNT` can only have a maximum of 2 decimal points.
+- `AMOUNT` must be more than or equal to 0.05.
+- `AMOUNT` can only have a maximum value of 1,000,000 (1 Million).
 - The sum of all your entries cannot be more than 100,000,000,000 (100 Billion).
+- `CATEGORY` has to be either `salary`, `allowance`, `others` or `adhoc`.
+- The default date of the added income will be the date in which the income is added.
 
 Examples:
 
-- `add_in d/lunch money a/1000 c/allowance` Adds an income entry regarding a lunch allowance of $1000.
+- Let's say you received some pocket money for the week. To log it down, type 
+  `add_in d/lunch money a/1000 c/allowance` into the command line. This adds an income entry regarding a 
+  lunch allowance of $1000.
 
 <details>
   <summary> ▼ Expected output in run window </summary>
@@ -351,39 +357,27 @@ This command adds an income entry to your list with a date of your choice!
 
 Format: `add_in_d d/DESCRIPTION a/AMOUNT c/CATEGORY D/DATE`
 
+Note:
 - `DESCRIPTION` has to be non-empty.
-- `AMOUNT` has to be a positive amount that has a maximum of 2 decimal points.
+- `AMOUNT` can only have a maximum of 2 decimal points.
+- `AMOUNT` must be more than or equal to 0.05.
+- `AMOUNT` can only have a maximum value of 1,000,000 (1 Million).
+- The sum of all your entries cannot be more than 100,000,000,000 (100 Billion).
 - `CATEGORY` has to be either `salary`, `allowance`, `others` or `adhoc`.
 - `DATE` must be in the DD/MM/YYYY format.
 
-
-Note:
-
-- Each income entry can only have a maximum value of 1,000,000 (1 Million).
-- The sum of all your entries cannot be more than 100,000,000,000 (100 Billion).
-
 Examples:
 
-- `add_in_d/december's bonus a/5000 c/salary D/26/12/2021` Adds an income entry regarding a salary bonus of $5000 for 26th December 2021.
+- Let's say you received a holiday bonus of $5000, but you forgot to add it in. To log it 
+  type `add_in_d/december's bonus a/5000 c/salary D/26/12/2021` into the command line. It adds an 
+  income entry regarding a salary bonus of $5000 for 26th December 2021.
+
 <details>
 <summary> ▼ Expected output in run window </summary>
 <pre>
 -----------------------------------------------------------------------------------------------------
 Your most recent earning: 
 [I] december's bonus - $5000.00 (26/12/2021)
------------------------------------------------------------------------------------------------------
-</pre>
-
-Note: Budget reminders of different kinds might also appear when expenses are added!
-They might look something like this.
-
-<pre>-----------------------------------------------------------------------------------------------------
-You are almost reaching the OCTOBER OVERALL budget: $48.40/$50.00
-Consider readjusting your OCTOBER OVERALL budget!
------------------------------------------------------------------------------------------------------
-You have exceeded the OCTOBER FOOD budget: $30.40/$30.00
-Since you have not yet exceeded your OCTOBER OVERALL budget: $48.40/$50.00
-You can directly increase your OCTOBER FOOD budget up to $32.00!
 -----------------------------------------------------------------------------------------------------
 </pre>
 </details>
@@ -403,35 +397,42 @@ Format: `del_in i/INDEX`
 
 Examples:
 
-- `del_in i/1` Deletes the 1st entry from the income list.
+- Let's say you have made a mistake while entering `income` entries, and you want to remove the entry you made.
+  What you want to do is get the list of `income` first, to find the index corresponding to that entry.
 
 <details>
 <summary> ▼ Expected output in run window </summary>
 <br>
-Before deletion the income list is as follows:
+Before deletion, view the income list using the <code>list_in</code> command. The expected output will be as follows:
 <pre>
 -----------------------------------------------------------------------------------------------------
 Below is a list of all of your recent earnings!
 -----------------------------------------------------------------------------------------------------
-1: [I] rob a bank - $800.00 (18/10/2021)
-2: [I] rob a church - $300.00 (18/11/2021)
-3: [I] rob a car - $400.00 (18/12/2021)
+1: [I] tuition salary - $800.00 (18/10/2021)
+2: [I] November allowance - $300.00 (18/11/2021)
+3: [I] Christmas gift money - $50.00 (18/12/2021)
+4: [I] Christmas gift money - $50000.00 (18/12/2021)
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-When command <code>del_in i/1</code> is given, you get the following message:
+You want to delete the last entry, with index 4 because the value you entered was too large.
+You can enter the command <code>del_in i/4</code> to delete that entry.
+<br>
+<br>
+Once the delete is completed, you get the following message:
 <pre>
 -----------------------------------------------------------------------------------------------------
 You removed this: 
-[I] rob a bank - $800.00 (18/10/2021)
+[I] Christmas gift money - $50000.00 (18/12/2021)
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-After deletion, we see that the list has removed the previous first entry!
+After deletion, we can see the list that the entry we want to remove is removed!
 <pre>
 -----------------------------------------------------------------------------------------------------
-1: [I] rob a church - $300.00 (18/11/2021)
-2: [I] rob a car - $400.00 (18/12/2021)
+1: [I] tuition salary - $800.00 (18/10/2021)
+2: [I] November allowance - $300.00 (18/11/2021)
+3: [I] Christmas gift money - $50.00 (18/12/2021)
 -----------------------------------------------------------------------------------------------------
 </pre>
 
@@ -439,7 +440,7 @@ After deletion, we see that the list has removed the previous first entry!
 <br>
 
 ---
-### 2.3 List / View information
+### 2.3 List / View Information
 
 ### List all expense entries: `list_ex`
 
@@ -500,11 +501,11 @@ Note:
 - `total_ex` command is only able to print values less than 100,000,000,000 (100Billion).
 
 Examples:
-<ol>
+<ul>
 <li>
 Let's say you have made expense entries consistently for a couple of months since you downloaded the application and you want to know the total expense you have logged.
 </li>
-</ol>
+</ul>
 <details>
 <summary> ▼ Expected output in run window </summary>
 <br>
@@ -756,14 +757,42 @@ Below is a list of all your findings!
 
 ### Set budget: `set_budget`
 
-This sets a budget for one of the many preset expense categories. 
+This sets a budget limit for one of the many preset expense categories. 
 Reminders will be given when your spending approaches the budget limit!
+From here onwards, sub-budgets refer to the `food`, `transport`, `bills`, `medical`, `entertainment` and `misc` budgets.
+
+To help you better manage your budgets, the following features are in place for setting budgets:
+1. The new budget limit for each sub-budget must be greater than the current month's expenses for that sub-budget.
+2. The sum of all the sub-budget limits must be less than the `overall` budget limit.
+3. In the event that a sub-budget's expenses exceed its budget limit, the total expenses for that sub-budget will be used for the calculation in point 2 instead.
+
+Example:
+
+|                    | Food | Transport | Bills | Medical | Entertainment | Misc | Overall     |
+| ------------------ | ---- | --------- | ----- | ------- | ------------- | ---- | -------     |
+| **Expenses**       | $100 | **$1**    | $100  | $100    | $100          | $100 |             |
+| **Budget Limit**   | $100 | $100      | $100  | $100    | $100          | $100 | **>$600**   |
+
+In the example above, none of the sub-budget expenses exceed their budget limits. 
+The allowable overall limit must be greater than $100 + **$100** + $100 + $100 + $100 + $100 = $600, which is the sum of all the sub-budget limits.
+
+
+However, in the following example, the transport expense exceeds the transport budget.
+The allowable overall limit must be greater than $100 + **$150** + $100 + $100 + $100 + $100 = $650.
+
+|                    | Food | Transport | Bills | Medical | Entertainment | Misc | Overall     |
+| ------------------ | ---- | --------- | ----- | ------- | ------------- | ---- | -------     |
+| **Expenses**       | $100 | **$150**  | $100  | $100    | $100          | $100 |             |
+| **Budget Limit**   | $100 | $100      | $100  | $100    | $100          | $100 | **>$650**   |
+
+<br>
 
 Format: `set_budget c/CATEGORY a/AMOUNT`
 
-- `CATEGORY` has to be one of `food`, `transport`, `bills`, `medical`, `entertainment`, `misc` or `overall`.
-- `AMOUNT` has to be a valid non-negative number.
-- TIP: Setting `AMOUNT` to 0 deactivates the budget warnings for that category!
+- `CATEGORY` has to be one of `food`, `transport`, `bills`, `medical`, `entertainment`, `misc` or `overall`. 
+- `AMOUNT` must be more than or equal to 0.05.
+- `AMOUNT` has to be less than 100,000,000,000 (100 Billion).
+- `AMOUNT` has to be in 2 decimal places.
 
 Examples:
 
@@ -772,10 +801,10 @@ Examples:
 <details>
 <summary> ▼ Expected output in run window </summary>
 <br>
-When command <code>set_budget c/bills a/100</code> is given, you get the following message:
+When command <code>set_budget c/bills a/100</code> is given, you get the following message if the budget is set successfully:
 <pre>
 -----------------------------------------------------------------------------------------------------
-BILLS budget has been set to $100.00
+BILLS budget set to $100.00
 -----------------------------------------------------------------------------------------------------
 </pre>
 </details>
@@ -790,7 +819,6 @@ Use this when you forget your budget limits!
 Format: `check_budget c/CATEGORY`
 
 - `CATEGORY` has to be one of `food`, `transport`, `bills`, `medical`, `entertainment`, `misc` or `overall`.
-- TIP: Setting `AMOUNT` to 0 deactivates the budget warnings for that category!
 
 Examples:
 
@@ -815,19 +843,20 @@ This sets the threshold beyond which reminders will be given when approaching th
 Format: `set_threshold t/THRESHOLD`
 
 - `THRESHOLD` has to be a value between 0 and 1.
-- Setting `THRESHOLD` to 0.1 produces reminders when you have used up more than 90% of your budget!
+- Setting `THRESHOLD` to 0.9 produces reminders when you have used up more than 90% of your budget!
 
 Examples:
 
-- `set_threshold t/0.2` sets the threshold value of all budget categories to 80%.
+- `set_threshold t/0.8` sets the threshold value of all budget categories to 80%.
 
 <details>
 <summary> ▼ Expected output in run window </summary>
 <br>
-When command <code>set_threshold t/0.2</code> is given, you get the following message:
+When command <code>set_threshold t/0.8</code> is given, you get the following message:
 <pre>
 -----------------------------------------------------------------------------------------------------
-Threshold for budget reminders set to 0.2
+Threshold for budget reminders set to 0.8
+We'll warn you when you spend 80.0% of your budget!
 -----------------------------------------------------------------------------------------------------
 </pre>
 </details>
@@ -843,7 +872,7 @@ onwards will be treated as the new currency set.
 
 Format: `set_curr c/CURRENCY`
 
-- As of v2.0, Stonks XD supports 2 different currencies: SGD and RMB.
+- As of v2.0, Stonks XD supports 2 different currencies: SGD and HKD.
 - If you try to set currency to currency you're already using, a warning will be shown.
 
 <details>
@@ -856,14 +885,14 @@ Current FOOD limit is $12.50
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-If you wish to convert the above (and all entries) to RMB, simply enter <code>set_curr c/RMB</code>. You will receive the following confirmation message:
+If you wish to convert the above (and all entries) to HKD, simply enter <code>set_curr c/HKD</code>. You will receive the following confirmation message:
 <pre>
 -----------------------------------------------------------------------------------------------------
-All entries have been converted to RMB!
+All entries have been converted to HKD!
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-If we check our budget limit once again, we see that it has now been converted to the appropriate value in RMB!
+If we check our budget limit once again, we see that it has now been converted to the appropriate value in HKD!
 <pre>
 -----------------------------------------------------------------------------------------------------
 Current FOOD limit is $62.50
@@ -905,7 +934,7 @@ If you are unsure as to what currency types you can convert to, just enter <code
 <pre>
 -----------------------------------------------------------------------------------------------------
 Here is a list of available currencies you can convert to!
-1. RMB
+1. HKD
 2. SGD
 -----------------------------------------------------------------------------------------------------
 </pre>
@@ -918,7 +947,7 @@ Here is a list of available currencies you can convert to!
 ### View yearly report: `show_graph`
 
 This shows the monthly breakdown of the finances in a Yearly Report which also
-includes current month spending and earnings.
+includes current month spending and earnings and your overall account balance regardless of year.
 We recommend using this function after your daily logging of expenses for a one-stop check-in on the state of your finances!
 
 
@@ -935,25 +964,25 @@ Format: `show_graph [Y/YEAR]`
 <details>
 <summary> ▼ Expected output in run window </summary>
 <pre>
-show_graph
+show_graph Y/2121
 -----------------------------------------------------------------------------------------------------
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 x                                                                                                  x
-x   Account Balance: $-449.50                                              Legend:                 x
-x   Current month (NOVEMBER) total expense: $5454.00                             # is Expense      x
-x   Current month (NOVEMBER) total income: $0.00                                 o is Income       x
-x   Your Yearly Report                                                     Unit: 1000.0            x
+x   Account Balance: $12.00                                                Legend:                 x
+x   Current month (NOVEMBER 2021) total expense: $0.00                           # is Expense      x
+x   Current month (NOVEMBER 2021) total income: $0.00                            o is Income       x
+x   Year 2121 Report                                                       Unit: 10.0              x
 x ------------------------------------------------------------------------------------------------ x
 x                                                                                                  x
 x                                                                                                  x
 x                                                                                                  x
 x                                                                                                  x
 x                                                                                                  x
-x                                                                                   #        o     x
-x                                                                                   #        o     x
-x                                                                                   #        o     x
-x                                                                                   #        o     x
-x                                                                                   #        o     x
+x                                                                                                  x
+x                                                                                                  x
+x                                                                                                  x
+x                                                                                    o             x
+x                                                                                   #o             x
 x ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ x
 x   Jan     Feb     Mar     Apr     May     Jun     Jul     Aug     Sept    Oct     Nov     Dec    x
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -1013,64 +1042,51 @@ Here's our tip for the day: Try using the 50/30/20 rule to budget. 50% for needs
 ---
 ### 2.10 Saving of Data
 
-### Saving of Data
+### Saving of data
 
 Stonks XD will save / load your data from `StonksXD_Entries.csv` and `StonksXD_Settings.csv`. This ensures that you 
 will not lose your important data when Stonks XD changes.
 
 The 2 `csv` files will be stored in the same directory as `StonksXD.jar`.
 
-`StonksXD_Entries.csv` will store all your entries. They are:
+`StonksXD_Entries.csv` will store all your entries. You can edit this file. They are:
 1. `Expense` entries.
 2. `Income` entries.
 
-`StonksXD_Settings.csv` will store all the important settings. They are:
-1. Currency setting
-2. Threshold setting
+`StonksXD_Settings.csv` will store all the important settings. **This file is read-only.** They are:
+1. Currency setting.
+2. Threshold setting.
 3. Budget settings for different expense categories.
 
 All important fields will be separated by a `,`.
 
-The reason for data files to be in `.csv` format is so that you can have an easier time editing those data in Excel 
-when **not** using the program. It is easy to make mistakes when editing the `csv` files manually so do be careful.
+The reason for data files to be in `.csv` format is so that you can have an easier time editing / viewing those data 
+in Excel when **not** using the program. It is easy to make mistakes when editing the `.csv` files manually so 
+do be careful.
 
-#### When editing csv files
+<br>
 
+#### When editing / viewing csv files
 
 - `.csv` files **must not** be open concurrently while Stonks XD is running. In other words, never have two programs 
 writing / reading the `.csv` files at the same time. This will very likely cause a saving / loading error and 
 lost of data.
 
 
+- `StonksXD_Settings.csv` is **read-only**. This is because changing the settings will result in many unexpected
+  results. For example, changing the currency setting in the file would result in the amounts in `StonksXD_Entries.csv`
+  to be recognised as another currency which is very unlikely what you are trying to do.
+
+
 - Restrictions and rules for different variables are the same as how you would enter them in the Command Line 
 Interface, as specified above.
 
-
   - For example, when editing an expense entry in `StonksXD_Entries.csv`, `entry_description` must not be blank.
-
-
-  - Another example, when editing an income entry in `StonksXD_Entries.csv`, `amount` has to be a positive number and 
-  less than 1,000,000.
-
-
-  - Another example, when editing `threshold` in `StonksXD_Settings.csv`, ensure it is between 0 and 1. 
-
-
+  - Another example, when editing an income entry in `StonksXD_Entries.csv`, `amount` has to be between 0.05 and
+  1,000,000 inclusive.
   - Another example, when editing an expense entry in `StonksXD_Entries.csv`, category should be the ones available and
-  specified ealier on in the user guide.
-
-    
-- `.csv` files should not be open concurrently while Stonks XD is running. In other words, never have two programs 
-writing / reading the `.csv` files at the same time. This will very likely cause a saving error and loss of data.
-- Restrictions and rules for different variables are the same as how you would enter them in the CLI, as specified 
-above:<br></br>
-  - For example, when editing an expense entry in `StonksXD_Entries.csv`, `entry_description` should not be blank.
-  - Another example, when editing an income entry in `StonksXD_Entries.csv`, `amount` has to be a positive number and 
-  less than 1,000,000.
-  - Another example, when editing `threshold` in `StonksXD_Settings.csv`, ensure it is between 0 and 1. 
-  - Another example, when editing an expense entry in `StonksXD_Entries.csv`, category should be the ones available and 
-
   specified earlier on in the user guide.
+
 
 - Do not alter / delete the headers of `.csv` files. Stonks XD is able to minimise the damage if you do so but to 
 ensure your data is saved / loaded properly, please do not edit anything unexpected.
@@ -1081,17 +1097,8 @@ data. When opening `StonksXD_Entries.csv` in Excel, Excel might change the forma
 format is in `DD/MM/YYYY` when dealing with `StonksXD_Entries.csv`. Entries with a different date format will be 
 considered corrupted and not be loaded into Stonks XD.
 
-
-- Changing the currency setting in `StonksXD_Settings.csv` is not recommended. This is because it will
-  cause all your entries and budgets to be recognised as a different currency.
-
   
-- Do not edit the amount of your expenses / incomes drastically such that they exceed the limit per entry or the 
-total limit of 100,000,000,000 for expense / income. Entries that cause you to exceed either limit will be considered 
-corrupted.
-cause all your entries and budgets to be recognised as a different currency.
-
-- Do not edit the amount of your entries drastically such that they exceed the max amount per entry or the 
+- Do not edit the amount of your entries **drastically** such that they exceed the max amount per entry or the 
 total limit of 100,000,000,000 for expenses / incomes. Entries that cause you to exceed either of the 2 limit will be 
 considered corrupted and not be loaded.
 
@@ -1111,7 +1118,7 @@ Here are the steps:
 
 
 3. Copy and paste the contents from your copies back into `StonksXD_Entries.csv` and `StonksXD_Settings.csv`. This 
-means all your edits are gone. But this pretty much ensures that there will be no corrupted data. 
+means all your edits are gone. But, this pretty much ensures that there will be no corrupted data. 
 
 
 ---
@@ -1151,7 +1158,7 @@ means all your edits are gone. But this pretty much ensures that there will be n
 | Set budget | `set_budget c/CATEGORY a/AMOUNT` | `set_budget c/bills a/100` |
 | Check budget | `check_budget c/CATEGORY` | `check_budget c/bills` |
 | Set threshold | `set_threshold t/THRESHOLD` | `set_threshold t/0.2` |
-| Set currency | `set_curr c/CURRENCY` | `set_curr c/usd` |
+| Set currency | `set_curr c/CURRENCY` | `set_curr c/hkd` |
 | Check current currency | `check_curr` | - |
 | List all currency conversions | `list_curr` | - |
 | View Yearly Report |`show_graph Y/YYYY`|`show_graph Y/2023`|
