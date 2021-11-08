@@ -6,9 +6,9 @@ public class Diary {
     private LocalDate date;
     private String message;
 
-    public Diary() {
+    public Diary(String message) {
         this.date = LocalDate.now();
-        this.message = null;
+        this.message = message;
     }
 
     public void write(String message) {
