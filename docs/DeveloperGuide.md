@@ -917,11 +917,12 @@ Logging in the application refers to storing exceptions, warnings and messages t
 The `java.util.logging` package is used for logging. The logging mechanism is managed by the `ClickLogger` class through the `logger` attribute and all information is logged into a log file, `logs/ClickLogs.log`.
 
 Logging Levels:
-*`Level.SEVERE`: a serious failure, which prevents normal execution of the program, for end users and system administrators.
-*`Level.WARNING`: a potential problem, for end users and system administrators.
-*`Level.INFO`: reasonably significant informational message for end users and system administrators.
-*`Level.CONFIG`: hardware configuration, such as CPU type.
-*`Level.FINE`, `Level.FINER`, `Level.FINEST`: three levels used for providing tracing information for the software developers.
+
+* `Level.SEVERE`: a serious failure, which prevents normal execution of the program, for end users and system administrators.
+* `Level.WARNING`: a potential problem, for end users and system administrators.
+* `Level.INFO`: reasonably significant informational message for end users and system administrators.
+* `Level.CONFIG`: hardware configuration, such as CPU type.
+* `Level.FINE`, `Level.FINER`, `Level.FINEST`: three levels used for providing tracing information for the software developers.
 
 `ClickLogger` follows Singleton Pattern. Therefore, other classes can access the `logger` by calling `ClickLogger.getNewLogger()`.
 
