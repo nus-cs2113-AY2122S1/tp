@@ -279,7 +279,16 @@ hence losing all the game data.
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: Copy and paste the save data under the same working directory.
+
+**Q**: The wiki page contains error messages. What should I do?
+
+**A**: Some characters might not be supported by the CLI. You can search for another page as an alternative.
+
+**Q**: Why does the time limit need to be a multiple of 30?
+
+**A**: It's a design choice. You can select the word limit game if you find it too restricting.
+
 
 ## Command Summary
 
