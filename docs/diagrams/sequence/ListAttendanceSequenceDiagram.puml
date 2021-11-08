@@ -2,56 +2,29 @@
 !include SequenceStyle.puml
 
 Actor User as user
-Participant ":Ui" as ui
 Participant ":Taa" as taa
-Participant "<<class>>\nParser" as parser
 Participant ":ListAttendanceCommand" as listAttendanceCommand
-Participant ":ModuleList" as moduleList
-Participant ":Module" as module
+Participant ":ClassList" as classList
+Participant ":TeachingClass" as teachingClass
 Participant ":StudentList" as studentList
 Participant ":Student" as student
-Participant ":AttendanceList" as attendanceList
 
+user -> taa : "list_attendance \nc/CS2113T-F12 s/1"
 activate taa
 
-taa -> ui : getUserInput()
-activate ui
-
-user -> ui : "list_attendance c/CS2113T\ns/1"
-ui --> taa : userInput:String
-deactivate ui
-
-taa -> parser : parseUserInput(userInput)
-activate parser
-
-create listAttendanceCommand
-parser -> listAttendanceCommand
-activate listAttendanceCommand
-listAttendanceCommand -> parser
-deactivate listAttendanceCommand
-
-parser --> taa : listAttendanceCommand:command
-deactivate parser
-
-taa -> listAttendanceCommand : checkArgument()
+taa -> listAttendanceCommand : execute(classList:ClassList, ui:Ui, storage:Storage)
 activate listAttendanceCommand
 
-listAttendanceCommand --> taa
-deactivate listAttendanceCommand
-
-taa -> listAttendanceCommand : execute(moduleList:ModuleList, ui:Ui, storage:Storage)
-activate listAttendanceCommand
-
-listAttendanceCommand -> moduleList : getModuleWithCode(moduleCode:String)
-activate moduleList
-moduleList --> listAttendanceCommand : module:Module
-deactivate moduleList
+listAttendanceCommand -> classList : getClassWithId(classId:String)
+activate classList
+classList --> listAttendanceCommand : teachingClass:TeachingClass
+deactivate classList
 
 
-listAttendanceCommand -> module : getStudentList()
-activate module
-module --> listAttendanceCommand : studentList:StudentList
-deactivate module
+listAttendanceCommand -> teachingClass : getStudentList()
+activate teachingClass
+teachingClass --> listAttendanceCommand : studentList:StudentList
+deactivate teachingClass
 
 listAttendanceCommand -> studentList : getStudentAt(studentIndex:int)
 activate studentList
@@ -63,29 +36,12 @@ activate student
 student --> listAttendanceCommand : attendanceList:AttendanceList
 deactivate student
 
-listAttendanceCommand -> attendanceList : getSize()
-activate attendanceList
-attendanceList --> listAttendanceCommand : size:int
-deactivate attendanceList
-
-alt#Gold #Pink size==0
-    listAttendanceCommand -> ui : printMessage("There is no recorded attendance ...")
-    activate ui
-    ui -> user : Display message:\n"There is no recorded ..."
-    ui --> listAttendanceCommand
-    deactivate ui
-
-
-
-else #LightGreen else
-    listAttendanceCommand -> ui : printMessage("Attendance for ...")
-    activate ui
-    ui -> user : Display message:\n"Attendance for ..."
-    ui --> listAttendanceCommand
-    deactivate ui
-end
-
+listAttendanceCommand --> taa
 deactivate listAttendanceCommand
+taa -[hidden]-> listAttendanceCommand
+destroy listAttendanceCommand
 
+taa --> user
+deactivate taa
 
 @enduml

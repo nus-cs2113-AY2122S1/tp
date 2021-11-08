@@ -5,8 +5,8 @@ Actor User as user
 Participant ":Taa" as taa
 Participant ":SetAttendanceCommand" as setAttendanceCommand
 Participant ":ClassList" as classList
-Participant ":TeachingClass" as teachingClass
 Participant ":StudentIndexArray" as studentIndexArray
+Participant ":TeachingClass" as teachingClass
 Participant ":StudentList" as studentList
 Participant ":Student" as student
 Participant ":AttendanceList" as attendanceList

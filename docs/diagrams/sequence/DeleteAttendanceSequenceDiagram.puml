@@ -2,81 +2,79 @@
 !include SequenceStyle.puml
 
 Actor User as user
-Participant ":Ui" as ui
 Participant ":Taa" as taa
-Participant "<<class>>\nParser" as parser
 Participant ":DeleteAttendanceCommand" as deleteAttendanceCommand
-Participant ":ModuleList" as moduleList
-Participant ":Module" as module
+Participant ":ClassList" as classList
+Participant ":StudentIndexArray" as studentIndexArray
+Participant ":TeachingClass" as teachingClass
 Participant ":StudentList" as studentList
 Participant ":Student" as student
 Participant ":AttendanceList" as attendanceList
 Participant ":Storage" as storage
 
+
+user -> taa : "delete_attendance \nc/CS2113T-F12 s/1-3 l/1"
 activate taa
-
-taa -> ui : getUserInput()
-activate ui
-
-user -> ui : "delete_attendance c/CS2113T\ns/1 l/1"
-ui --> taa : userInput:String
-deactivate ui
-
-taa -> parser : parseUserInput(userInput)
-activate parser
-
-create deleteAttendanceCommand
-parser -> deleteAttendanceCommand
-activate deleteAttendanceCommand
-deleteAttendanceCommand -> parser
-deactivate deleteAttendanceCommand
-
-parser --> taa : deleteAttendanceCommand:command
-deactivate parser
-
-taa -> deleteAttendanceCommand : checkArgument()
+taa -> deleteAttendanceCommand : execute(classList:ClassList,\n ui:Ui, storage:Storage)
 activate deleteAttendanceCommand
 
-deleteAttendanceCommand --> taa
-deactivate deleteAttendanceCommand
+deleteAttendanceCommand -> classList : getClassWithId(classId:String)
+activate classList
+classList --> deleteAttendanceCommand : teachingClass:TeachingClass
+deactivate classList
 
-taa -> deleteAttendanceCommand : execute(moduleList:ModuleList, ui:Ui, storage:Storage)
-activate deleteAttendanceCommand
+create studentIndexArray
+deleteAttendanceCommand -> studentIndexArray : new StudentIndexArray()
+activate studentIndexArray
+studentIndexArray --> deleteAttendanceCommand : studentIndexes:StudentIndexArray
+deactivate studentIndexArray
 
-deleteAttendanceCommand -> moduleList : getModuleWithCode(moduleCode:String)
-activate moduleList
-moduleList --> deleteAttendanceCommand : module:Module
-deactivate moduleList
+deleteAttendanceCommand -> studentIndexArray : setStudentIndexes(studentIndexInput:String)
+activate studentIndexArray
+studentIndexArray --> deleteAttendanceCommand
+deactivate studentIndexArray
 
-deleteAttendanceCommand -> module : getStudentList()
-activate module
-module -> studentList : getStudentAt(studentIndex:int)
-deactivate module
-activate studentList
-studentList --> deleteAttendanceCommand : student:StudentList
-deactivate studentList
+deleteAttendanceCommand -> studentIndexArray : getSize()
+activate studentIndexArray
+studentIndexArray --> deleteAttendanceCommand : size:int
+deactivate studentIndexArray
 
-deleteAttendanceCommand -> student : getAttendanceList()
-activate student
-student --> deleteAttendanceCommand : attendanceList:AttendanceList
-deactivate student
+deleteAttendanceCommand -[hidden]-> studentIndexArray
+destroy studentIndexArray
 
-deleteAttendanceCommand -> attendanceList : deleteAttendance(lessonNumber:int)
-activate attendanceList
-attendanceList --> deleteAttendanceCommand : attendance:Attendance
-deactivate attendanceList
+loop size
+    deleteAttendanceCommand -> teachingClass : getStudentList()
+    activate teachingClass
+    teachingClass --> deleteAttendanceCommand : studentList:StudentList
+    deactivate teachingClass
 
-deleteAttendanceCommand -> storage : save(moduleList:ModuleList)
+    deleteAttendanceCommand -> studentList : getStudentAt(studentIndex:int)
+    activate studentList
+    studentList --> deleteAttendanceCommand : student:StudentList
+    deactivate studentList
+
+    deleteAttendanceCommand -> student : getAttendanceList()
+    activate student
+    student --> deleteAttendanceCommand : attendanceList:AttendanceList
+    deactivate student
+
+    deleteAttendanceCommand -> attendanceList : deleteAttendance(lessonNumInput:String)
+    activate attendanceList
+    attendanceList --> deleteAttendanceCommand : attendance:Attendance
+    deactivate attendanceList
+end
+
+deleteAttendanceCommand -> storage : save(classList:ClassList)
 activate storage
 storage --> deleteAttendanceCommand
 deactivate storage
 
-deleteAttendanceCommand -> ui : printMessage("Attendance removed for ...")
-activate ui
-ui -> user : Display message:\n"Attendance removed for ..."
-ui --> deleteAttendanceCommand
-deactivate ui
-
+deleteAttendanceCommand --> taa
 deactivate deleteAttendanceCommand
+taa -[hidden]-> deleteAttendanceCommand
+destroy deleteAttendanceCommand
+
+taa --> user
+deactivate taa
 
 @enduml

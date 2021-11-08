@@ -226,18 +226,66 @@ The sequence diagram shown below illustrates how the `set_attendance` command wo
 
 Below is an example scenario of how the set attendance feature behaves at each step:
 * Step 1 - The user executes `set_attendance c/CS2113T-F12 s/1-3 l/1 p/1` to set an attendance to `Present` for students 
-at index `1-3`, lesson number `1` to set a student's attendance for a lesson. The `set_attendance` command calls the 
-`SetAttendanceCommand.execute` method.
+at index `1-3`, lesson number `1`. The `set_attendance` command calls the `setAttendanceCommand.execute` method.
 * Step 2 - The range of student indexes or selected student indexes are transformed into an array of the consisting
-student indexes. In this case, a `StudentIndexArray` [1,2,3] is set using the `setStudentIndexes` method.
+student indexes. In this case, a `studentIndexArray` [1,2,3] is set using the `setStudentIndexes` method.
 * Step 3a - If no existing attendance object with lesson number `1` for student at index `1` is found, a new 
-`Attendance` object with lesson number `1` and attendance record `Present` is set as its lesson number and attendance record respectively.
-* Step 3b - Otherwise, the existing attendance record of the attendance object with lesson number `1` is set to
-`Present`.
-* Step 4 - `AttendanceList.addAttendance` is called to add the newly created `Attendance` object into the `attendances` 
-ArrayList within `AttendanceList`.
-* Step 5 - Steps 2-4 are repeated for each element in the `StudentIndexArray`. For our example, steps 2-4 are repeated 
+`attendance` object with lesson number `1` and attendance record `Present` is set as its lesson number and attendance 
+record respectively.
+* Step 3b - Otherwise, the existing attendance record of the `attendance` object with student at index `1` and lesson 
+number `1` is set to `Present`.
+* Step 4 - `attendanceList.addAttendance` is called to add the newly created `attendance` object into the `attendances` 
+ArrayList within `attendanceList`.
+* Step 5 - Steps 2-4 are repeated for each element in the `studentIndexArray`. For our example, steps 2-4 are repeated 
 for students at index `2` and `3`.
+
+<br>
+
+### List Attendance
+The sequence diagram shown below illustrates how the `list_attendance` command works:
+![ListAttendanceSequenceDiagram](diagrams/sequence/ListAttendanceSequenceDiagram.png)
+
+Below is an example scenario of how the set attendance feature behaves at each step:
+* Step 1 - The user executes `list_attendance c/CS2113T-F12 s/1` to list the attendance of student at index `1` for 
+different lessons. The `list_attendance` command calls the `listAttendanceCommand.execute` method.
+* Step 2 - `classList.getClassWithId` is called to obtain the `teachingClass` object with `classId` `CS2113T-F12`.
+* Step 3 - `teachingClass.getStudentList` is called to obtain `studentList` object, containing the ArrayList of students
+for the class.
+* Step 4 - `studentList.getStudentAt` is called to obtain the `student` object at `studentIndex` `1`.
+* Step 5 - `student.getAttendanceList` is called to obtain the `attendanceList` object, containing the ArrayList of 
+attendances of different lessons for student at index `1` in `CS2113T-F12` class.
+
+<br>
+
+### List Lesson Attendance
+The sequence diagram shown below illustrates how the `list_lesson_attendance` command works:
+![ListLessonAttendanceSequenceDiagram](diagrams/sequence/ListLessonAttendanceSequenceDiagram.png)
+
+Below is an example scenario of how the set attendance feature behaves at each step:
+* Step 1 - The user executes `list_lesson_attendance c/CS2113T-F12 l/1` to list the class attendance for lesson number
+`1`. The `list_lesson_attendance` command calls the `listLessonAttendanceCommand.execute` method.
+* Step 2 - `classList.getClassWithId` is called to obtain the `teachingClass` object with `classId` `CS2113T-F12`.
+* Step 3 - `teachingClass.getStudentList` is called to obtain `studentList` object, containing the ArrayList of students
+  for the class.
+* Step 4 - The constructor `LessonAttendanceList()` is called to create a `lessonAttendanceList` object.
+* Step 5 - `lessonAttendanceList.setLessonAttendances` is called to populate an ArrayList in the `lessonAttendanceList` 
+object with existing student attendances from class `CS2113T-F12`, lesson number `1`.
+
+<br>
+
+### Delete Attendance
+The sequence diagram shown below illustrates how the `delete_attendance` command works:
+![DeleteAttendanceSequenceDiagram](diagrams/sequence/DeleteAttendanceSequenceDiagram.png)
+
+Below is an example scenario of how the set attendance feature behaves at each step:
+* Step 1 - The user executes `delete_attendance c/CS2113T-F12 s/1-3 l/1` to delete an attendance for students
+  at index `1-3`, lesson number `1`. The `delete_attendance` command calls the `deleteAttendanceCommand.execute` method.
+* Step 2 - The range of student indexes or selected student indexes are transformed into an array of the consisting
+  student indexes. In this case, a `studentIndexArray` [1,2,3] is set using the `setStudentIndexes` method.
+* Step 3 - The existing `attendance` object with student at index `1` and lesson number `1` is removed from 
+`attendanceList` through the `attendanceList.deleteAttendance` method.
+* Step 4 - Steps 2-3 are repeated for each element in the `StudentIndexArray`. For our example, steps 2-4 are repeated
+  for students at index `2` and `3`.
 
 <br>
 
