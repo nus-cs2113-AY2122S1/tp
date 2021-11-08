@@ -55,6 +55,8 @@ import seedu.duke.exceptions.syntax.ArgumentsNotFoundException;
 import seedu.duke.exceptions.syntax.IllegalCommandException;
 import seedu.duke.exceptions.syntax.IllegalDateTimeException;
 import seedu.duke.exceptions.syntax.WrongDividerOrderException;
+import seedu.duke.exceptions.zoom.InvalidZoomCommandException;
+import seedu.duke.exceptions.zoom.MissingParametersException;
 import seedu.duke.food.FoodRecord;
 import seedu.duke.constants.Messages;
 import seedu.duke.parser.schedule.ParserSchedule;
@@ -243,13 +245,21 @@ public class Parser {
             String[] zoomArgs = commandArgs.split(" ");
             switch (zoomArgs[0]) {
             case COMMAND_ZOOM_SUFFIX_ADD:
-                return new AddZoomCommand(zoomArgs[1], zoomArgs[2]);
+                if (zoomArgs.length > 2) {
+                    return new AddZoomCommand(zoomArgs[1], zoomArgs[2]);
+                } else {
+                    throw new MissingParametersException();
+                }
             case COMMAND_SUFFIX_LIST:
                 return new ListZoomLinksCommand();
             case COMMAND_ZOOM_SUFFIX_OPEN:
-                return new OpenZoomLink(zoomArgs[1]);
+                if (zoomArgs.length > 1) {
+                    return new OpenZoomLink(zoomArgs[1]);
+                } else {
+                    throw new MissingParametersException();
+                }
             default:
-                throw new ArgumentsNotFoundException();
+                throw new InvalidZoomCommandException();
             }
 
         case COMMAND_HElP:

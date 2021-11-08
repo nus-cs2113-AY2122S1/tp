@@ -1,12 +1,14 @@
 package seedu.duke.storage;
 
 
+import seedu.duke.exceptions.zoom.InvalidOpenRequestException;
 import seedu.duke.exceptions.zoom.InvalidZoomDataPath;
 import seedu.duke.exceptions.zoom.InvalidZoomLinkException;
 import seedu.duke.exceptions.zoom.ModuleNotFoundException;
 import seedu.duke.ui.Ui;
 import seedu.duke.parser.module.ParserModule;
 
+import javax.management.openmbean.InvalidOpenTypeException;
 import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.File;
@@ -127,7 +129,8 @@ public class StorageZoom {
      * @throws IOException throws the Input Output Exception
      * @throws ModuleNotFoundException throws the Invalid Zoom Link Exception
      */
-    public static void openZoomLink(String module) throws IOException, ModuleNotFoundException {
+    public static void openZoomLink(String module) throws IOException,
+            ModuleNotFoundException, InvalidOpenRequestException {
         String urlString = getZoomLink(module);
         System.out.println(urlString);
         try {
@@ -144,7 +147,7 @@ public class StorageZoom {
      * @return returns the zoom link.
      * @throws IOException throws the Input Output Exception
      */
-    public static String getZoomLink(String module) throws IOException {
+    public static String getZoomLink(String module) throws IOException, ModuleNotFoundException {
         File data = new File("storage/zoomdata/zoom.txt");
 
         Scanner scanner = new Scanner(data);
@@ -155,7 +158,7 @@ public class StorageZoom {
             }
         }
 
-        return "";
+        throw new ModuleNotFoundException();
     }
 
 }
