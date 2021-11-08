@@ -14,8 +14,8 @@
   - [3.4 Command Component](#34-command-component)
   - [3.5 TaskManager Component](#35-taskmanager-component)
   - [3.6 Storage Component](#36-storage-component)
-  - [3.7 Logger Component](#38-logger-component)
-  - [3.8 NUSMods API Component](#39-nusmods-api-component)
+  - [3.7 Logger Component](#37-logger-component)
+  - [3.8 NUSMods API Component](#38-nusmods-api-component)
 - [4. Implementation](#4-implementation)
   - [4.1 Task Factories](#41-task-factories)
   - [4.2 Filtering the tasklist](#42-filtering-the-tasklist)
@@ -243,7 +243,7 @@ The Storage is handled by the `DataManager` class.
 
 >💡 **Note**: The storage component has been implemented using the [Observer Design Pattern](https://en.wikipedia.org/wiki/Observer_pattern) where `TaskManager` implements `Subject` and `DataManager` implements `Observer`.
 
-### 3.8 Logger Component
+### 3.7 Logger Component
  - The Logger has been implemented with the `java.util.logging` library.
  - It's designed to be as easy to use as possible where in order to log any message, you only have to use `Log.<severity>(message)`.
    - E.g. `Log.info("this is an info log")`.
@@ -256,7 +256,7 @@ SEVERITY: Log Message Here
 - All individual class loggers are stored in a hashmap `Map<String, Logger>` where if a class name is not already in the hashmap on calling any log function, it will be added automatically.
 - All log messages above `Level.SEVERE` will be printed to console and all log messages above `Level.FINE` will be added to the log file `log.txt`.
 
-### 3.9 NUSMods API Component
+### 3.8 NUSMods API Component
 
 The major parts of this component lies within the nusmods package.
 
@@ -336,7 +336,7 @@ pre-formatted `String` containing a neat list of the final filtered tasks that m
 **Step 6**: A `CommandResult` object is then created and stores the `String` containing the filtered tasklist
 as the command execution message to be handled by the `Ui` and displayed to the user on the terminal interface.
 
-#### 4.2.1 Time proximity based filtering
+### 4.2.1 Time proximity based filtering
 
 All tasks are first gotten and converted into a stream for layer mutilation. Then, the time is first found for each task using the unified interface `Task::getHappenTime`, to filter out tasks that does not have an associated time. Subsequently, the next occurrence is obtained with,
 - `Lesson::getNextOccurrence` if the task is a lesson, since lessons have irregular recurrences, or,
