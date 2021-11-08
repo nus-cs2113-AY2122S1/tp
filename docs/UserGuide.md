@@ -751,8 +751,8 @@ Mark | Viewing average mark for an assessment | `average_mark c/<CLASS_ID> a/<AS
 Mark | Viewing the median mark for an assessment | `median_mark c/<CLASS_ID> a/<ASSESSMENT_NAME>`
 Mark | Sorting and listing students in a class by their overall score | `sort_by_scores c/<CLASS_ID> o/<ORDER>`
 Attendance | Listing attendance for a particular student | `list_attendance c/<CLASS_ID> s/<STUDENT_INDEX>`
-Attendance | Setting attendance for a particular lesson for a student | `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
-Attendance | Deleting attendance for a particular lesson for a student | `delete_attendance c/<CLASS_ID> s/<STUDENT_INDEX> l/<LESSON_NUMBER>`
+Attendance | Setting attendance for a particular lesson for a student | <code> set_attendance c/<CLASS_ID> [s/<STUDENT_INDEX> &#124; s/<START_STUDENT_INDEX>-<END_STUDENT_INDEX> &#124; s/<STUDENT_INDEX>,<STUDENT_INDEX>,...] l/<LESSON_NUMBER> p/<PRESENT> </code>
+Attendance | Deleting attendance for a particular lesson for a student | <code> delete_attendance c/<CLASS_ID> [s/<STUDENT_INDEX> &#124; s/<START_STUDENT_INDEX>-<END_STUDENT_INDEX> &#124; s/<STUDENT_INDEX>,<STUDENT_INDEX>,...] l/<LESSON_NUMBER> </code>
 Comment | Listing comments for all students in a class | `list_comments c/<CLASS_ID>`
 Comment | Setting comment for a particular student | `set_comment c/<CLASS_ID> s/<STUDENT_INDEX> t/<COMMENT>`
 Comment | Deleting comment for a particular student | `delete_comment c/<CLASS_ID> s/<STUDENT_INDEX>`
