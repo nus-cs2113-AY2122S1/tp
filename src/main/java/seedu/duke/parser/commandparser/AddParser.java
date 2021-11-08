@@ -107,7 +107,7 @@ public abstract class AddParser extends Parser {
         } catch (AttributeNotFoundException e) {
             String attributeType = ItemAttribute.getAttributeName(e.getItemAttribute());
             String attributeFlag = ItemAttribute.getItemFlag(e.getItemAttribute());
-            throw new DukeException("Please add a " + attributeType + "for your event using "
+            throw new DukeException("Please add a " + attributeType + " for your event using "
                     + attributeFlag + attributeType.toUpperCase());
         }
     }

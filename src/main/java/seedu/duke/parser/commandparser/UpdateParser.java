@@ -56,7 +56,7 @@ public abstract class UpdateParser extends Parser {
         } catch (AttributeNotFoundException e) {
             String attributeType = ItemAttribute.getAttributeName(e.getItemAttribute());
             String attributeFlag = ItemAttribute.getItemFlag(e.getItemAttribute());
-            System.out.println("Please add a " + attributeType + "for your update using "
+            System.out.println("Please add a " + attributeType + " for your update using "
                     + attributeFlag + attributeType.toUpperCase());
         }
         return null;
