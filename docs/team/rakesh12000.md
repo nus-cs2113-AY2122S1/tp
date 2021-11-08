@@ -61,13 +61,43 @@ ultimately saving cost and increasing profits.
   * Added Preface for the various components
   * Added Product Scope
   * Added Manual Testing 
-  * Added Implementation for:
-    * `Edit` Commands
-    * `Link` Command
-    * `Sort` Commands
-  * Added PUML Diagram for:
-    * `InputParser` class
-    * `Edit` Commands
-    * `Link` Command 
-    * `Sort` Commands
+  * Added Documentation for:
+    * Design - `InputParser` class
+    * Implementation - `Edit` Commands
+    * Implementation - `Link` Command
+    * Implementation - `Sort` Commands
+  * Added PUML Sequence Diagrams for:
+    * Design - `InputParser` class
+    
+    <p align="center">
+        <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/input_parser_sequence.png">
+      </p>
+      <center>Figure 3: InputParser Sequence Diagram</center>
+      <br>
+    
+    * Implementation - `Edit` Commands
+    <p align="center">
+        <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/edit_dish_name_sequence.png">
+    </p>
+    <center>Figure 14: EditDishNameCommand Sequence Diagram</center>
+    <br>
+    
+    * Implementation - `Link` Command 
+    <p align="center">
+        <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/link_sequence.png">
+    </p>
+    <center>Figure 16: LinkCommand Sequence Diagram</center>
+    <br>
+    
+    * Implementation - `Sort` Commands
+  <p align="center">
+      <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/sort_dish_sequence.png">
+  </p>
+  <center>Figure 18: SortDishCommand Sequence Diagram</center>
+  <br>
 
+  <p align="center">
+      <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/sort_ingr_sequence.png">
+  </p>
+  <center>Figure 19: SortIngrCommand Sequence Diagram</center>
+  <br>
