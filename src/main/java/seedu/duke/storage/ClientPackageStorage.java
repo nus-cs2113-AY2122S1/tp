@@ -1,5 +1,3 @@
-//@@author Demonshaha
-
 package seedu.duke.storage;
 
 import seedu.duke.TourPlannerException;
@@ -20,6 +18,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class for all ClientPackages. Creates and loads up the ClientPackageList.
+ */
 public class ClientPackageStorage {
     public static final String EMPTY_STRING = "";
     private final ClientPackageList clientPackages = new ClientPackageList();

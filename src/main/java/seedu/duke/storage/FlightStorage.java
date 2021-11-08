@@ -24,8 +24,11 @@ public class FlightStorage {
 
     /**
      * Class constructor for FlightStorage.
+     * Creates directory and files for storage if they do not already exist.
      *
      * @throws TourPlannerException if there are IOException thrown when creating a new directory/file
+     * @see File
+     * @see IOException
      */
     public FlightStorage() throws TourPlannerException {
         try {
@@ -51,9 +54,12 @@ public class FlightStorage {
     }
 
     /**
-     * Reads and loads the flights from the stored text file, '/data/TourPlannerFlights.txt' into FlightList.
+     * Reads each line of the file and identifies flight fields -- flightId,
+     * departure destination, return destination, departure date-time, return date-time.
+     * Creates new Flight object based on the flight fields and adds to FlightList.
      *
-     * @throws TourPlannerException if file in the given filePath does not exist
+     * @throws TourPlannerException if FileNotFoundException due to corrupted or missing file
+     * @see FileNotFoundException
      */
     public void loadFile() throws TourPlannerException {
         try {
@@ -90,7 +96,7 @@ public class FlightStorage {
     }
 
     /**
-     * Writes to and saves the flights from the database into the text file, '/data/TourPlannerFlights.txt' for storage.
+     * Loops through flights and writes into storage file for Flights.
      */
     public void saveFile() {
         ArrayList<Flight> flightList = flights.getFlights();

@@ -51,5 +51,5 @@ Code contributed: : [Reposense link](https://nus-cs2113-ay2122s1.github.io/tp-da
         * Added implementation details for Storage
 
 * Coummunity:
-  * Reviwed and approved PRs frequently
+  * Reviewed and approved PRs frequently
   * Give suggestions on codes.
