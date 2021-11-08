@@ -1054,7 +1054,7 @@ chicken|2.0|1.0|2.5|30/10/2021
 
 2. Sort the Ingredients by amount of wastage
 
-    * Test case: `sort ingr` but no Dish added to the Dish List in the first place.
+    * Test case: `sort ingr` but no Ingredients added to the Ingredient List in the first place.
 
       Expected: An empty list of Ingredients with message to tell user to add Ingredients will be printed onto the CLI.
 
