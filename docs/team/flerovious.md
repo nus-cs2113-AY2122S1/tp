@@ -38,11 +38,11 @@ View my [RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&
 
 ### Documentation
 
-#### [User Guide (UG)](/docs/UserGuide.md)
+#### [User Guide (UG)](https://ay2122s1-cs2113t-f14-1.github.io/tp/UserGuide.html)
 
 - Contributed to UG for `add` and `set` commands
 
-#### [Developer Guide (DG)](/docs/DeveloperGuide.md)
+#### [Developer Guide (DG)](https://ay2122s1-cs2113t-f14-1.github.io/tp/DeveloperGuide.html)
 
-- Contributed to code implementation details on DG section 4
+- Added code implementation details on DG section 4
 - Added `AddGoalCommandSequenceDiagram` and review the rest of the sequence diagrams
