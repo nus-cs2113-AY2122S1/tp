@@ -599,7 +599,7 @@ It takes in a `GoalList` object and converts the data into string to be stored i
 * wants to have a work-life balance but is often consumed by work/school
 * have goals and aspirations but falls short of them; lacklustre commitment or game plan for action
 * doesn't want to rely on smartphone (They're doing everything these days, sheesh!)
-* prefers desktop app, 
+* prefers desktop app
 * familiar and comfortable with CLI apps, or willing to learn to use
 
 ### Value proposition
@@ -633,7 +633,6 @@ workload or commitments.
 |App should be operable on Windows, macOS, and Ubuntu running Java `11` or above.|Technical|
 |App can be learned anyone who is familiar with computer within minutes of use.|Quality|
 |App should be a helpful, encouraging, and a joy to use.|Quality|
-| {feel free to add something here}|Performance|
 
 ## Appendix D: Glossary
 

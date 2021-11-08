@@ -30,9 +30,9 @@ Below are contributions I've made to the team and Ha(ppy)Bit. Organised for you 
 
 #### v2.1
 
-- 
+- Refined exception handling and accuracy of error messages of [staung07](../AboutUs.md)'s
+  new `UpdateParser` class
 - Added additional Junit tests in `UpdateParserTest` to improve test coverage
-- 
 
 ### Documentation
 
@@ -45,14 +45,18 @@ Below are contributions I've made to the team and Ha(ppy)Bit. Organised for you 
 
 #### [Developer Guide (DG)](/docs/DeveloperGuide.md)
 
-- Wrote `DeleteGoalCommand` and `DeleteHabitCommand` subsections of "Command Component" of "Design and Implementation"
+
+- Wrote "4.3. Listing all Goals" subsection of "4. Implementation"
+  - Created PUML Sequence Diagram 
+- Contributed to "4.8. Deleting a Goal" and "4.9. Deleting a Habit" subsection of "4. Implementation"
+  - Created PUML Sequence Diagram
 - Wrote "Target User Profile" and "Value Proposition" under "Appendix A"
 - Contributed to "Appendix C: Non-Functional Requirements"
 - Contributed to "Appendix D: Glossary"
 
 ### Community
 
-- 
+- _Hmm it's empty._
 
 ### Tools
 
@@ -60,6 +64,8 @@ Below are contributions I've made to the team and Ha(ppy)Bit. Organised for you 
 
 ### Extra
 
-- Came up with the logo for Ha(ppy)Bit:
-![HappyBit Logo](../Display_Images/HappyBit_logo.png)
-Used on the team's [Main Page](https://ay2122s1-cs2113t-f14-1.github.io/tp/) and in CS2101 Demo and Pitch.
+- Designed logo and diagram for Ha(ppy)Bit:
+  - ![HappyBit Logo](../Display_Images/HappyBit_logo.png)
+    Used on the team's [Main Page](../README.md) and in CS2101 Demo and Pitch.
+  - ![HappyBit_Visual_Explain](../Display_Images/HappyBit_Visual_Explain.png)
+    Used in the team's [User Guide](../UserGuide.md).
