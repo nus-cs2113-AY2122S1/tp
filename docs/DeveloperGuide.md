@@ -21,7 +21,7 @@
 4.1 [Module-related Features](#41-module-related-features)\
 4.2 [Zoom-related Features](#42-zoom-related-features)\
 4.3 [Calendar-related Features](#43-calendar-related-features)\
-4.4 [Journal-related Features](#44-journaling-feature)\
+4.4 [Journal-related Features](#44-journal-related-features)\
 4.5 [Food-related Features](#45-food-related-features)\
 4.6 [Help Command](#46--help-command)\
 4.7 [Exit Command](#47-exit-command)\
