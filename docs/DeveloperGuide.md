@@ -1,23 +1,22 @@
 # Developer Guide
 
-
 ## Table of Contents
 
 - [Getting Started](#getting-started)
-  - [Recommend software (for optimal compatability)](#recommended-software-for-optimal-compatability)
-  - [Setting up this project in your computer](#setting-up-this-project-in-your-computer)
-  
+    - [Recommend software (for optimal compatability)](#recommended-software-for-optimal-compatability)
+    - [Setting up this project in your computer](#setting-up-this-project-in-your-computer)
+
 
 - [Design & Implementation](#design--implementation)
-   - [Architecture](#architecture)
-   - [Command component](#command-component)
-       - [Add feature](#uadd-featureu)
-       - [Cut feature](#ucut-featureu)
-       - [List feature](#ulist-featureu)
-       - [Find feature](#ufind-featureu)
-       - [Sort feature](#usort-featureu)
-   - [Ui component](#ui-component)
-   - [Storage component (chengxu to do)]()
+    - [Architecture](#architecture)
+    - [Command component](#command-component)
+        - [Add feature](#uadd-featureu)
+        - [Cut feature](#ucut-featureu)
+        - [List feature](#ulist-featureu)
+        - [Find feature](#ufind-featureu)
+        - [Sort feature](#usort-featureu)
+    - [Ui component](#ui-component)
+    - [Storage component (chengxu to do)]()
 
 
 - [Product Scope](#product-scope)
@@ -32,7 +31,7 @@
 
 <br>
 
-##Getting Started
+## Getting Started
 
 <hr>
 
@@ -123,7 +122,7 @@ The Sequence Diagram below illustrates the flow of parsing a command:
 
 Here is a class diagram of Parser component:
 
-![Parser](https://user-images.githubusercontent.com/62021897/140608448-dc37fb49-dbab-4279-9067-770af331d19a.PNG)
+![Parser](https://user-images.githubusercontent.com/70316271/140693617-31b988e6-90ff-46b5-8af1-8921ca1ef3fa.png)
 
 The flow of **parse** in `Parser` is as follows:
 
@@ -184,12 +183,14 @@ Here's a (partial) class diagram of Command component:
 
 ![Command class (2)](https://user-images.githubusercontent.com/70316271/140637570-e6a9f453-ea88-46a8-8f3c-e1913e7e938d.png)
 
-Note: `XYZ` in this diagram is a placeholder for the specific data type (e.g. `Client`, `Flight`, `Tour`, `ClientPackage`).
-A similar workflow applies for these classes depending on the availability of the command for the specific data type.
+Note: `XYZ` in this diagram is a placeholder for the specific data type (e.g. `Client`, `Flight`, `Tour`
+, `ClientPackage`). A similar workflow applies for these classes depending on the availability of the command for the
+specific data type.
 
 How the `Command` works:
 
-**Step 1.** Based on the user input, `Parser` returns one of the subclasses of `Command` to `TourPlanner` *(main class)*.
+**Step 1.** Based on the user input, `Parser` returns one of the subclasses of `Command` to `TourPlanner` *(main class)*
+.
 
 **Step 2.** `TourPlanner` calls `Command.execute()`.
 
@@ -256,8 +257,8 @@ finds the `ClientPackage` based on the `CLIENT_PACKAGE_ID` "p001".
 
 **Step 3.** If the `CLIENT_PACKAGE_ID` "t001" already exists, an error message is returned.
 
-**Step 4.** Else, the `CLIENT_PACKAGE_ID` "p001" does not exist, `execute()` calls `add` in `ClientPackageList`, to
-add the specific tour and its arguments into the `ClientPackageList`.
+**Step 4.** Else, the `CLIENT_PACKAGE_ID` "p001" does not exist, `execute()` calls `add` in `ClientPackageList`, to add
+the specific tour and its arguments into the `ClientPackageList`.
 
 **Step 5.** `execute()` calls `showAdd` in `Ui`, which prints out the Object, `CLIENTPACKAGE` that was added.
 
@@ -451,30 +452,24 @@ The following activity diagram summarizes the following steps.
 
 #### <u>Finding a particular tour</u>
 
-**Step 1**: The user executes ```find -t JPN``` to query if a tour with code
-JPN exists in the TourList. The ```parse``` function in the ```Parser```
+**Step 1**: The user executes ```find -t JPN``` to query if a tour with code JPN exists in the TourList. The ```parse```
+function in the ```Parser```
 class takes the command, and the first word in it (```find```) means that the
-```parseFind()``` is to be called to determine which type of Object is to be
-queried for. The second word (```-f```) means that a the ```FindTourCommand()``` is
-executed with the parameter ```JPN```
+```parseFind()``` is to be called to determine which type of Object is to be queried for. The second word (```-f```)
+means that a the ```FindTourCommand()``` is executed with the parameter ```JPN```
 
+**Step 2**: The ```FindTourCommand``` is executed and iterates through each ```Tour``` object in the ```TourList```. For
+every ```Tour```, the ```getCode()``` function is called to retrieve the code attribute of the Tour. If the tour
+attribute is equals to ```JPN```, the ```Tour``` object is printed onto the console terminal.
 
-**Step 2**: The ```FindTourCommand``` is executed and iterates through each ```Tour``` object in the ```TourList```.
-For every ```Tour```, the ```getCode()``` function is called to retrieve the code attribute of the Tour.
-If the tour attribute is equals to ```JPN```, the ```Tour``` object
-is printed onto the console terminal.
+**Step 3**: In addition, the ```FindTourCommand``` iterates through each ```ClientPackage``` object in
+the ```ClientPackageList```. For every ```ClientPackage```, the ```getTour()``` function is called to retrieve the tour
+attribute of the ClientPackage. If the tour attribute is equals to the same ```Tour``` object that was found in Step 2,
+the client attribute of that same ClientPackage will be retrieved using the ```getClient()``` function.
 
-
-**Step 3**: In addition, the ```FindTourCommand``` iterates through each ```ClientPackage``` object in the ```ClientPackageList```.
-For every ```ClientPackage```, the ```getTour()``` function is called to retrieve the tour attribute of the ClientPackage.
-If the tour attribute is equals to the same ```Tour``` object that was found in Step 2, the client attribute of that same
-ClientPackage will be retrieved using the ```getClient()``` function.
-
-
-**Step 4**: The client's name attribute is then retrieved using the ```getName()``` function in the Client class.
-The name is printed onto the console terminal under "Subscribed Clients". Once all  ```ClientPackage``` objects are
-iterated through in the ```ClientPackageList```, the total number of subscribed clients will be printed on the console
-terminal.
+**Step 4**: The client's name attribute is then retrieved using the ```getName()``` function in the Client class. The
+name is printed onto the console terminal under "Subscribed Clients". Once all  ```ClientPackage``` objects are iterated
+through in the ```ClientPackageList```, the total number of subscribed clients will be printed on the console terminal.
 
 <br>
 
@@ -494,10 +489,9 @@ class takes the command, and the first word in it (```find```) means that the
 ```parseFind()``` is to be called to determine which type of Object is to be queried for. The second word (```-f```)
 means that a the ```FindFlightCommand()``` is executed with the parameter ```SQ-JPN```
 
-**Step 2**: The ```FindFlightCommand``` is executed and iterates through each ```Flight``` object in the ```FlightList```.
-For every ```Flight```, the ```getCode()``` function is called to retrieve the code attribute of the Tour.
-If the tour attribute is equals to ```SQ-JPN```, the ```Flight``` object
-is printed onto the console terminal.
+**Step 2**: The ```FindFlightCommand``` is executed and iterates through each ```Flight``` object in
+the ```FlightList```. For every ```Flight```, the ```getCode()``` function is called to retrieve the code attribute of
+the Tour. If the tour attribute is equals to ```SQ-JPN```, the ```Flight``` object is printed onto the console terminal.
 
 **Step 3**: In addition, the ```FindFlightCommand``` iterates through each ```ClientPackage``` object in
 the ```ClientPackageList```. For every ```ClientPackage```, the ```getFlight()``` function is called to retrieve the
@@ -547,7 +541,6 @@ Given below is an example usage of `sort -c /id`:
 Here is a (partial) sequence diagram of the above user input:
 
 ![SortClientCommand](https://user-images.githubusercontent.com/70316271/140637939-1ff5b961-31fa-4afa-b834-316066362ffd.png)
-
 
 **Step 1**: After adding a few clients to the database, user inputs `sort -c /id`. This command is passed to `parse()`
 method in the `Parser` class.
@@ -602,16 +595,17 @@ The diagram below shows the class diagram of the Ui component, in relation with 
 **API: `ClientPackageStorage.java` `ClientStorage.java` `FlightStorage.java` `TourStorage.java`**
 
 The Storage component consists of:
+
 1. ClientPackageStorage.java: Reading and saving files which record all clientpackages.
 2. ClientStorage.java: Reading and saving files which record all clients.
 3. FlightStorage.java: Reading and saving files which record all flights.
 4. TourStorage.java: Reading and saving files which record all tours.
 
 To add on Storage component is designed to access only the following folder:
+
 1. `data/`
 
 <br>
-
 
 ## Product scope
 
@@ -644,7 +638,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |`* *`|user with large amounts of data|find an existing entry of specific data type |locate a specific entry easily|
 |`* *`|user with large amounts of data|sort existing entries of specific data type |make smarter recommendations to clients based on their preferences|
 |`* *`|user|check number of clients subscribed to a tour / flight|check the popularity, vacancy of certain tours / flights|
-
 
 Note: 'specific data type' refers to either clients, tours, flights or tour packages.
 
