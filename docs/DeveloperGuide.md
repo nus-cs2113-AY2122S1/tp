@@ -593,14 +593,35 @@ This section describes the implementation of how the user can delete a goal from
 
 ### 4.9. Deleting a Habit
 
+This section describes the implementation of how the user can delete a habit from an associated goal from their list of 
+tracked goals.
+
 #### 4.9.1 Implementation
 
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteHabitCommandParserSequenceDiagram.png)
 
-When the `runCommand` method is executed for the `DeleteHabitCommand` object, the following steps as indicated by the
-sequence diagram below is carried out:
+1. The `DeleteParser#parseDeleteHabitCommand(input)` method is called, which starts the process of
+   extracting parameters from the user input.
+2. The `DeleteParser#splitInput(input)` method splits the user input into an ArrayList of parameters.
+3. The `goalIndex` of the associated goal from which a habit to deleted is then obtained with 
+   `DeleteParser#getIndex(parameters, FLAG_GOAL_INDEX)` method
+4. The `habitIndex` of the habit to deleted is then obtained with `DeleteParser#getIndex(parameters, FLAG_HABIT_INDEX)`
+   method
+5. A `DeleteHabitCommand(goalIndex, habitIndex)` object is created and returned from the
+   `DeleteParser#parseDeleteHabitCommand(input)` method.
 
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteHabitCommandSequenceDiagram.png)
+
+5. The `DeleteHabitCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
+   `GoalList#deleteHabitFromGoal(goalIndex, habitIndex, printManager)` method.
+6. Within this newly called method, the `GoalList#getGoal(goalIndex)` method is called to retrieve the `Goal` object
+   from the `goalList`.
+7. An ArrayList of habits associated with this goal is retrieved with `goal.getHabitList()`.
+8. The `GoalList#getHabit(habitList, habitIndex)` method is called to get the habit to be deleted. If `habitIndex` is
+   invalid, a `HaBitCommandException` is raised.
+9. The `Habit` is then deleted with the `goal.removeHabit(habitIndex)` method.
+10. Finally, the `PrintManager#printRemovedHabit(goalDescription, habitDescription)` method is called to print a 
+    confirmation message on the successful deletion of a habit.
 
 #### 4.9.2. Design Considerations
 
