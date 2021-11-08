@@ -1,13 +1,14 @@
 # Developer Guide
 
 ## Acknowledgements
-Snippets of code from Baeldung’s guide to unit testing of system.out.println() with junit were used.
 
-Source: https://www.baeldung.com/java-testing-system-out-println
 
-Snippets of code from addressbook-level2’s Parser.java were used.
+Source:
+1. Snippets of code from [addressbook-level2’s Parser.java](https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java) were used.
+2. Snippets of code from [Baeldung’s guide to unit testing](https://www.baeldung.com/java-testing-system-out-println) of system.out.println() with junit were used.
 
-Source: https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
+
+---
 
 ## Design & implementation
 ### Architecture
@@ -101,11 +102,29 @@ It interacts with `FinancialTracker`, `BudgetManager`, `CurrencyConversion` and 
 
 `DataManager` &larr; `StonksXD_data.csv`
 
-The Sequence Diagram below shows how the components interact with each other in a typical feedback loop.
-It is illustrated using the hypothetical scenario where the user issues the command `del_ex i/1`.
+---
+### Main Component 
+The main component is made up of the StonksXD class that contains references to the various other components such as Parser and BudgetManager.
+When the program first starts, the StonksXD class will call its constructor and load up the data stored in a csv file into the FinancialTracker component.
+After that it would take inputs from the user and parse it to identify which command it is. This process will continue until a termination command is identified
+which will then stop the feedback loop and end the program.
+
+
+The Sequence Diagram below shows how the main component interacts with other components in a typical feedback loop.
+The diagram below represents the use of delete expense command.
 
 ![](StonksXDSequenceDiagram.drawio.png)
-The sections below provide more information on the respective components.
+
+How the feedback loop of the main components works
+1. The main component will call the run() method which begins the program after the initial constructor is done.
+2. There will be a terminating flag called isNonTerminatingCommand which will be set to false when an exit command is detected.
+3. While this flag is true, the stonks program will constantly read and execute the given input.
+4. The parser would break down and identify the given input and create the respective commands 
+5. The commands will then be executed based on their different functionality.
+6. In the example above, delete expense command is created and executed, hence calling removeExpense() method.
+7. In most cases the method called would have feedback printing messages that requires the use of the Ui component, in this case the printing method is called printIncomeDeleted.
+8. After everything is completed, the isExit() method will check if the command given is a terminating command to adjust the terminating flag accordingly.
+9. If it is terminated the main component will print the termination message through the Ui.
 
 ---
 
@@ -114,7 +133,7 @@ Ui contains a Scanner object that takes in user inputs from the command line.
 The Ui’s main role is to provide feedback whenever the user enters a command through the form of messages. It also 
 handles the indexing of each element in the listing methods before printing out to the standard output for users to see.
 
-The image below illustrates the sequence diagram in the context of listing methods
+The sequence diagram below illustrates the sequence diagram in the context of listing methods
 which includes listExpense, listIncome and listFind
 
 
@@ -137,9 +156,18 @@ Each method is abstracted into an appropriate child class (for e.g. `AddExpenseC
 
 After obtaining the attributes of an entry from the `entry` class and the required command given by the user from the `parser` class, it directs the inputs to the respective methods for execution.
 
-The image below shows the sequence diagram of how the `AddExpenseCommand` class is used and, the other classes involved with it as well.
+
+The sequence diagram below shows how the `AddExpenseCommand` class is used and the other classes involved with it as well.
+`AddExpenseCommand` inherits from the `command` parent class and contains a method `execute` that adds an expense entry into `FinancialTracker`.
 
 ![](AddExpenseCommandSD.drawio.png)
+
+How the Command compoment works:
+
+1. When `execute` is called, it calls a `addExpense()` method in `FinancialTracker` which adds a `expense` object associated to the command into `FinancialTracker`.
+2. Next, the added object will be printed by the `Ui` class using the `printExpenseAdded()` method as feedback to the user.
+3. Lastly, based on the `expense` added, `BudgetManager` will update the budget related to the category of the object using the `handleBudget()` method.
+4. The updated budget will then be reflected to the user by the `printBudgetReminder` method in `Ui`. 
 
 ---
 
@@ -153,17 +181,28 @@ The `Parser` class is in charge of:
 
 `Parser` mainly uses regex to parse items.
 
+#### Converting user inputs to commands
+
+1. When the user gives an input, it will first be split into 2 parts command word and arguments using regex.
+2. The command word will be matched with the list of expected command words. If there is no match, return an 
+invalid command and the process stops here.
+3. If there is a match, `Parser` will check the validity of the arguments the user gave. This is also done
+using regex.
+4. If the arguments are valid, the corresponding command will be returned.
+5. If invalid, return an invalid command.
+
+
 ---
 
 ### Financial Tracker Component
 
-The `FinancialTracker` class is in charge of storing, deleting, and retrieving income and 
+The `FinancialTracker` class is in charge of storing, deleting, and retrieving income and
 expense related calculations while the program is running. It performs these operations based
 on the different commands it receives from the user.
 
-The class diagram below shows the structure of `FinancialTracker`.
+The class diagram below shows the structure of `FinancialTracker`
 
-![](FinancialTrackerCD.drawio.png) 
+![](FinancialTrackerCD.drawio.png)
 
 The `FinancialTracker` component,
 
@@ -175,14 +214,16 @@ It shows the hypothetical scenario where its `getExpenseBetween` method.
 
 ![](FinancialTrackerSD.drawio.png)
 
+How the Financial Tracker component works:
+
 1. `getExpenseBetween` is implemented using streams. It filters through the entire `expenses` ArrayList,
-checking if the date associated to that entry lies within the given date range provided as input parameters.
-Those that passes this check are stored in a `List` using the method `.collect(Collections.toList())` method, called on the stream. 
-2. This check is done by the `entryDateInRange` method in `DateOperator`. `DateOperator` stores and carries out all date related operations. 
+   checking if the date associated to that entry lies within the given date range provided as input parameters.
+   Those that passes this check are stored in a `List` using the method `.collect(Collections.toList())` method, called on the stream.
+2. This check is done by the `entryDateInRange` method in `DateOperator`. `DateOperator` stores and carries out all date related operations.
 3. The list is then passes into another method `getSumOfEntries`, which is a method in `FinancialCalculator` class.
 4. The method makes use of streams as well. It replaces all the entries with doubles associate to that entry
    using the method `mapToDouble` which uses the `getvalue` method in `Entry` to get the value of the entry.
-5. Finally, the method `sum()` is called on the stream which returns the sum of all the values inside the stream. This value 
+5. Finally, the method `sum()` is called on the stream which returns the sum of all the values inside the stream. This value
    is then returned at the end of the function call.
 
 ---
@@ -196,8 +237,6 @@ as prompted by the user using appropriate commands.
 The class diagram below shows the structure of the `CurrencyManager` class:
 
 -- Work in progress --
-
-
 
 ---
 
@@ -215,10 +254,7 @@ using regex.
 
 Every important field will be separated by `Parser` with a `,` before saving them into the respective `csv` files.
 
-##### Converting `csv` data to user information
-
-When a line of data is obtained from the `csv` file, `Parser` will check if the line fits the required format using
-regex.
+---
 
 ### Budget Component
 
@@ -232,7 +268,7 @@ There are currently 7 child classes of `Budget` (i.e. 7 legal budget categories 
 
 <br>
 
-How the Budget compoment works:
+How the Budget component works:
 - Upon start-up, a new `BudgetManager` is initialised in `StonksXD`.
 - `BudgetManager` initialises all `Budget` sub-classes with respective budget limit values loaded from `DataManager`.
 - When an entry is added by the user, `BudgetManager` parses the category input by the user and calls the relevant `Budget` sub-class.
@@ -315,13 +351,15 @@ Second file is `StonksXD_Settings.csv` which will be storing settings. They are:
 Every important fields will be separate by a `,`. 
 These 2 files will be located in the same directory as `StonksXD.jar`.
 
-`DataManager` requires an instance of the `Parser`, `FinancialTracker`, `Ui`, `CurrencyManager` and `BudgetManager` 
+`DataManager` requires an instance of the `FinancialTracker`, `Ui`, `CurrencyManager` and `BudgetManager` 
 at the moment of creation. 
 
 - When saving data into the csv files, `DataManager` uses Java's `FileWriter` and `BufferedWriter` class to 
 interact with the csv files.
 - When loading data from the csv files, `DataManager` uses Java's `FileInputStream` and `Scanner` to interact with 
 the csv files. 
+
+`DataManager` also uses `DataConverter` to convert `csv` data to entries and settings, vice versa.
 
 The image below illustrates the class diagram in the context of data saving and loading.
 
@@ -339,9 +377,9 @@ entries immediately.
 3. Check if the first line of the `csv` file has the correct header. If the header is not correct, a warning will be 
 shown to the user.
 4. Read the second line,called `data`, which should contain all the settings.
-5. Pass `data` into `Parser` to obtain the `CurrencyType` and load it into `CurrencyManager`.
-6. Pass `data` into `Parser` to obtain the threshold value and load it into `BudgetManager`.
-7. Pass `data` into `Parser` to obtain the different budget settings and load them into `BudgetManager`.
+5. Pass `data` into `DataConverter` to obtain the `CurrencyType` and load it into `CurrencyManager`.
+6. Pass `data` into `DataConverter` to obtain the threshold value and load it into `BudgetManager`.
+7. Pass `data` into `DataConverter` to obtain the different budget settings and load them into `BudgetManager`.
 8. Return.
 9. Now DataManager will begin loading all the entries from `StonksXD_Entries.csv`.
 
@@ -353,9 +391,9 @@ shown to the user.
 shown to the user.
 12. Read from the `csv` file line by line.
 13. For every line, `x`, 2 things can happen (they will not happen concurrently):
-    - If `x` can be loaded as an `Expense` entry, `Parser` will convert it to an `Expense` and load it into 
+    - If `x` can be loaded as an `Expense` entry, `DataConverter` will convert it to an `Expense` and load it into 
     `FinancialTracker`. Start reading for the next line.
-    - If `x` can be loaded as an `Income` entry, `Parser` will convert it to an `Income` and load it into
+    - If `x` can be loaded as an `Income` entry, `DataConverter` will convert it to an `Income` and load it into
       `FinancialTracker`. Start reading for the next line.
 14. If there are corrupted entries (cannot be loaded as `Expense` or `Income`), a warning will be 
 shown to the user.
@@ -379,9 +417,9 @@ settings immediately.
 could be the faster option.
 3. Write in the `csv` header.
 4. Obtain all `Expense` entries from `FinancialTracker`.
-5. For each `Expense`, convert it to a `String` through `Parser` and write the `String` to the `csv` file.
+5. For each `Expense`, convert it to a `String` through `DataConverter` and write the `String` to the `csv` file.
 6. Obtain all `Income` entries from `FinancialTracker`. (Will not be shown in diagram as it is similar to step 4.)
-7. For each `Income`, convert it to a `String` through `Parser` and write the `String` to the `csv` file.
+7. For each `Income`, convert it to a `String` through `DataConverter` and write the `String` to the `csv` file.
 (Will not be shown in diagram as it is similar to step 5.)
 8. Close the buffer and return.
 9. Begin saving the settings.
@@ -392,7 +430,7 @@ could be the faster option.
 11. Create a `BufferedWriter` using the `FileWriter`. `BufferedWriter` is used as since we are writing many times, it
 could be the faster option.
 12. Write in the `csv` header.
-13. Use `Parser` to convert all settings to a `String`.
+13. Use `DataConverter` to convert all settings to a `String`.
 14. Write the `String` to the `csv` file.
 15. Close the buffer.
 16. Return the control to the caller.
@@ -402,6 +440,7 @@ details to reduce complexity.
 
 ![](.png)
 
+---
 
 ## Product scope
 ### Target user profile
