@@ -38,7 +38,7 @@ and that `java` is in your `PATH` environment variable.
 3. Move the jar file to the folder you want to use as the _home folder_ for SchedUrMods.
    >💡 **Note**: Ensure you have permission to create files and folders in this _home folder_.
 4. Open a terminal window in the _home folder_ you created in step 3.
-5. Type `java -jar [CS2113T-W13-3][SCHEDURMODS].jar` into the terminal to start SchedUrMods.
+5. Type `java -jar SchedUrMods.jar` into the terminal to start SchedUrMods.
 6. The following display should appear in a few seconds:
 
 ```
@@ -514,7 +514,7 @@ that have the `java 11 jdk` installed on their systems.
 **Q**: How do I transfer my data to another computer?
 
 **A**: Install the program on the other computer and replace the new empty `tasks.dat`
-it creates with the `tasks.dat` that you wish to transfer from your previous `[CS2113T-W13-3][SCHEDURMODS].jar`
+it creates with the `tasks.dat` that you wish to transfer from your previous `SchedUrMods.jar`
 home folder.
 
 **Q**: I encountered an error message `java.lang.reflect.InaccessibleObjectException` when executing the program. How do I fix it?
