@@ -15,7 +15,8 @@
 3.2 [Ui Component](#32-ui-component)\
 3.3 [Logic Component](#33-logic-component)\
 3.4 [Model Component](#34-model-component)\
-3.5 [Storage Component](#35-storage-component)
+3.5 [Storage Component](#35-storage-component)\
+3.6 [Help Component](#36-help-component)
 4. [Implementation](#4-implementation)\
 4.1 [Module-related Features](#41-module-related-features)\
 4.2 [Zoom-related Features](#42-zoom-related-features)\
@@ -81,7 +82,7 @@ iii. Click `OK`.
 5. Locate the `buid.gradle` file in the repository you have cloned and select it. Click `OK`.
 6. Click `OK` to accept the default setting.
 7. Verify the setup:\
-i. Go to `src/main/java/seedu.duke.Click`, run `Click.main()` and trying a few commands.\
+i. Go to `src/main/java/seedu.duke.Click`, run `Click.main()` and try out a few commands.\
 ii. Go to `src/test/java/seedu.duke` and run `Tests in seedu.duke` to ensure they all pass.
 
 ## 3. Design
