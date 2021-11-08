@@ -70,11 +70,11 @@ public class RecordList {
     }
 
     public void deleteExpenditure(int index) {
-        expenditureRecords.remove(index - 1);
+        expenditureRecords.remove(index);
     }
 
     public void deleteLoan(int index) {
-        loanRecords.remove(index - 1);
+        loanRecords.remove(index);
     }
 
     public ArrayList<Expenditure> getExpenditureRecords() {

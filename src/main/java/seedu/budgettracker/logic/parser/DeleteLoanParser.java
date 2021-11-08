@@ -27,7 +27,7 @@ public class DeleteLoanParser implements ParserPrefix {
             int[] indexArray = ParserUtil.parseMultipleIndexes(indexString);
             int startIndex = indexArray[0];
             int endIndex = indexArray[1];
-            return new DeleteMultipleLoanCommand(startIndex, endIndex, month);
+            return new DeleteMultipleLoanCommand(startIndex - 1, endIndex - 1, month);
         }
         int index = ParserUtil.parseIndex(indexString);
         return new DeleteSingleLoanCommand(index, month);

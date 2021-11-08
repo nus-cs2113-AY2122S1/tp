@@ -22,11 +22,11 @@ public class DeleteSingleExpenditureCommand extends DeleteCommand {
 
     @Override
     public void execute() throws CommandException {
-        if (index <= 0 || index >= allRecordList.getExpenditureListSize(month)) {
+        if (index < 0 || index >= allRecordList.getExpenditureListSize(month)) {
             throw new CommandException(MESSAGE_INVALID_INDEX_OF_EXPENDITURE);
         }
         TextUi.showSingleExpenditureDeletedMessage(index + 1,
                 allRecordList.getExpenditure(index, month), allRecordList);
-        allRecordList.deleteExpenditure(index + 1, month);
+        allRecordList.deleteExpenditure(index, month);
     }
 }

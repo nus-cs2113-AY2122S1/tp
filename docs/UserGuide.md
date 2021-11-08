@@ -542,22 +542,19 @@ Description: breakfast
 Amount: $100.00
 Date: 2021-10-10
 Category: GENERAL
-Total Amount Spent in October: $300.00
-Percentage of Budget Left: 97.00%
 ========================================================
 Successfully deleted Expenditure 4:
 Description: lunch
 Amount: $100.00
 Date: 2021-10-10
 Category: GENERAL
-Total Amount Spent in October: $200.00
-Percentage of Budget Left: 98.00%
 ========================================================
 Successfully deleted Expenditure 5:
 Description: dinner
 Amount: $100.00
 Date: 2021-10-10
 Category: GENERAL
+========================================================
 Total Amount Spent in October: $100.00
 Percentage of Budget Left: 99.00%
 ========================================================
