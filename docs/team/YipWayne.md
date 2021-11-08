@@ -9,8 +9,6 @@ It is written in Java, and has about 7 kLoC.
 
 Given below are my contributions to the project.
 
-<br>
-
 * Feature: **LIST** - Added the ability to **list** clients, flights, tours and client in the database.
     * What it does: Allows the user to list a certain data type by typing into the CLI input, in the format of:
       `list [DATA_TYPE]`
@@ -20,8 +18,6 @@ Given below are my contributions to the project.
 
     * Highlights: The list feature required the elements of a certain data type to be printed incrementally. Since each data
       type has its own attributes, a custom method to print each type of data had to be used.
-
-<br>
 
 * Feature: **FIND** - Added the ability to **find** clients, flights, tours and client in the database.
     * What it does: Allows the user to find a certain data type by typing into the CLI input, in the format of:
@@ -37,8 +33,6 @@ Given below are my contributions to the project.
     * Highlights: For finding tours and flights, it also printed out the relevant clients that subscribed to them. This implementation
       was challenging as required interaction with other object classes, such as the ClientPackage class.
 
-<br>
-
 * Feature: Implementation of base code of the UI class
     * What it does: Provides functions that the relevant Commands will call, in order to print the appropriate results
       on the console terminal.
@@ -49,23 +43,18 @@ Given below are my contributions to the project.
     * Highlights: It was challenging to find a general output structure that would be consistent with the different types 
       of commands (add, list, find, cut, sort). Hence, it required some trial and error to find a suitable output structure.
 
-<br>
-
 * Task: General implementation of Tour and TourList classes
 * Task: Implementation of list and find-related Parser exception functions
 
-<br>
 
 * Code contributed: : [Reposense link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&tabAuthor=YipWayne&tabRepo=AY2122S1-CS2113T-F11-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false&reverseAuthorshipOrder=true)
 
-<br>
 
 * Project Management:
     * Created general idea and structure for this project.
     * Created issues and milestones for Milestone v1.0 and some of 2.0
     * Approved and reviewed PRs frequently.
 
-<br>
 
 * Documentation:
     * User Guide:
@@ -80,7 +69,6 @@ Given below are my contributions to the project.
         * Added documentation for the feature `find`, along with relevant UML diagrams
         * Addeed `Getting Started` and `User Stories` section
 
-<br>
 
 * Community:
     * Reviewed and approved PRs frequently
