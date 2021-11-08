@@ -14,7 +14,7 @@ to easily access the different sections of this guide, and we hope you have a pl
 * [Program overview](#program-overview)
 * [Quick Start](#quick-start)  
 * [How to use this guide](#how-to-use-this-guide)
-* [Universities, Modules and Module Mappings](#universities,-modules-and-module-mappings)
+* [Universities, Modules and Module Mappings](#universities-modules-and-module-mappings)
 * [Features](#features)  
   * [Viewing all available universities](#viewing-all-available-universities)
   * [Viewing all available modules](#viewing-all-available-modules)
