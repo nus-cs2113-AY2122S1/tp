@@ -158,6 +158,7 @@ Examples:
 > * Note that the program will consider **all characters as data following the first space character** in the input command. You may observe leading and trailing whitespaces in the output.
 > * **Non-printable characters** (e.g. null characters) may not be correctly displayed and could potentially scramble the user interface.
 
+<div style="page-break-after: always;"></div>
 
 #### List Available [Modules](#terminologies) or [Recipes](#terminologies): `list`
 
@@ -176,6 +177,8 @@ Examples:
 - `list recipes` Lists available recipes only.
 
 ![carbon(8).png](images/ug/ListCommandExample.png)
+
+<div style="page-break-after: always;"></div>
 
 #### Select a [Module](#terminologies) or [Recipe](#terminologies): `select`
 
@@ -207,6 +210,8 @@ Format: `show`
 Resets the transformed data back to the original input.
 
 Format: `reset`
+
+<div style="page-break-after: always;"></div>
 
 #### Exit the Program: `exit`
 
