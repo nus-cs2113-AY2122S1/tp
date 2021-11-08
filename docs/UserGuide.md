@@ -191,7 +191,7 @@ Here are three things to note:
 To explain with an example, a goal that starts and ends within a month is _not_ to have a habit with an interval 
 longer than 30 days, otherwise it should've been a one-off habit! 
 2. `One-off habits` (hey, an oxymoron!) are habits that do not repeat. <br>
-This is achieved by setting the `interval` as `0`, rather than any positive integer.
+This is achieved by setting the `interval` as `0`, rather than any positive integer. Treat them as a singular task.
 3. _Ha(ppy)Bit_ does not allow for an `interval` to be shorter than 1 day. <br>
 This is for those who are planning to do a habit more than once a day. 
 You may consider having multiple recurring habits instead.
@@ -235,7 +235,8 @@ A command could look like this: `add n/Run 2.4km g/1 i/7`. Where, <br>
 `Run 2.4km`, `1`, and `7` are _parameters_, <br>
 and `n/`, `g/`, and `i/` are _flags_.
 
-> 📃 Don't worry if you typed the command wrongly! Helpful error messages will pop up to advise you on what to change.
+> 📃 Don't worry if you typed the command wrongly! Helpful error messages will pop up to advise you on what to change. 
+> 👍
 
 Here are guidelines and tips for the command format:
 * **Commands** are only accepted when you see `Command: ` on the screen (See [Main Interface](#12-main-interface)). 
@@ -261,7 +262,7 @@ Below are the commands supported by the application.
 Each section describes the function of each command and its format. <br>
 
 ### 4.1 Ask for Help: `help`
-What did you say? You're not sure what the commands are? Relax, that's why the `help` command exists.\
+What did you say? You're not sure what the commands are? Relax, a `help` command exists.\
 This command displays a list of all possible commands.
 If an invalid command is typed, this command will be invoked by default.
 

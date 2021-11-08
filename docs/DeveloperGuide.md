@@ -465,12 +465,16 @@ you decide not to pursue any further or may deem to be irrelevant.
 A `DeleteGoalCommand` object is returned from the `DeleteParser` if the user input is successfully parsed as shown below.
 If the delete command is not provided with a goal index, it will throw an exception.
 
+![](Diagram_Images/Implementation_Diagram_Images/DeleteGoalCommandParserSequenceDiagram.png))
+
 When the `runCommand` method is executed for the `DeleteGoalCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
 
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteGoalCommandSequenceDiagram.png)
 
 ### 4.9. Deleting a Habit
+
+![](Diagram_Images/Implementation_Diagram_Images/DeleteHabitCommandParserSequenceDiagram.png)
 
 When the `runCommand` method is executed for the `DeleteHabitCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
