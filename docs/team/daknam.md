@@ -2,7 +2,7 @@
 
 ## Project: Teaching Assistant's Assistant (TAA)
 Teaching Assistant's Assistant (TAA) is a Command Line Interface (CLI) application for keeping track of classes and students.
-It is written in Java, and has about 9 kLoC.
+It is written in Java, and has about 6 kLoC.
 
 Given below are my contributions to the project.
 * **New Feature**: Added `Attendance` class.
