@@ -2,6 +2,7 @@ package seplanner.universities;
 
 import java.util.ArrayList;
 
+//@@author MAZJ124
 public class UniversityList {
 
     protected ArrayList<University> list;

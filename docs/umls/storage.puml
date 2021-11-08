@@ -9,7 +9,7 @@ ModuleStorage "1" ---* Storage
     ModuleStorage : - extractAttributes(line: String) : String[]
 
 UserStorage <|-- SelectedUniversityStorage
-SelectedUniversityStorage "1" -----* Storage
+SelectedUniversityStorage "1" ----* Storage
     SelectedUniversityStorage : - {static} logger: Logger
     SelectedUniversityStorage : - {static} FILE_PATH: String
     SelectedUniversityStorage : - {static} isMappingValid: boolean

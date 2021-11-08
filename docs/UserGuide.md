@@ -10,10 +10,11 @@ or you simply wish to explore SEPlanner to its fullest potential, this is the pa
 to easily access the different sections of this guide, and we hope you have a pleasant experience.
 
 ## Content Page
-* [Introduction](#Introduction)
+* [Introduction](#introduction)
 * [Program overview](#program-overview)
 * [Quick Start](#quick-start)  
-* [How to use this guide](#How-to-use-this-guide)
+* [How to use this guide](#how-to-use-this-guide)
+* [Universities, Modules and Module Mappings](#Universities,-Modules-and-Module-Mappings)
 * [Features](#features)  
   * [Viewing all available universities](#viewing-all-available-universities)
   * [Viewing all available modules](#viewing-all-available-modules)
@@ -35,6 +36,7 @@ to easily access the different sections of this guide, and we hope you have a pl
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 * [Glossary](#glossary)
+* [Troubleshooting](#troubleshooting)
 
 ## Introduction
 
@@ -122,6 +124,41 @@ Notes are important pieces of information.
 Code blocks contain either your inputs or program outputs.  
 ```
 
+## Universities, Modules and Module Mappings
+
+SEPlanner consists of 3 main data types, `University`, `Module` and `Module Mapping`. 
+
+### University
+
+A University consists of the following: 
+1. Index
+2. Name
+3. A list of module mappings
+
+### Module
+
+A Module consists of the following: 
+1. Index
+2. Code
+3. Name
+4. Module Credits (MCs)
+
+### Module Mapping
+
+A Module Mapping consists of the following: 
+1. NUS module
+2. Overseas module
+
+An example of a module mapping might look like this: 
+```
+[1]   CS2040 - Cs112 : Introduction to Computer Science 2 : 4.0
+```
+Here,   
+* `[1]` refers to the index within its Universities' module mapping list. 
+* `CS2040` is the module code of the NUS module.
+* `Cs112` is the module code of the Overseas module name.
+* `Introduction to Computer Science 2` is the name of the Overseas module name.
+* `4.0` is the module credits of the NUS module. 
 
 ## Features
 
@@ -548,3 +585,12 @@ Command | Format | Purpose
 * *Selected Module List* - The list of NUS modules you selected.
 * *SEP* - Student Exchange Programme
 * *NUS* - National University of Singapore
+
+## Troubleshooting
+
+### Permission denied for data files
+In the event that the program crashes on startup, and display the following message:  
+```data/selectedUniversities.txt (Permission denied) ```  
+This happens if the file permission of the files in data folder have been changed. There are two solutions to this problem:
+1. Change the file permissions for `selectedUniversity.txt` and `selectedModules.txt` to the appropriate settings base on your operating system. Else;
+2. Delete the data folder. This will remove all the data.

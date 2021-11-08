@@ -35,7 +35,7 @@ public class AddCommandParserTest {
     }
 
     @Test
-    public void test_invalidUniNameOrModuleCode_exceptionThrown() {
+    public void parse_invalidUniNameOrModuleCode_exceptionThrown() {
         String inputForUni = "/uni non-existent university name";
         String inputForMod = "/mod non-existent module code";
         assertThrows(AddParseException.class, () -> acp.parse(inputForUni, universityMasterList, moduleMasterList,

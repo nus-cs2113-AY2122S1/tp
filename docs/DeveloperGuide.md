@@ -64,11 +64,13 @@ to plan for their Student Exchange Programme, optimised for use via Command Line
 
 ## Getting started 
 
-Refer to our user guide [here](https://ay2122s1-cs2113t-t09-2.github.io/tp/UserGuide.html#quick-start)
+Refer to our user guide [here](https://ay2122s1-cs2113t-t09-2.github.io/tp/UserGuide.html#quick-start).
 
 ## Design & implementation
 
-<img src="images/architecture.png" width = "280"/>  
+<p align = "center">
+<img src="images/architecture.png" width = "800"/>  
+</p>
 
 The ***Architecture Diagram*** above explains the high-level design of the App. 
 
@@ -199,7 +201,7 @@ In the printUniversity Method,
 #### API : [`Storage.java`](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob/master/src/main/java/seplanner/storage/Storage.java)
 
 <p align = "center">
-<img src="images/storage.png" width = "800" />
+<img src="images/storage.png" width = "1600" />
 </p>
 
 The storage component can implement the below features:
@@ -399,30 +401,6 @@ a list of potential exchange Universities based on the users study plan, module 
 * *CSV* - Comma-separated Values
 * *SEP* - Student Exchange Programme
 * *NUS* - National University of Singapore
-
-## Possible future updates
-### Automatically update database
-Currently, data for universities and mappings are directly retrieved from EduRec website provided by NUS, and stored in csv files.
-There is no current way to automatically update the data retrieved. As such, one of the future updates the team can look into will be to 
-retrieve the data from EduRec automatically such that the universities, modules and mappings in the database will always be up-to-date.
-### Move database online for better security
-Data entered by users (selected module and university list) are currently only stored in the user's local machine. This introduces a certain
-amount of uncertainty to the users since the data might be easily corrupted or lost if the local machine malfunctions, thus the team should also
-look into storing all the data on the cloud such that data from the users can be stored more safely.
-### Include more information on partner universities 
-SEPlanner's current database includes crucial information for SEP planning, such as universities, NUS modules, and corresponding module mappings. 
-These data are chosen for the first 2 versions of the app since the process of accessing these data on EduRec is extremely slow and unorganised. 
-However, there are other information which are not included in SEPlanner right now, including the time of exchange for each partner university, number of 
-vacancies etc. Information mentioned here are not provided by EduRec, and is easy for the user to access. However, it will be good for the team to include
- all these details in future versions of SEPlanner, so that the application itself will be providing sufficient information for a NUS CEG student for his/her SEP application.
-### Integrate SEP application process 
-SEPlanner provides the users with a fast and easy experience to organise the mappings and universities for SEP, but SEPlanner alone is not enough for users to complete their SEP application. Unfortunately, after the planning 
-is done, users will still have to return to EduRec to submit their actual SEP application (which is extremely sow and inefficient as mentioned). The team 
-could look into further integration with EduRec in the future, and perform the application for users as well. This will make SEPlanner itself a sufficient 
-app for the entire SEP planning and applying process. 
-### Bring SEPlanner to students from other faculties
-The current version is only designed for CEG students from NUS, the team can further improve in the future by including more details for students from other 
-faculties, and a graphical interface, thus making SEPlanner the go-to choice for every single NUS student planning for their SEP.
 
 ## Instructions for manual testing
 
@@ -945,3 +923,28 @@ These instructions only provide a starting point for testers to work on; testers
        ```
     
        Expected: Error message printed to the console indicating that invalid university names are found and warning the user not to tamper the file.
+
+
+## Possible future updates
+### Automatically update database
+Currently, data for universities and mappings are directly retrieved from EduRec website provided by NUS, and stored in csv files.
+There is no current way to automatically update the data retrieved. As such, one of the future updates the team can look into will be to
+retrieve the data from EduRec automatically such that the universities, modules and mappings in the database will always be up-to-date.
+### Move database online for better security
+Data entered by users (selected module and university list) are currently only stored in the user's local machine. This introduces a certain
+amount of uncertainty to the users since the data might be easily corrupted or lost if the local machine malfunctions, thus the team should also
+look into storing all the data on the cloud such that data from the users can be stored more safely.
+### Include more information on partner universities
+SEPlanner's current database includes crucial information for SEP planning, such as universities, NUS modules, and corresponding module mappings.
+These data are chosen for the first 2 versions of the app since the process of accessing these data on EduRec is extremely slow and unorganised.
+However, there are other information which are not included in SEPlanner right now, including the time of exchange for each partner university, number of
+vacancies etc. Information mentioned here are not provided by EduRec, and is easy for the user to access. However, it will be good for the team to include
+all these details in future versions of SEPlanner, so that the application itself will be providing sufficient information for a NUS CEG student for his/her SEP application.
+### Integrate SEP application process
+SEPlanner provides the users with a fast and easy experience to organise the mappings and universities for SEP, but SEPlanner alone is not enough for users to complete their SEP application. Unfortunately, after the planning
+is done, users will still have to return to EduRec to submit their actual SEP application (which is extremely sow and inefficient as mentioned). The team
+could look into further integration with EduRec in the future, and perform the application for users as well. This will make SEPlanner itself a sufficient
+app for the entire SEP planning and applying process.
+### Bring SEPlanner to students from other faculties
+The current version is only designed for CEG students from NUS, the team can further improve in the future by including more details for students from other
+faculties, and a graphical interface, thus making SEPlanner the go-to choice for every single NUS student planning for their SEP.
