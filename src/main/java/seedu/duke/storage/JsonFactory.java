@@ -72,7 +72,7 @@ public class JsonFactory {
     /**
      * Deserializes content from JSON into a catalogue object.
      * @param data Content from JSON read from file
-     * @return ArrayList<Item> of all items specified within catalogue
+     * @return ArrayList of all items specified within catalogue
      * @throws IOException Error raised when trying to read from file
      * @throws NullPointerException Thrown when missin gkey is detected
      */
