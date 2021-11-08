@@ -519,7 +519,7 @@ _________________________________________________________
 
 ### `-e` - Delete (an) expenditure(s)
 
-Deletes (an) expenditure(s) of a specific month
+Deletes (an) expenditure(s) of a specific month.
 
 Format:`delete -e m/MONTH` 
 <br/> `delete -e  m/MONTH i/INDEX`
