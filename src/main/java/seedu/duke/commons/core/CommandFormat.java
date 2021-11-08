@@ -34,14 +34,14 @@ public final class CommandFormat {
     public static final String EXIT_FORMAT =
             "exit";
 
-    public static final String FIND_TASK_FORMAT =
-            "find task [KEYWORD]";
-
     public static final String FIND_LESSON_FORMAT =
             "find lesson [KEYWORD]";
 
     public static final String FIND_MODULE_FORMAT =
             "find module [MODULE_CODE] {verbose/-v}";
+
+    public static final String FIND_TASK_FORMAT =
+            "find task [KEYWORD]";
 
     public static final String HELP_FORMAT =
             "help";
