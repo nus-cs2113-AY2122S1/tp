@@ -11,48 +11,53 @@ box BLUE_COLOR
 Participant ":Parser" as Parser
 Participant ":UpdateParser" as UpdateParser
 end box
-box LOGIC_COLOR
-Participant ":UpdateCommand" as UpdateCommand
-end box
 
+
+
+-> Duke :runSlam
 activate Duke
--> Duke :runSlam()
-Duke -> Parser : "Update [Event_Index]"
+Duke -> Parser : parseCommand
 activate Parser
-Parser -> UpdateParser: "[Event_Index]"
+Parser -> UpdateParser
 
     loop Until UpdateParser obtains all necessary User Input
         activate UpdateParser
         UpdateParser -> Ui
         activate Ui
         opt Update Event
-            Ui -> Duke : printUpdateEventDetails(event)
-            Ui -> Duke : Ui :updateIntroMessage()
+            Ui -> Duke : printUpdateEventDetails
+            Ui -> Duke : Ui :updateIntroMessage
             |||
-            Duke -> Ui :readInput()
+            Duke -> Ui :readInput
             |||
             Ui -> UpdateParser
             |||
         end
         opt Update Task/Member
-            Ui -> Duke : printTask(task)
-            Ui -> Duke : updateTaskIntroMessage()
+            Ui -> Duke : printTask
+            Ui -> Duke : updateTaskIntroMessage
             |||
-            Duke -> Ui :readInput()
+            Duke -> Ui :readInput
             |||
             Ui -> UpdateParser
             |||
 
         end
-        return
+
     end
+    box LOGIC_COLOR
+    create ":UpdateCommand" as UpdateCommand
+    end box
+    |||
+return
 UpdateParser -> UpdateCommand: UpdateCommand(updateDetails)
 activate UpdateCommand
-|||
-return UpdateCommand
-return UpdateCommand
-return UpdateCommand
-Duke -> UpdateCommand : execute()
+return
+
+return
+return
+
+Duke -> UpdateCommand : execute
 activate UpdateCommand
 |||
 return : CommandResult
