@@ -39,6 +39,16 @@
   - This results in a Command object (more precisely, an object of one of its subclasses e.g., AddCommand) which is executed by ExpiryEliminator.
   - The command can communicate with the Model when it is executed (e.g. to add an ingredient).
 
+### Storage
+![](diagrams/Storage.png)
+
+- The 'Storage' component:
+  - When users type in a command that is to be executed by ExpiryEliminator, it stores all updates that the command
+    makes to the Recipe List and Ingredient Repository. The updates are stored to the txt files in the 'data' directory.
+    When users restart ExpiryEliminator, it loads all the data from the txt files to the program.
+  - The SaveData class saves all the updates of Ingredient Storage and Recipe Storage.
+  - The Recipe in the Recipe Storage is interdependent with ingredientQuantity in the Ingredient Storage, as each recipe is
+    composed of multiple instances of ingredientQuantity.
 
 ### Parser
 
