@@ -106,7 +106,7 @@ ultimately saving cost and increasing profits.
         * `Implementation - Add: Adding Wastage to Dishes and Ingredients, Storage to Ingredients`
         * `Implementation - Terminal Refreshing / Clear Screen`
       
-    * Added PUML Diagrams for (**images below are scaled down, refer to DeveloperGuide for full images**):
+    * Added PUML Diagrams for (images below are **scaled down**, refer to Developer Guide for full images):
       
         * `Design - Storage: Loading Data`
           
@@ -127,7 +127,7 @@ ultimately saving cost and increasing profits.
         * `Implementation - Add: Adding Dishes and Ingredients`
           
           <p align="center">
-            <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/add_ingr_command_sequence.png" width="70%" height="auto">
+            <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/add_ingr_command_sequence.png" width="90%" height="auto">
           </p>
           <center>Figure 11: AddIngredientCommand Sequence Diagram</center>          
           <br> 
@@ -135,7 +135,7 @@ ultimately saving cost and increasing profits.
         * `Implementation - Add: Adding Wastage to Dishes and Ingredients, Storage to Ingredients`
           
           <p align="center">
-          <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/add_dish_waste_command_sequence.png" width="70%" height="auto">
+          <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/add_dish_waste_command_sequence.png" width="90%" height="auto">
           </p>
           <center>Figure 12: AddDishWasteCommand Sequence Diagram</center>
     
