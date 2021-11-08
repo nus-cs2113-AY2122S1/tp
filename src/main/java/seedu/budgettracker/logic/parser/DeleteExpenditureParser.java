@@ -27,7 +27,7 @@ public class DeleteExpenditureParser implements ParserPrefix {
             int[] indexArray = ParserUtil.parseMultipleIndexes(indexString);
             int startIndex = indexArray[0];
             int endIndex = indexArray[1];
-            return new DeleteMultipleExpenditureCommand(startIndex, endIndex, month);
+            return new DeleteMultipleExpenditureCommand(startIndex - 1, endIndex - 1, month);
         }
         int index = ParserUtil.parseIndex(indexString);
         return new DeleteSingleExpenditureCommand(index, month);

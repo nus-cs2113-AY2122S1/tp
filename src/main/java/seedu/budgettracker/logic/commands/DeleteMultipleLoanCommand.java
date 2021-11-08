@@ -23,14 +23,14 @@ public class DeleteMultipleLoanCommand extends DeleteCommand {
 
     @Override
     public void execute() throws CommandException {
-        if (startIndex <= 0 || endIndex >= allRecordList.getExpenditureListSize(month)) {
+        if (startIndex < 0 || endIndex >= allRecordList.getLoanListSize(month)) {
             throw new CommandException(MESSAGE_INVALID_INDEX_OF_LOAN);
         }
         if (startIndex >= endIndex) {
             throw new CommandException(MESSAGE_INVALID_INDEX_OF_LOAN);
         }
         for (int i = startIndex; i <= endIndex; i++) {
-            TextUi.showMultipleLoanDeletedMessage(i, allRecordList.getLoan(startIndex - 1, month));
+            TextUi.showMultipleLoanDeletedMessage(i + 1, allRecordList.getLoan(startIndex, month));
             allRecordList.deleteLoan(startIndex, month);
         }
     }
