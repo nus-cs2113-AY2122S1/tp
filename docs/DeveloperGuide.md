@@ -358,7 +358,7 @@ SchedUrMods have pop-up reminders for all tasks with a time constraint, and all 
 #### 4.4.1 `Reminder` Class
 
 <p align="center">
-    <img src="images/XuefeiUMLDiagrams/ReminderUML.JPG">
+    <img src="images/XuefeiUMLDiagrams/ReminderUML.JPG" width="400">
 </p>
 
 The `Reminder` objects are implemented in all `Task` objects, however, `reminder` is only initialized in the `Task` objects with time constraint such as todo with a doOn time.
