@@ -84,7 +84,8 @@ public class Storage {
         boolean containsJunk = false;
         boolean isValidFileType = true;
 
-        containsJunk = isContainsJunk(dataDirectoryList, dataBaseFileName, dataBaseYearName, isValidName, isFile, containsJunk, isValidFileType);
+        containsJunk = isContainsJunk(dataDirectoryList, dataBaseFileName,
+                dataBaseYearName, isValidName, isFile, containsJunk, isValidFileType);
 
         if (containsJunk) {
             System.out.println("Your data directory contains junk files, please clean them up!");
@@ -92,7 +93,10 @@ public class Storage {
     }
 
     //@@author yeoweihngwhyelab
-    private boolean isContainsJunk(File[] dataDirectoryList, String dataBaseFileName, String dataBaseYearName, boolean isValidName, boolean isFile, boolean containsJunk, boolean isValidFileType) {
+    private boolean isContainsJunk(File[] dataDirectoryList, String dataBaseFileName,
+                                   String dataBaseYearName, boolean isValidName,
+                                   boolean isFile, boolean containsJunk,
+                                   boolean isValidFileType) {
         for (int i = 0; i < dataDirectoryList.length; i++) {
             if (dataDirectoryList[i].isFile()) {
                 dataBaseFileName = dataDirectoryList[i].getName();
