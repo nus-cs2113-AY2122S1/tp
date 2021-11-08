@@ -1,0 +1,96 @@
+@startuml
+!include Styles.puml
+
+box console COLOR_CONSOLE_SEGMENT
+participant ":InputParser" as InputParser COLOR_CONSOLE
+participant "<<class>>\nInputParser" as ClassInputParser COLOR_CONSOLE
+participant "<<class>>\nAddInstrumentParser" as AddInstrumentParser COLOR_CONSOLE
+participant ":AddStockParser" as AddStockParser COLOR_CONSOLE
+participant ":AddStockCommand" as AddStockCommand COLOR_COMMANDS
+end box
+
+box commands COLOR_FAINT_GREEN
+participant ":AddStockCommand" as AddStockCommand COLOR_FAINT_GREEN
+end box
+
+box error COLOR_ERROR_SEGMENT
+participant ":InvalidInstrumentError" as InvalidInstrumentError COLOR_ERROR
+end box
+box ui COLOR_LIGHT_BLUE
+participant "<<class>>\nTextUi" as TextUi COLOR_UI
+end box
+
+
+[-> InputParser : filterByCommandType({"add"}, instruments)
+activate InputParser
+
+InputParser -> InputParser : getAddInstrumentParameters()
+activate InputParser
+
+    loop until user enters a valid instrument type or aborts
+        InputParser -> TextUi : displayAddInstrumentFirstInstruction()
+        activate TextUi
+
+        TextUi --> InputParser
+        deactivate TextUi
+        InputParser -> ClassInputParser : getUserInput("add")
+        activate ClassInputParser
+        ClassInputParser --> InputParser : return instrumentType
+        deactivate ClassInputParser
+    end loop
+
+InputParser -> AddInstrumentParser : filterByInstrumentType({"stock"})
+activate AddInstrumentParser
+
+note right
+The parameter "stock" was
+given by the user after
+displayAddInstrumentFirstInstruction().
+end note
+alt Instrument type is stock/crypto/forex/etf
+    create AddStockParser
+    AddInstrumentParser -> AddStockParser : AddStockParser()
+    activate AddStockParser
+
+    AddStockParser --> AddInstrumentParser
+    deactivate AddStockParser
+
+    AddInstrumentParser -> AddStockParser : initParameters()
+    activate AddStockParser
+    AddStockParser --> AddInstrumentParser
+    deactivate AddStockParser
+
+    ref over AddInstrumentParser, AddStockParser, AddStockCommand
+    Get stock details from user and create the AddStockCommand
+    endref
+    note bottom
+                    Displaying
+                    only the
+                    outcome
+                    of adding
+                    a type
+                    stock. This
+                    is suppose
+                    to be a
+                    switch
+                    statement
+                    amongst
+                    the 4
+                    different
+                    instruments
+                    end note
+else
+    create InvalidInstrumentError
+    AddInstrumentParser -> InvalidInstrumentError : InvalidInstrumentError()
+    activate InvalidInstrumentError
+    InvalidInstrumentError --> AddInstrumentParser
+    deactivate InvalidInstrumentError
+end
+AddInstrumentParser --> InputParser : return command
+deactivate AddInstrumentParser
+InputParser --> InputParser : return command
+deactivate InputParser
+[<-- InputParser : return command
+deactivate InputParser
+
+@enduml

@@ -1,0 +1,59 @@
+@startuml
+!include Styles.puml
+
+Class Mtracker COLOR_MAIN
+
+Package "console                 "<<Rectangle>>{
+    Class InputParser COLOR_CONSOLE {
+        <color:WHITE>+ filterByCommandType(String[], ArrayList<Instrument>): Command</color>
+    }
+    Class "{abstract}\nAddInstrumentParser" as AddInstrumentParser COLOR_CONSOLE {
+        <color:WHITE>+ {static} filterByInstrumentType(String[]): AddInstrumentCommand</color>
+    }
+    Class AddXYZParser COLOR_CONSOLE {
+        <color:WHITE>+ getInstrumentParameters(): AddXYZCommand</color>
+    }
+    Class EditInstrumentParser COLOR_CONSOLE {
+        <color:WHITE>+ getEditedParameters(HashSet<String>, Instrument)</color>
+        <color:WHITE>+ createEditCommand(HashSet<String>, Instrument, int): EditInstrumentCommand</color>
+    }
+}
+
+show InputParser members
+show AddInstrumentParser members
+show AddXYZParser members
+show EditInstrumentParser members
+
+Class "{abstract}\nCommand" as Command COLOR_COMMANDS
+Class AddInstrumentCommand COLOR_COMMANDS
+Class AddXYZCommand COLOR_COMMANDS
+Class EditInstrumentCommand COLOR_COMMANDS
+Class "{abstract}\nIndexedCommand" as IndexedCommand COLOR_COMMANDS
+Class TextUi COLOR_UI
+Class "{abstract}\nInstrument" as Instrument COLOR_MODEL
+
+Mtracker -down[COLOR_MAIN]->"1" InputParser
+AddInstrumentParser -up[COLOR_CONSOLE]-|> InputParser
+AddXYZParser -up[COLOR_CONSOLE]-|> AddInstrumentParser
+EditInstrumentParser -left[COLOR_CONSOLE]-|> InputParser
+
+InputParser -down[COLOR_CONSOLE].> Command : creates >
+AddInstrumentParser -right[COLOR_CONSOLE].> AddInstrumentCommand : creates >
+AddXYZParser -right[COLOR_CONSOLE].> AddXYZCommand : creates >
+EditInstrumentParser -right[COLOR_CONSOLE].> EditInstrumentCommand : creates >
+InputParser -down[COLOR_CONSOLE].> TextUi
+AddInstrumentParser -left[COLOR_CONSOLE].> TextUi
+AddXYZParser -left[COLOR_CONSOLE].> TextUi
+EditInstrumentParser -down[COLOR_CONSOLE].> TextUi
+
+InputParser -left[COLOR_CONSOLE].> Instrument
+EditInstrumentParser -right[COLOR_CONSOLE].> Instrument
+
+note bottom of AddXYZParser: AddXYZParser = AddCryptoParser, \nAddEtfParser, etc
+
+EditInstrumentCommand -down[COLOR_COMMANDS]-|> IndexedCommand
+IndexedCommand -up[COLOR_COMMANDS]-|> Command
+AddXYZCommand -up[COLOR_COMMANDS]-|> AddInstrumentCommand
+AddInstrumentCommand -up[COLOR_COMMANDS]-|> Command
+note bottom of AddXYZCommand: AddXYZCommand = AddCryptoCommand, \nAddEtfCommand, etc
+@enduml

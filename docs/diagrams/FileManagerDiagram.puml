@@ -1,0 +1,55 @@
+@startuml
+!include Styles.puml
+'https://plantuml.com/class-diagram
+
+Class Mtracker COLOR_MAIN
+
+Package "filemanager"  <<Rectangle>> {
+     Class Storage COLOR_STORAGE {
+     <color:WHITE>+ loadFileData(InstrumentManager)</color>
+     <color:WHITE>+ writeFileData(ArrayList<Instrument>)</color>
+     <color:WHITE>+ updateFileData(ArrayList<Instrument>)</color>
+     }
+     Class InstrumentDecoder COLOR_STORAGE {
+     <color:WHITE>+ {static} readFile(InstrumentManager, List<String>)</color>
+     <color:WHITE>+ {static} addSavedInstrumentToList(InstrumentManager, String[])</color>
+     }
+     Class InstrumentEncoder COLOR_STORAGE {
+     <color:WHITE>+ {static} editFile(String, FileWriter)</color>
+     <color:WHITE>+ {static} writeFile(ArrayList<Instrument>, FileWriter)</color>
+     }
+     Class XYZDecoder COLOR_STORAGE {
+     <color:WHITE>+ {static} addXYZToList(String[], InstrumentManager)</color>
+     }
+
+}
+
+show Storage members
+show InstrumentDecoder members
+show InstrumentEncoder members
+show XYZDecoder members
+
+Class TextUi COLOR_UI
+Class "{abstract}\n Instrument" as Instrument COLOR_MODEL
+Class InstrumentManager COLOR_MODEL
+
+Mtracker -down[COLOR_MAIN]->"1" Storage
+
+Class outside COLOR_WHITE
+ Storage -down[COLOR_STORAGE].> InstrumentEncoder
+ Storage -down[COLOR_STORAGE].> InstrumentDecoder
+ Storage -down[COLOR_STORAGE].> Instrument
+ Storage -down[COLOR_STORAGE].> InstrumentManager
+ InstrumentEncoder -down[COLOR_STORAGE].> Instrument
+ InstrumentDecoder -down[COLOR_STORAGE].> InstrumentManager
+ InstrumentDecoder -down[COLOR_STORAGE].> Instrument
+ XYZDecoder -right[COLOR_STORAGE].> Instrument
+ XYZDecoder -down[COLOR_STORAGE].> InstrumentManager
+ XYZDecoder -up[COLOR_STORAGE]-|>InstrumentDecoder
+ Storage -left[COLOR_STORAGE].> TextUi
+ InstrumentDecoder -left[COLOR_STORAGE].> TextUi
+
+
+note bottom of XYZDecoder: XYZDecoder = CryptoDecoder, ForexDecoder, \nEtfDecoder, StockDecoder
+
+@enduml
