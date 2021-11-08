@@ -32,7 +32,7 @@ Below is the guide on how you can get started using our program to start **"Sche
 - [4. Command Summary](#4-command-summary)
 
 ## 1. Quick Start
-1. Ensure you have Java **11** or above installed in your Computer, 
+1. Ensure you have [Java **11** jdk installed in your Computer](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html), 
 and that `java` is in your `PATH` environment variable.
 2. Download the latest `SchedUrMods.jar` from [here](https://github.com/AY2122S1-CS2113T-W13-3/tp/releases/latest).
 
