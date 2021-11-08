@@ -189,7 +189,7 @@ and thereby encourages them to have greater control over their finances.
 ## Appendix C: Non-Functional Requirements
 
 **1**. Should work on any mainstream OS as long as it has Java 11 or above installed.
-<br/> **2**. 
+<br/> **2**. A user should be able to comfortably use and understand the application if they are able to read from the output of the help command.
 {Give non-functional requirements}
 
 ## Appendix D: Glossary
