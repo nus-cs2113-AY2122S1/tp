@@ -45,8 +45,6 @@ The application is CLI based and is suitable for users who can type quickly and 
    overview about the whole recipe list.
 
 
-
-
 #### Storage and loading of data
 - *What it does* : Helps users automatically store the updates to the txt file once their commands are executed 
    successfully, i.e, add/remove/update of any ingredients or recipes. And all the data will be loaded back from the 
@@ -58,6 +56,12 @@ The application is CLI based and is suitable for users who can type quickly and 
    converted to a string output in the txt file. Loading the data from the txt file may be complicated as the scanner
    has to scan line by line to interpret the string and convert it back to a meaningful data type in the product,
    i.e., recipe, ingredient, unit, batch number, expiry date...
+
+#### Help
+- *What it does* : Display the help message to help users clarify the format of each command input and also provide
+   the example command input for users to follow.
+- *Justification* : This feature contains the help message which enables users to understand the objectives and formats
+   of each command. Users can type in "help" to view the help message.
 
 ### Team Based Tasks
 - Group discussion on the designs, features and implementations of the project.
