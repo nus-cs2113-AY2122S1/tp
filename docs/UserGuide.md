@@ -50,10 +50,10 @@ User Interface (GUI) apps.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `Taa.jar` from [here](https://github.com/AY2122S1-CS2113T-F12-3/tp/releases).
-3. Create a new folder and place `Taa.jar` inside.
-4. Open Command Prompt/Terminal and navigate to the folder containing `Taa.jar`.
-5. Run `java -jar Taa.jar` in Command Prompt/Terminal to start the app. <br>
+2. Download the latest version of `CS2113T-F12-3.TAA.jar` from [here](https://github.com/AY2122S1-CS2113T-F12-3/tp/releases).
+3. Create a new folder and place `CS2113T-F12-3.TAA.jar` inside.
+4. Open Command Prompt/Terminal and navigate to the folder containing `CS2113T-F12-3.TAA.jar`.
+5. Run `java -jar CS2113T-F12-3.TAA.jar` in Command Prompt/Terminal to start the app. <br>
    ![QuickStart](images/quickstart/QuickStart.png)
 6. Enter `help` to display the list of available commands. See [Features](#features) for more information.
 
