@@ -8,6 +8,9 @@ import utils.Money;
 
 import java.util.concurrent.Callable;
 
+import static constants.ErrorMessage.invalidShareMsg;
+import static constants.ErrorMessage.negativeValueMsg;
+
 
 @CommandLine.Command(name = "stocks", description = "Add a stock to your portfolio")
 public class AddInvestStockCommand implements Callable<Integer> {
@@ -29,6 +32,17 @@ public class AddInvestStockCommand implements Callable<Integer> {
         try {
             String stockName = String.join(" ", names);
             Double price = Money.truncate(stockPrice);
+
+            if (numberOfStocks <= 0) {
+                ui.printMessage(invalidShareMsg);
+                return 1;
+            }
+
+            if (price < 0) {
+                ui.printMessage(negativeValueMsg);
+                return 1;
+            }
+
             investMgr.addStock(stockName, numberOfStocks, price);
             dataMgr.write();
         } catch (Exception error) {
