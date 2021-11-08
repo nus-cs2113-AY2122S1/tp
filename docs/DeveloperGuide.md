@@ -623,13 +623,13 @@ Dish example of usage:
 
 ```
 No Linked Ingredients, No Limit, Wastage of 2kg:
-prata|2.0|2.0|-1
+chicken rice|2.0|2.0|-1
 
-2 Linked Ingredients (flour and egg), Wastage of 2kg, No Limit:
-prata|2.0|1.0|-1|flour|egg
+2 Linked Ingredients (chicken and rice), Wastage of 2kg, No Limit:
+chicken rice|2.0|1.0|-1|chicken|rice
 
-2 Linked Ingredients (flour and egg), Wastage of 2kg, Limit of 3kg:
-prata|2.0|1.0|3|flour|egg
+2 Linked Ingredients (chicken and rice), Wastage of 2kg, Limit of 3kg:
+chicken rice|2.0|1.0|3|chicken|rice
 ```
 
 Ingredient Format: `[INGR_NAME] | [AMOUNT_STORED_IN_KG] | [AMOUNT_WASTED_IN_KG] | [WASTAGE_LIMIT] | [EXPIRY_DATE]`
@@ -644,10 +644,10 @@ Ingredient example of usage:
 
 ```
 No Limit, No Expiry, Storage of 2kg, Wastage of 1kg:
-chicken|2.0|1.0|-1|null
+duck|2.0|1.0|-1|null
 
 Limit of 2.5kg, Expiry Set, Storage of 2kg, Wastage of 1kg:
-chicken|2.0|1.0|2.5|30/10/2021
+duck|2.0|1.0|2.5|30/10/2021
 ```
 
 ### Testing the Dish commands
@@ -656,7 +656,7 @@ chicken|2.0|1.0|2.5|30/10/2021
 
     * Test case: `add dish chicken rice`
 
-      Expected: Initially the Dish List is empty, One Dish `chicken rice` is added and a success message will be printed
+      Expected: Initially the Dish List is empty, one Dish `chicken rice` is added and a success message will be printed
       to the CLI.
 
     * Test case: `add dish 5`
