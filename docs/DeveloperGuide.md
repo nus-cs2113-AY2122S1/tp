@@ -353,12 +353,12 @@ a `Semester`. It stores information from `GradableTask/Task `objects together wi
 `OverallTask` object stores the following for each task:
 
 1. `description`
-2. `Date`
+2. `date`
 3. `isDone`
 4. `isLate`
-5. `Deadline`
+5. `deadline`
 6. `isGradable`
-7. `Weightage`
+7. `weightage`
 8. `moduleName`
 
 How the `OverallTask` component works:
