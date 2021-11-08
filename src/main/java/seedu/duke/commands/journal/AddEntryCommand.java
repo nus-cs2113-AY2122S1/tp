@@ -35,7 +35,7 @@ public class AddEntryCommand extends Command {
     public AddEntryCommand(String userInput) {
         this.userInput = userInput;
         this.helpMessage = "Add an entry to the desired notebook";
-        this.syntax = "journal entry n/ NOTEBOOK_NAME e/ ENTRY_NAME";
+        this.syntax = "journal entry n/NOTEBOOK_NAME e/ENTRY_NAME";
     }
 
     /**

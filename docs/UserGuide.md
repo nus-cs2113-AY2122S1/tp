@@ -313,8 +313,8 @@ Format: `calendar lecture m/MODULE_CODE s/DD-MM-YYYY(START_DATE) e/DD-MM-YYYY(EN
 
 Example:
 ```
-calendar lecture m/CS1231 s/7-10-2021 e/31-10-2021
-calendar lecture m/CS2113T s/7-10-2021 e/31-10-2021
+calendar lecture m/CS1231 s/07-10-2021 e/31-10-2021
+calendar lecture m/CS2113T s/07-10-2021 e/31-10-2021
 ```
 
 Expected outcome:
@@ -392,11 +392,13 @@ calendar edit 1
 Expected outcome:
 ```
 calendar edit 1
-        __________________________________________________
-        Enter the entire todo command with the desired description and date that you want to replace in place of the current task at index 1
+	__________________________________________________
+	Enter the entire todo command with the desired description and date that you want to replace in place of the current task at index 1
+	__________________________________________________
 calendar todo n/changed task name d/22-12-2021
-        Edited Task!
-        __________________________________________________
+	__________________________________________________
+	Edited Task!
+	__________________________________________________
 ```
 
 #### 3.3.6 Displaying calendar: `calendar display`

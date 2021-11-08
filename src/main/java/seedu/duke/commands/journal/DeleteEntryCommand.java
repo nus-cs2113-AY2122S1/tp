@@ -37,7 +37,7 @@ public class DeleteEntryCommand extends Command {
     public DeleteEntryCommand(String userInput) {
         this.userInput = userInput;
         this.helpMessage = "Deletes entry from the notebook";
-        this.syntax = "journal delete_entry n/ NOTEBOOK_NAME e/ ENTRY_NAME";
+        this.syntax = "journal delete_entry n/NOTEBOOK_NAME e/ENTRY_NAME";
     }
 
     /**

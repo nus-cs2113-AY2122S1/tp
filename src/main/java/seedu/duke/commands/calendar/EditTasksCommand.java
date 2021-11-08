@@ -49,8 +49,8 @@ public class EditTasksCommand extends Command {
      */
     public EditTasksCommand(int index) {
         this.index = index;
-        helpMessage = "Delete task from calendar";
-        syntax = "calendar delete TASK_INDEX";
+        helpMessage = "Edit task from calendar";
+        syntax = "calendar edit TASK_INDEX";
     }
 
     /**

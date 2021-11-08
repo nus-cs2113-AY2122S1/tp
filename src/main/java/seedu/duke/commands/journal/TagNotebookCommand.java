@@ -36,7 +36,7 @@ public class TagNotebookCommand extends Command {
     public TagNotebookCommand(String userInput) {
         this.userInput = userInput;
         helpMessage = "Tag a notebook from list";
-        syntax = "journal tag n/ NOTE_INDEX t/ TAG_NAME";
+        syntax = "journal tag n/NOTE_INDEX t/TAG_NAME";
     }
 
 
