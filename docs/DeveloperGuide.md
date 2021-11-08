@@ -582,7 +582,8 @@ Given below is an example usage scenario and how the delete notebook mechanism b
    delete. \
    ii. `DeleteNoteCommand` checks if index of notebook is in list. If not, throws the
    exception InvalidNotebookIndexException(). \
-   iii. `DeleteNoteCommand` calls `storage.collectionOfNotebooks.deleteNote(indexOfNotebookToDelete, storage)`. \
+   iii. `DeleteNoteCommand` calls `storage.collectionOfNotebooks.deleteNote(indexOfNotebookToDelete, storage)` to 
+   delete the notebook. \
    iv. `DeleteNoteCommand` calls `ui.printDeletedNotebookMessage(indexOfNotebookToDelete)`to indicate that the 
    notebook has been deleted. \
    v. `DeleteNoteCommand` calls `StorageNotes.writeCollectionOfNotebooks(storage.collectionOfNotebooks)` to write 
