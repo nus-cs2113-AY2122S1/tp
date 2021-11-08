@@ -195,7 +195,7 @@ List all tasks currently stored locally in your task list.
 **Format**: `list`
 - The command displays the following information for each task:
   - **Task index**:
-    - A positive integer i.e. `1.` which identifies the task. This index is used to identify tasks in the [`edit`](#26-editing-your-tasks-edit), [`browse`](#272-browse-browse) and [`delete`](#28-deleting-your-tasks-delete) commands.
+    - A positive integer i.e. `1.` which identifies the task. This index is used to identify tasks in the [`edit`](#25-editing-your-tasks-edit), [`browse`](#262-browse-browse) and [`delete`](#27-deleting-your-tasks-delete) commands.
   - **Task type**:
     - A task can either be a Todo, Deadline, Event or Lesson and they are all represented with the first letter of their task type.
     - `[T]` represents a `Todo`.
@@ -395,7 +395,7 @@ Adds your modules and classes into your task list.
 
 #### 2.6.2 Browse: `browse`
 
-Browse to links that were added to your `Lesson` with the [`edit`](#26-editing-your-tasks-edit) command.
+Browse to links that were added to your `Lesson` with the [`edit`](#25-editing-your-tasks-edit) command.
 **Format**: `browse <index>`
 - `<index>` is the index of the task you want to browse to (open in an internet browser) in the most recent [list](#23-listing-your-tasks-list) command that you have run.
   >💡 **Note**: if the task you want to browse to was not in your most recent [list](#23-listing-your-tasks-list) command, simply type `list` to list all your tasks and use its corresponding index to browse to the task's url.
