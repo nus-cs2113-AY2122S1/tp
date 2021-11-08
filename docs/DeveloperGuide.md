@@ -225,6 +225,16 @@ This sequence diagram shows the interactions occurring each time a user wants to
 6. When the item status is `RESERVED` the loan is successful only if the username matches the item's loanee.
 7. When the item status is `LOANED` the loan is unsuccessful.
 
+![LoanObjectDiagram](img/LoanObjectDiagram.png)
+
+This object diagram shows an example when `LoanCommand` is being called to loan out a book with the details 
+shown in the diagram.
+
+When the `LoanCommand` is executed, it will change the attributes of this book such that:
+1. `status: null` changes to `status: LOANED`
+2. `loanee: null` changes to `loanee: "John Smith"`
+3. `dueDate: null` changes to `dueDate: 12-11-2021`
+
 ### Deadline Command
 
 ![DeadlineSequenceDiagram](img/DeadlineSequenceDiagram.png)
@@ -307,16 +317,23 @@ inventory more efficiently.
 |v1.0|librarian|check the list of items available in the library||
 |v1.0|librarian|check the list of items on loan||
 |v1.0|librarian|check the list of all items in the library||
-|v2.0|librarian|categorise different items into media forms. (E.g. book, magazine, audio, video)|better manage my catalogue
+|v2.0|librarian|categorise different items into media forms. (E.g. book, magazine, audio, video)|better manage my catalogue||
 |v2.0|librarian|edit the details of existing items on the catalogue|keep the full catalogue up to date||
 |v2.0|librarian|reserve and unreserve an item by updating its status|keep the full catalogue up to date||
+|v2.0|librarian|reset the reservation of an item||
 |v2.0|librarian|search for specific items by their title or ID|retrieve the details of items I need||
 |v2.0|librarian|check the list of items on reservation||
 |v2.0|librarian|loan an item for a person specified by their username||
 |v2.0|librarian|reserve an item for a person specified by their username||
-|v2.0|librarian|view what items are due to be returned today|| 
+|v2.0|librarian|view the list of items are due to be returned today|| 
 |v2.0|librarian|view the list of overdue items|inform people to return them||
-|v2.0|librarian|view the list of items that are due to be returned on a specific date||
+|v2.1|librarian|view the list of items that are due to be returned on a specific date||
+|v2.1|librarian|search items by their categories (Book, CD, Magazine, etc)||
+|v2.1|librarian|retain the items information|keep the details without re-entering it everytime I start the application||
+|v2.1|librarian|search items using multiple parameters (title, id, status, category, etc)||
+|v2.1|librarian|edit the details of the items simultaneously||
+|v2.1|librarian|track miscellaneous items||
+|v2.1|librarian|display the information of the library stats||
 
 ## Non-Functional Requirements
 

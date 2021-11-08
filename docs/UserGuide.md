@@ -17,6 +17,7 @@ done in an efficient manner.
     - [List items: `list`](#list-items)
     - [List items that are due today: `deadline today`](#list-items-that-are-due-today)
     - [List items that are overdue: `deadline overdue`](#list-items-that-are-overdue)
+    - [List items that are due on a specific date: `deadline d/dd-mm-yyyy`](#list-items-that-are-due-on-a-specific-date)
     - [Search items: `search`](#search-items)
     - [Reserve items: `res`](#reserve-items)
     - [Un-reserve items: `unres`](#unreserve-items)
@@ -568,6 +569,10 @@ Upon starting the program, it will search for the presence of a file in the dire
 > ⚠️ **Do not** make changes to the `data.json` while `libmgr` is running. Any changes made while running will not be reflected by `libmgr` and such changes may be overwritten.
 
 ## FAQ
+
+**Q**: What platforms is `Libmgr` supported on?
+
+**A**: This application supports cross-platform operation, as long as Java has been properly configured.
 
 **Q**: Can I port the program over to other devices
 
