@@ -72,19 +72,24 @@ public class SelectedModuleStorage extends UserStorage {
      */
     private void updateList(ModuleList moduleList, String line,
                             ModuleList moduleMasterList) {
-        String[] attributes = line.split(" # ");
-        if (attributes.length != 3) {
-            logger.log(Level.SEVERE, "Invalid module found in the file.");
-            isModuleValid = false;
-            return;
-        }
-        Module newModule = new Module(attributes[0], attributes[1],
-                parseDouble(attributes[2]), moduleMasterList);
-        if ((newModule.getIndex() != -1)
-                && (moduleMasterList.isModuleExist(newModule))
-                && !(moduleList.isModuleExist(newModule))) {
-            moduleList.addModule(newModule);
-        } else {
+        try {
+            String[] attributes = line.split(" # ");
+            if (attributes.length != 3) {
+                logger.log(Level.SEVERE, "Invalid module found in the file.");
+                isModuleValid = false;
+                return;
+            }
+            Module newModule = new Module(attributes[0], attributes[1],
+                    parseDouble(attributes[2]), moduleMasterList);
+            if ((newModule.getIndex() != -1)
+                    && (moduleMasterList.isModuleExist(newModule))
+                    && !(moduleList.isModuleExist(newModule))) {
+                moduleList.addModule(newModule);
+            } else {
+                logger.log(Level.SEVERE, "Invalid module found in the file.");
+                isModuleValid = false;
+            }
+        } catch (NumberFormatException ne) {
             logger.log(Level.SEVERE, "Invalid module found in the file.");
             isModuleValid = false;
         }

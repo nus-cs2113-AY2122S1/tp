@@ -588,7 +588,9 @@ Command | Format | Purpose
 
 ### Permission denied for data files
 In the event that the program crashes on startup, and display the following message:  
-```data/selectedUniversities.txt (Permission denied) ```  
-This happens if the file permission of the files in the data folder has been changed. There are two solutions to this problem:
+```data/selectedUniversities.txt (Permission denied) ``` or  
+```data/selectedUniversities.txt (No such file or directory)```  
+This happens if the file permission of the files in the data folder has been changed.  
+There are two possible solutions to this problem:
 1. Change the file permissions for `selectedUniversity.txt` and `selectedModules.txt` to the appropriate settings base on your operating system. Else;
 2. Delete the data folder. This will remove all the data.
