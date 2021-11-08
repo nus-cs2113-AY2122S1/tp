@@ -125,6 +125,12 @@ public class InvestigateCommand extends Command {
             sceneList.runCurrentScene();
             break;
         case INTRODUCTION_SCENE:
+            // fallthrough
+        case WRONG_KILLER_SCENE:
+            // fallthrough
+        case CORRECT_KILLER_SCENE:
+            // fallthrough
+        case TRUTH_SCENE:
             ui.printInvalidCommandMessage();
             break;
         default:
