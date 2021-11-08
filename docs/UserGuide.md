@@ -1056,6 +1056,11 @@ writing / reading the `.csv` files at the same time. This will very likely cause
 lost of data.
 
 
+- `StonksXD_Settings.csv` is **read-only**. This is because changing the settings will result in many unexpected
+  results. For example, changing the currency setting in the file would result in the amounts in `StonksXD_Entries.csv`
+  to be recognised as another currency which is very unlikely what you are trying to do.
+
+
 - Restrictions and rules for different variables are the same as how you would enter them in the Command Line 
 Interface, as specified above.
 
@@ -1075,12 +1080,7 @@ data. When opening `StonksXD_Entries.csv` in Excel, Excel might change the forma
 format is in `DD/MM/YYYY` when dealing with `StonksXD_Entries.csv`. Entries with a different date format will be 
 considered corrupted and not be loaded into Stonks XD.
 
-
-- `StonksXD_Settings.csv` is **read-only**. This is because changing the settings will result in many unexpected 
-results. For example, changing the currency setting in the file would result in the amounts in `StonksXD_Entries.csv` 
-to be recognised as another currency which is very unlikely what you are trying to do.
-
-
+  
 - Do not edit the amount of your entries **drastically** such that they exceed the max amount per entry or the 
 total limit of 100,000,000,000 for expenses / incomes. Entries that cause you to exceed either of the 2 limit will be 
 considered corrupted and not be loaded.
