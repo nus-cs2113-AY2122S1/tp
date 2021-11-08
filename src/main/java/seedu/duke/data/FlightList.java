@@ -17,9 +17,9 @@ public class FlightList {
             + "Please try another flight ID.";
 
     private final ArrayList<Flight> flights;
-    private ArrayList<String> flightIds;
-    private ArrayList<String> flightReturnDates;
-    private ArrayList<String> flightDepartureDates;
+    private final ArrayList<String> flightIds;
+    private final ArrayList<String> flightReturnDates;
+    private final ArrayList<String> flightDepartureDates;
     private ArrayList<String> iteratedFlightIds;
     private int flightCount = 0;
 
