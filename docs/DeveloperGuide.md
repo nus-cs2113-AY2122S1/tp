@@ -2,10 +2,12 @@
 
 ## 🌑 Introduction
 
-*Food-O-Rama* is a Java based Command-Line-Interface (CLI) application.
+This Developer Guide is designed for developers interested in working with *Food-O-Rama* in the following manner:
+1. Assist them in the development process of APIs
+2. Add features to *Food-O-Rama*
 
-This Developer Guide serves to inform developers on the design and implementation of
-*Food-O-Rama* to assist them in the development process of APIs. It also helps them realise the target user profile that
+This guide will bring you through the [design](#-design) of *Food-O-Rama*, the various
+[implementations](#-implementation) of features and their working mechanisms. It also helps you realise the target user profile that
 motivated us to build this application.
 
 | Legend |  Description |
@@ -16,7 +18,7 @@ motivated us to build this application.
 
 * [Acknowledgements](#-acknowledgements)
 * [Setting Up & Getting Started](#-setting-up--getting-started)
-* [Design](#design)
+* [Design](#-design)
     * [Main Components](#main-components)
     * [General Flow](#general-flow)
     * [Input Parsing](#input-parsing)
@@ -26,7 +28,7 @@ motivated us to build this application.
     * [Exceptions](#exceptions)
     * [Command Abstraction](#command-abstraction)
     * [Input Validation](#input-validation)
-* [Implementation](#implementation)
+* [Implementation](#-implementation)
     * [Add](#add)
     * [Find](#find)
     * [Edit](#edit)
@@ -93,7 +95,7 @@ Describes the step-by-step sequence from User Input to the Output.
 <p align="center">
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/main_sequence.png">
 </p>
-<center>Figure 2: General Flow Seqeuence Diagram</center>
+<center>Figure 2: General Flow Sequence Diagram</center>
 
 
 
@@ -296,7 +298,7 @@ For `add dish` and `add ingr` commands:
 2. For Adding Ingredients, `IngredientList.add()` will prompt storage weight input of the Ingredient from the user and
    throw exceptions if the storage weight is not an integer, is `Infinity` is `NaN`, or is negative.
 
-3. If storage weight input is greater than 10000kg (*soft limit*), the user will be prompted with a confirmation
+3. If storage weight input is greater than 10000 kg (*soft limit*), the user will be prompted with a confirmation
    message.
 
 4. If the user enters `n` or `no`, the input weight prompt will loop until the user inputs a valid number.
@@ -328,7 +330,7 @@ For `add dish waste`, `add ingr waste` and `add ingr stored` commands:
 2. The methods will prompt weight input from the user and throw exceptions if the weight is not an integer,
    is `Infinity`, is `NaN` or is negative.
 
-3. If weight input is greater than 10000kg (*soft limit*), the user will be prompted with a confirmation message.
+3. If weight input is greater than 10000 kg (*soft limit*), the user will be prompted with a confirmation message.
 
 4. If the user enters `n` or `no`, the input weight prompt will loop until the user inputs a valid number.
 
@@ -388,7 +390,7 @@ present in the DishList and IngredientList.
 
 This Sequence Diagram shows how the `EditDishNameCommand` class functions.
 
-Currently the User is able to edit the following:
+Currently, the User is able to edit the following:
 
 * Dish Name
 * Dish Wastage Weight
@@ -460,7 +462,7 @@ Below is a sequence diagram that shows how the GraphCommand functions
 <center>Figure 17: GraphCommand Sequence Diagram</center>
 
 
-Graph works by creating a two dimensional grid and printing the bars based on the current position of the terminal cursor. 
+Graph works by creating a two-dimensional grid and printing the bars based on the current position of the terminal cursor. 
 This bypasses the restriction in a CLI based application where you can only print from top down in the terminal and the bars can get
 printed "vertically". This is done by calculating the lengths of the bars beforehand and using these lengths along with
 the current coordinates to print either an empty space or a bar.
@@ -597,7 +599,7 @@ to their Wastages in descending order. This allows the user to view the most was
 
 
 * The Sort functions work by calling on the pre-existing Comparator function in ArrayList. Using this, they sort the
-  Dishes and Ingredients in descending order of their Wastages.
+  Dishes and Ingredients in descending order of their wastage.
 * Once done, the Sort Commands call on the list() function present in both DishList and IngredientList.
 * The list() function calls upon the `Ui` class to print the list of Dishes or Ingredients via the printDishList(
   dishList) or printIngrList(ingredientList) functions.
@@ -1036,7 +1038,7 @@ duck|2.0|1.0|2.5|30/10/2021
 
     * Test case:`del ingr duck`
 
-      Expected: Ingredient List List contains `duck`. A message will be printed to the CLI to ask user on confirming
+      Expected: Ingredient List contains `duck`. A message will be printed to the CLI to ask user on confirming
       deletion for `duck`.
 
     * Test case:`del ingr 1`
