@@ -1,0 +1,119 @@
+
+@startuml
+!include Style.puml
+Actor User
+User -> ":Parser" : "food [suffix] [arguments]"
+activate ":Parser"
+":Parser" -> ":Parser" : Get specific command
+activate ":Parser"
+":Parser" --> ":Parser" : Suffix after food
+deactivate ":Parser"
+alt suffix = "add"
+    ":Parser" -> ":Parser" : Parse parameters
+    activate ":Parser"
+    ":Parser" --> ":Parser" : food params
+    deactivate ":Parser"
+    create ":AddFoodCommand"
+    ":Parser" -> ":AddFoodCommand" :
+    activate ":AddFoodCommand"
+    return
+    deactivate ":Parser"
+    ":Parser" -> ":AddFoodCommand" : add to list
+     activate ":Parser"
+    activate ":AddFoodCommand"
+
+    ":AddFoodCommand" -> ":StorageFood" : Add Food Record
+    ":AddFoodCommand" --> ":Parser"
+    deactivate ":AddFoodCommand"
+    destroy ":AddFoodCommand"
+    deactivate ":Parser"
+
+else suffix = "radd"
+    create ":AddFoodFromReferenceCommand"
+    ":Parser" -> ":AddFoodFromReferenceCommand"
+    ":Parser" -> ":AddFoodFromReferenceCommand"
+    activate ":AddFoodFromReferenceCommand"
+    ":AddFoodFromReferenceCommand" -> "<color red><<class>></color>\nStallsManager" : get food record info
+    "<color red><<class>></color>\nStallsManager" --> ":AddFoodFromReferenceCommand" : food record info
+    ":AddFoodFromReferenceCommand" -> ":StorageFood" : add to list
+    deactivate ":AddFoodFromReferenceCommand"
+    destroy ":AddFoodFromReferenceCommand"
+
+else suffix = "delete"
+    create ":DeleteFoodCommand"
+    ":Parser" -> ":DeleteFoodCommand"
+    ":DeleteFoodCommand" -> ":Parser" : Get Index
+        activate ":DeleteFoodCommand"
+    ":Parser" --> ":DeleteFoodCommand" : Index
+    ":DeleteFoodCommand" -> ":StorageFood" : Delete Food
+    ":DeleteFoodCommand" --> ":Parser"
+    deactivate ":DeleteFoodCommand"
+    destroy ":DeleteFoodCommand"
+
+else suffix = "clear"
+    create ":ClearFoodCommand"
+    ":Parser" -> ":ClearFoodCommand"
+    ":ClearFoodCommand" -> ":StorageFood" : Clear list
+        activate ":ClearFoodCommand"
+    ":ClearFoodCommand" --> ":Parser"
+    deactivate ":ClearFoodCommand"
+    destroy ":ClearFoodCommand"
+
+else suffix = "list"
+    create ":ListFoodCommand"
+    ":Parser" -> ":ListFoodCommand"
+    ":ListFoodCommand" -> ":StorageFood" : List food records
+        activate ":ListFoodCommand"
+    ":ListFoodCommand" --> ":Parser"
+    deactivate ":ListFoodCommand"
+    destroy ":ListFoodCommand"
+
+else suffix = "find"
+    create ":FindFoodWithDateCommand"
+    ":Parser" -> ":FindFoodWithDateCommand"
+    ":FindFoodWithDateCommand" -> ":StorageFood" : Find food records matching date
+        activate ":FindFoodWithDateCommand"
+    return
+    destroy ":FindFoodWithDateCommand"
+
+else suffix = "clt"
+    create ":FindFoodByCalorieCountCommand"
+    ":Parser" -> ":FindFoodByCalorieCountCommand"
+    ":FindFoodByCalorieCountCommand" -> "<color red><<class>></color>\nStallsManager" : Find food records with <= calorie input
+        activate ":FindFoodByCalorieCountCommand"
+    return
+    destroy ":FindFoodByCalorieCountCommand"
+
+else suffix = "view"
+    create ":ViewReferenceFoodCommand"
+    ":Parser" -> ":ViewReferenceFoodCommand"
+
+    ":Parser" -> ":ViewReferenceFoodCommand"
+      activate ":ViewReferenceFoodCommand"
+     ":ViewReferenceFoodCommand" -> "<color red><<class>></color>\nStallsManager"
+
+    "<color red><<class>></color>\nStallsManager" --> ":ViewReferenceFoodCommand" : lists all stalls
+    return
+    opt all
+    ":Parser" -> ":ViewReferenceFoodCommand"
+     activate ":ViewReferenceFoodCommand"
+
+    ":ViewReferenceFoodCommand" -> "<color red><<class>></color>\nStallsManager"
+    "<color red><<class>></color>\nStallsManager" --> ":ViewReferenceFoodCommand" : lists all food items
+    return
+
+    else stall index
+
+    ":Parser" -> ":ViewReferenceFoodCommand"
+     activate ":ViewReferenceFoodCommand"
+    ":ViewReferenceFoodCommand" -> "<color red><<class>></color>\nStallsManager"
+    "<color red><<class>></color>\nStallsManager" --> ":ViewReferenceFoodCommand" : lists all items sold by the store
+    return
+    destroy ":ViewReferenceFoodCommand"
+    end
+
+else incorrect syntax
+    ":Parser"-->User : Throw Exception
+
+end
+@enduml

@@ -125,21 +125,32 @@ public class StorageModule {
         ArrayList<Double> capAndMc = new ArrayList<>();
         try {
             Scanner scanner = new Scanner(file);
+            if (!scanner.hasNext()) {
+                return defaultCapInfo(capAndMc);
+            }
             while (scanner.hasNext()) {
                 capAndMc = parserModule.retrieveStoredCapInfo(scanner.nextLine());
             }
         } catch (FileNotFoundException e) {
             exceptionHandler.handleOtherExceptions(e);
-            capAndMc.add(0.0);
-            capAndMc.add(0.0);
-            return capAndMc;
+            return defaultCapInfo(capAndMc);
         } catch (StorageModuleException e) {
             createCapStorageFile();
             exceptionHandler.handleClickExceptions(e);
-            capAndMc.add(0.0);
-            capAndMc.add(0.0);
-            return capAndMc;
+            return defaultCapInfo(capAndMc);
         }
+        return capAndMc;
+    }
+
+    /**
+     * Returns the default CAP information data.
+     *
+     * @param capAndMc The ArrayList of Double storing the CAP information.
+     * @return The ArrayList of Double containing 0.0 and 0.0.
+     */
+    private static ArrayList<Double> defaultCapInfo(ArrayList<Double> capAndMc) {
+        capAndMc.add(0.0);
+        capAndMc.add(0.0);
         return capAndMc;
     }
 

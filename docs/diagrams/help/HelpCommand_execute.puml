@@ -1,0 +1,34 @@
+@startuml
+!include Style.puml
+Actor Developer
+participant ":Parser"
+Developer -> ":Parser" : "help rt"
+
+activate ":Parser"
+":Parser" -> ":Parser" : parse input
+
+activate ":Parser"
+":Parser" --> ":Parser"
+deactivate ":Parser"
+create ":HelpCommand"
+":Parser" -> ":HelpCommand" : HelpCommand()
+
+'activate ":Parser"
+deactivate ":Parser"
+
+
+":Parser" -> ":HelpCommand" : execute()
+activate ":Parser"
+activate ":HelpCommand"
+
+
+":HelpCommand" -> "<<class>>\n:ClassPackageReader" : getCommandsAndPrintSyntax()
+"<<class>>\n:ClassPackageReader" -> ":Command" : getSyntax()
+":HelpCommand" --> ":Parser"
+deactivate ":Parser"
+deactivate ":HelpCommand"
+":Command" --> "<<class>>\n:ClassPackageReader" : syntax
+"<<class>>\n:ClassPackageReader" --> Developer : Prints help messages
+destroy ":HelpCommand"
+
+@enduml

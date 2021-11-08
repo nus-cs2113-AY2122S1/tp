@@ -38,6 +38,7 @@ import seedu.duke.exceptions.ClickException;
 import seedu.duke.exceptions.calendar.IncorrectCommandException;
 import seedu.duke.exceptions.calendar.IncorrectNumberOfArgumentsException;
 import seedu.duke.exceptions.calendar.InvalidDateException;
+import seedu.duke.exceptions.food.IllegalFoodCommandException;
 import seedu.duke.exceptions.food.IllegalFoodParameterException;
 import seedu.duke.exceptions.food.InvalidItemIndexException;
 import seedu.duke.exceptions.food.InvalidStoreIndexException;
@@ -274,6 +275,7 @@ public class Parser {
     }
 
     //@@author ngnigel99
+
     /**
      * Returns appropriate command related to Food based  on user's input.
      *
@@ -285,9 +287,9 @@ public class Parser {
      * @throws WrongDividerOrderException if divider order is wrong.
      * @throws ArgumentsNotFoundException if arguments not found.
      * @throws NoCalorieCountKeywordException if clt is not entered with command.
-     * @throws NoCaloriesInputException if paramter is missing.
+     * @throws NoCaloriesInputException if parameter is missing.
      * @throws NegativeCaloriesException if calorie count is negative.
-     * @author ngnigel99
+     * @throws IllegalFoodCommandException if next word after food is illegal.
      */
     private Command getFoodCommand(String userInput, String commandArgs) throws
             IllegalArgumentException,
@@ -300,7 +302,8 @@ public class Parser {
             InvalidItemIndexException,
             InvalidStoreIndexException,
             NoItemDividerException,
-            NoStoreDividerException {
+            NoStoreDividerException,
+            IllegalFoodCommandException {
         String[] foodArgs = commandArgs.split(" ");
         switch (foodArgs[0]) {  //consider 2nd word
         case COMMAND_SUFFIX_ADD:
@@ -341,9 +344,10 @@ public class Parser {
             }
             return new FindFoodByCalorieCount(userInput);
         default:
-            throw new IllegalArgumentException(Messages.LIST_PROPER_FEATURE +  COMMAND_FOOD);
+            throw new IllegalFoodCommandException();
         }
     }
+    //@@author
 
     //@@author nvbinh15
     /**

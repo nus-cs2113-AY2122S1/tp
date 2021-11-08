@@ -3,6 +3,7 @@ package seedu.duke.foodreferencelists;
 import seedu.duke.constants.Messages;
 import seedu.duke.exceptions.food.CannotFindFoodStoreException;
 import seedu.duke.exceptions.food.FoodIndexNotFoundException;
+import seedu.duke.exceptions.food.InvalidStoreIndexException;
 import seedu.duke.food.FoodRecord;
 import seedu.duke.food.WhatIAteList;
 import seedu.duke.parser.Parser;
@@ -27,7 +28,7 @@ public class StallsManager {
     public static HashMap<Integer, String[]> idData = new HashMap<>();
     public static ArrayList<String[]> compoundedItemsList = new ArrayList<>();
 
-    public static int MAX_STORE_INDEX = 11;
+    public static final int MAX_STORE_INDEX = 11;
 
     //for easier indexing and searching
     public StallsManager() {
@@ -98,13 +99,14 @@ public class StallsManager {
 
 
     /**
-     * Prints items for a specific store with given index.
-     * @param index index of the store
+     * Prints items for a specific store with a given index.
+     * @param index index of store
+     * @throws InvalidStoreIndexException if store index out of range
      */
-    public static void printItems(int index) {
+    public static void printItems(int index) throws
+            InvalidStoreIndexException {
         if (index <= 0 || index > MAX_STORE_INDEX) {
-            Ui.printMessage("Oops, can't find store " + index);
-            return;
+            throw new InvalidStoreIndexException(index);
         }
         WhatIAteList tempFormattedList = parseStringIntoFoodRecordList(index);
         tempFormattedList.printList(false);
@@ -127,8 +129,11 @@ public class StallsManager {
 
     /**
      * Trivial function to print every item.
+     * @throws InvalidStoreIndexException if store index not found.
+     *     note: should not be thrown as it iterates through store id hashmap.
      */
-    public static void printAllItems() {
+    public static void printAllItems() throws
+            InvalidStoreIndexException {
         for (int storeIndex : idName.keySet()) {
             String storeName = idName.get(storeIndex);
             System.out.println(storeName);
@@ -155,7 +160,8 @@ public class StallsManager {
         }
         sortListByCalorieCount(filterLowerThanCalories);
         sortListByName(filterLowerThanCalories);
-        Ui.printMessage("I've found the following items with " + calories + " calories!");
+        Ui.printMessage("I've found the following items with less than or equal to, "
+            + calories + " calories!");
         filterLowerThanCalories.printList(false);
         Ui.printMessage("done printing!");
         Ui.printLine();

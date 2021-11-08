@@ -3,6 +3,7 @@ package seedu.duke.commands.journal;
 //@@author SvethaMahadevan
 
 import seedu.duke.commands.Command;
+import seedu.duke.exceptions.calendar.IncorrectNumberOfArgumentsException;
 import seedu.duke.exceptions.journal.DuplicateNoteException;
 import seedu.duke.exceptions.journal.EmptyNoteArgumentsException;
 import seedu.duke.exceptions.journal.EmptyNoteNameException;
@@ -20,7 +21,7 @@ public class AddNoteCommand extends Command {
      * Class constructor providing syntax for the HelpCommand.
      */
     public AddNoteCommand() {
-        syntax = "journal notebook n/ [NOTEBOOK_NAME]";
+        syntax = "journal notebook n/[NOTEBOOK_NAME]";
     }
 
     /**
@@ -31,7 +32,7 @@ public class AddNoteCommand extends Command {
     public AddNoteCommand(String userInput) {
         this.userInput = userInput;
         helpMessage = "Add a notebook to list";
-        syntax = "journal notebook n/ NOTEBOOK_NAME";
+        syntax = "journal notebook n/NOTEBOOK_NAME";
     }
 
 
@@ -47,7 +48,7 @@ public class AddNoteCommand extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage) throws EmptyNoteNameException, EmptyNoteArgumentsException, IOException,
-            DuplicateNoteException {
+            DuplicateNoteException, IncorrectNumberOfArgumentsException {
         String noteName = ParserJournal.parseAddNoteCommand(userInput, storage);
         assert (noteName != null);
         ui.printAddedNoteMessage(noteName);

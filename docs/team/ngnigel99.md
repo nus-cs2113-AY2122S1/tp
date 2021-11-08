@@ -66,13 +66,13 @@ I used the help command to generate all commands at runtime on my end, to ensure
 
 I added a few FAQs which may be relevant for  computing students using a laptop for day-to-day work as well as to run the app.
   
-*Created bug report section*
+**Created bug report section**
   
 Following [Gimp's user guide](https://docs.gimp.org/2.10/en/gimp-introduction-bugs.html), I decided to include a bug report section that directs the user to our team page. While I acknowledge that there's no form of direct contact on that page, it's important to have a means of contacting the developers nonetheless.
 
 ### Contribution to the Developer Guide:
 
-Similar to the user guide, I worked with my teammates on writing a guide that aims to be informative to other developers and for them to understand how our apps works.
+Similar to the user guide, I worked with my teammates on writing a guide that aims to be informative to other developers and for them to understand how our app works.
 
 **Food-related architecture**
 

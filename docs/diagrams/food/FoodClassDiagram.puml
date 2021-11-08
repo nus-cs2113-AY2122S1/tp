@@ -1,0 +1,46 @@
+@startuml
+!include Style.puml
+class FoodRecord {
+    - foodName : String
+    - calorieCount : Int
+    - dateIAte : LocalDate
+    - defaultDate : LocalDate
+}
+
+class WhatIAteList {
+    #addToList(recordToAdd : FoodRecord, isSilent : boolean) : void
+    #printIndexWithSuffix(index : int) : void
+}
+
+class StallsManager {
+    {static} + MAX_STORE_INDEX : int
+    {static} + nameOfFoodCentre : String
+    {static} + idName : HashMap<Integer,String>
+    {static} + idData : HashMap<Integer,String>
+    {static}+ compoundedItemsList : ArrayList<String[]>
+    - initialiseNameIdmap() : void
+    - initialiseIdPointerMap() : void
+    - collateAllItems() : void
+    {static} + printStalls() : void
+    {static} + getFoodRecordFromStall(storeIndex : int, foodIndex : int) : FoodRecord
+    {static} + printItems(index : int) : void
+    {static} - parseStringIntoFoodRecordList(index : int) : WhatIAteList
+    {static} + printAllItems() : void
+    {static} + printFoodRecordsWithLowerCalories(calories : int) : void
+    {static} - sortListByName(filterLowerThanCalories : WhatIAteList) : void
+    {static} - sortListByCalorieCount(filterLowerThanCalories : WhatIAteList) : void
+}
+
+class StorageFood {
+- folderName : String
+- fileName : String
+- filePath : String
+{static} +saveList(whatIAteList : WhatIAteList) : void
+{static} +load() : WhatIAteList
+}
+
+StorageFood -> WhatIAteList : > reads and writes
+WhatIAteList -d-> FoodRecord
+
+StallsManager - FoodRecord : > contains information of
+@enduml

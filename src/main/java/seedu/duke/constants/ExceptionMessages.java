@@ -40,4 +40,5 @@ public class ExceptionMessages {
             + " to find desired lecture index";
     public static final String MESSAGE_MODULE_NOT_FOUND = "You have to add a module "
             + "before you can add a lecture to it !";
+    public static final String MESSAGE_MISSING_MODULE_CODE = "The module code must not be empty.";
 }

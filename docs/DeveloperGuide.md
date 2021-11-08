@@ -2,6 +2,7 @@
 
 ## Table of Contents
 
+[Acknowlegements](#acknowledgements)
 1. [Introduction](#1-introduction)\
 1.1 [Background](#11-background)\
 1.2 [Purpose](#12-purpose)\
@@ -14,7 +15,8 @@
 3.2 [Ui Component](#32-ui-component)\
 3.3 [Logic Component](#33-logic-component)\
 3.4 [Model Component](#34-model-component)\
-3.5 [Storage Component](#35-storage-component)
+3.5 [Storage Component](#35-storage-component)\
+3.6 [Help Component](#36-help-component)
 4. [Implementation](#4-implementation)\
 4.1 [Module-related Features](#41-module-related-features)\
 4.2 [Zoom-related Features](#42-zoom-related-features)\
@@ -24,15 +26,31 @@
 4.6 [Help Command](#46--help-command)\
 4.7 [Exit Command](#47-exit-command)\
 4.8 [Logging](#48-logging)
-5. [Testing](#5-testing)
+5. [Automated Testing](#5-automated-testing)
+
+[Appendices](#appendices)\
+[Appendix A: Product Scope](#appendix-a-product-scope)\
+[Appendix B: User Stories](#appendix-b-user-stories)\
+[Appendix C: Non-Fucntional Requirements](#appendix-c-non-functional-requirements)\
+[Appendix D: Glossary](#appendix-d-glossary)\
+[Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
+
+
+# Acknowledgements
+
+`Click` was inspired by the skeleton code and documentation (UG and DG) of [AddressBook Level-3](https://se-education.org/addressbook-level3/).
 
 ## 1. Introduction
 
 ### 1.1 Background
 
-**_Welcome to Click_!** It's a Java-based  Command-Line Interface for Cramming and Knowledge (CLICK), providing a one-stop access point
-for managing various parts of your Computing student life here at NUS. We aim to provide a simple interface 
-that quantifies how you use your time and if you're taking care of your overall well-being. 
+Click is a Java-based Command-Line Application targeted at Computing students at NUS. 
+
+Click aims to provide an all-in-one platform for students to:
+1. Manage modules and zoom links
+1. Manage tasks and compile them onto a calendar
+1. Manage journals and notebooks
+1. Manage food intake and consumption
 
 ### 1.2 Purpose
 
@@ -64,14 +82,14 @@ iii. Click `OK`.
 5. Locate the `buid.gradle` file in the repository you have cloned and select it. Click `OK`.
 6. Click `OK` to accept the default setting.
 7. Verify the setup:\
-i. Go to `src/main/java/seedu.duke.Click`, run `Click.main()` and trying a few commands.\
+i. Go to `src/main/java/seedu.duke.Click`, run `Click.main()` and try out a few commands.\
 ii. Go to `src/test/java/seedu.duke` and run `Tests in seedu.duke` to ensure they all pass.
 
 ## 3. Design
 
 ### 3.1. Architecture
 
-This section is designed to demonstrate our software design description, and aims to provide you with an overall guidance to the architecture of Duke.
+This section is designed to demonstrate our software design description, and aims to provide you with an overall guidance to the architecture of Click.
 
 The following sequence diagram illustrates a command call by the user to Click. 
 The steps are as follows:
@@ -83,10 +101,10 @@ The steps are as follows:
    3.2. If not, throw exception and ask for input again
 4. Parser returns control to Click
 
-![](./images/ClickRun.png)
+![](diagrams/ClickRun.png)
 
 You should note that this is a general overview of the Click functionality, and the `:Command` entity simply represents a Command to be called by the Parser.
-Another point for you to note is the difference between a Click exception and other exception. Click, as aptly referenced from our project, has unique
+Another point for you to note is the difference between a Click exception and other exceptions. Click, as aptly referenced from our project, has unique
 exceptions that belong to our program. For instance, invalid dates extending beyond a  student's  matriculation,  or a  lack of entries when adding a journal. 
 This is different from that of an "other" exception, which could be briefly categorized as a general exception. For instance, a `NumberFormatException` on the parsing
 of a String to an Integer.
@@ -114,11 +132,66 @@ The `UI` component:
 Module-related commands are managed by `ModuleManager`, which directly interacts with `StorageModule`. 
 `StorageModule` in turn makes use of `ParserModule` to format and retrieve the module-related information. The following diagram illustrates how the classes related to module interact with each other.
 
-![module architecture](images/module/Module.png)
+![module architecture](diagrams/module/Module.png)
+
+#### 3.4.2 Food-related models
+
+Food-related commands operate on a list of `FoodRecord`, and a `StorageFood` object. The following diagram  illustrates
+how the storage in a text file, and the current food list interact with each other.
+`StorageFood` object contains static methods to read and write data from said list.
+The saving of data from the list to the storage file is elaborated further in the diagram below.
+
+![](diagrams/food/foodClassDiagram.png)
+
+Additionally, StallsManager is implemented to support the `food view` commands, which include a reference food court
+, Technoedge.This class includes all stalls, food items sold by the store as well as the calorie count for the food items.
+Furthermore, methods that involve sorting and filtering food items by calorie count and name are implemented in StallsManager
+for the user to easily find items.
 
 ### 3.5. Storage Component
 
 The storage of `Click` refers to storing files of user's data into respective local subdirectory in a local directory called `storage`, which is in the same directory as the project root.
+
+The respective `.txt` files corresponding to the different features of click are held in their respective subfolders.
+
+For example, `food.txt` would be found under `storage/fooddata/`.
+
+### 3.6 Help Component
+
+#### Command-syntax interaction on runtime for Help Command
+
+The following diagram illustrates the  interactions between the functional class `ClassPackageReader` and
+a particular command `ClickCommand`.
+
+![](diagrams/help/helpCommandsClassDiagram.png)
+
+A class package reader  is implemented in order to:
+1.  Read classes from a specified package
+1.  Get names of all classes declared
+1.  Filter out the classes that are not commands by inheritance
+1.  Collect the commands in a set
+1.  Iterate through all other listed packages and merge the sets
+1.  Sort the filtered commands by alphabetical order for readability
+1.  Read the specific syntax  of a command, and print it to the user
+
+The abstract class `Command` has the following methods which
+implement steps 3 & 4:
+1. `public int compare(Command command1, Command command2){...}`
+   >This comparator is used in the
+   `ClassPackageReader` to sort out the Commands by name, and is further elaborated in Logic.
+1. `public void printClassNameAndSyntax()`
+   > This function splits the name of the class by upper and lower case, and also to remove the
+   "command" word at the end of the class.
+
+Next, we decided to run the `ClassPackageReader` through a package rather than iterate through all classes.
+The former is better than the latter considering our implementation of the commands. For instance, all module-
+related commands are grouped together in the `module` package, food-related commands in `food` etc. \
+Thus, by accessing the packages and filtering out the commands, the `ClassPackageReader` presents the name of the command
+and the syntax in a readable format to the user.
+
+Do note that the packages have to be manually input by the developers.
+However, the core functionality of Click is already partitioned nicely into the packages and hence we do not expect
+many updates over the lifeline of this project.
 
 ## 4. Implementation
 
@@ -127,15 +200,9 @@ as code examples.
 
 ### 4.1. Module-related Features
 
-This segment focuses on describing the implementation of module-related features, the functionality of the commands as well as the design considerations taken.
-
 #### 4.1.1 Adding a Module
 
-This feature allows user to add a new Module.
-
-If the creation is successful, a confirmation message on the newly created Module will be displayed to the user.
-
-**Implementation**
+This feature allows user to add a new Module. If the creation is successful, a confirmation message on the newly created Module will be displayed to the user.
 
 The command for listing all modules is implemented by the `AddModuleCommand` class that extends `Command`.
 
@@ -152,13 +219,13 @@ When the user types `module add c/CS2113T n/Software Engineering m/4 e/A`, the f
    iv. `AddModuleCommand` calls `moduleManager.addNewModule(module)` to add the new `module` to the module list\
    v. `AddModuleCommand` prompts the successful message to the user.
 
+The sequence diagram below summarizes how adding a module work:
+
+![AddModule](diagrams/module/AddModule.png)
+
 #### 4.1.2 Removing a Module
 
-This feature allows user to remove a Module created in the past.
-
-If the deletion is successful, a confirmation message on the Module deletion will be displayed to the user.
-
-**Implementation**
+This feature allows user to remove a Module created in the past. If the deletion is successful, a confirmation message on the Module deletion will be displayed to the user.
 
 The command for listing all modules is implemented by the `DeleteModuleCommand` class that extends `Command`.
 
@@ -177,8 +244,6 @@ When the user types `module delete 2`, the following sequence of steps will then
 
 This feature allows user to view all Modules.
 
-**Implementation**
-
 The command for listing all modules is implemented by the `ListModuleCommand` class that extends `Command`.
 
 When the user types `module list`, the following sequence of steps will then occur:
@@ -194,13 +259,11 @@ When the user types `module list`, the following sequence of steps will then occ
 
 The sequence diagram below summarizes how listing modules work:
 
-![](images/module/ListModule.png)
+![](diagrams/module/ListModule.png)
 
 #### 4.1.4 Edit CAP Information
 
 This feature allows user to edit the information related to the CAP.
-
-**Implementation**
 
 The command for editing CAP information is implemented by the `CapEditInfoCommand` class that extends `Command`.
 
@@ -218,12 +281,13 @@ When the user types `cap edit`, the following sequence of steps will then occur:
    v. `CapEditInfoCommand` calls `ui.printMessage()` to print the confirmation to the user\
    vi. `CapEditInfoCommand` calls `moduleManager.setCapInfo()` to save the data.
 
+The sequence diagram below summarizes how editing CAP information work:
+
+![EditCapInfo](diagrams/module/EditCapInfo.png)
 
 #### 4.1.5 Get Expected CAP
 
 This feature allows user to view the information related to the CAP and the expected CAP.
-
-**Implementation**
 
 The command for getting expected CAP is implemented by the `GetExpectedCapCommand` class that extends `Command`.
 
@@ -273,14 +337,14 @@ Given below is an example usage scenario and how the display calendar mechanism 
       >  **NOTE:** The input is validated first and if the input date given is invalid, i.e., the month not between 1-12, then the calendar for the current month is displayed.
    
       ii. The `inputYearMonth` is passed into `Ui` class method `printCalenderTitle` and this prints out the title of that month with the month name and the year. In this example, it will display as given in the figure below.
-     ![](./images/calendar/calendar_header.png)
+     ![](diagrams/calendar/calendar_header.png)
       iii. Then, the method `arrangeTaskList` in `Schedule` class is called, and it takes in `storage.tasksList` (the TaskList object with all the currently stored tasks drawn from storage), `calendarTasks` (an ArrayList<ArrayList<String>> object initialized with empty ArrayLists of type String), `month` (the month input by the user, which in this example is the integer `10`) and year `month` (the year input by the user, which in this example is the integer `2021`), and adds the tasks to the days in the empty String ArrayLists initialized before in `calendarTasks`.
       iv.The method `arrangeLectureList` is also called and the process is same as in the previous step, except with `storage.lectureList` and `calendarLecture` replacing the first two input parameters of `arrangeTaskList`.
       v.Then, the method `displayCalendar` in `Schedule` class is called, and it takes in `inputYearMonth` (the YearMonth object created from the month and year parsed from the user input), the `calendarTasks` (that was filled with the tasks for each day in the Step (iii)) and `calendarLecture` (that was filled with the lectures for each day in the Step (iv)). The method `displayCalendar` performs the necessary logic to print out the calendar.
   >  **NOTE:** Two tasks and two lectures are displayed for each day based on the order in which the user added them, and if there are more, they will show as and when the user deletes the tasks/lectures that are currently displayed.
 
 The below sequence diagram shows the execution process of the calendar display feature.
-![](./images/calendar/CalendarDisplaySequence.png)
+![](diagrams/calendar/CalendarDisplaySequence.png)
 
 **Design Considerations**
 
@@ -301,7 +365,7 @@ The command for adding a task is implemented by the `AddTodoCommand` class that 
 
 Given below is an example usage scenario and how the add task mechanism behaves at each step.
 
-1. User executes `calendar todo n/ RANDOMNAME d/ 10-10-2021`\
+1. User executes `calendar todo n/RANDOMNAME d/10-10-2021`\
    i. `Click` receives user's input.\
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
 2. `AddTodoCommand` object is created.
@@ -315,7 +379,7 @@ Given below is an example usage scenario and how the add task mechanism behaves 
 
 Below is an activity diagram for the execution of this feature.
 
-![](./images/calendar/AddTaskActivity.png)
+![](diagrams/calendar/AddTaskActivity.png)
 
 #### 4.3.3 Adding a Lecture
 
@@ -325,7 +389,7 @@ The command for adding a lecture is implemented by the `AddLectureCommand` class
 
 Given below is an example usage scenario and how the add lecture mechanism behaves at each step.
 
-1. User executes `calendar lecture m/ CS2113T s/ 10-10-2021 e/ 30-10-2021`\
+1. User executes `calendar lecture m/CS2113T s/10-10-2021 e/30-10-2021`\
    i. `Click` receives user's input.\
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
 2. `AddLectureCommand` object is created.
@@ -389,7 +453,7 @@ Given below is an example usage scenario and how the delete task mechanism behav
 
 Below is a sequence diagram that demonstrates this feature.
 
-![](./images/calendar/DeleteTaskCommand.png)
+![](diagrams/calendar/DeleteTaskCommand.png)
 
 #### 4.3.7 Deleting a Lecture
 
@@ -439,7 +503,7 @@ The command for adding notebook is implemented by the `AddNoteCommand` class tha
 
 Given below is an example usage scenario and how the add notebook mechanism behaves at each step.
 
-1. User inputs `journal notebook n/ CS2113` \
+1. User inputs `journal notebook n/CS2113` \
    i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
 2. Creating `AddNoteCommand` object.
@@ -453,7 +517,7 @@ Given below is an example usage scenario and how the add notebook mechanism beha
    data to
    the storage file.
 
-![](./images/journal/AddNoteCommand.png)
+![](diagrams/journal/AddNoteCommand.png)
 
 
 #### Add entry feature
@@ -462,7 +526,7 @@ The command for adding entry is implemented by the `AddEntryCommand` class that 
 
 Given below is an example usage scenario and how the add entry mechanism behaves at each step.
 
-1. User inputs `journal entry n/ CS2113 e/ HW`\
+1. User inputs `journal entry n/CS2113 e/HW`\
    i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input. 
 2. Creating `AddEntryCommand` object.
@@ -475,11 +539,12 @@ Given below is an example usage scenario and how the add entry mechanism behaves
    iii. Traverses through all notebooks in the array list using a for loop. \
    iv. If a notebook has name same as the notebook name in input got after parsing then `AddEntryCommand` calls
    `storage.collectionOfEntries.addEntry(NOTEBOOK_NAME, ENTRY_NAME)` to add the entry. \
-   v. `AddEntryCommand` calls `ui.printAddedEntryMessage(ENTRY_NAME)` to print a message that the entry has been added.
+   v. `AddEntryCommand` calls `ui.printAddedEntryMessage(ENTRY_NAME)` to print a message that the entry has been 
+   added. \
    vi. `AddEntryCommand` calls `StorageEntries.writeEntries(storage.collectionOfEntries, storage)` to write the new
    data to the storage file.
 
-![](./images/journal/AddEntryCommand.png)
+![](diagrams/journal/AddEntryCommand.png)
 
 #### List notebooks and entries
 
@@ -493,8 +558,8 @@ Given below is an example usage scenario and how the list mechanism behaves at e
 1. User inputs `journal list` \
    i. `Click` receives the input.\
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
-2. Creating `ListJournalCommand` object. \
-3. ListJournalCommand execution. 
+2. Creating `ListJournalCommand` object. 
+3. ListJournalCommand execution. \
    i. `ListJournalCommand` calls `storage.collectionOfNotebooks.getNotesArrayList()` which returns an array list of
    Notebook objects. \
    ii. `ListJournalCommand` calls `storage.collectionOfEntries.getEntriesArrayList()` which returns an array list of
@@ -524,7 +589,7 @@ Given below is an example usage scenario and how the delete notebook mechanism b
    the new
    data to the storage file. 
 
-![](./images/journal/DeleteNoteCommand.png)
+![](diagrams/journal/DeleteNoteCommand.png)
 
 #### Deleting Entry
 
@@ -532,7 +597,7 @@ The command for deleting entry is implemented by the `DeleteEntryCommand` class 
 
 Given below is an example usage scenario and how the delete entry mechanism behaves at each step.
 
-1. User inputs `journal delete_entry n/ CS2113 e/ HW` \
+1. User inputs `journal delete_entry n/CS2113 e/HW` \
    i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
 2. Creating `DeleteEntryCommand` object.
@@ -554,7 +619,7 @@ The command for tagging notebook is implemented by the `TagNotebookCommand` clas
 
 Given below is an example usage scenario and how tag notebook mechanism behaves at each step.
 
-1. User inputs `journal tag n/ 1 t/ important` \
+1. User inputs `journal tag n/1 t/important` \
    i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
 2. Creating `TagNotebookCommand` object.
@@ -604,144 +669,189 @@ Given below is an example usage scenario and how the find notebook by tag mechan
 This segment focuses on describing the implementation of food-related features,
 the functionality of the commands as well as the design considerations taken.
 
-#### 4.5.1 Architecture
-
-##### Class Diagram of Food
-
-Food-related commands operate on a list of food records, and a food storage object. The following diagram  illustrates
-how the storage in a text file, and the current food list interact with each other.
-Food storage object contains static methods to read and write data from said list.
-The saving of data from the list to the storage file is elaborated further in the diagram below.
-Further discussion on the design considerations of writing an abstract class are discussed in 
-design considerations.
-![](./images/food/foodClassDiagram.png)
-
+To begin, consider how a food command is parsed from user input.
 ##### Sequence diagram when food is parsed
 
 The following diagram displays the interactions between the classes when the user enters a command starting with
-"food". You should take note of the interactions between the constructed command classes, and the current list it's
-iterating over - `WhatIAteTodayList`, especially the updates shown after the  end of every  command. An update is 
-defined as a manual overwrite over the text file saved in the user's hard disk. By convention, this text file is saved
-in the directory `fooddata` , with the text file named aptly as `food.txt`. Current improvements in this functionality
-would be to integrate the dates in `Calendar` with  the `food.txt` file, enabling the user to search what they ate on a
-given day.
-![](./images/food/food_architecture.png)
+"food".\
+Do note that important calls are left out of this diagram (command execution) and the parser replaces Click for this.
+A high level view of command execution is covered in [Architecture](#31-architecture)\
+You should take note of the interactions between the constructed command classes, and the current list it's
+iterating over - `WhatIAteTodayList`, especially the updates shown after the  end of every  command. An update is
+defined as a manual overwrite over the text file saved in the user's hard disk. \
+By convention, this text file is saved
+in the directory `fooddata` in `storage`, with the text file named aptly as `food.txt`. \
+Additionally, `StallsManager` 
+is referenced in multiple commands, for instance `food radd`. This is due to the nature of the class, which contains the
+information of a food court, which includes the Stall name, and food items sold by each store.
+![](diagrams/food/food_architecture.png)
+
 
 #### 4.5.2 Feature List
 
 > **Note**: the methods invoked in the following commands are visually depicted in the sequence  diagram,
 > and thus only the general functionality  is discussed, as  well as the design considerations taken.
 
-##### Adding Food Record
+##### Adding Food Record 
+
+`food add n/ Samurai Burger c/ 433`
 
 This feature allows user to add a new Food Record.
 Tags `n/` `c/` stand for name and calorie count respectively.
 
+As depicted in the [class diagram](#451-architecture), the user's input undergoes the following sequence when it's
+converted to a food record to be added to the user's list.
+1. `Parser` invokes `parseFoodRecord` which takes in the `inputString`
+1. `storage` accesses it's `whatIAteTodayList` and calls it's `addToList` method, adding the
+   record to the list
+1.  As the parameter `isSilent` in  `addToList` is `false`, 
+    the user would be shown a message acknowledging an addition of data
+1. `StorageFood` saves the list to `food.txt` in <kbd>storage/fooddata</kbd>
 
-**Code example**
-
-`food add n/ Samurai Burger c/ 433`
 
 ##### Removing Food Record
 
+`food delete [INDEX]`
+
 This feature allows user to remove a Food Record created in the past.
 
+Similar to [adding a food record](#adding-food-record), the following steps are taken when deleting a food record.
+1. `indexToDelete` is extracted from `inputString` by a dedicated method
+1. A `FoodRecord` `toDelete` is then retrieved from `storage`, which has a `whatIAteTodayList` reference, by\
+   the `getList()` method, and retrieves the desired food record using `indexToDelete`
+1. `deleteFoodRecordAndSave` is then called, which does the following:
+   1. remove `toDelete` from `storage`
+   1. print a message to the user indicating that the record is deleted
+   1. call `saveList` method in `StorageFood` to update the `food.txt` file
 
-**Code example**
-
-`food delete [INDEX]`
 
 ##### Listing All Food Records
 
-This feature allows user to view all Food Records.
-
-This would be particularly useful for deleting items.
-
-**Code example**
-
 `food list`
+
+This feature allows user to view all Food Records, which would be particularly useful for deleting items.
+```
+
+	__________________________________________________
+	1st,You consumed  Samurai Burger , which has a calorie count of : 433 on Sunday, 7 November 2021!
+	You consumed 433 calories in total!
+	                    ...
+	__________________________________________________
+```
+Upon viewing the output of this feature, you may notice that it prints out a suffix along with the index of the
+items. Additionally, a line corresponding to the sum of calories recorded.
+
+To understand how these user-oriented additions were implemented, consider the execution path of food list.\
+When this feature is called, the following steps take place:
+1. `storage` accesses `whatIAteTodayList` by reference
+1. `whatIAteTodayList` invokes the `printList` method, with the `withMessages` parameter having a `true` value
+
+In particular, this method iterates through the list, and invokes the method `printIndexWithSuffix` to tag the correct
+suffix with each index.\
+Note that with each item iterated in the list, the corresponding calorie count is added to a `calorieSum` variable which
+stores the sum so far.\
+Following that, since `withMessages` is true, the user interface `Ui` would indicate the `calorieSum`
+calculated.
+
+These additions were not trivial, and were made with readability and user-oriented focus of Click in mind.
+
+##### Finding food records given a date
+
+`food find [DATE]`
+
+This feature also relies on the `storage` component in the following sequence:
+1. `Parser` filters out the relevant part of the user input relating to `LocalDate` type,
+   and a `DateTimeFormatter` formats that portion into a `dateInput`
+1. `storage` accesses `whatIAteTodayList` by reference
+1. `whatIAteTodayList` invokes it's method `printFoodWithFoundDate`, taking `dateInput` as an input, which does the following:
+   1. Create a temporary `WhatIAteList`
+   1. Call `addRecordIfFound`, which iterates through the current list and matches records with the same date as `dateInput`
+   1. Print out the temporary list, along with a nicely formatted date string of `FormatStyle.FULL`, representing
+   the full string of a month rather than the conventional MM format.\
+      For example, `Nice, I found the items you ate on Sunday, 7 November 2021`
+      
+Again, the formatting was carefully considered to be user-oriented and readable.
 
 ##### Clearing food list
 
-This feature allows users to clear their Food List.
-
-**Code example**
-
 `food clear`
+
+This feature allows users to clear their Food List. 
+
+`storage` accesses `whatIAteTodayList` by reference, and calls it's `clearList` method, clearing all entries from the list
+
+Following that, `StorageFood` invokes `saveList` to update the `food.txt` file.
+
+##### Viewing from a reference list
+
+This section covers the implementation, and design consideration of features that involve a reference list.
+
+A reference list is represented by [StallsManager](#class-diagram-of-food), which contains all the information of items sold by a store in
+a food court, as well as the name of the store.
+
+Additionally, a reference list has multiple features, namely
+
+1. `food view`
+1. `food view [STORE_INDEX]`
+1. `food view all`
+
+The `ViewReferenceFoodCommand` compares the user input to the correct syntax and executes the corresponding command.
+All three commands listed are implemented by methods contained in `StallsManager`, with the following execution path:
+1. `storage` accesses `reference`, which is a reference list
+1. `reference` then accesses a particular food court reference, Technoedge, by the method `getTechnoEdge()`
+1. `reference` then invokes the corresponding command by calling the one of the three methods stored in Technoedge reference.
+
+The implementation of the three methods is similar to  [Food List](#listing-all-food-records).
+However, they differ in the scale of the commands. `food list` operates simply by reading the user's current list.
+Subsets of `food view` commands operate on the reference list `StallsManager`, which is identified by Technoedge name.
+
+In particular, all the date corresponding to Technoedge food court is already saved into the system by arrays of strings,
+added in by the developer team (us). 
+
+This data is found from [NUS OCA](https://uci.nus.edu.sg/oca/retail-dining/well-certification/),
+and imported manually by us.
+
+Click parses the relevant data from the strings into food records for the user to interact with. 
+This functionality can be read from our [user guide](./UserGuide.md)
 
 ##### Saving food list on successful command
 
 The storage on hard-disk would be automatically
 updated on every successful command entered by the user.
 
-The interworking of this is described in detail in architecture.
+The interworking of this is described in detail in [architecture](#451-architecture).
 
-#### 4.5.3 Food Design considerations
-
-1. Why is there a need for calorie count?
-   > Health tracking is important for students, especially during the pandemic
-   where we stress eat during online lessons.
-1. Why is there a need to remove a record? We can't un-eat stuff
-   > Yes, however due to the limitations of the CLI interface there may be wrongly spelled
-   entries that the user wouldn't want reflected in the list.
-   Additionally, each food calorie count
-   would be summed up to show the user the total calories consumed per day. If the calories
-   entered are missing or have an additional 0 the sum would be overinflated 
-1. Why implement  `ListOfRecords`?  It seems like a duplicate of `ArrayList<T>`
-    > The abstract class `ListOfRecords` may seem uneventful to you on the surface, however
-    much consideration was taken in account in the making. For instance, in our current iteration
-    we are introducing a way to integrate current food names and calorie count from existing
-    food courts - e.g. TechnoEdge. Another class could inherit from `ListOfRecords` in order to parse in
-    the correct data, hence the generic `T` type used in the list.
-   
 ### 4.6  Help command
 
 This segment focuses on describing the not so-simple implementations behind what would otherwise
 be considered a simple feature. An interesting point for you to note before exploring this portion 
 would be the runtime-analysis of classes  done by the compiler, which reads the classes from the
 source code and extracts the syntax. This is perhaps more functional than printing out a string
-concatenating all command syntax.
+concatenating all command syntax, which is left as a task for the developers. The following segment discusses the different activation paths of help.
 
-#### 4.6.1 Architecture  of Help Command
+#### Developer help command
+The developer team (we) can enter `help rt` in intellij to activate the runtime mode of help, which is further elaborated in the following sections.
+Following that, we manually run `help rt`, and transfers the sorted command names and syntax onto a string, which is printed to the user on `help`.
 
-The following diagram illustrates the  interactions between the functional class `ClassPackageReader` and
-a particular command `ClickCommand`.
-![](./images/help/helpCommandsClassDiagram.png)
-A class package reader  is implemented in order to:
-1.  Read classes from a specified package
-1.  Get names of all classes declared
-1.  Filter out the classes that are not commands by inheritance
-1.  Collect the commands in a set
-1.  Iterate through all other listed packages and merge the sets
-1.  Sort the filtered commands by alphabetical order for readability
-1.  Read the specific syntax  of a command, and print it to the user
 
-The abstract class `Command` has the following methods which 
-implement steps 3 & 4:
-1. `public int compare(Command command1, Command command2){...}`
-   >This comparator is used in the
-`ClassPackageReader` to sort out the Commands by name, and is further elaborated in Logic.
-1. `public void printClassNameAndSyntax()` 
-    > This function splits the name of the class by upper and lower case, and also to remove the
-    "command" word at the end of the class. 
+#### For the user
+The user simply enters `help` to have the user interface `Ui` print out the help message,
 
-Next, we decided to run the `ClassPackageReader` through a package rather than iterate through all classes.
-The former is better than the latter considering our implementation of the commands. For instance, all module-
-related commands are grouped together in the `module` package, food-related commands in `food` etc. Thus, by
-accessing the packages and filtering out the commands, the `ClassPackageReader` presents the name of the command
-and the syntax in a readable format to the user. Do note that the packages have to be manually input by the developers.
-However, the core functionality of Click is already partitioned nicely into the packages and hence we do not expect
-many updates over the lifeline of this project.
+
+After considering the different functionalities of the `help` command as well as the runtime mode of help,
+the following section would elaborate on how the runtime mode works, and how we integrate this into generating the help message for the user.
 
 #### 4.6.2 Logic of Help Command
 
-After describing the [architecture](#461-architecture--of-help-command) of the help command, this portion will then describe the sequence of activation by
-the user when parsing a `help` command. Take the following sequence diagram for reference.
-![](./images/help/HelpCommand_execute-Help_Commands.png)
+After describing the [architecture](#36-help-component) of the help command, this portion will then describe the sequence of activation by
+the developer when parsing a `help rt` command. Take the following sequence diagram for reference.
+![](diagrams/help/HelpCommand_execute-Help_Commands.png)
+
 The sequence diagram provides a high-level view on how the entities interact. You should notice the interaction between
 `ClassPackageReader` and the `Command` entities, where the former gets the syntax of the latter by having a class as
 input. This translates into a scalable option on addition of commands, where a syntax attribute is required to be present
 in an empty constructor rather than concatenating additional syntax onto a constant String variable.
+That bit is done by the developers, to create a functional hard-coded string that is guaranteed to work on the user's end.
 
 We reviewed the high-level functionality of `ClassPackageReader`, but it is also important for developers to take note of how
 this class works on a lower-level. The function described here is `getCommandsAndPrintSyntax()`
@@ -766,10 +876,24 @@ to execute.
 | \ | Alternative 1 (current choice): Reads the name and syntax from the Classes | Alternative 2 (previous choice): Prints all available commands from a String, hard-coding every syntax and printing |
 |---|---|---|
 | Pros | 1. Dynamic, works well and sorts the names by order as long as the constructor is included for a command<br>2. Very readable and testable due to sorted names<br>3. OOP implementation with overloaded methods and branching on inheritance<br>4. The user gets to easily view *ALL*  possible commands with a single word | 1. Easy to implement, just adding all available commands into a String and print it out<br>2. Relatively fewer lines of code (LoC)<br>3. User gets specific syntax with command entered |
-| Cons | 1. Possible depreciated methods (`Class.getMethod`, `Class.getDeclaredConstructor`) which may be outdated, however,<br>  are still functional<br>2. Many more lines of code  (LoC) for implementation <br>3. The user  is bombarded with *ALL* possible commands with a single word | 1. Hard-coding and sorting help commands manually is a chore<br>2. User still has to remember the command in order to access the syntax |
+| Cons | 1. Possible deprecated methods (`Class.getMethod`, `Class.getDeclaredConstructor`) which may be outdated, however,<br>  are still functional<br>2. Many more lines of code  (LoC) for implementation <br>3. The user  is bombarded with *ALL* possible commands with a single word | 1. Hard-coding and sorting help commands manually is a chore<br>2. User still has to remember the command in order to access the syntax |
 
-While we submitted Alternative 2 in version 1 due to a lack of time and easier implementation. with more time given in Version 2.0 - we
-decided  to switch over to Alternative 1 for the user to easily view all the syntax at a glance.
+While alternative 1 works when run on intellij as all `.class` files are found easily in `src/`, it does not work when running with a `.jar` file. This was caught with early bug testing by the developer team.
+
+This issue is easily solved with alternative 2, which simply outputs a hard-coded string message to the user.
+
+We decided to include both alternatives in our code with the runtime mode, which is activated by `help rt` and is not included in the user guide to not confuse the user.
+
+Thus, the following steps are taken to combine both the pros of the alternatives. 
+1. Developer opens `Click` on intellij
+1. Developer enters `help rt` to generate sorted help message string
+1. Developer copies and pastes the string into `Messages`, storing the help message
+
+
+This ensures that:
+1. All commands and syntax are read accordingly / no commands are missed out
+1. Commands are sorted for readability and functionality (adds are group together etc)
+1. The `help` command works on a `.jar` file.
 
 ### 4.7. Exit Command
 
@@ -786,6 +910,7 @@ ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a
 i. `ExitCommand` calls `ui.printGoodBye()` to print the goodbye message to the user.\
 ii. `ExitCommand` calls `System.exit(0)` to terminate the program.
 
+  
 ### 4.8. Logging
 
 Logging in the application refers to storing exceptions, warnings and messages that occur during the execution of the program. It was included to help developers to identify bugs and to simplify their debugging process.
@@ -793,11 +918,12 @@ Logging in the application refers to storing exceptions, warnings and messages t
 The `java.util.logging` package is used for logging. The logging mechanism is managed by the `ClickLogger` class through the `logger` attribute and all information is logged into a log file, `logs/ClickLogs.log`.
 
 Logging Levels:
-*`Level.SEVERE`: a serious failure, which prevents normal execution of the program, for end users and system administrators.
-*`Level.WARNING`: a potential problem, for end users and system administrators.
-*`Level.INFO`: reasonably significant informational message for end users and system administrators.
-*`Level.CONFIG`: hardware configuration, such as CPU type.
-*`Level.FINE`, `Level.FINER`, `Level.FINEST`: three levels used for providing tracing information for the software developers.
+
+* `Level.SEVERE`: a serious failure, which prevents normal execution of the program, for end users and system administrators.
+* `Level.WARNING`: a potential problem, for end users and system administrators.
+* `Level.INFO`: reasonably significant informational message for end users and system administrators.
+* `Level.CONFIG`: hardware configuration, such as CPU type.
+* `Level.FINE`, `Level.FINER`, `Level.FINEST`: three levels used for providing tracing information for the software developers.
 
 `ClickLogger` follows Singleton Pattern. Therefore, other classes can access the `logger` by calling `ClickLogger.getNewLogger()`.
 
@@ -820,7 +946,7 @@ public class Click {
 }
 ```
 
-## 5. Testing
+## 5. Automated Testing
 
 We use JUnit testing to ensure that the operations of `Click` meet the expected behavior.
 
@@ -895,6 +1021,71 @@ There are two ways to run tests.
 ### Appendix D: Glossary
 
 **CAP**: Cumulative Average Point
+
 **MC**: modular credit
+
 **Mainstream OS**: Windows, Linux, Unix, OS-X
 
+### Appendix E: Instructions for Manual Testing
+
+This section gives you some guidance for the testers to manually test `Click`.
+
+There are two categories of the user-testable features:
+* Positive test cases
+* Negative test cases
+
+For the positive test cases, just simply follow the UserGuide in the sequence from 3.0 on to 3.6.
+
+Here are the negative test cases you can test:
+
+* Module-related commands:
+  * Invalid module commands:
+    * `module`
+    * `module a`
+    * `cap`
+  * Invalid add module commands:
+    * `module add`
+    * `module add n/Software Engineering c/CS2113T`
+  * Invalid delete module commands:
+    * `module delete one`
+    * `module delete -1`
+    * `module delete [INDEX_OUT_OF_BOUND]`
+  * Invalid CAP info:
+    * Provide the current CAP which is not a real number
+    * Provide the current CAP which is not in the range [0.0 - 5.5]
+    * Provide the total MC taken which is not a positive integer
+* Calendar-related commands:
+   * Invalid display commands:
+      * `calendar display`
+      * `calendar display 22-2021` (note that this command will show a warning and then display calendar for current 
+        month)
+   * Invalid add task commands:
+      * `calendar todo n/abc`
+      * `calendar todo n/ d/10-10-2021`
+      * `calendar todo n/abc d/`
+      * `calendar todo n/abc d/22-22-2021`
+   * Invalid add lecture commands:
+      * `calendar lecture m/ s/10-10-2021 e/10-10-2021`
+      * `calendar lecture m/CS2113T s/10-10-2021 e/10-10-2021` (when CS2113T module has not been added yet)
+      * `calendar lecture m/CS2113T s/ e/10-10-2021`
+      * `calendar lecture m/CS2113T s/10-10-2021 e/`
+      * `calendar lecture m/CS2113T s/10-10-2021 e/09-10-2021` (end date before start date)
+  * Invalid delete task commands:
+     * `calendar delete`
+     * `calendar delete task`
+     * `calendar delete task -1`
+* Journal related commands:
+   * Invalid add notebook commands:
+      * `journal notebook`
+      * `journal notebook cs`
+      * `journal notebook n/`
+   * Invalid add entry commands:
+      * `journal entry`
+      * `journal entry n/`
+   * Invalid delete notebook commands:
+      * `journal delete_notebook 0`
+      * `journal delete_notebook`
+   * Invalid delete entry commands:
+      * `journal delete_entry n/ e/`
+   * Invalid tag commands:
+      * `journal tag`

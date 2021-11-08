@@ -28,7 +28,7 @@ public class AddFoodFromReferenceCommand extends Command {
     private String itemDivider = "i/";
 
     public AddFoodFromReferenceCommand() {
-        this.syntax = "food radd s/ [STORE_INDEX] i/ [ITEM_INDEX]";
+        this.syntax = "food radd s/[STORE_INDEX] i/[ITEM_INDEX]";
     }
 
     //assumes string given after food radd
@@ -40,7 +40,7 @@ public class AddFoodFromReferenceCommand extends Command {
             InvalidItemIndexException,
             NoStoreDividerException,
             NoItemDividerException {
-        parseDataAndThrowExceptionsIfFound(userInput);
+        extractStoreAndItemIndex(userInput);
     }
 
     /**
@@ -53,46 +53,53 @@ public class AddFoodFromReferenceCommand extends Command {
      * @throws WrongDividerOrderException if divider order is wrong.
      * @throws ArgumentsNotFoundException if arguments not found.
      */
-    private void parseDataAndThrowExceptionsIfFound(String userInput) throws
+    private void extractStoreAndItemIndex(String userInput) throws
             InvalidStoreIndexException,
             InvalidItemIndexException,
             NoStoreDividerException,
             NoItemDividerException,
             WrongDividerOrderException,
             ArgumentsNotFoundException {
-        throwExceptionsIfFound(userInput);
-        String[] data = Parser.getData(userInput, storeDivider, itemDivider);
+        String[] data = {"",""};    //expecting 2 values returned
+        data = parseAndThrowExceptionsIfFound(userInput);
         String storeIndexString = data[0];
         String itemIndexString = data[1];
-        storeIndex = Integer.parseInt(storeIndexString);
-        itemIndex = Integer.parseInt(itemIndexString) - 1;
+        this.storeIndex = Integer.parseInt(storeIndexString);
+        if (storeIndex <= 0) {
+            throw new InvalidStoreIndexException(storeIndex);
+        }
+        this.itemIndex = Integer.parseInt(itemIndexString) - 1;
+        if (itemIndex <= 0) {
+            throw new InvalidItemIndexException(itemIndex + 1);
+        }
     }
 
     /**
-     * Throws exceptions if found.
+     * Parses data and throws appropriate exceptions if found.
      * @param userInput user input.
+     * @return data String array representing extracted string arguments.
      * @throws InvalidStoreIndexException if store index is invalid.
      * @throws InvalidItemIndexException if item index is invalid.
      * @throws NoStoreDividerException if no store divider is found.
      * @throws NoItemDividerException if no item divider is found.
+     * @throws WrongDividerOrderException if divider order is wrong.
+     * @throws ArgumentsNotFoundException if arguments not found.
      */
-    private void throwExceptionsIfFound(String userInput) throws
+    private String[] parseAndThrowExceptionsIfFound(String userInput) throws
             InvalidStoreIndexException,
             InvalidItemIndexException,
             NoStoreDividerException,
-            NoItemDividerException {
-        if (storeIndex <= 0) {
-            throw new InvalidStoreIndexException(storeIndex);
-        }
-        if (itemIndex <= 0) {
-            throw new InvalidItemIndexException(itemIndex);
-        }
+            NoItemDividerException,
+            WrongDividerOrderException,
+            ArgumentsNotFoundException {
         if (!userInput.contains(storeDivider)) {
             throw new NoStoreDividerException();
         }
         if (!userInput.contains(itemDivider)) {
             throw new NoItemDividerException();
         }
+        String[] data = Parser.getData(userInput, storeDivider, itemDivider);
+        return data;
     }
 
     @Override
@@ -100,8 +107,9 @@ public class AddFoodFromReferenceCommand extends Command {
         FoodRecord toAdd = getFoodRecordFromStall(storage);
         Ui.printLine();
         Ui.printMessageSameLine(Messages.PRINT_ADDING_ITEM);
-        Ui.printMessage(toAdd.toString());
-        storage.whatIAteTodayList.addToList(toAdd, false);
+        System.out.println(toAdd.toString());
+        Ui.printLine();
+        storage.whatIAteTodayList.addToList(toAdd, true);
         StorageFood.saveList(storage.whatIAteTodayList);
     }
 
