@@ -225,7 +225,7 @@ currency types, loaded from `DataManager`.
 
 1. When the user gives an input, it will first be split into 2 parts command word and arguments using regex.
 2. The command word will be matched with the list of expected command words. If there is no match, return an 
-invalid command and the process stops here.
+invalid command, and the process stops here.
 3. If there is a match, `Parser` will check the validity of the arguments the user gave. This is also done
 using regex.
 4. If the arguments are valid, the corresponding command will be returned.
