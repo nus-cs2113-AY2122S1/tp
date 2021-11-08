@@ -36,7 +36,7 @@ them. Finally, [Command Summary](#command-summary) provides you with an overview
     * [delete /att](#delete-attendance)
     * [list /att](#list-attendance)
 * [FAQ](#faq-frequently-asked-questions)
-* [Storage](#Storage)
+* [Storage](#storage)
 * [Command Summary](#command-summary)
 
 ## Acknowledgements
