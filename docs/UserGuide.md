@@ -11,7 +11,7 @@ GetJack'D **guarantees faster management of workouts** than traditional GUI appl
 to **help you embark on your fitness journey**, GetJack'D is the one for you!
 
 ## Contents 🔗
-- [Purpose](#purpose⚔️)
+- [Purpose](#purpose-)
 - [Quick Start](#quick-start-)
 - [Features](#features-)
   1. [Creating a new workout: `create`](#1-creating-a-new-workout-create)
@@ -37,7 +37,7 @@ to **help you embark on your fitness journey**, GetJack'D is the one for you!
 <div style="page-break-after: always;"></div>
 
 
-## Purpose⚔️
+## Purpose 🎯
 
 This user guide explains how you can **set up the application and utilise the various features** delivered by GetJack'D.
 
@@ -79,7 +79,7 @@ ________________________________________________________
 
 <div style="page-break-after: always;"></div>
 
-## Features 🎯
+## Features 🎨️ 
 
 GetJack'D maintains a list of workouts (hereafter referred to as the "workout list"), where **each workout is a list of exercises**.
 Using the commands specified in this guide will allow you to manipulate these workouts and the workout list in various ways.
