@@ -39,12 +39,15 @@ ultimately saving cost and increasing profits.
 * **Enhancement added**: Index Based Searching
   * **What it does**: Allows user to update Dishes and Ingredients by searching for their Index in 
   addition to searching for their String Name
-  * Added Exception to Numbers as Input in place of Strings to make code more defensive
+* **Enhancement added**: Exception to Numbers as Input in place of Strings
+  * **What it does**: Prevents user from using Numbers as Input in places that require String Input
+* **Enhancement added**: JUnit Test
+  * **What it does**: Makes Code more defensive by ensuring the different Classes work as intended
 * **Contribution to other features**: `UI` Class
   * Added Exception Messages for specific exception cases
   * Updated Command Summary
 * **Contribution to other features**: Soft Limit
-  * Added Soft Limit of 10,000kg to prevent Users from adding very large numbers
+  * Added Soft Limit of 10,000kg to advise Users against adding very large numbers 
   * Added to:
     * `Add Dish Waste`
     * `Add Ingr`
@@ -67,7 +70,4 @@ ultimately saving cost and increasing profits.
     * `Edit` Commands
     * `Link` Command 
     * `Sort` Commands
-* **Contributions to team-based tasks**:
-  * Added JUnit Tests for certain Command Classes
-* **Review/mentoring contributions**:
-* **Contributions beyond the project team**:
+
