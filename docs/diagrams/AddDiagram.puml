@@ -1,0 +1,62 @@
+@startuml
+!include style.puml
+box DUKE_COLOR
+Participant ":Duke" as Duke
+end box
+activate Duke
+box BLUE_COLOR
+Participant ":Parser" as Parser
+participant ":AddParser" as AddParser
+
+
+Duke -> Parser :parseCommand
+create ":AddParser" as AddParser
+end box
+activate Parser
+
+Parser -> AddParser: getAddCommand
+activate AddParser
+
+box LOGIC_COLOR
+alt isEventFlag
+create ":AddEventCommand" as AddEventCommand
+AddParser -> AddEventCommand: AddEventCommand
+activate AddEventCommand
+return
+
+else isTaskFlag
+create ":AddTaskCommand" as AddTaskCommand
+AddParser -> AddTaskCommand: AddTaskCommand
+activate AddTaskCommand
+return
+
+else isMemberFlag
+create ":AddMemberCommand" as AddMemberCommand
+AddParser -> AddMemberCommand: AddMemberCommand
+activate AddMemberCommand
+return
+end
+end box
+return
+return
+
+alt isEventFlag
+Duke -> AddEventCommand : execute
+activate AddEventCommand
+|||
+return CommandResult
+
+else isTaskFlag
+Duke -> AddTaskCommand : execute
+activate AddTaskCommand
+|||
+return CommandResult
+
+else isMemberFlag
+Duke -> AddMemberCommand : execute
+activate AddMemberCommand
+|||
+return CommandResult
+end
+
+@enduml
