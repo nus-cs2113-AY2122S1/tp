@@ -216,9 +216,10 @@ Expected Output: <br>
 <hr>
 
 ### Assessment
-> 💡 **Note(s):**<br />
-> * If multiple input fields are incorrect, only one of the errors will be explicitly shown.
-> * For decimal values, only up to 2 decimal places will be displayed.
+> 💡 **Notes:**<br />
+> If multiple input fields are incorrect, only one of the errors will be explicitly shown.
+> For inputs accepting decimal, only up to 2 decimal places will be allowed.
+> Assessments with maximum marks and weightages of 0.00 are accepted taking into account the possibility of ungraded submissions without maximum marks that still need to be accounted for.
 
 #### Listing all assessments in a class: `list_assessments`
 List all assessments in a class.
@@ -241,8 +242,8 @@ Adds an assessment to a class.
 Format: `add_assessment c/<CLASS_ID> n/<ASSESSMENT_NAME> m/<MAXIMUM_MARKS> w/<WEIGHTAGE>`
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `ASSESSMENT_NAME` refers to the name of the assessment (e.g. Midterm, Assignment 1, etc.).
-* `MAXIMUM_MARKS` refers to the maximum marks of the assessment (e.g. 100).
-* `WEIGHTAGE` refers to the weightage of the assessment (e.g. 10%).
+* `MAXIMUM_MARKS` refers to the maximum marks of the assessment (e.g. 100). Input can only have 2 decimal places at most.
+* `WEIGHTAGE` refers to the weightage of the assessment (e.g. 10%). Input can only have 2 decimal places at most.
 
 Examples:
 * `add_assessment c/CS2101-C03 n/OP1 m/20 w/10`
@@ -260,8 +261,8 @@ Format: `edit_assessment c/<CLASS_ID> a/<ASSESSMENT_NAME> [n/<NEW_ASSESSMENT_NAM
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `ASSESSMENT_NAME` refers to the name of the assessment (e.g. Midterm, Assignment 1, etc.).
 * `NEW_ASSESSMENT_NAME` [Optional] refers to the new name of the assessment (e.g. Finals, Assignment 2, etc.).
-* `NEW_MAXIMUM_MARKS` [Optional] refers to the new maximum marks of the assessment (e.g. 50).
-* `NEW_WEIGHTAGE` [Optional] refers to the new weightage of the assessment (e.g. 20%).
+* `NEW_MAXIMUM_MARKS` [Optional] refers to the new maximum marks of the assessment (e.g. 50). Input can only have 2 decimal places at most.
+* `NEW_WEIGHTAGE` [Optional] refers to the new weightage of the assessment (e.g. 20%). Input can only have 2 decimal places at most.
 > 💡 **Note:**<br />
 > At least one optional field must be provided:
 > * `NEW_ASSESSMENT_NAME`
