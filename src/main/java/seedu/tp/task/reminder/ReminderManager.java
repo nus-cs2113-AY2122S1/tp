@@ -14,6 +14,9 @@ import java.util.Map;
 
 public class ReminderManager {
 
+    private static final String LINE_SEPARATOR = "---------------------------------------"
+            + "----------------------------------";
+
     public ReminderManager() {
 
     }
@@ -21,22 +24,44 @@ public class ReminderManager {
     public static String sendReminder(TaskManager taskManager) {
         LocalDateTime now = LocalDateTime.now();
         String message = "";
-
-        for (int i = 0; i < taskManager.getTaskListSize(); i++) {
-            if (taskManager.getTask(i).needReminder()) {
-                message += (taskManager.getTask(i).getReminder(now));
+        if (taskManager != null) {
+            for (int i = 0; i < taskManager.getTaskListSize(); i++) {
+                if (taskManager.getTask(i).needReminder()) {
+                    message += (taskManager.getTask(i).getReminder(now));
+                }
             }
         }
         return message;
     }
 
-    public static void customizeReminderTime(long userTime, int index, TaskManager taskManager)
+    public static void printReminder(TaskManager taskManager) {
+        String message = sendReminder(taskManager);
+        if (!message.equals("")) {
+            System.out.println(message);
+            System.out.println(LINE_SEPARATOR);
+        }
+    }
+
+    public static void customizeReminderMinute(long userMinute, int index, TaskManager taskManager)
             throws InvalidTaskIndexException, ReminderNotRequiredException {
         if (index < 0 || index > taskManager.getTaskListSize() - 1) {
             throw new InvalidTaskIndexException(++index);
         } else if (taskManager.getTask(index).needReminder()) {
             Reminder reminder = taskManager.getTask(index).getReminder();
-            reminder.setUserTime(userTime);
+            reminder.setUserMinute(userMinute);
+        } else {
+            throw new ReminderNotRequiredException();
+        }
+
+    }
+
+    public static void customizeReminderDay(long userDay, int index, TaskManager taskManager)
+            throws InvalidTaskIndexException, ReminderNotRequiredException {
+        if (index < 0 || index > taskManager.getTaskListSize() - 1) {
+            throw new InvalidTaskIndexException(++index);
+        } else if (taskManager.getTask(index).needReminder()) {
+            Reminder reminder = taskManager.getTask(index).getReminder();
+            reminder.setUserDay(userDay);
         } else {
             throw new ReminderNotRequiredException();
         }
@@ -60,12 +85,12 @@ public class ReminderManager {
             MissingUserMessageException, MissingReminderFieldException {
         int index = Integer.parseInt(commandArguments.get(Command.MAIN_ARGUMENT));
         String outMessage = "";
-        if (commandArguments.containsKey(ReminderFlag.TIME_AHEAD)) {
-            if (commandArguments.get(ReminderFlag.TIME_AHEAD) != null) {
-                long userTime = Long.parseLong(commandArguments.get(ReminderFlag.TIME_AHEAD));
+        if (commandArguments.containsKey(ReminderFlag.MINUTE_AHEAD)) {
+            if (commandArguments.get(ReminderFlag.MINUTE_AHEAD) != null) {
+                long userMinute = Long.parseLong(commandArguments.get(ReminderFlag.MINUTE_AHEAD));
                 try {
-                    customizeReminderTime(userTime, index - 1, taskManager);
-                    outMessage += "The time for reminding before task is updated to " + userTime + " minutes.";
+                    customizeReminderMinute(userMinute, index - 1, taskManager);
+                    outMessage += "The minutes for reminder is updated to " + userMinute + "\n";
                 } catch (InvalidTaskIndexException itie) {
                     return itie.getMessage();
                 } catch (ReminderNotRequiredException rnre) {
@@ -75,6 +100,22 @@ public class ReminderManager {
                 throw new MissingUserTimeException();
             }
         }
+        if (commandArguments.containsKey(ReminderFlag.DAY_AHEAD)) {
+            if (commandArguments.get(ReminderFlag.DAY_AHEAD) != null) {
+                long userDay = Long.parseLong(commandArguments.get(ReminderFlag.DAY_AHEAD));
+                try {
+                    customizeReminderDay(userDay, index - 1, taskManager);
+                    outMessage += "The days for reminder is updated to " + userDay + "\n";
+                } catch (InvalidTaskIndexException itie) {
+                    return itie.getMessage();
+                } catch (ReminderNotRequiredException rnre) {
+                    return rnre.toString();
+                }
+            } else {
+                throw new MissingUserTimeException();
+            }
+        }
+
         if (commandArguments.containsKey(ReminderFlag.REMINDER_MESSAGE)) {
             if (commandArguments.get(ReminderFlag.REMINDER_MESSAGE) != null) {
                 String message = commandArguments.get(ReminderFlag.REMINDER_MESSAGE);
@@ -90,8 +131,9 @@ public class ReminderManager {
                 throw new MissingUserMessageException();
             }
         }
-        if (!commandArguments.containsKey(ReminderFlag.TIME_AHEAD)
-            && !commandArguments.containsKey(ReminderFlag.REMINDER_MESSAGE)) {
+        if (!commandArguments.containsKey(ReminderFlag.MINUTE_AHEAD)
+                && !commandArguments.containsKey(ReminderFlag.DAY_AHEAD)
+                && !commandArguments.containsKey(ReminderFlag.REMINDER_MESSAGE)) {
             throw new MissingReminderFieldException();
         }
         return outMessage;

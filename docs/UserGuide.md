@@ -401,29 +401,33 @@ You can also choose to **change the reminder message and time**. Each task can h
 **Format:** `reminder <index of task> [--flag <argument>]`
 - `<index of task>` specifies number of the task you want to change in your current task list.
 - `[--flag <argument>]` specifies additional details you need to provide.
-  - The time *(in minute)* you want the reminder to pop up before it starts/needs to be done: `[--time <minute>]`
+  - The number of days you want the reminder to pop up before it starts/needs to be done: `[--day <day>]`
+  - The number of minutes you want the reminder to pop up before it starts/needs to be done: `[--minute <minute>]`
   - The reminder message you want to use: `[--message <your reminder message>]`
 
->💡 **Note**: The task description cannot be changed. i.e. only the "Reminder! 10 min before the following task:" part can be modified.
+>💡 **Note**: 
+>- If both day and minute are set to a non-zero value, then the time for reminder is the total of days and minutes.
+>- The task description cannot be changed. i.e. only the "Reminder! 10 min before the following task:" part can be modified.
 
-**Example:** `reminder 1 --time 30 --message finish it in half an hour!`
-- Change the reminder time to be 30 minute before a task.
-- Change the reminder message to "finish it in half an hour!"    
+**Example:** `reminder 1 --day 10 --minute 30 --message finish it in half an hour!`
     
 **Expected outcome when a reminder is customized:**
 ```
-[user]: reminder 1 --time 30 --message finish it in half an hour!
-The time for reminding before task is updated to 30 minutes.
-The reminder message is updated to "finish it in half an hour!".
+[user]: reminder 1 --day 10 --minute 30 --message finish it in half an hour!
+|| The minutes for reminder is updated to 30
+|| The days for reminder is updated to 10
+|| The reminder message is updated to finish it in half an hour!
 ```
 
 **Reminder displayed:**
 ```
 -------------------------------------------------------------------------
 finish it in half an hour!
-	submit assignment 5 [medium] (dueDate: 02-11-2021 12:00)
+	submit assignment 5 [medium] (dueDate: 11-11-2021 12:00)
 -------------------------------------------------------------------------
 ```
+- In this example, the reminder message pops up at **01-11-2021 11:30**, 10 days **and** 30 minutes prior to the actual due date.
+
 
 ### 2.7 Editing your tasks: `edit`
 Edits a single [Todo](#221-todo-todo), [Deadline](#222-deadline-deadline) or [Event](#223-event-event) based on the flags entered.

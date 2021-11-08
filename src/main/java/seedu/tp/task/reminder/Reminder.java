@@ -10,7 +10,8 @@ public class Reminder {
     private LocalDateTime taskTime;
     private LocalDateTime reminderTime;
     private boolean reminderDone;
-    private long userTime = 10;
+    private long userMinute = 10;
+    private long userDay = 0;
     private String message = "Reminder! 10 min before the following task:";
     private ReminderInformation information;
 
@@ -20,18 +21,24 @@ public class Reminder {
 
     public Reminder(LocalDateTime time) {
         this.taskTime = time;
-        this.reminderTime = taskTime.minusMinutes(userTime);
+        this.reminderTime = taskTime.minusMinutes(userMinute);
         setReminderDone();
         setInformation();
     }
 
-    public void setUserTime(long userTime) {
-        this.userTime = userTime;
+    public void setUserMinute(long minute) {
+        this.userMinute = minute;
+        updateReminderTime();
+    }
+
+    public void setUserDay(long day) {
+        this.userDay = day;
         updateReminderTime();
     }
 
     public void updateReminderTime() {
-        this.reminderTime = taskTime.minusMinutes(userTime);
+        this.reminderTime = taskTime.minusMinutes(userMinute);
+        this.reminderTime = taskTime.minusDays(userDay);
     }
 
     public void setMessage(String message) {
@@ -64,7 +71,7 @@ public class Reminder {
     }
 
     public void setInformation() {
-        information = new ReminderInformation(reminderDone, userTime, message);
+        information = new ReminderInformation(reminderDone, userMinute, userDay, message);
     }
 
     public ReminderInformation getInformation() {
