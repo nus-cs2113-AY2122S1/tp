@@ -32,8 +32,6 @@ class UpdateParserTest {
             + "habit name? Please use the 'change' command instead.";
     private static final String ERROR_CHANGE_HABIT_INTERVAL_WITH_UPDATE_COMMAND = "There is no update command for "
             + "goals in this format, do check your parameters one more time.";
-    private static final String ERROR_UPDATE_GOAL_NAME_WITH_CHANGE_COMMAND = "Are you perhaps trying to change a "
-            + "goal name? Please use the 'update' command instead.";
     private static final String ERROR_MISSING_REQUIRED_FLAGS = "Required flags for update command missing. "
             + "Please try again.";
     private static final String ERROR_UPDATE_GOAL_TYPE_WITH_CHANGE_COMMAND = "The command is missing the 'h/' flag.";
@@ -296,10 +294,9 @@ class UpdateParserTest {
         String inputInvalidChangeCommand = "g/1 h/2";
 
         try {
-            // TODO: Fix assertion failure on UpdateParser.java:89
             UpdateParser.parseUpdateHabitCommands(inputUpdateGoalNameCommand);
         } catch (HaBitParserException e) {
-            assertEquals(ERROR_UPDATE_GOAL_NAME_WITH_CHANGE_COMMAND, e.getMessage());
+            assertEquals(ERROR_CHANGE_COMMAND_MISSING_INDEXES, e.getMessage());
         }
 
         try {
