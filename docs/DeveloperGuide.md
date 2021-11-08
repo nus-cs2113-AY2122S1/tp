@@ -19,6 +19,7 @@
 - [4. Implementation](#4-implementation)
   - [4.1 Task Factories](#41-task-factories)
   - [4.2 Filtering the tasklist](#42-filtering-the-tasklist)
+    - [4.2.1 Time proximity based filtering](#421-time-proximity-based-filiering)
   - [4.3 [Proposed] Refactor TaskManager](#43-proposed-refactor-taskmanager)
 - [5. Appendix: Requirements](#5-appendix-requirements)
   - [5.1 Product scope](#51-product-scope)
