@@ -519,7 +519,7 @@ Expected outcome:
 
 #### 3.4.5 Find a notebook by tag
 
-Allows you to find a notebook which has the tag.
+Allows you to find a notebook which has the required tag.
 
 Format: `journal find TAG_NAME`
 
