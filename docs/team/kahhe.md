@@ -9,7 +9,7 @@ Users can only run the app on a Command Line Interface (CLI).
 ## Summary of Contributions
 Below are contributions I've made to the team and Ha(ppy)Bit. Organised for you and because I like it that way.
 
-### Code Contributed: [RepoSense Link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=f14&breakdown=true&sort=groupTitle&sortWithin=title&since=2021-09-25&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=kahhe&tabRepo=AY2122S1-CS2113T-F14-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
+### Code Contributed: <br> [RepoSense Link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=f14&breakdown=true&sort=groupTitle&sortWithin=title&since=2021-09-25&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=kahhe&tabRepo=AY2122S1-CS2113T-F14-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 ### Features
 
@@ -19,7 +19,6 @@ Below are contributions I've made to the team and Ha(ppy)Bit. Organised for you 
 - Added the `Command` class `DeleteCommand` and its inheritance classes `DeleteGoalCommand` and `DeleteHabitCommand`
 - Added the `Parser` class `DeleteParser`
 
-
 #### v2.0
 
 "Update" feature for goal name and habit name:
@@ -27,12 +26,11 @@ Below are contributions I've made to the team and Ha(ppy)Bit. Organised for you 
   and `UpdateHabitNameCommand`
 - Contributed to `Parser` class `UpdateParser` for parsing input for updating goal name and updating habit name
 
-
 #### v2.1
 
-- 
+- Refined exception handling and accuracy of error messages of [staung07](../AboutUs.md)'s
+  new `UpdateParser` class
 - Added additional Junit tests in `UpdateParserTest` to improve test coverage
-- 
 
 ### Documentation
 
@@ -45,14 +43,18 @@ Below are contributions I've made to the team and Ha(ppy)Bit. Organised for you 
 
 #### [Developer Guide (DG)](/docs/DeveloperGuide.md)
 
-- Wrote `DeleteGoalCommand` and `DeleteHabitCommand` subsections of "Command Component" of "Design and Implementation"
+
+- Wrote "4.3. Listing all Goals" subsection of "4. Implementation"
+  - Created PUML Sequence Diagram 
+- Contributed to "4.8. Deleting a Goal" and "4.9. Deleting a Habit" subsection of "4. Implementation"
+  - Created PUML Sequence Diagram
 - Wrote "Target User Profile" and "Value Proposition" under "Appendix A"
 - Contributed to "Appendix C: Non-Functional Requirements"
 - Contributed to "Appendix D: Glossary"
 
 ### Community
 
-- 
+- _Hmm it's empty._
 
 ### Tools
 
@@ -60,6 +62,8 @@ Below are contributions I've made to the team and Ha(ppy)Bit. Organised for you 
 
 ### Extra
 
-- Came up with the logo for Ha(ppy)Bit:
-![HappyBit Logo](../Display_Images/HappyBit_logo.png)
-Used on the team's [Main Page](https://ay2122s1-cs2113t-f14-1.github.io/tp/) and in CS2101 Demo and Pitch.
+- Designed logo and diagram for Ha(ppy)Bit:
+  - ![HappyBit Logo](../Display_Images/HappyBit_logo.png)
+    Used on the team's [Main Page](../README.md) and in CS2101 Demo and Pitch.
+  - ![HappyBit_Visual_Explain](../Display_Images/HappyBit_Visual_Explain.png)
+    Used in the team's [User Guide](../UserGuide.md).

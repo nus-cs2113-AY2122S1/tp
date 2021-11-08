@@ -477,13 +477,13 @@ This section describes the implementation of how the user can update a goal's na
 2. The `UpdateParser#splitInput(commandInstruction)` method splits the user input into an ArrayList of parameters.
 3. The `UpdateParser#getUpdateGoalAttributes(parameters)` method is used to confirm what attributes exist in the user
    input and finds the flags for those attributes (goal name, goal type, and goal end date).
-4. If `isUpdateGoalName` is true, `UpdateParser#getName(parameter)` is called to get the updated name.
-5. Similarly, `isUpdateGoalType` and `isUpdateGoalEndDate` will call `UpdateParser#getType(parameter)` and
-   `UpdateParser#getDate(parameter)` to get the updated type and updated end date respectively.
+4. If `isUpdateGoalName` is true, `UpdateParser#getName(parameters)` is called to get the updated name.
+5. Similarly, `isUpdateGoalType` and `isUpdateGoalEndDate` will call `UpdateParser#getType(parameters)` and
+   `UpdateParser#getDate(parameters)` to get the updated type and updated end date respectively.
 6. The `goalIndex` to update is then obtained with `UpdateParser#getIndex(parameters, FLAG_GOAL_INDEX)` method
-7. The excess attributes provided in the input is found with the `UpdateParser#getExcessGoalAttributes(parameters)`
-   method. This is required as a parameter for the `UpdateGoalCommand` constructor. Its use is detailed in the further
-   steps below.
+7. Any excess attributes provided in the input is found with the `UpdateParser#getExcessGoalAttributes(parameters)`
+   method. This is required as a parameter for the `UpdateGoalCommand` constructor. Its use is detailed in the steps 
+   below.
 8. Finally, a `UpdateGoalCommand(goalIndex, newGoalName, newGoalType, newGoalEndDate, updateAttributes, 
    excessAttributes)` object is created and returned from the `UpdateParser#parseUpdateGoalCommands(commandInstruction)` 
    method.
@@ -491,8 +491,7 @@ This section describes the implementation of how the user can update a goal's na
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateGoalCommandParserSequenceDiagram.png)
 // TODO: Update the diagram to reflect changes to updateAttributes returning an ArrayList<Boolean>
 
-9. The `UpdateGoalCommand#runCommand(goalIndex, newGoalName, newGoalType, newGoalEndDate, updateAttributes,
-   excessAttributes)` method is called, which in turns calls the `GoalList#updateGoalAttributes(goalIndex, newGoalName, 
+9. The `UpdateGoalCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the `GoalList#updateGoalAttributes(goalIndex, newGoalName, 
    newGoalType, newGoalEndDate, updateAttributes, excessAttributes, printManager)` method.
 10. Within this newly called method, the `PrintManager#printUpdateGoalMessageStart()` method is called to print a
     message that a goal is being updated.
@@ -500,7 +499,7 @@ This section describes the implementation of how the user can update a goal's na
     newGoalName, printManager)` is called to update the goal name, calling the `PrintManager#printUpdatedGoalName(
     oldGoalDescription, newGoalDescription)` method to print a confirmation message on successful update of goal name.
     Similarly, if the second element is true, `GoalList#updateGoalType(goalIndex, newGoalType, printManager)` is called 
-    to update the goal type, calling the `PrintManager#printUpdatedGoalType(ooldGoalTypeName, newGoalTypeName)` 
+    to update the goal type, calling the `PrintManager#printUpdatedGoalType(oldGoalTypeName, newGoalTypeName)` 
     method to print a confirmation message on successful update of goal type. Finally, if the third element is true, 
     `GoalList#updateGoalEndDate(goalIndex, newGoalEndDate, printManager)` is called to update the goal end date, 
     calling the `PrintManager#printUpdatedGoalEndDate((goalName, oldDateString, newDateString)` method to print a 
@@ -523,15 +522,50 @@ This section describes the implementation of how the user can update a goal's na
 
 This section describes the implementation of how the user can update a habit's name and/or interval length.
 
-#### 4.7.1 Implementation
-
-A `UpdateHabitCommand` object is returned from the `UpdateParser` if the user input is successfully parsed as shown below.
-If the update command is not provided with a goal index and a habit index, or without any update flags it will throw an exception.
+#### 4.7.1. Implementation
+1. The `UpdateParser#parseUpdateHabitCommands(commandInstruction)` method is called, which starts the process of
+   extracting parameters from the user input.
+2. The `UpdateParser#splitInput(commandInstruction)` method splits the user input into an ArrayList of parameters.
+3. The `UpdateParser#getUpdateHabitAttributes(parameters)` method is used to confirm what attributes exist in the user
+   input and finds the flags for those attributes (habit name, habit interval).
+4. If `isUpdateHabitName` is true, `UpdateParser#getName(parameters)` is called to get the updated name.
+5. Similarly, if `isUpdateHabitInterval` is true, `UpdateParser#getUpdateInterval(parameters)` is called to get the 
+   updated interval.
+6. The `goalIndex` and `habitIndex` to update is then obtained with the 
+   `UpdateParser#getIndex(parameters, FLAG_GOAL_INDEX)` and `UpdateParser#getIndex(parameters, FLAG_HABIT_INDEX)`
+   methods respectively.
+7. Any excess attributes provided in the input is found with the `UpdateParser#getExcessHabitAttributes(parameters)`
+   method. This is required as a parameter for the `UpdateHabitCommand` constructor. Its use is detailed in the steps 
+   below.
+8. Finally, a `UpdateHabitCommand(goalIndex, habitIndex, newHabitName, newHabitInterval, updateAttributes, 
+   excessAttributes)` object is created and returned from the 
+   `UpdateParser#parseUpdateHabitCommands(commandInstruction)` method.
 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateHabitCommandParserSequenceDiagram.png)
 // TODO: Update the diagram to reflect changes to updateAttributes being an ArrayList<Boolean>
 
-The `runCommand` method is then executed for the `UpdateHabitCommand` object as seen.
+9. The `UpdateHabitCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the 
+   `GoalList#updateHabitAttributes(goalIndex, habitIndex, newHabitName, newHabitInterval, updateAttributes, 
+   excessAttributes, printManager)` method.
+10. Within this newly called method, the `PrintManager#printLine()` method is called to print a line to separate the
+    new messages being printed.
+11. Based on the `updateAttributes` parameter, if the first element is true, 
+    `GoalList#updateHabitNameFromGoal(goalIndex, habitIndex, newHabitName, printManager)` is called to update the habit 
+    name, calling the `PrintManager#printUpdatedHabitName(goalDescription, oldHabitDescription, newHabitDescription)` 
+    method to print a confirmation message on successful update of goal name. This is done after performing some checks 
+    on whether the new habit name is valid. Exceptions are raised if the new habit name is not valid.
+    
+    Similarly, if the second element of `updateAttributes` is true, 
+    `GoalList#updateHabitIntervalFromGoal(goalIndex, habitIndex, newHabitInterval, printManager)` is called
+    to update the interval of the specified habit, calling the `PrintManager#printUpdatedHabitInterval(goalDescription, 
+    habitDescription, newInterval)` method to print a confirmation message on successful update of habit interval. This 
+    is done after performing some checks on whether the new habit interval is valid. Exceptions are raised if it is
+    found to be invalid.
+12. Lastly, the `PrintManager#printUpdateHabitMessageEnd(excessAttributes)` method is called to print a message if
+    some excess parameters can be modified with a different command.
+13. Finally, since this command modifies the `goalList` data, the modified data is saved to the program data file with
+    `Storage#export(goalList)`. If there were any errors raised during this process, the printManager prints the error
+    with `PrintManager#printError`.
 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateHabitCommandSequenceDiagram.png)
 // TODO: Update the diagram to reflect changes to updateAttributes being an ArrayList<Boolean>
@@ -544,50 +578,95 @@ This section describes the implementation of how the user can delete a goal from
 
 #### 4.8.1. Implementation
 
-
-
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteGoalCommandParserSequenceDiagram.png))
 
-When the `runCommand` method is executed for the `DeleteGoalCommand` object, the following steps as indicated by the
-sequence diagram below is carried out:
+1. The `DeleteParser#parseDeleteGoalCommand(input)` method is called, which starts the process of
+   extracting parameters from the user input.
+2. The `DeleteParser#splitInput(input)` method splits the user input into an ArrayList of parameters.
+3. The `goalIndex` to delete is then obtained with `DeleteParser#getIndex(parameters, FLAG_GOAL_INDEX)` method
+4. A `DeleteGoalCommand(goalIndex)` object is created and returned from the
+   `DeleteParser#parseDeleteGoalCommand(input)` method.
 
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteGoalCommandSequenceDiagram.png)
+
+5. The `DeleteGoalCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
+      `GoalList#deleteGoal(goalIndex, printManager)` method. 
+6. Within this newly called method, the `GoalList#getGoal(goalIndex)` method is called to retrieve the `Goal` object
+   from the `goalList`.
+7. The `GoalList#updateChosenGoalIndex(goalIndex)` method is called to perform checks on the goal to be deleted.
+8. The `Goal` is then deleted with the `goalList` ArrayList method `.remove`
+9. Finally, the `PrintManager#printRemovedGoal(goalDescription)` method is called to print a confirmation message on 
+   the successful deletion of a goal.
 
 #### 4.8.2. Design Considerations
 
 ### 4.9. Deleting a Habit
 
-This section describes the implementation of how the user can delete a habit from its associated goal.
+This section describes the implementation of how the user can delete a habit from an associated goal from their list of 
+tracked goals.
 
 #### 4.9.1 Implementation
 
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteHabitCommandParserSequenceDiagram.png)
 
-When the `runCommand` method is executed for the `DeleteHabitCommand` object, the following steps as indicated by the
-sequence diagram below is carried out:
+1. The `DeleteParser#parseDeleteHabitCommand(input)` method is called, which starts the process of
+   extracting parameters from the user input.
+2. The `DeleteParser#splitInput(input)` method splits the user input into an ArrayList of parameters.
+3. The `goalIndex` of the associated goal from which a habit to deleted is then obtained with 
+   `DeleteParser#getIndex(parameters, FLAG_GOAL_INDEX)` method
+4. The `habitIndex` of the habit to deleted is then obtained with `DeleteParser#getIndex(parameters, FLAG_HABIT_INDEX)`
+   method
+5. A `DeleteHabitCommand(goalIndex, habitIndex)` object is created and returned from the
+   `DeleteParser#parseDeleteHabitCommand(input)` method.
 
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteHabitCommandSequenceDiagram.png)
+
+5. The `DeleteHabitCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
+   `GoalList#deleteHabitFromGoal(goalIndex, habitIndex, printManager)` method.
+6. Within this newly called method, the `GoalList#getGoal(goalIndex)` method is called to retrieve the `Goal` object
+   from the `goalList`.
+7. An ArrayList of habits associated with this goal is retrieved with `goal.getHabitList()`.
+8. The `GoalList#getHabit(habitList, habitIndex)` method is called to get the habit to be deleted. If `habitIndex` is
+   invalid, a `HaBitCommandException` is raised.
+9. The `Habit` is then deleted with the `goal.removeHabit(habitIndex)` method.
+10. Finally, the `PrintManager#printRemovedHabit(goalDescription, habitDescription)` method is called to print a 
+    confirmation message on the successful deletion of a habit.
 
 #### 4.9.2. Design Considerations
 
 ### 4.10. Getting Help
 
-This section describes the implementation of how the user can view the application's list of commands.
+This section describes the implementation of how the user can get help. This will open up a command summary with format
+information of each command in a tabular form.
 
 #### 4.10.1 Implementation
 
-When the `runCommand` method is executed for the `HelpCommand` object, it instantiates a `PrintManager` object and
-calls the `printCommandList` method which prints out a pre-set message informing the user of all the inputs they
-can type to execute a certain command.
+1. A `HelpCommand()` object is directly created and returned from the `ParserManager#parseCommand(command, details)` 
+   method.
+2. When the `HelpCommand#runCommand(goalList, printManger, storage)` method is executed it calls the 
+   `PrintManager#printCommandList()` method which prints out a pre-set message informing the user of all the possible
+   commands and their respective formats and options.
 
 #### 4.10.2. Design Considerations
 
 ### 4.11. Storage of Information
 
-The sequence diagram shows how the program imports data from storage file.
+This section describes the implementation of how _Ha(ppy)Bit_ handles and stores the information you have entered.
 
 #### 4.11.1. Implementation
 
+**Importing Data**
+1. The `load()` method runs automatically upon startup.
+2. `Storage` then calls the `importStorage(filePath)` method from the `Import` class.
+3. The save file `hiabit.txt` is then scanned line by line, where every line is parsed
+   into discrete and discernible information and then stored in `String[] lineData`.
+4. `updateGoalList(lineData, GoalList)` is called for every line till all lines have be scanned.
+5. In every iteration of `updateGoalList(lineData, goalList)` being called, the information
+   (sorted by goal type) is parsed and stored into `goalList`, updating `goalList`.
+6. The completed `goalList` is returned to `Storage`, and then returned to update the
+   main `goalList` attribute in `UiManager`.
+
+The sequence diagram shows how the program imports data from storage file. <Br>
 ![Import Sequence Diagram](Diagram_Images/Implementation_Diagram_Images/ImportSequenceDiagram.png)
 
 The program uses `Storage` class to import data from the storage file.
@@ -597,9 +676,12 @@ The program uses `Storage` class to import data from the storage file.
 * `Import` will then populate `GoalList` accordingly
   before returning `GoalList` back to `Storage` and back to user.
 
-The sequence diagram shows how the program exports data to storage file.
+**Exporting Data**
+1.
 
-![Export Sequence Diagram](Diagram_Images/Implementation_Diagram_Images/ExportSequenceDiagram.png)
+The sequence diagram shows how the program exports data to storage file. <br>
+![Export Sequence Diagram](Diagram_Images/Implementation_Diagram_Images/ExportSequenceDiagram.png) 
+
 
 `Storage` class can also export data to storage file with `Export` class.
 It takes in a `GoalList` object and converts the data into string to be stored in storage file.
@@ -614,7 +696,7 @@ It takes in a `GoalList` object and converts the data into string to be stored i
 * wants to have a work-life balance but is often consumed by work/school
 * have goals and aspirations but falls short of them; lacklustre commitment or game plan for action
 * doesn't want to rely on smartphone (They're doing everything these days, sheesh!)
-* prefers desktop app, 
+* prefers desktop app
 * familiar and comfortable with CLI apps, or willing to learn to use
 
 ### Value proposition
@@ -648,7 +730,6 @@ workload or commitments.
 |App should be operable on Windows, macOS, and Ubuntu running Java `11` or above.|Technical|
 |App can be learned anyone who is familiar with computer within minutes of use.|Quality|
 |App should be a helpful, encouraging, and a joy to use.|Quality|
-| {feel free to add something here}|Performance|
 
 ## Appendix D: Glossary
 
