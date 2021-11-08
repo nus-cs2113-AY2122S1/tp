@@ -4,19 +4,14 @@
 box STORAGE_COLOR
 Participant ":StorageFile" as Storage
 end box
-box FILE_COLOR
-Participant ":file" as File
-end box
-box LOGIC_COLOR
-Participant ":MemberEncoder" as MemberEncoder
-Participant ":EventEncoder" as EventEncoder
-end box
-
 
 -> Storage: save(eventsList : ArrayList<Event>)
 
 activate Storage
 
+box FILE_COLOR
+create ":File" as File
+end box
 Storage -> File : File(DEFAULT_FILE_PATH)
 activate File
 return saveFile
@@ -25,6 +20,10 @@ Storage --> Storage: checkFileIsValid
 activate Storage #orange
 return
 |||
+box LOGIC_COLOR
+Participant ":MemberEncoder" as MemberEncoder
+Participant ":EventEncoder" as EventEncoder
+end box
 Storage -> MemberEncoder: encodeMembersList
 activate MemberEncoder
 return encodedMembersList

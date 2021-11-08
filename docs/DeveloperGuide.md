@@ -176,7 +176,7 @@ How Done and Undo work:
 5. `Duke` then calls the `execute` method in the `DoneUndoCommand` object. This method would either mark the corresponding items as done or undone. Two lists will be created; one of items with changes made and the other with items that are unchanged. These lists will be displayed to the user.
 6. When marking or un-marking an item, the item flag `-e` or `-t` has to be followed after the `done` or `undo` command. 
 7. To mark or un-mark a task, an event has to be selected previously using the `select` command. 
-8. The item flag is then followed by integers representing the indexes of the items to be marked or unmarked, separated by non-numeric characters. 
+8. The item flag is then followed by integers representing the indexes of the items to be marked or unmarked, separated by spaces. 
 
 #### List Functionality
 
@@ -342,7 +342,9 @@ Please indicate a flag:
 -m for Member
 ```
 
-#####Managing events
+#### Managing events
+
+##### Adding events
 
 Adding events can be achieved through the use of the `add` command. 
 
@@ -359,7 +361,9 @@ Below are a list of additional test cases for incorrect input regarding event ad
 - **Test case:** `add -e`
   - **Expected:** No event is added. Error details shown in the message printed on the CLI.
 - **Test case:** `add -e asdf asdf`
-   - **Expected:** No event is added. Error details regarding a missing field will is printed on the CLI.
+   - **Expected:** No event is added. Error details regarding a missing field will be printed on the CLI.
+
+##### Deleting events
 
 Deleting events can be achieved through the use of the `delete` command. 
 
@@ -378,6 +382,8 @@ Below are a list of additional test cases for incorrect input regarding event de
 - **Test case:** `delete -e`
   - **Expected:** No event is deleted. Error details shown in the message printed on the CLI.
 
+##### Updating events
+
 The attributes of an event can be updated using the `update` command. 
 
 - **Test case:** `update 1` followed by `n/New Title`
@@ -395,6 +401,8 @@ Below are a list of additional test cases for incorrect input regarding the upda
 - **Test case:** `update 1` followed by `n/` when there is at least one event in the catalog.
    - **Expected:** Event 1 is not updated as a new title is not provided. Error details shown in the message printed on the CLI.
 
+##### Viewing next events
+
 Viewing the next chronological event can be achieved through the `next` command. 
 
 - **Test case:** `next -e`
@@ -406,6 +414,8 @@ A test case for incorrect input regarding the viewing of the next event will be 
 - **Test case:** `next -e`
 - **Prerequisite:** No event is in the catalog.
 - **Expected:** No next event is displayed. Error details shown in the message printed on the CLI.
+
+##### Listing events
 
 To list all the events in the catalog, the `list` command can be used.
 
@@ -419,9 +429,11 @@ A test case for incorrect input regarding the viewing of the next event will be 
 - **Prerequisite:** No event is in the catalog.
 - **Expected:** An empty list of events will be displayed.
 
+##### Selecting events
+
 An event can be selected using the `select` command.
 
-- **Test Case:** `select 1`
+- **Test Case:** `select -e 1`
 - **Prerequisite:** There is at least one event in the catalog.
 - **Expected:** The first event (at index 0) within the catalog is selected and more details about it will be printed out on the CLI.
 
@@ -430,6 +442,8 @@ A test case for incorrect input regarding the selection of the event will be as 
 - **Test case:** `select -e 1`
 - **Prerequisite:** No event is in the catalog.
 - **Expected:** No event will be selected. Error details shown in the message printed on the CLI.
+
+##### Finding events
 
 An event within the catalog can be found via it's `title` using the `find` command. 
 
@@ -447,11 +461,50 @@ Here are the events found:
 3. Tembusu Camp
 ```
 
-Events can be marked as done
+##### Marking an event as done/undone
 
-####Managing tasks
+Events can be marked as done or undone using done and undo command respectively.
 
-#####Adding tasks
+To mark an event / events as done:
+- **Test case:** `done -e 1 2`
+- **Prerequisite:**
+  - There are two events in total in the event catalog.
+  - Both events are not marked as done.
+- **Expected:** The first and second event (at index 0 and 1) will be marked as done.
+```
+Nice! I have marked these items as done:
+[E][X] Tembusu Concert (at: 19 Feb 2022 - 20:00)
+[E][X] Tembusu Camp (at: 20 Feb 2022 - 08:00)
+--------LIST UPDATED-----------
+```
+To mark an event / events as undone:
+- **Test case:** `undo -e 1 2`
+- **Prerequisite:**
+    - There are two events in total in the event catalog.
+    - Both events are marked as done.
+- **Expected:** The first and second event (at index 0 and 1) will be marked as undone.
+```
+Okay, I have unmarked these items:
+[E][ ] Tembusu Concert (at: 19 Feb 2022 - 20:00)
+[E][ ] Tembusu Camp (at: 20 Feb 2022 - 08:00)
+--------LIST UPDATED-----------
+```
+
+A test case for incorrect input when trying to mark an event as done is as such:
+- **Test case:** `done -e 1`
+- **Prerequisite:**
+  - There is at least one event in the catalog
+  - The event (at index 0 in this example) has already been marked as done prior to this.
+- **Expected:** The event cannot be marked as done again. Error details shown in the message will be printed on the CLI.
+
+A test case for incorrect input when trying to mark an event as undone is as such:
+- **Test case:** `undo -e abc`
+- **Prerequisite:** There is at least one event in the catalog.
+- **Expected:** The event cannot be marked as undone as `abc` is not a valid index and should be a number instead. Error details shown in the mesage will be printed in the CLI.
+
+#### Managing tasks
+
+##### Adding tasks
 
 Adding tasks can be achieved through the use of the `add` command.
 
@@ -477,7 +530,7 @@ Below are a list of additional test cases for incorrect input regarding task add
 - **Test case:** `add -t n/Buy stage lights d/10-12-2021 1600` with no member in the roster.
   - **Expected:** Unable to add task. Error requiring a member to be first added to the roster will be printed on the CLI.
 
-#####Deleting tasks
+##### Deleting tasks
 
 Deleting tasks can be achieved through the use of the `delete` command.
 
@@ -491,14 +544,14 @@ Deleting tasks can be achieved through the use of the `delete` command.
 This task has been removed: Buy stage lights
 ```
 
-Below are a list of additional test cases for incorrect input regarding event deletion to try and their expected results:
+Below are a list of additional test cases for incorrect input regarding task deletion to try and their expected results:
 
 - **Test case:** `delete -t 1` when there are 0 tasks under the selected event.
     - **Expected:** No task is deleted. Error details shown in the message printed on the CLI.
 - **Test case:** `delete -t 1` without having an event selected.
     - **Expected:** No task is deleted. Error details shown in the message printed on the CLI.
 
-#####Viewing next task
+##### Viewing next task
 
 Viewing the next chronological task can be achieved through the `next` command.
 
@@ -513,9 +566,9 @@ A test case for incorrect input regarding the viewing of the next event will be 
 - **Test case:** `next -t 1` when there is only one event in the catalog that contains no tasks.
   - **Expected:** No next task is displayed. Error details shown in the message printed on the CLI.
 
-#####Listing tasks
+##### Listing tasks
 
-To list all the events in the catalog, the `list` command can be used.
+To list all the tasks in the catalog, the `list` command can be used.
 
 - **Test case:** `list -t 1`
 - **Prerequisite:** There is 1 event in the catalog. This event contains at least one task.
@@ -529,9 +582,9 @@ A test case for incorrect input regarding the viewing of the next event will be 
   - **Prerequisite:** There is only 1 event in the catalog. 
   - **Expected:** No tasks will be listed as the event index provided is invalid. Error details shown in the message printed on the CLI.
 
-#####Selecting tasks
+##### Selecting tasks
     
-An event can be selected using the `select` command.
+A task can be selected using the `select` command.
 
 - **Test Case:** `select -t 1`
 - **Prerequisite:** 
@@ -545,7 +598,7 @@ A test case for incorrect input regarding the selection of the task will be as s
 - **Test case:** `select -t`
 - **Expected:** No task will be selected. Error details shown in the message printed on the CLI.
 
-#####Marking a task as done/undone 
+##### Marking a task as done/undone 
 
 Tasks can be marked as done or undone using `done` and `undo` command respectively.
 
@@ -598,7 +651,7 @@ A test case for incorrect input when trying to mark a task as undone is as such:
 - **Expected:** The task cannot be marked as done as there is an invalid task index is provided. Error details shown in the message will be printed on the CLI.
 
 
-####Saving data 
+#### Saving data 
 
 As much as SLAM strongly discourages users from modifying save data directly, should lines within the save data be modified in a manner that invalidates the data saved in that line, starting up the program with such corrupted data should produce an exception message with feedback on the line in `slamData.txt` causing the issue. 
 

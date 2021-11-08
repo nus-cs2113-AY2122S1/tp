@@ -3,21 +3,13 @@
 box STORAGE_COLOR
 Participant ":StorageFile" as Storage
 end box
-box FILE_COLOR
-Participant ":File" as File
-end box
-box LOGIC_COLOR
-Participant ":XYZDecoder" as XYZDecoder
-Participant ":TaskDecoder" as TaskDecoder
-end box
-box DUKE_COLOR
-Participant ":EventUpdater" as EventUpdater
-Participant ":MemberUpdater" as MemberUpdater
-end box
 
 -> Storage: loadSaveFile(memberRoster : MemberRoster\n eventCatalog : EventCatalog)
 activate Storage
 |||
+box FILE_COLOR
+create ":File" as File
+end box
 Storage -> File : File(DEFAULT_FILE_PATH)
 activate File
 return saveFile
@@ -34,6 +26,10 @@ loop encodedLines
         note right: Adds member/event to the respective roster/catalog
         activate Storage #orange
 
+        box LOGIC_COLOR
+        Participant ":XYZDecoder" as XYZDecoder
+        Participant ":TaskDecoder" as TaskDecoder
+        end box
         Storage-> XYZDecoder: decodeXYZFromString(line)
         activate XYZDecoder
         note over XYZDecoder: Decoders for Member,\nTask and Event objects
@@ -43,6 +39,11 @@ loop encodedLines
     |||
     else classType == 't'
     |||
+
+        box DUKE_COLOR
+        Participant ":EventUpdater" as EventUpdater
+        Participant ":MemberUpdater" as MemberUpdater
+        end box
         Storage -> TaskDecoder: decodeTaskFromString
         activate TaskDecoder
         return decodedTask
