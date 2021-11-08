@@ -164,7 +164,7 @@ public class Ui {
                 + System.lineSeparator()
                 + "edit [trip num] [attribute] [new value]"
                 + System.lineSeparator()
-                + "attributes: -location, -date, -exchange rate, -forcur, -homecur"
+                + "attributes: -location, -date, -exchangerate, -forcur, -homecur"
                 + System.lineSeparator());
     }
 
@@ -388,7 +388,7 @@ public class Ui {
             System.out.println("Separate persons-in-trip with commas");
             System.out.println();
             System.out.println("edit [trip num] [attribute] [new value]: edit trip attributes");
-            System.out.println("\tattributes: -location, -date, -exchange rate, -forcur, -homecur");
+            System.out.println("\tattributes: -location, -date, -exchangerate, -forcur, -homecur");
             System.out.println("\tNote the hyphen in the attribute");
             System.out.println("\tlast can be used for [trip num]");
             System.out.println();
@@ -424,6 +424,7 @@ public class Ui {
             System.out.println("\tclose: Closes the current trip");
             System.out.println("\topen [trip num]: Closes the current trip, opens another trip");
             System.out.println();
+            System.out.println("\tYou can also create or edit a trip, but it's recommended to close the current trip first");
             System.out.println("\tquit: exit the program");
             System.out.println();
         }

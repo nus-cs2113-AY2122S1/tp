@@ -5,6 +5,7 @@ import seedu.duke.exceptions.InvalidAmountException;
 import seedu.duke.Person;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
+import seedu.duke.parser.Parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -127,14 +128,14 @@ public class Expense implements ExpenseSplitter {
     public LocalDate promptDate() throws ForceCancelException {
         Ui.expensePromptDate();
         String inputDate = Ui.receiveUserInput();
-        while (!isDateValid(inputDate)) {
-            inputDate = Ui.receiveUserInput();
-        }
         if (inputDate.isEmpty()) {
             return LocalDate.now();
-        } else {
-            return LocalDate.parse(inputDate, inputPattern);
         }
+        while (!isDateValid(inputDate)) {
+            inputDate = Ui.receiveUserInput();
+            Storage.getLogger().log(Level.INFO, "Invalid date format entered");
+        }
+            return LocalDate.parse(inputDate, inputPattern);
     }
 
     private Boolean isDateValid(String date) {
@@ -143,9 +144,13 @@ public class Expense implements ExpenseSplitter {
         }
         try {
             LocalDate.parse(date, inputPattern);
+            //Additional check for weird dates like feb 31
+            if (!Parser.doesDateReallyExist(date)){
+                Ui.expenseDateInvalid();
+                return false;
+            }
             return true;
         } catch (DateTimeParseException e) {
-            Storage.getLogger().log(Level.INFO, "Invalid date format entered");
             Ui.expenseDateInvalid();
             return false;
         }

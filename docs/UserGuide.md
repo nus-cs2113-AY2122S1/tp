@@ -752,7 +752,7 @@ Close trip | `close` | `close`
 List trips | `list` when no trip is opened| `list`
 List persons involved in a trip | `people` | `people`
 Delete trip | `delete [trip-number]`|`delete 1`
-Edit trip | `edit [trip num] [attribute] [new value]` <br /><br /> attributes: -location, -date, -exchange rate, -forcur, -homecur  | `edit 1 -location Afghanistan`
+Edit trip | `edit [trip num] [attribute] [new value]` <br /><br /> attributes: -location, -date, -exchangerate, -forcur, -homecur  | `edit 1 -location Afghanistan`
 
 <br />
 
