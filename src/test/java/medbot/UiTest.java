@@ -340,7 +340,7 @@ class UiTest {
 
 
         String expectedOutput =
-            "Here is a list of all patients:" + END_LINE
+            "Here is a list of all not-hidden patients:" + END_LINE
             + "For full details of each patient, please use the command \"view PATIENT_ID\"" + END_LINE
             + " ----------------------------------------------------------------------------------------------------- "
             + END_LINE
@@ -357,7 +357,8 @@ class UiTest {
         try {
             patientList.addPerson(patient1);
             patientList.addPerson(patient2);
-            assertEquals(expectedOutput, PatientUi.getAllPatientsString(patientList.listPersons(false)));
+            assertEquals(expectedOutput, PatientUi.getAllPatientsString(patientList.listPersons(false),
+                    false));
         } catch (MedBotException e) {
             fail();
         }
@@ -374,7 +375,7 @@ class UiTest {
         staff2.setName("Bob");
         staff2.setPhoneNumber("88889999");
         String expectedOutput =
-            "Here is a list of all staffs:" + END_LINE
+            "Here is a list of all not-hidden staffs:" + END_LINE
                     + "For full details of each staff, please use the command \"view STAFF_ID\"" + END_LINE
                     + " -------------------------------------------------------------"
                     + "---------------------------------------- "
@@ -397,7 +398,8 @@ class UiTest {
         try {
             staffList.addPerson(staff1);
             staffList.addPerson(staff2);
-            assertEquals(expectedOutput, StaffUi.getAllStaffsString(staffList.listPersons(false)));
+            assertEquals(expectedOutput, StaffUi.getAllStaffsString(staffList.listPersons(false),
+                    false));
 
         } catch (MedBotException e) {
             fail();

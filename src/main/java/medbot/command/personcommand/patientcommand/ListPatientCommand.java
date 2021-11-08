@@ -13,7 +13,8 @@ public class ListPatientCommand extends ListPersonCommand {
 
     @Override
     public void execute(Scheduler scheduler, Ui ui) {
-        String allPatientsString = PatientUi.getAllPatientsString(scheduler.listPatients(getHidden()));
+        boolean isHidden = getHidden();
+        String allPatientsString = PatientUi.getAllPatientsString(scheduler.listPatients(isHidden), isHidden);
         ui.printOutput(allPatientsString);
     }
 }

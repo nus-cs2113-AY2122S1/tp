@@ -162,8 +162,8 @@ public class StaffUi extends PersonUi {
      * @param staffListString String containing information of all staff.
      * @return String containing all staff information in a table
      */
-    public static String getAllStaffsString(String staffListString) {
-        return getAllPersonsString(STAFF, staffListString);
+    public static String getAllStaffsString(String staffListString, boolean isHiddenPersonList) {
+        return getAllPersonsString(STAFF, staffListString, isHiddenPersonList);
     }
 
     /**
