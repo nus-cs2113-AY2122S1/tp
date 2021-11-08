@@ -199,6 +199,8 @@ Examples:
 
 ![carbon(9).png](images/ug/SelectCommandExample.png)
 
+<div style="page-break-after: always;"></div>
+
 #### Show Current Data: `show`
 
 Shows you the current data.
@@ -211,8 +213,6 @@ Resets the transformed data back to the original input.
 
 Format: `reset`
 
-<div style="page-break-after: always;"></div>
-
 #### Exit the Program: `exit`
 
 Exits the program.
@@ -221,13 +221,13 @@ Format: `exit`
 
 > :video_game: If you are trying out the side-quest from earlier and can't seem to find the solution to it, you may refer to the solution in the picture at the start of the user guide!
 
+<div style="page-break-after: always;"></div>
+
 ### [Recipe](#terminologies) Commands: `recipe`
 
 > :information_source: During the execution of the application, it would display the name of the recipe that is "currently being edited" (if any) in `[]` of the application's prompt. This currently edited recipe will be the target for some `recipe` commands such as [`recipe push`](#add-a-module-into-a-recipe-recipe-push), [`recipe pop`](#remove-a-module-from-a-recipe-recipe-pop) and [`recipe reset`](#clear-all-modules-in-a-recipe-recipe-reset).
 > 
 > ![carbon(17).png](images/carbon(17).png)
-
-<div style="page-break-after: always;"></div>
 
 #### Create a New [Recipe](#terminologies): `recipe new`
 
@@ -243,6 +243,8 @@ Example:
 
 ![recipeNew.png](images/recipeNew.png)
 
+<div style="page-break-after: always;"></div>
+
 #### Select a [Recipe](#terminologies) for Editing: `recipe select`
 
 Sets a recipe as currently being edited.
@@ -255,8 +257,6 @@ Example:
 
 ![recipeSelect.png](images/recipeSelect.png)
 
-<div style="page-break-after: always;"></div>
-
 #### Deselect the Current Editing [Recipe](#terminologies): `recipe deselect`
 
 Deselects the recipe currently being edited.
@@ -266,6 +266,8 @@ Format: `recipe deselect`
 Example:
 
 ![recipeDeselect.png](images/recipeDeselect.png)
+
+<div style="page-break-after: always;"></div>
 
 #### List [Modules](#terminologies) in a [Recipe](#terminologies): `recipe list`
 
@@ -281,8 +283,6 @@ Example:
 
 ![recipeList.png](images/recipeList.png)
 
-<div style="page-break-after: always;"></div>
-
 #### Add a [Module](#terminologies) into a [Recipe](#terminologies): `recipe push`
 
 Adds a module into the recipe that is currently being edited.
@@ -295,6 +295,8 @@ Example:
 - `recipe push rotencode 13` Adds the `rotencode` module with a single argument `13` into the current editing recipe.
 
 ![recipePush.png](images/recipePush.png)
+
+<div style="page-break-after: always;"></div>
 
 #### Remove a [Module](#terminologies) from a [Recipe](#terminologies): `recipe pop`
 
