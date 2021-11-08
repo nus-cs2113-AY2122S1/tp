@@ -347,7 +347,7 @@ Sorts your task list by a given criteria.
 -------------------------------------------------------------------------
 ```
 
-### 2.6 Editing your tasks: `edit`
+### 2.5 Editing your tasks: `edit`
 Edits a single [Todo](#221-todo-todo), [Deadline](#222-deadline-deadline) or [Event](#223-event-event) based on the flags entered.
 **Format**: `edit <index> <--flag <value>> [--flag <value>] [--flag <value>]...`
 - `<index>` is the index of the task you want to edit from the most recent [list](#23-listing-your-tasks-list) command that you have run.
@@ -364,11 +364,11 @@ Edits a single [Todo](#221-todo-todo), [Deadline](#222-deadline-deadline) or [Ev
   - `--link <url>` modifies your Lesson link.
 
 
-### 2.7 Adding your NUS timetable:
+### 2.6 Adding your NUS timetable:
 
 Allows you to add modules into your task list and browse to their meeting links with your Operating System's default internet browser.
 
-#### 2.7.1 Module: `module`
+#### 2.6.1 Module: `module`
 
 Adds your modules and classes into your task list.
 
@@ -393,7 +393,7 @@ Adds your modules and classes into your task list.
 -------------------------------------------------------------------------
 ```
 
-#### 2.7.2 Browse: `browse`
+#### 2.6.2 Browse: `browse`
 
 Browse to links that were added to your `Lesson` with the [`edit`](#26-editing-your-tasks-edit) command.
 **Format**: `browse <index>`
@@ -427,7 +427,7 @@ Browse to links that were added to your `Lesson` with the [`edit`](#26-editing-y
 > ```
 > You can conveniently list the tasks and see if the lesson has a link.
 
-### 2.8 Deleting your tasks: `delete`
+### 2.7 Deleting your tasks: `delete`
 Deletes all task(s) specified in a comma-separated argument.
 **Format**: `delete <indexes>`
 - `<indexes>` are the indexes of the task you want to edit from the most recent [list](#23-listing-your-tasks-list) command that you have run.
@@ -486,7 +486,7 @@ Deletes all task(s) specified in a comma-separated argument.
 -------------------------------------------------------------------------
 ```
 
-### 2.9 Exiting the program: `bye`
+### 2.8 Exiting the program: `bye`
 Displays goodbye message and exits the program.
 
 **Format**: `bye`
@@ -500,7 +500,7 @@ Displays goodbye message and exits the program.
 -------------------------------------------------------------------------
 ```
 
-### 2.10 Storage
+### 2.9 Storage
 The program will store and automatically update your tasks in the file `[project directory]/data/task.dat` on any change to your task list.  
    > **⚠️Warning**: The SchedUrMods team **strongly discourages** users from directly modifying Task data in `task.dat` as it can lead to undefined behaviour. The team **will not be responsible** for any *loss of data* or *undefined behaviour* as a result of users directly modifying values in the save file.
 
