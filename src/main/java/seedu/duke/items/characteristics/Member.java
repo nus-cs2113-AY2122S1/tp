@@ -35,13 +35,21 @@ public class Member {
         return name;
     }
 
+    // @@author alwinangys
     public String getTasks() {
         StringBuilder tasks = new StringBuilder();
-        for (Task assignedTask : assignedTasks) {
-            tasks.append(assignedTask).append("\n");
+        for (int i = 0; i < assignedTasks.size(); i++) {
+            Task task = assignedTasks.get(i);
+            tasks.append(task);
+            tasks.append("\n\tUnder the event: " + task.getEvent().getTitle());
+            if (i < assignedTasks.size() - 1) {
+                tasks.append("\n");
+            }
         }
+
         return tasks.toString();
     }
+    // @@author alwinangys
 
     public ArrayList<Task> getAssignedTasks() {
         return assignedTasks;
