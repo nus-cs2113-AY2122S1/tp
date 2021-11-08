@@ -44,6 +44,10 @@ Wrote exceptional test cases simulating network outage and file manipulation fai
 
 While JVM prevents common attacks, bugs can compromise the application and also degrade user experience. Reviewed others' code for earlier discovery of uncaught exceptions and other vulnerabilities.
 
+## Team task
+
+Set up the team GitHub organisation and tp repository. Created team PR to module repository.
+
 ## Unmerged enhancements
 ### Use annotations and reflection for commands
 #### Benefits
@@ -51,6 +55,8 @@ While JVM prevents common attacks, bugs can compromise the application and also 
 Annotations allow further conformance to the open-close principle by keeping everything task-related inside its class and eliminate the need to modify an overall class each time a new type is added.
 
 Moreover, it also allows further third-party plugin development by taking advantage of the dynamic linking nature.
+
+As such, a functional commit was implemented based upon this concept. There was also an attempt to integrate annotation proprocessors and add that to Gradle to guarantee a certain level of compile-time check on the annotations.
 
 ##### Considerations
 
