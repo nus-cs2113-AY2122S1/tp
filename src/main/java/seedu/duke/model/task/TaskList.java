@@ -1,15 +1,15 @@
 package seedu.duke.model.task;
 
-import seedu.duke.commons.core.Message;
-import seedu.duke.model.task.exceptions.TaskIndexException;
-import seedu.duke.ui.Ui;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import seedu.duke.commons.core.Message;
+import seedu.duke.model.task.exceptions.TaskIndexException;
+import seedu.duke.ui.Ui;
 
 //@@author rebchua39
 public class TaskList {

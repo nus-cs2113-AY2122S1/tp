@@ -14,4 +14,3 @@ public class DukeException extends Exception {
         return (message != null) ? message : Message.ERROR_UNKNOWN;
     }
 }
-

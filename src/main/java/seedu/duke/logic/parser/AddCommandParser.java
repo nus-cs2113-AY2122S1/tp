@@ -12,9 +12,9 @@ import seedu.duke.logic.commands.module.AddModuleCommand;
 import seedu.duke.logic.commands.task.AddTaskCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
-import static seedu.duke.commons.core.CommandFormat.ADD_TASK_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.ADD_LESSON_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.ADD_MODULE_FORMAT;
+import static seedu.duke.commons.core.CommandFormat.ADD_TASK_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.promptFormat;
 import static seedu.duke.commons.core.Priority.LOW;
 import static seedu.duke.commons.util.StringUtil.removeFirstParam;

@@ -1,6 +1,9 @@
 package seedu.duke.commons.core;
 
 //@@author richwill28
+/**
+ * Contains a list of command flags for parsing user response.
+ */
 public final class CommandFlag {
     public static final String DAY = "-d";
     public static final String END = "-e";

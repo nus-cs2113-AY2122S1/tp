@@ -1,14 +1,14 @@
 package seedu.duke.model.lesson;
 
-import seedu.duke.DukeException;
-import seedu.duke.commons.core.Message;
-import seedu.duke.model.lesson.exceptions.LessonIndexException;
-import seedu.duke.ui.Ui;
-
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.stream.Collectors;
+
+import seedu.duke.commons.core.Message;
+import seedu.duke.DukeException;
+import seedu.duke.model.lesson.exceptions.LessonIndexException;
+import seedu.duke.ui.Ui;
 
 //@@author Roycius
 public class LessonList {

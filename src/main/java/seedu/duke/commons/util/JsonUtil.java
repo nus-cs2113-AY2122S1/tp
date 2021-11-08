@@ -1,17 +1,17 @@
 package seedu.duke.commons.util;
 
-import com.google.gson.Gson;
-
-import seedu.duke.commons.core.Message;
-import seedu.duke.commons.util.exceptions.ModuleLoadException;
-import seedu.duke.model.module.Module;
-
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import seedu.duke.commons.core.Message;
+import seedu.duke.commons.util.exceptions.ModuleLoadException;
+import seedu.duke.model.module.Module;
+
+import com.google.gson.Gson;
 
 //@@author ptejasv
 public class JsonUtil {

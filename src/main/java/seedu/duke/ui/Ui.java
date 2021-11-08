@@ -1,5 +1,6 @@
 package seedu.duke.ui;
 
+import java.sql.SQLOutput;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
@@ -442,22 +443,32 @@ public class Ui {
 
     public void printModuleWithDescription(String[] moduleInfo) {
         System.out.print(LINE);
-        System.out.println(PADDING + moduleInfo[0]);
-        String[] descriptions = splitToLength(moduleInfo[1], MAX_DESCRIPTION_LENGTH);
-        for (String description : descriptions) {
-            System.out.println(PADDING + description.strip());
-        }
-
-        for (int i = 2; i < moduleInfo.length; i++) {
-            System.out.println(PADDING + moduleInfo[i]);
+        for (int i = 0; i < moduleInfo.length; i++) {
+            if (i == 1 || i == 4 || i == 5 || i == 6) {
+                // param 1, 4, 5, and 6 have long description
+                String[] params = splitToLength(moduleInfo[i], MAX_DESCRIPTION_LENGTH);
+                for (String param : params) {
+                    System.out.println(PADDING + param.strip());
+                }
+            } else {
+                System.out.println(PADDING + moduleInfo[i]);
+            }
         }
         System.out.println(LINE);
     }
 
     public void printModuleWithoutDescription(String[] moduleInfo) {
         System.out.print(LINE);
-        for (String info : moduleInfo) {
-            System.out.println(PADDING + info);
+        for (int i = 0; i < moduleInfo.length; i++) {
+            if (i == 3 || i == 4 || i == 5) {
+                // param 3, 4, and 5 have long descriptions
+                String[] params = splitToLength(moduleInfo[i], MAX_DESCRIPTION_LENGTH);
+                for (String param : params) {
+                    System.out.println(PADDING + param.strip());
+                }
+            } else {
+                System.out.println(PADDING + moduleInfo[i]);
+            }
         }
         System.out.println(LINE);
     }

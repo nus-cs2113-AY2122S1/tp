@@ -2,9 +2,9 @@ package seedu.duke.model.task;
 
 import seedu.duke.commons.core.DayOfTheWeek;
 import seedu.duke.commons.core.Priority;
-import seedu.duke.DukeException;
 import seedu.duke.commons.core.Message;
 import seedu.duke.commons.util.exceptions.InvalidDayException;
+import seedu.duke.DukeException;
 import seedu.duke.ui.Ui;
 
 import static seedu.duke.commons.util.DayUtil.compareDay;
@@ -97,8 +97,8 @@ public class Task implements Comparable<Task> {
         try {
             return compareDay(this.getDayOfTheWeek(), t.getDayOfTheWeek());
         } catch (InvalidDayException e) {
-            // Ignore and return 0
-            System.out.println("Error: Task comparison result is incorrect.");
+            // Warns user and return 0
+            System.out.println(Message.ERROR_COMPARING_TASK);
             return 0;
         }
     }

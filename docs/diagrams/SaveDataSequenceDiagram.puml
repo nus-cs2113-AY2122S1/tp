@@ -3,7 +3,7 @@
 
 !include Style.puml
 
-participant ":Storage" as Storage #lightgreen
+participant ":Storage" as Storage STORAGE_COLOR
 participant "fin:FileReader" as fin
 participant "bin:BufferedReader" as bin
 participant "data:List<String>" as data

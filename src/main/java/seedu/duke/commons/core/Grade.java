@@ -1,7 +1,10 @@
 package seedu.duke.commons.core;
 
 //@@author richwill28
-public class Grade {
+/**
+ * Manages a list of valid grades in NUS, accurate as of AY2021/2022.
+ */
+public final class Grade {
     public static final String[] GRADES = {
             "A+",   // Point = 5.0
             "A",    // Point = 5.0
@@ -27,6 +30,12 @@ public class Grade {
             "NONE"  // Custom default grade
     };
 
+    /**
+     * Determines whether the input parameter is a valid grade.
+     *
+     * @param param the input parameter
+     * @return true if valid, otherwise false
+     */
     public static boolean isValid(String param) {
         for (String grade : GRADES) {
             if (param.equals(grade)) {

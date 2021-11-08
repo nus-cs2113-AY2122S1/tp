@@ -532,17 +532,19 @@ Format: `find module [MODULE_CODE] {verbose/-v}`
 Example:
 
 ```
-$ find module cs2113t
+$ find module CS2113T
       ______________________________________________________________________________________
        CS2113T Software Engineering & Object-Oriented Programming (4MCs) 
        Department: Computer Science
        Faculty: Computing
        Preclusion: CS2103, CS2103T, (CS2113T for CS2113), (CS2113 for CS2113T)
        Prerequisite: CS2040C or ((CS2030 or its equivalent) and CS2040/S)
-       Corequisite: CS2101 Effective Communication for Computing Professionals is co-requisite for CS2113T. Students exempted from CS2101 will take CS2113 which does not have CS2101 as co-req. Otherwise, CS2113 and CS2113T are identical.
+       Corequisite: CS2101 Effective Communication for Computing Professionals is co-requis
+       ite for CS2113T. Students exempted from CS2101 will take CS2113 which does not have
+       CS2101 as co-req. Otherwise, CS2113 and CS2113T are identical.
       ______________________________________________________________________________________
 
-$ find module cs2113t verbose
+$ find module CS2113T verbose
       ______________________________________________________________________________________
        CS2113T Software Engineering & Object-Oriented Programming (4MCs) 
        This module introduces the necessary skills for systematic and rigorous development
@@ -556,7 +558,9 @@ $ find module cs2113t verbose
        Faculty: Computing
        Preclusion: CS2103, CS2103T, (CS2113T for CS2113), (CS2113 for CS2113T)
        Prerequisite: CS2040C or ((CS2030 or its equivalent) and CS2040/S)
-       Corequisite: CS2101 Effective Communication for Computing Professionals is co-requisite for CS2113T. Students exempted from CS2101 will take CS2113 which does not have CS2101 as co-req. Otherwise, CS2113 and CS2113T are identical.
+       Corequisite: CS2101 Effective Communication for Computing Professionals is co-requis
+       ite for CS2113T. Students exempted from CS2101 will take CS2113 which does not have
+       CS2101 as co-req. Otherwise, CS2113 and CS2113T are identical.
       ______________________________________________________________________________________
 ```
 
@@ -690,6 +694,6 @@ Modules:
 | [`done task [INDEX]`](#marking-a-task-as-done---done)                                                                    | To mark a task as done                           |
 | [`find [task/lesson] [KEYWORD]`](#finding-tasks-or-lessons-by-keyword---find-tasklesson)                                 | To find tasks/lessons with the specified keyword |
 | [`find module [MODULE_CODE] {verbose}`](#retrieving-module-information---find-module)                                    | To display module details                        |
-| [`edit module [MODULE_CODE] -g [GRADE]`](#editing-module-grade---edit-module)                                            | To set the grade for a particular module         |
+| [`edit module [MODULE_CODE] -g [GRADE]`](#editing-module-grade---edit-module)                                            | To edit the grade for a particular module        |
 | [`launch lesson [INDEX]`](#launching-lesson-url---launch-lesson)                                                         | To launch a meeting URL                          |
 | [`exit`](#exiting-the-program---exit)                                                                                    | To exit the program                              |

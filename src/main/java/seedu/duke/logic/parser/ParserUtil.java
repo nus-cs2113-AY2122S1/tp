@@ -1,18 +1,18 @@
 package seedu.duke.logic.parser;
 
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
 import seedu.duke.commons.core.CommandType;
 import seedu.duke.commons.core.DayOfTheWeek;
-import seedu.duke.commons.core.Message;
-import seedu.duke.commons.core.Priority;
 import seedu.duke.commons.core.exceptions.DayOfTheWeekException;
 import seedu.duke.commons.core.exceptions.PriorityException;
+import seedu.duke.commons.core.Message;
+import seedu.duke.commons.core.Priority;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
 import static seedu.duke.commons.core.Grade.isValid;
@@ -31,7 +31,7 @@ public class ParserUtil {
     public static String parseModuleCode(String param) throws ParseException {
         String moduleCode = param.strip().toUpperCase();
         if (moduleCode.isBlank()) {
-            throw new ParseException("No module code was provided.");
+            throw new ParseException(Message.ERROR_MODULE_IS_BLANK);
         }
         return moduleCode;
     }
@@ -39,7 +39,7 @@ public class ParserUtil {
     public static String parseModuleGrade(String param) throws ParseException {
         String grade = param.strip().toUpperCase();
         if (!isValid(grade)) {
-            throw new ParseException("Invalid grade input.");
+            throw new ParseException(Message.ERROR_INVALID_GRADE);
         }
         return grade;
     }

@@ -2,15 +2,15 @@ package seedu.duke.logic.commands.task;
 
 import java.io.IOException;
 
+import seedu.duke.commons.core.Message;
 import seedu.duke.DukeException;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.exceptions.CommandException;
 import seedu.duke.model.lesson.LessonList;
 import seedu.duke.model.module.ModuleList;
-import seedu.duke.storage.Storage;
 import seedu.duke.model.task.Task;
 import seedu.duke.model.task.TaskList;
-import seedu.duke.commons.core.Message;
+import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 //@@author rebchua39
