@@ -26,6 +26,14 @@
 4.8 [Logging](#48-logging)
 5. [Testing](#5-testing)
 
+[Appendices](#appendices)\
+[Appendix A: Product Scope](#appendix-a-product-scope)\
+[Appendix B: User Stories](#appendix-b-user-stories)\
+[Appendix C: Non-Fucntional Requirements](#appendix-c-non-functional-requirements)\
+[Appendix D: Glossary](#appendix-d-glossary)\
+[Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
+
+
 ## 1. Introduction
 
 ### 1.1 Background
@@ -877,6 +885,10 @@ There are two ways to run tests.
 ### Appendix D: Glossary
 
 **CAP**: Cumulative Average Point
+
 **MC**: modular credit
+
 **Mainstream OS**: Windows, Linux, Unix, OS-X
+
+### Appendix E: Instructions for Manual Testing
 
