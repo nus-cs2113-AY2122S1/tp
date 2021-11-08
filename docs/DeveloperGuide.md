@@ -236,7 +236,7 @@ Given below is an example usage scenario and how the ```edit``` mechanism behave
 <br/> **Step 3**. The user now realises that there was a mistake in the record added, and decides to edit the record by executing the ```edit``` command. The edit command will call ```AllRecordList#edit…``` based on the record type.
 
 
-### <a id=""></a> Listing
+### <a id=""></a> List feature
 
 The list feature works with Parser, Recordlist and TextUi, and allows users to see the listing of the budget and expenditures in either a specific month or every month.
 
