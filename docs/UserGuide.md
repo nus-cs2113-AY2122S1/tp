@@ -9,7 +9,7 @@ This application uses a Command Line Interface (CLI) for quick and easy task man
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `Accouminate` [here](https://github.com/AY2122S1-CS2113-T16-4/tp/releases/download/v1.9/accouminate_1.9.jar).
+2. Down the latest version of `Accouminate` [here](https://github.com/AY2122S1-CS2113-T16-4/tp/releases/download/v2.1/CS2113-T16-4.Accouminate.jar).
 3. Open your terminal (Mac/Linux) or your command prompt (Windows).
 4. Navigate to the folder where you have placed your `accouminate.jar` and run `java -jar accouminate.jar`. The standard greeting message will be shown if there is no error.
 
