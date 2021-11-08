@@ -55,6 +55,7 @@ public class Parser {
     private static final int KEY_LENGTH = 6;
 
 
+    //@@author conradwee
     /**
      * Breaks down raw user input into commands understood by <code>Traveller</code>.
      * @param rawInput String of the raw user input.
@@ -376,6 +377,7 @@ public class Parser {
         return command;
     }
 
+    //@@author conradwee
     /**
      * Parses user input to give a <code>SearchItemCommand</code>.
      * @param userInput Raw user input, with the first command option (search-item) removed.
@@ -422,7 +424,7 @@ public class Parser {
         return command;
     }
 
-    //@@author
+    //@@author conradwee
     /**
      * Parses user input to give an <code>EditItemCommand</code>.
      * @param userInput Raw user input, with the first command option (edit-item) removed.
@@ -467,6 +469,13 @@ public class Parser {
         return command;
     }
 
+    //@@author conradwee
+    /**
+     * Parses user input to give an <code>parseEditNewTripIndex</code>.
+     * @param userInput Raw user input, with the first command option (edit-item) removed.
+     * @return Integer itemIndex to be changed in edit-item command.
+     * @throws TravellerException Will be thrown if the user input cannot be understood.
+     */
     private static int parseEditNewTripIndex(String userInput) throws TravellerException {
         int itemIndex;
         String rawIndex = "";
@@ -496,6 +505,13 @@ public class Parser {
         return itemIndex;
     }
 
+    //@@author conradwee
+    /**
+     * Parses user input to give an <code>parseEditNewTripEventTime</code>.
+     * @param userInput Raw user input, with the first command option (edit-item) removed.
+     * @return String itemTime to be changed in edit-item command.
+     * @throws TravellerException Will be thrown if the user input cannot be understood.
+     */
     private static String parseEditNewTripEventTime(String userInput) throws TravellerException {
         int fromIndex = getTimeFlagIndex(userInput);
 
@@ -516,6 +532,13 @@ public class Parser {
         return itemTime;
     }
 
+    //@@author conradwee
+    /**
+     * Parses user input to give an <code>parseEditNewTripEventName</code>.
+     * @param userInput Raw user input, with the first command option (edit-item) removed.
+     * @return String itemName to be changed in edit-item command.
+     * @throws TravellerException Will be thrown if the user input cannot be understood.
+     */
     private static String parseEditNewTripEventName(String userInput) throws TravellerException {
         int nameIndex = getNameFlagIndex(userInput);
         String itemName;
@@ -558,7 +581,7 @@ public class Parser {
         return command;
     }
 
-    //@@author
+    //@@author conradwee
     /**
      * Parses user input to give a <code>ShortestCommand</code>.
      * @param userInput Raw user input, with the first command option (shortest-dist) removed.
@@ -591,6 +614,7 @@ public class Parser {
         return command;
     }
 
+    //@@author conradwee
     /**
      * Parses user input to give a <code>ShortestCommand</code>.
      * @param userInput Raw user input, with the first command option (shortest-cost) removed.
@@ -623,6 +647,7 @@ public class Parser {
         return command;
     }
 
+    //@@author conradwee
     /**
      * Parses user input to give an <code>ExitCommand</code>.
      * @return Command An <code>ExitCommand</code> object.
@@ -632,6 +657,7 @@ public class Parser {
         return new ExitCommand();
     }
 
+    //@@author conradwee
     /**
      * Launches help menu.
      * @return Command An <code>ExitCommand</code> object.

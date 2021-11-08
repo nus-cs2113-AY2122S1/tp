@@ -8,13 +8,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-//@@author jach23
+//@@author conradwee
 public class WorldMapTest {
     public WorldMapTest() {
         WorldMap.initWorldMap();
     }
 
-    //@@author Uxinnn
     @Test
     public void getCountry_sin_success() {
         Country countrySin = WorldMap.getValidCountry("SIN");
@@ -39,7 +38,6 @@ public class WorldMapTest {
                 WorldMap.calcMinTime("SIN", "MLY").toString());
     }
 
-    //@@author
     @Test
     public void calcMinCost_sinMly_success() {
         Country countrySin = new Country("SIN", 0);

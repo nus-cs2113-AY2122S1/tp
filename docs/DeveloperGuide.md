@@ -78,16 +78,46 @@ It instantiates all its subsequent classes, `GraphList`, `DataLoader`, and `Logi
 Its main functionalities are in the `calcMinDistance` function which calculates the least distance to get from a given source 
 to destination country. Similarly, the `calcMinCost` function calculates the least cost. 
 Then, the function then reads either *time.txt* or *cost.txt* and runs `computeSource` and `getToGoal`, 
-both from the `Logic` class. Also, another key functionality is the `editMap` which is linked to the `Parser` class, 
-which enables the user to edit a distance from a given source to destination country.
+both from the `Logic` class.
 
 As a side note, `initWorldMap` initialises the main World Map which is based on distances, 
 while `altWorldMap` boots up a side, read-only World Map based on the flight cost paths.     
 
-`WorldMap` also throws various exceptions to ensure the distances and costs are updated in the correct format. 
-For example, `distanceNonZero` and `distanceNonString` ensure the user's input is non-zero and is a number-type.
+NOTE: As of V2.1 `EditMap` is no longer used. 
 
-{TODO: Add diagram}
+![](documentationPics/worldmap2.1.png)
+<div style="text-align: center;">Figure 3.1.1: World Map Sequence Diagram Part 1</div>
+
+![](documentationPics/worldmap2.2.png)
+<div style="text-align: center;">Figure 3.1.2: World Map Sequence Diagram Part 2</div>
+(The diagrams are split into 2 parts to ensure higher picture resolution)
+
+The `initWorldMap` command is called which then processes the flight data by calling `readData`, with the data
+corresponding to the flight times. Alternatively, to process the flight costs data, the The `altWorldMap` command 
+processes the costs-based World Map. `getValidCountry` ensures the given country is valid by checking against the 
+current database in the system.
+
+The breakdown of more complicated functionalities illustrated by Figure 3.1 is summarised below.
+
+`printWorld`
+1. `getNameArray` returns the array of country codes in String form.
+2. Subsequently, `getNameArray.size` returns the size of the String which is the corresponding number of countries.
+3. The double nested for-loop iterates through all pairs of countries and returns the distance between all pairs by 
+calling the `getEdgeMatrix` which looks up the distances inside the corresponding matrix `EdgeMatrix`.  
+
+   
+>![](documentationPics/info.png) Both functions `calcMinTime` and `calcMinCost` are based off the same parent function,
+> with the main difference being that `calcMinCost` needs to initialise the alternative World Map and re-boots the 
+> original, time-based World Map just before the function returns, thereby restoring the World Map back to its original 
+> time-based state. Below is the overview of how both functions work in general. 
+
+`calcMinTime` and `calcMinCost` 
+1. The source and destination country are firstly checked to ensure they are valid through `getValidCountry`.
+2. `MinCalcResult` is then instantiated which passes in the two countries and a blank list which will eventually 
+contain the shortest path, whether cost or time-based.
+3. `computeSource` and `getToGoal` is then used to find the shortest path between the two countries, which is then 
+returned by the function as a `MinCalcResult` class.
+
 
 #### 1.1.2. GraphList class
 The `GraphList` class is based off the `WorldMap` overarching class and translate it into a more simplistic graph 
@@ -102,7 +132,20 @@ creating a bidirectional edge for both countries of interest.
 Similarly, the `modifyEdge` function calls the subsequent function `updateNeighbour` from the Country class. 
 The list of distances are all stored in a matrix which is called by `getEdgeMatrix` by the `WorldMap` class.
 
-{TODO: Add diagram}
+![](documentationPics/graphlist.png)
+<div style="text-align: center;">Figure 3.2: Graph List Sequence Diagram</div>
+
+>![](documentationPics/info.png) Both functions `modifyEdge` and `createEdge` have a very similar flow and structure.
+> While `modifyEdge` desires to update the path and hence calls `updateNeighbour`, `createEdge` desires to add a new
+> path into the existing database and hence calls `addNeighbour`.
+
+The breakdown of these functionalities as illustrated by Figure 3.2 is summarised below.
+
+`modifyEdge` and `createEdge`
+1. Calling `getKey` for both the starting and ending country returns the unique tags for the corresponding countries,
+which is then used to access and hence update the corresponding path linking both countries. 
+2. `updateNeighbour` (or `addNeighbour`) is then called on both countries to ensure the bi-directional edge is 
+correctly updated (or added to the existing database).
 
 #### 1.1.3. Logic class
 The `Logic` class is the main class driving the logic from the overarching `WorldMap` class. 
@@ -114,7 +157,16 @@ expands outwards to all other countries, yielding the least distances to all oth
 Then, `getToGoal` backtracks from the target country to trace the shortest path to the source country, 
 in reverse order. Note that `getToGoal` returns an object of `MinCalcResult` type.
 
-{TODO: Add diagram}
+![](documentationPics/logic.png)
+<div style="text-align: center;">Figure 3.3: Logic Sequence Diagram</div>
+
+The breakdown as illustrated by Figure 3.3 is summarised below.
+1. Firstly, `computeSource` calls `getVertexArray` which returns the list of all countries presently in the database.
+2. A `PriorityQueue` is then utilised which starts from the initial source country and expands to all other countries, 
+returning the shortest paths across the entire network of countries, in other words the implementation of Dijkstra's 
+algorithm.
+3. Then, `getToGoal` is a backtracking mechanism searching from the destination country back towards the country of 
+origin, and the function eventually returns an object of `MinCalcResult` class.
 
 #### 1.1.4. DataLoader class
 The `DataLoader` class reads in data from *flightData/time.txt* or *flightData/cost.txt* to create the vertexes 
@@ -127,7 +179,7 @@ number by changing the variable `numberOfCountries` in the class. Reading on, `n
 variable number.
 
 ![](documentationPics/dataSequenceDiagram.jpg)
-<div style="text-align: center;">Figure 3: DataLoader Sequence Diagram</div>
+<div style="text-align: center;">Figure 3.4: DataLoader Sequence Diagram</div>
 
 The first line of *time.txt* or *cost.txt* contains the 5 country codes, which are read added as vertexes.
 The remaining lines contain the country to country distances, which are in a lower triangular matrix, and are added as 
@@ -193,12 +245,12 @@ function is detailed below.
 The `Parser` class processes raw user input to return a `Command` object, which can be executed to execute the action
 specified by the command.
 It's main function is the `parse` function, which takes in a user input string obtained by a `Ui` object and output the 
-`Command` object. Figure 4 below illustrates the code of the `parse` function via a sequence diagram.
+`Command` object. Figure 5 below illustrates the code of the `parse` function via a sequence diagram.
 
 ![](documentationPics/parserSequenceDiagram.jpeg)
 <div style="text-align: center;">Figure 5: Parser Sequence Diagram</div>
 
-The steps illustrated by Figure 4 is summarised below.
+The steps illustrated by Figure 5 is summarised below.
 1. The `parse` command is called once per iteration of the main `run` loop in `Traveller`.
 2. Based on the user input, `parse` calls a private `parseAbcCommand`, which parses the user input for each available
 command.
@@ -209,7 +261,7 @@ viewing trips, or deleting trips.
 thrown.
 
 
-   An example of an iteration elaborated above in Figure 4 is detailed here:
+   An example of an iteration elaborated above in Figure 5 is detailed here:
 
 1.The user enters `add-day myFabulousTrip /day 3`.
 2.Parser parses the user input string.
