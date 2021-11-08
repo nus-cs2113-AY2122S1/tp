@@ -7,18 +7,31 @@ mainframe sd Add Habit Parsing
 -> ":AddParser": parseAddHabitCommand\n(commandInstruction:String)
 activate ":AddParser"
 
-":AddParser" -> ":Parser": splitInput(commandInstruction:String)
-activate ":Parser"
-":Parser" --> ":AddParser": parameters(ArrayList<String>)
-deactivate ":Parser"
+":AddParser" -> ":AddParser": splitInput(commandInstruction:String)
+activate ":AddParser"
+":AddParser" --> ":AddParser": parameters: ArrayList<String>
+deactivate ":AddParser"
 
-":AddParser" -> ":Parser": getIndex(parameters, "g/")
-activate ":Parser"
-":Parser" --> ":AddParser": goalIndex: int
-deactivate ":Parser"
+":AddParser" -> ":AddParser": getIndex(parameters, "g/")
+activate ":AddParser"
+":AddParser" --> ":AddParser": goalIndex: int
+deactivate ":AddParser"
 
 ":AddParser" -> ":AddParser": getHabit(commandInstruction: String)
 activate ":AddParser"
+
+ref over ":AddParser"
+Obtain parameters for Habit:
+habitName
+interval
+end
+
+create ":Habit"
+":AddParser" -> ":Habit": new Habit(habitName, interval)
+activate ":Habit"
+":Habit" --> ":AddParser"
+deactivate ":Habit"
+
 ":AddParser" --> ":AddParser": habit: Habit
 deactivate ":AddParser"
 
