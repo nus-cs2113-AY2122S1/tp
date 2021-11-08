@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//@@author conradwee
+
 /**
  * Each TripsList will store an ArrayList of this class.
  * Represents 1 trip plan created by the user.

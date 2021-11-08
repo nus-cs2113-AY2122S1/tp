@@ -4,7 +4,7 @@ import seedu.traveller.exceptions.TravellerException;
 
 import java.util.ArrayList;
 
-//@@author conradwee
+
 /**
  * Class for all days in an DaysList.
  */

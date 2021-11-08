@@ -55,7 +55,6 @@ public class Parser {
     private static final int KEY_LENGTH = 6;
 
 
-    //@@author conradwee
     /**
      * Breaks down raw user input into commands understood by <code>Traveller</code>.
      * @param rawInput String of the raw user input.
