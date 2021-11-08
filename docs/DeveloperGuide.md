@@ -571,10 +571,23 @@ This section describes the implementation of how the user can delete a goal from
 
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteGoalCommandParserSequenceDiagram.png))
 
-When the `runCommand` method is executed for the `DeleteGoalCommand` object, the following steps as indicated by the
-sequence diagram below is carried out:
+1. The `DeleteParser#parseDeleteGoalCommand(input)` method is called, which starts the process of
+   extracting parameters from the user input.
+2. The `DeleteParser#splitInput(input)` method splits the user input into an ArrayList of parameters.
+3. The `goalIndex` to delete is then obtained with `DeleteParser#getIndex(parameters, FLAG_GOAL_INDEX)` method
+4. A `DeleteGoalCommand(goalIndex)` object is created and returned from the
+   `DeleteParser#parseDeleteGoalCommand(input)` method.
 
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteGoalCommandSequenceDiagram.png)
+
+5. The `DeleteGoalCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
+      `GoalList#deleteGoal(goalIndex, printManager)` method. 
+6. Within this newly called method, the `GoalList#getGoal(goalIndex)` method is called to retrieve the `Goal` object
+   from the `goalList`.
+7. The `GoalList#updateChosenGoalIndex(goalIndex)` method is called to perform checks on the goal to be deleted.
+8. The `Goal` is then deleted with the `goalList` ArrayList method `.remove`
+9. Finally, the `PrintManager#printRemovedGoal(goalDescription)` method is called to print a confirmation message on 
+   the successful deletion of a goal.
 
 #### 4.8.2. Design Considerations
 
