@@ -9,7 +9,7 @@ Users can only run the app on a Command Line Interface (CLI).
 ## Summary of Contributions
 Below are contributions I've made to the team and Ha(ppy)Bit. Organised for you and because I like it that way.
 
-### Code Contributed: [RepoSense Link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=f14&breakdown=true&sort=groupTitle&sortWithin=title&since=2021-09-25&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=kahhe&tabRepo=AY2122S1-CS2113T-F14-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
+### Code Contributed: <br> [RepoSense Link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=f14&breakdown=true&sort=groupTitle&sortWithin=title&since=2021-09-25&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=authorship&tabAuthor=kahhe&tabRepo=AY2122S1-CS2113T-F14-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
 
 ### Features
 
@@ -19,14 +19,12 @@ Below are contributions I've made to the team and Ha(ppy)Bit. Organised for you 
 - Added the `Command` class `DeleteCommand` and its inheritance classes `DeleteGoalCommand` and `DeleteHabitCommand`
 - Added the `Parser` class `DeleteParser`
 
-
 #### v2.0
 
 "Update" feature for goal name and habit name:
 - Added the `Command` class `UpdateCommand` and its inheritance classes `UpdateGoalNameCommand` 
   and `UpdateHabitNameCommand`
 - Contributed to `Parser` class `UpdateParser` for parsing input for updating goal name and updating habit name
-
 
 #### v2.1
 

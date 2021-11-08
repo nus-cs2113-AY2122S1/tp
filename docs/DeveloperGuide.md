@@ -608,10 +608,22 @@ information of each command in a tabular form.
 
 ### 4.11. Storage of Information
 
-The sequence diagram shows how the program imports data from storage file.
+This section describes the implementation of how _Ha(ppy)Bit_ handles and stores the information you have entered.
 
 #### 4.11.1. Implementation
 
+**Importing Data**
+1. The `load()` method runs automatically upon startup.
+2. `Storage` then calls the `importStorage(filePath)` method from the `Import` class.
+3. The save file `hiabit.txt` is then scanned line by line, where every line is parsed
+   into discrete and discernible information and then stored in `String[] lineData`.
+4. `updateGoalList(lineData, GoalList)` is called for every line till all lines have be scanned.
+5. In every iteration of `updateGoalList(lineData, goalList)` being called, the information
+   (sorted by goal type) is parsed and stored into `goalList`, updating `goalList`.
+6. The completed `goalList` is returned to `Storage`, and then returned to update the
+   main `goalList` attribute in `UiManager`.
+
+The sequence diagram shows how the program imports data from storage file. <Br>
 ![Import Sequence Diagram](Diagram_Images/Implementation_Diagram_Images/ImportSequenceDiagram.png)
 
 The program uses `Storage` class to import data from the storage file.
@@ -621,9 +633,12 @@ The program uses `Storage` class to import data from the storage file.
 * `Import` will then populate `GoalList` accordingly
   before returning `GoalList` back to `Storage` and back to user.
 
-The sequence diagram shows how the program exports data to storage file.
+**Exporting Data**
+1.
 
-![Export Sequence Diagram](Diagram_Images/Implementation_Diagram_Images/ExportSequenceDiagram.png)
+The sequence diagram shows how the program exports data to storage file. <br>
+![Export Sequence Diagram](Diagram_Images/Implementation_Diagram_Images/ExportSequenceDiagram.png) 
+
 
 `Storage` class can also export data to storage file with `Export` class.
 It takes in a `GoalList` object and converts the data into string to be stored in storage file.
