@@ -155,10 +155,10 @@ public class Ui {
         String output;
         switch (viewType) {
         case PATIENT_INFO:
-            output = PatientUi.getPatientTableHeader();
+            output = PatientUi.getPatientTableMatchedHeader();
             break;
         case MEDICAL_STAFF_INFO:
-            output = StaffUi.getStaffTableHeader();
+            output = StaffUi.getStaffTableMatchedHeader();
             break;
         default:
             assert false;

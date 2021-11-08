@@ -496,8 +496,7 @@ class UiTest {
         patient2.setName("Bob");
         patient2.setPhoneNumber("88889999");
         String expectedOutput =
-            "Here is a list of all patients:" + END_LINE
-            + "For full details of each patient, please use the command \"view PATIENT_ID\"" + END_LINE
+            "Here is a list of matched patients:" + END_LINE
             + " ----------------------------------------------------------------------------------------------------- "
             + END_LINE
             + " |  ID  | IC Number |         Name         | Phone No. |        Email         |       Address        | "
@@ -538,8 +537,7 @@ class UiTest {
         staff2.setName("Bob");
         staff2.setPhoneNumber("88889999");
         String expectedOutput =
-                "Here is a list of all staffs:" + END_LINE
-                        + "For full details of each staff, please use the command \"view STAFF_ID\"" + END_LINE
+                "Here is a list of matched staff:" + END_LINE
                         + " -----------------------------------------"
                         + "------------------------------------------------------------ "
                         + END_LINE

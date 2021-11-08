@@ -343,8 +343,7 @@ Example:
 Expected Output:
 
 ```
-Here is a list of all patients:
-For full details of each patient, please use the command "view PATIENT_ID"
+Here is a list of matched patients:
  ----------------------------------------------------------------------------------------------------- 
  |  ID  | IC Number |         Name         | Phone No. |        Email         |       Address        | 
  ----------------------------------------------------------------------------------------------------- 

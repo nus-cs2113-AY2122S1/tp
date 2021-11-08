@@ -5,6 +5,7 @@ public abstract class PersonUi {
     protected static final String END_LINE = System.lineSeparator();
     protected static final String TABLE_ROW_SEPARATOR = " ------------------------------------------------"
             + "----------------------------------------------------- " + END_LINE;
+    private static final String PATIENT = "patient";
 
     /**
      * Returns a list of valid commands.
@@ -165,6 +166,23 @@ public abstract class PersonUi {
         String output = "Here is a list of all " + person + "s:" + END_LINE;
         output += "For full details of each " + person + ", please use the command \"view " + uppercasePerson
                 + "_ID\"" + END_LINE;
+        output += TABLE_ROW_SEPARATOR;
+        output += " |  ID  | IC Number |         Name         |"
+                + " Phone No. |        Email         |       Address        | " + END_LINE;
+        output += TABLE_ROW_SEPARATOR;
+
+        return output;
+    }
+
+    /**
+     * Returns a String containing the header of the person information table for find command.
+     *
+     * @param person String indicating the type of person
+     * @return String containing the header of the person information table for find command.
+     */
+    protected static String getTableMatchedHeader(String person) {
+        String optionalPluralSuffix = (person.equals(PATIENT)) ? "s" : "";
+        String output = "Here is a list of matched " + person + optionalPluralSuffix + ":" + END_LINE;
         output += TABLE_ROW_SEPARATOR;
         output += " |  ID  | IC Number |         Name         |"
                 + " Phone No. |        Email         |       Address        | " + END_LINE;
