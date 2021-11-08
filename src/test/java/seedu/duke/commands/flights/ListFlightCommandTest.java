@@ -17,8 +17,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ListFlightCommandTest {
 
-    private static Flight TEST_FLIGHT_ONE = new Flight(new String[]{"SQ-JPN", "JPN", "SG", "20/10/2021 18:00", "21/10/2021 03:00"});
-    private static Flight TEST_FLIGHT_TWO = new Flight(new String[]{"SQ-KOR", "KOR", "SG", "23/10/2021 18:00", "30/10/2021 03:00"});
+    private static Flight TEST_FLIGHT_ONE = new Flight(new String[]{"SQ-JPN", "JPN", "SG", "20/10/2021 18:00",
+        "21/10/2021 03:00"});
+    private static Flight TEST_FLIGHT_TWO = new Flight(new String[]{"SQ-KOR", "KOR", "SG", "23/10/2021 18:00",
+        "30/10/2021 03:00"});
     private static final String VALID_DATA_OUTPUT = "Here is a list of all flights:\n"
             + "1. " + TEST_FLIGHT_ONE + "\n\n"
             + "2. " + TEST_FLIGHT_TWO + "\n\n"

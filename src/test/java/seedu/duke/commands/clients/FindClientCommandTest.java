@@ -4,7 +4,11 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.TourPlannerException;
 import seedu.duke.Ui;
 import seedu.duke.commands.Command;
-import seedu.duke.data.*;
+import seedu.duke.data.Client;
+import seedu.duke.data.ClientList;
+import seedu.duke.data.ClientPackageList;
+import seedu.duke.data.FlightList;
+import seedu.duke.data.TourList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,8 +25,9 @@ public class FindClientCommandTest {
             + "1. " + TEST_CLIENT_ONE;
     private static final String TWO_OR_MORE_OUTPUT = "This is the client(s) that matches your search\n"
             + "1. " + TEST_CLIENT_ONE + "\n\n"
-            + "2. " + TEST_CLIENT_THREE ;
-    private static final String INVALID_DATA_OUTPUT = "I'm sorry, there seems to be no client(s) that matches your search";
+            + "2. " + TEST_CLIENT_THREE;
+    private static final String INVALID_DATA_OUTPUT = "I'm sorry, "
+            + "there seems to be no client(s) that matches your search";
 
     PrintStream previousConsole = System.out;
     ByteArrayOutputStream newConsole = new ByteArrayOutputStream();

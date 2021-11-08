@@ -6,8 +6,14 @@ import seedu.duke.data.Client;
 import seedu.duke.data.ClientPackage;
 import seedu.duke.data.Flight;
 import seedu.duke.data.Tour;
+import java.util.ArrayList;
 
 public class AddClientPackageCommand extends Command {
+    public static final String ERROR_CLIENT_PACKAGE_ID_EXISTS =
+            "ERROR: Package ID already exists. Please try another Package ID.";
+    public static final String ERROR_CLIENT_PACKAGE_SAME_FIELDS =
+            "ERROR: Package with same fields already exists with different ID.";
+
     private ClientPackage clientPackage;
     private String[] rawClientPackage;
 
@@ -15,7 +21,7 @@ public class AddClientPackageCommand extends Command {
      * Class constructor of AddClientPackage, used to add a ClientPackage to ClientPackageList.
      *
      * @param rawClientPackage the array of values of the client package, ordered in this manner:
-     *                          package id, client id, tour id and flight id
+     *                         package id, client id, tour id and flight id
      */
     public AddClientPackageCommand(String[] rawClientPackage) {
         this.rawClientPackage = rawClientPackage;
@@ -27,16 +33,26 @@ public class AddClientPackageCommand extends Command {
      */
     @Override
     public void execute() {
-        try {
-            createClientPackage();
-            ClientPackage existingClientPackage = clientPackages.getClientPackageById(clientPackage.getId());
-            System.out.println("Client package ID already exists. Please try another client package ID.");
-        } catch (TourPlannerException e) {
-            if (!clientPackage.getClient().equals(null) && !clientPackage.getTour().equals(null)
-                    && !clientPackage.getFlight().equals(null)) {
-                clientPackages.add(clientPackage);
-                ui.showAdd(clientPackage);
+        createClientPackage();
+        ArrayList<ClientPackage> checkClientPackage = clientPackages.getClientPackages();
+        for (ClientPackage currClientPackage : checkClientPackage) {
+            boolean sameId = currClientPackage.getId().equals(clientPackage.getId());
+            if (sameId) {
+                System.out.println(ERROR_CLIENT_PACKAGE_ID_EXISTS);
+                return;
             }
+            boolean sameClient = currClientPackage.getClient().equals(clientPackage.getClient());
+            boolean sameTour = currClientPackage.getTour().equals(clientPackage.getTour());
+            boolean sameFlight = currClientPackage.getFlight().equals(clientPackage.getFlight());
+            if (sameClient && sameTour && sameFlight) {
+                System.out.println(ERROR_CLIENT_PACKAGE_SAME_FIELDS);
+                return;
+            }
+        }
+        if (!clientPackage.getClient().equals(null) && !clientPackage.getTour().equals(null)
+                && !clientPackage.getFlight().equals(null)) {
+            clientPackages.add(clientPackage);
+            ui.showAdd(clientPackage);
         }
     }
 
@@ -45,16 +61,23 @@ public class AddClientPackageCommand extends Command {
      * If given client package ID already exists, the client package will not be added.
      */
     public void executeStorage() {
-        try {
-            createClientPackage();
-            ClientPackage existingClientPackage = clientPackages.getClientPackageById(clientPackage.getId());
-            System.out.println("Client package ID already exists. Please try another client package ID.");
-        } catch (TourPlannerException e) {
-            if (!clientPackage.getClient().equals(null) && !clientPackage.getTour().equals(null)
-                    && !clientPackage.getFlight().equals(null)) {
-                clientPackages.add(clientPackage);
+        createClientPackage();
+        ArrayList<ClientPackage> checkClientPackage = clientPackages.getClientPackages();
+        for (ClientPackage currClientPackage : checkClientPackage) {
+            boolean sameId = currClientPackage.getId().equals(clientPackage.getId());
+            if (sameId) {
+                System.out.println(ERROR_CLIENT_PACKAGE_ID_EXISTS);
+                return;
+            }
+            boolean sameClient = currClientPackage.getClient().equals(clientPackage.getClient());
+            boolean sameTour = currClientPackage.getTour().equals(clientPackage.getTour());
+            boolean sameFlight = currClientPackage.getFlight().equals(clientPackage.getFlight());
+            if (sameClient && sameTour && sameFlight) {
+                System.out.println(ERROR_CLIENT_PACKAGE_SAME_FIELDS);
+                return;
             }
         }
+        clientPackages.add(clientPackage);
     }
 
     /**

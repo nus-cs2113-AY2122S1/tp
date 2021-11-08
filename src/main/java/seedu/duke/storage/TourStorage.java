@@ -1,4 +1,3 @@
-//@@author Demonshaha
 package seedu.duke.storage;
 
 import seedu.duke.TourPlannerException;
@@ -90,7 +89,7 @@ public class TourStorage {
     }
 
     /**
-     * Loops through tours and writes into storage file for Tour
+     * Loops through tours and writes into storage file for Tour.
      */
     public void saveFile() {
         ArrayList<Tour> tourList = tours.getTours();
