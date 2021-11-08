@@ -411,7 +411,7 @@ To help young adults who are living in their own home keep track of ingredients 
        Expected: No recipe added. Details of the error are shown.
 
 
-4. Add a recipe with some ingredients having no quantity or vice versa.
+4. Add a recipe with some ingredients having no quantity or quantities without a corresponding ingredient.
    1. Test case: `add recipe r/Chicken Soup i/Chicken i/Salt q/20` <br/>
      Expected: No recipe added. Details of the error are shown, command usage message is shown.
    2. Test case: `add recipe r/Chicken Soup q/1 i/Salt q/20` <br/>
@@ -520,15 +520,15 @@ To help young adults who are living in their own home keep track of ingredients 
 
 1. Sufficient ingredients to cook a certain recipe
     1. Prerequisite: 
-       - The recipe "Chicken Soup" exist in the RecipeList, with 1 quantity for "Chicken" and 20 quantities for "Salt". 
+       - Only "Chicken Soup" exist in the RecipeList, with 1 quantity for "Chicken" and 20 quantities for "Salt". 
        - The ingredients "Chicken" and "Salt" exist in the IngredientRepository with at least 1 and 20 quantities respectively.
     2. Test case: `list recipes i can cook` <br/>
-       Expected: Recipes that can be cooked are shown. A reminder will be given to user if some of the ingredients are expired.
+       Expected: "Chicken Soup" and its ingredients shown. A reminder will be given to the user if some ingredients are expired.
 
     
 2. Insufficient ingredients to cook a certain recipe
     1. Prerequisite: 
-       - The recipe "Chicken Soup" exist in the RecipeList, with 1 quantity for "Chicken" and 20 quantities for "Salt". 
+       - Only "Chicken Soup" exist in the RecipeList, with 1 quantity for "Chicken" and 20 quantities for "Salt". 
        - The ingredients "Chicken" and "Salt" exist in the IngredientRepository with less than 1 and 20 quantities respectively.
     2. Test case: `list recipe i can cook` <br/>
        Expected: No recipes shown. Informs user they don't have enough ingredients.
