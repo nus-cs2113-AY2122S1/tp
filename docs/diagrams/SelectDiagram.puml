@@ -1,11 +1,41 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+!include style.puml
 
-autonumber
+box DUKE_COLOR
+participant ":Duke" as Duke
+end box
+box BLUE_COLOR
+participant ":Parser" as Parser
+participant ":SelectParser" as SelectParser
+end box
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+activate Duke
+Duke -> Parser
+activate Parser
+Parser -> SelectParser
+activate SelectParser
+
+box LOGIC_COLOR
+create ":SelectCommand" as SelectCommand
+end box
+
+SelectParser -> SelectCommand
+activate SelectCommand
+
+return
+return
+return
+
+Duke -> SelectCommand: execute()
+activate SelectCommand
+    opt ItemType == EVENT
+
+    end
+
+    opt ItemType == TASK
+
+    end
+return :CommandResult
+
 @enduml
