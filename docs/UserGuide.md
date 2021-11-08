@@ -74,7 +74,7 @@ Displays all commands available for the SchedUrMods application.
 > - Command arguments within `[ ]` are **optional** fields and may be arranged in any order or left out.
 > - Command arguments such as `<a|b|c>` Means that the argument must **strictly** either be `a`, `b` or `c`. 
 > - If `[--priority <high|medium|low>]` flag is not used, the **default priority** will be set to `medium`. 
-> - If `[--recur <daily|weekly|monthly|yearly>]` flag is not used, the **default recurrence** will be set to `none`. 
+> - If `[--recur <none|daily|weekly|monthly|yearly>]` flag is not used, the **default recurrence** will be set to `none`. 
 
 ### 2.2.1 Todo: `todo`
 Adds your **todo** to your task list.
@@ -111,7 +111,7 @@ Adds your **deadline** to your task list.
 - <code>&lt;--due <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a>&gt;</code> specifies when your deadline is.
 - `[--flag <argument>]` specifies optional details of your deadline.
   - The priority of your task: `[--priority <high|medium|low>]`
-  - How often your task is to repeat: `[--recur <daily|weekly|monthly|yearly>]`
+  - How often your task is to repeat: `[--recur <none|daily|weekly|monthly|yearly>]`
 
 **Example**: `deadline CS2106 Lab 3 --priority high --due 20-10-2021 02:00`
 - Adds a deadline task with description `CS2106 Lab 3` to the task list.
@@ -138,7 +138,7 @@ Adds your **event** to your task list.
 - <code>&lt;--end <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a>&gt;</code> specifies when your event ends.
 - `[--flag <argument>]` specifies optional details of your event.
   - The priority of your task: `[--priority <high|medium|low>]`
-  - How often your task is to repeat: `[--recur <daily|weekly|monthly|yearly>]`
+  - How often your task is to repeat: `[--recur <none|daily|weekly|monthly|yearly>]`
 
 **Example**: `event Marquee Christmas Party --priority high --start 25-12-2020 22:00 --end 26-12-2020 04:00`
 - Adds an event task with description `Marquee Christmas Party` to the task list.
@@ -209,6 +209,7 @@ List all tasks currently stored locally in your task list.
   - **Task recurrence ``**:
     - A task can either have `none`, `daily`, `weekly`, `monthly`, or `yearly` recurrence.
     - This value determines how often a task recurs.
+        >💡 **Note**: Tasks with a recurrence will automatically be recurred to the next date that has not occured yet every time you list them!
   - **Task date field**:
     - For a `Todo`, it represents the date and time to do the task.
     - For a `Deadline`, it represents the due date of the task.
@@ -344,7 +345,7 @@ Edits a single [Todo](#221-todo-todo), [Deadline](#222-deadline-deadline) or [Ev
 - **Flags**
   - `--description <description>` modifies task description.
   - `--priority <high|medium|low>` modifies task priority.
-  - `--recur <daily|weekly|monthly|yearly>` modifies task recurrence.
+  - `--recur <none|daily|weekly|monthly|yearly>` modifies task recurrence.
   - <code>--doOn <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Todo](#221-todo-todo) is to be done.
   - <code>--due <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Deadline](#222-deadline-deadline) is due.
   - <code>--start <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Event](#223-event-event) starts.
