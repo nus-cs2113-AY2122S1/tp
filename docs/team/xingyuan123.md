@@ -32,4 +32,4 @@ you may have in order to help you organise your CCA's timetable.
 
 * DG Contributions
   * Set up `Storage` DeveloperGuide.md.
-  * advised UML diagrams for all
+  * advised UML diagrams for all.
