@@ -44,13 +44,10 @@ Storage -[hidden]down-> Command
 class Scheduler {
     +addPatient(patient: Person): int
     +deletePatient(patientId: int): void
-    +editPatient(patientId: int, newPatientData: Person): void
     +addStaff(staff: Person): int
     +deleteStaff(staffId: int): void
-    +editStaff(staffId: int, newStaffData: Person): void
     +addAppointment(appointment: Appointment): int
     +deleteAppointment(appointmentId: int): void
-    +editAppointment(appointmentId: int, newAppointment: Appointment): void
 }
 
 class PersonList {
@@ -65,7 +62,7 @@ class Person {
     #phoneNumber: String
     #emailAddress: String
     #residentialAddress: String
-    #isArchived: boolean
+    #isHidden: boolean
 }
 
 enum PersonType {
@@ -74,15 +71,9 @@ enum PersonType {
 }
 
 class PersonalAppointmentList {
-    +addAppointment(appointment: Appointment): void
-    +deleteAppointment(appointmentId: int): void
-    +getAppointmentId(dateTimeCode: int): int
 }
 
 class SchedulerAppointmentList {
-    +addAppointment(appointment: Appointment): int
-    +deleteAppointment(appointmentId: int): void
-    +getAppointment(appointmentId: int): Appointment
 }
 
 class Appointment {

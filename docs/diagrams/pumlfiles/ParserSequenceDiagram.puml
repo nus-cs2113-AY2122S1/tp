@@ -20,15 +20,15 @@ note right of C: Minor utility functions\nin ParserUtils have\nbeen omitted for 
 
 autoactivate on
 
-X -> A PARSER_ACTIVATION_COLOR_1 : parseCommand(userInput)
-A -> B PARSER_ACTIVATION_COLOR_1 : parsePatientCommand(userInput)
+X -> A PARSER_ACTIVATION_COLOR_1 : parseCommand\n(userInput)
+A -> B PARSER_ACTIVATION_COLOR_1 : parsePatientCommand\n(userInput)
 B -> B PARSER_ACTIVATION_COLOR_2: parseAddCommand(userInput)
 B -> C PARSER_ACTIVATION_COLOR_1 : getParameters(userInput)
 return parameters
 create D
 B -> D PARSER_ACTIVATION_COLOR_1
 return patient
-B -> C PARSER_ACTIVATION_COLOR_1 : updateMultiplePersonalInformation(patient, parameters)
+B -> C PARSER_ACTIVATION_COLOR_1 : updateMultiplePersonalInformation\n(patient, parameters)
 return
 create E
 B -> E PARSER_ACTIVATION_COLOR_1 : AddPatientCommand(patient)
