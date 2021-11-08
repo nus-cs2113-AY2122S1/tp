@@ -16,14 +16,19 @@ class Student {
     id = A0123456Z
     name = Student
     comment = Good
-    results = <Midterms, 60.00>
+}
+class MarkList
+class Mark {
+    assessmentName = Midterms
+    marks = 60.00
 }
 
 
 ClassList *-> TeachingClass
 TeachingClass *-down-> "1" StudentList
 StudentList *-down-> Student
+Student *-down-> "1" MarkList
+MarkList *-down-> Mark
 TeachingClass *-down-> "1" AssessmentList
 AssessmentList *-down-> Assessment
-
 @enduml

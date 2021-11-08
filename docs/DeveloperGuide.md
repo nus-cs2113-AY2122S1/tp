@@ -239,7 +239,9 @@ of the new `Mark` object would only proceed if the getter retrieves a null. In o
 changing the `assessmentName` whenever an `Assessment` object has its `name` attribute changed, one can simply use the
 same getter as above to retrieve the `Mark` object with the old `assessmentName` and call a setter to change it to the
 new `assessmentName`.
-Included below is an updated Class Diagram showing this implementation
+Included below are an updated Class and Object Diagram showing this implementation. <br>ClassDiagram:<br>
+![MarksAsClassDiagram](diagrams/class/MarksAsClassDiagram.png) <br> ObjectDiagram:<br>
+![SetMarkAsClassObjectDiagram](diagrams/object/SetMarkAsClassObjectDiagram.png)
 
 <br>
 
