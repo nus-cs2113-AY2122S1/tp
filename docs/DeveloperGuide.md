@@ -48,11 +48,13 @@ It ensures the appropriate input format, and passes the input data to the approp
 
 `Command` is the class responsible for the execution of all commands.
 It contains child classes for all possible commands.
-It interacts with `FinancialTracker` and `BudgetManager` to execute commands, before sending information to `Ui` for output.
+It interacts with `FinancialTracker`, `BudgetManager` and `CurrencyConversion` to execute commands, before sending information to `Ui` for output.
 
 `Parser` &rarr; `Command` &harr; `FinancialTracker`
 
 `Parser` &rarr; `Command` &harr; `BudgetManager`
+
+`Parser` &rarr; `Command` &harr; `CurrencyConversion`
 
 `Ui` &larr; `Command`
 
@@ -68,6 +70,16 @@ It also retrieves data from `DataManager` when the program is loaded.
 
 <br>
 
+`CurrencyConversion` is the class containing and handling all currency related information an operations.
+It interacts with Command to execute tasks, and writes to DataManager to save its data.
+It also retrieves data from `DataManager` when the program is loaded.
+
+`Command` &harr; `CurrencyConversion`
+
+`CurrencyConversion` &harr; `DataManager`
+
+<br>
+
 `BudgetManager` is the class containing and handling all budget information.
 It interacts with `Command` to execute tasks, and writes to `DataManager` to save its data.
 It also retrieves data from `DataManager` when the program is loaded.
@@ -80,11 +92,13 @@ It also retrieves data from `DataManager` when the program is loaded.
 
 `DataManager` is the class responsible for reading data from the `StonksXD_entries.csv` and `StonksXD_budget.csv` files upon boot up,
 and writing save data to the files before terminating the program.
-It interacts with `FinancialTracker` and `BudgetManager` and receives commands from `StonksXD`.
+It interacts with `FinancialTracker`, `BudgetManager`, `CurrencyConversion` and receives commands from `StonksXD`.
 
 `FinancialTracker` &harr; `DataManager`
 
 `BudgetManager` &harr; `DataManager`
+
+`CurrencyConversion` &harr; `DataManager`
 
 `DataManager` &larr; `StonksXD_data.csv`
 
@@ -200,7 +214,7 @@ It shows the hypothetical scenario where its `getExpenseBetween` method.
 
 ![](FinancialTrackerSD.drawio.png)
 
-How the Financial Tracker compoment works:
+How the Financial Tracker component works:
 
 1. `getExpenseBetween` is implemented using streams. It filters through the entire `expenses` ArrayList,
    checking if the date associated to that entry lies within the given date range provided as input parameters.
@@ -212,6 +226,33 @@ How the Financial Tracker compoment works:
 5. Finally, the method `sum()` is called on the stream which returns the sum of all the values inside the stream. This value
    is then returned at the end of the function call.
 
+---
+
+### Currency Manager Component
+
+The `CurrencyManager` class is responsible for all currency related operations performed on entries in Stonks XD. 
+It can convert all these entries to a given currency type, track the current type and list the available types for conversion
+as prompted by the user using appropriate commands.
+
+The class diagram below shows the structure of the `CurrencyManager` class:
+
+-- Work in progress --
+
+---
+
+##### Converting user inputs to commands
+
+1. When the user gives an input, it will first be split into 2 parts command word and arguments using regex.
+2. The command word will be matched with the list of expected command words. If there is no match, return an 
+invalid command and the process stops here.
+3. If there is a match, `Parser` will check the validity of the arguments the user gave. This is also done
+using regex.
+4. If the arguments are valid, the corresponding command will be returned.
+5. If invalid, return an invalid command.
+
+##### Converting user information to `csv` data
+
+Every important field will be separated by `Parser` with a `,` before saving them into the respective `csv` files.
 
 ---
 
@@ -227,7 +268,7 @@ There are currently 7 child classes of `Budget` (i.e. 7 legal budget categories 
 
 <br>
 
-How the Budget compoment works:
+How the Budget component works:
 - Upon start-up, a new `BudgetManager` is initialised in `StonksXD`.
 - `BudgetManager` initialises all `Budget` sub-classes with respective budget limit values loaded from `DataManager`.
 - When an entry is added by the user, `BudgetManager` parses the category input by the user and calls the relevant `Budget` sub-class.
@@ -250,7 +291,7 @@ The constructed StonksGraph will then be printed out by the Ui class through the
 
 #### Class Diagram
 
-![](italiciseAbstractCD.png)
+![](constructorNoReturnType.png)
 In the class diagram above the StonksGraph class has a 2D array as a private attribute representing the graph.
 It also contains multiple methods used to write the proper characters to each parts of the 2D array.
 
@@ -453,12 +494,6 @@ youth to manage their finances by making personal finance entries simple.
 - Fault tolerance requirements: the application should handle inputs with a reasonable amount of errors
 - Interoperability requirements: the application should run on macOS, Windows and Linux operating systems
 - Stability requirements: Application should run without internet so that user can access the application anywhere without having to connect to the internet
-
----
-
-## Glossary
-
-* *glossary item* - Definition
 
 ---
 

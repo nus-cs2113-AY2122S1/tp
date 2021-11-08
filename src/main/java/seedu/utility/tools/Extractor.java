@@ -204,7 +204,6 @@ public abstract class Extractor {
 
     /**
      * Converts the String given to the CurrencyType.
-     * 
      * @param matcher An engine that performs match operations on a character sequence by interpreting a Pattern.
      * @return The CurrencyType.
      * @throws BlankCurrencyTypeException If CurrencyType given is empty.
