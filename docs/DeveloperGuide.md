@@ -16,20 +16,26 @@ motivated us to build this application.
 
 * [Acknowledgements](#-acknowledgements)
 * [Setting Up & Getting Started](#-setting-up--getting-started)
-* [Design & Implementations](#-design--implementation)
-    * [Design](#design)
-        * [Main Components](#main-components)
-        * [General Flow](#general-flow)
-        * [Input Parsing](#input-parsing)
-        * [Storage](#storage)
-        * [Data Structures](#data-structures)
-        * [User-Interface Component](#user-interface-component)
-        * [Exceptions](#exceptions)
-        * [Command Abstraction](#command-abstraction)
-        * [Input Validation](#input-validation)
-    * [Implementation](#implementation)
-        * [Edit](#edit)
-        * [Graph](#graph)
+* [Design](#design)
+    * [Main Components](#main-components)
+    * [General Flow](#general-flow)
+    * [Input Parsing](#input-parsing)
+    * [Storage](#storage)
+    * [Data Structures](#data-structures)
+    * [User-Interface Component](#user-interface-component)
+    * [Exceptions](#exceptions)
+    * [Command Abstraction](#command-abstraction)
+    * [Input Validation](#input-validation)
+* [Implementation](#implementation)
+    * [Add](#add)
+    * [Find](#find)
+    * [Edit](#edit)
+    * [Set](#set)
+    * [Link](#link)  
+    * [Graph](#graph)
+    * [Random Dish](#random-dish)
+    * [Sort](#sort)
+    * [Terminal Refreshing / Clear Screen](#terminal-refreshing--clear-screen)
 * [Product Scope](#-product-scope)
     * [Target User Profile](#target-user-profile)
     * [Value Proposition](#value-proposition)
@@ -68,9 +74,9 @@ The application consists of the following main components responsible for the hi
 2. `Ui`: Handles the displaying of all command results and error messages to the user.
 3. `Storage`: Handles the creation, reading from and writing from the `/data` directory
 4. `InputParser`: Makes sense from the user input and decides which `Command` class to call.
-5. `DishList`: Handles the collection of Dish objects used by Food-O-Rama
-6. `IngredientList`: Handles the collection of Ingredient objects used by Food-O-Rama.
-7. `Command`: Collection of classes that handle the different user commands
+5. `DishList`: Handles the collection of Dish objects used by *Food-O-Rama*.
+6. `IngredientList`: Handles the collection of Ingredient objects used by *Food-O-Rama*.
+7. `Command`: Collection of classes that handle the different user commands.
 
 The architecture diagram below shows a high-level overview of the structure between different components.
 
@@ -86,7 +92,7 @@ Describes the step-by-step sequence from User Input to the Output.
 2. User begins typing inputs.
 3. Inputs get parsed by InputParser returning the appropriate type of command and respective parameters.
 4. Command gets executed and respective output gets displayed.
-5. Once user is done using the application, he can send an exit message prompting a goodbye message.
+5. Once user is done using the application, they can send an exit message prompting a goodbye message.
 6. Application exits.
 
 ### Input Parsing
@@ -116,19 +122,19 @@ under *'Data'* folder.
 
 ![](images/storage_load_sequence.png)
 
-1. At the start of the program, Duke calls `Storage.load()`
+1. At the start of the program, Duke calls `Storage.load()`.
     * This method in the `Storage` class is responsible for invoking `loadIngredients()`, `loadDishes()`
-      and `loadFormat()`
+      and `loadFormat()`.
 2. After accessing `ingredients.txt`, `ingredientList.add()` is called for every ingredient that exists in the list and
-  is added to the active ArrayList, `IngredientList.ingredientList`
+  is added to the active ArrayList, `IngredientList.ingredientList`.
 3. Then, after accessing `dishes.txt`, `dishList.add()` is called for every dish that exists in the list and is added to
-  the active ArrayList, `DishList.dishList`
+  the active ArrayList, `DishList.dishList`.
 4. Any inputs in the data file that are invalid get disregarded and only valid inputs get loaded. As a result the invalid
-  inputs get sanitized once Food-O-Rama is started
+  inputs get sanitized once *Food-O-Rama* is started.
 5. Finally, the method also sets up the `formats.txt` file that contains all the relevant formats in which the data is
-  saved along with examples
-    * This is present in the load method as opposed to the write method as it only needs to be called once per run of *
-      Food-O-Rama*
+  saved along with examples.
+    * This is present in the load method as opposed to the write method as it only needs to be called once per run of 
+      *Food-O-Rama*.
 
 💡 *Note: `dishes.txt`,`ingredients.txt` and `formats.txt` can be found in the `data` folder from the root directory.*
 
@@ -172,22 +178,24 @@ The `Ui` Class is responsible for the printing of interactive messages whenever 
 messages to the Command Line Interface from when the program loads, to after every input by the user and finally when
 the user exits the program.
 
-The below class diagram shows the structure and relations of the Ui class in Foodorama.
+The below class diagram shows the structure and relations of the `Ui` class in *Food-O-Rama*.
 
 ![](images/UiClass.png)
 
 For simplicity’s sake the ui class has been minimized into 3 components:
 
-* The strings containing the various messages
-* Functions that get a string from UI to be used elsewhere (e.g. Exception classes getting error messages)
-* Functions that print command outputs
+* The strings containing the various messages.
+* Functions that get a string from UI to be used elsewhere (e.g. Exception classes getting error messages).
+* Functions that print command outputs.
 
 ### Exceptions
 
 The `FoodoramaException` class is responsible for handling errors such as unrecognised user commands and improper
-parameters. It does so by calling the `Ui` class to provide the error messages and throwing the exception up to the
-highest level, that is the Foodorama class where it then gets caught and the message is printed with the
-exception.getMessage() method which is part of the base Exception class.
+parameters. 
+
+It does so by calling the `Ui` class to provide the error messages and throwing the exception up to the
+highest level, the `Foodorama` class, where it then gets caught and the message is printed with the
+`exception.getMessage()` method which is part of the base Exception class.
 
 ### Command Abstraction
 
@@ -196,26 +204,26 @@ exception.getMessage() method which is part of the base Exception class.
 * Different Command Classes that perform different tasks by calling various functions of the Object Classes.
 * All inherit from an abstract `Command` class with one execute method that takes an Arraylist<String> as input.
 * These command classes help perform a more specialized input validation so ensure the inputs match the specific command
-  that has been invoked
+  that has been invoked.
 
-### Input validation
+### Input Validation
 
-In addition to the input parser, due to the different types of inputs Food-O-Rama deals with, there exists a second round
-of input validation to help seperate the invalid inputs from those that are valid
+In addition to the input parser, due to the different types of inputs *Food-O-Rama* deals with, there exists a second round
+of input validation to help seperate the invalid inputs from those that are valid.
 
-The sequence diagram for the validation of Numerical Inputs is given below
-
-![](images/input_validation_number.png)
-
-As you can see the system filters out the numerical inputs from the text strings and chceks if the numerical inputs are
-integers or not providing the actual methods that do the computation the only valid inputs that are integers in thsi
-case. The same process can be done to include doubles as well by excluding the final integer check.
-
-The sequence diagram for the validation of Text strings is given below
+The sequence diagram for the validation of Numerical Inputs is given below.
 
 ![](images/input_validation_number.png)
 
-The process of input validation for strings is quite similar to that for integers except the roles are reversed
+The system filters out the numerical inputs from the text strings, and checks if the numerical inputs are
+integers or not providing the actual methods that execute the computation (the only valid inputs are integers in this
+case). The same process can be done to include doubles as well by excluding the final integer check.
+
+The sequence diagram for the validation of Strings is given below.
+
+![](images/input_validation_number.png)
+
+The process of input validation for strings is similar to that for integers except only words are valid inputs.
 
 ## ✍ Implementation
 This section explores the overall implementation of the different main functions and how they work.
@@ -364,7 +372,7 @@ that use them. The diagram below showcases the sequence of the `LinkCommand` cla
 
 ### Graph
 
-The implementation of the Edit function allows Food-O-Rama to display a graph of the Dishes and Ingredients present in the
+The implementation of the Edit function allows *Food-O-Rama* to display a graph of the Dishes and Ingredients present in the
 DishList and IngredientList to the User Below is a sequence diagram that shows how the GraphCommand functions
 
 ![](images/graph_sequence.png)
@@ -399,7 +407,7 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-### Random dish
+### Random Dish
 
 The `RandomDishCommand` class is used to generate a random Dish Name.
 
@@ -1066,5 +1074,5 @@ chicken|2.0|1.0|2.5|30/10/2021
 1. Exit Food-O-Rama and Save User Data
     * Test case: `bye`
 
-      Expected: Food-O-Rama terminates and saves user data in dishes.txt and ingredients.txt. When Food-O-Rama run
+      Expected: *Food-O-Rama* terminates and saves user data in dishes.txt and ingredients.txt. When *Food-O-Rama* run
       again, previously saved user data will exist.
