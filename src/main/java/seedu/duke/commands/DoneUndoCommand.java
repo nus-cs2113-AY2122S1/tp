@@ -7,16 +7,18 @@ import seedu.duke.items.Task;
 import seedu.duke.parser.ItemType;
 import seedu.duke.parser.Parser;
 
+import java.util.ArrayList;
+
 public class DoneUndoCommand extends Command {
 
     private final String action;
     private final ItemType itemType;
-    private final int[] indexes;
+    private final ArrayList<Integer> indexes;
 
     private static final String DONE = "done";
     private static final String UNDO = "undo";
 
-    public DoneUndoCommand(String action, ItemType itemType, int[] indexes) {
+    public DoneUndoCommand(String action, ItemType itemType, ArrayList<Integer> indexes) {
         this.action = action;
         this.itemType = itemType;
         this.indexes = indexes;

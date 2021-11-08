@@ -56,7 +56,8 @@ public abstract class UpdateParser extends Parser {
         } catch (AttributeNotFoundException e) {
             String attributeType = ItemAttribute.getAttributeName(e.getItemAttribute());
             String attributeFlag = ItemAttribute.getItemFlag(e.getItemAttribute());
-            System.out.println("Please add a " + attributeType + "for your update using "
+            Ui.printLineBreak();
+            System.out.println("Please add a " + attributeType + " for your update using "
                     + attributeFlag + attributeType.toUpperCase());
         }
         return null;
@@ -86,6 +87,7 @@ public abstract class UpdateParser extends Parser {
             taskIndex = taskIndex.replaceAll("\\s", "");
             return parseUpdateTask(event, taskIndex);
         } else {
+            Ui.printLineBreak();
             System.out.println("Invalid update");
         }
         checkForOtherUpdate(update);
@@ -127,6 +129,7 @@ public abstract class UpdateParser extends Parser {
         } else if (update.contains(ADD_FLAG)) {
             return addMember(taskToBeUpdated);
         } else {
+            Ui.printLineBreak();
             System.out.println("Invalid update");
         }
 
@@ -180,10 +183,10 @@ public abstract class UpdateParser extends Parser {
 
     private static int getMemberIndex() {
         Ui.printLineBreak();
-        Ui.promptForMemberIndex();
+        Ui.promptForMemberIndexForUpdate();
         Ui.printMemberRoster();
         Ui.printLineBreak();
-        return Integer.parseInt(Ui.readInput()) - 1;
+        return Integer.parseInt(Ui.readInput().trim()) - 1;
     }
 
     private static Command removeMember(String index, Task taskToBeUpdated) {

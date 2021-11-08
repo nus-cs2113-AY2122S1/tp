@@ -9,6 +9,8 @@ import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
 import seedu.duke.parser.ItemType;
 import seedu.duke.parser.Parser;
 
+import java.util.ArrayList;
+
 public abstract class DoneUndoParser extends Parser {
 
     private static final String DONE = "done";
@@ -23,7 +25,7 @@ public abstract class DoneUndoParser extends Parser {
                         + (action.equals(DONE) ? "mark as done" : "undo") + ". ");
             }
             ItemType itemType = getItemType(commandDetails);
-            int[] indexes = getIndexes(commandDetails);
+            ArrayList<Integer> indexes = getIndexes(commandDetails);
             checkForValidIndexes(itemType, indexes);
             switch (itemType) {
             case EVENT:
@@ -39,16 +41,18 @@ public abstract class DoneUndoParser extends Parser {
                     + (action.equals(DONE) ? "done" : "undo") + "' command.");
         } catch (DukeException | InvalidIndexException e) {
             System.out.println(e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Please make sure you're only giving me numbers for the indexes!");
         }
         return null;
     }
 
-    private static int[] getIndexes(String commandDetails) throws DukeException {
+    private static ArrayList<Integer> getIndexes(String commandDetails) throws DukeException {
         String indexesInString = commandDetails.split(" ", 2)[1];
-        return extractInt(indexesInString);
+        return extractIndexes(indexesInString);
     }
 
-    private static void checkForValidIndexes(ItemType itemType, int[] indexes)
+    private static void checkForValidIndexes(ItemType itemType, ArrayList<Integer> indexes)
             throws DukeException, InvalidIndexException {
         switch (itemType) {
         case EVENT:

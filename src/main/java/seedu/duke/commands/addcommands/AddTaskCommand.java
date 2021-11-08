@@ -17,13 +17,13 @@ public class AddTaskCommand extends Command {
     private final String description;
     private final LocalDateTime dateTime;
     private final int eventIndex;
-    private final int[] memberIndexes;
+    private final ArrayList<Integer> memberIndexes;
 
     private final ArrayList<Member> memberList = new ArrayList<>();
     private Event assignedEvent;
 
     public AddTaskCommand(String title, String description, LocalDateTime dateTime,
-                          int eventIndex, int[] memberIndexes) {
+                          int eventIndex, ArrayList<Integer> memberIndexes) {
         this.title = title;
         this.description = description;
         this.dateTime = dateTime;
