@@ -180,7 +180,7 @@ data from storage everytime during start up.
 
 - Initially, when BudgetTracker App is started, it will create new Parser and Storage object. Storage's 
 makeStorageTextFile() method will be called to either create a new database text file of the current year
-for example "2021.txt" if it does not exist or it will load the existing "2021.txt" into the App by calling 
+for example "2021.txt" if it does not exist, or it will load the existing "2021.txt" into the App by calling 
 loadStorage() method of the Storage Class.
 - Then a while loop will be initialized to check for User Input in the command line to check for user's 
 command. Whenever any command that changes the data in the App is called such as `add`, `edit` and `delete` 
@@ -331,7 +331,7 @@ Given below is an example usage scenario and how the list feature behaves at eac
 
 ### <a id=""></a> Storage 
 
-1) #### How is the data stored?
+1) How is the data stored?
 
 The storage stores the exact `add` command of budget, expenditures and loan into the text 
 file containing in the current AllRecordList. Everytime a deleted, edit or add command is called, 
@@ -340,10 +340,10 @@ at every step.
 
 ![dataSample](images/dataSample.png)
 
-2) #### Why is the data stored in such a manner?
+2) Why is the data stored in such a manner?
 
-The reason it is implemented in this manner is so that we could reuse
-code that have been written for adding of budget and expenditures directly when loading from storage.
+The reason it is implemented in this manner is so that we could reuse code that have been written 
+for adding of budget and expenditures directly when loading from storage.
 
 This implementation makes `Storage` very versatile even when there are substantial changes in 
 the architecture of our app. Some examples are the changes to `Parser` and `Commands`. 
@@ -355,10 +355,10 @@ For the saving of data, only the reloading method needs to be edited to adhere t
 new changes such that the add command stored is of the correct format.
 
 The way the database is organized is that each yearly Records is stored in the form of 
-_[YYYY].txt_. Each year contains all the monthly budget as well as all the expenditure and 
+_YYYY.txt_. Each year contains all the monthly budget as well as all the expenditure and 
 loan tied to that month. 
 
-3) #### How do some key methods work?
+3) How do some key methods work?
 
 `readTextFileToString()`
 
@@ -385,7 +385,7 @@ commands, thus loading data into the App.
 
 When _reloadArrayToStorage()_ method is called, it creates a new File object into the specified directory
 (file directory to reload data files). The _isFile()_ method of the File Class is called to check if the data file
-exist. If it doesn't, a error message will be shown to the user and the method terminates. Otherwiese, it 
+exist. If it doesn't, a error message will be shown to the user and the method terminates. Otherwise, it 
 continues to create a new FileWrite object which will clear the existing data text file first. The FileWrite 
 object will then be passed into the new PrintWriter object that will be created. 
 
@@ -398,11 +398,11 @@ convert them into their respective add commands. For example, `add -e n/Chicken 
 `add -l n/Benjamin a/1000.00 d/2021-10-27`.
 
 Both _reloadArrayToStorage()_ and _convertToCsvFile()_ methods are similar in the way they read 
-data from the App and save it into the data files. The only difference is on the type of file they
+data from the App and save it into the data files. The main difference lies is on the type of file they
 save into. _reloadArrayToStorage()_ saves into _".txt"_ type files while _convertToCsvFile()_ saves into 
 _".csv"_ type files. 
 
-4) #### Why does `edit` and `delete` command work with reloadArrayToStorage() method? 
+4) Why does `edit` and `delete` command work with reloadArrayToStorage() method? 
 
 `edit` command can change the attribute of budget, expenditure and loan such as description, amount... 
 Reloading the data text files after the `edit` will just update the `add` command attribute's value to their
@@ -412,7 +412,7 @@ attribute's value after the edit. That is the reason why it _reloadArrayToStorag
 reloading the data text files after the `delete` command will just remove a particular `add` line 
 of command from the data text file. 
 
-5) #### How does switching database work?
+5) How does switching database work?
 
 When the `year <SELECTED DATABASE YEAR>` command is called eg. `year 2020`, the Parser will 
 call the YearCommand, and it will run the _execute()_ method. _execute()_ first clears the 
@@ -421,7 +421,6 @@ to set the year to 2020. Then. the _loadStorage()_ method of Storage Class will 
 the datafile _"2020.txt"_ into the app.  
 
 ## <a id=""></a> List of Commands
-
 
 ## <a id=""></a> Appendix A: Product scope
 
