@@ -1,8 +1,5 @@
 # Lu Sicheng - Project Portfolio Page
 
-<<<<<<< Updated upstream
-## Overview
-=======
 ## Overview: TYPIST
 Typists is a command line interface typing game targeted at users who love to type and are
 familiar with the command line interface. There are two game modes in types, time-limited
@@ -57,8 +54,3 @@ Given below are my contributions to the project:
 * The `game` class I added is inherited by both `TimeLimitGame` and `WordLimitGame`
   ([#56](https://github.com/AY2122S1-CS2113-T13-4/tp/pull/56), [#144](https://github.com/AY2122S1-CS2113-T13-4/tp/pull/144)).
 * The `GameCommand` class I added is also applied to both `TimeGameCommand` and `WordGameCommand`([#81](https://github.com/AY2122S1-CS2113-T13-4/tp/pull/81/files)).
-
->>>>>>> Stashed changes
-
-
-### Summary of Contributions
