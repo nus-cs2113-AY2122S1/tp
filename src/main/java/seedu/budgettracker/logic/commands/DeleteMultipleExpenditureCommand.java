@@ -4,8 +4,8 @@ import seedu.budgettracker.ui.TextUi;
 
 public class DeleteMultipleExpenditureCommand extends DeleteCommand {
 
-    public static final String MESSAGE_USAGE = "Delete multiple expenditure record.\n"
-            + "Parameters: -e m/MONTH i/INDEX_OF_EXPENDITURE-INDEX_OF_EXPENDITURE\n"
+    public static final String MESSAGE_USAGE = "Delete multiple expenditure records.\n"
+            + "Parameters: -e m/MONTH i/START_INDEX - END_INDEX\n"
             + "Note:\n"
             + " * If INDEX is not specified, all the expenditure records of this month will be deleted.\n";
     public final int startIndex;

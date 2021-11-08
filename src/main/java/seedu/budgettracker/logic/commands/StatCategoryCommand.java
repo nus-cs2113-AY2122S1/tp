@@ -7,7 +7,8 @@ import seedu.budgettracker.ui.TextUi;
 public class StatCategoryCommand extends StatCommand {
     int month;
 
-
+    public static final String MESSAGE_USAGE = "Display the statistics for a particular month’s budget and expenditure by categories.\n"
+            + "Parameters: -c m/MONTH";
 
     public StatCategoryCommand(int month) {
         this.month = month;
@@ -18,12 +19,13 @@ public class StatCategoryCommand extends StatCommand {
         double[] categoryPercentage;
         categoryPercentage = new double[numberOfCategories];
         double monthSpending = allRecordList.getTotalAmountSpent(month);
+        double monthBudget = allRecordList.getBudget(month).getAmount();
 
         getCategoryPercentage(categoryPercentage, monthSpending);
         String topCategory = getTopCategory();
         double topCategorySpending = getTopCategorySpending();
 
-        TextUi.displayStats(categoryPercentage, topCategory, topCategorySpending);
+        TextUi.displayStats(month, categoryPercentage, monthBudget, topCategory, topCategorySpending);
     }
 
     private void getCategoryPercentage(double[] barPercentage, double monthSpending) {

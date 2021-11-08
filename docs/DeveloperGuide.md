@@ -1,5 +1,9 @@
 # Developer Guide
 
+Budget Tracker is a desktop app for managing expenses, budget and loans, optimized for use via a Command Line Interface (CLI)
+for tech-savvy students who have trouble keeping track of their expenses.
+
+
 ## Table of Content
 * [Acknowledgements](#acknowledgements)
 * [Getting started](#getting-started)
@@ -60,7 +64,10 @@ Right click on BudgetTracker then click on run to test our our BudgetTracker App
 
 ![Intellij Run BudgetTracker](images/BudgetTrackerRun.png)
 
-### Additional Consideration
+### Additional Considerations
+
+_________________________________________________________
+<br />
 
 ## <a id="design"></a> Design 
 
@@ -95,6 +102,8 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 ![Figure_Architecture_Sequence_Diagram](images/ArchitectureSequenceDiagram.png)
 
+<br />
+
 ### <a id="ui-component"></a> UI Component
 **API**: [`ui.java`](https://github.com/AY2122S1-CS2113T-F11-2/tp/tree/master/src/main/java/seedu/budgettracker/ui)
 
@@ -104,6 +113,8 @@ The `Ui` component:
 - Reads in user input from the Command Line Interface (CLI).
 - Prints welcome screen, database information and messages prompting the user for input.
 - Other components call methods in Ui class to print corresponding output on the terminal.
+
+<br />
 
 ### <a id=""></a> Data Component
 Below is a partial class diagram that shows an overview of the `Data` component.
@@ -124,6 +135,8 @@ the `RecordList`, and the `XYZ` Classes.
 
 ![Figure_DataComponent_Partial_Class_Diagram](images/DataDiagram.png)
 
+<br />
+
 ### <a id=""></a> Logic Component (Parser and Commands)
 ![Figure_ParserDiagram](images/ParserDiagram.png)
 Figure 3. Structure of the program's logic
@@ -134,8 +147,13 @@ Figure 3. Structure of the program's logic
 4. Additionally, during execution of `XYZCommand`, `Ui` (not shown) will display helpful messages to the user.
 
 Given below is the Sequence Diagram for interactions with the Parser and Command components for the `parseCommand("add -b a/400")` call.
+
+<br />
+
 ![Figure_LogicSequenceDiagram](images/LogicSequenceDiagram.png)
 Figure 4. Sequence Diagram of program's logic with a `add -b a/400` call.
+
+<br />
 
 ### <a id=""></a> Storage Component (Loading and Storing Data)
 
@@ -143,7 +161,7 @@ The Storage component consists of:
 
 The `Storage` component:
 
-1) What it does?
+1) #### What it does?
 - During the first launch of the app, it creates a new current year database text file if there isn't any. 
 It will load any existing data from the database text file into the app. 
 - Allows user to change the database to the year he wants. 
@@ -151,7 +169,7 @@ It will load any existing data from the database text file into the app.
 - Upon performing any commands that will change records in the database, such as `add`, `edit`, or `delete`,
 Storage will reload the data in the app into the database text file. 
 
-2) Architecture of the Storage component
+2) #### Architecture of the Storage component
 
 ![Storage Sequence Diagram](images/StorageBasicaArchitecture.png)
 
@@ -171,7 +189,7 @@ file to the new state of the data in the App.
 - Then the loop will continue. For commands that will not change the data in the app such as `list`, `find`...
 The reloadArrayToStorage() method will not be called. 
 
-3) Class Diagram of the Storage component
+3) #### Class Diagram of the Storage component
 
 ![Storage Sequence Diagram](images/Storage-Class_Diagram.png)
 
@@ -181,7 +199,12 @@ The reloadArrayToStorage() method will not be called.
 - There is BudgetTracker consist of Storage, Command and Parser. Storage consist of ReadTextFile and Command
 consist of WriteToTextFile. 
 
+------------------------------------------------------
+<br />
+
 ## <a id="implementation"></a> Implementation
+
+<br />
 
 ### Add Feature
 The add mechanism allows the user to add records into the Budget Tracker and is needed in order for basic functionality. 
@@ -198,11 +221,15 @@ and _AddLoanCommand#execute()_ respectively.
 
 Given below is an example usage scenario and how the add mechanism behaves at each step.
 
- - **Step 1.** The user launches the application for the first time. The AllRecordList will be initialized with the initial record list state.
- - **Step 2.** The user executes `add ...`  to add a new record into the record list. The full command is passed into _Parser#parseCommand()_,
-which parses the user input and identifies the type of record to be added based on the first prefix after add.  
- - **Step 3.** Based on the type of record to be added, _Parser#parseCommand()_ returns an instance of _AddBudgetCommand,  AddExpenditureCommand_
+**Step 1.** The user launches the application for the first time. The AllRecordList will be initialized with the initial record list state.
+
+**Step 2.** The user executes `add ...`  to add a new record into the record list. The full command is passed into _Parser#parseCommand()_,
+which parses the user input and identifies the type of record to be added based on the first prefix after add.
+
+**Step 3.** Based on the type of record to be added, _Parser#parseCommand()_ returns an instance of _AddBudgetCommand,  AddExpenditureCommand_
 or  _AddLoanCommand_ back to the main function. The _execute()_ function of the instance will then be called to add the record into the initialized AllRecordList.
+
+<br />
 
 ### <a id="delete-feature"></a> Delete feature
 
@@ -228,21 +255,29 @@ Given below is an example usage scenario and how the delete feature behaves at e
 <br/>
 
 **Step 1**. The user launches the application for the first time.
-<br/> **Step 2**. The user adds a budget and some expenditures to the current month.
-<br/> **Step 3**. The user finds that the budget is a bit insufficient, thus the user wants to delete some expenditures.
-<br/> **Step 4**. After consideration, the user decides to delete expenditure 3-5, so he keys ```delete -e m/10 i/3-5``` for Parser class to parse:
-* ```parseCommand(String userInput)``` specifies the user input as a delete command, then calls the method ```prepareDeleteCommand(String commandParams)``` inside the class.
-* By using substring method, description, indexes, and month of the expenditures are extracted in ```deleteParams```, ```prepareDeleteCommand(commandParams)``` calls ```DeleteExpenditureParser.parse(deleteParams)``` to parse the params more specifically.
-* Method ```parse(String args)``` in class ```DeleteExpenditureParser``` returns newly created object ```DeleteMultipleExpenditureCommand(startIndex, endIndex, month)```.
-<br/>
+
+**Step 2**. The user adds a budget and some expenditures to the current month.
+
+**Step 3**. The user finds that the budget is a bit insufficient, thus the user wants to delete some expenditures.
+
+**Step 4**. After consideration, the user decides to delete expenditure 3-5, so he keys ```delete -e m/10 i/3-5``` for Parser class to parse:
+ * ```parseCommand(String userInput)``` specifies the user input as a delete command, then calls the method ```prepareDeleteCommand(String commandParams)``` inside the class.
+ * By using substring method, description, indexes, and month of the expenditures are extracted in ```deleteParams```, ```prepareDeleteCommand(commandParams)``` calls ```DeleteExpenditureParser.parse(deleteParams)``` to parse the params more specifically.
+ * Method ```parse(String args)``` in class ```DeleteExpenditureParser``` returns newly created object ```DeleteMultipleExpenditureCommand(startIndex, endIndex, month)```.
+
+<br />
+
   ![Figure Delete_Parse](images/DeleteDiagram2.png)
 
 **Step 5**. The newly created object ```DeleteExpenditureCommand``` will execute the deletion:
 * ```execute(boolean isLoadinStorage)``` runs a for loop to delete the related expenditures in the expenditure ArrayList.
 * ```for(int i = startIndex; i <= endIndex; i++)``` iterates the 3 expenditures, everytime it just calls ```allRecordList.deleteExpenditure(startIndex, month)``` to delete each expenditure.
-<br/>
+
+<br />
+
   ![Figure Delete_Execute](images/DeleteDiagram1.png)
 
+<br />
 
 ### <a id=""></a> Edit feature
 
@@ -262,13 +297,17 @@ Given below is an example usage scenario and how the ```edit``` mechanism behave
 <br/>
 
 **Step 1**. The user launches the application for the first time. The ```AllRecordList``` will be initialized with the initial record list state.
-<br/> **Step 2**. The user executes add …  to ```add``` a new record into the record list. The add command also calls Storage#saveToStorage(), causing a modified record list state to be saved into the storage file.
-<br/> **Step 3**. The user now realises that there was a mistake in the record added, and decides to edit the record by executing the ```edit``` command. The edit command will call ```AllRecordList#edit…``` based on the record type.
 
+**Step 2**. The user executes add …  to ```add``` a new record into the record list. The add command also calls Storage#saveToStorage(), causing a modified record list state to be saved into the storage file.
 
-### <a id=""></a> Listing
+**Step 3**. The user now realises that there was a mistake in the record added, and decides to edit the record by executing the ```edit``` command. The edit command will call ```AllRecordList#edit…``` based on the record type.
 
-The list feature works with Parser, Recordlist and TextUi, and allows users to see the listing of the budget and expenditures in either a specific month or every month.
+<br />
+
+### <a id=""></a> List Feature
+
+The list feature works with `Parser`, `Recordlist` and `TextUi`, and allows users to see the listing of the budget and expenditures in either a specific month 
+or the entire year.
 
 When user keys ```list m/Month [c/CATEGORY]```, The Parser class will analyse the whole command, extract "m/", "MONTH", "c/" and "CATEGORY", analyse whether MONTH is an integer or “all”, and check whether CATEGORY has been assigned. The boolean isListAll will be assigned as true if the value after “m/” is “all”. Then the class ListRecordsCommand will execute the listing by using TextUi.showRecordsListView(recordList, MONTH, isListAll)).
 
@@ -279,15 +318,20 @@ Similarly, we have our Parser to parse the commands for listing of expenditures
 Given below is an example usage scenario and how the list feature behaves at each step.
 
 **Step 1**. The user launches the application for the first time.
-<br/> **Step 2**. The user adds a budget and some expenditures to the current month.
-<br/> **Step 3**. The user forgets what the budget and expenditures added, thus the user wants to see the budget and the list of the expenditures.
-<br/> **Step 4**. After consideration, the user decides to see the budget and list of May, so he keys ```list m/5```
-<br/> **Step 5**. The Parser starts to parse the command, it extracts month 5. As this is a specific month to be listed, the Parser class calls ListRecordsCommand to work. By finding May, the expenditures list and budget of May are successfully found and prints out a showRecordsListView from TextUi class.
 
+**Step 2**. The user adds a budget and some expenditures to the current month.
+
+**Step 3**. The user forgets what the budget and expenditures added, thus the user wants to see the budget and the list of the expenditures.
+
+**Step 4**. After consideration, the user decides to see the budget and list of May, so he keys ```list m/5```
+
+**Step 5**. The Parser starts to parse the command, it extracts month 5. As this is a specific month to be listed, the Parser class calls ListRecordsCommand to work. By finding May, the expenditures list and budget of May are successfully found and prints out a showRecordsListView from TextUi class.
+
+<br />
 
 ### <a id=""></a> Storage 
 
-1) How are the data stored?
+1) #### How is the data stored?
 
 The storage stores the exact `add` command of budget, expenditures and loan into the text 
 file containing in the current AllRecordList. Everytime a deleted, edit or add command is called, 
@@ -296,40 +340,42 @@ at every step.
 
 ![dataSample](images/dataSample.png)
 
-2) Why are the data stored in such a manner?
+2) #### Why is the data stored in such a manner?
 
 The reason it is implemented in this manner is so that we could reuse
 code that have been written for adding of budget and expenditures directly when loading from storage.
 
-This implementation makes Storage very versitile even when there are substantiate changes in 
-the architecture of our app. Some examples are the changes to Parser, Logic and Commands. 
-Even with these stated changes, the Storage needs very little tweaks to the Storage for it 
-to work with the new implementation. The reasonis that Storage uses the code used in Parser to 
-load the data into the app. For the saving of data, only the reloading method needs to be 
-editted to adhere to the new changes such that the adding command stored is ofthe correct format.
+This implementation makes `Storage` very versatile even when there are substantial changes in 
+the architecture of our app. Some examples are the changes to `Parser` and `Commands`. 
+Even with changes to these classes, `Storage` needs very little tweaks for it 
+to work with the new implementation. 
+
+The reason is that `Storage` uses the code in `Parser` to load the data into the app. 
+For the saving of data, only the reloading method needs to be edited to adhere to the 
+new changes such that the add command stored is of the correct format.
 
 The way the database is organized is that each yearly Records is stored in the form of 
-<year>.txt. Each year contains all the monthly budget as well as all the expenditure and 
+_[YYYY].txt_. Each year contains all the monthly budget as well as all the expenditure and 
 loan tied to that month. 
 
-3) How does some of the key method work?
+3) #### How do some key methods work?
 
 `readTextFileToString()`
 
 ![readTextFileToString Sequence Diagram](images/readTextFileToString.png)
 
 This method reads the list of command in the data text file converts them into 
-a ArrayList of String. readTextFileToString() method will first create a new ArrayList 
+a ArrayList of String. _readTextFileToString()_ method will first create a new ArrayList 
 which will later be used to store all the commands in the data text file into 1 Strings 
 per command. A BufferReader object is then created to read the data text file in the 
 specified directory. The BufferReader object will read the content of the data text file 
 line by line or command by command (since each command is separated by a "\n" character).
 
-The BufferReader continues reading until the end of the data text-file and then return the 
+The BufferReader continues reading until the end of the data text-file and then returns the 
 filled ArrayList of String. 
 
-This ArrayList of String will later be passed into the Parser which will load all the 
-command and thus load data into the App.
+This ArrayList of String will later be passed into the `Logic` component which will parse and execute all the 
+commands, thus loading data into the App.
 
 `reloadArrayToStorage() & convertToCsvFile()`
 
@@ -337,42 +383,42 @@ command and thus load data into the App.
 
 ![convertToCsvFile Sequence Diagram](images/convertToCsvFile.png)
 
-When reloadArrayToStorage() method is called, it creates a new File object into the specified directory
-(file directory to reload data files). The isFile() of the File Class is called to check if the data file
+When _reloadArrayToStorage()_ method is called, it creates a new File object into the specified directory
+(file directory to reload data files). The _isFile()_ method of the File Class is called to check if the data file
 exist. If it doesn't, a error message will be shown to the user and the method terminates. Otherwiese, it 
 continues to create a new FileWrite object which will clear the existing data text file first. The FileWrite 
 object will then be passed into the new PrintWriter object that will be created. 
 
-Then a for loop is used to loop through the 12 months of the RecordList to obtain the amount for each
-month and convert it into a command such as "add -b a/1000.00 m/10". Each of these command will be "flush" into 
+Next, a for loop is used to loop through the 12 months of the RecordList to obtain the amount for each
+month and convert it into a command such as `add -b a/1000.00 m/10`. Each of these command will be "flush" into 
 the text file with 1 line per command. 
 
-2 inner for loop is also used to loop through all the expenditure and loan of a particular month respectively and 
-convert them into their respective add commands. For example, "add -e n/Chicken Rice a/100.0 d/2021-10-10 c/FOOD" and 
-"add -l n/Benjamin a/1000.00 d/2021-10-27".
+2 inner for loops are used to loop through all the expenditure and loan of a particular month respectively and 
+convert them into their respective add commands. For example, `add -e n/Chicken Rice a/100.0 d/2021-10-10 c/FOOD` or 
+`add -l n/Benjamin a/1000.00 d/2021-10-27`.
 
-Both reloadArrayToStorage() and convertToCsvFile() method are similar in the way they read 
+Both _reloadArrayToStorage()_ and _convertToCsvFile()_ methods are similar in the way they read 
 data from the App and save it into the data files. The only difference is on the type of file they
-save into. reloadArrayToStorage() save into ".txt" type files while convertToCsvFile() save into 
-".csv" type files. 
+save into. _reloadArrayToStorage()_ saves into _".txt"_ type files while _convertToCsvFile()_ saves into 
+_".csv"_ type files. 
 
-4) Why does `edit` and `delete` command work with reloadArrayToStorage() method? 
+4) #### Why does `edit` and `delete` command work with reloadArrayToStorage() method? 
 
 `edit` command can change the attribute of budget, expenditure and loan such as description, amount... 
 Reloading the data text files after the `edit` will just update the `add` command attribute's value to their
-attribute's value after the edit. That is the reason why it reloadArrayToStorage() can still work. 
+attribute's value after the edit. That is the reason why it _reloadArrayToStorage()_ can still work. 
 
 `delete` command on the other hand just removes a particular budget, expenditure or loan entry. Thus
 reloading the data text files after the `delete` command will just remove a particular `add` line 
 of command from the data text file. 
 
-5) How switching database work?
+5) #### How does switching database work?
 
 When the `year <SELECTED DATABASE YEAR>` command is called eg. `year 2020`, the Parser will 
-call the YearCommand and it will run the method "execute()". "execute()" first clears the 
-allRecordList by calling clearAll() from the AllRecordList class. And setYear(2020) method 
-is called from AllRecordList Class to set the year to 2020. Then the loadStorage method of Storage 
-Class will be called to load the datafile "2020.txt" into the app.  
+call the YearCommand, and it will run the _execute()_ method. _execute()_ first clears the 
+allRecordList by calling _clearAll()_ from the AllRecordList class followed by _setYear(2020)_ method 
+to set the year to 2020. Then. the _loadStorage()_ method of Storage Class will be called to load 
+the datafile _"2020.txt"_ into the app.  
 
 ## <a id=""></a> List of Commands
 

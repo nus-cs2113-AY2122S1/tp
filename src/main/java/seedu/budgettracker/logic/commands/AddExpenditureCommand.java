@@ -19,8 +19,6 @@ public class AddExpenditureCommand extends AddCommand {
 
     public static final boolean IS_NOT_LOADING_STORAGE = false;
 
-    private static final DecimalFormat df = new DecimalFormat("0.00");
-
     private final String description;
     private final double spending;
     private final LocalDate date;

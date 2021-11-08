@@ -4,7 +4,7 @@ import seedu.budgettracker.ui.TextUi;
 
 public class DeleteAllLoanCommand extends DeleteCommand {
 
-    public static final String MESSAGE_USAGE = "Delete all loan record.\n"
+    public static final String MESSAGE_USAGE = "Delete all loan records.\n"
             + "Parameters: -l m/MONTH\n";
     public final int month;
 
