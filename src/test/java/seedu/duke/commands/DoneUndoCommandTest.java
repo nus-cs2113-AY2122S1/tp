@@ -39,7 +39,7 @@ public class DoneUndoCommandTest {
     @Test
     void doneCommand_twoEventTest() throws DukeException, NoCommandAttributesException,
             InvalidItemTypeException {
-        Command command = Parser.parseCommand("done -e 1, 2");
+        Command command = Parser.parseCommand("done -e 1 2");
         System.out.print(command.execute().feedbackToUser);
         String expectedOutput = "Nice! I have marked these items as done: \n"
                 + "[E][X] Funfair (at: 20 Feb 2022 - 20:30)\n"
@@ -54,7 +54,7 @@ public class DoneUndoCommandTest {
     void doneCommand_twoTaskTest() throws DukeException, NoCommandAttributesException,
             InvalidItemTypeException {
         Parser.updateIndexOfLastSelectedEvent(0);
-        Command command = Parser.parseCommand("done -t 1, 2");
+        Command command = Parser.parseCommand("done -t 1 2");
         System.out.print(command.execute().feedbackToUser);
         String expectedOutput = "Nice! I have marked these items as done: \n"
                 + "[T][X] Collect Tickets (by: 19 Feb 2022 - 19:30)\n"
@@ -68,7 +68,7 @@ public class DoneUndoCommandTest {
     @Test
     void undoCommand_twoEventTest() throws DukeException, NoCommandAttributesException,
             InvalidItemTypeException {
-        Command command = Parser.parseCommand("undo -e 1, 2");
+        Command command = Parser.parseCommand("undo -e 1 2");
         System.out.print(command.execute().feedbackToUser);
         String expectedOutput = "Okay, I have unmarked these items: \n"
                 + "[E][ ] Peppa Pig's Concert (at: 19 Feb 2022 - 20:00)\n"
@@ -82,7 +82,7 @@ public class DoneUndoCommandTest {
     @Test
     void undoCommand_twoTaskTest() throws DukeException, NoCommandAttributesException, InvalidItemTypeException {
         Parser.updateIndexOfLastSelectedEvent(0);
-        Command command = Parser.parseCommand("undo -t 1, 2");
+        Command command = Parser.parseCommand("undo -t 1 2");
         System.out.print(command.execute().feedbackToUser);
         String expectedOutput = "Okay, I have unmarked these items: \n"
                 + "[T][ ] Buy Boost (by: 18 Feb 2022 - 19:30)\n"

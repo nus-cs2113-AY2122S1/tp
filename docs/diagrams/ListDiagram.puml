@@ -1,27 +1,67 @@
 @startuml
-title ListCommand
+!include style.puml
 
-participant ":Duke" as Duke
+box DUKE_COLOR
+Participant ":Duke" as Duke
+end box
+box UI_COLOR
+Participant ":Ui" as Ui
+end box
+box BLUE_COLOR
+Participant ":Parser" as Parser
+Participant ":ListParser" as ListParser
+end box
+box LOGIC_COLOR
+Participant ":ListCommand" as ListCommand
+end box
+
 activate Duke
 
-create ":Parser" as Parser
-Duke -> Parser
-activate Parser #yellow
+Duke -> Parser : list command
+activate Parser
 
-create ":ListCommand" as ListCommand
-Parser -> ListCommand: ListCommand(command)
-activate ListCommand #lightblue
-ListCommand -> ListCommand: checkForEmptyCells(command)
-activate ListCommand #lightgreen
-return
-return
-return
 
-Duke -> ListCommand
-activate ListCommand #lightblue
-ListCommand -> ListCommand: execute()
-activate ListCommand #lightgreen
+Parser -> ListParser: command
+activate ListParser
+ListParser -> ListCommand : ListCommand(listType)
+activate ListCommand
+|||
 return
+return
+return
+destroy Parser
+
+Duke -> ListCommand : execute()
+activate ListCommand
+opt listType = event
+  ListCommand -> Ui: listingOverallSchedule()
+  activate Ui
+  |||
+  Ui -> Duke
+  deactivate Ui
+end
+opt listType = task
+  ListCommand -> Ui: listingTaskDetails()
+  activate Ui
+  |||
+  Ui -> Duke
+  deactivate Ui
+end
+opt listType = member
+  ListCommand -> Ui: listingMemberDetails()
+  activate Ui
+  |||
+  Ui -> Duke
+  deactivate Ui
+end
+opt listType = memberRoster
+  ListCommand -> Ui: listingMemberRoster()
+  activate Ui
+  |||
+  Ui -> Duke
+  deactivate Ui
+end
+
 ListCommand --> Duke : CommandResult
 deactivate
 
