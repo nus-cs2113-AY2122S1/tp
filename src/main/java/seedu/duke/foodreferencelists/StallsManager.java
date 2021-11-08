@@ -27,7 +27,7 @@ public class StallsManager {
     public static HashMap<Integer, String[]> idData = new HashMap<>();
     public static ArrayList<String[]> compoundedItemsList = new ArrayList<>();
 
-    public static int MAX_STORE_INDEX = 11;
+    public static final int MAX_STORE_INDEX = 11;
 
     //for easier indexing and searching
     public StallsManager() {
@@ -155,7 +155,8 @@ public class StallsManager {
         }
         sortListByCalorieCount(filterLowerThanCalories);
         sortListByName(filterLowerThanCalories);
-        Ui.printMessage("I've found the following items with " + calories + " calories!");
+        Ui.printMessage("I've found the following items with less than or equal to, "
+            + calories + " calories!");
         filterLowerThanCalories.printList(false);
         Ui.printMessage("done printing!");
         Ui.printLine();

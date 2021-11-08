@@ -5,9 +5,9 @@ Actor User
 User -> ":Click" : run
 activate ":Click"
 User -> ":Click" : input
-":Click" -> ":Ui" : printGreeting
+":Click" -> ":Ui" : printGreeting()
 activate ":Ui"
-":Ui" -> ":Ui" : printMessage
+":Ui" -> ":Ui" : printMessage()
 activate ":Ui"
 ":Ui" --> ":Ui"
 deactivate ":Ui"
@@ -15,25 +15,33 @@ deactivate ":Ui"
 deactivate ":Ui"
 ":Click" -> ":Parser" : parse command
 activate ":Parser"
-":Parser" -> ":Parser" : splitCommandAndArgs
+":Parser" -> ":Parser" : splitCommandAndArgs()
+activate ":Parser"
+":Parser" --> ":Parser"
+deactivate ":Parser"
 
 alt command is valid
     create ":Command"
-    ":Click" -> ":Command"
+    ":Parser" -> ":Command"
     activate ":Command"
-    ":Click" -> ":Command" : execute
+    return
+    ":Click" -> ":Command" : execute command
+    activate ":Command"
+    ":Command" -> ":Command" : execute()
+    ":Command" --> ":Command"
+    deactivate ":Command"
     ":Command" --> ":Click"
     deactivate ":Command"
     destroy ":Command"
 
 else command is invalid
     alt Duke exception
-        ":Click" -> ":ExceptionHandler" : handleDukeExceptions
+        ":Click" -> ":ExceptionHandler" : handleDukeExceptions()
         activate ":ExceptionHandler"
         ":ExceptionHandler" --> ":Click"
         deactivate ":ExceptionHandler"
-    else Not Duke exception:
-        ":Click" -> ":ExceptionHandler" : handleOtherExceptions
+    else else
+        ":Click" -> ":ExceptionHandler" : handleOtherExceptions()
         activate ":ExceptionHandler"
         ":ExceptionHandler" --> ":Click"
         deactivate ":ExceptionHandler"
