@@ -73,6 +73,14 @@ public class TextUi {
                 + DIVIDER);
     }
 
+    public static void csvStatus() {
+        System.out.println("Your csv file have been successfully created in the data folder!");
+        System.out.print(LS);
+        System.out.println("Please have a look!");
+
+        System.out.println(DIVIDER);
+    }
+
     public static void showLoanReminder(int index, Loan dueLoan) {
         if (index == 1) {
             System.out.println("Loan Reminder:");
