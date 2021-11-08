@@ -15,7 +15,6 @@ Welcome to **SLAM**! **SLAM** is a desktop application for student group leaders
    1. [List Functionality](#List Functionality)
    2. [Next Functionality](#Next Functionality)
    3. [Update Functionality](#Update Functionality)
-   4. [Delete Functionality](#Delete Functionality)
    5. [Select Functionality](#Select Functionality)
 5. [Product Scope](#Product scope)
    1. [Target user profile](#Target user profile)
@@ -218,27 +217,16 @@ How Updating works:
 6. `Duke` then calls the `execute`  method in the respective `UpdateCommand` where the updates will be implemented
 8. Once all the updates are completed, `UpdateCommand` will return a `postUpdateMessage()` along with `CommandResult` object to show the User the result of the Updates
 
-#### Delete Functionality
-How deleting works:
-
-1. When the `Parser` class parses `delete` as the command from the user, a new `Command` object, `DeleteCommand` is created.
-2. The `DeleteCommand` constructor processes the entire input from the user by calling `prepareInputs`.
-3. `DeleteCommand` has 3 uses: deleting an `Event`, a `Task`, or to delete all `Event`s through the command `delete all`.
-4. The constructor processes the usage for `DeleteCommand` and executes the actual deletion through `execute` which returns a `CommandResult` object with the associated deletion message from the `Ui` class.
-5. `delete all` will not immediately invoke the `clear()` method on the global `eventCatalog` ArrayList and will instead prompt a confirmation from the user before deleting all `Event`s.
 
 #### Select Functionality
 
-![](images/SelectDiagramold.png)
+![](images/SelectDiagram.png)
 
-How selecting an `Event` or an event's nested `Task` works:
-1. When the `Parser` class parses `select` as the command from the user, a new `Command` object, `SelectCommand` is created.
-2. If the command contains a valid flag (`-e` or `-t`), `SelectCommand` processes the input from the user by calling `prepareInputs`.
-3. If the user selects an `Event`, `SelectCommand` updates the index of this `Event` in `Parser`.
-4. `SelectCommand` then passes the processed inputs back to `Parser`, which passes it back to `Duke`.
-5. `Duke` then calls the `execute` method in `SelectCommand` which will return an object of type `CommandResult`, and the respective output will be printed.
-
-
+How Selecting works:
+1. When the `Parser` class parses `select` as the command from the user via `parseCommand`, it will call `getSelectCommand` from `SelectParser`.
+2. `SelectParser` then determines what type of `Item` is to be selected, namely either `Event`, `Task`, or `Member`.
+3. Based on the type of `Item`, `SelectParser` determines the index of the `Item` to be chosen, and returns a new `SelectCommand` with the `Item` type and index.
+4. `SelectCommand` then calls on `execute` with the `Item` type and index and displays the details of that `Event`, `Task`, or `Member`.
 
 ## Product scope
 ### Target user profile

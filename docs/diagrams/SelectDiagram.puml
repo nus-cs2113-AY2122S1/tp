@@ -11,9 +11,10 @@ end box
 
 
 activate Duke
-Duke -> Parser
+-> Duke: runSlam
+Duke -> Parser:parseCommand
 activate Parser
-Parser -> SelectParser
+Parser -> SelectParser:getSelectCommand
 activate SelectParser
 
 box LOGIC_COLOR
@@ -27,15 +28,14 @@ return
 return
 return
 
-Duke -> SelectCommand: execute()
+Duke -> SelectCommand: execute
+note left
+Item to select is
+either an Event,
+Task or Member
+end note
 activate SelectCommand
-    opt ItemType == EVENT
+return CommandResult
 
-    end
-
-    opt ItemType == TASK
-
-    end
-return :CommandResult
 
 @enduml
