@@ -10,3 +10,6 @@ Useful links:
 * [User Guide](UserGuide.md)
 * [Developer Guide](DeveloperGuide.md)
 * [About Us](AboutUs.md)
+  * [Teo Chuan Kai](team/exetr.md)
+  * [Dyah Ayu Nurun Nafisah](team/dyahnafisah.md)
+  * [Wong Zi Xin, Avellin](team/avellinwong01.md)

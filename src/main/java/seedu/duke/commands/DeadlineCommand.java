@@ -18,6 +18,7 @@ import static seedu.duke.common.Messages.LIST_DEADLINE_DATE;
 import static seedu.duke.common.Messages.LIST_DEADLINE_OVERDUE;
 import static seedu.duke.common.Messages.LIST_DEADLINE_TODAY;
 
+//@@author dyahnafisah
 /**
  * Command that lists out the items according to their return deadlines.
  */
@@ -30,7 +31,9 @@ public class DeadlineCommand extends Command {
     public String input = "";
 
     /**
-     * Single constructor, no parameters.
+     * Single constructor.
+     *
+     * @param input Input given by the user
      */
     public DeadlineCommand(String input) {
         this.input = input.strip();

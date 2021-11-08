@@ -2,136 +2,81 @@
 'https://plantuml.com/sequence-diagram
 
 participant ":Libmgr" as Libmgr
+participant ":Parser" as Parser
 participant ":EditCommand" as EditCommand
 participant ":Catalogue" as Catalogue
+participant ":EditBookCommand" as EditBookCommand
 participant ":Book" as Book
-participant ":Audio" as Audio
-participant ":Magazine" as Magazine
-participant ":Video" as Video
 
+hide footbox
 
 activate Libmgr
+create Book
+create Parser
+Libmgr -> Parser: parse("edit 123 t/Harry Potter")
+activate Parser
+Parser -> Parser: extractArgs("edit 123 t/Harry Potter")
+activate Parser
+Parser --> Parser: args: HashMap<String, String>
+deactivate Parser
 create EditCommand
+Parser -> EditCommand: EditCommand(args: HashMap<String, String>)
+activate EditCommand
+EditCommand --> Parser: EditCommand
+deactivate EditCommand
+Parser --> Libmgr: EditCommand
+deactivate Parser
+
 Libmgr -> EditCommand: execute(ui: TextUI, catalogue: Catalogue)
 activate EditCommand
 EditCommand -> EditCommand: handlesEditCommand(ui: TextUI, catalogue: Catalogue)
 activate EditCommand
-EditCommand -> Catalogue: getItem(argList2[0]: String)
+EditCommand -> EditCommand: processArgs(catalogue: Catalogue)
+activate EditCommand
+create Catalogue
+EditCommand -> Catalogue: getItem(id: String)
 activate Catalogue
 Catalogue --> EditCommand: toEdit: Item
 deactivate Catalogue
+EditCommand --> EditCommand
+deactivate EditCommand
+create EditBookCommand
+EditCommand -> EditBookCommand: EditBookCommand(args: HashMap<String, String>, toEdit: Item)
+activate EditBookCommand
+EditBookCommand -> EditBookCommand: execute(ui: TextUI, catalogue: Catalogue)
+activate EditBookCommand
+EditBookCommand -> EditBookCommand: handlesEditBookCommand(ui: TextUI, catalogue: Catalogue)
+activate EditBookCommand
+EditBookCommand -> EditBookCommand: processArgs()
+activate EditBookCommand
+EditBookCommand --> EditBookCommand
+deactivate EditBookCommand
+EditBookCommand -> EditBookCommand: checkMissingArgs()
+activate EditBookCommand
+EditBookCommand --> EditBookCommand: hasMissingArgs: boolean
+deactivate EditBookCommand
+EditBookCommand -> EditBookCommand: checkEmptyArgs()
+activate EditBookCommand
+EditBookCommand --> EditBookCommand: hasEmptyArgs: boolean
+deactivate EditBookCommand
+EditBookCommand -> EditBookCommand: checkInvalidArgs()
+activate EditBookCommand
+EditBookCommand --> EditBookCommand: hasInvalidArgs: boolean
+deactivate EditBookCommand
 
-alt toEdit instanceof Book
-    EditCommand -> EditCommand: handlesEditBookCommand(newAttributeMarker: String, newAttribute: String, toEdit: Item)
-    activate EditCommand
+EditBookCommand -> Book: setTitle(title: String)
+activate Book
+Book --> EditBookCommand
+deactivate Book
 
-    alt newAttributeMarker.equals("t")
-        EditCommand -> Book: setTitle(newAttribute: String)
-        activate Book
-        Book --> EditCommand
-        deactivate Book
-    else newAttributeMarker.equals("i")
-        EditCommand -> Book: setID(newAttribute: String)
-        activate Book
-        Book --> EditCommand
-        deactivate Book
-    else newAttributeMarker.equals("a")
-        EditCommand -> Book: setAuthor(newAttribute: String)
-        activate Book
-        Book --> EditCommand
-        deactivate Book
-    end
+EditBookCommand --> EditBookCommand
+deactivate EditBookCommand
 
-    EditCommand --> EditCommand
-    deactivate EditCommand
+EditBookCommand --> EditBookCommand
+deactivate EditBookCommand
 
-else toEdit instanceof Audio
-    EditCommand -> EditCommand: handlesEditAudioCommand(newAttributeMarker: String, newAttribute: String, toEdit: Item)
-    activate EditCommand
-
-    alt newAttributeMarker.equals("t")
-        EditCommand -> Audio: setTitle(newAttribute: String)
-        activate Audio
-        Audio --> EditCommand
-        deactivate Audio
-    else newAttributeMarker.equals("i")
-        EditCommand -> Audio: setID(newAttribute: String)
-        activate Audio
-        Audio --> EditCommand
-        deactivate Audio
-    else newAttributeMarker.equals("a")
-        EditCommand -> Audio: setArtist(newAttribute: String)
-        activate Audio
-        Audio --> EditCommand
-        deactivate Audio
-    else newAttributeMarker.equals("d")
-        EditCommand -> Audio: setDuration(newAttribute: String)
-        activate Audio
-        Audio --> EditCommand
-        deactivate Audio
-    end
-
-    EditCommand --> EditCommand
-    deactivate EditCommand
-
-else toEdit instanceof Magazine
-    EditCommand -> EditCommand: handlesEditMagazineCommand(newAttributeMarker: String, newAttribute: String, toEdit: Item)
-    activate EditCommand
-
-    alt newAttributeMarker.equals("t")
-        EditCommand -> Magazine: setTitle(newAttribute: String)
-        activate Magazine
-        Magazine --> EditCommand
-        deactivate Magazine
-    else newAttributeMarker.equals("i")
-        EditCommand -> Magazine: setID(newAttribute: String)
-        activate Magazine
-        Magazine --> EditCommand
-        deactivate Magazine
-    else newAttributeMarker.equals("p")
-        EditCommand -> Magazine: setPublisher(newAttribute: String)
-        activate Magazine
-        Magazine --> EditCommand
-        deactivate Magazine
-    else newAttributeMarker.equals("e")
-        EditCommand -> Magazine: setEdition(newAttribute: String)
-        activate Magazine
-        Magazine --> EditCommand
-        deactivate Magazine
-    end
-
-    EditCommand --> EditCommand
-    deactivate EditCommand
-
-else toEdit instanceof Video
-    EditCommand -> EditCommand: handlesEditVideoCommand(newAttributeMarker: String, newAttribute: String, toEdit: Item)
-    activate EditCommand
-
-    alt newAttributeMarker.equals("t")
-        EditCommand -> Video: setTitle(newAttribute: String)
-        activate Video
-        Video --> EditCommand
-        deactivate Video
-    else newAttributeMarker.equals("i")
-        EditCommand -> Video: setID(newAttribute: String)
-        activate Video
-        Video --> EditCommand
-        deactivate Video
-    else newAttributeMarker.equals("p")
-        EditCommand -> Video: setPublisher(newAttribute: String)
-        activate Video
-        Video --> EditCommand
-        deactivate Video
-    else newAttributeMarker.equals("d")
-        EditCommand -> Video: setDuration(newAttribute: String)
-        activate Video
-        Video --> EditCommand
-        deactivate Video
-    end
-
-    EditCommand --> EditCommand
-    deactivate EditCommand
-end
+EditBookCommand --> EditCommand
+deactivate EditBookCommand
 
 EditCommand --> EditCommand
 deactivate EditCommand
@@ -140,12 +85,10 @@ EditCommand --> Libmgr
 deactivate EditCommand
 
 destroy Book
-destroy Audio
-destroy Magazine
-destroy Video
 destroy EditCommand
 destroy Catalogue
-destroy EditCommand
+destroy EditBookCommand
+destroy Parser
 
 
 @enduml

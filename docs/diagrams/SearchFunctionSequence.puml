@@ -2,60 +2,70 @@
 'https://plantuml.com/sequence-diagram
 hide footbox
 
-Participant ":Libmgr" as Libmgr
+Participant ":Libmgr" as libmgr
+Participant "parser:Parser" as parser
 Participant ":SearchCommand" as searchCommand
-Participant "ui:TextUI" as ui
+Participant "[number]Match:ArrayList<Item>" as numMatch
 Participant "catalogue:Catalogue" as catalogue
-Participant "item:Item" as item
+Participant "ui:TextUI" as ui
 
-activate Libmgr
-Libmgr -> searchCommand:execute(ui, catalogue)
+-> libmgr
+activate libmgr
+
+libmgr -> parser:parse("search c/book s/loaned")
+activate parser
+parser -> parser:extractArgs("search c/book s/loaned")
+activate parser
+return args:HashMap<String, String>
+return userCommand:SearchCommand
+
+libmgr -> searchCommand:execute(ui, catalogue)
 activate searchCommand
 searchCommand -> searchCommand:handleSearchCommand(ui, catalogue)
 activate searchCommand
-searchCommand -> ui:print(SEARCH_MESSAGE)
-activate ui
+
+searchCommand -> searchCommand:checkValidArgs()
+activate searchCommand
+return true
+
+searchCommand -> searchCommand:checkAdditionnalArgs()
+activate searchCommand
+return false
+
+searchCommand -> searchCommand:checkValidStatus()
+activate searchCommand
+return true
+
+searchCommand -> searchCommand:checkValidCategory()
+activate searchCommand
+return true
+
+create numMatch
+searchCommand -> numMatch
+activate numMatch
 return
-searchCommand -> ui:print(DIVIDER)
-activate ui
-return
+
 searchCommand -> catalogue:getAllItems()
 activate catalogue
-return :ArrayList<Item>
-alt userInput starts with SEARCH_ID_COMMAND
-    loop temp:Item in :ArrayList<Item>
-        searchCommand -> item:getID()
-        activate item
-        return id:Integer
-        alt id equals to keyword from userInput
-        searchCommand -> ui:print(temp)
-        activate ui
+return : catalogue
+
+loop temp in catalogue
+    searchCommand -> searchCommand:checkMatches(temp)
+    activate searchCommand
+    return matches:Integer
+    opt matches = num
+        searchCommand -> numMatch:add(temp)
+        activate numMatch
         return
-        end
-    end
-else userInput starts with SEARCH_TITLE_COMMAND
-    loop temp:Item in :ArrayList<Item>
-        searchCommand -> item:getTitle()
-        activate item
-        return title:String
-        alt title contains keyword from userInput
-        searchCommand -> ui:print(temp)
-        activate ui
-        return
-        end
-    end
-else userInput starts with SEARCH_STATUS_COMMAND
-    loop temp:Item in :ArrayList<Item>
-        searchCommand -> item:getStatus()
-        activate item
-        return status:Status
-        alt status equals to keyword from userInput
-        searchCommand -> ui:print(temp)
-        activate ui
-        return
-        end
     end
 end
+
+loop temp in [number]Match
+    searchCommand -> ui:print(temp)
+    activate ui
+    return
+end
+
 return
 return
 destroy searchCommand

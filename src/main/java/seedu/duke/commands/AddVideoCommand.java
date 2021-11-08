@@ -45,6 +45,7 @@ public class AddVideoCommand extends Command {
         this.status = Status.AVAILABLE;
         this.publisher = args.get(KEY_PUBLISHER);
         this.duration = args.get(KEY_DURATION);
+        assert args != null : "Args hashmap is null";
     }
 
     /**
@@ -88,6 +89,7 @@ public class AddVideoCommand extends Command {
         }
         try {
             Video newVideo = new Video(title, id, status, null, null, publisher, duration);
+            assert newVideo != null : "newBook is null";
             catalogue.add(newVideo);
             ui.print(ADD_MESSAGE, newVideo);
         } catch (LibmgrException e) {

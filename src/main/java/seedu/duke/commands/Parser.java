@@ -31,7 +31,11 @@ public class Parser {
         try {
             switch (command) {
             case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
+                if (inputList.length == 1) {
+                    return new ExitCommand();
+                } else {
+                    return new UnknownCommand();
+                }
             case RemoveCommand.COMMAND_WORD:
                 return new RemoveCommand(input);
             case ListCommand.COMMAND_WORD:
@@ -75,7 +79,7 @@ public class Parser {
     public HashMap<String, String> extractArgs(String input) throws LibmgrException {
         HashMap<String, String> args = new HashMap<>();
         // Configure regex matcher
-        String splitByDelimiter = ".+?(?=\\s\\w/)|.+?$";
+        String splitByDelimiter = ".+?(?=\\s\\w+/)|.+?$";
         Pattern p = Pattern.compile(splitByDelimiter);
         Matcher m = p.matcher(input);
         // Get command word

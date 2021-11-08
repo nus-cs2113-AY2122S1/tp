@@ -17,6 +17,7 @@ done in an efficient manner.
     - [List items: `list`](#list-items)
     - [List items that are due today: `deadline today`](#list-items-that-are-due-today)
     - [List items that are overdue: `deadline overdue`](#list-items-that-are-overdue)
+    - [List items that are due on a specific date: `deadline d/dd-mm-yyyy`](#list-items-that-are-due-on-a-specific-date)
     - [Search items: `search`](#search-items)
     - [Reserve items: `res`](#reserve-items)
     - [Un-reserve items: `unres`](#unreserve-items)
@@ -244,28 +245,46 @@ List the items with a due date of `03 November 2021`
 ### Search items
 Search items by ID, Title, Status, and Category.
 
-Status must be one of "AVAILABLE", "LOANED" or "RESERVED" and it is case insensitive.
+For searching by ID, the ID given by the search input must be exactly the same as the ID in database, 
+that is, it is **case-sensitive**, and any difference in space or special characters is not allowed.
 
-Category must be one of "Audio", "Video", "Book", "Magazine".
+For searching by Status, the Status given by the search input must be one of "AVAILABLE", "LOANED" or "RESERVED".
+It is **case-insensitive**.
 
-Any items matching more than one keyword will be listed, those items matching the search criteria more closely will be listed first.
+For searching by Category, the Category given by the search input must be one of "Book"", "Audio", "Video", "Magazine", or "Misc".
+It is **case-insensitive**.
+
+For searching by Title, the Title given by the search input only needs to partially match the title stored in database.
+It is **case-insensitive** as well.
+
+Any items matching more than one keyword will be listed. 
+Items matching more searching criterea will be listed at a upper position.
+Items matching fewer searching criterea will be listed at a lower position.
 
 Format: Subset of `search i/ID t/TITLE s/STATUS c/CATEGORY`
 
 ##### Usage Example: 
 
-`search s/LOANED c/Book`
+`search s/loaned c/book`
 
-Searches the catalogue for `Books` or items that are `Loaned`
+Searches the catalogue for items with the property of "loaned" and "book". 
+An item that is both loaned and is a book will be listed at the top.
+An item that is loaned but not a book, or an item that is a book but not loaned is also listed at a lower position.
+An item that is neither loaned nor a book will not be in the search result.
 
 ##### Expected Output:
 ```
   (+) Here are the searching results in library
   ========================================
-  [B] 123 | LOANED (Silin TILL 12-12-2021) | The Hunger Games | Collins
-  [B] 2551 | AVAILABLE | To Kill a Mockingbird | Harper Lee
+  [B] 43 | LOANED (Chuan Kai TILL 25-11-2021) | The Three Body Problem | Liu Cixin
+  [A] A A | LOANED (Silin TILL 30-12-2021) | Thriller | Michael Jackson | 2h
+  [B] 123 | AVAILABLE | Harry Potter | JK Rowling
   ========================================
 ```
+
+In the sample output, "The Three Body Problem" is both loaned and a book, matching both of the criteria, it is listed first;
+"Thriller" is loaned but not a book, "Harry Potter" is a book but not loaned, they satisfy only one criteria, therefore they are listed at a lower position.
+The rest of items do not match any search keyword, and they are not listed.
 
 ### Reserve items
 Reserve an item for a specific person.
@@ -565,7 +584,13 @@ Upon starting the program, it will search for the presence of a file in the dire
 
 > ⚠️ While the `data.json` file can be edited manually, it is highly recommended that users **do not** attempt to do so unnecessarily
 
+> ⚠️ **Do not** make changes to the `data.json` while `libmgr` is running. Any changes made while running will not be reflected by `libmgr` and such changes may be overwritten.
+
 ## FAQ
+
+**Q**: What platforms is `Libmgr` supported on?
+
+**A**: This application supports cross-platform operation, as long as Java has been properly configured.
 
 **Q**: Can I port the program over to other devices
 
@@ -595,5 +620,5 @@ When `libmgr` detects errors or corruptions in `data.json` it will overwrite the
 |Remove|Remove an item from the catalogue|`rm ID` <br> E.g. `rm 095680`|
 |Reserve|Reserve an item for a specific person|`res i/ID u/USERNAME` <br> E.g. `res i/2551 u/johnsmith`|
 |Return|Mark an item as returned and available for loan again|`return ID` <br> E.g. `return 2551`|
-|Search|Search for items in the catalogue based on their attributes|`search KEY/ATTRIBUTE` <br> E.g. `search c/Book t/Junglebook`|
+|Search|Search for items in the catalogue based on their attributes|`search KEY/ATTRIBUTE` <br> E.g. `search c/misc t/Junglebook s/available`|
 |Un-reserve|"Un-reserve" an item and mark as available again|`unres ID`<br> E.g. `unres 2551`|

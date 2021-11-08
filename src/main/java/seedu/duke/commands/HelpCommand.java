@@ -21,7 +21,9 @@ public class HelpCommand extends Command {
     /**
      * Prints a help guide with a list of commands for the user.
      * Overrides method from parent class.
+     *
      * @param ui Object that handles user IO
+     * @param catalogue Object that encapsulates a library catalogue
      */
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
