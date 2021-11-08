@@ -345,6 +345,8 @@ This section describes the implementation of how the user can display a list of 
 
 #### 4.3.1. Implementation
 
+//TODO LIST HAS A PARSER
+
 1. Since the command for listing goals does not require any parameters, using `ParserManager` to detect the command word
    `list` is sufficient to execute the command.
 2. The `ListGoalsCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the

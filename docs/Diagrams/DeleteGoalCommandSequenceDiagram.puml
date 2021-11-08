@@ -10,10 +10,10 @@ activate "goalList: GoalList"
 
 "goalList: GoalList" -> "goalList: GoalList": getGoal(goalIndex: int)
 activate "goalList: GoalList"
-"goalList: GoalList" --> "goalList: GoalList"
+"goalList: GoalList" --> "goalList: GoalList": goal: Goal
 deactivate "goalList: GoalList"
 
-ref over "goalList: GoalList": Abstracted checks before\ndeleting Goal:\ngoalIndex  is a positive integer \nand not out of bounds.
+ref over "goalList: GoalList": Abstracted checks before\ndeleting Goal:\ngoalIndex is a positive integer \nand not out of bounds.
 
 "goalList: GoalList" -> "goalList: GoalList": updateChosenGoalIndex(\ngoalIndex: int)
 activate "goalList: GoalList"
@@ -29,11 +29,10 @@ deactivate "goalList: GoalList"
 "goalList: GoalList" -> "goalList: GoalList": printRemovedGoal(\ngoal.getDescription(): String)
 activate "goalList: GoalList"
 "goalList: GoalList" -> ": PrintManager"
-deactivate "goalList: GoalList"
-
 activate ": PrintManager"
-"goalList: GoalList" <-- ": PrintManager"
-deactivate ": PrintManager"
+return
+"goalList: GoalList" --> "goalList: GoalList"
+deactivate "goalList: GoalList"
 
 return
 

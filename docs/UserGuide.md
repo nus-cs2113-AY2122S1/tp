@@ -199,7 +199,7 @@ You may consider having multiple recurring habits instead.
 ### 2.2 Icons
 Unfamiliar symbols may confuse. Here is a comprehensive collection of all emojis and syntax we employ.  
 
-> 📃 **Notes**: important information you should take note off (especially if you encounter input errors)
+> 📃 **Notes**: important information you should take note of (especially if you encounter input errors)
 
 > ⚠ **Warning**: avoid doing the things mentioned here at all costs (unless you're feeling lucky)
  
@@ -224,16 +224,18 @@ Do follow the instructions before typing anything, lest _Ha(ppy)Bit_ does not
 register your input. On the topic of inputs...
 
 ### 3.2 Command Format
-_Ha(ppy)Bit_ is very particular about your commands. You begin off with a "command word" to tell _Ha(ppy)Bit_ the exact 
+_Ha(ppy)Bit_ is very particular about your commands. You begin off with a **"command"** word to tell _Ha(ppy)Bit_ the exact 
 action to carry out (See [Command Summary](#7-command-summary) for all actions). The actions are then followed up with
-"parameters", which are information you wish to pass to _Ha(ppy)Bit_ to carry out the actions with it. To indicate the 
-type of parameters, they are prefixed with "flags". The flags help _Ha(ppy)Bit_ identify and distinguish the type of
+**"parameters"**, which are information you wish to pass to _Ha(ppy)Bit_ to carry out the actions with it. To indicate the 
+type of parameters, they are prefixed with **"flags"**. The flags help _Ha(ppy)Bit_ identify and distinguish the type of
 parameters.
 
 A command could look like this: `add n/Run 2.4km g/1 i/7`. Where, <br>
-`add` is the command word, <br>
-`Run 2.4km`, `1`, and `7` are parameters, <br>
-and `n/`, `g/`, and `i/` are flags.
+`add` is the _command_ word, <br>
+`Run 2.4km`, `1`, and `7` are _parameters_, <br>
+and `n/`, `g/`, and `i/` are _flags_.
+
+> 📃 Don't worry if you typed the command wrongly! Helpful error messages will pop up to advise you on what to change.
 
 Here are guidelines and tips for the command format:
 * **Commands** are only accepted when you see `Command: ` on the screen (See [Main Interface](#12-main-interface)). 
