@@ -356,7 +356,7 @@ public class Ui {
     //@@author
 
     public static void printIncorrectAmount(double amount) {
-        System.out.println("The amount you have entered is incorrect, it is either too high or low. The total "
+        System.out.println("The amount you have entered is not possible. The total "
                 + "of the expense should equal " + stringForeignMoney(amount));
     }
 

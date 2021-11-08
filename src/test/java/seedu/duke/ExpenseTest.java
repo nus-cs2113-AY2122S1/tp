@@ -114,7 +114,7 @@ class ExpenseTest {
     }
 
     @Test
-    void testInvalidAmount() {
+    void testInvalidAmountNotNumber() {
         ByteArrayOutputStream actualOutput = new ByteArrayOutputStream();
         System.setOut(new PrintStream(actualOutput));
         String expectedOutput = "Please format your inputs as follows: "
@@ -122,6 +122,15 @@ class ExpenseTest {
                 + System.lineSeparator();
         Parser.parseUserInput("expense notNumber category Albert, Betty, Evan /description");
         assertEquals(actualOutput.toString(), expectedOutput);
+    }
+
+    @Test
+    void testInvalidAmountNegativeNumber() throws ForceCancelException {
+        String correctInput = "2113" + System.lineSeparator() + "02-12-2020";
+        System.setIn(new ByteArrayInputStream(correctInput.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Expense testExpense = new Expense("-2113 category Evan /description");
+        assertEquals(2113.0, testExpense.getAmountSplit().get("Evan"));
     }
 
     @Test
@@ -163,9 +172,23 @@ class ExpenseTest {
     }
 
     @Test
-    void testInvalidAssignAmount() throws ForceCancelException {
+    void testInvalidAssignAmountNotNumber() throws ForceCancelException {
         String correctInput = "02-12-2020" + System.lineSeparator() + "Betty"
                 + System.lineSeparator() + "NotANumber" + System.lineSeparator() + "1010"
+                + System.lineSeparator() + "1010" + System.lineSeparator() + "y";
+        System.setIn(new ByteArrayInputStream(correctInput.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Expense testExpense = new Expense("2113 category Albert, Betty, Evan /description");
+        assertEquals("Betty", testExpense.getPayer().getName());
+        assertEquals(1010.0, testExpense.getAmountSplit().get("Albert"));
+        assertEquals(1010.0, testExpense.getAmountSplit().get("Betty"));
+        assertEquals(93.0, testExpense.getAmountSplit().get("Evan"));
+    }
+
+    @Test
+    void testInvalidAssignAmountNegativeNumber() throws ForceCancelException {
+        String correctInput = "02-12-2020" + System.lineSeparator() + "Betty"
+                + System.lineSeparator() + "-2113" + System.lineSeparator() + "Betty" + System.lineSeparator() + "1010"
                 + System.lineSeparator() + "1010" + System.lineSeparator() + "y";
         System.setIn(new ByteArrayInputStream(correctInput.getBytes()));
         Storage.setScanner(new Scanner(System.in));
