@@ -146,7 +146,8 @@ and terminates the game at the same time.
  without the "enter limit" prompt.
   > **NOTE**:
   > if you want to specify GAME_LIMIT, it needs to be right after the GAME_MODE argument.
-  > If the GAME_LIMIT entered is invalid, game will still start but with the "enter limit" prompt.  
+  > If the GAME_LIMIT entered is invalid, game will still start but with the "enter limit" prompt. 
+
   > Any ERROR in the _optional arguments_ will prompt a message but will not terminate the command.
   > The game will still start as if the optional argument is not given. 
 
