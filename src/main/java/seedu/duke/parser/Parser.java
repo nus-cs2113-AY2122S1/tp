@@ -117,21 +117,17 @@ public abstract class Parser {
     }
 
     /**
-     * Gets the combined string of command attributes given user input with the command type (add, delete etc)
-     * filtered off.
+     * Checks whether the user input contains command attributes and throws and exception if it does not.
      *
      * @param commandDetails String containing details of the command
-     * @return The combined string of command attributes e.g. "n/TITLE d/DATE v/VENUE b/BUDGET"
      * @throws NoCommandAttributesException If there is no command attributes detected
      */
-    protected static String getCommandAttributes(String commandDetails) throws NoCommandAttributesException {
+    protected static void checkCommandAttributes(String commandDetails) throws NoCommandAttributesException {
         String[] commandAttributes = (commandDetails.trim().split(" +", 2));
 
         if (commandAttributes.length < 2) {
             throw new NoCommandAttributesException();
         }
-
-        return commandAttributes[1];
     }
 
     // @@author Alvinlj00
@@ -146,8 +142,8 @@ public abstract class Parser {
      */
     protected static String retrieveItemAttribute(String response, ItemAttribute itemAttribute)
             throws AttributeNotFoundException {
-        // Check if the response contains the flag
-        if (!response.contains(ItemAttribute.getItemFlag(itemAttribute))) {
+        // Check if the response contains the flag and ensure that it is separated by whitespace
+        if (!response.contains(" " + ItemAttribute.getItemFlag(itemAttribute))) {
             throw new AttributeNotFoundException(itemAttribute);
         }
         int startOfItemAttribute = response.indexOf(ItemAttribute.getItemFlag(itemAttribute)) + 2;

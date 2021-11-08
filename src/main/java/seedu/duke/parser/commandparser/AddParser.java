@@ -87,16 +87,16 @@ public abstract class AddParser extends Parser {
      */
     private static String[] parseAddEvent(String commandDetails) throws DukeException {
         try {
-            String commandAttributes = getCommandAttributes(commandDetails);
+            checkCommandAttributes(commandDetails);
             String[] parsedAttributes = new String[4];
 
-            String title = retrieveItemAttribute(commandAttributes, ItemAttribute.TITLE);
+            String title = retrieveItemAttribute(commandDetails, ItemAttribute.TITLE);
             parsedAttributes[INDEX_OF_TITLE] = title;
-            String dateTime = retrieveItemAttribute(commandAttributes, ItemAttribute.DATE);
+            String dateTime = retrieveItemAttribute(commandDetails, ItemAttribute.DATE);
             parsedAttributes[INDEX_OF_DATETIME] = dateTime;
-            String venue = retrieveItemAttribute(commandAttributes, ItemAttribute.VENUE);
+            String venue = retrieveItemAttribute(commandDetails, ItemAttribute.VENUE);
             parsedAttributes[INDEX_OF_VENUE] = venue;
-            String budget = retrieveItemAttribute(commandAttributes, ItemAttribute.BUDGET);
+            String budget = retrieveItemAttribute(commandDetails, ItemAttribute.BUDGET);
             parsedAttributes[INDEX_OF_BUDGET] = budget;
 
             return parsedAttributes;
@@ -123,12 +123,12 @@ public abstract class AddParser extends Parser {
         }
 
         try {
-            String commandAttributes = getCommandAttributes(commandDetails);
+            checkCommandAttributes(commandDetails);
             String[] parsedAttributes = new String[2];
 
-            String title = retrieveItemAttribute(commandAttributes, ItemAttribute.TITLE);
+            String title = retrieveItemAttribute(commandDetails, ItemAttribute.TITLE);
             parsedAttributes[INDEX_OF_TITLE] = title;
-            String dateTime = retrieveItemAttribute(commandAttributes, ItemAttribute.DATE);
+            String dateTime = retrieveItemAttribute(commandDetails, ItemAttribute.DATE);
             parsedAttributes[INDEX_OF_DATETIME] = dateTime;
 
             return parsedAttributes;
