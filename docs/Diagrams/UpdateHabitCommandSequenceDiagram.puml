@@ -12,7 +12,7 @@ activate UpdateHabitCommand
 UpdateHabitCommand -> goalList: updateHabitAttributes(goalIndex,\nhabitIndex, newHabitName,\nnewHabitInterval, updateAttributes,\nexcessAttributes, printManager)
 activate goalList
 
-goalList -> printManager: printUpdateHabitMessageStart()
+goalList -> printManager: printLine()
 activate printManager
 printManager --> goalList
 deactivate printManager

@@ -12,7 +12,7 @@ activate UpdateGoalCommand
 UpdateGoalCommand -> goalList: updateGoalAttributes(goalIndex,\nnewGoalName, newGoalType,\nnewGoalEndDate, updateAttributes,\nexcessAttributes, printManager)
 activate goalList
 
-goalList -> printManager: printUpdateGoalMessageStart()
+goalList -> printManager: printLine()
 activate printManager
 printManager --> goalList
 deactivate printManager

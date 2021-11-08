@@ -487,23 +487,24 @@ This section describes the implementation of how the user can update a goal's na
 3. The `UpdateParser#getUpdateGoalAttributes(parameters)` method is used to confirm what attributes exist in the user
    input and finds the flags for those attributes (goal name, goal type, and goal end date).
 4. If `isUpdateGoalName` is true, `UpdateParser#getName(parameters)` is called to get the updated name.
-5. Similarly, `isUpdateGoalType` and `isUpdateGoalEndDate` will call `UpdateParser#getType(parameters)` and
-   `UpdateParser#getDate(parameters)` to get the updated type and updated end date respectively.
-6. The `goalIndex` to update is then obtained with `UpdateParser#getIndex(parameters, FLAG_GOAL_INDEX)` method
+5. Similarly, if `isUpdateGoalType` and `isUpdateGoalEndDate` is true, they will call `UpdateParser#getType(parameters)`
+   and `UpdateParser#getDate(parameters)` to get the updated type and updated end date respectively.
+6. The `goalIndex` to update is then obtained with the `UpdateParser#getIndex(parameters, FLAG_GOAL_INDEX)` method
 7. Any excess attributes provided in the input is found with the `UpdateParser#getExcessGoalAttributes(parameters)`
    method. This is required as a parameter for the `UpdateGoalCommand` constructor. Its use is detailed in the steps 
    below.
-8. Finally, a `UpdateGoalCommand(goalIndex, newGoalName, newGoalType, newGoalEndDate, updateAttributes, 
+8. Finally, an `UpdateGoalCommand(goalIndex, newGoalName, newGoalType, newGoalEndDate, updateAttributes, 
    excessAttributes)` object is created and returned from the `UpdateParser#parseUpdateGoalCommands(commandInstruction)` 
    method.
 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateGoalCommandParserSequenceDiagram.png)
 // TODO: Update the diagram to reflect changes to updateAttributes returning an ArrayList<Boolean>
 
-9. The `UpdateGoalCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the `GoalList#updateGoalAttributes(goalIndex, newGoalName, 
-   newGoalType, newGoalEndDate, updateAttributes, excessAttributes, printManager)` method.
-10. Within this newly called method, the `PrintManager#printUpdateGoalMessageStart()` method is called to print a
-    message that a goal is being updated.
+9. The `UpdateGoalCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the 
+   `GoalList#updateGoalAttributes(goalIndex, newGoalName, newGoalType, newGoalEndDate, updateAttributes, 
+    excessAttributes, printManager)` method.
+10. Within this newly called method, the `PrintManager#printLine()` method is called to print a line to separate the
+    new messages being printed.
 11. Based on the `updateAttributes` parameter, if the first element is true, `GoalList#updateGoalName(goalIndex, 
     newGoalName, printManager)` is called to update the goal name, calling the `PrintManager#printUpdatedGoalName(
     oldGoalDescription, newGoalDescription)` method to print a confirmation message on successful update of goal name.
@@ -525,7 +526,14 @@ This section describes the implementation of how the user can update a goal's na
 
 #### 4.6.2. Design Considerations
 
-// TODO
+**Aspect:** Single parameter vs Multiple parameters Update
+* **Alternative 1:** Separate commands to update each parameter for a `Goal` object.
+    * Pros: Separate classes are written for each command, which streamlines the process for adding more parameters in
+            the future.
+    * Cons: The user will be swamped by more command keywords.
+* **Alternative 2 (current choice):** A single command that can update multiple parameters for a `Goal` object.
+    * Pros: The user has to remember only one command keyword to update the parameters of a goal.
+    * Cons: Multiple checks have to be carried out within a class, which may be confusing due to long lines of code.
 
 ### 4.7. Updating a Habit
 
