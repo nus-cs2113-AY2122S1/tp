@@ -17,6 +17,7 @@ public final class HelpMessage {
             + "budget add -v [VALUE]\t Add a new budget\n"
             + "budget list\t List the budget set for current month\n"
             + "budget delete\t Delete the budget for current month\n"
+            + "\nInvest Functionality:\n"
             + "invest add savings [NAME] -v [VALUE] \t Add savings account\n"
             + "invest add stocks [NAME] -n [NUM] -p [PRICE] \t Add a stock\n"
             + "invest delete savings -i [ID] \t Delete savings account\n"
