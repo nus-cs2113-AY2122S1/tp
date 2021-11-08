@@ -59,7 +59,8 @@ wget -i - -nc  2>&1 >> log
 
 Tested dead links for the team GitHub page.
 ```shell
-LANG=C wget --spider -r -nv 'https://ay2122s1-cs2113t-w13-3.github.io/tp/' 2>&1 | grep broken -A 2
+LANG=C wget --spider -r -nv 'https://ay2122s1-cs2113t-w13-3.github.io/tp/' 2>&1 |
+grep broken -A 2
 ```
 
 ## Unmerged enhancements
