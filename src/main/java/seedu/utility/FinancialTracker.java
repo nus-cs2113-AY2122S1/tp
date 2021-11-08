@@ -1,6 +1,5 @@
 package seedu.utility;
 
-import seedu.commands.currency.CurrencyType;
 import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.Income;
@@ -27,6 +26,7 @@ public class FinancialTracker {
     private final ArrayList<Expense> expenses;
     private final ArrayList<Income> incomes;
     private final CurrencyManager currencyManager;
+
     public static final double TOTAL_ENTRIES_LIMIT = 100000000000.00;
 
     /**
@@ -66,13 +66,6 @@ public class FinancialTracker {
 
         assert !expenses.isEmpty();
         assert expenses.size() > expenseSize;
-    }
-
-    public void getOriginalEntries() {
-        ArrayList<Entry> entries = new ArrayList<>();
-        for (Entry entry : entries) {
-            entry.setCurrentDetails(entry.getOriginalValue(), CurrencyType.SGD);
-        }
     }
 
     private boolean isOverflowedExpense(Expense expense) {

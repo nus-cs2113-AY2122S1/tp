@@ -13,12 +13,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import static seedu.utility.tools.DateOperator.DATE_FORMAT;
 
 /**
  * The command that searches through the financial tracker for same keyword, value or category.
  */
 public class FindCommand extends Command {
-    private static final String DATE_FORMAT = "dd/MM/yyyy";
     protected String keyword;
 
     /**
