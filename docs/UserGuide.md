@@ -75,6 +75,9 @@ e.g. For `add b t/TITLE i/ID ...`, entering `add a t/The Great Gatsbyi/0125` is 
 > ⚠️ Command word must be in lower case
 e.g. For `add b t/TITLE i/ID ...`, entering `ADD a t/The Great Gatsby i/0125` is invalid
 
+> ⚠️ Attribute flags must be in lower case
+e.g. For `add b t/TITLE i/ID ...`, entering `ADD a T/The Great Gatsby I/0125` is invalid
+
 ### Add an item
 Add a new item to the catalogue. Items can fall under one of four categories: Audio, Books, Magazines, Videos
 
