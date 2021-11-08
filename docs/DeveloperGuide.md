@@ -512,7 +512,7 @@ Given below is an example of how the edit task mechanism behaves at each step.
    iv. Edit successful message is printed back to the user.\
    iv. `EditTasksCommand` calls `StorageTasks.writeTaskList(Storage.tasksList)` to save the new data to the storage file.
 
-### 4.4 Journaling Feature
+### 4.4 Journal-related Features
 This segment focuses on describing the implementation of journaling-related features, the functionality of the 
 commands as well as the design considerations taken.
 
