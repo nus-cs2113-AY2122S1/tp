@@ -1,0 +1,30 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+package "Main" <<Rectangle>> {
+
+}
+package "Logic" <<Rectangle>> {
+
+}
+package "Storage" <<Rectangle>> {
+}
+package Ui <<Rectangle>> {
+class "  Ui  "
+
+}
+package "Utility" <<Rectangle>> {
+}
+package "User" <<Rectangle>> {
+}
+User .right> "  Ui  "
+Main -> "1" "  Ui  "
+Main ..> Logic
+Logic ..> "  Ui  "
+Logic ..> Utility
+Storage ..> "  Ui  "
+
+hide members
+@enduml

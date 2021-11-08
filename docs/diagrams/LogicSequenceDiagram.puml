@@ -1,0 +1,75 @@
+@startuml
+box Main
+Participant ":Duke" as Duke
+end box
+box Ui
+Participant "ui:Ui" as Ui
+end box
+box Logic
+Participant ":Parser" as Parser
+Participant "cmd:AddCommand" as DeleteCommand
+end box
+
+box Model
+Participant "nfm:NormalFinanceManager" as NormalFinanceManager
+Participant "e:Expense" as Entry2
+Participant "bm:BudgetManager" as Budget
+end box
+
+box Storage
+Participant "nldm:NormalListDataManager" as NormalListDataManager
+end box
+
+activate Duke
+Duke -> Parser : parseCommand("add n/movie a/12")
+activate Parser
+
+Parser -> Parser : prepareAddEntry("add n/movie a/12")
+
+    activate Parser
+    create Entry2
+    Parser -> Entry2 : createExpenseObject()
+    activate Entry2
+    Entry2 --> Parser : e
+    deactivate Entry2
+
+
+create DeleteCommand
+Parser -> DeleteCommand : AddCommand(e)
+activate DeleteCommand
+DeleteCommand --> Parser : cmd
+deactivate DeleteCommand
+Parser --> Parser : cmd
+deactivate Parser
+Parser --> Duke : cmd
+
+deactivate Parser
+
+Duke -> DeleteCommand : execute(nfm,...,bm,nldm,...,ui)
+
+activate DeleteCommand
+DeleteCommand -> NormalFinanceManager : addEntry(e)
+activate NormalFinanceManager
+NormalFinanceManager --> DeleteCommand
+deactivate NormalFinanceManager
+
+DeleteCommand -> NormalListDataManager : appendToEntryListTextFile(e)
+activate NormalListDataManager
+NormalListDataManager --> DeleteCommand
+deactivate NormalListDataManager
+
+
+DeleteCommand -> Ui : printEntryAdded(e)
+
+activate Ui
+Ui --> DeleteCommand
+deactivate Ui
+DeleteCommand -> Budget : checkExceedBudget(e,...)
+activate Budget
+Budget --> DeleteCommand
+deactivate Budget
+
+DeleteCommand --> Duke
+deactivate DeleteCommand
+destroy DeleteCommand
+@enduml

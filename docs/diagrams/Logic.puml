@@ -1,0 +1,38 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+package "Ui" <<Rectangle>> {
+
+}
+package "Model" <<Rectangle>> {
+
+}
+package "Storage" <<Rectangle>> {
+
+}
+package "Main" <<Rectangle>> {
+}
+package "Logic" <<Rectangle>> {
+
+
+package "parser" <<Rectangle>> {
+class           Parser
+}
+
+package "commands" <<Rectangle>> {
+class "{abstract}\n Command"
+class XYZCommand
+}
+
+Main --> "1" Parser
+"{abstract}\n Command" <|-- XYZCommand
+Parser ..> XYZCommand : returns >
+Main ..> "{abstract}\n Command": executes >
+
+"{abstract}\n Command" ..> Ui
+Parser ..> Model
+"{abstract}\n Command" ..> Model
+"{abstract}\n Command" ..> Storage
+}
+hide members
+@enduml

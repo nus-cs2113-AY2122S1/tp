@@ -1,0 +1,38 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam groupInheritance 2
+package "FinanceManager" <<Rectangle>> {
+class  "{abstract}\nFinanceManager"
+class NormalFinanceManager
+class RecurringFinanceManager
+}
+
+package "Entry" <<Rectangle>> {
+
+class "{abstract}\nRecurringEntry"
+class RecurringExpense
+class RecurringIncome
+class "{abstract}\nEntry"
+class Income
+class Expense
+}
+
+RecurringFinanceManager -u-|> "{abstract}\nFinanceManager"
+NormalFinanceManager -u-|> "{abstract}\nFinanceManager"
+
+
+
+RecurringFinanceManager ----> "*" RecurringIncome
+RecurringFinanceManager ----> "*" RecurringExpense
+NormalFinanceManager ----> "*" Income
+NormalFinanceManager ----> "*" Expense
+
+"{abstract}\nRecurringEntry" -u-|> "{abstract}\nEntry"
+RecurringIncome -u-|> "{abstract}\nRecurringEntry"
+RecurringExpense -u-|> "{abstract}\nRecurringEntry"
+Income -u--|> "{abstract}\nEntry"
+Expense -u--|> "{abstract}\nEntry"
+
+hide members
+@enduml
