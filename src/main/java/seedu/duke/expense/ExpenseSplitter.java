@@ -50,15 +50,8 @@ public interface ExpenseSplitter {
             if (amountBeingPaid != null) {
                 total += amountBeingPaid.get(person);
             } else {
-                total = expense.getAmountSpent();
-                break;
+                return;
             }
-        }
-        if (total < expense.getAmountSpent()) {
-            Ui.printIncorrectAmount(expense.getAmountSpent());
-            updateIndividualSpending(expense);
-        } else if (amountBeingPaid != null) {
-            assignAmounts(payer, expense, amountBeingPaid);
         }
     }
 
