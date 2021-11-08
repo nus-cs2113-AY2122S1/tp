@@ -296,6 +296,7 @@ by SITUS.
 
 E.g. `update 1.2 a/150.0`
 1. The current ingredient inventory is:
+
 ```
 1. Carrot | Total Amount: 18.7 kg
     Amount Left: 10.0 kg | Expiry Date: 23/12/2021
@@ -306,6 +307,7 @@ E.g. `update 1.2 a/150.0`
     Amount Left: 5.0 kg | Expiry Date: 25/12/2021
     Amount Left: 2.1 kg | Expiry Date: 12/11/2021
 ```
+
 2. The initial user input is stored as a string. It is pre-processed by the `Parser` class that
 checks the validity of the inputs. If inputs are valid, the string is broken into an array 
 of 3 elements, and it's parameters are converted into it's appropriate data types.
@@ -334,8 +336,10 @@ by the `updateTotalAmount` method in the `IngredientGroup` class.
 8. Lastly, the updated `ingredientList` is stored in the external memory through the `Storage`
    class.
 
+<div style="page-break-after: always;"></div>
 
-8. After the ingredient has been updated, the ingredient inventory list is:
+After the ingredient has been updated, the ingredient inventory list is:
+
 ```
 1. Carrot | Total Amount: 166.5 kg
     Amount Left: 10.0 kg | Expiry Date: 23/12/2021
@@ -353,9 +357,6 @@ The sequence diagram below illustrates the above command example.
 
 <div style="page-break-after: always;"></div>
 
-
-<div style="page-break-after: always;"></div>
-
 ### 4.5. Subtracting ingredients
 Ingredient amount can be subtracted using `subtract` command followed by two parameters that
 contain a prefixed flag for SITUS to identify the ingredient's name and subtract amount.
@@ -363,6 +364,7 @@ contain a prefixed flag for SITUS to identify the ingredient's name and subtract
 E.g. `subtract n/carrot a/150.0`
 
 1. The current ingredient inventory is:
+
 ```
 1. Carrot | Total Amount: 166.5 kg
     Amount Left: 10.0 kg | Expiry Date: 23/12/2021
@@ -373,6 +375,7 @@ E.g. `subtract n/carrot a/150.0`
     Amount Left: 5.0 kg | Expiry Date: 25/12/2021
     Amount Left: 2.1 kg | Expiry Date: 12/11/2021
 ```
+
 2. The initial user input is stored as a string. It is pre-processed by the `Parser` class that
    checks the validity of the inputs. If inputs are valid, the string is broken into an array
    of 2 elements, and it's parameters are converted into it's appropriate data types.
@@ -412,6 +415,7 @@ negligible amounts remaining.
 
 
 10. After the ingredient amount has been subtracted, the ingredient inventory list is:
+
 ```
 1. Carrot | Total Amount: 16.5 kg
     Amount Left: 10.0 kg | Expiry Date: 25/12/2021
@@ -426,8 +430,6 @@ The sequence diagram below illustrates the above command example.
 
 
 ![image](images/SubtractSequenceDiagram.png)
-
-
 
 <div style="page-break-after: always;"></div>
 
