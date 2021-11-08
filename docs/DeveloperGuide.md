@@ -20,15 +20,13 @@
     - [Storage component](#storage-component)
 
 
-- [Product Scope](#product-scope)
+- [Appendix A: Product Scope](#appendix-a-product-scope)
     - [Target user profile](#target-user-profile)
     - [Value proposition](#value-proposition)
-
-
-- [User Stories](#user-stories)
-
-
-- [Non-Functional Requirements](#non-functional-requirements)
+- [Appendix B: User Stories](#appendix-b-user-stories)
+- [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
+- [Appendix D: Glossary](#appendix-d-glossary)
+- [Appendix E: Instructions for manual testing](#appendix-e-instructions-for-manual-testing)
 
 <br>
 
@@ -78,8 +76,7 @@
 
 The diagram below shows the high-level design of TourPlanner:
 
-<img width="307" alt="component_diagram" src="https://user-images.githubusercontent.com/79963329/140464392-5a1536d2-a5d8-4e57-83f4-f4938ede0cfe.PNG">
-
+![Architecture Class Diagram](https://user-images.githubusercontent.com/62021897/140712865-752a92c6-da93-42a2-9d12-66f4182df56c.png)
 
 Below is an overview of the main components, and how they interact with each other.
 
@@ -153,6 +150,7 @@ flight), `-p` (add package), by splitting the identifier and the rest of the str
 
 **Step 3.** To sort the values for addition, the prefixes and their corresponding indexes are stored as key-value pairs
 into a TreeMap. A TreeMap helps to sort the pairs by the natural ordering of the keys.
+:information_source: See [TreeMap](#appendix-d-glossary).
 
 ```
 ^JPN ^/n Japan Tour ^/p 1500 --> [(0, null), (4, /n), (18, /p)] (sorted)
@@ -187,7 +185,7 @@ them, all through the console terminal.
 
 The diagram below shows the class diagram of the Ui component, in relation with other major components:
 
-<img width="289" alt="ui" src="https://user-images.githubusercontent.com/79963329/140464630-a8a8000c-fb45-44af-9cc2-d146ae5ea5c8.PNG">
+![Ui Class Diagram](https://user-images.githubusercontent.com/62021897/140712493-2054f2c9-6f58-4353-88ad-1570707ff3ef.png)
 
 <br>
 
@@ -211,7 +209,7 @@ Here's a (partial) class diagram of Command component:
 
 ![Command class (2)](https://user-images.githubusercontent.com/70316271/140637570-e6a9f453-ea88-46a8-8f3c-e1913e7e938d.png)
 
-Note: `XYZ` in this diagram is a placeholder for the specific data type (`Client`, `Flight`, `Tour`
+:information_source: `XYZ` in this diagram is a placeholder for the specific data type (`Client`, `Flight`, `Tour`
 , `ClientPackage`). A similar workflow applies for these classes depending on the availability of the command for the
 specific data type.
 
@@ -276,17 +274,19 @@ Given below is an example usage of `add -p p001 ARGS...` to add client package "
 
 Here is a (partial) sequence diagram of above user input:
 
+![AddClientPackage Sequence Diagram](https://user-images.githubusercontent.com/62021897/140713338-a743133a-516b-47e3-88b6-e9b5408b226c.png)
+
 **Step 1.** Parser creates a `values` array, upon extracting values from user's input.
-Creates `AddClientPackageCommand(values)`, determined by the datatype identifier `-p`.
-Returns the created `Command` subclass to `TourPlanner`.
+Creates `AddClientPackageCommand(values)`, determined by the datatype identifier `-p`. Returns the created `Command`
+subclass to `TourPlanner`.
 
 **Step 2.** Then, `execute()` method in `AddClientCommand` is called. `getClientPackageById("p001")` is called, which
 finds the `ClientPackage` based on the `CLIENT_PACKAGE_ID` "p001".
 
 **Step 3.** If the `CLIENT_PACKAGE_ID` "p001" already exists, an error message is returned.
 
-**Step 4.** Else, the `CLIENT_PACKAGE_ID` "p001" does not exist, `execute()` calls `createClientPackage` which finds
-the specific `Client`, `Tour` and `Flight` objects to be added to the `ClientPackage`
+**Step 4.** Else, the `CLIENT_PACKAGE_ID` "p001" does not exist, `execute()` calls `createClientPackage` which finds the
+specific `Client`, `Tour` and `Flight` objects to be added to the `ClientPackage`
 
 **Step 5.** Then, `add` in `ClientPackageList` is called, to add the specific `ClientPackage` into `ClientPackageList`.
 
@@ -299,7 +299,8 @@ the specific `Client`, `Tour` and `Flight` objects to be added to the `ClientPac
 Given below is an example usage of `add -t t001 ARGS...` to add tour with the respective arguments.
 
 Here is a (partial) sequence diagram for above user input:
-![AddCommand](https://user-images.githubusercontent.com/62021897/140637968-b8ac7b0e-4ab3-42f4-a6b7-f526bfe80215.png)
+
+![AddCommand](https://user-images.githubusercontent.com/62021897/140713091-70c5b626-ec86-4122-a2c9-6b0f47b0a564.png)
 
 **Step 1.** `Parser` parses the input and instantiates `AddTourCommand`. It then returns it to `TourPlanner`.
 
@@ -336,8 +337,8 @@ Here is an example usage of `cut -c` to delete client with `CLIENT_ID` of "c001"
 to `parse()` method in the `Parser` class.
 
 **Step 2.** Based on the user input, `parse()` identifies that it is of type `cut` command and calls `ParseCut()`.
-`ParseCut()` will then create `CutClientCommand("c001")` based on the prefix `-c`. 
-Returns the created `Command` subclass to `TourPlanner`.
+`ParseCut()` will then create `CutClientCommand("c001")` based on the prefix `-c`. Returns the created `Command`
+subclass to `TourPlanner`.
 
 Depending on the type of cut command being called, these command types will be returned:
 
@@ -384,11 +385,11 @@ which finds the `Client` based on the `CLIENT_ID` "c001".
 **Step 3.** The `Client` is removed from the `ClientList`.
 
 **Step 4.** Next, `getClientPackageByClient("c001")` returns an `ArrayList` of `ClientPackages` that contains
-the `CLient` "c001".
+the `CLient` "c001". :information_source: See [ArrayList](#appendix-d-glossary).
 
 **Step 5.** Loops through the `ClientPackages` and deletes them from `ClientPackageList`.
 
-*Note: `Tour` and `Flight` works in the same way respectively with `TourList` and `FlightList`*
+*:information_source: `Tour` and `Flight` works in the same way respectively with `TourList` and `FlightList`
 
 <br>
 
@@ -429,12 +430,14 @@ Depending on the type of list command being called, these command types will be 
 
 ### Find feature
 
-The ```find``` feature is to be used to query for a particular client, tour or flight, providing extensive information about it.
-It is facilitated by the ```parse``` function in the ```Parser``` class,  and returns a FindCommand object. 
+The ```find``` feature is to be used to query for a particular client, tour or flight, providing extensive information
+about it. It is facilitated by the ```parse``` function in the ```Parser``` class, and returns a FindCommand object.
 When FindCommand is executed, it queries the corresponding `ObjectList` and returns the matching entries.
 
 It implements these following types of find commands:
-* `find -c CLIENT_NAME`: returns clients that contain `CLIENT_NAME` in their name and client packages they are subscribed to.
+
+* `find -c CLIENT_NAME`: returns clients that contain `CLIENT_NAME` in their name and client packages they are
+  subscribed to.
 * `find -t TOUR_ID`: returns tours that match the `TOUR_ID` and tours subscribed to the tour.
 * `find -f FLIGHT_ID`: returns flights that match the `FLIGHT_ID` and clients subscribed to the flight.
 
@@ -444,7 +447,7 @@ In general, there is a sequence of steps when any of the 3 `find` commands are c
 
 Firstly, assume that in previous sessions, commands were executed to add clients, tours, flights and packages to
 the ```ClientList```, ```TourList```, ```FlightList``` and ```PackageList``` respectively. In particular, these specific
-commands were exceuted.
+commands were executed.
 
 * ```add -c c001 /n Bo Tuan /cn 93338333 /m borangutuan@mail.com```
 * ```add -t JPN /n Japan Tour /p 1500```
@@ -453,11 +456,12 @@ commands were exceuted.
 
 Here is an example usage of `find -c bo` to find a client with name "Bo Tuan":
 **Step 1**: The user executes ```find -c bo``` to query if a client named "Bo Tuan" exists in the ClientList.
-The ```parse``` function in the ```Parser``` class takes the command, and calls `parseFind()` 
+The ```parse``` function in the ```Parser``` class takes the command, and calls `parseFind()`
 based on (```find```) in the input. ```parseFind()``` determines which type of Object is to be queried for and
 ```FindClientCommand()``` is created with the parameter ```bo``` based on prefix `-c`.
 
 Depending on the type of find command being called, these command types will be returned:
+
 * ```find -c```: ```FindClientCommand```
 * ```find -t```: ```FindTourCommand```
 * ```find -f```: ```FindFlightCommand```
@@ -467,9 +471,13 @@ The following 3 sections focuses on find for the specific classes.
 <br>
 
 #### <u>Finding a particular client</u>
+
 Given below is an example usage of `find -c bo`.
 
 Here is a (partial) sequence diagram for the above user input:
+
+<img width="512" alt="findclient" src="https://user-images.githubusercontent.com/79963329/140733278-59e74ce8-ea0c-4fd0-a026-95ff1346fac7.PNG">
+
 
 **Step 1** `Parser` creates `FindClientCommand("bo")` and returns it to `TourPlanner`.
 
@@ -486,9 +494,12 @@ in Step 2, the respective client package will be printed onto the console termin
 <br>
 
 #### <u>Finding a particular tour</u>
+
 Given below is an example usage of `find -t JPN`.
 
 Here is a (partial) sequence diagram for the above user input:
+
+![FindTour Sequence Diagram](https://user-images.githubusercontent.com/62021897/140713906-dd0524f5-53d2-4409-819b-05a467adee53.png)
 
 **Step 1**: `Parser` creates `FindTourCommand("JPN")` and returns it to `TourPlanner`.
 
@@ -508,9 +519,12 @@ through in the ```ClientPackageList```, the total number of subscribed clients w
 <br>
 
 #### <u>Finding a particular flight</u>
+
 Given below is an example usage of `find -f SQ-JPN`.
 
 Here is a (partial) sequence diagram for the above user input:
+
+![FindFlight Sequence Diagram](https://user-images.githubusercontent.com/62021897/140713762-85084399-97e1-47ee-a228-51e6c743d0d1.png)
 
 **Step 1**: `Parser` creates `FindFlightCommand("SQ-JPN")` and returns it to `TourPlanner`.
 
@@ -568,8 +582,8 @@ method in the `Parser` class.
 **Step 2**: Based on the user input, `parse()` identifies that it is of type `sort` command and calls `ParseSort()`.
 `ParseSort()` will then return `SortClientCommand` based on the prefix `-c`.
 
-**Step 3**: Then, `execute()` method in `SortClientCommand` is called, where it gets the sorted `ArrayList<>` of
-`clientIds`.
+**Step 3**: Then, `execute()` method in `SortClientCommand` is called, where it gets the sorted `ArrayList` of
+`clientIds`. :information_source: See [ArrayList](#appendix-d-glossary).
 
 **Step 4** In `UI`, `showSortedClientById()` is called, with `clientIds` passed in. The method iterates through all the
 client IDs. For each iteration, finds the corresponding `Client` with `getClientById()` and prints out the `Client`
@@ -608,7 +622,7 @@ To add on Storage component is designed to access only the following folder:
 
 <br>
 
-## Product scope
+## Appendix A: Product scope
 
 <hr>
 
@@ -625,7 +639,7 @@ To add on Storage component is designed to access only the following folder:
 
 <br>
 
-## User Stories
+## Appendix B: User Stories
 
 <hr>
 
@@ -640,11 +654,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |`* *`|user with large amounts of data|sort existing entries of specific data type |make smarter recommendations to clients based on their preferences|
 |`* *`|user|check number of clients subscribed to a tour / flight|check the popularity, vacancy of certain tours / flights|
 
-Note: 'specific data type' refers to either clients, tours, flights or client packages.
+:information_source: 'specific data type' refers to either clients, tours, flights or client packages.
 
 <br>
 
-## Non-Functional Requirements
+## Appendix C: Non-Functional Requirements
 
 <hr>
 
@@ -655,3 +669,62 @@ Note: 'specific data type' refers to either clients, tours, flights or client pa
 
 <br>
 
+## Appendix D: Glossary
+
+<hr>
+
+**ClientPackage:** serves as a link between the client, tour and flight, helps to keep track of the tours (and flights)
+they are subscribed to. `ClientPackage` class stores the actual `Client`, `Flight` and `Tour` objects.
+
+**ArrayList:** acts as a dynamic array, where items can be easily added and removed.
+
+**TreeMap:** sorts and stores key-value pairs. The key-value pairs are sorted according to the natural ordering of its
+keys, or by a Comparator provided at map creation time.
+
+**Subclass:** To say class `A` is a subclass of class `B` would mean that class `A` inherits from class `B`. A subclass
+inherits attributes and methods from the parent class.
+
+**Exceptions:** is any event that interrupts the normal flow of program execution, due to an unwanted event which cannot
+be controlled by developers
+
+<br>
+
+## Appendix E: Instructions for manual testing
+
+<hr>
+
+Given below are instructions to test the app manually.
+
+### Launch and shutdown
+
+1. Initial launch
+    1. Download the jar file and copy into an empty folder.
+    2. Run the command ```java -jar TourPlanner.jar``` in a command window to start the program.
+
+    * Expected: Applications shows welcome messages and allows you to type in commands.
+
+### Adding and viewing data
+
+1. Add `Client` to database
+    * Test case: `add -c c001 /n Bo Tuan /cn 93338333 /m borangutuan@mail.com`
+
+    1. Input the test case to the command window.
+    2. Input `list -c`.
+
+    * Expected: `Client` with id "c001", name "Bo Tuan", contact "93338333", mail "borangutuan@mail.com"
+      is displayed in the list of clients.
+    * :information_source: tests can be repeated with `Tour`, `Flight` and `ClientPackage` with the corresponding data
+      fields.
+
+### Cutting data
+
+1. Cut `Client` from database
+    * Test case: `cut -c c001` after calling `add -c c001 /n Bo Tuan /cn 93338333 /m borangutuan@mail.com`
+
+    1. Input the test case to the command window.
+    2. Input `list -c`.
+
+    * Expected: `Client` with id "c001", name "Bo Tuan", contact "93338333", mail "borangutuan@mail.com"
+      is no longer displayed in the list of clients.
+    * :information_source: tests can be repeated with `Tour`, `Flight` and `ClientPackage` with the corresponding data
+      fields.

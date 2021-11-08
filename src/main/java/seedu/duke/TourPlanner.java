@@ -58,7 +58,7 @@ public class TourPlanner {
      */
     private static void loadLogger() {
         LogManager.getLogManager().reset();
-        logr.setLevel(Level.INFO);
+        logr.setLevel(Level.ALL);
         ConsoleHandler consoleHandler = new ConsoleHandler();
         consoleHandler.setLevel(Level.OFF);
         logr.addHandler(consoleHandler);
@@ -134,7 +134,7 @@ public class TourPlanner {
                 isExit = specificCommand.isExit();
             } catch (TourPlannerException e) {
                 ui.show(e.getMessage());
-                logr.warning(e.getMessage());
+                logr.log(Level.WARNING, e.getMessage());
             } finally {
                 ui.showLine();
                 saveToStorage();
