@@ -16,6 +16,19 @@ This document is meant to assist developers in better understanding the inner wo
   - [Common Package](#common-component)
 - [Implementation](#implementation)
   - [Add Command](#add-command)
+  - [Edit Command](#edit-command)
+  - [Search Command](#search-command)
+  - [Loan Command](#loan-command)
+  - [Deadline Command](#deadline-command)
+  - [Storage Processes](#storage-processes)
+    - [Reading from file and deserializing](#reading-from-file-and-deserializing)
+    - [Serializing and writing to file](#serializing-and-writing-to-file)
+- [Product Scope](#product-scope)
+  - [Target user profile](#target-user-profile)
+  - [Value proposition](#value-proposition)
+  - [User Stories](#user-stories)
+- [Non-Functional Requirements](#non-functional-requirements)
+- [Instructions for manual testing](#instructions-for-manual-testing)
 
 ## Acknowledgements
 
@@ -45,7 +58,7 @@ If you plan to use Intellij IDEA (highly recommended):
 to import the project into IDEA.
    _⚠ Note: Importing a Gradle project is slightly different from importing a normal Java project._
 3. **Verify the setup**:
-   1. Run the `seedu.libmgr.Libmgr` and try a few commands. 
+   1. Run the `seedu.duke.Libmgr` and try a few commands. 
    2. Run the tests to ensure they all pass.
 
 ## Design
@@ -59,7 +72,7 @@ Further elaboration  is given below.
 
 ![ArchitectureDiagram](img/ArchitectureDiagram.png)
 
-The base `Duke` class consists of the main method which is responsible for:
+The base `Libmgr` class consists of the main method which is responsible for:
 - Application launch: initializing the components in the correct order and setting up the data containers effectively.
 - Applicaiton teardown: shutting down the components, perform cleaning up and closing of processes where necessary.
 
@@ -96,29 +109,44 @@ The above sequence diagram shows the interactions occurring each time a command 
 
 ### Commands component
 
-![ParserAndCommandClassDiagram](img/ParserAndCommandClassDiagram2.png)
+![ParserAndCommandClassDiagram1](img/ParserAndCommandClassDiagram1.png)
+![ParserAndCommandClassDiagram2](img/ParserAndCommandClassDiagram2.png)
+![ParserAndCommandClassDiagram23](img/ParserAndCommandClassDiagram3.png)
+
+The above partial class diagrams illustrate the classes inside the commands component that correspond to specific functionalities. 
 
 The commands component consists of a `commands` package. Inside the package are the following classes: 
 1. A main `Parser` class to process all the commands 
-2. Individual Command classes, each corresponding to a specific command 
+2. An abstract `Command` class, from which all other individual command classes inherit from
+3. Individual Command classes, each corresponding to a specific command based on the user input
    1. `AddAudioCommand`
    2. `AddBookCommand`
    3. `AddCommand`
    4. `AddMagazineCommand`
-   5. `AddVideoCommand`
-   6. `DeadlineCommand`
-   7. `EditCommand`
-   8. `ExitCommand`
-   9. `ListCommand`
-   10. `LoanCommand`
-   11. `RemoveCommand`
-   12. `ReserveCommand`
-   13. `ReturnCommand`
-   14. `SearchCommand`
-   15. `UnknownCommand`
-   16. `UnreserveCommand`
-
-The individual Command classes inherit from an abstract `Command` class.
+   5. `AddMiscellaneousCommand`
+   6. `AddVideoCommand`
+   7. `DeadlineCommand`
+   8. `EditAudioCommand`
+   9. `EditBookCommand`
+   10. `EditCommand`
+   11. `EditMagazineCommand`
+   12. `EditMiscellaneousCommand`
+   13. `EditVideoCommand`
+   14. `ErrorCommand`
+   15. `ExitCommand`
+   16. `HelpCommand`
+   17. `InfoCommand`
+   18. `ListCommand`
+   19. `LoanCommand`
+   20. `RemoveCommand`
+   21. `ReserveCommand`
+   22. `ReturnCommand`
+   23. `SearchCommand`
+   24. `UnknownCommand`
+   25. `UnreserveCommand`
+   
+Each individual command class overwrites the `execute(TextUI ui, Catalogue catalogue)` method in the abstract `Command` class 
+to implement its own execution functionality. 
 
 ### Data Component
 
@@ -179,9 +207,9 @@ In this instance, the hashmap will contain the following entries
 |Key (String)|Value (String)|
 |---|---|
 |null|add b|
-|t/|1984|
-|i/|91|
-|a/|George Orwell|
+|t|1984|
+|i|91|
+|a|George Orwell|
 
 3. It then checks the value associated with the `null` key in order to determine which `Command` to generate, in this case the `AddBookCommand` is generated
 4. The newly created `AddBookCommand` object is returned by the `parser`
@@ -191,9 +219,31 @@ In this instance, the hashmap will contain the following entries
 
 ### Edit Command
 
-![EditCommandSequence](img/EditCommandSequence.png)
+![EditCommandSequence](img/EditCommandSequence1.png)
 
-The Edit Command class handles the functionality to change a specific detail of an item in the catalogue.
+The Edit Command class handles the functionality to change a specific attribute of an item in the catalogue. The sequence diagram above
+shows the execution when the title attribute of a book with id 123 to "Harry Potter". 
+
+Firstly, the user types in the edit command: `edit 123 t/Harry Potter`. 
+1. The `main()` method in Libmgr calls `parser.parse()`, supplying the full line of input entered by the user. 
+2. Within `parser.parse()`, `parser.extractArgs(input)` is called, which processes the string into a `HashMap<String, String>` variable. <br> 
+In this instance, the hashmap contains the following entries: 
+
+|Key (String)|Value (String)|
+|---|---|
+|null|edit 123|
+|t|Harry Potter|
+
+3. Since the command word `edit` is detected, a new `EditCommand` object is returned by the `parser`. 
+4. The `execute(ui, catalogue)` method of `EditCommand` is called, which further calls the `handlesEditCommand(ui, catalogue)` method.
+5. In the `handlesEditCommand(ui, catalogue)` method, the `processArgs(catalogue)` method is called, which processes the value associated with 
+   the `null` key, to check if the user inputted a valid item id and to retrieve the item associated with that id from the catalogue. 
+6. In this case, since a valid `Book` object with id 123 exists in the catalogue, a new `EditBookCommand` object is created, which then calls its own
+   `execute(ui, catalogue)` and `handlesEditBookCommand(ui, catalogue)` methods. 
+7. The method `processArgs()` is performed to extract "Harry Potter", the new title of the book. Checks are also performed to ascertain if the attribute
+   to be edited is missing, if there are no valid arguments supplied, or if invalid arguments are supplied, outputting the relevant warning messages for each. 
+8. In this case, since all checks pass, the `setTitle(title)` method of the existing `Book` object with id 123 is called, and its `title` attribute is edited to 
+   "Harry Potter". 
 
 ### Search Command 
 
@@ -340,10 +390,6 @@ inventory more efficiently.
 
 1. Should work on Windows, macOSX and Linux as long as it has Java 11 or above installed.
 2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-## Glossary
-
-* *glossary item* - Definition
 
 ## Instructions for manual testing
 

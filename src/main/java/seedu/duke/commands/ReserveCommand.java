@@ -24,7 +24,6 @@ public class ReserveCommand extends Command {
     public static final String COMMAND_FORMAT = "  (!) Format: res i/ID u/USER";
     public static final String COMMAND_WORD = "res";
     public static final String SUCCESS_RES = "  (+) You have successfully reserved an item:";
-    public static final String ERR_RESERVED = "";
 
 
     protected HashMap<String, String> args;
@@ -68,7 +67,7 @@ public class ReserveCommand extends Command {
      * @param catalogue Object that encapsulates the library catalogue
      * @throws LibmgrException when user input is invalid
      */
-    public void handleLoanCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
+    public void handleReserveCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
         if (checkMissingArgs()) {
             ui.print(INVALID_VALUES + System.lineSeparator() + COMMAND_FORMAT);
             return;
@@ -99,7 +98,7 @@ public class ReserveCommand extends Command {
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
         try {
-            handleLoanCommand(ui, catalogue);
+            handleReserveCommand(ui, catalogue);
         } catch (LibmgrException e) {
             ui.print(e.getMessage());
         } catch (NullPointerException e) {

@@ -30,7 +30,9 @@ public class DeadlineCommand extends Command {
     public String input = "";
 
     /**
-     * Single constructor, no parameters.
+     * Single constructor.
+     *
+     * @param input Input given by the user
      */
     public DeadlineCommand(String input) {
         this.input = input.strip();
