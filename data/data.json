@@ -35,7 +35,7 @@
     "status" : "AVAILABLE"
   } ],
   "magazine" : [ {
-    "title" : "TITLE",
+    "title" : "title",
     "id" : "id",
     "status" : "AVAILABLE",
     "publisher" : "PUBLISHER",
