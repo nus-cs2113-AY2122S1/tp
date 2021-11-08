@@ -8,13 +8,10 @@ import seedu.duke.ui.TextUI;
 import static seedu.duke.common.Messages.INVALID_ID;
 import static seedu.duke.common.Messages.INVALID_VALUES;
 
-<<<<<<< HEAD
 //@@author exetr
-=======
 /**
  * Class encapsulating command to update the status of the item that was previously RESERVED to AVAILABLE.
  */
->>>>>>> ffc4fced82adc694ecb8e37f65e29371b4a309a4
 public class UnreserveCommand extends Command {
     public static final String COMMAND_WORD = "unres";
     public static final String COMMAND_FORMAT = "  (!) Format: unres ID";
