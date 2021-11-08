@@ -243,5 +243,4 @@ public class ParseCondition {
         return uniSelectedObject.getList().size() == 0;
     }
 
-
 }

@@ -58,6 +58,7 @@ public class Constants {
     public static final String ERRORMSG_PARSEEXCEPTION_DUPLICATEMAP = "This mapping has already been added.";
     public static final String ERRORMSG_PARSEEXCEPTION_NOMAPPING = "This university has no available mappings.";
     public static final String ERRORMSG_PARSEEXCEPTION_INVALIDMAPPING = "Mapping with this index does not exist.";
+    public static final String ERRORMSG_PARSEEXCEPTION_NOSELECTEDUNI = "Your selected university list is empty.";
 
     // Log
     public static final String LOGGER_NAME = "SEPlanner log";
