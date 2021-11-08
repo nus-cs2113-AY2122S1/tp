@@ -74,7 +74,7 @@ as major changes to the code architecture were implemented for improved scalabil
 
 * **PR**: [#28](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/28), [#64](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/64), [#84](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/84),
 [#87](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/87), [#114](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/114), [#163](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/163),
-[#173](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/173).
+[#173](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/173), [#192](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/192).
 
 Most notable enhancement is the [launch lesson](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/114) feature.
 The motivation for developing this comes from the frustration that some terminals do not support URL highlighting,
@@ -94,10 +94,11 @@ Refactored most sections of UG to improve its layout. Updated User Guide sequent
 
 ### Contributions to the Developer Guide
 
-* **PRs**: [#74](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/74), [#75](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/75), [#106](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/106).
+* **PRs**: [#74](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/74), [#75](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/75), [#106](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/106), [#193](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/193).
 
 Set up the structure of DG, starting with `Architecture` and `Logic` sections.
 Incorporated UML Diagrams with the help of [PlantUML](https://plantuml.com/), including class and sequence diagrams.
+Standardized UML Diagrams color scheme with `Style.puml`.
 
 ### Contributions to Team-based Tasks
 
