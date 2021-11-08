@@ -88,9 +88,9 @@ When the user inputs a line of text into the terminal, terminated with a newline
 
 * After user input is parsed by `Parser`, depending on the current `viewType`, the `Ui` will call methods from
   different `Ui` subclasses
-    * When `viewType` is `Patient Management`, `PatientUi` methods are called.
-    * When `viewType` is `Staff Management`, `StaffUi` methods are called.
-    * When `viewType` is `Scheduler`, `SchedulerUi` methods are called.
+    * When `viewType` is `PATIENT_INFO`, `PatientUi` methods are called.
+    * When `viewType` is `MEDICAL_STAFF_INFO`, `StaffUi` methods are called.
+    * When `viewType` is `SCHEDULER`, `SchedulerUi` methods are called.
 
 Given below is a sequence diagram of how the `Ui` component works after the `Parser`
 parses `help delete` input given by a user.
@@ -317,7 +317,7 @@ the `execute()` method to achieve the desired functionality.
 The example below gives a direction on how this command behaves.
 
 
-1. User executes the `edit n/John` command when the attribute `Parser#viewType` is `Patient Management``.
+1. User executes the `edit n/John` command when the attribute `Parser#viewType` is `PATIENT_INFO`.
 The `Parser#parseCommand()` method will parse this command and eventually returns a `new EditPatientCommand()` object.
 
 
