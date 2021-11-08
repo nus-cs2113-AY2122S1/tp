@@ -45,9 +45,10 @@ Below are contributions I've made to the team and Ha(ppy)Bit. Organised for you 
 
 
 - Wrote "4.3. Listing all Goals" subsection of "4. Implementation"
-  - Created PUML Sequence Diagram 
+  - Created PUML Sequence Diagram as well
 - Contributed to "4.8. Deleting a Goal" and "4.9. Deleting a Habit" subsection of "4. Implementation"
-  - Created PUML Sequence Diagram
+  - Created PUML Sequence Diagram as well
+- Wrote "4.11.1 Storage" subsection of "4. Implementation"
 - Wrote "Target User Profile" and "Value Proposition" under "Appendix A"
 - Contributed to "Appendix C: Non-Functional Requirements"
 - Contributed to "Appendix D: Glossary"
@@ -56,9 +57,18 @@ Below are contributions I've made to the team and Ha(ppy)Bit. Organised for you 
 
 - _Hmm it's empty._
 
+### Team-based Tasks
+
+- Took part in the great bug catching expedition (i.e. found and reported bugs to respective members)
+- Build rapport by staying past 3 AM together to work on _Ha(ppy)Bit_
+- Reviewed and merged PRs
+
 ### Tools
 
-- PlantUML diagrams for `DeleteGoalCommand` and `DeleteHabitCommand` in DG
+- PlantUML diagrams for:
+  - `ListGoalsCommand`, `ListGoalsParser`,
+  - `DeleteGoalCommand`, `DeleteHabitCommand`
+  - and `DeleteParser` in DG
 
 ### Extra
 
