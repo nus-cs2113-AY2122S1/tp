@@ -366,28 +366,70 @@ This section describes the implementation of how the user can display a list of 
 
 ### 4.4. Listing all Habits
 
-A `ListHabitCommand` object is returned from the `ListHabitParser` if the user input is successfully parsed as shown below.
-If no goal index or invalid goal index is detected, an exception is thrown.
+This section describes the implementation of how the user can display a list of all tracked goals.
+
+#### 4.4.1. Implementation
+
+1. The `ListHabitParser#parseListHabitCommand(commandInstruction)` method is called, which starts the process of 
+   extracting parameters from the user input.
+2. The `ListHabitParser#splitInput(commandInstruction)` method splits the user input into an ArrayList of parameters, 
+   while the `ListHabitParser#getIndex(parameters, "g/")` method finds the goal index from the parameters ArrayList and 
+   checks that the index is a positive integer, returning the goalIndex of the specified goal in the goalList.
+3. An `ListHabitsCommand(goalIndex)` object is created and returned from the 
+   `ListHabitParser#parseListHabitCommand(commandInstruction)` method.
 
 ![](Diagram_Images/Implementation_Diagram_Images/ListHabitsCommandParserSequenceDiagram.png)
 
-The `runCommand` method is then executed for the `ListHabitsCommand` object as seen.
+4. The `ListHabitsCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
+   `GoalList#listHabitsFromGoal(goalIndex, printManager)` method.
+5. Within this newly called method, the `GoalList#getGoal(goalIndex)` method is called to retrieve the `Goal` object
+   from the `goalList`. 
+6. The `goal.getHabitList()` method is called to retrieve all the habits associated with that `Goal` object.
+7. The `goal.getListLength()` method is called to find the number of habits associated with that `Goal` object.
+8. If the habitList is empty, a `HaBitCommandException` is raised to indicate the error that there are no habits
+   associated with that goal.
+9. Otherwise, the `PrintManager#printHabitList(goalName, habitList, numOfHabits)` method prints all habits associated
+   with that goal in a tabular form.
 
 ![](Diagram_Images/Implementation_Diagram_Images/ListHabitsCommandSequenceDiagram.png)
 
+#### 4.4.2. Design Considerations
+
+// TODO
+
 ### 4.5. Completing a Habit
 
-A `DoneHabitCommand` object is returned from the `DoneParser` if the user input is successfully parsed as shown below.
+#### 4.5.1. Implementation
+
+1. The `DoneParser#parseDoneHabitCommand(commandInstruction)` method is called, which starts the process of
+   extracting parameters from the user input.
+2. The `DoneParser#splitInput(commandInstruction)` method splits the user input into an ArrayList of parameters,
+   while the `ListHabitParser#getIndex(parameters, "g/")` and `ListHabitParser#getIndex(parameters, "h/")`methods find 
+   the goal index and habit index from the parameters ArrayList respectively. These methods check that the index is a 
+   positive integer and return the index, throwing a `HaBitParserException` otherwise.
+3. An `DoneHabitCommand(goalIndex, habitIndex)` object is created and returned from the
+   `DoneParser#parseDoneHabitCommand(commandInstruction)` method.
 
 ![](Diagram_Images/Implementation_Diagram_Images/DoneCommandParserSequenceDiagram.png)
 
-The `runCommand` method is then executed for the `DoneHabitCommand` object as seen.
+4. The `DoneHabitCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
+   `GoalList#doneHabitFromGoal(goalIndex, habitIndex, printManager)` method.
+5. Within this newly called method, the `GoalList#getGoal(goalIndex)` method is called to retrieve the `Goal` object
+   from the `goalList`.
+6. The `goal.getHabitList()` method is called to retrieve all the habits associated with that `Goal` object.
+7. The `GoalList#getHabit(habitList, habitIndex)` method is called to retrieve the habit at specified `habitIndex`.
+8. The `goal.doneHabit(habitIndex)` method is called to mark the specified habit as completed.
+9. The `habit.getDoneHabitDates` method is called to get information on the start and end dates of the interval marked 
+   as done, as well as the next interval's start date. This is information is required for printing a confirmation
+   message to the user.
+10. Finally, the `PrintManager#printDoneHabit(goalDescription, habitDescription, strDates)` method is called to
+    print a confirmation message on the successful completion of a habit.
 
 ![](Diagram_Images/Implementation_Diagram_Images/DoneCommandSequenceDiagram.png)
 
-The method `doneHabitFromGoal` will obtain the specified Habit from the Goal indicated by the user and execute the 
-`doneHabit` method within the Goal class. If at any point during the execution, if an invalid index for either the 
-Goal or the Habit is detected, an exception will be thrown.
+#### 4.5.2. Design Considerations
+
+// TODO
 
 ### 4.6. Updating a Goal
 

@@ -8,8 +8,14 @@ import happybit.command.UpdateHabitCommand;
 //import happybit.command.UpdateHabitIntervalCommand;
 //import happybit.command.UpdateHabitNameCommand;
 
+import happybit.exception.HaBitCommandException;
 import happybit.exception.HaBitParserException;
+import happybit.goal.Goal;
+import happybit.goal.GoalList;
 import happybit.goal.GoalType;
+import happybit.habit.Habit;
+import happybit.storage.Storage;
+import happybit.ui.PrintManager;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
@@ -67,7 +73,6 @@ class UpdateParserTest {
             "The flag 'i/' has to be followed by a number greater than 0";
     private static final String ERROR_INTERVAL_TOO_LARGE = "Interval size is capped at 365 days.";
 
-    private static final String DATE_FORMAT = "ddMMyyyy";
     private static final String INTERVAL_TOO_LARGE = "366";
     */
     private static final String ERROR_UPDATE_COMMAND_NO_GOAL_INDEX = "A goal index has to be provided with the "
@@ -90,6 +95,7 @@ class UpdateParserTest {
             + "Please try again.";
     private static final String ERROR_FLAG_INDEX_MISSING_PARAMETER = "Index expected after '%1$s' flag missing.";
 
+    private static final String DATE_FORMAT = "ddMMyyyy";
 
     /*
     Tests for parseUpdateGoalCommands()
@@ -270,6 +276,39 @@ class UpdateParserTest {
         }
     }
 
+    @Test
+    void updateGoalCommand_validInput_success() throws HaBitParserException, HaBitCommandException {
+        GoalList goalList = new GoalList();
+        PrintManager printManager = new PrintManager();
+        Storage storage = new Storage();
+
+        Goal goal = new Goal("Original name", GoalType.DEFAULT, stringToDateForTest("11112021"),
+                stringToDateForTest("25122021"));
+        goalList.addGoal(goal);
+        UpdateGoalCommand updateGoalCommand = (UpdateGoalCommand) UpdateParser.parseUpdateGoalCommands(
+                "g/1 n/change name e/31122021 t/ex");
+        updateGoalCommand.runCommand(goalList, printManager, storage);
+    }
+
+    /**
+     * Converts a string formatted date into a Date object.
+     * Original method stringToDate() is in UpdateParser. This method is used for testing.
+     *
+     * @param strDate Date written in String format
+     * @return Date object of strDate
+     * @throws ParseException If the String Date fails to be parsed
+     */
+    private static Date stringToDateForTest(String strDate) throws HaBitParserException {
+        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
+        formatter.setLenient(false);
+        try {
+            return formatter.parse(strDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     /*
     Able to assert handling of incorrect variables within flag due to tests below
      */
@@ -303,24 +342,7 @@ class UpdateParserTest {
 
     }
 
-    /**
-     * Converts a string formatted date into a Date object.
-     * Original method stringToDate() is in UpdateParser. This method is used for testing.
-     *
-     * @param strDate Date written in String format
-     * @return Date object of strDate
-     * @throws ParseException If the String Date fails to be parsed
-     * /
-    private static Date stringToDateForTest(String strDate) throws HaBitParserException {
-        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
-        formatter.setLenient(false);
-        try {
-            return formatter.parse(strDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+
 
     @Test
     void parseUpdateGoalCommands_invalidParameterCombination_exceptionThrown() {
