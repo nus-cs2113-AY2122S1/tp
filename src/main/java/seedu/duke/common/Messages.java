@@ -88,9 +88,13 @@ public class Messages {
     public static final String SEARCH_FORMAT_INCORRECT = " (!) Invalid searching format!" + System.lineSeparator()
             + " (!) Format: 'search i/ID t/TITLE s/STATUS(LOANED/AVAILABLE/RESERVED) "
             + "c/CATEGORY(Magazine/Book/Audio/Video)' or its subset";
-    public static final String NO_SEARCH_RESULT = " (!) No search result! "
+    public static final String NO_SEARCH_RESULT = " (!)  No search result! "
             + "Please check again whether your search format is correct." + System.lineSeparator()
-            + " (!) Format: 'search i/ID t/TITLE s/STATUS c/CATEGORY' or its subset";
+            + " (!)  Format: 'search i/ID t/TITLE s/STATUS c/CATEGORY' or its subset";
+    public static final String INVALID_STATUS = "  (!) Invalid status! Status can only be: AVAILABLE, LOANED, RESERVED"
+            + " (case insensitive)";
+    public static final String INVALID_CATEGORY = "  (!) Invalid category! Status can only be: Book, Audio, Video, Magazine"
+            + " (case insensitive)";
     // Loan and Return
     public static final String UNAVAILABLE_ITEM_MESSAGE = "  (!) Sorry, the item is unavailable.";
     public static final String RETURN_SUCCESS = "  (+) Item has been returned:";
@@ -150,6 +154,5 @@ public class Messages {
     public static final String WARN_INVALID_ARGS = "  (*) Invalid arguments detected, ignoring them";
     public static final String INVALID_ID = "  (!) Invalid Item ID!";
     public static final String INVALID_DATE = "  (!) Invalid date format! It should be in dd-mm-yyyy";
-    public static final String INVALID_STATUS = "  (!) Invalid status! Status can only be: AVAILABLE, LOANED, RESERVED"
-            + " (case insensitive)";
+
 }

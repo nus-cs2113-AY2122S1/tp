@@ -15,16 +15,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import static seedu.duke.common.Messages.DIVIDER;
-import static seedu.duke.common.Messages.INVALID_STATUS;
-import static seedu.duke.common.Messages.KEY_CATEGORY;
-import static seedu.duke.common.Messages.KEY_ID;
-import static seedu.duke.common.Messages.KEY_STATUS;
-import static seedu.duke.common.Messages.KEY_TITLE;
-import static seedu.duke.common.Messages.NO_SEARCH_RESULT;
-import static seedu.duke.common.Messages.SEARCH_FORMAT_INCORRECT;
-import static seedu.duke.common.Messages.SEARCH_MESSAGE;
-import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
+import static seedu.duke.common.Messages.*;
 
 //@@author silinche
 /**
@@ -107,7 +98,7 @@ public class SearchCommand extends Command {
      * Checks whether the status given is valid.
      * @return True if status is one of the enum in Status class
      */
-    public Boolean checkValidStatus(TextUI ui) {
+    public Boolean checkValidStatus() {
         for (Map.Entry<String, String> entry : args.entrySet()) {
             String k = entry.getKey();
             if (k == null) {
@@ -115,13 +106,33 @@ public class SearchCommand extends Command {
             }
             if (k.equals(KEY_STATUS)) {
                 String v = entry.getValue().toUpperCase(Locale.ROOT);
-                if (v.equals(Status.AVAILABLE.toString()) || v.equals(Status.LOANED.toString())
-                        || v.equals(Status.RESERVED.toString())) {
-                    return true;
+                if (!(v.equals(Status.AVAILABLE.toString()) || v.equals(Status.LOANED.toString())
+                        || v.equals(Status.RESERVED.toString()))) {
+                    return false;
                 }
             }
         }
-        return false;
+        return true;
+    }
+
+    /**
+     * Checks whether the status given is valid.
+     * @return True if status is one of the enum in Status class
+     */
+    public Boolean checkValidCategory() {
+        for (Map.Entry<String, String> entry : args.entrySet()) {
+            String k = entry.getKey();
+            if (k == null) {
+                continue;
+            }
+            if (k.equals(KEY_CATEGORY)) {
+                String v = entry.getValue().toUpperCase(Locale.ROOT);
+                if (!(v.equals("AUDIO") || v.equals("VIDEO") || v.equals("MAGAZINE") || v.equals("BOOK"))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public Integer checkMatches(Item temp) {
@@ -135,30 +146,30 @@ public class SearchCommand extends Command {
             if (k.equals(KEY_ID) && v.equals(temp.getID())) {
                 matches++;
             }
-            if (k.equals(KEY_TITLE) && temp.getTitle().contains(v)) {
+            if (k.equals(KEY_TITLE) && temp.getTitle().toUpperCase(Locale.ROOT).contains(v.toUpperCase(Locale.ROOT))) {
                 matches++;
             }
             if (k.equals(KEY_STATUS) && v.toUpperCase(Locale.ROOT).equals(temp.getStatus().name())) {
                 matches++;
             }
             if (k.equals(KEY_CATEGORY)) {
-                switch (v) {
-                case "Audio":
+                switch (v.toUpperCase(Locale.ROOT)) {
+                case "AUDIO":
                     if (temp instanceof Audio) {
                         matches++;
                     }
                     break;
-                case "Book":
+                case "BOOK":
                     if (temp instanceof Book) {
                         matches++;
                     }
                     break;
-                case "Magazine":
+                case "MAGAZINE":
                     if (temp instanceof Magazine) {
                         matches++;
                     }
                     break;
-                case "Video":
+                case "VIDEO":
                     if (temp instanceof Video) {
                         matches++;
                     }
@@ -174,12 +185,16 @@ public class SearchCommand extends Command {
         if (!checkValidArgs()) {
             throw new LibmgrException(SEARCH_FORMAT_INCORRECT);
         }
+        if (!checkValidStatus()) {
+            throw new LibmgrException(INVALID_STATUS);
+        }
+        if (!checkValidCategory()) {
+            throw new LibmgrException(INVALID_CATEGORY);
+        }
         if (checkAdditionalArgs()) {
             ui.print(WARN_INVALID_ARGS);
         }
-        if (!checkValidStatus(ui)) {
-            throw new LibmgrException(INVALID_STATUS);
-        }
+
         ArrayList<Item> fourMatch = new ArrayList<>();
         ArrayList<Item> threeMatch = new ArrayList<>();
         ArrayList<Item> twoMatch = new ArrayList<>();
