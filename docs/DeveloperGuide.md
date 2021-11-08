@@ -13,7 +13,7 @@
   * [Add Class](#add-class)
   * [Add Student](#add-student)
   * [Add Assessment](#add-assessment)
-  * [Set Marks](#set-marks)
+  * [Set Mark](#set-mark)
   * [Set Attendance](#set-attendance)
 * [Project scope](#product-scope)
 * [User Stories](#user-stories)
