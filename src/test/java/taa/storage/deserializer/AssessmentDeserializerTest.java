@@ -116,6 +116,14 @@ class AssessmentDeserializerTest {
     }
 
     @Test
+    void deserialize_aboveLimitMaximumMarksMember_expectNull() {
+        String input = "{\"name\":\"Midterm\",\"maximumMarks\":1000.1,\"weightage\":30.0}";
+
+        Assessment assessment = jsonToAssessment(input);
+        assertNull(assessment);
+    }
+
+    @Test
     void deserialize_missingWeightageMember_expectNull() {
         String input = "{\"name\":\"Midterm\",\"maximumMarks\":30.0}";
 
