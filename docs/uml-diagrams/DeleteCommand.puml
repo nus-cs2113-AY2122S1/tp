@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+[-> DeleteCommand : execute()
+activate DeleteCommand
+DeleteCommand -> Timetable : deleteModuleFromList( itemToBeDeleted )
+activate Timetable
+DeleteCommand -> Timetable : deleteFromSchedules( itemToBeDeleted )
+activate Timetable
+    loop For each day of the week
+    Timetable -> Timetable : deleteItemFromSchedule(Title, day)
+    activate Timetable
+       deactivate Timetable
+    end
+    deactivate Timetable
+    Timetable->TextUi :printModuleDeleted(Title)
+    activate TextUi
+    deactivate TextUi
+    destroy TextUi
+deactivate Timetable
+destroy DeleteCommand
+@enduml

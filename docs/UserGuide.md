@@ -29,11 +29,13 @@ lessons in your daily schedule and your total workload:
     * [Add to Timetable](#add-to-timetable-add)
         * [Add a Module](#add-a-module-to-timetable )
         * [Add an Event](#add-an-event-to-timetable)
+
     * [Delete from Timetable](#delete-from-timetable-delete-module_code-or-delete-event_name)
     * [Clear From Timetable or Transcript](#clear-from-timetable-or-transcript--clear)
         * [Clear from Timetable](#clear-from-timetable)
         * [Clear from Transcript](#clear-from-transcript)
     * [View Timetable](#view-timetable-timetable--flag)
+
     * [Changing Semester](#changing-semester)
     * [Storing grades secured in past modules](#store-grades-secured-in-various-modules-store-grade--module_code)
     * [Removing modules from stored grades](#remove-modules-from-the-list-of-completed-modules-remove-module_code)
@@ -567,18 +569,6 @@ You can type `store A+ > CS2113T` to store A+ grade for the module CS2113T in th
 CS2113T with grade A+ has been added to your Transcript
 ________________________________________________________________________________________________________________________
 
-
-```
-
-You can also store modules with CS/CU grades for record purposes.These modules will not be considered for CAP
-calculation.
-
-For Example : Let's store `CS` grade for `CFG1002` module in the records.
-
-```shell
-~$ store CS > CFG1002
-CFG1002 with grade CS has been added to your Transcript
-________________________________________________________________________________________________________________________
 
 ```
 
