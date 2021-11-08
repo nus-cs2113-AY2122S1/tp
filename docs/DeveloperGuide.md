@@ -133,9 +133,64 @@ Module-related commands are managed by `ModuleManager`, which directly interacts
 
 ![module architecture](diagrams/module/Module.png)
 
+#### 3.4.2 Food-related models
+
+Food-related commands operate on a list of `FoodRecord`, and a `StorageFood` object. The following diagram  illustrates
+how the storage in a text file, and the current food list interact with each other.
+`StorageFood` object contains static methods to read and write data from said list.
+The saving of data from the list to the storage file is elaborated further in the diagram below.
+
+![](diagrams/food/foodClassDiagram.png)
+
+Additionally, StallsManager is implemented to support the `food view` commands, which include a reference food court
+, Technoedge.This class includes all stalls, food items sold by the store as well as the calorie count for the food items.
+Furthermore, methods that involve sorting and filtering food items by calorie count and name are implemented in StallsManager
+for the user to easily find items.
+
 ### 3.5. Storage Component
 
 The storage of `Click` refers to storing files of user's data into respective local subdirectory in a local directory called `storage`, which is in the same directory as the project root.
+
+The respective `.txt` files corresponding to the different features of click are held in their respective subfolders.
+
+For example, `food.txt` would be found under `storage/fooddata/`.
+
+### 3.6 Help Component
+
+#### Command-syntax interaction on runtime for Help Command
+
+The following diagram illustrates the  interactions between the functional class `ClassPackageReader` and
+a particular command `ClickCommand`.
+
+![](diagrams/help/helpCommandsClassDiagram.png)
+
+A class package reader  is implemented in order to:
+1.  Read classes from a specified package
+1.  Get names of all classes declared
+1.  Filter out the classes that are not commands by inheritance
+1.  Collect the commands in a set
+1.  Iterate through all other listed packages and merge the sets
+1.  Sort the filtered commands by alphabetical order for readability
+1.  Read the specific syntax  of a command, and print it to the user
+
+The abstract class `Command` has the following methods which
+implement steps 3 & 4:
+1. `public int compare(Command command1, Command command2){...}`
+   >This comparator is used in the
+   `ClassPackageReader` to sort out the Commands by name, and is further elaborated in Logic.
+1. `public void printClassNameAndSyntax()`
+   > This function splits the name of the class by upper and lower case, and also to remove the
+   "command" word at the end of the class.
+
+Next, we decided to run the `ClassPackageReader` through a package rather than iterate through all classes.
+The former is better than the latter considering our implementation of the commands. For instance, all module-
+related commands are grouped together in the `module` package, food-related commands in `food` etc. \
+Thus, by accessing the packages and filtering out the commands, the `ClassPackageReader` presents the name of the command
+and the syntax in a readable format to the user.
+
+Do note that the packages have to be manually input by the developers.
+However, the core functionality of Click is already partitioned nicely into the packages and hence we do not expect
+many updates over the lifeline of this project.
 
 ## 4. Implementation
 
@@ -612,26 +667,7 @@ Given below is an example usage scenario and how the find notebook by tag mechan
 This segment focuses on describing the implementation of food-related features,
 the functionality of the commands as well as the design considerations taken.
 
-#### 4.5.1 Architecture
-
-##### Class Diagram of Food
-
-Food-related commands operate on a list of food records, and a food storage object. The following diagram  illustrates
-how the storage in a text file, and the current food list interact with each other.
-Food storage object contains static methods to read and write data from said list.
-The saving of data from the list to the storage file is elaborated further in the diagram below.
-
-Further discussion on the design considerations of writing an abstract class are discussed in 
-design considerations.
-
-![](diagrams/food/foodClassDiagram.png)
-
-Additionally, StallsManager is implemented to support the `food view` commands, which include a reference food court
-, Technoedge.This class includes all stalls, food items sold by the store as well as the calorie count for the food items.
-Furthermore, methods that involve sorting and filtering food items by calorie count and name are implemented in StallsManager
-for the user to easily find items.
-
-
+To begin, consider how a food command is parsed from user input.
 ##### Sequence diagram when food is parsed
 
 The following diagram displays the interactions between the classes when the user enters a command starting with
@@ -802,46 +838,12 @@ The user simply enters `help` to have the user interface `Ui` print out the help
 
 After considering the different functionalities of the `help` command as well as the runtime mode of help,
 the following section would elaborate on how the runtime mode works, and how we integrate this into generating the help message for the user.
-#### 4.6.1 Architecture  of Help Command
-
-The following diagram illustrates the  interactions between the functional class `ClassPackageReader` and
-a particular command `ClickCommand`.
-
-![](diagrams/help/helpCommandsClassDiagram.png)
-
-A class package reader  is implemented in order to:
-1.  Read classes from a specified package
-1.  Get names of all classes declared
-1.  Filter out the classes that are not commands by inheritance
-1.  Collect the commands in a set
-1.  Iterate through all other listed packages and merge the sets
-1.  Sort the filtered commands by alphabetical order for readability
-1.  Read the specific syntax  of a command, and print it to the user
-
-The abstract class `Command` has the following methods which 
-implement steps 3 & 4:
-1. `public int compare(Command command1, Command command2){...}`
-   >This comparator is used in the
-`ClassPackageReader` to sort out the Commands by name, and is further elaborated in Logic.
-1. `public void printClassNameAndSyntax()` 
-    > This function splits the name of the class by upper and lower case, and also to remove the
-    "command" word at the end of the class. 
-
-Next, we decided to run the `ClassPackageReader` through a package rather than iterate through all classes.
-The former is better than the latter considering our implementation of the commands. For instance, all module-
-related commands are grouped together in the `module` package, food-related commands in `food` etc. \
-Thus, by accessing the packages and filtering out the commands, the `ClassPackageReader` presents the name of the command
-and the syntax in a readable format to the user. \
-
-Do note that the packages have to be manually input by the developers.
-However, the core functionality of Click is already partitioned nicely into the packages and hence we do not expect
-many updates over the lifeline of this project.
 
 #### 4.6.2 Logic of Help Command
 
-After describing the [architecture](#461-architecture--of-help-command) of the help command, this portion will then describe the sequence of activation by
+After describing the [architecture](#36-help-component) of the help command, this portion will then describe the sequence of activation by
 the developer when parsing a `help rt` command. Take the following sequence diagram for reference.
-![](diagrams/help/HelpCommand_execute-Help_Commands.png)\
+![](diagrams/help/HelpCommand_execute-Help_Commands.png)
 
 The sequence diagram provides a high-level view on how the entities interact. You should notice the interaction between
 `ClassPackageReader` and the `Command` entities, where the former gets the syntax of the latter by having a class as
