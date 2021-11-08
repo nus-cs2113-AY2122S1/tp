@@ -46,6 +46,7 @@ Given below are my contributions to the project:
 * Developer Guide:
   * Added design detail for Architecture (excluding the diagram by [William](williamwahyudi.md).
   * Added design detail for Command Component, Game Component and Time Limit Game section: [#155](https://github.com/AY2122S1-CS2113-T13-4/tp/pull/155). 
+  * Added details for manual testing.
 
 #### Community
 * [16 PRs reviewed](https://github.com/AY2122S1-CS2113-T13-4/tp/pulls?q=is%3Apr+is%3Aclosed)
@@ -53,6 +54,3 @@ Given below are my contributions to the project:
 * The `game` class I added is inherited by both `TimeLimitGame` and `WordLimitGame`
   ([#56](https://github.com/AY2122S1-CS2113-T13-4/tp/pull/56), [#144](https://github.com/AY2122S1-CS2113-T13-4/tp/pull/144)).
 * The `GameCommand` class I added is also applied to both `TimeGameCommand` and `WordGameCommand`([#81](https://github.com/AY2122S1-CS2113-T13-4/tp/pull/81/files)).
-
-
-

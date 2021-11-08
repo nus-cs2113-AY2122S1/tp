@@ -208,9 +208,25 @@ It solves the lack of entertainment alternatives on the CLI.
 
 ## Glossary
 
-* *glossary item* - Definition
+* Mainstream OS: Windows, Linux, Unix, OS-X 
+* Time Limit Game: A game that ends only when timer stops.
+* Word Limit Game: A game that ends only when all the words has been inputted.
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
-
+### Launch and Shutdown
+1. Initial Launch
+   1. Download the jar file and copy into an empty folder
+   2. Double-click the jar file.  
+      Expected: shows the starting page and current version of Typist
+2. Obtaining past game records 
+   1. Exit the game through command `bye`.
+   2. Re-launch the app by double-clicking hte jar file.  
+      Expected: The record of previous games is retained. 
+   
+### Opening a game
+1. Opening a game with optional operands
+   1. Test case: `game -time 0`  
+      Expected: A warning message about error on limit input is shown. 
+      The game will still start as if no time limit is specified.
+   2. 
