@@ -19,8 +19,8 @@ import static java.lang.Double.parseDouble;
  * Hands the storage for user's selected module list.
  */
 public class SelectedModuleStorage extends UserStorage {
-    private static Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
     private static final String FILE_PATH = "data/selectedModules.txt";
+    private static Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
     private static Boolean isModuleValid = true;
 
     /**

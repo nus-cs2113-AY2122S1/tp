@@ -9,7 +9,9 @@ Exchange Programme, optimised for use via Command Line Interface (CLI).
 
 Given below are my contributions to the project.
 
-* **New Feature**: Added the `Parser` component to handle inputs for all commands. This includes all the `CommandParser` classes to handle the inputs.
+* **New Feature**: Added the `Parser` class to handle inputs for all commands. 
+ 
+* **New Feature**: Added the `AddCommandParser`, `RemoveCommandParser`, `ListCommandParser`, `ExitCommandParser`, `HelpCommandParser` classes to handle the arguments of various commands.
 
 * **New Feature**: Added the `ParserClassException` and its inherited classes to handle exceptions for `Parser` component.
 
@@ -24,10 +26,15 @@ Given below are my contributions to the project.
 
 * **Documentation**:
     * User Guide:
-        * Added documentation for `glossary` section.
+        * Added documentation for `Glossary` section.
+        * Added documentation for `Command Summary` section.
+        * Added documentation for `Features` section.
+        * Added documentation for `Program Overview` section.
+        * Added documentation for `Troubleshooting` section.
     * Developer Guide:
-        * Added implementation and class diagram for parser related classes.
-        * Added manual testing section.
+        * Added implementation and class diagram for `Parser` component.
+        * Added manual testing section for `add`, `remove`, `list`, `searchmap` commands.
 
 * **Community**:
-    * Reported bugs and suggestions for other teams in the class: Verbally informed T09-1 group about a bug in their program.
+    * Reported bugs and suggestions for other teams in the class: Verbally informed CS2113T-T09-1 group about a bug in their program.
+    * Evaluated group CS2113-T13-3 for bugs.
