@@ -564,6 +564,8 @@ This section describes the implementation of how the user can update a goal's na
 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateGoalCommandSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.6.2. Design Considerations
 
 **Aspect:** Single parameter vs Multiple parameters Update
@@ -721,6 +723,8 @@ tracked goals.
     confirmation message on the successful deletion of a habit.
 
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteHabitCommandSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.9.2. Design Considerations
 
@@ -923,7 +927,7 @@ To delete a goal, use the command `remove`.
 
 ![Delete Goal 1](Display_Images/DeleteGoal1.png)
 
-   * Use the command `list` to see the new index of the goals.
+Use the command `list` to see the new index of the goals.
    
 ![New List of Goals](Display_Images/NewListOfGoals.png)
 
