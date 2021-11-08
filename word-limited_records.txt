@@ -1,4 +1,1 @@
-Word-limited|10.055|2|3|5|40.0|60.0|17.90154152163103|[simply,  dummy]
-Word-limited|16.25|4|6|10|40.0|60.0|22.153846153846153|[may, refer, to:
-
-Jaan, name)
+Word-limited|12.04|3|8|11|27.27272727272727|72.72727272727273|39.8671096345515|[the,  printing,  typesetting]

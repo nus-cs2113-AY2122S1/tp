@@ -68,6 +68,11 @@ e.g.2 `clear -gtime` will be interpreted as `clear`
 
 ### 3.1 Set Content: `content`
 Set the typing content before the game.  
+There are two game modes in Typist:
+
+* time-limited (aim to type as much as possible in a limited time)
+* word-limited (aim to type a chosen number of words as fast as possible)
+
 Format: `content` `1-3` `[optional]`
 
 After entering `content`, user can type an integer from 1-3 to choose from following:

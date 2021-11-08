@@ -1,6 +1,4 @@
 # Developer Guide
-* Table of Contents
-  {:toc}
 
 * [Acknowledgements](#acknowledgements)
 * [Setting Up, getting started](#setting-up-getting-started)
@@ -51,37 +49,59 @@ The other core components of Typist:
 The `Command` component implements the Factory Design Pattern to parse user commands.
 
 Here’s a (partial) class diagram of the `Command` component:  
-<img src="diagrams/command.puml" width="560">
+
+![](images/command.png)
 
 How the `Command` component works:
 1. Typists `Main` calls upon the `CommandFactory` class to parse the user input.
 2. The `CommandFactory` returns a `Command` object (more precisely, an object that implements it e.g., `GameCommand`).
 3. `Main` will then execute the `Command` by calling `.run(args)` method of the `Command`.
 
-The Sequence Diagram below illustrates the interactions between `main` and `Command` component for the `getCommand("game -time")` input.
+The Sequence Diagram below illustrates the interactions between `main` and `Command` component 
+for the `getCommand("game -time")` input:
+{Some sequence diagram}
 
 ### Game Component
 
 **How the Game Component works:**
-* When `.run(args)` of the `GameCommand` object is called, a corresponding `Game` object is created. 
-Immediately after, the `.run()` method of `Game` will be called, followed by `.gameSummary()`. 
+* The `Game` component consists of 2 parts: 
+  1. The actual game execution classes;
+  2. and the game record classes
+* For 1: When for a `Game` object, the `.runGame()` is the main method that runs the game until termination and 
+the`.gameSummary()` displays the summary and stores game data. 
+* For 2: Game Record Management, which interacts with record storage, will be explained with further detail in [later section](#proposed-view-statistics-feature).
 
 For instance:
-* When the `.run(args)` of `TimeGameCommand` is called, a `TimeLimitGame` object is created. 
+When game is running from the CLI: 
+* The `.run(args)` of `TimeGameCommand` is called, a `TimeLimitGame` object is created. 
 * Then, `.run()` method of `TimeLimitCommand` is executed, a Time Limit Game will start running 
 until game ends(i.e. timer's up).
 * `.gameSummary()` method will then generate the summary of the game. 
+
+The (partial) Class Diagram bellow illustrates the structure of `game` component:
+{some class diagram}
+
+There are 2 constructors in `TimeModeGame` class, each handling different number of parameters specified.
+
+As from the diagram, `WordLimitGame` and `TimeLimitGame`, the 2 major game execution classes inherits from the `Game` Class.
+However, their implementations and functionality varies on many parts due to them being 2 different games. 
+Hence, The section below explains in greater detail how [Word Mode](#word-limit-game) and [Time Mode](#time-limit-game) of Typist game are implemented.  
+
+
 ### Word Limit Game
 
-Sequence Diagram for Time Mode Game:
+Sequence Diagram for Word Mode Game:
+
 ![](diagrams/WordLimitMode.png)
+
 The Sequence Diagram above illustrates the working process of the `WordLimitGame` class.
 
-### TimeLimitGame Class
-Sequence Diagram for Time Mode Game:
-<img src="https://user-images.githubusercontent.com/69776265/139190231-eb648329-517b-42dc-a088-fbce5c93c616.png" width="574" />
+### Time Limit Game
 
-The Sequence Diagram above illustrates the working process of the `TimeLimitGame` class.
+The Sequence Diagram below illustrates the working process of the `TimeLimitGame` when the `.runGame` method is called:
+<img src="images/TimeGame_SequenceDiagram.png" alt="sequence"/>
+![](images/TimeGame_SequenceDiagram.png)
+
 
 ## Implementation
 
@@ -102,12 +122,11 @@ There are 3 types:
 
 The following UML diagram illustrates the way content selection works in the program.
 
-![](diagrams/Content.png)
+![](images/Content.png)
 
 There only exists one private content string for all sessions. Each time a set method is called, the string is changed 
 depending on the choices that the user made throughout the process. Whenever the user starts a game, the getContent() 
 method is called and the text is set accordingly.
-
 
 
 ### \[Proposed\] View Statistics feature
