@@ -222,13 +222,23 @@ and _AddLoanCommand#execute()_ respectively.
 
 Given below is an example usage scenario and how the add mechanism behaves at each step.
 
-**Step 1.** The user launches the application for the first time. The AllRecordList will be initialized with the initial record list state.
+**Step 1.** The user launches the application for the first time. An instance of AllRecordList will be initialized in `BudgetTracker` class.
 
 **Step 2.** The user executes `add ...`  to add a new record into the record list. The full command is passed into _Parser#parseCommand()_,
 which parses the user input and identifies the type of record to be added based on the first prefix after add.
 
 **Step 3.** Based on the type of record to be added, _Parser#parseCommand()_ returns an instance of _AddBudgetCommand,  AddExpenditureCommand_
-or  _AddLoanCommand_ back to the main function. The _execute()_ function of the instance will then be called to add the record into the initialized AllRecordList.
+or  _AddLoanCommand_ back to the main function. 
+
+**Step 4.** The AllRecordList attribute of the returned *Command* instance is set to the currently initialized AllRecordList in _BudgetTracker_ class. 
+
+**Step 5.** The _execute()_ function of the *Command* instance will then be called to add the record into the AllRecordList.
+
+**Step 6.**
+
+Below is a _sequence diagram_ which shows the calling of `add -b m/12 a/100` during **runtime**.
+
+![Figure Add_Budget_Sequence_Diagram](images/AddSequenceDiagram.png)
 
 <br />
 
