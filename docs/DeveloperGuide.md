@@ -668,7 +668,7 @@ commands.
     <br>Expected:
     
         ```
-        Here is a list of all patients:
+        Here is a list of all not-hidden patients:
         For full details of each patient, please use the command "view PATIENT_ID"
         ----------------------------------------------------------------------------------------------------- 
         |  ID  | IC Number |         Name         | Phone No. |        Email         |       Address        | 
@@ -681,7 +681,7 @@ commands.
     <br>Expected:
      
         ```
-        Here is a list of all patients:
+        Here is a list of all hidden patients:
         For full details of each patient, please use the command "view PATIENT_ID"
         ----------------------------------------------------------------------------------------------------- 
         |  ID  | IC Number |         Name         | Phone No. |        Email         |       Address        | 
