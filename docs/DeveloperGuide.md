@@ -110,10 +110,19 @@ Below is a partial class diagram that shows an overview of the `Data` component.
 
 ![Figure_DataComponent_Partial_Class_Diagram](images/DataPartialClassDiagram.png)
 
-The `Data` component:
+How `Data` component works:
+ * Each instance of `AllRecordList` represents the year in which the user is working on and upon instantiation,
+instantiates 12 instances of `RecordList` which is stored in a _Hashtable_. 
+ * Each instance of `RecordList` stores the 
+records `XYZ` (i.e. `Budget`, `Expenditure`, `Loan`) of a particular month.
 
+ * All `XYZ` classes inherit from the `Record` class
+as they have similar characteristics.
 
-![Figure_DataComponent_Partial_Class_Diagram](images/Data.png)
+Given below is a more detailed class diagram showing the association between the `AllRecordList`,
+the `RecordList`, and the `XYZ` Classes.
+
+![Figure_DataComponent_Partial_Class_Diagram](images/DataDiagram.png)
 
 ### <a id=""></a> Logic Component (Parser and Commands)
 ![Figure_ParserDiagram](images/ParserDiagram.png)
@@ -136,10 +145,10 @@ The `Storage` component:
 
 1) What it does?
 - During the first launch of the app, it creates a new current year database text file if there isn't any. 
-it will then load the data from the database text file into the app. 
-- Allows user to change the data base to the year he wants. 
-- It also allows the conversion of a database into CSV format so that the user can perform more sophisticated statistical analysis.
-- Upon performing any commands that will perform changes to the database such as `add`, `edit`, `delete`
+It will load any existing data from the database text file into the app. 
+- Allows user to change the database to the year he wants. 
+- Allows the conversion of a database into CSV format so that the user can perform more sophisticated statistical analysis.
+- Upon performing any commands that will change records in the database, such as `add`, `edit`, or `delete`,
 Storage will reload the data in the app into the database text file. 
 
 2) Architecture of the Storage component
@@ -173,6 +182,27 @@ The reloadArrayToStorage() method will not be called.
 consist of WriteToTextFile. 
 
 ## <a id="implementation"></a> Implementation
+
+### Add Feature
+The add mechanism allows the user to add records into the Budget Tracker and is needed in order for basic functionality. 
+
+This mechanism is facilitated by AllRecordList which extends from RecordList. It implements the following operations:
+
+* _AllRecordList#addBudget()_  — Adds a budget to the record list.
+* _AllRecordList#addExpenditure()_  —  Adds an expenditure to the record list.
+* _AllRecordList#addLoan()_  — Adds a loan record to the record list.
+
+
+These operations are exposed in the subclasses of the Command Class, specifically the _AddBudgetCommand#execute(), AddExpenditureCommand#execute()_
+and _AddLoanCommand#execute()_ respectively.
+
+Given below is an example usage scenario and how the add mechanism behaves at each step.
+
+ - **Step 1.** The user launches the application for the first time. The AllRecordList will be initialized with the initial record list state.
+ - **Step 2.** The user executes `add ...`  to add a new record into the record list. The full command is passed into _Parser#parseCommand()_,
+which parses the user input and identifies the type of record to be added based on the first prefix after add.  
+ - **Step 3.** Based on the type of record to be added, _Parser#parseCommand()_ returns an instance of _AddBudgetCommand,  AddExpenditureCommand_
+or  _AddLoanCommand_ back to the main function. The _execute()_ function of the instance will then be called to add the record into the initialized AllRecordList.
 
 ### <a id="delete-feature"></a> Delete feature
 

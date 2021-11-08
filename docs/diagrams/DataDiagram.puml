@@ -52,9 +52,9 @@ class Budget {
 }
 
 class Loan {
- # debtorName;
- # LocalDate date;
- # LocalDate dueDate;
+ # debtorName : String
+ # date : LocalDate
+ # dueDate : LocalDate
  + getDueDateString() : String
 }
 
