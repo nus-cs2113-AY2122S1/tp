@@ -28,7 +28,7 @@ Code Hunt is a text-based adventure game using command lines for children aged 4
 ## Quick Start
 
 1. Ensure you have Java 11 or above installed in your Computer.
-2. Download the latest codehunt.jar from [here](to be filled in).
+2. Download the latest tp.jar from [here](https://github.com/AY2122S1-CS2113-T13-3/tp/releases).
 3. Copy the `.jar` file to the folder you want to use as the home folder for your CodeHunt.
 4. To launch the app, run the command `java -jar {filename}.jar`. Here are the first few lines you should see in the output when you start CodeHunt for the first time.
 ![greeting page](images/greeting.png)
