@@ -167,12 +167,12 @@ public class PatientUi extends PersonUi {
     }
 
     /**
-     * Returns a String containing the header of the patient information table.
+     * Returns a String containing the header of the patient information table for matched patients.
      *
-     * @return String containing the header of the patient information table.
+     * @return String containing the header of the patient information table for matched patients.
      */
-    public static String getPatientTableHeader() {
-        return getTableHeader(PATIENT);
+    public static String getPatientTableMatchedHeader() {
+        return getTableMatchedHeader(PATIENT);
     }
 
 }

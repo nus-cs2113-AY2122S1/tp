@@ -167,11 +167,11 @@ public class StaffUi extends PersonUi {
     }
 
     /**
-     * Returns a String containing the header of the staff information table.
+     * Returns a String containing the header of the staff information table for matched staff.
      *
-     * @return String containing the header of the staff information table.
+     * @return String containing the header of the staff information table for matched staff.
      */
-    public static String getStaffTableHeader() {
-        return getTableHeader(STAFF);
+    public static String getStaffTableMatchedHeader() {
+        return getTableMatchedHeader(STAFF);
     }
 }
