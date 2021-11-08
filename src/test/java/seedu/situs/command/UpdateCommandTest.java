@@ -33,7 +33,8 @@ class UpdateCommandTest {
 
         Ingredient updatedIngredient = new Ingredient("Avocado", 450.0, expiryDate1);
         String resultMsg = new UpdateCommand(1, 1, 450.0).run();
-        String expected = UPDATE_MESSAGE + updatedIngredient.getName() + " | Amount Left: 450.000 kg | Expiry Date: 11/11/2021";
+        String expected = UPDATE_MESSAGE + updatedIngredient.getName()
+                + " | Amount Left: 450.000 kg | Expiry Date: 11/11/2021";
         assertEquals(expected, resultMsg);
     }
 }
