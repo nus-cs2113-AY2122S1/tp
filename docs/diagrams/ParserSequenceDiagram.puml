@@ -13,7 +13,7 @@ activate Parser
 Parser -> Parser: parseUserInput
 activate Parser
 Parser -> Parser: checkValidInput
-alt User input is valid
+alt ValidInput
 activate Parser
 Parser -> CommandHandler: handleCommand
 activate CommandHandler
@@ -28,19 +28,28 @@ CommandHandler -> CommandExecutor: executeCommand
 
 
 activate CommandExecutor
-alt InputParams not valid
+alt invalidInputParameters
 CommandHandler <-- CommandExecutor: Error with input parameters
 User <-- CommandHandler: Error message
 
+
 else
 CommandExecutor -> : Call relevant functions
+
+alt invalidParameters
 CommandExecutor <-- : Error with input parameters
 CommandHandler <-- CommandExecutor: Error with input parameters
 deactivate CommandExecutor
 User <-- CommandHandler: Error message
 deactivate CommandHandler
 
+else
 User <--  : Show relevant output
+
+
+
+
+
 
 
 
