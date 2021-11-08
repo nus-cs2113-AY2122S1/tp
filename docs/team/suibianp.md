@@ -50,6 +50,13 @@ While JVM prevents common attacks, bugs can compromise the application and also 
 
 Set up the team GitHub organisation and tp repository. Created team PR to module repository.
 
+Pulled down entire nusmods data for AY20/21 to conform to the minimal network requirement.
+```shell
+curl "https://api.nusmods.com/v2/2021-2022/moduleList.json" |
+jq -r '"https://api.nusmods.com/v2/2021-2022/modules/" + .[].moduleCode + ".json"' |
+wget -i - -nc  2>&1 >> log
+```
+
 ## Unmerged enhancements
 ### Use annotations and reflection for commands
 #### Benefits
