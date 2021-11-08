@@ -13,9 +13,105 @@
     - [Creation of New Objects Stored in ElderlyList Class](#creation-of-new-objects-stored-in-elderlylist-class)
     - [Deletion of Objects Stored in ElderlyList Class](#deletion-of-objects-stored-in-elderlylist-class)
     - [Autosuggestions for search functions](#autosuggestions-for-search-functions)
-  - [User Stories](#user-stories)
-  - [Non-Functional Requirements](#non-functional-requirements)
-  - [Instructions for manual testing](#instructions-for-manual-testing)
+  - [Appendix A: Product Scope](#appendix-a-product-scope)
+    - [Target user profile](#target-user-profile) 
+    - [Value proposition](#value-proposition) 
+  - [Appendix B: User Stories](#appendix-b-user-stories)
+  - [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
+  - [Appendix D: Glossary](#appendix-d-glossary)
+  - [Appendix E: Instructions for manual testing](#appendix-e-instructions-for-manual-testing)
+    - [Launch and shutdown](#launch-and-shutdown)
+    - [Saving and Loading Data](#saving-and-loading-data)
+      - [Storing into wrong file location](#storing-into-wrong-file-location)
+      - [Dealing with corrupted data files](#dealing-with-corrupted-data-files)
+      - [Loading from a file in the correct format](#loading-from-a-file-in-the-correct-format)
+    - [Viewing birthdays](#viewing-birthdays)
+      - [Viewing from invalid username for birthdays](#viewing-from-invalid-username-for-birthdays)
+      - [Viewing from valid username, but birthday has not been set](#viewing-from-valid-username-but-birthday-has-not-been-set)
+      - [Viewing from valid username and birthday has been set](#viewing-from-valid-username-and-birthday-has-been-set)
+    - [Viewing vaccination status](#viewing-vaccination-status)
+      - [Viewing from invalid username for vaccination status](#viewing-from-invalid-username-for-vaccination-status)
+      - [Viewing from valid username, but vaccination status has not been changed](#viewing-from-valid-username-but-vaccination-status-has-not-been-changed)
+      - [Viewing from valid username and vaccination status has been changed](#viewing-from-valid-username-and-vaccination-status-has-been-changed)
+    - [Viewing dietary preference](#viewing-dietary-preference)
+      - [Viewing from invalid username for dietary preference](#viewing-from-invalid-username-for-dietary-preference)
+      - [Viewing from valid username, but dietary preference has not been set](#viewing-from-valid-username-but-dietary-preference-has-not-been-set)
+      - [Viewing from valid username and dietary preference has been set](#viewing-from-valid-username-and-dietary-preference-has-been-set)
+    - [Viewing blood pressure](#viewing-blood-pressure)
+      - [Viewing from invalid username for blood pressure](#viewing-from-invalid-username-for-blood-pressure)
+      - [Viewing from valid username, but blood pressure has not been set](#viewing-from-valid-username-but-blood-pressure-has-not-been-set)
+      - [Viewing from valid username and dietary preference has been set](#viewing-from-valid-username-and-blood-pressure-has-been-set)
+    - [List](#list)
+      - [Listing when elderly has not been added](#listing-when-elderly-has-not-been-added)
+      - [Listing when elderly has been added](#listing-when-elderly-has-been-added)
+    - [Help](#help)
+      - [Running help](#running-help)
+    - [Bye](#bye)
+        - [Running bye](#running-bye)
+    - [Finding elderly by medicine](#finding-elderly-by-medicine)
+      - [Finding with medicine name that nobody has](#finding-with-medicine-name-that-nobody-has)
+      - [Finding with medicine name that at least an elderly has](#finding-with-medicine-name-that-at-least-an-elderly-has)
+    - [Finding elderly by diet](#finding-elderly-by-diet)
+      - [Finding with diet that nobody has](#finding-with-diet-that-nobody-has)
+      - [Finding with diet that at least an elderly has](#finding-with-diet-that-at-least-an-elderly-has)
+    - [Finding elderly by name](#finding-elderly-by-name)
+      - [Finding with name that nobody has](#finding-with-name-that-nobody-has)
+      - [Finding with name that at least an elderly has](#finding-with-name-that-at-least-an-elderly-has)
+    - [Deleting elderly from records](#deleting-elderly-from-records)
+      - [Deleting an elderly record but username not in system](#deleting-an-elderly-record-but-username-not-in-system)
+      - [Deleting an elderly record and username in system](#deleting-an-elderly-record-and-username-is-in-system)
+    - [Deleting elderly medicine from records](#deleting-elderly-medicine-from-records)
+      - [Deleting a medicine record from non-existent elderly](#deleting-a-medicine-record-from-non-existent-elderly)
+      - [Deleting a medicine record from existent elderly but medicine name not in system](#deleting-a-medicine-record-from-existent-elderly-but-medicine-name-not-in-system)
+      - [Deleting an existing medicine record from existent elderly](#deleting-an-existing-medicine-record-from-existent-elderly)
+    - [Deleting elderly appointment from records](#deleting-elderly-appointment-from-records)
+      - [Deleting an appointment record from non-existent elderly](#deleting-an-appointment-record-from-non-existent-elderly)
+      - [Deleting an appointment record from existent elderly but appointment details not in system](#deleting-an-appointment-record-from-existent-elderly-but-appointment-details-not-in-system)
+      - [Deleting an appointment record from existent elderly but invalid datetime given](#deleting-an-appointment-record-from-existent-elderly-but-invalid-datetime-given)
+      - [Deleting an existing appointment record from existent elderly](#deleting-an-existing-appointment-record-from-existent-elderly)
+    - [Deleting elderly next of kin from records](#deleting-elderly-next-of-kin-from-records)
+      - [Deleting a nok record from non-existent elderly](#deleting-a-nok-record-from-non-existent-elderly)
+      - [Deleting a nok record from existent elderly but appointment details not in system](#deleting-a-nok-record-from-existent-elderly-but-appointment-details-not-in-system)
+      - [Deleting an existing nok record from existent elderly](#deleting-an-existing-nok-record-from-existent-elderly)
+    - [Deleting elderly medical history from records](#deleting-elderly-medical-history-from-records)
+      - [Deleting a medical history record from non-existent elderly](#deleting-a-medical-history-record-from-non-existent-elderly)
+      - [Deleting an existing medical history record from existent elderly](#deleting-an-existing-medical-history-record-from-existent-elderly)
+    - [Adding an elderly to the program](#adding-an-elderly-to-the-program)
+      - [Adding a legitimate elderly to the system](#adding-a-legitimate-elderly-to-the-system)
+      - [Inserting in the wrong format into `addelderly`](#inserting-in-the-wrong-format-into-addelderly)
+    - [Adding a medicine schedule to an elderly](#adding-a-medicine-schedule-to-an-elderly)
+      - [Adding medicine to an elderly in the system](#adding-medicine-to-an-elderly-in-the-system)
+      - [Adding medicine into non-existent elderly](#adding-medicine-into-non-existent-elderly)
+    - [Adding a medical appointment to an elderly](#adding-a-medical-appointment-to-an-elderly)
+      - [Adding medical appointment to an elderly in the system](#adding-medical-appointment-to-an-elderly-in-the-system)
+      - [Adding medical appointment into non-existent elderly](#adding-medical-appointment-into-non-existent-elderly)
+      - [Adding medical appointment with invalid fields](#adding-medical-appointment-with-invalid-fields)
+    - [Adding next-of-kin details to an elderly](#adding-next-of-kin-details-to-an-elderly)
+      - [Adding next-of-kin information to an elderly in the system](#adding-next-of-kin-information-to-an-elderly-in-the-system)
+      - [Adding next-of-kin information into non-existent elderly](#adding-next-of-kin-information-into-non-existent-elderly)
+      - [Adding next-of-kin information with invalid fields](#adding-next-of-kin-information-with-invalid-fields)
+    - [Adding record details to an elderly](#adding-record-details-to-an-elderly)
+      - [Adding record to an elderly in the system](#adding-record-to-an-elderly-in-the-system)
+      - [Adding record into non-existent elderly](#adding-record-into-non-existent-elderly)
+      - [Adding record to an elderly with invalid fields](#adding-record-to-an-elderly-with-invalid-fields)
+    - [Adding medical history details to an elderly](#adding-medical-history-details-to-an-elderly)
+      - [Adding medical history to an elderly in the system](#adding-medical-history-to-an-elderly-in-the-system)
+      - [Adding medical history into non-existent elderly](#adding-medical-history-into-non-existent-elderly)
+    - [Adding birthday to an elderly](#adding-birthday-to-an-elderly)
+      - [Setting birthday to an elderly in the system](#setting-birthday-to-an-elderly-in-the-system)
+      - [Setting birthday of an non-existent elderly](#setting-birthday-of-an-non-existent-elderly)
+      - [Adding birthday to an elderly with invalid fields](#adding-birthday-to-an-elderly-with-invalid-fields)
+    - [Sets vaccination status to an elderly](#sets-vaccination-status-to-an-elderly)
+      - [Setting vaccination status of an elderly in the system](#setting-vaccination-status-of-an-elderly-in-the-system)
+      - [Setting vaccination of an non-existent elderly](#setting-birthday-of-an-non-existent-elderly)
+    - [Adding dietary preference to an elderly](#adding-dietary-preference-to-an-elderly)
+      - [Setting dietary preference of an elderly in the system](#setting-dietary-preference-of-an-elderly-in-the-system)
+      - [Setting dietary preference of a non-existent elderly](#setting-dietary-preference-of-a-non-existent-elderly)
+      - [Setting dietary preference of an elderly with invalid fields](#setting-dietary-preference-of-an-elderly-with-invalid-fields)
+    - [Adding blood pressure reading to an elderly](#adding-blood-pressure-reading-to-an-elderly)
+      - [Adding blood pressure reading of an elderly in the system](#adding-blood-pressure-reading-of-an-elderly-in-the-system)
+      - [Adding blood pressure reading of a non-existent elderly](#adding-blood-pressure-reading-of-a-non-existent-elderly)
+      - [Setting blood pressure reading of an elderly with invalid fields](#setting-blood-pressure-reading-of-an-elderly-with-invalid-fields)
 
 ## Product scope
 Hi, welcome to the Elderly in Your Hood.
@@ -465,7 +561,7 @@ While program is being run, run `viewbirthday u/USER_NAME`
 View [UG-viewbirthday](https://ay2122s1-cs2113-t16-2.github.io/tp/UserGuide.html#view-birthday-viewbirthday) for more information.
 
 
-#### Viewing from invalid username
+#### Viewing from invalid username for birthdays
 Test Case: Viewing birthday of a non-existent username
 1. On the program, attempt to view birthday of non-existent username
    ```
@@ -498,7 +594,7 @@ Note: We assume that an elderly has not been vaccinated yet if he/she is not rec
 View [UG-viewvaccination](https://ay2122s1-cs2113-t16-2.github.io/tp/UserGuide.html#view-vaccination-status-viewvaccination) for more information.
 
 
-#### Viewing from invalid username
+#### Viewing from invalid username for vaccination status
 Test Case: Viewing vaccination status of a non-existent username
 1. On the program, attempt to view vaccination status of non-existent username
    ```
@@ -532,7 +628,7 @@ Note: Elderly diet defaulted to not set if elderly exists, but no diet has been 
 View [UG-viewdiet](https://ay2122s1-cs2113-t16-2.github.io/tp/UserGuide.html#view-dietary-preference-viewdiet) for more information.
 
 
-#### Viewing from invalid username
+#### Viewing from invalid username for dietary preference
 Test Case: Viewing dietary preference of a non-existent username
 1. On the program, attempt to view dietary preference of non-existent username
    ```
@@ -566,7 +662,7 @@ Note: Elderly blood pressure defaulted to not set
 View [UG-viewbloodpressure](https://ay2122s1-cs2113-t16-2.github.io/tp/UserGuide.html#view-blood-pressure-viewbloodpressure) for more information.
 
 
-#### Viewing from invalid username
+#### Viewing from invalid username for blood pressure
 Test Case: Viewing blood pressure of a non-existent username
 1. On the program, attempt to view blood pressure of non-existent username
    ```
@@ -582,7 +678,7 @@ Test Case: Viewing blood pressure of an existent username, but has not been set
     [*] Blood pressure of owen soh has not yet been set!
    ```
 
-#### Viewing from valid username and dietary preference has been set
+#### Viewing from valid username and blood pressure has been set
 Test Case: Viewing blood pressure of an existent username, but has been changed
 1. On the program, attempt to view blood pressure of existent username, and blood pressure is set
    ```
@@ -1003,4 +1099,467 @@ Test Case: Deleting existing medical history record from existing elderly
     > Y
     [*] Medical history of rachel heng has been deleted
    ```
-   
+
+### Adding an elderly to the program
+An elderly has to be added into the system for most rudimentary operations to be performed on it.
+While program is being run, run `addelderly u/USERNAME n/NAME r/RISK_LEVEL`
+
+View [UG-addelderly](https://ay2122s1-cs2113-t16-2.github.io/tp/UserGuide.html#adding-an-elderly-addelderly) for more information.
+
+#### Adding a legitimate elderly to the system
+Test Case: Adding a low risk elderly 
+1. On the program, attempt to add a low risk elderly.
+   ```
+    > addelderly u/nguyin n/Rebecca Ng r/l
+    [*] Elderly, rebecca ng, has been added!
+   ```
+
+Test Case: Adding a medium risk elderly
+1. On the program, attempt to add a medium risk elderly.
+   ```
+    > addelderly u/owinsoh n/Owen Soh r/m
+    List of hospitals are shown below:
+    1.changi general hospital
+    2.khoo teck puat hospital
+    3.national university hospital
+    4.ng teng feng general hospital
+    5.singapore general hospital
+    6.tan tock seng hospital
+    [*] Enter hospital number choice. (e.g. 1 for Changi General Hospital etc.) 
+    > 2
+    [*] Enter elderly condition below. Hit enter when done.
+    > G6PD
+    [*] Enter notes on care below. Hit enter when done.
+    > Fall Risk
+    [*] Elderly, owen soh, has been added!
+   ```
+
+Test Case: Adding a high risk elderly
+1. On the program, attempt to add a high risk elderly.
+   ```
+    > addelderly u/wutdequack n/Jonathan Lee r/h
+    List of hospitals are shown below:
+    1.changi general hospital
+    2.khoo teck puat hospital
+    3.national university hospital
+    4.ng teng feng general hospital
+    5.singapore general hospital
+    6.tan tock seng hospital
+    [*] Enter hospital number choice. (e.g. 1 for Changi General Hospital etc.)
+    > 6
+    [*] Enter elderly condition below. Hit enter when done.
+    > Concussion
+    [*] Enter notes on care below. Hit enter when done.
+    > Need to check vitals hourly
+    List of tan tock seng hospital doctors are shown below:
+    1.maralyn harsha
+    2.stace fang
+    3.chantelle jia
+    4.yasmin ang
+    5.wolf emmet
+    [*] Enter doctor number choice. (e.g. 1)
+    > 2
+    [*] Elderly, jonathan lee, has been added!
+   ```
+
+#### Inserting in the wrong format into `addelderly`
+Test Case: Putting a wrong risk level that is not `l`, `m`, `h`
+1. On the program, attempt to add elderly but with the risk level `?`
+   ```
+    > addelderly u/nonexistent n/Non Existent r/?
+    Invalid input detected
+    Correct input format: [*] Add Elderly format: addelderly u/USERNAME n/NAME r/RISK_LEVEL
+   ```
+
+Test Case: Putting a hospital index that is not in range 
+1. On the program, attempt to add medium risk elderly but with the hospital index `7`
+   ```
+    > addelderly u/mediumrisk n/Medium Risk r/m
+    List of hospitals are shown below:
+    1.changi general hospital
+    2.khoo teck puat hospital
+    3.national university hospital
+    4.ng teng feng general hospital
+    5.singapore general hospital
+    6.tan tock seng hospital
+    [*] Enter hospital number choice. (e.g. 1 for Changi General Hospital etc.)
+    > 7
+    [!] Hospital index keyed in is invalid. Please select from given options (1 - 6) only. Please redo addelderly command.
+   ```
+2. Redo the command with the correct parameters
+
+Test Case: Putting a doctor index that is not range
+1. On the program, attempt to add high risk elderly but with the doctor index of `6` instead of it being between `1-5`
+    ```
+    > addelderly u/highrisk n/High Risk r/h
+    List of hospitals are shown below:
+    1.changi general hospital
+    2.khoo teck puat hospital
+    3.national university hospital
+    4.ng teng feng general hospital
+    5.singapore general hospital
+    6.tan tock seng hospital
+    [*] Enter hospital number choice. (e.g. 1 for Changi General Hospital etc.)
+    > 1
+    [*] Enter elderly condition below. Hit enter when done.
+    > Love Sick
+    [*] Enter notes on care below. Hit enter when done.
+    > Watch out for this one!
+    List of changi general hospital doctors are shown below:
+    1.ma xuegang
+    2.xie fang
+    3.peter gang
+    4.jon yi
+    5.han guanting
+    [*] Enter doctor number choice. (e.g. 1)
+    > 6
+    [!] Doctor index keyed in is invalid. Please select from given options (1 - 5) only. Please redo addelderly command.
+   ```
+2. Redo the command with the correct parameters
+
+### Adding a medicine schedule to an elderly
+A medicine schedule with the medicine name and frequency can be tagged to an elderly.
+While program is being run, run `addmed u/USERNAME m/MEDICINE_NAME f/FREQUENCY`
+
+View [UG-addmed](https://ay2122s1-cs2113-t16-2.github.io/tp/UserGuide.html#adding-medicine-to-an-elderly-addmed) for more information.
+
+#### Adding medicine to an elderly in the system
+Test Case: Adding a medicine to a legitimate elderly in the system
+1. On the program, attempt to add `panadol` to `nguyin` that exists in the system.
+   ```
+    > addmed u/nguyin m/panadol f/daily
+    [*] Medicine has been added!
+   ```
+2. You can use the `viewmed` command to view the medicine that is tagged to `nguyin`.
+
+#### Adding medicine into non-existent elderly
+Test Case: Adding medicine to a patient that is not in the system
+1. On the program, attempt to add `anarex` to `nonexistent` that does not exist in the system.
+    ```
+    > addmed u/nonexistent m/anarex f/daily
+    [!] Elderly name you have keyed in does not exist
+   ```
+2. Redo the command and add to an elderly that exist in the system. You may use the `list` command to see the usernames of the elderly in the system.
+
+### Adding a medical appointment to an elderly
+A medical appointment with the location, date and time can be tagged to an elderly. Adding the purpose of visit is an _optional_ field.
+While program is being run, run `addappt u/USERNAME l/LOCATION d/DATE t/TIME [p/PURPOSE]`
+
+View [UG-addappt](https://ay2122s1-cs2113-t16-2.github.io/tp/UserGuide.html#adding-appointment-to-an-elderly-addappt) for more information.
+
+#### Adding medical appointment to an elderly in the system
+Test Case: Adding a medical appointment to a legitimate elderly in the system
+1. On the program, attempt to add an appointment at `tan tock seng hospital` at `08112021` with `1400` time to `nguyin` that exists in the system.
+   ```
+    > addappt u/nguyin l/tan tock seng hospital d/08112021 t/1400
+    [*] Appointment has been added!
+   ```
+2. You can use the `viewappt` to view appointments tagged to `nguyin`.  
+
+Test Case: Adding a medical appointment with a purpose to a legitimate elderly in the system
+1. On the program, attempt to add a `general checkup` appointment at `khoo teck puat hospital` at `08112021` with `1800` time to `owinsoh` that exists in the system.
+   ```
+    > addappt u/owinsoh l/khoo teck puat hospital d/08112021 t/1800 p/general checkup
+    [*] Appointment has been added!
+   ```
+2. You can use the `viewappt` to view appointments tagged to `owinsoh`.
+
+#### Adding medical appointment into non-existent elderly
+Test Case: Adding medical appointment to a patient that is not in the system
+1. On the program, attempt to add an appointment at `singapore general hospital` at `08112021` with `1900` time to `nonexistent` that exists in the system.
+    ```
+    > addappt u/nonexistent l/singapore general hospital d/08112021 t/1900
+    [!] Elderly name you have keyed in does not exist
+   ```
+2. Redo the command and add to an elderly that exist in the system. You may use the `list` command to see the usernames of the elderly in the system.
+
+#### Adding medical appointment with invalid fields
+Test Case: Adding medical appointment with the wrong date field
+
+* Note that the format for date is `DDMMYYYY`.
+
+1. On the program, attempt to add an appointment at `singapore general hospital` at `08132021` with `1930` time to `wutdequack` that exists in the system.
+    ```
+    > addappt u/wutdequack l/singapore general hospital d/08132021 t/1930
+    [*] Date is invalid!
+   ```
+2. Redo the command and add a legitimate date field. 
+
+* Note that the format for time is in 24 Hour Format `HHMM`.
+
+Test Case: Adding medical appointment with the wrong time field
+1. On the program, attempt to add an appointment at `singapore general hospital` at `08122021` with `2445` time to `wutdequack` that exists in the system.
+    ```
+    > addappt u/wutdequack l/singapore general hospital d/08122021 t/2445
+    [*] Time is invalid!
+   ```
+2. Redo the command and add a legitimate time field. 
+
+### Adding next-of-kin details to an elderly
+A next-of-kin can be registered in the system (tied to an existing elderly) with the name, phone, email, address and relationship with the elderly
+While program is being run, run `addnok u/USERNAME k/NOKNAME p/NOKPHONE e/NOKEMAIL a/NOKADDR r/NOKRSHIP`
+
+View [UG-addnok](https://ay2122s1-cs2113-t16-2.github.io/tp/UserGuide.html#adding-next-of-kin-information-to-an-elderly-addnok) for more information.
+
+#### Adding next-of-kin information to an elderly in the system
+Test Case: Adding a next-of-kin information to a legitimate elderly in the system
+1. On the program, attempt to add nok information to `nguyin` (exists in system) with the following details:
+ 
+    { NOKNAME: `Robert Ng`,   NOKPHONE: `98263744`, NOKEMAIL: `bye-bye@gmail.com`, NOKADDR: `Blk 5000 College Drive`, NOKRSHIP: `Son`}
+   ```
+    > addnok u/nguyin k/robert ng p/98263744 e/bye-bye@gmail.com a/Blk 5000 College Drive r/Son
+    [*] Next-of-Kin has been added!
+   ```
+2. You can use the `viewnok` to view appointments tagged to `nguyin`.
+
+#### Adding next-of-kin information into non-existent elderly
+Test Case: Adding a next-of-kin information to an elderly `nonexistent` that is not in the system
+1. On the program, attempt to add nok information to `nonexistent` (does not exist in system) with the following details:
+
+   { NOKNAME: `Non Sense`,   NOKPHONE: `89283837`, NOKEMAIL: `non-sense@gmail.com`, NOKADDR: `Blk NULL College Drive`, NOKRSHIP: `Ex`}
+    ```
+    > addnok u/nonexistent k/non sense p/89283837 e/non-sense@gmail.com a/Blk NULL College Drive r/Ex
+    [!] Elderly name you have keyed in does not exist
+   ```
+2. Redo the command and add to an elderly that exist in the system. You may use the `list` command to see the usernames of the elderly in the system.
+
+#### Adding next-of-kin information with invalid fields
+Test Case: Adding next-of-kin information with an invalid phone number
+
+* Note that phone number must consist of 8 digits.
+
+1. On the program, attempt to add nok information to `owinsoh` (exists in system) with the following details:
+
+   { NOKNAME: `Guan Soh`,   NOKPHONE: `123456789`, NOKEMAIL: `guan-soh@gmail.com`, NOKADDR: `Blk 300 College Drive`, NOKRSHIP: `Daughter`}
+    ```
+    > addnok u/owinsoh k/Guan Soh p/123456789 e/guan-soh@gmail.com a/Blk 300 College Drive r/Daughter
+    Invalid input detected
+    Correct input format: [*] Add Next-Of-Kin information format: addnok u/USERNAME k/NOKNAME p/NOKPHONE e/NOKEMAIL a/NOKADDR r/NOKRSHIP
+   ```
+2. Redo the command and add a legitimate nok phone number.
+
+Test Case: Adding next-of-kin information with an invalid email
+
+* Note that email must consist an `@`.
+
+1. On the program, attempt to add nok information to `owinsoh` (exists in system) with the following details:
+
+   { NOKNAME: `Tuah Soh`,   NOKPHONE: `92364337`, NOKEMAIL: `invalidemail`, NOKADDR: `Blk 300 College Drive`, NOKRSHIP: `Complicated`}
+    ```
+    > addnok u/owinsoh k/Tuah Soh p/92364337 e/invalidemail a/Blk 300 College Drive r/Complicated
+    Invalid input detected
+    Correct input format: [*] Add Next-Of-Kin information format: addnok u/USERNAME k/NOKNAME p/NOKPHONE e/NOKEMAIL a/NOKADDR r/NOKRSHIP
+   ```
+2. Redo the command and add a legitimate email. 
+
+### Adding record details to an elderly
+Additional details in the form of a record can be added to an elderly that exists in the system. This includes fields like the username, phone number and home address.
+While program is being run, run `addrec u/USERNAME p/PHONENUMBER a/HOMEADDRESS`
+
+View [UG-addrec](https://ay2122s1-cs2113-t16-2.github.io/tp/UserGuide.html#adding-record-information-to-an-elderly-addrec) for more information.
+
+#### Adding record to an elderly in the system
+Test Case: Adding a record to a legitimate elderly in the system
+1. On the program, attempt to tag `98273634` and `Block 3000 College Drive` to `nguyin` (exists in system).
+   ```
+    > addrec u/nguyin p/98273634 a/Block 3000 College Drive
+    [*] Record of elderly has been added!
+   ```
+2. You can use the `viewrec` to view appointments tagged to `nguyin`.
+
+#### Adding record into non-existent elderly
+Test Case: Adding record to an elderly `nonexistent` that is not in the system
+1. On the program, attempt to tag `87265352` and `Block 9823 College Drive` to `nonexistent` (exists in system).
+    ```
+    > addrec u/nonexistent p/87265352 a/Block 9823 College Drive
+    [!] Elderly name you have keyed in does not exist
+   ```
+2. Redo the command and add to an elderly that exist in the system. You may use the `list` command to see the usernames of the elderly in the system.
+
+#### Adding record to an elderly with invalid fields
+Test Case: Adding record with an invalid phone number
+
+* Note that phone number must consist of 8 digits.
+
+1. On the program, attempt to tag `123456789` and `Block 1234 College Drive` to `owinsoh` (exists in system).
+    ```
+    > addrec u/owinsoh p/123456789 a/Block 1234 College Drive
+    Invalid input detected
+    Correct input format: [*] Add Elderly Record Information format: addrec u/USERNAME p/PHONENUMBER a/HOMEADDRESS
+    ```
+2. Redo the command and add a legitimate phone number.
+
+### Adding medical history details to an elderly
+Medical history can be recorded for a specified elderly.
+While program is being run, run `addmedicalhistory u/USERNAME`
+
+View [UG-addmedicalhistory](https://ay2122s1-cs2113-t16-2.github.io/tp/UserGuide.html#adding-medical-history-information-to-an-elderly-addmedicalhistory) for more information.
+
+#### Adding medical history to an elderly in the system
+Test Case: Adding pre-existing medical history to a legitimate elderly in the system
+1. On the program, record down the medical history of `heart disease` for elderly `nguyin` (exists in system).
+   ```
+    > addmedicalhistory u/nguyin
+    [*] Please key in your medical history
+    > heart disease
+    [*] Medical history of rebecca ng has been updated
+   ```
+2. You can use the `viewmedicalhistory` to view appointments tagged to `nguyin`.
+
+#### Adding medical history into non-existent elderly
+Test Case: Adding pre-existing medical history to an elderly `nonexistent` that is not in the system
+1. On the program, record down the medical history of `mad cow disease` for elderly `nonexistent` (does not exists in system).
+    ```
+    > addmedicalhistory u/nonexistent
+    [!] Elderly name you have keyed in does not exist
+   ```
+2. Redo the command and add to an elderly that exist in the system. You may use the `list` command to see the usernames of the elderly in the system.
+
+### Adding birthday to an elderly
+A birthday can be tagged to an elderly. 
+While program is being run, run `setbirthday u/USERNAME b/BIRTHDAY`
+
+View [UG-setbirthday](https://ay2122s1-cs2113-t16-2.github.io/tp/UserGuide.html#set-birthday-setbirthday) for more information.
+
+#### Setting birthday to an elderly in the system
+Test Case: Adding birthday to a legitimate elderly in the system
+1. On the program, attempt to add birthday `1965-08-09` to `nguyin` (exists in system).
+   ```
+    > setbirthday u/nguyin b/1965-08-09
+    [*] Birthday of rebecca ng has been set to 1965-08-09
+   ```
+2. You can use the `viewbirthday` to view appointments tagged to `nguyin`.
+
+#### Setting birthday of an non-existent elderly
+Test Case: Adding birthday to a non-existent elderly `nonexistent`
+1. On the program, attempt to add birthday `1989-06-04` to `nonexistent` (does not exist in system).
+    ```
+    > setbirthday u/nonexistent b/1989-06-04
+    [!] Elderly name you have keyed in does not exist
+   ```
+2. Redo the command and add to an elderly that exist in the system. You may use the `list` command to see the usernames of the elderly in the system.
+
+#### Adding birthday to an elderly with invalid fields
+Test Case: Adding birthday with an invalid date
+
+* Note that date must be in the following format `YYYY-MM-DD`.
+
+1. On the program, attempt to add birthday `1950-13-32` to `owinsoh` (exists in system).
+    ```
+    > setbirthday u/owinsoh b/1950-13-32
+    Invalid input detected
+    Correct input format: [!] Invalid date keyed in Kindly check the date!
+    ```
+2. Redo the command and add a legitimate date.
+
+### Sets vaccination status to an elderly
+An elderly's vaccination status can be set to `true`.
+While program is being run, run `setvaccination u/USERNAME`
+
+View [UG-setvaccination](https://ay2122s1-cs2113-t16-2.github.io/tp/UserGuide.html#set-vaccination-setvaccination) for more information.
+
+#### Setting vaccination status of an elderly in the system
+Test Case: Sets vaccination status of a legitimate elderly in the system
+1. On the program, attempt to set `nguyin` (exists in system) vaccination status to `true`.
+   ```
+    > setvaccination u/nguyin
+    [*] We have set rebecca ng to be vaccinated
+   ```
+2. You can use the `viewvaccination` to view appointments tagged to `nguyin`.
+
+#### Setting vaccination of an non-existent elderly
+Test Case: Sets vaccination status of a non-existent elderly `nonexistent`
+1. On the program, attempt to set `nonexistent` (does not exist in system) vaccination status to `true`.
+    ```
+    > setvaccination u/nonexistent
+    [!] Elderly name you have keyed in does not exist
+   ```
+2. Redo the command and add to an elderly that exist in the system. You may use the `list` command to see the usernames of the elderly in the system.
+
+### Adding dietary preference to an elderly
+A dietary preference can be stated for an elderly that exists in the system.
+While program is being run, run `setdiet u/USERNAME`
+
+View [UG-setdiet](https://ay2122s1-cs2113-t16-2.github.io/tp/UserGuide.html#set-dietary-preference-setdiet) for more information.
+
+#### Setting dietary preference of an elderly in the system
+Test Case: Set dietary preference of a legitimate elderly in the system
+1. On the program, attempt to set `nguyin` (exists in system) dietary preference to `VEGAN`.
+   ```
+    > setdiet u/nguyin
+    [*] Select the possible diet of the elderly
+    1. Halal
+    2. Vegetarian
+    3. Vegan
+    4. Beef free
+    5. Diabetes
+    6. No restriction
+    > 3
+    [*] Dietary preference of rebecca ng has been set to Vegan
+   ```
+2. You can use the `viewdiet` to view appointments tagged to `nguyin`.
+
+#### Setting dietary preference of a non-existent elderly
+Test Case: Set dietary preference of a non-existent elderly `nonexistent`
+1. On the program, attempt to set `nonexistent` (does not exist in system) dietary preference to `Halal`.
+    ```
+    > setdiet u/nonexistent
+    [!] Elderly name you have keyed in does not exist
+   ```
+2. Redo the command and add to an elderly that exist in the system. You may use the `list` command to see the usernames of the elderly in the system.
+
+#### Setting dietary preference of an elderly with invalid fields
+Test Case: Select a dietary preference that is out of bounds
+
+* Note that diet preference must be between `1-6`.
+
+1. On the program, attempt to set `owinsoh` (exists in system) dietary preference with index `7`.
+    ```
+    > setdiet u/owinsoh
+    [*] Select the possible diet of the elderly
+    1. Halal
+    2. Vegetarian
+    3. Vegan
+    4. Beef free
+    5. Diabetes
+    6. No restriction
+    > 7
+    Invalid input detected
+    Correct input format: [!] Wrong index of diet is keyed in.
+
+    [*] Dietary preference of owen soh has been set to Not set
+    ```
+2. Redo the command and add a legitimate dietary preference.
+
+### Adding blood pressure reading to an elderly
+A blood pressure reading can be recorded for an elderly that exists in the system.
+While program is being run, run `setbloodpressure u/USERNAME s/SYSTOLIC_PRESSURE d/DIATOLIC_PRESSURE`
+
+View [UG-setbloodpressure](https://ay2122s1-cs2113-t16-2.github.io/tp/UserGuide.html#set-blood-pressure-setbloodpressure) for more information.
+
+#### Adding blood pressure reading of an elderly in the system
+Test Case: Set blood pressure reading of a legitimate elderly in the system
+1. On the program, attempt to set `nguyin` (exists in system) blood pressure readings to SYSTOLIC_PRESSURE: `110`, DIATOLIC_PRESSURE: `60`.
+   ```
+    > setbloodpressure u/nguyin s/110 d/60
+    [*] Blood pressure of rebecca ng has been updated to 110 60!
+   ```
+2. You can use the `viewbloodpressure` to view appointments tagged to `nguyin`.
+
+#### Adding blood pressure reading of a non-existent elderly
+Test Case: Set blood pressure reading of a non-existent elderly `nonexistent`
+1. On the program, attempt to set `nonexistent` (does not exists in system) blood pressure readings to SYSTOLIC_PRESSURE: `130`, DIATOLIC_PRESSURE: `70`.
+    ```
+    > setbloodpressure u/nonexistent s/130 d/70
+    [!] Elderly name you have keyed in does not exist
+   ```
+2. Redo the command and add to an elderly that exist in the system. You may use the `list` command to see the usernames of the elderly in the system.
+
+#### Setting blood pressure reading of an elderly with invalid fields
+Test Case: Set a blood pressure reading that is a `String`
+1. On the program, attempt to set `owinsoh` (exists in system) blood pressure readings to SYSTOLIC_PRESSURE: `INVALID`, DIATOLIC_PRESSURE: `NOPE`.
+    ```
+    > setbloodpressure u/owinsoh s/INVALID d/NOPE
+    [!] Set blood pressure format: setbloodpressure u/USERNAME s/SYSTOLIC_PRESSURE d/DIASTOLIC_PRESSURE
+    ```
+2. Redo the command and add a legitimate blood pressure reading.
