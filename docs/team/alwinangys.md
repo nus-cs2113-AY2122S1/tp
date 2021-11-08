@@ -35,6 +35,11 @@ Given below are my contributions to the project.
 
 
 - **Documentation**:
+  - User Guide:
+    - Laid down the overall structure of the user guide in collaboration with [@crabnuggets](https://github.com/crabnuggets)
+    - Added documentation for specific commands pertaining to `Event`, `Task` and `Member`. These include `select`, `delete` and `find`.
+  - Developer Guide:
+    - Added implementation
 
 
 - **Community**:

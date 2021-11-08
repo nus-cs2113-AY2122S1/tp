@@ -4,26 +4,25 @@ Welcome to **SLAM**! **SLAM** is a desktop application for student group leaders
 ---
 # Table of Contents
 1. [Introduction](#Introduction)
-   1. [Purpose of This Guide](#Purpose of Developer Guide)
+   1. [Purpose of This Guide](#Purpose-of-Developer-Guide)
 2. [Acknowledgements](#Acknowledgements)
 3. [Design](#Design)
    1. [Architecture](#Architecture)
-   2. [Ui component](#Ui component)
-   3. [Logic component](#Logic component)
-   4. [Storage component](#Storage component)
+   2. [Ui component](#Ui-component)
+   3. [Logic component](#Logic-component)
+   4. [Storage component](#Storage-component)
 4. [Implementation](#Implementation)
-   1. [List Functionality](#List Functionality)
-   2. [Next Functionality](#Next Functionality)
-   3. [Update Functionality](#Update Functionality)
-   4. [Delete Functionality](#Delete Functionality)
-   5. [Select Functionality](#Select Functionality)
-5. [Product Scope](#Product scope)
-   1. [Target user profile](#Target user profile)
-   2. [Value proposition](#Value proposition)
-6. [User Stories](#User Stories)
-7. [Non-Functional Requirements](#Non-Functional Requirements)
+   1. [List Functionality](#List-Functionality)
+   2. [Next Functionality](#Next-Functionality)
+   3. [Update Functionality](#Update-Functionality)
+   5. [Select Functionality](#Select-Functionality)
+5. [Product Scope](#Product-scope)
+   1. [Target user profile](#Target-user-profile)
+   2. [Value proposition](#Value-proposition)
+6. [User Stories](#User-Stories)
+7. [Non-Functional Requirements](#Non-Functional-Requirements)
 8. [Glossary](#Glossary)
-9. [Instructions for manual testing](#Instructions for manual testing)
+9. [Instructions for manual testing](#Instructions-for-manual-testing)
 
 
 ## Introduction
@@ -218,27 +217,16 @@ How Updating works:
 6. `Duke` then calls the `execute`  method in the respective `UpdateCommand` where the updates will be implemented
 8. Once all the updates are completed, `UpdateCommand` will return a `postUpdateMessage()` along with `CommandResult` object to show the User the result of the Updates
 
-#### Delete Functionality
-How deleting works:
-
-1. When the `Parser` class parses `delete` as the command from the user, a new `Command` object, `DeleteCommand` is created.
-2. The `DeleteCommand` constructor processes the entire input from the user by calling `prepareInputs`.
-3. `DeleteCommand` has 3 uses: deleting an `Event`, a `Task`, or to delete all `Event`s through the command `delete all`.
-4. The constructor processes the usage for `DeleteCommand` and executes the actual deletion through `execute` which returns a `CommandResult` object with the associated deletion message from the `Ui` class.
-5. `delete all` will not immediately invoke the `clear()` method on the global `eventCatalog` ArrayList and will instead prompt a confirmation from the user before deleting all `Event`s.
 
 #### Select Functionality
 
 ![](images/SelectDiagram.png)
 
-How selecting an `Event` or an event's nested `Task` works:
-1. When the `Parser` class parses `select` as the command from the user, a new `Command` object, `SelectCommand` is created.
-2. If the command contains a valid flag (`-e` or `-t`), `SelectCommand` processes the input from the user by calling `prepareInputs`.
-3. If the user selects an `Event`, `SelectCommand` updates the index of this `Event` in `Parser`.
-4. `SelectCommand` then passes the processed inputs back to `Parser`, which passes it back to `Duke`.
-5. `Duke` then calls the `execute` method in `SelectCommand` which will return an object of type `CommandResult`, and the respective output will be printed.
-
-
+How Selecting works:
+1. When the `Parser` class parses `select` as the command from the user via `parseCommand`, it will call `getSelectCommand` from `SelectParser`.
+2. `SelectParser` then determines what type of `Item` is to be selected, namely either `Event`, `Task`, or `Member`.
+3. Based on the type of `Item`, `SelectParser` determines the index of the `Item` to be chosen, and returns a new `SelectCommand` with the `Item` type and index.
+4. `SelectCommand` then calls on `execute` with the `Item` type and index and displays the details of that `Event`, `Task`, or `Member`.
 
 ## Product scope
 ### Target user profile
@@ -278,7 +266,7 @@ and provide Student leaders, with an application to cater to their specific mana
 |v2.0|Head of a committee|View all the members assigned to a task|Determine whether there is enough manpower allocated for the task|
 |v2.0|Head or member of a committee|Have a calendar view of my next event|Have a better sense of when the next event is happening|
 
-## Non-Functional Requirements
+## Non Functional Requirements
 
 1. Should work on any *mainstream OS* as long as it has java `11` or above installed.
 2. Should be able to hold up to 100 different events without noticeable issues, developing with the application.
@@ -290,4 +278,182 @@ and provide Student leaders, with an application to cater to their specific mana
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Given below are the instructions to test the app manually: 
+
+> 💡**Note:** These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
+
+###Launch and shutdown
+
+####Initial launch
+
+1. Ensure that `Java 11` is installed on your computer.
+2. Download the jar file from [here](https://github.com/AY2122S1-CS2113T-W12-3/tp/) and copy it into an empty folder.
+3. Open up a new terminal within this folder and enter the following command: `java -jar SLAM.jar`.
+4. The program should detect that this is the first time the program is being run from the lack of save data detected.
+5. Terminate the program using `bye` and you should see a new directory created called `data` that contains a `slamData.txt` file.
+
+#####Managing members
+
+Adding members can be achieved through the use of the `add` command.
+
+- **Test case:** `add -m John Doe`
+- **Expected:**
+
+```
+Member added: JOHN DOE
+```
+
+SLAM does not allow member names with numbers in them. However, certain non-alphabet characters are allowed.
+
+- **Test case:** `add -m John Doe`
+- **Expected:**
+
+```
+Member added: JANE TAN JR.
+```
+
+Deleting members can be achieved with the use of the `delete` command.
+
+- **Test case:** `delete -m JANE TAN JR.`
+- **Prerequisite:** `JANE TAN JR.` is in the member roster.
+- **Expected:** 
+
+```
+This member has been removed: JANE TAN JR.
+```
+
+Other incorrect member deletion commands to try are: 
+
+- **Test case:** `delete -m Jimmy Tan`
+- **Prerequisite:** `Jimmy Tan` is not in the roster.
+- **Expected:**
+
+```
+No matching names found!
+```
+
+- **Test case:** `delete John Doe` 
+- **Expected:** 
+
+```
+Please indicate a flag:
+-e for Event
+-t for Task
+-m for Member
+```
+
+#####Managing events
+
+Adding events can be achieved through the use of the `add` command. 
+
+- **Test case:** `add -e n/Tembusu Concert d/19-02-2022 2000 v/MPH b/1000`
+- **Expected:** Program will prompt for an optional description for the event to be entered. after optional description has been entered. Event will be successfully added.
+
+```
+Event added: Tembusu Concert
+Total number of events = 1
+```
+
+Below are a list of additional test cases for incorrect input regarding event addition to try and their expected results: 
+
+- **Test case:** `add -e`
+  - **Expected:** No event is added. Error details shown in the message printed on the CLI.
+- **Test case:** `add -e asdf asdf`
+   - **Expected:** No event is added. Error details regarding a missing field will is printed on the CLI.
+
+Deleting events can be achieved through the use of the `delete` command. 
+
+- **Test Case:** `delete -e 1`
+- **Prerequisite:** There is at least one event in the catalog. 
+- **Expected:** The first event (at index 0) within the catalog is deleted.
+
+```
+This event has been removed: Tembusu Concert
+```
+
+Below are a list of additional test cases for incorrect input regarding event deletion to try and their expected results:
+
+- **Test case:** `delete -e 1` when there are 0 events in the catalog.
+  - **Expected:** No event is deleted. Error details shown in the message printed on the CLI.
+- **Test case:** `delete -e`
+  - **Expected:** No event is deleted. Error details shown in the message printed on the CLI.
+
+The attributes of an event can be updated using the `update` command. 
+
+- **Test case:** `update 1` followed by `n/New Title`
+- **Prerequisite:** There is at least one event in the catalog.
+- **Expected:** The first event (at index 0) within the catalog is updated with a new title called `New Title`.
+
+Other attributes within the event can also be updated through the instructions printed on the CLI when using the `update` command. 
+
+Below are a list of additional test cases for incorrect input regarding the updating of events: 
+
+- **Test case:** `update 2` when there is only 1 event in the catalog.
+   - **Expected:** Non-existent event cannot be updated. Error details shown in the message printed on the CLI.
+- **Test case:** `update asdf`
+   - **Expected:** No event is updated. Error details shown in the message printed on the CLI.
+- **Test case:** `update 1` followed by `n/` when there is at least one event in the catalog.
+   - **Expected:** Event 1 is not updated as a new title is not provided. Error details shown in the message printed on the CLI.
+
+Viewing the next chronological event can be achieved through the `next` command. 
+
+- **Test case:** `next -e`
+- **Prerequisite:** At least 1 event is in the catalog.
+- **Expected:** A calendar view of the date of the next event, along with some of its details will be printed on the CLI. 
+
+A test case for incorrect input regarding the viewing of the next event will be as such: 
+
+- **Test case:** `next -e`
+- **Prerequisite:** No event is in the catalog.
+- **Expected:** No next event is displayed. Error details shown in the message printed on the CLI.
+
+To list all the events in the catalog, the `list` command can be used.
+
+- **Test case:** `list -e`
+- **Prerequisite:** At least 1 event is in the catalog.
+- **Expected:** A list of all the events in the catalog will be printed out with their respective indexes. The list of events will be sorted in chronological order.
+
+A test case for incorrect input regarding the viewing of the next event will be as such:
+
+- **Test case:** `list -e`
+- **Prerequisite:** No event is in the catalog.
+- **Expected:** An empty list of events will be displayed.
+
+An event can be selected using the `select` command.
+
+- **Test Case:** `select 1`
+- **Prerequisite:** There is at least one event in the catalog.
+- **Expected:** The first event (at index 0) within the catalog is selected and more details about it will be printed out on the CLI.
+
+A test case for incorrect input regarding the selection of the event will be as such: 
+
+- **Test case:** `select -e 1`
+- **Prerequisite:** No event is in the catalog.
+- **Expected:** No event will be selected. Error details shown in the message printed on the CLI.
+
+An event within the catalog can be found via it's `title` using the `find` command. 
+
+- **Test case:** `find -e Tembusu c`
+- **Prerequisite:** 
+  - There are three events in total in the event catalog.
+  - The first event has the title `Tembusu Concert` in the event catalog.
+  - The second event has a title that does not contain the search query e.g. `Festival`. 
+  - The third event has the title `Tembusu Camp` in the event catalog.
+- **Expected:** Search results for both events with their respective indexes in the catalog will be returned and printed out on the CLI.
+
+```
+Here are the events found:
+1. Tembusu Concert
+3. Tembusu Camp
+```
+
+Events can be marked as done
+
+#####Managing tasks
+
+
+####Saving data 
+
+As much as SLAM strongly discourages users from modifying save data directly, should lines within the save data be modified in a manner that invalidates the data saved in that line, starting up the program with such corrupted data should produce an exception message with feedback on the line in `slamData.txt` causing the issue. 
+
+Should this be the case, to avoid SLAM overwriting data after the corrupted lines, the tester can forcefully terminate the program using `ctrl + c` and fix corrupted line the save file. 

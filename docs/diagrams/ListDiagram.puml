@@ -11,55 +11,53 @@ box BLUE_COLOR
 Participant ":Parser" as Parser
 Participant ":ListParser" as ListParser
 end box
-box LOGIC_COLOR
-Participant ":ListCommand" as ListCommand
-end box
-
+->Duke: runSlam
 activate Duke
 
-Duke -> Parser : list command
+Duke -> Parser : parseCommand
 activate Parser
 
 
-Parser -> ListParser: command
+Parser -> ListParser:
 activate ListParser
-ListParser -> ListCommand : ListCommand(listType)
+
+box LOGIC_COLOR
+create ":ListCommand" as ListCommand
+end box
+
+ListParser -> ListCommand : ListCommand
 activate ListCommand
 |||
 return
 return
 return
-destroy Parser
 
-Duke -> ListCommand : execute()
+
+Duke -> ListCommand : execute
 activate ListCommand
 opt listType = event
-  ListCommand -> Ui: listingOverallSchedule()
+  ListCommand -> Ui: listingOverallSchedule
   activate Ui
   |||
-  Ui -> Duke
-  deactivate Ui
+  return
 end
 opt listType = task
-  ListCommand -> Ui: listingTaskDetails()
+  ListCommand -> Ui: listingTaskDetails
   activate Ui
   |||
-  Ui -> Duke
-  deactivate Ui
+  return
 end
 opt listType = member
-  ListCommand -> Ui: listingMemberDetails()
+  ListCommand -> Ui: listingMemberDetails
   activate Ui
   |||
-  Ui -> Duke
-  deactivate Ui
+  return
 end
 opt listType = memberRoster
-  ListCommand -> Ui: listingMemberRoster()
+  ListCommand -> Ui: listingMemberRoster
   activate Ui
   |||
-  Ui -> Duke
-  deactivate Ui
+  return
 end
 
 ListCommand --> Duke : CommandResult

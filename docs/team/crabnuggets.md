@@ -1,3 +1,5 @@
+## Alvin Pang (crabnuggets) - Project Portfolio Page
+
 ### Project: Student Life Affairs Manager (SLAM)
 
 SLAM is a desktop application for student group leaders in NUS to manage their group events, tasks and members. This application allows students to plan and manage the organisation of events by allowing users to add custom events to their schedule. Users can add tasks to complete under each event and keep track of the progress of such tasks and events. These tasks also have group members assigned to them from a user-generated roster of members. The user interacts with this application through a CLI. 
@@ -27,6 +29,8 @@ Given below are my contributions to the project.
     * Added documentation for `select` command.
   * Developer Guide:
     * Added implementation details of the `save` and `load` functionalities.
+    * Added user stories.
+    * Added instructions for manual testing.
 
 * **Community**:
   * Reviewed DG for PR [#27](https://github.com/AY2122S1-CS2113T-T10-3/tp)
