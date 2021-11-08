@@ -168,14 +168,17 @@ The sequence diagram shown below illustrates how the `add_student` command works
 ![AddStudentSequenceDiagram](diagrams/sequence/AddStudentSequenceDiagram.png)
 
 Below is an example scenario of how the add student feature behaves at each step:<br>
-* Step 1 - The user executes `add_student c/CS2113T i/a0217978j n/jonny` to add a student. The `add_student` command 
-  calls the `AddStudentCommand.execute` method.
-* Step 2 - Within `AddStudentCommand.execute`, `ClassList.getClassWithId("CS2113T")` is 
-  called to ensure that there is an existing class with ID `CS2113T`.
-* Step 3 - If an existing class with code `CS2113T` is found, a new `Student` object with id and name set to 
-  `a0217978j` and `jonny` respectively.
+* Step 1 - The user executes `add_student c/CS2113T-F12 i/A0217978J n/Jonny Lims` to add a student. The `add_student` 
+  command calls the `AddStudentCommand.execute` method.
+* Step 2 - Within `AddStudentCommand.execute`, `ClassList.getClassWithId("CS2113T-F12")` is 
+  called to ensure that there is an existing class with ID `CS2113TT-F12`.
+* Step 3 - If an existing class with code `CS2113T-F12` is found, a new `Student` object with id and name set to 
+  `A0217978J` and `Jonny Lims` respectively.
 * Step 4 - Then, `StudentList.addStudent` is called to add the newly created `Student` 
-  object into the `students` ArrayList within `StudentList`.
+  object into the `students` ArrayList within `StudentList`. Below is an object diagram showing the state after 
+  completion of the `add_student` command.
+<br>
+![AddStudentObjectDiagram](diagrams/object/AddStudentObjectDiagram.png)
 
 <br>
 
@@ -216,7 +219,7 @@ Below is an example scenario of how the set mark feature behaves at each step:
 * Step 4 - `assessmentList.getAssessment("Midterms")` is called to retrieve the respective `Assessment` object.
 * Step 5 - If the `Assessment` object for `Midterms` exists, `studentList.getStudentAt(1)` is to retrieve the `Student` object.
 * Step 6 - If the `Student` object exists, `student.setMarks("Midterms", 60)` is called to set the mark of the student
-  for `Midterms`. Below is an object diagram showing the state after completion of the set_mark command
+  for `Midterms`. Below is an object diagram showing the state after completion of the set_mark command.
 
 ![SetMarkObjectDiagram](diagrams/object/SetMarkObjectDiagram.png)
 <br>
