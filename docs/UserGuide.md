@@ -83,7 +83,7 @@ as the app each time after you run a command. This includes the `quit` command.
 If the save attempt is unsuccessful, you will see this error message:
 
 ```
-Sorry, there was an error saving your data. We'll try to save your data again the next time you enter a command."
+Sorry, there was an error saving your data. We'll try to save your data again the next time you enter a command.
 ```
 
 The program will then attempt to save again the next time you run a command.
@@ -714,7 +714,13 @@ app on your destination device before starting the program.
 
 **Q**: There was an error loading my save file. What should I do?
 
-**A**: It is likely that your save file is corrupted. If you have modified the save file directly using another
+**A**: If the program detects the save file as corrupted, it will display the following message:
+
+```
+We couldn't read your save file. It may be corrupted, or may have been wrongly modified outside the program.
+```
+
+If you see this message when starting up the app, it is likely that your save file is corrupted. If you have modified the save file directly using another
 application, you should try to undo those changes. Also ensure that your save file is in the same directory as 
 the jar file.
 
