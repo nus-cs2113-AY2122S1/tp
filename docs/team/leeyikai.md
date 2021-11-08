@@ -16,6 +16,7 @@ I have implemented the following enhancements
 - Filtering of expenses by category, payer, description, which allows the user to search for expenses based on their
    specific requirements. 
 - Payment optimization, where the number of transactions required to ensure that everyone is paid back is reduced.
+
 ### Contributions to the UG
 I have contributed to these sections in the UG
 
@@ -23,6 +24,7 @@ I have contributed to these sections in the UG
     make it clearer for the users.
 - `optimize` section, where I help write the explanations so that the user can have a clearer understanding of what the
    function does.
+
 ### Contributions to the DG
 I have contributed to these sections in the DG
 
