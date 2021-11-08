@@ -8,29 +8,20 @@ class TaskList MODEL_COLOR
 
 TaskList -[MODEL_COLOR_T1]> "*" Task : taskList
 
-package "AddTaskCommand" <<Rectangle>> {
-}
+class AddTaskCommand LOGIC_COLOR
+class DeleteTaskCommand LOGIC_COLOR
+class DoneTaskCommand LOGIC_COLOR
+class FindTaskCommand LOGIC_COLOR
+class ListTaskCommand LOGIC_COLOR
 
-package "DeleteTaskCommand" <<Rectangle>> {
-}
-
-package "DoneTaskCommand" <<Rectangle>> {
-}
-
-package "FindTaskCommand" <<Rectangle>> {
-}
-
-package "ListTaskCommand" <<Rectangle>> {
-}
-
-AddTaskCommand .down[MODEL_COLOR_T1].> Task
-AddTaskCommand .down[MODEL_COLOR_T1].> TaskList
-DeleteTaskCommand .down[MODEL_COLOR_T1].>Task
-DeleteTaskCommand .down[MODEL_COLOR_T1].> TaskList
-DoneTaskCommand .up[MODEL_COLOR_T1].> Task
-DoneTaskCommand .up[MODEL_COLOR_T1].> TaskList
-FindTaskCommand .up[MODEL_COLOR_T1].> Task
-FindTaskCommand .up[MODEL_COLOR_T1].> TaskList
-ListTaskCommand .up[MODEL_COLOR_T1].> Task
-ListTaskCommand .up[MODEL_COLOR_T1].> TaskList
+AddTaskCommand .down[LOGIC_COLOR_T1].> Task
+AddTaskCommand .down[LOGIC_COLOR_T1].> TaskList
+DeleteTaskCommand .down[LOGIC_COLOR_T1].>Task
+DeleteTaskCommand .down[LOGIC_COLOR_T1].> TaskList
+DoneTaskCommand .up[LOGIC_COLOR_T1].> Task
+DoneTaskCommand .up[LOGIC_COLOR_T1].> TaskList
+FindTaskCommand .up[LOGIC_COLOR_T1].> Task
+FindTaskCommand .up[LOGIC_COLOR_T1].> TaskList
+ListTaskCommand .up[LOGIC_COLOR_T1].> Task
+ListTaskCommand .up[LOGIC_COLOR_T1].> TaskList
 @enduml

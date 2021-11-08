@@ -3,10 +3,10 @@
 
 !include Style.puml
 
-participant ":Storage" as Storage #lightgreen
+participant ":Storage" as Storage STORAGE_COLOR
 participant "fout:FileWriter" as fout
 participant "bout:BufferedWriter" as bout
-participant "taskList:TaskList" as taskList
+participant "taskList:TaskList" as taskList MODEL_COLOR
 
 [-> Storage: saveData(taskList)
 activate Storage

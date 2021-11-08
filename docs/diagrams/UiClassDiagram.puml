@@ -1,31 +1,19 @@
 @startuml
 !include Style.puml
 
-package "Lesson" <<rectangle>> {
-}
-
-package "LessonList" <<rectangle>> {
-}
-
-package "Task" <<rectangle>> {
-}
-
-package "TaskList" <<rectangle>> {
-}
-
-package "Module" <<rectangle>> {
-}
-
-package "ModuleList" <<rectangle>> {
-}
-
-Class Ui UI_COLOR
-
-TaskList *-[UI_COLOR_T1]-> "*" Task : taskList
-LessonList *-[UI_COLOR_T1]-> "*" Lesson : lessonList
-ModuleList *-[UI_COLOR_T1]-> "*" Module : moduleList
+class Ui UI_COLOR
+class Lesson MODEL_COLOR
+class LessonList MODEL_COLOR
+class Task MODEL_COLOR
+class TaskList MODEL_COLOR
+class Module MODEL_COLOR
+class ModuleList MODEL_COLOR
 
 Ui .[UI_COLOR_T1].> TaskList
 Ui .[UI_COLOR_T1].> LessonList
 Ui .[UI_COLOR_T1].> ModuleList
+
+TaskList *-[MODEL_COLOR_T1]-> "*" Task : taskList
+LessonList *-[MODEL_COLOR_T1]-> "*" Lesson : lessonList
+ModuleList *-[MODEL_COLOR_T1]-> "*" Module : moduleList
 @enduml

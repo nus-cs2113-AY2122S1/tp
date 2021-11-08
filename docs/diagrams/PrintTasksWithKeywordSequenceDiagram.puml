@@ -1,9 +1,11 @@
 @startuml
-participant ":Ui" as ui
-participant ":TaskList" as tasks
-participant "out:PrintStream" as out
+'https://plantuml.com/sequence-diagram
 
 !include Style.puml
+
+participant ":Ui" as ui UI_COLOR
+participant ":TaskList" as tasks MODEL_COLOR
+participant "out:PrintStream" as out
 
 [-> ui : printTasksWithKeyword(taskList, keyword)
 activate ui

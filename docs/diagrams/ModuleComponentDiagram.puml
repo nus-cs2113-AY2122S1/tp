@@ -1,7 +1,5 @@
 @startuml
 !include Style.puml
-hide Circle
-skinparam classAttributeIconSize 0
 
 class Module MODEL_COLOR
 class ModuleList MODEL_COLOR
@@ -13,9 +11,9 @@ FullModuleList -[MODEL_COLOR_T1]> "*" Module : moduleMap
 
 hide members
 
-package "AddModuleCommand" <<Rectangle>> {
-}
-AddModuleCommand .[MODEL_COLOR_T1].> Module
-AddModuleCommand .[MODEL_COLOR_T1].> ModuleList
-AddModuleCommand .[MODEL_COLOR_T1].> FullModuleList
+class AddModuleCommand LOGIC_COLOR
+AddModuleCommand .[LOGIC_COLOR_T1].> Module
+AddModuleCommand .[LOGIC_COLOR_T1].> ModuleList
+AddModuleCommand .[LOGIC_COLOR_T1].> FullModuleList
+
 @enduml
