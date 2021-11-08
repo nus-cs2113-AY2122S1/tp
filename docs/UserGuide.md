@@ -294,7 +294,77 @@ _________________________________________________________
 
 #  &nbsp;&nbsp;`find`
 
-### Finding a Particular Expenditure/Budget: `find`
+### Finding a Particular Expenditure, Loan and Budget: `find`
+
+Find all the records of Expenditure, loan and Budget that have a matching key word on the search term. 
+The search term is the keyword.
+
+Format: `find KEYWORD`
+
+* The needs to be a white space between find and the KEYWORD.
+
+Example of usage:
+
+`find Chicken`
+
+Expected outcome: All records that contains the "Chicken" keyword will be returned.
+
+```
+find Chicken
+========================================================
+Here are the Expenditure and Loan matches we have found!
+/////////////////////////////////////////////////////////
+No Expenditures found for this month
+--------------------------------------------------------
+No Loan found for this month
+========================================================
+No Expenditures found for this month
+--------------------------------------------------------
+No Loan found for this month
+========================================================
+No Expenditures found for this month
+--------------------------------------------------------
+No Loan found for this month
+========================================================
+No Expenditures found for this month
+--------------------------------------------------------
+No Loan found for this month
+========================================================
+No Expenditures found for this month
+--------------------------------------------------------
+No Loan found for this month
+========================================================
+No Expenditures found for this month
+--------------------------------------------------------
+No Loan found for this month
+========================================================
+No Expenditures found for this month
+--------------------------------------------------------
+No Loan found for this month
+========================================================
+No Expenditures found for this month
+--------------------------------------------------------
+No Loan found for this month
+========================================================
+No Expenditures found for this month
+--------------------------------------------------------
+No Loan found for this month
+========================================================
+No Expenditures found for this month
+--------------------------------------------------------
+No Loan found for this month
+========================================================
+Here are the Expenditures we found!
+/////////////////////////////////////////////////////////
+1.Chicken                      | $100.00            | 2021-11-08         | GENERAL           
+--------------------------------------------------------
+No Loan found for this month
+========================================================
+No Expenditures found for this month
+--------------------------------------------------------
+No Loan found for this month
+========================================================
+```
 
 <br />
 
