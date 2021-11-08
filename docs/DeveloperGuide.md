@@ -791,7 +791,7 @@ and restart the program to allow created tasks to be saved!
 ```
 The todo will be shown in the task list but will not be reflected in the data folder.
 
-**Case A**: File exists with save folder name
+**Case B**: File exists with save folder name
 On program run:
    **Expected Output**:
 ```
