@@ -81,7 +81,7 @@ The application consists of the following main components responsible for the hi
 The architecture diagram below shows a high-level overview of the structure between different components.
 
 <p align="center">
-<img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/architecture_diagram.png">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/architecture_diagram.png">
 </p>
 <center>Figure 1: Food-O-Rama Overview Architecture Diagram</center>
 
@@ -89,10 +89,11 @@ The architecture diagram below shows a high-level overview of the structure betw
 
 Describes the step-by-step sequence from User Input to the Output.
 
-![](images/main_sequence.png)
-<p align = "center">
-Figure 2: General Flow Sequence Diagram
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/main_sequence.png">
 </p>
+<center>Figure 2: General Flow Seqeuence Diagram</center>
+
 
 1. User is greeted by welcome screen.
 2. User begins typing inputs.
@@ -105,10 +106,10 @@ Figure 2: General Flow Sequence Diagram
 
 The `InputParser` class is responsible for deconstructing User Inputs to identify Commands and Parameters for execution.
 
-![](images/input_parser_sequence.png)
-<p align = "center">
-Figure 3: InputParser Sequence Diagram
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/input_parser_sequence.png">
 </p>
+<center>Figure 3: InputParser Sequence Diagram</center>
 
 1. Gets command name of user input by checking if the users input starts with any of the strings that are defined for
   commands (add dish, list dish, help etc.).
@@ -129,7 +130,10 @@ under *'Data'* folder.
 
 #### Loading Data
 
-![](images/storage_load_sequence.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/storage_load_sequence.png">
+</p>
+<center>Figure 4: Loading Data Sequence Diagram</center>
 
 1. At the start of the program, Duke calls `Storage.load()`.
     * This method in the `Storage` class is responsible for invoking `loadIngredients()`, `loadDishes()`
@@ -149,7 +153,10 @@ under *'Data'* folder.
 
 #### Saving Data
 
-![](images/storage_write_sequence.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/storage_write_sequence.png">
+</p>
+<center>Figure 5: Saving Data Sequence Diagram</center>
 
 * After every command, Duke calls `Storage.write(Ingredient)`, then `Storage.write(Dish)`.
     * This method in the `Storage` class is responsible for writing to the respective text file depending on the mode.
@@ -170,7 +177,10 @@ under *'Data'* folder.
 The `Dish`, `DishList`, `Ingredient` and `IngredientList` classes are responsible for the handling and manipulation of
 the *Food-O-Rama* data.
 
-![](images/data_structures.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/data_structures.png">
+</p>
+<center>Figure 6: Data Structures Class Diagram</center>
 
 * The `Dish` class contains the Dish's Name, its wastage and its constituents.
 * The `Ingredient` class contains the Ingredient's Name, the weight of Ingredient in storage, the weight of Ingredient
