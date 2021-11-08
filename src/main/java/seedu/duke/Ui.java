@@ -66,11 +66,11 @@ public class Ui {
      */
     public void showWelcome() {
         showLine();
-        String logo = " █████  ███  █   █ ████  ████  █      ████  █    █ █    █ █████ ████\n"
-                + "   █   █   █ █   █ █   █ █   █ █     █    █ ██   █ ██   █ █     █   █\n"
-                + "   █   █   █ █   █ █████ ████  █     ██████ █ █  █ █ █  █ █████ █████\n"
-                + "   █   █   █ █   █ █  █  █     █     █    █ █  █ █ █  █ █ █     █  █\n"
-                + "   █    ███   ███  █   █ █     █████ █    █ █   ██ █   ██ █████ █   █\n";
+        String logo = "  _____                  _____  _\n"
+                + " |_   _| ___  _  _  ___ |  _  || | ___   _____  _____  ___  ___\n"
+                + "   | |  |   || || ||  _||  ___|| ||   \\ |  _  ||  _  || -_||  _|\n"
+                + "   | |  | | || || || |  | |    | || |  || | | || | | || |_ | |\n"
+                + "   |_|  |___||____||_|  |_|    |_||___|||_| |_||_| |_||___||_|\n";
         String greet = "Hello, Welcome to TourPlanner!\n"
                 + "What can I do for you?";
         show(logo);
@@ -456,7 +456,7 @@ public class Ui {
         show("Total Flights: " + count);
     }
 
-    
+
     /**
      * Ui response to FindFlightCommand.
      * Shows specific flight based on an ID, as well as the passengers for said flight.
