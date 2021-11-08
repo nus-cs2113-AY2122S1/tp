@@ -48,16 +48,18 @@ The other core components of Typist:
 
 The `Command` component implements the Factory Design Pattern to parse user commands.
 
-Here’s a (partial) class diagram of the `Command` component:  
-<img src="diagrams/command.puml" width="560">
-[](diagrams/command.puml)  
+Here’s a (partial) class diagram of the `Command` component:
+
+![](images/command.png)
 
 How the `Command` component works:
 1. Typists `Main` calls upon the `CommandFactory` class to parse the user input.
 2. The `CommandFactory` returns a `Command` object (more precisely, an object that implements it e.g., `GameCommand`).
 3. `Main` will then execute the `Command` by calling `.run(args)` method of the `Command`.
 
-The Sequence Diagram below illustrates the interactions between `main` and `Command` component for the `getCommand("game -time")` input.
+The Sequence Diagram below illustrates the interactions between `main` and `Command` component 
+for the `getCommand("game -time")` input:
+{Some sequence diagram}
 
 ### Game Component
 
