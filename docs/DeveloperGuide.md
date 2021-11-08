@@ -229,18 +229,14 @@ private static class LocalDateDeserializer implements JsonDeserializer<LocalDate
 
 | As a ... | I want to ... | So that I can ...|
 |----------|---------------|------------------|
-New user|see help instructions|refer to them when I forget how to use the application
-User| See my nett expenses| I can manage my budget
+New user|See help instructions|refer to them when I forget how to use the application
+User|See my nett expenses| I can manage my budget
 User|Enter my name|I can keep track of whose expenses it is
-User|Edit my name|I can change my name if there is a typo
 User|Enter names of other people|I can track who I went where with
-User|Edit names of other people|I can add extra details if there are many people with the same name
 User|Enter the category of my expenses|I can see how much I spent in certain areas
 User|Enter the location of my expenses|I can see where I spent my money
 User|Edit the location|I can change the location later on if i need to be more specific
 User|Enter the exchange rate of the currency of country I am visiting|I can repay people back in my local currency correctly
-User|Enter my budget|I can keep track how much money I have left
-User|Edit my budget|I can increase or decrease my overall budget for the trip
 User|Filter the expenses based on categories|I can better categorise my own spending
 User|Filter the expenses based on who is involved|I can better settle expenses with individual person(s)
 User|Start a new trip and save the previous one|I can record all my travels
@@ -249,7 +245,7 @@ User|Delete whole trips|In case I don’t want to remember the trips
 User|See history of my expenses, classified into trips|I can have a record to refer to
 User|Display total amount spent in local and foreign currency|For accounting purposes
 User|Know how much my friends has to pay me at the end of the trip|I will not go broke
-User|cancel an operation instead of re-entering my data when prompted|save time and run other commands immediately
+User|Cancel an operation instead of re-entering my data when prompted|save time and run other commands immediately
 
 
 
