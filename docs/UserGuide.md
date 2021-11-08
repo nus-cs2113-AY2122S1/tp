@@ -83,6 +83,7 @@ ____________________________________________________
 ```
 > **IMPORTANT**: **DO NOT** edit any files in the `data/` folder! This can cause major bugs in loading data and you 
 > may have to delete the folder completely to use SITUS again!
+
 ## 2. Features
 
 This section covers the commands SITUS can execute - how you can use them and their expected outputs. 
