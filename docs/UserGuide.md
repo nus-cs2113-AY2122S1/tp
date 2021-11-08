@@ -260,7 +260,7 @@ $ list task
 ```
 $ list task today
       ______________________________________________________________________________________
-       Here are the tasks on THU:
+       Here are the tasks on Thursday:
        1. [ ] Update CS2113T docs (Thursday)
               Priority: LOW
               Info: User Guide
@@ -298,7 +298,7 @@ $ list lesson
 
 $ list lesson tomorrow
       ______________________________________________________________________________________
-       Here are the lessons on FRI:
+       Here are the lessons on Friday:
        1. CS2113T Lecture
           Friday, 04:00 PM - 06:00 PM
           Meeting URL: -
