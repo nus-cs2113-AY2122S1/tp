@@ -277,7 +277,7 @@ class UpdateParserTest {
     }
 
     @Test
-    void UpdateGoalCommand_validInput_success() throws HaBitParserException, HaBitCommandException {
+    void updateGoalCommand_validInput_success() throws HaBitParserException, HaBitCommandException {
         GoalList goalList = new GoalList();
         PrintManager printManager = new PrintManager();
         Storage storage = new Storage();
@@ -285,8 +285,8 @@ class UpdateParserTest {
         Goal goal = new Goal("Original name", GoalType.DEFAULT, stringToDateForTest("11112021"),
                 stringToDateForTest("25122021"));
         goalList.addGoal(goal);
-        UpdateGoalCommand updateGoalCommand = (UpdateGoalCommand) UpdateParser.parseUpdateGoalCommands
-                ("g/1 n/change name e/31122021 t/ex");
+        UpdateGoalCommand updateGoalCommand = (UpdateGoalCommand) UpdateParser.parseUpdateGoalCommands(
+                "g/1 n/change name e/31122021 t/ex");
         updateGoalCommand.runCommand(goalList, printManager, storage);
     }
 
@@ -299,14 +299,14 @@ class UpdateParserTest {
      * @throws ParseException If the String Date fails to be parsed
      */
     private static Date stringToDateForTest(String strDate) throws HaBitParserException {
-    SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
-    formatter.setLenient(false);
-    try {
-    return formatter.parse(strDate);
-    } catch (ParseException e) {
-    e.printStackTrace();
-    }
-    return null;
+        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
+        formatter.setLenient(false);
+        try {
+            return formatter.parse(strDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /*
