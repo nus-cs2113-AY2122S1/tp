@@ -289,7 +289,7 @@ Expected: An error will inform the user that the trip number does not exist.
 
 #### Editing trip
 
-- 'edit' syntax with incorrect or missing attribute (e.g. edit 1 -location).
+- `edit` syntax with incorrect or missing attribute (e.g. edit 1 -location).
 <br>
 Expected: An error will inform the user, providing the input syntax for editing a trip.
 
