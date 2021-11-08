@@ -24,25 +24,25 @@ lessons in your daily schedule and your total workload:
 - [Features](#features)
     * [Viewing help](#viewing-help-help)
     * [Show Module Info](#display-module-info-show-module_code)
-    * [Search Module](#search-module-search-keyword--l)
+    * [Search Module](#search-module-search-keyword--flag)
     * [Update Local Database](#update-local-database-update)
-    * [Add to Timetable](#add-to-timetable)
+    * [Add to Timetable](#add-to-timetable-add)
         * [Add a Module](#add-a-module-to-timetable )
         * [Add an Event](#add-an-event-to-timetable)
-    * [Delete from Timetable](#delete-from-timetable-delete-module_code)
-    * [Clear From Timetable or Transcript]()
-        * [Clear from Timetable]()
-        * [CLear from Transcript]()
-    * [View Timetable](#view-timetable-timetable)
+    * [Delete from Timetable](#delete-from-timetable-delete-module_code-or-delete-event_name)
+    * [Clear From Timetable or Transcript](#clear-from-timetable-or-transcript--clear)
+        * [Clear from Timetable](#clear-from-timetable)
+        * [CLear from Transcript](#clear-from-transcript)
+    * [View Timetable](#view-timetable-timetable--flag)
     * [Changing Semester](#changing-semester)
     * [Storing grades secured in past modules](#store-grades-secured-in-various-modules-store-grade--module_code)
     * [Removing modules from stored grades](#remove-modules-from-the-list-of-completed-modules-remove-module_code)
-    * [Calculate CAP](#calculate-cap--calculate-cap)
+    * [Calculate CAP](#calculate-cap--calculate)
     * [View Unofficial Transcript](#view-unofficial-transcript--transcript)
     * [Checking eligibility from a module's pre-requisite](#checking-for-module-pre-requisite-check-module_code)
     * [Exit](#exit-exit)
 - [FAQ](#faq)
-- [Command Summary]()
+- [Command Summary](#command-summary)
 
 <br>
 
@@ -51,7 +51,7 @@ lessons in your daily schedule and your total workload:
 # Quick Start
 
 1. Ensure you have **Java 11** or above installed in your Computer.
-2. Download the latest **unimods.jar** and from here.
+2. Download the latest **unimods.jar** from here.
 3. Copy the files to the folder you want to use as the home folder for your Unimods.
 4. Open your CLI of choice and run `java -jar unimods.jar`.
 5. Type the command in the command box and press Enter to execute it.
@@ -76,7 +76,8 @@ lessons in your daily schedule and your total workload:
 
  :information_source: **Notes about the command formats**
  - Words in `<UPPER_CASE>` are the parameters to be given by the user.
-    > e.g. in `show <MODULE_CODE>`, <MODULE_CODE> is a parameter. For example, try typing `show CS2113T` and see the magic happen!
+    > e.g. in `show <MODULE_CODE>`, `<MODULE_CODE>` is a parameter. 
+    > Command can be called as `show CS2113T`.
  - Items in square brackets are optional.
     > e.g. find `search <KEYWORD> [-flag]`
     > can be called as `search GEH` OR `search GEH -q`.
@@ -691,6 +692,23 @@ Example output (If you had taken CS1010):
 ```shell
 ~$ check CS2040
 Yes! You are eligible to take up: CS2040 Data Structures and Algorithms 4MC
+________________________________________________________________________________________________________________________
+```
+
+<br>
+
+## Exit: `exit`
+
+You can end the application anytime by typing `exit` into the terminal!
+
+For example let's say you wish to take CS2040. <br>
+Example output (If you had not taken CS1010):
+
+```shell
+~$ ==> exit
+________________________________________________________________________________________________________________________
+> Bye friend!
+> See you again! :)
 ________________________________________________________________________________________________________________________
 ```
 
