@@ -64,7 +64,8 @@ public class Messages {
 
     public static final String TIP_HEADER = "Here's our tip for the day: ";
     public static final String DISPLAY_ADVICE_ERROR = "Sorry there is no advice for you at this moment >.<";
-    public static final String CURRENT_CURRENCY_MESSAGE = "You currency setting currently: ";
+    public static final String CURRENT_CURRENCY_MESSAGE = "Your currency setting currently: ";
+    public static final String CURRENCY_CONVERSION_SUCCESSFUL_MESSAGE = "All entries have been converted to ";
     public static final String INVALID_DATE_RANGE_MESSAGE = "Make sure your start date is before your end date";
     public static final String PARAMETERS_ERROR_MESSAGE = "You have missing or invalid parameters. Use help to view " 
             + "commands again!";

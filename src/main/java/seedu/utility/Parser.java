@@ -32,7 +32,6 @@ import seedu.commands.income.TotalIncomeCommand;
 import seedu.commands.budget.BalanceCommand;
 import seedu.commands.currency.ListCurrencyTypesCommand;
 
-
 import seedu.exceptions.InputException;
 import seedu.exceptions.InvalidBudgetAmountException;
 import seedu.exceptions.InvalidDateException;
