@@ -2,6 +2,7 @@
 
 
 
+
 ## Introduction ️⚖️
 
 GetJack'D is a **desktop app for managing and planning exercise routines, optimized for use via a Command Line Interface** (CLI).
@@ -10,7 +11,6 @@ GetJack'D **guarantees faster management of workouts** than traditional GUI appl
 to **help you embark on your fitness journey**, GetJack'D is the one for you!
 
 ## Contents 🔗
-
 - [Purpose](#purpose-)
 - [Quick Start](#quick-start-)
 - [Features](#features-)
@@ -36,12 +36,15 @@ to **help you embark on your fitness journey**, GetJack'D is the one for you!
 
 <div style="page-break-after: always;"></div>
 
+
 ## Purpose ⚔️
 
 This user guide explains how you can **set up the application and utilise the various features** delivered by GetJack'D.
+
 In addition, this guide provides the **correct command format** to use as well as **example commands** and **expected outcomes** for your reference.
 
 If you are an **active fitness enthusiast**, you can probably dive straight into using the general workout and exercise features.
+
 
 If you are a **beginner**, you may be more interested in the recommended workouts and work your way up from there as you get more used to
 working out and using GetJack'D.
@@ -226,7 +229,7 @@ ________________________________________________________
 ```
 
 > 💡 Note
->
+> 
 > GetJack'D **automatically sorts your workouts by their deadlines every time you add a new workout to your workout list**.
 > The workouts will be sorted in order where workouts with the **earliest deadlines appear on top**. Workouts without
 > deadlines will be at the bottom of the list and ranked **according to the order they were added to the workout list**.
@@ -292,7 +295,8 @@ Adds an exercise to a specified workout
 * `[REPS]`: Number of repetitions per set.
 * `[WORKOUT_INDEX]`: The workout's number in the workout list.
 
->⚠️ Warning
+
+>⚠️ Warning  
 >* There must be a space between the comma `,` and the next parameter as shown in the format.
 
 **Usage example(s):**
@@ -332,7 +336,7 @@ add lunges, 4 8
 
 Marks an exercise from a specified workout as done.
 
-**Format:**
+**Format:** 
 * Main mode: `done [EXERCISE_INDEX], [WORKOUT_INDEX]`
 * Workout Mode: `done [EXERCISE_INDEX]`
 
@@ -449,7 +453,7 @@ Show all exercises from workout 1: `display 1`
 
 * Entered into workout 1:
 
-Show all exercises: `display`
+Show all exercises: `display` 
 
 **Expected outcome (*Main mode*):**
 
@@ -555,7 +559,8 @@ Search for workouts that have the deadline 2 Oct 2021: `search 2 oct 2021`
 
 * Workout Mode:
 
-Search for exercises within workout 1 : `search kick`
+Search for exercises within workout 1 : `search kick` 
+
 
 **Expected outcome (*Main mode*):**
 ```
@@ -715,7 +720,7 @@ ________________________________________________________
 
 ### 15. Saving data
 
-The data that GetJack'D saves is **stored in the hard disk automatically after any command that changes the data** (adding
+The data that GetJack'D saves is **stored in the hard disk automatically after any command that changes the data** (adding 
 or editing workouts and exercises). **There is no need to save manually**.
 
 <div style="page-break-after: always;"></div>
@@ -832,6 +837,7 @@ This occurs when the `data` folder in which the GetJack'D data file is stored fa
 
 **A**: Go to the folder you saved `GetJackd.jar`, save a copy of the `data` folder and copy it to the folder
 `GetJackd.jar` is saved on your other computer.
+
 
 ## Command Summary 📖
 
