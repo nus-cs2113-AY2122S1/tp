@@ -372,11 +372,12 @@ public abstract class ParserUtils {
     /**
      * Returns the filter type of the appointment class.
      *
-     * @param attributeSpecifier the String to be parsed.
+     * @param string the String to be parsed.
      * @return the FilterType
-     * @throws MedBotParserException when the filter type cannot be
+     * @throws MedBotParserException when the filter type cannot be identified
      */
-    public static FilterType parseFilterType(String attributeSpecifier) throws MedBotParserException {
+    public static FilterType parseFilterType(String string) throws MedBotParserException {
+        String attributeSpecifier = string.trim();
 
         if (attributeSpecifier.equals(PARAMETER_BEFORE)) {
             return FilterType.BEFORE;
