@@ -104,13 +104,15 @@ Each of the 5 components (apart from `main`) can be found in their respective pa
 
 The **UI** component can be found in the `UI` package. The UI reads commands from the user, sends the command to `Main` to be executed and prints an output message upon completion of the command or if an error occurred.
 
+<div style="page-break-after: always;"></div>
+
 ### 3.3. Parser component
 
 The **Parser** component can be found in the `parser` package. 
 
 The package consists of the `Parser` class, which parses the command input by the user and executes the required `XYZCommand` class.
 
-<div style="page-break-after: always;"></div>
+
 
 ### 3.4. Command component
 
@@ -251,8 +253,9 @@ The current date is obtained via the `CurrentDate` class, with which the thresho
 The expiry date of `Ingredient` object in each `IngredientGroup` in the `IngredientList` class is taken and compared to the threshold date. 
 The information of the `Ingredient` is taken note of to be printed when the function returns.
 
-For `AlertLowStockCommand`, it is less complicated, and the sequence diagram shown below. The user can also call this via `alerts stock`
+<div style="page-break-after: always;"></div>
 
+For `AlertLowStockCommand`, it is less complicated, and the sequence diagram shown below. The user can also call this via `alerts stock`
 
 ![image](images/AlertStockSequenceDiagram.png)
 
@@ -301,6 +304,8 @@ Then, calling `update 1.2 a/150.0` will update the second entry in the carrot ca
 below illustrates the above command example.
 
 ![image](images/UpdateSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 After individual ingredient has been updated, the ingredient inventory list is
 ```
