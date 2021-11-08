@@ -15,7 +15,9 @@
         * [Features Improvement](#features-improvement)
         * [PED Bugs](#ped-bugs)
     * [Contributions to the User Guide](#contributions-to-the-user-guide)
+        * [Extract: Command Summary](#extract-command-summary)
     * [Contributions to the Developer Guide](#contributions-to-the-developer-guide)
+        * [Extract: Logic Component Diagram](#extract-logic-component-diagram)
     * [Contributions to Team-based Tasks](#contributions-to-team-based-tasks)
     * [Review/Mentoring](#reviewmentoring)
     * [Contributions Beyond The Project Team](#contributions-beyond-the-project-team)
@@ -92,6 +94,16 @@ Squashed bugs found in PE Dry Run.
 
 Refactored most sections of UG to improve its layout. Updated User Guide sequentially as the program output changes.
 
+#### Extract: Command Summary
+
+Command summary was provided for users' convenience. Partial example:
+
+| Command                                                                         | Purpose          |
+| :------------------------------------------------------------------------------ | :--------------- |
+| `add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}`          | To add a task    |
+| `add lesson [TITLE] -d [DAY_OF] -s [START_TIME] -e [END_TIME] -l {MEETING_URL}` | To add a lesson  |
+| `add module [MODULE_CODE]`                                                      | To add a module  |
+
 ### Contributions to the Developer Guide
 
 * **PRs**: [#74](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/74), [#75](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/75), [#106](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/106), [#193](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/193).
@@ -99,6 +111,13 @@ Refactored most sections of UG to improve its layout. Updated User Guide sequent
 Set up the structure of DG, starting with `Architecture` and `Logic` sections.
 Incorporated UML Diagrams with the help of [PlantUML](https://plantuml.com/), including class and sequence diagrams.
 Standardized UML Diagrams color scheme with `Style.puml`.
+
+#### Extract: Logic Component Diagram
+
+To better illustrate the relationships between the various classes used in the project, UML diagrams were utilized to explains the overall architecture of the program.
+The following example is from the **Logic Component Diagram**.
+
+![Logic Component Diagram](../images/LogicComponentDiagram.png)
 
 ### Contributions to Team-based Tasks
 
