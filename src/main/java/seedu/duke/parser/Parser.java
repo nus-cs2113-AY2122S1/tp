@@ -164,7 +164,8 @@ public abstract class Parser {
 
     public static LocalDateTime convertDateTime(String dateTime) throws DukeException {
         try {
-            LocalDateTime result = LocalDateTime.parse(dateTime, formatter1);
+            String formattedDateTimeString = dateTime.trim().replaceAll(" +", " ");
+            LocalDateTime result = LocalDateTime.parse(formattedDateTimeString, formatter1);
             if (result.isBefore(LocalDateTime.now())) {
                 throw new DukeException("Unfortunately, we cannot travel back in time. Please "
                         + "enter a valid date and time in the format 'dd-MM-yyyy HHmm'. ");
