@@ -364,18 +364,18 @@ that use them. The diagram below showcases the sequence of the `LinkCommand` cla
 
 ### Graph
 
-The implementation of the Edit function allows Food-O-Rama to display a graph of the Dishes and Ingredients present in the
-DishList and IngredientList to the User Below is a sequence diagram that shows how the GraphCommand functions
+The implementation of the Graph function allows Food-O-Rama to display a graph of the Dishes and Ingredients present in the
+DishList and IngredientList to the User. Below is a sequence diagram that shows how the GraphCommand functions
 
 ![](images/graph_sequence.png)
 
-Graph works by creating a 2d grid and printing the bars based on the current position of the terminal cursor. This lets
-us bypass the restriction in a CLI based application where you can only print from up to down and the bars can get
+Graph works by creating a two dimensional grid and printing the bars based on the current position of the terminal cursor. 
+This bypasses the restriction in a CLI based application where you can only print from top down in the terminal and the bars can get
 printed "vertically". This is done by calculating the lengths of the bars beforehand and using these lengths along with
 the current coordinates to print either an empty space or a bar.
 
-Despite this due to CLI and ascii limitations, printing of fractional values posed an issue. This was because you are
-unable to print half a character and using special unicode characters would break cross-platform functionality. The
+Despite this, due to CLI and ASCII limitations, printing of fractional values poses an issue. This is because we cannot
+print half a character and using special unicode characters would break cross-platform functionality. The
 solution that we implemented was to have a digit in the top most bar if we have fractional heights. This way while we
 still don't get a perfect representation, we are capable of giving the value accurate to one decimal place. So if the
 height was 3.33 units it would be represented by 3 filled bars and the 4th bar will have a 3 within indicating its value
