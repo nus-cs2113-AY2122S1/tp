@@ -30,18 +30,13 @@ efficient allocation of said ingredients to the cooking of dishes, ultimately sa
       understanding of the data more intuitively. This also mitigates one of the disadvatages of cli with a basic form
       of graphical output.
 
-* **Feature**: Implement `InputParser`
-    * **What it does**: Separates the components of the user input so that the command can access the correct parameters
-    * **Justification**: This allows the users commands to be properly interpreted so that the outputs are not skewed
-
 * **Feature**: Implement storage of data 
     * **What it does**: Stores data during runtime to a text file and reads text file to retrieve data when application is rerun
     * **Justification**: This allows the user to carry forward data across sessions and makes it easier for the user to pick up where they left off. They are 
     also capable of modifying the text files to manually edit the data without the assistance of Foodorama
 
 * **Enhancement added**: Input validation to allow both index and string commands
-    * **What it does**: Initially, only allowed input as a string to check based on the object names. Was modified to allow 
-    the user to enter either a string to search based on name or an index to search based on position in the 
+    * **What it does**: Modified to allow the user to enter either a string to search based on name or an index to search based on position in the 
     list for the edit and add commands without clashing and unexpected outcomes
     * **Justification**: This gives the user greater freedom to choose how they want to identify their ingredients / dishes. This also allows them to use a short index instead of a long name
 
@@ -57,6 +52,11 @@ efficient allocation of said ingredients to the cooking of dishes, ultimately sa
   Wrote documentation for some command classes and the `IngredientList`, `Storage` and `InputParser` classes
     * **Justification**: Helps improve code readability
 
+* **Contributions to team-based tasks**:
+    * Produced the skeletal code for Foodorama
+    * Handled the v1.0 release on GitHub
+    * Handled the v2.0 release on GitHub
+
 <div style="page-break-after: always;"></div>
 
 * **Contributions to UG**:
@@ -71,7 +71,3 @@ efficient allocation of said ingredients to the cooking of dishes, ultimately sa
     * Drafted UML Diagrams for `General Flow`, `Command Abstraction`, `Set` and `Input Vaidation`.
     * Helped with general formatting
 
-* **Contributions to team-based tasks**:
-    * Produced the skeletal code for Foodorama
-    * Handled the v1.0 release on GitHub
-    * Handled the v2.0 release on GitHub
