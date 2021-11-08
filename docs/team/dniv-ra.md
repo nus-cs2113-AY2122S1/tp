@@ -57,6 +57,8 @@ efficient allocation of said ingredients to the cooking of dishes, ultimately sa
   Wrote documentation for some command classes and the `IngredientList`, `Storage` and `InputParser` classes
     * **Justification**: Helps keep the code more bug free and prevents unexpected outcomes from occurring during runtime
 
+<div style="page-break-after: always;"></div>
+
 * **Contributions to UG**:
     * Added documentation for `limit` feature.
     * Added documentation for `graph` feature.
