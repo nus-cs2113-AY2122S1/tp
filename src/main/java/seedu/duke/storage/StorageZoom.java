@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 
+import seedu.duke.exceptions.ClickException;
 import seedu.duke.exceptions.zoom.InvalidZoomDataPath;
 import seedu.duke.exceptions.zoom.InvalidZoomLinkException;
 import seedu.duke.exceptions.zoom.ModuleNotFoundException;
@@ -82,9 +83,9 @@ public class StorageZoom {
      *
      * @throws InvalidZoomDataPath Throws the Invalid Zoom Data Path Exception
      */
-    public static void displayLinks() throws InvalidZoomDataPath {
+    public static void displayLinks() throws ClickException {
         try {
-            BufferedReader br = new BufferedReader(new FileReader(folderName + fileName + 'n'));
+            BufferedReader br = new BufferedReader(new FileReader(folderName + fileName));
             String line;
             while ((line = br.readLine()) != null) {
                 String moduleName = line.split("\\|", 2)[0];
@@ -92,7 +93,6 @@ public class StorageZoom {
                 Ui.displayZoomLink(moduleName, zoomLink);
             }
         } catch (Exception e) {
-            System.out.println("Here");
             throw new InvalidZoomDataPath();
         }
 
