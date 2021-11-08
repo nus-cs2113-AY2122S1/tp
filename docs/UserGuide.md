@@ -569,6 +569,10 @@ Upon starting the program, it will search for the presence of a file in the dire
 
 ## FAQ
 
+**Q**: What platforms is `Libmgr` supported on?
+
+**A**: This application supports cross-platform operation, as long as Java has been properly configured.
+
 **Q**: Can I port the program over to other devices
 
 **A**: Yes, just copy over the `libmgr.jar` along with the `./data/data.json` files to the target computer, and make sure that they are stored within the same folder, all data will be preserved
