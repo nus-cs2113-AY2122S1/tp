@@ -42,9 +42,7 @@ The following sections in the [User Guide](https://ay2122s1-cs2113t-t12-2.github
 
 In addition, I made contributions to the following sections:
 
-- Introduction
-- Using this guide
-- Quick Start
+- Introduction, Using this guide, Quick Start
 - FAQ #1
 
 #### Contributions to Developer Guide:
@@ -61,11 +59,10 @@ In addition, I made contributions to the following sections:
 
 #### Contributions to Team Tasks:
 
-- Setting up and administration of organisation and team repository
-- Reviewing of Pull Requests
+- Setting up and administration of organisation and team repository, and reviewing of pull requests
 - Adding templates for User Stories and Bug Reporting in Issues
 - Gradle modifications (for enabling assertions and adding Gson dependency)
-- Managed `v2.0` release
+- Managed `v2.0` and `v2.1` release
 - Cleanup of PE-D issues (marking duplicate, rejecting non-issues)
 - General maintenance of issue tracker (milestone and label assignment)
 
@@ -75,7 +72,6 @@ In addition, I made contributions to the following sections:
   [#42](https://github.com/AY2122S1-CS2113T-T12-2/tp/pull/42#discussion_r725532182), [#55](https://github.com/AY2122S1-CS2113T-T12-2/tp/pull/55#discussion_r726785554))
 - Bug reports - [#135](https://github.com/AY2122S1-CS2113T-T12-2/tp/issues/135), [#49](https://github.com/AY2122S1-CS2113T-T12-2/tp/issues/49), [#45](https://github.com/AY2122S1-CS2113T-T12-2/tp/issues/45), 
 - Mentoring on JUnit tests - simulating user input through `Scanner`, and testing `System.out.println()` statements.
-
 
 #### Contributions beyond the team
 
