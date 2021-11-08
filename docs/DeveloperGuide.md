@@ -50,7 +50,7 @@ instance of the `Expense` class) and persons (each person being represented by a
 instance of the `Person` class) tagged to the trip. The class diagram below illustrates
 the interactions of the `Trip` class with other classes.
 
-![](images/TripClassDiag.png)
+![](images/classDiagTrip.png)
 
 A trip is created when the `Parser` class calls its `executeCreate()` method to instantiate 
 a new instance of `Trip`. The newly-created trip is then added to the `ArrayList<Trip>` 
@@ -60,6 +60,11 @@ Although the program is able to store zero trips, in order for it to work at any
 there must be at least one trip added by the user (either through input or through loading from the
 save file) in order for any other features to be available. If there are no trips added, the program 
 will repeatedly prompt the user to add a new trip.
+
+The sequence diagram below shows what happens when the user creates a new trip. If a duplicate
+trip is input, the app will confirm with the user if he/she wishes to add the duplicate trip.
+
+![](images/tripSeq.png)
 
 ### `Person` Class
 Below details the UML diagram for the `Person` class.
@@ -74,14 +79,24 @@ Represents an individual that participated in an expense or a whole trip.
 
 ### `Ui` Class
 
-The `Ui` class handles everything that the user sees, which includes exception handling messages, outputs to users and feedback.
+The `Ui` class handles everything that the user sees, which includes feedback, error messages, user prompts, and displaying help. All of Ui's methods are static, and are meant to be called by other classes.
 
-`Ui` class consists of multiple print methods, where some are listed above in the UML diagram. `Ui` depends on other classes, 
-such as `Storage`, `Parser`, `Trip` and `Expense` to obtain information stored in these classes.
+<br />
 
-The `Ui` class,
-- Obtains information from Storage, Parser, Trip and Expense components.
-- Prints the information through the terminal.
+**Methods of 'Ui' can be broadly categorised into 2 types:**
+1. Error and feedback messages, which do not contain references to other classes, and are mainly `System.out.println` statements.
+   
+2. Methods that calculates and prints the state of the program. These methods contain references 
+   to other classes, and may require input parameters. An example will be 
+   `public static void printAmount(Person person, Trip trip)`, which generates the total amount 
+   spent and the repayment instructions for `person` in that `trip`.
+
+<br />
+
+The `help` command is implemented by `Ui.displayHelp()`, and has 3 different states, as shown in the diagram below:
+![](images/HelpCommandStates.png)
+
+
 
 ### `Parser` Class
 
@@ -107,10 +122,35 @@ The following partial sequence diagram dictates the flow of events when the user
 ![](images/ParserSequenceDiagram.png)
 
 ### `Expense` Class
-The `Expense` class deals with most functionalities related to adding an expense inside a trip. The sequence diagram below shows how an expense is initialised.
-![](images/Expense%20Sequence%20Diagram.jpeg)
+The `Expense` class deals with most functionalities related to adding an expense inside a trip. The following partial class diagram
+shows the interactions between the `Expense` class and other classes and interfaces.
 
-When `Parser` calls the `executeExpense` method, it creates an expense object, and also calls the `promptDate` method to set that expense object’s date. `promptDate` calls `isDateValid` to validate user input.
+
+![](images/ExpenseClassDiagram.png)
+
+The `Expense` class,
+- Stores amount spent
+- Stores description
+- Stores category
+- Stores persons involved
+
+The sequence diagram below shows how an expense is initialised.
+![](images/ExpenseSequenceDiagram.png)
+
+
+When `CommandExecutor` calls the `executeCreateExpense()` function, the open trip will be retrieved, and an expense will be intialized.
+During the initialization fo a new `Expense`, the amount spent for the expense is set using `setAmountSpent()`, the category is set
+using `setCategory` and the date of the `Expense` is being prompted using `promptDate()`. 
+
+In `promptDate()`, the date is checked if it is valid and will only return if it is. Otherwise, the program will keep prompting the user.
+
+If no date is entered, `LocalDate` will return the date which the user entered the expense. 
+Otherwise, `LocalDate` will parse the date according to the given format.
+
+If there is only 1 `Person` in the expense, then `Expense` will call the corresponding methods in `ExpenseSplitter`. `CommandExecutor` will
+call `addExpense()` and `setLastExpense` to add the expense to the trip and set it as the last expense added. Then, a success message is printed using
+`printExpensesAddedSuccess()` of `Ui`.
+
 
 ### `Storage` Component
 
@@ -151,22 +191,27 @@ The code for the custom deserialiser is:
 
 ## Appendix: Requirements
 
-### Target user profile
-
-{Describe the target user profile}
-
-### Value proposition
-
-{Describe the value proposition: what problem does it solve?}
-
 ### Appendix A: Product scope
+
+**Target user profile**
+- Students who are travelling overseas and sharing expenses with a group
+- Comfortable with CLI desktop apps
+- Prefers typing to mouse interaction for data input
+
+**Value proposition**
+- Suitable for batch input of expenses
+- PayMeBack data is in JSON, which is lightweight and easily transferable
 
 ### Appendix B: User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| As a ... | I want to ... | So that I can ...|
+|----------|---------------|------------------|
+new user|see help instructions|refer to them when I forget how to use the application
+new user|edit trip attributes|modify them easily when I type them wrongly
+user|have various filters for expenses in a trip|find expenses that are of interest to me, especially when the expense list is large
+user|cancel an operation instead of re-entering my data when prompted|save time and run other commands immediately
+
+
 
 ### Appendix C: Non-Functional Requirements
 

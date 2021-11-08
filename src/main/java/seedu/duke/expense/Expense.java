@@ -5,6 +5,7 @@ import seedu.duke.exceptions.InvalidAmountException;
 import seedu.duke.Person;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
+import seedu.duke.parser.Parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -27,10 +28,10 @@ public class Expense implements ExpenseSplitter {
     /**
      * Legacy Constructor for {@link Expense} - does not include parsing.
      *
-     * @param amountSpent   (placeholder)
-     * @param category      (placeholder)
+     * @param amountSpent (placeholder)
+     * @param category    (placeholder)
      * @param personsList (placeholder)
-     * @param description   (placeholder)
+     * @param description (placeholder)
      */
     //@@author lixiyuan416
     public Expense(double amountSpent, String description, ArrayList<Person> personsList,
@@ -64,8 +65,10 @@ public class Expense implements ExpenseSplitter {
     }
 
     //@@author joshualeeky
+
     /**
      * Extracts the description of the expense from the user input.
+     *
      * @param userInput the string that the user enters.
      * @return description of the expense.
      */
@@ -76,6 +79,7 @@ public class Expense implements ExpenseSplitter {
     /**
      * Obtains a list of Person objects from a string of names separated by a comma. Also checks if there are repeated
      * names that were entered in the expense.
+     *
      * @param userInput the string that the user enters.
      * @return ArrayList containing the Person objects included in the expense.
      */
@@ -84,7 +88,6 @@ public class Expense implements ExpenseSplitter {
         ArrayList<String> listOfPeopleNamesUpperCase = new ArrayList<>();
         ArrayList<Person> validListOfPeople = new ArrayList<>();
         ArrayList<String> invalidListOfPeople = new ArrayList<>();
-        Storage.getLogger().log(Level.INFO, "Checking if names are valid");
         if (listOfPeople.length == 1 && listOfPeople[0].strip().equalsIgnoreCase("-all")) {
             return Storage.getOpenTrip().getListOfPersons();
         }
@@ -119,6 +122,7 @@ public class Expense implements ExpenseSplitter {
 
 
     //@@author lixiyuan416
+
     /**
      * Prompts user for date.
      *
@@ -127,14 +131,14 @@ public class Expense implements ExpenseSplitter {
     public LocalDate promptDate() throws ForceCancelException {
         Ui.expensePromptDate();
         String inputDate = Ui.receiveUserInput();
-        while (!isDateValid(inputDate)) {
-            inputDate = Ui.receiveUserInput();
-        }
         if (inputDate.isEmpty()) {
             return LocalDate.now();
-        } else {
-            return LocalDate.parse(inputDate, inputPattern);
         }
+        while (!isDateValid(inputDate)) {
+            inputDate = Ui.receiveUserInput();
+            Storage.getLogger().log(Level.INFO, "Invalid date format entered");
+        }
+        return LocalDate.parse(inputDate, inputPattern);
     }
 
     private Boolean isDateValid(String date) {
@@ -143,9 +147,13 @@ public class Expense implements ExpenseSplitter {
         }
         try {
             LocalDate.parse(date, inputPattern);
+            //Additional check for weird dates like feb 31
+            if (!Parser.doesDateReallyExist(date)) {
+                Ui.expenseDateInvalid();
+                return false;
+            }
             return true;
         } catch (DateTimeParseException e) {
-            Storage.getLogger().log(Level.INFO, "Invalid date format entered");
             Ui.expenseDateInvalid();
             return false;
         }
@@ -205,6 +213,10 @@ public class Expense implements ExpenseSplitter {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setDate(String date) {
+        this.date = LocalDate.parse(date, inputPattern);
     }
 
     public void setCategory(String category) {

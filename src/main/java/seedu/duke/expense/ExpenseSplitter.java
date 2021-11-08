@@ -86,7 +86,7 @@ public interface ExpenseSplitter {
                 double amount = Double.parseDouble(amountString);
                 amount = Storage.formatForeignMoneyDouble(amount);
                 total += amount;
-                if (total > expense.getAmountSpent()) {
+                if (total > expense.getAmountSpent() || amount < 0) {
                     Ui.printIncorrectAmount(expense.getAmountSpent());
                     updateIndividualSpending(expense);
                     return null;

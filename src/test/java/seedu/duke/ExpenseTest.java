@@ -6,48 +6,42 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.ForceCancelException;
 import seedu.duke.exceptions.SameNameException;
 import seedu.duke.expense.Expense;
+import seedu.duke.parser.Parser;
 import seedu.duke.trip.FilterFinder;
 import seedu.duke.trip.Trip;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.io.ByteArrayInputStream;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+//@@ joshualeeky
 class ExpenseTest {
     static Expense exp;
     static Trip trip;
 
     @BeforeAll
     static void setUp() throws ForceCancelException, SameNameException {
+        Logger logger = Logger.getLogger("ProgramLogger");
+        logger.setLevel(Level.OFF);
+        Storage.setLogger(logger);
         String[] stringArray = {"", "USA", "01-12-2020", "USD", "0.74", "Albert, Betty, Chris, Don, Evan"};
         trip = new Trip(stringArray);
         Storage.getListOfTrips().add(trip);
         Storage.setOpenTrip(Storage.getListOfTrips().indexOf(trip));
-        final double amountSpent = 600.0;
-        final String description = "Dinner at fancy restaurant";
-        Person person1 = new Person("Albert");
-        Person person2 = new Person("Betty");
-        Person person3 = new Person("Chris");
-        ArrayList<Person> personsList = new ArrayList<>();
-        personsList.add(person1);
-        personsList.add(person2);
-        personsList.add(person3);
-        final String category = "food";
-        final LocalDate date = LocalDate.parse("02-12-2020", DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        final Person payer = person3;
-        HashMap<String, Double> amountSplit = new HashMap<>();
-        amountSplit.put("Albert", 100.0);
-        amountSplit.put("Betty", 200.0);
-        amountSplit.put("Chris", 300.0);
-        exp = new Expense(amountSpent, description, personsList, category, date, payer, amountSplit);
+        String input = "02-12-2020" + System.lineSeparator() + "Chris" + System.lineSeparator() + "100"
+                + System.lineSeparator() + "200" + System.lineSeparator() + "y";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        exp = new Expense("600 food Albert, Betty, Chris /Dinner at fancy restaurant");
+        trip.addExpense(exp);
         System.setOut(System.out);
     }
-
 
     @Test
     void testGetAmountSpent() {
@@ -94,13 +88,250 @@ class ExpenseTest {
         assertEquals("{Chris=300.0, Betty=200.0, Albert=100.0}", exp.getAmountSplit().toString());
     }
 
+    @Test
+    void testDuplicatePeopleInExpense() throws ForceCancelException {
+        String input = "Betty, Betty" + System.lineSeparator() + "Albert, Betty, Evan"
+                + System.lineSeparator() + "02-12-2020"
+                + System.lineSeparator() + "Evan" + System.lineSeparator() + "1010"
+                + System.lineSeparator() + "1010" + System.lineSeparator() + "y";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Expense testExpense = new Expense("3000 category Albert, Albert, Evan /description");
+        assertEquals("Evan", testExpense.getPayer().getName());
+        assertEquals(1010.0, testExpense.getAmountSplit().get("Albert"));
+        assertEquals(1010.0, testExpense.getAmountSplit().get("Betty"));
+        assertEquals(980.0, testExpense.getAmountSplit().get("Evan"));
+    }
+
+    @Test
+    void testCurrentDate() throws ForceCancelException {
+        String input = System.lineSeparator();
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Expense testExpense = new Expense("3000 category Albert /description");
+        assertEquals(LocalDate.now(), testExpense.getDate());
+    }
+
+    @Test
+    void testInvalidDates() throws ForceCancelException {
+        String input = "35-02-2021" + System.lineSeparator()
+                + "00-11-2021" + System.lineSeparator()
+                + "25-00-2021" + System.lineSeparator()
+                + "16-23-2021" + System.lineSeparator()
+                + "02-12-2020" + System.lineSeparator() + "Albert" + System.lineSeparator() + "equal";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Expense testExpense = new Expense("3000 category Albert, Betty, Evan /description");
+        assertEquals("Albert", testExpense.getPayer().getName());
+        assertEquals(1000.0, testExpense.getAmountSplit().get("Albert"));
+        assertEquals(1000.0, testExpense.getAmountSplit().get("Betty"));
+        assertEquals(1000.0, testExpense.getAmountSplit().get("Evan"));
+    }
+
+    @Test
+    void testInvalidAmountNotNumber() {
+        ByteArrayOutputStream actualOutput = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(actualOutput));
+        String expectedOutput = "Please format your inputs as follows: "
+                + System.lineSeparator() + "expense [amount] [category] [people] /[description]."
+                + System.lineSeparator();
+        Parser.parseUserInput("expense notNumber category Albert, Betty, Evan /description");
+        assertEquals(actualOutput.toString(), expectedOutput);
+    }
+
+    @Test
+    void testInvalidAmountNotPositiveNumber() throws ForceCancelException {
+        String input = "0" + System.lineSeparator() + "2113" + System.lineSeparator() + "02-12-2020";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Expense testExpense = new Expense("-2113 category Evan /description");
+        assertEquals(2113.0, testExpense.getAmountSplit().get("Evan"));
+    }
+
+    @Test
+    void testNormalAssignUserNo() throws ForceCancelException {
+        String input = "02-12-2020" + System.lineSeparator() + "Evan" + System.lineSeparator() + "1010"
+                + System.lineSeparator() + "1010" + System.lineSeparator() + "n"
+                + System.lineSeparator() + "Evan" + System.lineSeparator() + "equal";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Expense testExpense = new Expense("3000 category Albert, Betty, Evan /description");
+        assertEquals("Evan", testExpense.getPayer().getName());
+        assertEquals(1000.0, testExpense.getAmountSplit().get("Albert"));
+        assertEquals(1000.0, testExpense.getAmountSplit().get("Betty"));
+        assertEquals(1000.0, testExpense.getAmountSplit().get("Evan"));
+    }
+
+    @Test
+    void testAmountAssignedTooHigh() throws ForceCancelException {
+        String input = "02-12-2020" + System.lineSeparator() + "Betty" + System.lineSeparator() + "2114"
+                + System.lineSeparator() + "Betty" + System.lineSeparator() + "1010"
+                + System.lineSeparator() + "1010" + System.lineSeparator() + "y";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Expense testExpense = new Expense("2113 category Albert, Betty, Evan /description");
+        assertEquals("Betty", testExpense.getPayer().getName());
+        assertEquals(1010.0, testExpense.getAmountSplit().get("Albert"));
+        assertEquals(1010.0, testExpense.getAmountSplit().get("Betty"));
+        assertEquals(93.0, testExpense.getAmountSplit().get("Evan"));
+    }
+
+    @Test
+    void testInvalidPersonInExpense() throws ForceCancelException {
+        String input = "Don" + System.lineSeparator() + "02-12-2020" + System.lineSeparator();
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Expense testExpense = new Expense("2113 category Duke /description");
+        assertEquals("Don", testExpense.getPayer().getName());
+        assertEquals(2113.0, testExpense.getAmountSplit().get("Don"));
+    }
+
+    @Test
+    void testInvalidAssignAmountNotNumber() throws ForceCancelException {
+        String input = "02-12-2020" + System.lineSeparator() + "Betty"
+                + System.lineSeparator() + "NotANumber" + System.lineSeparator() + "1010"
+                + System.lineSeparator() + "1010" + System.lineSeparator() + "y";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Expense testExpense = new Expense("2113 category Albert, Betty, Evan /description");
+        assertEquals("Betty", testExpense.getPayer().getName());
+        assertEquals(1010.0, testExpense.getAmountSplit().get("Albert"));
+        assertEquals(1010.0, testExpense.getAmountSplit().get("Betty"));
+        assertEquals(93.0, testExpense.getAmountSplit().get("Evan"));
+    }
+
+    @Test
+    void testInvalidAssignAmountNegativeNumber() throws ForceCancelException {
+        String input = "02-12-2020" + System.lineSeparator() + "Betty"
+                + System.lineSeparator() + "-2113" + System.lineSeparator() + "Betty" + System.lineSeparator() + "1010"
+                + System.lineSeparator() + "1010" + System.lineSeparator() + "y";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Expense testExpense = new Expense("2113 category Albert, Betty, Evan /description");
+        assertEquals("Betty", testExpense.getPayer().getName());
+        assertEquals(1010.0, testExpense.getAmountSplit().get("Albert"));
+        assertEquals(1010.0, testExpense.getAmountSplit().get("Betty"));
+        assertEquals(93.0, testExpense.getAmountSplit().get("Evan"));
+    }
+
+    @Test
+    void testInvalidPayer() throws ForceCancelException {
+        String input = "02-12-2020" + System.lineSeparator() + "Chris" + System.lineSeparator() + "Albert"
+                + System.lineSeparator() + "equal";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Expense testExpense = new Expense("3000 category Albert, Don, Betty /description");
+        assertEquals("Albert", testExpense.getPayer().getName());
+        assertEquals(1000.0, testExpense.getAmountSplit().get("Albert"));
+        assertEquals(1000.0, testExpense.getAmountSplit().get("Betty"));
+        assertEquals(1000.0, testExpense.getAmountSplit().get("Don"));
+    }
+
+    @Test
+    void testUpdateOnePersonSpending() throws ForceCancelException {
+        System.setIn(new ByteArrayInputStream("08-12-2010".getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Expense testExpense = new Expense("2113 category Albert /description");
+        assertEquals("Albert", testExpense.getPayer().getName());
+        assertEquals(2113.0, testExpense.getAmountSplit().get("Albert"));
+        assertEquals(2213.0, trip.getListOfPersons().get(0).getMoneyOwed().get("Albert"));
+    }
+
+    @Test
+    void testUpdateIndividualSpendingAssignZero() throws ForceCancelException {
+        String input = "02-12-2020" + System.lineSeparator() + "Albert" + System.lineSeparator() + "1234"
+                + System.lineSeparator() + "y";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Expense testExpense = new Expense("1234 category Albert, Evan, Don /description");
+        assertEquals(1234.0, testExpense.getAmountSplit().get("Albert"));
+        assertEquals(0.0, testExpense.getAmountSplit().get("Evan"));
+        assertEquals(0.0, testExpense.getAmountSplit().get("Don"));
+    }
+
+    @Test
+    void testUpdateIndividualSpendingAssignZeroUserNo() throws ForceCancelException {
+        String input = "02-12-2020" + System.lineSeparator() + "Albert" + System.lineSeparator() + "1234"
+                + System.lineSeparator() + "n" + System.lineSeparator() + "Albert" + System.lineSeparator() + "equal";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Expense testExpense = new Expense("1200 category Albert, Evan, Don /description");
+        assertEquals(400.0, testExpense.getAmountSplit().get("Albert"));
+        assertEquals(400.0, testExpense.getAmountSplit().get("Evan"));
+        assertEquals(400.0, testExpense.getAmountSplit().get("Don"));
+    }
+
+    @Test
+    void testUpdateIndividualSpendingEqual() throws ForceCancelException {
+        String input = "02-12-2020" + System.lineSeparator() + "Evan" + System.lineSeparator() + "equal";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Expense testExpense = new Expense("900 category Don, Evan, Betty /description");
+        assertEquals(300.0, testExpense.getAmountSplit().get("Don"));
+        assertEquals(300.0, testExpense.getAmountSplit().get("Evan"));
+        assertEquals(300.0, testExpense.getAmountSplit().get("Betty"));
+    }
+
+    @Test
+    void testUpdateIndividualSpendingMoreThanEqual() throws ForceCancelException {
+        String input = "02-12-2020" + System.lineSeparator() + "Albert" + System.lineSeparator() + "equal";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Expense testExpense = new Expense("901 category Albert, Don, Betty /description");
+        assertEquals(300.34, testExpense.getAmountSplit().get("Albert"));
+        assertEquals(300.33, testExpense.getAmountSplit().get("Don"));
+        assertEquals(300.33, testExpense.getAmountSplit().get("Betty"));
+    }
+
+    @Test
+    void testUpdateIndividualSpendingLessThanEqual() throws ForceCancelException {
+        String input = "02-12-2020" + System.lineSeparator() + "Albert" + System.lineSeparator() + "equal";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Expense testExpense = new Expense("899 category Albert, Don, Betty /description");
+        assertEquals(299.66, testExpense.getAmountSplit().get("Albert"));
+        assertEquals(299.67, testExpense.getAmountSplit().get("Don"));
+        assertEquals(299.67, testExpense.getAmountSplit().get("Betty"));
+    }
+
+    @Test
+    void testDeleteExpense() throws ForceCancelException {
+        String input = "02-12-2020" + System.lineSeparator() + "Albert" + System.lineSeparator() + "equal";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Expense testExpense = new Expense("899 category Albert, Don, Betty /description");
+        trip.addExpense(testExpense);
+        Parser.parseUserInput("delete 2");
+        assertEquals(1, trip.getListOfExpenses().size());
+        assertEquals("Dinner at fancy restaurant", trip.getListOfExpenses().get(0).getDescription());
+    }
+
+    @Test
+    void testDeleteLastExpense() {
+        String input = "02-12-2020" + System.lineSeparator() + "Albert" + System.lineSeparator() + "equal";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Parser.parseUserInput("expense 899 category Albert, Don, Betty /description");
+        Parser.parseUserInput("delete last");
+        assertEquals(1, trip.getListOfExpenses().size());
+        assertEquals("Dinner at fancy restaurant", trip.getListOfExpenses().get(0).getDescription());
+    }
+
+    @Test
+    void testInvalidDeleteLastExpense() {
+        ByteArrayOutputStream actualOutput = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(actualOutput));
+        String expectedOutput = "You have not recently added an expense." + System.lineSeparator();
+        Parser.parseUserInput("delete last");
+        assertEquals(expectedOutput, actualOutput.toString());
+    }
+
     //@@author lixiyuan416
     //Tests expense filtering methods
     @Test
     void findMatchingPersonExpenses_validName_printExpense() {
         ByteArrayOutputStream bo = new ByteArrayOutputStream();
         System.setOut(new PrintStream(bo));
-        trip.addExpense(exp);
         String correctOutput = "1. \tDinner at fancy restaurant" + System.lineSeparator()
                 + "\tDate: 02 Dec 2020" + System.lineSeparator()
                 + "\tAmount Spent: USD $600.00" + System.lineSeparator()
