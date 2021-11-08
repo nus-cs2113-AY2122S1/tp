@@ -18,15 +18,15 @@ activate ":AddModuleCommand"
 
 opt no duplicate parameters
     ":AddModuleCommand" -> ":AddModuleCommand" : getModule()
-    participant "ModuleManager"
-    activate "ModuleManager"
-    ":AddModuleCommand" -> "ModuleManager" : addNewModule(module)
-    "ModuleManager" --> ":AddModuleCommand"
-    deactivate "ModuleManager"
+    participant "<color red><<class>></color> \n ModuleManager"
+    activate "<color red><<class>></color> \n ModuleManager"
+    ":AddModuleCommand" -> "<color red><<class>></color> \n ModuleManager" : addNewModule(module)
+    "<color red><<class>></color> \n ModuleManager" --> ":AddModuleCommand"
+    deactivate "<color red><<class>></color> \n ModuleManager"
 end
-
-
 
 ":AddModuleCommand" --> ":Click"
 deactivate ":AddModuleCommand"
+
+hide footbox
 @enduml

@@ -25,16 +25,16 @@ User -> ":CapEditInfoCommand" : currentCap
 User -> ":CapEditInfoCommand" : totalMcTaken
 deactivate ":Ui"
 
-participant "ModuleManager"
+participant "<color red><<class>></color> \n ModuleManager"
 opt valid input
-    activate "ModuleManager"
-    ":CapEditInfoCommand" -> "ModuleManager" : setCapInfo(currentCap, totalMcTaken)
-    "ModuleManager" --> ":CapEditInfoCommand"
-    deactivate "ModuleManager"
+    activate "<color red><<class>></color> \n ModuleManager"
+    ":CapEditInfoCommand" -> "<color red><<class>></color> \n ModuleManager" : setCapInfo(currentCap, totalMcTaken)
+    "<color red><<class>></color> \n ModuleManager" --> ":CapEditInfoCommand"
+    deactivate "<color red><<class>></color> \n ModuleManager"
 end
-
-
 
 ":CapEditInfoCommand" --> ":Click"
 deactivate ":CapEditInfoCommand"
+
+hide footbox
 @enduml
