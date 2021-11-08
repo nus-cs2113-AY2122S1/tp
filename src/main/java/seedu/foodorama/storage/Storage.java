@@ -23,14 +23,20 @@ import java.util.logging.Logger;
  * @author Dniv-ra
  */
 public class Storage {
-    public static final String INGREDIENT = "ingredient";
-    public static final String DISH = "dish";
+    private static final String INGREDIENT = "ingredient";
+    private static final String DISH = "dish";
     private static Logger LOGGER = Logger.getLogger("Storage class");
     private static final String DIRECTORY_NAME = "data";
     private static final String FILE_NAME_DISH = "dishes.txt";
     private static final String FILE_NAME_INGR = "ingredients.txt";
     private static final String FILE_NAME_FORMAT = "formats.txt";
     private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private static final int INDEX_ZERO = 0;
+    private static final int INDEX_ONE = 1;
+    private static final int INDEX_TWO = 2;
+    private static final int INDEX_THREE = 3;
+    private static final int INDEX_FOUR = 4;
+    private static final int LENGTH_CONTAINS_CONSTITUENTS = 4;
 
     /**
      * Deals with writing the data that's present during runtime into a text file.
@@ -128,11 +134,11 @@ public class Storage {
                     for (int i = 0; i < params.length; i++) {
                         params[i] = params[i].trim();
                     }
-                    String ingredientName = params[0];
-                    double ingredientWeight = Double.parseDouble(params[1]);
-                    double ingredientWaste = Double.parseDouble(params[2]);
-                    double limit = Double.parseDouble(params[3]);
-                    String expiryDate = params[4];
+                    String ingredientName = params[INDEX_ZERO];
+                    double ingredientWeight = Double.parseDouble(params[INDEX_ONE]);
+                    double ingredientWaste = Double.parseDouble(params[INDEX_TWO]);
+                    double limit = Double.parseDouble(params[INDEX_THREE]);
+                    String expiryDate = params[INDEX_FOUR];
                     Ingredient ingredientToAdd = new Ingredient(ingredientName, ingredientWeight,
                             ingredientWaste, expiryDate);
                     ingredientToAdd.setLimit(limit);
@@ -167,14 +173,13 @@ public class Storage {
                     for (int i = 0; i < params.length; i++) {
                         params[i] = params[i].trim();
                     }
-                    String dishName = params[0];
-                    double wastage = Double.parseDouble(params[1]);
-                    double ingredientContribution = Double.parseDouble(params[2]);
-                    double limit = Double.parseDouble(params[3]);
+                    String dishName = params[INDEX_ZERO];
+                    double wastage = Double.parseDouble(params[INDEX_ONE]);
+                    double ingredientContribution = Double.parseDouble(params[INDEX_TWO]);
+                    double limit = Double.parseDouble(params[INDEX_THREE]);
                     Dish dishToAdd = new Dish(dishName, wastage, ingredientContribution);
                     dishToAdd.setLimit(limit);
-                    if (params.length > 4) {
-                        //System.out.println("Contains constituents");
+                    if (params.length > LENGTH_CONTAINS_CONSTITUENTS) {
                         for (int i = 4; i < params.length; i++) {
                             int ingredientIndex = IngredientList.find(params[i]);
                             Ingredient dishComponent = IngredientList.ingredientList.get(ingredientIndex);

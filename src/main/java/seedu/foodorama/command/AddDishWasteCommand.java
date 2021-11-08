@@ -20,6 +20,8 @@ import java.util.logging.Logger;
 public class AddDishWasteCommand extends Command {
     private static Logger logger = Logger.getLogger("AddDishWasteCommand.execute()");
     private static final Ui UI = new Ui();
+    private static final int INDEX_ZERO = 0;
+    private static final int INDEX_OFFSET = 1;
 
     AddDishWasteCommand() {
         LoggerManager.setupLogger(logger);
@@ -43,11 +45,11 @@ public class AddDishWasteCommand extends Command {
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         logger.log(Level.INFO, "Start of process");
-        String dish = parameters.get(0);
+        String dish = parameters.get(INDEX_ZERO);
         int dishIndex;
         if (isNumber(dish)) {
             if (isInteger(dish)) {
-                dishIndex = Integer.parseInt(dish) - 1;
+                dishIndex = Integer.parseInt(dish) - INDEX_OFFSET;
             } else {
                 throw new FoodoramaException(UI.getInvalidIndexMsg());
             }
@@ -58,9 +60,11 @@ public class AddDishWasteCommand extends Command {
         //Possible edge case (user give 0 as input)
         if (dish.isBlank()) {
             throw new FoodoramaException(UI.getDishNameMissingMsg());
+        // If dish cannot be found and is not a number
         } else if (dishIndex == -1 && !isNumber(dish)) {
             logger.log(Level.INFO, "Dish does not exist");
-            throw new FoodoramaException(UI.getDishNotExistMsg(parameters.get(0)));
+            throw new FoodoramaException(UI.getDishNotExistMsg(parameters.get(INDEX_ZERO)));
+        // If dish index is out of bounds
         } else if (dishIndex < 0 || dishIndex >= DishList.dishList.size()) {
             logger.log(Level.INFO, "Dish index is wrong");
             throw new FoodoramaException(UI.getDishIndexExceedSizeMsg());
@@ -104,6 +108,7 @@ public class AddDishWasteCommand extends Command {
     public boolean isInteger(String numberString) {
         if (isNumber(numberString)) {
             double number = Double.parseDouble(numberString);
+            // Check if integer when rounded number - number == 0
             return Math.rint(number) - number == 0;
         } else {
             return false;

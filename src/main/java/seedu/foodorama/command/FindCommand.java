@@ -20,6 +20,8 @@ public class FindCommand extends Command {
     private static final String DISH = "dish";
     private static final String INGR = "ingr";
     private static final Ui UI = new Ui();
+    private static final int INDEX_ZERO = 0;
+
 
     /**
      * User command to find ingredients or dishes from their respective lists using a keyword.
@@ -33,8 +35,8 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
-        String commandToExecute = parameters.get(0);
-        parameters.remove(0);
+        String commandToExecute = parameters.get(INDEX_ZERO);
+        parameters.remove(INDEX_ZERO);
         String itemToFind = String.join(" ", parameters);
 
         switch (commandToExecute) {

@@ -18,6 +18,8 @@ import java.util.logging.Logger;
 public class DeleteIngrCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger("EditIngrCommand");
     private static final Ui UI = new Ui();
+    private static final int INDEX_ZERO = 0;
+    private static final int INDEX_OFFSET = 1;
 
     DeleteIngrCommand() {
         LoggerManager.setupLogger(LOGGER);
@@ -32,24 +34,26 @@ public class DeleteIngrCommand extends Command {
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         LOGGER.log(Level.INFO, "Start of process");
-        String ingr = parameters.get(0);
+        String ingr = parameters.get(INDEX_ZERO);
         int ingrIndex;
         if (isNumber(ingr)) {
             if (isInteger(ingr)) {
-                ingrIndex = Integer.parseInt(parameters.get(0)) - 1;
+                ingrIndex = Integer.parseInt(parameters.get(INDEX_ZERO)) - INDEX_OFFSET;
                 LOGGER.log(Level.INFO, "Parameter is Integer " + ingrIndex);
             } else {
                 throw new FoodoramaException(UI.getInvalidIndexMsg());
             }
-        } else if (!isNumber(ingr) & ingr.isEmpty()) {
+        } else if (!isNumber(ingr) && ingr.isEmpty()) {
             LOGGER.log(Level.INFO, "Parameter is Empty");
             throw new FoodoramaException(UI.getIngrIndexMissingMsg());
         } else {
             ingrIndex = IngredientList.find(ingr);
         }
-        if (!isNumber(ingr) & ingrIndex == -1) {
+        // If user input is not a number and index cannot be found
+        if (!isNumber(ingr) && ingrIndex == -1) {
             LOGGER.log(Level.INFO, "Ingredient does not exist");
             throw new FoodoramaException(UI.getIngrNotExistMsg());
+        // If ingr index is out of bounds
         } else if (ingrIndex < 0 || ingrIndex >= IngredientList.ingredientList.size()) {
             LOGGER.log(Level.INFO, "Ingredient Index is not within Ingredient List Range");
             throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());
@@ -66,7 +70,7 @@ public class DeleteIngrCommand extends Command {
      *
      * @param numberString the String to check if it is a number
      * @return true if the String is a number, false if it is not a number
-     * @author Dniv-ra
+     * @author Rakesh12000
      */
     public boolean isNumber(String numberString) {
         try {
@@ -87,6 +91,7 @@ public class DeleteIngrCommand extends Command {
     public boolean isInteger(String numberString) {
         if (isNumber(numberString)) {
             double number = Double.parseDouble(numberString);
+            // Check if integer when rounded number - number == 0
             return Math.rint(number) - number == 0;
         } else {
             return false;

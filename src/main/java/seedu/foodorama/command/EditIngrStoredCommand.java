@@ -18,6 +18,8 @@ import java.util.logging.Logger;
 public class EditIngrStoredCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger("EditIngrCommand");
     private static final Ui UI = new Ui();
+    private static final int INDEX_ZERO = 0;
+    private static final int INDEX_OFFSET = 1;
 
     EditIngrStoredCommand() {
         LoggerManager.setupLogger(LOGGER);
@@ -41,10 +43,10 @@ public class EditIngrStoredCommand extends Command {
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         LOGGER.log(Level.INFO, "Start of process");
         int ingredientIndex;
-        String ingredientName = parameters.get(0);
-        if (isNumber(parameters.get(0))) {
-            if (isInteger(parameters.get(0))) {
-                ingredientIndex = Integer.parseInt(parameters.get(0)) - 1;
+        String ingredientName = parameters.get(INDEX_ZERO);
+        if (isNumber(parameters.get(INDEX_ZERO))) {
+            if (isInteger(parameters.get(INDEX_ZERO))) {
+                ingredientIndex = Integer.parseInt(parameters.get(INDEX_ZERO)) - INDEX_OFFSET;
                 LOGGER.log(Level.INFO, "Parameter is Integer " + ingredientIndex);
             } else {
                 throw new FoodoramaException(UI.getInvalidIndexMsg());
@@ -101,6 +103,7 @@ public class EditIngrStoredCommand extends Command {
     public boolean isInteger(String numberString) {
         if (isNumber(numberString)) {
             double number = Double.parseDouble(numberString);
+            // Check if integer when rounded number - number == 0
             return Math.rint(number) - number == 0;
         } else {
             return false;

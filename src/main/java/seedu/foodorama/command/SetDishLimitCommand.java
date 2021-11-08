@@ -16,6 +16,8 @@ import java.util.ArrayList;
  */
 public class SetDishLimitCommand extends Command {
     private static final Ui UI = new Ui();
+    private static final int INDEX_ZERO = 0;
+    private static final int INDEX_OFFSET = 1;
 
     /**
      * User command to set limit to the wasted weight of the dish
@@ -32,21 +34,23 @@ public class SetDishLimitCommand extends Command {
      */
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
-        String dish = parameters.get(0);
+        String dish = parameters.get(INDEX_ZERO);
         int dishIndex;
         if (isNumber(dish)) {
             if (isInteger(dish)) {
-                dishIndex = Integer.parseInt(dish) - 1;
+                dishIndex = Integer.parseInt(dish) - INDEX_OFFSET;
             } else {
                 throw new FoodoramaException(UI.getInvalidIndexMsg());
             }
-        } else if (!isNumber(dish) & dish.isEmpty()) {
+        } else if (!isNumber(dish) && dish.isEmpty()) {
             throw new FoodoramaException(UI.getDishNameMissingMsg());
         } else {
             dishIndex = DishList.find(dish);
         }
+        // If user input is not a number and index cannot be found
         if (dishIndex == -1 && !isNumber(dish)) {
-            throw new FoodoramaException(UI.getDishNotExistMsg(parameters.get(0)));
+            throw new FoodoramaException(UI.getDishNotExistMsg(parameters.get(INDEX_ZERO)));
+        // If dish index is out of bounds
         } else if (dishIndex < 0 || dishIndex >= DishList.dishList.size()) {
             throw new FoodoramaException(UI.getDishIndexExceedSizeMsg());
         } else {
@@ -88,6 +92,7 @@ public class SetDishLimitCommand extends Command {
     public boolean isInteger(String numberString) {
         if (isNumber(numberString)) {
             double number = Double.parseDouble(numberString);
+            // Check if integer when rounded number - number == 0
             return Math.rint(number) - number == 0;
         } else {
             return false;

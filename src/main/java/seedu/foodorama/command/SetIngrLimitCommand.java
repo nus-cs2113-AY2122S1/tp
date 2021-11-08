@@ -18,6 +18,8 @@ import java.util.ArrayList;
  */
 public class SetIngrLimitCommand extends Command {
     private static final Ui UI = new Ui();
+    private static final int INDEX_ZERO = 0;
+    private static final int INDEX_OFFSET = 1;
 
     /**
      * User command to set weight limit to the Ingredient stored
@@ -31,21 +33,23 @@ public class SetIngrLimitCommand extends Command {
      */
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
-        String ingr = parameters.get(0);
+        String ingr = parameters.get(INDEX_ZERO);
         int ingrIndex;
         if (isNumber(ingr)) {
             if (isInteger(ingr)) {
-                ingrIndex = Integer.parseInt(ingr) - 1;
+                ingrIndex = Integer.parseInt(ingr) - INDEX_OFFSET;
             } else {
                 throw new FoodoramaException(UI.getInvalidIndexMsg());
             }
-        } else if (!isNumber(ingr) & ingr.isEmpty()) {
+        } else if (!isNumber(ingr) && ingr.isEmpty()) {
             throw new FoodoramaException(UI.getIngrIndexMissingMsg());
         } else {
             ingrIndex = IngredientList.find(ingr);
         }
+        // If user input is not a number and index cannot be found
         if (ingrIndex == -1 && !isNumber(ingr)) {
             throw new FoodoramaException(UI.getIngrNotExistMsg());
+        // If ingr index is out of bounds
         } else if (ingrIndex < 0 || ingrIndex >= IngredientList.ingredientList.size()) {
             throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());
         } else {
@@ -85,6 +89,7 @@ public class SetIngrLimitCommand extends Command {
     public boolean isInteger(String numberString) {
         if (isNumber(numberString)) {
             double number = Double.parseDouble(numberString);
+            // Check if integer when rounded number - number == 0
             return Math.rint(number) - number == 0;
         } else {
             return false;

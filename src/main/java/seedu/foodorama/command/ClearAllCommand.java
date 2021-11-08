@@ -19,7 +19,8 @@ import java.util.logging.Logger;
 public class ClearAllCommand extends Command {
     private static final Logger LOGGER = Logger.getLogger("ClearAllCommand.execute()");
     private static final Ui UI = new Ui();
-    public static final String YES_NO_REGEX = "^(y|yes|n|no)$";
+    private static final String YES_NO_REGEX = "^(y|yes|n|no)$";
+    private static final String Y_CHAR = "y";
 
     ClearAllCommand() {
         LoggerManager.setupLogger(LOGGER);
@@ -44,7 +45,7 @@ public class ClearAllCommand extends Command {
             confirmClear = input.nextLine().toLowerCase();
         }
         UI.clearTerminalAndPrintNewPage();
-        if (confirmClear.startsWith("y")) {
+        if (confirmClear.startsWith(Y_CHAR)) {
             DishList.dishList.clear();
             IngredientList.ingredientList.clear();
             UI.printAllCleared();

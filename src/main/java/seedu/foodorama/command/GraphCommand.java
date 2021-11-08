@@ -17,6 +17,7 @@ public class GraphCommand extends Command {
     private static final String DISH = "dish";
     private static final String INGR = "ingr";
     private static final Ui UI = new Ui();
+    private static final int INDEX_ZERO = 0;
 
     /**
      * User command to display a graph of ingredients or dishes from their respective lists.
@@ -30,7 +31,7 @@ public class GraphCommand extends Command {
      */
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
-        switch (parameters.get(0)) {
+        switch (parameters.get(INDEX_ZERO)) {
         case DISH:
             if (DishList.dishList.isEmpty()) {
                 throw new FoodoramaException(UI.getLineDivider() + System.lineSeparator()
