@@ -28,7 +28,7 @@ public abstract class AddParser extends Parser {
     private static final int INDEX_OF_BUDGET = 3;
 
     private static final ItemAttribute[] eventAttributesToCheckFor = {ItemAttribute.TITLE, ItemAttribute.DATE,
-            ItemAttribute.VENUE, ItemAttribute.BUDGET};
+                                                                      ItemAttribute.VENUE, ItemAttribute.BUDGET};
     private static final ItemAttribute[] taskAttributesToCheckFor = {ItemAttribute.TITLE, ItemAttribute.DATE};
 
     /**

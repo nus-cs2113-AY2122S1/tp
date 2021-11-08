@@ -49,7 +49,7 @@ public class Event extends Item {
     public String getTaskListAsString() {
         StringBuilder tasks = new StringBuilder();
         int counter = 1;
-        for (int i = 0; i < taskList.size(); i++ ) {
+        for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
             tasks.append(counter).append(". ");
             tasks.append(task.getTitle());

@@ -52,7 +52,7 @@ public class Task extends Item {
     public String getMemberListAsString() {
         StringBuilder members = new StringBuilder();
         int counter = 1;
-        for (int i = 0; i < memberList.size(); i++ ) {
+        for (int i = 0; i < memberList.size(); i++) {
             Member member = memberList.get(i);
             members.append(counter).append(". ");
             members.append(member);
