@@ -279,7 +279,7 @@ their personal account which will be stored in the `GoalList` class.
 5. The `GoalList#addGoal(goal, printManager)` method checks for duplicated goal names before adding a goal to the list.
 6. The `PrintManager#printAddedGoal(description)` method prints an acknowledgement message that the goal has been added.
 
-![](https://www.planttext.com/api/plantuml/img/ZLB1QiCm3BtxAqGltI1fxcQCZWvwwM2mwouY5fuXbZDRsVVFIGepn2sxoUz9xptBFYR1A9CVrFvBP4owwyO1UKOEVV1Tek-9kAVMEBGHlMgVOQVXnPXpmE4Kl4Ss6OWJNmyFDXCNbqJ3-LeryCbZT2nlo6WfQdWlJWqa2J5N6ZxMub5XB-u7XIfUIcqnc5DjVNCZherBg9Leu7QKqhWYbwqhw69-MtC7UdNCcUalpC6Il5Bgenl51PxldfjicU2EPZt8KzlUdpBqF_NQYXVnsb9AqHg_36wViHpRiaTYa__WBm00)
+![](Diagram_Images/Implementation_Diagram_Images/AddGoalCommandSequenceDiagram.png)
 
 #### 4.1.2. Design Considerations
 
