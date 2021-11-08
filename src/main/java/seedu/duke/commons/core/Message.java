@@ -22,6 +22,9 @@ public final class Message {
     public static final String ERROR_DUPLICATE_FLAGS =
             "Duplicate Flag(s) found, please check your flags again.";
 
+    public static final String ERROR_DUPLICATE_MODULES =
+            "Sorry, you already have the module in the list.";
+
     public static final String ERROR_EMPTY_MEETING_LINK =
             "Sorry, no meeting link was provided.";
 
@@ -63,6 +66,9 @@ public final class Message {
 
     public static final String ERROR_MODULE_NOT_FOUND =
             "Sorry, there is no module on NUSMods matching the module code you entered.";
+
+    public static final String ERROR_MODULE_NOT_IN_LIST =
+            "Sorry, the module that you specified is not in the list.";
 
     public static final String ERROR_RETRIEVING_DATA =
             "I can't retrieve the saved data. Creating new file..";

@@ -2,6 +2,7 @@ package seedu.duke.model.module;
 
 import seedu.duke.DukeException;
 import seedu.duke.commons.core.Message;
+import seedu.duke.model.module.exceptions.ModuleNotFoundException;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
@@ -27,23 +28,13 @@ public class ModuleList {
         return moduleList.size();
     }
 
-    public Module getModule(int moduleIndex) throws DukeException {
-        try {
-            return moduleList.get(moduleIndex);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(Message.ERROR_INVALID_INDEX);
-        } catch (NumberFormatException e) {
-            throw new DukeException(Message.ERROR_INVALID_NUMBER);
-        }
-    }
-
-    public Module getModule(String moduleCode) throws DukeException {
+    public Module getModule(String moduleCode) throws ModuleNotFoundException {
         for (Module module : moduleList) {
             if (module.getModuleCode().equals(moduleCode)) {
                 return module;
             }
         }
-        throw new DukeException("The module is not in the list.");
+        throw new ModuleNotFoundException(Message.ERROR_MODULE_NOT_IN_LIST);
     }
 
     public boolean isEmpty() {
@@ -53,19 +44,19 @@ public class ModuleList {
     public void addModule(Module newModule, String grade) throws DukeException {
         for (Module module : moduleList) {
             if (module.getModuleCode().equals(newModule.getModuleCode())) {
-                throw new DukeException("You have already added that module");
+                throw new DukeException(Message.ERROR_DUPLICATE_MODULES);
             }
         }
         newModule.setGrade(grade);
         moduleList.add(newModule);
     }
 
-    public void deleteModule(String moduleCode) throws DukeException {
+    public void deleteModule(String moduleCode) throws ModuleNotFoundException {
         try {
             Module module = getModule(moduleCode);
             moduleList.remove(module);
         } catch (NullPointerException e) {
-            throw new DukeException("The module is not in the list.");
+            throw new ModuleNotFoundException(Message.ERROR_MODULE_NOT_IN_LIST);
         }
     }
 
