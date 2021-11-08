@@ -33,9 +33,9 @@ upon.
     * [Glossary](#glossary)
 
 ## Acknowledgements
-
+* [Gson](https://github.com/google/gson/) for reading and writing of JSON files.
 * [Thread](https://stackoverflow.com/questions/31758872/how-to-handle-different-data-types-with-same-attribute-name-with-gson)
-from StackOverflow with a simple method to parse a json field with a variable data type. 
+from StackOverflow with a simple method to parse a JSON field with a variable data type. 
 
 ## Setting up, getting started
 
@@ -170,9 +170,9 @@ This section covers the important details on how some features are implemented.
 <br>
 
 ### Fetching Module Data
-Each module is converted from the json fetched from the **NUSMods API** into a Java Object using the gson library.
-Since the json format utilized by the API contains nested objects, the final implementation of the `Module` objects 
-emulates that of the json, with each `Module` containing an `Attributes` object and an array of `Semester` objects, 
+Each module is converted from the JSON fetched from the **NUSMods API** into a Java Object using the gson library.
+Since the JSON format utilized by the API contains nested objects, the final implementation of the `Module` objects 
+emulates that of the JSON, with each `Module` containing an `Attributes` object and an array of `Semester` objects, 
 `Semester` containing an array of `Lesson` objects, and  `Lesson` containing an array of `Weeks` objects.
 
 ![FetchModuleDiagram](uml-diagrams/ModuleClassDiagram.png)
@@ -233,17 +233,17 @@ was implemented.
 ![WeeksReadDiagram](uml-diagrams/WeeksRead.png)
 
 Using `peek()`, Gson checks if *weeks* is an array or an object. From there it utilizes the deserialization method for 
-the specific data type. The key difference is that while *weeks* can be an array in the json, when deserialized it is 
+the specific data type. The key difference is that while *weeks* can be an array in the JSON, when deserialized it is 
 always an object that contains three variables, *weeks*, *start* and *end*. If it was originally an array, then the 
 array be written into the *weeks* array in the object itself, and *start* and *end* will be null. If it was an object, 
 then *start* and *end* will be written, but *weeks* will be null.
 
 ![WeeksWriteDiagram](uml-diagrams/WeeksWrite.png)
 
-Similarly for saving weeks for the `Timetable` json, a custom serialization method is used that checks which specific 
+Similarly for saving weeks for the `Timetable` JSON, a custom serialization method is used that checks which specific 
 data type to serialize it as. If *weeks* is not null, then Gson writes it as an array despite it being an object. 
-This is to maintain consistency with the json format retrieved from the **NUSMods API** which allows Gson to 
-successfully deserialize the timetable json when it is loaded.  Otherwise it writes it as an object as usual.
+This is to maintain consistency with the JSON format retrieved from the **NUSMods API** which allows Gson to 
+successfully deserialize the timetable JSON when it is loaded.  Otherwise it writes it as an object as usual.
 
 <br>
 
@@ -258,9 +258,9 @@ The following implemented functions are utilized heavily:
 * `getOnlineModInfo()` : using a module code, get detailed information about that
 
 `ModStorage`:
-* `saveModInfo()` : saves a fetched json into local storage.
-* `searchFiles()` : attempts to search from all jsons in the local data folder.
-* `loadModInfo()` : directly loads the json with the specified module code.
+* `saveModInfo()` : saves a fetched JSON into local storage.
+* `searchFiles()` : attempts to search from all JSONs in the local data folder.
+* `loadModInfo()` : directly loads the JSON with the specified module code.
 
 <br>
 
@@ -278,7 +278,7 @@ The following implemented functions are utilized heavily:
 
 Utilizes `getOnlineModList()` to get all mods from online. If the module code contains the search term or matches the 
 level flag if inputted, `getOnlineModInfo()` is used to fetch the full data for further comparison with the remaining 
-flags. `saveModInfo()` is always used after fetching a json to keep the local database as up to date as possible. 
+flags. `saveModInfo()` is always used after fetching a JSON to keep the local database as up to date as possible. 
 If the module matches the search term and all flags, then it is printed. If either `getOnlineModList()` or 
 `getOnlineModInfo()` fail at the start, then `searchFiles()` will execute instead to fetch data locally.
 
@@ -291,7 +291,7 @@ If the module matches the search term and all flags, then it is printed. If eith
 ![ShowCommandDiagram](uml-diagrams/Show.png)
 
 Similar to search, except it directly uses `getOnlineModInfo()` instead. If the module exists, then it will be printed. 
-Again, `saveModInfo()` is always used after fetching a json to keep the local database as up to date as possible. 
+Again, `saveModInfo()` is always used after fetching a JSON to keep the local database as up to date as possible. 
 If `getOnlineModInfo()` fails at the start, then `loadModInfo()` will execute instead.
 
 <br>
@@ -302,7 +302,7 @@ If `getOnlineModInfo()` fails at the start, then `loadModInfo()` will execute in
 
 ![UpdateCommandDiagram](uml-diagrams/Update.png)
 
-Fetches the json from all mods in the NUSMods database. Utilizes `getOnlineModList()` to get all mods from online. 
+Fetches the JSON from all mods in the NUSMods database. Utilizes `getOnlineModList()` to get all mods from online. 
 `getOnlineModInfo()` and `saveModInfo()` is run for every mod in the list to update all mods in the local database.
 
 <br>
@@ -314,9 +314,9 @@ Fetches the json from all mods in the NUSMods database. Utilizes `getOnlineModLi
 #### Initialization
 ![](uml-diagrams/TimetableLoad.png)
 
-Fetches locally stored timetable json, utilizing Gson to convert it to a `TimetableDto` object. `toTimetable()` function is then called to convert `TimetableDto` to a `Timetable` object, where schedule info is merged to easier access.
+Fetches locally stored timetable JSON, utilizing Gson to convert it to a `TimetableDto` object. `toTimetable()` function is then called to convert `TimetableDto` to a `Timetable` object, where schedule info is merged to easier access.
 
-In the event that the json save file is empty or does not exist, a new empty `Timetable` object is created
+In the event that the JSON save file is empty or does not exist, a new empty `Timetable` object is created
 
 <br>
 
@@ -382,7 +382,7 @@ by incrementing a counter for each module tracked within the timetable instance'
 
 #### Checking Pre-requisite
 
-The pre-requisite tree for a particular module can be found under `prerequisiteTree` in the json obtained from NUSMods API.
+The pre-requisite tree for a particular module can be found under `prerequisiteTree` in the JSON obtained from NUSMods API.
 The pre-requisite tree varies from module to module and can be deeply recursive.
 
 Example of deeply recursive pre-requisite tree (CS4243):
@@ -561,7 +561,7 @@ Use case ends.
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to perform local search operations, even on 12000+ module jsons quickly.
+2. Should be able to perform local search operations, even on 12000+ module JSONs quickly.
 3. Should be easily usable by someone who has not used CLI before.
 
 ### Glossary
