@@ -297,16 +297,16 @@ by SITUS.
 E.g. `update 1.2 a/150.0`
 1. The current ingredient inventory is:
 
-```
-1. Carrot | Total Amount: 18.7 kg
-    1.1 Amount Left: 10.0 kg | Expiry Date: 23/12/2021
-    1.2 Amount Left: 2.2 kg | Expiry Date: 25/12/2021
-    1.3 Amount Left: 6.5 kg | Expiry Date: 02/01/2022
-
-2. Potato | Total Amount: 7.1 kg
-    2.1 Amount Left: 5.0 kg | Expiry Date: 25/12/2021
-    2.2 Amount Left: 2.1 kg | Expiry Date: 12/11/2021
-```
+   ```
+   1. Carrot | Total Amount: 18.7 kg
+       1.1 Amount Left: 10.0 kg | Expiry Date: 23/12/2021
+       1.2 Amount Left: 2.2 kg | Expiry Date: 25/12/2021
+       1.3 Amount Left: 6.5 kg | Expiry Date: 02/01/2022
+   
+   2. Potato | Total Amount: 7.1 kg
+       2.1 Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+       2.2 Amount Left: 2.1 kg | Expiry Date: 12/11/2021
+   ```
 
 2.The initial user input is stored as a string. It is pre-processed by the `Parser` class that
 checks the validity of the inputs. If inputs are valid, the string is broken into an array 
@@ -358,16 +358,16 @@ contain a prefixed flag for SITUS to identify the ingredient's name and subtract
 E.g. `subtract n/carrot a/150.0`
 1. The current ingredient inventory is:
 
-```
-1. Carrot | Total Amount: 166.5 kg
-    1.1 Amount Left: 10.0 kg | Expiry Date: 23/12/2021
-    1.2 Amount Left: 150.0 kg | Expiry Date: 25/12/2021
-    1.3 Amount Left: 6.5 kg | Expiry Date: 02/01/2022
-
-2. Potato | Total Amount: 7.1 kg
-    2.1 Amount Left: 5.0 kg | Expiry Date: 25/12/2021
-    2.2 Amount Left: 2.1 kg | Expiry Date: 12/11/2021
-```
+   ```
+   1. Carrot | Total Amount: 166.5 kg
+       1.1 Amount Left: 10.0 kg | Expiry Date: 23/12/2021
+       1.2 Amount Left: 150.0 kg | Expiry Date: 25/12/2021
+       1.3 Amount Left: 6.5 kg | Expiry Date: 02/01/2022
+   
+   2. Potato | Total Amount: 7.1 kg
+       2.1 Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+       2.2 Amount Left: 2.1 kg | Expiry Date: 12/11/2021
+   ```
 
 2. The initial user input is stored as a string. It is pre-processed by the `Parser` class that
    checks the validity of the inputs. If inputs are valid, the string is broken into an array
