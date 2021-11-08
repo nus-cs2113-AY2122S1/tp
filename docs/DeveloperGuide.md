@@ -282,7 +282,7 @@ Expected: the program will warn the user, and asks for confirmation from the use
 
 #### Opening and deleting trip 
 
-- `open` or `delete` with a incorrect trip number (wrong format/trip number doesn't exist 
+- `open` or `delete` with an incorrect trip number (wrong format/trip number doesn't exist 
 e.g. `open something` or `delete 1000` when only 2 trips are stored.)
 <br>
 Expected: An error will inform the user that the trip number does not exist.
@@ -300,7 +300,27 @@ e.g. 'summary abcdefg' or 'summary %32!3'.
 <br>
 Expected: An error will inform the user that the string or name does not exist in the trip.
 
-#### Creating Expense
+#### Creating expenses
 - Create an expense inside a trip. When prompted for date, enter an input like `testing123`, or enter an invalid date like `31-02-2021`
   <br>
   Expected: Program will prompt you to re-enter date in DD-MM-YYYY format.
+
+- Create an Expense with the people with identical names (case-insensitive). e.g. `expense 2113 food duke, dUkE /nice dinner`.
+  <br>
+  Expected: An error will inform the user that they have entered people with the same name.
+
+- Create an Expense with invalid parameters (negative, zero or non-number). e.g. `expense -2113 category Duke, Duke2 /description` or
+  `expense 0 category Duke, Duke2 /description` or `expense notNumber cateogry Duke, Duke2 /description`.
+  <br>
+  Expected: An error will inform the user that the amount is invalid and request the user to enter the amount again.
+
+#### Viewing and deleting expenses
+
+- `view` and `delete` with an invalid expense number (wrong format/trip number doesn't exist).
+  e.g. `view something` or `delete 1000` when only 2 expenses are added.
+  <br>
+  Expected: An error will inform the user that the expense number does not exist.
+- `view last` and `delete last` when you have already deleted your most recent expense.
+e.g. `delete last` followed by `delete last` or `view last`.
+<br>
+Expected: An error will inform the user that they have no recently added an expense.
