@@ -466,7 +466,8 @@ Input syntax:
 view [expense-number]
 ````
 - Note that entering `view` without an index will print all expenses in the currently opened trip.
-- `view last` to view last expense
+- Enter `view last` to view the last added expense.
+  - Note: If the last added expense is deleted, you will not be able to use this command.
 
 For example,
 
@@ -543,7 +544,8 @@ delete [expense-number]
 ```
 - `[expense-number]` is the index of the expense you wish to delete, 
 and can be found by using `list` command while a Trip is open.
-- `delete last` to delete last expense
+- `delete last` to delete the last added expense.
+  - Note: After deletion, you will not be able to use this command again until you add another expense.
 
 For example,
 
