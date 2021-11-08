@@ -15,9 +15,9 @@ deactivate ":AddNoteCommand"
 deactivate ":Parser"
 ":Click" --> ":AddNoteCommand" : execute()
 activate ":AddNoteCommand"
-participant ":CollectionOfNotes"
-":AddNoteCommand" -> ":CollectionOfNotes" : addNote()
-activate ":CollectionOfNotes"
+participant ":CollectionOfNotebooks"
+":AddNoteCommand" -> ":CollectionOfNotebooks" : addNote()
+activate ":CollectionOfNotebooks"
 return
 participant ":Ui"
 ":AddNoteCommand" -> ":Ui" : printAddedNoteMessage(NOTEBOOK_NAME)
