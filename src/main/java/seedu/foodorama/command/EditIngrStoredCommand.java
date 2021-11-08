@@ -43,6 +43,7 @@ public class EditIngrStoredCommand extends Command {
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         LOGGER.log(Level.INFO, "Start of process");
         int ingredientIndex;
+        String ingredientName = parameters.get(INDEX_ZERO);
         if (isNumber(parameters.get(INDEX_ZERO))) {
             if (isInteger(parameters.get(INDEX_ZERO))) {
                 ingredientIndex = Integer.parseInt(parameters.get(INDEX_ZERO)) - INDEX_OFFSET;
@@ -50,17 +51,28 @@ public class EditIngrStoredCommand extends Command {
             } else {
                 throw new FoodoramaException(UI.getInvalidIndexMsg());
             }
+        } else if (!isNumber(ingredientName) & ingredientName.isEmpty()) {
+            LOGGER.log(Level.INFO, "Parameter is Empty");
+            throw new FoodoramaException(UI.getIngrIndexMissingMsg());
         } else {
-            String ingredientName = String.join(" ", parameters);
-            if (ingredientName.isBlank()) {
-                LOGGER.log(Level.INFO, "Parameter is Empty");
-                throw new FoodoramaException(UI.getIngrIndexMissingMsg());
-            } else {
-                ingredientIndex = IngredientList.find(ingredientName);
-                LOGGER.log(Level.INFO, "Parameter is String '" + ingredientName + "'");
+            ingredientIndex = IngredientList.find(ingredientName);
+            LOGGER.log(Level.INFO, "Parameter is String '" + ingredientName + "'");
+        }
+
+        if (!isNumber(ingredientName) & ingredientIndex == -1) {
+            LOGGER.log(Level.INFO, "Ingredient does not exist");
+            throw new FoodoramaException(UI.getIngrNotExistEdit());
+        } else if (ingredientIndex < 0 || ingredientIndex >= IngredientList.ingredientList.size()) {
+            LOGGER.log(Level.INFO, "Ingredient Index is not within Ingredient List Range");
+            throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());
+        } else {
+            assert (ingredientIndex != -1) : "The dishIndex cannot be -1";
+            try {
+                IngredientList.editStorage(ingredientIndex);
+            } catch (FoodoramaException e) {
+                throw new FoodoramaException(e.getMessage());
             }
         }
-        IngredientList.editStorage(ingredientIndex);
         LOGGER.log(Level.INFO, "Ingredient Name edited.");
         LOGGER.log(Level.INFO, "End of process.");
     }
