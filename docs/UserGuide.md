@@ -62,7 +62,7 @@ Command-Line Interface for NUSMODS                               (v2.1.0)
 
 ## 2. Features
 ### 2.1 Viewing help : `help`
-Displays all commands available for the SchedUrMods application.
+Displays all available commands for the SchedUrMods application.
 
 **Format**: `help`
 
