@@ -21,8 +21,10 @@ import static java.lang.Double.parseDouble;
 public class SelectedModuleStorage extends UserStorage {
     private static Logger logger = Logger.getLogger(Constants.LOGGER_NAME);
 
+    /** File path of the text file used to store selected modules */
     private static final String FILE_PATH = "data/selectedModules.txt";
 
+    /** Changes to false when there is at least one invalid module */
     private static Boolean isModuleValid = true;
 
     /**
