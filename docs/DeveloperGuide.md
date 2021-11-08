@@ -26,6 +26,7 @@ upon.
       * [Search](#search)
       * [Show](#show)
       * [Update](#update)
+      * [Remove](#remove)
 - [Documentation, logging, testing, configuration, dev-ops]()
 - [Appendix: Requirements](#appendix-requirements)
     * [Product scope](#product-scope)
@@ -312,13 +313,15 @@ event to the timetable.
 
 <br>
 
-#### Delete
-
+#### Remove from Transcript
+![](uml-diagrams/RemoveCommand.png)
+Removing modules and their grades from the transcript follows a systematic step-by-step process. It first fetches the module to check if its valid module code. 
+Next, the current Profile of the user is captured by calling the `getProfileInUse()` function and then the `removeModuleFromTrascnript()` is called with the moduleCode that is to be deleted. 
+This function checks every module present in the list of stored modules and deletes the one which is same as the passed module.
+After deletion, the `printModuleRemoved` function is called from the `TextUi` class to print the message of successful deletion of the module from the transcript.
+<br>
 <br>
 
-#### Clear Timetable
-
-<br>
 
 #### Show Timetable
 ![](uml-diagrams/ViewTimetable.png)

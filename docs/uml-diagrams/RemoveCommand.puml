@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+[-> RemoveCommand : execute()
+activate RemoveCommand
+RemoveCommand -> NusMods : fetchModuleCode()
+activate NusMods
+NusMods --> RemoveCommand : moduleCode
+deactivate NusMods
+destroy NusMods
+RemoveCommand -> UniMods  : getProfileInUse()
+activate UniMods
+UniMods -> RemoveCommand : currentProfile : Profile
+RemoveCommand -> ModuleRecord : removeModuleFromTranscript(moduleCode)
+activate ModuleRecord
+ModuleRecord->TextUi : printModuleRemoved(moduleCode)
+activate TextUi
+TextUi->ModuleRecord
+deactivate TextUi
+destroy TextUi
+deactivate UniMods
+destroy UniMods
+deactivate ModuleRecord
+destroy ModuleRecord
+destroy RemoveCommand
+@enduml

@@ -92,3 +92,4 @@ Given below are my contributions to the project.
 
     * Developer Guide:
         * Added the introduction and Setting up, Getting Started section.
+        * Added the `remove` section along with the UML diagram.
