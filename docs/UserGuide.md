@@ -116,10 +116,10 @@ Examples:
 * `edit_class c/CS2113T-F12 i/CS2113T-F13 n/Class-F13 of Software Engineering`
 
 Expected Output:<br>
-(Change name to `Class F12`)
+(Change name to `Class F12`) <br>
 ![EditClassesCommand](images/class/EditClassCommand.png)
 
-(Change name to empty)
+(Change name to empty) <br>
 ![EditClassesCommand2](images/class/EditClassCommand2.png)
 
 <br>
