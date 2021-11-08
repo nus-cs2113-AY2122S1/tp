@@ -225,4 +225,54 @@ without error.
 
 ### Appendix D: Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+#### Setting up
+
+1. Ensure that you have Java 11 or above installed.
+2. Download the latest version of `PayMeBack` from [here](https://github.com/AY2122S1-CS2113T-T12-2/tp/releases),
+   and move the downloaded file to your preferred folder.
+3. Open any command-line application (such as Terminal, Command Prompt, or Powershell) and navigate to the folder
+   containing your downloaded copy of `PayMeBack`.
+4. In the command-line interface, type `java -jar PayMeBack.jar`.
+5. If the program starts successfully, you should see the following on your screen:
+
+
+```
+Welcome to
+    ____              __  ___     ____             __  
+   / __ \____ ___  __/  |/  ___  / __ )____ ______/ /__
+  / /_/ / __ `/ / / / /|_/ / _ \/ __  / __ `/ ___/ //_/
+ / ____/ /_/ / /_/ / /  / /  __/ /_/ / /_/ / /__/ ,<   
+/_/    \__,_/\__, /_/  /_/\___/_____/\__,_/\___/_/|_|  
+            /____/                                     
+
+```
+
+
+#### Manual Testing
+
+The following is a non-exhaustive list of common commands that may be used to operate the program, and
+the expected behaviour for each. For more information on commands, please refer to the [User Guide](https://ay2122s1-cs2113t-t12-2.github.io/tp/UserGuide.html).
+
+#### Creating Trip
+
+- `create` syntax with missing attribute (e.g. missing date `create /USA /USD /0.74 /ben, jerry`)
+<br>
+Expected: an error message shows, providing the input syntax for creating a trip.
+
+
+- `create` syntax with incorrect type/format (e.g. incorrect date format `create /USA /hello /USD /0.74 /ben, jerry`)
+  <br>
+  Expected:
+  - For some errors, the program will prompt the user to correct the input for that attribute on the spot.
+  - For other errors, the program will display an error message, and the user will need to re-enter the full command again.
+
+- `create` with a new trip with the same attributes as an already existing trip.
+<br>
+Expected: the program will warn the user, and asks for confirmation from the user on whether to add the duplicate trip.
+
+#### Opening and deleting trip 
+
+- `open` or `delete` with a incorrect trip number (wrong format/trip number doesn't exist 
+e.g. `open something` or `delete 1000` when only 2 trips are stored.)
+<br>
+Expected: An error will inform the user that the trip number does not exist.
