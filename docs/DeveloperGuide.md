@@ -261,11 +261,15 @@ The major parts of this component lies within the nusmods package.
 
 The parsing logic is implemented in the NusModsParser class, which exposes the following public API,
 
+![NusModsParser class diagram](images/JialunUMLDiagrams/CD_NusModsParser.png)
+
 - `getLessons`: Obtain an array of Lesson objects given a module code and a lesson number. 
 This relies on either local cache or network being available.
 
 Additionally, the auxiliary class `Semester` implements complement utility for handling NUS semesters and offers two-way
 conversion between java time API and semesters. The enumeration class `Semester` exposes the following APIs,
+
+![Semester class diagram](images/JialunUMLDiagrams/CD_Semester.png)
 
 - `getSemester`: Get the semester at a certain time, or at the current instant.
 - `fromInt`: Convert the integer representation from NUSMods API response to the enumeration.
