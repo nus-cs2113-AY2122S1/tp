@@ -1,7 +1,7 @@
 @startuml
 hide circle
 skinparam classAttributeIconSize 0
-skinparam groupInheritance 2
+skinparam groupInheritance 1
 skinparam maxLength 128
 
 class Storage {
@@ -14,13 +14,13 @@ class Storage {
     + updateSelectedUniversityList(universityList: UniversityList) : void
 }
 
-ModuleStorage "1" ---* Storage
+ModuleStorage "1" --* Storage
     ModuleStorage : - {static} logger: Logger
     ModuleStorage : + readModuleList(inputStream: InputStream) : ArrayList<Module>
     ModuleStorage : - extractAttributes(line: String) : String[]
 
 UserStorage <|-- SelectedUniversityStorage
-SelectedUniversityStorage "1" ----* Storage
+SelectedUniversityStorage "1" ---* Storage
     SelectedUniversityStorage : - {static} logger: Logger
     SelectedUniversityStorage : - {static} FILE_PATH: String
     SelectedUniversityStorage : - {static} isMappingValid: boolean
@@ -32,7 +32,7 @@ SelectedUniversityStorage "1" ----* Storage
     SelectedUniversityStorage : - isMappingExist(mappings: ArrayList<ModuleMapping>, searchMapping: ModuleMapping) : boolean
 
 UserStorage <|-- SelectedModuleStorage
-SelectedModuleStorage "1" -----* Storage
+SelectedModuleStorage "1" --* Storage
      SelectedModuleStorage : - {static} logger: Logger
      SelectedModuleStorage : - {static} FILE_PATH: String
      SelectedModuleStorage : - {static} isModuleValid: boolean
@@ -40,7 +40,7 @@ SelectedModuleStorage "1" -----* Storage
      SelectedModuleStorage : + readFile(moduleMasterList: ModuleList) : ModuleList
      SelectedModuleStorage : - updateList(moduleList: ModuleList, line: String, moduleMasterList: ModuleList) : void
 
-UniversityStorage "1" ---* Storage
+UniversityStorage "1" -* Storage
     UniversityStorage : - {static} logger: Logger
     UniversityStorage : + readFile(inputStream: InputStream, moduleMasterList: ModuleList) : ArrayList<University>
     UniversityStorage : - extractAttributes(line: String) : String[]

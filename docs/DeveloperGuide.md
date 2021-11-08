@@ -119,6 +119,8 @@ by passing the university to display the message of adding the selected universi
  
 ### Command Implementation
 
+#### API : [`Command.java`](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob/master/src/main/java/seplanner/commands/Command.java)
+
 <p align = "center">
 <img src="images/command.png" width = "1600" />
 </p>
@@ -213,7 +215,7 @@ In the printUniversity Method,
 #### API : [`Storage.java`](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob/master/src/main/java/seplanner/storage/Storage.java)
 
 <p align = "center">
-<img src="images/storage.png" width = "1200" />
+<img src="images/storage.png" width = "1600" />
 </p>
 
 The storage component can implement the below features:
@@ -236,6 +238,9 @@ The classes `UniversityStorage` and `ModuleStorage` are responsible for extracti
 from the CSV type files (`University.csv` and `modules.csv`) stored in the resources root.
 
 ### University and module related classes
+
+#### API : [`University.java`](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob/master/src/main/java/seplanner/universities/University.java)
+#### API : [`Module.java`](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob/master/src/main/java/seplanner/modules/Module.java)
 
 The following diagram is the class diagram of the university related classes:
 
@@ -294,6 +299,8 @@ This component consist of the following classes:
 * Stores the partner university module in `mappedModule`.
 
 ### Parser Component
+
+#### API : [`Parser.java`](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob/master/src/main/java/seplanner/parser/Parser.java)
 
 The parser component is made up of the following classes:
 

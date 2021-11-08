@@ -49,7 +49,6 @@ public class Constants {
     public static final String ERRORMSG_PARSEEXCEPTION_UNIINVALID =
             "Input is either university index or university name.";
 
-    public static final String ERRORMSG_PARSEEXCEPTION_MODNOTFOUND = "Module not found.";
     public static final String ERRORMSG_PARSEEXCEPTION_MODDUPLICATE = "This module has already been added.";
     public static final String ERRORMSG_PARSEEXCEPTION_MODNOTSELECTED = "This module is not in your selected list.";
     public static final String ERRORMSG_PARSEEXCEPTION_MODNOTAVAILABLE = "This module does not exist.";

@@ -27,6 +27,7 @@ SearchMapParseException --|> ParserClassException
 ListParseException --|> ParserClassException
 
 ListCommandParser --> ListType
+FindCommandParser --> FindModInputType
 
 class Parser {
     - BASIC_COMMAND_FORMAT: Pattern
@@ -112,6 +113,11 @@ class SearchMapCommandParser {
 enum ListType <<enumeration>> {
 MASTER
 SELECTED
+}
+
+enum FindModInputType <<enumeration>> {
+MODULECODE
+MODULENAME
 }
 
 class ParserClassException {
