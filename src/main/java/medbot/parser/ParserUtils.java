@@ -39,7 +39,7 @@ public abstract class ParserUtils {
     private static final String ERROR_INVALID_PARAM_SPECIFIER = "\"%s\" is not a valid attribute specifier";
     private static final String ERROR_NO_PARAMETER = "No parameters given.";
     private static final String ERROR_TOO_MANY_SPECIFIERS = "Too many attribute specifiers.";
-    private static final String ERROR_ID_NOT_SPECIFIED = "ID not specified or not a number.";
+    private static final String ERROR_ID_NOT_SPECIFIED = "ID not specified or not a positive number.";
     private static final String ERROR_PERSON_TYPE_INVALID = "Person type specified is not valid.";
     private static final String ERROR_FILTER_TYPE_INVALID = "Filter type specified is not valid.";
     private static final String ERROR_PARAMETER_TYPE_INVALID = "Parameter type specified is not valid.";

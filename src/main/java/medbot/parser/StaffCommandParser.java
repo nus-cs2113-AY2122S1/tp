@@ -67,7 +67,7 @@ public abstract class StaffCommandParser {
      *
      * @param userInput String containing the full user input.
      * @return ViewStaffCommand object.
-     * @throws MedBotParserException when staff id is not specified or not a number.
+     * @throws MedBotParserException when staff id is not specified or not a positive number.
      */
     private static ViewStaffCommand parseViewStaffCommand(String userInput) throws MedBotParserException {
         int personId = ParserUtils.parseId(userInput.substring(4));
@@ -79,7 +79,7 @@ public abstract class StaffCommandParser {
      *
      * @param userInput String containing the full user input.
      * @return DeleteStaffCommand object.
-     * @throws MedBotParserException when staff id given is not specified or not a number.
+     * @throws MedBotParserException when staff id given is not specified or not a positive number.
      */
     private static DeleteStaffCommand parseDeleteStaffCommand(String userInput) throws MedBotParserException {
         int personId = ParserUtils.parseId(userInput.substring(6));
@@ -91,7 +91,7 @@ public abstract class StaffCommandParser {
      *
      * @param userInput String containing the full user input.
      * @return EditStaffCommand objects
-     * @throws MedBotParserException when staff id given is not specified or not a number, or when
+     * @throws MedBotParserException when staff id given is not specified or not a positive number, or when
      *                               the parameters given cannot be parsed.
      */
     private static EditStaffCommand parseEditStaffCommand(String userInput) throws MedBotParserException {
@@ -138,7 +138,7 @@ public abstract class StaffCommandParser {
      *
      * @param userInput String containing the full user input.
      * @return HideStaffCommand object.
-     * @throws MedBotParserException when staff id given is not specified or not a number.
+     * @throws MedBotParserException when staff id given is not specified or not a positive number.
      */
     private static HideStaffCommand parseHideStaffCommand(String userInput) throws MedBotParserException {
         int personId = ParserUtils.parseId(userInput.substring(4));
@@ -150,7 +150,7 @@ public abstract class StaffCommandParser {
      *
      * @param userInput String containing the full user input.
      * @return ShowStaffCommand object.
-     * @throws MedBotParserException when staff id given is not specified or not a number.
+     * @throws MedBotParserException when staff id given is not specified or not a positive number.
      */
     private static ShowStaffCommand parseShowStaffCommand(String userInput) throws MedBotParserException {
         int personId = ParserUtils.parseId(userInput.substring(4));

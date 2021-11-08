@@ -231,10 +231,10 @@ class ParserTest {
         }
 
         String[][] testInputExceptions = {
-                {"     ", "ID not specified or not a number."},
-                {"hi", "ID not specified or not a number."},
-                {"13hi ", "ID not specified or not a number."},
-                {"hi13", "ID not specified or not a number."}
+                {"     ", "ID not specified or not a positive number."},
+                {"hi", "ID not specified or not a positive number."},
+                {"13hi ", "ID not specified or not a positive number."},
+                {"hi13", "ID not specified or not a positive number."}
         };
         for (String[] testInputException : testInputExceptions) {
             try {
