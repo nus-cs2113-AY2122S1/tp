@@ -1,46 +1,60 @@
 @startuml
-title Load Functionality
+!include style.puml
+box STORAGE_COLOR
+Participant ":StorageFile" as Storage
+end box
+box FILE_COLOR
+Participant ":file" as File
+end box
+box LOGIC_COLOR
+Participant ":XYZDecoder" as XYZDecoder
+Participant ":TaskDecoder" as TaskDecoder
+end box
+box DUKE_COLOR
+Participant ":EventUpdater" as EventUpdater
+Participant ":MemberUpdater" as MemberUpdater
+end box
 
--> ":StorageFile": loadSaveFile(memberRoster : MemberRoster\n eventCatalog : EventCatalog)
-activate ":StorageFile" #yellow
+-> Storage: loadSaveFile(memberRoster : MemberRoster\n eventCatalog : EventCatalog)
+activate Storage
 |||
-":StorageFile" -> ":File" : File(DEFAULT_FILE_PATH)
-activate ":File" #lightblue
+Storage -> File : File(DEFAULT_FILE_PATH)
+activate File
 return saveFile
 |||
-":StorageFile" -> ":StorageFile" : getStringsFromFile
-activate ":StorageFile"
+Storage -> Storage : getStringsFromFile
+activate Storage #orange
 return encodedLines
 |||
 loop encodedLines
 |||
     alt classType == 'm' ||\n classType=='e'
     |||
-        ":StorageFile" -> ":StorageFile": add
+        Storage -> Storage: add
         note right: Adds member/event to the respective roster/catalog
-        activate ":StorageFile" #orange
+        activate Storage #orange
 
-        ":StorageFile"-> ":XYZDecoder": decodeXYZFromString(line)
-        activate ":XYZDecoder" #lightblue
-        note over ":XYZDecoder": Decoders for Member,\nTask and Event objects
+        Storage-> XYZDecoder: decodeXYZFromString(line)
+        activate XYZDecoder
+        note over XYZDecoder: Decoders for Member,\nTask and Event objects
         return decodedObject
 
         return
     |||
     else classType == 't'
     |||
-        ":StorageFile" -> ":TaskDecoder": decodeTaskFromString
-        activate ":TaskDecoder" #lightblue
+        Storage -> TaskDecoder: decodeTaskFromString
+        activate TaskDecoder
         return decodedTask
 
-        ":StorageFile" -> ":EventUpdater": updateEvent
-        activate ":EventUpdater" #lightblue
-        note over ":EventUpdater": Adds the decoded task to\nits event's list of tasks
+        Storage -> EventUpdater: updateEvent
+        activate EventUpdater
+        note over EventUpdater: Adds the decoded task to\nits event's list of tasks
         return
 
-        ":StorageFile" -> ":MemberUpdater": updateMemberTasks
-        activate ":MemberUpdater" #lightblue
-        note over ":MemberUpdater": Within each member in the member\nroster that contains this task, add\nthis task to their task list
+        Storage -> MemberUpdater: updateMemberTasks
+        activate MemberUpdater
+        note over MemberUpdater: Within each member in the member\nroster that contains this task, add\nthis task to their task list
         return
     |||
     end

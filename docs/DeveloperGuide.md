@@ -19,27 +19,110 @@ section of this guide.
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
+## Design
 
 This section describes some noteworthy details on how certain features are designed and implemented within SLAM.
 
 ### Architecture
+Below displays how the overall flow and implementation of the application is executed.
+
+![](images/ArchitectureDiagram.png)
 
 The architecture of the entire application revolves around a few different components.
-* `Ui` : This component is responsible for the information displayed to the user from the command line interface
-* `Parser` : This component parses the different data keyed in from the user and prepares the relevant data required to execute the commands
+* `Ui` : This component is responsible for the information displayed to the user from the command line interface.
+* `Parser` : This component parses the different data keyed in from the user and prepares the relevant data required to execute the commands.
 * `Commands` : These components executes the different commands parsed by the parser from the inputs of the User.
-* `Items` : Represents the different types of items (events, tasks and members) that can be assigned and implemented within the application
-* `Storage` : Manages the writing and reading of data to and from the disk
+* `Items` : Represents the different types of items (events, tasks and members) that can be assigned and implemented within the application.
+* `Storage` : Manages the writing and reading of data to and from the disk.
 
-Below displays how the overall flow and implementation of the application is executed.
-![](images/ArchitectureDiagram.png)
+The interaction of all the different components within the application can be depicted as such.
+
+![](images/ArchitectureSequenceDiagram.png)
+
+### Ui component
+
+**API**: `Ui.java`
+
+Below is a brief class diagram of the UI component
+
+![](images/UiClassDiagram.png)
+
+The UI component,
+* executes the different user commands using the `Logic` component.
+* looks out for changes in the `Command` and `Parser` classes so that the UI can be updated to display to the user the latest data of the application.
+* Manages the access to the `Scanner` object that reads user input.
+* is the bridge between the user and the `Logic` component.
+* contains all the methods for printing to the User.
 
 ### Logic component
 
-**API**: `Parser.java` {NOTE: this may change based on further implementations}
+**API**: `Parser.java` 
 
-(insert relevant information here about taking in user input and parsing it etc.)
+Below is a partial class diagram that shows na overview of the `Logic` component.
+
+![](images/LogicClassDiagram.png)
+
+How the `Logic` component works:
+1. When `Logic` is called upon to execute a command it uses the abstract `Parser` class to parse the UserCommand.
+2. The `Parser` then calls the specified abstract `Parser` class to be called. For example, `DeleteParser` will be command when a `delete` command is keyed in by the user.
+3. `DeleteParser` will then parse the necessary information from the Users input.
+4. This results in  `Command` object (more precisely, an object of one of its subclasses e.g. `DeleteCommand`) being returned.
+5. `Duke` then calls `execute()` within the `Command` object which then executes the specified command.
+6. Upon the completion of `execute()` an object of type `CommandResult` is returned to `Duke` and the feedback is displayed to the User
+
+### Storage component
+
+**API**: `Storage.java`
+
+
+#### Save Functionality
+
+![](images/SaveDiagram.png)
+
+How the `save` functionality works:
+1. When the `save` method is called, `StorageFile` constructs a new `File` object using the configured `DEFAULT_FILE_PATH`.
+2. The presence of the `File` object on the local system is checked. The `data` directory and `slamData.txt` file wil be created if they are absent.
+3. The `Member` objects in the provided `memberRoster` will be encoded into a list of `String` objects via the `encodeMemebersList` method.
+4. The `Event` objects in the provided `eventCatalog` along with their respective lists of `Task` objects will be encoded into a list of `String` objects via `encodeEventsList`.
+5. The `writeToFile` method will be called to write the encoded lists of `String` data into the `.txt` save file locally for future uses of the program.
+
+#### Load Functionality
+
+![](images/LoadDiagram.png)
+
+How the `load` functionality works:
+1. When the `loadSaveFile` method is called, `StorageFile` constructs a new `File` object using the configured `DEFAULT_FILE_PATH`.
+2. The returned `File` object will then be parsed into an `ArrayList<String>` of `encodedLines` through the `getStringsFromFile` method.
+3. If the detected line contains data regarding a `Member` or `Event` object, the `StorageFile` instance will decode and construct the `Member` and `Event` objects, adding them to the global `MemberRoster` and `EventCatalog` respectively.
+4. If the detected line contains data regarding a `Task` object:
+   1. The `decodedTask` object will be decoded from the respective line and returned via `decodeTaskFromString`.
+   2. The `decodedTask` will be added to the `Event` object's list of tasks within the global `eventCatalog`.
+   3. `Member` objects in the global `memberRoster` that this `decodedTask` contains will also have their list of tasks updated to contain this `decodedTask`.
+
+>💡 When decoding an invalid line (possibly from unwanted edits to `slamData.txt` by the user), `loadSaveFile` will throw an appropriate exception and provide feedback regarding the invalid line to the user.
+
+## Implementation
+
+This section aims to explain the specfic application functionalities and the interactions between the classes and their methods
+
+>💡 The lifeline of the objects should terminate at the destroy marker (`X`), however due to a limitation of the PlantUML software, the lifeline extends beyond the destroy marker.
+
+### Commands
+
+The commands represent the different tasking that the application can complete and the different user specific functionalities within the application
+
+Here is a brief overview of the different Commands
+* List
+* Next
+* Update
+* Delete
+* Select
+* Find
+* Add
+* Help
+* DoneUndo
+* Bye
+
 #### List Functionality
 
 How List works:
@@ -94,33 +177,6 @@ How selecting an `Event` or an event's nested `Task` works:
 5. `Duke` then calls the `execute` method in `SelectCommand` which will return an object of type `CommandResult`, and the respective output will be printed.
 
 
-### Storage component
-
-#### Save Functionality
-
-![](images/SaveDiagram.png)
-
-How the `save` functionality works: 
-1. When the `save` method is called, `StorageFile` constructs a new `File` object using the configured `DEFAULT_FILE_PATH`.
-2. The presence of the `File` object on the local system is checked. The `data` directory and `slamData.txt` file wil be created if they are absent.
-3. The `Member` objects in the provided `memberRoster` will be encoded into a list of `String` objects via the `encodeMemebersList` method.  
-4. The `Event` objects in the provided `eventCatalog` along with their respective lists of `Task` objects will be encoded into a list of `String` objects via `encodeEventsList`. 
-5. The `writeToFile` method will be called to write the encoded lists of `String` data into the `.txt` save file locally for future uses of the program.
-
-#### Load Functionality 
-
-![](images/LoadDiagram.png)
-
-How the `load` functionality works: 
-1. When the `loadSaveFile` method is called, `StorageFile` constructs a new `File` object using the configured `DEFAULT_FILE_PATH`.
-2. The returned `File` object will then be parsed into an `ArrayList<String>` of `encodedLines` through the `getStringsFromFile` method.
-3. If the detected line contains data regarding a `Member` or `Event` object, the `StorageFile` instance will decode and construct the `Member` and `Event` objects, adding them to the global `MemberRoster` and `EventCatalog` respectively.
-4. If the detected line contains data regarding a `Task` object:
-   1. The `decodedTask` object will be decoded from the respective line and returned via `decodeTaskFromString`. 
-   2. The `decodedTask` will be added to the `Event` object's list of tasks within the global `eventCatalog`.
-   3. `Member` objects in the global `memberRoster` that this `decodedTask` contains will also have their list of tasks updated to contain this `decodedTask`. 
-
->💡 When decoding an invalid line (possibly from unwanted edits to `slamData.txt` by the user), `loadSaveFile` will throw an appropriate exception and provide feedback regarding the invalid line to the user.
 
 ## Product scope
 ### Target user profile
