@@ -35,7 +35,7 @@ public final class CommandFormat {
             "done task [INDEX]";
 
     public static final String EDIT_MODULE_FORMAT =
-            "edit module [MODULE_CODE] -g {GRADE}";
+            "edit module [MODULE_CODE] -g [GRADE]";
 
     public static final String FIND_TASK_FORMAT =
             "find task [KEYWORD]";

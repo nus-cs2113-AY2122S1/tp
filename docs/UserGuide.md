@@ -28,7 +28,7 @@ commands that you can execute.
   * [Deleting Tasks, Lessons or Modules - `delete`](#deleting-tasks-lessons-or-modules---delete)
   * [Finding Tasks or lessons by keyword - `find task/lesson`](#finding-tasks-or-lessons-by-keyword---find-tasklesson)
   * [Retrieving Module information - `find module`](#retrieving-module-information---find-module)
-  * [Setting module grade - `set grade`](#setting-module-grade---set-grade)
+  * [Editing module grade - `edit module`](#editing-module-grade---edit-module)
   * [Launching Lesson URL - `launch lesson`](#launching-lesson-url---launch-lesson)
   * [Exiting the program - `exit`](#exiting-the-program---exit)
   * [Saving the data](#saving-the-data)
@@ -550,25 +550,37 @@ $ find module cs2113t verbose
       ______________________________________________________________________________________
 ```
 
-### Setting module grade - `set grade`
+### Editing module grade - `edit module`
 
-Format: `set grade [MODULE_CODE] [GRADE]`
+Format: `edit module [MODULE_CODE] -g [GRADE]`
 
 Example:
 
 ```
-$ set grade CS2113T A
+$ list module
       ______________________________________________________________________________________
-       You have changed your grade for this module: 
-          CS2113T Software Engineering & Object-Oriented Programming (4MCs) Grade: A
-          Grade: A
+       Here are the modules in your list:
+       1. CS2113T Software Engineering & Object-Oriented Programming (4MCs) | Grade: B
+       2. CS1231 Discrete Structures (4MCs) | Grade: NONE
+       ------------------------------------------------------------------------------------
+       You have a total of 8 MCs
+       Your current CAP is: 3.50
       ______________________________________________________________________________________
 
-$ set grade CG2028 B
+$ edit module cs1231 -g A+
       ______________________________________________________________________________________
        You have changed your grade for this module: 
-          CG2028 Computer Organization (2MCs) Grade: B
-          Grade: B
+          CS1231 Discrete Structures (4MCs) | Grade: A+
+      ______________________________________________________________________________________
+
+$ list module
+      ______________________________________________________________________________________
+       Here are the modules in your list:
+       1. CS2113T Software Engineering & Object-Oriented Programming (4MCs) | Grade: B
+       2. CS1231 Discrete Structures (4MCs) | Grade: A+
+       ------------------------------------------------------------------------------------
+       You have a total of 8 MCs
+       Your current CAP is: 4.25
       ______________________________________________________________________________________
 ```
 
@@ -664,6 +676,6 @@ Modules:
 | [`done task [INDEX]`](#marking-a-task-as-done---done)                                                                    | To mark a task as done                           |
 | [`find [task/lesson] [KEYWORD]`](#finding-tasks-or-lessons-by-keyword---find-tasklesson)                                 | To find tasks/lessons with the specified keyword |
 | [`find module [MODULE_CODE] {verbose}`](#retrieving-module-information---find-module)                                    | To display module details                        |
-| [`set grade [MODULE_CODE] [GRADE]`](#setting-module-grade---set-grade)                                                   | To set the grade for a particular module         |
+| [`edit module [MODULE_CODE] -g [GRADE]`](#editing-module-grade---edit-module)                                            | To set the grade for a particular module         |
 | [`launch lesson [INDEX]`](#launching-lesson-url---launch-lesson)                                                         | To launch a meeting URL                          |
 | [`exit`](#exiting-the-program---exit)                                                                                    | To exit the program                              |
