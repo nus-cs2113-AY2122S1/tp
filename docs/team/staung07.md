@@ -1,4 +1,4 @@
-# STAung07 - Project Portfolio Page
+# Swann - Project Portfolio Page
 
 ## Overview
 
@@ -27,6 +27,8 @@ The code written by me can be found [here](https://nus-cs2113-ay2122s1.github.io
   * Update Goal End Date Parser
   * Update Habit Interval Parser
   * Multiple Updates Parser
+
+<div style="page-break-after: always;"></div>
 
 #### Contributions to UG
 
