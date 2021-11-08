@@ -4,7 +4,9 @@ import seedu.budgettracker.data.AllRecordList;
 import seedu.budgettracker.data.RecordList;
 import seedu.budgettracker.data.records.Expenditure;
 import seedu.budgettracker.data.records.Loan;
+import seedu.budgettracker.ui.TextUi;
 
+import javax.swing.plaf.TextUI;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -45,6 +47,8 @@ public class ConverterToCsv {
                 writeLoanCv(fileWrite, currentMonthRecordList);
             }
             fileWrite.close();
+
+            TextUi.csvStatus();
         } catch (IOException e) {
             e.printStackTrace();
         }
