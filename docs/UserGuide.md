@@ -1158,7 +1158,7 @@ means all your edits are gone. But, this pretty much ensures that there will be 
 | Set budget | `set_budget c/CATEGORY a/AMOUNT` | `set_budget c/bills a/100` |
 | Check budget | `check_budget c/CATEGORY` | `check_budget c/bills` |
 | Set threshold | `set_threshold t/THRESHOLD` | `set_threshold t/0.2` |
-| Set currency | `set_curr c/CURRENCY` | `set_curr c/usd` |
+| Set currency | `set_curr c/CURRENCY` | `set_curr c/hkd` |
 | Check current currency | `check_curr` | - |
 | List all currency conversions | `list_curr` | - |
 | View Yearly Report |`show_graph Y/YYYY`|`show_graph Y/2023`|
