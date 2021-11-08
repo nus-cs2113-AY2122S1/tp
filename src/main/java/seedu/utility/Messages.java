@@ -91,4 +91,5 @@ public class Messages {
     public static final String INVALID_DATE_FORMAT = "Your date format is invalid. Please use DD/MM/YYYY";
     public static final String INVALID_INDEX_MESSAGE = "Index given is either out of range or not an integer.";
     public static final String INVALID_YEAR_MESSAGE = "The given year must be in the YYYY format.";
+    public static final String INVALID_DATE_ERROR = "This date is invalid. Try another date!";
 }
