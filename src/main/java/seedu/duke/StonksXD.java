@@ -14,7 +14,7 @@ import seedu.utility.Ui;
  * A command line interfaced program that can store your financial entries and provide other insights and analytical 
  * services.
  */
-public class StonksXD {
+public class  StonksXD {
     private final Ui ui;
     private final FinancialTracker finances;
     private final Parser parser;
@@ -35,6 +35,7 @@ public class StonksXD {
         this.finances = new FinancialTracker(currencyManager);
         this.dataManager = new DataManager(finances, ui, budgetManager, currencyManager);
         dataManager.loadAll();
+        dataManager.setSettingsToWritable();
     }
 
     /**
@@ -53,6 +54,7 @@ public class StonksXD {
             }
             dataManager.saveAll();
         }
+        dataManager.setSettingsToReadOnly();
         //ui.printBye();
     }
     
