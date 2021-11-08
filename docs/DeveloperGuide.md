@@ -3,20 +3,21 @@
 ## Table of Contents
 
 - [Getting Started](#getting-started)
-    - [Recommend software (for optimal compatability)](#recommended-software-for-optimal-compatability)
+    - [Recommended software (for optimal compatability)](#recommended-software-for-optimal-compatibility)
     - [Setting up this project in your computer](#setting-up-this-project-in-your-computer)
 
 
 - [Design & Implementation](#design--implementation)
     - [Architecture](#architecture)
-    - [Command component](#command-component)
-        - [Add feature](#uadd-featureu)
-        - [Cut feature](#ucut-featureu)
-        - [List feature](#ulist-featureu)
-        - [Find feature](#ufind-featureu)
-        - [Sort feature](#usort-featureu)
+    - [Parser](#parser-component)
     - [Ui component](#ui-component)
-    - [Storage component (chengxu to do)]()
+    - [Command component](#command-component)
+        - [Add feature](#add-feature)
+        - [Cut feature](#cut-feature)
+        - [List feature](#list-feature)
+        - [Find feature](#find-feature)
+        - [Sort feature](#sort-feature)
+    - [Storage component](#storage-component)
 
 
 - [Product Scope](#product-scope)
@@ -96,10 +97,10 @@ The rest of the app consists of the following components:
 * ```Parser```: Deciphers user input and returns the appropriate command to `TourPlanner`.
 * ```Command```: The different types of commands that can possibly be executed.
 * ```ObjectList```: Holds data in different arrays, based on their type. Namely there are four types of ObjectLists:
-    * ClientList
-    * TourList
-    * FlightList
-    * ClientPackageList
+    * `ClientList`
+    * `TourList`
+    * `FlightList`
+    * `ClientPackageList`
 * ```Storage```: Reads data from, and writes data to, the hard disk.
 
 <br>
@@ -108,7 +109,7 @@ The rest of the app consists of the following components:
 
 The diagram below shows how the components interact with each other if the user inputs the command ```list -c```:
 
-<img width="538" alt="architecture_example" src="https://user-images.githubusercontent.com/79963329/140464330-b4f9121f-b60f-4203-a814-63b7a6bd97a5.PNG">
+![ListClientCommand](https://user-images.githubusercontent.com/70316271/140695121-080a0611-4c22-4399-b460-eb5b0454e445.png)
 
 <br>
 
@@ -128,12 +129,12 @@ The flow of **parse** in `Parser` is as follows:
 
 **Step 1.** `Parser` splits the user input String to identify user's **Command** (add, list, cut etc.).
 
-**Step 2.** Depending on the Command, `Parser` executes parsing respective to the Command given.
+**Step 2.** Depending on the Command, `Parser` calls `parseXYZ()` method respective to the `XYZCommand`
+(`XYZ` is a placeholder for the specific command e.g. `AddClientCommand`) given.
 
-**Step 3.** `Parser` creates an `XYZCommand` object (`XYZ` is a placeholder for the specific command e.g.
-`AddClientCommand`) which Parser returns as a `Command` object.
+**Step 3.** `Parser` creates an `XYZCommand` object which Parser returns as a `Command` object.
 
-**Step 4.** `XYZCommand` is returned to `TourPlanner`.
+**Step 4.** `XYZCommand` is returned to `TourPlanner` to be executed.
 
 <br>
 
@@ -173,6 +174,33 @@ and the value corresponding to the prefix.
 **Step 6.** The value is extracted from the substring by removing the prefix, and inserted into an array. The array is
 used as an argument for the *Object* constructor.
 
+<br>
+
+## UI Component
+
+<hr>
+
+**API: `Ui.java`**
+
+The Ui component is the means by which Command(s) can receive inputs from the user, as well as display information to
+them, all through the console terminal.
+
+The diagram below shows the class diagram of the Ui component, in relation with other major components:
+
+<img width="289" alt="ui" src="https://user-images.githubusercontent.com/79963329/140464630-a8a8000c-fb45-44af-9cc2-d146ae5ea5c8.PNG">
+
+<br>
+
+After the user typed in an input into the console terminal and presses 'Enter':
+
+* the ```Ui``` reads the input typed in by the user on the console terminal.
+* the ```Parser``` class parses the read input and calls the appropriate ```Command```. (see the ```Parser```
+  and ```Command``` sections for more information)
+* the called ```Command``` calls a function in the ```Ui``` to print the appropriate information onto the console
+  terminal.
+
+<br>
+
 ## Command component
 
 <hr>
@@ -183,14 +211,13 @@ Here's a (partial) class diagram of Command component:
 
 ![Command class (2)](https://user-images.githubusercontent.com/70316271/140637570-e6a9f453-ea88-46a8-8f3c-e1913e7e938d.png)
 
-Note: `XYZ` in this diagram is a placeholder for the specific data type (e.g. `Client`, `Flight`, `Tour`
+Note: `XYZ` in this diagram is a placeholder for the specific data type (`Client`, `Flight`, `Tour`
 , `ClientPackage`). A similar workflow applies for these classes depending on the availability of the command for the
 specific data type.
 
 How the `Command` works:
 
-**Step 1.** Based on the user input, `Parser` returns one of the subclasses of `Command` to `TourPlanner` *(main class)*
-.
+**Step 1.** Based on the user input, `Parser` returns one of the subclasses of `Command` to `TourPlanner`.
 
 **Step 2.** `TourPlanner` calls `Command.execute()`.
 
@@ -199,7 +226,7 @@ e.g. `Client`) and `Ui` to carry out its function.
 
 <br>
 
-### <u>Add feature</u>
+### Add feature
 
 The add feature is facilitated mainly by `Parser`, and returns an `AddCommand` object. When `AddCommand` is executed,
 the values corresponding to their fields are added.
@@ -250,17 +277,20 @@ Given below is an example usage of `add -p p001 ARGS...` to add client package "
 Here is a (partial) sequence diagram of above user input:
 
 **Step 1.** Parser creates a `values` array, upon extracting values from user's input.
-Returns `AddClientPackageCommand(values)`, determined by the datatype identifier `-p`.
+Creates `AddClientPackageCommand(values)`, determined by the datatype identifier `-p`.
+Returns the created `Command` subclass to `TourPlanner`.
 
 **Step 2.** Then, `execute()` method in `AddClientCommand` is called. `getClientPackageById("p001")` is called, which
 finds the `ClientPackage` based on the `CLIENT_PACKAGE_ID` "p001".
 
-**Step 3.** If the `CLIENT_PACKAGE_ID` "t001" already exists, an error message is returned.
+**Step 3.** If the `CLIENT_PACKAGE_ID` "p001" already exists, an error message is returned.
 
-**Step 4.** Else, the `CLIENT_PACKAGE_ID` "p001" does not exist, `execute()` calls `add` in `ClientPackageList`, to add
-the specific tour and its arguments into the `ClientPackageList`.
+**Step 4.** Else, the `CLIENT_PACKAGE_ID` "p001" does not exist, `execute()` calls `createClientPackage` which finds
+the specific `Client`, `Tour` and `Flight` objects to be added to the `ClientPackage`
 
-**Step 5.** `execute()` calls `showAdd` in `Ui`, which prints out the Object, `CLIENTPACKAGE` that was added.
+**Step 5.** Then, `add` in `ClientPackageList` is called, to add the specific `ClientPackage` into `ClientPackageList`.
+
+**Step 5.** `execute()` calls `showAdd` in `Ui`, which prints out the Object, `ClientPackage` that was added.
 
 <br>
 
@@ -278,17 +308,17 @@ the `Tour` based on the `TOUR_ID` "t001".
 
 **Step 3.** If the `TOUR_ID` "t001" already exists, an error message is returned.
 
-**Step 4.** Else, the `TOUR_ID` "t001" does not exist, `execute()` calls `add` in `TourList`, to add the specific tour
-and its arguments into the `TourList`.
+**Step 4.** Else, the `TOUR_ID` "t001" does not exist, `execute()` calls `add` in `TourList`, to add the specific client
+package and its arguments into the `TourList`.
 
 **Step 5.** `execute()` calls `showAdd` in `Ui`, which prints out the Object, `Tour` that was added.
 
 
 <br>
 
-### <u>Cut feature</u>
+### Cut feature
 
-The `cut` feature is used to remove an entry from the `ObjectList` (for Client, Tour, Flight and ClientPackage),
+The `cut` feature is used to remove an entry from the `ObjectList` (for `Client`, `Tour`, `Flight` and `ClientPackage`),
 where `Parser` determines the `ObjectList` to remove from.
 
 It implements these following types of `cut` commands:
@@ -301,12 +331,13 @@ It implements these following types of `cut` commands:
 In general, there is a sequence of steps when any of the 4 `cut` commands are called.
 
 Here is an example usage of `cut -c` to delete client with `CLIENT_ID` of "c001":
+
 **Step 1.** After adding a few client packages to the database, user inputs `cut -c c001`. This command is passed
 to `parse()` method in the `Parser` class.
 
 **Step 2.** Based on the user input, `parse()` identifies that it is of type `cut` command and calls `ParseCut()`.
-`ParseCut()` will then return `CutClientCommand("c001")` based on the prefix `-c`, where "c001" will be stored in
-`CutClientCommand`.
+`ParseCut()` will then create `CutClientCommand("c001")` based on the prefix `-c`. 
+Returns the created `Command` subclass to `TourPlanner`.
 
 Depending on the type of cut command being called, these command types will be returned:
 
@@ -327,7 +358,7 @@ Here is a (partial) sequence diagram of above user input:
 
 ![CutClientPackageCommand](https://user-images.githubusercontent.com/70316271/140637935-a64ba82f-a9d1-4439-ad04-157ad0ecaad3.png)
 
-**Step 1.** `Parser` returns `CutClientPackageCommand("p001")`.
+**Step 1.** `Parser` creates `CutClientPackageCommand("p001")` and returns it to `TourPlanner`.
 
 **Step 2.** Then, `execute()` method in `CutClientPackageCommand` calls `getClientPackageById("p001")`
 which finds the `ClientPackage` based on the `CLIENTPACKAGE_ID` "p001".
@@ -345,7 +376,7 @@ Here is a (partial) sequence diagram for above user input:
 
 ![CutClientCommand](https://user-images.githubusercontent.com/70316271/140637934-08e0a09e-bf63-4f16-b84f-faa7a852b2d3.png)
 
-**Step 1.** `Parser` returns `CutClientCommand("c001")`.
+**Step 1.** `Parser` creates `CutClientCommand("c001")` and returns it to `TourPlanner`.
 
 **Step 2.** Then, `execute()` method in `CutClientCommand` calls `getClientById("c001")`
 which finds the `Client` based on the `CLIENT_ID` "c001".
@@ -361,9 +392,9 @@ the `CLient` "c001".
 
 <br>
 
-### <u>List feature</u>
+### List feature
 
-The `list` feature is used to display all entries in `ObjectList` (for Client, Tour, Flight and ClientPackage),
+The `list` feature is used to display all entries in `ObjectList` (`Client`, `Tour`, `Flight` and `ClientPackage`),
 where `Parser` determines the `ObjectList` to list from.
 
 It implements these following types of list commands:
@@ -396,23 +427,20 @@ Depending on the type of list command being called, these command types will be 
 
 <br>
 
-### <u>Find feature</u>
+### Find feature
 
-The ```find``` feature is to be used to query for a particular client or tour, providing extensive information about it.
-It is facilitated by the ```parse``` function in the ```Parser``` class, which determines which type of
-Object (```Client``` or ```Tour```) is to be parsed and which command to be executed. It is implemented by following
-operations:
+The ```find``` feature is to be used to query for a particular client, tour or flight, providing extensive information about it.
+It is facilitated by the ```parse``` function in the ```Parser``` class,  and returns a FindCommand object. 
+When FindCommand is executed, it queries the corresponding `ObjectList` and returns the matching entries.
 
-* ```FindClientCommand(String substring)```
-* ```FindTourCommand(String code)```
-* ```FindFlightCommand(String code)```
-
-These commands extend from the Command class.
-
-Given below is an example usage scenario and how the find feature behaves at each step, when trying to find a particular
-client or tour.
+It implements these following types of find commands:
+* `find -c CLIENT_NAME`: returns clients that contain `CLIENT_NAME` in their name and client packages they are subscribed to.
+* `find -t TOUR_ID`: returns tours that match the `TOUR_ID` and tours subscribed to the tour.
+* `find -f FLIGHT_ID`: returns flights that match the `FLIGHT_ID` and clients subscribed to the flight.
 
 <br>
+
+In general, there is a sequence of steps when any of the 3 `find` commands are called.
 
 Firstly, assume that in previous sessions, commands were executed to add clients, tours, flights and packages to
 the ```ClientList```, ```TourList```, ```FlightList``` and ```PackageList``` respectively. In particular, these specific
@@ -423,40 +451,46 @@ commands were exceuted.
 * ```add -f SQ-JPN /d JPN /r SG /dd 20/10/2021 18:00 /rd 21/10/2021 03:00```
 * ```add -p p001 /c c001 /t JPN /f SQ-JPN```
 
+Here is an example usage of `find -c bo` to find a client with name "Bo Tuan":
+**Step 1**: The user executes ```find -c bo``` to query if a client named "Bo Tuan" exists in the ClientList.
+The ```parse``` function in the ```Parser``` class takes the command, and calls `parseFind()` 
+based on (```find```) in the input. ```parseFind()``` determines which type of Object is to be queried for and
+```FindClientCommand()``` is created with the parameter ```bo``` based on prefix `-c`.
+
+Depending on the type of find command being called, these command types will be returned:
+* ```find -c```: ```FindClientCommand```
+* ```find -t```: ```FindTourCommand```
+* ```find -f```: ```FindFlightCommand```
+
+The following 3 sections focuses on find for the specific classes.
+
 <br>
 
 #### <u>Finding a particular client</u>
+Given below is an example usage of `find -c bo`.
 
-**Step 1**: The user executes ```find -c bo``` to query if a client named Bo Tuan exists in the ClientList.
-The ```parse``` function in the ```Parser```
-class takes the command, and the first word in it (```find```) means that the
-```parseFind()``` is to be called to determine which type of Object is to be queried for. The second word (```-c```)
-means that a the ```FindClientCommand()``` is executed with the parameter ```bo```
+Here is a (partial) sequence diagram for the above user input:
 
-**Step 2**: The ```FindClientCommand``` iterates through each ```Client``` object in the ```ClientList```. For
+**Step 1** `Parser` creates `FindClientCommand("bo")` and returns it to `TourPlanner`.
+
+**Step 2** The ```FindClientCommand``` iterates through each ```Client``` object in the ```ClientList```. For
 every ```Client```, the ```getName()``` function is called to retrieve the name attribute of the Client. The name
 attribute is then converted to lower case for comparison with the substring. If the name attribute is contains the
 substring```bo```, the ```Client``` object is printed onto the console terminal.
 
-**Step 3**: In addition, the ```FindClientCommand``` iterates through each ```ClientPackage``` object in
+**Step 3** In addition, the ```FindClientCommand``` iterates through each ```ClientPackage``` object in
 the ```ClientPackageList```. For every ```ClientPackage```, the ```getClient()``` function is called to retrieve the
 client attribute of the ClientPackage. If the client attribute is equals to the same ```Client``` object that was found
 in Step 2, the respective client package will be printed onto the console terminal.
 
-The following activity diagram summarizes the following steps.
-
-<img width="517" alt="findclient" src="https://user-images.githubusercontent.com/79963329/140683509-8bc4bb34-a41f-4b57-9a86-e0af13cae0ac.PNG">
-
-
 <br>
 
 #### <u>Finding a particular tour</u>
+Given below is an example usage of `find -t JPN`.
 
-**Step 1**: The user executes ```find -t JPN``` to query if a tour with code JPN exists in the TourList. The ```parse```
-function in the ```Parser```
-class takes the command, and the first word in it (```find```) means that the
-```parseFind()``` is to be called to determine which type of Object is to be queried for. The second word (```-f```)
-means that a the ```FindTourCommand()``` is executed with the parameter ```JPN```
+Here is a (partial) sequence diagram for the above user input:
+
+**Step 1**: `Parser` creates `FindTourCommand("JPN")` and returns it to `TourPlanner`.
 
 **Step 2**: The ```FindTourCommand``` is executed and iterates through each ```Tour``` object in the ```TourList```. For
 every ```Tour```, the ```getCode()``` function is called to retrieve the code attribute of the Tour. If the tour
@@ -473,21 +507,12 @@ through in the ```ClientPackageList```, the total number of subscribed clients w
 
 <br>
 
-The following activity diagram summarizes the following steps.
-
-
-<img width="484" alt="findtour" src="https://user-images.githubusercontent.com/79963329/140683529-0d6c02aa-dad4-4078-9404-d2b246604c22.PNG">
-
-
-<br>
-
 #### <u>Finding a particular flight</u>
+Given below is an example usage of `find -f SQ-JPN`.
 
-**Step 1**: The user executes ```find -f SQ-JPN``` to query if a tour with code JPN exists in the TourList.
-The ```parse``` function in the ```Parser```
-class takes the command, and the first word in it (```find```) means that the
-```parseFind()``` is to be called to determine which type of Object is to be queried for. The second word (```-f```)
-means that a the ```FindFlightCommand()``` is executed with the parameter ```SQ-JPN```
+Here is a (partial) sequence diagram for the above user input:
+
+**Step 1**: `Parser` creates `FindFlightCommand("SQ-JPN")` and returns it to `TourPlanner`.
 
 **Step 2**: The ```FindFlightCommand``` is executed and iterates through each ```Flight``` object in
 the ```FlightList```. For every ```Flight```, the ```getCode()``` function is called to retrieve the code attribute of
@@ -504,23 +529,18 @@ in the ```ClientPackageList```, the total number of passengers will be printed o
 
 <br>
 
-The following activity diagram summarizes the following steps.
-
-<img width="475" alt="findflight" src="https://user-images.githubusercontent.com/79963329/140683549-96857734-6cc5-470c-90a5-c45fc57e30a1.PNG">
-
-
-<br>
-
 #### <u>Design Considerations</u>
 
-* Alternative: only iterate through the ```Package``` List.
+* Alternative: only iterate through the ```ClientPackageList```.
     * Pros: fast querying time.
     * Cons: If the client/tour/flight is not in any package, none of their information can be accessed, including their
       contact number.
 
-### <u>Sort feature</u>
+<br>
 
-The `sort` feature is used to sort the `ObjectList` (for Client, Tour, Flight and ClientPackage) and list it,
+### Sort feature
+
+The `sort` feature is used to sort the `ObjectList` (for `Client`, `Tour`, `Flight` and `ClientPackage`) and list it,
 where `Parser` determines the `ObjectList` and criteria to sort for.
 
 It implements these following types of `sort` commands:
@@ -563,51 +583,28 @@ Depending on the type of sort command being called, these command types will be 
 
 <br>
 
-## UI Component
-
-<hr>
-
-**API: `Ui.java`**
-
-The Ui component is the means by which Command(s) can receive inputs from the user, as well as display information to
-them, all through the console terminal.
-
-After the user typed in an input into the console terminal and presses 'Enter':
-
-* the ```Ui``` reads the input typed in by the user on the console terminal.
-* the ```Parser``` class parses the read input and calls the apprpriate ```Command```. (see the ```Parser```
-  and ```Command``` sections for more information)
-* the called ```Command``` calls a function in the ```Ui``` to print the appropriate information onto the console
-  terminal.
-
-<br>
-
-The diagram below shows the class diagram of the Ui component, in relation with other major components:
-
-<img width="289" alt="ui" src="https://user-images.githubusercontent.com/79963329/140464630-a8a8000c-fb45-44af-9cc2-d146ae5ea5c8.PNG">
-
-<br>
-
 ## Storage Component
 
 <hr>
 
 **API: `ClientPackageStorage.java` `ClientStorage.java` `FlightStorage.java` `TourStorage.java`**
 
+Shown below is the class diagram for TourPlanner's Storage Component:
+
+![Storage](https://user-images.githubusercontent.com/62021897/140651207-73bd0de8-cb0b-469f-9cdd-c9bbc26b8efc.png)
+
+<br>
+
 The Storage component consists of:
 
-1. ClientPackageStorage.java: Reading and saving files which record all clientpackages.
-2. ClientStorage.java: Reading and saving files which record all clients.
-3. FlightStorage.java: Reading and saving files which record all flights.
-4. TourStorage.java: Reading and saving files which record all tours.
+1. `ClientPackageStorage.java`: Reading and saving files which record all clientpackages.
+2. `ClientStorage.java`: Reading and saving files which record all clients.
+3. `FlightStorage.java`: Reading and saving files which record all flights.
+4. `TourStorage.java`: Reading and saving files which record all tours.
 
 To add on Storage component is designed to access only the following folder:
 
 1. `data/`
-
-Shown below is the class diagram for TourPlanner's Storage Component:
-
-![Storage](https://user-images.githubusercontent.com/62021897/140651207-73bd0de8-cb0b-469f-9cdd-c9bbc26b8efc.png)
 
 <br>
 
@@ -643,7 +640,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |`* *`|user with large amounts of data|sort existing entries of specific data type |make smarter recommendations to clients based on their preferences|
 |`* *`|user|check number of clients subscribed to a tour / flight|check the popularity, vacancy of certain tours / flights|
 
-Note: 'specific data type' refers to either clients, tours, flights or tour packages.
+Note: 'specific data type' refers to either clients, tours, flights or client packages.
 
 <br>
 
