@@ -320,5 +320,6 @@ Example: `man clear`
 |`game -word [WORD_LIMIT] [-sn] [-c]` | Start a word-limited game
 |`game -time [TIME_LIMIT] [-sn] [-c]` | Start a time-limited game
 |`history -g GAME_MODE [-n NUMBER_OF_RECORDS] [-h]` | View past game records
-|`clear` | Clear past game records
+|`clear [-g GAME_MODE] [-h]` | Clear past game records
+|`man [COMMAND]`| View man pages of command
 |`bye`| Exit the program
