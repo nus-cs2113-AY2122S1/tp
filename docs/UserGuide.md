@@ -5,8 +5,8 @@ title: User Guide
 
 ## Purpose Of This User Guide 
 
-This User Guide is an introduction to the features, commands and tips of SEPlanner. If you are first time user, 
-or you simply wish to explore SEPlanner to its fullest potential, this is the page for you. Use the [Content Page](#Content-Page) 
+This User Guide is an introduction to the features, commands, and tips of SEPlanner. If you are a first-time user,
+or you simply wish to explore SEPlanner to its fullest potential, this is the page for you. Use the [Content Page](#Content-Page)
 to easily access the different sections of this guide, and we hope you have a pleasant experience.
 
 ## Content Page
@@ -41,8 +41,7 @@ to easily access the different sections of this guide, and we hope you have a pl
 ## Introduction
 
 SEPlanner is a lightweight **desktop application** for Computer Engineering undergraduates from the National University of Singapore
-to plan for their **Student Exchange Program**, optimised for use via **Command Line Interface** (CLI). If you are familiar with command line,
-SEPlanner can streamline your planning process when compared to other Graphical User Interface (GUI) apps.
+to plan for their **Student Exchange Program**, optimized for use via **Command Line Interface** (CLI). If you are familiar with the command line, SEPlanner can streamline your planning process when compared to other Graphical User Interface (GUI) apps.
 
 ## Program Overview
 
@@ -57,7 +56,7 @@ This SEPlanner allows you to search for pre-approved module mappings through our
 1. Ensure that you have Java 11 or above installed.
 2. Download the latest version of `SEPlanner` from [here](https://github.com/AY2122S1-CS2113T-T09-2/tp/releases/tag/v2.1).
 3. Copy the file to the folder you want to use as the home folder for your SEPlanner.
-4. In your preferred command line interface, navigate to that directory.
+4. In your preferred command-line interface, navigate to that directory.
 5. Enter the command `java -jar tp.jar`.
 6. If you can see the graphic below, congrats! You are ready to start using SEPlanner.
 ```
@@ -99,12 +98,12 @@ This SEPlanner allows you to search for pre-approved module mappings through our
   `Y8888P ,88P' 8 888888888888 8 8888         8 888888888888 .8'       `8. `88888. 8            `Yo 8            `Yo 8 888888888888 8 8888     `88.
 ```
 <div markdown="span" class="alert alert-primary"> :bulb: **Tip:**
-If the visual that appears does not look like this, you might want maximize your console window.
+If the visual that appears does not look like this, you might want to maximize your console window.
 Don't worry, the features of SEPlanner still work regardless of window size, but doing so allows you to enjoy the beautiful ASCII art!
 </div>
 
 ## How to use this guide
-This user guide provides useful tools to help you acclimatise to SEPlanner. 
+This user guide provides useful tools to help you acclimatize to SEPlanner. 
 
 Here is a list of the different types of text formatting and what they mean. 
 
@@ -126,7 +125,7 @@ Code blocks contain either your inputs or program outputs.
 
 ## Universities, Modules and Module Mappings
 
-SEPlanner consists of 3 main data types, `University`, `Module` and `Module Mapping`. 
+SEPlanner consists of 3 main data types, `University`, `Module`, and `Module Mapping`. 
 
 ### University
 
@@ -212,7 +211,7 @@ Here are the modules in the list:
 
 ### Adding a partner university
 
-Adds a partner university that you are interested into your selected university list.
+Adds a partner university that you are interested to your selected university list.
 
 #### Format: `add /uni <UNIVERSITY_INDEX>` `add /uni <UNIVERSITY_NAME>`
 
@@ -238,7 +237,7 @@ New university added:
 
 ### Adding a NUS module
 
-Adds a NUS module that you want to complete during SEP into your *Selected Module List*.
+Adds an NUS module that you want to complete during SEP into your *Selected Module List*.
 
 #### Format: `add /mod <MODULE_INDEX>` `add /mod <MODULE_CODE>` 
 
@@ -345,10 +344,9 @@ Potential mappings for University of California [59] :
 ```
 
 <div markdown="span" class="alert alert-primary"> :information_source: **Note:**
-Similar to the example for the previous command, the output of this command might also differ from the example given 
-based on the modules and universities in the selected list. For instance, the output shown in this example is based on
+Similar to the example for the previous command, the output of this command might also differ from the example given based on the modules and universities in the selected list. For instance, the output shown in this example is based on
 the same selected modules as the example in the previous command, with the following universities in the selected list:
-arhus School of Business, Boston University, ETH Zurich, Korea Advanced Inst of Sci & Tech, University of California.
+Arhus School of Business, Boston University, ETH Zurich, Korea Advanced Inst of Sci & Tech, University of California.
 </div>
 
 ### Adding a module mapping
@@ -372,7 +370,7 @@ New module mapping added:
 
 ### Finding a specific university
 
-Looks for universities that matches your entered keyword.
+Looks for universities that match your entered keyword.
 The output also consists of the index of the university, which is needed for subsequent commands.  
 
 
@@ -410,7 +408,7 @@ Expected output:
 
 ### Finding a specific module by module name
 
-Looks for modules with module names that matches your entered keyword.
+Looks for modules with module names that match your entered keyword.
 * The output also consists of the index of the module, which is needed for subsequent commands.
 
 #### Format: `find /mod <KEYWORD>`
@@ -435,7 +433,7 @@ Expected output:
 
 ### Finding a specific module by module code
 
-Looks for modules with module codes that matches your entered keyword.
+Looks for modules with module codes that match your entered keyword.
 * The output also consists of the index of the module, which is needed for subsequent commands.
 
 #### Format: `find /code <KEYWORD>`
@@ -541,13 +539,13 @@ Do not edit the data stored in the text file, as the storage feature removes the
 In your working directory, you might notice the `log` directory. The log directory contains files that track the status 
 and records events that occur while SEPlanner is in use. 
 
-The logging information is used for identification and tracking of bugs for developers, as we continue to improve SEPlanner
+The logging information is used for the identification and tracking of bugs for developers, as we continue to improve SEPlanner
 for you.
 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?  
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that 
+**A**: Install the app on the other computer and overwrite the empty data file it creates with the file that 
 contains the data of your previous SEPlanner home folder.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -555,7 +553,7 @@ Do not delete the `/data` directory or any of its files as this will cause you t
 </div>
 
 **Q**: How do I save my selected universities and modules?  
-**A**: All your universities, modules and module mappings are automatically saved at 
+**A**: All your universities, modules, and module mappings are automatically saved at 
 each command and will be auto-loaded on program start. 
 
 **Q**: How do I remove all my universities and modules?   
@@ -577,7 +575,7 @@ Command | Format | Purpose
 
 * *UNI_INDEX* The unique identifier corresponding to a particular university.
 * *MOD_INDEX* The unique identifier corresponding to a particular module.
-* *MAPPING_INDEX* The identifier corresponding to a particular module mapping withing a university.
+* *MAPPING_INDEX* The identifier corresponding to a particular module mapping within a university.
 * *Master University List* The list of all partner universities.
 * *Master Module List* - The list of all NUS modules available for mapping.
 * *Selected University List* - The list of partner universities you selected along with your selected module mappings
@@ -591,6 +589,6 @@ Command | Format | Purpose
 ### Permission denied for data files
 In the event that the program crashes on startup, and display the following message:  
 ```data/selectedUniversities.txt (Permission denied) ```  
-This happens if the file permission of the files in data folder have been changed. There are two solutions to this problem:
+This happens if the file permission of the files in the data folder has been changed. There are two solutions to this problem:
 1. Change the file permissions for `selectedUniversity.txt` and `selectedModules.txt` to the appropriate settings base on your operating system. Else;
 2. Delete the data folder. This will remove all the data.
