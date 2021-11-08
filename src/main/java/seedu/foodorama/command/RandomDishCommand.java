@@ -119,7 +119,7 @@ public class RandomDishCommand extends Command {
     @Override
     public void execute(ArrayList<String> parameters) {
 
-        Ui ui = new Ui();
+        Ui UI = new Ui();
 
         Random randomMethod = new Random();
 
@@ -135,7 +135,7 @@ public class RandomDishCommand extends Command {
 
         this.randomDishName = generatedDishName;
 
-        ui.printRandomDishName(generatedDishName);
+        UI.printRandomDishName(generatedDishName);
 
     }
 
