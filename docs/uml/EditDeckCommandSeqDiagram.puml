@@ -1,0 +1,56 @@
+@startuml
+!include style.puml
+
+hide footbox
+autonumber
+
+participant ":CardLI" as CardLI mainCOLOUR
+participant "outerParser:OuterParser" as OuterParser logicCOLOUR
+participant "command:\nEditDeckCommand" as EditDeckCommand logicCOLOUR
+participant "deckManager:\nDeckManager" as DeckManager modelCOLOUR
+participant ":Deck" as Deck modelCOLOUR
+participant "ui:CardLiUI" as CardLiUI uiCOLOUR
+actor "User" as User
+
+CardLI-> OuterParser : parseCommand\n(input)
+activate OuterParser
+
+ref over OuterParser
+getCommandArguments(commandType,input)
+end ref
+
+OuterParser -> EditDeckCommand**: new EditDeckCommand\n(arguments)
+activate EditDeckCommand
+EditDeckCommand --> OuterParser: command
+deactivate EditDeckCommand
+OuterParser --> CardLI: command
+deactivate OuterParser
+
+CardLI ->EditDeckCommand : execute()
+activate EditDeckCommand
+
+ref over EditDeckCommand
+prepareEditDeckCommand()
+end ref
+
+EditDeckCommand -> DeckManager: editDeck\n(parameters)
+activate DeckManager
+
+DeckManager -> Deck: setName\n(deckName)
+activate Deck
+deactivate Deck
+
+DeckManager --> EditDeckCommand: message
+deactivate DeckManager
+
+CardLI<-- EditDeckCommand: result
+deactivate EditDeckCommand
+destroy EditDeckCommand
+
+CardLI-> CardLiUI: printResult(result)
+activate CardLiUI
+
+CardLiUI -> User
+
+deactivate CardLiUI
+@enduml

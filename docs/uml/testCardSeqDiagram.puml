@@ -1,0 +1,49 @@
+@startuml
+!include style.puml
+autonumber
+hide footbox
+
+participant ":TestManager" as TestManager modelCOLOUR
+participant ":AnswerList" as AnswerList modelCOLOUR
+participant "TestParser" as TestParser modelCOLOUR
+participant ":Answer" as Answer modelCOLOUR
+participant ":TestUi" as TestUi uiCOLOUR
+
+activate TestManager
+TestManager -> TestManager : testCard(userAnswers, card)
+activate TestManager
+
+TestManager -> TestUi : getUserMessage()
+activate TestUi
+TestUi --> TestManager : userResponse
+deactivate TestUi
+
+TestManager -> TestParser : parseUserResponse(userResponse)
+activate TestParser
+TestParser --> TestManager : parsedUserResponse
+deactivate TestParser
+
+opt parsedUserResponse != /Next && parsedUserResponse != /Back
+TestManager -> AnswerList : setQuestionAnswer(questionNumber, parsedUserResponse)
+activate AnswerList
+AnswerList --> TestManager
+deactivate AnswerList
+
+TestManager -> AnswerList : getAnswer(questionNumber)
+activate AnswerList
+AnswerList -> Answer : setIsAnswered()
+activate Answer
+Answer --> AnswerList
+deactivate Answer
+AnswerList --> TestManager
+deactivate AnswerList
+
+TestManager -> AnswerList : addAnswer(parsedUserResponse, questionNumber)
+activate AnswerList
+AnswerList --> TestManager
+deactivate AnswerList
+
+TestManager --> TestManager : nextQuestionFlag:Int
+deactivate TestManager
+end
+@enduml

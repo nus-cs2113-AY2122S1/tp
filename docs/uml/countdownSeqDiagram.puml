@@ -1,0 +1,34 @@
+@startuml
+!include style.puml
+hide footbox
+autonumber
+
+participant ":Countdown" as Countdown modelCOLOUR
+participant ":CountdownTimerTask" as CountdownTimerTask modelCOLOUR
+
+[->Countdown: Countdown(startValue,\n timesUpMessage)
+activate Countdown
+Countdown->CountdownTimerTask: CountdownTimerTask(startValue,\n timesUpMessage)
+activate CountdownTimerTask
+[->Countdown: start()
+Countdown->CountdownTimerTask: scheduleAtFixedRate(timerTask,\n delay, period)
+
+loop until time is up or Countdown is stopped
+[<--CountdownTimerTask: display()
+CountdownTimerTask->CountdownTimerTask: countDown()
+    opt
+    [->Countdown: stop()
+    Countdown->CountdownTimerTask: cancel()
+    end
+end
+
+alt isRunning()
+CountdownTimerTask->Countdown: stop()
+Countdown->CountdownTimerTask: cancel()
+end
+
+deactivate CountdownTimerTask
+destroy CountdownTimerTask
+deactivate Countdown
+destroy Countdown
+@enduml

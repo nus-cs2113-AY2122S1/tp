@@ -1,0 +1,66 @@
+@startuml
+!include style.puml
+
+hide footbox
+autonumber
+
+participant ":CardLI" as CardLI mainCOLOUR
+participant "innerParser:\nInnerParser" as InnerParser logicCOLOUR
+participant "command:\nMoveCardCommand" as MoveCardCommand logicCOLOUR
+participant "deckManager:\nDeckManager" as DeckManager modelCOLOUR
+participant ":Deck" as Deck modelCOLOUR
+participant "ui:\nCardLiUI" as CardLiUI uiCOLOUR
+actor "User" as User
+
+CardLI -> InnerParser: parseCommand(input)
+activate InnerParser
+
+ref over InnerParser
+getCommandArguments\n(commandType,input)
+end ref
+
+InnerParser -> MoveCardCommand**: new MoveCardCommand\n(arguments)
+activate MoveCardCommand
+MoveCardCommand --> InnerParser: "command:\nMoveCardCommand
+deactivate MoveCardCommand
+InnerParser --> CardLI: command
+deactivate InnerParser
+
+CardLI->MoveCardCommand : execute()
+activate MoveCardCommand
+
+ref over MoveCardCommand
+prepareMoveCardCommand()
+end ref
+
+MoveCardCommand -> DeckManager: moveCard\n(parameters)
+activate DeckManager
+
+DeckManager -> Deck: getCard\n(cardIndex)
+activate Deck
+
+Deck --> DeckManager: cardCopy
+deactivate Deck
+
+DeckManager -> Deck: addFlashCard\n(cardCopy)
+activate Deck
+deactivate Deck
+
+DeckManager -> Deck: deleteFlashCard\n(enteredCardIndex)
+activate Deck
+deactivate Deck
+
+DeckManager --> MoveCardCommand: message
+deactivate DeckManager
+
+CardLI<-- MoveCardCommand: result
+deactivate MoveCardCommand
+destroy MoveCardCommand
+
+CardLI-> CardLiUI: printResult\n(result)
+activate CardLiUI
+
+CardLiUI -> User
+
+deactivate CardLiUI
+@enduml

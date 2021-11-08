@@ -1,0 +1,63 @@
+@startuml
+!include style.puml
+
+hide footbox
+autonumber
+
+participant ":CardLI" as CardLI mainCOLOUR
+participant "innerParser:\nInnerParser" as InnerParser logicCOLOUR
+participant "command:\nEditCardCommand" as EditCardCommand logicCOLOUR
+participant ":Deck" as Deck modelCOLOUR
+participant ":FlashCard" as FlashCard modelCOLOUR
+participant "ui:\nCardLiUI" as CardLiUI uiCOLOUR
+actor "User" as User
+
+CardLI -> InnerParser: parseCommand\n(input)
+activate InnerParser
+
+ref over InnerParser
+getCommandArguments(commandType,input)
+end ref
+
+InnerParser -> EditCardCommand** : new EditCardCommand\n(arguments)
+activate EditCardCommand
+InnerParser <-- EditCardCommand : command
+deactivate EditCardCommand
+InnerParser --> CardLI: command
+deactivate InnerParser
+
+CardLI -> EditCardCommand : execute()
+activate EditCardCommand
+
+ref over EditCardCommand
+    prepareEditCardCommand()
+end ref
+
+EditCardCommand -> Deck: editCard\n(parameters)
+activate Deck
+
+alt front
+    Deck -> FlashCard: setFront\n(changeTo)
+    activate FlashCard
+    deactivate FlashCard
+else back
+    Deck -> FlashCard: setBack\n(changeTo)
+    activate FlashCard
+    deactivate FlashCard
+end
+
+
+Deck --> EditCardCommand: message
+deactivate Deck
+
+CardLI<-- EditCardCommand: result
+deactivate EditCardCommand
+destroy EditCardCommand
+
+CardLI -> CardLiUI: printResult(result)
+activate CardLiUI
+
+CardLiUI -> User
+
+deactivate CardLiUI
+@enduml

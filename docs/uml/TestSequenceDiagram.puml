@@ -1,0 +1,29 @@
+@startuml
+!include style.puml
+autonumber
+hide footbox
+
+actor "User" as User
+participant ":Ui" as Ui uiCOLOUR
+participant ":Logic" as Logic logicCOLOUR
+participant ":Model" as Model modelCOLOUR
+
+User -> Ui : "test"
+activate Ui
+
+Ui -> Logic : execute()
+activate Logic
+
+Logic -> Model : startTest()
+activate Model
+
+Model --> Logic
+deactivate Model
+
+Logic --> Ui
+deactivate Logic
+
+Ui --> User : endTestMessage
+deactivate Ui
+
+@enduml
