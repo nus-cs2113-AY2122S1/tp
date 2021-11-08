@@ -8,9 +8,7 @@ import seedu.duke.logic.parser.exceptions.ParseException;
 
 import java.util.HashMap;
 
-import static seedu.duke.commons.core.CommandFormat.EDIT_LESSON_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.EDIT_MODULE_FORMAT;
-import static seedu.duke.commons.core.CommandFormat.EDIT_TASK_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.promptFormat;
 import static seedu.duke.commons.util.StringUtil.removeFirstParam;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
@@ -30,7 +28,7 @@ public class EditCommandParser {
         case INVALID:
             // Fallthrough
         default:
-            throw new ParseException(promptFormat(EDIT_TASK_FORMAT, EDIT_LESSON_FORMAT, EDIT_MODULE_FORMAT));
+            throw new ParseException(promptFormat(EDIT_MODULE_FORMAT));
         }
     }
 
