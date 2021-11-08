@@ -19,7 +19,7 @@ public class AddCommandTest {
 
     @Test
     public void addCommandTest_sampleIngredient_success() throws SitusException {
-        LocalDate expiryDate = LocalDate.parse("10/08/2021", DATE_FORMATTER);
+        LocalDate expiryDate = LocalDate.parse("10/08/2022", DATE_FORMATTER);
         Ingredient sampleIngredient = new Ingredient("onion", 15.0, expiryDate);
         String resultMsg = new AddCommand(sampleIngredient).run();
         String expectedMsg = "Got it. This ingredient has been added to the inventory:\n\t"
