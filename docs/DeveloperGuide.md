@@ -75,10 +75,10 @@ The application consists of the following main components responsible for the hi
 1. `Foodorama`: Initializes all the other components and coordinates them.
 2. `Ui`: Handles the displaying of all command results and error messages to the user.
 3. `Storage`: Handles the creation, reading from and writing from the `/data` directory
-4. `InputParser`: Makes sense from the user input and decides which `Command` class to call.
-5. `DishList`: Handles the collection of Dish objects used by *Food-O-Rama*.
-6. `IngredientList`: Handles the collection of Ingredient objects used by *Food-O-Rama*.
-7. `Command`: Collection of classes that handle the different user commands.
+4. `InputParser`: Makes sense of the user input and decides which `Command` class to call.
+5. `DishList`: Handles the collection of Dish objects *Food-O-Rama* uses.
+6. `IngredientList`: Handles the collection of Ingredient objects *Food-O-Rama* uses.
+7. `Command`: The collection of classes that handle the different user commands.
 
 The architecture diagram below shows a high-level overview of the structure between different components.
 
@@ -90,7 +90,7 @@ The architecture diagram below shows a high-level overview of the structure betw
 
 ### General Flow
 
-Describes the step-by-step sequence from User Input to the Output.
+Description of the step-by-step sequence from User Input to the Output.
 
 <p align="center">
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/main_sequence.png">
@@ -120,7 +120,7 @@ The `InputParser` class is responsible for deconstructing User Inputs to identif
   commands (add dish, list dish, help etc.).
 2. Throws an exception if no matching command is found.
 3. Takes rest of user input as parameterString.
-4. Based on command name splits the parameterString into respective parameters to respective command classes for
+4. Based on command name, splits the parameterString into respective parameters to respective command classes for
   execution.
 
 ### Storage
@@ -128,9 +128,9 @@ The `InputParser` class is responsible for deconstructing User Inputs to identif
 The `Storage` class is responsible for the reading and writing of *Food-O-Rama* data. Data is stored as .txt files
 under *'Data'* folder.
 
-* After every operation writes the names of the Ingredient, weight of Ingredient Stored and weight of Ingredient Wasted,
+* After every operation, writes the names of the Ingredient, weight of Ingredient Stored and weight of Ingredient Wasted,
   into a text file called `ingredients.txt`.
-* After every operation writes the names of the Dish, weight of Dish Waste and constituents of the Dish if there are
+* After every operation, writes the names of the Dish, weight of Dish Waste and constituents of the Dish if there are
   any, into a text file called `dishes.txt`.
 
 #### Loading Data
@@ -141,7 +141,7 @@ under *'Data'* folder.
 <center>Figure 4: Loading Data Sequence Diagram</center>
 <br>
 
-1. At the start of the program, Duke calls `Storage.load()`.
+1. At the start of the program, Foodorama calls `Storage.load()`.
     * This method in the `Storage` class is responsible for invoking `loadIngredients()`, `loadDishes()`
       and `loadFormat()`.
 2. After accessing `ingredients.txt`, `ingredientList.add()` is called for every ingredient that exists in the list and
@@ -165,7 +165,7 @@ under *'Data'* folder.
 <center>Figure 5: Saving Data Sequence Diagram</center>
 <br>
 
-* After every command, Duke calls `Storage.write(Ingredient)`, then `Storage.write(Dish)`.
+* After every command, Foodorama calls `Storage.write(Ingredient)`, then `Storage.write(Dish)`.
     * This method in the `Storage` class is responsible for writing to the respective text file depending on the mode.
 * `Storage.write()` will access the respective text file and save to its respective save format.
 
@@ -196,16 +196,16 @@ the *Food-O-Rama* data.
 * The `DishList` class comprises an array of `Dish` along with functions to find, retrieve and modify dishes.
 * The `IngredientList` class comprises an array of `Ingredient` along with functions to find, retrieve and modify
   ingredients.
-    * The Sort function arranges Dishes / Ingredients in descending order of their wastage.
+    * The Sort function arranges Dishes / Ingredients in descending order of their wastage weight.
     * The Graph function visualises the wastage of Dishes / Ingredients for easier analysis.
 
 ### User-Interface Component
 
 The `Ui` Class is responsible for the printing of interactive messages whenever a user types an input. It handles print
-messages to the Command Line Interface from when the program loads, to after every input by the user and finally when
+messages to the Command Line Interface from when the program loads, to after every input by the user, and finally when
 the user exits the program.
 
-The below class diagram shows the structure and relations of the `Ui` class in *Food-O-Rama*.
+The class diagram below shows the structure and relations of the `Ui` class in *Food-O-Rama*.
 
 
 <p align="center">
@@ -214,10 +214,10 @@ The below class diagram shows the structure and relations of the `Ui` class in *
 <center>Figure 7: User Interface Class Diagram</center>
 <br>
 
-For simplicity’s sake the ui class has been minimized into 3 components:
+For simplicity’s sake the Ui class has been minimized into 3 components:
 
 * The strings containing the various messages.
-* Functions that get a string from UI to be used elsewhere (e.g. Exception classes getting error messages).
+* Functions that get a string from Ui to be used elsewhere (e.g. Exception classes getting error messages).
 * Functions that print command outputs.
 
 ### Exceptions
@@ -247,7 +247,7 @@ highest level, the `Foodorama` class, where it then gets caught and the message 
 In addition to the input parser, due to the different types of inputs *Food-O-Rama* deals with, there exists a second round
 of input validation to help seperate the invalid inputs from those that are valid.
 
-The sequence diagram for the validation of Numerical Inputs is given below.
+Below is the sequence diagram for the validation of Numerical Inputs.
 
 <p align="center">
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/input_validation_number.png">
@@ -453,7 +453,7 @@ that use them. The diagram below showcases the sequence of the `LinkCommand` cla
 
 The implementation of the Graph function allows Food-O-Rama to display a graph of the Dishes and Ingredients present in the DishList and IngredientList to the User.
 
-Below is a sequence diagram that shows how the GraphCommand functions
+Below is a sequence diagram that shows how the GraphCommand functions.
 
 
 <p align="center">
@@ -766,12 +766,12 @@ duck|2.0|1.0|2.5|30/10/2021
     * Test case:`add dish waste chicken rice`
 
       Expected: Dish List contains `chicken rice`. A message will be printed to the CLI to prompt user for the wastage
-      weight of `chiccken rice` in kg.
+      weight of `chicken rice` in kg.
 
     * Test case:`add dish waste 1`
 
       Expected: Dish List contains `chicken rice`, and `chicken rice` is at the first position in the Dish List. A
-      message will be printed to the CLI to prompt user for the wastage weight of `chiccken rice` in kg.
+      message will be printed to the CLI to prompt user for the wastage weight of `chicken rice` in kg.
 
     * Test case:`add dish waste abcde`
 
@@ -784,12 +784,12 @@ duck|2.0|1.0|2.5|30/10/2021
     * Test case:`set dish limit chicken`
 
       Expected: Dish List contains `chicken rice`. A message will be printed to the CLI to prompt user to enter the
-      limit of wastage weight of `chiccken rice` in kg.
+      limit of wastage weight of `chicken rice` in kg.
 
     * Test case:`set dish limit 1`
 
       Expected: Dish List contains `chicken rice` and `chicken rice` is at the first position in the Dish List. A
-      message will be printed to the CLI to prompt user to enter the limit of wastage weight of `chiccken rice` in kg.
+      message will be printed to the CLI to prompt user to enter the limit of wastage weight of `chicken rice` in kg.
 
     * Test case:`set dish limit abcde`
 
@@ -807,7 +807,7 @@ duck|2.0|1.0|2.5|30/10/2021
     * Test case:`edit dish name 1`
 
       Expected: Dish List contains `chicken rice`, and `chicken rice` is at the first position in the Dish List. A
-      message will be printed to the CLI to prompt user to enter the new name for `chiccken rice`.
+      message will be printed to the CLI to prompt user to enter the new name for `chicken rice`.
 
     * Test case:`edit dish name abcde`
 
@@ -820,12 +820,12 @@ duck|2.0|1.0|2.5|30/10/2021
     * Test case:`edit dish waste chicken rice`
 
       Expected: Dish List contains `chicken rice`. A message will be printed to the CLI to prompt user to enter the new
-      wastage weight for `chiccken rice`.
+      wastage weight for `chicken rice`.
 
     * Test case:`edit dish waste 1`
 
       Expected: Dish List contains `chicken rice`, and `chicken rice` is at the first position in the Dish List. A
-      message will be printed to the CLI to prompt user to enter the new wastage weight for `chiccken rice`.
+      message will be printed to the CLI to prompt user to enter the new wastage weight for `chicken rice`.
 
     * Test case:`edit dish waste abcde`
 
@@ -838,12 +838,12 @@ duck|2.0|1.0|2.5|30/10/2021
     * Test case:`del dish chicken rice`
 
       Expected: Dish List contains `chicken rice`. A message will be printed to the CLI to ask user on confirming
-      deletion for `chiccken rice`.
+      deletion for `chicken rice`.
 
     * Test case:`del dish 1`
 
       Expected: Dish List contains `chicken rice`, and `chicken rice` is at the first position in the Dish List. A
-      message will be printed to the CLI to ask user on confirming deletion for `chiccken rice`.
+      message will be printed to the CLI to ask user on confirming deletion for `chicken rice`.
 
     * Test case:`del dish abcde`
 
@@ -944,15 +944,15 @@ duck|2.0|1.0|2.5|30/10/2021
       Expected: Ingredient List contains `duck`. A message will be printed to the CLI to prompt user for the expiry date
       of `duck` in 'dd/MM/yyyy' format. Upon entering a valid expiry date, e.g. `08/11/2021`, a success message will be
       printed to the CLI. Upon entering an invalid date that does not follow 'dd/MM/yyyy', e.g. `abc`, an error message
-      will be printed to the CLI, until the user enters a date in 'dd/MM/yyyy' format.
+      will be printed to the CLI.The command is disregarded.
 
     * Test case:`set ingr expiry 1`
 
       Expected: Ingredient List contains `duck` and `duck` is at the first position in the Ingredient List. A message
       will be printed to the CLI to prompt user for the expiry date of `duck` in 'dd/MM/yyyy' format. Upon entering a
       valid expiry date, e.g. `08/11/2021`, a success message will be printed to the CLI. Upon entering an invalid date
-      that does not follow 'dd/MM/yyyy', e.g. `abc`, an error message will be printed to the CLI, until the user enters
-      a date in 'dd/MM/yyyy' format.
+      that does not follow 'dd/MM/yyyy', e.g. `abc`, an error message will be printed to the CLI.The command is 
+      disregarded.
 
     * Test case:`set ingr expiry lmnop`
 
@@ -1169,3 +1169,4 @@ duck|2.0|1.0|2.5|30/10/2021
     * Test case: `bye`
 
       Expected: *Food-O-Rama* terminates. When *Food-O-Rama* run again, previously saved user data will exist.
+
