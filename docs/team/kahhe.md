@@ -34,14 +34,14 @@ Below are contributions I've made to the team and Ha(ppy)Bit. Organised for you 
 
 ### Documentation
 
-#### [User Guide (UG)](/docs/UserGuide.md)
+#### [User Guide (UG)](https://ay2122s1-cs2113t-f14-1.github.io/tp/UserGuide.html)
 
 - Contributed to UG introduction 
 - Wrote most of "Using this Guide", "Using _Ha(ppy)Bit_", and "Useful Links" section
 - Attempted to make the UG user-centric/reader-friendly overall with signposting and explanations
 - Fixed documentation flaws brought up by peers in PE Dry Run
 
-#### [Developer Guide (DG)](/docs/DeveloperGuide.md)
+#### [Developer Guide (DG)](https://ay2122s1-cs2113t-f14-1.github.io/tp/DeveloperGuide.html)
 
 
 - Wrote "4.3. Listing all Goals" subsection of "4. Implementation"
