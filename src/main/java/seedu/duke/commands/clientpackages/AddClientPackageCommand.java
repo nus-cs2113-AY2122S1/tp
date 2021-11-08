@@ -6,6 +6,7 @@ import seedu.duke.data.Client;
 import seedu.duke.data.ClientPackage;
 import seedu.duke.data.Flight;
 import seedu.duke.data.Tour;
+
 import java.util.ArrayList;
 
 public class AddClientPackageCommand extends Command {
@@ -33,26 +34,30 @@ public class AddClientPackageCommand extends Command {
      */
     @Override
     public void execute() {
-        createClientPackage();
-        ArrayList<ClientPackage> checkClientPackage = clientPackages.getClientPackages();
-        for (ClientPackage currClientPackage : checkClientPackage) {
-            boolean sameId = currClientPackage.getId().equals(clientPackage.getId());
-            if (sameId) {
-                System.out.println(ERROR_CLIENT_PACKAGE_ID_EXISTS);
-                return;
+        try {
+            createClientPackage();
+            ArrayList<ClientPackage> checkClientPackage = clientPackages.getClientPackages();
+            for (ClientPackage currClientPackage : checkClientPackage) {
+                boolean sameId = currClientPackage.getId().equals(clientPackage.getId());
+                if (sameId) {
+                    System.out.println(ERROR_CLIENT_PACKAGE_ID_EXISTS);
+                    return;
+                }
+                boolean sameClient = currClientPackage.getClient().equals(clientPackage.getClient());
+                boolean sameTour = currClientPackage.getTour().equals(clientPackage.getTour());
+                boolean sameFlight = currClientPackage.getFlight().equals(clientPackage.getFlight());
+                if (sameClient && sameTour && sameFlight) {
+                    System.out.println(ERROR_CLIENT_PACKAGE_SAME_FIELDS);
+                    return;
+                }
             }
-            boolean sameClient = currClientPackage.getClient().equals(clientPackage.getClient());
-            boolean sameTour = currClientPackage.getTour().equals(clientPackage.getTour());
-            boolean sameFlight = currClientPackage.getFlight().equals(clientPackage.getFlight());
-            if (sameClient && sameTour && sameFlight) {
-                System.out.println(ERROR_CLIENT_PACKAGE_SAME_FIELDS);
-                return;
+            if (!clientPackage.getClient().equals(null) && !clientPackage.getTour().equals(null)
+                    && !clientPackage.getFlight().equals(null)) {
+                clientPackages.add(clientPackage);
+                ui.showAdd(clientPackage);
             }
-        }
-        if (!clientPackage.getClient().equals(null) && !clientPackage.getTour().equals(null)
-                && !clientPackage.getFlight().equals(null)) {
-            clientPackages.add(clientPackage);
-            ui.showAdd(clientPackage);
+        } catch (TourPlannerException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -61,23 +66,27 @@ public class AddClientPackageCommand extends Command {
      * If given client package ID already exists, the client package will not be added.
      */
     public void executeStorage() {
-        createClientPackage();
-        ArrayList<ClientPackage> checkClientPackage = clientPackages.getClientPackages();
-        for (ClientPackage currClientPackage : checkClientPackage) {
-            boolean sameId = currClientPackage.getId().equals(clientPackage.getId());
-            if (sameId) {
-                System.out.println(ERROR_CLIENT_PACKAGE_ID_EXISTS);
-                return;
+        try {
+            createClientPackage();
+            ArrayList<ClientPackage> checkClientPackage = clientPackages.getClientPackages();
+            for (ClientPackage currClientPackage : checkClientPackage) {
+                boolean sameId = currClientPackage.getId().equals(clientPackage.getId());
+                if (sameId) {
+                    System.out.println(ERROR_CLIENT_PACKAGE_ID_EXISTS);
+                    return;
+                }
+                boolean sameClient = currClientPackage.getClient().equals(clientPackage.getClient());
+                boolean sameTour = currClientPackage.getTour().equals(clientPackage.getTour());
+                boolean sameFlight = currClientPackage.getFlight().equals(clientPackage.getFlight());
+                if (sameClient && sameTour && sameFlight) {
+                    System.out.println(ERROR_CLIENT_PACKAGE_SAME_FIELDS);
+                    return;
+                }
             }
-            boolean sameClient = currClientPackage.getClient().equals(clientPackage.getClient());
-            boolean sameTour = currClientPackage.getTour().equals(clientPackage.getTour());
-            boolean sameFlight = currClientPackage.getFlight().equals(clientPackage.getFlight());
-            if (sameClient && sameTour && sameFlight) {
-                System.out.println(ERROR_CLIENT_PACKAGE_SAME_FIELDS);
-                return;
-            }
+            clientPackages.add(clientPackage);
+        } catch (TourPlannerException e) {
+            System.out.println(e.getMessage());
         }
-        clientPackages.add(clientPackage);
     }
 
     /**
@@ -89,19 +98,15 @@ public class AddClientPackageCommand extends Command {
         return clientPackage;
     }
 
-    private void createClientPackage() {
-        try {
-            String clientPackageId = rawClientPackage[0];
-            String clientId = rawClientPackage[1];
-            String tourId = rawClientPackage[2];
-            String flightId = rawClientPackage[3];
-            Client client = extractClient(clientId);
-            Tour tour = extractTour(tourId);
-            Flight flight = extractFlight(flightId);
-            clientPackage = new ClientPackage(clientPackageId, client, tour, flight);
-        } catch (TourPlannerException e) {
-            System.out.println(e.getMessage());
-        }
+    private void createClientPackage() throws TourPlannerException {
+        String clientPackageId = rawClientPackage[0];
+        String clientId = rawClientPackage[1];
+        String tourId = rawClientPackage[2];
+        String flightId = rawClientPackage[3];
+        Client client = extractClient(clientId);
+        Tour tour = extractTour(tourId);
+        Flight flight = extractFlight(flightId);
+        clientPackage = new ClientPackage(clientPackageId, client, tour, flight);
     }
 
     private Client extractClient(String clientId) throws TourPlannerException {
