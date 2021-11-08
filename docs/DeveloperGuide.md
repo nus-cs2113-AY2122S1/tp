@@ -16,20 +16,26 @@ motivated us to build this application.
 
 * [Acknowledgements](#-acknowledgements)
 * [Setting Up & Getting Started](#-setting-up--getting-started)
-* [Design & Implementations](#-design--implementation)
-    * [Design](#design)
-        * [Main Components](#main-components)
-        * [General Flow](#general-flow)
-        * [Input Parsing](#input-parsing)
-        * [Storage](#storage)
-        * [Data Structures](#data-structures)
-        * [User-Interface Component](#user-interface-component)
-        * [Exceptions](#exceptions)
-        * [Command Abstraction](#command-abstraction)
-        * [Input Validation](#input-validation)
-    * [Implementation](#implementation)
-        * [Edit](#edit)
-        * [Graph](#graph)
+* [Design](#design)
+    * [Main Components](#main-components)
+    * [General Flow](#general-flow)
+    * [Input Parsing](#input-parsing)
+    * [Storage](#storage)
+    * [Data Structures](#data-structures)
+    * [User-Interface Component](#user-interface-component)
+    * [Exceptions](#exceptions)
+    * [Command Abstraction](#command-abstraction)
+    * [Input Validation](#input-validation)
+* [Implementation](#implementation)
+    * [Add](#add)
+    * [Find](#find)
+    * [Edit](#edit)
+    * [Set](#set)
+    * [Link](#link)  
+    * [Graph](#graph)
+    * [Random Dish](#random-dish)
+    * [Sort](#sort)
+    * [Terminal Refreshing / Clear Screen](#terminal-refreshing--clear-screen)
 * [Product Scope](#-product-scope)
     * [Target User Profile](#target-user-profile)
     * [Value Proposition](#value-proposition)
@@ -68,25 +74,31 @@ The application consists of the following main components responsible for the hi
 2. `Ui`: Handles the displaying of all command results and error messages to the user.
 3. `Storage`: Handles the creation, reading from and writing from the `/data` directory
 4. `InputParser`: Makes sense from the user input and decides which `Command` class to call.
-5. `DishList`: Handles the collection of Dish objects used by Food-O-Rama
-6. `IngredientList`: Handles the collection of Ingredient objects used by Food-O-Rama.
-7. `Command`: Collection of classes that handle the different user commands
+5. `DishList`: Handles the collection of Dish objects used by *Food-O-Rama*.
+6. `IngredientList`: Handles the collection of Ingredient objects used by *Food-O-Rama*.
+7. `Command`: Collection of classes that handle the different user commands.
 
 The architecture diagram below shows a high-level overview of the structure between different components.
 
-![](images/architecture_diagram.png)
+<p align="center">
+<img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/architecture_diagram.png">
+</p>
+<center>Figure 1: Food-O-Rama Overview Architecture Diagram</center>
 
 ### General Flow
 
 Describes the step-by-step sequence from User Input to the Output.
 
 ![](images/main_sequence.png)
+<p align = "center">
+Figure 2: General Flow Sequence Diagram
+</p>
 
 1. User is greeted by welcome screen.
 2. User begins typing inputs.
 3. Inputs get parsed by InputParser returning the appropriate type of command and respective parameters.
 4. Command gets executed and respective output gets displayed.
-5. Once user is done using the application, he can send an exit message prompting a goodbye message.
+5. Once user is done using the application, they can send an exit message prompting a goodbye message.
 6. Application exits.
 
 ### Input Parsing
@@ -94,6 +106,9 @@ Describes the step-by-step sequence from User Input to the Output.
 The `InputParser` class is responsible for deconstructing User Inputs to identify Commands and Parameters for execution.
 
 ![](images/input_parser_sequence.png)
+<p align = "center">
+Figure 3: InputParser Sequence Diagram
+</p>
 
 1. Gets command name of user input by checking if the users input starts with any of the strings that are defined for
   commands (add dish, list dish, help etc.).
@@ -116,19 +131,19 @@ under *'Data'* folder.
 
 ![](images/storage_load_sequence.png)
 
-1. At the start of the program, Duke calls `Storage.load()`
+1. At the start of the program, Duke calls `Storage.load()`.
     * This method in the `Storage` class is responsible for invoking `loadIngredients()`, `loadDishes()`
-      and `loadFormat()`
+      and `loadFormat()`.
 2. After accessing `ingredients.txt`, `ingredientList.add()` is called for every ingredient that exists in the list and
-  is added to the active ArrayList, `IngredientList.ingredientList`
+  is added to the active ArrayList, `IngredientList.ingredientList`.
 3. Then, after accessing `dishes.txt`, `dishList.add()` is called for every dish that exists in the list and is added to
-  the active ArrayList, `DishList.dishList`
+  the active ArrayList, `DishList.dishList`.
 4. Any inputs in the data file that are invalid get disregarded and only valid inputs get loaded. As a result the invalid
-  inputs get sanitized once Food-O-Rama is started
+  inputs get sanitized once *Food-O-Rama* is started.
 5. Finally, the method also sets up the `formats.txt` file that contains all the relevant formats in which the data is
-  saved along with examples
-    * This is present in the load method as opposed to the write method as it only needs to be called once per run of *
-      Food-O-Rama*
+  saved along with examples.
+    * This is present in the load method as opposed to the write method as it only needs to be called once per run of 
+      *Food-O-Rama*.
 
 💡 *Note: `dishes.txt`,`ingredients.txt` and `formats.txt` can be found in the `data` folder from the root directory.*
 
@@ -172,22 +187,24 @@ The `Ui` Class is responsible for the printing of interactive messages whenever 
 messages to the Command Line Interface from when the program loads, to after every input by the user and finally when
 the user exits the program.
 
-The below class diagram shows the structure and relations of the Ui class in Foodorama.
+The below class diagram shows the structure and relations of the `Ui` class in *Food-O-Rama*.
 
 ![](images/UiClass.png)
 
 For simplicity’s sake the ui class has been minimized into 3 components:
 
-* The strings containing the various messages
-* Functions that get a string from UI to be used elsewhere (e.g. Exception classes getting error messages)
-* Functions that print command outputs
+* The strings containing the various messages.
+* Functions that get a string from UI to be used elsewhere (e.g. Exception classes getting error messages).
+* Functions that print command outputs.
 
 ### Exceptions
 
 The `FoodoramaException` class is responsible for handling errors such as unrecognised user commands and improper
-parameters. It does so by calling the `Ui` class to provide the error messages and throwing the exception up to the
-highest level, that is the Foodorama class where it then gets caught and the message is printed with the
-exception.getMessage() method which is part of the base Exception class.
+parameters. 
+
+It does so by calling the `Ui` class to provide the error messages and throwing the exception up to the
+highest level, the `Foodorama` class, where it then gets caught and the message is printed with the
+`exception.getMessage()` method which is part of the base Exception class.
 
 ### Command Abstraction
 
@@ -196,26 +213,26 @@ exception.getMessage() method which is part of the base Exception class.
 * Different Command Classes that perform different tasks by calling various functions of the Object Classes.
 * All inherit from an abstract `Command` class with one execute method that takes an Arraylist<String> as input.
 * These command classes help perform a more specialized input validation so ensure the inputs match the specific command
-  that has been invoked
+  that has been invoked.
 
-### Input validation
+### Input Validation
 
-In addition to the input parser, due to the different types of inputs Food-O-Rama deals with, there exists a second round
-of input validation to help seperate the invalid inputs from those that are valid
+In addition to the input parser, due to the different types of inputs *Food-O-Rama* deals with, there exists a second round
+of input validation to help seperate the invalid inputs from those that are valid.
 
-The sequence diagram for the validation of Numerical Inputs is given below
-
-![](images/input_validation_number.png)
-
-As you can see the system filters out the numerical inputs from the text strings and chceks if the numerical inputs are
-integers or not providing the actual methods that do the computation the only valid inputs that are integers in thsi
-case. The same process can be done to include doubles as well by excluding the final integer check.
-
-The sequence diagram for the validation of Text strings is given below
+The sequence diagram for the validation of Numerical Inputs is given below.
 
 ![](images/input_validation_number.png)
 
-The process of input validation for strings is quite similar to that for integers except the roles are reversed
+The system filters out the numerical inputs from the text strings, and checks if the numerical inputs are
+integers or not providing the actual methods that execute the computation (the only valid inputs are integers in this
+case). The same process can be done to include doubles as well by excluding the final integer check.
+
+The sequence diagram for the validation of Strings is given below.
+
+![](images/input_validation_string.png)
+
+The process of input validation for strings is similar to that for integers except only words are valid inputs.
 
 ## ✍ Implementation
 This section explores the overall implementation of the different main functions and how they work.
@@ -298,7 +315,10 @@ Code Snippet:
 The find commands (`find dish` and `find ingr`) implement the `FindCommand` class to allow the user to search for a
 particular `KEYWORD` and return a list of Dishes or Ingredients that match the keyword.
 
-![](images/find_command_sequence.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/find_command_sequence.png">
+</p>
+<center>Figure 13: FindCommand Sequence Diagram</center>
 
 For `find` commands, the handling method `FindCommand.execute()`:
 
@@ -318,7 +338,10 @@ For `find` commands, the handling method `FindCommand.execute()`:
 The implementation of the Edit function allows the User to edit several instance variables of the Dishes and Ingredients
 present in the DishList and IngredientList.
 
-![](images/edit_dish_name_sequence.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/edit_dish_name_sequence.png">
+</p>
+<center>Figure 14: EditDishNameCommand Sequence Diagram</center>
 
 This Sequence Diagram shows how the `EditDishNameCommand` class functions.
 
@@ -340,7 +363,10 @@ The implementation of the set function allows the User to set the expiry date fo
 
 Below is a sequence diagram that shows how the SetExpiryCommand functions
 
-![](images/set_expiry.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/set_expiry.png">
+</p>
+<center>Figure 15: EditDishNameCommand Sequence Diagram</center>
 
 1. The input will be handled by the basic input validation within the command class to figure out which ingredient is to be changed
 
@@ -361,34 +387,42 @@ Below is a sequence diagram that shows how the SetExpiryCommand functions
 The Link function allows Users to link existing Ingredients in the IngredientList to the existing Dishes in the DishList
 that use them. The diagram below showcases the sequence of the `LinkCommand` class.
 
-![](images/link_sequence.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/link_sequence.png">
+</p>
+<center>Figure 16: LinkCommand Sequence Diagram</center>
 
-1. The LinkCommand calls upon DishList to get the Dish based on the Index given via UserInput
+1. The LinkCommand calls upon DishList to get the Dish based on the Index given via UserInput.
 2. DishList then calls on Dish to carry out the addPart(ingredientName) function which is responsible for the linking of
-  the Dish and Ingredient
-3. Dish calls on IngredientList through the find function, to which IngredientList returns the Index of the Ingredient
+  the Dish and Ingredient.
+3. Dish calls on IngredientList through the find function, to which IngredientList returns the Index of the Ingredient.
 4. Given the index is non-negative, the addPart function then removes any old contributions of Ingredient Wastes in the
-  current Dish's Waste through a loop
+  current Dish's Waste through a loop.
 5. Subsequently, it adds the Ingredient to the Dish's parts following which it updates the Dish's own Ingredient
-  Contribution
+  Contribution.
 6. Finally, the function re-updates the contribution of all linked Ingredient's Wastes to the Dish's Waste.
 
 ### Graph
 
 The implementation of the Graph function allows Food-O-Rama to display a graph of the Dishes and Ingredients present in the
 DishList and IngredientList to the User.
+
 Below is a sequence diagram that shows how the GraphCommand functions
 
-![](images/graph_sequence.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/graph_sequence.png">
+</p>
+<center>Figure 17: GraphCommand Sequence Diagram</center>
 
-Graph works by creating a 2d grid and printing the bars based on the current position of the terminal cursor. This lets
+Graph works by creating a 2D grid and printing the bars based on the current position of the terminal cursor. This lets
 us bypass the restriction in a CLI based application where you can only print from up to down and the bars can get
 printed "vertically". This is done by calculating the lengths of the bars beforehand and using these lengths along with
 the current coordinates to print either an empty space or a bar.
 
-Despite this due to CLI and ascii limitations, printing of fractional values posed an issue. This was because you are
-unable to print half a character and using special unicode characters would break cross-platform functionality. The
-solution that we implemented was to have a digit in the top most bar if we have fractional heights. This way while we
+Despite this due to CLI and ASCII limitations, printing of fractional values poses an issue. This was because you are
+unable to print half a character and using special unicode characters would break cross-platform functionality. 
+
+The solution that we implemented was to have a digit in the top most bar if we have fractional heights. This way while we
 still don't get a perfect representation, we are capable of giving the value accurate to one decimal place. So if the
 height was 3.33 units it would be represented by 3 filled bars and the 4th bar will have a 3 within indicating its value
 is between 3.3 to 3.4 as shown in the figure below.
@@ -411,7 +445,7 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-### Random dish
+### Random Dish
 
 The `RandomDishCommand` class is used to generate a random Dish Name.
 
@@ -505,8 +539,15 @@ This allows the user to generate new Dish ideas.
 The `SortDishCommand` and `SortIngrCommand` classes are used to sort the Dishes and Ingredients respectively, according
 to their Wastages in descending order. This allows the user to view the most wasted Dishes and Ingredients at the top.
 
-![](images/sort_dish_sequence.png)
-![](images/sort_ingr_sequence.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/sort_dish_sequence.png">
+</p>
+<center>Figure 18: SortDishCommand Sequence Diagram</center>
+
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/sort_dish_sequence.png">
+</p>
+<center>Figure 19: SortIngrCommand Sequence Diagram</center>
 
 * The Sort functions work by calling on the pre-existing Comparator function in ArrayList. Using this, they sort the
   Dishes and Ingredients in descending order of their Wastages.
@@ -1078,5 +1119,4 @@ duck|2.0|1.0|2.5|30/10/2021
 1. Exit Food-O-Rama and Save User Data
     * Test case: `bye`
 
-      Expected: Food-O-Rama terminates and saves user data in dishes.txt and ingredients.txt. When Food-O-Rama run
-      again, previously saved user data will exist.
+      Expected: *Food-O-Rama* terminates. When *Food-O-Rama* run again, previously saved user data will exist.
