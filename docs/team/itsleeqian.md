@@ -22,7 +22,10 @@ I added the following UG sections: List, Summary of Expenses, View people and th
 Additionally, I was also in charge of finalizing the formatting and readability of the UG, standardizing various aspects of each section.
 
 #### DG Contribution
-TOBEADDED
+I have contributed the following to the DG:
+
+1. The whole of the Architecture section, including the Architectural diagram and architectural sequence diagram.
+2. The UML diagram for Person
 
 #### Team based tasks Contribution
 1. I helped to review my members' pull requests into our team repository, ensuring that the incoming code has no conflicts with the existing code. I would also discuss with the relevant members for any further improvements on the incoming code, and clarify any misunderstandings that appear.
