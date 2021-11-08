@@ -14,10 +14,10 @@ import static seedu.duke.commons.util.LinkUtil.formatLink;
 import static seedu.duke.commons.util.LinkUtil.launchUrlOnLinux;
 import static seedu.duke.commons.util.LinkUtil.launchUrlOnMac;
 import static seedu.duke.commons.util.LinkUtil.launchUrlOnWindows;
-import static seedu.duke.logic.parser.ParserUtil.parseTitle;
+import static seedu.duke.commons.util.TimeUtil.compareTime;
 import static seedu.duke.logic.parser.ParserUtil.parseDayOfTheWeek;
 import static seedu.duke.logic.parser.ParserUtil.parseTime;
-import static seedu.duke.commons.util.TimeUtil.compareTime;
+import static seedu.duke.logic.parser.ParserUtil.parseTitle;
 
 //@@author Roycius
 public class Lesson implements Comparable<Lesson> {
@@ -125,8 +125,8 @@ public class Lesson implements Comparable<Lesson> {
             }
             return compareTime(this.getStartTime(), l.getStartTime());
         } catch (InvalidDayException | InvalidTimeException e) {
-            // Ignore and return 0
-            System.out.println("Error: Lesson comparison result is incorrect.");
+            // Warns user and return 0
+            System.out.println(Message.ERROR_COMPARING_LESSON);
             return 0;
         }
     }

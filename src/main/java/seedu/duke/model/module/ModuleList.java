@@ -1,12 +1,12 @@
 package seedu.duke.model.module;
 
-import seedu.duke.DukeException;
-import seedu.duke.commons.core.Message;
-import seedu.duke.model.module.exceptions.ModuleNotFoundException;
-import seedu.duke.ui.Ui;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import seedu.duke.commons.core.Message;
+import seedu.duke.DukeException;
+import seedu.duke.model.module.exceptions.ModuleNotFoundException;
+import seedu.duke.ui.Ui;
 
 //@@author ptejasv
 /**

@@ -7,6 +7,12 @@ public final class Message {
     public static final String ERROR_CREATING_NEW_FILE =
             "Sorry, I can't create a new save file.";
 
+    public static final String ERROR_COMPARING_LESSON =
+            "Error: Lesson comparison result is incorrect, the data must be incorrect";
+
+    public static final String ERROR_COMPARING_TASK =
+            "Error: Lesson comparison result is incorrect, the data must be incorrect";
+
     public static final String ERROR_DESERIALIZING_DATA =
             "Sorry, I can't deserialize the save file. Overwriting file..";
 
