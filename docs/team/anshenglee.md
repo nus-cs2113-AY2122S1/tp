@@ -85,12 +85,15 @@ Link to code contribution: [RepoSense Link](https://nus-cs2113-ay2122s1.github.i
   - Command summary.
 - The `Notes` portion under `Features`.
 - Data saving feature.
+- Fix typos and small format errors.
 
 #### Contributions to DG
 
+- Fix typos and small format errors.
 - Parser component.
 - Data saving component.
   - Contributed **1** class diagram and **5** sequence diagrams.
+  Link to PR: [#277](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/277)
 - Added user stories for v2.0.
 
 #### Contributions to team-based tasks
@@ -101,7 +104,8 @@ Link to code contribution: [RepoSense Link](https://nus-cs2113-ay2122s1.github.i
 - Ensured forking workflow.
 - Managed milestones. Ensured everything was done before deadlines. Adjusted milestone deadlines when needed.
 - Managed issues. Ensured duplicate issues are marked. Labelled issues with the appropriate labels.
-- Fix multiple bugs found during PED
+- Fixed bugs throughout the project.
+- Fixed multiple bugs found during PED
   - **6** PED bugs were fixed. Here are the issue links:
     - [#192](https://github.com/AY2122S1-CS2113T-T12-3/tp/issues/192)
     - [#173](https://github.com/AY2122S1-CS2113T-T12-3/tp/issues/173)
@@ -112,7 +116,7 @@ Link to code contribution: [RepoSense Link](https://nus-cs2113-ay2122s1.github.i
 
 #### Review/mentoring contributions during team project
 
-- Total PRs reviewed: 32
+- Total PRs reviewed: 34
 - Links to PRs with non-trivial reviews:
   - [#210](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/210)
   - [#208](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/208)
