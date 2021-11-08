@@ -1,8 +1,14 @@
 package seplanner.modules;
 
 import java.util.ArrayList;
+
 //@@author MAZJ124
+
+/**
+ * Module list class to store a list of modules.
+ */
 public class ModuleList {
+
     protected ArrayList<Module> list;
 
     public ModuleList(ArrayList<Module> list) {
