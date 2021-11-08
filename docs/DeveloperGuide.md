@@ -26,17 +26,12 @@ upon.
       * [Search](#search)
       * [Show](#show)
       * [Update](#update)
-- [Documentation, logging, testing, configuration, dev-ops]()
 - [Appendix: Requirements](#appendix-requirements)
     * [Product scope](#product-scope)
     * [User stories](#user-stories)
     * [Use cases](#use-cases)
     * [Non-Functional Requirements](#non-functional-requirements)
     * [Glossary](#glossary)
-- [Appendix: Instructions for manual testing]()
-    * [Launch and shutdown]()
-    * [Deleting a person]()
-    * [Saving data]()
 
 ## Acknowledgements
 
