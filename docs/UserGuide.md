@@ -97,8 +97,7 @@ Before you learn how to use the app, take a look at the [Quick Start](#quick-sta
 
 5. Once the program is up and running, the image shown below is what you can expect the program should look like!   
 
-![image](https://user-images.githubusercontent.com/69465661/140613991-7848997a-e97b-4c65-825a-1e126590b6a0.png)
-
+![image](https://user-images.githubusercontent.com/69465661/140690502-73964f95-4a07-4ea4-8ef4-83341e4fe268.png)
 
 6. If you are a first time user, the first command you want to key in is the [help](#view-all-possible-commands-help) command.
 It will guide you to the possible commands you can enter into Stonks XD. (Tip! Refer to the [Features](#features) below for details of each command.)
@@ -134,7 +133,9 @@ of the parameter will be taken. e.g. if you gave `a/100 a/1000`, only `a/1000` w
 ### 2.1 Help
 
 ### View all possible commands: `help`
-This shows a list of all possible commands. Use this command when you are lost while using the app!
+This shows a list of all possible commands. 
+If you are a first time user, this is the perfect opportunity for you to get familiarize with the application.
+Feel free to use this command whenever you are lost while using the app!
 
 Format: `help`
 
@@ -161,13 +162,13 @@ Show Total Expense between 2 dates (Date Format: DD/MM/YYYY): btw_ex s/START_DAT
 Show Total Income between 2 dates (Date Format: DD/MM/YYYY): btw_in s/START_DATE e/END_DATE
 To Find Using Date: find DD/MM/YYYY
 To Find Based On Keyword: find KEYWORD
-To Set Budgets: set_budget c/CATEGORY a/AMOUNT
+To Set Budgets(Overall, Food, Transport, Medical, Bills, Entertainment, Misc): set_budget c/CATEGORY a/AMOUNT
 To Check Budgets: check_budget c/CATEGORY
 To Set Threshold Value for Reminders: set_threshold t/THRESHOLD
 To change entries into a different currency: set_curr c/CURRENCY
 To check the currency that entries are currently in: check_curr
 Lists available currency types for conversion: list_curr
-To View Your Yearly Report (Year format: YYYY): show_graph [Y/YEAR]
+To View Your Year Report (Year format: YYYY): show_graph [Y/YEAR]
 To Clear All Expense And Income Entries: clear_all_entries
 To Terminate The Program: end
 -----------------------------------------------------------------------------------------------------
@@ -196,7 +197,9 @@ Note:
 
 Examples:
 
-- `add_ex d/KFC lunch a/10.20 c/food` Adds an expense entry regarding lunch that costs $10.20.
+- Let's say you just had KFC for lunch today, and you want to log it down. Type in
+  `add_ex d/KFC lunch a/10.20 c/food` into the command line. This adds an expense entry regarding lunch that costs $10.20.
+
 <details>
 <summary> ▼ Expected output in run window </summary>
 <pre>
@@ -241,7 +244,10 @@ Note:
 
 Examples:
 
-- `add_ex_d d/McDonalds dinner a/7.50 c/food D/20/10/2021` Adds a dinner expense entry that costs $7.50 that is made on 20th October 2021.
+- Let's say you had McDonald's for dinner 2 days ago, and you only remembered about it today. You can type in
+  `add_ex_d d/McDonalds dinner a/7.50 c/food D/20/10/2021` into the command line. This will adds a dinner expense 
+  entry that costs $7.50 that is made on 20th October 2021.
+  
 <details>
 <summary> ▼ Expected output in run window </summary>
 <pre>
@@ -333,7 +339,9 @@ Note:
 
 Examples:
 
-- `add_in d/lunch money a/1000 c/allowance` Adds an income entry regarding a lunch allowance of $1000.
+- Let's say you received some pocket money for the week. To log it down, type 
+  `add_in d/lunch money a/1000 c/allowance` into the command line. This adds an income entry regarding a 
+  lunch allowance of $1000.
 
 <details>
   <summary> ▼ Expected output in run window </summary>
@@ -365,7 +373,10 @@ Note:
 
 Examples:
 
-- `add_in_d/december's bonus a/5000 c/salary D/26/12/2021` Adds an income entry regarding a salary bonus of $5000 for 26th December 2021.
+- Let's say you received a holiday bonus of $5000, but you forgot to add it in. To log it 
+  type `add_in_d/december's bonus a/5000 c/salary D/26/12/2021` into the command line. It adds an 
+  income entry regarding a salary bonus of $5000 for 26th December 2021.
+
 <details>
 <summary> ▼ Expected output in run window </summary>
 <pre>
@@ -844,7 +855,7 @@ onwards will be treated as the new currency set.
 
 Format: `set_curr c/CURRENCY`
 
-- As of v2.0, Stonks XD supports 2 different currencies: SGD and USD.
+- As of v2.0, Stonks XD supports 2 different currencies: SGD and RMB.
 - If you try to set currency to currency you're already using, a warning will be shown.
 
 <details>
@@ -853,21 +864,21 @@ Format: `set_curr c/CURRENCY`
 Let's take the following budget limit for <code>FOOD</code> expenses as an example:
 <pre>
 -----------------------------------------------------------------------------------------------------
-Current FOOD limit is $10.00
+Current FOOD limit is $12.50
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-If you wish to convert the above (and all entries) to USD, simply enter <code>set_curr c/USD</code>. You will receive the following confirmation message:
+If you wish to convert the above (and all entries) to RMB, simply enter <code>set_curr c/RMB</code>. You will receive the following confirmation message:
 <pre>
 -----------------------------------------------------------------------------------------------------
-All entries have been converted to USD!
+All entries have been converted to RMB!
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-If we check our budget limit once again, we see that it has now been converted to the appropriate value in USD!
+If we check our budget limit once again, we see that it has now been converted to the appropriate value in RMB!
 <pre>
 -----------------------------------------------------------------------------------------------------
-Current FOOD limit is $7.40
+Current FOOD limit is $62.50
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
@@ -906,7 +917,7 @@ If you are unsure as to what currency types you can convert to, just enter <code
 <pre>
 -----------------------------------------------------------------------------------------------------
 Here is a list of available currencies you can convert to!
-1. USD
+1. RMB
 2. SGD
 -----------------------------------------------------------------------------------------------------
 </pre>

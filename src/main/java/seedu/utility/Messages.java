@@ -23,7 +23,8 @@ public class Messages {
     public static final String UNABLE_TO_FIND_SETTINGS_FILE = "Unable to find StonksXD_Settings.csv, a new one " 
             + "has been made.";
     public static final String SEARCH_NO_MATCH_MESSAGE = "Your search did not match any of the entries!";
-    public static final String TYPE_SOMETHING_MESSAGE = "Type something!";
+    public static final String PROMPTING_MESSAGE = "Would you like to set your budget before you begin?"
+            + " You can use the set budget commands shown in the help command!";
     public static final String HELP_COMMAND_MESSAGE = "This is a list of commands and their format!";
     public static final String LISTING_EXPENSE_MESSAGE = "Below is a list of all of your recent spending!";
     public static final String LISTING_INCOME_MESSAGE = "Below is a list of all of your recent earnings!";
@@ -69,8 +70,6 @@ public class Messages {
             + "commands again!";
     public static final String INVALID_EXPENSE_VALUE = "Wow! That's a lot of money. "
             + "Are you sure you have spent that much?";
-    public static final String INVALID_INCOME_VALUE = "Wow! That's a lot of money."
-            + "I don't think we can handle that much money";
     public static final String INVALID_BUDGET_VALUE = "Wow! That's a lot of money."
             + "I don't think we can handle that much money";
     public static final String INCOMPLETE_ENTRIES_CSV_HEADER_MESSAGE = "The CSV header for StonksXD_Entries.csv " 

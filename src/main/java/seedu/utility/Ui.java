@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static seedu.utility.tools.DateOperator.DATE_FORMAT;
 import static seedu.utility.tools.FinancialAdvisor.getRandomAdvice;
 
 /**
@@ -19,7 +20,6 @@ import static seedu.utility.tools.FinancialAdvisor.getRandomAdvice;
  */
 public class Ui {
     private final Scanner in;
-    private static final String DATE_FORMAT = "dd/MM/yyyy";
     private static final String NEW_LINE = System.lineSeparator();
 
 
@@ -44,7 +44,7 @@ public class Ui {
         printLine();
         System.out.println(Messages.LOGO_MESSAGE);
         printLine();
-        System.out.println(Messages.TYPE_SOMETHING_MESSAGE);
+        System.out.println(Messages.PROMPTING_MESSAGE);
     }
 
     private void printLine() {
@@ -402,24 +402,41 @@ public class Ui {
         printLine();
     }
 
+    /**
+     * Prints confirmation message upon successful conversion of entries.
+     * @param currency tracks currency type of entries
+     */
     public void printCurrencyChangedConfirmation(CurrencyType currency) {
         printLine();
         System.out.println("All entries have been converted to " + currency + "!");
         printLine();
     }
 
+
+    /**
+     * Prints error message if trying to convert again to the same currency type.
+     * @param currency tracks currency type of entries
+     */
     public void printSameCurrencyTypeMessage(CurrencyType currency) {
         printLine();
         System.out.println(Messages.SAME_CURRENCY_TYPE_MESSAGE + "- " + currency);
         printLine();
     }
 
+    /**
+     * Prints the current currency type of all entries.
+     * @param currency tracks currency type of entries
+     */
     public void printCurrentCurrency(CurrencyType currency) {
         printLine();
         System.out.println(Messages.CURRENT_CURRENCY_MESSAGE + currency.toString());
         printLine();
     }
 
+    /**
+     * Prints out list of available currency conversions.
+     * @param currencyTypes enum of all allowed currency types
+     */
     public void printCurrencyTypes(ArrayList<CurrencyType> currencyTypes) {
         printLine();
         System.out.println(Messages.AVAILABLE_CURRENCIES_MESSAGE);
