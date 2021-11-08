@@ -930,7 +930,7 @@ Here is a list of available currencies you can convert to!
 ### View yearly report: `show_graph`
 
 This shows the monthly breakdown of the finances in a Yearly Report which also
-includes current month spending and earnings.
+includes current month spending and earnings and your overall account balance regardless of year.
 We recommend using this function after your daily logging of expenses for a one-stop check-in on the state of your finances!
 
 
@@ -947,25 +947,25 @@ Format: `show_graph [Y/YEAR]`
 <details>
 <summary> ▼ Expected output in run window </summary>
 <pre>
-show_graph
+show_graph Y/2121
 -----------------------------------------------------------------------------------------------------
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 x                                                                                                  x
-x   Account Balance: $-449.50                                              Legend:                 x
-x   Current month (NOVEMBER) total expense: $5454.00                             # is Expense      x
-x   Current month (NOVEMBER) total income: $0.00                                 o is Income       x
-x   Your Yearly Report                                                     Unit: 1000.0            x
+x   Account Balance: $12.00                                                Legend:                 x
+x   Current month (NOVEMBER 2021) total expense: $0.00                           # is Expense      x
+x   Current month (NOVEMBER 2021) total income: $0.00                            o is Income       x
+x   Year 2121 Report                                                       Unit: 10.0              x
 x ------------------------------------------------------------------------------------------------ x
 x                                                                                                  x
 x                                                                                                  x
 x                                                                                                  x
 x                                                                                                  x
 x                                                                                                  x
-x                                                                                   #        o     x
-x                                                                                   #        o     x
-x                                                                                   #        o     x
-x                                                                                   #        o     x
-x                                                                                   #        o     x
+x                                                                                                  x
+x                                                                                                  x
+x                                                                                                  x
+x                                                                                    o             x
+x                                                                                   #o             x
 x ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ x
 x   Jan     Feb     Mar     Apr     May     Jun     Jul     Aug     Sept    Oct     Nov     Dec    x
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
