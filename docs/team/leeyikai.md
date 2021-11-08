@@ -18,7 +18,7 @@ I have implemented the following enhancements
 ### Contributions to the UG
 I have contributed to these sections in the UG
 
-1. `view` section, where I have contributed most of the initial content, before my team mates helped to refine it to
+1. `view` section, where I have contributed most of the initial content, before my teammates helped to refine it to
     make it clearer for the users.
 2. `optimize` section, where I help write the explanations so that the user can have a clearer understanding of what the
    function does.
@@ -31,7 +31,7 @@ I have contributed to these sections in the DG
 ### Contributions to team-based tasks
 I contributed in these areas for team-based tasks
 
-1. Code enhancements: I ensured that the code that people were requesting to merge in were neat and I recommended multiple ways for the code to be neatened such as removing magic numbers/strings.
+1. Code enhancements: I ensured that the code that people were requesting to merge in were neat, and I recommended multiple ways for the code to be neatened such as removing magic numbers/strings.
 
 ### Review/Mentoring Contributions
 I contributed in review/mentoring in these areas
