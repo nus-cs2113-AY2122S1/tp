@@ -311,7 +311,7 @@ Adds a lecture item.
 
 Note: You cannot add a lecture to a module unless the module has been added previously.
 
-Format: `calendar lecture m/[MODULE_CODE] s/[DD-MM-YYYY](START_DATE) e/[DD-MM-YYYY](END_DATE)`
+Format: `calendar lecture m/[MODULE_CODE] s/[DD-MM-YYYY(START_DATE)] e/[DD-MM-YYYY(END_DATE)]`
 
 Example:
 ```
@@ -367,7 +367,7 @@ Expected outcome:
 #### 3.3.4 Deleting a task: `calendar delete task`
 Deletes a task item based on the index.
 
-Format: `calendar delete task TASK_INDEX`
+Format: `calendar delete task [TASK_INDEX]`
 
 Example:
 ```
@@ -450,7 +450,7 @@ Expected outcome:
 ```
         __________________________________________________
         Here is your list of lectures:
-        
+        1. CS2113T (from: 07-10-2021) (to: 31-10-2021)
         __________________________________________________
 ```
 

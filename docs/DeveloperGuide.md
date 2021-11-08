@@ -539,7 +539,8 @@ Given below is an example usage scenario and how the add entry mechanism behaves
    iii. Traverses through all notebooks in the array list using a for loop. \
    iv. If a notebook has name same as the notebook name in input got after parsing then `AddEntryCommand` calls
    `storage.collectionOfEntries.addEntry(NOTEBOOK_NAME, ENTRY_NAME)` to add the entry. \
-   v. `AddEntryCommand` calls `ui.printAddedEntryMessage(ENTRY_NAME)` to print a message that the entry has been added.
+   v. `AddEntryCommand` calls `ui.printAddedEntryMessage(ENTRY_NAME)` to print a message that the entry has been 
+   added. \
    vi. `AddEntryCommand` calls `StorageEntries.writeEntries(storage.collectionOfEntries, storage)` to write the new
    data to the storage file.
 
@@ -557,8 +558,8 @@ Given below is an example usage scenario and how the list mechanism behaves at e
 1. User inputs `journal list` \
    i. `Click` receives the input.\
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
-2. Creating `ListJournalCommand` object. \
-3. ListJournalCommand execution. 
+2. Creating `ListJournalCommand` object. 
+3. ListJournalCommand execution. \
    i. `ListJournalCommand` calls `storage.collectionOfNotebooks.getNotesArrayList()` which returns an array list of
    Notebook objects. \
    ii. `ListJournalCommand` calls `storage.collectionOfEntries.getEntriesArrayList()` which returns an array list of
@@ -1053,3 +1054,38 @@ Here are the negative test cases you can test:
     * Provide the current CAP which is not a real number
     * Provide the current CAP which is not in the range [0.0 - 5.5]
     * Provide the total MC taken which is not a positive integer
+* Calendar-related commands:
+   * Invalid display commands:
+      * `calendar display`
+      * `calendar display 22-2021` (note that this command will show a warning and then display calendar for current 
+        month)
+   * Invalid add task commands:
+      * `calendar todo n/abc`
+      * `calendar todo n/ d/10-10-2021`
+      * `calendar todo n/abc d/`
+      * `calendar todo n/abc d/22-22-2021`
+   * Invalid add lecture commands:
+      * `calendar lecture m/ s/10-10-2021 e/10-10-2021`
+      * `calendar lecture m/CS2113T s/10-10-2021 e/10-10-2021` (when CS2113T module has not been added yet)
+      * `calendar lecture m/CS2113T s/ e/10-10-2021`
+      * `calendar lecture m/CS2113T s/10-10-2021 e/`
+      * `calendar lecture m/CS2113T s/10-10-2021 e/09-10-2021` (end date before start date)
+  * Invalid delete task commands:
+     * `calendar delete`
+     * `calendar delete task`
+     * `calendar delete task -1`
+* Journal related commands:
+   * Invalid add notebook commands:
+      * `journal notebook`
+      * `journal notebook cs`
+      * `journal notebook n/`
+   * Invalid add entry commands:
+      * `journal entry`
+      * `journal entry n/`
+   * Invalid delete notebook commands:
+      * `journal delete_notebook 0`
+      * `journal delete_notebook`
+   * Invalid delete entry commands:
+      * `journal delete_entry n/ e/`
+   * Invalid tag commands:
+      * `journal tag`

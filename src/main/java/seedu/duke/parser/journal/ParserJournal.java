@@ -1,5 +1,6 @@
 package seedu.duke.parser.journal;
 
+import seedu.duke.exceptions.calendar.IncorrectNumberOfArgumentsException;
 import seedu.duke.exceptions.journal.DuplicateNoteException;
 import seedu.duke.exceptions.journal.EmptyDeleteNoteException;
 import seedu.duke.exceptions.journal.EmptyEntryArgumentsException;
@@ -23,6 +24,10 @@ import seedu.duke.storage.Storage;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static seedu.duke.constants.Messages.MODULE_DIVIDER;
+import static seedu.duke.constants.Messages.MODULE_DIVIDER_NOT_FOUND;
+
+//@@author SvethaMahadevan
 public class ParserJournal {
 
     /**
@@ -35,7 +40,7 @@ public class ParserJournal {
      * @throws EmptyNoteArgumentsException if only "journal notebook" is entered by user without arguments
      */
     public static String parseAddNoteCommand(String input, Storage storage) throws DuplicateNoteException,
-            EmptyNoteNameException, EmptyNoteArgumentsException {
+            EmptyNoteNameException, EmptyNoteArgumentsException, IncorrectNumberOfArgumentsException {
         if (isValidNotebookCommand(input)) {
             ArrayList<Notebook> notes = storage.collectionOfNotebooks.getNotesArrayList();
             String noteName = parseNoteName(input, notes);
@@ -52,7 +57,11 @@ public class ParserJournal {
      * @return notebook name if it is not duplicate
      * @throws DuplicateNoteException checks for duplicate note
      */
-    public static String parseNoteName(String input, ArrayList<Notebook> notes) throws DuplicateNoteException {
+    public static String parseNoteName(String input, ArrayList<Notebook> notes) 
+        throws DuplicateNoteException, IncorrectNumberOfArgumentsException {
+        if (!input.contains("n/")) {
+            throw new IncorrectNumberOfArgumentsException("n/ not found in command!");
+        }
         String noteNameDetails = input.trim().split("notebook")[1];
         String noteName = noteNameDetails.split("n/")[1].trim();
         for (Notebook note : notes) {
