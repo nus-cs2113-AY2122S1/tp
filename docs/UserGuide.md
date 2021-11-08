@@ -87,9 +87,9 @@ Adds your **todo** to your task list.
   - The priority of your task: `[--priority high|medium|low]`
   - How often your task is to repeat: `[--recur daily|weekly|monthly|yearly]`
 
-**Example**: `todo read book --priority low --doOn 20-10-2021 02:00 --recur daily`
+**Example**: `todo read book --doOn 20-10-2021 02:00 --recur daily`
 - Adds a todo task with the description '`read book`' to your task list.
-- Specifies that the priority of the task is '`low`'.
+- Specifies that the priority of the task is '`medium`' [(default priority)](#some-notes-when-adding-tasks).
 - Specifies that the task is to be done on '`20-10-2021 02:00`'.
 - Specifies that the task is to repeat '`daily`'.
 
@@ -97,9 +97,9 @@ Adds your **todo** to your task list.
 
 ```
 -------------------------------------------------------------------------
-[user]: todo read book --priority low --doOn 20-10-2021 02:00 --recur daily
+[user]: todo read book --doOn 20-10-2021 02:00 --recur daily
 || Task created!
-|| [T] read book <low> {daily} (doOn: 20-10-2021 02:00)
+|| [T] read book <medium> {daily} (doOn: 20-10-2021 02:00)
 -------------------------------------------------------------------------
 ```
 
@@ -117,7 +117,7 @@ Adds your **deadline** to your task list.
 - Adds a deadline task with the description '`CS2106 Lab 3`' to your task list.
 - Specifies that the priority of the task is '`high`'.
 - Specifies that the task is to be done on '`20-10-2021 02:00`'.
-- Specifies that the task will have no recurrence [(default recurrence)](some-notes-when-adding-tasks).
+- Specifies that the task will have no recurrence [(default recurrence)](#some-notes-when-adding-tasks).
 
 **Expected Outcome**:
 
@@ -144,7 +144,7 @@ Adds your **event** to your task list.
 - Adds an event task with the description '`Marquee Christmas Party`' to your task list.
 - Specifies that the priority of the task is '`high`'.
 - Specifie that the task starts on '`25-12-2020 22:00`' and ends on '`26-12-2020 04:00`'.
-- Specifies that the task will have no recurrence [(default recurrence)](some-notes-when-adding-tasks).
+- Specifies that the task will have no recurrence [(default recurrence)](#some-notes-when-adding-tasks).
 
 **Expected Outcome**:
 
