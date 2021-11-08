@@ -21,7 +21,7 @@ public class DeleteCommand extends Command {
     private int eventIndex;
     private int taskIndex;
     private int memberIndex;
-    private static boolean canDeleteMember = false;
+    private static boolean canDeleteMember;
     private static boolean isDeleteAll = false;
 
     public DeleteCommand() {
@@ -90,17 +90,19 @@ public class DeleteCommand extends Command {
     }
 
     private static String deleteMember(int index) {
+        canDeleteMember = false;
         Member memberToDelete =  Duke.memberRoster.get(index);
         String memberName = memberToDelete.getName();
 
         ArrayList<String> tasksContainingOnlyMemberToDelete = new ArrayList<>();
 
         for (int i = 0; i < Duke.eventCatalog.size(); i++) {
+            String eventName = Duke.eventCatalog.get(i).getTitle();
             for (Task task: Duke.eventCatalog.get(i).getTaskList()) {
                 int taskListSize = task.memberList.size();
                 for (Member member: task.getMemberList()) {
                     if (member.getName().equalsIgnoreCase(memberName) && taskListSize == 1) {
-                        String details = "Event #" + i + ": " + task.getTitle();
+                        String details = "Event: " + eventName + "; Task: " + task.getTitle();
                         tasksContainingOnlyMemberToDelete.add(details);
                     }
                 }

@@ -46,7 +46,7 @@ public abstract class DeleteParser extends Parser {
         } catch (NumberFormatException e) {
             System.out.println("Please enter a number for the item index!");
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Please select an index!");
+            System.out.println("Please select an event first!");
         } catch (DukeException | InvalidIndexException e) {
             System.out.println(e.getMessage());
         }
