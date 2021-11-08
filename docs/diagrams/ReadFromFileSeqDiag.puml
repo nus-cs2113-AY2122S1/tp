@@ -48,6 +48,7 @@ break JsonParseException
         else close
             <-- Storage: System.exit(1)
         end
+        Storage --> Storage
     deactivate Storage
 
 end
