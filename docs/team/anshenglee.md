@@ -4,10 +4,8 @@
 Stonks XD is an expense managing software that aims to simplify the process of keeping track of one's finances.
 The target users for this app are computing students that travels frequently and prefer logging their finances.
 Stonks XD allows you to:
-- Add income.
-- Add daily expenses and track them.
-- Set budgets for different expense categories.
-- Receive financial advices.
+- Add income, add daily expenses and track them.
+- Set budgets for different expense categories and receive financial advices.
 - Receive a snapshot of your spending in the form of bar graphs.
 - See your entries in different currencies.
 
@@ -53,13 +51,6 @@ Link to code contribution: [RepoSense Link](https://nus-cs2113-ay2122s1.github.i
   - What it does: Stores all possible commands the user can give.
   - Justification: This is done to fit the OOP paradigm and increase readability.
   - Highlights: Good understanding of OOP.
-  
-
-- **New Feature**: Added multiple exceptions.
-  - What it does: Used exceptions to handle unexpected cases.
-  - Justification: This is done to separate expected cases from unexpected cases.
-  - Highlights: Made exceptions such as `InvalidAmountException` and `InvalidIncomeDataFormatException`.
-    This Requires an understanding of exceptions.
 
 
 - **New Feature**: Included date mechanism to the program.
@@ -107,26 +98,26 @@ Link to code contribution: [RepoSense Link](https://nus-cs2113-ay2122s1.github.i
 - Fixed bugs throughout the project.
 - Fixed multiple bugs found during PED
   - **6** PED bugs were fixed. Here are the issue links:
-    - [#192](https://github.com/AY2122S1-CS2113T-T12-3/tp/issues/192)
-    - [#173](https://github.com/AY2122S1-CS2113T-T12-3/tp/issues/173)
-    - [#170](https://github.com/AY2122S1-CS2113T-T12-3/tp/issues/170)
-    - [#167](https://github.com/AY2122S1-CS2113T-T12-3/tp/issues/167)
-    - [#157](https://github.com/AY2122S1-CS2113T-T12-3/tp/issues/157)
-    - [#155](https://github.com/AY2122S1-CS2113T-T12-3/tp/issues/155)
+  [#192](https://github.com/AY2122S1-CS2113T-T12-3/tp/issues/192)
+  , [#173](https://github.com/AY2122S1-CS2113T-T12-3/tp/issues/173)
+  , [#170](https://github.com/AY2122S1-CS2113T-T12-3/tp/issues/170)
+  , [#167](https://github.com/AY2122S1-CS2113T-T12-3/tp/issues/167)
+  , [#157](https://github.com/AY2122S1-CS2113T-T12-3/tp/issues/157)
+  , [#155](https://github.com/AY2122S1-CS2113T-T12-3/tp/issues/155)
 
 #### Review/mentoring contributions during team project
 
 - Total PRs reviewed: 34
 - Links to PRs with non-trivial reviews:
-  - [#210](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/210)
-  - [#208](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/208)
-  - [#122](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/122)
-  - [#56](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/56)
-  - [#49](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/49)
-  - [#45](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/45)
-  - [#32](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/32)
-  - [#27](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/27)
-  - [#20](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/20)
+  [#210](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/210)
+  , [#208](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/208)
+  , [#122](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/122)
+  , [#56](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/56)
+  , [#49](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/49)
+  , [#45](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/45)
+  , [#32](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/32)
+  , [#27](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/27)
+  , [#20](https://github.com/AY2122S1-CS2113T-T12-3/tp/pull/20)
 
 - Other forms of help:
   - Helped other teammates through streaming channels like Zoom and Discord.
