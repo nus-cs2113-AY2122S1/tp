@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//@@author conradwee
+
 /**
  * Represents a list of trips in the existing database.
  * Each <code>Trip</code> will have a source and destination country.
