@@ -48,7 +48,7 @@ The other core components of Typist:
 
 The `Command` component implements the Factory Design Pattern to parse user commands.
 
-Here’s a (partial) class diagram of the `Command` component:
+Here’s a (partial) class diagram of the `Command` component:  
 
 ![](images/command.png)
 
@@ -90,18 +90,17 @@ Hence, The section below explains in greater detail how [Word Mode](#word-limit-
 
 ### Word Limit Game
 
-Sequence Diagram for Word Mode Game:
+Sequence Diagram for Word Mode Game:  
 
-![](diagrams/WordLimitMode.png)
+![](images/WordLimitMode.png)
 
 The Sequence Diagram above illustrates the working process of the `WordLimitGame` class.
 
 ### Time Limit Game
 
-The Sequence Diagram below illustrates the working process of the `TimeLimitGame` when the `.runGame` method is called:
-<img src="images/TimeGame_SequenceDiagram.png" alt="sequence"/>
-![](images/TimeGame_SequenceDiagram.png)
+The Sequence Diagram below illustrates the working process of the `TimeLimitGame` when the `.runGame` method is called:  
 
+<img src="images/TimeGame_SequenceDiagram.png" height="576"/>
 
 ## Implementation
 
@@ -228,5 +227,8 @@ It solves the lack of entertainment alternatives on the CLI.
 1. Opening a game with optional operands
    1. Test case: `game -time 0`  
       Expected: A warning message about error on limit input is shown. 
-      The game will still start as if no time limit is specified.
-   2. 
+      The game will still start as if no time limit is specified. 
+      User will be asked to "Enter how long you want the game to run: ".
+   2. Test case: `game -time 30 -sn`
+      Expected: A game will start running. Timer starts immediately together the first line of sentence to be typed is displayed.
+      
