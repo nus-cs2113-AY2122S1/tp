@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 
+import seedu.duke.exceptions.ClickException;
 import seedu.duke.food.FoodRecord;
 import seedu.duke.food.WhatIAteList;
 import seedu.duke.logger.ClickLogger;
@@ -73,11 +74,14 @@ public class StorageFood {
         } catch (FileNotFoundException e) {
             ClickLogger.getNewLogger().log(Level.WARNING, "file not found on load");
             File f = new File(filePath);
-            ClickLogger.getNewLogger().log(Level.CONFIG, "create new text file");
+            ClickLogger.getNewLogger().log(Level.INFO, "create new text file");
         } catch (NullPointerException e) {
-            System.out.println("Null Pointer Exception, try again!");
+            ClickLogger.getNewLogger().log(Level.WARNING,"Null Pointer Exception!");
         } catch (IOException e) {
-            System.out.println("Hey, Input/ Output exception, returning empty list...");
+            ClickLogger.getNewLogger().log(Level.WARNING,"Input/ Output exception, returning empty list...");
+        } catch (Exception e) {
+            ClickLogger.getNewLogger().log(Level.WARNING, "Data illegally modified. Creating new file");
+            return new WhatIAteList();  //empty list
         }
         return listToReturn;
     }
