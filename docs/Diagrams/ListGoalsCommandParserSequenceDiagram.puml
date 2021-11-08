@@ -2,20 +2,20 @@
 
 !include Style.puml
 
-participant ": ListGoalParser" as ListGoalParser PARSER_COLOUR
+participant ": ListGoalsParser" as ListGoalsParser PARSER_COLOUR
 participant ": ListGoalsCommand" as ListGoalsCommand COMMAND_COLOUR
 
 mainframe sd List Goal Parsing
 
--> ListGoalParser: parseListGoalsCommand(input: String)
-activate ListGoalParser
+-> ListGoalsParser: parseListGoalsCommand(input: String)
+activate ListGoalsParser
 create ListGoalsCommand
-ListGoalParser -> ListGoalsCommand: input
+ListGoalsParser -> ListGoalsCommand: input
 activate ListGoalsCommand
 
 return
 
-return new ListGoalCommand(input)
+return new ListGoalsCommand(input)
 
 
 

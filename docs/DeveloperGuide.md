@@ -36,19 +36,23 @@ the design considerations and implementation of features, and possibly expand on
     * [4.5.1. Implementation](#451-implementation)
     * [4.5.2. Design Considerations](#452-design-considerations)
   * [4.6. Updating a Goal](#46-updating-a-goal)
-    * [4.6.1. Implementation](#461-implentation)
+    * [4.6.1. Implementation](#461-implementation)
     * [4.6.2. Design Considerations](#462-design-considerations)
   * [4.7. Updating a Habit](#47-updating-a-habit)
-    * [4.7.1. Implementation](#471-implentation)
+    * [4.7.1. Implementation](#471-implementation)
     * [4.7.2. Design Considerations](#472-design-considerations)
   * [4.8. Deleting a Goal](#48-deleting-a-goal)
-    * [4.8.1. Implementation](#481-implentation)
+    * [4.8.1. Implementation](#481-implementation)
     * [4.8.2. Design Considerations](#482-design-considerations)
   * [4.9. Deleting a Habit](#49-deleting-a-habit)
-    * [4.9.1. Implementation](#491-implentation)
+    * [4.9.1. Implementation](#491-implementation)
     * [4.9.2. Design Considerations](#492-design-considerations)
   * [4.10. Getting Help](#410-getting-help)
+    * [4.10.1. Implementation](#4101-implementation)
+    * [4.10.2. Design Considerations](#4102-design-considerations)
   * [4.11. Storage of Information](#411-storage-of-information)
+    * [4.11.1. Implementation](#4111-implementation)
+    * [4.11.2. Design Considerations](#4112-design-considerations)
 * [Appendix A: Product Scope](#appendix-a-product-scope)
   * [Target user profile](#target-user-profile)
   * [Value proposition](#value-proposition)
@@ -357,26 +361,25 @@ This section describes the implementation of how the user can display a list of 
 
 #### 4.3.1. Implementation
 
-//TODO LIST HAS A PARSER
-
-1. The `ListGoalParser#parseListGoalCommand(input)` method is called. Since `list` does not require any parameters,
+1. The `ListGoalsParser#parseListGoalsCommand(input)` method is called. Since `list` does not require any parameters,
    the `input` (extra text) after `list` is there in case you typed anything extra afterwards, intentionally or not.
-2. The `ListGoalParser#parseListGoalCommand(input)` method then returns a `ListGoalsCommand(input)`.
+2. The `ListGoalsParser#parseListGoalsCommand(input)` method then returns a `ListGoalsCommand(input)`.
 
 ![](Diagram_Images/Implementation_Diagram_Images/ListGoalsCommandParserSequenceDiagram.png)
 
-![](Diagram_Images/Implementation_Diagram_Images/ListGoalsCommandSequenceDiagram.png)
-
-// Old text for reference
-
-1. Since the command for listing goals does not require any parameters, using `ParserManager` to detect the command word
-   `list` is sufficient to execute the command.
+1. The `ListGoalsCommand#runCommand(goalList, printManager, storage, gibberish)` method is called, which in turns calls the
+    `GoalList#listGoals(printManager, gibberish)` method.
 2. The `ListGoalsCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
    `GoalList#listGoals(printManager)` method.
-3. If the `GoalList` object is empty, the `GoalList#listGoals(printManager)` method returns an exception indicating that
-   there are no goals to be printed. 
-4. Otherwise, the method calls the `PrintManager#printGoalList(goalList, goalList.size()` method, which iterates through
-   all `Goal` objects and prints their respective description line by line in a table.
+3. If the `GoalList` object is empty, the `GoalList#listGoals(printManager)` method returns an exception to you, 
+   indicating that there are no goals to be printed.
+4. Otherwise, the method calls the `PrintManager#printGoalList(goalList, goalList.size(), gibberish)` method, 
+   which iterates through all `Goal` objects and prints their respective description line by line in a table.
+5. If you so happen to include extra text (delightfully called `gibberish`) after the `list` command, it will be
+   printed out before the table is generated. The `gibberish` is limited to 40 characters and below, any characters
+   after the limit will be trimmed.
+
+![](Diagram_Images/Implementation_Diagram_Images/ListGoalsCommandSequenceDiagram.png)
 
 #### 4.3.2. Design Considerations
 
@@ -509,6 +512,8 @@ This section describes the implementation of how the user can update a goal in t
 
 ### 4.7. Updating a Habit
 
+#### 4.7.1 Implementation
+
 A `UpdateHabitCommand` object is returned from the `UpdateParser` if the user input is successfully parsed as shown below.
 If the update command is not provided with a goal index and a habit index, or without any update flags it will throw an exception.
 
@@ -520,6 +525,7 @@ The `runCommand` method is then executed for the `UpdateHabitCommand` object as 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateHabitCommandSequenceDiagram.png)
 // TODO: Update the diagram to reflect changes to updateAttributes being an ArrayList<Boolean>
 
+#### 4.7.2. Design Considerations
 
 ### 4.8. Deleting a Goal
 
@@ -536,7 +542,11 @@ sequence diagram below is carried out:
 
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteGoalCommandSequenceDiagram.png)
 
+#### 4.8.2. Design Considerations
+
 ### 4.9. Deleting a Habit
+
+#### 4.9.1 Implementation
 
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteHabitCommandParserSequenceDiagram.png)
 
@@ -545,15 +555,23 @@ sequence diagram below is carried out:
 
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteHabitCommandSequenceDiagram.png)
 
+#### 4.9.2. Design Considerations
+
 ### 4.10. Getting Help
+
+#### 4.10.1 Implementation
 
 When the `runCommand` method is executed for the `HelpCommand` object, it instantiates a `PrintManager` object and
 calls the `printCommandList` method which prints out a pre-set message informing the user of all the inputs they
 can type to execute a certain command.
 
+#### 4.10.2. Design Considerations
+
 ### 4.11. Storage of Information
 
 The sequence diagram shows how the program imports data from storage file.
+
+#### 4.11.1. Implementation
 
 ![Import Sequence Diagram](Diagram_Images/Implementation_Diagram_Images/ImportSequenceDiagram.png)
 
@@ -570,6 +588,8 @@ The sequence diagram shows how the program exports data to storage file.
 
 `Storage` class can also export data to storage file with `Export` class.
 It takes in a `GoalList` object and converts the data into string to be stored in storage file.
+
+#### 4.11.2. Design Considerations
 
 ---------------------------------------------------------------------------------------------------------
 
