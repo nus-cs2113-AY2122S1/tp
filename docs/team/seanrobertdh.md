@@ -46,7 +46,7 @@ Given below are the contributions I have made to this project.
            class names to loggers. That way, the whole process of setting up a fileHandler, consoleHandler and log class is done automatically and
            the user doesn't have to worry about it. Therefore, any issues that can arise from it. e.g. specifying the wrong class when creating a logger are no longer an issue.
     - **Feature 7:** Created `PriorityEnum` and `RecurrenceEnum` for storing of priorities and recurrences.
-        - **Justification:** Forces the program to be unable to store an invalid recurrence or priority.
+        - **Justification:** Forces the program to be unable to store an invalid recurrence or priority.  
         - **Highlights:** coded `getNextRecurredDate()` which recurs the date based on the `recurrenceEnum` until it's passed the current time and returns it.
 ---
 
