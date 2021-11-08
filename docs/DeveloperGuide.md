@@ -82,6 +82,8 @@ This application adapted the Developer Guide and User Guide from:
 
 ---------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## 1. Introduction
 
 ### 1.1. Overview of Ha(ppy)Bit
@@ -111,6 +113,8 @@ A habit can have one or more intervals.
 
 > 💡 **Pro-Tip!** additional information that may make your tracking journey easier
 
+<div style="page-break-after: always;"></div>
+
 ## 2. Setting Up
 The following section covers basic setup instructions to get you up and running on the HappyBit development environment.
 
@@ -138,6 +142,8 @@ The following section covers basic setup instructions to get you up and running 
 7. Locate the `main` method and click the green triangle on the left of it
 8. If the code builds and runs with no issues, you are good.
 
+<div style="page-break-after: always;"></div>
+
 ## 3. Design
 
 ### 3.1. Overall Architecture
@@ -159,6 +165,8 @@ command `remove g/1` to remove the goal at index 1.
 ![Architecture Sequence Diagram](Diagram_Images/Design_Diagram_Images/ArchitectureSequenceDiagram.png)
 
 We will now explain the 5 individual components, beginning with the UI Component.
+
+<div style="page-break-after: always;"></div>
 
 ### 3.2. UI Component
 
@@ -188,6 +196,8 @@ each sub-component.
     the `help` command to view a summary of formats of relevant commands in a tabular form.
 3. `PrintManager` depends on `Goal` and `Habit` to print goal-related and habit-related information respectively.
 
+<div style="page-break-after: always;"></div>
+
 ### 3.3. Parser Component
 
 Our second component is the Parser component, responsible for parsing and checking the logic of the user input. 
@@ -211,6 +221,8 @@ The diagram below illustrates the high level representation of the component.
 The sequence diagram below illustrates the flow of logic when a generic user input is entered into the application.
 
 ![](Diagram_Images/Design_Diagram_Images/MainParserSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 ### 3.4. Command Component
 
@@ -239,6 +251,8 @@ below illustrates the high level representation of the component.
    * `ReturnCommand` - Returns the user to start state of the application (Refer to Section 3.2. for _start state_).
    * `ExitCommand` - Saves all changes and exits the application.
 
+<div style="page-break-after: always;"></div>
+
 ### 3.5. Goal Component
 
 The Goal component is responsible for maintaining and updating all goals set by the user. This includes running logic to
@@ -255,6 +269,8 @@ level representation of the component.
 4. `Habit` may call `HabitDateManager` to handle date related logic.
 5. 1 or more `Interval` are associated with a `Habit`.
 
+<div style="page-break-after: always;"></div>
+
 ### 3.6. Storage Component
 
 The Storage component allows data to be read from and saved to a storage file. The diagram below illustrates the high
@@ -268,6 +284,8 @@ level representation of the component and the interactions between the other com
 2. `Storage` calls `Import` when reading data from the external storage file to the `GoalList`.
 3. `Import` calls `ImportParser` to decode the data extracted from the external storage file.
 4. `ImportParser` calls `Goal`, `Habit`, and `Interval` in that order to load data into the `GoalList`.
+
+<div style="page-break-after: always;"></div>
 
 ## 4. Implementation
 
