@@ -120,64 +120,65 @@ All fields are compulsory. Note the following:
 - `[location]` is the location of the trip. Any string can be entered.
 - `[date]` must follow the format of dd-mm-yyyy.
 - `[foriegn-currency-ISO-code]`: Currently there are 30 currencies supported, the currencies' names and ISO codes are listed below.
-  - The program is still runnable with unknown currencies, however the symbol and decimal place will not be accurate.
+  - Some currencies will not have symbols as some terminals may not be able to support displaying of certain symbols.
+  - The program is still runnable with unknown currencies, however the symbol and decimal place may not be accurate.
 - `[exchange-rate]` should be how much 1 of your home currency costs in foreign currency.
   - Example: SGD $1 is equivalent to USD $0.74, hence the `exchange-rate` will be 0.74.
-  - Note that the default home currency is SGD.
+  - Note that the default home currency is SGD. To change the home currency, please refer to [Edit Trip](#--edit-trip).
 - `persons-in-trip` should be separated with commas.
 
 #### Compatible Currencies
 
-Currency Name | ISO Code
------------- | -----------
-United States Dollar | USD
-Singapore Dollar | SGD
-Australian Dollar | AUD
-Canadian Dollar | CAD
-New Zealand Dollar | NZD
-Euro | EUR
-Pound Sterling| GBP
-Malaysian Ringgit | MYR
-Hong Kong Dollar | HKD
-Thai Baht | THB
-Russian Ruble | RUB
-South African Rand | ZAR
-Turkish Lira | TRY
-Brazilian Real | BRL
-Danish Krone | DKK
-Polish Zloty | PLN
-Israeli New Shekel | ILS
-Saudi Riyal | SAR
-Chinese Yuan | CNY
-Japanese Yen | JPY
-South Korean Won | KRW
-Indonesian Rupiah | IDR
-Indian Rupee | INR
-Swiss Franc | CHF
-Swedish Krona | SEK
-Norwegian Krone | NOK
-Mexican Peso | MXN
-New Taiwan Dollar | TWD
-Hungarian Forint | HUF
-Czech Koruna | CZK
-Chilean Peso | CLP
-Philippine Peso | PHP
-United Arab Emirates Dirham | AED
-Colombian Peso | COP
-Romanian Leu | RON
+Currency Name | ISO Code | Is Symbol available?
+--- | --- | --- |
+United States Dollar | USD | Yes
+Singapore Dollar | SGD | Yes
+Australian Dollar | AUD | Yes
+Canadian Dollar | CAD | Yes
+New Zealand Dollar | NZD | Yes
+Euro | EUR | No
+Pound Sterling| GBP | No
+Malaysian Ringgit | MYR | Yes
+Hong Kong Dollar | HKD | Yes
+Thai Baht | THB | No
+Russian Ruble | RUB | No
+South African Rand | ZAR | Yes
+Turkish Lira | TRY |  No
+Brazilian Real | BRL | Yes
+Danish Krone | DKK | Yes
+Polish Zloty | PLN | No
+Israeli New Shekel | ILS | No
+Saudi Riyal | SAR | Yes
+Chinese Yuan | CNY | No
+Japanese Yen | JPY | No
+South Korean Won | KRW | No
+Indonesian Rupiah | IDR | Yes
+Indian Rupee | INR | Yes
+Swiss Franc | CHF | Yes
+Swedish Krona | SEK | Yes
+Norwegian Krone | NOK | Yes
+Mexican Peso | MXN | Yes
+New Taiwan Dollar | TWD | Yes
+Hungarian Forint | HUF | Yes
+Czech Koruna | CZK | Yes
+Chilean Peso | CLP | Yes
+Philippine Peso | PHP | No
+United Arab Emirates Dirham | AED | No
+Colombian Peso | COP | Yes
+Romanian Leu | RON | Yes
 
 For example,
 
 Input:
 
 ```
-create /America /02-02-2021 /USD /0.74 /Ben, Jerry, Tom
+create /United States of America /02-02-2021 /USD /0.74 /Ben, Jerry, Tom
 ```
 
 If successful, the output will be as follows:
 
 ```
-Your trip to America on 02 Feb 2021 has been successfully added!
+Your trip to United States of America on 02 Feb 2021 has been successfully added!
 ```
 
 <br />
@@ -201,7 +202,7 @@ open 1
 If successful, the output will be as follows:
 ```
 You have opened the following trip:
-America | 02 Feb 2021
+United States of America | 02 Feb 2021
 ```
 
 You can also run the `open` command while a Trip is already open. This will close the currently-opened
@@ -213,9 +214,10 @@ Trip, and open the specified Trip in the most recent command.
 
 #### - Close Trip
 
-Closes the current Trip you are in. This allows the user to list all trips or to delete a Trip.
+Closes the current Trip you are in. This allows you to interact with trips (e.g. adding a new trip,
+list all trips or to delete a trip).
 
-This command can only be used if a Trip is open.
+This command can only be used if a Trip is already open.
 
 Input syntax:
 ```
@@ -236,10 +238,13 @@ America | 02 Feb 2021
 <br />
 
 #### - List Trips
-Lists all the Trips that you have created. 
+
+Lists all the Trips that you have created along with their index numbers. 
+
 This command can only be used if no Trip is open.
 
-Note that if a Trip is open, this command will list down your expenses instead. 
+Note that if a Trip is open, this command will list down your expenses instead. See [List Expenses](#--list-expenses)
+for more information on listing expenses.
 
 Input syntax:
 ```
@@ -260,8 +265,10 @@ List of Trips:
 <br />
 
 #### - View People in Trip
+
 Lists the persons involved in a particular Trip. 
-This command can only be used if you have opened a Trip.
+
+This command can only be used if you have a Trip opened.
 
 Input syntax:
 ```
@@ -292,7 +299,7 @@ Input syntax:
 delete [trip-number]
 ```
 - `[trip-number]` is the index of the Trip you wish to delete, which can be found by using `list` command while no Trip is open.
-- `delete last` to delete last trip
+- `delete last` to delete the trip you last interacted with.
 
 
 For example,
@@ -310,17 +317,22 @@ Your trip to America on 02 Feb 2021 has been successfully removed.
 
 #### - Edit Trip
 
-Edit attributes of a Trip
+Edit the attributes of a Trip
 
 Input syntax:
 ```
-edit [trip num] [attribute] [new value]
+edit [trip-num] -[attribute] [new-value]
 ```
 All fields are compulsory. Note the following:
-- list of attributes: -location, -date, -exchange rate, -forcur, -homecur
-- The hyphen preceding an attribute is part of the syntax.
+- The following are the attributes that can be edited along with their corresponding syntax: 
+  - Location: `-location`
+  - Date: `-date`
+  - Exchange Rate: `-exchangerate`
+  - Foreign Currency ISO Code: `-forcur`
+  - Home Currency ISO Code: `-homecur`
+- The hyphen preceding `[attribute]` is part of the syntax.
 - `[trip-number]` is the index of the Trip you wish to edit, which can be found by using `list` command while no Trip is open.
-- `last` can be used for `[trip num]`.
+- `last` can be used for `[trip num]`. This will modify the last trip you interacted with.
 
 
 For example,
@@ -338,9 +350,9 @@ The location of your trip has been changed from tokyo to japan.
 
 ### Expenses
 #### - Create Expense
-Creates a new expense entry for the current Trip. 
+Creates a new expense entry for the current opened Trip. 
 
-This command can only be used if you have opened a Trip.
+This command can only be used if you have a Trip opened.
 
 Input syntax:
 ````  
@@ -387,6 +399,7 @@ There is USD $30.00 left to be assigned. How much did Tom spend?:
 ````
 - The program will automatically cycle through every person involved in the expense.
 - Entering `equal` when the program asks for the amount spent for the first person will cause the program to evenly split the expense among all the people involved in it.
+  - Note: If the amount is not perfectly divisible by the number of people, the payer will bear the surplus or deficit.
 
 If there is no amount remaining but there are still people left to be assigned, PayMeBack will prompt the user if they would like to assign 0 to the rest of the people involved in the expense:
 ````
@@ -475,7 +488,7 @@ If successful, the output will be as follows:
 <br />
 
 #### - Filter Expenses By Attribute
-Allows the user to view specific expenses based on an attribute of their choice.
+Allows the user to view specific expenses and index numbers based on an attribute of their choice.
 
 This command can only be used if a trip is open, and there is at least 1 expense.
 
@@ -538,29 +551,21 @@ delete 1
 ````
 If successful, the output will be as follows:
 ```
-Your expense of SGD 50.00 has been successfully removed.
+Your expense of SGD $50.00 has been successfully removed.
 ```
 <br />
 
 ### Settling Expenses
 There are 2 commands that you can run to get a list of who pays who (WPW) to 
 settle expenses. `amount` displays the WPW for 1 person, while `optimize` displays the WPW for everyone in 
-the trip. We recommend you use `optimize` most of the time.
+the trip.
 
 <br />
 
 #### Amount
-Shows the transactions that the input person have to make to ensure that everyone is being paid back. User needs to have opened a trip and have expenses to use the command. Note that the WPW list is not optimized, and you will encounter cases where the WPW list will list:
-
-```
-Adam needs to pay USD 10.00 (SGD 10.00) to Eve
-Eve needs to pay USD 3.00 (SGD 3.00) to Adam
-```
-instead of
-```
-Adam needs to pay USD 7.00 (SGD 7.00) to Eve
-```
-<br />
+Shows the transactions that a person will have to engage in so that the person will not owe or be owed any money.
+User needs to have a trip opened and have expenses added to use this command. Note that this list is not optimized, 
+if you would like to settle all payments, please use `optimize` instead.
 
 Input syntax:
 ```
@@ -578,10 +583,10 @@ amount Ben
 If successful, the output will be as follows:
 
 ```
-Ben spent SGD $3050.50 (SGD $3050.50) on the trip so far
-Ben owes SGD $3000.00 (SGD $3000.00) to Jerry
+Ben spent USD $350.50 (SGD $473.65) on the trip so far
+Ben owes USD $30.00 (SGD $40.54) to Jerry
 Ben does not owe anything to Dick
-Ben needs to pay USD 7.00 (SGD 7.00) to Eve
+Ben owes USD $7.00 (SGD $9.46) to Eve
 ```
 <br /><br />
 #### Optimize Transactions
@@ -606,8 +611,8 @@ If successful, the output will be as follows:
 
 ```
 Here is the optimized payment transactions:
-yuzhao needs to pay USD 8.00 (SGD 8.00) to yikai
-yuzhao needs to pay USD 13.00 (SGD 13.00) to qian
+yuzhao needs to pay USD $8.00 (SGD $8.00) to yikai
+yuzhao needs to pay USD $13.00 (SGD $13.00) to qian
 ```
 
 If no transactions are required, the user will see this message:
@@ -627,7 +632,7 @@ The input syntax is as follows:
 ````
 summary [name]
 ````
-- [name] is an optional argument.
+- `[name]` is an optional argument.
 - Note that entering `summary` without a name will print the summary of everybody in the opened trip.
 
 For example,
@@ -657,6 +662,7 @@ shopping: USD $30.00 (SGD $40.54)
 ```
 
 ### Help
+
 Shows a quick help message, depending on which stage the user is at.
 
 Input syntax:
@@ -698,20 +704,35 @@ You are inside a trip. Trip specific commands:
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: To transfer your data to another device, simply copy over the "trips.json" file in the same directory as this app to the device you wish to use.
+**A**: To transfer your data to another device, simply copy over the "trips.json" file in the same directory as this
+app to the device you wish to use. Ensure that the save file is stored in the same directory as the PayMeBack
+app on your destination device before starting the program.
 
-**Q**: There was an error loading my saved file.
+**Q**: There was an error loading my save file. What should I do?
 
-**A**: Ensure that your saved file is in the same directory as the jar file, and that you did not modify the contents of the json file directly. Delete all json files, and run the app again, and re-enter your data.
+**A**: It is likely that your save file is corrupted. If you have modified the save file directly using another
+application, you should try to undo those changes. Also ensure that your save file is in the same directory as 
+the jar file.
+
+If the file cannot be recovered, we recommend that you run the app again. When prompted to overwrite the
+corrupted save file, enter `y`. You may then proceed to re-enter your data.
+
+**Q**: I made a mistake while entering a command. How can I exit the process and start again?
+
+**A**: If the app is asking you to correct an erroneous input, but you wish to cancel the process, 
+type `-cancel`. This will return you to the preceding state of the program, allowing you to enter 
+any command.
 
 ## Command Summary
 Hyphen before square brackets (eg `summary -[name]`) denotes optional arguments
 
 ### General commands
+
 Action | Command syntax
 ---|---
 Display help|`help`
 Quit|`quit`
+Cancel operation ([see FAQ](#FAQ)) | `-cancel`
 
 <br />
 
@@ -725,7 +746,7 @@ Close trip | `close` | `close`
 List trips | `list` when no trip is opened| `list`
 List persons involved in a trip | `people` | `people`
 Delete trip | `delete [trip-number]`|`delete 1`
-Edit trip | `edit [trip num] [attribute] [new value]` <br /><br /> attributes: -location, -date, -exchange rate, -forcur, -homecur  | `edit 1 -location Afghanistan`
+Edit trip | `edit [trip num] [attribute] [new value]` <br /><br /> attributes: -location, -date, -exchangerate, -forcur, -homecur  | `edit 1 -location Afghanistan`
 
 <br />
 

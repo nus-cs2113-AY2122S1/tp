@@ -5,6 +5,7 @@ import seedu.duke.exceptions.InvalidAmountException;
 import seedu.duke.Person;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
+import seedu.duke.parser.Parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -27,27 +28,28 @@ public class Expense implements ExpenseSplitter {
     /**
      * Legacy Constructor for {@link Expense} - does not include parsing.
      *
-     * @param amountSpent   (placeholder)
-     * @param category      (placeholder)
-     * @param listOfPersons (placeholder)
-     * @param description   (placeholder)
+     * @param amountSpent (placeholder)
+     * @param category    (placeholder)
+     * @param personsList (placeholder)
+     * @param description (placeholder)
      */
     //@@author lixiyuan416
-    public Expense(Double amountSpent, String category, ArrayList<Person> listOfPersons,
-                   String description) {
+    public Expense(double amountSpent, String description, ArrayList<Person> personsList,
+                   String category, LocalDate date, Person payer, HashMap<String, Double> amountSplit) {
         this.amountSpent = amountSpent;
         this.description = description;
         this.category = category;
-        this.personsList = listOfPersons;
+        this.date = date;
+        this.payer = payer;
+        this.amountSplit = amountSplit;
+        this.personsList = personsList;
     }
-    //@@author
 
     /**
      * Constructor for {@link Expense} class - contains parsing and amount assignment.
      *
      * @param inputDescription String of user input to be parsed and assigned to expense attributes
      */
-
     public Expense(String inputDescription) throws ForceCancelException {
         String[] expenseInfo = inputDescription.split(" ", 3);
         setAmountSpent(expenseInfo[0]);
@@ -63,8 +65,10 @@ public class Expense implements ExpenseSplitter {
     }
 
     //@@author joshualeeky
+
     /**
      * Extracts the description of the expense from the user input.
+     *
      * @param userInput the string that the user enters.
      * @return description of the expense.
      */
@@ -75,6 +79,7 @@ public class Expense implements ExpenseSplitter {
     /**
      * Obtains a list of Person objects from a string of names separated by a comma. Also checks if there are repeated
      * names that were entered in the expense.
+     *
      * @param userInput the string that the user enters.
      * @return ArrayList containing the Person objects included in the expense.
      */
@@ -83,7 +88,6 @@ public class Expense implements ExpenseSplitter {
         ArrayList<String> listOfPeopleNamesUpperCase = new ArrayList<>();
         ArrayList<Person> validListOfPeople = new ArrayList<>();
         ArrayList<String> invalidListOfPeople = new ArrayList<>();
-        Storage.getLogger().log(Level.INFO, "Checking if names are valid");
         if (listOfPeople.length == 1 && listOfPeople[0].strip().equalsIgnoreCase("-all")) {
             return Storage.getOpenTrip().getListOfPersons();
         }
@@ -116,24 +120,9 @@ public class Expense implements ExpenseSplitter {
         return validListOfPeople;
     }
 
-    public void setPayer(Person person) {
-        this.payer = person;
-    }
-
-    public Person getPayer() {
-        return payer;
-    }
-
-
-    public void setAmountSplit(Person person, double amount) {
-        amountSplit.put(person.getName(), amount);
-    }
-
-    public HashMap<String, Double> getAmountSplit() {
-        return amountSplit;
-    }
 
     //@@author lixiyuan416
+
     /**
      * Prompts user for date.
      *
@@ -142,14 +131,14 @@ public class Expense implements ExpenseSplitter {
     public LocalDate promptDate() throws ForceCancelException {
         Ui.expensePromptDate();
         String inputDate = Ui.receiveUserInput();
-        while (!isDateValid(inputDate)) {
-            inputDate = Ui.receiveUserInput();
-        }
         if (inputDate.isEmpty()) {
             return LocalDate.now();
-        } else {
-            return LocalDate.parse(inputDate, inputPattern);
         }
+        while (!isDateValid(inputDate)) {
+            inputDate = Ui.receiveUserInput();
+            Storage.getLogger().log(Level.INFO, "Invalid date format entered");
+        }
+        return LocalDate.parse(inputDate, inputPattern);
     }
 
     private Boolean isDateValid(String date) {
@@ -158,18 +147,19 @@ public class Expense implements ExpenseSplitter {
         }
         try {
             LocalDate.parse(date, inputPattern);
+            //Additional check for weird dates like feb 31
+            if (!Parser.doesDateReallyExist(date)) {
+                Ui.expenseDateInvalid();
+                return false;
+            }
             return true;
         } catch (DateTimeParseException e) {
-            Storage.getLogger().log(Level.INFO, "Invalid date format entered");
             Ui.expenseDateInvalid();
             return false;
         }
     }
 
-    //@@author
 
-
-    //expense details
     @Override
     public String toString() {
         return ("\t" + this.getDescription()
@@ -186,6 +176,7 @@ public class Expense implements ExpenseSplitter {
                 + "\t" + "Category: " + this.category)
                 + System.lineSeparator();
     }
+    //@@author
 
     public String getPersonExpense() {
         StringBuilder returnString = new StringBuilder();
@@ -201,20 +192,6 @@ public class Expense implements ExpenseSplitter {
             returnString.append(System.lineSeparator());
         }
         return returnString.toString();
-    }
-
-    //Getters and setters
-
-    public ArrayList<Person> getPersonsList() {
-        return personsList;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public double getAmountSpent() {
-        return amountSpent;
     }
 
     //@@author itsleeqian
@@ -246,12 +223,42 @@ public class Expense implements ExpenseSplitter {
         this.category = category;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
     public LocalDate getDate() {
         return date;
     }
 
     public String getStringDate() {
         return date.format(outputPattern);
+    }
+
+    public ArrayList<Person> getPersonsList() {
+        return personsList;
+    }
+
+    public double getAmountSpent() {
+        return amountSpent;
+    }
+
+
+    public void setPayer(Person person) {
+        this.payer = person;
+    }
+
+    public Person getPayer() {
+        return payer;
+    }
+
+
+    public void setAmountSplit(Person person, double amount) {
+        amountSplit.put(person.getName(), amount);
+    }
+
+    public HashMap<String, Double> getAmountSplit() {
+        return amountSplit;
     }
 
 }

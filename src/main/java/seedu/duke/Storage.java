@@ -84,6 +84,7 @@ public class Storage {
 
     //@@author
 
+    //@@author yeezao
     /**
      * Serializes the {@link Storage#listOfTrips} into a JSON String using {@link Gson}
      * to be written to the save file.
@@ -92,7 +93,7 @@ public class Storage {
      *
      * @see FileStorage#writeToFile(String, String)
      */
-    protected static void writeToFile(String filePath) throws IOException {
+    public static void writeToFile(String filePath) throws IOException {
         String jsonString = FileStorage.getGson().toJson(listOfTrips);
         FileStorage.writeToFile(jsonString, filePath);
     }
@@ -171,11 +172,13 @@ public class Storage {
     public static void setScanner(Scanner scanner) {
         Storage.scanner = scanner;
     }
+    //@@author
 
     public static ArrayList<String> getValidCommands() {
         return validCommands;
     }
 
+    //@@author yeezao
     /**
      * Gets the currently open trip. If no trip is open, asks the user to enter a trip index to open that trip.
      *
@@ -196,7 +199,7 @@ public class Storage {
      *
      * @see Storage#getOpenTrip()
      */
-    public static void promptUserForValidTrip() throws ForceCancelException {
+    private static void promptUserForValidTrip() throws ForceCancelException {
         try {
             System.out.print("Please enter the trip you would like to open: ");
             String input = Ui.receiveUserInput();

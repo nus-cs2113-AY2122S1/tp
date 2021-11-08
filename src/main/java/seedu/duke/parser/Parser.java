@@ -3,7 +3,6 @@ package seedu.duke.parser;
 import seedu.duke.exceptions.ForceCancelException;
 import seedu.duke.Storage;
 import seedu.duke.Ui;
-import seedu.duke.trip.Trip;
 
 import java.time.LocalDate;
 import java.util.logging.Level;
@@ -32,6 +31,7 @@ public class Parser extends CommandHandler {
         if (rawInput.length == SPLIT_COMMAND_FROM_INFO_LENGTH) {
             inputParams = rawInput[INPUT_INFO];
         }
+
         try {
             if (inputCommand.equals(QUIT_COMMAND)) {
                 Ui.goodBye();
@@ -139,15 +139,21 @@ public class Parser extends CommandHandler {
     }
 
     //@@author lixiyuan416
+
+    /**
+     * Helper function to get user to confirm y/n.
+     *
+     * @return true if user agrees, false otherwise
+     */
     public static boolean getUserToConfirm() {
         boolean isValidInput = false;
         boolean doesUserAgree = false;
         while (!isValidInput) {
             String userReply = Storage.getScanner().nextLine();
-            if (userReply.equalsIgnoreCase("y")) {
+            if (userReply.strip().equalsIgnoreCase("y")) {
                 isValidInput = true;
                 doesUserAgree = true;
-            } else if (userReply.equalsIgnoreCase("n")) {
+            } else if (userReply.strip().equalsIgnoreCase("n")) {
                 isValidInput = true;
             } else {
                 System.out.println("Enter y/n");
@@ -161,6 +167,7 @@ public class Parser extends CommandHandler {
         return Storage.getValidCommands().contains(inputCommand);
     }
 
+    //@@author yeezao
     public static boolean doesUserWantToForceCancel(String userInput) {
         return userInput.equals("-cancel");
     }
@@ -169,7 +176,6 @@ public class Parser extends CommandHandler {
     private static final int MONTHMM = 1;
     private static final int YEARYYYY = 2;
 
-    //@@author yeezao
     /**
      * Checks if the user-entered date is a date that actually exists.
      *

@@ -13,11 +13,20 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-interface FilterFinder {
+public interface FilterFinder {
 
     DateTimeFormatter inputPattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     //@@author lixiyuan416
+
+    /**
+     * Filters expenses inside a trip by date.
+     * See parent method {@link Trip#getFilteredExpenses(String, String)}
+     *
+     * @param listOfCurrentExpenses expense list of a trip
+     * @param expenseAttribute date to search for
+     * @throws ForceCancelException when user inputs command to cancel the view filter operation
+     */
     static void findMatchingDateExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute)
             throws ForceCancelException {
         boolean areThereExpenses = false;
@@ -111,6 +120,14 @@ interface FilterFinder {
     //@@author
 
     //@@author lixiyuan416
+
+    /**
+     * Filters expenses inside a trip by person.
+     * See parent method {@link Trip#getFilteredExpenses(String, String)}
+     *
+     * @param listOfCurrentExpenses list of expenses of a trip
+     * @param personToSearchFor name of person
+     */
     static void findMatchingPersonExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                    String personToSearchFor) {
         boolean areThereExpenses = false;
@@ -139,9 +156,8 @@ interface FilterFinder {
             if (Parser.doesDateReallyExist(inputDate)) {
                 LocalDate.parse(inputDate, inputPattern);
                 return true;
-            } else {
-                return false;
             }
+            return false;
         } catch (DateTimeParseException e) {
             Storage.getLogger().log(Level.INFO, "Invalid date format entered");
             Ui.viewFilterDateFormatInvalid();

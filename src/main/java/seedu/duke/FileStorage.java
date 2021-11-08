@@ -1,3 +1,5 @@
+//@@author yeezao
+
 package seedu.duke;
 
 import com.google.gson.Gson;
@@ -57,7 +59,7 @@ public class FileStorage {
      * @param filePath path location to create the file at
      * @throws IOException if file creation fails (thrown from {@link FileWriter}).
      */
-    protected static void newBlankFile(String filePath) throws IOException {
+    public static void newBlankFile(String filePath) throws IOException {
         FileWriter fileWriter = initializeFileWriter(filePath);
         fileWriter.close();
     }
@@ -72,7 +74,7 @@ public class FileStorage {
      * @see FileStorage#newBlankFile(String)
      * @see FileStorage#writeToFile(String, String)
      */
-    public static FileWriter initializeFileWriter(String filePath) throws IOException {
+    private static FileWriter initializeFileWriter(String filePath) throws IOException {
         return new FileWriter(filePath);
     }
 
