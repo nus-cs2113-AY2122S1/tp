@@ -1,6 +1,7 @@
 package seedu.command;
 
 
+import seedu.exceptions.UniModsException;
 import seedu.unimods.UniMods;
 import seedu.exceptions.FetchException;
 import seedu.module.GradedModule;
@@ -22,7 +23,7 @@ public class StoreResultsCommand extends Command {
     private final String moduleCode;
     private final String grade;
     private final String gradeType;
-    private final boolean isErrorThrown;
+    private boolean isErrorThrown;
     private static final Logger logger = Logger.getLogger("");
 
     public StoreResultsCommand(String grade, String moduleCode, String gradeType, boolean isErrorThrown) {
@@ -36,20 +37,32 @@ public class StoreResultsCommand extends Command {
         Module module;
         try {
             if (isErrorThrown) {
+                isErrorThrown = false;
                 return;
             }
             module = NusMods.fetchModOnline(moduleCode);
             Profile currentProfile = UniMods.getProfileInUse();
+
             if (gradeType.equals(TextUi.GRADED)) {
                 GradedModule grModule = new GradedModule(module, grade);
                 currentProfile.getRecord().addModuleToRecord(grModule);
-            } else {
+            } else if (gradeType.equals(TextUi.UNGRADED)) {
+                String suOption = module.isSuPossible();
+                boolean isSUable = (suOption.equals("No") || suOption.equals("No data")) ? false : true;
+                if ((grade.equals("S") || grade.equals("U")) && !isSUable) {
+                    throw new UniModsException(TextUi.ERROR_CANNOT_SU);
+                }
                 UngradedModule ugModule = new UngradedModule(module, grade);
                 currentProfile.getRecord().addModuleToRecord(ugModule);
+            } else {
+                System.out.print("INVALID GRADE");
             }
         } catch (FetchException e) {
             System.out.println(TextUi.ERROR_INVALID_MODULE_CODE);
             logger.log(Level.WARNING, "Attempt to store a module grade has failed");
+        } catch (UniModsException e) {
+            System.out.println(e.getMessage());
+            logger.log(Level.WARNING, e.getMessage());
         }
     }
 }

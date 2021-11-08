@@ -19,7 +19,10 @@ import seedu.command.TimetableCommand;
 import seedu.command.TranscriptCommand;
 import seedu.command.UpdateCommand;
 import seedu.command.flags.AddFlag;
+import seedu.command.flags.ClearFlag;
 import seedu.command.flags.SearchFlags;
+import seedu.exceptions.FetchException;
+import seedu.online.NusMods;
 import seedu.unimods.UniMods;
 import seedu.exceptions.UniModsException;
 import seedu.module.Module;
@@ -44,7 +47,7 @@ public class CommandParser {
     /**
      * Parses user input into different Command objects depending on the input.
      *
-     * @param text User input.
+     * @param text      User input.
      * @param timetable Timetable object for timetable commands.
      * @return command A Command object which class depends on the input.
      */
@@ -114,7 +117,14 @@ public class CommandParser {
      * @return ClearCommand with the timetable to be cleared.
      */
     public Command parseClearCommand(Timetable timetable) {
-        return new ClearCommand(timetable);
+        ClearFlag clearFlag = ClearFlag.INVALID;
+        try {
+            clearFlag = TextUi.getClearFlag();
+        } catch (UniModsException e) {
+            e.printMessage();
+        }
+        assert clearFlag != ClearFlag.INVALID;
+        return new ClearCommand(timetable, clearFlag);
     }
 
     /**
@@ -131,10 +141,11 @@ public class CommandParser {
             grade = split[0].trim().toUpperCase();
             gradeType = Module.checkGradeType(grade);
             moduleCode = split[1].trim().toUpperCase();
+            return new StoreResultsCommand(grade, moduleCode, gradeType, isErrorThrown);
         } catch (UniModsException e) {
             System.out.println(e.getMessage());
+            return new InvalidCommand();
         }
-        return new StoreResultsCommand(grade, moduleCode, gradeType, isErrorThrown);
     }
 
 
@@ -217,7 +228,6 @@ public class CommandParser {
             e.printMessage();
         }
         assert flag != AddFlag.INVALID;
-
         return new AddCommand(timetable, flag);
     }
 }

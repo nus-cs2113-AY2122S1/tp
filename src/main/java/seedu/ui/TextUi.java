@@ -1,14 +1,13 @@
 package seedu.ui;
 
 import seedu.command.flags.AddFlag;
+import seedu.command.flags.ClearFlag;
 import seedu.exceptions.ProfileException;
 import seedu.exceptions.UniModsException;
 import seedu.module.Lesson;
 import seedu.module.Module;
-import seedu.timetable.Timetable;
 import seedu.timetable.TimetableUserItem;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,17 +17,17 @@ public class TextUi {
 
     public static Scanner in = new Scanner(System.in);
 
-    public static final String LINE = String.format("%120s\n","").replaceAll(" ","_");
+    public static final String LINE = String.format("%120s\n", "").replaceAll(" ", "_");
 
     /*------------- PRIVATE LOGGING CONSTANTS ----------- */
     private static final String LOGO = "  _    _       _ __  __           _     \n"
-        + " | |  | |     (_)  \\/  |         | |    \n"
-        + " | |  | |_ __  _| \\  / | ___   __| |___ \n"
-        + " | |  | | '_ \\| | |\\/| |/ _ \\ / _` / __|\n"
-        + " | |__| | | | | | |  | | (_) | (_| \\__ \\\n"
-        + "  \\____/|_| |_|_|_|  |_|\\___/ \\__,_|___/\n"
-        + "                                        \n"
-        + "                                        ";
+            + " | |  | |     (_)  \\/  |         | |    \n"
+            + " | |  | |_ __  _| \\  / | ___   __| |___ \n"
+            + " | |  | | '_ \\| | |\\/| |/ _ \\ / _` / __|\n"
+            + " | |__| | | | | | |  | | (_) | (_| \\__ \\\n"
+            + "  \\____/|_| |_|_|_|  |_|\\___/ \\__,_|___/\n"
+            + "                                        \n"
+            + "                                        ";
 
     private static final String STARTUP = "Hello from \n " + LOGO;
     private static final String GREETING = "How can I help you today?";
@@ -43,24 +42,34 @@ public class TextUi {
     private static final String HELP_HEADER = LINE + "\tUNIMods accepts the following commands:-\n";
     private static final String HELP_FOOTER =
             "\t ** Note: For details, refer to the User Guide of NUSModsLite at: "
-            + "\n\t\thttps://ay2122s1-cs2113t-w12-2.github.io/tp/UserGuide.html\n";
+                    + "\n\t\thttps://ay2122s1-cs2113t-w12-2.github.io/tp/UserGuide.html\n";
 
-    public static final String ERROR_MODULE_NOT_FOUND = "OOPS, this module does not exist in your timetable!";
+    public static final String ERROR_MODULE_NOT_FOUND = "OOPS, this item does not exist in your timetable!";
+    public static final String ERROR_MODULE_FOUND = "OOPS, this module already exists in your transcript!";
     public static final String ERROR_MODULE_NOT_IN_TRANSCRIPT = "OOPS, this module does not exist in your Transcript";
     public static final String ERROR_INVALID_MODULE_CODE =
             "OOPS, it looks like the module code you entered doesn't exist, Please re-check!";
     public static final String ERROR_EMPTY_TIMETABLE = "OOPS, it seems that your timetable is already empty.";
+    public static final String ERROR_EMPTY_TRANSCRIPT = "OOPS, it seems that your transcript is already empty.";
     public static final String ERROR_INVALID_GRADE = "OOPS, it seems that the grade you entered is invalid.";
-    public static final String ERROR_INVALID_RESULT_COMMAND = "OOPS, it seems that your command is in wrong format"
+    public static final String ERROR_INVALID_RESULT_COMMAND = "OOPS, it seems that your command is in wrong format. "
             + "The correct command format is =>"
             + " \n \"store\" <grade> \">\" <module_code> ";
+    public static final String ERROR_CANNOT_SU = "You cannot exercise S/U option for this module.";
 
     public static final String GRADED = "GRADED";
     public static final String UNGRADED = "UNGRADED";
+    public static final String ERROR_FAIL_TO_SAVE = "Failed to save modules in the Transcript";
     public static final String ERROR_EMPTY_RECORD = "OOPS, it seems that you have not added any modules "
             + "and grades to your transcript"
             + "\nType the command below to store the grades in our records =>"
             + "\n \"store\" <grade> \">\" <module_code> ";
+    public static final String OPTION_1 = "1";
+    public static final String OPTION_2 = "2";
+    public static final int ZERO = 0;
+    public static final String CLEAR_TIMETABLE = "Timetable";
+    public static final String CLEAR_TRANSCRIPT = "Transcript";
+    public static final String DELIMITER_DOT = ". ";
 
     /*------------- PUBLIC COMMANDS ----------- */
     public static String getCommand(String prompt) {
@@ -88,10 +97,28 @@ public class TextUi {
         while (input.isEmpty()) {
             input = in.next();
         }
-        if (input.equals("1")) {
+        if (input.equals(OPTION_1)) {
             return AddFlag.LESSON;
-        } else if (input.equals("2")) {
+        } else if (input.equals(OPTION_2)) {
             return AddFlag.EVENT;
+        } else {
+            throw new UniModsException("Invalid Selection, please choose either 1 or 2");
+        }
+    }
+
+    public static ClearFlag getClearFlag() throws UniModsException {
+        System.out.println("What would you like to clear ?");
+        System.out.println(OPTION_1 + DELIMITER_DOT + CLEAR_TIMETABLE);
+        System.out.println(OPTION_2 + DELIMITER_DOT + CLEAR_TRANSCRIPT);
+        System.out.print("Choose your option: ");
+        String input = in.nextLine();
+        while (input.isEmpty()) {
+            input = in.next();
+        }
+        if (input.equals(OPTION_1)) {
+            return ClearFlag.TIMETABLE;
+        } else if (input.equals(OPTION_2)) {
+            return ClearFlag.TRANSCRIPT;
         } else {
             throw new UniModsException("Invalid Selection, please choose either 1 or 2");
         }
@@ -224,6 +251,10 @@ public class TextUi {
         System.out.println("All modules have been successfully removed from your Timetable.");
     }
 
+    public static void printTranscriptCleared() {
+        System.out.println("All modules have been successfully removed from your Transcript.");
+    }
+
     public static String returnLine() {
         return "________________________________________";
     }
@@ -243,7 +274,7 @@ public class TextUi {
     }
 
     public static void printAddedGrade(String moduleCode, String grade) {
-        System.out.println(moduleCode + " with grade " + grade + " has been added to the list of modules completed.");
+        System.out.println(moduleCode + " with grade " + grade + " has been added to your Transcript");
     }
 
     public static void printCap(double cap) {
@@ -311,7 +342,7 @@ public class TextUi {
 
     public static void printUpdateProgressMessage(int count) {
         System.out.print("\rApproximately ");
-        System.out.printf("%.2f", (double)count / 130);
+        System.out.printf("%.2f", (double) count / 130);
         System.out.print("% done.");
     }
 

@@ -16,6 +16,7 @@ import java.io.IOException;
 public class TimetableStorage {
     private final File file;
 
+
     /**
      * Initialize TimetableStorage.
      */
@@ -69,4 +70,6 @@ public class TimetableStorage {
             System.out.println("failed to save timetable");
         }
     }
+
+
 }

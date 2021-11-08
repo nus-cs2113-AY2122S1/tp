@@ -44,7 +44,7 @@ public class EditCommand extends Command {
         }
 
         String answer = TextUi.getCommand(TITLE_PROMPT);
-        if (answer.isEmpty() || answer.isBlank()) {
+        if (answer.isEmpty()) {
             throw new EditException("Empty input");
         }
 

@@ -169,7 +169,7 @@ Since the json format utilized by the API contains nested objects, the final imp
 emulates that of the json, with each `Module` containing an `Attributes` object and an array of `Semester` objects, 
 `Semester` containing an array of `Lesson` objects, and  `Lesson` containing an array of `Weeks` objects.
 
-![FetchModuleDiagram](resources/ModulesClassDiagram.png)
+![FetchModuleDiagram](uml-diagrams/ModuleClassDiagram.png)
 
 #### Parsing and Saving of Weeks via Gson
 Gson was unable to parse the weeks key as provided by the NUSMods API as the value expected for the key can be of two different data types.
