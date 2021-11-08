@@ -208,7 +208,7 @@ List all tasks currently stored locally in your task list.
   - **Task priority `[priority]`**:
     - A task can either have `low`, `medium`, or `high` priority. 
     - This value determines the urgency of the task.
-  - **Task recurrence `[recurrence]`**:
+  - **Task recurrence `{recurrence}`**:
     - A task can either have `none`, `daily`, `weekly`, `monthly`, or `yearly` recurrence.
     - This value determines how often a task recurs.
         >💡 **Note**: Tasks with a recurrence will automatically be recurred to the next date that has not occured yet every time you list them.
