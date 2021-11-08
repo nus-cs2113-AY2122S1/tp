@@ -106,7 +106,7 @@ ultimately saving cost and increasing profits.
         * `Implementation - Add: Adding Wastage to Dishes and Ingredients, Storage to Ingredients`
         * `Implementation - Terminal Refreshing / Clear Screen`
       
-    * Added PUML Diagrams for (**images below are scaled down**):
+    * Added PUML Diagrams for (**images below are scaled down, refer to DeveloperGuide for full images**):
       
         * `Design - Storage: Loading Data`
           
