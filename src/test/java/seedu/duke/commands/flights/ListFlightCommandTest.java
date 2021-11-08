@@ -17,6 +17,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ListFlightCommandTest {
 
+    private static Flight TEST_FLIGHT_ONE = new Flight(new String[]{"SQ-JPN", "JPN", "SG", "20/10/2021 18:00",
+        "21/10/2021 03:00"});
+    private static Flight TEST_FLIGHT_TWO = new Flight(new String[]{"SQ-KOR", "KOR", "SG", "23/10/2021 18:00",
+        "30/10/2021 03:00"});
+    private static final String VALID_DATA_OUTPUT = "Here is a list of all flights:\n"
+            + "1. " + TEST_FLIGHT_ONE + "\n\n"
+            + "2. " + TEST_FLIGHT_TWO + "\n\n"
+            + "Total Flights: 2";
+    private static final String NO_DATA_OUTPUT = "I'm sorry, there seems to be no flights";
+
     PrintStream previousConsole = System.out;
     ByteArrayOutputStream newConsole = new ByteArrayOutputStream();
 
@@ -30,28 +40,16 @@ public class ListFlightCommandTest {
     void listClientCommand_validData_correctlyConstructed() throws TourPlannerException {
         System.setOut(new PrintStream(newConsole));
 
-        Flight sqjpn = new Flight(new String[]{"SQ-JPN", "JPN", "SG",
-            "20/10/2021 18:00", "21/10/2021 03:00"});
-        Flight sqkor = new Flight(new String[]{"SQ-KOR", "KOR", "SG",
-            "23/10/2021 18:00", "30/10/2021 03:00"});
-        testFlightList.add(sqjpn);
-        testFlightList.add(sqkor);
+        testFlightList.add(TEST_FLIGHT_ONE);
+        testFlightList.add(TEST_FLIGHT_TWO);
         Command listTour = new ListFlightCommand();
         listTour.setData(dummyClientList, testFlightList, dummyTourList, dummyPackageList, testUi);
         listTour.execute();
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "Here is a list of all flights:\n"
-                + "1. Flight ID: SQ-JPN\n"
-                + "Departure Flight: JPN, 20/10/2021 18:00\n"
-                + "Return Flight: SG, 21/10/2021 03:00\n" + "\n"
-                + "2. Flight ID: SQ-KOR\n"
-                + "Departure Flight: KOR, 23/10/2021 18:00\n"
-                + "Return Flight: SG, 30/10/2021 03:00\n" + "\n"
-                + "Total Flights: 2";
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
-        assertEquals(expectedString, actualString);
+        assertEquals(VALID_DATA_OUTPUT, actualString);
     }
 
     @Test
@@ -64,8 +62,7 @@ public class ListFlightCommandTest {
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "I'm sorry, there seems to be no flights";
         String actualString = newConsole.toString().trim().replace("\r\n", "\n");
-        assertEquals(expectedString, actualString);
+        assertEquals(NO_DATA_OUTPUT, actualString);
     }
 }

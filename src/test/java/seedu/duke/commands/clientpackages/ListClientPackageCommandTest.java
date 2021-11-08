@@ -20,6 +20,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ListClientPackageCommandTest {
 
+    private static Client TEST_CLIENT = new Client(new String[]{"c001", "Bo Tuan", "93338333", "bt@mail.com"});
+    private static Tour TEST_TOUR = new Tour(new String[]{"JPN", "Japan Basic Tour", "1500.00"});
+    private static Flight TEST_FLIGHT = new Flight(new String[]{"SQ-JPN", "JPN", "SG", "20/10/2021 18:00",
+        "21/10/2021 03:00"});
+    private static ClientPackage TEST_CLIENTPACKAGE = new ClientPackage("p001",
+            TEST_CLIENT, TEST_TOUR, TEST_FLIGHT);
+    private static final String VALID_DATA_OUTPUT = "Here is a list of all packages:\n"
+            + "1. " + TEST_CLIENTPACKAGE + "\n\n\n"
+            + "Total Packages: 1";
+
     PrintStream previousConsole = System.out;
     ByteArrayOutputStream newConsole = new ByteArrayOutputStream();
 
@@ -33,14 +43,10 @@ public class ListClientPackageCommandTest {
     void listClientCommand_validData_correctlyConstructed() throws TourPlannerException {
         System.setOut(new PrintStream(newConsole));
 
-        Client botuan = new Client(new String[]{"c001", "Bo Tuan", "93338333", "bt@mail.com"});
-        Tour jpn = new Tour(new String[]{"JPN", "Japan Basic Tour", "1500.00"});
-        Flight sqjpn = new Flight(new String[]{"SQ-JPN", "JPN", "SG", "20/10/2021 18:00", "21/10/2021 03:00"});
-        dummyClientList.add(botuan);
-        dummyTourList.add(jpn);
-        dummyFlightList.add(sqjpn);
-        ClientPackage jpnPackage = new ClientPackage("p001", botuan, jpn, sqjpn);
-        testPackageList.add(jpnPackage);
+        dummyClientList.add(TEST_CLIENT);
+        dummyTourList.add(TEST_TOUR);
+        dummyFlightList.add(TEST_FLIGHT);
+        testPackageList.add(TEST_CLIENTPACKAGE);
 
         Command listPackage = new ListClientPackageCommand();
         listPackage.setData(dummyClientList, dummyFlightList, dummyTourList, testPackageList, testUi);
@@ -48,12 +54,7 @@ public class ListClientPackageCommandTest {
 
         previousConsole.println(newConsole.toString());
         System.setOut(previousConsole);
-        String expectedString = "Here is a list of all packages:\n"
-                + "1. Package ID: p001\n" + "\n"
-                + "Client: \n"
-                + "Client ID: c001";
-        String[] actualStringArray = newConsole.toString().trim().split("\r\n", 2);
-        String actualString = actualStringArray[0] + "\n" + actualStringArray[1].trim().split("\r\n", 2)[0];
-        assertEquals(expectedString, actualString);
+        String actualString = newConsole.toString().trim().replace("\r\n", "\n");
+        assertEquals(VALID_DATA_OUTPUT, actualString);
     }
 }
