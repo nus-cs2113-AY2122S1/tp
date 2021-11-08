@@ -47,11 +47,14 @@ The sections below provide more details of the components and classes in them.
 The `Trip` class contains attributes storing the details of trips added by the user, 
 and is a container class for the expenses (each expense being represented by an 
 instance of the `Expense` class) and persons (each person being represented by an 
-instance of the `Person` class) tagged to the trip.
+instance of the `Person` class) tagged to the trip. The class diagram below illustrates
+the interactions of the `Trip` class with other classes.
+
+![](images/TripClassDiag.png)
 
 A trip is created when the `Parser` class calls its `executeCreate()` method to instantiate 
 a new instance of `Trip`. The newly-created trip is then added to the `ArrayList<Trip>` 
-in the Storage class
+in the Storage class.
 
 Although the program is able to store zero trips, in order for it to work at any appreciable level,
 there must be at least one trip added by the user (either through input or through loading from the
@@ -114,10 +117,35 @@ The following partial sequence diagram dictates the flow of events when the user
 ![](images/ParserSequenceDiagram.png)
 
 ### `Expense` Class
-The `Expense` class deals with most functionalities related to adding an expense inside a trip. The sequence diagram below shows how an expense is initialised.
-![](images/Expense%20Sequence%20Diagram.jpeg)
+The `Expense` class deals with most functionalities related to adding an expense inside a trip. The following partial class diagram
+shows the interactions between the `Expense` class and other classes and interfaces.
 
-When `Parser` calls the `executeExpense` method, it creates an expense object, and also calls the `promptDate` method to set that expense object’s date. `promptDate` calls `isDateValid` to validate user input.
+
+![](images/ExpenseClassDiagram.png)
+
+The `Expense` class,
+- Stores amount spent
+- Stores description
+- Stores category
+- Stores persons involved
+
+The sequence diagram below shows how an expense is initialised.
+![](images/ExpenseSequenceDiagram.png)
+
+
+When `CommandExecutor` calls the `executeCreateExpense()` function, the open trip will be retrieved, and an expense will be intialized.
+During the initialization fo a new `Expense`, the amount spent for the expense is set using `setAmountSpent()`, the category is set
+using `setCategory` and the date of the `Expense` is being prompted using `promptDate()`. 
+
+In `promptDate()`, the date is checked if it is valid and will only return if it is. Otherwise, the program will keep prompting the user.
+
+If no date is entered, `LocalDate` will return the date which the user entered the expense. 
+Otherwise, `LocalDate` will parse the date according to the given format.
+
+If there is only 1 `Person` in the expense, then `Expense` will call the corresponding methods in `ExpenseSplitter`. `CommandExecutor` will
+call `addExpense()` and `setLastExpense` to add the expense to the trip and set it as the last expense added. Then, a success message is printed using
+`printExpensesAddedSuccess()` of `Ui`.
+
 
 ### `Storage` Component
 
@@ -126,7 +154,7 @@ and `FileStorage` class, which interacts with the save file.
 
 The interaction between the two classes is illustrated in the diagram below:
 
-(insert diagram)
+![](images/StorageCompClassDiag.png)
 
 - The `Storage` class stores the user data after it has been read from the save file. It also stores the list of supported 
 currencies, the current open trip (set to `null` if there is no open trip), and the trip which the user last interacted with and
