@@ -496,8 +496,7 @@ Given below is an example usage scenario and how the edit task mechanism behaves
 This segment focuses on describing the implementation of journaling-related features, the functionality of the 
 commands as well as the design considerations taken.
 
-#### 4.4.1 Feature list
-#### Add notebook feature
+#### 4.4.1 Add notebook feature
 
 The command for adding notebook is implemented by the `AddNoteCommand` class that extends `Command`.
 
@@ -520,7 +519,7 @@ Given below is an example usage scenario and how the add notebook mechanism beha
 ![](diagrams/journal/AddNoteCommand.png)
 
 
-#### Add entry feature
+#### 4.4.2 Add entry feature
 
 The command for adding entry is implemented by the `AddEntryCommand` class that extends `Command`.
 
@@ -545,7 +544,7 @@ Given below is an example usage scenario and how the add entry mechanism behaves
 
 ![](diagrams/journal/AddEntryCommand.png)
 
-#### List notebooks and entries
+#### 4.4.3 List notebooks and entries
 
 The command for adding notebook is implemented by the `ListJournalCommand` class that extends `Command`.
 The command for listing is implemented by the `ListJournalCommand` class that extends `Command`.
@@ -565,7 +564,7 @@ Given below is an example usage scenario and how the list mechanism behaves at e
    Entry objects. \
    iii. `ListJournalCommand` then prints all the notebooks with their entries.
 
-#### Deleting notebook
+#### 4.4.4 Deleting notebook
 
 The command for deleting notebook is implemented by the `DeleteNoteCommand` class that extends `Command`.
 The notebook along with all its entries will be deleted.
@@ -590,7 +589,7 @@ Given below is an example usage scenario and how the delete notebook mechanism b
 
 ![](diagrams/journal/DeleteNoteCommand.png)
 
-#### Deleting Entry
+#### 4.4.5 Deleting Entry
 
 The command for deleting entry is implemented by the `DeleteEntryCommand` class that extends `Command`.
 
@@ -611,7 +610,7 @@ Given below is an example usage scenario and how the delete entry mechanism beha
    data to the storage file. \
    v. `DeleteEntryCommand` calls `printDeletedEntryMessage()` to convey that entry has been deleted successfully.
 
-#### Tagging Notebook
+#### 4.4.6 Tagging Notebook
 
 The command for tagging notebook is implemented by the `TagNotebookCommand` class that extends `Command`.
 
@@ -645,7 +644,7 @@ The following design considerations were kept in mind while implementing the tag
       - Pros : Better time complexity since more optimized.
       - Cons: Takes up storage space.
    
-#### Finding Notebook by tag
+#### 4.4.7 Finding Notebook by tag
 
 The command for finding notebook by a tag is implemented by the `FindNotebooksByTagCommand` class that extends
 `Command`.

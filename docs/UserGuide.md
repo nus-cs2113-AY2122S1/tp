@@ -71,7 +71,7 @@ The smallest index would naturally be 1. (1-based)
 - The `{}` wrapping indicates an optional parameter.
 
 - Parameters cannot be reordered.
-  Example: If the command specifies `module add c/[MODULE_CODE] n/[M]ODULE_NAME]`, keying in `module add n/[MODULE_NAME] c/[MODULE_CODE]` will result in an invalid command.
+  Example: If the command specifies `module add c/[MODULE_CODE] n/[MODULE_NAME]`, keying in `module add n/[MODULE_NAME] c/[MODULE_CODE]` will result in an invalid command.
 
 > **NOTE**: 
 > We left out some expected commands for readability as they will print out similar messages
@@ -366,7 +366,7 @@ Expected outcome:
 #### 3.3.4 Deleting a task: `calendar delete task`
 Deletes a task item based on the index.
 
-Format: `calendar delete task TASK_INDEX`
+Format: `calendar delete task [TASK_INDEX]`
 
 Example:
 ```
@@ -774,7 +774,7 @@ Format : `food clt [CALORIES_COUNT]`
 
 Expected outcome:
 
-Allows you to view the food items from the reference food court that has an similar to, or lower calorie
+Allows you to view the food items from the reference food court that has a similar to, or lower calorie
  count than the amount you gave Click!
 
 Example : `food clt 0`
@@ -783,14 +783,14 @@ Expected outcome:
 
 Lists all food items sold with a similar to, or lower calorie count than your input.
 ```
-	I've found the following items with 0 calories!
-	__________________________________________________
-	1st,Coke No Sugar  : 0Kcal
-	2nd,Mineral Water  : 0Kcal
-	Wow, that's a lot of food! Finished reading the list
-	__________________________________________________
-	done printing!
-	__________________________________________________
+        I've found the following items with less than or equal to, 0 calories!
+        __________________________________________________
+        1st,Coke No Sugar  : 0Kcal
+        2nd,Mineral Water  : 0Kcal
+        Wow, 0 calories, please add something to the list!
+        __________________________________________________
+        done printing!
+        __________________________________________________
 ```
 ### 3.6 Exit
 
