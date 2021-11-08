@@ -17,7 +17,7 @@ Participant ":Storage" as storage STORAGE_COLOUR
 activate parser PARSER_COLOUR
 
 parser -> parser : parseAddCommand("a/carrot n/200 e/ 25/12/2021")
-activate parser PARSER_COLOUR
+activate parser PARSER_COLOUR_S1
 
 parser -> add **: AddCommand(ingredient)
 activate add COMMAND_COLOUR
@@ -38,7 +38,7 @@ activate ingredientClass INGREDIENT_COLOUR
 return ingredientName
 
 ingredient_list -> ingredient_list : isIngredientInList(ingredientName)
-activate ingredient_list INGREDIENTLIST_COLOUR
+activate ingredient_list INGREDIENTLIST_COLOUR_S1
 return isRepeatedName
 
 alt !isRepeatedName
@@ -47,7 +47,7 @@ alt !isRepeatedName
     return newIngredientGroup
 
     ingredient_list -> ingredient_list : add(newIngredientGroup)
-    activate ingredient_list INGREDIENTLIST_COLOUR
+    activate ingredient_list INGREDIENTLIST_COLOUR_S1
     return
 
     ingredient_list -> ingredient_group : setIngredientGroupName(ingredientName)
@@ -61,11 +61,11 @@ alt !isRepeatedName
 
     else isRepeatedName
     ingredient_list -> ingredient_list : findIngredientIndexInList(ingredientName)
-        activate ingredient_list INGREDIENTLIST_COLOUR
+        activate ingredient_list INGREDIENTLIST_COLOUR_S1
         return ingredientIndex
 
         ingredient_list -> ingredient_list : get(ingredientIndex)
-        activate ingredient_list INGREDIENTLIST_COLOUR
+        activate ingredient_list INGREDIENTLIST_COLOUR_S1
         return
         ingredient_list -> ingredient_group : add(ingredient)
         activate ingredient_group INGREDIENTGROUP_COLOUR

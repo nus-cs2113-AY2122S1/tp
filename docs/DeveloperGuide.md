@@ -98,7 +98,7 @@ The _sequence diagram_ below shows how the components interact with each other f
 
 ![image](images/InteractionSeqDiagram.png)
 
-Each of the 5 components (apart from `main`) can be found in their respective packages.
+Each of the 6 components (apart from `main`) can be found in their respective packages.
 
 ### 3.2. UI component
 

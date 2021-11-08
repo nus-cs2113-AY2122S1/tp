@@ -1,13 +1,16 @@
 @startuml
 'https://plantuml.com/class-diagram
-'!include style.puml
+!include style.puml
 
 hide circle
-skinparam classAttributeIconSize 0
+skinparam class {
+              BorderThickness 1
+              BorderColor #Black
+          }
 
 Package "Storage"<<RECTANGLE>> {
-    class "Storage" #DeepSkyBlue
-    class "File" #DeepSkyBlue
+    class "Storage" #219EBC
+    class "File" #219EBC
 }
 
 Storage -->"0..1" "File"

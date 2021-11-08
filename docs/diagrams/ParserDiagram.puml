@@ -1,20 +1,26 @@
 @startuml
+
+!include style.puml
 hide circle
-skinparam classAttributeIconSize 0
-
-abstract class Command #pink {
-+ {abstract} run() : String
+skinparam class {
+    BorderThickness 1
+    BorderColor #Black
 }
 
-class Parser #F3722C {
-- {static} parseXYZCommand(command : String) : String
+abstract class Command #B38A72  {
+ {abstract} run() : String
 }
 
-class XYZCommand #orchid {
-+ run() : String
+class Parser PARSER_COLOUR {
+{static} parseXYZCommand(command : String) : String
+}
+
+class XYZCommand #D9BAA8  {
+run() : String
 }
 
 XYZCommand --|> Command
 Parser "executes" ..> XYZCommand
+
 
 @enduml

@@ -30,7 +30,7 @@ update -> ingredient_list : update(1, 2, 150.0)
 activate ingredient_list INGREDIENTLIST_COLOUR
 
 ingredient_list -> ingredient_list : getIngredientGroup(1)
-activate ingredient_list INGREDIENTLIST_COLOUR
+activate ingredient_list INGREDIENTLIST_COLOUR_S1
 return updatedGroup
 
 ingredient_list -> ingredient_group : get(2)

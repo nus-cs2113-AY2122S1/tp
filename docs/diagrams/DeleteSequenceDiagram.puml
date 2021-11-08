@@ -30,7 +30,7 @@ delete -> ingredient_list : removeIngredientFromGroup(1, 1)
 activate ingredient_list INGREDIENTLIST_COLOUR
 
 ingredient_list -> ingredient_list : getIngredientGroup(1)
-activate ingredient_list INGREDIENTLIST_COLOUR
+activate ingredient_list INGREDIENTLIST_COLOUR_S1
 return
 
 ingredient_list -> ingredient_group : remove()
