@@ -456,7 +456,7 @@ public class Ui {
         show("Total Flights: " + count);
     }
 
-<<<<<<< HEAD
+    
     /**
      * Ui response to FindFlightCommand.
      * Shows specific flight based on an ID, as well as the passengers for said flight.
@@ -466,10 +466,6 @@ public class Ui {
      * @param id the ID used to find the specific flight.
      */
     public void showFindFlight(FlightList flights, ClientPackageList clientPackages, String id)
-=======
-
-    public void showFindFlight(FlightList flights, ClientPackageList clientPackages, String code)
->>>>>>> 66a087701821e87dc5425f35bb0fa7fb3fb50967
             throws TourPlannerException {
         Flight foundFlight = flights.getFlightById(id);
         if (foundFlight != null) {
