@@ -560,23 +560,24 @@ Example Output
 
 ## 5. Future Implementations [coming in v3.0]
 ### 5.1 Table Paging
-* A page in a table shown by `list` will be limited to 50 records.
-* `list` will include paging feature with `next` and `prev` commands to get 
-  to the next page or the previous page, to get the next 50 or the previous 50 records 
-  in the table.
+* A page in a table shown by `list` will be limited to only 50 records to prevent overly long lists.
+* `list` will include paging through the inclusion of `next` and `prev` commands to navigate between
+   different pages in the table.
 
 ### 5.2 Patient's Medical Information
-* Patient's medical issues will be added into MedBot so that medical staffs can better 
-  prepare any necessary arrangements before an appointment.
+* Patient's medical information will be added into MedBot so that medical staff can make the 
+  necessary arrangements for their appointments (e.g. Patient X needs to take a blood test an hour before
+  their appointment).
 
-### 5.3 View Patients' or Staffs' Appointments
-* View all appointments scheduled to a particular patient or staff.
+### 5.3 View Appointments between specific Patients and Staff
+* View all appointments scheduled for a particular patient and a particular staff in order to check for 
+  recurring appointments.
 
 ### 5.4 Different Identification Numbers
-* Accepting other persons' IDs such as Passport Number.
+* Accept other forms of identification for patients such as their passport number.
 
 ### 5.5 Different Phone Number Formats
-* Accepting different phone number format from different countries.
+* Accept different phone number formats from different countries.
 
 ## 6. FAQ
 
