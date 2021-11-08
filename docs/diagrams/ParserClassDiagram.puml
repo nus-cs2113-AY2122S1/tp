@@ -15,7 +15,7 @@ class MultipleArgPrefix extends Prefix {
     +MultipleArgPrefix(singleArgPrefix: SingleArgPrefix)
 }
 class OptionalArgPrefix extends SingleArgPrefix {
-    +OptionalArgPrefix(prefix : String)
+    +OptionalArgPrefix(singleArgPrefix: SingleArgPrefix)
 }
 
 class ArgsParser {
