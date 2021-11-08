@@ -25,7 +25,8 @@ I have contributed the following enhancements to PayMeBack:
 1. The refactoring of the Parser class to help with overall neatness of the project.
 2. The printing of currency in a user-friendly manner including the HashMap of the various currency ISO-codes and symbols.
 3. Implementation of `last` for expenses to allow users to delete or view their most recently added expense.
-4. Implementation of the command `-cancel` which allows users to abort a process when asked to correct an erroneous 
+4. Implemented a check to ensure that the people added into a trip or expense do not contain people with the same name.
+5. Implementation of the command `-cancel` which allows users to abort a process when asked to correct an erroneous 
 input (completed in collaboration with @yeezao).
 
 
