@@ -32,7 +32,8 @@ My responsibilities:
 
 ### Code Contributed
 
-My overall code contributions can be found [here](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25). (Search for `richwill28`)
+My overall code contributions can be found [here](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25).
+(Search for `richwill28`)
 
 ### Enhancements Implemented
 
@@ -48,7 +49,32 @@ My overall code contributions can be found [here](https://nus-cs2113-ay2122s1.gi
 * Maintained overall code quality and implementation designs.
 * Maintained collaborative document ([Notion](https://www.notion.so/)) for project management.
 
+### PED Bugs
+
+* **PRs**: [#163](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/163), [#173](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/173), [#184](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/184).
+
+Squashed bugs found in PE Dry Run. These included high priority bug such as [#156](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/156),
+and medium severity bugs such as [#112](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/112) and [#149](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/149),
+as well as other lower severity bugs.
+
 ### Review/Mentoring
+
+Almost all PRs were reviewed, with notable ones listed below:
+
+* Gave suggestions accepted by teammates:
+[#24](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/24), [#26](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/26), [#30](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/30),
+[#31](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/31), [#32](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/32), [#70](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/70),
+[#80](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/80), [110](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/110), [#159](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/159),
+[#161](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/161).
+* Spotted minor fixes:
+[#27](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/27), [#57](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/57), [#62](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/62),
+[#73](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/73), [#104](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/104).
+
+All PED bugs were reviewed and assigned with labels. Notable ones are listed below:
+
+* [#112](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/112), [#113](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/113), [#118](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/118),
+[#129](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/129), [#133](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/133), [#134](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/134),
+[#141](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/141), [#149](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/149), [#155](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/155).
 
 ### Beyond Project Team
 
