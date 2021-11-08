@@ -38,6 +38,7 @@ conditions and history, their Next-of-Kin information as well as their dietary p
 11. `viewbirthday` : Viewing of the birthday of the elderly
 12. Used regex format to check for the inputs
 13. Apply a better way to return Objects - Optional class, and amend the code accordingly
+14. Define useful exception classes fit to the program
 
 #### Contributions to UG
 
@@ -60,7 +61,8 @@ conditions and history, their Next-of-Kin information as well as their dietary p
 2. Think of the idea of creating the elderly catering to their risk levels
 3. Improve the program structure by decoupling the content coupling of Duke execution
 4. Make the code more defensive and more OOP-like
-5. Amend the naming conventions of classes, methods and fields to abide by the coding styles as well as
+5. Amend the naming conventions of classes, methods and fields to abide by the coding styles and provide consistency 
+in the whole project, as well as
 to distinguish the methods that have similar names in different classes 
 (e.g. deleteElderlyMedicalHistory in Elderly class and deleteMedicalHistory in ElderlyList class)
 6. Add javadocs to the public methods
