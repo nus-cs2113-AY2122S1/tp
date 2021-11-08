@@ -24,12 +24,6 @@ public class EditCommandParser {
 
         String simplifiedUserResponse;
         switch (commandType) {
-        case LESSON:
-            simplifiedUserResponse = removeFirstParam(userResponse, "lesson");
-            return parseEditLessonCommand(simplifiedUserResponse);
-        case TASK:
-            simplifiedUserResponse = removeFirstParam(userResponse, "task");
-            return parseEditTaskCommand(simplifiedUserResponse);
         case MODULE:
             simplifiedUserResponse = removeFirstParam(userResponse, "module");
             return parseEditModuleCommand(simplifiedUserResponse);
@@ -38,16 +32,6 @@ public class EditCommandParser {
         default:
             throw new ParseException(promptFormat(EDIT_TASK_FORMAT, EDIT_LESSON_FORMAT, EDIT_MODULE_FORMAT));
         }
-    }
-
-    private static Command parseEditLessonCommand(String userResponse) throws ParseException {
-        // to be implemented
-        return null;
-    }
-
-    private static Command parseEditTaskCommand(String userResponse) throws ParseException {
-        // to be implemented
-        return null;
     }
 
     private static Command parseEditModuleCommand(String userResponse) throws ParseException {
