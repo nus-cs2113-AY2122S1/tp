@@ -691,11 +691,10 @@ When entering data, `Decodex` requires a specific format such that the data is e
 
 
 Here are some example inputs you can try:
-```
-- input hello world : Inputs "hello world" as data into the Decodex.
-- input <space>hello world<space> : Inputs "<space>hello world<space>" as data into Decodex.
-- input goodbye world : Inputs "goodbye world" as data into the Decodex.
-```
+- `input hello world` : Inputs "hello world" as data into the Decodex.
+- `input <space>hello world<space>` : Inputs "<space>hello world<space>" as data into Decodex.
+- `input goodbye world` : Inputs "goodbye world" as data into the Decodex.
+
 For subsequent examples below, this guide assumes that the original input data is `goodbye world`.
 
 ### Listing Modules and Recipes
@@ -862,6 +861,8 @@ Some examples of invalid recipe creation commands are shown below.
 ```
 [x] Recipe names can contain only alphabets, numbers and underscores and must be non-empty.
 ```
+
+> :bulb: The expected output of the test case above might exceed an A4 page's width when viewing in PDF format or when printed. See the full output on the online developer guide [here](https://ay2122s1-cs2113t-t10-3.github.io/tp/DeveloperGuide.html#creating-recipes).
 
 ### Switching Recipes for Modification
 
