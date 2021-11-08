@@ -18,7 +18,7 @@ public class Grade {
             "U",    // Unsatisfactory
             "CS",   // Completed (Satisfactory)
             "CU",   // Completed (Unsatisfactory)
-            "IC",   // In Complete
+            "IC",   // Incomplete
             "IP",   // In Progress
             "AUD",  // Audit
             "EXE",  // Exempted
