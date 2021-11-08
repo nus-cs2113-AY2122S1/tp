@@ -7,7 +7,11 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+//@@author conradwee
+/**
+ * Represents a list of trips in the existing database.
+ * Each <code>Trip</code> will have a source and destination country.
+ */
 public class TripsList {
     private static final Logger logger = Logger.getLogger(TripsList.class.getName());
     private final ArrayList<Trip> trips;

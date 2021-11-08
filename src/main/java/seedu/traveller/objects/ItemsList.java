@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+//@@author conradwee
 /**
  * Represents a list of items that will be done in a particular day of a trip.
  * Each <code>Day</code> will have 1 <code>ItemsList</code>.

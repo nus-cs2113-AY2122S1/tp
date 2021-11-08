@@ -178,11 +178,11 @@ Use this command to add an item to a day of your trip. An item represents an act
 #### Usage Example:
 
 ```
-____________________________________________________________
+________________________________________________________________
 $ add-item trip1 /day 0 /time 1900 /name Check-in to HolidayInn
-____________________________________________________________
+________________________________________________________________
 	Added a new item to day 0 of trip FamilyTrip2021.
-____________________________________________________________
+________________________________________________________________
 ```
 
 > ![](documentationPics/info.png) In each day of your trip, you will want to have multiple items planned out, 
@@ -332,11 +332,11 @@ ________________________________________________________________________________
 _________________________________________________________________________________
 $ edit-item trip1 /day 1 /index 1 /time 1000
 _________________________________________________________________________________
-	You have just edited item 1 on day 1 of trip1 to later breakfast at 1000
+	You have just edited item 1 on day 1 of trip1 to later breakfast at 1000.
 _________________________________________________________________________________
 $ edit-item trip1 /day 1 /index 1 /name buffet breakfast
 _________________________________________________________________________________
-	You have just edited item 1 on day 1 of trip1 to buffet breakfast at 1000
+	You have just edited item 1 on day 1 of trip1 to buffet breakfast at 1000.
 _________________________________________________________________________________
 
 ```
@@ -359,15 +359,15 @@ Searches for an item keyword from a trip and returns the resulting matching item
 
 #### Usage Example:
 ```
-_________________________________________________________________________________
+___________________________________________________________________________________
 $ search-item FamilyTrip2021 /day 1 /key time
-_________________________________________________________________________________
-	You have just search item keyword time on day 1 in trip called FamilyTrip2021
+___________________________________________________________________________________
+	You have just search item keyword time on day 1 in trip called FamilyTrip2021.
 	
 	Results: 
 	1. 1400		lunch time
 	2. 1700		dinner time
-_________________________________________________________________________________
+___________________________________________________________________________________
 ```
 
 > ![](documentationPics/tip.png) Search allows you to find words that contain the phrase, no 

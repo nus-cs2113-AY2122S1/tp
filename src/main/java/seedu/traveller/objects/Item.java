@@ -3,7 +3,7 @@ package seedu.traveller.objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+//@@author conradwee
 /**
  * Class for all items in an ItemsList.
  */

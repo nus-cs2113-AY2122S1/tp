@@ -15,6 +15,13 @@ public class MinCalcResult {
     private final List<Double> time;
     private int error;
 
+    /**
+     * This is the constructor of the class MinCalcResult.
+     * @param startCountry The starting country.
+     * @param endCountry The destination country.
+     * @param path The path of countries that yield the shortest time or cost.
+     * @param time The respective time or costs corresponding to the shortest path of countries.
+     */
     public MinCalcResult(Country startCountry, Country endCountry, List<Country> path, List<Double> time) {
         this.startCountry = startCountry;
         this.endCountry = endCountry;

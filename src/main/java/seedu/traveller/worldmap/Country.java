@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//@@author jach23
+//@@author conradwee
+/**
+ * This class is responsible for the countries of interests as a Country class.
+ */
 public class Country implements Comparable<Country> {
     private static final Logger logger = Logger.getLogger(Country.class.getName());
     private final int key;
@@ -18,6 +21,11 @@ public class Country implements Comparable<Country> {
     public double minDistance = Double.MAX_VALUE;
 
 
+    /**
+     * This is the constructor of the class Country.
+     * @param name The name of the country stored as a String.
+     * @param key The unique key of the country stored as an Integer.
+     */
     public Country(String name, int key) {
         logger.setLevel(Level.INFO);
         this.name = name;
@@ -28,6 +36,12 @@ public class Country implements Comparable<Country> {
                 + "\n\tkey: " + this.key);
     }
 
+    /**
+     * This function is responsible for adding a neighbour to a given country.
+     * @param distance The distance to be updated.
+     * @param startCountry The starting country.
+     * @param endCountry The destination country.
+     */
     public static void addNeighbour(Double distance, Country startCountry, Country endCountry) {
         logger.log(Level.INFO, "Adding new neighbour: "
                 + "\n\tdistance: " + distance
@@ -36,6 +50,13 @@ public class Country implements Comparable<Country> {
         startCountry.distances.add(new Distance(distance, startCountry, endCountry));
     }
 
+    /**
+     * This function is responsible for updating the distance between a given neighbour and the given country of
+     * interest.
+     * @param newDistance The new distance to be updated.
+     * @param startCountry The starting country.
+     * @param endCountry The destination country.
+     */
     public static void updateNeighbour(Double newDistance, Country startCountry, Country endCountry) {
         logger.log(Level.INFO, "Updating neighbour: "
                 + "\n\tnewDistance: " + newDistance
