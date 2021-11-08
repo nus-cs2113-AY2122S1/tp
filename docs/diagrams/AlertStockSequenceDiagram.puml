@@ -1,0 +1,41 @@
+@startuml
+!include style.puml
+
+Participant ":AlertExpringSoonCommand" as alert_exp COMMAND_COLOUR_S1
+Participant ":IngredientList" as ing_list INGREDIENTLIST_COLOUR
+Participant ":IngredientGroup" as ing_group INGREDIENTGROUP_COLOUR
+
+-> alert_exp : run()
+activate alert_exp COMMAND_COLOUR_S1
+
+
+alert_exp -> ing_list : getIngredientList()
+activate ing_list INGREDIENTLIST_COLOUR
+
+ing_list --> alert_exp : ingredientList
+deactivate ing_list
+
+loop all ingredientGroups in ingredientList
+    alert_exp -> ing_group: getTotalAmount()
+    activate ing_group INGREDIENTGROUP_COLOUR
+    ing_group --> alert_exp: totalAmount
+    deactivate ing_group
+    opt totalAmount < threshold amount
+        alert_exp -> ing_group: toString()
+        activate ing_group INGREDIENTGROUP_COLOUR
+        ing_group -->alert_exp
+        deactivate ing_group
+    end
+    deactivate ing_group
+end
+
+<-- alert_exp : list of expiring ingredients
+deactivate alert_exp
+
+
+
+
+
+
+
+@enduml

@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+
+Participant ":Parser" as parser PARSER_COLOUR
+Participant ":ExpireCommand" as exp COMMAND_COLOUR
+Participant ":Ingredient" as ing INGREDIENT_COLOUR
+
+
+-> parser : "expire [date]"
+activate parser PARSER_COLOUR
+
+parser -> parser : parseExpireCommand("expire [date]")
+activate parser PARSER_COLOUR_S1
+
+parser -> ing : stringToDate("[date]")
+activate ing INGREDIENT_COLOUR
+
+ing --> parser : date
+deactivate ing
+
+parser -> exp **: ExpireCommand(date)
+activate exp COMMAND_COLOUR
+
+exp --> parser
+deactivate exp
+
+parser -> exp : run()
+activate exp COMMAND_COLOUR
+
+exp --> parser : list of expiring ingredients
+deactivate exp
+
+parser --> parser : list of expiring ingredients
+deactivate parser
+
+<-- parser : list of expiring ingredients
+deactivate parser
+
+
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam arrowColor #Crimson
+
+skinparam class {
+    BorderThickness 1
+    BorderColor #Black
+}
+
+Package "IngredientList"<<RECTANGLE>>{
+    class IngredientList INGREDIENTLIST_COLOUR
+    class IngredientGroup INGREDIENTGROUP_COLOUR
+    class Ingredient INGREDIENT_COLOUR
+ }
+
+class Storage STORAGE_COLOUR
+
+
+IngredientList --> "0..*" IngredientGroup
+IngredientGroup : totalAmount: Double
+IngredientGroup : groupName: String
+
+IngredientGroup --> "1..*" Ingredient
+Ingredient : name: String
+Ingredient : amount: Double
+Ingredient : expiry: LocalDate
+
+IngredientList -r--> Storage
+Storage -l..>IngredientList
+
+@enduml

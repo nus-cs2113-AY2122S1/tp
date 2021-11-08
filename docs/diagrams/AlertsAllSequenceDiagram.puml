@@ -1,0 +1,41 @@
+@startuml
+!include style.puml
+
+Participant ":Parser" as parser PARSER_COLOUR
+Participant ":AlertCommand" as alert COMMAND_COLOUR
+Participant ":AlertExpringSoonCommand" as alert_exp COMMAND_COLOUR_S1
+Participant ":AlertLowStockCommand" as alert_stock COMMAND_COLOUR_S2
+
+
+-> parser : "alerts all"
+activate parser PARSER_COLOUR
+
+parser -> parser : parseAlertCommand()
+activate parser PARSER_COLOUR_S1
+
+parser -> alert : run()
+activate alert COMMAND_COLOUR
+
+alert -> alert_exp : run()
+activate alert_exp COMMAND_COLOUR_S1
+
+alert_exp --> alert : list of ingredients
+deactivate alert_exp
+
+alert -> alert_stock: run()
+activate alert_stock COMMAND_COLOUR_S2
+
+alert_stock --> alert : list of ingredients
+deactivate alert_stock
+
+alert --> parser : both lists of ingredients
+deactivate alert
+
+parser --> parser :both lists of ingredients
+deactivate parser
+
+<-- parser : both lists of ingredients
+deactivate parser
+
+
+@enduml

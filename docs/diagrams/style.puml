@@ -1,0 +1,38 @@
+/'
+ ' Color Palettes Webpage Reference
+ ' https://plantuml-documentation.readthedocs.io/en/latest/formatting/color-names.html#all-color-names
+ '/
+
+!define UI_COLOUR #B392AC
+!define PARSER_COLOUR #F3722C
+!define PARSER_COLOUR_S1 #F8961E
+!define INGREDIENTLIST_COLOUR #43AA8B
+!define INGREDIENTLIST_COLOUR_S1 #A1E8AF
+!define INGREDIENTGROUP_COLOUR #90BE6D
+!define INGREDIENT_COLOUR #EAEFBD
+!define STORAGE_COLOUR #219EBC
+!define COMMAND_COLOUR #F9C74F
+!define COMMAND_COLOUR_S1 #B38A72
+!define COMMAND_COLOUR_S2 #DarkSalmon
+!define DATE_COLOUR #E2E2E2
+!define MAIN_COLOUR #F94144
+
+skinparam MinClassWidth 50
+skinparam MaxClassWidth 200
+skinparam ParticipantPadding 10
+skinparam Shadowing false
+skinparam DefaultTextAlignment center
+skinparam packageStyle Rectangle
+
+skinparam Class {
+    classFontSize 12
+    BorderThickness 1
+    BorderColor #FFFFFF
+}
+
+skinparam sequenceDiagram {
+    ParticipantFontSize 12
+}
+
+hide footbox
+hide circle

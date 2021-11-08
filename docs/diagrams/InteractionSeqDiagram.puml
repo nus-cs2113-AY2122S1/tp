@@ -1,0 +1,79 @@
+@startuml
+!include style.puml
+
+skinparam maxMessageSize 150
+actor User as U
+participant ":UI" as UI UI_COLOUR
+participant ":Main" as M MAIN_COLOUR
+participant ":Parser" as P PARSER_COLOUR
+participant ":XYZCommand" as C COMMAND_COLOUR
+participant ":IngredientList" as IL INGREDIENTLIST_COLOUR
+participant ":IngredientGroup" as IG INGREDIENTGROUP_COLOUR
+participant ":Storage" as S STORAGE_COLOUR
+
+
+activate UI UI_COLOUR
+
+M -> UI: getUserCommand()
+activate M MAIN_COLOUR
+
+U -> UI: command
+
+UI --> M: command
+deactivate UI
+
+M -> M: runCommand(command)
+activate M #F1827E
+
+M -> P: parse(command)
+activate P PARSER_COLOUR
+
+P -> P: parseXYZCommand(command)
+activate P PARSER_COLOUR_S1
+
+P -> C **: XYZCommand()
+activate C COMMAND_COLOUR
+
+C --> P
+deactivate C
+
+P -> C: run()
+activate C COMMAND_COLOUR
+
+C -> IL: execute command
+activate IL INGREDIENTLIST_COLOUR
+
+IL -> IG: modify corresponding IngredientGroup
+activate IG INGREDIENTGROUP_COLOUR
+
+IG --> IL: updated IngredientGroup
+deactivate IG
+
+IL -> S: writeIngredientsToMemory()
+activate S STORAGE_COLOUR
+
+S --> IL
+deactivate S
+
+IL --> C : output message
+deactivate IL
+
+C --> P : output message
+deactivate C
+
+P --> P : output message
+deactivate P
+
+P --> M: output message
+deactivate P
+
+M --> M: output message
+deactivate M
+
+M -> UI : printCommandOutput()
+activate UI UI_COLOUR
+
+UI --> M
+deactivate UI
+
+@enduml
