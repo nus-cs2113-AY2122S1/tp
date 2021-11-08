@@ -12,7 +12,7 @@ activate ":BudgetTracker"
 activate ":Parser"
 
 create ":AddBudgetCommand"
-":Parser" -> ":AddBudgetCommand" : new AddBudgetCommand\n(amount: double, month: int)
+":Parser" -> ":AddBudgetCommand" : new AddBudgetCommand(100 ,12)
 activate ":AddBudgetCommand"
 return
 
@@ -25,16 +25,34 @@ return
 ":BudgetTracker" -> ":AddBudgetCommand" : execute()
 activate ":AddBudgetCommand"
 
-":AddBudgetCommand" -> "allRecordList:AllRecordList" : addBudget(amount : double, month : int,\n IS_NOT_LOADING_STORAGE : boolean)
+":AddBudgetCommand" -> "allRecordList:AllRecordList" : addBudget(100, 12, false)
 activate "allRecordList:AllRecordList"
 
-"allRecordList:AllRecordList" -> ":RecordList" : addBudget(amount : double, month : int)
+"allRecordList:AllRecordList" -> ":RecordList" : addBudget(100, 12)
 activate ":RecordList"
 
 opt !hasBudget
-    ":RecordList" -> "budget:Budget" : setAmount(amount : double)
+    ":RecordList" -> "budget:Budget" : setAmount(100)
     activate "budget:Budget"
+    return
 end
+
+return
+
+note left
+Budget added is stored
+into Storage at this point
+end note
+
+return
+
+participant TextUi <<class>>
+
+":AddBudgetCommand" -> TextUi : showBudgetAddedMessage(100, 12)
+activate TextUi
+return
+
+return
 
 ":BudgetTracker" --> user
 deactivate ":BudgetTracker"
