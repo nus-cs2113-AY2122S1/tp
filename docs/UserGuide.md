@@ -73,13 +73,21 @@ read as the same word by SITUS
 6. If successful, you should see a similar message when the program starts up:
 
 ```
+###################################
+#    _____ ____________  _______  #
+#   / ___//  _/_  __/ / / / ___/  #
+#   \__ \ / /  / / / / / /\__ \   #
+#  ___/ // /  / / / /_/ /___/ /   #
+# /____/___/ /_/  \____//____/    #
+#                                 #
+###################################
 ____________________________________________________
 Welcome to SITUS!
 What would you like to do first?
 To see what I can do, use "help"
 ____________________________________________________
-____________________________________________________
 No ingredients expiring by [5 days from current date]
+____________________________________________________
 No ingredients with stock less than 1.0 kg
 ____________________________________________________
 ```
