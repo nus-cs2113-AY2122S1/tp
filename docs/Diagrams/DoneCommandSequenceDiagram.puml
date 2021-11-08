@@ -26,7 +26,12 @@ activate "goal:Goal"
 "goal:Goal" --> "goalList:GoalList"
 deactivate "goal:Goal"
 
-"goalList:GoalList" -> "printManager:PrintManager": printDoneHabit(goalDescription: String, habitName: String)
+"goalList:GoalList" -> "habit:Habit": getDoneHabitDates(date: Date)
+activate "habit:Habit"
+"habit:Habit" --> "goalList:GoalList": strDates: String[]
+deactivate "habit:Habit"
+
+"goalList:GoalList" -> "printManager:PrintManager": printDoneHabit(goalDescription: String,\nhabitName: String,strDates: String[])
 activate "printManager:PrintManager"
 "printManager:PrintManager" --> "goalList:GoalList"
 deactivate "printManager:PrintManager"
