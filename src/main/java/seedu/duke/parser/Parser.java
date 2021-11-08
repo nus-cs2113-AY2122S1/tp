@@ -42,12 +42,12 @@ public abstract class Parser {
         // TODO: Once parser is restructured, replace above with following two lines
         String[] command = response.trim().split(" +");
         if (command.length == 1) {
-            String commandType = command[0];
+            String commandType = command[0].toLowerCase();
             return singleWordCommandProtocol(command, commandType);
         } else {
             String[] splitCommandIntoTwo = response.trim().split(" +", 2);
             String commandDetails = splitCommandIntoTwo[1];
-            String commandType = command[0];
+            String commandType = command[0].toLowerCase();
             return multiWordCommandProtocol(response, command, commandDetails, commandType);
         }
     }
