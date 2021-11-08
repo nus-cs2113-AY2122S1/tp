@@ -244,19 +244,22 @@ List the items with a due date of `03 November 2021`
 ### Search items
 Search items by ID, Title, Status, and Category.
 
-Status must be one of "AVAILABLE", "LOANED" or "RESERVED" and it is case insensitive.
+Status must be one of "AVAILABLE", "LOANED" or "RESERVED", and it is case insensitive.
 
-Category must be one of "Audio", "Video", "Book", "Magazine".
+Category must be one of "Audio", "Video", "Book", "Magazine", or "Misc", and it is case insensitive.
 
-Any items matching more than one keyword will be listed, those items matching the search criteria more closely will be listed first.
+Any items matching more than one keyword will be listed. Items matching the search criteria more closely will be listed first.
 
 Format: Subset of `search i/ID t/TITLE s/STATUS c/CATEGORY`
 
 ##### Usage Example: 
 
-`search s/LOANED c/Book`
+`search s/loaned c/book`
 
-Searches the catalogue for `Books` or items that are `Loaned`
+Searches the catalogue for items with the property of "loaned" and "book". 
+An item that is both loaned and is a book will be listed at the top.
+An item that is loaned but not a book, or an item that is a book but not loaned is also listed at a lower position.
+An item that is neither loaned nor a book will not be in the search result.
 
 ##### Expected Output:
 ```
@@ -601,5 +604,5 @@ When `libmgr` detects errors or corruptions in `data.json` it will overwrite the
 |Remove|Remove an item from the catalogue|`rm ID` <br> E.g. `rm 095680`|
 |Reserve|Reserve an item for a specific person|`res i/ID u/USERNAME` <br> E.g. `res i/2551 u/johnsmith`|
 |Return|Mark an item as returned and available for loan again|`return ID` <br> E.g. `return 2551`|
-|Search|Search for items in the catalogue based on their attributes|`search KEY/ATTRIBUTE` <br> E.g. `search c/Book t/Junglebook`|
+|Search|Search for items in the catalogue based on their attributes|`search KEY/ATTRIBUTE` <br> E.g. `search c/misc t/Junglebook s/available`|
 |Un-reserve|"Un-reserve" an item and mark as available again|`unres ID`<br> E.g. `unres 2551`|
