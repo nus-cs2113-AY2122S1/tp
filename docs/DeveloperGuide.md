@@ -202,10 +202,23 @@ The custom serialiser and deserialiser is implemented as inner classes within th
 
 | As a ... | I want to ... | So that I can ...|
 |----------|---------------|------------------|
-new user|see help instructions|refer to them when I forget how to use the application
-new user|edit trip attributes|modify them easily when I type them wrongly
-user|have various filters for expenses in a trip|find expenses that are of interest to me, especially when the expense list is large
-user|cancel an operation instead of re-entering my data when prompted|save time and run other commands immediately
+New user|See help instructions|refer to them when I forget how to use the application
+User|See my nett expenses|I can manage my budget
+User|Enter my name|I can keep track of whose expenses it is
+User|Enter names of other people|I can track who I went where with
+User|Enter the category of my expenses|I can see how much I spent in certain areas
+User|Enter the location of my expenses|I can see where I spent my money
+User|Edit the location|I can change the location later on if i need to be more specific
+User|Enter the exchange rate of the currency of country I am visiting|I can repay people back in my local currency correctly
+User|Filter the expenses based on categories|I can better categorise my own spending
+User|Filter the expenses based on who is involved|I can better settle expenses with individual person(s)
+User|Start a new trip and save the previous one|I can record all my travels
+User|Delete wrong entries|In case I added something wrongly
+User|Delete whole trips|In case I don’t want to remember the trips
+User|See history of my expenses, classified into trips|I can have a record to refer to
+User|Display total amount spent in local and foreign currency|For accounting purposes
+User|Know how much my friends has to pay me at the end of the trip|I will not go broke
+User|Cancel an operation instead of re-entering my data when prompted|save time and run other commands immediately
 
 
 
