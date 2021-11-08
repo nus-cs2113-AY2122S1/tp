@@ -3,17 +3,18 @@
  ' https://plantuml-documentation.readthedocs.io/en/latest/formatting/color-names.html#all-color-names
  '/
 
-!define UI_COLOUR #F9C74F
+!define UI_COLOUR #B392AC
 !define PARSER_COLOUR #F3722C
-!define PARSER_COLOUR_S1 #Orchid
+!define PARSER_COLOUR_S1 #F8961E
 !define INGREDIENTLIST_COLOUR #43AA8B
+!define INGREDIENTLIST_COLOUR_S1 #A1E8AF
 !define INGREDIENTGROUP_COLOUR #90BE6D
 !define INGREDIENT_COLOUR #EAEFBD
-!define STORAGE_COLOUR #DeepSkyBlue
-!define COMMAND_COLOUR #F8961E
-!define COMMAND_COLOUR_S1 #Pink
+!define STORAGE_COLOUR #219EBC
+!define COMMAND_COLOUR #F9C74F
+!define COMMAND_COLOUR_S1 #B38A72
 !define COMMAND_COLOUR_S2 #DarkSalmon
-!define DATE_COLOUR #7C4E7E
+!define DATE_COLOUR #E2E2E2
 !define MAIN_COLOUR #F94144
 
 skinparam MinClassWidth 50

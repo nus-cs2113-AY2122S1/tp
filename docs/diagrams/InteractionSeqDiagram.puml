@@ -8,7 +8,9 @@ participant ":Main" as M MAIN_COLOUR
 participant ":Parser" as P PARSER_COLOUR
 participant ":XYZCommand" as C COMMAND_COLOUR
 participant ":IngredientList" as IL INGREDIENTLIST_COLOUR
+participant ":IngredientGroup" as IG INGREDIENTGROUP_COLOUR
 participant ":Storage" as S STORAGE_COLOUR
+
 
 activate UI UI_COLOUR
 
@@ -21,7 +23,7 @@ UI --> M: command
 deactivate UI
 
 M -> M: runCommand(command)
-activate M #pink
+activate M #F1827E
 
 M -> P: parse(command)
 activate P PARSER_COLOUR
@@ -40,6 +42,12 @@ activate C COMMAND_COLOUR
 
 C -> IL: execute command
 activate IL INGREDIENTLIST_COLOUR
+
+IL -> IG: modify corresponding IngredientGroup
+activate IG INGREDIENTGROUP_COLOUR
+
+IG --> IL: updated IngredientGroup
+deactivate IG
 
 IL -> S: writeIngredientsToMemory()
 activate S STORAGE_COLOUR
