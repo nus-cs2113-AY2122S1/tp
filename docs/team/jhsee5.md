@@ -53,9 +53,22 @@ efficient allocation of said ingredients to the cooking of dishes, ultimately sa
 <div style="page-break-after: always;"></div>
 
 * **Contributions to DG**:
-    * Add PUML for `SortIngrCommand`.
-    * Add PUML for `SortDishCommand`.
-    * Add content for whole of Manual Testing Section.
-    * Assist in centering of some Figures.
 
-
+ * Create and assist in PUML for `SortDishCommand`.
+    <p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/sort_dish_sequence.png">
+    </p>
+    <center>PUML for SortDishCommand</center>
+    
+          
+  * Create and assist in PUML for `SortIngrCommand`.
+    <p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/sort_ingr_sequence.png">
+    </p>
+    <center>PUML for SortIngrCommand</center>
+    
+    
+  * Add majority content for Instructions for Manual Testing.
+    
+  * Assist in centering of Images/Figures.
+  
