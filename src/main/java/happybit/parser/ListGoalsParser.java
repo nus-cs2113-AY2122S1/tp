@@ -4,9 +4,9 @@ import happybit.command.Command;
 import happybit.command.ListGoalsCommand;
 import happybit.exception.HaBitParserException;
 
-public class ListGoalParser extends Parser {
+public class ListGoalsParser extends Parser {
 
-    public static Command parseListGoalCommand(String input) throws HaBitParserException {
+    public static Command parseListGoalsCommand(String input) throws HaBitParserException {
         return new ListGoalsCommand(input);
     }
 }

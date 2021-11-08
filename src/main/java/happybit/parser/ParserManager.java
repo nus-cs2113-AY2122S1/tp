@@ -124,7 +124,7 @@ public class ParserManager {
         case COMMAND_SET_GOAL:
             return SetParser.parseSetGoalCommand(details);
         case COMMAND_LIST_GOAL:
-            return ListGoalParser.parseListGoalCommand(details);
+            return ListGoalsParser.parseListGoalsCommand(details);
         case COMMAND_LIST_HABIT:
             return ListHabitParser.parseListHabitCommand(details);
         case COMMAND_DELETE_GOAL:
