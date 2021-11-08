@@ -1,9 +1,9 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-participant ":<<class>>\nDuke" as d
-participant ":<<class>>\nParser" as p
-participant "<<class>>\n:Ui" as ui
+participant "<<class>>\nDuke" as d
+participant "<<class>>\nParser" as p
+participant "<<class>>\nUi" as ui
 
 loop until user inputs 'quit'
 
