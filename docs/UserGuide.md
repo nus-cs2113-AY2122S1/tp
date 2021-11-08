@@ -154,6 +154,8 @@ ____________________________________________________________
 
 <div style="page-break-after: always;"></div>
 
+<!-- @@author mayankp291 -->
+
 <a name="list"></a>
 ### Listing all contacts: `ls`
 
@@ -179,7 +181,7 @@ ____________________________________________________________
 4. Mayank
 ____________________________________________________________
 ```
-
+<!-- @@author -->
 **[Back to Table of Contents](#toc)**
 
 <div style="page-break-after: always;"></div>
@@ -600,6 +602,8 @@ For more information on the implementation, please refer to the [Developer Guide
 **[Back to Table of Contents](#toc)**
 
 <div style="page-break-after: always;"></div>
+
+<!-- @@author mayankp291 -->
 
 ## <a name="summary"></a>Command Summary
 
