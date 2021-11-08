@@ -18,7 +18,7 @@ import static seedu.duke.common.Status.AVAILABLE;
 import static seedu.duke.common.Status.RESERVED;
 
 /**
- * Class encapsulating command to update the status of the item to be loaned out.
+ * Class encapsulating command to update the status of the item from AVAILABLE to RESERVED.
  */
 public class ReserveCommand extends Command {
     public static final String COMMAND_FORMAT = "  (!) Format: res i/ID u/USER";
@@ -33,7 +33,7 @@ public class ReserveCommand extends Command {
 
     /**
      * Class Constructor.
-     * @param args Arguments supplied by user in the loan command
+     * @param args Arguments supplied by user in the reserve command
      */
     public ReserveCommand(HashMap<String, String> args) {
         this.args = args;
@@ -63,7 +63,7 @@ public class ReserveCommand extends Command {
     }
 
     /**
-     * Processes <b>loan</b> Command, including handle exceptions.
+     * Processes <b>reserve</b> Command, including handle exceptions.
      * @param ui Object that handles user IO
      * @param catalogue Object that encapsulates the library catalogue
      * @throws LibmgrException when user input is invalid
@@ -92,7 +92,7 @@ public class ReserveCommand extends Command {
     }
 
     /**
-     * Executes <b>loan</b> Command.
+     * Executes <b>reserve</b> Command.
      * @param ui Object that handles user IO
      * @param catalogue Object that encapsulates the library catalogue
      */
