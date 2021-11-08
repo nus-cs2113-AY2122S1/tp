@@ -514,6 +514,9 @@ Format: `set_attendance c/<CLASS_ID> s/<START_STUDENT_INDEX>-<END_STUDENT_INDEX>
 * `END_STUDENT_INDEX` refers to the end index of the student in the student list of the class.
 * `LESSON_NUMBER` refers to the lesson number.
 * `PRESENT` refers to the whether a student is present. (`1` for present, `0` for not present)
+> ❗ **Warning:**<br />
+> Do not use whitespace in the range of student indexes. <br>
+> ❌ e.g. set_attendance c/CS2113T-F12 <span style="color: red;">s/1 - 5</span> l/1 p/1
 
 Examples:
 * `set_attendance c/CS2113T-F12 s/1-5 l/1 p/1`
@@ -534,6 +537,10 @@ Format: `set_attendance c/<CLASS_ID> s/<STUDENT_INDEX>,<STUDENT_INDEX>,... l/<LE
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 * `LESSON_NUMBER` refers to the lesson number.
 * `PRESENT` refers to the whether a student is present. (`1` for present, `0` for not present)
+
+> ❗ **Warning:**<br />
+> Do not use whitespace in the range of student indexes. <br>
+> ❌ e.g. set_attendance c/CS2113T-F12 <span style="color: red;">s/1 , 3, 5 </span> l/1 p/1
 
 Examples:
 * `set_attendance c/CS2113T-F12 s/1,3,5 l/1 p/1`
@@ -572,6 +579,10 @@ Format: `delete_attendance c/<CLASS_ID> s/<START_STUDENT_INDEX>-<END_STUDENT_IND
 * `END_STUDENT_INDEX` refers to the end index of the student in the student list of the class.
 * `LESSON_NUMBER` refers to the lesson number.
 
+> ❗ **Warning:**<br />
+> Do not use whitespace in the range of student indexes. <br>
+> ❌ e.g. delete_attendance c/CS2113T-F12 <span style="color: red;">s/1 - 5</span> l/1
+
 Examples:
 * `delete_attendance c/CS2113T-F12 s/1-5 l/1`
 * `delete_attendance c/CS2101-D03 s/3-8 l/2`
@@ -590,6 +601,10 @@ Format: `delete_attendance c/<CLASS_ID> s/<STUDENT_INDEX>,<STUDENT_INDEX>,... l/
 * `CLASS_ID` refers to the id of the class (e.g. CS2113T-F12).
 * `STUDENT_INDEX` refers to the index of the student in the student list of the class.
 * `LESSON_NUMBER` refers to the lesson number.
+
+> ❗ **Warning:**<br />
+> Do not use whitespace in the range of student indexes. <br>
+> ❌ e.g. delete_attendance c/CS2113T-F12 <span style="color: red;">s/1, 3, 5</span> l/1
 
 Examples:
 * `delete_attendance c/CS2113T-F12 s/1,3,5 l/1`
