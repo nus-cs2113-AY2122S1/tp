@@ -35,7 +35,8 @@ activate Storage
 
 break JsonParseException
 
-    Storage -> Storage: askOverwriteOrClose
+    Storage -> Storage: askOverwriteOrClose()
+    activate Storage
 
         alt overwrite
             Storage -> Storage: createNewFile(String)
@@ -47,6 +48,8 @@ break JsonParseException
         else close
             <-- Storage: System.exit(1)
         end
+        Storage --> Storage
+    deactivate Storage
 
 end
 
