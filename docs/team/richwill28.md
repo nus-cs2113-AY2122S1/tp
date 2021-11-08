@@ -66,7 +66,8 @@ Set up code skeleton used in the project, including the following classes:
 
 #### Unit Testing & Assertions
 
-**PR**: [#28](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/28), [#114](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/114), [#163](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/163), [#164](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/164), [#173](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/173).
+**PR**: [#28](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/28), [#114](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/114), [#163](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/163),
+[#164](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/164), [#173](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/173).
 
 Added JUnit testing and assertions to make code more defensive and more effective for regression testing.
 
@@ -78,7 +79,8 @@ Added logging to record the states of the program, and is useful for troubleshoo
 
 #### Code Refactoring
 
-**PR**: [#28](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/28), [#35](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/35), [#59](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/59), [#164](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/164), [#184](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/114).
+**PR**: [#28](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/28), [#35](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/35), [#59](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/59),
+[#164](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/164), [#184](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/114).
 
 Refactored classes and packages to improve overall code quality (e.g., better OOP, SLAP, etc.).
 Most notable refactoring is [#28](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/28), which our team like to refer to as "the great refacotring",
@@ -86,7 +88,9 @@ as major changes to the code architecture were implemented for improved scalabil
 
 #### Features Improvement
 
-**PR**: [#114](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/114).
+**PR**: [#28](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/28), [#64](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/64), [#84](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/84),
+[#87](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/87), [#114](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/114), [#163](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/163),
+[#173](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/173).
 
 Most notable enhancement is the [launch lesson](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/114) feature.
 The motivation for developing this comes from the frustration that some terminals do not support URL highlighting,
