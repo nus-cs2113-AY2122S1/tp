@@ -21,7 +21,9 @@ Given below are my notable contributions to the project.
      - The `select` command allows the user to select a module and run it on the user provided data ([#68](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/68)).
      - The `list` command allows the user to list all available modules ([#69](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/69)).
      - The `recipe deselect` command deselects the recipe currently being edited ([#275](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/275)).
+
 <div style="page-break-after: always;"></div>
+
 - Implemented the `Ui`, `RegularMessages` and `ErrorMessages` classes along with tests.
    - What it does: `Ui` manages all UI related activities (e.g. Prints messages to the user with the appropriate statuses) while `RegularMessages` and `ErrorMessages` servers as a central location for all messages to be printed.
    - Justification: Serves as the centralised location to conduct all UI related activities.
