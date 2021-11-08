@@ -86,7 +86,7 @@ The architecture diagram below shows a high-level overview of the structure betw
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/architecture_diagram.png">
 </p>
 <center>Figure 1: Food-O-Rama Overview Architecture Diagram</center>
-
+<br>
 
 ### General Flow
 
@@ -96,7 +96,7 @@ Describes the step-by-step sequence from User Input to the Output.
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/main_sequence.png">
 </p>
 <center>Figure 2: General Flow Sequence Diagram</center>
-
+<br>
 
 
 1. User is greeted by welcome screen.
@@ -114,7 +114,7 @@ The `InputParser` class is responsible for deconstructing User Inputs to identif
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/input_parser_sequence.png">
 </p>
 <center>Figure 3: InputParser Sequence Diagram</center>
-
+<br>
 
 1. Gets command name of user input by checking if the users input starts with any of the strings that are defined for
   commands (add dish, list dish, help etc.).
@@ -139,7 +139,7 @@ under *'Data'* folder.
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/storage_load_sequence.png">
 </p>
 <center>Figure 4: Loading Data Sequence Diagram</center>
-
+<br>
 
 1. At the start of the program, Duke calls `Storage.load()`.
     * This method in the `Storage` class is responsible for invoking `loadIngredients()`, `loadDishes()`
@@ -163,7 +163,7 @@ under *'Data'* folder.
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/storage_write_sequence.png">
 </p>
 <center>Figure 5: Saving Data Sequence Diagram</center>
-
+<br>
 
 * After every command, Duke calls `Storage.write(Ingredient)`, then `Storage.write(Dish)`.
     * This method in the `Storage` class is responsible for writing to the respective text file depending on the mode.
@@ -188,7 +188,7 @@ the *Food-O-Rama* data.
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/data_structures.png">
 </p>
 <center>Figure 6: Data Structures Class Diagram</center>
-
+<br>
 
 * The `Dish` class contains the Dish's Name, its wastage and its constituents.
 * The `Ingredient` class contains the Ingredient's Name, the weight of Ingredient in storage, the weight of Ingredient
@@ -212,7 +212,7 @@ The below class diagram shows the structure and relations of the `Ui` class in *
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/UiClass.png">
 </p>
 <center>Figure 7: User Interface Class Diagram</center>
-
+<br>
 
 For simplicity’s sake the ui class has been minimized into 3 components:
 
@@ -235,7 +235,7 @@ highest level, the `Foodorama` class, where it then gets caught and the message 
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/command.png">
 </p>
 <center>Figure 8: Command Abstraction Diagram</center>
-
+<br>
 
 * Different Command Classes that perform different tasks by calling various functions of the Object Classes.
 * All inherit from an abstract `Command` class with one execute method that takes an Arraylist<String> as input.
@@ -253,7 +253,7 @@ The sequence diagram for the validation of Numerical Inputs is given below.
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/input_validation_number.png">
 </p>
 <center>Figure 9: Input Validation for Number Sequence Diagram</center>
-
+<br>
 
 The system filters out the numerical inputs from the text strings, and checks if the numerical inputs are
 integers or not providing the actual methods that execute the computation (the only valid inputs are integers in this
@@ -265,7 +265,7 @@ The sequence diagram for the validation of Strings is given below.
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/input_validation_string.png">
 </p>
 <center>Figure 10: Input Validation for String Sequence Diagram</center>
-
+<br>
 
 The process of input validation for strings is similar to that for integers except only words are valid inputs.
 
@@ -286,7 +286,7 @@ further described in the sequence diagram below.
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/add_ingr_command_sequence.png">
 </p>
 <center>Figure 11: AddIngredientCommand Sequence Diagram</center>
-
+<br>
 
 For `add dish` and `add ingr` commands:
 
@@ -319,7 +319,7 @@ as described by the sequence diagram below for Adding Wastage to Dishes.
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/add_dish_waste_command_sequence.png">
 </p>
 <center>Figure 12: AddDishWasteCommand Sequence Diagram</center>
-
+<br>
 
 For `add dish waste`, `add ingr waste` and `add ingr stored` commands:
 
@@ -362,7 +362,7 @@ particular `KEYWORD` and return a list of Dishes or Ingredients that match the k
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/find_command_sequence.png">
 </p>
 <center>Figure 13: FindCommand Sequence Diagram</center>
-
+<br>
 
 For `find` commands, the handling method `FindCommand.execute()`:
 
@@ -386,7 +386,7 @@ present in the DishList and IngredientList.
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/edit_dish_name_sequence.png">
 </p>
 <center>Figure 14: EditDishNameCommand Sequence Diagram</center>
-
+<br>
 
 This Sequence Diagram shows how the `EditDishNameCommand` class functions.
 
@@ -412,7 +412,7 @@ Below is a sequence diagram that shows how the SetExpiryCommand functions
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/set_expiry.png">
 </p>
 <center>Figure 15: EditDishNameCommand Sequence Diagram</center>
-
+<br>
 
 1. The input will be handled by the basic input validation within the command class to figure out which ingredient is to be changed
 
@@ -437,7 +437,7 @@ that use them. The diagram below showcases the sequence of the `LinkCommand` cla
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/link_sequence.png">
 </p>
 <center>Figure 16: LinkCommand Sequence Diagram</center>
-
+<br>
 
 1. The LinkCommand calls upon DishList to get the Dish based on the Index given via UserInput.
 2. DishList then calls on Dish to carry out the addPart(ingredientName) function which is responsible for the linking of
@@ -460,7 +460,7 @@ Below is a sequence diagram that shows how the GraphCommand functions
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/graph_sequence.png">
 </p>
 <center>Figure 17: GraphCommand Sequence Diagram</center>
-
+<br>
 
 Graph works by creating a two-dimensional grid and printing the bars based on the current position of the terminal cursor. 
 This bypasses the restriction in a CLI based application where you can only print from top down in the terminal and the bars can get
@@ -590,13 +590,13 @@ to their Wastages in descending order. This allows the user to view the most was
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/sort_dish_sequence.png">
 </p>
 <center>Figure 18: SortDishCommand Sequence Diagram</center>
-
+<br>
 
 <p align="center">
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/sort_dish_sequence.png">
 </p>
 <center>Figure 19: SortIngrCommand Sequence Diagram</center>
-
+<br>
 
 * The Sort functions work by calling on the pre-existing Comparator function in ArrayList. Using this, they sort the
   Dishes and Ingredients in descending order of their wastage.
