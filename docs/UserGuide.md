@@ -767,10 +767,9 @@ Hungry Burger (Store index 5), you should see the following:
 food radd s/5 i/5
 
 	__________________________________________________
-	Nice, adding the record - 	Chicken Burger Set  : 607 KCal
+	Nice, adding the record - Chicken Burger Set  : 607 KCal
 	__________________________________________________
-	Nice.  I've added Chicken Burger Set  to the list, with 607 calories!
-	__________________________________________________
+
 ```
 
 #### 3.5.8 Finding items with a calorie count <= a given amount `food clt`
