@@ -4,5 +4,5 @@ Display | Name | Github Profile | Portfolio
 --------|:----:|:--------------:|:---------:
 ![](https://via.placeholder.com/100.png?text=Photo) | Alvin Lim | [Github](https://github.com/Alvinlj00) | [Portfolio](docs/team/johndoe.md)
 ![](images/AlvinPangProfilePic.jpg) | Alvin Pang | [Github](https://github.com/crabnuggets) | [Portfolio](docs/team/crabnuggets.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Alwin Ang | [Github](https://github.com/alwinangys) | [Portfolio](docs/team/alwinangys.md)
+![](images/AlwinAngProfilePic.JPG) | Alwin Ang | [Github](https://github.com/alwinangys) | [Portfolio](docs/team/alwinangys.md)
 ![](images/Antriksh_profile_pic.jpg) | Antriksh Verma | [Github](https://github.com/antrikshv) | [Portfolio](docs/team/antrikshv.md)
