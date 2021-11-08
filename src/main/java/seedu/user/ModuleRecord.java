@@ -20,7 +20,7 @@ public class ModuleRecord {
     private final SortedSet<String> moduleCodes = new TreeSet<>();
     private double cap;
 
-
+    //@@author aditichadha1310
     public ModuleRecord() {
         cap = 0;
     }
@@ -30,6 +30,7 @@ public class ModuleRecord {
      *
      * @param module Module contains the graded module to be stored in the Transcript
      */
+    //@@author aditichadha1310
     public void addModuleToRecord(GradedModule module) throws UniModsException {
         boolean isModInRecords = checkModuleExists(module.getModuleCode());
         if (isModInRecords) {
@@ -47,6 +48,7 @@ public class ModuleRecord {
      *
      * @param module Module contains the ungraded module to be stored in the Transcript
      */
+    //@@author aditichadha1310
     public void addModuleToRecord(UngradedModule module) throws UniModsException {
         boolean isModInRecords = checkModuleExists(module.getModuleCode());
         if (isModInRecords) {
@@ -65,6 +67,7 @@ public class ModuleRecord {
      * @param module Module stores the Module to be stored in the Transcript
      * @param grade  Grade stores the grade scored in the module which is to be stored in the Transcript
      */
+    //@@author aditichadha1310
     public void addModuleToRecord(Module module, String grade) {
         String gradeType = "";
         try {
@@ -89,6 +92,7 @@ public class ModuleRecord {
      * @param moduleCode ModuleCode is the module code which is to be removed from the Transcript.
      * @throws UniModsException IF the module is not found in the transcript records.
      */
+    //@@author aditichadha1310
     public void removeModuleFromTranscript(String moduleCode) throws UniModsException {
         moduleCodes.remove(moduleCode);
         for (int i = 0; i < gradedModules.size(); i++) {
@@ -114,6 +118,7 @@ public class ModuleRecord {
      *
      * @return cap CAP according to the user's grades in the transcript's records.
      */
+    //@@author aditichadha1310
     private double calculateCapFromList() {
         double sumModGradePoints = 0;
         double sumModCredits = 0;
@@ -245,7 +250,7 @@ public class ModuleRecord {
             TranscriptUi.printUngradedModules(ungradedModules.get(i));
         }
     }
-
+    //@@author aditichadha1310
     public void clearTranscript() throws UniModsException {
         if (gradedModules.size() == TextUi.ZERO && ungradedModules.size() == TextUi.ZERO) {
             throw new UniModsException(TextUi.ERROR_EMPTY_TRANSCRIPT);
@@ -255,7 +260,7 @@ public class ModuleRecord {
         moduleCodes.clear();
         TextUi.printTranscriptCleared();
     }
-
+    //@@author aditichadha1310
     public boolean checkModuleExists(String moduleCode) {
         for (int i = 0; i < gradedModules.size(); i++) {
             if (gradedModules.get(i).getModuleCode().equals(moduleCode)) {
