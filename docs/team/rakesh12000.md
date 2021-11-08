@@ -56,11 +56,10 @@ ultimately saving cost and increasing profits.
     * `Edit Dish Waste`
     * `Edit Ingr Waste`
 * **Contributions to UG**:
-  * Added Expected Outcome for Help
+  * Added Expected Outcome for `Help`
 * **Contributions to Developer Guide**:
   * Added Preface for the various components
-  * Added Product Scope
-  * Added Manual Testing 
+  * Added Product Scope 
   * Added Documentation for:
     * Design - `InputParser` class
     * Implementation - `Edit` Commands
