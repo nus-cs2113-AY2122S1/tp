@@ -12,8 +12,18 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 //@@author yeoweihngwhyelab
+/**
+ * Converts a particular data base into .csv file.
+ */
 public class ConverterToCsv {
     //@@author yeoweihngwhyelab
+    /**
+     * This method firstly deletes the csv file if it exists and then create a new
+     * ".csv" file and loads the current app data into it.
+     *
+     * @param monthlyRecordList AllRecordList object containing the app data.
+     * @param csvDirectory Directory to create the ".csv" file.
+     */
     public void convertToCsvFile(AllRecordList monthlyRecordList, String csvDirectory) {
         try {
             File inFile = new File(csvDirectory);

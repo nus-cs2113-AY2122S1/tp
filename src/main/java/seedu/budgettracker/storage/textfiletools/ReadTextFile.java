@@ -14,6 +14,11 @@ public class ReadTextFile {
     private final String fileDirectory;
 
     //@@author yeoweihngwhyelab
+    /**
+     * Constructor to set the fileDirectory attribute.
+     *
+     * @param fileDirectory Attribute containing the file directory string.
+     */
     public ReadTextFile(String fileDirectory) {
         this.fileDirectory = fileDirectory;
     }
