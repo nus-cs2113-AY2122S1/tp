@@ -135,13 +135,13 @@ A quick overview of how a command is parsed and executed is as such:
 ### 3.5. IngredientGroup component
 The **IngredientGroup** component can be found in the `ingredients` package
 
-An instance `IngredientGroup` is created for each new ingredient. 
+An instance `IngredientGroup` is created for each new ingredient.
 A new ingredient is defined as one with a different name as compared to all existing ingredients.
 
-Each instance of `IngredientGroup` is made up multiple `Ingredient`. One entry in an `IngredientGroup` corresponds to one `Ingredient`. 
+Each instance of `IngredientGroup` is made up multiple `Ingredient`. One entry in an `IngredientGroup` corresponds to one `Ingredient`.
 All entries with the same ingredient name is stored in the same `IngredientGroup`.
 
-In the example below, there are 2 `IngredientGroup`, Carrot and White Carrot. Carrot contains 2 `Ingredient` (entries) while White Carrot contains 3 `Ingredient` (entries). 
+In the example below, there are 2 `IngredientGroup`, Carrot and White Carrot. Carrot contains 2 `Ingredient` (entries) while White Carrot contains 3 `Ingredient` (entries).
 ```
 1. Carrot | Total Amount: 12.2 kg
     1.1. Amount Left: 10.0 kg | Expiry Date: 23/12/2021 
@@ -296,55 +296,53 @@ by SITUS.
 
 E.g. `update 1.2 a/150.0`
 1. The current ingredient inventory is:
-```
-1. Carrot | Total Amount: 18.7 kg
-    Amount Left: 10.0 kg | Expiry Date: 23/12/2021
-    Amount Left: 2.2 kg | Expiry Date: 25/12/2021
-    Amount Left: 6.5 kg | Expiry Date: 02/01/2022
 
-2. Potato | Total Amount: 7.1 kg
-    Amount Left: 5.0 kg | Expiry Date: 25/12/2021
-    Amount Left: 2.1 kg | Expiry Date: 12/11/2021
-```
+   ```
+   1. Carrot | Total Amount: 18.7 kg
+       1.1 Amount Left: 10.0 kg | Expiry Date: 23/12/2021
+       1.2 Amount Left: 2.2 kg | Expiry Date: 25/12/2021
+       1.3 Amount Left: 6.5 kg | Expiry Date: 02/01/2022
+   
+   2. Potato | Total Amount: 7.1 kg
+       2.1 Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+       2.2 Amount Left: 2.1 kg | Expiry Date: 12/11/2021
+   ```
+
 2. The initial user input is stored as a string. It is pre-processed by the `Parser` class that
 checks the validity of the inputs. If inputs are valid, the string is broken into an array 
 of 3 elements, and it's parameters are converted into it's appropriate data types.
 
-
 3. The 3 elements within the array get passed as arguments in the `UpdateCommand` class that calls the `update`
 method in the `IngredientList` class.
 
-
 4. The `update` method calls the `getIngredientGroup` method in the `IngredientList` class
 to find the ingredient group to be updated.
-
 
 5. Then, in the `IngredientGroup` class, the
    `get` method is called on the identified ingredient group to get the ingredient 
    object that is to be updated.
 
-
 6. The total amount of ingredient within the group is updated to the new amount 
 by the `updateTotalAmount` method in the `IngredientGroup` class.
 
-
 7. Next, The ingredient amount of the ingredient is set using the `setAmount` method.
-
 
 8. Lastly, the updated `ingredientList` is stored in the external memory through the `Storage`
    class.
 
+<div style="page-break-after: always;"></div>
 
-8. After the ingredient has been updated, the ingredient inventory list is:
+After the ingredient has been updated, the ingredient inventory list is:
+
 ```
 1. Carrot | Total Amount: 166.5 kg
-    Amount Left: 10.0 kg | Expiry Date: 23/12/2021
-    Amount Left: 150.0 kg | Expiry Date: 25/12/2021
-    Amount Left: 6.5 kg | Expiry Date: 02/01/2022
+    1.1 Amount Left: 10.0 kg | Expiry Date: 23/12/2021
+    1.2 Amount Left: 150.0 kg | Expiry Date: 25/12/2021
+    1.3 Amount Left: 6.5 kg | Expiry Date: 02/01/2022
 
 2. Potato | Total Amount: 7.1 kg
-    Amount Left: 5.0 kg | Expiry Date: 25/12/2021
-    Amount Left: 2.1 kg | Expiry Date: 12/11/2021
+    2.1 Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+    2.2 Amount Left: 2.1 kg | Expiry Date: 12/11/2021
 ```
 
 The sequence diagram below illustrates the above command example.
@@ -353,46 +351,39 @@ The sequence diagram below illustrates the above command example.
 
 <div style="page-break-after: always;"></div>
 
-
-<div style="page-break-after: always;"></div>
-
 ### 4.5. Subtracting ingredients
 Ingredient amount can be subtracted using `subtract` command followed by two parameters that
 contain a prefixed flag for SITUS to identify the ingredient's name and subtract amount.
 
 E.g. `subtract n/carrot a/150.0`
-
 1. The current ingredient inventory is:
-```
-1. Carrot | Total Amount: 166.5 kg
-    Amount Left: 10.0 kg | Expiry Date: 23/12/2021
-    Amount Left: 150.0 kg | Expiry Date: 25/12/2021
-    Amount Left: 6.5 kg | Expiry Date: 02/01/2022
 
-2. Potato | Total Amount: 7.1 kg
-    Amount Left: 5.0 kg | Expiry Date: 25/12/2021
-    Amount Left: 2.1 kg | Expiry Date: 12/11/2021
-```
+   ```
+   1. Carrot | Total Amount: 166.5 kg
+       1.1 Amount Left: 10.0 kg | Expiry Date: 23/12/2021
+       1.2 Amount Left: 150.0 kg | Expiry Date: 25/12/2021
+       1.3 Amount Left: 6.5 kg | Expiry Date: 02/01/2022
+   
+   2. Potato | Total Amount: 7.1 kg
+       2.1 Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+       2.2 Amount Left: 2.1 kg | Expiry Date: 12/11/2021
+   ```
+
 2. The initial user input is stored as a string. It is pre-processed by the `Parser` class that
    checks the validity of the inputs. If inputs are valid, the string is broken into an array
    of 2 elements, and it's parameters are converted into it's appropriate data types.
 
-
 3. The 2 elements within the array get passed as arguments in the `SubtractCommand` class that 
 calls the `SubtractIngredientFromGroup` method in the `IngredientList` class.
-
 
 4. The `SubtractIngredientFromGroup` method calls the `findIngredientIndexInList` method 
 in the `IngredientList` class to find the index of the ingredient to subtract amount from.
 
-
 5. Then, the `getIngredientGroup` method is called to get the ingredient group.
-
 
 6. If the ingredient has a negligible amount remaining, the group is removed,
 the updated ingredientList is stored in the external memory through the `Storage` class, 
 and the function is returned.
-
 
 7. If not, the input subtract amount is subtracted from the ingredient group. The subtraction
 iterates from ingredients with closest to the furthest expiry dates. There are two scenarios during iteration:
@@ -403,15 +394,15 @@ iterates from ingredients with closest to the furthest expiry dates. There are t
       1. The current ingredient amount is set to 0.0.
       2. The current ingredient amount is subtracted from the amount to be subtracted.
 
+<div style="page-break-after: always;"></div>
 
 8. Next, the `removeLowAmountIngredientFromGroup` method is called to remove ingredients with 
 negligible amounts remaining.
 
-
 9. Lastly, the updated `ingredientList` is stored in the external memory through the Storage class.
 
-
 10. After the ingredient amount has been subtracted, the ingredient inventory list is:
+
 ```
 1. Carrot | Total Amount: 16.5 kg
     Amount Left: 10.0 kg | Expiry Date: 25/12/2021
@@ -426,8 +417,6 @@ The sequence diagram below illustrates the above command example.
 
 
 ![image](images/SubtractSequenceDiagram.png)
-
-
 
 <div style="page-break-after: always;"></div>
 
