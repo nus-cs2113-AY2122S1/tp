@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+//@@author Uxinnn
 /**
  * Represents a list of days in a trip.
  * Each <code>Trip</code> will have 1 <code>DaysList</code>.
@@ -43,6 +44,7 @@ public class DaysList {
         return day;
     }
 
+    //@@author Cuiminjing
     public void deleteDay(int dayNumber) throws TravellerException {
         logger.log(Level.INFO, "Deleted a day of index " + dayNumber + " from daysList");
         try {
@@ -52,6 +54,7 @@ public class DaysList {
         }
     }
 
+    //@@author Uxinnn
     public int getMaxDaysAllowed() {
         return maxDaysAllowed;
     }
