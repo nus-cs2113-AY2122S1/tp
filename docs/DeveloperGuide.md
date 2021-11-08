@@ -18,15 +18,15 @@ motivated us to build this application.
 * [Setting Up & Getting Started](#-setting-up--getting-started)
 * [Design & Implementations](#-design--implementation)
     * [Design](#design)
-      * [Main Components](#main-components)
-      * [General Flow](#general-flow)
-      * [Input Parsing](#input-parsing)
-      * [Storage](#storage)
-      * [Data Structures](#data-structures)
-      * [User-Interface Component](#user-interface-component)
-      * [Exceptions](#exceptions)
-      * [Command Abstraction](#command-abstraction)
-      * [Input Validation](#input-validation)
+        * [Main Components](#main-components)
+        * [General Flow](#general-flow)
+        * [Input Parsing](#input-parsing)
+        * [Storage](#storage)
+        * [Data Structures](#data-structures)
+        * [User-Interface Component](#user-interface-component)
+        * [Exceptions](#exceptions)
+        * [Command Abstraction](#command-abstraction)
+        * [Input Validation](#input-validation)
     * [Implementation](#implementation)
         * [Edit](#edit)
         * [Graph](#graph)
@@ -179,18 +179,18 @@ The below class diagram shows the structure and relations of the Ui class in Foo
 
 ![](images/UiClass.png)
 
-For simplicity’s sake the ui class has been minimized into 3 components: 
- * The strings containing the various messages
- * Functions that get a string from UI to be used elsewhere (e.g. Exception classes getting error messages)
- * Functions that print command outputs
+For simplicity’s sake the ui class has been minimized into 3 components:
 
+* The strings containing the various messages
+* Functions that get a string from UI to be used elsewhere (e.g. Exception classes getting error messages)
+* Functions that print command outputs
 
 ### Exceptions
 
 The `FoodoramaException` class is responsible for handling errors such as unrecognised user commands and improper
-parameters. It does so by calling the `Ui` class to provide the error messages and throwing the exception 
-up to the highest level, that is the Foodorama class where it then gets caught and the message is printed with
-the exception.getMessage() method which is part of the base Exception class
+parameters. It does so by calling the `Ui` class to provide the error messages and throwing the exception up to the
+highest level, that is the Foodorama class where it then gets caught and the message is printed with the
+exception.getMessage() method which is part of the base Exception class
 
 ### Command Abstraction
 
@@ -198,35 +198,36 @@ the exception.getMessage() method which is part of the base Exception class
 
 * Different Command Classes that perform different tasks by calling various functions of the Object Classes.
 * All inherit from an abstract `Command` class with one execute method that takes an Arraylist<String> as input.
-* These command classes help perform a more specialized input validation so ensure the inputs match the specific command 
+* These command classes help perform a more specialized input validation so ensure the inputs match the specific command
   that has been invoked
 
 ### Input validation
 
-In addition to the input parser, due to the different types of inputs foodorama deals with,
-there exists a second round of input validation to help seperate the invalid inputs from those that are valid
+In addition to the input parser, due to the different types of inputs foodorama deals with, there exists a second round
+of input validation to help seperate the invalid inputs from those that are valid
 
 The sequence diagram for the validation of Numerical Inputs is given below
 
 ![](images/input_validation_number.png)
 
 As you can see the system filters out the numerical inputs from the text strings and chceks if the numerical inputs are
-integers or not providing the actual methods that do the computation the only valid inputs that are integers in thsi case.
-The same process can be done to include doubles as well by excluding the final integer check.
+integers or not providing the actual methods that do the computation the only valid inputs that are integers in thsi
+case. The same process can be done to include doubles as well by excluding the final integer check.
 
 The sequence diagram for the validation of Text strings is given below
 
 ![](images/input_validation_number.png)
 
-The process of input validation for strings is quite similar to that for integers except
-the roles are reversed
+The process of input validation for strings is quite similar to that for integers except the roles are reversed
 
 ## Implementation
 
 ### Add
+
 The add command allows for the addition of dishes and ingredients, and wastage weights and storage weights.
 
 #### Adding Dishes and Ingredients
+
 The `add dish` and `add ingr` commands are handled by the `AddDishCommand` and `AddIngrCommand` classes respectively.
 Both commands have a similar implementation, with the difference being that `add ingr` has an additional weight input as
 further described in the sequence diagram below.
@@ -235,16 +236,17 @@ further described in the sequence diagram below.
 
 For `add dish` and `add ingr` commands:
 
-1. `AddDishCommand` or `AddIngredientCommand` will proceed with basic Input Validation, and call `TYPEList.add[DISH/INGR_NAME]`,
-where `TYPE` is either `Dish` or `Ingredient` respectively.
-   
+1. `AddDishCommand` or `AddIngredientCommand` will proceed with basic Input Validation, and
+   call `TYPEList.add[DISH/INGR_NAME]`, where `TYPE` is either `Dish` or `Ingredient` respectively.
+
         For Adding Dishes, skip to Step 6.
 
-2. For Adding Ingredients, `IngredientList.add()` will prompt storage weight input of the Ingredient from the user and throw
-exceptions if the storage weight is not an integer, is `Infinity` is `NaN`, or is negative.
-   
-3. If storage weight input is greater than 10000kg (*soft limit*), the user will be prompted with a confirmation message.
-   
+2. For Adding Ingredients, `IngredientList.add()` will prompt storage weight input of the Ingredient from the user and
+   throw exceptions if the storage weight is not an integer, is `Infinity` is `NaN`, or is negative.
+
+3. If storage weight input is greater than 10000kg (*soft limit*), the user will be prompted with a confirmation
+   message.
+
 4. If the user enters `n` or `no`, the input weight prompt will loop until the user inputs a valid number.
 
 5. Else, the ingredient is added to the ingredient list.
@@ -254,18 +256,21 @@ exceptions if the storage weight is not an integer, is `Infinity` is `NaN`, or i
 7. The Ui class is then called to print a success message to the user.
 
 #### Adding Wastage to Dishes and Ingredients, Storage to Ingredients
-The `add dish waste`, `add ingr waste` and `add ingr storage` commands are handled by the `AddDishWasteCommand`, `AddIngrWasteCommand` and `AddIngrStoredCommand` classes respectively.
-All three commands have similar implementation as described by the sequence diagram below for Adding Wastage to Dishes.
+
+The `add dish waste`, `add ingr waste` and `add ingr storage` commands are handled by the `AddDishWasteCommand`
+, `AddIngrWasteCommand` and `AddIngrStoredCommand` classes respectively. All three commands have similar implementation
+as described by the sequence diagram below for Adding Wastage to Dishes.
 
 ![](images/add_dish_waste_command_sequence.png)
 
 For `add dish waste`, `add ingr waste` and `add ingr stored` commands:
 
-1. The input will be handled by their respective command classes with Basic Input Validation and call the `Dish` or `List`
-   class methods `addWeight` (for waste) or `updateIngredientStoredWeight` (for ingredient stored.) 
-   
-2. The methods will prompt weight input from the user and throw exceptions if the weight is not an integer, is `Infinity`, is `NaN` or
-   is negative.
+1. The input will be handled by their respective command classes with Basic Input Validation and call the `Dish`
+   or `List`
+   class methods `addWeight` (for waste) or `updateIngredientStoredWeight` (for ingredient stored.)
+
+2. The methods will prompt weight input from the user and throw exceptions if the weight is not an integer,
+   is `Infinity`, is `NaN` or is negative.
 
 3. If weight input is greater than 10000kg (*soft limit*), the user will be prompted with a confirmation message.
 
@@ -279,6 +284,7 @@ The difference between the three commands lies in the `add dish waste` command, 
 ingredients linked to it as seen in the Code Snippet below.
 
 Code Snippet:
+
 ```
     if (!parts.isEmpty()) {
         ingredientContribution = wastage / parts.size();
@@ -290,15 +296,16 @@ Code Snippet:
 ```
 
 ### Find
-The find commands (`find dish` and `find ingr`) implement the `FindCommand` class to allow the user to search for 
-a particular `KEYWORD` and return a list of Dishes or Ingredients that match the keyword.
+
+The find commands (`find dish` and `find ingr`) implement the `FindCommand` class to allow the user to search for a
+particular `KEYWORD` and return a list of Dishes or Ingredients that match the keyword.
 
 ![](images/find_command_sequence.png)
 
-For `find` commands, the handling method `FindCommand.execute()`: 
+For `find` commands, the handling method `FindCommand.execute()`:
 
-1. Parses the input and determines if a dish or ingredient is to be found, and uses corresponding switch cases. If it is neither,
-throw an Invalid Parameter error via Foodorama Exception.
+1. Parses the input and determines if a dish or ingredient is to be found, and uses corresponding switch cases. If it is
+   neither, throw an Invalid Parameter error via Foodorama Exception.
 
 2. If the keyword to be found is blank, throw a Missing Parameter error via FoodoramaException.
 
@@ -310,15 +317,15 @@ throw an Invalid Parameter error via Foodorama Exception.
 
 ### Edit
 
-The implementation of the Edit function allows the User to edit several 
-instance variables of the Dishes and Ingredients present in the DishList and
-IngredientList.
+The implementation of the Edit function allows the User to edit several instance variables of the Dishes and Ingredients
+present in the DishList and IngredientList.
 
 ![](images/edit_dish_name_sequence.png)
 
 This Sequence Diagram shows how the `EditDishNameCommand` class functions.
 
 Currently the User is able to edit the following:
+
 * Dish Name
 * Dish Wastage Weight
 * Ingr Name
@@ -337,34 +344,30 @@ Below is a sequence diagram that shows how the SetExpiryCommand functions
 
 ![](images/set_expiry.png)
 
-There is currently a soft limit of 10000 days for the expiry. If this limit is exceeded the user will be prompted for 
+There is currently a soft limit of 10000 days for the expiry. If this limit is exceeded the user will be prompted for
 confirmation before proceeding as 10000 is an unusual amount for the field and might be a misinput.
 
 ### Link
-The Link function allows Users to link existing Ingredients in the IngredientList 
-to the existing Dishes in the DishList that use them. The diagram below showcases
-the sequence of the `LinkCommand` class.
+
+The Link function allows Users to link existing Ingredients in the IngredientList to the existing Dishes in the DishList
+that use them. The diagram below showcases the sequence of the `LinkCommand` class.
 
 ![](images/link_sequence.png)
 
-* The LinkCommand calls upon DishList to get the Dish based on the Index given via 
-UserInput
-* DishList then calls on Dish to carry out the addPart(ingredientName) function which
-is responsible for the linking of the Dish and Ingredient
-* Dish calls on IngredientList through the find function, to which IngredientList
-returns the Index of the Ingredient
-* Given the index is non-negative, the addPart function then removes any old
-contributions of Ingredient Wastes in the current Dish's Waste through a loop
-* Subsequently, it adds the Ingredient to the Dish's parts following which it updates 
-the Dish's own Ingredient Contribution
-* Finally, the function re-updates the contribution of all linked Ingredient's
-Wastes to the Dish's Waste.
+* The LinkCommand calls upon DishList to get the Dish based on the Index given via UserInput
+* DishList then calls on Dish to carry out the addPart(ingredientName) function which is responsible for the linking of
+  the Dish and Ingredient
+* Dish calls on IngredientList through the find function, to which IngredientList returns the Index of the Ingredient
+* Given the index is non-negative, the addPart function then removes any old contributions of Ingredient Wastes in the
+  current Dish's Waste through a loop
+* Subsequently, it adds the Ingredient to the Dish's parts following which it updates the Dish's own Ingredient
+  Contribution
+* Finally, the function re-updates the contribution of all linked Ingredient's Wastes to the Dish's Waste.
 
 ### Graph
 
-The implementation of the Edit function allows Foodorama to display a graph of the Dishes and Ingredients present in the DishList and
-IngredientList to the User
-Below is a sequence diagram that shows how the GraphCommand functions
+The implementation of the Edit function allows Foodorama to display a graph of the Dishes and Ingredients present in the
+DishList and IngredientList to the User Below is a sequence diagram that shows how the GraphCommand functions
 
 ![](images/graph_sequence.png)
 
@@ -400,22 +403,112 @@ ____________________________________________________________
 
 ### Random dish
 
+The `RandomDishCommand` class is used to generate a random Dish Name.
+
+The random Dish Name is a combination of Strings from 4 different ArrayLists.
+
+These ArrayLists are carbohydrates, proteins, sauces and cookingMethods. The ArrayLists contain a fixed pool of
+vocabulary.
+
+Code snippet:
+
+```
+ArrayList<String> carbohydrates = new ArrayList<>() {
+        {
+            add("rice");
+            add("noodles");
+            add("beans");
+            add("potatoes");
+            add("pizza");
+            add("burger");
+            add("pasta");
+        }
+    };
+
+    ArrayList<String> proteins = new ArrayList<>() {
+        {
+            add("chicken");
+            add("turkey");
+            add("beef");
+            add("pork");
+            add("duck");
+            add("lamb");
+            add("fish");
+            add("lobster");
+        }
+    };
+
+    ArrayList<String> sauces = new ArrayList<>() {
+        {
+            add("chili");
+            add("tomato");
+            add("mustard");
+            add("cheesy");
+            add("soy sauce");
+            add("mayonnaise");
+            add("sweet");
+        }
+    };
+
+    ArrayList<String> cookingMethods = new ArrayList<>() {
+        {
+            add("steamed");
+            add("grilled");
+            add("fried");
+            add("baked");
+            add("smoked");
+            add("roasted");
+        }
+    };
+```
+
+Random Dish Name is then generated by taking a random String element from each of these 4 ArrayLists and adding a white
+space between the Strings. The generated Dish Name is stored in the String variable `generatedDishName` to be printed to
+the user.
+
+Code snippet:
+
+```
+        Ui UI = new Ui();
+
+        Random randomMethod = new Random();
+
+        int carbohydratesIndex = randomMethod.nextInt(carbohydrates.size());
+        int proteinsIndex = randomMethod.nextInt(proteins.size());
+        int saucesIndex = randomMethod.nextInt(sauces.size());
+        int cookingMethodsIndex = randomMethod.nextInt(cookingMethods.size());
+
+        String generatedDishName = cookingMethods.get(cookingMethodsIndex) + " "
+                + sauces.get(saucesIndex) + " "
+                + proteins.get(proteinsIndex) + " "
+                + carbohydrates.get(carbohydratesIndex) + " ";
+
+        this.randomDishName = generatedDishName;
+
+        UI.printRandomDishName(generatedDishName);
+```
+
+This allows the user to generate new Dish ideas.
+
 ### Sort
-The `SortDishCommand` and `SortIngrCommand` classes are used to sort the Dishes and Ingredients
-respectively, according to their Wastages in descending order. This allows the user to view 
-the most wasted Dishes and Ingredients at the top.
+
+The `SortDishCommand` and `SortIngrCommand` classes are used to sort the Dishes and Ingredients respectively, according
+to their Wastages in descending order. This allows the user to view the most wasted Dishes and Ingredients at the top.
 
 ![](images/sort_dish_sequence.png)
 ![](images/sort_ingr_sequence.png)
 
-* The Sort functions work by calling on the pre-existing Comparator function in ArrayList.
-Using this, they sort the Dishes and Ingredients in descending order of their Wastages. 
-* Once done, the Sort Commands call on the list() function present in both DishList and IngredientList. 
-* The list() function calls upon the `Ui` class to print the list of Dishes or Ingredients
-via the printDishList(dishList) or printIngrList(ingredientList) functions.
+* The Sort functions work by calling on the pre-existing Comparator function in ArrayList. Using this, they sort the
+  Dishes and Ingredients in descending order of their Wastages.
+* Once done, the Sort Commands call on the list() function present in both DishList and IngredientList.
+* The list() function calls upon the `Ui` class to print the list of Dishes or Ingredients via the printDishList(
+  dishList) or printIngrList(ingredientList) functions.
 
 ### Terminal Refreshing / Clear Screen
-The interface of the program utilizes the ClearScreen class to clear the terminal after every user input through the built-in `ProcessBuilder` Java class. Such a feature allows greater readability and focus for the user as the terminal will not be cluttered with past commands.
+
+The interface of the program utilizes the ClearScreen class to clear the terminal after every user input through the
+built-in `ProcessBuilder` Java class. Such a feature allows greater readability and focus for the user as the terminal
+will not be cluttered with past commands.
 `Ui` will call `ClearScreen.clearConsole()` method to clear the terminal.
 
 The ProcessBuilder class will send a respective command to the terminal depending on the Operating System of the user.
@@ -509,9 +602,10 @@ Brings developers through the requirements of Users the *Food-O-Rama* team consi
 
 ## 🧪 Instructions for Manual Testing
 
-* For Manual Testing, you can write sample data into data text files (`dishes.txt` & `ingredients.txt`). 
-  
-Dish Format: `[DISH_NAME] | [AMOUNT_WASTED_IN_KG] | [WASTAGE_DIVIDED_BY_NUM_OF_LINKED_INGR] | [WASTAGE_LIMIT] | [INGR_1|INGR_2|etc.]`
+* For Manual Testing, you can write sample data into data text files (`dishes.txt` & `ingredients.txt`).
+
+Dish
+Format: `[DISH_NAME] | [AMOUNT_WASTED_IN_KG] | [WASTAGE_DIVIDED_BY_NUM_OF_LINKED_INGR] | [WASTAGE_LIMIT] | [INGR_1|INGR_2|etc.]`
 
 * 💡 *Note*: `[WASTAGE_LIMIT]` is `-1` when no limit is set.
 
