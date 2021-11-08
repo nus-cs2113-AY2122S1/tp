@@ -378,7 +378,7 @@ inventory more efficiently.
 |v2.0|librarian|view the list of items are due to be returned today|keep track of what items are expected to be returned today| 
 |v2.0|librarian|view the list of overdue items|inform people to return them|
 |v2.1|librarian|view the list of items that are due to be returned on a specific date|get a list of expected returns in the future|
-|v2.1|librarian|search items by their categories (Book, CD, Magazine, etc)|easily sort through the inventory|
+|v2.1|librarian|search items by their categories (Book, Audio, Magazine, Video)|easily sort through the inventory|
 |v2.1|librarian|retain the items information|keep the details without re-entering it everytime I start the application||
 |v2.1|librarian|search items using multiple parameters (title, id, status, category, etc)|narrow down the items based on certain parameters|
 |v2.1|librarian|edit the details of the items simultaneously|quickly make changes to the details of each item|
