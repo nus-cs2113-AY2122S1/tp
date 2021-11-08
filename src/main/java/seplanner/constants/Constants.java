@@ -14,7 +14,7 @@ public class Constants {
     public static final int INDEX_LENGTH = 3;
     public static final int UNIVERSITY_NAME_LENGTH = 50;
     public static int MODUlE_NAME_LENGTH = 40;
-    // @@author
+    // @@author leowyy99
     // Commands
     public static final String COMMAND_REMOVE = "remove";
     public static final String COMMAND_ADD = "add";
@@ -47,14 +47,14 @@ public class Constants {
     public static final String ERRORMSG_PARSEEXCEPTION_UNINOTAVAILABLE = "This university does not exist.";
     public static final String ERRORMSG_PARSEEXCEPTION_UNIINDEXNOTAVAILABLE = "This university index does not exist.";
     public static final String ERRORMSG_PARSEEXCEPTION_UNIINVALID =
-            "Input is either university index or university name";
+            "Input is either university index or university name.";
 
     public static final String ERRORMSG_PARSEEXCEPTION_MODNOTFOUND = "Module not found.";
     public static final String ERRORMSG_PARSEEXCEPTION_MODDUPLICATE = "This module has already been added.";
     public static final String ERRORMSG_PARSEEXCEPTION_MODNOTSELECTED = "This module is not in your selected list.";
     public static final String ERRORMSG_PARSEEXCEPTION_MODNOTAVAILABLE = "This module does not exist.";
     public static final String ERRORMSG_PARSEEXCEPTION_MODINDEXNOTAVAILABLE = "This module index does not exist.";
-    public static final String ERRORMSG_PARSEEXCEPTION_MODINVALID = "Input is either module index or module code";
+    public static final String ERRORMSG_PARSEEXCEPTION_MODINVALID = "Input is either module index or module code.";
 
     public static final String ERRORMSG_PARSEEXCEPTION_DUPLICATEMAP = "This mapping has already been added.";
     public static final String ERRORMSG_PARSEEXCEPTION_NOMAPPING = "This university has no available mappings.";

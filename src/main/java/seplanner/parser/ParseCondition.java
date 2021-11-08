@@ -10,6 +10,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 //@@ author MAZJ124
+
+/**
+ * Conditions to be checked by the parser to throw exceptions.
+ */
 public class ParseCondition {
 
     /**
