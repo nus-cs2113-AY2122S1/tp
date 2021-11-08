@@ -1,0 +1,60 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam actorStyle awesome
+Actor User as user #abcdef
+Participant ":UI" as ui #abcdef
+Participant ":Parser" as parser #f3f609
+Participant ":Entry" as entry #f3f609
+Participant ":AddMember" as command
+Participant ":Member" as member #d83815
+Participant ":Storage" as storage #ffffff
+
+user -> ui : entry
+
+ui -> parser
+activate parser
+
+parser -> entry : waitForQuery()
+activate entry
+
+entry -> parser : getKeywordStatus()
+
+parser --> entry : keyword = ADD_MEMBER
+
+entry -> parser : getMemberDetails()
+parser --> entry : member = new Member()
+
+entry -> command : new AddMember()
+activate command
+
+command -> member : members.addMember()
+activate member
+
+member -> storage : writeMemberFile()
+activate storage
+
+storage -> storage : save to disk
+activate storage
+
+storage --> storage
+deactivate storage
+
+storage --> member
+deactivate storage
+
+member --> command
+deactivate member
+
+command --> entry
+destroy command
+
+entry --> parser
+deactivate entry
+
+parser -> ui
+
+deactivate parser
+
+ui -> user : printNewMemberAdded()
+
+@enduml

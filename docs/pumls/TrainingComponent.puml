@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/component-diagram
+skinparam classAttributeIconSize 0
+
+
+Package Training <<Rectangle>> {
+
+Class TrainingList {
+- ArrayList<TrainingSchedule> TrainingList
++ addTrainingSchedule()
++ deleteTrainingSchedule()
++ findTraining()
+}
+
+Class TrainingSchedule {
+# String TrainingName
+# String TrainingTime
+# String TrainingVenue
+# int TrainingIndex
+}
+
+}
+
+Package Storage <<Rectangle>> {
+Class TrainingStorage
+hide member
+}
+
+Package Attendance <<Rectangle>> {
+Class Attendance
+hide member
+}
+
+TrainingStorage "1"<..>"1" TrainingList
+TrainingList "1"<..>"*" TrainingSchedule
+TrainingSchedule "1"..right>"*" Attendance
+
+hide circle
+@enduml
