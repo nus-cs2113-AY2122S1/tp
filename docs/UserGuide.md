@@ -114,7 +114,7 @@ It will guide you to the possible commands you can enter into Stonks XD. (Tip! R
 
 
 - Parameters surrounded with `[` and `]` are optional parameters which you might consider including to your input.
-  e.g. in the add expense/income feature, an optional date parameter `[D/DATE]` may be added which can be typed as `D/19/10/2021` 
+  e.g. in the show graph feature: `show_graph [Y/YEAR]`, an optional `YEAR` parameter may be added to show graphs of different years.
 
 
 - Most features below have a collapsible section that allows you to see the run time output. Do check them out if you want to visualize what the product looks like!
@@ -214,12 +214,9 @@ Note: Budget reminders of different kinds might also appear when expenses are ad
 They might look something like this.
 
 <pre>-----------------------------------------------------------------------------------------------------
-You are almost reaching the OCTOBER OVERALL budget: $48.40/$50.00
-Consider readjusting your OCTOBER OVERALL budget!
------------------------------------------------------------------------------------------------------
-You have exceeded the OCTOBER FOOD budget: $30.40/$30.00
-Since you have not yet exceeded your OCTOBER OVERALL budget: $48.40/$50.00
-You can directly increase your OCTOBER FOOD budget up to $32.00!
+Exceeded both NOVEMBER FOOD budget ($35.50/$30.00) and NOVEMBER OVERALL budget ($50.50/$50.00).
+Consider adjusting your OVERALL budget to $50.50 before adjusting your FOOD budget!
+Currently you cannot extend your FOOD budget without first extending your OVERALL budget!
 -----------------------------------------------------------------------------------------------------
 </pre>
 </details>
@@ -261,12 +258,9 @@ Note: Budget reminders of different kinds might also appear when expenses are ad
 They might look something like this.
 
 <pre>-----------------------------------------------------------------------------------------------------
-You are almost reaching the OCTOBER OVERALL budget: $48.40/$50.00
-Consider readjusting your OCTOBER OVERALL budget!
------------------------------------------------------------------------------------------------------
-You have exceeded the OCTOBER FOOD budget: $30.40/$30.00
-Since you have not yet exceeded your OCTOBER OVERALL budget: $48.40/$50.00
-You can directly increase your OCTOBER FOOD budget up to $32.00!
+Exceeded both NOVEMBER FOOD budget ($35.50/$30.00) and NOVEMBER OVERALL budget ($50.50/$50.00).
+Consider adjusting your OVERALL budget to $50.50 before adjusting your FOOD budget!
+Currently you cannot extend your FOOD budget without first extending your OVERALL budget!
 -----------------------------------------------------------------------------------------------------
 </pre>
 </details>
@@ -383,19 +377,6 @@ Examples:
 -----------------------------------------------------------------------------------------------------
 Your most recent earning: 
 [I] december's bonus - $5000.00 (26/12/2021)
------------------------------------------------------------------------------------------------------
-</pre>
-
-Note: Budget reminders of different kinds might also appear when expenses are added!
-They might look something like this.
-
-<pre>-----------------------------------------------------------------------------------------------------
-You are almost reaching the OCTOBER OVERALL budget: $48.40/$50.00
-Consider readjusting your OCTOBER OVERALL budget!
------------------------------------------------------------------------------------------------------
-You have exceeded the OCTOBER FOOD budget: $30.40/$30.00
-Since you have not yet exceeded your OCTOBER OVERALL budget: $48.40/$50.00
-You can directly increase your OCTOBER FOOD budget up to $32.00!
 -----------------------------------------------------------------------------------------------------
 </pre>
 </details>
@@ -768,14 +749,40 @@ Below is a list of all your findings!
 
 ### Set budget: `set_budget`
 
-This sets a budget for one of the many preset expense categories. 
+This sets a budget limit for one of the many preset expense categories. 
 Reminders will be given when your spending approaches the budget limit!
+From here onwards, sub-budgets refer to the `food`, `transport`, `bills`, `medical`, `entertainment` and `misc` budgets.
+
+To help you better manage your budgets, the following features are in place for setting budgets:
+1. The new budget limit for each sub-budget must be greater than the current month's expenses for that sub-budget.
+2. The sum of all the sub-budget limits must be less than the `overall` budget limit.
+3. In the event that a sub-budget's expenses exceed its budget limit, the total expenses for that sub-budget will be used for the calculation in point 2 instead.
+
+Example:
+
+|                    | Food | Transport | Bills | Medical | Entertainment | Misc | Overall     |
+| ------------------ | ---- | --------- | ----- | ------- | ------------- | ---- | -------     |
+| **Expenses**       | $100 | **$1**    | $100  | $100    | $100          | $100 |             |
+| **Budget Limit**   | $100 | $100      | $100  | $100    | $100          | $100 | **>$600**   |
+
+In the example above, none of the sub-budget expenses exceed their budget limits. 
+The allowable overall limit must be greater than $100 + **$100** + $100 + $100 + $100 + $100 = $600, which is the sum of all the sub-budget limits.
+
+
+However, in the following example, the transport expense exceeds the transport budget.
+The allowable overall limit must be greater than $100 + **$150** + $100 + $100 + $100 + $100 = $650.
+
+|                    | Food | Transport | Bills | Medical | Entertainment | Misc | Overall     |
+| ------------------ | ---- | --------- | ----- | ------- | ------------- | ---- | -------     |
+| **Expenses**       | $100 | **$150**  | $100  | $100    | $100          | $100 |             |
+| **Budget Limit**   | $100 | $100      | $100  | $100    | $100          | $100 | **>$650**   |
+
+<br>
 
 Format: `set_budget c/CATEGORY a/AMOUNT`
 
 - `CATEGORY` has to be one of `food`, `transport`, `bills`, `medical`, `entertainment`, `misc` or `overall`.
-- `AMOUNT` has to be a valid non-negative number.
-- TIP: Setting `AMOUNT` to 0 deactivates the budget warnings for that category!
+- `AMOUNT` has to be a valid non-negative number less than 100,000,000,000 (100 Billion).
 
 Examples:
 
@@ -784,10 +791,10 @@ Examples:
 <details>
 <summary> ▼ Expected output in run window </summary>
 <br>
-When command <code>set_budget c/bills a/100</code> is given, you get the following message:
+When command <code>set_budget c/bills a/100</code> is given, you get the following message if the budget is set successfully:
 <pre>
 -----------------------------------------------------------------------------------------------------
-BILLS budget has been set to $100.00
+BILLS budget set to $100.00
 -----------------------------------------------------------------------------------------------------
 </pre>
 </details>
@@ -802,7 +809,6 @@ Use this when you forget your budget limits!
 Format: `check_budget c/CATEGORY`
 
 - `CATEGORY` has to be one of `food`, `transport`, `bills`, `medical`, `entertainment`, `misc` or `overall`.
-- TIP: Setting `AMOUNT` to 0 deactivates the budget warnings for that category!
 
 Examples:
 
@@ -827,19 +833,20 @@ This sets the threshold beyond which reminders will be given when approaching th
 Format: `set_threshold t/THRESHOLD`
 
 - `THRESHOLD` has to be a value between 0 and 1.
-- Setting `THRESHOLD` to 0.1 produces reminders when you have used up more than 90% of your budget!
+- Setting `THRESHOLD` to 0.9 produces reminders when you have used up more than 90% of your budget!
 
 Examples:
 
-- `set_threshold t/0.2` sets the threshold value of all budget categories to 80%.
+- `set_threshold t/0.8` sets the threshold value of all budget categories to 80%.
 
 <details>
 <summary> ▼ Expected output in run window </summary>
 <br>
-When command <code>set_threshold t/0.2</code> is given, you get the following message:
+When command <code>set_threshold t/0.8</code> is given, you get the following message:
 <pre>
 -----------------------------------------------------------------------------------------------------
-Threshold for budget reminders set to 0.2
+Threshold for budget reminders set to 0.8
+We'll warn you when you spend 80.0% of your budget!
 -----------------------------------------------------------------------------------------------------
 </pre>
 </details>
