@@ -322,13 +322,8 @@ The following diagram explains the sequence of execution for the zoom list comma
 This command is implemented by the `AddZoomCommand` class. The basic functionality of this command is to write a new zoom link to a local storage file and associate it to the relevant module code. The `AddZoomCommand`
 class extends `Command`.
 
-<<<<<<< HEAD
 Syntax: `zoom add [MODULE_CODE] [LINK]`
 Example: `zoom add CS2113T https://nus.sg/testlink`
-=======
-Syntax: `zoom add LINK MODULE_CODE`
-Example: `zoom add https://nus-sg.com ABC101`
->>>>>>> 83d0e72170abc0889cf051f12b6f910fae7a8088
 
 The following diagram explains the sequence of execution for the add zoom command. 
 ![addzoomlink](./diagrams/zoom/addZoomLinksFinal.png)
