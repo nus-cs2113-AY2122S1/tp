@@ -243,9 +243,9 @@ public class Ui {
 
         System.out.print(LINE);
         if (filteredTaskList.isEmpty()) {
-            System.out.println(PADDING + "There is no task on " + period.toUpperCase() + ".");
+            System.out.println(PADDING + "There is no task on " + period + ".");
         } else {
-            System.out.println(PADDING + "Here are the tasks on " + period.toUpperCase() + ":");
+            System.out.println(PADDING + "Here are the tasks on " + period+ ":");
             System.out.print(filteredTaskList);
         }
         System.out.println(LINE);
@@ -334,9 +334,9 @@ public class Ui {
 
         System.out.print(LINE);
         if (filteredLessonList.isEmpty()) {
-            System.out.println(PADDING + "There is no lesson on " + period.toUpperCase() + ".");
+            System.out.println(PADDING + "There is no lesson on " + period + ".");
         } else {
-            System.out.println(PADDING + "Here are the lessons on " + period.toUpperCase() + ":");
+            System.out.println(PADDING + "Here are the lessons on " + period + ":");
             System.out.print(filteredLessonList);
         }
         System.out.println(LINE);
