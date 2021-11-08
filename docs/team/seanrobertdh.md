@@ -45,6 +45,7 @@ Given below are the contributions I have made to this project.
         - **Highlights:** The logger handles getting the class by using the `Thread.currentThread().getStackTrace()` function and manages a `Map<String, Logger>` of
            class names to loggers. That way, the whole process of setting up a fileHandler, consoleHandler and log class is done automatically and
            the user doesn't have to worry about it. Therefore, any issues that can arise from it. e.g. specifying the wrong class when creating a logger are no longer an issue.
+
 ---
 
 - **Contributions to the UG**:
