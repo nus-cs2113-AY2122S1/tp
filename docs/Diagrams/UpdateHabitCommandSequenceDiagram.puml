@@ -2,40 +2,44 @@
 'https://plantuml.com/sequence-diagram
 !include Style.puml
 
--> ":UpdateHabitCommand": runCommand(goalList: GoalList,\nprintManager: PrintManager,\nstorage: Storage
-activate ":UpdateHabitCommand"
+participant ":UpdateHabitCommand" as UpdateHabitCommand COMMAND_COLOUR
+participant "goalList: GoalList" as goalList GOAL_COLOUR
+participant "printManager: PrintManager" as printManager UI_COLOUR
 
-":UpdateHabitCommand" -> "goalList: GoalList": updateHabitAttributes(goalIndex,\nhabitIndex, newHabitName,\nnewHabitInterval, updateAttributes,\nexcessAttributes, printManager)
-activate "goalList: GoalList"
+-> UpdateHabitCommand: runCommand(goalList: GoalList,\nprintManager: PrintManager,\nstorage: Storage
+activate UpdateHabitCommand
 
-"goalList: GoalList" -> "printManager: PrintManager": printUpdateHabitMessageStart()
-activate "printManager: PrintManager"
-"printManager: PrintManager" --> "goalList: GoalList"
-deactivate "printManager: PrintManager"
+UpdateHabitCommand -> goalList: updateHabitAttributes(goalIndex,\nhabitIndex, newHabitName,\nnewHabitInterval, updateAttributes,\nexcessAttributes, printManager)
+activate goalList
+
+goalList -> printManager: printUpdateHabitMessageStart()
+activate printManager
+printManager --> goalList
+deactivate printManager
 
 alt#gold #lightblue updateAttributes[0] == 1
-"goalList: GoalList" -> "goalList: GoalList": updateHabitNameFromGoal(goalIndex,\nhabitIndex, newHabitName, printManager)
-activate "goalList: GoalList"
-"goalList: GoalList" --> "goalList: GoalList":
-deactivate "goalList: GoalList"
+goalList -> goalList: updateHabitNameFromGoal(goalIndex,\nhabitIndex, newHabitName, printManager)
+activate goalList
+goalList --> goalList:
+deactivate goalList
 end
 
 alt#gold #lightblue updateAttributes[1] == 1
-"goalList: GoalList" -> "goalList: GoalList": updateHabitIntervalFromGoal(goalIndex, \nhabitIndex, newHabitInterval, printManager);
-activate "goalList: GoalList"
-"goalList: GoalList" --> "goalList: GoalList":
-deactivate "goalList: GoalList"
+goalList -> goalList: updateHabitIntervalFromGoal(goalIndex, \nhabitIndex, newHabitInterval, printManager);
+activate goalList
+goalList --> goalList:
+deactivate goalList
 end
 
-"goalList: GoalList" -> "printManager: PrintManager": printUpdateHabitMessageEnd\n(excessAttributes)
-activate "printManager: PrintManager"
-"printManager: PrintManager" --> "goalList: GoalList"
-deactivate "printManager: PrintManager"
+goalList -> printManager: printUpdateHabitMessageEnd\n(excessAttributes)
+activate printManager
+printManager --> goalList
+deactivate printManager
 
-"goalList: GoalList" --> ":UpdateHabitCommand"
-deactivate "goalList: GoalList"
+goalList --> UpdateHabitCommand
+deactivate goalList
 
-<-- ":UpdateHabitCommand"
-deactivate ":UpdateHabitCommand"
+<-- UpdateHabitCommand
+deactivate UpdateHabitCommand
 
 @enduml

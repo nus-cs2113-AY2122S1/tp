@@ -2,47 +2,51 @@
 'https://plantuml.com/sequence-diagram
 !include Style.puml
 
--> ":UpdateGoalCommand": runCommand(goalList: GoalList,\nprintManager: PrintManager,\nstorage: Storage
-activate ":UpdateGoalCommand"
+participant ":UpdateGoalCommand" as UpdateGoalCommand COMMAND_COLOUR
+participant "goalList: GoalList" as goalList GOAL_COLOUR
+participant "printManager: PrintManager" as printManager UI_COLOUR
 
-":UpdateGoalCommand" -> "goalList: GoalList": updateGoalAttributes(goalIndex,\nnewGoalName, newGoalType,\nnewGoalEndDate, updateAttributes,\nexcessAttributes, printManager)
-activate "goalList: GoalList"
+-> UpdateGoalCommand: runCommand(goalList: GoalList,\nprintManager: PrintManager,\nstorage: Storage
+activate UpdateGoalCommand
 
-"goalList: GoalList" -> "printManager: PrintManager": printUpdateGoalMessageStart()
-activate "printManager: PrintManager"
-"printManager: PrintManager" --> "goalList: GoalList"
-deactivate "printManager: PrintManager"
+UpdateGoalCommand -> goalList: updateGoalAttributes(goalIndex,\nnewGoalName, newGoalType,\nnewGoalEndDate, updateAttributes,\nexcessAttributes, printManager)
+activate goalList
+
+goalList -> printManager: printUpdateGoalMessageStart()
+activate printManager
+printManager --> goalList
+deactivate printManager
 
 alt#gold #lightblue updateAttributes[0] == 1
-"goalList: GoalList" -> "goalList: GoalList": updateGoalName(goalIndex,\nnewGoalName, printManager)
-activate "goalList: GoalList"
-"goalList: GoalList" --> "goalList: GoalList":
-deactivate "goalList: GoalList"
+goalList -> goalList: updateGoalName(goalIndex,\nnewGoalName, printManager)
+activate goalList
+goalList --> goalList:
+deactivate goalList
 end
 
 alt#gold #lightblue updateAttributes[1] == 1
-"goalList: GoalList" -> "goalList: GoalList": updateGoalType(goalIndex,\nnewGoalType, printManager)
-activate "goalList: GoalList"
-"goalList: GoalList" --> "goalList: GoalList":
-deactivate "goalList: GoalList"
+goalList -> goalList: updateGoalType(goalIndex,\nnewGoalType, printManager)
+activate goalList
+goalList --> goalList:
+deactivate goalList
 end
 
 alt#gold #lightblue updateAttributes[2] == 1
-"goalList: GoalList" -> "goalList: GoalList": updateGoalEndDate(goalIndex,\nnewGoalEndDate, printManager)
-activate "goalList: GoalList"
-"goalList: GoalList" --> "goalList: GoalList":
-deactivate "goalList: GoalList"
+goalList -> goalList: updateGoalEndDate(goalIndex,\nnewGoalEndDate, printManager)
+activate goalList
+goalList --> goalList:
+deactivate goalList
 end
 
-"goalList: GoalList" -> "printManager: PrintManager": printUpdateGoalMessageEnd\n(excessAttributes)
-activate "printManager: PrintManager"
-"printManager: PrintManager" --> "goalList: GoalList"
-deactivate "printManager: PrintManager"
+goalList -> printManager: printUpdateGoalMessageEnd\n(excessAttributes)
+activate printManager
+printManager --> goalList
+deactivate printManager
 
-"goalList: GoalList" --> ":UpdateGoalCommand"
-deactivate "goalList: GoalList"
+goalList --> UpdateGoalCommand
+deactivate goalList
 
-<-- ":UpdateGoalCommand"
-deactivate ":UpdateGoalCommand"
+<-- UpdateGoalCommand
+deactivate UpdateGoalCommand
 
 @enduml

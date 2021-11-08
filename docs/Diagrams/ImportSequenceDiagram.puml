@@ -1,6 +1,10 @@
 @startuml
 !include Style.puml
 
+participant ":Storage" as Storage STORAGE_COLOUR
+participant ":Import" as Import STORAGE_COLOUR
+participant ":ImportParser" as ImportParser PARSER_COLOUR
+
 [-> Storage: load()
 activate Storage
 Storage -> Import: importStorage(filePath)

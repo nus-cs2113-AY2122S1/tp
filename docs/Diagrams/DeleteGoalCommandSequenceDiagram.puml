@@ -2,38 +2,42 @@
 
 !include Style.puml
 
--> ": DeleteGoalCommand": runCommand(\ngoalList: GoalList,\nprintManager: PrintManager,\nstorage: Storage)
-activate ": DeleteGoalCommand"
+participant ": DeleteGoalCommand" as DeleteGoalCommand COMMAND_COLOUR
+participant "goalList: GoalList" as goalList GOAL_COLOUR
+participant "printManager: PrintManager" as printManager UI_COLOUR
 
-": DeleteGoalCommand" -> "goalList: GoalList": deleteGoal(\ngoalIndex: int,\nprintManager: PrintManager)
-activate "goalList: GoalList"
+-> DeleteGoalCommand: runCommand(\ngoalList: GoalList,\nprintManager: PrintManager,\nstorage: Storage)
+activate DeleteGoalCommand
 
-"goalList: GoalList" -> "goalList: GoalList": getGoal(goalIndex: int)
-activate "goalList: GoalList"
-"goalList: GoalList" --> "goalList: GoalList"
-deactivate "goalList: GoalList"
+DeleteGoalCommand -> goalList: deleteGoal(\ngoalIndex: int,\nprintManager: PrintManager)
+activate goalList
 
-ref over "goalList: GoalList": Abstracted checks before\ndeleting Goal:\ngoalIndex  is a positive integer \nand not out of bounds.
+goalList -> goalList: getGoal(goalIndex: int)
+activate goalList
+goalList --> goalList
+deactivate goalList
 
-"goalList: GoalList" -> "goalList: GoalList": updateChosenGoalIndex(\ngoalIndex: int)
-activate "goalList: GoalList"
-"goalList: GoalList" --> "goalList: GoalList"
-deactivate "goalList: GoalList"
+ref over goalList: Abstracted checks before\ndeleting Goal:\ngoalIndex  is a positive integer \nand not out of bounds.
 
-"goalList: GoalList" -> "goalList: GoalList": remove(goal: Goal)
-activate "goalList: GoalList"
-"goalList: GoalList" --> "goalList: GoalList"
-deactivate "goalList: GoalList"
+goalList -> goalList: updateChosenGoalIndex(\ngoalIndex: int)
+activate goalList
+goalList --> goalList
+deactivate goalList
+
+goalList -> goalList: remove(goal: Goal)
+activate goalList
+goalList --> goalList
+deactivate goalList
 
 
-"goalList: GoalList" -> "goalList: GoalList": printRemovedGoal(\ngoal.getDescription(): String)
-activate "goalList: GoalList"
-"goalList: GoalList" -> ": PrintManager"
-deactivate "goalList: GoalList"
+goalList -> goalList: printRemovedGoal(\ngoal.getDescription(): String)
+activate goalList
+goalList -> printManager
+deactivate goalList
 
-activate ": PrintManager"
-"goalList: GoalList" <-- ": PrintManager"
-deactivate ": PrintManager"
+activate printManager
+goalList <-- printManager
+deactivate printManager
 
 return
 
