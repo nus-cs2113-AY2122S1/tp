@@ -89,7 +89,7 @@ Adds your **todo** to your task list.
 
 **Example**: `todo read book --doOn 20-10-2021 02:00 --recur daily`
 - Adds a todo task with the description '`read book`' to your task list.
-- Specifies that the priority of the task is '`medium`' [(default priority)](#-some-notes-when-adding-tasks).
+- Specifies that the priority of the task is '`medium`' (default priority).
 - Specifies that the task is to be done on '`20-10-2021 02:00`'.
 - Specifies that the task is to repeat '`daily`'.
 
@@ -117,7 +117,7 @@ Adds your **deadline** to your task list.
 - Adds a deadline task with the description '`CS2106 Lab 3`' to your task list.
 - Specifies that the priority of the task is '`high`'.
 - Specifies that the task is to be done on '`20-10-2021 02:00`'.
-- Specifies that the task will have no recurrence [(default recurrence)](#-some-notes-when-adding-tasks).
+- Specifies that the task will have no recurrence (default recurrence).
 
 **Expected Outcome**:
 
@@ -143,8 +143,8 @@ Adds your **event** to your task list.
 **Example**: `event Marquee Christmas Party --priority high --start 25-12-2020 22:00 --end 26-12-2020 04:00`
 - Adds an event task with the description '`Marquee Christmas Party`' to your task list.
 - Specifies that the priority of the task is '`high`'.
-- Specifie that the task starts on '`25-12-2020 22:00`' and ends on '`26-12-2020 04:00`'.
-- Specifies that the task will have no recurrence [(default recurrence)](#-some-notes-when-adding-tasks).
+- Specifies that the task starts on '`25-12-2020 22:00`' and ends on '`26-12-2020 04:00`'.
+- Specifies that the task will have no recurrence (default recurrence).
 
 **Expected Outcome**:
 
@@ -160,7 +160,7 @@ Adds your **event** to your task list.
 
 When entering dates into SchedUrMods, we accept multiple date formats to allow you to reduce how much you have to type.  
 
-The accepted date formats in SchedUrMods:  
+The accepted date formats in SchedUrMods are:
 - `dd/MM/yyyy HH:mm` or `dd/MM/yy HH:mm`
 - `dd/MM/yyyy HH` or `dd/MM/yy HH`
 - `dd/MM HH:mm`
@@ -197,9 +197,9 @@ List all tasks currently stored locally in your task list.
 **Format**: `list`
 - The command displays the following information for each task:
   - **Task id**:
-    - A positive integer i.e. `1.` to identify the task. This is used in the `edit`@@@@@@@@link, `browse` and `delete` command
+    - A positive integer i.e. `1.` to identify the task. This is used in the [`edit`](#26-editing-your-tasks-edit), [`browse`](#272-browse-browse) and [`delete`](#28-deleting-your-tasks-delete) command
   - **Task type**:
-    - A task can be either Todo, Deadline, Event or Lesson and is represented with the first letter of their task type
+    - A task can either be a Todo, Deadline, Event or Lesson and they are all represented with the first letter of their task type
     - `[T]` represents a `Todo`
     - `[D]` represents a `Deadline`
     - `[E]` represents a `Event`
@@ -247,7 +247,7 @@ Filters the task list for all tasks that matches the filters applied.
 
 **Format**: `list [--filter <argument>] [--filter <argument>] ...`
 - `[--flag <argument>]` specifies the filter to be applied to your task list.
-  - Type of task: `[--type <todo|deadline|event|lesson>]`
+  - Type of the task: `[--type <todo|deadline|event|lesson>]`
   - Priority of the task: `[--priority <low|medium|high>]`
   - Recurrence of the task: `[--recur <none|daily|weekly|monthly|yearly>]`
 
@@ -337,28 +337,28 @@ Sorts your task list by a given criteria.
 -------------------------------------------------------------------------
 ```
 
-### 2.5 Setting reminders to your tasks: `reminder`
+### 2.5 Setting reminders for your tasks: `reminder`
 
 ### 2.6 Editing your tasks: `edit`
 Edits a single [Todo](#221-todo-todo), [Deadline](#222-deadline-deadline) or [Event](#223-event-event) based on the flags entered.
 **Format**: `edit <index> <--flag <value>> [--flag <value>] [--flag <value>]...`
-- `<index>` is the index of the task you want to edit from the most recent [list](#24-listing-your-tasks-list) command that you have run.
-   >💡 **Note**: if the task you want to edit was not in your most recent [list](#24-listing-your-tasks-list) command, simply type `list` to list all tasks and use its corresponding index to edit it.
+- `<index>` is the index of the task you want to edit from the most recent [list](#23-listing-your-tasks-list) command that you have run.
+   >💡 **Note**: if the task you want to edit was not in your most recent [list](#23-listing-your-tasks-list) command, simply type `list` to list all tasks and use its corresponding index to edit it.
 - at least one `<--flag <value>>` must be specified, though you can edit multiple values at once by providing multiple more `[--flag <value>]` arguments.
 - **Flags**
-  - `--description <description>` modifies task description.
-  - `--priority <high|medium|low>` modifies task priority.
-  - `--recur <none|daily|weekly|monthly|yearly>` modifies task recurrence.
-  - <code>--doOn <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Todo](#221-todo-todo) is to be done.
-  - <code>--due <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Deadline](#222-deadline-deadline) is due.
-  - <code>--start <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Event](#223-event-event) starts.
-  - <code>--end <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when [Event](#223-event-event) ends.
+  - `--description <description>` modifies your task description.
+  - `--priority <high|medium|low>` modifie yours task priority.
+  - `--recur <none|daily|weekly|monthly|yearly>` modifies your task recurrence.
+  - <code>--doOn <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when your [Todo](#221-todo-todo) is to be done.
+  - <code>--due <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when your [Deadline](#222-deadline-deadline) is due.
+  - <code>--start <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when your [Event](#223-event-event) starts.
+  - <code>--end <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a></code> modifies when your [Event](#223-event-event) ends.
   - `--link <url>` modifies your Lesson link.
 
 
 ### 2.7 Adding your NUS timetable:
 
-Allows you to add modules into your task list and browse to their meeting links.
+Allows you to add modules into your task list and browse to their meeting links with your Operating System's default internet browser.
 
 #### 2.7.1 Module: `module`
 
@@ -387,10 +387,10 @@ Adds your modules and classes into your task list.
 
 #### 2.7.2 Browse: `browse`
 
-Browse links that were added to a `Lesson` with the `edit`@@@@@ command.
+Browse links that were added to a `Lesson` with the [`edit`](#26-editing-your-tasks-edit) command.
 **Format**: `browse <index>`
-- `<index>` is the index of the task you want to browse to (open in an internet browser) in the most recent [list](#24-listing-your-tasks-list) command that you have run.
-  >💡 **Note**: if the task you want to browse to was not in your most recent [list](#24-listing-your-tasks-list) command, simply type `list` to list all tasks and use its corresponding index to browse to the task's url.
+- `<index>` is the index of the task you want to browse to (open in an internet browser) in the most recent [list](#23-listing-your-tasks-list) command that you have run.
+  >💡 **Note**: if the task you want to browse to was not in your most recent [list](#23-listing-your-tasks-list) command, simply type `list` to list all your tasks and use its corresponding index to browse to the task's url.
 
 **Example**: `browse 2`
 
@@ -402,12 +402,12 @@ Browse links that were added to a `Lesson` with the `edit`@@@@@ command.
 -------------------------------------------------------------------------
 ```
 
->💡 **Note**: The opening of the link is done by the operating system. As such, the actual protocols supported is
-> dependent on the OS.
+>💡 **Note**: The opening of the link in your default browser is done by the operating system. As such, the actual protocols supported is
+> dependent on your OS.
 
 
->💡 **Note**: There may be possible error messages printed on your terminal. They can be from the associated application
-> for opening the link, such as Chrome, and not SchedUrMods.
+>💡 **Note**: There may be error messages printed on your terminal which can be from the associated application
+> used in opening the link, such as Chrome, and not SchedUrMods.
 
 >💡 **Note**: If there is no link in the lesson being specified, you will be prompted with an error:
 >
@@ -422,19 +422,19 @@ Browse links that were added to a `Lesson` with the `edit`@@@@@ command.
 ### 2.8 Deleting your tasks: `delete`
 Deletes all task(s) specified in a comma-separated argument.
 **Format**: `delete <indexes>`
-- `<indexes>` are the indexes of the task you want to edit from the most recent [list](#24-listing-your-tasks-list) command that you have run.
-   >💡 **Note**: if the task(s) you want to delete was not in your most recent [list](#24-listing-your-tasks-list) command, simply type `list` to list the tasks and use their indexes to delete them.
+- `<indexes>` are the indexes of the task you want to edit from the most recent [list](#23-listing-your-tasks-list) command that you have run.
+   >💡 **Note**: if the task(s) you want to delete was not in your most recent [list](#23-listing-your-tasks-list) command, simply type `list` to list the tasks and use their indexes to delete them.
   - Indexes should be comma separated single integers such as `5` and/or ranges of two indexes such as `1-3`.
   - **Example**:
    - `delete 1,3,5` would delete tasks with indexes 1, 3 and 5.
    - `delete 1-3` would delete tasks with indexes 1, 2 and 3.
    - `delete 1-3, 5` would delete tasks with indexes 1, 2, 3 and 5.
-   - `delete 5` would delete the task with index 5.
+   - `delete 5` would delete the task with the index 5.
       >💡 **Note**: It does not matter if there are any spaces in-between the commas.
 
 
 **Example**: `delete 1-3, 5`
-- delete tasks with indexes 1, 2, 3 and 5.
+- delete the tasks with indexes 1, 2, 3 and 5.
 
 **List before deletion**:
 
@@ -501,7 +501,7 @@ The program will store and automatically update your tasks in the file `[project
 **Q**: What operating systems can the application work on?
 
 **A**: The SchedUrMods application supports all Windows, Linux and Unix operating systems 
-that have `java 11` installed on their systems. 
+that have the `java 11 jdk` installed on their systems. 
 
 **Q**: How do I transfer my data to another computer?
 
