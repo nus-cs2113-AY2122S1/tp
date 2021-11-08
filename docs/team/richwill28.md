@@ -14,24 +14,20 @@
         * [Code Refactoring](#code-refactoring)
         * [Features Improvement](#features-improvement)
         * [PED Bugs](#ped-bugs)
-    * [User Guide](#user-guide)
-    * [Developer Guide](#developer-guide)
-    * [Team-based Tasks](#team-based-tasks)
+    * [Contributions to the User Guide](#contributions-to-the-user-guide)
+    * [Contributions to the Developer Guide](#contributions-to-the-developer-guide)
+    * [Contributions to Team-based Tasks](#contributions-to-team-based-tasks)
     * [Review/Mentoring](#reviewmentoring)
-    * [Beyond Project Team](#beyond-project-team)
+    * [Contributions Beyond The Project Team](#contributions-beyond-the-project-team)
         * [Forum Contributions](#forum-contributions)
         * [Module Contributions](#module-contibutions)
         * [Other Contributions](#other-contributions)
 
 ## Overview
 
-The motivation for developing [NUSBuddy](https://ay2122s1-cs2113t-w11-3.github.io/tp/) comes from the fact that most computing students spend their time using the terminal.
-However, there was no CLI program that manages student tasks/lessons and combine its functionality with [NUSMods](https://nusmods.com/), so we decided to build one.
-
-The design philosophy of [NUSBuddy](https://ay2122s1-cs2113t-w11-3.github.io/tp/) mostly follows the [KISS principle](https://nus-cs2113-ay2122s1.github.io/website/se-book-adapted/chapters/codeQuality.html#practice-kissing),
-in other words, we want the program to be fast and unobtrusive, so that users spend as little time as possible using our app and actually focus on doing their actual work.
-One more consideration that we implement in our app is that the user commands are friendly (i.e., make sense grammatically).
-For instance, `add lesson` is better than `lesson add`.
+The design philosophy of [NUSBuddy](https://ay2122s1-cs2113t-w11-3.github.io/tp/) mostly follows [KISS](https://nus-cs2113-ay2122s1.github.io/website/se-book-adapted/chapters/codeQuality.html#practice-kissing),
+in other words, we want the app to be fast and unobtrusive, so that users spend as little time as possible using it and actually focus on doing their actual work.
+In addition, our user commands are friendly (i.e., make sense grammatically). For instance, `add task` is better than `task add`.
 
 My responsibilities:
 
@@ -42,86 +38,68 @@ My responsibilities:
 
 ### Code Contributed
 
-My overall code contributions can be found [here](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25).
-(Search for `richwill28`)
-
-Mostly in charge of `logic` package (including `Command` and `Parser`), `commons` package (including general and utility classes), `Storage` class operations, and overall the data structures of `model` package.
-Have full understanding of almost all the working classes and components to help teammates, when necessary.
+My overall code contributions can be found [here](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=richwill28).
 
 ### Enhancements Implemented
 
 #### Code & Packages Setup
 
-**PRs**: [#23](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/23), [#25](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/25).
+* **PRs**: [#23](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/23), [#25](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/25).
 
-Set up code skeleton used in the project, including the following classes:
-
-* `Duke`
-* `DukeException`
-* `Command`
-* `Lesson`
-* `Message`
-* `Parser`
-* `Storage`
-* `Task`
-* `Ui`
-* ...and many more!
+Set up code skeleton for the program.
 
 #### Unit Testing & Assertions
 
-**PR**: [#28](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/28), [#114](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/114), [#163](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/163),
+* **PR**: [#28](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/28), [#114](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/114), [#163](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/163),
 [#164](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/164), [#173](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/173).
 
 Added JUnit testing and assertions to make code more defensive and more effective for regression testing.
 
 #### Logging
 
-**PR**: [#60](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/60).
+* **PR**: [#60](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/60).
 
 Added logging to record the states of the program, and is useful for troubleshooting when needed.
 
 #### Code Refactoring
 
-**PR**: [#28](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/28), [#35](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/35), [#59](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/59),
+* **PR**: [#28](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/28), [#35](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/35), [#59](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/59),
 [#164](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/164), [#184](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/114).
 
 Refactored classes and packages to improve overall code quality (e.g., better OOP, SLAP, etc.).
-Most notable refactoring is [#28](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/28), which our team like to refer to as "the great refacotring",
+Most notable refactoring is [#28](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/28),
 as major changes to the code architecture were implemented for improved scalability and better separation of concerns with respect to OOP.
 
 #### Features Improvement
 
-**PR**: [#28](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/28), [#64](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/64), [#84](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/84),
+* **PR**: [#28](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/28), [#64](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/64), [#84](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/84),
 [#87](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/87), [#114](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/114), [#163](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/163),
 [#173](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/173).
 
 Most notable enhancement is the [launch lesson](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/114) feature.
 The motivation for developing this comes from the frustration that some terminals do not support URL highlighting,
-which prevent users from conveniently clicking and launching the URLs stored in `Lesson`.
-The feature had been tested and confirmed to be working on Windows, Linux, Mac, and WSL.
+which prevent users from conveniently clicking and launching the URL stored in `Lesson`.
 
 #### PED Bugs
 
 * **PR**: [#163](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/163), [#173](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/173), [#184](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/184).
 
-Squashed bugs found in PE Dry Run. These included high priority bug such as [#156](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/156),
-and medium severity bugs such as [#112](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/112) and [#149](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/149),
-as well as other lower severity bugs.
+Squashed bugs found in PE Dry Run.
 
-### User Guide
+### Contributions to the User Guide
 
 * **PRs**: [#95](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/95), [#106](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/106).
 
 Refactored most sections of UG to improve its layout. Updated User Guide sequentially as the program output changes.
 
-### Developer Guide
+### Contributions to the Developer Guide
 
 * **PRs**: [#74](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/74), [#75](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/75), [#106](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/106).
 
 Set up the structure of DG, starting with `Architecture` and `Logic` sections.
 Incorporated UML Diagrams with the help of [PlantUML](https://plantuml.com/), including class and sequence diagrams.
 
-### Team-based Tasks
+### Contributions to Team-based Tasks
 
 * Set up GitHub team organization and repository.
 * Managed JAR releases.
@@ -148,7 +126,7 @@ All PED bugs were reviewed and assigned with labels. Notable ones are listed bel
 [#129](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/129), [#133](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/133), [#134](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/134),
 [#141](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/141), [#149](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/149), [#155](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/155).
 
-### Beyond Project Team
+### Contributions Beyond The Project Team
 
 #### Forum Contributions
 
