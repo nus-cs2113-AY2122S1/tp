@@ -30,17 +30,13 @@ public class Parser {
     private static final String DEFAULT_LABEL = "df";
 
     private static final String ERROR_NAME_FORMAT = "Use the 'n/' flag to define the name. Exp: n/Foo";
-    private static final String ERROR_GOAL_END_DATE_FORMAT = "Use the e/ flag to set the new goal end dateEg: ";
     private static final String ERROR_GOAL_TYPE_FORMAT = "Use the 't/' flag to define the goal type. Exp: t/df";
-    private static final String ERROR_GOAL_UPDATE_FORMAT = "Missing additional goal name, goal end date, or "
-            + "goal type parameter needed for update.";
     private static final String ERROR_INTEGER_FLAG_FORMAT = "The command is missing the '%1$s' flag.";
     private static final String ERROR_CONVERT_NUM = "The flag '%1$s' has to be followed by a number.";
     private static final String ERROR_UNDEFINED_GOAL_TYPE_LABEL =
             "Use the following goal types: 'sl', 'fd', 'ex', 'sd', 'df'.";
     private static final String ERROR_NEGATIVE_NUM = "The flag '%1$s' has to be followed by a positive integer.";
     private static final String ERROR_ZERO_NUM = "The flag '%1$s' has to be followed by a number greater than 0.";
-    protected static final String ERROR_INTERVAL_TOO_LARGE = "Interval size is capped at 365 days.";
     private static final String ERROR_NO_DESCRIPTION = "Use a description of at least 1 character.";
     private static final String ERROR_LONG_DESCRIPTION = "Use a description no more than 50 characters "
             + "(current: %1$s characters)";
@@ -51,7 +47,6 @@ public class Parser {
 
     private static final int FLAG_LENGTH = 2;
     private static final int MAX_NAME_LENGTH = 50;
-    protected static final int MAX_INTERVAL = 365;
 
     /**
      * Splits the input into the various parameters.
@@ -83,16 +78,6 @@ public class Parser {
             }
         }
         return null;
-    }
-
-    /**
-     * 'Type-casting' a Date to a LocalDate.
-     *
-     * @param date Date to be 'type-casted'.
-     * @return LocalDate that has been 'type-casted' from Date.
-     */
-    protected static LocalDate convertDateToLocalDate(Date date) {
-        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
     /**
@@ -223,40 +208,47 @@ public class Parser {
             throw new HaBitParserException(errorMessage);
         } else if (parameter.equals(FLAG_NAME) || parameter.equals(FLAG_INTERVAL)) {
             return parameter;
-        } else if (isParamIsFlagForIndex(parameter, flag)) {
+        } else if (isParamIsFlagForIndex(parameter)) {
             throw new HaBitParserException(String.format(ERROR_FLAG_INDEX_MISSING_PARAMETER, flag));
-            //throw new HaBitParserException(errorMessage);
-        } else if (isParamIsFlagForText(parameter, flag)) {
+        } else if (isParamIsFlagForText(parameter)) {
             throw new HaBitParserException(String.format(ERROR_FLAG_TEXT_MISSING_PARAMETER, flag));
-        } else if (isParamIsFlagForStringDate(parameter, flag)) {
+        } else if (isParamIsFlagForStringDate(parameter)) {
             throw new HaBitParserException(String.format(ERROR_FLAG_DATE_MISSING_PARAMETER, flag));
         } else {
             return parameter;
         }
     }
 
-    private static boolean isParamIsFlagForIndex(String parameter, String flag) {
-        if (parameter.equals(flag) && (flag.equals(FLAG_GOAL_INDEX)
-                || flag.equals(FLAG_HABIT_INDEX) || flag.equals(FLAG_INTERVAL))) {
-            return true;
-        }
-        return false;
+    /**
+     * Checks if a flag for an integer exists without a parameter.
+     *
+     * @param parameter Input to be checked for existence of a parameter.
+     * @return True if the input does not contain the parameter; false otherwise.
+     */
+    private static boolean isParamIsFlagForIndex(String parameter) {
+        return parameter.equals(FLAG_GOAL_INDEX) || parameter.equals(FLAG_HABIT_INDEX)
+                || parameter.equals(FLAG_INTERVAL);
     }
 
-    private static boolean isParamIsFlagForText(String parameter, String flag) {
-        if (parameter.equals(flag) && (flag.equals(FLAG_NAME) || flag.equals(FLAG_GOAL_TYPE))) {
-            return true;
-        }
-        return false;
+    /**
+     * Checks if a flag for a string exists without a parameter.
+     *
+     * @param parameter Input to be checked for existence of a parameter.
+     * @return True if the input does not contain the parameter; false otherwise.
+     */
+    private static boolean isParamIsFlagForText(String parameter) {
+        return parameter.equals(FLAG_NAME) || parameter.equals(FLAG_GOAL_TYPE);
     }
 
-    private static boolean isParamIsFlagForStringDate(String parameter, String flag) {
-        if (parameter.equals(flag) && (flag.equals(FLAG_START_DATE) || flag.equals(FLAG_END_DATE))) {
-            return true;
-        }
-        return false;
+    /**
+     * Checks if a flag for a date exists without a parameter.
+     *
+     * @param parameter Input to be checked for existence of a parameter.
+     * @return True if the input does not contain the parameter; false otherwise.
+     */
+    private static boolean isParamIsFlagForStringDate(String parameter) {
+        return parameter.equals(FLAG_START_DATE) || parameter.equals(FLAG_END_DATE);
     }
-
 
     /**
      * Checks if the input is too long.

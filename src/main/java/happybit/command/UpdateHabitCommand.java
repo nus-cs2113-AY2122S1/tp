@@ -54,10 +54,6 @@ public class UpdateHabitCommand extends UpdateCommand {
         return newHabitInterval;
     }
 
-    public ArrayList<Boolean> getUpdateAttributes() {
-        return updateAttributes;
-    }
-
     public ArrayList<String> getExcessAttributes() {
         return excessAttributes;
     }

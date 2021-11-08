@@ -171,7 +171,7 @@ public class UiStartup extends UiManager {
      *
      * @return Boolean value of isExitFromStartup.
      */
-    public static boolean getIsExitFromStartup() {
+    public boolean getIsExitFromStartup() {
         return isExitFromStartup;
     }
 }
