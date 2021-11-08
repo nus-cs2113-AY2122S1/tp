@@ -217,18 +217,21 @@ public abstract class Parser {
         return result;
     }
 
-    public static int[] extractInt(String input) throws DukeException {
+    public static ArrayList<Integer> extractIndexes(String input) throws DukeException {
         String parsedInput = input.replaceAll("[^\\d]", " ").trim();
         if (parsedInput.isBlank()) {
             throw new DukeException("Indexes entered need to be valid numbers. ");
         }
 
         String[] stringIndexes = parsedInput.split(" +");
-        int [] indexes = new int[stringIndexes.length];
+        ArrayList<Integer> indexes = new ArrayList<>();
 
-        for (int i = 0; i < stringIndexes.length; i++) {
+        for (String stringIndex : stringIndexes) {
             // -1 to obtain the real indexes instead of what the user sees
-            indexes[i] = Integer.parseInt(stringIndexes[i]) - 1;
+            Integer currIndex = Integer.parseInt(stringIndex) - 1;
+            if (!indexes.contains(currIndex)) {
+                indexes.add(currIndex);
+            }
         }
         return indexes;
     }

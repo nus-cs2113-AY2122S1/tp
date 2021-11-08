@@ -18,6 +18,7 @@ import seedu.duke.parser.ItemType;
 import seedu.duke.parser.Parser;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public abstract class AddParser extends Parser {
 
@@ -62,7 +63,7 @@ public abstract class AddParser extends Parser {
 
                 int eventIndex = getEventForTask();
                 Ui.printLineBreak();
-                int[] memberIndexes = getMembersForTask();
+                ArrayList<Integer> memberIndexes = getMembersForTask();
 
                 return new AddTaskCommand(title, description, dateTime, eventIndex, memberIndexes);
 
@@ -200,16 +201,16 @@ public abstract class AddParser extends Parser {
         return eventIndex;
     }
 
-    private static int[] getMembersForTask() {
+    private static ArrayList<Integer> getMembersForTask() {
         Ui.promptForMemberIndex();
-        int[] memberIndexes = null;
+        ArrayList<Integer> memberIndexes = null;
         boolean isCorrectMember = false;
         while (!isCorrectMember) {
             try {
                 assert !Duke.memberRoster.isEmpty() : "The member roster should not be empty";
                 Ui.printMemberRoster();
                 Ui.printLineBreak();
-                memberIndexes = extractInt(Ui.readInput());
+                memberIndexes = extractIndexes(Ui.readInput());
                 for (int index : memberIndexes) {
                     Member member = Duke.memberRoster.get(index);
                     assert member != null : "Member does not exist";
