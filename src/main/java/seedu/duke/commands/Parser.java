@@ -31,7 +31,11 @@ public class Parser {
         try {
             switch (command) {
             case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
+                if (inputList.length == 1) {
+                    return new ExitCommand();
+                } else {
+                    return new UnknownCommand();
+                }
             case RemoveCommand.COMMAND_WORD:
                 return new RemoveCommand(input);
             case ListCommand.COMMAND_WORD:
