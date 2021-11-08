@@ -38,6 +38,7 @@ Given below are my contributions to the project.
       this feature evolved with the iterations and was made functional to clear the transcript of all modules and
       grades. <br>
 
+<div style="page-break-after: always;"></div>
 * **New Feature**: Added the Helpcommand.
     * What it does: allows the user to ask for help if they are stuck and not sure about what commands they should use.
       The `help` command returns a few commands along with the link to the comprehensive User Guide so that the users
@@ -73,7 +74,7 @@ Given below are my contributions to the project.
       and the total number of Module credits fulfilled.
     * Highlights: This feature involves a lot of functionality in the back-end but prints a nicely drafted Transcript
       for the user.<br>
-
+<div style="page-break-after: always;"></div>
 * **Code
   contributed**: [RepoSense link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&tabAuthor=aditichadha1310&tabRepo=AY2122S1-CS2113T-W12-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
