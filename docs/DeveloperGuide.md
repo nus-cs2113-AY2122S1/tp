@@ -2,10 +2,12 @@
 
 ## 🌑 Introduction
 
-*Food-O-Rama* is a Java based Command-Line-Interface (CLI) application.
+This Developer Guide is designed for developers interested in working with *Food-O-Rama* in the following manner:
+1. Assist them in the development process of APIs
+2. Add features to *Food-O-Rama*
 
-This Developer Guide serves to inform developers on the design and implementation of
-*Food-O-Rama* to assist them in the development process of APIs. It also helps them realise the target user profile that
+This guide will bring you through the [design](#-design) of *Food-O-Rama*, the various
+[implementations](#-implementation) of features and their working mechanisms. It also helps you realise the target user profile that
 motivated us to build this application.
 
 | Legend |  Description |
@@ -16,7 +18,7 @@ motivated us to build this application.
 
 * [Acknowledgements](#-acknowledgements)
 * [Setting Up & Getting Started](#-setting-up--getting-started)
-* [Design](#design)
+* [Design](#-design)
     * [Main Components](#main-components)
     * [General Flow](#general-flow)
     * [Input Parsing](#input-parsing)
@@ -26,7 +28,7 @@ motivated us to build this application.
     * [Exceptions](#exceptions)
     * [Command Abstraction](#command-abstraction)
     * [Input Validation](#input-validation)
-* [Implementation](#implementation)
+* [Implementation](#-implementation)
     * [Add](#add)
     * [Find](#find)
     * [Edit](#edit)
@@ -85,6 +87,7 @@ The architecture diagram below shows a high-level overview of the structure betw
 </p>
 <center>Figure 1: Food-O-Rama Overview Architecture Diagram</center>
 
+
 ### General Flow
 
 Describes the step-by-step sequence from User Input to the Output.
@@ -92,7 +95,8 @@ Describes the step-by-step sequence from User Input to the Output.
 <p align="center">
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/main_sequence.png">
 </p>
-<center>Figure 2: General Flow Seqeuence Diagram</center>
+<center>Figure 2: General Flow Sequence Diagram</center>
+
 
 
 1. User is greeted by welcome screen.
@@ -110,6 +114,7 @@ The `InputParser` class is responsible for deconstructing User Inputs to identif
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/input_parser_sequence.png">
 </p>
 <center>Figure 3: InputParser Sequence Diagram</center>
+
 
 1. Gets command name of user input by checking if the users input starts with any of the strings that are defined for
   commands (add dish, list dish, help etc.).
@@ -135,6 +140,7 @@ under *'Data'* folder.
 </p>
 <center>Figure 4: Loading Data Sequence Diagram</center>
 
+
 1. At the start of the program, Duke calls `Storage.load()`.
     * This method in the `Storage` class is responsible for invoking `loadIngredients()`, `loadDishes()`
       and `loadFormat()`.
@@ -157,6 +163,7 @@ under *'Data'* folder.
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/storage_write_sequence.png">
 </p>
 <center>Figure 5: Saving Data Sequence Diagram</center>
+
 
 * After every command, Duke calls `Storage.write(Ingredient)`, then `Storage.write(Dish)`.
     * This method in the `Storage` class is responsible for writing to the respective text file depending on the mode.
@@ -182,6 +189,7 @@ the *Food-O-Rama* data.
 </p>
 <center>Figure 6: Data Structures Class Diagram</center>
 
+
 * The `Dish` class contains the Dish's Name, its wastage and its constituents.
 * The `Ingredient` class contains the Ingredient's Name, the weight of Ingredient in storage, the weight of Ingredient
   wasted as well as the weight of Ingredient wasted from Dish wastage.
@@ -203,7 +211,8 @@ The below class diagram shows the structure and relations of the `Ui` class in *
 <p align="center">
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/UiClass.png">
 </p>
-<center>Figure 7: Food-O-Rama User Interface Class Diagram</center>
+<center>Figure 7: User Interface Class Diagram</center>
+
 
 For simplicity’s sake the ui class has been minimized into 3 components:
 
@@ -225,7 +234,8 @@ highest level, the `Foodorama` class, where it then gets caught and the message 
 <p align="center">
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/command.png">
 </p>
-<center>Figure 8: Food-O-Rama Command Abstraction Diagram</center>
+<center>Figure 8: Command Abstraction Diagram</center>
+
 
 * Different Command Classes that perform different tasks by calling various functions of the Object Classes.
 * All inherit from an abstract `Command` class with one execute method that takes an Arraylist<String> as input.
@@ -242,7 +252,8 @@ The sequence diagram for the validation of Numerical Inputs is given below.
 <p align="center">
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/input_validation_number.png">
 </p>
-<center>Figure 9: Food-O-Rama Input Validation for Number Sequence Diagram</center>
+<center>Figure 9: Input Validation for Number Sequence Diagram</center>
+
 
 The system filters out the numerical inputs from the text strings, and checks if the numerical inputs are
 integers or not providing the actual methods that execute the computation (the only valid inputs are integers in this
@@ -253,7 +264,8 @@ The sequence diagram for the validation of Strings is given below.
 <p align="center">
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/input_validation_string.png">
 </p>
-<center>Figure 10: Food-O-Rama Input Validation for String Sequence Diagram</center>
+<center>Figure 10: Input Validation for String Sequence Diagram</center>
+
 
 The process of input validation for strings is similar to that for integers except only words are valid inputs.
 
@@ -273,7 +285,8 @@ further described in the sequence diagram below.
 <p align="center">
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/add_ingr_command_sequence.png">
 </p>
-<center>Figure 11: Food-O-Rama AddIngredientCommand Sequence Diagram</center>
+<center>Figure 11: AddIngredientCommand Sequence Diagram</center>
+
 
 For `add dish` and `add ingr` commands:
 
@@ -285,7 +298,7 @@ For `add dish` and `add ingr` commands:
 2. For Adding Ingredients, `IngredientList.add()` will prompt storage weight input of the Ingredient from the user and
    throw exceptions if the storage weight is not an integer, is `Infinity` is `NaN`, or is negative.
 
-3. If storage weight input is greater than 10000kg (*soft limit*), the user will be prompted with a confirmation
+3. If storage weight input is greater than 10000 kg (*soft limit*), the user will be prompted with a confirmation
    message.
 
 4. If the user enters `n` or `no`, the input weight prompt will loop until the user inputs a valid number.
@@ -305,7 +318,8 @@ as described by the sequence diagram below for Adding Wastage to Dishes.
 <p align="center">
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/add_dish_waste_command_sequence.png">
 </p>
-<center>Figure 12: Food-O-Rama AddDishWasteCommand Sequence Diagram</center>
+<center>Figure 12: AddDishWasteCommand Sequence Diagram</center>
+
 
 For `add dish waste`, `add ingr waste` and `add ingr stored` commands:
 
@@ -316,7 +330,7 @@ For `add dish waste`, `add ingr waste` and `add ingr stored` commands:
 2. The methods will prompt weight input from the user and throw exceptions if the weight is not an integer,
    is `Infinity`, is `NaN` or is negative.
 
-3. If weight input is greater than 10000kg (*soft limit*), the user will be prompted with a confirmation message.
+3. If weight input is greater than 10000 kg (*soft limit*), the user will be prompted with a confirmation message.
 
 4. If the user enters `n` or `no`, the input weight prompt will loop until the user inputs a valid number.
 
@@ -344,7 +358,11 @@ Code Snippet:
 The find commands (`find dish` and `find ingr`) implement the `FindCommand` class to allow the user to search for a
 particular `KEYWORD` and return a list of Dishes or Ingredients that match the keyword.
 
-![](images/find_command_sequence.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/find_command_sequence.png">
+</p>
+<center>Figure 13: FindCommand Sequence Diagram</center>
+
 
 For `find` commands, the handling method `FindCommand.execute()`:
 
@@ -364,11 +382,15 @@ For `find` commands, the handling method `FindCommand.execute()`:
 The implementation of the Edit function allows the User to edit several instance variables of the Dishes and Ingredients
 present in the DishList and IngredientList.
 
-![](images/edit_dish_name_sequence.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/edit_dish_name_sequence.png">
+</p>
+<center>Figure 14: EditDishNameCommand Sequence Diagram</center>
+
 
 This Sequence Diagram shows how the `EditDishNameCommand` class functions.
 
-Currently the User is able to edit the following:
+Currently, the User is able to edit the following:
 
 * Dish Name
 * Dish Wastage Weight
@@ -386,17 +408,36 @@ The implementation of the set function allows the User to set the expiry date fo
 
 Below is a sequence diagram that shows how the SetExpiryCommand functions
 
-![](images/set_expiry.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/set_expiry.png">
+</p>
+<center>Figure 15: EditDishNameCommand Sequence Diagram</center>
 
-There is currently a soft limit of 10000 days for the expiry. If this limit is exceeded the user will be prompted for
-confirmation before proceeding as 10000 is an unusual amount for the field and might be a misinput.
+
+1. The input will be handled by the basic input validation within the command class to figure out which ingredient is to be changed
+
+2. The methods will prompt a date input as a sting and will throw exceptions if date is of an invalid format.
+
+3. If the input is a valid date, the function will calculate the days till expiry. If this result turns out to be negative (in the past), the user is prompted to re-enter a date
+
+4. There is currently a soft limit of 10000 days for the expiry. If this limit is exceeded the user will be prompted for confirmation before proceeding as 10000 is an unusual amount for the field and might be a misinput.
+
+5. If the user enters `n` or `no`, the user is prompted to re-enter a date.
+
+6. Else, the previously entered date is set as the expiry.
+
+7. The Ui class is then called to print a success message to the user.
 
 ### Link
 
 The Link function allows Users to link existing Ingredients in the IngredientList to the existing Dishes in the DishList
 that use them. The diagram below showcases the sequence of the `LinkCommand` class.
 
-![](images/link_sequence.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/link_sequence.png">
+</p>
+<center>Figure 16: LinkCommand Sequence Diagram</center>
+
 
 1. The LinkCommand calls upon DishList to get the Dish based on the Index given via UserInput.
 2. DishList then calls on Dish to carry out the addPart(ingredientName) function which is responsible for the linking of
@@ -410,12 +451,18 @@ that use them. The diagram below showcases the sequence of the `LinkCommand` cla
 
 ### Graph
 
-The implementation of the Graph function allows Food-O-Rama to display a graph of the Dishes and Ingredients present in the
-DishList and IngredientList to the User. Below is a sequence diagram that shows how the GraphCommand functions
+The implementation of the Graph function allows Food-O-Rama to display a graph of the Dishes and Ingredients present in the DishList and IngredientList to the User.
 
-![](images/graph_sequence.png)
+Below is a sequence diagram that shows how the GraphCommand functions
 
-Graph works by creating a two dimensional grid and printing the bars based on the current position of the terminal cursor. 
+
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/graph_sequence.png">
+</p>
+<center>Figure 17: GraphCommand Sequence Diagram</center>
+
+
+Graph works by creating a two-dimensional grid and printing the bars based on the current position of the terminal cursor. 
 This bypasses the restriction in a CLI based application where you can only print from top down in the terminal and the bars can get
 printed "vertically". This is done by calculating the lengths of the bars beforehand and using these lengths along with
 the current coordinates to print either an empty space or a bar.
@@ -539,11 +586,20 @@ This allows the user to generate new Dish ideas.
 The `SortDishCommand` and `SortIngrCommand` classes are used to sort the Dishes and Ingredients respectively, according
 to their Wastages in descending order. This allows the user to view the most wasted Dishes and Ingredients at the top.
 
-![](images/sort_dish_sequence.png)
-![](images/sort_ingr_sequence.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/sort_dish_sequence.png">
+</p>
+<center>Figure 18: SortDishCommand Sequence Diagram</center>
+
+
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/sort_dish_sequence.png">
+</p>
+<center>Figure 19: SortIngrCommand Sequence Diagram</center>
+
 
 * The Sort functions work by calling on the pre-existing Comparator function in ArrayList. Using this, they sort the
-  Dishes and Ingredients in descending order of their Wastages.
+  Dishes and Ingredients in descending order of their wastage.
 * Once done, the Sort Commands call on the list() function present in both DishList and IngredientList.
 * The list() function calls upon the `Ui` class to print the list of Dishes or Ingredients via the printDishList(
   dishList) or printIngrList(ingredientList) functions.
@@ -982,7 +1038,7 @@ duck|2.0|1.0|2.5|30/10/2021
 
     * Test case:`del ingr duck`
 
-      Expected: Ingredient List List contains `duck`. A message will be printed to the CLI to ask user on confirming
+      Expected: Ingredient List contains `duck`. A message will be printed to the CLI to ask user on confirming
       deletion for `duck`.
 
     * Test case:`del ingr 1`
