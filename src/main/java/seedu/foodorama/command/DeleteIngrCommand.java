@@ -92,9 +92,10 @@ public class DeleteIngrCommand extends Command {
         if (isNumber(numberString)) {
             double number = Double.parseDouble(numberString);
             // Check if integer when rounded number - number == 0
-            return Math.rint(number) - number == 0;
-        } else {
-            return false;
+            if (Math.rint(number) - number == 0) {
+                return (number < Integer.MAX_VALUE);
+            }
         }
+        return false;
     }
 }
