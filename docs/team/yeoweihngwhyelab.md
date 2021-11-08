@@ -81,7 +81,8 @@ Given below are my contributions to the team's documentation:
     our code.
   * Wrote the design for our Storage Architecture. 
   * Wrote the implementation of our Storage. 
-  * Transferred our user stories from word document to the Developers Guide. 
+  * Transferred our user stories from word document to the Developers Guide.
+  * Wrote some of the glossory.
 
 * **Design Breakdown**:
   * Use of Class diagram and a sequence diagram to explain how the storage works.
@@ -118,3 +119,5 @@ Given below are my contributions to the team's documentation:
   * Make the basic skeleton content for each of the commands on what needs to be included
     for each command's description. 
   * Wrote the Command Summary. 
+  * Wrote most of the command description such as `stat`, `add`, `edit`, `delete`, `list`
+    `list`, `csv`, `db`

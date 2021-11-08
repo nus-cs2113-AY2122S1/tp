@@ -32,6 +32,8 @@ for tech-savvy students who have trouble keeping track of their expenses.
     * [Year: `-l`](#stat-year)
   * [Guides](#guides)
     * [Help](#help)
+  * [DB](#db)
+    * [DB](#d-b)
   * [Exit](#exit)
     * [Bye](#bye)
 * [FAQ](#faq)
@@ -936,6 +938,36 @@ Parameters: bye
 _________________________________________________________
 
 <br />
+
+## &nbsp;&nbsp; `db`
+
+### <a id="d-b"></a>  `db`
+
+Displays all the available database. 
+
+Format: `db`
+
+* The format must be strictly as stated above.
+
+Example of usage:
+
+`db`
+
+Expected outcome: Available databases will be shown.
+
+```
+========================================================
+These are the data base you currently have!
+
+2019.txt
+2020.txt
+2021.txt
+========================================================
+```
+
+# &nbsp;&nbsp; `bye`
+
+### Exiting the program: `bye`
 
 # &nbsp;&nbsp; `bye`
 
