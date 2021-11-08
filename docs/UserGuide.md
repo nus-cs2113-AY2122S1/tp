@@ -77,7 +77,7 @@ lessons in your daily schedule and your total workload:
  :information_source: **Notes about the command formats**
  - Words in `<UPPER_CASE>` are the parameters to be given by the user.
     > e.g. in `show <MODULE_CODE>`, `<MODULE_CODE>` is a parameter. 
-    > Command can be called as `show CS2113T`.
+    > For example, command can be called as `show CS2113T`.
  - Items in square brackets are optional.
     > e.g. find `search <KEYWORD> [-flag]`
     > can be called as `search GEH` OR `search GEH -q`.
@@ -143,6 +143,7 @@ For example, try typing `show CS2113T` and see the magic happen!
 :information_source: Both command and module code is case-insensitive.
 
 ```shell
+~$ show CS2113T
 Title: Software Engineering & Object-Oriented Programming
 
 MCs: 4
@@ -583,7 +584,7 @@ You can choose to store modules for which you have exercised the S/U option. The
 CAP calculation. For Example : Let's store `S` grade for `CS1231` module in the records.
 
 ```shell
-~$  store S > CS1231
+~$ store S > CS1231
 CS1231 with grade S has been added to your Transcript
 ________________________________________________________________________________________________________________________
 
@@ -639,7 +640,7 @@ You can type `transcript` to view your Unofficial Transcript.
 For Example:
 
 ```shell
-~$==>transcript
+~$ transcript
                                 --	National University of Singapore	--
                                 	--	Unofficial Transcript	--
                                 	------------------------------
@@ -705,7 +706,7 @@ For example let's say you wish to take CS2040. <br>
 Example output (If you had not taken CS1010):
 
 ```shell
-~$ ==> exit
+~$ exit
 ________________________________________________________________________________________________________________________
 > Bye friend!
 > See you again! :)
