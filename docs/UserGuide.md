@@ -131,8 +131,7 @@ This option opens the Developer Guide in your web browser.
 
 #### Option 4: `Demo Video`
 Don't like reading long wordy guides? A video may be just the thing for you!\
-This option opens the Demo Video in your web browser.\
-(The video is currently unavailable and will be up in v2.1)
+This option opens a Google Drive folder containing the Demo Video in your web browser.
 
     Option: 4
 

@@ -14,10 +14,11 @@ https://nus-cs2113-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=dj-tan
 
 #### Enhancements Implemented
 
-- Code structure (goal, habit, interval, command)
+- General code structure (goal, habit, interval, command)
 - Date Parsing
 - Table Printing
 - Switching between UI of start-up and main interface
+- Parser Test (not including subclasses)
 
 #### Contributions to User Guide (UG)
 
@@ -28,16 +29,26 @@ https://nus-cs2113-ay2122s1.github.io/tp-dashboard/#breakdown=true&search=dj-tan
   - Updated code screenshots with new UI
   - Updated command summary
 - Version 2.1
-  - To be added...
+  - Fix spelling and documentation errors
+  - Updated test codes to match output if keyed on the day of PE
+  - Added Option 6: Exit Application for Start-Up Interface
 
 #### Contributions to Developer Guide (DG)
 
+- Section 1: Introduction
+- Section 2: Setting Up
+- Section 3: Design
+- Section 4.1: Adding a Goal (excluding sequence diagram)
+- Section 4.2: Adding a Habit (excluding sequence diagram)
+- Section 4.3: Listing all Goals (excluding sequence diagram)
 - 
 
 #### Contributions to Team-Based Tasks
 
-- Code refactoring
+- Code refactoring (especially for number, name and type checks in Parser)
 - JavaDoc
+- Code testing
+- Reviewed teammates PRs
 
 #### Review/Mentoring Contributions
 

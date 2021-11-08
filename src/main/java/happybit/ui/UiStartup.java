@@ -12,7 +12,7 @@ public class UiStartup extends UiManager {
 
     private static final String UG_URI = "https://ay2122s1-cs2113t-f14-1.github.io/tp/UserGuide.html";
     private static final String DG_URI = "https://ay2122s1-cs2113t-f14-1.github.io/tp/DeveloperGuide.html";
-    private static final String DEMO_URI = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; // To be changed (lel)
+    private static final String DEMO_URI = "https://tinyurl.com/HappyBitDemoVideo";
 
     private static final String MENU = "Select from one of the following menu items:"
             + LS + S_TAB + "[1] About HappyBit"

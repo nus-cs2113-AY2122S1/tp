@@ -185,7 +185,7 @@ each sub-component.
 
 1. `PrintManager` is called upon by user commands to display text or error messages.
 2. `PrintManager` may call `PrintTable` to print a list of items in a tabular format, for example when you input
-the `help` command to view a summary of formats of relevant commands in a tabular form.
+    the `help` command to view a summary of formats of relevant commands in a tabular form.
 3. `PrintManager` depends on `Goal` and `Habit` to print goal-related and habit-related information respectively.
 
 ### 3.3. Parser Component
@@ -303,7 +303,7 @@ their personal account which will be stored in the `GoalList` class.
 
 **Aspect:** Limiting number of characters for goal name
 * **Alternative 1:** No limit imposed, but cut-off after a fixed number of characters and replace with ellipsis when
-                 printing the list.
+                     printing the list.
   * Pros: Table will be of a fixed size and reduced chance of error if the character limit is exceeded. 
   * Cons: Important information regarding the name may be unintentionally cut-off.
 * **Alternative 2 (current choice):** A 50-character limit is imposed.
@@ -425,7 +425,7 @@ This section describes the implementation of how the user can display a list of 
 * **Alternative 1:** Obtain list of habits directly from `Habit` class.
     * Pros: Eliminate the need to pass the list of habits between classes before reaching `PrintManager`.
     * Cons: `GoalList`, `Goal` and `Habit` has to be associated with `PrintManager`, which makes add-ons difficult for
-            future developers that have to deal with the high complexity of class dependency.
+            future developers that have to deal with the high level of class dependency.
 * **Alternative 2 (current choice):** Obtain list of habits indirectly from `GoalList` class
     * Pros: Only the `GoalList` class will be associated with the `PrintManager` class.
     * Cons: The list of habits have to passed from the `Habit` class, through the `Goal` class, before being available
@@ -437,12 +437,12 @@ This section describes the implementation of how the user can mark a habit as co
 
 #### 4.5.1. Implementation
 
-1. The `DoneParser#parseDoneHabitCommand(commandInstruction)` method is called, which starts the process of
-   extracting parameters from the user input.
-2. The `DoneParser#splitInput(commandInstruction)` method splits the user input into an ArrayList of parameters,
-   while the `ListHabitParser#getIndex(parameters, "g/")` and `ListHabitParser#getIndex(parameters, "h/")`methods find 
-   the goal index and habit index from the parameters ArrayList respectively. These methods check that the index is a 
-   positive integer and return the index, throwing a `HaBitParserException` otherwise.
+1. The `DoneParser#parseDoneHabitCommand(commandInstruction)` method is called, which starts the process of extracting 
+   parameters from the user input.
+2. The `DoneParser#splitInput(commandInstruction)` method splits the user input into an ArrayList of parameters, while 
+   the `ListHabitParser#getIndex(parameters, "g/")` and `ListHabitParser#getIndex(parameters, "h/")`methods find the
+   goal index and habit index from the parameters ArrayList respectively. These methods check that the index is a 
+   positive integer and returns the index, throwing a `HaBitParserException` otherwise.
 3. An `DoneHabitCommand(goalIndex, habitIndex)` object is created and returned from the
    `DoneParser#parseDoneHabitCommand(commandInstruction)` method.
 
@@ -451,11 +451,11 @@ This section describes the implementation of how the user can mark a habit as co
 4. The `DoneHabitCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
    `GoalList#doneHabitFromGoal(goalIndex, habitIndex, printManager)` method.
 5. Within this newly called method, the `GoalList#getGoal(goalIndex)` method is called to retrieve the `Goal` object
-   from the `goalList`.
-6. The `goal.getHabitList()` method is called to retrieve all the habits associated with that `Goal` object.
-7. The `GoalList#getHabit(habitList, habitIndex)` method is called to retrieve the habit at specified `habitIndex`.
-8. The `goal.doneHabit(habitIndex)` method is called to mark the specified habit as completed.
-9. The `habit.getDoneHabitDates` method is called to get information on the start and end dates of the interval marked 
+   from the `GoalList` object.
+6. The `Goal#getHabitList()` method is called to retrieve all the habits associated with that `Goal` object.
+7. The `GoalList#getHabit(habitList, habitIndex)` method is called to retrieve the habit at the specified `habitIndex`.
+8. The `Goal#doneHabit(habitIndex)` method is called to mark the specified habit as completed.
+9. The `Habit#getDoneHabitDates` method is called to get information on the start and end dates of the interval marked 
    as done, as well as the next interval's start date. This is information is required for printing a confirmation
    message to the user.
 10. Finally, the `PrintManager#printDoneHabit(goalDescription, habitDescription, strDates)` method is called to
@@ -465,7 +465,16 @@ This section describes the implementation of how the user can mark a habit as co
 
 #### 4.5.2. Design Considerations
 
-// TODO
+**Aspect:** Backtracking for marking habits as completed
+* **Alternative 1 (current choice):** Users are only allowed to mark the current intervals of habit as completed. 
+    * Pros: Users will not abuse the tracking application by marking past intervals as completed.
+    * Cons: Users temporarily unable to access the application will be penalised for not updating their completion on
+            application although the habit has been completed within that interval.
+* **Alternative 2:** Users are allowed a fixed number of habit retro-completions.
+    * Pros: Users will not be penalised if they did not have access to the application for whatever reason.
+    * Cons: Additional logic has to be implemented to ensure that a reduction in number of intervals is also reflected
+            with a proportional reduction in retro-completions. Furthermore, the number of retro-completion has to be
+            backed by past statistics which we do not have at the moment.
 
 ### 4.6. Updating a Goal
 
