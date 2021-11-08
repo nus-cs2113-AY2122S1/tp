@@ -13,6 +13,7 @@ import java.util.Scanner;
  */
 public class DishList {
     private static final String YES_NO_REGEX = "^(y|yes|n|no)$";
+    public static final String NUMBER_REGEX = "^[-\\d\\s.]+$";
     public static ArrayList<Dish> dishList = new ArrayList<>();
     private static final Ui UI = new Ui();
     private static final String YES = "y";
@@ -226,6 +227,9 @@ public class DishList {
                     UI.clearTerminalAndPrintNewPage();
                     UI.printInvalidDishWasteValue(dishName);
                     newWeight = in.nextLine();
+                    if (!isDouble(newWeight)) {
+                        throw new FoodoramaException(UI.getInvalidNumberMsg());
+                    }
                     inputWastage = Double.parseDouble(newWeight);
                 }
                 if (Double.isInfinite(inputWastage) || Double.isNaN(inputWastage)) {
@@ -277,7 +281,7 @@ public class DishList {
      * @author Dniv-ra
      */
     public static boolean isNumber(String numberString) {
-        if (numberString.matches("^[\\d\\s.]+$")) {
+        if (numberString.matches(NUMBER_REGEX)) {
             return true;
         } else {
             return false;

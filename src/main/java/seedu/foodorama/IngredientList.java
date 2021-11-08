@@ -26,6 +26,7 @@ public class IngredientList {
     private static final int ZERO_DAYS = 0;
     private static final int SOFT_WEIGHT_LIMIT = 10000;
     private static final int SIZE_OFFSET = 1;
+    public static final String NUMBER_REGEX = "^[-\\d\\s.]+$";
     public static ArrayList<Ingredient> ingredientList = new ArrayList<>();
 
     /**
@@ -353,6 +354,9 @@ public class IngredientList {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printInvalidIngrWasteValue(inputIngredientWeight);
                 inputIngredientWeight = in.nextLine();
+                if (!isDouble(inputIngredientWeight)) {
+                    throw new FoodoramaException(UI.getInvalidNumberMsg());
+                }
                 ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
             }
 
@@ -424,6 +428,9 @@ public class IngredientList {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printInvalidIngrWeight(inputIngredientWeight);
                 inputIngredientWeight = in.nextLine();
+                if (!isDouble(inputIngredientWeight)) {
+                    throw new FoodoramaException(UI.getInvalidNumberMsg());
+                }
                 ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
             }
             if (Double.isInfinite(ingredientWeightValue) | Double.isNaN(ingredientWeightValue)) {
@@ -476,7 +483,7 @@ public class IngredientList {
      * @author Dniv-ra
      */
     public static boolean isNumber(String numberString) {
-        if (numberString.matches("^[\\d\\s.]+$")) {
+        if (numberString.matches(NUMBER_REGEX)) {
             return true;
         } else {
             return false;
