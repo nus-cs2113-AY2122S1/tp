@@ -9,8 +9,8 @@
 !define MEDBOT_COLOR #32FF32
 !define PARSER_COLOR #26FFE5
 !define COMMAND_COLOR #00A9FF
-!define SCHEDULER_COLOR #1966FF
-!define STORAGE_COLOR #7032FF
+!define SCHEDULER_COLOR #3F82FF
+!define STORAGE_COLOR #8A59FF
 !define DOCUMENT_COLOR #A932FF
 
 ' hide the circles in the diagram
