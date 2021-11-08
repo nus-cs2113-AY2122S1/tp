@@ -38,7 +38,7 @@ public class AddLectureCommand extends Command {
      * Class constructor providing syntax for the HelpCommand.
      */
     public AddLectureCommand() {
-        syntax = "calendar lecture m/ [MODULE_CODE] s/ [DD-MM-YYYY(START_DATE)] e/ [DD-MM-YYYY(END_DATE)]";
+        syntax = "calendar lecture m/[MODULE_CODE] s/[DD-MM-YYYY(START_DATE)] e/ [DD-MM-YYYY(END_DATE)]";
     }
 
     /**

@@ -26,7 +26,7 @@ public class DeleteEntryCommand extends Command {
      * Class constructor providing syntax for the HelpCommand.
      */
     public DeleteEntryCommand() {
-        syntax = "journal delete_entry n/ [NOTEBOOK_NAME] e/ [ENTRY_NAME]";
+        syntax = "journal delete_entry n/[NOTEBOOK_NAME] e/[ENTRY_NAME]";
     }
 
     /**

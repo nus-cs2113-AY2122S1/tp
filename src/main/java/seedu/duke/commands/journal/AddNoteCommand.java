@@ -20,7 +20,7 @@ public class AddNoteCommand extends Command {
      * Class constructor providing syntax for the HelpCommand.
      */
     public AddNoteCommand() {
-        syntax = "journal notebook n/ [NOTEBOOK_NAME]";
+        syntax = "journal notebook n/[NOTEBOOK_NAME]";
     }
 
     /**

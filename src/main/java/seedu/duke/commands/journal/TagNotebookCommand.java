@@ -25,7 +25,7 @@ public class TagNotebookCommand extends Command {
      * Class constructor providing syntax for the HelpCommand.
      */
     public TagNotebookCommand() {
-        syntax = "journal tag n/ [NOTE_INDEX] t/ [TAG_NAME]";
+        syntax = "journal tag n/[NOTE_INDEX] t/[TAG_NAME]";
     }
 
     /**
