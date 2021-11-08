@@ -393,7 +393,9 @@ iterates from ingredients with closest to the furthest expiry dates. There are t
    2. Remaining amount to be subtracted is greater than current ingredient amount:
       1. The current ingredient amount is set to 0.0.
       2. The current ingredient amount is subtracted from the amount to be subtracted.
-      
+
+<div style="page-break-after: always;"></div>
+
 8. Next, the `removeLowAmountIngredientFromGroup` method is called to remove ingredients with 
 negligible amounts remaining.
 
