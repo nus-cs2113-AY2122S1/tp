@@ -52,8 +52,6 @@ Given below are the contributions to the project.
     * Managed *issues*, *assigned* work and *tracked* completion for Milestone v2.0
     * Approved and reviewed PRs frequently.
 
-<br>
-
 * Documentation:
     * User Guide:
         * Added Table of Contents (TOC) and navigation for UG
