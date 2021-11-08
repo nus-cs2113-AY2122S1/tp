@@ -727,7 +727,7 @@ public class Parser {
         }
     }
 
-    //@@author Uxinnn
+    //@@author conradwee
     /**
      * Used to check if a user input value for the tripName field is valid.
      * @param tripName TripName that user has entered.
@@ -783,7 +783,7 @@ public class Parser {
         return userInput.indexOf(timeSeparator);
     }
 
-    //@@author Uxinnn
+    //@@author conradwee
     /**
      * Used to parse flags in raw user input.
      * @param userInput Input string which contains /name flag.
@@ -794,7 +794,7 @@ public class Parser {
         return userInput.indexOf(nameSeparator);
     }
 
-    //@@author Uxinnn
+    //@@author conradwee
     /**
      * Used to parse flags in raw user input.
      * @param userInput Input string which contains /item flag.
@@ -805,7 +805,7 @@ public class Parser {
         return userInput.indexOf(itemSeparator);
     }
 
-    //@@author Uxinnn
+    //@@author conradwee
     /**
      * Used to parse flags in raw user input.
      * @param userInput Input string which contains /key flag.
@@ -816,7 +816,7 @@ public class Parser {
         return userInput.indexOf(keywordSeparator);
     }
 
-    //@@author Uxinnn
+    //@@author conradwee
     /**
      * Used to parse flags in raw user input.
      * @param userInput Input string which contains /index flag.
