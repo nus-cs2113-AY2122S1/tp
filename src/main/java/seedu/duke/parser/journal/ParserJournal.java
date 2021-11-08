@@ -57,7 +57,8 @@ public class ParserJournal {
      * @return notebook name if it is not duplicate
      * @throws DuplicateNoteException checks for duplicate note
      */
-    public static String parseNoteName(String input, ArrayList<Notebook> notes) throws DuplicateNoteException, IncorrectNumberOfArgumentsException {
+    public static String parseNoteName(String input, ArrayList<Notebook> notes) 
+        throws DuplicateNoteException, IncorrectNumberOfArgumentsException {
         if (!input.contains("n/")) {
             throw new IncorrectNumberOfArgumentsException("n/ not found in command!");
         }
