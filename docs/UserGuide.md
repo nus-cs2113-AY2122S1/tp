@@ -33,12 +33,12 @@ Below is the guide on how you can get started using our program to start **"Sche
 ## 1. Quick Start
 1. Ensure you have [Java **11** jdk](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html) installed in your Computer, 
 and that `java` is in your `PATH` environment variable.
-2. Download the latest zip file from [here](https://github.com/AY2122S1-CS2113T-W13-3/tp/releases/latest).
-3. Decompress the zip file to the folder you want to use as the _home folder_ for SchedUrMods.
-   > **⚠️Warning**: Only decompress the zip file. Do *not* decompress any jar file even if it shows as an archive on your file manager.
+2. Download the latest jar file from [here](https://github.com/AY2122S1-CS2113T-W13-3/tp/releases/latest).
+   > **⚠️Warning**: Do *not* decompress any jar file even if it shows as an archive on your file manager.
+3. Move the jar file to the folder you want to use as the _home folder_ for SchedUrMods.
    >💡 **Note**: Ensure you have permission to create files and folders in this _home folder_.
-4. Open a terminal window in the _home folder_ you designated in step 3.
-5. Type `java -jar SchedUrMods.jar` into the terminal to start SchedUrMods.
+4. Open a terminal window in the _home folder_ you created in step 3.
+5. Type `java -jar [CS2113T-W13-3][SCHEDURMODS].jar` into the terminal to start SchedUrMods.
 6. The following display should appear in a few seconds:
 
 ```
@@ -514,7 +514,7 @@ that have the `java 11 jdk` installed on their systems.
 **Q**: How do I transfer my data to another computer?
 
 **A**: Install the program on the other computer and replace the new empty `tasks.dat`
-it creates with the `tasks.dat` that you wish to transfer from your previous `SchedUrMods.jar`
+it creates with the `tasks.dat` that you wish to transfer from your previous `[CS2113T-W13-3][SCHEDURMODS].jar`
 home folder.
 
 **Q**: I encountered an error message `java.lang.reflect.InaccessibleObjectException` when executing the program. How do I fix it?
