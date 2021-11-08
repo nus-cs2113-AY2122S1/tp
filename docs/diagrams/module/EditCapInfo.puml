@@ -1,0 +1,40 @@
+@startuml
+
+Actor User
+User -> ":Click" : "module list"
+participant ":Click"
+":Click" -> ":Parser" : parseCommand()
+participant ":Parser"
+activate ":Parser"
+create ":CapEditInfoCommand"
+":Parser" -> ":CapEditInfoCommand" : new CapEditInfoCommand()
+activate ":CapEditInfoCommand"
+return
+deactivate ":CapEditInfoCommand"
+":Parser" -> ":Click" : CapEditInfoCommand
+deactivate ":Parser"
+":Click" -> ":CapEditInfoCommand" : execute()
+activate ":CapEditInfoCommand"
+
+participant ":Ui"
+activate ":Ui"
+":CapEditInfoCommand" -> ":Ui" : printMessage()
+":Ui" --> User : GET_CAP_QUESTION
+User -> ":CapEditInfoCommand" : currentCap
+":Ui" --> User : GET_MC_QUESTION
+User -> ":CapEditInfoCommand" : totalMcTaken
+deactivate ":Ui"
+
+participant "<color red><<class>></color> \n ModuleManager"
+opt valid input
+    activate "<color red><<class>></color> \n ModuleManager"
+    ":CapEditInfoCommand" -> "<color red><<class>></color> \n ModuleManager" : setCapInfo(currentCap, totalMcTaken)
+    "<color red><<class>></color> \n ModuleManager" --> ":CapEditInfoCommand"
+    deactivate "<color red><<class>></color> \n ModuleManager"
+end
+
+":CapEditInfoCommand" --> ":Click"
+deactivate ":CapEditInfoCommand"
+
+hide footbox
+@enduml

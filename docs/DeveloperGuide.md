@@ -2,6 +2,7 @@
 
 ## Table of Contents
 
+[Acknowlegements](#acknowledgements)
 1. [Introduction](#1-introduction)\
 1.1 [Background](#11-background)\
 1.2 [Purpose](#12-purpose)\
@@ -24,7 +25,19 @@
 4.6 [Help Command](#46--help-command)\
 4.7 [Exit Command](#47-exit-command)\
 4.8 [Logging](#48-logging)
-5. [Testing](#5-testing)
+5. [Automated Testing](#5-automated-testing)
+
+[Appendices](#appendices)\
+[Appendix A: Product Scope](#appendix-a-product-scope)\
+[Appendix B: User Stories](#appendix-b-user-stories)\
+[Appendix C: Non-Fucntional Requirements](#appendix-c-non-functional-requirements)\
+[Appendix D: Glossary](#appendix-d-glossary)\
+[Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
+
+
+# Acknowledgements
+
+`Click` was inspired by the skeleton code and documentation (UG and DG) of [AddressBook Level-3](https://se-education.org/addressbook-level3/).
 
 ## 1. Introduction
 
@@ -87,7 +100,7 @@ The steps are as follows:
    3.2. If not, throw exception and ask for input again
 4. Parser returns control to Click
 
-![](./images/ClickRun.png)
+![](diagrams/ClickRun.png)
 
 You should note that this is a general overview of the Click functionality, and the `:Command` entity simply represents a Command to be called by the Parser.
 Another point for you to note is the difference between a Click exception and other exceptions. Click, as aptly referenced from our project, has unique
@@ -118,7 +131,7 @@ The `UI` component:
 Module-related commands are managed by `ModuleManager`, which directly interacts with `StorageModule`. 
 `StorageModule` in turn makes use of `ParserModule` to format and retrieve the module-related information. The following diagram illustrates how the classes related to module interact with each other.
 
-![module architecture](images/module/Module.png)
+![module architecture](diagrams/module/Module.png)
 
 ### 3.5. Storage Component
 
@@ -131,15 +144,9 @@ as code examples.
 
 ### 4.1. Module-related Features
 
-This segment focuses on describing the implementation of module-related features, the functionality of the commands as well as the design considerations taken.
-
 #### 4.1.1 Adding a Module
 
-This feature allows user to add a new Module.
-
-If the creation is successful, a confirmation message on the newly created Module will be displayed to the user.
-
-**Implementation**
+This feature allows user to add a new Module. If the creation is successful, a confirmation message on the newly created Module will be displayed to the user.
 
 The command for listing all modules is implemented by the `AddModuleCommand` class that extends `Command`.
 
@@ -156,14 +163,13 @@ When the user types `module add c/CS2113T n/Software Engineering m/4 e/A`, the f
    iv. `AddModuleCommand` calls `moduleManager.addNewModule(module)` to add the new `module` to the module list\
    v. `AddModuleCommand` prompts the successful message to the user.
 
+The sequence diagram below summarizes how adding a module work:
+
+![AddModule](diagrams/module/AddModule.png)
 
 #### 4.1.2 Removing a Module
 
-This feature allows user to remove a Module created in the past.
-
-If the deletion is successful, a confirmation message on the Module deletion will be displayed to the user.
-
-**Implementation**
+This feature allows user to remove a Module created in the past. If the deletion is successful, a confirmation message on the Module deletion will be displayed to the user.
 
 The command for listing all modules is implemented by the `DeleteModuleCommand` class that extends `Command`.
 
@@ -182,8 +188,6 @@ When the user types `module delete 2`, the following sequence of steps will then
 
 This feature allows user to view all Modules.
 
-**Implementation**
-
 The command for listing all modules is implemented by the `ListModuleCommand` class that extends `Command`.
 
 When the user types `module list`, the following sequence of steps will then occur:
@@ -199,13 +203,11 @@ When the user types `module list`, the following sequence of steps will then occ
 
 The sequence diagram below summarizes how listing modules work:
 
-![](images/module/ListModule.png)
+![](diagrams/module/ListModule.png)
 
 #### 4.1.4 Edit CAP Information
 
 This feature allows user to edit the information related to the CAP.
-
-**Implementation**
 
 The command for editing CAP information is implemented by the `CapEditInfoCommand` class that extends `Command`.
 
@@ -223,12 +225,13 @@ When the user types `cap edit`, the following sequence of steps will then occur:
    v. `CapEditInfoCommand` calls `ui.printMessage()` to print the confirmation to the user\
    vi. `CapEditInfoCommand` calls `moduleManager.setCapInfo()` to save the data.
 
+The sequence diagram below summarizes how editing CAP information work:
+
+![EditCapInfo](diagrams/module/EditCapInfo.png)
 
 #### 4.1.5 Get Expected CAP
 
 This feature allows user to view the information related to the CAP and the expected CAP.
-
-**Implementation**
 
 The command for getting expected CAP is implemented by the `GetExpectedCapCommand` class that extends `Command`.
 
@@ -278,14 +281,14 @@ Given below is an example usage scenario and how the display calendar mechanism 
       >  **NOTE:** The input is validated first and if the input date given is invalid, i.e., the month not between 1-12, then the calendar for the current month is displayed.
    
       ii. The `inputYearMonth` is passed into `Ui` class method `printCalenderTitle` and this prints out the title of that month with the month name and the year. In this example, it will display as given in the figure below.
-     ![](./images/calendar/calendar_header.png)
+     ![](diagrams/calendar/calendar_header.png)
       iii. Then, the method `arrangeTaskList` in `Schedule` class is called, and it takes in `storage.tasksList` (the TaskList object with all the currently stored tasks drawn from storage), `calendarTasks` (an ArrayList<ArrayList<String>> object initialized with empty ArrayLists of type String), `month` (the month input by the user, which in this example is the integer `10`) and year `month` (the year input by the user, which in this example is the integer `2021`), and adds the tasks to the days in the empty String ArrayLists initialized before in `calendarTasks`.
       iv.The method `arrangeLectureList` is also called and the process is same as in the previous step, except with `storage.lectureList` and `calendarLecture` replacing the first two input parameters of `arrangeTaskList`.
       v.Then, the method `displayCalendar` in `Schedule` class is called, and it takes in `inputYearMonth` (the YearMonth object created from the month and year parsed from the user input), the `calendarTasks` (that was filled with the tasks for each day in the Step (iii)) and `calendarLecture` (that was filled with the lectures for each day in the Step (iv)). The method `displayCalendar` performs the necessary logic to print out the calendar.
   >  **NOTE:** Two tasks and two lectures are displayed for each day based on the order in which the user added them, and if there are more, they will show as and when the user deletes the tasks/lectures that are currently displayed.
 
 The below sequence diagram shows the execution process of the calendar display feature.
-![](./images/calendar/CalendarDisplaySequence.png)
+![](diagrams/calendar/CalendarDisplaySequence.png)
 
 **Design Considerations**
 
@@ -320,7 +323,7 @@ Given below is an example usage scenario and how the add task mechanism behaves 
 
 Below is an activity diagram for the execution of this feature.
 
-![](./images/calendar/AddTaskActivity.png)
+![](diagrams/calendar/AddTaskActivity.png)
 
 #### 4.3.3 Adding a Lecture
 
@@ -394,7 +397,7 @@ Given below is an example usage scenario and how the delete task mechanism behav
 
 Below is a sequence diagram that demonstrates this feature.
 
-![](./images/calendar/DeleteTaskCommand.png)
+![](diagrams/calendar/DeleteTaskCommand.png)
 
 #### 4.3.7 Deleting a Lecture
 
@@ -458,7 +461,7 @@ Given below is an example usage scenario and how the add notebook mechanism beha
    data to
    the storage file.
 
-![](./images/journal/AddNoteCommand.png)
+![](diagrams/journal/AddNoteCommand.png)
 
 
 #### Add entry feature
@@ -484,7 +487,7 @@ Given below is an example usage scenario and how the add entry mechanism behaves
    vi. `AddEntryCommand` calls `StorageEntries.writeEntries(storage.collectionOfEntries, storage)` to write the new
    data to the storage file.
 
-![](./images/journal/AddEntryCommand.png)
+![](diagrams/journal/AddEntryCommand.png)
 
 #### List notebooks and entries
 
@@ -529,7 +532,7 @@ Given below is an example usage scenario and how the delete notebook mechanism b
    the new
    data to the storage file. 
 
-![](./images/journal/DeleteNoteCommand.png)
+![](diagrams/journal/DeleteNoteCommand.png)
 
 #### Deleting Entry
 
@@ -617,11 +620,17 @@ Food-related commands operate on a list of food records, and a food storage obje
 how the storage in a text file, and the current food list interact with each other.
 Food storage object contains static methods to read and write data from said list.
 The saving of data from the list to the storage file is elaborated further in the diagram below.
+
+Further discussion on the design considerations of writing an abstract class are discussed in 
+design considerations.
+
+![](diagrams/food/foodClassDiagram.png)
+
 Additionally, StallsManager is implemented to support the `food view` commands, which include a reference food court
 , Technoedge.This class includes all stalls, food items sold by the store as well as the calorie count for the food items.
 Furthermore, methods that involve sorting and filtering food items by calorie count and name are implemented in StallsManager
 for the user to easily find items.
-![](./images/food/foodClassDiagram.png)
+
 
 ##### Sequence diagram when food is parsed
 
@@ -630,14 +639,15 @@ The following diagram displays the interactions between the classes when the use
 Do note that important calls are left out of this diagram (command execution) and the parser replaces Click for this.
 A high level view of command execution is covered in [Architecture](#31-architecture)\
 You should take note of the interactions between the constructed command classes, and the current list it's
-iterating over - `WhatIAteTodayList`, especially the updates shown after the  end of every  command. An update is 
+iterating over - `WhatIAteTodayList`, especially the updates shown after the  end of every  command. An update is
 defined as a manual overwrite over the text file saved in the user's hard disk. \
 By convention, this text file is saved
 in the directory `fooddata` in `storage`, with the text file named aptly as `food.txt`. \
 Additionally, `StallsManager` 
 is referenced in multiple commands, for instance `food radd`. This is due to the nature of the class, which contains the
-information of a food court, which includes the Stall name, and food items sold by each store. 
-![](./images/food/food_architecture.png)
+information of a food court, which includes the Stall name, and food items sold by each store.
+![](diagrams/food/food_architecture.png)
+
 
 #### 4.5.2 Feature List
 
@@ -797,7 +807,8 @@ the following section would elaborate on how the runtime mode works, and how we 
 The following diagram illustrates the  interactions between the functional class `ClassPackageReader` and
 a particular command `ClickCommand`.
 
-![](./images/help/helpCommandsClassDiagram.png)
+![](diagrams/help/helpCommandsClassDiagram.png)
+
 A class package reader  is implemented in order to:
 1.  Read classes from a specified package
 1.  Get names of all classes declared
@@ -830,7 +841,8 @@ many updates over the lifeline of this project.
 
 After describing the [architecture](#461-architecture--of-help-command) of the help command, this portion will then describe the sequence of activation by
 the developer when parsing a `help rt` command. Take the following sequence diagram for reference.
-![](./images/help/HelpCommand_execute-Help_Commands.png)\
+![](diagrams/help/HelpCommand_execute-Help_Commands.png)\
+
 The sequence diagram provides a high-level view on how the entities interact. You should notice the interaction between
 `ClassPackageReader` and the `Command` entities, where the former gets the syntax of the latter by having a class as
 input. This translates into a scalable option on addition of commands, where a syntax attribute is required to be present
@@ -929,7 +941,7 @@ public class Click {
 }
 ```
 
-## 5. Testing
+## 5. Automated Testing
 
 We use JUnit testing to ensure that the operations of `Click` meet the expected behavior.
 
@@ -1004,6 +1016,36 @@ There are two ways to run tests.
 ### Appendix D: Glossary
 
 **CAP**: Cumulative Average Point
+
 **MC**: modular credit
+
 **Mainstream OS**: Windows, Linux, Unix, OS-X
 
+### Appendix E: Instructions for Manual Testing
+
+This section gives you some guidance for the testers to manually test `Click`.
+
+There are two categories of the user-testable features:
+* Positive test cases
+* Negative test cases
+
+For the positive test cases, just simply follow the UserGuide in the sequence from 3.0 on to 3.6.
+
+Here are the negative test cases you can test:
+
+* Module-related commands:
+  * Invalid module commands:
+    * `module`
+    * `module a`
+    * `cap`
+  * Invalid add module commands:
+    * `module add`
+    * `module add n/Software Engineering c/CS2113T`
+  * Invalid delete module commands:
+    * `module delete one`
+    * `module delete -1`
+    * `module delete [INDEX_OUT_OF_BOUND]`
+  * Invalid CAP info:
+    * Provide the current CAP which is not a real number
+    * Provide the current CAP which is not in the range [0.0 - 5.5]
+    * Provide the total MC taken which is not a positive integer
