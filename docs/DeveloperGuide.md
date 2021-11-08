@@ -219,7 +219,7 @@ In this instance, the hashmap will contain the following entries
 
 ### Edit Command
 
-![EditCommandSequence](img/EditCommandSequence1.png)
+![EditCommandSequenceDiagram](img/EditCommandSequence.png)
 
 The Edit Command class handles the functionality to change a specific attribute of an item in the catalogue. The sequence diagram above
 shows the execution when the title attribute of a book with id 123 to "Harry Potter". 
