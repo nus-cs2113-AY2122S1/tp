@@ -24,34 +24,37 @@ lessons in your daily schedule and your total workload:
 - [Features](#features)
     * [Viewing help](#viewing-help-help)
     * [Show Module Info](#display-module-info-show-module_code)
-    * [Search Module](#search-module-search-keyword--l)
+    * [Search Module](#search-module-search-keyword--flag)
     * [Update Local Database](#update-local-database-update)
-    * [Add to Timetable](#add-to-timetable)
+    * [Add to Timetable](#add-to-timetable-add)
         * [Add a Module](#add-a-module-to-timetable )
         * [Add an Event](#add-an-event-to-timetable)
-    * [Delete from Timetable](#delete-from-timetable-delete-module_code)
+
+    * [Delete from Timetable](#delete-from-timetable-delete-module_code-or-delete-event_name)
     * [Clear From Timetable or Transcript](#clear-from-timetable-or-transcript--clear)
         * [Clear from Timetable](#clear-from-timetable)
-        * [CLear from Transcript](#clear-from-transcript)
-    * [View Timetable](#view-timetable-timetable)
+        * [Clear from Transcript](#clear-from-transcript)
+    * [View Timetable](#view-timetable-timetable--flag)
+
     * [Changing Semester](#changing-semester)
     * [Storing grades secured in past modules](#store-grades-secured-in-various-modules-store-grade--module_code)
     * [Removing modules from stored grades](#remove-modules-from-the-list-of-completed-modules-remove-module_code)
-    * [Calculate CAP](#calculate-cap--calculate-cap)
+    * [Calculate CAP](#calculate-cap--calculate)
     * [View Unofficial Transcript](#view-unofficial-transcript--transcript)
     * [Checking eligibility from a module's pre-requisite](#checking-for-module-pre-requisite-check-module_code)
     * [Exit](#exit-exit)
 - [FAQ](#faq)
-- [Command Summary]()
+- [Command Summary](#command-summary)
 
 <br>
 
 ---
 
 # Quick Start
+This section goes over how to use this application.
 
 1. Ensure you have **Java 11** or above installed in your Computer.
-2. Download the latest **unimods.jar** and from here.
+2. Download the latest **unimods.jar** from here.
 3. Copy the files to the folder you want to use as the home folder for your Unimods.
 4. Open your CLI of choice and run `java -jar unimods.jar`.
 5. Type the command in the command box and press Enter to execute it.
@@ -73,17 +76,17 @@ lessons in your daily schedule and your total workload:
 ---
 
 # Features
+This section contains an overview of all the features and associated commands in UniMods.
 
-> :information_source: **Notes about the command formats**
-> - Words in `<UPPER_CASE>` are the parameters to be given by the user. <br />
-    > e.g. in `show <MODULE_CODE>`, <MODULE_CODE> is a parameter and be called like so : `show CS2113T`.
-    <br /><br />
-> - Items in square brackets are optional <br />
+ :information_source: **Notes about the command formats**
+ - Words in `<UPPER_CASE>` are the parameters to be given by the user.
+    > e.g. in `show <MODULE_CODE>`, `<MODULE_CODE>` is a parameter. 
+    > For example, command can be called as `show CS2113T`.
+ - Items in square brackets are optional.
     > e.g. find `search <KEYWORD> [-flag]`
     > can be called as `search GEH` OR `search GEH -q`.
-    <br /><br />
-> - Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `bye`) will be ignored.<br />
-    > e.g. `help abc` will be interpreted as  `help`
+ - Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `bye`) will be ignored.
+    > e.g. `help abc` will be interpreted as `help`.
 
 ## Viewing Help: `help`
 
@@ -144,6 +147,7 @@ For example, try typing `show CS2113T` and see the magic happen!
 :information_source: Both command and module code is case-insensitive.
 
 ```shell
+~$ show CS2113T
 Title: Software Engineering & Object-Oriented Programming
 
 MCs: 4
@@ -309,6 +313,7 @@ If all lesson types have been successfully added, program will print out
 Module and any selected lesson(s) has been added to timetable
 ```
 `NOTE:` Modules that contains no lessons will likewise be added into list of modules taken this semester
+
 <br>
 
 ### Add an Event to timetable
@@ -427,7 +432,8 @@ ________________________________________________________________________________
 ```
 
 <br>
-## View timetable: `timetable`
+
+## View timetable: `timetable [-flag]`
 
 You can view the current timetable which details your daily schedule as well as the total MCs taken and classes and time
 slots for each day of the week in a timetable structure.
@@ -478,9 +484,74 @@ Total MCs taken this semester: 4.0
 
 ```
 
+In addition, you can add a `-u` flag to the `timetable` command to view only your custom events!
+
+```shell
+~$ timetable -u
+                0900            1000            1100            1200            1300            1400            1500            1600
+--------------------------------------------------------------------------------------------------------------------------------
+                                                                                                                |   Team Meeting|
+     MON                                                                                                        |   TASK        |
+                                                                                                                |   Discord     |
+--------------------------------------------------------------------------------------------------------------------------------
+
+     TUE
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+     WED
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+     THU
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+     FRI
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+     SAT
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+     SUN
+
+
+*******************
+Modules taken this semester:
+
+CS2113T Software Engineering & Object-Oriented Programming 4MC (Exam: Tue Nov 30 09:00 AM - 11:00 AM)
+
+Total MCs taken this semester: 4.0
+
+*******************
+
+```
+
 <br>
 
 ## Changing semester
+
+You can set the semester to align with the current school semester. This will change the modules that you will be allowed to take and their corresponding details, depending on the semester.
+
+You can type `semester` to change the semester.
+
+Do note that changing the semester will reset your timetable if the semester you selected different from your current semester.
+
+```shell
+~$ semester
+Current semester: Semester 1
+1. Semester 1
+2. Semester 2
+3. Special Term 1
+4. Special Term 2
+5. cancel
+Change semester? (This will reset timetable)
+2
+All modules have been successfully removed from your Timetable.
+Current semester: Semester 2
+```
 
 <br>
 
@@ -505,7 +576,7 @@ You can choose to store modules for which you have exercised the S/U option. The
 CAP calculation. For Example : Let's store `S` grade for `CS1231` module in the records.
 
 ```shell
-~$  store S > CS1231
+~$ store S > CS1231
 CS1231 with grade S has been added to your Transcript
 ________________________________________________________________________________________________________________________
 
@@ -513,11 +584,7 @@ ________________________________________________________________________________
 
 <br>
 
-
-
 ## Remove modules from the list of completed modules: `remove <MODULE_CODE>`
-
-
 
 You can remove any module and grade that you added to your list of completed modules in the transcript by using this
 command.
@@ -561,7 +628,7 @@ You can type `transcript` to view your Unofficial Transcript.
 For Example:
 
 ```shell
-~$==>transcript
+~$ transcript
                                 --	National University of Singapore	--
                                 	--	Unofficial Transcript	--
                                 	------------------------------
@@ -617,9 +684,27 @@ Yes! You are eligible to take up: CS2040 Data Structures and Algorithms 4MC
 ________________________________________________________________________________________________________________________
 ```
 
+<br>
+
+## Exit: `exit`
+
+You can end the application anytime by typing `exit` into the terminal!
+
+For example let's say you wish to take CS2040. <br>
+Example output (If you had not taken CS1010):
+
+```shell
+~$ exit
+________________________________________________________________________________________________________________________
+> Bye friend!
+> See you again! :)
+________________________________________________________________________________________________________________________
+```
+
 ---
 
 # FAQ
+This section contains a list of some commonly asked questions and their answers.
 
 **Q**: Why does this module not show up even though my search term is its exact title?
 <br>
@@ -663,6 +748,7 @@ and is very similar to just running `update`.
 ---
 
 ## Command Summary
+This section contains a brief summary of all commands available in UniMods.
 
 | Command                         | Meaning                                                                                            |
 | --------------                  | ----------                                                                                         |

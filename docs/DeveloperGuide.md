@@ -26,18 +26,12 @@ upon.
       * [Search](#search)
       * [Show](#show)
       * [Update](#update)
-      * [Remove](#remove)
-- [Documentation, logging, testing, configuration, dev-ops]()
 - [Appendix: Requirements](#appendix-requirements)
     * [Product scope](#product-scope)
     * [User stories](#user-stories)
     * [Use cases](#use-cases)
     * [Non-Functional Requirements](#non-functional-requirements)
     * [Glossary](#glossary)
-- [Appendix: Instructions for manual testing]()
-    * [Launch and shutdown]()
-    * [Deleting a person]()
-    * [Saving data]()
 
 ## Acknowledgements
 
@@ -133,6 +127,13 @@ The **Online** component consists of only `NusMods`.
 <br>
 
 ### Timetable component
+The **Timetable** component consists of `Timetable`, `TimetableItem`, `TimetableLesson` and `TimetableUserItem` classes.
+
+![TimetableComponent](./uml-diagrams/TimetableComponent.png)
+
+> `Timetable` stores all timetable information, including weekly schedule, modules taken and the current semester
+> 
+> `TimetableLesson`, and `TimetableUserItem` extends from `TimetableItem`. They are stored in the timetable schedule to differentiate between different type of schedule items
 
 <br>
 

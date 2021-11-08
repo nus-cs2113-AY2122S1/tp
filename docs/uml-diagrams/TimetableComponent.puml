@@ -16,26 +16,25 @@ Shadowing<<PLACEHOLDER>> false
 rectangle a <<PLACEHOLDER>> {
 }
 
-frame Timetable {
+frame timetable {
 
 Component [Timetable] TIMETABLE_COLOR
-Component [TimetableDto] TIMETABLE_COLOR
 Component [TimetableItem] TIMETABLE_COLOR
+Component [TimetableLesson] TIMETABLE_COLOR
 Component [TimetableUserItem] TIMETABLE_COLOR
 
+[TimetableLesson] --> TimetableItem
+[TimetableUserItem] --> TimetableItem
+Logic--> [Timetable]
+[Storage] --> [Timetable]
+[Timetable] --> UI
 }
 
-
-frame [UniMods] UNIMODS_COLOR {
-}
 
 frame [Logic] LOGIC_COLOR {
 }
 
 frame [Storage] STORAGE_COLOR {
-}
-
-frame [Online] ONLINE_COLOR {
 }
 
 frame [UI] UI_COLOR {
