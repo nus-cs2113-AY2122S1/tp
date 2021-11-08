@@ -266,11 +266,11 @@ The `Module` component consists of:
     - `RotEncoder`: Performs rotational cipher operation
 - `ModuleManager`: Decides and generates the necessary `Module` objects to be added to `Recipe` objects or to be executed on `Data` objects.
 
+<div style="page-break-after: always;"></div>
+
 Below is the class diagram showing the association between the `Decodex` class, the `ModuleManager` class.
 
 ![ModuleManagerClass.png](images/dg/ModuleManagerClass.png)
-
-<div style="page-break-after: always;"></div>
 
 Below is the class diagram showing the association between the abstract `Module` class and its derived `XYZModule` classes.
 
@@ -878,6 +878,8 @@ Assuming there are 3 recipes `myRecipe1`, `myRecipe_123` and `special_Recipe1`.
 Decodex [Editing: myRecipe] >
 ```
 
+<div style="page-break-after: always;"></div>
+
 - Test case: `recipe deselect`
     - Expected: deselects the recipe currently being edited
 
@@ -976,6 +978,7 @@ Details of Recipe Files:
 - Deleted automatically whenever the corresponding recipe on Decodex is deleted successfully using `recipe delete`.
 - The table below denotes the different behaviours on startup for an invalid `recipe/` directory and 2 invalid recipe files, assuming they are `myRecipe.txt` and `iRecipe.md`.
 
+<div style="page-break-after: always;"></div>
 
 | Invalid Type                                                                                                                                                                                                                  | Error Message                                                 | Behaviour                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
