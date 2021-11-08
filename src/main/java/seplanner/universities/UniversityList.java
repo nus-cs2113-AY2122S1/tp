@@ -3,6 +3,10 @@ package seplanner.universities;
 import java.util.ArrayList;
 
 //@@author MAZJ124
+
+/**
+ * University list class to store a list of partner universities.
+ */
 public class UniversityList {
 
     protected ArrayList<University> list;
