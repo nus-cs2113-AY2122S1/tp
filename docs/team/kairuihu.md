@@ -35,8 +35,7 @@ The application is CLI based and is suitable for users who can type quickly and 
    txt files to storage once the program gets started.
 
 #### Help
-- *What it does* : Display the help message to help users clarify the format of each command input and also provide
-   the example command input for users to follow.
+- *What it does* : Display the usage instructions of each command.
 
 ### Team Based Tasks
 - Group discussion on the designs, features and implementations of the project.
@@ -46,8 +45,7 @@ The application is CLI based and is suitable for users who can type quickly and 
 - **User Guide**
     - Added documentations for features `update recipe`, `list recipe`, `view recipe` and `help` [#136](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/136)
 - **Developer Guide**
-    - Added implementation details and UML diagrams for features `list recipes`[#136](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/136)
-    - Added implementation details and UML diagrams for features `view recipes`[#136](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/136)
+    - Added implementation details and UML diagrams for feature [#136](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/136)
     - Added design details and UML diagrams for `Storage` component. [#134](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/134)
     - Added manual testing.[#125](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/125)
 
