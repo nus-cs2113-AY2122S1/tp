@@ -121,7 +121,7 @@ All fields are compulsory. Note the following:
 - `[date]` must follow the format of dd-mm-yyyy.
 - `[foriegn-currency-ISO-code]`: Currently there are 30 currencies supported, the currencies' names and ISO codes are listed below.
   - Some currencies will not have symbols as some terminals may not be able to support displaying of certain symbols.
-  - Supported currencies will be rounded to either 2 decimal places or nearest whole number, 
+  - Supported currencies will be rounded to either 2 decimal places or to the nearest whole number, 
   depending on the currency's smallest denomination.
   - The program is still runnable with unknown currencies, however there will be no symbol and the decimal place may not be accurate.
 - `[exchange-rate]` should be how much 1 of your home currency costs in foreign currency.
