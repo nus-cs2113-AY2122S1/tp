@@ -52,7 +52,7 @@ lessons in your daily schedule and your total workload:
 This section goes over how to use this application.
 
 1. Ensure you have **Java 11** or above installed in your Computer.
-2. Download the latest **unimods.jar** from here.
+2. Download the latest **unimods.jar** from [here](https://github.com/AY2122S1-CS2113T-W12-2/tp/releases).
 3. Copy the files to the folder you want to use as the home folder for your Unimods.
 4. Open your CLI of choice and run `java -jar unimods.jar`.
 5. Type the command in the command box and press Enter to execute it.
