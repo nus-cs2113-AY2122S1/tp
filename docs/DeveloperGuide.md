@@ -2,8 +2,7 @@
 
 ## Acknowledgements
 
-Third party library used: GSON under Apache License 2.0
-
+Third party library used: GSON under Apache License 2.0 (repo [here](https://github.com/google/gson))
 
 ## Design 
 
@@ -215,7 +214,13 @@ user|cancel an operation instead of re-entering my data when prompted|save time 
 
 ### Appendix C: Non-Functional Requirements
 
-{Give non-functional requirements}
+- The app should work on all mainstream OSes (Windows, macOS, Linux) with Java 11 or later installed.
+- The app should be able to store 1000 trips, each with 1000 expenses, without any noticeable slowdown in performance.
+- A user with an above-average typing speed in English should be able to complete tasks on the app quicker than using a 
+GUI.
+- The app should be able to handle corrupted save files.
+- An advanced user should be able to manipulate the save file directly, and the app must be able to handle this scenario
+without error.
 
 ### Appendix D: Glossary
 
