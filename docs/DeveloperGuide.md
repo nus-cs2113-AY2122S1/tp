@@ -311,6 +311,10 @@ The `ShowZoomLinks` class extends `Command`.
 
 Syntax: `zoom list`
 
+The following diagram explains the sequence of execution for the zoom list command. 
+![displayZoomLinks](./diagrams/zoom/displayZoomLinks.png)
+
+
 #### 4.2.2 Adding a new zoom link
 
 This command is implemented by the `AddZoomCommand` class. The basic functionality of this command is to write a new zoom link to a local storage file and associate it to the relevant module code. The `AddZoomCommand`
@@ -318,6 +322,17 @@ class extends `Command`.
 
 Syntax: `zoom add LINK MODULE_CODE`
 Example: `zoom add nus.sg/testlink ABC101`
+
+The following diagram explains the sequence of execution for the add zoom command. 
+![addzoomlink](./diagrams/zoom/addzoomlink.png)
+
+
+#### 4.2.3 Open a zoom link
+
+this command is implemented by the `OpenZoomLink` class. The basic functionality of this command is to open the zoom link associated to the particular module. The `OpenZoomLink` class extends `Command`
+
+Syntax: `zoom open MODULE_CODE`
+Example: `zoom open CS2113T`
 
 
 ### 4.3 Calendar-related Features
