@@ -1,4 +1,30 @@
 # Developer Guide
+Welcome to **SLAM**! **SLAM** is a desktop application for student group leaders in NUS to manage their group events, tasks, members and various activities. This application allows you to effectively plan and manage the organisation of events by allowing users to create and add such events to their schedule. Leading up to the actual date and time of the event, committee heads can add tasks (e.g. meetings, purchase of logistics) to complete under each event to keep track of progress. Group members can also be added and assigned to these tasks. This application uses a Command Line Interface (CLI); that is, the application is operated by typing commands into a Command Box.
+
+---
+# Table of Contents
+1. [Introduction](#Introduction)
+   1. [Purpose of This Guide](#Purpose of Developer Guide)
+2. [Acknowledgements](#Acknowledgements)
+3. [Design](#Design)
+   1. [Architecture](#Architecture)
+   2. [Ui component](#Ui component)
+   3. [Logic component](#Logic component)
+   4. [Storage component](#Storage component)
+4. [Implementation](#Implementation)
+   1. [List Functionality](#List Functionality)
+   2. [Next Functionality](#Next Functionality)
+   3. [Update Functionality](#Update Functionality)
+   4. [Delete Functionality](#Delete Functionality)
+   5. [Select Functionality](#Select Functionality)
+5. [Product Scope](#Product scope)
+   1. [Target user profile](#Target user profile)
+   2. [Value proposition](#Value proposition)
+6. [User Stories](#User Stories)
+7. [Non-Functional Requirements](#Non-Functional Requirements)
+8. [Glossary](#Glossary)
+9. [Instructions for manual testing](#Instructions for manual testing)
+
 
 ## Introduction
 
@@ -69,6 +95,7 @@ How the `Logic` component works:
 4. This results in  `Command` object (more precisely, an object of one of its subclasses e.g. `DeleteCommand`) being returned.
 5. `Duke` then calls `execute()` within the `Command` object which then executes the specified command.
 6. Upon the completion of `execute()` an object of type `CommandResult` is returned to `Duke` and the feedback is displayed to the User
+7. Within the `Parser` classes, all the input of the User will also be checked to ensure that no error messages come up during execution
 
 ### Storage component
 
@@ -125,36 +152,42 @@ Here is a brief overview of the different Commands
 
 #### List Functionality
 
+Below is a brief overview of how the list Functionality works.
+
+![](images/ListDiagram.png)
+
 How List works:
-1. When the `parser` class parses `list` as the command from the user, a new `Command` object, `ListCommand` is created.
-2. The `ListCommand` constructor will parse through the user command to remove the empty space by calling `checkForEmptyCells`
-3. Then it would initialize the `listType` value depending on the `userCommand`
-4. This processed information would be passed back to `parser` then on to `Duke`.
-5. `Duke` then calls the `execute` method in `ListCommand` which will then return an object of type `CommandResult` and would print out the list corresponding to the `listType` in chronological order
-6. list can display 4 types of list depending on the `listType` 
-7. `list` : to list the Overall Schedule 
-8. `list -m` : to list all the members in the Overall Members List
-9. `list {Event_Num} -t` : to display all the tasks in a unique Event
-10. `list {Event_Num} t/{Task_Num}` : to display all the members involved in a specific task
+1. Duke will call `Parser` to parse through the user inputs, when `list` is detected, `ListParser` will be called.
+2. `ListParser` will parse through the user inputs, and create a new `ListCommand` object, which will be returned to Duke.
+7. `Duke` then calls the `execute` method in `ListCommand` which will then return an object of type `CommandResult` and would print out the list corresponding to the `listType` in chronological order.
+8. list can display 4 types of list depending on the `listType` .
+9. `list -e` : to list the Overall Schedule .
+10. `list -m` : to list all the members in the Overall Members List.
+11. `list -t [Event_Num]` : to display all the tasks in a unique Event.
+12. `list -m e/[Event Index] t/[Task Index]` : to display all the members involved in a specific task.
 
 #### Next Functionality
 
+Below is a brief overview of how the next Functionality works.
+
+![](images/NextDiagram.png)
+
 How Next works:
-1. When the `Parser` class parses `next` as the command from the user, a new `Command` object, `NextCommand` is created.
-2. Within the constructor `NextCommand` process the inputs from the user
-3. `Duke` then calls `execute` within the `NextCommand` where in it will display the most upcoming event or task depending on the user input
-4. `task` will display next upcoming task and `event` will display next upcoming event
+1. When `next` is input by the User, the `Parser` class will call `NextParser`.
+2. The `NextParser` class will check and parse the user input, to see which item, to user wants to see next.
+3. The `NextParser` then creates a `NextCommand` object, and sets the relevant date based on the parsed user input.
+4. `Duke` then calls `execute` within the `NextCommand` where in it will display the most upcoming event or task depending on the user input.
+5. `-t [Event_Index]` will display next upcoming task and `-e` will display next upcoming event.
 
 #### Update Functionality
 ![](images/UpdateDiagram.png)
 
 How Updating works:
-1. When the `Parser` class parses `update` as the command from the user, a new `Command` object, `UpdateCommand` is created.
-2. The `UpdateCommand` constructor processes the entire input from the user by calling `prepareUpdates`.
-3. It will the display to the user the selected `Event`
-4. `Duke` then calls the `execute`  method in `UpdateCommand`
-5. `UpdateCommand` will interact with `Duke` and the Users Inputs to finish the updates the User requires within a loop
-6. Once all the updates are completed, and we exit the loop, `UpdateCommand` will return a `postUpdateMessage()` along with `CommandResult` object to show the User the result of the Updates
+1. When the `Parser` class parses `update` it will call `UpdateParser` where the Type of the update will be determined
+2. Based on the Type of update (Whether updating `event details` or `task details`) the `UpdateParser` through the `Ui` will get the relevant information from the user
+3. Once the relevant information is parsed `UpdateParser` will create a new `UpdateCommand` based on the type of update (eg. `UpdateEventCommand` to update details of an event)
+6. `Duke` then calls the `execute`  method in the respective `UpdateCommand` where the updates will be implemented
+8. Once all the updates are completed, `UpdateCommand` will return a `postUpdateMessage()` along with `CommandResult` object to show the User the result of the Updates
 
 #### Delete Functionality
 How deleting works:
@@ -181,11 +214,18 @@ How selecting an `Event` or an event's nested `Task` works:
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+The target user profile for our application are university Student leaders, who are required to manage various club events and peope
+1. Is a student leader of multiple groups
+2. Has to plan multiple event within a given AY
+3. Has many members to account for
+4. Is comfortable typing and using the CLI
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+This application helps to organise the details of multiple events and tasks for various student leaders. As student leaders
+people often have to manage not only the multiple extra-curricular groups they are involved in but also their own studies. 
+This can often be a hassle and difficult for student leaders to manage, thus this program aims to directly deal with this issue
+and provide Student leaders, with an application to cater to their specific managerial needs.
 
 ## User Stories
 
@@ -196,11 +236,13 @@ How selecting an `Event` or an event's nested `Task` works:
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on any *mainstream OS* as long as it has java `11` or above installed.
+2. Should be able to hold up to 100 different events without noticeable issues, developing with the application.
+3. User with above average typing speed, should be able to manage, and use the application to plan and organise events faster than other event planning applications.
 
 ## Glossary
 
-* *glossary item* - Definition
+* **Mainstream OS** -  Windows, Linux, Unix, OS-X
 
 ## Instructions for manual testing
 
