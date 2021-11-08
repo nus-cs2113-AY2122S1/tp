@@ -21,12 +21,11 @@
 - [Appendix A: Product Scope](#appendix-a-product-scope)
 - [Appendix B: User Stories](#appendix-b-user-stories)
 - [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
-- [Appendix D: Glossary](#appendix-d-glossary)
-- [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
+- [Appendix D: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
 
 ## 1. Acknowledgements
 
-* [SE-EDU AB3 Developer Guide Format](https://se-education.org/addressbook-level3/DeveloperGuide.html)
+* Referenced the [SE-EDU AB3 Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html)
 
 ## 2. Introduction
 
@@ -237,7 +236,6 @@ Example:
 ```
 
 
-
 ### 3.6 Command Class
 
 The `Command` class and its subclasses are responsible for handling the execution of user instructions.
@@ -304,8 +302,8 @@ of the `Parser`. The 3 possible views and the corresponding user input commands 
 `Patient Management` --> `Staff Management` --> `Scheduler` --> `Patient Management`
 
 
-Each command evokes the `Parser#setViewType(ViewType)` method, which will set the corresponding
-`ViewType` property in the `Parser` class. Additionally, the `Ui#clearConsoleFromIde` method will be evoked, which
+Each command calls the `Parser.setViewType(ViewType)` method, which will set the corresponding
+`ViewType` property in the `Parser` class. Additionally, the `Ui.clearConsoleFromIde()` method will be evoked, which
 performs a pseudo clear of the console before printing a message that indicates the user has switched view.
 
 #### Design Considerations:
@@ -430,14 +428,13 @@ Below is a simplified sequence diagram of the `addAppointment(Appointment)` meth
 
 ### Target user profile
 
-Head nurses who prefer using Command Line Interface(CLI) instead of traditional Graphical User Interface (GUI)
-for their daily jobs
+Head nurses who are fast typists or prefer using a Command Line Interface (CLI) instead of a Graphical User Interface 
+(GUI) for their daily jobs
 
 ### Value proposition
 
-1. Easily manage patient info, consultation requirements
-2. Easily manage nurse/doctor schedules
-3. Assign nurses/doctors to visit patients at specific times
+1. Easily manage patient and medical staff information.
+2. Easily schedule and manage appointments between patients and staff.
 
 ## Appendix B: User Stories
 
@@ -455,17 +452,13 @@ for their daily jobs
 
 ## Appendix C: Non-Functional Requirements
 
-1. Should work on any *mainstream OS* as long as it has `Java 11` or above installed.
+1. Should work on Windows, Linux, or OS-X as long as it has `Java 11` or above installed.
 2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands)
    should be able to accomplish most of the tasks faster using commands than using the mouse.
 3. Should be able to hold up to a thousand appointments and patient/staff records without any noticeable decrease in
    performance.
 
-## Appendix D: Glossary
-
-* *Mainstream OS* - Windows, GNU/Linux, Unix, OS-X
-
-## Appendix E: Instructions for manual testing
+## Appendix D: Instructions for manual testing
 
 Below are instructions to perform manual testing of the application. Please refer to the
 [User Guide](https://ay2122s1-cs2113-t13-1.github.io/tp/UserGuide.html) for more details on the usage of the various
@@ -502,7 +495,7 @@ commands.
          \ \ / /_ _| __\ \    / /
           \ V / | || _| \ \/\/ / 
            \_/ |___|___| \_/\_/  
-        View has been switched to Staff Management
+        You are now in the Staff Management view.
         ```
 
 3. Switching view to the current view
