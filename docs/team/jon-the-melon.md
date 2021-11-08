@@ -39,7 +39,11 @@ Given below are my contributions to the project.
         * Did cosmetic tweaks to features list and command summary 
           ([\#219](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/219/files))
     * Developer Guide:
-        * Added implementation details and sequence diagram of the `set_mark` feature.
+        * Added implementation details and sequence and object diagram of the `set_mark` feature.
+          ([\#134](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/134/files),
+           [\#322](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/322/files))
+        * Added alternate implementation for `Marks` and the associated class and object diagram. 
+          ([\#324](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/324/files))
       
 * **Team-Based Tasks**:
     * Organised Zoom meetings to discuss features and issues
