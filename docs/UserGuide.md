@@ -21,12 +21,10 @@ Below is the guide on how you can get started using our program to start **"Sche
       - [2.3.4 Listing your upcoming tasks: `upcoming`](#234-listing-your-upcoming-tasks-upcoming)
     - [2.4 Sorting your task list: `sort`](#24-sorting-your-task-list-sort)
     - [2.5 Setting reminders to your tasks: `reminder`](#25-setting-reminders-to-your-tasks-reminder)
-    - [2.6 Editing your tasks: `edit`](#27-editing-your-tasks-edit)
-    - [2.7 Adding your NUS timetable:](#23-adding-your-nus-timetable)
-      - [2.7.1 Module: `module`](#231-module-module)
-      - [2.7.2 Browse: `browse`](#232-browse-browse)
-    
- 
+    - [2.6 Editing your tasks: `edit`](#26-editing-your-tasks-edit)
+    - [2.7 Adding your NUS timetable:](#27-adding-your-nus-timetable)
+      - [2.7.1 Module: `module`](#271-module-module)
+      - [2.7.2 Browse: `browse`](#272-browse-browse)
     - [2.8 Deleting your tasks: `delete`](#28-deleting-your-tasks-delete)
     - [2.9 Exiting the program: `bye`](#29-exiting-the-program-bye)
     - [2.10 Storage](#210-storage)
