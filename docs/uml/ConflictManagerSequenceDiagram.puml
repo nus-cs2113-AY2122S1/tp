@@ -40,7 +40,7 @@ AddLinkCommand -> ConflictManager: getConflictingSchedule()
       return Links
     end
     return Links
-    loop For each Link in AllLinks
+    loop For each Link in Links
         opt same day && overlapping start-time to end-time
           ConflictManager -> Link :getViewDescription()
           return description

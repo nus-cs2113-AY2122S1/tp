@@ -34,7 +34,7 @@ loop For each schedule in dailySchedule
   return description
 end
 
-return schedule
+return dailySchedule
 
 
 
