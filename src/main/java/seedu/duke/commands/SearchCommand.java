@@ -140,7 +140,7 @@ public class SearchCommand extends Command {
             if (k.equals(KEY_CATEGORY)) {
                 String v = entry.getValue().toUpperCase(Locale.ROOT);
                 if (!(v.equals("AUDIO") || v.equals("VIDEO")
-                        || v.equals("MAGAZINE") || v.equals("BOOK") || v.equals("-"))) {
+                        || v.equals("MAGAZINE") || v.equals("BOOK") || v.equals("MISC"))) {
                     return false;
                 }
             }
@@ -187,7 +187,7 @@ public class SearchCommand extends Command {
                         matches++;
                     }
                     break;
-                case "-":
+                case "MISC":
                     if (temp instanceof Miscellaneous) {
                         matches++;
                     }

@@ -94,7 +94,7 @@ public class Messages {
     public static final String INVALID_STATUS = "  (!) Invalid status! Status can only be: AVAILABLE, LOANED, RESERVED"
             + " (case insensitive)";
     public static final String INVALID_CATEGORY = "  (!) Invalid category! Status can only be: "
-            + "Book, Audio, Video, Magazine, '-'"
+            + "Book, Audio, Video, Magazine, Misc"
             + " (case insensitive)";
     // Loan and Return
     public static final String UNAVAILABLE_ITEM_MESSAGE = "  (!) Sorry, the item is unavailable.";
