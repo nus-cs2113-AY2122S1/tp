@@ -31,6 +31,8 @@
 [8. Instructions for manual testing](#8-instructions-for-manual-testing)<br>
 [9. Acknowledgements](#9-acknowledgements)<br>
 
+<div style="page-break-after: always;"></div>
+
 ## 1. Introduction
 
 ### 1.1. Purpose
@@ -39,6 +41,8 @@ Tracking and Updating System (SITUS).
 
 ### 1.2. Audience
 The intended audience for this document are developers looking to introduce new functionalities based on their needs.
+
+<div style="page-break-after: always;"></div>
 
 ## 2. First-time setup
 ### 2.1. Prerequisites
@@ -65,6 +69,7 @@ The intended audience for this document are developers looking to introduce new 
 > are fully deleted. The Junit tests in step 3 will not pass if there are contents already in the storage file.
 3. Run the Junit tests in `/src/test/java/seedu.situs` to make sure the programs passes all tests.
 
+<div style="page-break-after: always;"></div>
 
 ## 3. Design
 
@@ -83,6 +88,8 @@ The App consists of 6 major components:
 * `IngredientGroup`: Class that holds all entries of a single ingredient.
 * `IngredientList`: Class that holds the list of all ingredients in the inventory. It is made up of multiple instances of `IngredientGroup`.
 * `Storage`: Reads data from, and writes data
+
+<div style="page-break-after: always;"></div>
 
 **Interaction between architecture components**
 
@@ -103,6 +110,8 @@ The **Parser** component can be found in the `parser` package.
 
 The package consists of the `Parser` class, which parses the command input by the user and executes the required `XYZCommand` class.
 
+<div style="page-break-after: always;"></div>
+
 ### 3.4. Command component
 
 The **Command** component can be found in the `command` package
@@ -118,6 +127,8 @@ A quick overview of how a command is parsed and executed is as such:
 * `Parser` calls its `parseXYZCommand()` method with the command entered by the user as its parameter.
 * `parseXYZCommand()` creates an instance of the corresponding `XYZCommand` class and calls its `run()` method.
 * Thus, the command entered by the user is executed.
+
+<div style="page-break-after: always;"></div>
 
 ### 3.5. IngredientGroup component
 The **IngredientGroup** component can be found in the `ingredients` package
@@ -140,6 +151,8 @@ In the example below, there are 2 `IngredientGroup`, Carrot and White Carrot. Ca
     2.3. Amount Left: 10.0 kg | Expiry Date: 01/02/2022
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### 3.6. IngredientList component
 
 The **IngredientList** component can be found in the `ingredients` package
@@ -154,6 +167,8 @@ The `IngredientList` class
 * sends the stored data to the `Storage` class for storage after command execution 
 
 Each of the `Ingredient` objects contains information about an ingredient, namely its `name`, `amount` in stock and the `expiry` date.
+
+<div style="page-break-after: always;"></div>
 
 ### 3.7. Storage component
 
@@ -171,6 +186,8 @@ The `Storage` class
 The two public methods mentioned above are the most essential for the storage capability of the program.
 `IngredientList` object will only use `loadIngredientsFromMemory()` and `writeIngredientsToMemory()` methods
 of the storage class only when there is a change in the ingredient list of the program.
+
+<div style="page-break-after: always;"></div>
 
 ## 4. Implementation
 This sections provides details regarding the implementation of the more significant features of SITUS.
@@ -200,6 +217,7 @@ E.g. `add n/carrots a/200 e/25-12-2021`
 The overall sequence diagram can be seen below. 
 ![image](images/AddSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
 
 ### 4.2. Alerts
 
@@ -241,6 +259,8 @@ For `AlertLowStockCommand`, it is less complicated, and the sequence diagram sho
 The `totalAmount` for each `IngredientGroup` in the `IngredientList` is obtained and compared to the threshold amount. The 
 information of the `IngredientGroup` is taken note of to be printed when the function is returned.
 
+<div style="page-break-after: always;"></div>
+
 ### 4.3. Deleting ingredients
 
 Delete is performed on individual ingredients in groups. Users are to supply the information for the ingredient to delete by 
@@ -262,6 +282,8 @@ Then, calling `delete 1.1` will remove the second entry in the `carrot` category
 The sequence diagram below illustrates the above command example.
 
 ![image](images/DeleteSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 ### 4.4. Updating ingredients
 Updating is performed on individual ingredients within the ingredient groups. For example, the current ingredient inventory is
@@ -292,6 +314,8 @@ After individual ingredient has been updated, the ingredient inventory list is
     Amount Left: 2.1 kg | Expiry Date: 12/11/2021
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### 4.5. Subtracting ingredients
 Subtracting is performed on ingredient groups. For example, the current ingredient inventory is
 ```
@@ -320,6 +344,8 @@ After ingredient group has been updated, the ingredient inventory list is
     Amount Left: 2.1 kg | Expiry Date: 12/11/2021
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### 4.6. Searching for Ingredients
 Ingredients can be searched for either by name using `find` or by expiry date using `expire`. 
 
@@ -339,6 +365,8 @@ searches the names in the ingredient list for the given keyword, and displays an
 The partial sequence diagram of the above process is shown below:
 ![image](images/FindSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.6.2. Searching by Expiry Date
 The command to find ingredients by expiry date uses the keyword `expire` followed by the expiry date to search in the format dd/mm/yyyy. 
 The command will display all ingredients in the list that are expiring **by** and **on** the given date. An example of its usage is `expire 23/12/2021`.
@@ -353,6 +381,8 @@ object of type `Ingredient`. The ingredients are then sorted by earliest expirin
 
 The partial sequence diagram of the above process is shown below:
 ![image](images/ExpireSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 ## 5. Product scope
 
@@ -382,6 +412,8 @@ The partial sequence diagram of the above process is shown below:
 
 1. Should work on any *mainstream OS* (Windows, Linus, macOS or Unix) with Java `11` or above installed.
 2. Users proficient at typing should be able to complete tasks faster using commands than using a mouse with a GUI.
+
+<div style="page-break-after: always;"></div>
 
 ## 8. Instructions for manual testing
 
