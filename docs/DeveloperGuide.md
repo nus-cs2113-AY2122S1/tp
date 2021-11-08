@@ -570,17 +570,46 @@ This feature allows users to clear their Food List.
 
 `storage` accesses `whatIAteTodayList` by reference, and calls it's `clearList` method, clearing all entries from the list
 
-following that, `StorageFood` invokes `saveList` to update the `food.txt` file.
+Following that, `StorageFood` invokes `saveList` to update the `food.txt` file.
 
 ##### Viewing from a reference list
 
+This section covers the implementation, and design consideration of features that involve a reference list.
+
+A reference list is represented by [StallsManager](#class-diagram-of-food), which contains all the information of items sold by a store in
+a food court, as well as the name of the store.
+
+Additionally, a reference list has multiple features, namely
+
+1. `food view`
+1. `food view [STORE_INDEX]`
+1. `food view all`
+
+The `ViewReferenceFoodCommand` compares the user input to the correct syntax and executes the corresponding command.
+All three commands listed are implemented by methods contained in `StallsManager`, with the following execution path:
+1. `storage` accesses `reference`, which is a reference list
+1. `reference` then accesses a particular food court reference, Technoedge, by the method `getTechnoEdge()`
+1. `reference` then invokes the corresponding command by calling the one of the three methods stored in Technoedge reference.
+
+The implementation of the three methods is similar to  [Food List](#listing-all-food-records).
+However, they differ in the scale of the commands. `food list` operates simply by reading the user's current list.
+Subsets of `food view` commands operate on the reference list `StallsManager`, which is identified by Technoedge name.
+
+In particular, all the date corresponding to Technoedge food court is already saved into the system by arrays of strings,
+added in by the developer team (us). 
+
+This data is found from [NUS OCA](https://uci.nus.edu.sg/oca/retail-dining/well-certification/),
+and imported manually by us.
+
+Click parses the relevant data from the strings into food records for the user to interact with. 
+This functionality can be read from our [user guide](./UserGuide.md)
 
 ##### Saving food list on successful command
 
 The storage on hard-disk would be automatically
 updated on every successful command entered by the user.
 
-The interworking of this is described in detail in architecture.
+The interworking of this is described in detail in [architecture](#451-architecture).
 
 ### 4.6  Help command
 
