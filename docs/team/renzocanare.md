@@ -15,9 +15,7 @@ ultimately saving cost and increasing profits.
 
 * **Feature**: Adding and Editing Storage or Wastage to Ingredients
     * **What it does**: Ability to add or edit weight (in kg) to the value of total storage or wastage of a particular ingredient.
-    * **Justification**: This feature is a core feature of the product as the user should be able to track the amount of storage or wastage
-    an ingredient to help them reduce their ingredient wastage. 
-  
+
 
 * **Feature**: Setting the Expiry Date of Ingredients
     * **What it does**: Ability to set the expiry date (in dd/MM/yyyy format) of a particular ingredient.      
@@ -50,9 +48,8 @@ ultimately saving cost and increasing profits.
           last input command.
     * **Justification**: This enhancement improves the user-experience (UX) of our target audience, restaurant owners, as the terminal becomes easier to read and is less
           cluttered with previous commands. Such an enhancement will help restaurant owners navigate through the application faster due to the increased readability.
-    * **Highlights**: There was an initial great difficulty in implementing this function as terminal manipulation was not taught in this module.
-          Furthermore, many of the online resources on how to clear the terminal tend to not work in the expected manner for all operating systems.
-          However, after long research, a viable method was found that could suit to our needs with flexibility between different operating systems.
+    * **Highlights**: Most of the online resources on how to clear the terminal tend to not work in the expected manner for all operating systems.
+          A viable method was eventually found that could suit to our needs with flexibility between different operating systems.
     * **Credits**: [Java-Clear-Console](https://www.delftstack.com/howto/java/java-clear-console/)
 
 
@@ -61,18 +58,73 @@ ultimately saving cost and increasing profits.
     * **Justification**: This enhancement reduces the likelihood of mistakes being made when entering a command since users will
       now only need to enter the additional parameter on the following prompt. Furthermore, the overall command length is reduced. This will increase the user's
       efficiency as the user will not have to pause in making sure lengthy command inputs are correct.
-    
-
-* **Documentation**:
-    * Contributions to User Guide:
-        * Overall formatting and design, and cosmetic tweaks to other existing documentation.
-        * Added documentation for `edit dish name`, `edit dish waste`, `set ingr expiry`, `edit ingr stored`, `edit ingr waste`.
-        * Contributed to various other existing documentation by updating command formats and expected inputs/outputs.
-    * Contributions to Developer Guide:
-        * Overall formatting and design, and cosmetic tweaks to other existind documentation.
-        * Added documentation for `Loading Data`, `Saving Data`, `User-Interface Component`.
 
 
 * **Contributions to team-based tasks**:
-* **Review/mentoring contributions**:
-* **Contributions beyond the project team**:
+    * Managed milestones `v2.0 - v2.1`. 
+    * Managed project documentation (`UserGuide`, `DeveloperGuide`, `PPP`) issues.
+    
+
+<div style="page-break-after: always;"></div>
+
+
+* **Contributions to User Guide**:
+    * Overall formatting and design, and cosmetic tweaks to other existing documentation.
+    * Added documentation for:
+        * `edit dish name`
+        * `edit dish waste`
+        * `set ingr expiry`
+        * `edit ingr stored`
+        * `edit ingr waste`
+    * Contributed to various other existing documentation by updating command formats, expected inputs/outputs and
+      adding `Tips` and `Notes`.
+
+
+<div style="page-break-after: always;"></div>
+
+
+* **Contributions to Developer Guide**:
+    * Overall formatting and design (including image centering and captions), and cosmetic tweaks to other existing documentation.
+      
+    * Added documentation for:
+        * `Design - Storage: Loading Data`
+        * `Design - Storage: Saving Data`
+        * `Design - User-Interface Component`
+        * `Implementation - Add: Adding Dishes and Ingredients`
+        * `Implementation - Add: Adding Wastage to Dishes and Ingredients, Storage to Ingredients`
+        * `Implementation - Terminal Refreshing / Clear Screen`
+      
+    * Added PUML Diagrams for:
+      
+        * `Design - Storage: Loading Data`
+          
+          <p align="center">
+            <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/storage_load_sequence.png">
+          </p>
+          <center>Figure 4: Loading Data Sequence Diagram</center>
+          <br>
+          
+        * `Design - Storage: Saving Data`
+          
+          <p align="center">
+            <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/storage_write_sequence.png">
+          </p>
+          <center>Figure 5: Saving Data Sequence Diagram</center>
+          <br>
+          
+        * `Implementation - Add: Adding Dishes and Ingredients`
+          
+          <p align="center">
+            <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/add_ingr_command_sequence.png">
+          </p>
+          <center>Figure 11: AddIngredientCommand Sequence Diagram</center>          
+          <br> 
+          
+        * `Implementation - Add: Adding Wastage to Dishes and Ingredients, Storage to Ingredients`
+          
+          <p align="center">
+          <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/add_dish_waste_command_sequence.png">
+          </p>
+          <center>Figure 12: AddDishWasteCommand Sequence Diagram</center>
+    
+
