@@ -4,11 +4,11 @@
 
 * [Overview](#overview)
 * [Summary of Contributions](#summary-of-contributions)
-  * [Code Contribution](#code-contributions)
+  * [Code Contributions](#code-contributions)
   * [Enhancements Implemented](#enhancements-implemented)
-  * [User Guide](#user-guide-contributions)
-  * [Developer Guide](#developer-guide-contributions)
-  * [Team based contributions](#team-based-contributions)
+  * [User Guide Contributions](#user-guide-contributions)
+  * [Developer Guide Contributions](#developer-guide-contributions)
+  * [Team-based Contributions](#team-based-contributions)
 
 ## Overview
 
@@ -62,7 +62,7 @@ Here are some of the enhancements implemented:
   * Product scope
   * User stories (transferring from discussion to DG)
 
-### Team based contributions
+### Team-based Contributions
 
 Reviewing and approving of some [pull requests](https://github.com/AY2122S1-CS2113T-W11-3/tp/pulls?q=is%3Apr+is%3Aclosed) (more than 20) of other members.
 
