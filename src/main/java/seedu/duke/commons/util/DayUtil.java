@@ -1,11 +1,11 @@
 package seedu.duke.commons.util;
 
-import seedu.duke.commons.core.Message;
-import seedu.duke.commons.util.exceptions.InvalidDayException;
-
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
+
+import seedu.duke.commons.core.Message;
+import seedu.duke.commons.util.exceptions.InvalidDayException;
 
 //@@author Roycius
 public class DayUtil {
@@ -29,6 +29,15 @@ public class DayUtil {
         return period.equalsIgnoreCase("tomorrow");
     }
 
+    //@@author richwill28
+    /**
+     * Compare two input days.
+     *
+     * @param d1 day 1
+     * @param d2 day 2
+     * @return -1 if d1 < d2, 0 if d1 == d2, and 1 if d1 == d2
+     * @throws InvalidDayException if the input days are invalid
+     */
     public static int compareDay(String d1, String d2) throws InvalidDayException {
         Map<String, Integer> order = new HashMap<>();
         order.put("Monday", 1);
