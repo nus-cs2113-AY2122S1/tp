@@ -35,7 +35,7 @@ public class AddTourCommand extends Command {
      */
     @Override
     public void execute() {
-        int newTourCount = tours.getTourCount() + 1;
+        final int newTourCount = tours.getTourCount() + 1;
         try {
             Tour existingTour = tours.getTourById(tour.getId());
             System.out.println("Tour code already exists. Please try another tour code.");
