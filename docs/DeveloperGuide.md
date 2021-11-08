@@ -144,15 +144,9 @@ as code examples.
 
 ### 4.1. Module-related Features
 
-This segment focuses on describing the implementation of module-related features, the functionality of the commands as well as the design considerations taken.
-
 #### 4.1.1 Adding a Module
 
-This feature allows user to add a new Module.
-
-If the creation is successful, a confirmation message on the newly created Module will be displayed to the user.
-
-**Implementation**
+This feature allows user to add a new Module. If the creation is successful, a confirmation message on the newly created Module will be displayed to the user.
 
 The command for listing all modules is implemented by the `AddModuleCommand` class that extends `Command`.
 
@@ -175,11 +169,7 @@ The sequence diagram below summarizes how adding a module work:
 
 #### 4.1.2 Removing a Module
 
-This feature allows user to remove a Module created in the past.
-
-If the deletion is successful, a confirmation message on the Module deletion will be displayed to the user.
-
-**Implementation**
+This feature allows user to remove a Module created in the past. If the deletion is successful, a confirmation message on the Module deletion will be displayed to the user.
 
 The command for listing all modules is implemented by the `DeleteModuleCommand` class that extends `Command`.
 
@@ -197,8 +187,6 @@ When the user types `module delete 2`, the following sequence of steps will then
 #### 4.1.3 Listing All Modules
 
 This feature allows user to view all Modules.
-
-**Implementation**
 
 The command for listing all modules is implemented by the `ListModuleCommand` class that extends `Command`.
 
@@ -220,8 +208,6 @@ The sequence diagram below summarizes how listing modules work:
 #### 4.1.4 Edit CAP Information
 
 This feature allows user to edit the information related to the CAP.
-
-**Implementation**
 
 The command for editing CAP information is implemented by the `CapEditInfoCommand` class that extends `Command`.
 
@@ -246,8 +232,6 @@ The sequence diagram below summarizes how editing CAP information work:
 #### 4.1.5 Get Expected CAP
 
 This feature allows user to view the information related to the CAP and the expected CAP.
-
-**Implementation**
 
 The command for getting expected CAP is implemented by the `GetExpectedCapCommand` class that extends `Command`.
 
@@ -1050,4 +1034,18 @@ For the positive test cases, just simply follow the UserGuide in the sequence fr
 Here are the negative test cases you can test:
 
 * Module-related commands:
-  * 
+  * Invalid module commands:
+    * `module`
+    * `module a`
+    * `cap`
+  * Invalid add module commands:
+    * `module add`
+    * `module add n/Software Engineering c/CS2113T`
+  * Invalid delete module commands:
+    * `module delete one`
+    * `module delete -1`
+    * `module delete [INDEX_OUT_OF_BOUND]`
+  * Invalid CAP info:
+    * Provide the current CAP which is not a real number
+    * Provide the current CAP which is not in the range [0.0 - 5.5]
+    * Provide the total MC taken which is not a positive integer
