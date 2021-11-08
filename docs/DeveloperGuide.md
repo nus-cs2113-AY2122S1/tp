@@ -26,7 +26,6 @@ Welcome to **SLAM**! **SLAM** is a desktop application for student group leaders
 9. [Glossary](#glossary)
 10. [Instructions for manual testing](#instructions-for-manual-testing)
 
-
 ## Introduction
 
 SLAM is a **command line interface application** for student group leaders in NUS to **manage their group 
