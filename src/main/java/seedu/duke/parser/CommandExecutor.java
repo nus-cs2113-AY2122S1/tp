@@ -1,7 +1,6 @@
 package seedu.duke.parser;
 
 import seedu.duke.exceptions.ForceCancelException;
-import seedu.duke.exceptions.InvalidAmountException;
 import seedu.duke.exceptions.NoExpensesException;
 import seedu.duke.exceptions.SameNameException;
 import seedu.duke.exceptions.TripNotOpenException;
@@ -12,6 +11,8 @@ import seedu.duke.Person;
 import seedu.duke.expense.Expense;
 
 import java.util.ArrayList;
+
+import static seedu.duke.Storage.LAST_INTERACTED;
 
 abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummarizer {
     private static final int EDIT_ATTR_COUNT = 2;
@@ -69,9 +70,6 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
         Storage.setLastTrip(newTrip);
     }
 
-    private static final String USER_CONTINUE = "y";
-    private static final String USER_QUIT = "n";
-
     /**
      * Asks if the user wants to proceed with adding a trip that has been detected as a duplicate.
      *
@@ -82,9 +80,9 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
         Ui.duplicateTripWarning();
         while (true) {
             String userOption = Ui.receiveUserInput();
-            if (userOption.contains(USER_CONTINUE)) {
+            if (userOption.contains(Ui.USER_CONTINUE)) {
                 return true;
-            } else if (userOption.contains(USER_QUIT)) {
+            } else if (userOption.contains(Ui.USER_QUIT)) {
                 Ui.printForceCancelled();
                 return false;
             }
@@ -127,7 +125,7 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
         String[] tripToEditInfo = inputDescription.split(" ", EDIT_ATTR_COUNT);
         String attributesToEdit = tripToEditInfo[ATTRIBUTE_DATA];
         Trip tripToEdit;
-        if (tripToEditInfo[EDIT_INDEX].equals("last")) {
+        if (tripToEditInfo[EDIT_INDEX].equals(LAST_INTERACTED)) {
             tripToEdit = Storage.getLastTrip();
             if (tripToEdit == null) {
                 Ui.printNoLastTripError();
@@ -201,7 +199,7 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
         Trip openTrip = Storage.getOpenTrip();
         if (inputParams == null) {
             openTrip.viewAllExpenses();
-        } else if (inputParams.equalsIgnoreCase(LAST)) {
+        } else if (inputParams.equalsIgnoreCase(LAST_INTERACTED)) {
             if (openTrip.getLastExpense() == null) {
                 Ui.noRecentExpenseError();
             } else {
@@ -251,14 +249,14 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
         int index;
         if (Storage.checkOpenTrip()) {
             Trip currTrip = Storage.getOpenTrip();
-            if (inputParams.equalsIgnoreCase("last")) {
+            if (inputParams.equalsIgnoreCase(LAST_INTERACTED)) {
                 index = currTrip.getListOfExpenses().indexOf(currTrip.getLastExpense());
             } else {
                 index = Integer.parseInt(inputParams) - 1;
             }
             executeDeleteExpense(index);
         } else {
-            if (inputParams.equalsIgnoreCase("last")) {
+            if (inputParams.equalsIgnoreCase(LAST_INTERACTED)) {
                 index = Storage.getListOfTrips().indexOf(Storage.getLastTrip());
             } else {
                 index = Integer.parseInt(inputParams) - 1;

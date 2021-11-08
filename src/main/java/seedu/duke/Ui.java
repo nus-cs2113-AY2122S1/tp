@@ -10,6 +10,9 @@ import java.util.HashMap;
 
 public class Ui {
 
+    public static final String USER_CONTINUE = "y";
+    public static final String USER_QUIT = "n";
+
     public static void printOptimizedAmounts() throws ForceCancelException {
         boolean isAllPaid = true;
         Trip openTrip = Storage.getOpenTrip();

@@ -10,7 +10,7 @@ _PayMeBack_ is a greenfield project. My main responsibilities in this project in
 - As the team member most proficient in Java, to provide guidance and mentorship to other team members on Java.
 - To manage the team organisation and repository.
 - To implement and test new features in the program.
-- To maintain a high quality of code and workflows in collaboration with other members of the team.
+- To maintain high quality of code and workflows in collaboration with other members of the team.
 
 ### Summary of Contributions
 
@@ -23,14 +23,13 @@ Detailed code contribution information can be viewed via RepoSense [here](https:
 - Implemented and tested `FileStorage` class, and some of `Ui`, `Trip`, `Storage`, `Parser`, and `ForceCancelException` classes.
 - Wrote a large part, or the entirety, of `FileTest`, `TripTest`, and `ValidityCheckerTest`.
 
-#### Enhancements Implemented:
+#### Enhancements and Features Implemented:
 
-- **New Feature**: Using `last` to get the trip which the user last interacted with, saving time from having to repeatedly figure
-  out what the trip index is.
-- **New Feature**: Reading from and writing to a save file using the JSON format (through serialisation/deserialisation with Google Gson).
-- **Enhancement to Feature**: Adding custom serialiser/deserialiser to Gson for LocalDate objects.
-- **Enhancement to Feature**: Ability to assist user in detecting and overwriting a corrupted save file.
-- **New Feature**: Allowing users to abort a process when asked to correct an erroneous input (completed in collaboration with @joshualeeky)
+- **New**: Using `last` to get the trip which the user last interacted with.
+- **New**: Reading from and writing to a save file using the JSON format (through serialisation/deserialisation with Google Gson).
+- **Enhancement**: Adding custom serialiser/deserialiser to Gson for LocalDate objects.
+- **Enhancement**: Ability to assist user in detecting and overwriting a corrupted save file.
+- **New**: Allowing users to abort a process when asked to correct an erroneous input (completed in collaboration with @joshualeeky)
 
 #### Contributions to User Guide:
 
@@ -42,9 +41,7 @@ The following sections in the [User Guide](https://ay2122s1-cs2113t-t12-2.github
 
 In addition, I made contributions to the following sections:
 
-- Introduction
-- Using this guide
-- Quick Start
+- Introduction, Using this guide, Quick Start
 - FAQ #1
 
 #### Contributions to Developer Guide:
@@ -61,21 +58,19 @@ In addition, I made contributions to the following sections:
 
 #### Contributions to Team Tasks:
 
-- Setting up and administration of organisation and team repository
-- Reviewing of Pull Requests
+- Setup and administration of organisation and team repository, and reviewing pull requests
 - Adding templates for User Stories and Bug Reporting in Issues
 - Gradle modifications (for enabling assertions and adding Gson dependency)
-- Managed `v2.0` release
-- Cleanup of PE-D issues (marking duplicate, rejecting non-issues)
+- Managed `v2.0` and `v2.1` release
+- Cleanup of PE-D issues (marking duplicates, rejecting non-issues)
 - General maintenance of issue tracker (milestone and label assignment)
 
 #### Review and Mentoring contributions
 
-- Comments on PRs ([#31](https://github.com/AY2122S1-CS2113T-T12-2/tp/pull/31#discussion_r723066635),
-  [#42](https://github.com/AY2122S1-CS2113T-T12-2/tp/pull/42#discussion_r725532182), [#55](https://github.com/AY2122S1-CS2113T-T12-2/tp/pull/55#discussion_r726785554))
+- Comments on PRs - [#31](https://github.com/AY2122S1-CS2113T-T12-2/tp/pull/31#discussion_r723066635),
+  [#42](https://github.com/AY2122S1-CS2113T-T12-2/tp/pull/42#discussion_r725532182), [#55](https://github.com/AY2122S1-CS2113T-T12-2/tp/pull/55#discussion_r726785554)
 - Bug reports - [#135](https://github.com/AY2122S1-CS2113T-T12-2/tp/issues/135), [#49](https://github.com/AY2122S1-CS2113T-T12-2/tp/issues/49), [#45](https://github.com/AY2122S1-CS2113T-T12-2/tp/issues/45), 
-- Mentoring on JUnit tests - simulating user input through `Scanner`, and testing `System.out.println()` statements.
-
+- Mentoring on JUnit tests to simulate and test user inputs and outputs
 
 #### Contributions beyond the team
 
