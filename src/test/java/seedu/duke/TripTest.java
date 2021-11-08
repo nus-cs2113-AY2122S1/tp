@@ -11,6 +11,7 @@ import seedu.duke.trip.Trip;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -260,16 +261,102 @@ class TripTest {
         assertEquals("Duke", person.getName());
     }
 
+    //@@author itsleeqian
     @Test
-    public void testSetCurrencyInfo() throws ForceCancelException {
-        Trip trip = new Trip();
-        trip.setForeignCurrency("USD");
-        trip.setRepaymentCurrency("SGD");
-        trip.setExchangeRate("1.3");
-        assertEquals("USD", trip.getForeignCurrency());
-        assertEquals("SGD", trip.getRepaymentCurrency());
-        assertEquals(1.3, trip.getExchangeRate());
+    public void testSetForeignCurrency() throws ForceCancelException {
+        Trip trip1 = new Trip();
+        trip1.setForeignCurrency("USD");
+        assertEquals("USD", trip1.getForeignCurrency());
+        Trip trip2 = new Trip();
+        trip2.setForeignCurrency("EUR");
+        assertEquals("EUR", trip2.getForeignCurrency());
     }
+
+
+    @Test
+    public void testEditForeignCurrency() throws ForceCancelException {
+        testTrip1.setForeignCurrency("CNY");
+        assertEquals("CNY", testTrip1.getForeignCurrency());
+    }
+
+    @Test
+    public void testEditForeignCurrency_InvalidCurrency() throws ForceCancelException {
+        String scannerInputs = "123" + System.lineSeparator()
+                + "test currency" + System.lineSeparator()
+                + "Galleon" + System.lineSeparator()
+                + "KRW";
+        System.setIn(new ByteArrayInputStream(scannerInputs.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        testTrip1.setForeignCurrency("hello");
+        assertEquals("KRW", testTrip1.getForeignCurrency());
+    }
+
+    @Test
+    public void testEditForeignCurrency_BlankInput() throws ForceCancelException {
+        System.setIn(new ByteArrayInputStream("KRW".getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        testTrip1.setForeignCurrency("");
+        assertEquals("KRW", testTrip1.getForeignCurrency());
+    }
+
+    @Test
+    public void testEditForeignCurrencyFull() {
+        createNewTripForTest();
+        String userInput = "edit last -forcur TWD";
+        Parser.parseUserInput(userInput);
+        Trip tripToCheck = Storage.getLastTrip();
+        assertEquals("TWD", tripToCheck.getForeignCurrency());
+        assertEquals("NT$", tripToCheck.getForeignCurrencySymbol());
+    }
+
+
+    @Test
+    public void testSetHomeCurrency() throws ForceCancelException {
+        Trip trip1 = new Trip();
+        trip1.setRepaymentCurrency("SGD");
+        assertEquals("SGD", trip1.getRepaymentCurrency());
+        Trip trip2 = new Trip();
+        trip2.setRepaymentCurrency("MYR");
+        assertEquals("MYR", trip2.getRepaymentCurrency());
+    }
+
+    @Test
+    public void testEditHomeCurrency() throws ForceCancelException {
+        testTrip1.setRepaymentCurrency("SAR");
+        assertEquals("SAR", testTrip1.getRepaymentCurrency());
+    }
+
+    @Test
+    public void testEditHomeCurrency_InvalidCurrency() throws ForceCancelException {
+        String scannerInputs = "456" + System.lineSeparator()
+                + "kekW" + System.lineSeparator()
+                + "Galleon" + System.lineSeparator()
+                + "JPY";
+        System.setIn(new ByteArrayInputStream(scannerInputs.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        testTrip1.setForeignCurrency("hello");
+        assertEquals("JPY", testTrip1.getForeignCurrency());
+    }
+
+    @Test
+    public void testEditHomeCurrency_BlankInput() throws ForceCancelException {
+        System.setIn(new ByteArrayInputStream("KRW".getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        testTrip1.setRepaymentCurrency("");
+        assertEquals("KRW", testTrip1.getRepaymentCurrency());
+    }
+
+    @Test
+    public void testEditHomeCurrencyFull() {
+        createNewTripForTest();
+        String userInput = "edit last -homecur IDR";
+        Parser.parseUserInput(userInput);
+        Trip tripToCheck = Storage.getLastTrip();
+        assertEquals("IDR", tripToCheck.getRepaymentCurrency());
+        assertEquals("Rp", tripToCheck.getRepaymentCurrencySymbol());
+    }
+
+    //@@author
 
     @Test
     public void testSetDate() throws ForceCancelException {
