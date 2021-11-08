@@ -14,8 +14,7 @@ Given below are the contributions to the project.
       `add -[IDENTIFIER] /PREFIX1 DATA1 /PREFIX2 DATA2 ...`
 
     * Justification: This is the functionality that is core to the program, as it allows the input of data into
-      database. As such, many exceptions have to be handled, along with catchers for erroneous inputs that were
-      implemented.
+      database. As such, many exceptions have to be handled, along with catchers for erroneous inputs.
 
     * Highlights: The add feature implemented (including parsing of user input) allows for greater flexibility during
       input. The prefixes can be arranged in any order during adding, and additional white spaces in the command will be
@@ -24,8 +23,7 @@ Given below are the contributions to the project.
     * Highlights: The exception handling for add is rather extensive. First, erroneous inputs such as missing
       identifier, missing prefixes (hence data fields), duplicated prefixes, missing data fields will all be flagged as
       an error. Erroneous or illogical entries will either be flagged out as a **WARNING** or an **ERROR**, depending on
-      its severity. For example, if user enters price as *200a*, the entry will be rejected with an **ERROR** return,
-      whereas another price entry of *2000.23232* will be flagged as a **WARNING** since it has too many decimal places.
+      its severity. 
 
 * Feature: **SORT** - Added the ability to **sort** clients, flights, tours in the database.
     * What it does: Allows the user to sort, in the format of:
@@ -37,8 +35,7 @@ Given below are the contributions to the project.
 
     * Highlights: Sorting is mostly implemented with using the natural sorting of String or Float. Hence,
       `Collections.sort()` is mainly used to sort an ArrayList of data. Sorting for local date-time is trickier,
-      requiring the need for a defined `Comparator`. However, sorting the data in itself is not enough. To sort the
-      objects, we can query for the object using the specific data field. The program has allowed for sorting regardless
+      requiring the need for a defined `Comparator`. The program has allowed for sorting regardless
       of duplicates in the data.
 
 * Task: General **Parser** methods and code structure
