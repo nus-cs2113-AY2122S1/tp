@@ -51,4 +51,6 @@ StorageModule ..> ModuleList
 StorageModule ..> ParserModule
 ParserModule ..> Module
 
+skinparam classAttributeIconSize 0
+hide circle
 @enduml
