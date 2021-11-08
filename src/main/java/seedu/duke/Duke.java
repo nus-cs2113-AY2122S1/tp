@@ -7,20 +7,14 @@ import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.parserexceptions.InvalidItemTypeException;
 import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
 import seedu.duke.items.mainlists.EventCatalog;
-import seedu.duke.items.Task;
 import seedu.duke.items.mainlists.MemberRoster;
 import seedu.duke.parser.Parser;
 import seedu.duke.storage.StorageFile;
-
-import java.util.ArrayList;
 
 public class Duke {
 
     public static EventCatalog eventCatalog = EventCatalog.getInstance();
     public static MemberRoster memberRoster = MemberRoster.getInstance();
-    /*TODO: Delete the ArrayList of tasks below once the project has been restructured to fully utilize the new
-     *  ArrayList of Task objects within each Event*/
-    public static ArrayList<Task> taskList = new ArrayList<>();
     private static final StorageFile storage = new StorageFile();
 
     public static void main(String[] args) {

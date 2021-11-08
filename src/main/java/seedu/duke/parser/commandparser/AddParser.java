@@ -18,6 +18,7 @@ import seedu.duke.parser.ItemType;
 import seedu.duke.parser.Parser;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public abstract class AddParser extends Parser {
 
@@ -25,6 +26,10 @@ public abstract class AddParser extends Parser {
     private static final int INDEX_OF_DATETIME = 1;
     private static final int INDEX_OF_VENUE = 2;
     private static final int INDEX_OF_BUDGET = 3;
+
+    private static final ItemAttribute[] eventAttributesToCheckFor = {ItemAttribute.TITLE, ItemAttribute.DATE,
+                                                                      ItemAttribute.VENUE, ItemAttribute.BUDGET};
+    private static final ItemAttribute[] taskAttributesToCheckFor = {ItemAttribute.TITLE, ItemAttribute.DATE};
 
     /**
      * Parses add command details from user input to determine the type of item to be added along with its respective
@@ -58,7 +63,7 @@ public abstract class AddParser extends Parser {
 
                 int eventIndex = getEventForTask();
                 Ui.printLineBreak();
-                int[] memberIndexes = getMembersForTask();
+                ArrayList<Integer> memberIndexes = getMembersForTask();
 
                 return new AddTaskCommand(title, description, dateTime, eventIndex, memberIndexes);
 
@@ -87,16 +92,18 @@ public abstract class AddParser extends Parser {
      */
     private static String[] parseAddEvent(String commandDetails) throws DukeException {
         try {
-            String commandAttributes = getCommandAttributes(commandDetails);
+            checkCommandAttributes(commandDetails);
             String[] parsedAttributes = new String[4];
 
-            String title = retrieveItemAttribute(commandAttributes, ItemAttribute.TITLE);
+            verifyFlags(commandDetails, eventAttributesToCheckFor);
+
+            String title = retrieveItemAttribute(commandDetails, ItemAttribute.TITLE);
             parsedAttributes[INDEX_OF_TITLE] = title;
-            String dateTime = retrieveItemAttribute(commandAttributes, ItemAttribute.DATE);
+            String dateTime = retrieveItemAttribute(commandDetails, ItemAttribute.DATE);
             parsedAttributes[INDEX_OF_DATETIME] = dateTime;
-            String venue = retrieveItemAttribute(commandAttributes, ItemAttribute.VENUE);
+            String venue = retrieveItemAttribute(commandDetails, ItemAttribute.VENUE);
             parsedAttributes[INDEX_OF_VENUE] = venue;
-            String budget = retrieveItemAttribute(commandAttributes, ItemAttribute.BUDGET);
+            String budget = retrieveItemAttribute(commandDetails, ItemAttribute.BUDGET);
             parsedAttributes[INDEX_OF_BUDGET] = budget;
 
             return parsedAttributes;
@@ -107,7 +114,7 @@ public abstract class AddParser extends Parser {
         } catch (AttributeNotFoundException e) {
             String attributeType = ItemAttribute.getAttributeName(e.getItemAttribute());
             String attributeFlag = ItemAttribute.getItemFlag(e.getItemAttribute());
-            throw new DukeException("Please add a " + attributeType + "for your event using "
+            throw new DukeException("Please add a " + attributeType + " for your event using "
                     + attributeFlag + attributeType.toUpperCase());
         }
     }
@@ -123,12 +130,14 @@ public abstract class AddParser extends Parser {
         }
 
         try {
-            String commandAttributes = getCommandAttributes(commandDetails);
+            checkCommandAttributes(commandDetails);
             String[] parsedAttributes = new String[2];
 
-            String title = retrieveItemAttribute(commandAttributes, ItemAttribute.TITLE);
+            verifyFlags(commandDetails, taskAttributesToCheckFor);
+
+            String title = retrieveItemAttribute(commandDetails, ItemAttribute.TITLE);
             parsedAttributes[INDEX_OF_TITLE] = title;
-            String dateTime = retrieveItemAttribute(commandAttributes, ItemAttribute.DATE);
+            String dateTime = retrieveItemAttribute(commandDetails, ItemAttribute.DATE);
             parsedAttributes[INDEX_OF_DATETIME] = dateTime;
 
             return parsedAttributes;
@@ -180,10 +189,12 @@ public abstract class AddParser extends Parser {
                 assert event != null : "Event does not exist";
                 isCorrectEvent = true;
             } catch (NumberFormatException e) {
+                Ui.printLineBreak();
                 System.out.println("Please enter the number corresponding to the event "
                         + "you want to add to. ");
                 Ui.printLineBreak();
             } catch (IndexOutOfBoundsException e) {
+                Ui.printLineBreak();
                 System.out.println("No such event. Please enter a valid event for your task. ");
                 Ui.printLineBreak();
             }
@@ -192,43 +203,59 @@ public abstract class AddParser extends Parser {
         return eventIndex;
     }
 
-    private static int[] getMembersForTask() {
+    private static ArrayList<Integer> getMembersForTask() {
         Ui.promptForMemberIndex();
-        int[] memberIndexes = null;
+        ArrayList<Integer> memberIndexes = null;
         boolean isCorrectMember = false;
         while (!isCorrectMember) {
             try {
                 assert !Duke.memberRoster.isEmpty() : "The member roster should not be empty";
                 Ui.printMemberRoster();
                 Ui.printLineBreak();
-                memberIndexes = extractInt(Ui.readInput());
+                memberIndexes = extractIndexes(Ui.readInput());
                 for (int index : memberIndexes) {
                     Member member = Duke.memberRoster.get(index);
                     assert member != null : "Member does not exist";
                 }
                 isCorrectMember = true;
             } catch (IndexOutOfBoundsException e) {
+                Ui.printLineBreak();
                 System.out.println("One or more of these members do not exist. Please enter the "
                         + "index(es) corresponding to the correct member(s). ");
                 Ui.printLineBreak();
             } catch (DukeException e) {
+                Ui.printLineBreak();
                 System.out.println(e.getMessage());
                 Ui.printLineBreak();
+            } catch (NumberFormatException e) {
+                System.out.println("Please make sure you're only giving me numbers for the indexes!");
             }
         }
         return memberIndexes;
     }
 
-    public static boolean isValidName(String input) {
+    // @@author Alvinlj00
+    private static boolean isValidName(String input) {
         return ((!input.equals("")) && (input.matches("^[A-Z. -]*$")));
     }
 
-    public static boolean isDuplicateName(String name) {
+    private static boolean isDuplicateName(String name) {
         for (Member member : Duke.memberRoster) {
             if (name.equals(member.getName())) {
                 return true;
             }
         }
         return false;
+    }
+    // @@author Alvinlj00
+
+    private static void verifyFlags(String commandDetails, ItemAttribute[] attributeFlagsToCheckFor)
+            throws AttributeNotFoundException {
+        // Check if the response contains the flag and ensure that it is separated by whitespace
+        for (ItemAttribute itemAttribute : attributeFlagsToCheckFor) {
+            if (!commandDetails.contains(" " + ItemAttribute.getItemFlag(itemAttribute))) {
+                throw new AttributeNotFoundException(itemAttribute);
+            }
+        }
     }
 }

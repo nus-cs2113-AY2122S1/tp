@@ -48,14 +48,21 @@ public class Task extends Item {
         return memberList.get(index);
     }
 
+    // @@author alwinangys
     public String getMemberListAsString() {
         StringBuilder members = new StringBuilder();
         int counter = 1;
-        for (Member member : memberList) {
-            members.append(counter).append(" ");
-            members.append(member).append("\n");
+        for (int i = 0; i < memberList.size(); i++) {
+            Member member = memberList.get(i);
+            members.append(counter).append(". ");
+            members.append(member);
+            if (i != memberList.size() - 1) {
+                members.append("\n");
+            }
             counter++;
         }
+
         return members.toString();
     }
+    // @@author alwinangys
 }

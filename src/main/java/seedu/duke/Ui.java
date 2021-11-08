@@ -88,21 +88,28 @@ public class Ui {
     }
 
     public static void promptForMemberIndex() {
-        System.out.println("Please choose which member(s) you want to assign your task to. "
-                + "If you're choosing more than 1 member, separate the indexes with ', '. ");
+        System.out.println("Please enter the indexes of the member(s) you want to assign your task to.\n"
+                + "If you're choosing more than 1 member, separate the indexes with a whitespace:");
     }
 
+    public static void promptForMemberIndexForUpdate() {
+        System.out.println("Please enter the index of the member you want to assign your task to.\n"
+                + "Note: Enter the index of only one member!");
+    }
+
+    // @@author alwinangys
     public static String getTaskDeletionMessage(String taskTitle) {
-        return String.format("This task has been removed: %s\n", taskTitle);
+        return String.format("This task has been removed: %s", taskTitle);
     }
 
     public static String getEventDeletionMessage(String eventTitle) {
-        return String.format("This event has been removed: %s\n", eventTitle);
+        return String.format("This event has been removed: %s", eventTitle);
     }
 
     public static String getMemberDeletionMessage(String name) {
-        return String.format("This member has been removed: %s\n", name);
+        return String.format("This member has been removed: %s", name);
     }
+    // @@author Alvinlj00
 
     public static String getUnableToDeleteMemberMessage(String message) {
         return "Please assign more members to these tasks:" + System.lineSeparator()
@@ -112,7 +119,7 @@ public class Ui {
     public static String getTaskAddedMessage(int eventIndex, Task task) {
         assert eventIndex < Duke.eventCatalog.size() : "Number entered cannot be more than "
                 + "number of events";
-        return String.format("Task added: %s\n"
+        return String.format(Ui.getLineBreak() + "\nTask added: %s\n"
                         + "Total number of tasks in this event = %s",
                 task.getTitle(), Duke.eventCatalog.get(eventIndex).getTaskList().size());
     }
@@ -189,10 +196,12 @@ public class Ui {
         return "Here are the details of the event:\n" + getEvent(event);
     }
 
+    // @@author alwinangys
     public static String getSelectedMemberMessage(Member member) {
-        return "Here are the details of the member:\n" + member.getName() + "\n"
+        return "Here are the tasks this member is assigned to:\n" + member.getName() + "\n"
                 + member.getTasks();
     }
+    // @@author alwinangys
 
     public static <T> void printList(ArrayList<T> list) {
         AtomicInteger i = new AtomicInteger();
@@ -271,7 +280,7 @@ public class Ui {
                 + System.lineSeparator() + "t/[TASK NUM YOU WANT TO UPDATE]"
                 + System.lineSeparator()
                 + "Only type a singular update at given time!"
-                + "\n Only the first command will be updated if multiple updates are written"
+                + "\nOnly the first command will be updated if multiple updates are written"
                 + System.lineSeparator() + Ui.getLineBreak());
     }
 
@@ -314,10 +323,10 @@ public class Ui {
                 + System.lineSeparator() + "p/[NEW DESCRIPTION]"
                 + System.lineSeparator() + "member/[MEMBER INDEX]"
                 + System.lineSeparator() + "remove/[MEMBER INDEX]"
-                + System.lineSeparator() + "add : to add a member to a task"
+                + System.lineSeparator() + "To add a member to a task, enter 'add'"
                 + System.lineSeparator()
                 + "\nOnly type a singular update at given time!"
-                + "\n Only the first command will be updated if multiple updates are written"
+                + "\nOnly the first command will be updated if multiple updates are written"
                 + System.lineSeparator() + Ui.getLineBreak());
     }
 
