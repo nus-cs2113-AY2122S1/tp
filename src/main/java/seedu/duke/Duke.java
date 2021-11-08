@@ -21,7 +21,6 @@ public class Duke {
 
         Ui.printGreetingMessage();
         storage.loadSaveFile(memberRoster, eventCatalog);
-        Ui.printDashboardCalendar();
         runSlam();
         storage.save(memberRoster, eventCatalog);
     }
