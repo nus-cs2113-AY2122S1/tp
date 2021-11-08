@@ -48,8 +48,8 @@ class RecipePopCommandTest {
     }
 
     @Test
-    public void run_oneModuleToEditingRecipe_recipeSizeIsZero()
-            throws RecipeManagerException, ModuleManagerException, ModuleException, RecipeException, IOException {
+    public void run_oneModuleToEditingRecipe_recipeSizeIsZero() throws RecipeManagerException, ModuleManagerException,
+            ModuleException, RecipeException, IOException {
         recipeManager.addRecipe(testRecipe);
         recipeManager.selectRecipeForEditing(testRecipeName);
 

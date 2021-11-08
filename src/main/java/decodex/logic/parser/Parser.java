@@ -53,6 +53,7 @@ public class Parser {
     private static final int EXIT_COMMAND_LENGTH = 1;
     private static final int SHOW_COMMAND_LENGTH = 1;
     private static final int HELP_COMMAND_LENGTH = 1;
+    private static final int RESET_COMMAND_LENGTH = 1;
 
     // Initializes the RecipeCommandParser for parsing recipe commands.
     private static final RecipeCommandParser recipeCommandParser = new RecipeCommandParser();
@@ -125,7 +126,7 @@ public class Parser {
             command = prepareListCommand(userInput);
             break;
         case ResetCommand.COMMAND_WORD:
-            command = prepareResetCommand();
+            command = prepareResetCommand(userInput);
             break;
         case SelectCommand.COMMAND_WORD:
             command = prepareSelectCommand(userInput);
@@ -228,9 +229,17 @@ public class Parser {
     /**
      * Prepares and returns the ResetCommand.
      *
+     * @param userInput The user input specified by the user.
      * @return The ResetCommand object.
+     * @throws CommandException If the number of command arguments is invalid.
      */
-    private ResetCommand prepareResetCommand() {
+    private ResetCommand prepareResetCommand(String userInput) throws CommandException {
+        String[] tokens = getTokens(userInput);
+
+        if (tokens.length > RESET_COMMAND_LENGTH) {
+            throw new CommandException(ErrorMessages.TOO_MANY_COMMAND_ARGUMENTS);
+        }
+
         return new ResetCommand();
     }
 

@@ -30,8 +30,7 @@ public class RecipeDeleteCommand extends Command {
 
     @Override
     public void run(DataManager dataManager, ModuleManager moduleManager, Ui ui, RecipeManager recipeManager,
-            Storage storage)
-            throws CommandException, ModuleException, RecipeManagerException, IOException {
+            Storage storage) throws CommandException, ModuleException, RecipeManagerException, IOException {
         if (recipeName.isBlank()) {
             throw new CommandException(ErrorMessages.MISSING_RECIPE_NAME);
         }
