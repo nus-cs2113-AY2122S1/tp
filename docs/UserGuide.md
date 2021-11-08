@@ -417,7 +417,7 @@ d/[NEW DATE[d/dd-MM-yyyy HHmm]]
 p/[NEW DESCRIPTION]
 member/[MEMBER INDEX]
 remove/[MEMBER INDEX]
-add : to add a member to a task
+To add a member to a task, enter 'add'
 
 Only type a singular update at given time!
 Only the first command will be updated if multiple updates are written
