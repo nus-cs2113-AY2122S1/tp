@@ -558,8 +558,8 @@ each command and will be auto-loaded on program start.
 
 Command | Format &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | Purpose
 --------|---------|-----------
-`add` | `add /uni <UNI_INDEX>` <br /> `add /uni <UNI_NAME>` <br />`add /mod <MOD_INDEX>` <br /> `add /mod <UNI_NAME>`<br />`add /map <UNI_INDEX> <MAP_INDEX>` | Add a university/module/mapping
-`remove` | `remove /uni <UNI_INDEX>` <br /> `remove /uni <UNI_NAME>` <br />`remove /mod <MOD_INDEX>` <br /> `remove /mod <UNI_NAME>`<br />`remove /map <UNI_INDEX> <MAP_INDEX>` | Remove a university/module/mapping
+`add` | `add /uni <UNI_INDEX>`, <br /> `add /uni <UNI_NAME>`, <br />`add /mod <MOD_INDEX>`, <br /> `add /mod <UNI_NAME>`,<br />`add /map <UNI_INDEX> <MAP_INDEX>` | Add a university/module/mapping
+`remove` | `remove /uni <UNI_INDEX>`, <br /> `remove /uni <UNI_NAME>`, <br />`remove /mod <MOD_INDEX>`, <br /> `remove /mod <UNI_NAME>`,<br />`remove /map <UNI_INDEX> <MAP_INDEX>` | Remove a university/module/mapping
 `list` | `list /muni`<br />`list /mmod`<br />`list /suni`<br />`list /smod` | List master/selected university list or module list
 `searchmap` | `searchmap <UNI_INDEX> <MAP_INDEX>`<br />`searchmap all`| Search for potential mappings for the selected university/ all universities in the selected university list
 `find` | `find /uni <KEYWORD>`<br />`find /mod <KEYWORD>`<br />`find /code <KEYWORD>` | Find the possible university or module
