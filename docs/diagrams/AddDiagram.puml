@@ -1,0 +1,61 @@
+@startuml
+title AddCommand
+
+participant ":Duke" as Duke
+activate Duke
+
+create ":Parser" as Parser
+Duke -> Parser
+activate Parser #yellow
+create ":AddParser" as AddParser
+Parser -> AddParser: multiWordCommandProtocol()
+activate AddParser #orange
+
+alt isEventFlag
+create ":AddEventCommand" as AddEventCommand
+AddParser -> AddEventCommand: getAddCommand(commandDetails)
+activate AddEventCommand #lightblue
+return
+
+else isTaskFlag
+create ":AddTaskCommand" as AddTaskCommand
+AddParser -> AddTaskCommand: getAddCommand(commandDetails)
+activate AddTaskCommand #lightblue
+return
+
+else isMemberFlag
+create ":AddMemberCommand" as AddMemberCommand
+AddParser -> AddMemberCommand: getAddCommand(commandDetails)
+activate AddMemberCommand #lightblue
+return
+end
+
+return
+return
+
+alt isEventFlag
+Duke -> AddEventCommand
+activate AddEventCommand #lightblue
+AddEventCommand -> AddEventCommand: execute()
+activate AddEventCommand #lightgreen
+return
+return
+
+else isTaskFlag
+Duke -> AddTaskCommand
+activate AddTaskCommand #lightblue
+AddTaskCommand -> AddTaskCommand: execute()
+activate AddTaskCommand #lightgreen
+return
+return
+
+else isMemberFlag
+Duke -> AddMemberCommand
+activate AddMemberCommand #lightblue
+AddMemberCommand -> AddMemberCommand: execute()
+activate AddMemberCommand #lightgreen
+return
+return
+end
+
+@enduml

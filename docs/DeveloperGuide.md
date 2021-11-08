@@ -15,6 +15,34 @@ This section describes some noteworthy details on how certain features are desig
 **API**: `Parser.java` {NOTE: this may change based on further implementations}
 
 (insert relevant information here about taking in user input and parsing it etc.)
+
+#### Add Functionality
+![](images/AddDiagram.png)
+
+How Add works:
+1. When the `Parser` class parses `add` as the command from the user, a new `Command` object is created by the `AddParser` method `getAddCommand`. This method will create an `AddEventCommand`, `AddTaskCommand` or `AddMemberCommand` object depending on the user input. 
+2. The `getAddCommand` method will parse through the user command to obtain the item flag, which will signify if the user is adding an event, task or member. It will also obtain the attributes of the item the user is adding and parse them into the `AddCommand` object it creates.
+3. The `AddCommand` constructor would then initialize the item attributes obtained from `getAddCommand`. 
+4. After creating the `AddCommand` object, the object is then returned to `Parser` and on to `Duke`.
+5. `Duke` then calls the `execute` method in the specific `AddCommand` object. This adds either an event or a task to the overall `eventCatalog`, or a member to the overall `memberRoster`. It will also return a `CommandResult` object to `Duke` which would print out a message corresponding to the item added.
+6. When adding an item, an event `-e`, task `-t` or member `-m` flag should follow after the `add` command. This should be followed by their respective attributes as shown below. 
+7. The attributes of an event are `n/TITLE`, `d/DATE_AND_TIME`, `v/VENUE` and `b/BUDGET`.
+8. The attributes of a task are `n/TITLE` and `d/DATE_AND_TIME`. A task can only be added after at least one event and at least one member has been added. 
+9. The attribute of a member is just their name, but multiple members can be added at once using a comma and a space `, ` separating the names. 
+
+#### Done and Undo Functionality
+![](images/DoneUndoDiagram.png)
+
+How Done and Undo work:
+1. When the `Parser` class parses `done` or `undo` as the command from the user, a new `DoneUndoCommand` object is created by the `DoneUndoParser` method `getDoneUndoCommand`.
+2. The `getDoneUndoCommand` method will parse through the user command to determine if it is a `done` or an `undo` command, as well as if the item is a `task` or an `event`. It will also retrieve the indexes of the items. 
+3. The `DoneUndoCommand` constructor initializes the array of integers representing the indexes of the items to mark as `done` or `undo`.
+4. After creating the `DoneUndoCommand` object, the object is then returned to `Parser` and on to `Duke`. 
+5. `Duke` then calls the `execute` method in the `DoneUndoCommand` object. This method would either mark the corresponding items as done or undone. Two lists will be created; one of items with changes made and the other with items that are unchanged. These lists will be displayed to the user.
+6. When marking or un-marking an item, the item flag `-e` or `-t` has to be followed after the `done` or `undo` command. 
+7. To mark or un-mark a task, an event has to be selected previously using the `select` command. 
+8. The item flag is then followed by integers representing the indexes of the items to be marked or unmarked, separated by non-numeric characters. 
+
 #### List Functionality
 ![](images/ListDiagram.png)
 

@@ -1,0 +1,39 @@
+@startuml
+
+title DoneUndoCommand
+
+participant ":Duke" as Duke
+activate Duke
+
+create ":Parser" as Parser
+
+Duke -> Parser
+activate Parser #yellow
+create ":DoneUndoParser" as DoneUndoParser
+Parser -> DoneUndoParser: multiWordCommandProtocol()
+activate DoneUndoParser #orange
+create ":DoneUndoCommand" as DoneUndoCommand
+DoneUndoParser -> DoneUndoCommand: getDoneUndoCommand(command, commandDetails)
+activate DoneUndoCommand #lightblue
+return
+return
+return
+Duke -> DoneUndoCommand
+activate DoneUndoCommand #lightblue
+DoneUndoCommand -> DoneUndoCommand: execute()
+activate DoneUndoCommand #lightgreen
+
+alt isDoneCommand
+DoneUndoCommand -> DoneUndoCommand: obtainAndMarkDoneItems()
+activate DoneUndoCommand #pink
+return
+else isUndoCommand
+DoneUndoCommand -> DoneUndoCommand: obtainAndUndoItems()
+activate DoneUndoCommand #pink
+return
+end
+
+return
+return
+
+@enduml
