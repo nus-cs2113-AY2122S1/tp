@@ -28,12 +28,12 @@ public class UiStartup extends UiManager {
     private static final String START_MESSAGE = "Starting application...\nType 'return' to return to main menu\n";
     private static final String INVALID_MESSAGE = "Invalid command detected\n";
 
-    private static final String ABOUT_MESSAGE = "Ha(ppy)Bit is a desktop app aimed to improve both the physical and "
-            + "mental lifestyle of students,\n"
-            + "through the setting and tracking of goals to cultivate good habits. The app operates on a Command\n"
-            + "Line Interface (CLI) while still comprising features typically found in a Graphical User Interface\n"
-            + "(GUI). Students who type fast will find that Ha(ppy)Bit performs habit tracking more efficiently\n"
-            + "than your conventional GUI apps.\n";
+    private static final String ABOUT_MESSAGE = "Ha(ppy)Bit is a desktop application aimed to empower students to "
+            + "achieve their goals—whether personal,\n"
+            + "academical, or health—amidst the hectic and stressful university life, through cultivating good\n"
+            + "habits. The application operates on a Command Line Interface (CLI) while still comprising features\n"
+            + "typically found in a Graphical User Interface (GUI). Students who type fast will find that Ha(ppy)Bit\n"
+            + "performs habit tracking more efficiently than your conventional GUI applications.\n";
 
     private static final String TEAM_MESSAGE = "Meet The Team\n"
             + "=================================================================\n"
@@ -44,7 +44,7 @@ public class UiStartup extends UiManager {
             + "||  Swann Tet Aung     ||  Backend Developer                   ||\n"
             + "=================================================================\n";
 
-    private static final String VERSION_MESSAGE = "Current Version: v2.0 (updated 28-Oct-2021)\n";
+    private static final String VERSION_MESSAGE = "Current Version: v2.1 (updated 08-Nov-2021)\n";
     private static boolean isExitFromStartup = false;
 
     /**
