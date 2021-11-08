@@ -45,7 +45,7 @@ public class ReserveCommand extends Command {
      * Checks for whether user has supplied any empty values any of the attributes.
      * @return Boolean True if any attributes are missing
      */
-    private Boolean checkMissingArgs() {
+    public Boolean checkMissingArgs() {
         return id == null | username == null;
     }
 
@@ -54,7 +54,7 @@ public class ReserveCommand extends Command {
      * additional arguments.
      * @return Boolean True if any additional arguments detected
      */
-    private Boolean checkAdditionalArgs() {
+    public Boolean checkAdditionalArgs() {
         HashMap<String, String> tempArgs = args;
         tempArgs.remove(null);
         tempArgs.remove(KEY_ID);
