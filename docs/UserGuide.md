@@ -14,16 +14,19 @@ Below is the guide on how you can get started using our program to start **"Sche
       - [2.2.2 Deadline: `deadline`](#222-deadline-deadline)
       - [2.2.3 Event: `event`](#223-event-event)
       - [2.2.4 Date Format: `<dateFormat>`](#224-date-format-dateformat)
-    - [2.3 Adding your NUS timetable:](#23-adding-your-nus-timetable)
-      - [2.3.1 Module: `module`](#231-module-module)
-      - [2.3.2 Browse: `browse`](#232-browse-browse)
-    - [2.4 Listing your tasks: `list`](#24-listing-your-tasks-list)
-      - [2.4.1 Listing your entire task list](#241-listing-your-entire-task-list)
-      - [2.4.2 Filtering your task list](#242-filtering-your-task-list)
-      - [2.4.3 Listing the recurrence of a task](#243-listing-the-recurrence-of-a-task)
-    - [2.5 Sorting your task list: `sort`](#25-sorting-your-task-list-sort)
-    - [2.6 Setting reminders to your tasks: `reminder`](#26-setting-reminders-to-your-tasks-reminder)
-    - [2.7 Editing your tasks: `edit`](#27-editing-your-tasks-edit)
+    - [2.3 Listing your tasks: `list`](#23-listing-your-tasks-list)
+      - [2.3.1 Listing your entire task list](#231-listing-your-entire-task-list)
+      - [2.3.2 Filtering your task list](#232-filtering-your-task-list)
+      - [2.3.3 Listing the recurrence of a task](#233-listing-the-recurrence-of-a-task)
+      - [2.3.4 Listing your upcoming tasks: `upcoming`](#234-listing-your-upcoming-tasks-upcoming)
+    - [2.4 Sorting your task list: `sort`](#24-sorting-your-task-list-sort)
+    - [2.5 Setting reminders to your tasks: `reminder`](#25-setting-reminders-to-your-tasks-reminder)
+    - [2.6 Editing your tasks: `edit`](#27-editing-your-tasks-edit)
+    - [2.7 Adding your NUS timetable:](#23-adding-your-nus-timetable)
+      - [2.7.1 Module: `module`](#231-module-module)
+      - [2.7.2 Browse: `browse`](#232-browse-browse)
+    
+ 
     - [2.8 Deleting your tasks: `delete`](#28-deleting-your-tasks-delete)
     - [2.9 Exiting the program: `bye`](#29-exiting-the-program-bye)
     - [2.10 Storage](#210-storage)
@@ -351,7 +354,7 @@ Edits a single [Todo](#221-todo-todo), [Deadline](#222-deadline-deadline) or [Ev
   - `--link <url>` modifies your Lesson link.
 
 
-### 2.6 Adding your NUS timetable:
+### 2.7 Adding your NUS timetable:
 
 Allows you to add modules into your task list and browse to their meeting links.
 
