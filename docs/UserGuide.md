@@ -253,7 +253,7 @@ and `n/`, `g/`, and `i/` are _flags_.
 
 Here are guidelines and tips for the command format:
 * **Commands** are only accepted when you see `Command: ` on the screen (See [Main Interface](#12-main-interface)). 
-  Your inputs appearing after `Command: ` indicates you're doing it right.
+  If your inputs appear after `Command: `, you're doing it right.
 * **Commands** may require one or more flags. You may choose to use the flags in any order but ensure that all flags 
   for that command are present.\
   (e.g. `add` requires the `n/`, `g/` and `i/` flag, and possible variations include `add n/habit 1 g/1 i/1` and

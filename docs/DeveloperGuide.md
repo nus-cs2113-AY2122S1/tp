@@ -704,7 +704,7 @@ This section describes the implementation of how _Ha(ppy)Bit_ handles and stores
 
 **Importing Data**
 1. The `Storage#load()` method runs automatically upon startup, which calls `Import#importStorage(filePath)`.
-2. The save file `habit.txt` is then scanned line by line, where every line is parsed into discrete and 
+2. The save file `habits.txt` is then scanned line by line, where every line is parsed into discrete and 
    discernible information and then stored in a string array `lineData`.
 3. `Import#updateGoalList(lineData, GoalList)` is called for every line till all lines have be scanned.
 4. In every iteration of `Import#updateGoalList(lineData, goalList)` being called, the information
@@ -717,8 +717,8 @@ The sequence diagram shows how the program imports data from storage file.\
 
 **Exporting Data**
 1. The `Storage#export(goalList)` method is called, which in turn calls `Storage#exportToStorage(goalList)`.
-2. The `habit.txt` filed is cleared of previous text with `Export#clearFile()`.
-3. The `Export#writeToFile(goalList)` then rewrites `habit.txt` using data in `goalList`.
+2. The `habits.txt` filed is cleared of previous text with `Export#clearFile()`.
+3. The `Export#writeToFile(goalList)` then rewrites `habits.txt` using data in `goalList`.
 4. The `goalList` is encoded goal by goal. 
 5. In a `goal` object, all of its attributes are converted to text in a line. They are segregated
    by a delimiter. The habits are then are encoded habit by habit.
@@ -726,7 +726,7 @@ The sequence diagram shows how the program imports data from storage file.\
    by a delimiter. The intervals are then encoded interval by interval.
 7. In an `interval` all of its attributes are converted to text in a line. They are segregated
    by a delimiter.
-8. At the end of `Export#writeToFile(goalList)`, all data in `goalList` is stored in `habit.txt`.
+8. At the end of `Export#writeToFile(goalList)`, all data in `goalList` is stored in `habits.txt`.
 
 The sequence diagram shows how the program exports data to storage file./
 ![Export Sequence Diagram](Diagram_Images/Implementation_Diagram_Images/ExportSequenceDiagram.png)
