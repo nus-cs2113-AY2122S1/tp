@@ -189,7 +189,11 @@ the user exits the program.
 
 The below class diagram shows the structure and relations of the `Ui` class in *Food-O-Rama*.
 
-![](images/UiClass.png)
+
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/UiClass.png">
+</p>
+<center>Figure 7: Food-O-Rama User Interface Class Diagram</center>
 
 For simplicity’s sake the ui class has been minimized into 3 components:
 
@@ -208,7 +212,10 @@ highest level, the `Foodorama` class, where it then gets caught and the message 
 
 ### Command Abstraction
 
-![](images/command.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/command.png">
+</p>
+<center>Figure 8: Food-O-Rama Command Abstraction Diagram</center>
 
 * Different Command Classes that perform different tasks by calling various functions of the Object Classes.
 * All inherit from an abstract `Command` class with one execute method that takes an Arraylist<String> as input.
@@ -222,7 +229,10 @@ of input validation to help seperate the invalid inputs from those that are vali
 
 The sequence diagram for the validation of Numerical Inputs is given below.
 
-![](images/input_validation_number.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/input_validation_number.png">
+</p>
+<center>Figure 9: Food-O-Rama Input Validation for Number Sequence Diagram</center>
 
 The system filters out the numerical inputs from the text strings, and checks if the numerical inputs are
 integers or not providing the actual methods that execute the computation (the only valid inputs are integers in this
@@ -230,7 +240,10 @@ case). The same process can be done to include doubles as well by excluding the 
 
 The sequence diagram for the validation of Strings is given below.
 
-![](images/input_validation_number.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/input_validation_string.png">
+</p>
+<center>Figure 10: Food-O-Rama Input Validation for String Sequence Diagram</center>
 
 The process of input validation for strings is similar to that for integers except only words are valid inputs.
 
@@ -247,7 +260,10 @@ The `add dish` and `add ingr` commands are handled by the `AddDishCommand` and `
 Both commands have a similar implementation, with the difference being that `add ingr` has an additional weight input as
 further described in the sequence diagram below.
 
-![](images/add_ingr_command_sequence.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/add_ingr_command_sequence.png">
+</p>
+<center>Figure 11: Food-O-Rama AddIngredientCommand Sequence Diagram</center>
 
 For `add dish` and `add ingr` commands:
 
@@ -276,7 +292,10 @@ The `add dish waste`, `add ingr waste` and `add ingr storage` commands are handl
 , `AddIngrWasteCommand` and `AddIngrStoredCommand` classes respectively. All three commands have similar implementation
 as described by the sequence diagram below for Adding Wastage to Dishes.
 
-![](images/add_dish_waste_command_sequence.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/add_dish_waste_command_sequence.png">
+</p>
+<center>Figure 12: Food-O-Rama AddDishWasteCommand Sequence Diagram</center>
 
 For `add dish waste`, `add ingr waste` and `add ingr stored` commands:
 
