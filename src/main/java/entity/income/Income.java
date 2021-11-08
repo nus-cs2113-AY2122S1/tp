@@ -29,6 +29,6 @@ public class Income {
 
     @Override
     public String toString() {
-        return String.format("%-16s | %-6.2f | %s", description, value, date);
+        return String.format("%-25s | %-10.2f | %-8s", description, value, date);
     }
 }

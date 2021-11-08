@@ -44,12 +44,12 @@ public class IncomeManager implements LoadableManager {
     public void listIncomes() {
         Ui ui = Ui.getUi();
         // the formatting needs to be aligned
-        String incomeListHeader = "Id. | Name             | Value  | Date";
+        String incomeListHeader = String.format("%-10s | %-25s | %-10s | %-8s", "Id.", "Name", "Value", "Date");
 
         ui.printMessage(incomeListHeader);
         ArrayList<Income> incomes = IncomeList.getIncomes();
         for (int i = 0; i < incomes.size(); i++) {
-            ui.printMessage((i + 1) + ". \t| " + incomes.get(i));
+            ui.printMessage(String.format("%-10s | %s", (i + 1) + ".", incomes.get(i)));
         }
     }
 
