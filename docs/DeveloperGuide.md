@@ -476,6 +476,9 @@ Given below is an example usage of `find -c bo`.
 
 Here is a (partial) sequence diagram for the above user input:
 
+<img width="512" alt="findclient" src="https://user-images.githubusercontent.com/79963329/140733278-59e74ce8-ea0c-4fd0-a026-95ff1346fac7.PNG">
+
+
 **Step 1** `Parser` creates `FindClientCommand("bo")` and returns it to `TourPlanner`.
 
 **Step 2** The ```FindClientCommand``` iterates through each ```Client``` object in the ```ClientList```. For

@@ -27,18 +27,25 @@ activate FCC
 
 
 
-FCC -> Ui : showFindTour()
+FCC -> Ui : showFindClient()
 activate Ui
-Ui -> TourList : getClient("JPN")
+Ui -> TourList : getClient("Bo Tuan")
 activate TourList
 TourList --> Ui : id, name, contact no, email
 deactivate TourList
-
+loop until all clientPackage iterated
+    Ui -> ClientPackageList : getClientPackageByIndex()
+    activate ClientPackageList
+    ClientPackageList --> Ui: client packages of found client(s)
+    deactivate ClientPackageList
+    Ui -> Ui: show ClientPackage
+    activate Ui
+    Ui --> Ui
+    deactivate Ui
+end
 Ui --> FCC
 deactivate Ui
 
 <-- FCC
 deactivate FCC
-
-destroy FCC
 @enduml
