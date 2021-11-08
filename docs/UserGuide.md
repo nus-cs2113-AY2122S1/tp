@@ -17,6 +17,7 @@ done in an efficient manner.
     - [List items: `list`](#list-items)
     - [List items that are due today: `deadline today`](#list-items-that-are-due-today)
     - [List items that are overdue: `deadline overdue`](#list-items-that-are-overdue)
+    - [List items that are due on a specific date: `deadline d/dd-mm-yyyy`](#list-items-that-are-due-on-a-specific-date)
     - [Search items: `search`](#search-items)
     - [Reserve items: `res`](#reserve-items)
     - [Un-reserve items: `unres`](#unreserve-items)

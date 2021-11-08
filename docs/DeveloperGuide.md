@@ -226,6 +226,16 @@ This sequence diagram shows the interactions occurring each time a user wants to
 6. When the item status is `RESERVED` the loan is successful only if the username matches the item's loanee.
 7. When the item status is `LOANED` the loan is unsuccessful.
 
+![LoanObjectDiagram](img/LoanObjectDiagram.png)
+
+This object diagram shows an example when `LoanCommand` is being called to loan out a book with the details 
+shown in the diagram.
+
+When the `LoanCommand` is executed, it will change the attributes of this book such that:
+1. `status: null` changes to `status: LOANED`
+2. `loanee: null` changes to `loanee: "John Smith"`
+3. `dueDate: null` changes to `dueDate: 12-11-2021`
+
 ### Deadline Command
 
 ![DeadlineSequenceDiagram](img/DeadlineSequenceDiagram.png)

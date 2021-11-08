@@ -42,6 +42,7 @@ public class AddBookCommand extends Command {
         this.id = args.get(KEY_ID);
         this.status = Status.AVAILABLE;
         this.author = args.get(KEY_AUTHOR);
+        assert args != null : "Args hashmap is null";
     }
 
     /**
@@ -84,6 +85,7 @@ public class AddBookCommand extends Command {
         }
         try {
             Book newBook = new Book(title, id, status, null, null, author);
+            assert newBook != null : "newBook is null";
             catalogue.add(newBook);
             ui.print(ADD_MESSAGE, newBook);
         } catch (LibmgrException e) {

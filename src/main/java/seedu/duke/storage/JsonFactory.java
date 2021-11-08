@@ -52,28 +52,49 @@ public class JsonFactory {
         this.allItems = mapper.createObjectNode();
     }
 
+    /**
+     * Serializes the current state of the catalogue into JSON format.
+     * @param catalogue Current state of the catalogue
+     * @return String Serialized content of the catalogue in JSON.
+     * @throws JsonProcessingException Thrown when JSON is invalid/malformed
+     */
     public String toJson(Catalogue catalogue) throws JsonProcessingException {
+        // Converts all items into JSON format by category, then add as value to relevant key in overall ObjectNode
         allItems.set(KEY_AUDIO, audioToJson(catalogue));
         allItems.set(KEY_BOOK, bookToJson(catalogue));
         allItems.set(KEY_ITEM, itemToJson(catalogue));
         allItems.set(KEY_MAGAZINE, magazineToJson(catalogue));
         allItems.set(KEY_VIDEO, videoToJson(catalogue));
+        // Convert overall ObjectNode into String format (JSON)
         return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(allItems);
     }
 
+    /**
+     * Deserializes content from JSON into a catalogue object.
+     * @param data Content from JSON read from file
+     * @return ArrayList of all items specified within catalogue
+     * @throws IOException Error raised when trying to read from file
+     * @throws NullPointerException Thrown when missin gkey is detected
+     */
     public ArrayList<Item> fromJson(File data) throws IOException, NullPointerException {
+        // Create container for all items
         ArrayList<Item> itemArrayList = new ArrayList<>();
-
+        // Parse content into ObjectNode
         ObjectNode json = mapper.readValue(data, ObjectNode.class);
+        // Deserialize content of JSON by category, and add to array list
         itemArrayList.addAll(jsonToAudio((ArrayNode) json.get(KEY_AUDIO)));
         itemArrayList.addAll(jsonToBook((ArrayNode) json.get(KEY_BOOK)));
         itemArrayList.addAll(jsonToItem((ArrayNode) json.get(KEY_ITEM)));
         itemArrayList.addAll(jsonToMagazine((ArrayNode) json.get(KEY_MAGAZINE)));
         itemArrayList.addAll(jsonToVideo((ArrayNode) json.get(KEY_VIDEO)));
-
         return itemArrayList;
     }
 
+    /**
+     * Converts audio items to JSON.
+     * @param catalogue Current state of catalogue
+     * @return ArrayNode Object with "audio" as key and array of audio items as value.
+     */
     private ArrayNode audioToJson(Catalogue catalogue) {
         ArrayNode audioArray = mapper.createArrayNode();
         List<Audio> audioObjects = catalogue.getAllItems().stream().filter(p -> p instanceof Audio)
@@ -84,6 +105,12 @@ public class JsonFactory {
         return audioArray;
     }
 
+    /**
+     * Converts JSON values with key of "audio" into Audio objects.
+     * @param arrayNode Deserialized arrayNode containing list of audio objects in JSON
+     * @return ArrayList containing all audio items specified within JSON file
+     * @throws JsonProcessingException Thrown when invalid characters found within JSON
+     */
     private ArrayList<Audio> jsonToAudio(ArrayNode arrayNode) throws JsonProcessingException {
         ArrayList<Audio> itemList = new ArrayList<>();
         for (JsonNode item : arrayNode) {
@@ -92,6 +119,11 @@ public class JsonFactory {
         return itemList;
     }
 
+    /**
+     * Converts book items to JSON.
+     * @param catalogue Current state of catalogue
+     * @return ArrayNode Object with "book" as key and array of audio items as value.
+     */
     private ArrayNode bookToJson(Catalogue catalogue) {
         ArrayNode bookArray = mapper.createArrayNode();
         List<Book> bookObjects = catalogue.getAllItems().stream().filter(p -> p instanceof Book)
@@ -102,6 +134,12 @@ public class JsonFactory {
         return bookArray;
     }
 
+    /**
+     * Converts JSON values with key of "book" into Book objects.
+     * @param arrayNode Deserialized arrayNode containing list of book objects in JSON
+     * @return ArrayList containing all book items specified within JSON file
+     * @throws JsonProcessingException Thrown when invalid characters found within JSON
+     */
     private ArrayList<Book> jsonToBook(ArrayNode arrayNode) throws JsonProcessingException {
         ArrayList<Book> itemList = new ArrayList<>();
         for (JsonNode item : arrayNode) {
@@ -110,6 +148,11 @@ public class JsonFactory {
         return itemList;
     }
 
+    /**
+     * Converts miscellaneous items to JSON.
+     * @param catalogue Current state of catalogue
+     * @return ArrayNode Object with "miscellaneous" as key and array of audio items as value.
+     */
     private ArrayNode itemToJson(Catalogue catalogue) {
         ArrayNode itemArray = mapper.createArrayNode();
         List<Miscellaneous> itemObjects = catalogue.getAllItems().stream().filter(p -> p instanceof Miscellaneous)
@@ -120,6 +163,12 @@ public class JsonFactory {
         return itemArray;
     }
 
+    /**
+     * Converts JSON values with key of "item" into Miscellaneous objects.
+     * @param arrayNode Deserialized arrayNode containing list of miscellaneous objects in JSON
+     * @return ArrayList containing all miscellaneous items specified within JSON file
+     * @throws JsonProcessingException Thrown when invalid characters found within JSON
+     */
     private ArrayList<Miscellaneous> jsonToItem(ArrayNode arrayNode) throws JsonProcessingException {
         ArrayList<Miscellaneous> itemList = new ArrayList<>();
         for (JsonNode item : arrayNode) {
@@ -128,6 +177,11 @@ public class JsonFactory {
         return itemList;
     }
 
+    /**
+     * Converts magazine items to JSON.
+     * @param catalogue Current state of catalogue
+     * @return ArrayNode Object with "magazine" as key and array of audio items as value.
+     */
     private ArrayNode magazineToJson(Catalogue catalogue) {
         ArrayNode magazineArray = mapper.createArrayNode();
         List<Magazine> magazineObjects = catalogue.getAllItems().stream().filter(p -> p instanceof Magazine)
@@ -138,6 +192,12 @@ public class JsonFactory {
         return magazineArray;
     }
 
+    /**
+     * Converts JSON values with key of "magazine" into Magazine objects.
+     * @param arrayNode Deserialized arrayNode containing list of magazine objects in JSON
+     * @return ArrayList containing all magazine items specified within JSON file
+     * @throws JsonProcessingException Thrown when invalid characters found within JSON
+     */
     private ArrayList<Magazine> jsonToMagazine(ArrayNode arrayNode) throws JsonProcessingException {
         ArrayList<Magazine> itemList = new ArrayList<>();
         for (JsonNode item : arrayNode) {
@@ -146,6 +206,11 @@ public class JsonFactory {
         return itemList;
     }
 
+    /**
+     * Converts video items to JSON.
+     * @param catalogue Current state of catalogue
+     * @return ArrayNode Object with "video" as key and array of audio items as value.
+     */
     private ArrayNode videoToJson(Catalogue catalogue) {
         ArrayNode videoArray = mapper.createArrayNode();
         List<Video> videoObjects = catalogue.getAllItems().stream().filter(p -> p instanceof Video)
@@ -156,6 +221,12 @@ public class JsonFactory {
         return videoArray;
     }
 
+    /**
+     * Converts JSON values with key of "video" into Video objects.
+     * @param arrayNode Deserialized arrayNode containing list of video objects in JSON
+     * @return ArrayList containing all video items specified within JSON file
+     * @throws JsonProcessingException Thrown when invalid characters found within JSON
+     */
     private ArrayList<Video> jsonToVideo(ArrayNode arrayNode) throws JsonProcessingException {
         ArrayList<Video> itemList = new ArrayList<>();
         for (JsonNode item : arrayNode) {

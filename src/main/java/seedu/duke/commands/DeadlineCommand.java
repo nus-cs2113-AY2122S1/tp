@@ -23,8 +23,8 @@ import static seedu.duke.common.Messages.LIST_DEADLINE_TODAY;
  */
 public class DeadlineCommand extends Command {
     public static final String COMMAND_WORD = "deadline";
-    public static final String DESCRIPTION_TODAY = " today";
-    public static final String DESCRIPTION_OVERDUE = " overdue";
+    public static final String DESCRIPTION_TODAY = "today";
+    public static final String DESCRIPTION_OVERDUE = "overdue";
     public static final String dateFormat = "dd-MM-yyyy";
     protected DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern(dateFormat);
     public String input = "";
@@ -43,7 +43,8 @@ public class DeadlineCommand extends Command {
      */
     public void handleDeadlineCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
         LocalDate today = LocalDate.now();
-        if (input.contains(DESCRIPTION_TODAY)) {
+        String desc = input.substring(8).trim();
+        if (desc.equals(DESCRIPTION_TODAY)) {
             ui.print(LIST_DEADLINE_TODAY);
             ui.print(DIVIDER);
             for (Item temp : catalogue.getAllItems()) {
@@ -51,7 +52,7 @@ public class DeadlineCommand extends Command {
                     ui.print(temp);
                 }
             }
-        } else if (input.contains(DESCRIPTION_OVERDUE)) {
+        } else if (desc.equals(DESCRIPTION_OVERDUE)) {
             ui.print(LIST_DEADLINE_OVERDUE);
             ui.print(DIVIDER);
             for (Item temp : catalogue.getAllItems()) {
@@ -59,8 +60,8 @@ public class DeadlineCommand extends Command {
                     ui.print(temp);
                 }
             }
-        } else if (input.contains("d/")) {
-            LocalDate dueDate = LocalDate.parse(input.split("d/")[1].substring(0,10), dtFormatter);
+        } else if (desc.contains("d/")) {
+            LocalDate dueDate = LocalDate.parse(input.split("d/")[1], dtFormatter);
             ui.print(LIST_DEADLINE_DATE + dueDate.format(dtFormatter));
             ui.print(DIVIDER);
             for (Item temp : catalogue.getAllItems()) {
