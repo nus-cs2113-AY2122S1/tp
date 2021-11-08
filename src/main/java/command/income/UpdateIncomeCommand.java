@@ -27,6 +27,10 @@ public class UpdateIncomeCommand implements Callable<Integer> {
         try {
             String incomeName = String.join(" ", names);
             Double incomeValue = Money.truncate(value);
+            if (incomeValue < 0) {
+                System.out.print("Invalid input, please check the value and input again.");
+                return 0;
+            }
             IncomeManager.updateIncome(incomeName, incomeValue);
 
         } catch (Exception error) {

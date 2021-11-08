@@ -10,6 +10,7 @@ import utils.Money;
 import java.util.concurrent.Callable;
 
 import static constants.ErrorMessage.addBudgetErrorMsg;
+import static constants.ErrorMessage.incorrectExpenseValueMsg;
 
 @Command(name = "add", mixinStandardHelpOptions = true, description = "Adds a budget plan for the current month.")
 public class AddBudgetCommand implements Callable<Integer> {
@@ -25,8 +26,13 @@ public class AddBudgetCommand implements Callable<Integer> {
 
         try {
             Double budgetValue = Money.truncate(value);
-            budgetMgr.addBudget(budgetValue);
-            dataMgr.write();
+            if (budgetValue <= 0) {
+                ui.printMessage(addBudgetErrorMsg);
+                return 1;
+            } else {
+                budgetMgr.addBudget(budgetValue);
+                dataMgr.write();
+            }
         } catch (Exception error) {
             ui.printMessage(addBudgetErrorMsg);
             return 1;
