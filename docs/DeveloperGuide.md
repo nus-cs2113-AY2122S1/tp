@@ -56,10 +56,6 @@ How the `Command` component works:
 2. The `CommandFactory` returns a `Command` object (more precisely, an object that implements it e.g., `GameCommand`).
 3. `Main` will then execute the `Command` by calling `.run(args)` method of the `Command`.
 
-The Sequence Diagram below illustrates the interactions between `main` and `Command` component 
-for the `getCommand("game -time")` input:
-{Some sequence diagram}
-
 ### Game Component
 
 **How the Game Component works:**
