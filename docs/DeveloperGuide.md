@@ -321,7 +321,7 @@ This command is implemented by the `AddZoomCommand` class. The basic functionali
 class extends `Command`.
 
 Syntax: `zoom add LINK MODULE_CODE`
-Example: `zoom add nus.sg/testlink ABC101`
+Example: `zoom add https://nus-sg.com ABC101`
 
 The following diagram explains the sequence of execution for the add zoom command. 
 ![addzoomlink](./diagrams/zoom/addzoomlink.png)
