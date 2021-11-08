@@ -309,7 +309,7 @@ Adds a lecture item.
 
 Note: You cannot add a lecture to a module unless the module has been added previously.
 
-Format: `calendar lecture m/MODULE_CODE s/DD-MM-YYYY(START_DATE) e/DD-MM-YYYY(END_DATE)`
+Format: `calendar lecture m/[MODULE_CODE] s/[DD-MM-YYYY(START_DATE)] e/[DD-MM-YYYY(END_DATE)]`
 
 Example:
 ```
@@ -328,7 +328,7 @@ Expected outcome:
 #### 3.3.2 Adding a todo task: `calendar todo`
 Adds a task item.
 
-Format: `calendar todo n/TASK_NAME d/DD-MM-YYYY`
+Format: `calendar todo n/[TASK_NAME] d/[DD-MM-YYYY]`
 
 Example:
 ```
@@ -365,7 +365,7 @@ Expected outcome:
 #### 3.3.4 Deleting a task: `calendar delete task`
 Deletes a task item based on the index.
 
-Format: `calendar delete task TASK_INDEX`
+Format: `calendar delete task [TASK_INDEX]`
 
 Example:
 ```
@@ -382,7 +382,7 @@ Expected outcome:
 #### 3.3.5 Editing a task: `calendar edit`
 Edits a task item based on the index.
 
-Format: `calendar edit TASK_INDEX`
+Format: `calendar edit [TASK_INDEX]`
 
 Example:
 ```
@@ -406,7 +406,7 @@ Displays a calendar based on the month.
 
 Note: If the calendar layout appears skewed, maximise terminal to full screen or zoom out.
 
-Format: `calendar display MM-YYY`
+Format: `calendar display [MM-YYY]`
 
 Example:
 ```
@@ -419,7 +419,7 @@ Expected outcome:
 #### 3.3.7 Deleting a lecture: `calendar delete lec`
 Deletes a lecture item based on the index.
 
-Format: `calendar delete lec LECTURE_INDEX`
+Format: `calendar delete lec [LECTURE_INDEX]`
 
 Example:
 ```
@@ -448,7 +448,7 @@ Expected outcome:
 ```
         __________________________________________________
         Here is your list of lectures:
-        
+        1. CS2113T (from: 07-10-2021) (to: 31-10-2021)
         __________________________________________________
 ```
 
