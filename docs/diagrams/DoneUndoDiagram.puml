@@ -40,7 +40,6 @@ activate DoneUndoCommand #lightgreen
 return
 end
 
-return
 return CommandResult
 
 @enduml
