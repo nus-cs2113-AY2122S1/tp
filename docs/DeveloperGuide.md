@@ -78,8 +78,7 @@
 
 The diagram below shows the high-level design of TourPlanner:
 
-<img width="307" alt="component_diagram" src="https://user-images.githubusercontent.com/79963329/140464392-5a1536d2-a5d8-4e57-83f4-f4938ede0cfe.PNG">
-
+![Architecture Class Diagram](https://user-images.githubusercontent.com/62021897/140712865-752a92c6-da93-42a2-9d12-66f4182df56c.png)
 
 Below is an overview of the main components, and how they interact with each other.
 
@@ -187,7 +186,7 @@ them, all through the console terminal.
 
 The diagram below shows the class diagram of the Ui component, in relation with other major components:
 
-<img width="289" alt="ui" src="https://user-images.githubusercontent.com/79963329/140464630-a8a8000c-fb45-44af-9cc2-d146ae5ea5c8.PNG">
+![Ui Class Diagram](https://user-images.githubusercontent.com/62021897/140712493-2054f2c9-6f58-4353-88ad-1570707ff3ef.png)
 
 <br>
 
@@ -276,17 +275,19 @@ Given below is an example usage of `add -p p001 ARGS...` to add client package "
 
 Here is a (partial) sequence diagram of above user input:
 
+![AddClientPackage Sequence Diagram](https://user-images.githubusercontent.com/62021897/140713338-a743133a-516b-47e3-88b6-e9b5408b226c.png)
+
 **Step 1.** Parser creates a `values` array, upon extracting values from user's input.
-Creates `AddClientPackageCommand(values)`, determined by the datatype identifier `-p`.
-Returns the created `Command` subclass to `TourPlanner`.
+Creates `AddClientPackageCommand(values)`, determined by the datatype identifier `-p`. Returns the created `Command`
+subclass to `TourPlanner`.
 
 **Step 2.** Then, `execute()` method in `AddClientCommand` is called. `getClientPackageById("p001")` is called, which
 finds the `ClientPackage` based on the `CLIENT_PACKAGE_ID` "p001".
 
 **Step 3.** If the `CLIENT_PACKAGE_ID` "p001" already exists, an error message is returned.
 
-**Step 4.** Else, the `CLIENT_PACKAGE_ID` "p001" does not exist, `execute()` calls `createClientPackage` which finds
-the specific `Client`, `Tour` and `Flight` objects to be added to the `ClientPackage`
+**Step 4.** Else, the `CLIENT_PACKAGE_ID` "p001" does not exist, `execute()` calls `createClientPackage` which finds the
+specific `Client`, `Tour` and `Flight` objects to be added to the `ClientPackage`
 
 **Step 5.** Then, `add` in `ClientPackageList` is called, to add the specific `ClientPackage` into `ClientPackageList`.
 
@@ -299,7 +300,8 @@ the specific `Client`, `Tour` and `Flight` objects to be added to the `ClientPac
 Given below is an example usage of `add -t t001 ARGS...` to add tour with the respective arguments.
 
 Here is a (partial) sequence diagram for above user input:
-![AddCommand](https://user-images.githubusercontent.com/62021897/140637968-b8ac7b0e-4ab3-42f4-a6b7-f526bfe80215.png)
+
+![AddCommand](https://user-images.githubusercontent.com/62021897/140713091-70c5b626-ec86-4122-a2c9-6b0f47b0a564.png)
 
 **Step 1.** `Parser` parses the input and instantiates `AddTourCommand`. It then returns it to `TourPlanner`.
 
@@ -336,8 +338,8 @@ Here is an example usage of `cut -c` to delete client with `CLIENT_ID` of "c001"
 to `parse()` method in the `Parser` class.
 
 **Step 2.** Based on the user input, `parse()` identifies that it is of type `cut` command and calls `ParseCut()`.
-`ParseCut()` will then create `CutClientCommand("c001")` based on the prefix `-c`. 
-Returns the created `Command` subclass to `TourPlanner`.
+`ParseCut()` will then create `CutClientCommand("c001")` based on the prefix `-c`. Returns the created `Command`
+subclass to `TourPlanner`.
 
 Depending on the type of cut command being called, these command types will be returned:
 
@@ -429,12 +431,14 @@ Depending on the type of list command being called, these command types will be 
 
 ### Find feature
 
-The ```find``` feature is to be used to query for a particular client, tour or flight, providing extensive information about it.
-It is facilitated by the ```parse``` function in the ```Parser``` class,  and returns a FindCommand object. 
+The ```find``` feature is to be used to query for a particular client, tour or flight, providing extensive information
+about it. It is facilitated by the ```parse``` function in the ```Parser``` class, and returns a FindCommand object.
 When FindCommand is executed, it queries the corresponding `ObjectList` and returns the matching entries.
 
 It implements these following types of find commands:
-* `find -c CLIENT_NAME`: returns clients that contain `CLIENT_NAME` in their name and client packages they are subscribed to.
+
+* `find -c CLIENT_NAME`: returns clients that contain `CLIENT_NAME` in their name and client packages they are
+  subscribed to.
 * `find -t TOUR_ID`: returns tours that match the `TOUR_ID` and tours subscribed to the tour.
 * `find -f FLIGHT_ID`: returns flights that match the `FLIGHT_ID` and clients subscribed to the flight.
 
@@ -444,7 +448,7 @@ In general, there is a sequence of steps when any of the 3 `find` commands are c
 
 Firstly, assume that in previous sessions, commands were executed to add clients, tours, flights and packages to
 the ```ClientList```, ```TourList```, ```FlightList``` and ```PackageList``` respectively. In particular, these specific
-commands were exceuted.
+commands were executed.
 
 * ```add -c c001 /n Bo Tuan /cn 93338333 /m borangutuan@mail.com```
 * ```add -t JPN /n Japan Tour /p 1500```
@@ -453,11 +457,12 @@ commands were exceuted.
 
 Here is an example usage of `find -c bo` to find a client with name "Bo Tuan":
 **Step 1**: The user executes ```find -c bo``` to query if a client named "Bo Tuan" exists in the ClientList.
-The ```parse``` function in the ```Parser``` class takes the command, and calls `parseFind()` 
+The ```parse``` function in the ```Parser``` class takes the command, and calls `parseFind()`
 based on (```find```) in the input. ```parseFind()``` determines which type of Object is to be queried for and
 ```FindClientCommand()``` is created with the parameter ```bo``` based on prefix `-c`.
 
 Depending on the type of find command being called, these command types will be returned:
+
 * ```find -c```: ```FindClientCommand```
 * ```find -t```: ```FindTourCommand```
 * ```find -f```: ```FindFlightCommand```
@@ -467,6 +472,7 @@ The following 3 sections focuses on find for the specific classes.
 <br>
 
 #### <u>Finding a particular client</u>
+
 Given below is an example usage of `find -c bo`.
 
 Here is a (partial) sequence diagram for the above user input:
@@ -486,9 +492,12 @@ in Step 2, the respective client package will be printed onto the console termin
 <br>
 
 #### <u>Finding a particular tour</u>
+
 Given below is an example usage of `find -t JPN`.
 
 Here is a (partial) sequence diagram for the above user input:
+
+![FindTour Sequence Diagram](https://user-images.githubusercontent.com/62021897/140713906-dd0524f5-53d2-4409-819b-05a467adee53.png)
 
 **Step 1**: `Parser` creates `FindTourCommand("JPN")` and returns it to `TourPlanner`.
 
@@ -508,9 +517,12 @@ through in the ```ClientPackageList```, the total number of subscribed clients w
 <br>
 
 #### <u>Finding a particular flight</u>
+
 Given below is an example usage of `find -f SQ-JPN`.
 
 Here is a (partial) sequence diagram for the above user input:
+
+![FindFlight Sequence Diagram](https://user-images.githubusercontent.com/62021897/140713762-85084399-97e1-47ee-a228-51e6c743d0d1.png)
 
 **Step 1**: `Parser` creates `FindFlightCommand("SQ-JPN")` and returns it to `TourPlanner`.
 
