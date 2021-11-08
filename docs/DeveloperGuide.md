@@ -320,7 +320,7 @@ To help young adults who are living in their own home keep track of ingredients 
 ### Launch and Shutdown
 1. Initial launch
     1. Download the [jarfile](https://github.com/AY2122S1-CS2113-T16-3/tp/releases) of the latest release and copy it into an empty folder.
-    2. For Windows, launch Command Prompt and navigate to the folder that contains the jar file
+    2. Launch the command line and navigate to the folder that contains the jar file.
     3. Type `java -jar fileName.jar`, where `fileName` is the name of the jar file.
        Expected: Shows the welcome message of the application
 
