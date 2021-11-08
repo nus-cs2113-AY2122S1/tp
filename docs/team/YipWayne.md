@@ -26,23 +26,12 @@ Given below are my contributions to the project.
     * Justification: This is the functionality that is core to the program. In the event that there is a lot of data within the database, this 
       function allows the travel agency employee to quickly find the specific entry that they are looking for.
 
-    * Highlights: The find feature was different between the data types. For the client, a `[SUBSTRING]` parameter is take in, which
-      returns clients with the substring contained in their name. On the other hand for tours and flights, am `[ID]` parameter is
-      taken in , which returns <u>ONE</u> entry with that specific ID. Hence, separate implementations were required.
+    * Highlights: The find feature was different between the data types. Hence, separate implementations were required.
 
     * Highlights: For finding tours and flights, it also printed out the relevant clients that subscribed to them. This implementation
       was challenging as required interaction with other object classes, such as the ClientPackage class.
 
-* Feature: Implementation of base code of the UI class
-    * What it does: Provides functions that the relevant Commands will call, in order to print the appropriate results
-      on the console terminal.
-  
-    * Justification: It allows the travel agency employee to see their desirable results based on the command and parameters
-      they inputted. Hence, it is a crucial link between the code and the user input.
-
-    * Highlights: It was challenging to find a general output structure that would be consistent with the different types 
-      of commands (add, list, find, cut, sort). Hence, it required some trial and error to find a suitable output structure.
-
+* Task: General implementation of Ui class
 * Task: General implementation of Tour and TourList classes
 * Task: Implementation of list and find-related Parser exception functions
 
