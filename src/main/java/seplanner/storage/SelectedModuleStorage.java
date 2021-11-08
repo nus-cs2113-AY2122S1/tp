@@ -56,11 +56,11 @@ public class SelectedModuleStorage extends UserStorage {
             String line = scanner.nextLine();
             updateList(moduleList, line, moduleMasterList);
         }
-        updateFile(moduleList);
         logger.log(Level.INFO, "Modules stored in the file are successfully loaded");
         if (!isModuleValid) {
             System.out.println(UiStorage.getInvalidModuleMessage());
         }
+        updateFile(moduleList);
         return moduleList;
     }
 

@@ -77,12 +77,12 @@ public class SelectedUniversityStorage extends UserStorage {
             updateUniversityList(curr, moduleMappings, universitySelectedList,
                     universityMasterList);
         }
-        updateFile(universitySelectedList);
         if (!isUniversityValid) {
             System.out.println(UiStorage.getInvalidUniversityMessage());
         } else if (!isMappingValid) {
             System.out.println(UiStorage.getInvalidMappingMessage());
         }
+        updateFile(universitySelectedList);
         logger.log(Level.INFO, "Module mappings stored in the file are successfully loaded");
         return universitySelectedList;
     }
