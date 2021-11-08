@@ -1,6 +1,7 @@
 # Herrekt's Project Portfolio Page
 
 ## Project: The Great Detective
+The Great Detective is an interactive mystery solving murder game.
 
 ### Given below are my contributions to the project:
 
@@ -11,6 +12,7 @@
   and then interact with via looking into the suspects and clues after reading the narrative.
   * Highlights: As everything contained within the scene do not directly interact with each other, it reduces coupling 
   dependencies and increases abstraction.
+  
 
 * **New Feature**: Added the class `SuspectListBuilder`.
   * What it does: Allows the creation of SuspectList to be more efficient, by reading a text file containing the clues
@@ -38,30 +40,49 @@
 * Code contributed:[RepoSense link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&tabAuthor=Herrekt&tabRepo=AY2122S1-CS2113-T14-1%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false) 
 
 
-* **Enhancements to existing features**:
+* **Enhancements to existing features**: 
+  * Brought up the need to follow OOP in some features such as the instantiation of narratives and the clues.
+    This helped to change the focus in simplifying the creation of `SuspectList` and `SceneList` builder methods
+    in both personal and other PRs (Personal PRs: [#79](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/79), 
+  [#87](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/87).)
   * Reduced coupling within the `Investigation` class, removing its reliance from the `NoteList` class 
-  (Pull requests #87, #96) .
-  * Improved OOP of the `Narrative` class and its instantiation (Pull request #59).
+  (Pull requests [#87](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/87), [#96](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/96)).
+  * Improved OOP of the `Narrative` class and its instantiation (Pull request [#59](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/59)).
   * Added additional methods in the `Parser` class enabling it to take in additional inputs for the note command,
-  and also overloaded certain methods in the `NoteList` class to allow multiple inputs at once (Pull requests #213).
-  * Created assertion tests for the different exceptions 
-  (Pull request #83, and in the later PRs as constant changes were made to the `Investigation` class).
-  * Ui fixes were made to improve the quality of message when related to error messages (Pull requests #213, #228).
+  and also overloaded certain methods in the `NoteList` class and `NoteCommand` class to allow multiple inputs at once 
+  (Pull requests [#96](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/96), [#213](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/213)).
+  * Created assertion tests for the different exceptions, 
+  also fixed other JUnit tests during the changes made to the project. 
+  (Pull request [#83](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/83), 
+  and in the later PRs as constant changes were made to `Investigation` class and different tests).
+  * Ui fixes were made to improve the quality of message when related to error messages 
+  (Pull requests [#213](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/213), 
+  [#228](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/228)).
 
 
 * **Documentation**: 
   * User guide:
-    * Added documentation for the features `/note` (Pull requests #105, #116).
+    * Added documentation for the features `/note` 
+    (Pull requests [#105](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/105), 
+    [#116](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/116), 
+    [#251](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/251)).
   * Developer guide:
     * Added implementation details for `SceneList` and `SuspectList` related classes. 
     Created sequence diagram to show initiation of SceneList and SuspectList via their corresponding builders
-    (Pull requests #105, #112, #228).
+    (Pull requests [#105](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/105),
+    [#112](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/112), 
+    [#228](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/228)).
     * Javadocs:
-      * Added javadocs for class creation like `SuspectList`, `NoteCommand`, and `SceneList` (Pull request #221).
+      * Added javadocs for class creation like `SuspectList`, `NoteCommand`, and `SceneList` 
+      (Pull request [#221](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/221)).
       
 
 * **Project Management**:
+  * Suggested some ideas and highlighted potential and actual bugs found in the project.
   * Reviewed, gave comments, approved and merged pull requests.
+  * Some PRs reviewed ([#91](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/91), 
+  [#212](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/212), 
+  [#265](https://github.com/AY2122S1-CS2113-T14-1/tp/pull/265))
 
 
 * **Contributions Beyond the Team Project**:
