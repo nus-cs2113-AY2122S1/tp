@@ -20,7 +20,7 @@ Below is the guide on how you can get started using our program to start **"Sche
       - [2.3.3 Listing the recurrence of a task](#233-listing-the-recurrence-of-a-task)
       - [2.3.4 Listing your upcoming tasks: `upcoming`](#234-listing-your-upcoming-tasks-upcoming)
     - [2.4 Sorting your task list: `sort`](#24-sorting-your-task-list-sort)
-    - [2.5 Setting reminders to your tasks: `reminder`](#25-setting-reminders-to-your-tasks-reminder)
+    - [2.5 Setting reminders to your tasks: `reminder`](#25-setting-reminders-for-your-tasks-reminder)
     - [2.6 Editing your tasks: `edit`](#26-editing-your-tasks-edit)
     - [2.7 Adding your NUS timetable:](#27-adding-your-nus-timetable)
       - [2.7.1 Module: `module`](#271-module-module)
