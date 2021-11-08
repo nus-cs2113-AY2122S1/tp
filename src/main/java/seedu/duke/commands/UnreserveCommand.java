@@ -18,7 +18,7 @@ public class UnreserveCommand extends Command {
     protected String id;
 
     /**
-     * Sole constructor, takes in full line of input
+     * Sole constructor, takes in full line of input.
      * @param args Full input as entered by user
      */
     public UnreserveCommand(String args) {
@@ -27,7 +27,7 @@ public class UnreserveCommand extends Command {
 
     /**
      * Gets the ID of object to be un-reserved,
-     * Check validity of request and performs operations on item in catalogue
+     * Check validity of request and performs operations on item in catalogue.
      * @param ui Object that handles user IO
      * @param catalogue Underlying list of all items.
      */
