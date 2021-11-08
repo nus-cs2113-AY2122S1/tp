@@ -48,12 +48,10 @@ efficient allocation of said ingredients to the cooking of dishes, ultimately sa
     * **What it does**: Allows the user to enter both types of input as a parameter for the edit and add commands without clashing and unexpected outcomes
     * **Justification**: This gives the user greater freedom to choose how they want to identify their ingredients / dishes. This also allows them to use a short index instead of a long name
 
-* **Contribution to other features**: Code Defensiveness
-    Wrote JUnit tests and exceptions to improve code defensiveness.
+* **Contribution to other features**: Code Defensiveness: Wrote JUnit tests and exceptions to improve code defensiveness.
   * **Justification**: Helps keep the code more bug free and prevents unexpected outcomes from occurring during runtime
 
-* **Contribution to other features**: Documentation
-  Wrote documentation for some command classes and the `IngredientList`, `Storage` and `InputParser` classes
+* **Contribution to other features**: Documentation: Wrote documentation for some command classes and the `IngredientList`, `Storage` and `InputParser` classes
     * **Justification**: Helps improve code readability
 
 * **Contributions to team-based tasks**:
