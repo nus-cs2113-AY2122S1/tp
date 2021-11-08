@@ -47,7 +47,7 @@ public class TextUi {
         in = new Scanner(System.in);
     }
 
-    //@@author yeoweihngwhyelab
+    //@@author YEOWEIHNGWHYELAB
     public static void showWelcomeMessage() {
         DateTimeFormatter dateTime = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
         LocalDateTime now = LocalDateTime.now();
@@ -72,7 +72,9 @@ public class TextUi {
                 + "    What entries do you wish to enter today?\n"
                 + DIVIDER);
     }
+    //@@
 
+    //@@author YEOWEIHNGWHYELAB
     public static void csvStatus() {
         System.out.println("Your csv file have been successfully created in the data folder!");
         System.out.print(LS);
@@ -80,6 +82,7 @@ public class TextUi {
 
         System.out.println(DIVIDER);
     }
+    //@@
 
     public static void showLoanReminder(int index, Loan dueLoan) {
         if (index == 1) {
@@ -93,6 +96,7 @@ public class TextUi {
                 + " is due!!");
     }
 
+    //@@author YEOWEIHNGWHYELAB
     public static void showExpenditureAddedMessage(Expenditure addedExpenditure, AllRecordList recordList) {
         assert addedExpenditure.getAmount() > 0 : "Expenditure added should be a positive value";
 
@@ -101,6 +105,7 @@ public class TextUi {
 
         printDivider();
     }
+    //@@
 
     public static void showExpenditureEditedMessage(Expenditure newExpenditure, AllRecordList recordList) {
         assert newExpenditure.getAmount() > 0 : "Edited Expenditure should have a positive amount";
@@ -112,7 +117,7 @@ public class TextUi {
         printDivider();
     }
 
-    //@@author yeoweihngwhyelab
+    //@@author YEOWEIHNGWHYELAB
     private static void showExpenditureDetails(Expenditure newExpenditure, AllRecordList recordList) {
         System.out.println("Description: " + newExpenditure.getDescription()
                 + "\nAmount: $" + df.format(newExpenditure.getAmount())
@@ -126,6 +131,7 @@ public class TextUi {
 
         spendingNotice(monthString, amount, totalMonthExpenditureSpending);
     }
+    //@@
 
     private static void showExpenditureDetailsForDelete1(Expenditure newExpenditure) {
         System.out.println("Description: " + newExpenditure.getDescription()
@@ -150,7 +156,7 @@ public class TextUi {
         spendingNotice(monthString, amount, totalMonthExpenditureSpending);
     }
 
-    //@@author yeoweihngwhyelab
+    //@@author YEOWEIHNGWHYELAB
     private static void spendingNotice(String monthString, double amount, double totalMonthExpenditureSpending) {
         System.out.println("Total Amount Spent in "
                 + monthString
@@ -175,6 +181,8 @@ public class TextUi {
         }
 
     }
+    //@@
+
 
     //@@author ZenoNexus
     public static void showBudgetAddedMessage(double amount, int month) {
@@ -187,6 +195,7 @@ public class TextUi {
                 + LS
                 + DIVIDER);
     }
+    //@@
 
     public static void showBudgetEditedMessage(Budget newBudget) {
         assert newBudget.getAmount() > 0 : "Edited Budget should have a positive amount";
@@ -198,11 +207,12 @@ public class TextUi {
         printDivider();
     }
 
-
+    //@@author YEOWEIHNGWHYELAB
     private static void showBudgetDetails(Budget newBudget) {
         System.out.println("Amount: $" + df.format(newBudget.getAmount())
                 + "\nMonth: " + newBudget.getMonth());
     }
+    //@@
 
     public static void showLoanAddedMessage(Loan newLoan, boolean isLoadingStorage) {
         if (isLoadingStorage) {
@@ -285,7 +295,7 @@ public class TextUi {
         return monthString;
     }
 
-    //@@author yeoweihngwhyelab
+    //@@author YEOWEIHNGWHYELAB
     public static void showRecordsListView(AllRecordList records, int month, boolean isListAll, Category category) {
         if (isListAll) {
             for (int i = 1; i <= 12; i++) {
@@ -295,8 +305,9 @@ public class TextUi {
             printRecordList(records, month, category);
         }
     }
+    //@@
 
-    //@@author yeoweihngwhyelab
+    //@@author YEOWEIHNGWHYELAB
     /**
      * print out the record list.
      * @param records the record list of budget, expenditures and loans
@@ -327,7 +338,9 @@ public class TextUi {
 
         recordListPrinter(records, i, category, monthString, totalSpending, currentMonthBudget, budget, printInfo);
     }
+    //@@
 
+    //@@author YEOWEIHNGWHYELAB
     private static void recordListPrinter(AllRecordList records, int i, Category category,
                                           String monthString, double totalSpending, double currentMonthBudget,
                                           String budget, boolean printInfo) {
@@ -345,6 +358,7 @@ public class TextUi {
 
         getMonthListView(records, i, monthString, budget, category);
     }
+    //@@
 
     /**
      * Names/Descriptions longer than 30characters may get truncated.
@@ -436,11 +450,11 @@ public class TextUi {
 
     public static void showBudgetDeletedMessage() {
         System.out.println("Successfully deleted the Budget for this month!");
-        System.out.println("Now the budget amount is 0.00!");
+        System.out.println("Now the budget amount is $0.00!");
         System.out.println(DIVIDER);
     }
 
-    //@@author yeoweihngwhyelab
+    //@@author YEOWEIHNGWHYELAB
     public static void drawVerticalPercentage(double[] barPercentage) {
         System.out.println("Percentage of Money Spent");
         System.out.println(buffer + "JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC ");
@@ -451,8 +465,9 @@ public class TextUi {
         }
         printDivider();
     }
+    //@@
 
-    //@@author yeoweihngwhyelab
+    //@@author YEOWEIHNGWHYELAB
     public static void printExplosion() {
         System.out.println("              _.-^^---....,,---_\n"
                 + "           _--                  --_\n"
@@ -465,8 +480,9 @@ public class TextUi {
                 + "                    | ;  :|\n"
                 + "           _____.,-#%&$@%#&#~,._____");
     }
+    //@@
 
-    //@@author yeoweihngwhyelab
+    //@@author YEOWEIHNGWHYELAB
     public static void drawSingleOverallGraph(double barPercentage) {
         System.out.println("Percentage of Money Spent throughout the year");
         System.out.print(LS);
@@ -500,8 +516,9 @@ public class TextUi {
 
         printDivider();
     }
+    //@@
 
-    //@@author yeoweihngwhyelab
+    //@@author YEOWEIHNGWHYELAB
     private static void printVerticalPercentageRow(double[] barPercentage, int i) {
         for (double v : barPercentage) {
             if ((i * 10) <= v) {
@@ -511,6 +528,8 @@ public class TextUi {
             }
         }
     }
+    //@@
+
 
     //@@author ZenoNexus
     public static void displayStats(int month, double[] categoryPercentage, double monthBudget,
@@ -524,6 +543,7 @@ public class TextUi {
         System.out.println("The amount you spent on this category: $" + df.format(topCategorySpending));
         printDivider();
     }
+    //@@
 
     public static void drawHorizontalGraph(double[] barPercentage) {
         printHorizontalGraphHeader();
@@ -544,6 +564,17 @@ public class TextUi {
         System.out.println();
     }
 
+    //@@author YEOWEIHNGWHYELAB
+    public static void printYearStatus(int statusMessage) {
+        System.out.print("The data base have been switched to: ");
+        System.out.println(statusMessage);
+
+        System.out.println("You may work on the " + statusMessage + " database!");
+
+        System.out.println(DIVIDER);
+    }
+    //@@
+
     private static void printHorizontalGraphRow(double percentageToPrint) {
         int totalNumberOfBars = 20;
         long numberOfBarsToPrint = round(percentageToPrint / percentageRepresentedByEachBar);
@@ -559,16 +590,6 @@ public class TextUi {
         }
         System.out.print("     " + df.format(percentageToPrint) + "%");
         System.out.println();
-    }
-
-    //@@author yeoweihngwhyelab
-    public static void printYearStatus(int statusMessage) {
-        System.out.print("The data base have been switched to: ");
-        System.out.println(statusMessage);
-
-        System.out.println("You may work on the " + statusMessage + " database!");
-
-        System.out.println(DIVIDER);
     }
 
     public static void showExitMessage() {
@@ -593,7 +614,7 @@ public class TextUi {
         System.out.println(DIVIDER);
     }
 
-    //@@author yeoweihngwhyelab
+    //@@author YEOWEIHNGWHYELAB
     public static void statsIntro(AllRecordList recordList) {
         StatYearCommand command = new StatYearCommand(1);
         command.setAllRecordList(recordList);
@@ -604,14 +625,16 @@ public class TextUi {
         System.out.println();
         Delay.loadingBar(20);
     }
+    //@@
 
-    //@@author yeoweihngwhyelab
+    //@@author YEOWEIHNGWHYELAB
     public static void printAvailableDataBase(Storage dataBase) {
         System.out.println("These are the data base you currently have!");
         dataBase.directoryListAllFiles();
     }
+    //@@
 
-    //@@author yeoweihngwhyelab
+    //@@author YEOWEIHNGWHYELAB
     public static void printExpenditureLoanFoundInMonth(ArrayList<Expenditure> matchedExpenditureList,
                                                         ArrayList<Loan> matchedLoanList,
                                                         int sizeOfMatchedExpenditureList,
@@ -642,6 +665,7 @@ public class TextUi {
 
         System.out.println(FindCommand.DIVIDER);
     }
+    //@@
 
     /**
      * Prints a message out to the user with dividers.

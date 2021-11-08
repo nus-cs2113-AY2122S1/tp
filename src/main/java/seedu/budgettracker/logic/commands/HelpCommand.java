@@ -13,6 +13,7 @@ public class HelpCommand extends Command {
     public static final int EXIT_COMMAND_HELP_INDEX = 8;
     private static final String DIVIDER = "========================================================";
 
+    //@@author YEOWEIHNGWHYELAB
     public void printHelp() {
         printAddCommandHelp();
         printEditCommandHelp();
@@ -23,6 +24,7 @@ public class HelpCommand extends Command {
         printHelpCommandHelp();
         printExitCommandHelp();
     }
+    //@@
 
     private void printAddCommandHelp() {
         System.out.println(ADD_COMMAND_HELP_INDEX + ". " + AddCommand.COMMAND_WORD);
@@ -40,12 +42,14 @@ public class HelpCommand extends Command {
         System.out.println(DIVIDER);
     }
 
+    //@@author YEOWEIHNGWHYELAB
     private void printFindCommandHelp() {
         System.out.println(FIND_COMMAND_HELP_INDEX + "." + FindCommand.COMMAND_WORD);
         System.out.println("Finds all expenditure and loan records with the specified keyword");
         System.out.println("Parameters: [KEYWORD]");
         System.out.println(DIVIDER);
     }
+    //@@
 
     private void printListCommandHelp() {
         System.out.println(LIST_COMMAND_HELP_INDEX + ". list");
@@ -68,6 +72,7 @@ public class HelpCommand extends Command {
         System.out.println(DeleteMultipleLoanCommand.MESSAGE_USAGE);
         System.out.println(DIVIDER);
     }
+    //@@
 
     private void printStatCommandHelp() {
         System.out.println(STAT_COMMAND_HELP_INDEX + ". " + StatCommand.COMMAND_WORD);

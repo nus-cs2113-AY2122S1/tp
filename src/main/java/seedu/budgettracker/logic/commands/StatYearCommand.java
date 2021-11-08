@@ -1,10 +1,11 @@
+//@@author YEOWEIHNGWHYELAB
+
 package seedu.budgettracker.logic.commands;
 
 import seedu.budgettracker.ui.TextUi;
 
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_STAT_COMMAND;
 
-//@@author yeoweihngwhyelab
 public class StatYearCommand extends StatCommand {
     private final int type;
 
@@ -12,12 +13,10 @@ public class StatYearCommand extends StatCommand {
             + "being worked on.\n"
             + "Parameters: -y t/[TYPE]";
 
-    //@@author yeoweihngwhyelab
     public StatYearCommand(int type) {
         this.type = type;
     }
 
-    //@@author yeoweihngwhyelab
     public double getTotalBudgetAmount() {
         double totalBudgetAmount = 0.0;
 
@@ -28,7 +27,6 @@ public class StatYearCommand extends StatCommand {
         return totalBudgetAmount;
     }
 
-    //@@author yeoweihngwhyelab
     public double getTotalExpenditure() {
         double totalExpenditureAmount = 0.0;
 
@@ -41,7 +39,6 @@ public class StatYearCommand extends StatCommand {
         return totalExpenditureAmount;
     }
 
-    //@@author yeoweihngwhyelab
     public void overallStatisticsIntro() {
         double expenditureTotal = getTotalExpenditure();
         double budgetTotal = getTotalBudgetAmount();
@@ -54,7 +51,6 @@ public class StatYearCommand extends StatCommand {
         System.out.printf("%.2f", expenditureTotal);
     }
 
-    //@@author yeoweihngwhyelab
     private void typeVerticalBarGraph() {
         double amount;
 
@@ -79,7 +75,6 @@ public class StatYearCommand extends StatCommand {
         TextUi.drawVerticalPercentage(barPercentage);
     }
 
-    //@@author yeoweihngwhyelab
     private void typeSingleOverallGraph() {
         double amount = 0.0;
         double totalSpending = 0.0;
@@ -98,7 +93,6 @@ public class StatYearCommand extends StatCommand {
         TextUi.drawSingleOverallGraph(barPercentage);
     }
 
-    //@@author yeoweihngwhyelab
     @Override
     public void execute() {
         switch (type) {

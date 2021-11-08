@@ -184,6 +184,7 @@ public class Parser {
         return command;
     }
 
+    //@@author YEOWEIHNGWHYELAB
     /**
      * Splits the stat command parameters into its respective type and parses accordingly.
      *
@@ -191,7 +192,6 @@ public class Parser {
      * @return the corresponding Command for the input
      * @throws ParserException if arguments are invalid
      */
-    //@@author yeoweihngwhyelab
     private Command prepareStatCommand(String commandParams) throws ParserException {
         String statOption = commandParams.substring(TYPE_IDENTIFIER_START_INDEX, TYPE_IDENTIFIER_END_INDEX);
         String statParams = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
@@ -232,6 +232,7 @@ public class Parser {
         }
     }
 
+    //@@author YEOWEIHNGWHYELAB
     /**
      * Prepares the list command for parsing.
      *
@@ -239,7 +240,6 @@ public class Parser {
      * @return the corresponding Command for the input
      * @throws ParserException if arguments are invalid
      */
-    //@@author yeoweihngwhyelab
     private Command prepareListMonthCommand(String commandParams) throws ParserException {
         try {
             return ListRecordParser.parse(commandParams);
@@ -276,6 +276,7 @@ public class Parser {
 
     }
 
+    //@@author YEOWEIHNGWHYELAB
     /**
      * Prepares the find command for parsing.
      *
@@ -283,7 +284,6 @@ public class Parser {
      * @return the corresponding Command for the input
      * @throws ParserException if arguments are invalid
      */
-    //@@author yeoweihngwhyelab
     private Command prepareFindCommand(String commandParams) throws ParserException {
         try {
             return new FindCommand(commandParams);
@@ -292,7 +292,7 @@ public class Parser {
         }
     }
 
-    //@@author yeoweihngwhyelab
+    //@@author YEOWEIHNGWHYELAB
     private Command prepareYearCommand(String commandParams) {
         try {
             boolean isYear = commandParams.matches("^[0-9]{4}$");
