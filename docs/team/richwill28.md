@@ -8,8 +8,15 @@
 * [Summary of Contributions](#summary-of-contributions)
     * [Code Contributed](#code-contributed)
     * [Enhancements Implemented](#enhancements-implemented)
+        * [Code & Packages Setup](#code--packages-setup)
+        * [Unit Testing & Assertions](#unit-testing--assertions)
+        * [Logging](#logging)
+        * [Code Refactoring](#code-refactoring)
+        * [Features Improvement](#features-improvement)
+        * [PED Bugs](#ped-bugs)
     * [User Guide](#user-guide)
     * [Developer Guide](#developer-guide)
+    * [Team-based Tasks](#team-based-tasks)
     * [Review/Mentoring](#reviewmentoring)
     * [Beyond Project Team](#beyond-project-team)
         * [Forum Contributions](#forum-contributions)
@@ -35,11 +42,77 @@ My responsibilities:
 My overall code contributions can be found [here](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25).
 (Search for `richwill28`)
 
+Mostly in charge of `logic` package (including `Command` and `Parser`), `commons` package (including general and utility classes), `Storage` class operations, and overall the data structures of `model` package.
+Have full understanding of almost all the working classes and components to help teammates, when necessary.
+
 ### Enhancements Implemented
+
+#### Code & Packages Setup
+
+**PRs**: [#23](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/23), [#25](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/25).
+
+Set up code skeleton used in the project, including the following classes:
+
+* `Duke`
+* `DukeException`
+* `Command`
+* `Lesson`
+* `Message`
+* `Parser`
+* `Storage`
+* `Task`
+* `Ui`
+* ...and many more!
+
+#### Unit Testing & Assertions
+
+**PR**: [#28](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/28), [#114](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/114), [#163](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/163), [#164](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/164), [#173](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/173).
+
+Added JUnit testing and assertions to make code more defensive and more effective for regression testing.
+
+#### Logging
+
+**PR**: [#60](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/60).
+
+Added logging to record the states of the program, and is useful for troubleshooting when needed.
+
+#### Code Refactoring
+
+**PR**: [#28](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/28), [#35](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/35), [#59](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/59), [#164](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/164), [#184](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/114).
+
+Refactored classes and packages to improve overall code quality (e.g., better OOP, SLAP, etc.).
+Most notable refactoring is [#28](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/28), which our team like to refer to as "the great refacotring",
+as major changes to the code architecture were implemented for improved scalability and better separation of concerns with respect to OOP.
+
+#### Features Improvement
+
+**PR**: [#114](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/114).
+
+Most notable enhancement is the [launch lesson](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/114) feature.
+The motivation for developing this comes from the frustration that some terminals do not support URL highlighting,
+which prevent users from conveniently clicking and launching the URLs stored in `Lesson`.
+The feature had been tested and confirmed to be working on Windows, Linux, Mac, and WSL.
+
+#### PED Bugs
+
+* **PR**: [#163](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/163), [#173](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/173), [#184](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/184).
+
+Squashed bugs found in PE Dry Run. These included high priority bug such as [#156](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/156),
+and medium severity bugs such as [#112](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/112) and [#149](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/149),
+as well as other lower severity bugs.
 
 ### User Guide
 
+* **PRs**: [#95](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/95), [#106](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/106).
+
+Refactored most sections of UG to improve its layout. Updated User Guide sequentially as the program output changes.
+
 ### Developer Guide
+
+* **PRs**: [#74](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/74), [#75](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/75), [#106](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/106).
+
+Set up the structure of DG, starting with `Architecture` and `Logic` sections.
+Incorporated UML Diagrams with the help of [PlantUML](https://plantuml.com/), including class and sequence diagrams.
 
 ### Team-based Tasks
 
@@ -48,14 +121,6 @@ My overall code contributions can be found [here](https://nus-cs2113-ay2122s1.gi
 * Maintained issue tracker.
 * Maintained overall code quality and implementation designs.
 * Maintained collaborative document ([Notion](https://www.notion.so/)) for project management.
-
-### PED Bugs
-
-* **PRs**: [#163](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/163), [#173](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/173), [#184](https://github.com/AY2122S1-CS2113T-W11-3/tp/pull/184).
-
-Squashed bugs found in PE Dry Run. These included high priority bug such as [#156](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/156),
-and medium severity bugs such as [#112](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/112) and [#149](https://github.com/AY2122S1-CS2113T-W11-3/tp/issues/149),
-as well as other lower severity bugs.
 
 ### Review/Mentoring
 
