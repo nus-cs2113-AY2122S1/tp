@@ -23,15 +23,15 @@ public class DeleteMultipleExpenditureCommand extends DeleteCommand {
 
     @Override
     public void execute() throws CommandException {
-        if (startIndex <= 0 || endIndex >= allRecordList.getExpenditureListSize(month)) {
+        if (startIndex < 0 || endIndex >= allRecordList.getExpenditureListSize(month)) {
             throw new CommandException(MESSAGE_INVALID_INDEX_OF_EXPENDITURE);
         }
         if (startIndex >= endIndex) {
             throw new CommandException(MESSAGE_INVALID_INDEX_OF_EXPENDITURE);
         }
         for (int i = startIndex; i <= endIndex; i++) {
-            TextUi.showMultiExpenditureDelMessage(i, endIndex,
-                    allRecordList.getExpenditure(startIndex - 1, month), allRecordList);
+            TextUi.showMultiExpenditureDelMessage(i + 1, endIndex + 1,
+                    allRecordList.getExpenditure(startIndex, month), allRecordList);
             allRecordList.deleteExpenditure(startIndex, month);
         }
     }

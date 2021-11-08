@@ -119,11 +119,27 @@ public class TextUi {
         spendingNotice(monthString, amount, totalMonthExpenditureSpending);
     }
 
-    private static void showExpenditureDetailsForDelete(Expenditure newExpenditure) {
+    private static void showExpenditureDetailsForDelete1(Expenditure newExpenditure) {
         System.out.println("Description: " + newExpenditure.getDescription()
                 + "\nAmount: $" + df.format(newExpenditure.getAmount())
                 + "\nDate: " + newExpenditure.getDateString()
                 + "\nCategory: " + newExpenditure.getCategoryString());
+    }
+
+    private static void showExpenditureDetailsForDelete2(Expenditure newExpenditure, AllRecordList recordList) {
+        System.out.println("Description: " + newExpenditure.getDescription()
+                + "\nAmount: $" + df.format(newExpenditure.getAmount())
+                + "\nDate: " + newExpenditure.getDateString()
+                + "\nCategory: " + newExpenditure.getCategoryString());
+
+        System.out.println(DIVIDER);
+
+        int month = newExpenditure.getMonth();
+        String monthString = getMonthString(month);
+        double amount = recordList.getBudget(month).getAmount();
+        double totalMonthExpenditureSpending = recordList.getTotalAmountSpent(month);
+
+        spendingNotice(monthString, amount, totalMonthExpenditureSpending);
     }
 
     //@@author yeoweihngwhyelab
@@ -397,9 +413,9 @@ public class TextUi {
     public static void showMultiExpenditureDelMessage(int index1, int index2, Expenditure delExe, AllRecordList list) {
         System.out.println("Successfully deleted Expenditure " + index1 + ":");
         if (index1 != index2) {
-            showExpenditureDetailsForDelete(delExe);
+            showExpenditureDetailsForDelete1(delExe);
         } else {
-            showExpenditureDetails(delExe, list);
+            showExpenditureDetailsForDelete2(delExe, list);
         }
         System.out.println(DIVIDER);
     }

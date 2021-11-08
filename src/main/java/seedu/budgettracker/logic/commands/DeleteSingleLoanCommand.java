@@ -21,11 +21,11 @@ public class DeleteSingleLoanCommand extends DeleteCommand {
 
     @Override
     public void execute() throws CommandException {
-        if (index <= 0 || index >= allRecordList.getLoanListSize(month)) {
+        if (index < 0 || index >= allRecordList.getLoanListSize(month)) {
             throw new CommandException(MESSAGE_INVALID_INDEX_OF_LOAN);
         }
         TextUi.showSingleLoanDeletedMessage(index + 1,
                 allRecordList.getLoan(index, month));
-        allRecordList.deleteLoan(index + 1, month);
+        allRecordList.deleteLoan(index, month);
     }
 }
