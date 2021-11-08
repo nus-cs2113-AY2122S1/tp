@@ -1,6 +1,7 @@
 package taa.command.mark;
 
 //@@author jon-the-melon
+import taa.Taa;
 import taa.teachingclass.TeachingClass;
 import taa.command.Command;
 import taa.storage.Storage;
@@ -54,7 +55,7 @@ public class SetMarkCommand extends Command {
         }
 
         String marksInput = argumentMap.get(KEY_MARKS);
-        if (!Util.isStringDouble(marksInput, 2)) {
+        if (!Util.isStringDouble(marksInput, Taa.DECIMAL_PLACES)) {
             throw new TaaException(MESSAGE_INVALID_MARKS);
         }
     }
@@ -96,7 +97,7 @@ public class SetMarkCommand extends Command {
         }
 
         String marksInput = argumentMap.get(KEY_MARKS);
-        assert Util.isStringDouble(marksInput);
+        assert Util.isStringDouble(marksInput, Taa.DECIMAL_PLACES);
         double marks = Double.parseDouble(marksInput);
         if (!(assessment.isMarksValid(marks))) {
             double maxMarks = assessment.getMaximumMarks();

@@ -60,6 +60,14 @@ class AttendanceDeserializerTest {
     }
 
     @Test
+    void deserialize_aboveMaxLessonNumberMember_expectNull() {
+        String input = "{\"lessonNumber\":1001,\"isPresent\":true}";
+
+        Attendance attendance = jsonToAttendance(input);
+        assertNull(attendance);
+    }
+
+    @Test
     void deserialize_missingIsPresentMember_expectNull() {
         String input = "{\"lessonNumber\":1}";
 

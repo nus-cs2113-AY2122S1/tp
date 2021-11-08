@@ -4,7 +4,9 @@ package taa.util;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class UtilTest {
@@ -162,5 +164,29 @@ class UtilTest {
     void isStringDouble_dotFirstAndThreeZeroesAndTwoDp_expectFalse() {
         String string = ".000";
         assertFalse(Util.isStringDouble(string, 2));
+    }
+
+    @Test
+    void setPrecision_oneDp_expectNotZero() {
+        double value = Util.setPrecision(0.9, 2);
+        assertNotEquals(value, 0);
+    }
+
+    @Test
+    void setPrecision_zeroDp_expectNotZero() {
+        double value = Util.setPrecision(1, 2);
+        assertNotEquals(value, 0);
+    }
+
+    @Test
+    void setPrecision_threeDp_expectNotZero() {
+        double value = Util.setPrecision(1.999, 2);
+        assertNotEquals(value, 0);
+    }
+
+    @Test
+    void setPrecision_sevenZeroesAndOneDp_expectZero() {
+        double value = Util.setPrecision(0.00000001, 2);
+        assertEquals(value, 0);
     }
 }

@@ -1,6 +1,7 @@
 package taa.command.assessment;
 
 //@@author rachelkeh
+import taa.Taa;
 import taa.teachingclass.ClassList;
 import taa.teachingclass.TeachingClass;
 import taa.command.Command;
@@ -56,7 +57,7 @@ public class AddAssessmentCommand extends Command {
         }
 
         String maximumMarksString = argumentMap.get(KEY_MAXIMUM_MARKS);
-        if (!Util.isStringDouble(maximumMarksString, 2)) {
+        if (!Util.isStringDouble(maximumMarksString, Taa.DECIMAL_PLACES)) {
             throw new TaaException(String.format(
                 MESSAGE_FORMAT_INVALID_MAXIMUM_MARKS,
                 Assessment.MAXIMUM_MARKS_RANGE[0],
@@ -65,7 +66,7 @@ public class AddAssessmentCommand extends Command {
         }
 
         String weightageString = argumentMap.get(KEY_WEIGHTAGE);
-        if (!Util.isStringDouble(weightageString, 2)) {
+        if (!Util.isStringDouble(weightageString, Taa.DECIMAL_PLACES)) {
             throw new TaaException(String.format(
                 MESSAGE_FORMAT_INVALID_WEIGHTAGE,
                 Assessment.WEIGHTAGE_RANGE[0],
@@ -113,7 +114,7 @@ public class AddAssessmentCommand extends Command {
 
     public double checkAndGetMaximumMarks() throws TaaException {
         String maximumMarksString = argumentMap.get(KEY_MAXIMUM_MARKS);
-        assert Util.isStringDouble(maximumMarksString, 2);
+        assert Util.isStringDouble(maximumMarksString, Taa.DECIMAL_PLACES);
         double maximumMarks = Double.parseDouble(maximumMarksString);
         if (!Assessment.isMaximumMarksValid(maximumMarks)) {
             throw new TaaException(String.format(
@@ -127,7 +128,7 @@ public class AddAssessmentCommand extends Command {
 
     public double checkAndGetWeightage(TeachingClass teachingClass) throws TaaException {
         String weightageString = argumentMap.get(KEY_WEIGHTAGE);
-        assert Util.isStringDouble(weightageString, 2);
+        assert Util.isStringDouble(weightageString, Taa.DECIMAL_PLACES);
         double weightage = Double.parseDouble(weightageString);
         if (!Assessment.isWeightageWithinRange(weightage)) {
             throw new TaaException(String.format(

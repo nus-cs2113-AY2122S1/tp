@@ -11,9 +11,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import taa.Parser;
+import taa.Taa;
 import taa.attendance.Attendance;
 import taa.attendance.AttendanceList;
 import taa.student.Student;
+import taa.util.Util;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -110,7 +112,7 @@ public class StudentDeserializer extends StorageDeserializer implements JsonDese
 
         for (String key : results.keySet()) {
             double value = results.get(key);
-            student.setMarks(key, value);
+            student.setMarks(key, Util.setPrecision(value, Taa.DECIMAL_PLACES));
         }
     }
 }

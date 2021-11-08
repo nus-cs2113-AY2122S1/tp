@@ -483,7 +483,7 @@ class TeachingClassDeserializerTest {
                 + "{\"id\":\"A1234567B\",\"name\":\"Jon Lim\",\"comment\":\"\","
                 + "\"attendanceList\":{\"attendances\":["
                 + "{\"lessonNumber\":1,\"isPresent\":true},{\"lessonNumber\":4,\"isPresent\":false}]},"
-                + "\"results\":{\"Midterm\":30.1,\"Quiz 1\":10.0001}},"
+                + "\"results\":{\"Midterm\":30.1,\"Quiz 1\":10.01}},"
                 + "{\"id\":\"A7654321Z\",\"name\":\"Hello-world_123 (Nothing)\",\"comment\":\"\","
                 + "\"attendanceList\":{\"attendances\":[]},\"results\":{}}]},"
                 + "\"assessmentList\":{\"assessments\":["
