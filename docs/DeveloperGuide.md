@@ -225,20 +225,6 @@ When the view feature is invoked, clues in the clue tracker will be iterated thr
 
 An alternative to this would be to update the clue status under each scene. However, this does not allow the display of clues according to different suspects.
 
-### Local Game Data Storage
-
-The local Game Data Storage feature allows users to save the current game progress and resume the saved progress in the Future.
-It is facilitated by ```java.io.File``` and ```java.io.FileWriter```. 
-It implements the following operations 
-- ```Storage#checkPath()``` -- Checks if there is a valid path to the data file, and creates a new data file if the data file is missing or hte path is invalid.
-- ```Storage#readFile()``` -- Reads all the lines in the data files and store the information into a ```ArrayList<String>``` type Array List, then close the file.
-- ```Storage#rewriteFile()``` -- Erase the content of the data file and rewrite from the start, then save and close the file.
-
-At first ```Storage file = new Storage("name.txt")```, initialise the ```Storage``` class type with the name of the file. 
-Then ```file.checkPath()``` will check for existing data file and creates a new data file if the path ```./Data/name.txt```is invalid.
-Then read the file and store the information into array list using ```ArrayList<String> content = file.readFile()```.
-Eventually, edit the content and rewrite to data file using ```file.rewriteFile(content)```
-
 ### Taking Notes For Specified Scene
 
 This note-taking feature allows users to take note whenever they want, and store these notes locally. All the locally saved notes will be loaded and accessible
