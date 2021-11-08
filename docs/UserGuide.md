@@ -42,7 +42,7 @@ fast, this application can allow one to access relevant travel information faste
 
 #### Miscellaneous
 
-- [Viewing help](#viewing-help-help)
+- [Viewing help](#viewing-helphelp)
 - [Exiting TourPlanner](#exit-application-bye)
 
 ### Landing Gracefully - Summary
@@ -156,7 +156,7 @@ Examples of data fields in commands:
 
 [**Return to Table of Contents**](#table-of-contents)
 
-## Viewing help ``help``
+## Viewing help:``help``
 
 <hr>
 

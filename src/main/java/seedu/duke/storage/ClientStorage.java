@@ -13,6 +13,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage class for all Clients. Creates and loads up the ClientList.
+ */
 public class ClientStorage {
     public static final String EMPTY_STRING = "";
     private final ClientList clients = new ClientList();
