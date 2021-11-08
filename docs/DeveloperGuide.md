@@ -17,7 +17,9 @@ section of this guide.
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+1. Software Engineering Education ([SE-EDU](https://se-education.org/))
+   1. [AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2) for providing us with ideas on how to implement a more OOP-oriented project  
+   2. [AddressBook (Level 3)](https://github.com/se-edu/addressbook-level3) for providing us with references on how to better structuer and format our User and Developer Guides
 
 ## Design
 
