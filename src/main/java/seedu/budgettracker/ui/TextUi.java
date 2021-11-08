@@ -183,7 +183,8 @@ public class TextUi {
     }
     //@@
 
-    //@@author YEOWEIHNGWHYELAB
+
+    //@@author ZenoNexus
     public static void showBudgetAddedMessage(double amount, int month) {
         String monthString = getMonthString(month);
         System.out.println("Your budget of $"
@@ -206,11 +207,12 @@ public class TextUi {
         printDivider();
     }
 
-
+    //@@author YEOWEIHNGWHYELAB
     private static void showBudgetDetails(Budget newBudget) {
         System.out.println("Amount: $" + df.format(newBudget.getAmount())
                 + "\nMonth: " + newBudget.getMonth());
     }
+    //@@
 
     public static void showLoanAddedMessage(Loan newLoan, boolean isLoadingStorage) {
         if (isLoadingStorage) {
@@ -448,7 +450,7 @@ public class TextUi {
 
     public static void showBudgetDeletedMessage() {
         System.out.println("Successfully deleted the Budget for this month!");
-        System.out.println("Now the budget amount is 0.00!");
+        System.out.println("Now the budget amount is $0.00!");
         System.out.println(DIVIDER);
     }
 
@@ -528,7 +530,8 @@ public class TextUi {
     }
     //@@
 
-    //@@author YEOWEIHNGWHYELAB
+
+    //@@author ZenoNexus
     public static void displayStats(int month, double[] categoryPercentage, double monthBudget,
                                     String topCategory, double topCategorySpending) {
         String monthString = getMonthString(month);
@@ -613,10 +616,10 @@ public class TextUi {
 
     //@@author YEOWEIHNGWHYELAB
     public static void statsIntro(AllRecordList recordList) {
-        Command command = new StatYearCommand(1);
+        StatYearCommand command = new StatYearCommand(1);
         command.setAllRecordList(recordList);
 
-        ((StatYearCommand) command).overallStatisticsIntro();
+        command.overallStatisticsIntro();
 
         Delay.wait(200);
         System.out.println();

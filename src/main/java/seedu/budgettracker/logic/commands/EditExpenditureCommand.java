@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import static seedu.budgettracker.common.Messages.MESSAGE_AMOUNT_EXCEEDED;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_INDEX_OF_EXPENDITURE;
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_YEAR;
+import static seedu.budgettracker.common.Messages.MESSAGE_AMOUNT_ZERO_OR_NEGATIVE;
 
 //@@author jyxhazcake
 /**
@@ -58,6 +59,9 @@ public class EditExpenditureCommand extends EditCommand {
      * @throws CommandException if parameters are invalid
      */
     private void checkValidParams() throws CommandException {
+        if (amount <= 0) {
+            throw new CommandException(MESSAGE_AMOUNT_ZERO_OR_NEGATIVE);
+        }
         if (amount > AMOUNT_MAX_VALUE) {
             throw new CommandException(MESSAGE_AMOUNT_EXCEEDED);
         }
