@@ -1,5 +1,9 @@
 # User Guide
 
+Budget Tracker is a desktop app for managing expenses, budget and loans, optimized for use via a Command Line Interface (CLI) 
+for tech-savvy students who have trouble keeping track of their expenses.
+
+
 ## Table of Content
 * [Intro](#introduction)
 * [Getting Started](#getting-started)
@@ -60,6 +64,7 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 6. Expenditure Categories
 
 ## Notes about the command format:
+* Command words (i.e. `add`, `edit`, etc.) must strictly be in **lower case**.
 * Words in UPPER_CASE are the parameters to be supplied by the user. <br />
 e.g. in `add -b a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can be used as `add -b a/500 m/12`.
 NOTE: **These parameters cannot be left empty.**
@@ -174,7 +179,7 @@ _________________________________________________________
 
 <br/>
 
-# <a id="edit"></a> &nbsp;&nbsp; `edit` 
+# <a id="edit"></a> &nbsp;&nbsp; Edit: `edit` 
 
 Edits a budget or expenditure entry.
 <br />
@@ -266,7 +271,7 @@ _________________________________________________________
 
 <br />
 
-# &nbsp;&nbsp; `year`
+# &nbsp;&nbsp; Year: `year`
 
 ### Switching Database Year: `year`
 
@@ -292,7 +297,7 @@ You are currently working on year 2020 database!
 _________________________________________________________
 
 
-#  &nbsp;&nbsp;`find`
+#  &nbsp;&nbsp; Find: `find`
 
 ### Finding a Particular Expenditure, Loan and Budget: `find`
 
@@ -372,7 +377,7 @@ _________________________________________________________
 
 <br/>
 
-# &nbsp;&nbsp;`list`
+# &nbsp;&nbsp;List: `list`
 
 <br />
 
@@ -481,7 +486,7 @@ _________________________________________________________
 
 <br />
 
-# &nbsp;&nbsp; `delete`
+# &nbsp;&nbsp; Delete: `delete`
 
 Deletes an entry / entries (maybe user wants to cut off the expenses) from the budget tracker data set.
 <br />
@@ -599,7 +604,7 @@ _________________________________________________________
 
 <br />
 
-# &nbsp;&nbsp; `stat`
+# &nbsp;&nbsp; Stat: `stat`
 
 The command word `stat` display some statistics graphs and paramters about the expenditure for 
 the year or month.
@@ -612,6 +617,10 @@ _________________________________________________________
 
 
 Display the statistics for a particular month's budget and expenditure by categories. 
+
+How it works:
+ * The graph shows the percentage spent on each category relative to the overall spending that month.
+ * The accuracy of the graph is represented by **3bars for every 5%** and is rounded up (e.g. 3% is rounded up to 5%).
 
 Format: `stat -c m/MONTH`
 
@@ -626,17 +635,19 @@ expenditures.
 
 ```
 ========================================================
-               10%   20%   30%   40%   50%   60%   70%   80%   90%   100% 
-GENERAL                                                                    0.85%
-CLOTHES       ###                                                          3.1%
-FOOD          ################################################             79.51%
-ENTERTAINMENT                                                              0%
-GIFTS         ###                                                          4.64%
-HEALTH                                                                     0%
-TECH          ######                                                       11.9%
-ALL                                                                        0%
-The category you spent the most on is: FOOD
-The amount you spent on this category is: $5136.50
+Here are the statistics for the month of October:
+              0%    10%   20%   30%   40%   50%   60%   70%   80%   90%   100%  
+GENERAL                                                                       0.85%
+CLOTHES       ###                                                             3.1%
+FOOD          ################################################                79.51%
+ENTERTAINMENT                                                                 0%
+GIFTS         ###                                                             4.64%
+HEALTH                                                                        0%
+TECH          ######                                                          11.9%
+ALL                                                                           0%
+Your budget: $500
+The category you spent the most on: FOOD
+The amount you spent on this category: $5136.50
 ========================================================
 ```
 <br />
@@ -647,7 +658,7 @@ _________________________________________________________
 
 ### `-y` : View Statistics for the Year
 
-Display the statistics for a particular the current database year which the user is working on. 
+Display the statistics for the current database year which the user is working on. 
 
 Format: `stat -y t/TYPE_OF_GRAPHICAL_VIEW`
 

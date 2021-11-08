@@ -7,10 +7,10 @@ import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_INDEX_OF_LOAN;
 
 public class DeleteSingleLoanCommand extends DeleteCommand {
 
-    public static final String MESSAGE_USAGE = "Delete an loan record.\n"
-            + "Parameters: -l m/MONTH i/INDEX_OF_LOAN\n"
+    public static final String MESSAGE_USAGE = "Delete a loan record.\n"
+            + "Parameters: -l m/MONTH [i/INDEX_OF_LOAN]\n"
             + "Note:\n"
-            + " * If INDEX is not specified, all the loan records of this month will be deleted.\n";
+            + " * If INDEX_OF_LOAN is not specified, all the loan records of this month will be deleted.\n";
     public final int index;
     public final int month;
 
