@@ -75,9 +75,9 @@ lessons in your daily schedule and your total workload:
 # Features
 
  :information_source: **Notes about the command formats**
- - Words in `<UPPER_CASE>` are the parameters to be given by the user. 
-    > e.g. in `show <MODULE_CODE>`, <MODULE_CODE> is a parameter and be called like so: 
-    `show CS2113T`.
+ - Words in `<UPPER_CASE>` are the parameters to be given by the user.
+    > e.g. in `show <MODULE_CODE>`, <MODULE_CODE> is a parameter and be called like so:
+   > `show CS2113T`.
  - Items in square brackets are optional.
     > e.g. find `search <KEYWORD> [-flag]`
     > can be called as `search GEH` OR `search GEH -q`.
