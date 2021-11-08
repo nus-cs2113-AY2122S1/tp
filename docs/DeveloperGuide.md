@@ -176,7 +176,7 @@ How Done and Undo work:
 5. `Duke` then calls the `execute` method in the `DoneUndoCommand` object. This method would either mark the corresponding items as done or undone. Two lists will be created; one of items with changes made and the other with items that are unchanged. These lists will be displayed to the user.
 6. When marking or un-marking an item, the item flag `-e` or `-t` has to be followed after the `done` or `undo` command. 
 7. To mark or un-mark a task, an event has to be selected previously using the `select` command. 
-8. The item flag is then followed by integers representing the indexes of the items to be marked or unmarked, separated by non-numeric characters. 
+8. The item flag is then followed by integers representing the indexes of the items to be marked or unmarked, separated by spaces. 
 
 #### List Functionality
 
