@@ -34,12 +34,6 @@ public final class CommandFormat {
     public static final String DONE_TASK_FORMAT =
             "done task [INDEX]";
 
-    public static final String EDIT_TASK_FORMAT =
-            "edit task [INDEX] -d {DAY_OF_THE_WEEK} -p {PRIORITY} -i {INFORMATION}";
-
-    public static final String EDIT_LESSON_FORMAT =
-            "edit lesson [INDEX] -d {DAY_OF_THE_WEEK} -s {START_TIME} -e {END_TIME} -l {MEETING_URL}";
-
     public static final String EDIT_MODULE_FORMAT =
             "edit module [MODULE_CODE] -g {GRADE}";
 
