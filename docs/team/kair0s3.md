@@ -37,24 +37,22 @@ Features/Functionalities
 - Refactored and improved Coding Standards
     - `Storage` - Remove the magic literals [#280](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/280) and removed dead code [#251](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/251/files)
     - `Decodex` - Grouped a code fragment together and made the while loop less complex/more readable [#280](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/280)
+    - Others - [#325](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/325), [#366](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/366)
 - Assertion for `Parser` - [#99](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/99/files)
 - Logging for `Decodex.class` - [#96](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/96)
-- Wrote JUnit Test for Base64 Modules and Parser - [#35](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/35), [#72](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/72/), [#91](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/91)
+- Wrote JUnit Test for Base64 Modules, Parser and Storage - [#35](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/35), [#72](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/72/), [#91](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/91), [#319](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/319), [#325](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/325)
 - Attempted to standardize coding styles/documentation - [#47](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/47), [#147](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/147)
-    - I learnt that this is probably one of the hardest thing to do since everyone has their own style of codes and the way they describe/explain things.
+    - I learnt that this is probably one of the hardest thing to do since everyone has their own style.
 - JavaDocs for `Decodex` and `Storage` - Some notable ones ([#280](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/280))
 - Bug Fixes - [#274](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/274), [#286](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/286)
 
-## Documentation
+## Documentation (Most classified under *Others* due to page limit)
 - [User Guide](https://ay2122s1-cs2113t-t10-3.github.io/tp/UserGuide.html)
-    - Added introduction - [#103](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/103)
-    - Added table of contents - [#220](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/220/files)
-    - Added basic commands, storage documentation - [#246](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/246)
-    - Added command summary documentation [#246](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/246)
+    - Added documentation for Storage, Basic Commands - [#246](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/246), [#308](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/308)
+    - Others - [#103](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/103), [#220](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/220/files), [#317](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/317)
 - [Developer Guide](https://ay2122s1-cs2113t-t10-3.github.io/tp/DeveloperGuide.html)
-    - Added Introduction, Purpose, Terminologies, Symbols - [#231](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/231)
-    - Added "Before writing code" portion - [#180](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/180)
-    - Added User Profiles, Value Proposition, User Stories - [#231](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/231)
+    - Added/Updated diagrams and description for Data Component, ShowCommand, HelpCommand and Storage Testing - [#321](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/321), [#323](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/323), [#360](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/360)
+    - Others - [#180](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/180), [#231](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/231), [#323](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/323)
 
 ## Community
 - Non-trivial PR reviews - [#39](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/39), [#52](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/52), [#148](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/148) , [#156](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/156), [#166](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/166), [#183](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/183), [#190](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/190), [#192](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/192), [#194](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/194), [#196](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/196), [#275](https://github.com/AY2122S1-CS2113T-T10-3/tp/pull/275)
