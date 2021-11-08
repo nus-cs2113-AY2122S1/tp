@@ -503,7 +503,7 @@ Expected outcome:
 
 #### 3.4.4 Tagging a notebook
 
-Allows you to tag a notebook.
+Allows you to tag a notebook. By default, the tag of a notebook is `none`.
 
 Format: `journal tag n/ NOTE_INDEX t/ TAG_NAME`
 
