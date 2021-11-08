@@ -253,11 +253,126 @@ Format: `budget delete`
 
 <hr />
 
+
+### Invest - `invest`
+**Accouminate** provides users the ability to track basic investments, namely stocks and savings.
+
+Subcommands for each investment type [TYPE] are used:
+- Stock: `stocks`
+- Savings: `savings`
+
+
+#### Adding an investment - `add`
+
+Adds an investment to the portfolio.
+
+##### Adding a stock - `stocks`
+
+Adds a stock to the investment portfolio. If a stock with the same name already exists in the portfolio, then the number of shares and the average price will be updated.
+
+Format: `invest add stocks [NAME] -n [NUM] -p [PRICE]`
+
+Argument:
+- `NAME`
+  - The name of the income source is case-sensitive, and shall contain any characters except for “-”.
+  - Names are unique.
+- `NUM`
+  - The number of stocks shall be a positive integer.
+  - If a non-numeric string is provided, an error message is shown.
+- `PRICE`
+  - The price shall be any positive number (integer or float values).
+  - Float values with more than two decimal places specified are truncated to two decimal places.
+  - If a non-numeric string, negative number, or zero is provided, an error message is shown.
+
+Example of usage:
+- `invest add stocks OCBC -n 100 -p 11.50`
+
+<br />
+
+##### Adding a savings account -  `savings`
+
+Adds a savings account to the investment portfolio. If a savings account with the same name already exists in the portfolio, then the account balance will be updated.
+
+Format: `invest add savings [NAME] -v [VALUE]`
+
+Argument:
+- `NAME`
+  - The name of the income source is case-sensitive, and shall contain any characters except for “-”.
+  - Names are unique.
+- `VALUE`
+  - The value shall be any positive number (integer or float values).
+  - Float values with more than two decimal places specified are truncated to two decimal places.
+  - If a non-numeric string, negative number, or zero is provided, an error message is shown.
+
+Example of usage:
+- `invest add savings Main -v 15000`
+
+<hr />
+
+#### Deleting an investment - `delete`
+
+Deletes an investment from the portfolio.
+
+##### Deleting a stock - `stocks`
+
+Deletes a stock from the investment portfolio by its unique identifier (from `list`).
+
+Format: `invest delete stocks -i [ID]`
+
+Argument:
+- `ID`
+  - The id number shall be a positive integer.
+  - If not a positive integer is provided, then an error message is shown.
+
+
+Example of usage:
+- `invest delete stocks -i 1`
+
+<br />
+
+##### Deleting a savings account -  `savings`
+
+Deletes a savings account from the investment portfolio by its unique identifier (from `list`).
+
+Format: `invest delete savings -i [ID]`
+
+Argument:
+- `ID`
+  - The id number shall be a positive integer.
+  - If not a positive integer is provided, then an error message is shown.
+
+Example of usage:
+- `invest delete savings -i 1`
+
+<hr />
+
+#### Listing investments - `list`
+
+Lists a type of all investments in the portfolio.
+
+##### Listing all stocks - `stocks`
+
+Lists all the stocks in the investment portfolio.
+
+Format: `invest list stocks`
+
+
+<br />
+
+##### Listing all savings accounts -  `savings`
+
+Lists all the savings accounts in the investment portfolio.
+
+Format: `invest list savings`
+
+<hr />
+
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: A folder called data containing your records will be in the same directory as your jar file. Simply transfer it to the other computer, where the new jar file is located.
 
 ## Command Summary
 
@@ -275,5 +390,11 @@ Format: `budget delete`
 | Add budget | `budget add -v [VALUE]` |
 | List budget | `budget list` |
 | Delete budget | `budget delete` |
+| Add savings | `invest add savings [NAME] -v [VALUE]` |
+| Add stocks | `invest add stocks [NAME] -n [NUM] -p [PRICE]` |
+| Delete savings | `invest delete stocks [NAME] -i [ID]` |
+| Delete stocks | `invest delete stocks -i [ID]` |
+| List savings | `invest list savings` |
+| List stocks | `invest list stocks` |
 | View all available commands | `help` |
 | Exit the application | `exit` |
