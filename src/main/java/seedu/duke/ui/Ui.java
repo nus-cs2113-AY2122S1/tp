@@ -120,7 +120,7 @@ public class Ui {
         System.out.println(PADDING + CommandFormat.FIND_LESSON_FORMAT);
         System.out.println(PADDING + CommandFormat.FIND_MODULE_FORMAT);
 
-        System.out.println(PADDING + CommandFormat.SET_GRADE_FORMAT);
+        System.out.println(PADDING + CommandFormat.EDIT_MODULE_FORMAT);
 
         System.out.println(PADDING + CommandFormat.LAUNCH_LESSON_FORMAT);
 
