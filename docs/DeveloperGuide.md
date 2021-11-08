@@ -335,6 +335,16 @@ pre-formatted `String` containing a neat list of the final filtered tasks that m
 **Step 6**: A `CommandResult` object is then created and stores the `String` containing the filtered tasklist
 as the command execution message to be handled by the `Ui` and displayed to the user on the terminal interface.
 
+#### 4.2.1 Time proximity based filtering
+
+All tasks are first gotten and converted into a stream for layer mutilation. Then, the time is first found for each task using the unified interface `Task::getHappenTime`, to filter out tasks that does not have an associated time. Subsequently, the next occurrence is obtained with,
+- `Lesson::getNextOccurrence` if the task is a lesson, since lessons have irregular recurrences, or,
+- `RecurrenceEnum::getNextRecurredDate` otherwise.
+
+If the time of the next occurrence falls within the threshold time length from now, the task is preserved.
+
+Finally, the stream is sorted by the occurrence time and collected into a string for return.
+
 ### 4.3 [Proposed] Refactor `TaskManager`
 The team has thought of refactoring `TaskManager` because as of currently, it does not seem to be following the 'Single Responsibility Principle'. Because `TaskManager` both manages the `taskList` and `latestFilteredList`, it seems that it is having 2 responsibilities. The team believes that this issue can be fixed using either the 'Facade', 'Decorator' or 'Proxy' design pattern. However, due to lack of time, we have bundled the two Task lists into one class.
 
