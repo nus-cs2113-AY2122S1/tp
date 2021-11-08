@@ -18,21 +18,19 @@ Designed for fast typists, it can help to augment the day-to-day tasks of a libr
 2. Added the `TextUI` class, which handles recording inputs from the user and displaying messages from the application. ([#15](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/15))
 
 3. Extended on [silin's](https://github.com/silinche) `AddCommand` and all child classes (`AddAudioCommand`, `AddBookCommand`, `AddMagazineCommand`, `AddMiscellaneousCommand`, `AddVideoCommand`) ([#87](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/87)).
-<br> _What it does:_  It allows users to creating new items of different categories (audio, book, magazine, video, miscellaneous) and insert them into the catalogue.
+It allows users to creating new items of different categories (audio, book, magazine, video, miscellaneous) and insert them into the catalogue.
 
-4. Implemented `RemoveCommand` class ([#31](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/31)).
-<br> _What it does_: Provides method to remove a specific item from the catalogue.
+4. Implemented `RemoveCommand` class ([#31](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/31)). 
+Provides method to remove a specific item from the catalogue.
 
 5. Added `UnreserveCommand` ([#92](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/92)).
-<br> _What it does_: Provides functionality to make available an item that has been previously reserved by some user.
-<br> _Justification_: In the case where a previous reservation has been invalidated or cancelled, it allows the referenced item to be loaned out by other users.
+Provides functionality to make available an item that has been previously reserved by some user, in the case where a previous reservation has been invalidated or cancelled, it allows the referenced item to be loaned out by other users.
 
 6. Implemented `Parser` class to handle user commands ([#174](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/174)).
-<br> _What it does_: Identifies the specific command issued by the user and Separates the attributes or flags and the related values supplied by the user. It also handles invalid entries such as empty or duplicate attributes.
-<br> _Justification_: Serves as an abstraction so that developers working on individual commands do not have to write custom code to parse for input and to handle errors.
+Identifies the specific command issued by the user and Separates the attributes or flags and the related values supplied by the user. It also handles invalid entries such as empty or duplicate attributes.
 
 7. Implemented `Storage` and `JsonFactory` classes ([#176](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/176)).
-<br> _What it does_: The `storage` class acts as an interface that `libmgr` uses to perform reading and writing operations to and from `data.json`. Within this process, the `JsonFactory` is used to serialize and deserialize the contents of the catalogue.
+The `storage` class acts as an interface that `libmgr` uses to perform reading and writing operations to and from `data.json`. Within this process, the `JsonFactory` is used to serialize and deserialize the contents of the catalogue.
 
 ### Contributions to the User Guide
 
