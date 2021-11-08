@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 import static seedu.budgettracker.common.Messages.MESSAGE_AMOUNT_EXCEEDED;
 
+//@@author yeoweihngwhyelab
 public class EditExpenditureCommand extends EditCommand {
     public int month;
     public int index;
@@ -21,6 +22,7 @@ public class EditExpenditureCommand extends EditCommand {
             + " * If DATE_OF_EXPENDITURE is not specified, current system date will be the default value.\n"
             + " * If CATEGORY is not specified, GENERAL will be the default category.\n";
 
+    //@@author yeoweihngwhyelab
     public EditExpenditureCommand(int month, int index, double amount, LocalDate date, String description) {
         this.month = month;
         this.index = index;
@@ -29,6 +31,7 @@ public class EditExpenditureCommand extends EditCommand {
         this.description = description;
     }
 
+    //@@author yeoweihngwhyelab
     public void execute() throws CommandException {
         if (amount > 1000000000) {
             throw new CommandException(MESSAGE_AMOUNT_EXCEEDED);

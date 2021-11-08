@@ -105,6 +105,7 @@ public class RecordList {
         return loanRecords.get(index);
     }
 
+    //@@author yeoweihngwhyelab
     /**
      * Returns the total amount spent on expenditures in this month.
      *

@@ -88,11 +88,11 @@ Given below are my contributions to the team's documentation:
   * A basic architectural diagram is shown to simplify the way the Storage is designed to 
     work with the app. 
 
-![Storage-Class Diragram](images/Storage-Class_Diagram.png)
+![Storage-Class Diragram](../images/Storage-Class_Diagram.png)
 
-![Storage Basic Architecture](images/StorageBasicaArchitecture.png)
+![Storage Basic Architecture](../images/StorageBasicaArchitecture.png)
 
-![Storage Sequence Diagram](images/Storage.png)
+![Storage Sequence Diagram](../images/Storage.png)
 
 * **Implementation Breakdown**:
   * Goes into deeper details about some key methods that help to implement the storage.
@@ -103,11 +103,11 @@ Given below are my contributions to the team's documentation:
   * readTextFileToString() converts the command stored the ".txt" file storage into 
     ArrayList<String>.
 
-![reloadArrayToStorage](images/reloadArrayToStorage.png)
+![reloadArrayToStorage](../images/reloadArrayToStorage.png)
 
-![convertToCsvFile](images/convertToCsvFile.png)
+![convertToCsvFile](../images/convertToCsvFile.png)
 
-![readTextFileToString](images/readTextFileToString.png)
+![readTextFileToString](../images/readTextFileToString.png)
 
 ## User Guide Contribution
 
