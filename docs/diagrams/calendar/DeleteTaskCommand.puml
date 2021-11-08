@@ -14,7 +14,7 @@ return
 deactivate ":DeleteTaskCommand"
 ":Parser" --> ":Click"
 deactivate ":Parser"
-":Click" --> ":DeleteTaskCommand" : execute()
+":Click" -> ":DeleteTaskCommand" : execute()
 activate ":DeleteTaskCommand"
 participant ":TaskList"
 ":DeleteTaskCommand" -> ":TaskList" : deleteTask()
