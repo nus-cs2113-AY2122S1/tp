@@ -19,8 +19,8 @@ class ModuleListTest {
     public void isEmpty_nonEmptyList_false() {
         try {
             ModuleList moduleList = new ModuleList();
-            moduleList.addModule(new Module("CS2105", "Introduction to Computer Networks", "4 MC"));
-            moduleList.addModule(new Module("CS2106", "Introduction to Operating Systems", "4 MC"));
+            moduleList.addModule(new Module("CS2105", "Introduction to Computer Networks", "4 MC"), "NONE");
+            moduleList.addModule(new Module("CS2106", "Introduction to Operating Systems", "4 MC"), "NONE");
             assertEquals(2, moduleList.getSize());
             moduleList.deleteModule("CS2105");
             assertEquals(1, moduleList.getSize());
@@ -35,7 +35,7 @@ class ModuleListTest {
     public void deleteModule_emptyList_exceptionThrown() {
         assertThrows(DukeException.class, () -> {
             ModuleList moduleList = new ModuleList();
-            moduleList.addModule(new Module("CS3244", "Machine Learning", "4 MC"));
+            moduleList.addModule(new Module("CS3244", "Machine Learning", "4 MC"), "NONE");
             moduleList.deleteModule("CS1010");
         });
     }
@@ -47,8 +47,8 @@ class ModuleListTest {
             ModuleList moduleList = new ModuleList();
             Module module1 = new Module("CS2105", "Introduction to Computer Networks", "4");
             Module module2 = new Module("CS2106", "Introduction to Operating Systems", "4");
-            moduleList.addModule(module1);
-            moduleList.addModule(module2);
+            moduleList.addModule(module1, "NONE");
+            moduleList.addModule(module2, "NONE");
             module1.setGrade("A");
             module2.setGrade("B");
             assertEquals(4.25, moduleList.calculateCap());
@@ -63,8 +63,8 @@ class ModuleListTest {
             ModuleList moduleList = new ModuleList();
             Module module1 = new Module("CS2105", "Introduction to Computer Networks", "4");
             Module module2 = new Module("CS2106", "Introduction to Operating Systems", "4");
-            moduleList.addModule(module1);
-            moduleList.addModule(module2);
+            moduleList.addModule(module1, "NONE");
+            moduleList.addModule(module2, "NONE");
             module1.setGrade("S");
             module2.setGrade("NONE");
             assertEquals(-1, moduleList.calculateCap());
@@ -86,8 +86,8 @@ class ModuleListTest {
             ModuleList moduleList = new ModuleList();
             Module module1 = new Module("CS2105", "Introduction to Computer Networks", "4");
             Module module2 = new Module("CS2106", "Introduction to Operating Systems", "4");
-            moduleList.addModule(module1);
-            moduleList.addModule(module2);
+            moduleList.addModule(module1, "NONE");
+            moduleList.addModule(module2, "NONE");
             assertEquals(8, moduleList.getTotalMC());
         } catch (DukeException e) {
             fail();
