@@ -8,40 +8,39 @@
 !define ENTITY_COLOR_6 #7032FF
 
 !define ACTIVATION_COLOR_0 #C8EF53
-!define ACTIVATION_COLOR_1A #C7F248
-!define ACTIVATION_COLOR_1B #D1EF77
+!define ACTIVATION_COLOR_1 #C7F248
 !define ACTIVATION_COLOR_2 #66FF66
 !define ACTIVATION_COLOR_3 #99FFF3
 !define ACTIVATION_COLOR_4 #4CC3FF
 !define ACTIVATION_COLOR_5 #4C88FF
 !define ACTIVATION_COLOR_6 #874CFF
 
-participant ":MedBot" as medbot ENTITY_COLOR_0
+participant ":Command" as command ENTITY_COLOR_0
 participant ":Ui" as ui ENTITY_COLOR_1
 participant ":PatientUi" as patientUi ENTITY_COLOR_2
 participant ":StaffUi" as staffUi ENTITY_COLOR_3
 participant ":SchedulerUi" as schedulerUi ENTITY_COLOR_4
 
-medbot --> ui : getDeleteHelpMessage()
-activate ui
+command --> ui : getDeleteHelpMessage()
+activate ui ACTIVATION_COLOR_1
 
 alt Patient Info
-    ui -> patientUi: getDeletePatientHelpMessage()
-    activate patientUi
+    ui -> patientUi : getDeletePatientHelpMessage()
+    activate patientUi ACTIVATION_COLOR_2
     patientUi --> ui
     deactivate patientUi
 else Staff Info
     ui -> staffUi: getDeleteStaffHelpMessage()
-    activate staffUi
+    activate staffUi ACTIVATION_COLOR_3
     staffUi --> ui
     deactivate staffUi
 else Scheduler Info
     ui -> schedulerUi: getDeleteSchedulerHelpMessage()
-    activate schedulerUi
+    activate schedulerUi ACTIVATION_COLOR_4
     schedulerUi --> ui
     deactivate schedulerUi
 end
 
-ui --> medbot
+ui --> command
 deactivate ui
 @enduml
