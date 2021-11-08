@@ -357,12 +357,12 @@ Instead, detailed full module information will only be retrieved from the `Modul
 
 **Target Users:** 
 
-NUS undergraduate students who prefer typing over using a mouse and proficient with using CLI.
+NUS undergraduate students who prefer using a CLI application over GUI to manage their undergraduate activities and education.
 
 **Needs of users:**
 
-* Quickly manage and record tasks and lessons
-* Manage modules for the semester and get module information quickly
+* Quickly manage and record tasks, lessons and modules
+* Get module information of modules on demand
 
 ### User stories
 
