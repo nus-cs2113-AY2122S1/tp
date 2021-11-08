@@ -15,7 +15,7 @@ Designed for fast typists, it can help to augment the day-to-day tasks of a libr
 
 1. Added subclasses that extend the main `Item` class by [silin](https://github.com/silinche), which include the `Audio`, `Book`, `Magazine`, `Video` and `Miscellaneous` classes. ([#62](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/62))
 
-2. Added the `TextUI` class, which handles recording inputs from the user and displaying messages from the application. ([#15](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/15))
+2. Added the `TextUI` class, handling inputs from the user and displaying messages from the application. ([#15](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/15))
 
 3. Extended on [silin's](https://github.com/silinche) `AddCommand` and all child classes (`AddAudioCommand`, `AddBookCommand`, `AddMagazineCommand`, `AddMiscellaneousCommand`, `AddVideoCommand`) ([#87](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/87)).
 It allows users to creating new items of different categories (audio, book, magazine, video, miscellaneous) and insert them into the catalogue.
@@ -44,7 +44,7 @@ The `storage` class acts as an interface that `libmgr` uses to perform reading a
 1. Created base format of the Markdown document including different sections and table of contents. ([#191](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/191/files)).
 2. Designed high-level architecture diagram for the program ([#191](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/191/files)).
 3. Added the following diagrams ([#191](https://github.com/AY2122S1-CS2113-T16-1/tp/pull/191/files)).
-   - Application launch and overall component interaction sequence diagrams.
+   - Application launch and overall component interaction sequence diagrams and accompanying descriptions.
    - Data, storage and UI components
    - Sequence and object diagram for usage of add command `add b t/1984 i/91 a/George Orwell`
    - Sequence diagram for operations involved when `data.json` is read from or written to.
