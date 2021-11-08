@@ -33,7 +33,6 @@ public class Task {
         setDate(date);
         setDone(false);
         setLate(false);
-        parseDeadline(date);
     }
 
     /**
@@ -77,14 +76,17 @@ public class Task {
 
     public void setDate(String date) {
         this.date = date;
+        setDeadline(DateParser.parseDate(date));
     }
 
     public void parseDeadline(String date) throws DateTimeException {
         try {
             logger.log(Level.INFO, "Successfully set Task deadline...");
-            setDeadline(DateParser.parseDate(date));
+            setDate(date);
+            updateOverdue();
+            Ui.printUpdateTaskDeadline(this);
         } catch (DateTimeException e) {
-            Ui.missingDate();
+            Ui.wrongDateTimeFormat();
         }
     }
 
@@ -120,9 +122,7 @@ public class Task {
     public void updateOverdue() throws NullPointerException {
         try {
             LocalDateTime currentDateTime = LocalDateTime.now();
-            if (!(this.isDone) && currentDateTime.isAfter(this.deadline)) {
-                this.isLate = true;
-            }
+            this.isLate = !(this.isDone) && currentDateTime.isAfter(this.deadline);
         } catch (NullPointerException e) {
             Ui.printInvalidIndex();
         }
