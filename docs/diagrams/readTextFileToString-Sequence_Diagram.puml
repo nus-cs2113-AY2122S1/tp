@@ -2,64 +2,75 @@
 'https://plantuml.com/sequence-diagram
 hide footbox
 
--> readTextFile: readTextFileToString()
+-> ":readTextFile": readTextFileToString()
 
-activate readTextFile
+activate ":readTextFile"
 
-create ArrayList
-readTextFile -> ArrayList: new ArrayList()
+create ":ArrayList"
+":readTextFile" -> ":ArrayList": new ArrayList()
 
-activate ArrayList
-readTextFile <-- ArrayList: listOfRawCommand: ArrayList<String>
+activate ":ArrayList"
+":readTextFile" <-- ":ArrayList": listOfRawCommand: ArrayList<String>
 
-deactivate ArrayList
+deactivate ":ArrayList"
 
-create File
+create ":File"
 
-readTextFile -> File: new File()
+":readTextFile" -> ":File": new File()
 
-activate File
+activate ":File"
 
-File -> File: isFile()
+":File" -> ":File": isFile()
 
-activate File
+activate ":File"
+":File" --> ":File"
 
-deactivate File
+deactivate ":File"
+alt not a file
+":readTextFile"<-- ":File"
+<-- ":readTextFile"
+
+end
+
+deactivate ":File"
+
+":readTextFile" <-- ":File"
+
+create ":BufferReader"
+
+":readTextFile" -> ":BufferReader": new BufferReader()
+activate ":BufferReader"
 
 
-deactivate File
-
-readTextFile <-- File
-
-create BufferReader
-
-readTextFile -> BufferReader: new BufferReader()
-activate BufferReader
 
 
-BufferReader -> BufferReader: readLine()
-
-activate BufferReader
+activate ":BufferReader"
 
 loop while There are still lines in buffer not read yet
-"BufferReader" -> ":readline()"
 
-BufferReader <-- ":readline()" : line
+":BufferReader" -> ":BufferReader": readLine()
+activate ":BufferReader"
+":BufferReader" --> ":BufferReader": line
+deactivate ":BufferReader"
 
-alt if not null
-    BufferReader <-- ":add()" : line
+":BufferReader" -> ":ArrayList": add(line)
+activate ":ArrayList"
+
+
+":BufferReader" <-- ":ArrayList"
+deactivate ":ArrayList"
+
+
+":readTextFile" <-- ":BufferReader": listOfRawCommand: ArrayList<String>
+
 end
 
-readTextFile <-- BufferReader: listOfRawCommand: ArrayList<String>
+deactivate ":BufferReader"
 
-end
-
-deactivate BufferReader
-
-deactivate BufferReader
+deactivate ":BufferReader"
 
 return listOfRawCommand: ArrayList<String>
 
-deactivate readTextFile
+deactivate ":readTextFile"
 
 @enduml
