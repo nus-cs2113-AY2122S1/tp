@@ -30,6 +30,10 @@ efficient allocation of said ingredients to the cooking of dishes, ultimately sa
       understanding of the data more intuitively. This also mitigates one of the disadvatages of cli with a basic form
       of graphical output.
 
+* **Feature**: Implement `InputParser`
+    * **What it does**: Separates the components of the user input so that the command can access the correct parameters
+    * **Justification**: This allows the users commands to be properly interpreted so that the outputs are not skewed
+
 * **Feature**: Implement storage of data 
     * **What it does**: Stores data during runtime to a text file and reads text file to retrieve data when application is rerun
     * **Justification**: This allows the user to carry forward data across sessions and makes it easier for the user to pick up where they left off. They are 
