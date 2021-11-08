@@ -1,5 +1,6 @@
 # Developer Guide
 
+
 ## Table of Contents
 
 - [Getting Started](#getting-started)
@@ -32,6 +33,7 @@
 <br>
 
 ##Getting Started
+
 <hr>
 
 ### Recommended software (for optimal compatibility)
@@ -66,7 +68,7 @@
 
 <br>
 
-## Design & implementation
+## Design & Implementation
 
 <hr>
 
@@ -434,17 +436,10 @@ every ```Client```, the ```getName()``` function is called to retrieve the name 
 attribute is then converted to lower case for comparison with the substring. If the name attribute is contains the
 substring```bo```, the ```Client``` object is printed onto the console terminal.
 
-**Step 2**: The ```FindClientCommand``` is executed and iterates through each ```Client``` object in the ```ClientList```.
-For every ```Client```, the ```getName()``` function is called to retrieve the name attribute of the Client.
-The name attribute is then converted to lower case for comparison with the substring.
-If the name attribute contains the substring```bo```, the ```Client``` object
-is printed onto the console terminal.
-
-**Step 3**: In addition, the ```FindClientCommand``` iterates through each ```ClientPackage``` object in the ```ClientPackageList```.
-For every ```ClientPackage```, the ```getClient()``` function is called to retrieve the client attribute of the ClientPackage.
-If the client attribute is equals to the same ```Client``` object that was found in Step 2, the respective client package will
-be printed onto the console terminal.
-
+**Step 3**: In addition, the ```FindClientCommand``` iterates through each ```ClientPackage``` object in
+the ```ClientPackageList```. For every ```ClientPackage```, the ```getClient()``` function is called to retrieve the
+client attribute of the ClientPackage. If the client attribute is equals to the same ```Client``` object that was found
+in Step 2, the respective client package will be printed onto the console terminal.
 
 The following activity diagram summarizes the following steps.
 
@@ -612,6 +607,7 @@ To add on Storage component is designed to access only the following folder:
 1. `data/`
 
 <br>
+
 
 ## Product scope
 
