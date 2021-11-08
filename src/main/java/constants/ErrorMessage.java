@@ -48,4 +48,8 @@ public final class ErrorMessage {
             + "the budget value and try again!";
 
     public static final String invalidIndexMsg = "Invalid index";
+
+    public static final String negativeValueMsg = "Your value cannot be a negative amount. Check that you have entered the correct value and try again!";
+
+    public static final String invalidShareMsg = "Your number of shares cannot be 0 or negative. Check that you have entered the correct value and try again!";
 }
