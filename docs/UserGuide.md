@@ -625,13 +625,15 @@ Expected outcome:
 
 Example of adding with a date
 
-```
-food add n/something i ate 2 weeks ago but forgot to record c/300 d/13-10-2021
+Format: `food add n/FOOD_NAME d/KCALORIE d/ DATE`
 
+Example: `food add n/something i ate 2 weeks ago but forgot to record c/300 d/13-10-2021`
+
+Expected outcome:
+```
 	__________________________________________________
 	Nice.  I've added something i ate 2 weeks ago but forgot to record to the list, with 300 calories!
 	__________________________________________________
-
 ```
 
 #### 3.5.2a Listing food records: `food list`
@@ -644,13 +646,10 @@ Additionally, the calories consumed are nicely added up for you.
 
 > **NOTE** :
 > The date displayed may *not be the same as the expected outcome*. It'll show you today's date instead as you didn't add the `d/` parameter previously!
-> 
-
+>
 Expected outcome:
 
 ```
-food list
-
 	__________________________________________________
 	1st,You consumed  Samurai Burger , which has a calorie count of : 433 on Sunday, 7 November 2021!
 	2nd,You consumed  Seaweed Shaker Fries Seasoning , which has a calorie count of : 15 on Sunday, 7 November 2021!
@@ -661,8 +660,6 @@ food list
 	Wow, that's a lot of food! Finished reading the list
 	You consumed 1925 calories in total!
 	__________________________________________________
-
-
 ```
 
 #### 3.5.2b Finding food records with a date:  `food find`
@@ -673,13 +670,13 @@ Want to go even further and see what you ate on a specific date?
 Simply give Click the date to search for, and the list of food items
 you've recorded would be shown to you!
 
+Example: `food find 13-10-2021`
+
 Expected outcome : 
 
 Shows you a list of items you've consumed on that particular day.
 
 ```
-food find 13-10-2021
-
         Nice, I found the items you ate on Wednesday, 13 October 2021
         __________________________________________________
         1st,You consumed  something i ate 2 weeks ago but forgot to record , which has a calorie count of : 300 on 2021-10-13!
@@ -699,11 +696,9 @@ Not to worry, simply delete that item by giving Click the index
 of the item to delete!
 
 Example: `food delete 5`
+
 Expected outcome:
-
 ```
-food delete 5
-
         __________________________________________________
         Deleted food record  A Thousand Tide Pods at index: 5
         __________________________________________________
@@ -719,8 +714,6 @@ Format : `food clear`
 Expected outcome:
 
 ```
-food clear
-
 	__________________________________________________
 	Cleared food record list for today!
 	__________________________________________________
@@ -748,7 +741,8 @@ Expected outcome:
 
 Shows you the menu of a particular stall when you give Click the store index, 
 find the stall index using `food view`, then view the menu of the stall with
-`food view [STALL_INDEX`. Do take note of the index of the food item you want
+`food view [STALL_INDEX]`. \
+Do take note of the index of the food item you want
 to add to your list.
 
 #### 3.5.7 Adding items from a particular stall to your list `food radd`
@@ -763,14 +757,14 @@ in the name of the item and the calorie count.
 For example, if you had just consumed a chicken burger set (Item index 5) sold by
 Hungry Burger (Store index 5), you should see the following:
 
-```
-food radd s/5 i/5
+Example: `food radd s/5 i/5`
 
+Expected outcome:
+```
 	__________________________________________________
-	Nice, adding the record - 	Chicken Burger Set  : 607 KCal
+	Nice, adding the record - Chicken Burger Set  : 607 KCal
 	__________________________________________________
-	Nice.  I've added Chicken Burger Set  to the list, with 607 calories!
-	__________________________________________________
+
 ```
 
 #### 3.5.8 Finding items with a calorie count <= a given amount `food clt`
@@ -782,10 +776,12 @@ Expected outcome:
 Allows you to view the food items from the reference food court that has an similar to, or lower calorie
  count than the amount you gave Click!
 
-Example : 
-```
-food clt 0
+Example : `food clt 0`
 
+Expected outcome:
+
+Lists all food items sold with a similar to, or lower calorie count than your input.
+```
 	I've found the following items with 0 calories!
 	__________________________________________________
 	1st,Coke No Sugar  : 0Kcal
@@ -869,7 +865,15 @@ and recording my calorie count on a journal. I'd like to  know some  benefits of
 >  Sure, while we acknowledge your  love of pen and paper we'd like to remind you the scalability of digital apps,
 >  preservation of data as well as  the efficiency of the CLI in typing rather than writing. 
 
+What if my data is corrupted in the text files?
+> Not to worry, the app would still be functional. 
+> However, new files would be created to replace the corrupted text files.
+> This would mean that your previous data is irrecoverable.
+> The developer team is working on undo and redo features for our future implenentation to better
+> serve your needs.
 ## 6. Bug Reports
 
 Found  a ***content error*** or just something which doesn't look right?
-[Get in touch with our team on GitHub](https://github.com/AY2122S1-CS2113T-T09-4/tp/blob/master/docs/AboutUs.md) and let us know.
+[Get in touch with our team on GitHub](https://github.com/AY2122S1-CS2113T-T09-4/tp/blob/master/docs/AboutUs.md) and let us know.\
+Please include your `ClickLogs` file in `storage/logs` folder located in your home directory, so we can better
+understand what went wrong.
