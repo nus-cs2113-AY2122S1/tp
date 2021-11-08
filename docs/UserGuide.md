@@ -76,7 +76,8 @@ lessons in your daily schedule and your total workload:
 
 > :information_source: **Notes about the command formats**
 > - Words in `<UPPER_CASE>` are the parameters to be given by the user. <br />
-    > e.g. in `show <MODULE_CODE>`, <MODULE_CODE> is a parameter and be called like so : `show CS2113T`.
+    > e.g. in `show <MODULE_CODE>`, <MODULE_CODE> is a parameter and be called like so: 
+    `show CS2113T`.
     <br /><br />
 > - Items in square brackets are optional <br />
     > e.g. find `search <KEYWORD> [-flag]`
@@ -309,7 +310,8 @@ If all lesson types have been successfully added, program will print out
 Module and any selected lesson(s) has been added to timetable
 ```
 `NOTE:` Modules that contains no lessons will likewise be added into list of modules taken this semester
-<br></br>
+
+<br>
 
 ### Add an Event to timetable
 
