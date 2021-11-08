@@ -34,7 +34,7 @@ application {
 
 shadowJar {
     archiveBaseName = "expiryeliminator"
-    archiveClassifier = "v2.0"
+    archiveClassifier = "v2.1"
 }
 
 checkstyle {
