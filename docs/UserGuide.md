@@ -1,5 +1,37 @@
 # Decodex User Guide <!-- omit in toc -->
 
+## Table of Contents <!-- omit in toc -->
+- [Introduction](#introduction)
+- [Terminologies](#terminologies)
+- [Symbols](#symbols)
+- [Quick Start](#quick-start)
+- [List of Available Modules](#list-of-available-modules)
+- [Features](#features)
+    - [Basic Commands](#basic-commands)
+        - [Help: `help`](#help-help)
+        - [Input of Data: `input`](#input-of-data-input)
+        - [List Available Modules or Recipes: `list`](#list-available-modules-or-recipes-list)
+        - [Select a Module or Recipe: `select`](#select-a-module-or-recipe-select)
+        - [Show Current Data: `show`](#show-current-data-show)
+        - [Reset Data: `reset`](#reset-data-reset)
+        - [Exit the Program: `exit`](#exit-the-program-exit)
+    - [Recipe Commands: `recipe`](#recipe-commands-recipe)
+        - [Create a New Recipe: `recipe new`](#create-a-new-recipe-recipe-new)
+        - [Select a Recipe for Editing: `recipe select`](#select-a-recipe-for-editing-recipe-select)
+        - [Deselect the Current Editing Recipe: `recipe deselect`](#deselect-the-current-editing-recipe-recipe-deselect)
+        - [List Modules in a Recipe: `recipe list`](#list-modules-in-a-recipe-recipe-list)
+        - [Add a Module to a Recipe: `recipe push`](#add-a-module-into-a-recipe-recipe-push)
+        - [Remove a Module from a Recipe: `recipe pop`](#remove-a-module-from-a-recipe-recipe-pop)
+        - [Clear All Modules in a Recipe: `recipe reset`](#clear-all-modules-in-a-recipe-recipe-reset)
+        - [Delete a Recipe: `recipe delete`](#delete-a-recipe-recipe-delete)
+    - [Storage of Recipe Files](#storage-of-recipe-files)
+        - [Load Recipe Files on Startup](#load-recipe-files-on-startup)
+        - [Save Recipe to File](#save-recipe-to-file)
+        - [Delete Recipe File](#delete-recipe-file)
+    - [Reading/Writing Data from/to File `coming soon in the future`](#readingwriting-data-fromto-file-coming-soon-in-the-future)
+- [Command Summary](#command-summary)
+- [FAQ](#faq)
+
 ## Introduction
 
 Decodex is a **Command Line Interface (CLI) application for Capture-The-Flag (CTF) players to perform [encoding](#terminologies), [decoding](#terminologies), [encryption](#terminologies) and [decryption](#terminologies) of data**, which come in the form of [modules](#terminologies) that can be **executed with ease** and **without any programming** needed. Decodex also provides [recipes](#terminologies) which can also be used to link several of these [modules](#terminologies) together so that they could be executed in one go to speed up repetitive tasks. The intuitive interaction can thus help to speed up a player’s performance during CTFs and save time without having to manually code the tedious [data transformations](#terminologies).
@@ -10,41 +42,9 @@ This guide serves to help you understand the usage of the program, which include
 
 ![carbon(6).png](images/carbon(6).png)
 
-## Table of Contents <!-- omit in toc -->
-- [Introduction](#introduction)
-- [Terminologies](#terminologies)
-- [Symbols](#symbols)
-- [Quick Start](#quick-start)
-- [List of Available Modules](#list-of-available-modules)
-- [Features](#features)
-  - [Basic Commands](#basic-commands)
-    - [Help: `help`](#help-help)
-    - [Input of Data: `input`](#input-of-data-input)
-    - [List Available Modules or Recipes: `list`](#list-available-modules-or-recipes-list)
-    - [Select a Module or Recipe: `select`](#select-a-module-or-recipe-select)
-    - [Show Current Data: `show`](#show-current-data-show)
-    - [Reset Data: `reset`](#reset-data-reset)
-    - [Exit the Program: `exit`](#exit-the-program-exit)
-  - [Recipe Commands: `recipe`](#recipe-commands-recipe)
-    - [Create a New Recipe: `recipe new`](#create-a-new-recipe-recipe-new)
-    - [Select a Recipe for Editing: `recipe select`](#select-a-recipe-for-editing-recipe-select)
-    - [Deselect the Current Editing Recipe: `recipe deselect`](#deselect-the-current-editing-recipe-recipe-deselect)
-    - [List Modules in a Recipe: `recipe list`](#list-modules-in-a-recipe-recipe-list)
-    - [Add a Module to a Recipe: `recipe push`](#add-a-module-into-a-recipe-recipe-push)
-    - [Remove a Module from a Recipe: `recipe pop`](#remove-a-module-from-a-recipe-recipe-pop)
-    - [Clear All Modules in a Recipe: `recipe reset`](#clear-all-modules-in-a-recipe-recipe-reset)
-    - [Delete a Recipe: `recipe delete`](#delete-a-recipe-recipe-delete)
-  - [Storage of Recipe Files](#storage-of-recipe-files)
-    - [Load Recipe Files on Startup](#load-recipe-files-on-startup)
-    - [Save Recipe to File](#save-recipe-to-file)
-    - [Delete Recipe File](#delete-recipe-file)
-  - [Reading/Writing Data from/to File `coming soon in the future`](#readingwriting-data-fromto-file-coming-soon-in-the-future)
-- [Command Summary](#command-summary)
-- [FAQ](#faq)
-
 ## Terminologies
 
-This section serves to help you better understand the terminologies used in this user guide.<a name="moduleDefinition"></a>
+This section serves to help you better understand the terminologies used in this user guide.
 
 | Terminology                 | Definition                                                                                                                                                                                |
 |-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -57,7 +57,7 @@ This section serves to help you better understand the terminologies used in this
 | Base64, Binary, Hexadecimal | Common types of data encoding standards.                                                                                                                                                  |
 | Console                     | This refers to your command prompt window.                                                                                                                                                |
 | Argument                    | Additional information that you provide to the program's command.                                                                                                                         |
-| Module                      | A self-contained set of instructions to process your data into another form.                                                                                                              |
+| Module                      | A self-contained set of instructions to process your data into another form. A full list of supported modules can be found [here](#list-of-available-modules).                            |
 | Recipe                      | Acts as a container for you to link several modules together that will be executed back-to-back on your data.<br>By default, the application does not have any default recipes installed. |
 
 ## Symbols
@@ -92,7 +92,7 @@ This section serves to help you better understand the terminologies used in this
 
 > :video_game: To make things more interesting while learning how to use Decodex, you may try to find out what `NTEgMzEgNTIgNDcgNjUgMzAgNGUgNTQgNGQgNmEgNDUgNzggNGQgMzEgNTIgMzk=` using our application! If you are new here, you can continue reading this guide to understand how to unravel this mysterious text!
 
-## List of Available [Modules](#moduleDefinition)
+## List of Available [Modules](#terminologies)
 Below, you can see the list of available modules and what they do. <a name="selectModuleExamples"></a>
 
 > :information_source: These are some of the more common encoding/decoding/cipher methods that can be found in CTF competitions.
@@ -166,7 +166,7 @@ Examples:
 
 ![carbon(8).png](images/ug/ListCommandExample.png)
 
-#### Select a [Module](#list-of-available-modules) or [Recipe](#terminologies): `select`
+#### Select a [Module](#terminologies) or [Recipe](#terminologies): `select`
 
 Selects a module or recipe and processes the data accordingly. Subsequent selection of modules or recipes will process the transformed data output from the previous module or recipe.
 
@@ -247,7 +247,7 @@ Example:
 
 ![recipeDeselect.png](images/recipeDeselect.png)
 
-#### List [Modules](#list-of-available-modules) in a [Recipe](#terminologies): `recipe list`
+#### List [Modules](#terminologies) in a [Recipe](#terminologies): `recipe list`
 
 Show all the modules in a recipe, in the order they were added.
 
@@ -261,7 +261,7 @@ Example:
 
 ![recipeList.png](images/recipeList.png)
 
-#### Add a [Module](#list-of-available-modules) into a [Recipe](#terminologies): `recipe push`
+#### Add a [Module](#terminologies) into a [Recipe](#terminologies): `recipe push`
 
 Adds a module into the recipe that is currently being edited.
 
@@ -274,7 +274,7 @@ Example:
 
 ![recipePush.png](images/recipePush.png)
 
-#### Remove a [Module](#list-of-available-modules) from a [Recipe](#terminologies): `recipe pop`
+#### Remove a [Module](#terminologies) from a [Recipe](#terminologies): `recipe pop`
 
 Removes the most recently added module from the recipe that is currently being edited.
 
@@ -282,7 +282,7 @@ Format: `recipe pop`
 
 ![recipePop.png](images/recipePop.png)
 
-#### Clear All [Modules](#list-of-available-modules) in a [Recipe](#terminologies): `recipe reset`
+#### Clear All [Modules](#terminologies) in a [Recipe](#terminologies): `recipe reset`
 
 Removes all modules from the recipe that is currently being edited.
 
@@ -333,8 +333,8 @@ Coming soon to a cinema near you in the future…
 | ------------------------------------------- | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | View the syntax and description of commands | `help`                                                                     | `help`                                                                                    |
 | Enter input data                            | `input <data>`                                                             | `input HelloWorld!`                                                                       |
-| List available modules/recipe               | `list {category}`                                                          | `list` `list module` <br>`list recipe`                                                    |
-| Select processing module/recipe             | `select module <moduleName>` <br>&ensp;OR<br> `select recipe <recipeName>` | `select module base64decode`<br> `select module rotencode 13` `select recipe testRecipe1` |
+| List available modules/recipe               | `list {category}`                                                          | `list` <br> `list modules` <br>`list recipes`                                                    |
+| Select processing module/recipe             | `select module <moduleName> {moduleArgument}` <br>&ensp;OR<br> `select recipe <recipeName>` | `select module base64decode`<br> `select module rotencode 13` `select recipe testRecipe1` |
 | View current data                           | `show`                                                                     | `show`                                                                                    |
 | Reset to original data                      | `reset`                                                                    | `reset`                                                                                   |
 | Create new recipe                           | `recipe new <recipeName>`                                                  | `recipe new testRecipe`                                                                   |
