@@ -80,13 +80,7 @@ Welcome to
 By default, the program attempts to save your data to a file named `trips.json` located in the same directory
 as the app each time after you run a command. This includes the `quit` command.
 
-If the save attempt is unsuccessful, you will see this error message:
-
-```
-Sorry, there was an error saving your data. We'll try to save your data again the next time you enter a command.
-```
-
-The program will then attempt to save again the next time you run a command.
+If the save attempt is unsuccessful, you will see an error message. The program will then attempt to save again the next time you run a command.
 
 <br />
 
@@ -113,13 +107,13 @@ Creates a new Trip in the program. This command will only work when there is no 
 
 Input syntax:
 ```
-create /[location] /[date] /[foreign-currency-ISO-code] /[exchange-rate] /[persons-in-trip]
+create /[location] /[date] /[foreign-currency] /[exchange-rate] /[persons-in-trip]
 ```
 
 All fields are compulsory. Note the following:
 - `[location]` is the location of the trip. Any string can be entered.
 - `[date]` must follow the format of dd-mm-yyyy.
-- `[foriegn-currency-ISO-code]`: Currently there are 30 currencies supported, the currencies' names and ISO codes are listed below.
+- `[foriegn-currency]`: is the 3-digit ISO code of the foreign currency (e.g USD, GBP). Currently there are 30 currencies supported, the currencies' names and ISO codes are listed below.
   - Some currencies will not have symbols as some terminals may not be able to support displaying of certain symbols.
   - Supported currencies will be rounded to either 2 decimal places or to the nearest whole number, 
   depending on the currency's smallest denomination.
@@ -694,15 +688,7 @@ Type "quit" to exit
 Output for if trip is open:
 ````
 You are inside a trip. Trip specific commands:
-	expense: creates an expense
-	view: list all expenses
-	view filter [options] [search keyword]: list filtered expenses.
-		filter options: [category, description, payer, person, date]
-	view [index]
-	summary: shows how much each person spent in total for this trip
-	amount [person]: for settling repayment at the end of the trip,shows how much this person owes to others, or how much others owe this person
-	open [trip num]: open another trip
-	quit: exit the program
+	<more help information will be displayed here>
 ````
 
 ## FAQ
@@ -718,13 +704,7 @@ If the app is running when the save file is pasted, you may accidentally overwri
 
 **Q**: There was an error loading my save file. What should I do?
 
-**A**: If the program detects the save file as corrupted, it will display the following message:
-
-```
-We couldn't read your save file. It may be corrupted, or may have been wrongly modified outside the program.
-```
-
-If you see this message when starting up the app, it is likely that your save file is corrupted. If you have modified the save file directly using another
+**A**: If you see an error message when starting up the app, it is likely that your save file is corrupted. If you have modified the save file directly using another
 application, you should try to undo those changes. Also ensure that your save file is in the same directory as 
 the jar file.
 
