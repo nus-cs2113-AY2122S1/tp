@@ -6,6 +6,7 @@ participant ":Parser" as Parser
 participant ":ListIngredientsExpiredCommand" as ListIngredientsExpiredCommand
 participant ":IngredientRepository" as IngredientRepository
 participant ":IngredientStorage" as IngredientStorage
+participant "expiredIngredientStorage:IngredientStorage" as expiredIngredientStorage
 
 autonumber
 
@@ -32,7 +33,7 @@ loop ingredientStorages
     IngredientRepository -> IngredientStorage: new(ingredient: Ingredient)
     activate IngredientStorage
 
-    IngredientStorage -> IngredientRepository: expiredIngredientStorage: IngredientStorage
+    IngredientStorage --> IngredientRepository: expiredIngredientStorage: IngredientStorage
     deactivate IngredientStorage
 
     loop ingredientStorageBatches
@@ -52,8 +53,10 @@ end
 
 IngredientRepository --> ListIngredientsExpiredCommand: list
 deactivate IngredientRepository
+destroy IngredientRepository
 
 return list
+destroy ListIngredientsExpiredCommand
 
 
 @enduml
