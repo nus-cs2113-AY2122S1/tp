@@ -250,7 +250,7 @@ In this instance, the hashmap contains the following entries:
 ![SearchFunction](img/SearchFunctionSequence.png)
 
 The Search class handles the functionality to search items based on multiple searching keywords.
-Such keywords include "id", "category", "status", and "title". This sequence diagram shows the interactions occuring
+Such keywords include "id", "category", "status", and "title". This sequence diagram shows the interactions occurring
 when the command "search c/book s/loaned" is executed.
 1. `Libmgr` calls `parse()` method in `parser` object, which returns a searchCommand object.
 2. `Libmgr` calls `execute()` method in `searchCommand` object, which calls a `handleSearch()` in itself.
@@ -336,7 +336,7 @@ The following sequence diagram shows the process of serialization and writing to
 
 > ℹ️ The default directory where `data.json` is located is `./data/data.json` <br> This can be modified within the `Storage` class.
 
-> ℹ️ Users and developes are allowed to manually edit the `data.json` file with tools such as text editors, but are strongly recommended to exercise caution regarding formatting and spelling, as a small error can result in corrupting the entire file's structure.
+> ℹ️ Users and developers are allowed to manually edit the `data.json` file with tools such as text editors, but are strongly recommended to exercise caution regarding formatting and spelling, as a small error can result in corrupting the entire file's structure.
 
 > ⚠️As the `data.json` file is updated after completing execution of each command, if a corrupted `data.json` file is loaded and the user/developer wishes to retain the file, terminate the programme immediately, **do not** execute any commands other than `exit`
 
@@ -370,7 +370,7 @@ inventory more efficiently.
 |v1.0|librarian|check the list of all items in the library|get an overview of the full inventory of the library|
 |v2.0|librarian|categorise different items into media forms. (E.g. book, magazine, audio, video)|better manage my catalogue|
 |v2.0|librarian|edit the details of existing items on the catalogue|keep the full catalogue up to date|
-|v2.0|librarian|reserve and unreserve an item by updating its status|set aside an item for a user beforehand|
+|v2.0|librarian|reserve and un-reserve an item by updating its status|set aside an item for a user beforehand|
 |v2.0|librarian|search for specific items by their title or ID|retrieve the details of items I need|
 |v2.0|librarian|check the list of items on reservation|make an item available for others to loan|
 |v2.0|librarian|loan an item for a person specified by their username|track who is in possession of a item currently|
