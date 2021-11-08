@@ -64,11 +64,12 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 6. Expenditure Categories
 
 ## Notes about the command format:
+* Words encased in `<>` brackets are optional parameters.
 * Command words (i.e. `add`, `edit`, etc.) must strictly be in **lower case**.
 * Words in UPPER_CASE are the parameters to be supplied by the user. <br />
 e.g. in `add -b a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can be used as `add -b a/500 m/12`.
 NOTE: **These parameters cannot be left empty.**
-* Words encased in `<>` brackets are optional parameters.
+
 
 <br />
 
@@ -86,7 +87,7 @@ ______________
 
 Sets a new budget for a specific month.
 
-Format: `add -b a/AMOUNT m/<MONTH>`
+Format: `add -b a/AMOUNT <m/MONTH>`
 
 * The `AMOUNT` can be entered with 2 decimal places or without decimal places.
   * Note: `Amount` will be rounded up to 2dp (for budget, expenditure, and loan).
@@ -112,7 +113,7 @@ ________________________
 
 Records the details of a new expenditure including the _description_, the _amount spent_, the _date on which expenditure was made_ and the _category which the expenditure falls under_ .
 
-Format: `add -e n/DESCRIPTION a/AMOUNT d/<DATE_OF_EXPENDITURE> c/<CATEGORY>`
+Format: `add -e n/DESCRIPTION a/AMOUNT <d/DATE_OF_EXPENDITURE> <c/CATEGORY>`
 
 * The `DESCRIPTION` can be in a natural language format.
   * NOTE: **If Description column exceeds 30characters limit, it will be truncated during list view**
@@ -151,12 +152,14 @@ _________________________________________________________
 
 Records down a loan record specifying when and who the money was lent out to.
 
-Format: `add -e n/<BORROWER_NAME> a/AMOUNT d/<DATE_OF_EXPENDITURE>`
+Format: `add -e n/BORROWER_NAME a/AMOUNT <d/DATE_OF_EXPENDITURE>`
 
-* `AMOUNT` entered can be up to 2 decimal places.
-* `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_. 
-  * If left empty, the current date according to the
-    system will be entered by default.
+* `AMOUNT` entered will be rounded to the nearest 2 decimal places and cannot exceed 1 billion dollars.
+* `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_.
+    * If left empty, the current date according to the
+  system will be entered by default.
+    * Note: **YYYY value should correspond to the current storage file year, please use `year`
+      command to switch to the correct year before entering an expenditure of another year**
 
 Example of usage:
 
@@ -167,9 +170,8 @@ Expected outcome:
 ```
 ========================================================
 Loan successfully added!
-Borrower Name: Yap Wei Xuan
-Amount: $500.00
-Date: 2021-08-20
+Yap Wei Xuan owes you: $500.00
+Date of loan: 2021-08-20
 ========================================================
 ```
 
@@ -215,26 +217,46 @@ _________________________________________________________
 
 ### `-e` : Edit an Expenditure 
 
-Edit the amount of budget allowance for a particular month.
+Edits the values of an expenditure, including its _description_, _amount_, _date of expenditure_ and _category_.
 
-Format: `edit -e m/MONTH i/INDEX a/AMOUNT d/<DATE_OF_EXPENDITURE> n/DESCRIPTION`
+Format: `edit -e m/MONTH i/INDEX <n/DESCRIPTION> <a/AMOUNT> <d/DATE_OF_EXPENDITURE> <c/CATEGORY>`
+* `<AMOUNT>`,`<DATE_OF_EXPENDITURE>`,`<DESCRIPTION>` and `<CATEGORY>` are optional. Any parameters entered will be edited, while those not entered will remain the same. At least **one** of these 
+    parameters must exist.
 
-* The `MONTH` must strictly be within the range of 1 to 12 and cannot be empty.
-* The `INDEX` must strictly be within the range of the total number of expenditure for that particular month.
-* The `AMOUNT` can be entered with 2 decimal places or without decimal places and cannot be empty.
-* The `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_. If left empty, the current 
-date according to the system will be entered by default.
 
-Example of usage:
+* `<DESCRIPTION>` can be in a natural language format.
+    * Note: **If `<DESCRIPTION>` exceeds 30 characters limit, it will be truncated during list view.**
+* `<AMOUNT>` entered will be rounded to the nearest 2 decimal places and cannot exceed 1 billion dollars.
+* `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_.
+    * Note: **YYYY value should correspond to the current storage file year, please use `year`
+      command to switch to the correct year before entering an expenditure of another year**
+* `<CATEGORY>` must be one of the following values:
+    * _GENERAL, CLOTHES, FOOD, ENTERTAINMENT, GIFTS, HEALTH, TECH_
 
-`edit -e m/10 i/2 a/1000 d/2021-10-12 n/Chicken Rice`
+Example expenditure:
 
-Expected outcome: A message will be shown to alert the user that the expenditure number 2 for 12 october 2021
-have been changed to $1000 with description of Chicken Rice.
+`DESCRIPTION` as _Fish n Chips_, `AMOUNT` as _$5.00_, `DATE_OF_EXPENDITURE` as _2021-10-13_ and `CATEGORY` as _Food_ with _$500_ budget.
+
+Example usage on example expenditure:
+
+`edit -e m/10 i/1 n/Chicken Rice a/4 d/2021-10-12`
+
+Expected outcome:
+
+The previously set `CATEGORY` is unchanged, while the rest of the values are set to the provided values accordingly.
 
 ```
 ========================================================
-
+edit -e m/10 i/1 n/Chicken Rice a/4 d/2021-10-12
+========================================================
+Expenditure has been successfully edited!
+New values: 
+Description: Chicken Rice
+Amount: $4.00
+Date: 2021-10-12
+Category: FOOD
+Total Amount Spent in October: $4.00
+Percentage of Budget Left: 99.20%
 ========================================================
 ```
 <br />
@@ -247,22 +269,35 @@ Edits the loan for a particular month.
 
 Format: `edit -l m/MONTH i/INDEX <a/AMOUNT> <d/DATE_OF_LOAN> <n/BORROWER_NAME>`
 
-* `MONTH` must strictly be within the range of 1 to 12 and cannot be empty.
-* `INDEX` must strictly be within the range of the total number of expenditure for that particular month, and cannot be empty.
-* `AMOUNT, DATE_OF_LOAN, BORROWER_NAME` are optional. If not specified, the values will not be changed for that specific parameter. However, at least one of these must be present.
-* `AMOUNT` if entered, can be entered with 2 decimal places.
-* `DATE_OF_EXPENDITURE` if entered, must strictly be in the form of _YYYY-MM-DD_.
+* `<AMOUNT>`,`<DATE_OF_LOAN>` and `<BORROWER_NAME>` are optional. Any parameters entered will be edited, while those not entered will remain the same. At least **one** of these
+  parameters must exist.
 
-Example of usage:
 
-`edit -l m/10 i/2 a/1000 d/2021-10-12 n/Wei Hng`
+* `<BORROWER_NAME>` can be in a natural language format.
+    * Note: **If `<BORROWER_NAME>` exceeds 30 characters limit, it will be truncated during list view.**
+* `<AMOUNT>` entered will be rounded to the nearest 2 decimal places and cannot exceed 1 billion dollars.
+* `<DATE_OF_LOAN>` must strictly be in the form of _YYYY-MM-DD_.
+    * Note: **YYYY value should correspond to the current storage file year, please use `year`
+      command to switch to the correct year before entering an expenditure of another year**
+
+Example Loan:
+
+`BORROWER_NAME` as _Jon_, `AMOUNT` as _$4000_ and `DATE_OF_LOAN` as _2021-11-05_
+
+Example usage on example loan:
+
+`edit -l m/11 i/1 a/5000`
 
 Expected outcome:
+The previously set `BORROWER_NAME` and `DATE_OF_LOAN` is unchanged, while `AMOUNT` is set to the provided value accordingly.
 
 ```
 ========================================================
 Loan has been successfully edited!
-New values: Wei Hng         | $1000.0       | 2021-10-12       
+New values: 
+Debtor: Jon
+Amount: $5000.00
+Date: 2021-11-05
 ========================================================
 ```
 <br />
