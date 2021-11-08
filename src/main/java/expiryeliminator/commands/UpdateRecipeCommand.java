@@ -21,6 +21,8 @@ public class UpdateRecipeCommand extends Command {
             + "You may want to use the 'list recipes' command to check the whole recipe list.";
     public static final String RECIPE_UPDATE_FAIL = "Unable to update this recipe:\n\n" + "%1$s\n\n"
             + "No matching recipes or ingredients found, please check your input again.\n";
+    public static final String MESSAGE_DUPLICATE_INGREDIENT_ERROR = "Unable to update this recipe:\n\n" + "%1$s\n\n"
+            + "There are duplicate ingredients in your input.\n";
     public static final String MESSAGE_ILLEGAL_VALUE_ERROR = "Unable to update this recipe:\n\n" + "%1$s\n\n"
             + "Quantity of ingredients for recipe cannot be negative.";
     public static final String MESSAGE_NO_INGREDIENT_ERROR = "Unable to update this recipe:\n\n" + "%1$s\n\n"
@@ -59,6 +61,11 @@ public class UpdateRecipeCommand extends Command {
             recipe = recipes.findRecipe(name);
         } catch (NotFoundException e) {
             return String.format(RECIPE_UPDATE_FAIL, name);
+        }
+
+        String duplicateIngredient = recipe.sameIngredientNames(ingredientNames);
+        if (!duplicateIngredient.isBlank()) {
+            return String.format(MESSAGE_DUPLICATE_INGREDIENT_ERROR, name, duplicateIngredient);
         }
 
         for (int i = 0; i < ingredientNames.size(); i++) {

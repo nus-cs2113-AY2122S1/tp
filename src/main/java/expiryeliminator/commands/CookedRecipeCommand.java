@@ -1,7 +1,10 @@
 package expiryeliminator.commands;
 
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
+import expiryeliminator.common.LogsCenter;
 import expiryeliminator.data.IngredientQuantity;
 import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.IngredientStorage;
@@ -19,7 +22,7 @@ public class CookedRecipeCommand extends Command {
 
     public static final String MESSAGE_RECIPE_COOKED = "Now you have these quantities left for your ingredients:\n"
             + "\n%1$s\n";
-    public static final String MESSAGE_INSUFFICIENT_QUANTITY = "You don't have enough ingredients! "
+    public static final String MESSAGE_INSUFFICIENT_QUANTITY = "You don't have enough ingredients!\n"
             + "Generate a shopping list to see what ingredients you're missing.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the ingredients' quantities based on"
             + "the recipe cooked.\n"
@@ -28,23 +31,12 @@ public class CookedRecipeCommand extends Command {
             + " r/Chicken Soup";
 
     private final String name;
+    private static final Logger logger = LogsCenter.getLogger(CookedRecipeCommand.class);
 
     public CookedRecipeCommand(String name) {
         assert name != null : "The recipe name cannot be null";
         assert !name.isEmpty() : "The recipe name cannot be empty";
         this.name = name;
-    }
-
-    private boolean allIngredientsAreSufficient(TreeMap<String, IngredientQuantity> ingredientsFromRecipe,
-                                                IngredientRepository ingredients) {
-        for (IngredientQuantity i : ingredientsFromRecipe.values()) {
-            IngredientStorage ingredient = ingredients.findWithNullReturn(i.getName());
-            assert ingredient != null : "Ingredient should be in the repository after the recipe is added";
-            if (ingredient.getQuantity() < i.getQuantity()) {
-                return false;
-            }
-        }
-        return true;
     }
 
     @Override
@@ -53,13 +45,15 @@ public class CookedRecipeCommand extends Command {
         try {
             Recipe recipe = recipes.findRecipe(name);
             TreeMap<String, IngredientQuantity> ingredientsInRecipe = recipe.getIngredientQuantities();
-            if (!allIngredientsAreSufficient(ingredientsInRecipe, ingredients)) {
+            if (!recipe.allIngredientsAreSufficient(ingredients)) {
                 return MESSAGE_INSUFFICIENT_QUANTITY;
             }
             for (String s : ingredientsInRecipe.keySet()) {
                 IngredientStorage ingredient = ingredients.findWithNullReturn(s);
                 assert ingredient != null : "Ingredient should be added in when recipe is added.";
-                ingredient.remove(ingredientsInRecipe.get(s).getQuantity());
+                int quantity = ingredientsInRecipe.get(s).getQuantity();
+                logger.log(Level.INFO,"Removing " + quantity + " amount of " + ingredient.getIngredient());
+                ingredient.remove(quantity);
                 ingredientsLeft += ingredient + "\n";
             }
         } catch (NotFoundException e) {
