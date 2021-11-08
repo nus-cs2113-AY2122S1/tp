@@ -27,8 +27,11 @@
 
 The motivation for developing [NUSBuddy](https://ay2122s1-cs2113t-w11-3.github.io/tp/) comes from the fact that most computing students spend their time using the terminal.
 However, there was no CLI program that manages student tasks/lessons and combine its functionality with [NUSMods](https://nusmods.com/), so we decided to build one.
+
 The design philosophy of [NUSBuddy](https://ay2122s1-cs2113t-w11-3.github.io/tp/) mostly follows the [KISS principle](https://nus-cs2113-ay2122s1.github.io/website/se-book-adapted/chapters/codeQuality.html#practice-kissing),
 in other words, we want the program to be fast and unobtrusive, so that users spend as little time as possible using our app and actually focus on doing their actual work.
+One more consideration that we implement in our app is that the user commands are friendly (i.e., make sense grammatically).
+For instance, `add lesson` is better than `lesson add`.
 
 My responsibilities:
 
