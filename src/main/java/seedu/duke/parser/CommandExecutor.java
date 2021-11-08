@@ -64,9 +64,6 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
         Storage.setLastTrip(newTrip);
     }
 
-    private static final String USER_CONTINUE = "y";
-    private static final String USER_QUIT = "n";
-
     /**
      * Asks if the user wants to proceed with adding a trip that has been detected as a duplicate.
      *
@@ -77,9 +74,9 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
         Ui.duplicateTripWarning();
         while (true) {
             String userOption = Ui.receiveUserInput();
-            if (userOption.contains(USER_CONTINUE)) {
+            if (userOption.contains(Ui.USER_CONTINUE)) {
                 return true;
-            } else if (userOption.contains(USER_QUIT)) {
+            } else if (userOption.contains(Ui.USER_QUIT)) {
                 Ui.printForceCancelled();
                 return false;
             }

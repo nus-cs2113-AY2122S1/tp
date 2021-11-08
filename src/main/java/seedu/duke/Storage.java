@@ -139,9 +139,6 @@ public class Storage {
         }
     }
 
-    private static final String USER_REQUEST_END = "n";
-    private static final String USER_REQUEST_CONTINUE = "y";
-
     /**
      * If {@link Storage#readFromFile(String)} throws a {@link JsonParseException}, asks the user whether to overwrite
      * the corrupted file or close the program.
@@ -153,12 +150,12 @@ public class Storage {
         while (true) {
             Ui.printJsonParseUserInputPrompt();
             String input = scanner.nextLine().strip();
-            if (input.contains(USER_REQUEST_END)) {
+            if (input.contains(Ui.USER_QUIT)) {
                 Ui.goodBye();
                 Storage.getLogger().log(Level.WARNING, "JSON Parse failed, user requests program end");
                 System.exit(EXIT_ERROR_CODE);
                 return;
-            } else if (input.contains(USER_REQUEST_CONTINUE)) {
+            } else if (input.contains(Ui.USER_CONTINUE)) {
                 createNewFile(FILE_PATH);
                 return;
             }

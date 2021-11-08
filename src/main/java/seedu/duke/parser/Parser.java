@@ -150,10 +150,10 @@ public class Parser extends CommandHandler {
         boolean doesUserAgree = false;
         while (!isValidInput) {
             String userReply = Storage.getScanner().nextLine();
-            if (userReply.strip().equalsIgnoreCase("y")) {
+            if (userReply.strip().equalsIgnoreCase(Ui.USER_CONTINUE)) {
                 isValidInput = true;
                 doesUserAgree = true;
-            } else if (userReply.strip().equalsIgnoreCase("n")) {
+            } else if (userReply.strip().equalsIgnoreCase(Ui.USER_QUIT)) {
                 isValidInput = true;
             } else {
                 System.out.println("Enter y/n");
