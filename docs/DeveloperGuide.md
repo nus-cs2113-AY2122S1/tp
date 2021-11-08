@@ -23,12 +23,12 @@ This document is meant to assist developers in better understanding the inner wo
   - [Storage Processes](#storage-processes)
     - [Reading from file and deserializing](#reading-from-file-and-deserializing)
     - [Serializing and writing to file](#serializing-and-writing-to-file)
-- [Product Scope](#product-scope)
+- [Appendix A: Product Scope](#appendix-a-product-scope)
   - [Target user profile](#target-user-profile)
   - [Value proposition](#value-proposition)
-  - [User Stories](#user-stories)
-- [Non-Functional Requirements](#non-functional-requirements)
-- [Instructions for manual testing](#instructions-for-manual-testing)
+- [Appendix B: User Stories](#appendix-b-user-stories)
+- [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
+- [Appendix D: Instructions For Manual Testing](#appendix-d-instructions-for-manual-testing)
 
 ## Acknowledgements
 
@@ -344,7 +344,7 @@ The following sequence diagram shows the process of serialization and writing to
 
 
 ---
-## Product scope
+## Appendix A: Product scope
 ### Target user profile
 
 Library staff who prefer keyboard inputs and require a text based application to quickly track and update 
@@ -357,7 +357,7 @@ It will allow library staff to track their items, such as finding out their stat
 catalogue quickly. Designed for fast typists, it also allows staff to track, update and manage their 
 inventory more efficiently.
 
-## User Stories
+## Appendix B: User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
@@ -365,32 +365,53 @@ inventory more efficiently.
 |v1.0|librarian|remove items from the catalogue|keep the full catalogue up to date|
 |v1.0|librarian|update the status of an item when it is loaned out|keep the full catalogue up to date|
 |v1.0|librarian|update the status of an item when it is returned|keep the full catalogue up to date|
-|v1.0|librarian|check the list of items available in the library||
-|v1.0|librarian|check the list of items on loan||
-|v1.0|librarian|check the list of all items in the library||
-|v2.0|librarian|categorise different items into media forms. (E.g. book, magazine, audio, video)|better manage my catalogue||
-|v2.0|librarian|edit the details of existing items on the catalogue|keep the full catalogue up to date||
-|v2.0|librarian|reserve and unreserve an item by updating its status|keep the full catalogue up to date||
-|v2.0|librarian|reset the reservation of an item||
-|v2.0|librarian|search for specific items by their title or ID|retrieve the details of items I need||
-|v2.0|librarian|check the list of items on reservation||
-|v2.0|librarian|loan an item for a person specified by their username||
-|v2.0|librarian|reserve an item for a person specified by their username||
-|v2.0|librarian|view the list of items are due to be returned today|| 
-|v2.0|librarian|view the list of overdue items|inform people to return them||
-|v2.1|librarian|view the list of items that are due to be returned on a specific date||
-|v2.1|librarian|search items by their categories (Book, CD, Magazine, etc)||
+|v1.0|librarian|check the list of items available in the library|get an overview what items are still present within the library|
+|v1.0|librarian|check the list of items on loan|expect what items are going to be returned soon|
+|v1.0|librarian|check the list of all items in the library|get an overview of the full inventory of the library|
+|v2.0|librarian|categorise different items into media forms. (E.g. book, magazine, audio, video)|better manage my catalogue|
+|v2.0|librarian|edit the details of existing items on the catalogue|keep the full catalogue up to date|
+|v2.0|librarian|reserve and unreserve an item by updating its status|set aside an item for a user beforehand|
+|v2.0|librarian|search for specific items by their title or ID|retrieve the details of items I need|
+|v2.0|librarian|check the list of items on reservation|make an item available for others to loan|
+|v2.0|librarian|loan an item for a person specified by their username|track who is in possession of a item currently|
+|v2.0|librarian|reserve an item for a person specified by their username|
+|v2.0|librarian|view the list of items are due to be returned today|keep track of what items are expected to be returned today| 
+|v2.0|librarian|view the list of overdue items|inform people to return them|
+|v2.1|librarian|view the list of items that are due to be returned on a specific date|get a list of expected returns in the future|
+|v2.1|librarian|search items by their categories (Book, CD, Magazine, etc)|easily sort through the inventory|
 |v2.1|librarian|retain the items information|keep the details without re-entering it everytime I start the application||
-|v2.1|librarian|search items using multiple parameters (title, id, status, category, etc)||
-|v2.1|librarian|edit the details of the items simultaneously||
-|v2.1|librarian|track miscellaneous items||
-|v2.1|librarian|display the information of the library stats||
+|v2.1|librarian|search items using multiple parameters (title, id, status, category, etc)|narrow down the items based on certain parameters|
+|v2.1|librarian|edit the details of the items simultaneously|quickly make changes to the details of each item|
+|v2.1|librarian|track miscellaneous items|also record items that are not categorised as audio, books, magazines or videos|
+|v2.1|librarian|display the information of the library stats|get a rough gauge about the usage of the library's assets|
 
-## Non-Functional Requirements
+## Appendix C: Non-Functional Requirements
 
 1. Should work on Windows, macOSX and Linux as long as it has Java 11 or above installed.
 2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-## Instructions for manual testing
+## Appendix D: Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Launch and Shutdown
+
+- Initial Launch
+  1. Download the latest [`libmgr.jar`](https://github.com/AY2122S1-CS2113-T16-1/tp/releases) and move it into a separate directory or folder
+  2. Ensure that Java 11 has been installed and configured on your device.
+  3. Open a command prompt or terminal and run the command `java -jar libmgr.jar`.
+- Shutdown
+  1. Type `exit` to quit the program.
+
+### Loading Data
+
+If you wish to start the program while retaining data:
+1. Within the folder that contains `libmgr.jar`, create a subdirectory called `data`.
+2. Ensure that the JSON file containing the program data is named `data.json` and move it to the `data` subdirectory. The full path should be `./data/data.json`
+3. Start the program with the command mentioned [above](#launch-and-shutdown).
+
+> ⚠️ If the program shows an error regarding malformed or corrupted data files, and you wish to retain the current state of the data file, exit the program immediately and **do not** run any other commands,
+otherwise, the data file may be overwritten. Afterwards, use a text editor to make any changes before restarting the program.
+
+### Running Commands
+
+Refer to the list of commands shown in the user guide. Alternatively, type `help` to get an overview of the list of commands and their usage.
+
