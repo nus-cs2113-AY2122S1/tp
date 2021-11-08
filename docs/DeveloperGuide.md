@@ -199,6 +199,18 @@ The Edit Command class handles the functionality to change a specific detail of 
 
 ![SearchFunction](img/SearchFunctionSequence.png)
 
+The Search class handles the functionality to search items based on multiple searching keywords.
+Such keywords include "id", "category", "status", and "title". This sequence diagram shows the interactions occuring
+when the command "search c/book s/loaned" is executed.
+1. `Libmgr` calls `parse()` method in `parser` object, which returns a searchCommand object.
+2. `Libmgr` calls `execute()` method in `searchCommand` object, which calls a `handleSearch()` in itself.
+3. `searchCommand` performs several checks on the args, by calling several methods.
+4. `searchCommand` creates four ArrayList of `Item` called [num]Match, i.e., fourMatch/threeMatch/twoMatch/oneMatch respectively.
+5. `searchCommand` calls `getAllItems()` method in `catalogue` object, which returns an ArrayList of all objects in `catalogue`.
+6. `searchCommand` loops through all items from `catalogue`, calls `checkMatches()` method on each item.
+7. Items with certain number of matches are inserted into one of the four corresponding [num]Match ArrayList.
+8. `searchCommand` then loops through each of four ArrayList, starting from fourMatch, ending with oneMatch, to print out all items in each ArrayList.
+
 ### Loan Command
 
 ![LoanSequenceDiagram](img/LoanSequenceDiagram.png)
