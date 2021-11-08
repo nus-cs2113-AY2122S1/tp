@@ -97,7 +97,7 @@ Before you learn how to use the app, take a look at the [Quick Start](#quick-sta
 
 5. Once the program is up and running, the image shown below is what you can expect the program should look like!   
 
-![image](https://user-images.githubusercontent.com/69465661/140690502-73964f95-4a07-4ea4-8ef4-83341e4fe268.png)
+![image](https://user-images.githubusercontent.com/77761339/140724500-ea056343-86d5-4a9c-ba82-db8de51dd595.png)
 
 6. If you are a first time user, the first command you want to key in is the [help](#view-all-possible-commands-help) command.
 It will guide you to the possible commands you can enter into Stonks XD. (Tip! Refer to the [Features](#features) below for details of each command.)
@@ -279,35 +279,40 @@ Format: `del_ex i/INDEX`
 
 Examples:
 
-- `del_ex i/1` Deletes the 1st entry from the expense list.
+- Let's say you have made a mistake while entering `expense` entries, and you want to remove the entry you made.
+  What you want to do is get the list of `expense` first, to find the index corresponding to that entry.
 
 <details>
 <summary> ▼ Expected output in run window </summary>
 <br>
-Before deletion the expense list is as follows:
+Before deletion, view the expense list using the <code>list_ex</code> command. The expected output will be as follows:
 <pre>
 -----------------------------------------------------------------------------------------------------
 Below is a list of all of your recent spending!
 -----------------------------------------------------------------------------------------------------
-1: [E] pillow - $500.00 (18/10/2021)
-2: [E] bought cookies - $500.00 (18/01/2021)
+1: [E] pillow - $5.00 (18/10/2021)
+2: [E] bought cookies - $5.00 (18/01/2021)
 3: [E] bought home - $555.00 (18/07/2021)
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-When command <code>del_ex i/1</code> is given, you get the following message:
+You want to delete the last entry, with index 3 because the description you entered was incorrect.
+You can enter the command <code>del_ex i/3</code> into the command line to delete that entry.
+<br>
+<br>
+When entry is deleted, you should expect the following message from the program:
 <pre>
 -----------------------------------------------------------------------------------------------------
 You removed this: 
-[E] pillow - $500.00 (18/10/2021)
+[E] bought home - $555.00 (18/07/2021)
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-After deletion, we see that the list has removed the previous first entry!
+After deletion, we view the list again to see that the list no longer contains the entry you deleted!
 <pre>
 -----------------------------------------------------------------------------------------------------
-1: [E] bought cookies - $500.00 (18/01/2021)
-2: [E] bought home - $555.00 (18/07/2021)
+1: [E] pillow - $5.00 (18/10/2021)
+2: [E] bought cookies - $5.00 (18/01/2021)
 -----------------------------------------------------------------------------------------------------
 </pre>
 </details>
@@ -392,35 +397,42 @@ Format: `del_in i/INDEX`
 
 Examples:
 
-- `del_in i/1` Deletes the 1st entry from the income list.
+- Let's say you have made a mistake while entering `income` entries, and you want to remove the entry you made.
+  What you want to do is get the list of `income` first, to find the index corresponding to that entry.
 
 <details>
 <summary> ▼ Expected output in run window </summary>
 <br>
-Before deletion the income list is as follows:
+Before deletion, view the income list using the <code>list_in</code> command. The expected output will be as follows:
 <pre>
 -----------------------------------------------------------------------------------------------------
 Below is a list of all of your recent earnings!
 -----------------------------------------------------------------------------------------------------
-1: [I] rob a bank - $800.00 (18/10/2021)
-2: [I] rob a church - $300.00 (18/11/2021)
-3: [I] rob a car - $400.00 (18/12/2021)
+1: [I] tuition salary - $800.00 (18/10/2021)
+2: [I] November allowance - $300.00 (18/11/2021)
+3: [I] Christmas gift money - $50.00 (18/12/2021)
+4: [I] Christmas gift money - $50000.00 (18/12/2021)
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-When command <code>del_in i/1</code> is given, you get the following message:
+You want to delete the last entry, with index 4 because the value you entered was too large.
+You can enter the command <code>del_in i/4</code> to delete that entry.
+<br>
+<br>
+Once the delete is completed, you get the following message:
 <pre>
 -----------------------------------------------------------------------------------------------------
 You removed this: 
-[I] rob a bank - $800.00 (18/10/2021)
+[I] Christmas gift money - $50000.00 (18/12/2021)
 -----------------------------------------------------------------------------------------------------
 </pre>
 <br>
-After deletion, we see that the list has removed the previous first entry!
+After deletion, we can see the list that the entry we want to remove is removed!
 <pre>
 -----------------------------------------------------------------------------------------------------
-1: [I] rob a church - $300.00 (18/11/2021)
-2: [I] rob a car - $400.00 (18/12/2021)
+1: [I] tuition salary - $800.00 (18/10/2021)
+2: [I] November allowance - $300.00 (18/11/2021)
+3: [I] Christmas gift money - $50.00 (18/12/2021)
 -----------------------------------------------------------------------------------------------------
 </pre>
 
@@ -489,11 +501,11 @@ Note:
 - `total_ex` command is only able to print values less than 100,000,000,000 (100Billion).
 
 Examples:
-<ol>
+<ul>
 <li>
 Let's say you have made expense entries consistently for a couple of months since you downloaded the application and you want to know the total expense you have logged.
 </li>
-</ol>
+</ul>
 <details>
 <summary> ▼ Expected output in run window </summary>
 <br>
