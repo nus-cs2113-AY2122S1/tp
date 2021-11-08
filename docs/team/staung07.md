@@ -1,4 +1,4 @@
-# STAung07 - Project Portfolio Page
+# Swann - Project Portfolio Page
 
 ## Overview
 
@@ -28,6 +28,8 @@ The code written by me can be found [here](https://nus-cs2113-ay2122s1.github.io
   * Update Habit Interval Parser
   * Multiple Updates Parser
 
+<div style="page-break-after: always;"></div>
+
 #### Contributions to UG
 
 * Skeleton of UG
@@ -50,5 +52,5 @@ The code written by me can be found [here](https://nus-cs2113-ay2122s1.github.io
 #### Team-based Tasks
 
 * Initiated a large number of Team Meetings.
-* Reviewed and Merged some PRs
+* Reviewed and Merged some PRs.
 

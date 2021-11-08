@@ -82,6 +82,8 @@ This application adapted the Developer Guide and User Guide from:
 
 ---------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## 1. Introduction
 
 ### 1.1. Overview of Ha(ppy)Bit
@@ -138,6 +140,8 @@ The following section covers basic setup instructions to get you up and running 
 7. Locate the `main` method and click the green triangle on the left of it
 8. If the code builds and runs with no issues, you are good.
 
+<div style="page-break-after: always;"></div>
+
 ## 3. Design
 
 ### 3.1. Overall Architecture
@@ -159,6 +163,8 @@ command `remove g/1` to remove the goal at index 1.
 ![Architecture Sequence Diagram](Diagram_Images/Design_Diagram_Images/ArchitectureSequenceDiagram.png)
 
 We will now explain the 5 individual components, beginning with the UI Component.
+
+<div style="page-break-after: always;"></div>
 
 ### 3.2. UI Component
 
@@ -188,6 +194,8 @@ each sub-component.
     the `help` command to view a summary of formats of relevant commands in a tabular form.
 3. `PrintManager` depends on `Goal` and `Habit` to print goal-related and habit-related information respectively.
 
+<div style="page-break-after: always;"></div>
+
 ### 3.3. Parser Component
 
 Our second component is the Parser component, responsible for parsing and checking the logic of the user input. 
@@ -211,6 +219,8 @@ The diagram below illustrates the high level representation of the component.
 The sequence diagram below illustrates the flow of logic when a generic user input is entered into the application.
 
 ![](Diagram_Images/Design_Diagram_Images/MainParserSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 ### 3.4. Command Component
 
@@ -238,6 +248,8 @@ below illustrates the high level representation of the component.
    * `HelpCommand` - Prints out table of all available commands.
    * `ReturnCommand` - Returns the user to start state of the application (Refer to Section 3.2. for _start state_).
    * `ExitCommand` - Saves all changes and exits the application.
+
+<div style="page-break-after: always;"></div>
 
 ### 3.5. Goal Component
 
@@ -269,6 +281,8 @@ level representation of the component and the interactions between the other com
 3. `Import` calls `ImportParser` to decode the data extracted from the external storage file.
 4. `ImportParser` calls `Goal`, `Habit`, and `Interval` in that order to load data into the `GoalList`.
 
+<div style="page-break-after: always;"></div>
+
 ## 4. Implementation
 
 This section describes some noteworthy details on how the main features are implemented.
@@ -296,6 +310,8 @@ their personal account which will be stored in the `GoalList` class.
    `GoalList#addGoal(goal, printManager)` method.
 5. The `GoalList#addGoal(goal, printManager)` method checks for duplicated goal names before adding a goal to the list.
 6. The `PrintManager#printAddedGoal(description)` method prints an acknowledgement message that the goal has been added.
+
+<div style="page-break-after: always;"></div>
 
 ![](Diagram_Images/Implementation_Diagram_Images/AddGoalCommandSequenceDiagram.png)
 
@@ -325,6 +341,8 @@ This section describes the implementation of how the user can add a habit to one
    Within this method, there is a 50-character limit imposed on the name, as well as an integer check for the interval.
 4. An `AddHabitCommand(habit, goalIndex)` object is created from the `AddParser#parseAddHabitCommand()` method.
 
+<div style="page-break-after: always;"></div>
+
 ![](Diagram_Images/Implementation_Diagram_Images/AddHabitCommandParserSequenceDiagram.png)
 
 5. The `AddHabitCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
@@ -344,6 +362,8 @@ This section describes the implementation of how the user can add a habit to one
     habit has been successfully added to the goal.
 
 ![](Diagram_Images/Implementation_Diagram_Images/AddHabitCommandSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.2.2. Design Considerations
 
@@ -367,6 +387,8 @@ This section describes the implementation of how the user can display a list of 
 
 ![](Diagram_Images/Implementation_Diagram_Images/ListGoalsCommandParserSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 3. The `ListGoalsCommand#runCommand(goalList, printManager, storage, gibberish)` method is called, which in turns calls 
    the `GoalList#listGoals(printManager, gibberish)` method. The string variable `gibberish` is logically equivalent to
    the variable `input`.
@@ -379,6 +401,8 @@ This section describes the implementation of how the user can display a list of 
 7. `gibberish` is limited to 40 characters, with any characters after the limit trimmed.
 
 ![](Diagram_Images/Implementation_Diagram_Images/ListGoalsCommandSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.3.2. Design Considerations
 
@@ -406,6 +430,8 @@ This section describes the implementation of how the user can display a list of 
 
 ![](Diagram_Images/Implementation_Diagram_Images/ListHabitsCommandParserSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 4. The `ListHabitsCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
    `GoalList#listHabitsFromGoal(goalIndex, printManager)` method.
 5. Within this newly called method, the `GoalList#getGoal(goalIndex)` method is called to retrieve the `Goal` object
@@ -418,6 +444,8 @@ This section describes the implementation of how the user can display a list of 
    with that goal in a tabular form.
 
 ![](Diagram_Images/Implementation_Diagram_Images/ListHabitsCommandSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.4.2. Design Considerations
 
@@ -448,6 +476,8 @@ This section describes the implementation of how the user can mark a habit as co
 
 ![](Diagram_Images/Implementation_Diagram_Images/DoneCommandParserSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 4. The `DoneHabitCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
    `GoalList#doneHabitFromGoal(goalIndex, habitIndex, printManager)` method.
 5. Within this newly called method, the `GoalList#getGoal(goalIndex)` method is called to retrieve the `Goal` object
@@ -462,6 +492,8 @@ This section describes the implementation of how the user can mark a habit as co
     print a confirmation message on the successful completion of a habit.
 
 ![](Diagram_Images/Implementation_Diagram_Images/DoneCommandSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.5.2. Design Considerations
 
@@ -497,7 +529,11 @@ This section describes the implementation of how the user can update a goal's na
    excessAttributes)` object is created and returned from the `UpdateParser#parseUpdateGoalCommands(commandInstruction)` 
    method.
 
+<div style="page-break-after: always;"></div>
+
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateGoalCommandParserSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 9. The `UpdateGoalCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the 
    `GoalList#updateGoalAttributes(goalIndex, newGoalName, newGoalType, newGoalEndDate, updateAttributes, 
@@ -521,6 +557,8 @@ This section describes the implementation of how the user can update a goal's na
     with `PrintManager#printError`.
 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateGoalCommandSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.6.2. Design Considerations
 
@@ -556,7 +594,11 @@ This section describes the implementation of how the user can update a habit's n
    excessAttributes)` object is created and returned from the 
    `UpdateParser#parseUpdateHabitCommands(commandInstruction)` method.
 
+<div style="page-break-after: always;"></div>
+
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateHabitCommandParserSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 9. The `UpdateHabitCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the 
    `GoalList#updateHabitAttributes(goalIndex, habitIndex, newHabitName, newHabitInterval, updateAttributes, 
@@ -581,6 +623,8 @@ This section describes the implementation of how the user can update a habit's n
     with `PrintManager#printError`.
 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateHabitCommandSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 #### 4.7.2. Design Considerations
 
@@ -610,6 +654,8 @@ This section describes the implementation of how the user can delete a goal from
 4. A `DeleteGoalCommand(goalIndex)` object is created and returned from the `DeleteParser#parseDeleteGoalCommand(input)`
    method.
 
+<div style="page-break-after: always;"></div>
+
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteGoalCommandSequenceDiagram.png)
 
 5. The `DeleteGoalCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
@@ -620,6 +666,8 @@ This section describes the implementation of how the user can delete a goal from
 8. The `Goal` is then deleted with the `GoalList#remove(Goal)` method.
 9. Finally, the `PrintManager#printRemovedGoal(goalDescription)` method is called to print a confirmation message on 
    the successful deletion of a goal.
+
+<div style="page-break-after: always;"></div>
 
 #### 4.8.2. Design Considerations
 
@@ -653,6 +701,8 @@ tracked goals.
 5. A `DeleteHabitCommand(goalIndex, habitIndex)` object is created and returned from the
    `DeleteParser#parseDeleteHabitCommand(input)` method.
 
+<div style="page-break-after: always;"></div>
+
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteHabitCommandSequenceDiagram.png)
 
 6. The `DeleteHabitCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
@@ -665,6 +715,8 @@ tracked goals.
 10. The `Habit` is then deleted with the `Goal#removeHabit(habitIndex)` method.
 11. Finally, the `PrintManager#printRemovedHabit(goalDescription, habitDescription)` method is called to print a 
     confirmation message on the successful deletion of a habit.
+
+<div style="page-break-after: always;"></div>
 
 #### 4.9.2. Design Considerations
 
