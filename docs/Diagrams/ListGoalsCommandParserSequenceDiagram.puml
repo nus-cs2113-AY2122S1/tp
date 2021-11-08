@@ -3,21 +3,12 @@
 !include Style.puml
 
 participant ": ListGoalsParser" as ListGoalsParser PARSER_COLOUR
-participant ": ListGoalsCommand" as ListGoalsCommand COMMAND_COLOUR
 
 mainframe sd List Goal Parsing
 
 -> ListGoalsParser: parseListGoalsCommand(input: String)
 activate ListGoalsParser
-create ListGoalsCommand
-ListGoalsParser -> ListGoalsCommand: input
-activate ListGoalsCommand
 
-return
-
-return new ListGoalsCommand(input)
-
-
-
+return ListGoalsCommand(input)
 
 @enduml
