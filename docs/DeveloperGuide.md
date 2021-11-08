@@ -560,7 +560,7 @@ commands.
        Expected: `No Patient with ID 4 found.`
 3. Invalid usage of `delete`
     1. Test case (Invalid command): `delete asd`<br>
-       Expected: `ID not specified or not a number.`
+       Expected: `ID not specified or not a positive number.`
 
 #### View a patient's information
 
@@ -593,7 +593,7 @@ commands.
        Expected: `The patient with ID: 1 is now hidden.`
 2. Invalid usage of `hide`
     1. Test case (Invalid command): `hide ab`<br>
-       Expected: `ID not specified or not a number.`
+       Expected: `ID not specified or not a positive number.`
 
 #### Show a patient
 
@@ -605,7 +605,7 @@ commands.
        Expected: `The patient with ID: 1 is now not hidden.`
 2. Invalid usage of `show`
     1. Test case: `show ab`<br>
-       Expected: `ID not specified or not a number.`
+       Expected: `ID not specified or not a positive number.`
 
 #### List information of all current patients
 
