@@ -40,6 +40,14 @@ My overall code contributions can be found [here](https://nus-cs2113-ay2122s1.gi
 
 ### Developer Guide
 
+### Team-based Tasks
+
+* Set up GitHub team organization and repository.
+* Managed JAR releases.
+* Maintained issue tracker.
+* Maintained overall code quality and implementation designs.
+* Maintained collaborative document ([Notion](https://www.notion.so/)) for project management.
+
 ### Review/Mentoring
 
 ### Beyond Project Team
