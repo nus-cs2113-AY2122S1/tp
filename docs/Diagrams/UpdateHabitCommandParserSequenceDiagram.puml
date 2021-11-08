@@ -16,7 +16,7 @@ deactivate UpdateParser
 
 UpdateParser -> UpdateParser: getUpdateHabitAttributes\n(parameters)
 activate UpdateParser
-UpdateParser --> UpdateParser: updateAttributes: int[2]
+UpdateParser --> UpdateParser: updateAttributes: ArrayList<Boolean>
 deactivate UpdateParser
 
 alt#gold #lightblue isUpdateHabitName

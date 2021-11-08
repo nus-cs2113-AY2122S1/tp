@@ -498,7 +498,6 @@ This section describes the implementation of how the user can update a goal's na
    method.
 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateGoalCommandParserSequenceDiagram.png)
-// TODO: Update the diagram to reflect changes to updateAttributes returning an ArrayList<Boolean>
 
 9. The `UpdateGoalCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the 
    `GoalList#updateGoalAttributes(goalIndex, newGoalName, newGoalType, newGoalEndDate, updateAttributes, 
@@ -522,7 +521,6 @@ This section describes the implementation of how the user can update a goal's na
     with `PrintManager#printError`.
 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateGoalCommandSequenceDiagram.png)
-// TODO: Update the diagram to reflect changes to updateAttributes being an ArrayList<Boolean>
 
 #### 4.6.2. Design Considerations
 
@@ -559,7 +557,6 @@ This section describes the implementation of how the user can update a habit's n
    `UpdateParser#parseUpdateHabitCommands(commandInstruction)` method.
 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateHabitCommandParserSequenceDiagram.png)
-// TODO: Update the diagram to reflect changes to updateAttributes being an ArrayList<Boolean>
 
 9. The `UpdateHabitCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the 
    `GoalList#updateHabitAttributes(goalIndex, habitIndex, newHabitName, newHabitInterval, updateAttributes, 
@@ -584,7 +581,6 @@ This section describes the implementation of how the user can update a habit's n
     with `PrintManager#printError`.
 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateHabitCommandSequenceDiagram.png)
-// TODO: Update the diagram to reflect changes to updateAttributes being an ArrayList<Boolean>
 
 #### 4.7.2. Design Considerations
 

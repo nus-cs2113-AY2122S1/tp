@@ -16,7 +16,7 @@ deactivate UpdateParser
 
 UpdateParser -> UpdateParser: getUpdateGoalAttributes\n(parameters)
 activate UpdateParser
-UpdateParser --> UpdateParser: updateAttributes: int[3]
+UpdateParser --> UpdateParser: updateAttributes: ArrayList<Boolean>
 deactivate UpdateParser
 
 alt#gold #lightblue isUpdateGoalName

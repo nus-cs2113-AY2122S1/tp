@@ -17,21 +17,21 @@ activate printManager
 printManager --> goalList
 deactivate printManager
 
-alt#gold #lightblue updateAttributes[0] == 1
+alt#gold #lightblue updateAttributes.get(0)
 goalList -> goalList: updateGoalName(goalIndex,\nnewGoalName, printManager)
 activate goalList
 goalList --> goalList:
 deactivate goalList
 end
 
-alt#gold #lightblue updateAttributes[1] == 1
+alt#gold #lightblue updateAttributes.get(1)
 goalList -> goalList: updateGoalType(goalIndex,\nnewGoalType, printManager)
 activate goalList
 goalList --> goalList:
 deactivate goalList
 end
 
-alt#gold #lightblue updateAttributes[2] == 1
+alt#gold #lightblue updateAttributes.get(2)
 goalList -> goalList: updateGoalEndDate(goalIndex,\nnewGoalEndDate, printManager)
 activate goalList
 goalList --> goalList:
