@@ -21,7 +21,7 @@
 - [Appendix A: Product Scope](#appendix-a-product-scope)
 - [Appendix B: User Stories](#appendix-b-user-stories)
 - [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
-- [Appendix D: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
+- [Appendix D: Instructions for Manual Testing](#appendix-d-instructions-for-manual-testing)
 
 ## 1. Acknowledgements
 
