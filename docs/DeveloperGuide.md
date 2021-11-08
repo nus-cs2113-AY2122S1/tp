@@ -217,6 +217,7 @@ E.g. `add n/carrots a/200 e/25-12-2021`
 4. The updated `IngredientList` is stored in the external memory through the `Storage` class. 
 
 The overall sequence diagram can be seen below. 
+
 ![image](images/AddSequenceDiagram.png)
 
 <div style="page-break-after: always;"></div>
