@@ -211,8 +211,8 @@ When the user types `module add c/CS2113T n/Software Engineering m/4 e/A`, the f
 1. User executes `module add c/CS2113T n/Software Engineering e/A`\
    i. `Click` receives user's input.\
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
-2. Creating `AddModuleCommand` object.
-3. Executing command.\
+2. Create `AddModuleCommand` object.
+3. Execute command.\
    i. `AddModuleCommand` finds `indexOfCode`, `indexOfName`, `indexOfMc` and `indexOfExpectedGrade` in user's input\
    ii. `AddModuleCommand` checks if there are duplicate prefixes in the command or not. If yes, throw `DuplicateModuleParamException`\
    iii. `AddModuleCommand` calls `getModule()` to create a new `module` based on user's input\
@@ -381,7 +381,7 @@ This feature allows user to add a new Task.
 
 The command for adding a task is implemented by the `AddTodoCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the add task mechanism behaves at each step.
+Given below is an example of how the add task mechanism behaves at each step.
 
 1. User executes `calendar todo n/RANDOMNAME d/10-10-2021`\
    i. `Click` receives user's input.\
@@ -405,7 +405,7 @@ This feature allows user to add a new Lecture.
 
 The command for adding a lecture is implemented by the `AddLectureCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the add lecture mechanism behaves at each step.
+Given below is an example of how the add lecture mechanism behaves at each step.
 
 1. User executes `calendar lecture m/CS2113T s/10-10-2021 e/30-10-2021`\
    i. `Click` receives user's input.\
@@ -425,7 +425,7 @@ This feature allows user to view all Tasks.
 
 The command for listing all tasks is implemented by the `ListTasksCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the list task mechanism behaves at each step.
+Given below is an example of how the list task mechanism behaves at each step.
 
 1. User executes `calendar list task`\
    i. `Click` receives user's input.\
@@ -441,7 +441,7 @@ This feature allows user to view all Lectures.
 
 The command for listing all lectures is implemented by the `ListLecturesCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the list lecture mechanism behaves at each step.
+Given below is an example of how the list lecture mechanism behaves at each step.
 
 1. User executes `calendar list lec`\
    i. `Click` receives user's input.\
@@ -457,7 +457,7 @@ This feature allows user to delete a Task created in the past.
 
 The command for deleting a task is implemented by the `DeleteTaskCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the delete task mechanism behaves at each step.
+Given below is an example of how the "delete task" mechanism behaves at each step.
 
 1. User executes `calendar delete task 1`\
    i. `Click` receives user's input.\
@@ -479,7 +479,7 @@ This feature allows user to delete a Lecture created in the past.
 
 The command for deleting a task is implemented by the `DeleteLectureCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the delete lecture mechanism behaves at each step.
+Given below is an example of how the "delete lecture" mechanism behaves at each step.
 
 1. User executes `calendar delete lec 1`\
    i. `Click` receives user's input.\
@@ -488,7 +488,7 @@ Given below is an example usage scenario and how the delete lecture mechanism be
 3. Execution of the command.\
    i. `DeleteLectureCommand` checks if the index as gotten from `getLectureIndex()` of `Parser` class is in the task list and if it not then `LectureIndexNotFoundException()` is thrown.\
    ii. `DeleteLectureCommand` calls `deleteLecture(this.index)` for the index of the lecture as given by the user to delete the lecture.\
-   iii. The delete successful message is printed to the user.\
+   iii. "Delete successful" message is printed to the user.\
    iv. `DeleteLectureCommand` calls `StorageLecture.writeLectureList(Storage.lectureList)` to save the new data to the storage file.
 
 #### 4.3.8 Editing a Task
@@ -497,7 +497,7 @@ This feature allows user to edit a Task created in the past.
 
 The command for editing a task is implemented by the `EditTasksCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the edit task mechanism behaves at each step.
+Given below is an example of how the edit task mechanism behaves at each step.
 
 1. User executes `calendar edit task 1`\
    i. `Click` receives user's input.\
@@ -518,16 +518,16 @@ commands as well as the design considerations taken.
 
 The command for adding notebook is implemented by the `AddNoteCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the add notebook mechanism behaves at each step.
+Given below is an example of how the add notebook mechanism behaves at each step.
 
 1. User inputs `journal notebook n/CS2113` \
    i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
-2. Creating `AddNoteCommand` object.
+2. Create `AddNoteCommand` object.
 3. AddNoteCommand execution. \
    i. `AddNoteCommand` calls `ParserJournal.parseAddNoteCommand(userInput)` which returns the notebook name. \
    ii. `AddNoteCommand` calls `storage.collectionOfNotebooks.addNote(noteName, "none")`. Here the parameters are the
-   notebook name and the tag name which is "none" by default. \
+   notebook name, and the tag name which is "none" by default. \
    iii. `AddNoteCommand` calls `ui.printAddedNoteMessage` and passes in notebook name as parameter to convey
    successful addition of notebook.
    iv. `AddNoteCommand` calls `StorageNotes.writeCollectionOfNotebooks(storage.collectionOfNotebooks)` to write the new 
@@ -541,12 +541,12 @@ Given below is an example usage scenario and how the add notebook mechanism beha
 
 The command for adding entry is implemented by the `AddEntryCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the add entry mechanism behaves at each step.
+Given below is an example of how the add entry mechanism behaves at each step.
 
 1. User inputs `journal entry n/CS2113 e/HW`\
    i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input. 
-2. Creating `AddEntryCommand` object.
+2. Create `AddEntryCommand` object.
 3. AddEntryCommand execution. \
    i. `AddEntryCommand` calls `ParserJournal.parseAddEntryCommand(userInput)` which returns the notebook name and entry
    name as a
@@ -570,12 +570,12 @@ The command for listing is implemented by the `ListJournalCommand` class that ex
 
 A list of notebooks along with their entries will be displayed.
 
-Given below is an example usage scenario and how the list mechanism behaves at each step.
+Given below is an example of how the list mechanism behaves at each step.
 
 1. User inputs `journal list` \
    i. `Click` receives the input.\
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
-2. Creating `ListJournalCommand` object. 
+2. Create `ListJournalCommand` object. 
 3. ListJournalCommand execution. \
    i. `ListJournalCommand` calls `storage.collectionOfNotebooks.getNotesArrayList()` which returns an array list of
    Notebook objects. \
@@ -588,12 +588,12 @@ Given below is an example usage scenario and how the list mechanism behaves at e
 The command for deleting notebook is implemented by the `DeleteNoteCommand` class that extends `Command`.
 The notebook along with all its entries will be deleted.
 
-Given below is an example usage scenario and how the delete notebook mechanism behaves at each step.
+Given below is an example of how  "delete notebook" mechanism behaves at each step.
 
 1. User inputs `journal delete_notebook 1` \
    i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
-2. Creating `DeleteNoteCommand` object.
+2. Create `DeleteNoteCommand` object.
 3. DeleteNoteCommand execution. \
    i. `DeleteNoteCommand` calls `ParserJournal.parseDeleteNoteCommand(userInput)` to get index of notebook to
    delete. \
@@ -613,12 +613,12 @@ Given below is an example usage scenario and how the delete notebook mechanism b
 
 The command for deleting entry is implemented by the `DeleteEntryCommand` class that extends `Command`.
 
-Given below is an example usage scenario and how the delete entry mechanism behaves at each step.
+Given below is an example of how the "delete entry" mechanism behaves at each step.
 
 1. User inputs `journal delete_entry n/CS2113 e/HW` \
    i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
-2. Creating `DeleteEntryCommand` object.
+2. Create `DeleteEntryCommand` object.
 3. DeleteEntryCommand execution. \
    i. `DeleteEntryCommand` calls `ParserJournal.parseDeleteEntryCommand(userInput, storage)` to get notebook name and
    entry name. \
@@ -635,12 +635,12 @@ Given below is an example usage scenario and how the delete entry mechanism beha
 The command for tagging notebook is implemented by the `TagNotebookCommand` class that extends `Command`.
 
 
-Given below is an example usage scenario and how tag notebook mechanism behaves at each step.
+Given below is an example usage of how tag notebook mechanism behaves at each step.
 
 1. User inputs `journal tag n/1 t/important` \
    i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
-2. Creating `TagNotebookCommand` object.
+2. Create `TagNotebookCommand` object.
 3. TagNotebookCommand execution. \
 i. `TagNotebookCommand` calls `ParserJournal.parseTagNotebookCommand(userInput, storage)` to get notebook index and
    tag name. \
@@ -669,12 +669,12 @@ The following design considerations were kept in mind while implementing the tag
 The command for finding notebook by a tag is implemented by the `FindNotebooksByTagCommand` class that extends
 `Command`.
 
-Given below is an example usage scenario and how the find notebook by tag mechanism behaves at each step.
+Given below is an example of how the find notebook by tag mechanism behaves at each step.
 
 1. User inputs `journal find tag_name` \
    i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
-2. Creating `FindNotebooksByTagCommand` object.
+2. Create `FindNotebooksByTagCommand` object.
 3. FindNotebooksByTagCommand execution. \
    i. `FindNotebooksByTagCommand` calls `ParserJournal.parseTagForFinding(userInput)` to get tag name. \
    ii. `FindNotebooksByTagCommand` calls `storage.collectionOfNotebooks.getNotesArrayList()` which returns an array 
@@ -924,8 +924,8 @@ When the user types `exit`, the following sequence of steps will then occur:
 1. User executes `exit`\
 i. `Click` receives user's input.\
 ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
-2. Creating `ExitCommand` object.
-3. Executing command.\
+2. Create `ExitCommand` object.
+3. Execute command.\
 i. `ExitCommand` calls `ui.printGoodBye()` to print the goodbye message to the user.\
 ii. `ExitCommand` calls `System.exit(0)` to terminate the program.
 

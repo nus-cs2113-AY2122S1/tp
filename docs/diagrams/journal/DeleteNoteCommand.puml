@@ -1,4 +1,5 @@
 @startuml
+hide footbox
 Actor User
 User -> ":Click" : "journal delete_notebook 1"
 participant ":Click"
@@ -13,7 +14,7 @@ return
 deactivate ":DeleteNoteCommand"
 ":Parser" --> ":Click"
 deactivate ":Parser"
-":Click" --> ":DeleteNoteCommand" : execute()
+":Click" -> ":DeleteNoteCommand" : execute()
 activate ":DeleteNoteCommand"
 participant ":CollectionOfNotebooks"
 ":DeleteNoteCommand" -> ":CollectionOfNotebooks" : deleteNote()
