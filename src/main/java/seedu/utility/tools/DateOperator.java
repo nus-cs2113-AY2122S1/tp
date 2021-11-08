@@ -8,16 +8,16 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
-import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 
-import static seedu.utility.Parser.DATE_FORMAT;
 
 /**
  * DateOperator is stores useful date manipulation methods which are used for processing data of FinancialTracker.java.
  */
 public abstract class DateOperator {
+    public static final String DATE_FORMAT = "dd/MM/yyyy";
+    
     /**
      * Checks if the date of a given entry is within a valid date range, 
      * where startDate is earlier than or the same as endDate.
@@ -110,11 +110,20 @@ public abstract class DateOperator {
         return item -> isSameYear(inputYear, item);
     }
 
+
+    /**
+     * Returns the current month as an index.
+     * @return The current month as an index of data type int.
+     */
     public static int currentMonthInIndex() {
         LocalDate currentDate = LocalDate.now();
         return currentDate.getMonthValue() - 1;
     }
 
+    /**
+     * Returns the current month.
+     * @return The current month as an object.
+     */
     public static Month currentMonth() {
         LocalDate currentDate = LocalDate.now();
         return currentDate.getMonth();

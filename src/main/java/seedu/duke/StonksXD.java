@@ -4,7 +4,7 @@ import seedu.commands.Command;
 
 import seedu.utility.BudgetManager;
 import seedu.utility.CurrencyManager;
-import seedu.utility.DataManager;
+import seedu.utility.storage.DataManager;
 import seedu.utility.FinancialTracker;
 
 import seedu.utility.Parser;
@@ -29,17 +29,16 @@ public class StonksXD {
      */
     public StonksXD() {
         this.ui = new Ui();
-        this.finances = new FinancialTracker();
         this.parser = new Parser();
         this.budgetManager = new BudgetManager();
         this.currencyManager = new CurrencyManager();
-        
-        this.dataManager = new DataManager(parser, finances, ui, budgetManager, currencyManager);
+        this.finances = new FinancialTracker(currencyManager);
+        this.dataManager = new DataManager(finances, ui, budgetManager, currencyManager);
         dataManager.loadAll();
     }
 
     /**
-     * This method handles the lifecycle and the general logic of the program. It reads users input and performs actions
+     * Handles the lifecycle and the general logic of the program. It reads users input and performs actions
      * based on it.
      */
     public void run() {
