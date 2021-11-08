@@ -871,6 +871,8 @@ What if my data is corrupted in the text files?
 > This would mean that your previous data is irrecoverable.
 > The developer team is working on undo and redo features for our future implenentation to better
 > serve your needs.
+ 
+
 ## 6. Bug Reports
 
 Found  a ***content error*** or just something which doesn't look right?
