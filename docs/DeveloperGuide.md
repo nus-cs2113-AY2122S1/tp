@@ -357,7 +357,7 @@ To help young adults who are living in their own home keep track of ingredients 
        Expected: The message "Here are the expired ingredients in your list", however, no ingredients are listed out.
 
 ### View an ingredient
-1. View an ingredient which exits.
+1. View an ingredient which exists.
    1. Prerequisite: The ingredient "Chicken" exists in the ingredient repository.
    2. Test case: `view i/chicken` <br/>
    Expected: A list of that specific ingredient and all its batches.
@@ -549,7 +549,7 @@ To help young adults who are living in their own home keep track of ingredients 
    2. Test case: `shopping list r/chicken soup r/pork soup` <br/>
    Expected: A list of ingredients and quantities needed to be bought on top of ingredients that already exist in the ingredient repository to make those recipes.
 3. Generate a shopping list for recipe that is not in the recipe list.
-   1. Prerequisite: The recipes "Apple Pie" does not exist in the recipe list.
+   1. Prerequisite: The recipe "Apple Pie" does not exist in the recipe list.
    2. Test case: `shopping list r/apple pie` <br/>
    3. Expected: Error message "Sorry. One or more of your recipes are not found!"
 4. Generate a shopping list for multiple recipes, and one of those recipes is not in recipe list.
