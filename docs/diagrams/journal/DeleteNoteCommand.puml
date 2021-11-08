@@ -15,9 +15,9 @@ deactivate ":DeleteNoteCommand"
 deactivate ":Parser"
 ":Click" --> ":DeleteNoteCommand" : execute()
 activate ":DeleteNoteCommand"
-participant ":CollectionOfNotes"
-":DeleteNoteCommand" -> ":CollectionOfNotes" : deleteNote()
-activate ":CollectionOfNotes"
+participant ":CollectionOfNotebooks"
+":DeleteNoteCommand" -> ":CollectionOfNotebooks" : deleteNote()
+activate ":CollectionOfNotebooks"
 return
 participant ":Ui"
 ":DeleteNoteCommand" -> ":Ui" : printDeletedNotebookMessage(NOTEBOOK_INDEX)
