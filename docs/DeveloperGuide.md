@@ -61,6 +61,11 @@ there must be at least one trip added by the user (either through input or throu
 save file) in order for any other features to be available. If there are no trips added, the program 
 will repeatedly prompt the user to add a new trip.
 
+The sequence diagram below shows what happens when the user creates a new trip. If a duplicate
+trip is input, the app will confirm with the user if he/she wishes to add the duplicate trip.
+
+![](images/tripSeq.png)
+
 ### `Person` Class
 Below details the UML diagram for the `Person` class.
 ![](images/Person_Diagram.JPG)
@@ -186,22 +191,27 @@ The code for the custom deserialiser is:
 
 ## Appendix: Requirements
 
-### Target user profile
-
-{Describe the target user profile}
-
-### Value proposition
-
-{Describe the value proposition: what problem does it solve?}
-
 ### Appendix A: Product scope
+
+**Target user profile**
+- Students who are travelling overseas and sharing expenses with a group
+- Comfortable with CLI desktop apps
+- Prefers typing to mouse interaction for data input
+
+**Value proposition**
+- Suitable for batch input of expenses
+- PayMeBack data is in JSON, which is lightweight and easily transferable
 
 ### Appendix B: User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+| As a ... | I want to ... | So that I can ...|
+|----------|---------------|------------------|
+new user|see help instructions|refer to them when I forget how to use the application
+new user|edit trip attributes|modify them easily when I type them wrongly
+user|have various filters for expenses in a trip|find expenses that are of interest to me, especially when the expense list is large
+user|cancel an operation instead of re-entering my data when prompted|save time and run other commands immediately
+
+
 
 ### Appendix C: Non-Functional Requirements
 
