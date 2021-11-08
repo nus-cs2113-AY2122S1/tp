@@ -760,6 +760,16 @@ public class Click {
 
 ## 5. Testing
 
+We use JUnit testing to ensure that the operations of `Click` meet the expected behavior.
+
+There are two ways to run tests.
+
+**Method 1: Using IntelliJ JUnit test runner**
+* To run all tests, right-click on the `src/test/java` directory and choose `Run 'All Tests'`
+* To run a subset of tests, you can right-click on a test package, a test class, or a test and choose `Run 'ABC'`
+
+**Method 2: Using Gradle**
+* To run all tests, open a console and run the command `gradlew clean test` (MacOS/Linus: `./gradlew clean test`)
 
 ## 6. Dev Ops
 
@@ -797,12 +807,13 @@ public class Click {
 |v1.0|user|add a todo task|to keep track of tasks I need to complete|
 |v1.0|user|delete a todo task|delete a task I have completed/am not going to do|
 |v1.0|user|list all tasks|get the information about my tasks|
+|v2.0|user|edit my CAP information|record my current CAP and the total MC taken that contribute to the CAP|
+|v2.0|user|get expected CAP based on my CAP information and my modules|revise my module planning to meet my expectation|
 |v2.0|user|display a calendar with lectures and tasks|view all my tasks and lectures in a calendar view|
 |v2.0|user|add a lecture|know which lectures I have on which days|
 |v2.0|user|delete a lecture|delete a lecture that I am not going to do|
 |v2.0|user|edit a task|I do not have to delete a task which I just want to make minor changes to|
 |v2.0|user|list all lectures|get the information about my lectures|
-
 
 
 ### Appendix C: Non-Functional Requirements
