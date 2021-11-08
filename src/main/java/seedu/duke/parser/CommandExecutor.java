@@ -1,7 +1,6 @@
 package seedu.duke.parser;
 
 import seedu.duke.exceptions.ForceCancelException;
-import seedu.duke.exceptions.InvalidAmountException;
 import seedu.duke.exceptions.NoExpensesException;
 import seedu.duke.exceptions.SameNameException;
 import seedu.duke.exceptions.TripNotOpenException;
@@ -13,15 +12,25 @@ import seedu.duke.expense.Expense;
 
 import java.util.ArrayList;
 
+import static seedu.duke.Storage.LAST_INTERACTED;
+
 abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummarizer {
+    private static final int EDIT_ATTR_COUNT = 2;
     private static final int ATTRIBUTE_DATA = 1;
     private static final int EDIT_ATTRIBUTE = 0;
+    private static final int EDIT_INDEX = 0;
     private static final String EDIT_LOCATION = "-location";
     private static final String EDIT_DATE = "-date";
     private static final String EDIT_EXRATE = "-exchangerate";
     private static final String EDIT_FORCUR = "-forcur";
     private static final String EDIT_HOMECUR = "-homecur";
     private static final int NEW_TRIP_ATTRIBUTES_COUNT = 6;
+    private static final int NUMBER_OF_PARAMETERS = 3;
+    private static final int INDEX_OF_SECOND_COMMAND = 0;
+    private static final int INDEX_OF_CATEGORY = 1;
+    private static final int INDEX_OF_EXPENSE_ATTRIBUTE = 2;
+    private static final String LAST = "last";
+    private static final String FILTER = "filter";
 
     //@@author yeezao
     /**
@@ -71,9 +80,9 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
         Ui.duplicateTripWarning();
         while (true) {
             String userOption = Ui.receiveUserInput();
-            if (userOption.contains("y")) {
+            if (userOption.contains(Ui.USER_CONTINUE)) {
                 return true;
-            } else if (userOption.contains("n")) {
+            } else if (userOption.contains(Ui.USER_QUIT)) {
                 Ui.printForceCancelled();
                 return false;
             }
@@ -99,6 +108,8 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
         return false;
     }
 
+
+
     /**
      * Gets the trip to be edited and edits the specified attributes of the trip.
      *
@@ -111,18 +122,17 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
      *
      */
     protected static void executeEditTrip(String inputDescription) throws ForceCancelException {
-        String[] tripToEditInfo = inputDescription.split(" ", 2);
-        assert tripToEditInfo[1] != null;
-        String attributesToEdit = tripToEditInfo[1];
+        String[] tripToEditInfo = inputDescription.split(" ", EDIT_ATTR_COUNT);
+        String attributesToEdit = tripToEditInfo[ATTRIBUTE_DATA];
         Trip tripToEdit;
-        if (tripToEditInfo[0].equals("last")) {
+        if (tripToEditInfo[EDIT_INDEX].equals(LAST_INTERACTED)) {
             tripToEdit = Storage.getLastTrip();
             if (tripToEdit == null) {
                 Ui.printNoLastTripError();
                 return;
             }
         } else {
-            tripToEdit = editTripWithIndex(tripToEditInfo[0].strip());
+            tripToEdit = editTripWithIndex(tripToEditInfo[EDIT_INDEX].strip());
         }
         editTripPerAttribute(tripToEdit, attributesToEdit);
     }
@@ -189,22 +199,22 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
         Trip openTrip = Storage.getOpenTrip();
         if (inputParams == null) {
             openTrip.viewAllExpenses();
-        } else if (inputParams.equalsIgnoreCase("last")) {
+        } else if (inputParams.equalsIgnoreCase(LAST_INTERACTED)) {
             if (openTrip.getLastExpense() == null) {
                 Ui.noRecentExpenseError();
             } else {
                 System.out.println(openTrip.getLastExpense());
             }
         } else {
-            String[] paramString = inputParams.split(" ", 3);
-            String secondCommand = paramString[0];
+            String[] paramString = inputParams.split(" ", NUMBER_OF_PARAMETERS);
+            String secondCommand = paramString[INDEX_OF_SECOND_COMMAND];
             String expenseCategory = null;
             String expenseAttribute = null;
             if (!isNumeric(secondCommand)) {
-                expenseCategory = paramString[1];
-                expenseAttribute = paramString[2];
+                expenseCategory = paramString[INDEX_OF_CATEGORY];
+                expenseAttribute = paramString[INDEX_OF_EXPENSE_ATTRIBUTE];
             }
-            if (secondCommand.equalsIgnoreCase("filter")) {
+            if (secondCommand.equalsIgnoreCase(FILTER)) {
                 try {
                     openTrip.getFilteredExpenses(expenseCategory, expenseAttribute);
                 } catch (IndexOutOfBoundsException e) {
@@ -239,14 +249,14 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
         int index;
         if (Storage.checkOpenTrip()) {
             Trip currTrip = Storage.getOpenTrip();
-            if (inputParams.equalsIgnoreCase("last")) {
+            if (inputParams.equalsIgnoreCase(LAST_INTERACTED)) {
                 index = currTrip.getListOfExpenses().indexOf(currTrip.getLastExpense());
             } else {
                 index = Integer.parseInt(inputParams) - 1;
             }
             executeDeleteExpense(index);
         } else {
-            if (inputParams.equalsIgnoreCase("last")) {
+            if (inputParams.equalsIgnoreCase(LAST_INTERACTED)) {
                 index = Storage.getListOfTrips().indexOf(Storage.getLastTrip());
             } else {
                 index = Integer.parseInt(inputParams) - 1;
@@ -375,7 +385,7 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
      * @throws ForceCancelException allows the user to cancel an operation when an input is required.
      */
     private static void editTripPerAttribute(Trip tripToEdit, String attributeToEdit) throws ForceCancelException {
-        String[] splitCommandAndData = attributeToEdit.split(" ", 2);
+        String[] splitCommandAndData = attributeToEdit.split(" ", EDIT_ATTR_COUNT);
         String data = splitCommandAndData[ATTRIBUTE_DATA];
         switch (splitCommandAndData[EDIT_ATTRIBUTE]) {
         case EDIT_LOCATION:
