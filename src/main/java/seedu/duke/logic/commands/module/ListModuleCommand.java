@@ -20,6 +20,5 @@ public class ListModuleCommand extends Command {
         } else {
             ui.printModuleList(moduleList);
         }
-
     }
 }
