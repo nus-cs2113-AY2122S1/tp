@@ -1,6 +1,6 @@
 @startuml
 'https://plantuml.com/sequence-diagram
-
+hide footbox
 autonumber
 
 -> "command:DeleteMultipleExpenditureCommand" : execute(boolean isLoadingStorage)
