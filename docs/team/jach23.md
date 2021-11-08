@@ -13,6 +13,7 @@ Please see below for my contributions to Traveller.
   * Returning the path of the shortest cost or time
   * Basic exceptions and assertions
   * Creating all major test cases
+
 * Item List
   * Search
   * Edit/Update
@@ -24,7 +25,7 @@ Please see below for my contributions to Traveller.
 #### Enhancements Implemented
 * **Features**
   * `shortest-time`: Allow users to find the shortest time from one destination to another.
-    * Core part of Traveller, which is to enable users to find the minimal route and the corresponding path breakdown.
+    * Core part of Traveller, which is to enable users to find the shortest route and the corresponding path breakdown.
   * `shortest-cost`: Allow users to find the least expensive distance from one destination to another.
     * Core part of Traveller, which is to help users to find the cheapest path and the corresponding journey breakdown.
   * `search-item`: Allow users to search using an item keyword.
@@ -57,8 +58,21 @@ Please see below for my contributions to Traveller.
 
 #### Contributions to Team-based tasks
 * Reviewed multiple PRs.
+* Re-delegated workload regarding bugs on World Map and Item List from V2.0.
 
 #### Review/mentoring contributions
+PRs merged: 
+* [#158](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/158),
+* [#156](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/156),
+* [#152](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/152),
+* [#104](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/104),
+* [#93](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/93),
+* [#80](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/80),
+* [#76](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/76),
+* [#69](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/69),
+* [#68](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/68),
+* [#36](https://github.com/AY2122S1-CS2113T-W13-1/tp/pull/36).
 
-
-
+#### Contributions beyond the project team
+* Bugs found during PED.
+* Comments given during UG/DG peer review.
