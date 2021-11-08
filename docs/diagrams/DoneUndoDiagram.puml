@@ -7,21 +7,21 @@ end box
 activate Duke
 box BLUE_COLOR
 Participant ":Parser" as Parser
-
+Participant ":DoneUndoParser" as DoneUndoParser
 activate Duke
 
 
-Duke -> Parser
+Duke -> Parser: parseCommand
 activate Parser
-create ":DoneUndoParser" as DoneUndoParser
+
 end box
-Parser -> DoneUndoParser: multiWordCommandProtocol
+Parser -> DoneUndoParser: getDoneUndoCommand
 activate DoneUndoParser
 
 box LOGIC_COLOR
 create ":DoneUndoCommand" as DoneUndoCommand
 end box
-DoneUndoParser -> DoneUndoCommand: getDoneUndoCommand
+DoneUndoParser -> DoneUndoCommand: DoneUndoCommand
 activate DoneUndoCommand
 return
 return
