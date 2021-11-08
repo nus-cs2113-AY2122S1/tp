@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class Storage {
     public static String dataStorageDirectory = "./data/";
     public static final String LS = System.lineSeparator();
+
     /**
      * Loads the data text file to the app.
      *
