@@ -2,30 +2,41 @@
 
 !include Style.puml
 
--> ": DeleteGoalCommand": runCommand\n(goalList: GoalList,\n printManager: PrintManager,\n storage: Storage)
+-> ": DeleteGoalCommand": runCommand(\ngoalList: GoalList,\nprintManager: PrintManager,\nstorage: Storage)
 activate ": DeleteGoalCommand"
 
-": DeleteGoalCommand" -> "goalList: GoalList": deleteGoal\n(goalIndex: int,\n printManager: PrintManager)
+": DeleteGoalCommand" -> "goalList: GoalList": deleteGoal(\ngoalIndex: int,\nprintManager: PrintManager)
 activate "goalList: GoalList"
 
-create "goal: Goal"
-"goalList: GoalList" -> "goal: Goal": getGoal(goalIndex: int)
-activate "goal: Goal"
-"goalList: GoalList" <-- "goal: Goal"
-
-
-"goalList: GoalList" -> "goalList: GoalList": updateChosenGoalIndex\n(goalIndex: int)
+"goalList: GoalList" -> "goalList: GoalList": getGoal(goalIndex: int)
 activate "goalList: GoalList"
+"goalList: GoalList" --> "goalList: GoalList"
+deactivate "goalList: GoalList"
+
+ref over "goalList: GoalList": Abstracted checks before\ndeleting Goal:\ngoalIndex  is a positive integer \nand not out of bounds.
+
+"goalList: GoalList" -> "goalList: GoalList": updateChosenGoalIndex(\ngoalIndex: int)
+activate "goalList: GoalList"
+"goalList: GoalList" --> "goalList: GoalList"
 deactivate "goalList: GoalList"
 
 "goalList: GoalList" -> "goalList: GoalList": remove(goal: Goal)
 activate "goalList: GoalList"
+"goalList: GoalList" --> "goalList: GoalList"
 deactivate "goalList: GoalList"
 
-"goalList: GoalList" -> "goal: Goal": printRemovedGoal\n(goal.getDescription(): String)
 
-"goal: Goal" -> ": PrintManager"
+"goalList: GoalList" -> "goalList: GoalList": printRemovedGoal(\ngoal.getDescription(): String)
+activate "goalList: GoalList"
+"goalList: GoalList" -> ": PrintManager"
+deactivate "goalList: GoalList"
+
 activate ": PrintManager"
+"goalList: GoalList" <-- ": PrintManager"
 deactivate ": PrintManager"
+
+return
+
+return
 
 @enduml

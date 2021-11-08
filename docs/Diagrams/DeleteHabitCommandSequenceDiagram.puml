@@ -2,10 +2,10 @@
 
 !include Style.puml
 
--> ": DeleteHabitCommand": runCommand\n(goalList: GoalList,\n printManager: PrintManager,\n storage: Storage)
+-> ": DeleteHabitCommand": runCommand(\ngoalList: GoalList,\n printManager: PrintManager,\n storage: Storage)
 activate ": DeleteHabitCommand"
 
-": DeleteHabitCommand" -> "goalList: GoalList": deleteHabitFromGoal\n(goalIndex: int,\n habitIndex: int,\n printManager: PrintManager)
+": DeleteHabitCommand" -> "goalList: GoalList": deleteHabitFromGoal(\ngoalIndex: int,\n habitIndex: int,\n printManager: PrintManager)
 activate "goalList: GoalList"
 
 create "goal: Goal"
@@ -23,7 +23,7 @@ activate "habitList: ArrayList<habit>"
 create "habit: Habit"
 "goalList: GoalList" -> "habit: Habit"
 activate "habit: Habit"
-"habitList: ArrayList<habit>" <- "habit: Habit": getHabit\n(habitList: ArrayList<Habit>,\n habitIndex: int)
+"habitList: ArrayList<habit>" <- "habit: Habit": getHabit(\nhabitList: ArrayList<Habit>,\n habitIndex: int)
 "habitList: ArrayList<habit>" --> "habit: Habit": habit
 "goalList: GoalList" <-- "habit: Habit"
 
@@ -36,9 +36,13 @@ deactivate "goal: Goal"
 "goalList: GoalList" <-- "goal: Goal"
 
 
-"goalList: GoalList" -> "goal: Goal": printRemovedHabit\n(goal.getDescription(): String,\n habit.getHabitName(): String)
+"goalList: GoalList" -> "goal: Goal": printRemovedHabit(\ngoal.getDescription(): String,\n habit.getHabitName(): String)
 "goal: Goal" -> "habit: Habit"
 "habit: Habit" -> ": PrintManager"
 activate ": PrintManager"
+
+return
+
+return
 
 @enduml
