@@ -196,7 +196,7 @@ List all tasks currently stored locally in your task list.
 
 **Format**: `list`
 - The command displays the following information for each task:
-  - **Task id**:
+  - **Task index**:
     - A positive integer i.e. `1.` which identifies the task. This index is used to identify tasks in the [`edit`](#26-editing-your-tasks-edit), [`browse`](#272-browse-browse) and [`delete`](#28-deleting-your-tasks-delete) commands.
   - **Task type**:
     - A task can either be a Todo, Deadline, Event or Lesson and they are all represented with the first letter of their task type.
@@ -270,8 +270,8 @@ Filters the task list for all tasks that matches the filters applied.
 #### 2.3.3 Listing the recurrence of a task
 Displays the next four recurrences of a task.
 
-**Format 2**: `list [index]`
-- `[index]` specifies the id of the task to display the next four recurrences of.
+**Format 2**: `list [id]`
+- `[id]` specifies the id of the task to display the next four recurrences of.
   >💡 **Note**: To obtain the correct task id of each task, please use the `list` command without any filters.
 
 **Example (with task id)**: `list 3`
