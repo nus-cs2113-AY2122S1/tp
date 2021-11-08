@@ -1,19 +1,21 @@
 @startuml
+!include Style.puml
 hide Circle
 skinparam classAttributeIconSize 0
 
-class Module
-class ModuleList
-class FullModuleList
+class Module MODEL_COLOR
+class ModuleList MODEL_COLOR
+class FullModuleList MODEL_COLOR
 
-ModuleList -down-> "*" Module : moduleList
-FullModuleList -> "*" Module : fullModuleList
-FullModuleList -> "*" Module : moduleMap
+ModuleList -down[MODEL_COLOR_T1]-> "*" Module : moduleList
+FullModuleList -[MODEL_COLOR_T1]> "*" Module : fullModuleList
+FullModuleList -[MODEL_COLOR_T1]> "*" Module : moduleMap
 
 hide members
 
-class AddModuleCommand
-AddModuleCommand ..> Module
-AddModuleCommand ..> ModuleList
-AddModuleCommand ..> FullModuleList
+package "AddModuleCommand" <<Rectangle>> {
+}
+AddModuleCommand .[MODEL_COLOR_T1].> Module
+AddModuleCommand .[MODEL_COLOR_T1].> ModuleList
+AddModuleCommand .[MODEL_COLOR_T1].> FullModuleList
 @enduml

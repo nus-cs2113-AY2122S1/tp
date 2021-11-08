@@ -1,25 +1,32 @@
 @startuml
+!include Style.puml
 hide circle
 skinparam classAttributeIconSize 0
 
-class Lesson
-class LessonList
+class Lesson MODEL_COLOR
+class LessonList MODEL_COLOR
 
-LessonList -> "*" Lesson : lessonList
+LessonList -[MODEL_COLOR_T1]> "*" Lesson : lessonList
 
-hide members
+package "AddLessonCommand" <<Rectangle>> {
+}
 
-class AddLessonCommand
-class DeleteLessonCommand
-class FindLessonCommand
-class ListLessonCommand
-AddLessonCommand ..> Lesson
-AddLessonCommand ..> LessonList
-DeleteLessonCommand ..>Lesson
-DeleteLessonCommand ..> LessonList
-FindLessonCommand ..> Lesson
-FindLessonCommand ..> LessonList
-ListLessonCommand ..> Lesson
-ListLessonCommand ..> LessonList
+package "DeleteLessonCommand" <<Rectangle>> {
+}
+
+package "FindLessonCommand" <<Rectangle>> {
+}
+
+package "ListLessonCommand" <<Rectangle>> {
+}
+
+AddLessonCommand .down[MODEL_COLOR_T1].> Lesson
+AddLessonCommand .down[MODEL_COLOR_T1].> LessonList
+DeleteLessonCommand .down[MODEL_COLOR_T1].>Lesson
+DeleteLessonCommand .down[MODEL_COLOR_T1].> LessonList
+FindLessonCommand .up[MODEL_COLOR_T1].> Lesson
+FindLessonCommand .up[MODEL_COLOR_T1].> LessonList
+ListLessonCommand .up[MODEL_COLOR_T1].> Lesson
+ListLessonCommand .up[MODEL_COLOR_T1].> LessonList
 
 @enduml

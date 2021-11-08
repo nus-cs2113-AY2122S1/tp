@@ -1,27 +1,36 @@
 @startuml
+!include Style.puml
 hide circle
 skinparam classAttributeIconSize 0
 
-class Task
-class TaskList
+class Task MODEL_COLOR
+class TaskList MODEL_COLOR
 
-TaskList -> "*" Task : taskList
+TaskList -[MODEL_COLOR_T1]> "*" Task : taskList
 
-hide members
+package "AddTaskCommand" <<Rectangle>> {
+}
 
-class AddTaskCommand
-class DeleteTaskCommand
-class DoneTaskCommand
-class FindTaskCommand
-class ListTaskCommand
-AddTaskCommand ..> Task
-AddTaskCommand ..> TaskList
-DeleteTaskCommand ..>Task
-DeleteTaskCommand ..> TaskList
-DoneTaskCommand ..> Task
-DoneTaskCommand ..> TaskList
-FindTaskCommand ..> Task
-FindTaskCommand ..> TaskList
-ListTaskCommand ..> Task
-ListTaskCommand ..> TaskList
+package "DeleteTaskCommand" <<Rectangle>> {
+}
+
+package "DoneTaskCommand" <<Rectangle>> {
+}
+
+package "FindTaskCommand" <<Rectangle>> {
+}
+
+package "ListTaskCommand" <<Rectangle>> {
+}
+
+AddTaskCommand .down[MODEL_COLOR_T1].> Task
+AddTaskCommand .down[MODEL_COLOR_T1].> TaskList
+DeleteTaskCommand .down[MODEL_COLOR_T1].>Task
+DeleteTaskCommand .down[MODEL_COLOR_T1].> TaskList
+DoneTaskCommand .up[MODEL_COLOR_T1].> Task
+DoneTaskCommand .up[MODEL_COLOR_T1].> TaskList
+FindTaskCommand .up[MODEL_COLOR_T1].> Task
+FindTaskCommand .up[MODEL_COLOR_T1].> TaskList
+ListTaskCommand .up[MODEL_COLOR_T1].> Task
+ListTaskCommand .up[MODEL_COLOR_T1].> TaskList
 @enduml
