@@ -3,6 +3,10 @@ package seedu.duke;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.commands.currency.CheckCurrentCurrencyCommand;
+import seedu.commands.currency.CurrencyConversionCommand;
+import seedu.commands.currency.CurrencyType;
+import seedu.commands.currency.ListCurrencyTypesCommand;
 import seedu.commands.general.FindCommand;
 import seedu.entry.Entry;
 import seedu.entry.Income;
@@ -285,15 +289,16 @@ public class UiTest {
     
     @Test
     public void printGraph_validStonksGraph_printCorrectGraph() {
+        int currentYear = LocalDate.now().getYear();
         //empty financialtracker
-        StonksGraph stonksGraph = new StonksGraph(financialTracker,LocalDate.now().getYear());
+        StonksGraph stonksGraph = new StonksGraph(financialTracker,currentYear);
         String expectedOutput = SEPARATOR_LINE
                 + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
                 + "x                                                                                                  x"
                 + "x   Account Balance: $0.00                                                 Legend:                 x"
-                + "x   Current month total expense: $0.00                                # is Expense      x"
-                + "x   Current month total income: $0.00                                 o is Income       x"
-                + "x   Your Year Report                                                       Unit: 0.01              x"
+                + "x   Current month total expense: $0.00                           # is Expense      x"
+                + "x   Current month total income: $0.00                            o is Income       x"
+                + "x   Year Report                                                       Unit: 0.01              x"
                 + "x ------------------------------------------------------------------------------------------------ x"
                 + "x                                                                                                  x"
                 + "x                                                                                                  x"
@@ -313,9 +318,10 @@ public class UiTest {
 
         String fullOutput = outputStreamCaptor.toString().trim();
         String fullOutputWithoutNewLine = fullOutput.replace(System.lineSeparator(),"");
-        String outputToBeTested = fullOutputWithoutNewLine.replaceAll("h.*?t","h t");
+        String afterRemoveCurrentMonth = fullOutputWithoutNewLine.replaceAll("month.*?t","month t");
+        String afterRemoveCurrentYear = afterRemoveCurrentMonth.replaceAll("Year.*?R","Year R");
 
-        assertEquals(expectedOutput, outputToBeTested);
+        assertEquals(expectedOutput, afterRemoveCurrentYear);
     }
 
     @Test
@@ -428,6 +434,48 @@ public class UiTest {
                 + "Below is a list of all your findings!" + newLine
                 + SEPARATOR_LINE + newLine
                 + "1: [E] Bought a game - $19.73 " + currentDate + newLine
+                + SEPARATOR_LINE;
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void listCurrencyTypes_matchInCurrencyTypes_printCorrectList() {
+        ListCurrencyTypesCommand testListCurrencyTypesCommand = new ListCurrencyTypesCommand();
+        testListCurrencyTypesCommand.execute(financialTracker, testUI, budgetManager, currencyManager);
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "Here is a list of available currencies you can convert to!" + newLine
+                + "1. HKD" + newLine
+                + "2. SGD" + newLine
+                + SEPARATOR_LINE;
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void checkCurrencyTypes_matchInCurrentCurrencyTypes_printCorrectType() {
+        CheckCurrentCurrencyCommand testCurrentCurrencyTypeCommand = new CheckCurrentCurrencyCommand();
+        testCurrentCurrencyTypeCommand.execute(financialTracker, testUI, budgetManager, currencyManager);
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "Your currency setting currently: SGD" + newLine
+                + SEPARATOR_LINE;
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void setCurrencyTypeHdk_matchesCurrencyTypeHdk_printConfirmationMessage() {
+        CurrencyConversionCommand testCurrencyConversionCommand = new CurrencyConversionCommand(CurrencyType.HKD);
+        testCurrencyConversionCommand.execute(financialTracker, testUI, budgetManager, currencyManager);
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "All entries have been converted to HKD!" + newLine
+                + SEPARATOR_LINE;
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void setCurrencyTypeSgd_matchesCurrencyTypeSgd_printSameTypeExceptionMessage() {
+        CurrencyConversionCommand testCurrencyConversionCommand = new CurrencyConversionCommand(CurrencyType.SGD);
+        testCurrencyConversionCommand.execute(financialTracker, testUI, budgetManager, currencyManager);
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "Your lists are already in the requested currency type!- SGD" + newLine
                 + SEPARATOR_LINE;
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
