@@ -197,7 +197,7 @@ List all tasks currently stored locally in your task list.
 **Format**: `list`
 - The command displays the following information for each task:
   - **Task id**:
-    - A positive integer i.e. `1.` which identifies the task. This is used in the [`edit`](#26-editing-your-tasks-edit), [`browse`](#272-browse-browse) and [`delete`](#28-deleting-your-tasks-delete) commands.
+    - A positive integer i.e. `1.` which identifies the task. This index is used to identify tasks in the [`edit`](#26-editing-your-tasks-edit), [`browse`](#272-browse-browse) and [`delete`](#28-deleting-your-tasks-delete) commands.
   - **Task type**:
     - A task can either be a Todo, Deadline, Event or Lesson and they are all represented with the first letter of their task type.
     - `[T]` represents a `Todo`.
