@@ -104,7 +104,7 @@ Simply typing help without parameters will display a list of commands that can b
 Expected Output when the program is in the Patient Management view:
 
 ```
-Here are the list of commands:
+Here is the list of commands:
 
 help
 add
@@ -119,7 +119,7 @@ switch
 get view
 exit
 
-To obtain more information on each command and their respective required inputs, type:
+To view more information about each command and their respective command formats, type:
 help [COMMAND]
 
 *Note that all commands will remove any '|' inputs for format parsing purposes.
@@ -141,7 +141,7 @@ Here is the list of views and their corresponding `[VIEW_TYPE]` specifiers:
 | `Scheduler`                | `s`       | `3`                 |
 
 Using either specifier will switch to the corresponding view. I.e., `switch m` and `switch 2` will both switch to the 
-Medical Staff Info view.
+Staff Management view.
 
 If the switch command is called without any parameters, the view that is switched to will depend on the current view in 
 the following order.
@@ -223,14 +223,15 @@ Address: Blk 123 Bishan Street 7, #03-07
 
 #### Notes on adding patients:
 
-- The first letter of each word in `NAME` and `ADDRESS` will be capitalized, and the remaining letters will be set to
+- The first letter of each word in `NAME` and `ADDRESS` will be capitalized, and the remaining letters will be set to 
+lowercase.
 - `PHONE_NUMBER` must be an 8-digit phone number. Spaces, dashes and underscore characters will be accepted but removed
-  lower case
 - `EMAIL` must be in a valid email format
     - eg. tim_ong@example.com
 - `PATIENT_IC` must be in a valid NRIC format:
     - The checksum of the NRIC will not be checked.
     - Alphabets will be auto-capitalized.
+    - No two patients can have the same NRIC
 - No parameters are made compulsory but at least one parameter must be given. The purpose is to allow for the addition 
 of patients into MedBot in emergency cases where personal information is not yet available.
 
@@ -250,8 +251,7 @@ Patient with ID 3 deleted from system.
 
 #### Notes:
 
-* The patient being deleted does not affect the data of the rest of the patients, i.e. the ID will 
-remain the same. 
+* Deleting a patient would not affect the IDs of other patients
 <br>Reasons :
   * ID uniquely identifies a patient and should not be changed.
   * ID does not indicate the row number in the patient list.
@@ -367,10 +367,10 @@ Here is a list of matched patients:
 
 ### 4.3.7 Hide a patient: `hide`
 
-Hides a patient in the list. Hidden patients are not shown with `list` command. To show all hidden patients,
+Hides a patient in the list. Hidden patients are not shown with `list` command. To view all hidden patients,
 use `list -h`.
 
-This command only works for currently not-hidden patients.
+This command only works for non-hidden patients.
 
 Format: `hide PATIENT_ID`
 
@@ -384,7 +384,7 @@ Expected Output:
 
 Show a patient in the list. Shown (not-hidden) patients are shown on `list`
 
-This command only works for currently hidden patients.
+This command only works for hidden patients.
 
 Format: `show PATIENT_ID`
 
@@ -420,7 +420,8 @@ Date/Time: 09 Nov 21 1200HRS
 - Appointments are managed on an hourly basis. 
 
   - e.g. any appointments set to any time between 0800HRS and 0859HRS will be treated as an appointment from 0800HRS to 
-  0859HRS. 
+  0859HRS. Setting an appointment time at 0837HRS will have MedBot correcting the appointment time to 0800HRS, and it 
+  will last until 0859HRS.
   - No subsequent appointment can then be scheduled for both the patient and the medical staff during that time frame.
 
 ### 4.4.2 Delete an appointment: `delete`
