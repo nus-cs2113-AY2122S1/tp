@@ -311,26 +311,20 @@ E.g. `update 1.2 a/150.0`
 checks the validity of the inputs. If inputs are valid, the string is broken into an array 
 of 3 elements, and it's parameters are converted into it's appropriate data types.
 
-
 3. The 3 elements within the array get passed as arguments in the `UpdateCommand` class that calls the `update`
 method in the `IngredientList` class.
 
-
 4. The `update` method calls the `getIngredientGroup` method in the `IngredientList` class
 to find the ingredient group to be updated.
-
 
 5. Then, in the `IngredientGroup` class, the
    `get` method is called on the identified ingredient group to get the ingredient 
    object that is to be updated.
 
-
 6. The total amount of ingredient within the group is updated to the new amount 
 by the `updateTotalAmount` method in the `IngredientGroup` class.
 
-
 7. Next, The ingredient amount of the ingredient is set using the `setAmount` method.
-
 
 8. Lastly, the updated `ingredientList` is stored in the external memory through the `Storage`
    class.
@@ -361,7 +355,6 @@ Ingredient amount can be subtracted using `subtract` command followed by two par
 contain a prefixed flag for SITUS to identify the ingredient's name and subtract amount.
 
 E.g. `subtract n/carrot a/150.0`
-
 1. The current ingredient inventory is:
 
 ```
@@ -378,22 +371,17 @@ E.g. `subtract n/carrot a/150.0`
    checks the validity of the inputs. If inputs are valid, the string is broken into an array
    of 2 elements, and it's parameters are converted into it's appropriate data types.
 
-
 3. The 2 elements within the array get passed as arguments in the `SubtractCommand` class that 
 calls the `SubtractIngredientFromGroup` method in the `IngredientList` class.
-
 
 4. The `SubtractIngredientFromGroup` method calls the `findIngredientIndexInList` method 
 in the `IngredientList` class to find the index of the ingredient to subtract amount from.
 
-
 5. Then, the `getIngredientGroup` method is called to get the ingredient group.
-
 
 6. If the ingredient has a negligible amount remaining, the group is removed,
 the updated ingredientList is stored in the external memory through the `Storage` class, 
 and the function is returned.
-
 
 7. If not, the input subtract amount is subtracted from the ingredient group. The subtraction
 iterates from ingredients with closest to the furthest expiry dates. There are two scenarios during iteration:
@@ -403,14 +391,11 @@ iterates from ingredients with closest to the furthest expiry dates. There are t
    2. Remaining amount to be subtracted is greater than current ingredient amount:
       1. The current ingredient amount is set to 0.0.
       2. The current ingredient amount is subtracted from the amount to be subtracted.
-
-
+      
 8. Next, the `removeLowAmountIngredientFromGroup` method is called to remove ingredients with 
 negligible amounts remaining.
 
-
 9. Lastly, the updated `ingredientList` is stored in the external memory through the Storage class.
-
 
 10. After the ingredient amount has been subtracted, the ingredient inventory list is:
 
