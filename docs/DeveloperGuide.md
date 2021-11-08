@@ -24,7 +24,7 @@
 
 List of sources/references:
 * [GSON](https://github.com/google/gson/) - Read and write JSON files.
-* [Address Book (Level 4)](https://se-education.org/addressbook-level4/) - Provide samples of User Guide (UG) and Developer Guide (DG).
+* [Address Book (Level 4)](https://se-education.orAg/addressbook-level4/) - Provide samples of User Guide (UG) and Developer Guide (DG).
 
 ## Design
 ### Architecture
@@ -208,7 +208,7 @@ The sequence diagram shown below illustrates how the `set_mark` command works:
 ![SetMarkSequenceDiagram](diagrams/sequence/SetMarkSequenceDiagram.png)
 
 Below is an example scenario of how the set mark feature behaves at each step:
-* Step 1 - The user executes `set_marks c/CS2113T-F12 \ns/1 a/Midterms m/60` to set the mark of a student for an assessment.
+* Step 1 - The user executes `set_mark c/CS2113T-F12 s/1 a/Midterms m/60` to set the mark of a student for an assessment.
   The `set_mark` command calls the `SetMarkCommand.execute` method.
 * Step 2 - Within `SetMarkCommand.execute`, `ClassList.getClassWithId("CS2113T-F12")` is called to ensure that there
   is an existing class with code `CS2113T-F12`.
@@ -216,8 +216,9 @@ Below is an example scenario of how the set mark feature behaves at each step:
 * Step 4 - `assessmentList.getAssessment("Midterms")` is called to retrieve the respective `Assessment` object.
 * Step 5 - If the `Assessment` object for `Midterms` exists, `studentList.getStudentAt(1)` is to retrieve the `Student` object.
 * Step 6 - If the `Student` object exists, `student.setMarks("Midterms", 60)` is called to set the mark of the student
-  for `Midterms`.
+  for `Midterms`. Below is an object diagram showing the state after completion of the set_mark command
 
+![SetMarkObjectDiagram](diagrams/object/SetMarkObjectDiagram.png)
 <br>
 
 ### Set Attendance

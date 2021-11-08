@@ -11,7 +11,7 @@ Participant ":StudentList" as studentList
 Participant ":Student" as student
 Participant ":Storage" as storage
 
-user -> taa : "set_marks c/CS2113T-F12 \ns/1 a/Midterms m/60"
+user -> taa : "set_mark c/CS2113T-F12 \ns/1 a/Midterms m/60"
 activate taa
 
 taa -> setMarkCommand : execute(classList:ClassList, \nui:Ui, storage:Storage)
