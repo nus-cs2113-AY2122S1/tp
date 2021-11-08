@@ -8,9 +8,8 @@ import seedu.duke.trip.Trip;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
-interface PaymentOptimizer {
-    double EPSILON = 0.001;
+class PaymentOptimizer {
+    static double EPSILON = 0.001;
 
     /**
      * Calls different methods that helps to calculate the optimized payments.
@@ -22,7 +21,6 @@ interface PaymentOptimizer {
         ArrayList<Double> totalExpenses = new ArrayList<>();
         boolean isAllPaid = false;
         getTotalAmountForPerson(totalExpenses, listOfPersons);
-
         int currentIndex;
         while (!isAllPaid) {
             for (Person person : listOfPersons) {
