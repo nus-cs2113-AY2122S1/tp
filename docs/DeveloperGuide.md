@@ -342,8 +342,19 @@ Below is a sequence diagram that shows how the SetExpiryCommand functions
 
 ![](images/set_expiry.png)
 
-There is currently a soft limit of 10000 days for the expiry. If this limit is exceeded the user will be prompted for
-confirmation before proceeding as 10000 is an unusual amount for the field and might be a misinput.
+1. The input will be handled by the basic input validation within the command class to figure out which ingredient is to be changed
+
+2. The methods will prompt a date input as a sting and will throw exceptions if date is of an invalid format.
+
+3. If the input is a valid date, the function will calculate the days till expiry. If this result turns out to be negative (in the past), the user is prompted to re-enter a date
+
+4. There is currently a soft limit of 10000 days for the expiry. If this limit is exceeded the user will be prompted for confirmation before proceeding as 10000 is an unusual amount for the field and might be a misinput.
+
+5. If the user enters `n` or `no`, the user is prompted to re-enter a date.
+
+6. Else, the previously entered date is set as the expiry.
+
+7. The Ui class is then called to print a success message to the user.
 
 ### Link
 
@@ -364,8 +375,9 @@ that use them. The diagram below showcases the sequence of the `LinkCommand` cla
 
 ### Graph
 
-The implementation of the Edit function allows Food-O-Rama to display a graph of the Dishes and Ingredients present in the
-DishList and IngredientList to the User Below is a sequence diagram that shows how the GraphCommand functions
+The implementation of the Graph function allows Food-O-Rama to display a graph of the Dishes and Ingredients present in the
+DishList and IngredientList to the User.
+Below is a sequence diagram that shows how the GraphCommand functions
 
 ![](images/graph_sequence.png)
 
