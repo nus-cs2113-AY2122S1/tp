@@ -31,6 +31,7 @@ public class AddMiscellaneousCommand extends Command {
         this.title = args.get(KEY_TITLE);
         this.id = args.get(KEY_ID);
         this.status = Status.AVAILABLE;
+        assert args != null : "Args hashmap is null";
     }
 
     /**
@@ -72,6 +73,7 @@ public class AddMiscellaneousCommand extends Command {
         }
         try {
             Miscellaneous newItem = new Miscellaneous(title, id, status, null, null);
+            assert newItem != null : "newItem is null";
             catalogue.add(newItem);
             ui.print(ADD_MESSAGE, newItem);
         } catch (LibmgrException e) {

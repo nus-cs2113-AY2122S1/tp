@@ -44,6 +44,7 @@ public class Storage {
         this.dataDir = DEFAULT_PATH.split("/")[0];
         this.dataFile = DEFAULT_PATH.split("/")[1];
         data = validatePath();
+        assert data != null : "Data file object returned null";
         this.jsonFactory = new JsonFactory();
     }
 

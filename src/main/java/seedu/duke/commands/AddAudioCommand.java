@@ -46,6 +46,7 @@ public class AddAudioCommand extends Command {
         this.status = Status.AVAILABLE;
         this.artist = args.get(KEY_ARTIST);
         this.duration = args.get(KEY_DURATION);
+        assert args != null : "Args hashmap is null";
     }
 
     /**
@@ -89,6 +90,7 @@ public class AddAudioCommand extends Command {
         }
         try {
             Audio newAudio = new Audio(title, id, status, null, null, artist, duration);
+            assert newAudio != null : "newAudio is null";
             catalogue.add(newAudio);
             ui.print(ADD_MESSAGE, newAudio);
         } catch (LibmgrException e) {

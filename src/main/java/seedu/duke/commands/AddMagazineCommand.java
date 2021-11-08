@@ -46,6 +46,7 @@ public class AddMagazineCommand extends Command {
         this.status = Status.AVAILABLE;
         this.publisher = args.get(KEY_PUBLISHER);
         this.edition = args.get(KEY_EDITION);
+        assert args != null : "Args hashmap is null";
     }
 
     /**
@@ -89,6 +90,7 @@ public class AddMagazineCommand extends Command {
         }
         try {
             Magazine newMagazine = new Magazine(title, id, status, null, null, publisher, edition);
+            assert newMagazine != null : "newMagazine is null";
             catalogue.add(newMagazine);
             ui.print(ADD_MESSAGE, newMagazine);
         } catch (LibmgrException e) {

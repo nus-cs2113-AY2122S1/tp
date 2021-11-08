@@ -11,3 +11,4 @@ Useful links:
 * [Developer Guide](DeveloperGuide.md)
 * [About Us](AboutUs.md)
   * [Teo Chuan Kai](team/exetr.md)
+  * [Dyah Ayu Nurun Nafisah](team/dyahnafisah.md)
