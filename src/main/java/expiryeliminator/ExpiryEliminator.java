@@ -1,16 +1,16 @@
 package expiryeliminator;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import expiryeliminator.commands.Command;
 import expiryeliminator.common.LogsCenter;
 import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.parser.Parser;
+import expiryeliminator.storage.LoadData;
 import expiryeliminator.storage.SaveData;
 import expiryeliminator.ui.Ui;
-import expiryeliminator.storage.LoadData;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Entry point of the ExpiryEliminator application.
@@ -49,6 +49,7 @@ public class ExpiryEliminator {
             final Command command = Parser.parseCommand(userInput);
             isExit = command.isExit();
             final String feedback = command.execute(ingredients, recipes);
+            logger.log(Level.INFO, "Feedback from command: " + feedback);
             SaveData.saveIngredientRepoToFile(ingredients);
             SaveData.saveRecipeListToFile(recipes);
             ui.showToUser(feedback);

@@ -2,6 +2,8 @@ package expiryeliminator.parser;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,6 +29,7 @@ import expiryeliminator.commands.UpdateRecipeCommand;
 import expiryeliminator.commands.UpdateUnitsCommand;
 import expiryeliminator.commands.ViewIngredientCommand;
 import expiryeliminator.commands.ViewRecipeCommand;
+import expiryeliminator.common.LogsCenter;
 import expiryeliminator.parser.argparser.ExpiryDateParser;
 import expiryeliminator.parser.argparser.IngredientParser;
 import expiryeliminator.parser.argparser.QuantityParser;
@@ -68,6 +71,7 @@ public class Parser {
     public static final String MESSAGE_INVALID_ARGUMENT_FORMAT = "Invalid argument format!\n%1$s";
     private static final String MESSAGE_UNRECOGNISED_COMMAND = "I'm sorry, but I don't know what that means :-(\n"
             + "For help, please type `help`.";
+    private static final Logger logger = LogsCenter.getLogger(Parser.class);
 
     /**
      * Parses user input as a command.
@@ -83,6 +87,7 @@ public class Parser {
         }
         final String command = matcher.group("command").trim();
         String args = matcher.group("args");
+        logger.log(Level.FINER, "Parsed command: '" + command + "', parsed args:'" + args + "'");
 
         try {
             switch (command) {
@@ -136,6 +141,13 @@ public class Parser {
     }
     //@@author
 
+    /**
+     * Creates an AddIngredientCommand from the inputs.
+     *
+     * @param args Command arguments.
+     * @return AddIngredientCommand with the ingredient name and unit if successful and IncorrectCommand if not.
+     * @throws InvalidArgFormatException If the argument is of an invalid format.
+     */
     private static Command prepareAddIngredient(String args) throws InvalidArgFormatException {
         final ArgsParser argsParser = new ArgsParser(PREFIX_INGREDIENT, PREFIX_OPTIONAL_UNIT);
         try {
@@ -150,6 +162,13 @@ public class Parser {
         return new AddIngredientCommand(ingredient, unitString);
     }
 
+    /**
+     * Creates an DecrementCommand from the inputs.
+     *
+     * @param args Command arguments.
+     * @return DecrementCommand with the ingredient name and quantity if successful and IncorrectCommand if not.
+     * @throws InvalidArgFormatException If the argument is of an invalid format.
+     */
     private static Command prepareDecrementIngredient(String args) throws InvalidArgFormatException {
         final ArgsParser argsParser = new ArgsParser(PREFIX_INGREDIENT, PREFIX_QUANTITY);
         try {
@@ -163,6 +182,14 @@ public class Parser {
         return new DecrementCommand(ingredient, quantity);
     }
 
+    /**
+     * Creates an IncrementCommand from the inputs.
+     *
+     * @param args Command arguments.
+     * @return IncrementCommand with the ingredient name, quantity, and expiry date if successful and
+     *         IncorrectCommand if not.
+     * @throws InvalidArgFormatException If the argument is of an invalid format.
+     */
     private static Command prepareIncrementIngredient(String args) throws InvalidArgFormatException {
         final ArgsParser argsParser = new ArgsParser(PREFIX_INGREDIENT, PREFIX_QUANTITY, PREFIX_EXPIRY);
         try {
@@ -177,6 +204,13 @@ public class Parser {
         return new IncrementCommand(ingredient, quantity, expiry);
     }
 
+    /**
+     * Creates a DeleteIngredientCommand from the inputs.
+     *
+     * @param args Command arguments.
+     * @return DeleteIngredientCommand with the ingredient name if successful and IncorrectCommand if not.
+     * @throws InvalidArgFormatException If the argument is of an invalid format.
+     */
     private static Command prepareDeleteIngredient(String args) throws InvalidArgFormatException {
         final ArgsParser argsParser = new ArgsParser(PREFIX_INGREDIENT);
         try {
@@ -197,6 +231,7 @@ public class Parser {
      *
      * @param args Command arguments.
      * @return AddRecipeCommand with the recipe name and the ingredients if successful and IncorrectCommand if not.
+     * @throws InvalidArgFormatException If the argument is of an invalid format.
      */
     private static Command prepareAddRecipe(String args) throws InvalidArgFormatException {
         final ArgsParser argsParser = new ArgsParser(PREFIX_RECIPE, PREFIX_MULTIPLE_INGREDIENT,
@@ -225,6 +260,7 @@ public class Parser {
      *
      * @param args Command arguments.
      * @return a DeleteRecipeCommand with the recipe name if successful and an IncorrectCommand if not.
+     * @throws InvalidArgFormatException If the argument is of an invalid format.
      */
     private static Command prepareDeleteRecipe(String args) throws InvalidArgFormatException {
         final ArgsParser argsParser = new ArgsParser(PREFIX_RECIPE);
@@ -246,6 +282,7 @@ public class Parser {
      *
      * @param args Command arguments.
      * @return a DeleteRecipeCommand with the recipe name if successful and an IncorrectCommand if not.
+     * @throws InvalidArgFormatException If the argument is of an invalid format.
      */
     private static Command prepareViewIngredient(String args) throws InvalidArgFormatException {
         final ArgsParser argsParser = new ArgsParser(PREFIX_INGREDIENT);
@@ -267,6 +304,7 @@ public class Parser {
      *
      * @param args Command arguments.
      * @return a DeleteRecipeCommand with the recipe name if successful and an IncorrectCommand if not.
+     * @throws InvalidArgFormatException If the argument is of an invalid format.
      */
     private static Command prepareUpdateRecipe(String args) throws InvalidArgFormatException {
         final ArgsParser argsParser = new ArgsParser(PREFIX_RECIPE, PREFIX_MULTIPLE_INGREDIENT,
@@ -297,6 +335,7 @@ public class Parser {
      *
      * @param args Command arguments.
      * @return a DeleteRecipeCommand with the recipe name if successful and an IncorrectCommand if not.
+     * @throws InvalidArgFormatException If the argument is of an invalid format.
      */
     private static Command prepareCookedRecipe(String args) throws InvalidArgFormatException {
         final ArgsParser argsParser = new ArgsParser(PREFIX_RECIPE);
@@ -318,6 +357,7 @@ public class Parser {
      *
      * @param args Command arguments.
      * @return a DeleteRecipeCommand with the recipe name if successful and an IncorrectCommand if not.
+     * @throws InvalidArgFormatException If the argument is of an invalid format.
      */
     private static Command prepareViewRecipe(String args) throws InvalidArgFormatException {
         final ArgsParser argsParser = new ArgsParser(PREFIX_RECIPE);
@@ -336,6 +376,7 @@ public class Parser {
      *
      * @param args Command arguments.
      * @return a DeleteRecipeCommand with the recipe name if successful and an IncorrectCommand if not.
+     * @throws InvalidArgFormatException If the argument is of an invalid format.
      */
     private static Command prepareShoppingList(String args) throws InvalidArgFormatException {
         final ArgsParser argsParser = new ArgsParser(PREFIX_MULTIPLE_RECIPE);
@@ -355,6 +396,7 @@ public class Parser {
      *
      * @param args Command arguments.
      * @return a DeleteRecipeCommand with the recipe name if successful and an IncorrectCommand if not.
+     * @throws InvalidArgFormatException If the argument is of an invalid format.
      */
     private static Command prepareUpdateUnits(String args) throws InvalidArgFormatException {
         final ArgsParser argsParser = new ArgsParser(PREFIX_INGREDIENT, PREFIX_UNIT);

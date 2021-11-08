@@ -3,9 +3,12 @@ package expiryeliminator.parser;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import expiryeliminator.common.LogsCenter;
 import expiryeliminator.parser.exception.InvalidPrefixException;
 import expiryeliminator.parser.exception.MissingPrefixException;
 import expiryeliminator.parser.exception.MultipleArgsException;
@@ -25,11 +28,12 @@ class ArgsParser {
 
     /**
      * Used for separation of each prefix and argument.
-     * E.g. this matches "/a aaaaa aaaa"
+     * E.g. this matches "a/aaaaa aaaa".
      */
     private static final Pattern ARGS_FORMAT = Pattern.compile("\\w+/([^/\\s]*( +|$))+");
 
     private final ArrayList<Prefix> prefixList;
+    private static final Logger logger = LogsCenter.getLogger(ArgsParser.class);
 
     /**
      * Initialises argument parser and stores prefix list.
@@ -66,10 +70,18 @@ class ArgsParser {
         checkAllArgsPresent();
     }
 
+    /**
+     * Extracts arguments from the matcher and populates {@link #prefixesToArgs}.
+     *
+     * @param matcher Matcher based on the {@link #ARGS_FORMAT} pattern and matching on the argument string.
+     * @throws InvalidPrefixException If there is an invalid prefix found in the args that does not correspond
+     *         to any of the specified prefixes.
+     */
     private void findAndPopulateArgs(Matcher matcher) throws InvalidPrefixException {
         while (matcher.find()) {
             final String match = matcher.group().trim();
             final String[] prefixAndArg = match.split("/");
+            logger.log(Level.FINEST, "Parsing prefixAndArg: '" + Arrays.toString(prefixAndArg) + "'");
             final String prefix = prefixAndArg[0];
             String arg = null;
             if (prefixAndArg.length == 2) {
@@ -80,6 +92,7 @@ class ArgsParser {
                 }
                 arg = arg.trim();
             }
+            logger.log(Level.FINEST, "Parsed prefix: '" + prefix + "', parsed arg:'" + arg + "'");
             try {
                 prefixesToArgs.get(prefix).add(arg);
             } catch (NullPointerException error) {
@@ -88,9 +101,17 @@ class ArgsParser {
         }
     }
 
+    /**
+     * Checks that all required arguments are present.
+     *
+     * @throws MissingPrefixException If there is a missing prefix that could not be found in the args.
+     * @throws MultipleArgsException If there is a prefix that appears more than once in the args when it should
+     *         have only appeared once.
+     */
     private void checkAllArgsPresent() throws MissingPrefixException, MultipleArgsException {
         for (Prefix prefix : prefixList) {
             final ArrayList<String> argList = prefixesToArgs.get(prefix.getPrefix());
+            // Optional args do not need to be present.
             if (!(prefix instanceof OptionalArgPrefix) && argList.size() == 0) {
                 throw new MissingPrefixException(prefix);
             }
