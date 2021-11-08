@@ -498,7 +498,7 @@ public class Ui {
                     + "  \\ V / | || _| \\ \\/\\/ /          \n"
                     + "   \\_/ |___|___| \\_/\\_/           \n"
                     + "                                  ");
-            printOutput("View has been switched to Patient Management");
+            printOutput("You are now in the Patient Management view");
             break;
         case SCHEDULER:
             printOutput("  ___  ___ _  _ ___ ___  _   _ _    ___ ___ \n"
@@ -509,7 +509,7 @@ public class Ui {
                     + "  \\ V / | || _| \\ \\/\\/ /                    \n"
                     + "   \\_/ |___|___| \\_/\\_/                     \n"
                     + "                                            ");
-            printOutput("View has been switched to Scheduler");
+            printOutput("You are now in the Scheduler view.");
             break;
         case MEDICAL_STAFF_INFO:
             printOutput("  ___ _____ _   ___ ___  \n"
@@ -523,7 +523,7 @@ public class Ui {
                     + "  \\ V / | || _| \\ \\/\\/ / \n"
                     + "   \\_/ |___|___| \\_/\\_/  \n"
                     + "                         ");
-            printOutput("View has been switched to Staff Management");
+            printOutput("You are now in the Staff Management view.");
             break;
         default:
             break;

@@ -16,5 +16,4 @@ public interface ListItem {
      */
     void setId(int id);
 
-
 }

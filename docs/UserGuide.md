@@ -44,9 +44,8 @@
 
 ## 1. Introduction
 
-MedBot is a Command Line Interface (CLI) application for head nurses to manage patients’ personal and medical
-information. By utilising text-based commands instead of traditional Graphical User Interface (GUI) based navigation,
-MedBot can allow head nurses to get their management tasks done quicker and more efficiently.
+MedBot is a Command Line Interface (CLI) application for head nurses to manage patients’ and medical staff's personal
+information, and schedule appointments between them.
 
 ## 2. Quick Start Guide
 
@@ -165,7 +164,7 @@ Expected Output:
   \ V / | || _| \ \/\/ /          
    \_/ |___|___| \_/\_/           
                                   
-View has been switched to Patient Management
+You are now in the Patient Management view.
 ```
 
 ### 4.2.3 Get current view: `get view`
