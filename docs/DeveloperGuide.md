@@ -22,9 +22,9 @@
 4.4 [Journal-related Features](#44-journaling-feature)\
 4.5 [Food-related Features](#45-food-related-features)\
 4.6 [Help Command](#46--help-command)\
-4.7 [Logging](#47-logging)
+4.7 [Exit Command](#47-exit-command)\
+4.8 [Logging](#48-logging)
 5. [Testing](#5-testing)
-6. [Dev Ops](#6-dev-ops)
 
 ## 1. Introduction
 
@@ -139,19 +139,18 @@ If the creation is successful, a confirmation message on the newly created Modul
 
 The command for listing all modules is implemented by the `AddModuleCommand` class that extends `Command`.
 
-When the user types `module add c/CS2113T n/Software Engineering e/A`, the following sequence of steps will then occur:
+When the user types `module add c/CS2113T n/Software Engineering m/4 e/A`, the following sequence of steps will then occur:
 
 1. User executes `module add c/CS2113T n/Software Engineering e/A`\
    i. `Click` receives user's input.\
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
 2. Creating `AddModuleCommand` object.
 3. Executing command.\
-   i. `AddModuleCommand` find `indexOfCode`, `indexOfName`, and `indexOfExpectedGrade` in user's input.\
-   ii. `AddModuleCommand` calls `getModule()` to create a new `module` based on user's input.\
-   iii. `AddModuleCommand` calls `storage.StorageModule.readDataFromFile()` to read Module-related data `moduleList` from the storage file.\
-   iv. `AddModuleCommand` calls `moduleList.addModule(module)` to add a new `module` to the list.\
+   i. `AddModuleCommand` finds `indexOfCode`, `indexOfName`, `indexOfMc` and `indexOfExpectedGrade` in user's input\
+   ii. `AddModuleCommand` checks if there are duplicate prefixes in the command or not. If yes, throw `DuplicateModuleParamException`\
+   iii. `AddModuleCommand` calls `getModule()` to create a new `module` based on user's input\
+   iv. `AddModuleCommand` calls `moduleManager.addNewModule(module)` to add the new `module` to the module list\
    v. `AddModuleCommand` prompts the successful message to the user.
-   vi. `AddModuleCommand` calls `storage.storageModule.saveDataToFile(moduleList)` to save the new data to the storage file.
 
 #### 4.1.2 Removing a Module
 
@@ -170,13 +169,9 @@ When the user types `module delete 2`, the following sequence of steps will then
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
 2. Creating `DeleteModuleCommand` object.
 3. Executing command.\
-   i. `DeleteModuleCommand` calls `storage.StorageModule.readDataFromFile()` to read Module-related data from the storage file.\
-   ii. `DeleteModuleCommand` finds the `moduleIndex` based on user's input.\
-   iii. `DeleteModuleCommand` checks if `moduleIndex` is valid or not. If not, throw an `IllegalModuleIndexException`.\
-   iv. `DeleteModuleCommand` calls `moduleList.addModule(module)` to add a new `module` to the list.\
-   v. `DeleteModuleCommand` prompts the successful message to the user.\
-   vi. `DeleteModuleCommand` calls `moduleList.removeModuleByIndex(moduleIndex)` to delete the specified module.\
-   vii. `DeleteModuleCommand` calls `storage.storageModule.saveDataToFile(moduleList)` to save the new data to the storage file.
+   i. `DeleteModuleCommand` finds the index of the module to be deleted in user's input.\
+   ii. `DeleteModuleCommand` calls `moduleManager.deleteModule(moduleIndex)` to delete the specifed module and print the message to the user.
+
 
 #### 4.1.3 Listing All Modules
 
@@ -194,13 +189,54 @@ When the user types `module list`, the following sequence of steps will then occ
 2. Creating `ListModuleCommand` object.
 3. Executing command.\
    i. `ListModuleCommand` calls `storage.StorageModule.readDataFromFile()` to read Module-related data from the storage file.\
-   ii. `ListModuleCommand` check if there is any Modules in the list. If not, prints the message of having no Modules then return.\
+   ii. `ListModuleCommand` check if there is any Modules in the list. If not, prints the message of having no modules then return.\
    iii. `ListModuleCommand` prompts the message to list the Modules to the user and prints out the Modules line by line.
 
 The sequence diagram below summarizes how listing modules work:
 
 ![](images/module/ListModule.png)
 
+#### 4.1.4 Edit CAP Information
+
+This feature allows user to edit the information related to the CAP.
+
+**Implementation**
+
+The command for editing CAP information is implemented by the `CapEditInfoCommand` class that extends `Command`.
+
+When the user types `cap edit`, the following sequence of steps will then occur:
+
+1. User executes `module list`\
+   i. `Click` receives user's input.\
+   ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
+2. Creating `CapEditInfoCommand` object.
+3. Executing command.\
+   i. `CapEditInfoCommand` calls `ui.printMessage()` to print the `GET_CAP_QUESTION` to the user\
+   ii. `CapEditInfoCommand` gets the current CAP from the user. If the CAP is illegal, `CapEditInfoCommand` throws `IllegalCurrentCapException`\
+   iii. `CapEditInfoCommand` calls `ui.printMessage()` to print the `GET_MC_QUESTION` to the user\
+   iv. `CapEditInfoCommand` gets the total MC taken from the user. If the total MC taken is illegal, `CapEditInfoCommand` throws `IllegalTotalMcTakenException`.\
+   v. `CapEditInfoCommand` calls `ui.printMessage()` to print the confirmation to the user\
+   vi. `CapEditInfoCommand` calls `moduleManager.setCapInfo()` to save the data.
+
+
+#### 4.1.5 Get Expected CAP
+
+This feature allows user to view the information related to the CAP and the expected CAP.
+
+**Implementation**
+
+The command for getting expected CAP is implemented by the `GetExpectedCapCommand` class that extends `Command`.
+
+When the user types `cap expected`, the following sequence of steps will then occur:
+
+1. User executes `module list`\
+   i. `Click` receives user's input.\
+   ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
+2. Creating `GetCapCommand` object.
+3. Executing command.\
+   i. `GetCapCommand` calls `moduleManager.getExpectedCap()` to get the expected CAP.
+   ii. If the expected CAP return is not a number, `GetCapCommand` calls `ui.printMessage` to prompt the `MESSAGE_MISSING_CAP_INFO` to the user.
+   iii. Else, `GetCapCommand` calls ui.printMessage` to print the information related to the CAP and the expected CAP to the user.
 
 ### 4.2 Zoom related features
 
@@ -233,7 +269,7 @@ Given below is an example usage scenario and how the display calendar mechanism 
 1. The user enters the command `calendar display 10-2021`. This command is then sent for parsing in the `Click` class to `parseCommand` method in the `Parser` class. The `parseCommand` method first splits the entire command into an array `todoArguments` containing `calendar`, `display` and `10-2021`.
 2. The string `calendar` from the first index of todoArguments is checked against switch cases and is found to match `COMMAND_CALENDAR` which is the constant string "calendar". Upon finding this match, the string from the second index `todoArguments`is further split based on the delimiter of a single white space. The string `display` id checked against possible suffixes and `Command` object `DisplayCommand` is returned to the `Click` class.
 3. `Click` class then calls the method `execute` of `DisplayCommand` class. `DisplayCommand` extends `Command` class and has three steps in its `execute` method.\
-         i. The `parseCalendarCommand` is first called, and it returns the year and month values after splitting `10-2021` into `10` and `2021`. This is put together into an YearMonth object `inputYearMonth`\
+         i. The `parseCalendarCommand` is first called, and it returns the year and month values after splitting `10-2021` into `10` and `2021`. This is put together into an YearMonth object `inputYearMonth`
       >  **NOTE:** The input is validated first and if the input date given is invalid, i.e., the month not between 1-12, then the calendar for the current month is displayed.
    
       ii. The `inputYearMonth` is passed into `Ui` class method `printCalenderTitle` and this prints out the title of that month with the month name and the year. In this example, it will display as given in the figure below.
@@ -393,28 +429,28 @@ Given below is an example usage scenario and how the edit task mechanism behaves
    iv. `EditTasksCommand` calls `StorageTasks.writeTaskList(Storage.tasksList)` to save the new data to the storage file.
 
 ### 4.4 Journaling Feature
-This segment focuses on describing the implementation of journaling-related features and the functionality of the 
-commands.
+This segment focuses on describing the implementation of journaling-related features, the functionality of the 
+commands as well as the design considerations taken.
 
 #### 4.4.1 Feature list
 #### Add notebook feature
 
 The command for adding notebook is implemented by the `AddNoteCommand` class that extends `Command`.
-On adding notebook successfully, the message "Great you have added the note: NOTEBOOK_NAME" will be displayed.
 
-#### Implementation
+Given below is an example usage scenario and how the add notebook mechanism behaves at each step.
 
-1. User inputs `journal notebook n/ CS2113`
-   i. `Click` receives the input.
+1. User inputs `journal notebook n/ CS2113` \
+   i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
 2. Creating `AddNoteCommand` object.
-3. AddNoteCommand execution.
-   i. `AddNoteCommand` calls `ParserJournal.parseAddNoteCommand(userInput)` which returns the notebook name.
-   ii. `AddNoteCommand` calls `storage.collectionOfNotes.addNote(noteName, "none")`. Here the parameters are the
-   notebook name and the tag name which is "none" by default.
+3. AddNoteCommand execution. \
+   i. `AddNoteCommand` calls `ParserJournal.parseAddNoteCommand(userInput)` which returns the notebook name. \
+   ii. `AddNoteCommand` calls `storage.collectionOfNotebooks.addNote(noteName, "none")`. Here the parameters are the
+   notebook name and the tag name which is "none" by default. \
    iii. `AddNoteCommand` calls `ui.printAddedNoteMessage` and passes in notebook name as parameter to convey
    successful addition of notebook.
-   iv. `AddNoteCommand` calls `StorageNotes.writeCollectionOfNotes(storage.collectionOfNotes)` to write the new data to
+   iv. `AddNoteCommand` calls `StorageNotes.writeCollectionOfNotebooks(storage.collectionOfNotebooks)` to write the new 
+   data to
    the storage file.
 
 ![](./images/journal/AddNoteCommand.png)
@@ -424,22 +460,21 @@ On adding notebook successfully, the message "Great you have added the note: NOT
 
 The command for adding entry is implemented by the `AddEntryCommand` class that extends `Command`.
 
-On adding entry successfully, the message "Great you have added the entry: ENTRY_NAME" will be displayed.
+Given below is an example usage scenario and how the add entry mechanism behaves at each step.
 
-#### Implementation
-
-1. User inputs `journal entry n/ CS2113 e/ HW`
-   i. `Click` receives the input.
-   ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
+1. User inputs `journal entry n/ CS2113 e/ HW`\
+   i. `Click` receives the input. \
+   ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input. 
 2. Creating `AddEntryCommand` object.
-3. AddEntryCommand execution.
+3. AddEntryCommand execution. \
    i. `AddEntryCommand` calls `ParserJournal.parseAddEntryCommand(userInput)` which returns the notebook name and entry
    name as a
-   string array.
-   ii. `AddEntryCommand` calls `storage.collectionOfNotes.getNotesArrayList` to get an ArrayList of notebook objects.
-   iii. Traverses through all notebooks in the array list using a for loop.
+   string array. \
+   ii. `AddEntryCommand` calls `storage.collectionOfNotebooks.getNotesArrayList` to get an ArrayList of notebook 
+   objects. \
+   iii. Traverses through all notebooks in the array list using a for loop. \
    iv. If a notebook has name same as the notebook name in input got after parsing then `AddEntryCommand` calls
-   `storage.collectionOfEntries.addEntry(NOTEBOOK_NAME, ENTRY_NAME)` to add the entry.
+   `storage.collectionOfEntries.addEntry(NOTEBOOK_NAME, ENTRY_NAME)` to add the entry. \
    v. `AddEntryCommand` calls `ui.printAddedEntryMessage(ENTRY_NAME)` to print a message that the entry has been added.
    vi. `AddEntryCommand` calls `StorageEntries.writeEntries(storage.collectionOfEntries, storage)` to write the new
    data to the storage file.
@@ -453,40 +488,41 @@ The command for listing is implemented by the `ListJournalCommand` class that ex
 
 A list of notebooks along with their entries will be displayed.
 
-#### Implementation
+Given below is an example usage scenario and how the list mechanism behaves at each step.
 
-1. User inputs `journal list`
-   i. `Click` receives the input.
+1. User inputs `journal list` \
+   i. `Click` receives the input.\
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
-2. Creating `ListJournalCommand` object.
-3. ListJournalCommand execution.
-   i. `ListJournalCommand` calls `storage.collectionOfNotes.getNotesArrayList()` which returns an array list of
-   Note objects.
+2. Creating `ListJournalCommand` object. \
+3. ListJournalCommand execution. 
+   i. `ListJournalCommand` calls `storage.collectionOfNotebooks.getNotesArrayList()` which returns an array list of
+   Notebook objects. \
    ii. `ListJournalCommand` calls `storage.collectionOfEntries.getEntriesArrayList()` which returns an array list of
-   Entry objects.
+   Entry objects. \
    iii. `ListJournalCommand` then prints all the notebooks with their entries.
 
 #### Deleting notebook
 
 The command for deleting notebook is implemented by the `DeleteNoteCommand` class that extends `Command`.
-
 The notebook along with all its entries will be deleted.
 
-#### Implementation
+Given below is an example usage scenario and how the delete notebook mechanism behaves at each step.
 
-1. User inputs `journal delete_notebook 1`
-   i. `Click` receives the input.
+1. User inputs `journal delete_notebook 1` \
+   i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
 2. Creating `DeleteNoteCommand` object.
-3. DeleteNoteCommand execution.
+3. DeleteNoteCommand execution. \
    i. `DeleteNoteCommand` calls `ParserJournal.parseDeleteNoteCommand(userInput)` to get index of notebook to
-   delete.
+   delete. \
    ii. `DeleteNoteCommand` checks if index of notebook is in list. If not, throws the
-   exception InvalidNotebookIndexException().
-   iii. `DeleteNoteCommand` calls `storage.collectionOfNotes.deleteNote(indexOfNotebookToDelete, storage)`.
-   iv. `DeleteNoteCommand` calls `ui.printDeletedNotebookMessage(indexOfNotebookToDelete)`
-   v. `DeleteNoteCommand` calls `StorageNotes.writeCollectionOfNotes(storage.collectionOfNotes)` to write the new
-   data to the storage file.
+   exception InvalidNotebookIndexException(). \
+   iii. `DeleteNoteCommand` calls `storage.collectionOfNotebooks.deleteNote(indexOfNotebookToDelete, storage)`. \
+   iv. `DeleteNoteCommand` calls `ui.printDeletedNotebookMessage(indexOfNotebookToDelete)`to indicate that the 
+   notebook has been deleted. \
+   v. `DeleteNoteCommand` calls `StorageNotes.writeCollectionOfNotebooks(storage.collectionOfNotebooks)` to write 
+   the new
+   data to the storage file. 
 
 ![](./images/journal/DeleteNoteCommand.png)
 
@@ -494,22 +530,21 @@ The notebook along with all its entries will be deleted.
 
 The command for deleting entry is implemented by the `DeleteEntryCommand` class that extends `Command`.
 
+Given below is an example usage scenario and how the delete entry mechanism behaves at each step.
 
-#### Implementation
-
-1. User inputs `journal delete_entry n/ CS2113 e/ HW`
-   i. `Click` receives the input.
+1. User inputs `journal delete_entry n/ CS2113 e/ HW` \
+   i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
 2. Creating `DeleteEntryCommand` object.
-3. DeleteEntryCommand execution.
+3. DeleteEntryCommand execution. \
    i. `DeleteEntryCommand` calls `ParserJournal.parseDeleteEntryCommand(userInput, storage)` to get notebook name and
-   entry name.
+   entry name. \
    ii. `DeleteEntryCommand` calls `storage.collectionOfEntries.getEntriesArrayList()` which returns an array list of
-   Entry objects.
+   Entry objects.\
    iii. Traverses entries. If notebook name and entry name match that of Entry object in list, calls `entries.remove(indexOfEntry)`
-   to delete the entry. If entry to delete doesn't exist then throws `EntryDoesNotExistException()`.
+   to delete the entry. If entry to delete doesn't exist then throws `EntryDoesNotExistException()`. \
    iv. `DeleteEntryCommand` calls `StorageEntries.writeEntries(storage.collectionOfEntries, storage)` to write the new
-   data to the storage file.
+   data to the storage file. \
    v. `DeleteEntryCommand` calls `printDeletedEntryMessage()` to convey that entry has been deleted successfully.
 
 #### Tagging Notebook
@@ -517,40 +552,52 @@ The command for deleting entry is implemented by the `DeleteEntryCommand` class 
 The command for tagging notebook is implemented by the `TagNotebookCommand` class that extends `Command`.
 
 
-#### Implementation
+Given below is an example usage scenario and how tag notebook mechanism behaves at each step.
 
-1. User inputs `journal tag n/ 1 t/ important`
-   i. `Click` receives the input.
+1. User inputs `journal tag n/ 1 t/ important` \
+   i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
 2. Creating `TagNotebookCommand` object.
-3. TagNotebookCommand execution.
-   i. `TagNotebookCommand` calls `ParserJournal.parseTagNotebookCommand(userInput, storage)` to get notebook index and
-   tag name.
-   ii. `TagNotebookCommand` calls `storage.collectionOfNotes.getNotesArrayList()` which returns an array list of
-   Note objects.
+3. TagNotebookCommand execution. \
+i. `TagNotebookCommand` calls `ParserJournal.parseTagNotebookCommand(userInput, storage)` to get notebook index and
+   tag name. \
+   ii. `TagNotebookCommand` calls `storage.collectionOfNotebooks.getNotesArrayList()` which returns an array list of
+   Notebook objects. \
    iii. `TagNotebookCommand` calls `notes.get(NOTEBOOK_INDEX)` to get the required Note object at the index in the
-   array list.
-   iv. `TagNotebookCommand` calls `noteToBeTagged.tag(TAG_NAME, storage)` to tag the notebook.
+   array list. \
+   iv. `TagNotebookCommand` calls `noteToBeTagged.tag(TAG_NAME, storage)` to tag the notebook. \
    v. `TagNotebookCommand` calls `printTaggedNotebookMessage()` to convey that the notebook has been tagged
-   successfully.
+   successfully. 
 
+**Design Considerations**
+
+The following design considerations were kept in mind while implementing the tag notebook feature,
+- Aspect: How to store tag
+   - Alternative 1: Store the tag as private string in every Notebook
+      - Pros : Easy to access for printing.
+      - Cons: Not optimized in terms of complexity for finding operation and needs more work for scaling the 
+        application.
+   - Alternative 2: Store as a Hash Table with the key as the tag and value as `Notebook`
+      - Pros : Better time complexity since more optimized.
+      - Cons: Takes up storage space.
+   
 #### Finding Notebook by tag
 
 The command for finding notebook by a tag is implemented by the `FindNotebooksByTagCommand` class that extends
 `Command`.
 
+Given below is an example usage scenario and how the find notebook by tag mechanism behaves at each step.
 
-#### Implementation
-
-1. User inputs `journal find tag_name`
-   i. `Click` receives the input.
+1. User inputs `journal find tag_name` \
+   i. `Click` receives the input. \
    ii. `Parser` calls `parser.parseCommand(userInput)` to parse the input.
 2. Creating `FindNotebooksByTagCommand` object.
-3. FindNotebooksByTagCommand execution.
-   i. `FindNotebooksByTagCommand` calls `ParserJournal.parseTagForFinding(userInput)` to get tag name.
-   ii. `FindNotebooksByTagCommand` calls `storage.collectionOfNotes.getNotesArrayList()` which returns an array list of
-   Note objects.
-   iii. If tag name matches tag name of any Note objects in the array list then the notebook name is displayed.
+3. FindNotebooksByTagCommand execution. \
+   i. `FindNotebooksByTagCommand` calls `ParserJournal.parseTagForFinding(userInput)` to get tag name. \
+   ii. `FindNotebooksByTagCommand` calls `storage.collectionOfNotebooks.getNotesArrayList()` which returns an array 
+   list of
+   Notebook objects. \
+   iii. If tag name matches tag name of any Notebook objects in the array list then the notebook name is displayed.
 
 ### 4.5 Food related features
 
@@ -724,7 +771,22 @@ to execute.
 While we submitted Alternative 2 in version 1 due to a lack of time and easier implementation. with more time given in Version 2.0 - we
 decided  to switch over to Alternative 1 for the user to easily view all the syntax at a glance.
 
-### 4.7. Logging
+### 4.7. Exit Command
+
+This feature allows user to terminate the program. 
+
+The command for terminating the program is implemented by the `ExitCommand` class that extends `Command`
+
+When the user types `exit`, the following sequence of steps will then occur:
+1. User executes `exit`\
+i. `Click` receives user's input.\
+ii. `Parser` calls `parser.parseCommand(userInput)` to parse user's input into a `Command`.
+2. Creating `ExitCommand` object.
+3. Executing command.\
+i. `ExitCommand` calls `ui.printGoodBye()` to print the goodbye message to the user.\
+ii. `ExitCommand` calls `System.exit(0)` to terminate the program.
+
+### 4.8. Logging
 
 Logging in the application refers to storing exceptions, warnings and messages that occur during the execution of the program. It was included to help developers to identify bugs and to simplify their debugging process.
 
@@ -760,8 +822,17 @@ public class Click {
 
 ## 5. Testing
 
+We use JUnit testing to ensure that the operations of `Click` meet the expected behavior.
 
-## 6. Dev Ops
+There are two ways to run tests.
+
+**Method 1: Using IntelliJ JUnit test runner**
+* To run all tests, right-click on the `src/test/java` directory and choose `Run 'All Tests'`
+* To run a subset of tests, you can right-click on a test package, a test class, or a test and choose `Run 'ABC'`
+
+**Method 2: Using Gradle**
+* To run all tests, open a console and run the command `gradlew clean test` (MacOS/Linus: `./gradlew clean test`)
+
 
 ## Appendices 
 
@@ -797,12 +868,20 @@ public class Click {
 |v1.0|user|add a todo task|to keep track of tasks I need to complete|
 |v1.0|user|delete a todo task|delete a task I have completed/am not going to do|
 |v1.0|user|list all tasks|get the information about my tasks|
+|v2.0|user|edit my CAP information|record my current CAP and the total MC taken that contribute to the CAP|
+|v2.0|user|get expected CAP based on my CAP information and my modules|revise my module planning to meet my expectation|
 |v2.0|user|display a calendar with lectures and tasks|view all my tasks and lectures in a calendar view|
 |v2.0|user|add a lecture|know which lectures I have on which days|
 |v2.0|user|delete a lecture|delete a lecture that I am not going to do|
 |v2.0|user|edit a task|I do not have to delete a task which I just want to make minor changes to|
 |v2.0|user|list all lectures|get the information about my lectures|
-
+|v2.0|user|add a notebook|to help me journal|
+|v2.0|user|add an entry to a notebook|to help me journal|
+|v2.0|user|delete notebook|allows me to delete notebook if I don't need it|
+|v2.0|user|delete entry|allows me to delete entry I don't need it|
+|v2.0|user|list notebooks and entries|to keep track of my journal and view notebooks and entries|
+|v2.0|user|tag notebook|so I can organize my journal better|
+|v2.0|user|find notebook by tag|so I can find similar notebooks|
 
 
 ### Appendix C: Non-Functional Requirements
@@ -815,5 +894,7 @@ public class Click {
 
 ### Appendix D: Glossary
 
+**CAP**: Cumulative Average Point
+**MC**: modular credit
 **Mainstream OS**: Windows, Linux, Unix, OS-X
 

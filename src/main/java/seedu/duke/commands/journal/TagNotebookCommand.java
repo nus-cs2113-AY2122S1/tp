@@ -9,7 +9,7 @@ import seedu.duke.exceptions.journal.EmptyTagNameException;
 import seedu.duke.exceptions.journal.InvalidAddTagArgumentException;
 import seedu.duke.exceptions.journal.InvalidTagNameException;
 import seedu.duke.exceptions.journal.NotebookNotFoundForTagException;
-import seedu.duke.journal.Note;
+import seedu.duke.journal.Notebook;
 import seedu.duke.parser.journal.ParserJournal;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
@@ -60,9 +60,9 @@ public class TagNotebookCommand extends Command {
         String[] tagNameAndNotebookIndex = ParserJournal.parseTagNotebookCommand(userInput, storage);
         String notebookIndex = tagNameAndNotebookIndex[0];
         String tagName = tagNameAndNotebookIndex[1];
-        ArrayList<Note> notes = storage.collectionOfNotes.getNotesArrayList();
-        Note noteToBeTagged = notes.get(Integer.parseInt(notebookIndex) - 1);
-        noteToBeTagged.tag(tagName, storage);
+        ArrayList<Notebook> notebooks = storage.collectionOfNotebooks.getNotesArrayList();
+        Notebook notebookToBeTagged = notebooks.get(Integer.parseInt(notebookIndex) - 1);
+        notebookToBeTagged.tag(tagName, storage);
         ui.printTaggedNotebookMessage();
     }
 }

@@ -6,7 +6,7 @@ import seedu.duke.commands.Command;
 import seedu.duke.exceptions.journal.EmptyDeleteNoteException;
 import seedu.duke.exceptions.journal.InvalidDeleteNoteArgumentException;
 import seedu.duke.exceptions.journal.InvalidNotebookIndexException;
-import seedu.duke.journal.Note;
+import seedu.duke.journal.Notebook;
 import seedu.duke.parser.journal.ParserJournal;
 import seedu.duke.storage.Storage;
 import seedu.duke.storage.StorageNotes;
@@ -51,13 +51,13 @@ public class DeleteNoteCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage) throws IOException, InvalidNotebookIndexException,
             EmptyDeleteNoteException, InvalidDeleteNoteArgumentException {
-        ArrayList<Note> notes = storage.collectionOfNotes.getNotesArrayList();
+        ArrayList<Notebook> notes = storage.collectionOfNotebooks.getNotesArrayList();
         int indexOfNotebookToDelete = ParserJournal.parseDeleteNoteCommand(userInput);
         if (indexOfNotebookToDelete < 1 || indexOfNotebookToDelete > notes.size()) {
             throw new InvalidNotebookIndexException();
         }
         ui.printDeletedNotebookMessage(indexOfNotebookToDelete);
-        storage.collectionOfNotes.deleteNote(indexOfNotebookToDelete, storage);
-        StorageNotes.writeCollectionOfNotes(storage.collectionOfNotes);
+        storage.collectionOfNotebooks.deleteNote(indexOfNotebookToDelete, storage);
+        StorageNotes.writeCollectionOfNotes(storage.collectionOfNotebooks);
     }
 }

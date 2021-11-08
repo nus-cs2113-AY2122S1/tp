@@ -8,7 +8,7 @@ import seedu.duke.exceptions.journal.EmptyEntryNameException;
 import seedu.duke.exceptions.journal.EmptyNoteNameException;
 import seedu.duke.exceptions.journal.InvalidAddEntryArgumentException;
 import seedu.duke.exceptions.journal.NotebookNotFoundForEntry;
-import seedu.duke.journal.Note;
+import seedu.duke.journal.Notebook;
 import seedu.duke.parser.journal.ParserJournal;
 import seedu.duke.storage.Storage;
 import seedu.duke.storage.StorageEntries;
@@ -57,8 +57,8 @@ public class AddEntryCommand extends Command {
         String[] argumentsNoteEntry = ParserJournal.parseAddEntryCommand(userInput, storage);
         String notebookName = argumentsNoteEntry[0];
         String entryName = argumentsNoteEntry[1];
-        ArrayList<Note> notes = storage.collectionOfNotes.getNotesArrayList();
-        for (Note note : notes) {
+        ArrayList<Notebook> notes = storage.collectionOfNotebooks.getNotesArrayList();
+        for (Notebook note : notes) {
             if (note.getNoteName().equals(notebookName)) {
                 storage.collectionOfEntries.addEntry(notebookName, entryName);
             }

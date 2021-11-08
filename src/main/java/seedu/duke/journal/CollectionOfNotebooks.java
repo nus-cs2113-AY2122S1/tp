@@ -8,10 +8,10 @@ import seedu.duke.storage.StorageEntries;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class CollectionOfNotes {
-    private static ArrayList<Note> notes = new ArrayList<>();
+public class CollectionOfNotebooks {
+    private static ArrayList<Notebook> notes = new ArrayList<>();
 
-    public CollectionOfNotes() {
+    public CollectionOfNotebooks() {
         this.notes = new ArrayList<>();
     }
 
@@ -20,7 +20,7 @@ public class CollectionOfNotes {
      *
      * @return list of notes.
      */
-    public ArrayList<Note> getNotesArrayList() {
+    public ArrayList<Notebook> getNotesArrayList() {
         return notes;
     }
 
@@ -31,7 +31,7 @@ public class CollectionOfNotes {
      * @param tag contains tag name
      */
     public static void addNote(String nameOfNote, String tag) {
-        notes.add(new Note(nameOfNote, tag));
+        notes.add(new Notebook(nameOfNote, tag));
     }
 
     /**

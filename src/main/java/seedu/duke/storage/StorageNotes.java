@@ -2,11 +2,9 @@ package seedu.duke.storage;
 
 //@@author SvethaMahadevan
 
-import seedu.duke.commands.calendar.AddTodoCommand;
-import seedu.duke.journal.CollectionOfNotes;
-import seedu.duke.journal.Note;
+import seedu.duke.journal.CollectionOfNotebooks;
+import seedu.duke.journal.Notebook;
 import seedu.duke.logger.ClickLogger;
-import seedu.duke.schedule.task.Todo;
 
 import java.util.logging.Level;
 import java.io.File;
@@ -19,8 +17,8 @@ public class StorageNotes {
     public static final String fileName   = "journalNotes.txt";
     public static final String filePath = folderName + fileName;
 
-    static ArrayList<Note> dataToNotes(ArrayList<String> data) {
-        ArrayList<Note> notes = new ArrayList<>();
+    static ArrayList<Notebook> dataToNotes(ArrayList<String> data) {
+        ArrayList<Notebook> notes = new ArrayList<>();
         int i = 0;
         int dataSize = data.size();
         while (i < dataSize) {
@@ -34,40 +32,40 @@ public class StorageNotes {
         return notes;
     }
 
-    private static Note addNote(String[] noteArguments) {
+    private static Notebook addNote(String[] noteArguments) {
         String name = noteArguments[1].trim();
         String tag = noteArguments[2].trim();
-        return new Note(name, tag);
+        return new Notebook(name, tag);
     }
 
-    public static ArrayList<String> notesToData(ArrayList<Note> notes) {
+    public static ArrayList<String> notesToData(ArrayList<Notebook> notes) {
         ArrayList<String> data = new ArrayList<>();
-        for (Note note : notes) {
+        for (Notebook note : notes) {
             data.add(note.toSaveFileFormat());
         }
         return data;
     }
 
-    public static void writeCollectionOfNotes(CollectionOfNotes collectionOfNotes) throws IOException {
-        ArrayList<Note> notes = collectionOfNotes.getNotesArrayList();
+    public static void writeCollectionOfNotes(CollectionOfNotebooks collectionOfNotes) throws IOException {
+        ArrayList<Notebook> notes = collectionOfNotes.getNotesArrayList();
         ArrayList<String> data = notesToData(notes);
         Storage.writeDataOntoSaveFile(filePath, data);
     }
 
-    public static CollectionOfNotes readCollectionOfNotes() throws NullPointerException, IOException {
-        CollectionOfNotes collectionOfNotes = new CollectionOfNotes();
-        ArrayList<Note> notes;
+    public static CollectionOfNotebooks readCollectionOfNotes() throws NullPointerException, IOException {
+        CollectionOfNotebooks collectionOfNotebooks = new CollectionOfNotebooks();
+        ArrayList<Notebook> notes;
         try {
             Storage.checkAndAddDirectory(StorageNotes.folderName);
             ArrayList<String> data = Storage.loadDataFromSaveFile(StorageNotes.filePath);
             notes = StorageNotes.dataToNotes(data);
             for (int i = 0; i < notes.size(); i++) {
-                collectionOfNotes.addNote(notes.get(i).getNoteName(), notes.get(i).getTag());
+                collectionOfNotebooks.addNote(notes.get(i).getNoteName(), notes.get(i).getTag());
             }
         } catch (FileNotFoundException e) {
             ClickLogger.getNewLogger().log(Level.WARNING, "file not found on load");
             File f = new File(StorageNotes.filePath);
         }
-        return collectionOfNotes;
+        return collectionOfNotebooks;
     }
 }
