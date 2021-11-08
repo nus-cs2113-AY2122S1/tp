@@ -11,7 +11,7 @@ public final class CommandFormat {
             "add lesson [TITLE] -d [DAY_OF_THE_WEEK] -s [START_TIME] -e [END_TIME] -l {MEETING_URL}";
 
     public static final String ADD_MODULE_FORMAT =
-            "add module [MODULE_CODE]";
+            "add module [MODULE_CODE] -g {GRADE}";
 
     public static final String ADD_TASK_FORMAT =
             "add task [TITLE] -d [DAY_OF_THE_WEEK] -p {PRIORITY} -i {INFORMATION}";
