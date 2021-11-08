@@ -20,7 +20,7 @@ I have contributed over >1800 lines of code and documentation in total.
 Detailed code contribution information can be viewed via RepoSense [here](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&tabAuthor=yeezao&tabRepo=AY2122S1-CS2113T-T12-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false).
 
 - Provided basic skeleton for `Ui`, `Parser`, `Trip`, `Expense`, `Person` classes.
-- Implemented and tested `FileStorage` class, and some of `Trip` and `Storage` classes.
+- Implemented and tested `FileStorage` class, and some of `Ui`, `Trip`, `Storage`, `Parser`, and `ForceCancelException` classes.
 - Wrote a large part, or the entirety, of `FileTest`, `TripTest`, and `ValidityCheckerTest`.
 
 #### Enhancements Implemented:
@@ -34,7 +34,7 @@ Detailed code contribution information can be viewed via RepoSense [here](https:
 
 #### Contributions to User Guide:
 
-The following sections in the User Guide were largely or wholly written by me:
+The following sections in the [User Guide](https://ay2122s1-cs2113t-t12-2.github.io/tp/UserGuide.html) were largely or wholly written by me:
 
 - Saving your data, Loading your saved data
 - Create Trip, Open Trip, Close Trip, Delete Trip, Edit Trip
@@ -49,7 +49,7 @@ In addition, I made contributions to the following sections:
 
 #### Contributions to Developer Guide:
 
-The following sections in the Developer Guide were largely or wholly written by me:
+The following sections in the [Developer Guide](https://ay2122s1-cs2113t-t12-2.github.io/tp/DeveloperGuide.html) were largely or wholly written by me:
 
 - `Storage` component, and its related diagrams
 - Non-functional Requirements
