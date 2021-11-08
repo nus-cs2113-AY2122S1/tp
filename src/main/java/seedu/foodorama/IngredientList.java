@@ -53,7 +53,7 @@ public class IngredientList {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printInvalidIngrWeight(ingredientName);
                 ingredientWeight = in.nextLine();
-                if(!isDouble(ingredientWeight)) {
+                if (!isDouble(ingredientWeight)) {
                     throw new FoodoramaException(UI.getInvalidNumberMsg());
                 }
                 ingredientWeightValue = Double.parseDouble(ingredientWeight);
@@ -70,7 +70,7 @@ public class IngredientList {
                     UI.clearTerminalAndPrintNewPage();
                     UI.printEnterStoredWeightOf(ingredientName);
                     ingredientWeight = in.nextLine();
-                    if(!isDouble(ingredientWeight)) {
+                    if (!isDouble(ingredientWeight)) {
                         throw new FoodoramaException(UI.getInvalidNumberMsg());
                     }
                     ingredientWeightValue = Double.parseDouble(ingredientWeight);
@@ -222,9 +222,7 @@ public class IngredientList {
         Scanner input = new Scanner(System.in);
         String newName = input.nextLine().toLowerCase();
         while (isNumber(newName) | isDouble(newName)) {
-            UI.clearTerminalAndPrintNewPage();
-            UI.printInvalidIngredientName();
-            newName = input.nextLine().toLowerCase();
+            throw new FoodoramaException(UI.getInvalidIngredientName());
         }
 
         if (newName.isBlank()) {
@@ -301,7 +299,7 @@ public class IngredientList {
      *
      * @author renzocanare
      */
-    public static void addExpiry(int ingredientIndex) {
+    public static void addExpiry(int ingredientIndex) throws FoodoramaException {
         String ingrName = ingredientList.get(ingredientIndex).getIngredientName();
         UI.printAskIngrExpiryDate(ingrName);
 
@@ -314,7 +312,7 @@ public class IngredientList {
         while (loop == LOOP) {
             UI.clearTerminalAndPrintNewPage();
             if (!isValidDateFormat(expiryDateString)) {
-                UI.printIncorrectExpiryDateFormatMsg();
+                throw new FoodoramaException(UI.getIncorrectExpiryDateFormatMsg());
             } else if (isValidDateFormat(expiryDateString)) {
                 expiryDate = LocalDate.parse(expiryDateString, dtf);
                 daysBetweenExpiryToday = ChronoUnit.DAYS.between(LocalDate.now(), expiryDate);
@@ -434,7 +432,7 @@ public class IngredientList {
             ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
             while (ingredientWeightValue < 0) {
                 UI.clearTerminalAndPrintNewPage();
-                UI.printInvalidIngrWeight(inputIngredientWeight);
+                UI.printInvalidIngrWeight(ingrName);
                 inputIngredientWeight = in.nextLine();
                 if (!isDouble(inputIngredientWeight)) {
                     throw new FoodoramaException(UI.getInvalidNumberMsg());

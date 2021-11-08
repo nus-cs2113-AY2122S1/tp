@@ -288,11 +288,12 @@ initially*.
 Format: `set dish limit [DISH_NAME]`
 
 * Can only be performed on existing `DISH_NAME`.
+* ❕ *Tip*: You can replace `[DISH_NAME]` with `[DISH_INDEX]` to quickly choose which dish to set a limit to.
 * 💡 *Note*:  You will be prompted to enter the limit to watch out for in the next step.
 
 Example of usage:
 
-`set dish limit chicken rice`
+`set dish limit chicken rice` or `set dish limit 1`
 
 ```
 ____________________________________________________________
@@ -1132,7 +1133,7 @@ Format: `graph dish`
     * `graph dish` does not require additional parameters. 
     * Due to the limitations of a CLI based application, the terminal is unable to print half a character and 
       as a result the graphs are unable to display fractional values (e.g. 2.5 units is impossible)
-    * To circumvent this limitation we have added a bar that has a digit instead of a | inside to indicate fractional units
+    * To circumvent this limitation we have added a bar that has a digit instead of a `|` inside to indicate fractional units
       (e.g 4.5 units will have four bars followed by a bar that contains a 5). This is still only capable of representing up to one decimal place.
 
 Example of usage:
@@ -1172,7 +1173,7 @@ Format: `graph ingr`
     * `graph ingr` does not require additional parameters.
     * Due to the limitations of a CLI based application, the terminal is unable  to print half a character and
        as a result the graphs are unable to display fractional values (e.g. 2.5 units is impossible)
-    * To circumvent this limitation we have added a bar that has a digit instead of a | inside to indicate fractional units
+    * To circumvent this limitation we have added a bar that has a digit instead of a `|` inside to indicate fractional units
       (e.g 4.9 units will have four bars followed by a bar that contains a 9). This is still only capable of representing up to one decimal place.
        
 Example of usage:

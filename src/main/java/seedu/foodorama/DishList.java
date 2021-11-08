@@ -166,9 +166,7 @@ public class DishList {
         Scanner input = new Scanner(System.in);
         String newName = input.nextLine().toLowerCase();
         while (isNumber(newName) || isDouble(newName)) {
-            UI.clearTerminalAndPrintNewPage();
-            UI.printInvalidDishName();
-            newName = input.nextLine().toLowerCase();
+            throw new FoodoramaException(UI.getInvalidDishName());
         }
 
         if (newName.isBlank()) {
