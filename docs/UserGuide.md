@@ -105,6 +105,8 @@ Learn more about our vision for _Ha(ppy)Bit_ and the team behind it.
     
     Press enter to return to main menu...
 
+<div style="page-break-after: always;"></div>
+
 #### Option 2: `User Guide`
 Learn what you can accomplish with this app.\
 This option opens the User Guide in your web browser.
@@ -117,6 +119,8 @@ This option opens the User Guide in your web browser.
 
 ![User Guide](Display_Images/UserGuide.png)
 
+<div style="page-break-after: always;"></div>
+
 #### Option 3: `Developer Guide`
 Learn about the app from the perspective of a software engineer.\
 This option opens the Developer Guide in your web browser.
@@ -126,6 +130,8 @@ This option opens the Developer Guide in your web browser.
     Opening in a web browser...
     
     Press enter to return to main menu...
+
+<div style="page-break-after: always;"></div>
 
 ![Developer Guide](Display_Images/DeveloperGuide.png)
 
@@ -162,6 +168,7 @@ If you insist... this option exits the application.
     Will Durant
     ________________________________________________________________________________________________________________________
 
+<div style="page-break-after: always;"></div>
 
 ### 1.2 Main Interface
 Upon formally starting the application, you should see the following screen. 
@@ -193,6 +200,8 @@ Interval | The frequency (in days) which you want the habit to recur.       |`Ru
 ![](Display_Images/HappyBit_Visual_Explain.png)
 _A timeline of what a goal with three different habits could be._ | Made with Canva
 
+<div style="page-break-after: always;"></div>
+
 **Goals and habits** <br>
 Here we distinguish between goals and habits. Although they are commonly used words, the way we
 design _Ha(ppy)Bit_ is tightly integral to the way we define them above. We would also like you
@@ -222,6 +231,8 @@ Unfamiliar symbols may confuse. Here is a comprehensive collection of all emojis
 > 😀 &#8594; Used to show the developers' exuberance!!!
 
 > 👍 &#8594; Used to show the developers' love and support for you.
+
+<div style="page-break-after: always;"></div>
 
 ## 3. Using _Ha(ppy)Bit_
 _Ha(ppy)Bit_ comes with some quirks that might need some time getting used to. To get you up to speed and warmed
@@ -268,6 +279,9 @@ Here are guidelines and tips for the command format:
 * **Parameters** enclosed withing square brackets, `[]` suggest that at least one of the parameters is required
 * **Flags** should have a whitespace before them <br>
   (e.g. `view g/1` instead of `viewg/1`)
+
+
+<div style="page-break-after: always;"></div>
 
 ## 4. Features
 
@@ -319,6 +333,8 @@ Here are the list of commands:
 Press enter ONCE to return to command mode...
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### 4.2 Set a Goal: `set`
 Sets a new goal for a long term achievement you wish to accomplish. Goals must have an end date while the goal type and
 start dates are optional (well, we wouldn't you to be procrastinating on your goals right?)
@@ -357,6 +373,8 @@ In addition, you get to view some useful statistics.
 ```
 Command: list
 ```
+
+<div style="page-break-after: always;"></div>
 
 **Output:**
 ```
@@ -406,6 +424,8 @@ defeat today, but to return stronger to fight another time. We got ya fam.)
 ```
 Command: remove g/1
 ```
+
+<div style="page-break-after: always;"></div>
 
 **Output:**
 ```
@@ -459,6 +479,8 @@ Output 2: `The habit 'Do 20 pushups' of goal 'Exercise more' has been changed to
 Output 3: `The habit 'Run 2.4km' of goal 'Exercise more' has been changed to 'Run 1.6km'`\
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 `The habit 'Run 1.6km' of goal 'Exercise more' has its interval changed to '3'`
+
+<div style="page-break-after: always;"></div>
 
 ### 4.8 Complete a Habit: `done`
 Mark a habit under a goal as done.\
@@ -517,6 +539,8 @@ Command: view g/1
 -------------------------------------------------------------------------------------------------------
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### 4.11 Return to Start-Up: `return`
 Return to the start-up interface.\
 (Where did that bring you? Back to the start.)
@@ -571,6 +595,8 @@ Thanks for using Ha(ppy)Bit, see you in a bit! (hehe)
 ________________________________________________________________________________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
+
 ## 5. About Loading and Saving Data
 **Loading saved data:**
 
@@ -615,6 +641,8 @@ before the screen is cleared.
 **Q**: Are there any books you recommend?
 <br>
 **A**: Data Structures and Algorithms in Java &#8594; [here](https://www.amazon.com/Data-Structures-Algorithms-Java-2nd/dp/0672324539)
+
+<div style="page-break-after: always;"></div>
 
 ## 7. Command Summary
 

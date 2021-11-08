@@ -50,5 +50,5 @@ The code written by me can be found [here](https://nus-cs2113-ay2122s1.github.io
 #### Team-based Tasks
 
 * Initiated a large number of Team Meetings.
-* Reviewed and Merged some PRs
+* Reviewed and Merged some PRs.
 
