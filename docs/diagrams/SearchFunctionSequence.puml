@@ -24,21 +24,10 @@ activate searchCommand
 searchCommand -> searchCommand:handleSearchCommand(ui, catalogue)
 activate searchCommand
 
-searchCommand -> searchCommand:checkValidArgs()
-activate searchCommand
-return true
-
-searchCommand -> searchCommand:checkAdditionnalArgs()
-activate searchCommand
-return false
-
-searchCommand -> searchCommand:checkValidStatus()
-activate searchCommand
-return true
-
-searchCommand -> searchCommand:checkValidCategory()
-activate searchCommand
-return true
+ref over searchCommand
+    checkValidArgs(), checkAdditionalArgs(),
+    checkValidStatus(), checkValidCategory(),
+end ref
 
 create numMatch
 searchCommand -> numMatch
@@ -65,6 +54,8 @@ loop temp in [number]Match
     activate ui
     return
 end
+
+destroy numMatch
 
 return
 return
