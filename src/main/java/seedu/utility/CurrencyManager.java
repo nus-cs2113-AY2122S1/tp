@@ -45,10 +45,8 @@ public class CurrencyManager {
 
     public double determineExchangeRate(CurrencyType to) {
         switch (to) {
-        case USD:
+        case RMB:
             return exchangeRate = 5.00;
-        case INR:
-            return exchangeRate = 2.00;
         case SGD:
             return exchangeRate = 1.00;
         default:
