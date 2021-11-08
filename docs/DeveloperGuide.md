@@ -1,4 +1,30 @@
 # Developer Guide
+Welcome to **SLAM**! **SLAM** is a desktop application for student group leaders in NUS to manage their group events, tasks, members and various activities. This application allows you to effectively plan and manage the organisation of events by allowing users to create and add such events to their schedule. Leading up to the actual date and time of the event, committee heads can add tasks (e.g. meetings, purchase of logistics) to complete under each event to keep track of progress. Group members can also be added and assigned to these tasks. This application uses a Command Line Interface (CLI); that is, the application is operated by typing commands into a Command Box.
+
+---
+# Table of Contents
+1. [Introduction](#Introduction)
+   1. [Purpose of This Guide](#Purpose of Developer Guide)
+2. [Acknowledgements](#Acknowledgements)
+3. [Design](#Design)
+   1. [Architecture](#Architecture)
+   2. [Ui component](#Ui component)
+   3. [Logic component](#Logic component)
+   4. [Storage component](#Storage component)
+4. [Implementation](#Implementation)
+   1. [List Functionality](#List Functionality)
+   2. [Next Functionality](#Next Functionality)
+   3. [Update Functionality](#Update Functionality)
+   4. [Delete Functionality](#Delete Functionality)
+   5. [Select Functionality](#Select Functionality)
+5. [Product Scope](#Product scope)
+   1. [Target user profile](#Target user profile)
+   2. [Value proposition](#Value proposition)
+6. [User Stories](#User Stories)
+7. [Non-Functional Requirements](#Non-Functional Requirements)
+8. [Glossary](#Glossary)
+9. [Instructions for manual testing](#Instructions for manual testing)
+
 
 ## Introduction
 
@@ -188,11 +214,18 @@ How selecting an `Event` or an event's nested `Task` works:
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+The target user profile for our application are university Student leaders, who are required to manage various club events and peope
+1. Is a student leader of multiple groups
+2. Has to plan multiple event within a given AY
+3. Has many members to account for
+4. Is comfortable typing and using the CLI
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+This application helps to organise the details of multiple events and tasks for various student leaders. As student leaders
+people often have to manage not only the multiple extra-curricular groups they are involved in but also their own studies. 
+This can often be a hassle and difficult for student leaders to manage, thus this program aims to directly deal with this issue
+and provide Student leaders, with an application to cater to their specific managerial needs.
 
 ## User Stories
 
@@ -203,11 +236,13 @@ How selecting an `Event` or an event's nested `Task` works:
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on any *mainstream OS* as long as it has java `11` or above installed.
+2. Should be able to hold up to 100 different events without noticeable issues, developing with the application.
+3. User with above average typing speed, should be able to manage, and use the application to plan and organise events faster than other event planning applications.
 
 ## Glossary
 
-* *glossary item* - Definition
+* **Mainstream OS** -  Windows, Linux, Unix, OS-X
 
 ## Instructions for manual testing
 
