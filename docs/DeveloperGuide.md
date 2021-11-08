@@ -51,7 +51,7 @@
 - [Appendix C: Non-Functional Requirements](#appendix-c-non-functional-requirements)
 - [Appendix D: Glossary](#appendix-d-glossary)
 - [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
-  - [Start-up and Shutdown](#start-up-and-shutdown)
+  - [Start and Shutdown](#start-and-shutdown)
   - [Inputting Data](#inputting-data)
   - [Listing Modules and Recipes](#listing-modules-and-recipes)
   - [Running Modules and Resetting](#running-modules-and-resetting)
@@ -665,6 +665,8 @@ To sum it up, this application helps users to reduce the time needed to transfor
 - **Mainstream OS**: Windows, Linux, Unix, OS-X
 
 **Note:** These instructions only provide a starting point for testers to work on, testers are expected to do more *exploratory* testing.
+
+## Appendix E: Instructions for Manual Testing
 
 ### Start and Shutdown
 
