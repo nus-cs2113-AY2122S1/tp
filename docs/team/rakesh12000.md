@@ -36,20 +36,37 @@ ultimately saving cost and increasing profits.
   * **What it does**: Allows the User to clear all Dishes / Ingredients / Everything
   * **Justification**: This feature improves the product as the User can remove all
   Dishes / Ingredients when starting a new Menu
-* **Enhancement added**:
-  * Added Index Based Searching along existing Name Based Searching for certain Dish and
-  Ingredient Commands
+* **Enhancement added**: Index Based Searching
+  * **What it does**: Allows user to update Dishes and Ingredients by searching for their Index in 
+  addition to searching for their String Name
   * Added Exception to Numbers as Input in place of Strings to make code more defensive
-* **Contribution to other features**:
-  * Added Exception Messages in `UI` for specific exception cases
-  * Updated Command Summary in `UI`
+* **Contribution to other features**: `UI` Class
+  * Added Exception Messages for specific exception cases
+  * Updated Command Summary
+* **Contribution to other features**: Soft Limit
+  * Added Soft Limit of 10,000kg to prevent Users from adding very large numbers
+  * Added to:
+    * `Add Dish Waste`
+    * `Add Ingr`
+    * `Add Ingr Stored`
+    * `Add Ingr Wasted`
+    * `Edit Dish Waste`
+    * `Edit Ingr Waste`
 * **Contributions to UG**:
   * Added Expected Outcome for Help
-* **Contributions to DG**:
+* **Contributions to Developer Guide**:
   * Added Preface for the various components
   * Added Product Scope
   * Added Manual Testing 
-  * Drafted UML Diagram for `InputParser` class
+  * Added Implementation for:
+    * `Edit` Commands
+    * `Link` Command
+    * `Sort` Commands
+  * Added PUML Diagram for:
+    * `InputParser` class
+    * `Edit` Commands
+    * `Link` Command 
+    * `Sort` Commands
 * **Contributions to team-based tasks**:
   * Added JUnit Tests for certain Command Classes
 * **Review/mentoring contributions**:
