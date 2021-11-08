@@ -3,7 +3,7 @@ package seedu.duke.storage;
 import seedu.duke.food.ReferenceLists;
 import seedu.duke.food.WhatIAteList;
 import seedu.duke.journal.CollectionOfEntries;
-import seedu.duke.journal.CollectionOfNotes;
+import seedu.duke.journal.CollectionOfNotebooks;
 import seedu.duke.logger.ClickLogger;
 import seedu.duke.schedule.lecture.LectureList;
 import seedu.duke.schedule.task.TaskList;
@@ -38,7 +38,7 @@ public class Storage {
         }
     }
 
-    public CollectionOfNotes collectionOfNotes = StorageNotes.readCollectionOfNotes();
+    public CollectionOfNotebooks collectionOfNotebooks = StorageNotes.readCollectionOfNotes();
     public CollectionOfEntries collectionOfEntries = StorageEntries.readEntries();
     public StorageModule storageModule = new StorageModule();
     public static LectureList lectureList;

@@ -3,6 +3,7 @@ package seedu.duke.storage;
 import seedu.duke.commands.calendar.AddLectureCommand;
 import seedu.duke.exceptions.calendar.DuplicateTaskException;
 import seedu.duke.exceptions.calendar.InvalidDateException;
+import seedu.duke.module.ModuleList;
 import seedu.duke.schedule.lecture.Lecture;
 import seedu.duke.schedule.lecture.LectureList;
 import seedu.duke.schedule.task.Task;
@@ -20,7 +21,7 @@ public class StorageLecture {
     public static final String filePath = folderName + fileName;
 
     public static ArrayList<Lecture> dataToLecture(ArrayList<String> data)
-            throws InvalidDateException, DuplicateTaskException {
+            throws InvalidDateException, DuplicateTaskException, IOException {
         ArrayList<Lecture> lectures = new ArrayList<>();
         int i = 0;
         int dataSize = data.size();
@@ -61,7 +62,8 @@ public class StorageLecture {
             }
             return lectureList;
         } catch (FileNotFoundException | InvalidDateException
-                | ArrayIndexOutOfBoundsException | DuplicateTaskException e) {
+                | ArrayIndexOutOfBoundsException
+                | DuplicateTaskException e) {
             File f = new File(StorageLecture.filePath);
         }
         return lectureList;

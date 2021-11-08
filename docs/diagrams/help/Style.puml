@@ -2,3 +2,9 @@ header Nigel's additions
 title Help Commands
 
 hide footbox
+
+skinparam classAttributeIconSize 0
+hide footbox
+
+hide circle
+skinparam classAttributeIconSize 0

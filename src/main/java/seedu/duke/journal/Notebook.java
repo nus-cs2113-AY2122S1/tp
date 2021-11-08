@@ -9,9 +9,9 @@ import seedu.duke.storage.Storage;
 
 import java.io.IOException;
 
-public class Note {
-    protected String noteName;
-    protected String tag;
+public class Notebook {
+    private String notebookName;
+    private String tag;
 
     /**
      * Constructor of Note class.
@@ -19,8 +19,8 @@ public class Note {
      * @param noteName name of the note
      * @param tag of the notebook
      */
-    public Note(String noteName, String tag) {
-        this.noteName = noteName;
+    public Notebook(String noteName, String tag) {
+        this.notebookName = noteName;
         this.tag = tag;
     }
 
@@ -35,7 +35,7 @@ public class Note {
             throw new InvalidTagNameException();
         }
         this.tag = tag;
-        StorageNotes.writeCollectionOfNotes(storage.collectionOfNotes);
+        StorageNotes.writeCollectionOfNotes(storage.collectionOfNotebooks);
     }
 
     /**
@@ -54,7 +54,7 @@ public class Note {
      * @return noteName which stores the name of the note.
      */
     public String getNoteName() {
-        return noteName;
+        return notebookName;
     }
 
     /**
@@ -63,7 +63,7 @@ public class Note {
      * @return  stringForStorage name of notebook in format to save in data file.
      */
     public String toSaveFileFormat() {
-        String stringForStorage = "note" + "|" + noteName + "|" + tag;
+        String stringForStorage = "note" + "|" + notebookName + "|" + tag;
         return stringForStorage;
     }
 

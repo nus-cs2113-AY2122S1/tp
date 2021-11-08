@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 
+import seedu.duke.exceptions.ClickException;
 import seedu.duke.exceptions.zoom.InvalidZoomDataPath;
 import seedu.duke.exceptions.zoom.InvalidZoomLinkException;
 import seedu.duke.exceptions.zoom.ModuleNotFoundException;
@@ -34,7 +35,7 @@ public class StorageZoom {
      * @param moduleName The module name
      * @param zoomLink The zoom link
      * @throws IOException Throws an Input Output Exception
-     * @throws InvalidZoomLinkException throws an error for invalid zoom linkgit
+     * @throws InvalidZoomLinkException throws an error for invalid zoom link
      */
     public static void saveLink(String moduleName, String zoomLink) throws IOException, InvalidZoomLinkException {
         Storage.checkAndAddDirectory(folderName);
@@ -66,7 +67,7 @@ public class StorageZoom {
             fw.write(newData);
             fw.close();
             Ui.printMessage("Zoom link updated successfully!");
-        } else if (isModuleIn("module/module.txt", moduleName)) {
+        } else if (isModuleIn("storage/module/module.txt", moduleName)) {
             FileWriter fw = new FileWriter(folderName + fileName, true);
             fw.write(moduleName + "|" + zoomLink + "\n");
             fw.close();
@@ -82,7 +83,7 @@ public class StorageZoom {
      *
      * @throws InvalidZoomDataPath Throws the Invalid Zoom Data Path Exception
      */
-    public static void displayLinks() throws InvalidZoomDataPath {
+    public static void displayLinks() throws ClickException {
         try {
             BufferedReader br = new BufferedReader(new FileReader(folderName + fileName));
             String line;
@@ -144,7 +145,7 @@ public class StorageZoom {
      * @throws IOException throws the Input Output Exception
      */
     public static String getZoomLink(String module) throws IOException {
-        File data = new File("zoomdata/zoom.txt");
+        File data = new File("storage/zoomdata/zoom.txt");
 
         Scanner scanner = new Scanner(data);
         while (scanner.hasNext()) {

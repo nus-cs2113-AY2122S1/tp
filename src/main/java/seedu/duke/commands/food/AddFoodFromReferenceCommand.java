@@ -28,7 +28,7 @@ public class AddFoodFromReferenceCommand extends Command {
     private String itemDivider = "i/";
 
     public AddFoodFromReferenceCommand() {
-        this.syntax = "food radd s/ [STORE_INDEX] i/ [ITEM_INDEX]";
+        this.syntax = "food radd s/[STORE_INDEX] i/[ITEM_INDEX]";
     }
 
     //assumes string given after food radd

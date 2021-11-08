@@ -16,7 +16,7 @@ import seedu.duke.exceptions.journal.InvalidDeleteEntryArgumentException;
 import seedu.duke.exceptions.journal.InvalidDeleteNoteArgumentException;
 import seedu.duke.exceptions.journal.NotebookNotFoundForEntry;
 import seedu.duke.exceptions.journal.NotebookNotFoundForTagException;
-import seedu.duke.journal.Note;
+import seedu.duke.journal.Notebook;
 import seedu.duke.parser.Parser;
 import seedu.duke.storage.Storage;
 
@@ -37,7 +37,7 @@ public class ParserJournal {
     public static String parseAddNoteCommand(String input, Storage storage) throws DuplicateNoteException,
             EmptyNoteNameException, EmptyNoteArgumentsException {
         if (isValidNotebookCommand(input)) {
-            ArrayList<Note> notes = storage.collectionOfNotes.getNotesArrayList();
+            ArrayList<Notebook> notes = storage.collectionOfNotebooks.getNotesArrayList();
             String noteName = parseNoteName(input, notes);
             return noteName;
         }
@@ -52,10 +52,10 @@ public class ParserJournal {
      * @return notebook name if it is not duplicate
      * @throws DuplicateNoteException checks for duplicate note
      */
-    public static String parseNoteName(String input, ArrayList<Note> notes) throws DuplicateNoteException {
+    public static String parseNoteName(String input, ArrayList<Notebook> notes) throws DuplicateNoteException {
         String noteNameDetails = input.trim().split("notebook")[1];
         String noteName = noteNameDetails.split("n/")[1].trim();
-        for (Note note : notes) {
+        for (Notebook note : notes) {
             if (note.getNoteName().equals(noteName)) {
                 throw new DuplicateNoteException();
             }
@@ -103,7 +103,7 @@ public class ParserJournal {
         String[] noteEntryNames = parseNoteEntryName(input);
         String notebookName = noteEntryNames[0];
         String entryName = noteEntryNames[1];
-        ArrayList<Note> notes = storage.collectionOfNotes.getNotesArrayList();
+        ArrayList<Notebook> notes = storage.collectionOfNotebooks.getNotesArrayList();
         int flagNotebook = notes.stream().anyMatch(note -> note.getNoteName().equals(notebookName)) ? 1 : 0;
         if (flagNotebook == 0) {
             throw new NotebookNotFoundForEntry();
@@ -127,7 +127,7 @@ public class ParserJournal {
     public static String[] parseTagNotebookCommand(String input, Storage storage) throws EmptyTagNameException,
             InvalidAddTagArgumentException, EmptyTagArgumentsException,
             NotebookNotFoundForTagException, EmptyNoteIndexException {
-        ArrayList<Note> notes = storage.collectionOfNotes.getNotesArrayList();
+        ArrayList<Notebook> notes = storage.collectionOfNotebooks.getNotesArrayList();
         String[] notebookIndexAndTagName = parseNotebookNameAndTag(input);
         String notebookIndex = notebookIndexAndTagName[0];
         String tagName = notebookIndexAndTagName[1];
@@ -153,7 +153,7 @@ public class ParserJournal {
     public static String[] parseDeleteEntryCommand(String input, Storage storage) throws EmptyEntryArgumentsException,
             EmptyNoteNameException, EmptyEntryNameException, NotebookNotFoundForEntry,
             InvalidDeleteEntryArgumentException {
-        ArrayList<Note> notes = storage.collectionOfNotes.getNotesArrayList();
+        ArrayList<Notebook> notes = storage.collectionOfNotebooks.getNotesArrayList();
         String[] noteEntryNames = parseArgumentsDeleteEntryCommand(input);
         String notebookName = noteEntryNames[0];
         String entryName = noteEntryNames[1];

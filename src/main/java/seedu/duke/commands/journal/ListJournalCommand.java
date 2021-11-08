@@ -4,7 +4,7 @@ package seedu.duke.commands.journal;
 
 import seedu.duke.commands.Command;
 import seedu.duke.journal.Entry;
-import seedu.duke.journal.Note;
+import seedu.duke.journal.Notebook;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
@@ -28,12 +28,12 @@ public class ListJournalCommand extends Command {
      */
     @Override
     public void execute(Ui ui, Storage storage) {
-        ArrayList<Note> notes = storage.collectionOfNotes.getNotesArrayList();
+        ArrayList<Notebook> notes = storage.collectionOfNotebooks.getNotesArrayList();
         ArrayList<Entry> entries = storage.collectionOfEntries.getEntriesArrayList();
         int notebookIndex = 1;
         int entryIndex = 1;
         ui.printLine();
-        for (Note note : notes) {
+        for (Notebook note : notes) {
             ui.printMessage(notebookIndex + ". " + "The notebook " + note.getNoteName()
                    + "(tag: " + note.getTag().trim() + ")" + " contains:");
             notebookIndex += 1;

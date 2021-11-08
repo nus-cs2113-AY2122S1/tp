@@ -20,7 +20,7 @@ public class AddNoteCommand extends Command {
      * Class constructor providing syntax for the HelpCommand.
      */
     public AddNoteCommand() {
-        syntax = "journal notebook n/ [NOTEBOOK_NAME]";
+        syntax = "journal notebook n/[NOTEBOOK_NAME]";
     }
 
     /**
@@ -31,7 +31,7 @@ public class AddNoteCommand extends Command {
     public AddNoteCommand(String userInput) {
         this.userInput = userInput;
         helpMessage = "Add a notebook to list";
-        syntax = "journal notebook n/ NOTEBOOK_NAME";
+        syntax = "journal notebook n/NOTEBOOK_NAME";
     }
 
 
@@ -51,7 +51,7 @@ public class AddNoteCommand extends Command {
         String noteName = ParserJournal.parseAddNoteCommand(userInput, storage);
         assert (noteName != null);
         ui.printAddedNoteMessage(noteName);
-        storage.collectionOfNotes.addNote(noteName, "none");
-        StorageNotes.writeCollectionOfNotes(storage.collectionOfNotes);
+        storage.collectionOfNotebooks.addNote(noteName, "none");
+        StorageNotes.writeCollectionOfNotes(storage.collectionOfNotebooks);
     }
 }

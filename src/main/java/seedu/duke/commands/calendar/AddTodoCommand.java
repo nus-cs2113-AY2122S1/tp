@@ -34,7 +34,7 @@ public class AddTodoCommand extends Command {
      * Class constructor providing syntax for the HelpCommand.
      */
     public AddTodoCommand() {
-        syntax = "calendar todo n/ [TASK_NAME] d/ [DD-MM-YYYY]";
+        syntax = "calendar todo n/[TASK_NAME] d/[DD-MM-YYYY]";
     }
 
     /**

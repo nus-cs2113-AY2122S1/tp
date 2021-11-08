@@ -1,18 +1,34 @@
 @startuml
 !include Style.puml
-Actor User
+Actor Developer
 participant ":Parser"
-User -> ":Parser" : "help"
+Developer -> ":Parser" : "help rt"
+
 activate ":Parser"
+":Parser" -> ":Parser" : parse input
+
+activate ":Parser"
+":Parser" --> ":Parser"
+deactivate ":Parser"
 create ":HelpCommand"
 ":Parser" -> ":HelpCommand" : HelpCommand()
-activate ":HelpCommand"
-":Parser" -> ":HelpCommand" : execute()
+
+'activate ":Parser"
 deactivate ":Parser"
-":HelpCommand" -> "<<static>>\n:ClassPackageReader" : getCommandsAndPrintSyntax()
-"<<static>>\n:ClassPackageReader" -> ":Command" : getSyntax()
-":Command" --> "<<static>>\n:ClassPackageReader" : syntax
-"<<static>>\n:ClassPackageReader" --> User : Prints help messages
+
+
+":Parser" -> ":HelpCommand" : execute()
+activate ":Parser"
+activate ":HelpCommand"
+
+
+":HelpCommand" -> "<<class>>\n:ClassPackageReader" : getCommandsAndPrintSyntax()
+"<<class>>\n:ClassPackageReader" -> ":Command" : getSyntax()
+":HelpCommand" --> ":Parser"
+deactivate ":Parser"
+deactivate ":HelpCommand"
+":Command" --> "<<class>>\n:ClassPackageReader" : syntax
+"<<class>>\n:ClassPackageReader" --> Developer : Prints help messages
 destroy ":HelpCommand"
 
 @enduml

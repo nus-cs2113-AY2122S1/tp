@@ -313,8 +313,8 @@ Format: `calendar lecture m/MODULE_CODE s/DD-MM-YYYY(START_DATE) e/DD-MM-YYYY(EN
 
 Example:
 ```
-calendar lecture m/CS1231 s/7-10-2021 e/31-10-2021
-calendar lecture m/CS2113T s/7-10-2021 e/31-10-2021
+calendar lecture m/CS1231 s/07-10-2021 e/31-10-2021
+calendar lecture m/CS2113T s/07-10-2021 e/31-10-2021
 ```
 
 Expected outcome:
@@ -392,11 +392,13 @@ calendar edit 1
 Expected outcome:
 ```
 calendar edit 1
-        __________________________________________________
-        Enter the entire todo command with the desired description and date that you want to replace in place of the current task at index 1
+	__________________________________________________
+	Enter the entire todo command with the desired description and date that you want to replace in place of the current task at index 1
+	__________________________________________________
 calendar todo n/changed task name d/22-12-2021
-        Edited Task!
-        __________________________________________________
+	__________________________________________________
+	Edited Task!
+	__________________________________________________
 ```
 
 #### 3.3.6 Displaying calendar: `calendar display`
@@ -503,7 +505,7 @@ Expected outcome:
 
 #### 3.4.4 Tagging a notebook
 
-Allows you to tag a notebook.
+Allows you to tag a notebook. By default, the tag of a notebook is `none`.
 
 Format: `journal tag n/NOTE_INDEX t/TAG_NAME`
 
@@ -519,7 +521,7 @@ Expected outcome:
 
 #### 3.4.5 Find a notebook by tag
 
-Allows you to find a notebook which has the tag.
+Allows you to find a notebook which has the required tag.
 
 Format: `journal find TAG_NAME`
 
@@ -598,6 +600,7 @@ food add n/Seaweed Shaker Fries Seasoning c/15
 food add n/Large Fries c/461 
 food add n/Caramel Frappé - Medium c/624 
 food add n/A Thousand Tide Pods c/92 
+
 ```
 
 Expected outcome:
@@ -624,10 +627,11 @@ Example of adding with a date
 
 ```
 food add n/something i ate 2 weeks ago but forgot to record c/300 d/13-10-2021
-        Nice, I see you consumed something i ate 2 weeks ago but forgot to record on 2021-10-13, and have recorded
-        __________________________________________________
-        Nice.  I've added something i ate 2 weeks ago but forgot to record to the list, with 300 calories!
-        __________________________________________________
+
+	__________________________________________________
+	Nice.  I've added something i ate 2 weeks ago but forgot to record to the list, with 300 calories!
+	__________________________________________________
+
 ```
 
 #### 3.5.2a Listing food records: `food list`
@@ -646,16 +650,19 @@ Expected outcome:
 
 ```
 food list
-        __________________________________________________
-        1st,You consumed  Samurai Burger , which has a calorie count of : 433 on 2021-10-29!
-        2nd,You consumed  Seaweed Shaker Fries Seasoning , which has a calorie count of : 15 on 2021-10-29!
-        3rd,You consumed  Large Fries , which has a calorie count of : 461 on 2021-10-29!
-        4th,You consumed  Caramel Frappe - Medium , which has a calorie count of : 624 on 2021-10-29!
-        5th,You consumed  A Thousand Tide Pods , which has a calorie count of : 92 on 2021-10-29!
-        6th,You consumed  something i ate 2 weeks ago but forgot to record , which has a calorie count of : 300 on 2021-10-13!
-        Wow, that's a lot of food! Finished reading the list
-        You consumed 1925 calories in total!
-        __________________________________________________
+
+	__________________________________________________
+	1st,You consumed  Samurai Burger , which has a calorie count of : 433 on Sunday, 7 November 2021!
+	2nd,You consumed  Seaweed Shaker Fries Seasoning , which has a calorie count of : 15 on Sunday, 7 November 2021!
+	3rd,You consumed  Large Fries , which has a calorie count of : 461 on Sunday, 7 November 2021!
+	4th,You consumed  Caramel Frappé - Medium , which has a calorie count of : 624 on Sunday, 7 November 2021!
+	5th,You consumed  A Thousand Tide Pods , which has a calorie count of : 92 on Sunday, 7 November 2021!
+	6th,You consumed  something i ate 2 weeks ago but forgot to record , which has a calorie count of : 300 on Wednesday, 13 October 2021!
+	Wow, that's a lot of food! Finished reading the list
+	You consumed 1925 calories in total!
+	__________________________________________________
+
+
 ```
 
 #### 3.5.2b Finding food records with a date:  `food find`
@@ -672,6 +679,7 @@ Shows you a list of items you've consumed on that particular day.
 
 ```
 food find 13-10-2021
+
         Nice, I found the items you ate on Wednesday, 13 October 2021
         __________________________________________________
         1st,You consumed  something i ate 2 weeks ago but forgot to record , which has a calorie count of : 300 on 2021-10-13!
@@ -695,6 +703,7 @@ Expected outcome:
 
 ```
 food delete 5
+
         __________________________________________________
         Deleted food record  A Thousand Tide Pods at index: 5
         __________________________________________________
@@ -710,6 +719,8 @@ Format : `food clear`
 Expected outcome:
 
 ```
+food clear
+
 	__________________________________________________
 	Cleared food record list for today!
 	__________________________________________________
@@ -754,6 +765,7 @@ Hungry Burger (Store index 5), you should see the following:
 
 ```
 food radd s/5 i/5
+
 	__________________________________________________
 	Nice, adding the record - 	Chicken Burger Set  : 607 KCal
 	__________________________________________________
@@ -773,6 +785,7 @@ Allows you to view the food items from the reference food court that has an simi
 Example : 
 ```
 food clt 0
+
 	I've found the following items with 0 calories!
 	__________________________________________________
 	1st,Coke No Sugar  : 0Kcal

@@ -1,9 +1,11 @@
 package seedu.duke.exceptions.zoom;
 
-import seedu.duke.ui.Ui;
+import seedu.duke.exceptions.ClickException;
 
-public class InvalidZoomDataPath extends Exception {
+import static seedu.duke.constants.Messages.PRINT_INVALID_ZOOM_DATA_PATH;
+
+public class InvalidZoomDataPath extends ClickException {
     public InvalidZoomDataPath() {
-        Ui.printMessage("Cannot find the requested zoom data file");
+        super(PRINT_INVALID_ZOOM_DATA_PATH);
     }
 }
