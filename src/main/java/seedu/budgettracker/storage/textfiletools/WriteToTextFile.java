@@ -1,7 +1,5 @@
 package seedu.budgettracker.storage.textfiletools;
 
-//@@author YEOWEIHNGWHYELAB
-
 import seedu.budgettracker.data.RecordList;
 import seedu.budgettracker.data.records.Expenditure;
 import seedu.budgettracker.data.records.Loan;
@@ -17,6 +15,9 @@ import java.util.Hashtable;
 import static seedu.budgettracker.common.Messages.MESSAGE_FILE_NOT_EXIST;
 
 //@@author yeoweihngwhyelab
+/**
+ * Class responsible for saving the app data into text file.
+ */
 public class WriteToTextFile {
     //@@author yeoweihngwhyelab
     /**
@@ -35,7 +36,6 @@ public class WriteToTextFile {
                 return;
             }
 
-            String line = "";
             PrintWriter fileWrite = new PrintWriter(new FileWriter(storageDirectory));
 
             reloadingRecordList(monthlyRecordList, fileWrite);
@@ -69,7 +69,7 @@ public class WriteToTextFile {
     //@@author yeoweihngwhyelab
     /**
      * Traverse through a particular month's loan attribute values and convert them
-     * into "add" command format.
+     * into "add" command format then flush into the text file.
      *
      * @param fileWrite The PrintWriter that will be used to write into the text
      *                  file in the stated directory.
@@ -90,9 +90,12 @@ public class WriteToTextFile {
     //@@author yeoweihngwhyelab
 
     /**
+     * Traverse through a particular month's expenditure attribute values and convert them
+     * into "add" command format then flush into the text file.
      *
-     * @param fileWrite
-     * @param currentMonthRecordList
+     * @param fileWrite The PrintWriter that will be used to write into the text
+     *                  file in the stated directory.
+     * @param currentMonthRecordList RecordList containing all the expenditure details.
      */
     private void reloadExpenditureRecordList(PrintWriter fileWrite, RecordList currentMonthRecordList) {
         for (int j = 0; j < currentMonthRecordList.getExpenditureListSize(); j++) {
