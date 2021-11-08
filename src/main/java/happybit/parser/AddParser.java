@@ -26,6 +26,7 @@ public class AddParser extends Parser {
     private static final int START_DATE = 0;
     private static final int END_DATE = 1;
     private static final int FLAG_LENGTH = 2;
+    private static final int DATE_LENGTH = 8;
 
     /**
      * Parses user input to add a goal.
@@ -150,7 +151,7 @@ public class AddParser extends Parser {
         } else if (strStartDate.equals(FLAG_START_DATE)) {
             throw new HaBitParserException(ERROR_START_DATE_FORMAT);
         }
-        return stringToDate(strStartDate.substring(FLAG_LENGTH));
+        return stringToDate(strStartDate.substring(FLAG_LENGTH, FLAG_LENGTH + DATE_LENGTH));
     }
 
     /**
@@ -165,7 +166,7 @@ public class AddParser extends Parser {
         if (strEndDate == null || strEndDate.equals(FLAG_END_DATE)) {
             throw new HaBitParserException(ERROR_END_DATE_FORMAT);
         }
-        return stringToDate(strEndDate.substring(FLAG_LENGTH));
+        return stringToDate(strEndDate.substring(FLAG_LENGTH, FLAG_LENGTH + DATE_LENGTH));
     }
 
     /**
