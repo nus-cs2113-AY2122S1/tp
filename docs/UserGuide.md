@@ -712,7 +712,6 @@ Expected Output: <br>
 **A**: Simply transfer the `data` folder to your new computer and ensure that it is in the same folder as the jar file.
 
 ## Command Summary
-`edit_class c/<CLASS_ID> [i/<NEW_CLASS_ID> | n/<NEW_CLASS_NAME>]`
 
 Category | Action | Format |
  ----- | ------ | --------------- |
