@@ -1,9 +1,14 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
-What is your name?
-Hello James Gosling
+     | Typist - Version 2.1
+     | ===========================================================
+     |   ______            _      __
+     |  /_  __/_  ______  (_)____/ /_
+     |   / / / / / / __ \/ / ___/ __/
+     |  / / / /_/ / /_/ / (__  ) /_
+     | /_/  \__, / .___/_/____/\__/
+     |     /____/_/
+     | Welcome to Typist -- the ultimate cli typing game.
+     | Brought to you by -- AY2122S1-CS2113-T13-4.
+     | man: check man page to get started!
+     | ===========================================================
+Updating game records...
+     | Thanks for using Typist! See you next time!
