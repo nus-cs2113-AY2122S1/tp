@@ -694,7 +694,7 @@ Modules:
 | [`delete module [MODULE_CODE]`](#deleting-tasks-lessons-or-modules---delete)                                             | To delete a module                               |
 | [`done task [INDEX]`](#marking-a-task-as-done---done)                                                                    | To mark a task as done                           |
 | [`find [task/lesson] [KEYWORD]`](#finding-tasks-or-lessons-by-keyword---find-tasklesson)                                 | To find tasks/lessons with the specified keyword |
-| [`find module [MODULE_CODE] {verbose}`](#retrieving-module-information---find-module)                                    | To display module details                        |
+| [`find module [MODULE_CODE] {verbose/-v}`](#retrieving-module-information---find-module)                                    | To display module details                        |
 | [`edit module [MODULE_CODE] -g [GRADE]`](#editing-module-grade---edit-module)                                            | To edit the grade for a particular module        |
 | [`launch lesson [INDEX]`](#launching-lesson-url---launch-lesson)                                                         | To launch a meeting URL                          |
 | [`exit`](#exiting-the-program---exit)                                                                                    | To exit the program                              |
