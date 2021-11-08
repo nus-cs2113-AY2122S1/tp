@@ -8,9 +8,9 @@ import seedu.duke.logic.commands.module.DeleteModuleCommand;
 import seedu.duke.logic.commands.task.DeleteTaskCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
-import static seedu.duke.commons.core.CommandFormat.DELETE_TASK_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.DELETE_LESSON_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.DELETE_MODULE_FORMAT;
+import static seedu.duke.commons.core.CommandFormat.DELETE_TASK_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.promptFormat;
 import static seedu.duke.commons.util.StringUtil.removeFirstParam;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;

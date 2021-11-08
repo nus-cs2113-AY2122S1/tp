@@ -9,15 +9,14 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import seedu.duke.commons.util.exceptions.ModuleLoadException;
+import seedu.duke.commons.core.Message;
 import seedu.duke.logic.commands.Command;
-import seedu.duke.model.lesson.LessonList;
 import seedu.duke.logic.parser.Parser;
+import seedu.duke.model.lesson.LessonList;
 import seedu.duke.model.module.FullModuleList;
 import seedu.duke.model.module.ModuleList;
-import seedu.duke.storage.Storage;
 import seedu.duke.model.task.TaskList;
-import seedu.duke.commons.core.Message;
+import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 //@@author richwill28
@@ -152,9 +151,10 @@ public class Duke {
     private void initializeFullModuleList() {
         try {
             fullModuleList = new FullModuleList();
-        } catch (ModuleLoadException | FileNotFoundException e) {
+        } catch (DukeException | FileNotFoundException e) {
+            // Warns user but proceed with the proram
             LOGGER.warning(e.getMessage());
-            // Ignore error
+            ui.printMessage(e.getMessage());
         }
     }
 }

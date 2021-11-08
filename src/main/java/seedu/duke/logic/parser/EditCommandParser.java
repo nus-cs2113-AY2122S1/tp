@@ -1,12 +1,12 @@
 package seedu.duke.logic.parser;
 
+import java.util.HashMap;
+
 import seedu.duke.commons.core.CommandFlag;
 import seedu.duke.commons.core.CommandType;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.module.EditModuleCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
-
-import java.util.HashMap;
 
 import static seedu.duke.commons.core.CommandFormat.EDIT_MODULE_FORMAT;
 import static seedu.duke.commons.core.CommandFormat.promptFormat;
@@ -36,7 +36,7 @@ public class EditCommandParser {
         HashMap<String, String> flagMap = ParserUtil.getFlagMap(userResponse, CommandFlag.GRADE);
 
         if (!flagMap.containsKey(CommandFlag.GRADE)) {
-            throw new ParseException("No grade parameter provided.");
+            throw new ParseException(promptFormat(EDIT_MODULE_FORMAT));
         }
 
         String[] params = userResponse.split(CommandFlag.MODULE);

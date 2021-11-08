@@ -1,15 +1,15 @@
 package seedu.duke.model.module;
 
-import seedu.duke.commons.core.Message;
-import seedu.duke.commons.util.JsonUtil;
-import seedu.duke.commons.util.exceptions.ModuleLoadException;
-import seedu.duke.model.module.exceptions.ModuleNotFoundException;
-
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import seedu.duke.commons.core.Message;
+import seedu.duke.commons.util.JsonUtil;
+import seedu.duke.commons.util.exceptions.ModuleLoadException;
+import seedu.duke.model.module.exceptions.ModuleNotFoundException;
 
 //@@author ptejasv
 /**
