@@ -45,7 +45,7 @@ public class GradableTaskList extends TaskList {
 
     private static int getWeightage(String description) {
         try {
-            int weightagePos = description.indexOf(ParserChecks.START_OF_WEIGHTAGE) + LENGTH_OF_MARKER;
+            int weightagePos = description.indexOf(ParserChecks.START_OF_WEIGHTAGE) + 2;
             int weightage = Integer.parseInt(description.substring(weightagePos).trim());
             if (weightage < MINWEIGHTAGE || weightage > MAXWEIGHTAGE) {
                 throw new NoCapExceptions("wrong weightage");
