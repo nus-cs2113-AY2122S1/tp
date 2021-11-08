@@ -254,6 +254,9 @@ public class Dish implements Comparable<Dish> {
                     UI.clearTerminalAndPrintNewPage();
                     UI.printEnterWeightOf(dishName);
                     dishWaste = in.nextLine();
+                    if (!isNumber(dishWaste)) {
+                        throw new FoodoramaException(UI.getInvalidNumberMsg());
+                    }
                     inputWastage = Double.parseDouble(dishWaste);
                 }
             }

@@ -244,6 +244,9 @@ public class DishList {
                         UI.clearTerminalAndPrintNewPage();
                         UI.printEnterWeightOf(dishName);
                         newWeight = in.nextLine();
+                        if (!isDouble(newWeight)) {
+                            throw new FoodoramaException(UI.getInvalidNumberMsg());
+                        }
                         inputWastage = Double.parseDouble(newWeight);
                     }
                 }

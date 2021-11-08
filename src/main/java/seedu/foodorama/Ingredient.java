@@ -203,6 +203,9 @@ public class Ingredient implements Comparable<Ingredient> {
                     UI.clearTerminalAndPrintNewPage();
                     UI.printEnterWeightOf(ingredientName);
                     inputIngredientWeight = in.nextLine();
+                    if (!isNumber(inputIngredientWeight)) {
+                        throw new FoodoramaException(UI.getInvalidNumberMsg());
+                    }
                     ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
                 }
             }
@@ -291,6 +294,9 @@ public class Ingredient implements Comparable<Ingredient> {
                     UI.clearTerminalAndPrintNewPage();
                     UI.printEnterWeightOf(ingredientName);
                     ingredientWeight = in.nextLine();
+                    if (!isNumber(ingredientWeight)) {
+                        throw new FoodoramaException(UI.getInvalidNumberMsg());
+                    }
                     ingredientWeightValue = Double.parseDouble(ingredientWeight);
                 }
             }
