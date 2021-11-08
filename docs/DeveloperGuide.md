@@ -200,7 +200,7 @@ How deleting works:
 
 #### Select Functionality
 
-![](images/SelectDiagram.png)
+![](images/SelectDiagramold.png)
 
 How selecting an `Event` or an event's nested `Task` works:
 1. When the `Parser` class parses `select` as the command from the user, a new `Command` object, `SelectCommand` is created.
