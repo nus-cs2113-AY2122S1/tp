@@ -1,6 +1,4 @@
 # Developer Guide
-* Table of Contents
-  {:toc}
 
 * [Acknowledgements](#acknowledgements)
 * [Setting Up, getting started](#setting-up-getting-started)
@@ -16,7 +14,7 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, 
 and third-party libraries -- include links to the original source as well}
-* https://www.baeldung.com/java-testing-system-out-println
+* [reference code for testing System.out.println()](https://www.baeldung.com/java-testing-system-out-println)
 * https://github.com/fastily/jwiki
 
 ## Setting Up, getting started
@@ -28,7 +26,9 @@ and third-party libraries -- include links to the original source as well}
 > can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. 
 
 ### Architecture
-(Some architecture diagram)
+
+![](diagrams/arch.png)
+
 The Architecture diagram above explains the high-level design of the Typists app.  
 Given below is a quick overview of main components and how they interact with each other.
 
@@ -72,12 +72,17 @@ For instance:
 * Then, `.run()` method of `TimeLimitCommand` is executed, a Time Limit Game will start running 
 until game ends(i.e. timer's up).
 * `.gameSummary()` method will then generate the summary of the game. 
+### Word Limit Game
+
+Sequence Diagram for Time Mode Game:
+![](diagrams/WordLimitMode.png)
+The Sequence Diagram above illustrates the working process of the `WordLimitGame` class.
 
 ### TimeLimitGame Class
 Sequence Diagram for Time Mode Game:
 <img src="https://user-images.githubusercontent.com/69776265/139190231-eb648329-517b-42dc-a088-fbce5c93c616.png" width="574" />
 
-The Sequence Diagram below illustrates the working process of the `TimeModeGame` class.
+The Sequence Diagram above illustrates the working process of the `TimeLimitGame` class.
 
 ## Implementation
 
@@ -104,13 +109,6 @@ There only exists one private content string for all sessions. Each time a set m
 depending on the choices that the user made throughout the process. Whenever the user starts a game, the getContent() 
 method is called and the text is set accordingly.
 
-### Word Limit Game
-
-Once the CommandFactory reads a 'word' command, a word limit game will begin.
-
-Gonna to change this .puml diagram later - zhansen
-
-![](images/WordLimitMode.png)
 
 ### \[Proposed\] View Statistics feature
 #### \[Proposed Implementation\]
