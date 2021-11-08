@@ -692,7 +692,7 @@ When entering data, `Decodex` requires a specific format such that the data is e
 
 Here are some example inputs you can try:
 
-> :exclamation: `<space>` shows that there are extra spaces in the input. Replace `<space>` with a space character when running the example commands below.
+> :exclamation: `<space>` indicates that there are extra spaces in the input. Replace `<space>` with a space character when running the example commands below.
 
 - `input hello<space>world` : Inputs "hello world" as data into the Decodex.
 - `input <space>hello<space>world<space>` : Inputs " hello world " as data into Decodex.
