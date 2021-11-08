@@ -288,6 +288,7 @@ initially*.
 Format: `set dish limit [DISH_NAME]`
 
 * Can only be performed on existing `DISH_NAME`.
+* ❕ *Tip*: You can replace `[DISH_NAME]` with `[DISH_INDEX]` to quickly choose which dish to set a limit to.
 * 💡 *Note*:  You will be prompted to enter the limit to watch out for in the next step.
 
 Example of usage:
