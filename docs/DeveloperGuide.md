@@ -292,11 +292,9 @@ The sequence diagram below illustrates the above command example.
 ### 4.4. Updating ingredients
 Ingredients can be updated using `update` command followed by two parameters - first of which is a number
 indicating the specific ingredient in an ingredient group, followed a parameter prefixed with flag for identification
-by SITUS.
+by SITUS. 
 
 E.g. `update 1.2 a/150.0`
-
-<ol>
 1. The current ingredient inventory is:
 
 ```
@@ -331,7 +329,6 @@ by the `updateTotalAmount` method in the `IngredientGroup` class.
 8. Lastly, the updated `ingredientList` is stored in the external memory through the `Storage`
    class.
 
-</ol>
 <div style="page-break-after: always;"></div>
 
 After the ingredient has been updated, the ingredient inventory list is:
