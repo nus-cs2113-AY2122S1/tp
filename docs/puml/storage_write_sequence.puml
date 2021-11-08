@@ -7,7 +7,7 @@ activate Foodorama
 Foodorama -> Storage: write(mode: Ingredient)
 activate Storage
 Storage -> ingredients.txt : Write to ingredients.txt
-Duke -> Storage: write(mode: Dish)
+Foodorama -> Storage: write(mode: Dish)
 Storage -> dishes.txt: Write to dishes.txt
 deactivate Foodorama
 
