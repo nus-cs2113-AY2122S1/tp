@@ -1,7 +1,7 @@
 # SchedUrMods User Guide
 SchedUrMods is a **desktop application for NUS Students to manage their NUSMODS timetable and
 everyday tasks optimised for usage via a Command Line Interface (CLI).** If you can type fast, 
-SchedUrMods can help you manage your daily tasks faster than traditional GUI application.  
+SchedUrMods can help you manage your daily tasks faster as compared to a traditional GUI application.
 
 Below is the guide on how you can get started using our program to start **"Scheduling Ur Mods!"**.  
 
