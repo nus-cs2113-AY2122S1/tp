@@ -25,7 +25,7 @@ class ArgsParser {
 
     /**
      * Used for separation of each prefix and argument.
-     * E.g. this matches "/a aaaaa aaaa"
+     * E.g. this matches "a/aaaaa aaaa".
      */
     private static final Pattern ARGS_FORMAT = Pattern.compile("\\w+/([^/\\s]*( +|$))+");
 
@@ -66,6 +66,13 @@ class ArgsParser {
         checkAllArgsPresent();
     }
 
+    /**
+     * Extracts arguments from the matcher and populates {@link #prefixesToArgs}.
+     *
+     * @param matcher Matcher based on the {@link #ARGS_FORMAT} pattern and matching on the argument string.
+     * @throws InvalidPrefixException If there is an invalid prefix found in the args that does not correspond
+     *         to any of the specified prefixes.
+     */
     private void findAndPopulateArgs(Matcher matcher) throws InvalidPrefixException {
         while (matcher.find()) {
             final String match = matcher.group().trim();
@@ -88,9 +95,17 @@ class ArgsParser {
         }
     }
 
+    /**
+     * Checks that all required arguments are present.
+     *
+     * @throws MissingPrefixException If there is a missing prefix that could not be found in the args.
+     * @throws MultipleArgsException If there is a prefix that appears more than once in the args when it should
+     *         have only appeared once.
+     */
     private void checkAllArgsPresent() throws MissingPrefixException, MultipleArgsException {
         for (Prefix prefix : prefixList) {
             final ArrayList<String> argList = prefixesToArgs.get(prefix.getPrefix());
+            // Optional args do not need to be present.
             if (!(prefix instanceof OptionalArgPrefix) && argList.size() == 0) {
                 throw new MissingPrefixException(prefix);
             }
