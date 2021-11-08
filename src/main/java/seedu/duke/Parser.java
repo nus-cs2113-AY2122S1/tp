@@ -679,7 +679,7 @@ public class Parser {
     private static Command parseFind(String params) throws TourPlannerException {
         String[] prefixSuffix = params.split(" ", 2);
         if (prefixSuffix.length < 2) {
-            throw new TourPlannerException(ERROR_MISSING_NAME_ID);
+            throw new TourPlannerException(ERROR_MISSING_IDENTIFIER);
         }
         String prefix = prefixSuffix[IDENTIFIER_INDEX];
         String suffix = prefixSuffix[ARGS_INDEX];
