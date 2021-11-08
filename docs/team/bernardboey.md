@@ -38,12 +38,13 @@ The application is CLI based and is suitable for users who can type quickly and 
 * **User Guide**:
     * Added table of contents, introduction, quick start, and notes to the user guide ([#83](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/83), [#90](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/90)).
     * Updated the command summary ([commit](https://github.com/AY2122S1-CS2113-T16-3/tp/commit/cd133ae9db82cfbdec13ea803ffc5e065aed25e8#diff-b50feaf9240709b6b02fb9584696b012c2a69feeba89e409952cc2f401f373fb)).
-    * Added documentation for the features `add`, `increment`, `decrement`, `delete`, and `bye`  ([#90](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/90)).
+    * Added documentation for the features `add`, `increment`, `decrement`, `delete`, and `bye` ([#90](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/90)).
 
 
 * **Developer Guide**:
     * Added table of contents, acknowledgements, value proposition, user stories, and non-functional requirements to the developer guide ([#84](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/84), [#87](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/87), [#90](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/90)).
     * Added documentation for the parser and added 3 class diagrams and 1 sequence diagram ([#84](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/84), [#87](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/87)).
+    * Added instructions for manual testing for `add`, `increment`, `decrement`, `delete`, and `bye` ([#150](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/150)).
 
 
 * **Team-based tasks**:
