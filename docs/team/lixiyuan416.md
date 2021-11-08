@@ -21,7 +21,8 @@
     - Justification: Helpful filter options for users when viewing expenses in a trip
     
 - **Testing**
-    - Added tests for `Expense` class
+    - Added tests for view filter methods in `ExpenseTest`
+    - Added `ParserTest`
 
 ### UG Contribution
 - **Initial Draft**
@@ -33,6 +34,12 @@
 - **Added FAQ section**
 
 ### DG Contribution
+- **Initial Draft**
+  - Added `Expense` section, with [sequence diagram](../images/Expense%20Sequence%20Diagram.jpeg)
+  
+- **Final Submission**
+  - Ui section - [Link to diagram](../images/HelpCommandStates.png)
+  - Wrote header names, Appendixes A-B
 
 ### Team based tasks Contribution
 - **Added bug report in Issues**
