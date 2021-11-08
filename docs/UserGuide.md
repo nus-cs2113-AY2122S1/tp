@@ -52,7 +52,8 @@ User Interface (GUI) apps.
 2. Download the latest version of `Taa.jar` from [here](https://github.com/AY2122S1-CS2113T-F12-3/tp/releases).
 3. Create a new folder and place `Taa.jar` inside.
 4. Open Command Prompt/Terminal and navigate to the folder containing `Taa.jar`.
-5. Run `java -jar Taa.jar` in Command Prompt/Terminal to start the app.
+5. Run `java -jar Taa.jar` in Command Prompt/Terminal to start the app. <br>
+   ![QuickStart](images/quickstart/QuickStart.png)
 6. Enter `help` to display the list of available commands. See [Features](#features) for more information.
 
 ## Features
