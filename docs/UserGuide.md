@@ -59,7 +59,7 @@ I woke up and found myself dead. The Spirit Guide from the Hell told me that the
 >* Items in square brackets are optional.
   e.g `/view [NAME]...` can be used as `/view` or `/view Father`.
 >* Items with `...` after them can be used multiple times including zero times. 
-  e.g. `[NAME]...` can be used as ` ` (i.e. 0 times), `Father`, `Father Ling` etc.
+  e.g. `[NAME]...` can be used as `Father`, `Father Ling`, or simply blank etc.
 
 ### Viewing the list of commands available: `/help`
 Views the list of commands available.
@@ -72,16 +72,19 @@ Example of usage:
 $ /help
 
 Here are the list of commands available to you.
-"/narrative-lines NUM" - change number of narrative lines print each time to #NUM
+You can also check out this webpage for our user guide:
+https://ay2122s1-cs2113-t14-1.github.io/tp/UserGuide.html
 "/help" - view this command list
+"/narrative-lines NUM" - change number of narrative lines print each time to NUM
 "/next" - move on to the next scene or the next stage of a scene
 "/back" - go back to previous scene
-"/note" - create a new note / open a note / delete a note
 "/view" - view all the clues that you have gathered
+"/note" - create a new note / open a note / delete a note
+"/quit" - quit the note function
 "/restart" - restart the game from beginning
+"/exit" - exit the game
 Key in the index (e.g. 1, 2) in front of the suspect/clue you want to investigate
 To investigate suspects or clues, please input their corresponding number.
-"/exit" - exit the game
 ```
 
 
@@ -110,14 +113,20 @@ Example of usage:
 | Instructions |
 ----------------
 
-Here are the commands that you can enter:
-"/narrative-lines #NUM" - change number of narrative lines print each time to #NUM
+Here are the list of commands available to you.
+You can also check out this webpage for our user guide:
+https://ay2122s1-cs2113-t14-1.github.io/tp/UserGuide.html
 "/help" - view this command list
+"/narrative-lines NUM" - change number of narrative lines print each time to NUM
 "/next" - move on to the next scene or the next stage of a scene
-"/note" - create a new note / open a note / delete a note
+"/back" - go back to previous scene
 "/view" - view all the clues that you have gathered
+"/note" - create a new note / open a note / delete a note
+"/quit" - quit the note function
 "/restart" - restart the game from beginning
 "/exit" - exit the game
+Key in the index (e.g. 1, 2) in front of the suspect/clue you want to investigate
+To investigate suspects or clues, please input their corresponding number.
 
 Now, enter "/next" to start your journey to the truth.
 
@@ -155,7 +164,7 @@ The Spirit Guide from the Hell told me that the only way to revive my soul is fo
 So I have to go back 24 hours ago and find the murderer from the perspective of my soul.
 ```
 
->💡 Users can use /back at any scene
+>💡 Users can use `/back` at any scene
 
 ### Choosing a suspect: `KEYWORD` or `INDEX`
 Chooses a suspect using either the suspect's name or the suspect number.
@@ -503,12 +512,14 @@ Format: `/exit`
 
 |Action| Format, Examples |
 |--------|----------|
-| Changes the number of lines to be printed during narrative | `/narrative-lines NUM` e.g., `10` |
+| Show the list of commands available | `/help` |
+| Change the number of lines to be printed during narrative | `/narrative-lines NUM` e.g., `/narrative-lines 10` |
 | Next | `/next` |
+| Back | `/back` |
+| View clues | `/view [NAME]...` e.g., `/view` `/view Father` `/view Father Ling` |
+| Take note | `/note [INDEX]` |
+| Quit note function | `/quit` |
 | Restart | `/restart` |
 | Exit | `/exit` |
-| Back | `/back` |
-| Investigate/Choose Killer | `[/investigate] INDEX or KEYWORD` e.g., `/investigate father`, `father`, `1` |
-| View Clues | `/view [NAME]...` e.g., `/view` `/view Father` `/view Father Ling` |
-| Take Note | `/note <Command index>(optional)` |
-| Quit note | `/quit` |
+| Choose suspect | `[/investigate] INDEX or KEYWORD` e.g., `/investigate father`, `father`, `1` |
+| Investigate clue | `INDEX` |
