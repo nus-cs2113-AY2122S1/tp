@@ -24,7 +24,7 @@ public class AddEntryCommand extends Command {
      * Class constructor providing syntax for the HelpCommand.
      */
     public AddEntryCommand() {
-        syntax = "journal entry n/ [NOTEBOOK_NAME] e/ [ENTRY_NAME]";
+        syntax = "journal entry n/[NOTEBOOK_NAME] e/[ENTRY_NAME]";
     }
 
     /**
@@ -35,7 +35,7 @@ public class AddEntryCommand extends Command {
     public AddEntryCommand(String userInput) {
         this.userInput = userInput;
         this.helpMessage = "Add an entry to the desired notebook";
-        this.syntax = "journal entry n/ NOTEBOOK_NAME e/ ENTRY_NAME";
+        this.syntax = "journal entry n/NOTEBOOK_NAME e/ENTRY_NAME";
     }
 
     /**
