@@ -33,8 +33,7 @@ in the cooked recipe.
 - *Justification* : This feature helps the user manage their Ingredient Repository more easily as it helps the user do the manual work of removing
 ingredients in the Ingredient Repository after cooking a recipe.
 - *Highlights* : The design of the feature required some analysis. We considered whether we should assume users will use ingredients
-that are expiring the soonest first. The implementation was also quite challenging as it 
-required changes to the structure of other commands.
+that are expiring the soonest first.
 
 #### Feature: List recipes user can cook
 - *What it does* : Helps user check which recipes the user can cook based on the ingredients they have.
