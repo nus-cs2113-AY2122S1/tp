@@ -198,7 +198,13 @@ public class UpdateParser extends Parser {
             } else {
                 throw new HaBitParserException(ERROR_INVALID_CHANGE_COMMAND);
             }
+
         }
+
+        if (!isContainFlag(parameters, FLAG_GOAL_INDEX) || !isContainFlag(parameters, FLAG_HABIT_INDEX)) {
+            throw new HaBitParserException(ERROR_CHANGE_COMMAND_MISSING_INDEXES);
+        }
+        
         return updateAttributes;
     }
 
