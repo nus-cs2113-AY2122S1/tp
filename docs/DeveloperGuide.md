@@ -36,7 +36,7 @@
 [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
 
 
-# Acknowledgements
+## Acknowledgements
 
 `Click` was inspired by the skeleton code and documentation (UG and DG) of [AddressBook Level-3](https://se-education.org/addressbook-level3/).
 
