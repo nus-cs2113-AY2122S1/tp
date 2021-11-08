@@ -1,7 +1,7 @@
 # SchedUrMods User Guide
 SchedUrMods is a **desktop application for NUS Students to manage their NUSMODS timetable and
 everyday tasks optimised for usage via a Command Line Interface (CLI).** If you can type fast, 
-SchedUrMods can help you manage your daily tasks faster than traditional GUI application.  
+SchedUrMods can help you manage your daily tasks faster as compared to a traditional GUI application.
 
 Below is the guide on how you can get started using our program to start **"Scheduling Ur Mods!"**.  
 
@@ -20,7 +20,7 @@ Below is the guide on how you can get started using our program to start **"Sche
       - [2.3.3 Listing the recurrence of a task](#233-listing-the-recurrence-of-a-task)
       - [2.3.4 Listing your upcoming tasks: `upcoming`](#234-listing-your-upcoming-tasks-upcoming)
     - [2.4 Sorting your task list: `sort`](#24-sorting-your-task-list-sort)
-    - [2.5 Setting reminders to your tasks: `reminder`](#25-setting-reminders-to-your-tasks-reminder)
+    - [2.5 Setting reminders to your tasks: `reminder`](#25-setting-reminders-for-your-tasks-reminder)
     - [2.6 Editing your tasks: `edit`](#26-editing-your-tasks-edit)
     - [2.7 Adding your NUS timetable:](#27-adding-your-nus-timetable)
       - [2.7.1 Module: `module`](#271-module-module)
@@ -34,12 +34,11 @@ Below is the guide on how you can get started using our program to start **"Sche
 ## 1. Quick Start
 1. Ensure you have [Java **11** jdk](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html) installed in your Computer, 
 and that `java` is in your `PATH` environment variable.
-2. Download the latest `SchedUrMods.jar` [here](https://github.com/AY2122S1-CS2113T-W13-3/tp/releases/latest).
-
-   > **⚠️Warning**: Do *not* decompress the jar file even if it shows as an archive on your file manager.
-3. Copy the file to the folder you want to use as the _home folder_ for SchedUrMods.
+2. Download the latest zip file from [here](https://github.com/AY2122S1-CS2113T-W13-3/tp/releases/latest).
+3. Decompress the zip file to the folder you want to use as the _home folder_ for SchedUrMods.
+   > **⚠️Warning**: Only decompress the zip file. Do *not* decompress any jar file even if it shows as an archive on your file manager.
    >💡 **Note**: Ensure you have permission to create files and folders in this _home folder_.
-4. Open a terminal window in the _home folder_.
+4. Open a terminal window in the _home folder_ you designated in step 3.
 5. Type `java -jar SchedUrMods.jar` into the terminal to start SchedUrMods.
 6. The following display should appear in a few seconds:
 
@@ -62,7 +61,7 @@ Command-Line Interface for NUSMODS                               (v2.1.0)
 
 ## 2. Features
 ### 2.1 Viewing help : `help`
-Displays all commands available for the SchedUrMods application.
+Displays all available commands for the SchedUrMods application.
 
 **Format**: `help`
 
@@ -161,10 +160,10 @@ Adds your **event** to your task list.
 When entering dates into SchedUrMods, we accept multiple date formats to allow you to reduce how much you have to type.  
 
 The accepted date formats in SchedUrMods are:
-- `dd/MM/yyyy HH:mm` or `dd/MM/yy HH:mm`
-- `dd/MM/yyyy HH` or `dd/MM/yy HH`
-- `dd/MM HH:mm`
-- `dd/MM HH`
+- `dd-MM-yyyy HH:mm` or `dd-MM-yy HH:mm`
+- `dd-MM-yyyy HH` or `dd-MM-yy HH`
+- `dd-MM HH:mm`
+- `dd-MM HH`
 - `dd HH:mm`
 - `dd HH`
 - `HH`  
@@ -183,7 +182,7 @@ The accepted date formats in SchedUrMods are:
 >💡 **Note**: When minute (`mm`) is unspecified, it will be replaced with `0`.
 
 **Examples**:
-- `03/10/2004 03` translates to `3rd October 2004, 3:00am`.
+- `03-10-2004 03` translates to `3rd October 2004, 3:00am`.
 - `15:30` translates to `Your current year, month and day at 3.30pm`.
 - `15 12:30` translates to `Your current year and month on the 15th at 12.30pm`.
 
@@ -196,7 +195,7 @@ List all tasks currently stored locally in your task list.
 
 **Format**: `list`
 - The command displays the following information for each task:
-  - **Task id**:
+  - **Task index**:
     - A positive integer i.e. `1.` which identifies the task. This index is used to identify tasks in the [`edit`](#26-editing-your-tasks-edit), [`browse`](#272-browse-browse) and [`delete`](#28-deleting-your-tasks-delete) commands.
   - **Task type**:
     - A task can either be a Todo, Deadline, Event or Lesson and they are all represented with the first letter of their task type.
@@ -209,7 +208,7 @@ List all tasks currently stored locally in your task list.
   - **Task priority `[priority]`**:
     - A task can either have `low`, `medium`, or `high` priority. 
     - This value determines the urgency of the task.
-  - **Task recurrence ``**:
+  - **Task recurrence `{recurrence}`**:
     - A task can either have `none`, `daily`, `weekly`, `monthly`, or `yearly` recurrence.
     - This value determines how often a task recurs.
         >💡 **Note**: Tasks with a recurrence will automatically be recurred to the next date that has not occured yet every time you list them.
@@ -270,8 +269,8 @@ Filters the task list for all tasks that matches the filters applied.
 #### 2.3.3 Listing the recurrence of a task
 Displays the next four recurrences of a task.
 
-**Format 2**: `list [index]`
-- `[index]` specifies the id of the task to display the next four recurrences of.
+**Format 2**: `list [id]`
+- `[id]` specifies the id of the task to display the next four recurrences of.
   >💡 **Note**: To obtain the correct task id of each task, please use the `list` command without any filters.
 
 **Example (with task id)**: `list 3`
@@ -299,9 +298,21 @@ Allows you to easily list your tasks over the upcoming week.
 
 **Format**: `upcoming`
 
-**Example**:
+**Example**: `upcoming`
 
 **Expected Outcome**:
+```
+-------------------------------------------------------------------------
+[user]: upcoming
+|| [L] CS2113T C02: 10-11-2021 13:00 to 10-11-2021 14:00 <medium> {weekly} 
+|| [T] buy groceries <medium> {none} (doOn: 10-11-2021 17:30)
+|| [L] CS2113T C02: 11-11-2021 14:00 to 11-11-2021 16:00 <medium> {weekly} 
+|| [L] CS2113T C02: 12-11-2021 16:00 to 12-11-2021 18:00 <medium> {weekly} 
+|| [L] CS2113T C02: 15-11-2021 14:00 to 15-11-2021 16:00 <medium> {weekly} 
+|| [E] finals <medium> {none} (startDate: 15-11-2021 15:00 - endDate: 15-11-2021 18:00)
+-------------------------------------------------------------------------
+```
+
 
 ### 2.4 Sorting your task list: `sort`
 Sorts your task list by a given criteria.
@@ -550,6 +561,11 @@ that have the `java 11 jdk` installed on their systems.
 **A**: Install the program on the other computer and replace the new empty `tasks.dat`
 it creates with the `tasks.dat` that you wish to transfer from your previous `SchedUrMods.jar`
 home folder.
+
+**Q**: I encountered an error message `java.lang.reflect.InaccessibleObjectException` when executing the program. How do I fix it?
+
+**A**: Ensure that you have installed and are running `java jdk 11`. Check your java version, by typing `java -version`
+to ensure that the correct jdk version (`11.x.x`) is being recognised by your system.
 
 ## 4. Command Summary
 

@@ -22,6 +22,7 @@
 - [4. Implementation](#4-implementation)
   - [4.1 Task Factories](#41-task-factories)
   - [4.2 Filtering the tasklist](#42-filtering-the-tasklist)
+    - [4.2.1 Time proximity based filtering](#421-time-proximity-based-filtering)
   - [4.3 [Proposed] Refactor TaskManager](#43-proposed-refactor-taskmanager)
 - [5. Appendix: Requirements](#5-appendix-requirements)
   - [5.1 Product scope](#51-product-scope)
@@ -33,8 +34,8 @@
 ## 1. Introduction
 **SchedUrMods** is a desktop application for NUS students who wish to manage 
 their assignments and semester-related information via CLI (command-line interface).
-If you can type fast, SchedUrMods can help you manage your daily tasks faster than 
-traditional GUI application.
+If you can type fast, SchedUrMods can help you manage your daily tasks faster 
+as compared to a traditional GUI application.
 
 **SchedUrMods** is written in `Java 11` and utilises the **Object-Oriented Programming (OOP)** 
 paradigm to provide the following benefits during the development of the application. 
@@ -199,7 +200,7 @@ associated with it.
 The `Command` component consists of an abstract class `Command` that all commands should inherit from. There are then 3 seperate types of Commands.
  - `XYZCommand`: These are commands that do not interact with `TaskManager` and need no flags. e.g. the 'bye' command.
  - `XYZTaskManagerCommand`: These are commands that perform a function with `TaskManager` based on the flags that are entered in the `Map<String, String>` e.g. the 'edit' or 'sort' command.
- - `TaskCommand` these are commands that add Tasks to the `TaskManager`. individual TaaskCommands will inherit from this class and set the `TaskFactory` and Task usage e.g. the 'Deadline' command.
+ - `TaskCommand` these are commands that add Tasks to the `TaskManager`. individual TaskCommands will inherit from this class and set the `TaskFactory` and Task usage e.g. the 'Deadline' command.
    >💡 **Note**: The `ModuleCommand` is implemented with `XYZTaskManagerCommand` instead of `TaskCommand` as it does **not** use a `TaskFactory`.  
 
 On executing the command (`executeCommand()` called), the `CommandResult` should be returned with 2 variables. `message` is the message to be printed back to the user and `isExited` is whether the program should exit after this command.
@@ -271,7 +272,7 @@ The Storage is handled by the `DataManager` class.
 
 >💡 **Note**: The storage component has been implemented using the [Observer Design Pattern](https://en.wikipedia.org/wiki/Observer_pattern) where `TaskManager` implements `Subject` and `DataManager` implements `Observer`.
 
-### 3.8 Logger Component
+### 3.7 Logger Component
  - The Logger has been implemented with the `java.util.logging` library.
  - It's designed to be as easy to use as possible where in order to log any message, you only have to use `Log.<severity>(message)`.
    - E.g. `Log.info("this is an info log")`.
@@ -284,7 +285,7 @@ SEVERITY: Log Message Here
 - All individual class loggers are stored in a hashmap `Map<String, Logger>` where if a class name is not already in the hashmap on calling any log function, it will be added automatically.
 - All log messages above `Level.SEVERE` will be printed to console and all log messages above `Level.FINE` will be added to the log file `log.txt`.
 
-### 3.9 NUSMods API Component
+### 3.8 NUSMods API Component
 
 The major parts of this component lies within the nusmods package.
 
@@ -363,6 +364,16 @@ pre-formatted `String` containing a neat list of the final filtered tasks that m
 
 **Step 6**: A `CommandResult` object is then created and stores the `String` containing the filtered tasklist
 as the command execution message to be handled by the `Ui` and displayed to the user on the terminal interface.
+
+### 4.2.1 Time proximity based filtering
+
+All tasks are first gotten and converted into a stream for layer mutilation. Then, the time is first found for each task using the unified interface `Task::getHappenTime`, to filter out tasks that does not have an associated time. Subsequently, the next occurrence is obtained with,
+- `Lesson::getNextOccurrence` if the task is a lesson, since lessons have irregular recurrences, or,
+- `RecurrenceEnum::getNextRecurredDate` otherwise.
+
+If the time of the next occurrence falls within the threshold time length from now, the task is preserved.
+
+Finally, the stream is sorted by the occurrence time and collected into a string for return.
 
 ### 4.3 [Proposed] Refactor `TaskManager`
 The team has thought of refactoring `TaskManager` because as of currently, it does not seem to be following the 'Single Responsibility Principle'. Because `TaskManager` both manages the `taskList` and `latestFilteredList`, it seems that it is having 2 responsibilities. The team believes that this issue can be fixed using either the 'Facade', 'Decorator' or 'Proxy' design pattern. However, due to lack of time, we have bundled the two Task lists into one class.
@@ -809,7 +820,7 @@ and restart the program to allow created tasks to be saved!
 ```
 The todo will be shown in the task list but will not be reflected in the data folder.
 
-**Case A**: File exists with save folder name
+**Case B**: File exists with save folder name
 On program run:
    **Expected Output**:
 ```
