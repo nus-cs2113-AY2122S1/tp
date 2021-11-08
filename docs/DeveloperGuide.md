@@ -85,7 +85,7 @@ Follow [this guide](https://se-education.org/guides/tutorials/intellijCodeStyle.
 
 The **Architecture Diagram** given above explains the high-level design of the App.
 
-> 📝 **Note:** `DukeException` class is not shown in the diagram for simplicity-sake.
+> 📝 **Note:** `DukeException` class is not shown in the diagram for simplicity's sake.
 
 Given below is a quick overview of main components and how they interact with each other.
 
