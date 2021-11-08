@@ -300,3 +300,18 @@ Expected: the program will warn the user, and asks for confirmation from the use
 e.g. `open something` or `delete 1000` when only 2 trips are stored.)
 <br>
 Expected: An error will inform the user that the trip number does not exist.
+
+#### Editing trip
+
+- 'edit' syntax with incorrect or missing attribute (e.g. edit 1 -location).
+<br>
+Expected: An error will inform the user, providing the input syntax for editing a trip.
+
+
+#### Viewing summary of expenses
+
+- `summary` with a random string or a name that does not exist in the trip
+e.g. 'summary abcdefg' or 'summary %32!3'.
+<br>
+Expected: An error will inform the user that the string or name does not exist in the trip.
+
