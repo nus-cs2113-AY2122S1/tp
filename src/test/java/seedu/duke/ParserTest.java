@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.parser.Parser;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
