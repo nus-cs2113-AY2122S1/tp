@@ -1,6 +1,6 @@
 package seedu.duke.parser;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Person;
@@ -24,6 +24,7 @@ import java.util.Scanner;
 class CommandExecutorTest {
     private static final DateTimeFormatter inputPattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     private static Trip trip;
+
     @BeforeAll
     static void setUp() throws SameNameException, ForceCancelException {
         String[] stringArray = {"", "Canada", "02-03-2021", "cad", "0.123", "ben,jerry,tom"};
@@ -41,11 +42,11 @@ class CommandExecutorTest {
         HashMap<String, Double> amountSplit1 = new HashMap<>();
         Expense exp1 = new Expense(8.00, "chicken nuggets", listOfPersons1, "food",
                 LocalDate.parse("11-02-2021", inputPattern), person1, amountSplit1);
+        exp1.setAmountSplit(person1, 0.0);
+        exp1.setAmountSplit(person2, 8.0);
         person1.setMoneyOwed(person1, -8.0);
         person1.setMoneyOwed(person2, 8.0);
         person2.setMoneyOwed(person1, -8.0);
-        exp1.setAmountSplit(person1, 0.0);
-        exp1.setAmountSplit(person2, 8.0);
         HashMap<String, Double> amountSplit2 = new HashMap<>();
         Expense exp2 = new Expense(16.00, "chicken", listOfPersons, "food",
                 LocalDate.parse("11-02-2021", inputPattern), person2, amountSplit2);
