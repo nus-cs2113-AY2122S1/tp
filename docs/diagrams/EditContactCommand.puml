@@ -1,0 +1,34 @@
+@startuml
+hide footbox
+'https://plantuml.com/sequence-diagram
+
+-> ":EditContactCommand": execute()
+activate ":EditContactCommand"
+
+alt#gold #lightgreen PERSONAL_CONTACT_INDEX
+    ":EditContactCommand" -> ":EditContactCommand":updatePersonalContact()
+    activate ":EditContactCommand"
+    ":EditContactCommand" -> ":personalContact":editContact(contactDetails:String[])
+    activate ":personalContact"
+    ":personalContact" --> ":EditContactCommand":
+    deactivate ":personalContact"
+    ":EditContactCommand" -> ":TextUi":editPersonalContactMessage(personalContact:Contact)
+    activate ":TextUi"
+    ":TextUi" --> ":EditContactCommand":
+    deactivate ":TextUi"
+    ":EditContactCommand" --> ":EditContactCommand":
+    deactivate ":EditContactCommand"
+
+
+else #lightblue ALL_CONTACTS_INDEX
+    ":EditContactCommand" -> ":ExceptionTextUi":numOutOfRangeEditMessage(contactListSize:int)
+    activate ":ExceptionTextUi"
+    ":ExceptionTextUi" --> ":EditContactCommand":
+    deactivate ":ExceptionTextUi"
+
+else #gold CONTACT_INDEX
+   ref over ":EditContactCommand", ":EditContactCommand" :edit contact
+end
+
+
+@enduml

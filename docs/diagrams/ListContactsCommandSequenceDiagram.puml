@@ -1,0 +1,41 @@
+@startuml
+hide footbox
+'https://plantuml.com/sequence-diagram
+
+-> ":ListContactsCommand": execute()
+activate ":ListContactsCommand"
+
+":ListContactsCommand" -> ":ContactList" :getListSize()
+activate ":ContactList"
+    ":ContactList" --> ":ListContactsCommand" :contactListSize:int
+deactivate ":ContactList"
+
+alt#gold #lightgreen listSize == 0
+    ":ListContactsCommand" -> ":TextUi" :contactsEmptyListMessage()
+    activate ":TextUi"
+    ":TextUi" --> ":ListContactsCommand"
+    deactivate ":TextUi"
+
+else #lightblue else
+    ":ListContactsCommand" -> ":ListContactsCommand" : listAllContacts(listSize:int)
+    activate ":ListContactsCommand"
+    ":ListContactsCommand" -> ":TextUi" :contactsListMessage(listSize:int)
+    activate ":TextUi"
+    ":TextUi" --> ":ListContactsCommand"
+    deactivate ":TextUi"
+
+    loop #lightgrey listSize times
+
+    ":ListContactsCommand" -> ":ContactList" : getContactName(index:int)
+    activate ":ContactList"
+    ":ContactList" --> ":ListContactsCommand"
+    deactivate ":ContactList"
+    ":ListContactsCommand" -> ":TextUi" : printContactWithIndex(index:int)
+    activate ":TextUi"
+    ":TextUi" --> ":ListContactsCommand"
+    deactivate ":TextUi"
+    end
+
+    deactivate ":ListContactsCommand"
+end
+@enduml

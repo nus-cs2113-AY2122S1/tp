@@ -15,9 +15,13 @@ dos2unix EXPECTED-UNIX.TXT ACTUAL.TXT
 diff EXPECTED-UNIX.TXT ACTUAL.TXT
 if [ $? -eq 0 ]
 then
+    rm data/contacts.txt
+    rm data/me.txt
     echo "Test passed!"
     exit 0
 else
+    rm data/contacts.txt
+    rm data/me.txt
     echo "Test failed!"
     exit 1
 fi

@@ -1,0 +1,38 @@
+@startuml
+hide footbox
+'https://plantuml.com/sequence-diagram
+
+-> ":SearchContactCommand": execute()
+activate ":SearchContactCommand"
+
+
+":SearchContactCommand" -> ":ContactList" : searchContact(query:String, detailFlag:int)
+activate ":ContactList"
+
+loop for all contacts
+    loop #lightgrey for all contacts
+    ":ContactList" -> ":ContactList" :getContactAtIndex(i:int)
+    activate ":ContactList"
+    ":ContactList" --> ":ContactList" :contact:Contact
+    deactivate ":ContactList"
+
+        opt#gold #lightgreen hasDetailMatches(query, detailType, i, contact)
+        ":ContactList" -> ":TextUI" :viewContactMessage(contact:Contact, Index:int)
+        activate ":TextUI"
+        ":TextUI" --> ":ContactList"
+        deactivate ":TextUI"
+        ":ContactList" -> ":ContactList" : matches++
+    end
+end
+
+opt#gold #lightgreen matches == 0
+":ContactList"->":TextUI":searchNoResultsFoundMessage()
+activate ":TextUI"
+":TextUI" --> ":ContactList"
+deactivate ":TextUI"
+end
+
+":ContactList"-->":SearchContactCommand"
+deactivate ":SearchContactCommand"
+
+@enduml

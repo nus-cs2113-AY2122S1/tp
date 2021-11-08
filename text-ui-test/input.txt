@@ -1,1 +1,109 @@
-James Gosling
+Le Zong
+
+lezongmun
+lezongg
+
+@gmail.com
+lezongmun@gmail.com
+
+me
+edit me -n Marcus Bory
+edit me
+edit me -e lezongmun
+rm 1
+add -n ng andre -g ng-andre
+rm 2
+view 999aa
+add -n ashraf -g ashraf
+rm 1
+n
+rm 1
+o
+add -n mayank -g mayankp123
+rm 9909
+add -n bory -g marcus
+add       -n   andre   -g ng-andre
+y
+ls
+view 1
+add -n bory -g
+rm abc
+add -g lezongmun -n lezong
+add -g      github
+ls
+view 3
+rm 0
+y
+rm    0
+y
+   add  -p  -f
+view 2 1
+n             andre
+f facebook
+n
+  add  -p pinterest  -f facebook
+         add   1231267azldasd -n   lezongmun    -g  lezong
+      rm 1
+n
+    rm    1
+y
+ls
+view abc
+add -n yusdhsdsd -g -sdj11222
+add -n yusdhsdsd -g sdj0-11222
+add -n yusdhfgsd -g sdj11222-
+add -n yusdhsd -g sdj11--222
+add -n asbsd123123
+add -n asjoda sadfsd -te _123adad
+view 0
+   add  -n   -g
+      add -n le,zong, mun -g    lezaimun
+      y
+       add   -n null  -g legit
+       add -n name -g null
+       add   -n dev -g nullptr
+    edit 3 -g new-git
+    add -n asjoda sadfsd -tw _123  adad
+    y
+    add -n asjoda sadfsd -tw 123_adad
+add -n name -l linkedin -g github -e lasdas@ -tw twitter -te telegram
+add -n asdasd -l kusdd__ -g adasdas -e .adadas@com
+add -n lezai  -g lezongmun  -e lezongmun@gmail.com   -linkedin  lezongmun
+add -n lezai3  -g lezongmun  -e lezongmun@gmail.com   -l  lezongmun
+add -n lezongggg    -te testTelegram
+search
+search
+search -g
+search boris
+search -n bory
+search -g lezong
+search -zxca lezong
+ls
+add -n ashraf -g ashrafjfr
+add -n ashraf -te ashrafjfr
+y
+edit 0 -te ashrafjfr
+y
+edit 0 -e ashrafjfr@gmail.com
+view 0
+import
+search -n lezai
+search -n badgithub
+ls
+rm all
+asdsad
+ls
+rm 0 -e -te -tw
+y
+view 0
+add -n marcus  -n lezaimun
+edit 4 -g github -g guthib
+view all
+rm me
+view me
+edit all -n trysth -g trying
+edit asd -n trying
+rm all
+y
+ls
+exit

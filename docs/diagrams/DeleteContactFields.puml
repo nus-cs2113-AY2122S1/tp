@@ -1,0 +1,56 @@
+@startuml
+hide footbox
+mainframe sd delete selected contact fields
+-> ":DeleteContactCommand":deleteFields()
+activate ":DeleteContactCommand"
+
+'obtain contact to be deleted using index
+":DeleteContactCommand" -> ":IndexParser": getContactFromIndex(contactIndex: int, contactList: ContactList)
+activate ":IndexParser"
+":IndexParser" --> ":DeleteContactCommand": deletedContact:Contact
+deactivate ":IndexParser"
+
+
+opt#gold #lightgreen no fields to delete
+    ":DeleteContactCommand" -> ":TextUi": noDeleteFields()
+    activate ":TextUi"
+    ":TextUi" --> ":DeleteContactCommand"
+    deactivate ":TextUi"
+    <-- ":DeleteContactCommand"
+end
+
+'confirm delete message
+":DeleteContactCommand" -> ":TextUi" :confirmDeleteFieldMessage(hasDeleteDetails: boolean[], deletedContact: Contact)
+activate ":TextUi"
+":TextUi" --> ":DeleteContactCommand"
+deactivate ":TextUi"
+
+'get confirmation from user to delete
+":DeleteContactCommand" -> ":UserInputTextUi":getUserConfirmation()
+activate ":UserInputTextUi"
+":UserInputTextUi" --> ":DeleteContactCommand" :userConfirmation:String
+deactivate ":UserInputTextUi"
+
+alt#gold #lightgreen delete confirmed
+    'execute delete for selected contact
+    ":DeleteContactCommand" -> ":ContactList":deleteContactFields(hasDeletedDetails: boolean[])
+    activate ":ContactList"
+    ":ContactList" --> ":DeleteContactCommand"
+    deactivate ":ContactList"
+
+    'Print message to show delete executed
+    ":DeleteContactCommand" -> ":TextUi": deleteFieldsMessage(deletedContact: Contact)
+    activate ":TextUi"
+    ":TextUi" --> ":DeleteContactCommand"
+    deactivate ":TextUi"
+
+else #lightblue delete cancelled
+    'Print message to show delete cancelled
+    ":DeleteContactCommand" -> ":TextUi":cancelDeleteContactMessage()
+    activate ":TextUi"
+    ":TextUi" --> ":DeleteContactCommand"
+    deactivate ":TextUi"
+end
+
+deactivate ":DeleteContactCommand"
+@enduml

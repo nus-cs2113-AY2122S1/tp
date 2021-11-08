@@ -1,0 +1,24 @@
+@startuml
+skinparam classAttributeIconSize 0
+!include style.puml
+
+class MainParser {
+}
+
+class AddContactParser {
+}
+
+class "<<abstract>>\nContactParser" {
+}
+
+class "<<abstract>>\nRegexParser" {
+}
+
+interface "<<interface>>\nContactDetails" {
+}
+
+"<<abstract>>\nContactParser" -up-|> "<<abstract>>\nRegexParser"
+"<<abstract>>\nContactParser" .up.|> "<<interface>>\nContactDetails"
+AddContactParser -up-|> "<<abstract>>\nContactParser"
+MainParser -up-> AddContactParser
+@enduml

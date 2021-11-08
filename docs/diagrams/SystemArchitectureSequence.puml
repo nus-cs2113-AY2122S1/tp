@@ -1,0 +1,40 @@
+@startuml
+
+hide footbox
+
+actor User as user
+participant ":Main" as main
+participant ":MainParser" as parser
+participant ":Command" as cmd
+participant ":ContactList" as cl
+participant ":TextUi" as ui
+participant ":Storage" as store
+
+user -> main : "view 2"
+activate main
+main -> parser : parse("view 2")
+
+activate parser
+parser -> cmd : viewContact(2)
+deactivate parser
+
+activate cmd
+cmd -> cl : getContact(2)
+activate cl
+cl --> cmd : Contact
+deactivate cl
+
+cmd -> ui : printContact(Contact)
+deactivate cmd
+activate ui
+ui --> main
+deactivate ui
+main-> store : updateStorage(ContactList)
+activate store
+store --> main
+deactivate store
+
+main --> user
+deactivate main
+
+@enduml

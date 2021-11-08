@@ -1,0 +1,10 @@
+skinparam MinClassWidth 50
+skinparam Shadowing false
+
+hide footbox
+hide members
+hide circle
+
+!define ALT_HEADER_COLOR #gold
+!define ALT_BODY_COLOUR #lightgreen
+!define ELSE_BODY_COLOUR #lightblue

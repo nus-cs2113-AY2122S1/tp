@@ -2,8 +2,9 @@
 
 Display | Name | Github Profile | Portfolio 
 --------|:----:|:--------------:|:---------:
-![](https://via.placeholder.com/100.png?text=Photo) | John Doe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Joe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Ron John | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | John Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
+![](images/MarcusProfile.jpg) | Marcus Ong | [Github](https://github.com/marcusbory) | [Portfolio](team/marcusbory.md)
+![](images/AndreProfile.jpg) | Andre | [Github](https://github.com/ng-andre) | [Portfolio](team/ng-andre.md)
+![](images/LezongProfile.jpg) | Mun Le Zong | [Github](https://github.com/lezongmun) | [Portfolio](team/lezongmun.md)
+![](images/MayankProfile.png) | Mayank Panjiyara | [Github](https://github.com/mayankp291) | [Portfolio](team/mayankp291.md)
+![](images/AshrafProfile.jpg) | Ashraf| [Github](https://github.com/ashrafjfr) | [Portfolio](team/ashrafjfr.md)
+

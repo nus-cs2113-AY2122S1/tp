@@ -1,0 +1,16 @@
+@startuml
+hide footbox
+'https://plantuml.com/sequence-diagram
+mainframe sd Detailed Add Contact Parsing
+->":AddContactParser":parseContactDetails(\n\tuserInput:String\n)
+activate ":AddContactParser"
+loop until all fields are parsed
+":AddContactParser"->":AddContactParser":parseDetail(\n\tcontactDetails:String[],\n\tdestructuredInputs:String[]\n)
+activate ":AddContactParser"
+":AddContactParser"-->":AddContactParser"
+deactivate ":AddContactParser"
+end
+
+<--":AddContactParser":contactDetails:String[]
+deactivate ":AddContactParser"
+@enduml

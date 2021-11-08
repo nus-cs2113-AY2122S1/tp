@@ -1,0 +1,29 @@
+@startuml
+hide footbox
+-> ":ImportContactCommand": execute()
+activate ":ImportContactCommand"
+
+alt#gold #lightgreen foundImportFile()
+    ":ImportContactCommand" -> ":ImportContactCommand" : importContacts()
+    activate ":ImportContactCommand"
+    ":ImportContactCommand" --> ":ImportContactCommand"
+    deactivate ":ImportContactCommand"
+
+    ":ImportContactCommand" -> ":ImportContactCommand" : appendImportedContacts()
+    activate ":ImportContactCommand"
+    ":ImportContactCommand" --> ":ImportContactCommand"
+    deactivate ":ImportContactCommand"
+
+    ":ImportContactCommand" -> ":TextUi" : successfulImportMessage()
+    activate ":TextUi"
+    ":TextUi" --> ":ImportContactCommand"
+    deactivate ":TextUi"
+
+else #lightblue else
+    ":ImportContactCommand" -> ":ExceptionTextUi" : missingImportFileMessage()
+    activate ":ExceptionTextUi"
+    ":ExceptionTextUi" --> ":ImportContactCommand"
+    deactivate ":ExceptionTextUi"
+
+end
+@enduml
