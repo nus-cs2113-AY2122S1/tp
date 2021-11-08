@@ -26,12 +26,12 @@ public class Expense implements ExpenseSplitter {
     private static final DateTimeFormatter outputPattern = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
     /**
-     * Legacy Constructor for {@link Expense} - does not include parsing.
+     * Legacy constructor for Expense. Used as stub for testing. Does not include parsing.
      *
-     * @param amountSpent (placeholder)
-     * @param category    (placeholder)
-     * @param personsList (placeholder)
-     * @param description (placeholder)
+     * @param amountSpent amount spent in the expense.
+     * @param category category which is expense is being spent in.
+     * @param personsList list of people that were involved in the expense.
+     * @param description description of expense.
      */
     //@@author lixiyuan416
     public Expense(double amountSpent, String description, ArrayList<Person> personsList,
