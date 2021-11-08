@@ -569,8 +569,6 @@ This section describes the implementation of how the user can delete a goal from
 
 #### 4.8.1. Implementation
 
-
-
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteGoalCommandParserSequenceDiagram.png))
 
 When the `runCommand` method is executed for the `DeleteGoalCommand` object, the following steps as indicated by the
@@ -595,11 +593,16 @@ sequence diagram below is carried out:
 
 ### 4.10. Getting Help
 
+This section describes the implementation of how the user can get help. This will open up a command summary with format
+information of each command in a tabular form.
+
 #### 4.10.1 Implementation
 
-When the `runCommand` method is executed for the `HelpCommand` object, it instantiates a `PrintManager` object and
-calls the `printCommandList` method which prints out a pre-set message informing the user of all the inputs they
-can type to execute a certain command.
+1. A `HelpCommand()` object is directly created and returned from the `ParserManager#parseCommand(command, details)` 
+   method.
+2. When the `HelpCommand#runCommand(goalList, printManger, storage)` method is executed it calls the 
+   `PrintManager#printCommandList()` method which prints out a pre-set message informing the user of all the possible
+   commands and their respective formats and options.
 
 #### 4.10.2. Design Considerations
 
