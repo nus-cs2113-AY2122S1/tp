@@ -19,15 +19,20 @@ The application is CLI based and is suitable for users who can type quickly and 
 #### List Expiring Command
 - Filters out ingredients that are expiring within the week .
 - Lists all the expiring ingredients out.
+
 #### List Expired Command
 - Filters out ingredients that have expired then lists them all out.
+
 #### Delete Expired Command
 - Filters out all the expired ingredients, then deletes them from the ingredient repository.
+
 #### View Ingredient Command
 - Finds a specific ingredient from the ingredient repository and lists out its details.
+
 #### Update Units Command
 - Finds a specific ingredient from the ingredient repository and updates its units.
 - Finds all instances of the specific ingredient from the recipe list and update its units.
+
 #### Shopping List Command
 - Takes in a list of recipes and collates all the ingredients required to cook them. Then compares the ingredients required to the ingredients that exist in the ingredient repository and generate a list of required ingredients that are missing and needed to buy.
 
