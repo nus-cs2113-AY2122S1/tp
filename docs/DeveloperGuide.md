@@ -93,7 +93,7 @@ NOTE: As of V2.1 `EditMap` is no longer used.
 <div style="text-align: center;">Figure 3.1: World Map Sequence Diagram Part 1</div>
 
 ![](documentationPics/worldmap2.2.png)
-<div style="text-align: center;">Figure 3.1: World Map Sequence Diagram Part 2</div>
+<div style="text-align: center;">Figure 3.2: World Map Sequence Diagram Part 2</div>
 (The diagrams are split into 2 parts to ensure higher picture resolution)
 
 The `initWorldMap` command is called which then processes the flight data by calling `readData`, with the data
