@@ -334,8 +334,8 @@ User can update CCA information faster than using a GUI, and offers a centralize
       * Input: `delete /m John`
       * Expected Output: Since there is only one member in the list, whose name is `John Hwee`, his entry will be deleted
    * By index
-         * Input: `delete /m 1`
-         * Expected Output: Since `John Hwee` is assigned index `1`, his details will be deleted from the list.
+      * Input: `delete /m 1`
+      * Expected Output: Since `John Hwee` is assigned index `1`, his details will be deleted from the list.
    * The entry will be deleted from `CCAMembers.csv` as well 
 
 
@@ -354,7 +354,7 @@ User can update CCA information faster than using a GUI, and offers a centralize
 
 3. Listing out all trainings
   * Input: `list /t`
-  * Expected Output: Since there is only 1 training entry, `Friday Training 1`, the list command will succeed nad show the details of `Friday Training 1`
+  * Expected Output: Since there is only 1 training entry, `Friday Training 1`, the list command will succeed and show the details of `Friday Training 1`
 
 
 4. Delete an existing training
