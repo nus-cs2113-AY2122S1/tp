@@ -25,7 +25,7 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&zFR=false&tabAuthor=MAZJ124&tabRepo=AY2122S1-CS2113T-T09-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
 * **Project management**:
-  * Managed release of `v1.0``, `v2.0`, and `v2.1` on GitHub.
+  * Managed release of `v1.0`, `v2.0`, `v2.1` on GitHub.
 
 * **Enhancements to existing features**: 
   * Added `ParseCondition` class to check for various invalid inputs from users, and refactored classes in `Parser` package based on this. (Pull requests [#270](https://github.com/AY2122S1-CS2113T-T09-2/tp/pull/270), [#272](https://github.com/AY2122S1-CS2113T-T09-2/tp/pull/272))
