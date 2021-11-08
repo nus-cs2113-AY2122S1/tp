@@ -129,6 +129,7 @@ public abstract class UpdateParser extends Parser {
         } else if (update.contains(ADD_FLAG)) {
             return addMember(taskToBeUpdated);
         } else {
+            Ui.printLineBreak();
             System.out.println("Invalid update");
         }
 
@@ -182,10 +183,10 @@ public abstract class UpdateParser extends Parser {
 
     private static int getMemberIndex() {
         Ui.printLineBreak();
-        Ui.promptForMemberIndex();
+        Ui.promptForMemberIndexForUpdate();
         Ui.printMemberRoster();
         Ui.printLineBreak();
-        return Integer.parseInt(Ui.readInput()) - 1;
+        return Integer.parseInt(Ui.readInput().trim()) - 1;
     }
 
     private static Command removeMember(String index, Task taskToBeUpdated) {

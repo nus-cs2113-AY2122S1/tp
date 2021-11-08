@@ -92,6 +92,11 @@ public class Ui {
                 + "If you're choosing more than 1 member, separate the indexes with a whitespace:");
     }
 
+    public static void promptForMemberIndexForUpdate() {
+        System.out.println("Please enter the index of the member you want to assign your task to.\n"
+                + "Note: Enter the index of only one member!");
+    }
+
     // @@author alwinangys
     public static String getTaskDeletionMessage(String taskTitle) {
         return String.format("This task has been removed: %s", taskTitle);
@@ -318,7 +323,7 @@ public class Ui {
                 + System.lineSeparator() + "p/[NEW DESCRIPTION]"
                 + System.lineSeparator() + "member/[MEMBER INDEX]"
                 + System.lineSeparator() + "remove/[MEMBER INDEX]"
-                + System.lineSeparator() + "add : to add a member to a task"
+                + System.lineSeparator() + "To add a member to a task, enter 'add'"
                 + System.lineSeparator()
                 + "\nOnly type a singular update at given time!"
                 + "\nOnly the first command will be updated if multiple updates are written"
