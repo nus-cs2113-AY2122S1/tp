@@ -218,6 +218,8 @@ The diagram below illustrates the high level representation of the component.
    6. `UpdateParser` handles the parsing of inputs starting with `update` and `change`
    7. `SetParser` Handles the parsing of inputs starting with `goal`
 
+<div style="page-break-after: always;"></div>
+
 The sequence diagram below illustrates the flow of logic when a generic user input is entered into the application.
 
 ![](Diagram_Images/Design_Diagram_Images/MainParserSequenceDiagram.png)
@@ -310,6 +312,8 @@ their personal account which will be stored in the `GoalList` class.
 
 ![](Diagram_Images/Implementation_Diagram_Images/AddGoalCommandParserSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 4. The `AddGoalCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the 
    `GoalList#addGoal(goal, printManager)` method.
 5. The `GoalList#addGoal(goal, printManager)` method checks for duplicated goal names before adding a goal to the list.
@@ -328,6 +332,8 @@ their personal account which will be stored in the `GoalList` class.
   * Pros: Entire name will be visible when printing the list, also no chance of exceeding character limit.
   * Cons: Table may be misaligned if the user's monitor is too small, name has to conform within the limit.
 
+<div style="page-break-after: always;"></div>
+
 ### 4.2. Adding a Habit
 
 This section describes the implementation of how the user can add a habit to one of their tracked goals.
@@ -344,6 +350,8 @@ This section describes the implementation of how the user can add a habit to one
 4. An `AddHabitCommand(habit, goalIndex)` object is created from the `AddParser#parseAddHabitCommand()` method.
 
 ![](Diagram_Images/Implementation_Diagram_Images/AddHabitCommandParserSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 5. The `AddHabitCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
    `GoalList#addHabitToGoal(habit, goalIndex, printManager)` method.
@@ -373,6 +381,8 @@ This section describes the implementation of how the user can add a habit to one
     * Pros: No additional logic required to get the `GoalList` object in `AddParser`.
     * Cons: Additional logic required in `GoalList` to update end date and populate intervals.
 
+<div style="page-break-after: always;"></div>
+
 ### 4.3. Listing all Goals
 
 This section describes the implementation of how the user can display a list of all tracked goals.
@@ -384,6 +394,8 @@ This section describes the implementation of how the user can display a list of 
 2. The `ListGoalsParser#parseListGoalsCommand(input)` method then returns a `ListGoalsCommand(input)`.
 
 ![](Diagram_Images/Implementation_Diagram_Images/ListGoalsCommandParserSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 3. The `ListGoalsCommand#runCommand(goalList, printManager, storage, gibberish)` method is called, which in turns calls 
    the `GoalList#listGoals(printManager, gibberish)` method. The string variable `gibberish` is logically equivalent to
@@ -408,6 +420,8 @@ This section describes the implementation of how the user can display a list of 
     * Pros: The command acts as an overview of everything the user may need to know about each goal.
     * Cons: Too much upfront information, which may lead to a lot of user scrolling if the list is very long.
 
+<div style="page-break-after: always;"></div>
+
 ### 4.4. Listing all Habits
 
 This section describes the implementation of how the user can display a list of all habits under a tracked goal.
@@ -423,6 +437,8 @@ This section describes the implementation of how the user can display a list of 
    `ListHabitParser#parseListHabitCommand(commandInstruction)` method.
 
 ![](Diagram_Images/Implementation_Diagram_Images/ListHabitsCommandParserSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 4. The `ListHabitsCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
    `GoalList#listHabitsFromGoal(goalIndex, printManager)` method.
@@ -449,6 +465,8 @@ This section describes the implementation of how the user can display a list of 
     * Cons: The list of habits have to passed from the `Habit` class, through the `Goal` class, before being available
             in the `GoalList` class.
 
+<div style="page-break-after: always;"></div>
+
 ### 4.5. Completing a Habit
 
 This section describes the implementation of how the user can mark a habit as completed for the current interval.
@@ -465,6 +483,8 @@ This section describes the implementation of how the user can mark a habit as co
    `DoneParser#parseDoneHabitCommand(commandInstruction)` method.
 
 ![](Diagram_Images/Implementation_Diagram_Images/DoneCommandParserSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 4. The `DoneHabitCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
    `GoalList#doneHabitFromGoal(goalIndex, habitIndex, printManager)` method.
@@ -494,6 +514,8 @@ This section describes the implementation of how the user can mark a habit as co
             with a proportional reduction in retro-completions. Furthermore, the number of retro-completion has to be
             backed by past statistics which we do not have at the moment.
 
+<div style="page-break-after: always;"></div>
+
 ### 4.6. Updating a Goal
 
 This section describes the implementation of how the user can update a goal's name, type and/or end date.
@@ -516,6 +538,8 @@ This section describes the implementation of how the user can update a goal's na
    method.
 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateGoalCommandParserSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 9. The `UpdateGoalCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the 
    `GoalList#updateGoalAttributes(goalIndex, newGoalName, newGoalType, newGoalEndDate, updateAttributes, 
@@ -551,6 +575,8 @@ This section describes the implementation of how the user can update a goal's na
     * Pros: The user has to remember only one command keyword to update the parameters of a goal.
     * Cons: Multiple checks have to be carried out within a class, which may be confusing due to long lines of code.
 
+<div style="page-break-after: always;"></div>
+
 ### 4.7. Updating a Habit
 
 This section describes the implementation of how the user can update a habit's name and/or interval length.
@@ -575,6 +601,8 @@ This section describes the implementation of how the user can update a habit's n
    `UpdateParser#parseUpdateHabitCommands(commandInstruction)` method.
 
 ![](Diagram_Images/Implementation_Diagram_Images/UpdateHabitCommandParserSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 9. The `UpdateHabitCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the 
    `GoalList#updateHabitAttributes(goalIndex, habitIndex, newHabitName, newHabitInterval, updateAttributes, 
@@ -613,13 +641,13 @@ This section describes the implementation of how the user can update a habit's n
     * Cons: If the habit routine initially created by the user does not suit him/her, the entire habit has to be
             recreated, meaning that all past data will be lost.
 
+<div style="page-break-after: always;"></div>
+
 ### 4.8. Deleting a Goal
 
 This section describes the implementation of how the user can delete a goal from their list of tracked goals.
 
 #### 4.8.1. Implementation
-
-![](Diagram_Images/Implementation_Diagram_Images/DeleteGoalCommandParserSequenceDiagram.png))
 
 1. The `DeleteParser#parseDeleteGoalCommand(input)` method is called, which starts the process of extracting parameters
    from the user input.
@@ -628,7 +656,9 @@ This section describes the implementation of how the user can delete a goal from
 4. A `DeleteGoalCommand(goalIndex)` object is created and returned from the `DeleteParser#parseDeleteGoalCommand(input)`
    method.
 
-![](Diagram_Images/Implementation_Diagram_Images/DeleteGoalCommandSequenceDiagram.png)
+![](Diagram_Images/Implementation_Diagram_Images/DeleteGoalCommandParserSequenceDiagram.png))
+
+<div style="page-break-after: always;"></div>
 
 5. The `DeleteGoalCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
    `GoalList#deleteGoal(goalIndex, printManager)` method.
@@ -636,8 +666,10 @@ This section describes the implementation of how the user can delete a goal from
    from the `goalList`.
 7. The `GoalList#updateChosenGoalIndex(goalIndex)` method is called to perform checks on the goal to be deleted.
 8. The `Goal` is then deleted with the `GoalList#remove(Goal)` method.
-9. Finally, the `PrintManager#printRemovedGoal(goalDescription)` method is called to print a confirmation message on 
+9. Finally, the `PrintManager#printRemovedGoal(goalDescription)` method is called to print a confirmation message on
    the successful deletion of a goal.
+
+![](Diagram_Images/Implementation_Diagram_Images/DeleteGoalCommandSequenceDiagram.png)
 
 #### 4.8.2. Design Considerations
 
@@ -652,6 +684,8 @@ This section describes the implementation of how the user can delete a goal from
     * Pros: Logic for the goal list is easier to implement (simply use the add() and remove() methods of ArrayList).
     * Cons: Users need to constantly check their list of tracked goals to ensure that the correct goal is being updated.
 
+<div style="page-break-after: always;"></div>
+
 ### 4.9. Deleting a Habit
 
 This section describes the implementation of how the user can delete a habit from an associated goal from their list of 
@@ -659,19 +693,19 @@ tracked goals.
 
 #### 4.9.1 Implementation
 
-![](Diagram_Images/Implementation_Diagram_Images/DeleteHabitCommandParserSequenceDiagram.png)
-
 1. The `DeleteParser#parseDeleteHabitCommand(input)` method is called, which starts the process of extracting parameters
    from the user input.
 2. The `DeleteParser#splitInput(input)` method splits the user input into an ArrayList of parameters.
-3. The `goalIndex` of the associated goal from which a habit to deleted is then obtained with 
+3. The `goalIndex` of the associated goal from which a habit to deleted is then obtained with
    `DeleteParser#getIndex(parameters, FLAG_GOAL_INDEX)` method
 4. The `habitIndex` of the habit to deleted is then obtained with `DeleteParser#getIndex(parameters, FLAG_HABIT_INDEX)`
    method
 5. A `DeleteHabitCommand(goalIndex, habitIndex)` object is created and returned from the
    `DeleteParser#parseDeleteHabitCommand(input)` method.
 
-![](Diagram_Images/Implementation_Diagram_Images/DeleteHabitCommandSequenceDiagram.png)
+![](Diagram_Images/Implementation_Diagram_Images/DeleteHabitCommandParserSequenceDiagram.png)
+
+<div style="page-break-after: always;"></div>
 
 6. The `DeleteHabitCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
    `GoalList#deleteHabitFromGoal(goalIndex, habitIndex, printManager)` method.
@@ -681,13 +715,17 @@ tracked goals.
 9. The `GoalList#getHabit(habitList, habitIndex)` method is called to get the habit to be deleted. If `habitIndex` is
    invalid, a `HaBitCommandException` is raised.
 10. The `Habit` is then deleted with the `Goal#removeHabit(habitIndex)` method.
-11. Finally, the `PrintManager#printRemovedHabit(goalDescription, habitDescription)` method is called to print a 
+11. Finally, the `PrintManager#printRemovedHabit(goalDescription, habitDescription)` method is called to print a
     confirmation message on the successful deletion of a habit.
+
+![](Diagram_Images/Implementation_Diagram_Images/DeleteHabitCommandSequenceDiagram.png)
 
 #### 4.9.2. Design Considerations
 
 The design consideration was similar to [Section 4.8.2. Design Considerations](#482-design-considerations), where it was
 ultimately decided that the habit indexes will be flushed to avoid gaps instead of being maintained.
+
+<div style="page-break-after: always;"></div>
 
 ### 4.10. Getting Help
 
@@ -714,6 +752,8 @@ information of each command in a tabular form.
     * Cons: Network connection is required for an application that should be able to operate without sustaining one. In
             addition, a link to the User Guide will be provided in the Start-Up interface.
 
+<div style="page-break-after: always;"></div>
+
 ### 4.11. Storage of Information
 
 This section describes the implementation of how _Ha(ppy)Bit_ handles and stores the information you have entered.
@@ -733,6 +773,8 @@ This section describes the implementation of how _Ha(ppy)Bit_ handles and stores
 The sequence diagram shows how the program imports data from storage file.\
 ![Import Sequence Diagram](Diagram_Images/Implementation_Diagram_Images/ImportSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 **Exporting Data**
 1. The `Storage#export(goalList)` method is called, which in turn calls `Storage#exportToStorage(goalList)`.
 2. The `habits.txt` filed is cleared of previous text with `Export#clearFile()`.
@@ -749,6 +791,8 @@ The sequence diagram shows how the program imports data from storage file.\
 The sequence diagram shows how the program exports data to storage file./
 ![Export Sequence Diagram](Diagram_Images/Implementation_Diagram_Images/ExportSequenceDiagram.png)
 
+<div style="page-break-after: always;"></div>
+
 #### 4.11.2. Design Considerations
 
 **Aspect:** Storage of application data
@@ -761,6 +805,7 @@ The sequence diagram shows how the program exports data to storage file./
     * Cons: Various data types are not supported in JSON formatted files.
 
 ---------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Appendix A: Product Scope
 
@@ -776,6 +821,7 @@ The sequence diagram shows how the program exports data to storage file./
 Users with _Ha(ppy)Bit_ will find themselves cultivating good habits and breaking bad habits despite hectic 
 workload or commitments. 
 
+<div style="page-break-after: always;"></div>
 
 ## Appendix B: User Stories
 
@@ -794,6 +840,7 @@ workload or commitments.
 |v2.0|user|be able to view my progress for any goal|motivate myself in the process|
 |v2.0|user|view all my habits due for the day upon entering the program|remember to carry out these habits by the end of the day|
 
+<div style="page-break-after: always;"></div>
 
 ## Appendix C: Non-Functional Requirements
 
@@ -808,6 +855,7 @@ workload or commitments.
 * **Goal**: A long term achievement you wish to accomplish
 * **Habit**: Checkpoints; actionable tasks to be done to achieve goal
 
+<div style="page-break-after: always;"></div>
 
 ## Appendix E: Instructions for Manual Testing
 
@@ -822,6 +870,8 @@ The instructions below are for the manual testing of the program.
   
 ![Start Up Page](Display_Images/StartUpPage.png)
 
+<div style="page-break-after: always;"></div>
+
 2. Navigation
    * Select what you are interested in from the start-up menu by typing in the corresponding option number.
    * You can find out more about the various options at our [User Guide](UserGuide.md#12-main-interface).
@@ -830,11 +880,15 @@ The instructions below are for the manual testing of the program.
 
 ![Menu Error Message](Display_Images/MenuError.png)
 
+<div style="page-break-after: always;"></div>
+
 3. Exit
    * To exit the program, select option `6`. 
    * You should see the exit message before the program terminates as shown below.
   
 ![Exit Message](Display_Images/ExitMessage.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Starting the Application
 
@@ -854,6 +908,8 @@ The instructions below are for the manual testing of the program.
 ![Added Goal](Display_Images/AddGoal.png)
 
 6. Press enter again to return to command screen.
+
+<div style="page-break-after: always;"></div>
 
 ### Deleting Goals or Habits
 
