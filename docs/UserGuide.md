@@ -444,8 +444,9 @@ In addition, you can add a `-u` flag to the `timetable` command to view only you
 *******************
 Modules taken this semester:
 
+CS2113T Software Engineering & Object-Oriented Programming 4MC (Exam: Tue Nov 30 09:00 AM - 11:00 AM)
 
-Total MCs taken this semester: 0.0
+Total MCs taken this semester: 4.0
 
 *******************
 
