@@ -39,5 +39,5 @@ I contributed in these areas for team-based tasks
 ### Review/Mentoring Contributions
 I contributed in review/mentoring in these areas
 
-1. I suggested ways for the code to be refactored so that our overall readability can be improved. This was largely done during our meetings.
-2. I thoroughly tested other team's code and gave them valuable inputs to improve their interface.
+- I suggested ways for the code to be refactored so that our overall readability can be improved. This was largely done during our meetings.
+- I thoroughly tested other team's code and gave them valuable inputs to improve their interface.
