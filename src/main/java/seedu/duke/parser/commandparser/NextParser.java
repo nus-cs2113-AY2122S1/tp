@@ -9,7 +9,7 @@ import seedu.duke.exceptions.parserexceptions.NoCommandAttributesException;
 import seedu.duke.parser.ItemType;
 import seedu.duke.parser.Parser;
 
-public class NextParser extends Parser {
+public abstract class NextParser extends Parser {
     public static Command getNextCommand(String commandDetails, String response) {
         try {
             ItemType listType = getItemType(commandDetails);
