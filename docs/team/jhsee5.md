@@ -36,6 +36,7 @@ ultimately saving cost and increasing profits.
 * **Contributions to DG**:
   * Add PUML for SortIngrCommand
   * Add PUML for SortDishCommand
+  * Add content for whole of Manual Testing Section
 * **Contributions to team-based tasks**:
   * Add JUnit5 Tests for SortIngrCommand, SortDishCommand, RandomDishCommand and EditIngrStoredCommand.
 * **Review/mentoring contributions**:
