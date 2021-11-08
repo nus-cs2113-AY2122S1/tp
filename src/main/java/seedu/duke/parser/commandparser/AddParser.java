@@ -26,6 +26,10 @@ public abstract class AddParser extends Parser {
     private static final int INDEX_OF_VENUE = 2;
     private static final int INDEX_OF_BUDGET = 3;
 
+    private static final ItemAttribute[] eventAttributesToCheckFor = {ItemAttribute.TITLE, ItemAttribute.DATE,
+            ItemAttribute.VENUE, ItemAttribute.BUDGET};
+    private static final ItemAttribute[] taskAttributesToCheckFor = {ItemAttribute.TITLE, ItemAttribute.DATE};
+
     /**
      * Parses add command details from user input to determine the type of item to be added along with its respective
      * attributes and returns the respective Add Command.
@@ -90,6 +94,8 @@ public abstract class AddParser extends Parser {
             checkCommandAttributes(commandDetails);
             String[] parsedAttributes = new String[4];
 
+            verifyFlags(commandDetails, eventAttributesToCheckFor);
+
             String title = retrieveItemAttribute(commandDetails, ItemAttribute.TITLE);
             parsedAttributes[INDEX_OF_TITLE] = title;
             String dateTime = retrieveItemAttribute(commandDetails, ItemAttribute.DATE);
@@ -125,6 +131,8 @@ public abstract class AddParser extends Parser {
         try {
             checkCommandAttributes(commandDetails);
             String[] parsedAttributes = new String[2];
+
+            verifyFlags(commandDetails, taskAttributesToCheckFor);
 
             String title = retrieveItemAttribute(commandDetails, ItemAttribute.TITLE);
             parsedAttributes[INDEX_OF_TITLE] = title;
@@ -219,16 +227,28 @@ public abstract class AddParser extends Parser {
         return memberIndexes;
     }
 
-    public static boolean isValidName(String input) {
+    // @@author Alvinlj00
+    private static boolean isValidName(String input) {
         return ((!input.equals("")) && (input.matches("^[A-Z. -]*$")));
     }
 
-    public static boolean isDuplicateName(String name) {
+    private static boolean isDuplicateName(String name) {
         for (Member member : Duke.memberRoster) {
             if (name.equals(member.getName())) {
                 return true;
             }
         }
         return false;
+    }
+    // @@author Alvinlj00
+
+    private static void verifyFlags(String commandDetails, ItemAttribute[] attributeFlagsToCheckFor)
+            throws AttributeNotFoundException {
+        // Check if the response contains the flag and ensure that it is separated by whitespace
+        for (ItemAttribute itemAttribute : attributeFlagsToCheckFor) {
+            if (!commandDetails.contains(" " + ItemAttribute.getItemFlag(itemAttribute))) {
+                throw new AttributeNotFoundException(itemAttribute);
+            }
+        }
     }
 }
