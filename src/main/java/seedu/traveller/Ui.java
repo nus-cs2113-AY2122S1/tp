@@ -179,8 +179,8 @@ public class Ui {
                 + "\n\t\tEdits an existing trip called FamilyTrip2021"
                 + "to have new START and END destinations.\n"
 
-                + "\tedit-item 1 trip1 /day 1 /time 0700 /name wake up from bed : "
-                + "\n\t\tEdits item1 of trip 1 to wake up from bed at 0700.\n"
+                + "\tedit-item trip1 /day 1 /index 1 /time 0700 /name wake up from bed : "
+                + "\n\t\tEdits item1 of trip1 to wake up from bed at 0700.\n"
 
                 + "\tsearch-item trip1 /name sleep at home : "
                 + "\n\t\tSearches item keyword sleep at home in trip called trip1.\n"
