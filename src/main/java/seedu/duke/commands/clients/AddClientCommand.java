@@ -1,9 +1,7 @@
 package seedu.duke.commands.clients;
 
-import seedu.duke.TourPlannerException;
-import seedu.duke.data.Client;
 import seedu.duke.commands.Command;
-import seedu.duke.data.Flight;
+import seedu.duke.data.Client;
 
 /**
  * Adds a client into the database.

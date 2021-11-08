@@ -168,7 +168,47 @@ Format: ```help```
 
 The following output will be shown:
 
-(insert output)
+```
+add: Add information of all data types into the database.
+Prefixes can be input in any order.
+Add client: add -c CLIENT_ID /n NAME /cn CONTACT_NUM /m EMAIL
+Add flight: add -f FLIGHT_ID /d DEPART_DESTINATION /r RETURN_DESTINATION
+/dd DEPARTURE_DATETIME /rd RETURN_DATETIME
+Add tour: add -t TOUR_ID /n DEPART_DESTINATION /p TOUR_PRICE
+Add client package: add -p PACKAGE_ID /c CLIENT_ID /t TOUR_ID /f FLIGHT_ID
+
+list: Shows a list of all available entries of a specific data type, along with their respective fields.
+List client: list -c
+List flight: list -f
+List tour: list -t
+List client package: list -p
+
+cut: Deletes entry of a certain data type and all client packages corresponding to the entry.
+Cut client: cut -c CLIENT_ID
+Cut flight: cut -f FLIGHT_ID
+Cut tour: cut -t TOUR_ID
+Cut client package: cut -p PACKAGE_ID
+
+find: Finds specific entry of data type, returns the entry and other relevant information.
+Find client: find -c CLIENT_NAME
+Find flight: find -f FLIGHT_ID
+Find tour: find -t TOUR_ID
+
+sort: Sorts entries in the data type based on the criteria.
+Sort client:
+Sort by id: sort -c /id
+Sort by name: sort -c /n
+Sort flight:
+Sort by id: sort -f /id
+Sort by departure date: sort -f /d
+Sort by return date: sort -f /r
+Sort tour:
+Sort by id: sort -t /id
+Sort by name: sort -t /n
+Sort by price: sort -t /p
+
+bye: Exits the program.
+```
 
 <br>
 
@@ -234,8 +274,8 @@ Mandatory data fields:
 * Flight departure date and time - ```/dd DEPARTURE_TIME```
 * Flight return date and time - ```/rd RETURN_TIME```
 
-:exclamation: Note that the given date and times should be of the format: ```d/M/yy HH:mm```. TourPlanner will **
-reject** any entry that violates this format rule.
+:exclamation: Note that the given date and times should be of the format: ```d/M/yy HH:mm```. TourPlanner will
+**reject** any entry that violates this format rule.
 
 Example:
 
