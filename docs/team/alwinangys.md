@@ -31,9 +31,11 @@ Given below are my contributions to the project.
 
 
 - **Enhancements to existing features**
+  - Ensured test for `find` had 100% coverage (PR [#190](https://github.com/AY2122S1-CS2113T-W12-3/tp/pull/190))
 
 
 - **Documentation**:
 
 
 - **Community**:
+  - PRs reviewed with non-trivial comments: [#25](https://github.com/AY2122S1-CS2113T-W12-3/tp/pull/25)
