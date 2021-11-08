@@ -6,10 +6,10 @@
 
 I am honoured to have my contributions in this project. Please find below some descriptions of my contributions, and also see [RepoSense](https://nus-cs2113-ay2122s1.github.io/tp-dashboard/?search=AY2122S1-CS2113T-W13-3&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-25&tabOpen=true&tabType=authorship&tabAuthor=SuibianP&tabRepo=AY2122S1-CS2113T-W13-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false) for the exact parts of my contributions.
 
-## Functionality
+## Major functionality
 ### NUSMods API interfacing
 
-As a core flagship feature of our product, the ability to interface the NUSMods API, parse its response, be it from local cache or remote server, is crucial. Implemented the `NusModsParser` and `Semester` class to efficiently handle various situations.
+As a core flagship feature of our product, the ability to interface the NUSMods API, parse its response, be it from local cache or remote server, is crucial. Implemented the `NusModsParser` and `Semester` class forming the `nusmods` package  to efficiently handle various situations.
 
 ### Lesson type
 
@@ -19,7 +19,9 @@ Nonetheless, with customisation capabilities in mind, the lesson type was made m
 
 ### Attaching link to tasks
 
-Zoom classes and web lecture recordings have been prevalent at NUS for a relatively long time, and it is recognised as an annoyance to find those links all over the place, Hence, this project also acts as a link hub by allowing users to add link to tasks. This feature is implemented using OS capabilities so that protocol supports are as abundant as possible.
+Zoom classes and web lecture recordings have been prevalent at NUS for a relatively long time, and it is recognised as an annoyance to find those links all over the place, Hence, this project also acts as a link hub by allowing users to add link to tasks. 
+
+Two classes are constructed for this purpose, namely `command.BrowseCommand` and `utility.ExternalHelper`. This feature is implemented using OS capabilities so that protocol supports are as abundant as possible.
 
 ## Documentation
 ### User Guide
