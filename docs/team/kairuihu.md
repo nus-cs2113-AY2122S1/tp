@@ -69,12 +69,12 @@ The application is CLI based and is suitable for users who can type quickly and 
 
 ### Documentation
 - **User Guide**
-    - Added documentations for features `update recipe`, `list recipe`, `view recipe` and `help` [#62](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/86)
+    - Added documentations for features `update recipe`, `list recipe`, `view recipe` and `help` [#136](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/136)
 - **Developer Guide**
-    - Added implementation details and UML diagrams for features `list recipes`
-    - Added implementation details and UML diagrams for features `view recipes`
-    - Added design details and UML diagrams for `Storage` component. 
-    - Added manual testing.
+    - Added implementation details and UML diagrams for features `list recipes`[#136](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/136)
+    - Added implementation details and UML diagrams for features `view recipes`[#136](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/136)
+    - Added design details and UML diagrams for `Storage` component. [#134](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/134)
+    - Added manual testing.[#125](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/125)
 
 ### Review Contribution
 - Suggestion given to a PR. [#24](https://github.com/AY2122S1-CS2113-T16-3/tp/pull/24)

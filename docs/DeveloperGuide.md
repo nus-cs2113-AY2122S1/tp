@@ -201,6 +201,33 @@ Here is the sequence diagram for how delete recipe works if the `Recipe` exists 
 
 <br/>
 
+### List Recipes Feature
+
+The list recipes feature is performed by `RecipeList`. It displays the whole `RecipeList`.
+
+Here is the sequence diagram for how list recipes works.
+
+![](diagrams/ListRecipes.png)
+
+> **Note**: The lifeline for `ListRecipeComand` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reach the end of diagram.
+
+<br/>
+
+
+### View Recipe Feature
+
+The view recipe feature finds the matching `Recipe` in the `RecipeList`.
+
+Here is the sequence diagram for how view recipe works if the `Recipe` exists in the `RecipeList`.
+
+![](diagrams/ViewRecipe.png)
+
+> **Note**: The lifeline for `ViewRecipeComand` should end at the destroy marker (X). However, due to a limitation of PlantUML, the lifelines reach the end of diagram.
+
+> **Note** : If the `Recipe` doesn't exist in the `RecipeList`, an error will be returned.
+
+<br/>
+
 ### Cooked Recipe Feature
 
 The cooked recipe feature is performed by `Recipe`. It deletes a certain quantity of ingredients in the
@@ -271,11 +298,14 @@ To help young adults who are living in their own home keep track of ingredients 
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v1.0|user|add a recipe and its constituent ingredients|keep track of what I want to cook|
 |v1.0|user|delete a recipe|retain only recipes I want|
+|v1.0|user|list recipes|check all the recipes I have at a glance|
+|v1.0|user|view a recipe|check the details of a specific recipe|
 |v2.0|user|be able to indicate that I have cooked a recipe|keep my ingredient repository accurate|
 |v2.0|user|list recipes i can cook based on the ingredients I have|save time on checking the ingredients I have|
 |v2.0|user|generate a shopping list for a particular recipe/recipes|know what ingredients to buy|
 |v2.0|user|delete all ingredients that have expired at one go|all ingredients I keep track of are not expired|
 |v2.0|user|update the units of an ingredient|accurately quantify each ingredient
+|v2.0|user|update recipes|modify the quantities of ingredients in the recipe according to my own flavour
 ## Non-Functional Requirements
 
 1. Should work on Windows, Mac, and any mainstream Linux OS as long as it has Java 11 or above installed.
@@ -508,7 +538,7 @@ To help young adults who are living in their own home keep track of ingredients 
     1. Prerequisite: RecipeList is empty
     2. Test case: `list recipe i can cook` <br/>
        Expected: Informs user that the RecipeList is empty.
-=======
+
 ### Generate a shopping list
 1. Generate a shopping list for one recipe.
    1. Prerequisite: The recipe "Chicken Soup" exists in the recipe list.
@@ -526,4 +556,3 @@ To help young adults who are living in their own home keep track of ingredients 
    1. Prerequisite: The recipe "Chicken Soup" exists but the recipe and "Apple Pie" does not exist in the recipe list.
    2. Test case: `shopping list r/chicken soup r/apple pie` <br/>
    Expected: Error message "Sorry. One or more of your recipes are not found!"
->>>>>>> cfa6233bc6a085f8c8f25c52145e4344c0d5c1fe
