@@ -1,0 +1,20 @@
+@startuml
+!include ObjectStyle.puml
+
+class ClassList
+class TeachingClass {
+    id = CS2113T-F12
+}
+
+class StudentList
+class Student {
+    id = A0217978J
+    name = Jonny Lims
+}
+
+
+ClassList -> TeachingClass
+TeachingClass -down-> "1" StudentList
+StudentList -down-> Student
+
+@enduml

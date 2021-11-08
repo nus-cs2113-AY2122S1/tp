@@ -46,7 +46,7 @@ Given below are my contributions to the project.
           [\#251](https://github.com/AY2122S1-CS2113T-F12-3/tp/pull/251/files))
           , add after added diagrams
     * Developer Guide:
-        * Added implementation details and sequence diagram of the `AddStudentCommand` feature.
+        * Added implementation details, sequence diagram and object diagram for the `AddStudentCommand` feature.
 
 * **Team-Based Tasks**:
   * Setting up the GitHub team repo
