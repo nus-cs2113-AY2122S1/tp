@@ -155,6 +155,10 @@ public abstract class AddParser extends Parser {
                     throw new DukeException("One or more of the member names are not valid. "
                             + "Please separate the names with ', '. ");
                 }
+                if (isDuplicateName(parsedAttributes[i])) {
+                    throw new DukeException("One or more of these names is a duplicate. "
+                            + "Please re-add the members without any duplicates. ");
+                }
             }
             return parsedAttributes;
         } catch (IndexOutOfBoundsException e) {
@@ -217,5 +221,14 @@ public abstract class AddParser extends Parser {
 
     public static boolean isValidName(String input) {
         return ((!input.equals("")) && (input.matches("^[A-Z. -]*$")));
+    }
+
+    public static boolean isDuplicateName(String name) {
+        for (Member member : Duke.memberRoster) {
+            if (name.equals(member.getName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
