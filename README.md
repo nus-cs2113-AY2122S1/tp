@@ -1,31 +1,58 @@
-# Duke project template
+# TermiNUS
+
+[![Java CI](https://github.com/AY2122S1-CS2113T-T10-2/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2122S1-CS2113T-T10-2/tp/actions/workflows/gradle.yml)
+[![codecov](https://codecov.io/gh/AY2122S1-CS2113T-T10-2/tp/branch/master/graph/badge.svg?token=CLLWHY78LP)](https://codecov.io/gh/AY2122S1-CS2113T-T10-2/tp)
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
-## Setting up in Intellij
+## Setting up
 
-Prerequisites: JDK 11 (use the exact version), update Intellij to the most recent version.
+### Prerequisite
 
-1. **Ensure Intellij JDK 11 is defined as an SDK**, as described [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk) -- this step is not needed if you have used JDK 11 in a previous Intellij project.
-   * In the same dialog, you _may_ have to set the Project language level field to the SDK default option.
-1. **Import the project _as a Gradle project_**, as described [here](https://se-education.org/guides/tutorials/intellijImportGradleProject.html).
-1. **Verify the set up**: After the importing is complete, locate the `src/main/java/seedu/duke/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
+Before setting up the project, please do ensure you have the following items installed.
+
+- [JDK 11](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html)
+- [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
+
+`Java Development Kit ver 11 (JDK 11)` is the **environment / programming language** in which
+TermiNUS is written with and `IntelliJ IDEA` will be the **integrated development environment (
+IDE)** platform for us to write the programming codes on.
+
+Go to [link](https://github.com/AY2122S1-CS2113T-T10-2/tp) and retrieve the `TermiNUS project file`.
+You can do so by **forking** the project and **cloning** a copy into your computer.
+
+To learn more about github fork-clone feature please follow the guide
+on [link](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
+
+### Setting up in Intellij
+
+1. Open the application `IntelliJ IDEA`.
+2. Inside `IntelliJ IDEA` navigate to `open project` button
+   1. On the top left of the app, `File`&rarr;`Open...`
+3. Locate and select the folder containing the files for **Terminus** that you have downloaded
+   earlier on.
+4. Change the **Project SDK** that IntelliJ IDEA will be using.
+   1. On the top left of the app, `File`&rarr;`Project Structure...`
+   2. Under **Project SDK:** section, find and select JDK version 11.
+      Eg: `Amazon Corretto version 11.0.12`.
+   3. Under **Project language level:**, select `SDK default`.
+5. Verifying the setup
+   1. After performing the steps above, locate the file `src/main/java/terminus/Terminus.java`,
+      right-click and select `Run 'Terminus.main()'`.
+   2. If everything is correctly set up, you should see the following terminal.
+
    ```
-   > Task :compileJava
-   > Task :processResources NO-SOURCE
-   > Task :classes
+   Welcome to TermiNUS!
    
-   > Task :Duke.main()
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
+   Type any of the following to get started:
+   > exit
+   > help
+   > note
+   > schedule
    
-   What is your name?
+   [] >>>
+
    ```
-   Type some word and press enter to let the execution proceed to the end.
 
 ## Build automation using Gradle
 
@@ -40,12 +67,12 @@ Prerequisites: JDK 11 (use the exact version), update Intellij to the most recen
 
 ### JUnit tests
 
-* A skeleton JUnit test (`src/test/java/seedu/duke/DukeTest.java`) is provided with this project template. 
+* We use JUnit testing for this project. 
 * If you are new to JUnit, refer to the [JUnit Tutorial at se-education.org/guides](https://se-education.org/guides/tutorials/junit.html).
 
 ## Checkstyle
 
-* A sample CheckStyle rule configuration is provided in this project.
+* A CheckStyle rule configuration is provided in this project.
 * If you are new to Checkstyle, refer to the [Checkstyle Tutorial at se-education.org/guides](https://se-education.org/guides/tutorials/checkstyle.html).
 
 ## CI using GitHub Actions

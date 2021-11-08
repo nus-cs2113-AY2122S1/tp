@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include ../SequenceStyle.puml
+
+mainframe sd showQuestion
+
+box "Commands" #thistle
+endbox
+box "Ui" #bisque
+participant ":Ui" as Ui
+endbox
+box "Active Recall" #lightblue
+participant ":GameEnvironment" as GameEnvironment #lightskyblue
+participant ":QuestionGenerator" as QuestionGenerator #lightskyblue
+endbox
+
+activate GameEnvironment
+GameEnvironment -> GameEnvironment : promptQuestion()
+    activate GameEnvironment
+      GameEnvironment -> QuestionGenerator : next()
+      activate QuestionGenerator 
+      return question
+      GameEnvironment -> Ui : printSection(question.getQuestion())
+      activate Ui
+      return
+      GameEnvironment -> Ui : getUserInput()
+      note right: Wait for user to press Enter key to reveal answer.
+      activate Ui
+      return
+      GameEnvironment -> Ui : printSection(question.getAnswer())
+      activate Ui
+      return
+    return question
+@enduml

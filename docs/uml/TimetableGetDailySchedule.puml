@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include SequenceStyle.puml
+
+mainframe sd getDailySchedule
+
+box Content CONTENT_BOX_COLOR
+participant ":Timetable" as Timetable CONTENT_COLOR
+participant ":Link" as Link CONTENT_COLOR
+endbox
+
+box Module MODULE_BOX_COLOR
+participant ":ModuleManager" as ModuleManager MODULE_COLOR
+participant ":NusModule" as NusModule MODULE_COLOR
+endbox
+
+autoactivate on
+ -> Timetable: getDailySchedule()
+
+Timetable -> ModuleManager: getAllModules()
+return modules
+
+loop For each NusModule in modules
+    Timetable -> ModuleManager: getModule(NusModule)
+    return NusModule
+    Timetable -> NusModule : getContentManager()
+    return ContentManager
+    Timetable -> Timetable: listDailySchedule(contentManager, today)
+    return Links
+end
+loop For each schedule in dailySchedule
+  Timetable -> Link: getViewDescription()
+  return description
+end
+
+return dailySchedule
+
+
+
+@enduml

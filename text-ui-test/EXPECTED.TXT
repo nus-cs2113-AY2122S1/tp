@@ -1,9 +1,98 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
 
-What is your name?
-Hello James Gosling
+Welcome to TermiNUS!
+You have no schedule for today.
+
+Type any of the following to get started:
+> exit
+> help
+> module
+> go
+> timetable
+
+[] >>> Command not found! Type 'help' for a list of commands.
+[] >>> Command not found! Type 'help' for a list of commands.
+[] >>> Command not found! Type 'help' for a list of commands.
+[] >>> Module TEST has been added
+[] >>> 
+Entering TEST workspace
+
+Type any of the following to get started:
+> exit
+> help
+> note
+> schedule
+> question
+> back
+
+[TEST] >>> Error: Missing arguments or Invalid arguments.
+Format: note add "<note_name>" "<note_content>"
+[TEST] >>> Your note on 'CS2113T' has been added!
+[TEST] >>> List of Content
+---------------
+1. CS2113T
+
+Rerun the same command with an index behind to view the content.
+[TEST] >>> Error: Invalid numerical value provided or content could not be found.
+Format: note view {index}
+[TEST] >>> Error: Invalid numerical value provided or content could not be found.
+[TEST] >>> Name: CS2113T
+Content:
+Week 8 test
+
+[TEST] >>> Error: Missing arguments or Invalid arguments.
+Format: note delete <index>
+[TEST] >>> Error: Invalid numerical value provided or content could not be found.
+Format: note delete <index>
+[TEST] >>> Error: Invalid numerical value provided or content could not be found.
+[TEST] >>> Your note on 'CS2113T' has been deleted!
+[TEST] >>> 
+Help Menu
+---------
+exit : Exits the program.
+Format: exit
+
+help : Prints the help page.
+Format: help
+
+note : Move to notes workspace.
+Format: note
+
+schedule : Move to schedules workspace.
+Format: schedule
+
+question : Move to questions workspace.
+Format: question
+
+back : Returns to the parent workspace.
+Format: back
+
+[TEST] >>> Error: Missing arguments or Invalid arguments.
+Format: schedule add "<link_description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"
+[TEST] >>> Error: Missing arguments or Invalid arguments.
+Format: schedule add "<link_description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"
+[TEST] >>> Error: Missing arguments or Invalid arguments.
+Format: schedule add "<link_description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"
+[TEST] >>> Your schedule on 'CS2113T Tutorial' has been added!
+[TEST] >>> Your schedule on 'CS2113T Lecture' has been added!
+[TEST] >>> Command not found! Type 'help' for a list of commands.
+[TEST] >>> List of Content
+---------------
+1. CS2113T Tutorial (Thursday, 10:00 - 12:00): https://zoom.us/test
+2. CS2113T Lecture (Friday, 16:00 - 18:00): https://zoom.us/test
+
+Rerun the same command with an index behind to view the content.
+[TEST] >>> Error: Invalid numerical value provided or content could not be found.
+[TEST] >>> CS2113T Lecture (Friday, 16:00 - 18:00): https://zoom.us/test
+[TEST] >>> Error: Missing arguments or Invalid arguments.
+Format: schedule delete <index>
+[TEST] >>> Error: Invalid numerical value provided or content could not be found.
+[TEST] >>> Your link on 'CS2113T Tutorial' has been deleted!
+[TEST] >>> List of Content
+---------------
+1. CS2113T Lecture (Friday, 16:00 - 18:00): https://zoom.us/test
+
+Rerun the same command with an index behind to view the content.
+[TEST] >>> Command not found! Type 'help' for a list of commands.
+[TEST] >>> Command not found! Type 'help' for a list of commands.
+[TEST] >>> Your link on 'CS2113T Lecture' has been deleted!
+[TEST] >>> Goodbye!

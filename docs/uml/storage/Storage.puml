@@ -1,0 +1,94 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+!include ../ClassStyle.puml
+
+'abstract class DGS
+'abstract AbstractCollection
+'interface List
+'interface Collection
+'
+'List <|-- AbstractList
+'Collection -- AbstractCollection
+'
+'Collection <|- List
+'AbstractCollection <|- AbstractList
+'AbstractList <|-- ArrayList
+
+StorageManager --> "1" NoteStorage
+StorageManager --> "1" PdfStorage
+StorageManager --> "1" JsonStorage
+StorageManager --> "1" FolderStorage
+
+FilterManager <.. StorageManager : "filters \n ModuleManager <"
+
+NoteStorage --|> Storage
+PdfStorage --|> Storage
+JsonStorage --|> Storage
+FolderStorage --|> Storage
+
+class StorageManager STORAGE_COLOR{
+  - isDisabled : Boolean
+  - baseDirectory : Path
+  + StorageManager(baseDirectory: Path, mainJsonFileName: String )
+  + executeCommandResult(moduleManager: ModuleManager, result: CommandResult) : void
+  + updateMainJsonFile(moduleManager: ModuleManager) : void
+  + initialize() : ModuleManager
+  + save() : void
+}
+
+class NoteStorage STORAGE_COLOR{
+  + execute() : void
+  # createNoteFile() : void
+  # loadNoteIntoModuleManager() : void
+  # saveAllNotes() : void
+}
+
+class PdfStorage STORAGE_COLOR{
+  + execute() : void
+  # exportModuleNotes() : void
+}
+
+class JsonStorage STORAGE_COLOR{
+  + execute() : void
+  + loadJson() : ModuleManager
+  # createJson() : void
+  # saveJson() : void
+}
+
+class FolderStorage STORAGE_COLOR{
+  + execute() : void
+  # createModuleFolder() : void
+  # deleteModuleFolder() : void
+  # renameModuleFolder() : void
+}
+
+class Storage STORAGE_COLOR{
+ + createFolder(folderPath: Path) : void
+ + createFile(filePath: Path) : void
+ + readFile(filePath: Path) : String
+ + writeFile(filePath: Path, data: String): void
+ + delete(filePath: Path) : void
+ + getListOfFiles(folderPath: Path) : File[]
+ + renameFolder(oldPath: Path, newPath: Path) : void
+ + getBufferedReader(filePath: Path) : void
+ + getFileType(file: File) : String
+ + getAppendPath(corePath: Path, path: String) : Path
+ # cleanAllFilesInclusive(filePath: Path) : void
+
+}
+
+class FilterManager STORAGE_COLOR{
+  + filter(moduleManager: ModuleManager) : void
+  # filterLink(linkContentManager: ContentManager<Link>) : void
+  # filterQuestion(questionContentManager: ContentManager<Question>) : void
+  + {static} isQuestionValid(question: Question) : Boolean
+  + {static} isScheduleValid(link: Link) : Boolean
+  + {static} isModuleValid(module: String) : Boolean
+
+}
+
+note "The input parameters in all functions \nfor <Type>Storage has been left out \nto make this diagram more compact." as note1
+
+
+@enduml

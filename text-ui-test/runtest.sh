@@ -8,7 +8,17 @@ cd ..
 
 cd text-ui-test
 
+if [ -d "./data" ]
+then
+    rm -rf ./data
+fi
+
 java  -jar $(find ../build/libs/ -mindepth 1 -print -quit) < input.txt > ACTUAL.TXT
+
+if [ -d "./data" ]
+then
+    rm -rf ./data
+fi
 
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
 dos2unix EXPECTED-UNIX.TXT ACTUAL.TXT

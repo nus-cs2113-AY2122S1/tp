@@ -1,1 +1,33 @@
-James Gosling
+invalid
+note invalid
+invalid
+module add "test"
+go test
+note add a
+note add "CS2113T" "Week 8 test"
+note view
+note view aa
+note view 2
+note view 1
+note delete
+note delete aa
+note delete 2
+note delete 1
+help
+schedule add a
+schedule add a "Thursday"
+schedule add a "Thursday" "10:00"
+schedule add "CS2113T Tutorial" "Thursday" "10:00" "2" "https://zoom.us/test"
+schedule add "CS2113T Lecture" "Friday" "16:00" "2" "https://zoom.us/test"
+schedule invalid
+schedule view
+schedule view 4
+schedule view 2
+schedule delete
+schedule delete 5
+schedule delete 1
+schedule view
+view
+delete
+schedule delete 1
+exit
