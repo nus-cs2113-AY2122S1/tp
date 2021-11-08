@@ -50,7 +50,7 @@ instance of the `Expense` class) and persons (each person being represented by a
 instance of the `Person` class) tagged to the trip. The class diagram below illustrates
 the interactions of the `Trip` class with other classes.
 
-![](images/TripClassDiag.png)
+![](images/classDiagTrip.png)
 
 A trip is created when the `Parser` class calls its `executeCreate()` method to instantiate 
 a new instance of `Trip`. The newly-created trip is then added to the `ArrayList<Trip>` 
