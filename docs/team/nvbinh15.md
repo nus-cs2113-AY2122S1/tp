@@ -44,7 +44,7 @@ We know that you are a Computing student here at NUS 👨‍🎓 and may prefer 
   + Wrote the Module-related Features subsection in the Implementation section
   + Wrote the `exit` command subsection in the Implementation section
   + Wrote the Logging subsection in the Implementation section
-  + Wrote the Testing section
+  + Wrote the Automated Testing section
   + Contributed to Appendix A: Product Scope (including Target user profile and Value proposition)
   + Contributed to Appendix B: User Stories
   + Wrote Appendix C: Non-Functional Requirements
@@ -67,4 +67,3 @@ We know that you are a Computing student here at NUS 👨‍🎓 and may prefer 
 
 + **Contributions beyond the project team**:
   + Responses posted in the module forum. [#84](https://github.com/nus-cs2113-AY2122S1/forum/issues/84#issuecomment-929917702), [#67](https://github.com/nus-cs2113-AY2122S1/forum/issues/67#issuecomment-917878295), [#54](https://github.com/nus-cs2113-AY2122S1/forum/issues/54#issuecomment-915016571), [#39](https://github.com/nus-cs2113-AY2122S1/forum/issues/39#issuecomment-907974603), [#17](https://github.com/nus-cs2113-AY2122S1/forum/issues/17#issuecomment-903249341), [#13](https://github.com/nus-cs2113-AY2122S1/forum/issues/13#issuecomment-903083234), [#6](https://github.com/nus-cs2113-AY2122S1/forum/issues/6#issuecomment-902085909), [#6](https://github.com/nus-cs2113-AY2122S1/forum/issues/6#issuecomment-900743403), [#64](https://github.com/nus-cs2113-AY2122S1/forum/issues/64)
-

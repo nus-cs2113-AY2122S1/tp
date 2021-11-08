@@ -1,0 +1,32 @@
+@startuml
+
+Actor User
+User -> ":Click" : "module list"
+participant ":Click"
+":Click" -> ":Parser" : parseCommand()
+participant ":Parser"
+activate ":Parser"
+create ":AddModuleCommand"
+":Parser" -> ":AddModuleCommand" : new AddMoudleCommand()
+activate ":AddModuleCommand"
+return
+deactivate ":AddModuleCommand"
+":Parser" -> ":Click" : AddMoudleCommand
+deactivate ":Parser"
+":Click" -> ":AddModuleCommand" : execute()
+activate ":AddModuleCommand"
+
+opt no duplicate parameters
+    ":AddModuleCommand" -> ":AddModuleCommand" : getModule()
+    participant "ModuleManager"
+    activate "ModuleManager"
+    ":AddModuleCommand" -> "ModuleManager" : addNewModule(module)
+    "ModuleManager" --> ":AddModuleCommand"
+    deactivate "ModuleManager"
+end
+
+
+
+":AddModuleCommand" --> ":Click"
+deactivate ":AddModuleCommand"
+@enduml
