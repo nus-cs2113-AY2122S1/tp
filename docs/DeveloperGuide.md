@@ -205,7 +205,8 @@ It also has methods to track the currency type of said objects both during and a
 The enum class is used mainly to prevent erroneous currency types from being parsed by the user.
 It currently supports only two conversions: `SGD` to `HKD` & vice versa. 
 
-####How the Currency component works:
+#### How the Currency component works:
+
 * Upon start-up, a new `CurrencyManager` is initialised in `StonksXD`.
 * `CurrencyManager` initialises `Entry` and `Budget` objects with their respective values and
 currency types, loaded from `DataManager`.
@@ -373,19 +374,19 @@ shown to the user.
 
 ##### Loading of Entries from `StonksXD_Entries.csv`
 
-9. Create a `FileInputStream` to the `csv` file.
-10. Create a `Scanner` with the `FileInputStream`.
-11. Check if the first line of the `csv` file has the correct header. If the header is not correct, a warning will be
+10. Create a `FileInputStream` to the `csv` file.
+11. Create a `Scanner` with the `FileInputStream`.
+12. Check if the first line of the `csv` file has the correct header. If the header is not correct, a warning will be
 shown to the user.
-12. Read from the `csv` file line by line.
-13. For every line, `x`, 2 things can happen (they will not happen concurrently):
+13. Read from the `csv` file line by line.
+14. For every line, `x`, 2 things can happen (they will not happen concurrently):
     - If `x` can be loaded as an `Expense` entry, `DataConverter` will convert it to an `Expense` and load it into 
     `FinancialTracker`. Start reading for the next line.
     - If `x` can be loaded as an `Income` entry, `DataConverter` will convert it to an `Income` and load it into
       `FinancialTracker`. Start reading for the next line.
-14. If there are corrupted entries (cannot be loaded as `Expense` or `Income`), a warning will be 
+15. If there are corrupted entries (cannot be loaded as `Expense` or `Income`), a warning will be 
 shown to the user.
-15. Return the control to caller.
+16. Return the control to caller.
 
 The sequence diagrams below will illustrate the loading process. Note that the diagrams do not show the full
 details to reduce complexity.
@@ -462,7 +463,7 @@ youth to manage their finances by making personal finance entries simple.
 |Version| As a ... (role)| I want to ... (Function)| So that I can … (Benefit)|
 |--------|----------|---------------|------------------|
 |v1.0|New User|List out all possible commands|Know what I can key into the CLI interface|
-|v1.0|User|Be able to record my spendings|Keep track of all my expenses|
+|v1.0|User|Be able to record my expenditures|Keep track of all my expenses|
 |v1.0|User|View all expense entries|See which spending I can cut down on and better manage my finances|
 |v1.0|User|Delete my expense entries|Delete wrong entries due to possible typos|
 |v1.0|User|View total expense|See if I need to reduce my spending in the future|
@@ -597,10 +598,10 @@ This form of testing involves loading sample data stored in the `text-ui-test` f
 1. Enter new sample data or use the pre-existing test data that can be found in the `input.txt` file.
 
 
-3. Open CLI terminal and navigate to the `text-ui-test` directory using the following command - `cd /text-ui-test`
+2. Open CLI terminal and navigate to the `text-ui-test` directory using the following command - `cd /text-ui-test`
 
 
-2. Run `.\runtest.bat` in CLI and see if you receive the message `"Test Passed!"`.
+3. Run `.\runtest.bat` in CLI and see if you receive the message `"Test Passed!"`.
 
 
-3. The IDE will compare the output in the `EXPECTED.TXT` and `ACTUAL.TXT` files to see if they are exactly the same to pass this test.
+4. The IDE will compare the output in the `EXPECTED.TXT` and `ACTUAL.TXT` files to see if they are exactly the same to pass this test.
