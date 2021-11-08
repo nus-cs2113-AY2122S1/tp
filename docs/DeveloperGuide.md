@@ -342,7 +342,9 @@ Please indicate a flag:
 -m for Member
 ```
 
-#####Managing events
+####Managing events
+
+###### Adding events
 
 Adding events can be achieved through the use of the `add` command. 
 
@@ -359,7 +361,7 @@ Below are a list of additional test cases for incorrect input regarding event ad
 - **Test case:** `add -e`
   - **Expected:** No event is added. Error details shown in the message printed on the CLI.
 - **Test case:** `add -e asdf asdf`
-   - **Expected:** No event is added. Error details regarding a missing field will is printed on the CLI.
+   - **Expected:** No event is added. Error details regarding a missing field will be printed on the CLI.
 
 Deleting events can be achieved through the use of the `delete` command. 
 
@@ -421,7 +423,7 @@ A test case for incorrect input regarding the viewing of the next event will be 
 
 An event can be selected using the `select` command.
 
-- **Test Case:** `select 1`
+- **Test Case:** `select -e 1`
 - **Prerequisite:** There is at least one event in the catalog.
 - **Expected:** The first event (at index 0) within the catalog is selected and more details about it will be printed out on the CLI.
 
@@ -447,7 +449,44 @@ Here are the events found:
 3. Tembusu Camp
 ```
 
-Events can be marked as done
+Events can be marked as done or undone using done and undo command respectively.
+
+To mark an event / events as done:
+- **Test case:** `done -e 1 2`
+- **Prerequisite:**
+  - There are two events in total in the event catalog.
+  - Both events are not marked as done.
+- **Expected:** The first and second event (at index 0 and 1) will be marked as done.
+```
+Nice! I have marked these items as done:
+[E][X] Tembusu Concert (at: 19 Feb 2022 - 20:00)
+[E][X] Tembusu Camp (at: 20 Feb 2022 - 08:00)
+--------LIST UPDATED-----------
+```
+To mark an event / events as undone:
+- **Test case:** `undo -e 1 2`
+- **Prerequisite:**
+    - There are two events in total in the event catalog.
+    - Both events are marked as done.
+- **Expected:** The first and second event (at index 0 and 1) will be marked as undone.
+```
+Okay, I have unmarked these items:
+[E][ ] Tembusu Concert (at: 19 Feb 2022 - 20:00)
+[E][ ] Tembusu Camp (at: 20 Feb 2022 - 08:00)
+--------LIST UPDATED-----------
+```
+
+A test case for incorrect input when trying to mark an event as done is as such:
+- **Test case:** `done -e 1`
+- **Prerequisite:**
+  - There is at least one event in the catalog
+  - The event (at index 0 in this example) has already been marked as done prior to this.
+- **Expected:** The event cannot be marked as done again. Error details shown in the message will be printed on the CLI.
+
+A test case for incorrect input when trying to mark an event as undone is as such:
+- **Test case:** `undo -e abc`
+- **Prerequisite:** There is at least one event in the catalog.
+- **Expected:** The event cannot be marked as undone as `abc` is not a valid index and should be a number instead. Error details shown in the mesage will be printed in the CLI.
 
 #####Managing tasks
 
