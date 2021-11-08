@@ -17,6 +17,7 @@ import static seedu.duke.common.Messages.WARN_INVALID_ARGS;
 import static seedu.duke.common.Status.AVAILABLE;
 import static seedu.duke.common.Status.RESERVED;
 
+//@@author dyahnafisah
 /**
  * Class encapsulating command to update the status of the item from AVAILABLE to RESERVED.
  */
