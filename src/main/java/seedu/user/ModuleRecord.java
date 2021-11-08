@@ -250,6 +250,7 @@ public class ModuleRecord {
             TranscriptUi.printUngradedModules(ungradedModules.get(i));
         }
     }
+
     //@@author aditichadha1310
     public void clearTranscript() throws UniModsException {
         if (gradedModules.size() == TextUi.ZERO && ungradedModules.size() == TextUi.ZERO) {
@@ -260,6 +261,7 @@ public class ModuleRecord {
         moduleCodes.clear();
         TextUi.printTranscriptCleared();
     }
+
     //@@author aditichadha1310
     public boolean checkModuleExists(String moduleCode) {
         for (int i = 0; i < gradedModules.size(); i++) {
