@@ -32,6 +32,8 @@
 - [Command Summary](#command-summary)
 - [FAQ](#faq)
 
+<div style="page-break-after: always;"></div>
+
 ## Introduction
 
 Decodex is a **Command Line Interface (CLI) application for Capture-The-Flag (CTF) players to perform [encoding](#terminologies), [decoding](#terminologies), [encryption](#terminologies) and [decryption](#terminologies) of data**, which come in the form of [modules](#terminologies) that can be **executed with ease** and **without any programming** needed. Decodex also provides [recipes](#terminologies) which can also be used to link several of these [modules](#terminologies) together so that they could be executed in one go to speed up repetitive tasks. The intuitive interaction can thus help to speed up a player’s performance during CTFs and save time without having to manually code the tedious [data transformations](#terminologies).
@@ -41,6 +43,8 @@ This guide serves to help you understand the usage of the program, which include
 > :information_source: This user guide is tailor-made for CTF players who have some technical understanding of encoding schemes and cryptography.
 
 ![carbon(6).png](images/carbon(6).png)
+
+<div style="page-break-after: always;"></div>
 
 ## Terminologies
 
@@ -60,6 +64,8 @@ This section serves to help you better understand the terminologies used in this
 | Module                      | A self-contained set of instructions to process your data into another form. A full list of supported modules can be found [here](#list-of-available-modules).                            |
 | Recipe                      | Acts as a container for you to link several modules together that will be executed back-to-back on your data.<br>By default, the application does not have any default recipes installed. |
 
+<div style="page-break-after: always;"></div>
+
 ## Symbols
 
 | Symbol               | Definition                                                                                                |
@@ -69,6 +75,7 @@ This section serves to help you better understand the terminologies used in this
 | :information_source: | Represents additional information regarding commands/features for you to better understand how to use it. |
 | :video_game:         | Represents something optional that you can try out, mostly for exploring or fun.                          |
 
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 
@@ -90,6 +97,8 @@ This section serves to help you better understand the terminologies used in this
    5. `exit`: Exits the application.
 6. For more information on Decodex's features, please refer to the Features Section.
 
+<div style="page-break-after: always;"></div>
+
 > :video_game: To make things more interesting while learning how to use Decodex, you may try to find out what `NTEgMzEgNTIgNDcgNjUgMzAgNGUgNTQgNGQgNmEgNDUgNzggNGQgMzEgNTIgMzk=` using our application! If you are new here, you can continue reading this guide to understand how to unravel this mysterious text!
 
 ## List of Available [Modules](#terminologies)
@@ -107,6 +116,8 @@ Below, you can see the list of available modules and what they do. <a name="sele
 | `binencode`    | Encodes the data using binary format.                                                                    | N.A                                                                                                    |
 | `bindecode`    | Decodes the data using binary format.<br><br> Note that this module does not accept any form of separators (space, commas, etc.) in the data.                                                                    | N.A                                                                                                    |
 | `rotencode`    | Rotates alphabetical characters by a specified integer offset.<br><br>E.g., `select module rotencode 13`, `recipe push rotencode 13` | The rotation offset.<br><br>Must be an integer between `-2,147,483,648` (`MIN_INT`) and `2,147,483,647` (`MAX_INT`). |
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -211,6 +222,8 @@ Format: `exit`
 > 
 > ![carbon(17).png](images/carbon(17).png)
 
+<div style="page-break-after: always;"></div>
+
 #### Create a New [Recipe](#terminologies): `recipe new`
 
 Creates a new recipe and sets it as currently being edited.
@@ -237,6 +250,8 @@ Example:
 
 ![recipeSelect.png](images/recipeSelect.png)
 
+<div style="page-break-after: always;"></div>
+
 #### Deselect the Current Editing [Recipe](#terminologies): `recipe deselect`
 
 Deselects the recipe currently being edited.
@@ -260,6 +275,8 @@ Example:
 - `recipe list testRecipe` Lists the modules in the recipe named `testRecipe`.
 
 ![recipeList.png](images/recipeList.png)
+
+<div style="page-break-after: always;"></div>
 
 #### Add a [Module](#terminologies) into a [Recipe](#terminologies): `recipe push`
 
@@ -302,6 +319,8 @@ Example:
 
 ![recipeDelete.png](images/recipeDelete.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Storage of Recipe Files
 
 > :exclamation: Notes about the recipe files
@@ -326,6 +345,8 @@ Deletes the recipe file in the `recipe/` directory. This is also done automatica
 ### Reading/Writing Data from/to File `[coming soon in the future]`
 
 Coming soon to a cinema near you in the future…
+
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 
