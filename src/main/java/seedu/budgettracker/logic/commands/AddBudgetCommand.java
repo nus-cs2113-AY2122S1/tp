@@ -26,7 +26,7 @@ public class AddBudgetCommand extends AddCommand {
     }
 
     /**
-     * Adds a budget to the record list during runtime
+     * Adds a budget to the record list during runtime.
      *
      * @throws CommandException to catch invalid amounts entered by user.
      */
