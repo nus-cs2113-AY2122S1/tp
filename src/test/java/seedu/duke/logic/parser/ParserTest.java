@@ -3,6 +3,9 @@ package seedu.duke.logic.parser;
 import org.junit.jupiter.api.Test;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.lesson.AddLessonCommand;
+import seedu.duke.logic.commands.lesson.FindLessonCommand;
+import seedu.duke.logic.commands.module.FindModuleCommand;
+import seedu.duke.logic.commands.task.FindTaskCommand;
 import seedu.duke.logic.commands.task.AddTaskCommand;
 import seedu.duke.logic.commands.task.DoneTaskCommand;
 import seedu.duke.DukeException;
@@ -135,6 +138,26 @@ public class ParserTest {
     public void parseMarkTaskAsDone_indexNotANumber_exceptionThrown() {
         String userResponse = "done task m";
         assertThrows(DukeException.class, (() -> Parser.parse(userResponse)));
+    }
+
+    @Test
+    public void parseCommand_extraTrailingWords_exceptionThrown() {
+        assertThrows(DukeException.class, () -> Parser.parse("help invalid"));
+        assertThrows(DukeException.class, () -> Parser.parse("exit invalid"));
+    }
+
+    @Test
+    public void parseFindCommand_validArgument_valid() {
+        try {
+            Command lessonCommand = Parser.parse("find lesson test");
+            assertTrue(lessonCommand instanceof FindLessonCommand);
+            Command taskCommand = Parser.parse("find task test");
+            assertTrue(taskCommand instanceof FindTaskCommand);
+            Command moduleCommand = Parser.parse("find module test");
+            assertTrue(moduleCommand instanceof FindModuleCommand);
+        } catch (DukeException e) {
+            fail();
+        }
     }
 
     //@@author ptejasv

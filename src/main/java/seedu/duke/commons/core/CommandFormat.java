@@ -35,7 +35,7 @@ public final class CommandFormat {
             "done task [INDEX]";
 
     public static final String EDIT_MODULE_FORMAT =
-            "edit module [MODULE_CODE] -g {GRADE}";
+            "edit module [MODULE_CODE] -g [GRADE]";
 
     public static final String FIND_TASK_FORMAT =
             "find task [KEYWORD]";
@@ -48,9 +48,6 @@ public final class CommandFormat {
 
     public static final String HELP_FORMAT =
             "help";
-
-    public static final String SET_GRADE_FORMAT =
-            "set grade [MODULE_CODE] [GRADE]";
 
     public static final String LAUNCH_LESSON_FORMAT =
             "launch lesson [INDEX]";
