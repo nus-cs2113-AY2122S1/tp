@@ -34,7 +34,7 @@ Below is the guide on how you can get started using our program to start **"Sche
 ## 1. Quick Start
 1. Ensure you have [Java **11** jdk](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html) installed in your Computer, 
 and that `java` is in your `PATH` environment variable.
-2. Download the latest `SchedUrMods.jar` from [here](https://github.com/AY2122S1-CS2113T-W13-3/tp/releases/latest).
+2. Download the latest `SchedUrMods.jar` [here](https://github.com/AY2122S1-CS2113T-W13-3/tp/releases/latest).
 
    > **⚠️Warning**: Do *not* decompress the jar file even if it shows as an archive on your file manager.
 3. Copy the file to the folder you want to use as the _home folder_ for SchedUrMods.
@@ -88,10 +88,10 @@ Adds your **todo** to your task list.
   - How often your task is to repeat: `[--recur daily|weekly|monthly|yearly]`
 
 **Example**: `todo read book --priority low --doOn 20-10-2021 02:00 --recur daily`
-- Adds a todo task with description `read book` to the task list.
-- Specifies the priority to be `low`.
-- Specifies the task is to be done on `20-10-2021 02:00`.
-- Specifies the task is to repeat `daily`.
+- Adds a todo task with the description '`read book`' to your task list.
+- Specifies that the priority of the task is '`low`'.
+- Specifies that the task is to be done on '`20-10-2021 02:00`'.
+- Specifies that the task is to repeat '`daily`'.
 
 **Expected Outcome**:
 
@@ -108,16 +108,16 @@ Adds your **deadline** to your task list.
 
 **Format**: `deadline <description> <--due dd/MM/yyyy HH:mm> [--flag <argument>]`
 - `<description>` specifies the description of your deadline.
-- <code>&lt;--due <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a>&gt;</code> specifies when your deadline is.
+- <code>&lt;--due <a href="#224-date-format-dateformat">&lt;dateFormat&gt;</a>&gt;</code> specifies when your deadline is due.
 - `[--flag <argument>]` specifies optional details of your deadline.
   - The priority of your task: `[--priority <high|medium|low>]`
   - How often your task is to repeat: `[--recur <none|daily|weekly|monthly|yearly>]`
 
 **Example**: `deadline CS2106 Lab 3 --priority high --due 20-10-2021 02:00`
-- Adds a deadline task with description `CS2106 Lab 3` to the task list.
-- Specifies the priority to be `high`.
-- Specifies the task is to be done on `20-10-2021 02:00`.
-- Specifies the task to have no recurrence.
+- Adds a deadline task with the description '`CS2106 Lab 3`' to your task list.
+- Specifies that the priority of the task is '`high`'.
+- Specifies that the task is to be done on '`20-10-2021 02:00`'.
+- Specifies that the task will have no recurrence [(default recurrence)](some-notes-when-adding-tasks).
 
 **Expected Outcome**:
 
@@ -141,10 +141,10 @@ Adds your **event** to your task list.
   - How often your task is to repeat: `[--recur <none|daily|weekly|monthly|yearly>]`
 
 **Example**: `event Marquee Christmas Party --priority high --start 25-12-2020 22:00 --end 26-12-2020 04:00`
-- Adds an event task with description `Marquee Christmas Party` to the task list.
-- Specifies the priority to be `high`.
-- Specifies the task to start on `25-12-2020 22:00` and end on `26-12-2020 04:00`.
-- with no recurrence.
+- Adds an event task with the description '`Marquee Christmas Party`' to your task list.
+- Specifies that the priority of the task is '`high`'.
+- Specifie that the task starts on '`25-12-2020 22:00`' and ends on '`26-12-2020 04:00`'.
+- Specifies that the task will have no recurrence [(default recurrence)](some-notes-when-adding-tasks).
 
 **Expected Outcome**:
 
@@ -157,7 +157,10 @@ Adds your **event** to your task list.
 ```
 
 ### 2.2.4 Date Format: `<dateFormat>`
-The accepted date formats in our program:  
+
+When entering dates into SchedUrMods, we accept multiple date formats to allow you to reduce how much you have to type.  
+
+The accepted date formats in SchedUrMods:  
 - `dd/MM/yyyy HH:mm` or `dd/MM/yy HH:mm`
 - `dd/MM/yyyy HH` or `dd/MM/yy HH`
 - `dd/MM HH:mm`
