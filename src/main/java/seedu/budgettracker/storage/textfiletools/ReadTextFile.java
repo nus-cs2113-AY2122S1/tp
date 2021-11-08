@@ -1,3 +1,5 @@
+//@@author YEOWEIHNGWHYELAB
+
 package seedu.budgettracker.storage.textfiletools;
 
 import static seedu.budgettracker.common.Messages.MESSAGE_INVALID_IO;
@@ -9,11 +11,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//@@author yeoweihngwhyelab
 public class ReadTextFile {
     private final String fileDirectory;
 
-    //@@author yeoweihngwhyelab
     /**
      * Constructor to set the fileDirectory attribute.
      *
@@ -23,7 +23,6 @@ public class ReadTextFile {
         this.fileDirectory = fileDirectory;
     }
 
-    //@@author yeoweihngwhyelab
     /**
      * Reads the text file containing all the commands for adding Budget or Expenditure
      * and return an ArrayList of String containing those commands.

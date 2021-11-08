@@ -17,10 +17,7 @@ activate logic LOGIC_COLOR
 logic -[LOGIC_COLOR]> data : addBudget(1, 500)
 activate data DATA_COLOR
 
-data -[DATA_COLOR]-> logic
-deactivate data
-
-logic -[LOGIC_COLOR]> storage : saveToStorage(storageDirectory)
+data -[DATA_COLOR]> storage : saveToStorage(storageDirectory)
 activate storage STORAGE_COLOR
 
 storage -[STORAGE_COLOR]> storage : Save to file
@@ -28,8 +25,12 @@ activate storage STORAGE_COLOR_T1
 storage --[STORAGE_COLOR]> storage
 deactivate storage
 
-storage --[STORAGE_COLOR]> logic
+storage --[STORAGE_COLOR]> data
 deactivate storage
+
+
+data -[DATA_COLOR]-> logic
+deactivate data
 
 logic --[LOGIC_COLOR]> ui
 deactivate logic

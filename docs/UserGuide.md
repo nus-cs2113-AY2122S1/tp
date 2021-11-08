@@ -118,11 +118,11 @@ Format: `add -e n/DESCRIPTION a/AMOUNT <d/DATE_OF_EXPENDITURE> <c/CATEGORY>`
 * The `DESCRIPTION` can be in a natural language format.
   * NOTE: **If Description column exceeds 30characters limit, it will be truncated during list view**
 * The `AMOUNT` entered can be specified up to 2 decimal places.
+  * NOTE: `Amount` **cannot exceed 1billion (1000000000)**
 * The `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_. 
   * If left empty, the current date according to the
   system will be entered by default.
-  * Note: **YYYY value should correspond to the current storage file year, please use `year` 
-  command to switch to the correct year before entering an expenditure of another year**
+  * NOTE: **YYYY value should correspond to the current storage file year**
 * The `<CATEGORY>` must be one of the following values:
   * _GENERAL, CLOTHES, FOOD, ENTERTAINMENT, GIFTS, HEALTH_
   * If left empty, the default value will be _GENERAL_
@@ -418,13 +418,13 @@ _________________________________________________________
 
 _________________________________________________________
 
-### Listing all Budget & Expenditure: `list`
+### Listing all Budget & Expenditure
 
 List all the Budget and expenditure for that particular year.
 
 Format: `list m/all [c/CATEGORY]`
-
-* The command format must strictly be as shown above.
+* `CATEGORY` filters out the expenditures to show only those falling under the specified category.
+  * Note: If `CATEGORY` is left empty, expenditures of all categories will be shown
 
 Example of usage:
 
@@ -436,55 +436,80 @@ Expected outcome: Listing all the budget and expenditure for the particular year
 ========================================================
 Your budget for January: Not Set
 Your expenditures:
- None 
+No Expenditure records yet.
+Your loans: 
+No Loan records yet. 
 ========================================================
 Your budget for February: Not Set
 Your expenditures:
- None 
+No Expenditure records yet.
+Your loans: 
+No Loan records yet. 
 ========================================================
 Your budget for March: Not Set
 Your expenditures:
- None 
+No Expenditure records yet.
+Your loans: 
+No Loan records yet.
 ========================================================
 Your budget for April: Not Set
 Your expenditures:
- None 
+No Expenditure records yet.
+Your loans: 
+No Loan records yet.
 ========================================================
 Your budget for May: Not Set
 Your expenditures:
- None 
+No Expenditure records yet.
+Your loans: 
+No Loan records yet.
 ========================================================
 Your budget for June: Not Set
 Your expenditures:
- None 
+No Expenditure records yet.
+Your loans: 
+No Loan records yet.
 ========================================================
 Your budget for July: Not Set
 Your expenditures:
- None 
+No Expenditure records yet.
+Your loans: 
+No Loan records yet.
 ========================================================
 Your budget for August: Not Set
 Your expenditures:
-  Description            | Amount             | Date           
-1.CS2113T Textbooks      | $60.0              | 2021-08-20       
+  Description            | Amount             | Date               | Category
+1.CS2113T Textbooks      | $60.00             | 2021-08-20         | GENERAL
+Your loans: 
+No Loan records yet.
 ========================================================
 Your budget for September: Not Set
 Your expenditures:
-  Description            | Amount             | Date           
-1.Chicken Rice1          | $500.0             | 2021-09-13       
+  Description            | Amount             | Date               | Category
+1.Chicken Rice           | $5.00              | 2021-09-13         | FOOD
+Your loans: 
+No Loan records yet.
 ========================================================
-You are spending too much for October !
-Your budget for October: $330.0
+You did not overspend for October, Good JOB!
+1.52% of your overall budget has been spent
+Your budget for October: $330.00
 Your expenditures:
-  Description            | Amount             | Date           
-1.Chicken Rice1          | $500.0             | 2021-10-13       
+  Description            | Amount             | Date               | Category
+1.Chicken Rice           | $5.00              | 2021-10-13         | FOOD
+Your loans: 
+No Loan records yet.
 ========================================================
 Your budget for November: Not Set
 Your expenditures:
- None 
+No Expenditure records yet.
+Your loans: 
+No Loan records yet.
 ========================================================
-Your budget for December: $500.0
+Your budget for December: $500.00
 Your expenditures:
- None 
+No Expenditure records yet.
+Your loans: 
+No Loan records yet.
 ========================================================
 ```
 <br />
@@ -638,8 +663,8 @@ _________________________________________________________
 
 # &nbsp;&nbsp; Stat: `stat`
 
-The command word `stat` display some statistics graphs and paramters about the expenditure for 
-the year or month.
+The command word `stat` display some statistics graphs and information about the expenditure for 
+the year or particular month.
 
 _________________________________________________________
 <br />
@@ -932,28 +957,36 @@ Bye, see you again soon!
 **A**: Copy the data folder from the source computer to the destination computer on the same directory as the tp.jar file.
 
 ## Command Summary
+
+<> - Parameters that must be stated in the command.
+
+[<>] - Optional parameters that can be ommited.
+
  |no. | Command | Description |
  |--- | --------- | --------------------------------------- |
  |1.  | `add -b a/<AMOUNT> m/<MONTH>` | `add budget of $AMOUNT to MONTH of the year` |
- |2.  | `add -e c/<DESCRIPTION> a/<AMOUNT> d/<DATE_OF_EXPENDITURE> [c/<CATEGORY>]` | `add expenditure with DESCRIPTION of CATEGORY which cost $<AMOUNT> on <DATE>` |
- |3.  | `add -l n/<NAME_OF_LOAN_BORROWER> a/<AMOUNT> d/<DUE_DATE_OF_LOAN>` | `add a loan of $AMOUNT borrowed by NAME_OF_LOAN_BORROWER due on <DUE_DATE_OF_LOAN>` |
+ |2.  | `add -e c/<DESCRIPTION> a/<AMOUNT> d/<DATE_OF_EXPENDITURE> [c/<CATEGORY>]` | `add expenditure with DESCRIPTION of CATEGORY which cost $AMOUNT on DATE` |
+ |3.  | `add -l n/<NAME_OF_LOAN_BORROWER> a/<AMOUNT> d/<DUE_DATE_OF_LOAN>` | `add a loan of $AMOUNT borrowed by NAME_OF_LOAN_BORROWER due on DUE_DATE_OF_LOAN` |
  |4.  | `edit -b m/<MONTH> a/<AMOUNT>` | `edit the MONTH budget to AMOUNT` |
  |5.  | `edit -e m/<MONTH> i/<INDEX> a/<AMOUNT> d/<DATE_OF_EXPENDITURE> n/<DESCRIPTION>` | `edit exependiture of MONTH and INDEX to AMOUNT, DATE_OF_EXPENDITURE and DESCRIPTION` |
  |6.  | `edit -l m/<MONTH> i/<INDEX> a/<AMOUNT> d/<DUE_DATE_OF_LOAN> n/<BORROWER_NAME>` | `edit the loan of MONTH and INDEX to AMOUNT, DUE_DATE_OF_LOAN and BORROWER_NAME ` |
  |7.  | `year <year>` | `switch database to YEAR` |
  |8.  | `find <keyword>` | `find a particular KEYWORD in the database` |
- |9.  | `list m/all [c/<CATEGORY]` | `list all budget, expenditure and loan entries of the year of CATEGORY` |
- |10. | `list m/MONTH [c/<CATEGORY]` | `list MONTH budget, expenditure and loan entries of CATEGORY` |
+ |9.  | `list m/all [c/<CATEGORY>]` | `list all budget, expenditure and loan entries of the year of CATEGORY` |
+ |10. | `list m/<MONTH> [c/<CATEGORY>]` | `list MONTH budget, expenditure and loan entries of CATEGORY` |
  |11. | `delete -b m/<MONTH>` | `delete the budget entry of MONTH` |
- |12. | `delete -e m/MONTH` | `delete all expenditure entries of MONTH` |
- |13. | `delete -e  m/MONTH i/INDEX` | `delete a particular expenditure of INDEX from MONTH` |
- |14. | `delete -e m/MONTH/ i/INDEX_FROM-INDEX_TO` | `delete all the expenditure of MONTH of INDEX_FROM-INDEX_TO` |
- |15. | `delete -l m/MONTH` | `delete all loan entries of MONTH` |
- |16. | `delete -l m/MONTH i/INDEX` | `delete a particular loan of INDEX from MONTH` |
- |17. | `delete -l m/MONTH i/INDEX_FROM-INDEX_TO` | `delete all the loan of MONTH of INDEX_FROM-INDEX_TO` |
- |18. | `stat -e m/MONTH` | `show a particualr MONTH statistics breakdown` |
- |19. | `stat -l t/<TYPE>` | `show overall statistics of TYPE for the entire year` | 
- |20. | `help` | `shows a list of command guides` |
- |21. | `bye` | `terminates the app` |
+ |12. | `delete -e m/<MONTH>` | `delete all expenditure entries of MONTH` |
+ |13. | `delete -e  m/<MONTH> i/<INDEX>` | `delete a particular expenditure of INDEX from MONTH` |
+ |14. | `delete -e m/<MONTH> i/<INDEX_FROM-INDEX_TO>` | `delete all the expenditure of MONTH of INDEX_FROM-INDEX_TO` |
+ |15. | `delete -l m/<MONTH>` | `delete all loan entries of MONTH` |
+ |16. | `delete -l m/<MONTH> i/<INDEX>` | `delete a particular loan of INDEX from MONTH` |
+ |17. | `delete -l m/<MONTH> i/<INDEX_FROM-INDEX_TO>` | `delete all the loan of MONTH of INDEX_FROM-INDEX_TO` |
+ |18. | `stat -e m/<MONTH>` | `show a particualr MONTH statistics breakdown` |
+ |18. | `stat -e m/<MONTH>` | `show a particualr MONTH statistics breakdown` |
+ |19. | `stat -y t/<TYPE>` | `show overall statistics of TYPE for the entire year` | 
+ |20. | `csv` | `save the current database into text file` | 
+ |21. | `db` | `show all the available database in the user's device` | 
+ |22. | `help` | `shows a list of command guides` |
+ |23. | `bye` | `terminates the app` |
 
 

@@ -10,6 +10,7 @@ for tech-savvy students who have trouble keeping track of their expenses.
 * [Design](#design)
   * [Architecture](#architecture)
   * [UI Component](#ui-component)
+  * [Data Component](#data-component)
 * [Implementation](#implementation)
   * [Delete feature](#delete-feature)
 * [Product scope](#product-scope)
@@ -60,7 +61,7 @@ project, click trust.
 ![Intellij ProjectStructure](images/TrustGradle.png)
 
 6) Verifying BudgetTracker Runs
-Right click on BudgetTracker then click on run to test our our BudgetTracker App. 
+Right click on BudgetTracker then click on run to test our BudgetTracker App. 
 
 ![Intellij Run BudgetTracker](images/BudgetTrackerRun.png)
 
@@ -84,7 +85,7 @@ At app launch, **`BudgetTracker`** is in charge of initializing the components a
 initialized components into others as parameters. 
 
 For example, an initialized variable of `Data` is passed into an initialized variable of `Storage` for
-the `Storage` component to load hard disk information into the memory.
+the `Storage` component to load hard disk information into the data memory.
 
 [**`Commons`**](#common-classes) consists of the exception classes for exception handling and messages used by other classes.
 
@@ -116,7 +117,7 @@ The `Ui` component:
 
 <br />
 
-### <a id=""></a> Data Component
+### <a id="data-component"></a> Data Component
 Below is a partial class diagram that shows an overview of the `Data` component.
 
 ![Figure_DataComponent_Partial_Class_Diagram](images/DataPartialClassDiagram.png)
@@ -161,7 +162,7 @@ The Storage component consists of:
 
 The `Storage` component:
 
-1) #### What it does?
+1) What it does?
 - During the first launch of the app, it creates a new current year database text file if there isn't any. 
 It will load any existing data from the database text file into the app. 
 - Allows user to change the database to the year he wants. 
@@ -169,7 +170,7 @@ It will load any existing data from the database text file into the app.
 - Upon performing any commands that will change records in the database, such as `add`, `edit`, or `delete`,
 Storage will reload the data in the app into the database text file. 
 
-2) #### Architecture of the Storage component
+2) Architecture of the Storage component
 
 ![Storage Sequence Diagram](images/StorageBasicaArchitecture.png)
 
@@ -180,7 +181,7 @@ data from storage everytime during start up.
 
 - Initially, when BudgetTracker App is started, it will create new Parser and Storage object. Storage's 
 makeStorageTextFile() method will be called to either create a new database text file of the current year
-for example "2021.txt" if it does not exist or it will load the existing "2021.txt" into the App by calling 
+for example "2021.txt" if it does not exist, or it will load the existing "2021.txt" into the App by calling 
 loadStorage() method of the Storage Class.
 - Then a while loop will be initialized to check for User Input in the command line to check for user's 
 command. Whenever any command that changes the data in the App is called such as `add`, `edit` and `delete` 
@@ -189,7 +190,7 @@ file to the new state of the data in the App.
 - Then the loop will continue. For commands that will not change the data in the app such as `list`, `find`...
 The reloadArrayToStorage() method will not be called. 
 
-3) #### Class Diagram of the Storage component
+3) Class Diagram of the Storage component
 
 ![Storage Sequence Diagram](images/Storage-Class_Diagram.png)
 
@@ -221,13 +222,23 @@ and _AddLoanCommand#execute()_ respectively.
 
 Given below is an example usage scenario and how the add mechanism behaves at each step.
 
-**Step 1.** The user launches the application for the first time. The AllRecordList will be initialized with the initial record list state.
+**Step 1.** The user launches the application for the first time. An instance of AllRecordList will be initialized in `BudgetTracker` class.
 
 **Step 2.** The user executes `add ...`  to add a new record into the record list. The full command is passed into _Parser#parseCommand()_,
 which parses the user input and identifies the type of record to be added based on the first prefix after add.
 
 **Step 3.** Based on the type of record to be added, _Parser#parseCommand()_ returns an instance of _AddBudgetCommand,  AddExpenditureCommand_
-or  _AddLoanCommand_ back to the main function. The _execute()_ function of the instance will then be called to add the record into the initialized AllRecordList.
+or  _AddLoanCommand_ back to the main function. 
+
+**Step 4.** The AllRecordList attribute of the returned *Command* instance is set to the currently initialized AllRecordList in _BudgetTracker_ class. 
+
+**Step 5.** The _execute()_ function of the *Command* instance will then be called to add the record into the AllRecordList.
+
+**Step 6.**
+
+Below is a _sequence diagram_ which shows the calling of `add -b m/12 a/100` during **runtime**.
+
+![Figure Add_Budget_Sequence_Diagram](images/AddSequenceDiagram.png)
 
 <br />
 
@@ -331,7 +342,7 @@ Given below is an example usage scenario and how the list feature behaves at eac
 
 ### <a id=""></a> Storage 
 
-1) #### How is the data stored?
+1) How is the data stored?
 
 The storage stores the exact `add` command of budget, expenditures and loan into the text 
 file containing in the current AllRecordList. Everytime a deleted, edit or add command is called, 
@@ -340,10 +351,10 @@ at every step.
 
 ![dataSample](images/dataSample.png)
 
-2) #### Why is the data stored in such a manner?
+2)  Why is the data stored in such a manner?
 
-The reason it is implemented in this manner is so that we could reuse
-code that have been written for adding of budget and expenditures directly when loading from storage.
+The reason it is implemented in this manner is so that we could reuse code that have been written 
+for adding of budget and expenditures directly when loading from storage.
 
 This implementation makes `Storage` very versatile even when there are substantial changes in 
 the architecture of our app. Some examples are the changes to `Parser` and `Commands`. 
@@ -355,10 +366,10 @@ For the saving of data, only the reloading method needs to be edited to adhere t
 new changes such that the add command stored is of the correct format.
 
 The way the database is organized is that each yearly Records is stored in the form of 
-_[YYYY].txt_. Each year contains all the monthly budget as well as all the expenditure and 
+_YYYY.txt_. Each year contains all the monthly budget as well as all the expenditure and 
 loan tied to that month. 
 
-3) #### How do some key methods work?
+3)  How do some key methods work?
 
 `readTextFileToString()`
 
@@ -385,7 +396,7 @@ commands, thus loading data into the App.
 
 When _reloadArrayToStorage()_ method is called, it creates a new File object into the specified directory
 (file directory to reload data files). The _isFile()_ method of the File Class is called to check if the data file
-exist. If it doesn't, a error message will be shown to the user and the method terminates. Otherwiese, it 
+exist. If it doesn't, a error message will be shown to the user and the method terminates. Otherwise, it 
 continues to create a new FileWrite object which will clear the existing data text file first. The FileWrite 
 object will then be passed into the new PrintWriter object that will be created. 
 
@@ -398,11 +409,11 @@ convert them into their respective add commands. For example, `add -e n/Chicken 
 `add -l n/Benjamin a/1000.00 d/2021-10-27`.
 
 Both _reloadArrayToStorage()_ and _convertToCsvFile()_ methods are similar in the way they read 
-data from the App and save it into the data files. The only difference is on the type of file they
+data from the App and save it into the data files. The main difference lies is on the type of file they
 save into. _reloadArrayToStorage()_ saves into _".txt"_ type files while _convertToCsvFile()_ saves into 
 _".csv"_ type files. 
 
-4) #### Why does `edit` and `delete` command work with reloadArrayToStorage() method? 
+4) Why does `edit` and `delete` command work with reloadArrayToStorage() method? 
 
 `edit` command can change the attribute of budget, expenditure and loan such as description, amount... 
 Reloading the data text files after the `edit` will just update the `add` command attribute's value to their
@@ -412,7 +423,7 @@ attribute's value after the edit. That is the reason why it _reloadArrayToStorag
 reloading the data text files after the `delete` command will just remove a particular `add` line 
 of command from the data text file. 
 
-5) #### How does switching database work?
+5)How does switching database work?
 
 When the `year <SELECTED DATABASE YEAR>` command is called eg. `year 2020`, the Parser will 
 call the YearCommand, and it will run the _execute()_ method. _execute()_ first clears the 
@@ -421,7 +432,6 @@ to set the year to 2020. Then. the _loadStorage()_ method of Storage Class will 
 the datafile _"2020.txt"_ into the app.  
 
 ## <a id=""></a> List of Commands
-
 
 ## <a id=""></a> Appendix A: Product scope
 

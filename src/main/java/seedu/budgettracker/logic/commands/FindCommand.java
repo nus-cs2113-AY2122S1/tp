@@ -1,3 +1,5 @@
+//@@author YEOWEIHNGWHYELAB
+
 package seedu.budgettracker.logic.commands;
 
 import seedu.budgettracker.data.records.Expenditure;
@@ -7,7 +9,6 @@ import seedu.budgettracker.ui.TextUi;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-//@@author yeoweihngwhyelab
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
     public static final String DIVIDER = "========================================================";
@@ -15,12 +16,10 @@ public class FindCommand extends Command {
     public static final String EXPENDITURE_LOAN_DIVIDER = "--------------------------------------------------------";
     public String keyword;
 
-    //@@author yeoweihngwhyelab
     public FindCommand(String commandParams) {
         this.keyword = commandParams;
     }
 
-    //@@author yeoweihngwhyelab
     public void execute() {
         System.out.println("Here are the Expenditure and Loan matches we have found!");
         System.out.println(TITLE_DIVIDER);
@@ -30,7 +29,6 @@ public class FindCommand extends Command {
         }
     }
 
-    //@@author yeoweihngwhyelab
     public void findExpenditureLoanOfMonth(int i) {
         ArrayList<Expenditure> budgetList = allRecordList.getExpenditureRecords(i);
         ArrayList<Loan> loanList = allRecordList.getLoanRecords(i);

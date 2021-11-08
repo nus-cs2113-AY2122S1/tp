@@ -1,3 +1,5 @@
+//@@author YEOWEIHNGWHYELAB
+
 package seedu.budgettracker.storage;
 
 import seedu.budgettracker.logic.commands.AddCommand;
@@ -10,7 +12,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-//@@author yeoweihngwhyelab
 /**
  * This class is responsible for the initial loading of the data text file from the
  * data folder to the app or creating the data text file if there isn't any.
@@ -18,8 +19,6 @@ import java.util.ArrayList;
 public class Storage {
     public static String dataStorageDirectory = "./data/";
     public static final String LS = System.lineSeparator();
-
-    //@@author yeoweihngwhyelab
 
     /**
      * Loads the data text file to the app.
@@ -59,7 +58,6 @@ public class Storage {
         return recordListDirectory;
     }
 
-    //@@author yeoweihngwhyelab
     /**
      * Creates the data folder and the data text file if there isn't any.
      *
@@ -88,7 +86,6 @@ public class Storage {
         }
     }
 
-    //@@author yeoweihngwhyelab
     /**
      * List out all the data text file in the data folder and prints warning to user
      * if there are junk files.
@@ -113,8 +110,6 @@ public class Storage {
             System.out.println("Your data directory contains junk files, please clean them up!");
         }
     }
-
-    //@@author yeoweihngwhyelab
 
     /**
      * Check if the data folder has junk files - anything other than "YYYY.txt" file

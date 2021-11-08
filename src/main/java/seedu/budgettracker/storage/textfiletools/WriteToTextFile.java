@@ -1,3 +1,5 @@
+//@@author YEOWEIHNGWHYELAB
+
 package seedu.budgettracker.storage.textfiletools;
 
 import seedu.budgettracker.data.RecordList;
@@ -14,12 +16,10 @@ import java.util.Hashtable;
 
 import static seedu.budgettracker.common.Messages.MESSAGE_FILE_NOT_EXIST;
 
-//@@author yeoweihngwhyelab
 /**
  * Class responsible for saving the app data into text file.
  */
 public class WriteToTextFile {
-    //@@author yeoweihngwhyelab
     /**
      * Save the monthlyRecordList containing all the data from the app to the data text
      * file. It deletes the existing text file first before writing to it.
@@ -45,7 +45,6 @@ public class WriteToTextFile {
         }
     }
 
-    //@@author yeoweihngwhyelab
     /**
      * Traverses through the monthlyRecordList 12 times and convert their attribute values
      * into "add" command format.
@@ -66,7 +65,6 @@ public class WriteToTextFile {
         }
     }
 
-    //@@author yeoweihngwhyelab
     /**
      * Traverse through a particular month's loan attribute values and convert them
      * into "add" command format then flush into the text file.
@@ -86,8 +84,6 @@ public class WriteToTextFile {
             fileWrite.flush();
         }
     }
-
-    //@@author yeoweihngwhyelab
 
     /**
      * Traverse through a particular month's expenditure attribute values and convert them

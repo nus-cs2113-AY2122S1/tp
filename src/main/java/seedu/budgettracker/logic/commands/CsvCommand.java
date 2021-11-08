@@ -1,3 +1,5 @@
+//@@author YEOWEIHNGWHYELAB
+
 package seedu.budgettracker.logic.commands;
 
 import seedu.budgettracker.data.RecordList;
@@ -6,11 +8,9 @@ import seedu.budgettracker.storage.ConverterToCsv;
 
 import java.util.Hashtable;
 
-//@@author yeoweihngwhyelab
 public class CsvCommand extends Command {
     public static final String COMMAND_WORD = "csv";
 
-    //@@author yeoweihngwhyelab
     public void execute() {
         ConverterToCsv csvConversion = new ConverterToCsv();
         String directoryName = allRecordList.storageDirectory;
