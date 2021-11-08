@@ -273,7 +273,7 @@ Displays all universities added into your *Selected University List*, as well as
 ```
 Here are the universities and module mappings in your list:
 [40] Technical University of Munich -------------------- 4.0
-      [1]  IE4056 - WI001098 : Introduction to Production Scheduling Theory
+      [1]   IE4056 - WI001098 : Introduction to Production Scheduling Theory : 4.0
 [80] - Western University
 ```
 
