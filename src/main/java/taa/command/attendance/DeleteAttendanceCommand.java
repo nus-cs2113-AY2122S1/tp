@@ -26,7 +26,8 @@ public class DeleteAttendanceCommand extends Command {
     };
 
     private static final String MESSAGE_FORMAT_DELETE_ATTENDANCE_USAGE =
-        "%s %s/<CLASS_ID> %s/<STUDENT_INDEX> %s/<LESSON_NUMBER>";
+        "%s %s/<CLASS_ID> %s/[<STUDENT_INDEX> | <START_STUDENT_INDEX>-<END_STUDENT_INDEX> | <STUDENT_INDEX>,"
+            + "<STUDENT_INDEX>,...] %s/<LESSON_NUMBER>";
 
     private static final String MESSAGE_FORMAT_ATTENDANCE_DELETED = "Attendance removed for:\n%s";
     private boolean doesStudentExist = true;
