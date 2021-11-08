@@ -85,7 +85,7 @@ Before you learn how to use the app, take a look at the [Quick Start](#quick-sta
 1. Ensure that you have Java 11 or above installed.
 
 
-2. Download the latest version of `StonksXD.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-3/tp/releases).
+2. Download the latest version of `StonksXD.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-3/tp/releases/tag/v2.1).
 
 
 3. Copy the file to the folder you want to use as the home folder for your `Stonks XD`.
@@ -100,7 +100,7 @@ Before you learn how to use the app, take a look at the [Quick Start](#quick-sta
 ![image](https://user-images.githubusercontent.com/77761339/140724500-ea056343-86d5-4a9c-ba82-db8de51dd595.png)
 
 6. If you are a first time user, the first command you want to key in is the [help](#view-all-possible-commands-help) command.
-It will guide you to the possible commands you can enter into Stonks XD. (Tip! Refer to the [Features](#features) below for details of each command.)
+It will guide you to the possible commands you can enter into `Stonks XD`. (Tip! Refer to the [Features](#features) below for details of each command.)
     
 ---
 
