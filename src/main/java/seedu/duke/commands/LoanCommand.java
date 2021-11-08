@@ -20,6 +20,7 @@ import static seedu.duke.common.Status.AVAILABLE;
 import static seedu.duke.common.Status.LOANED;
 import static seedu.duke.common.Status.RESERVED;
 
+//@@author dyahnafisah
 /**
  * Class encapsulating command to update the status of the item to be loaned out.
  */

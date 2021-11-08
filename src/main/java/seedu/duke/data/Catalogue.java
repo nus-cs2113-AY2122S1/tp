@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import static seedu.duke.common.Messages.ADD_DUPLICATE_ID;
 
+//@@author dyahnafisah
 /**
  * The Catalogue class stores the ArrayList of the items.
  */
