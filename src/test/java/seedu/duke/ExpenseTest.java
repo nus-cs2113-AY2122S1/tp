@@ -13,6 +13,7 @@ import seedu.duke.trip.Trip;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.io.ByteArrayInputStream;
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -85,6 +86,15 @@ class ExpenseTest {
     @Test
     void testGetAmountSplit() {
         assertEquals("{Chris=300.0, Betty=200.0, Albert=100.0}", exp.getAmountSplit().toString());
+    }
+
+    @Test
+    void testCurrentDate() throws ForceCancelException {
+        String input = System.lineSeparator();
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        Storage.setScanner(new Scanner(System.in));
+        Expense testExpense = new Expense("3000 category Albert /description");
+        assertEquals(LocalDate.now(), testExpense.getDate());
     }
 
     @Test
