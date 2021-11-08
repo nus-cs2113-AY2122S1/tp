@@ -19,7 +19,7 @@ public class FindCommand extends Command {
         if (noEventsFound()) {
             return new CommandResult("No matching events found!");
         }
-        return new CommandResult(findResults);
+        return new CommandResult("Here are the events found:" + System.lineSeparator() + findResults);
     }
 
     private static String filterEvents(String keyword) {
