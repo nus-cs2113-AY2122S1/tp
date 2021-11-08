@@ -263,4 +263,182 @@ and provide Student leaders, with an application to cater to their specific mana
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+Given below are the instructions to test the app manually: 
+
+> 💡**Note:** These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
+
+###Launch and shutdown
+
+####Initial launch
+
+1. Ensure that `Java 11` is installed on your computer.
+2. Download the jar file from [here](https://github.com/AY2122S1-CS2113T-W12-3/tp/) and copy it into an empty folder.
+3. Open up a new terminal within this folder and enter the following command: `java -jar SLAM.jar`.
+4. The program should detect that this is the first time the program is being run from the lack of save data detected.
+5. Terminate the program using `bye` and you should see a new directory created called `data` that contains a `slamData.txt` file.
+
+#####Managing members
+
+Adding members can be achieved through the use of the `add` command.
+
+- **Test case:** `add -m John Doe`
+- **Expected:**
+
+```
+Member added: JOHN DOE
+```
+
+SLAM does not allow member names with numbers in them. However, certain non-alphabet characters are allowed.
+
+- **Test case:** `add -m John Doe`
+- **Expected:**
+
+```
+Member added: JANE TAN JR.
+```
+
+Deleting members can be achieved with the use of the `delete` command.
+
+- **Test case:** `delete -m JANE TAN JR.`
+- **Prerequisite:** `JANE TAN JR.` is in the member roster.
+- **Expected:** 
+
+```
+This member has been removed: JANE TAN JR.
+```
+
+Other incorrect member deletion commands to try are: 
+
+- **Test case:** `delete -m Jimmy Tan`
+- **Prerequisite:** `Jimmy Tan` is not in the roster.
+- **Expected:**
+
+```
+No matching names found!
+```
+
+- **Test case:** `delete John Doe` 
+- **Expected:** 
+
+```
+Please indicate a flag:
+-e for Event
+-t for Task
+-m for Member
+```
+
+#####Managing events
+
+Adding events can be achieved through the use of the `add` command. 
+
+- **Test case:** `add -e n/Tembusu Concert d/19-02-2022 2000 v/MPH b/1000`
+- **Expected:** Program will prompt for an optional description for the event to be entered. after optional description has been entered. Event will be successfully added.
+
+```
+Event added: Tembusu Concert
+Total number of events = 1
+```
+
+Below are a list of additional test cases for incorrect input regarding event addition to try and their expected results: 
+
+- **Test case:** `add -e`
+  - **Expected:** No event is added. Error details shown in the message printed on the CLI.
+- **Test case:** `add -e asdf asdf`
+   - **Expected:** No event is added. Error details regarding a missing field will is printed on the CLI.
+
+Deleting events can be achieved through the use of the `delete` command. 
+
+- **Test Case:** `delete -e 1`
+- **Prerequisite:** There is at least one event in the catalog. 
+- **Expected:** The first event (at index 0) within the catalog is deleted.
+
+```
+This event has been removed: Tembusu Concert
+```
+
+Below are a list of additional test cases for incorrect input regarding event deletion to try and their expected results:
+
+- **Test case:** `delete -e 1` when there are 0 events in the catalog.
+  - **Expected:** No event is deleted. Error details shown in the message printed on the CLI.
+- **Test case:** `delete -e`
+  - **Expected:** No event is deleted. Error details shown in the message printed on the CLI.
+
+The attributes of an event can be updated using the `update` command. 
+
+- **Test case:** `update 1` followed by `n/New Title`
+- **Prerequisite:** There is at least one event in the catalog.
+- **Expected:** The first event (at index 0) within the catalog is updated with a new title called `New Title`.
+
+Other attributes within the event can also be updated through the instructions printed on the CLI when using the `update` command. 
+
+Below are a list of additional test cases for incorrect input regarding the updating of events: 
+
+- **Test case:** `update 2` when there is only 1 event in the catalog.
+   - **Expected:** Non-existent event cannot be updated. Error details shown in the message printed on the CLI.
+- **Test case:** `update asdf`
+   - **Expected:** No event is updated. Error details shown in the message printed on the CLI.
+- **Test case:** `update 1` followed by `n/` when there is at least one event in the catalog.
+   - **Expected:** Event 1 is not updated as a new title is not provided. Error details shown in the message printed on the CLI.
+
+Viewing the next chronological event can be achieved through the `next` command. 
+
+- **Test case:** `next -e`
+- **Prerequisite:** At least 1 event is in the catalog.
+- **Expected:** A calendar view of the date of the next event, along with some of its details will be printed on the CLI. 
+
+A test case for incorrect input regarding the viewing of the next event will be as such: 
+
+- **Test case:** `next -e`
+- **Prerequisite:** No event is in the catalog.
+- **Expected:** No next event is displayed. Error details shown in the message printed on the CLI.
+
+To list all the events in the catalog, the `list` command can be used.
+
+- **Test case:** `list -e`
+- **Prerequisite:** At least 1 event is in the catalog.
+- **Expected:** A list of all the events in the catalog will be printed out with their respective indexes. The list of events will be sorted in chronological order.
+
+A test case for incorrect input regarding the viewing of the next event will be as such:
+
+- **Test case:** `list -e`
+- **Prerequisite:** No event is in the catalog.
+- **Expected:** An empty list of events will be displayed.
+
+An event can be selected using the `select` command.
+
+- **Test Case:** `select 1`
+- **Prerequisite:** There is at least one event in the catalog.
+- **Expected:** The first event (at index 0) within the catalog is selected and more details about it will be printed out on the CLI.
+
+A test case for incorrect input regarding the selection of the event will be as such: 
+
+- **Test case:** `select -e 1`
+- **Prerequisite:** No event is in the catalog.
+- **Expected:** No event will be selected. Error details shown in the message printed on the CLI.
+
+An event within the catalog can be found via it's `title` using the `find` command. 
+
+- **Test case:** `find -e Tembusu c`
+- **Prerequisite:** 
+  - There are three events in total in the event catalog.
+  - The first event has the title `Tembusu Concert` in the event catalog.
+  - The second event has a title that does not contain the search query e.g. `Festival`. 
+  - The third event has the title `Tembusu Camp` in the event catalog.
+- **Expected:** Search results for both events with their respective indexes in the catalog will be returned and printed out on the CLI.
+
+```
+Here are the events found:
+1. Tembusu Concert
+3. Tembusu Camp
+```
+
+Events can be marked as done
+
+#####Managing tasks
+
+
+####Saving data 
+
+As much as SLAM strongly discourages users from modifying save data directly, should lines within the save data be modified in a manner that invalidates the data saved in that line, starting up the program with such corrupted data should produce an exception message with feedback on the line in `slamData.txt` causing the issue. 
+
+Should this be the case, to avoid SLAM overwriting data after the corrupted lines, the tester can forcefully terminate the program using `ctrl + c` and fix corrupted line the save file. 
