@@ -50,7 +50,7 @@ public class CurrencyManager {
 
     /**
      * Updates currency type to new currency.
-     * @param currency
+     * @param currency tracks currency type of entries
      */
     public void setCurrency(CurrencyType currency) {
         this.currency = currency;
@@ -66,7 +66,7 @@ public class CurrencyManager {
     }
 
     /**
-     * Returns exchange rate of given currency type
+     * Returns exchange rate of given currency type.
      * @param to new currency type that user wishes to convert to
      * @return exchangeRate
      */
@@ -75,14 +75,14 @@ public class CurrencyManager {
         case RMB:
             return exchangeRate = 5.00;
         case SGD:
-            return exchangeRate = (1.00/5.00);
+            return exchangeRate = (1.00 / 5.00);
         default:
             return 0;
         }
     }
 
     /**
-     * Checks if given currency type is equal to SGD
+     * Checks if given currency type is equal to SGD.
      * @param from base currency type
      * @return false if equals SGD
      */
@@ -91,7 +91,7 @@ public class CurrencyManager {
     }
 
     /**
-     * Converts all entry objects values into equivalent value in new currency type
+     * Converts all entry objects values into equivalent value in new currency type.
      * @param entries income and expense objects stored in FinancialTracker
      * @param from base currency type
      * @param to new currency type that user wishes to convert to
@@ -106,7 +106,7 @@ public class CurrencyManager {
     }
 
     /**
-     * Converts all budget objects values into equivalent value in new currency type
+     * Converts all budget objects values into equivalent value in new currency type.
      * @param budgets budget objects stored in BudgetManager
      * @param from base currency type
      * @param to new currency type that user wishes to convert to
@@ -120,7 +120,7 @@ public class CurrencyManager {
     }
 
     /**
-     * Returns new values of entries after multiplying with correct exchangeRate
+     * Returns new values of entries after multiplying with correct exchangeRate.
      * @param from base currency type
      * @param to new currency type that user wishes to convert to
      * @param value value of object being parsed

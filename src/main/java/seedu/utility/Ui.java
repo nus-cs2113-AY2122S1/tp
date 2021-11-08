@@ -404,8 +404,7 @@ public class Ui {
 
     /**
      * Prints confirmation message upon successful conversion of entries.
-     *
-     * @param currency
+     * @param currency tracks currency type of entries
      */
     public void printCurrencyChangedConfirmation(CurrencyType currency) {
         printLine();
@@ -416,8 +415,7 @@ public class Ui {
 
     /**
      * Prints error message if trying to convert again to the same currency type.
-     *
-     * @param currency
+     * @param currency tracks currency type of entries
      */
     public void printSameCurrencyTypeMessage(CurrencyType currency) {
         printLine();
@@ -427,8 +425,7 @@ public class Ui {
 
     /**
      * Prints the current currency type of all entries.
-     *
-     * @param currency
+     * @param currency tracks currency type of entries
      */
     public void printCurrentCurrency(CurrencyType currency) {
         printLine();
@@ -438,8 +435,7 @@ public class Ui {
 
     /**
      * Prints out list of available currency conversions.
-     *
-     * @param currencyTypes
+     * @param currencyTypes enum of all allowed currency types
      */
     public void printCurrencyTypes(ArrayList<CurrencyType> currencyTypes) {
         printLine();
