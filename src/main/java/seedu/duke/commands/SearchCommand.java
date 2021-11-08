@@ -31,9 +31,11 @@ import static seedu.duke.common.Messages.KEY_TITLE;
 
 //@@author silinche
 /**
- * Command that lists out all items that matches the search criteria.
- * For searching by ID and STATUS, the keyword must be exactly the same.
- * For searching by TITLE, the keyword can be part of the actual title.
+ * Command that lists out all items that matches the search criteria to a certain extent.
+ * For searching by ID, the keyword must be exactly the same.
+ * For searching by category, the keyword must be exactly one of BOOK/AUDIO/VIDEO/MAGAZINE/MISC, case insensitive.
+ * For searching by status, the keyword must be exactly one of LOANED/AVAILABLE/RESERVED, case insensitive.
+ * For searching by TITLE, the keyword can be part of the actual title, case insensitive.
  */
 public class SearchCommand extends Command {
     public static final String COMMAND_WORD = "search";
@@ -74,7 +76,7 @@ public class SearchCommand extends Command {
 
     /**
      * Checks whether there is at least one valid argument.
-     * @return True if there is at least one valid argument.
+     * @return Boolean True if there is at least one valid argument.
      */
     public Boolean checkValidArgs() {
         for (Map.Entry<String, String> entry : args.entrySet()) {
@@ -90,8 +92,8 @@ public class SearchCommand extends Command {
     }
 
     /**
-     * Checks whether there are additional arguments other than the four supported.
-     * @return True if there are arguements not supported
+     * Checks whether there are additional arguments other than the four types of arguments supported.
+     * @return Boolean True if there are arguements not supported
      */
     public Boolean checkAdditionalArgs() {
         for (Map.Entry<String, String> entry : args.entrySet()) {
@@ -108,7 +110,7 @@ public class SearchCommand extends Command {
 
     /**
      * Checks whether the status given is valid.
-     * @return True if status is one of the enum in Status class
+     * @return Boolean True if status is one of the enum in Status class
      */
     public Boolean checkValidStatus() {
         for (Map.Entry<String, String> entry : args.entrySet()) {
@@ -128,8 +130,8 @@ public class SearchCommand extends Command {
     }
 
     /**
-     * Checks whether the status given is valid.
-     * @return True if status is one of the enum in Status class
+     * Checks whether the category given is valid.
+     * @return Boolean True if category is one of the BOOK/AUDIO/VIDEO/MAGAZINE/MISC cases supported
      */
     public Boolean checkValidCategory() {
         for (Map.Entry<String, String> entry : args.entrySet()) {
@@ -148,6 +150,12 @@ public class SearchCommand extends Command {
         return true;
     }
 
+    /**
+     * Checks the number of matches each item has with the arguments give by the search command.
+     * The minimal value of matches is zero, the maximal value is four.
+     * @param temp Item object that is being checked
+     * @return Integer The number of matches the Item object has
+     */
     public Integer checkMatches(Item temp) {
         Integer matches = 0;
         for (Map.Entry<String, String> entry : this.args.entrySet()) {
@@ -199,6 +207,12 @@ public class SearchCommand extends Command {
         return matches;
     }
 
+    /**
+     * Processes <b>search</b> Command, including handle exceptions.
+     * @param ui Object that handles user IO
+     * @param catalogue Object that encapsulates the library catalogue
+     * @throws LibmgrException when user input is invalid
+     */
     public void handlesSearchCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
         if (!checkValidArgs()) {
             throw new LibmgrException(SEARCH_FORMAT_INCORRECT);
@@ -252,7 +266,6 @@ public class SearchCommand extends Command {
      * Executes search command.
      * Checks for missing and/or additional arguments first, before trying to handle search command.
      * Overrides method from parent class.
-     *
      * @param ui Object that handles user IO
      * @param catalogue Object that encapsulates the library catalogue
      */
