@@ -6,7 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-//@@author Uxinnn
+//@@author conradwee
 public class ExitCommand extends Command {
     private static final Logger logger = Logger.getLogger(ExitCommand.class.getName());
 

@@ -46,12 +46,14 @@ public class Ui {
         System.out.println(errorMessage);
     }
 
+    //@@author conradwee
     public void printTrip(Trip trip) {
         assert !trip.getTripName().equals("all") : "'all' is an invalid tripName.";
         assert !trip.getTripName().equals("") : "'' is an invalid tripName.";
         System.out.println(trip);
     }
 
+    //@@author
     public void printAllTrips(TripsList tripsList) throws TravellerException {
         assert tripsList.getSize() > 0 : "There are no trips in the tripsList.";
         System.out.println("\tHere are all your trips: ");
@@ -124,7 +126,7 @@ public class Ui {
         }
     }
 
-
+    //@@author conradwee
     public void printAddDayToTrip(String tripName, int numberOfDays) {
         assert numberOfDays >= 0 : "Number of days is negative.";
         assert !tripName.equals("all") : "'all' is an invalid tripName.";
@@ -132,6 +134,7 @@ public class Ui {
         System.out.println("\tAdded " + numberOfDays + " days to trip " + tripName + ".");
     }
 
+    //@@author
     public void printAddItemToDay(String tripName, int dayIndex) {
         assert dayIndex >= 0 : "Number of days is negative.";
         assert !tripName.equals("all") : "'all' is an invalid tripName.";
@@ -147,6 +150,7 @@ public class Ui {
         System.out.println("\tNow saving all your trips.");
     }
 
+    //@@author conradwee
     public void printHelp() {
         System.out.println("\tSome of our basic commands are:\n"
                 + "\tnew FamilyTrip2021 /from SIN /to MLY : "

@@ -5,7 +5,7 @@ import seedu.traveller.Ui;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+//@@author conradwee
 public class HelpCommand extends Command {
     private static final Logger logger = Logger.getLogger(HelpCommand.class.getName());
 
