@@ -113,7 +113,7 @@ create /[location] /[date] /[foreign-currency] /[exchange-rate] /[persons-in-tri
 All fields are compulsory. Note the following:
 - `[location]` is the location of the trip. Any string can be entered.
 - `[date]` must follow the format of dd-mm-yyyy.
-- `[foriegn-currency]`: is the 3-digit ISO code of the foreign currency (e.g USD, GBP). Currently there are 30 currencies supported, the currencies' names and ISO codes are listed below.
+- `[foriegn-currency]` is the 3-digit ISO code of the foreign currency (e.g USD, GBP). Currently there are 30 currencies supported, the currencies' names and ISO codes are listed below.
   - Some currencies will not have symbols as some terminals may not be able to support displaying of certain symbols.
   - Supported currencies will be rounded to either 2 decimal places or to the nearest whole number, 
   depending on the currency's smallest denomination.
