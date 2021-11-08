@@ -38,6 +38,13 @@ public enum DayOfTheWeek {
         return false;
     }
 
+    /**
+     * Converts input string to proper day of the week format.
+     *
+     * @param param the input string
+     * @return proper day of the week
+     * @throws DayOfTheWeekException if input string is not a valid day of the week
+     */
     public static String toProper(String param) throws DayOfTheWeekException {
         if (!is(param)) {
             throw new DayOfTheWeekException(Message.ERROR_INVALID_DAY);
