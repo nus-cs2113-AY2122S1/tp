@@ -76,11 +76,11 @@ lessons in your daily schedule and your total workload:
 
 > :information_source: **Notes about the command formats**
 > - Words in `<UPPER_CASE>` are the parameters to be given by the user. <br />
-    > e.g. in `show <MODULE_CODE>`, <MODULE_CODE> is a parameter and be called like so : `show CS2113T`
+    > e.g. in `show <MODULE_CODE>`, <MODULE_CODE> is a parameter and be called like so : `show CS2113T`.
     <br /><br />
 > - Items in square brackets are optional <br />
-    > e.g. find `search <KEYWORD> [-l]`
-    > can be called as `search GEH` OR `search GEH -l`.
+    > e.g. find `search <KEYWORD> [-flag]`
+    > can be called as `search GEH` OR `search GEH -q`.
     <br /><br />
 > - Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `bye`) will be ignored.<br />
     > e.g. `help abc` will be interpreted as  `help`
@@ -122,13 +122,13 @@ ________________________________________________________________________________
 
 ```
 
-To begin, perhaps try looking up CS2113T by using the [show Command](#display-module-info-show-module_code)
+To begin, perhaps try looking up CS2113T by using the [show command](#display-module-info-show-module_code).
 
 <br>
 
 ## Display Module Info: `show <MODULE_CODE>`
 
-If you want to find out more about a module, type `show <module_code>` to display the following:
+If you want to find out more about a module, type `show <MODULE_CODE>` to display the following:
 
 * Name
 * MCs
@@ -137,6 +137,7 @@ If you want to find out more about a module, type `show <module_code>` to displa
 * Prerequisites
 * S/U option Availability
 * Semester Availability
+* Exam Date(s)
 
 For example, try typing `show CS2113T` and see the magic happen!
 
@@ -171,7 +172,7 @@ Exam Date(s): Sem 1: Tue Nov 30 09:00 AM - 11:00 AM
 
 <br>
 
-## Search Module: `search <KEYWORD> [-l]`
+## Search Module: `search <KEYWORD> [-flag]`
 
 Maybe you don't know what modules are out there, and want to know what GEH modules are available.
 
@@ -196,16 +197,17 @@ If you wish to cancel your search, hit `ENTER`.
 
 You can also apply the following flags to refine the search:
 
-- **-l (small L) :** search for mods matching the level specified e.g `-l 3000`
-- **-mc :** search for mods matching the number of MCs specified e.g `-mc 4`
-- **-s :** search for mods offered in the semester e.g. `-s 2`
+- **-q :** performs a local search using locally saved module data which might not be the most updated version, but is
+  very quick e.g. `-q`. Note that local search cannot be cancelled.
+- **-l (small L) :** search for mods matching the level specified e.g. `-l 3000`. 
+- **-mc :** search for mods matching the number of MCs specified e.g. `-mc 4`.
+- **-s :** search for mods offered in the semester e.g. `-s 2`.
   <br>:information_source: 3 & 4 refer to Special Terms 1 and 2 respectively.
 - **-e :** search for mods that have/do not have exams. Specify with true/false e.g `-e false`.
   <br>:information_source: Defaults to false if input is invalid.
-- **-f :** search for mods from a faculty e.g `-f Computing`. Checks if faculty contains keyword.
-- **-d :** search for mods from a department `-d Computer Science`. Checks if faculty contains keyword.
-- **-q :** performs a local search using locally saved module data which might not be the most updated version, but is
-  very quick e.g. `-q`. Note that local search cannot be cancelled.
+- **-f :** search for mods from a faculty e.g. `-f Computing`. Checks if faculty contains keyword.
+- **-d :** search for mods from a department e.g. `-d Computer Science`. Checks if faculty contains keyword.
+
 
 :information_source: Command, search term and flag regex are case-insensitive.
 
@@ -304,9 +306,9 @@ For example:
 If all lesson types have been successfully added, program will print out
 
 ```shell
-Lessons for all modules have been successfully added
+Module and any selected lesson(s) has been added to timetable
 ```
-
+`NOTE:` Modules that contains no lessons will likewise be added into list of modules taken this semester
 <br></br>
 
 ### Add an Event to timetable
@@ -335,11 +337,13 @@ Date of Event (E.g. Monday): Monday
 Starting time of Event (E.g. 1600): 2000
 Ending time of Event (E.g. 1800): 2100
 Location of Event (Optional): Discord
-Alright!! Event: Team Meeting CS2113T on Monday, from 2000 to 2100 at Team Meeting CS2113T has been added to your timetable
+Alright!! Event: Team Meeting CS2113T on Monday, from 2000 to 2100 at Discord has been added to your timetable
 ```
+`NOTE:` All events will occur within will fit within an hourly timeframe, you are not able to add start and end timing
+with minutes. E.g. 1034
 
 
-If the selected timeslot is already occupied, the program will let you know and the event will not be added until the timeslot
+`NOTE:` If the selected timeslot is already occupied, the program will let you know and the event will not be added until the timeslot
 has been freed up.
 
 <br>
@@ -675,7 +679,7 @@ and is very similar to just running `update`.
 | Command                         | Meaning                                                                                            |
 | --------------                  | ----------                                                                                         |
 | `help`                          | Shows available commands and flags. <br> Example: `help`                                           |
-| `search <KEYWORD> [-l]`         | Lists modules that have partial matches by regex to the keyword. <br> Example: `search GEH -l 1000`|
+| `search <KEYWORD> [-flag]`      | Lists modules that have partial matches by regex to the keyword. <br> Example: `search GEH -q`     |
 | `show <MODULE_CODE>`            | Display relevant module information. <br> Example: `show CS2113T`                                  |
 | `update`                        | Fetches all mods from the API to a local save. <br> Example: `update`                              |
 | `add`                           | Adds modules or events to the timetable. <br> Example: `add`                                       |

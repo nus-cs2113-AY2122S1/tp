@@ -1,0 +1,71 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+skinparam rectangle {
+        BackgroundColor<<PLACEHOLDER>> transparent
+        BorderThickness<<PLACEHOLDER>> .1
+        BorderColor<<PLACEHOLDER>> transparent
+              FontColor<<PLACEHOLDER>> transparent
+               FontSize<<PLACEHOLDER>> 0
+    StereotypeFontColor<<PLACEHOLDER>> transparent
+     StereotypeFontSize<<PLACEHOLDER>> 0
+Shadowing<<PLACEHOLDER>> false
+}
+
+rectangle a <<PLACEHOLDER>> {
+}
+
+
+frame Application {
+
+    frame [Timetable] TIMETABLE_COLOR {
+    }
+
+    frame [UniMods] UNIMODS_COLOR {
+    }
+
+    frame [Logic] LOGIC_COLOR {
+    }
+
+    frame [Storage] STORAGE_COLOR {
+    }
+
+    frame [Online] ONLINE_COLOR {
+    }
+
+    frame [UI] UI_COLOR {
+    }
+
+    frame [Commons] COMMONS_COLOR {
+    }
+
+    UniMods --> Logic
+    UniMods --> Storage
+    UniMods --> UI
+    Logic --> UI
+    Logic --> Online
+    Logic --> Timetable
+    Online --> Storage
+    Online --> UI
+    Online -[hidden]left- Timetable
+    Timetable -[hidden]down- Storage
+    Storage -[hidden]left- UI
+    Storage --> UI
+    Storage --> Timetable
+    Timetable --> UI
+    Storage --> localdata
+    Storage -[hidden]right- localdata
+    Online --> internet
+    Online -[hidden]right- internet
+}
+
+rectangle "<$media_flash{scale=0.5}>" as localdata {
+}
+
+rectangle "<$network{scale=0.5}>" as internet {
+}
+
+internet -[hidden]down- localdata
+
+@enduml

@@ -26,28 +26,29 @@ Component [TranscriptUI] UI_COLOR
 
 [Logic] --> [AddUI]
 [Timetable] --> [TimetableUI]
+[UniMods] --> [TextUI]
 [Logic] --> [TranscriptUI]
 [Logic] --> [TextUI]
 [Storage] --> [TextUI]
 [Online] --> [TextUI]
 
-[TextUI] -[hidden]down- [AddUI]
-[AddUI] -[hidden]down- [TranscriptUI]
+[TextUI] -[hidden]right- [Online]
+
 }
 
-frame Timetable {
+frame [Timetable] TIMETABLE_COLOR {
 }
 
-frame UI {
+frame [UniMods] UNIMODS_COLOR {
 }
 
-frame Logic {
+frame [Logic] LOGIC_COLOR {
 }
 
-frame Storage {
+frame [Storage] STORAGE_COLOR {
 }
 
-frame Online {
+frame [Online] ONLINE_COLOR {
 }
 
 @enduml

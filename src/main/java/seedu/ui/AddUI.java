@@ -1,11 +1,11 @@
 package seedu.ui;
 
 import seedu.exceptions.IntegerException;
+import seedu.exceptions.UniModsException;
 import seedu.module.Lesson;
 import seedu.module.Module;
 import seedu.timetable.Timetable;
 import seedu.timetable.TimetableUserItem;
-import seedu.logger.TimetableLogger;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,7 +15,6 @@ import java.util.logging.Logger;
 public class AddUI {
 
     private static final String FIXED_LENGTH_FORMAT = "%-56.56s";
-    private static final String FIXED_TIME_FORMAT = "%04d";
     private static final String SMALL_GAP = "%14s";
     private static final String FIXED_FORMAT = "%93.93s";
     private static final String LECTURE = "Lecture";
@@ -27,7 +26,6 @@ public class AddUI {
     private static final int BALANCE_ARRAY = 1;
     private static final int SERIAL_STARTING = 1;
     private static final int ZERO = 0;
-    private static final int TIME = 100;
     private static final String RUN = "Run";
     private static final String EXIT = "Exit";
     private static final String LINE = "_________________________________________________   |   ";
@@ -53,7 +51,7 @@ public class AddUI {
      * @param module    the chosen module by the user
      */
     public void printLessonDetails(ArrayList<Lesson> lec, ArrayList<Lesson> tt, ArrayList<Lesson> lab,
-                                   Timetable timetable, Module module) {
+                                   Timetable timetable, Module module) throws UniModsException {
         ArrayList<String> lectureLessons;
         ArrayList<String> tutorialLessons;
         ArrayList<String> labLessons;
@@ -70,7 +68,13 @@ public class AddUI {
             TextUi.printLessonAdded();
         } catch (IntegerException e) {
             e.printMessage();
+            timetable.removeFromSchedules(module.getModuleCode());
+            timetable.deleteModuleFromList(module.getModuleCode());
             logger.log(Level.WARNING, "Invalid Lesson Selection, Add Module aborted");
+        } finally {
+            if (!isArrayExist(lec, ZERO) && !isArrayExist(tt, ZERO) && !isArrayExist(lab, ZERO)) {
+                timetable.addModuleToList(module);
+            }
         }
     }
 
@@ -270,16 +274,7 @@ public class AddUI {
      * @param event The event that is to be printed
      */
     public void printEventMessage(TimetableUserItem event) {
-        String startTime = String.format(FIXED_TIME_FORMAT, event.getStartHour() * TIME);
-        String endTime = String.format(FIXED_TIME_FORMAT, event.getEndHour() * TIME);
-
-        String output = "Alright!! Event: " + event.getTitle() + " on " + event.getDay() + ", from "
-                + startTime + " to " + endTime;
-        if (event.isDescription()) {
-            output = output.concat(" at " + event.getDescription());
-        }
-        output = output.concat(" has been added to your timetable");
-        System.out.println(output);
+        System.out.println(event.toString());
     }
 
     public String getModuleCode() {
@@ -300,6 +295,9 @@ public class AddUI {
      */
     public Lesson lessonEqualizer(ArrayList<Lesson> lessons, int index) {
         int tally = 0;
+        if (index == 0) {
+            return lessons.get(index);
+        }
         for (int i = 1; lessons.size() > i; i++) {
             Lesson prev = lessons.get(i - BALANCE_ARRAY);
             Lesson curr = lessons.get(i);
@@ -325,35 +323,49 @@ public class AddUI {
                 throw e;
             }
             int indexOfLesson = Integer.parseInt(select) - BALANCE_ARRAY;
+
             Lesson selectedLesson = lessonEqualizer(lessons, indexOfLesson);
             classNumber = selectedLesson.getClassNo();
-            flag = checkFlag(timetable, selectedLesson);
+            ArrayList<Lesson> selectedLessons = getSelectedLessons(lessons, classNumber);
+            flag = checkFlag(timetable, selectedLessons);
         }
         addLessonToTimetable(lessons, timetable, module, classNumber);
+    }
+
+    private ArrayList<Lesson> getSelectedLessons(ArrayList<Lesson> lessons, String classNumber) {
+        ArrayList<Lesson> completeList;
+        completeList = new ArrayList<>();
+        for (Lesson lesson : lessons) {
+            if (lesson.getClassNo().equals(classNumber)) {
+                completeList.add(lesson);
+            }
+        }
+        return completeList;
     }
 
     /**
      * Function checks for user response when a conflict occurs when
      * trying to add a lesson into timetable.
      * @param timetable the user's timetable
-     * @param lesson the lesson to be added into the timetable
+     * @param lessons the list of lessons to be added into the timetable
      * @return the flag to determine whether user input is required again
      */
-    public String checkFlag(Timetable timetable, Lesson lesson) {
-        if (timetable.isConflict(lesson)) {
-            String choice = TextUi.printAskConfirmation(lesson);
-            if (choice.equals("y") || choice.equals("yes")) {
-                return EXIT;
-            } else if (choice.equals("n") || choice.equals("no")) {
-                System.out.println("Alright, returning to lesson selection");
-                return RUN;
-            } else {
-                System.out.println("Invalid Command, Try Again");
-                return RUN;
+    public String checkFlag(Timetable timetable, ArrayList<Lesson> lessons) {
+        for (Lesson lesson : lessons) {
+            if (timetable.isConflict(lesson)) {
+                String choice = TextUi.printAskConfirmation(lesson);
+                if (choice.equals("y") || choice.equals("yes")) {
+                    return EXIT;
+                } else if (choice.equals("n") || choice.equals("no")) {
+                    System.out.println("Alright, returning to lesson selection");
+                    return RUN;
+                } else {
+                    System.out.println("Invalid Command, Try Again");
+                    return RUN;
+                }
             }
-        } else {
-            return EXIT;
         }
+        return EXIT;
     }
 
     /**
@@ -366,10 +378,25 @@ public class AddUI {
         try {
             int indexOfLesson = Integer.parseInt(select) - BALANCE_ARRAY;
             Lesson test = lessons.get(indexOfLesson);
+            numberOfUniqueClassNumber(lessons, indexOfLesson);
         } catch (NumberFormatException e) {
             throw new IntegerException("Input is not an integer, try adding the module again");
         } catch (IndexOutOfBoundsException e) {
-            throw new IntegerException("Input is out of range, try adding the module");
+            throw new IntegerException("Input is out of range, try adding the module again");
+        }
+    }
+
+    public void numberOfUniqueClassNumber(ArrayList<Lesson> lessons, int select) throws IndexOutOfBoundsException {
+        int result = 1;
+        for (int i = 1; lessons.size() > i; i++) {
+            Lesson curr = lessons.get(i);
+            Lesson prev = lessons.get(i - BALANCE_ARRAY);
+            if (!curr.getClassNo().equals(prev.getClassNo())) {
+                result++;
+            }
+        }
+        if (result < select + BALANCE_ARRAY) {
+            throw new IndexOutOfBoundsException("Input is out of range, try adding the module again");
         }
     }
 }

@@ -1,12 +1,7 @@
 package seedu.timetable;
 
-import seedu.ui.TimetableUI.LineType;
-
-import java.time.DayOfWeek;
-import java.util.ArrayList;
-
 public class TimetableUserItem extends TimetableItem {
-
+    private static final int TIME = 100;
 
     private final String day;
 
@@ -41,8 +36,8 @@ public class TimetableUserItem extends TimetableItem {
         return getTitle();
     }
 
-    public boolean isDescription() {
-        return getTitle().length() > 0;
+    public boolean isLocation() {
+        return getLocation().length() > 0;
     }
 
     public String getStartTime() {
@@ -59,13 +54,16 @@ public class TimetableUserItem extends TimetableItem {
 
     @Override
     public String toString() {
-        String output = "Event: " + getTitle() + " on " + getDay() + ", from " + startTime + " to "
-                + endTime;
-        if (isDescription()) {
-            output = output.concat(" at " + getDescription());
+        String output = "Alright!! Event: " + getTitle() + " on " + getDay() + ", from "
+                + getStartTime() + " to " + getEndTime();
+        if (isLocation()) {
+            output = output.concat(" at " + getLocation());
         }
+        output = output.concat(" has been added to your timetable");
         return output;
     }
 
-
+    public String getLocation() {
+        return venue;
+    }
 }

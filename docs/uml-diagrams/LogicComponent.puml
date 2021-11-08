@@ -51,13 +51,13 @@ a-->[CommandParser] : User Input
 
 
 
-frame Timetable {
+frame [Timetable] TIMETABLE_COLOR {
 }
 
-frame UI {
+frame [Online] ONLINE_COLOR {
 }
 
-frame Online {
+frame [UI] UI_COLOR {
 }
 
 Timetable <- [AddCommand]

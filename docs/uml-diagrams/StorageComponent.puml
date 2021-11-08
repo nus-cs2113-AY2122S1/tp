@@ -27,17 +27,22 @@ Component [TimetableStorage] STORAGE_COLOR
 [TimetableStorage] --> UI
 [ModStorage] --> UI
 Online --> [ModStorage]
+UniMods --> [ProfileStorage]
+UniMods --> [TimetableStorage]
 
 [ModStorage] -[hidden]down- [TimetableStorage]
 }
 
-frame Timetable {
+frame [Timetable] TIMETABLE_COLOR {
 }
 
-frame UI {
+frame [UniMods] UNIMODS_COLOR {
 }
 
-frame Online {
+frame [Online] ONLINE_COLOR {
+}
+
+frame [UI] UI_COLOR {
 }
 
 @enduml

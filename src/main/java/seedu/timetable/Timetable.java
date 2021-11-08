@@ -24,6 +24,9 @@ import java.util.logging.Level;
  */
 public class Timetable implements Comparable<Timetable> {
 
+    private static final int HOUR = 100;
+    private static final int TIME_LIMIT = 23;
+    private static final int ONE = 1;
     private static final int DEFAULT_START = 9;
     private static final int DEFAULT_END = 16;
     private static final int ZERO = 0;
@@ -38,7 +41,6 @@ public class Timetable implements Comparable<Timetable> {
     private final ArrayList<Module> modules;
     private final PriorityQueue<Integer> earliestHours; //Min heap
     private final PriorityQueue<Integer> latestHours;
-
 
     private final TimetableLogger logger = new TimetableLogger();
 
@@ -140,6 +142,11 @@ public class Timetable implements Comparable<Timetable> {
         addItemToSchedule(item, schedules.get(day));
     }
 
+    public void addEvent(DayOfWeek day, TimetableUserItem event) {
+        addEventToSchedule(event,schedules.get(day));
+        logger.log(Level.INFO, String.format("%s added to timetable", event.getTitle()));
+    }
+
     public void addLesson(Module module, Integer semester, Lesson lesson) {
         TimetableLesson timetableLesson = new TimetableLesson(module, semester, lesson);
         addItem(timetableLesson.getDayOfWeek(), timetableLesson);
@@ -147,11 +154,6 @@ public class Timetable implements Comparable<Timetable> {
 
         logger.log(Level.INFO, String.format("%s added to timetable",
                 timetableLesson.getTitle() + ", " + timetableLesson.getLessonType()));
-    }
-
-    public void addEvent(DayOfWeek date, TimetableUserItem timetableUserItem) {
-        addItem(date, timetableUserItem);
-        logger.log(Level.INFO, String.format("%s added to timetable", timetableUserItem.getTitle()));
     }
 
     /**
@@ -195,6 +197,44 @@ public class Timetable implements Comparable<Timetable> {
         }
         adjustStartAndEndHours();
         isEmpty = false;
+    }
+
+    /**
+     * Adds a timetable event to a specific day schedule.
+     *
+     * @param timetableUserItem Event to be added to a day's schedule
+     * @param schedule      Day's schedule (i.e monday/tuesday/.. etc) to add the
+     *                      lesson to
+     */
+    private void addEventToSchedule(TimetableUserItem timetableUserItem, TimetableItem[] schedule) {
+        int start = Integer.parseInt(timetableUserItem.getStartTime());
+        int end = Integer.parseInt(timetableUserItem.getEndTime());
+        start /= HOUR;
+        end /= HOUR;
+        end = endTimeEqualizer(end);
+        for (int i = start; i <= end; i++) {
+            schedule[i] = timetableUserItem;
+            earliestHours.add(start);
+            latestHours.add(end);
+        }
+        if (end == TIME_LIMIT) {
+            latestHours.add(end + ONE);
+        }
+        adjustStartAndEndHours();
+        isEmpty = false;
+    }
+
+    /**
+     * Function is used to find the true end time of an event in order to account for 2400.
+     * @param end the hour in which the event ends
+     * @return the true end time
+     */
+    private int endTimeEqualizer(int end) {
+        int result = end;
+        if (end != TIME_LIMIT) {
+            result--;
+        }
+        return result;
     }
 
     /**
@@ -454,5 +494,15 @@ public class Timetable implements Comparable<Timetable> {
 
     public void addToEvents(TimetableUserItem timetableUserItem) {
         events.add(timetableUserItem);
+    }
+
+    public void removeFromSchedules(String title) {
+        deleteItemFromSchedule(title, monday);
+        deleteItemFromSchedule(title, tuesday);
+        deleteItemFromSchedule(title, wednesday);
+        deleteItemFromSchedule(title, thursday);
+        deleteItemFromSchedule(title, friday);
+        deleteItemFromSchedule(title, saturday);
+        deleteItemFromSchedule(title, sunday);
     }
 }
