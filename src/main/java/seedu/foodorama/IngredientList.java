@@ -432,7 +432,7 @@ public class IngredientList {
             ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
             while (ingredientWeightValue < 0) {
                 UI.clearTerminalAndPrintNewPage();
-                UI.printInvalidIngrWeight(inputIngredientWeight);
+                UI.printInvalidIngrWeight(ingrName);
                 inputIngredientWeight = in.nextLine();
                 if (!isDouble(inputIngredientWeight)) {
                     throw new FoodoramaException(UI.getInvalidNumberMsg());
