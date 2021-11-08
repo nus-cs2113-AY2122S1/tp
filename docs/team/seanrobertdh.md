@@ -51,9 +51,9 @@ Given below are the contributions I have made to this project.
 - **Contributions to the UG**:
     - **Contribution 1:** Added the documentation in "2.1 Viewing help: `help`".
     - **Contribution 2:** Added the documentation in "2.2 Adding your tasks:" + all it's sub-sections.
-    - **Contribution 3:** Added the documentation in "2.7 Editing your tasks: `edit`".
-    - **Contribution 4:** Added the documentation in "2.8 Deleting your tasks: `delete`".
-    - **Contribution 5:** Added the documentation in "2.10 Storage".
+    - **Contribution 3:** Added the documentation in "2.5 Editing your tasks: `edit`".
+    - **Contribution 4:** Added the documentation in "2.7 Deleting your tasks: `delete`".
+    - **Contribution 5:** Added the documentation in "2.9 Storage".
 
 ---
 
