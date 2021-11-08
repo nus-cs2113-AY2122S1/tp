@@ -14,8 +14,10 @@ import seedu.duke.expense.Expense;
 import java.util.ArrayList;
 
 abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummarizer {
+    private static final int EDIT_ATTR_COUNT = 2;
     private static final int ATTRIBUTE_DATA = 1;
     private static final int EDIT_ATTRIBUTE = 0;
+    private static final int EDIT_INDEX = 0;
     private static final String EDIT_LOCATION = "-location";
     private static final String EDIT_DATE = "-date";
     private static final String EDIT_EXRATE = "-exchangerate";
@@ -61,6 +63,9 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
         Storage.setLastTrip(newTrip);
     }
 
+    private static final String USER_CONTINUE = "y";
+    private static final String USER_QUIT = "n";
+
     /**
      * Asks if the user wants to proceed with adding a trip that has been detected as a duplicate.
      *
@@ -71,9 +76,9 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
         Ui.duplicateTripWarning();
         while (true) {
             String userOption = Ui.receiveUserInput();
-            if (userOption.contains("y")) {
+            if (userOption.contains(USER_CONTINUE)) {
                 return true;
-            } else if (userOption.contains("n")) {
+            } else if (userOption.contains(USER_QUIT)) {
                 Ui.printForceCancelled();
                 return false;
             }
@@ -99,6 +104,8 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
         return false;
     }
 
+
+
     /**
      * Gets the trip to be edited and edits the specified attributes of the trip.
      *
@@ -111,17 +118,17 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
      *
      */
     protected static void executeEditTrip(String inputDescription) throws ForceCancelException {
-        String[] tripToEditInfo = inputDescription.split(" ", 2);
-        String attributesToEdit = tripToEditInfo[1];
+        String[] tripToEditInfo = inputDescription.split(" ", EDIT_ATTR_COUNT);
+        String attributesToEdit = tripToEditInfo[ATTRIBUTE_DATA];
         Trip tripToEdit;
-        if (tripToEditInfo[0].equals("last")) {
+        if (tripToEditInfo[EDIT_INDEX].equals("last")) {
             tripToEdit = Storage.getLastTrip();
             if (tripToEdit == null) {
                 Ui.printNoLastTripError();
                 return;
             }
         } else {
-            tripToEdit = editTripWithIndex(tripToEditInfo[0].strip());
+            tripToEdit = editTripWithIndex(tripToEditInfo[EDIT_INDEX].strip());
         }
         editTripPerAttribute(tripToEdit, attributesToEdit);
     }
@@ -374,7 +381,7 @@ abstract class CommandExecutor extends PaymentOptimizer implements ExpenseSummar
      * @throws ForceCancelException allows the user to cancel an operation when an input is required.
      */
     private static void editTripPerAttribute(Trip tripToEdit, String attributeToEdit) throws ForceCancelException {
-        String[] splitCommandAndData = attributeToEdit.split(" ", 2);
+        String[] splitCommandAndData = attributeToEdit.split(" ", EDIT_ATTR_COUNT);
         String data = splitCommandAndData[ATTRIBUTE_DATA];
         switch (splitCommandAndData[EDIT_ATTRIBUTE]) {
         case EDIT_LOCATION:
