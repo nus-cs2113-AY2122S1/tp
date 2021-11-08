@@ -2,7 +2,7 @@ package seedu.duke.parser;
 
 import seedu.duke.exceptions.DukeException;
 
-public class MemberParser {
+public abstract class MemberParser {
 
     private static final String INTER_MEMBER_DELIMITER = " +";
     private static final String NAME_SPACER = "_";

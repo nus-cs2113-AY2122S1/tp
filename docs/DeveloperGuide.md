@@ -43,7 +43,9 @@ section of this guide.
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+1. Software Engineering Education ([SE-EDU](https://se-education.org/))
+   1. [AddressBook (Level 2)](https://github.com/se-edu/addressbook-level2) for providing us with ideas on how to implement a more OOP-oriented project  
+   2. [AddressBook (Level 3)](https://github.com/se-edu/addressbook-level3) for providing us with references on how to better structuer and format our User and Developer Guides
 
 ## Design
 
@@ -231,8 +233,23 @@ and provide Student leaders, with an application to cater to their specific mana
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|Head of a committee|Add events with their dates and timings to my schedule|Keep track of their dates and times|
+|v1.0|Head of a committee|Add tasks with their dates and timings to my schedule|Keep track of their respective deadlines|
+|v1.0|Head or member of a committee|Have an overview of the upcoming events and tasks in chronological order|Plan my schedule and prioritise my time|
+|v1.0|Head of a committee with many events|Find an event by its title|Have a quick glance of the event without having to go through the entire list|
+|v1.0|Head or member of a committee|Save the schedule of tasks and events|Avoid retyping all my events and tasks whenever I start SLAM|
+|v1.0|Head or member of a committee|View the next upcoming event|Know how much time I have to prepare myself for it|
+|v1.0|Head of a committee|Delete events and tasks|Remove events and tasks that I no longer need|
+|v1.0|Head of a committee|Update events and tasks|Edit outdated information regarding these events/tasks with updated ones|
+|v1.0|Head of a committee|Mark events and tasks as done|Keep track of what events and tasks that the committee has completed|
+|v1.0|Head of a committee|Un-mark events and tasks as done|Undo any events and tasks that I might have accidentally marked as done|
+|v2.0|Head of a committee|Add tasks under an event|Keep track of what tasks there are to complete for each specific event|
+|v2.0|Head of a committee|Add members to my roster|Keep track of committee members that I have to work with|
+|v2.0|Head of a committee|Delete members from my roster|Remove members that are no longer part of the committee|
+|v2.0|Head of a committee|Assign members to tasks|Delegate work effectively|
+|v2.0|Head of a committee|View all the tasks assigned to a member|Keep track of that member's workload|
+|v2.0|Head of a committee|View all the members assigned to a task|Determine whether there is enough manpower allocated for the task|
+|v2.0|Head or member of a committee|Have a calendar view of my next event|Have a better sense of when the next event is happening|
 
 ## Non-Functional Requirements
 

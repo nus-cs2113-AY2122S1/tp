@@ -6,8 +6,6 @@ import seedu.duke.commands.ByeCommand;
 
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.Command;
-import seedu.duke.commands.DeleteCommand;
-import seedu.duke.commands.FindCommand;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.parserexceptions.AttributeNotFoundException;
 import seedu.duke.exceptions.parserexceptions.InvalidBudgetException;
@@ -26,10 +24,13 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import java.util.ArrayList;
 
 
 public abstract class Parser {
-    protected static DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+    protected static DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd-MM-uuuu HHmm")
+            .withResolverStyle(ResolverStyle.STRICT);
     protected static DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d MMM yyyy - HH:mm");
     private static int indexOfLastSelectedEvent = -1;
 
@@ -41,12 +42,12 @@ public abstract class Parser {
         // TODO: Once parser is restructured, replace above with following two lines
         String[] command = response.trim().split(" +");
         if (command.length == 1) {
-            String commandType = command[0];
+            String commandType = command[0].toLowerCase();
             return singleWordCommandProtocol(command, commandType);
         } else {
             String[] splitCommandIntoTwo = response.trim().split(" +", 2);
             String commandDetails = splitCommandIntoTwo[1];
-            String commandType = command[0];
+            String commandType = command[0].toLowerCase();
             return multiWordCommandProtocol(response, command, commandDetails, commandType);
         }
     }
@@ -117,21 +118,17 @@ public abstract class Parser {
     }
 
     /**
-     * Gets the combined string of command attributes given user input with the command type (add, delete etc)
-     * filtered off.
+     * Checks whether the user input contains command attributes and throws and exception if it does not.
      *
      * @param commandDetails String containing details of the command
-     * @return The combined string of command attributes e.g. "n/TITLE d/DATE v/VENUE b/BUDGET"
      * @throws NoCommandAttributesException If there is no command attributes detected
      */
-    protected static String getCommandAttributes(String commandDetails) throws NoCommandAttributesException {
+    protected static void checkCommandAttributes(String commandDetails) throws NoCommandAttributesException {
         String[] commandAttributes = (commandDetails.trim().split(" +", 2));
 
         if (commandAttributes.length < 2) {
             throw new NoCommandAttributesException();
         }
-
-        return commandAttributes[1];
     }
 
     // @@author Alvinlj00
@@ -160,9 +157,9 @@ public abstract class Parser {
             throw new AttributeNotFoundException(itemAttribute);
         }
 
-        return result;
+        return result.trim();
     }
-    // @@author
+    // @@author Alvinlj00
 
     public static String convertDateTime(LocalDateTime dateTime) {
         return dateTime.format(formatter2);
@@ -170,7 +167,8 @@ public abstract class Parser {
 
     public static LocalDateTime convertDateTime(String dateTime) throws DukeException {
         try {
-            LocalDateTime result = LocalDateTime.parse(dateTime, formatter1);
+            String formattedDateTimeString = dateTime.trim().replaceAll(" +", " ");
+            LocalDateTime result = LocalDateTime.parse(formattedDateTimeString, formatter1);
             if (result.isBefore(LocalDateTime.now())) {
                 throw new DukeException("Unfortunately, we cannot travel back in time. Please "
                         + "enter a valid date and time in the format 'dd-MM-yyyy HHmm'. ");
@@ -222,18 +220,21 @@ public abstract class Parser {
         return result;
     }
 
-    public static int[] extractInt(String input) throws DukeException {
-        String parsedInput = input.replaceAll("[^\\d]", " ").trim();
+    public static ArrayList<Integer> extractIndexes(String input) throws DukeException {
+        String parsedInput = input.replaceAll(" +", " ").trim();
         if (parsedInput.isBlank()) {
             throw new DukeException("Indexes entered need to be valid numbers. ");
         }
 
         String[] stringIndexes = parsedInput.split(" +");
-        int [] indexes = new int[stringIndexes.length];
+        ArrayList<Integer> indexes = new ArrayList<>();
 
-        for (int i = 0; i < stringIndexes.length; i++) {
+        for (String stringIndex : stringIndexes) {
             // -1 to obtain the real indexes instead of what the user sees
-            indexes[i] = Integer.parseInt(stringIndexes[i]) - 1;
+            Integer currIndex = Integer.parseInt(stringIndex) - 1;
+            if (!indexes.contains(currIndex)) {
+                indexes.add(currIndex);
+            }
         }
         return indexes;
     }
