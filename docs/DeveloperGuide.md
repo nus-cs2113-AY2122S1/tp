@@ -686,7 +686,18 @@ The program uses `Storage` class to import data from the storage file.
   before returning `GoalList` back to `Storage` and back to user.
 
 **Exporting Data**
-1.
+1. The `export(goalList)` method is called, which in turn the `Storage` class calls
+   `exportToStorage(goalList)`. `exportToStorage(goalList)` runs.
+2. The `habit.txt` filed is cleared of previous text with `clearFile()`.
+3. the `writeToFile(goalList)` then rewrites `habit.txt` using data in `goalList`.
+4. The `goalList` is encoded goal by goal. 
+5. In a `goal` all of its attributes are converted to text in a line. They are segregated
+   by a delimiter. The habits are then are encoded habit by habit.
+6. In a `habit` all of its attributes are converted to text in a line. They are segreagated
+   by a delimiter. The intervals are then encoded interval by interval.
+7. In an `interval` all of its attributes are converted to text in a line. They are segregated
+   by a delimiter.
+8. At the end of `writeToFile(goalList)`, all data in `goalList` is stored in `habit.txt`.
 
 The sequence diagram shows how the program exports data to storage file. <br>
 ![Export Sequence Diagram](Diagram_Images/Implementation_Diagram_Images/ExportSequenceDiagram.png) 
