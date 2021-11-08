@@ -123,6 +123,8 @@ is the same as the one used by this guide, which can be found [here](#features).
 
 ### Adding a Task, Lesson or Module - `add`
 
+Adds a task, lesson or module of your choice to your list.
+
 #### Task
 
 A task contains a title, day of the week, a priority, and an information.
@@ -229,6 +231,8 @@ $ add module CG2028
 
 ### Listing Tasks, Lessons or Modules - `list`
 
+Lists out tasks, lessons or modules on your list with an option to sort or filter the list.
+
 #### Task
 
 Format: `list task {PERIOD/PRIORITY}`
@@ -318,6 +322,8 @@ $ list module
 
 ### Marking a Task as done - `done`
 
+Marks a task of your specification as done.
+
 Format: `done task [INDEX]`
 
 * `INDEX` refers to the index of the task. You can view it by executing `list task`.
@@ -360,6 +366,8 @@ $ list task
 > 💡 `[X]` indicates that the task is completed.
 
 ### Deleting Tasks, Lessons or Modules - `delete`
+
+Removes a task, lesson or module of your specification from your list.
 
 > ❗ Once removed, the deleted task/lesson/module cannot be restored.
 
@@ -472,9 +480,9 @@ $ list module
 
 ### Finding Tasks or Lessons by keyword - `find task/lesson`
 
-Finds the tasks/lessons that contain the specific keyword.
-
 #### Task
+
+Finds tasks matching the keyword you specify.
 
 Format: `find task [KEYWORD]`
 
@@ -494,6 +502,8 @@ $ find task CS2113T
 
 #### Lesson
 
+Finds lessons matching the keyword you specify.
+
 Format: `find lesson [KEYWORD]`
 
 * `KEYWORD` refers to the intended keyword, not case-sensitive
@@ -512,10 +522,10 @@ $ find lesson CS2113T
 
 ### Retrieving Module information - `find module`
 
-Format: `find module [MODULE_CODE] {verbose/-v}`
-
 Shows you a complete list of information for any modules that are listed on NUSMods. You can find information
 such as module title, modular credits, department, faculty, preclusion, pre-requisites, etc.
+
+Format: `find module [MODULE_CODE] {verbose/-v}`
 
 * Adding `verbose` or `-v` at the end will provide more detailed information.
 
@@ -551,6 +561,8 @@ $ find module cs2113t verbose
 ```
 
 ### Setting module grade - `set grade`
+
+Allows you to set a grade value for a module in your list.
 
 Format: `set grade [MODULE_CODE] [GRADE]`
 
@@ -601,6 +613,8 @@ $ launch lesson 2
 In this example, the meeting URL of lesson number 2 (which is https://www.google.com/) is launched.
 
 ### Exiting the program - `exit`
+
+Exits the programme.
 
 Format: `exit`
 
