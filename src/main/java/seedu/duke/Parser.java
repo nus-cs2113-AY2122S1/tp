@@ -67,8 +67,7 @@ public class Parser {
                     + "Example: find -t TOUR_ID";
     public static final String ERROR_DUPLICATE_PREFIXES = "ERROR: TourPlanner has detected duplicate prefixes!";
     public static final String ERROR_MISSING_PREFIXES
-            = "ERROR: TourPlanner has detected missing prefixes! Did you miss out some fields?";
-    public static final String ERROR_MISSING_NAME_ID = "ERROR: TourPlanner has detected missing name/id!";
+            = "ERROR: TourPlanner has detected missing/wrong prefixes! Did you miss out some fields?";
     public static final String ERROR_MISSING_ID = "Missing id that you wish to cut from! Please try again.";
     public static final String ERROR_MISSING_FIELDS = "ERROR: TourPlanner has detected empty fields! "
             + "Please enter all fields!";
