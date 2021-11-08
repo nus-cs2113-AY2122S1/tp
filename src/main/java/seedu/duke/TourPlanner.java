@@ -132,6 +132,8 @@ public class TourPlanner {
                 specificCommand.setData(clients, flights, tours, clientPackages, ui);
                 specificCommand.execute();
                 isExit = specificCommand.isExit();
+            } catch (NullPointerException e) {
+                logr.log(Level.SEVERE, e.getMessage());
             } catch (TourPlannerException e) {
                 ui.show(e.getMessage());
                 logr.log(Level.WARNING, e.getMessage());
