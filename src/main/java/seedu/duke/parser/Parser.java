@@ -146,6 +146,10 @@ public abstract class Parser {
      */
     protected static String retrieveItemAttribute(String response, ItemAttribute itemAttribute)
             throws AttributeNotFoundException {
+        // Check if the response contains the flag
+        if (!response.contains(ItemAttribute.getItemFlag(itemAttribute))) {
+            throw new AttributeNotFoundException(itemAttribute);
+        }
         int startOfItemAttribute = response.indexOf(ItemAttribute.getItemFlag(itemAttribute)) + 2;
         int endOfItemAttribute = response.indexOf("/", startOfItemAttribute) - 2;
 
@@ -162,7 +166,7 @@ public abstract class Parser {
 
         return result;
     }
-    // @@author
+    // @@author Alvinlj00
 
     public static String convertDateTime(LocalDateTime dateTime) {
         return dateTime.format(formatter2);
