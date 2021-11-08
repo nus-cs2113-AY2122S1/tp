@@ -250,7 +250,7 @@ The constructed StonksGraph will then be printed out by the Ui class through the
 
 #### Class Diagram
 
-![](italiciseAbstractCD.png)
+![](constructorNoReturnType.png)
 In the class diagram above the StonksGraph class has a 2D array as a private attribute representing the graph.
 It also contains multiple methods used to write the proper characters to each parts of the 2D array.
 
