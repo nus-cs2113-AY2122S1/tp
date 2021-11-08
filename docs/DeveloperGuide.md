@@ -81,7 +81,7 @@ The application consists of the following main components responsible for the hi
 The architecture diagram below shows a high-level overview of the structure between different components.
 
 <p align="center">
-<img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/architecture_diagram.png">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/architecture_diagram.png">
 </p>
 <center>Figure 1: Food-O-Rama Overview Architecture Diagram</center>
 
@@ -89,10 +89,11 @@ The architecture diagram below shows a high-level overview of the structure betw
 
 Describes the step-by-step sequence from User Input to the Output.
 
-![](images/main_sequence.png)
-<p align = "center">
-Figure 2: General Flow Sequence Diagram
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/main_sequence.png">
 </p>
+<center>Figure 2: General Flow Seqeuence Diagram</center>
+
 
 1. User is greeted by welcome screen.
 2. User begins typing inputs.
@@ -105,10 +106,10 @@ Figure 2: General Flow Sequence Diagram
 
 The `InputParser` class is responsible for deconstructing User Inputs to identify Commands and Parameters for execution.
 
-![](images/input_parser_sequence.png)
-<p align = "center">
-Figure 3: InputParser Sequence Diagram
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/input_parser_sequence.png">
 </p>
+<center>Figure 3: InputParser Sequence Diagram</center>
 
 1. Gets command name of user input by checking if the users input starts with any of the strings that are defined for
   commands (add dish, list dish, help etc.).
@@ -129,7 +130,10 @@ under *'Data'* folder.
 
 #### Loading Data
 
-![](images/storage_load_sequence.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/storage_load_sequence.png">
+</p>
+<center>Figure 4: Loading Data Sequence Diagram</center>
 
 1. At the start of the program, Duke calls `Storage.load()`.
     * This method in the `Storage` class is responsible for invoking `loadIngredients()`, `loadDishes()`
@@ -149,7 +153,10 @@ under *'Data'* folder.
 
 #### Saving Data
 
-![](images/storage_write_sequence.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/storage_write_sequence.png">
+</p>
+<center>Figure 5: Saving Data Sequence Diagram</center>
 
 * After every command, Duke calls `Storage.write(Ingredient)`, then `Storage.write(Dish)`.
     * This method in the `Storage` class is responsible for writing to the respective text file depending on the mode.
@@ -170,7 +177,10 @@ under *'Data'* folder.
 The `Dish`, `DishList`, `Ingredient` and `IngredientList` classes are responsible for the handling and manipulation of
 the *Food-O-Rama* data.
 
-![](images/data_structures.png)
+<p align="center">
+    <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/data_structures.png">
+</p>
+<center>Figure 6: Data Structures Class Diagram</center>
 
 * The `Dish` class contains the Dish's Name, its wastage and its constituents.
 * The `Ingredient` class contains the Ingredient's Name, the weight of Ingredient in storage, the weight of Ingredient
@@ -404,25 +414,24 @@ that use them. The diagram below showcases the sequence of the `LinkCommand` cla
 
 ### Graph
 
-The implementation of the Graph function allows Food-O-Rama to display a graph of the Dishes and Ingredients present in the
-DishList and IngredientList to the User.
+The implementation of the Graph function allows Food-O-Rama to display a graph of the Dishes and Ingredients present in the DishList and IngredientList to the User.
 
 Below is a sequence diagram that shows how the GraphCommand functions
+
 
 <p align="center">
     <img src="https://ay2122s1-cs2113t-w11-4.github.io/tp/images/graph_sequence.png">
 </p>
 <center>Figure 17: GraphCommand Sequence Diagram</center>
 
-Graph works by creating a 2D grid and printing the bars based on the current position of the terminal cursor. This lets
-us bypass the restriction in a CLI based application where you can only print from up to down and the bars can get
+Graph works by creating a two dimensional grid and printing the bars based on the current position of the terminal cursor. 
+This bypasses the restriction in a CLI based application where you can only print from top down in the terminal and the bars can get
 printed "vertically". This is done by calculating the lengths of the bars beforehand and using these lengths along with
 the current coordinates to print either an empty space or a bar.
 
-Despite this due to CLI and ASCII limitations, printing of fractional values poses an issue. This was because you are
-unable to print half a character and using special unicode characters would break cross-platform functionality. 
-
-The solution that we implemented was to have a digit in the top most bar if we have fractional heights. This way while we
+Despite this, due to CLI and ASCII limitations, printing of fractional values poses an issue. This is because we cannot
+print half a character and using special unicode characters would break cross-platform functionality. The
+solution that we implemented was to have a digit in the top most bar if we have fractional heights. This way while we
 still don't get a perfect representation, we are capable of giving the value accurate to one decimal place. So if the
 height was 3.33 units it would be represented by 3 filled bars and the 4th bar will have a 3 within indicating its value
 is between 3.3 to 3.4 as shown in the figure below.
