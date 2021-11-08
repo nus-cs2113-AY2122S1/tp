@@ -25,8 +25,7 @@ Detailed code contribution information can be viewed via RepoSense [here](https:
 
 #### Enhancements and Features Implemented:
 
-- **New**: Using `last` to get the trip which the user last interacted with, saving time from having to repeatedly figure
-  out what the trip index is.
+- **New**: Using `last` to get the trip which the user last interacted with.
 - **New**: Reading from and writing to a save file using the JSON format (through serialisation/deserialisation with Google Gson).
 - **Enhancement**: Adding custom serialiser/deserialiser to Gson for LocalDate objects.
 - **Enhancement**: Ability to assist user in detecting and overwriting a corrupted save file.
