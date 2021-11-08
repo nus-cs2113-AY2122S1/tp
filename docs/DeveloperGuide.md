@@ -1011,6 +1011,7 @@ There are two ways to run tests.
 |v1.0|user|add a todo task|to keep track of tasks I need to complete|
 |v1.0|user|delete a todo task|delete a task I have completed/am not going to do|
 |v1.0|user|list all tasks|get the information about my tasks|
+|v1.0|user|see a list of all zoom links|so that I can see all my links at one place
 |v2.0|user|edit my CAP information|record my current CAP and the total MC taken that contribute to the CAP|
 |v2.0|user|get expected CAP based on my CAP information and my modules|revise my module planning to meet my expectation|
 |v2.0|user|display a calendar with lectures and tasks|view all my tasks and lectures in a calendar view|
@@ -1025,6 +1026,9 @@ There are two ways to run tests.
 |v2.0|user|list notebooks and entries|to keep track of my journal and view notebooks and entries|
 |v2.0|user|tag notebook|so I can organize my journal better|
 |v2.0|user|find notebook by tag|so I can find similar notebooks|
+|v2.0|user|add zoom links for modules|so that I can organise based on my modules
+|v2.0|user|edit zoom links for modules|so that I can change my links
+|v2.0|user|open zoom links from command line|so that I can easily access my zoom links
 
 
 ### Appendix C: Non-Functional Requirements
