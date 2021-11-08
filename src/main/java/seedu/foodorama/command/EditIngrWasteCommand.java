@@ -56,9 +56,10 @@ public class EditIngrWasteCommand extends Command {
             LOGGER.log(Level.INFO, "Parameter is String '" + ingr + "'");
             ingrIndex = IngredientList.find(ingr);
         }
+
         if (!isNumber(ingr) & ingrIndex == -1) {
             LOGGER.log(Level.INFO, "Ingredient does not exist");
-            throw new FoodoramaException(UI.getIngrNotExistMsg());
+            throw new FoodoramaException(UI.getIngrNotExistEdit());
         } else if (ingrIndex < 0 || ingrIndex >= IngredientList.ingredientList.size()) {
             LOGGER.log(Level.INFO, "Ingredient Index is not within Ingredient List Range");
             throw new FoodoramaException(UI.getIngrIndexExceedSizeMsg());
