@@ -186,8 +186,8 @@ class ParserTest {
         String testOutput2 = "add   |n/Tim lee   |e/tim_lee@gmail.com.sg   |a/123 queenstown ave 6 #05-19 ";
         assertEquals(testOutput2, method.invoke(method, testInput2));
 
-        String testInput3 = "addn/Tim leee/tim_lee@gmail.com.sga/123 queenstown ave 6 #05-19 ";
-        String testOutput3 = "add|n/Tim lee|e/tim_lee@gmail.com.sg|a/123 queenstown ave 6 #05-19 ";
+        String testInput3 = "add n/Tim lee e/tim_lee@gmail.com.sg a/123 queenstown ave 6 #05-19 ";
+        String testOutput3 = "add |n/Tim lee |e/tim_lee@gmail.com.sg |a/123 queenstown ave 6 #05-19 ";
         assertEquals(testOutput3, method.invoke(method, testInput3));
     }
 
@@ -231,10 +231,10 @@ class ParserTest {
         }
 
         String[][] testInputExceptions = {
-                {"     ", "ID not specified or not a number."},
-                {"hi", "ID not specified or not a number."},
-                {"13hi ", "ID not specified or not a number."},
-                {"hi13", "ID not specified or not a number."}
+                {"     ", "ID not specified or not a positive number."},
+                {"hi", "ID not specified or not a positive number."},
+                {"13hi ", "ID not specified or not a positive number."},
+                {"hi13", "ID not specified or not a positive number."}
         };
         for (String[] testInputException : testInputExceptions) {
             try {

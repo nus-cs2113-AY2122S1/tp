@@ -68,7 +68,7 @@ public abstract class PatientCommandParser {
      *
      * @param userInput String containing the full user input.
      * @return ViewPatientCommand object.
-     * @throws MedBotParserException when patient id is not specified or not a number.
+     * @throws MedBotParserException when patient id is not specified or not a positive number.
      */
     private static ViewPatientCommand parseViewPatientCommand(String userInput) throws MedBotParserException {
         int personId = ParserUtils.parseId(userInput.substring(4));
@@ -80,7 +80,7 @@ public abstract class PatientCommandParser {
      *
      * @param userInput String containing the full user input.
      * @return DeletePatientCommand object.
-     * @throws MedBotParserException when patient id given is not specified or not a number.
+     * @throws MedBotParserException when patient id given is not specified or not a positive number.
      */
     private static DeletePatientCommand parseDeletePatientCommand(String userInput) throws MedBotParserException {
         int personId = ParserUtils.parseId(userInput.substring(6));
@@ -92,7 +92,7 @@ public abstract class PatientCommandParser {
      *
      * @param userInput String containing the full user input.
      * @return EditPatientCommand object.
-     * @throws MedBotParserException when patient id given is not specified or not a number, or when
+     * @throws MedBotParserException when patient id given is not specified or not a positive number, or when
      *                               the parameters given cannot be parsed.
      */
     private static EditPatientCommand parseEditPatientCommand(String userInput) throws MedBotParserException {
@@ -146,7 +146,7 @@ public abstract class PatientCommandParser {
      *
      * @param userInput String containing the full user input.
      * @return HideUserCommand object with the specified parameters
-     * @throws MedBotParserException when patient id given is not specified or not a number.
+     * @throws MedBotParserException when patient id given is not specified or not a positive number.
      */
     private static HidePatientCommand parseHidePatientCommand(String userInput) throws MedBotParserException {
         int personId = ParserUtils.parseId(userInput.substring(4));
@@ -158,7 +158,7 @@ public abstract class PatientCommandParser {
      *
      * @param userInput String containing the full user input.
      * @return ShowPatientCommand object.
-     * @throws MedBotParserException when patient id given is not specified or not a number.
+     * @throws MedBotParserException when patient id given is not specified or not a positive number.
      */
     private static ShowPatientCommand parseShowPatientCommand(String userInput) throws MedBotParserException {
         int personId = ParserUtils.parseId(userInput.substring(4));
