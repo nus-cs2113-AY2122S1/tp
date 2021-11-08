@@ -80,11 +80,12 @@ public abstract class Task {
         this.priority = priority;
     }
 
+    //@@author Xuefei2001
     public Reminder getReminder() {
         return reminder;
     }
 
-    public String getReminder(LocalDateTime now) {
+    public String getReminderMessage(LocalDateTime now) {
         return reminder.getRecurrenceMessage(now, getTaskEntryDescription(), getRecurrence());
     }
 
@@ -95,6 +96,7 @@ public abstract class Task {
     public boolean needReminder() {
         return (reminder != null);
     }
+    //@@author
 
     public RecurrenceEnum getRecurrence() {
         return this.recurrence;
