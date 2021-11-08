@@ -29,18 +29,19 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "expiryeliminator.ExpiryEliminator"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
-    archiveClassifier = null
+    archiveBaseName = "expiryeliminator"
+    archiveClassifier = "v2.1"
 }
 
 checkstyle {
     toolVersion = '8.23'
 }
 
-run{
+run {
     standardInput = System.in
+    enableAssertions = true;
 }

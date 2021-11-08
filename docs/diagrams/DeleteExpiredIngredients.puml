@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+participant ":Parser" as Parser
+participant ":DeleteExpiredIngredientsCommand" as DeleteExpiredIngredientsCommand
+participant ":IngredientRepository" as IngredientRepository
+
+autonumber
+
+ -> Parser: parseCommand()
+activate Parser
+
+return command
+destroy Parser
+
+ -> DeleteExpiredIngredientsCommand: execute()
+activate DeleteExpiredIngredientsCommand
+
+DeleteExpiredIngredientsCommand -> IngredientRepository: deleteExpiredIngredients()
+activate IngredientRepository
+
+return boolean
+destroy IngredientRepository
+
+return message
+destroy DeleteExpiredIngredientsCommand
+
+
+@enduml

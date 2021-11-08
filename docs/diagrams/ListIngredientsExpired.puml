@@ -1,0 +1,62 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+participant ":Parser" as Parser
+participant ":ListIngredientsExpiredCommand" as ListIngredientsExpiredCommand
+participant ":IngredientRepository" as IngredientRepository
+participant ":IngredientStorage" as IngredientStorage
+participant "expiredIngredientStorage:IngredientStorage" as expiredIngredientStorage
+
+autonumber
+
+ -> Parser: parseCommand()
+activate Parser
+
+return command
+destroy Parser
+
+-> ListIngredientsExpiredCommand: execute()
+activate ListIngredientsExpiredCommand
+
+ListIngredientsExpiredCommand -> IngredientRepository: findExpiredIngredients()
+activate IngredientRepository
+
+loop ingredientStorages
+
+    IngredientRepository -> IngredientStorage: getIngredient()
+    activate IngredientStorage
+
+    IngredientStorage --> IngredientRepository: ingredient: Ingredient
+    deactivate IngredientStorage
+
+    IngredientRepository -> IngredientStorage: new(ingredient: Ingredient)
+    activate IngredientStorage
+
+    IngredientStorage --> IngredientRepository: expiredIngredientStorage: IngredientStorage
+    deactivate IngredientStorage
+
+    loop ingredientStorageBatches
+
+            opt expiryDateOfBatch < currentDate
+
+                IngredientRepository -> expiredIngredientStorage: add( ingredientBatch)
+                activate expiredIngredientStorage
+
+            end
+    end
+
+    expiredIngredientStorage --> IngredientRepository:expiredIngredientStorage: IngredientStorage
+    deactivate expiredIngredientStorage
+
+end
+
+IngredientRepository --> ListIngredientsExpiredCommand: list
+deactivate IngredientRepository
+destroy IngredientRepository
+
+return list
+destroy ListIngredientsExpiredCommand
+
+
+@enduml

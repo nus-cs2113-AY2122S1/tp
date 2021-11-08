@@ -1,0 +1,62 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+skinparam defaultFontSize 25
+
+autonumber
+box Logic
+-> ":Parser": parseCommand(userInput)
+activate ":Parser"
+
+create ":AddRecipeCommand"
+note right of ":AddRecipeCommand"
+AddRecipeCommand() is called with the following args
+- recipeName
+- ingredientNames
+- quantities
+end note
+":Parser" -> ":AddRecipeCommand" : AddRecipeCommand()
+activate ":AddRecipeCommand"
+
+return
+return command
+
+-> ":AddRecipeCommand" : execute(ingredients,recipes)
+activate ":AddRecipeCommand"
+end box
+
+box Data
+create "recipe :Recipe"
+":AddRecipeCommand" -> "recipe :Recipe" : Recipe(name)
+activate "recipe :Recipe"
+
+return
+
+loop all ingredients
+":AddRecipeCommand" -> "recipe :Recipe" : add()
+note right
+add() is called with the following args
+- ingredientName
+- quantity
+- ingredients
+
+end note
+
+activate "recipe :Recipe"
+create ":IngredientQuantity"
+"recipe :Recipe" -> ":IngredientQuantity" : IngredientQuantity()
+activate ":IngredientQuantity"
+return
+end
+
+return
+
+":AddRecipeCommand" -> "recipes :RecipeList" : add(recipe)
+activate "recipes :RecipeList"
+end box
+
+return
+return message
+destroy ":AddRecipeCommand"
+@enduml

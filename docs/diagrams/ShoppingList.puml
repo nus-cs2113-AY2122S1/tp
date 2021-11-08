@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+participant ":Parser" as Parser
+participant ":ShoppingListCommand" as ShoppingListCommand
+participant ":IngredientRepository" as IngredientRepository
+
+autonumber
+
+-> Parser: parseCommand()
+activate Parser
+
+Parser -> Parser: prepareShoppingList()
+activate Parser
+
+create ShoppingListCommand
+Parser -> ShoppingListCommand: new()
+activate ShoppingListCommand
+
+return shoppingListCommand
+return shoppingListCommand
+return shoppingListCommand
+destroy Parser
+
+
+-> ShoppingListCommand: execute()
+activate ShoppingListCommand
+
+ShoppingListCommand -> IngredientRepository: generateShoppingList(recipes: Array<Recipe>)
+activate IngredientRepository
+
+loop recipes
+
+    IngredientRepository -> IngredientRepository: updateShoppingListItemQuantity(ingredientName: String, recipe: Recipe)
+    activate IngredientRepository
+
+    IngredientRepository -> IngredientRepository: totalIngredients: Treemap<String, IngredientQuantity>
+    deactivate IngredientRepository
+
+
+end
+
+return shoppingList
+destroy IngredientRepository
+
+return shoppingList
+destroy ShoppingListCommand
+
+@enduml

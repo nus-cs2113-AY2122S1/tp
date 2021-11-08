@@ -1,0 +1,61 @@
+@startuml
+'https://plantuml.com/class-diagram
+!include style.puml
+
+class "{abstract}\nPrefix" as Prefix
+
+class Prefix {
+    #prefix : String
+    +getPrefix() : String
+}
+class SingleArgPrefix extends Prefix {
+    +SingleArgPrefix(prefix: String)
+}
+class MultipleArgPrefix extends Prefix {
+    +MultipleArgPrefix(singleArgPrefix: SingleArgPrefix)
+}
+class OptionalArgPrefix extends SingleArgPrefix {
+    +OptionalArgPrefix(singleArgPrefix: SingleArgPrefix)
+}
+
+class ArgsParser {
+    ~ArgsParser(prefixList: Prefix[])
+    ~parse(args: String) : void
+    ~getSingleArg(prefix: SingleArgPrefix) : String
+    ~getArgList(prefix: MultipleArgPrefix) : ArrayList<String>
+}
+class Parser {
+    +{static}parseCommand(userInput: String) : Command
+}
+
+ArgsParser ..> Prefix
+ArgsParser ..> SingleArgPrefix
+ArgsParser ..> MultipleArgPrefix
+Parser ..> ArgsParser
+Parser "1" --> "5" SingleArgPrefix
+Parser "1" --> "3  " MultipleArgPrefix
+Parser "    1" --> "1 " OptionalArgPrefix
+MultipleArgPrefix .> SingleArgPrefix
+
+note bottom of MultipleArgPrefix
+Parser has the following prefixes:
+PREFIX_MULTIPLE_INGREDIENT
+PREFIX_MULTIPLE_QUANTITY
+PREFIX_MULTIPLE_RECIPE
+end note
+
+note right of SingleArgPrefix
+Parser has the following prefixes:
+PREFIX_RECIPE
+PREFIX_INGREDIENT
+PREFIX_QUANTITY
+PREFIX_EXPIRY
+PREFIX_UNIT
+end note
+
+note right of OptionalArgPrefix
+Parser has the following prefix:
+PREFIX_OPTIONAL_UNIT
+end note
+
+@enduml

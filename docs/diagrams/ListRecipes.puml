@@ -1,0 +1,45 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+
+participant ":Parser" as Parser
+participant ":ListRecipeCommand" as ListRecipeCommand
+participant ":RecipeList" as RecipeList
+participant ":Recipe" as Recipe
+
+
+autonumber
+
+ -> Parser: parseCommand()
+activate Parser
+
+return command
+destroy Parser
+
+-> ListRecipeCommand: execute()
+activate ListRecipeCommand
+
+opt RecipeList.size() >0
+    ListRecipeCommand -> RecipeList: printWholeList()
+    activate RecipeList
+
+        loop Recipe
+            RecipeList -> Recipe
+            activate Recipe
+
+            Recipe --> RecipeList: Recipe
+            deactivate Recipe
+        end
+
+
+    return list
+    destroy RecipeList
+end
+
+
+return list
+destroy ListRecipeCommand
+
+
+@enduml

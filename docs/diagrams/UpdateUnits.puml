@@ -1,0 +1,48 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+participant ":Parser" as Parser
+participant ":UpdateUnitsCommand" as UpdateUnitsCommand
+participant ":IngredientRepository" as IngredientRepository
+participant ":IngredientStorage" as IngredientStorage
+participant ":RecipeList" as RecipeList
+
+autonumber
+
+-> Parser: parseCommand(userInput)
+activate Parser
+
+create UpdateUnitsCommand
+Parser -> UpdateUnitsCommand : UpdateUnitsCommand()
+activate UpdateUnitsCommand
+
+return updateUnitsCommand
+return command
+destroy Parser
+
+-> UpdateUnitsCommand: execute()
+activate UpdateUnitsCommand
+
+UpdateUnitsCommand -> IngredientRepository: find(ingredientName: String)
+activate IngredientRepository
+
+IngredientRepository --> UpdateUnitsCommand: ingredientStorage: IngredientStorage
+destroy IngredientRepository
+
+UpdateUnitsCommand -> IngredientStorage: updateUnits(unit: String)
+activate IngredientStorage
+
+IngredientStorage --> UpdateUnitsCommand
+destroy IngredientStorage
+
+UpdateUnitsCommand -> RecipeList: updateUnits(ingredientName: String, unit: String)
+activate RecipeList
+
+RecipeList --> UpdateUnitsCommand:
+destroy RecipeList
+
+<-- UpdateUnitsCommand: message
+destroy UpdateUnitsCommand
+
+@enduml

@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+participant ":Parser" as Parser
+participant ":ViewRecipeCommand" as ViewRecipeCommand
+participant ":RecipeList" as RecipeList
+
+autonumber
+
+-> Parser: parseCommand(userInput)
+activate Parser
+
+create ViewRecipeCommand
+Parser -> ViewRecipeCommand: ViewRecipeCommand(recipeName: String))
+activate ViewRecipeCommand
+
+return viewRecipeCommand
+return command
+destroy Parser
+
+-> ViewRecipeCommand: execute()
+activate ViewRecipeCommand
+
+ViewRecipeCommand -> RecipeList: find(recipeName: String)
+activate RecipeList
+
+RecipeList --> ViewRecipeCommand: recipe: RecipeStorage
+destroy RecipeList
+
+<-- ViewRecipeCommand: recipe
+destroy ViewRecipeCommand
+
+
+@enduml

@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/component-diagram
+!include style.puml
+
+component ExpiryEliminator{
+    component Parser
+    component Storage
+    component Data
+    component Main
+    component Command
+    component UI
+
+    Main --> UI
+    UI ..> Main
+
+    Main --> Command
+
+    Main -->Data
+
+    Main --> Storage
+    Storage --> Main
+
+    Main --> Parser
+    Parser ..> Main
+
+    Parser --> Command
+    Command ..> Parser
+}
+
+
+
+@enduml

@@ -1,0 +1,59 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+skinparam defaultFontSize 25
+
+autonumber
+box Logic
+-> ":Parser" : parseCommand(userInput)
+activate ":Parser"
+
+create ":ListRecipeUserCanCookCommand"
+":Parser" -> ":ListRecipeUserCanCookCommand"
+activate ":ListRecipeUserCanCookCommand"
+
+return
+return command
+
+-> ":ListRecipeUserCanCookCommand" : execute(ingredients,recipes)
+activate ":ListRecipeUserCanCookCommand"
+end box
+
+box Data
+":ListRecipeUserCanCookCommand" -> "recipes :RecipeList" : getRecipes()
+activate "recipes :RecipeList"
+return recipes
+end box
+
+loop recipes in "recipes :RecipeList"
+":ListRecipeUserCanCookCommand" -> ":ListRecipeUserCanCookCommand" : allIngredientsAreSufficient()
+
+note right
+allIngredientsAreSufficient() is called with the following args:
+- ingredientsFromRecipe
+- Ingredients
+end note
+
+activate ":ListRecipeUserCanCookCommand"
+return
+opt ingredients are sufficient
+":ListRecipeUserCanCookCommand" -> ":ListRecipeUserCanCookCommand" : checkForExpiredIngredients()
+
+note right
+checkForExpiredIngredients() is called with the following args:
+- ingredientsFromRecipe
+- Ingredients
+end note
+
+activate ":ListRecipeUserCanCookCommand"
+return recipe and expired ingredients
+
+end
+end
+
+return recipes user can cook and expired ingredients
+destroy ":ListRecipeUserCanCookCommand"
+
+
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include style.puml
+
+
+autonumber
+box Logic
+-> ":Parser": parseCommand(userInput)
+activate ":Parser"
+
+create ":DeleteRecipeCommand"
+":Parser" -> ":DeleteRecipeCommand" : DeleteRecipeCommand(recipeName)
+activate ":DeleteRecipeCommand"
+
+return
+return command
+
+-> ":DeleteRecipeCommand" : execute(ingredients,recipes)
+activate ":DeleteRecipeCommand"
+end box
+
+box Data
+":DeleteRecipeCommand" -> "recipes :RecipeList" : remove(recipeName)
+activate "recipes :RecipeList"
+return
+end box
+
+return message
+destroy ":DeleteRecipeCommand"
+
+@enduml
