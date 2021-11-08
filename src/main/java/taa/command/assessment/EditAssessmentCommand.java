@@ -4,6 +4,7 @@ package taa.command.assessment;
 import taa.Ui;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
+import taa.student.Student;
 import taa.teachingclass.ClassList;
 import taa.teachingclass.TeachingClass;
 import taa.command.Command;
@@ -12,6 +13,7 @@ import taa.storage.Storage;
 import taa.util.Util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class EditAssessmentCommand extends Command {
     private static final String KEY_CLASS_ID = "c";
@@ -30,11 +32,14 @@ public class EditAssessmentCommand extends Command {
     private static final String MESSAGE_FORMAT_EDIT_ASSESSMENT_USAGE = "%s %s/<CLASS_ID> "
         + "%s/<ASSESSMENT_NAME> [%s/<NEW_ASSESSMENT_NAME> | %s/<NEW_MAXIMUM_MARKS> | %s/<NEW_WEIGHTAGE>]";
     private static final String MESSAGE_FORMAT_INVALID_NEW_WEIGHTAGE = "Invalid new weightage. "
-        + "Weightage must be between %,.2f (inclusive) and %,.2f (inclusive)";
+        + "Weightage must be a number with at most 2 decimal places between %,.2f (inclusive) and %,.2f (inclusive).";
     private static final String MESSAGE_FORMAT_INVALID_NEW_TOTAL_WEIGHTAGE = "Invalid new weightage. "
         + "Total new weightage exceeds %,.2f%%.";
     private static final String MESSAGE_FORMAT_INVALID_NEW_MAXIMUM_MARKS = "Invalid new maximum marks. "
-        + "Maximum marks must be larger than %,.2f (inclusive)";
+        + "Maximum marks must be a number with at most 2 decimal places "
+        + "between %,.2f (inclusive) and %,.2f (inclusive).";
+    private static final String MESSAGE_FORMAT_NEW_MAXIMUM_MARKS_EXCEED_STUDENTS_CURRENT_MARKS =
+        "Invalid new maximum marks. New maximum marks exceed the current marks of %d student(s).";
     private static final String MESSAGE_FORMAT_INVALID_NEW_NAME = "Invalid new name. "
         + "An assessment with the same name already exists.";
     private static final String MESSAGE_FORMAT_ASSESSMENT_EDITED = "Assessment in %s updated:\n  %s";
@@ -62,17 +67,18 @@ public class EditAssessmentCommand extends Command {
 
         String newMaximumMarksString = argumentMap.getOrDefault(KEY_NEW_MAXIMUM_MARKS, null);
         if (newMaximumMarksString != null) {
-            if (!Util.isStringDouble(newMaximumMarksString)) {
+            if (!Util.isStringDouble(newMaximumMarksString, 2)) {
                 throw new TaaException(String.format(
                     MESSAGE_FORMAT_INVALID_NEW_MAXIMUM_MARKS,
-                    Assessment.MINIMUM_MARKS)
+                    Assessment.MAXIMUM_MARKS_RANGE[0],
+                    Assessment.MAXIMUM_MARKS_RANGE[1])
                 );
             }
         }
 
         String newWeightageString = argumentMap.getOrDefault(KEY_NEW_WEIGHTAGE, null);
         if (newWeightageString != null) {
-            if (!Util.isStringDouble(newWeightageString)) {
+            if (!Util.isStringDouble(newWeightageString, 2)) {
                 throw new TaaException(String.format(
                     MESSAGE_FORMAT_INVALID_NEW_WEIGHTAGE,
                     Assessment.WEIGHTAGE_RANGE[0],
@@ -119,7 +125,13 @@ public class EditAssessmentCommand extends Command {
         String newMaximumMarksString = argumentMap.getOrDefault(KEY_NEW_MAXIMUM_MARKS, null);
         boolean hasValidNewMaximumMarks = false;
         if (newMaximumMarksString != null) {
-            hasValidNewMaximumMarks = checkMaximumMarks(newMaximumMarksString);
+            hasValidNewMaximumMarks = checkMaximumMarks(name, newMaximumMarksString, teachingClass);
+            if (!hasValidNewMaximumMarks) {
+                int numberOfStudentsExceedingNewMaximumMarks =
+                    countNumberOfStudentsExceedingNewMaximumMarks(name, newMaximumMarksString, teachingClass);
+                throw new TaaException(String.format(MESSAGE_FORMAT_NEW_MAXIMUM_MARKS_EXCEED_STUDENTS_CURRENT_MARKS,
+                        numberOfStudentsExceedingNewMaximumMarks));
+            }
         }
 
         String newName = argumentMap.getOrDefault(KEY_NEW_ASSESSMENT_NAME, null);
@@ -137,6 +149,7 @@ public class EditAssessmentCommand extends Command {
             assessment.setMaximumMarks(newMaximumMarks);
         }
         if (hasValidNewName) {
+            changeAssessmentNameForResults(teachingClass, name, newName);
             assessment.setName(newName);
         }
 
@@ -150,7 +163,7 @@ public class EditAssessmentCommand extends Command {
 
     public boolean checkWeightage(String newWeightageString, AssessmentList assessmentList, String name)
             throws TaaException {
-        assert Util.isStringDouble(newWeightageString);
+        assert Util.isStringDouble(newWeightageString, 2);
         double newWeightage = Double.parseDouble(newWeightageString);
         if (!Assessment.isWeightageWithinRange(newWeightage)) {
             throw new TaaException(String.format(
@@ -176,16 +189,53 @@ public class EditAssessmentCommand extends Command {
         return true;
     }
 
-    public boolean checkMaximumMarks(String newMaximumMarksString) throws TaaException {
-        assert Util.isStringDouble(newMaximumMarksString);
+    public boolean checkMaximumMarks(String name, String newMaximumMarksString, TeachingClass teachingClass)
+            throws TaaException {
+        assert Util.isStringDouble(newMaximumMarksString, 2);
+        ArrayList<Student> students = teachingClass.getStudentList().getStudents();
         double newMaximumMarks = Double.parseDouble(newMaximumMarksString);
         if (!Assessment.isMaximumMarksValid(newMaximumMarks)) {
             throw new TaaException(String.format(
                     MESSAGE_FORMAT_INVALID_NEW_MAXIMUM_MARKS,
-                    Assessment.MINIMUM_MARKS)
+                    Assessment.MAXIMUM_MARKS_RANGE[0],
+                    Assessment.MAXIMUM_MARKS_RANGE[1])
             );
         }
+        String nameWithCorrectCase = teachingClass.getAssessmentList().getAssessment(name).getName();
+        for (Student s : students) {
+            HashMap<String, Double> results = s.getResults();
+            Double mark = results.get(nameWithCorrectCase);
+            if (mark != null) {
+                int validNewMaximumMarks = Double.compare(newMaximumMarks, mark);
+                boolean isNewMaximumMarksValid = validNewMaximumMarks >= 0;
+                if (!isNewMaximumMarksValid) {
+                    return false;
+                }
+            }
+        }
         return true;
+    }
+
+    public int countNumberOfStudentsExceedingNewMaximumMarks(String name, String newMaximumMarksString,
+                                                             TeachingClass teachingClass) {
+        assert Util.isStringDouble(newMaximumMarksString, 2);
+        ArrayList<Student> students = teachingClass.getStudentList().getStudents();
+        double newMaximumMarks = Double.parseDouble(newMaximumMarksString);
+        assert Assessment.isMaximumMarksValid(newMaximumMarks);
+        String nameWithCorrectCase = teachingClass.getAssessmentList().getAssessment(name).getName();
+        int numberOfStudentsExceedingNewMaximumMarks = 0;
+        for (Student s : students) {
+            HashMap<String, Double> results = s.getResults();
+            Double mark = results.get(nameWithCorrectCase);
+            if (mark != null) {
+                int validNewMaximumMarks = Double.compare(newMaximumMarks, mark);
+                boolean isNewMaximumMarksValid = validNewMaximumMarks >= 0;
+                if (!isNewMaximumMarksValid) {
+                    numberOfStudentsExceedingNewMaximumMarks += 1;
+                }
+            }
+        }
+        return numberOfStudentsExceedingNewMaximumMarks;
     }
 
     public boolean checkNewName(String newName, AssessmentList assessmentList, Assessment assessment)
@@ -195,6 +245,14 @@ public class EditAssessmentCommand extends Command {
             throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_NEW_NAME));
         }
         return true;
+    }
+
+    public void changeAssessmentNameForResults(TeachingClass teachingClass, String oldName, String newName) {
+        String oldNameWithCorrectCase = teachingClass.getAssessmentList().getAssessment(oldName).getName();
+        ArrayList<Student> students = teachingClass.getStudentList().getStudents();
+        for (Student s : students) {
+            s.changeAssessmentName(oldNameWithCorrectCase, newName);
+        }
     }
 
     @Override

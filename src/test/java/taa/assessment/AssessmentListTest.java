@@ -133,7 +133,8 @@ class AssessmentListTest {
             command2.execute(classList, ui, storage);
         } catch (Exception e) {
             assertEquals("Invalid weightage. "
-                    + "Weightage must be between 0.00 (inclusive) and 100.00 (inclusive)", e.getMessage());
+                    + "Weightage must be a number with at most 2 decimal places "
+                    + "between 0.00 (inclusive) and 100.00 (inclusive).", e.getMessage());
         }
     }
 
@@ -155,7 +156,7 @@ class AssessmentListTest {
         command2.execute(classList, ui, storage);
 
         try {
-            String addAssessment2 = "add_assessment c/cs2113t-f12 n/Finals m/50 w/80.001";
+            String addAssessment2 = "add_assessment c/cs2113t-f12 n/Finals m/50 w/80.01";
             Command command7 = Parser.parseUserInput(addAssessment2);
             command7.parseArgument();
             command7.checkArgument();
@@ -183,7 +184,9 @@ class AssessmentListTest {
             command2.checkArgument();
             command2.execute(classList, ui, storage);
         } catch (Exception e) {
-            assertEquals("Invalid maximum marks. Maximum marks must be larger than 0.00 (inclusive)", e.getMessage());
+            assertEquals("Invalid maximum marks. "
+                    + "Maximum marks must be a number with at most 2 decimal places "
+                    + "between 0.00 (inclusive) and 1,000.00 (inclusive).", e.getMessage());
         }
     }
 
@@ -269,7 +272,8 @@ class AssessmentListTest {
             command3.execute(classList, ui, storage);
         } catch (Exception e) {
             assertEquals("Invalid new weightage. "
-                    + "Weightage must be between 0.00 (inclusive) and 100.00 (inclusive)", e.getMessage());
+                    + "Weightage must be a number with at most 2 decimal places "
+                    + "between 0.00 (inclusive) and 100.00 (inclusive).", e.getMessage());
         }
     }
 
@@ -297,7 +301,7 @@ class AssessmentListTest {
         command8.execute(classList, ui, storage);
 
         try {
-            String editAssessment1 = "edit_assessment c/cs2113t-f12 a/midterms w/80.001";
+            String editAssessment1 = "edit_assessment c/cs2113t-f12 a/midterms w/80.01";
             Command command3 = Parser.parseUserInput(editAssessment1);
             command3.parseArgument();
             command3.checkArgument();
@@ -332,7 +336,9 @@ class AssessmentListTest {
             command3.execute(classList, ui, storage);
         } catch (Exception e) {
             assertEquals("Invalid new maximum marks. "
-                    + "Maximum marks must be larger than 0.00 (inclusive)", e.getMessage());
+                    + "Maximum marks must be a number with at most 2 decimal places "
+                    + "between 0.00 (inclusive) and 1,000.00 (inclusive).",
+                    e.getMessage());
         }
     }
 

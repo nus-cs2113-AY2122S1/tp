@@ -4,7 +4,7 @@ import taa.ClassChecker;
 
 public class Assessment implements ClassChecker {
     public static final double[] WEIGHTAGE_RANGE = {0, 100};
-    public static final double MINIMUM_MARKS = 0;
+    public static final double[] MAXIMUM_MARKS_RANGE = {0, 1000};
 
     private String name;
     private double maximumMarks;
@@ -33,9 +33,11 @@ public class Assessment implements ClassChecker {
     }
 
     public static boolean isMaximumMarksValid(double maximumMarks) {
-        int lowerBoundary = Double.compare(maximumMarks, MINIMUM_MARKS);
+        int lowerBoundary = Double.compare(maximumMarks, MAXIMUM_MARKS_RANGE[0]);
+        int upperBoundary = Double.compare(maximumMarks, MAXIMUM_MARKS_RANGE[1]);
         boolean isValidLowerBoundary = lowerBoundary >= 0;
-        return (isValidLowerBoundary);
+        boolean isValidUpperBoundary = upperBoundary <= 0;
+        return (isValidLowerBoundary && isValidUpperBoundary);
     }
 
     public String getName() {
@@ -47,7 +49,7 @@ public class Assessment implements ClassChecker {
     }
 
     public boolean isMarksValid(double marks) {
-        int lowerBoundary = Double.compare(marks, MINIMUM_MARKS);
+        int lowerBoundary = Double.compare(marks, MAXIMUM_MARKS_RANGE[0]);
         int upperBoundary = Double.compare(marks, maximumMarks);
         boolean isValidLowerBoundary = lowerBoundary >= 0;
         boolean isValidUpperBoundary = upperBoundary <= 0;
@@ -89,8 +91,11 @@ public class Assessment implements ClassChecker {
      */
     @Override
     public boolean verify() {
-        int validMaximumMarks = Double.compare(maximumMarks, MINIMUM_MARKS);
-        boolean isValidMaximumMarks = validMaximumMarks >= 0;
+        int lowerBoundary = Double.compare(maximumMarks, MAXIMUM_MARKS_RANGE[0]);
+        int upperBoundary = Double.compare(maximumMarks, MAXIMUM_MARKS_RANGE[1]);
+        boolean isValidLowerBoundary = lowerBoundary >= 0;
+        boolean isValidUpperBoundary = upperBoundary <= 0;
+        boolean isValidMaximumMarks = (isValidLowerBoundary && isValidUpperBoundary);
         if (name.isEmpty() || !isWeightageWithinRange(weightage) || !isValidMaximumMarks) {
             return false;
         }
