@@ -353,6 +353,9 @@ public class IngredientList {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printInvalidIngrWasteValue(inputIngredientWeight);
                 inputIngredientWeight = in.nextLine();
+                if (!isDouble(inputIngredientWeight)) {
+                    throw new FoodoramaException(UI.getInvalidNumberMsg());
+                }
                 ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
             }
 
@@ -424,6 +427,9 @@ public class IngredientList {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printInvalidIngrWeight(inputIngredientWeight);
                 inputIngredientWeight = in.nextLine();
+                if (!isDouble(inputIngredientWeight)) {
+                    throw new FoodoramaException(UI.getInvalidNumberMsg());
+                }
                 ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
             }
             if (Double.isInfinite(ingredientWeightValue) | Double.isNaN(ingredientWeightValue)) {

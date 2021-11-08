@@ -226,6 +226,9 @@ public class DishList {
                     UI.clearTerminalAndPrintNewPage();
                     UI.printInvalidDishWasteValue(dishName);
                     newWeight = in.nextLine();
+                    if (!isDouble(newWeight)) {
+                        throw new FoodoramaException(UI.getInvalidNumberMsg());
+                    }
                     inputWastage = Double.parseDouble(newWeight);
                 }
                 if (Double.isInfinite(inputWastage) || Double.isNaN(inputWastage)) {

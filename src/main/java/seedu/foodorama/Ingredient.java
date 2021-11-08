@@ -180,13 +180,15 @@ public class Ingredient implements Comparable<Ingredient> {
             if (!isNumber(inputIngredientWeight)) {
                 throw new FoodoramaException(UI.getInvalidNumberMsg());
             }
-
             ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
             // while ingredientWeightValue is negative
             while (ingredientWeightValue < 0) {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printInvalidIngrWeight(inputIngredientWeight);
                 inputIngredientWeight = in.nextLine();
+                if (!isNumber(inputIngredientWeight)) {
+                    throw new FoodoramaException(UI.getInvalidNumberMsg());
+                }
                 ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
             }
             if (Double.isInfinite(ingredientWeightValue) || Double.isNaN(ingredientWeightValue)) {
@@ -272,6 +274,9 @@ public class Ingredient implements Comparable<Ingredient> {
                 UI.clearTerminalAndPrintNewPage();
                 UI.printInvalidIngrWasteValue(ingredientName);
                 ingredientWeight = in.nextLine();
+                if (!isNumber(ingredientWeight)) {
+                    throw new FoodoramaException(UI.getInvalidNumberMsg());
+                }
                 ingredientWeightValue = Double.parseDouble(ingredientWeight);
             }
             if (Double.isInfinite(ingredientWeightValue) || Double.isNaN(ingredientWeightValue)) {
