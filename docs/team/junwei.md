@@ -22,6 +22,7 @@ Below are my contributions to the project.
 - Documentation:
   - User Guide:
     - Added documentation for all the features implemented in v1.0
+    - Added documentation for investment tracking feature implemented in v2.0
   - Designer Guide
     - Added documentation for all the components in the v1.0 application
     
