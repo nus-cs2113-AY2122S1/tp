@@ -11,7 +11,9 @@ import seedu.duke.ui.TextUI;
 
 import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 class AddAudioCommandTest {
     Parser parser = new Parser();
