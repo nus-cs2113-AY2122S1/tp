@@ -1,0 +1,62 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+
+Command <|-up- ErrorCommand
+Command <|-- HelpCommand
+Command <|-left- InfoCommand
+Command <|-- UnreserveCommand
+Command <|-right- UnknownCommand
+
+abstract class Command {
++ execute(ui: TextUI, catalogue: Catalogue)
++ isExit(): Boolean
+}
+
+class ErrorCommand {
+- message: String
++ ErrorCommand(message: String)
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+class HelpCommand {
++ {static} {final} COMMAND_WORD: String = "help"
++ HelpCommand()
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+class InfoCommand {
++ {static} {final} COMMAND_WORD: String = "info"
++ {static} {final} COMMAND_WORD_ALL: String = "all"
++ {static} {final} COMMAND_WORD_CATEGORY: String = "category"
++ {static} {final} COMMAND_WORD_STATUS: String = "status"
+# args: String
++ InfoCommand(args: String)
++ calcCategoryInfo(ui: TextUI, catalogue: Catalogue)
++ calcStatusInfo(ui: TextUI, catalogue: Catalogue)
++ calcTotalItems(ui: TextUI, catalogue: Catalogue)
++ handlesInfoCommand(ui: TextUI, catalogue: Catalogue)
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+class UnreserveCommand {
++ {static} {final} COMMAND_WORD: String = "unres"
++ {static} {final} COMMAND_FORMAT: String = "  (!) Format: unres ID"
++ {static} {final} ERR_NOT_RESERVED: String = "  (!) Item not reserved!"
++ {static} {final} SUCCESS_UNRES: String = "  (+) Item unreserved:"
+# args: String
+# id: String
++ UnreserveCommand(args: String)
++ execute(ui: TextUI, catalogue: Catalogue)
+
+}
+
+class UnknownCommand {
++ UnknownCommand()
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+
+@enduml

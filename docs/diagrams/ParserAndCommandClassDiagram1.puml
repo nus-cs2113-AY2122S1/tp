@@ -1,0 +1,61 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+
+Command <|-up- ExitCommand
+Command <|-up- AddCommand
+Command <|-- EditCommand
+Command <.right. Parser: creates
+Command <|-left- DeadlineCommand
+
+class Parser {
++ Parser()
++ parse(input: String): Command
++ extractArgs(input: String): HashMap<String, String>
+
+}
+
+abstract class Command {
++ execute(ui: TextUI, catalogue: Catalogue)
++ isExit(): Boolean
+}
+
+class AddCommand {
++ {static} {final} COMMAND_WORD: String = "add"
++ {static} {final} COMMAND_FORMAT: String = "  Format: add [a|b|i|m|v] [ARGUMENTS]"
+# args: HashMap<String, String>
++ AddCommand(args: HashMap<String, String>)
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+class EditCommand {
++ {static} {final} COMMAND_WORD: String = "edit"
+# args: HashMap<String, String>
+# toEdit: Item
++ EditCommand(args: HashMap<String, String>)
++ processArgs(catalogue: Catalogue)
++ handlesEditCommand(ui: TextUI, catalogue: Catalogue)
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+class ExitCommand {
++ {static} {final} COMMAND_WORD: String = "exit"
++ ExitCommand()
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+class DeadlineCommand {
++ {static} {final} COMMAND_WORD: String = "deadline"
++ {static} {final} DESCRIPTION_TODAY: String = " today"
++ {static} {final} DESCRIPTION_OVERDUE: String = " overdue"
++ {static} {final} dateFormat: String = "dd-MM-yyyy"
+# dtFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern(dateFormat)
++ input: String = ""
++ DeadlineCommand(input: String)
++ handleDeadlineCommand(ui: TextUI, catalogue: Catalogue)
++ execute(ui: TextUI, catalogue: Catalogue)
+}
+
+@enduml

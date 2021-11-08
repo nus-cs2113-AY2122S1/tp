@@ -98,27 +98,38 @@ The above sequence diagram shows the interactions occurring each time a command 
 
 ![ParserAndCommandClassDiagram](img/ParserAndCommandClassDiagram2.png)
 
+The above partial class diagrams illustrate the classes inside the commands component.
+
 The commands component consists of a `commands` package. Inside the package are the following classes: 
 1. A main `Parser` class to process all the commands 
-2. Individual Command classes, each corresponding to a specific command 
+2. An abstract `Command` class, from which all other individual command classes inherit from
+3. Individual Command classes, each corresponding to a specific command based on the user input
    1. `AddAudioCommand`
    2. `AddBookCommand`
    3. `AddCommand`
    4. `AddMagazineCommand`
-   5. `AddVideoCommand`
-   6. `DeadlineCommand`
-   7. `EditCommand`
-   8. `ExitCommand`
-   9. `ListCommand`
-   10. `LoanCommand`
-   11. `RemoveCommand`
-   12. `ReserveCommand`
-   13. `ReturnCommand`
-   14. `SearchCommand`
-   15. `UnknownCommand`
-   16. `UnreserveCommand`
-
-The individual Command classes inherit from an abstract `Command` class.
+   5. `AddMiscellaneousCommand`
+   6. `AddVideoCommand`
+   7. `DeadlineCommand`
+   8. `EditAudioCommand`
+   9. `EditBookCommand`
+   10. `EditCommand`
+   11. `EditMagazineCommand`
+   12. `EditMiscellaneousCommand`
+   13. `EditVideoCommand`
+   14. `ErrorCommand`
+   15. `ExitCommand`
+   16. `HelpCommand`
+   17. `InfoCommand`
+   18. `ListCommand`
+   19. `LoanCommand`
+   20. `RemoveCommand`
+   21. `ReserveCommand`
+   22. `ReturnCommand`
+   23. `SearchCommand`
+   24. `UnknownCommand`
+   25. `UnreserveCommand`
+   
 
 ### Data Component
 
