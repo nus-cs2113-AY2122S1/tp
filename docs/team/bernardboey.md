@@ -54,6 +54,7 @@ The application is CLI based and is suitable for users who can type quickly and 
   * Managed the GitHub workflow by imposing branch protection rules (i.e. requiring pull request, approvals, and status checks to pass before merging). Subsequently removed the rules when it was less useful (e.g. cosmetic edits to the UG/DG).
   * Added code enhancements for the team (see more under enhancements)
   * Updated the user guide and developer guide on parts not specific to a feature (see more under user guide and developer guide).
+  * Managed the release for [v2.1](https://github.com/AY2122S1-CS2113-T16-3/tp/releases/tag/v2.1).
 
 
 * **Review/mentoring**:
