@@ -68,7 +68,7 @@ public class IngredientList {
                 confirmAdd = getConfirmation(confirmAdd);
                 if (confirmAdd.startsWith(NO)) {
                     UI.clearTerminalAndPrintNewPage();
-                    UI.printEnterWeightOf(ingredientName);
+                    UI.printEnterStoredWeightOf(ingredientName);
                     ingredientWeight = in.nextLine();
                     if(!isDouble(ingredientWeight)) {
                         throw new FoodoramaException(UI.getInvalidNumberMsg());
@@ -451,7 +451,7 @@ public class IngredientList {
                 confirmAdd = getConfirmation(confirmAdd);
                 if (confirmAdd.startsWith(NO)) {
                     UI.clearTerminalAndPrintNewPage();
-                    UI.printEnterWeightOf(ingrName);
+                    UI.printEnterStoredWeightOf(ingrName);
                     inputIngredientWeight = in.nextLine();
                     if (!isDouble(inputIngredientWeight)) {
                         throw new FoodoramaException(UI.getInvalidNumberMsg());
