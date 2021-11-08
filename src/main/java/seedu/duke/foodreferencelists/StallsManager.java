@@ -130,7 +130,7 @@ public class StallsManager {
     /**
      * Trivial function to print every item.
      * @throws InvalidStoreIndexException if store index not found.
-     *  note: should not be thrown as it iterates through store id hashmap.
+     *     note: should not be thrown as it iterates through store id hashmap.
      */
     public static void printAllItems() throws
             InvalidStoreIndexException {

@@ -38,7 +38,16 @@ import seedu.duke.exceptions.ClickException;
 import seedu.duke.exceptions.calendar.IncorrectCommandException;
 import seedu.duke.exceptions.calendar.IncorrectNumberOfArgumentsException;
 import seedu.duke.exceptions.calendar.InvalidDateException;
-import seedu.duke.exceptions.food.*;
+import seedu.duke.exceptions.food.IllegalFoodCommandException;
+import seedu.duke.exceptions.food.IllegalFoodParameterException;
+import seedu.duke.exceptions.food.InvalidItemIndexException;
+import seedu.duke.exceptions.food.InvalidStoreIndexException;
+import seedu.duke.exceptions.food.MissingDateException;
+import seedu.duke.exceptions.food.NegativeCaloriesException;
+import seedu.duke.exceptions.food.NoCalorieCountKeywordException;
+import seedu.duke.exceptions.food.NoCaloriesInputException;
+import seedu.duke.exceptions.food.NoItemDividerException;
+import seedu.duke.exceptions.food.NoStoreDividerException;
 import seedu.duke.exceptions.journal.EmptyJournalArgumentException;
 import seedu.duke.exceptions.journal.IncorrectJournalArgumentException;
 
