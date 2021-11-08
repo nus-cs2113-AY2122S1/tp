@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-[Acknowlegements](#acknowledgements)
+[Acknowledgements](#acknowledgements)
 1. [Introduction](#1-introduction)\
 1.1 [Background](#11-background)\
 1.2 [Purpose](#12-purpose)\
@@ -468,7 +468,7 @@ Given below is an example of how the "delete task" mechanism behaves at each ste
 3. Execution of the command.\
    i. `DeleteTaskCommand` checks if the index as gotten from `getTaskIndex()` of `Parser` class is in the task list and if it not then `CalendarIndexNotFoundException()` is thrown.\
    ii. `DeleteTaskCommand` calls `deleteTask(this.index)` for the index of the task as given by the user to delete the task.\
-   iii. The delete successful message is printed to the user.\
+   iii. The "delete successful" message is printed to the user.\
    iv. `DeleteTaskCommand` calls `StorageTasks.writeTaskList(Storage.tasksList)` to save the new data to the storage file.
 
 Below is a sequence diagram that demonstrates this feature.
