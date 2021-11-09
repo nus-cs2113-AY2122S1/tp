@@ -99,7 +99,8 @@ public class RecordList {
     public void deleteLoan(int index) {
         loanRecords.remove(index);
     }
-
+    //@@author
+    
     public ArrayList<Expenditure> getExpenditureRecords() {
         return expenditureRecords;
     }
