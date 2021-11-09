@@ -4,8 +4,7 @@ import seedu.traveller.worldmap.exceptions.IllegalFlightFileException;
 import seedu.traveller.worldmap.exceptions.WorldMapException;
 import seedu.traveller.worldmap.exceptions.FlightDataNotFoundException;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -20,8 +19,8 @@ public class DataLoader {
     private static final Logger logger = Logger.getLogger(DataLoader.class.getName());
     private final int numberOfCountries = 5;
     private final int countryCodeLength = 3;
-    private final String filePath = "./flightData/time.txt";
-    private final String filePath2 = "./flightData/cost.txt";
+    private final String filePath = "/time.txt";
+    private final String filePath2 = "/cost.txt";
     private final String separator = "\\|";
 
     /**
@@ -87,11 +86,11 @@ public class DataLoader {
     public GraphList readData() throws WorldMapException {
         logger.setLevel(Level.INFO);
         logger.log(Level.INFO, "Reading data from " + filePath);
-        File data = new File(filePath);
+        InputStream data = getClass().getResourceAsStream(filePath);
         Scanner scanner;
         try {
             scanner = new Scanner(data);
-        } catch (FileNotFoundException e) {
+        } catch (NullPointerException e) {
             logger.log(Level.WARNING, "Flight data cannot be found.");
             throw new FlightDataNotFoundException();
         }
@@ -118,11 +117,11 @@ public class DataLoader {
     public GraphList readAltData() throws WorldMapException {
         logger.setLevel(Level.INFO);
         logger.log(Level.INFO, "Reading data from " + filePath2);
-        File data = new File(filePath2);
+        InputStream data = getClass().getResourceAsStream(filePath);
         Scanner scanner;
         try {
             scanner = new Scanner(data);
-        } catch (FileNotFoundException e) {
+        } catch (NullPointerException e) {
             logger.log(Level.WARNING, "Flight data cannot be found.");
             throw new FlightDataNotFoundException();
         }
