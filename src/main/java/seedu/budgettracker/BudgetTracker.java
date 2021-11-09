@@ -37,6 +37,7 @@ public class BudgetTracker {
      * @param dateNow the local date now
      * @param dateMonthNow the month param of date now as an integer
      */
+    //@@author EdisonZhong17
     public void loanReminder(LocalDate dateNow, int dateMonthNow) {
         for (int i = 0; i < recordList.getLoanListSize(dateMonthNow); i++) {
             recordList.getLoan(i,dateMonthNow).setDueDate();
