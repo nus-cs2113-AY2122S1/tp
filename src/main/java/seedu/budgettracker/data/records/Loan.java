@@ -69,6 +69,7 @@ public class Loan extends Record {
         String[] d = dueDate.toString().split("-", 3);
         return Integer.parseInt(d[2]);
     }
+    //@@author
 
     public String getName() {
         return debtorName;
@@ -97,6 +98,7 @@ public class Loan extends Record {
     public LocalDate getDueDate() {
         return dueDate;
     }
+    //@@author
 
     public String toString() {
         return String.format("%-20.20s  %-20.20s %-20.20s",
