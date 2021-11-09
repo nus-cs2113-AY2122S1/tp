@@ -13,7 +13,7 @@ public class Expenditure extends Record {
     protected Category category;
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
-    //@@author YEOWEIHNGWHYELAB
+
     public Expenditure(String description, double amount, LocalDate date, Category category) {
         super(amount, date.getMonthValue());
         this.date = date;
