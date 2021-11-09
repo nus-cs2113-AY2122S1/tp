@@ -240,6 +240,7 @@ public class AllRecordList {
         allRecordList.get(month).deleteLoan(index);
         saveToStorage(storageDirectory);
     }
+    //@@author
 
     public RecordList getMonthRecord(int month) {
         return allRecordList.get(month);
