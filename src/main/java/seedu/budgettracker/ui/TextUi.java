@@ -83,7 +83,7 @@ public class TextUi {
         System.out.println(DIVIDER);
     }
 
-    //@@ author EdisonZhong17
+    //@@author EdisonZhong17
     public static void showLoanReminder(int index, Loan dueLoan) {
         if (index == 1) {
             System.out.println("Loan Reminder:");
@@ -96,7 +96,7 @@ public class TextUi {
                 + " is due!!");
     }
 
-    //@@ author ZenoNexus
+    //@@author ZenoNexus
     public static void showExpenditureAddedMessage(Expenditure addedExpenditure, AllRecordList recordList) {
         assert addedExpenditure.getAmount() > 0 : "Expenditure added should be a positive value";
 
@@ -213,6 +213,7 @@ public class TextUi {
         System.out.println("Amount: $" + df.format(newBudget.getAmount())
                 + "\nMonth: " + newBudget.getMonth());
     }
+    //@@author
 
 
     public static void showLoanAddedMessage(Loan newLoan, boolean isLoadingStorage) {
