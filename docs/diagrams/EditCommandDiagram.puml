@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+autonumber
+
+-> "command:EditBudgetCommand" : execute()
+activate "command:EditBudgetCommand"
+"command:EditBudgetCommand" -> ":allRecordList" : editBudget(month, amount)
+activate ":allRecordList"
+":allRecordList" -> ":RecordList" : setAmount(amount)
+activate ":RecordList"
+return targetBudget: Budget
+
+@enduml

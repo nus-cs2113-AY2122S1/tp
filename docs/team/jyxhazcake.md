@@ -31,7 +31,7 @@ Given below are my contributions to the project.
         * Added documentation for Design in the Logic component for Parser and Commands. [\#218](https://github.com/AY2122S1-CS2113T-F11-2/tp/pull/218)
         * Created a UML class diagram to show the program's logic.
         * Created a UML sequence diagram to show an example of the logic flow of a user command.
-        * Added implementation details of the `edit` feature.
+        * Added implementation details of the `edit` feature and a sequence diagram showing a call. [\#265](https://github.com/AY2122S1-CS2113T-F11-2/tp/pull/265)
 * **Contributions beyond project team**:
     * Reviewed and provided bug reports for another team during PE Dry Run. [PED Issues](https://github.com/jyxhazcake/ped/issues)
     
