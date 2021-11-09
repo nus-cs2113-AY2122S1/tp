@@ -352,7 +352,7 @@ Loading the save file is similar to the main `run` function of Traveller, as the
 
 Following the loading of the save file, writing of the save file is handled as shown below.
 
-![](documentationPics/SaveSequenceDiagram.jpg)
+![](documentationPics/saveSequenceDiagram.jpg)
 <div style="text-align: center;">Figure 11: Save Sequence Diagram</div>
 
 The functions `getSaveTrip()`, `getSaveDay()` and `getSaveItem()` return strings that corresponds to the 
