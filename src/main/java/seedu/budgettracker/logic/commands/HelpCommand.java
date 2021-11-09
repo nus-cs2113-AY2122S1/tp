@@ -72,6 +72,7 @@ public class HelpCommand extends Command {
         System.out.println(DeleteMultipleLoanCommand.MESSAGE_USAGE);
         System.out.println(DIVIDER);
     }
+    //@@author
 
     private void printStatCommandHelp() {
         System.out.println(STAT_COMMAND_HELP_INDEX + ". " + StatCommand.COMMAND_WORD);
