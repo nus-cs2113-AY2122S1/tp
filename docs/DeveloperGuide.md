@@ -172,10 +172,12 @@ algorithm.
 origin, and the function eventually returns an object of `MinCalcResult` class.
 
 #### 1.1.4. DataLoader class
-The `DataLoader` class reads in data from *flightData/time.txt* or *flightData/cost.txt* to create the vertices 
-and edges in `GraphList`.
+The `DataLoader` class reads in data from *time.txt* or *cost.txt* to create the vertices and edges in `GraphList`.
 Its main function is the `readData` or `readAltData` function which passes the relevant lines in 
 *time.txt* or *cost.txt* to either `loadCountries` or `loadDistances` to create vertexes or edges respectively.
+
+NOTE: As of V2.1 *time.txt* and *cost.txt* are integrated into the jar file, read
+[here](#6-instructions-for-manual-testing) to see what they contain.
 
 While `DataLoader` is hardcoded to accept only 5 countries at its implementation, it is possible to increase this 
 number by changing the variable `numberOfCountries` in the class. Reading on, `numberOfCountries` might be used as a
@@ -350,7 +352,7 @@ Loading the save file is similar to the main `run` function of Traveller, as the
 
 Following the loading of the save file, writing of the save file is handled as shown below.
 
-![](documentationPics/saveSequenceDiagram.jpg)
+![](documentationPics/SaveSequenceDiagram.jpg)
 <div style="text-align: center;">Figure 11: Save Sequence Diagram</div>
 
 The functions `getSaveTrip()`, `getSaveDay()` and `getSaveItem()` return strings that corresponds to the 
@@ -421,22 +423,37 @@ This section details the requirements needed for Traveller to work.
 
 ### 6.1 Data file
 
-The data file *flightData/time.txt* or *cost.txt* can be modified following the formatting stated [here](#114-dataloader-class).
+The data file *time.txt* or *cost.txt* can be modified following the formatting stated [here](#114-dataloader-class).
 
 To test out the effectiveness of the implemented algorithm, you can add 0 to the distance matrix to tell Traveller that
 there is no flight between the two countries (no edge between the vertexes).
 
-The lower triangular matrix is read as such.
+The data file *time.txt* contains the following text:
 ```
 SIN|MLY|CHN|JPN|SKR
 1
-2|3
-4|5|6
-7|8|9|10
+2|3.1
+999|5|6
+7.1|8.2|9.2|10.2
 ```
 Element11 (Row 1, Column 1) is the distance from SIN to MLY (and vice versa).
 
 Element32 (Row 3, Column 2) is the distance from MLY to JPN (and vice versa).
+
+Similarly, the data file *cost.txt* contains the following text:
+```
+SIN|MLY|CHN|JPN|SKR
+100
+150|300
+999|500|400
+701|801|901|1001
+```
+
+With the release of v2.1, both data files have been integrated into the jar file in our 
+[release](https://github.com/AY2122S1-CS2113T-W13-1/tp/releases). For manual testing and modifying of these files, do
+look to our public [repo](https://github.com/AY2122S1-CS2113T-W13-1/tp), where the files can be found under the
+*resources* folder. You will then have to rebuild the jar file to test it as an executable or directly within your
+desired IDE.
 
 ### 6.2 Save file
 The save file *save/save.txt* can be modified following the formatting stated [here](#125-saveloader-class) and the corresponding command formats

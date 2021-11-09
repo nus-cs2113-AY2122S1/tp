@@ -139,7 +139,7 @@ ________________________________________________________________
 > the shortest flight path to get to your desired country (Yes, it is automated! :)).
 > 
 > ![](documentationPics/warning.png) If you encounter an issue where either your Start or End destinations are not recognised by Traveller.
-> Take a look in *flightData/time.txt* or *flightData/cost.txt* to see how Traveller recognises them!
+> Take a look [here](#4-supported-countries-summary) for the supported countries!
 
 <br/>
 
@@ -448,7 +448,6 @@ if the files have been changed and re-download them from our
 
 **A**: Transfer the entire folder containing the items listed below to the other computer. 
    * *Traveller.jar*
-   * *flightData* folder with *time.txt* and *cost.txt* inside
    * *save* folder with *save.txt* inside
 
 <br/>
@@ -459,9 +458,12 @@ if the files have been changed and re-download them from our
 Please check [here](#4-supported-countries-summary) for all supported destinations and their specific 
 wordings.
 
-If the problem persists, then your data in *flightData/time.txt* or *flightData/cost.txt* may have been corrupted.
+If the problem persists, then your data in *time.txt* or *cost.txt* may have been corrupted.
 Download a new copy of Traveller from [this link](https://github.com/AY2122S1-CS2113T-W13-1/tp/releases) to get a new
-uncorrupted version of the flight and cost data.
+uncorrupted version of our jar file.
+
+> ![](documentationPics/warning.png) With the release of v2.1, *time.txt* and *cost.txt* have been directly integrated 
+> into our jar file, and should be not changeable.
 
 <br/>
 
@@ -495,7 +497,7 @@ is 5 hours long.
 As Traveller can only read certain country codes. Below is a short table of the basic
 supported countries (included in our [release](https://github.com/AY2122S1-CS2113T-W13-1/tp/releases)) 
 and their codes. Read our Developer Guide [here](https://ay2122s1-cs2113t-w13-1.github.io/tp/DeveloperGuide.html)
-if you would like to change the supported countries to those that you want.
+if you would like to read more on how these are used in Traveller!
 
 Country | Code
 --- | ---
