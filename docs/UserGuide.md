@@ -444,7 +444,7 @@ if the files have been changed and re-download them from our
 
 > ![](documentationPics/warning.png) With the release of V2.1, both data files have been integrated into our executable jar file. 
 > If you have modified them, do ensure that it follows how the files are read 
-[here](https://https://ay2122s1-cs2113t-w13-1.github.io/tp/DeveloperGuide.html#6-instructions-for-manual-testing).
+[here](https://ay2122s1-cs2113t-w13-1.github.io/tp/DeveloperGuide.html#6-instructions-for-manual-testing).
 
 <br/>
 

@@ -233,9 +233,9 @@ Additionally, the `Command` class is used to execute various actions in the vari
 Details of each of the sub-components can be found in the subsequent sub-sections.
 
 #### 1.2.1. Traveller class
-The root class of the whole project. The 2 major components of Traveller ([World Map](#11-world-map) and 
-[Main Traveller](#12-main-traveller)) is initialized here. 
-Sub-components of [Main Traveller](#12-main-traveller) is also initialized here.
+The root class of the whole project. The 2 major components of Traveller (World Map and 
+Main Traveller) is initialized here. 
+Sub-components of Main Traveller is also initialized here.
 
 The class has a run function which is called to run the whole application. The steps taken in each iteration of the run
 function is detailed below.
@@ -352,7 +352,7 @@ Loading the save file is similar to the main `run` function of Traveller, as the
 
 Following the loading of the save file, writing of the save file is handled as shown below.
 
-![](documentationPics/SaveSequenceDiagram.jpg)
+![](documentationPics/saveSequenceDiagram.jpg)
 <div style="text-align: center;">Figure 11: Save Sequence Diagram</div>
 
 The functions `getSaveTrip()`, `getSaveDay()` and `getSaveItem()` return strings that corresponds to the 
