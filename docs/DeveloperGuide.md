@@ -87,8 +87,7 @@ both from the `Logic` class.
 As a side note, `initWorldMap` initialises the main World Map which is based on distances, 
 while `altWorldMap` boots up a side World Map based on the flight cost paths.     
 
-NOTE: As of V2.1 `EditMap` is no longer used. *time.txt* and *cost.txt* are also integrated into the .jar file, read
-[here](#6-instructions-for-manual-testing) to see how what they contain.
+NOTE: As of V2.1 `EditMap` is no longer used. 
 
 ![](documentationPics/worldmap2.1.png)
 <div style="text-align: center;">Figure 3.1: World Map Sequence Diagram Part 1</div>
@@ -176,6 +175,9 @@ origin, and the function eventually returns an object of `MinCalcResult` class.
 The `DataLoader` class reads in data from *time.txt* or *cost.txt* to create the vertices and edges in `GraphList`.
 Its main function is the `readData` or `readAltData` function which passes the relevant lines in 
 *time.txt* or *cost.txt* to either `loadCountries` or `loadDistances` to create vertexes or edges respectively.
+
+NOTE: As of V2.1 *time.txt* and *cost.txt* are integrated into the jar file, read
+[here](#6-instructions-for-manual-testing) to see what they contain.
 
 While `DataLoader` is hardcoded to accept only 5 countries at its implementation, it is possible to increase this 
 number by changing the variable `numberOfCountries` in the class. Reading on, `numberOfCountries` might be used as a
