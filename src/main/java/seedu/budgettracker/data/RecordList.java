@@ -125,7 +125,6 @@ public class RecordList {
         return loanRecords.get(index);
     }
 
-    //@@author yeoweihngwhyelab
     /**
      * Retrieves the hasBudget boolean on whether the record list has a budget.
      * @return a boolean on whether the budget exists

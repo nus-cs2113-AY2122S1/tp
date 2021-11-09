@@ -72,9 +72,9 @@ public class TextUi {
                 + "    What entries do you wish to enter today?\n"
                 + DIVIDER);
     }
-    //@@
 
-    //@@author YEOWEIHNGWHYELAB
+
+
     public static void csvStatus() {
         System.out.println("Your csv file have been successfully created in the data folder!");
         System.out.print(LS);
@@ -82,8 +82,8 @@ public class TextUi {
 
         System.out.println(DIVIDER);
     }
-    //@@
 
+    //@@ author EdisonZhong17
     public static void showLoanReminder(int index, Loan dueLoan) {
         if (index == 1) {
             System.out.println("Loan Reminder:");
@@ -96,7 +96,7 @@ public class TextUi {
                 + " is due!!");
     }
 
-    //@@author YEOWEIHNGWHYELAB
+    //@@ author ZenoNexus
     public static void showExpenditureAddedMessage(Expenditure addedExpenditure, AllRecordList recordList) {
         assert addedExpenditure.getAmount() > 0 : "Expenditure added should be a positive value";
 
@@ -105,7 +105,7 @@ public class TextUi {
 
         printDivider();
     }
-    //@@
+
 
     public static void showExpenditureEditedMessage(Expenditure newExpenditure, AllRecordList recordList) {
         assert newExpenditure.getAmount() > 0 : "Edited Expenditure should have a positive amount";
@@ -117,7 +117,7 @@ public class TextUi {
         printDivider();
     }
 
-    //@@author YEOWEIHNGWHYELAB
+
     private static void showExpenditureDetails(Expenditure newExpenditure, AllRecordList recordList) {
         System.out.println("Description: " + newExpenditure.getDescription()
                 + "\nAmount: $" + df.format(newExpenditure.getAmount())
@@ -131,8 +131,8 @@ public class TextUi {
 
         spendingNotice(monthString, amount, totalMonthExpenditureSpending);
     }
-    //@@
 
+    //@@author EdisonZhong17
     private static void showExpenditureDetailsForDelete1(Expenditure newExpenditure) {
         System.out.println("Description: " + newExpenditure.getDescription()
                 + "\nAmount: $" + df.format(newExpenditure.getAmount())
@@ -181,7 +181,7 @@ public class TextUi {
         }
 
     }
-    //@@
+
 
 
     //@@author ZenoNexus
@@ -195,7 +195,7 @@ public class TextUi {
                 + LS
                 + DIVIDER);
     }
-    //@@
+
 
     public static void showBudgetEditedMessage(Budget newBudget) {
         assert newBudget.getAmount() > 0 : "Edited Budget should have a positive amount";
@@ -207,12 +207,12 @@ public class TextUi {
         printDivider();
     }
 
-    //@@author YEOWEIHNGWHYELAB
+    //@@author EdisonZhong17
     private static void showBudgetDetails(Budget newBudget) {
         System.out.println("Amount: $" + df.format(newBudget.getAmount())
                 + "\nMonth: " + newBudget.getMonth());
     }
-    //@@
+
 
     public static void showLoanAddedMessage(Loan newLoan, boolean isLoadingStorage) {
         if (isLoadingStorage) {
@@ -250,6 +250,7 @@ public class TextUi {
                 + "\nDate: " + newLoan.getDate());
     }
 
+    //@@author LS-Young
     public static String getMonthString(int month) {
         String monthString = null;
         switch (month) {
@@ -305,9 +306,8 @@ public class TextUi {
             printRecordList(records, month, category);
         }
     }
-    //@@
 
-    //@@author YEOWEIHNGWHYELAB
+
     /**
      * print out the record list.
      * @param records the record list of budget, expenditures and loans
@@ -338,9 +338,9 @@ public class TextUi {
 
         recordListPrinter(records, i, category, monthString, totalSpending, currentMonthBudget, budget, printInfo);
     }
-    //@@
 
-    //@@author YEOWEIHNGWHYELAB
+
+
     private static void recordListPrinter(AllRecordList records, int i, Category category,
                                           String monthString, double totalSpending, double currentMonthBudget,
                                           String budget, boolean printInfo) {
@@ -358,8 +358,8 @@ public class TextUi {
 
         getMonthListView(records, i, monthString, budget, category);
     }
-    //@@
 
+    //@@author
     /**
      * Names/Descriptions longer than 30characters may get truncated.
      */
@@ -410,6 +410,7 @@ public class TextUi {
         }
     }
 
+    //@@author EdisonZhong17
     public static void showSingleExpenditureDeletedMessage(int index, Expenditure delExe, AllRecordList allRecordList) {
         System.out.println("Successfully deleted Expenditure " + index + ":");
         showExpenditureDetails(delExe, allRecordList);
@@ -465,9 +466,9 @@ public class TextUi {
         }
         printDivider();
     }
-    //@@
 
-    //@@author YEOWEIHNGWHYELAB
+
+
     public static void printExplosion() {
         System.out.println("              _.-^^---....,,---_\n"
                 + "           _--                  --_\n"
@@ -480,9 +481,9 @@ public class TextUi {
                 + "                    | ;  :|\n"
                 + "           _____.,-#%&$@%#&#~,._____");
     }
-    //@@
 
-    //@@author YEOWEIHNGWHYELAB
+
+
     public static void drawSingleOverallGraph(double barPercentage) {
         System.out.println("Percentage of Money Spent throughout the year");
         System.out.print(LS);
@@ -516,9 +517,9 @@ public class TextUi {
 
         printDivider();
     }
-    //@@
 
-    //@@author YEOWEIHNGWHYELAB
+
+
     private static void printVerticalPercentageRow(double[] barPercentage, int i) {
         for (double v : barPercentage) {
             if ((i * 10) <= v) {
@@ -528,7 +529,7 @@ public class TextUi {
             }
         }
     }
-    //@@
+
 
 
     //@@author ZenoNexus
@@ -543,7 +544,7 @@ public class TextUi {
         System.out.println("The amount you spent on this category: $" + df.format(topCategorySpending));
         printDivider();
     }
-    //@@
+
 
     public static void drawHorizontalGraph(double[] barPercentage) {
         printHorizontalGraphHeader();
@@ -573,8 +574,8 @@ public class TextUi {
 
         System.out.println(DIVIDER);
     }
-    //@@
 
+    //@@author ZenoNexus
     private static void printHorizontalGraphRow(double percentageToPrint) {
         int totalNumberOfBars = 20;
         long numberOfBarsToPrint = round(percentageToPrint / percentageRepresentedByEachBar);
@@ -625,16 +626,16 @@ public class TextUi {
         System.out.println();
         Delay.loadingBar(20);
     }
-    //@@
 
-    //@@author YEOWEIHNGWHYELAB
+
+
     public static void printAvailableDataBase(Storage dataBase) {
         System.out.println("These are the data base you currently have!");
         dataBase.directoryListAllFiles();
     }
-    //@@
 
-    //@@author YEOWEIHNGWHYELAB
+
+
     public static void printExpenditureLoanFoundInMonth(ArrayList<Expenditure> matchedExpenditureList,
                                                         ArrayList<Loan> matchedLoanList,
                                                         int sizeOfMatchedExpenditureList,
@@ -665,8 +666,8 @@ public class TextUi {
 
         System.out.println(FindCommand.DIVIDER);
     }
-    //@@
 
+    //@@author jyxhazcake
     /**
      * Prints a message out to the user with dividers.
      * @param messages the message shown to the user
@@ -678,6 +679,7 @@ public class TextUi {
         printDivider();
     }
 
+    //@@author ZenoNexus
     /**
      * Reads the text entered by the user.
      *

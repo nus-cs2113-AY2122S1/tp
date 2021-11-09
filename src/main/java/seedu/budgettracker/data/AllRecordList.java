@@ -36,7 +36,7 @@ public class AllRecordList {
         }
     }
 
-    //@@author yeoweihngwhyelab
+
     public void statIntro(AllRecordList recordList) {
         TextUi.statsIntro(recordList);
     }
@@ -45,6 +45,7 @@ public class AllRecordList {
         WriteToTextFile textFileWriter = new WriteToTextFile();
         textFileWriter.reloadArrayToStorage(allRecordList, storageDirectory);
     }
+
 
     /**
      * Returns the year the user is inserting records into.
