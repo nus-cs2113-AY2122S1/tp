@@ -75,8 +75,8 @@ This section provides you with a guide on how to get Traveller up and running on
 
 1. Ensure that you have Java 11 or above installed. You can install it from this 
 [link](https://www.oracle.com/java/technologies/downloads/#java11).
-2. Download the latest version of `Traveller.zip` from [here](https://github.com/AY2122S1-CS2113T-W13-1/tp/releases).
-3. Unzip the downloaded folder in an empty directory of your choice.
+2. Download the latest version of `Traveller.jar` from [here](https://github.com/AY2122S1-CS2113T-W13-1/tp/releases).
+3. Move the executable jar file to an empty directory of your choice.
 4. Navigate to the directory containing `Traveller.jar` in your desired CLI and run `java -jar Traveller.jar`.
    You should see Traveller's welcome message as shown below.
 
@@ -441,6 +441,10 @@ the Traveller team at traveller@gmail.com.
 **A**: Traveller only exits when its data files *time.txt* and *cost.txt* are tampered with. Please check
 if the files have been changed and re-download them from our 
 [release.](https://github.com/AY2122S1-CS2113T-W13-1/tp/releases)
+
+> ![](documentationPics/warning.png) With the release of V2.1, both data files have been integrated into our executable jar file. 
+> If you have modified them, do ensure that it follows how the files are read 
+[here](https://https://ay2122s1-cs2113t-w13-1.github.io/tp/DeveloperGuide.html#6-instructions-for-manual-testing).
 
 <br/>
 
