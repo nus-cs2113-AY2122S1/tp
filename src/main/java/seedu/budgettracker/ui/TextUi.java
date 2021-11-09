@@ -309,7 +309,7 @@ public class TextUi {
         }
     }
 
-
+    //@@author LS-Young
     /**
      * print out the record list.
      * @param records the record list of budget, expenditures and loans
@@ -341,8 +341,7 @@ public class TextUi {
         recordListPrinter(records, i, category, monthString, totalSpending, currentMonthBudget, budget, printInfo);
     }
 
-
-
+    //@@author YEOWEIHNGWHYELAB
     private static void recordListPrinter(AllRecordList records, int i, Category category,
                                           String monthString, double totalSpending, double currentMonthBudget,
                                           String budget, boolean printInfo) {
@@ -360,8 +359,9 @@ public class TextUi {
 
         getMonthListView(records, i, monthString, budget, category);
     }
-
     //@@author
+
+    //@@author LS-Young
     /**
      * Names/Descriptions longer than 30characters may get truncated.
      */
