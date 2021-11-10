@@ -274,7 +274,7 @@ Shows you the proper format of commands.
 15. Exit the program: exit
 ```
 
-#### Description of the outcome.
+#### Description of the outcome:
 
 * I'll show you the proper format for using every command
 * Just type `help` anywhere in the terminal for a quick guide if you forget any command
