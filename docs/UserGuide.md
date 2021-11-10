@@ -38,6 +38,10 @@ I am a Command Line Interface (CLI)-based recipe database application, and I can
 1. Organise your collection of recipes with tags and other attributes so they are easier to find
 1. Delete recipes like the chicken you cooked so raw I can still hear it clucking
 
+This is what **Gordon** looks like:
+![Labelled Interface](images/labelInterface.png)
+
+
 If you're one of them so-called 'developers', head on over to our [Developer Guide](https://ay2122s1-cs2113t-w13-2.github.io/tp/DeveloperGuide.html).
 
 It's absolutely bonkers. Now let's get down to business.
@@ -48,8 +52,8 @@ It's absolutely bonkers. Now let's get down to business.
 * Use the [Cheat sheet](#cheat-sheet) for a quick lookup of commands.
 * Pages you need to navigate to or buttons you need to press are enclosed in quotation marks like 'This page'.
 * Code you need to type are shown like `this code`.
-* Parameters you can type are capitalised, like THIS_PARAMETER.
-* Whatever Gordon is telling you in the terminal will be enclosed in larger shaded boxes
+* Parameters you can type are capitalised, like _THIS_PARAMETER_.
+* Whatever **Gordon** is telling you in the terminal will be enclosed in larger shaded boxes
 ```
 like this output
 ```
@@ -326,6 +330,10 @@ Setting steps...
 Steps set successfully.
 ```
 
+#### Description of the outcome:
+
+- I'll set attributes for the recipe of your choosing.
+
 **Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
 
 ---
@@ -374,6 +382,10 @@ Searching by ingredient...
 2. Duck Rice
 ```
 
+#### Description of the outcome:
+
+- I'll find recipes according to the inputted attributes.
+
 **Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
 
 ---
@@ -408,6 +420,11 @@ I've got a variety of tagging-related functions, for better organization of your
 > Successfully tagged Duck Rice under Hawker Food
 > Successfully tagged Duck Rice under Favorites
 > ```
+>
+> #### Description of the outcome:
+>
+> - I'll tag your recipe accordingly.
+> 
  
 #### 9.2 Untagging Tags from Recipes: `untag`
 
@@ -427,6 +444,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > untag / Chocolate Milkshake / Fatty Foods
 > ```
 > 
+> 
 > #### Expected outcome
 >
 > ```
@@ -435,6 +453,10 @@ I've got a variety of tagging-related functions, for better organization of your
 > Successfully untagged Chocolate Milkshake from Fatty Foods
 > Fatty Foods tag will no longer have any recipes under it. You might want to delete it!
 > ```
+>
+> #### Description of the outcome:
+>
+> - I'll untag your recipe accordingly.
 
 #### 9.3 Deleting Tags from Cookbook: `deleteTag`
 
@@ -456,6 +478,10 @@ I've got a variety of tagging-related functions, for better organization of your
 > Successfully deleted Hawker Food tag
 > Successfully deleted Noodles tag
 > ```
+>
+> #### Description of the outcome:
+>
+> - I'll delete your tags accordingly.
 
 #### 9.4 Find a Recipe by their tag(s): `find`
 
@@ -486,6 +512,10 @@ I've got a variety of tagging-related functions, for better organization of your
 > Searching by tags...
 > 1. Mee Pok
 > ```
+>
+> #### Description of the outcome:
+>
+> - I'll find your recipes according to the inputted tags.
 
 #### 9.5 List all your Tags: `listTags`
 
@@ -506,6 +536,10 @@ I've got a variety of tagging-related functions, for better organization of your
 > 2. Noodles
 > 3. Favorites
 > ```
+>
+> #### Description of the outcome:
+>
+> - I'll list all of your tags.
 
 ### 10. Saving and Loading
 
