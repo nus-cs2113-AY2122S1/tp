@@ -1,3 +1,5 @@
+//@@author LS-Young
+
 package seedu.budgettracker.logic.parser;
 
 import seedu.budgettracker.common.exception.EmptyDescriptionException;
@@ -7,7 +9,9 @@ import seedu.budgettracker.logic.parser.exceptions.ParserException;
 
 import java.util.HashMap;
 
-//@@author LS-Young
+/**
+ * Parser class for parsing user input into an ListRecordsCommand.
+ */
 public class ListRecordParser implements ParserPrefix {
     public static final String[] PREFIX_ARRAY = {PREFIX_MONTH, PREFIX_CATEGORY};
 

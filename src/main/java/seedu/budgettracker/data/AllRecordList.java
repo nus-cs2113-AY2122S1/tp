@@ -36,7 +36,7 @@ public class AllRecordList {
         }
     }
 
-    //@@author yeoweihngwhyelab
+
     public void statIntro(AllRecordList recordList) {
         TextUi.statsIntro(recordList);
     }
@@ -45,6 +45,7 @@ public class AllRecordList {
         WriteToTextFile textFileWriter = new WriteToTextFile();
         textFileWriter.reloadArrayToStorage(allRecordList, storageDirectory);
     }
+
 
     /**
      * Returns the year the user is inserting records into.
@@ -210,6 +211,7 @@ public class AllRecordList {
      *
      * @param month the target budget's month
      */
+    //@@author EdisonZhong17
     public void deleteBudget(int month) {
         allRecordList.get(month).deleteBudget();
         saveToStorage(storageDirectory);
@@ -221,6 +223,7 @@ public class AllRecordList {
      * @param index the target expenditure's index
      * @param month the target expenditure's month
      */
+    //@@author EdisonZhong17
     public void deleteExpenditure(int index, int month) {
         allRecordList.get(month).deleteExpenditure(index);
         saveToStorage(storageDirectory);
@@ -232,10 +235,12 @@ public class AllRecordList {
      * @param index the target loan's index
      * @param month the target loan's month
      */
+    //@@author EdisonZhong17
     public void deleteLoan(int index, int month) {
         allRecordList.get(month).deleteLoan(index);
         saveToStorage(storageDirectory);
     }
+    //@@author
 
     public RecordList getMonthRecord(int month) {
         return allRecordList.get(month);

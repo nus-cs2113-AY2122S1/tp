@@ -73,6 +73,7 @@ public class RecordList {
     /**
      * Deletes the budget.
      */
+    //@@author EdisonZhong17
     public void deleteBudget() {
         budget.clearAmount();
         assert budget.getAmount() == 0.00;
@@ -84,6 +85,7 @@ public class RecordList {
      *
      * @param index the index of the target expenditure
      */
+    //@@author EdisonZhong17
     public void deleteExpenditure(int index) {
         expenditureRecords.remove(index);
     }
@@ -93,10 +95,12 @@ public class RecordList {
      *
      * @param index the index of the target loan
      */
+    //@@author EdisonZhong17
     public void deleteLoan(int index) {
         loanRecords.remove(index);
     }
-
+    //@@author
+    
     public ArrayList<Expenditure> getExpenditureRecords() {
         return expenditureRecords;
     }
@@ -125,7 +129,6 @@ public class RecordList {
         return loanRecords.get(index);
     }
 
-    //@@author yeoweihngwhyelab
     /**
      * Retrieves the hasBudget boolean on whether the record list has a budget.
      * @return a boolean on whether the budget exists

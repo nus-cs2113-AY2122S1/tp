@@ -1,8 +1,11 @@
+//@@author EdisonZhong17
+
 package seedu.budgettracker.logic.commands;
 
 import seedu.budgettracker.logic.commands.exceptions.CommandException;
 import seedu.budgettracker.ui.TextUi;
 
+//@@author EdisonZhong17
 public class DeleteAllLoanCommand extends DeleteCommand {
 
     public static final String MESSAGE_USAGE = "Delete all loan records.\n"
