@@ -31,6 +31,8 @@ to easily access the different sections of this guide, and we hope you have a pl
   * [Removing a selected university](#removing-a-selected-university)
   * [Removing a selected NUS module](#removing-a-selected-nus-module)
   * [Removing a selected module mapping](#removing-a-selected-module-mapping)
+  * [Help](#help)
+  * [Exit](#exit)
   * [Storage](#storage)
   * [Logs](#logs)
 * [FAQ](#faq)
@@ -516,6 +518,19 @@ This module mapping is removed:
 Removing a module does not automatically remove all module mappings associated with it.
 </div>
 
+### Help 
+
+Displays the list of commands for SEPlanner and their respective descriptions 
+
+#### Format: `help`
+
+### Exit 
+
+Exits SEPlanner. For information about your data when SEPlanner is exited, refer to [Storage](#storage). 
+
+#### Format: `exit`
+
+
 ### Storage
 
 Your *Selected Module List* and *Selected University List* are stored in the text files, `selectedModules.txt` and 
@@ -556,7 +571,7 @@ each command and will be auto-loaded on program start.
 
 ## Command Summary
 
-Command | Format &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | Purpose
+Command | Format &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | Purpose
 --------|---------|-----------
 `add` | `add /uni <UNI_INDEX>`, <br /> `add /uni <UNI_NAME>`, <br />`add /mod <MOD_INDEX>`, <br /> `add /mod <UNI_NAME>`,<br />`add /map <UNI_INDEX> <MAP_INDEX>` | Add a university/module/mapping
 `remove` | `remove /uni <UNI_INDEX>`, <br /> `remove /uni <UNI_NAME>`, <br />`remove /mod <MOD_INDEX>`, <br /> `remove /mod <UNI_NAME>`,<br />`remove /map <UNI_INDEX> <MAP_INDEX>` | Remove a university/module/mapping
