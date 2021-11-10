@@ -187,7 +187,7 @@ Method:
 --------------------
 ```
 
-#### Description of the outcome.
+#### Description of the outcome:
 
 * I'll show you the ingredients you need for that recipe, and the steps required to prepare it, as well as any other attributes you might have assigned it.
 
