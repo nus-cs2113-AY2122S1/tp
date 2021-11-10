@@ -18,30 +18,40 @@ lessons in your daily schedule and your total workload:
 
 ---
 
+# Purpose of this Guide
+
+This guide gives an overview of the key features of UniMods and shows you how to get started. Even if you do not have 
+any prior experience with the Command Line, there is no need to worry! Choose a feature from the below table of contents 
+to get step-by-step instructions and begin your UniMods journey! If you encounter any problems, you can check the FAQ
+to see if it is covered there. A Command Summary containing a brief overview of all commands is available at the very 
+end of this guide too if you require it.
+
+<br>
+
+---
+
 # Table of Contents
 
 - [Quick Start](#quick-start)
 - [Features](#features)
-    * [Viewing help](#viewing-help-help)
+    * [View Help](#view-help-help)
     * [Show Module Info](#display-module-info-show-module_code)
     * [Search Module](#search-module-search-keyword--flag)
     * [Update Local Database](#update-local-database-update)
     * [Add to Timetable](#add-to-timetable-add)
         * [Add a Module](#add-a-module-to-timetable )
         * [Add an Event](#add-an-event-to-timetable)
-
     * [Delete from Timetable](#delete-from-timetable-delete-module_code-or-delete-event_name)
     * [Clear From Timetable or Transcript](#clear-from-timetable-or-transcript--clear)
         * [Clear from Timetable](#clear-from-timetable)
         * [Clear from Transcript](#clear-from-transcript)
     * [View Timetable](#view-timetable-timetable--flag)
-
-    * [Changing Semester](#changing-semester)
-    * [Storing grades secured in past modules](#store-grades-secured-in-various-modules-store-grade--module_code)
-    * [Removing modules from stored grades](#remove-modules-from-the-list-of-completed-modules-remove-module_code)
+    * [Change Semester](#change-semester)
+    * [Store Grades Secured in Past Modules](#store-grades-secured-in-various-modules-store-grade--module_code)
+    * [Remove Modules from List of Completed Modules](#remove-modules-from-the-list-of-completed-modules-remove-module_code)
     * [Calculate CAP](#calculate-cap--calculate)
     * [View Unofficial Transcript](#view-unofficial-transcript--transcript)
-    * [Checking eligibility from a module's pre-requisite](#checking-for-module-pre-requisite-check-module_code)
+    * [Check for Module Pre-requisite](#check-for-module-pre-requisite-check-module_code)
     * [Exit](#exit-exit)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
@@ -57,7 +67,9 @@ This section goes over how to use this application.
 2. Download the latest **Unimods.jar** from here.
 3. Copy the file to the folder you want to use as the home folder for Unimods.
 4. Open your CLI of choice and run `java -jar unimods.jar`.
-5. Type the command in the command box and press Enter to execute it.
+5. On your first start, UniMods will ask you for your details. Simply reply with your details! ![](Profile.png)
+6. Now you should see something like this and you should be good to go! ![](Logo.png)
+7. Type the command in the command box and press Enter to execute it.
 
    Some example commands you can try:
 
@@ -88,7 +100,9 @@ This section contains an overview of all the features and associated commands in
  - Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `bye`) will be ignored.
     > e.g. `help abc` will be interpreted as `help`.
 
-## Viewing Help: `help`
+<br>
+
+## View Help: `help`
 
 If you are stuck wondering how to even begin using this application, simply type `help` into the terminal, and you will
 be able to see all the available commands!
@@ -381,7 +395,7 @@ ________________________________________________________________________________
 ## Clear from Timetable or Transcript : `clear`
 
 You can use the `clear` command to remove all modules and events from the timetable or to remove all completed modules with
-their corresponding grades from your transcript. For Example: type `clear` to see what you can clear using this command.
+their corresponding grades from your Transcript. For Example: type `clear` to see what you can clear using this command.
 
 ```shell
 ==> clear
@@ -392,6 +406,8 @@ Choose your option:
 ```
 
 You can choose what you want to clear and choose the corresponding number i.e. `1` or `2`.
+
+<br>
 
 ### Clear from Timetable
 
@@ -433,7 +449,7 @@ ________________________________________________________________________________
 
 <br>
 
-## View timetable: `timetable [-flag]`
+## View Timetable: `timetable [-flag]`
 
 You can view the current timetable which details your daily schedule as well as the total MCs taken and classes and time
 slots for each day of the week in a timetable structure.
@@ -531,7 +547,7 @@ Total MCs taken this semester: 4.0
 
 <br>
 
-## Changing semester
+## Change Semester
 
 You can set the semester to align with the current school semester. This will change the modules that you will be allowed to take and their corresponding details, depending on the semester.
 
@@ -555,7 +571,7 @@ Current semester: Semester 2
 
 <br>
 
-## Store grades secured in various modules: `store <GRADE> > <MODULE_CODE>`
+## Store Grades Secured in Various Modules: `store <GRADE> > <MODULE_CODE>`
 
 You can store the grades you have secured for various modules by using this command. These modules along with their
 grades will be stored in the list of completed modules in the Transcript.
@@ -584,7 +600,7 @@ ________________________________________________________________________________
 
 <br>
 
-## Remove modules from the list of completed modules: `remove <MODULE_CODE>`
+## Remove Modules from the List of Completed Modules: `remove <MODULE_CODE>`
 
 You can remove any module and grade that you added to your list of completed modules in the transcript by using this
 command.
@@ -661,7 +677,7 @@ ________________________________________________________________________________
 
 <br>
 
-## Checking for module pre-requisite: `check <MODULE_CODE>`
+## Check for Module Pre-requisite: `check <MODULE_CODE>`
 
 After [assigning grades to past modules](#store-grades-secured-in-various-modules-store-grade--module_code), you can
 check whether you have met all the pre-requisites for a module!
@@ -700,6 +716,8 @@ ________________________________________________________________________________
 > See you again! :)
 ________________________________________________________________________________________________________________________
 ```
+
+<br>
 
 ---
 
