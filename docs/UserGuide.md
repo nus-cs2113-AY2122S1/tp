@@ -367,7 +367,7 @@ has been freed up.
 
 You can remove any module or personal task that you added to your timetable using this command.
 
-For example: If you have CS2113T module already added to your timetable. You can type
+For example: If you have CS2113T module already added to your timetable then you can type
 `delete CS2113T` to remove this module from your timetable.
 
 ```shell
@@ -390,7 +390,7 @@ ________________________________________________________________________________
 
 ## Clear from Timetable or Transcript : `clear`
 
-You can use the `clear` to remove all modules and events from the timetable or to remove all completed modules with
+You can use the `clear` command to remove all modules and events from the timetable or to remove all completed modules with
 their corresponding grades from your Transcript. For Example: type `clear` to see what you can clear using this command.
 
 ```shell
@@ -401,7 +401,7 @@ What would you like to clear ?
 Choose your option: 
 ```
 
-You can choose what you want to clear completely and choose the corresponding number i.e. `1` or `2`.
+You can choose what you want to clear and choose the corresponding number i.e. `1` or `2`.
 
 <br>
 
@@ -615,7 +615,7 @@ __________________________________________________________________________
 ## Calculate CAP : `calculate`
 
 You can calculate your **CAP** based on the list of modules you have completed and the corresponding grades scored in
-them.
+these modules.
 
 You can type `calculate` to view your Cumulative Average Point.
 
