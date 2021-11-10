@@ -1,4 +1,4 @@
-//@@author YEOWEIHNGWHYELAB
+//@@author LS-Young
 
 package seedu.budgettracker.logic.commands;
 
