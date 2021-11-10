@@ -26,6 +26,10 @@ to get step-by-step instructions and begin your UniMods journey! If you encounte
 to see if it is covered there. A Command Summary containing a brief overview of all commands is available at the very 
 end of this guide too if you require it.
 
+<br>
+
+---
+
 # Table of Contents
 
 - [Quick Start](#quick-start)
