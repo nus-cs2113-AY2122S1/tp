@@ -59,9 +59,9 @@ end of this guide too if you require it.
 # Quick Start
 This section goes over how to use this application.
 
-1. Ensure you have **Java 11** or above installed in your Computer.
-2. Download the latest **unimods.jar** from [here](https://github.com/AY2122S1-CS2113T-W12-2/tp/releases).
-3. Copy the files to the folder you want to use as the home folder for your Unimods.
+1. Ensure that you have **Java 11** or above installed on your Computer.
+2. Download the latest **Unimods.jar** from here.
+3. Copy the file to the folder you want to use as the home folder for Unimods.
 4. Open your CLI of choice and run `java -jar unimods.jar`.
 5. On your first start, UniMods will ask you for your details. Simply reply with your details! ![](Profile.png)
 6. Now you should see something like this and you should be good to go! ![](Logo.png)
@@ -69,8 +69,8 @@ This section goes over how to use this application.
 
    Some example commands you can try:
 
-       - help : to list all the commands with their description
-       - search <module_code> : lists module code based on the given partial regex
+       - help : list all the commands with their description
+       - search <module_code> : lists all relevant module code based on the given partial regex
        - show <module_code>: displays the module information
        - add <module_code> : to add the module to the timetable
        - delete <module_code> : to remove the module from the timetable
@@ -100,7 +100,7 @@ This section contains an overview of all the features and associated commands in
 
 ## View Help: `help`
 
-If you are stuck wondering how to even begin using this application, simply type `help` into the terminal and you will
+If you are stuck wondering how to even begin using this application, simply type `help` into the terminal, and you will
 be able to see all the available commands!
 You will also be provided a link to the User Guide of this application which you can refer to, for detailed descriptions
 of the commands.
@@ -135,7 +135,7 @@ ________________________________________________________________________________
 
 ```
 
-To begin, perhaps try looking up CS2113T by using the [show command](#display-module-info-show-module_code).
+To begin, try looking up CS2113T by using the [show command](#display-module-info-show-module_code).
 
 <br>
 
@@ -188,7 +188,7 @@ Exam Date(s): Sem 1: Tue Nov 30 09:00 AM - 11:00 AM
 
 ## Search Module: `search <KEYWORD> [-flag]`
 
-Maybe you don't know what modules are out there, and want to know what GEH modules are available.
+Perhaps you don't know what modules are out there, and want to know what GEH modules are available.
 
 You can type `search GEH` to display all GEH modules available:
 
@@ -219,8 +219,8 @@ You can also apply the following flags to refine the search:
   <br>:information_source: 3 & 4 refer to Special Terms 1 and 2 respectively.
 - **-e :** search for mods that have/do not have exams. Specify with true/false e.g `-e false`.
   <br>:information_source: Defaults to false if input is invalid.
-- **-f :** search for mods from a faculty e.g. `-f Computing`. Checks if faculty contains keyword.
-- **-d :** search for mods from a department e.g. `-d Computer Science`. Checks if faculty contains keyword.
+- **-f :** search for mods from a faculty e.g. `-f Computing`. Remember to Check if faculty contains a keyword.
+- **-d :** search for mods from a department e.g. `-d Computer Science`. Remember to Check if faculty contains a keyword.
 
 
 :information_source: Command, search term and flag regex are case-insensitive.
@@ -233,8 +233,8 @@ You can also apply the following flags to refine the search:
 
 ## Update local database: `update`
 
-Maybe you are going to be doing some work at the University Sports Center tomorrow. You forsee that you will lack a good
-WiFi connection there, and want to access the latest information offline. Run update, and grab a cup of coffee while
+Maybe you are going to be doing some work at the University Sports Center tomorrow. You foresee that you will lack a good
+Wi-Fi connection there, and want to access the latest information offline. Run update, and grab a cup of coffee while
 waiting!
 
 Update will take up to 10 minutes to complete. If you wish to cancel your search at any time, simply hit
@@ -242,8 +242,8 @@ Update will take up to 10 minutes to complete. If you wish to cancel your search
 
 :information_source: Command is case-insensitive.
 
-:information_source:  You should rarely need to execute this command since every time UNI Mods retrieves data from
-NUSMods, it will update that mod in the local database. You should only realistically only need to do this before the
+:information_source:  You should rarely need to execute this command, since every time UNI Mods retrieves data from
+NUSMods, it will update that mod in the local database. Realistically, you would only need to do this before the
 start of a new semester, when mods are being updated for the coming semester.
 
 <br>
@@ -428,7 +428,7 @@ ________________________________________________________________________________
 ### Clear from Transcript
 
 You can remove **all** completed modules and their grades from your timetable by typing `clear`. On being prompted to
-choose a number, choose `2` and this should clear your transcript of all modules and grades. You can then view the empty
+choose a number, enter `2` and this should clear your transcript of all modules and grades. You can subsequently view the empty
 transcript by typing the command `transcript`.
 
 For Example:
@@ -549,7 +549,7 @@ You can set the semester to align with the current school semester. This will ch
 
 You can type `semester` to change the semester.
 
-Do note that changing the semester will reset your timetable if the semester you selected different from your current semester.
+Do note that changing the semester will reset your timetable if the semester you selected is different from your current semester.
 
 ```shell
 ~$ semester
@@ -569,7 +569,7 @@ Current semester: Semester 2
 
 ## Store Grades Secured in Various Modules: `store <GRADE> > <MODULE_CODE>`
 
-You can store the grades you have secured for various modules by using this command.These modules along with their
+You can store the grades you have secured for various modules by using this command. These modules along with their
 grades will be stored in the list of completed modules in the Transcript.
 
 For Example : Let's store `A+` grade for `CS2113T` module in the records.
@@ -632,7 +632,7 @@ __________________________________________________________________________
 
 ## View Unofficial Transcript : `transcript`
 
-You can view your Unofficial Transcript to get an idea of your degree progress.This will display the modules you have
+You can view your Unofficial Transcript to get an idea of your degree progress. This will display the modules you have
 completed and their corresponding grades. The total number of credits completed and the CAP will also be displayed.
 
 You can type `transcript` to view your Unofficial Transcript.
@@ -720,7 +720,7 @@ ________________________________________________________________________________
 # FAQ
 This section contains a list of some commonly asked questions and their answers.
 
-**Q**: Why does this module not show up even though my search term is its exact title?
+**Q**: Why does this module not show up even though my search term is the exact title?
 <br>
 **A**: Search keyword is only for the module code. Searching for the title of a module is currently unsupported, since
 NUS modules are far more often referred to by their module code.
@@ -733,17 +733,17 @@ NUS modules are far more often referred to by their module code.
 **Q**<a name = "slow_search"></a>: Why is the search taking so long?
 <br>
 **A**: Your query is probably too broad. You can greatly cut down search time by specifying at least the letter codes of
-the mods you are interested in. If you absolutely need to execute that query, it is recommended to perform a quicksearch
+the mods you are interested in. If you absolutely need to execute that query, it is recommended to perform a quick search
 with the -q flag instead, which will execute in a matter of seconds. <br>
 See [here](#extra_info) if you wish to know more about the technical details behind why it takes so long.
 
-**Q**: Alright, I decided to do a quicksearch instead. Why are no mods appearing even though I know some mods must match
+**Q**: Alright, I decided to do a quick search instead. Why are no mods appearing even though I know some mods must match
 my search?
 <br>
 **A**: Local search is dependent on local data. If certain modules cannot be found offline, and you are sure that they
 do exist and match your query, then it is likely that you do not have the local data, or your local data is outdated.
 
-**Q**: How do I save my timetable so I don’t have to add all my modules again?
+**Q**: How do I save my timetable, so I don’t have to add all my modules again?
 <br>
 **A**: The timetable is saved automatically on every update (add/delete etc.)
 
@@ -754,7 +754,7 @@ make a request to the API for every match. Hence, including some part of a modul
 will greatly increase search speed by cutting down the number of requests needed to be made. Other flags, such as the
 faculty, department and exams are checked against the mod information after the request and as such have little to no
 effect on how fast the search goes. The most common cause of a slow search is running `search`
-without any search term specified, which means that UniMods has to make 12000+ requests to the API, one for each mod,
+without any search term specified, which means that UNIMods has to make 12000+ requests to the API, one for each mod,
 and is very similar to just running `update`.
 
 <br>
