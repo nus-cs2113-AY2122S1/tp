@@ -8,6 +8,8 @@
 
 Fridget is a <strong> desktop app built to be used via Command Line Interface </strong> (CLI). Fridget is an easier way for you to keep track of the items in your fridge. It is convenient to add, remove, and find items stored in your fridge. Fridget also reminds you when items are nearing expiry.
 
+### Who Is Fridget Meant For?
+
 If you want to start taking charge of your fridge and stop wasting your food, Fridget is for you.
 
 - Forget scribbling your items on a piece of paper. 
@@ -16,7 +18,17 @@ If you want to start taking charge of your fridge and stop wasting your food, Fr
 
 Use Fridget today.
 
+### Purpose Of This Guide
+
 This guide is meant for you to quickly get started with Fridget so you can stop worrying about expired food and start enjoying life.
+
+You can use the [Index](#index) below to navigate through different sections in the user guide.
+
+Do start at the [Legend](#legend) to get an overview of the icons and terminology we use throughout the document.
+
+If you want to immediately get started with using Fridget, just follow the instructions in the [Quick Start](#quick-start) section. Afterwards, take a look at the [Features](#features) section to learn about all that you can do with Fridget.
+
+We highly recommend you to refer to the [Command Syntax](#command-syntax) and [Things To Note](#things-to-note) for a better understanding of the properties underlying Fridget and its features.
 
 <hr/>
 
@@ -102,9 +114,14 @@ Command Option | Description |
 <hr/>
 
 ### Add an item into Fridget: `add`
-Use this command to add your items into Fridget.
+Use this command if you want to add your items into Fridget.
 
 Format: `add ITEM_NAME /EXPIRY_DATE`
+
+Steps:
+1. Type the item you want to add in the following format: `add ITEM_NAME /EXPIRY_DATE`.
+2. Fridget will prompt you for the quantity of the item that you want to add. You can feel free to type in the quantity you prefer. This is illustrated in [Figure 1.1](#figure-11)
+3. Do ensure that this quantity is less than `INT_MAX`. The value for`INT_MAX` can be found in the [Command Syntax](#command-syntax).
 
 Constraints:
 - Do not use `/`, `|`, or `;` in the `ITEM_NAME`.
@@ -126,6 +143,7 @@ The <code>EXPIRY_DATE</code> should not be earlier than the current day.
 
 <ins>If you are adding an item not in Fridget:</ins>
 
+#### Figure 1.1
 ```markdown
 USER INPUT: add burger /2021-11-11
 __________________________________________
@@ -138,7 +156,10 @@ You have successfully added:
 __________________________________________
 ```
 
+
 <ins>If you are adding an item already in Fridget:</ins>
+
+#### Figure 1.2
 
 ```markdown
 USER INPUT: add burger /2021-11-11
@@ -157,6 +178,8 @@ __________________________________________
 If you want to add multiple items at the same time, separate each item with a semicolon: `;`.
 
 **For example:**
+
+#### Figure 1.3
 
 ```bash
 USER INPUT: add burger /2021-11-11; chicken /2023-11-11
@@ -180,9 +203,14 @@ __________________________________________
 <hr/>
 
 ### Remove an item from Fridget: `remove`
-Use this command to remove items from Fridget.
+Use this command if you want to remove items from Fridget.
 
 Format: `remove ITEM_NAME`
+
+Steps:
+1. Type the item you want to remove in the following format: `remove ITEM_NAME`.
+2. If there are multiple items with similar names, Fridget will prompt you to pick one by number. Do pick the number that is beside your item of choice. This is illustrated in the [Figure 2.3](#figure-23) below.
+3. Afterwards, if there is more than 1 of your chosen item, Fridget will prompt you for the quantity of the item that you want to remove. You can feel free to type in the quantity you prefer. This is illustrated in [Figure 2.2](#figure-22) below.
 
 <span style="display: inline-block; background-image: linear-gradient(180deg, #fff5d5, #fff3cd); padding-top: 1em; padding-bottom: 1em; padding-left: 1em; padding-right: 1em; font-style: normal; border-radius: 1em; border: 2px solid #999">
 :exclamation:
@@ -197,6 +225,9 @@ The <code>ITEM_NAME</code> can also be a <ins>part of the name</ins> of the item
 **Example of usage:**
 
 <ins>If there is only one item with a name exactly the same as `ITEM_NAME`</ins>:
+
+#### Figure 2.1
+
 ```markdown
 USER INPUT: remove burger
 __________________________________________
@@ -211,6 +242,9 @@ __________________________________________
 ```
 
 <ins>If there is only one item with a similar spelling (different capitalization / has more letters) to `ITEM_NAME`</ins>:
+
+#### Figure 2.2
+
 ```markdown
 USER INPUT: remove Burger
 __________________________________________
@@ -228,6 +262,9 @@ __________________________________________
 ```
 
 <ins>If there are multiple items with the same name or has a name containing `ITEM_NAME`</ins>
+
+#### Figure 2.3
+
 ```markdown
 USER INPUT: remove burger
 __________________________________________
@@ -244,6 +281,9 @@ __________________________________________
 ```
 
 <ins>Upon removing an item, if there are no items left with the same name in the fridge</ins>:
+
+#### Figure 2.4
+
 ```
 USER INPUT: remove burger
 __________________________________________
@@ -265,9 +305,15 @@ __________________________________________
 <hr/>
 
 ### Update the quantity of an item in Fridget: `update`
-Use this command to update the quantity of items in Fridget.
+Use this command if you want to update the quantity of items in Fridget.
 
 Format: `update ITEM_NAME`
+
+Steps:
+1. Type the item you want to update in the following format: `update ITEM_NAME`.
+2. If there are multiple items with similar names, Fridget will prompt you to pick one by number. Do pick the number that is beside your item of choice. This is illustrated in [Figure 3.3](#figure-33) below.
+3. Fridget will prompt you for the quantity of the item that you want to update. You can feel free to type in the quantity you prefer. This is illustrated in [Figure 3.1](#figure-31) below.
+4. Do ensure that this quantity is less than `INT_MAX`. The value for`INT_MAX` can be found in the [Command Syntax](#command-syntax).
 
 <span style="display: inline-block; background-image: linear-gradient(180deg, #fff5d5, #fff3cd); padding-top: 1em; padding-bottom: 1em; padding-left: 1em; padding-right: 1em; font-style: normal; border-radius: 1em; border: 2px solid #999">
 :exclamation:
@@ -282,6 +328,9 @@ The <code>ITEM_NAME</code> can also be a <ins>part of the name</ins> of the item
 **Example of usage:**
 
 <ins>If there is only one item with a name exactly the same as `ITEM_NAME`</ins>:
+
+#### Figure 3.1
+
 ```markdown
 USER INPUT: update burger
 __________________________________________
@@ -294,6 +343,9 @@ __________________________________________
 ```
 
 <ins>If there is only one item with a similar spelling (different capitalization / has more letters) to `ITEM_NAME`</ins>:
+
+#### Figure 3.2
+
 ```markdown
 USER INPUT: update Burger
 __________________________________________
@@ -310,6 +362,9 @@ __________________________________________
 ```
 
 <ins>If there are multiple items with the same name or has a name containing `ITEM_NAME`</ins>:
+
+#### Figure 3.3
+
 ```markdown
 USER INPUT: update burger
 __________________________________________
@@ -330,6 +385,9 @@ __________________________________________
 ```
 
 <ins>If the intended value to be update is zero</ins>:
+
+#### Figure 3.4
+
 ```
 USER INPUT: update burger
 __________________________________________
@@ -361,11 +419,17 @@ __________________________________________
 
 ### Get help: `help`
 
-Use this command to see the list of commands from within Fridget.
+Use this command if you want to see the list of commands from within Fridget.
 
 Format: `help`
 
+Steps:
+1. Type `help`. A list of commands will be shown. 
+
 **Example of usage:**
+
+#### Figure 4.1
+
 ```
 USER INPUT: help
 __________________________________________
@@ -419,13 +483,19 @@ __________________________________________
 
 ### Reset all items: `reset`
 
-Use this command to reset all the items in your fridge.
+Use this command if you want to reset all the items in your fridge.
 
 Format: `reset`
+
+Steps:
+1. Type `reset`. Fridget will prompt you to confirm that you want to reset all the items in your fridge.
+2. Type `Y` if you want to reset everything. Type `N` if you would like to abort.
 
 **Example of usage:**
 
 <ins>If you decide to not reset in the end:</ins>
+
+#### Figure 5.1
 
 ```
 USER INPUT: reset
@@ -439,6 +509,8 @@ __________________________________________
 ```
 
 <ins>If you are sure you want to reset:</ins>
+
+#### Figure 5.2
 
 ```
 USER INPUT: reset
@@ -455,13 +527,19 @@ __________________________________________
 
 ### Reset all items in shopping list: `shopreset`
 
-Use this command to reset all the items in your shopping list.
+Use this command if you want to reset all the items in your shopping list.
 
 Format: `shopreset`
+
+Steps:
+1. Type `shopreset`. Fridget will prompt you to confirm that you want to reset all the items in your shopping list.
+2. Type `Y` if you want to reset everything. Type `N` if you would like to abort.
 
 **Example of usage:**
 
 <ins>If you decide to not reset in the end:</ins>
+
+#### Figure 6.1
 
 ```
 USER INPUT: shopreset
@@ -475,6 +553,8 @@ __________________________________________
 ```
 
 <ins>If you are sure you want to reset:</ins>
+
+#### Figure 6.2
 
 ```
 USER INPUT: shopreset
@@ -491,9 +571,12 @@ __________________________________________
 
 ### List all items in Fridget: `list`
 
-This commands lists all items in Fridget, in the order that you prefer.
+Use this command if you want to list all items in Fridget, in the order that you prefer.
 
 Format: `list -OPTIONAL_SORT_TYPE`
+
+Steps:
+1. Type `list` to list all items in Fridget. You can optionally choose to add an ` -OPTIONAL_SORT_TYPE` to decide how the list should be sorted. More details can be found below.
 
 * `list` Lists items in alphabetical order.
 * `list -e` Lists items in ascending order of expiry dates.
@@ -502,6 +585,8 @@ Format: `list -OPTIONAL_SORT_TYPE`
 **Example of usage:**
 
 <ins> If you want to list items in alphabetical order: </ins>
+
+#### Figure 7.1
 
 ```markdown
 USER INPUT: list
@@ -515,6 +600,8 @@ __________________________________________
 
 <ins> If you want to list items in ascending order of expiry dates: </ins>
 
+#### Figure 7.2
+
 ```
 USER INPUT: list -e
 __________________________________________
@@ -526,6 +613,8 @@ __________________________________________
 ```
 
 <ins> If you want to list items in order of how recently they were added: </ins>
+
+#### Figure 7.3
 
 ```
 USER INPUT: list -r
@@ -541,11 +630,16 @@ __________________________________________
 
 ### List items in shopping list: `shoplist`
 
-Use this command to list all the items in your shopping list.
+Use this command if you want to list all the items in your shopping list.
 
 Format: `shoplist`
 
+Steps:
+1. Type `shoplist` to list all items in your shopping list.
+
 **Example of usage:**
+
+#### Figure 8.1
 
 ```
 USER INPUT: shoplist
@@ -561,9 +655,12 @@ __________________________________________
 
 ### Find items stored in Fridget: `find`
 
-Use this command to easily find an item in Fridget by name.
+Use this command if you want to easily find an item in Fridget by name.
 
 Format: `find KEYWORD`
+
+Steps:
+1. Type `find KEYWORD` into Fridget to get all item(s) in Fridget that match your chosen `KEYWORD`.
 
 <span style="display: inline-block; background-image: linear-gradient(180deg, #fff5d5, #fff3cd); padding-top: 1em; padding-bottom: 1em; padding-left: 1em; padding-right: 1em; font-style: normal; border-radius: 1em; border: 2px solid #999">
 :exclamation:
@@ -576,6 +673,8 @@ The <code>KEYWORD</code> can also be a <ins>part of the name</ins> of the item.
 </span>
 
 **Example of usage:**
+
+#### Figure 9.1
 
 ```
 USER INPUT: find burger
@@ -593,7 +692,7 @@ __________________________________________
 
 ### List all items expiring soon: `expiring`
 
-Use this command to get a list of all expiring items.
+Use this command if you want to get a list of all expiring or expired items in Fridget.
 
 <span style="display: inline-block; background-image: linear-gradient(180deg, #d8eff3, #d1ecf1); padding-top: 1em; padding-bottom: 1em; padding-left: 1em; padding-right: 1em; font-style: normal; border-radius: 1em; border: 2px solid #999">
 :bulb:
@@ -602,7 +701,12 @@ Only items expiring within 7 days will be shown. Expired items will be shown too
 
 Format: `expiring`
 
+Steps:
+1. Type `expiring`. Fridget will display a list of all expiring or expired items.
+
 **Example of usage:**
+
+#### Figure 10.1
 
 ```markdown
 USER INPUT: expiring
@@ -617,10 +721,10 @@ __________________________________________
 
 ### See notifications: `notifs`
 
-Use this command to toggle notifications on or off. There are a total of 2 reminders, health and expiry.
+Use this command if you want to toggle notifications on or off. There are a total of 2 reminders, health and expiry.
 
-* Health: To remind you to eat healthier.
-* Expiry: To remind you that items are expiring and/or expired.
+* Health: To remind you to eat healthier. You can see it in action in [Figure 11.2](#figure-112)
+* Expiry: To remind you that items are expiring and/or expired. You can see it in action in [Figure 11.3](#figure-113)
 
 <span style="display: inline-block; background-image: linear-gradient(180deg, #d8eff3, #d1ecf1); padding-top: 1em; padding-bottom: 1em; padding-left: 1em; padding-right: 1em; font-style: normal; border-radius: 1em; border: 2px solid #999">
 :bulb:
@@ -629,7 +733,13 @@ Notifications are scheduled by default to be displayed every 4 hours, if turned 
 
 Format: notifs
 
+Steps:
+1. Type `notifs`. This will toggle the notifications in Fridget on or off. Fridget will display the current status of the notifications after your command.
+
 **Example of usage:**
+
+#### Figure 11.1
+
 ````
 USER INPUT: notifs
 __________________________________________
@@ -640,7 +750,11 @@ __________________________________________
 Turning notification on!
 __________________________________________
 ````
+
 **Example of health reminder notice:**
+
+#### Figure 11.2
+
 ````
  ___________________________________________________
 |                      HEALTH!                      |
@@ -660,6 +774,9 @@ __________________________________________
 |___________________________________________________|
 ````
 **Example of expiry reminder notice:**
+
+#### Figure 11.3
+
 ````
 __________________________________________
  ___________________________________________________
@@ -686,9 +803,14 @@ __________________________________________
 
 Use this command when you are done using Fridget. Fridget will help you to remember everything you did.
 
+Steps:
+1. Type `exit`. Fridget will display a shutdown message and save all data from your current session. You can see the above-mentioned in [Figure 12.1](#figure-121)
+
 Format: `exit`
 
 **Example of usage:**
+
+#### Figure 12.1
 
 ```markdown
 USER INPUT: exit
@@ -726,6 +848,9 @@ __________________________________________
 </span>
 
 Example:
+
+#### Figure 13.1
+
 ```
 USER INPUT: notifs ajsdfasf
 __________________________________________
@@ -744,6 +869,9 @@ __________________________________________
 </span>
 
 Example:
+
+#### Figure 13.2
+
 ```
 USER INPUT: find a
 __________________________________________
