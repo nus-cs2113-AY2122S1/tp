@@ -77,18 +77,21 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 
 6. Expenditure Categories
 
-## Notes about the command format:
-* Words encased in `<>` brackets are optional parameters.
-* Command words (i.e. `add`, `edit`, etc.) must strictly be in **lower case**.
-* Words in UPPER_CASE are the parameters to be supplied by the user. <br />
-e.g. in `add -b a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can be used as `add -b a/500 m/12`.
-NOTE: **These parameters cannot be left empty.**
-
+> ❗ Notes about the command format:
+> * Words encased in `<>` brackets are optional parameters.
+> * Command words (i.e. `add`, `edit`, etc.) must strictly be in **lower case**.
+> * Words in UPPER_CASE are the parameters to be supplied by the user.
+>   * e.g. in `add -b a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can be used as `add -b a/500 m/12`.
+>   * NOTE: **These parameters cannot be left empty.**
 #### [↑ Back to top](#top)
-
 <br />
 
 # <a id="commands"></a> Commands
+
+
+> :smiley: Hello! I'm <i> Budgie</i>, your personalised guide. My job will be to take you
+through this User Guide and give you a pleasant experience using our app!
+
 
 # <a id="add"></a> &nbsp; &nbsp;Add: `add`
 
@@ -170,13 +173,17 @@ Records down a loan record specifying when and who the money was lent out to.
 
 Format: `add -e n/BORROWER_NAME a/AMOUNT <d/DATE_OF_EXPENDITURE>`
 
-* `AMOUNT` entered will be rounded to the nearest 2 decimal places and cannot exceed 1 billion dollars.
-* `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_.
-    * If left empty, the current date according to the
-  system will be entered by default.
-    * Note: **YYYY value should correspond to the current storage file year, please use `year`
-      command to switch to the correct year before entering an expenditure of another year**
-
+<div class="alert alert-success">
+<ul>
+<li> <code>AMOUNT</code> entered will be rounded to the nearest 2 decimal places and cannot exceed 1 billion dollars. </li>
+<li> <code>DATE_OF_EXPENDITURE</code> must strictly be in the form of _YYYY-MM-DD_. </li>
+    <ul>
+        <li>If left empty, the current date according to the system will be entered by default. </li>
+        <li> Note: YYYY value should correspond to the current storage file year, please use `year`
+        command to switch to the correct year before entering an expenditure of another year </li> 
+    </ul> 
+</ul>
+</div>
 Example of usage:
 
 `add -l n/Yap Wei Xuan a/500 d/2021-08-20`
@@ -197,9 +204,13 @@ _________________________________________________________
 
 <br/>
 
-# <a id="edit"></a> &nbsp;&nbsp; Edit: `edit` 
+# <a id="edit"></a> &nbsp;&nbsp; Edit: `edit`
 
-Edits a budget or expenditure entry.
+> :smiley: Oh no! You just added an entry, but you realised that there were some incorrect information...
+If only there was a way to fix what was mistyped... well lucky for you!
+
+
+This feature allows you to edit any information in a budget, expenditure or loan entry you have previously added.
 <br />
 
 _________________________________________________________
@@ -207,7 +218,7 @@ _________________________________________________________
 
 ### <a id="edit-budget"></a> `-b` : Edit a Budget
 
-Edit the _amount_ of budget allowance for a particular month.
+Edits the _amount_ of budget allowance for a particular month.
 
 Format: `edit -b m/MONTH a/AMOUNT`
 
