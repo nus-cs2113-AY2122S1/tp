@@ -53,7 +53,7 @@ It's absolutely bonkers. Now let's get down to business.
 * Pages you need to navigate to or buttons you need to press are enclosed in quotation marks like 'This page'.
 * Code you need to type are shown like `this code`.
 * Parameters you can type are capitalised, like _THIS_PARAMETER_.
-* Whatever **Gordon** is telling you in the terminal will be enclosed in larger shaded boxes
+* Whatever **Gordon** is telling you in the terminal will be enclosed in larger shaded boxes.
 ```
 like this output
 ```
@@ -280,8 +280,8 @@ I can show you the proper format of commands.
 
 #### Description of the outcome:
 
-* I'll show you the proper format for using every command
-* Just type `help` anywhere in the terminal for a quick guide if you forget any command
+* I'll show you the proper format for using every command.
+* Just type `help` anywhere in the terminal for a quick guide if you forget any command.
 
 **Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
 
@@ -301,8 +301,8 @@ I can set the attributes of recipes, e.g. time needed, calories etc.
   * `/Difficulty` (`ATTRIBUTE_VALUE` must be one of these: `None`, `Easy`, `Medium` and `Hard`)
   * `/Price` (`ATTRIBUTE_VALUE` must be a decimal)
   * `/Time` (`ATTRIBUTE_VALUE` must be two integers, separated by a comma)
-    * The first integer represents the preparation time required for the dish
-    * The next integer then represents the cooking time
+    * The first integer represents the preparation time required for the dish.
+    * The next integer then represents the cooking time.
   * `/Ingredients` (`ATTRIBUTE_VALUE` must be ingredients separated by '+', similar to addRecipe)
   * `/Steps` (`ATTRIBUTE_VALUE` must be steps separated by '+', similar to addRecipe)
   * `/Tag` (Refer to [this section](#94-find-a-recipe-by-their-tags-find) for more details)
@@ -348,10 +348,10 @@ I can find recipes by their attributes, e.g. time needed, calories etc.
 
 #### Format: `find /ATTRIBUTE_NAME ATTRIBUTE_VALUE ` 
 
-* For `/Calories`, `/Price`, and `/Time`;
+* For `/Calories`, `/Price`, and `/Time`:
   * I'll automatically sort the results from greatest to smallest `ATTRIBUTE_VALUE`.
   * I'll show you recipes whose `ATTRIBUTE_TYPE` is less than or equal to the `ATTRIBUTE_VALUE` you specified.
-* For `/Ingredients` and `/Difficulty`;
+* For `/Ingredients` and `/Difficulty`:
   * I'll automatically sort the results in alphabetical order.
   * I'll show you recipes with the exact `ATTRIBUTE_VALUE` you are looking for.
 * For `/tag`, see [9.4](#94-find-a-recipe-by-their-tags-find) for more details!
@@ -442,7 +442,7 @@ I can untag recipes in your cookbook.
 
 #### Example of usage:
 
-assume that _Fatty Foods_ tag only has _Chocolate Milkshake_ under it
+Assume that _Fatty Foods_ tag only has _Chocolate Milkshake_ under it:
 ```
 untag / Mee Pok / Hawker Food + Noodles
 untag / Chocolate Milkshake / Fatty Foods
@@ -498,9 +498,8 @@ I can find recipes by their tag(s).
 
  #### Example of usage:
  
- Assume that _Mee Pok_ is under _Hawker Food_ and _Noodles_ tag
- <br>
- Assume that _Duck Rice_ is under _Hawker Food_ and _Favorites_ tag
+Assume that _Mee Pok_ is under _Hawker Food_ and _Noodles_ tag, and  
+assume that _Duck Rice_ is under _Hawker Food_ and _Favorites_ tag.
 ```
 find /tag Hawker Food
 find /tag Hawker Food + Noodles
@@ -519,7 +518,7 @@ Searching by tags...
 
 #### Description of the outcome:
 
-- I'll find your recipes according to the inputted tags.
+- I'll find your recipes according to the tags you keyed in.
 
 #### 9.5 List all tags in Cookbook: `listTags`
 
@@ -548,7 +547,7 @@ listTags
 ### 10. Save and Load
 
 I will automatically save all of your recipes to a .txt file, "saveFile.txt", 
-in the same directory where you ran the app. It loads the recipes when you start up Gordon.
+in the same directory where you ran the app. I'll load the recipes when you start up Gordon.
 
 > :exclamation: **Warning:** It is not advised to edit the save file directly unless you are very 
 > familiar with the syntax of how the file structured. Misuse may cause the save file to be deleted
