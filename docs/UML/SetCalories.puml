@@ -1,0 +1,51 @@
+@startuml
+
+hide footbox
+
+!include Style.puml
+skinparam sequence {
+ParticipantBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor peachpuff
+}
+
+skinparam sequenceArrowColor black
+
+--> ":Parser": parseMaster()
+activate ":Parser"
+
+' Name
+":Parser" -> ":Parser": setParse()
+activate ":Parser"
+
+":Parser" --> ":Parser"
+deactivate ":Parser"
+
+
+
+create ":SetCaloriesCommand"
+":Parser" -> ":SetCaloriesCommand": SetCaloriesCommand(String recipeName, int cal)
+activate ":SetCaloriesCommand"
+
+":SetCaloriesCommand" -> ":Cookbook" : setCalories(String recipeName, int newCalories)
+activate ":Cookbook"
+
+activate ":Recipe"
+":Cookbook" -> ":Recipe": setCalories(int newCalories)
+
+":Recipe" --> ":Cookbook"
+destroy ":Recipe"
+
+":Cookbook" --> ":SetCaloriesCommand"
+destroy ":Cookbook"
+
+":SetCaloriesCommand" --> ":Parser"
+destroy ":SetCaloriesCommand"
+
+destroy ":Parser"
+
+
+
+
+
+@enduml

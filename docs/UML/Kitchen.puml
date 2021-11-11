@@ -1,0 +1,40 @@
+@startuml
+!include Style.puml
+skinparam ArrowColor black
+skinparam classBorderColor black
+
+hide empty fields
+hide empty methods
+
+rectangle "Util" {
+    enum "<<enumeration>> \n Difficulty" LOGIC_YELLOW_1 {
+        NONE
+        EASY
+        MEDIUM
+        HARD
+    }
+
+    class Tag LOGIC_YELLOW_1
+}
+
+rectangle "Kitchen" {
+    class Cookbook LOGIC_BLUE_1 {
+    #ArrayList<Recipe> recipes
+    #ArrayList<Tag> cookbookTags
+    + addRecipe(Recipe newRecipe)
+    + setIngredients(String name, ArrayList<String> newIngredients)
+    + setSteps(String name, ArrayList<String> newSteps)
+    + setCalories(String name, int newCalories)
+    + setTimes(String name, int prepTime, int cookTime)
+    + setPrice(String name, float newPrice)
+    + setDifficulty(String name, Difficulty newDifficulty)
+    + addCookbookTag(Tag tag)
+    + addTagToRecipes(Tag tag)
+    }
+    class Recipe LOGIC_BLUE_1
+
+    Cookbook "1" --> "1" "<<enumeration>> \n Difficulty"
+    Cookbook "1" *- "*" Recipe : contains >
+    Cookbook "1" *-right-- "*" Tag : contains >
+}
+@enduml

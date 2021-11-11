@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="571px" preserveAspectRatio="none" style="width:663px;height:571px;background:#FFFFFF;" version="1.1" viewBox="0 0 663 571" width="663px" zoomAndPan="magnify"><defs/><g><rect fill="#FFDAB9" height="479.7871" style="stroke:#000000;stroke-width:1.0;" width="10" x="99" y="67.0474"/><rect fill="#FFDAB9" height="25" style="stroke:#000000;stroke-width:1.0;" width="10" x="104" y="103.9961"/><rect fill="#FFDAB9" height="84.8975" style="stroke:#000000;stroke-width:1.0;" width="10" x="104" y="214.0435"/><rect fill="#FFDAB9" height="84.8975" style="stroke:#000000;stroke-width:1.0;" width="10" x="104" y="342.8896"/><rect fill="#FFDAB9" height="273.8423" style="stroke:#000000;stroke-width:1.0;" width="10" x="340" y="174.9448"/><rect fill="#FFDAB9" height="59.0986" style="stroke:#000000;stroke-width:1.0;" width="10" x="434.5" y="487.7358"/><rect fill="#FFDAB9" height="14" style="stroke:#000000;stroke-width:1.0;" width="10" x="611.5" y="518.8345"/><rect fill="#FFFFFF" height="45.8975" style="stroke:#000000;stroke-width:2.0;" width="322" x="64" y="234.0435"/><rect fill="#FFFFFF" height="45.8975" style="stroke:#000000;stroke-width:2.0;" width="322" x="64" y="362.8896"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="104" x2="104" y1="36.0986" y2="564.8345"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="345" x2="345" y1="174.5454" y2="564.8345"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="439" x2="439" y1="487.3364" y2="564.8345"/><line style="stroke:#000000;stroke-width:1.0;stroke-dasharray:5.0,5.0;" x1="616.5" x2="616.5" y1="36.0986" y2="564.8345"/><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="60" x="74" y="5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="46" x="81" y="25.1318">:Parser</text><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="82" x="575.5" y="5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="68" x="582.5" y="25.1318">:Cookbook</text><rect fill="#FFDAB9" height="479.7871" style="stroke:#000000;stroke-width:1.0;" width="10" x="99" y="67.0474"/><rect fill="#FFDAB9" height="25" style="stroke:#000000;stroke-width:1.0;" width="10" x="104" y="103.9961"/><rect fill="#FFDAB9" height="84.8975" style="stroke:#000000;stroke-width:1.0;" width="10" x="104" y="214.0435"/><rect fill="#FFDAB9" height="84.8975" style="stroke:#000000;stroke-width:1.0;" width="10" x="104" y="342.8896"/><rect fill="#FFDAB9" height="273.8423" style="stroke:#000000;stroke-width:1.0;" width="10" x="340" y="174.9448"/><rect fill="#FFDAB9" height="59.0986" style="stroke:#000000;stroke-width:1.0;" width="10" x="434.5" y="487.7358"/><rect fill="#FFDAB9" height="14" style="stroke:#000000;stroke-width:1.0;" width="10" x="611.5" y="518.8345"/><polygon fill="#000000" points="87,63.0474,97,67.0474,87,71.0474,91,67.0474" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="0" x2="93" y1="67.0474" y2="67.0474"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="80" x="7" y="62.2925">parseMaster()</text><line style="stroke:#000000;stroke-width:2.0;" x1="109" x2="156" y1="90.9961" y2="90.9961"/><line style="stroke:#000000;stroke-width:2.0;" x1="156" x2="156" y1="90.9961" y2="103.9961"/><line style="stroke:#000000;stroke-width:2.0;" x1="115" x2="156" y1="103.9961" y2="103.9961"/><polygon fill="#000000" points="125,99.9961,115,103.9961,125,107.9961,121,103.9961" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="161" x="121" y="86.2412">addRecipeParse(String line)</text><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="114" x2="156" y1="127.9961" y2="127.9961"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="156" x2="156" y1="127.9961" y2="140.9961"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="109" x2="156" y1="140.9961" y2="140.9961"/><polygon fill="#000000" points="119,136.9961,109,140.9961,119,144.9961,115,140.9961" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="302,160.9448,312,164.9448,302,168.9448,306,164.9448" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="109" x2="308" y1="164.9448" y2="164.9448"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="118" x="116" y="160.1899">Recipe(String name)</text><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="62" x="314" y="143.9961"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="48" x="321" y="164.1279">:Recipe</text><line style="stroke:#000000;stroke-width:2.0;" x1="109" x2="156" y1="201.0435" y2="201.0435"/><line style="stroke:#000000;stroke-width:2.0;" x1="156" x2="156" y1="201.0435" y2="214.0435"/><line style="stroke:#000000;stroke-width:2.0;" x1="115" x2="156" y1="214.0435" y2="214.0435"/><polygon fill="#000000" points="125,210.0435,115,214.0435,125,218.0435,121,214.0435" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="217" x="121" y="196.2886">parseIngredients(String line, Recipe r)</text><path d="M64,234.0435 L137,234.0435 L137,240.0435 L127,250.0435 L64,250.0435 L64,234.0435 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="45.8975" style="stroke:#000000;stroke-width:2.0;" width="322" x="64" y="234.0435"/><text fill="#000000" font-family="Arial" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="28" x="79" y="247.2373">loop</text><text fill="#000000" font-family="Arial" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="106" x="152" y="246.3613">[for all ingredients]</text><polygon fill="#000000" points="328,267.9409,338,271.9409,328,275.9409,332,271.9409" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="114" x2="334" y1="271.9409" y2="271.9409"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="179" x="121" y="267.186">addIngredient(String ingredient)</text><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="114" x2="156" y1="297.9409" y2="297.9409"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="156" x2="156" y1="297.9409" y2="310.9409"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="109" x2="156" y1="310.9409" y2="310.9409"/><polygon fill="#000000" points="119,306.9409,109,310.9409,119,314.9409,115,310.9409" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="109" x2="156" y1="329.8896" y2="329.8896"/><line style="stroke:#000000;stroke-width:2.0;" x1="156" x2="156" y1="329.8896" y2="342.8896"/><line style="stroke:#000000;stroke-width:2.0;" x1="115" x2="156" y1="342.8896" y2="342.8896"/><polygon fill="#000000" points="125,338.8896,115,342.8896,125,346.8896,121,342.8896" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="188" x="121" y="325.1348">parseSteps(String line, Recipe r)</text><path d="M64,362.8896 L137,362.8896 L137,368.8896 L127,378.8896 L64,378.8896 L64,362.8896 " fill="#EEEEEE" style="stroke:#000000;stroke-width:1.0;"/><rect fill="none" height="45.8975" style="stroke:#000000;stroke-width:2.0;" width="322" x="64" y="362.8896"/><text fill="#000000" font-family="Arial" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="28" x="79" y="376.0835">loop</text><text fill="#000000" font-family="Arial" font-size="11" font-weight="bold" lengthAdjust="spacing" textLength="74" x="152" y="375.2075">[for all steps]</text><polygon fill="#000000" points="328,396.7871,338,400.7871,328,404.7871,332,400.7871" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="114" x2="334" y1="400.7871" y2="400.7871"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="119" x="121" y="396.0322">addStep(String step)</text><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="114" x2="156" y1="426.7871" y2="426.7871"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="156" x2="156" y1="426.7871" y2="439.7871"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="109" x2="156" y1="439.7871" y2="439.7871"/><polygon fill="#000000" points="119,435.7871,109,439.7871,119,443.7871,115,439.7871" style="stroke:#000000;stroke-width:1.0;"/><polygon fill="#000000" points="120,444.7871,110,448.7871,120,452.7871,116,448.7871" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="114" x2="344" y1="448.7871" y2="448.7871"/><line style="stroke:#000000;stroke-width:2.0;" x1="336" x2="354" y1="439.7871" y2="457.7871"/><line style="stroke:#000000;stroke-width:2.0;" x1="336" x2="354" y1="457.7871" y2="439.7871"/><polygon fill="#000000" points="374,473.7358,384,477.7358,374,481.7358,378,477.7358" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="109" x2="380" y1="477.7358" y2="477.7358"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="138" x="116" y="472.981">AddCommand(Recipe r)</text><rect fill="#FEFECE" height="30.0986" style="stroke:#000000;stroke-width:1.5;" width="107" x="386" y="456.7871"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="93" x="393" y="476.9189">:AddCommand</text><polygon fill="#000000" points="599.5,514.8345,609.5,518.8345,599.5,522.8345,603.5,518.8345" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;" x1="444.5" x2="605.5" y1="518.8345" y2="518.8345"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="148" x="451.5" y="514.0796">addRecipe(Recipe recipe)</text><polygon fill="#000000" points="455.5,528.8345,445.5,532.8345,455.5,536.8345,451.5,532.8345" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="449.5" x2="615.5" y1="532.8345" y2="532.8345"/><line style="stroke:#000000;stroke-width:2.0;" x1="607.5" x2="625.5" y1="523.8345" y2="541.8345"/><line style="stroke:#000000;stroke-width:2.0;" x1="607.5" x2="625.5" y1="541.8345" y2="523.8345"/><polygon fill="#000000" points="115,542.8345,105,546.8345,115,550.8345,111,546.8345" style="stroke:#000000;stroke-width:1.0;"/><line style="stroke:#000000;stroke-width:2.0;stroke-dasharray:2.0,2.0;" x1="109" x2="438.5" y1="546.8345" y2="546.8345"/><line style="stroke:#000000;stroke-width:2.0;" x1="430.5" x2="448.5" y1="537.8345" y2="555.8345"/><line style="stroke:#000000;stroke-width:2.0;" x1="430.5" x2="448.5" y1="555.8345" y2="537.8345"/><line style="stroke:#000000;stroke-width:2.0;" x1="95" x2="113" y1="537.8345" y2="555.8345"/><line style="stroke:#000000;stroke-width:2.0;" x1="95" x2="113" y1="555.8345" y2="537.8345"/><!--MD5=[9b27a873e80de58d52ff554d6c98e0b2]
+@startuml
+
+hide footbox
+
+!include Style.puml
+skinparam sequence {
+ParticipantBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor peachpuff
+}
+
+skinparam sequenceArrowColor black
+
+- -> ":Parser": parseMaster()
+activate ":Parser"
+
+":Parser" -> ":Parser": addRecipeParse(String line)
+activate ":Parser"
+
+":Parser" - -> ":Parser"
+deactivate ":Parser"
+
+create ":Recipe"
+":Parser" -> ":Recipe": Recipe(String name)
+activate ":Recipe"
+
+
+' Ingredients
+":Parser" -> ":Parser": parseIngredients(String line, Recipe r)
+activate ":Parser"
+
+loop for all ingredients
+":Parser" -> ":Recipe": addIngredient(String ingredient)
+end
+
+":Parser" - -> ":Parser"
+deactivate ":Parser"
+
+
+":Parser" -> ":Parser": parseSteps(String line, Recipe r)
+activate ":Parser"
+
+loop for all steps
+":Parser" -> ":Recipe": addStep(String step)
+end
+
+":Parser" - -> ":Parser"
+deactivate ":Parser"
+
+
+
+":Recipe" - -> ":Parser":
+destroy ":Recipe"
+
+create ":AddCommand"
+":Parser" -> ":AddCommand": AddCommand(Recipe r)
+activate ":AddCommand"
+
+":AddCommand" -> ":Cookbook": addRecipe(Recipe recipe)
+activate ":Cookbook"
+
+":Cookbook" - -> ":AddCommand"
+destroy ":Cookbook"
+
+":AddCommand" - -> ":Parser"
+destroy ":AddCommand"
+
+destroy ":Parser"
+@enduml
+
+@startuml
+
+hide footbox
+
+
+
+
+
+
+
+hide circle
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam shadowing false
+skinparam arrowThickness 2
+skinparam classAttributeIconSize 0
+skinparam sequence {
+ParticipantBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor peachpuff
+}
+
+skinparam sequenceArrowColor black
+
+- -> ":Parser": parseMaster()
+activate ":Parser"
+
+":Parser" -> ":Parser": addRecipeParse(String line)
+activate ":Parser"
+
+":Parser" - -> ":Parser"
+deactivate ":Parser"
+
+create ":Recipe"
+":Parser" -> ":Recipe": Recipe(String name)
+activate ":Recipe"
+
+
+":Parser" -> ":Parser": parseIngredients(String line, Recipe r)
+activate ":Parser"
+
+loop for all ingredients
+":Parser" -> ":Recipe": addIngredient(String ingredient)
+end
+
+":Parser" - -> ":Parser"
+deactivate ":Parser"
+
+
+":Parser" -> ":Parser": parseSteps(String line, Recipe r)
+activate ":Parser"
+
+loop for all steps
+":Parser" -> ":Recipe": addStep(String step)
+end
+
+":Parser" - -> ":Parser"
+deactivate ":Parser"
+
+
+
+":Recipe" - -> ":Parser":
+destroy ":Recipe"
+
+create ":AddCommand"
+":Parser" -> ":AddCommand": AddCommand(Recipe r)
+activate ":AddCommand"
+
+":AddCommand" -> ":Cookbook": addRecipe(Recipe recipe)
+activate ":Cookbook"
+
+":Cookbook" - -> ":AddCommand"
+destroy ":Cookbook"
+
+":AddCommand" - -> ":Parser"
+destroy ":AddCommand"
+
+destroy ":Parser"
+@enduml
+
+PlantUML version 1.2021.11(Sat Oct 02 21:26:11 SGT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: en
+Country: US
+--></g></svg>

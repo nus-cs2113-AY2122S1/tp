@@ -1,0 +1,12 @@
+Coffee
+Calories (kcal): 
+10
+Ingredients needed: 
+1. Coffee beans
+2. Water
+3. Sugar
+Method: 
+1. Boil water
+2. Grind beans
+3. Pour water over grounds
+

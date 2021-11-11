@@ -1,0 +1,42 @@
+@startuml
+!include Style.puml
+skinparam ArrowColor black
+skinparam classBorderColor black
+
+hide empty fields
+hide empty methods
+
+class Gordon #white {
+Gordon()
+Run()
+}
+
+rectangle Util {
+    class Parser {
+    parseMaster()
+    parseNextLine()
+    }
+
+    class Command {
+    execute()
+    }
+
+    class UI {
+    printIntro()
+    printExitMessage()
+    printHelp()
+    }
+}
+
+rectangle exception {
+    class GordonException LOGIC_PINK_1 {
+    }
+}
+
+Gordon "1" -> "1" Parser : creates >
+Parser "1" --> "*" Command : creates >
+Parser "1" --> "*" UI : uses >
+GordonException "*" <-- "1" Parser : creates <
+
+
+@enduml

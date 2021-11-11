@@ -1,0 +1,84 @@
+@startuml
+!include Style.puml
+skinparam ArrowColor black
+left to right direction
+
+hide empty fields
+hide empty methods
+
+rectangle "Command" {
+    rectangle "{abstract}\nCommand" LOGIC_PINK_1 {
+    }
+
+    rectangle "Basic Commands" {
+        rectangle AddCommand LOGIC_GREEN_1 {
+        }
+
+        rectangle DeleteCommand LOGIC_GREEN_1 {
+        }
+
+        rectangle CheckCommand LOGIC_GREEN_1 {
+        }
+
+        rectangle ListRecipesCommand LOGIC_GREEN_1 {
+        }
+
+        rectangle HelpCommand LOGIC_GREEN_1 {
+        }
+
+        rectangle NullCommand LOGIC_GREEN_1 {
+        }
+    }
+
+    Rectangle "Find Commands" {
+        rectangle FindCaloriesCommand LOGIC_BLUE_1 {
+        }
+
+        rectangle FindDifficultyCommand LOGIC_BLUE_1 {
+        }
+
+        rectangle FindIngredientsCommand LOGIC_BLUE_1 {
+        }
+
+        rectangle FindPriceCommand LOGIC_BLUE_1 {
+        }
+
+        rectangle FindTagsCommand LOGIC_BLUE_1 {
+        }
+    }
+
+    rectangle "Set Commands" {
+        rectangle SetIngredientsCommand LOGIC_RED_2 {
+        }
+
+        rectangle SetStepsCommand LOGIC_RED_2 {
+        }
+
+        rectangle SetCaloriesCommand LOGIC_RED_2 {
+        }
+
+        rectangle SetDifficultyCommand LOGIC_RED_2 {
+        }
+
+        rectangle SetPriceCommand LOGIC_RED_2 {
+        }
+    }
+
+    rectangle "Tag Commands" {
+            rectangle TagAddCommand LOGIC_YELLOW_1 {
+            }
+
+            rectangle TagDeleteCommand LOGIC_YELLOW_1 {
+            }
+
+            rectangle TagUntagCommand LOGIC_YELLOW_1 {
+            }
+        }
+
+    "{abstract}\nCommand" <|-- "Basic Commands"
+    "Tag Commands" --|> "{abstract}\nCommand"
+    "Find Commands" --|> "{abstract}\nCommand"
+    "{abstract}\nCommand" <|-left- "Set Commands"
+
+}
+@enduml

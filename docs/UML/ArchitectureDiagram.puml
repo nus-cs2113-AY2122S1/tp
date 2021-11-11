@@ -1,0 +1,52 @@
+@startuml
+!include Style.puml
+skinparam ArrowColor black
+hide empty fields
+hide empty methods
+
+actor User
+database Computer
+
+rectangle Gordon {
+}
+
+rectangle Cookbook LOGIC_BLUE_1 {
+}
+
+rectangle Recipe LOGIC_BLUE_1 {
+}
+
+rectangle Parser LOGIC_YELLOW_1 {
+}
+
+rectangle Tag LOGIC_YELLOW_1 {
+}
+
+rectangle Storage LOGIC_YELLOW_1 {
+}
+
+rectangle Command LOGIC_GREEN_1 {
+}
+
+rectangle UI LOGIC_YELLOW_1 {
+}
+
+rectangle GordonException LOGIC_PINK_1 {
+}
+
+User .> Gordon
+Gordon --> Parser
+Gordon ---> Cookbook
+Parser --> GordonException
+Command --> GordonException
+Storage <--> Cookbook
+Cookbook --> Recipe
+Cookbook --> Tag
+Gordon --> Storage
+Parser --> Cookbook
+Parser --> Command
+Parser --> UI
+
+Command --> Recipe
+Storage ..> Computer
+@enduml

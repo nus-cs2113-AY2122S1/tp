@@ -1,0 +1,69 @@
+@startuml
+
+hide footbox
+
+!include Style.puml
+skinparam sequence {
+ParticipantBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor peachpuff
+}
+
+skinparam sequenceArrowColor black
+
+--> ":Parser": parseMaster()
+activate ":Parser"
+
+":Parser" -> ":Parser": addRecipeParse(String line)
+activate ":Parser"
+
+":Parser" --> ":Parser"
+deactivate ":Parser"
+
+create ":Recipe"
+":Parser" -> ":Recipe": Recipe(String name)
+activate ":Recipe"
+
+
+' Ingredients
+":Parser" -> ":Parser": parseIngredients(String line, Recipe r)
+activate ":Parser"
+
+loop for all ingredients
+":Parser" -> ":Recipe": addIngredient(String ingredient)
+end
+
+":Parser" --> ":Parser"
+deactivate ":Parser"
+
+
+":Parser" -> ":Parser": parseSteps(String line, Recipe r)
+activate ":Parser"
+
+loop for all steps
+":Parser" -> ":Recipe": addStep(String step)
+end
+
+":Parser" --> ":Parser"
+deactivate ":Parser"
+
+
+
+":Recipe" --> ":Parser":
+destroy ":Recipe"
+
+create ":AddCommand"
+":Parser" -> ":AddCommand": AddCommand(Recipe r)
+activate ":AddCommand"
+
+":AddCommand" -> ":Cookbook": addRecipe(Recipe recipe)
+activate ":Cookbook"
+
+":Cookbook" --> ":AddCommand"
+destroy ":Cookbook"
+
+":AddCommand" --> ":Parser"
+destroy ":AddCommand"
+
+destroy ":Parser"
+@enduml

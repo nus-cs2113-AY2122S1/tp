@@ -1,0 +1,31 @@
+!define LOGIC_BLUE_1 #b3dff3
+!define LOGIC_BLUE_2 #a1d1fd
+!define LOGIC_BLUE_3 #a7d3f7
+!define LOGIC_BLUE_4 #1e75d9
+!define LOGIC_BLUE_5 #1f408e
+
+!define LOGIC_PINK_1 #f4c7f8
+
+!define LOGIC_GREEN_1 #DFF3B3
+!define LOGIC_GREEN_2 #DFF3B3
+!define LOGIC_GREEN_3 #DFF3B3
+!define LOGIC_GREEN_4 #3c5648
+!define LOGIC_GREEN_5 #DFF3B3
+
+!define LOGIC_YELLOW_1 #fdfcbe
+!define LOGIC_YELLOW_2 #DFF3B3
+!define LOGIC_YELLOW_3 #DFF3B3
+!define LOGIC_YELLOW_4 #3c5648
+!define LOGIC_YELLOW_5 #DFF3B3
+
+!define LOGIC_RED_1 #E1300A
+!define LOGIC_RED_2 #FF5151
+
+!define LOGIC_MAGENTA_1 #FA21E3
+
+hide circle
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam shadowing false
+skinparam arrowThickness 2
+skinparam classAttributeIconSize 0

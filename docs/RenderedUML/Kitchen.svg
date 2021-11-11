@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="438px" preserveAspectRatio="none" style="width:509px;height:438px;background:#FFFFFF;" version="1.1" viewBox="0 0 509 438" width="509px" zoomAndPan="magnify"><defs/><g><!--MD5=[a55135535b5c544b99c33b17428c3b14]
+cluster Util--><rect fill="#FFFFFF" height="147" style="stroke:#000000;stroke-width:1.5;" width="201" x="100" y="285"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="23" x="189" y="300.1318">Util</text><!--MD5=[eb6ea87d0d0a91892a2beb4011c98068]
+cluster Kitchen--><rect fill="#FFFFFF" height="230" style="stroke:#000000;stroke-width:1.5;" width="496" x="7" y="7"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="53" x="228.5" y="22.1318">Kitchen</text><!--MD5=[f579a6c413791e75a8adf693a61ee201]
+class <<enumeration>> \n Difficulty--><rect codeLine="9" fill="#FDFCBE" height="96.1934" id="&lt;&lt;enumeration&gt;&gt; \n Difficulty" style="stroke:#000000;stroke-width:1.5;" width="106" x="179" y="320"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="97" x="182" y="336.2559">&lt;&lt;enumeration&gt;&gt;</text><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="46" x="210.5" y="350.0547">Difficulty</text><line style="stroke:#000000;stroke-width:1.5;" x1="180" x2="284" y1="357.5977" y2="357.5977"/><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="32" x="185" y="371.9155">NONE</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="28" x="185" y="384.5645">EASY</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="44" x="185" y="397.2134">MEDIUM</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="31" x="185" y="409.8623">HARD</text><!--MD5=[39d6d2ea03de602dbf4d534e70c872a9]
+class Tag--><rect codeLine="16" fill="#FDFCBE" height="23.7988" id="Tag" style="stroke:#000000;stroke-width:1.5;" width="27" x="116.5" y="356"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="21" x="119.5" y="372.2559">Tag</text><!--MD5=[582d2bf949e04e7ea0860600380cbf03]
+class Cookbook--><rect codeLine="20" fill="#B3DFF3" height="178.937" id="Cookbook" style="stroke:#000000;stroke-width:1.5;" width="320" x="23" y="42"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="56" x="155" y="58.2559">Cookbook</text><line style="stroke:#000000;stroke-width:1.5;" x1="24" x2="342" y1="65.7988" y2="65.7988"/><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="135" x="29" y="80.1167">#ArrayList&lt;Recipe&gt; recipes</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="157" x="29" y="92.7656">#ArrayList&lt;Tag&gt; cookbookTags</text><line style="stroke:#000000;stroke-width:1.5;" x1="24" x2="342" y1="99.0967" y2="99.0967"/><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="157" x="29" y="113.4146">+addRecipe(Recipe newRecipe)</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="308" x="29" y="126.0635">+setIngredients(String name, ArrayList&lt;String&gt; newIngredients)</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="256" x="29" y="138.7124">+setSteps(String name, ArrayList&lt;String&gt; newSteps)</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="207" x="29" y="151.3613">+setCalories(String name, int newCalories)</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="251" x="29" y="164.0103">+setTimes(String name, int prepTime, int cookTime)</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="186" x="29" y="176.6592">+setPrice(String name, float newPrice)</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="239" x="29" y="189.3081">+setDifficulty(String name, Difficulty newDifficulty)</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="138" x="29" y="201.957">+addCookbookTag(Tag tag)</text><text fill="#000000" font-family="Arial" font-size="11" lengthAdjust="spacing" textLength="141" x="29" y="214.606">+addTagToRecipes(Tag tag)</text><!--MD5=[20418cb98520644da1e87dc0310aa74a]
+class Recipe--><rect codeLine="33" fill="#B3DFF3" height="23.7988" id="Recipe" style="stroke:#000000;stroke-width:1.5;" width="45" x="441.5" y="119.5"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="39" x="444.5" y="135.7559">Recipe</text><!--MD5=[3c7c8e9883abad6086eb4b5981bd3f7e]
+link Cookbook to <<enumeration>> \n Difficulty--><path codeLine="35" d="M201.52,221.15 C208.13,252.78 215.36,287.36 221.11,314.91 " fill="none" id="Cookbook-to-&lt;&lt;enumeration&gt;&gt; \n Difficulty" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="222.17,319.97,224.2301,310.339,221.1399,315.0773,216.4017,311.9871,222.17,319.97" style="stroke:#000000;stroke-width:2.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="195.7169" y="241.086">1</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="212.9622" y="309.1121">1</text><!--MD5=[12aa1a5e13c2f3a9b3bc9488321658f3]
+reverse link Cookbook to Recipe--><path codeLine="36" d="M356.26,131.5 C390.03,131.5 421.12,131.5 441.14,131.5 " fill="none" id="Cookbook-backto-Recipe" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="343.2,131.5,349.2,135.5,355.2,131.5,349.2,127.5,343.2,131.5" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="370.25,120.9744,361.2049,118.0354,361.2049,123.9133,370.25,120.9744" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="49" x="374.25" y="125.6938">contains</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="351.1292" y="129.3793">1</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="5" x="428.3735" y="127.7262">*</text><!--MD5=[698322bc5fa7bd1029ba01cf661eabff]
+reverse link Cookbook to Tag--><path codeLine="37" d="M140.96,233.53 C139.06,240.05 137.38,246.58 136,253 C128.03,290.01 128.61,335.25 129.42,355.84 " fill="none" id="Cookbook-backto-Tag" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="144.83,221.01,139.2299,225.553,141.2695,232.4696,146.8696,227.9266,144.83,221.01" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="140.5303,266.4523,144.3059,257.7232,138.454,257.1711,140.5303,266.4523" style="stroke:#000000;stroke-width:1.0;"/><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="49" x="150" y="266.1938">contains</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="7" x="134.3792" y="241.238">1</text><text fill="#000000" font-family="Arial" font-size="13" lengthAdjust="spacing" textLength="5" x="122.9955" y="345.4383">*</text><!--MD5=[3a2b80bfabc14ec404272857f2039119]
+@startuml
+!include Style.puml
+skinparam ArrowColor black
+skinparam classBorderColor black
+
+hide empty fields
+hide empty methods
+
+rectangle "Util" {
+    enum "<<enumeration>> \n Difficulty" LOGIC_YELLOW_1 {
+        NONE
+        EASY
+        MEDIUM
+        HARD
+    }
+
+    class Tag LOGIC_YELLOW_1
+}
+
+rectangle "Kitchen" {
+    class Cookbook LOGIC_BLUE_1 {
+    #ArrayList<Recipe> recipes
+    #ArrayList<Tag> cookbookTags
+    + addRecipe(Recipe newRecipe)
+    + setIngredients(String name, ArrayList<String> newIngredients)
+    + setSteps(String name, ArrayList<String> newSteps)
+    + setCalories(String name, int newCalories)
+    + setTimes(String name, int prepTime, int cookTime)
+    + setPrice(String name, float newPrice)
+    + setDifficulty(String name, Difficulty newDifficulty)
+    + addCookbookTag(Tag tag)
+    + addTagToRecipes(Tag tag)
+    }
+    class Recipe LOGIC_BLUE_1
+
+    Cookbook "1" - -> "1" "<<enumeration>> \n Difficulty"
+    Cookbook "1" *- "*" Recipe : contains >
+    Cookbook "1" *-right- - "*" Tag : contains >
+}
+@enduml
+
+@startuml
+
+
+
+
+
+
+hide circle
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam shadowing false
+skinparam arrowThickness 2
+skinparam classAttributeIconSize 0
+skinparam ArrowColor black
+skinparam classBorderColor black
+
+hide empty fields
+hide empty methods
+
+rectangle "Util" {
+    enum "<<enumeration>> \n Difficulty" #fdfcbe {
+        NONE
+        EASY
+        MEDIUM
+        HARD
+    }
+
+    class Tag #fdfcbe
+}
+
+rectangle "Kitchen" {
+    class Cookbook #b3dff3 {
+    #ArrayList<Recipe> recipes
+    #ArrayList<Tag> cookbookTags
+    + addRecipe(Recipe newRecipe)
+    + setIngredients(String name, ArrayList<String> newIngredients)
+    + setSteps(String name, ArrayList<String> newSteps)
+    + setCalories(String name, int newCalories)
+    + setTimes(String name, int prepTime, int cookTime)
+    + setPrice(String name, float newPrice)
+    + setDifficulty(String name, Difficulty newDifficulty)
+    + addCookbookTag(Tag tag)
+    + addTagToRecipes(Tag tag)
+    }
+    class Recipe #b3dff3
+
+    Cookbook "1" - -> "1" "<<enumeration>> \n Difficulty"
+    Cookbook "1" *- "*" Recipe : contains >
+    Cookbook "1" *-right- - "*" Tag : contains >
+}
+@enduml
+
+PlantUML version 1.2021.11(Sat Oct 02 21:26:11 SGT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: GB
+--></g></svg>
