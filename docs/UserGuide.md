@@ -75,9 +75,17 @@ This section provides you with a short guide on how to get Traveller up and runn
 
 1. Ensure that you have Java 11 or above installed. You can install it from this 
 [link](https://www.oracle.com/java/technologies/downloads/#java11).
+> ![](documentationPics/tip.png) To check your java version, enter `java -version`.
 2. Download the latest version of `Traveller.jar` [here](https://github.com/AY2122S1-CS2113T-W13-1/tp/releases).
 3. Move the executable jar file to an empty directory of your choice.
 4. Navigate to the directory containing `Traveller.jar` in your desired CLI and enter `java -jar Traveller.jar`.
+> ![](documentationPics/tip.png) If you are unfamiliar with a CLI, you can use the command prompt/terminal provided by 
+> your OS. For Windows, open your Start Menu and enter `cmd`. For macOS, search `terminal` in LaunchPad. For Linux,
+> you can use the shortcut `Ctrl + Alt + T` or searching `terminal` in the Dash.
+> 
+> If you have moved `Traveller.jar` to your Desktop, enter `cd Desktop` to navigate to the
+> Desktop directory.
+
    You should see Traveller's welcome message as shown below.
 
    ![Welcome](./documentationPics/welcome.png)
@@ -89,6 +97,8 @@ This section provides you with a short guide on how to get Traveller up and runn
    * `view FamilyTrip2021` : Shows your existing trips and their details.
    * `delete FamilyTrip2021` : Deletes the trip called `FamilyTrip2021`.
    * `exit` : Exits the program.
+
+
 
 <br/>
 
