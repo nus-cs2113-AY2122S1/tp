@@ -15,7 +15,7 @@ Use Traveller so that you can plan your trips with ease and focus on what matter
 
 ### What is a Command Line Interface (CLI)?
 A CLI is a way of interacting with applications via lines of text, instead of the usual way of clicking on the application.
-Each computer will have their own CLI, such as the Windows' Powershell and the macOS's Terminal.
+Each computer will have their own CLI, such as the Windows Powershell and the macOS's Terminal.
 
 ### What is this guide for?
 This guide's purpose is to help users like you understand how to use the Traveller application to its fullest potential.
@@ -306,13 +306,14 @@ ________________________________________________________________________________
 _________________________________________________________________________________
 ```
 
-> ![](documentationPics/tip.png) Edit only allows you to change the name, to and from of a trip.
+> ![](documentationPics/tip.png) Edit only allows you to change the TRIP_NAME, SOURCE_COUNTRY and DESTINATION_COUNTRY 
+> of a trip.
 > To change your trip itinerary use [edit-item](#210-editing-an-item-edit-item) instead!
 
 <br/>
 
 ### 2.10. Editing an item: `edit-item`
-Edits and updates existing item from a trip and updates it to a new corresponding item.
+Edits the time or name field of an existing item in a trip.
 
 #### Format: `edit-item TRIP_NAME /day DAY_NUMBER /index ITEM_INDEX /time NEW_TIME /name NEW_NAME`
 
@@ -350,7 +351,8 @@ ________________________________________________________________________________
 <br/>
 
 ### 2.11. Searching for an item: `search-item`
-Searches for an item keyword from a trip and returns the resulting matching items.
+Search allows you to find all items from the selected day that contain the desired keyword. 
+Also, this keyword can be as short or as long as you want, from 'ant’ to 'zombie'!
 
 #### Format: `search-item TRIP_NAME /day DAY_INDEX /key KEYWORD`
 
@@ -393,9 +395,9 @@ ____________________________________________________________
 	5.0
 ____________________________________________________________
 ```
-> ![](documentationPics/tip.png) shortest-time allows you to find the shortest time from one country to 
+> ![](documentationPics/tip.png) `shortest-time` allows you to find the shortest time from one country to 
 > another! If you wish to find or research on costs instead, do take a look at our shortest cost function 
-> at [shortest-cost](#213-finding-the-least-cost-shortest-cost)
+> at [`shortest-cost`](#213-finding-the-least-cost-shortest-cost).
 
 <br/>
 
@@ -415,9 +417,9 @@ ____________________________________________________________
 	400.0
 ____________________________________________________________
 ```
-> ![](documentationPics/tip.png) shortest-cost allows you to find the least cost from one country to
+> ![](documentationPics/tip.png) `shortest-cost` allows you to find the least cost from one country to
 > another! If you wish to find or research in terms of flight time instead, do take a look at our 
-> time function instead at [shortest-time](#212-finding-the-shortest-time-shortest-time)
+> time function instead at [`shortest-time`](#212-finding-the-shortest-time-shortest-time).
 
 <br/>
 
@@ -452,7 +454,7 @@ if the files have been changed and re-download them from our
 
 **A**: Transfer the entire folder containing the items listed below to the other computer. 
    * *Traveller.jar*
-   * *save* folder with *save.txt* inside
+   * *save* folder with *save.txt* inside.
 
 <br/>
 
