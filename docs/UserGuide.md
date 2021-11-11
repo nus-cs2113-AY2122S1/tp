@@ -16,13 +16,13 @@
   1. [Find a recipe by attribute](#8-find-a-recipe-by-attribute-find)
   1. [Do cool stuff with tags](#9-do-cool-stuff-with-tags)
       1. [Tag a recipe](#91-adding-tags-to-recipes-tag)
-      1. [Untag a recipe](#92-untagging-tags-from-recipes-untag)
-      1. [Delete a tag](#93-deleting-tags-from-cookbook-deletetag)
+      1. [Untag a recipe](#92-untag-tags-from-recipes-untag)
+      1. [Delete a tag](#93-delete-tags-from-cookbook-deletetag)
       1. [List all tags](#94-find-a-recipe-by-their-tags-find)
-      1. [Find recipes by tag](#95-list-all-your-tags-listtags)
-  1. [Save and load your recipes](#10-saving-and-loading)
+      1. [Find recipes by tag](#95-list-all-tags-in-cookbook-listtags)
+  1. [Save and load your recipes](#10-save-and-load)
 * [**Cheat sheet**](#cheat-sheet)  
-* [**FAQ**](#FAQ)
+* [**FAQ**](#faq)
 
 ## Who is Gordon? 
 
@@ -429,7 +429,7 @@ Successfully tagged Duck Rice under Favorites
 
 - I'll tag your recipe accordingly.
 
- 
+
 #### 9.2 Untag tags from Recipes: `untag`
 
 I can untag recipes in your cookbook.
@@ -496,7 +496,7 @@ I can find recipes by their tag(s).
 * I'll search for recipes that have **ALL** tags as defined in `TAG_NAME`.
 * Tags are case-sensitive! (favorites is **NOT** the same as FAVORITES)
 
- #### Example of usage:
+#### Example of usage:
  
 Assume that _Mee Pok_ is under the _Hawker Food_ and _Noodles_ tag, and  
 assume that _Duck Rice_ is under the _Hawker Food_ and _Favorites_ tag.
