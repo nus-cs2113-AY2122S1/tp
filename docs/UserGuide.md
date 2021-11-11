@@ -80,7 +80,7 @@ This section provides you with a short guide on how to get Traveller up and runn
 3. Move the executable jar file to an empty directory of your choice.
 4. Navigate to the directory containing `Traveller.jar` in your desired CLI and enter `java -jar Traveller.jar`.
 > ![](documentationPics/tip.png) If you are unfamiliar with a CLI, you can use the command prompt/terminal provided by 
-> your OS. For Windows, open your Start Menu and enter `cmd`. For macOS, search `terminal` in LaunchPad. For Linux,
+> your computer. For Windows, open your Start Menu and enter `cmd`. For macOS, search `terminal` in LaunchPad. For Linux,
 > you can use the shortcut `Ctrl + Alt + T` or searching `terminal` in the Dash.
 > 
 > If you have moved `Traveller.jar` to your Desktop, enter `cd Desktop` to navigate to the
