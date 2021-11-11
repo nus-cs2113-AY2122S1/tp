@@ -31,6 +31,7 @@ for tech-savvy students who have trouble keeping track of their expenses.
     * [Month: `-c`](#stat-budget)
     * [Year: `-l`](#stat-year)
   * [Guides](#guides)
+  * [CSV](#csv)
   * [DB](#db)
   * [Exit](#exit)
 * [FAQ](#faq)
@@ -45,10 +46,18 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 
 ## <a id="getting-started"></a> Quick Start
 
-1. Ensure that you have Java 11 or above installed.
-2. Check your java version by entering "java -version" command to your terminal. 
-3. Down the latest version of `Budget Tracker` from [here]().
+1. Ensure that you have Java 11 or above installed. Otherwise, you can download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
+   Select the respective download for your operating system.
+2. Check your java version by entering "java -version" command to your terminal.
+
+   ![java version check](images/java-version-cmd.png)
+
+3. Download the latest version of `Budget Tracker` from [here](https://github.com/AY2122S1-CS2113T-F11-2/tp/releases/download/v2.1/tp.jar).
 4. If you have anti-virus, please add an exception on the directory you have downloaded the `Budget Tracker`.
+   For example, if your Tp.jar file is in the "tp-folder", then you can create an exception in that folder 
+   in your anti-virus. 
+   
+   ![AV-Exception](images/exception-AV.png)
 
 #### [↑ Back to top](#top)
 
@@ -593,7 +602,9 @@ _________________________________________________________
 
 ### <a id="stat-year"></a> `-y` : View Statistics for the Year
 
-Display the statistics for the current database year which the user is working on. 
+Surely things get messy after you have many expenditures, loan and budget entries. Is there
+a easy way to visualize the amount of budget used or left? Yes! `stat -y` 
+display the statistics for the current database year which the user is working on. 
 
 Format: `stat -y t/TYPE_OF_GRAPHICAL_VIEW`
 
@@ -626,8 +637,9 @@ Percentage of Money Spent in 2021
 
 `stat -y t/2`
 
-Expected outcome: An overall percentage bar graph showing the amount of money spent in that particular year and if the 
-overall expenditure exceeds the budget available, an explosion will be shown on the graph.
+Expected outcome: If you feel that type 1 have too much detail. Then feel free to use Type 2! 
+It is a single overall percentage bar graph showing the amount of money spent in that particular year 
+and if the overall expenditure exceeds the budget available, an explosion :boom: will be shown on the graph. 
 
 ```
 ========================================================
@@ -659,16 +671,16 @@ Percentage: 56.00%
 
 ```
 Percentage: 143.03%
-              _.-^^---....,,---_
-           _--                  --_
-          <          Overspent!       >)
-           \._                   _./
-              ```--. . , ; .--'''
-                    | |   |
-                 .-=||  | |=-.
-                 `-=#$%&%$#=-'
-                    | ;  :|
-           _____.,-#%&$@%#&#~,._____
+               _.-^^---....,,---_
+            _--                  --_
+           <          Overspent!       >)
+            \._                   _./
+               ```--. . , ; .--'''
+                     | |   |
+                  .-=||  | |=-.
+                  `-=#$%&%$#=-'
+                     | ;  :|
+            _____.,-#%&$@%#&#~,._____
 100%                  #####
 95%                   #####
 90%                   #####
@@ -718,9 +730,45 @@ _________________________________________________________
 
 <br />
 
+# <a id="csv"></a> &nbsp;&nbsp; CSV: `csv`
+
+If our statistical analysis feature is not good enough for you, you may convert the database records
+into a csv file by simple keying in the `csv` command. You will then be able to use Excel to do advance
+statistical analysis.
+
+Format: `csv`
+
+* The format must be strictly as stated above.
+
+Example of usage:
+
+`csv`
+
+Expected outcome: A notification will tell you that the csv file have been successfully created first.
+The csv file will be in the data folder, opening it up you should see all the current year's records.
+
+```
+========================================================
+Your csv file have been successfully created in the data folder!
+
+Please have a look!
+========================================================
+```
+
+![java version check](images/csv.png)
+
+#### [↑ Back to top](#top)
+<br />
+
+_________________________________________________________
+
+<br />
+
 # <a id="db"></a> &nbsp;&nbsp; DB: `db`
 
-Displays all the available database. 
+What if you have forgotten all the database years that you have been using? Fear not! `db` command 
+is here to help! `db` command basically list out all the available database text file you currently
+have. 
 
 Format: `db`
 
@@ -750,7 +798,8 @@ _________________________________________________________
 
 # <a id="exit"></a> &nbsp;&nbsp; Exit the program: `bye`
  
-Exits the program. 
+When you are done with using the app and wish to exit the app. Enter the command `bye` to 
+say goodbye with our app :wave:
 
 Format: `bye`
 
@@ -785,7 +834,9 @@ Bye, see you again soon!
   
   <br />
 
-* How to change my Java version to Java 11 in case if my main JDK is not Java 11?
+* How to change use Java 11 if I do not want my main JDK to change to Java 11?
+  * Download a zipped version instead of an executable [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
+  * Extract the zip JDK to a desired directory.
   * Create a .bat file with the following content.
     <br />
     @ECHO OFF <br />
@@ -794,6 +845,9 @@ Bye, see you again soon!
     echo Java home set to: %JAVA_HOME% <br />
     echo Java 11 activated <br />
     java -version <br />
+
+  :bulb: Note that <Directory of JDK> is the directory where your JDK has been unzipped towards.
+
 #### [↑ Back to top](#top)
 
 <br />
