@@ -1,3 +1,4 @@
+
 # Click - User Guide
 
 ## Table of Contents
@@ -5,36 +6,40 @@
 1. [Introduction](#1-introduction)
 2. [Quick Start](#2-quick-start)
 3. [Features](#3-features)\
-3.0 [Getting Help](#30-getting-help)\
-3.1 [Managing your modules](#31-managing-your-modules)\
-3.2 [Managing your zoom-links](#32-managing-your-zoom-links)\
-3.3 [Managing your calendar](#33-managing-your-calendar)\
-3.4 [Managing your journal](#34-managing-your-journal)\
-3.5 [Managing your food consumption](#35-managing-your-food-consumption)\
-3.6 [Exit](#36-exit)
+   3.0 [Getting Help](#30-getting-help)\
+   3.1 [Managing your modules](#31-managing-your-modules)\
+   3.2 [Managing your zoom-links](#32-managing-your-zoom-links)\
+   3.3 [Managing your calendar](#33-managing-your-calendar)\
+   3.4 [Managing your journal](#34-managing-your-journal)\
+   3.5 [Managing your food consumption](#35-managing-your-food-consumption)\
+   3.6 [Exit](#36-exit)
 4. [Command Summary](#4-command-summary)
 5. [Frequently Asked Questions](#5-frequently-asked-questions)
 6. [Bug reports](#6-bug-reports)
+
+<div style="page-break-after: always;"></div>
 
 ## 1. Introduction
 
 Welcome to your all-in-one desktop app for managing modules, tracking your food consumption, time scheduling, journaling, and CAP planning!
 We know that you are a Computing student here at NUS 👨‍🎓 and may prefer typing ⌨ to swiping (Hello Vim! 😉)
-, so we think that our command line interface for cramming & knowledge (Click) is a great fit for you! 
+, so we think that our command line interface for cramming & knowledge (Click) is a great fit for you!
 
-This user guide serves to give you a brief overview of our features, as well as how to use them. 
+This user guide serves to give you a brief overview of our features, as well as how to use them.
 
->**To use this guide effectively** 
-> 
+>**To use this guide effectively**
+>
 > We ordered the commands and features in ***sequential order*** for you,
 > so some commands cannot work independently without using other commands first.
 > If you want to follow our sequence, please enter every command given in the examples.
-> 
+>
 > An example of dependent commands is : you cannot add a lecture or zoom link without adding the specified module.
-> 
-> Therefore, please follow the sequence from 3.0 on to 3.6! 
+>
+> Therefore, please follow the sequence from 3.0 on to 3.6!
 
 Jump in to the section [2. Quick Start](#2-quick-start) to get started!
+
+<div style="page-break-after: always;"></div>
 
 ## 2. Quick Start
 
@@ -59,21 +64,23 @@ Jump in to the section [2. Quick Start](#2-quick-start) to get started!
 
 * Type the valid command into the terminal (or Command Prompt) and press <kbd>return</kbd> (or <kbd>Enter</kbd>) to run the command.
 
-## 3. Features 
+<div style="page-break-after: always;"></div>
+
+## 3. Features
 
 **Before you begin, please note the command format:**
 
 - Words in `[UPPER_CASE]` are the parameters to be supplied by you.
-  
+
 - The `[INDEX]` used in various commands must be a number specifying the order of an item in the list of items.
-The smallest index would naturally be 1. (1-based)
-  
+  The smallest index would naturally be 1. (1-based)
+
 - The `{}` wrapping indicates an optional parameter.
 
 - Parameters cannot be reordered.
   Example: If the command specifies `module add c/[MODULE_CODE] n/[MODULE_NAME]`, keying in `module add n/[MODULE_NAME] c/[MODULE_CODE]` will result in an invalid command.
 
-> **NOTE**: 
+> **NOTE**:
 > We left out some expected commands for readability as they will print out similar messages
 
 ### 3.0 Getting Help
@@ -82,6 +89,8 @@ Click helps you by showing all available commands and syntax
 Format: `help`
 
 You can refer  to [Command Summary](#4-command-summary) for a TLDR version.
+
+<div style="page-break-after: always;"></div>
 
 ### 3.1 Managing your modules
 
@@ -102,6 +111,8 @@ Click supports 4 ways of adding Modules:
 > - The module code must not be empty.
 
 
+<div style="page-break-after: always;"></div>
+
 **Adding with module code, module name, modular credits, and expected grade**
 
 Format: `module add c/[MODULE_CODE] n/[MODULE_NAME] m/[MODULAR_CREDITS] e/[EXPECTED_GRADE]`
@@ -117,6 +128,7 @@ Expected outcome:
 	__________________________________________________
 ```
 
+
 **Adding with module code, module name, and modular credits**
 
 Format: `module add c/[MODULE_CODE] n/[MODULE_NAME] m/[MODULAR_CREDITS]`
@@ -131,6 +143,8 @@ Expected outcome:
 	CS1231 | Discrete Structure | MC: 4 | Expected grade: NA
 	__________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 **Adding with module code and module name**
 
@@ -161,6 +175,8 @@ Expected outcome:
 	CG2028 | None | MC: 4 | Expected grade: NA
 	__________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 #### 3.1.2 Listing Modules: `module list`
 
@@ -198,6 +214,8 @@ Expected outcome:
 	__________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### 3.1.4 Editing CAP Information
 
 Edits information of your current Cumulative Average Point (CAP) and the number of modular credits you have taken so that Click can calculate your expected CAP.
@@ -234,6 +252,8 @@ Expected outcome:
 	Your expected CAP based on the modules you are taking is: 4.55
 	__________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### 3.2 Managing your Zoom links
 
@@ -276,6 +296,8 @@ Expected outcome:
 
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### 3.2.3 List all zoom links: `zoom list`
 Lists all zoom links.
 
@@ -303,6 +325,8 @@ Example:
 ```
 zoom open CS2113T
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### 3.3 Managing your calendar
 
@@ -346,6 +370,8 @@ Expected outcome:
 
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### 3.3.3 Listing tasks: `calendar list task`
 Lists all the current task items.
 
@@ -380,6 +406,7 @@ Expected outcome:
         Task has been deleted!
         __________________________________________________
 ```
+<div style="page-break-after: always;"></div>
 
 #### 3.3.5 Editing a task: `calendar edit`
 Edits a task item based on the index.
@@ -418,6 +445,9 @@ calendar display 10-2021
 Expected outcome:
 ![](diagrams/calendar/calendar_full.png)
 
+
+<div style="page-break-after: always;"></div>
+
 #### 3.3.7 Deleting a lecture: `calendar delete lec`
 Deletes a lecture item based on the index.
 
@@ -434,6 +464,8 @@ Expected outcome:
         Lecture has been deleted!
         __________________________________________________
 ```
+
+
 
 #### 3.3.3 Listing lectures: `calendar list lec`
 
@@ -453,6 +485,8 @@ Expected outcome:
         1. CS2113T (from: 07-10-2021) (to: 31-10-2021)
         __________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### 3.4 Managing your journal
 
@@ -488,6 +522,8 @@ Expected outcome:
         __________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### 3.4.3 Listing notebooks with entries: `journal list`
 
 Lists all notebooks with their entries.
@@ -520,6 +556,8 @@ Expected outcome:
         Great you have tagged the notebook
         __________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 #### 3.4.5 Find a notebook by tag
 
@@ -554,6 +592,8 @@ Expected outcome:
         __________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### 3.4.7 Deleting notebooks `journal delete_notebook`
 
 Deletes specific notebook with all its entries.
@@ -571,12 +611,14 @@ Expected outcome:
 ```
 
 
+<div style="page-break-after: always;"></div>
+
 ### 3.5 Managing your food consumption
 
 Sometimes you snack, maybe go for supper breaks now and then.
 After all, you need to power the processor we all have - our brain!
 Click provides you with the ability to track your food consumption to
-match your dieting needs to consume the recommended amount of calories 
+match your dieting needs to consume the recommended amount of calories
 you need every day!
 
 #### 3.5.1 Adding a food item: `food add`
@@ -591,10 +633,10 @@ However, how do you quantify your guilty-ness? Simply tell Click what you've
 eaten and how many calories are included, so you can see how far you should run
 to burn them away!
 
->**NOTE** : 
+>**NOTE** :
 > If you leave the date parameter empty, Click would just add in today's date for you, no worries!
 
-Example: 
+Example:
 
 ```
 food add n/Samurai Burger c/433 
@@ -638,11 +680,13 @@ Expected outcome:
 	__________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### 3.5.2a Listing food records: `food list`
 
 Format : `food list`
 
-What did you have for lunch on the 27th of October - forgot already? 
+What did you have for lunch on the 27th of October - forgot already?
 Not to worry. Simply tell Click to list the food items you've recorded.
 Additionally, the calories consumed are nicely added up for you.
 
@@ -674,7 +718,7 @@ you've recorded would be shown to you!
 
 Example: `food find 13-10-2021`
 
-Expected outcome : 
+Expected outcome :
 
 Shows you a list of items you've consumed on that particular day.
 
@@ -688,12 +732,14 @@ Shows you a list of items you've consumed on that particular day.
 ```
 
 
+<div style="page-break-after: always;"></div>
+
 #### 3.5.3 Deleting food records: `food delete`
 
 Format: `food delete [INDEX]`
 
 Oops, you accidentally entered a wrong food item as you confused your food list with
-your shopping list. 
+your shopping list.
 Not to worry, simply delete that item by giving Click the index
 of the item to delete!
 
@@ -723,6 +769,8 @@ Expected outcome:
 
 Congrats, you've cleared your list.
 
+<div style="page-break-after: always;"></div>
+
 #### 3.5.5 Viewing food stalls at Techno edge `food view`
 
 Format : `food view`
@@ -741,7 +789,7 @@ Format : `food view [STALL_INDEX]`
 
 Expected outcome:
 
-Shows you the menu of a particular stall when you give Click the store index, 
+Shows you the menu of a particular stall when you give Click the store index,
 find the stall index using `food view`, then view the menu of the stall with
 `food view [STALL_INDEX]`. \
 Do take note of the index of the food item you want
@@ -769,6 +817,8 @@ Expected outcome:
 
 ```
 
+<div style="page-break-after: always;"></div>
+
 #### 3.5.8 Finding items with a calorie count <= a given amount `food clt`
 
 Format : `food clt [CALORIES_COUNT]`
@@ -776,7 +826,7 @@ Format : `food clt [CALORIES_COUNT]`
 Expected outcome:
 
 Allows you to view the food items from the reference food court that has a similar to, or lower calorie
- count than the amount you gave Click!
+count than the amount you gave Click!
 
 Example : `food clt 0`
 
@@ -806,6 +856,8 @@ Expected outcome:
 	Bye. Hope to see you again soon!
 	__________________________________________________
 ```
+
+<div style="page-break-after: always;"></div>
 
 ## 4. Command Summary
 
@@ -847,6 +899,8 @@ Expected outcome:
 **Exit**|`exit`
 
 
+<div style="page-break-after: always;"></div>
+
 ## 5. Frequently Asked Questions
 
 We know you are a curious individual, so here
@@ -865,15 +919,15 @@ forcefully exit the app.
 This app seems to replicate what I'm currently  doing on paper, such as writing my tasks on a physical calendar,
 and recording my calorie count on a journal. I'd like to  know some  benefits of  this over paper.
 >  Sure, while we acknowledge your  love of pen and paper we'd like to remind you the scalability of digital apps,
->  preservation of data as well as  the efficiency of the CLI in typing rather than writing. 
+>  preservation of data as well as  the efficiency of the CLI in typing rather than writing.
 
 What if my data is corrupted in the text files?
-> Not to worry, the app would still be functional. 
+> Not to worry, the app would still be functional.
 > However, new files would be created to replace the corrupted text files.
 > This would mean that your previous data is irrecoverable.
 > The developer team is working on undo and redo features for our future implenentation to better
 > serve your needs.
- 
+
 
 ## 6. Bug Reports
 
