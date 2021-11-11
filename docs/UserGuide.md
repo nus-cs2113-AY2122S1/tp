@@ -385,7 +385,7 @@ height and weight values in your profile.
 
 Example:
 - `bmi` calculates the BMI value based on the current height and weight in your profile.
-- `bmi h/180 w/65` calculates the BMI value based on height 180cm and weight 65cm.
+- `bmi h/180 w/65` calculates the BMI value based on height 180cm and weight 65kg.
 
 ```text  
 bmi
