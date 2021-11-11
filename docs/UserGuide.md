@@ -52,7 +52,7 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 
    ![java version check](images/java-version-cmd.png)
 
-3. Down the latest version of `Budget Tracker` from [here](https://github.com/AY2122S1-CS2113T-F11-2/tp/releases/download/v2.1/tp.jar).
+3. Download the latest version of `Budget Tracker` from [here](https://github.com/AY2122S1-CS2113T-F11-2/tp/releases/download/v2.1/tp.jar).
 4. If you have anti-virus, please add an exception on the directory you have downloaded the `Budget Tracker`.
    For example, if your Tp.jar file is in the "tp-folder", then you can create an exception in that folder 
    in your anti-virus. 
