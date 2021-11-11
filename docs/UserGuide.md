@@ -141,6 +141,8 @@ Congratulations! Now, the **List of Commands** below will teach you how to use a
 > e.g. `add dish [DISH_NAME]`, where `[DISH_NAME]` is a parameter which can be used as `add dish chicken rice`.
 > * All text supplied by the user are automatically converted into lowercase format.
 
+<div style="page-break-after: always;"></div>
+
 ### List all commands : `help`
 
 Display the list of commands that Food-O-Rama utilises.
