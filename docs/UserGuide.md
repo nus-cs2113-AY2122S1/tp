@@ -35,7 +35,7 @@
 like this output
 ```
 
-## Who is Gordon?
+## Who is Gordon? 
 
 <!-- Images -->
 ![Markdown Logo](https://www.denofgeek.com/wp-content/uploads/2019/10/robot-chicken-gordon-ramsay-adult-swim.jpg?resize=768%2C432)
@@ -54,6 +54,8 @@ If you're one of them so-called 'developers', head on over to our [Developer Gui
 It's absolutely bonkers. Now let's get down to business.
 
 ## How do you start Gordon?
+
+In this section, I'll show you how to run Gordon from CLI.
 
 If you're using a Windows system, follow this guide:
 
@@ -82,9 +84,11 @@ If you're using a Windows system, follow this guide:
 
 ## What can Gordon do?
 
+I'll provide instructions on how to use Gordon's different functionalities.
+
 ### 1. Add a recipe: `addRecipe`
 
-Adds a new recipe to my database of recipes.
+I can add a new recipe to my database of recipes.
 
 #### Format: `addRecipe RECIPE_NAME /ingredients INGREDIENT1+INGREDIENT2 /steps STEP1+STEP2`
 
@@ -123,7 +127,7 @@ Method:
 
 ### 2. Delete a recipe: `deleteRecipe`
 
-Removes an existing recipe from my database of recipes.
+I can remove an existing recipe from my database of recipes.
 
 #### Format: `deleteRecipe RECIPE_INDEX`
 
@@ -153,7 +157,7 @@ OK! The recipe has been deleted from your cookbook.
 
 ### 3. Look up a recipe: `check`
 
-Prints the details of the specified recipe.
+I can show you the details of the specified recipe, all printed out.
 
 #### Format: `check RECIPE_NAME`
 
@@ -191,7 +195,7 @@ Method:
 
 ### 4. Display all recipes: `listRecipes`
 
-Shows all recipes saved in my database.
+I can show you all the recipes saved in my database.
 
 #### Format: `listRecipes`
 
@@ -240,7 +244,7 @@ Pack your bags, you're off the show
 
 ### 6. Lend a hand: `help`
 
-Shows you the proper format of commands.
+I can show you the proper format of commands.
 
 #### Format: `help`
 
@@ -278,7 +282,7 @@ Shows you the proper format of commands.
 
 ### 7. Set attributes of a recipe: `set`
 
-Sets the attributes of recipes, e.g. time needed, calories etc.
+I can set the attributes of recipes, e.g. time needed, calories etc.
 
 **Format:** `set RECIPE_NAME /ATTRIBUTE_TYPE ATTRIBUTE_VALUE`
 
@@ -329,7 +333,7 @@ Steps set successfully.
 
 ### 8. Find a recipe by attribute: `find`
 
-Finds recipes by their attributes, e.g. time needed, calories etc.
+I can find recipes by their attributes, e.g. time needed, calories etc.
 
 #### Format: `find /ATTRIBUTE_NAME ATTRIBUTE_VALUE ` 
 
@@ -412,7 +416,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > Successfully tagged Duck Rice under Favorites
 > ```
  
-#### 9.2 Untagging Tags from Recipes: `untag`
+#### 9.2 Untag tags from Recipes: `untag`
 
 > Untag recipes in your cookbook.
 >
@@ -439,7 +443,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > Fatty Foods tag will no longer have any recipes under it. You might want to delete it!
 > ```
 
-#### 9.3 Deleting Tags from Cookbook: `deleteTag`
+#### 9.3 Delete tags from Cookbook: `deleteTag`
 
 > Delete tags from your cookbook.
 >
@@ -460,7 +464,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > Successfully deleted Noodles tag
 > ```
 
-#### 9.4 Find a Recipe by their tag(s): `find`
+#### 9.4 Find a Recipe by their tags: `find`
 
 > Finds recipes by their tag(s)
 >
@@ -490,7 +494,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > 1. Mee Pok
 > ```
 
-#### 9.5 List all your Tags: `listTags`
+#### 9.5 List all tags in Cookbook: `listTags`
 
 > List all the tags in your Cookbook.
 >
@@ -510,7 +514,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > 3. Favorites
 > ```
 
-### 10. Saving and Loading
+### 10. Save and Load
 
 I will automatically save all of your recipes to a .txt file, "saveFile.txt", 
 in the same directory where you ran the app. It loads the recipes when you start up Gordon.
