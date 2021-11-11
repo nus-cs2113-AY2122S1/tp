@@ -64,7 +64,7 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 
 6. Expenditure Categories
 
-> :exclamation: Notes about the command format:
+> ❗ Notes about the command format:
 > * Words encased in `<>` brackets are optional parameters.
 > * Command words (i.e. `add`, `edit`, etc.) must strictly be in **lower case**.
 > * Words in UPPER_CASE are the parameters to be supplied by the user.
