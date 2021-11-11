@@ -83,7 +83,7 @@ public class TextUi {
         System.out.println(DIVIDER);
     }
 
-    //@@ author EdisonZhong17
+    //@@author EdisonZhong17
     public static void showLoanReminder(int index, Loan dueLoan) {
         if (index == 1) {
             System.out.println("Loan Reminder:");
@@ -96,7 +96,7 @@ public class TextUi {
                 + " is due!!");
     }
 
-    //@@ author ZenoNexus
+    //@@author ZenoNexus
     public static void showExpenditureAddedMessage(Expenditure addedExpenditure, AllRecordList recordList) {
         assert addedExpenditure.getAmount() > 0 : "Expenditure added should be a positive value";
 
@@ -140,6 +140,7 @@ public class TextUi {
                 + "\nCategory: " + newExpenditure.getCategoryString());
     }
 
+    //@@author EdisonZhong17
     private static void showExpenditureDetailsForDelete2(Expenditure newExpenditure, AllRecordList recordList) {
         System.out.println("Description: " + newExpenditure.getDescription()
                 + "\nAmount: $" + df.format(newExpenditure.getAmount())
@@ -212,6 +213,7 @@ public class TextUi {
         System.out.println("Amount: $" + df.format(newBudget.getAmount())
                 + "\nMonth: " + newBudget.getMonth());
     }
+    //@@author
 
 
     public static void showLoanAddedMessage(Loan newLoan, boolean isLoadingStorage) {
@@ -307,7 +309,7 @@ public class TextUi {
         }
     }
 
-
+    //@@author LS-Young
     /**
      * print out the record list.
      * @param records the record list of budget, expenditures and loans
@@ -339,8 +341,7 @@ public class TextUi {
         recordListPrinter(records, i, category, monthString, totalSpending, currentMonthBudget, budget, printInfo);
     }
 
-
-
+    //@@author YEOWEIHNGWHYELAB
     private static void recordListPrinter(AllRecordList records, int i, Category category,
                                           String monthString, double totalSpending, double currentMonthBudget,
                                           String budget, boolean printInfo) {
@@ -358,8 +359,9 @@ public class TextUi {
 
         getMonthListView(records, i, monthString, budget, category);
     }
-
     //@@author
+
+    //@@author LS-Young
     /**
      * Names/Descriptions longer than 30characters may get truncated.
      */
@@ -417,22 +419,26 @@ public class TextUi {
         System.out.println(DIVIDER);
     }
 
+    //@@author EdisonZhong17
     public static void showSingleLoanDeletedMessage(int indexOfLoan, Loan deletedLoan) {
         System.out.println("Successfully deleted Loan " + indexOfLoan + ":");
         showLoanDetails(deletedLoan);
         System.out.println(DIVIDER);
     }
 
+    //@@author EdisonZhong17
     public static void showAllExpenditureDeletedMessage() {
         System.out.println("Successfully deleted all Expenditures in this month!");
         System.out.println(DIVIDER);
     }
 
+    //@@author EdisonZhong17
     public static void showAllLoanDeletedMessage() {
         System.out.println("Successfully deleted all Loans in this month!");
         System.out.println(DIVIDER);
     }
 
+    //@@author EdisonZhong17
     public static void showMultiExpenditureDelMessage(int index1, int index2, Expenditure delExe, AllRecordList list) {
         System.out.println("Successfully deleted Expenditure " + index1 + ":");
         if (index1 != index2) {
@@ -443,12 +449,14 @@ public class TextUi {
         System.out.println(DIVIDER);
     }
 
+    //@@author EdisonZhong17
     public static void showMultipleLoanDeletedMessage(int index, Loan deletedLoan) {
         System.out.println("Successfully deleted Loan " + index + ":");
         showLoanDetails(deletedLoan);
         System.out.println(DIVIDER);
     }
 
+    //@@author EdisonZhong17
     public static void showBudgetDeletedMessage() {
         System.out.println("Successfully deleted the Budget for this month!");
         System.out.println("Now the budget amount is $0.00!");

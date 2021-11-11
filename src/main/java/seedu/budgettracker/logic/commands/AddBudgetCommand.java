@@ -1,5 +1,3 @@
-//@@author YEOWEIHNGWHYELAB
-
 package seedu.budgettracker.logic.commands;
 
 import seedu.budgettracker.data.records.exceptions.DuplicateBudgetException;

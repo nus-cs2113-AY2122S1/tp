@@ -22,6 +22,7 @@ public class Loan extends Record {
         this.debtorName = debtorName;
     }
 
+    //@@author EdisonZhong17
     public String getDueDateString() {
         String[] dayString = date.toString().split("-", 3);
         String dueDateString;
@@ -57,15 +58,18 @@ public class Loan extends Record {
 
     }
 
+    //@@author EdisonZhong17
     public int getDueDateMonth() {
         String[] d = dueDate.toString().split("-", 3);
         return Integer.parseInt(d[1]);
     }
 
+    //@@author EdisonZhong17
     public int getDueDateDay() {
         String[] d = dueDate.toString().split("-", 3);
         return Integer.parseInt(d[2]);
     }
+    //@@author
 
     public String getName() {
         return debtorName;
@@ -83,15 +87,18 @@ public class Loan extends Record {
         this.date = date;
     }
 
+    //@@author EdisonZhong17
     public void setDueDate() {
         String dueDateString = getDueDateString();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.dueDate = LocalDate.parse(dueDateString, formatter);
     }
 
+    //@@author EdisonZhong17
     public LocalDate getDueDate() {
         return dueDate;
     }
+    //@@author
 
     public String toString() {
         return String.format("%-20.20s  %-20.20s %-20.20s",

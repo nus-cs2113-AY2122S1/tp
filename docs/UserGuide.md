@@ -555,14 +555,14 @@ _________________________________________________________
 
 <br />
 
-# &nbsp;&nbsp; Delete: `delete`
+# <a id="delete"></a> &nbsp;&nbsp;  Delete: `delete`
 
 Deletes an entry / entries (maybe user wants to cut off the expenses) from the budget tracker data set.
 <br />
 
 _________________________________________________________
 
-### `-b` - Delete a budget 
+### <a id="delete-budget"></a> `-b` - Delete a budget
 
 Deletes the budget of a specific month
 
@@ -586,7 +586,7 @@ Now the budget amount is 0.00!
 _________________________________________________________
 
 
-### `-e` - Delete (an) expenditure(s)
+### <a id="delete-expenditure"></a> `-e` - Delete (an) expenditure(s)
 
 Deletes (an) expenditure(s) of a specific month.
 
@@ -597,7 +597,6 @@ Format:`delete -e m/MONTH`
 * The `MONTH` represents the month of the expenditure(s) will be deleted and cannot be empty.
 * The `INDEX` refers to the index number or a range of index numbers shown in the displayed entry list.
 * The `INDEX` must be within the range of the list.
-* If the `INDEX` is empty, then all the expenditures of this month will be deleted.
 
 Examples of usage:
 
@@ -633,7 +632,7 @@ Percentage of Budget Left: 99.00%
 _________________________________________________________
 
 
-### `-l` - Delete (a) loan record(s)
+### <a id="delete-loan"></a> `-l` - Delete (a) loan record(s)
 
 Deletes (a) loan record(s) of a specific month
 
@@ -644,7 +643,6 @@ Format:`delete -l m/MONTH`
 * The `MONTH` represents the month of the loan record(s) will be deleted and cannot be empty.
 * The `INDEX` refers to the index number or a range of index numbers shown in the displayed entry list.
 * The `INDEX` must be within the range of the list.
-* If the `INDEX` is empty, then all the loan records of this month will be deleted.
 
 Examples of usage:
 
