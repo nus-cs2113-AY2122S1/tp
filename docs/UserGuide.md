@@ -64,6 +64,7 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 
 6. Expenditure Categories
 
+<meta charset="utf-8"/>
 <div class="alert">
 <h3> &#10071; Notes about the command format: </h3>
 <ul>
