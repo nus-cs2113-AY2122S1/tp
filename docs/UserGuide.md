@@ -4,7 +4,7 @@ Budget Tracker is a desktop app for managing expenses, budget and loans, optimiz
 for tech-savvy students who have trouble keeping track of their expenses.
 
 
-## Table of Content
+## <a id="top"></a> Table of Content
 * [Intro](#introduction)
 * [Getting Started](#getting-started)
 * [Features](#features)
@@ -41,12 +41,16 @@ for tech-savvy students who have trouble keeping track of their expenses.
 Budget Tracker is a desktop app for managing expenses, budget and loans, optimized for use via a 
 Command Line Interface (CLI) for tech-savvy students who have trouble keeping track of their expenses.
 
+#### [↑ Back to top](#top)
+
 ## <a id="getting-started"></a> Quick Start
 
 1. Ensure that you have Java 11 or above installed.
 2. Check your java version by entering "java -version" command to your terminal. 
 3. Down the latest version of `Budget Tracker` from [here]().
 4. If you have anti-virus, please add an exception on the directory you have downloaded the `Budget Tracker`.
+
+#### [↑ Back to top](#top)
 
 ## <a id="features"></a> Features
 
@@ -71,6 +75,7 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 e.g. in `add -b a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can be used as `add -b a/500 m/12`.
 NOTE: **These parameters cannot be left empty.**
 
+#### [↑ Back to top](#top)
 
 <br />
 
@@ -106,6 +111,7 @@ Expected outcome: Budget of $500.00 is added to the month of December of that pa
 Your budget of $500.00 for December is successfully set!
 ========================================================
 ```
+#### [↑ Back to top](#top)
 <br />
 
 ________________________
@@ -143,7 +149,7 @@ Date: 2021-08-20
 Category: GENERAL
 ========================================================
 ```
-
+#### [↑ Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -175,7 +181,7 @@ Yap Wei Xuan owes you: $500.00
 Date of loan: 2021-08-20
 ========================================================
 ```
-
+#### [↑ Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -216,6 +222,7 @@ Amount: $100020.00
 Month: 10
 ========================================================
 ```
+#### [↑ Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -265,6 +272,7 @@ Total Amount Spent in October: $4.00
 Percentage of Budget Left: 99.20%
 ========================================================
 ```
+#### [↑ Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -306,6 +314,7 @@ Amount: $5000.00
 Date: 2021-11-05
 ========================================================
 ```
+#### [↑ Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -333,6 +342,7 @@ Expected outcome: A message will be shown to alert the user that the database ha
 You are currently working on year 2020 database!
 ========================================================
 ```
+#### [↑ Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -354,69 +364,12 @@ Example of usage:
 `find Chicken`
 
 Expected outcome: All records that contains the "Chicken" keyword will be returned.
-
-```
-find Chicken
-========================================================
-Here are the Expenditure and Loan matches we have found!
-/////////////////////////////////////////////////////////
-No Expenditures found for this month
---------------------------------------------------------
-No Loan found for this month
-========================================================
-No Expenditures found for this month
---------------------------------------------------------
-No Loan found for this month
-========================================================
-No Expenditures found for this month
---------------------------------------------------------
-No Loan found for this month
-========================================================
-No Expenditures found for this month
---------------------------------------------------------
-No Loan found for this month
-========================================================
-No Expenditures found for this month
---------------------------------------------------------
-No Loan found for this month
-========================================================
-No Expenditures found for this month
---------------------------------------------------------
-No Loan found for this month
-========================================================
-No Expenditures found for this month
---------------------------------------------------------
-No Loan found for this month
-========================================================
-No Expenditures found for this month
---------------------------------------------------------
-No Loan found for this month
-========================================================
-No Expenditures found for this month
---------------------------------------------------------
-No Loan found for this month
-========================================================
-No Expenditures found for this month
---------------------------------------------------------
-No Loan found for this month
-========================================================
-Here are the Expenditures we found!
-/////////////////////////////////////////////////////////
-1.Chicken                      | $100.00            | 2021-11-08         | GENERAL           
---------------------------------------------------------
-No Loan found for this month
-========================================================
-No Expenditures found for this month
---------------------------------------------------------
-No Loan found for this month
-========================================================
-```
-
+#### [↑ Back to top](#top)
 <br />
 
 _________________________________________________________
 
-<br/>
+<br />
 
 # <a id="list"></a> &nbsp;&nbsp;List: `list`
 
@@ -437,91 +390,9 @@ Example of usage:
 `list m/all`
 
 Expected outcome: Listing all the budget and expenditure for the particular year.
-
-```
-========================================================
-Your budget for January: Not Set
-Your expenditures:
-No Expenditure records yet.
-Your loans: 
-No Loan records yet. 
-========================================================
-Your budget for February: Not Set
-Your expenditures:
-No Expenditure records yet.
-Your loans: 
-No Loan records yet. 
-========================================================
-Your budget for March: Not Set
-Your expenditures:
-No Expenditure records yet.
-Your loans: 
-No Loan records yet.
-========================================================
-Your budget for April: Not Set
-Your expenditures:
-No Expenditure records yet.
-Your loans: 
-No Loan records yet.
-========================================================
-Your budget for May: Not Set
-Your expenditures:
-No Expenditure records yet.
-Your loans: 
-No Loan records yet.
-========================================================
-Your budget for June: Not Set
-Your expenditures:
-No Expenditure records yet.
-Your loans: 
-No Loan records yet.
-========================================================
-Your budget for July: Not Set
-Your expenditures:
-No Expenditure records yet.
-Your loans: 
-No Loan records yet.
-========================================================
-Your budget for August: Not Set
-Your expenditures:
-  Description            | Amount             | Date               | Category
-1.CS2113T Textbooks      | $60.00             | 2021-08-20         | GENERAL
-Your loans: 
-No Loan records yet.
-========================================================
-Your budget for September: Not Set
-Your expenditures:
-  Description            | Amount             | Date               | Category
-1.Chicken Rice           | $5.00              | 2021-09-13         | FOOD
-Your loans: 
-No Loan records yet.
-========================================================
-You did not overspend for October, Good JOB!
-1.52% of your overall budget has been spent
-Your budget for October: $330.00
-Your expenditures:
-  Description            | Amount             | Date               | Category
-1.Chicken Rice           | $5.00              | 2021-10-13         | FOOD
-Your loans: 
-No Loan records yet.
-========================================================
-Your budget for November: Not Set
-Your expenditures:
-No Expenditure records yet.
-Your loans: 
-No Loan records yet.
-========================================================
-Your budget for December: $500.00
-Your expenditures:
-No Expenditure records yet.
-Your loans: 
-No Loan records yet.
-========================================================
-```
+#### [↑ Back to top](#top)
 <br />
-
 _________________________________________________________
-
 
 ### Listing Budget & Expenditure for a Particular Month: `list`
 
@@ -546,6 +417,7 @@ Your expenditures:
 1.Chicken Rice1          | $500.0             | 2021-10-13       
 ========================================================
 ```
+#### [↑ Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -578,6 +450,7 @@ Successfully deleted the Budget for this month!
 Now the budget amount is 0.00!      
 ========================================================
 ```
+#### [↑ Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -624,6 +497,7 @@ Total Amount Spent in October: $100.00
 Percentage of Budget Left: 99.00%
 ========================================================
 ```
+#### [↑ Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -659,6 +533,7 @@ Amount: $200.00
 Date: 2021-10-03
 ========================================================
 ```
+#### [↑ Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -673,9 +548,7 @@ the year or particular month.
 _________________________________________________________
 <br />
 
-
 ### <a id="stat-budget"></a> `-c` : View Statistics for the Month by categories
-
 
 Display the statistics for a particular month's budget and expenditure by categories. 
 
@@ -711,6 +584,7 @@ The category you spent the most on: FOOD
 The amount you spent on this category: $5136.50
 ========================================================
 ```
+#### [↑ Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -817,7 +691,7 @@ Percentage: 143.03%
 5%                    #####
 ========================================================
 ```
-
+#### [↑ Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -837,99 +711,7 @@ Example of usage:
 `help`
 
 Expected outcome: Lists all available commands and their parameters.
-
-```
-1. add
-Adds an expenditure record.
-Parameters: -e n/EXPENDITURE_NAME a/COST d/[DATE_OF_EXPENDITURE] c/[CATEGORY]
-Note:
- * If DATE_OF_EXPENDITURE is not specified, current system date will be the default value.
- * If CATEGORY is not specified, GENERAL will be the default category.
-
-Adds a budget record.
-Parameters: -b a/AMOUNT m/[MONTH]
-Note:
- * If MONTH is not specified, current system month will be the default value.
-
-Adds a loan record.
-Parameters: -l n/BORROWER_NAME a/AMOUNT d/[DATE_OF_LOAN]
-Note: 
- * If DATE_OF_LOAN is not specified, the current system date will be the default value.
-========================================================
-2. edit
-Edits a budget record.
-Parameters: -b m/MONTH a/AMOUNT
-Note:
- * MONTH must be strictly within the range of 1 to 12. 
-
-Edits an expenditure record.
-Parameters: -e m/MONTH i/INDEX [a/AMOUNT] [d/DATE_OF_EXPENDITURE] [n/DESCRIPTION] [c/CATEGORY]
-Note:
- * AMOUNT, DATE_OF_EXPENDITURE, DESCRIPTION and CATEGORY are optional but at least one must exist to edit.
-
-Edits a loan record.
-Parameters: -l m/MONTH i/INDEX [a/AMOUNT] [d/DATE_OF_LOAN] [n/BORROWER_NAME]
-Note:
- * AMOUNT, DATE_OF_LOAN and BORROWER_NAME are optional, but at least one must exist to edit.
-
-========================================================
-3.find
-Finds all expenditure and loan records with the specified keyword
-Parameters: [KEYWORD]
-========================================================
-4. list
-Lists all records
-Parameters:  m/all [c/CATEGORY]
-
-Lists records in a specified monthlist m/MONTH [c/CATEGORY]
-========================================================
-5. delete
-Delete a budget record.
-Parameters: -b m/MONTH
-
-Delete all expenditure records.
-Parameters: -e m/MONTH i/INDEX
-
-Delete an expenditure record.
-Parameters: -e i/INDEX_OF_EXPENDITURE m/MONTH
-Note:
- * If INDEX is not specified, all the expenditure records of this month will be deleted.
-
-Delete multiple expenditure records.
-Parameters: -e m/MONTH i/START_INDEX - END_INDEX
-Note:
- * If INDEX is not specified, all the expenditure records of this month will be deleted.
-
-Delete all loan records.
-Parameters: -l m/MONTH
-
-Delete a loan record.
-Parameters: -l m/MONTH [i/INDEX_OF_LOAN]
-Note:
- * If INDEX_OF_LOAN is not specified, all the loan records of this month will be deleted.
-
-Delete multiple loan records.
-Parameters: -l m/MONTH i/START_INDEX - END_INDEX
-Note:
- * If INDEX is not specified, all the loan records of this month will be deleted.
-========================================================
-6. stat
-Display the statistics for a particular month’s budget and expenditure by categories.
-Parameters: -c m/MONTH
-
-Display the statistics for the current database year being worked on.
-Parameters: -y t/[TYPE]
-========================================================
-7.help
-Get all commands' information.
-Parameters: help
-========================================================
-8.bye
-Exits the app.
-Parameters: bye
-========================================================
-```
-
+#### [↑ Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -959,6 +741,12 @@ These are the data base you currently have!
 2021.txt
 ========================================================
 ```
+#### [↑ Back to top](#top)
+<br />
+
+_________________________________________________________
+
+<br />
 
 # <a id="exit"></a> &nbsp;&nbsp; Exit the program: `bye`
  
@@ -979,6 +767,10 @@ Expected outcome: Goodbye message shown.
 Bye, see you again soon!
 ========================================================
 ```
+#### [↑ Back to top](#top)
+
+<br />
+
 
 # <a id="faq"></a> FAQ
 
@@ -1002,12 +794,13 @@ Bye, see you again soon!
     echo Java home set to: %JAVA_HOME% <br />
     echo Java 11 activated <br />
     java -version <br />
+#### [↑ Back to top](#top)
 
-
+<br />
 
 # <a id="command-summary"></a> Command Summary
 
-<PARAM> - Optional parameters that can be omitted. And it will be defaulted to the value 
+`<PARAM>` - Optional parameters that can be omitted. And it will be defaulted to the value 
 stated in the above command description. 
 
  |no. | Command | Description |
@@ -1034,5 +827,4 @@ stated in the above command description.
  |20. | `db` | `show all the available database in the user's device` | 
  |21. | `help` | `shows a list of command guides` |
  |22. | `bye` | `terminates the app` |
-
-
+#### [↑ Back to top](#top)
