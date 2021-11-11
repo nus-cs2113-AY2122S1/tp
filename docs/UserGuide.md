@@ -960,6 +960,41 @@ Data formats:
 **A**: You can transfer data to another computer by moving the `data` folder containing the 3 data files to where `MediVault.jar` is.
 You should expect to see `stock.txt`, `order.txt`, `prescription.txt` in that folder.
 
+**Q**: Can MediVault run on a Raspberry Pi?
+
+**A**: Yes, MediVault does not require a lot of processing power and only requires any computer capable of running **Java 11**.
+
+**Q**: How do I transfer my data from Excel to MediVault?
+
+**A**:
+- For Stocks:
+  - First, order the columns of your Excel sheet in the following order.
+    - `ID|NAME|PRICE|QUANTITY|EXPIRY_DATE|DESCRIPTION|MAX_QUANTITY|ISDELETED`
+  - Next, copy and paste the following command into Excel at the first row and on the right of last column of your data **(Cell I2)**.
+    - `=UPPER(CONCAT(A2,"|",B2,"|",C2,"|",D2,"|",TEXT(E2, "dd-mm-yyyy"),"|",F2,"|",G2,"|",H2))`
+  - Then, double-click on the square box at the bottom right of the cell so that the formula will be calculated for all rows.
+  - Finally, copy and paste the all entries in column **I** into `data/stock.txt`.
+- For Orders:
+  - First, order the columns of your Excel sheet in the following order.
+    - `ID|NAME|QUANTITY|DATE|STATUS`
+  - Next, copy and paste the following command into Excel at the first row and on the right of last column of your data **(Cell F2)**.
+    - `=UPPER(CONCAT(A2,"|",B2,"|",C2,"|",TEXT(D2, "dd-mm-yyyy"),"|",E2))`
+  - Then, double-click on the square box at the bottom right of the cell so that the formula will be calculated for all rows.
+  - Finally, copy and paste the all entries in column **F** into `data/order.txt`.
+- For Prescriptions:
+    - First, order the columns of your Excel sheet in the following order.
+        - `ID|NAME|QUANTITY|CUSTOMER_ID|DATE|STAFF|STOCK_ID`
+    - Next, copy and paste the following command into Excel at the first row and on the right of last column of your data **(Cell H2)**.
+      - `=UPPER(CONCAT(A2,"|",B2,"|",C2,"|",D2,"|",TEXT(E2, "dd-mm-yyyy"),"|",F2,"|",G2))`
+    - Then, double-click on the square box at the bottom right of the cell so that the formula will be calculated for all rows.
+    - Finally, copy and paste the all entries in column **H** into `data/prescription.txt`.
+
+**Q**: How secure is MediVault since it stores customer's information?
+
+**A**: MediVault does not require internet access and runs locally on the computer. For better security, do not connect
+the computer to the internet and ensure that the computer is password locked and only give authorised staff access.
+
+
 ## Command Summary
 
 Command | Command Syntax
