@@ -2,8 +2,8 @@
 
 Display | Name | Github Profile | Portfolio 
 --------|:----:|:--------------:|:---------:
-![](https://via.placeholder.com/100.png?text=Photo) | John Doe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Joe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Ron John | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | John Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
+![](./profilePics/ConradWee.jpg) | Conrad Wee | [Github](https://github.com/conradwee) | [Portfolio](./team/conradwee.md)
+![](./profilePics/FoongXinYu.jpg) | Foong Xin Yu | [Github](https://github.com/Uxinnn) | [Portfolio](./team/uxinnn.md)
+![](./profilePics/GavienPat.png) | Gavien Pat | [Github](https://github.com/gavienwz) | [Portfolio](./team/gavienwz.md)
+![](./profilePics/minjing.jpg) | Cui Minjing | [Github](https://github.com/Cuiminjing) | [Portfolio](./team/cuiminjing.md)
+![](./profilePics/jared.jpg) | Jared Cheang | [Github](https://github.com/jach23) | [Portfolio](./team/jach23.md)
