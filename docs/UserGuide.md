@@ -496,7 +496,7 @@ I can find recipes by their tag(s).
 * I'll search for recipes that have **ALL** tags as defined in `TAG_NAME`.
 * Tags are case-sensitive! (favorites is **NOT** the same as FAVORITES)
 
- #### Example of usage:
+#### Example of usage:
  
 Assume that _Mee Pok_ is under the _Hawker Food_ and _Noodles_ tag, and  
 assume that _Duck Rice_ is under the _Hawker Food_ and _Favorites_ tag.
