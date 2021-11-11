@@ -414,7 +414,7 @@ This command allows you to add a new Food Item to the Food List. Repeated Food I
 Format: `add f/ITEM {c/CALORIES} {d/DD-MM-YYYY} {t/HHMM}` adds a Food Item consumed with its respective calories on the given
 date (`DD-MM-YYYY`) and time (`HHMM`).
 
-❗ The input date `DD-MM-YYYY` must be within the past 7 days (including today). For example, if today date is `07-11-2021`, then the input
+❗ The input date `DD-MM-YYYY` must be within the past 7 days (including today). For example, if today's date is `07-11-2021`, then the input
 date must be within `01-11-2021` to `07-11-2021`. ([more details](#6-data-limits))
 
 
@@ -519,7 +519,7 @@ Format: `add e/ITEM {c/CALORIES} {d/DD-MM-YYYY}` adds an Exercise Item with its 
 ℹ️ If the date `DD-MM-YYYY` provided is in the future, this exercise will be treated as an Upcoming Exercise Item, 
 and it will be added to the [Upcoming Exercise List](#441-adding-upcoming-exercise-items-add-e) instead.
 
-❗ The input date `DD-MM-YYYY` must be within the past 7 days (including today). For example, if today date is `07-11-2021`, then the input
+❗ The input date `DD-MM-YYYY` must be within the past 7 days (including today). For example, if today's date is `07-11-2021`, then the input
 date must be within `01-11-2021` to `07-11-2021`. ([more details](#6-data-limits))
 
 Example:
@@ -683,7 +683,7 @@ ________________________________________________________________________________
 If you would like to make some changes to the details of your Upcoming Exercise Items, this command can be used and your Upcoming Exercise Items
 in the Upcoming Exercise List will be updated.
 
-Format: `edit u/LIST_NO {n/NEW_NAME} {c/NEW_CALORIES} {d/NEW_DATE}` edits the n<sup>th</sup> item in the Upcoming Exercise List, where *n* is the index of the Exercise to edit.
+Format: `edit u/LIST_NO {n/NEW_NAME} {c/NEW_CALORIES} {d/NEW_DATE}` edits the *n<sup>th</sup>* item in the Upcoming Exercise List, where *n* is the index of the Exercise to edit.
 
 ❗ `LIST_NO` must be a positive integer within the range of the number of Items in the list.\
 ❗ Though the parameters are optional, do provide at least one of them so that _Fitbot_ knows what you want to update about the Item!
@@ -703,7 +703,7 @@ ________________________________________________________________________________
 In case any Upcoming Exercise Item is cancelled and you would like to remove it from the Upcoming Exercise List, you can use 
 this command to delete that particular Upcoming Exercise Item. Deletion of multiple Upcoming Exercise Items is supported too. 
 
-Format: `delete u/LIST_NO {,LIST_NO,...}` deletes the n<sup>th</sup> Upcoming Exercise Item in the Upcoming Exercise List, where *n* is the index of the exercise to delete.
+Format: `delete u/LIST_NO {,LIST_NO,...}` deletes the *n<sup>th</sup>* Upcoming Exercise Item in the Upcoming Exercise List, where *n* is the index of the exercise to delete.
 You may delete multiple Exercise Items at once by providing multiple `LIST_NO` that are separated by commas.
 
 ❗ `LIST_NO` must be a positive integer within the range of the number of Items in the list.
@@ -780,7 +780,7 @@ ________________________________________________________________________________
 #### 4.5.3 Editing Food Bank Items `edit fbank/`
 If you have entered any wrong information or wish to update existing Items in the Food Bank, you can use this command to do so.
 
-Format:  `edit fbank/LIST_NO {n/NEW_NAME} {c/NEW_CALORIES}` edits the n<sup>th</sup> Item in the Food Bank, where *n* is the index of the Food Item to edit.
+Format:  `edit fbank/LIST_NO {n/NEW_NAME} {c/NEW_CALORIES}` edits the *n<sup>th</sup>* Item in the Food Bank, where *n* is the index of the Food Item to edit.
 
 ❗ `LIST_NO` must be a positive integer within the range of the number of Items in the list.\
 ❗ Though the parameters are optional, do provide at least one of them so that _Fitbot_ knows what you want to update about the Item!
@@ -797,7 +797,7 @@ ________________________________________________________________________________
 #### 4.5.4 Deleting Food Bank Items `delete fbank/`
 You can delete an Item from the Food Bank using this command.
 
-Format: `edit fbank/LIST_NO {,LIST_NO,...}` deletes the n<sup>th</sup> Item in the Food Bank, where *n* is the index of the Food Item to edit. 
+Format: `edit fbank/LIST_NO {,LIST_NO,...}` deletes the *n<sup>th</sup>* Item in the Food Bank, where *n* is the index of the Food Item to edit. 
 You may delete multiple Food Items at once by providing multiple `LIST_NO` that are separated by commas.  
 
 ❗ `LIST_NO` must be a positive integer within the range of the number of Items in the list.
@@ -877,7 +877,7 @@ ________________________________________________________________________________
 #### 4.6.3 Editing Exercise Bank Items `edit ebank/`
 If you have entered any wrong information or wish to update existing Items in the Exercise Bank, you can use this command to do so.
 
-Format:  `edit ebank/LIST_NO {n/NEW_NAME} {c/NEW_CALORIES}` edits the n<sup>th</sup> Item in the Exercise Bank, where *n* is the index of the Exercise Item to edit.
+Format:  `edit ebank/LIST_NO {n/NEW_NAME} {c/NEW_CALORIES}` edits the *n<sup>th</sup>* Item in the Exercise Bank, where *n* is the index of the Exercise Item to edit.
 
 ❗ `LIST_NO` must be a positive integer within the range of the number of Items in the list.\
 ❗ Though the parameters are optional, do provide at least one of them so that _Fitbot_ knows what you want to update about the Item!
@@ -896,7 +896,7 @@ ________________________________________________________________________________
 #### 4.6.4 Deleting Exercise Bank Items `delete ebank/`
 You can delete an Item from the Exercise Bank using this command.
 
-Format: `delete ebank/LIST_NO {,LIST_NO,...}` deletes the n<sup>th</sup> Item in the Exercise Bank, where *n* is the index of the Exercise Item to edit.
+Format: `delete ebank/LIST_NO {,LIST_NO,...}` deletes the *n<sup>th</sup>* Item in the Exercise Bank, where *n* is the index of the Exercise Item to edit.
 You may delete multiple Exercise Items at once by providing multiple `LIST_NO` that are separated by commas.  
 
 ❗ `LIST_NO` must be a positive integer within the range of the number of Items in the list.
