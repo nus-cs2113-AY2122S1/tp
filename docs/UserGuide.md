@@ -47,7 +47,9 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 ## <a id="getting-started"></a> Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `Budget Tracker` from [here]().
+2. Check your java version by entering "java -version" command to your terminal. 
+3. Down the latest version of `Budget Tracker` from [here]().
+4. If you have anti-virus, please add an exception on the directory you have downloaded the `Budget Tracker`.
 
 ## <a id="features"></a>Features
 
@@ -707,6 +709,7 @@ GIFTS         ###                                                             4.
 HEALTH                                                                        0%
 TECH          ######                                                          11.9%
 ALL                                                                           0%
+
 Your budget: $500
 The category you spent the most on: FOOD
 The amount you spent on this category: $5136.50
@@ -825,9 +828,9 @@ _________________________________________________________
 
 <br />
 
-## &nbsp;&nbsp; `help`
+# <a id="guides"></a> &nbsp; &nbsp;Guides: `help`
  
-### Command Guides: `help`
+### <a id="help"></a> `help`
 
 Command description and format.
 
@@ -939,7 +942,7 @@ _________________________________________________________
 
 <br />
 
-## &nbsp;&nbsp; `db`
+# <a id="db"></a> &nbsp; &nbsp;DB: `db`
 
 ### <a id="d-b"></a>  `db`
 
@@ -965,9 +968,7 @@ These are the data base you currently have!
 ========================================================
 ```
 
-# &nbsp;&nbsp; `bye`
-
-### Exiting the program: `bye`
+# <a id="exit"></a> &nbsp; &nbsp;Exit: `exit`
 
 # &nbsp;&nbsp; `bye`
 
@@ -997,11 +998,21 @@ Bye, see you again soon!
 
 **A**: Copy the data folder from the source computer to the destination computer on the same directory as the tp.jar file.
 
+**Q**: How to change my Java version to Java 11 in case if my main JDK is not Java 11?
+
+**A**: Create a .bat file with the following content. 
+
+@ECHO OFF
+SET JAVA_HOME=<Directory of JDK>
+SET Path=%JAVA_HOME%\bin;%Path%
+echo Java home set to: %JAVA_HOME%
+echo Java 11 activated
+java -version
+
 ## Command Summary
 
-<> - Parameters that must be stated in the command.
-
-[<>] - Optional parameters that can be ommited.
+<PARAM> - Optional parameters that can be omitted. And it will be defaulted to the value 
+stated in the above command description. 
 
  |no. | Command | Description |
  |--- | --------- | --------------------------------------- |
