@@ -1,0 +1,44 @@
+@startuml DeleteOrderSequenceDiagram
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+box Command COLOR_COMMAND_BOX
+    participant ":DeleteOrderCommand" as deleteorder COLOR_COMMAND
+end box
+
+box Utilities COLOR_UTILITIES_BOX
+    participant ":OrderValidator" as ordervalidator COLOR_UTILITIES
+end box
+
+box Inventory COLOR_INVENTORY_BOX
+    participant "<<class>>\n:Medicine" as medicine COLOR_INVENTORY
+    participant ":Order" as order COLOR_INVENTORY
+end box
+autoactivate on
+
+mainframe sd DeleteOrderCommand
+activate deleteorder
+
+deleteorder -> deleteorder : isValidOrderParameters(ui: Ui, medicines: ArrayList<Medicine>)
+
+
+
+    loop medicine : medicines
+    opt medicine instanceof Order
+
+
+            deleteorder -> order : getOrderId()
+            deleteorder <-- order
+            opt order.getOrderId() == order.orderId
+                deleteorder -> medicine : remove()
+                deleteorder <-- medicine :
+            end
+        end
+    end
+
+
+deleteorder --> deleteorder :
+
+
+@enduml

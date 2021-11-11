@@ -1,0 +1,62 @@
+@startuml AddSequenceDiagram
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+box Command COLOR_COMMAND_BOX
+    participant ":List*Command" as list COLOR_COMMAND
+end box
+
+box Utilities COLOR_UTILITIES_BOX
+    participant "<<class>>\nUi" as ui COLOR_UTILITIES
+    participant ":*Comparator" as comparator COLOR_UTILITIES
+end box
+
+box Inventory COLOR_INVENTORY_BOX
+    participant ":*" as object COLOR_INVENTORY
+end box
+
+autoactivate on
+
+mainFrame sd Logic for List*
+
+activate list
+list -> list : filter*()
+
+loop until end of parameters
+
+    alt parameters.equals(SORT)
+        create comparator
+        list -> comparator : new *Comparator(column: String, isReversed: boolean)
+        list <-- comparator : sorted*
+        deactivate comparator
+    else parameters.equals(REVERSED_SORT)
+        create comparator
+        list -> comparator : new *Comparator(column: String, isReversed: boolean)
+        list <-- comparator : reverseSorted*
+        deactivate comparator
+    else default
+        loop until end of all * objects
+            list -> object : getAttributeValue()
+            list <-- object
+        end
+
+    end
+
+end
+
+list --> list : filtered*
+
+list -> ui : print*(medicines: Arraylist<*>)
+list <-- ui
+deactivate ui
+
+note left of object
+Replace * in the diagram with
+Stock, Prescription or Order
+depending on the command entered.
+end note
+
+
+
+@enduml

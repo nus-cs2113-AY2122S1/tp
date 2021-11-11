@@ -1,0 +1,34 @@
+@startuml DeleteStockSequenceDiagram
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+box Command COLOR_COMMAND_BOX
+    participant ":DeleteStockCommand" as deleteStock COLOR_COMMAND
+end box
+
+box Utilities COLOR_UTILITIES_BOX
+    participant "<<class>>\n:Ui" as ui COLOR_UTILITIES
+    participant ":StockValidator" as stockValidator COLOR_UTILITIES
+    participant "<<class>>\n:Storage" as storage COLOR_UTILITIES
+end box
+
+box Inventory COLOR_INVENTORY_BOX
+    participant "<<class>>\n:Medicine" as medicine COLOR_INVENTORY
+end box
+
+autoactivate on
+mainFrame sd Logic for DeleteStockCommand
+activate deleteStock
+opt !(hasStockId && hasExpiryDate)
+    alt hasStockId && !hasExpiryDate
+        ref over deleteStock, medicine
+            Deletion of stock by id
+        end ref
+    else !hasStockId && hasExpiryDate
+        ref over deleteStock, medicine
+            Deletion of stock by expiry
+        end ref
+    end
+end
+@enduml

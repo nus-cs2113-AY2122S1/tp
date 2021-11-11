@@ -1,0 +1,43 @@
+@startuml UpdateOrderSequenceDiagram
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+box Command COLOR_COMMAND_BOX
+    participant ":UpdateOrderCommand" as updateorder COLOR_COMMAND
+end box
+
+box Utilities COLOR_UTILITIES_BOX
+    participant ":StockValidator" as stockvalidator COLOR_UTILITIES
+    participant "<<class>>\n:OrderManager" as ordermanager COLOR_UTILITIES
+    participant "<<class>>\n:StockManager" as stockmanager COLOR_UTILITIES
+end box
+
+box Inventory COLOR_INVENTORY_BOX
+    participant ":Order" as order COLOR_INVENTORY
+end box
+
+autoactivate on
+mainFrame sd Logic for UpdateOrderCommand
+activate updateorder
+    updateorder -> ordermanager: extractOrderObject(parameters: LinkedHashMap<String, String>,\nmedicines: ArrayList<Medicine>)
+    updateorder <-- ordermanager: order
+    updateorder -> order: isDelivered()
+    updateorder <-- order
+    opt !isDelivered
+        updateorder -> stockmanager: getMaxStockQuantity(medicines: ArrayList<Medicines>, orderName: String)
+        updateorder <-- stockmanager
+        opt existName && existQuantityParam
+            create stockvalidator
+            updateorder -> stockvalidator: new StockValidator()
+            updateorder <-- stockvalidator
+            updateorder -> stockvalidator: checkUpdateQuantity(ui: Ui,\nmedicines: ArrayList<Medicine>,\norder: Order, maxQuantity: int)
+            updateorder <-- stockvalidator: isValidQuantity
+            opt isValidQuantity
+                updateorder -> updateorder: setUpdatesByOrderId(filteredOrders: ArrayList<Order>,\norder: Order)
+                updateorder --> updateorder
+            end
+        end
+    end
+
+@enduml

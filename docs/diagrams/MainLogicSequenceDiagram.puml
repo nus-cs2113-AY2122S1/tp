@@ -1,0 +1,63 @@
+@startuml AddSequenceDiagram
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+box MediVault COLOR_MEDIVAULT_BOX
+    participant ":MediVault" as medivault COLOR_MEDIVAULT
+end box
+
+box Utilities COLOR_UTILITIES_BOX
+    participant "<<class>>\nUi" as uiclass COLOR_UTILITIES
+    participant "Ui" as ui COLOR_UTILITIES
+    participant "CommandParser" as commandparser COLOR_UTILITIES
+end box
+
+box Command COLOR_COMMAND_BOX
+    participant ":Command" as command COLOR_COMMAND
+end box
+
+autoactivate on
+
+-> medivault: run()
+    medivault -> uiclass : getInstance()
+    medivault <-- uiclass
+    medivault -> uiclass : printWelcomeMessage()
+    medivault <-- uiclass
+    create commandparser
+    medivault -> commandparser : CommandParser()
+    medivault <-- commandparser
+
+    loop until exit is received
+        medivault -> ui : getInput()
+        medivault <-- ui : userInput
+        medivault -> commandparser : parseCommand(userInput: String)
+        medivault <-- commandparser : userCommand, parameters
+
+        alt command equals modes
+            medivault -> commandparser : changeMode(ui: Ui, commandString: String, mode: Mode)
+            medivault <-- commandparser
+        else else
+            medivault -> commandparser : processCommand(commandString: String,\ncommandParameters: LinkedHashMap<String, String>,\nmode Mode)
+            commandparser -> commandparser : parseParameters(parametersString: String)
+            commandparser --> commandparser : parameterValues
+            create command
+            commandparser -> command : Command(parameters: LinkedHashMap<String, String>)
+            commandparser <-- command
+            medivault <-- commandparser
+            medivault -> command : execute()
+
+            ref over medivault,command
+                Execution of *command
+            end ref
+            medivault <-- command
+            deactivate command
+        end
+    end
+
+note left of command
+Note that processCommand throws InvalidCommandException
+when an invalid command is entered.
+end note
+
+@enduml

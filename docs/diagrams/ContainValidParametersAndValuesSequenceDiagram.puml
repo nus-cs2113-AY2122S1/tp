@@ -1,0 +1,55 @@
+@startuml ContainValidParametersAndValuesSequenceDiagram
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+box Command COLOR_COMMAND_BOX
+    participant ":*Command" as command COLOR_COMMAND
+end box
+
+box Utilities COLOR_UTILITIES_BOX
+    participant "<<class>>\n:Ui" as ui COLOR_UTILITIES
+    participant "<<abstract>>\nMedicineValidator" as medicinevalidator COLOR_UTILITIES
+    participant ":*Validator" as xvalidator COLOR_UTILITIES
+    participant "<<class>>\n:Storage" as storage COLOR_UTILITIES
+end box
+
+box Inventory COLOR_INVENTORY_BOX
+    participant "<<class>>\n:Medicine" as medicine COLOR_INVENTORY
+end box
+
+autoactivate on
+mainFrame sd Execution of *Command
+note right of command
+Replace * in the diagram with
+Stock, Prescription or Order
+depending on the command entered.
+end note
+activate command
+    command -> ui: getInstance()
+    command <-- ui
+    command -> medicine: getInstance()
+    command <-- medicine
+    create xvalidator
+    command -> xvalidator: new *Validator()
+    command <-- xvalidator
+    command -> medicinevalidator: containsInvalidParametersAndValues(ui: Ui,\nparameters: LinkedHashMap<String, String>,\nmedicines: ArrayList<Medicine>, requiredParameters: String[],\noptionalParameters: String[], commandSyntax: String,\nrequiresOptionalParameters: boolean, validator: MedicineValidator)
+        medicinevalidator -> medicinevalidator: containsInvalidParameters(ui: Ui,\nparameters: LinkedHashMap<String, String>,\nrequiredParameters: String[],\noptionalParameters: String[],\ncommandSyntax: String,\nrequiresOptionalParameters: boolean)
+        medicinevalidator --> medicinevalidator: isInvalidParameter
+        opt !isInvalidParameter
+            medicinevalidator -> xvalidator: containsInvalidParameterValues(ui: Ui,\nparameters: LinkedHashMap<String,String>,\nmedicines: ArrayList<Medicine>,\ncommandSyntax: String,\ninvalidParameters: ArrayList<String>)
+            medicinevalidator <-- xvalidator: isInvalidParameterValues
+        end
+        command <-- medicinevalidator: isInvalidInput
+        opt !isInvalidInput
+            ref over command, storage
+                Logic for *Command
+            end ref
+            command -> storage: getInstance()
+            command <-- storage
+            command -> storage: saveData()
+            command <-- storage
+        end
+
+
+@enduml

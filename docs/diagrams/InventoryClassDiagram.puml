@@ -1,0 +1,63 @@
+@startuml
+'https://plantuml.com/class-diagram
+' hide the circles in the diagram
+hide circle
+' hide the icons for access modifiers
+skinparam classAttributeIconSize 0
+' to join all the arrows
+skinparam groupInheritance 3
+
+class "{abstract}\nMedicine"{
+    #medicineName: String
+    #quantity: int
+    -{static} medicines: ArrayList<Medicine>
+    +{static} getInstance()
+    +Medicine(medicineName: String, quantity: int)
+    +toFileFormat() &#123;abstract&#125;
+    +toArchiveFormat() &#123;abstract&#125;
+}
+
+class "Stock"{
+    -{static} stockCount: int
+    #stockID: int
+    #price: double
+    #expiry: Date
+    #description: String
+    #maxQuantity: int
+    #isDeleted: boolean
+    +Stock(name: String, price: Double, quantity: int,
+     expiry: Date, description: String, maxQuantity: int)
+    +toFileFormat(): String
+    +toArchiveFormat(): String
+}
+
+class "Prescription"{
+    -{static} prescriptionCount: int
+    #prescriptionId: int
+    #customerId: int
+    #date: Date
+    #staff: String
+    #stockId: int
+    +Prescription(medicineName: String, quantity: int,
+     customerId: String, date: Date, staff: String, stockId: int)
+    +toFileFormat(): String
+    +toArchiveFormat(): String
+}
+
+class "Order"{
+    -{static} orderCount: int
+    #orderId: int
+    #date: Date
+    #isDelivered: boolean
+    +Order(medicineName: String,
+    quantity: int, date: Date)
+    +toFileFormat(): String
+    +toArchiveFormat(): String
+}
+
+"{abstract}\nMedicine" <|-- "Stock"
+"{abstract}\nMedicine" <|-- "Prescription"
+"{abstract}\nMedicine" <|-- "Order"
+
+note "Note: All the getters and setters are\nleft out in this diagram." as n1
+@enduml

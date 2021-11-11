@@ -1,0 +1,31 @@
+@startuml ArchitectureDiagram
+!include <office/Concepts/documents>
+!include <office/Users/user>
+!include style.puml
+
+' hide the circles in the diagram
+hide circle
+hide empty members
+
+package " "<<Rectangle>>{
+    class MediVault COLOR_MEDIVAULT
+    class Utilities COLOR_UTILITIES
+    class Errors COLOR_ERRORS
+    class Command COLOR_COMMAND
+    class Inventory COLOR_INVENTORY
+}
+
+class "<$user>" as User COLOR_SPARE
+class "<$documents>" as Files COLOR_SPARE1
+
+User .[COLOR_SPARE].> Utilities
+MediVault -[COLOR_MEDIVAULT]> Utilities
+Errors --[COLOR_ERRORS]up> Utilities
+Utilities .[COLOR_UTILITIES]right>Files
+Utilities --[COLOR_UTILITIES]> Command
+MediVault --[COLOR_COMMAND]> Command
+Command --[COLOR_COMMAND]> Inventory
+Inventory --[COLOR_INVENTORY]> Utilities
+
+
+@enduml

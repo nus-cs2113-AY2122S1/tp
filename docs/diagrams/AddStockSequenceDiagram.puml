@@ -1,0 +1,65 @@
+@startuml AddStockSequenceDiagram
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+box Command COLOR_COMMAND_BOX
+    participant ":AddStockCommand" as addstock COLOR_COMMAND
+end box
+
+box Utilities COLOR_UTILITIES_BOX
+    participant ":StockValidator" as stockvalidator COLOR_UTILITIES
+    participant "<<class>>\n:StockManager" as stockmanager COLOR_UTILITIES
+end box
+
+box Inventory COLOR_INVENTORY_BOX
+    participant ":Stock" as stock COLOR_INVENTORY
+end box
+
+autoactivate on
+mainFrame sd Logic for AddStockCommand
+activate addstock
+addstock -> addstock : checkExpiryDate(ui: Ui, expiryDate: String)
+addstock --> addstock :
+
+    addstock -> stockmanager: getTotalStockQuantity()
+    addstock <-- stockmanager: totalStock
+    addstock -> addstock : isExpiryExist(ui: Ui, stockValidator: StockValidator, \nfilteredStock: ArrayList<Stock>, quantityToAdd: String, \nformatExpiry: Date, totalStock: int)
+    loop stock : filteredStocks
+        opt isValidQuantity
+            addstock -> addstock : isValidQuantity(ui:Ui, stockValidator: StockValidator, \nmaxQuantity: int, quantity: int)
+            addstock -> stockvalidator : quantityValidityChecker(ui: Ui, quantity: int, maxQuantity: int)
+            addstock <-- stockvalidator : isValidQuantity
+            addstock --> addstock :
+            opt formatExpiry.equals(stock.getExpiry())
+                addstock -> stock : getQuantity()
+                addstock <-- stock : getQuantity
+                addstock -> stock : setQuantity()
+                addstock <-- stock :
+            end
+        end
+    end
+    addstock --> addstock :
+    addstock -> addstock : checkValidParametersAndValues(ui: Ui, parameters: LinkedHashMap<String, String>, \nmedicines: ArrayList<Medicine>, requiredParameters: String[], optionalParameters: String[])
+    addstock -> addstock : addSameMedicine(ui: Ui, medicines: ArrayList<Medicine>, nameToAdd: String, \nstockValidator: StockValidator, filteredStocks: ArrayList<Stock>, quantityToAdd: String, \nformatExpiry: Date, totalStock: int)
+    loop stock : filteredStocks
+        opt isValidQuantity
+        addstock -> addstock : isValidQuantity(ui:Ui, stockValidator: StockValidator, \nmaxQuantity: int, quantity: int)
+        addstock -> stockvalidator : quantityValidityChecker(ui: Ui, quantity: int, maxQuantity: int)
+        addstock <-- stockvalidator : isValidQuantity
+        addstock --> addstock :
+        addstock -> addstock : addMedicine(ui: Ui, medicines: ArrayList<Medicine>, name: String, \ndescription: String, price: Double, quantity: int, expiryDate: Date, maxQuantity: int)
+        addstock --> addstock :
+        end
+        addstock --> addstock :
+    end
+    addstock --> addstock :
+    note right
+        This diagram shows the process for adding medication
+        where medication exists.
+        It does not include the process whereby medication does
+        not exist in stock.
+    end note
+deactivate addstock
+
+@enduml

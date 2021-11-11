@@ -1,0 +1,28 @@
+@startuml DeleteStockSequenceDiagram
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+box Command COLOR_COMMAND_BOX
+    participant ":ArchivePrescriptionCommand" as archivePrescription COLOR_COMMAND
+end box
+
+box Utilities COLOR_UTILITIES_BOX
+    participant "<<class>>\n:DateParser" as dateParser COLOR_UTILITIES
+    participant "<<class>>\n:Storage" as storage COLOR_UTILITIES
+end box
+
+mainFrame sd Logic for ArchivePrescriptionCommand
+autoactivate on
+activate archivePrescription
+archivePrescription -> dateParser : stringToDate(date: String)
+archivePrescription <-- dateParser : date
+archivePrescription -> archivePrescription : prescriptionsToArchive(medicines: ArrayList<Medicine>,\n prescriptionArchiveDate: Date)
+archivePrescription --> archivePrescription : filteredPrescriptions
+archivePrescription -> archivePrescription : removeFromPrescriptions(medicines: ArrayList<Medicine>,\n filteredPrescriptions: ArrayList<Medicine>)
+archivePrescription --> archivePrescription
+archivePrescription -> storage : getInstance()
+archivePrescription <-- storage
+archivePrescription -> storage : archiveData(filteredPrescriptions: ArrayList<Medicine>)
+archivePrescription <-- storage
+@enduml

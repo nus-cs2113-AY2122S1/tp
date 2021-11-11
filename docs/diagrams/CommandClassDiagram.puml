@@ -1,0 +1,205 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+!include style.puml
+!define ABSTRACT &#123;abstract&#125;
+
+' hide the circles in the diagram
+hide circle
+' hide the icons for access modifiers
+skinparam classAttributeIconSize 0
+' to join all the arrows
+'skinparam groupInheritance 3
+skinparam classBackgroundColor COLOR_COMMAND_BOX
+
+package "Command Component" <<Rectangle>> {
+    class "{abstract}\nCommand" as Command
+    class AddPrescriptionCommand
+    class AddStockCommand
+    class AddOrderCommand
+    class ArchivePrescriptionCommand
+    class ArchiveOrderCommand
+    class DeletePrescriptionCommand
+    class DeleteStockCommand
+    class DeleteOrderCommand
+    class ExitCommand
+    class HelpCommand
+    class ListPrescriptionCommand
+    class ListStockCommand
+    class ListOrderCommand
+    class PurgeCommand
+    class ReceiveOrderCommand
+    class UpdatePrescriptionCommand
+    class UpdateStockCommand
+    class UpdateOrderCommand
+
+}
+
+package MediVault <<Rectangle>> COLOR_MEDIVAULT_BOX {
+}
+
+package Inventory <<Rectangle>> COLOR_INVENTORY_BOX {
+}
+
+class Command {
+    #parameters: LinkedHashMap<String, String>
+    +execute(): void ABSTRACT
+}
+
+class AddPrescriptionCommand {
+    +AddPrescriptionCommand()
+    +execute(): void
+    -prescribe(): void
+}
+
+class AddStockCommand {
+    +AddStockCommand()
+    +execute(): void
+    -checkExpiryDate(): Date
+    -isExpiryExist(): boolean
+    -addSameMedicine(): boolean
+    -isValidQuantity(): boolean
+    -checkValidParametersAndValues(): boolean
+    -addMedicine(): void
+}
+
+class AddOrderCommand {
+    +AddOrderCommand()
+    +execute(): void
+    -addOrder(): void
+    -addDate(): Date
+    -checkvalidParameterValues(): boolean
+}
+
+class ArchivePrescriptionCommand {
+    +ArchivePrescriptionCommand()
+    +execute(): void
+    -prescriptionsToArchive(): ArrayList<Medicine>
+    -removeFromPrescriptions(): void
+}
+
+class ArchiveOrderCommand {
+    +ArchiveOrderCommand()
+    +execute(): void
+    -ordersToArchive(): ArrayList<Medicine>
+    -removeFromOrders(): void
+}
+
+class DeletePrescriptionCommand {
+    +DeletePrescriptionCommand()
+    +execute(): void
+    -isValidPrescriptionParameters(): boolean
+    -setStockQuantity(): boolean
+}
+
+class DeleteStockCommand {
+    +DeleteStockCommand()
+    +execute(): void
+    -deleteStockById(): void
+    -deleteStockByExpiry(): void
+}
+
+class DeleteOrderCommand {
+    +DeleteOrderCommand()
+    +execute(): void
+    -isValidOrderParameters(): boolean
+}
+
+class ExitCommand {
+    +execute(): void
+}
+
+class HelpCommand {
+    +execute(): void
+}
+
+class ListPrescriptionCommand {
+    +ListPrescriptionCommand()
+    +execute(): void
+    -filterPrescriptions(): ArrayList<Prescription>
+}
+
+class ListStockCommand {
+    +ListStockCommand()
+    +execute(): void
+}
+
+class ListOrderCommand {
+    +ListOrderCommand()
+    +execute(): void
+    -filterOrders(): ArrayList<Order>
+}
+
+class PurgeCommand {
+    +execute(): void
+}
+
+class ReceiveOrderCommand {
+    +ReceiveOrderCommand()
+    +execute(): void
+    -getCurrentQuantity(): int
+    -checkStockExist(): boolean
+    -checkOrderIdExist(): boolean
+    -isStockParametersValid(): boolean
+}
+
+class UpdatePrescriptionCommand {
+    +UpdatePrescriptionCommand()
+    +execute(): void
+    -processGivenNameAndQuantity(): boolean
+    -processGivenName(): boolean
+    -processGivenQuantity(): boolean
+    -processOtherFields(): boolean
+    -processPrescription(): boolean
+    -processRestoration(): boolean
+}
+
+class UpdateOrderCommand {
+    +UpdateOrderCommand()
+    +execute(): void
+    -setUpdatesByOrderId(): void
+}
+
+class UpdateStockCommand {
+    +UpdateStockCommand()
+    +execute(): void
+    -printUpdatedStockId: void
+    -checkAffectedCommand(): boolean
+    -getNewStock(): Stock
+    -addNewRowForUpdates(): void
+    -processDateInput(): boolean
+    -processQuantityValues(): boolean
+    -setUpdatesByStockId(): void
+}
+
+AddPrescriptionCommand ----|> Command
+AddStockCommand ----|> Command
+AddOrderCommand ----|> Command
+DeletePrescriptionCommand ---|> Command
+DeleteStockCommand ---|> Command
+DeleteOrderCommand ---|> Command
+ExitCommand --|> Command
+HelpCommand --|> Command
+PurgeCommand --|> Command
+ListPrescriptionCommand --up|> Command
+ListStockCommand --up|> Command
+ListOrderCommand --up|> Command
+ReceiveOrderCommand ---up|> Command
+ArchivePrescriptionCommand ---up|> Command
+ArchiveOrderCommand ---up|> Command
+UpdateOrderCommand ----up|> Command
+UpdatePrescriptionCommand ----up|> Command
+UpdateStockCommand ----up|> Command
+
+MediVault ---.right|> Command: executes >
+Command ---.right|> Inventory: affects >
+
+note as ConstraintsNote
+The input parameters for
+methods and constructors are
+left out as member details
+can get outdated over time.
+end note
+
+
+@enduml

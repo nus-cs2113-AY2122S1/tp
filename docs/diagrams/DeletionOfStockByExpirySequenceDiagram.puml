@@ -1,0 +1,42 @@
+@startuml DeleteStockSequenceDiagram
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+box Command COLOR_COMMAND_BOX
+    participant ":DeleteStockCommand" as deleteStock COLOR_COMMAND
+end box
+
+box Utilities COLOR_UTILITIES_BOX
+    participant "<<class>>\n:Ui" as ui COLOR_UTILITIES
+    participant "<<class>>\n:DateParser" as dateParser COLOR_UTILITIES
+end box
+
+box Inventory COLOR_INVENTORY_BOX
+    participant ":Stock" as stock COLOR_INVENTORY
+end box
+
+autoactivate on
+mainFrame sd Deletion of stock by expiry
+activate deleteStock
+deleteStock -> deleteStock: deleteStockByExpiry(ui: Ui,\n medicines: ArrayList<Medicine>)
+deleteStock -> dateParser : stringToDate(date: String)
+deleteStock <-- dateParser : date
+loop medicine : medicines
+    deleteStock -> deleteStock : medicine
+    opt medicine instanceof Stock
+        deleteStock -> stock : getExpiry()
+        deleteStock <-- stock : stockExpiryDate
+        opt stockExpiryDate.before(date) || stockExpiryDate.equals(date)
+            deleteStock -> stock : setQuantity(quantity: int)
+            deleteStock <-- stock
+            deleteStock -> stock : setDeleted(deleted: boolean)
+            deleteStock <-- stock
+        end
+    end
+    deleteStock --> deleteStock
+end
+deleteStock --> deleteStock
+deleteStock -> ui : print()
+deleteStock <-- ui
+@enduml

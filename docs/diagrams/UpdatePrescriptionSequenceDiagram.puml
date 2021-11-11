@@ -1,0 +1,43 @@
+@startuml UpdatePrescriptionSequenceDiagram
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+box Command COLOR_COMMAND_BOX
+    participant ":UpdatePrescriptionCommand" as updateprescription COLOR_COMMAND
+end box
+
+box Utilities COLOR_UTILITIES_BOX
+    participant ":StockValidator" as stockvalidator COLOR_UTILITIES
+    participant "<<class>>\n:PrescriptionManager" as prescriptionmanager COLOR_UTILITIES
+end box
+
+autoactivate on
+mainFrame sd Logic for UpdatePrescriptionCommand
+activate updateprescription
+    updateprescription -> prescriptionmanager: extractDispenseObject(parameters: LinkedHashMap<String,String>,\nmedicines: ArrayList<Medicine>)
+    updateprescription <-- prescriptionmanager
+    create stockvalidator
+    updateprescription -> stockvalidator: new StockValidator()
+    updateprescription <-- stockvalidator
+    alt hasNameParam && hasQuantityParam
+        updateprescription -> updateprescription: processGivenNameAndQuantity()
+        note right
+            All methods takes in the same parameters.
+            process(ui: Ui, medicines: ArrayList<Medicine>,
+            prescription: Prescription, customerId: String,
+            date: Date, staffName: String)
+        end note
+        updateprescription --> updateprescription: isSuccessfulUpdate
+    else hasNameParam && !hasQuantityParam
+        updateprescription -> updateprescription: processGivenName()
+        updateprescription --> updateprescription: isSuccessfulUpdate
+    else !hasNameParam && hasQuantityParam
+        updateprescription -> updateprescription: processGivenQuantity()
+        updateprescription --> updateprescription: isSuccessfulUpdate
+    else containsParamOtherThanNameAndQuantity
+        updateprescription -> updateprescription: processOtherFields()
+        updateprescription --> updateprescription: isSuccessfulUpdate
+    end
+
+@enduml

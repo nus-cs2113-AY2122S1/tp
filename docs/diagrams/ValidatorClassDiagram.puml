@@ -1,0 +1,63 @@
+@startuml
+'https://plantuml.com/class-diagram
+' hide the circles in the diagram
+hide circle
+' hide the icons for access modifiers
+skinparam classAttributeIconSize 0
+' to join all the arrows
+skinparam groupInheritance 3
+
+!include style.puml
+
+skinparam classBackgroundColor COLOR_UTILITIES_BOX
+
+class "{abstract}\n MedicineValidator"{
+    +containsInvalidParameterValues(): boolean &#123;abstract&#125;
+    +isValidColumn(): boolean &#123;abstract&#125;
+    +containsInvalidParametersAndValues(): boolean
+    +getInvalidParameters(): ArrayList<String>
+    +containsInvalidParameters(): boolean
+    +isValidName(): boolean
+    +isValidQuantity(): boolean
+    +hasNameParamChecker(): boolean
+    +hasQuantityParamChecker(): boolean
+}
+
+class "StockValidator"{
+    +StockValidator()
+    +containsInvalidParameterValues(): boolean;
+    +isValidStockId(): boolean
+    +isValidPrice(): boolean
+    +isValidExpiry(): boolean
+    +isValidDescription(): boolean
+    +isValidMaxQuantity(): boolean
+    +isValidColumn(): boolean
+    +quantityValidityChecker(): boolean
+    +dateValidityChecker(): boolean
+}
+
+class "PrescriptionValidator"{
+    +PrescriptionValidator()
+    +containsInvalidParameterValues(): boolean;
+    +isValidPrescriptionId(): boolean
+    +isValidCustomerId(): boolean
+    +isValidStaffName(): boolean
+    +isValidColumn(): boolean
+    +isValidDate(): boolean
+}
+
+class "OrderValidator"{
+    +OrderValidator()
+    +containsInvalidParameterValues(): boolean;
+    +isValidOrderId(): boolean
+    +isValidDate(): boolean
+    +isValidStatus(): boolean
+    +isValidColumn(): boolean
+}
+
+"{abstract}\n MedicineValidator" <|---- "StockValidator"
+"{abstract}\n MedicineValidator" <|-- "PrescriptionValidator"
+"{abstract}\n MedicineValidator" <|---- "OrderValidator"
+
+note "The input parameters for all functions\nhas been left out to make this\ndiagram more compact." as n1
+@enduml
