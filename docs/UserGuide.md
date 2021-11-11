@@ -100,7 +100,7 @@ Before you learn how to use the app, take a look at the [Quick Start](#1-quick-s
 ![image](https://user-images.githubusercontent.com/77761339/140724500-ea056343-86d5-4a9c-ba82-db8de51dd595.png)
 
 6. If you are a first time user, the first command you want to key in is the [help](#view-all-possible-commands-help) command.
-It will guide you to the possible commands you can enter into `Stonks XD`. (Tip! Refer to the [Features](#features) below for details of each command.)
+It will guide you to the possible commands you can enter into `Stonks XD`. (Tip! Refer to the [Features](#2-features) below for details of each command.)
     
 ---
 
@@ -546,11 +546,11 @@ Note:
 - `total_in` command is only able to print values less than 100,000,000,000 (100Billion).
 
 Examples:
-<ol>
+<ul>
 <li>
 Let's say you have made income entries consistently for a couple of months since you downloaded the application and you want to know the total income you have logged.
 </li>
-</ol>
+</ul>
 <details>
 <summary> ▼ Expected output in run window </summary>
 <br>
@@ -1045,22 +1045,22 @@ Here's our tip for the day: Try using the 50/30/20 rule to budget. 50% for needs
 ### Saving of data
 
 Stonks XD will save / load your data from `StonksXD_Entries.csv` and `StonksXD_Settings.csv`. This ensures that you 
-will not lose your important data when Stonks XD changes.
+will not lose important data when Stonks XD closes.
 
 The 2 `csv` files will be stored in the same directory as `StonksXD.jar`.
 
-`StonksXD_Entries.csv` will store all your entries. You can edit this file. They are:
+`StonksXD_Entries.csv` is an editable file. It stores the following content:
 1. `Expense` entries.
 2. `Income` entries.
 
-`StonksXD_Settings.csv` will store all the important settings. **This file is read-only.** They are:
+`StonksXD_Settings.csv` a **read-only file**. It stores all the important settings:
 1. Currency setting.
 2. Threshold setting.
 3. Budget settings for different expense categories.
 
 All important fields will be separated by a `,`.
 
-The reason for data files to be in `.csv` format is so that you can have an easier time editing / viewing those data 
+The reason for data files being in `.csv` format is for you can have an easier time editing / viewing the data 
 in Excel when **not** using the program. It is easy to make mistakes when editing the `.csv` files manually so 
 do be careful.
 
@@ -1069,23 +1069,17 @@ do be careful.
 #### When editing / viewing csv files
 
 - `.csv` files **must not** be open concurrently while Stonks XD is running. In other words, never have two programs 
-writing / reading the `.csv` files at the same time. This will very likely cause a saving / loading error and 
-lost of data.
+writing / reading the `.csv` files at the same time. This will very likely cause saving / loading errors and 
+loss of data.
 
 
 - `StonksXD_Settings.csv` is **read-only**. This is because changing the settings will result in many unexpected
   results. For example, changing the currency setting in the file would result in the amounts in `StonksXD_Entries.csv`
-  to be recognised as another currency which is very unlikely what you are trying to do.
+  being recognised as another currency.
 
 
 - Restrictions and rules for different variables are the same as how you would enter them in the Command Line 
 Interface, as specified above.
-
-  - For example, when editing an expense entry in `StonksXD_Entries.csv`, `entry_description` must not be blank.
-  - Another example, when editing an income entry in `StonksXD_Entries.csv`, `amount` has to be between 0.05 and
-  1,000,000 inclusive.
-  - Another example, when editing an expense entry in `StonksXD_Entries.csv`, category should be the ones available and
-  specified earlier on in the user guide.
 
 
 - Do not alter / delete the headers of `.csv` files. Stonks XD is able to minimise the damage if you do so but to 
@@ -1095,7 +1089,7 @@ ensure your data is saved / loaded properly, please do not edit anything unexpec
 - Stonks XD expects the dates in `StonksXD_Entries.csv` to be in `DD/MM/YYYY` format i.e., `11/12/2021` when loading 
 data. When opening `StonksXD_Entries.csv` in Excel, Excel might change the format of the dates. Do ensure Excel's date 
 format is in `DD/MM/YYYY` when dealing with `StonksXD_Entries.csv`. Entries with a different date format will be 
-considered corrupted and not be loaded into Stonks XD.
+considered corrupted and will not be loaded into Stonks XD.
 
   
 - Do not edit the amount of your entries **drastically** such that they exceed the max amount per entry or the 
@@ -1111,14 +1105,14 @@ messages telling you that there are corrupted data, and they will not be loaded.
 edited things you are not suppose to, or you have edited wrongly. There is a way to minimise this damage (This is 
 optional, and you do not have to do this if you are fine with losing data). 
 Here are the steps:
-1. When you ended Stonks XD already but wants to edit the `.csv` files, make a copy of them first.
+1. When you have terminated Stonks XD but want to edit the `.csv` files, make a copy of them first.
 
 
-2. When you run Stonks XD and receive corruption errors, end the program.
+2. If you run Stonks XD and receive corruption errors, end the program.
 
 
 3. Copy and paste the contents from your copies back into `StonksXD_Entries.csv` and `StonksXD_Settings.csv`. This 
-means all your edits are gone. But, this pretty much ensures that there will be no corrupted data. 
+means all your edits are gone. But, this will ensure that there will be no data is lost. 
 
 
 ---
