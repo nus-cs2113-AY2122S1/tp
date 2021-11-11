@@ -23,18 +23,18 @@ This guide's purpose is to help users like you understand how to use the Travell
 ### How to use this guide?
 This guide consists of 5 main sections, with each section catering to your different needs, as detailed below. 
 
-* [Quick Start](#1-quick-start): A quick set up guide for users are new and can't wait to start using Traveller!
-* [Features](#2-features): Details the functionalities of Traveller. For users who are seeking to understand the 
+* [Quick Start](#1-quick-start): A quick set up guide for users who are new and can't wait to start using Traveller!
+* [Features](#2-features): A list of functionalities and details of Traveller. This is for users who are seeking to understand the 
 full functionality of Traveller.
 * [FAQ](#3-faq): A list of commonly asked questions regarding Traveller. If you are facing issues with Traveller, this 
 is the section you are looking for.
 * [Supported Countries Summary](#4-supported-countries-summary): A list of countries currently supported by Traveller. 
 If you want to see if your destination country is supported by Traveller, navigate here.
-* [Command Summary](#5-command-summary): A summary of the various functionalities currently supported by Traveller. See
-here if you forgot how to use the assortment of commands in Traveller.
+* [Command Summary](#5-command-summary): A summary of the various functionalities currently supported by Traveller. 
+If you forgot how to use the assortment of commands in Traveller, look here.
 
 ### Legend
-These icons here will be used throughout the guide to provide you with more information when using 
+These icons will be used throughout the guide to provide you with more information when using 
 Traveller. Do familiarise yourself with what they mean as they provide very useful information that can help you become 
 an expert Traveller user!
 
@@ -71,13 +71,13 @@ an expert Traveller user!
 <br/>
 
 ## 1. Quick Start
-This section provides you with a guide on how to get Traveller up and running on your computer.
+This section provides you with a short guide on how to get Traveller up and running on your computer.
 
 1. Ensure that you have Java 11 or above installed. You can install it from this 
 [link](https://www.oracle.com/java/technologies/downloads/#java11).
-2. Download the latest version of `Traveller.jar` from [here](https://github.com/AY2122S1-CS2113T-W13-1/tp/releases).
+2. Download the latest version of `Traveller.jar` [here](https://github.com/AY2122S1-CS2113T-W13-1/tp/releases).
 3. Move the executable jar file to an empty directory of your choice.
-4. Navigate to the directory containing `Traveller.jar` in your desired CLI and run `java -jar Traveller.jar`.
+4. Navigate to the directory containing `Traveller.jar` in your desired CLI and enter `java -jar Traveller.jar`.
    You should see Traveller's welcome message as shown below.
 
    ![Welcome](./documentationPics/welcome.png)
@@ -98,13 +98,13 @@ As well as useful tips and tricks for you to fully utilise Traveller.
 
 For a quick summary of all commands, please click [here](#5-command-summary) instead.
 
-> ![](documentationPics/info.png) As Traveller is a CLI based app, what and how you type your commands is *very important*.
+> ![](documentationPics/info.png) As Traveller is a CLI based app, what and how you type is *very important*.
 > Each command has its specific format so that Traveller can understand what you want to do!
 
 <br/>
 
 ### 2.1. Getting help: `help`
-The help command would return the basic commands that are supported by Traveller.
+The **help** command shows you the basic commands that are supported by Traveller.
 The purpose of the help command is to ensure that even if there is no internet connection, the user is able to utilise the CLI without having to refer to the user guide.
 
 #### Format: `help`
@@ -112,10 +112,10 @@ The purpose of the help command is to ensure that even if there is no internet c
 <br/>
 
 ### 2.2. Creating a trip: `new`
-Creates a new trip.
+The **new** command creates a new trip in your trip list.
 
 #### Format: `new TRIP_NAME /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
-   *  Keywords `/from` and `/to` must be included **before** the SOURCE_COUNTRY and DESTINATION_COUNTRY respectively.
+   * Keywords `/from` and `/to` must be included **before** the SOURCE_COUNTRY and DESTINATION_COUNTRY respectively.
    * `SOURCE_COUNTRY` and `DESTINATION_COUNTRY` destinations must be [supported countries codes](#4-supported-countries-summary).
    * Trips cannot be named `all` or contain the character `/`.
 
@@ -144,9 +144,7 @@ ________________________________________________________________
 <br/>
 
 ### 2.3. Adding a day to trip: `add-day`
-Your overseas trip may span multiple days.
-
-This command allows you to create any number of days in your trip.
+The **add-day** command allows you to add any number of days to your trip, as your overseas trip may span multiple days.
 
 #### Format: `add-day TRIP_NAME /day NUMBER_OF_DAYS`
    * The maximum number of days allowed per trip is 30 days.
@@ -170,7 +168,7 @@ ____________________________________________________________
 <br/>
 
 ### 2.4. Adding an item to a day: `add-item`
-Use this command to add an item to a day of your trip. An item represents an activity that you will do in a day.
+The **add-item** command adds an item to a day of your trip. This item represents an activity that you will do in that day.
 
 #### Format: `add-item TRIP_NAME /day DAY_INDEX /time ITEM_TIME /name ITEM_NAME`
    * The maximum number of items allowed per day is 50 days.
@@ -202,7 +200,7 @@ ________________________________________________________________
 <br/>
 
 ### 2.5. Viewing trips: `view`
-Shows you details of your existing trips.
+The **view** command displays and shows you details of your existing trips.
 
 #### Format: `view TRIP_NAME`
 
@@ -230,7 +228,7 @@ ____________________________________________________________
 <br/>
 
 ### 2.6. Deleting a trip: `delete`
-Deletes an existing trip from the trip list.
+The **delete** command deletes an existing trip from the trip list.
 
 #### Format: `delete TRIP_NAME`
 
@@ -243,12 +241,12 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-> ![](documentationPics/warning.png) Be careful when deleting your trips, a delete command is irreversible!
+> ![](documentationPics/warning.png) Be careful when deleting your trips, the delete command is irreversible!
 
 <br/>
 
 ### 2.7. Deleting a day from a trip: `delete-day`
-Deletes an existing day from a trip.
+The **delete-day** command deletes an existing day from a trip.
 
 #### Format: `delete-day TRIP_NAME /day DAY_INDEX`
 
@@ -261,12 +259,12 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-> ![](documentationPics/warning.png) Be careful when deleting your trips, a delete-day command is irreversible!
+> ![](documentationPics/warning.png) Be careful when deleting your days, the delete-day command is irreversible!
 
 <br/>
 
 ### 2.8. Deleting an item from a day: `delete-item`
-Deletes an existing item from a trip.
+The **delete-item** command deletes an existing item from a day in a trip.
 
 #### Format: `delete-item TRIP_NAME /day DAY_INDEX /item ITEM_INDEX`
 
@@ -279,12 +277,12 @@ ____________________________________________________________
 ____________________________________________________________
 ```
 
-> ![](documentationPics/warning.png) Be careful when deleting your trips, a delete-item command is irreversible!
+> ![](documentationPics/warning.png) Be careful when deleting your items, the delete-item command is irreversible!
 
 <br/>
 
 ### 2.9. Editing a trip: `edit`
-Edits any main field about an existing trip.
+The **edit** command edits any main field about an existing trip.
 
 #### Format: `edit TRIP_NAME /name NEW_TRIP_NAME /from NEW_SOURCE_COUNTRY /to NEW_DESTINATION_COUNTRY`
 
@@ -313,7 +311,7 @@ ________________________________________________________________________________
 <br/>
 
 ### 2.10. Editing an item: `edit-item`
-Edits the time or name field of an existing item in a trip.
+The **edit-item** command edits the time or name field of an existing item from a trip.
 
 #### Format: `edit-item TRIP_NAME /day DAY_NUMBER /index ITEM_INDEX /time NEW_TIME /name NEW_NAME`
 
@@ -351,8 +349,8 @@ ________________________________________________________________________________
 <br/>
 
 ### 2.11. Searching for an item: `search-item`
-Search allows you to find all items from the selected day that contain the desired keyword. 
-Also, this keyword can be as short or as long as you want, from 'ant’ to 'zombie'!
+The **search-item** command searches finds all items from the selected day that contains the desired keyword.
+This keyword can be as short or as long as you want, from 'ant' to 'zombie'!
 
 #### Format: `search-item TRIP_NAME /day DAY_INDEX /key KEYWORD`
 
@@ -380,7 +378,7 @@ ________________________________________________________________________________
 <br/>
 
 ### 2.12. Finding the shortest time: `shortest-time`
-Returns the shortest flight time from the source to destination country.
+The **shortest-time** command shows the shortest flight time from the source to destination country.
 
 #### Format: `shortest-time /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
 
@@ -402,7 +400,7 @@ ____________________________________________________________
 <br/>
 
 ### 2.13. Finding the least cost: `shortest-cost`
-Returns the least expensive flight path from the source to destination country.
+The **shortest-cost** command shows the least expensive flight path from the source to destination country.
 
 #### Format: `shortest-cost /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
 
@@ -424,7 +422,7 @@ ____________________________________________________________
 <br/>
 
 ### 2.14. Exiting the program: `exit`
-Exits the program.
+The **exit** command exits Traveller.
 
 #### Format: `exit`
 
