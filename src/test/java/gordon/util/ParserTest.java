@@ -81,6 +81,7 @@ public class ParserTest {
                 + System.lineSeparator()
                 + "13. List all tags: listTags" + System.lineSeparator()
                 + "14. Help me: help" + System.lineSeparator()
+                + "15. Exit the program: exit" + System.lineSeparator()
                 + "" + System.lineSeparator();
         inputOutputTest(input, expected);
     }

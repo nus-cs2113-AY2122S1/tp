@@ -2,8 +2,8 @@
 
 ## Contents
 
-* [**How do you use this guide?**](#how-do-you-use-this-guide)
 * [**Who is Gordon?**](#who-is-gordon)
+* [**How do you use this guide?**](#how-do-you-use-this-guide)
 * [**How do you start Gordon?**](#how-do-you-start-gordon)
 * [**What can Gordon do?**](#what-can-gordon-do)
   1. [Add a recipe](#1-add-a-recipe-addrecipe)
@@ -22,25 +22,14 @@
       1. [Find recipes by tag](#95-list-all-your-tags-listtags)
   1. [Save and load your recipes](#10-saving-and-loading)
 * [**Cheat sheet**](#cheat-sheet)  
-
-## How do you use this guide?
-
-* Use the [Contents](#contents) section to navigate to anywhere in this user guide.
-* Use the [Cheat sheet](#cheat-sheet) for a quick lookup of commands.
-* Pages you need to navigate to or buttons you need to press are enclosed in quotation marks like 'This page'.
-* Code you need to type are shown like `this code`.
-* Parameters you can type are capitalised, like THIS_PARAMETER.
-* Whatever Gordon is telling you in the terminal will be enclosed in larger shaded boxes
-```
-like this output
-```
+* [**FAQ**](#FAQ)
 
 ## Who is Gordon? 
 
 <!-- Images -->
 ![Markdown Logo](https://www.denofgeek.com/wp-content/uploads/2019/10/robot-chicken-gordon-ramsay-adult-swim.jpg?resize=768%2C432)
 
-It's me, **Gordon v2.0**, and today, I'm gonna teach you donkeys how to use the Gordon application.
+It's me, **Gordon**, and today, I'm gonna teach you donkeys how to use the Gordon application.
 
 I am a Command Line Interface (CLI)-based recipe database application, and I can help you to:
 
@@ -49,9 +38,25 @@ I am a Command Line Interface (CLI)-based recipe database application, and I can
 1. Organise your collection of recipes with tags and other attributes so they are easier to find
 1. Delete recipes like the chicken you cooked so raw I can still hear it clucking
 
+This is what **Gordon** looks like:
+![Labelled Interface](images/labelInterface.png)
+
+
 If you're one of them so-called 'developers', head on over to our [Developer Guide](https://ay2122s1-cs2113t-w13-2.github.io/tp/DeveloperGuide.html).
 
 It's absolutely bonkers. Now let's get down to business.
+
+## How do you use this guide?
+
+* Use the [Contents](#contents) section to navigate to anywhere in this user guide.
+* Use the [Cheat sheet](#cheat-sheet) for a quick lookup of commands.
+* Pages you need to navigate to or buttons you need to press are enclosed in quotation marks like 'This page'.
+* Code you need to type are shown like `this code`.
+* Parameters you can type are capitalised, like _THIS_PARAMETER_.
+* Whatever **Gordon** is telling you in the terminal will be enclosed in larger shaded boxes
+```
+like this output
+```
 
 ## How do you start Gordon?
 
@@ -132,9 +137,10 @@ I can remove an existing recipe from my database of recipes.
 #### Format: `deleteRecipe RECIPE_INDEX`
 
 * The `RECIPE_INDEX` must be a positive integer representing the index of the recipe you want to remove.
-* `RECIPE_INDEX` refers to the index of the recipe after you use listRecipe.
-  * **Warning:** This is not the same index as the index given by the `find` command. Use deleteRecipe with caution to prevent losing your recipes.
-  * I recommend using the `listRecipes` command first to check for the index of the recipe you want to delete.
+* `RECIPE_INDEX` refers to the index of the recipe after you use listRecipe.  
+
+> :exclamation: **Warning:** This is not the same index as the index given by the `find` command. Use deleteRecipe with caution to prevent losing your recipes.
+> I recommend using the `listRecipes` command first to check for the index of the recipe you want to delete.
 
 #### Example of usage:
 
@@ -185,7 +191,7 @@ Method:
 --------------------
 ```
 
-#### Description of the outcome.
+#### Description of the outcome:
 
 * I'll show you the ingredients you need for that recipe, and the steps required to prepare it, as well as any other attributes you might have assigned it.
 
@@ -269,9 +275,10 @@ I can show you the proper format of commands.
 12. Delete tags from Cookbook: deleteTag "/ tagName1 + tagName2 + ..."
 13. List all tags: listTags
 14. Help me: help
+15. Exit the program: exit
 ```
 
-#### Description of the outcome.
+#### Description of the outcome:
 
 * I'll show you the proper format for using every command
 * Just type `help` anywhere in the terminal for a quick guide if you forget any command
@@ -327,6 +334,10 @@ Setting steps...
 Steps set successfully.
 ```
 
+#### Description of the outcome:
+
+- I'll set attributes for the recipe of your choosing.
+
 **Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
 
 ---
@@ -340,19 +351,13 @@ I can find recipes by their attributes, e.g. time needed, calories etc.
 * For `/Calories`, `/Price`, and `/Time`;
   * I'll automatically sort the results from greatest to smallest `ATTRIBUTE_VALUE`.
   * I'll show you recipes whose `ATTRIBUTE_TYPE` is less than or equal to the `ATTRIBUTE_VALUE` you specified.
-    
-
 * For `/Ingredients` and `/Difficulty`;
   * I'll automatically sort the results in alphabetical order.
   * I'll show you recipes with the exact `ATTRIBUTE_VALUE` you are looking for.
-    
-
 * For `/tag`, see [9.4](#94-find-a-recipe-by-their-tags-find) for more details!
+* If the `ATTRIBUTE_TYPE` of any recipe is not set, I'll send you an error.  
 
-  
-
-* If the `ATTRIBUTE_TYPE` of any recipe is not set, I'll send you an error.
-* **Warning:** When using the `deleteRecipe` command, `RECIPE_INDEX` refers to the index given by the `listRecipes` command and not the `find` command. Keep this in mind before deleting a recipe.
+> :exclamation: **Warning:** When using the `deleteRecipe` command, `RECIPE_INDEX` refers to the index given by the `listRecipes` command and not the `find` command. Keep this in mind before deleting a recipe.
 
 #### Example of usage:
 
@@ -380,6 +385,10 @@ Searching by ingredient...
 1. Chicken Rice
 2. Duck Rice
 ```
+
+#### Description of the outcome:
+
+- I'll find recipes according to the inputted attributes.
 
 **Quick reference: \| [Contents](#contents) \| [Cheat sheet](#cheat-sheet) \|**
 
@@ -415,6 +424,11 @@ I've got a variety of tagging-related functions, for better organization of your
 > Successfully tagged Duck Rice under Hawker Food
 > Successfully tagged Duck Rice under Favorites
 > ```
+>
+> #### Description of the outcome:
+>
+> - I'll tag your recipe accordingly.
+> 
  
 #### 9.2 Untag tags from Recipes: `untag`
 
@@ -434,6 +448,7 @@ I've got a variety of tagging-related functions, for better organization of your
 > untag / Chocolate Milkshake / Fatty Foods
 > ```
 > 
+> 
 > #### Expected outcome
 >
 > ```
@@ -442,6 +457,10 @@ I've got a variety of tagging-related functions, for better organization of your
 > Successfully untagged Chocolate Milkshake from Fatty Foods
 > Fatty Foods tag will no longer have any recipes under it. You might want to delete it!
 > ```
+>
+> #### Description of the outcome:
+>
+> - I'll untag your recipe accordingly.
 
 #### 9.3 Delete tags from Cookbook: `deleteTag`
 
@@ -463,6 +482,10 @@ I've got a variety of tagging-related functions, for better organization of your
 > Successfully deleted Hawker Food tag
 > Successfully deleted Noodles tag
 > ```
+>
+> #### Description of the outcome:
+>
+> - I'll delete your tags accordingly.
 
 #### 9.4 Find a Recipe by their tags: `find`
 
@@ -493,6 +516,10 @@ I've got a variety of tagging-related functions, for better organization of your
 > Searching by tags...
 > 1. Mee Pok
 > ```
+>
+> #### Description of the outcome:
+>
+> - I'll find your recipes according to the inputted tags.
 
 #### 9.5 List all tags in Cookbook: `listTags`
 
@@ -513,19 +540,20 @@ I've got a variety of tagging-related functions, for better organization of your
 > 2. Noodles
 > 3. Favorites
 > ```
+>
+> #### Description of the outcome:
+>
+> - I'll list all of your tags.
 
 ### 10. Save and Load
 
 I will automatically save all of your recipes to a .txt file, "saveFile.txt", 
 in the same directory where you ran the app. It loads the recipes when you start up Gordon.
 
-<div markdown="span" class="alert alert-danger">
-
-**Warning:** It is not advised to edit the save file directly unless you are very 
-familiar with the syntax of how the file structured. Misuse may cause the save file to be deleted
-altogether, or cause errors in the main software. If the program fails to start, close the application
-and delete the save file before trying again.
-</div>
+> :exclamation: **Warning:** It is not advised to edit the save file directly unless you are very 
+> familiar with the syntax of how the file structured. Misuse may cause the save file to be deleted
+> altogether, or cause errors in the main software. If the program fails to start, close the application
+> and delete the save file before trying again.
 
 ---
 
@@ -547,3 +575,10 @@ Instruction | Command format
 [Untag a recipe](#92-untagging-tags-from-recipes-untag) | `untag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
 [Delete a tag](#93-deleting-tags-from-cookbook-deletetag) | `deleteTag / TAG_NAME1 + TAG_NAME2 + ...`
 [List all tags](#95-list-all-your-tags-listtags) | `listTags`
+
+---
+
+## FAQ
+
+**Q:** How do I transfer my data to another computer?  
+**A:** Copy and paste the saveFile.txt file generated by Gordon into the same directory as the .jar file on your new computer.  
