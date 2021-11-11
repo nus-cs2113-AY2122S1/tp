@@ -998,12 +998,12 @@ Bye, see you again soon!
 
 **A**: Copy the data folder from the source computer to the destination computer on the same directory as the tp.jar file.
 
-**Q**: How to change my Java version to Java 11?
+**Q**: How to change my Java version to Java 11 in case if my main JDK is not Java 11?
 
-**A**: Create a .bat file with the following content.
+**A**: Create a .bat file with the following content. 
 
 @ECHO OFF
-SET JAVA_HOME=C:\Program Files\Java\jdk11.0.12_7
+SET JAVA_HOME=<Directory of JDK>
 SET Path=%JAVA_HOME%\bin;%Path%
 echo Java home set to: %JAVA_HOME%
 echo Java 11 activated
