@@ -1,4 +1,4 @@
-# User Guide
+# <a id="top"></a> User Guide
 
 Budget Tracker is a desktop app for managing expenses, budget and loans, optimized for use via a Command Line Interface (CLI) 
 for tech-savvy students who have trouble keeping track of their expenses.
@@ -41,12 +41,16 @@ for tech-savvy students who have trouble keeping track of their expenses.
 Budget Tracker is a desktop app for managing expenses, budget and loans, optimized for use via a 
 Command Line Interface (CLI) for tech-savvy students who have trouble keeping track of their expenses.
 
+#### [Back to top](#top)
+
 ## <a id="getting-started"></a> Quick Start
 
 1. Ensure that you have Java 11 or above installed.
 2. Check your java version by entering "java -version" command to your terminal. 
 3. Down the latest version of `Budget Tracker` from [here]().
 4. If you have anti-virus, please add an exception on the directory you have downloaded the `Budget Tracker`.
+
+#### [Back to top](#top)
 
 ## <a id="features"></a> Features
 
@@ -71,6 +75,7 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 e.g. in `add -b a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can be used as `add -b a/500 m/12`.
 NOTE: **These parameters cannot be left empty.**
 
+#### [Back to top](#top)
 
 <br />
 
@@ -106,6 +111,7 @@ Expected outcome: Budget of $500.00 is added to the month of December of that pa
 Your budget of $500.00 for December is successfully set!
 ========================================================
 ```
+#### [Back to top](#top)
 <br />
 
 ________________________
@@ -143,7 +149,7 @@ Date: 2021-08-20
 Category: GENERAL
 ========================================================
 ```
-
+#### [Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -175,7 +181,7 @@ Yap Wei Xuan owes you: $500.00
 Date of loan: 2021-08-20
 ========================================================
 ```
-
+#### [Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -216,6 +222,7 @@ Amount: $100020.00
 Month: 10
 ========================================================
 ```
+#### [Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -265,6 +272,7 @@ Total Amount Spent in October: $4.00
 Percentage of Budget Left: 99.20%
 ========================================================
 ```
+#### [Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -306,6 +314,7 @@ Amount: $5000.00
 Date: 2021-11-05
 ========================================================
 ```
+#### [Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -333,6 +342,7 @@ Expected outcome: A message will be shown to alert the user that the database ha
 You are currently working on year 2020 database!
 ========================================================
 ```
+#### [Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -354,7 +364,7 @@ Example of usage:
 `find Chicken`
 
 Expected outcome: All records that contains the "Chicken" keyword will be returned.
-
+#### [Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -380,7 +390,7 @@ Example of usage:
 `list m/all`
 
 Expected outcome: Listing all the budget and expenditure for the particular year.
-
+#### [Back to top](#top)
 <br />
 _________________________________________________________
 
@@ -407,6 +417,7 @@ Your expenditures:
 1.Chicken Rice1          | $500.0             | 2021-10-13       
 ========================================================
 ```
+#### [Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -439,6 +450,7 @@ Successfully deleted the Budget for this month!
 Now the budget amount is 0.00!      
 ========================================================
 ```
+#### [Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -485,6 +497,7 @@ Total Amount Spent in October: $100.00
 Percentage of Budget Left: 99.00%
 ========================================================
 ```
+#### [Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -520,6 +533,7 @@ Amount: $200.00
 Date: 2021-10-03
 ========================================================
 ```
+#### [Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -570,6 +584,7 @@ The category you spent the most on: FOOD
 The amount you spent on this category: $5136.50
 ========================================================
 ```
+#### [Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -676,7 +691,7 @@ Percentage: 143.03%
 5%                    #####
 ========================================================
 ```
-
+#### [Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -696,7 +711,7 @@ Example of usage:
 `help`
 
 Expected outcome: Lists all available commands and their parameters.
-
+#### [Back to top](#top)
 <br />
 
 _________________________________________________________
@@ -726,6 +741,12 @@ These are the data base you currently have!
 2021.txt
 ========================================================
 ```
+#### [Back to top](#top)
+<br />
+
+_________________________________________________________
+
+<br />
 
 # <a id="exit"></a> &nbsp;&nbsp; Exit the program: `bye`
  
@@ -746,6 +767,10 @@ Expected outcome: Goodbye message shown.
 Bye, see you again soon!
 ========================================================
 ```
+#### [Back to top](#top)
+
+<br />
+
 
 # <a id="faq"></a> FAQ
 
@@ -769,8 +794,9 @@ Bye, see you again soon!
     echo Java home set to: %JAVA_HOME% <br />
     echo Java 11 activated <br />
     java -version <br />
+#### [Back to top](#top)
 
-
+<br />
 
 # <a id="command-summary"></a> Command Summary
 
@@ -801,3 +827,4 @@ stated in the above command description.
  |20. | `db` | `show all the available database in the user's device` | 
  |21. | `help` | `shows a list of command guides` |
  |22. | `bye` | `terminates the app` |
+#### [Back to top](#top)
