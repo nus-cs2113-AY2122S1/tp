@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+actor User
+box
+
+User -> SortIngrCommand: UserCommand
+
+activate SortIngrCommand
+
+SortIngrCommand -> IngredientList: ingredientList.sort(ingrComparator)
+
+activate IngredientList
+
+SortIngrCommand -> UI : printSortIngrMsg()
+
+activate UI
+
+SortIngrCommand -> IngredientList: list()
+deactivate SortIngrCommand
+
+IngredientList -> UI: printIngrList(ingredientList)
+deactivate IngredientList
+User <-- UI: output to be displayed
+
+ deactivate UI
+
+
+
+
+
+
+@enduml

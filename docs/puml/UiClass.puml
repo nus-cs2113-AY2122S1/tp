@@ -1,0 +1,49 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+class seedu.foodorama.Foodorama {
++ {static} void main(String[])
+}
+class seedu.foodorama.Ingredient {
+
+}
+class seedu.foodorama.DishList {
+
+}
+class seedu.foodorama.ClearScreen {
++ {static} void main(String[])
++ {static} void clearConsole()
+}
+class seedu.foodorama.Ui {
+{static} messageStrings
+void getFunctions()
+void printFunctions()
+}
+class seedu.foodorama.IngredientList {
+
+}
+class seedu.foodorama.Dish {
+
+}
+abstract class seedu.foodorama.command.Command {
++ {abstract}void execute(ArrayList<String>)
+}
+class seedu.foodorama.InputParser {
+- {static} Ui ui
++ CommandNames getCommandName(String)
++ ArrayList<String> getParameters(String,CommandNames)
+}
+
+seedu.foodorama.Ui <- seedu.foodorama.Dish
+seedu.foodorama.Dish --o seedu.foodorama.DishList
+seedu.foodorama.Ingredient --o seedu.foodorama.IngredientList
+seedu.foodorama.Ui <- seedu.foodorama.Ingredient
+seedu.foodorama.Ui <-- seedu.foodorama.Foodorama
+seedu.foodorama.Ui <-- seedu.foodorama.DishList
+seedu.foodorama.Ui <-- seedu.foodorama.ClearScreen
+seedu.foodorama.Ui <-- seedu.foodorama.IngredientList
+seedu.foodorama.Ui <-- seedu.foodorama.InputParser
+seedu.foodorama.Ui <-- seedu.foodorama.command.Command
+@enduml

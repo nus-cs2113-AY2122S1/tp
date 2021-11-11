@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+actor User
+box
+
+User -> SortDishCommand: UserCommand
+
+activate SortDishCommand
+
+SortDishCommand -> DishList: dishList.sort(dishComparator)
+
+activate DishList
+
+SortDishCommand -> UI : printSortDishMsg()
+
+activate UI
+
+SortDishCommand -> DishList: list()
+deactivate SortDishCommand
+
+DishList -> UI: printDishList(dishList)
+deactivate DishList
+User <-- UI: output to be displayed
+
+ deactivate UI
+
+
+
+
+
+
+@enduml

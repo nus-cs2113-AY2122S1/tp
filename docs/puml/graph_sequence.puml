@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+
+box
+create GraphCommand
+ -> GraphCommand : execute(parameters)
+activate GraphCommand
+
+alt case DISH
+    GraphCommand -> DishList: DishList.graph
+    DishList -> Ui: printDishGraph()
+
+
+else case INGR
+    GraphCommand -> IngredientList : IngredientList.graph
+    IngredientList -> Ui: printIngrGraph()
+    Ui --> : output on the terminal
+
+else default
+    create FoodoramaException
+    GraphCommand -> FoodoramaException: throw new
+    activate FoodoramaException
+
+    FoodoramaException -> Ui: getInvalidTypeMsg()
+    activate Ui
+    FoodoramaException<-- Ui : INVALID_TYPE_GRAPH
+    deactivate Ui
+    FoodoramaException --> : exceptionMsg
+end
+
+@enduml

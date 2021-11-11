@@ -1,0 +1,16 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+Foodorama -up-> Ui
+Foodorama -up-> InputParser
+InputParser .down.> Foodorama
+Foodorama -up-> Storage
+Foodorama .up.> Commands
+Commands .up.> Ui
+Commands .up.> DishList
+Commands .up.> IngredientList
+DishList .right.> Ui
+IngredientList .right.> Ui
+
+@enduml

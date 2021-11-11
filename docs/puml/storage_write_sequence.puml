@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+Box
+-> Foodorama: After a Command
+activate Foodorama
+Foodorama -> Storage: write(mode: Ingredient)
+activate Storage
+Storage -> ingredients.txt : Write to ingredients.txt
+Foodorama -> Storage: write(mode: Dish)
+Storage -> dishes.txt: Write to dishes.txt
+deactivate Foodorama
+
+@enduml

@@ -8,10 +8,11 @@ cd ..
 
 cd text-ui-test
 
-java  -jar $(find ../build/libs/ -mindepth 1 -print -quit) < input.txt > ACTUAL.TXT
+java -jar $(find ../build/libs/ -mindepth 1 -print -quit) < input.txt > ACTUALPRE.TXT
 
-cp EXPECTED.TXT EXPECTED-UNIX.TXT
-dos2unix EXPECTED-UNIX.TXT ACTUAL.TXT
+cat EXPECTED.TXT | tr -d '\014' > EXPECTED-UNIX.TXT
+cat ACTUALPRE.TXT | tr -d '\014' > ACTUAL.TXT
+
 diff EXPECTED-UNIX.TXT ACTUAL.TXT
 if [ $? -eq 0 ]
 then

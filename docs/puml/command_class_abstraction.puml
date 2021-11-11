@@ -1,0 +1,115 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+class seedu.foodorama.command.EditIngrStoredCommand {
+
+}
+class seedu.foodorama.command.AddDishCommand {
+
+}
+class seedu.foodorama.command.EditDishWasteCommand {
+
+}
+class seedu.foodorama.command.SortIngrCommand {
+
+}
+class seedu.foodorama.command.DeleteIngrCommand {
+
+}
+class seedu.foodorama.command.ListCommand {
+
+}
+class seedu.foodorama.command.RandomDishCommand {
+
+}
+class seedu.foodorama.command.ClearIngrCommand {
+
+}
+class seedu.foodorama.command.EditIngrWasteCommand {
+
+}
+class seedu.foodorama.command.FindCommand {
+
+}
+class seedu.foodorama.command.LinkCommand {
+
+}
+class seedu.foodorama.command.DeleteDishCommand {
+
+}
+class seedu.foodorama.command.AddIngrCommand {
+
+}
+class seedu.foodorama.command.GraphCommand {
+
+}
+class seedu.foodorama.command.AddIngrStoredCommand {
+
+}
+class seedu.foodorama.command.EditIngrNameCommand {
+
+}
+class seedu.foodorama.command.EditDishNameCommand {
+
+}
+class seedu.foodorama.command.SetIngrLimitCommand {
+
+}
+class seedu.foodorama.command.AddDishWasteCommand {
+
+}
+class seedu.foodorama.command.ClearDishCommand {
+
+}
+class seedu.foodorama.command.SortDishCommand {
+
+}
+class seedu.foodorama.command.ClearAllCommand {
+
+}
+class seedu.foodorama.command.SetIngrExpiryCommand {
+
+}
+abstract class seedu.foodorama.command.Command {
+    + void execute(ArrayList<String>)
+}
+class seedu.foodorama.command.AddIngrWasteCommand {
+
+}
+class seedu.foodorama.command.SetDishLimitCommand {
+
+}
+class seedu.foodorama.command.HelpCommand {
+
+}
+
+
+seedu.foodorama.command.Command <|-up- seedu.foodorama.command.EditIngrStoredCommand
+seedu.foodorama.command.Command <|-up- seedu.foodorama.command.AddDishCommand
+seedu.foodorama.command.Command <|-up-- seedu.foodorama.command.EditDishWasteCommand
+seedu.foodorama.command.Command <|-up-- seedu.foodorama.command.SortIngrCommand
+seedu.foodorama.command.Command <|-up-- seedu.foodorama.command.DeleteIngrCommand
+seedu.foodorama.command.Command <|-up--- seedu.foodorama.command.ListCommand
+seedu.foodorama.command.Command <|-up--- seedu.foodorama.command.RandomDishCommand
+seedu.foodorama.command.Command <-up--- seedu.foodorama.command.ClearIngrCommand
+seedu.foodorama.command.Command <|-up-- seedu.foodorama.command.EditIngrWasteCommand
+seedu.foodorama.command.Command <|-up-- seedu.foodorama.command.FindCommand
+seedu.foodorama.command.Command <|-up-- seedu.foodorama.command.LinkCommand
+seedu.foodorama.command.Command <|-up- seedu.foodorama.command.DeleteDishCommand
+seedu.foodorama.command.Command <|-up- seedu.foodorama.command.AddIngrCommand
+seedu.foodorama.command.Command <|-- seedu.foodorama.command.GraphCommand
+seedu.foodorama.command.Command <|-- seedu.foodorama.command.AddIngrStoredCommand
+seedu.foodorama.command.Command <|--- seedu.foodorama.command.EditIngrNameCommand
+seedu.foodorama.command.Command <|--- seedu.foodorama.command.EditDishNameCommand
+seedu.foodorama.command.Command <|--- seedu.foodorama.command.SetIngrLimitCommand
+seedu.foodorama.command.Command <|---- seedu.foodorama.command.AddDishWasteCommand
+seedu.foodorama.command.Command <|---- seedu.foodorama.command.ClearDishCommand
+seedu.foodorama.command.Command <|---- seedu.foodorama.command.SortDishCommand
+seedu.foodorama.command.Command <|--- seedu.foodorama.command.ClearAllCommand
+seedu.foodorama.command.Command <|--- seedu.foodorama.command.SetIngrExpiryCommand
+seedu.foodorama.command.Command <|--- seedu.foodorama.command.AddIngrWasteCommand
+seedu.foodorama.command.Command <|-- seedu.foodorama.command.SetDishLimitCommand
+seedu.foodorama.command.Command <|-- seedu.foodorama.command.HelpCommand
+@enduml

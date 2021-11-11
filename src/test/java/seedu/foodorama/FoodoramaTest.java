@@ -1,10 +1,11 @@
-package seedu.duke;
+package seedu.foodorama;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-class DukeTest {
+
+class FoodoramaTest {
     @Test
     public void sampleTest() {
         assertTrue(true);

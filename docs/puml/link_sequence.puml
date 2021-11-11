@@ -1,0 +1,73 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+actor User
+box
+User -> LinkCommand: UserCommand
+alt if exception
+activate LinkCommand
+LinkCommand -> FoodoramaException: throw new
+activate FoodoramaException
+FoodoramaException -> Ui: getExceptionMsg()
+deactivate FoodoramaException
+activate Ui
+User <-- Ui : EXCEPTION_MSG
+deactivate Ui
+
+else else
+
+
+LinkCommand -> DishList: dishList.get(dishIndex)
+deactivate LinkCommand
+activate DishList
+DishList -> Dish: addPart(ingredientName)
+deactivate DishList
+activate Dish
+Dish -> IngredientList: find(ingredientName)
+activate IngredientList
+IngredientList --> Dish: ingredientIndex
+alt if (ingredientIndex == -1)
+Dish --> Ui: printIngrNotExistMsg()
+activate Ui
+Ui --> User: INGR_NOT_EXIST_MSG
+else else
+loop for(Ingredient ingredient : parts)
+Dish -> Ingredient: subtract old contribution of Ingredient Waste to Dish Waste if exists
+activate Ingredient
+deactivate Ingredient
+end
+Dish -> Dish: parts.add(IngredientList.ingredientList.get(ingredientIndex))
+activate Dish#LightSalmon
+Dish -> IngredientList: ingredientList.get(ingredientIndex)
+IngredientList --> Dish: Ingredient
+deactivate IngredientList
+deactivate Dish
+Dish --> Ui: printAddedPartOf(ingredientName, dishName)
+User <-- Ui: output to be displayed
+deactivate Ui
+Dish -> Dish: update Ingredient Contribution
+activate Dish#LightSalmon
+deactivate Dish
+loop for(Ingredient ingredient : parts)
+Dish -> Ingredient: update new contribution of Ingredient Waste to Dish Waste
+deactivate Dish
+activate Ingredient
+deactivate Ingredient
+end
+activate Ui
+
+
+
+
+
+
+
+
+end
+end
+
+
+
+
+@enduml

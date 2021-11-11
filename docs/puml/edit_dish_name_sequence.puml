@@ -1,0 +1,46 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+Actor User
+Box
+
+User -> EditDishNameCommand: UserCommand
+alt if exception
+activate EditDishNameCommand
+EditDishNameCommand -> FoodoramaException: throw new
+activate FoodoramaException
+FoodoramaException -> Ui: getExceptionMsg()
+deactivate FoodoramaException
+activate Ui
+User <-- Ui : EXCEPTION_MSG
+deactivate Ui
+
+else else
+EditDishNameCommand->DishList: editName(dishIndex)
+deactivate EditDishNameCommand
+activate DishList
+
+
+DishList --> Ui: printAskNewNameDish(dishName)
+activate Ui
+User <--Ui: INPUT_NEW_NAME_MSG
+deactivate Ui
+
+User->DishList: newDishName
+DishList -> Dish: setDishName(newDishName)
+activate Dish
+deactivate Dish
+DishList --> Ui: printDishNameChanged(dishName, newDishNameName)
+
+deactivate DishList
+activate Ui
+User <-- Ui: DISH_NAME_CHANGED_MSG
+deactivate Ui
+
+end
+
+
+
+
+
+@enduml

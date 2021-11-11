@@ -1,0 +1,69 @@
+@startuml
+
+hide circle
+skinparam classAttributeIconSize 0
+
+class seedu.foodorama.IngredientList {
+- {static} Ui ui
++ {static} void add(String)
++ {static} int find(String)
++ {static} double getGreatestWaste()
++ {static} void graph()
++ {static} void sort()
++ {static} void list()
++ {static} void delete(String)
++ {static} void clearList()
+}
+class seedu.foodorama.Dish {
+- {static} Logger logger
+- {static} Ui ui
+- String dishName
+- double wastage
+- double ingredientContribution
++ String getDishName()
++ double getWastage()
++ double getIngredientContribution()
++ ArrayList<Ingredient> getConstituents()
++ void addConstituent(String)
++ void addWaste()
++ String toString()
++ String toGraph(double)
++ String formatData()
++ int compareTo(Dish)
+}
+class seedu.foodorama.DishList {
++ {static} Ui UI
++ {static} void add(String)
++ {static} double getGreatestWaste()
++ {static} int find(String)
++ {static} void list()
++ {static} void sort()
++ {static} void graph()
++ {static} void delete(String)
++ {static} void clearList()
+}
+class seedu.foodorama.Ingredient {
+- {static} Ui ui
+- String ingredientName
+- double ingredientWeight
+- double ingredientWasteIngr
++ double ingredientWasteDish
++ String getIngredientName()
++ double getIngredientWeight()
++ void updateIngredientWeight()
++ void addWaste()
++ double getWastage()
++ String toString()
++ String formatData()
++ void addDishWaste(Double)
++ String toGraph(double)
++ int compareTo(Ingredient)
+}
+
+
+seedu.foodorama.Comparable <|.. seedu.foodorama.Dish
+seedu.foodorama.DishList o-- seedu.foodorama.Dish : dishList
+seedu.foodorama.Comparable <|.. seedu.foodorama.Ingredient
+seedu.foodorama.IngredientList o-- seedu.foodorama.Ingredient :ingredientList
+seedu.foodorama.Dish o- seedu.foodorama.Ingredient :constituents
+@enduml
