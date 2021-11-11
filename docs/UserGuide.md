@@ -442,7 +442,7 @@ I can untag recipes in your cookbook.
 
 #### Example of usage:
 
-Assume that _Fatty Foods_ tag only has _Chocolate Milkshake_ under it:
+Assume that the _Fatty Foods_ tag only has _Chocolate Milkshake_ under it:
 ```
 untag / Mee Pok / Hawker Food + Noodles
 untag / Chocolate Milkshake / Fatty Foods
@@ -498,8 +498,8 @@ I can find recipes by their tag(s).
 
  #### Example of usage:
  
-Assume that _Mee Pok_ is under _Hawker Food_ and _Noodles_ tag, and  
-assume that _Duck Rice_ is under _Hawker Food_ and _Favorites_ tag.
+Assume that _Mee Pok_ is under the _Hawker Food_ and _Noodles_ tag, and  
+assume that _Duck Rice_ is under the _Hawker Food_ and _Favorites_ tag.
 ```
 find /tag Hawker Food
 find /tag Hawker Food + Noodles
