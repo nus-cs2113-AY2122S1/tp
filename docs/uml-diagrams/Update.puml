@@ -1,0 +1,33 @@
+k@startuml
+
+[-> UpdateCommand : execute()
+activate UpdateCommand
+
+opt Able to connect
+    UpdateCommand -> NusMods : update()
+    activate NusMods
+    NusMods -> NusMods : getOnlineModList()
+    activate NusMods
+    NusMods --> NusMods
+    deactivate NusMods
+    loop For each mod
+        NusMods -> NusMods : getOnlineModInfo()
+        activate NusMods
+        NusMods --> NusMods
+        deactivate NusMods
+        NusMods -> ModStorage : saveModInfo()
+        activate ModStorage
+        ModStorage --> NusMods
+        deactivate ModStorage
+    end
+    NusMods --> UpdateCommand
+    deactivate NusMods
+
+
+
+end
+
+<-- UpdateCommand
+deactivate UpdateCommand
+
+@enduml

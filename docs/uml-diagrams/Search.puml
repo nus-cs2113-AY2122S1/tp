@@ -1,0 +1,57 @@
+@startuml
+
+[-> SearchCommand : execute()
+activate SearchCommand
+
+alt Able to connect
+    SearchCommand -> NusMods : searchModsOnline()
+    activate NusMods
+    NusMods -> NusMods : getOnlineModList()
+    activate NusMods
+    NusMods --> NusMods
+    deactivate NusMods
+    loop For each mod
+            opt Module Code Match
+                ref over NusMods
+                    Fetch, Save and Load Mod
+                end ref
+                opt All Flags Match
+                    NusMods -> TextUI : PrintModBriefDescription()
+                    activate TextUI
+                    TextUI --> NusMods
+                    deactivate TextUI
+                else
+                end
+            else
+            end
+    end
+    NusMods --> SearchCommand
+    deactivate NusMods
+
+else No connection or Quicksearch
+
+    SearchCommand -> ModStorage : searchFiles()
+    activate ModStorage
+    loop For each json
+        opt Module Code Match
+            ModStorage -> ModStorage : loadModInfo()
+            activate ModStorage
+            ModStorage --> ModStorage
+            deactivate ModStorage
+            opt All Flags Match
+                ModStorage -> TextUI : PrintModBriefDescription()
+                activate TextUI
+                TextUI --> ModStorage
+                deactivate TextUI
+            end
+        end
+    end
+    ModStorage --> SearchCommand
+    deactivate ModStorage
+
+end
+
+<-- SearchCommand
+deactivate SearchCommand
+
+@enduml

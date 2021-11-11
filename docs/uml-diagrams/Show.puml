@@ -1,0 +1,43 @@
+@startuml
+
+[-> ShowCommand : execute()
+activate ShowCommand
+
+alt Able to connect
+    ShowCommand -> NusMods : fetchModOnline()
+    activate NusMods
+    NusMods -> NusMods : getOnlineModInfo()
+    activate NusMods
+    NusMods --> NusMods
+    deactivate NusMods
+    NusMods -> ModStorage : saveModInfo()
+    activate ModStorage
+    ModStorage --> NusMods
+    deactivate ModStorage
+    NusMods -> ModStorage : loadModInfo()
+    activate ModStorage
+    ModStorage -> TextUI : printModFullDescription()
+    activate TextUI
+    TextUI --> ModStorage
+    deactivate TextUI
+    ModStorage --> NusMods
+    deactivate ModStorage
+    NusMods --> ShowCommand
+    deactivate NusMods
+
+else No connection
+    ShowCommand -> ModStorage : loadModInfo()
+    activate ModStorage
+    ModStorage -> TextUI : printModFullDescription()
+    activate TextUI
+    TextUI --> ModStorage
+    deactivate TextUI
+    ModStorage --> ShowCommand
+    deactivate ModStorage
+
+end
+
+<-- ShowCommand
+deactivate ShowCommand
+
+@enduml

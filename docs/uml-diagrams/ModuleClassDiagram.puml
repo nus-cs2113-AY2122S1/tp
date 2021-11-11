@@ -1,0 +1,55 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Module {
+    #moduleCode : String
+    #title : String
+    #description : String
+    #moduleCredit : double
+    -department : String
+    -faculty: String
+    -prerequisite : String
+    -preclusion : String
+    -corequisite : String
+    -acadYear : String
+}
+
+Module *-- "0..1" Attributes : attributes
+Module -[hidden]right- Attributes
+
+class Attributes {
+    -mpes1 : boolean
+    -mpes2 : boolean
+    -su : boolean
+}
+
+Module *-- "*" Semester : semesterData
+
+class Semester {
+    -semester : int
+    -examDate : Date
+    -examDuration : int
+}
+
+Semester *-- "*" Lesson : timetable
+
+class Lesson {
+    -classNo : String
+    -startTime : String
+    -endTime : String
+    -venue : String
+    -day : String
+    -lessonType : String
+    -size : int
+}
+
+Lesson *-- "0...1" Weeks : weeks
+Lesson -[hidden]right- Weeks
+
+class Weeks {
+    -start : Date
+    -end : Date
+    -weeks : ArrayList<Integer>
+}
+
+@enduml

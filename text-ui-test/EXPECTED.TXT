@@ -1,9 +1,51 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+No local profile can be found,
+Setup a new profile by answering the following: 
+________________________________________________________________________________________________________________________
 
 What is your name?
-Hello James Gosling
+==> ________________________________________________________________________________________________________________________
+
+What is your major?
+==> ________________________________________________________________________________________________________________________
+
+Which year of study are you currently in?
+==> Hello from 
+   _    _       _ __  __           _     
+ | |  | |     (_)  \/  |         | |    
+ | |  | |_ __  _| \  / | ___   __| |___ 
+ | |  | | '_ \| | |\/| |/ _ \ / _` / __|
+ | |__| | | | | | |  | | (_) | (_| \__ \
+  \____/|_| |_|_|_|  |_|\___/ \__,_|___/
+                                        
+                                        
+________________________________________________________________________________________________________________________
+
+What would you like to do?
+==> Searching, standby...
+If nothing is appearing even after a while, press ENTER to cancel the search and narrow down your search terms.
+CG1111 Engineering Principles and Practice I 6MC
+CG1111A Engineering Principles and Practice I 4MC
+CG1112 Engineering Principles and Practice II 6MC
+CG2023 Signals and Systems 4MC
+CG2027 Transistor-level Digital Circuits 2MC
+CG2028 Computer Organization 2MC
+CG2111A Engineering Principles and Practice II 4MC
+CG2271 Real-Time Operating Systems 4MC
+CG3002 Embedded Systems Design Project 6MC
+CG3207 Computer Architecture 4MC
+CG4001 B. Eng. Dissertation 12MC
+CG4002 Computer Engineering Capstone Project 8MC
+CG4003 Advanced Project and Internship 12MC
+13 mods found.
+________________________________________________________________________________________________________________________
+
+What would you like to do?
+==> Oops, you have not met the module's prerequisite: 
+CS1010 or its equivalent
+________________________________________________________________________________________________________________________
+
+What would you like to do?
+==> ________________________________________________________________________________________________________________________
+> Bye friend!
+> See you again! :)
+________________________________________________________________________________________________________________________

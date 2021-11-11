@@ -1,0 +1,48 @@
+@startuml
+
+[-> TimetableStorage : loadSchedule()
+activate TimetableStorage
+TimetableStorage -> FileReader**
+activate FileReader
+FileReader --> TimetableStorage
+deactivate FileReader
+alt Save File Exists
+    TimetableStorage -> Gson**
+    activate Gson
+    Gson --> TimetableStorage
+    deactivate Gson
+    TimetableStorage -> Gson : fromJson(fileReader)
+    activate Gson
+    Gson -> TimetableDto**
+    activate TimetableDto
+    TimetableDto --> Gson
+    deactivate TimetableDto
+    Gson --> TimetableStorage
+    deactivate Gson
+    destroy Gson
+    
+    opt TimetableDto null
+        TimetableStorage -> Timetable**
+        activate Timetable
+        Timetable --> TimetableStorage
+        deactivate Timetable
+    end
+    
+    TimetableDto -> Timetable** : toTimetable()
+    activate Timetable
+    Timetable --> TimetableStorage
+    deactivate Timetable
+    destroy TimetableDto
+
+else FileNotFoundException
+        destroy FileReader
+        TimetableStorage -> Timetable**
+        activate Timetable
+        Timetable --> TimetableStorage
+        deactivate Timetable
+end
+
+<-- TimetableStorage
+deactivate TimetableStorage
+
+@enduml

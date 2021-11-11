@@ -1,0 +1,58 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+[-> CheckCommand : execute()
+activate CheckCommand
+
+CheckCommand -> NusMods : fetchMod(moduleCode : String)
+activate NusMods
+    note right
+    fetchMod goes through several
+    method calls that has been
+    explained in `Search` previously,
+    and will thus be left out of this diagram
+    for simplicity
+    end note
+NusMods --> CheckCommand : Module
+opt Module != null
+    CheckCommand -> Profile : getRecord()
+    activate Profile
+    Profile --> CheckCommand : record of modules
+    deactivate Profile
+    CheckCommand -> ModuleRecord : isModulePrereqMet(Module)
+    activate ModuleRecord
+    ModuleRecord -> Module : getPrerequisiteTree()
+    activate Module
+    Module --> ModuleRecord : tree: PrerequisiteTree
+    deactivate Module
+    ModuleRecord -> ModuleRecord : isTreeSatisfied(tree)
+        note right
+        isTreeSatisfied is complicated and
+        the sequence will be explored in a
+        separate diagram
+        end note
+    activate ModuleRecord
+    ModuleRecord --> ModuleRecord
+    deactivate ModuleRecord
+    ModuleRecord --> CheckCommand : True if Pre-req met, False otherwise
+    deactivate ModuleRecord
+
+    alt Prerequisite is met
+        CheckCommand -> TextUI as "<<class>>\nTextUI" : printPrereqMet()
+        activate TextUI
+        TextUI --> CheckCommand : print Yes, user has met module prerequisite
+        deactivate TextUI
+    else Prerequiste is not met
+        CheckCommand -> TextUI as "<<class>>\nTextUI" : printPrereqMet()
+        activate TextUI
+        TextUI -> Module : getPrerequisite()
+        activate Module
+        Module --> TextUI
+        deactivate Module
+        TextUI --> CheckCommand : print Sorry, <module_prerequisite> not met!
+        deactivate TextUI
+    end
+
+end
+@enduml

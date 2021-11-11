@@ -1,0 +1,18 @@
+@startuml
+    activate NusMods
+    NusMods -> NusMods : fetchModOnline()
+    activate NusMods
+    NusMods -> NusMods : getOnlineModInfo()
+    activate NusMods
+    NusMods --> NusMods
+    deactivate NusMods
+    NusMods -> ModStorage : saveModInfo()
+    activate ModStorage
+    ModStorage --> NusMods
+    deactivate ModStorage
+    NusMods -> ModStorage : loadModInfo()
+    activate ModStorage
+    ModStorage --> NusMods
+    deactivate ModStorage
+    deactivate NusMods
+@enduml
