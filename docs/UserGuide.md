@@ -192,7 +192,7 @@ Exam Date(s): Sem 1: Tue Nov 30 09:00 AM - 11:00 AM
 
 ## Search Module: `search <KEYWORD> [-flag]`
 
-Perhaps you don't know what modules are out there, and want to know what GEH modules are available.
+Perhaps you do not know what modules are out there, and want to know what GEH modules are available.
 
 You can type `search GEH` to display all GEH modules available:
 
