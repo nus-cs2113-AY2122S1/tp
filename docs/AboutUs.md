@@ -1,9 +1,9 @@
-# About us
+# About Us
 
 Display | Name | Github Profile | Portfolio 
 --------|:----:|:--------------:|:---------:
-![](https://via.placeholder.com/100.png?text=Photo) | John Doe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Joe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Ron John | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | John Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
+![](teamMembers/formal_chris.JPG) | Chris Langton | [Github](https://github.com/ChrisLangton) | [Portfolio](team/chrislangton.md)
+![](teamMembers/rae.png) | Ray Kang Qingxuan | [Github](https://github.com/Rrraaaeee) | [Portfolio](team/rrraaaeee.md)
+![](teamMembers/shixi_mugshot.png) | Fan Shixi | [Github](https://github.com/fansxx) | [Portfolio](team/fansxx.md)
+![](teamMembers/EugeneChong.jpg) | Eugene Chong | [Github](https://github.com/theeugenechong) | [Portfolio](team/theeugenechong.md)
+
