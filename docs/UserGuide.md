@@ -45,10 +45,18 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 
 ## <a id="getting-started"></a> Quick Start
 
-1. Ensure that you have Java 11 or above installed.
-2. Check your java version by entering "java -version" command to your terminal. 
-3. Down the latest version of `Budget Tracker` from [here]().
+1. Ensure that you have Java 11 or above installed. Otherwise, you can download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
+   Select the respective download for your operating system.
+2. Check your java version by entering "java -version" command to your terminal.
+
+   ![java version check](images/java version cmd.png)
+
+3. Down the latest version of `Budget Tracker` from [here](https://github.com/AY2122S1-CS2113T-F11-2/tp/releases/download/v2.1/tp.jar).
 4. If you have anti-virus, please add an exception on the directory you have downloaded the `Budget Tracker`.
+   For example, if your Tp.jar file is in the "tp-folder", then you can create an exception in that folder 
+   in your anti-virus. 
+   
+   ![AV-Exception](images/exception-AV.png)
 
 #### [↑ Back to top](#top)
 
