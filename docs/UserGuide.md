@@ -605,7 +605,7 @@ ________________________________________________________________________________
 Besides your current exercises, you may also record all your Upcoming Exercise Items that you plan to do into the Upcoming Exercise List. 
 This will allow you to plan your exercises in advance and be more aware of your calorie output from your exercises in the near future.
 
-ℹ️ All of your upcoming Exercise Items will be automatically loaded into the ExerciseList if the dates of the upcoming Exercise Items have passed.
+ℹ️ All of your upcoming Exercise Items will be automatically loaded into the Exercise List if the dates of the upcoming Exercise Items have passed.
 
 #### 4.4.1 Adding Upcoming Exercise Items `add e/`
 
