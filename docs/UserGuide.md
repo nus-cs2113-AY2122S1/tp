@@ -64,7 +64,7 @@ In this section, I'll show you how to run Gordon from CLI.
 
 If you're using a Windows system, follow this guide:
 
-1. Checkout the latest version of **Gordon** [here](https://github.com/AY2122S1-CS2113T-W13-2/tp)
+1. Check out the latest version of **Gordon** [here](https://github.com/AY2122S1-CS2113T-W13-2/tp)
    1. Go to the 'Releases' section on the right-side of the page
      ![](images/releases.jpg)
    1. Download the file named 'tp.jar'
