@@ -747,7 +747,7 @@ my search?
 **A**: Local search is dependent on local data. If certain modules cannot be found offline, and you are sure that they
 do exist and match your query, then it is likely that you do not have the local data, or your local data is outdated.
 
-**Q**: How do I save my timetable, so I don’t have to add all my modules again?
+**Q**: How do I save my timetable, so I do not have to add all my modules again?
 <br>
 **A**: The timetable is saved automatically on every update (add/delete etc.)
 
