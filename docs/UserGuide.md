@@ -21,8 +21,8 @@ for tech-savvy students who have trouble keeping track of their expenses.
     * [year](#year)
   * [Find & Filter](#find&filter)
     * [Find](#find)
-  * [Listing](#listing)
-    * [List](#list)
+  * [List](#list)
+    * [Listing](#listing)
   * [Delete](#delete)
     * [Budget: `-b`](#delete-budget)
     * [Expenditure: `-e`](#delete-expenditure)
@@ -31,11 +31,8 @@ for tech-savvy students who have trouble keeping track of their expenses.
     * [Month: `-c`](#stat-budget)
     * [Year: `-l`](#stat-year)
   * [Guides](#guides)
-    * [Help](#help)
   * [DB](#db)
-    * [DB](#d-b)
   * [Exit](#exit)
-    * [Bye](#bye)
 * [FAQ](#faq)
 * [Command summary](#command-summary)
 
@@ -51,7 +48,7 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 3. Down the latest version of `Budget Tracker` from [here]().
 4. If you have anti-virus, please add an exception on the directory you have downloaded the `Budget Tracker`.
 
-## <a id="features"></a>Features
+## <a id="features"></a> Features
 
 1. Storage
 <br/>  Allows saving and loading of budget and loan data.
@@ -193,7 +190,7 @@ Edits a budget or expenditure entry.
 _________________________________________________________
 
 
-### `-b` : Edit a Budget
+### <a id="edit-budget"></a> `-b` : Edit a Budget
 
 Edit the _amount_ of budget allowance for a particular month.
 
@@ -224,7 +221,7 @@ Month: 10
 _________________________________________________________
 
 
-### `-e` : Edit an Expenditure 
+### <a id="edit-expenditure"></a> `-e` : Edit an Expenditure 
 
 Edits the values of an expenditure, including its _description_, _amount_, _date of expenditure_ and _category_.
 
@@ -273,7 +270,7 @@ Percentage of Budget Left: 99.20%
 _________________________________________________________
 
 
-### `-e` : Edit a Loan
+### <a id="edit-loan"></a> `-e` : Edit a Loan
 Edits the loan for a particular month.
 
 Format: `edit -l m/MONTH i/INDEX <a/AMOUNT> <d/DATE_OF_LOAN> <n/BORROWER_NAME>`
@@ -315,9 +312,9 @@ _________________________________________________________
 
 <br />
 
-# &nbsp;&nbsp; Year: `year`
+# <a id="dbselect"></a> &nbsp;&nbsp; Year: `year`
 
-### Switching Database Year: `year`
+### <a id="year"></a> Switching Database Year: `year`
 
 Selection of the database year.
 
@@ -341,9 +338,9 @@ You are currently working on year 2020 database!
 _________________________________________________________
 
 
-#  &nbsp;&nbsp; Find: `find`
+#  <a id="find&filter"></a> &nbsp;&nbsp; Find: `find`
 
-### Finding a Particular Expenditure, Loan and Budget: `find`
+### <a id="find"></a> Finding a Particular Expenditure, Loan and Budget: `find`
 
 Find all the records of Expenditure, loan and Budget that have a matching key word on the search term. 
 The search term is the keyword.
@@ -421,13 +418,13 @@ _________________________________________________________
 
 <br/>
 
-# &nbsp;&nbsp;List: `list`
+# <a id="list"></a> &nbsp;&nbsp;List: `list`
 
 <br />
 
 _________________________________________________________
 
-### Listing all Budget & Expenditure
+### <a id="listing"></a> Listing all Budget & Expenditure
 
 List all the Budget and expenditure for that particular year.
 
@@ -668,7 +665,7 @@ _________________________________________________________
 
 <br />
 
-# &nbsp;&nbsp; Stat: `stat`
+# <a id="stat"></a> &nbsp;&nbsp; Stat: `stat`
 
 The command word `stat` display some statistics graphs and information about the expenditure for 
 the year or particular month.
@@ -677,7 +674,7 @@ _________________________________________________________
 <br />
 
 
-### `-c` : View Statistics for the Month by categories
+### <a id="stat-budget"></a> `-c` : View Statistics for the Month by categories
 
 
 Display the statistics for a particular month's budget and expenditure by categories. 
@@ -709,7 +706,6 @@ GIFTS         ###                                                             4.
 HEALTH                                                                        0%
 TECH          ######                                                          11.9%
 ALL                                                                           0%
-
 Your budget: $500
 The category you spent the most on: FOOD
 The amount you spent on this category: $5136.50
@@ -721,7 +717,7 @@ _________________________________________________________
 
 
 
-### `-y` : View Statistics for the Year
+### <a id="stat-year"></a> `-y` : View Statistics for the Year
 
 Display the statistics for the current database year which the user is working on. 
 
@@ -828,9 +824,7 @@ _________________________________________________________
 
 <br />
 
-# <a id="guides"></a> &nbsp; &nbsp;Guides: `help`
- 
-### <a id="help"></a> `help`
+# <a id="guides"></a> &nbsp;&nbsp; Command Guides: `help`
 
 Command description and format.
 
@@ -942,9 +936,7 @@ _________________________________________________________
 
 <br />
 
-# <a id="db"></a> &nbsp; &nbsp;DB: `db`
-
-### <a id="d-b"></a>  `db`
+# <a id="db"></a> &nbsp;&nbsp; DB: `db`
 
 Displays all the available database. 
 
@@ -968,11 +960,7 @@ These are the data base you currently have!
 ========================================================
 ```
 
-# <a id="exit"></a> &nbsp; &nbsp;Exit: `exit`
-
-# &nbsp;&nbsp; `bye`
-
-### Exiting the program: `bye`
+# <a id="exit"></a> &nbsp;&nbsp; Exit the program: `bye`
  
 Exits the program. 
 
@@ -992,24 +980,32 @@ Bye, see you again soon!
 ========================================================
 ```
 
-## FAQ
+# <a id="faq"></a> FAQ
 
-**Q**: How do I transfer my data to another computer?
+* How do I transfer my data to another computer? 
+  * Copy the data folder from the source computer to the destination computer on the same directory as the tp.jar file.
+  
+  <br />
+  
+* Why are users able to delete the expenditures they have already recorded?
+  * Some users like to record expenditures in advance if they are going to spend it, so this feature allows them to regret.
+  * Users might refund after spending money on some returnable products such as clothes, shoes, and so on.
+  
+  <br />
 
-**A**: Copy the data folder from the source computer to the destination computer on the same directory as the tp.jar file.
+* How to change my Java version to Java 11 in case if my main JDK is not Java 11?
+  * Create a .bat file with the following content.
+    <br />
+    @ECHO OFF <br />
+    SET JAVA_HOME=<Directory of JDK> <br />
+    SET Path=%JAVA_HOME%\bin;%Path% <br />
+    echo Java home set to: %JAVA_HOME% <br />
+    echo Java 11 activated <br />
+    java -version <br />
 
-**Q**: How to change my Java version to Java 11 in case if my main JDK is not Java 11?
 
-**A**: Create a .bat file with the following content. 
 
-@ECHO OFF
-SET JAVA_HOME=<Directory of JDK>
-SET Path=%JAVA_HOME%\bin;%Path%
-echo Java home set to: %JAVA_HOME%
-echo Java 11 activated
-java -version
-
-## Command Summary
+# <a id="command-summary"></a> Command Summary
 
 <PARAM> - Optional parameters that can be omitted. And it will be defaulted to the value 
 stated in the above command description. 
@@ -1027,18 +1023,16 @@ stated in the above command description.
  |9.  | `list m/all <c/CATEGORY>` | `list all budget, expenditure and loan entries of the year of CATEGORY` |
  |10. | `list m/MONTH <c/CATEGORY>` | `list MONTH budget, expenditure and loan entries of CATEGORY` |
  |11. | `delete -b m/MONTH` | `delete the budget entry of MONTH` |
- |12. | `delete -e m/MONTH` | `delete all expenditure entries of MONTH` |
- |13. | `delete -e  m/MONTH i/INDEX` | `delete a particular expenditure of INDEX from MONTH` |
- |14. | `delete -e m/MONTH i/INDEX_FROM-INDEX_TO` | `delete all the expenditure of MONTH of INDEX_FROM-INDEX_TO` |
- |15. | `delete -l m/MONTH` | `delete all loan entries of MONTH` |
- |16. | `delete -l m/MONTH i/INDEX` | `delete a particular loan of INDEX from MONTH` |
- |17. | `delete -l m/MONTH i/INDEX_FROM-INDEX_TO` | `delete all the loan of MONTH of INDEX_FROM-INDEX_TO` |
- |18. | `stat -e m/MONTH` | `show a particualr MONTH statistics breakdown` |
- |18. | `stat -e m/MONTH` | `show a particualr MONTH statistics breakdown` |
- |19. | `stat -y t/TYPE` | `show overall statistics of TYPE for the entire year` | 
- |20. | `csv` | `save the current database into text file` | 
- |21. | `db` | `show all the available database in the user's device` | 
- |22. | `help` | `shows a list of command guides` |
- |23. | `bye` | `terminates the app` |
+ |12. | `delete -e  m/MONTH i/INDEX` | `delete a particular expenditure of INDEX from MONTH` |
+ |13. | `delete -e m/MONTH i/INDEX_FROM-INDEX_TO` | `delete all the expenditure of MONTH of INDEX_FROM-INDEX_TO` |
+ |14. | `delete -l m/MONTH i/INDEX` | `delete a particular loan of INDEX from MONTH` |
+ |15. | `delete -l m/MONTH i/INDEX_FROM-INDEX_TO` | `delete all the loan of MONTH of INDEX_FROM-INDEX_TO` |
+ |16. | `stat -e m/MONTH` | `show a particualr MONTH statistics breakdown` |
+ |17. | `stat -e m/MONTH` | `show a particualr MONTH statistics breakdown` |
+ |18. | `stat -y t/TYPE` | `show overall statistics of TYPE for the entire year` | 
+ |19. | `csv` | `save the current database into text file` | 
+ |20. | `db` | `show all the available database in the user's device` | 
+ |21. | `help` | `shows a list of command guides` |
+ |22. | `bye` | `terminates the app` |
 
 
