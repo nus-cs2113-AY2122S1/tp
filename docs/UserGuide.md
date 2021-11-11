@@ -35,7 +35,7 @@ I am a Command Line Interface (CLI)-based recipe database application, and I can
 
 1. Store your recipes (including ingredients and steps required)
 1. Check them when you're ready to cook
-1. Organise your collection of recipes with tags and other attributes so they are easier to find
+1. Organise your collection of recipes with tags and other attributes, so they are easier to find
 1. Delete recipes like the chicken you cooked so raw I can still hear it clucking
 
 This is what **Gordon** looks like:
@@ -400,150 +400,150 @@ I've got a variety of tagging-related functions, for better organization of your
 
 #### 9.1 Adding Tags to Recipes: `tag`
 
-> Tag recipes in your cookbook.
-> 
-> #### Format: `tag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
-> 
-> * I'll name your tag as defined in `TAG_NAME`
-> * Within a recipe, you are not allowed to have duplicate tag names
-> * You can associate multiple tags to a single recipe in one command
-> * Tags are case-sensitive! (favorites is **NOT** the same as FAVORITES)
-> 
-> #### Example of usage:
-> 
-> ```
-> tag / Mee Pok / Hawker Food + Noodles
-> tag / Duck Rice / Hawker Food + Favorites
-> ```
-> 
-> #### Expected outcome
-> 
-> ```
-> Successfully tagged Mee Pok under Hawker Food
-> Successfully tagged Mee Pok under Noodles
-> Successfully tagged Duck Rice under Hawker Food
-> Successfully tagged Duck Rice under Favorites
-> ```
->
-> #### Description of the outcome:
->
-> - I'll tag your recipe accordingly.
-> 
+I can tag recipes in your cookbook.
+
+#### Format: `tag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
+
+* I'll name your tag as defined in `TAG_NAME`
+* Within a recipe, you are not allowed to have duplicate tag names
+* You can associate multiple tags to a single recipe in one command
+* Tags are case-sensitive! (favorites is **NOT** the same as FAVORITES)
+
+#### Example of usage:
+
+```
+tag / Mee Pok / Hawker Food + Noodles
+tag / Duck Rice / Hawker Food + Favorites
+```
+
+#### Expected outcome
+
+```
+Successfully tagged Mee Pok under Hawker Food
+Successfully tagged Mee Pok under Noodles
+Successfully tagged Duck Rice under Hawker Food
+Successfully tagged Duck Rice under Favorites
+```
+
+#### Description of the outcome:
+
+- I'll tag your recipe accordingly.
+
  
 #### 9.2 Untag tags from Recipes: `untag`
 
-> Untag recipes in your cookbook.
->
-> #### Format: `untag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
-> * I'll untag all tags as defined in `TAG_NAME`, from your Recipe.
-> * You can untag multiple tags from a single recipe in one command.
-> * If untagging causes the Tag to have no associated recipes, a prompt will be shown.
-> * Tags are case-sensitive! (favorites is **NOT** the same as FAVORITES)
->
-> #### Example of usage:
->
-> assume that _Fatty Foods_ tag only has _Chocolate Milkshake_ under it
-> ```
-> untag / Mee Pok / Hawker Food + Noodles
-> untag / Chocolate Milkshake / Fatty Foods
-> ```
-> 
-> 
-> #### Expected outcome
->
-> ```
-> Successfully untagged Mee Pok from Hawker Food
-> Successfully untagged Mee Pok from Noodles
-> Successfully untagged Chocolate Milkshake from Fatty Foods
-> Fatty Foods tag will no longer have any recipes under it. You might want to delete it!
-> ```
->
-> #### Description of the outcome:
->
-> - I'll untag your recipe accordingly.
+I can untag recipes in your cookbook.
+
+#### Format: `untag / RECIPE_NAME / TAG_NAME1 + TAG_NAME2 + ...`
+* I'll untag all tags as defined in `TAG_NAME`, from your Recipe.
+* You can untag multiple tags from a single recipe in one command.
+* If untagging causes the Tag to have no associated recipes, a prompt will be shown.
+* Tags are case-sensitive! (favorites is **NOT** the same as FAVORITES)
+
+#### Example of usage:
+
+assume that _Fatty Foods_ tag only has _Chocolate Milkshake_ under it
+```
+untag / Mee Pok / Hawker Food + Noodles
+untag / Chocolate Milkshake / Fatty Foods
+```
+
+
+#### Expected outcome
+
+```
+Successfully untagged Mee Pok from Hawker Food
+Successfully untagged Mee Pok from Noodles
+Successfully untagged Chocolate Milkshake from Fatty Foods
+Fatty Foods tag will no longer have any recipes under it. You might want to delete it!
+```
+
+#### Description of the outcome:
+
+- I'll untag your recipe accordingly.
 
 #### 9.3 Delete tags from Cookbook: `deleteTag`
 
-> Delete tags from your cookbook.
->
-> #### Format: `deleteTag / TAG_NAME1 + TAG_NAME2 + ...`
-> * I'll delete all tags as defined in `TAG_NAME` from your Cookbook.
-> * Note that deleting a tag will remove **ALL** instances of that tag from **ALL** recipes!
-> * You can delete multiple tags from your Cookbook in one command.
-> * Tags are case-sensitive! (favorites is **NOT** the same as FAVORITES)
->
-> #### Example of usage:
-> 
-> `deleteTag / Hawker Food + Noodles`
-> <br>
-> 
-> #### Expected outcome
-> ```
-> Successfully deleted Hawker Food tag
-> Successfully deleted Noodles tag
-> ```
->
-> #### Description of the outcome:
->
-> - I'll delete your tags accordingly.
+I can delete tags from your cookbook.
+
+#### Format: `deleteTag / TAG_NAME1 + TAG_NAME2 + ...`
+* I'll delete all tags as defined in `TAG_NAME` from your Cookbook.
+* Note that deleting a tag will remove **ALL** instances of that tag from **ALL** recipes!
+* You can delete multiple tags from your Cookbook in one command.
+* Tags are case-sensitive! (favorites is **NOT** the same as FAVORITES)
+
+#### Example of usage:
+ 
+`deleteTag / Hawker Food + Noodles`
+<br>
+ 
+#### Expected outcome
+```
+Successfully deleted Hawker Food tag
+Successfully deleted Noodles tag
+```
+
+#### Description of the outcome:
+
+- I'll delete your tags accordingly.
 
 #### 9.4 Find a Recipe by their tags: `find`
 
-> Finds recipes by their tag(s)
->
-> #### Format: `find /tag TAG_NAME1 + TAG_NAME2 + ...`
-> 
-> * I'll search for recipes that have **ALL** tags as defined in `TAG_NAME`.
-> * Tags are case-sensitive! (favorites is **NOT** the same as FAVORITES)
->
-> #### Example of usage:
-> 
-> Assume that _Mee Pok_ is under _Hawker Food_ and _Noodles_ tag
-> <br>
-> Assume that _Duck Rice_ is under _Hawker Food_ and _Favorites_ tag
-> ```
-> find /tag Hawker Food
-> find /tag Hawker Food + Noodles
-> ```
->
-> #### Expected outcome
-> 
-> ```
-> Searching by tags...
-> 1. Mee Pok
-> 2. Duck Rice
-> 
-> Searching by tags...
-> 1. Mee Pok
-> ```
->
-> #### Description of the outcome:
->
-> - I'll find your recipes according to the inputted tags.
+I can find recipes by their tag(s).
+
+#### Format: `find /tag TAG_NAME1 + TAG_NAME2 + ...`
+ 
+* I'll search for recipes that have **ALL** tags as defined in `TAG_NAME`.
+* Tags are case-sensitive! (favorites is **NOT** the same as FAVORITES)
+
+ #### Example of usage:
+ 
+ Assume that _Mee Pok_ is under _Hawker Food_ and _Noodles_ tag
+ <br>
+ Assume that _Duck Rice_ is under _Hawker Food_ and _Favorites_ tag
+```
+find /tag Hawker Food
+find /tag Hawker Food + Noodles
+```
+
+#### Expected outcome
+ 
+```
+Searching by tags...
+1. Mee Pok
+2. Duck Rice
+ 
+Searching by tags...
+1. Mee Pok
+```
+
+#### Description of the outcome:
+
+- I'll find your recipes according to the inputted tags.
 
 #### 9.5 List all tags in Cookbook: `listTags`
 
-> List all the tags in your Cookbook.
->
-> #### Format: `listTags`
->
-> #### Example of usage:
-> 
-> ```
-> listTags
-> ```
->
-> #### Expected outcome
-> 
-> ```
-> 1. Hawker Food
-> 2. Noodles
-> 3. Favorites
-> ```
->
-> #### Description of the outcome:
->
-> - I'll list all of your tags.
+I can list all the tags in your Cookbook.
+
+#### Format: `listTags`
+
+#### Example of usage:
+ 
+```
+listTags
+```
+
+#### Expected outcome
+ 
+```
+1. Hawker Food
+2. Noodles
+3. Favorites
+```
+
+#### Description of the outcome:
+
+- I'll list all of your tags.
 
 ### 10. Save and Load
 
