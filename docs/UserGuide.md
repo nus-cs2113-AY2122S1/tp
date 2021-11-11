@@ -429,6 +429,7 @@ calendar todo n/changed task name d/22-12-2021
 	Edited Task!
 	__________________________________________________
 ```
+<div style="page-break-after: always;"></div>
 
 #### 3.3.6 Displaying calendar: `calendar display`
 Displays a calendar based on the month.
