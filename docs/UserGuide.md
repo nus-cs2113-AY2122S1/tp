@@ -194,10 +194,11 @@ _________________________________________________________
 <br/>
 
 # <a id="edit"></a> &nbsp;&nbsp; Edit: `edit`
-<div class="alert alert-success">
-&#128512; Oh no! You just added an entry, but you realised that there were some incorrect information...
+
+> :smiley:
+> Oh no! You just added an entry, but you realised that there were some incorrect information...
 If only there was a way to fix what was mistyped... well lucky for you!
-</div>
+
 
 This feature allows you to edit any information in a budget, expenditure or loan entry you have previously added.
 <br />
