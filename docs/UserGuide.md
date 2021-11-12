@@ -80,9 +80,9 @@ Happy to have you onboard TourPlanner!
 
 <hr>
 
-1. Ensure you have Java 11 installed in your Computer
+1. Ensure you have Java 11 installed in your Computer.
 
-2. Download the latest database db.jar from here (link tbd)
+2. Download the latest TourPlanner.jar from [here](https://github.com/AY2122S1-CS2113T-F11-3/tp/releases/tag/A-JarV2.1).
 
 3. Copy the file to the folder you want to use as the home folder for your database.
 
@@ -108,7 +108,9 @@ There are 4 data types that are stored in TourPlanner:
 * ```-c``` Clients
 * ```-t``` Tours
 * ```-f``` Flights
-* ```-p``` Client Package: package that contains the client along with the tour and flight they have opted for.
+* ```-p``` Client Package
+
+:information_source: Client Package contains the client along with the tour and flight they have opted for.
 
 Examples of data types in commands:
 
@@ -127,9 +129,9 @@ Throughout the user guide, you may observe that many commands have a ```[DATA_FI
 The ```[DATA_FIELDS]``` parameter represents the compulsory information fields that serves to describe the command in
 more detail.
 
-One data field is represented in the following format: ```/PREFIX INFO```
-
 Data fields can be viewed as supporting documents to the main command to be executed.
+
+One data field is represented in the following format: ```/PREFIX INFO```
 
 These fields are *mandatory*. Let's say a client is added without his **name**, or **contact details**. Having these
 empty fields reduces the utility of the program, since certain meaningful operations cannot be performed. Case in point,
