@@ -43,6 +43,8 @@ its developers (😀 us!) at our [Main Page](README.md).
 
 ------------
 
+<div style="page-break-after: always;"></div>
+
 ## 1. Quick Start
 
 1. Hype yourself up by dancing. Here begins your journey with _Ha(ppy)Bit_.
@@ -74,6 +76,8 @@ its developers (😀 us!) at our [Main Page](README.md).
    Option:
    ```
    Any keyboard input will appear after `Option: `. Here is where interaction between you and _Ha(ppy)Bit_ takes place.
+
+<div style="page-break-after: always;"></div>
 
 ### 1.1 Start-Up Interface
 In the current loading screen, you will be able to navigate to five other screens.
@@ -131,9 +135,9 @@ This option opens the Developer Guide in your web browser.
     
     Press enter to return to main menu...
 
-<div style="page-break-after: always;"></div>
-
 ![Developer Guide](Display_Images/DeveloperGuide.png)
+
+<div style="page-break-after: always;"></div>
 
 #### Option 4: `Demo Video`
 Don't like reading long wordy guides? A video may be just the thing for you!\
@@ -276,7 +280,7 @@ Here are guidelines and tips for the command format:
 * **Parameters** enclosed in angle brackets `<>` are meant to be replaced.\
   (e.g. `view g/<goal_index>` could be `view g/1`)
 * **Parameters** enclosed within curly brackets, `{}` are optional 
-* **Parameters** enclosed withing square brackets, `[]` suggest that at least one of the parameters is required
+* **Parameters** enclosed withing square brackets, `[]` indicate that at least one of the parameters is required
 * **Flags** should have a whitespace before them <br>
   (e.g. `view g/1` instead of `viewg/1`)
 
@@ -361,7 +365,9 @@ Output 1: `The goal '[DF] Reduce spending' has been added.`\
 Output 2: `The goal '[EX] Exercise more' has been added.`\
 Output 3: `The goal '[FD] Become a vegetarian' has been added.`
 
-> 📃 If more than 8 numbers are used for the date, only the 1st 8 numbers will be treated as the date.
+> ⚠  If more than 8 numbers are used for the date, it will be rejected as an invalid command.
+
+<div style="page-break-after: always;"></div>
 
 ### 4.3 List all Goals: `list`
 Can't remember what goals you have? Use this command to list all goals that you have set. 
@@ -373,8 +379,6 @@ In addition, you get to view some useful statistics.
 ```
 Command: list
 ```
-
-<div style="page-break-after: always;"></div>
 
 **Output:**
 ```
@@ -393,6 +397,8 @@ Command: list
 > 📃 Goal index may change if a goal is deleted. e.g. deleting the goal `Exercise more` will cause the index of `Become
 > a vegetarian` to change from 3 to 2.
 
+<div style="page-break-after: always;"></div>
+
 ### 4.4 Update a Goal: `update`
 Updates a parameter of a goal specified by its index.\
 (To err is human. That's why we have the `update` feature; designed to be more forgiving, 
@@ -400,7 +406,9 @@ when we have the occasional oopsies. 👍 )
 
 **Format:** `update g/<goal_index> [ n/<goal_name> t/<goal_type> e/<end_date> ]`
 
+* There must be at least one parameter changed - otherwise why call this command at all?
 * Goal Index has to be provided
+* Attributes being changed to must be different from original value - what would be the point otherwise?
 
 **Example:**\
 Command 1: `update g/1 n/Read more`\
@@ -412,6 +420,8 @@ Output 2: `The goal end date of goal 'Exercise more' has been changed from '01-J
 Output 3: `The goal type 'Default' has been updated to 'Study'.`\
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 `The goal end date of goal 'Read more' has been changed from '29-Nov-2022' to '31-Jan-2022'.`
+
+> 💡 Inputting multiple flags will allow you to update multiple attributes at the same time. Extra invalid flags will be ignored. 
 
 ### 4.5 Remove a Goal: `remove`
 Removes a goal specified by its index.\
@@ -425,8 +435,6 @@ defeat today, but to return stronger to fight another time. We got ya fam.)
 Command: remove g/1
 ```
 
-<div style="page-break-after: always;"></div>
-
 **Output:**
 ```
 ________________________________________________________________________________________________________________________
@@ -435,6 +443,8 @@ ________________________________________________________________________________
 ```
 
 > 📃 Goal index may change if a goal is deleted. Use the `list` command to check what the new goal indexes are.
+
+<div style="page-break-after: always;"></div> 
 
 ### 4.6 Add a Habit: `add`
 Adds a habit that is linked to a goal.\
@@ -462,12 +472,11 @@ Output 3: `The habit 'Learn a vegetarian dish' has been added to goal '[FD] Beco
 Change and update the name and/or interval of a habit.
 
 **Format:** `change g/<goal_index> h/<habit_index> [ n/<habit_name> i/<interval> ]`
-* You may change either the `habit_name` or `interval` with 2 separate commands, or both at the same time
 * There must be at least one parameter changed - otherwise why call this command at all?
-
 * Goal Index and Habit Index has to be provided
 * Interval cannot be changed to 0
 * Interval added cannot exceed end date of goal from current date of change
+* Attributes being changed to must be different from original value - what would be the point otherwise?
 
 **Example:**\
 Command 1: `change g/2 h/1 i/7`\
@@ -479,6 +488,8 @@ Output 2: `The habit 'Do 20 pushups' of goal 'Exercise more' has been changed to
 Output 3: `The habit 'Run 2.4km' of goal 'Exercise more' has been changed to 'Run 1.6km'`\
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 `The habit 'Run 1.6km' of goal 'Exercise more' has its interval changed to '3'`
+
+> 💡 Inputting multiple flags will allow you to update multiple attributes at the same time. Extra invalid flags will be ignored.
 
 <div style="page-break-after: always;"></div>
 
@@ -519,6 +530,8 @@ The habit 'Do 30 pushups' of goal '[EX] Exercise more' has been deleted.
 ________________________________________________________________________________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
+
 ### 4.10 View all Habits: `view`
 List all habits under a specific goal for a bird's eye view on your goal.
 
@@ -538,8 +551,6 @@ Command: view g/1
 | 1       | Run 1.6km  | 3          | 5.56%        | 1           | 17          | 0         | 1        |
 -------------------------------------------------------------------------------------------------------
 ```
-
-<div style="page-break-after: always;"></div>
 
 ### 4.11 Return to Start-Up: `return`
 Return to the start-up interface.\
@@ -572,6 +583,8 @@ Select from one of the following menu items:
 
 Option:
 ```
+
+<div style="page-break-after: always;"></div>
 
 ### 4.12 Exit the Program: `exit`
 Exits the program.\
