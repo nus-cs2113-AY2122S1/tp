@@ -283,9 +283,9 @@ Given below are the instructions to test the app manually:
 
 > 💡**Note:** These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
 
-###Launch and shutdown
+### Launch and shutdown
 
-####Initial launch
+#### Initial launch
 
 1. Ensure that `Java 11` is installed on your computer.
 2. Download the jar file from [here](https://github.com/AY2122S1-CS2113T-W12-3/tp/) and copy it into an empty folder.
@@ -293,7 +293,7 @@ Given below are the instructions to test the app manually:
 4. The program should detect that this is the first time the program is being run from the lack of save data detected.
 5. Terminate the program using `bye` and you should see a new directory created called `data` that contains a `slamData.txt` file.
 
-#####Managing members
+##### Managing members
 
 Adding members can be achieved through the use of the `add` command.
 
