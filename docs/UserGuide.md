@@ -815,7 +815,7 @@ Price per pax: $4000.00
 
 ### Sort flights
 
-Sort flight(s) based on a particular [FILTER]. It will return all flight(s) in ascending alphabetical order.
+Sort flight(s) based on a particular ```[FILTER]```. It will return all flight(s) in ascending alphabetical order.
 
 The possible values of ```[FILTER]``` are:
 
