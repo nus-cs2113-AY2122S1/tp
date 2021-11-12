@@ -52,8 +52,7 @@ its developers (😀 us!) at our [Main Page](README.md).
 4. Copy the file to the folder you want to use as the **home folder** for your _Ha(ppy)Bit_.
 5. Open your terminal of choice inside the folder containing `happybit.jar` file.
 6. Run the file by typing the command `java -jar happybit.jar`.
-7. Upon loading the app you should see the following screen, 
-indicating that you have successfully ran the app.
+7. Upon loading the app you should see the following screen, indicating that you have successfully run the app.
 
    ```
    ==============================================================================
@@ -70,6 +69,7 @@ indicating that you have successfully ran the app.
        [3] Developer Guide
        [4] Demo Video
        [5] Start Application
+       [6] Exit Application
     
    Option:
    ```
@@ -77,7 +77,7 @@ indicating that you have successfully ran the app.
 
 ### 1.1 Start-Up Interface
 In the current loading screen, you will be able to navigate to five other screens.
-Choose an option from one to five by typing 1, 2, 3, 4, or 5 and hitting "enter" to load the desired screen.
+Choose an option from one to six by typing 1, 2, 3, 4, 5 or 6 and hitting "enter" to load the desired screen.
 Below are the outcomes.
 
 #### Option 1: `About Ha(ppy)Bit`
@@ -85,12 +85,12 @@ Learn more about our vision for _Ha(ppy)Bit_ and the team behind it.
 
     Option: 1
 
-    Ha(ppy)Bit is a desktop app aimed to improve both the physical and mental lifestyle of students,
-    through the setting and tracking of goals to cultivate good habits. The app operates on a Command
-    Line Interface (CLI) while still comprising features typically found in a Graphical User Interface
-    (GUI). Students who type fast will find that Ha(ppy)Bit performs habit tracking more efficiently
-    than your conventional GUI apps.
-    
+    Ha(ppy)Bit is a desktop application aimed to empower students to achieve their goals—whether personal,
+    academical, or health—amidst the hectic and stressful university life, through cultivating good
+    habits. The application operates on a Command Line Interface (CLI) while still comprising features
+    typically found in a Graphical User Interface (GUI). Students who type fast will find that Ha(ppy)Bit
+    performs habit tracking more efficiently than your conventional GUI applications.
+
     Meet The Team
     =================================================================
     ||  Tan Kah Heng       ||  Creative Director, Visionary        ||
@@ -100,7 +100,7 @@ Learn more about our vision for _Ha(ppy)Bit_ and the team behind it.
     ||  Swann Tet Aung     ||  Backend Developer                   ||
     =================================================================
     
-    Current Version: v2.0 (updated 28-Oct-2021)
+    Current Version: v2.1 (updated 08-Nov-2021)
     
     
     Press enter to return to main menu...
@@ -115,6 +115,8 @@ This option opens the User Guide in your web browser.
     
     Press enter to return to main menu...
 
+![User Guide](Display_Images/UserGuide.png)
+
 #### Option 3: `Developer Guide`
 Learn about the app from the perspective of a software engineer.\
 This option opens the Developer Guide in your web browser.
@@ -124,6 +126,8 @@ This option opens the Developer Guide in your web browser.
     Opening in a web browser...
     
     Press enter to return to main menu...
+
+![Developer Guide](Display_Images/DeveloperGuide.png)
 
 #### Option 4: `Demo Video`
 Don't like reading long wordy guides? A video may be just the thing for you!\
@@ -145,6 +149,20 @@ This option starts up the main interface of the application.
     
     Starting application...
     Type 'return' to return to main menu
+
+#### Option 6: `Exit Application`
+Why would you exit _Ha(ppy)Bit_ even before trying out the main functionalities?\
+If you insist... this option exits the application.
+
+    Option: 6
+
+    ________________________________________________________________________________________________________________________
+    Thanks for using Ha(ppy)Bit, see you in a bit! (hehe)
+
+    "We are what we repeatedly do. Excellence, then, is not an act, but a habit."
+    Will Durant
+    ________________________________________________________________________________________________________________________
+
 
 ### 1.2 Main Interface
 Upon formally starting the application, you should see the following screen. 
@@ -183,18 +201,15 @@ to know that the purpose of `habits` is to break down daunting, colossal `goals`
 `habits`; tasks that you can complete within a day or as defined by your `interval`.
 
 **Intervals** <br>
-An `interval` is the number of days between a habit. It is for habits that will occur periodically,
-saving you the hassle of keying in individual habits every time it occurs.
-It is also the window period for you to complete a habit.
+An `interval` is the window period given for each repetition of a habit. This implementation saves you the hassle of 
+recording similar habits that occurs periodically.
 Here are three things to note:
-1. `interval` is not allowed to extend longer than your goal time frame. <br>
-To explain with an example, a goal that starts and ends within a month is _not_ to have a habit with an interval 
-longer than 30 days, otherwise it should've been a one-off habit! 
-2. `One-off habits` (hey, an oxymoron!) are habits that do not repeat. <br>
-This is achieved by setting the `interval` as `0`, rather than any positive integer.
-3. _Ha(ppy)Bit_ does not allow for an `interval` to be shorter than 1 day. <br>
-This is for those who are planning to do a habit more than once a day. 
-You may consider having multiple recurring habits instead.
+1. An `interval` length is not allowed to extend longer than your goal time frame. To explain with an example, a goal 
+   that starts and ends within a week is _not_ allowed to have a habit with an interval 
+   longer than 7 days.
+2. One-off habits (hey, an oxymoron!) are habits that do not repeat. This is achieved by setting the `interval` as `0`, 
+   rather than any positive integer.
+3. Recurring habits are habits that have an `interval` length of 1 or more day, but fulfill condition 1.
 
 ### 2.2 Icons
 Unfamiliar symbols may confuse. Here is a comprehensive collection of all emojis and syntax we employ.  
@@ -215,20 +230,19 @@ up with _Ha(ppy)Bit_, here are instructions and command formats to follow. 👍
 
 ### 3.1 Instructions from _Ha(ppy)Bit_
 
-You may have noticed the instructions `Press enter to return to main menu...` and `Type 'return' to return to main menu`
-at the bottom of some responses from _Ha(ppy)Bit_. This is because _Ha(ppy)Bit_ clears and refreshes the page after 
-every command. Previously typed commands will also be cleared, so press the "up" key on your keyboard to navigate 
-through recently typed commands. 
+You may have noticed the instructions `Press enter to return to main menu...`, `Type 'return' to return to main menu`, 
+or `Press enter ONCE to return to command mode...` at the bottom of some responses from _Ha(ppy)Bit_. This is because 
+_Ha(ppy)Bit_ clears and refreshes the page after every command. Previously typed commands will also be cleared, so press
+the "up" key on your keyboard to navigate through recently typed commands. 
 
-Do follow the instructions before typing anything, lest _Ha(ppy)Bit_ does not
-register your input. On the topic of inputs...
+Do follow the instructions before typing anything, lest _Ha(ppy)Bit_ does not register your input. 
+On the topic of inputs...
 
 ### 3.2 Command Format
 _Ha(ppy)Bit_ is very particular about your commands. You begin off with a "command word" to tell _Ha(ppy)Bit_ the exact 
 action to carry out (See [Command Summary](#7-command-summary) for all actions). The actions are then followed up with
-"parameters", which are information you wish to pass to _Ha(ppy)Bit_ to carry out the actions with it. To indicate the 
-type of parameters, they are prefixed with "flags". The flags help _Ha(ppy)Bit_ identify and distinguish the type of
-parameters.
+"parameters", which are information you wish to pass to _Ha(ppy)Bit_ to carry out the actions with it. The various 
+parameters are prefixed with different flags, which help _Ha(ppy)Bit_ identify and distinguish the type of parameters.
 
 A command could look like this: `add n/Run 2.4km g/1 i/7`. Where, <br>
 `add` is the command word, <br>
@@ -249,7 +263,7 @@ Here are guidelines and tips for the command format:
 * **Parameters** enclosed in angle brackets `<>` are meant to be replaced.\
   (e.g. `view g/<goal_index>` could be `view g/1`)
 * **Parameters** enclosed within curly brackets, `{}` are optional 
-* **Parameters** enclosed withing square brackets, `[]` suggest that at least one of the parameters are required
+* **Parameters** enclosed withing square brackets, `[]` suggest that at least one of the parameters is required
 * **Flags** should have a whitespace before them <br>
   (e.g. `view g/1` instead of `viewg/1`)
 
@@ -277,9 +291,9 @@ Here are the list of commands:
 --------------------------------------------------------------------------------------------------------------
 | add a habit                       | add g/<goal_index> n/<habit_name> i/<interval>                         | 
 --------------------------------------------------------------------------------------------------------------
-| update a goal name/type/end date  | update g/<goal_index> { n/<goal_name> t/<goal_type> e/<end_date> }     | 
+| update a goal name/type/end date  | update g/<goal_index> [ n/<goal_name> t/<goal_type> e/<end_date> ]     | 
 --------------------------------------------------------------------------------------------------------------
-| change a habit name/interval      | change g/<goal_index> h/<habit_index> { n/<habit_name> i/<interval> }  | 
+| change a habit name/interval      | change g/<goal_index> h/<habit_index> [ n/<habit_name> i/<interval> ]  | 
 --------------------------------------------------------------------------------------------------------------
 | list all goals                    | list                                                                   | 
 --------------------------------------------------------------------------------------------------------------
@@ -297,9 +311,10 @@ Here are the list of commands:
 --------------------------------------------------------------------------------------------------------------
 * Replace <> with relevant terms (Exp: <goal_name> --> goal 1)
 * Items enclosed within { } are optional
+* Items enclosed within [ ] need to have at least one of the parameters specified inside.
 * Use 'list' and 'view' to check the goal and habit indexes respectively
 
-Press enter to return to command mode...
+Press enter ONCE to return to command mode...
 ```
 
 ### 4.2 Set a Goal: `set`
@@ -308,7 +323,7 @@ start dates are optional (well, we wouldn't you to be procrastinating on your go
 
 **Format:** `set n/<goal_name> { t/<goal_type> s/<start_date> } e/<end_date>`
 
-* Goal name can be any name of your choosing (make it meaningful otherwise you won't know what you're tracking).
+* Goal name can be any name of your choosing (however do keep within a 50-character limit).
 * Dates must be in `DDMMYYYY` format. For example, 01 January 2021 must be written as `01012020`.
 * Goal type is an optional parameter and can take one of the following arguments
   * `sl` &#8594; Sleep
@@ -320,7 +335,7 @@ start dates are optional (well, we wouldn't you to be procrastinating on your go
 
 **Example:**
 
-Command 1: `set n/Reduce spending s/29102021 e/31122021`\
+Command 1: `set n/Reduce spending s/29112021 e/29112022`\
 Command 2: `set n/Exercise more t/ex e/01012022`\
 Command 3: `set t/fd e/31122022 n/Become a vegetarian`
 
@@ -347,11 +362,11 @@ Command: list
 ----------------------------------------------------------------------------------------------------------------
 | Index   | Name                 | Type      | Start Date   | End Date     | Habit Count   | Completion Rate   |
 ----------------------------------------------------------------------------------------------------------------
-| 1       | Reduce spending      | Default   | 29-Oct-2021  | 31-Dec-2021  | 0             | Not Applicable    |
+| 1       | Reduce spending      | Default   | 29-Nov-2021  | 29-Nov-2022  | 0             | Not Applicable    |
 ----------------------------------------------------------------------------------------------------------------
-| 2       | Exercise more        | Exercise  | 28-Oct-2021  | 01-Jan-2022  | 0             | Not Applicable    |
+| 2       | Exercise more        | Exercise  | 12-Nov-2021  | 01-Jan-2022  | 0             | Not Applicable    |
 ----------------------------------------------------------------------------------------------------------------
-| 3       | Become a vegetarian  | Food      | 28-Oct-2021  | 31-Dec-2022  | 0             | Not Applicable    |
+| 3       | Become a vegetarian  | Food      | 12-Nov-2021  | 31-Dec-2022  | 0             | Not Applicable    |
 ----------------------------------------------------------------------------------------------------------------
 ```
 
@@ -363,18 +378,18 @@ Updates a parameter of a goal specified by its index.\
 (To err is human. That's why we have the `update` feature; designed to be more forgiving, 
 when we have the occasional oopsies. 👍 )
 
-**Format:** `update g/<goal_index> { n/<goal_name> t/<goal_type> e/<end_date> }`
+**Format:** `update g/<goal_index> [ n/<goal_name> t/<goal_type> e/<end_date> ]`
 
 **Example:**\
 Command 1: `update g/1 n/Read more`\
 Command 2: `update g/2 e/31122021`\
-Command 3: `update t/sd g/1`
+Command 3: `update g/1 t/sd e/31012022`
 
-Output 1: `The goal name 'Sleep more' has been updated to 'Read more'.`\
-Output 2: `The goal end date of goal 'Exercise more' has been changed from '01-Jan-2022' to '30-Nov-2021'.`\
-Output 3: `The goal type 'Default' has been updated to 'Study'.`
-
-> 📃 Only one parameter can be updated at a time (to be changed to multiple parameters in v2.1)
+Output 1: `The goal name 'Reduce spending' has been updated to 'Read more'.`\
+Output 2: `The goal end date of goal 'Exercise more' has been changed from '01-Jan-2022' to '31-Dec-2021'.`\
+Output 3: `The goal type 'Default' has been updated to 'Study'.`\
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+`The goal end date of goal 'Read more' has been changed from '29-Nov-2022' to '31-Jan-2022'.`
 
 ### 4.5 Remove a Goal: `remove`
 Removes a goal specified by its index.\
@@ -409,9 +424,9 @@ without even pulling a muscle.)
 * 'Interval' defined as 0 indicates a one-off habit; you only have to complete the habit once
 
 **Example:**\
-Input 1: `add n/Run 2.4km g/1 i/7`\
-Input 2: `add g/1 i/1 n/Do 20 pushups`\
-Input 3: `add i/14 n/Learn a vegetarian dish g/2`
+Command 1: `add n/Run 2.4km g/1 i/7`\
+Command 2: `add g/1 i/1 n/Do 20 pushups`\
+Command 3: `add i/14 n/Learn a vegetarian dish g/2`
 
 Output 1: `The habit 'Run 2.4km' has been added to goal '[EX] Exercise more'`\
 Output 2: `The habit 'Do 20 pushups' has been added to goal '[EX] Exercise more'`\
@@ -422,18 +437,20 @@ Output 3: `The habit 'Learn a vegetarian dish' has been added to goal '[FD] Beco
 ### 4.7 Change a Habit: `change`
 Change and update the name and/or interval of a habit.
 
-**Format:** `change g/<goal_index> h/<habit_index> { n/<habit_name> i/<interval> }`
-* You may change either the `habit_name` or `interval` at a time, but not both
+**Format:** `change g/<goal_index> h/<habit_index> [ n/<habit_name> i/<interval> ]`
+* You may change either the `habit_name` or `interval` with 2 separate commands, or both at the same time
 * There must be at least one parameter changed - otherwise why call this command at all?
 
 **Example:**\
-Input 1: `change g/2 h/1 i/7`\
-Input 2: `change n/Do 30 pushups h/2 g/1`
+Command 1: `change g/2 h/1 i/7`\
+Command 2: `change n/Do 30 pushups h/2 g/1`\
+Command 3: `change g/1 h/1 n/Run 1.6km i/3`
 
 Output 1: `The habit 'Learn a vegetarian dish' of goal 'Become a vegetarian' has its interval changed to '7'`\
-Output 2: `The habit 'Do 20 pushups' of goal 'Exercise more' has been changed to 'Do 30 pushups'`
-
-> 📃 Only one parameter can be updated at a time (to be changed to multiple parameters in v2.1)
+Output 2: `The habit 'Do 20 pushups' of goal 'Exercise more' has been changed to 'Do 30 pushups'`\
+Output 3: `The habit 'Run 2.4km' of goal 'Exercise more' has been changed to 'Run 1.6km'`\
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+`The habit 'Run 1.6km' of goal 'Exercise more' has its interval changed to '3'`
 
 ### 4.8 Complete a Habit: `done`
 Mark a habit under a goal as done.\
@@ -449,8 +466,8 @@ Command: done g/1 h/1
 **Output:**
 ```
 ________________________________________________________________________________________________________________________
-The habit 'Run 2.4km' of goal '[EX] Exercise more' has been completed for 28102021 to 04112021.
-The next interval will begin on 05112021
+The habit 'Run 1.6km' of goal '[EX] Exercise more' has been completed for 12112021 to 15112021.
+The next interval will begin on 16112021
 ________________________________________________________________________________________________________________________
 ```
 
@@ -488,7 +505,7 @@ Command: view g/1
 -------------------------------------------------------------------------------------------------------
 | Index   | Name       | Interval   | Completion   | Completed   | Remaining   | Expired   | Streak   |
 -------------------------------------------------------------------------------------------------------
-| 1       | Run 2.4km  | 7          | 20%          | 1           | 4           | 0         | 1        |
+| 1       | Run 1.6km  | 3          | 5.56%        | 1           | 17          | 0         | 1        |
 -------------------------------------------------------------------------------------------------------
 ```
 
@@ -519,6 +536,7 @@ Select from one of the following menu items:
     [3] Developer Guide
     [4] Demo Video
     [5] Start Application
+    [6] Exit Application
 
 Option:
 ```
@@ -576,13 +594,15 @@ your data will be there!
 > 💡 **Pro Tip!** Have your home folder reside in a cloud storage service (OneDrive, iCloud, etc.) to sync your data
 > between devices.
 
-**Q**: Why do distinguish between `delete` and `remove`, and other similar commands but named differently? 
+**Q**: Why are our commands synonyms of each other - `remove` and `delete`, `set` and `add`, etc.?
 <br>
-**A**:
+**A**: Well... we need a way to distinguish between goal and habit commands, and we want to avoid using command words
+such as `gdelete` and `hdelete` for goal and habit deletion respectively.
 
 **Q**: Why do I have to hit "enter" every time I want to key in a new command?
 <br>
-**A**:
+**A**: We want you to confirm that you have called the correct command, or understand the error message after it pops up
+before the screen is cleared.
 
 **Q**: Are there any books you recommend?
 <br>
@@ -595,10 +615,10 @@ Action             | Command Format                                             
 Get help           | `help`                                                                  | `help`
 Set goal           | `set n/<goal_name> { t/<goal_type> s/<start_date> } e/<end_date>`       | `set n/Reduce spending e/31122022`
 List goals         | `list`                                                                  | `list`
-Update goal        | `update g/<goal_index> { n/<goal_name> t/<goal_type> e/<end_date> }`    | `update g/1 n/Decrease Spending`
+Update goal        | `update g/<goal_index> [ n/<goal_name> t/<goal_type> e/<end_date> ]`    | `update g/1 n/Decrease Spending`
 Remove goal        | `remove g/<goal_index>`                                                 | `remove g/1`
 Add habit          | `add g/<goal_index> n/<habit_name> i/<interval>`                        | `add n/Don't drink BBT g/1 i/3`
-Change habit       | `change g/<goal_index> h/<habit_index> { n/<habit_name> i/<interval> }` | `change g/1 h/2 i/3`
+Change habit       | `change g/<goal_index> h/<habit_index> [ n/<habit_name> i/<interval> ]` | `change g/1 h/2 i/3`
 Done habit         | `done g/<goal_index> h/<habit_index> `                                  | `done g/1 h/1`
 Delete habit       | `delete g/<goal_index> h/<habit_index>`                                 | `delete g/1 h/1`
 View habits        | `view g/<goal_index>`                                                   | `view g/1`

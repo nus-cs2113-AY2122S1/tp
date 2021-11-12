@@ -94,11 +94,11 @@ public class Export {
         File storageFile = new File(this.filePath);
         boolean isWriteable = storageFile.setWritable(true);
 
-        if (isWriteable) {
-            this.printManager.printStorageMessage(FILE_WRITE);
-        } else {
-            this.printManager.printStorageMessage(FILE_WRITE_FAIL);
-        }
+//        if (isWriteable) {
+//            this.printManager.printStorageMessage(FILE_WRITE);
+//        } else {
+//            this.printManager.printStorageMessage(FILE_WRITE_FAIL);
+//        }
     }
 
     /**
@@ -108,11 +108,11 @@ public class Export {
         File storageFile = new File(this.filePath);
         boolean isReadOnly = storageFile.setReadOnly();
 
-        if (isReadOnly) {
-            this.printManager.printStorageMessage(READ_ONLY);
-        } else {
-            this.printManager.printStorageMessage(SET_READ_ONLY_FAILED);
-        }
+//        if (isReadOnly) {
+//            this.printManager.printStorageMessage(READ_ONLY);
+//        } else {
+//            this.printManager.printStorageMessage(SET_READ_ONLY_FAILED);
+//        }
     }
 
     /**

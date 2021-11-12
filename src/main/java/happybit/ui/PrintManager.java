@@ -207,9 +207,11 @@ public class PrintManager {
         printLine();
     }
 
+    /**
+     * Prints a separator line.
+     */
     public void printUpdateGoalMessageStart() {
         printLine();
-        System.out.printf(MSG_UPDATE_GOAL_START);
     }
 
     /**
@@ -232,7 +234,6 @@ public class PrintManager {
     }
 
     public void printUpdateGoalMessageEnd(ArrayList<String> excess) {
-        System.out.printf(MSG_UPDATE_GOAL_END);
         if (!excess.isEmpty()) {
             System.out.printf(MSG_UPDATE_GOAL_EXCESS_END_ONE);
             for (String flag : excess) {
@@ -241,11 +242,6 @@ public class PrintManager {
             System.out.printf(MSG_UPDATE_GOAL_EXCESS_END_TWO);
         }
         printLine();
-    }
-
-    public void printUpdateHabitMessageStart() {
-        printLine();
-        System.out.printf(MSG_UPDATE_HABIT_START);
     }
 
     /**
@@ -275,7 +271,6 @@ public class PrintManager {
     }
 
     public void printUpdateHabitMessageEnd(ArrayList<String> excess) {
-        System.out.printf(MSG_UPDATE_HABIT_END);
         if (!excess.isEmpty()) {
             System.out.printf(MSG_UPDATE_HABIT_EXCESS_END_ONE);
             for (String flag : excess) {
@@ -306,6 +301,14 @@ public class PrintManager {
         printLine();
     }
 
+    /**
+     * Prints a horizontal line.
+     * Used for enclosing message within 2 such lines.
+     */
+    public void printLine() {
+        System.out.println(LINE);
+    }
+
     /*
      * NOTE : ==================================================================
      * The following are private methods that are used to implement SLAP for the
@@ -313,14 +316,6 @@ public class PrintManager {
      * visualise the actual methods that can be called from outside this class.
      * =========================================================================
      */
-
-    /**
-     * Prints a horizontal line.
-     * Used for enclosing message within 2 such lines.
-     */
-    private void printLine() {
-        System.out.println(LINE);
-    }
 
     //@@author kahhe
     /**

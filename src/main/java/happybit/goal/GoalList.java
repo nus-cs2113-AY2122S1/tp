@@ -267,7 +267,7 @@ public class GoalList {
     public void updateGoalAttributes(int goalIndex, String newGoalName, GoalType newGoalType, Date newGoalEndDate,
             int[] updateAttributes, ArrayList<String> excessAttributes, PrintManager printManager)
             throws HaBitCommandException {
-        printManager.printUpdateGoalMessageStart();
+        printManager.printLine();
         if (updateAttributes[0] == 1) { // update goal name
             updateGoalName(goalIndex, newGoalName, printManager);
         }
@@ -295,7 +295,7 @@ public class GoalList {
     public void updateHabitAttributes(int goalIndex, int habitIndex, String newHabitName, int newHabitInterval,
             int[] updateAttributes, ArrayList<String> excessAttributes, PrintManager printManager)
             throws HaBitCommandException {
-        printManager.printUpdateHabitMessageStart();
+        printManager.printLine();
         if (updateAttributes[0] == 1) { // update habit name
             updateHabitNameFromGoal(goalIndex, habitIndex, newHabitName, printManager);
         }
