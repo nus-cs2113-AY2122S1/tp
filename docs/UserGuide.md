@@ -636,6 +636,8 @@ to burn them away!
 
 >**NOTE** :
 > If you leave the date parameter empty, Click would just add in today's date for you, no worries!
+> 
+<div style="page-break-after: always;"></div>
 
 Example:
 
@@ -668,6 +670,8 @@ Expected outcome:
 	__________________________________________________
 ```
 
+<div style="page-break-after: always;"></div>
+
 Example of adding with a date
 
 Format: `food add n/[FOOD_NAME] d/[KCALORIE] d/[DATE]`
@@ -693,10 +697,6 @@ Additionally, the calories consumed are nicely added up for you.
 
 > **NOTE** :
 > The date displayed may *not be the same as the expected outcome*. It'll show you today's date instead as you didn't add the `d/` parameter previously!
-
-
-<div style="page-break-after: always;"></div>
-
 
 Expected outcome:
 
