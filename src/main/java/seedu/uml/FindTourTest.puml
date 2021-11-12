@@ -1,0 +1,53 @@
+@startuml
+
+participant ":Parser" as Parser
+participant ":FindTourCommand" as FCC
+participant ":Ui" as Ui
+participant ":TourList" as TourList
+
+-> Parser: execute "find -t JPN"
+activate Parser
+Parser -> Parser : parseFind("-t JPN")
+activate Parser
+
+
+
+create FCC
+Parser -> FCC
+activate FCC
+FCC --> Parser
+deactivate FCC
+Parser --> Parser
+deactivate Parser
+<-- Parser: FindTourCommand
+deactivate Parser
+
+-> FCC: execute()
+activate FCC
+
+
+
+FCC -> Ui : showFindTour()
+activate Ui
+Ui -> TourList : getTour("JPN")
+activate TourList
+TourList --> Ui : id, name, price
+deactivate TourList
+loop until all clientPackage iterated
+    Ui -> ClientPackageList : getClientPackageByIndex()
+    activate ClientPackageList
+    ClientPackageList --> Ui: subscribed clients
+    deactivate ClientPackageList
+    Ui -> Ui: show Client
+    activate Ui
+    Ui --> Ui
+    deactivate Ui
+end
+Ui --> FCC
+deactivate Ui
+
+<-- FCC
+deactivate FCC
+
+destroy FCC
+@enduml

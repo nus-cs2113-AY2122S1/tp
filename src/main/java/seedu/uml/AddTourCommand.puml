@@ -1,0 +1,44 @@
+@startuml
+
+participant ":Parser" as Parser
+participant ":AddTourCommand" as ATC
+participant ":TourList" as TourList
+participant ":Ui" as Ui
+
+-> Parser : parse("add -t t001 ARGS")
+activate Parser
+    Parser -> Parser: parseAdd("-t t001 ARGS")
+    activate Parser
+    create ATC
+    Parser -> ATC : new AddTourCommand
+    activate ATC
+    ATC --> Parser : AddTourCommand
+    deactivate ATC
+    Parser --> Parser: AddTourCommand
+    deactivate Parser
+    <-- Parser: AddTourCommand
+deactivate Parser
+
+-> ATC : execute()
+    activate ATC
+
+
+    alt#Gold #LightBlue if added tour is unique and has unique fields
+
+        ATC -> TourList: add(Tour tour)
+        activate TourList
+        ATC <-- TourList:
+        deactivate TourList
+        ATC -> Ui : showAdd(Tour tour)
+        activate Ui
+        ATC <-- Ui : add tour Ui display
+        deactivate Ui
+        <-- ATC: add tour Ui display
+
+   else #Pink if added tour ID already exists or has duplicated fields
+        <-- ATC : ERROR message
+
+        deactivate ATC
+        destroy ATC
+    end
+@enduml

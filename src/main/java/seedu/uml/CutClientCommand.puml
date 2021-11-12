@@ -1,0 +1,51 @@
+@startuml
+
+participant ":Parser" as Parser
+participant ":CutClientCommand" as CCC
+participant ":ClientList" as ClientList
+participant ":ClientPackageList" as ClientPackageList
+
+-> Parser: parse("cut -c c001")
+activate Parser
+Parser -> Parser : parseCut("-c c001")
+activate Parser
+
+create CCC
+Parser -> CCC
+activate CCC
+CCC --> Parser
+deactivate CCC
+Parser --> Parser
+deactivate Parser
+
+<-- Parser: CutClientCommand
+deactivate Parser
+
+-> CCC: execute()
+activate CCC
+
+CCC -> ClientList : getClientById("c001")
+activate ClientList
+ClientList --> CCC : Client
+deactivate ClientList
+
+CCC -> ClientList : cut(Client)
+activate ClientList
+ClientList --> CCC
+deactivate ClientList
+
+CCC -> ClientPackageList : getClientPackageByClient("c001")
+activate ClientPackageList
+ClientPackageList --> CCC : ClientPackage
+deactivate ClientPackageList
+
+CCC -> ClientPackageList : cut(ClientPackage)
+activate ClientPackageList
+ClientPackageList --> CCC
+deactivate ClientPackageList
+
+<-- CCC
+deactivate CCC
+deactivate Parser
+destroy CCC
+@enduml

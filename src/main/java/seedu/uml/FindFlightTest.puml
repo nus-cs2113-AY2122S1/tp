@@ -1,0 +1,53 @@
+@startuml
+
+participant ":Parser" as Parser
+participant ":FindFlightCommand" as FCC
+participant ":Ui" as Ui
+participant ":FlightList" as TourList
+
+-> Parser: execute "find -f SQ-JPN"
+activate Parser
+Parser -> Parser : parseFind("-f SQ-JPN")
+activate Parser
+
+
+
+create FCC
+Parser -> FCC
+activate FCC
+FCC --> Parser
+deactivate FCC
+Parser --> Parser
+deactivate Parser
+<-- Parser: FindFlightCommand
+deactivate Parser
+
+-> FCC: execute()
+activate FCC
+
+
+
+FCC -> Ui : showFindFlight()
+activate Ui
+Ui -> TourList : getFlight("SQ-JPN")
+activate TourList
+TourList --> Ui : id, departure / return destination, place
+deactivate TourList
+loop until all clientPackage iterated
+    Ui -> ClientPackageList : getClientPackageByIndex()
+    activate ClientPackageList
+    ClientPackageList --> Ui: passengers
+    deactivate ClientPackageList
+    Ui -> Ui: show Client
+    activate Ui
+    Ui --> Ui
+    deactivate Ui
+end
+Ui --> FCC
+deactivate Ui
+
+<-- FCC
+deactivate FCC
+
+destroy FCC
+@enduml

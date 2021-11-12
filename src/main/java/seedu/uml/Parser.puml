@@ -1,0 +1,42 @@
+@startuml
+
+participant ":Parser" as Parser
+participant ":XYZCommand" as XYZ
+
+-> Parser: parse(input: String)
+activate Parser
+
+Parser -> Parser : splitCommandString(input: String)
+activate Parser
+Parser --> Parser : Command and Params
+deactivate Parser
+
+alt Command is "xyz", Params are valid
+
+Parser -> Parser : parseXYZ(params: String)
+note left
+"XYZ" refers to general
+operations such as
+add, list and sort.
+end note
+activate Parser
+
+create XYZ
+Parser -> XYZ : new XYZCommand()
+activate XYZ
+XYZ --> Parser : XYZCommand
+deactivate XYZ
+
+Parser --> Parser : XYZCommand
+deactivate Parser
+
+<-- Parser : XYZCommand
+
+
+else Command and/or Params are invalid
+    <-- Parser : TourPlannerException
+
+deactivate Parser
+
+end
+@enduml

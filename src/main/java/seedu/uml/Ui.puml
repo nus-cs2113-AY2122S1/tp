@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam componentStyle rectangle
+component {
+    [Ui] as Ui
+    [Parser] as Parser
+    [Command] as Command
+
+}
+
+actor User
+
+User - Ui
+Ui -- Parser : read by >
+Parser .> "0..1" Command : returns >
+Command .> Ui : calls appropriate function >
+@enduml
