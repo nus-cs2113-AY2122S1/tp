@@ -687,6 +687,6 @@ corporations bombard your with enticing information to profit of your valuable a
 has shortened your attention span tremendously such that you don't have the patience nor focus to sit down and refer
 to our User Guide which we have painstakingly written to be comprehensive for users like you in order to provide a 
 better user experience to a new app they may be unfamiliar with? Fine! We get it! We have prepared a 
-[Demo Video](https://www.youtube.com/watch?v=dQw4w9WgXcQ) for you, the guided walkthrough you _oh_ so desired.
+[Demo Video](https://tinyurl.com/HappyBitDemoVideo) for you, the guided walkthrough you _oh_ so desired.
 
 Watch our wacky Demo Video bloopers [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ)!
