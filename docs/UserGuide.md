@@ -378,7 +378,7 @@ _________________________________________________________
 
 ### <a id="year"></a> Switching Database Year: `year`
 
-Selection of the database year.
+> Selection of the database year.
 
 Format: `year <year>`
 
@@ -405,8 +405,8 @@ _________________________________________________________
 
 ### <a id="find"></a> Finding a Particular Expenditure, Loan and Budget: `find`
 
-Find all the records of Expenditure, loan and Budget that have a matching key word on the search term. 
-The search term is the keyword.
+> 😃 Want to find a specific records of Expenditure, loan and Budget that have a matching key word on the search term? 
+> Use the `find` command!
 
 Format: `find KEYWORD`
 
@@ -432,7 +432,7 @@ _________________________________________________________
 
 ### Listing Budget & Expenditure for a Particular Month: `list`
 
-Adds a new expenditure to a specific budget of a month.
+> Adds a new expenditure to a specific budget of a month.
 
 Format: `list m/MONTH [c/CATEGORY]`
 
@@ -460,7 +460,7 @@ _________________________________________________________
 
 ### <a id="listing"></a> Listing all Budget & Expenditure
 
-List all the Budget and expenditure for that particular year.
+> List all the Budget and expenditure for that particular year.
 
 Format: `list m/all [c/CATEGORY]`
 * `CATEGORY` filters out the expenditures to show only those falling under the specified category.
@@ -487,7 +487,7 @@ _________________________________________________________
 
 ### <a id="delete-budget"></a> `-b` - Delete a budget
 
-Deletes the budget of a specific month
+> Deletes the budget of a specific month
 
 Format: `delete -b m/MONTH`
 
@@ -512,7 +512,7 @@ _________________________________________________________
 
 ### <a id="delete-expenditure"></a> `-e` - Delete (an) expenditure(s)
 
-Deletes (an) expenditure(s) of a specific month.
+> Deletes (an) expenditure(s) of a specific month.
 
 Format:`delete -e m/MONTH` 
 <br/> `delete -e  m/MONTH i/INDEX`
@@ -559,7 +559,7 @@ _________________________________________________________
 
 ### <a id="delete-loan"></a> `-l` - Delete (a) loan record(s)
 
-Deletes (a) loan record(s) of a specific month
+> Deletes (a) loan record(s) of a specific month
 
 Format:`delete -l m/MONTH` 
 <br/> `delete -l m/MONTH i/INDEX`
@@ -653,9 +653,9 @@ _________________________________________________________
 
 ### <a id="stat-year"></a> `-y` : View Statistics for the Year
 
-Surely things get messy after you have many expenditures, loan and budget entries. Is there
-an easy way to visualize the amount of budget used or left? Yes! `stat -y` 
-display the statistics for the current database year which the user is working on. 
+> Surely things get messy after you have many expenditures, loan and budget entries. Is there
+> an easy way to visualize the amount of budget used or left? Yes! `stat -y` 
+> display the statistics for the current database year which the user is working on. 
 
 Format: `stat -y t/TYPE_OF_GRAPHICAL_VIEW`
 
@@ -763,7 +763,7 @@ _________________________________________________________
 
 # <a id="guides"></a> &nbsp;&nbsp; Command Guides: `help`
 
-Command description and format.
+> Command description and format.
 
 Format: `help`
 
@@ -783,9 +783,9 @@ _________________________________________________________
 
 # <a id="csv"></a> &nbsp;&nbsp; CSV: `csv`
 
-If our statistical analysis feature is not good enough for you, you may convert the database records
-into a csv file by simple keying in the `csv` command. You will then be able to use Excel to do advanced
-statistical analysis.
+> If our statistical analysis feature is not good enough for you, you may convert the database records
+> into a csv file by simple keying in the `csv` command. You will then be able to use Excel to do advanced
+> statistical analysis.
 
 Format: `csv`
 
@@ -817,9 +817,9 @@ _________________________________________________________
 
 # <a id="db"></a> &nbsp;&nbsp; DB: `db`
 
-😃 What if you have forgotten all the database years that you have been using? Fear not! `db` command 
-is here to help! `db` command basically list out all the available database text file you currently
-have. 
+> 😃 What if you have forgotten all the database years that you have been using? Fear not! `db` command 
+> is here to help! `db` command basically list out all the available database text file you currently
+> have. 
 
 Format: `db`
 
@@ -849,8 +849,8 @@ _________________________________________________________
 
 # <a id="exit"></a> &nbsp;&nbsp; Exit the program: `bye`
  
-When you are done with using the app and wish to exit the app. Enter the command `bye` to 
-say goodbye with our app 👋
+> When you are done with using the app and wish to exit the app. Enter the command `bye` to 
+> say goodbye with our app 👋
 
 Format: `bye`
 
@@ -963,5 +963,6 @@ stated in the above command description.
 |3.  | `.zip` | `.zip is the file format for ZIP. ZIP is an archive file format that supports lossless data compression.` |
 |4.  | `.bat` | `.bat is the file format for batch file. A batch file is a script file in DOS, OS/2 and Microsoft Windows. It consists of a series of commands to be executed by the command-line interpreter, stored in a plain text file.` |
 |5.  | `.jar` | `.jar is the file format for JAR. A JAR (Java ARchive) is a package file format typically used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file for distribution.` |
+|6.  | text data file | `Text file used to store all the entries of a particular year` |
 
 #### [↑ Back to top](#top)
