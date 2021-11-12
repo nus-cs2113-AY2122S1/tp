@@ -512,6 +512,7 @@ _________________________________________________________
 <br />
 
 # <a id="delete"></a> &nbsp;&nbsp;  Delete: `delete`
+> 😃 This feature allows you to delete the records you have made if you got refund or accidentally added wrongly!
 
 Deletes an entry / entries (maybe user wants to cut off the expenses) from the budget tracker data set.
 <br />
@@ -520,7 +521,9 @@ _________________________________________________________
 
 ### <a id="delete-budget"></a> `-b` - Delete a budget
 
-> Deletes the budget of a specific month
+> 😃 I can help you delete a budget of a specific month!
+
+Deletes the budget of a specific month
 
 Format: `delete -b m/MONTH`
 
@@ -544,8 +547,9 @@ _________________________________________________________
 
 
 ### <a id="delete-expenditure"></a> `-e` - Delete (an) expenditure(s)
+> 😃 I can help you delete (an) expenditure(s) of a specific month!
 
-> Deletes (an) expenditure(s) of a specific month.
+Deletes (an) expenditure(s) of a specific month.
 
 Format:`delete -e m/MONTH` 
 <br/> `delete -e  m/MONTH i/INDEX`
@@ -591,8 +595,9 @@ _________________________________________________________
 
 
 ### <a id="delete-loan"></a> `-l` - Delete (a) loan record(s)
+> 😃 I can help you delete (a) loan record(s) of a specific month!
 
-> Deletes (a) loan record(s) of a specific month
+Deletes (a) loan record(s) of a specific month
 
 Format:`delete -l m/MONTH` 
 <br/> `delete -l m/MONTH i/INDEX`
