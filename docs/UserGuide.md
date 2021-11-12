@@ -636,7 +636,8 @@ to burn them away!
 
 >**NOTE** :
 > If you leave the date parameter empty, Click would just add in today's date for you, no worries!
-> 
+
+
 <div style="page-break-after: always;"></div>
 
 Example:
