@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+-> ":ViewSuggestionsCommand": execute(ed, fd, md, us)
+activate ":ViewSuggestionsCommand"
+
+":ViewSuggestionsCommand" -> ":User" : getCalorieGoal()
+activate ":User"
+return calorieGoal
+
+":ViewSuggestionsCommand" -> ":EntryDatabase" : getTotalDailyCalorie()
+activate ":EntryDatabase"
+return caloriesConsumed
+opt remaining is not negative
+":ViewSuggestionsCommand" -> ":FoodDatabase" : findSuggestions(type, remaining, isSort)
+note right
+remaining = calorieGoal - caloriesConsumed
+end note
+activate ":FoodDatabase"
+return suggestions
+
+opt has 1 or more suggestions
+":ViewSuggestionsCommand" -> "<<Class>>\nUi" : printMatchingFoods(suggestions)
+activate "<<Class>>\nUi"
+return
+end
+
+end
+return output
+@enduml

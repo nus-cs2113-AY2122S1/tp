@@ -1,0 +1,49 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+class User {
+
+-calorieGoal:int
+-age:int
+-height:int
+-weight:int
+
++getCalorieGoal():int
++setCalorieGoal(int):void
+
++getGender():Gender
++setGender(Gender):void
+
++getWeight():float
++setWeight(float):void
+
++getHeight():int
++setHeight(int):void
+
++getAge():int
++setAge(int):void
+
++getWeightRecords():ArrayList<WeightRecord>
++addToWeightRecords(WeightRecord):void
++updateWeightAndWeightTracker(float):String
+-updateWeightTrackerIfHavePreviousRecords(float):void
+-getWeightDifference(float, WeightRecord):float
+-getChangeType(float):String
++convertWeightRecordsToStringForUi(ArrayList<WeightRecord>):String
++getWeightTrackerDisplay(int):String
+-getRelevantWeightRecords(int):ArrayList<WeightRecord>
+
++getCaloriesRemaining(EntryDatabase):int
++handleGenerateCalorieGoalCommand(float, String):int
++calculateCalorieGoal(float, String):int
+-calculateBasalMetabolicRate():int
+
++preloadUserData(BufferedReader):boolean
++preloadWeightData(BufferedReader):void
+
++getUserDataDisplay():String
++convertUserDataToString():String
++convertWeightDataToString():String
+}
+@enduml
