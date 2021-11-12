@@ -38,6 +38,7 @@ for tech-savvy students who have trouble keeping track of their expenses.
   * [Exit](#exit)
 * [FAQ](#faq)
 * [Command summary](#command-summary)
+* [Glossary](#glossary)
 
 ## <a id="introduction"></a> Introduction
 
@@ -925,5 +926,19 @@ stated in the above command description.
  |20. | `db` | `show all the available database in the user's device` | 
  |21. | `help` | `shows a list of command guides` |
  |22. | `bye` | `terminates the app` |
+
+#### [↑ Back to top](#top)
+
+<br />
+
+# <a id="glossary"></a> Glossary
+
+|no. | Command | Description |
+ |--- | --------- | --------------------------------------- |
+|1.  | `Java` | `Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible.` |
+|2.  | `JDK` | `The Java Development Kit (JDK) is a distribution of Java Technology by Oracle Corporation.` |
+|3.  | `.zip` | `.zip is the file format for ZIP. ZIP is an archive file format that supports lossless data compression.` |
+|4.  | `.bat` | `.bat is the file format for batch file. A batch file is a script file in DOS, OS/2 and Microsoft Windows. It consists of a series of commands to be executed by the command-line interpreter, stored in a plain text file.` |
+|5.  | `.jar` | `.jar is the file format for JAR. A JAR (Java ARchive) is a package file format typically used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file for distribution.` |
 
 #### [↑ Back to top](#top)
