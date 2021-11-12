@@ -1,41 +1,46 @@
 @startuml
 !include Style.puml
 
--> ":ListHabitsCommand": runCommand(goalList: GoalList,\nprintManager:PrintManager, storage:Storage)
-activate ":ListHabitsCommand"
+participant ":ListHabitsCommand" as ListHabitsCommand COMMAND_COLOUR
+participant "goalList: GoalList" as goalList GOAL_COLOUR
+participant "goal:Goal" as goal GOAL_COLOUR
+participant "printManager:PrintManager" as printManager UI_COLOUR
 
-":ListHabitsCommand" -> "goalList:GoalList" :listHabitsFromGoal(goatIndex:int,\nprintManager:PrintManager)
-activate "goalList:GoalList"
-"goalList:GoalList" -> "goalList:GoalList" :getGoal(goalIndex:int)
-activate "goalList:GoalList"
-"goalList:GoalList" --> "goalList:GoalList" :goal:Goal
-deactivate "goalList:GoalList"
+-> ListHabitsCommand: runCommand(goalList: GoalList,\nprintManager:PrintManager, storage:Storage)
+activate ListHabitsCommand
 
-"goalList:GoalList" -> "goal:Goal": getHabitList()
-activate "goal:Goal"
-"goal:Goal" --> "goalList:GoalList": habitList: ArrayList<Habit>
-deactivate "goal:Goal"
+ListHabitsCommand -> goalList :listHabitsFromGoal(goatIndex:int,\nprintManager:PrintManager)
+activate goalList
+goalList -> goalList :getGoal(goalIndex:int)
+activate goalList
+goalList --> goalList :goal:Goal
+deactivate goalList
 
-"goalList:GoalList" -> "goal:Goal": numberOfHabits()
-activate "goal:Goal"
-"goal:Goal" --> "goalList:GoalList" :numOfHabits: int
-deactivate "goal:Goal"
+goalList -> goal: getHabitList()
+activate goal
+goal --> goalList: habitList: ArrayList<Habit>
+deactivate goal
+
+goalList -> goal: numberOfHabits()
+activate goal
+goal --> goalList :numOfHabits: int
+deactivate goal
 
 alt#gold #lightblue numOfHabits = 0
-    "goalList:GoalList" -> ":HabitCommandException": HabitCommandException(message:String)
+    goalList -> ":HabitCommandException": HabitCommandException(message:String)
     activate ":HabitCommandException"
-    ":HabitCommandException" --> "goalList:GoalList"
+    ":HabitCommandException" --> goalList
     deactivate ":HabitCommandException"
 else #lightgreen else
-    "goalList:GoalList" -> "printManager:PrintManager": printHabitList(goalDescription: String, habitList: ArrayList<Habit>, numOfHabits: int)
-    activate "printManager:PrintManager"
-    "printManager:PrintManager" --> "goalList:GoalList"
-    deactivate "printManager:PrintManager"
+    goalList -> printManager: printHabitList(goalDescription: String,\nhabitList: ArrayList<Habit>, numOfHabits: int)
+    activate printManager
+    printManager --> goalList
+    deactivate printManager
 end
 
-"goalList:GoalList" --> ":ListHabitsCommand"
-deactivate "goalList:GoalList"
-<-- ":ListHabitsCommand"
-deactivate ":ListHabitsCommand"
+goalList --> ListHabitsCommand
+deactivate goalList
+<-- ListHabitsCommand
+deactivate ListHabitsCommand
 
 @enduml

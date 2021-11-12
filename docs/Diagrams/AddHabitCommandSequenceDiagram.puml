@@ -2,43 +2,51 @@
 'https://plantuml.com/sequence-diagram
 !include Style.puml
 
--> ":AddHabitCommand": runCommand(goalList: GoalList, \nprintManager: PrintManager, storage: Storage)
-activate ":AddHabitCommand"
+participant ":AddHabitCommand" as AddHabitCommand COMMAND_COLOUR
+participant "goalList:GoalList" as goalList GOAL_COLOUR
+participant "newHabit:Habit" as newHabit HABIT_COLOUR
+participant "goal:Goal" as goal GOAL_COLOUR
+participant "printManager:PrintManager" as printManager UI_COLOUR
 
-":AddHabitCommand" -> "goalList:GoalList":addHabitToGoal(habit:Habit,\ngoalIndex,printManager)
-activate "goalList:GoalList"
 
-"goalList:GoalList" -> "goalList:GoalList": getGoal(goalIndex)
-activate "goalList:GoalList"
-"goalList:GoalList" --> "goalList:GoalList": goal: goal
-deactivate "goalList:GoalList"
 
-ref over "goalList:GoalList": Abstracted checks before\nadding Habit:\n1. Non-repeated Habit name.\n2. Interval for new Habit cannot \nexceed end date of goal.
+-> AddHabitCommand: runCommand(goalList: GoalList, \nprintManager: PrintManager, storage: Storage)
+activate AddHabitCommand
 
-"goalList:GoalList" -> "goalList:GoalList": updateHabitEndDate(goal, habit)
-activate "goalList:GoalList"
-"goalList:GoalList" --> "goalList:GoalList": newHabit: Habit
-deactivate "goalList:GoalList"
+AddHabitCommand -> goalList:addHabitToGoal(habit:Habit,\ngoalIndex,printManager)
+activate goalList
 
-"goalList:GoalList" -> "newHabit:Habit": populateIntervalsDuringHabitCreation()
-activate "newHabit:Habit"
-"newHabit:Habit" --> "goalList:GoalList"
-deactivate "newHabit:Habit"
+goalList -> goalList: getGoal(goalIndex)
+activate goalList
+goalList --> goalList: goal: goal
+deactivate goalList
 
-"goalList:GoalList" -> "goal:Goal": addHabit(newHabit)
-activate "goal:Goal"
-"goal:Goal" --> "goalList:GoalList"
-deactivate "goal:Goal"
+ref over goalList: Abstracted checks before\nadding Habit:\n1. Non-repeated Habit name.\n2. Interval for new Habit cannot \nexceed end date of goal.
 
-"goalList:GoalList" -> "printManager:PrintManager": printAddedHabit(newHabitName, goalDescription)
-activate "printManager:PrintManager"
-"printManager:PrintManager" --> "goalList:GoalList"
-deactivate "printManager:PrintManager"
+goalList -> goalList: updateHabitEndDate(goal, habit)
+activate goalList
+goalList --> goalList: newHabit: Habit
+deactivate goalList
 
-"goalList:GoalList" --> ":AddHabitCommand"
-deactivate "goalList:GoalList"
-<--":AddHabitCommand"
-deactivate ":AddHabitCommand"
+goalList -> newHabit: populateIntervalsDuringHabitCreation()
+activate newHabit
+newHabit --> goalList
+deactivate newHabit
+
+goalList -> goal: addHabit(newHabit)
+activate goal
+goal --> goalList
+deactivate goal
+
+goalList -> printManager: printAddedHabit(newHabitName, goalDescription)
+activate printManager
+printManager --> goalList
+deactivate printManager
+
+goalList --> AddHabitCommand
+deactivate goalList
+<--AddHabitCommand
+deactivate AddHabitCommand
 
 
 @enduml

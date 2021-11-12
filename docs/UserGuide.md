@@ -214,7 +214,7 @@ Here are three things to note:
 ### 2.2 Icons
 Unfamiliar symbols may confuse. Here is a comprehensive collection of all emojis and syntax we employ.  
 
-> 📃 **Notes**: important information you should take note off (especially if you encounter input errors)
+> 📃 **Notes**: important information you should take note of (especially if you encounter input errors)
 
 > ⚠ **Warning**: avoid doing the things mentioned here at all costs (unless you're feeling lucky)
  
@@ -239,15 +239,18 @@ Do follow the instructions before typing anything, lest _Ha(ppy)Bit_ does not re
 On the topic of inputs...
 
 ### 3.2 Command Format
-_Ha(ppy)Bit_ is very particular about your commands. You begin off with a "command word" to tell _Ha(ppy)Bit_ the exact 
+_Ha(ppy)Bit_ is very particular about your commands. You begin off with a **"command"** word to tell _Ha(ppy)Bit_ the exact 
 action to carry out (See [Command Summary](#7-command-summary) for all actions). The actions are then followed up with
 "parameters", which are information you wish to pass to _Ha(ppy)Bit_ to carry out the actions with it. The various 
 parameters are prefixed with different flags, which help _Ha(ppy)Bit_ identify and distinguish the type of parameters.
 
 A command could look like this: `add n/Run 2.4km g/1 i/7`. Where, <br>
-`add` is the command word, <br>
-`Run 2.4km`, `1`, and `7` are parameters, <br>
-and `n/`, `g/`, and `i/` are flags.
+`add` is the _command_ word, <br>
+`Run 2.4km`, `1`, and `7` are _parameters_, <br>
+and `n/`, `g/`, and `i/` are _flags_.
+
+> 📃 Don't worry if you typed the command wrongly! Helpful error messages will pop up to advise you on what to change. 
+> 👍
 
 Here are guidelines and tips for the command format:
 * **Commands** are only accepted when you see `Command: ` on the screen (See [Main Interface](#12-main-interface)). 
@@ -273,7 +276,7 @@ Below are the commands supported by the application.
 Each section describes the function of each command and its format. <br>
 
 ### 4.1 Ask for Help: `help`
-What did you say? You're not sure what the commands are? Relax, that's why the `help` command exists.\
+What did you say? You're not sure what the commands are? Relax, a `help` command exists.\
 This command displays a list of all possible commands.
 If an invalid command is typed, this command will be invoked by default.
 
@@ -380,6 +383,8 @@ when we have the occasional oopsies. 👍 )
 
 **Format:** `update g/<goal_index> [ n/<goal_name> t/<goal_type> e/<end_date> ]`
 
+* Goal Index has to be provided
+
 **Example:**\
 Command 1: `update g/1 n/Read more`\
 Command 2: `update g/2 e/31122021`\
@@ -440,6 +445,10 @@ Change and update the name and/or interval of a habit.
 **Format:** `change g/<goal_index> h/<habit_index> [ n/<habit_name> i/<interval> ]`
 * You may change either the `habit_name` or `interval` with 2 separate commands, or both at the same time
 * There must be at least one parameter changed - otherwise why call this command at all?
+
+* Goal Index and Habit Index has to be provided
+* Interval cannot be changed to 0
+* Interval added cannot exceed end date of goal from current date of change
 
 **Example:**\
 Command 1: `change g/2 h/1 i/7`\

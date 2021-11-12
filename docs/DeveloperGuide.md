@@ -103,7 +103,7 @@ The following section covers basic setup instructions to get you up and running 
 1. Ensure that you have installed Java SE Development Kit (JDK) `11` on your computer. If you do not have it installed, 
    you may download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
 2. We recommend using [IntelliJ IDEA](https://www.jetbrains.com/idea/download/).
-3. Fork this [repository](https://github.com/AY2122S1-CS2113T-F14-1/tp), and clone the fork to your computer.
+3. Fork our [repository](https://github.com/AY2122S1-CS2113T-F14-1/tp), and clone the fork to your computer.
 
 ### 2.2. Project Set-Up
 
@@ -137,19 +137,21 @@ The 5 main components of the architecture diagram are:
 4. `Goal` : Contains the data of all goals, habits and intervals, as well as the logic to update them
 5. `Storage` : Facilitates transfer of data between the application and external storage files
 
-The sequence diagram below shows how the components interact with each other for the scenario where the user issues the
+The sequence diagram below shows how the components interact with each other for the scenario where you issue the
 command `remove g/1` to remove the goal at index 1.
 
 ![Architecture Sequence Diagram](Diagram_Images/Design_Diagram_Images/ArchitectureSequenceDiagram.png)
 
+We will now explain the 5 individual components, beginning with the UI Component.
+
 ### 3.2. UI Component
 
-The UI component is responsible for all user interfaces of the application. However, the component is further divided
+Firstly, the UI component is responsible for all user interfaces of the application. However, the component is further divided
 into 2 sub-components: `UiManager.java` for static interface displays, and `PrintManager.java` for dynamic interface
 displays (display messages in response to user input). The diagrams below illustrates the high level representation of
 each sub-component.
 
-### 3.2.1 UiManager
+#### 3.2.1 UiManager
 ![Ui Manager](Diagram_Images/Design_Diagram_Images/UiManagerComponent.png)
 
 **API:** `UiManager.java`
@@ -157,23 +159,23 @@ each sub-component.
 1. `UiStartup` will be called upon starting the application (we refer to this as the start state).
 2. `UiMain` will be called upon entering the main state of the application (the main state is entered when you select
     the option `[5] Start Application` in the start state).
-3. `UiMain` calls `Goal` to display a static view of all habits to be done for the day.
+3. `UiMain` calls `Goal` to display a static view of all your habits to be done for the day.
 4. `UiMain` calls `Storage` to display alerts for status of storage imports and exports.
 
-### 3.2.2 PrintManager
+#### 3.2.2 PrintManager
 ![Print Manager](Diagram_Images/Design_Diagram_Images/PrintManagerComponent.png)
 
 **API:** `PrintManager.java`
 
 1. `PrintManager` is called upon by user commands to display text or error messages.
-2. `PrintManager` may call `PrintTable` to print a list of items in a tabular format, for example when a user inputs
+2. `PrintManager` may call `PrintTable` to print a list of items in a tabular format, for example when you input
 the `help` command to view a summary of formats of relevant commands in a tabular form.
 3. `PrintManager` depends on `Goal` and `Habit` to print goal-related and habit-related information respectively.
 
 ### 3.3. Parser Component
 
-The Parser component is responsible for parsing and checking the logic of the user input. The diagram below illustrates
-the high level representation of the component.
+Our second component is the Parser component, responsible for parsing and checking the logic of the user input. 
+The diagram below illustrates the high level representation of the component.
 
 ![Parser Component](Diagram_Images/Design_Diagram_Images/ParserComponent.png)
 
@@ -181,14 +183,14 @@ the high level representation of the component.
 
 1. A user input is given to `ParserManager` that determines which subclass of `Parser` is required
 2. Inputs starting with `help`, `return`, and `exit` are handled by `ParserManager`
-3. Other inputs are handled by `Parser`, which has a total of 7 subclasses
-4. `AddParser` handles the parsing of inputs starting with `set` and `add`
-5. `DeleteParser` handles the parsing of inputs starting with `remove` and `delete`
-6. `DoneParser` handles the parsing of inputs starting with `done`
-7. `ListGoalParser` handles the parsing of inputs starting with `list`
-8. `ListHabitParser` handles the parsing of inputs starting with `view`
-9. `UpdateParser` handles the parsing of inputs starting with `update` and `change`
-10. `SetParser` Handles the parsing of inputs starting with `goal`
+3. Other inputs are handled by `Parser`, which has a total of 7 subclasses:
+   1. `AddParser` handles the parsing of inputs starting with `set` and `add`
+   2. `DeleteParser` handles the parsing of inputs starting with `remove` and `delete`
+   3. `DoneParser` handles the parsing of inputs starting with `done`
+   4. `ListGoalParser` handles the parsing of inputs starting with `list`
+   5. `ListHabitParser` handles the parsing of inputs starting with `view`
+   6. `UpdateParser` handles the parsing of inputs starting with `update` and `change`
+   7. `SetParser` Handles the parsing of inputs starting with `goal`
 
 The sequence diagram below illustrates the flow of logic when a generic user input is entered into the application.
 
@@ -343,6 +345,8 @@ This section describes the implementation of how the user can display a list of 
 
 #### 4.3.1. Implementation
 
+//TODO LIST HAS A PARSER
+
 1. Since the command for listing goals does not require any parameters, using `ParserManager` to detect the command word
    `list` is sufficient to execute the command.
 2. The `ListGoalsCommand#runCommand(goalList, printManager, storage)` method is called, which in turns calls the
@@ -461,12 +465,16 @@ you decide not to pursue any further or may deem to be irrelevant.
 A `DeleteGoalCommand` object is returned from the `DeleteParser` if the user input is successfully parsed as shown below.
 If the delete command is not provided with a goal index, it will throw an exception.
 
+![](Diagram_Images/Implementation_Diagram_Images/DeleteGoalCommandParserSequenceDiagram.png))
+
 When the `runCommand` method is executed for the `DeleteGoalCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:
 
 ![](Diagram_Images/Implementation_Diagram_Images/DeleteGoalCommandSequenceDiagram.png)
 
 ### 4.9. Deleting a Habit
+
+![](Diagram_Images/Implementation_Diagram_Images/DeleteHabitCommandParserSequenceDiagram.png)
 
 When the `runCommand` method is executed for the `DeleteHabitCommand` object, the following steps as indicated by the
 sequence diagram below is carried out:

@@ -1,16 +1,19 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+
 !include Style.puml
 
 mainframe sd Add Goal Parsing
 
--> ":AddParser": parseAddGoalCommand\n(commandInstruction:String)
-activate ":AddParser"
+participant ":AddParser" as AddParser PARSER_COLOUR
+participant ":Goal" as Goal GOAL_COLOUR
 
-":AddParser" -> ":AddParser": getGoal(commandInstruction:String)
-activate ":AddParser"
+-> AddParser: parseAddGoalCommand\n(commandInstruction:String)
+activate AddParser
 
-ref over ":AddParser"
+AddParser -> AddParser: getGoal(commandInstruction:String)
+activate AddParser
+
+ref over AddParser
 Obtain parameters for Goal:
 goalName
 goalType
@@ -18,16 +21,16 @@ startDate
 endDate
 end
 
-create ":Goal"
-":AddParser" -> ":Goal": new Goal(goalName,goalType,startDate, endDate)
-activate ":Goal"
-":Goal" --> ":AddParser":
-deactivate ":Goal"
+create Goal
+AddParser -> Goal: new Goal(goalName,goalType,startDate, endDate)
+activate Goal
+Goal --> AddParser:
+deactivate Goal
 
-":AddParser" --> ":AddParser": goal: Goal
-deactivate ":AddParser"
+AddParser --> AddParser: goal: Goal
+deactivate AddParser
 
-<-- ":AddParser": AddGoalCommand(goal)
-deactivate ":AddParser"
+<-- AddParser: AddGoalCommand(goal)
+deactivate AddParser
 
 @enduml

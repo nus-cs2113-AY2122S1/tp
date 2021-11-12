@@ -14,11 +14,11 @@ public class UpdateHabitCommand extends UpdateCommand {
     protected int habitIndex;
     protected String newHabitName; // index 0
     protected int newHabitInterval; // index 1
-    protected int[] updateAttributes;
+    protected ArrayList<Boolean> updateAttributes;
     protected ArrayList<String> excessAttributes;
 
     public UpdateHabitCommand(int goalIndex, int habitIndex, String habitName, int interval,
-            int[] updateAttributes, ArrayList<String> excessAttributes) {
+                              ArrayList<Boolean> updateAttributes, ArrayList<String> excessAttributes) {
         this.goalIndex = goalIndex;
         this.habitIndex = habitIndex;
         this.newHabitName = habitName;
@@ -54,7 +54,7 @@ public class UpdateHabitCommand extends UpdateCommand {
         return newHabitInterval;
     }
 
-    public int[] getUpdateAttributes() {
+    public ArrayList<Boolean> getUpdateAttributes() {
         return updateAttributes;
     }
 

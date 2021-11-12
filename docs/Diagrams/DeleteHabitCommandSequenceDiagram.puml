@@ -2,43 +2,54 @@
 
 !include Style.puml
 
--> ": DeleteHabitCommand": runCommand\n(goalList: GoalList,\n printManager: PrintManager,\n storage: Storage)
-activate ": DeleteHabitCommand"
+participant ": DeleteHabitCommand" as DeleteHabitCommand COMMAND_COLOUR
+participant "goalList: GoalList" as goalList GOAL_COLOUR
+participant "goal: Goal" as goal GOAL_COLOUR
+participant "habitList: ArrayList<habit>" as habitList HABIT_COLOUR
+participant "habit: Habit" as habit HABIT_COLOUR
+participant "printManager: PrintManager" as printManager UI_COLOUR
 
-": DeleteHabitCommand" -> "goalList: GoalList": deleteHabitFromGoal\n(goalIndex: int,\n habitIndex: int,\n printManager: PrintManager)
-activate "goalList: GoalList"
+-> DeleteHabitCommand: runCommand(\ngoalList: GoalList,\n printManager: PrintManager,\n storage: Storage)
+activate DeleteHabitCommand
 
-create "goal: Goal"
-"goalList: GoalList" -> "goal: Goal": getGoal(goalIndex: int)
-activate "goal: Goal"
-"goalList: GoalList" <-- "goal: Goal"
+DeleteHabitCommand -> goalList: deleteHabitFromGoal(\ngoalIndex: int,\n habitIndex: int,\n printManager: PrintManager)
+activate goalList
 
-create "habitList: ArrayList<habit>"
-"goalList: GoalList" -> "habitList: ArrayList<habit>"
-activate "habitList: ArrayList<habit>"
-"goal: Goal" <- "habitList: ArrayList<habit>": getHabitList()
-"goal: Goal" --> "habitList: ArrayList<habit>"
-"goalList: GoalList" <-- "habitList: ArrayList<habit>"
+create goal
+goalList -> goal: getGoal(goalIndex: int)
+activate goal
+goalList <-- goal
 
-create "habit: Habit"
-"goalList: GoalList" -> "habit: Habit"
-activate "habit: Habit"
-"habitList: ArrayList<habit>" <- "habit: Habit": getHabit\n(habitList: ArrayList<Habit>,\n habitIndex: int)
-"habitList: ArrayList<habit>" --> "habit: Habit": habit
-"goalList: GoalList" <-- "habit: Habit"
+create habitList
+goalList -> habitList
+activate habitList
+goal <- habitList: getHabitList()
+goal --> habitList
+goalList <-- habitList
 
-
-"goalList: GoalList" -> "goal: Goal": removeHabit(habitIndex: int)
-"goal: Goal" -> "goal: Goal": remove(habitIndex: int)
-activate "goal: Goal"
-"goal: Goal" --> "goal: Goal"
-deactivate "goal: Goal"
-"goalList: GoalList" <-- "goal: Goal"
+create habit
+goalList -> habit
+activate habit
+habitList <- habit: getHabit(\nhabitList: ArrayList<Habit>,\n habitIndex: int)
+habitList --> habit: habit
+goalList <-- habit
 
 
-"goalList: GoalList" -> "goal: Goal": printRemovedHabit\n(goal.getDescription(): String,\n habit.getHabitName(): String)
-"goal: Goal" -> "habit: Habit"
-"habit: Habit" -> ": PrintManager"
-activate ": PrintManager"
+goalList -> goal: removeHabit(habitIndex: int)
+goal -> goal: remove(habitIndex: int)
+activate goal
+goal --> goal
+deactivate goal
+goalList <-- goal
+
+
+goalList -> goal: printRemovedHabit(\ngoal.getDescription(): String,\n habit.getHabitName(): String)
+goal -> habit
+habit -> printManager
+activate printManager
+
+return
+
+return
 
 @enduml
