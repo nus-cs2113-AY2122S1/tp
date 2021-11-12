@@ -518,6 +518,8 @@ Input:
 ````
 Enter your command: view filter category food
 ````
+<div style="page-break-after: always;"></div>
+
 If successful, the output will be as follows:
 ````
 1.  In-and-Out Burgers
@@ -558,6 +560,8 @@ delete [expense-number]
 and can be found by using `list` while a trip is open.
 - `delete last` to delete the last added expense.
   - Note: After deletion, you will not be able to use this command again until you add another expense.
+
+<div style="page-break-after: always;"></div>
 
 For example,
 
@@ -604,7 +608,8 @@ Ben owes USD $30.00 (SGD $40.54) to Jerry
 Ben does not owe anything to Dick
 Ben owes USD $7.00 (SGD $9.46) to Eve
 ```
-<br /><br />
+<div style="page-break-after: always;"></div>
+
 #### Optimize Transactions
 
 Shows the most optimized number of transactions to ensure that everyone is being paid back. User needs to have opened a trip and have expenses to use the command. 
@@ -651,6 +656,8 @@ summary [name]
 - `[name]` is an optional argument.
 - Note that entering `summary` without a name will print the summary of everybody in the opened trip.
 
+<div style="page-break-after: always;"></div>
+
 For example,
 
 Input:
@@ -688,8 +695,6 @@ help
 
 For example,
 
-<div style="page-break-after: always;"></div>
-
 Input:
 
 ```
@@ -708,6 +713,7 @@ Output for if trip is open:
 You are inside a trip. Trip specific commands:
 	<more help information will be displayed here>
 ````
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
