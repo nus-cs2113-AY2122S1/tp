@@ -690,9 +690,9 @@ Shows a quick help message, depending on which stage the user is at.
 
 Input syntax:
 
-``
+```
 help
-``
+```
 
 For example,
 
@@ -709,12 +709,13 @@ While a trip is open, type "expense" to create an expense for that trip
 Type "quit" to exit
 ````
 
+<div style="page-break-after: always;"></div>
+
 Output for if trip is open:
 ````
 You are inside a trip. Trip specific commands:
 	<more help information will be displayed here>
 ````
-<div style="page-break-after: always;"></div>
 
 ## FAQ
 
