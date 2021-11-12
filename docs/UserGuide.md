@@ -5,7 +5,7 @@ Budget Tracker is a free, easy-to-use desktop app for managing finances, optimiz
 for tech-savvy students who have trouble keeping track of their expenses. 
 You can use Budget Tracker to manage your budget, expenditures and loans lent out to other parties for the month, and 
 easily access and retrieve this information with a single command. 
-To aid you in spending better, Budget Tracker also displays useful data and statistics about your spending habits for the month.
+To improve your spending habits, Budget Tracker also displays useful data and statistics about it for the month.
 
 ## <a id="top"></a> Table of Content
 * [Intro](#introduction)
@@ -276,7 +276,7 @@ _________________________________________________________
 
 ### <a id="edit-expenditure"></a> `-e` : Edit an Expenditure 
 
-> 😃 An expenditure record has many values, and editing everything is hassle for just one mistake. 
+> 😃 An expenditure record has many values, and editing all of them is a hassle for just one mistake. 
 > Luckily, this feature allows you to edit any of the values in your expenditures as long as you specify them!
 
 Edits any of the values of an expenditure, including its _description_, _amount_, _date of expenditure_ and _category_.
