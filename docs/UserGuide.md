@@ -480,6 +480,127 @@ _________________________________________________________
 
 <br />
 
+# <a id="delete"></a> &nbsp;&nbsp;  Delete: `delete`
+
+Deletes an entry / entries from the budget tracker data set.
+<br />
+
+_________________________________________________________
+
+### <a id="delete-budget"></a> `-b` - Delete a budget
+
+Deletes the budget of a specific month
+
+Format: `delete -b m/MONTH`
+
+> ❗ Notes about Parameters
+> *  `MONTH` indicates the month that this record belongs in.
+     >   *  Must strictly be within the range of 1 to 12.
+
+Example of usage:
+
+`delete -b m/10`
+
+Expected outcome: Budget in October is successfully deleted.
+```
+========================================================
+Successfully deleted the Budget for this month!
+Now the budget amount is 0.00!      
+========================================================
+```
+#### [↑ Back to top](#top)
+<br />
+
+_________________________________________________________
+
+
+### <a id="delete-expenditure"></a> `-e` - Delete (an) expenditure(s)
+
+Deletes (an) expenditure(s) of a specific month.
+
+Format:`delete -e m/MONTH`
+<br/> `delete -e  m/MONTH i/INDEX`
+<br/> `delete -e m/MONTH/ i/INDEX_FROM-INDEX_TO `
+
+> ❗ Notes about Parameters
+> *  `MONTH` indicates the month that this record belongs in.
+     >   *  Must strictly be within the range of 1 to 12.
+> *  `INDEX` indicates the index position of this record in the month.
+     >   *  Must strictly be within the list range.
+
+Examples of usage:
+
+`delete -e m/10 i/3-5`
+
+Expected outcome: Expenditures of indexes 3-5 in October are deleted accordingly.
+```
+========================================================
+Successfully deleted Expenditure 3:
+Description: breakfast
+Amount: $100.00
+Date: 2021-10-10
+Category: GENERAL
+========================================================
+Successfully deleted Expenditure 4:
+Description: lunch
+Amount: $100.00
+Date: 2021-10-10
+Category: GENERAL
+========================================================
+Successfully deleted Expenditure 5:
+Description: dinner
+Amount: $100.00
+Date: 2021-10-10
+Category: GENERAL
+========================================================
+Total Amount Spent in October: $100.00
+Percentage of Budget Left: 99.00%
+========================================================
+```
+#### [↑ Back to top](#top)
+<br />
+
+_________________________________________________________
+
+
+### <a id="delete-loan"></a> `-l` - Delete (a) loan record(s)
+
+Deletes (a) loan record(s) of a specific month
+
+Format:`delete -l m/MONTH`
+<br/> `delete -l m/MONTH i/INDEX`
+<br/> `delete -l m/MONTH i/INDEX_FROM-INDEX_TO`
+
+> ❗ Notes about Parameters
+> *  `MONTH` indicates the month that this record belongs in.
+     >   *  Must strictly be within the range of 1 to 12.
+> *  `INDEX` indicates the index position of this record in the month.
+     >   *  Must strictly be within the list range.
+
+Examples of usage:
+
+`delete -l m/10 i/1-2`
+
+Expected outcome: Loans of indexes 1 to 2 are deleted accordingly.
+```
+========================================================
+Successfully deleted Loan 1:
+Debtor: xinghan
+Amount: $100.00
+Date: 2021-10-10
+========================================================
+Successfully deleted Loan 2:
+Debtor: kobe
+Amount: $200.00
+Date: 2021-10-03
+========================================================
+```
+#### [↑ Back to top](#top)
+<br />
+
+_________________________________________________________
+<br />
+
 # <a id="dbselect"></a> &nbsp;&nbsp; Switching Database Year: `year`
 
 > 😃 Looking to record down past finances? This command allows you to switch between different database years you are working on seamlessly.
@@ -532,127 +653,6 @@ Expected outcome: All records that contains the `Chicken` keyword will be return
 
 _________________________________________________________
 
-<br />
-
-# <a id="delete"></a> &nbsp;&nbsp;  Delete: `delete`
-
-Deletes an entry / entries from the budget tracker data set.
-<br />
-
-_________________________________________________________
-
-### <a id="delete-budget"></a> `-b` - Delete a budget
-
-Deletes the budget of a specific month
-
-Format: `delete -b m/MONTH`
-
-> ❗ Notes about Parameters
-> *  `MONTH` indicates the month that this record belongs in.
- >   *  Must strictly be within the range of 1 to 12.
-
-Example of usage:
-
-`delete -b m/10`
-
-Expected outcome: Budget in October is successfully deleted.
-```
-========================================================
-Successfully deleted the Budget for this month!
-Now the budget amount is 0.00!      
-========================================================
-```
-#### [↑ Back to top](#top)
-<br />
-
-_________________________________________________________
-
-
-### <a id="delete-expenditure"></a> `-e` - Delete (an) expenditure(s)
-
-Deletes (an) expenditure(s) of a specific month.
-
-Format:`delete -e m/MONTH` 
-<br/> `delete -e  m/MONTH i/INDEX`
-<br/> `delete -e m/MONTH/ i/INDEX_FROM-INDEX_TO `
-
-> ❗ Notes about Parameters
-> *  `MONTH` indicates the month that this record belongs in.
->   *  Must strictly be within the range of 1 to 12.
-> *  `INDEX` indicates the index position of this record in the month.
- >   *  Must strictly be within the list range.
-
-Examples of usage:
-
- `delete -e m/10 i/3-5`
-
-Expected outcome: Expenditures of indexes 3-5 in October are deleted accordingly.
-```
-========================================================
-Successfully deleted Expenditure 3:
-Description: breakfast
-Amount: $100.00
-Date: 2021-10-10
-Category: GENERAL
-========================================================
-Successfully deleted Expenditure 4:
-Description: lunch
-Amount: $100.00
-Date: 2021-10-10
-Category: GENERAL
-========================================================
-Successfully deleted Expenditure 5:
-Description: dinner
-Amount: $100.00
-Date: 2021-10-10
-Category: GENERAL
-========================================================
-Total Amount Spent in October: $100.00
-Percentage of Budget Left: 99.00%
-========================================================
-```
-#### [↑ Back to top](#top)
-<br />
-
-_________________________________________________________
-
-
-### <a id="delete-loan"></a> `-l` - Delete (a) loan record(s)
-
-Deletes (a) loan record(s) of a specific month
-
-Format:`delete -l m/MONTH` 
-<br/> `delete -l m/MONTH i/INDEX`
-<br/> `delete -l m/MONTH i/INDEX_FROM-INDEX_TO`
-
-> ❗ Notes about Parameters
-> *  `MONTH` indicates the month that this record belongs in.
->   *  Must strictly be within the range of 1 to 12.
-> *  `INDEX` indicates the index position of this record in the month.
->   *  Must strictly be within the list range.
-
-Examples of usage:
-
- `delete -l m/10 i/1-2`
-
-Expected outcome: Loans of indexes 1 to 2 are deleted accordingly.
-```
-========================================================
-Successfully deleted Loan 1:
-Debtor: xinghan
-Amount: $100.00
-Date: 2021-10-10
-========================================================
-Successfully deleted Loan 2:
-Debtor: kobe
-Amount: $200.00
-Date: 2021-10-03
-========================================================
-```
-#### [↑ Back to top](#top)
-<br />
-
-_________________________________________________________
 
 <br />
 
