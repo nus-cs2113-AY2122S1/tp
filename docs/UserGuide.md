@@ -50,7 +50,7 @@ This user guide is written to assist you in making full use of SLAM's available 
 
 ## 1. Quick Start
 
-1. Ensure that you have Java 11 or above [installed]() on your computer.
+1. Ensure that you have Java 11 or above [installed](#8-faq) on your computer.
 2. Download the latest `.jar` file release of SLAM from [here](https://github.com/AY2122S1-CS2113T-W12-3/tp/).
 3. Place the downloaded `.jar` file in the directory you intend to store SLAM’s data at.
 4. Double-click the `.jar` file to launch the app. If double-clicking does not work, open the command prompt, navigate
