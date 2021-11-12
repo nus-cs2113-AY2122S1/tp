@@ -274,13 +274,13 @@ Here are guidelines and tips for the command format:
   (e.g. `add` requires the `n/`, `g/` and `i/` flag, and possible variations include `add n/habit 1 g/1 i/1` and
   `add i/1 n/habit 1 g/1`)
 * **Commands** with repeated parameters with the same flag will be accepted without error,
-  however only the parameter than came first will be taken as valid.
+  however only the parameter that came first will be taken as valid.
   (e.g. `update g/1 n/gibberish n/malarkey` will be accepted as if it was `update g/1 n/gibberish`)
 * **Parameters** `<goal_index>` and `<habit_index>`can be checked with the commands `list` and `view` respectively.
 * **Parameters** enclosed in angle brackets `<>` are meant to be replaced.\
   (e.g. `view g/<goal_index>` could be `view g/1`)
 * **Parameters** enclosed within curly brackets, `{}` are optional 
-* **Parameters** enclosed withing square brackets, `[]` indicate that at least one of the parameters is required
+* **Parameters** enclosed within square brackets, `[]` indicate that at least one of the parameters is required
 * **Flags** should have a whitespace before them <br>
   (e.g. `view g/1` instead of `viewg/1`)
 
@@ -301,7 +301,7 @@ If an invalid command is typed, this command will be invoked by default.
 
 **Output:**
 ```
-Here are the list of commands:
+Here is the list of commands:
 --------------------------------------------------------------------------------------------------------------
 | Action                            | Format                                                                 | 
 --------------------------------------------------------------------------------------------------------------
@@ -341,7 +341,7 @@ Press enter ONCE to return to command mode...
 
 ### 4.2 Set a Goal: `set`
 Sets a new goal for a long term achievement you wish to accomplish. Goals must have an end date while the goal type and
-start dates are optional (well, we wouldn't you to be procrastinating on your goals right?)
+start dates are optional (well, we wouldn't want you to be procrastinating on your goals right?)
 
 **Format:** `set n/<goal_name> { t/<goal_type> s/<start_date> } e/<end_date>`
 
@@ -370,7 +370,7 @@ Output 3: `The goal '[FD] Become a vegetarian' has been added.`
 <div style="page-break-after: always;"></div>
 
 ### 4.3 List all Goals: `list`
-Can't remember what goals you have? Use this command to list all goals that you have set. 
+Can't remember what goals you have? Use this command to list all the goals that you have set. 
 In addition, you get to view some useful statistics.
 
 **Format:** `list`
@@ -448,7 +448,7 @@ ________________________________________________________________________________
 
 ### 4.6 Add a Habit: `add`
 Adds a habit that is linked to a goal.\
-(Habits are meant to easy and doable. Completing them over time, with consistent dedication, 
+(Habits are meant to be easy and doable. Completing them over time, with consistent dedication, 
 one of these habits will be the metaphorical straw that breaks the camel's back. Your goals reached,
 without even pulling a muscle.)
 
@@ -514,7 +514,7 @@ ________________________________________________________________________________
 
 ### 4.9 Delete a Habit: `delete`
 Deletes a habit under a goal.\
-(This should be used a last resort. Don't give up, hang in there and make your habits stick.)
+(This should be used as a last resort. Don't give up, hang in there and make your habits stick.)
 
 **Format:** `delete g/<goal_index> h/<habit_index>`
 
@@ -587,7 +587,7 @@ Option:
 <div style="page-break-after: always;"></div>
 
 ### 4.12 Exit the Program: `exit`
-Exits the program.\
+Exit the program.\
 (Don't stay on _Ha(ppy)Bit_ too long. You have a life out there, go live it!)
 
 > ⚠ Make sure to use this command before exiting the program to ensure that your data is saved properly.
@@ -624,7 +624,7 @@ data stored in the storage file and corrupt it.
 
 **Saving data:**
 
-* Everytime you make changes to any of your data, the changes
+* Every time you make changes to any of your data, the changes
   are **immediately** reflected in the storage file. This is to ensure that in the
   event you closed the program without using the command `exit`, we can ensure that
   **most of your data are saved**.
@@ -683,7 +683,7 @@ to explore and geek out on. What did you say? An explanation for the inner worki
 Here is our [Developer Guide](https://ay2122s1-cs2113t-f14-1.github.io/tp/DeveloperGuide.html).
 
 What now? You prefer a ***guided walkthrough*** because of the digital age and the attention economy today where
-corporations bombard your with enticing information to profit of your valuable attention 
+corporations bombard your with enticing information to profit off your valuable attention 
 has shortened your attention span tremendously such that you don't have the patience nor focus to sit down and refer
 to our User Guide which we have painstakingly written to be comprehensive for users like you in order to provide a 
 better user experience to a new app they may be unfamiliar with? Fine! We get it! We have prepared a 
