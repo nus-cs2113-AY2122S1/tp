@@ -171,7 +171,7 @@ public abstract class UpdateParser extends Parser {
     }
 
     private static void checkValidMember(int memberIndex, Task task) throws ExistingMemberException {
-        if (memberIndex >= task.memberList.size() || memberIndex < 0) {
+        if (memberIndex >= Duke.memberRoster.size() || memberIndex < 0) {
             throw new IndexOutOfBoundsException();
         }
         Member memberAdded = task.getFromMemberList(memberIndex);
