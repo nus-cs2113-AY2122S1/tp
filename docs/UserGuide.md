@@ -24,7 +24,7 @@ This user guide is written to assist you in making full use of SLAM's available 
     4. [Mark an event as undone](#34-mark-an-event-as-undone)
     5. [Delete an event](#35-delete-an-event)
     6. [Delete all events](#36-delete-all-events)
-    7. [Find Event(s) based on keywords(s)](#37-find-events-based-on-keywords)
+    7. [Find event(s) based on keywords(s)](#37-find-events-based-on-keywords)
     8. [Display next upcoming event](#38-display-next-upcoming-event)
     9. [Update an event](#39-update-an-event)
 4. [Task Commands](#4-task-commands)
