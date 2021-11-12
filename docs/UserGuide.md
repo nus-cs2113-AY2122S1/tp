@@ -7,7 +7,7 @@ You can use Budget Tracker to manage your budget, expenditures and loans lent ou
 easily access and retrieve this information with a single command. 
 To improve your spending habits, Budget Tracker also displays useful data and statistics about it for the month.
 
-<div style="page-break-after: always"></div>
+<div style="page-break-after: always;"></div>
 
 ## <a id="top"></a> Table of Content
 * [Intro](#introduction)
@@ -929,8 +929,7 @@ Bye, see you again soon!
 <br />
   
 * Why are users able to delete the expenditures they have already recorded?
-  * Some users like to record expenditures in advance if they know they are going to spend it.
-  This feature allows them to change their plans after finding out that they might exceed their budget.
+  * Some users might record expenditures in advance. This feature allows them to change their plans after finding out that they might exceed their budget, thus removing it from the list.
   * Users might have made a refund after spending money on some returnable products such as clothes, shoes, and so on.
   
   <br />
