@@ -1,0 +1,113 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+-> ":ConverterToCSV": convertToCsvFile(AllRecordList monthlyRecordList, String csvDirectory)
+
+activate ":ConverterToCSV"
+
+create ":File"
+":ConverterToCSV" -> ":File": new File(csvDirectory)
+activate ":File"
+":File" --> ":ConverterToCSV": File
+deactivate ":File"
+
+create ":PrintWriter"
+":ConverterToCSV" -> ":PrintWriter": new PrintWriter()
+activate ":PrintWriter"
+
+create ":FileWriter"
+":PrintWriter" -> ":FileWriter": new FileWriter(storageDirectory)
+activate ":FileWriter"
+
+":FileWriter" --> ":PrintWriter": FileWriter
+deactivate ":FileWriter"
+
+":PrintWriter" --> ":ConverterToCSV": PrintWriter
+deactivate ":PrintWriter"
+
+loop until all the 12 months of budget have been stored into csv file
+":ConverterToCSV" -> ":AllRecordList": getMonthRecord()
+
+activate ":AllRecordList"
+":AllRecordList" --> ":ConverterToCSV"
+deactivate ":AllRecordList"
+
+":ConverterToCSV" -> ":PrintWriter": println(budgetDetails)
+activate ":PrintWriter"
+":PrintWriter" --> ":ConverterToCSV"
+deactivate ":PrintWriter"
+
+":ConverterToCSV" -> ":PrintWriter": flush()
+activate ":PrintWriter"
+":PrintWriter" --> ":ConverterToCSV"
+deactivate ":PrintWriter"
+
+loop until each month's expenditure have been written into the csv file
+":ConverterToCSV" -> ":ConverterToCSV":writeExpenditureCsv()
+activate ":ConverterToCSV"
+
+":ConverterToCSV" -> ":RecordList": getExpenditureRecord()
+
+activate ":RecordList"
+":RecordList" -> ":RecordList":get()
+activate ":RecordList"
+":RecordList" --> ":RecordList"
+deactivate ":RecordList"
+":RecordList" --> ":ConverterToCSV":
+deactivate ":RecordList"
+
+":ConverterToCSV" -> ":PrintWriter": println(expenditureDetails)
+activate ":PrintWriter"
+":PrintWriter" --> ":ConverterToCSV"
+deactivate ":PrintWriter"
+
+":ConverterToCSV" -> ":PrintWriter": flush()
+activate ":PrintWriter"
+":PrintWriter" --> ":ConverterToCSV"
+deactivate ":PrintWriter"
+":ConverterToCSV" --> ":ConverterToCSV"
+
+deactivate ":ConverterToCSV"
+
+end
+
+loop until each month's loan have been written into the csv file
+":ConverterToCSV" -> ":ConverterToCSV":writeExpenditureCsv()
+activate ":ConverterToCSV"
+
+":ConverterToCSV" -> ":RecordList": getLoanRecord()
+activate ":RecordList"
+":RecordList" -> ":RecordList":get()
+activate ":RecordList"
+":RecordList" --> ":RecordList"
+deactivate ":RecordList"
+":RecordList" --> ":ConverterToCSV":
+deactivate ":RecordList"
+
+":ConverterToCSV" -> ":PrintWriter": println(loanDetails)
+activate ":PrintWriter"
+":PrintWriter" --> ":ConverterToCSV"
+deactivate ":PrintWriter"
+
+":ConverterToCSV" -> ":PrintWriter": flush()
+activate ":PrintWriter"
+":PrintWriter" --> ":ConverterToCSV"
+deactivate ":PrintWriter"
+":ConverterToCSV" --> ":ConverterToCSV"
+deactivate ":ConverterToCSV"
+
+end
+
+end
+
+":ConverterToCSV" -> ":PrintWriter": close()
+activate ":PrintWriter"
+":PrintWriter" --> ":ConverterToCSV"
+deactivate ":PrintWriter"
+
+return
+
+deactivate ":ConverterToCSV"
+
+@enduml

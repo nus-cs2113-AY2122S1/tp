@@ -1,0 +1,76 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+-> ":readTextFile": readTextFileToString()
+
+activate ":readTextFile"
+
+create ":ArrayList"
+":readTextFile" -> ":ArrayList": new ArrayList()
+
+activate ":ArrayList"
+":readTextFile" <-- ":ArrayList": listOfRawCommand: ArrayList<String>
+
+deactivate ":ArrayList"
+
+create ":File"
+
+":readTextFile" -> ":File": new File()
+
+activate ":File"
+
+":File" -> ":File": isFile()
+
+activate ":File"
+":File" --> ":File"
+
+deactivate ":File"
+alt not a file
+":readTextFile"<-- ":File"
+<-- ":readTextFile"
+
+end
+
+deactivate ":File"
+
+":readTextFile" <-- ":File"
+
+create ":BufferReader"
+
+":readTextFile" -> ":BufferReader": new BufferReader()
+activate ":BufferReader"
+
+
+
+
+activate ":BufferReader"
+
+loop while There are still lines in buffer not read yet
+
+":BufferReader" -> ":BufferReader": readLine()
+activate ":BufferReader"
+":BufferReader" --> ":BufferReader": line
+deactivate ":BufferReader"
+
+":BufferReader" -> ":ArrayList": add(line)
+activate ":ArrayList"
+
+
+":BufferReader" <-- ":ArrayList"
+deactivate ":ArrayList"
+
+
+":readTextFile" <-- ":BufferReader": listOfRawCommand: ArrayList<String>
+
+end
+
+deactivate ":BufferReader"
+
+deactivate ":BufferReader"
+
+return listOfRawCommand: ArrayList<String>
+
+deactivate ":readTextFile"
+
+@enduml

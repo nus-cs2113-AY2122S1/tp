@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/class-diagram
+class BudgetTracker
+hide empty members
+hide circle
+package "Data" <<rectangle>> {
+}
+package "logic" <<rectangle>> {
+
+package "parser" <<rectangle>> {
+class XYZParser {
++parse(args: String) : XYZCommand
+}
+class ParserUtil
+class Parser {
++parseCommand(userInput : String) : Command
+}
+
+class ParserPrefix <<interface>> {
+}
+
+skinparam classAttributeIconSize 0
+hide circle
+hide empty members
+BudgetTracker -[dotted]-> Parser
+ParserPrefix <|-[dotted]- XYZParser
+Parser -[dotted]->  XYZParser : creates
+XYZParser -[dotted]> ParserUtil
+}
+package "commands" <<rectangle>> {
+abstract class Command
+class XYZCommand {
++execute()
+}
+skinparam classAttributeIconSize 0
+hide circle
+hide empty members
+Command <|-[dotted]- XYZCommand
+XYZParser -[dotted]-> XYZCommand : creates
+Data <-[dotted]- XYZCommand
+}
+}
+@enduml

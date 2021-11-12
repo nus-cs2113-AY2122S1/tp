@@ -1,0 +1,66 @@
+@startuml
+hide circle
+
+class Storage {
+    {static} dataStorageDirectory: String
+    {static} LS: String
+    loadStorage(AllRecordList, String)
+    makeStorageTextFile(String)
+    directoryListAllFiles()
+}
+
+class ReadTextFile {
+    readTextFileToString()
+}
+
+class WriteToTextFile {
+    reloadArrayToStorage()
+}
+
+class BudgetTracker {
+    textUi : TextUI
+    loanCounter : int
+    recordList : AllRecordList
+    recordListDirectory : String
+    BudgetTracker()
+    {static} main(String[])
+    loanReminder(LocalDate, int)
+    run()
+}
+
+class Command {
+    allRecordList : AllRecordList
+    {abstract} execute()
+    setAllRecordList(AllRecordList)
+    isExit()
+}
+
+class Parser {
+    {static} DISPLAYED_INDEX_OFFSET
+    {static} TYPE_IDENTIFIER_END_INDEX
+    {static} splitCommandWordAndArgs(String)
+    {static} splitArgs(String, String[])
+    {static} checkValidArguments(String, int)
+    {static} findArgValue(String, String)
+    parseCommand(String)
+    prepareStatCommand(String)
+    prepareEditCommand(String)
+    prepareListMonthCommand(String)
+    prepareAddCommand(String)
+    prepareFindCommand(String)
+    prepareYearCommand(String)
+    prepareDeleteCommand(String)
+}
+
+
+BudgetTracker "1" *-- "1" Parser : parse input command >
+
+BudgetTracker "1" *-- "1" Command : perform operation >
+
+BudgetTracker "1" *-- "1" Storage : loads data to App >
+
+Storage "1" *-- "1" ReadTextFile : read data file >
+
+Command "1" *-- "1" WriteToTextFile : save data >
+
+@enduml

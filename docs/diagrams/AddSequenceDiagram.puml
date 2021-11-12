@@ -1,0 +1,60 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+autonumber
+
+Actor User as user
+
+user -> ":BudgetTracker" : "add -b m/12 a/100"
+activate ":BudgetTracker"
+
+":BudgetTracker" -> ":Parser" : parseCommand("add -b m/12 a/100")
+activate ":Parser"
+
+create ":AddBudgetCommand"
+":Parser" -> ":AddBudgetCommand" : new AddBudgetCommand(100 ,12)
+activate ":AddBudgetCommand"
+return
+
+return command:AddBudgetCommand
+
+":BudgetTracker" -> ":AddBudgetCommand" : setRecordList(allRecordList: AllRecordList)
+activate ":AddBudgetCommand"
+return
+
+":BudgetTracker" -> ":AddBudgetCommand" : execute()
+activate ":AddBudgetCommand"
+
+":AddBudgetCommand" -> "allRecordList:AllRecordList" : addBudget(100, 12, false)
+activate "allRecordList:AllRecordList"
+
+"allRecordList:AllRecordList" -> ":RecordList" : addBudget(100, 12)
+activate ":RecordList"
+
+opt !hasBudget
+    ":RecordList" -> "budget:Budget" : setAmount(100)
+    activate "budget:Budget"
+    return
+end
+
+return
+
+note left
+Budget added is stored
+into Storage at this point
+end note
+
+return
+
+participant TextUi <<class>>
+
+":AddBudgetCommand" -> TextUi : showBudgetAddedMessage(100, 12)
+activate TextUi
+return
+
+return
+
+":BudgetTracker" --> user
+deactivate ":BudgetTracker"
+
+@enduml

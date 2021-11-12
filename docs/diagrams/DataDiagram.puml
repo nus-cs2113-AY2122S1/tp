@@ -1,0 +1,75 @@
+@startuml
+'https://plantuml.com/class-diagram'
+hide circle
+skinparam classAttributeIconSize 0
+
+class AllRecordList
+class RecordList
+enum Category <<enum>>
+
+abstract class "{abstract}\n Record" as Record
+
+AllRecordList -down->"12 " RecordList
+
+RecordList -down->"1 " Budget
+RecordList -down->"*" Loan
+RecordList -down->"*" Expenditure
+
+Budget -down-|> Record
+Expenditure -down-|> Record
+Loan -down-|> Record
+
+Expenditure -up.> Category
+
+RecordList -[hidden]left-> Category
+
+class AllRecordList {
+ - year: int
+}
+
+class RecordList {
+ - budget: Budget
+
+ + addBudget(double spendingLimit,
+ boolean isLoadingStorage): void
+ + addExpenditure(String description, double amount,
+ LocalDate date, Category category): void
+ + void addLoan(String name, double amount,
+  LocalDate date)
+}
+
+class Expenditure {
+ # description: String
+ # date: LocalDate
+ # category: Category
+ + toString(int indexOfExpenditure): String
+}
+
+class Budget {
+ # description: String
+ # date: LocalDate
+ # category: Category
+}
+
+class Loan {
+ # debtorName : String
+ # date : LocalDate
+ # dueDate : LocalDate
+ + getDueDateString() : String
+}
+
+class Record {
+ # amount : double
+ # month : int
+}
+
+
+enum Category {
+XYZ
+}
+note left
+XYZ = GENERAL,
+GIFTS, TECH etc.
+end note
+
+@enduml

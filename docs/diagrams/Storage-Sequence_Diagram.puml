@@ -1,0 +1,84 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+activate ":BudgetTracker"
+
+create ":Parser"
+
+":BudgetTracker" -> ":Parser": new Parser()
+activate ":Parser"
+":BudgetTracker" <-- ":Parser" : parser: Parser
+deactivate ":Parser"
+
+create ":Storage"
+
+":BudgetTracker" -> ":Storage": new Storage()
+activate ":Storage"
+
+
+":Storage" -> ":Storage": makeStorageTextFile()
+activate ":Storage"
+":Storage" --> ":Storage"
+deactivate ":Storage"
+
+
+":Storage" -> ":Parser": loadStorage()
+activate ":Parser"
+":Parser" --> ":Storage"
+deactivate ":Parser"
+
+":BudgetTracker" <-- ":Storage": storage: Storage
+deactivate ":Storage"
+
+loop while isExit is still false
+    ":BudgetTracker" -> ":Parser": userInput: String
+    activate ":Parser"
+
+
+    ":Parser" -> ":Parser": parseCommand()
+    activate ":Parser"
+    ":Parser" --> ":Parser": command: Command
+
+    deactivate ":Parser"
+
+    ":Parser" --> ":BudgetTracker": command: Command
+    deactivate ":Parser"
+
+    ":BudgetTracker" -> ":Command": setAllRecordList()
+
+
+    activate ":Command"
+
+    ":Command" --> ":BudgetTracker"
+    deactivate ":Command"
+
+    ":BudgetTracker" -> ":Command": execute()
+
+    activate ":Command"
+
+
+    ":Command" -> WriteToTextFile: new WriteToTextFile()
+    activate WriteToTextFile
+
+    WriteToTextFile -> WriteToTextFile: reloadArrayToStorage
+    activate WriteToTextFile
+
+    WriteToTextFile --> WriteToTextFile
+
+    deactivate WriteToTextFile
+
+
+    WriteToTextFile --> ":Command"
+    deactivate WriteToTextFile
+
+
+    ":Command" --> ":BudgetTracker"
+    deactivate ":Command"
+
+end
+
+deactivate ":BudgetTracker"
+
+
+@enduml
