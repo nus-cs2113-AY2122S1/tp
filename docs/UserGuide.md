@@ -434,6 +434,8 @@ _________________________________________________________
 
 ### Listing Budget & Expenditure for a Particular Month: `list`
 
+> 😃 Do you want to see the budget and expenditure in January? Let's take a look how to do it.
+
 Adds a new expenditure to a specific budget of a month.
 
 Format: `list m/MONTH [c/CATEGORY]`
@@ -461,6 +463,8 @@ Your expenditures:
 _________________________________________________________
 
 ### <a id="listing"></a> Listing all Budget & Expenditure
+
+> 😃 Forget what you have recorded with the programme? Then list everything!
 
 List all the Budget and expenditure for that particular year.
 
