@@ -269,7 +269,7 @@ public class GoalList {
                                      PrintManager printManager)
             throws HaBitCommandException {
         printManager.printLine();
-        if (updateAttributes[0] == 1) { // update goal name
+        if (updateAttributes.get(0)) { // update goal name
             updateGoalName(goalIndex, newGoalName, printManager);
         }
         if (updateAttributes.get(1)) { // update goal type
@@ -298,7 +298,7 @@ public class GoalList {
                                       PrintManager printManager)
             throws HaBitCommandException {
         printManager.printLine();
-        if (updateAttributes[0] == 1) { // update habit name
+        if (updateAttributes.get(0)) { // update habit name
             updateHabitNameFromGoal(goalIndex, habitIndex, newHabitName, printManager);
         }
         if (updateAttributes.get(1)) { // update habit interval
