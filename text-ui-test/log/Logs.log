@@ -1,0 +1,24 @@
+Nov 05, 2021 10:39:29 PM seplanner.storage.Storage readModuleList
+INFO: Start loading module data
+Nov 05, 2021 10:39:29 PM seplanner.storage.ModuleStorage readFile
+INFO: Completed loading of modules
+Nov 05, 2021 10:39:29 PM seplanner.storage.Storage readUniversityList
+INFO: Start loading university data
+Nov 05, 2021 10:39:29 PM seplanner.storage.UniversityStorage readFile
+INFO: Completed loading of universities
+Nov 05, 2021 10:39:29 PM seplanner.storage.Storage readSelectedUniversityList
+INFO: Start loading selected university data
+Nov 05, 2021 10:39:29 PM seplanner.storage.SelectedUniversityStorage readFile
+INFO: File is either created or opened
+Nov 05, 2021 10:39:29 PM seplanner.storage.SelectedUniversityStorage updateFile
+INFO: File writing operation completed
+Nov 05, 2021 10:39:29 PM seplanner.storage.SelectedUniversityStorage readFile
+INFO: Module mappings stored in the file are successfully loaded
+Nov 05, 2021 10:39:29 PM seplanner.storage.Storage readSelectedModuleList
+INFO: Start loading selected module data
+Nov 05, 2021 10:39:29 PM seplanner.storage.SelectedModuleStorage readFile
+INFO: File is either created or opened
+Nov 05, 2021 10:39:29 PM seplanner.storage.SelectedModuleStorage updateFile
+INFO: File writing operation completed
+Nov 05, 2021 10:39:29 PM seplanner.storage.SelectedModuleStorage readFile
+INFO: Modules stored in the file are successfully loaded

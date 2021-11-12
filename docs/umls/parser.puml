@@ -1,0 +1,150 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+skinparam groupInheritance 2
+skinparam maxWidth 256
+
+HelpCommandParser <-- Parser
+ExitCommandParser <-- Parser
+Parser --> AddCommandParser
+Parser ---> RemoveCommandParser
+Parser --> FindCommandParser
+Parser ---> SearchMapCommandParser
+Parser --> ListCommandParser
+
+AddCommandParser --> AddParseException
+RemoveCommandParser --> RemoveParseException
+FindCommandParser --> FindParseException
+SearchMapCommandParser --> SearchMapParseException
+ListCommandParser --> ListParseException
+
+AddParseException --|> ParserClassException
+RemoveParseException --|> ParserClassException
+FindParseException --|> ParserClassException
+SearchMapParseException --|> ParserClassException
+ListParseException --|> ParserClassException
+
+ListCommandParser --> ListType
+FindCommandParser --> FindModInputType
+
+class Parser {
+    - BASIC_COMMAND_FORMAT: Pattern
+    # universityMasterList: UniversityList
+    # moduleMasterList: ModuleList
+    # moduleSelectedList: ModuleList
+    # universitySelectedList: UniversityList
+
+    + ParseCommand(userInput: String): Command
+}
+
+
+
+class ExitCommandParser {
+    + parse(): ExitCommand
+}
+
+class FindCommandParser {
+    - logger: Logger
+    - flag:String
+
+    + parse(arguments: String, universityMasterList: UniversityList,
+      moduleMasterList: ModuleList): Command
+    - identifyFlagAndSplitArgs(arguments: String): String
+}
+
+class HelpCommandParser {
+    + parse(): HelpCommand
+}
+
+class ListCommandParser {
+    - logger: Logger
+
+    + parse(arguments: String, universityMasterList: UniversityList, moduleMasterList: ModuleList,
+      universitySelectedList: UniversityList, moduleSelectedList: ModuleList): Command
+}
+
+class RemoveCommandParser {
+    - flag:String
+    - uniIndex: int
+    - mapIndex: int
+    - university: University;
+    - module: Module
+    - logger: Logger
+
+    + parse(arguments: String, universityMasterList: UniversityList, moduleMasterList: ModuleList,
+    universitySelectedList: UniversityList, moduleSelectedList: ModuleList): Command
+    - identifyFlagAndSplitArgs(arguments: String): String
+    - handleUniFlagArgs(arguments: String, universityMasterList: UniversityList,
+      universitySelectedList: UniversityList): void
+    - handleModFlagArgs(arguments: String, moduleMasterList: ModuleList,
+      moduleSelectedList: ModuleList): void
+    - handleMapFlagArgs(arguments: String, universitySelectedList: UniversityList,
+      moduleSelectedList: ModuleList, universityMasterList: UniversityList): void
+}
+
+class AddCommandParser {
+    - flag:String
+    - uniIndex: int
+    - mapIndex: int
+    - university: University;
+    - module: Module
+    - logger: Logger
+
+    + parse(arguments: String, universityMasterList: UniversityList, moduleMasterList: ModuleList,
+    universitySelectedList: UniversityList, moduleSelectedList: ModuleList): Command
+    - identifyFlagAndSplitArgs(arguments: String): String
+    - handleUniFlagArgs(arguments: String, universityMasterList: UniversityList,
+    universitySelectedList: UniversityList): void
+    - handleModFlagArgs(arguments: String,
+      moduleMasterList: ModuleList, moduleSelectedList: ModuleList): void
+    - handleMapFlagArgs(arguments: String, universitySelectedList: UniversityList,
+      moduleSelectedList: ModuleList, universityMasterList: UniversityList): void
+}
+
+class SearchMapCommandParser {
+    - logger: Logger
+
+    + parse(arguments: String, universityMasterList: UniversityList,
+    universitySelectedList: UniversityList, moduleSelectedList: ModuleList): SearchMapCommand
+}
+
+enum ListType <<enumeration>> {
+MASTER
+SELECTED
+}
+
+enum FindModInputType <<enumeration>> {
+MODULECODE
+MODULENAME
+}
+
+class ParserClassException {
+- boolean: isPrintFormat
+
++ abstract getFormat(): String
++ isPrintFormat(): boolean
+}
+
+class AddParseException {
+- format: String
+}
+
+class FindParseException {
+- format: String
+}
+
+class ListParseException {
+- format: String
+}
+
+class RemoveParseException {
+- format: String
+}
+
+class SearchMapParseException {
+- format: String
+}
+
+@enduml

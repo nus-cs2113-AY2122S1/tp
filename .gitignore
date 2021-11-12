@@ -1,4 +1,4 @@
-# IDEA files
+cd# IDEA files
 /.idea/
 /out/
 /*.iml
@@ -14,4 +14,9 @@ src/main/resources/docs/
 bin/
 
 /text-ui-test/ACTUAL.txt
-text-ui-test/EXPECTED-UNIX.TXT
+/text-ui-test/EXPECTED-UNIX.TXT
+/src/main/java/seedu/duke/KeyPair
+/data/
+/log/
+/text-ui-test/data/
+/text-ui-test/log/

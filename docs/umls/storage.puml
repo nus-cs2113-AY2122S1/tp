@@ -1,0 +1,53 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam groupInheritance 1
+skinparam maxLength 128
+
+class Storage {
+    - {static} logger: Logger
+    + readModuleList() : ArrayList<Module>
+    + readUniversityList(moduleMasterList: ModuleList) : ArrayList<University>
+    + readSelectedModuleList(moduleMasterList: ModuleList) : ModuleList
+    + readSelectedUniversityList(universityMasterList: UniversityList, moduleMasterList: ModuleList) : UniversityList
+    + updateSelectedModuleList(moduleList: ModuleList) : void
+    + updateSelectedUniversityList(universityList: UniversityList) : void
+}
+
+ModuleStorage "1" --* Storage
+    ModuleStorage : - {static} logger: Logger
+    ModuleStorage : + readModuleList(inputStream: InputStream) : ArrayList<Module>
+    ModuleStorage : - extractAttributes(line: String) : String[]
+
+UserStorage <|-- SelectedUniversityStorage
+SelectedUniversityStorage "1" ---* Storage
+    SelectedUniversityStorage : - {static} logger: Logger
+    SelectedUniversityStorage : - {static} FILE_PATH: String
+    SelectedUniversityStorage : - {static} isMappingValid: boolean
+    SelectedUniversityStorage : - {static} isUniversityValid: boolean
+    SelectedUniversityStorage : + updateFile(universityList: UniversityList) : void
+    SelectedUniversityStorage : + readFile(universityMasterList: UniversityList , moduleMasterList: ModuleList) : UniversityList
+    SelectedUniversityStorage : - updateMappings(moduleMappings: ArrayList<ModuleMapping>, line: String, moduleMasterList: ModuleList, universityMasterList: UniversityList, universityName: String) : void
+    SelectedUniversityStorage : - updateUniversityList(universityName: String, moduleMappings: ArrayList<ModuleMapping>, universitySelectedList: UniversityList, universityMasterList: UniversityList) : void
+    SelectedUniversityStorage : - isMappingExist(mappings: ArrayList<ModuleMapping>, searchMapping: ModuleMapping) : boolean
+
+UserStorage <|-- SelectedModuleStorage
+SelectedModuleStorage "1" --* Storage
+     SelectedModuleStorage : - {static} logger: Logger
+     SelectedModuleStorage : - {static} FILE_PATH: String
+     SelectedModuleStorage : - {static} isModuleValid: boolean
+     SelectedModuleStorage : + updateFile(moduleList: ModuleList) : void
+     SelectedModuleStorage : + readFile(moduleMasterList: ModuleList) : ModuleList
+     SelectedModuleStorage : - updateList(moduleList: ModuleList, line: String, moduleMasterList: ModuleList) : void
+
+UniversityStorage "1" -* Storage
+    UniversityStorage : - {static} logger: Logger
+    UniversityStorage : + readFile(inputStream: InputStream, moduleMasterList: ModuleList) : ArrayList<University>
+    UniversityStorage : - extractAttributes(line: String) : String[]
+    UniversityStorage : - editMappedModuleCode(attributes: String[]) : String[]
+
+class UserStorage {
+    # loadFile(filepath: String) : File
+}
+
+@enduml

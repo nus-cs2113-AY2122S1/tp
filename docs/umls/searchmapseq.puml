@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor User
+
+participant ":Parser" #LightGreen
+User -> ":Parser" ++ #LightGreen: input
+
+participant ":SearchMapCommandParser" #LightBlue
+":Parser" -> ":SearchMapCommandParser" ++  #LightBlue : parseCommand(input: String,...)
+
+participant ":Command" #Yellow
+":SearchMapCommandParser" -> ":Command" ++ #Yellow : searchMapCommand(U: University,..., isAll: boolean)
+
+alt#Gold #LightBlue searchmap all
+
+loop until all universities are taken care of
+
+participant ":Ui" #DarkGrey
+":Command" -> ":Ui" ++ #DarkGrey : printMappings(U, moduleSelectedList)
+return
+deactivate ":Ui"
+
+end
+
+else #Pink searchmap for specific university
+
+participant ":Ui" #DarkGrey
+":Command" -> ":Ui" ++ #DarkGrey : printMappings(U, moduleSelectedList)
+return
+
+deactivate ":Ui"
+
+end
+
+":Command" --> ":SearchMapCommandParser"
+deactivate ":Command"
+
+":SearchMapCommandParser" --> ":Parser"
+deactivate ":SearchMapCommandParser"
+
+":Parser" --> User
+deactivate ":Parser"
+@enduml

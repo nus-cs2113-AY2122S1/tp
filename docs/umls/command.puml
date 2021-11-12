@@ -1,0 +1,113 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+skinparam groupInheritance 1
+skinparam maxLength 128
+
+AddModCommand <--- Command
+AddUniCommand <---- Command
+FindModCommand <---- Command
+ListModCommand <---- Command
+RemoveModCommand <--- Command
+HelpCommand <- Command
+ExitCommand <- Command
+FindUniCommand <- Command
+Command -> AddMapCommand
+Command ---> RemoveUniCommand
+Command ----> SearchMapCommand
+Command ----> ListUniCommand
+Command ---> RemoveMapCommand
+
+class Command {
+    # storage: Storage
+
+    + Command()
+}
+
+class AddModCommand {
+
+    + AddModCommand(moduleToAdd: Module, moduleMasterList: ModuleList,
+    moduleSelectedList: ModuleList)
+}
+
+class AddUniCommand {
+    - universityToAdd: University
+    - universityIndexToAdd:int
+
+    + AddUniCommand(universityToAdd: University, universityMasterList: UniversityList,
+      universitySelectedList: UniversityList)
+}
+
+class AddMapCommand {
+
+    + AddMapCommand(universityIndexToMap: int, selectedMappingIndex: int, universityMasterList: UniversityList,
+    moduleMasterList: ModuleList, universitySelectedList: UniversityList, universityMasterList: UniversityList, moduleSelectedList: ModuleList)
+}
+
+class RemoveModCommand {
+
+    -moduleToRemove: Module
+    -moduleIndexToRemove: int
+
+    + RemoveModCommand(moduleToRemove: Module, moduleMasterList: ModuleList,
+    moduleSelectedList: ModuleList)
+}
+
+class RemoveUniCommand {
+    - universityToRemove: University
+    - universityIndexToRemove:int
+
+    + RemoveUniCommand(universityToRemove: University, universityMasterList: UniversityList,
+      universitySelectedList: UniversityList)
+}
+
+class RemoveMapCommand {
+
+    + RemoveMapCommand(universityIndexToMap: int, selectedMappingIndex: int,
+    universityMasterList: UniversityList, universitySelectedList: UniversityList, universityMasterList: UniversityList)
+}
+
+class ListModCommand {
+
+    + ListModCommand(moduleList: ModuleList, type: ListType)
+}
+
+class ListUniCommand {
+
+    + ListUniCommand(universityList: UniversityList, type: ListType)
+    -printSelectedList(universityList: UniversityList): void
+    -printMasterList(universityList: UniversityList): void
+}
+
+
+class FindModCommand {
+
+    + FindModCommand(userInput: String, moduleMasterList: ModuleList, type: FindModInputType)
+}
+
+class FindUniCommand {
+
+    + FindUniCommand(userInput: String, universityMasterList: UniversityList)
+}
+
+class SearchMapCommand {
+    - selectedUniversity: University
+
+    + SearchMapCommand(selectedUniversity: University, universitySelectedList: UniversityList
+    universityMasterList: UniversityList, moduleSelectedList: ModuleList, isAll: boolean)
+    + getSelectedUniversity(): University
+}
+
+class HelpCommand {
+
+    + HelpCommand()
+}
+
+class ExitCommand {
+
+    + ExitCommand()
+}
+
+@enduml
