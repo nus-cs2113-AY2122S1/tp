@@ -40,7 +40,7 @@ This user guide is written to assist you in making full use of SLAM's available 
     3. [Delete a member](#53-delete-a-member)
 6. [General Commands](#6-general-commands)
     1. [Help](#61-help)
-    2. [List all events](#62-list-events-tasks-or-members)
+    2. [List events, tasks or members](#62-list-events-tasks-or-members)
     3. [Exiting the program](#63-exiting-the-program)
 7. [Saving the data](#7-saving-the-data)
 8. [FAQ](#8-faq)
@@ -684,7 +684,7 @@ You may also choose to view all the tasks you have assigned to any specified eve
 **Expected Output:**
 
 ```
-> list 1 -t
+> list -t 1
 ```
 
 ```
@@ -758,7 +758,7 @@ SLAM data is saved in the hard disk automatically after you exit the program. Th
 | **Command**               | **Format**                                          |
 |---------------------------|-----------------------------------------------------|
 | Display user manual       | `help`                                              |
-| List events/members/tasks | For events: `list`<br />For tasks: `list EVENT_INDEX -t`<br />For members: `list -m`<br />For members assigned to a task: `list EVENT_INDEX t/TASK_INDEX`|
+| List events/members/tasks | For events: `list`<br />For tasks: `list -t EVENT_INDEX`<br />For members: `list -m`<br />For members assigned to a task: `list EVENT_INDEX t/TASK_INDEX`|
 | Exit program              | `bye`                                               |
 
 ### Event commands
@@ -769,7 +769,7 @@ SLAM data is saved in the hard disk automatically after you exit the program. Th
 | Delete an event       | `delete -e INDEX`                                   |
 | Delete all events     | `delete all`                                        |
 | Select an event       | `select -e INDEX`                                   | 
-| Find event(s)         | `find EVENT_KEYWORD(S)`                             |
+| Find event(s)         | `find -e KEYWORDS`                             |
 | Mark event as done    | `done -e INDEX`                                     | 
 | Un-mark event as done | `undo -e INDEX`                                     |
 | Update an event       | `update INDEX`                                      |
