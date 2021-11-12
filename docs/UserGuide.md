@@ -216,7 +216,7 @@ _________________________________________________________
 
 # <a id="edit"></a> &nbsp;&nbsp; Edit: `edit`
 
-> :smiley: Oh no! You just added an entry, but you realised that there were some incorrect information...
+> 😃 Oh no! You just added an entry, but you realised that there were some incorrect information...
 If only there was a way to fix what was mistyped... well lucky for you!
 
 
@@ -631,7 +631,7 @@ _________________________________________________________
 ### <a id="stat-year"></a> `-y` : View Statistics for the Year
 
 Surely things get messy after you have many expenditures, loan and budget entries. Is there
-a easy way to visualize the amount of budget used or left? Yes! `stat -y` 
+an easy way to visualize the amount of budget used or left? Yes! `stat -y` 
 display the statistics for the current database year which the user is working on. 
 
 Format: `stat -y t/TYPE_OF_GRAPHICAL_VIEW`
@@ -761,7 +761,7 @@ _________________________________________________________
 # <a id="csv"></a> &nbsp;&nbsp; CSV: `csv`
 
 If our statistical analysis feature is not good enough for you, you may convert the database records
-into a csv file by simple keying in the `csv` command. You will then be able to use Excel to do advance
+into a csv file by simple keying in the `csv` command. You will then be able to use Excel to do advanced
 statistical analysis.
 
 Format: `csv`
@@ -794,7 +794,7 @@ _________________________________________________________
 
 # <a id="db"></a> &nbsp;&nbsp; DB: `db`
 
-What if you have forgotten all the database years that you have been using? Fear not! `db` command 
+😃 What if you have forgotten all the database years that you have been using? Fear not! `db` command 
 is here to help! `db` command basically list out all the available database text file you currently
 have. 
 
@@ -827,7 +827,7 @@ _________________________________________________________
 # <a id="exit"></a> &nbsp;&nbsp; Exit the program: `bye`
  
 When you are done with using the app and wish to exit the app. Enter the command `bye` to 
-say goodbye with our app :wave:
+say goodbye with our app 👋
 
 Format: `bye`
 
