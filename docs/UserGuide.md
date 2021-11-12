@@ -22,20 +22,27 @@ exacerbate this issue.
 
 ## Quick Start
 
-1. The BMI calculator and recommended caloric intake calculator gives the user an idea of where his current fitness
-level stands. Users can also choose to skip using the calculators by entering the appropriate keystrokes.
-* *NOTE* : Please follow _**exactly**_ the explicitly _**required**_ input formats for answering the calculator
-questions. Any deviating inputs will result in the question being repeated so that the user is able to know exactly what inputs and formats are needed by the
-calculator to calculate BMI and recommended daily caloric intake.
-* Please only enter one input for each question. 
-
-  eg. when prompted for the user's weight, the user should only type in "50" and not "50  6000".
+1. The BMI calculator and recommended caloric intake calculator gives you an idea of where your current fitness
+level stands. You can also choose to skip using the calculators by entering the appropriate keystrokes.
+   * *NOTE* : Please follow _**exactly**_ the explicitly _**required**_ input formats for answering the calculator
+   questions. Any deviating inputs will result in the question being repeated so that you are able to know exactly what inputs and formats are needed by the
+   calculator to calculate BMI and recommended daily caloric intake.
+   * Please only enter one input for each question. 
+     E. g. When prompted for your weight, you should only type in "50" and not "50  6000".
   
-2. The user can then access the calorie manager to track their caloric intake, while also using the workout schedule manager
-to track the calories burned.
-3. Workout schedule manager also allows the user to schedule future workouts
-4. For the long term outlook, weight tracker lets the user monitor his weight over the length of usage of CLI.ckFit as an
-indicator of the user's progress
+2. You can then access the calorie manager to track your caloric intake, while also using the workout schedule manager
+   to track the calories burned.
+3. Workout schedule manager also allows you to schedule future workouts.
+4. For the long term outlook, weight tracker lets you monitor your weight over the length of usage of CLI.ckFit as an
+   indicator of your progress.
+5. In order to load the data of your previous session, you *MUST* press "enter" when prompted with the following
+   question:
+   ```
+   Would you like to clear all records of your fitness journey?
+   Key in "y" to clear your records, or press enter keystroke to load in data from 
+   your previous session(s)
+   Note: Keying in "y" will result in the previous session's data being deleted!
+   ```
 
 ## Technical Start Up
 
@@ -104,18 +111,6 @@ overly large and nonsensical integer value for calories such as `2147483647` the
 * The current version CLI.ckFit only supports 3 types of distance based activities,
   namely swimming, running and cycling. **ALL** other activities are **assumed** to be sets/repetitions based.
   (*Read more about Sets and Reps under [**Common Terminologies**](#common-terminologies-and-definitions)*)
-
-## Important FAQs
-
-* In order to load the data of your previous session, the user *MUST* press "enter" when prompted with the following
-question: 
-
-```
-Would you like to clear all records of your fitness journey?
-Key in "y" to clear your records, or press enter keystroke to load in data from 
-your previous session(s)
-Note: Keying in "y" will result in the previous session's data being deleted!
-```
 
 ## Table of Contents
 
@@ -191,7 +186,8 @@ Note: Keying in "y" will result in the previous session's data being deleted!
 
 ### List Manager
 
-- [**List everything**](#list-everything-on-current-date)
+- [**List everything on current date**](#list-everything-on-current-date)
+- [**List everything**](#list-everything-on-all-dates)
 
 ### Getting help
 - [**Access user help**](#help-command)
@@ -1011,7 +1007,7 @@ Command Word: `list`
 
 Description: Lists all meals, fluids, weight, workouts and scheduled workouts on a particular date
 
-Format `list <DATE`
+Format `list <DATE>`
 
 * The `DATE` is in dd/mm/yyyy.
 
@@ -1124,7 +1120,7 @@ You have a total of 1 workouts in your schedule.
 Command Word: `help`
 
 Description: Lists out the formats of input for meal, fluid, workout, weight and library commands and
-provides the hyperlink to the user guide for more tech-savvy users to read.
+provides the hyperlink to the user guide for a comprehensive walkthrough of features and commands.
 
 Example of usage:
 
