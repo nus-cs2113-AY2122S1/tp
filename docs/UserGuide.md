@@ -1,10 +1,11 @@
-# User Guide
-
-Budget Tracker is a desktop app for managing expenses, budget and loans, optimized for use via a Command Line Interface (CLI) 
-for tech-savvy students who have trouble keeping track of their expenses.
+# Budget Tracker User Guide
 
 ## Product Overview
-
+Budget Tracker is a free, easy-to-use desktop app for managing finances, optimized for use via a Command Line Interface (CLI)
+for tech-savvy students who have trouble keeping track of their expenses. 
+You can use Budget Tracker to manage your budget, expenditures and loans lent out to other parties for the month, and 
+easily access and retrieve this information with a single command. 
+To improve your spending habits, Budget Tracker also displays useful data and statistics about it for the month.
 
 ## <a id="top"></a> Table of Content
 * [Intro](#introduction)
@@ -42,8 +43,21 @@ for tech-savvy students who have trouble keeping track of their expenses.
 
 ## <a id="introduction"></a> Introduction
 
+Welcome to the Budget Tracker's User Guide! This Guide provides important information on the setting-up process, 
+overview of the features we have, and a deeper dive into each of them to get you familiarised with our app.
+In addition, we include a Frequently Asked Questions (FAQ) and a summary section at the end of the guide, should you have any doubts.
+
+Our Table of Contents serve as a good way to navigate through this guide. We designed each section such that
+you will be able to understand them on their own without the need to refer to other sections. Do use the 
+#### [↑ Back to top](#top) 
+link at the bottom 
+of each section to quickly access the Table of Contents.
+
+Along the way, you may be confused or require more information on each section. Just follow this box below with a smiley as _Budgie_,
+your Budget Tracking guide will bring you on a journey through this User Guide as well!
+
 > 😃 Hello! I'm <i> Budgie</i>, your personalised guide. My job will be to take you
-through this User Guide and give you a pleasant experience using our app!
+through this User Guide and give you a pleasant experience using our app! Follow along!
 
 #### [↑ Back to top](#top)
 
@@ -58,9 +72,11 @@ through this User Guide and give you a pleasant experience using our app!
 3. Download the latest version of `Budget Tracker` from [here](https://github.com/AY2122S1-CS2113T-F11-2/tp/releases/download/v2.1/tp.jar).
 4. If you have anti-virus, please add an exception on the directory you have downloaded the `Budget Tracker`.
    For example, if your Tp.jar file is in the "tp-folder", then you can create an exception in that folder 
-   in your anti-virus. 
+   in your anti-virus.
    
    ![AV-Exception](images/exception-AV.png)
+
+> 😃 Great! Now that everything is all set up, let's take a look at what features we have in store!
 
 #### [↑ Back to top](#top)
 
@@ -227,6 +243,7 @@ _________________________________________________________
 
 
 ### <a id="edit-budget"></a> `-b` : Edit a Budget
+> 😃 Editing the budget's amount is easy as can be. This is also useful in situations where you feel like spending more for the month, or are having sudden financial constraints, and a change to your budget is required.
 
 Edits the _amount_ of budget allowance for a particular month.
 
@@ -260,7 +277,10 @@ _________________________________________________________
 
 ### <a id="edit-expenditure"></a> `-e` : Edit an Expenditure 
 
-Edits the values of an expenditure, including its _description_, _amount_, _date of expenditure_ and _category_.
+> 😃 An expenditure record has many values, and editing all of them is a hassle for just one mistake. 
+> Luckily, this feature allows you to edit any of the values in your expenditures as long as you specify them!
+
+Edits any of the values of an expenditure, including its _description_, _amount_, _date of expenditure_ and _category_.
 
 Format: `edit -e m/MONTH i/INDEX <n/DESCRIPTION> <a/AMOUNT> <d/DATE_OF_EXPENDITURE> <c/CATEGORY>`
 * `<AMOUNT>`,`<DATE_OF_EXPENDITURE>`,`<DESCRIPTION>` and `<CATEGORY>` are optional. Any parameters entered will be edited, while those not entered will remain the same. At least **one** of these 
@@ -309,6 +329,9 @@ _________________________________________________________
 
 
 ### <a id="edit-loan"></a> `-e` : Edit a Loan
+
+> 😃 Similar to editing expenditures, this feature allows you to edit any of the values in your loan record.
+
 Edits the loan for a particular month.
 
 Format: `edit -l m/MONTH i/INDEX <a/AMOUNT> <d/DATE_OF_LOAN> <n/BORROWER_NAME>`
