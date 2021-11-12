@@ -18,6 +18,7 @@ To improve your spending habits, Budget Tracker also displays useful data and st
     * [Budget: `-b`](#add-budget)
     * [Expenditure: `-e`](#add-expenditure)
     * [Loan: `-l`](#add-loan)
+  * [List](#list)
   * [Edit](#edit)
     * [Budget: `-b`](#edit-budget)
     * [Expenditure: `-e`](#edit-expenditure)
@@ -28,11 +29,10 @@ To improve your spending habits, Budget Tracker also displays useful data and st
     * [Loan: `-l`](#delete-loan)
   * [Switching database year](#dbselect)
   * [Find](#find)
-  * [List](#list)
   * [Stat](#stat) 
     * [Month: `-c`](#stat-budget)
     * [Year: `-l`](#stat-year)
-  * [Guides](#guides)
+  * [Command Guide](#guides)
   * [CSV](#csv)
   * [DB](#db)
   * [Exit](#exit)
@@ -47,8 +47,8 @@ overview of the features we have, and a deeper dive into each of them to get you
 In addition, we include a Frequently Asked Questions (FAQ) and a summary section at the end of the guide, should you have any doubts.
 
 Our Table of Contents serves as a good way to navigate through this guide. We designed each section such that
-you will be able to understand them on their own without the need to refer to other sections. Do use the 
-[↑ Back to top](#top) link at the bottom 
+you will be able to **understand them on their own without the need to refer to other sections.** Do use the 
+[↑ Back to top](#top) link at the bottom
 of each section to quickly access the Table of Contents.
 
 Along the way, you may be confused or require more information on each section. Just follow this box below with a smiley as _Budgie_,
@@ -159,10 +159,11 @@ ______________
 
 Format: `add -b a/AMOUNT <m/MONTH>`
 
-* The `AMOUNT` can be entered with 2 decimal places or without decimal places.
-  * Note: `Amount` will be rounded up to 2dp (for budget, expenditure, and loan).
-  * E.g. $1.006 will be rounded up to $1.01.
-* The `MONTH` must strictly be within the range of 1 to 12.
+> ❗ Notes about Parameters
+>*  `AMOUNT` entered will be rounded off to 2 decimal places
+>    and cannot exceed 1 billion (1000000000) in value.
+>* `<MONTH>`, if entered, must strictly be within the range of 1 to 12.
+>  * If left empty, the current month according to the system will be set as default.
 
 Example of usage:
 
@@ -187,25 +188,24 @@ ________________________
 Records the details of a new expenditure including the _description_, the _amount spent_, the _date on which expenditure was made_ and the _category which the expenditure falls under_ .
 
 Format: `add -e n/DESCRIPTION a/AMOUNT <d/DATE_OF_EXPENDITURE> <c/CATEGORY>`
-
-* The `DESCRIPTION` can be in a natural language format.
-  * NOTE: **If Description column exceeds 30characters limit, it will be truncated during list view**
-* The `AMOUNT` entered can be specified up to 2 decimal places.
-  * NOTE: `Amount` **cannot exceed 1billion (1000000000)**
-* The `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_. 
-  * If left empty, the current date according to the
-  system will be entered by default.
-  * NOTE: **YYYY value should correspond to the current storage file year**
-* The `<CATEGORY>` must be one of the following values:
-  * _GENERAL, CLOTHES, FOOD, ENTERTAINMENT, GIFTS, HEALTH_
-  * If left empty, the default value will be _GENERAL_
+> ❗ Notes about Parameters
+>* `DESCRIPTION` can be in a natural language format. 
+>  * If `DESCRIPTION` exceeds a 30 characters limit, it will be truncated during list view.
+>*  `AMOUNT` entered will be rounded off to 2 decimal places
+>    and cannot exceed 1 billion (1000000000) in value.
+>* `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_. 
+>  * If left empty, the current date according to the
+>  system will be set as default.
+>  * **YYYY value should correspond to the current storage file year.**
+>* `<CATEGORY>` must fall under one of the following types:
+>  * _GENERAL, CLOTHES, FOOD, ENTERTAINMENT, GIFTS, HEALTH, TECH_
+>  * If left empty, the default value will be set as _GENERAL_.
 
 Example of usage:
 
 `add -e n/CS2113T Textbooks a/60 d/2021-08-20 c/GENERAL`
 
-Expected outcome: The buying of CS2113T textbooks, costing $60.00, on the 20th of August 2021 has been successfully added.
-
+Expected outcome: A message will be shown to the user that the buying of CS2113T textbooks, costing $60.00, on the 20th of August 2021 has been successfully added.
 ```
 ========================================================
 Expenditure successfully added!
@@ -229,22 +229,22 @@ Records down a loan record specifying when and who the money was lent out to.
 
 Format: `add -e n/BORROWER_NAME a/AMOUNT <d/DATE_OF_EXPENDITURE>`
 
-<div class="alert alert-success">
-<ul>
-<li> <code>AMOUNT</code> entered will be rounded to the nearest 2 decimal places and cannot exceed 1 billion dollars. </li>
-<li> <code>DATE_OF_EXPENDITURE</code> must strictly be in the form of _YYYY-MM-DD_. </li>
-    <ul>
-        <li>If left empty, the current date according to the system will be entered by default. </li>
-        <li> Note: YYYY value should correspond to the current storage file year, please use `year`
-        command to switch to the correct year before entering an expenditure of another year </li> 
-    </ul> 
-</ul>
-</div>
+> ❗ Notes about Parameters
+>* `BORROWER_NAME` can be in a natural language format.
+   >  * If `BORROWER_NAME` exceeds a 30 characters limit, it will be truncated during list view.
+>*  `AMOUNT` entered will be rounded off to 2 decimal places
+    >    and cannot exceed 1 billion (1000000000) in value.
+>* `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_.
+   >  * If left empty, the current date according to the
+        >  system will be set as default.
+>  * **YYYY value should correspond to the current storage file year.**
+
+
 Example of usage:
 
 `add -l n/Yap Wei Xuan a/500 d/2021-08-20`
 
-Expected outcome:
+Expected outcome: A message will be shown to alert the user that a loan owed by Yap Wei Xuan of $500 on 2021-08-20 has been successfully added.
 
 ```
 ========================================================
@@ -260,6 +260,72 @@ _________________________________________________________
 
 <br/>
 
+
+# <a id="list"></a> &nbsp;&nbsp;List: `list`
+> 😃 After recording down your budget, expenditures and loans, the next step is definitely to view them to make changes,
+> or get a clearer picture of how your spending is so far!
+
+Displays your record information.
+
+_________________________________________________________
+
+### Listing Budget & Expenditure for a Particular Month: `list`
+
+> 😃 Let's take a look at how to view my data in a particular month!
+
+Displays all record information for a particular month.
+
+Format: `list m/MONTH <c/CATEGORY>`
+
+> ❗ Notes about Parameters
+> * `MONTH` must strictly be within the range of 1 to 12.
+>* `<CATEGORY>` will list all commands in the specified category, must fall under one of the following types:
+   >  * _GENERAL, CLOTHES, FOOD, ENTERTAINMENT, GIFTS, HEALTH, TECH_
+>  * If left empty, the list command will display all categories.
+
+Example of usage:
+
+`list m/10`
+
+Expected outcome: Listing the budget and all expenditures for that particular month.
+
+```
+========================================================
+You are spending too much for October !
+Your budget for October: $330.0
+Your expenditures:
+  Description            | Amount             | Date           
+1.Chicken Rice1          | $500.0             | 2021-10-13       
+========================================================
+```
+#### [↑ Back to top](#top)
+<br />
+
+_________________________________________________________
+
+### Listing all Budget & Expenditure
+
+> 😃 Did you forget what you have recorded with our app? Then list everything!
+
+List all records for the current database year.
+
+Format: `list m/all [c/CATEGORY]`
+> ❗ Notes about Parameters
+>* `<CATEGORY>` will list all commands in the specified category, and must fall under one of the following types:
+   >  * _GENERAL, CLOTHES, FOOD, ENTERTAINMENT, GIFTS, HEALTH, TECH_
+>  * If left empty, the list command will display all categories.
+
+Example of usage:
+
+`list m/all`
+
+Expected outcome: Listing all the budget and expenditure for the particular year.
+#### [↑ Back to top](#top)
+<br />
+
+_________________________________________________________
+<br />
+
 # <a id="edit"></a> &nbsp;&nbsp; Edit: `edit`
 
 > 😃 Oh no! You just added an entry, but you realised that there were some incorrect information...
@@ -267,21 +333,24 @@ If only there was a way to fix what was mistyped... well lucky for you!
 
 
 This feature allows you to edit any information in a budget, expenditure or loan entry you have previously added.
-<br />
 
 _________________________________________________________
 
 
 ### <a id="edit-budget"></a> `-b` : Edit a Budget
-> 😃 Editing the budget's amount is easy as can be. This is also useful in situations where you feel like spending more for the month, or are having sudden financial constraints, and a change to your budget is required.
+> 😃 Editing the budget's amount is easy as can be. This is also useful in situations where you feel like spending more for the month, or are having sudden financial constraints
+> and a change to your budget is required.
 
 Edits the _amount_ of budget allowance for a particular month.
 
 Format: `edit -b m/MONTH a/AMOUNT`
 
 
-* `<AMOUNT>` will be rounded to the nearest 2 decimal places and must be above 0 but cannot exceed 1 billion dollars.
-* The `MONTH` must strictly be within the range of 1 to 12 and cannot be empty.
+> ❗ Notes about Parameters
+>* `MONTH` must strictly be within the range of 1 to 12 and cannot be empty.
+>*  `AMOUNT` entered will be rounded off to 2 decimal places
+    and cannot exceed 1 billion (1000000000) in value.
+
 
 
 Example of usage:
@@ -313,18 +382,23 @@ _________________________________________________________
 Edits any of the values of an expenditure, including its _description_, _amount_, _date of expenditure_ and _category_.
 
 Format: `edit -e m/MONTH i/INDEX <n/DESCRIPTION> <a/AMOUNT> <d/DATE_OF_EXPENDITURE> <c/CATEGORY>`
-* `<AMOUNT>`,`<DATE_OF_EXPENDITURE>`,`<DESCRIPTION>` and `<CATEGORY>` are optional. Any parameters entered will be edited, while those not entered will remain the same. At least **one** of these 
+
+> ❗ Notes about Parameters
+> *  `MONTH` indicates the month that this record belongs in.
+>   *  Must strictly be within the range of 1 to 12.
+> *  `INDEX` indicates the index position of this record in the month.
+>   *  Must strictly be within the list range.
+> * `<AMOUNT>`,`<DATE_OF_EXPENDITURE>`,`<DESCRIPTION>` and `<CATEGORY>` are optional. Any parameters entered will be edited, while those not entered will remain the same. 
+>   * However, at least **one** of these
     parameters must exist.
-
-
-* `<DESCRIPTION>` can be in a natural language format.
-    * Note: **If `<DESCRIPTION>` exceeds 30 characters limit, it will be truncated during list view.**
-* `<AMOUNT>` will be rounded to the nearest 2 decimal places and must be above 0 but cannot exceed 1 billion dollars.
-* `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_.
-    * Note: **YYYY value should correspond to the current storage file year, please use `year`
-      command to switch to the correct year before entering an expenditure of another year**
-* `<CATEGORY>` must be one of the following values:
-    * _GENERAL, CLOTHES, FOOD, ENTERTAINMENT, GIFTS, HEALTH, TECH_
+>* `<DESCRIPTION>` can be in a natural language format.
+   >  * If `<DESCRIPTION>` exceeds a 30 characters limit, it will be truncated during list view.
+>*  `<AMOUNT>` entered will be rounded off to 2 decimal places
+    >    and cannot exceed 1 billion (1000000000) in value.
+>* `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_.
+>  * **YYYY value should correspond to the current storage file year.**
+>* `<CATEGORY>` must fall under one of the following types:
+   >  * _GENERAL, CLOTHES, FOOD, ENTERTAINMENT, GIFTS, HEALTH, TECH_
 
 Example expenditure:
 
@@ -366,16 +440,20 @@ Edits the loan for a particular month.
 
 Format: `edit -l m/MONTH i/INDEX <a/AMOUNT> <d/DATE_OF_LOAN> <n/BORROWER_NAME>`
 
-* `<AMOUNT>`,`<DATE_OF_LOAN>` and `<BORROWER_NAME>` are optional. Any parameters entered will be edited, while those not entered will remain the same. At least **one** of these
-  parameters must exist.
-
-
-* `<BORROWER_NAME>` can be in a natural language format.
-    * Note: **If `<BORROWER_NAME>` exceeds 30 characters limit, it will be truncated during list view.**
-* `<AMOUNT>` will be rounded to the nearest 2 decimal places and must be above 0 but cannot exceed 1 billion dollars.
-* `<DATE_OF_LOAN>` must strictly be in the form of _YYYY-MM-DD_.
-    * Note: **YYYY value should correspond to the current storage file year, please use `year`
-      command to switch to the correct year before entering an expenditure of another year**
+> ❗ Notes about Parameters
+> *  `MONTH` indicates the month that this record belongs in.
+>   *  Must strictly be within the range of 1 to 12.
+> *  `INDEX` indicates the index position of this record in the month.
+>   *  Must strictly be within the list range.
+> * `<AMOUNT>`,`<DATE_OF_LOAN>` and `<BORROWER_NAME>` are optional. Any parameters entered will be edited, while those not entered will remain the same.
+>   * However, at least **one** of these
+          parameters must exist.
+>* `<BORROWER_NAME>` can be in a natural language format.
+   >  * If `<BORROWER_NAME>` exceeds a 30 characters limit, it will be truncated during list view.
+>*  `<AMOUNT>` entered will be rounded off to 2 decimal places
+    >    and cannot exceed 1 billion (1000000000) in value.
+>* `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_.
+   >  * **YYYY value should correspond to the current storage file year.**
 
 Example Loan:
 
@@ -404,138 +482,33 @@ _________________________________________________________
 
 <br />
 
-# <a id="dbselect"></a> &nbsp;&nbsp; Year: `year`
-
-### <a id="year"></a> Switching Database Year: `year`
-> 😃 This command allows you to switch between different database years you are working on seamlessly.
-
-Selection of the database year.
-
-Format: `year <year>`
-
-* The <year> must strictly be 4 characters long and must only be numeric.
-
-Example of usage:
-
-`year 2020`
-
-Expected outcome: A message will be shown to alert the user that the database have been switched to 2020.
-
-```
-========================================================
-You are currently working on year 2020 database!
-========================================================
-```
-#### [↑ Back to top](#top)
-<br />
-
-_________________________________________________________
-
-
-#  <a id="find"></a> &nbsp;&nbsp; Find: `find`
-
-> 😃 Want to find a specific records of Expenditure, loan and Budget that have a matching key word on the search term? 
-Use the `find` command!
-
-Find records matching a particular keyword.
-
-Format: `find KEYWORD`
-
-* There needs to be a white space between find and the KEYWORD.
-
-Example of usage:
-
-`find Chicken`
-
-Expected outcome: All records that contains the "Chicken" keyword will be returned.
-#### [↑ Back to top](#top)
-<br />
-
-_________________________________________________________
-
-<br />
-
-# <a id="list"></a> &nbsp;&nbsp;List: `list`
-
-<br />
-
-_________________________________________________________
-
-### Listing Budget & Expenditure for a Particular Month: `list`
-
-> 😃 Do you want to see the budget and expenditure in January? Let's take a look how to do it.
-
-Adds a new expenditure to a specific budget of a month.
-
-Format: `list m/MONTH [c/CATEGORY]`
-
-* The 'month' must strictly be within the range of 1 to 12.
-
-Example of usage:
-
-`list m/10`
-
-Expected outcome: Listing the budget and all expenditures for that particular month.
-
-```
-========================================================
-You are spending too much for October !
-Your budget for October: $330.0
-Your expenditures:
-  Description            | Amount             | Date           
-1.Chicken Rice1          | $500.0             | 2021-10-13       
-========================================================
-```
-#### [↑ Back to top](#top)
-<br />
-
-_________________________________________________________
-
-### Listing all Budget & Expenditure
-
-> 😃 Forget what you have recorded with the programme? Then list everything!
-
-List all the Budget and expenditure for that particular year.
-
-Format: `list m/all [c/CATEGORY]`
-* `CATEGORY` filters out the expenditures to show only those falling under the specified category.
-  * Note: If `CATEGORY` is left empty, expenditures of all categories will be shown
-
-Example of usage:
-
-`list m/all`
-
-Expected outcome: Listing all the budget and expenditure for the particular year.
-#### [↑ Back to top](#top)
-<br />
-_________________________________________________________
-
-
-<br />
-
 # <a id="delete"></a> &nbsp;&nbsp;  Delete: `delete`
 > 😃 This feature allows you to delete the records you have made if you got refund or accidentally added wrongly!
 
-Deletes an entry / entries (maybe user wants to cut off the expenses) from the budget tracker data set.
+Deletes an entry / entries from the budget tracker data set.
 <br />
 
 _________________________________________________________
 
 ### <a id="delete-budget"></a> `-b` - Delete a budget
 
+
 > 😃 I can help you delete a budget of a specific month!
+
 
 Deletes the budget of a specific month
 
 Format: `delete -b m/MONTH`
 
-* The `MONTH` represents the month of the budget will be deleted and cannot be empty.
+> ❗ Notes about Parameters
+> *  `MONTH` indicates the month that this record belongs in.
+     >   *  Must strictly be within the range of 1 to 12.
 
 Example of usage:
 
 `delete -b m/10`
 
-Expected outcome:
+Expected outcome: Budget in October is successfully deleted.
 ```
 ========================================================
 Successfully deleted the Budget for this month!
@@ -553,19 +526,21 @@ _________________________________________________________
 
 Deletes (an) expenditure(s) of a specific month.
 
-Format:`delete -e m/MONTH` 
+Format:`delete -e m/MONTH`
 <br/> `delete -e  m/MONTH i/INDEX`
 <br/> `delete -e m/MONTH/ i/INDEX_FROM-INDEX_TO `
 
-* The `MONTH` represents the month of the expenditure(s) will be deleted and cannot be empty.
-* The `INDEX` refers to the index number or a range of index numbers shown in the displayed entry list.
-* The `INDEX` must be within the range of the list.
+> ❗ Notes about Parameters
+> *  `MONTH` indicates the month that this record belongs in.
+     >   *  Must strictly be within the range of 1 to 12.
+> *  `INDEX` indicates the index position of this record in the month.
+     >   *  Must strictly be within the list range.
 
 Examples of usage:
 
- `delete -e m/10 i/3-5`
+`delete -e m/10 i/3-5`
 
-Expected outcome:
+Expected outcome: Expenditures of indexes 3-5 in October are deleted accordingly.
 ```
 ========================================================
 Successfully deleted Expenditure 3:
@@ -601,19 +576,21 @@ _________________________________________________________
 
 Deletes (a) loan record(s) of a specific month
 
-Format:`delete -l m/MONTH` 
+Format:`delete -l m/MONTH`
 <br/> `delete -l m/MONTH i/INDEX`
 <br/> `delete -l m/MONTH i/INDEX_FROM-INDEX_TO`
 
-* The `MONTH` represents the month of the loan record(s) will be deleted and cannot be empty.
-* The `INDEX` refers to the index number or a range of index numbers shown in the displayed entry list.
-* The `INDEX` must be within the range of the list.
+> ❗ Notes about Parameters
+> *  `MONTH` indicates the month that this record belongs in.
+     >   *  Must strictly be within the range of 1 to 12.
+> *  `INDEX` indicates the index position of this record in the month.
+     >   *  Must strictly be within the list range.
 
 Examples of usage:
 
- `delete -l m/10 i/1-2`
+`delete -l m/10 i/1-2`
 
-Expected outcome:
+Expected outcome: Loans of indexes 1 to 2 are deleted accordingly.
 ```
 ========================================================
 Successfully deleted Loan 1:
@@ -631,13 +608,67 @@ Date: 2021-10-03
 <br />
 
 _________________________________________________________
+<br />
+
+# <a id="dbselect"></a> &nbsp;&nbsp; Switching Database Year: `year`
+
+> 😃 Looking to record down past finances? This command allows you to switch between different database years you are working on seamlessly.
+
+Selection of the database year.
+
+Format: `year <YEAR>`
+
+> ❗ Notes about Parameters
+> * `<YEAR>` must strictly be 4 numeric characters long.
+
+Example of usage:
+
+`year 2020`
+
+Expected outcome: A message will be shown to alert the user that the database have been switched to 2020.
+
+```
+========================================================
+You are currently working on year 2020 database!
+========================================================
+```
+#### [↑ Back to top](#top)
+<br />
+
+_________________________________________________________
+
+<br />
+
+#  <a id="find"></a> &nbsp;&nbsp; Find: `find`
+
+> 😃 It seems you have added many records and are getting overwhelmed with all the info!  
+> Use the `find` command to search for any record matching a specific keyword. 
+
+
+Find records matching a particular keyword.
+
+Format: `find KEYWORD`
+
+> ❗ Notes about Parameters
+> * There must be a whitespace between `find` and `KEYWORD`.
+
+Example of usage:
+
+`find Chicken`
+
+Expected outcome: All records that contains the `Chicken` keyword will be returned.
+#### [↑ Back to top](#top)
+<br />
+
+_________________________________________________________
+
 
 <br />
 
 # <a id="stat"></a> &nbsp;&nbsp; Stat: `stat`
 
-> 😃 It can be hard to make sense of the expenditures you have recorded down and figure out where exactly you are
-> overspending. This is especially so if you've been diligently recording down your spendings! Well, `stat` will help you
+> 😃 It can be hard to make sense of the expenditures you have recorded down and figure out which area you are
+> overspending in. This is especially so if you've been diligently recording down your spendings! Well, `stat` will help you
 > do the thinking. So try it out!
 
 The command word `stat` display some statistics graphs and information about the expenditure for 
@@ -650,7 +681,7 @@ _________________________________________________________
 > 😃 Knowing which category you're spending the most on allows a more targeted approach to cutting back on spendings.
 > Use this feature to determine which category and how much you have spent on it in a specific month!
 
-Display the statistics for a particular month's budget and expenditure by categories. 
+Displays the statistics for a particular month's budget and expenditure by categories. 
 
 How it works:
  * The graph shows the percentage spent on each category relative to the overall spending that month.
@@ -658,7 +689,8 @@ How it works:
 
 Format: `stat -c m/MONTH`
 
-* The `MONTH` must strictly be within the range of 1 to 12 and cannot be empty.
+> ❗ Notes about Parameters
+>   *  `MONTH` must strictly be within the range of 1 to 12.
 
 Example of usage:
 
@@ -700,8 +732,11 @@ Display the percentage of expenditure of each month of the year or entire year.
 
 Format: `stat -y t/TYPE_OF_GRAPHICAL_VIEW`
 
-* The `TYPE_OF_GRAPHICAL_VIEW` can only be a value of 1 or 2. Type 1 is a bar graph of monthly percentage
-  (12 bar graph) of budget used. Type 2 is overall yearly percentage (single bar graph) of budget used. 
+> ❗ Notes about Parameters
+>   * `TYPE_OF_GRAPHICAL_VIEW` can only be a value of 1 or 2. 
+>    * Type 1 is a bar graph of monthly percentage
+  (12 bar graph) of budget used 
+>    *  Type 2 is overall yearly percentage (single bar graph) of budget used. 
 
 Example of usage:
 
@@ -802,13 +837,14 @@ _________________________________________________________
 
 <br />
 
-# <a id="guides"></a> &nbsp;&nbsp; Command Guides: `help`
+# <a id="guides"></a> &nbsp;&nbsp; Command Guide: `help`
 
-Command description and format.
+> 😃 Perhaps constantly referring to our User Guide is a hassle, and you want to view information on commands in the app itself? 
+> The help command does exactly that for you!
+
+Displays all commands' description and their format.
 
 Format: `help`
-
-* The format must be strictly as stated above.
 
 Example of usage:
 
@@ -829,8 +865,6 @@ _________________________________________________________
 Converts your data text file into csv format.
 
 Format: `csv`
-
-* The format must be strictly as stated above.
 
 Example of usage:
 
@@ -866,8 +900,6 @@ Displays all the available database.
 
 Format: `db`
 
-* The format must be strictly as stated above.
-
 Example of usage:
 
 `db`
@@ -898,8 +930,6 @@ Terminates the app.
 
 Format: `bye`
 
-* The format must be strictly as stated above.
-
 Example of usage:
 
 `bye`
@@ -917,6 +947,8 @@ Bye, see you again soon!
 
 
 # <a id="faq"></a> FAQ
+
+> 😃 If you still have any more questions, fret not! This Frequently Asked Questions section will hopefully answer some of those doubts still lingering in your head. 
 
 * How do I transfer my data to another computer?
   * Step 1: Locate the folder containing the **tp.jar** file.
@@ -957,13 +989,14 @@ Bye, see you again soon!
      echo Java 11 activated <br />
      java -version <br />
 
-  💡 Note: **[Directory of JDK]** should be replaced with the directory where your JDK has been unzipped into.
+>💡 Note: **[Directory of JDK]** should be replaced with the directory where your JDK has been unzipped into.
 
 #### [↑ Back to top](#top)
 
 <br />
 
 # <a id="command-summary"></a> Command Summary
+> 😃 This summarises all the above features for our app! Use this as a quick alternative if you forgot any of our comamnds!
 
 `<PARAM>` - Optional parameters that can be omitted. And it will be defaulted to the value 
 stated in the above command description. 
