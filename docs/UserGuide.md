@@ -52,7 +52,7 @@ section.
     - [Viewing remaining calories for the day: `calorie /remain`](#viewing-remaining-calories-for-the-day-calorie-remain)
   - [Other](#other)
     - [Viewing help: `help`](#viewing-help-help)
-    - [Viewing statistics: `summary`](#view-statistics-summary)
+    - [Viewing statistics: `summary`](#viewing-statistics-summary)
     - [Getting food suggestions: `suggest`](#getting-food-suggestions-suggest)
     - [Saving data](#saving-data)
     - [Loading data](#loading-data)
