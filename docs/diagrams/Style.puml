@@ -1,0 +1,11 @@
+hide circle
+hide footbox
+hide members
+
+!define UI_COLOUR #F8CECC
+!define PARSER_COLOUR #D5E8D4
+!define COMMAND_COLOUR #E1D5E7
+!define GOAL_COLOUR #FFF2CC
+!define HABIT_COLOUR #FFE6CC
+!define STORAGE_COLOUR #DAE8FC
+

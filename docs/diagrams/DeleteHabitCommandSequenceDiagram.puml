@@ -1,0 +1,52 @@
+@startuml
+
+!include Style.puml
+
+participant ": DeleteHabitCommand" as DeleteHabitCommand COMMAND_COLOUR
+participant "goalList: GoalList" as goalList GOAL_COLOUR
+participant "goal: Goal" as goal GOAL_COLOUR
+participant "printManager: PrintManager" as printManager UI_COLOUR
+
+-> DeleteHabitCommand: runCommand(\ngoalList: GoalList,\nprintManager: PrintManager,\nstorage: Storage)
+activate DeleteHabitCommand
+
+DeleteHabitCommand -> goalList: deleteHabitFromGoal(\ngoalIndex: int,\nhabitIndex: int,\nprintManager: PrintManager)
+activate goalList
+
+goalList -> goalList: getGoal(goalIndex: int)
+activate goalList
+goalList --> goalList: goal: Goal
+deactivate goalList
+
+ref over goalList: Abstracted checks before\ndeleting Goal:\ngoalIndex is a positive integer \nand not out of bounds.
+
+goalList -> goalList: goal.getHabitList()
+activate goalList
+goalList --> goalList: habitList: ArrayList<habit>
+deactivate goalList
+
+goalList -> goalList: getHabit(\nhabitList: ArrayList<Habit>,\nhabitIndex: int)
+activate goalList
+goalList --> goalList: habit: Habit
+deactivate goalList
+
+ref over goalList: Abstracted checks before\nremoving Habit:\nhabitIndex is a positive integer \nand not out of bounds.
+
+goalList -> goal: goal.removeHabit(habitIndex: int)
+activate goal
+return
+
+goalList -> goalList: printRemovedHabit(\ngoal.getDescription(): String,\nhabit.getHabitName(): String)
+activate goalList
+goalList -> printManager
+activate printManager
+
+return
+goalList --> goalList
+deactivate goalList
+
+return
+
+return
+
+@enduml

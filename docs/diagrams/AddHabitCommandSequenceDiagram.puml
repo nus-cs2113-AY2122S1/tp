@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+participant ":AddHabitCommand" as AddHabitCommand COMMAND_COLOUR
+participant "goalList:GoalList" as goalList GOAL_COLOUR
+participant "newHabit:Habit" as newHabit HABIT_COLOUR
+participant "goal:Goal" as goal GOAL_COLOUR
+participant "printManager:PrintManager" as printManager UI_COLOUR
+
+
+
+-> AddHabitCommand: runCommand(goalList: GoalList, \nprintManager: PrintManager, storage: Storage)
+activate AddHabitCommand
+
+AddHabitCommand -> goalList:addHabitToGoal(habit:Habit,\ngoalIndex,printManager)
+activate goalList
+
+goalList -> goalList: getGoal(goalIndex)
+activate goalList
+goalList --> goalList: goal: goal
+deactivate goalList
+
+ref over goalList: Abstracted checks before\nadding Habit:\n1. Non-repeated Habit name.\n2. Interval for new Habit cannot \nexceed end date of goal.
+
+goalList -> goalList: updateHabitEndDate(goal, habit)
+activate goalList
+goalList --> goalList: newHabit: Habit
+deactivate goalList
+
+goalList -> newHabit: populateIntervalsDuringHabitCreation()
+activate newHabit
+newHabit --> goalList
+deactivate newHabit
+
+goalList -> goal: addHabit(newHabit)
+activate goal
+goal --> goalList
+deactivate goal
+
+goalList -> printManager: printAddedHabit(newHabitName, goalDescription)
+activate printManager
+printManager --> goalList
+deactivate printManager
+
+goalList --> AddHabitCommand
+deactivate goalList
+<--AddHabitCommand
+deactivate AddHabitCommand
+
+
+@enduml

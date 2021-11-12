@@ -1,0 +1,35 @@
+@startuml
+
+!include Style.puml
+
+participant ":ListGoalsCommand" as ListGoalsCommand COMMAND_COLOUR
+participant "goalList:GoalList" as goalList GOAL_COLOUR
+participant "printManager:PrintManager" as printManager UI_COLOUR
+
+-> ListGoalsCommand: runCommand(\ngoalList:GoalList,\nprintManager:printManager,\nstorage:Storage,\ngibberish: String)
+activate ListGoalsCommand
+
+ListGoalsCommand -> goalList: listGoals(\nprintManager,\ngibberish)
+activate goalList
+
+alt#gold #lightblue goalList.isEmpty()
+    create ":HabitCommandException"
+    "goalList" -> ":HabitCommandException": HabitCommandException(message: String)
+    activate ":HabitCommandException"
+    return
+    deactivate ":HabitCommandException"
+
+else #lightgreen else
+    goalList -> printManager: printGoalList(\ngoalList: ArrayList<Goal>,\ngoalList.size: int,\ngibberish)
+    activate printManager
+    printManager --> goalList
+    deactivate printManager
+end
+
+goalList --> ListGoalsCommand
+deactivate goalList
+
+<-- ListGoalsCommand
+deactivate ListGoalsCommand
+
+@enduml

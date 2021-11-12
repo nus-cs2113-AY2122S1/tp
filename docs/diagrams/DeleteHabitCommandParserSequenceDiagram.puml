@@ -1,0 +1,25 @@
+@startuml
+
+!include Style.puml
+
+participant ": DeleteParser" as DeleteParser PARSER_COLOUR
+
+mainframe sd Delete Habit Parsing
+
+-> DeleteParser: parseDeleteHabitCommand(\ninput: String)
+activate DeleteParser
+DeleteParser-> DeleteParser: splitInput(input: String)
+activate DeleteParser
+return parameters: ArrayList<String>
+
+DeleteParser-> DeleteParser: getIndex(\nparameters: ArrayList<string>,\nFLAG_GOAL_INDEX: String)
+activate DeleteParser
+return goalIndex: int
+
+DeleteParser-> DeleteParser: getIndex(\nparameters: ArrayList<string>,\nFLAG_HABIT_INDEX: String)
+activate DeleteParser
+return habitIndex: int
+
+return new DeleteHabitCommand(\ngoalIndex: int, habitIndex: int)
+
+@enduml

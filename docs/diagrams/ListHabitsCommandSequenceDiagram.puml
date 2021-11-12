@@ -1,0 +1,46 @@
+@startuml
+!include Style.puml
+
+participant ":ListHabitsCommand" as ListHabitsCommand COMMAND_COLOUR
+participant "goalList: GoalList" as goalList GOAL_COLOUR
+participant "goal:Goal" as goal GOAL_COLOUR
+participant "printManager:PrintManager" as printManager UI_COLOUR
+
+-> ListHabitsCommand: runCommand(goalList: GoalList,\nprintManager:PrintManager, storage:Storage)
+activate ListHabitsCommand
+
+ListHabitsCommand -> goalList :listHabitsFromGoal(goatIndex:int,\nprintManager:PrintManager)
+activate goalList
+goalList -> goalList :getGoal(goalIndex:int)
+activate goalList
+goalList --> goalList :goal:Goal
+deactivate goalList
+
+goalList -> goal: getHabitList()
+activate goal
+goal --> goalList: habitList: ArrayList<Habit>
+deactivate goal
+
+goalList -> goal: numberOfHabits()
+activate goal
+goal --> goalList :numOfHabits: int
+deactivate goal
+
+alt#gold #lightblue numOfHabits = 0
+    goalList -> ":HabitCommandException": HabitCommandException(message:String)
+    activate ":HabitCommandException"
+    ":HabitCommandException" --> goalList
+    deactivate ":HabitCommandException"
+else #lightgreen else
+    goalList -> printManager: printHabitList(goalDescription: String,\nhabitList: ArrayList<Habit>, numOfHabits: int)
+    activate printManager
+    printManager --> goalList
+    deactivate printManager
+end
+
+goalList --> ListHabitsCommand
+deactivate goalList
+<-- ListHabitsCommand
+deactivate ListHabitsCommand
+
+@enduml

@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+participant ":DoneParser" as DoneParser PARSER_COLOUR
+
+mainframe sd Done Habit Parsing
+
+-> DoneParser: parseDoneHabit\n(commandInstruction:String)
+activate DoneParser
+
+DoneParser -> DoneParser: splitInput\n(commandInstruction: String)
+activate DoneParser
+DoneParser --> DoneParser: parameters: ArrayList<String>
+deactivate DoneParser
+
+DoneParser -> DoneParser: getIndex(parameters, "g/")
+activate DoneParser
+DoneParser --> DoneParser: goalIndex: int
+deactivate DoneParser
+
+DoneParser -> DoneParser: getIndex(parameters, "h/")
+activate DoneParser
+DoneParser --> DoneParser: habitIndex: int
+deactivate DoneParser
+
+<-- DoneParser: DoneHabitCommand\n(goalIndex, habitIndex)
+deactivate DoneParser
+
+@enduml

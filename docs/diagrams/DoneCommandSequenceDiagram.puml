@@ -1,0 +1,50 @@
+@startuml
+!include Style.puml
+
+participant ":DoneHabitCommand" as DoneHabitCommand COMMAND_COLOUR
+participant "goalList:GoalList" as goalList GOAL_COLOUR
+participant "goal:Goal" as goal GOAL_COLOUR
+participant "habit:Habit" as habit HABIT_COLOUR
+participant "printManager:PrintManager" as printManager UI_COLOUR
+
+-> DoneHabitCommand: runCommand(goalList: GoalList,\nprintManager:PrintManager, storage: Storage)
+activate DoneHabitCommand
+
+DoneHabitCommand -> goalList: doneHabitFromGoal(goalIndex,\nhabitIndex, printManager)
+activate goalList
+goalList -> goalList: getGoal(goalIndex: int)
+activate goalList
+goalList --> goalList: goal: Goal
+deactivate goalList
+
+goalList -> goal: getHabitList()
+activate goal
+goal --> goalList: habits: ArrayList<Habit>
+deactivate goal
+
+goalList -> goalList: getHabit(habits, habitIndex)
+activate goalList
+goalList --> goalList: habit:Habit
+deactivate goalList
+
+goalList -> goal: doneHabit(habitIndex:int)
+activate goal
+goal --> goalList
+deactivate goal
+
+goalList -> habit: getDoneHabitDates(date: Date)
+activate habit
+habit --> goalList: strDates: String[]
+deactivate habit
+
+goalList -> printManager: printDoneHabit(goalDescription: String,\nhabitName: String,strDates: String[])
+activate printManager
+printManager --> goalList
+deactivate printManager
+
+goalList --> DoneHabitCommand
+deactivate goalList
+<-- DoneHabitCommand
+deactivate DoneHabitCommand
+
+@enduml

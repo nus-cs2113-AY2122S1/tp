@@ -1,0 +1,14 @@
+@startuml
+
+!include Style.puml
+
+participant ": ListGoalsParser" as ListGoalsParser PARSER_COLOUR
+
+mainframe sd List Goal Parsing
+
+-> ListGoalsParser: parseListGoalsCommand(input: String)
+activate ListGoalsParser
+
+return ListGoalsCommand(input)
+
+@enduml

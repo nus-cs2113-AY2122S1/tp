@@ -1,8 +1,17 @@
-# Duke
+![Ha(ppy)Bit Logo](Display_Images/HappyBit_logo.png)
+_Ha(ppy)Bit logo_ | Made with Canva
 
-{Give product intro here}
+# Howdy! This is Ha(ppy)Bit.
+_Ha(ppy)Bit_ is a desktop app aimed to **empower students** to achieve their
+**goals**—whether personal, academical, or health—amidst the hectic and stressful
+**university life**, through cultivating good **habits**.
+Users can only run the app on a Command Line Interface (CLI).
 
-Useful links:
-* [User Guide](UserGuide.md)
-* [Developer Guide](DeveloperGuide.md)
-* [About Us](AboutUs.md)
+Sounds like the app for you? Head over to our [User Guide](UserGuide.md) to get started!
+
+-----------
+
+You might be interested in:
+* 💻 [User Guide](UserGuide.md): great starting point for new users. 
+* 📖 [Developer Guide](DeveloperGuide.md): what makes Ha(ppy)Bit tick?
+* 👩‍💻 👨‍💻 [About Us](AboutUs.md): find out about the developers behind Ha(ppy)Bit.

@@ -1,0 +1,43 @@
+@startuml
+
+!include Style.puml
+
+participant ": DeleteGoalCommand" as DeleteGoalCommand COMMAND_COLOUR
+participant "goalList: GoalList" as goalList GOAL_COLOUR
+participant "printManager: PrintManager" as printManager UI_COLOUR
+
+-> DeleteGoalCommand: runCommand(\ngoalList: GoalList,\nprintManager: PrintManager,\nstorage: Storage)
+activate DeleteGoalCommand
+
+DeleteGoalCommand -> goalList: deleteGoal(\ngoalIndex: int,\nprintManager: PrintManager)
+activate goalList
+
+goalList -> goalList: getGoal(goalIndex: int)
+activate goalList
+goalList --> goalList: goal: Goal
+deactivate goalList
+
+ref over goalList: Abstracted checks before\ndeleting Goal:\ngoalIndex  is a positive integer \nand not out of bounds.
+
+goalList -> goalList: updateChosenGoalIndex(\ngoalIndex: int)
+activate goalList
+goalList --> goalList
+deactivate goalList
+
+goalList -> goalList: remove(goal: Goal)
+activate goalList
+goalList --> goalList
+deactivate goalList
+
+goalList -> goalList: printRemovedGoal(\ngoal.getDescription(): String)
+activate goalList
+goalList -> printManager
+deactivate goalList
+
+activate printManager
+goalList <-- printManager
+deactivate printManager
+
+return
+
+@enduml
