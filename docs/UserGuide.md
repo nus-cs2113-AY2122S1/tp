@@ -378,7 +378,7 @@ _________________________________________________________
 
 ### <a id="year"></a> Switching Database Year: `year`
 
-> 😃 Selection of the database year.
+> 😃 This command allows you to switch between different database years you are working on seamlessly.
 
 Format: `year <year>`
 
@@ -405,7 +405,7 @@ _________________________________________________________
 
 ### <a id="find"></a> Finding a Particular Expenditure, Loan and Budget: `find`
 
-> 😃 Want to find a specific records of Expenditure, loan and Budget that have a matching key word on the search term? 
+> 😃 Want to find a records of Expenditure, Loan and Budget that contains matching keywords with the search term? 
 > Use the `find` command!
 
 Format: `find KEYWORD`
@@ -653,9 +653,9 @@ _________________________________________________________
 
 ### <a id="stat-year"></a> `-y` : View Statistics for the Year
 
-> 😃 Surely things get messy after you have many expenditures, loan and budget entries. Is there
+> 😃 Surely things get messy after you have added many expenditures, loan and budget entries. Is there
 > an easy way to visualize the amount of budget used or left? Yes! `stat -y` 
-> display the statistics for the current database year which the user is working on. 
+> displays the statistics for the current database year which you are working on. 
 
 Format: `stat -y t/TYPE_OF_GRAPHICAL_VIEW`
 
@@ -784,7 +784,7 @@ _________________________________________________________
 # <a id="csv"></a> &nbsp;&nbsp; CSV: `csv`
 
 > 😃 If our statistical analysis feature is not good enough for you, you may convert the database records
-> into a csv file by simple keying in the `csv` command. You will then be able to use Excel to do advanced
+> into a csv file by simply keying in the `csv` command. You will then be able to use Excel to do advanced
 > statistical analysis.
 
 Format: `csv`
@@ -850,7 +850,7 @@ _________________________________________________________
 # <a id="exit"></a> &nbsp;&nbsp; Exit the program: `bye`
  
 > When you are done with using the app and wish to exit the app. Enter the command `bye` to 
-> say goodbye with our app 👋
+> say goodbye to our app 👋
 
 Format: `bye`
 
