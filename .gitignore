@@ -13,5 +13,15 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.txt
+# Jekyll Local Testing Files
+docs/.sass-cache
+docs/_site
+
+# IO Tests
+text-ui-test/ACTUAL.TXT
 text-ui-test/EXPECTED-UNIX.TXT
+
+# Stored Data
+fridgetData
+fridgetTestData
+text-ui-test/config

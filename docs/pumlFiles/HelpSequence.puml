@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam backgroundColor #f2f2f2
+skinparam defaultFontSize 16
+
+Participant ":HelpCommand" as HelpCommand
+
+autonumber
+
+-> HelpCommand: execute()
+activate HelpCommand
+
+    HelpCommand -> ":Ui": printLine()
+    activate ":Ui"
+    HelpCommand <-- ":Ui"
+    deactivate ":Ui"
+
+    <-- HelpCommand
+deactivate  HelpCommand
+
+@enduml

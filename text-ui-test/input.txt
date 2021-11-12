@@ -1,1 +1,66 @@
-James Gosling
+blabla
+notifs
+notifs
+help
+add burger /2030-09-23
+1
+add chicken /2023-10-10
+1
+update burger
+20
+list
+find burger
+find e
+find n
+reset
+n
+find e
+reset
+y
+find e
+add yoghurt cake /2030-10-15
+1
+add fish Cake /2022-12-12
+1
+add JimBeam /2030-10-03
+1
+list -e
+list -r
+expiring
+list
+add fish Cake /2022-12-12
+1
+add fish Cake /2022-12-12
+remove i
+0
+list
+remove beam
+n
+update beam
+y
+2
+remove beam
+y
+1
+update beam
+y
+2000
+update a
+1
+675
+remove i
+2
+2
+list
+remove fish Cake
+2
+list
+remove yoghurt cake
+675
+Y
+5
+remove fish Cake
+N
+list
+shoplist
+exit

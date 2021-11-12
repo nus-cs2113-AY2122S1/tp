@@ -1,9 +1,313 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
 
-What is your name?
-Hello James Gosling
+
+
+
+   ad88              88           88
+  d8"                ""           88                             ,d
+  88                              88                             88
+MM88MMM  8b,dPPYba,  88   ,adPPYb,88   ,adPPYb,d8   ,adPPYba,  MM88MMM
+  88     88P'   "Y8  88  a8"    `Y88  a8"    `Y88  a8P_____88    88
+  88     88          88  8b       88  8b       88  8PP"""""""    88
+  88     88          88  "8a,   ,d88  "8a,   ,d88  "8b,   ,aa    88,
+  88     88          88   `"8bbdP"Y8   `"YbbdP"Y8   `"Ybbd8"'    "Y888
+                                       aa,    ,88
+                                        "Y8bbdP"
+Hello!
+What would you like to do?
+__________________________________________
+USER INPUT: __________________________________________
+No command found!
+Enter help if you need the list of available commands.
+__________________________________________
+USER INPUT: __________________________________________
+Turning notification off!
+__________________________________________
+USER INPUT: __________________________________________
+Turning notification on!
+__________________________________________
+USER INPUT: __________________________________________
+List of commands available:
+
+add ITEM_NAME /EXPIRY_DATE(format: yyyy-mm-dd) [eg. add bacon /2022-11-11]
+-> Adds an item and its expiry date to the item list. Input quantity after being prompt.
+
+find KEYWORD [eg. find bacon]
+-> Find and print all items associated with keyword.
+
+remove ITEM_NAME [eg. delete bacon]
+-> Removes the item from the item list.
+
+list -e
+-> List out all the items starting with earliest expiry date.
+
+list -r
+-> List out all the items based on the order added.
+
+list
+-> List out all the items in alphabetical order.
+
+shoplist
+-> List out all the items in the shopping list in alphabetical order.
+
+expiring
+-> Prints out items that have expired or are expiring within a week.
+
+update ITEMS_NAME [eg. update egg]
+-> Prompts a quantity change for the specified item name.
+
+notifs
+-> Toggle the notification on or off depending on previous state. Default mode is on.
+
+reset
+-> Deletes all the previous items entries from the reader.
+
+shopreset
+-> Deletes all the previous items entries in the shopping list.
+
+exit
+-> Exits the program.
+
+For more information about each command please visit our User Guide.
+Link: https://ay2122s1-cs2113t-w12-4.github.io/tp/UserGuide.html
+__________________________________________
+USER INPUT: __________________________________________
+What quantity of [burger | 2030-09-23] would you like to add?
+__________________________________________
+USER INPUT: __________________________________________
+You have successfully added:
+    burger | Qty: 1 | 23 Sep 2030
+__________________________________________
+USER INPUT: __________________________________________
+What quantity of [chicken | 2023-10-10] would you like to add?
+__________________________________________
+USER INPUT: __________________________________________
+You have successfully added:
+    chicken | Qty: 1 | 10 Oct 2023
+__________________________________________
+USER INPUT: __________________________________________
+How many of burger do you have left?
+__________________________________________
+USER INPUT: __________________________________________
+Quantity of burger is now 20.
+__________________________________________
+USER INPUT: __________________________________________
+List sorted by item name:
+    burger | Qty: 20 | 23 Sep 2030
+    chicken | Qty: 1 | 10 Oct 2023
+    JimBeam | Qty: 1998 | 03 Oct 2030
+__________________________________________
+USER INPUT: __________________________________________
+These are the matching items:
+    1. burger | Qty: 20 | 23 Sep 2030
+__________________________________________
+USER INPUT: __________________________________________
+These are the matching items:
+    1. JimBeam | Qty: 1998 | 03 Oct 2030
+    2. burger | Qty: 20 | 23 Sep 2030
+    3. chicken | Qty: 1 | 10 Oct 2023
+__________________________________________
+USER INPUT: __________________________________________
+These are the matching items:
+    1. chicken | Qty: 1 | 10 Oct 2023
+__________________________________________
+USER INPUT: __________________________________________
+Are you sure you want to reset everything in the fridge? (Y/N)
+__________________________________________
+USER INPUT: __________________________________________
+Shutting down the command...
+__________________________________________
+USER INPUT: __________________________________________
+These are the matching items:
+    1. JimBeam | Qty: 1998 | 03 Oct 2030
+    2. burger | Qty: 20 | 23 Sep 2030
+    3. chicken | Qty: 1 | 10 Oct 2023
+__________________________________________
+USER INPUT: __________________________________________
+Are you sure you want to reset everything in the fridge? (Y/N)
+__________________________________________
+USER INPUT: __________________________________________
+Item list has been reset successfully.
+__________________________________________
+USER INPUT: __________________________________________
+You currently have nothing in your fridge.
+Input "help" to get started!
+__________________________________________
+USER INPUT: __________________________________________
+What quantity of [yoghurt cake | 2030-10-15] would you like to add?
+__________________________________________
+USER INPUT: __________________________________________
+You have successfully added:
+    yoghurt cake | Qty: 1 | 15 Oct 2030
+__________________________________________
+USER INPUT: __________________________________________
+What quantity of [fish Cake | 2022-12-12] would you like to add?
+__________________________________________
+USER INPUT: __________________________________________
+You have successfully added:
+    fish Cake | Qty: 1 | 12 Dec 2022
+__________________________________________
+USER INPUT: __________________________________________
+What quantity of [JimBeam | 2030-10-03] would you like to add?
+__________________________________________
+USER INPUT: __________________________________________
+You have successfully added:
+    JimBeam | Qty: 1 | 03 Oct 2030
+__________________________________________
+USER INPUT: __________________________________________
+List sorted by expiry date:
+    fish Cake | Qty: 1 | 12 Dec 2022
+    JimBeam | Qty: 1 | 03 Oct 2030
+    yoghurt cake | Qty: 1 | 15 Oct 2030
+__________________________________________
+USER INPUT: __________________________________________
+List sorted by earliest added:
+    yoghurt cake | Qty: 1 | 15 Oct 2030
+    fish Cake | Qty: 1 | 12 Dec 2022
+    JimBeam | Qty: 1 | 03 Oct 2030
+__________________________________________
+USER INPUT: __________________________________________
+No items expiring.
+__________________________________________
+USER INPUT: __________________________________________
+List sorted by item name:
+    fish Cake | Qty: 1 | 12 Dec 2022
+    JimBeam | Qty: 1 | 03 Oct 2030
+    yoghurt cake | Qty: 1 | 15 Oct 2030
+__________________________________________
+USER INPUT: __________________________________________
+What quantity of [fish Cake | 2022-12-12] would you like to add?
+__________________________________________
+USER INPUT: __________________________________________
+You have successfully increased the quantity of:
+    fish Cake | Qty: 1->2 | 12 Dec 2022
+__________________________________________
+USER INPUT: __________________________________________
+What quantity of [fish Cake | 2022-12-12] would you like to add?
+__________________________________________
+USER INPUT: __________________________________________
+No valid number was stated. The command has been shutdown.
+__________________________________________
+USER INPUT: __________________________________________
+No command found!
+Enter help if you need the list of available commands.
+__________________________________________
+USER INPUT: __________________________________________
+List sorted by item name:
+    fish Cake | Qty: 2 | 12 Dec 2022
+    JimBeam | Qty: 1 | 03 Oct 2030
+    yoghurt cake | Qty: 1 | 15 Oct 2030
+__________________________________________
+USER INPUT: __________________________________________
+Did you mean: JimBeam? [Y/N]
+__________________________________________
+USER INPUT: __________________________________________
+No other item matches : [beam]
+Command has been shutdown.
+__________________________________________
+USER INPUT: __________________________________________
+Did you mean: JimBeam? [Y/N]
+__________________________________________
+USER INPUT: __________________________________________
+How many of JimBeam do you have left?
+__________________________________________
+USER INPUT: __________________________________________
+Quantity of JimBeam is now 2.
+__________________________________________
+USER INPUT: __________________________________________
+Did you mean: JimBeam? [Y/N]
+__________________________________________
+USER INPUT: __________________________________________
+There are 2 items, how many would like to remove?
+__________________________________________
+USER INPUT: __________________________________________
+You have successfully removed:
+    JimBeam | Qty: 1 | 03 Oct 2030
+__________________________________________
+USER INPUT: __________________________________________
+Did you mean: JimBeam? [Y/N]
+__________________________________________
+USER INPUT: __________________________________________
+How many of JimBeam do you have left?
+__________________________________________
+USER INPUT: __________________________________________
+Quantity of JimBeam is now 2000.
+__________________________________________
+USER INPUT: __________________________________________
+Which item would you like to overwrite quantity? Type the index of the item below.
+    1. yoghurt cake | Qty: 1 | 15 Oct 2030
+    2. fish Cake | Qty: 2 | 12 Dec 2022
+    3. JimBeam | Qty: 2000 | 03 Oct 2030
+If you've changed your mind, simply type 'quit'.
+__________________________________________
+USER INPUT: __________________________________________
+How many of yoghurt cake do you have left?
+__________________________________________
+USER INPUT: __________________________________________
+Quantity of yoghurt cake is now 675.
+__________________________________________
+USER INPUT: __________________________________________
+Which item would you like to remove? Type the index of the item below.
+    1. fish Cake | Qty: 2 | 12 Dec 2022
+    2. JimBeam | Qty: 2000 | 03 Oct 2030
+If you've changed your mind, simply type 'quit'.
+__________________________________________
+USER INPUT: __________________________________________
+There are 2000 items, how many would like to remove?
+__________________________________________
+USER INPUT: __________________________________________
+You have successfully removed:
+    JimBeam | Qty: 2 | 03 Oct 2030
+__________________________________________
+USER INPUT: __________________________________________
+List sorted by item name:
+    fish Cake | Qty: 2 | 12 Dec 2022
+    JimBeam | Qty: 1998 | 03 Oct 2030
+    yoghurt cake | Qty: 675 | 15 Oct 2030
+__________________________________________
+USER INPUT: __________________________________________
+There are 2 items, how many would like to remove?
+__________________________________________
+USER INPUT: __________________________________________
+You have successfully removed:
+    fish Cake | Qty: 2 | 12 Dec 2022
+__________________________________________
+You have ran out of fish Cake. Would you like to add it to your shopping list? (Y/N)
+__________________________________________
+USER INPUT: __________________________________________
+Invalid Confirmation. The Command has been shutdown.
+__________________________________________
+USER INPUT: __________________________________________
+There are 675 items, how many would like to remove?
+__________________________________________
+USER INPUT: __________________________________________
+You have successfully removed:
+    yoghurt cake | Qty: 675 | 15 Oct 2030
+__________________________________________
+You have ran out of yoghurt cake. Would you like to add it to your shopping list? (Y/N)
+__________________________________________
+USER INPUT: __________________________________________
+How many items would you like to buy?
+__________________________________________
+USER INPUT: __________________________________________
+You have successfully added:
+    yoghurt cake | Qty: 5
+__________________________________________
+USER INPUT: __________________________________________
+No item matching [fish Cake] was found.
+__________________________________________
+USER INPUT: __________________________________________
+No command found!
+Enter help if you need the list of available commands.
+__________________________________________
+USER INPUT: __________________________________________
+List sorted by item name:
+    JimBeam | Qty: 1998 | 03 Oct 2030
+__________________________________________
+USER INPUT: __________________________________________
+List sorted by item name:
+    1. yoghurt cake | Qty: 5
+__________________________________________
+USER INPUT: __________________________________________
+We'll help you remember everything you told us :)
+See you again!~~
+__________________________________________

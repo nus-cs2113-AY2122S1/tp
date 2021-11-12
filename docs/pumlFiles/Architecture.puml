@@ -1,0 +1,38 @@
+@startuml
+
+skinparam backgroundColor #f2f2f2
+skinparam defaultFontSize 16
+
+
+:Our\nFridget\nUser:  as user
+
+rectangle Fridget
+
+package Core #A9DCDF {
+    rectangle Command
+    rectangle Parser
+    rectangle ItemList
+    rectangle ShoppingList
+}
+
+package Database #DDDDDD {
+    rectangle Storage
+}
+
+package Front\nEnd #ADD1B2 {
+        rectangle Ui
+    }
+
+user <-r-> Ui
+
+Ui <-> Fridget
+Fridget --> Parser
+Parser <-u-> Command
+Command <-> Fridget
+Command <-l-> Ui
+Command --> ItemList
+Command --> ShoppingList
+
+Fridget -u-> Storage
+
+@enduml

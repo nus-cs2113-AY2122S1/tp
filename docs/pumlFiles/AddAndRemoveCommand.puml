@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+hide circle
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #f2f2f2
+skinparam defaultFontSize 16
+
+abstract class Command
+class AddCommand
+class RemoveCommand
+
+Command <|-- AddCommand
+Command <|-- RemoveCommand
+
+class AddCommand {
+isBye = false
++AddCommand()
++execute(Ui ui, Parser parser,
+ItemList itemList)
++exitNotRequired()
+}
+
+class RemoveCommand {
+isBye = false
++ AddCommand()
++ execute(Ui ui, Parser parser,
+ItemList itemList)
++ exitNotRequired()
++ handleRemovalOfItem(Ui ui, ItemList itemList,
+String nameOfItemToBeRemoved, ArrayList<Item> matchingItems)
+}
+
+abstract class Command {
+isBye = false
++ Command()
++ execute(Ui ui, Parser parser, ItemList itemList)
++ exitNotRequired()
+}
+
+@enduml

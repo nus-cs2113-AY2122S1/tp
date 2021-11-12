@@ -1,0 +1,40 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #f2f2f2
+skinparam defaultFontSize 16
+
+
+
+class AddCommand {
+    + execute() : void
+    - addMultipleItemsToItemList() : void
+    - addItemToItemList() : void
+}
+
+note left
+    Parameters for
+    AddCommand
+    have been
+    excluded to
+    focus on Ui
+end note
+
+class Ui {
+    - input: Scanner
+    + printSeparatorLine() : void
+    + printReactionToAddingItem(newItem : Item) : void
+    + getQuantityToBeAdded() : int
+}
+
+
+
+AddCommand -> "1" Ui
+note right
+    Commonly used
+    methods for Ui
+    from within
+    AddCommand
+end note
+
+@enduml

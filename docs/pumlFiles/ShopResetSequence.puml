@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam backgroundColor #f2f2f2
+skinparam defaultFontSize 16
+
+autonumber
+
+-> ":ShopResetCommand": execute()
+activate ":ShopResetCommand"
+
+":ShopResetCommand" -> ":ShoppingList": getShoppingList("r")
+activate ":ShoppingList"
+":ShopResetCommand" <-- ":ShoppingList": ArrayList<Item> listOfItems
+deactivate ":ShoppingList"
+
+opt Shopping List Empty
+<- ":ShopResetCommand": FridgetException()
+end
+
+opt Reconfirm Reset Command
+
+    ":ShopResetCommand" -> ":ShoppingList": resetList()
+    activate ":ShoppingList"
+    ":ShopResetCommand" <-- ":ShoppingList":
+    deactivate ":ShoppingList"
+
+    ":ShopResetCommand" -> ":Ui": printShopResetMessage()
+    activate ":Ui"
+    ":ShopResetCommand" <-- ":Ui"
+    deactivate ":Ui"
+
+    <-- ":ShopResetCommand"
+    deactivate ":ShopResetCommand"
+end
+@enduml

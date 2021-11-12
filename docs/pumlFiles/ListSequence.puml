@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam backgroundColor #f2f2f2
+skinparam defaultFontSize 16
+
+autonumber
+
+-> ":ListCommand": execute()
+activate ":ListCommand"
+
+":ListCommand" -> ":Parser": parseSortTypeForList(currentUserInput)
+activate ":Parser"
+":ListCommand" <-- ":Parser": sortType :String
+deactivate ":Parser"
+":ListCommand" -> ":ItemList": getItemList(sortType)
+activate ":ItemList"
+":ListCommand" <--":ItemList": listOfItems :ArrayList<Item>
+deactivate ":ItemList"
+":ListCommand" -> ":Ui": printListMessage(listOfItems, sortType)
+activate ":Ui"
+":ListCommand" <-- ":Ui"
+deactivate ":Ui"
+
+<-- ":ListCommand"
+deactivate ":ListCommand"
+
+@enduml

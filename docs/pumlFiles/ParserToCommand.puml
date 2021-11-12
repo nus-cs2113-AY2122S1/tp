@@ -1,0 +1,40 @@
+@startuml
+hide circle
+skinparam backgroundColor #f2f2f2
+skinparam defaultFontSize 16
+skinparam classAttributeIconSize 0
+
+Parser <-> "*" XYZCommand
+
+note top of XYZCommand
+ * XYZCommand represents all command classes
+   that inherits from Command class including
+   AddCommand, ExitCommand, etc.
+
+ * All methods eliminated from diagram
+   except for its constructor to place
+   focus on Parser and Command interaction.
+end note
+
+class XYZCommand {
++XYZCommand()
+}
+
+note top of Parser
+* Constants and private variables
+  are not shown in the diagram.
+end note
+
+class Parser {
++Parser()
++parseCommand(userInput: String): Command
+commandType: CommandType): String
++parseItemForAdding(userInput: String): Item
++parseMultipleItemsForAdding(userInput: String): ArrayList<Item>
++parseSortTypeForList(userInput: String): String
++parseSearchTerm(userInput: String,
+commandType: CommandType): String
++parseQuantity(newQty: int): boolean
++parseSuggestion(acceptSuggestion: boolean): void
+}
+@enduml

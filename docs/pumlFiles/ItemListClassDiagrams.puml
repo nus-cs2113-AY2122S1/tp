@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #f2f2f2
+skinparam defaultFontSize 16
+hide circle
+
+ItemList "1" <-left- Fridget : itemList
+ItemList "1" <-up- Command
+Item "*" <-left- ItemList : itemList
+
+class ItemList {
+    + addItem(item: Item): int
+    + removeItem(item: Item, qty: int): boolean
+    + searchItemNameExist(item: Item): boolean
+    + updateQuantity(targetItem: Item, toQuantity: int): void
+    + containsItem(item: Item): boolean
+    + sortItem(byDate: boolean): ArrayList<Item>
+    + getItemList(sortType: String): ArrayList<Item>
+    + findAllMatchingItems(searchTerm: String): ArrayList<Item>
+    + resetList(): void
+}
+
+class Item {
+    - itemName: String
+    - expiryDate: LocalDate
+    - quantity: int
+}
+
+class Command {
+    + execute(ui: Ui, parser: Parser, itemList: ItemList, shoppingList: ShoppingList) : void
+}
+
+class Fridget {
+    + run(): void
+    + {static} main(): void
+}
+
+@enduml

@@ -1,0 +1,80 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam backgroundColor #f2f2f2
+skinparam defaultFontSize 16
+
+box #A9DCDF
+Participant "Fridget" as FridgetClass
+Participant ":Fridget" as Fridget
+end box
+
+box #Salmon
+Participant ":Ui" as Ui
+end box
+
+box #Technology
+Participant ":Parser" as Parser
+end box
+
+box #Motivation
+Participant ":ItemList" as ItemList
+end box
+
+box #Moccasin
+Participant ":ShoppingList" as ShoppingList
+end box
+
+box #PaleGreen
+Participant ":Storage" as Storage
+end box
+
+
+box #B4A7E5
+Participant ":Notification" as Notification
+end box
+
+-> FridgetClass: main()
+activate FridgetClass
+
+note top
+Parameters are omitted from the diagram.
+end note
+
+create Fridget
+FridgetClass -> Fridget: new Fridget()
+activate Fridget
+
+Fridget -> Fridget: run()
+activate Fridget
+
+create Ui
+Fridget -> Ui: new Ui()
+activate Ui
+Fridget <-- Ui
+
+create Parser
+Fridget -> Parser: new Parser()
+activate Parser
+Fridget <-- Parser
+
+create ItemList
+Fridget -> ItemList: new ItemList()
+activate ItemList
+Fridget <-- ItemList
+
+create ShoppingList
+Fridget -> ShoppingList: new ShoppingList()
+activate ShoppingList
+Fridget <-- ShoppingList
+
+create Storage
+Fridget -> Storage: new Storage()
+activate Storage
+Fridget <-- Storage
+
+create Notification
+Fridget -> Notification: new Notification()
+activate Notification
+Fridget <-- Notification
+
+@enduml

@@ -1,6 +1,6 @@
-# Duke project template
+# Fridget
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+This is a repository to store all source files related to the development of Fridget. Follow the instructions below to set up the project in your local repo, and create PRs.
 
 ## Setting up in Intellij
 
@@ -9,21 +9,48 @@ Prerequisites: JDK 11 (use the exact version), update Intellij to the most recen
 1. **Ensure Intellij JDK 11 is defined as an SDK**, as described [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk) -- this step is not needed if you have used JDK 11 in a previous Intellij project.
    * In the same dialog, you _may_ have to set the Project language level field to the SDK default option.
 1. **Import the project _as a Gradle project_**, as described [here](https://se-education.org/guides/tutorials/intellijImportGradleProject.html).
-1. **Verify the set up**: After the importing is complete, locate the `src/main/java/seedu/duke/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
+1. **Verify the set up**: After the importing is complete, locate the `src/main/java/seedu/fridget/Fridget.java` file, right-click it, and choose `Run Fridget.main()`. If the setup is correct, you should see something like the below:
    ```
    > Task :compileJava
    > Task :processResources NO-SOURCE
    > Task :classes
    
-   > Task :Duke.main()
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
+   > Task :run
    
-   What is your name?
+   
+   
+   
+      ad88              88           88
+     d8"                ""           88                             ,d
+     88                              88                             88
+   MM88MMM  8b,dPPYba,  88   ,adPPYb,88   ,adPPYb,d8   ,adPPYba,  MM88MMM
+     88     88P'   "Y8  88  a8"    `Y88  a8"    `Y88  a8P_____88    88
+     88     88          88  8b       88  8b       88  8PP"""""""    88
+     88     88          88  "8a,   ,d88  "8a,   ,d88  "8b,   ,aa    88,
+     88     88          88   `"8bbdP"Y8   `"YbbdP"Y8   `"Ybbd8"'    "Y888
+                                          aa,    ,88
+                                           "Y8bbdP"
+   Hello!
+   What would you like to do?
+   __________________________________________
+    ___________________________________________________
+   |                      HEALTH!                      |
+   |===================================================|
+   |      ___            _         __        ______    |
+   |     / _ \___ __ _  (_)__  ___/ /__ ____/ / / /    |
+   |    / , _/ -_)  ' \/ / _ \/ _  / -_) __/_/_/_/     |
+   |   /_/|_|\__/_/_/_/_/_//_/\_,_/\__/_/ (_|_|_)      |
+   |   ---------------------------------------------   |
+   |                                                   |
+   |    "If you don't take time to take care of your   |
+   |    health now, you're gonna have to make time     |
+   |    for feeling sick and tired later."             |
+   |                                                   |
+   |            Always remember to eat more            |
+   |              Fruits and Vegetables!               |
+   |___________________________________________________|
+   __________________________________________
+   USER INPUT: 
    ```
    Type some word and press enter to let the execution proceed to the end.
 
@@ -40,7 +67,6 @@ Prerequisites: JDK 11 (use the exact version), update Intellij to the most recen
 
 ### JUnit tests
 
-* A skeleton JUnit test (`src/test/java/seedu/duke/DukeTest.java`) is provided with this project template. 
 * If you are new to JUnit, refer to the [JUnit Tutorial at se-education.org/guides](https://se-education.org/guides/tutorials/junit.html).
 
 ## Checkstyle

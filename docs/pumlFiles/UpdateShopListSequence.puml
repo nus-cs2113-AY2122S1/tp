@@ -1,0 +1,55 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam backgroundColor #f2f2f2
+skinparam defaultFontSize 16
+
+autonumber
+
+activate ":RemoveCommand"
+activate ":RemoveCommand"
+
+":RemoveCommand" -> ":RemoveCommand": handleRemovalOfItem(nameOfItemToBeRemoved, matchingItems)
+activate ":RemoveCommand"
+
+":RemoveCommand" -> ":RemoveCommand": handleRemovalOfMultipleQuantity(itemToBeRemoved)
+activate ":RemoveCommand"
+
+":RemoveCommand" -> ":RemoveCommand": updateShopList(itemToBeRemoved, qtyInShop)
+activate ":RemoveCommand"
+
+":RemoveCommand" -> ":Ui": getShopQuantity(itemRemoved, qtyInShop)
+activate ":Ui"
+":RemoveCommand" <-- ":Ui"
+deactivate ":Ui"
+
+opt qty > 0
+
+    create ":Item"
+    ":RemoveCommand" -> ":Item": new Item(itemRemoved.getName(), qty)
+    activate ":Item"
+    ":RemoveCommand" <-- ":Item": Item addedItem
+    deactivate ":Item"
+
+    ":RemoveCommand" -> ":ShoppingList": addItem(addedItem, qty)
+    activate ":ShoppingList"
+    ":RemoveCommand" <-- ":ShoppingList"
+    deactivate ":ShoppingList"
+
+    ":RemoveCommand" -> ":Ui": printShopUpdateMessage(addedItem, qtyInShop)
+    activate ":Ui"
+    ":RemoveCommand" <- ":Ui"
+    deactivate ":Ui"
+
+end
+
+":RemoveCommand" --> ":RemoveCommand"
+deactivate ":RemoveCommand"
+
+":RemoveCommand" --> ":RemoveCommand"
+deactivate ":RemoveCommand"
+
+":RemoveCommand" --> ":RemoveCommand"
+deactivate ":RemoveCommand"
+
+@enduml

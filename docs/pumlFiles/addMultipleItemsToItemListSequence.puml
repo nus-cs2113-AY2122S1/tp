@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam backgroundColor #f2f2f2
+skinparam defaultFontSize 16
+
+autonumber
+activate ":AddCommand"
+
+":AddCommand"-> ":AddCommand": addMultipleItemsToItemList(ArrayList<Item> newItems)
+activate ":AddCommand"
+
+loop for each newItem in newItems
+
+":AddCommand" -> ":AddCommand": addItemToItemList(newItem)
+activate ":AddCommand"
+":AddCommand" <-- ":AddCommand"
+deactivate ":AddCommand"
+
+alt newItem not last item in newItem
+
+":AddCommand" -> ":Ui": printSeparatorLine()
+":AddCommand" <-- ":Ui"
+
+end
+
+end
+
+":AddCommand" <-- ":AddCommand"
+deactivate ":AddCommand"
+
+
+@enduml

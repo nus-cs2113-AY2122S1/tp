@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam backgroundColor #f2f2f2
+skinparam defaultFontSize 16
+
+autonumber
+
+-> ":FindCommand": execute()
+activate ":FindCommand"
+
+":FindCommand" -> ":Ui": getCurrentUserInput()
+activate ":Ui"
+":FindCommand" <-- ":Ui": storedInput :String
+deactivate ":Ui"
+
+":FindCommand" -> ":Parser": parseSearchTerm(storedInput, Parser.CommandType.FIND)
+activate ":Parser"
+":FindCommand" <-- ":Parser": searchTerm :String
+deactivate ":Parser"
+":FindCommand" -> ":ItemList": findAllMatchingItems(searchTerm)
+activate ":ItemList"
+":FindCommand" <--":ItemList": matchingItems :ArrayList<Item>
+deactivate ":ItemList"
+":FindCommand" -> ":Ui": printListMessage(matchingItems)
+activate ":Ui"
+":FindCommand" <-- ":Ui"
+deactivate ":Ui"
+
+<-- ":FindCommand"
+deactivate ":FindCommand"
+
+@enduml

@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+skinparam backgroundColor #f2f2f2
+skinparam defaultFontSize 16
+
+autonumber
+
+activate ":AddCommand"
+
+":AddCommand"-> ":AddCommand": addItemToItemList(newItem)
+activate ":AddCommand"
+
+":AddCommand" -> ":Ui": getQuantityToBeAdded(newItem)
+activate ":Ui"
+":AddCommand" <-- ":Ui": int qtyToBeAdded
+deactivate ":Ui"
+
+":AddCommand" -> ":ItemList": addItem(newItem)
+activate ":ItemList"
+":AddCommand" <-- ":ItemList": int finalQty
+deactivate ":ItemList"
+
+alt originalQty > 0
+
+":AddCommand" -> ":Ui": printReactionToAddingExistingItem()
+activate ":Ui"
+":AddCommand" <-- ":Ui"
+deactivate ":Ui"
+
+else
+
+":AddCommand" -> ":Ui": printReactionToAddingItem()
+activate ":Ui"
+":AddCommand" <-- ":Ui"
+deactivate ":Ui"
+
+end
+
+":AddCommand" -> ":ShoppingList": removeItem(newItem, newItemQty)
+activate ":ShoppingList"
+":AddCommand" <-- ":ShoppingList"
+deactivate ":ShoppingList"
+
+":AddCommand" <-- ":AddCommand"
+
+deactivate ":AddCommand"
+
+
+@enduml

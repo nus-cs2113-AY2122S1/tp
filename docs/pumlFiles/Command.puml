@@ -1,0 +1,70 @@
+@startuml
+hide circle
+skinparam backgroundColor #f2f2f2
+skinparam defaultFontSize 16
+skinparam classAttributeIconSize 0
+
+class Command
+class HelpCommand
+class RemoveCommand
+class UpdateCommand
+
+
+Command <|-up- HelpCommand
+Command <|-right- RemoveCommand
+Command <|-left- XYZCommand
+Command <|-down- UpdateCommand
+
+class Command {
++isExit: boolean
++Command()
++exitNotRequired(): boolean
++execute(ui: Ui, parser: Parser, itemList: ItemList,
+shoppingList: ShoppingList): void
+}
+
+note top of XYZCommand
+ * XYZCommand represents command classes,
+   AddCommand, ExitCommand, etc.
+   (Excluding those with additional variables/methods)
+
+ * All XYZCommand has their respective
+   XYZCommand() constructor.
+end note
+class XYZCommand {
++XYZCommand()
+}
+
+class HelpCommand {
+-{static} COMMAND_LIST: String
++HelpCommand()
+}
+
+class RemoveCommand {
++RemoveCommand()
+-handleRemovalOfItem(ui: Ui, itemList: ItemList, shoppingList: ShoppingList,
+ nameOfItemToBeRemoved: String, matchingItems: ArrayList<Item>): void
+-handleRemovalOfMultipleQuantity(ui: Ui, itemList: ItemList,
+ shoppingList: ShoppingList, itemToBeRemoved: Item): void
+-updateShopList(ui: Ui, shoppingList: ShoppingList,
+ itemRemoved: Item, qtyInShop: int): void
+}
+
+class UpdateCommand {
++UpdateCommand()
+-handleUpdate(ui: Ui, parser: Parser, itemList: ItemList, shoppingList: ShoppingList,
+ itemToUpdate: Item, newQty: int, requireRemoval: boolean) :void
+-updateShopList(shoppingList: ShoppingList, updatedItem: Item,
+ qty: int, isRemove: boolean): void
+}
+
+note as N1
+* All command classes inherits
+  and overrides the execute() method.
+* Overridden method execute() is
+  not shown in class diagram of
+  classes that inherits
+  Command class.
+end note
+
+@enduml

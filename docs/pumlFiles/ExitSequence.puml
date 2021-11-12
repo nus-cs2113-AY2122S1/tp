@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam backgroundColor #f2f2f2
+skinparam defaultFontSize 16
+
+Participant ":ExitCommand" as ExitCommand
+Participant ":Ui" as Ui
+
+autonumber
+
+-> ExitCommand: execute()
+activate ExitCommand
+
+    ExitCommand -> Ui: printExitMessage()
+    activate Ui
+    ExitCommand <-- Ui
+    deactivate Ui
+
+    <-- ExitCommand
+deactivate ExitCommand
+
+@enduml
