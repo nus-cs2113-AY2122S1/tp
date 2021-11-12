@@ -397,6 +397,8 @@ Who paid for the expense?:
 ````
 - The name entered has to be part of the expense or PayMeBack will request for the name again.
 
+<div style="page-break-after: always;"></div>
+
 PayMeBack will then ask for the amounts spent by each person involved along
 with how much of the amount has yet to be assigned:
 ````
@@ -483,7 +485,6 @@ Input:
 ````
 view 1
 ````
-<div style="page-break-after: always;"></div>
 
 If successful, the output will be as follows:
 ````
