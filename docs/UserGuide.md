@@ -378,7 +378,7 @@ _________________________________________________________
 
 ### <a id="year"></a> Switching Database Year: `year`
 
-> Selection of the database year.
+> 😃 Selection of the database year.
 
 Format: `year <year>`
 
@@ -653,7 +653,7 @@ _________________________________________________________
 
 ### <a id="stat-year"></a> `-y` : View Statistics for the Year
 
-> Surely things get messy after you have many expenditures, loan and budget entries. Is there
+> 😃 Surely things get messy after you have many expenditures, loan and budget entries. Is there
 > an easy way to visualize the amount of budget used or left? Yes! `stat -y` 
 > display the statistics for the current database year which the user is working on. 
 
@@ -763,7 +763,7 @@ _________________________________________________________
 
 # <a id="guides"></a> &nbsp;&nbsp; Command Guides: `help`
 
-> Command description and format.
+> 😃 Command description and format.
 
 Format: `help`
 
@@ -783,7 +783,7 @@ _________________________________________________________
 
 # <a id="csv"></a> &nbsp;&nbsp; CSV: `csv`
 
-> If our statistical analysis feature is not good enough for you, you may convert the database records
+> 😃 If our statistical analysis feature is not good enough for you, you may convert the database records
 > into a csv file by simple keying in the `csv` command. You will then be able to use Excel to do advanced
 > statistical analysis.
 
