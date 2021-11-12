@@ -518,6 +518,7 @@ Input:
 ````
 Enter your command: view filter category food
 ````
+
 <div style="page-break-after: always;"></div>
 
 If successful, the output will be as follows:
