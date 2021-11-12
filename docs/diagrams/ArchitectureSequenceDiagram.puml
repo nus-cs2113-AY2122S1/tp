@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+
+box
+Participant "User" as User
+end box
+box DUKE_COLOR
+Participant ":Duke" as Duke
+end box
+box UI_COLOR
+Participant ":Ui" as Ui
+end box
+box BLUE_COLOR
+Participant ":Parser" as Parser
+end box
+box LOGIC_COLOR
+Participant ":Command" as Command
+end box
+
+User -> Duke: "xyz"
+
+activate Duke
+
+Duke -> Ui : "xyz"
+activate Ui
+|||
+Ui --> Parser: "xyz"
+activate Parser
+|||
+Parser -> Command: command(xyz)
+activate Command
+|||
+return xyz Command
+return xyz Command
+return xyz Command
+Duke -> Command: execute()
+activate Command
+|||
+return Commandresult
+|||
+return
+@enduml

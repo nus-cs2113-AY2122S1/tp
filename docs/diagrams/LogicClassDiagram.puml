@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor #000000
+skinparam classBackgroundColor #FFFFFF
+
+package Parser LOGIC_COLOR{
+
+Class "{abstract}\nParser" as Parser
+Class "{abstract}\nXYZParser" as XYZParser
+Class XYZCommand
+Class CommandResult
+}
+
+Class Ui UI_COLOR
+Class Duke DUKE_COLOR
+Class Storage  STORAGE_COLOR
+
+Duke -down-> Parser
+
+Parser --> XYZParser
+XYZParser ..> XYZCommand : creates >
+XYZCommand ..> CommandResult : execute() >
+XYZCommand ..> Ui
+XYZCommand ..> Storage
+CommandResult ..> Ui
+CommandResult .up.> Duke
+@enduml

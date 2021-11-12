@@ -1,0 +1,40 @@
+@startuml
+!include style.puml
+
+box STORAGE_COLOR
+Participant ":StorageFile" as Storage
+end box
+
+-> Storage: save(eventsList : ArrayList<Event>)
+
+activate Storage
+
+box FILE_COLOR
+create ":File" as File
+end box
+Storage -> File : File(DEFAULT_FILE_PATH)
+activate File
+return saveFile
+|||
+Storage --> Storage: checkFileIsValid
+activate Storage #orange
+return
+|||
+box LOGIC_COLOR
+Participant ":MemberEncoder" as MemberEncoder
+Participant ":EventEncoder" as EventEncoder
+end box
+Storage -> MemberEncoder: encodeMembersList
+activate MemberEncoder
+return encodedMembersList
+|||
+Storage -> EventEncoder: encodeEventsList
+activate EventEncoder
+return encodedEventsList
+|||
+Storage -> Storage: writeToFile
+activate Storage #orange
+return
+|||
+return
+@enduml

@@ -1,0 +1,66 @@
+@startuml
+!include style.puml
+
+box DUKE_COLOR
+Participant ":Duke" as Duke
+end box
+box UI_COLOR
+Participant ":Ui" as Ui
+end box
+box BLUE_COLOR
+Participant ":Parser" as Parser
+Participant ":ListParser" as ListParser
+end box
+->Duke: runSlam
+activate Duke
+
+Duke -> Parser : parseCommand
+activate Parser
+
+
+Parser -> ListParser:
+activate ListParser
+
+box LOGIC_COLOR
+create ":ListCommand" as ListCommand
+end box
+
+ListParser -> ListCommand : ListCommand
+activate ListCommand
+|||
+return
+return
+return
+
+
+Duke -> ListCommand : execute
+activate ListCommand
+opt listType = event
+  ListCommand -> Ui: listingOverallSchedule
+  activate Ui
+  |||
+  return
+end
+opt listType = task
+  ListCommand -> Ui: listingTaskDetails
+  activate Ui
+  |||
+  return
+end
+opt listType = member
+  ListCommand -> Ui: listingMemberDetails
+  activate Ui
+  |||
+  return
+end
+opt listType = memberRoster
+  ListCommand -> Ui: listingMemberRoster
+  activate Ui
+  |||
+  return
+end
+
+ListCommand --> Duke : CommandResult
+deactivate
+
+@enduml

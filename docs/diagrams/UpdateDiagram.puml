@@ -1,0 +1,66 @@
+@startuml
+!include style.puml
+
+box DUKE_COLOR
+Participant ":Duke" as Duke
+end box
+box UI_COLOR
+Participant ":Ui" as Ui
+end box
+box BLUE_COLOR
+Participant ":Parser" as Parser
+Participant ":UpdateParser" as UpdateParser
+end box
+
+
+
+-> Duke :runSlam
+activate Duke
+Duke -> Parser : parseCommand
+activate Parser
+Parser -> UpdateParser
+
+    loop Until UpdateParser obtains all necessary User Input
+        activate UpdateParser
+        UpdateParser -> Ui
+        activate Ui
+        opt Update Event
+            Ui -> Duke : printUpdateEventDetails
+            Ui -> Duke : Ui :updateIntroMessage
+            |||
+            Duke -> Ui :readInput
+            |||
+            Ui -> UpdateParser
+            |||
+        end
+        opt Update Task/Member
+            Ui -> Duke : printTask
+            Ui -> Duke : updateTaskIntroMessage
+            |||
+            Duke -> Ui :readInput
+            |||
+            Ui -> UpdateParser
+            |||
+
+        end
+
+    end
+    box LOGIC_COLOR
+    create ":UpdateCommand" as UpdateCommand
+    end box
+    |||
+return
+UpdateParser -> UpdateCommand: UpdateCommand(updateDetails)
+activate UpdateCommand
+return
+
+return
+return
+
+Duke -> UpdateCommand : execute
+activate UpdateCommand
+|||
+return : CommandResult
+
+
+@enduml

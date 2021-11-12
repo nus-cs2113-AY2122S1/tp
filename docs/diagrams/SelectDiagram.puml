@@ -1,0 +1,41 @@
+@startuml
+!include style.puml
+
+box DUKE_COLOR
+participant ":Duke" as Duke
+end box
+box BLUE_COLOR
+participant ":Parser" as Parser
+participant ":SelectParser" as SelectParser
+end box
+
+
+activate Duke
+-> Duke: runSlam
+Duke -> Parser:parseCommand
+activate Parser
+Parser -> SelectParser:getSelectCommand
+activate SelectParser
+
+box LOGIC_COLOR
+create ":SelectCommand" as SelectCommand
+end box
+
+SelectParser -> SelectCommand
+activate SelectCommand
+
+return
+return
+return
+
+Duke -> SelectCommand: execute
+note left
+Item to select is
+either an Event,
+Task or Member
+end note
+activate SelectCommand
+return CommandResult
+
+
+@enduml

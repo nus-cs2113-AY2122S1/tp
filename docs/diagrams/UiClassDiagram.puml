@@ -1,0 +1,29 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+!include colors.puml
+
+Duke -> "1" Ui
+
+class Duke DUKE_COLOR {
+
+  + {static} main(): void
+  - runSlam(): void
+}
+
+
+class Ui UI_COLOR {
+  - in: Scanner
+  + readInput(): String
+  + printLineBreak() : void
+  + printGreetingMessage(): void
+  + printMonth(): void
+}
+
+note right
+  Here are some of the more commonly
+  used methods
+end note
+
+@enduml

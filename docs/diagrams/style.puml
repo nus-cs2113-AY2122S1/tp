@@ -1,0 +1,25 @@
+!define DUKE_COLOR #fcf5c7
+!define UI_COLOR #FFc09f
+!define LOGIC_COLOR #edacab
+!define DATA_COLOR #F9D2DE
+!define FILE_COLOR #FFDF71
+!define MODULE_COLOR #C7E8AC
+!define BLUE_COLOR #a0ced9
+!define STORAGE_COLOR #a0ced9
+
+
+skinparam Sequence {
+    MessageAlign center
+}
+
+hide footbox
+hide members
+hide circle
+
+skinparam DefaultTextAlignment center
+skinparam Shadowing false
+skinparam SequenceGroupBodyBackGroundColor ffffff90
+
+skinparam MinClassWidth 110
+skinparam ParticipantPadding 10
+

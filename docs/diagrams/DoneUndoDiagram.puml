@@ -1,0 +1,45 @@
+@startuml
+!include style.puml
+
+box DUKE_COLOR
+Participant ":Duke" as Duke
+end box
+activate Duke
+box BLUE_COLOR
+Participant ":Parser" as Parser
+Participant ":DoneUndoParser" as DoneUndoParser
+activate Duke
+
+
+Duke -> Parser: parseCommand
+activate Parser
+
+end box
+Parser -> DoneUndoParser: getDoneUndoCommand
+activate DoneUndoParser
+
+box LOGIC_COLOR
+create ":DoneUndoCommand" as DoneUndoCommand
+end box
+DoneUndoParser -> DoneUndoCommand: DoneUndoCommand
+activate DoneUndoCommand
+return
+return
+return
+Duke -> DoneUndoCommand : execute
+activate DoneUndoCommand
+
+
+alt isDoneCommand
+DoneUndoCommand -> DoneUndoCommand: obtainAndMarkDoneItems
+activate DoneUndoCommand #lightgreen
+return
+else isUndoCommand
+DoneUndoCommand -> DoneUndoCommand: obtainAndUndoItems
+activate DoneUndoCommand #lightgreen
+return
+end
+
+return CommandResult
+
+@enduml
