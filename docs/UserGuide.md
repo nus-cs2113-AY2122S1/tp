@@ -53,6 +53,8 @@ This SEPlanner allows you to search for pre-approved module mappings through our
 3. Search for potential mapping for a particular selected university.
 4. Select a mapping and add the mapping.
 
+<div style="page-break-after: always;"></div>
+
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
@@ -160,6 +162,8 @@ Here,
 * `Cs112` is the module code of the Overseas module name.
 * `Introduction to Computer Science 2` is the name of the Overseas module name.
 * `4.0` is the module credits of the NUS module. 
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -568,6 +572,8 @@ Do not delete the `/data` directory or any of its files as this will cause you t
 **Q**: How do I save my selected universities and modules?  
 **A**: All your universities, modules, and module mappings are automatically saved at 
 each command and will be auto-loaded on program start.
+
+<div style="page-break-after: always;"></div>
 
 ## Command Summary
 
