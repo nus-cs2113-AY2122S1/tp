@@ -785,9 +785,8 @@ _________________________________________________________
 <br />
 
 # <a id="csv"></a> &nbsp;&nbsp; CSV: `csv`
-> 😃 If our statistical analysis feature is not good enough for you, you may convert the database records
-into a csv file by simple keying in the `csv` command. You will then be able to use Excel to do advanced
-statistical analysis.
+> 😃 This feature allows you to export your data into a CSV file, for users who desire more flexibility with customizing 
+> their data and further analysis which is not yet supported by Budget Tracker.
 
 Converts your data text file into csv format.
 
@@ -822,7 +821,7 @@ _________________________________________________________
 # <a id="db"></a> &nbsp;&nbsp; DB: `db`
 
 > 😃 What if you have forgotten all the database years that you have been using? Fear not! `db` command 
-is here to help! `db` command basically list out all the available database text file you currently
+is here to help! `db` command list out all the available database text file you currently
 have. 
 
 Displays all the available database.
