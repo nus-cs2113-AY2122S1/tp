@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+participant ":ScheduleTracker"
+
+->":ScheduleTracker" : addScheduledWorkout(inputArguments: String)
+activate ":ScheduleTracker" #FFBBBB
+
+":ScheduleTracker"->":ScheduleTracker" : generateParameters(inputArguments: String)
+activate ":ScheduleTracker" #DarkSalmon
+return
+
+create ":ScheduledWorkout"
+":ScheduleTracker"->":ScheduledWorkout" : add ScheduledWorkout
+activate ":ScheduledWorkout"
+":ScheduledWorkout"-->":ScheduleTracker"
+deactivate ":ScheduledWorkout"
+
+":ScheduleTracker"->":ScheduleTracker" : cleanUpScheduleList()
+
+activate ":ScheduleTracker" #DarkSalmon
+
+ref over ":ScheduleTracker", ":ScheduledWorkout" : updateOrDeleteScheduledWorkout
+
+
+
+return
+return
+
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+|||
+participant ":FoodBank"
+    ->":FoodBank" : "addCustomMeal(inputArguments: String)"
+    activate ":FoodBank" #FFBBBB
+    opt inputArguments == null
+    |||
+    end
+    note left : if block only throws an exception: EmptyLibraryDescription
+    |||
+    ":FoodBank"->":FoodBank" : generateParameters(inputArguments: String)
+    |||
+    activate ":FoodBank" #FFBBBB
+    return
+    |||
+    opt Until no more meals
+    |||
+    opt m.contains(description)
+    |||
+    end
+    note left : if block only throws an exception: DuplicateFood
+    |||
+    end
+    |||
+    ":FoodBank"->":ClickfitMessages" : printAddedLibraryMeal(description: String,calories: int,totalMeals: int)
+    activate ":ClickfitMessages" #FFBBBB
+    return
+    deactivate ":FoodBank"
+    |||
+@enduml

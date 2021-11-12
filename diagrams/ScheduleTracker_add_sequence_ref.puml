@@ -1,0 +1,22 @@
+@startuml
+
+mainframe **sd**   updateOrDeleteScheduledWorkout
+
+activate ":ScheduleTracker" #DarkSalmon
+loop no more overdue workouts
+    note left : Take note that a workout is "overdue" \nif its scheduled date is before the current date
+    alt isRecurringWorkout
+        ":ScheduleTracker"->":ScheduledWorkout" : incrementWorkoutDate(days: long)
+        |||
+        activate ":ScheduledWorkout"
+        return
+        |||
+    else else
+        ":ScheduleTracker"->":ScheduledWorkout" : delete ScheduledWorkout
+        activate ":ScheduledWorkout"
+        destroy ":ScheduledWorkout"
+        |||
+    end
+end
+
+@enduml

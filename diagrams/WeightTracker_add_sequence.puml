@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+participant ":WeightTracker"
+participant ":ClickfitMessages"
+
+->":WeightTracker" : weightTracker.addWeights(input: String)
+activate ":WeightTracker" #Salmon
+":WeightTracker"->":WeightTracker" : generateWeightParameters(inputArguments: String)
+activate ":WeightTracker" #LightSalmon
+return
+alt typical input
+":WeightTracker"->":ClickfitMessages" : printAddWeightResponse(weight: int, date: String)
+activate ":WeightTracker" #LightSalmon
+activate ":ClickfitMessages" #Tomato
+return
+deactivate ":ClickfitMessages"
+return
+else missing date
+":WeightTracker"->":ClickfitMessages" : printAddWeightResponse(weight: int, date: String)
+activate ":WeightTracker" #LightSalmon
+activate ":ClickfitMessages"#Tomato
+return
+deactivate ":ClickfitMessages"
+<--":WeightTracker"
+deactivate ":WeightTracker"
+else exception
+<--":WeightTracker" : AddWeightException()
+end
+
+@enduml

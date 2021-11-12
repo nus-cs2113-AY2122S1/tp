@@ -1,9 +1,15 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Greetings from
+   ______  _____     _____            __       ________  _   _
+ .' ___  ||_   _|   |_   _|          [  |  _  |_   __  |(_) / |_
+/ .'   \_|  | |       | |      .---.  | | / ]   | |_ \_|__ `| |-'
+| |         | |   _   | |     / /'`\] | '' <    |  _|  [  | | |
+\ `.___.'\ _| |__/ | _| |_  _ | \__.  | |`\ \  _| |_    | | | |,
+ `.____ .'|________||_____|(_)'.___.'[__|  \_]|_____|  [___]\__/
 
-What is your name?
-Hello James Gosling
+
+Welcome! Here's to your fitness journey! Type in any commands to get started! Type "help" to get started!
+Lets work hard together in your fitness journey!
+
+Would you like to check your BMI and recommended caloric intake?
+Key in "y" to proceed, or press enter keystroke to skip!
+wrong input!

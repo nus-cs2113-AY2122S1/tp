@@ -1,0 +1,30 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+'https://plantuml.com/class-diagram
+
+class Meal
+
+abstract class Tracker {
+}
+
+class Meal {
+protected ArrayList<String> meals;
+    #mealNumber: int
+    #calories: int
+    #description: String
+    #date: String
+    #time: String
+    #totalCalories: int
+    - {static} logger: Logger
+    +generateWeightParameters(inputArguments: String): void
+    +addMeal(inputArguments: String): void
+    +deleteMeal(inputArguments: String): void
+    +listMeals(inputArguments: String): void
+    +getCalories(date: String): int
+}
+
+Meal --|> "<<extends>>" Tracker
+
+
+@enduml

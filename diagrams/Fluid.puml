@@ -1,0 +1,34 @@
+@startuml
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+hide circle
+
+abstract class Tracker {
+}
+
+class Fluid {
+    #fluidArray: ArrayList<String>
+    #fluidNumber: int
+    #description: String
+    #calories: int
+    #volume: int
+    #date: String
+    #time: String
+    #totalCalories: int
+    #totalVolume: int
+
+  +generateFluidParameters(inputArguments: String): void
+  +addFluid(inputArguments: String): void
+  +deleteFluid(inputArguments: String): void
+  +listFluid(date: String): void
+  +getCalories(date: String): int
+  +getVolume(date: String): int
+}
+
+class FluidExceptions {
+}
+
+FluidExceptions --|> Fluid
+Fluid --|> "<<extends>>" Tracker
+
+@enduml

@@ -1,0 +1,55 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+'https://plantuml.com/class-diagram
+
+abstract class Tracker {
+}
+
+class WeightTracker {
+#weightsArray: ArrayList<String>
+#numberOfWeights: int
+#weight: int
+#date: String
+- {static} logger: Logger
++WeightTracker()
++generateWeightParameters(inputArguments: String): void
++addWeight(input: String): void
++deleteWeight(input: String): void
++printWeight(input: String): void
++listWeights(input: String): void
++listSpecificWeights(input: String): void
++listAllWeights(): void
+}
+
+class AddWeightException {
++getMessage():String
+}
+class DeleteWeightException {
++getMessage():String
+}
+class DeleteWeightIndexException {
++getMessage():String
+}
+class NoWeightsException {
++getMessage():String
+}
+class WeightException {
++getMessage():String
+}
+class ClickfitMessages {
++printAddWeightResponse(weight: double, date: String):void
++printDeleteWeightResponse(weight: double, date: String):void
+}
+WeightTracker --> ClickfitMessages
+WeightTracker ..> "<<throws>>" AddWeightException
+WeightTracker ..> "<<throws>>" DeleteWeightException
+WeightTracker ..> "<<throws>>" DeleteWeightIndexException
+WeightTracker ..> "<<throws>>" NoWeightsException
+WeightTracker --|>  Tracker
+AddWeightException --|>  WeightException
+DeleteWeightException --|>  WeightException
+DeleteWeightIndexException --|>  WeightException
+NoWeightsException --|>  WeightException
+
+@enduml

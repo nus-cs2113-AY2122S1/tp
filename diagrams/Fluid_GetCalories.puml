@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant "fluid:Fluid"
+->"fluid:Fluid" : getCalories(date: String)
+activate "fluid:Fluid" #FFBBBB
+|||
+opt for all elements in fluidArray
+|||
+alt fluidArray contains a fluid with date provided
+"fluid:Fluid"->"fluid:Fluid" : generateFluidParameters(fluid: ArrayList<String>)
+    activate "fluid:Fluid" #FFBBBB
+    |||
+    return
+    |||
+    end
+    end
+    |||
+    return calorieTotal
+    deactivate "fluid:Fluid"
+    |||
+@enduml

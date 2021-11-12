@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+participant "meal:Meal"
+    ->"meal:Meal" : "listMeals(userDate: String)"
+    activate "meal:Meal" #FFBBBB
+    alt userDate.equals(Keywords.ALL)
+    |||
+    "meal:Meal"->"meal:Meal" : listAllMeals()
+    activate "meal:Meal" #FFBBBB
+    return
+    |||
+    else
+    |||
+    |||
+    "meal:Meal"->"meal:Meal" : listMealsByDate(userDate: String)
+    activate "meal:Meal" #FFBBBB
+    return
+    |||
+    end
+    |||
+    "meal:Meal"->":ClickfitMessages" : printMealListTotals(mealNumber: int, totalCalories: int)
+    activate ":ClickfitMessages" #FFBBBB
+    return
+    deactivate "meal:Meal"
+    |||
+@enduml

@@ -1,0 +1,47 @@
+@startuml
+<<<<<<< HEAD
+
+=======
+hide circle
+skinparam classAttributeIconSize 0
+>>>>>>> master
+'https://plantuml.com/class-diagram
+skinparam classAttributeIconSize 0
+hide circle
+
+class ScheduleTracker {
++ScheduleTracker()
++addScheduledWorkout(inputArguments: String):void
++deleteScheduledworkout(inputArguments: String): void
++listScheduledWorkouts(): void
+}
+
+note bottom of ScheduledWorkout : Basic getter methods for attributes omitted
+class ScheduledWorkout {
+-workoutDescription: String
+-workoutDate: String
+-workoutTime: String
+-workoutDateTime: LocalDateTime
+-isRecurring: boolean
+
++ScheduledWorkout(workoutDescription: String, \n\tworkoutDate: String, workoutTime: String, \n\tactivityMap: Map<String, ArrayList<Integer>>  \n\tisRecurring: boolean)
++incrementWorkoutDate(): void
+}
+
+note top of WorkoutActivity : Basic getter methods for attribute omitted
+class WorkoutActivity {
+private String activityDescription;
+    -boolean isDistanceActivity = false;
+    -activityDistance: int
+    -activitySets: int
+    -activityReps: int
+
+    +WorkoutActivity(activityDescription: String,
+     \tactivityQuantifier: ArrayList<Integer>,\n\tisDistanceActivity: boolean)
+}
+
+ScheduleTracker -->  "[0..*] scheduledWorkouts" ScheduledWorkout
+ScheduledWorkout -->  "\t\t\n\n\n\n[0..*] activities" WorkoutActivity
+
+
+@enduml

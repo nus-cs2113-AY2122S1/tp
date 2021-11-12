@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide circle
+skinparam classAttributeIconSize 0
+
+participant "Ui"
+
+->"Ui" :memoryStartup()
+activate "Ui" #FFBBBB
+
+"Ui" -> "Scanner" : uiInput = uiScanner.nextLine();
+activate "Scanner" #DarkSalmon
+return
+|||
+opt !flag
+"Ui" -> "Scanner" : uiInput = uiScanner.nextLine();
+activate "Scanner" #DarkSalmon
+return
+|||
+alt  uiInput.isEmpty()
+|||
+else uiInput.trim().equals("y")
+|||
+else
+|||
+end
+|||
+note left: if block loads the data for the previous session else if block deletes the data for the previous session, else just prints out incorrect input
+end
+|||
+return result
+deactivate "Ui"
+|||
+
+@enduml

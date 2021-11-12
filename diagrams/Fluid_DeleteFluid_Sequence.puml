@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+|||
+participant "fluid:Fluid"
+
+->"fluid:Fluid" : deleteFluid(inputArguments: String)
+activate "fluid:Fluid" #FFBBBB
+
+"fluid:Fluid"->"fluid:Fluid" : generateFluidParameters(fluidArray.get(taskNumber: int): String)
+activate "fluid:Fluid" #DarkSalmon
+return
+|||
+"fluid:Fluid"->"parser:Parser" : parseStringToInteger(inputArguments: String) - 1;
+activate "parser:Parser" #DarkSalmon
+return taskNumber
+|||
+alt invalid fluid index / empty fluid list
+else else
+"fluid:Fluid"->"fluid:Fluid" : fluidArray.remove(taskNumber: int)
+activate "fluid:Fluid" #IndianRed
+return
+|||
+    end
+    note left : if block only throws an exception
+    |||
+    deactivate "fluid:Fluid"
+    |||
+@enduml

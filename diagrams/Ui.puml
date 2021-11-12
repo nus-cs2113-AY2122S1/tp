@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/class-diagram
+hide circle
+skinparam classAttributeIconSize 0
+
+class Ui {
++welcomeMessage():void
++getInfo():void
++memoryStartup():void
++sex:String
++weight:int
++height:int
++age:int
++activityLevel:int
+}
+
+note bottom of Calculator : Prints out BMI of the user and his/her recommended caloric intake
+class Calculator {
++getBmi():void
++getIdealCalories():void
++sex:String
++weight:int
++height:int
++age:int
++activityLevel:int
+}
+
+Ui -->  "1" Calculator
+
+@enduml
