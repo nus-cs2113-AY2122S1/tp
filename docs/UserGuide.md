@@ -269,6 +269,9 @@ Input syntax:
 ```
 people
 ```
+
+<div style="page-break-after: always;"></div>
+
 For example,
 
 Input:
@@ -276,7 +279,6 @@ Input:
 people
 ````
 
-<div style="page-break-after: always;"></div>
 
 If successful, the output will be as follows:
 ```
