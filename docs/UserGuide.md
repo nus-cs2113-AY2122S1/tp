@@ -30,7 +30,7 @@ To improve your spending habits, Budget Tracker also displays useful data and st
   * [Stat](#stat) 
     * [Month: `-c`](#stat-budget)
     * [Year: `-l`](#stat-year)
-  * [Guides](#guides)
+  * [Command Guide](#guides)
   * [CSV](#csv)
   * [DB](#db)
   * [Exit](#exit)
