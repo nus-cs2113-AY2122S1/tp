@@ -3,6 +3,8 @@
 Budget Tracker is a desktop app for managing expenses, budget and loans, optimized for use via a Command Line Interface (CLI) 
 for tech-savvy students who have trouble keeping track of their expenses.
 
+## Product Overview
+
 
 ## <a id="top"></a> Table of Content
 * [Intro](#introduction)
@@ -39,8 +41,8 @@ for tech-savvy students who have trouble keeping track of their expenses.
 
 ## <a id="introduction"></a> Introduction
 
-Budget Tracker is a desktop app for managing expenses, budget and loans, optimized for use via a 
-Command Line Interface (CLI) for tech-savvy students who have trouble keeping track of their expenses.
+> 😃 Hello! I'm <i> Budgie</i>, your personalised guide. My job will be to take you
+through this User Guide and give you a pleasant experience using our app!
 
 #### [↑ Back to top](#top)
 
@@ -63,22 +65,26 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 
 ## <a id="features"></a> Features
 
-1. Storage
-<br/>  Allows saving and loading of budget and loan data.
-	
-2. Statistics
+> 😃 Here's a list of features that our Budget Tracker app has. We'll be diving deeper into each feature along the way.
+
+1. Budget Tracker
+
+2. Expenditure Tracker
 
 3. Loan Tracker
 
-4. Loan Reminder
+4. Storage
+   * Allows saving of budget, expenditure and loan data so that you can load them up during your next session.
+	
+5. Statistical analysis on data
+   * Provides further insight on data recorded.
+
+6. Loan Reminder
 <br/>  Every time when user starts the app, it reminds user of the loans that are due under the welcome screen.
 
-5. Budget Tracker
-
-6. Expenditure Categories
 
 > ❗ Notes about the command format:
-> * Words encased in `<>` brackets are optional parameters.
+> * Words encased in `<>` brackets are _optional_ parameters.
 > * Command words (i.e. `add`, `edit`, etc.) must strictly be in **lower case**.
 > * Words in UPPER_CASE are the parameters to be supplied by the user.
 >   * e.g. in `add -b a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can be used as `add -b a/500 m/12`.
@@ -89,21 +95,20 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 # <a id="commands"></a> Commands
 
 
-> :smiley: Hello! I'm <i> Budgie</i>, your personalised guide. My job will be to take you
-through this User Guide and give you a pleasant experience using our app!
-
 
 # <a id="add"></a> &nbsp; &nbsp;Add: `add`
 
-The command word `add` adds a record of either Budget, Expenditure, or Loan to the record list. 
+> 😃 To start off your Budget Tracking journey, we first need to add some records into the list.
+> This will let you keep track of where your money is going!
+
+The command word `add` adds a record of either _Budget, Expenditure, or Loan_ to the record list. 
 The type of record is determined by the identifier tag after the `add` command word.
 
 ______________
 <br />
 
 ### <a id="add-budget"></a> `-b` : Adds a Budget
-
-Sets a new budget for a specific month.
+> 😃 Setting a budget for the month serves as a goal and keeps you from spending money you do not have.
 
 Format: `add -b a/AMOUNT <m/MONTH>`
 
@@ -116,7 +121,7 @@ Example of usage:
 
 `add -b a/500 m/12`
 
-Expected outcome: Budget of $500.00 is added to the month of December of that particular year.
+Expected outcome:
 
 ```
 ========================================================
@@ -129,6 +134,8 @@ Your budget of $500.00 for December is successfully set!
 ________________________
 
 ### <a id="add-expenditure"></a> `-e` : Adds an expenditure
+> 😃 Recording down your expenditures will allow you to keep track of where your money is going and determine
+> whether they were essentials or wants. This will help you cut out unnecessary expenditures.
 
 Records the details of a new expenditure including the _description_, the _amount spent_, the _date on which expenditure was made_ and the _category which the expenditure falls under_ .
 
@@ -168,6 +175,8 @@ _________________________________________________________
 
 
 ### <a id="add-loan"></a> `-l` : Adds a Loan
+> 😃 Losing track of whom you've lent money out to? Friends not paying you back? Fret not! Budget Tracker is here to
+> remind you of these loans. It's time to get your money back! 🤑
 
 Records down a loan record specifying when and who the money was lent out to.
 
@@ -397,23 +406,6 @@ _________________________________________________________
 
 _________________________________________________________
 
-### <a id="listing"></a> Listing all Budget & Expenditure
-
-List all the Budget and expenditure for that particular year.
-
-Format: `list m/all [c/CATEGORY]`
-* `CATEGORY` filters out the expenditures to show only those falling under the specified category.
-  * Note: If `CATEGORY` is left empty, expenditures of all categories will be shown
-
-Example of usage:
-
-`list m/all`
-
-Expected outcome: Listing all the budget and expenditure for the particular year.
-#### [↑ Back to top](#top)
-<br />
-_________________________________________________________
-
 ### Listing Budget & Expenditure for a Particular Month: `list`
 
 Adds a new expenditure to a specific budget of a month.
@@ -441,6 +433,24 @@ Your expenditures:
 <br />
 
 _________________________________________________________
+
+### <a id="listing"></a> Listing all Budget & Expenditure
+
+List all the Budget and expenditure for that particular year.
+
+Format: `list m/all [c/CATEGORY]`
+* `CATEGORY` filters out the expenditures to show only those falling under the specified category.
+  * Note: If `CATEGORY` is left empty, expenditures of all categories will be shown
+
+Example of usage:
+
+`list m/all`
+
+Expected outcome: Listing all the budget and expenditure for the particular year.
+#### [↑ Back to top](#top)
+<br />
+_________________________________________________________
+
 
 <br />
 
@@ -562,6 +572,10 @@ _________________________________________________________
 
 # <a id="stat"></a> &nbsp;&nbsp; Stat: `stat`
 
+> 😃 It can be hard to make sense of the expenditures you have recorded down and figure out where exactly you are
+> overspending. This is especially so if you've been diligently recording down your spendings! Well, `stat` will help you
+> do the thinking. So try it out!
+
 The command word `stat` display some statistics graphs and information about the expenditure for 
 the year or particular month.
 
@@ -569,6 +583,8 @@ _________________________________________________________
 <br />
 
 ### <a id="stat-budget"></a> `-c` : View Statistics for the Month by categories
+> 😃 Knowing which category you're spending the most on allows a more targeted approach to cutting back on spendings.
+> Use this feature to determine which category and how much you have spent on it in a specific month!
 
 Display the statistics for a particular month's budget and expenditure by categories. 
 
@@ -834,30 +850,47 @@ Bye, see you again soon!
 
 # <a id="faq"></a> FAQ
 
-* How do I transfer my data to another computer? 
-  * Copy the data folder from the source computer to the destination computer on the same directory as the tp.jar file.
+* How do I transfer my data to another computer?
+  * Step 1: Locate the folder containing the **tp.jar** file.
+  * Step 2: Copy the **data** folder.
+
+    ![data_folder](images/data_folder.png)
+  * Step 3: Via email, thumb-drive or a messaging app which supports file sharing, transfer the folder onto your **target computer**.
+  * Step 4: Copy and paste the **data** folder into the folder containing the **tp.jar** file.
   
-  <br />
+<br />
   
 * Why are users able to delete the expenditures they have already recorded?
-  * Some users like to record expenditures in advance if they are going to spend it, so this feature allows them to regret.
-  * Users might refund after spending money on some returnable products such as clothes, shoes, and so on.
+  * Some users like to record expenditures in advance if they know they are going to spend it.
+  This feature allows them to change their plans after finding out that they might exceed their budget.
+  * Users might have made a refund after spending money on some returnable products such as clothes, shoes, and so on.
   
   <br />
 
-* How to change use Java 11 if I do not want my main JDK to change to Java 11?
-  * Download a zipped version instead of an executable [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
-  * Extract the zip JDK to a desired directory.
-  * Create a .bat file with the following content.
-    <br />
-    @ECHO OFF <br />
-    SET JAVA_HOME=<Directory of JDK> <br />
-    SET Path=%JAVA_HOME%\bin;%Path% <br />
-    echo Java home set to: %JAVA_HOME% <br />
-    echo Java 11 activated <br />
-    java -version <br />
+* What is the recommended way of using the app?
+  1. Record down the budget you have set for yourself at the start of every month.
+  We advise you to stick to the 50/30/20 rule — 50% for your needs, 30% for your wants and the last 20% for your savings and debt repayments.
+  Hence, your budget should be **80% of your monthly disposable income**. <br />
+  Click [here](https://www.nerdwallet.com/article/finance/how-to-budget) for more information.
+  2. Key in your daily expenditures at the end of the day. You can be as detailed as possible or simply provide a rough
+  estimate. Focus should be placed on **consistency**, as you want to make it a habit to take note of your spendings.
+  3. We recommend using our `stats` feature to analyse your spending habits every quarter / half a year so that you can
+  gain an understanding of which areas to cut down on spending
 
-  :bulb: Note that <Directory of JDK> is the directory where your JDK has been unzipped towards.
+    <br />
+
+* **Advanced**: How can I use Java 11 if I do not want my main JDK to change to Java 11?
+  * Download a zipped version instead of an executable [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
+  * Extract the .zip JDK to a desired directory.
+  * Create a .bat file with the following content:
+    > @ECHO OFF <br />
+     SET JAVA_HOME=**[Directory of JDK]** <br />
+     SET Path=%JAVA_HOME%\bin;%Path% <br />
+     echo Java home set to: %JAVA_HOME% <br />
+     echo Java 11 activated <br />
+     java -version <br />
+
+  💡 Note: **[Directory of JDK]** should be replaced with the directory where your JDK has been unzipped into.
 
 #### [↑ Back to top](#top)
 
@@ -892,4 +925,5 @@ stated in the above command description.
  |20. | `db` | `show all the available database in the user's device` | 
  |21. | `help` | `shows a list of command guides` |
  |22. | `bye` | `terminates the app` |
+
 #### [↑ Back to top](#top)
