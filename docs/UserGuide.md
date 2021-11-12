@@ -377,6 +377,7 @@ _________________________________________________________
 # <a id="dbselect"></a> &nbsp;&nbsp; Year: `year`
 
 ### <a id="year"></a> Switching Database Year: `year`
+> 😃 This command allows you to switch between different database years you are working on seamlessly.
 
 Selection of the database year.
 
@@ -404,9 +405,10 @@ _________________________________________________________
 #  <a id="find&filter"></a> &nbsp;&nbsp; Find: `find`
 
 ### <a id="find"></a> Finding a Particular Expenditure, Loan and Budget: `find`
+> 😃 Want to find a specific records of Expenditure, loan and Budget that have a matching key word on the search term? 
+Use the `find` command!
 
-Find all the records of Expenditure, loan and Budget that have a matching key word on the search term. 
-The search term is the keyword.
+Find a particular matching keyword.
 
 Format: `find KEYWORD`
 
@@ -487,7 +489,7 @@ _________________________________________________________
 
 ### <a id="delete-budget"></a> `-b` - Delete a budget
 
-Deletes the budget of a specific month
+> Deletes the budget of a specific month
 
 Format: `delete -b m/MONTH`
 
@@ -512,7 +514,7 @@ _________________________________________________________
 
 ### <a id="delete-expenditure"></a> `-e` - Delete (an) expenditure(s)
 
-Deletes (an) expenditure(s) of a specific month.
+> Deletes (an) expenditure(s) of a specific month.
 
 Format:`delete -e m/MONTH` 
 <br/> `delete -e  m/MONTH i/INDEX`
@@ -559,7 +561,7 @@ _________________________________________________________
 
 ### <a id="delete-loan"></a> `-l` - Delete (a) loan record(s)
 
-Deletes (a) loan record(s) of a specific month
+> Deletes (a) loan record(s) of a specific month
 
 Format:`delete -l m/MONTH` 
 <br/> `delete -l m/MONTH i/INDEX`
@@ -652,10 +654,11 @@ _________________________________________________________
 
 
 ### <a id="stat-year"></a> `-y` : View Statistics for the Year
-
-Surely things get messy after you have many expenditures, loan and budget entries. Is there
+> 😃 Surely things get messy after you have many expenditures, loan and budget entries. Is there
 an easy way to visualize the amount of budget used or left? Yes! `stat -y` 
 display the statistics for the current database year which the user is working on. 
+
+Display the percentage of expenditure of each month of the year or entire year.
 
 Format: `stat -y t/TYPE_OF_GRAPHICAL_VIEW`
 
@@ -782,10 +785,10 @@ _________________________________________________________
 <br />
 
 # <a id="csv"></a> &nbsp;&nbsp; CSV: `csv`
+> 😃 This feature allows you to export your data into a CSV file, for users who desire more flexibility with customizing 
+> their data and further analysis which is not yet supported by Budget Tracker.
 
-If our statistical analysis feature is not good enough for you, you may convert the database records
-into a csv file by simple keying in the `csv` command. You will then be able to use Excel to do advanced
-statistical analysis.
+Converts your data text file into csv format.
 
 Format: `csv`
 
@@ -817,9 +820,11 @@ _________________________________________________________
 
 # <a id="db"></a> &nbsp;&nbsp; DB: `db`
 
-😃 What if you have forgotten all the database years that you have been using? Fear not! `db` command 
-is here to help! `db` command basically list out all the available database text file you currently
+> 😃 What if you have forgotten all the database years that you have been using? Fear not! `db` command 
+is here to help! `db` command list out all the available database text file you currently
 have. 
+
+Displays all the available database.
 
 Format: `db`
 
@@ -848,9 +853,10 @@ _________________________________________________________
 <br />
 
 # <a id="exit"></a> &nbsp;&nbsp; Exit the program: `bye`
- 
-When you are done with using the app and wish to exit the app. Enter the command `bye` to 
+> 😃 When you are done with using the app and wish to exit the app. Enter the command `bye` to 
 say goodbye with our app 👋
+
+Terminates the app.
 
 Format: `bye`
 
@@ -963,5 +969,6 @@ stated in the above command description.
 |3.  | `.zip` | `.zip is the file format for ZIP. ZIP is an archive file format that supports lossless data compression.` |
 |4.  | `.bat` | `.bat is the file format for batch file. A batch file is a script file in DOS, OS/2 and Microsoft Windows. It consists of a series of commands to be executed by the command-line interpreter, stored in a plain text file.` |
 |5.  | `.jar` | `.jar is the file format for JAR. A JAR (Java ARchive) is a package file format typically used to aggregate many Java class files and associated metadata and resources (text, images, etc.) into one file for distribution.` |
+|6.  | text data file | `Text file used to store all the entries of a particular year` |
 
 #### [↑ Back to top](#top)
