@@ -6,7 +6,7 @@ for tech-savvy students who have trouble keeping track of their expenses.
 You can use Budget Tracker to manage your budget, expenditures and loans lent out to other parties for the month, and 
 easily access and retrieve this information with a single command. 
 To improve your spending habits, Budget Tracker also displays useful data and statistics about it for the month.
-<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+<br />
 ## <a id="top"></a> Table of Content
 * [Intro](#introduction)
 * [Getting Started](#getting-started)
