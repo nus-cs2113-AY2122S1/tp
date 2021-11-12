@@ -20,16 +20,13 @@ To improve your spending habits, Budget Tracker also displays useful data and st
     * [Budget: `-b`](#edit-budget)
     * [Expenditure: `-e`](#edit-expenditure)
     * [Loan: `-l`](#edit-loan)
-  * [Database Selector](#dbselect)
-    * [year](#year)
-  * [Find & Filter](#find&filter)
-    * [Find](#find)
-  * [List](#list)
-    * [Listing](#listing)
   * [Delete](#delete)
     * [Budget: `-b`](#delete-budget)
     * [Expenditure: `-e`](#delete-expenditure)
     * [Loan: `-l`](#delete-loan)
+  * [Switching database year](#dbselect)
+  * [Find](#find)
+  * [List](#list)
   * [Stat](#stat) 
     * [Month: `-c`](#stat-budget)
     * [Year: `-l`](#stat-year)
@@ -47,10 +44,9 @@ Welcome to the Budget Tracker's User Guide! This Guide provides important inform
 overview of the features we have, and a deeper dive into each of them to get you familiarised with our app.
 In addition, we include a Frequently Asked Questions (FAQ) and a summary section at the end of the guide, should you have any doubts.
 
-Our Table of Contents serve as a good way to navigate through this guide. We designed each section such that
+Our Table of Contents serves as a good way to navigate through this guide. We designed each section such that
 you will be able to understand them on their own without the need to refer to other sections. Do use the 
-#### [↑ Back to top](#top) 
-link at the bottom 
+[↑ Back to top](#top) link at the bottom 
 of each section to quickly access the Table of Contents.
 
 Along the way, you may be confused or require more information on each section. Just follow this box below with a smiley as _Budgie_,
@@ -61,6 +57,10 @@ through this User Guide and give you a pleasant experience using our app! Follow
 
 #### [↑ Back to top](#top)
 
+<br />
+
+_________________________________________________________
+
 ## <a id="getting-started"></a> Quick Start
 
 1. Ensure that you have Java 11 or above installed. Otherwise, you can download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
@@ -70,8 +70,8 @@ through this User Guide and give you a pleasant experience using our app! Follow
    ![java version check](images/java-version-cmd.png)
 
 3. Download the latest version of `Budget Tracker` from [here](https://github.com/AY2122S1-CS2113T-F11-2/tp/releases/download/v2.1/tp.jar).
-4. If you have anti-virus, please add an exception on the directory you have downloaded the `Budget Tracker`.
-   For example, if your Tp.jar file is in the "tp-folder", then you can create an exception in that folder 
+4. Additional note: If your anti-virus is preventing you from running budget tracker, please add an exception on the directory you have downloaded the `Budget Tracker`.
+   For example, if your Tp.jar file is in the "tp-folder", then you can create an exception for that folder 
    in your anti-virus.
    
    ![AV-Exception](images/exception-AV.png)
@@ -79,6 +79,10 @@ through this User Guide and give you a pleasant experience using our app! Follow
 > 😃 Great! Now that everything is all set up, let's take a look at what features we have in store!
 
 #### [↑ Back to top](#top)
+
+<br />
+
+_________________________________________________________
 
 ## <a id="features"></a> Features
 
@@ -100,13 +104,37 @@ through this User Guide and give you a pleasant experience using our app! Follow
 <br/>  Every time when user starts the app, it reminds user of the loans that are due under the welcome screen.
 
 
-> ❗ Notes about the command format:
+<br />
+
+_________________________________________________________
+
+## Before getting started
+
+Identifier tags are the tags after the command words which will indicate the type of data 
+(i.e. _Budget, Expenditure, Loan etc._) the commands are working with.
+
+| Tags | Type of data | Commands using these tags     |
+|------|--------------|-------------------------------|
+| `-b` | Budget       | `add`, `delete`, `edit`       |
+| `-e` | Expenditure  | `add`, `delete`, `edit`       |
+| `-l` | Loan         | `add`, `delete`, `edit`       |
+| `-c` | Category     | `stat`                        |
+| `-y` | Year         | `stat`                        | 
+
+<br />
+
+> ❗ Important Notes about the command format:
 > * Words encased in `<>` brackets are _optional_ parameters.
 > * Command words (i.e. `add`, `edit`, etc.) must strictly be in **lower case**.
 > * Words in UPPER_CASE are the parameters to be supplied by the user.
 >   * e.g. in `add -b a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can be used as `add -b a/500 m/12`.
 >   * NOTE: **These parameters cannot be left empty.**
 #### [↑ Back to top](#top)
+
+<br />
+
+_________________________________________________________
+
 <br />
 
 # <a id="commands"></a> Commands
@@ -402,17 +430,16 @@ You are currently working on year 2020 database!
 _________________________________________________________
 
 
-#  <a id="find&filter"></a> &nbsp;&nbsp; Find: `find`
+#  <a id="find"></a> &nbsp;&nbsp; Find: `find`
 
-### <a id="find"></a> Finding a Particular Expenditure, Loan and Budget: `find`
 > 😃 Want to find a specific records of Expenditure, loan and Budget that have a matching key word on the search term? 
 Use the `find` command!
 
-Find a particular matching keyword.
+Find records matching a particular keyword.
 
 Format: `find KEYWORD`
 
-* The needs to be a white space between find and the KEYWORD.
+* There needs to be a white space between find and the KEYWORD.
 
 Example of usage:
 
@@ -460,7 +487,7 @@ Your expenditures:
 
 _________________________________________________________
 
-### <a id="listing"></a> Listing all Budget & Expenditure
+### Listing all Budget & Expenditure
 
 List all the Budget and expenditure for that particular year.
 
@@ -651,7 +678,7 @@ The amount you spent on this category: $5136.50
 
 _________________________________________________________
 
-
+<br />
 
 ### <a id="stat-year"></a> `-y` : View Statistics for the Year
 > 😃 Surely things get messy after you have many expenditures, loan and budget entries. Is there
