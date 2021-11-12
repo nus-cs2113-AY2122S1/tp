@@ -318,6 +318,8 @@ Your trip to America on 02 Feb 2021 has been successfully removed.
 ```
 <br />
 
+<div style="page-break-after: always;"></div>
+
 #### - Edit Trip
 
 Edit the attributes of a Trip. This command can only be used when no trip is open.
@@ -356,6 +358,8 @@ The location of your trip has been changed from tokyo to japan.
 Creates a new expense entry for the currently opened Trip. 
 
 This command can only be used if you have a Trip opened.
+
+<div style="page-break-after: always;"></div>
 
 Input syntax:
 ````  
@@ -427,6 +431,8 @@ Your expense has been added successfully
 
 <br />
 
+<div style="page-break-after: always;"></div>
+
 #### - List Expenses
 
 List all expenses in the current opened trip.
@@ -445,7 +451,6 @@ Input:
 ````
 list
 ````
-<div style="page-break-after: always;"></div>
 
 If successful, the output will be as follows:
 ````
