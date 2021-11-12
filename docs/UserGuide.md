@@ -6,7 +6,9 @@
 
 ![image info](./umlDiagrams/smallerlogo.png)
 
-Fridget is a <strong> desktop app built to be used via Command Line Interface </strong> (CLI). Fridget is an easier way for you to keep track of the items in your fridge. It is convenient to add, remove, and find items stored in your fridge. Fridget also reminds you when items are nearing expiry.
+Fridget is a <strong> desktop app built to be used via Command Line Interface </strong> (CLI). Fridget is an easier way for you to keep track of the items in your fridge. It makes it convenient for you to add, remove, and find items stored in your fridge. Fridget also reminds you when items are nearing expiry.
+
+![image info](./umlDiagrams/Ui.png)
 
 ### Who Is Fridget Meant For?
 
@@ -20,13 +22,13 @@ Use Fridget today.
 
 ### Purpose Of This Guide
 
-This guide is meant for you to quickly get started with Fridget so you can stop worrying about expired food and start enjoying life.
+This guide is meant for you to quickly get started with Fridget, so you can stop worrying about expired food and start enjoying life.
 
 You can use the [Index](#index) below to navigate through different sections in the user guide.
 
 Do start at the [Legend](#legend) to get an overview of the icons and terminology we use throughout the document.
 
-If you want to immediately get started with using Fridget, just follow the instructions in the [Quick Start](#quick-start) section. Afterwards, take a look at the [Features](#features) section to learn about all that you can do with Fridget.
+If you want to immediately get started with Fridget, just follow the instructions in the [Quick Start](#quick-start) section. Afterwards, take a look at the [Features](#features) section to learn about all that you can do with Fridget.
 
 We highly recommend you to refer to the [Command Syntax](#command-syntax) and [Things To Note](#things-to-note) for a better understanding of the properties underlying Fridget and its features.
 
@@ -42,14 +44,14 @@ We highly recommend you to refer to the [Command Syntax](#command-syntax) and [T
 
 ## Legend
 
-`add ITEM_NAME /EXPIRY_DATE` - Texts inside `this` box refers to either input text by the user or output from Fridget in the terminal.
+`add ITEM_NAME /EXPIRY_DATE` - Texts inside boxes like `this` refers to either input text by the user or output from Fridget in the terminal.
 It could also refer to file names like `Fridget.jar`.
 
 `ITEM_NAME` or `EXPIRY_DATE` - Texts which have been capitalized refer to parameters which the user should type in. For example:
 
 A command like `add ITEM_NAME /EXPIRY_DATE` would actually be typed by the user as `add burger /2021-11-11`.
 
-:bulb: - This icon refers to tips that may help you make the best out of Fridget.
+:bulb: - This icon refers to tips that can help you make the most out of Fridget.
 
 :exclamation: - This icon refers to warnings to help you avoid mistakes when using Fridget.
 
@@ -65,8 +67,8 @@ A command like `add ITEM_NAME /EXPIRY_DATE` would actually be typed by the user 
 6. Type your command in the command box and press Enter to execute it.
     * Some example commands you can try:
         - help: lists all commands and input format.
-        - reset: prompts the user to confirm clearing all data.
-        - exit: close the app.
+        - reset: prompts the user for confirmation to clear all data.
+        - exit: closes the app.
 7. Congratulations! You should be good to go!
 
 <span style="display: inline-block; background-image: linear-gradient(180deg, #d8eff3, #d1ecf1); padding-top: 1em; padding-bottom: 1em; padding-left: 1em; padding-right: 1em; font-style: normal; border-radius: 1em; border: 2px solid #999">
@@ -86,7 +88,7 @@ Feature | Command Format |
 [Remove an item](#remove-an-item-from-fridget-remove) | `remove ITEM_NAME`
 [Update the quantity of an item](#update-the-quantity-of-an-item-in-fridget-update) | `update ITEM_NAME`
 [Get help](#get-help-help) | `help`
-[Reset all items](#reset-all-items-reset) | `reset`
+[Reset item list](#reset-all-items-reset) | `reset`
 [Reset shopping list](#reset-all-items-in-shopping-list-shopreset) | `shopreset`
 [List all items](#list-all-items-in-fridget-list) | `list -OPTIONAL_SORT_TYPE`
 [List items in shopping list](#list-items-in-shopping-list-shoplist) | `shoplist`
@@ -173,9 +175,13 @@ You have successfully increased the quantity of:
 __________________________________________
 ```
 
-<ins>For advanced users:</ins>
+<br/>
+<span style="display: inline-block; background-image: linear-gradient(180deg, #d8eff3, #d1ecf1); padding-top: 1em; padding-bottom: 1em; padding-left: 1em; padding-right: 1em; font-style: normal; border-radius: 1em; border: 2px solid #999">
+:bulb: For advanced users
+</span>
 
-If you want to add multiple items at the same time, separate each item with a semicolon: `;`.
+
+<ins>If you want to add multiple items at the same time, separate each item with a semicolon: `;`.</ins>
 
 **For example:**
 
@@ -224,7 +230,7 @@ The <code>ITEM_NAME</code> can also be a <ins>part of the name</ins> of the item
 
 **Example of usage:**
 
-<ins>If there is only one item with a name exactly the same as `ITEM_NAME`</ins>:
+<ins>If there is only one item that exactly matches your `ITEM_NAME`</ins>:
 
 #### Figure 2.1
 
@@ -241,7 +247,7 @@ __________________________________________
 
 ```
 
-<ins>If there is only one item with a similar spelling (different capitalization / has more letters) to `ITEM_NAME`</ins>:
+<ins>If there is only one item with a similar spelling (different capitalization / has more letters) to your `ITEM_NAME`</ins>:
 
 #### Figure 2.2
 
@@ -261,7 +267,7 @@ burger | Qty: 1 | 11 Nov 2021
 __________________________________________
 ```
 
-<ins>If there are multiple items with the same name or has a name containing `ITEM_NAME`</ins>
+<ins>If there are multiple items with similar names to your `ITEM_NAME`</ins>:
 
 #### Figure 2.3
 
@@ -280,7 +286,12 @@ You have successfully removed:
 __________________________________________
 ```
 
-<ins>Upon removing an item, if there are no items left with the same name in the fridge</ins>:
+<ins>If you remove an item, and there are no items left with the same name in Fridget</ins>:
+
+<span style="display: inline-block; background-image: linear-gradient(180deg, #d8eff3, #d1ecf1); padding-top: 1em; padding-bottom: 1em; padding-left: 1em; padding-right: 1em; font-style: normal; border-radius: 1em; border: 2px solid #999">
+:bulb: Our shopping list will prompt you to add depleted items to your shopping list.
+</span>
+
 
 #### Figure 2.4
 
@@ -305,7 +316,7 @@ __________________________________________
 <hr/>
 
 ### Update the quantity of an item in Fridget: `update`
-Use this command if you want to update the quantity of items in Fridget.
+Use this command if you want to update the quantity of items currently in Fridget.
 
 Format: `update ITEM_NAME`
 
@@ -327,7 +338,7 @@ The <code>ITEM_NAME</code> can also be a <ins>part of the name</ins> of the item
 
 **Example of usage:**
 
-<ins>If there is only one item with a name exactly the same as `ITEM_NAME`</ins>:
+<ins>If there is only one item that exactly matches your `ITEM_NAME`:</ins>:
 
 #### Figure 3.1
 
@@ -342,7 +353,7 @@ Quantity of burger is now 5.
 __________________________________________
 ```
 
-<ins>If there is only one item with a similar spelling (different capitalization / has more letters) to `ITEM_NAME`</ins>:
+<ins>If there is only one item with a similar spelling (different capitalization / has more letters) to your `ITEM_NAME`:</ins>:
 
 #### Figure 3.2
 
@@ -361,7 +372,7 @@ Quantity of burger is now 8.
 __________________________________________
 ```
 
-<ins>If there are multiple items with the same name or has a name containing `ITEM_NAME`</ins>:
+<ins>If there are multiple items with similar names to your `ITEM_NAME`</ins>:
 
 #### Figure 3.3
 
@@ -384,7 +395,15 @@ Quantity of burger is now 32.
 __________________________________________
 ```
 
-<ins>If the intended value to be update is zero</ins>:
+<ins>If you choose to update the quantity of an item to zero</ins>:
+
+<span style="display: inline-block; background-image: linear-gradient(180deg, #d8eff3, #d1ecf1); padding-top: 1em; padding-bottom: 1em; padding-left: 1em; padding-right: 1em; font-style: normal; border-radius: 1em; border: 2px solid #999">
+:bulb: Fridget will prompt you to check if you meant to completely remove the item.
+</span>
+
+<span style="display: inline-block; background-image: linear-gradient(180deg, #d8eff3, #d1ecf1); padding-top: 1em; padding-bottom: 1em; padding-left: 1em; padding-right: 1em; font-style: normal; border-radius: 1em; border: 2px solid #999">
+:bulb: Fridget will further prompt you to add depleted items to your shopping list.
+</span>
 
 #### Figure 3.4
 
@@ -828,26 +847,25 @@ __________________________________________
 :bulb: Details about how the shopping list works
 </span>
 
-- Adding items into the shopping list is only available when the item you remove has run out completely (there are no more items with the same name in the item list).
-  - Details about adding items in the shopping list can be found in the last section of [`remove`](#remove-an-item-from-fridget-remove).
-- Do take note that Fridget will only prompt you to add the item to the shopping list if there are no other items with a similar name(different capitalisation) stored in Fridget.
-      
+- You can only add items into the shopping list when the item you remove has run out completely (there are no more items with a similar name (different capitalisation) in the item list).
+  - You can find out how to add items into the shopping list in [Figure 2.4](#figure-24) or [Figure 3.4](#figure-34).
 
 - Removing items from the shopping list is done automatically by Fridget when:
   - An item that is in the shopping list is added into the item list.  
   - The quantity of an item in the shopping list is increased with the update command.
     
 
-- You are not allowed to manually add or remove items from the shopping list.
-- You may copy the `savedShop.txt` file stored in the `fridgetData` directory when you need to go shopping.
+- We currently do not support manual addition or removal of items from the shopping list. Instead, it is all done automatically by Fridget.
+
+- You may copy or print out the `savedShop.txt` file stored in the `fridgetData` directory when you need to go shopping.
 
 <hr/>
 
 <span style="display: inline-block; background-image: linear-gradient(180deg, #d8eff3, #d1ecf1); padding-top: 1em; padding-bottom: 1em; padding-left: 1em; padding-right: 1em; font-style: normal; border-radius: 1em; border: 2px solid #999">
-:exclamation: For commands <code>help</code>, <code>expiring</code>, <code>reset</code>, <code>shopreset</code>, <code>shoplist</code>, <code>list</code>, and <code>notifs</code>, adding a space and random text behind will still trigger the command.
+:bulb: For commands <code>help</code>, <code>expiring</code>, <code>reset</code>, <code>shopreset</code>, <code>shoplist</code>, <code>list</code>, and <code>notifs</code>, adding a space and random text behind will still trigger the command.
 </span>
 
-Example:
+<ins>Examples:</ins>
 
 #### Figure 13.1
 
@@ -865,10 +883,8 @@ __________________________________________
 <hr/>
 
 <span style="display: inline-block; background-image: linear-gradient(180deg, #d8eff3, #d1ecf1); padding-top: 1em; padding-bottom: 1em; padding-left: 1em; padding-right: 1em; font-style: normal; border-radius: 1em; border: 2px solid #999">
-:exclamation: If no item is recorded, Fridget will prompt you to use the <code>help</code> command.
+:bulb: If no item is recorded, Fridget will prompt you to use the <code>help</code> command.
 </span>
-
-Example:
 
 #### Figure 13.2
 
@@ -891,7 +907,7 @@ __________________________________________
 :exclamation: All numerical inputs are limited between <code>0</code> to <code>2147483647</code>. Numbers outside this range are invalid inputs.
 </span>
 
-This is done to reduce the memory that needs to be stored per item.
+This is done to reduce the memory that Fridget uses on your computer.
 
 <hr/>
 
@@ -899,7 +915,7 @@ This is done to reduce the memory that needs to be stored per item.
 :exclamation: When adding multiple items, any error will invalidate the entire input. No items will be added.
 </span>
 
-This is done so as to ensure no incorrect items are added into Fridget accidentally. In the case of error, you can copy the previous input, fix the errors, and run the command again.
+This is done to ensure no incorrect items are added into Fridget accidentally. In your input is wrong, you can copy the previous input, fix the errors, and run the command again.
 
 <hr/>
 
@@ -913,8 +929,14 @@ Please feel free to read and copy the content from the files. However, do not ed
 
 # Thank You
 
-We hope you found this user guide useful in pushing Fridget to its limits! 
+We hope you found this user guide useful to help you push Fridget to its limits! 
 
-If you find any issues, do let us know [here](https://github.com/AY2122S1-CS2113T-W12-4/tp/issues/new/choose).
+If you find any issues, do let us know [here](https://github.com/AY2122S1-CS2113T-W12-4/tp/issues/new/choose). 
+
+
+<span style="display: inline-block; background-image: linear-gradient(180deg, #d8eff3, #d1ecf1); padding-top: 1em; padding-bottom: 1em; padding-left: 1em; padding-right: 1em; font-style: normal; border-radius: 1em; border: 2px solid #999">
+:bulb:  You will need a GitHub account to access the above link.
+</span>
+
 
 All the best, and have fun!
