@@ -377,6 +377,7 @@ _________________________________________________________
 # <a id="dbselect"></a> &nbsp;&nbsp; Year: `year`
 
 ### <a id="year"></a> Switching Database Year: `year`
+> 😃 This command allows you to switch between different database years you are working on seamlessly.
 
 Selection of the database year.
 
@@ -404,11 +405,10 @@ _________________________________________________________
 #  <a id="find&filter"></a> &nbsp;&nbsp; Find: `find`
 
 ### <a id="find"></a> Finding a Particular Expenditure, Loan and Budget: `find`
-
 > 😃 Want to find a specific records of Expenditure, loan and Budget that have a matching key word on the search term? 
 Use the `find` command!
 
-Find a particular matching keyword. 
+Find a particular matching keyword.
 
 Format: `find KEYWORD`
 
@@ -785,12 +785,11 @@ _________________________________________________________
 <br />
 
 # <a id="csv"></a> &nbsp;&nbsp; CSV: `csv`
-
 > 😃 If our statistical analysis feature is not good enough for you, you may convert the database records
 into a csv file by simple keying in the `csv` command. You will then be able to use Excel to do advanced
 statistical analysis.
 
-Converts your data text file into csv format. 
+Converts your data text file into csv format.
 
 Format: `csv`
 
@@ -855,7 +854,6 @@ _________________________________________________________
 <br />
 
 # <a id="exit"></a> &nbsp;&nbsp; Exit the program: `bye`
-
 > 😃 When you are done with using the app and wish to exit the app. Enter the command `bye` to 
 say goodbye with our app 👋
 
