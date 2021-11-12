@@ -754,7 +754,7 @@ Action | Command syntax
 ---|---
 Display help|`help`
 Quit|`quit`
-Cancel operation ([see FAQ](#FAQ)) | `-cancel`
+Cancel operation ([see FAQ](#faq)) | `-cancel`
 
 <br />
 
