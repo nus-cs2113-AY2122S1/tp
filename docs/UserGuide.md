@@ -462,7 +462,6 @@ List of Expenses:
 
 <br />
 
-
 #### - View an Expense
 Shows the details of a particular expense of a trip.
 
@@ -476,12 +475,16 @@ view [expense-number]
 - Enter `view last` to view the last added expense.
   - Note: If the last added expense is deleted, you will not be able to use this command.
 
+<div style="page-break-after: always;"></div>
+
 For example,
 
 Input:
 ````
 view 1
 ````
+<div style="page-break-after: always;"></div>
+
 If successful, the output will be as follows:
 ````
 	In-and-Out Burgers
