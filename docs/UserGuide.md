@@ -73,6 +73,8 @@ Welcome to
 ```
 <br>
 
+<div style="page-break-after: always;"></div>
+
 ## Features
 
 ### Saving your data
@@ -89,7 +91,7 @@ If the save attempt is unsuccessful, you will see an error message. The program 
 The first time you open the program, or if the save file was deleted or moved, the program will create a save file 
 named `trips.json` for you.
 
-The next time open the program, it will attempt to load your saved data from the save file. If the data is successfully 
+The next time you open the program, it will attempt to load your data from the save file. If the data is successfully 
 loaded, you will see the following message:
 ```
 Your saved data was successfully loaded!
@@ -210,8 +212,7 @@ Trip, and open the specified Trip in the most recent command.
 
 #### - Close Trip
 
-Closes the current Trip you are in. This allows you to interact with trips (e.g. adding a new trip,
-list all trips or to delete a trip).
+Closes the current Trip you are in. This allows you to interact with trips (e.g. add a new trip, delete a trip, or list all trips)
 
 This command can only be used if a Trip is already open.
 
@@ -274,6 +275,9 @@ Input:
 ````
 people
 ````
+
+<div style="page-break-after: always;"></div>
+
 If successful, the output will be as follows:
 ```
 These are the people involved in this trip:
@@ -347,7 +351,7 @@ The location of your trip has been changed from tokyo to japan.
 
 ### Expenses
 #### - Create Expense
-Creates a new expense entry for the current opened Trip. 
+Creates a new expense entry for the currently opened Trip. 
 
 This command can only be used if you have a Trip opened.
 
@@ -439,6 +443,7 @@ Input:
 ````
 list
 ````
+<div style="page-break-after: always;"></div>
 
 If successful, the output will be as follows:
 ````
@@ -539,7 +544,7 @@ Input syntax:
 delete [expense-number]
 ```
 - `[expense-number]` is the index of the expense you wish to delete, 
-and can be found by using `list` command while a Trip is open.
+and can be found by using `list` while a trip is open.
 - `delete last` to delete the last added expense.
   - Note: After deletion, you will not be able to use this command again until you add another expense.
 
@@ -672,6 +677,8 @@ help
 
 For example,
 
+<div style="page-break-after: always;"></div>
+
 Input:
 
 ```
@@ -717,6 +724,8 @@ corrupted save file, enter `y`. You may then proceed to re-enter your data.
 type `-cancel`. This will return you to the preceding state of the program, allowing you to enter 
 any command.
 
+<div style="page-break-after: always;"></div>
+
 ## Command Summary
 Hyphen before square brackets (eg `summary -[name]`) denotes optional arguments
 
@@ -743,6 +752,8 @@ Delete trip | `delete [trip-number]`|`delete 1`
 Edit trip | `edit [trip num] [attribute] [new value]` <br /><br /> attributes: -location, -date, -exchangerate, -forcur, -homecur  | `edit 1 -location Afghanistan`
 
 <br />
+
+<div style="page-break-after: always;"></div>
 
 ### Expense commands
 Open a trip to use
