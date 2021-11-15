@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+participant ":CliverShelf" as app
+participant "newCommand:ListCommand" as listCommand
+participant ":ShelfList" as shelflist
+participant ":Shelf" as shelf
+
+
+app -> listCommand: execute()
+
+
+activate listCommand
+alt shelf is specified
+    listCommand -> listCommand : getOneList(shelfName)
+    activate listCommand
+    listCommand -> shelflist:getShelf(shelfName)
+    listCommand -> shelf :getItems()
+    listCommand -> listCommand: compileQuantity
+    listCommand --> listCommand:output
+
+    deactivate listCommand
+
+
+else
+    listCommand -> shelflist:getShelves()
+    loop for every shelf in shelves
+        listCommand -> listCommand : getEveryList()
+        activate listCommand
+        listCommand -> shelf:getItems()
+        listCommand -> listCommand: compileQuantity
+        listCommand --> listCommand :add to output
+        deactivate listCommand
+    end
+
+end
+
+listCommand --> app:output
+deactivate listCommand
+destroy listCommand
+
+hide footbox
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include Style.puml
+participant ":MarkUpCommand" as markupCommand
+participant ":SalesMarkUp" as SalesMarkUp
+
+-> markupCommand : execute()
+
+activate markupCommand
+
+markupCommand -> SalesMarkUp ** : new SalesMarkUp(shelfName, index, userRequestPercent)
+activate SalesMarkUp
+SalesMarkUp --> markupCommand
+deactivate SalesMarkUp
+
+markupCommand -> SalesMarkUp : getItemToMarkUpInfo()
+
+markupCommand -> SalesMarkUp : getSelectedItemMarkUpInfo()
+
+alt userRequestPercent == ""
+    markupCommand -> SalesMarkUp : getEstimatedMarkUpInfo()
+    <-- markupCommand : resultString
+
+else
+   markupCommand -> SalesMarkUp : getUserRequestMarkUpInfo()
+   <-- markupCommand : resultString
+   deactivate markupCommand
+end
+
+destroy markupCommand
+
+@enduml

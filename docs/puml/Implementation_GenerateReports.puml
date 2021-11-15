@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+participant ":CliverShelf" as Main
+
+participant "newCommand:ReportCommand" as Command
+participant "newSalesReport:SalesReport" as SalesReport
+
+Main -> Command: execute()
+activate Command
+Command -> SalesReport **: new SalesReport(timeSpan)
+activate SalesReport
+SalesReport --> Command
+deactivate SalesReport
+alt type.equals("stats")
+    Command -> SalesReport: generateSoldItemStats()
+    activate SalesReport
+    SalesReport --> Command: statsReport
+    deactivate SalesReport
+else
+    Command -> SalesReport: generateSoldItemDetails()
+    activate SalesReport
+    SalesReport --> Command: detailsReport
+    deactivate SalesReport
+end
+Command --> Main: report
+deactivate Command
+destroy SalesReport
+destroy Command
+
+
+@enduml

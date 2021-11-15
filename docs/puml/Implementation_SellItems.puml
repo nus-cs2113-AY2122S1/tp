@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+participant ":CliverShelf" as Main
+
+participant "newCommand:SellCommand" as Command
+participant ":ShelfList" as ShelfList
+participant ":SalesManager" as SalesManager
+participant "originalShelf:Shelf" as OriginalShelf
+participant "newSoldItem:SoldItem" as SoldItem
+participant "soldItemShelf:Shelf" as SoldItemShelf
+
+
+
+Main -> Command: execute()
+activate Command
+Command -> ShelfList: getItem(itemID)
+Command -> SalesManager: sell(item)
+activate SalesManager
+SalesManager -> ShelfList: shelfOfItem(item)
+activate ShelfList
+ShelfList --> SalesManager: originalShelf
+deactivate ShelfList
+SalesManager -> OriginalShelf: deleteItem(item)
+SalesManager -> ShelfList: getShelf("soldItem")
+activate ShelfList
+ShelfList --> SalesManager: soldItemShelf
+deactivate ShelfList
+SalesManager -> SoldItem **: new SoldItem(itemDetails)
+activate SoldItem
+SoldItem --> SalesManager
+deactivate SoldItem
+SalesManager -> SoldItemShelf: addItem(newSoldItem)
+SalesManager --> Command: finishedMessage
+deactivate SalesManager
+
+Command --> Main: finishedMessage
+deactivate Command
+destroy Command
+
+
+@enduml

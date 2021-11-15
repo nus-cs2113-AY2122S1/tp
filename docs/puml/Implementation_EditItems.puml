@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+
+participant ":CliverShelf" as Main
+
+participant "newCommand:EditCommand" as Command
+participant ":ShelfList" as ShelfList
+participant "specifiedShelf:Shelf" as Shelf
+participant "selectedItem:Item" as Item
+
+
+
+Main -> Command: execute()
+activate Command
+
+Command -> ShelfList: getShelf(specifiedShelf)
+Command -> Shelf: getItem(selectedItem)
+Command -> Item: setProperty(newValue)
+Command --> Main: finishedMessage
+deactivate Command
+
+destroy Command
+
+
+@enduml
