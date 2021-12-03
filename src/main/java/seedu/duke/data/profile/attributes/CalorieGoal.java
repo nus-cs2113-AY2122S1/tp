@@ -12,7 +12,7 @@ public class CalorieGoal implements Verifiable {
     public static final int LIMIT_UPPER_CALORIES = 10000;
     public static final int LIMIT_LOWER_CALORIES = -3000;
 
-    protected int calorieGoal = 100001;
+    protected int calorieGoal;
 
     public CalorieGoal() {
 

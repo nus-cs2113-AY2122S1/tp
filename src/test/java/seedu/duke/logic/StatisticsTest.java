@@ -9,6 +9,7 @@ import seedu.duke.data.item.food.FoodList;
 import seedu.duke.data.profile.Profile;
 import seedu.duke.data.profile.attributes.ActivityFactor;
 import seedu.duke.data.profile.attributes.Age;
+import seedu.duke.data.profile.attributes.CalorieGoal;
 import seedu.duke.data.profile.attributes.Gender;
 import seedu.duke.data.profile.attributes.Height;
 
@@ -63,6 +64,7 @@ class StatisticsTest {
         profile.setProfileAge(new Age(21));
         profile.setProfileHeight(new Height(170.0));
         profile.setProfileGender(new Gender('M'));
+        profile.getProfileCalorieGoal().setCalorieGoal(0);
         this.foodItems = new FoodList();
         this.exerciseItems = new ExerciseList();
         profile.setProfileActivityFactor(new ActivityFactor(3));
