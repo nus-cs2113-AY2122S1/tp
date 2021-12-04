@@ -1,0 +1,48 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+!include Style.puml
+hide class fields
+hide class methods
+hide interface fields
+hide interface methods
+
+class StorageManager STORAGE_COLOUR
+class ProfileStorageUtils STORAGE_COLOUR
+class FoodBankStorageUtils STORAGE_COLOUR
+class FoodListStorageUtils STORAGE_COLOUR
+class ExerciseListStorageUtils STORAGE_COLOUR
+class FutureExerciseListStorageUtils STORAGE_COLOUR
+class ExerciseBankStorageUtils STORAGE_COLOUR
+class "<<interface>>\nProfileStorage" STORAGE_COLOUR
+class "<<interface>>\nFoodBankStorage" STORAGE_COLOUR
+class "<<interface>>\nExerciseBankStorage" STORAGE_COLOUR
+class "<<interface>>\nFoodListStorage" STORAGE_COLOUR
+class "<<interface>>\nExerciseListStorage" STORAGE_COLOUR
+class "<<interface>>\nUpcomingStorage" STORAGE_COLOUR
+class "<<interface>>\nStorage" STORAGE_COLOUR
+
+"<<interface>>\nProfileStorage" <|-- "<<interface>>\nStorage"
+"<<interface>>\nFoodBankStorage" <|-- "<<interface>>\nStorage"
+"<<interface>>\nExerciseBankStorage" <|-- "<<interface>>\nStorage"
+"<<interface>>\nFoodListStorage" <|-- "<<interface>>\nStorage"
+"<<interface>>\nExerciseListStorage" <|-- "<<interface>>\nStorage"
+"<<interface>>\nUpcomingStorage" <|-- "<<interface>>\nStorage"
+
+StorageManager <|.up. "<<interface>>\nStorage"
+
+"<<interface>>\nProfileStorage" <|.. ProfileStorageUtils
+"<<interface>>\nFoodBankStorage" <|.. FoodBankStorageUtils
+"<<interface>>\nExerciseBankStorage" <|.. ExerciseBankStorageUtils
+"<<interface>>\nFoodListStorage" <|.. FoodListStorageUtils
+"<<interface>>\nExerciseListStorage" <|.. ExerciseListStorageUtils
+"<<interface>>\nUpcomingStorage" <|.. FutureExerciseListStorageUtils
+
+StorageManager --> "1" "<<interface>>\nProfileStorage"
+StorageManager --> "1" "<<interface>>\nFoodBankStorage"
+StorageManager --> "1" "<<interface>>\nExerciseBankStorage"
+StorageManager --> "1" "<<interface>>\nFoodListStorage"
+StorageManager --> "1" "<<interface>>\nExerciseListStorage"
+StorageManager --> "1" "<<interface>>\nUpcomingStorage"
+
+@enduml

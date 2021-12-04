@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+hide footbox
+
+group sd Decode Weight
+participant ":ProfileDecoder" As ProfileDecoder STORAGE_COLOUR
+participant ":Weight" As Weight DATA_COLOUR
+
+activate ProfileDecoder STORAGE_COLOUR
+alt no errors thrown
+ProfileDecoder -> Weight ** DATA_COLOUR: new Weight(Double.parse(detail))
+activate Weight DATA_COLOUR
+    Weight --> ProfileDecoder
+deactivate
+destroy Weight
+else NumberFormatException
+ProfileDecoder -> Weight ** DATA_COLOUR: new Weight(Double.MIN_VALUE)
+note right STORAGE_FADED_COLOUR
+The (Double.MIN_VALUE) here represents an invalid double
+of Weight that is handled later on in the startup of the bot.
+end note
+activate Weight DATA_COLOUR
+    Weight --> ProfileDecoder
+deactivate
+destroy Weight
+
+end
+
+end
+@enduml

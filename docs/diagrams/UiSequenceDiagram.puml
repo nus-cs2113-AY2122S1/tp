@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+hide footbox
+actor user #ffffff
+participant Ui as ui UI_COLOUR
+participant Main as main MAIN_COLOUR
+main ++ MAIN_COLOUR
+main -> main ++ MAIN_COLOUR: enterTaskModeUntilByeCommand()
+main -> ui ++ UI_COLOUR : getUserInput()
+user -> ui : type command
+ui --> main -- :     command
+ref over main
+parsing of commands
+end
+main -> ui ++ UI_COLOUR: formatMessageFramedWithDivider()
+ui -> user : prints message \n on console
+ui --> main --
+
+
+@enduml

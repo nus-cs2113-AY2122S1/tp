@@ -1,0 +1,28 @@
+@startuml
+!include style.puml
+hide footbox
+
+participant ":Ui" as ui UI_COLOUR
+participant ":Main" as main MAIN_COLOUR
+main -> ui ++ UI_COLOUR: getUserInput()
+main++ MAIN_COLOUR
+-> ui   UI_COLOUR : addFoodItem
+ui --> main --
+'create ":Parser" as parser LOGIC_COLOUR
+main -> parser ++ LOGIC_COLOUR : parseAddFoodItem()
+participant ":Data" as itemlist DATA_COLOUR
+parser -> itemlist ++ DATA_COLOUR : addFoodItem()
+itemlist --> parser --  :
+parser --> main --
+participant ":Storage" as storage STORAGE_COLOUR
+main -> storage ++ STORAGE_COLOUR: saveFoodList()
+'destroy parser
+storage -> storage ++ STORAGE_COLOUR: save to file
+storage --> storage --
+storage --> main --
+main --> ui ++ UI_COLOUR: formatMessageFramedWithDivider() success
+<- ui  : show add food item\n success message
+ui --> main --
+main --
+
+@enduml

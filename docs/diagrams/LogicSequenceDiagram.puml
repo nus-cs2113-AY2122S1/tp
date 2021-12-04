@@ -1,0 +1,69 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+hide footbox
+autoactivate on
+
+participant ":Main" AS Main MAIN_COLOUR
+participant ":LogicManager" AS LogicManager LOGIC_COLOUR
+participant ":ParserManager" AS ParserManager LOGIC_COLOUR
+participant ":AddCommandParser" AS AddCommandParser LOGIC_COLOUR
+participant "c:AddFoodCommand" AS AddFoodCommand LOGIC_COLOUR
+participant "r:CommandResult" AS CommandResult LOGIC_COLOUR
+activate Main MAIN_COLOUR
+
+
+create LogicManager
+Main -> LogicManager LOGIC_COLOUR : new LogicManager(storageManager, dataManager)
+
+create ParserManager
+LogicManager-> ParserManager LOGIC_COLOUR
+return
+return
+
+
+Main -> LogicManager LOGIC_COLOUR : execute("add f/potato c/30")
+
+
+
+LogicManager -> ParserManager LOGIC_COLOUR : parseCommand ("add f/potato c/30")
+ref over ParserManager
+    determine type
+    of command
+end ref
+
+create AddCommandParser
+ParserManager -> AddCommandParser LOGIC_COLOUR
+return
+ParserManager -> AddCommandParser LOGIC_COLOUR : parse("f/...")
+
+ref over AddCommandParser
+    parse required
+    parameters
+    for the command
+end ref
+
+
+create AddFoodCommand
+AddCommandParser -> AddFoodCommand LOGIC_COLOUR : new AddFoodCommand("potato", ...)
+return c
+return c
+return c
+destroy AddCommandParser
+
+LogicManager -> AddFoodCommand LOGIC_COLOUR : setData(dataManager)
+destroy ParserManager
+return
+LogicManager -> AddFoodCommand LOGIC_COLOUR : execute()
+note over AddFoodCommand #WHITE : The data manipulation process \n is not shown here.
+
+
+create CommandResult
+AddFoodCommand -> CommandResult LOGIC_COLOUR
+
+return r
+return r
+destroy CommandResult
+return r
+destroy AddFoodCommand
+@enduml

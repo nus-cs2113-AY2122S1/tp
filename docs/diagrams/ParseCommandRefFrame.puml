@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+mainframe sd determine type of command
+
+
+participant ":ParserManager" AS ParserManager LOGIC_COLOUR
+participant ":AddCommandParser" AS AddCommandParser LOGIC_COLOUR
+participant ":XYZCommandParser" AS XYZCommandParser LOGIC_COLOUR
+-> ParserManager : parseCommand("add f/potato c/30")
+participant ":InvalidCommand" AS InvalidCommand LOGIC_COLOUR
+
+activate ParserManager LOGIC_COLOUR
+
+ParserManager -> ParserManager : splitInputIntoCommandAndParams(input)
+activate ParserManager LOGIC_COLOUR
+return ["add", "f/potato c/30"]
+alt command word is "add"
+    create AddCommandParser
+    ParserManager -> AddCommandParser LOGIC_COLOUR : new AddCommandParser()
+    activate AddCommandParser LOGIC_COLOUR
+    return
+
+else command word is "xyz"
+    create XYZCommandParser
+    ParserManager -> XYZCommandParser LOGIC_COLOUR : new XYZCommandParser()
+    activate XYZCommandParser LOGIC_COLOUR
+    return
+
+    note left #WHITE: XYZ = Delete, View, \nEdit, etc.
+else command word is not known
+    create InvalidCommand
+    ParserManager -> InvalidCommand LOGIC_COLOUR : new InvalidCommand(ParserMessages.MESSAGE_ERROR_COMMAND_DOES_NOT_EXIST)
+    activate InvalidCommand LOGIC_COLOUR
+    return
+end
+
+
+@enduml

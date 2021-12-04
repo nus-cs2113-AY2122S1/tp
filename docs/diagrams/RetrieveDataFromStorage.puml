@@ -1,0 +1,47 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+hide footbox
+
+group sd Retrieval of data from storage with the use of ProfileDecoder to decode
+participant "profileStorage:ProfileStorage" As ProfileStorage STORAGE_COLOUR
+participant ":ProfileDecoder" As ProfileDecoder STORAGE_COLOUR
+
+participant "file:File" As File STORAGE_COLOUR
+participant "in:Scanner" As Scanner STORAGE_COLOUR
+participant "profile:Profile" As Profile DATA_COLOUR
+
+activate ProfileStorage STORAGE_COLOUR
+ProfileStorage -> ProfileDecoder: retrieveProfileFromData(filePath)
+activate ProfileDecoder STORAGE_COLOUR
+    ProfileDecoder -> File **: new File(filePath)
+    activate File STORAGE_COLOUR
+        File --> ProfileDecoder: file
+    deactivate
+    ProfileDecoder -> Scanner ** : new Scanner(file)
+    activate Scanner STORAGE_COLOUR
+        Scanner --> ProfileDecoder:
+    deactivate
+        ProfileDecoder -> Scanner : nextLine()
+        activate Scanner STORAGE_COLOUR
+            Scanner --> ProfileDecoder: line
+        deactivate
+        ProfileDecoder -> ProfileDecoder ++ STORAGE_COLOUR: decodeProfile(line)
+
+        ref over ProfileDecoder
+        Decode all the attributes
+        end ref
+        ProfileDecoder -> Profile ** : new Profile(name, height, ...)
+        activate Profile DATA_COLOUR
+            Profile --> ProfileDecoder :
+        deactivate
+        ProfileDecoder --> ProfileDecoder -- : profile
+        destroy Profile
+
+    destroy Scanner
+    destroy File
+    ProfileDecoder --> ProfileStorage : profile
+deactivate
+end
+@enduml

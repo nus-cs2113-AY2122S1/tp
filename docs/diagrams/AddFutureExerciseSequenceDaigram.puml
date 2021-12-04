@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include Style.puml
+hide footbox
+
+participant "command:AddFutureExerciseCommand" As AddFutureExerciseCommand LOGIC_COLOUR
+participant "exerciseBank:ItemBank" As ItemBank DATA_COLOUR
+
+activate AddFutureExerciseCommand LOGIC_COLOUR
+?->AddFutureExerciseCommand :execute()
+
+opt isCalorieFromBank
+    AddFutureExerciseCommand -> ItemBank : getCaloriesOfItemWithMatchingName(description)
+    activate ItemBank DATA_COLOUR
+    ItemBank --> AddFutureExerciseCommand : \t\t\t\tcalories
+    deactivate ItemBank
+end
+create "Exercise" As Exercise DATA_COLOUR
+    AddFutureExerciseCommand -> Exercise ** : \t\t\t\tnew Exercise(description,calories,date)
+    activate Exercise DATA_COLOUR
+    Exercise --> AddFutureExerciseCommand : \t\t\t\t\t\t\texercise
+    deactivate Exercise
+
+
+participant "futureExerciseItems:FutureExerciseList" As FutureExerciseItems DATA_COLOUR
+participant "commandResult:CommandResult" As CommandResult LOGIC_COLOUR
+AddFutureExerciseCommand -> FutureExerciseItems : \t\t\t\t\t\t\t\t\t\taddItem(exercise)
+activate FutureExerciseItems DATA_COLOUR
+FutureExerciseItems -> FutureExerciseItems ++  DATA_COLOUR: sortList()
+FutureExerciseItems --> FutureExerciseItems --
+FutureExerciseItems --> AddFutureExerciseCommand
+deactivate FutureExerciseItems
+AddFutureExerciseCommand -> CommandResult **: \t\t\t\t\t\t\tnew CommandResult(String.format(MESSAGE_SUCCESS,exercise))
+activate CommandResult LOGIC_COLOUR
+CommandResult --> AddFutureExerciseCommand
+deactivate CommandResult
+
+?<-- AddFutureExerciseCommand : commandResult
+deactivate AddFutureExerciseCommand
+destroy Exercise
+destroy CommandResult
+destroy AddFutureExerciseCommand
+@enduml

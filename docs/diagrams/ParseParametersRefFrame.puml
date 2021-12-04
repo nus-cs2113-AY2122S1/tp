@@ -1,0 +1,55 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+mainframe sd parse required parameters for the command
+
+
+participant ":AddCommandParser" AS AddCommandParser LOGIC_COLOUR
+participant "<<class>> \n ParserUtils" AS ParserUtils LOGIC_COLOUR
+participant "a:InvalidCommand" AS InvalidCommand1 LOGIC_COLOUR
+participant ":AddFoodCommand" AS AddFoodCommand LOGIC_COLOUR
+participant "b:InvalidCommand" AS InvalidCommand2 LOGIC_COLOUR
+participant "c:InvalidCommand" AS InvalidCommand3 LOGIC_COLOUR
+-> AddCommandParser : parse("f/potato c/30")
+activate AddCommandParser LOGIC_COLOUR
+AddCommandParser -> ParserUtils : extractItemTypePrefix("f/potato c/30")
+activate ParserUtils LOGIC_COLOUR
+return "f"
+alt item type is food
+    AddCommandParser -> AddCommandParser : parseAddToFood("f/potato c/30", "f")
+    activate AddCommandParser LOGIC_COLOUR
+    AddCommandParser -> ParserUtils ++ LOGIC_COLOUR : hasExtraDelimiters("f/potato c/30", AddFoodCommand.EXPECTED_PREFIXES)
+    return
+    alt hasExtraDelimiters
+        create InvalidCommand1
+        AddCommandParser -> InvalidCommand1 : new InvalidCommand(ParserMessages.MESSAGE_ERROR_TOO_MANY_DELIMITERS)
+        activate InvalidCommand1 LOGIC_COLOUR
+        return command
+    else else
+        AddCommandParser -> ParserUtils ++ LOGIC_COLOUR : extractItemDescription("f/potato c/30", "f")
+        return "potato"
+        AddCommandParser -> ParserUtils ++ LOGIC_COLOUR : extractItemCalories("f/potato c/30")
+        return "30"
+        AddCommandParser -> ParserUtils ++ LOGIC_COLOUR : extractDateTime("f/potato c/30")
+        return LocalDate.now()
+        alt all parameters are valid
+            create AddFoodCommand
+            AddCommandParser -> AddFoodCommand ++ LOGIC_COLOUR : new AddFoodCommand("potato", 30, LocalDate.now())
+            return command
+       else else
+            create InvalidCommand2
+            AddCommandParser -> InvalidCommand2 ++ LOGIC_COLOUR : new InvalidCommand(ParserException.getMessage())
+            return command
+        end
+end
+else item type is X
+    note over AddCommandParser #WHITE: The process for extracting parameters \n differ for each X, \n where X = exercise, recurring exercise, \n exercise bank, food bank. However, the process is similar, \n hence they have been omitted for simplicity.
+else item type is not known
+    create InvalidCommand3
+    AddCommandParser -> InvalidCommand3 ++ LOGIC_COLOUR : new InvalidCommand(ParserMessages.MESSAGE_ADD_COMMAND_INVALID_FORMAT)
+    return command
+
+end
+return command
+return command
+@enduml

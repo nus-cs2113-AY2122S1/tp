@@ -1,0 +1,33 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+hide footbox
+
+group sd Decode ActivityFactor
+participant ":ProfileDecoder" As ProfileDecoder STORAGE_COLOUR
+participant ":ActivityFactor" As ActivityFactor DATA_COLOUR
+
+activate ProfileDecoder STORAGE_COLOUR
+alt no errors thrown
+ProfileDecoder -> ActivityFactor ** DATA_COLOUR: new ActivityFactor(Integer.parse(detail))
+activate ActivityFactor DATA_COLOUR
+    ActivityFactor --> ProfileDecoder
+deactivate
+destroy ActivityFactor
+else NumberFormatException
+ProfileDecoder -> ActivityFactor ** DATA_COLOUR: new ActivityFactor(Integer.MIN_VALUE)
+note right STORAGE_FADED_COLOUR
+ The (Integer.MIN_VALUE) here represents an invalid
+ integer of ActivityFactor that is handled later on in
+ the startup of the bot.
+end note
+activate ActivityFactor DATA_COLOUR
+    ActivityFactor --> ProfileDecoder
+deactivate
+destroy ActivityFactor
+
+end
+
+end
+@enduml

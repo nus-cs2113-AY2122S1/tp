@@ -1,0 +1,37 @@
+@startuml
+
+!include Style.puml
+hide circle
+hide empty members
+skinparam minclassWidth 120
+skinparam Padding 5
+
+class AttributeCreator STATE_COLOUR
+class NameCreator STATE_COLOUR
+class HeightCreator STATE_COLOUR
+class WeightCreator STATE_COLOUR
+class GenderCreator STATE_COLOUR
+class AgeCreator STATE_COLOUR
+class CalorieGoalCreator STATE_COLOUR
+class ActivityFactorCreator STATE_COLOUR
+class StartState STATE_COLOUR
+
+
+StartState ..> NameCreator : > executes
+StartState ..> HeightCreator : > executes
+StartState ..> WeightCreator : > executes
+StartState ..> GenderCreator : > executes
+StartState ..> AgeCreator : > executes
+StartState ..> CalorieGoalCreator : > executes
+StartState ..> ActivityFactorCreator : > executes
+NameCreator --|> AttributeCreator
+HeightCreator --|> AttributeCreator
+WeightCreator --|> AttributeCreator
+GenderCreator --|> AttributeCreator
+AgeCreator --|> AttributeCreator
+CalorieGoalCreator --|> AttributeCreator
+ActivityFactorCreator --|> AttributeCreator
+
+
+
+@enduml

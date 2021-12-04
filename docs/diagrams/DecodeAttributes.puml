@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+hide footbox
+
+group sd Decode all the attributes
+participant ":ProfileDecoder" As ProfileDecoder STORAGE_COLOUR
+
+ref over ProfileDecoder
+Decode Name
+end ref
+
+ref over ProfileDecoder
+Decode Height
+end ref
+
+ref over ProfileDecoder
+Decode Weight
+end ref
+
+ref over ProfileDecoder
+Decode Gender
+end ref
+
+ref over ProfileDecoder
+Decode Age
+end ref
+
+ref over ProfileDecoder
+Decode CalorieGoal
+end ref
+
+ref over ProfileDecoder
+Decode ActivityFactor
+end ref
+
+activate ProfileDecoder STORAGE_COLOUR
+
+end
+@enduml

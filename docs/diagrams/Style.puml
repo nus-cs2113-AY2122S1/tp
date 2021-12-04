@@ -1,0 +1,42 @@
+@startuml
+'COLOURS
+!define BLACK #2F3030
+!define UI_COLOUR #FFCCFF
+!define UI_FADED_COLOUR #FFE6F3
+!define MAIN_COLOUR #EA6B66
+!define MAIN_FADED_COLOUR #F1C3BE
+!define LOGIC_COLOUR #FFFF66
+!define LOGIC_FADED_COLOUR #FFF7C4
+!define DATA_COLOUR #99FFFF
+!define DATA_FADED_COLOUR #DAE8FC
+!define STORAGE_COLOUR #D5E8D4
+!define STORAGE_FADED_COLOUR #E1F7E7
+!define STATE_COLOUR #40ff49
+
+hide circle
+hide footbox
+
+skinparam Shadowing false
+skinparam class {
+    BorderColor BLACK
+    BorderThickness 1
+    AttributeIconSize 0
+}
+skinparam participant {
+    BorderColor BLACK
+    BorderThickness 1
+}
+skinparam arrow {
+    Color BLACK
+}
+skinparam sequence {
+    TitleFontColor BLACK
+    LifeLineBackgroundColor WHITE
+    LifeLineBorderColor BLACK
+}
+
+hide circle
+hide enum methods
+
+
+@enduml

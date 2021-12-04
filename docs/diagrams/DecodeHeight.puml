@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+hide footbox
+
+group sd Decode Height
+participant ":ProfileDecoder" As ProfileDecoder STORAGE_COLOUR
+participant ":Height" As Height DATA_COLOUR
+
+activate ProfileDecoder STORAGE_COLOUR
+alt no errors thrown
+ProfileDecoder -> Height ** DATA_COLOUR: new Height(Double.parse(detail))
+activate Height DATA_COLOUR
+    Height --> ProfileDecoder
+deactivate
+destroy Height
+else NumberFormatException
+ProfileDecoder -> Height ** DATA_COLOUR: new Height(Double.MIN_VALUE)
+note right STORAGE_FADED_COLOUR
+The (Double.MIN_VALUE) here represents an invalid double
+of Height that is handled later on in the startup of the bot.
+end note
+activate Height DATA_COLOUR
+    Height --> ProfileDecoder
+deactivate
+destroy Height
+
+end
+
+end
+@enduml

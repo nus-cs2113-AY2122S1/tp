@@ -1,0 +1,51 @@
+@startuml
+'https://plantuml.com/class-diagram
+!include Style.puml
+hide empty members
+skinparam minclassWidth 120
+skinparam Padding 2
+
+class ParserMessages LOGIC_COLOUR
+class ParserManager LOGIC_COLOUR
+class ParserUtils LOGIC_COLOUR
+class XYZCommandParser LOGIC_COLOUR
+class XYZCommand LOGIC_COLOUR
+abstract class "{abstract}\nCommand" AS Command LOGIC_COLOUR
+class Parser <<interface>> LOGIC_COLOUR
+
+ParserManager ..> ParserMessages : > uses
+ParserManager .down.> XYZCommandParser : > creates
+XYZCommandParser ..right|> Parser
+XYZCommandParser .up.> ParserMessages : > uses
+
+
+note as N2 #white
+XYZCommand =
+AddCommand,
+DeleteCommand,
+ViewCommand, etc.
+end note
+
+XYZCommandParser .. N2 #transparent
+N2 .. XYZCommand #transparent
+
+
+XYZCommandParser .left.> ParserUtils : > uses
+XYZCommandParser ...> XYZCommand : > creates and returns
+XYZCommand -right[hidden]- XYZCommandParser
+ParserManager -down[hidden]-XYZCommandParser
+
+ParserManager ..> Command :> returns
+XYZCommand -|> Command
+
+note as N1 #white
+ParserMessages and ParserUtils
+are purely utility classes
+and contain static
+methods/constants only.
+end note
+
+ParserMessages.. N1 #transparent
+N1 .. ParserUtils #transparent
+
+@enduml

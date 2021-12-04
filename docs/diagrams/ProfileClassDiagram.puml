@@ -1,0 +1,53 @@
+@startuml
+'https://plantuml.com/class-diagram
+!include Style.puml
+hide class fields
+hide class methods
+hide interface fields
+hide interface methods
+
+
+package Profile {
+    class Profile DATA_COLOUR
+    package Attributes {
+        class Name DATA_COLOUR
+        class Height DATA_COLOUR
+        class Weight DATA_COLOUR
+        class Age DATA_COLOUR
+        class Gender DATA_COLOUR
+        class CalorieGoal DATA_COLOUR
+        class ActivityFactor DATA_COLOUR
+    }
+    package Utilities {
+        class ProfileUtils DATA_COLOUR
+        class "<<enumeration>>\nActivityLevel" DATA_COLOUR
+    }
+}
+
+    class DataManager DATA_COLOUR
+    class "<<Interface>>\nVerifiable" DATA_COLOUR
+
+
+'Attributes ..|> "<<Interface>>\nVerifiable"
+
+Profile "1" <-right- DataManager : profile
+Name "1" --* Profile : name
+Profile *-- "1" Height : height
+Profile *-- "1" Weight : weight
+Profile *-- "1" Age : age
+Profile *-- "1" Gender : gender
+Profile *-- "1" CalorieGoal : calorieGoal
+Profile *-- "1" ActivityFactor : activityFactor
+ActivityFactor ..> "<<enumeration>>\nActivityLevel" :> retrieves
+ProfileUtils ..> "<<enumeration>>\nActivityLevel" :> calculates with
+Profile <.up. ProfileUtils :< manipulates
+
+"<<Interface>>\nVerifiable" <|.up. Name
+"<<Interface>>\nVerifiable" <|.up. Height
+"<<Interface>>\nVerifiable" <|.up. Weight
+"<<Interface>>\nVerifiable" <|.up. Age
+"<<Interface>>\nVerifiable" <|.up. Gender
+"<<Interface>>\nVerifiable" <|.up. CalorieGoal
+"<<Interface>>\nVerifiable" <|.up. ActivityFactor
+
+@enduml

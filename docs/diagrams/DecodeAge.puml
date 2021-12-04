@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+hide footbox
+
+group sd Decode Age
+participant ":ProfileDecoder" As ProfileDecoder STORAGE_COLOUR
+participant ":Age" As Age DATA_COLOUR
+participant ":Age" As Age DATA_COLOUR
+
+activate ProfileDecoder STORAGE_COLOUR
+alt no errors thrown
+ProfileDecoder -> Age ** DATA_COLOUR: new Age(Integer.parse(detail))
+activate Age DATA_COLOUR
+    Age --> ProfileDecoder
+deactivate
+destroy Age
+else NumberFormatException
+ProfileDecoder -> Age ** DATA_COLOUR: new Age(Integer.MIN_VALUE)
+note right STORAGE_FADED_COLOUR
+The (Integer.MIN_VALUE) here represents an
+invalid integer of Age that is handledlater
+on in the startup of the bot.
+
+end note
+activate Age DATA_COLOUR
+    Age --> ProfileDecoder
+deactivate
+destroy Age
+
+end
+
+end
+@enduml

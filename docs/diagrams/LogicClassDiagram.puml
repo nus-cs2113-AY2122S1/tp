@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/class-diagram
+!include Style.puml
+hide circle
+hide empty members
+skinparam minclassWidth 120
+skinparam Padding 5
+
+class StorageManager STORAGE_COLOUR
+class DataManager DATA_COLOUR
+class LogicManager LOGIC_COLOUR
+class ParserManager LOGIC_COLOUR
+class CommandResult LOGIC_COLOUR
+class XYZCommand LOGIC_COLOUR
+abstract class "{abstract}\nCommand" AS Command LOGIC_COLOUR
+
+
+LogicManager --> "1" ParserManager
+LogicManager --> "1" StorageManager
+LogicManager -> "1" DataManager
+
+ParserManager ..> XYZCommand : > creates
+XYZCommand --|> Command
+Command .right.> CommandResult : > produces
+
+
+class Main MAIN_COLOUR
+
+Main --> "1" LogicManager : > instantiates and \n feeds user input
+Command --> "1" DataManager : > modifies
+ParserManager ..> Command : > returns
+StorageManager ..> DataManager : > saves
+LogicManager ..> Command : > executes
+Main ..> CommandResult : > retrieves
+
+
+
+@enduml

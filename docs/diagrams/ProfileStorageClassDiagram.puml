@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+!include Style.puml
+hide class fields
+hide class methods
+hide interface fields
+hide interface methods
+
+class ProfileDecoder STORAGE_COLOUR
+class ProfileStorage STORAGE_COLOUR
+class "{abstract}\nStorage" STORAGE_COLOUR
+class ProfileEncoder STORAGE_COLOUR
+class FileChecker STORAGE_COLOUR
+class FileSaver STORAGE_COLOUR
+interface "<<interface>>\nProfileStorageInterface" STORAGE_COLOUR
+
+ProfileStorage <.up.. " "
+"{abstract}\nStorage" <|-down- ProfileStorage
+"<<interface>>\nProfileStorageInterface" <|.left. ProfileStorage
+ProfileDecoder <.up. ProfileStorage :< decodes
+ProfileEncoder <.up. ProfileStorage :< encodes
+ProfileStorage .down.> FileChecker :> checks for file
+ProfileStorage .left.> FileSaver :> saves
+
+@enduml

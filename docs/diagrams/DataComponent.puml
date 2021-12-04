@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/class-diagram
+!include Style.puml
+hide interface methods
+
+package Data {
+
+    class DataManager DATA_COLOUR {
+        - profile: Profile
+        - foodItems: FoodList
+        - filteredFoodItems: FoodList
+        - exerciseItems: ExerciseList
+        - filteredExerciseItems: ExerciseList
+        - foodBank: ItemBank
+        - exerciseBank: ItemBank
+    }
+
+    class "<<interface>>\nVerifiable" As Verifiable DATA_COLOUR {
+        isValid(): boolean
+    }
+
+    package Profile {
+
+    }
+
+    package Item {
+
+    }
+
+}
+
+Verifiable <|.. Item
+Verifiable <|.. Profile
+DataManager --> Profile
+DataManager --> Item
+
+
+@enduml

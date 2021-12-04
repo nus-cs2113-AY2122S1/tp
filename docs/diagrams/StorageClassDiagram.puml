@@ -1,0 +1,48 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+!include Style.puml
+hide class fields
+hide class methods
+hide interface fields
+hide interface methods
+
+package Storage {
+class XYZDecoder STORAGE_COLOUR
+class XYZEncoder STORAGE_COLOUR
+
+class FileChecker STORAGE_COLOUR
+class FileSaver STORAGE_COLOUR
+class StorageManager STORAGE_COLOUR
+class XYZStorageUtils STORAGE_COLOUR
+
+class "<<interface>>\nXYZStorage" STORAGE_COLOUR
+
+class "<<interface>>\nStorage" STORAGE_COLOUR
+
+}
+
+package Data {
+}
+
+package Logic {
+}
+
+Data <.. "StorageManager"
+Logic --> "StorageManager"
+Logic -left-> Data
+
+"<<interface>>\nXYZStorage" <|-left- "<<interface>>\nStorage"
+
+StorageManager .left.|> "<<interface>>\nStorage"
+
+"<<interface>>\nXYZStorage" <|.. XYZStorageUtils
+
+StorageManager --> "1" "<<interface>>\nXYZStorage"
+
+XYZDecoder <.up. XYZStorageUtils :< decodes
+XYZEncoder <.up. XYZStorageUtils :< encodes
+XYZStorageUtils .right.> FileChecker :> checks for file
+XYZStorageUtils .left.> FileSaver :> saves
+
+@enduml

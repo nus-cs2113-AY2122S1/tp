@@ -1,0 +1,58 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+hide footbox
+skinparam ParticipantPadding 1
+
+participant ":Main" As Main MAIN_COLOUR
+participant "storage:StorageManager" As StorageManager STORAGE_COLOUR
+participant "profileStorage:ProfileStorage" As ProfileStorage STORAGE_COLOUR
+participant Profile DATA_COLOUR
+
+
+activate Main MAIN_COLOUR
+create "storage:StorageManager" As StorageManager STORAGE_COLOUR
+Main -> StorageManager **: new StorageManager()
+activate StorageManager STORAGE_COLOUR
+    create "profileStorage:ProfileStorage" As ProfileStorage STORAGE_COLOUR
+    StorageManager -> ProfileStorage ** : new ProfileStorage(filePath)
+        activate ProfileStorage STORAGE_COLOUR
+        ProfileStorage --> StorageManager : profileStorage
+        deactivate
+    StorageManager --> Main : storage
+deactivate
+
+
+Main -> StorageManager: loadAll()
+
+activate StorageManager STORAGE_COLOUR
+    alt no errors thrown
+    StorageManager -> StorageManager ++ STORAGE_COLOUR : loadProfile()
+    StorageManager -> ProfileStorage : loadProfile()
+    activate ProfileStorage STORAGE_COLOUR
+        participant ":FileChecker" As FileChecker STORAGE_COLOUR
+        participant ":ProfileDecoder" As ProfileDecoder STORAGE_COLOUR
+        ref over ProfileStorage, FileChecker
+            Checks for the file and create directory if missing
+        end ref
+        ref over ProfileStorage, ProfileDecoder
+            Retrieval of data from storage with the use of ProfileDecoder to decode
+        end ref
+        ProfileStorage --> StorageManager:profile
+    deactivate
+    StorageManager --> StorageManager -- :profile
+    else UnableToReadFileException
+        StorageManager -> Profile **: new Profile()
+        activate Profile DATA_COLOUR
+            Profile --> StorageManager --
+        destroy Profile
+    end
+
+
+    StorageManager --> Main: data
+
+deactivate
+
+
+@enduml

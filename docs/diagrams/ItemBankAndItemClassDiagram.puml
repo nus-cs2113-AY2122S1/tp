@@ -1,0 +1,53 @@
+@startuml
+'https://plantuml.com/class-diagram
+!include Style.puml
+hide circle
+skinparam classAttributeIconSize 0
+
+class DataManager DATA_COLOUR
+class "<<interface>>\nVerifiable" As Verifiable DATA_COLOUR
+
+
+package "Item" As Item1 {
+class ItemBank DATA_COLOUR
+class "{abstract}\nItemList" as ItemList DATA_COLOUR
+class FoodList DATA_COLOUR
+class ExerciseList DATA_COLOUR
+class FutureExerciseList DATA_COLOUR
+DataManager -left-> ItemBank
+class "{abstract}\nItem" as Item DATA_COLOUR{
+#name: String
+#calories: int
+}
+
+class Food DATA_COLOUR {
+#dateTime: LocalDateTime
+}
+
+class Exercise DATA_COLOUR {
+#date: LocalDate
+}
+
+enum "<<enumeration>>\nTimePeriod" as TimePeriod DATA_COLOUR {
+MORNING, AFTERNOON,
+EVENING, NIGHT
+}
+
+hide TimePeriod method
+
+ItemBank <|-- ItemList
+ItemList <|-- FoodList
+ItemList <|-- ExerciseList
+ExerciseList <|-- FutureExerciseList
+
+Verifiable <|.left. Item : "\t\t"
+Item <|-left- Food
+Item <|-- Exercise
+Item "*" <-- ItemBank: "internalItems\n\n\n"
+TimePeriod "1 " <-up- Food : "\n\n\n timePeriod"
+
+Food <.. FoodList
+Exercise <.. ExerciseList
+}
+
+@enduml

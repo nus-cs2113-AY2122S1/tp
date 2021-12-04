@@ -1,0 +1,59 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include Style.puml
+hide footbox
+
+participant "command:AddFoodCommand" As AddFoodCommand LOGIC_COLOUR
+participant "foodBank:ItemBank" As FoodBank DATA_COLOUR
+
+?->AddFoodCommand :execute()
+activate AddFoodCommand LOGIC_COLOUR
+
+opt calories == null
+    AddFoodCommand -> FoodBank : findCalorie(description)
+    activate FoodBank DATA_COLOUR
+    FoodBank --> AddFoodCommand : calories
+    deactivate FoodBank
+end
+
+create "food:Food" As Food DATA_COLOUR
+AddFoodCommand -> Food ** : new Food(description,calories,dateTime)
+activate Food DATA_COLOUR
+Food -> Food ++ DATA_COLOUR : setTimePeriod (dateTime)
+Food --> Food --
+Food --> AddFoodCommand : food
+deactivate Food
+
+AddFoodCommand -> Food : isValid()
+activate Food DATA_COLOUR
+participant ":CommandResult" As CommandResult1 LOGIC_COLOUR
+Food --> AddFoodCommand :isValid
+deactivate Food
+alt !isValid
+    AddFoodCommand -> CommandResult1 **: new CommandResult(String.format(MESSAGE_INVALID_CALORIES, food))
+    activate CommandResult1 LOGIC_COLOUR
+    CommandResult1 --> AddFoodCommand
+    deactivate CommandResult1
+else else
+    participant "filteredFoodList:FoodList" As FoodList DATA_COLOUR
+    participant ":CommandResult" As CommandResult LOGIC_COLOUR
+    AddFoodCommand -> FoodList : \t\t\t\t\t\t\t\t\t\taddItem(food)
+    activate FoodList DATA_COLOUR
+    FoodList -> FoodList ++  DATA_COLOUR: sortList()
+    FoodList --> FoodList --
+    FoodList --> AddFoodCommand
+    deactivate FoodList
+    AddFoodCommand -> CommandResult **: \t\t\t\t\tnew CommandResult(String.format(MESSAGE_SUCCESS,food))
+    activate CommandResult LOGIC_COLOUR
+    CommandResult --> AddFoodCommand
+    deactivate CommandResult
+end
+
+?<-- AddFoodCommand : commandResult\t\t
+deactivate AddFoodCommand
+destroy Food
+destroy CommandResult
+destroy CommandResult1
+destroy AddFoodCommand
+@enduml

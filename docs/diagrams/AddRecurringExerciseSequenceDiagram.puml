@@ -1,0 +1,51 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include Style.puml
+hide footbox
+
+participant "command:AddRecurringExerciseCommand" As AddRecurringExerciseCommand LOGIC_COLOUR
+participant "exerciseBank:ItemBank" As ItemBank DATA_COLOUR
+
+activate AddRecurringExerciseCommand LOGIC_COLOUR
+?->AddRecurringExerciseCommand :execute()
+
+opt calories == null
+    AddRecurringExerciseCommand -> ItemBank : findCalorie(description)
+    activate ItemBank DATA_COLOUR
+    ItemBank --> AddRecurringExerciseCommand : calories
+    deactivate ItemBank
+
+end
+
+participant "futureExerciseItems:FutureExerciseList" As FutureExerciseItems DATA_COLOUR
+AddRecurringExerciseCommand -> FutureExerciseItems : \taddRecurringExercises(exercise, calories, startDate, endDate, dayOfTheWeek)
+activate FutureExerciseItems DATA_COLOUR
+loop matchesAllDayAndDate
+create ":Exercise" As Exercise DATA_COLOUR
+    FutureExerciseItems -> Exercise ** : \tnew Exercise(description,calories,date)
+    activate Exercise DATA_COLOUR
+    Exercise --> FutureExerciseItems : exercise
+    deactivate Exercise
+FutureExerciseItems -> FutureExerciseItems ++  DATA_COLOUR: addItem(exercise)
+FutureExerciseItems --> FutureExerciseItems --
+end
+FutureExerciseItems -> FutureExerciseItems ++  DATA_COLOUR: sortList()
+FutureExerciseItems --> FutureExerciseItems --
+FutureExerciseItems --> AddRecurringExerciseCommand
+deactivate FutureExerciseItems
+
+participant "commandResult:CommandResult" As CommandResult LOGIC_COLOUR
+AddRecurringExerciseCommand -> CommandResult **: \t\t\t\t\t\t\tnew CommandResult(MESSAGE_SUCCESS)
+activate CommandResult LOGIC_COLOUR
+CommandResult --> AddRecurringExerciseCommand
+deactivate CommandResult
+
+
+
+?<-- AddRecurringExerciseCommand : commandResult
+deactivate AddRecurringExerciseCommand
+destroy Exercise
+destroy CommandResult
+destroy AddRecurringExerciseCommand
+@enduml

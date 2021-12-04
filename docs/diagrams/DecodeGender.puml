@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+hide footbox
+
+group sd Decode Gender
+participant ":ProfileDecoder" As ProfileDecoder STORAGE_COLOUR
+participant ":Gender" As Gender DATA_COLOUR
+activate ProfileDecoder STORAGE_COLOUR
+alt detail.length() > 1
+ProfileDecoder -> Gender ** DATA_COLOUR: new Gender('X')
+activate Gender DATA_COLOUR
+    Gender --> ProfileDecoder
+deactivate
+else else
+destroy Gender
+ProfileDecoder -> Gender ** DATA_COLOUR: new Gender(detail)
+activate Gender DATA_COLOUR
+    Gender --> ProfileDecoder
+deactivate
+destroy Gender
+end
+note right STORAGE_FADED_COLOUR: The 'X' here represents an \ninvalid gender that is handled\nlater on in the startup of the \nbot. It only accept single\ncharacters.
+
+end
+@enduml
