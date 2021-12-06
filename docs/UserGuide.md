@@ -877,7 +877,6 @@ Expected outcome:
 **Add Entry**|`journal entry n/[NOTEBOOK_NAME] e/[ENTRY_NAME]`
 **Add Todo**|`calendar todo n/[TASK_NAME] d/[DD-MM-YYYY]`
 **Add Zoom**|`zoom add [MODULE_CODE] [ZOOM_LINK]`
-**Cap Info**|`module info`
 **Clear Food**|`food clear`
 **Delete Entry**|`journal delete_entry n/[NOTE_NAME] e/[ENTRY_NAME]`
 **Delete Food**|`food delete [INDEX]`
@@ -893,9 +892,9 @@ Expected outcome:
 **Find Notebook by tag**|`journal find [TAG_NAME]`
 **Get Expected CAP**|`cap expected`
 **Help**|`help`
-**List  Food Items**|`food list`
-**List  Journal**|`journal list`
-**List  Modules**|`module list`
+**List Food Items**|`food list`
+**List Journal**|`journal list`
+**List Modules**|`module list`
 **List Tasks**|`calendar list task`
 **List Lectures**|`calendar list lec`
 **List Zoom Links**|`zoom list`
