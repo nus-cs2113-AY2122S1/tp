@@ -68,7 +68,7 @@ public class ModuleManager {
      */
     public void deleteModule(int moduleIndex) throws IOException, IllegalModuleIndexException {
         ModuleList moduleList = storageModule.readModulesFromFile();
-        boolean isValidIndex = (moduleIndex > 0) && (moduleIndex < moduleList.getNumberOfModules());
+        boolean isValidIndex = (moduleIndex >= 0) && (moduleIndex < moduleList.getNumberOfModules());
         if (!isValidIndex) {
             throw new IllegalModuleIndexException();
         }
