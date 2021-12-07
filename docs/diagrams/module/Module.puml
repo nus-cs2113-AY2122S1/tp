@@ -1,0 +1,56 @@
+@startuml
+
+class Module {
+    - code : String
+    - name : String
+    - modularCredits : int
+    - expectedGrade : String
+}
+
+class GradePoints {
+    gradePoints : HashMap<String, Double>
+    + getPoint(rawGrade : String) : Double
+    + isValidGrade(rawGrade : String) : boolean
+}
+
+class ModuleList {
+    + getNumberOfModules() : int
+    + getModuleByIndex(index : int) : Module
+    + addModule(module : Module) : void
+    + removeModuleByIndex(index : int) : void
+    + exist(module : Module) : boolean
+}
+
+class ModuleManager {
+    - {static} currentCap : double
+    - {static} totalMcTaken : int
+    + {static} addNewModule(module : Module) : void
+    + {static} deleteModule(moduleIndex : int) : void
+    + {static} setCapInfo(cap : double, mc : int) : void
+    + {static} getExpectedCap() : double
+}
+
+class StorageModule {
+    + {static} readModulesFromFile() : ModuleList
+    + {static} saveModuleToFile(moduleList : ModuleList) : void
+    + {static} readCapInfoFromFile() : ArrayList<Double>
+    + {static} saveCapInfoToFile(currentCap : double, totalMcTaken : int) : void
+}
+
+class ParserModule {
+    + {static} formatModuleToStore(module : Module) : String
+    + {static} retrieveStoredModule(String : data) : Module
+    + {static} formatCapInfoToStore(currentCap : double, totalMcTaken : int) : String
+    + {static} retrieveStoredCapInfo(data : String) : ArrayList<Double>
+}
+
+ModuleList --> "*" Module
+ModuleManager --> "1" GradePoints
+ModuleManager --> "1" StorageModule
+StorageModule ..> ModuleList
+StorageModule ..> ParserModule
+ParserModule ..> Module
+
+skinparam classAttributeIconSize 0
+hide circle
+@enduml

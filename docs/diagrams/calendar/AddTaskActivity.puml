@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:Enter Add Task Command;
+:Check if the date given by user is valid;
+if () then (true)
+  :Create a Todo task object;
+  :Add the task to persistent storage 'storage.tasksList';
+  :Print the message for successful task addition;
+  :Write the update task list to persistent storage;
+else (false)
+    :Throw exception for incorrect date;
+    stop
+endif
+
+stop
+
+@enduml

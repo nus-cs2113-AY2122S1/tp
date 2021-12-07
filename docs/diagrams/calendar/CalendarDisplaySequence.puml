@@ -1,0 +1,51 @@
+@startuml
+hide footbox
+Actor User
+User -> ":Click" : "calendar display 10-2021"
+participant ":Click"
+":Click" -> ":Parser" : parseCommand()
+participant ":Parser"
+activate ":Parser"
+create ":DisplayCommand"
+":Parser" -> ":DisplayCommand" : new DisplayCommand()
+activate ":DisplayCommand"
+":DisplayCommand" -> ":Schedule" : initializeCalendarDayTasksList()
+activate ":Schedule"
+return
+":DisplayCommand" -> ":Schedule" : initializeCalendarDayLectureList()
+activate ":Schedule"
+return
+":DisplayCommand" -> ":ParserSchedule" : parseCalendarCommand()
+activate ":ParserSchedule"
+return
+":DisplayCommand" --> ":Parser"
+deactivate ":DisplayCommand"
+":Parser" --> ":Click"
+deactivate ":Parser"
+":Click" -> ":DisplayCommand" : execute()
+activate ":DisplayCommand"
+":DisplayCommand" -> ":Schedule" : arrangeTaskList()
+activate ":Schedule"
+return
+":DisplayCommand" -> ":Schedule" : arrangeLectureList()
+activate ":Schedule"
+return
+":DisplayCommand" -> ":Schedule" : displayCalendar()
+activate ":Schedule"
+":Schedule" -> ":Schedule" : printEntireCalendar()
+activate ":Schedule"
+":Schedule" -> ":Schedule" : printCalendarDates()
+activate ":Schedule"
+return
+":Schedule" -> ":Schedule" : printTaskLectureForWeek()
+activate ":Schedule"
+return
+return
+":Schedule" --> ":DisplayCommand"
+deactivate ":Schedule"
+destroy ":Schedule"
+":DisplayCommand" --> ":Click"
+deactivate ":DisplayCommand"
+destroy ":DisplayCommand"
+participant ":ParserSchedule"
+@enduml

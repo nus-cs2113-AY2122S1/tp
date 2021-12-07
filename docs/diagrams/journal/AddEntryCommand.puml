@@ -1,0 +1,16 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:Enter AddEntryCommand;
+:Get list of notebooks from storage;
+:Check if the notebook name given by user matches any notebook;
+if () then (true)
+  :Adds the entry to which it belongs to persistent storage "storage.collectionOfEntries" ;
+  :Print a message that the entry has been added successfully;
+  :Write the updated entries(along with the associated notebook) list to persistent storage;
+endif
+
+stop
+
+@enduml

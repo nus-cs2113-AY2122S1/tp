@@ -1,0 +1,33 @@
+@startuml
+hide footbox
+Actor User
+User -> ":Click" : "calendar delete task 1"
+participant ":Click"
+activate ":Click"
+":Click" -> ":Parser" : parseCommand()
+participant ":Parser"
+activate ":Parser"
+create ":DeleteTaskCommand"
+":Parser" -> ":DeleteTaskCommand" : new DeleteTaskCommand()
+activate ":DeleteTaskCommand"
+return
+deactivate ":DeleteTaskCommand"
+":Parser" --> ":Click"
+deactivate ":Parser"
+":Click" -> ":DeleteTaskCommand" : execute()
+activate ":DeleteTaskCommand"
+participant ":TaskList"
+":DeleteTaskCommand" -> ":TaskList" : deleteTask()
+activate ":TaskList"
+return
+participant ":Ui"
+":DeleteTaskCommand" -> ":Ui" : printMessage(DELETED_TASK)
+activate ":Ui"
+return
+":DeleteTaskCommand" --> ":Click"
+deactivate ":DeleteTaskCommand"
+":Click" --> User
+deactivate ":Click"
+deactivate ":DeleteTaskCommand"
+destroy ":DeleteTaskCommand"
+@enduml

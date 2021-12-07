@@ -1,1 +1,13 @@
-James Gosling
+food add n/ Samurai Burger c/ 433
+food add n/ McFlurry c/ 165
+food list
+module add c/cs2113t n/softwareengineering e/A
+module add c/cs1231 n/discrete structure
+module list
+module delete 2
+journal notebook n/ Today's stuff
+journal entry n/ Today's stuff e/ Random Observation
+journal list
+calendar todo n/ sometask d/ 10-10-2021
+calendar delete 1
+exit

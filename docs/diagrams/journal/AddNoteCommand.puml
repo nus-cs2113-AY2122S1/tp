@@ -1,0 +1,33 @@
+@startuml
+hide footbox
+Actor User
+User -> ":Click" : "journal notebook n/ CS2113"
+participant ":Click"
+activate ":Click"
+":Click" -> ":Parser" : parseCommand()
+participant ":Parser"
+activate ":Parser"
+create ":AddNoteCommand"
+":Parser" -> ":AddNoteCommand" : new AddNoteCommand()
+activate ":AddNoteCommand"
+return
+deactivate ":AddNoteCommand"
+":Parser" --> ":Click"
+deactivate ":Parser"
+":Click" -> ":AddNoteCommand" : execute()
+activate ":AddNoteCommand"
+participant ":CollectionOfNotebooks"
+":AddNoteCommand" -> ":CollectionOfNotebooks" : addNote()
+activate ":CollectionOfNotebooks"
+return
+participant ":Ui"
+":AddNoteCommand" -> ":Ui" : printAddedNoteMessage(NOTEBOOK_NAME)
+activate ":Ui"
+return
+":AddNoteCommand" --> ":Click"
+deactivate ":AddNoteCommand"
+":Click" --> User
+deactivate ":Click"
+deactivate ":AddNoteCommand"
+destroy ":AddNoteCommand"
+@enduml

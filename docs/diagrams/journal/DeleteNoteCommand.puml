@@ -1,0 +1,33 @@
+@startuml
+hide footbox
+Actor User
+User -> ":Click" : "journal delete_notebook 1"
+participant ":Click"
+activate ":Click"
+":Click" -> ":Parser" : parseCommand()
+participant ":Parser"
+activate ":Parser"
+create ":DeleteNoteCommand"
+":Parser" -> ":DeleteNoteCommand" : new DeleteNoteCommand()
+activate ":DeleteNoteCommand"
+return
+deactivate ":DeleteNoteCommand"
+":Parser" --> ":Click"
+deactivate ":Parser"
+":Click" -> ":DeleteNoteCommand" : execute()
+activate ":DeleteNoteCommand"
+participant ":CollectionOfNotebooks"
+":DeleteNoteCommand" -> ":CollectionOfNotebooks" : deleteNote()
+activate ":CollectionOfNotebooks"
+return
+participant ":Ui"
+":DeleteNoteCommand" -> ":Ui" : printDeletedNotebookMessage(NOTEBOOK_INDEX)
+activate ":Ui"
+return
+":DeleteNoteCommand" --> ":Click"
+deactivate ":DeleteNoteCommand"
+":Click" --> User
+deactivate ":Click"
+deactivate ":DeleteNoteCommand"
+destroy ":DeleteNoteCommand"
+@enduml
