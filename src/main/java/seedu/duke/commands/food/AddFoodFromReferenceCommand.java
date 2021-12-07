@@ -69,7 +69,7 @@ public class AddFoodFromReferenceCommand extends Command {
             throw new InvalidStoreIndexException(storeIndex);
         }
         this.itemIndex = Integer.parseInt(itemIndexString) - 1;
-        if (itemIndex <= 0) {
+        if (itemIndex < 0) {
             throw new InvalidItemIndexException(itemIndex + 1);
         }
     }
